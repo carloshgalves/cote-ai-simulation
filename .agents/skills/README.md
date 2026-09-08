@@ -1,3 +1,5 @@
-# Project skills
+# Repo-scoped Agent Skills
 
-Repo-scoped Agent Skills used by coding agents in COTE AI Simulation.
+Use the skill whose `description` matches the task. The canonical project context is `CONTEXT.md`; architectural decisions live in `docs/adr/`.
+
+Project-specific AI skills are intentionally strict about knowledge isolation because accidental omniscience would invalidate strategic outcomes.

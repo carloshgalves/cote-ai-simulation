@@ -1,0 +1,22 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+.pytest_cache/
+.venv/
+venv/
+node_modules/
+dist/
+build/
+coverage/
+.DS_Store
+
+# Corpus privado/local. Não versionar novels, scans ou dumps protegidos.
+data/canon/private/
+data/canon/raw/
+data/canon/index/
+
+# Execuções locais e traces podem conter prompts/contextos derivados.
+runs/
+traces/
+logs/

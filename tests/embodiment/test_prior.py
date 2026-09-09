@@ -227,6 +227,23 @@ def test_loading_boolean_is_not_coerced_to_a_numeric_parameter(tmp_path) -> None
         PopulationPrior.load(path)
 
 
+def test_unmarked_quoted_marginal_parameters_are_refused_by_the_public_loader(tmp_path) -> None:
+    import yaml
+
+    data = yaml.safe_load(POPULATION_PRIOR_PATH.read_text(encoding="utf-8"))
+    data["marginals"].pop("source")
+    numeric_fields = {"mean", "sd", "low", "high", "median", "logit_sd"}
+    for by_dimension in data["marginals"].values():
+        for marginal in by_dimension.values():
+            for field in numeric_fields & marginal.keys():
+                marginal[field] = str(marginal[field])
+    path = tmp_path / "unmarked-quoted-marginals.yaml"
+    path.write_text(yaml.safe_dump(data), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="no source marking"):
+        PopulationPrior.load(path)
+
+
 @pytest.mark.parametrize("value", [-0.15, float("nan"), float("inf")])
 def test_min_residual_sd_must_be_a_positive_finite_standard_deviation(
     tmp_path, value: float

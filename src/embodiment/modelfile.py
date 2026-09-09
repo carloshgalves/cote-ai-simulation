@@ -26,6 +26,7 @@ each answering a failure the spec names:
 
 from __future__ import annotations
 
+import math
 import re
 from collections.abc import Iterator, Mapping, Sequence
 from pathlib import Path
@@ -150,7 +151,14 @@ def _walk(node: Any, path: str) -> Iterator[tuple[str, Any]]:
 
 
 def _is_number(value: Any) -> bool:
-    return isinstance(value, (int, float)) and not isinstance(value, bool)
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        return True
+    if isinstance(value, str):
+        try:
+            return math.isfinite(float(value))
+        except ValueError:
+            return False
+    return False
 
 
 def _assert_every_number_is_marked(data: Mapping[str, Any], origin: str) -> None:

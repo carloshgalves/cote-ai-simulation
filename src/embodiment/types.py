@@ -17,6 +17,7 @@ Two rules from `docs/architecture/physical-model.md` are structural here:
 
 from __future__ import annotations
 
+import re
 from collections.abc import Mapping
 from enum import StrEnum
 from types import MappingProxyType
@@ -42,6 +43,7 @@ __all__ = [
 
 SCHEMA_VERSION = 1
 SNAPSHOT_VERSION = 1
+_SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 #: The simulation instant `capacity_baseline` is sampled at (spec §5.3). The
 #: logical clock of ADR 0003 is not in this ticket; the label is, because a
@@ -292,6 +294,21 @@ class RunMetadata(BaseModel):
         if unknown:
             raise ValueError(f"unknown parameter component(s): {sorted(unknown)}")
         return freeze_mapping(value)
+
+    @field_validator("posterior_hash_by_character", mode="after")
+    @classmethod
+    def _valid_posterior_identities(cls, value: Mapping[str, str]) -> Mapping[str, str]:
+        for character_id, digest in value.items():
+            if not character_id.strip():
+                raise ValueError(
+                    "posterior_hash_by_character contains an empty character id"
+                )
+            if not _SHA256_RE.fullmatch(digest):
+                raise ValueError(
+                    f"posterior_hash_by_character[{character_id!r}] must be a lowercase "
+                    "sha256 digest"
+                )
+        return value
 
     @field_validator(
         "posterior_hash_by_character",

@@ -66,7 +66,7 @@ def test_invariant_11_run_metadata_carries_the_parameter_versions(prior) -> None
 
 
 def test_invariant_11_a_missing_parameter_version_stops_the_run(prior) -> None:
-    metadata = RunMetadata(world_seed=42, posterior_hash_by_character={"npc.0001": "x"})
+    metadata = RunMetadata(world_seed=42, posterior_hash_by_character={"npc.0001": "0" * 64})
     with pytest.raises(MissingRunMetadataError):
         metadata.require(("prior",))
     # And every component spec §9.2 names is declared, so a later ticket adding

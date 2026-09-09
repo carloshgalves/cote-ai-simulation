@@ -29,7 +29,7 @@ from .eventlog import (
 )
 from .prior import POPULATION_PRIOR_PATH, PopulationPrior
 from .seeding import CapacityBaselineStore, Posterior, cohort_ids, posterior_for, seed_character
-from .snapshot import build_snapshot, write_snapshot
+from .snapshot import write_snapshot
 from .types import Dimension, RunMetadata, Y1_START
 
 __all__ = ["main", "seed_cohort_command", "correlation_report"]
@@ -194,10 +194,13 @@ def seed_cohort_command(
             seed_character(world_seed, character_id, prior, store=store, log=log)
         log.append(EVENT_COHORT_CORRELATION_REPORT, correlation_report(prior, store, posteriors))
 
-    snapshot = build_snapshot(
-        world_seed=world_seed, store=store, metadata=metadata, posteriors=posteriors
+    snapshot_digest = write_snapshot(
+        snapshot_path,
+        world_seed=world_seed,
+        store=store,
+        metadata=metadata,
+        posteriors=posteriors,
     )
-    snapshot_digest = write_snapshot(snapshot_path, snapshot)
 
     return {
         "events": events_path,

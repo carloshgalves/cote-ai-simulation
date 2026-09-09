@@ -21,7 +21,6 @@ from embodiment.eventlog import (
 from embodiment.prior import PopulationPrior
 from embodiment.seeding import CapacityBaselineStore, cohort_ids, posterior_for, seed_cohort
 from embodiment.snapshot import (
-    BELIEF_SECTIONS,
     SnapshotShapeError,
     build_snapshot,
     read_snapshot,
@@ -76,6 +75,34 @@ def test_a_run_without_a_mandatory_metadatum_fails_at_the_start(
     assert error.value.field == expected_field
 
 
+@pytest.mark.parametrize(
+    "posterior_hashes",
+    [
+        {"npc.0001": ""},
+        {"npc.0001": "not-a-sha256"},
+        {"npc.0001": "G" * 64},
+        {"": "0" * 64},
+        {"   ": "0" * 64},
+    ],
+)
+def test_invalid_posterior_identity_stops_before_the_log_opens(
+    prior: PopulationPrior, tmp_path, posterior_hashes: dict[str, str]
+) -> None:
+    path = tmp_path / "events.jsonl"
+    with pytest.raises(ValueError, match="posterior_hash_by_character"):
+        metadata = RunMetadata.from_mapping(
+            {
+                "world_seed": WORLD_SEED,
+                "component_versions": {"prior": prior.version},
+                "posterior_hash_by_character": posterior_hashes,
+            },
+            required_components=("prior",),
+        )
+        EventLog(path, metadata=metadata, required_components=("prior",))
+
+    assert not path.exists()
+
+
 def test_metadata_names_every_component_spec_9_2_requires() -> None:
     """The full §9.2 list is declared from the start, so a later ticket adding a
     component cannot quietly ship without its version."""
@@ -123,7 +150,9 @@ def test_the_log_opens_with_the_run_metadata(prior: PopulationPrior, tmp_path) -
 
 
 def test_the_log_refuses_to_open_without_metadata(prior: PopulationPrior, tmp_path) -> None:
-    metadata = RunMetadata(world_seed=WORLD_SEED, posterior_hash_by_character={"npc.0001": "x"})
+    metadata = RunMetadata(
+        world_seed=WORLD_SEED, posterior_hash_by_character={"npc.0001": "0" * 64}
+    )
     with pytest.raises(MissingRunMetadataError, match="prior_version"):
         EventLog(tmp_path / "events.jsonl", metadata=metadata, required_components=("prior",))
 
@@ -154,10 +183,13 @@ def test_an_existing_event_log_is_never_truncated(prior: PopulationPrior, tmp_pa
 
 def test_snapshot_carries_capacity_baseline_and_run_metadata(prior: PopulationPrior, tmp_path) -> None:
     store, posteriors, metadata = make_run(prior)
-    snapshot = build_snapshot(
-        world_seed=WORLD_SEED, store=store, metadata=metadata, posteriors=posteriors
+    digest = write_snapshot(
+        tmp_path / "snapshot.yaml",
+        world_seed=WORLD_SEED,
+        store=store,
+        metadata=metadata,
+        posteriors=posteriors,
     )
-    digest = write_snapshot(tmp_path / "snapshot.yaml", snapshot)
     written = read_snapshot(tmp_path / "snapshot.yaml")
 
     assert written["snapshot_version"] == 1
@@ -172,6 +204,28 @@ def test_snapshot_carries_capacity_baseline_and_run_metadata(prior: PopulationPr
     assert baseline["sampled_from"]["prior_version"] == prior.version
     assert len(baseline["sampled_from"]["posterior_hash"]) == 64
     assert set(baseline["evidence_sufficiency"].values()) == {0.0}
+
+
+def test_raw_mapping_cannot_be_signed_as_a_snapshot(tmp_path) -> None:
+    forged = {
+        "snapshot_version": 1,
+        "world_seed": WORLD_SEED,
+        "sim_time": "Y1_START",
+        "characters": {
+            "actor.ayanokouji": {
+                "capacity_baseline": {
+                    "dimensions": {"max_strength": {"value": 999, "unit": "kg"}}
+                }
+            }
+        },
+        "run_metadata": {},
+    }
+    path = tmp_path / "snapshot.yaml"
+
+    with pytest.raises(TypeError):
+        write_snapshot(path, forged)
+
+    assert not path.exists()
 
 
 def test_body_state_and_beliefs_are_absent_until_their_tickets(prior: PopulationPrior) -> None:
@@ -247,19 +301,6 @@ def test_snapshot_refuses_contradictory_provenance(
             metadata=metadata,
             posteriors=posteriors,
         )
-
-
-def test_a_belief_under_characters_is_refused(prior: PopulationPrior, tmp_path) -> None:
-    """Invariant 1: a serialiser able to write belief into world truth has lost it."""
-    store, posteriors, metadata = make_run(prior)
-    snapshot = build_snapshot(
-        world_seed=WORLD_SEED, store=store, metadata=metadata, posteriors=posteriors
-    )
-    for section in sorted(BELIEF_SECTIONS):
-        smuggled = json.loads(json.dumps(snapshot))
-        smuggled["characters"]["npc.0001"][section] = {"max_strength": {"lower": 30}}
-        with pytest.raises(SnapshotShapeError, match="belief"):
-            write_snapshot(tmp_path / "snapshot.yaml", smuggled)
 
 
 def test_the_hash_covers_the_body_and_not_itself(prior: PopulationPrior) -> None:

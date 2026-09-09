@@ -3,8 +3,9 @@
 Spec §5.3. `body_state` arrives with PSV1-2 and `physical_beliefs` with PSV1-6;
 what this ticket fixes is the **shape**, and one part of the shape is not
 stylistic: world truth lives under `characters`, belief lives in its own tree
-with an explicit holder. A serialiser able to write a belief inside
-`characters.<id>` has already lost invariant 1, so `write_snapshot` refuses one.
+with an explicit holder. The public writer accepts only the authoritative
+seeding inputs and builds the document itself, so a caller cannot sign a raw
+mapping that bypassed the world-truth and provenance checks.
 
 `snapshot_version: 1` is introduced here. A snapshot is only loadable while the
 parameter versions in its `run_metadata` are available: the bodies in it were
@@ -168,8 +169,28 @@ def snapshot_hash(snapshot: Mapping[str, Any]) -> str:
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
-def write_snapshot(path: str | Path, snapshot: Mapping[str, Any]) -> str:
-    _assert_shape(snapshot)
+def write_snapshot(
+    path: str | Path,
+    *,
+    world_seed: int,
+    store: CapacityBaselineStore,
+    metadata: RunMetadata,
+    posteriors: Mapping[str, Posterior],
+    sim_time: str = Y1_START,
+) -> str:
+    """Build, validate and exclusively persist one authoritative snapshot.
+
+    Raw mappings are deliberately not accepted here. Signing a caller-authored
+    mapping would create a second writer of physical world truth outside the
+    seeding boundary and would make the hash attest bytes rather than validity.
+    """
+    snapshot = build_snapshot(
+        world_seed=world_seed,
+        store=store,
+        metadata=metadata,
+        posteriors=posteriors,
+        sim_time=sim_time,
+    )
     digest = snapshot_hash(snapshot)
     payload = {key: value for key, value in snapshot.items() if key != "snapshot_hash"}
     payload["snapshot_hash"] = digest

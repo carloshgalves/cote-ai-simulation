@@ -26,7 +26,7 @@ import json
 from collections.abc import Iterable, Mapping, Sequence
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, field_validator
 
 from .eventlog import EVENT_CAPACITY_SAMPLED, EventLog
 from .prior import PopulationPrior, Sex
@@ -37,7 +37,7 @@ from .rng import (
     substream,
     substream_name,
 )
-from .types import CapacityBaselineRecord, Dimension, Y1_START
+from .types import CapacityBaselineRecord, Dimension, Y1_START, freeze_mapping
 
 __all__ = [
     "Posterior",
@@ -74,6 +74,13 @@ class Posterior(BaseModel):
     posterior_hash: str
     evidence_sufficiency: Mapping[Dimension, float]
     effective_sample_size: float | None = None
+
+    @field_validator("evidence_sufficiency", mode="after")
+    @classmethod
+    def _freeze_evidence_sufficiency(
+        cls, value: Mapping[Dimension, float]
+    ) -> Mapping[Dimension, float]:
+        return freeze_mapping(value)
 
 
 class CapacityBaselineStore:

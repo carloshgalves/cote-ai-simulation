@@ -95,6 +95,18 @@ def test_an_unknown_parameter_component_is_refused() -> None:
         RunMetadata(world_seed=1, component_versions={"vibes": "1.0.0"})
 
 
+def test_run_metadata_cannot_drift_after_validation(prior: PopulationPrior) -> None:
+    _, _, metadata = make_run(prior)
+    before = metadata.as_dict()
+
+    with pytest.raises(TypeError):
+        metadata.posterior_hash_by_character["npc.0001"] = "rewritten"  # type: ignore[index]
+    with pytest.raises(TypeError):
+        metadata.component_versions["prior"] = "other"  # type: ignore[index]
+
+    assert metadata.as_dict() == before
+
+
 # -------------------------------------------------------------------- event log
 
 

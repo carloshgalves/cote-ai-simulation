@@ -28,10 +28,10 @@ from pathlib import Path
 from typing import Any, Literal
 
 import numpy as np
-from pydantic import BaseModel, ConfigDict, model_validator
+from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 from .modelfile import PHYSICAL_MODELS_DIR, ModelFileError, load_model_file
-from .types import DIMENSION_UNITS, CapacityProfile, Dimension, DimensionValue
+from .types import DIMENSION_UNITS, CapacityProfile, Dimension, DimensionValue, freeze_mapping
 
 __all__ = [
     "Sex",
@@ -230,6 +230,11 @@ class PopulationPrior(BaseModel):
     marginals: Mapping[Sex, Mapping[Dimension, Marginal]]
     loadings: Mapping[Dimension, Loading]
     raw: Mapping[str, Any]
+
+    @field_validator("marginals", "loadings", "raw", mode="after")
+    @classmethod
+    def _freeze_model_mappings(cls, value: Mapping[Any, Any]) -> Mapping[Any, Any]:
+        return freeze_mapping(value)
 
     # ------------------------------------------------------------------ loading
 

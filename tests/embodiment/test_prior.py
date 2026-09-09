@@ -36,11 +36,22 @@ def test_prior_declares_itself_provisional_and_says_why(prior: PopulationPrior) 
     """Acceptance criterion 10: the file's honesty is part of the deliverable."""
     assert prior.status == "PROVISIONAL"
     assert prior.raw["not_canon"] is True
-    assert prior.raw["provenance"]["sourcing_gaps"] == ["S1", "S2"]
+    assert tuple(prior.raw["provenance"]["sourcing_gaps"]) == ("S1", "S2")
     assert prior.raw["evidence_sufficiency"]["overall"] == 0.0
     # The null hypothesis of cohort selectivity is declared, not omitted.
     assert "oq.capability.cohort-selectivity" in prior.raw["provenance"]["open_questions"]
     assert "no selectivity shift" in prior.raw["cohort"]["description"].lower()
+
+
+def test_loaded_prior_cannot_drift_after_its_content_hash_is_fixed(prior: PopulationPrior) -> None:
+    original_hash = prior.content_hash
+    with pytest.raises(TypeError):
+        prior.marginals["male"][Dimension.MAX_STRENGTH] = prior.marginal(  # type: ignore[index]
+            Dimension.BODY_MASS, "male"
+        )
+    with pytest.raises(AttributeError):
+        prior.raw["provenance"]["sourcing_gaps"].append("S3")  # type: ignore[union-attr]
+    assert prior.content_hash == original_hash
 
 
 @pytest.mark.parametrize("sex", SEXES)

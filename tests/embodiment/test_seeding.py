@@ -35,6 +35,16 @@ def test_a_character_with_no_evidence_draws_the_prior(prior: PopulationPrior) ->
     assert posterior.effective_sample_size is None
 
 
+def test_posterior_evidence_cannot_change_after_its_hash_is_fixed(
+    prior: PopulationPrior,
+) -> None:
+    posterior = posterior_for(42, "npc.0001", prior)
+    original_hash = posterior.posterior_hash
+    with pytest.raises(TypeError):
+        posterior.evidence_sufficiency[Dimension.MAX_STRENGTH] = 1.0  # type: ignore[index]
+    assert posterior.posterior_hash == original_hash
+
+
 def test_the_posterior_of_zero_evidence_is_the_prior_under_another_name(prior: PopulationPrior) -> None:
     """Two evidence-free characters of the same sex share a posterior, and say so."""
     same_sex = [

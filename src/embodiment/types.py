@@ -20,6 +20,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from enum import StrEnum
 from types import MappingProxyType
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
@@ -36,6 +37,7 @@ __all__ = [
     "Y1_START",
     "SCHEMA_VERSION",
     "SNAPSHOT_VERSION",
+    "freeze_mapping",
 ]
 
 SCHEMA_VERSION = 1
@@ -45,6 +47,21 @@ SNAPSHOT_VERSION = 1
 #: logical clock of ADR 0003 is not in this ticket; the label is, because a
 #: sample without an instant cannot be read later.
 Y1_START = "Y1_START"
+
+
+def freeze_mapping(value: Mapping[Any, Any]) -> Mapping[Any, Any]:
+    """Copy a mapping into recursively immutable containers."""
+    return MappingProxyType({key: _freeze_container(child) for key, child in value.items()})
+
+
+def _freeze_container(value: Any) -> Any:
+    if isinstance(value, Mapping):
+        return freeze_mapping(value)
+    if isinstance(value, (list, tuple)):
+        return tuple(_freeze_container(child) for child in value)
+    if isinstance(value, (set, frozenset)):
+        return frozenset(_freeze_container(child) for child in value)
+    return value
 
 
 class Dimension(StrEnum):
@@ -179,7 +196,7 @@ class CapacityProfile(BaseModel):
                 raise ValueError(
                     f"{dimension.value} must be stored in {expected!r}, got {entry.unit!r}"
                 )
-        return MappingProxyType(dict(dimensions))
+        return freeze_mapping(dimensions)
 
     def value(self, dimension: Dimension) -> float:
         return self.dimensions[dimension].value
@@ -216,7 +233,7 @@ class CapacityBaselineRecord(BaseModel):
         for dimension, sufficiency in value.items():
             if not 0.0 <= sufficiency <= 1.0:
                 raise ValueError(f"evidence_sufficiency[{dimension.value}] outside [0, 1]: {sufficiency}")
-        return MappingProxyType(dict(value))
+        return freeze_mapping(value)
 
 
 class MissingRunMetadataError(RuntimeError):
@@ -264,7 +281,17 @@ class RunMetadata(BaseModel):
         unknown = set(value) - set(SPEC_9_2_COMPONENTS)
         if unknown:
             raise ValueError(f"unknown parameter component(s): {sorted(unknown)}")
-        return MappingProxyType(dict(value))
+        return freeze_mapping(value)
+
+    @field_validator(
+        "posterior_hash_by_character",
+        "estimator_ess_by_character",
+        "evidence_sufficiency_by_character",
+        mode="after",
+    )
+    @classmethod
+    def _freeze_provenance_mappings(cls, value: Mapping[Any, Any]) -> Mapping[Any, Any]:
+        return freeze_mapping(value)
 
     @classmethod
     def from_mapping(cls, raw: Mapping[str, object], *, required_components: tuple[str, ...]) -> RunMetadata:

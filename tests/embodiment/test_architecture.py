@@ -122,27 +122,81 @@ def test_direct_numpy_random_imports_are_rejected(source: str) -> None:
     assert violations
 
 
+def capacity_baseline_writer_violations(path: Path, tree: ast.Module) -> list[str]:
+    """Find every construction path for the frozen baseline record."""
+    record_aliases = {"CapacityBaselineRecord"}
+    violations: list[str] = []
+    pydantic_constructors = {"model_construct", "model_validate", "model_validate_json"}
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ImportFrom):
+            for alias in node.names:
+                if alias.name == "CapacityBaselineRecord":
+                    record_aliases.add(alias.asname or alias.name)
+
+    def is_record_reference(node: ast.expr) -> bool:
+        return (
+            isinstance(node, ast.Name)
+            and node.id in record_aliases
+            or isinstance(node, ast.Attribute)
+            and node.attr == "CapacityBaselineRecord"
+        )
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call):
+            constructor = False
+            if is_record_reference(node.func):
+                constructor = True
+            elif (
+                isinstance(node.func, ast.Attribute)
+                and node.func.attr in pydantic_constructors
+                and is_record_reference(node.func.value)
+            ):
+                constructor = True
+            if constructor:
+                violations.append(
+                    f"{path.name}:{node.lineno} constructs a CapacityBaselineRecord outside "
+                    f"seeding.py (F3)"
+                )
+
+        targets: list[ast.expr] = []
+        if isinstance(node, ast.Assign):
+            targets = list(node.targets)
+        elif isinstance(node, (ast.AnnAssign, ast.AugAssign)):
+            targets = [node.target]
+        for target in targets:
+            name = target.attr if isinstance(target, ast.Attribute) else getattr(target, "id", "")
+            if name == "capacity_baseline":
+                violations.append(
+                    f"{path.name}:{node.lineno} assigns capacity_baseline outside seeding.py (F3)"
+                )
+
+    return violations
+
+
 def test_f3_only_seeding_writes_a_capacity_baseline(package_sources) -> None:
     """A hand-set attribute can only enter through a second writer, so there is one."""
     for path, tree in package_sources:
         if path.name == "seeding.py":
             continue
-        for node in ast.walk(tree):
-            if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
-                assert node.func.id != "CapacityBaselineRecord", (
-                    f"{path.name}:{node.lineno} constructs a CapacityBaselineRecord. "
-                    f"capacity_baseline is written in seeding.py and nowhere else (F3)."
-                )
-            targets: list[ast.expr] = []
-            if isinstance(node, ast.Assign):
-                targets = list(node.targets)
-            elif isinstance(node, (ast.AnnAssign, ast.AugAssign)):
-                targets = [node.target]
-            for target in targets:
-                name = target.attr if isinstance(target, ast.Attribute) else getattr(target, "id", "")
-                assert name != "capacity_baseline", (
-                    f"{path.name}:{node.lineno} assigns capacity_baseline outside seeding.py (F3)"
-                )
+        violations = capacity_baseline_writer_violations(path, tree)
+        assert not violations, "\n".join(violations)
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        "from embodiment.types import CapacityBaselineRecord as Record\nRecord()\n",
+        "import embodiment.types as types\ntypes.CapacityBaselineRecord()\n",
+        (
+            "from embodiment.types import CapacityBaselineRecord\n"
+            "CapacityBaselineRecord.model_validate({})\n"
+        ),
+    ],
+)
+def test_f3_writer_guard_resolves_aliases_and_alternative_constructors(source: str) -> None:
+    violations = capacity_baseline_writer_violations(Path("consumer.py"), ast.parse(source))
+    assert violations
 
 
 # --------------------------------------------------------------------------
@@ -156,6 +210,27 @@ def test_no_capacity_posterior_is_committed(data_documents, walk_document) -> No
             assert "capacity_posterior" not in where, f"{path}: {where}"
 
 
+def nominal_capacity_dimensions(node: object) -> set[str]:
+    if not isinstance(node, dict):
+        return set()
+    dimension_names = {dimension.value for dimension in Dimension}
+    return {
+        key
+        for key, value in node.items()
+        if key in dimension_names and is_serialised_capacity_value(value)
+    }
+
+
+def is_serialised_capacity_value(value: object) -> bool:
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        return True
+    return (
+        isinstance(value, dict)
+        and isinstance(value.get("value"), (int, float))
+        and not isinstance(value.get("value"), bool)
+    )
+
+
 def test_no_nominal_capacity_profile_compiles(data_documents, walk_document) -> None:
     """Nor a hand-written profile wearing another name.
 
@@ -163,22 +238,26 @@ def test_no_nominal_capacity_profile_compiles(data_documents, walk_document) -> 
     whatever it is called, and only `seeding.py` may produce one — at runtime,
     from the prior, never from a committed file.
     """
-    dimension_names = {dimension.value for dimension in Dimension}
     for path, document in data_documents:
         if path.name == "population-prior.yaml":
             continue  # the cohort distribution, which is exactly what may exist
         for where, node in walk_document(document):
             if not isinstance(node, dict):
                 continue
-            numeric_dimensions = {
-                key
-                for key, value in node.items()
-                if key in dimension_names and isinstance(value, (int, float)) and not isinstance(value, bool)
-            }
+            numeric_dimensions = nominal_capacity_dimensions(node)
             assert len(numeric_dimensions) < 3, (
                 f"{path}: {where} looks like a nominal capacity profile "
                 f"({sorted(numeric_dimensions)}). Capacity is sampled, never written down."
             )
+
+
+def test_nominal_profile_lint_recognises_the_serialised_capacity_shape() -> None:
+    dimensions = {
+        "max_strength": {"value": 55.0, "unit": "kg"},
+        "sprint_speed": {"value": 8.0, "unit": "m_per_s"},
+        "body_mass": {"value": 62.0, "unit": "kg"},
+    }
+    assert nominal_capacity_dimensions(dimensions) == set(dimensions)
 
 
 def test_runs_are_not_committed(repo_root: Path) -> None:

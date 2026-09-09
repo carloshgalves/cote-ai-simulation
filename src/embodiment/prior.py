@@ -127,6 +127,10 @@ class Marginal(BaseModel):
 
     @model_validator(mode="after")
     def _parameters_match_family(self) -> Marginal:
+        for name in ("mean", "sd", "low", "high", "median", "logit_sd"):
+            value = getattr(self, name)
+            if value is not None and not math.isfinite(value):
+                raise ValueError(f"marginal parameter {name} must be finite")
         required = {
             "normal": ("mean", "sd"),
             "lognormal": ("mean", "sd"),
@@ -205,6 +209,13 @@ class Loading(BaseModel):
     general_fitness: float
     build: float
 
+    @field_validator("general_fitness", "build", mode="after")
+    @classmethod
+    def _loading_is_finite(cls, value: float) -> float:
+        if not math.isfinite(value):
+            raise ValueError("factor loading must be finite")
+        return value
+
     def residual_sd(self, minimum: float) -> float:
         communality = self.general_fitness**2 + self.build**2
         residual = 1.0 - communality
@@ -241,6 +252,13 @@ class PopulationPrior(BaseModel):
     def _sex_ratio_is_a_probability(cls, value: float) -> float:
         if not math.isfinite(value) or not 0.0 <= value <= 1.0:
             raise ValueError("sex_ratio_male must be finite and within [0, 1]")
+        return value
+
+    @field_validator("min_residual_sd", mode="after")
+    @classmethod
+    def _residual_floor_is_a_standard_deviation(cls, value: float) -> float:
+        if not math.isfinite(value) or not 0.0 < value <= 1.0:
+            raise ValueError("min_residual_sd must be finite and within (0, 1]")
         return value
 
     # ------------------------------------------------------------------ loading
@@ -282,6 +300,8 @@ class PopulationPrior(BaseModel):
 
         raw_loadings = data.get("loadings") or {}
         min_residual_sd = float(_sourced_number(data, ("copula", "min_residual_sd"), path))
+        if not math.isfinite(min_residual_sd) or not 0.0 < min_residual_sd <= 1.0:
+            raise PriorError(f"{path}: copula.min_residual_sd must be finite and within (0, 1]")
         loadings: dict[Dimension, Loading] = {}
         for dimension in Dimension:
             entry = raw_loadings.get(dimension.value)

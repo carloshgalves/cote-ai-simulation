@@ -236,7 +236,7 @@ def test_snapshot_refuses_contradictory_provenance(
         changed = CapacityBaselineStore()
         for character_id, record in store.items():
             if character_id == "npc.0001":
-                record = record.model_copy(update={field: "wrong"})
+                record = record.__class__.model_construct(**{**record.__dict__, field: "wrong"})
             changed.put(record)
         store = changed
 

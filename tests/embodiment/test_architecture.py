@@ -11,11 +11,12 @@ They are also, per ADR 0007 §5, the guard of the subdomain boundary itself.
 from __future__ import annotations
 
 import ast
+import math
 from pathlib import Path
 
 import pytest
 
-from embodiment.types import Dimension
+from embodiment.types import DIMENSION_UNITS, CapacityProfile, Dimension
 
 #: Import roots that would make this subdomain depend on a language model.
 #: Spec §4: nothing here needs an LLM to decide a result, and a test refuses one
@@ -72,6 +73,29 @@ def global_rng_violations(path: Path, tree: ast.Module) -> list[str]:
             elif node.module == "random":
                 violations.append(f"{path.name}:{node.lineno} imports from stdlib random")
 
+    def is_numpy_random_module(node: ast.expr) -> bool:
+        return (
+            isinstance(node, ast.Attribute)
+            and node.attr == "random"
+            and isinstance(node.value, ast.Name)
+            and node.value.id in numpy_aliases
+        )
+
+    for node in ast.walk(tree):
+        value: ast.expr | None = None
+        if isinstance(node, ast.Assign):
+            value = node.value
+        elif isinstance(node, ast.AnnAssign):
+            value = node.value
+        if value is None:
+            continue
+        if is_numpy_random_module(value) or (
+            isinstance(value, ast.Attribute) and is_numpy_random_module(value.value)
+        ):
+            violations.append(
+                f"{path.name}:{node.lineno} binds a local alias derived from numpy.random"
+            )
+
     for node in ast.walk(tree):
         if not isinstance(node, ast.Call) or not isinstance(node.func, ast.Attribute):
             continue
@@ -122,6 +146,18 @@ def test_direct_numpy_random_imports_are_rejected(source: str) -> None:
     assert violations
 
 
+@pytest.mark.parametrize(
+    "source",
+    [
+        "import numpy as np\ndraw = np.random.default_rng\ndraw().normal()\n",
+        "import numpy as np\nr = np.random\nr.default_rng().normal()\n",
+    ],
+)
+def test_local_numpy_random_aliases_are_rejected(source: str) -> None:
+    violations = global_rng_violations(Path("consumer.py"), ast.parse(source))
+    assert violations
+
+
 def capacity_baseline_writer_violations(path: Path, tree: ast.Module) -> list[str]:
     """Find every construction path for the frozen baseline record."""
     record_aliases = {"CapacityBaselineRecord"}
@@ -158,6 +194,15 @@ def capacity_baseline_writer_violations(path: Path, tree: ast.Module) -> list[st
                     f"{path.name}:{node.lineno} constructs a CapacityBaselineRecord outside "
                     f"seeding.py (F3)"
                 )
+            elif (
+                isinstance(node.func, ast.Attribute)
+                and node.func.attr == "model_copy"
+                and any(keyword.arg == "update" for keyword in node.keywords)
+            ):
+                violations.append(
+                    f"{path.name}:{node.lineno} updates a frozen model through model_copy "
+                    f"outside seeding.py (F3/F5)"
+                )
 
         targets: list[ast.expr] = []
         if isinstance(node, ast.Assign):
@@ -192,6 +237,7 @@ def test_f3_only_seeding_writes_a_capacity_baseline(package_sources) -> None:
             "from embodiment.types import CapacityBaselineRecord\n"
             "CapacityBaselineRecord.model_validate({})\n"
         ),
+        "def forge(record):\n    return record.model_copy(update={'posterior_hash': 'x'})\n",
     ],
 )
 def test_f3_writer_guard_resolves_aliases_and_alternative_constructors(source: str) -> None:
@@ -222,13 +268,13 @@ def nominal_capacity_dimensions(node: object) -> set[str]:
 
 
 def is_serialised_capacity_value(value: object) -> bool:
-    if isinstance(value, (int, float)) and not isinstance(value, bool):
-        return True
-    return (
-        isinstance(value, dict)
-        and isinstance(value.get("value"), (int, float))
-        and not isinstance(value.get("value"), bool)
-    )
+    candidate = value.get("value") if isinstance(value, dict) else value
+    if isinstance(candidate, bool):
+        return False
+    try:
+        return math.isfinite(float(candidate))  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return False
 
 
 def test_no_nominal_capacity_profile_compiles(data_documents, walk_document) -> None:
@@ -257,6 +303,16 @@ def test_nominal_profile_lint_recognises_the_serialised_capacity_shape() -> None
         "sprint_speed": {"value": 8.0, "unit": "m_per_s"},
         "body_mass": {"value": 62.0, "unit": "kg"},
     }
+    assert nominal_capacity_dimensions(dimensions) == set(dimensions)
+
+
+def test_nominal_profile_lint_matches_numeric_strings_accepted_by_the_model() -> None:
+    dimensions = {
+        dimension.value: {"value": "55.0", "unit": DIMENSION_UNITS[dimension].unit}
+        for dimension in Dimension
+    }
+    profile = CapacityProfile.model_validate({"dimensions": dimensions})
+    assert set(profile.dimensions) == set(Dimension)
     assert nominal_capacity_dimensions(dimensions) == set(dimensions)
 
 

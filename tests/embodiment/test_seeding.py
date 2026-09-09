@@ -76,6 +76,8 @@ def test_f5_the_record_itself_cannot_be_rewritten(prior: PopulationPrior) -> Non
         record.posterior_hash = "rewritten"  # type: ignore[misc]
     with pytest.raises(Exception):
         record.profile.dimensions[Dimension.MAX_STRENGTH] = None  # type: ignore[index]
+    with pytest.raises(TypeError, match="model_copy.*update"):
+        record.model_copy(update={"posterior_hash": "forged"})
 
 
 def test_f6_scenario_7_a_late_npc_gets_the_body_it_would_have_had(prior: PopulationPrior) -> None:

@@ -20,7 +20,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from enum import StrEnum
 from types import MappingProxyType
-from typing import Any
+from typing import Any, Self
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
@@ -221,6 +221,16 @@ class CapacityBaselineRecord(BaseModel):
     prior_version: str
     substream: str
     evidence_sufficiency: Mapping[Dimension, float]
+
+    def model_copy(
+        self, *, update: Mapping[str, Any] | None = None, deep: bool = False
+    ) -> Self:
+        if update:
+            raise TypeError(
+                "CapacityBaselineRecord.model_copy does not accept update: "
+                "capacity_baseline is created only by seeding.py"
+            )
+        return super().model_copy(deep=deep)
 
     @field_validator("evidence_sufficiency", mode="after")
     @classmethod

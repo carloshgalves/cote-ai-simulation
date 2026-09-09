@@ -177,6 +177,47 @@ def test_sex_ratio_male_must_be_a_finite_probability(tmp_path, value: float) -> 
         PopulationPrior.load(path)
 
 
+@pytest.mark.parametrize("value", [float("nan"), float("inf")])
+def test_marginal_scalars_must_be_finite(tmp_path, value: float) -> None:
+    import yaml
+
+    data = yaml.safe_load(POPULATION_PRIOR_PATH.read_text(encoding="utf-8"))
+    data["marginals"]["male"]["max_strength"]["sd"] = value
+    path = tmp_path / "non-finite-marginal.yaml"
+    path.write_text(yaml.safe_dump(data), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="finite"):
+        PopulationPrior.load(path)
+
+
+@pytest.mark.parametrize("value", [float("nan"), float("inf")])
+def test_loading_scalars_must_be_finite(tmp_path, value: float) -> None:
+    import yaml
+
+    data = yaml.safe_load(POPULATION_PRIOR_PATH.read_text(encoding="utf-8"))
+    data["loadings"]["max_strength"]["general_fitness"] = value
+    path = tmp_path / "non-finite-loading.yaml"
+    path.write_text(yaml.safe_dump(data), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="finite"):
+        PopulationPrior.load(path)
+
+
+@pytest.mark.parametrize("value", [-0.15, float("nan"), float("inf")])
+def test_min_residual_sd_must_be_a_positive_finite_standard_deviation(
+    tmp_path, value: float
+) -> None:
+    import yaml
+
+    data = yaml.safe_load(POPULATION_PRIOR_PATH.read_text(encoding="utf-8"))
+    data["copula"]["min_residual_sd"]["value"] = value
+    path = tmp_path / "bad-residual-floor.yaml"
+    path.write_text(yaml.safe_dump(data), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="min_residual_sd"):
+        PopulationPrior.load(path)
+
+
 # --------------------------------------------------------------------------
 # Calibration. Blocked, and saying so.
 # --------------------------------------------------------------------------

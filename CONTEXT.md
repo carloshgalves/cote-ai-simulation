@@ -9,11 +9,18 @@ Construir uma simulação multiagente em que personagens inspirados em *Classroo
 ### Simulation Engine
 Fonte de verdade sobre relógio, localização, recursos, eventos, causalidade, turnos/cenas e snapshots.
 
+**Subdomínio `Embodiment`.** Capacidade física amostrada, estado corporal (fadiga aguda e acumulada,
+sono, nutrição, hidratação, carga térmica, dor, lesão), ambiente, resolução de esforço e resolução de
+disputa física. É subdomínio do engine, não contexto par: um módulo físico ao lado do engine criaria
+dois lugares capazes de decidir o que aconteceu. Modelo em
+[`docs/architecture/physical-model.md`](docs/architecture/physical-model.md), decisão no
+[ADR 0006](docs/adr/0006-physical-domain-model.md).
+
 ### Agent Cognition
 Transforma percepção + identidade + memória + crenças + objetivos em intenção/ação. Nunca recebe o world state completo.
 
 ### Canon Knowledge
-Armazena perfis estruturados e evidências comportamentais usadas para fidelidade de personagem. Não contém o estado corrente da simulação.
+Armazena perfis estruturados e evidências comportamentais usadas para fidelidade de personagem. Não contém o estado corrente da simulação. Inclui o corpus **compartilhado** de feats físicos (`data/canon/feats/`), indexado por ator e não separado por personagem.
 
 ### Agent Knowledge & Memory
 Mantém o que cada agente sabe, acredita, suspeita, esquece, aprendeu e de onde veio a informação.
@@ -37,6 +44,12 @@ Congela um snapshot ao fim do primeiro ano e injeta novos entrantes a partir de 
 6. Memórias da linha canônica após o ponto de divergência não podem aparecer como memória da simulação.
 7. Mudanças de prompt/modelo que alterem comportamento estratégico exigem evals versionados.
 8. Corpus privado não deve ser commitado no repositório público.
+9. Capacidade latente, estado corporal, esforço escolhido, desempenho realizado, desempenho observado e autopercepção corporal são seis estruturas distintas.
+10. Desempenho observado restringe capacidade como limite, nunca como estimativa; teto só existe com esforço máximo atestado.
+11. Ausência de evidência sobre um personagem produz prior populacional versionado, nunca atributo escolhido à mão.
+12. Consequência física persiste entre cenas, eventos e dias; cena não cura nada, e só o engine escreve estado corporal.
+13. Ao agente chega interocepção qualitativa e enviesada, nunca telemetria corporal — nem a própria, nem a de terceiros.
+14. Comparações de capacidade entre personagens são saída da simulação, nunca entrada de dados.
 
 ## Escopo da primeira milestone
 

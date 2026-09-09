@@ -1,0 +1,19 @@
+id: oq.capability.physical-exam-tasks
+schema_version: 1
+question: Which special exams and school events impose physical tasks, and what do they demand —
+  sustained pace, sprinting, strength, exposure, sleep loss, rationing?
+why_it_matters: 'Determines which capacity dimensions the engine must actually resolve and which
+  BodyState channels carry consequence across events. A dimension no activity consumes should not exist;
+  a demand with no dimension behind it cannot be resolved deterministically.'
+priority: high
+category: capability
+where_to_look:
+- work: ln.y1.v02
+  strength: primary
+- work: ln.y1.v03
+  strength: primary
+blocks:
+- data/models/physical/BODY_DYNAMICS
+status: open
+answer: null
+answered_by: null

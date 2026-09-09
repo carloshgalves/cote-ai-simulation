@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/canon/feat_collection.schema.json",
+  "title": "FeatCollection",
+  "description": "File-level container. One YAML file holds a topical group of physical feats. Grouping is by event or modality, never by character: the corpus is shared.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "feats"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "collection": { "type": "string" },
+    "note": { "type": "string" },
+    "feats": { "type": "array", "items": { "$ref": "feat.schema.json" } }
+  }
+}

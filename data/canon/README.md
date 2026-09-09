@@ -29,6 +29,7 @@ Esta política de corpus continua valendo. A partir do ADR 0005, o diretório ta
 | `actors/` | stubs de entidade (sem dossiers nesta fase) |
 | `exams/` | cânone dos exames especiais |
 | `evidence/` | paráfrases citáveis para RAG |
+| `feats/` | desempenhos físicos observados; corpus compartilhado, indexado por ator |
 | `conflicts/` · `open_questions/` | discordâncias e lacunas |
 | `derived/` | snapshots compilados consumidos pelo engine (gerados) |
 

@@ -12,6 +12,7 @@ Base canônica do universo de *Classroom of the Elite* usada para reconstruir o 
 | `data/canon/world/` | estrutura, regras e entidades não específicas do Y1 |
 | `data/canon/y1/` | estado inicial do primeiro ano e linha de eventos canônica |
 | `data/canon/evidence/` | paráfrases citáveis, indexáveis por RAG |
+| `data/canon/feats/` | desempenhos físicos observados, corpus **compartilhado** (não por personagem) |
 | `data/canon/conflicts/` | discordâncias entre fontes, com hipóteses |
 | `data/canon/open_questions/` | lacunas que exigem leitura direta da light novel |
 | `data/canon/derived/` | snapshots compilados consumidos pelo engine (gerados) |

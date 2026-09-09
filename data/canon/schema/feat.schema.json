@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/canon/feat.schema.json",
+  "title": "PhysicalFeat",
+  "description": "An observed physical performance in canon. A feat CONSTRAINS latent capacity; it never measures it. Lower bounds are cheap, upper bounds are expensive: an upper bound requires attested maximal effort. See docs/architecture/physical-model.md and ADR 0006.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "schema_version", "actors", "modality", "story_time", "measurement", "effort", "inference", "provenance"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^feat\\.[a-z0-9.-]+$" },
+    "schema_version": { "type": "integer", "const": 1 },
+    "revision": { "type": "integer", "minimum": 1, "default": 1 },
+
+    "actors": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "Actor ids. More than one for same-event comparative feats. Feats are a SHARED corpus, never a per-character store."
+    },
+
+    "modality": {
+      "type": "string",
+      "enum": [
+        "endurance-run", "sprint", "swim", "jump", "throw", "lift-or-push",
+        "grip-or-hold", "climb", "carry", "ball-sport", "combat", "restraint",
+        "pursuit-or-flight", "sustained-labour", "survival-exposure",
+        "fitness-test", "other"
+      ]
+    },
+
+    "story_time": { "$ref": "common.schema.json#/$defs/TimeBound" },
+
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimensions", "form"],
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "FK to schema/enums/capacity-dimensions.yaml. Which capacity dimensions this observation speaks to."
+        },
+        "skill_axes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "FK to skill_axes in the same enum file. Technique is not capacity; a feat may inform both, separately."
+        },
+        "form": {
+          "type": "string",
+          "enum": ["quantity", "ordinal", "qualitative"],
+          "description": "quantity: a measured value in a physical unit. ordinal: a placing in a field. qualitative: prose only, weakest form."
+        },
+        "quantity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["value", "unit"],
+          "properties": {
+            "value": { "type": "number" },
+            "unit": { "type": "string" },
+            "precision": { "type": "string" }
+          }
+        },
+        "ordinal": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["rank", "field_size"],
+          "properties": {
+            "rank": { "type": "integer", "minimum": 1 },
+            "field_size": { "type": "integer", "minimum": 2 },
+            "field_composition": { "type": "string", "description": "Who else was in the field. A rank means nothing without it." }
+          }
+        },
+        "qualitative": { "type": "string" }
+      },
+      "allOf": [
+        { "if": { "properties": { "form": { "const": "quantity" } }, "required": ["form"] }, "then": { "required": ["quantity"] } },
+        { "if": { "properties": { "form": { "const": "ordinal" } }, "required": ["form"] }, "then": { "required": ["ordinal"] } },
+        { "if": { "properties": { "form": { "const": "qualitative" } }, "required": ["form"] }, "then": { "required": ["qualitative"] } }
+      ]
+    },
+
+    "conditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Everything needed to de-normalise the observation back to neutral conditions. Unknown is a legitimate value; guessing is not.",
+      "properties": {
+        "environment": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "temperature_c": { "type": ["number", "null"] },
+            "humid": { "type": ["boolean", "null"] },
+            "terrain": { "type": "string" },
+            "surface": { "type": "string" },
+            "gradient": { "type": "string" },
+            "visibility": { "type": "string" },
+            "footwear_or_clothing": { "type": "string" },
+            "load_carried": { "type": "string" }
+          }
+        },
+        "body_state_at_the_time": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "What the text tells us about the body BEFORE the feat. Absent field means unknown, not neutral.",
+          "properties": {
+            "prior_exertion": { "type": "string" },
+            "sleep": { "type": "string" },
+            "food_or_water": { "type": "string" },
+            "injury_or_illness": { "type": "string" },
+            "pain": { "type": "string" }
+          }
+        },
+        "ruleset_or_constraints": { "type": "string" },
+        "unknowns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Conditions the text does not establish. Recording them is what keeps the bound honest."
+        }
+      }
+    },
+
+    "effort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attestation"],
+      "properties": {
+        "attestation": {
+          "type": "string",
+          "enum": [
+            "NARRATED_MAXIMAL",
+            "SELF_REPORTED_MAXIMAL",
+            "SELF_REPORTED_SUBMAXIMAL",
+            "THIRD_PARTY_READ",
+            "STRAIN_CUES_PRESENT",
+            "STRAIN_CUES_ABSENT",
+            "STRUCTURAL_INCENTIVE_TO_CONCEAL",
+            "UNKNOWN"
+          ],
+          "description": "How we know the effort level. UNKNOWN is the default and the majority case. Never assume maximal effort from the mere fact that a performance happened."
+        },
+        "note": { "type": "string" },
+        "fraction_bounds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["support_note"],
+          "description": "Only when the text bounds the effort fraction. Requires a support note; an invented fraction is forbidden.",
+          "properties": {
+            "min": { "type": "number", "minimum": 0, "maximum": 1 },
+            "max": { "type": "number", "minimum": 0, "maximum": 1 },
+            "support_note": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "inference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["constraint", "posterior_use"],
+      "properties": {
+        "constraint": {
+          "type": "string",
+          "enum": ["LOWER_BOUND", "UPPER_BOUND", "INSTRUMENTED_ESTIMATE", "COMPARATIVE", "TESTIMONY", "NO_INFORMATION"],
+          "description": "Direction of what this feat authorises. See physical-model.md §6."
+        },
+        "posterior_use": {
+          "type": "string",
+          "enum": ["BOUND", "WEAK_CORROBORATION", "EXCLUDED"],
+          "description": "How the capacity estimator may use it. TESTIMONY may never be BOUND: hype is not physics."
+        },
+        "normalization_note": {
+          "type": "string",
+          "description": "How conditions and known body state were removed before applying the bound."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Required for NO_INFORMATION: why this performance constrains nothing above the existing floor."
+        },
+        "comparative": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["outperformed", "by_whom", "same_event"],
+          "properties": {
+            "by_whom": { "type": "string" },
+            "outperformed": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+            "same_event": { "type": "boolean", "description": "Must be true: a comparison across different conditions is not a comparison." },
+            "margin": { "type": "string" },
+            "effort_assumption": { "type": "string", "description": "Explicit assumption required to transfer a performance ordering to a capacity ordering." }
+          }
+        },
+        "instrument": {
+          "type": "string",
+          "description": "Required for INSTRUMENTED_ESTIMATE: which official measurement produced it."
+        },
+        "testifier": {
+          "type": "string",
+          "description": "Required for TESTIMONY: whose belief this is. It seeds belief state, not the posterior."
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "constraint": { "const": "NO_INFORMATION" } }, "required": ["constraint"] },
+          "then": { "required": ["reason"], "properties": { "posterior_use": { "const": "EXCLUDED" } } }
+        },
+        {
+          "if": { "properties": { "constraint": { "const": "COMPARATIVE" } }, "required": ["constraint"] },
+          "then": { "required": ["comparative"], "properties": { "comparative": { "properties": { "same_event": { "const": true } } } } }
+        },
+        {
+          "if": { "properties": { "constraint": { "const": "INSTRUMENTED_ESTIMATE" } }, "required": ["constraint"] },
+          "then": { "required": ["instrument"] }
+        },
+        {
+          "if": { "properties": { "constraint": { "const": "TESTIMONY" } }, "required": ["constraint"] },
+          "then": {
+            "required": ["testifier"],
+            "properties": { "posterior_use": { "enum": ["WEAK_CORROBORATION", "EXCLUDED"] } }
+          }
+        }
+      ]
+    },
+
+    "observers": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/KnowledgeGrant" },
+      "description": "Who witnessed it in-universe. Seeds other characters' capacity beliefs at Y1_START; after that the simulation event log governs."
+    },
+
+    "divergence_sensitive": {
+      "type": "boolean",
+      "default": true,
+      "description": "A body does not change because the timeline forked: a post-divergence feat MAY inform the capacity posterior at seeding. A memory does change: it may never enter episodic memory or belief state. See ADR 0006 decision 14."
+    },
+
+    "supports_claims": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/ClaimId" } },
+    "evidence_refs": { "type": "array", "items": { "type": "string" }, "description": "FK to evidence records carrying the paraphrase. Feats hold numbers; evidence holds prose." },
+    "provenance": { "$ref": "common.schema.json#/$defs/Provenance" },
+    "notes_ref": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  },
+
+  "allOf": [
+    {
+      "if": {
+        "properties": { "inference": { "properties": { "constraint": { "const": "UPPER_BOUND" } }, "required": ["constraint"] } },
+        "required": ["inference"]
+      },
+      "then": {
+        "properties": {
+          "effort": {
+            "properties": {
+              "attestation": {
+                "enum": ["NARRATED_MAXIMAL", "SELF_REPORTED_MAXIMAL"],
+                "$comment": "Hard rule: an upper bound on capacity requires attested maximal effort. Same discipline as not_before requiring not_before_support in ADR 0005."
+              }
+            },
+            "required": ["attestation"]
+          }
+        },
+        "required": ["effort"]
+      }
+    }
+  ]
+}

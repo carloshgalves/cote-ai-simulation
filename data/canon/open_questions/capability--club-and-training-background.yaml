@@ -1,0 +1,19 @@
+id: oq.capability.club-and-training-background
+schema_version: 1
+question: Which first-year students belong to sports clubs or have stated athletic or martial training,
+  and how much of it does the text actually establish?
+why_it_matters: 'Separates skill from capacity and conditions the population prior. Club membership is
+  the strongest canon-available cohort covariate for students with no feats; martial background is a
+  skill axis and must not be stored as capacity.'
+priority: high
+category: capability
+where_to_look:
+- work: ln.y1.v01
+  strength: primary
+- work: ln.y1.v02
+  strength: primary
+blocks:
+- data/models/physical/POPULATION_PRIORS
+status: open
+answer: null
+answered_by: null

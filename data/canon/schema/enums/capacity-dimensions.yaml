@@ -1,0 +1,96 @@
+# Physical capacity dimensions.
+#
+# Shared vocabulary, not claims. A dimension exists only if some canon feat can
+# bind to it and some engine activity can consume it.
+#
+# Every dimension carries a PHYSICAL UNIT and an observable anchor. Cohort
+# percentile is a derived view, never the primary storage: "0-100 arbitrary" is
+# the antipattern this file exists to prevent.
+#
+# A dimension may be percentile-only when no physical unit exists for it; it must
+# then name its reference cohort explicitly.
+#
+# Capacity is NOT skill and NOT disposition. Skill (technique, club training,
+# martial background) lives in Canon Knowledge plus in-simulation adaptation;
+# disposition (willingness to fight, to hurt, to endure, to bother at all) lives
+# in Character Core / Agent Cognition. See docs/architecture/physical-model.md §4.
+#
+# Numeric cohort norms live in data/models/physical/ and are NOT canon.
+
+schema_version: 1
+
+dimensions:
+  - id: aerobic_capacity
+    unit: "mL.kg-1.min-1"
+    anchor: Endurance run / shuttle run; sustained pace over minutes.
+    note: VO2max proxy. Degraded by substrate depletion and dehydration before any injury.
+
+  - id: anaerobic_power
+    unit: "W.kg-1"
+    anchor: Standing long jump, throw, first strides of a sprint.
+
+  - id: sprint_speed
+    unit: "m.s-1"
+    anchor: 50 m dash.
+
+  - id: max_strength
+    unit: "N"
+    anchor: Grip dynamometer; pushing, lifting, holding a person.
+    note: Also stored as force-to-bodymass ratio. Nearly insensitive to sleep debt.
+
+  - id: strength_endurance
+    unit: "reps"
+    anchor: Sit-ups, hanging, repeated pushing.
+    alt_unit: "s at % of max"
+
+  - id: agility
+    unit: "s"
+    anchor: Standardised change-of-direction course.
+
+  - id: coordination
+    unit: "hit_rate"
+    anchor: Motor precision under time pressure.
+
+  - id: reaction_time
+    unit: "ms"
+    anchor: Response latency to a discrete cue.
+
+  - id: flexibility
+    unit: "cm"
+    anchor: Sit-and-reach.
+
+  - id: injury_resilience
+    unit: "risk_multiplier"
+    dimensionless: true
+    anchor: Tissue robustness; divides injury probability.
+
+  - id: recovery_rate
+    unit: "h"
+    anchor: Time constant of fatigue dissipation and healing progress.
+
+  - id: thermoregulation
+    unit: "degC"
+    anchor: Tolerated core/ambient offset before performance decay.
+
+  - id: pain_tolerance
+    unit: "percentile"
+    reference_cohort: "same-age, same-sex secondary school cohort"
+    anchor: No physical unit exists. Percentile-only by exception, cohort declared.
+
+  - id: body_mass
+    unit: "kg"
+    anchor: Anthropometry.
+
+  - id: stature
+    unit: "cm"
+    anchor: Anthropometry.
+
+# Skill axes are a separate namespace. Listed here only so that feats can tag
+# which axis they inform, and so that nobody stores technique as capacity.
+skill_axes:
+  - id: skill.grappling
+  - id: skill.striking
+  - id: skill.pacing
+  - id: skill.swimming
+  - id: skill.ball_sport
+  - id: skill.outdoor_survival

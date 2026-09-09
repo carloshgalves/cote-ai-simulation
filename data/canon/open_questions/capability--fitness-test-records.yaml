@@ -1,0 +1,21 @@
+id: oq.capability.fitness-test-records
+schema_version: 1
+question: Does the school administer and record a physical fitness test, and are any per-student results
+  or rankings stated in the text?
+why_it_matters: 'Official measured records are the only plausible source of INSTRUMENTED_ESTIMATE feats.
+  Without them nearly every capacity claim is a lower bound only, and posteriors stay dominated by the
+  population prior. It also decides whether concealment has an institutional channel to defeat.'
+priority: high
+category: capability
+where_to_look:
+- work: ln.y1.v01
+  strength: primary
+- work: para.school-database
+  locator:
+    section: stat cards
+  strength: primary
+blocks:
+- data/models/physical/CAPACITY_ESTIMATOR
+status: open
+answer: null
+answered_by: null

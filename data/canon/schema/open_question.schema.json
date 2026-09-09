@@ -13,7 +13,7 @@
     "priority": { "type": "string", "enum": ["blocker", "high", "medium", "low"] },
     "category": {
       "type": "string",
-      "enum": ["initial-state", "engine-rule", "hidden-knowledge", "prehistory", "roster", "observability"]
+      "enum": ["initial-state", "engine-rule", "hidden-knowledge", "prehistory", "roster", "observability", "capability"]
     },
     "where_to_look": {
       "type": "array",

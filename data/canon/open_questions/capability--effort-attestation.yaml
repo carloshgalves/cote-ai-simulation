@@ -1,0 +1,23 @@
+id: oq.capability.effort-attestation
+schema_version: 1
+question: For each physical performance in the text, what does the prose establish about the effort
+  spent — strain, exhaustion, self-report, or nothing at all?
+why_it_matters: 'Decides whether a feat can ever license an UPPER_BOUND. With no effort attestation every
+  observation collapses to a lower bound, capacity ceilings stay unknown, and deliberate underperformance
+  becomes indistinguishable from mediocrity. This is the single most load-bearing gap in the physical
+  domain.'
+priority: blocker
+category: capability
+where_to_look:
+- work: ln.y1.v01
+  strength: primary
+- work: ln.y1.v02
+  strength: primary
+- work: ln.y1.v03
+  strength: primary
+blocks:
+- data/canon/feats
+- data/models/physical/CAPACITY_ESTIMATOR
+status: open
+answer: null
+answered_by: null

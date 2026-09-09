@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/models/physical/model-file.schema.json",
+  "title": "PhysicalModelFileHeader",
+  "description": "The header every file in data/models/physical/ carries. These files are OUR RECONSTRUCTIONS, never canon: none of them may appear in provenance.supports of a canon claim (ADR 0005 §7). The header exists so that a reader can tell, without leaving the file, what in it was measured and what was assumed. Spec: docs/spec/physical-simulation-v1.md §5.1, acceptance criterion 10. Three rules are enforced by src/embodiment/modelfile.py rather than here, because they are about the body of the file and not its shape: (1) every numeric parameter is covered by a `source` marking; (2) a marking is one of [MEASURED] [TRANSCRIBED] [EQUATED] [DERIVED] [INT], and [INT] means assumption; (3) no file may order two characters (invariant 8).",
+  "type": "object",
+  "required": ["schema_version", "not_canon", "model_kind", "model_version", "status", "provenance", "evidence_sufficiency"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+
+    "not_canon": {
+      "const": true,
+      "description": "Always true. A model file that could be read as canon is the failure this field exists to make impossible."
+    },
+
+    "model_kind": {
+      "type": "string",
+      "enum": ["POPULATION_PRIORS", "UNIT_ANCHORS", "CAPACITY_ESTIMATOR", "BODY_DYNAMICS"],
+      "description": "The four models of data/models/physical/README.md."
+    },
+
+    "model_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[a-z0-9.-]+)?$",
+      "description": "Semver. It enters run_metadata: a snapshot sampled under one version does not mean the same thing under another (spec §10.4)."
+    },
+
+    "status": {
+      "type": "string",
+      "enum": ["PROVISIONAL", "CALIBRATED"],
+      "description": "PROVISIONAL while any blocking sourcing gap is open. Runs using a provisional file say so in their metadata."
+    },
+
+    "provenance": {
+      "type": "object",
+      "required": ["calibrated_against", "sourcing_gaps", "research", "decision"],
+      "properties": {
+        "calibrated_against": {
+          "type": "string",
+          "description": "What real-world instrument or literature the numbers answer to. 'model memory' is not an answer."
+        },
+        "sourcing_gaps": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^S[0-9]+$" },
+          "description": "Open entries of data/models/physical/SOURCING.md that keep this file provisional. Empty only when status is CALIBRATED."
+        },
+        "open_questions": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^oq\\.[a-z0-9.-]+$" },
+          "description": "Canon open questions that fix what this file must assume while unanswered."
+        },
+        "research": { "type": "string" },
+        "decision": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+
+    "evidence_sufficiency": {
+      "type": "object",
+      "required": ["overall", "basis"],
+      "description": "The file's OWN sufficiency, not a character's. physical-model.md §5.6: while the factor loadings are a declared assumption, the prior file must say so itself, and not only the character sheets.",
+      "properties": {
+        "overall": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "1 - sd(posterior)/sd(prior) in spirit: 0 means 'this is assumption with a version number'."
+        },
+        "basis": { "type": "string" },
+        "by_component": {
+          "type": "object",
+          "additionalProperties": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true,
+
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "CALIBRATED" } }, "required": ["status"] },
+      "then": {
+        "properties": {
+          "provenance": {
+            "properties": { "sourcing_gaps": { "maxItems": 0 } }
+          }
+        }
+      }
+    }
+  ]
+}

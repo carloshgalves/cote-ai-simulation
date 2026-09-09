@@ -1,0 +1,137 @@
+"""Snapshot serialisation — first half: `capacity_baseline` and `run_metadata`.
+
+Spec §5.3. `body_state` arrives with PSV1-2 and `physical_beliefs` with PSV1-6;
+what this ticket fixes is the **shape**, and one part of the shape is not
+stylistic: world truth lives under `characters`, belief lives in its own tree
+with an explicit holder. A serialiser able to write a belief inside
+`characters.<id>` has already lost invariant 1, so `write_snapshot` refuses one.
+
+`snapshot_version: 1` is introduced here. A snapshot is only loadable while the
+parameter versions in its `run_metadata` are available: the bodies in it were
+sampled under that prior and do not mean the same thing under another (spec
+§10.2), which is also why a recalibrated prior re-runs from the seed rather than
+migrating old snapshots.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+from collections.abc import Mapping
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+from .seeding import CapacityBaselineStore, Posterior
+from .types import RunMetadata, SCHEMA_VERSION, SNAPSHOT_VERSION, Y1_START
+
+__all__ = [
+    "build_snapshot",
+    "write_snapshot",
+    "read_snapshot",
+    "snapshot_hash",
+    "SnapshotShapeError",
+    "BELIEF_SECTIONS",
+]
+
+#: Sections that may never appear under `characters.<id>`. Belief has a holder
+#: and world truth does not; putting the two in one tree is how they get fused.
+BELIEF_SECTIONS = frozenset(
+    {"physical_beliefs", "self_physical_model", "capacity_beliefs", "beliefs"}
+)
+
+
+class SnapshotShapeError(ValueError):
+    """The snapshot is not shaped the way the invariants require."""
+
+
+def build_snapshot(
+    *,
+    world_seed: int,
+    store: CapacityBaselineStore,
+    metadata: RunMetadata,
+    posteriors: Mapping[str, Posterior],
+    sim_time: str = Y1_START,
+) -> dict[str, Any]:
+    characters: dict[str, Any] = {}
+    for character_id, record in sorted(store.items()):
+        posterior = posteriors.get(character_id)
+        characters[character_id] = {
+            "capacity_baseline": {
+                "schema_version": SCHEMA_VERSION,
+                "sim_time": record.sim_time,
+                "sampled_from": {
+                    "posterior_hash": record.posterior_hash,
+                    "prior_version": record.prior_version,
+                    # Which marginals the copula used. A cohort covariate, not a
+                    # capacity dimension: without it the percentile *view* of
+                    # this body cannot be recomputed from the snapshot alone.
+                    "cohort_sex": posterior.sex if posterior else None,
+                    "substream": record.substream,
+                },
+                "evidence_sufficiency": {
+                    dimension.value: sufficiency
+                    for dimension, sufficiency in record.evidence_sufficiency.items()
+                },
+                "dimensions": {
+                    dimension.value: {"value": entry.value, "unit": entry.unit}
+                    for dimension, entry in record.profile.dimensions.items()
+                },
+            }
+        }
+
+    snapshot: dict[str, Any] = {
+        "snapshot_version": SNAPSHOT_VERSION,
+        "world_seed": world_seed,
+        "sim_time": sim_time,
+        "characters": characters,
+        "run_metadata": metadata.as_dict(),
+    }
+    _assert_shape(snapshot)
+    return snapshot
+
+
+def _assert_shape(snapshot: Mapping[str, Any]) -> None:
+    for character_id, sections in (snapshot.get("characters") or {}).items():
+        offending = BELIEF_SECTIONS & set(sections)
+        if offending:
+            raise SnapshotShapeError(
+                f"characters.{character_id} carries belief section(s) {sorted(offending)}. "
+                f"World truth and belief are distinct structures with distinct owners "
+                f"(CONTEXT.md invariant 1); belief lives in its own tree, keyed by holder."
+            )
+
+
+def snapshot_hash(snapshot: Mapping[str, Any]) -> str:
+    """sha256 over the snapshot without its own hash field."""
+    body = {key: value for key, value in snapshot.items() if key != "snapshot_hash"}
+    canonical = json.dumps(body, sort_keys=True, ensure_ascii=False, default=str)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def write_snapshot(path: str | Path, snapshot: Mapping[str, Any]) -> str:
+    _assert_shape(snapshot)
+    digest = snapshot_hash(snapshot)
+    payload = {key: value for key, value in snapshot.items() if key != "snapshot_hash"}
+    payload["snapshot_hash"] = digest
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        yaml.safe_dump(payload, sort_keys=True, allow_unicode=True, default_flow_style=False),
+        encoding="utf-8",
+    )
+    return digest
+
+
+def read_snapshot(path: str | Path) -> dict[str, Any]:
+    """Parse a snapshot back as plain data.
+
+    Deliberately does **not** reconstruct `CapacityBaselineRecord`: rebuilding a
+    frozen sample outside `seeding.py` is the door failure mode F3 comes through.
+    Rehydration of a run belongs to PSV1-8, and it will come through seeding.
+    """
+    data = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise SnapshotShapeError(f"{path}: a snapshot must be a mapping at the top level")
+    return data

@@ -17,4 +17,12 @@ Simulação multiagente inspirada em *Classroom of the Elite*, com personagens p
 
 Este bootstrap instala as Agent Skills e registra as primeiras decisões arquiteturais. Ainda não escolhe framework, provedor de LLM, banco vetorial ou stack de UI.
 
+O primeiro código do repositório é o subdomínio `Embodiment` do motor, em `src/embodiment/` — amostragem de capacidade física, sem nenhuma chamada de LLM. **Python vale para esse subdomínio e só para ele** ([ADR 0007](docs/adr/0007-python-para-o-subdominio-embodiment.md)); framework de agentes, provedor de LLM, banco vetorial e UI seguem em aberto.
+
+```bash
+uv sync --extra dev                                                   # ou: pip install -e '.[dev]'
+python -m embodiment seed-cohort --world-seed 42 --n 40 --out runs/demo/
+pytest
+```
+
 Veja `CONTEXT.md`, `docs/adr/` e `docs/research/ai-landscape.md`.

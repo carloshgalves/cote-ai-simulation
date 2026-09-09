@@ -1,0 +1,40 @@
+schema_version: 1
+collection: world.rules.conduct
+note: NOTHING HERE IS VERIFIED.
+claims:
+  - id: rule.conduct.point-deductions
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: conduct
+    statement: >
+      Class points are deducted for conduct infractions including lateness,
+      absence, talking in class and phone use. The per-infraction cost is not
+      established; the deduction is not announced as it accrues.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: >
+          The first month's deduction was applied to conduct occurring from the
+          first days of April, so the rule operated from Y1_START. This bounds
+          the rule from above only; its origin is unknown.
+    visibility_default: CONCEALED
+    unknown_by:
+      - actor: group.first-years
+        until: {anchor: Y1_M02}
+        note: Students did not know their conduct was being scored.
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 2, scene: "point system revealed to Class D"}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/1st_Year_Arc"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.conduct.deduction-table]

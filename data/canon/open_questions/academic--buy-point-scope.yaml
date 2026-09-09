@@ -1,0 +1,18 @@
+id: oq.academic.buy-point-scope
+schema_version: 1
+question: Is buying an exam point a general institutional rule or a teacher's discretion?
+why_it_matters: A general rule is an engine mechanic available to every agent. Discretion is a character-specific
+  affordance that must not be generalised.
+priority: blocker
+category: engine-rule
+where_to_look:
+- work: ln.y1.v01
+  locator:
+    chapter: 4
+    scene: corridor negotiation
+  strength: primary
+blocks:
+- rule.academic.buy-exam-point
+status: open
+answer: null
+answered_by: null

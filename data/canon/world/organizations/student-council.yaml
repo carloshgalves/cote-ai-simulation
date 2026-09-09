@@ -1,0 +1,66 @@
+schema_version: 1
+collection: world.organizations.student-council
+note: NOTHING HERE IS VERIFIED.
+claims:
+  - id: entity.org.student-council
+    schema_version: 1
+    claim_kind: ENTITY
+    domain: governance
+    statement: >
+      The student council holds substantial authority over students, presiding
+      over disciplinary matters and, when necessary, calling for expulsion. Its
+      president is treated as the final decision maker in punishments, and
+      faculty defer to the office.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_SEM1}
+        origin: UNKNOWN
+        basis: >
+          Observed exercising authority during the first semester. Origin and
+          exact scope of the authority are not established.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v02
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Student_Council"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.governance.council-authority-scope]
+
+  - id: rule.governance.club-formation
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: governance
+    statement: >
+      First-year students may join a club between the opening period and the
+      last day of April. A club requires a minimum of three members.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: Applied to the first intake's club period in April.
+    visibility_default: PUBLIC
+    known_by:
+      - actor: group.first-years
+        since: {anchor: Y1_START}
+        channel: announcement
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Terminology"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]

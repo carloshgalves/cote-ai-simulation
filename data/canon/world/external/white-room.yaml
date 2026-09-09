@@ -1,0 +1,84 @@
+schema_version: 1
+collection: world.external.white-room
+note: >
+  Pre-school world truth. Demonstrates the core distinction: true long before
+  Y1_START, revealed to the reader much later, known at Y1_START by almost
+  nobody. NOTHING HERE IS VERIFIED.
+claims:
+  - id: world.external.white-room
+    schema_version: 1
+    claim_kind: WORLD_TRUTH
+    domain: external
+    statement: >
+      A facility known as the White Room exists: a talent-development
+      institution founded as a top-secret project under direct government
+      control, headed by Atsuomi Ayanokoji. It was founded roughly twenty years
+      before the first year begins.
+    temporal:
+      effective_from:
+        mode: INTERVAL
+        not_before: {years_before_y1: 20}
+        not_before_support:
+          - work: ln.jp.y1.v00
+            locator: {section: "prologue / founding"}
+            strength: primary
+        holds_by: {anchor: PRE_Y1}
+        origin: STATED
+        basis: >
+          The prequel volume dates the founding to roughly twenty years before
+          enrolment and narrates the founding itself, which is why a lower
+          bound is permitted here. Contrast with rules whose origin is unknown.
+    visibility_default: CONCEALED
+    known_by:
+      - actor: actor.professor-ayanokoji
+        channel: institutional
+      - actor: actor.chairman-sakayanagi
+        channel: institutional
+      - actor: org.government
+        channel: institutional
+    unknown_by:
+      - actor: group.students
+        until: {anchor: Y1_SEM3}
+        note: >
+          With narrow exceptions among students with prior exposure. Those
+          exceptions must be claimed individually, never assumed.
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.jp.y1.v00
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Light_Novel_Volume_0"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.prehistory.white-room-vs-school-founding]
+
+  - id: world.external.white-room-suspension
+    schema_version: 1
+    claim_kind: WORLD_TRUTH
+    domain: external
+    statement: >
+      The White Room was temporarily shut down for about one year, which
+      created the opportunity for one subject to leave.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: PRE_Y1}
+        origin: UNKNOWN
+        basis: The shutdown preceded enrolment; its dating is not established.
+    visibility_default: CONCEALED
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v07
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Terminology"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]

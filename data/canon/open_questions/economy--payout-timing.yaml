@@ -1,0 +1,17 @@
+id: oq.economy.payout-timing
+schema_version: 1
+question: On what day are private points issued, and how are partial months and rounding handled?
+why_it_matters: The monthly allowance is a scheduled engine event; its timing affects every economic decision
+  near a month boundary.
+priority: high
+category: engine-rule
+where_to_look:
+- work: ln.y1.v01
+  locator:
+    chapter: 2
+  strength: primary
+blocks:
+- rule.economy.cp-to-pp-ratio
+status: open
+answer: null
+answered_by: null

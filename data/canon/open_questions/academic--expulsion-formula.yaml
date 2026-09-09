@@ -1,0 +1,23 @@
+id: oq.academic.expulsion-formula
+schema_version: 1
+question: What is the exact expulsion threshold for midterms and finals?
+why_it_matters: The exam engine cannot resolve expulsion deterministically without the formula. A proportion
+  of the class average and a flat pass line are different mechanics.
+priority: blocker
+category: engine-rule
+where_to_look:
+- work: ln.y1.v01
+  locator:
+    chapter: 2
+  strength: primary
+- work: ln.y1.v01
+  locator:
+    chapter: 4
+    scene: midterm results
+  strength: primary
+blocks:
+- rule.academic.exam-expulsion
+- conflict.academic.expulsion-threshold
+status: open
+answer: null
+answered_by: null

@@ -1,0 +1,17 @@
+id: oq.initial-state.mock-exam-status
+schema_version: 1
+question: What is the official status of the surprise mock exam held in the first week?
+why_it_matters: If it is a real assessment instrument rather than practice, it is a hidden evaluation
+  running before students know evaluation exists.
+priority: medium
+category: initial-state
+where_to_look:
+- work: ln.y1.v01
+  locator:
+    chapter: 1
+    scene: surprise mock exam
+  strength: primary
+blocks: []
+status: open
+answer: null
+answered_by: null

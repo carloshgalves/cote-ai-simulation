@@ -1,0 +1,67 @@
+schema_version: 1
+collection: world.school.campus
+note: >
+  Facilities and observability. Surveillance coverage matters for the
+  simulation's observation model, not just as colour. NOTHING HERE IS VERIFIED.
+claims:
+  - id: entity.facility.set
+    schema_version: 1
+    claim_kind: ENTITY
+    domain: facility
+    statement: >
+      Known campus facilities include a school complex with classrooms, a
+      cafeteria, a library, a gymnasium and a student council room; a five-floor
+      shopping complex (Keyaki Mall) containing shops and karaoke rooms; a
+      swimming pool; a park; a boulevard along the seafront; and a convenience
+      store.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: Facilities in use from the first days.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: world.school.surveillance-coverage
+    schema_version: 1
+    claim_kind: WORLD_TRUTH
+    domain: facility
+    statement: >
+      Classrooms, the cafeteria and most public areas are under camera
+      surveillance, and a patrol operates on campus. The swimming pool area and
+      the boulevard are described as not surveilled.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: Cameras present from the first days.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.observability.camera-map]
+    engine:
+      binds_to: observation.surveillance_zones
+    notes_ref: docs/canon/temporal-model.md

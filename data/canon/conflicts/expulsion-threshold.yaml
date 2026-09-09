@@ -1,0 +1,46 @@
+id: conflict.academic.expulsion-threshold
+schema_version: 1
+kind: declared-vs-observed
+question: What score triggers expulsion on a midterm or final exam?
+positions:
+  - label: declared
+    statement: >
+      The threshold is 50% of the average score of the rest of the class in
+      the given subject.
+    discovered_via:
+      - tier: 5
+        ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+        retrieved_at: "2026-09-08"
+  - label: observed
+    statement: >
+      In the first-semester English midterm the pass line is stated as 40, and
+      a student scoring 39 is expelled. A flat line is not obviously the same
+      as a proportion of the class average.
+    claim: rule.academic.exam-expulsion
+    discovered_via:
+      - tier: 5
+        ref: "you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+        retrieved_at: "2026-09-08"
+hypotheses:
+  - kind: misreading
+    note: >
+      Both may be consistent: 40 could be the computed value of the proportion
+      for that class and subject. This is arithmetic we have not done, because
+      we do not have the class's scores.
+    assessment: open
+  - kind: narrower_scope
+    note: The proportion rule may apply only to some exam types.
+    assessment: open
+  - kind: unreliable_declaration
+    note: The 50% figure may be a fan reconstruction.
+    assessment: open
+  - kind: temporal_change
+    note: The formula may differ between the midterm and later exams.
+    assessment: open
+status: open
+resolution: null
+resolved_by: null
+blocks_compilation_of:
+  - rule.academic.exam-expulsion
+modeling_decision: null
+open_questions: [oq.academic.expulsion-formula]

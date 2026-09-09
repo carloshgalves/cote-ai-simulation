@@ -1,0 +1,17 @@
+id: oq.admission.eligibility-wording
+schema_version: 1
+question: What is the exact wording about government evaluation, the accepted list, and the admission
+  that bypassed it?
+why_it_matters: Determines how much of the admission machinery is world truth versus a character's account
+  of it.
+priority: high
+category: prehistory
+where_to_look:
+- work: ln.y1.v07
+  strength: primary
+blocks:
+- rule.admission.government-eligibility
+- world.external.chairman-approved-admission
+status: open
+answer: null
+answered_by: null

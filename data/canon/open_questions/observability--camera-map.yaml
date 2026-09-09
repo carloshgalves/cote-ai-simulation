@@ -1,0 +1,17 @@
+id: oq.observability.camera-map
+schema_version: 1
+question: Which areas are and are not under surveillance?
+why_it_matters: 'Feeds the observation model directly: unsurveilled areas are where private action is
+  causally possible.'
+priority: medium
+category: observability
+where_to_look:
+- work: ln.y1.v01
+  strength: primary
+- work: ln.y1.v02
+  strength: primary
+blocks:
+- world.school.surveillance-coverage
+status: open
+answer: null
+answered_by: null

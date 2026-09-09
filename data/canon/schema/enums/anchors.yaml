@@ -1,0 +1,30 @@
+# Story-time anchors. Japanese academic year: April to March, three semesters.
+# Dates are relative (Y<n>-MM-DD). The works never fix a calendar year;
+# binding to a real year would be inventing canon.
+#
+# SCHOOL_FOUNDING and WHITE_ROOM_FOUNDING may only be used with
+# TimeBound.mode = EXACT, i.e. when the text states it. They are never
+# a default for unknown origin. See docs/canon/temporal-model.md.
+anchors:
+  - id: WHITE_ROOM_FOUNDING
+    scope: prehistory
+  - id: SCHOOL_FOUNDING
+    scope: prehistory
+  - id: ADMISSION_DECISION
+    scope: prehistory
+    note: Placement into A-D decided before the entrance ceremony.
+  - id: PRE_Y1
+    scope: prehistory
+  - id: Y1_START
+    scope: year1
+    approx_date: Y1-04-06
+    note: Opening ceremony / first homeroom. Exact date is an open question.
+  - id: Y1_M01
+    scope: year1
+    approx_date: Y1-04-01
+  - id: Y1_M02
+    scope: year1
+    approx_date: Y1-05-01
+  - id: Y1_END
+    scope: year1
+    approx_date: Y1-03-31

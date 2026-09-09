@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/canon/open_question.schema.json",
+  "title": "OpenQuestion",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "schema_version", "question", "priority", "status"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^oq\\.[a-z0-9.-]+$" },
+    "schema_version": { "type": "integer", "const": 1 },
+    "question": { "type": "string" },
+    "why_it_matters": { "type": "string" },
+    "priority": { "type": "string", "enum": ["blocker", "high", "medium", "low"] },
+    "category": {
+      "type": "string",
+      "enum": ["initial-state", "engine-rule", "hidden-knowledge", "prehistory", "roster", "observability"]
+    },
+    "where_to_look": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/SourceRef" },
+      "description": "Candidate locations for direct light novel reading."
+    },
+    "blocks": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Claims, conflicts or ADRs held up by this question."
+    },
+    "status": { "type": "string", "enum": ["open", "answered", "dropped"] },
+    "answer": { "type": ["string", "null"] },
+    "answered_by": { "type": ["string", "null"] }
+  }
+}

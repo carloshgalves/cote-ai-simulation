@@ -1,0 +1,18 @@
+id: oq.initial-state.dorm-handbook
+schema_version: 1
+question: What are the contents of the dormitory handbook issued on the first day?
+why_it_matters: It is the documented channel by which students legitimately know the residence and outside-contact
+  rules at Y1_START.
+priority: high
+category: initial-state
+where_to_look:
+- work: ln.y1.v01
+  locator:
+    chapter: 1
+    scene: return to the dormitory
+  strength: primary
+blocks:
+- rule.mobility.campus-confinement
+status: open
+answer: null
+answered_by: null

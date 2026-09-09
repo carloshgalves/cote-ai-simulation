@@ -1,0 +1,19 @@
+id: oq.initial-state.day-one-briefing
+schema_version: 1
+question: What exactly does the homeroom teacher tell first-years on day one, and what is in the handout?
+why_it_matters: Defines known_by at Y1_START for every student agent. Everything the students do NOT hear
+  that day is hidden information by construction.
+priority: blocker
+category: initial-state
+where_to_look:
+- work: ln.y1.v01
+  locator:
+    chapter: 1
+    scene: first homeroom
+  strength: primary
+blocks:
+- rule.economy.initial-deposit
+- y1.initial.class-points-equal-start
+status: open
+answer: null
+answered_by: null

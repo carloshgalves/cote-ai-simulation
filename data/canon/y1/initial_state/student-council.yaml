@@ -1,0 +1,37 @@
+schema_version: 1
+collection: y1.initial_state.student-council
+note: NOTHING HERE IS VERIFIED.
+claims:
+  - id: y1.initial.student-council-composition
+    schema_version: 1
+    claim_kind: ENTITY
+    domain: governance
+    statement: >
+      At Y1_START the student council is led by a third-year president, with a
+      second-year vice-president, a further second-year member and a secretary.
+      Named individuals are recorded as actor stubs only; character dossiers
+      are out of scope at this stage.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: Composition observed early in the first semester.
+      effective_to:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_SEM2}
+        origin: UNKNOWN
+        basis: A transition ceremony changes the council later in the year.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v02
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Student_Council"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]

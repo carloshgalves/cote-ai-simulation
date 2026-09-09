@@ -1,0 +1,19 @@
+id: oq.admission.placement-basis
+schema_version: 1
+question: What exactly does the text assert about how admission assessment maps to class placement?
+why_it_matters: Bounds CANON_ADMISSION_FACTS. Everything beyond what the text asserts is SIMULATION_ADMISSION_MODEL
+  and must be labelled as reconstruction.
+priority: blocker
+category: hidden-knowledge
+where_to_look:
+- work: ln.y1.v01
+  locator:
+    chapter: 2
+  strength: primary
+- work: ln.y1.v07
+  strength: primary
+blocks:
+- rule.admission.merit-placement
+status: open
+answer: null
+answered_by: null

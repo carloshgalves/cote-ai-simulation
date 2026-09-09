@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/canon/evidence.schema.json",
+  "title": "CanonEvidence",
+  "description": "RAG unit. Our paraphrase of a canon passage, never the protected text itself.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "schema_version", "text", "story_time", "provenance"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^ev\\.[a-z0-9.-]+$" },
+    "schema_version": { "type": "integer", "const": 1 },
+    "text": { "type": "string", "description": "Paraphrase written by us. No verbatim source text." },
+    "story_time": { "$ref": "common.schema.json#/$defs/TimeBound" },
+    "actors": { "type": "array", "items": { "type": "string" } },
+    "situation_tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Situation classes for retrieval, e.g. negotiation, deception, exam-strategy."
+    },
+    "supports_claims": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/ClaimId" } },
+    "divergence_sensitive": { "type": "boolean", "default": true },
+    "provenance": { "$ref": "common.schema.json#/$defs/Provenance" }
+  }
+}

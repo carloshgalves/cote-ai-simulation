@@ -1,0 +1,18 @@
+id: oq.admission.dimension-semantics
+schema_version: 1
+question: What do the five assessed dimensions mean, on what scale are they graded, and when are they
+  updated?
+why_it_matters: Needed before any allocation reconstruction can be calibrated. Without it a model would
+  be inventing both the inputs and the function.
+priority: high
+category: hidden-knowledge
+where_to_look:
+- work: para.school-database
+  locator:
+    section: stat cards
+  strength: primary
+blocks:
+- rule.admission.assessed-dimensions
+status: open
+answer: null
+answered_by: null

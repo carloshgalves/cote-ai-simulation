@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/canon/entity.schema.json",
+  "title": "CanonEntity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "schema_version", "entity_type", "name", "provenance"],
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/ClaimId" },
+    "schema_version": { "type": "integer", "const": 1 },
+    "entity_type": {
+      "type": "string",
+      "enum": ["school", "class", "facility", "dormitory", "organization", "role", "person", "external-org"]
+    },
+    "name": { "type": "string" },
+    "name_ja": { "type": "string" },
+    "aliases": { "type": "array", "items": { "type": "string" } },
+    "part_of": { "type": "string" },
+    "attributes": {
+      "type": "array",
+      "description": "Each attribute is a temporally scoped, independently sourced claim.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "value", "temporal", "provenance"],
+        "properties": {
+          "key": { "type": "string" },
+          "value": {},
+          "unit": { "type": "string" },
+          "temporal": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["effective_from"],
+            "properties": {
+              "effective_from": { "$ref": "common.schema.json#/$defs/TimeBound" },
+              "effective_to": { "anyOf": [{ "$ref": "common.schema.json#/$defs/TimeBound" }, { "type": "null" }] }
+            }
+          },
+          "visibility_default": { "$ref": "common.schema.json#/$defs/Visibility" },
+          "provenance": { "$ref": "common.schema.json#/$defs/Provenance" }
+        }
+      }
+    },
+    "provenance": { "$ref": "common.schema.json#/$defs/Provenance" },
+    "notes_ref": { "type": "string" }
+  }
+}

@@ -1,0 +1,75 @@
+schema_version: 1
+collection: world.rules.mobility
+note: NOTHING HERE IS VERIFIED.
+claims:
+  - id: rule.mobility.campus-confinement
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: mobility
+    statement: >
+      All students must live in on-campus housing and may not leave the campus
+      except on specified occasions. Contact with outsiders, including family
+      and guardians, is forbidden.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: >
+          Students were already resident and out of outside contact from day
+          one, so the rule held by Y1_START. Origin not established.
+    visibility_default: PUBLIC
+    known_by:
+      - actor: group.first-years
+        since: {anchor: Y1_START}
+        channel: documented
+        note: Dormitory handbook issued on the first day.
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v03
+          locator: {section: "school rules restated"}
+          strength: primary
+        - work: ln.y1.v01
+          locator: {chapter: 1, scene: "dormitory handbook"}
+          strength: corroborating
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.initial-state.dorm-handbook]
+
+  - id: rule.mobility.student-cannot-leave-school
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: mobility
+    statement: >
+      A student cannot be removed from the school by an outside party; they
+      leave only by their own wish or by expulsion.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_SEM3}
+        origin: UNKNOWN
+        basis: >
+          Asserted by the chairman late in the first year. No observation places
+          it earlier, though nothing suggests it changed.
+    visibility_default: RESTRICTED
+    known_by:
+      - actor: actor.chairman-sakayanagi
+        channel: institutional
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v07
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Chairman_Sakayanagi"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]

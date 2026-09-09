@@ -1,0 +1,142 @@
+schema_version: 1
+collection: world.rules.academic
+note: NOTHING HERE IS VERIFIED. Located via Tier 5; awaits Tier 0-1 reading.
+claims:
+  - id: rule.academic.exam-expulsion
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: academic
+    statement: >
+      A student who fails to reach the required score on a midterm or final
+      exam is expelled. The exact threshold is disputed: one reading gives
+      50% of the rest of the class's average per subject; an observed case
+      shows a flat pass line. See conflict.academic.expulsion-threshold.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_M02}
+        origin: UNKNOWN
+        basis: >
+          Applied to the first-semester midterms. Whether the rule predates the
+          school year is not established by anything observed.
+    visibility_default: CONCEALED
+    known_by:
+      - actor: group.faculty
+        channel: institutional
+      - actor: group.first-years
+        since: {anchor: Y1_M02}
+        channel: announcement
+    unknown_by:
+      - actor: group.first-years
+        until: {anchor: Y1_M02}
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 2, scene: "mock exam results / expulsion warning"}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      conflicts: [conflict.academic.expulsion-threshold]
+      open_questions: [oq.academic.expulsion-formula]
+
+  - id: rule.academic.class-a-guarantee
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: academic
+    statement: >
+      Only students graduating from Class A receive the school's university and
+      employment recommendation.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_M02}
+        origin: UNKNOWN
+        basis: >
+          Stated to first-years in the second month. No observation constrains
+          when the policy began; do not assume school founding.
+    visibility_default: CONCEALED
+    unknown_by:
+      - actor: group.first-years
+        until: {anchor: Y1_M02}
+        note: >
+          Incoming students believe the advertised 100% placement rate applies
+          to everyone. See belief.students.placement-guarantee-universal.
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 2}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: rule.academic.buy-exam-point
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: academic
+    statement: >
+      A single point can be added to an exam score in exchange for private
+      points; one observed transaction cost 100,000 private points. Whether
+      this is a general institutional rule or teacher discretion is not settled.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_M02}
+        origin: UNKNOWN
+        basis: Observed once, after the first midterms.
+    visibility_default: CONCEALED
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 4, scene: "negotiation in the corridor after results"}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.academic.buy-point-scope]
+
+  - id: rule.academic.protection-point
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: academic
+    statement: >
+      A protection point grants the right to override an expulsion. Protection
+      points cannot be transferred between students.
+    temporal:
+      effective_from:
+        mode: UNKNOWN
+        basis: >
+          Located in a late first-year volume, where it appears as an exam
+          reward. Whether the underlying rule existed earlier and was merely
+          unrevealed, or was introduced at that point, is exactly the question
+          this model refuses to guess. Not part of the Y1_START snapshot.
+    visibility_default: CONCEALED
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v10
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Terminology"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.academic.protection-point-origin]

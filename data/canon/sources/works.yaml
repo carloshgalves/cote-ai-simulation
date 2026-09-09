@@ -1,0 +1,113 @@
+# Source registry.
+#
+# TIER FOLLOWS AUTHORSHIP AND FORM, NEVER DISTRIBUTION CHANNEL.
+# Volume 0 was distributed as a BD/DVD bonus but is light novel prose by the
+# original author, so it sits at the same tier as every other volume of the
+# same edition. Character stat cards printed inside a volume are paratext and
+# sit in the complementary tier. See docs/canon/source-tiers.md.
+schema_version: 1
+works:
+  # ---- Tier 0/1: light novel prose, Kinugasa Shougo -------------------------
+  - id: ln.jp.y1.v00
+    title: "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e — Volume 0"
+    medium: light-novel
+    form: ln-prose
+    tier: 0
+    author: Kinugasa Shougo
+    language: ja
+    distribution_note: "Bonus with BD/DVD Season 2 Volume 1. Does not affect tier."
+    story_span: "~20 years before Y1_START; White Room founding"
+    held_locally: false
+  - id: ln.jp.y1.v01
+    title: "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e — Volume 1"
+    medium: light-novel
+    form: ln-prose
+    tier: 0
+    author: Kinugasa Shougo
+    language: ja
+    story_span: "Y1_START through first-semester midterms"
+    held_locally: false
+  - id: ln.y1.v01
+    title: "Classroom of the Elite — Volume 1"
+    medium: light-novel
+    form: ln-prose
+    tier: 1
+    author: Kinugasa Shougo
+    edition: seven-seas-en
+    language: en
+    story_span: "Y1_START through first-semester midterms"
+    held_locally: false
+  - id: ln.y1.v02
+    title: "Classroom of the Elite — Volume 2"
+    medium: light-novel
+    form: ln-prose
+    tier: 1
+    edition: seven-seas-en
+    language: en
+    story_span: "Assault incident"
+    held_locally: false
+  - id: ln.y1.v03
+    title: "Classroom of the Elite — Volume 3"
+    medium: light-novel
+    form: ln-prose
+    tier: 1
+    edition: seven-seas-en
+    language: en
+    story_span: "Deserted island special test"
+    held_locally: false
+  - id: ln.y1.v07
+    title: "Classroom of the Elite — Volume 7"
+    medium: light-novel
+    form: ln-prose
+    tier: 1
+    edition: seven-seas-en
+    language: en
+    story_span: "Search for X; school admission process revealed"
+    held_locally: false
+  - id: ln.y1.v10
+    title: "Classroom of the Elite — Volume 10"
+    medium: light-novel
+    form: ln-prose
+    tier: 1
+    edition: seven-seas-en
+    language: en
+    story_span: "The Class Poll; protection points"
+    held_locally: false
+  - id: ln.y1.v11_5
+    title: "Classroom of the Elite — Volume 11.5"
+    medium: light-novel
+    form: ln-prose
+    tier: 1
+    edition: seven-seas-en
+    language: en
+    story_span: "End of first year"
+    held_locally: false
+
+  # ---- Tier 2: official complementary material (paratext) -------------------
+  - id: para.school-database
+    title: "School Database character stat cards"
+    medium: complementary
+    form: paratext
+    tier: 2
+    distribution_note: "Printed inside light novel volumes; paratext, not prose."
+    story_span: "per-volume snapshots of the five assessed dimensions"
+    held_locally: false
+
+  # ---- Tier 4: anime adaptation --------------------------------------------
+  - id: anime.s1
+    title: "Classroom of the Elite — Season 1"
+    medium: anime
+    form: adaptation-anime
+    tier: 4
+    story_span: "Y1 first semester"
+    held_locally: false
+
+  # ---- Tier 5: community, DISCOVERY ONLY -----------------------------------
+  # Listed for traceability of discovered_via. Never valid in `supports`.
+  - id: community.you-zitsu-wiki
+    title: "You-Zitsu Wiki (Fandom)"
+    medium: complementary
+    form: official-other
+    tier: 5
+    distribution_note: "Community-maintained. Discovery and locator hints only."
+    held_locally: false

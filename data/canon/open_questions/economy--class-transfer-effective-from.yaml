@@ -1,0 +1,17 @@
+id: oq.economy.class-transfer-effective-from
+schema_version: 1
+question: Was the 20,000,000 point class transfer available at Y1_START, or introduced later?
+why_it_matters: Direct test of the source_time versus effective_from distinction. If it existed from the
+  start it belongs to the initial world state even though nobody used it.
+priority: high
+category: engine-rule
+where_to_look:
+- work: ln.y1.v03
+  locator:
+    section: class transfer
+  strength: primary
+blocks:
+- rule.economy.class-transfer-price
+status: open
+answer: null
+answered_by: null

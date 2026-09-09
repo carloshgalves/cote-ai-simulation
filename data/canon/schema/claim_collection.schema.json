@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/canon/claim_collection.schema.json",
+  "title": "ClaimCollection",
+  "description": "File-level container. One YAML file holds a topical group of claims.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "claims"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "collection": { "type": "string" },
+    "note": { "type": "string" },
+    "claims": { "type": "array", "items": { "$ref": "claim.schema.json" } }
+  }
+}

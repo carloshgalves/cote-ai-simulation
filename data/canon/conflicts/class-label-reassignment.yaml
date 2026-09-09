@@ -1,0 +1,62 @@
+id: conflict.governance.class-label-reassignment
+schema_version: 1
+kind: declared-vs-observed
+question: >
+  Are the A-D class labels reassigned dynamically according to class point
+  standing, or are they stable identities fixed at admission?
+positions:
+  - label: declared
+    statement: >
+      The labels are provisional: the class holding the highest class point
+      total is named Class A, with B, C and D following in descending order.
+    discovered_via:
+      - tier: 5
+        ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+        retrieved_at: "2026-09-08"
+        note: >
+          The wiki attributes this to a first-year volume and to an anime
+          episode. The wording has not been checked against the text, and the
+          anime citation carries no weight as support.
+  - label: observed
+    statement: >
+      Through the first year no relabelling occurs. Class D remains Class D at
+      87 points while Class C holds roughly 492, and the same cohort carries
+      its original letter into the following year.
+    claim: y1.initial.class-labels
+    discovered_via:
+      - tier: 5
+        ref: "you-zitsu.fandom.com/wiki/Class_1-D_(1st_Year)/Progression"
+        retrieved_at: "2026-09-08"
+hypotheses:
+  - kind: narrower_scope
+    note: >
+      Relabelling may apply only at a year boundary, or only on graduation,
+      rather than continuously.
+    assessment: open
+  - kind: unreliable_declaration
+    note: >
+      The rule as phrased may be a wiki compression of an in-universe
+      explanation about mobility between classes, not about renaming.
+    assessment: open
+  - kind: misreading
+    note: >
+      "You can rise to Class A by accumulating points" may describe student
+      movement between classes rather than relabelling of class units.
+    assessment: open
+  - kind: exception
+    note: The observed span may fall under an exception not yet identified.
+    assessment: open
+  - kind: temporal_change
+    note: The rule may have changed within the observed period.
+    assessment: open
+status: open
+resolution: null
+resolved_by: null
+blocks_compilation_of:
+  - y1.initial.class-labels
+modeling_decision: >
+  Model class identity and class ranking as two separate things: a stable
+  class_id, and a rank derived from class points. This holds under any
+  resolution of the conflict and is therefore safe to adopt now. It is a
+  modeling choice, not a resolution: the conflict stays open.
+open_questions: [oq.governance.class-label-reassignment]

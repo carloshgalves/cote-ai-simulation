@@ -1,0 +1,34 @@
+schema_version: 1
+collection: world.school.dormitories
+note: NOTHING HERE IS VERIFIED.
+claims:
+  - id: entity.facility.dormitories
+    schema_version: 1
+    claim_kind: ENTITY
+    domain: facility
+    statement: >
+      Student housing consists of four 15-storey buildings of at least 140
+      rooms each. Lower floors house male students and upper floors female
+      students. Rooms are minimal, roughly eight tatami mats. Access uses a
+      passcode with duplicate cards, and rooms have an internal telephone line.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: Occupied from the first day.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 1}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.initial-state.dorm-handbook]

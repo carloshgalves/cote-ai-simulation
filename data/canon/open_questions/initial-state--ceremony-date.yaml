@@ -1,0 +1,16 @@
+id: oq.initial-state.ceremony-date
+schema_version: 1
+question: What is the exact date of the opening ceremony and the first homeroom?
+why_it_matters: Anchors Y1_START on the relative calendar and fixes the offset of every dated event.
+priority: medium
+category: initial-state
+where_to_look:
+- work: ln.y1.v01
+  locator:
+    chapter: 1
+  strength: primary
+blocks:
+- world.calendar.academic-year
+status: open
+answer: null
+answered_by: null

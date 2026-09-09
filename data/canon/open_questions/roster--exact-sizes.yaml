@@ -1,0 +1,18 @@
+id: oq.roster.exact-sizes
+schema_version: 1
+question: What are the exact class sizes and rosters for the four first-year classes at Y1_START?
+why_it_matters: Exam mechanics with pairs, groups and per-head scoring need exact counts. 'About 40' does
+  not resolve.
+priority: high
+category: roster
+where_to_look:
+- work: ln.y1.v01
+  strength: primary
+- work: para.school-database
+  strength: primary
+blocks:
+- entity.org.anhs.year-class-structure
+- conflict.roster.class-size
+status: open
+answer: null
+answered_by: null

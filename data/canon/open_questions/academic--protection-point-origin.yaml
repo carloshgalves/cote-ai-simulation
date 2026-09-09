@@ -1,0 +1,16 @@
+id: oq.academic.protection-point-origin
+schema_version: 1
+question: Did the protection point rule exist at Y1_START and go unrevealed, or was it introduced when
+  first awarded?
+why_it_matters: 'The cleanest instance of the guiding question: did it become true then, or was it merely
+  revealed then?'
+priority: high
+category: engine-rule
+where_to_look:
+- work: ln.y1.v10
+  strength: primary
+blocks:
+- rule.academic.protection-point
+status: open
+answer: null
+answered_by: null

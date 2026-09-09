@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/canon/source.schema.json",
+  "title": "SourceRegistry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "works"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "works": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "medium", "form", "tier", "title"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "medium": { "type": "string", "enum": ["light-novel", "manga", "anime", "complementary"] },
+          "form": {
+            "type": "string",
+            "enum": ["ln-prose", "paratext", "adaptation-manga", "adaptation-anime", "official-other"],
+            "description": "Tier follows authorship and form, never distribution channel."
+          },
+          "tier": { "type": "integer", "minimum": 0, "maximum": 6 },
+          "author": { "type": "string" },
+          "edition": { "type": "string" },
+          "language": { "type": "string" },
+          "distribution_note": { "type": "string", "description": "Informational only. Does not affect tier." },
+          "story_span": { "type": "string" },
+          "held_locally": { "type": "boolean", "default": false }
+        }
+      }
+    }
+  }
+}

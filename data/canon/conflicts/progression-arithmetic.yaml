@@ -1,0 +1,35 @@
+id: conflict.economy.progression-arithmetic
+schema_version: 1
+kind: third-party-arithmetic
+question: >
+  Are the community class point progression tables internally consistent, and
+  is the 1000 opening balance stated in the text or reconstructed?
+positions:
+  - label: table-as-published
+    statement: >
+      Community tables give an opening balance of 1000 for all four classes and
+      track month-by-month changes.
+    discovered_via:
+      - tier: 5
+        ref: "you-zitsu.fandom.com/wiki/Class_1-D_(1st_Year)/Progression"
+        retrieved_at: "2026-09-08"
+  - label: internal-inconsistency
+    statement: >
+      The tables are headed "Private Points" while listing class points, and
+      Class C appears as 490 after the first month yet 492 after a stated +2,
+      which does not reconcile without further information.
+    discovered_via:
+      - tier: 5
+        ref: "you-zitsu.fandom.com/wiki/Class_1-C_(1st_Year)/Progression"
+        retrieved_at: "2026-09-08"
+hypotheses:
+  - kind: unreliable_observation
+    note: Transcription errors in a community-maintained table.
+    assessment: supported
+status: open
+resolution: null
+resolved_by: null
+blocks_compilation_of:
+  - y1.initial.class-points-equal-start
+modeling_decision: null
+open_questions: [oq.initial-state.starting-class-points]

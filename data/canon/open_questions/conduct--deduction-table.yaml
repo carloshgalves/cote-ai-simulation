@@ -1,0 +1,19 @@
+id: oq.conduct.deduction-table
+schema_version: 1
+question: Is there a per-infraction cost for lateness, absence, talking and phone use, or only an aggregate
+  monthly judgement?
+why_it_matters: Determines whether conduct is a deterministic accumulator in the engine or an opaque monthly
+  evaluation. The two produce very different agent incentives.
+priority: blocker
+category: engine-rule
+where_to_look:
+- work: ln.y1.v01
+  locator:
+    chapter: 2
+    scene: point system revealed
+  strength: primary
+blocks:
+- rule.conduct.point-deductions
+status: open
+answer: null
+answered_by: null

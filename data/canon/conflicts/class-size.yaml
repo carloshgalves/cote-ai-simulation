@@ -1,0 +1,31 @@
+id: conflict.roster.class-size
+schema_version: 1
+kind: cross-tier
+question: How many students are in each first-year class?
+positions:
+  - label: light-novel
+    statement: Approximately 40 per class, evenly distributed.
+    claim: entity.org.anhs.year-class-structure
+    discovered_via:
+      - tier: 5
+        ref: "you-zitsu.fandom.com/wiki/Class_1-D_(1st_Year)"
+        retrieved_at: "2026-09-08"
+  - label: anime
+    statement: 25 students are shown and seated in Class D.
+    discovered_via:
+      - tier: 4
+        ref: "anime.s1"
+        retrieved_at: "2026-09-08"
+hypotheses:
+  - kind: unreliable_declaration
+    note: Adaptation reduced the cast for production reasons.
+    assessment: supported
+status: open
+resolution: >
+  Provisional under the cross-tier rule: the light novel figure prevails and
+  the anime figure is retained as continuity anime. Left open because "about
+  40" is not a roster and the exam engine needs exact counts.
+resolved_by: null
+blocks_compilation_of: []
+modeling_decision: null
+open_questions: [oq.roster.exact-sizes]

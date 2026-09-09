@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/canon/common.schema.json",
+  "title": "Common canon definitions",
+  "$defs": {
+    "ClaimId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9-]+)+$",
+      "description": "Stable namespaced id, e.g. rule.economy.monthly-allowance"
+    },
+    "Anchor": {
+      "type": "string",
+      "enum": [
+        "WHITE_ROOM_FOUNDING", "SCHOOL_FOUNDING", "ADMISSION_DECISION", "PRE_Y1",
+        "Y1_START", "Y1_M01", "Y1_M02", "Y1_M03", "Y1_M04", "Y1_M05", "Y1_M06",
+        "Y1_M07", "Y1_M08", "Y1_M09", "Y1_M10", "Y1_M11", "Y1_M12",
+        "Y1_SEM1", "Y1_SEM2", "Y1_SEM3", "Y1_END",
+        "Y2_START", "Y2_END", "Y3_START", "Y3_END"
+      ]
+    },
+    "TimePoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "anchor": { "$ref": "#/$defs/Anchor" },
+        "date": {
+          "type": "string",
+          "pattern": "^Y[123]-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$",
+          "description": "Relative story date. The works never fix a calendar year."
+        },
+        "years_before_y1": { "type": "number", "minimum": 0 },
+        "note": { "type": "string" }
+      }
+    },
+    "TimeBound": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["EXACT", "HOLDS_BY", "INTERVAL", "UNKNOWN"],
+          "description": "EXACT: the text states when it was instituted. HOLDS_BY: proven to hold at/before a point, origin unknown. INTERVAL: both bounds textually supported. UNKNOWN: not even an upper bound."
+        },
+        "exact": { "$ref": "#/$defs/TimePoint" },
+        "holds_by": {
+          "$ref": "#/$defs/TimePoint",
+          "description": "Proven to already hold at this point. Says NOTHING about origin."
+        },
+        "not_before": {
+          "$ref": "#/$defs/TimePoint",
+          "description": "Lower bound. Only permitted with not_before_support."
+        },
+        "not_before_support": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/SourceRef" },
+          "description": "Textual support for the lower bound. Inventing a lower bound is forbidden."
+        },
+        "origin": {
+          "type": "string",
+          "enum": ["STATED", "UNKNOWN"],
+          "description": "UNKNOWN is a first-class value. Never fill origin with a convenient anchor."
+        },
+        "basis": {
+          "type": "string",
+          "description": "Why this bound and not another. Required whenever mode != EXACT."
+        }
+      },
+      "dependentRequired": {
+        "not_before": ["not_before_support"]
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "mode": { "const": "EXACT" } }, "required": ["mode"] },
+          "then": { "required": ["exact"] }
+        },
+        {
+          "if": { "properties": { "mode": { "const": "HOLDS_BY" } }, "required": ["mode"] },
+          "then": {
+            "required": ["holds_by", "origin", "basis"],
+            "properties": { "origin": { "const": "UNKNOWN" } }
+          }
+        },
+        {
+          "if": { "properties": { "mode": { "const": "INTERVAL" } }, "required": ["mode"] },
+          "then": { "required": ["holds_by", "not_before", "not_before_support", "basis"] }
+        },
+        {
+          "if": { "properties": { "mode": { "const": "UNKNOWN" } }, "required": ["mode"] },
+          "then": { "required": ["basis"] }
+        }
+      ]
+    },
+    "SourceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["work", "strength"],
+      "properties": {
+        "work": { "type": "string", "description": "FK to sources/works.yaml" },
+        "locator": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "part": { "type": "string" },
+            "chapter": { "type": ["integer", "string"] },
+            "section": { "type": "string" },
+            "scene": { "type": "string" },
+            "page": { "type": ["integer", "string"] }
+          }
+        },
+        "edition": { "type": "string" },
+        "quote_policy": { "type": "string", "enum": ["paraphrase-only", "short-quote"], "default": "paraphrase-only" },
+        "strength": { "type": "string", "enum": ["primary", "corroborating"] }
+      }
+    },
+    "DiscoveryRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tier", "ref"],
+      "properties": {
+        "tier": { "type": "integer", "minimum": 0, "maximum": 6 },
+        "ref": { "type": "string" },
+        "retrieved_at": { "type": "string", "format": "date" },
+        "note": { "type": "string" }
+      }
+    },
+    "Provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["epistemic_status", "continuity"],
+      "properties": {
+        "epistemic_status": {
+          "type": "string",
+          "enum": ["VERIFIED", "INFERRED", "INTERPRETATION", "UNVERIFIED"]
+        },
+        "supports": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/SourceRef" },
+          "description": "What SUSTAINS the claim. Tier 0-3 only. Tier 4-6 never appear here."
+        },
+        "discovered_via": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/DiscoveryRef" },
+          "description": "How we LOCATED the claim. Never migrates into supports."
+        },
+        "verified_by": { "type": ["string", "null"] },
+        "verified_at": { "type": ["string", "null"], "format": "date" },
+        "continuity": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "enum": ["ln", "manga", "anime"] }
+        },
+        "conflicts": { "type": "array", "items": { "type": "string" } },
+        "open_questions": { "type": "array", "items": { "type": "string" } }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "epistemic_status": { "const": "VERIFIED" } },
+            "required": ["epistemic_status"]
+          },
+          "then": {
+            "required": ["supports", "verified_by", "verified_at"],
+            "properties": {
+              "verified_by": { "type": "string" },
+              "verified_at": { "type": "string" },
+              "supports": { "minItems": 1 }
+            }
+          }
+        }
+      ]
+    },
+    "Derivation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "from"],
+      "properties": {
+        "method": { "type": "string", "enum": ["arithmetic", "logical", "corroboration"] },
+        "from": { "type": "array", "items": { "$ref": "#/$defs/ClaimId" } },
+        "computation": { "type": "string" },
+        "recomputed_by": { "type": ["string", "null"] }
+      }
+    },
+    "KnowledgeGrant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor"],
+      "properties": {
+        "actor": { "type": "string", "description": "actor id or group id, e.g. group.faculty" },
+        "since": { "$ref": "#/$defs/TimePoint" },
+        "until": { "$ref": "#/$defs/TimePoint" },
+        "channel": {
+          "type": "string",
+          "enum": ["institutional", "announcement", "lived-experience", "observation", "hearsay", "inference", "briefing", "documented"]
+        },
+        "via_event": { "$ref": "#/$defs/ClaimId" },
+        "note": { "type": "string" }
+      }
+    },
+    "Visibility": {
+      "type": "string",
+      "enum": ["PUBLIC", "RESTRICTED", "PRIVATE", "CONCEALED"]
+    }
+  }
+}

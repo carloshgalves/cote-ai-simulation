@@ -1,0 +1,18 @@
+id: oq.economy.transfer-rules
+schema_version: 1
+question: What are the exact limits on private point transfers, and how are fraud and threat defined and
+  punished?
+why_it_matters: Point trading is the main non-exam economic mechanic. Without the boundary between legitimate
+  contract and coercion, the validator cannot reject invalid actions.
+priority: high
+category: engine-rule
+where_to_look:
+- work: ln.y1.v02
+  locator:
+    section: point transfer rules
+  strength: primary
+blocks:
+- rule.economy.pp-transfer-between-students
+status: open
+answer: null
+answered_by: null

@@ -1,0 +1,13 @@
+id: oq.terminology.s-system
+schema_version: 1
+question: Does the term 'S-System' or 'S-Point' appear in the light novel, or is it adaptation-only naming?
+why_it_matters: Domain vocabulary should not be built on a term the primary source may never use.
+priority: low
+category: engine-rule
+where_to_look:
+- work: ln.y1.v01
+  strength: primary
+blocks: []
+status: open
+answer: null
+answered_by: null

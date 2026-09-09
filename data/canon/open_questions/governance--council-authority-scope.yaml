@@ -1,0 +1,15 @@
+id: oq.governance.council-authority-scope
+schema_version: 1
+question: What is the student council's actual authority at Y1_START, and what are its limits?
+why_it_matters: The council can affect expulsion and disputes. Its powers must be engine rules, not narrative
+  discretion.
+priority: medium
+category: engine-rule
+where_to_look:
+- work: ln.y1.v02
+  strength: primary
+blocks:
+- entity.org.student-council
+status: open
+answer: null
+answered_by: null

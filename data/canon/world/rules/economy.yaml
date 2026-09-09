@@ -1,0 +1,194 @@
+schema_version: 1
+collection: world.rules.economy
+note: >
+  Class points and private points. NOTHING HERE IS VERIFIED. Every claim was
+  located through Tier 5 pointers and awaits direct reading of Tier 0-1 text.
+claims:
+  - id: rule.economy.cp-to-pp-ratio
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: economy
+    statement: >
+      Each student receives monthly private points equal to 100 times their
+      class's current class points. One private point is worth one yen.
+    subject: [org.anhs, sys.class-points, sys.private-points]
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: >
+          The first-month allowance was already computed under this rule, so it
+          held at or before Y1_START. Nothing observed constrains the origin;
+          the school may have instituted it at founding or at any point before.
+      effective_to: null
+    visibility_default: CONCEALED
+    known_by:
+      - actor: group.faculty
+        channel: institutional
+      - actor: group.upperclassmen
+        channel: lived-experience
+        note: Inferred from upperclassmen taking free meals at month end.
+      - actor: group.first-years
+        since: {anchor: Y1_M02, date: "Y1-05-01"}
+        channel: announcement
+        via_event: evt.y1.m02.point-system-revealed
+    unknown_by:
+      - actor: group.first-years
+        until: {anchor: Y1_M02}
+        note: >
+          First-years believe the initial deposit is an unconditional allowance.
+          See belief.students.allowance-unconditional.
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 1, scene: "homeroom, ID card distribution"}
+          edition: seven-seas-en
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.economy.payout-timing]
+    engine:
+      binds_to: economy.monthly_allowance
+      params: {ratio_cp_to_pp: 100, pp_to_yen: 1}
+    notes_ref: docs/canon/hidden-information.md
+
+  - id: rule.economy.initial-deposit
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: economy
+    statement: >
+      On the first day, 100,000 private points are already deposited on each
+      student's ID card, which serves as campus currency.
+    subject: [sys.private-points, item.student-id-card]
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START, date: "Y1-04-06"}
+        origin: UNKNOWN
+        basis: Observed on day one; origin of the practice not stated.
+      effective_to: null
+    visibility_default: PUBLIC
+    known_by:
+      - actor: group.first-years
+        since: {anchor: Y1_START}
+        channel: announcement
+        note: Stated by the homeroom teacher on day one.
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 1, scene: "homeroom, ID card distribution"}
+          edition: seven-seas-en
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: rule.economy.points-not-restored
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: economy
+    statement: >
+      Class points lost through conduct are not restored by subsequent good
+      behaviour; the class must earn points back by other means.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_M02}
+        origin: UNKNOWN
+        basis: Stated when the first deduction took effect; origin unknown.
+    visibility_default: CONCEALED
+    unknown_by:
+      - actor: group.first-years
+        until: {anchor: Y1_M02}
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 2, scene: "point system revealed to Class D"}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: rule.economy.pp-transfer-between-students
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: economy
+    statement: >
+      Students may exchange private points among themselves. Acquiring another
+      student's points through fraud or threat is severely punished; trades
+      under an arrangement deemed legitimate are left to personal discretion.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_SEM1}
+        origin: UNKNOWN
+        basis: >
+          Located in a volume covering the first semester. Whether it was in
+          force at Y1_START is not established. See oq.economy.transfer-rules.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v02
+          locator: {section: "point transfer rules"}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.economy.transfer-rules]
+
+  - id: rule.economy.class-transfer-price
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: mobility
+    statement: >
+      A student may buy the right to transfer into a class of their choosing
+      for 20,000,000 private points.
+    temporal:
+      effective_from:
+        mode: UNKNOWN
+        basis: >
+          Located in a later volume. Neither an upper nor a lower bound on when
+          this rule came into force has been established, so it must not be
+          assumed part of the Y1_START world state.
+    visibility_default: CONCEALED
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v03
+          locator: {section: "class transfer"}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Terminology"
+          retrieved_at: "2026-09-08"
+        - tier: 4
+          ref: "anime.s1 episode 8"
+          retrieved_at: "2026-09-08"
+          note: Wiki cites the anime episode for this figure; adaptation is not support.
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.economy.class-transfer-effective-from]

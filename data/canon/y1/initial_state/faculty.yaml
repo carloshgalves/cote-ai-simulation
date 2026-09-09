@@ -1,0 +1,30 @@
+schema_version: 1
+collection: y1.initial_state.faculty
+note: NOTHING HERE IS VERIFIED.
+claims:
+  - id: y1.initial.homeroom-assignments
+    schema_version: 1
+    claim_kind: ENTITY
+    domain: governance
+    statement: >
+      First-year homeroom assignments at Y1_START: Tomonari Mashima to Class A,
+      Chie Hoshinomiya to Class B, Kazuma Sakagami to Class C, Sae Chabashira
+      to Class D.
+    temporal:
+      effective_from:
+        mode: EXACT
+        exact: {anchor: Y1_START}
+        basis: Assignments in force from the first homeroom.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]

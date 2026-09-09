@@ -1,0 +1,75 @@
+schema_version: 1
+collection: y1.initial_state.beliefs
+note: >
+  What first-year students actually believe at Y1_START. These, not the hidden
+  world truths, seed the initial belief state of student agents.
+  NOTHING HERE IS VERIFIED.
+claims:
+  - id: belief.students.allowance-unconditional
+    schema_version: 1
+    claim_kind: BELIEF
+    holder: group.first-years
+    truth_value: false
+    derivation_kind: assumption
+    domain: economy
+    statement: >
+      First-year students believe the points deposited on their ID card are an
+      unconditional monthly allowance that will be replenished regardless of
+      their conduct or results.
+    temporal:
+      effective_from:
+        mode: EXACT
+        exact: {anchor: Y1_START}
+        basis: Held from the first day.
+      effective_to:
+        mode: EXACT
+        exact: {anchor: Y1_M02, date: "Y1-05-01"}
+        basis: Corrected when the second month's deposit fails to arrive.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 1, section: "spending through the first month"}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: belief.students.placement-guarantee-universal
+    schema_version: 1
+    claim_kind: BELIEF
+    holder: group.first-years
+    truth_value: false
+    derivation_kind: inference
+    domain: academic
+    statement: >
+      First-year students believe the school's advertised 100% employment and
+      university placement rate applies to all graduates, not only to Class A.
+    temporal:
+      effective_from:
+        mode: EXACT
+        exact: {anchor: Y1_START}
+        basis: Inferred by students from the school's public advertising.
+      effective_to:
+        mode: EXACT
+        exact: {anchor: Y1_M02}
+        basis: Corrected in the second month.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 2}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]

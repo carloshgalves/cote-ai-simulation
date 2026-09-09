@@ -1,0 +1,67 @@
+schema_version: 1
+collection: world.calendar
+note: NOTHING HERE IS VERIFIED.
+claims:
+  - id: world.calendar.academic-year
+    schema_version: 1
+    claim_kind: WORLD_TRUTH
+    domain: governance
+    statement: >
+      The academic year runs April to March across three semesters, following
+      the ordinary Japanese school calendar. Class points are announced at the
+      end of each month and the corresponding private points are issued at the
+      start of the following month.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: The first year opens in April and the first payout cycle follows it.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Terminology"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.economy.payout-timing, oq.initial-state.ceremony-date]
+
+  - id: world.calendar.special-exams
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: exam
+    statement: >
+      Beyond ordinary midterms and finals, the school runs special exams that
+      determine class points and are the main route by which a lower class can
+      climb. Their number, schedule and form are not fixed by any stated rule
+      we have located.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_SEM1}
+        origin: UNKNOWN
+        basis: First special exam observed in the first semester.
+    visibility_default: CONCEALED
+    unknown_by:
+      - actor: group.first-years
+        until: {anchor: Y1_SEM1}
+        note: Each exam's rules are disclosed only at announcement.
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v03
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Special_Exam"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.exam.disclosure-model]

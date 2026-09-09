@@ -1,0 +1,61 @@
+schema_version: 1
+collection: world.organizations.faculty
+note: NOTHING HERE IS VERIFIED.
+claims:
+  - id: entity.role.homeroom-teacher
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: governance
+    statement: >
+      Each class has a homeroom teacher who is not replaced before graduation.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: Homeroom teachers assigned from day one.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Terminology"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: entity.actor.chairman-sakayanagi
+    schema_version: 1
+    claim_kind: ENTITY
+    domain: governance
+    statement: >
+      The school's chairman is Narimori Sakayanagi, who took the position from
+      his father some seven to eight years before the first year begins.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: PRE_Y1}
+        origin: UNKNOWN
+        basis: >
+          In office before Y1_START. The "seven to eight years" figure comes
+          from a late volume and needs direct reading before being treated as
+          an interval bound.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v07
+          strength: primary
+        - work: ln.jp.y1.v00
+          strength: corroborating
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Chairman_Sakayanagi"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]

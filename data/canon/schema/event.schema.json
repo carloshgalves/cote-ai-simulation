@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/canon/event.schema.json",
+  "title": "CanonEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "schema_version", "title", "story_time", "provenance"],
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/ClaimId" },
+    "schema_version": { "type": "integer", "const": 1 },
+    "title": { "type": "string" },
+    "summary": { "type": "string", "description": "Our own paraphrase." },
+    "story_time": { "$ref": "common.schema.json#/$defs/TimeBound" },
+    "participants": { "type": "array", "items": { "type": "string" } },
+    "observers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Who could perceive it. Drives knowledge propagation, not participation."
+    },
+    "location": { "type": "string" },
+    "effects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "target": { "type": "string" },
+          "change": { "type": "string" },
+          "value": {}
+        }
+      }
+    },
+    "establishes": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/ClaimId" },
+      "description": "Claims whose known_by this event grants."
+    },
+    "divergence_sensitive": {
+      "type": "boolean",
+      "default": true,
+      "description": "If true, this event must not be injected as factual memory once the simulation has diverged."
+    },
+    "provenance": { "$ref": "common.schema.json#/$defs/Provenance" }
+  }
+}

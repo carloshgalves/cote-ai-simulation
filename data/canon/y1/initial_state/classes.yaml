@@ -1,0 +1,83 @@
+schema_version: 1
+collection: y1.initial_state.classes
+note: >
+  The Y1_START world state for the four first-year classes. This is the file
+  the engine snapshot is built from once verification lands.
+  NOTHING HERE IS VERIFIED.
+claims:
+  - id: y1.initial.class-points-equal-start
+    schema_version: 1
+    claim_kind: WORLD_TRUTH
+    domain: economy
+    statement: >
+      All four first-year classes begin the year with the same class point
+      total, given as 1000 each. Class D reaches zero after the first month's
+      conduct deduction; the other three retain differing remainders.
+    subject: [entity.class.y1-a, entity.class.y1-b, entity.class.y1-c, entity.class.y1-d]
+    temporal:
+      effective_from:
+        mode: EXACT
+        exact: {anchor: Y1_START}
+        basis: An opening balance is by definition set at the start of the year.
+    visibility_default: CONCEALED
+    known_by:
+      - actor: group.faculty
+        channel: institutional
+    unknown_by:
+      - actor: group.first-years
+        until: {anchor: Y1_M02}
+        note: >
+          Students do not know class points exist, let alone that all classes
+          started equal. This is the single most load-bearing hidden fact for
+          Class D's early reasoning.
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Class_1-D_(1st_Year)/Progression"
+          retrieved_at: "2026-09-08"
+          note: >
+            Community progression tables list an "Initial Class Points" row of
+            1000 for all four classes. Whether the figure is stated in the text
+            or reconstructed by fans is unknown.
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      conflicts: [conflict.economy.progression-arithmetic]
+      open_questions: [oq.initial-state.starting-class-points]
+    engine:
+      binds_to: economy.initial_class_points
+      params: {y1_a: 1000, y1_b: 1000, y1_c: 1000, y1_d: 1000}
+    tags: [hidden-at-y1-start]
+
+  - id: y1.initial.class-labels
+    schema_version: 1
+    claim_kind: ENTITY
+    domain: governance
+    statement: >
+      The four first-year classes carry the labels A, B, C and D from the start
+      of the year, assigned by the admission-time merit placement rather than
+      by class point standing, which is equal at Y1_START.
+    temporal:
+      effective_from:
+        mode: EXACT
+        exact: {anchor: Y1_START}
+        basis: Labels in use from the opening ceremony.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      conflicts: [conflict.governance.class-label-reassignment]
+      open_questions: [oq.governance.class-label-reassignment]

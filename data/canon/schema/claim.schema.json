@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/canon/claim.schema.json",
+  "title": "CanonClaim",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "schema_version", "claim_kind", "statement", "temporal", "visibility_default", "provenance"],
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/ClaimId" },
+    "schema_version": { "type": "integer", "const": 1 },
+    "revision": { "type": "integer", "minimum": 1, "default": 1 },
+    "claim_kind": {
+      "type": "string",
+      "enum": ["WORLD_TRUTH", "INSTITUTIONAL_RULE", "EVENT", "ENTITY", "BELIEF"]
+    },
+    "statement": { "type": "string", "minLength": 1 },
+    "subject": { "type": "array", "items": { "type": "string" } },
+    "domain": {
+      "type": "string",
+      "enum": ["economy", "academic", "conduct", "exam", "mobility", "admission", "governance", "facility", "external"]
+    },
+
+    "holder": {
+      "type": "string",
+      "description": "BELIEF only: the actor holding the belief."
+    },
+    "truth_value": {
+      "type": ["boolean", "null"],
+      "description": "BELIEF only: whether the belief is actually true in world truth."
+    },
+    "derivation_kind": {
+      "type": "string",
+      "enum": ["stated", "inference", "assumption"],
+      "description": "BELIEF only: how the holder arrived at it. In-universe inference lives here, not in epistemic_status."
+    },
+
+    "temporal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["effective_from"],
+      "properties": {
+        "effective_from": { "$ref": "common.schema.json#/$defs/TimeBound" },
+        "effective_to": {
+          "anyOf": [{ "$ref": "common.schema.json#/$defs/TimeBound" }, { "type": "null" }]
+        },
+        "supersedes": { "anyOf": [{ "$ref": "common.schema.json#/$defs/ClaimId" }, { "type": "null" }] },
+        "superseded_by": { "anyOf": [{ "$ref": "common.schema.json#/$defs/ClaimId" }, { "type": "null" }] }
+      }
+    },
+
+    "visibility_default": { "$ref": "common.schema.json#/$defs/Visibility" },
+    "known_by": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/KnowledgeGrant" } },
+    "unknown_by": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/KnowledgeGrant" },
+      "description": "Explicit negative knowledge assertions. Same weight as known_by; this is what makes leakage auditable."
+    },
+
+    "provenance": { "$ref": "common.schema.json#/$defs/Provenance" },
+    "derivation": { "$ref": "common.schema.json#/$defs/Derivation" },
+
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["binds_to"],
+      "properties": {
+        "binds_to": { "type": "string", "description": "Engine rule slot this claim compiles into." },
+        "params": { "type": "object", "additionalProperties": true }
+      },
+      "description": "Present only when the claim is meant to become deterministic engine behavior. Compiling requires VERIFIED + no open conflict."
+    },
+
+    "evidence_refs": { "type": "array", "items": { "type": "string" } },
+    "notes_ref": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "claim_kind": { "const": "BELIEF" } }, "required": ["claim_kind"] },
+      "then": { "required": ["holder", "derivation_kind"] }
+    },
+    {
+      "if": { "properties": { "epistemic_status": { "const": "INFERRED" } } },
+      "then": { "required": ["derivation"] }
+    }
+  ]
+}

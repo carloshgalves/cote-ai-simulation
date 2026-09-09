@@ -1,0 +1,16 @@
+id: oq.exam.disclosure-model
+schema_version: 1
+question: 'How are special exam rules disclosed: what is announced publicly, what is given only to some
+  participants, and when?'
+why_it_matters: The disclosure system is the mechanism that keeps agent knowledge bounded during an exam.
+  It cannot be designed from a summary.
+priority: high
+category: engine-rule
+where_to_look:
+- work: ln.y1.v03
+  strength: primary
+blocks:
+- world.calendar.special-exams
+status: open
+answer: null
+answered_by: null

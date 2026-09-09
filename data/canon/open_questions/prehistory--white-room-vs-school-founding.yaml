@@ -1,0 +1,18 @@
+id: oq.prehistory.white-room-vs-school-founding
+schema_version: 1
+question: Are the White Room and the school the same government programme, or distinct projects?
+why_it_matters: If they share an origin, the school's founding inherits a dated lower bound from the prequel
+  volume. If not, it stays unknown.
+priority: medium
+category: prehistory
+where_to_look:
+- work: ln.jp.y1.v00
+  strength: primary
+- work: ln.y1.v07
+  strength: primary
+blocks:
+- world.external.white-room
+- entity.org.anhs
+status: open
+answer: null
+answered_by: null

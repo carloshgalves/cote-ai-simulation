@@ -1,0 +1,20 @@
+id: oq.governance.class-label-reassignment
+schema_version: 1
+question: Does the school reassign the A-D labels according to class point standing?
+why_it_matters: Decides whether class label is a stable identity or a projection of rank. Affects every
+  reference to a class in the engine, in prompts and in memory.
+priority: blocker
+category: engine-rule
+where_to_look:
+- work: ln.y1.v01
+  locator:
+    chapter: 2
+  strength: primary
+- work: ln.y1.v02
+  strength: primary
+blocks:
+- y1.initial.class-labels
+- conflict.governance.class-label-reassignment
+status: open
+answer: null
+answered_by: null

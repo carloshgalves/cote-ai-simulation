@@ -1,0 +1,17 @@
+id: oq.prehistory.school-founding
+schema_version: 1
+question: When was the school founded, and does any text state it?
+why_it_matters: Currently unknown, and deliberately not assumed. Several rules would gain a lower bound
+  if this were established.
+priority: medium
+category: prehistory
+where_to_look:
+- work: ln.jp.y1.v00
+  strength: primary
+- work: ln.y1.v07
+  strength: primary
+blocks:
+- entity.org.anhs
+status: open
+answer: null
+answered_by: null

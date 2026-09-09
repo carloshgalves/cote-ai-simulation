@@ -1,0 +1,69 @@
+schema_version: 1
+collection: world.school.identity
+note: NOTHING HERE IS VERIFIED.
+claims:
+  - id: entity.org.anhs
+    schema_version: 1
+    claim_kind: ENTITY
+    domain: governance
+    statement: >
+      Advanced Nurturing High School, also rendered Tokyo Metropolitan Advanced
+      Nurturing High School, is an institution established by the national
+      government to develop graduates who will support the country. It
+      advertises a 100% employment and university placement rate. Campus area
+      is given as roughly 600,000 square metres.
+    subject: [org.anhs]
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: >
+          The school is operating at Y1_START. Its founding date is not
+          established anywhere we have located, and is not assumed.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 1}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.prehistory.school-founding]
+
+  - id: entity.org.anhs.year-class-structure
+    schema_version: 1
+    claim_kind: ENTITY
+    domain: governance
+    statement: >
+      Each year level is divided into four classes, labelled A through D. Class
+      size for the first year is given in the light novel as approximately 40,
+      described as evenly distributed across the four classes.
+    subject: [org.anhs, entity.class.y1-a, entity.class.y1-b, entity.class.y1-c, entity.class.y1-d]
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: Structure observed in place at Y1_START.
+    visibility_default: PUBLIC
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Class_1-D_(1st_Year)"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      conflicts: [conflict.roster.class-size]
+      open_questions: [oq.roster.exact-sizes]

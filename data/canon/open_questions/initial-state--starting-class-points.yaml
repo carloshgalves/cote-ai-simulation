@@ -1,0 +1,19 @@
+id: oq.initial-state.starting-class-points
+schema_version: 1
+question: Is the 1000 opening class point balance stated in the text, or reconstructed by the community?
+why_it_matters: It is the single most load-bearing number in the Y1_START snapshot. If it is a fan reconstruction,
+  the initial world state has no verified opening balance at all.
+priority: blocker
+category: initial-state
+where_to_look:
+- work: ln.y1.v01
+  locator:
+    chapter: 2
+    scene: point system revealed
+  strength: primary
+blocks:
+- y1.initial.class-points-equal-start
+- conflict.economy.progression-arithmetic
+status: open
+answer: null
+answered_by: null

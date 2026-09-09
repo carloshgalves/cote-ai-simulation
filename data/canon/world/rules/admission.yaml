@@ -1,0 +1,165 @@
+schema_version: 1
+collection: CANON_ADMISSION_FACTS
+note: >
+  CANON_ADMISSION_FACTS — only what the work asserts about admission and class
+  placement. The work does NOT state an allocation formula, and none is
+  recorded here. Any reconstruction of how the five dimensions map to a class
+  is a SIMULATION_ADMISSION_MODEL and lives in data/models/admission/, marked
+  not_canon, calibrated against the canonical placements recorded here.
+  Dependency is one-way: canon -> models. Nothing under data/models/ may ever
+  appear in a provenance.supports of a canon claim.
+  NOTHING HERE IS VERIFIED.
+claims:
+  - id: rule.admission.merit-placement
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: admission
+    statement: >
+      Students are placed into classes A through D by an assessment of merit
+      made at admission, with the strongest placed in Class A and the weakest
+      in Class D. The work states that placement reflects merit; it does not
+      state how the assessment is computed.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: ADMISSION_DECISION}
+        origin: UNKNOWN
+        basis: >
+          Placement existed before the opening ceremony, so the rule held by
+          the admission decision. Its origin is unknown.
+    visibility_default: CONCEALED
+    known_by:
+      - actor: group.faculty
+        channel: institutional
+      - actor: group.first-years
+        since: {anchor: Y1_M02}
+        channel: announcement
+    unknown_by:
+      - actor: group.first-years
+        until: {anchor: Y1_M02}
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 2}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.admission.placement-basis]
+    tags: [CANON_ADMISSION_FACTS]
+
+  - id: rule.admission.assessed-dimensions
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: admission
+    statement: >
+      Students carry graded assessments across five dimensions: academic
+      ability, intellect, judgment ability, physical ability and
+      cooperativeness. The existence of these dimensions and their per-student
+      grades is asserted; no weighting, aggregation or cutoff is asserted.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: Y1_START}
+        origin: UNKNOWN
+        basis: Grades exist for first-years from the start of the year.
+    visibility_default: RESTRICTED
+    known_by:
+      - actor: group.faculty
+        channel: institutional
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: para.school-database
+          locator: {section: "per-student stat cards"}
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Terminology"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.admission.dimension-semantics]
+    tags: [CANON_ADMISSION_FACTS]
+    notes_ref: docs/canon/methodology.md
+
+  - id: rule.admission.government-eligibility
+    schema_version: 1
+    claim_kind: INSTITUTIONAL_RULE
+    domain: admission
+    statement: >
+      Every middle school student in the country is evaluated by the government
+      for eligibility to enrol. Only students on the accepted list who then
+      apply of their own accord may enrol. The qualities sought are stated not
+      to be overall capability, and are not otherwise specified.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: PRE_Y1}
+        origin: UNKNOWN
+        basis: >
+          The process necessarily preceded the current intake. How long the
+          practice has existed is not established.
+    visibility_default: CONCEALED
+    known_by:
+      - actor: group.faculty
+        channel: institutional
+      - actor: org.government
+        channel: institutional
+    unknown_by:
+      - actor: group.students
+        until: {anchor: Y1_SEM3}
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v07
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+      open_questions: [oq.admission.eligibility-wording]
+    tags: [CANON_ADMISSION_FACTS]
+
+  - id: world.external.chairman-approved-admission
+    schema_version: 1
+    claim_kind: WORLD_TRUTH
+    domain: admission
+    statement: >
+      At least one student was admitted without going through the government
+      evaluation, under the chairman's personal approval.
+    temporal:
+      effective_from:
+        mode: HOLDS_BY
+        holds_by: {anchor: ADMISSION_DECISION}
+        origin: UNKNOWN
+        basis: The admission decision predates the school year.
+    visibility_default: PRIVATE
+    known_by:
+      - actor: actor.chairman-sakayanagi
+        channel: institutional
+    unknown_by:
+      - actor: group.students
+        until: {anchor: Y1_SEM3}
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v07
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "you-zitsu.fandom.com/wiki/Chairman_Sakayanagi"
+          retrieved_at: "2026-09-08"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+    tags: [CANON_ADMISSION_FACTS]

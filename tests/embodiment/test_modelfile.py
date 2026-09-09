@@ -118,6 +118,18 @@ def test_f3_a_file_that_names_a_character_at_all_is_refused() -> None:
         )
 
 
+def test_f3_a_character_id_used_as_a_mapping_key_is_refused() -> None:
+    with pytest.raises(ModelFileError, match="actor.ayanokouji"):
+        validate_mapping(
+            file_with(
+                overrides={
+                    "source": "[INT] fixture",
+                    "actor.ayanokouji": {"max_strength": 55.0},
+                }
+            )
+        )
+
+
 def test_the_only_admissible_comparison_is_anchored_to_an_event() -> None:
     """Invariant 8: a COMPARATIVE constraint on one observed event, and nothing else."""
     validate_mapping(

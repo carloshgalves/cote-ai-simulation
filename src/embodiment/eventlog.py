@@ -56,7 +56,7 @@ class EventLog:
         self.sim_time = sim_time
         self._sequence = 0
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self._handle = self.path.open("w", encoding="utf-8")
+        self._handle = self.path.open("x", encoding="utf-8")
         self.append(
             EVENT_RUN_STARTED,
             {

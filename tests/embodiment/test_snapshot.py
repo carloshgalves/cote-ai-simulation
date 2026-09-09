@@ -126,6 +126,17 @@ def test_normalisation_flattens_only_the_wall_clock(prior: PopulationPrior, tmp_
         assert record["sim_time"] == "Y1_START"
 
 
+def test_an_existing_event_log_is_never_truncated(prior: PopulationPrior, tmp_path) -> None:
+    _, _, metadata = make_run(prior)
+    path = tmp_path / "events.jsonl"
+    path.write_text("previous audit record\n", encoding="utf-8")
+
+    with pytest.raises(FileExistsError):
+        EventLog(path, metadata=metadata, required_components=("prior",))
+
+    assert path.read_text(encoding="utf-8") == "previous audit record\n"
+
+
 # --------------------------------------------------------------------- snapshot
 
 
@@ -160,6 +171,19 @@ def test_body_state_and_beliefs_are_absent_until_their_tickets(prior: Population
     assert "physical_beliefs" not in snapshot
     for sections in snapshot["characters"].values():
         assert set(sections) == {"capacity_baseline"}
+
+
+def test_snapshot_refuses_a_character_without_its_posterior(prior: PopulationPrior) -> None:
+    store, posteriors, metadata = make_run(prior)
+    posteriors.pop("npc.0001")
+
+    with pytest.raises(SnapshotShapeError, match="npc.0001.*posterior"):
+        build_snapshot(
+            world_seed=WORLD_SEED,
+            store=store,
+            metadata=metadata,
+            posteriors=posteriors,
+        )
 
 
 def test_a_belief_under_characters_is_refused(prior: PopulationPrior, tmp_path) -> None:

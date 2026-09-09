@@ -154,6 +154,14 @@ def seed_cohort_command(
     if count < 1:
         raise ValueError("a cohort needs at least one student: there is nothing to seed otherwise")
     out_dir = Path(out_dir)
+    events_path = out_dir / "events.jsonl"
+    snapshot_path = out_dir / "snapshot.yaml"
+    existing = [path for path in (events_path, snapshot_path) if path.exists()]
+    if existing:
+        names = ", ".join(path.name for path in existing)
+        raise FileExistsError(
+            f"run artifact already exists in {out_dir}: {names}; choose an empty output directory"
+        )
     prior = PopulationPrior.load(prior_path)
     ids = cohort_ids(count, prefix=id_prefix, start=start_index)
 
@@ -178,8 +186,6 @@ def seed_cohort_command(
         required_components=SEEDING_COMPONENTS,
     )
 
-    events_path = out_dir / "events.jsonl"
-    snapshot_path = out_dir / "snapshot.yaml"
     store = CapacityBaselineStore()
     with EventLog(
         events_path, metadata=metadata, required_components=SEEDING_COMPONENTS, sim_time=Y1_START

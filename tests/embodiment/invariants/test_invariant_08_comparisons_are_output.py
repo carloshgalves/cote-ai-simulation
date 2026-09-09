@@ -24,6 +24,16 @@ def test_invariant_08_an_assertion_that_one_exceeds_another_is_refused() -> None
             assert_no_character_ordering({"claim": {key: ["actor.a", "actor.b"]}})
 
 
+@pytest.mark.parametrize("key", ["strength_order", "placement", "ranked_by"])
+def test_invariant_08_semantic_ordering_aliases_are_refused(key: str) -> None:
+    with pytest.raises(ModelFileError, match="orders subjects"):
+        assert_no_character_ordering({"claim": {key: ["actor.a", "actor.b"]}})
+
+
+def test_invariant_08_non_character_placement_is_not_a_capacity_ordering() -> None:
+    assert_no_character_ordering({"school": {"placement": "Class D"}})
+
+
 def test_invariant_08_an_anchored_comparative_is_the_one_admissible_form() -> None:
     assert_no_character_ordering(
         {

@@ -56,7 +56,13 @@ def build_snapshot(
 ) -> dict[str, Any]:
     characters: dict[str, Any] = {}
     for character_id, record in sorted(store.items()):
-        posterior = posteriors.get(character_id)
+        try:
+            posterior = posteriors[character_id]
+        except KeyError:
+            raise SnapshotShapeError(
+                f"characters.{character_id} has a capacity baseline but no posterior; "
+                f"cohort_sex cannot be reconstructed"
+            ) from None
         characters[character_id] = {
             "capacity_baseline": {
                 "schema_version": SCHEMA_VERSION,
@@ -67,7 +73,7 @@ def build_snapshot(
                     # Which marginals the copula used. A cohort covariate, not a
                     # capacity dimension: without it the percentile *view* of
                     # this body cannot be recomputed from the snapshot alone.
-                    "cohort_sex": posterior.sex if posterior else None,
+                    "cohort_sex": posterior.sex,
                     "substream": record.substream,
                 },
                 "evidence_sufficiency": {
@@ -117,10 +123,10 @@ def write_snapshot(path: str | Path, snapshot: Mapping[str, Any]) -> str:
     payload["snapshot_hash"] = digest
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        yaml.safe_dump(payload, sort_keys=True, allow_unicode=True, default_flow_style=False),
-        encoding="utf-8",
-    )
+    with path.open("x", encoding="utf-8") as handle:
+        handle.write(
+            yaml.safe_dump(payload, sort_keys=True, allow_unicode=True, default_flow_style=False)
+        )
     return digest
 
 

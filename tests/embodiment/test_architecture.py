@@ -13,6 +13,8 @@ from __future__ import annotations
 import ast
 from pathlib import Path
 
+import pytest
+
 from embodiment.types import Dimension
 
 #: Import roots that would make this subdomain depend on a language model.
@@ -44,6 +46,52 @@ def imported_roots(tree: ast.Module) -> set[str]:
     return roots
 
 
+def global_rng_violations(path: Path, tree: ast.Module) -> list[str]:
+    """Return uses that can obtain randomness outside the named-stream module."""
+    violations: list[str] = []
+    numpy_aliases: set[str] = set()
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                if alias.name == "numpy":
+                    numpy_aliases.add(alias.asname or "numpy")
+                elif alias.name.startswith("numpy.random"):
+                    violations.append(f"{path.name}:{node.lineno} imports {alias.name} directly")
+                elif alias.name == "random":
+                    violations.append(f"{path.name}:{node.lineno} imports stdlib random")
+        elif isinstance(node, ast.ImportFrom) and node.level == 0:
+            if node.module == "numpy":
+                for alias in node.names:
+                    if alias.name == "random":
+                        violations.append(
+                            f"{path.name}:{node.lineno} imports numpy.random directly"
+                        )
+            elif node.module and node.module.startswith("numpy.random"):
+                violations.append(f"{path.name}:{node.lineno} imports from {node.module}")
+            elif node.module == "random":
+                violations.append(f"{path.name}:{node.lineno} imports from stdlib random")
+
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call) or not isinstance(node.func, ast.Attribute):
+            continue
+        owner = node.func.value
+        if not (
+            isinstance(owner, ast.Attribute)
+            and owner.attr == "random"
+            and isinstance(owner.value, ast.Name)
+            and owner.value.id in numpy_aliases
+        ):
+            continue
+        if path.name != "rng.py" or node.func.attr not in ALLOWED_NUMPY_RANDOM:
+            violations.append(
+                f"{path.name}:{node.lineno} calls numpy.random.{node.func.attr} outside "
+                f"the named-stream implementation"
+            )
+
+    return violations
+
+
 def test_the_package_imports_no_llm_client(package_sources) -> None:
     for path, tree in package_sources:
         offending = imported_roots(tree) & LLM_CLIENT_ROOTS
@@ -57,21 +105,21 @@ def test_the_package_never_uses_a_global_rng(package_sources) -> None:
     which is exactly the class of bug a test has to catch instead of a reviewer.
     """
     for path, tree in package_sources:
-        assert "random" not in imported_roots(tree), f"{path.name} imports the stdlib `random`"
-        for node in ast.walk(tree):
-            if not isinstance(node, ast.Attribute):
-                continue
-            value = node.value
-            if (
-                isinstance(value, ast.Attribute)
-                and value.attr == "random"
-                and isinstance(value.value, ast.Name)
-                and value.value.id in {"np", "numpy"}
-                and node.attr not in ALLOWED_NUMPY_RANDOM
-            ):
-                raise AssertionError(
-                    f"{path.name}:{node.lineno} calls numpy.random.{node.attr}, which is a global draw"
-                )
+        violations = global_rng_violations(path, tree)
+        assert not violations, "\n".join(violations)
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        "from numpy.random import default_rng\ndefault_rng().normal()\n",
+        "import numpy.random as npr\nnpr.default_rng().normal()\n",
+        "from numpy import random as npr\nnpr.default_rng().normal()\n",
+    ],
+)
+def test_direct_numpy_random_imports_are_rejected(source: str) -> None:
+    violations = global_rng_violations(Path("consumer.py"), ast.parse(source))
+    assert violations
 
 
 def test_f3_only_seeding_writes_a_capacity_baseline(package_sources) -> None:

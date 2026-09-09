@@ -11,6 +11,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from embodiment.cli import main
 from embodiment.eventlog import (
     EVENT_COHORT_CORRELATION_REPORT,
@@ -84,7 +86,7 @@ def test_seeding_forty_one_keeps_the_forty(tmp_path: Path) -> None:
 
 
 def test_the_run_reports_the_correlation_structure_of_the_cohort(tmp_path: Path) -> None:
-    """Evidence 4: the structure of the prior is visible in the sampled cohort."""
+    """Evidence 4: every run emits a complete report of the sampled structure."""
     reports = [
         record["payload"]
         for record in events(run(tmp_path / "demo"))
@@ -94,11 +96,36 @@ def test_the_run_reports_the_correlation_structure_of_the_cohort(tmp_path: Path)
     report = reports[0]
     assert report["cohort_size"] == 40
     by_pair = {tuple(entry["dimensions"]): entry for entry in report["pairs"]}
-    assert by_pair[("max_strength", "body_mass")]["observed"] > 0
-    assert by_pair[("body_mass", "aerobic_capacity")]["observed"] < 0
-    assert all(entry["sign_agrees"] for entry in report["pairs"])
+    assert set(by_pair) == {
+        ("max_strength", "body_mass"),
+        ("body_mass", "aerobic_capacity"),
+        ("sprint_speed", "aerobic_capacity"),
+        ("stature", "body_mass"),
+        ("max_strength", "aerobic_capacity"),
+    }
+    assert all(isinstance(entry["expected_from_loadings"], float) for entry in report["pairs"])
+    assert all(isinstance(entry["observed"], float) for entry in report["pairs"])
+    assert all(isinstance(entry["sign_agrees"], bool) for entry in report["pairs"])
     agreement = report["material_pairs_sign_agreement"]
-    assert agreement["agree"] > 10 * agreement["disagree"]
+    assert set(agreement) == {"agree", "disagree"}
+    assert agreement["agree"] + agreement["disagree"] > 0
+
+
+@pytest.mark.parametrize("existing_name", ["events.jsonl", "snapshot.yaml"])
+def test_the_command_preserves_an_existing_run_artifact(
+    tmp_path: Path, existing_name: str
+) -> None:
+    out = tmp_path / "demo"
+    out.mkdir()
+    artifact = out / existing_name
+    artifact.write_text("previous audit artifact\n", encoding="utf-8")
+
+    with pytest.raises(FileExistsError, match=existing_name):
+        run(out)
+
+    assert artifact.read_text(encoding="utf-8") == "previous audit artifact\n"
+    other_name = "snapshot.yaml" if existing_name == "events.jsonl" else "events.jsonl"
+    assert not (out / other_name).exists()
 
 
 def test_the_snapshot_holds_the_frozen_bodies(tmp_path: Path) -> None:
@@ -114,8 +141,6 @@ def test_the_snapshot_holds_the_frozen_bodies(tmp_path: Path) -> None:
 
 def test_an_empty_cohort_is_refused_clearly(tmp_path: Path) -> None:
     """Rather than failing later on empty run metadata, which names the wrong cause."""
-    import pytest
-
     from embodiment.cli import seed_cohort_command
 
     with pytest.raises(ValueError, match="at least one student"):

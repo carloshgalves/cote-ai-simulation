@@ -77,13 +77,11 @@ _MARKING_RE = re.compile(r"^\[(MEASURED|TRANSCRIBED|EQUATED|DERIVED|INT)\]\s*\S"
 #: and both are refused.
 _CHARACTER_ID_RE = re.compile(r"^(actor|char|npc|student)\.[a-z0-9][a-z0-9._-]*$")
 
-#: Key names that assert an order between subjects rather than describing one.
-_ORDERING_KEYS = frozenset(
+#: Relational key names that assert one subject exceeds another. Other ranking
+#: fields are recognised by their component words so aliases such as
+#: `strength_order` and `ranked_by` cannot bypass the invariant.
+_RELATIONAL_ORDERING_KEYS = frozenset(
     {
-        "ranking",
-        "rank_order",
-        "ordering",
-        "order_of",
         "stronger_than",
         "faster_than",
         "superior_to",
@@ -92,6 +90,7 @@ _ORDERING_KEYS = frozenset(
         "better_than",
     }
 )
+_ORDERING_WORDS = frozenset({"order", "ordering", "rank", "ranked", "ranking", "placement"})
 
 
 class ModelFileError(ValueError):
@@ -210,8 +209,8 @@ def assert_no_character_ordering(data: Mapping[str, Any], *, origin: str = "<map
     for path, node, exempt in _mappings(data):
         if exempt:
             continue
-        for key in node:
-            if key in _ORDERING_KEYS:
+        for key, value in node.items():
+            if _looks_like_ordering_key(key) and len(set(_character_ids_below(value))) >= 2:
                 here = f"{path}.{key}" if path else str(key)
                 raise ModelFileError(
                     f"{origin}: {here} orders subjects. Capacity comparisons are an output of the "
@@ -231,7 +230,7 @@ def assert_no_named_characters(data: Mapping[str, Any], *, origin: str = "<mappi
         if exempt:
             continue
         for key, value in node.items():
-            for offender in _character_ids_in(value):
+            for offender in (*_character_ids_in(key), *_character_ids_in(value)):
                 here = f"{path}.{key}" if path else str(key)
                 raise ModelFileError(
                     f"{origin}: {here} names character {offender!r}. Parameter files describe "
@@ -262,6 +261,32 @@ def _is_anchored_comparative(node: Mapping[str, Any]) -> bool:
             "anchored to one observed event is a ranking (invariant 8)"
         )
     return True
+
+
+def _looks_like_ordering_key(key: Any) -> bool:
+    if not isinstance(key, str):
+        return False
+    normalised = re.sub(r"[^a-z0-9]+", "_", key.lower()).strip("_")
+    words = set(normalised.split("_"))
+    return (
+        normalised in _RELATIONAL_ORDERING_KEYS
+        or normalised.endswith("_than")
+        or bool(words & _ORDERING_WORDS)
+    )
+
+
+def _character_ids_below(value: Any) -> Iterator[str]:
+    """Character ids anywhere below one candidate ordering field."""
+    if isinstance(value, str):
+        if _CHARACTER_ID_RE.match(value):
+            yield value
+    elif isinstance(value, Mapping):
+        for key, child in value.items():
+            yield from _character_ids_below(key)
+            yield from _character_ids_below(child)
+    elif isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
+        for item in value:
+            yield from _character_ids_below(item)
 
 
 def _character_ids_in(value: Any) -> Iterator[str]:

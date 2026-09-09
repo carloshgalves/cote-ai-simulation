@@ -17,7 +17,7 @@
     "subject": { "type": "array", "items": { "type": "string" } },
     "domain": {
       "type": "string",
-      "enum": ["economy", "academic", "conduct", "exam", "mobility", "admission", "governance", "facility", "external"]
+      "enum": ["economy", "academic", "conduct", "exam", "mobility", "admission", "governance", "facility", "external", "physical"]
     },
 
     "holder": {
@@ -80,7 +80,16 @@
       "then": { "required": ["holder", "derivation_kind"] }
     },
     {
-      "if": { "properties": { "epistemic_status": { "const": "INFERRED" } } },
+      "$comment": "epistemic_status lives inside provenance. Without the nested path and the required keys, this conditional fires on every claim and makes derivation mandatory everywhere.",
+      "if": {
+        "required": ["provenance"],
+        "properties": {
+          "provenance": {
+            "required": ["epistemic_status"],
+            "properties": { "epistemic_status": { "const": "INFERRED" } }
+          }
+        }
+      },
       "then": { "required": ["derivation"] }
     }
   ]

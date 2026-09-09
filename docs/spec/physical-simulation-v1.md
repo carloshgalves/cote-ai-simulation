@@ -647,6 +647,8 @@ pode ser avaliado antes delas, e é assim que deve ser.
 
 ## 15. Próximo passo
 
+Fatiada em [`docs/tickets/physical-simulation-v1/`](../tickets/physical-simulation-v1/) — nove tickets, `PSV1-0` a `PSV1-8`, com matriz de cobertura dos critérios de aceitação, dos cenários, das property tests e dos modos de falha.
+
 `/to-tickets` sobre esta spec. Ordem de dependência sugerida: `rng` → `types` → `dynamics` →
 `capability` → `prior` → `estimator` → `seeding` → `effort` → `observation`/`detection` →
 `interoception` → `contest` → `snapshot`. As decisões 13.1 e 13.2 precisam estar fechadas antes dos

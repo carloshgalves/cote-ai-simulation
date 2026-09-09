@@ -164,6 +164,19 @@ def test_a_marginal_in_the_wrong_unit_is_refused(tmp_path) -> None:
         PopulationPrior.load(path)
 
 
+@pytest.mark.parametrize("value", [-0.01, 1.01, float("nan"), float("inf")])
+def test_sex_ratio_male_must_be_a_finite_probability(tmp_path, value: float) -> None:
+    import yaml
+
+    data = yaml.safe_load(POPULATION_PRIOR_PATH.read_text(encoding="utf-8"))
+    data["cohort"]["sex_ratio_male"]["value"] = value
+    path = tmp_path / "bad-sex-ratio.yaml"
+    path.write_text(yaml.safe_dump(data), encoding="utf-8")
+
+    with pytest.raises(ValueError, match=r"sex_ratio_male.*\[0, 1\]"):
+        PopulationPrior.load(path)
+
+
 # --------------------------------------------------------------------------
 # Calibration. Blocked, and saying so.
 # --------------------------------------------------------------------------

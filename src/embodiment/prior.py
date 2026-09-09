@@ -236,6 +236,13 @@ class PopulationPrior(BaseModel):
     def _freeze_model_mappings(cls, value: Mapping[Any, Any]) -> Mapping[Any, Any]:
         return freeze_mapping(value)
 
+    @field_validator("sex_ratio_male", mode="after")
+    @classmethod
+    def _sex_ratio_is_a_probability(cls, value: float) -> float:
+        if not math.isfinite(value) or not 0.0 <= value <= 1.0:
+            raise ValueError("sex_ratio_male must be finite and within [0, 1]")
+        return value
+
     # ------------------------------------------------------------------ loading
 
     @classmethod

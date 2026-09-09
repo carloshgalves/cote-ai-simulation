@@ -19,7 +19,7 @@ from embodiment.eventlog import (
     normalised_bytes,
 )
 from embodiment.prior import PopulationPrior
-from embodiment.seeding import cohort_ids, posterior_for, seed_cohort
+from embodiment.seeding import CapacityBaselineStore, cohort_ids, posterior_for, seed_cohort
 from embodiment.snapshot import (
     BELIEF_SECTIONS,
     SnapshotShapeError,
@@ -192,6 +192,57 @@ def test_snapshot_refuses_a_character_without_its_posterior(prior: PopulationPri
     with pytest.raises(SnapshotShapeError, match="npc.0001.*posterior"):
         build_snapshot(
             world_seed=WORLD_SEED,
+            store=store,
+            metadata=metadata,
+            posteriors=posteriors,
+        )
+
+
+@pytest.mark.parametrize(
+    ("case", "match"),
+    [
+        ("world_seed", "world_seed"),
+        ("metadata_characters", "characters"),
+        ("metadata_hash", "posterior_hash"),
+        ("metadata_prior", "prior_version"),
+        ("posterior_hash", "posterior_hash"),
+        ("posterior_prior", "prior_version"),
+        ("record_hash", "posterior_hash"),
+        ("record_prior", "prior_version"),
+    ],
+)
+def test_snapshot_refuses_contradictory_provenance(
+    prior: PopulationPrior, case: str, match: str
+) -> None:
+    store, posteriors, metadata = make_run(prior)
+    world_seed = WORLD_SEED
+
+    if case == "world_seed":
+        world_seed += 1
+    elif case == "metadata_characters":
+        metadata = metadata.model_copy(update={"posterior_hash_by_character": {"npc.other": "x"}})
+    elif case == "metadata_hash":
+        hashes = dict(metadata.posterior_hash_by_character)
+        hashes["npc.0001"] = "wrong"
+        metadata = metadata.model_copy(update={"posterior_hash_by_character": hashes})
+    elif case == "metadata_prior":
+        metadata = metadata.model_copy(update={"component_versions": {"prior": "wrong"}})
+    elif case in {"posterior_hash", "posterior_prior"}:
+        field = "posterior_hash" if case == "posterior_hash" else "prior_version"
+        posteriors = dict(posteriors)
+        posteriors["npc.0001"] = posteriors["npc.0001"].model_copy(update={field: "wrong"})
+    else:
+        field = "posterior_hash" if case == "record_hash" else "prior_version"
+        changed = CapacityBaselineStore()
+        for character_id, record in store.items():
+            if character_id == "npc.0001":
+                record = record.model_copy(update={field: "wrong"})
+            changed.put(record)
+        store = changed
+
+    with pytest.raises(SnapshotShapeError, match=match):
+        build_snapshot(
+            world_seed=world_seed,
             store=store,
             metadata=metadata,
             posteriors=posteriors,

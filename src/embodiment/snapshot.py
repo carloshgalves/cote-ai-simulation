@@ -54,15 +54,15 @@ def build_snapshot(
     posteriors: Mapping[str, Posterior],
     sim_time: str = Y1_START,
 ) -> dict[str, Any]:
+    _assert_consistent_provenance(
+        world_seed=world_seed,
+        store=store,
+        metadata=metadata,
+        posteriors=posteriors,
+    )
     characters: dict[str, Any] = {}
     for character_id, record in sorted(store.items()):
-        try:
-            posterior = posteriors[character_id]
-        except KeyError:
-            raise SnapshotShapeError(
-                f"characters.{character_id} has a capacity baseline but no posterior; "
-                f"cohort_sex cannot be reconstructed"
-            ) from None
+        posterior = posteriors[character_id]
         characters[character_id] = {
             "capacity_baseline": {
                 "schema_version": SCHEMA_VERSION,
@@ -96,6 +96,58 @@ def build_snapshot(
     }
     _assert_shape(snapshot)
     return snapshot
+
+
+def _assert_consistent_provenance(
+    *,
+    world_seed: int,
+    store: CapacityBaselineStore,
+    metadata: RunMetadata,
+    posteriors: Mapping[str, Posterior],
+) -> None:
+    if metadata.world_seed != world_seed:
+        raise SnapshotShapeError(
+            f"snapshot world_seed {world_seed} disagrees with run_metadata world_seed "
+            f"{metadata.world_seed}"
+        )
+
+    character_ids = set(store.ids())
+    metadata_ids = set(metadata.posterior_hash_by_character)
+    if metadata_ids != character_ids:
+        raise SnapshotShapeError(
+            "run_metadata posterior_hash characters must exactly match snapshot characters: "
+            f"metadata_only={sorted(metadata_ids - character_ids)}, "
+            f"snapshot_only={sorted(character_ids - metadata_ids)}"
+        )
+
+    metadata_prior_version = metadata.component_versions.get("prior")
+    if not metadata_prior_version:
+        raise SnapshotShapeError("run_metadata is missing prior_version")
+
+    for character_id, record in store.items():
+        try:
+            posterior = posteriors[character_id]
+        except KeyError:
+            raise SnapshotShapeError(
+                f"characters.{character_id} has a capacity baseline but no posterior; "
+                f"cohort_sex cannot be reconstructed"
+            ) from None
+        if posterior.character_id != character_id:
+            raise SnapshotShapeError(
+                f"characters.{character_id} points to posterior for {posterior.character_id}"
+            )
+
+        metadata_hash = metadata.posterior_hash_by_character[character_id]
+        if len({record.posterior_hash, posterior.posterior_hash, metadata_hash}) != 1:
+            raise SnapshotShapeError(
+                f"characters.{character_id} posterior_hash disagrees across baseline, "
+                f"posterior and run_metadata"
+            )
+        if len({record.prior_version, posterior.prior_version, metadata_prior_version}) != 1:
+            raise SnapshotShapeError(
+                f"characters.{character_id} prior_version disagrees across baseline, "
+                f"posterior and run_metadata"
+            )
 
 
 def _assert_shape(snapshot: Mapping[str, Any]) -> None:

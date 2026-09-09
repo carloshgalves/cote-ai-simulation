@@ -2,7 +2,7 @@
 
 Espelho humano de `data/canon/open_questions/`. Fonte de verdade são os arquivos YAML; esta tabela é para leitura e priorização.
 
-27 questões abertas. Nenhuma respondida — nada foi conferido em fonte Tier 0–1.
+28 questões abertas. Nenhuma respondida — nada foi conferido em fonte Tier 0–1.
 
 ## Blockers
 
@@ -25,7 +25,7 @@ Travam o vertical slice. Enquanto abertas, o engine não recebe regras econômic
 
 ## Média e baixa
 
-`governance.council-authority-scope` · `observability.camera-map` · `initial-state.ceremony-date` · `initial-state.mock-exam-status` · `prehistory.school-founding` · `prehistory.white-room-vs-school-founding` · `terminology.s-system`
+`governance.council-authority-scope` · `capability.cohort-selectivity` · `observability.camera-map` · `initial-state.ceremony-date` · `initial-state.mock-exam-status` · `prehistory.school-founding` · `prehistory.white-room-vs-school-founding` · `terminology.s-system`
 
 ## Duas questões que testam o modelo temporal
 
@@ -35,13 +35,21 @@ Travam o vertical slice. Enquanto abertas, o engine não recebe regras econômic
 
 A forma mais barata de fechar isto é uma passagem sobre o Volume 1 (capítulos 1–4) com as sete questões blocker abertas ao lado. Sozinho, o Volume 1 fecha ou reduz cinco delas. As de admissão exigem o Volume 7; as de pré-história, o Volume 0.
 
-## As quatro questões de capacidade física
+## As cinco questões de capacidade física
 
 Introduzidas pelo [ADR 0006](../adr/0006-physical-domain-model.md). Enquanto abertas, priors
 populacionais e dinâmica corporal podem ser construídos — calibram contra fisiologia real, não contra
 cânone — mas **nenhum posterior de capacidade por personagem pode ser commitado** e nenhum perfil
 nominal compila para o engine.
 
-`capability.effort-attestation` é a única blocker das quatro, e por um motivo estrutural: ela decide
+`capability.effort-attestation` é a única blocker das cinco, e por um motivo estrutural: ela decide
 se algum feat pode gerar teto de capacidade. Fecha-se junto com a passagem de leitura do Volume 1, já
 que a pergunta é sobre a prosa em torno de cada desempenho, não sobre uma regra da escola.
+
+A quinta, `capability.cohort-selectivity`, veio da pesquisa de
+[`docs/research/physical-domain-v1.md`](../research/physical-domain-v1.md) e opera numa escala
+diferente das outras: ela não move o posterior de um personagem, move o prior de todo mundo. Enquanto
+aberta, o prior usa a coorte nacional sem deslocamento — hipótese nula declarada, não omissão.
+
+O que a leitura precisa extrair por desempenho encontrado, para que uma única passagem feche as
+quatro primeiras em vez de quatro passagens, está no §8.3 daquela pesquisa.

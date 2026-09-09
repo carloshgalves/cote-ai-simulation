@@ -43,6 +43,11 @@ to the engine, while these are open:
 `oq.capability.fitness-test-records` · `oq.capability.club-and-training-background` ·
 `oq.capability.effort-attestation` · `oq.capability.physical-exam-tasks`
 
+**Open but not blocking** — `oq.capability.cohort-selectivity` asks whether the school's intake is
+physically unlike the national cohort the prior is calibrated against. It does not stop the prior
+being built; it fixes what the prior must assume while unanswered, which is the national cohort with
+no shift, declared as such.
+
 ## Forbidden in every case
 
 - A capacity number chosen by hand because we "know" a character is strong.
@@ -51,7 +56,24 @@ to the engine, while these are open:
   `COMPARATIVE` feat anchored to one observed event.
 - Presenting any of these models, in a prompt or an output, as a rule of the school or as canon.
 
-## Empty for now
+## State
 
-Structure and gating are decided; parameter files are not written. Building `POPULATION_PRIORS`
-starts with transcribing cohort norms, which is a sourcing task, not a modelling one.
+Structure and gating are decided. What exists:
+
+- [`fitness-test-score-table.yaml`](fitness-test-score-table.yaml) — `UNIT_ANCHORS`, transcribed from
+  the 新体力テスト 実施要項 item score table for ages 12-19, both sexes, plus the age-specific overall
+  rating bands. Real units on the right cohort, and an official equating between the endurance run
+  and the 20 m shuttle run.
+- [`SOURCING.md`](SOURCING.md) — the four sourcing gaps that still stand between this and a
+  calibrated prior, with the e-Stat table ids and one verified blocker.
+
+Not written: the prior itself, the estimator and the dynamics parameters. Their structure, chosen
+alternatives and parameter sources are settled in
+[`docs/research/physical-domain-v1.md`](../../../docs/research/physical-domain-v1.md); the numbers
+wait on S1 and S2.
+
+One correction from that research lands here rather than in a parameter file: **the acute:chronic
+workload ratio must not be used as an injury-risk factor.** It is mathematically coupled, unstable at
+low chronic load, unsupported as a causal factor, and the figure that popularised it is the subject of
+a formal retraction request. Absolute recent load relative to the body's own available capability,
+plus injury history, replaces it. See the research §7.1.

@@ -1,0 +1,344 @@
+# 新体力テスト — official item score table, ages 12-19. NOT CANON.
+#
+# model_kind: UNIT_ANCHORS
+# This is a real-world measurement instrument transcribed from its publication,
+# not a claim about the work and not a rule of the school. It may never be cited
+# as canon, and no record here may appear in provenance.supports of a claim.
+#
+# Why it is here: it anchors every capacity dimension that the battery covers to
+# a physical unit on the right cohort (Japanese, 12-19, by sex), and — because
+# 持久走 and 20mシャトルラン are scored on the same 1-10 scale — it doubles as an
+# official equating table between two aerobic modalities.
+#
+# CAUTION, read before using the numbers:
+#   1. The item table is age-INVARIANT within 12-19. It is a criterion table, not
+#      a percentile table. It does NOT give cohort mean or SD; those live in the
+#      annual 体力・運動能力調査 and are still untranscribed. See SOURCING.md (S1).
+#   2. The 持久走 distances per sex are NOT stated in the transcribed sheet.
+#      1500 m male / 1000 m female is INFERRED from the times, not verified (S3).
+#   3. Transcribed from a publisher's redistribution of the 平成11年度 (1999)
+#      実施要項, the sheet itself carrying the note 平成11年4月19日訂正. Verify
+#      against the Sports Agency's own 実施要項 before treating as authoritative (S4).
+#
+# Research: docs/research/physical-domain-v1.md §1
+# Decision: docs/adr/0006-physical-domain-model.md
+
+schema_version: 1
+not_canon: true
+model_kind: UNIT_ANCHORS
+model_version: 0.1.0-provisional
+transcribed_at: 2026-09-08
+source:
+  instrument: "新体力テスト (New Physical Fitness Test), 12-19 age band"
+  publisher_of_battery: "文部省 / スポーツ庁 (Japan Sports Agency)"
+  document: "新体力テスト実施要項 — 項目別得点表 および 総合評価基準表 (平成11年度, corrected 1999-04-19)"
+  transcribed_from: "https://www.daiichi-g.co.jp/stest/feature/tokuten/xls/sd-2.xls"
+  landing_page: "https://www.daiichi-g.co.jp/stest/feature/tokuten/index.html"
+  official_landing_page: "https://www.mext.go.jp/sports/b_menu/sports/mcatetop03/list/detail/1408001.htm"
+  verification_status: SECONDARY_REDISTRIBUTION_UNVERIFIED
+
+items:
+  - id: grip_kg
+    item_ja: "握力"
+    unit: "kg"
+    dimension: max_strength
+  - id: situps_reps
+    item_ja: "上体起こし"
+    unit: "reps_30s"
+    dimension: strength_endurance
+  - id: sit_reach_cm
+    item_ja: "長座体前屈"
+    unit: "cm"
+    dimension: flexibility
+  - id: side_step_pts
+    item_ja: "反復横とび"
+    unit: "touches_20s"
+    dimension: agility
+  - id: endurance_run
+    item_ja: "持久走"
+    unit: "s"
+    dimension: aerobic_capacity
+    note: "Alternative to shuttle_laps; the student does one or the other. Distances per sex INFERRED, not verified."
+  - id: shuttle_laps
+    item_ja: "20mシャトルラン"
+    unit: "laps"
+    dimension: aerobic_capacity
+    note: "Alternative to endurance_run. Equal points across the two items is the official equating."
+  - id: dash50_s
+    item_ja: "50m走"
+    unit: "s"
+    dimension: sprint_speed
+  - id: long_jump_cm
+    item_ja: "立ち幅とび"
+    unit: "cm"
+    dimension: anaerobic_power
+  - id: handball_m
+    item_ja: "ハンドボール投げ"
+    unit: "m"
+    dimension: anaerobic_power
+    note: "Shares anaerobic_power with long_jump_cm; upper-body throw vs lower-body jump. Treat as two indicators of one dimension, not two dimensions."
+
+# Bands are inclusive. A bound omitted means open-ended in that direction.
+# For time items (endurance_run, dash50_s) a LOWER value is a BETTER score.
+score_table:
+  male:
+    - points: 10
+      grip_kg: {min: 56}
+      situps_reps: {min: 35}
+      sit_reach_cm: {min: 64}
+      side_step_pts: {min: 63}
+      endurance_run: {max: 299}
+      shuttle_laps: {min: 125}
+      dash50_s: {max: 6.6}
+      long_jump_cm: {min: 265}
+      handball_m: {min: 37}
+    - points: 9
+      grip_kg: {min: 51, max: 55}
+      situps_reps: {min: 33, max: 34}
+      sit_reach_cm: {min: 58, max: 63}
+      side_step_pts: {min: 60, max: 62}
+      endurance_run: {min: 300, max: 316}
+      shuttle_laps: {min: 113, max: 124}
+      dash50_s: {min: 6.7, max: 6.8}
+      long_jump_cm: {min: 254, max: 264}
+      handball_m: {min: 34, max: 36}
+    - points: 8
+      grip_kg: {min: 47, max: 50}
+      situps_reps: {min: 30, max: 32}
+      sit_reach_cm: {min: 53, max: 57}
+      side_step_pts: {min: 56, max: 59}
+      endurance_run: {min: 317, max: 333}
+      shuttle_laps: {min: 102, max: 112}
+      dash50_s: {min: 6.9, max: 7.0}
+      long_jump_cm: {min: 242, max: 253}
+      handball_m: {min: 31, max: 33}
+    - points: 7
+      grip_kg: {min: 43, max: 46}
+      situps_reps: {min: 27, max: 29}
+      sit_reach_cm: {min: 49, max: 52}
+      side_step_pts: {min: 53, max: 55}
+      endurance_run: {min: 334, max: 355}
+      shuttle_laps: {min: 90, max: 101}
+      dash50_s: {min: 7.1, max: 7.2}
+      long_jump_cm: {min: 230, max: 241}
+      handball_m: {min: 28, max: 30}
+    - points: 6
+      grip_kg: {min: 38, max: 42}
+      situps_reps: {min: 25, max: 26}
+      sit_reach_cm: {min: 44, max: 48}
+      side_step_pts: {min: 49, max: 52}
+      endurance_run: {min: 356, max: 382}
+      shuttle_laps: {min: 76, max: 89}
+      dash50_s: {min: 7.3, max: 7.5}
+      long_jump_cm: {min: 218, max: 229}
+      handball_m: {min: 25, max: 27}
+    - points: 5
+      grip_kg: {min: 33, max: 37}
+      situps_reps: {min: 22, max: 24}
+      sit_reach_cm: {min: 39, max: 43}
+      side_step_pts: {min: 45, max: 48}
+      endurance_run: {min: 383, max: 410}
+      shuttle_laps: {min: 63, max: 75}
+      dash50_s: {min: 7.6, max: 7.9}
+      long_jump_cm: {min: 203, max: 217}
+      handball_m: {min: 22, max: 24}
+    - points: 4
+      grip_kg: {min: 28, max: 32}
+      situps_reps: {min: 19, max: 21}
+      sit_reach_cm: {min: 33, max: 38}
+      side_step_pts: {min: 41, max: 44}
+      endurance_run: {min: 411, max: 450}
+      shuttle_laps: {min: 51, max: 62}
+      dash50_s: {min: 8.0, max: 8.4}
+      long_jump_cm: {min: 188, max: 202}
+      handball_m: {min: 19, max: 21}
+    - points: 3
+      grip_kg: {min: 23, max: 27}
+      situps_reps: {min: 16, max: 18}
+      sit_reach_cm: {min: 28, max: 32}
+      side_step_pts: {min: 37, max: 40}
+      endurance_run: {min: 451, max: 499}
+      shuttle_laps: {min: 37, max: 50}
+      dash50_s: {min: 8.5, max: 9.0}
+      long_jump_cm: {min: 170, max: 187}
+      handball_m: {min: 16, max: 18}
+    - points: 2
+      grip_kg: {min: 18, max: 22}
+      situps_reps: {min: 13, max: 15}
+      sit_reach_cm: {min: 21, max: 27}
+      side_step_pts: {min: 30, max: 36}
+      endurance_run: {min: 500, max: 560}
+      shuttle_laps: {min: 26, max: 36}
+      dash50_s: {min: 9.1, max: 9.7}
+      long_jump_cm: {min: 150, max: 169}
+      handball_m: {min: 13, max: 15}
+    - points: 1
+      grip_kg: {max: 17}
+      situps_reps: {max: 12}
+      sit_reach_cm: {max: 20}
+      side_step_pts: {max: 29}
+      endurance_run: {min: 561}
+      shuttle_laps: {max: 25}
+      dash50_s: {min: 9.8}
+      long_jump_cm: {max: 149}
+      handball_m: {max: 12}
+  female:
+    - points: 10
+      grip_kg: {min: 36}
+      situps_reps: {min: 29}
+      sit_reach_cm: {min: 63}
+      side_step_pts: {min: 53}
+      endurance_run: {max: 229}
+      shuttle_laps: {min: 88}
+      dash50_s: {max: 7.7}
+      long_jump_cm: {min: 210}
+      handball_m: {min: 23}
+    - points: 9
+      grip_kg: {min: 33, max: 35}
+      situps_reps: {min: 26, max: 28}
+      sit_reach_cm: {min: 58, max: 62}
+      side_step_pts: {min: 50, max: 52}
+      endurance_run: {min: 230, max: 242}
+      shuttle_laps: {min: 76, max: 87}
+      dash50_s: {min: 7.8, max: 8.0}
+      long_jump_cm: {min: 200, max: 209}
+      handball_m: {min: 20, max: 22}
+    - points: 8
+      grip_kg: {min: 30, max: 32}
+      situps_reps: {min: 23, max: 25}
+      sit_reach_cm: {min: 54, max: 57}
+      side_step_pts: {min: 48, max: 49}
+      endurance_run: {min: 243, max: 259}
+      shuttle_laps: {min: 64, max: 75}
+      dash50_s: {min: 8.1, max: 8.3}
+      long_jump_cm: {min: 190, max: 199}
+      handball_m: {min: 18, max: 19}
+    - points: 7
+      grip_kg: {min: 28, max: 29}
+      situps_reps: {min: 20, max: 22}
+      sit_reach_cm: {min: 50, max: 53}
+      side_step_pts: {min: 45, max: 47}
+      endurance_run: {min: 260, max: 277}
+      shuttle_laps: {min: 54, max: 63}
+      dash50_s: {min: 8.4, max: 8.6}
+      long_jump_cm: {min: 179, max: 189}
+      handball_m: {min: 16, max: 17}
+    - points: 6
+      grip_kg: {min: 25, max: 27}
+      situps_reps: {min: 18, max: 19}
+      sit_reach_cm: {min: 45, max: 49}
+      side_step_pts: {min: 42, max: 44}
+      endurance_run: {min: 278, max: 296}
+      shuttle_laps: {min: 44, max: 53}
+      dash50_s: {min: 8.7, max: 8.9}
+      long_jump_cm: {min: 168, max: 178}
+      handball_m: {min: 14, max: 15}
+    - points: 5
+      grip_kg: {min: 23, max: 24}
+      situps_reps: {min: 15, max: 17}
+      sit_reach_cm: {min: 40, max: 44}
+      side_step_pts: {min: 39, max: 41}
+      endurance_run: {min: 297, max: 318}
+      shuttle_laps: {min: 35, max: 43}
+      dash50_s: {min: 9.0, max: 9.3}
+      long_jump_cm: {min: 157, max: 167}
+      handball_m: {min: 12, max: 13}
+    - points: 4
+      grip_kg: {min: 20, max: 22}
+      situps_reps: {min: 13, max: 14}
+      sit_reach_cm: {min: 35, max: 39}
+      side_step_pts: {min: 36, max: 38}
+      endurance_run: {min: 319, max: 342}
+      shuttle_laps: {min: 27, max: 34}
+      dash50_s: {min: 9.4, max: 9.8}
+      long_jump_cm: {min: 145, max: 156}
+      handball_m: {min: 11, max: 11}
+    - points: 3
+      grip_kg: {min: 17, max: 19}
+      situps_reps: {min: 11, max: 12}
+      sit_reach_cm: {min: 30, max: 34}
+      side_step_pts: {min: 32, max: 35}
+      endurance_run: {min: 343, max: 374}
+      shuttle_laps: {min: 21, max: 26}
+      dash50_s: {min: 9.9, max: 10.3}
+      long_jump_cm: {min: 132, max: 144}
+      handball_m: {min: 10, max: 10}
+    - points: 2
+      grip_kg: {min: 14, max: 16}
+      situps_reps: {min: 8, max: 10}
+      sit_reach_cm: {min: 23, max: 29}
+      side_step_pts: {min: 27, max: 31}
+      endurance_run: {min: 375, max: 417}
+      shuttle_laps: {min: 15, max: 20}
+      dash50_s: {min: 10.4, max: 11.2}
+      long_jump_cm: {min: 118, max: 131}
+      handball_m: {min: 8, max: 9}
+    - points: 1
+      grip_kg: {max: 13}
+      situps_reps: {max: 7}
+      sit_reach_cm: {max: 22}
+      side_step_pts: {max: 26}
+      endurance_run: {min: 418}
+      shuttle_laps: {max: 14}
+      dash50_s: {min: 11.3}
+      long_jump_cm: {max: 117}
+      handball_m: {max: 7}
+
+# Sum of the nine item scores (eight, since the two aerobic items are exclusive)
+# mapped to an overall rating. UNLIKE the item table, this one IS age-specific.
+overall_rating:
+  note: "Total of item points -> band A..E. Bands rise with age, which is the only
+    place in this document where the cohort's age structure is visible."
+  bands:
+    - age: 12
+      A: {min: 51}
+      B: {min: 41, max: 50}
+      C: {min: 32, max: 40}
+      D: {min: 22, max: 31}
+      E: {max: 21}
+    - age: 13
+      A: {min: 57}
+      B: {min: 47, max: 56}
+      C: {min: 37, max: 46}
+      D: {min: 27, max: 36}
+      E: {max: 26}
+    - age: 14
+      A: {min: 60}
+      B: {min: 51, max: 59}
+      C: {min: 41, max: 50}
+      D: {min: 31, max: 40}
+      E: {max: 30}
+    - age: 15
+      A: {min: 61}
+      B: {min: 52, max: 60}
+      C: {min: 41, max: 51}
+      D: {min: 31, max: 40}
+      E: {max: 30}
+    - age: 16
+      A: {min: 63}
+      B: {min: 53, max: 62}
+      C: {min: 42, max: 52}
+      D: {min: 31, max: 41}
+      E: {max: 30}
+    - age: 17
+      A: {min: 65}
+      B: {min: 54, max: 64}
+      C: {min: 43, max: 53}
+      D: {min: 31, max: 42}
+      E: {max: 30}
+    - age: 18
+      A: {min: 65}
+      B: {min: 54, max: 64}
+      C: {min: 43, max: 53}
+      D: {min: 31, max: 42}
+      E: {max: 30}
+    - age: 19
+      A: {min: 65}
+      B: {min: 54, max: 64}
+      C: {min: 43, max: 53}
+      D: {min: 31, max: 42}
+      E: {max: 30}
+
+# The simulation cohort is 15-18. Read the four rows above and note that the A
+# threshold moves 61 -> 63 -> 65 -> 65 across it: the ~15-18 band is where the
+# criterion stops rising, which is one reason it is a defensible single cohort.

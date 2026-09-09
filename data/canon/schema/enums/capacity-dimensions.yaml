@@ -7,83 +7,130 @@
 # percentile is a derived view, never the primary storage: "0-100 arbitrary" is
 # the antipattern this file exists to prevent.
 #
-# A dimension may be percentile-only when no physical unit exists for it; it must
-# then name its reference cohort explicitly.
+# ANCHORING: dimensions covered by the 新体力テスト battery (ages 12-19) are
+# anchored to the REAL item and its REAL unit, per docs/research/physical-domain-v1.md §1.
+# An anchor that does not match the instrument is not an anchor. Item score bands
+# live in data/models/physical/fitness-test-score-table.yaml (NOT canon: it is a
+# real-world measurement instrument, never a rule of the school).
+#
+# Six dimensions have no battery item. They say so, and carry their own anchor
+# and reference cohort instead of borrowing credibility from the battery.
 #
 # Capacity is NOT skill and NOT disposition. Skill (technique, club training,
 # martial background) lives in Canon Knowledge plus in-simulation adaptation;
 # disposition (willingness to fight, to hurt, to endure, to bother at all) lives
 # in Character Core / Agent Cognition. See docs/architecture/physical-model.md §4.
 #
-# Numeric cohort norms live in data/models/physical/ and are NOT canon.
+# Numeric cohort norms (mean, SD, correlations) live in data/models/physical/ and
+# are NOT canon. They are still untranscribed: see that directory's SOURCING.md.
 
 schema_version: 1
 
 dimensions:
   - id: aerobic_capacity
-    unit: "mL.kg-1.min-1"
-    anchor: Endurance run / shuttle run; sustained pace over minutes.
-    note: VO2max proxy. Degraded by substrate depletion and dehydration before any injury.
+    battery_item: "20mシャトルラン | 持久走"
+    unit: "laps | s"
+    anchor: 20 m shuttle run, or the endurance run as its scored alternative.
+    note: >
+      Both items score on the same 1-10 scale, so the score table is an official
+      equating between them: this is how two aerobic feats of different modalities
+      are normalised without inventing a conversion. Prefer the shuttle-run column
+      while the endurance-run distances per sex remain unverified (SOURCING.md S3).
+      Degraded by substrate depletion and dehydration before any injury appears.
 
   - id: anaerobic_power
-    unit: "W.kg-1"
-    anchor: Standing long jump, throw, first strides of a sprint.
+    battery_item: "立ち幅とび + ハンドボール投げ"
+    unit: "cm | m"
+    anchor: Standing long jump and handball throw.
+    note: >
+      Two indicators of one dimension — lower-body jump and upper-body throw —
+      not two dimensions.
 
   - id: sprint_speed
-    unit: "m.s-1"
-    anchor: 50 m dash.
+    battery_item: "50m走"
+    unit: "s"
+    anchor: 50 m dash. Lower is better; convert to m.s-1 for engine use.
 
   - id: max_strength
-    unit: "N"
-    anchor: Grip dynamometer; pushing, lifting, holding a person.
-    note: Also stored as force-to-bodymass ratio. Nearly insensitive to sleep debt.
+    battery_item: "握力"
+    unit: "kg"
+    anchor: Grip dynamometer.
+    note: >
+      Also stored as force-to-bodymass ratio. Least sensitive dimension to sleep
+      deprivation. Grip endurance specifically is decisive in grappling contests.
 
   - id: strength_endurance
-    unit: "reps"
-    anchor: Sit-ups, hanging, repeated pushing.
-    alt_unit: "s at % of max"
+    battery_item: "上体起こし"
+    unit: "reps_30s"
+    anchor: Sit-ups in 30 s.
 
   - id: agility
-    unit: "s"
-    anchor: Standardised change-of-direction course.
-
-  - id: coordination
-    unit: "hit_rate"
-    anchor: Motor precision under time pressure.
-
-  - id: reaction_time
-    unit: "ms"
-    anchor: Response latency to a discrete cue.
+    battery_item: "反復横とび"
+    unit: "touches_20s"
+    anchor: Repeated side-step, counted touches in 20 s.
+    note: >
+      Count, not elapsed time. An earlier draft anchored this to "seconds on a
+      standardised course", which does not exist in the instrument.
 
   - id: flexibility
+    battery_item: "長座体前屈"
     unit: "cm"
-    anchor: Sit-and-reach.
+    anchor: Seated forward bend.
+
+  - id: body_mass
+    battery_item: "体格測定"
+    unit: "kg"
+    anchor: Anthropometry.
+    note: Explicit term in the contest margin; mass confers advantage.
+
+  - id: stature
+    battery_item: "体格測定"
+    unit: "cm"
+    anchor: Anthropometry.
+
+  # --- No battery item. These declare their own anchor and cohort. ---
+
+  - id: reaction_time
+    battery_item: null
+    unit: "ms"
+    anchor: Response latency to a discrete cue.
+    unanchored_note: Not covered by the battery; needs its own reference values.
+
+  - id: coordination
+    battery_item: null
+    unit: "hit_rate"
+    anchor: Motor precision under time pressure.
+    unanchored_note: Not covered by the battery. Most sleep-sensitive dimension.
 
   - id: injury_resilience
+    battery_item: null
     unit: "risk_multiplier"
     dimensionless: true
     anchor: Tissue robustness; divides injury probability.
+    unanchored_note: Not directly measurable; identified through injury history.
 
   - id: recovery_rate
+    battery_item: null
     unit: "h"
     anchor: Time constant of fatigue dissipation and healing progress.
+    unanchored_note: >
+      Adolescents recover faster than adults from high-intensity effort; the
+      strongest evidence is pre-pubertal, so the 15-18 value is interpolation and
+      the prior file must say so.
 
   - id: thermoregulation
+    battery_item: null
     unit: "degC"
-    anchor: Tolerated core/ambient offset before performance decay.
+    anchor: Tolerated WBGT and work:rest ratio before performance decay.
+    unanchored_note: >
+      Indexed to WBGT, not to age. Adolescents are NOT thermoregulatorily inferior
+      when hydrated; no age penalty may be applied. Individual variation lives here.
 
   - id: pain_tolerance
+    battery_item: null
     unit: "percentile"
     reference_cohort: "same-age, same-sex secondary school cohort"
     anchor: No physical unit exists. Percentile-only by exception, cohort declared.
-
-  - id: body_mass
-    unit: "kg"
-    anchor: Anthropometry.
-
-  - id: stature
-    unit: "cm"
-    anchor: Anthropometry.
 
 # Skill axes are a separate namespace. Listed here only so that feats can tag
 # which axis they inform, and so that nobody stores technique as capacity.
@@ -91,6 +138,7 @@ skill_axes:
   - id: skill.grappling
   - id: skill.striking
   - id: skill.pacing
+    note: Choice and execution of an anticipatory pacing template.
   - id: skill.swimming
   - id: skill.ball_sport
   - id: skill.outdoor_survival

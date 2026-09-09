@@ -1,0 +1,24 @@
+id: oq.capability.cohort-selectivity
+schema_version: 1
+question: Does the text establish anything about how the school's intake relates to the general
+  student population in physical terms — selection on athletics, a physical component in admission,
+  or statements that the intake is unusual in body or fitness rather than only in aptitude?
+why_it_matters: 'POPULATION_PRIORS is calibrated against national age-cohort fitness norms. Applying
+  that prior unshifted assumes selection does not correlate with physical capacity. Applying a shift
+  without canon support invents canon at the scale of the whole cohort, which is worse than inventing
+  one character''s number, because it silently moves every draw. Until answered, the prior uses the
+  national cohort with no shift and declares that as the explicit null hypothesis.'
+priority: medium
+category: capability
+where_to_look:
+- work: ln.y1.v01
+  strength: primary
+- work: ln.y1.v07
+  strength: primary
+- work: para.school-database
+  strength: primary
+blocks:
+- data/models/physical/POPULATION_PRIORS
+status: open
+answer: null
+answered_by: null

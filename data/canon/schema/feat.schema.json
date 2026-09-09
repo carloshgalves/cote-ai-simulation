@@ -135,9 +135,10 @@
             "STRAIN_CUES_PRESENT",
             "STRAIN_CUES_ABSENT",
             "STRUCTURAL_INCENTIVE_TO_CONCEAL",
+            "VERIFICATION_BOUT",
             "UNKNOWN"
           ],
-          "description": "How we know the effort level. UNKNOWN is the default and the majority case. Never assume maximal effort from the mere fact that a performance happened."
+          "description": "How we know the effort level. UNKNOWN is the default and the majority case. Never assume maximal effort from the mere fact that a performance happened. STRAIN_CUES_PRESENT is deliberately NOT a maximal attestation: in the real world the equivalent secondary criteria (breathing hard, high heart rate, respiratory exchange ratio) are satisfied at intensities as low as 61% of maximum, and clinical detection of insincere effort by trained professionals with a dynamometer errs 47-69% of the time. Visible strain is the fiction equivalent of a secondary criterion. VERIFICATION_BOUT is the structural exception: a second independent performance under conditions where withholding was not viable, which is the fiction equivalent of the VO2max verification phase."
         },
         "note": { "type": "string" },
         "fraction_bounds": {
@@ -251,8 +252,8 @@
           "effort": {
             "properties": {
               "attestation": {
-                "enum": ["NARRATED_MAXIMAL", "SELF_REPORTED_MAXIMAL"],
-                "$comment": "Hard rule: an upper bound on capacity requires attested maximal effort. Same discipline as not_before requiring not_before_support in ADR 0005."
+                "enum": ["NARRATED_MAXIMAL", "SELF_REPORTED_MAXIMAL", "VERIFICATION_BOUT"],
+                "$comment": "Hard rule: an upper bound on capacity requires attested maximal effort. Same discipline as not_before requiring not_before_support in ADR 0005, and empirically justified: strain cues are satisfied far below maximum, so they never license a ceiling. VERIFICATION_BOUT qualifies because it is structural rather than rhetorical."
               }
             },
             "required": ["attestation"]

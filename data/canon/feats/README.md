@@ -22,9 +22,18 @@ The numeric posterior is a seeding input, never a RAG-retrievable document.
 
 Lower bounds are cheap, upper bounds are expensive. `inference.constraint` says what a record
 authorises, and the schema enforces the asymmetry: `UPPER_BOUND` is rejected unless
-`effort.attestation` is `NARRATED_MAXIMAL` or `SELF_REPORTED_MAXIMAL`. Same discipline as `not_before`
-requiring `not_before_support` in ADR 0005 — the record cannot quietly assume that what someone did
-is the most they could do.
+`effort.attestation` is `NARRATED_MAXIMAL`, `SELF_REPORTED_MAXIMAL` or `VERIFICATION_BOUT`. Same
+discipline as `not_before` requiring `not_before_support` in ADR 0005 — the record cannot quietly
+assume that what someone did is the most they could do.
+
+`STRAIN_CUES_PRESENT` is deliberately *not* one of them. Panting, staggering, visible effort: in the
+real world the equivalent secondary criteria are satisfied at intensities as low as 61% of maximum,
+and trained professionals with a dynamometer misjudge sincerity of effort 47-69% of the time. Visible
+strain is the fiction equivalent of a secondary criterion, and it licenses nothing.
+
+`VERIFICATION_BOUT` is the structural exception: a second independent performance under conditions
+where withholding was not viable — the fiction equivalent of the VO2max verification phase. It is the
+only way to attest maximum without relying on narration or self-report.
 
 Never fill `effort.attestation` with a maximal value for convenience. `UNKNOWN` is the default and
 the majority case.

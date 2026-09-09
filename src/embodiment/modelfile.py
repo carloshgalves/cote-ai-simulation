@@ -210,7 +210,16 @@ def assert_no_character_ordering(data: Mapping[str, Any], *, origin: str = "<map
         if exempt:
             continue
         for key, value in node.items():
-            if _looks_like_ordering_key(key) and len(set(_character_ids_below(value))) >= 2:
+            if not _looks_like_ordering_key(key):
+                continue
+            subject_ids = set(_character_ids_below(value))
+            if _is_relational_ordering_key(key):
+                for sibling_key, sibling_value in node.items():
+                    if sibling_key == key:
+                        continue
+                    subject_ids.update(_character_ids_below(sibling_key))
+                    subject_ids.update(_character_ids_below(sibling_value))
+            if len(subject_ids) >= 2:
                 here = f"{path}.{key}" if path else str(key)
                 raise ModelFileError(
                     f"{origin}: {here} orders subjects. Capacity comparisons are an output of the "
@@ -269,10 +278,16 @@ def _looks_like_ordering_key(key: Any) -> bool:
     normalised = re.sub(r"[^a-z0-9]+", "_", key.lower()).strip("_")
     words = set(normalised.split("_"))
     return (
-        normalised in _RELATIONAL_ORDERING_KEYS
-        or normalised.endswith("_than")
+        _is_relational_ordering_key(key)
         or bool(words & _ORDERING_WORDS)
     )
+
+
+def _is_relational_ordering_key(key: Any) -> bool:
+    if not isinstance(key, str):
+        return False
+    normalised = re.sub(r"[^a-z0-9]+", "_", key.lower()).strip("_")
+    return normalised in _RELATIONAL_ORDERING_KEYS or normalised.endswith("_than")
 
 
 def _character_ids_below(value: Any) -> Iterator[str]:

@@ -24,6 +24,13 @@ def test_invariant_08_an_assertion_that_one_exceeds_another_is_refused() -> None
             assert_no_character_ordering({"claim": {key: ["actor.a", "actor.b"]}})
 
 
+def test_invariant_08_a_relational_target_is_joined_to_its_enclosing_subject() -> None:
+    with pytest.raises(ModelFileError, match="orders subjects"):
+        assert_no_character_ordering(
+            {"claim": {"subject": "actor.a", "stronger_than": "actor.b"}}
+        )
+
+
 @pytest.mark.parametrize("key", ["strength_order", "placement", "ranked_by"])
 def test_invariant_08_semantic_ordering_aliases_are_refused(key: str) -> None:
     with pytest.raises(ModelFileError, match="orders subjects"):

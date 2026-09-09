@@ -203,6 +203,30 @@ def test_loading_scalars_must_be_finite(tmp_path, value: float) -> None:
         PopulationPrior.load(path)
 
 
+def test_marginal_boolean_is_not_coerced_to_a_numeric_parameter(tmp_path) -> None:
+    import yaml
+
+    data = yaml.safe_load(POPULATION_PRIOR_PATH.read_text(encoding="utf-8"))
+    data["marginals"]["male"]["max_strength"]["sd"] = True
+    path = tmp_path / "boolean-marginal.yaml"
+    path.write_text(yaml.safe_dump(data), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="boolean"):
+        PopulationPrior.load(path)
+
+
+def test_loading_boolean_is_not_coerced_to_a_numeric_parameter(tmp_path) -> None:
+    import yaml
+
+    data = yaml.safe_load(POPULATION_PRIOR_PATH.read_text(encoding="utf-8"))
+    data["loadings"]["max_strength"]["general_fitness"] = False
+    path = tmp_path / "boolean-loading.yaml"
+    path.write_text(yaml.safe_dump(data), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="boolean"):
+        PopulationPrior.load(path)
+
+
 @pytest.mark.parametrize("value", [-0.15, float("nan"), float("inf")])
 def test_min_residual_sd_must_be_a_positive_finite_standard_deviation(
     tmp_path, value: float

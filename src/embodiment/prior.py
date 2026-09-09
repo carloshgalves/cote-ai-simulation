@@ -125,6 +125,13 @@ class Marginal(BaseModel):
     median: float | None = None
     logit_sd: float | None = None
 
+    @field_validator("mean", "sd", "low", "high", "median", "logit_sd", mode="before")
+    @classmethod
+    def _numeric_parameter_is_not_boolean(cls, value: Any) -> Any:
+        if isinstance(value, bool):
+            raise ValueError("marginal numeric parameter must not be boolean")
+        return value
+
     @model_validator(mode="after")
     def _parameters_match_family(self) -> Marginal:
         for name in ("mean", "sd", "low", "high", "median", "logit_sd"):
@@ -208,6 +215,13 @@ class Loading(BaseModel):
 
     general_fitness: float
     build: float
+
+    @field_validator("general_fitness", "build", mode="before")
+    @classmethod
+    def _numeric_parameter_is_not_boolean(cls, value: Any) -> Any:
+        if isinstance(value, bool):
+            raise ValueError("factor loading must not be boolean")
+        return value
 
     @field_validator("general_fitness", "build", mode="after")
     @classmethod

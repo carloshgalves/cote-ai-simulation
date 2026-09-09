@@ -1,17 +1,42 @@
 ---
 name: implement
-description: Use when implementing an accepted spec/ticket; enforce deterministic core rules, tests and project-specific AI evals before completion.
+description: Use for the first implementation of an accepted COTE simulation spec/ticket; build and validate the change, then checkpoint it in Git. Do not use for review-finding remediation.
 ---
 
 # Implement
 
-1. Read the originating spec/ticket, `CONTEXT.md`, relevant ADRs and matching domain skill.
-2. Identify deterministic seams and write tests first where practical.
-3. Implement the smallest vertical slice.
+Use this skill for **primary implementation only**. Do not inspect pull-request review comments or try to repair prior review findings here; `address-review-findings` owns that phase.
+
+## Before editing
+
+1. Read the originating spec/ticket, `CONTEXT.md`, relevant ADRs, architecture docs, and matching domain skills.
+2. Work on a dedicated feature branch for the ticket. Never implement directly on the default branch.
+3. Inspect the affected code and tests and identify deterministic seams, simulation invariants, and required evals.
+4. If the ticket still requires a product/domain decision that is not already accepted, stop that branch of work instead of guessing.
+
+## Implementation loop
+
+1. Establish a focused failing or verification signal when practical.
+2. Implement the smallest coherent vertical slice.
+3. Use `tdd` for deterministic behavior that benefits from red-green development.
 4. Keep provider/framework code behind adapters.
-5. Add traces/metadata needed to reproduce model-dependent runs.
-6. Run unit/integration tests.
-7. Run applicable `llm-evals`, `rag-evals`, `knowledge-boundary-audit`, `character-fidelity` or `simulation-evals` checks.
-8. Review the diff against both coding standards and spec.
+5. Preserve world-truth/belief separation, knowledge boundaries, deterministic authority, provenance, and reproducible stochastic substreams.
+6. Add traces/metadata required to replay or audit model-dependent runs.
+7. Run focused tests as the slice grows, then the broader relevant suite.
+8. Run applicable `llm-evals`, `rag-evals`, `knowledge-boundary-audit`, `character-fidelity`, or `simulation-evals` checks.
+9. Inspect the final diff for unrelated changes and run `git diff --check`.
 
 Do not “fix” failing deterministic tests by relaxing rules into prompts.
+
+## Git checkpoint is mandatory
+
+When the primary implementation and its validation are complete:
+
+1. commit the implementation on the feature branch **before ending the task**;
+2. use a ticket-scoped commit message;
+3. treat the commit as the review checkpoint, not as approval to merge;
+4. push the feature branch when remote credentials are available so an independent reviewer can inspect the exact commit.
+
+Do not wait for code review before committing. Review findings, if any, belong in later commits produced by `address-review-findings`.
+
+Do not open, approve, or merge a pull request from this skill. `code-review` owns the review surface and `address-review-findings` owns remediation.

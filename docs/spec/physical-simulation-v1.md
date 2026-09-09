@@ -565,6 +565,21 @@ na faixa intermediária, que é justamente a faixa onde quase todo confronto esc
 "um judoca leve vence um aluno forte e destreinado" e "uma diferença grande de capacidade não é
 compensável por técnica" — e não por dado. Registrar a calibração por propriedade como tal.
 
+**Decidido:** 2026-09-09 — decaimento exponencial de parâmetro único sobre o **módulo** da diferença:
+`w_hab(Δcap) = w_hab_0 · exp(−|Δcap| / κ)`, com `Δcap` em desvios-padrão do prior da capacidade
+relevante à modalidade. É monotonicamente decrescente em todo o domínio e assintótica a zero, de modo
+que habilidade nunca vira desvantagem e nenhum ponto de corte separa uma "faixa da técnica" de uma
+"faixa da força". Descartadas a sigmoide invertida (dois parâmetros para produzir um platô que
+nenhuma propriedade exigida pede) e a função por partes (o joelho vira regra à parte, que é
+exatamente o que o modelo §11 evita ao pedir a dominância como *função*). `κ` é **`[INT]`**,
+declarado em `contest-params.yaml` (PSV1-7) e **calibrado por propriedade, não por dado**: (P-A) com
+vantagem grande de habilidade e desvantagem pequena de capacidade, a margem favorece o técnico — "um
+judoca leve vence um aluno forte e destreinado"; (P-B) a partir de uma diferença grande de
+capacidade, nenhuma diferença de habilidade representável no modelo inverte a margem. As duas viram
+testes executáveis, e o cabeçalho do arquivo registra a origem da calibração **como calibração por
+propriedade** — um `κ` que se apresente como medido é a desonestidade que o `[INT]` existe para
+impedir.
+
 ### 13.2 Granularidade de `peripheral_fatigue` por região — *bloqueia o ticket de `BodyState`*
 
 O modelo cita `legs, arms, grip, core`. Quatro regiões bastam para corrida, agarre e trabalho
@@ -576,12 +591,41 @@ lesão tem custo em toda a dinâmica.
 (b) unificar as duas taxonomias. A (a) é mais barata e cria uma assimetria que precisa ser
 documentada; a (b) é mais coerente e mais cara.
 
+**Decidido:** 2026-09-09 — opção (a). `peripheral_fatigue` fica com quatro regiões (`legs`, `arms`,
+`grip`, `core`) e `Injury.region` mantém granularidade fina (`wrist_left`, `hand_right`,
+`ankle_left`, …). A assimetria é deliberada e fica documentada em duas partes, não em uma nota:
+(i) o cabeçalho de `body-dynamics.yaml` declara as duas taxonomias e por que diferem; (ii) o mesmo
+arquivo carrega um mapa **total** `Injury.region → região de fadiga`, e um teste do PSV1-2 falha se
+alguma região de lesão ficar sem imagem. O cenário 4 do modelo §14 sobrevive porque não depende de
+fadiga: punho e mão já se distinguem em `Injury`, e o que decide um exame de preensão é o campo
+`impairments` **por dimensão** (modelo §7), não a região de fadiga. Unificar as taxonomias custaria a
+dinâmica inteira de fadiga por região fina para comprar uma distinção que o mecanismo que a usa nem
+lê. Fadiga **não** ganha granularidade na V1; se um exame futuro exigir fadiga distinta entre punho e
+mão, isso é revisão de spec, não ajuste de parâmetro.
+
 ### 13.3 Limiar de ESS e o que fazer abaixo dele
 
 O estimador reporta ESS. Falta decidir o limiar e a conduta: falhar alto, reamostrar com mais
 partículas, ou devolver o posterior marcado como degenerado. *Recomendação:* falhar alto na V1 — um
 posterior degenerado que circula é pior que um seeding que não completa, porque o primeiro produz
 números plausíveis e errados.
+
+**Decidido:** 2026-09-09 — falhar alto, com limiar duplo. O gate é o ESS **conjunto** do vetor de
+pesos: degeneração é propriedade do conjunto de partículas, não de uma dimensão isolada; o ESS por
+dimensão que o PSV1-3 reporta é diagnóstico e não abre nem fecha o gate. O posterior é reprovado se
+`ESS < 500` **ou** `ESS < 0,05 · N`, com `N = 10 000` partículas por padrão; os três números entram
+em `estimator-params.yaml` marcados `[INT]`. Os dois limiares coincidem no `N` padrão e só divergem
+quando alguém o muda — que é justamente quando um limiar único enganaria: com `N` grande a fração
+impede a falsa sensação de amostra, com `N` pequeno o piso absoluto impede que 50 partículas efetivas
+passem por posterior bem-comportado. O piso de 500 mantém o erro padrão de Monte Carlo de uma média
+em torno de 4–5% do desvio do posterior, uma ordem de grandeza abaixo da largura que a identificação
+parcial legitimamente produz; abaixo disso o ruído do estimador começa a competir com a incerteza que
+ele deveria estar reportando. **Conduta abaixo do limiar:** não reamostrar com mais partículas e não
+devolver posterior marcado — escrever `capacity.posterior.degenerate` no event log com
+`character_id`, ESS, limiar violado, `N` e as restrições aplicadas, e levantar erro que interrompe o
+run. Nenhum posterior degenerado é amostrado, congelado em `capacity_baseline` ou serializado em
+snapshot. As correções admissíveis são revisar o conjunto de restrições ou alargar as indicadoras
+suavizadas, ambas visíveis no diff; **baixar o limiar é mudança de spec**, não ajuste de arquivo.
 
 ### 13.4 Python fixa a stack do projeto? — *decisão de escopo, não técnica*
 
@@ -593,11 +637,29 @@ linguagem, esta decisão vira uma fronteira de processo.
 *Encaminhamento sugerido:* registrar como ADR 0007 antes de `/to-tickets`, com escopo explicitamente
 limitado a este subdomínio. Não bloqueia a implementação; bloqueia a generalização.
 
+**Decidido:** 2026-09-09 — sim para o subdomínio, não para o projeto. Registrado no
+[ADR 0007](../adr/0007-python-para-o-subdominio-embodiment.md), status `Accepted`, com o limite de
+escopo no próprio título. Cobre `src/embodiment/`, sua toolchain (`numpy`, `pydantic`, `pytest`,
+`hypothesis`) e os arquivos de parâmetro em `data/models/physical/`. Não cobre Agent Cognition,
+Examination Engine, Social State, framework de agentes, provedor de LLM, banco vetorial nem UI —
+todos seguem em aberto como o `README.md` afirma. A fronteira do subdomínio é **dados** (event log,
+snapshot, YAML de parâmetros), não importação de módulo, de modo que uma stack diferente adiante vira
+fronteira de processo e não reescrita. Citar o ADR 0007 como precedente para "o projeto é Python" é
+uso indevido dele.
+
 ### 13.5 `illnesses` sem dinâmica
 
 O campo é serializado e nada o atualiza. Alternativa seria omiti-lo do `snapshot_version: 1` e
 introduzi-lo depois, ao custo de um incremento de versão. *Recomendação:* manter o campo, porque um
 exame de sobrevivência vai precisar dele e o incremento de versão é mais caro que um campo vazio.
+
+**Decidido:** 2026-09-09 — confirmada a recomendação: o campo fica. `illnesses` é serializado em
+`snapshot_version: 1` e **nenhum ticket da V1 o atualiza**; todo run da V1 o escreve como `[]`. Para
+que a ausência de dinâmica não seja lida adiante como bug, ela é declarada em dois lugares: o
+cabeçalho de `body-dynamics.yaml` registra que doença não é canal dinâmico nesta versão (os nove
+canais do modelo §7 não a incluem), e um teste do PSV1-2 falha se qualquer módulo escrever no campo.
+Reverter custaria um incremento de `snapshot_version` no primeiro exame de sobrevivência, que é mais
+caro que um campo vazio já versionado.
 
 ---
 

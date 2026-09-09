@@ -7,6 +7,8 @@ description: Use after primary implementation is committed to independently revi
 
 Use this skill **after `implement` has produced a committed implementation checkpoint**. This skill reviews; it does not modify production code.
 
+This skill is one workflow phase. It may inspect the complete PR and persist findings, but it must not start remediation on its own.
+
 ## Establish the review surface
 
 1. Identify the feature branch, fixed comparison base, originating ticket/spec, relevant ADRs, `CONTEXT.md`, architecture docs, and matching domain skills.
@@ -14,6 +16,7 @@ Use this skill **after `implement` has produced a committed implementation check
 3. Ensure the feature branch is available remotely.
 4. Reuse the Draft PR for this branch if one exists; otherwise create a Draft PR against the intended base branch. The PR is the persistent handoff surface between implementation, review, and remediation.
 5. Review the complete PR diff, not only the latest commit.
+6. Read existing marked findings before publishing new ones. Do not duplicate a materially identical finding that is already `OPEN`.
 
 ## Axis A — Spec fidelity
 
@@ -72,8 +75,17 @@ Each finding comment must use this machine-readable marker and structure:
 **Smallest safe correction:** <minimal correction>
 ```
 
-On re-review, read existing marked comments first and do not duplicate a still-open finding that is materially the same.
-
 If a review axis is clean, say so in the review summary. If there are no findings at all, publish one clean-review summary comment; do not invent work merely to populate the PR.
 
-Do not edit production code, commit fixes, approve, mark ready, or merge from this skill. Remediation belongs to `address-review-findings`.
+## Stop condition
+
+After all findings and the review summary are persisted:
+
+1. **STOP.**
+2. Do not edit production code or tests to remediate findings.
+3. Do not invoke `address-review-findings` or `implement`.
+4. Do not spawn a remediation subagent or start another review/remediation cycle.
+5. Do not approve, mark ready, or merge the PR.
+6. Report the review result and tell the user that `$address-review-findings <ticket>` is the separate next phase when actionable findings exist.
+
+A re-review is also a separate user-triggered invocation of this skill. Phase transitions are never automatic.

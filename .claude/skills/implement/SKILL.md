@@ -7,6 +7,8 @@ description: Use for the first implementation of an accepted COTE simulation spe
 
 Use this skill for **primary implementation only**. Do not inspect pull-request review comments or try to repair prior review findings here; `address-review-findings` owns that phase.
 
+This skill is one workflow phase. It must not start the next phase on its own.
+
 ## Before editing
 
 1. Read the originating spec/ticket, `CONTEXT.md`, relevant ADRs, architecture docs, and matching domain skills.
@@ -39,4 +41,14 @@ When the primary implementation and its validation are complete:
 
 Do not wait for code review before committing. Review findings, if any, belong in later commits produced by `address-review-findings`.
 
-Do not open, approve, or merge a pull request from this skill. `code-review` owns the review surface and `address-review-findings` owns remediation.
+## Stop condition
+
+After the validated implementation is committed and, when possible, pushed:
+
+1. **STOP.**
+2. Do not invoke `code-review` or `address-review-findings`.
+3. Do not spawn a reviewer/subagent whose purpose is to perform the next workflow phase.
+4. Do not inspect PR review comments or open a review cycle.
+5. Report the implementation checkpoint and tell the user that `$code-review <ticket>` is the separate next phase if they want to run it.
+
+Do not open, approve, mark ready, or merge a pull request from this skill. `code-review` owns the review surface and `address-review-findings` owns remediation. A phase transition requires a separate user-triggered skill invocation.

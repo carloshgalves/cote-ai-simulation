@@ -1,11 +1,13 @@
 ---
 name: address-review-findings
-description: Use only when a Draft PR already has review findings. Read the persisted findings, validate and fix the actionable ones, run regression coverage, then commit and push the remediation.
+description: Use only when a Draft PR already has review findings. Read the persisted findings that are open at invocation time, validate and fix the actionable ones, run regression coverage, then commit and push the remediation. Do not start a new review cycle.
 ---
 
 # Address Review Findings
 
 Use this skill **only because review findings already exist**. Do not perform an open-ended review and do not re-run primary implementation from scratch.
+
+This skill consumes one finite remediation batch. It must not create a new review cycle.
 
 The Draft PR is the handoff surface. If the expected PR or marked findings cannot be loaded, stop and report the broken handoff instead of guessing what the reviewer meant.
 
@@ -13,8 +15,9 @@ The Draft PR is the handoff surface. If the expected PR or marked findings canno
 
 1. Identify the feature branch and its Draft PR.
 2. Read the originating ticket/spec, relevant ADRs, `CONTEXT.md`, architecture docs, and the current PR diff.
-3. Load every PR conversation comment marked `<!-- cote-review-finding:v1 -->` whose status is `OPEN`.
-4. Process findings by severity, highest first. Work on one finding at a time unless two findings share the same root cause and one coherent correction closes both.
+3. Load every PR conversation comment marked `<!-- cote-review-finding:v1 -->` whose status is `OPEN` **at the start of this invocation**.
+4. Freeze that set as the remediation batch for this run. Findings published later are out of scope and belong to a future user-triggered remediation invocation.
+5. Process the frozen batch by severity, highest first. Work on one finding at a time unless two findings share the same root cause and one coherent correction closes both.
 
 ## For each finding
 
@@ -29,12 +32,14 @@ Use `tdd` when a deterministic finding benefits from red-green repair.
 
 ## Full validation
 
-After actionable findings are addressed:
+After the frozen remediation batch is addressed:
 
 - run the broader relevant test/eval suite;
 - run `git diff --check`;
 - inspect the remediation diff for unrelated changes;
 - preserve deterministic authority, knowledge boundaries, provenance, and reproducibility.
+
+Do not perform an exploratory review looking for additional defects. Validation here proves the remediation batch; discovery of new findings belongs to `code-review` in a separate invocation.
 
 ## Commit and push the remediation
 
@@ -47,7 +52,7 @@ When remediation is green:
 
 ## Close the handoff loop
 
-Update each original marked finding comment after the correction commit:
+Update each original marked finding in the frozen batch after the correction commit:
 
 - `**Status:** RESOLVED` plus the correction commit SHA for fixed findings;
 - `**Status:** DISMISSED` plus the evidence/rationale for invalid findings;
@@ -55,4 +60,15 @@ Update each original marked finding comment after the correction commit:
 
 Prefer updating the original comment so machine-readable status remains authoritative. If tooling cannot edit that comment, reply to it with the resolution and leave a clear note that the original marker could not be updated.
 
-After this skill finishes, run `code-review` again in an independent session against the complete PR diff.
+## Stop condition
+
+After the remediation commit is pushed and every finding in the frozen batch has a terminal status:
+
+1. **STOP.**
+2. Do not invoke `code-review` or `implement`.
+3. Do not spawn a reviewer/subagent whose purpose is to inspect the corrected PR for new findings.
+4. Do not search the PR for newly created findings or expand the remediation batch.
+5. Do not begin another fix → review → fix loop.
+6. Report the remediation checkpoint and tell the user that `$code-review <ticket>` is the separate next phase if they want another independent review.
+
+A new review cycle is a separate user-triggered workflow phase. No workflow phase may automatically invoke the next one.

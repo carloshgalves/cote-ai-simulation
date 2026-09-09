@@ -1,6 +1,12 @@
 # Roadmap — COTE AI Simulation
 
-Este roadmap organiza as frentes de desenvolvimento sem transformar acontecimentos futuros do cânone em roteiro obrigatório. O princípio geral é: **preservar causas, regras, atores e pressões canônicas quando sustentadas; não preservar resultados que deixaram de ser causalmente necessários depois da divergência.**
+Este roadmap organiza as frentes de desenvolvimento sem transformar acontecimentos futuros do cânone em roteiro obrigatório.
+
+Princípio geral:
+
+> **Preservar causas, regras, atores e pressões canônicas quando sustentadas; não preservar resultados que deixaram de ser causalmente necessários depois da divergência.**
+
+O objetivo do projeto não é reproduzir a light novel. É construir uma ANHS causalmente executável, povoada por personagens persistentes, capaz de produzir uma timeline própria a partir das mesmas pressões, regras, capacidades e conhecimentos disponíveis.
 
 ## Legenda
 
@@ -8,372 +14,904 @@ Este roadmap organiza as frentes de desenvolvimento sem transformar aconteciment
 - 🔄 frente atual
 - ⏳ planejado
 - ❓ depende de cânone/decisão futura
+- 🧪 requer validação/evals
+- 🚫 não bloqueia o primeiro run
 
 ---
 
-## 0. Fundação do projeto
+# 0. Fundação do projeto
 
-### Canon Knowledge Base ✅
+## 0.1 Canon Knowledge Base ✅
 
-- Separação entre verdade do mundo, visibilidade/knowledge e status epistemológico da nossa pesquisa.
-- Temporalidade separa quando algo é verdadeiro, quando é revelado ao leitor e quando um ator passa a saber.
+- Separar `WORLD_TRUTH`, conhecimento/visibilidade dos atores e status epistemológico da pesquisa.
+- Separar quando algo é verdadeiro, quando é revelado ao leitor e quando um ator passa a saber.
 - Claims estruturados são distintos de evidence para RAG.
-- Informações não verificadas permanecem explicitamente abertas; o engine não deve tratar hipótese de fandom/modelo como cânone.
-- Depois da divergência, o event log da simulação determina o que os personagens sabem.
+- Informações não verificadas permanecem abertas; fandom, hipótese ou inferência não entram silenciosamente como cânone.
+- Status previstos incluem:
+  - `CANON_VERIFIED`;
+  - `CANON_INFERRED`;
+  - `CANON_CONFLICTED/UNKNOWN`;
+  - `SIMULATION_AUTHORED`;
+  - `USER_AUTHORED` quando aplicável.
+- Depois da divergência, o event log da simulação passa a ser autoridade sobre a história ocorrida.
 
-### Domínio físico ✅
+## 0.2 Domínio físico ✅ / 🔄
 
-- `CapacityProfile`, `BodyState`, `ExertionIntent`, `PerformanceOutcome`, `ObservedPerformance` e `SelfPhysicalModel` são conceitos distintos.
-- Feats restringem capacidade latente; não atribuem scores arbitrários.
-- Capacidade, habilidade, estado e disposição para agir são separados.
-- Fadiga, sono, recuperação, hidratação/nutrição, dor, lesões e combate devem persistir causalmente entre eventos.
-- Corpus de evidência física é compartilhado entre personagens; não existe um RAG físico por personagem.
+Já estabelecido conceitualmente:
+
+- `CapacityProfile`;
+- `BodyState`;
+- `ExertionIntent`;
+- `PerformanceOutcome`;
+- `ObservedPerformance`;
+- `SelfPhysicalModel`.
+
+Regras:
+
+- feats restringem capacidade latente; não atribuem scores arbitrários;
+- capacidade, habilidade, estado e disposição para agir são separados;
+- fadiga, sono, recuperação, hidratação/nutrição, dor e lesões persistem causalmente;
+- capacidade física pode ser um asset estratégico, mas disponibilidade não implica decisão de usá-la.
 
 ### Physical Simulation V1 🔄
 
-Fluxo previsto:
+Fluxo:
 
-`/to-spec` → `/to-tickets` → `/implement` → testes/evals/review.
+`/to-spec → /to-tickets → /implement → tests/evals → review → fix`
 
-A V1 deve funcionar com personagens sintéticos e priors provisórios mesmo antes de perfis canônicos nominais estarem completamente calibrados.
+A V1 deve funcionar com personagens sintéticos e priors provisórios antes da calibração nominal completa.
 
-Lacunas de sourcing e open questions permanecem abertas quando não bloqueiam a mecânica da V1.
+## 0.3 Private Points Economy ✅ conceitualmente
+
+Regras consolidadas em `PRIVATE_POINTS_ECONOMY.md`.
+
+- PP são persistentes;
+- renda mensal deriva dos Class Points aplicáveis no momento do pagamento;
+- gastos cotidianos afetam liquidez estratégica futura;
+- transferências são zero-sum entre participantes;
+- saldo nunca fica negativo;
+- necessidades básicas gratuitas/alternativas mínimas evitam dívida artificial;
+- pagamentos estratégicos usam o saldo real acumulado pela história da simulação;
+- o ledger deve ser replayable e auditável.
 
 ---
 
-## 1. Fundação causal da simulação ⏳
+# 1. Fundação causal da simulação ⏳
 
-### 1.1 Event Model
+Esta é a próxima fundação obrigatória depois do domínio físico. Nenhum domínio cognitivo/social deve depender de uma noção vaga de “cena”.
 
-Definir formalmente `Event` antes dos domínios cognitivo/social/exames.
+## 1.1 Simulation Clock
 
-Um evento é uma ocorrência temporalmente identificável que pode alterar estado do mundo, estado institucional, informação disponível ou estado de um ator e gerar consequências causais posteriores.
+Representar tempo lógico e calendário escolar.
 
-Regras esperadas:
+Requisitos:
 
-- **evento não significa acontecimento público**;
-- existência do evento e visibilidade do evento são dimensões separadas;
-- `STATE != EVENT`: uma agenda, crença ou relação é estado; sua criação/revisão pode ser evento;
-- eventos devem suportar replay, snapshots, auditoria, estatísticas e POV filtering;
-- eventos privados/secretos continuam sendo world truth mesmo quando nenhum aluno os conhece.
+- data e hora da simulação;
+- ordenação causal de eventos;
+- eventos simultâneos não recebem vantagem pela ordem de execução das chamadas LLM;
+- checkpoints e retomada reproduzível;
+- avanço de tempo compatível com calendário, aulas, exames, clubes, refeições, sono e eventos externos.
 
-Categorias candidatas incluem ações físicas, decisões institucionais, comunicações, observações, revisões de crença, mudanças de relação, ações de agenda/operação e eventos de exame.
+## 1.2 Event Model
 
-### 1.2 Communication / Information Transfer
+Um `Event` é uma ocorrência temporalmente identificável capaz de alterar mundo, instituição, informação ou estado de ator.
 
-Comunicação não pode ser reduzida a fala.
+Regras:
 
-Canais devem poder incluir, entre outros:
+- evento não significa acontecimento público;
+- `STATE != EVENT`;
+- existência e observabilidade são separadas;
+- eventos secretos continuam sendo world truth;
+- eventos suportam replay, snapshots, auditoria, métricas e POV filtering;
+- relação, crença, agenda e plano são estados; criação/revisão/execução deles pode gerar eventos.
 
-- fala presencial;
-- carta ou bilhete;
-- mensagem de celular;
+## 1.3 Communication / Information Transfer
+
+Comunicação não se reduz a fala.
+
+Canais possíveis:
+
+- conversa presencial;
+- carta/bilhete;
+- celular/mensagem;
 - chamada;
-- documento/aviso oficial;
+- aviso oficial;
 - mensagem anônima;
 - gesto/sinal;
-- comunicação mediada por terceiro;
 - rumor;
-- objeto ou artefato deixado deliberadamente;
-- ação realizada para ser observada.
+- terceiro intermediário;
+- documento/objeto;
+- ação deliberadamente observável.
 
-O modelo deverá representar propriedades como destinatário, observadores possíveis, interceptação, persistência, autenticidade, falsificação, atraso e evidência deixada pelo canal.
+Representar destinatário, observadores, interceptação, persistência, autenticidade, falsificação, atraso e evidência deixada.
 
-A informação só entra no conhecimento de outro agente por uma cadeia causal de comunicação/observação.
+Informação só entra no conhecimento de outro ator por cadeia causal válida de observação/comunicação.
 
-### 1.3 Action / Affordance Model
+## 1.4 Action / Affordance Model
 
-O `ExamSpec` **não** será a lista completa de ações que um aluno pode tentar.
+O `ExamSpec` não define tudo que um estudante pode tentar.
 
-Agentes devem poder compor estratégias a partir de ações/affordances do mundo, inclusive ações não previstas pelo exame ou proibidas pelas regras, quando forem fisicamente e causalmente possíveis.
-
-Pipeline esperado:
+Pipeline-base:
 
 `AgentIntent → ActionProposal → Affordance/Resource Check → Rule Check → Execution → Event(s) → Consequences`
 
-O resolvedor deve distinguir:
+Distinguir:
 
 - possibilidade física;
 - posse/acesso a recursos;
 - legalidade/regra institucional;
-- possibilidade de tentar uma ação proibida;
-- detecção/observabilidade;
-- consequências físicas, acadêmicas, sociais, disciplinares e outras aplicáveis.
+- ação proibida mas fisicamente possível;
+- detecção;
+- consequência física;
+- consequência acadêmica;
+- consequência social;
+- consequência disciplinar/legal quando aplicável.
 
-Objetivo: evitar agentes estrategicamente rasos limitados a menus como `talk/observe/form_alliance/answer_exam`, sem hardcodar “jogadas inteligentes” específicas do cânone.
+Objetivo: permitir estratégias compostas sem hardcodar jogadas canônicas.
 
-### 1.4 Simulation Observatory
+## 1.5 Consequence Resolver
 
-Criar uma camada de observação para o usuário que **nunca altera o conhecimento dos agentes**.
+Ação grave não recebe consequência fixa simplista.
 
-Modos desejados:
+Avaliar:
 
-- **Observer/Reader View:** pode inspecionar world truth, eventos secretos, estados privados, planos, crenças, relações, estado físico e autoria causal dos resultados;
-- **Character POV:** mostra apenas o que o personagem pode perceber/saber, além de sua própria cognição privada;
-- **Public View:** mostra acontecimentos públicos e reações agregadas das classes, professores, conselho estudantil e staff.
-
-O observatório deve registrar cognição/estratégia em formato estruturado e auditável (objetivos, hipóteses, confiança, intenções, planos, rationale summary etc.), sem transformar esse conteúdo em conhecimento universal.
-
-Estatísticas planejadas:
-
-- por personagem: acadêmico, estratégico, social, físico, institucional, crenças, informação, contribuições, relações e performance;
-- gerais: ranking das classes, influência, confiança, medo, alianças, conflitos, rumores, expulsões, lesões, fadiga, transferências de pontos e outros agregados;
-- **actual vs perceived**, inclusive contribuição real vs contribuição publicamente atribuída;
-- public reaction derivada dos estados reais dos agentes, não de uma “mente coletiva” narrada.
+- observação/detecção;
+- força da evidência;
+- regra escolar violada;
+- dano produzido;
+- denúncia/comunicação;
+- resposta institucional;
+- fallout social;
+- efeitos relacionais;
+- encaminhamento externo quando causalmente aplicável.
 
 ---
 
-## 2. Agendas, facções e operações ocultas ⏳
+# 2. Character / Cognition Model ⏳
 
-Modelar atores externos/institucionais sem reduzir toda a lore da White Room a um único objetivo.
+Transformar personagens em agentes persistentes, não prompts de interpretação.
 
-Estrutura conceitual:
+## 2.1 Character Core
+
+Representar:
+
+- identidade;
+- tendências relativamente estáveis;
+- capacidades;
+- preferências;
+- valores/inibições;
+- objetivos e prioridades;
+- tolerância a risco;
+- conhecimento inicial;
+- autoimagem e percepção de terceiros.
+
+Capacidade e motivação são separadas.
+
+> **Capability does not imply manifestation.**
+
+Ayanokōji, Yuuichi, Kōenji ou qualquer outro personagem podem possuir enorme capacidade e nunca encontrar razão suficiente para demonstrá-la.
+
+## 2.2 Motivations + Behavioral Triggers
+
+Motivações não podem ser apenas “chegar à Classe A”.
+
+Representar objetivos específicos e gatilhos contextuais capazes de alterar a política de ação.
+
+Exemplo conceitual:
+
+`trusted_person_under_credible_attack → increase strategic engagement / decrease passivity / expand acceptable tactics`
+
+O gatilho não define uma estratégia pronta; apenas altera prioridades, limites, disposição e orçamento de planejamento.
+
+Targets de proteção devem derivar do estado real das relações, não de listas roteirizadas.
+
+## 2.3 Beliefs, Hypotheses and Episodic Memory
+
+Cada ator mantém:
+
+- fatos conhecidos;
+- crenças;
+- confiança;
+- proveniência;
+- hipóteses;
+- memórias episódicas;
+- planos e intenções.
+
+Inteligência nunca concede informação secreta.
+
+## 2.4 Cross-canon characters ⏳
+
+Contrato universal de importação:
+
+`canon start → knowledge horizon → actual history → school-visible dossier → capability evidence → feats`
+
+Exemplo estrutural para Yuuichi:
+
+- estado mental/memórias: capítulo inicial de *Tomodachi Game*;
+- evidência de capacidade: pode usar feats posteriores apenas quando demonstrarem capacidade plausivelmente preexistente;
+- feitos futuros nunca viram memória retroativa;
+- aprendizado genuinamente adquirido depois do ponto inicial não é retroalimentado.
+
+A classificação escolar usa apenas o dossier que a escola poderia conhecer, não world truth oculto.
+
+## 2.5 Hyuzaki ⏳
+
+Personagem baseado no usuário.
+
+- adaptar biografia para elegibilidade/realidade japonesa da ANHS;
+- separar `REAL_USER_EVIDENCE` de `SIMULATION_ADAPTATION`;
+- usar as mesmas interfaces dos demais personagens;
+- pensamentos e estratégias privados podem ser vistos pelo Observatory sem vazar para outros atores.
+
+---
+
+# 3. Strategic Intelligence ⏳ 🧪
+
+Uma das frentes mais críticas do projeto.
+
+Estratégia não deve vir de uma única pergunta “o que você faria?”.
+
+## 3.1 Strategic Asset Scan
+
+Antes de gerar planos, o personagem inventaria os assets que acredita possuir:
+
+- informação;
+- aliados;
+- relações;
+- autoridade/status;
+- PP/recursos;
+- Class Points e recursos coletivos quando acessíveis;
+- força/capacidade física;
+- reputação/intimidação;
+- deception;
+- regras institucionais;
+- loopholes percebidos;
+- tempo;
+- vulnerabilidades percebidas dos oponentes.
+
+Para cada asset:
+
+`Can I use it? → Should I use it? → What happens if I use it?`
+
+## 3.2 Planning pipeline
+
+Pipeline esperado:
+
+1. definir objetivo;
+2. identificar constraints;
+3. inventariar assets;
+4. modelar atores relevantes;
+5. gerar candidatos;
+6. buscar combinações;
+7. simular reações prováveis;
+8. buscar counterplay;
+9. procurar falhas ocultas;
+10. avaliar custo/risco;
+11. comparar com não agir;
+12. revisar melhores candidatos;
+13. commit da ação/intenção.
+
+## 3.3 Planning Budget
+
+Profundidade deve depender de personagem **e** situação.
+
+Parâmetros possíveis:
+
+- breadth de candidatos;
+- depth de rollout;
+- opponent modeling;
+- counterfactual depth;
+- rule exploitation search;
+- information valuation;
+- revision passes.
+
+Personagens excepcionais recebem maior orçamento quando a situação justifica. Isso não significa fornecer informação adicional.
+
+## 3.4 Critic without intelligence leakage
+
+O crítico pode encontrar falhas, contradições, riscos e counterplay.
+
+Ele **não pode fornecer gratuitamente uma solução que o personagem não teria capacidade de conceber**.
+
+Fluxo correto:
+
+`character plan → critic exposes weakness → character replans within own capability`
+
+Não:
+
+`mediocre plan → super-critic invents genius plan → character executes borrowed intelligence`
+
+## 3.5 Strategic evals 🧪
+
+Construir benchmarks com situações canônicas removendo a solução canônica.
+
+Avaliar se o agente:
+
+- encontra soluções fortes;
+- preserva estilo;
+- não recebe conhecimento proibido;
+- não copia roteiro futuro;
+- mantém qualidade sob novos problemas;
+- diferencia personagens estrategicamente.
+
+Não exigir reprodução exata do plano da novel; exigir qualidade compatível com evidência disponível da capacidade.
+
+## 3.6 Severe / unethical strategies
+
+Não usar moralidade como bloqueio binário, pois destruiria a caracterização de diversos atores.
+
+Separar:
+
+- ação concebível no mundo;
+- capacidade do personagem de aceitá-la;
+- risco e consequências;
+- nível de detalhe permitido ao planner.
+
+Ações graves podem ser tratadas estrategicamente/abstratamente quando coerentes com o personagem, sem transformar o sistema em otimizador operacional de abuso, tortura, violência extrema ou material íntimo não consentido.
+
+Consequências escolares, sociais e legais devem ser causalmente modeladas quando aplicáveis.
+
+---
+
+# 4. Social + Affective + Relationships ⏳
+
+Relações são direcionais, históricas e persistentes.
+
+Dimensões candidatas:
+
+- confiança;
+- respeito;
+- medo;
+- admiração;
+- ressentimento;
+- familiaridade;
+- dependência;
+- suspeita;
+- proximidade emocional;
+- percepção de competência;
+- atração/interesse quando aplicável.
+
+## 4.1 Relationship Events
+
+Estado de relação deriva de acontecimentos reais.
+
+Exemplos:
+
+- estudaram juntos;
+- alguém protegeu outro;
+- mentira descoberta;
+- ajuda em exame;
+- humilhação pública;
+- segredo compartilhado;
+- dívida criada/paga;
+- conflito repetido.
+
+O sistema deve preservar histórico suficiente para explicar por que uma relação chegou ao estado atual.
+
+Romance é consequência possível do domínio social, não tabela de casais canônicos.
+
+---
+
+# 5. Vida escolar e instituição ⏳
+
+## 5.1 School Calendar
+
+Representar:
+
+- aulas;
+- dias letivos;
+- feriados;
+- refeições;
+- dormitórios;
+- lojas/serviços;
+- períodos de estudo;
+- eventos institucionais;
+- exames;
+- reuniões escolares relevantes;
+- entrada/saída de gerações.
+
+Calendário é infraestrutura causal, não decoração.
+
+## 5.2 Clubs ⏳
+
+Clubes entram já no primeiro run em versão simples.
+
+Representar:
+
+- identidade do clube;
+- horários;
+- requisitos;
+- advisor quando aplicável;
+- membros;
+- processo de entrada/saída;
+- presença/ausência;
+- eventos de relacionamento;
+- treino e efeitos físicos/skill quando aplicáveis;
+- custos de tempo e oportunidade.
+
+Um personagem pode descobrir, considerar, entrar, frequentar, faltar ou abandonar um clube por decisão própria.
+
+## 5.3 OAA ⏳
+
+Tratar como mudança institucional ligada ao início do segundo ano, não como criação de Tsukishiro.
+
+A proveniência temporal exata e dependência de Nagumo devem ser modeladas explicitamente. Não confundir “proposta de Nagumo” com “evento causado pelo enredo de expulsão de Kiyotaka”.
+
+## 5.4 Protection Points ❓
+
+Não hardcodar por data.
+
+A introdução deve ser acionada por condição institucional relacionada à ausência anormal de expulsões.
+
+Regra de simulação a formalizar:
+
+- se uma geração alcançar a condição institucional correspondente sem expulsões, a escola pode introduzir o sistema;
+- uma vez introduzido como regra escolar, alunos de outras grades também podem ser afetados quando a regra aplicável assim determinar;
+- marcar explicitamente a generalização além do caso canônico como interpretação/simulation rule, não como fato provado pelo cânone.
+
+## 5.5 Student IDs + unresolved mysteries ⏳ / ❓
+
+Todo estudante deve possuir ID escolar.
+
+Preservar pares canonicamente iguais quando verificados.
+
+A regra por trás de IDs duplicados permanece `UNKNOWN` enquanto não houver evidência suficiente.
+
+---
+
+# 6. Hypothesis Engine ⏳
+
+Mistérios e regras não resolvidos não devem receber verdade arbitrária porque um personagem escolheu uma hipótese.
+
+Pipeline:
+
+`facts/observations → hypothesis generation → evidence testing → consistency/coverage/contradictions/predictive power/parsimony → supported set`
+
+Separar:
+
+- `actor_belief`;
+- hipóteses avaliadas pelo Engine;
+- world truth selecionado posteriormente.
+
+Se várias hipóteses permanecerem compatíveis:
+
+`UNDERDETERMINED`
+
+O Engine pode apresentá-las ao usuário. Uma hipótese escolhida para a simulação recebe provenance explícita como `SIMULATION_AUTHORED`/`SIMULATION_ASSUMPTION`.
+
+Personagens não descobrem automaticamente essa verdade só porque ela foi aprovada fora do mundo.
+
+---
+
+# 7. Special Exams + Institutional Exam Design ⏳ 🧪
+
+## 7.1 ExamSpec
+
+Exames canônicos devem virar regras executáveis antes de receber agentes LLM.
+
+Estrutura mínima:
+
+- objetivo;
+- participantes;
+- agrupamento;
+- recursos;
+- informação pública/privada;
+- pontuação;
+- CP/PP/recompensas;
+- penalidades;
+- expulsão quando aplicável;
+- comunicação;
+- regras de empate;
+- condições terminais;
+- regras institucionais aplicáveis.
+
+## 7.2 Exam provenance
+
+Tipos:
+
+- `CANON_SCHEDULED`;
+- `CANON_ADAPTED`;
+- `SIMULATION_GENERATED`;
+- `USER_SUGGESTED`;
+- `USER_INTERVENTION` quando o usuário força sua ocorrência.
+
+A escola deve continuar capaz de gerar exames mesmo se Tsukishiro nunca entrar na timeline.
+
+## 7.3 User exam suggestions ⏳
+
+O usuário pode fornecer apenas um intent, por exemplo:
+
+> “Crie um exame envolvendo artes marciais.”
+
+Isso **não é ainda um exame válido**.
+
+Pipeline:
+
+`USER IDEA → Exam Generator → Formal Validator → Adversarial Tester → Simulation Sandbox → USER APPROVAL → eligible ExamSpec`
+
+## 7.4 Formal Validator
+
+Verificar deterministicamente:
+
+- fechamento matemático;
+- estados impossíveis;
+- regras contraditórias;
+- empates;
+- transações CP/PP;
+- penalidades/recompensas;
+- condições de saída;
+- caminhos sem resolução.
+
+## 7.5 Adversarial Tester
+
+Procurar:
+
+- estratégia dominante trivial;
+- exploit infinito;
+- coalizão que torna resultado inevitável;
+- incentivo universal a não participar;
+- vantagem estrutural absurda;
+- expulsão inevitável sem resposta;
+- loop de pontuação;
+- loophole contornando penalidade.
+
+## 7.6 Synthetic sandbox 🧪
+
+Rodar perfis artificiais antes dos personagens reais:
+
+- forte acadêmico/fraco físico;
+- forte físico/fraco estratégico;
+- equilibrado;
+- cooperativo;
+- conflitivo;
+- altamente estratégico.
+
+Objetivo: garantir que comportamento interessante não esteja mascarando regras ruins.
+
+---
+
+# 8. Population Model + outras grades ⏳
+
+## 8.1 Variable resolution population
+
+`exists in world != full LLM inference`
+
+Níveis:
+
+- full agent;
+- lightweight named actor;
+- lightweight student;
+- class/cohort aggregate.
+
+Promoção de resolução ocorre antes de um resultado importante ser finalizado quando o ator se torna causalmente relevante.
+
+Nunca:
+
+`unexpected result → invent genius background retroactively`
+
+Correto:
+
+`latent profile already exists → causal concentration detected → promote actor → resolve in higher detail → commit result`
+
+## 8.2 Cohort Generator
+
+Novas gerações recebem perfis latentes fixados no nascimento da coorte:
+
+- capacidades multidimensionais;
+- tendências;
+- school-visible dossier;
+- possíveis hooks latentes;
+- seed reproduzível.
+
+Excepcionalidade é decidida pela geração da coorte/distribuições, não pelo Background Resolver depois de um resultado.
+
+Detalhes biográficos podem ser expandidos posteriormente, mas devem permanecer compatíveis com todos os fatos já fixados.
+
+## 8.3 Year 2 / Year 3 background simulation
+
+Outras grades devem acumular história sem exigir catálogo completo de exames.
+
+Background resolver pode registrar:
+
+- ranking de exames;
+- class-point deltas;
+- vitórias/derrotas;
+- dominance/leadership effects;
+- causal factors agregados.
+
+Não inventar retrospectivamente estratégias detalhadas que nunca foram simuladas.
+
+Quando um exame envolver várias grades ou causar impacto grande, promover para resolução `ACTIVE`.
+
+---
+
+# 9. Relevance Scheduler + computational scaling ⏳
+
+Importância narrativa não decide se algo aconteceu. Decide **quanta resolução computacional e observabilidade** será dada ao que aconteceu.
+
+Níveis candidatos:
+
+- `BACKGROUND`;
+- `SUMMARY`;
+- `ACTIVE`;
+- `SPOTLIGHT`.
+
+Fatores de relevância:
+
+- focal actor involvement;
+- causal impact;
+- institutional impact;
+- relationship impact;
+- faction impact;
+- strategic novelty;
+- future dependency.
+
+A ativação deve ser event-driven.
+
+Personagens dormindo, assistindo aula comum ou sem evento relevante não executam planejamento profundo.
+
+## 9.1 Simultaneous cognition
+
+Atores que agem no mesmo quantum recebem o mesmo snapshot de mundo.
+
+Pipeline:
+
+`WORLD t → independent intents → deterministic collision/resolution → WORLD t+1`
+
+A ordem de conclusão das chamadas LLM não pode criar vantagem temporal artificial.
+
+---
+
+# 10. Agendas, facções e atores externos ⏳
+
+Estrutura:
 
 `Actor/Faction → Agenda → Objectives → Strategy/Plan → Operation → Actions → Events`
 
-### Requisitos
+Requisitos:
 
-- facções/atores distintos podem ter objetivos distintos ou conflitantes;
-- interesses individuais podem divergir dos interesses da facção;
-- observar, testar, manipular, expulsar, recuperar, controlar ou expor alguém são papéis/objetivos diferentes e não devem ser fundidos automaticamente;
-- objetivos/motivações devem carregar proveniência epistemológica própria:
-  - `CANON_VERIFIED`;
-  - `CANON_INFERRED`;
-  - `CANON_CONFLICTED/UNKNOWN`;
-  - `SIMULATION_AUTHORED` quando o cânone ainda não resolve a questão e a simulação precisa escolher uma verdade interna.
+- agendas individuais podem divergir das facções;
+- objetivos carregam proveniência epistemológica;
+- White Room não é reduzida a “expulsar Kiyotaka”;
+- Tsukishiro não deve spawnar automaticamente por calendário se a cadeia causal não existir;
+- família Kōenji, Kijima e demais forças externas devem ser modeladas conforme cânone/inferência distinguível;
+- uma facção relacionada a *Tomodachi Game* pode existir no crossover apenas com premissas explicitamente definidas;
+- atores externos permanecem baratos/inativos até um gate causal permitir ação.
 
-### Questões canônicas a investigar, não assumir
-
-- objetivos da facção/estrutura ligada a Atsuomi;
-- objetivos e interesses ligados a Kijima;
-- natureza real da atuação de Tsukishiro e se “expulsar Kiyotaka” descreve de fato seu objetivo final;
-- hipótese de que determinadas pressões foram desenhadas para obrigar Kiyotaka a agir/demonstrar capacidade;
-- origem e papel do professor/instrutor associado a Nanase;
-- existência e função de alunos colocados na ANHS principalmente para observar Ayanokōji, incluindo material recente associado a Shiraishi.
-
-Esses itens são **perguntas de modelagem/cânone**, não fatos já aprovados do simulador.
-
-### Tsukishiro
-
-Não hardcodar `Y2_START → spawn Tsukishiro` nem `Tsukishiro.goal = expel_Kiyotaka` sem sustentação.
-
-A entrada/intervenção deve decorrer de agendas e operações que continuem causalmente válidas na timeline simulada.
-
-Se Kiyotaka já tiver sido expulso ou as circunstâncias mudarem radicalmente, operações planejadas podem ser canceladas, modificadas ou substituídas.
+Eventos escolares como reuniões, visitas e outros access windows podem funcionar como activation gates para pais/facções.
 
 ---
 
-## 3. Character / Cognition Model ⏳
+# 11. Simulation Observatory ⏳
 
-Transformar personagens em agentes persistentes, e não prompts interpretativos.
+Camada somente de observação. Nunca altera conhecimento dos agentes.
 
-Abranger:
+Modos:
 
-- identidade/core relativamente estável;
-- objetivos e prioridades;
-- crenças com confiança e proveniência;
-- conhecimento inicial;
-- memória episódica da simulação;
-- hipóteses/inferências;
-- planos e intenções;
-- percepção do próprio corpo;
-- incerteza e possibilidade de erro;
-- evolução ao longo do tempo.
+- **Observer/Reader View** — world truth, eventos secretos, planos, crenças, relações, física e autoria causal;
+- **Character POV** — somente o que aquele ator pode perceber/saber, além da própria cognição;
+- **Public View** — acontecimentos públicos e estados agregados observáveis.
 
-### Base de personagem
+Registrar cognição de forma estruturada/auditável sem expor chain-of-thought bruto:
 
-Ao criar um personagem canônico, alimentar o sistema com o máximo de informação **verificada/estruturada disponível**, sem despejar tudo no prompt de cada cena.
+- objective;
+- hypotheses;
+- confidence;
+- candidate-plan summaries;
+- chosen intent;
+- known constraints;
+- rationale summary;
+- causal result.
 
-Usar um corpus/evidence store compartilhado e recuperação por metadata/contexto. RAG é mecanismo de recuperação; não há necessidade de um banco vetorial independente por personagem.
+Estatísticas:
 
-No runtime, o contexto deve ser montado seletivamente a partir de core, objetivos, crenças, relações, memórias recentes/relevantes, estado físico, observações da cena e evidências comportamentais pertinentes.
-
-### Hyuzaki
-
-Hyuzaki é o personagem baseado no usuário.
-
-- contexto biográfico deve ser adaptado de forma coerente à elegibilidade/realidade japonesa da ANHS;
-- separar `REAL_USER_EVIDENCE` de `SIMULATION_ADAPTATION`;
-- histórico, personalidade, cognição e capacidades devem ser modelados pelas mesmas interfaces dos demais personagens;
-- suas crenças, estratégias e pensamentos privados devem ser observáveis pelo usuário via Observatory sem vazarem para outros agentes.
-
-Personagens originais adicionais poderão ser importados com proveniência `USER_AUTHORED`.
+- performance acadêmica/estratégica/social/física;
+- influência;
+- confiança/medo;
+- relações;
+- alianças/conflitos;
+- rumores;
+- expulsões;
+- PP/CP;
+- contribuição real vs contribuição percebida.
 
 ---
 
-## 4. Social + Affective + Romance ⏳
+# 12. Checkpoints, replay e fronteira da simulação ⏳
 
-Relações devem ser direcionais e persistentes.
+## 12.1 Checkpoints
 
-Possíveis dimensões incluem confiança, respeito, medo, admiração, ressentimento, familiaridade, dependência, suspeita, proximidade emocional e percepção de competência.
+Salvar:
 
-Romance é uma consequência possível do domínio social/afetivo, não uma tabela de casais canônicos.
+- world state;
+- event log;
+- beliefs;
+- memories;
+- relationships;
+- PP/CP;
+- physical state relevante;
+- agendas/operações;
+- school state;
+- configuration/seed;
+- versões de modelos/prompts/regras necessárias à reprodutibilidade.
 
-Separar pelo menos:
+## 12.2 Pause/resume
 
-- atração;
-- interesse romântico;
-- apego;
-- ciúme;
-- disposição para perseguir uma relação;
-- decisão de revelar/ocultar interesse;
-- reciprocidade.
+Uma execução pode ser pausada e retomada sem normalizar estados ou reconstruir retrospectivamente o mundo.
 
-Casais do cânone não são resultados obrigatórios depois da divergência.
+## 12.3 Terminal checkpoint
 
----
+A run principal termina quando a **coorte focal inicial se forma**.
 
-## 5. Strategic Intelligence ⏳
+O mundo não termina.
 
-Inteligência estratégica deve ser separada de personalidade, motivação e conhecimento disponível.
+O `Terminal World Snapshot` preserva:
 
-Abranger, entre outros:
+- resultado da coorte focal;
+- expulsões;
+- classes finais;
+- relações;
+- recursos;
+- estado institucional;
+- gerações ainda cursando a escola;
+- conflitos/agendas ainda abertos.
 
-- geração e comparação de hipóteses;
-- inferência sob informação parcial;
-- planejamento;
-- raciocínio adversarial;
-- avaliação de risco;
-- valoração/aquisição de informação;
-- detecção e produção de engano;
-- adaptação estratégica;
-- decisão de ocultar ou revelar capacidade.
-
-**Inteligência nunca concede informação secreta.** Um personagem mais capaz processa melhor evidência disponível; não recebe world truth privilegiada.
-
-Estratégias complexas devem emergir da composição de affordances e recursos do mundo, inclusive quando envolvem ações fora do fluxo normal de um exame.
-
----
-
-## 6. Special Exams + Institutional Exam Design ⏳
-
-### ExamSpec
-
-Exames canônicos devem ser formalizados como regras executáveis/determinísticas antes de receber agentes LLM.
-
-Validar com puppet/scripted agents para impedir que comportamento estratégico mascare regras quebradas.
-
-### Escola vs interferência externa
-
-Separar o programa institucional de exames da ANHS de interferências externas.
-
-A escola deve continuar capaz de produzir exames mesmo se Tsukishiro não aparecer ou se a timeline divergir.
-
-Origens conceituais de exame:
-
-- `CANON_SCHEDULED`: institucionalmente preservado e ainda causalmente aplicável;
-- `CANON_ADAPTED`: objetivo institucional permanece, mas condições exigem regras diferentes;
-- `SIMULATION_GENERATED`: novo exame construído a partir da filosofia/objetivos/restrições da ANHS quando o cânone não oferece um exame causalmente aplicável.
-
-Interferência externa deve modificar/propor condições sobre um processo institucional; não ser a única razão para o exame existir.
-
-Exames gerados precisam de estrutura formal (objetivo, participantes, recursos, informação, cooperação/competição, riscos, recompensas, penalidades, tempo, comunicação, segredos e condições terminais) e validação determinística.
-
-### Exames originalmente associados a tentativas de expulsar Kiyotaka ❓
-
-Investigar individualmente o terceiro trimestre do primeiro ano até o exame da ilha do segundo ano para separar:
-
-- objetivo institucional normal da ANHS;
-- influência/interferência externa comprovada;
-- objetivo atribuído a Tsukishiro/Atsuomi e seu grau de certeza;
-- regras que ainda fariam sentido sem Kiyotaka/Tsukishiro;
-- regras que precisariam ser adaptadas ou substituídas na timeline simulada.
+Uma continuação posterior nasce como nova run com `parent_checkpoint` apontando para o estado terminal anterior.
 
 ---
 
-## 7. Divergência temporal, Year 2 e Year 3 ⏳
+# 13. Delivery Milestones
 
-### Princípio
+Estimativas abaixo são de ordem de grandeza e devem ser recalibradas após os primeiros vertical slices. Não são calendário contratual.
 
-**Preservar causas/pressões canônicas; não forçar consequências canônicas.**
+## 13.1 Prototype Run — ~3–5 semanas
 
-Distinguir futuramente:
+Objetivo: provar o motor causal básico com poucos agentes.
 
-- fatos já estabelecidos antes da divergência;
-- eventos institucionais previamente agendados;
-- agendas/pressões persistentes;
-- operações já iniciadas;
-- resultados canônicos não obrigatórios.
+Requer:
 
-### White Roomers no segundo ano
+- Simulation Clock;
+- Event Model;
+- world truth / knowledge isolation;
+- action/affordance básico;
+- comunicação/observação;
+- memória e decisão simples;
+- snapshot/replay inicial;
+- Physical Simulation V1 integrada em escala pequena.
 
-A lore prévia continua verdadeira quando verificada, mas entrada, missão e comportamento na ANHS devem depender de operações causalmente válidas.
+Não precisa representar a ANHS completa.
 
-Se for desejável garantir a presença de certos personagens independentemente da divergência, isso deve existir como **Scenario Constraint explícita**, não como falsa emergência espontânea.
+## 13.2 First Real Run — alvo principal — ~8–12 semanas
 
-### Potencial Kiyotaka × Kōenji no terceiro ano
+Definição de pronto:
 
-A disputa deve ser uma possibilidade emergente, não um checkpoint obrigatório do roteiro.
+- world/event engine estável;
+- knowledge isolation;
+- Character Core;
+- motivations + behavioral triggers;
+- beliefs/hypotheses/memory;
+- relationship events;
+- Strategic Planner com asset scan, candidate generation, counterplay e critic sem intelligence leakage;
+- Physical Simulation V1;
+- PP/CP básicos;
+- vida escolar/calendário mínimo;
+- clubes básicos;
+- 160 alunos de Y1 existentes, com centrais full e demais lightweight;
+- pelo menos um Special Exam formalizado e validado;
+- Formal Validator;
+- deterministic Exam Resolver;
+- checkpoints;
+- replay;
+- Observatory básico;
+- seeded reproducibility;
+- pause/resume.
 
-- se um deles for expulso antes, a disputa pode simplesmente não existir;
-- se ambos estiverem presentes, ainda precisa haver motivo/condição causal para confronto;
-- Kōenji não recebe `if expulsion_risk → full_power` hardcoded;
-- sua ação deve decorrer de preferências, objetivos, percepção de risco, custo, interesse e capacidade.
+Escopo recomendado da primeira execução: **um período curto de abril/maio do primeiro ano**, não três anos inteiros.
 
-O mesmo vale para Kiyotaka: capacidade disponível não implica decisão de demonstrá-la.
+Critério qualitativo:
+
+> Soltar uma pequena ANHS, avançar dias, observar personagens lembrando, criando relações, gastando recursos, perseguindo objetivos, formulando estratégias e entrando em um exame cujo resultado não foi previamente escrito.
+
+## 13.3 Year-1 Capable — ~3–5 meses
+
+Depois do First Real Run:
+
+- maior cobertura do calendário;
+- múltiplos exames;
+- clubes mais ricos;
+- background simulation das outras grades;
+- personagens institucionais importantes;
+- facções básicas;
+- maior cobertura de regras/economia;
+- exam generation/adaptation;
+- relevance scheduler mais maduro;
+- calibração estratégica extensa.
+
+## 13.4 Three-Year Capable — ~5–8+ meses
+
+- transição de gerações;
+- Cohort Generator;
+- Year 2/Year 3 completos;
+- OAA;
+- Protection Points quando causalmente ativados;
+- atores/facções externas maduras;
+- pais e access windows;
+- terminal graduation checkpoint;
+- continuidade por child runs;
+- exames entre grades quando aplicável.
 
 ---
 
-## 8. Integrated Simulation Milestones ⏳
+# 14. Não bloqueia o First Real Run 🚫
 
-### Primeiro marco integrado
+Não esperar implementar estes itens para começar a experiência:
 
-Executar um período curto do início do primeiro ano com poucos agentes relevantes, demonstrando:
+- geração seguinte completa de 160 alunos;
+- catálogo de exames de Y2/Y3;
+- Nagumo/Manabu plenamente ativos em toda a rotina;
+- Tsukishiro;
+- White Room operacional completa;
+- família Kōenji completa;
+- facção *Tomodachi Game*;
+- OAA;
+- Protection Points;
+- resolução do mistério dos IDs;
+- Hypothesis Engine completo;
+- Exam Generator irrestrito;
+- user exam suggestions em UI final;
+- graduation;
+- torneios/intercâmbio entre escolas.
 
-- world truth determinístico;
-- event log e logical time;
-- conhecimento isolado;
-- estado físico persistente;
-- ações/affordances;
-- cognição e decisão;
-- comunicação multicanal;
-- relações persistentes;
-- Observatory/POV/Public View;
-- métricas básicas por personagem e gerais.
-
-### Primeiro Special Exam integrado
-
-Executar um exame formalizado com:
-
-- regras determinísticas;
-- conhecimento secreto isolado;
-- agentes estratégicos;
-- ações não limitadas ao menu do exame;
-- física/social/cognição integradas;
-- replay e causal trace;
-- avaliação de contribuição real vs percebida.
-
-### Escala
-
-Depois da prova do vertical slice:
-
-- personagens estratégicos centrais como agentes completos;
-- secundários em representação simplificada;
-- NPCs ordinários por priors/estado agregado;
-- promoção de NPC para agente mais completo quando ganhar relevância causal.
-
-### Transição de ano
-
-Ao final do primeiro ano, snapshot/pause deve preservar estado necessário para continuação: eventos, crenças, memórias, relações, recursos, class points, expulsões, estado físico relevante, agendas/operações, configuração/seed e versões de modelos/prompts.
-
-Só depois disso introduzir/ativar o conteúdo específico do segundo ano de acordo com a timeline resultante.
+Esses subsistemas devem encaixar nas interfaces fundamentais sem serem pré-requisitos para validar a primeira sociedade funcional.
 
 ---
 
-## Frente paralela permanente: verificação do cânone
+# 15. Expansões futuras 🚫
 
-A verificação do cânone continua em paralelo ao desenvolvimento.
+## 15.1 External Institutions / Inter-School Events
 
-Ela alimentará progressivamente:
+Possibilidade futura de outras Advanced Nurturing High Schools ou instituições equivalentes participarem de:
+
+- torneios;
+- intercâmbios;
+- exames compartilhados;
+- cooperação/competição institucional;
+- circulação temporária de estudantes;
+- reputação entre escolas.
+
+Isso exigiria novos domínios de acesso, população externa, calendário, viagens, informação e regras institucionais. Portanto não deve entrar no caminho crítico do primeiro run.
+
+---
+
+# 16. Frente paralela permanente: verificação do cânone
+
+A pesquisa canônica continua em paralelo e alimenta progressivamente:
 
 - regras institucionais;
 - cronologia;
-- personagens e backgrounds;
-- feats físicos;
+- personagens/backgrounds;
+- feats físicos e cognitivos;
 - relações iniciais;
 - conhecimento inicial;
 - facções/agendas;
 - eventos/exames;
-- operações ocultas.
+- operações ocultas;
+- calendário;
+- clubes;
+- IDs e mistérios.
 
-Quando a light novel não fornecer resposta suficiente, a simulação pode precisar escolher uma premissa própria. Essa decisão deve ser explicitamente marcada como `SIMULATION_AUTHORED` (ou equivalente), com a incerteza canônica preservada em documentação.
+Quando a light novel não fornecer resposta suficiente, o sistema pode manter `UNKNOWN`, gerar hipóteses ou exigir uma premissa própria. Se uma verdade interna precisar ser escolhida, registrar explicitamente como `SIMULATION_AUTHORED`/`SIMULATION_ASSUMPTION` e preservar a incerteza canônica na documentação.
+
+---
+
+# Princípio de encerramento
+
+O maior salto do projeto é:
+
+`zero → primeira sociedade funcional`
+
+Depois que `World Engine + Characters + Strategic Cognition + Relationships + Institution + Exam Engine` estiverem integrados, a maior parte das novas ideias deve entrar como extensão das mesmas interfaces, não como motores paralelos.
+
+O primeiro run não precisa provar que a simulação consegue viver três anos.
+
+Ele precisa provar que, durante algumas semanas, **o mundo continua existindo e produzindo consequências mesmo quando nenhum de nós já sabe qual será a próxima cena**.

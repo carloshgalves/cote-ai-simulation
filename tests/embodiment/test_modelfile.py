@@ -130,28 +130,84 @@ def test_f3_a_character_id_used_as_a_mapping_key_is_refused() -> None:
         )
 
 
+def _comparative_feat(**overrides: object) -> dict[str, object]:
+    """The shape `data/canon/schema/feat.schema.json` defines for a comparison."""
+    feat: dict[str, object] = {
+        "source": "[INT] synthetic fixture",
+        "id": "feat.sports-festival.relay",
+        "story_time": {"arc": "sports-festival"},
+        "actors": ["actor.a", "actor.b"],
+        "inference": {
+            "constraint": "COMPARATIVE",
+            "posterior_use": "BOUND",
+            "comparative": {
+                "by_whom": "actor.a",
+                "outperformed": ["actor.b"],
+                "same_event": True,
+            },
+        },
+        "margin_seconds": 0.4,
+    }
+    feat.update(overrides)
+    return feat
+
+
 def test_the_only_admissible_comparison_is_anchored_to_an_event() -> None:
     """Invariant 8: a COMPARATIVE constraint on one observed event, and nothing else."""
-    validate_mapping(
-        file_with(
-            fixture={
-                "source": "[INT] synthetic fixture",
-                "constraint_type": "COMPARATIVE",
-                "anchored_to_event": "ev.sports-festival.relay",
-                "subjects": ["actor.a", "actor.b"],
-                "margin_seconds": 0.4,
-            }
+    validate_mapping(file_with(fixture=_comparative_feat()))
+
+
+def test_a_comparison_across_two_events_is_refused() -> None:
+    """`same_event: false` compares conditions, which is what the schema forbids."""
+    with pytest.raises(ModelFileError, match="same_event"):
+        validate_mapping(
+            file_with(
+                fixture=_comparative_feat(
+                    inference={
+                        "constraint": "COMPARATIVE",
+                        "comparative": {
+                            "by_whom": "actor.a",
+                            "outperformed": ["actor.b"],
+                            "same_event": False,
+                        },
+                    }
+                )
+            )
         )
-    )
+
+
+@pytest.mark.parametrize("missing", ["id", "story_time"])
+def test_a_comparative_without_its_event_anchor_is_refused(missing: str) -> None:
+    feat = _comparative_feat()
+    del feat[missing]
+    with pytest.raises(ModelFileError, match="anchored to one observed event"):
+        validate_mapping(file_with(fixture=feat))
+
+
+def test_a_comparative_over_undeclared_actors_is_refused() -> None:
+    with pytest.raises(ModelFileError, match="not among the feat's declared"):
+        validate_mapping(file_with(fixture=_comparative_feat(actors=["actor.a"])))
 
 
 def test_an_unanchored_comparative_is_refused() -> None:
-    with pytest.raises(ModelFileError, match="anchored"):
+    """No `comparative` block at all: a constraint label with nothing under it."""
+    with pytest.raises(ModelFileError, match="inference.comparative"):
+        validate_mapping(
+            file_with(
+                fixture=_comparative_feat(inference={"constraint": "COMPARATIVE"})
+            )
+        )
+
+
+def test_the_invented_constraint_type_spelling_is_not_the_exemption() -> None:
+    """A record the real feat validator rejects may not claim invariant 8's exception."""
+    with pytest.raises(ModelFileError, match="not part of that contract"):
         validate_mapping(
             file_with(
                 fixture={
                     "source": "[INT] synthetic fixture",
                     "constraint_type": "COMPARATIVE",
+                    "anchored_to_event": "ev.sports-festival.relay",
                     "subjects": ["actor.a", "actor.b"],
                 }
             )

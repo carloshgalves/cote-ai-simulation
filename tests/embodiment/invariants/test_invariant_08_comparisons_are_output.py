@@ -41,19 +41,90 @@ def test_invariant_08_non_character_placement_is_not_a_capacity_ordering() -> No
     assert_no_character_ordering({"school": {"placement": "Class D"}})
 
 
+#: The comparison `data/canon/schema/feat.schema.json` actually defines. The gate
+#: is tested against the contract canon will hold, not against a spelling the
+#: tests and the validator agreed on between themselves.
+CANONICAL_COMPARATIVE_FEAT = {
+    "id": "feat.sports-festival.relay",
+    "schema_version": 1,
+    "story_time": {"arc": "sports-festival"},
+    "actors": ["actor.a", "actor.b"],
+    "modality": "sprint",
+    "inference": {
+        "constraint": "COMPARATIVE",
+        "posterior_use": "BOUND",
+        "comparative": {
+            "by_whom": "actor.a",
+            "outperformed": ["actor.b"],
+            "same_event": True,
+        },
+    },
+}
+
+
 def test_invariant_08_an_anchored_comparative_is_the_one_admissible_form() -> None:
-    assert_no_character_ordering(
-        {
-            "feat_fixture": {
-                "constraint_type": "COMPARATIVE",
-                "anchored_to_event": "ev.sports-festival.relay",
-                "subjects": ["actor.a", "actor.b"],
-            }
-        }
-    )
-    with pytest.raises(ModelFileError, match="anchored"):
+    assert_no_character_ordering(CANONICAL_COMPARATIVE_FEAT)
+    assert_no_character_ordering({"feat_fixture": CANONICAL_COMPARATIVE_FEAT})
+
+
+def test_invariant_08_a_comparison_across_events_is_not_a_comparison() -> None:
+    """`same_event` is `const: true` in the schema; the gate must hold it there.
+
+    This is the shape that used to pass: a canonical record ordering two
+    characters in *different* events, which is a ranking with a constraint's name.
+    """
+    across = {
+        **CANONICAL_COMPARATIVE_FEAT,
+        "inference": {
+            "constraint": "COMPARATIVE",
+            "comparative": {
+                "by_whom": "actor.a",
+                "outperformed": ["actor.b"],
+                "same_event": False,
+            },
+        },
+    }
+    with pytest.raises(ModelFileError, match="same_event"):
+        assert_no_character_ordering(across)
+
+
+def test_invariant_08_a_truthy_stand_in_is_not_the_same_event_boolean() -> None:
+    truthy = {
+        **CANONICAL_COMPARATIVE_FEAT,
+        "inference": {
+            "constraint": "COMPARATIVE",
+            "comparative": {
+                "by_whom": "actor.a",
+                "outperformed": ["actor.b"],
+                "same_event": "yes",
+            },
+        },
+    }
+    with pytest.raises(ModelFileError, match="same_event"):
+        assert_no_character_ordering(truthy)
+
+
+@pytest.mark.parametrize("missing", ["id", "story_time", "actors"])
+def test_invariant_08_a_comparative_must_carry_its_event_anchor(missing: str) -> None:
+    feat = {key: value for key, value in CANONICAL_COMPARATIVE_FEAT.items() if key != missing}
+    with pytest.raises(ModelFileError):
+        assert_no_character_ordering(feat)
+
+
+def test_invariant_08_the_invented_spelling_no_longer_buys_the_exemption() -> None:
+    """`constraint_type`/`anchored_to_event` are not in the contract.
+
+    The old gate accepted `anchored_to_event: true`, which names no event at all.
+    """
+    with pytest.raises(ModelFileError, match="not part of that contract"):
         assert_no_character_ordering(
-            {"feat_fixture": {"constraint_type": "COMPARATIVE", "subjects": ["actor.a", "actor.b"]}}
+            {
+                "feat_fixture": {
+                    "constraint_type": "COMPARATIVE",
+                    "anchored_to_event": True,
+                    "subjects": ["actor.a", "actor.b"],
+                }
+            }
         )
 
 

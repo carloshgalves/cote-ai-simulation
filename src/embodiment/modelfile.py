@@ -14,10 +14,13 @@ each answering a failure the spec names:
 3. **No ordering of characters** (invariant 8, failure mode F4) — comparisons of
    capacity are an *output* of the simulation. A parameter file or fixture that
    ranks two characters is refused. The single admissible comparison is a
-   `COMPARATIVE` constraint anchored to one observed event, and it must carry
-   the anchor to be accepted. This rule holds for every committed record,
-   canon included, and `assert_no_character_ordering` is written to be applied
-   that widely.
+   `COMPARATIVE` constraint anchored to one observed event, in the shape
+   `data/canon/schema/feat.schema.json` defines — `inference.constraint`,
+   `inference.comparative.same_event`, and actors declared on the record. The
+   gate consumes that contract rather than a spelling of its own, so a record
+   the real feat validator would reject cannot be green here. This rule holds
+   for every committed record, canon included, and `assert_no_character_ordering`
+   is written to be applied that widely.
 4. **No named character in a *model* file** (failure mode F3) — a parameter file
    describes cohorts and mechanisms. A character named in one is either a
    hand-set attribute or an ordering. This rule is narrower than rule 3 on
@@ -78,6 +81,10 @@ _MARKING_RE = re.compile(r"^\[(MEASURED|TRANSCRIBED|EQUATED|DERIVED|INT)\]\s*\S"
 #: and both are refused.
 _CHARACTER_ID_RE = re.compile(r"^(actor|char|npc|student)\.[a-z0-9][a-z0-9._-]*$")
 
+#: `feat.schema.json` `properties.id.pattern`. The feat record *is* the observed
+#: event a COMPARATIVE constraint anchors to, so its id is the anchor.
+_FEAT_ID_RE = re.compile(r"^feat\.[a-z0-9.-]+$")
+
 #: Relational key names that assert one subject exceeds another. Other ranking
 #: fields are recognised by their component words so aliases such as
 #: `strength_order` and `ranked_by` cannot bypass the invariant.
@@ -88,6 +95,8 @@ _RELATIONAL_ORDERING_KEYS = frozenset(
         "superior_to",
         "beats",
         "outperforms",
+        #: The spelling `feat.schema.json` actually uses for the relation.
+        "outperformed",
         "better_than",
     }
 )
@@ -262,7 +271,13 @@ def _mappings(data: Mapping[str, Any]) -> Iterator[tuple[str, Mapping[str, Any],
     for path, node in _walk(data, ""):
         if not isinstance(node, Mapping):
             continue
-        inside = any(path == prefix or path.startswith(f"{prefix}.") for prefix in exempt_prefixes)
+        #: `prefix == ""` is the whole document: a feat record committed as its own
+        #: file is the root, and `"".startswith(".")` would leave its own subtree
+        #: unexempt while exempting only the root mapping.
+        inside = any(
+            prefix == "" or path == prefix or path.startswith(f"{prefix}.")
+            for prefix in exempt_prefixes
+        )
         if not inside and _is_anchored_comparative(node):
             exempt_prefixes.append(path)
             inside = True
@@ -270,14 +285,106 @@ def _mappings(data: Mapping[str, Any]) -> Iterator[tuple[str, Mapping[str, Any],
 
 
 def _is_anchored_comparative(node: Mapping[str, Any]) -> bool:
-    if node.get("constraint_type") != "COMPARATIVE":
-        return False
-    if not node.get("anchored_to_event"):
+    """Is this record the one admissible comparison, in the shape the schema defines?
+
+    The contract is `data/canon/schema/feat.schema.json`, not a spelling invented
+    here: a feat naming its `actors`, carrying `inference.constraint:
+    COMPARATIVE` and an `inference.comparative` block whose `same_event` is true.
+    Recognising anything else would leave the gate green on records the real
+    validator rejects, and red on the records canon will actually hold.
+
+    A record that opens the exception and then fails to satisfy it is an error,
+    not a non-match: `COMPARATIVE` is the only way past invariant 8, so a
+    malformed one is a ranking wearing the exemption's name.
+    """
+    if node.get("constraint_type") == "COMPARATIVE":
+        #: A spelling `feat.schema.json` does not define, and the schema is
+        #: `additionalProperties: false`. Refused rather than ignored: a record the
+        #: real validator would reject must not be able to claim the one exemption
+        #: invariant 8 grants, and silently not recognising it is how a ranking
+        #: gets in under a constraint's name.
         raise ModelFileError(
-            "a COMPARATIVE constraint must carry `anchored_to_event`: a comparison that is not "
-            "anchored to one observed event is a ranking (invariant 8)"
+            "a COMPARATIVE constraint is declared as `inference.constraint: COMPARATIVE` with an "
+            "`inference.comparative` block, per data/canon/schema/feat.schema.json. "
+            "`constraint_type` is not part of that contract, so this record is not the anchored "
+            "comparison invariant 8 admits."
         )
+
+    inference = node.get("inference")
+    if not isinstance(inference, Mapping):
+        return False
+    if inference.get("constraint") != "COMPARATIVE":
+        return False
+    _assert_comparative_contract(node, inference)
     return True
+
+
+def _assert_comparative_contract(node: Mapping[str, Any], inference: Mapping[str, Any]) -> None:
+    comparative = inference.get("comparative")
+    if not isinstance(comparative, Mapping):
+        raise ModelFileError(
+            "a COMPARATIVE constraint must carry `inference.comparative`, naming who "
+            "outperformed whom: the constraint alone is not anchored to anything (invariant 8)"
+        )
+
+    #: The schema pins this to `const: true` for a reason it states itself: "a
+    #: comparison across different conditions is not a comparison". `is not True`
+    #: rather than falsiness, so a truthy string cannot stand in for the boolean.
+    if comparative.get("same_event") is not True:
+        raise ModelFileError(
+            "a COMPARATIVE constraint must set `same_event: true`: a comparison anchored to "
+            "two different events compares conditions, not capacities (invariant 8)"
+        )
+
+    by_whom = comparative.get("by_whom")
+    outperformed = comparative.get("outperformed")
+    if not isinstance(by_whom, str) or not by_whom:
+        raise ModelFileError(
+            "a COMPARATIVE constraint must name `by_whom` as a single actor id (invariant 8)"
+        )
+    if (
+        not isinstance(outperformed, Sequence)
+        or isinstance(outperformed, (str, bytes))
+        or not outperformed
+        or not all(isinstance(item, str) and item for item in outperformed)
+    ):
+        raise ModelFileError(
+            "a COMPARATIVE constraint must list at least one actor id in `outperformed` "
+            "(invariant 8)"
+        )
+
+    actors = node.get("actors")
+    if (
+        not isinstance(actors, Sequence)
+        or isinstance(actors, (str, bytes))
+        or not actors
+    ):
+        raise ModelFileError(
+            "a COMPARATIVE feat must declare its `actors`: a comparison whose participants "
+            "are not on the record cannot be checked against the event (invariant 8)"
+        )
+    undeclared = sorted({by_whom, *outperformed} - set(actors))
+    if undeclared:
+        raise ModelFileError(
+            f"a COMPARATIVE constraint compares {undeclared}, who are not among the feat's "
+            f"declared `actors`: the comparison is not anchored to the event it claims "
+            f"(invariant 8)"
+        )
+
+    #: The anchor the contract provides is the feat record itself — its id and the
+    #: story time it happened at. A comparison with neither is a ranking with a
+    #: constraint label on it.
+    record_id = node.get("id")
+    if not isinstance(record_id, str) or not _FEAT_ID_RE.match(record_id):
+        raise ModelFileError(
+            "a COMPARATIVE constraint must be anchored to one observed event: the feat needs "
+            "an `id` of the form `feat.<slug>` (invariant 8)"
+        )
+    if not node.get("story_time"):
+        raise ModelFileError(
+            "a COMPARATIVE constraint must be anchored to one observed event: the feat needs "
+            "a `story_time` (invariant 8)"
+        )
 
 
 def _looks_like_ordering_key(key: Any) -> bool:

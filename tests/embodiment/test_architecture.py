@@ -159,7 +159,16 @@ def test_local_numpy_random_aliases_are_rejected(source: str) -> None:
 
 
 def capacity_baseline_writer_violations(path: Path, tree: ast.Module) -> list[str]:
-    """Find every construction path for the frozen baseline record."""
+    """Find every construction path for the frozen baseline record.
+
+    The `model_copy(update=...)` branch resolves its **receiver** before flagging
+    it. `model_copy` is ordinary Pydantic on every other model — `BodyState`
+    transitions in PSV1-2 are exactly that — and a guard that bans the method name
+    outright bans a legal operation the spec never restricted, which is how a
+    guard gets deleted rather than tightened. What F3/F5 forbid is a second writer
+    of `capacity_baseline`, and `CapacityBaselineRecord.model_copy` refuses
+    `update` at runtime regardless of what this static pass can see.
+    """
     record_aliases = {"CapacityBaselineRecord"}
     violations: list[str] = []
     pydantic_constructors = {"model_construct", "model_validate", "model_validate_json"}
@@ -177,6 +186,59 @@ def capacity_baseline_writer_violations(path: Path, tree: ast.Module) -> list[st
             or isinstance(node, ast.Attribute)
             and node.attr == "CapacityBaselineRecord"
         )
+
+    def annotation_names_record(annotation: ast.expr | None) -> bool:
+        """Does this annotation mention the record? `X | None` and strings included."""
+        if annotation is None:
+            return False
+        if isinstance(annotation, ast.Constant) and isinstance(annotation.value, str):
+            try:
+                annotation = ast.parse(annotation.value, mode="eval").body
+            except SyntaxError:  # pragma: no cover - not a type expression
+                return False
+        if is_record_reference(annotation):
+            return True
+        if isinstance(annotation, ast.BinOp):
+            return annotation_names_record(annotation.left) or annotation_names_record(
+                annotation.right
+            )
+        if isinstance(annotation, ast.Subscript):
+            return annotation_names_record(annotation.slice)
+        if isinstance(annotation, ast.Tuple):
+            return any(annotation_names_record(element) for element in annotation.elts)
+        return False
+
+    #: Names this module has bound to a baseline record — by annotation, or by
+    #: assignment from a constructor call. A receiver outside this set is some
+    #: other model, and copying it is not a write of `capacity_baseline`.
+    baseline_names: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.arg) and annotation_names_record(node.annotation):
+            baseline_names.add(node.arg)
+        elif isinstance(node, ast.AnnAssign) and annotation_names_record(node.annotation):
+            if isinstance(node.target, ast.Name):
+                baseline_names.add(node.target.id)
+        elif isinstance(node, ast.Assign) and isinstance(node.value, ast.Call):
+            called = node.value.func
+            constructs = is_record_reference(called) or (
+                isinstance(called, ast.Attribute)
+                and called.attr in pydantic_constructors
+                and is_record_reference(called.value)
+            )
+            if constructs:
+                for target in node.targets:
+                    if isinstance(target, ast.Name):
+                        baseline_names.add(target.id)
+
+    def is_baseline_receiver(node: ast.expr) -> bool:
+        if isinstance(node, ast.Name):
+            return node.id in baseline_names
+        if isinstance(node, ast.Attribute):
+            #: `self.capacity_baseline.model_copy(...)` names the field outright.
+            return node.attr == "capacity_baseline" or is_record_reference(node)
+        if isinstance(node, ast.Call):
+            return is_record_reference(node.func)
+        return False
 
     for node in ast.walk(tree):
         if isinstance(node, ast.Call):
@@ -198,6 +260,7 @@ def capacity_baseline_writer_violations(path: Path, tree: ast.Module) -> list[st
                 isinstance(node.func, ast.Attribute)
                 and node.func.attr == "model_copy"
                 and any(keyword.arg == "update" for keyword in node.keywords)
+                and is_baseline_receiver(node.func.value)
             ):
                 violations.append(
                     f"{path.name}:{node.lineno} updates a frozen model through model_copy "
@@ -237,12 +300,52 @@ def test_f3_only_seeding_writes_a_capacity_baseline(package_sources) -> None:
             "from embodiment.types import CapacityBaselineRecord\n"
             "CapacityBaselineRecord.model_validate({})\n"
         ),
-        "def forge(record):\n    return record.model_copy(update={'posterior_hash': 'x'})\n",
+        (
+            "from embodiment.types import CapacityBaselineRecord\n"
+            "def forge(record: CapacityBaselineRecord):\n"
+            "    return record.model_copy(update={'posterior_hash': 'x'})\n"
+        ),
+        (
+            "from embodiment.types import CapacityBaselineRecord\n"
+            "def forge(record: CapacityBaselineRecord | None):\n"
+            "    return record.model_copy(update={'posterior_hash': 'x'})\n"
+        ),
+        (
+            "from embodiment.types import CapacityBaselineRecord\n"
+            "def forge(store):\n"
+            "    record = CapacityBaselineRecord.model_validate({})\n"
+            "    return record.model_copy(update={'posterior_hash': 'x'})\n"
+        ),
+        "def forge(state):\n    return state.capacity_baseline.model_copy(update={'x': 1})\n",
     ],
 )
 def test_f3_writer_guard_resolves_aliases_and_alternative_constructors(source: str) -> None:
     violations = capacity_baseline_writer_violations(Path("consumer.py"), ast.parse(source))
     assert violations
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        # PSV1-2's own shape: a pure transition on a different frozen model.
+        "def update_unrelated(state):\n    return state.model_copy(update={'fatigue': 0.5})\n",
+        (
+            "from embodiment.types import BodyState\n"
+            "def rest(body: BodyState) -> BodyState:\n"
+            "    return body.model_copy(update={'fatigue': 0.0})\n"
+        ),
+        "def bump(self):\n    self.body_state = self.body_state.model_copy(update={'t': 1})\n",
+    ],
+)
+def test_f3_writer_guard_leaves_other_models_alone(source: str) -> None:
+    """`model_copy` on a model that is not the baseline is not a second writer.
+
+    The runtime guard on `CapacityBaselineRecord.model_copy` still refuses
+    `update` for the real type; this pass only decides what the architecture test
+    is allowed to forbid statically.
+    """
+    violations = capacity_baseline_writer_violations(Path("dynamics.py"), ast.parse(source))
+    assert not violations, violations
 
 
 # --------------------------------------------------------------------------

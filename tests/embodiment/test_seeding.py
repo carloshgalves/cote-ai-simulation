@@ -15,6 +15,9 @@ from embodiment.prior import PopulationPrior
 from embodiment.seeding import (
     AlreadySeededError,
     CapacityBaselineStore,
+    CohortCovariates,
+    UnknownCovariateSubjectError,
+    capacity_sampled_payload,
     cohort_ids,
     posterior_for,
     seed_character,
@@ -131,3 +134,64 @@ def test_cohort_ids_are_stable_and_ordered() -> None:
     assert cohort_ids(3) == ("npc.0001", "npc.0002", "npc.0003")
     assert cohort_ids(3, start=2) == ("npc.0002", "npc.0003", "npc.0004")
     assert cohort_ids(0) == ()
+
+
+# --------------------------------------------------------------------------
+# Explicit cohort composition — ADR 0006 decision 4 and the `[INT]` sex ratio
+# `population-prior.yaml` asks a specific class to override.
+# --------------------------------------------------------------------------
+
+def test_a_cohort_states_its_composition_instead_of_drawing_it(prior: PopulationPrior) -> None:
+    ids = cohort_ids(4)
+    composition = {
+        "npc.0001": CohortCovariates(sex="female"),
+        "npc.0002": CohortCovariates(sex="female"),
+        "npc.0003": CohortCovariates(sex="male"),
+    }
+    store = seed_cohort(7, ids, prior, covariates=composition)
+    posteriors = {
+        character_id: posterior_for(7, character_id, prior, covariates=composition.get(character_id))
+        for character_id in ids
+    }
+    assert [posteriors[i].sex for i in ids[:3]] == ["female", "female", "male"]
+    assert [posteriors[i].sex_source for i in ids[:3]] == ["KNOWN"] * 3
+    # The fourth is not in the composition, so it is still drawn.
+    assert posteriors["npc.0004"].sex_source == "DRAWN"
+    assert len(store) == 4
+
+
+def test_a_composition_naming_an_outsider_is_refused_not_ignored(prior: PopulationPrior) -> None:
+    """Same rule as constraints: silently dropping an input forges provenance."""
+    with pytest.raises(UnknownCovariateSubjectError, match="outside the cohort"):
+        seed_cohort(7, cohort_ids(2), prior, covariates={"npc.9999": CohortCovariates(sex="male")})
+
+
+def test_a_known_covariate_moves_nobody_elses_draw(prior: PopulationPrior) -> None:
+    """P5: conditioning one character leaves every other body byte-identical.
+
+    The `cohort.sex` substream of the conditioned character is simply not
+    consumed; because substreams are named and not sequential, skipping a draw
+    cannot shift anyone downstream.
+    """
+    ids = cohort_ids(6)
+    baseline = seed_cohort(11, ids, prior)
+    conditioned = seed_cohort(11, ids, prior, covariates={"npc.0003": CohortCovariates(sex="male")})
+    for character_id in ids:
+        if character_id == "npc.0003":
+            continue
+        assert conditioned.get(character_id) == baseline.get(character_id)
+
+
+def test_the_log_says_whether_the_sex_was_sourced_or_drawn(prior: PopulationPrior) -> None:
+    """The audit artefact must not present an `[INT]` assumption as a canon fact."""
+    drawn = seed_character(42, "npc.0001", prior)
+    drawn_payload = capacity_sampled_payload(drawn, posterior_for(42, "npc.0001", prior))
+    assert drawn_payload["sex_source"] == "DRAWN"
+
+    covariates = CohortCovariates(sex="male")
+    stated = seed_character(42, "npc.0002", prior, covariates=covariates)
+    stated_payload = capacity_sampled_payload(
+        stated, posterior_for(42, "npc.0002", prior, covariates=covariates)
+    )
+    assert stated_payload["sex_source"] == "KNOWN"
+    assert stated_payload["sex"] == "male"

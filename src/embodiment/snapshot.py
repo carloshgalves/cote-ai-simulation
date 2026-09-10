@@ -75,6 +75,10 @@ def build_snapshot(
                     # capacity dimension: without it the percentile *view* of
                     # this body cannot be recomputed from the snapshot alone.
                     "cohort_sex": posterior.sex,
+                    # Whether canon fixed that covariate or the cohort ratio
+                    # drew it. Without it the snapshot cannot distinguish a
+                    # sourced fact from an `[INT]` assumption of the prior file.
+                    "cohort_sex_source": posterior.sex_source,
                     "substream": record.substream,
                 },
                 "evidence_sufficiency": {

@@ -24,7 +24,7 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Iterable, Mapping, Sequence
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, field_validator
 
@@ -40,9 +40,13 @@ from .rng import (
 from .types import CapacityBaselineRecord, Dimension, Y1_START, freeze_mapping
 
 __all__ = [
+    "CohortCovariates",
+    "NO_COVARIATES",
+    "SexSource",
     "Posterior",
     "CapacityBaselineStore",
     "AlreadySeededError",
+    "UnknownCovariateSubjectError",
     "posterior_for",
     "seed_character",
     "seed_cohort",
@@ -50,8 +54,47 @@ __all__ = [
 ]
 
 
+#: Where a character's sex came from. `KNOWN` is canon establishing it; `DRAWN`
+#: is the cohort ratio standing in for a source that does not say.
+SexSource = Literal["KNOWN", "DRAWN"]
+
+
 class AlreadySeededError(RuntimeError):
     """A body is sampled once. A second sample would be a different character."""
+
+
+class UnknownCovariateSubjectError(KeyError):
+    """Covariates were supplied for a character the cohort does not contain."""
+
+
+class CohortCovariates(BaseModel):
+    """What canon already fixes about a character, before any feat is weighed.
+
+    ADR 0006 decision 4 does not say "draw everything": absence of evidence draws
+    from a cohort *conditioned on what canon states* — year, sex, club or the lack
+    of one, build. `population-prior.yaml` says the same of the sex ratio it
+    carries, in as many words: the split is an `[INT]` assumption, and "a cohort
+    seeded for a specific class should pass its composition in explicitly". A
+    covariate the source establishes is not an unknown, and drawing it anyway
+    writes world truth that contradicts the canon it claims to model.
+
+    This is not a second door for a hand-set attribute (F3). The model forbids
+    unknown fields, and a covariate is by construction *not* a capacity: no value,
+    bound or percentile in any of the 15 dimensions may be named here. What a feat
+    constrains arrives as a typed constraint through the estimator (PSV1-3), never
+    as a covariate.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    #: `None` means canon does not establish it, which is the ordinary case for an
+    #: anonymous cohort member and the reason the draw exists at all.
+    sex: Sex | None = None
+
+
+#: The covariates of a character canon says nothing about. Shared rather than
+#: rebuilt so that "no covariates" is one object with one meaning.
+NO_COVARIATES = CohortCovariates()
 
 
 class Posterior(BaseModel):
@@ -68,6 +111,12 @@ class Posterior(BaseModel):
 
     character_id: str
     sex: Sex
+    #: Whether `sex` came from canon or from the cohort ratio. It is provenance,
+    #: not identity: conditioning on a known male and drawing a male produce the
+    #: *same* distribution, so `posterior_hash` is deliberately equal for the two.
+    #: Which of them happened still has to survive into the log and the snapshot,
+    #: or a reader cannot tell a modelled covariate from a sourced one.
+    sex_source: SexSource
     prior_version: str
     prior_content_hash: str
     constraint_count: int
@@ -133,6 +182,7 @@ def posterior_for(
     character_id: str,
     prior: PopulationPrior,
     constraints: Sequence[Any] = (),
+    covariates: CohortCovariates | None = None,
 ) -> Posterior:
     """The distribution a character's body is drawn from.
 
@@ -141,6 +191,12 @@ def posterior_for(
     `evidence_sufficiency`. Until then, constraints are refused rather than
     ignored — silently dropping evidence would make a posterior that claims to
     have seen it.
+
+    `covariates` is the other half of ADR 0006 decision 4, and it is not the same
+    door: a constraint is evidence about a *capacity* and needs the estimator to
+    be weighed, while a covariate is a cohort fact canon already fixes and only
+    ever selects which marginals the copula reads. Drawing a covariate the source
+    states would be inventing world truth, so it is conditioned on, not sampled.
     """
     if constraints:
         raise NotImplementedError(
@@ -150,7 +206,18 @@ def posterior_for(
             "that weighed it and found it uninformative."
         )
 
-    sex = prior.draw_sex(substream(world_seed, character_id, SEEDING_EVENT_ID, PURPOSE_COHORT_SEX))
+    covariates = NO_COVARIATES if covariates is None else covariates
+    if covariates.sex is not None:
+        #: The substream for `cohort.sex` is simply not consumed. Nothing else
+        #: moves: `capacity.sample` is named from the character id, so a known
+        #: covariate changes this character's marginals and nobody else's draw.
+        sex: Sex = covariates.sex
+        sex_source: SexSource = "KNOWN"
+    else:
+        sex = prior.draw_sex(
+            substream(world_seed, character_id, SEEDING_EVENT_ID, PURPOSE_COHORT_SEX)
+        )
+        sex_source = "DRAWN"
     #: Zero evidence: sd(posterior) == sd(prior), so 1 - sd(posterior)/sd(prior)
     #: is exactly 0 in every dimension (physical-model.md §5.6).
     sufficiency = {dimension: 0.0 for dimension in Dimension}
@@ -167,6 +234,7 @@ def posterior_for(
     return Posterior(
         character_id=character_id,
         sex=sex,
+        sex_source=sex_source,
         prior_version=prior.version,
         prior_content_hash=prior.content_hash,
         constraint_count=0,
@@ -182,6 +250,7 @@ def seed_character(
     prior: PopulationPrior,
     *,
     constraints: Sequence[Any] = (),
+    covariates: CohortCovariates | None = None,
     store: CapacityBaselineStore | None = None,
     log: EventLog | None = None,
 ) -> CapacityBaselineRecord:
@@ -190,7 +259,7 @@ def seed_character(
         raise AlreadySeededError(
             f"{character_id} already has a capacity_baseline in this run (failure mode F5)"
         )
-    posterior = posterior_for(world_seed, character_id, prior, constraints)
+    posterior = posterior_for(world_seed, character_id, prior, constraints, covariates)
     name = substream_name(character_id, SEEDING_EVENT_ID, PURPOSE_CAPACITY_SAMPLE)
     generator = substream(world_seed, character_id, SEEDING_EVENT_ID, PURPOSE_CAPACITY_SAMPLE)
     profile = prior.sample_profile(generator, posterior.sex)
@@ -226,6 +295,7 @@ def capacity_sampled_payload(record: CapacityBaselineRecord, posterior: Posterio
         "posterior_kind": "PRIOR_ZERO_EVIDENCE" if posterior.constraint_count == 0 else "POSTERIOR",
         "substream": record.substream,
         "sex": posterior.sex,
+        "sex_source": posterior.sex_source,
         "constraint_count": posterior.constraint_count,
         "estimator_ess": posterior.effective_sample_size,
         "evidence_sufficiency": {
@@ -244,11 +314,36 @@ def seed_cohort(
     character_ids: Sequence[str],
     prior: PopulationPrior,
     *,
+    covariates: Mapping[str, CohortCovariates] | None = None,
     store: CapacityBaselineStore | None = None,
     log: EventLog | None = None,
 ) -> CapacityBaselineStore:
-    """Seed a whole cohort. Order of iteration changes nothing but the log order."""
+    """Seed a whole cohort. Order of iteration changes nothing but the log order.
+
+    `covariates` is the explicit-composition path `population-prior.yaml` asks
+    for: the file's sex ratio is an `[INT]` equal split, and a cohort standing in
+    for a specific class states its composition here instead of letting that
+    assumption decide it. A character the cohort does not contain is an error
+    rather than a no-op, for the same reason `posterior_for` refuses constraints
+    it cannot consume: silently dropping a stated composition is indistinguishable
+    from having honoured it.
+    """
     store = store if store is not None else CapacityBaselineStore()
+    covariates = {} if covariates is None else dict(covariates)
+    unknown = sorted(set(covariates) - set(character_ids))
+    if unknown:
+        raise UnknownCovariateSubjectError(
+            f"covariates supplied for characters outside the cohort: {unknown}. "
+            f"A composition that names nobody in the cohort was not applied, and a "
+            f"seeding that ignored it would look identical to one that used it."
+        )
     for character_id in character_ids:
-        seed_character(world_seed, character_id, prior, store=store, log=log)
+        seed_character(
+            world_seed,
+            character_id,
+            prior,
+            covariates=covariates.get(character_id),
+            store=store,
+            log=log,
+        )
     return store

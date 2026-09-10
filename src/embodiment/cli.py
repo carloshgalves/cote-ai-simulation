@@ -351,8 +351,17 @@ def advance_clock_command(
             "PSV1-8, so advancing the immutable seed snapshot again would fork its history"
         )
 
+    #: The environment the report is read in, held fixed on both sides. The body
+    #: is advanced through this ambient WBGT, so reading capability in a neutral
+    #: environment would print what this body could do somewhere it is not; and
+    #: reading the two sides in different environments would fold "moved into the
+    #: heat" into a number that is supposed to show what the passage of time did.
+    ambient = Environment(wbgt_c=wbgt_c)
+
     before = body
-    capability_before = capability_available(profile, body, traits=traits, params=params)
+    capability_before = capability_available(
+        profile, body, environment=ambient, traits=traits, params=params
+    )
     advances: list[dict[str, object]] = []
 
     if segments:
@@ -387,12 +396,15 @@ def advance_clock_command(
                 advances.append(record)
                 body = moved
 
-    capability_after = capability_available(profile, body, traits=traits, params=params)
+    capability_after = capability_available(
+        profile, body, environment=ambient, traits=traits, params=params
+    )
     return {
         "character_id": character_id,
         "days": days,
         "sleep_hours": sleep_hours,
         "quality": quality.value,
+        "wbgt_c": wbgt_c,
         "advances": advances,
         "hours_advanced": body.t_hours - before.t_hours,
         "before": before,
@@ -438,7 +450,10 @@ def print_advance(result: Mapping[str, object]) -> None:
             label = f"{channel}.{key}" if key else channel
             print(f"  {label:<42} {_cell(old)} {_cell(new)}")
 
-    print("\ncapability_available                           start            end")
+    print(
+        f"\ncapability_available at WBGT {result['wbgt_c']:.1f} C"
+        f"{'start':>21}{'end':>15}"
+    )
     capability_before: Mapping[Dimension, float] = result["capability_before"]  # type: ignore[assignment]
     capability_after: Mapping[Dimension, float] = result["capability_after"]  # type: ignore[assignment]
     for dimension in Dimension:

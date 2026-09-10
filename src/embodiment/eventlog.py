@@ -33,6 +33,7 @@ __all__ = [
     "normalised_digest",
     "body_has_advanced",
     "logical_sim_time",
+    "SIM_TIME_OFFSET_DIGITS",
 ]
 
 EVENT_RUN_STARTED = "run.started"
@@ -192,14 +193,36 @@ def body_has_advanced(path: str | Path, character_id: str) -> bool:
     return False
 
 
+#: Digits the rendered offset is padded to. Fixed width is the whole point: an
+#: unpadded offset reads as ordered and is not — `Y1_START+100h` sorts before
+#: `Y1_START+20h` — and a consumer comparing timestamps then gets a plausible
+#: wrong chronology instead of an error. Five integer digits carry about eleven
+#: years of simulation and three decimals resolve 3.6 s, well under the
+#: quarter-hour integration step. Full precision stays in the payload's
+#: `t_hours_before`/`t_hours_after`; this is the ordering key, not the measurement.
+SIM_TIME_OFFSET_DIGITS = 5
+SIM_TIME_OFFSET_DECIMALS = 3
+_MAX_SIM_TIME_OFFSET_H = float(10**SIM_TIME_OFFSET_DIGITS)
+
+
 def logical_sim_time(origin: str, offset_hours: float) -> str:
-    """Render the additive body clock as a stable event-log instant."""
+    """Render the additive body clock as an instant that orders as written.
+
+    The bare `origin` is returned at offset zero, and it is a prefix of every
+    other rendering, so an instant at the origin still sorts before every later
+    one.
+    """
     if offset_hours < 0.0:
         raise ValueError("logical time cannot precede its origin")
     if offset_hours == 0.0:
         return origin
-    rendered = f"{offset_hours:.9f}".rstrip("0").rstrip(".")
-    return f"{origin}+{rendered}h"
+    if offset_hours >= _MAX_SIM_TIME_OFFSET_H:
+        raise ValueError(
+            f"an offset of {offset_hours} h does not fit in {SIM_TIME_OFFSET_DIGITS} digits; "
+            "widen the rendering rather than emitting an instant that no longer orders"
+        )
+    width = SIM_TIME_OFFSET_DIGITS + SIM_TIME_OFFSET_DECIMALS + 1
+    return f"{origin}+{offset_hours:0{width}.{SIM_TIME_OFFSET_DECIMALS}f}h"
 
 
 def _assert_same_run(path: Path, opening: Mapping[str, object], metadata: RunMetadata) -> None:

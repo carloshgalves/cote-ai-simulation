@@ -466,6 +466,18 @@ channels:
         clearance. DOMS that shows up during the effort or at 6 h is failure
         mode F11; the explicit gate prevents that causal impossibility.
       onset_delay_h: 12.0
+      onset_resolution_h:
+        source: >
+          [INT] The grid the onset gate releases on. Damage admitted during a
+          step is held until the first grid instant at or after its own 12 h
+          delay, so the queue holds at most `onset_delay_h / onset_resolution_h`
+          entries per region however small `integration.step_hours` is. Without
+          it the number of entries in persisted world truth — and therefore the
+          snapshot hash — would be an artefact of the integration step rather
+          than of the body. Rounding is always UP, so the measured 12 h floor
+          stays a floor; the coarsening it costs is at most one hour inside a
+          12-24 h onset window that then passes through an 11 h latency chain.
+        value: 1.0
       latency_stages: 3
       latency_tau_h: 11.0
       resolution_tau_h: 42.0
@@ -614,10 +626,26 @@ degradation:
 
   unmodulated_dimensions:
     source: >
-      [INT] Dimensions that state does not degrade, because they are constitutional
-      traits that GOVERN the dynamics rather than performances the dynamics wear
-      down: how fast this body recovers, how much heat it tolerates, how robust it
-      is, how much pain it takes, and its own size. Fatigue does not make a body
-      shorter. Listing them keeps the composition total: every dimension is either
-      degraded by named channels or named here.
+      [INT] Dimensions no state channel degrades. Listing them keeps the
+      composition total: every dimension is either degraded by a named channel
+      above or named here. They are on this list for TWO different reasons, and
+      collapsing the two would hide the second one.
+
+      (a) CONSTITUTIONAL TRAITS — body_mass, stature, injury_resilience,
+      recovery_rate, thermoregulation, pain_tolerance. These GOVERN the dynamics
+      rather than being performances the dynamics wear down; recovery_rate and
+      thermoregulation are read by the channels themselves. Fatigue does not make
+      a body shorter.
+
+      (b) NO SOURCED SENSITIVITY — flexibility. This one is NOT a trait: it is a
+      performance with a battery item and a unit (長座体前屈, cm,
+      physical-model.md §4), and a fatigued or cold body really does score worse
+      on it. It is exempt because nothing in docs/research/physical-domain-v1.md
+      §4 gives a per-channel effect size for range of motion — the sleep
+      meta-analysis measured five categories and flexibility is none of them, and
+      the DOMS evidence is concentric power. Writing a number here anyway would be
+      inventing a parameter (F3), which is worse than a declared blank. So it sits
+      at baseline under every state channel, it is still reachable by
+      Injury.impairments, and moving it off this list means arriving with a
+      source, not with a plausible coefficient.
     dimensions: [body_mass, stature, flexibility, injury_resilience, recovery_rate, thermoregulation, pain_tolerance]

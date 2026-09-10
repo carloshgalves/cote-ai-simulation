@@ -15,13 +15,15 @@ from pathlib import Path
 
 import pytest
 
-from embodiment.cli import main
+from embodiment.capability import capability_available
+from embodiment.cli import advance_clock_command, main
+from embodiment.dynamics import BodyTraits, Environment
 from embodiment.eventlog import (
     EVENT_COHORT_CORRELATION_REPORT,
     EVENT_RUN_STARTED,
     normalised_bytes,
 )
-from embodiment.snapshot import read_snapshot
+from embodiment.snapshot import capacity_profile_of, read_snapshot
 from embodiment.types import Dimension
 
 
@@ -250,12 +252,12 @@ def test_body_advanced_events_carry_the_logical_instant_the_body_reached(tmp_pat
     advances = [record for record in events(out) if record["event"] == "body.advanced"]
 
     assert [record["sim_time"] for record in advances] == [
-        "Y1_START+20h",
-        "Y1_START+24h",
-        "Y1_START+44h",
-        "Y1_START+48h",
-        "Y1_START+68h",
-        "Y1_START+72h",
+        "Y1_START+00020.000h",
+        "Y1_START+00024.000h",
+        "Y1_START+00044.000h",
+        "Y1_START+00048.000h",
+        "Y1_START+00068.000h",
+        "Y1_START+00072.000h",
     ]
     assert [record["payload"]["t_hours_after"] for record in advances] == [
         20.0,
@@ -265,6 +267,76 @@ def test_body_advanced_events_carry_the_logical_instant_the_body_reached(tmp_pat
         68.0,
         72.0,
     ]
+
+
+def test_event_instants_order_as_written_past_a_hundred_hours(tmp_path: Path) -> None:
+    """The property, not six literals: sorting the log by `sim_time` is the log.
+
+    An unpadded offset reads as ordered and is not — `Y1_START+100h` sorts before
+    `Y1_START+20h` — and the ticket's own exam week already runs past 100 h. A
+    consumer that compares timestamps has to get a wrong answer loudly or not at
+    all, so this asserts the whole log's order rather than one run's spelling.
+    """
+    out = run(tmp_path / "demo")
+    assert advance(out, character="npc.0001", days=9) == 0
+    records = events(out)
+
+    instants = [record["sim_time"] for record in records]
+    assert instants == sorted(instants), instants
+    assert any(record["payload"].get("t_hours_after", 0.0) > 100.0 for record in records)
+
+    advances = [record for record in records if record["event"] == "body.advanced"]
+    for record in advances:
+        rendered = f"Y1_START+{record['payload']['t_hours_after']:09.3f}h"
+        assert record["sim_time"] == rendered
+
+
+def test_capability_is_reported_in_the_environment_the_body_was_advanced_through(
+    tmp_path: Path,
+) -> None:
+    """`--wbgt` has to reach the number the ticket asks the command to print.
+
+    Reading capability in a neutral environment while the body is advanced through
+    a hot one prints what this body could do somewhere it is not. Both sides are
+    read in the run's own ambient WBGT, so the reported change is what the passage
+    of time did and not what walking into the sun did.
+    """
+    neutral = advance_clock_command(
+        run_dir=run(tmp_path / "cool"), character_id="npc.0001", days=1, wbgt_c=21.0
+    )
+    hot = advance_clock_command(
+        run_dir=run(tmp_path / "hot"), character_id="npc.0001", days=1, wbgt_c=34.0
+    )
+
+    for dimension in (Dimension.AEROBIC_CAPACITY, Dimension.MAX_STRENGTH, Dimension.COORDINATION):
+        assert hot["capability_after"][dimension] < neutral["capability_after"][dimension], dimension
+        assert hot["capability_before"][dimension] < neutral["capability_before"][dimension], dimension
+    #: Milliseconds: the heat makes this one bigger, not smaller.
+    assert (
+        hot["capability_after"][Dimension.REACTION_TIME]
+        > neutral["capability_after"][Dimension.REACTION_TIME]
+    )
+    #: A trait the dynamics govern rather than wear down is the same in both.
+    assert (
+        hot["capability_after"][Dimension.STATURE]
+        == neutral["capability_after"][Dimension.STATURE]
+    )
+
+
+def test_the_reported_capability_is_the_one_the_composition_computes(tmp_path: Path) -> None:
+    """No second composition: the command reports what `capability.py` returns."""
+    out = run(tmp_path / "demo")
+    result = advance_clock_command(run_dir=out, character_id="npc.0001", days=1, wbgt_c=34.0)
+    section = read_snapshot(out / "snapshot.yaml")["characters"]["npc.0001"]
+    profile = capacity_profile_of(section)
+
+    expected = capability_available(
+        profile,
+        result["after"],
+        environment=Environment(wbgt_c=34.0),
+        traits=BodyTraits.from_profile(profile),
+    )
+    assert dict(result["capability_after"]) == pytest.approx(dict(expected))
 
 
 def test_a_character_outside_the_run_is_named_rather_than_guessed(tmp_path: Path) -> None:

@@ -18,6 +18,11 @@ Two rules the composition has to keep straight:
   recovery rate, thermoregulation and pain tolerance are not degraded by state:
   they are what *governs* the dynamics. Fatigue does not make a body shorter.
   They are named in the parameter file, so the composition stays total.
+* **One dimension is exempt for a different reason.** `flexibility` *is* a
+  performance — it has a battery item and a unit — and it sits in
+  `unmodulated_dimensions` only because no channel in this model has a sourced
+  effect size for range of motion. It is a declared blank, not a claim that
+  a tired body stretches as far, and the parameter file says so at the list.
 
 **Nothing here reaches an agent.** These are `BodyState` numbers by another
 name, and spec §7.1 keeps them inside the engine: what a character gets is the
@@ -155,7 +160,10 @@ def channel_losses(
     for channel, per_dimension in losses.items():
         for dimension in tuple(per_dimension):
             if dimension in degradation.unmodulated_dimensions:
-                #: A trait that governs the dynamics is not worn down by them.
+                #: Named in `unmodulated_dimensions`: a trait that governs the
+                #: dynamics rather than being worn down by them, or the one
+                #: performance with no sourced sensitivity. The parameter file
+                #: says which of the two each dimension is.
                 del per_dimension[dimension]
             else:
                 per_dimension[dimension] = max(0.0, min(1.0, per_dimension[dimension]))

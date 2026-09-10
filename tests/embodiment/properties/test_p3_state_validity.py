@@ -68,6 +68,18 @@ def assert_valid(state: BodyState) -> None:
     assert all(0.0 <= value <= 1.0 for value in state.pain.by_region.values())
     for region in state.soreness.by_region.values():
         assert 0.0 <= region.expressed <= 1.0
+        #: The onset queue is world truth too, and the one field whose *length*
+        #: could drift with a numerical setting rather than with the body.
+        instants = [entry.release_at_h for entry in region.pending_onset]
+        assert instants == sorted(instants) and len(set(instants)) == len(instants)
+        assert all(entry.amount > 0.0 for entry in region.pending_onset)
+        assert all(instant > state.t_hours for instant in instants), (
+            "damage past its release instant is damage the channel forgot to release"
+        )
+        assert len(instants) <= int(
+            PARAMS.channels.soreness.kernel.onset_delay_h
+            / PARAMS.channels.soreness.kernel.onset_resolution_h
+        ) + 1
         assert all(stage >= 0.0 for stage in region.latency)
     for adaptation in state.soreness.repeated_bout_adaptation.values():
         assert 0.0 <= adaptation <= 1.0

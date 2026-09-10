@@ -264,6 +264,7 @@ class ThermalParams(_Block):
 
 class _SorenessKernel(_Block):
     onset_delay_h: float
+    onset_resolution_h: Scalar
     latency_stages: int
     latency_tau_h: float
     resolution_tau_h: float
@@ -631,6 +632,18 @@ class Exposure(BaseModel):
 
 def _clamp(value: float, low: float, high: float) -> float:
     return low if value < low else high if value > high else value
+
+
+def _onset_instant(release_at_h: float, resolution_h: float) -> float:
+    """The onset-grid instant at or after `release_at_h`.
+
+    Always rounded **up**, so quantising the release cannot bring damage forward:
+    the measured 12 h onset stays a floor rather than becoming an average, and
+    failure mode F11 keeps the same guarantee it had before the grid existed.
+    """
+    if resolution_h <= 0.0:
+        return round(release_at_h, 9)
+    return round(math.ceil(release_at_h / resolution_h - 1e-9) * resolution_h, 9)
 
 
 def _decay(dt_hours: float, tau_hours: float) -> float:
@@ -1040,24 +1053,35 @@ def advance_soreness(state: BodyState, dt_hours: float, exposure: Exposure) -> B
         )
         key = f"{region.value}|{load.activity}"
         adapted = float(adaptation.get(key, 0.0))
-        pending = list(current.pending_onset)
         interval_end_h = state.t_hours + dt_hours
-        due = sum(item.amount for item in pending if item.release_at_h <= interval_end_h + 1e-9)
-        pending = [item for item in pending if item.release_at_h > interval_end_h + 1e-9]
+        due = 0.0
+        #: Held damage keyed by the instant it is released on. Keying rather than
+        #: appending is what keeps this queue a function of the onset window and
+        #: not of `integration.step_hours`: a step half the size admits the same
+        #: damage into the same bucket instead of into a second entry.
+        held: dict[float, float] = {}
+        for item in current.pending_onset:
+            if item.release_at_h <= interval_end_h + 1e-9:
+                due += item.amount
+            else:
+                held[item.release_at_h] = held.get(item.release_at_h, 0.0) + item.amount
 
         if dose > 0.0:
             admitted_dose = dose * (1.0 - channel.repeated_bout.max_damage_reduction * adapted)
-            pending.append(
-                SorenessOnset(
-                    release_at_h=interval_end_h + kernel.onset_delay_h,
-                    amount=admitted_dose,
-                )
+            release_at_h = _onset_instant(
+                interval_end_h + kernel.onset_delay_h, kernel.onset_resolution_h
             )
+            held[release_at_h] = held.get(release_at_h, 0.0) + admitted_dose
             adaptation[key] = _clamp(
                 adapted + (1.0 - adapted) * channel.repeated_bout.gain_per_unit_dose * dose,
                 0.0,
                 1.0,
             )
+        pending = tuple(
+            SorenessOnset(release_at_h=instant, amount=amount)
+            for instant, amount in sorted(held.items())
+            if amount > 0.0
+        )
 
         #: Flow every stage from the values present at the *start* of the step.
         #: In-place flow would let one dose traverse the entire latency chain in
@@ -1077,7 +1101,7 @@ def advance_soreness(state: BodyState, dt_hours: float, exposure: Exposure) -> B
             current.expressed * _decay(dt_hours, kernel.resolution_tau_h) + transferred, 0.0, 1.0
         )
         by_region[region] = RegionSoreness(
-            latency=tuple(latency), pending_onset=tuple(pending), expressed=expressed
+            latency=tuple(latency), pending_onset=pending, expressed=expressed
         )
 
     decay = _decay(dt_hours, channel.repeated_bout.decay_tau_h)
@@ -1394,5 +1418,3 @@ def channel_diff(before: BodyState, after: BodyState) -> dict[str, dict[str, Any
         if old_value != new_value:
             changed[section] = {"before": old_value, "after": new_value}
     return changed
-
-

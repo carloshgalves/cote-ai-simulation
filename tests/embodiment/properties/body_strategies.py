@@ -33,12 +33,14 @@ from embodiment.types import (
     Sleep,
     SleepQuality,
     Soreness,
+    SorenessOnset,
     Thermal,
     WPrimeBalance,
 )
 
 PARAMS = load_params()
 STAGES = max(1, PARAMS.channels.soreness.kernel.latency_stages)
+KERNEL = PARAMS.channels.soreness.kernel
 
 #: One concrete body, for the `@example` the ticket asks each property to pin.
 #: Drawn from the prior like every other body in this repository: a profile
@@ -106,10 +108,36 @@ def injuries(draw) -> Injury:
 
 
 @st.composite
+def pending_onsets(draw, t_hours: float) -> tuple[SorenessOnset, ...]:
+    """Damage waiting on the onset grid, the way the channel leaves it.
+
+    Generated relative to the body's own clock and on the declared grid, because
+    a queue holding instants that already passed, or two entries sharing one, is
+    a body the channel cannot produce — and P3 is about what the engine hands
+    back, not about what a constructor can be talked into.
+    """
+    offsets = draw(
+        st.lists(
+            st.integers(min_value=1, max_value=int(KERNEL.onset_delay_h / KERNEL.onset_resolution_h)),
+            unique=True,
+            max_size=4,
+        )
+    )
+    return tuple(
+        SorenessOnset(
+            release_at_h=round(t_hours + offset * KERNEL.onset_resolution_h, 9),
+            amount=draw(st.floats(min_value=1e-6, max_value=1.0, allow_nan=False)),
+        )
+        for offset in sorted(offsets)
+    )
+
+
+@st.composite
 def body_states(draw) -> BodyState:
+    t_hours = draw(st.floats(min_value=0.0, max_value=10000.0, allow_nan=False))
     return BodyState(
         character_id="npc.0001",
-        t_hours=draw(st.floats(min_value=0.0, max_value=10000.0, allow_nan=False)),
+        t_hours=t_hours,
         w_prime_balance=draw(w_prime_balances()),
         peripheral_fatigue={region: draw(fractions) for region in FatigueRegion},
         central_fatigue=draw(fractions),
@@ -144,6 +172,7 @@ def body_states(draw) -> BodyState:
             by_region={
                 region: RegionSoreness(
                     latency=tuple(draw(st.floats(min_value=0.0, max_value=1.0, allow_nan=False)) for _ in range(STAGES)),
+                    pending_onset=draw(pending_onsets(t_hours)),
                     expressed=draw(fractions),
                 )
                 for region in FatigueRegion

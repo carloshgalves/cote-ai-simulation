@@ -21,6 +21,7 @@ from embodiment.dynamics import (
     BodyTraits,
     Environment,
     Exposure,
+    IntegrationParams,
     IntervalLoad,
     advance,
     advance_central_fatigue,
@@ -538,13 +539,25 @@ def test_doms_is_absent_at_six_hours_present_at_a_day_peaks_on_the_second_and_re
     curve rather than as absolute values, because the window is what the
     literature gives and the magnitude is `[INT]`.
     """
+    kernel = dynamics_params.channels.soreness.kernel
     worked = bout(rested_body, dynamics_params)
     assert worked.soreness.by_region[FatigueRegion.LEGS].expressed == 0.0
 
-    curve = soreness_curve(worked, dynamics_params, (6.0, 24.0, 48.0, 72.0, 168.0))
+    curve = soreness_curve(
+        worked, dynamics_params, (6.0, kernel.onset_delay_h - 1.0, 24.0, 48.0, 72.0, 168.0)
+    )
     peak = max(curve.values())
+
+    #: Absent, as a value and not as a small number: nothing may be expressed
+    #: before the gate opens, at six hours or at any hour up to the delay itself.
     assert curve[6.0] == 0.0
-    assert curve[24.0] > 0.0
+    assert curve[kernel.onset_delay_h - 1.0] == 0.0
+
+    #: Present at a day, with a magnitude. `> 0.0` would also pass with an onset
+    #: that had drifted to 23.9 h and left a float of order 1e-6 here, which is
+    #: the acceptance criterion (F11) going quiet rather than being met.
+    assert 0.10 * peak < curve[24.0] < 0.50 * peak
+
     assert curve[48.0] > 0.90 * peak
     assert curve[168.0] < 0.15 * peak
     assert curve[24.0] < curve[48.0]
@@ -555,6 +568,89 @@ def test_doms_peaks_inside_the_measured_window(rested_body, dynamics_params) -> 
     curve = soreness_curve(bout(rested_body, dynamics_params), dynamics_params, tuple(float(h) for h in range(1, 121)))
     peak_hour = max(curve, key=lambda hour: curve[hour])
     assert 24.0 <= peak_hour <= 72.0
+
+
+def worked_body(rested_body, params, *, hours: float = 8.0) -> BodyState:
+    """A body that has just done `hours` of fully eccentric work on every region."""
+    load = IntervalLoad(
+        intensity=0.8,
+        by_region={region: 1.0 for region in FatigueRegion},
+        eccentric_fraction=1.0,
+        activity="drill",
+    )
+    return advance(
+        rested_body,
+        hours,
+        Exposure.of(load=load, traits=BodyTraits.reference(params), params=params),
+    )
+
+
+def pending_entries(state: BodyState) -> int:
+    return sum(len(region.pending_onset) for region in state.soreness.by_region.values())
+
+
+def test_the_onset_queue_is_bounded_by_the_window_not_by_the_integration_step(
+    rested_body, dynamics_params
+) -> None:
+    """World truth may not carry an artefact of how finely the engine integrated.
+
+    The queue is persisted in the snapshot and hashed with it, so if its length
+    followed `integration.step_hours` the snapshot of a body would change when a
+    numerical setting changed and nothing about the body did.
+    """
+    kernel = dynamics_params.channels.soreness.kernel
+    ceiling = len(FatigueRegion) * (
+        int(kernel.onset_delay_h / kernel.onset_resolution_h) + 1
+    )
+
+    counts = set()
+    for step_hours in (0.125, 0.25, 0.5, 1.0):
+        params = dynamics_params.model_copy(
+            update={
+                "integration": IntegrationParams(
+                    step_hours=step_hours,
+                    max_interval_hours=dynamics_params.integration.max_interval_hours,
+                )
+            }
+        )
+        worked = worked_body(rested_body, params)
+        counts.add(pending_entries(worked))
+        assert pending_entries(worked) <= ceiling
+
+    assert len(counts) == 1, f"the queue length follows the integration step: {counts}"
+
+
+def test_the_onset_queue_holds_one_entry_per_release_instant(rested_body, dynamics_params) -> None:
+    """Damage admitted by many steps into the same bucket stays one entry."""
+    worked = worked_body(rested_body, dynamics_params)
+    for region in worked.soreness.by_region.values():
+        instants = [entry.release_at_h for entry in region.pending_onset]
+        assert instants == sorted(instants)
+        assert len(set(instants)) == len(instants)
+        assert all(entry.amount > 0.0 for entry in region.pending_onset)
+
+
+def test_the_onset_grid_never_releases_damage_before_the_measured_delay(
+    rested_body, dynamics_params
+) -> None:
+    """Quantising the release rounds up, so 12 h stays a floor (F11)."""
+    kernel = dynamics_params.channels.soreness.kernel
+    worked = worked_body(rested_body, dynamics_params, hours=1.0)
+    for region in worked.soreness.by_region.values():
+        for entry in region.pending_onset:
+            assert entry.release_at_h >= kernel.onset_delay_h
+
+
+def test_the_queue_drains_and_leaves_nothing_behind(rested_body, dynamics_params) -> None:
+    """A body that stops working owes no pending damage once the window passes."""
+    worked = worked_body(rested_body, dynamics_params, hours=1.0)
+    assert pending_entries(worked) > 0
+    rested = advance(
+        worked,
+        dynamics_params.channels.soreness.kernel.onset_delay_h * 2.0,
+        exposure(dynamics_params),
+    )
+    assert pending_entries(rested) == 0
 
 
 def test_the_same_load_hurts_less_the_second_time(rested_body, dynamics_params) -> None:

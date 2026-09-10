@@ -102,6 +102,61 @@ def test_a_wrist_injury_takes_grip_and_throwing_and_leaves_sprinting_alone(
         )
 
 
+def test_the_exempt_dimensions_are_exactly_the_ones_the_file_justifies(dynamics_params) -> None:
+    """The list is what keeps the composition total, so it is pinned here.
+
+    Six constitutional traits plus `flexibility`, which is on the list for the
+    other reason the parameter file gives: it is a real performance with a
+    battery item, exempt only because no channel has a sourced effect size for
+    range of motion. Adding a dimension without adding its reason is how a
+    declared blank turns into a silent one.
+    """
+    assert set(dynamics_params.degradation.unmodulated_dimensions) == {
+        Dimension.BODY_MASS,
+        Dimension.STATURE,
+        Dimension.INJURY_RESILIENCE,
+        Dimension.RECOVERY_RATE,
+        Dimension.THERMOREGULATION,
+        Dimension.PAIN_TOLERANCE,
+        Dimension.FLEXIBILITY,
+    }
+
+
+def test_no_channel_names_a_dimension_it_is_also_exempt_from(dynamics_params) -> None:
+    """A dimension cannot be both degraded by a named channel and exempt."""
+    degradation = dynamics_params.degradation
+    exempt = set(degradation.unmodulated_dimensions)
+    for table in (
+        degradation.peripheral_fatigue_loss_at_full,
+        degradation.w_prime_loss_at_empty,
+        degradation.central_fatigue_loss_at_full,
+        degradation.soreness_loss_at_full,
+        degradation.substrate_loss_at_empty,
+        degradation.sleep_sensitivity,
+    ):
+        assert not (set(table) & exempt), sorted(d.value for d in set(table) & exempt)
+
+
+def test_an_exempt_dimension_is_still_reachable_by_a_lesion(rested_body) -> None:
+    """Exempt from *state*, not from injury: the two are different mechanisms."""
+    stiff = replace_channel(
+        rested_body,
+        injuries=(
+            Injury(
+                region=InjuryRegion.LOWER_BACK,
+                tissue=InjuryTissue.MUSCLE,
+                mechanism=InjuryMechanism.STRAIN,
+                severity=InjurySeverity.MINOR,
+                onset_h=0.0,
+                healing=Healing(expected_days=14.0, progress=0.0),
+                impairments={Dimension.FLEXIBILITY: 0.6},
+            ),
+        ),
+    )
+    assert impairment_multipliers(stiff)[Dimension.FLEXIBILITY] < 1.0
+    assert impairment_multipliers(stiff)[Dimension.SPRINT_SPEED] == 1.0
+
+
 def test_an_impairment_that_touches_every_dimension_equally_is_refused() -> None:
     """It is failure mode F12 by definition, so the type refuses to hold it."""
     with pytest.raises(ValueError, match="F12"):

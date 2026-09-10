@@ -713,9 +713,15 @@ class SorenessOnset(_ValidatedStateModel):
 class RegionSoreness(_ValidatedStateModel):
     """One region's DOMS: damage still on its way, and damage being felt.
 
-    The latency stages are why soreness cannot appear during the effort that
-    caused it (failure mode F11). Damage enters the first stage, walks the chain,
-    and only then becomes `expressed`.
+    The onset gate and the latency stages are why soreness cannot appear during
+    the effort that caused it (failure mode F11). Damage waits in `pending_onset`
+    until its release instant, then enters the first latency stage, walks the
+    chain, and only then becomes `expressed`.
+
+    `pending_onset` is held on a declared release grid
+    (`channels.soreness.kernel.onset_resolution_h`) with one entry per instant,
+    so its length is a property of the onset window rather than of the
+    integration step the engine happened to advance in.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid")
@@ -723,6 +729,24 @@ class RegionSoreness(_ValidatedStateModel):
     latency: tuple[float, ...] = ()
     pending_onset: tuple[SorenessOnset, ...] = ()
     expressed: float = Field(default=0.0, ge=0.0, le=1.0)
+
+    @field_validator("pending_onset", mode="after")
+    @classmethod
+    def _one_entry_per_release_instant(
+        cls, value: tuple[SorenessOnset, ...]
+    ) -> tuple[SorenessOnset, ...]:
+        """Strictly increasing instants, so the queue cannot grow per step.
+
+        Two entries sharing a release instant are the same release written twice,
+        which is how a per-step accumulator gets back into world truth.
+        """
+        instants = [entry.release_at_h for entry in value]
+        if instants != sorted(instants) or len(set(instants)) != len(instants):
+            raise ValueError(
+                "pending_onset must hold one entry per release instant, in increasing order: "
+                f"{instants}"
+            )
+        return value
 
     @field_validator("latency", mode="after")
     @classmethod

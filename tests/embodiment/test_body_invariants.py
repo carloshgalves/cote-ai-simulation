@@ -35,6 +35,7 @@ from embodiment.types import (
     Illness,
     InjuryRegion,
     InjurySeverity,
+    as_document,
 )
 
 DEAD_ACCOUNTING_FIELDS = ("acute_7d", "chronic_28d")
@@ -225,6 +226,17 @@ def _enclosing_function(tree: ast.Module, target: ast.AST) -> str | None:
 def test_the_type_refuses_a_body_outside_its_domains(rested_body, section, value, message) -> None:
     with pytest.raises(ValueError, match=message):
         replace_channel(rested_body, **{section: value})
+
+
+@pytest.mark.parametrize(
+    "value", [float("nan"), float("inf"), float("-inf")], ids=["nan", "posinf", "neginf"]
+)
+def test_persisted_body_state_refuses_non_finite_floats(rested_body, value) -> None:
+    """Even structurally valid world truth must remain finite at every depth."""
+    document = as_document(rested_body)
+    document["thermal"]["wbgt"] = value
+    with pytest.raises(ValueError, match="finite"):
+        BodyState.model_validate(document)
 
 
 @pytest.mark.parametrize(

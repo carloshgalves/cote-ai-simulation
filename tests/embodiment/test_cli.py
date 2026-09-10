@@ -14,16 +14,19 @@ import json
 from pathlib import Path
 
 import pytest
+import yaml
 
+import embodiment.cli as cli
 from embodiment.capability import capability_available
 from embodiment.cli import advance_clock_command, main
 from embodiment.dynamics import BodyTraits, Environment, load_params
 from embodiment.eventlog import (
     EVENT_COHORT_CORRELATION_REPORT,
     EVENT_RUN_STARTED,
+    RunContinuityError,
     normalised_bytes,
 )
-from embodiment.snapshot import capacity_profile_of, read_snapshot
+from embodiment.snapshot import SnapshotShapeError, capacity_profile_of, read_snapshot
 from embodiment.types import Dimension, RunMetadata
 
 
@@ -212,6 +215,76 @@ def test_the_snapshot_records_the_dynamics_version_that_actually_advanced_it(
     advances = [record for record in events(out) if record["event"] == "body.advanced"]
     assert advances
     assert {record["payload"]["dynamics_version"] for record in advances} == {version}
+
+
+def test_an_old_body_is_not_reinterpreted_under_the_current_dynamics(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A model-version bump is a replay boundary, not a migration request."""
+    current = load_params()
+    legacy = current.model_copy(update={"model_version": "0.1.0-provisional"})
+    with monkeypatch.context() as legacy_loader:
+        legacy_loader.setattr(cli, "load_params", lambda: legacy)
+        out = run(tmp_path / "legacy", count=1)
+
+    before = (out / "events.jsonl").read_bytes()
+
+    def capability_must_not_run(*args, **kwargs):
+        raise AssertionError("version compatibility must be checked before capability")
+
+    monkeypatch.setattr(cli, "capability_available", capability_must_not_run)
+    with pytest.raises(
+        RunContinuityError,
+        match=r"0\.1\.0-provisional.*0\.1\.1-provisional",
+    ):
+        advance_clock_command(run_dir=out, character_id="npc.0001", days=1)
+
+    assert (out / "events.jsonl").read_bytes() == before
+
+
+def test_a_tampered_snapshot_is_rejected_before_the_log_is_extended(tmp_path: Path) -> None:
+    """A domain-valid edit is still not world truth when its digest is stale."""
+    out = run(tmp_path / "demo", count=1)
+    snapshot_path = out / "snapshot.yaml"
+    snapshot = yaml.safe_load(snapshot_path.read_text(encoding="utf-8"))
+    snapshot["characters"]["npc.0001"]["body_state"]["central_fatigue"] = 0.9
+    snapshot_path.write_text(
+        yaml.safe_dump(snapshot, sort_keys=True, allow_unicode=True), encoding="utf-8"
+    )
+    before = (out / "events.jsonl").read_bytes()
+
+    with pytest.raises(SnapshotShapeError, match="snapshot_hash"):
+        advance_clock_command(run_dir=out, character_id="npc.0001", days=1)
+
+    assert (out / "events.jsonl").read_bytes() == before
+
+
+@pytest.mark.parametrize(
+    "wbgt_c",
+    [float("nan"), float("inf"), float("-inf")],
+    ids=["nan", "positive-infinity", "negative-infinity"],
+)
+def test_non_finite_wbgt_is_rejected_before_the_log_is_extended(
+    tmp_path: Path, wbgt_c: float
+) -> None:
+    out = run(tmp_path / "demo", count=1)
+    before = (out / "events.jsonl").read_bytes()
+
+    with pytest.raises(ValueError, match="finite"):
+        main(
+            [
+                "advance-clock",
+                "--run",
+                str(out),
+                "--character",
+                "npc.0001",
+                "--days",
+                "1",
+                f"--wbgt={wbgt_c}",
+            ]
+        )
+
+    assert (out / "events.jsonl").read_bytes() == before
 
 
 def test_the_command_advances_three_days_of_bad_sleep(tmp_path: Path, capsys) -> None:

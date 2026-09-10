@@ -44,6 +44,7 @@ from .eventlog import (
     EVENT_BODY_ADVANCED,
     EVENT_COHORT_CORRELATION_REPORT,
     EventLog,
+    RunContinuityError,
     body_has_advanced,
     logical_sim_time,
     normalised_digest,
@@ -341,6 +342,15 @@ def advance_clock_command(
     body = body_state_of(section)
     traits = BodyTraits.from_profile(profile)
     params = load_params()
+    metadata = RunMetadata.from_document(snapshot.get("run_metadata") or {})
+    metadata.require(ADVANCE_COMPONENTS)
+    recorded_dynamics = metadata.component_versions["dynamics"]
+    if recorded_dynamics != params.model_version:
+        raise RunContinuityError(
+            f"{snapshot_path} records dynamics_version {recorded_dynamics!r}, but the "
+            f"available BODY_DYNAMICS is {params.model_version!r}. An old body cannot be "
+            "migrated or reinterpreted by advance-clock; re-run it under the recorded model."
+        )
 
     sleep_hours = parse_hours(sleep)
     segments = day_segments(sleep_hours, quality, wbgt_c) * days
@@ -365,7 +375,6 @@ def advance_clock_command(
     advances: list[dict[str, object]] = []
 
     if segments:
-        metadata = RunMetadata.from_document(snapshot.get("run_metadata") or {})
         with EventLog.extend(
             events_path,
             metadata=metadata,

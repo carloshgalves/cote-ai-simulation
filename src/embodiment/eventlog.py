@@ -135,9 +135,12 @@ class EventLog:
             "wall_time": datetime.now(UTC).isoformat(),
             "payload": dict(payload),
         }
-        self._sequence += 1
-        self._handle.write(json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n")
+        encoded = json.dumps(
+            record, ensure_ascii=False, sort_keys=True, allow_nan=False
+        )
+        self._handle.write(encoded + "\n")
         self._handle.flush()
+        self._sequence += 1
         return record
 
     def close(self) -> None:

@@ -1,0 +1,188 @@
+# POPULATION_PRIORS — the cohort a body is drawn from when nothing else is known.
+#
+# NOT CANON. This is our reconstruction of a real-world cohort, never a claim
+# about the work and never a rule of the school. No record here may appear in
+# provenance.supports of a canon claim (ADR 0005 §7).
+#
+# READ THIS BEFORE USING THE NUMBERS
+#
+#   status: PROVISIONAL, and it is provisional in the way that matters: the
+#   STRUCTURE is settled (two latent factors plus a per-dimension residual, as a
+#   gaussian copula over the marginals — docs/research/physical-domain-v1.md §2)
+#   and the NUMBERS are not. Every mean, SD and loading below is marked [INT]:
+#   an interpretation, not a measurement.
+#
+#   S1 — the cohort mean and SD by age and sex live in the annual 体力・運動能力調査
+#        on e-Stat, whose file download returns 404 to automated requests
+#        (verified 2026-09-08). Until a human transcribes them, the marginals
+#        here are plausible values consistent with the item score table, and not
+#        the published distribution. See SOURCING.md S1.
+#   S2 — the inter-item correlation matrix was not located. The factor loadings
+#        below are a declared modelling assumption. The tests that ship with this
+#        file check THAT a correlation structure exists, not that it is right;
+#        the calibration tests are xfail with that reason written out.
+#
+#   Consequently `evidence_sufficiency.overall` is 0.0. This file is assumption
+#   with a version number, and a run that uses it says so in its metadata.
+#
+# COHORT SELECTIVITY, declared as a null hypothesis and not as an omission:
+#   the school of the work is selective; this prior is the NATIONAL cohort with
+#   NO SHIFT applied. Applying an invented "elite school bonus" would displace
+#   every draw in the world at once, which is worse than inventing one
+#   character's number, because it is invisible. While
+#   oq.capability.cohort-selectivity is open, no shift is the assumption, and it
+#   is written here so that a later answer changes a declared number rather than
+#   an unstated habit.
+#
+# WHY A COPULA AND NOT INDEPENDENT MARGINALS (failure mode F7):
+#   independent marginals are wrong in a visible way — they populate the joint
+#   tail with a student who is simultaneously the heaviest, the fastest and the
+#   best at the shuttle run. Two latent factors (general fitness, build) plus a
+#   residual reproduce the structure fitness batteries actually have, and the
+#   copula preserves each marginal exactly.
+#
+# Model:    docs/architecture/physical-model.md §4, §5
+# Research: docs/research/physical-domain-v1.md §2
+# Spec:     docs/spec/physical-simulation-v1.md §5.1
+# Units:    data/canon/schema/enums/capacity-dimensions.yaml is the authority on
+#           which dimensions exist; src/embodiment/types.py holds the unit each
+#           one is stored in and a test fails if the two drift apart.
+
+schema_version: 1
+not_canon: true
+model_kind: POPULATION_PRIORS
+model_version: 0.1.0-provisional
+status: PROVISIONAL
+
+provenance:
+  calibrated_against: >
+    Structure: the two-factor form recommended in docs/research/physical-domain-v1.md §2,
+    which matches the known structure of fitness batteries. Units and plausible ranges:
+    the 新体力テスト item score table transcribed in fitness-test-score-table.yaml
+    (ages 12-19, by sex). Numbers: NOT calibrated — see sourcing_gaps.
+  sourcing_gaps: [S1, S2]
+  open_questions: [oq.capability.cohort-selectivity]
+  research: docs/research/physical-domain-v1.md
+  decision: docs/adr/0006-physical-domain-model.md
+
+evidence_sufficiency:
+  overall: 0.0
+  basis: >
+    Zero by construction. sd(prior) is not narrowed by any evidence, because no
+    published distribution has been transcribed yet (S1) and no correlation
+    matrix has been located (S2). A run reporting evidence_sufficiency 0.0 for a
+    character under this prior is reporting the truth twice over: the character
+    has no feats, and the prior itself has no measurements.
+  by_component:
+    marginals: 0.0
+    loadings: 0.0
+    correlation_structure: 0.0
+
+cohort:
+  description: >
+    Japanese secondary-school students in their first year of senior high, both
+    sexes. National distribution, no selectivity shift (see header).
+  age_band:
+    source: "[DERIVED] First-year students of the work; year boundary per ADR 0004."
+    min_years: 15
+    max_years: 16
+  age_resolved: false
+  age_resolution_note: >
+    The marginals below are NOT resolved by age within the band. The transcribed
+    item table is age-invariant within 12-19 (it is a criterion table, not a
+    percentile table), and the age-resolved distribution is exactly what S1 is
+    blocked on. Age resolution arrives with S1, not before.
+  sex_ratio_male:
+    source: "[INT] Equal split assumed. The sex composition of a class is a question about the work, not about the instrument, and it is not settled here; a cohort seeded for a specific class should pass its composition in explicitly."
+    value: 0.5
+
+copula:
+  family: gaussian
+  factors: [general_fitness, build]
+  min_residual_sd:
+    source: "[INT] Floor on the per-dimension residual, so that no dimension becomes a deterministic function of the two factors. A dimension with no residual is not a dimension."
+    value: 0.15
+  note: >
+    z_d = loading_general_d * f_general + loading_build_d * f_build + residual_sd_d * e_d,
+    with f and e standard normal and residual_sd_d = sqrt(1 - loading_general_d^2 - loading_build_d^2)
+    so that each z_d is exactly standard normal and the marginal below is preserved exactly
+    under x_d = ppf_d(Phi(z_d)).
+
+# Loadings are shared across sexes: the sex difference lives in the marginals,
+# not in the correlation structure. That is itself an assumption (S2).
+loadings:
+  source: "[INT] S2 open — no published correlation matrix or factor loadings for this battery and age band were located. Signs are taken from the structure fitness batteries are known to have (a general fitness factor; a build factor that helps mass and strength and hurts relative aerobic capacity); magnitudes are chosen, not measured. The shipped tests assert the SIGNS, and the calibration test is xfail with this reason."
+  aerobic_capacity:   {general_fitness:  0.55, build: -0.55}
+  anaerobic_power:    {general_fitness:  0.55, build:  0.45}
+  sprint_speed:       {general_fitness:  0.60, build:  0.20}
+  max_strength:       {general_fitness:  0.35, build:  0.70}
+  strength_endurance: {general_fitness:  0.55, build:  0.05}
+  agility:            {general_fitness:  0.55, build: -0.15}
+  flexibility:        {general_fitness:  0.25, build: -0.10}
+  body_mass:          {general_fitness:  0.00, build:  0.85}
+  stature:            {general_fitness:  0.05, build:  0.55}
+  reaction_time:      {general_fitness: -0.45, build: -0.05}
+  coordination:       {general_fitness:  0.45, build: -0.05}
+  injury_resilience:  {general_fitness:  0.30, build:  0.15}
+  recovery_rate:      {general_fitness: -0.40, build:  0.10}
+  thermoregulation:   {general_fitness:  0.35, build: -0.25}
+  pain_tolerance:     {general_fitness:  0.15, build:  0.05}
+
+loading_orientation_note: >
+  A loading is written in the unit the dimension is STORED in, so its sign is
+  read there and nowhere else. reaction_time is in ms and recovery_rate is a time
+  constant in h: for both, lower is better, so a fitter body loads NEGATIVELY.
+  sprint_speed is stored in m.s-1 and not in seconds (the enum file itself
+  instructs the conversion), so a faster body loads positively.
+
+marginals:
+  source: "[INT] S1 open — the published cohort mean and SD have not been transcribed (e-Stat download returns 404 to automated requests, verified 2026-09-08). The values below are plausible for this cohort and consistent with the transcribed item score bands, and they are NOT the published distribution. Do not cite them as norms."
+  male:
+    aerobic_capacity:   {family: lognormal, mean:  72.0,  sd: 22.0,  unit: laps}
+    anaerobic_power:    {family: lognormal, mean: 220.0,  sd: 25.0,  unit: cm}
+    sprint_speed:       {family: normal,    mean:   6.60, sd:  0.50, unit: m_per_s}
+    max_strength:       {family: lognormal, mean:  40.0,  sd:  7.0,  unit: kg}
+    strength_endurance: {family: normal,    mean:  27.0,  sd:  5.0,  unit: reps_30s}
+    agility:            {family: normal,    mean:  55.0,  sd:  7.0,  unit: touches_20s}
+    flexibility:        {family: normal,    mean:  47.0,  sd: 10.0,  unit: cm}
+    body_mass:          {family: lognormal, mean:  60.0,  sd: 10.0,  unit: kg}
+    stature:            {family: normal,    mean: 170.0,  sd:  6.0,  unit: cm}
+    reaction_time:      {family: lognormal, mean: 250.0,  sd: 35.0,  unit: ms}
+    coordination:       {family: logitnormal, median: 0.72, logit_sd: 0.45, unit: hit_rate}
+    injury_resilience:  {family: lognormal, mean:   1.00, sd:  0.20, unit: risk_multiplier}
+    recovery_rate:      {family: lognormal, mean:  24.0,  sd:  6.0,  unit: h}
+    thermoregulation:   {family: normal,    mean:  28.0,  sd:  1.5,  unit: degC}
+    pain_tolerance:     {family: uniform,   low:    0.0,  high: 100.0, unit: percentile}
+  female:
+    aerobic_capacity:   {family: lognormal, mean:  45.0,  sd: 15.0,  unit: laps}
+    anaerobic_power:    {family: lognormal, mean: 170.0,  sd: 22.0,  unit: cm}
+    sprint_speed:       {family: normal,    mean:   5.65, sd:  0.45, unit: m_per_s}
+    max_strength:       {family: lognormal, mean:  25.0,  sd:  5.0,  unit: kg}
+    strength_endurance: {family: normal,    mean:  22.0,  sd:  5.0,  unit: reps_30s}
+    agility:            {family: normal,    mean:  48.0,  sd:  6.0,  unit: touches_20s}
+    flexibility:        {family: normal,    mean:  47.0,  sd:  9.0,  unit: cm}
+    body_mass:          {family: lognormal, mean:  52.0,  sd:  8.0,  unit: kg}
+    stature:            {family: normal,    mean: 157.0,  sd:  5.5,  unit: cm}
+    reaction_time:      {family: lognormal, mean: 258.0,  sd: 36.0,  unit: ms}
+    coordination:       {family: logitnormal, median: 0.71, logit_sd: 0.45, unit: hit_rate}
+    injury_resilience:  {family: lognormal, mean:   1.00, sd:  0.20, unit: risk_multiplier}
+    recovery_rate:      {family: lognormal, mean:  24.0,  sd:  6.0,  unit: h}
+    thermoregulation:   {family: normal,    mean:  28.0,  sd:  1.5,  unit: degC}
+    pain_tolerance:     {family: uniform,   low:    0.0,  high: 100.0, unit: percentile}
+
+marginal_notes:
+  pain_tolerance: >
+    Uniform on [0, 100] by construction, not by assumption: this dimension has no
+    physical unit and is stored as a cohort percentile by the exception of
+    invariant 9, and a percentile of its own reference cohort is uniform. The
+    reference cohort is declared in the dimension enum and in types.py.
+  thermoregulation: >
+    Tolerated WBGT. Indexed to WBGT and to modifiable factors, NEVER to age: a
+    cohort of adolescents carries no thermal penalty for being adolescent
+    (failure mode F16). The sex difference here is not asserted; the same
+    marginal is used for both while S1 is open.
+  recovery_rate: >
+    A time constant in hours, so lower is faster recovery. Adolescents recover
+    faster than adults from high-intensity effort, but the strongest evidence is
+    pre-pubertal, so any 15-18 value is interpolation — which is why this whole
+    file is [INT] and not only this line.

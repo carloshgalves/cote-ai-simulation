@@ -66,11 +66,20 @@ Structure and gating are decided. What exists:
   and the 20 m shuttle run.
 - [`SOURCING.md`](SOURCING.md) — the four sourcing gaps that still stand between this and a
   calibrated prior, with the e-Stat table ids and one verified blocker.
+- [`population-prior.yaml`](population-prior.yaml) — `POPULATION_PRIORS`, **`status: PROVISIONAL`**.
+  Its structure is settled (two latent factors plus a per-dimension residual, applied as a gaussian
+  copula so the marginals are preserved exactly); its numbers are not. Every mean, SD and factor
+  loading in it is marked `[INT]`, its own `evidence_sufficiency` is `0.0`, and the null hypothesis
+  of cohort selectivity — the national cohort with no shift — is declared in the file rather than
+  left implicit. Introduced by ticket PSV1-1.
+- [`schema/model-file.schema.json`](schema/model-file.schema.json) — the header every file in this
+  directory carries. Validated by `src/embodiment/modelfile.py`, which also refuses an unmarked
+  number and any record that orders two characters.
 
-Not written: the prior itself, the estimator and the dynamics parameters. Their structure, chosen
-alternatives and parameter sources are settled in
+Not written: the estimator and the dynamics parameters. Their structure, chosen alternatives and
+parameter sources are settled in
 [`docs/research/physical-domain-v1.md`](../../../docs/research/physical-domain-v1.md); the numbers
-wait on S1 and S2.
+wait on S1 and S2, and the prior above waits on the same two to stop being provisional.
 
 One correction from that research lands here rather than in a parameter file: **the acute:chronic
 workload ratio must not be used as an injury-risk factor.** It is mathematically coupled, unstable at

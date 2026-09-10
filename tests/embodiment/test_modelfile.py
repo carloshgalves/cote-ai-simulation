@@ -17,6 +17,7 @@ from embodiment.modelfile import (
     PHYSICAL_MODELS_DIR,
     ModelFileError,
     assert_no_character_ordering,
+    assert_no_named_characters,
     load_model_file,
     validate_mapping,
 )
@@ -212,6 +213,41 @@ def test_the_invented_constraint_type_spelling_is_not_the_exemption() -> None:
                 }
             )
         )
+
+
+def test_a_root_comparative_does_not_exempt_a_sibling_subtree() -> None:
+    """The exemption covers the feat's contract, not the document that carries it.
+
+    The record here really is the one admissible comparison, and it sits at the
+    root — the shape that used to hand every sibling the exemption too.
+    """
+    feat = _comparative_feat()
+    del feat["source"]
+    with pytest.raises(ModelFileError, match="actor.ayanokouji"):
+        assert_no_named_characters(
+            {
+                **feat,
+                "overrides": {
+                    "actor.ayanokouji": {
+                        "max_strength": 55.0,
+                        "sprint_speed": 8.0,
+                        "body_mass": 62.0,
+                    }
+                },
+            }
+        )
+
+
+def test_a_model_file_root_may_not_claim_the_comparative_exemption() -> None:
+    """`not_canon: true` is not an observed event, whatever fields it copies.
+
+    The comparison is well formed; what refuses it is that a parameter file may
+    not be the record it is anchored to, so it stays an ordinary ranking.
+    """
+    feat = _comparative_feat()
+    del feat["source"], feat["margin_seconds"]
+    with pytest.raises(ModelFileError, match="orders subjects"):
+        validate_mapping(file_with(**feat))
 
 
 def test_the_ordering_check_is_reusable_on_a_fixture(tmp_path) -> None:

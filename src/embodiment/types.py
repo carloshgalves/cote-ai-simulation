@@ -21,12 +21,14 @@ import re
 from collections.abc import Mapping
 from enum import StrEnum
 from types import MappingProxyType
-from typing import Any, Self
+from typing import Any, Literal, Self
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 __all__ = [
     "Dimension",
+    "Sex",
+    "SexSource",
     "UnitSpec",
     "DIMENSION_UNITS",
     "DimensionValue",
@@ -49,6 +51,16 @@ _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 #: logical clock of ADR 0003 is not in this ticket; the label is, because a
 #: sample without an instant cannot be read later.
 Y1_START = "Y1_START"
+
+#: Which cohort marginals a body was drawn from. A covariate, never a capacity:
+#: it selects the distribution, and no dimension of the profile is named by it.
+Sex = Literal["male", "female"]
+
+#: Where that covariate came from. `KNOWN` is canon establishing it; `DRAWN` is
+#: the prior file's `[INT]` cohort ratio standing in for a source that is silent.
+#: The two produce the same distribution, so nothing but this field distinguishes
+#: a sourced fact from an assumption once the body is sampled.
+SexSource = Literal["KNOWN", "DRAWN"]
 
 
 def freeze_mapping(value: Mapping[Any, Any]) -> Mapping[Any, Any]:
@@ -222,6 +234,15 @@ class CapacityBaselineRecord(BaseModel):
     posterior_hash: str
     prior_version: str
     substream: str
+    #: The covariate the copula read, and whether canon fixed it or the cohort
+    #: ratio drew it. It travels on the frozen record rather than being looked up
+    #: later because `posterior_hash` deliberately does not distinguish the two:
+    #: conditioning on a known male and drawing a male are the same distribution.
+    #: Without it here, a posterior rebuilt with the same hash but the other
+    #: provenance is indistinguishable from the one that actually ran, and a
+    #: snapshot can present an `[INT]` assumption as a sourced fact.
+    cohort_sex: Sex
+    cohort_sex_source: SexSource
     evidence_sufficiency: Mapping[Dimension, float]
 
     def model_copy(
@@ -233,6 +254,21 @@ class CapacityBaselineRecord(BaseModel):
                 "capacity_baseline is created only by seeding.py"
             )
         return super().model_copy(deep=deep)
+
+    def copy(self, **kwargs: Any) -> Self:
+        """Pydantic 1's `copy`, held to the same rule as `model_copy`.
+
+        Pydantic 2 still exposes it, and deprecating a method is not the same as
+        closing it: it emits a warning and returns the altered record anyway. The
+        single-writer rule is about the type, not about one spelling of it, so
+        every copy API the type offers refuses `update`.
+        """
+        if kwargs.get("update"):
+            raise TypeError(
+                "CapacityBaselineRecord.copy does not accept update: "
+                "capacity_baseline is created only by seeding.py"
+            )
+        return super().copy(**kwargs)  # type: ignore[deprecated]
 
     @field_validator("evidence_sufficiency", mode="after")
     @classmethod

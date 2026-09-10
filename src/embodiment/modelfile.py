@@ -85,6 +85,37 @@ _CHARACTER_ID_RE = re.compile(r"^(actor|char|npc|student)\.[a-z0-9][a-z0-9._-]*$
 #: event a COMPARATIVE constraint anchors to, so its id is the anchor.
 _FEAT_ID_RE = re.compile(r"^feat\.[a-z0-9.-]+$")
 
+#: `feat.schema.json` `properties`. A record recognised as the one admissible
+#: comparison is exempt *inside its own contract* and nowhere else: the schema is
+#: `additionalProperties: false`, so a field the real feat validator would reject
+#: cannot borrow the exception invariant 8 grants to the comparison itself.
+_FEAT_RECORD_FIELDS = frozenset(
+    {
+        "actors",
+        "conditions",
+        "divergence_sensitive",
+        "effort",
+        "evidence_refs",
+        "id",
+        "inference",
+        "measurement",
+        "modality",
+        "notes_ref",
+        "observers",
+        "provenance",
+        "revision",
+        "schema_version",
+        "story_time",
+        "supports_claims",
+        "tags",
+    }
+)
+
+#: Header keys that make a document one of ours rather than canon. A model file
+#: is `not_canon: true` by construction, so it is never the observed event a
+#: COMPARATIVE constraint anchors to, and its root may not claim the exemption.
+_MODEL_FILE_HEADER_KEYS = frozenset({"not_canon", "model_kind", "model_version"})
+
 #: Relational key names that assert one subject exceeds another. Other ranking
 #: fields are recognised by their component words so aliases such as
 #: `strength_order` and `ranked_by` cannot bypass the invariant.
@@ -223,11 +254,9 @@ def assert_no_character_ordering(data: Mapping[str, Any], *, origin: str = "<map
     admissible comparison in the whole model — and it is only an exception if it
     actually carries the anchor.
     """
-    for path, node, exempt in _mappings(data):
-        if exempt:
-            continue
+    for path, node, exempt_keys in _mappings(data):
         for key, value in node.items():
-            if not _looks_like_ordering_key(key):
+            if key in exempt_keys or not _looks_like_ordering_key(key):
                 continue
             subject_ids = set(_character_ids_below(value))
             if _is_relational_ordering_key(key):
@@ -252,10 +281,10 @@ def assert_no_named_characters(data: Mapping[str, Any], *, origin: str = "<mappi
     records name characters and must, while a parameter file that does is either
     hand-setting an attribute or ranking people.
     """
-    for path, node, exempt in _mappings(data):
-        if exempt:
-            continue
+    for path, node, exempt_keys in _mappings(data):
         for key, value in node.items():
+            if key in exempt_keys:
+                continue
             for offender in (*_character_ids_in(key), *_character_ids_in(value)):
                 here = f"{path}.{key}" if path else str(key)
                 raise ModelFileError(
@@ -265,23 +294,52 @@ def assert_no_named_characters(data: Mapping[str, Any], *, origin: str = "<mappi
                 )
 
 
-def _mappings(data: Mapping[str, Any]) -> Iterator[tuple[str, Mapping[str, Any], bool]]:
-    """Every mapping in the document, flagged if it sits inside an anchored comparative."""
-    exempt_prefixes: list[str] = []
+def _mappings(data: Mapping[str, Any]) -> Iterator[tuple[str, Mapping[str, Any], frozenset[str]]]:
+    """Every mapping in the document, with the keys an anchored comparative exempts.
+
+    The exemption is granted per key rather than over a subtree prefix. A prefix
+    of `""` — a feat record committed as its own file, which is the root mapping —
+    used to match every path in the document, so one `COMPARATIVE` record at the
+    root switched both gates off for its siblings too. Invariant 8 admits *one
+    anchored comparison*, not the file that carries it, so the exemption now
+    reaches exactly the fields `feat.schema.json` defines and stops there.
+    """
+    exempt = _exempt_paths(data)
     for path, node in _walk(data, ""):
         if not isinstance(node, Mapping):
             continue
-        #: `prefix == ""` is the whole document: a feat record committed as its own
-        #: file is the root, and `"".startswith(".")` would leave its own subtree
-        #: unexempt while exempting only the root mapping.
-        inside = any(
-            prefix == "" or path == prefix or path.startswith(f"{prefix}.")
-            for prefix in exempt_prefixes
-        )
-        if not inside and _is_anchored_comparative(node):
-            exempt_prefixes.append(path)
-            inside = True
-        yield path, node, inside
+        yield path, node, frozenset(key for key in node if _child_path(path, key) in exempt)
+
+
+def _child_path(path: str, key: Any) -> str:
+    return f"{path}.{key}" if path else str(key)
+
+
+def _exempt_paths(data: Mapping[str, Any]) -> frozenset[str]:
+    """Paths covered by an anchored comparative's own contract."""
+    is_model_file = bool(_MODEL_FILE_HEADER_KEYS & set(data))
+    exempt: set[str] = set()
+    for path, node in _walk(data, ""):
+        if not isinstance(node, Mapping) or path in exempt:
+            continue
+        if path == "" and is_model_file:
+            #: A parameter file describing a cohort is not an observed event. Were
+            #: its root allowed to claim the exception, a model file could wear a
+            #: feat's fields and carry hand-authored profiles as siblings.
+            continue
+        if _is_anchored_comparative(node):
+            exempt.update(_contract_paths(node, path))
+    return frozenset(exempt)
+
+
+def _contract_paths(node: Mapping[str, Any], path: str) -> Iterator[str]:
+    """The comparative record itself, and everything under its declared fields."""
+    yield path
+    for key, value in node.items():
+        if key not in _FEAT_RECORD_FIELDS:
+            continue
+        for child, _ in _walk(value, _child_path(path, key)):
+            yield child
 
 
 def _is_anchored_comparative(node: Mapping[str, Any]) -> bool:

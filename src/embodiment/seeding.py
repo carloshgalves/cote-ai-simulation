@@ -24,7 +24,7 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Iterable, Mapping, Sequence
-from typing import Any, Literal
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, field_validator
 
@@ -37,7 +37,13 @@ from .rng import (
     substream,
     substream_name,
 )
-from .types import CapacityBaselineRecord, Dimension, Y1_START, freeze_mapping
+from .types import (
+    CapacityBaselineRecord,
+    Dimension,
+    SexSource,
+    Y1_START,
+    freeze_mapping,
+)
 
 __all__ = [
     "CohortCovariates",
@@ -47,16 +53,12 @@ __all__ = [
     "CapacityBaselineStore",
     "AlreadySeededError",
     "UnknownCovariateSubjectError",
+    "RunContextMismatchError",
     "posterior_for",
     "seed_character",
     "seed_cohort",
     "cohort_ids",
 ]
-
-
-#: Where a character's sex came from. `KNOWN` is canon establishing it; `DRAWN`
-#: is the cohort ratio standing in for a source that does not say.
-SexSource = Literal["KNOWN", "DRAWN"]
 
 
 class AlreadySeededError(RuntimeError):
@@ -65,6 +67,16 @@ class AlreadySeededError(RuntimeError):
 
 class UnknownCovariateSubjectError(KeyError):
     """Covariates were supplied for a character the cohort does not contain."""
+
+
+class RunContextMismatchError(RuntimeError):
+    """A sample was about to be appended to a log that declares other inputs.
+
+    `run.started` carries the world seed, the prior version and the posterior
+    hash per character of spec §9.2, and a replay reads those to reproduce the
+    bodies. A `capacity.sampled` drawn under different inputs would make the
+    audit artefact contradict itself while every field in it stayed well formed.
+    """
 
 
 class CohortCovariates(BaseModel):
@@ -260,6 +272,8 @@ def seed_character(
             f"{character_id} already has a capacity_baseline in this run (failure mode F5)"
         )
     posterior = posterior_for(world_seed, character_id, prior, constraints, covariates)
+    if log is not None:
+        _assert_matches_run(log, world_seed=world_seed, posterior=posterior)
     name = substream_name(character_id, SEEDING_EVENT_ID, PURPOSE_CAPACITY_SAMPLE)
     generator = substream(world_seed, character_id, SEEDING_EVENT_ID, PURPOSE_CAPACITY_SAMPLE)
     profile = prior.sample_profile(generator, posterior.sex)
@@ -271,6 +285,11 @@ def seed_character(
         posterior_hash=posterior.posterior_hash,
         prior_version=posterior.prior_version,
         substream=name,
+        #: Frozen with the body, not looked up afterwards: `posterior_hash` is
+        #: equal for a known male and a drawn male on purpose, so provenance that
+        #: is not carried here cannot be recovered from the hash later.
+        cohort_sex=posterior.sex,
+        cohort_sex_source=posterior.sex_source,
         evidence_sufficiency=posterior.evidence_sufficiency,
     )
     if store is not None:
@@ -278,6 +297,37 @@ def seed_character(
     if log is not None:
         log.append(EVENT_CAPACITY_SAMPLED, capacity_sampled_payload(record, posterior))
     return record
+
+
+def _assert_matches_run(log: EventLog, *, world_seed: int, posterior: Posterior) -> None:
+    """Refuse to append a sample the log's own `run.started` cannot account for.
+
+    Checked **before** the draw is written, and before it reaches the store: the
+    log is the audit artefact, and the moment it holds one entry that disagrees
+    with its metadata, no reader can tell which of the two is the run that
+    happened. The three fields are exactly the ones a replay depends on.
+    """
+    metadata = log.metadata
+    if metadata.world_seed != world_seed:
+        raise RunContextMismatchError(
+            f"{posterior.character_id} was seeded under world_seed {world_seed}, but this log "
+            f"declares world_seed {metadata.world_seed} in run.started"
+        )
+
+    declared_prior = metadata.component_versions.get("prior")
+    if declared_prior != posterior.prior_version:
+        raise RunContextMismatchError(
+            f"{posterior.character_id} was seeded from prior {posterior.prior_version}, but "
+            f"this log declares prior_version {declared_prior!r} in run.started"
+        )
+
+    declared_hash = metadata.posterior_hash_by_character.get(posterior.character_id)
+    if declared_hash != posterior.posterior_hash:
+        raise RunContextMismatchError(
+            f"{posterior.character_id} has posterior_hash {posterior.posterior_hash}, but this "
+            f"log declares {declared_hash!r} for it in run.started. The metadata of spec §9.2 "
+            f"is complete before the log opens precisely so that this cannot drift."
+        )
 
 
 def capacity_sampled_payload(record: CapacityBaselineRecord, posterior: Posterior) -> dict[str, Any]:
@@ -294,8 +344,8 @@ def capacity_sampled_payload(record: CapacityBaselineRecord, posterior: Posterio
         "prior_content_hash": posterior.prior_content_hash,
         "posterior_kind": "PRIOR_ZERO_EVIDENCE" if posterior.constraint_count == 0 else "POSTERIOR",
         "substream": record.substream,
-        "sex": posterior.sex,
-        "sex_source": posterior.sex_source,
+        "sex": record.cohort_sex,
+        "sex_source": record.cohort_sex_source,
         "constraint_count": posterior.constraint_count,
         "estimator_ess": posterior.effective_sample_size,
         "evidence_sufficiency": {

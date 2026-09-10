@@ -161,8 +161,9 @@ def test_local_numpy_random_aliases_are_rejected(source: str) -> None:
 def capacity_baseline_writer_violations(path: Path, tree: ast.Module) -> list[str]:
     """Find every construction path for the frozen baseline record.
 
-    The `model_copy(update=...)` branch resolves its **receiver** before flagging
-    it. `model_copy` is ordinary Pydantic on every other model — `BodyState`
+    The copy branch resolves its **receiver** before flagging it, and covers every
+    copy API the type exposes (`model_copy`, and Pydantic 1's still-present
+    `copy`). Copying is ordinary Pydantic on every other model — `BodyState`
     transitions in PSV1-2 are exactly that — and a guard that bans the method name
     outright bans a legal operation the spec never restricted, which is how a
     guard gets deleted rather than tightened. What F3/F5 forbid is a second writer
@@ -172,6 +173,10 @@ def capacity_baseline_writer_violations(path: Path, tree: ast.Module) -> list[st
     record_aliases = {"CapacityBaselineRecord"}
     violations: list[str] = []
     pydantic_constructors = {"model_construct", "model_validate", "model_validate_json"}
+    #: Every copy API the type exposes. Pydantic 2 still carries `copy` from
+    #: Pydantic 1, deprecated but working, so a guard that knew only `model_copy`
+    #: left a second, quieter writer open.
+    copy_methods = {"model_copy", "copy"}
 
     for node in ast.walk(tree):
         if isinstance(node, ast.ImportFrom):
@@ -258,13 +263,13 @@ def capacity_baseline_writer_violations(path: Path, tree: ast.Module) -> list[st
                 )
             elif (
                 isinstance(node.func, ast.Attribute)
-                and node.func.attr == "model_copy"
+                and node.func.attr in copy_methods
                 and any(keyword.arg == "update" for keyword in node.keywords)
                 and is_baseline_receiver(node.func.value)
             ):
                 violations.append(
-                    f"{path.name}:{node.lineno} updates a frozen model through model_copy "
-                    f"outside seeding.py (F3/F5)"
+                    f"{path.name}:{node.lineno} updates a frozen model through "
+                    f"{node.func.attr} outside seeding.py (F3/F5)"
                 )
 
         targets: list[ast.expr] = []
@@ -317,6 +322,12 @@ def test_f3_only_seeding_writes_a_capacity_baseline(package_sources) -> None:
             "    return record.model_copy(update={'posterior_hash': 'x'})\n"
         ),
         "def forge(state):\n    return state.capacity_baseline.model_copy(update={'x': 1})\n",
+        (
+            "from embodiment.types import CapacityBaselineRecord\n"
+            "def forge(record: CapacityBaselineRecord):\n"
+            "    return record.copy(update={'posterior_hash': 'x'})\n"
+        ),
+        "def forge(state):\n    return state.capacity_baseline.copy(update={'x': 1})\n",
     ],
 )
 def test_f3_writer_guard_resolves_aliases_and_alternative_constructors(source: str) -> None:
@@ -335,6 +346,7 @@ def test_f3_writer_guard_resolves_aliases_and_alternative_constructors(source: s
             "    return body.model_copy(update={'fatigue': 0.0})\n"
         ),
         "def bump(self):\n    self.body_state = self.body_state.model_copy(update={'t': 1})\n",
+        "def update_unrelated(state):\n    return state.copy(update={'fatigue': 0.5})\n",
     ],
 )
 def test_f3_writer_guard_leaves_other_models_alone(source: str) -> None:

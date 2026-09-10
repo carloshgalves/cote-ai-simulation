@@ -63,7 +63,6 @@ def build_snapshot(
     )
     characters: dict[str, Any] = {}
     for character_id, record in sorted(store.items()):
-        posterior = posteriors[character_id]
         characters[character_id] = {
             "capacity_baseline": {
                 "schema_version": SCHEMA_VERSION,
@@ -74,11 +73,14 @@ def build_snapshot(
                     # Which marginals the copula used. A cohort covariate, not a
                     # capacity dimension: without it the percentile *view* of
                     # this body cannot be recomputed from the snapshot alone.
-                    "cohort_sex": posterior.sex,
+                    # Read off the frozen record — the authoritative output of
+                    # seeding — and not off the posterior argument, which a
+                    # caller reconstructs and which hashes the same either way.
+                    "cohort_sex": record.cohort_sex,
                     # Whether canon fixed that covariate or the cohort ratio
                     # drew it. Without it the snapshot cannot distinguish a
                     # sourced fact from an `[INT]` assumption of the prior file.
-                    "cohort_sex_source": posterior.sex_source,
+                    "cohort_sex_source": record.cohort_sex_source,
                     "substream": record.substream,
                 },
                 "evidence_sufficiency": {
@@ -152,6 +154,16 @@ def _assert_consistent_provenance(
             raise SnapshotShapeError(
                 f"characters.{character_id} prior_version disagrees across baseline, "
                 f"posterior and run_metadata"
+            )
+        #: `posterior_hash` is deliberately blind to `sex_source`, so a posterior
+        #: rebuilt with the other provenance hashes identically. Only the frozen
+        #: record says which one actually ran, and a snapshot signed over the
+        #: wrong one presents an `[INT]` assumption of the prior as canon.
+        if (record.cohort_sex, record.cohort_sex_source) != (posterior.sex, posterior.sex_source):
+            raise SnapshotShapeError(
+                f"characters.{character_id} cohort_sex provenance disagrees between the "
+                f"frozen baseline ({record.cohort_sex}/{record.cohort_sex_source}) and the "
+                f"posterior supplied ({posterior.sex}/{posterior.sex_source})"
             )
 
 

@@ -81,6 +81,10 @@ def test_f5_the_record_itself_cannot_be_rewritten(prior: PopulationPrior) -> Non
         record.profile.dimensions[Dimension.MAX_STRENGTH] = None  # type: ignore[index]
     with pytest.raises(TypeError, match="model_copy.*update"):
         record.model_copy(update={"posterior_hash": "forged"})
+    #: Pydantic 2 still carries Pydantic 1's `copy`. Deprecated is not closed: it
+    #: warns and hands back the altered record, so the rule holds on it too.
+    with pytest.raises(TypeError, match="copy.*update"):
+        record.copy(update={"posterior_hash": "forged"})
 
 
 def test_f6_scenario_7_a_late_npc_gets_the_body_it_would_have_had(prior: PopulationPrior) -> None:

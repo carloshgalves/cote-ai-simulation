@@ -67,6 +67,18 @@ def test_invariant_08_an_anchored_comparative_is_the_one_admissible_form() -> No
     assert_no_character_ordering({"feat_fixture": CANONICAL_COMPARATIVE_FEAT})
 
 
+def test_invariant_08_a_root_comparative_does_not_exempt_a_sibling_ranking() -> None:
+    """One anchored comparison is the exception; the file around it is not.
+
+    The record is valid and is the root mapping, which is exactly the position
+    that used to switch the gate off for every sibling in the document.
+    """
+    with pytest.raises(ModelFileError, match="orders subjects"):
+        assert_no_character_ordering(
+            {**CANONICAL_COMPARATIVE_FEAT, "calibration": {"ranking": ["actor.c", "actor.d"]}}
+        )
+
+
 def test_invariant_08_a_comparison_across_events_is_not_a_comparison() -> None:
     """`same_event` is `const: true` in the schema; the gate must hold it there.
 

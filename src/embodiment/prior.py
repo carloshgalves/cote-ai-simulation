@@ -31,7 +31,14 @@ import numpy as np
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 from .modelfile import PHYSICAL_MODELS_DIR, ModelFileError, load_model_file
-from .types import DIMENSION_UNITS, CapacityProfile, Dimension, DimensionValue, freeze_mapping
+from .types import (
+    DIMENSION_UNITS,
+    CapacityProfile,
+    Dimension,
+    DimensionValue,
+    Sex,
+    freeze_mapping,
+)
 
 __all__ = [
     "Sex",
@@ -45,7 +52,6 @@ __all__ = [
 
 POPULATION_PRIOR_PATH = PHYSICAL_MODELS_DIR / "population-prior.yaml"
 
-Sex = Literal["male", "female"]
 SEXES: tuple[Sex, ...] = ("male", "female")
 
 #: Order matters: it fixes which draw of the substream feeds which factor, so it

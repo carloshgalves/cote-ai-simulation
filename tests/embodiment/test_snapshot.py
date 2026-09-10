@@ -19,7 +19,15 @@ from embodiment.eventlog import (
     normalised_bytes,
 )
 from embodiment.prior import PopulationPrior
-from embodiment.seeding import CapacityBaselineStore, cohort_ids, posterior_for, seed_cohort
+from embodiment.seeding import (
+    CapacityBaselineStore,
+    CohortCovariates,
+    RunContextMismatchError,
+    cohort_ids,
+    posterior_for,
+    seed_character,
+    seed_cohort,
+)
 from embodiment.snapshot import (
     SnapshotShapeError,
     build_snapshot,
@@ -256,6 +264,39 @@ def test_snapshot_refuses_a_character_without_its_posterior(prior: PopulationPri
     ("case", "match"),
     [
         ("world_seed", "world_seed"),
+        ("prior_version", "prior_version"),
+        ("character", "posterior_hash"),
+    ],
+)
+def test_a_sample_the_log_cannot_account_for_is_refused(
+    prior: PopulationPrior, tmp_path, case: str, match: str
+) -> None:
+    """The audit artefact may not contradict its own `run.started`.
+
+    `seed_character` takes the seed and the prior as arguments and the log as
+    another, so nothing but this check ties the three together. A log whose
+    metadata says one seed and whose `capacity.sampled` was drawn under another
+    is well formed in every field and reproduces nothing.
+    """
+    _, _, metadata = make_run(prior, size=1)
+    path = tmp_path / "events.jsonl"
+    world_seed = WORLD_SEED + 1 if case == "world_seed" else WORLD_SEED
+    character_id = "npc.9999" if case == "character" else "npc.0001"
+    if case == "prior_version":
+        prior = prior.model_copy(update={"version": "9.9.9-other"})
+
+    with EventLog(path, metadata=metadata, required_components=("prior",)) as log:
+        with pytest.raises(RunContextMismatchError, match=match):
+            seed_character(world_seed, character_id, prior, log=log)
+
+    events = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+    assert [event["event"] for event in events] == [EVENT_RUN_STARTED]
+
+
+@pytest.mark.parametrize(
+    ("case", "match"),
+    [
+        ("world_seed", "world_seed"),
         ("metadata_characters", "characters"),
         ("metadata_hash", "posterior_hash"),
         ("metadata_prior", "prior_version"),
@@ -302,6 +343,60 @@ def test_snapshot_refuses_contradictory_provenance(
             posteriors=posteriors,
         )
 
+
+def test_a_drawn_covariate_cannot_be_relabelled_as_canon(prior: PopulationPrior) -> None:
+    """`posterior_hash` is blind to `sex_source` on purpose; the record is not.
+
+    Conditioning on a known male and drawing a male are the same distribution, so
+    a posterior rebuilt from `CohortCovariates` hashes identically and passes
+    every version check while claiming the other provenance. What actually
+    happened is frozen on the baseline at seeding, and the snapshot is signed
+    over that — otherwise it can present an `[INT]` cohort ratio as canon.
+    """
+    store, posteriors, metadata = make_run(prior, size=1)
+    drawn = posteriors["npc.0001"]
+    assert drawn.sex_source == "DRAWN"
+    assert store.get("npc.0001").cohort_sex_source == "DRAWN"
+
+    relabelled = posterior_for(
+        WORLD_SEED, "npc.0001", prior, covariates=CohortCovariates(sex=drawn.sex)
+    )
+    assert relabelled.posterior_hash == drawn.posterior_hash
+    assert relabelled.sex_source == "KNOWN"
+
+    with pytest.raises(SnapshotShapeError, match="cohort_sex provenance"):
+        build_snapshot(
+            world_seed=WORLD_SEED,
+            store=store,
+            metadata=metadata,
+            posteriors={"npc.0001": relabelled},
+        )
+
+
+def test_the_snapshot_reports_the_provenance_that_actually_ran(prior: PopulationPrior) -> None:
+    """A covariate canon fixes reaches the snapshot as `KNOWN`, and says so."""
+    ids = cohort_ids(1)
+    covariates = {"npc.0001": CohortCovariates(sex="male")}
+    posteriors = {
+        cid: posterior_for(WORLD_SEED, cid, prior, covariates=covariates.get(cid)) for cid in ids
+    }
+    metadata = RunMetadata.from_mapping(
+        {
+            "world_seed": WORLD_SEED,
+            "component_versions": {"prior": prior.version},
+            "posterior_hash_by_character": {
+                cid: posterior.posterior_hash for cid, posterior in posteriors.items()
+            },
+        },
+        required_components=("prior",),
+    )
+    store = seed_cohort(WORLD_SEED, ids, prior, covariates=covariates)
+    snapshot = build_snapshot(
+        world_seed=WORLD_SEED, store=store, metadata=metadata, posteriors=posteriors
+    )
+    sampled_from = snapshot["characters"]["npc.0001"]["capacity_baseline"]["sampled_from"]
+    assert sampled_from["cohort_sex"] == "male"
+    assert sampled_from["cohort_sex_source"] == "KNOWN"
 
 def test_the_hash_covers_the_body_and_not_itself(prior: PopulationPrior) -> None:
     store, posteriors, metadata = make_run(prior)

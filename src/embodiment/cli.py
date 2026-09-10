@@ -44,6 +44,8 @@ from .eventlog import (
     EVENT_BODY_ADVANCED,
     EVENT_COHORT_CORRELATION_REPORT,
     EventLog,
+    body_has_advanced,
+    logical_sim_time,
     normalised_digest,
 )
 from .prior import POPULATION_PRIOR_PATH, PopulationPrior
@@ -72,6 +74,10 @@ SEEDING_COMPONENTS: tuple[str, ...] = ("prior", "dynamics")
 #: being advanced was drawn from it, and the dynamics, because they are what
 #: moves it.
 ADVANCE_COMPONENTS: tuple[str, ...] = ("prior", "dynamics")
+
+
+class BodyAlreadyAdvancedError(RuntimeError):
+    """The seed snapshot cannot safely be advanced twice before PSV1-8."""
 
 #: Hours in a simulated day. A day that is not 24 h is a different world model.
 HOURS_PER_DAY = 24.0
@@ -339,6 +345,12 @@ def advance_clock_command(
     sleep_hours = parse_hours(sleep)
     segments = day_segments(sleep_hours, quality, wbgt_c) * days
 
+    if segments and body_has_advanced(events_path, character_id):
+        raise BodyAlreadyAdvancedError(
+            f"{character_id} has already been advanced in this run; resume/save is owned by "
+            "PSV1-8, so advancing the immutable seed snapshot again would fork its history"
+        )
+
     before = body
     capability_before = capability_available(profile, body, traits=traits, params=params)
     advances: list[dict[str, object]] = []
@@ -365,7 +377,13 @@ def advance_clock_command(
                     "dynamics_version": params.model_version,
                     "channels_changed": channel_diff(body, moved),
                 }
-                log.append(EVENT_BODY_ADVANCED, record)
+                log.append(
+                    EVENT_BODY_ADVANCED,
+                    record,
+                    sim_time=logical_sim_time(
+                        str(snapshot.get("sim_time", Y1_START)), moved.t_hours
+                    ),
+                )
                 advances.append(record)
                 body = moved
 

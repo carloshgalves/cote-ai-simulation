@@ -231,6 +231,42 @@ def test_advancing_the_same_run_twice_appends_rather_than_forking_it(tmp_path: P
     assert len({record["payload"]["character_id"] for record in records if record["event"] == "body.advanced"}) == 2
 
 
+def test_advancing_the_same_character_twice_is_refused_without_forking_its_history(
+    tmp_path: Path,
+) -> None:
+    out = run(tmp_path / "demo")
+    assert advance(out, character="npc.0001", days=1) == 0
+    before = (out / "events.jsonl").read_bytes()
+
+    with pytest.raises(RuntimeError, match="npc.0001.*already been advanced.*PSV1-8"):
+        advance(out, character="npc.0001", days=1)
+
+    assert (out / "events.jsonl").read_bytes() == before
+
+
+def test_body_advanced_events_carry_the_logical_instant_the_body_reached(tmp_path: Path) -> None:
+    out = run(tmp_path / "demo")
+    assert advance(out, character="npc.0001", days=3) == 0
+    advances = [record for record in events(out) if record["event"] == "body.advanced"]
+
+    assert [record["sim_time"] for record in advances] == [
+        "Y1_START+20h",
+        "Y1_START+24h",
+        "Y1_START+44h",
+        "Y1_START+48h",
+        "Y1_START+68h",
+        "Y1_START+72h",
+    ]
+    assert [record["payload"]["t_hours_after"] for record in advances] == [
+        20.0,
+        24.0,
+        44.0,
+        48.0,
+        68.0,
+        72.0,
+    ]
+
+
 def test_a_character_outside_the_run_is_named_rather_than_guessed(tmp_path: Path) -> None:
     out = run(tmp_path / "demo")
     with pytest.raises(KeyError, match="npc.9999"):

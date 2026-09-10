@@ -31,6 +31,8 @@ __all__ = [
     "NORMALISED_WALL_TIME",
     "normalised_bytes",
     "normalised_digest",
+    "body_has_advanced",
+    "logical_sim_time",
 ]
 
 EVENT_RUN_STARTED = "run.started"
@@ -118,11 +120,17 @@ class EventLog:
             continuing=True,
         )
 
-    def append(self, event: str, payload: Mapping[str, object]) -> dict[str, object]:
+    def append(
+        self,
+        event: str,
+        payload: Mapping[str, object],
+        *,
+        sim_time: str | None = None,
+    ) -> dict[str, object]:
         record: dict[str, object] = {
             "seq": self._sequence,
             "event": event,
-            "sim_time": self.sim_time,
+            "sim_time": self.sim_time if sim_time is None else sim_time,
             "wall_time": datetime.now(UTC).isoformat(),
             "payload": dict(payload),
         }
@@ -169,6 +177,29 @@ def _read_opening(path: Path) -> tuple[int, Mapping[str, object]]:
     if opening is None:
         raise RunContinuityError(f"{path} is empty: there is no run here to continue")
     return sequence, opening
+
+
+def body_has_advanced(path: str | Path, character_id: str) -> bool:
+    """Whether this immutable seed body already has a history in the run log."""
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        record = json.loads(line)
+        if record.get("event") != EVENT_BODY_ADVANCED:
+            continue
+        if (record.get("payload") or {}).get("character_id") == character_id:
+            return True
+    return False
+
+
+def logical_sim_time(origin: str, offset_hours: float) -> str:
+    """Render the additive body clock as a stable event-log instant."""
+    if offset_hours < 0.0:
+        raise ValueError("logical time cannot precede its origin")
+    if offset_hours == 0.0:
+        return origin
+    rendered = f"{offset_hours:.9f}".rstrip("0").rstrip(".")
+    return f"{origin}+{rendered}h"
 
 
 def _assert_same_run(path: Path, opening: Mapping[str, object], metadata: RunMetadata) -> None:

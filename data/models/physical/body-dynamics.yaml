@@ -461,11 +461,11 @@ channels:
       source: >
         [MEASURED] window: onset 12-24 h after the effort, peak between 24 and
         72 h, resolution in about 7 days, with measurable loss of concentric
-        power inside the window. [INT] form: a three-stage latency chain feeding
-        an expressed pool with its own clearance, whose constants are chosen so
-        the response lands in that window — 3 % of peak at 6 h, 62 % at 24 h,
-        peak at ~46 h, 9 % at 7 d. DOMS that shows up during the effort is
-        failure mode F11, and it is the shape of this chain that prevents it.
+        power inside the window. [INT] form: a hard 12 h onset gate followed by
+        a three-stage latency chain feeding an expressed pool with its own
+        clearance. DOMS that shows up during the effort or at 6 h is failure
+        mode F11; the explicit gate prevents that causal impossibility.
+      onset_delay_h: 12.0
       latency_stages: 3
       latency_tau_h: 11.0
       resolution_tau_h: 42.0

@@ -54,6 +54,7 @@ __all__ = [
     "InjuryMechanism",
     "InjurySeverity",
     "SleepQuality",
+    "SorenessOnset",
     "LastSleep",
     "WPrimeBalance",
     "Sleep",
@@ -568,7 +569,42 @@ class SleepQuality(StrEnum):
     POOR = "poor"
 
 
-class LastSleep(BaseModel):
+class _ValidatedStateModel(BaseModel):
+    """A physical-state value whose copy APIs preserve its declared domains.
+
+    Pydantic's default ``model_copy(update=...)`` deliberately skips validation.
+    That is useful for ordinary data-transfer models and unsafe for authoritative
+    world truth: ``frozen=True`` alone would still permit a caller to manufacture
+    an invalid body. Rebuild from plain data so nested forged models are checked
+    again as well as the field being updated.
+    """
+
+    def model_copy(
+        self, *, update: Mapping[str, Any] | None = None, deep: bool = False
+    ) -> Self:
+        if update is None:
+            return super().model_copy(deep=deep)
+        document = as_document(self)
+        document.update({name: as_document(value) for name, value in update.items()})
+        return type(self).model_validate(document)
+
+    def copy(
+        self,
+        *,
+        include: Any = None,
+        exclude: Any = None,
+        update: Mapping[str, Any] | None = None,
+        deep: bool = False,
+    ) -> Self:
+        """Close Pydantic 1's unchecked compatibility copy path too."""
+        if include is not None or exclude is not None:
+            raise TypeError(
+                "physical state cannot be copied with fields omitted; rebuild a valid model"
+            )
+        return self.model_copy(update=update, deep=deep)
+
+
+class LastSleep(_ValidatedStateModel):
     """The sleep episode that just ended, in hours since `Y1_START`."""
 
     model_config = ConfigDict(frozen=True, extra="forbid")
@@ -584,7 +620,7 @@ class LastSleep(BaseModel):
         return self
 
 
-class WPrimeBalance(BaseModel):
+class WPrimeBalance(_ValidatedStateModel):
     """Work available above critical power, and how fast it comes back.
 
     `tau_s` is recorded rather than assumed because it is not a constant: the
@@ -612,7 +648,7 @@ class WPrimeBalance(BaseModel):
         return self.remaining_j / self.capacity_j
 
 
-class Sleep(BaseModel):
+class Sleep(_ValidatedStateModel):
     """The two-process model's state: homeostatic pressure and circadian phase."""
 
     model_config = ConfigDict(frozen=True, extra="forbid")
@@ -625,7 +661,7 @@ class Sleep(BaseModel):
     last_sleep: LastSleep | None = None
 
 
-class Energy(BaseModel):
+class Energy(_ValidatedStateModel):
     """Substrate is the channel that makes a multi-day exam a multi-day exam.
 
     `balance_kcal_24h` is accounting: it is written and, in V1, read by nobody.
@@ -640,7 +676,7 @@ class Energy(BaseModel):
     last_meal_at_h: float | None = None
 
 
-class Hydration(BaseModel):
+class Hydration(_ValidatedStateModel):
     """Deficit as a percentage of body mass. Below ~2 % it costs nothing."""
 
     model_config = ConfigDict(frozen=True, extra="forbid")
@@ -648,7 +684,7 @@ class Hydration(BaseModel):
     deficit_pct_body_mass: float = Field(ge=0.0)
 
 
-class Thermal(BaseModel):
+class Thermal(_ValidatedStateModel):
     """Heat load, indexed to WBGT and to modifiable factors — never to age (F16).
 
     `wbgt`, `work_rest_ratio` and `clothing_insulation` are the environment the
@@ -665,7 +701,16 @@ class Thermal(BaseModel):
     clothing_insulation: float = Field(ge=0.0)
 
 
-class RegionSoreness(BaseModel):
+class SorenessOnset(_ValidatedStateModel):
+    """Damage held until the causal DOMS onset window opens."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    release_at_h: float = Field(ge=0.0)
+    amount: float = Field(gt=0.0)
+
+
+class RegionSoreness(_ValidatedStateModel):
     """One region's DOMS: damage still on its way, and damage being felt.
 
     The latency stages are why soreness cannot appear during the effort that
@@ -676,6 +721,7 @@ class RegionSoreness(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
 
     latency: tuple[float, ...] = ()
+    pending_onset: tuple[SorenessOnset, ...] = ()
     expressed: float = Field(default=0.0, ge=0.0, le=1.0)
 
     @field_validator("latency", mode="after")
@@ -687,7 +733,7 @@ class RegionSoreness(BaseModel):
         return value
 
 
-class Soreness(BaseModel):
+class Soreness(_ValidatedStateModel):
     """DOMS by region, plus the repeated-bout flag that stops it repeating forever."""
 
     model_config = ConfigDict(frozen=True, extra="forbid")
@@ -713,7 +759,7 @@ class Soreness(BaseModel):
         return freeze_mapping(value)
 
 
-class Healing(BaseModel):
+class Healing(_ValidatedStateModel):
     """How far along an injury is, and what loading it costs."""
 
     model_config = ConfigDict(frozen=True, extra="forbid")
@@ -725,14 +771,14 @@ class Healing(BaseModel):
     setback_on_load: float = Field(default=0.0, ge=0.0, le=1.0)
 
 
-class PainProfile(BaseModel):
+class PainProfile(_ValidatedStateModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
 
     at_rest: float = Field(default=0.0, ge=0.0, le=1.0)
     on_use: float = Field(default=0.0, ge=0.0, le=1.0)
 
 
-class Concealment(BaseModel):
+class Concealment(_ValidatedStateModel):
     """Hiding an injury is an intention with a price, not an adjective.
 
     Nothing in PSV1-2 writes this: concealment is resolved in PSV1-4 and leaks
@@ -748,7 +794,7 @@ class Concealment(BaseModel):
     leak_probability: float = Field(default=0.0, ge=0.0, le=1.0)
 
 
-class Injury(BaseModel):
+class Injury(_ValidatedStateModel):
     """A lesion, with impairments **per dimension** (failure mode F12).
 
     An `impairments` map that touches every dimension by the same factor is the
@@ -790,7 +836,7 @@ class Injury(BaseModel):
         return freeze_mapping(value)
 
 
-class Illness(BaseModel):
+class Illness(_ValidatedStateModel):
     """Serialised, and never written in V1 (spec §13.5, decided 2026-09-09).
 
     The field exists so that `snapshot_version: 1` already has room for it when a
@@ -805,7 +851,7 @@ class Illness(BaseModel):
     severity: InjurySeverity = InjurySeverity.MINOR
 
 
-class Pain(BaseModel):
+class Pain(_ValidatedStateModel):
     """Pain is a signal. It dissociates from lesion in both directions."""
 
     model_config = ConfigDict(frozen=True, extra="forbid")
@@ -826,7 +872,7 @@ class Pain(BaseModel):
         return freeze_mapping(value)
 
 
-class CumulativeLoad(BaseModel):
+class CumulativeLoad(_ValidatedStateModel):
     """Load accounting for capacity drift, which V1 does not implement.
 
     Both fields are updated and **read by nobody** (spec §3.2). The ratio between
@@ -842,7 +888,7 @@ class CumulativeLoad(BaseModel):
     chronic_28d: float = Field(default=0.0, ge=0.0)
 
 
-class BodyState(BaseModel):
+class BodyState(_ValidatedStateModel):
     """The condition a body is in right now. Structure 2 of the six of §2.
 
     World truth, owned by the engine, indexed by simulation time, and present in

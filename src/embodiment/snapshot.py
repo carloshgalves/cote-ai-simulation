@@ -74,12 +74,13 @@ def build_snapshot(
     bodies: Mapping[str, BodyState] | None = None,
     sim_time: str = Y1_START,
 ) -> dict[str, Any]:
+    validated_bodies = _validated_bodies(bodies)
     _assert_consistent_provenance(
         world_seed=world_seed,
         store=store,
         metadata=metadata,
         posteriors=posteriors,
-        bodies=bodies,
+        bodies=validated_bodies,
     )
     characters: dict[str, Any] = {}
     for character_id, record in sorted(store.items()):
@@ -113,12 +114,14 @@ def build_snapshot(
                 },
             }
         }
-        if bodies is not None:
+        if validated_bodies is not None:
             #: World truth, in the same tree as the baseline it belongs to and in
             #: full — `t_hours` is hours since the snapshot's own `sim_time`
             #: origin, and `illnesses` is present and empty because nothing in V1
             #: writes it (spec §13.5), not because nobody thought about it.
-            characters[character_id]["body_state"] = as_document(bodies[character_id])
+            characters[character_id]["body_state"] = as_document(
+                validated_bodies[character_id]
+            )
 
     snapshot: dict[str, Any] = {
         "snapshot_version": SNAPSHOT_VERSION,
@@ -129,6 +132,23 @@ def build_snapshot(
     }
     _assert_shape(snapshot)
     return snapshot
+
+
+def _validated_bodies(
+    bodies: Mapping[str, BodyState] | None,
+) -> dict[str, BodyState] | None:
+    """Reconstruct bodies from plain data before the snapshot attests them.
+
+    A caller can bypass an instance method with Pydantic's low-level construction
+    APIs. The persistence boundary therefore trusts neither the class label nor
+    ``frozen=True`` and validates the complete aggregate again before hashing.
+    """
+    if bodies is None:
+        return None
+    return {
+        character_id: BodyState.model_validate(as_document(body))
+        for character_id, body in bodies.items()
+    }
 
 
 def _assert_consistent_provenance(

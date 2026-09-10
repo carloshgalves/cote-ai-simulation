@@ -227,6 +227,27 @@ def test_the_type_refuses_a_body_outside_its_domains(rested_body, section, value
         replace_channel(rested_body, **{section: value})
 
 
+@pytest.mark.parametrize(
+    ("target", "update"),
+    [
+        ("body", {"central_fatigue": 9.0, "t_hours": -3.0}),
+        ("hydration", {"deficit_pct_body_mass": -1.0}),
+        ("sleep", {"circadian_phase": 24.0}),
+        ("soreness", {"expressed": 2.0}),
+    ],
+)
+def test_model_copy_cannot_bypass_body_state_domains(rested_body, target, update) -> None:
+    state_model = {
+        "body": rested_body,
+        "hydration": rested_body.hydration,
+        "sleep": rested_body.sleep,
+        "soreness": rested_body.soreness.by_region[FatigueRegion.LEGS],
+    }[target]
+
+    with pytest.raises(ValueError):
+        state_model.model_copy(update=update)
+
+
 def test_a_body_missing_a_fatigue_region_is_refused(rested_body) -> None:
     with pytest.raises(ValueError, match="missing region"):
         replace_channel(rested_body, peripheral_fatigue={FatigueRegion.LEGS: 0.1})

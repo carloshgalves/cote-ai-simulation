@@ -60,6 +60,7 @@ from .types import (
     Sleep,
     SleepQuality,
     Soreness,
+    SorenessOnset,
     Thermal,
     WPrimeBalance,
     as_document,
@@ -262,6 +263,7 @@ class ThermalParams(_Block):
 
 
 class _SorenessKernel(_Block):
+    onset_delay_h: float
     latency_stages: int
     latency_tau_h: float
     resolution_tau_h: float
@@ -667,12 +669,13 @@ def only_with_a_clock(channel: Callable[..., BodyState]) -> Callable[..., BodySt
 def _replace(state: BodyState, **sections: Any) -> BodyState:
     """Swap one channel of a body, leaving the rest identical.
 
-    `model_copy` rather than the constructor because every replacement here is a
-    fully validated sub-model, and the whole body is re-validated once at the
-    boundary of `advance`. It is not a second writer: this module is the only one
-    allowed to call it on a body, and a test of architecture enforces that.
+    Rebuilt through the constructor because Pydantic's default copy update is
+    unchecked. It is not a second writer: this module is the only one allowed to
+    call it on a body, and a test of architecture enforces that.
     """
-    return state.model_copy(update=sections)
+    fields = {name: getattr(state, name) for name in BodyState.model_fields}
+    fields.update(sections)
+    return BodyState(**fields)
 
 
 # --------------------------------------------------------------------------
@@ -1037,27 +1040,45 @@ def advance_soreness(state: BodyState, dt_hours: float, exposure: Exposure) -> B
         )
         key = f"{region.value}|{load.activity}"
         adapted = float(adaptation.get(key, 0.0))
+        pending = list(current.pending_onset)
+        interval_end_h = state.t_hours + dt_hours
+        due = sum(item.amount for item in pending if item.release_at_h <= interval_end_h + 1e-9)
+        pending = [item for item in pending if item.release_at_h > interval_end_h + 1e-9]
+
         if dose > 0.0:
-            latency[0] += dose * (1.0 - channel.repeated_bout.max_damage_reduction * adapted)
+            admitted_dose = dose * (1.0 - channel.repeated_bout.max_damage_reduction * adapted)
+            pending.append(
+                SorenessOnset(
+                    release_at_h=interval_end_h + kernel.onset_delay_h,
+                    amount=admitted_dose,
+                )
+            )
             adaptation[key] = _clamp(
                 adapted + (1.0 - adapted) * channel.repeated_bout.gain_per_unit_dose * dose,
                 0.0,
                 1.0,
             )
 
+        #: Flow every stage from the values present at the *start* of the step.
+        #: In-place flow would let one dose traverse the entire latency chain in
+        #: a single integration step. Newly due damage enters stage zero only
+        #: after these flows and therefore cannot be expressed immediately.
+        previous_latency = tuple(latency)
         transferred = 0.0
-        for index in range(stages):
-            flow = latency[index] * (dt_hours / kernel.latency_tau_h)
-            flow = min(flow, latency[index])
+        for index, value in enumerate(previous_latency):
+            flow = min(value * (dt_hours / kernel.latency_tau_h), value)
             latency[index] -= flow
             if index + 1 < stages:
                 latency[index + 1] += flow
             else:
-                transferred = flow
+                transferred += flow
+        latency[0] += due
         expressed = _clamp(
             current.expressed * _decay(dt_hours, kernel.resolution_tau_h) + transferred, 0.0, 1.0
         )
-        by_region[region] = RegionSoreness(latency=tuple(latency), expressed=expressed)
+        by_region[region] = RegionSoreness(
+            latency=tuple(latency), pending_onset=tuple(pending), expressed=expressed
+        )
 
     decay = _decay(dt_hours, channel.repeated_bout.decay_tau_h)
     adaptation = {key: value * decay for key, value in adaptation.items()}
@@ -1103,20 +1124,13 @@ def advance_injuries(state: BodyState, dt_hours: float, exposure: Exposure) -> B
             #: interval carries both sides of the channel, so the disappearance is
             #: in the audit artefact rather than only in the absence of a field.
             continue
-        healed.append(
-            injury.model_copy(
-                update={
-                    #: Through the constructor, not `model_copy`: pydantic does not
-                    #: revalidate a model instance it is handed, so a progress that
-                    #: only *happened* to be clamped would never be checked.
-                    "healing": Healing(
-                        expected_days=injury.healing.expected_days,
-                        progress=progress,
-                        setback_on_load=injury.healing.setback_on_load,
-                    )
-                }
-            )
+        injury_fields = {name: getattr(injury, name) for name in Injury.model_fields}
+        injury_fields["healing"] = Healing(
+            expected_days=injury.healing.expected_days,
+            progress=progress,
+            setback_on_load=injury.healing.setback_on_load,
         )
+        healed.append(Injury(**injury_fields))
     return _replace(state, injuries=tuple(healed))
 
 
@@ -1380,6 +1394,5 @@ def channel_diff(before: BodyState, after: BodyState) -> dict[str, dict[str, Any
         if old_value != new_value:
             changed[section] = {"before": old_value, "after": new_value}
     return changed
-
 
 

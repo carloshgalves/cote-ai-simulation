@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 
 import pytest
+from pydantic import BaseModel
 
 from embodiment.eventlog import (
     EVENT_CAPACITY_SAMPLED,
@@ -471,6 +472,27 @@ def test_a_body_can_be_read_back_out_of_the_snapshot(prior: PopulationPrior, dyn
 
     profile = capacity_profile_of(section)
     assert profile == store.get("npc.0001").profile
+
+
+def test_snapshot_revalidates_a_body_before_signing_world_truth(
+    prior: PopulationPrior, dynamics_params
+) -> None:
+    """Even an object forged around the public copy guard cannot be attested."""
+    store, posteriors, metadata = make_run(prior)
+    bodies = make_bodies(store, dynamics_params)
+    valid = bodies["npc.0001"]
+    bodies["npc.0001"] = BaseModel.model_copy(
+        valid, update={"central_fatigue": 9.0, "t_hours": -3.0}
+    )
+
+    with pytest.raises(ValueError):
+        build_snapshot(
+            world_seed=WORLD_SEED,
+            store=store,
+            metadata=with_dynamics(metadata, dynamics_params),
+            posteriors=posteriors,
+            bodies=bodies,
+        )
 
 
 def test_a_snapshot_with_bodies_must_say_which_dynamics_advanced_them(

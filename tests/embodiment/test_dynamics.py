@@ -539,12 +539,12 @@ def test_doms_is_absent_at_six_hours_present_at_a_day_peaks_on_the_second_and_re
     literature gives and the magnitude is `[INT]`.
     """
     worked = bout(rested_body, dynamics_params)
-    assert worked.soreness.by_region[FatigueRegion.LEGS].expressed < 0.02
+    assert worked.soreness.by_region[FatigueRegion.LEGS].expressed == 0.0
 
     curve = soreness_curve(worked, dynamics_params, (6.0, 24.0, 48.0, 72.0, 168.0))
     peak = max(curve.values())
-    assert curve[6.0] < 0.10 * peak
-    assert curve[24.0] > 0.30 * peak
+    assert curve[6.0] == 0.0
+    assert curve[24.0] > 0.0
     assert curve[48.0] > 0.90 * peak
     assert curve[168.0] < 0.15 * peak
     assert curve[24.0] < curve[48.0]

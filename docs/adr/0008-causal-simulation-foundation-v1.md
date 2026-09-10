@@ -69,6 +69,7 @@ validador/resolvedor especializado chamado pela fundação, não uma segunda aut
 | `AffordanceAssessment` | diagnóstico facetado da proposta contra um snapshot |
 | `CommitCandidate` | unidade atômica que pode produzir zero ou mais eventos e declarar conflitos |
 | `Event` | fato imutável do mundo aceito em commit |
+| `CycleCommit` | envelope persistido do `EventBatch` de um ciclo, obrigatório mesmo com zero eventos |
 | `WorldState` | redução dos eventos autoritativos até uma revisão |
 | `Observation` | evidência parcial disponibilizada a um observador por acesso perceptivo causal |
 | `Proposition` | conteúdo semântico normalizado de uma alegação; value object sem verdade embutida |
@@ -90,8 +91,9 @@ unidades causais e não dão autoridade de commit.
 - **Agregados com lifecycle:** `ScheduledOccurrence`, `Trigger` (`Definition + RuntimeState`) e
   `Transmission`.
 - **Fronteira de consistência:** `ResolutionCycle` agrega candidatos e produz um único `EventBatch` +
-  `WorldRevision`. `CausalRun` dá identidade ao histórico inteiro, mas não deve virar um objeto gigante
-  carregado em memória; seus substates continuam com owners/reducers separados.
+  `WorldRevision`, persistidos como um `CycleCommit` mesmo quando o lote tem zero eventos (§8.0).
+  `CausalRun` dá identidade ao histórico inteiro, mas não deve virar um objeto gigante carregado em
+  memória; seus substates continuam com owners/reducers separados.
 
 O `WorldState@revision` é a composição autoritativa desses substates. Atomicidade global no commit não
 transfere a responsabilidade das invariantes locais ao coordinator.
@@ -145,10 +147,37 @@ mesmo ciclo. O lote é fechado por protocolo, não pela ordem de chegada:
   nem promovida automaticamente ao ciclo seguinte. Uma nova tentativa exige novo round/input causal;
 - o wall clock que levou ao `NoProposal` fica na telemetria e não aparece como causa dentro do mundo.
 
+A membresia do ciclo é decidida por uma **barreira de admissão** única por `cycle_id`, comum a todas
+as fontes de entrada. `decision_round_id` sozinho não define ciclo:
+
+- um run tem no máximo um ciclo aberto por vez, e um ciclo hospeda no máximo um `decision_round_id`;
+  rounds não se sobrepõem. O round é vinculado a `(instant, cycle_ordinal)` na abertura e todos os
+  seus slots pertencem àquele ciclo, mesmo que carreguem `effective_at` iguais aos de outra fonte;
+- input exógeno entra apenas pelo input ledger, nunca direto no coordinator. A admissão grava
+  `(input_id → cycle_id)` antes do fechamento da barreira; essa atribuição integra o input digest
+  canônico e é reutilizada em replay/resume, exatamente como as respostas de LLM já registradas;
+- a barreira fecha quando todo slot do round está preenchido e nenhum input exógeno com
+  `effective_at <= instant` está pendente de admissão. Fechada a barreira, `admitted_input_ids` é
+  imutável;
+- input exógeno que chegue depois do fechamento nunca é inserido retroativamente: ele é admitido ao
+  próximo ciclo, com `effective_at` normalizado para o instante desse ciclo e o valor original
+  preservado no input ledger como provenance;
+- ocorrências vencidas e ativações de trigger não disputam ordem de chegada: entram por serem devidas
+  contra `base_revision` no instante do ciclo, dentro da mesma barreira.
+
+Assim, `effective_at` compartilhado por dois rounds independentes, ou por um round e um input exógeno,
+não gera ambiguidade: cada entrada tem uma única atribuição de ciclo, fixada antes de qualquer
+avaliação. Ordem de chegada ou de fechamento não altera `base_revision`, `ConflictSet`, vencedor nem
+event log.
+
+Essa barreira de admissão decide quando um ciclo **fecha**; o barrier epistemológico da §10.1 decide
+quando um round pode **abrir**. São gates complementares e não se substituem.
+
 Eventos commitados no mesmo ciclo recebem `LogicalSequence` em ordem canônica apenas para
-serialização, replay e links causais. Essa sequência não significa que um vencedor leu o resultado
-do evento anterior. Prioridade de disputa precisa vir de uma política de domínio explícita e
-versionada, nunca do sequence, da ordem de iteração ou da latência.
+serialização e replay. Essa sequência não significa que um vencedor leu o resultado do evento
+anterior e nunca cria link causal entre candidatos distintos (§8.1). Prioridade de disputa precisa
+vir de uma política de domínio explícita e versionada, nunca do sequence, da ordem de iteração ou da
+latência.
 
 Pode haver mais de um ciclo no mesmo instante: por exemplo, um commit entrega uma mensagem e a
 entrega ativa um trigger imediato. Esses ciclos têm ordinais crescentes e revisões diferentes. Uma
@@ -190,7 +219,9 @@ ScheduledOccurrence {
 Transições são monotônicas. Uma ocorrência cancelada ou consumida nunca volta a `PENDING`; reagendar
 cria outra identidade com provenance para a anterior. No vencimento, o handler puro devolve um
 `CommitCandidate` determinístico ou falha de domínio. Só depois de commit bem-sucedido a ocorrência é
-consumida. Retentativa técnica não duplica efeito por causa da identidade/idempotency key.
+consumida. Retentativa técnica não duplica efeito por causa da identidade/idempotency key. Uma
+ocorrência vencida nunca permanece `PENDING` no instante em que venceu: qualquer disposição do ciclo
+a liquida conforme a §7.
 
 Recorrência não “ressuscita” a mesma ocorrência: o consumo bem-sucedido agenda a próxima instância
 com nova identidade e link causal. Criação, cancelamento e consumo são representados por eventos de
@@ -265,7 +296,7 @@ Cada proposta produz um `AffordanceAssessment` facetado:
 ```text
 FacetResult {
   facet: PHYSICAL | ACCESS | RESOURCE | TEMPORAL | INSTITUTIONAL | LEGAL
-  status: SATISFIED | UNSATISFIED | NOT_APPLICABLE
+  status: SATISFIED | UNSATISFIED | NOT_APPLICABLE | INDETERMINATE
   policy_effect: BLOCKS_EXECUTION | RECORDS_VIOLATION | INFORMATIONAL
   reason_code
   evidence_refs[]
@@ -273,9 +304,13 @@ FacetResult {
 }
 ```
 
-`INDETERMINATE` não é um resultado silenciosamente aceito ou negado: significa que regra, dado ou
-resolvedor necessário está ausente e aborta o ciclo antes do commit. Isso impede que lacunas de
-implementação virem realidade do mundo por default.
+`INDETERMINATE` é status de primeira classe da faceta, não um resultado silenciosamente aceito ou
+negado: significa que regra, dado ou resolvedor necessário está ausente. Ele é gravado no decision
+ledger com `facet`, `reason_code`, `evidence_refs` e `rule_version` do validador que faltou, junto da
+disposição do ciclo, e só então o ciclo aborta antes do commit — independentemente do `policy_effect`
+declarado, que descreve regra existente e não supre regra ausente. Ciclo abortado não persiste
+`CycleCommit` nem publica revisão (§8.0), de modo que o comportamento fail-closed fica auditável sem
+inventar estado. Isso impede que lacunas de implementação virem realidade do mundo por default.
 
 O efeito da faceta é definido pelo tipo de ação/regra:
 
@@ -324,8 +359,24 @@ declara:
 
 Dois candidatos sem conflito podem ambos vencer. Em conflito, o resolvedor produz uma disposição
 determinística (`COMMIT`, `REJECT`, `DEFER`) para cada candidato. Empate estocástico só usa substream
-nomeado. `DEFER` exige nova ocorrência/proposta com identidade e tempo explícitos; não deixa trabalho
-fantasma na memória do processo.
+nomeado.
+
+Toda disposição liquida a fonte do candidato no mesmo commit atômico. Nenhuma delas pode deixar a
+fonte pendente no instante já avaliado:
+
+- `COMMIT`: os eventos do candidato entram no lote; a ocorrência vai a `CONSUMED`, o
+  `TriggerRuntimeState` registra a ativação e a proposta recebe disposição no decision ledger — as
+  transições de agenda/trigger como eventos de lifecycle no mesmo `EventBatch`;
+- `REJECT`: nenhum evento de domínio do candidato entra no lote, mas os eventos de lifecycle da fonte
+  entram. A ocorrência vencida vai a estado terminal — `CONSUMED` quando foi avaliada e descartada,
+  `CANCELLED` quando a política a retira —, o trigger registra a avaliação e o rearm previsto pela
+  sua própria política, e a rejeição fica no decision ledger com `reason_code`. Assim nenhuma fonte
+  continua `PENDING` no instante corrente e nenhum trigger redispara a partir de estado velho;
+- `DEFER`: a fonte antiga também vai a estado terminal e o mesmo commit cria a nova ocorrência ou o
+  novo input causal, com identidade nova, `effective_at` estritamente posterior — instante futuro ou
+  próximo ciclo do mesmo instante, contando para o limite de cascata — e provenance para a fonte
+  anterior. `DEFER` nunca reabre a identidade antiga nem deixa trabalho fantasma na memória do
+  processo.
 
 O commit é uma transação única sobre `base_revision`: ou todos os eventos dos candidatos vencedores,
 incluindo eventos de lifecycle de agenda/trigger, e a nova revisão persistem, ou nada persiste. Antes
@@ -334,6 +385,33 @@ verificadas. Falha em evento, reducer, schema, provenance ou invariante aborta o
 commit parcial de uma ação multi-evento nem event log adiantado em relação ao state store.
 
 ### 8. Eventos e ledgers
+
+#### 8.0 Envelope de commit do ciclo
+
+Todo ciclo fechado com sucesso persiste no event store um envelope do seu lote, **inclusive quando o
+lote tem zero eventos**:
+
+```text
+CycleCommit {
+  run_id
+  cycle_id
+  instant
+  cycle_ordinal
+  base_revision + base_state_hash
+  result_revision + result_state_hash
+  admitted_input_ids[]
+  event_ids[]              // pode ser vazio
+  next_logical_sequence
+  batch_digest
+}
+```
+
+Um ciclo em que todos os slots produziram `NoProposal`, ou em que todo candidato foi rejeitado sem
+gerar evento de lifecycle, ainda avança `WorldRevision` e `cycle_ordinal`. O envelope é o registro que
+torna esse avanço reconstruível: o replay percorre a sequência de `CycleCommit` e reaplica os eventos
+de cada um, reproduzindo revisão vazia, ordinal e `next_logical_sequence` sem precisar de evento
+decorativo nem de um snapshot do coordinator. Ciclo abortado não produz envelope, não publica revisão
+e não avança o ordinal do instante.
 
 #### 8.1 Envelope de `Event`
 
@@ -357,9 +435,14 @@ Event {
 ```
 
 `event_id` é derivado deterministicamente do run/ciclo/candidato/posição canônica, ou usa outro
-esquema de identidade determinístico equivalente. Pais causais precisam existir, estar no mesmo
-instante com sequência anterior ou em instante anterior, formando DAG. Provenance sem evento pai usa
-`InputRef` ou `GenesisRef`; não se inventa evento decorativo só para preencher a cadeia.
+esquema de identidade determinístico equivalente. Pais causais precisam existir e formar DAG, e só
+podem estar em um ciclo anterior — ou no mesmo ciclo quando pai e filho vêm do **mesmo
+`CommitCandidate` atômico**, com o pai em posição canônica anterior dentro daquele candidato. Link
+causal entre candidatos distintos do mesmo ciclo é proibido: eles leram a mesma `base_revision` e
+nenhum pôde observar o resultado do outro, portanto `LogicalSequence` menor não é causa. Reação ao
+evento de outro candidato pertence a um `ResolutionCycle` posterior, como já exige a §9. Provenance
+sem evento pai usa `InputRef` ou `GenesisRef`; não se inventa evento decorativo só para preencher a
+cadeia.
 
 Eventos são imutáveis, factuais e no passado perfeito do mundo: `door.opened`, `message.sent`,
 `resource.transferred`. Intenção, manipulação, confiança e interpretação não entram como fato físico.
@@ -550,7 +633,7 @@ O contrato reproduzível é:
 
 ```text
 mesmo genesis snapshot/config
-+ mesmos inputs admitidos em bytes canônicos
++ mesmos inputs admitidos em bytes canônicos, com a mesma atribuição de ciclo registrada
 + mesmas versões de schema/reducer/validator/resolver/RNG
 + mesmo world seed
 → mesmo input/decision digest
@@ -584,17 +667,39 @@ Um snapshot causal contém, no mínimo:
 - cursores/digests do input, decision, event e evidence ledgers;
 - schemas e versões de reducers, validators, resolvers e RNG necessários;
 - outboxes/inboxes causais cuja entrega ainda não foi confirmada;
+- `EpistemicCheckpointRef` versionado de cada ator com estado epistemológico;
 - hash canônico do snapshot.
 
-Projeções reconstruíveis e caches não entram como autoridade. Estado de crença/memória pode viajar no
-mesmo checkpoint para pause/resume, mas fica em árvore e ownership separados do world truth, conforme
-ADR 0001.
+Projeções reconstruíveis e caches não entram como autoridade. Estado de crença, memória e reflexão,
+porém, não é projeção reconstruível: ele deriva de LLM e o replay é proibido de chamar modelo (§11).
+Por isso um checkpoint resumível **precisa** conter, ou referenciar atomicamente, um checkpoint
+epistemológico versionado de todo ator que possua esse estado:
+
+```text
+EpistemicCheckpointRef {
+  actor_id
+  store_id + schema_version
+  content_ref | inline_payload
+  content_hash
+  producer + producer_version
+  covers_through: { instant, revision, evidence_cursor }
+}
+```
+
+Para a fundação esse checkpoint é **opaco**: a CSF verifica apenas presença, versão, hash e cobertura
+— `covers_through` precisa alcançar o instante, a revisão e o cursor de evidência do snapshot — e
+falha fechado quando um ator elegível está ausente ou defasado. Conteúdo, modelo de crença, reflexão
+e política de esquecimento continuam propriedade de `Agent Knowledge & Memory`/Cognition, em árvore e
+ownership separados do world truth, conforme ADR 0001; este ADR não os modela. Referência atômica
+significa que checkpoint causal e checkpoint epistemológico são salvos e carregados como unidade
+verificada por hash: um sem o outro é snapshot inválido, não snapshot parcial.
 
 Há duas provas distintas:
 
 1. **event replay:** genesis + event store reconstrói exatamente o mesmo `WorldState`/hash;
 2. **resume equivalence:** snapshot + tails dos ledgers produz o mesmo log e estado que a execução
-   contínua.
+   contínua. Essa prova inclui o estado epistemológico restaurado do checkpoint, nunca regenerado por
+   chamada de modelo.
 
 O event replay reconstrói agenda e trigger runtime porque suas transições são eventos. O evidence
 ledger pode ser verificado diretamente ou regenerado deterministicamente a partir de eventos,
@@ -636,7 +741,8 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 4. `LogicalSequence` ordena fatos commitados; não decide disputa.
 5. Occurrence/trigger handlers, validators e reducers não mutam stores diretamente.
 6. Trigger repetível tem rearm/cadência persistida; reavaliação sozinha nunca repete efeito.
-7. Resultado indeterminado de validação aborta; lacuna de implementação não vira permissão.
+7. Resultado indeterminado de validação é `INDETERMINATE` registrado no decision ledger e aborta o
+   ciclo; lacuna de implementação não vira permissão.
 8. Proibição institucional/legal não implica impossibilidade física.
 9. Eventos são fatos do mundo; claims são alegações; observations são evidência disponível.
 10. Evento existente, público ou secreto não altera conhecimento sem rota causal registrada.
@@ -651,12 +757,26 @@ uma leitura privilegiada não pode vazar por efeito colateral.
     ele.
 19. Contexto de agente é allow-list por holder/timeline/provenance; não é uma view redigida do estado
     global.
+20. Toda entrada causal recebe atribuição de ciclo na barreira de admissão antes de ser avaliada;
+    rounds não se sobrepõem e ordem de chegada nunca decide membresia.
+21. Toda disposição (`COMMIT`, `REJECT`, `DEFER`) liquida a fonte do candidato no mesmo commit;
+    nenhuma fonte vencida permanece `PENDING` no instante avaliado.
+22. Todo ciclo commitado persiste um `CycleCommit`, mesmo com zero eventos.
+23. Link causal dentro do mesmo ciclo só existe entre eventos do mesmo `CommitCandidate` atômico.
+24. Checkpoint resumível contém ou referencia atomicamente checkpoint epistemológico versionado de
+    cada ator elegível.
 
 ## Cenários de stress e provas de aceite
 
 | Cenário | Prova exigida |
 |---|---|
 | Duas respostas LLM chegam em ordens opostas | mesmo `decision_round_id` + `base_revision`; log e vencedor idênticos |
+| Dois rounds independentes, ou round e input exógeno, declaram o mesmo `effective_at` | barreira única atribui ciclo antes da avaliação; base revision, `ConflictSet`, vencedor e log não mudam com a ordem de chegada |
+| Candidato de ocorrência vencida é rejeitado | ocorrência termina no mesmo commit; nenhum `PENDING` remanescente e nenhum redisparo a partir de estado velho |
+| Ciclo em que todos os slots respondem `NoProposal` | `CycleCommit` vazio persistido; replay reproduz revisão, ordinal e `next_logical_sequence` |
+| Faceta sem regra, dado ou resolvedor disponível | `INDETERMINATE` no decision ledger; nenhum commit, nenhum envelope, nenhuma revisão publicada |
+| Dois candidatos vencem no mesmo ciclo | nenhum evento de um aparece como `causal_parent` do outro; reação exige ciclo posterior |
+| Resume de snapshot com crença formada por LLM | checkpoint epistemológico presente, versionado e coberto por hash; resume equivalente sem chamar modelo |
 | Duas ações consomem a última unidade | um `ConflictSet`; política/seed fixa seleciona o mesmo resultado; saldo nunca negativo |
 | Regra proíbe agressão, mas corpos e acesso permitem | ação pode commitar; `institution.rule_violated` existe; punição só após cadeia de detecção/resposta |
 | Evento secreto sem observador elegível | evento existe; zero `Observation`/`KnowledgeInput` para ator não relacionado |
@@ -683,8 +803,8 @@ Os nomes concretos podem variar, mas a responsabilidade não:
 | Contrato | Responsabilidade única |
 |---|---|
 | `Clock` | expor/avançar `SimulationInstant` conforme próxima entrada causal |
-| `CycleCoordinator` | abrir/fechar lote sobre uma revisão e coordenar o commit |
-| `InputLedger` | admitir inputs idempotentes e preservar ordem declarada do round |
+| `CycleCoordinator` | abrir/fechar a barreira de admissão sobre uma revisão e coordenar o commit |
+| `InputLedger` | admitir inputs idempotentes, fixar sua atribuição de ciclo e preservar ordem declarada do round |
 | `ScheduleStore` | manter lifecycle de occurrences e consultar vencidas |
 | `TriggerRegistry` | armazenar definition/version e runtime state |
 | `OccurrenceHandler` | transformar occurrence vencida em candidato, sem side effect |
@@ -692,14 +812,14 @@ Os nomes concretos podem variar, mas a responsabilidade não:
 | `AffordanceValidator` | produzir facets contra a revisão congelada |
 | `ConflictDetector` | construir conflict sets conservadores |
 | `ConflictResolver` | produzir disposições sob política/version/seed explícitos |
-| `CommitCoordinator` | validar lote/post-state e persistir evento+revisão atomicamente |
+| `CommitCoordinator` | validar lote/post-state e persistir `CycleCommit`+eventos+revisão atomicamente |
 | `EventStore` | append/read de eventos imutáveis; sem API update/delete |
 | `ReducerRegistry` | mapear cada event type ao único owner/reducer versionado |
 | `PerceptionResolver` | transformar evento+acesso em observations endereçadas |
 | `EvidenceLedger` | persistir observations/recibos por destinatário, append-only |
 | `EpistemicOutbox` | retomar entrega idempotente e impor barrier antes do próximo round |
 | `KnowledgeInputSink` | entregar idempotentemente recibos, sem formar crença |
-| `SnapshotStore` | salvar/carregar checkpoint versionado e verificado por hash |
+| `SnapshotStore` | salvar/carregar checkpoint causal + referência epistemológica como unidade verificada por hash |
 | `ObservatoryQueries` | leitura sem dependências transitivas de escrita |
 
 Não haverá um `WorldService` genérico que valide, resolva, mute, perceba e comunique. Esses contratos
@@ -713,7 +833,8 @@ existem para tornar impossível que dois módulos decidam o mesmo verbo.
 4. `EventBatch`, reducers, transação e replay de world state.
 5. `Observation`, `Claim`, `Transmission` e entrega agendada.
 6. `KnowledgeInput` idempotente e testes de isolamento.
-7. Snapshot/resume completo e Observatory estritamente read-only.
+7. Snapshot/resume completo, incluindo o contrato opaco de checkpoint epistemológico, e Observatory
+   estritamente read-only.
 8. Adapter do `Embodiment` para envelope/revisão canônicos.
 
 Cada passo deve ser um tracer bullet testável; as regras concretas de exames, economia e relações vêm

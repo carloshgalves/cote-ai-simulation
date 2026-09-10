@@ -1,0 +1,623 @@
+# BODY_DYNAMICS — how a body changes when the clock moves, and nothing else.
+#
+# NOT CANON. This is our reconstruction of physiology, never a claim about the
+# work and never a rule of the school. No record here may appear in
+# provenance.supports of a canon claim (ADR 0005 §7).
+#
+# READ THIS BEFORE USING THE NUMBERS
+#
+#   HONESTY NOTE, carried here from ADR 0006 and docs/research/physical-domain-v1.md §4,
+#   because this is the file someone will cite later:
+#
+#     The two-exponential form used for between-day fatigue (a slow trace and a
+#     fast one, after the impulse-response tradition) is adopted as CONSISTENT
+#     STATE ACCOUNTING, NOT as a validated predictor of performance. The reviews
+#     of impulse-response models are harsh: imprecise parameter estimates, poor
+#     conditioning, parameters that resist practical interpretation, and failure
+#     to predict future performance. We keep the SHAPE because a body needs a
+#     coherent ledger across days; we do not keep the claim.
+#
+#     The shift of `recovery_rate` toward this cohort is INTERPOLATION, declared
+#     as such. Adolescents recover faster than adults from intense effort, but
+#     the strongest evidence is pre-pubertal; 15-18 sits between child and adult
+#     and nobody measured it there. It is not a measurement and this file will
+#     not present it as one.
+#
+#   TIME CONSTANTS are the part of this file with real sources: the W'
+#   reconstitution constants, the sleep-deprivation effect sizes, the 2 % body
+#   mass hydration threshold, and the DOMS onset/peak/resolution windows are
+#   [MEASURED]. Everything that turns a time constant into a number of
+#   percentage points — every gain, every functional form, every coefficient
+#   below — is [INT]. That is why `status: PROVISIONAL` with no sourcing gap
+#   open: nothing here is waiting on a transcription, and nothing here is
+#   calibrated either.
+#
+# TWO REGION TAXONOMIES, DELIBERATELY DIFFERENT (spec §13.2, decided 2026-09-09)
+#
+#   `peripheral_fatigue` has FOUR regions: legs, arms, grip, core.
+#   `Injury.region` is FINE: wrist_left, hand_right, ankle_left, and so on.
+#
+#   They differ on purpose. Fatigue is a reservoir that a whole limb shares, and
+#   four reservoirs are enough for running, gripping and sustained work; an
+#   injury is a lesion of one tissue in one place, and the distinction between a
+#   wrist and a hand is exactly what decides an exam of grip. Unifying the two
+#   would buy a distinction that the mechanism which uses it does not even read:
+#   what decides a grip exam is `Injury.impairments`, PER DIMENSION, not the
+#   region a fatigue reservoir is named after.
+#
+#   The asymmetry is only safe while the map between them is TOTAL, so it is
+#   written out below (`taxonomies.injury_region_to_fatigue_region`) and a test
+#   of PSV1-2 fails if any injury region lacks an image. The map is LOSSY by
+#   construction — `head` and `neck` land on `core` because the coarse taxonomy
+#   has no head — and a head injury therefore acts through its per-dimension
+#   `impairments`, never through fatigue. Fatigue does not gain granularity in
+#   V1; an exam that needs fatigue told apart between wrist and hand is a spec
+#   revision, not a parameter change.
+#
+# ILLNESS IS NOT A CHANNEL HERE (spec §13.5, decided 2026-09-09)
+#
+#   The nine dynamic channels of physical-model.md §7 do not include illness.
+#   `BodyState.illnesses` is serialised in snapshot_version 1 and NOTHING in V1
+#   writes it; every V1 run leaves it `[]`. That is a decision, not an oversight,
+#   and a test of PSV1-2 fails if any module writes the field. A survival exam
+#   will need it, and a version bump costs more than an empty list.
+#
+# CAPACITY DRIFT IS NOT HERE EITHER (spec §3.2). `cumulative_load.acute_7d` and
+# `chronic_28d` are accounted for below and READ BY NOBODY in V1 — the field
+# exists, is updated, and nothing depends on it. The ratio between them is NOT a
+# risk factor and must not become one (failure mode F14, research §7.1).
+#
+# Model:    docs/architecture/physical-model.md §7
+# Research: docs/research/physical-domain-v1.md §4
+# Spec:     docs/spec/physical-simulation-v1.md §5.1
+# Ticket:   docs/tickets/physical-simulation-v1/02-corpo-que-persiste.md
+
+schema_version: 1
+not_canon: true
+model_kind: BODY_DYNAMICS
+model_version: 0.1.0-provisional
+status: PROVISIONAL
+
+provenance:
+  calibrated_against: >
+    Physiology literature reviewed in docs/research/physical-domain-v1.md §4:
+    critical power / W' balance for intra-event fatigue, the two-process model of
+    sleep regulation plus a sleep-deprivation meta-analysis for the per-dimension
+    ordering, a 34-study review for the 2 % body-mass hydration threshold, muscle
+    glycogen work for substrate, and the DOMS onset/peak/resolution window with
+    the repeated-bout effect. Deterministic unit tests stand in for calibration
+    everywhere a gain is [INT], which is nearly everywhere.
+  sourcing_gaps: []
+  open_questions: []
+  research: docs/research/physical-domain-v1.md
+  decision: docs/adr/0006-physical-domain-model.md
+
+evidence_sufficiency:
+  overall: 0.2
+  basis: >
+    The time constants are sourced and the functional forms are not. A reader can
+    trust the ORDER and the SCALE of what happens here — W' reconstitutes in
+    minutes, DOMS peaks on the second day, glycogen stays low for days on a poor
+    diet, max_strength barely notices lost sleep — and must not trust the number
+    of percentage points any of it costs. Nothing in this file is waiting on a
+    transcription: it is provisional because it is uncalibrated, not because it
+    is unfinished.
+  by_component:
+    time_constants: 0.6
+    sleep_effect_ordering: 0.7
+    functional_forms: 0.0
+    gains_and_coefficients: 0.0
+    region_maps: 0.0
+
+# --------------------------------------------------------------------------
+# Taxonomies
+# --------------------------------------------------------------------------
+
+taxonomies:
+  note: >
+    The two lists below are the whole of decision 13.2. src/embodiment/types.py
+    holds the same two taxonomies as enums and a test fails if either drifts from
+    this file.
+  fatigue_regions: [legs, arms, grip, core]
+  injury_regions:
+    - head
+    - neck
+    - shoulder_left
+    - shoulder_right
+    - upper_arm_left
+    - upper_arm_right
+    - elbow_left
+    - elbow_right
+    - forearm_left
+    - forearm_right
+    - wrist_left
+    - wrist_right
+    - hand_left
+    - hand_right
+    - finger_left
+    - finger_right
+    - chest
+    - upper_back
+    - lower_back
+    - abdomen
+    - groin
+    - hip_left
+    - hip_right
+    - thigh_left
+    - thigh_right
+    - knee_left
+    - knee_right
+    - shin_left
+    - shin_right
+    - calf_left
+    - calf_right
+    - ankle_left
+    - ankle_right
+    - foot_left
+    - foot_right
+    - toe_left
+    - toe_right
+  injury_region_to_fatigue_region:
+    head: core
+    neck: core
+    shoulder_left: arms
+    shoulder_right: arms
+    upper_arm_left: arms
+    upper_arm_right: arms
+    elbow_left: arms
+    elbow_right: arms
+    forearm_left: arms
+    forearm_right: arms
+    wrist_left: grip
+    wrist_right: grip
+    hand_left: grip
+    hand_right: grip
+    finger_left: grip
+    finger_right: grip
+    chest: core
+    upper_back: core
+    lower_back: core
+    abdomen: core
+    groin: core
+    hip_left: legs
+    hip_right: legs
+    thigh_left: legs
+    thigh_right: legs
+    knee_left: legs
+    knee_right: legs
+    shin_left: legs
+    shin_right: legs
+    calf_left: legs
+    calf_right: legs
+    ankle_left: legs
+    ankle_right: legs
+    foot_left: legs
+    foot_right: legs
+    toe_left: legs
+    toe_right: legs
+
+# --------------------------------------------------------------------------
+# Integration
+# --------------------------------------------------------------------------
+
+integration:
+  source: >
+    [INT] Fixed-step integration at quarter-hour resolution. The step is small
+    against the shortest time constant that survives to this layer (W'
+    reconstitution, ~6-10 min) and large enough that a month of simulated time is
+    a few thousand steps. An interval that is a whole number of steps decomposes
+    exactly: advancing 24 h in one call equals advancing 12 h twice. The cap
+    refuses a single call so long that the fixed step stops being a small step.
+  step_hours: 0.25
+  max_interval_hours: 720.0
+
+reference_body:
+  source: >
+    [INT] The cohort-reference body the channel gains are written against. A real
+    body's own values are read from its frozen capacity_baseline (body_mass,
+    recovery_rate, thermoregulation, injury_resilience) and these stand in only
+    where a channel is exercised without one.
+  body_mass_kg: 58.0
+  recovery_rate_h: 24.0
+  thermoregulation_c: 28.0
+  injury_resilience: 1.0
+
+# --------------------------------------------------------------------------
+# The nine dynamic channels of physical-model.md §7
+# --------------------------------------------------------------------------
+
+channels:
+
+  w_prime_balance:
+    time_scale: seconds to minutes
+    degrades: [anaerobic_power, sprint_speed]
+    reconstitution_tau_s:
+      source: >
+        [MEASURED] W' reconstitution time constants by recovery intensity:
+        ~377 s recovering at 20 W, ~452 s in the moderate domain, ~580 s in the
+        heavy domain (research §4). The constant is LARGER the harder the
+        recovery, which is the counter-intuitive part and the reason it is
+        written out rather than remembered.
+      at_low_intensity: 377.0
+      at_moderate_intensity: 452.0
+      at_heavy_intensity: 580.0
+    reconstitution_interpolation:
+      source: >
+        [INT] Linear in recovery intensity between the low and heavy anchors,
+        with the moderate anchor falling where the literature puts it. The three
+        points are measured; the curve through them is ours.
+      moderate_intensity_fraction: 0.37
+    critical_power_fraction:
+      source: >
+        [INT] The fraction of capability_available treated as sustainable. Above
+        it W' drains, below it W' reconstitutes. Critical power sits well below
+        maximal in every published fit; 0.75 is a plausible placement, not one.
+      value: 0.75
+    depletion_rate_per_hour_per_unit_excess:
+      source: >
+        [INT] Fraction of W' capacity spent per hour, per unit of intensity above
+        critical power. At 100 % of available capability (0.25 above CP) this
+        empties a full reserve in about ten minutes, which is the right order for
+        time-to-exhaustion above CP.
+      value: 24.0
+    capacity_j:
+      source: >
+        [INT] Reserve above critical power for the reference body, scaled
+        linearly by body mass. W' magnitudes come from cycle ergometry on adults
+        and transfer to a school corridor only in order of magnitude.
+      reference_j: 20000.0
+
+  peripheral_fatigue:
+    time_scale: hours
+    degrades: [max_strength, strength_endurance]
+    regions: [legs, arms, grip, core]
+    recovery_tau_h:
+      source: >
+        [INT] Per-region multiplier on the body's own recovery_rate (a time
+        constant in hours, drawn from the prior). Grip recovers fastest, legs
+        slowest; the ordering is conventional and the numbers are ours.
+      legs: 1.0
+      arms: 0.9
+      grip: 0.7
+      core: 1.0
+    accrual_per_hour_at_full_load:
+      source: >
+        [INT] Fraction of the remaining headroom to full fatigue accrued per hour
+        of work at the region's full available capability. Approach to 1 is
+        asymptotic, so no load can push a region past saturation.
+      value: 1.2
+
+  central_fatigue:
+    time_scale: hours to days
+    degrades: [coordination, reaction_time]
+    recovery_tau_h:
+      source: >
+        [INT] The slow trace of the two-exponential form — see the honesty note
+        at the top of this file. Recovery is faster asleep than awake, which is
+        the one part of this the sleep literature does support.
+      awake: 60.0
+      asleep: 14.0
+    accrual_per_hour_at_full_load:
+      source: "[INT] Central cost of an hour of work at full available capability."
+      value: 0.35
+    accrual_per_hour_at_full_sleep_pressure:
+      source: >
+        [INT] Sleep pressure feeds the slow trace as well as degrading
+        performance directly. Both paths are in the model's own channel table —
+        `central_fatigue` and `sleep.debt` are separate rows with separate time
+        scales — so the coupling is deliberate, and this gain is deliberately
+        small so that the fast path stays the dominant one.
+      value: 0.015
+
+  sleep:
+    time_scale: days
+    degrades: [coordination, reaction_time, aerobic_capacity, anaerobic_power, sprint_speed, agility, strength_endurance, max_strength]
+    need_hours_per_day:
+      source: >
+        [MEASURED] 8-10 h is the recommendation for this age band, which also has
+        a delayed circadian phase; early school hours therefore produce systematic
+        chronic deprivation. In a boarding school that is everybody's baseline,
+        not scene colour. 9.0 is the midpoint of the recommended band.
+      value: 9.0
+    quality_efficiency:
+      source: >
+        [INT] Fraction of time in bed that repays the debt. The three grades are a
+        modelling convenience; no measurement grades sleep this way.
+      good: 1.0
+      fair: 0.85
+      poor: 0.7
+    debt_cap_hours:
+      source: "[INT] Ceiling on accumulated debt, so an unslept month saturates instead of diverging."
+      value: 40.0
+    process_s:
+      source: >
+        [INT] Homeostatic pressure as a saturating function of accumulated debt
+        plus the hours awake beyond a normal waking day. The two-process model is
+        [MEASURED] as a framework; this parameterisation of it is not.
+      half_saturation_h: 12.0
+      normal_waking_hours: 16.0
+    process_c:
+      source: >
+        [MEASURED] as a framework, [INT] as numbers. Circadian trough in the
+        small hours; adolescents run phase-delayed, which is why the trough sits
+        at 05:00 and not earlier. The gain is the amplitude of the circadian
+        modulation of homeostatic pressure.
+      trough_hour: 5.0
+      gain: 0.35
+    performance_loss_gain:
+      source: >
+        [INT] Percentage points of capability lost per unit of standardised mean
+        difference per unit of sleep pressure. The RATIOS between dimensions are
+        measured (see degradation.sleep_sensitivity); this scalar, which turns
+        them into a magnitude, is not.
+      value: 0.12
+
+  energy:
+    time_scale: hours to days
+    degrades: [aerobic_capacity, strength_endurance]
+    resting_burn_per_hour:
+      source: "[INT] Substrate spent per hour at rest, as a fraction of a full store."
+      value: 0.010
+    work_burn:
+      source: >
+        [MEASURED] that glycogen degradation rises EXPONENTIALLY with intensity
+        and that depletion is a principal cause of fatigue in prolonged effort;
+        [INT] for both constants below.
+      coefficient: 0.020
+      intensity_exponent: 2.0
+    repletion_per_hour_at_full_diet:
+      source: >
+        [MEASURED] that full glycogen resynthesis takes on the order of 20-24 h
+        with adequate carbohydrate, and that with a low-carbohydrate diet
+        glycogen STAYS LOW FOR SEVERAL DAYS. [INT] for the linear scaling by
+        carbohydrate intake, which is what makes the third day of a rationed exam
+        start worse than the first.
+      value: 0.045
+    kcal_ledger:
+      source: >
+        [INT] Accounting only, in the manner of cumulative_load: written every
+        interval and read by nobody in V1. Expenditure is the reference body's
+        resting cost plus the cost of work at full available capability; intake
+        is the ration the environment offered. The three numbers are plausible
+        for this cohort and are not measurements, which is why nothing is allowed
+        to depend on them yet.
+      resting_expenditure_per_day: 1800.0
+      work_expenditure_per_hour_at_full: 600.0
+      intake_per_day_at_full_ration: 2400.0
+      window_tau_h: 24.0
+    dehydration_coupling:
+      source: >
+        [MEASURED] that dehydration increases glycogen use; [INT] for the size.
+        Applied per percentage point of body-mass deficit above the threshold.
+      per_pct_above_threshold: 0.15
+
+  hydration:
+    time_scale: hours
+    degrades: [aerobic_capacity]
+    threshold_pct_body_mass:
+      source: >
+        [MEASURED] Review of 34 studies / 60 endurance observations: 41/60 (68 %)
+        significantly impaired at a loss of 2 % of body mass or more, 53/60 (88 %)
+        in the direction of impairment. Below the threshold the effect is
+        negligible; above it, progressive.
+      value: 2.0
+    sweat_rate_pct_body_mass_per_hour:
+      source: >
+        [INT] Sweat loss per hour as a fraction of body mass, driven by the heat
+        index above a neutral WBGT and by work intensity, scaled by the
+        work:rest ratio and by clothing insulation. Work is converted into
+        degrees of equivalent heat index so that hard work sweats in a mild room,
+        which a term in WBGT alone would miss. Age is NOT a term here and must
+        not become one (failure mode F16).
+      per_degree_above_neutral: 0.030
+      work_equivalent_degrees: 6.0
+    intake_pct_body_mass_per_hour:
+      source: >
+        [INT] Replacement at full ad-libitum access, per hour. Scaled linearly by
+        the fluid access the environment actually offers, so a rationed exam is a
+        state that persists rather than a modifier of the day.
+      value: 0.35
+    max_deficit_pct_body_mass:
+      source: "[INT] Ceiling. Past this a body is a medical event, not a simulation parameter."
+      value: 12.0
+    loss_per_pct_above_threshold:
+      source: "[INT] Capability lost per percentage point of deficit above the threshold, before thermal amplification."
+      value: 0.09
+
+  thermal:
+    time_scale: minutes to hours
+    degrades: all
+    neutral_wbgt_c:
+      source: "[INT] WBGT below which the environment imposes no heat load."
+      value: 21.0
+    core_offset:
+      source: >
+        [INT] Core temperature offset as a first-order response to heat load,
+        with heat load indexed to WBGT, work intensity, the work:rest ratio and
+        clothing insulation — the modifiable factors, exactly as the review
+        frames them. NO AGE TERM (failure mode F16): with adequate hydration
+        there is no demonstrated difference in heat accumulation, core
+        temperature or tolerance for this cohort. Individual variation lives in
+        the `thermoregulation` dimension of the body's own capacity baseline.
+      gain_c_per_hour: 1.5
+      dissipation_tau_h: 0.8
+      resting_fraction: 0.30
+      max_offset_c: 4.0
+      dehydration_amplification_per_pct: 0.20
+    loss_per_degree_over_tolerance:
+      source: >
+        [INT] Capability lost per degree of WBGT above the body's own tolerated
+        WBGT, plus per degree of core offset. This is the one channel that
+        degrades every dimension, which is why its gain is the most conservative
+        in the file.
+      per_degree_wbgt: 0.030
+      per_degree_core_offset: 0.060
+
+  soreness:
+    time_scale: onset 12-24 h, peak 24-72 h, resolution ~7 d
+    degrades: [anaerobic_power, max_strength]
+    regions: [legs, arms, grip, core]
+    kernel:
+      source: >
+        [MEASURED] window: onset 12-24 h after the effort, peak between 24 and
+        72 h, resolution in about 7 days, with measurable loss of concentric
+        power inside the window. [INT] form: a three-stage latency chain feeding
+        an expressed pool with its own clearance, whose constants are chosen so
+        the response lands in that window — 3 % of peak at 6 h, 62 % at 24 h,
+        peak at ~46 h, 9 % at 7 d. DOMS that shows up during the effort is
+        failure mode F11, and it is the shape of this chain that prevents it.
+      latency_stages: 3
+      latency_tau_h: 11.0
+      resolution_tau_h: 42.0
+    damage_per_hour_at_full_eccentric_load:
+      source: "[INT] Damage dose per hour of fully eccentric work at full available capability."
+      value: 0.55
+    repeated_bout:
+      source: >
+        [MEASURED] that the same load produces less damage the second time.
+        [INT] for the gain, the ceiling and the decay: without a per-region,
+        per-activity flag, someone who trains every week suffers as if it were
+        the first time, forever.
+      gain_per_unit_dose: 0.80
+      max_damage_reduction: 0.60
+      decay_tau_h: 504.0
+
+  injuries:
+    time_scale: days to months
+    degrades: per dimension, through Injury.impairments
+    healing:
+      source: >
+        [INT] Progress accrues linearly over the injury's own expected_days,
+        scaled by how the body's recovery_rate compares to the cohort reference.
+        Impairment fades with progress rather than switching off at the end, and
+        an injury that reaches full progress leaves the list.
+      recovery_scaling_exponent: 1.0
+      min_expected_days: 0.5
+    setback_on_load:
+      source: >
+        [INT] Loading an injured region above this intensity costs progress. The
+        framing is dynamic-recursive: each exposure changes the next risk, and a
+        lesion is not caused only by the incident that opened it.
+      intensity_threshold: 0.5
+
+# --------------------------------------------------------------------------
+# Dead accounting — updated here, read by nobody in V1
+# --------------------------------------------------------------------------
+
+cumulative_load:
+  source: >
+    [INT] Exponentially weighted load over 7 and 28 days. These two numbers feed
+    capacity drift, which is OUT OF SCOPE in V1 (spec §3.2), so nothing reads
+    them. THE RATIO BETWEEN THEM IS NOT A RISK FACTOR: it is mathematically
+    coupled, unstable at low chronic load, unsupported as a causal factor, and
+    the figure that popularised it is the subject of a formal retraction request
+    (research §7.1, failure mode F14). A test fails if any module reads either
+    field.
+  acute_tau_h: 168.0
+  chronic_tau_h: 672.0
+
+# --------------------------------------------------------------------------
+# Pain — a signal, not a lesion
+# --------------------------------------------------------------------------
+
+pain:
+  source: >
+    [INT] Pain and injury dissociate in both directions: DOMS is pain without a
+    lesion, and adrenaline is a lesion without proportional pain. Pain is
+    therefore computed from soreness and from each injury's own pain profile,
+    then suppressed by analgesia, which decays on its own and heals nothing.
+  from_soreness: 0.80
+  from_injury_at_rest: 0.60
+  analgesia_decay_tau_h: 2.0
+  response_tau_h: 0.5
+
+# --------------------------------------------------------------------------
+# How each channel reaches each dimension
+# --------------------------------------------------------------------------
+
+degradation:
+  note: >
+    Every entry below is a loss at the channel's full extent, composed
+    multiplicatively per dimension. A channel that reached every dimension
+    equally would be failure mode F12 wearing a table.
+
+  dimension_regions:
+    source: >
+      [INT] Which fatigue regions a dimension draws on, read by every channel
+      that is stored per region — peripheral fatigue and soreness. It says WHERE
+      a dimension is exposed, never WHETHER a channel reaches it: that is decided
+      by each channel's own loss table below, so a dimension listed here is not
+      thereby degraded by everything. The anchors do the assigning: max_strength
+      is the grip dynamometer, strength_endurance the 30-second sit-up, and
+      anaerobic_power the standing long jump.
+    max_strength:
+      grip: 1.0
+    strength_endurance:
+      core: 0.8
+      arms: 0.2
+    anaerobic_power:
+      legs: 0.8
+      core: 0.2
+
+  peripheral_fatigue_loss_at_full:
+    source: "[INT] Capability lost by a dimension whose regions are fully fatigued."
+    max_strength: 0.35
+    strength_endurance: 0.40
+
+  w_prime_loss_at_empty:
+    source: "[INT] Capability lost with the reserve fully spent. It returns as the reserve reconstitutes, within minutes."
+    anaerobic_power: 0.35
+    sprint_speed: 0.25
+
+  central_fatigue_loss_at_full:
+    source: >
+      [INT] The model's own wording for this channel is coordination, reaction
+      time and the expression of technique. Technique is skill, which lives
+      outside capacity (physical-model.md §4), so it does not appear here.
+    coordination: 0.30
+    reaction_time: 0.25
+
+  soreness_loss_at_full:
+    source: "[INT] Measured loss of concentric power inside the DOMS window; the size is ours."
+    anaerobic_power: 0.25
+    max_strength: 0.20
+
+  substrate_loss_at_empty:
+    source: "[INT] Capability lost with the substrate store empty."
+    aerobic_capacity: 0.45
+    strength_endurance: 0.30
+
+  sleep_sensitivity:
+    source: >
+      [MEASURED] Standardised mean differences from a sleep-deprivation
+      meta-analysis: skill control -0.87, aerobic endurance -0.66, explosive
+      power -0.63, speed -0.52, maximal strength -0.35. USE THE RATIOS, NOT THE
+      VALUES: these are acute laboratory protocols, and it is the ordering the
+      meta-analysis supports. [INT] for the assignment of reaction_time and
+      agility to the skill-control and speed categories, and for
+      strength_endurance sitting between speed and strength; the meta-analysis
+      measured five categories, not fifteen dimensions.
+    coordination: 0.87
+    reaction_time: 0.87
+    aerobic_capacity: 0.66
+    anaerobic_power: 0.63
+    sprint_speed: 0.52
+    agility: 0.52
+    strength_endurance: 0.45
+    max_strength: 0.35
+
+  retention_floor:
+    source: >
+      [INT] No composition of channels may take a dimension below this fraction
+      of its baseline. A body at the floor is unable, not negative.
+    value: 0.05
+
+  unmodulated_dimensions:
+    source: >
+      [INT] Dimensions that state does not degrade, because they are constitutional
+      traits that GOVERN the dynamics rather than performances the dynamics wear
+      down: how fast this body recovers, how much heat it tolerates, how robust it
+      is, how much pain it takes, and its own size. Fatigue does not make a body
+      shorter. Listing them keeps the composition total: every dimension is either
+      degraded by named channels or named here.
+    dimensions: [body_mass, stature, flexibility, injury_resilience, recovery_rate, thermoregulation, pain_tolerance]

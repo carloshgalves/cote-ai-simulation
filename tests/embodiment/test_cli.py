@@ -1,6 +1,8 @@
-"""The observable result of PSV1-1, end to end.
+"""The observable results of PSV1-1 and PSV1-2, end to end.
 
     python -m embodiment seed-cohort --world-seed 42 --n 40 --out runs/demo/
+    python -m embodiment advance-clock --run runs/demo/ --character npc.0017 \
+        --days 3 --sleep 4h --quality poor
 
 Evidence of what happened is the **event log**, not the terminal output, so every
 assertion here reads the log or the snapshot.
@@ -145,3 +147,115 @@ def test_an_empty_cohort_is_refused_clearly(tmp_path: Path) -> None:
 
     with pytest.raises(ValueError, match="at least one student"):
         seed_cohort_command(world_seed=42, count=0, out_dir=tmp_path / "demo")
+
+
+# --------------------------------------------------------------------------
+# PSV1-2 — `advance-clock`
+# --------------------------------------------------------------------------
+
+
+def advance(out_dir: Path, *, character: str = "npc.0017", days: int = 3, sleep: str = "4h", quality: str = "poor") -> int:
+    return main(
+        [
+            "advance-clock",
+            "--run", str(out_dir),
+            "--character", character,
+            "--days", str(days),
+            "--sleep", sleep,
+            "--quality", quality,
+        ]
+    )
+
+
+def test_a_seeded_character_has_a_rested_body_in_the_snapshot(tmp_path: Path) -> None:
+    snapshot = read_snapshot(run(tmp_path / "demo") / "snapshot.yaml")
+    body = snapshot["characters"]["npc.0001"]["body_state"]
+    assert body["character_id"] == "npc.0001"
+    assert body["t_hours"] == 0.0
+    assert body["central_fatigue"] == 0.0
+    assert body["sleep"]["debt_hours"] == 0.0
+    assert body["energy"]["substrate_availability"] == 1.0
+    assert set(body["peripheral_fatigue"]) == {"legs", "arms", "grip", "core"}
+    #: Serialised and empty, by decision 13.5 rather than by omission.
+    assert body["illnesses"] == []
+    assert snapshot["run_metadata"]["dynamics_version"]
+
+
+def test_the_command_advances_three_days_of_bad_sleep(tmp_path: Path, capsys) -> None:
+    """The ticket's observable result, from the terminal the reader will use."""
+    out = run(tmp_path / "demo")
+    assert advance(out) == 0
+    printed = capsys.readouterr().out
+    assert "sleep.debt_hours" in printed
+    assert "capability_available" in printed
+    assert "coordination" in printed
+
+
+def test_the_log_gains_one_body_advanced_per_interval(tmp_path: Path) -> None:
+    """Evidence is the log: six intervals over three days, with both sides."""
+    out = run(tmp_path / "demo")
+    advance(out)
+    advances = [record for record in events(out) if record["event"] == "body.advanced"]
+    assert len(advances) == 6
+    payload = advances[0]["payload"]
+    assert payload["character_id"] == "npc.0017"
+    assert payload["dt_hours"] == 20.0
+    assert payload["environment"]["asleep"] is False
+    assert payload["channels_changed"]["sleep"]["before"]["debt_hours"] == 0.0
+    assert payload["channels_changed"]["sleep"]["after"]["debt_hours"] > 0.0
+
+
+def test_advancing_zero_days_leaves_the_run_exactly_as_it_was(tmp_path: Path) -> None:
+    """The other half of the ticket, and as much its point as the first.
+
+    A command that looked at a body and wrote nothing changed nothing — not the
+    body, and not the audit artefact either.
+    """
+    out = run(tmp_path / "demo")
+    before = (out / "events.jsonl").read_bytes()
+    snapshot_before = (out / "snapshot.yaml").read_bytes()
+
+    assert advance(out, days=0) == 0
+
+    assert (out / "events.jsonl").read_bytes() == before
+    assert (out / "snapshot.yaml").read_bytes() == snapshot_before
+
+
+def test_advancing_the_same_run_twice_appends_rather_than_forking_it(tmp_path: Path) -> None:
+    out = run(tmp_path / "demo")
+    advance(out, days=1)
+    advance(out, character="npc.0002", days=1)
+    records = events(out)
+    assert records[0]["event"] == "run.started"
+    assert [record["seq"] for record in records] == list(range(len(records)))
+    assert len({record["payload"]["character_id"] for record in records if record["event"] == "body.advanced"}) == 2
+
+
+def test_a_character_outside_the_run_is_named_rather_than_guessed(tmp_path: Path) -> None:
+    out = run(tmp_path / "demo")
+    with pytest.raises(KeyError, match="npc.9999"):
+        advance(out, character="npc.9999")
+
+
+def test_the_same_seed_and_the_same_days_produce_the_same_advance(tmp_path: Path) -> None:
+    first = run(tmp_path / "one")
+    second = run(tmp_path / "two")
+    advance(first)
+    advance(second)
+    assert normalised_bytes(first / "events.jsonl") == normalised_bytes(second / "events.jsonl")
+
+
+@pytest.mark.parametrize(
+    ("text", "hours"), [("4h", 4.0), ("30m", 0.5), ("90min", 1.5), ("1.5h", 1.5), ("8", 8.0)]
+)
+def test_durations_are_read_the_way_the_ticket_writes_them(text: str, hours: float) -> None:
+    from embodiment.cli import parse_hours
+
+    assert parse_hours(text) == hours
+
+
+def test_an_unreadable_duration_is_refused(tmp_path: Path) -> None:
+    from embodiment.cli import parse_hours
+
+    with pytest.raises(ValueError, match="duration"):
+        parse_hours("a whole night")

@@ -75,7 +75,13 @@
 schema_version: 1
 not_canon: true
 model_kind: BODY_DYNAMICS
-model_version: 0.1.0-provisional
+# 0.1.1: the DOMS onset gate releases on a declared 1 h grid
+# (`channels.soreness.kernel.onset_resolution_h`) instead of on whatever
+# `integration.step_hours` happened to be. Bodies advanced under 0.1.0 and 0.1.1
+# are NOT interchangeable — the expressed-soreness curve shifts slightly and the
+# shape of the persisted onset queue changes — which is the whole reason
+# run_metadata records this string (spec §9.2).
+model_version: 0.1.1-provisional
 status: PROVISIONAL
 
 provenance:

@@ -17,14 +17,14 @@ import pytest
 
 from embodiment.capability import capability_available
 from embodiment.cli import advance_clock_command, main
-from embodiment.dynamics import BodyTraits, Environment
+from embodiment.dynamics import BodyTraits, Environment, load_params
 from embodiment.eventlog import (
     EVENT_COHORT_CORRELATION_REPORT,
     EVENT_RUN_STARTED,
     normalised_bytes,
 )
 from embodiment.snapshot import capacity_profile_of, read_snapshot
-from embodiment.types import Dimension
+from embodiment.types import Dimension, RunMetadata
 
 
 def run(out_dir: Path, *, world_seed: int = 42, count: int = 40) -> Path:
@@ -181,6 +181,37 @@ def test_a_seeded_character_has_a_rested_body_in_the_snapshot(tmp_path: Path) ->
     #: Serialised and empty, by decision 13.5 rather than by omission.
     assert body["illnesses"] == []
     assert snapshot["run_metadata"]["dynamics_version"]
+
+
+def test_the_snapshot_records_the_dynamics_version_that_actually_advanced_it(
+    tmp_path: Path,
+) -> None:
+    """Spec §9.2: the recorded version is what makes two snapshots comparable.
+
+    Asserted against the loaded parameter file rather than against a literal, so
+    it keeps proving the linkage after the next bump instead of becoming a string
+    somebody edits to make a test pass. Bodies advanced under different
+    BODY_DYNAMICS versions are not interchangeable, and this is where a reader
+    finds out which one they have.
+    """
+    out = run(tmp_path / "demo")
+    snapshot = read_snapshot(out / "snapshot.yaml")
+    version = load_params().model_version
+
+    assert snapshot["run_metadata"]["dynamics_version"] == version
+    #: `as_dict` writes spec §9.2's field name and `from_document` reads it back
+    #: by component; `advance-clock` rehydrates through that round trip, so a
+    #: version that survives only one direction is a version the second phase of
+    #: a run cannot check itself against.
+    assert (
+        RunMetadata.from_document(snapshot["run_metadata"]).component_versions["dynamics"]
+        == version
+    )
+
+    assert advance(out, character="npc.0001", days=1) == 0
+    advances = [record for record in events(out) if record["event"] == "body.advanced"]
+    assert advances
+    assert {record["payload"]["dynamics_version"] for record in advances} == {version}
 
 
 def test_the_command_advances_three_days_of_bad_sleep(tmp_path: Path, capsys) -> None:

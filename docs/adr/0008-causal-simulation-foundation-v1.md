@@ -68,6 +68,8 @@ validador/resolvedor especializado chamado pela fundação, não uma segunda aut
 | `RoundDeclaration` | entrada causal durável que abre um decision round: ator, slots e coordenada de elegibilidade |
 | `DecisionCohort` | conjunto das `RoundDeclaration` elegíveis a um ciclo; derivado dos ledgers, nunca do que o host observou |
 | `AdmissionFence` | registro durável, derivado dos ledgers, que materializa a membresia de um ciclo antes de qualquer avaliação |
+| `SlotDispatch` | registro durável que abre exatamente um pedido de resposta para um slot `(decision_round_id, slot_id)`; no máximo um dispatch aberto por slot; redespacho exige revogação durável |
+| `SlotResponse` | preenchimento único de um slot — `ActionProposal` ou `NoProposal` — admitido somente contra o dispatch aberto; não é entrada de fonte exógena e não tem coordenada própria |
 | `ScheduledOccurrence` | trabalho causal pendente cujo vencimento é temporal |
 | `TriggerDefinition` | predicate puro e política explícita de ativação |
 | `TriggerRuntimeState` | memória operacional necessária para edge/rearm/repeat |
@@ -78,8 +80,8 @@ validador/resolvedor especializado chamado pela fundação, não uma segunda aut
 | `CycleCommit` | envelope persistido do `EventBatch` de um ciclo, obrigatório mesmo com zero eventos |
 | `DecisionRecord` | desfecho terminal canônico de exatamente uma unidade admitida; existe somente dentro de um `CycleCommit` |
 | `CycleAbortRecord` | envelope durável de tentativa abortada; audita `INDETERMINATE` e a causa sem publicar revisão nem liquidar nada |
-| `AttemptRetryRecord` | decisão explícita e durável de abrir `attempt_ordinal + 1` para um ciclo parado após abort |
-| `CycleControlState` | estado do coordinator derivado dos envelopes: ocioso, tentativa em voo ou parado após abort |
+| `AttemptRetryRecord` | decisão explícita e durável de abrir `attempt_ordinal + 1` para um ciclo parado após abort; consumido pelo fence que abre essa tentativa |
+| `CycleControlState` | estado do coordinator derivado por dobra total e ordenada sobre fences, envelopes e retentativas: ocioso, tentativa em voo, retentativa autorizada ou parado após abort |
 | `WorldState` | redução dos eventos autoritativos até uma revisão |
 | `Observation` | evidência parcial disponibilizada a um observador por acesso perceptivo causal |
 | `Proposition` | conteúdo semântico normalizado de uma alegação; value object sem verdade embutida |
@@ -97,13 +99,14 @@ unidades causais e não dão autoridade de commit.
   `WorldStateHash`, `ActorRef`, `EntityRef`, `LocationRef`, `ResourceClaim`, `Proposition`,
   `CausalRef`, `SeedKey`, `EligibilityCoordinate` e versões de schema/política.
 - **Entidades/artefatos imutáveis:** `Event`, `ActionProposal`, `NoProposal`, `Claim`,
-  `Observation`, `KnowledgeInput`, `SourceClosure`, `AdmissionFence`, `DecisionRecord`,
-  `CycleAbortRecord` e `AttemptRetryRecord`; identidade e provenance importam mesmo quando dois
-  payloads são iguais.
+  `Observation`, `KnowledgeInput`, `SourceClosure`, `SlotDispatch`, `SlotDispatchRevocation`,
+  `AdmissionFence`, `DecisionRecord`, `CycleAbortRecord` e `AttemptRetryRecord`; identidade e
+  provenance importam mesmo quando dois payloads são iguais.
 - **Agregados com lifecycle:** `ScheduledOccurrence`, `RoundDeclaration`, `Trigger`
   (`Definition + RuntimeState`) e `Transmission`.
-- **Estado derivado do coordinator:** `CycleControlState` é uma dobra determinística sobre fences,
-  envelopes terminais e `AttemptRetryRecord`; o snapshot o persiste como cursor verificável (§12).
+- **Estado derivado do coordinator:** `CycleControlState` é uma dobra determinística, total e com
+  precedência fixa sobre fences, envelopes terminais e `AttemptRetryRecord` (§8.0.2); o snapshot o
+  persiste como cursor verificável (§12).
 - **Fronteira de consistência:** `ResolutionCycle` agrega candidatos e produz um único `EventBatch` +
   `WorldRevision`, persistidos como um `CycleCommit` mesmo quando o lote tem zero eventos (§8.0). Sua
   membresia é derivada dos ledgers e materializada por um `AdmissionFence` durável antes da avaliação
@@ -160,15 +163,22 @@ ResolutionCycle {
 Todas as propostas do ciclo leem exatamente `base_revision`. Nenhuma vê mutações de outra proposta do
 mesmo ciclo. O lote é fechado por protocolo, não pela ordem de chegada:
 
-- uma solicitação a agente carrega `decision_round_id`, `slot_id`, `base_revision`, `effective_at` e
-  a coordenada de elegibilidade da `RoundDeclaration` à qual o slot pertence;
-- a resposta pertence àquele slot mesmo que outra chamada termine antes;
+- uma solicitação a agente é um `SlotDispatch` durável (§3.2.5) e carrega `dispatch_id`,
+  `decision_round_id`, `slot_id`, `base_revision`, `effective_at` e a coordenada de elegibilidade da
+  `RoundDeclaration` à qual o slot pertence;
+- a resposta pertence àquele slot mesmo que outra chamada termine antes; um slot tem no máximo um
+  dispatch aberto e no máximo uma resposta gravada;
 - os slots do round são declarados na criação da `RoundDeclaration` e o round só fecha quando cada
-  slot contém uma resposta gravada: `ActionProposal` ou `NoProposal`; timeout operacional, quando
-  usado, grava um `NoProposal` explícito no slot. A resposta gravada é input externo registrado,
-  com o mesmo status de uma resposta de LLM — o que a produziu é telemetria, o que foi gravado é fato;
-- depois que o round fecha, resposta atrasada é ignorada e auditada; nunca é inserida retroativamente
-  nem promovida automaticamente ao ciclo seguinte. Uma nova tentativa exige novo round/input causal;
+  slot contém sua única resposta gravada: `ActionProposal` ou `NoProposal`; timeout operacional,
+  quando usado, grava um `NoProposal` explícito contra o dispatch aberto. A resposta gravada é fato
+  de ledger com o mesmo status qualquer que seja a origem — LLM, timeout ou operador: o que a
+  produziu é telemetria, o que foi gravado é fato. Ela **não** é entrada de fonte exógena: é o
+  preenchimento de uma unidade derivada e não passa por `SourceClosure` nem por normalização de
+  ingresso (§3.2.5);
+- uma segunda escrita para o mesmo slot — resposta atrasada, duplicada ou dirigida a um dispatch
+  revogado — é rejeitada na admissão e apenas auditada, antes ou depois de o round fechar; nunca é
+  inserida retroativamente nem promovida automaticamente ao ciclo seguinte. Uma nova tentativa exige
+  novo round/input causal;
 - o wall clock que levou ao `NoProposal` fica na telemetria e não aparece como causa dentro do mundo.
 
 A membresia do ciclo não é decidida por ordem de chegada, pela ausência momentânea de trabalho
@@ -200,7 +210,8 @@ ciclo. A coordenada é atribuída **uma única vez**, por regra versionada, no m
   normalização é uma função do ledger da fonte — não de qual fence o coordinator já gravou;
 - `RoundDeclaration` recebe a coordenada escrita explicitamente por quem a criou: o genesis, ou o
   `CycleCommit` que a originou, com valor `(instant, cycle_ordinal + 1)` ou maior (§3.2.3); os slots
-  herdam a coordenada da declaração;
+  herdam a coordenada da declaração, e a resposta que preenche um slot não recebe coordenada própria
+  nem passa pela normalização de ingresso (§3.2.5);
 - ocorrência agendada recebe `(due_at, 0)`, salvo quando a política de origem exigir ordinal maior;
 - sucessor de `DEFER` recebe a coordenada escrita explicitamente pelo commit que o criou (§7).
 
@@ -220,8 +231,18 @@ Toda entrada causal pertence a exatamente uma fonte declarada. Há duas classes:
   sobre a revisão resultante, o conjunto de entradas derivadas elegíveis a ele já está fixado;
 - **Fontes exógenas:** adapters de harness/driver, genesis-only sources e, no futuro, intervenção de
   usuário por contrato próprio. Elas são declaradas na configuração imutável do run
-  (`exogenous_sources[]`, possivelmente vazia); uma fonte não declarada não escreve no input ledger.
-  Cada fonte grava entradas com `ingress_seq` durável e monotônico por `source_id`.
+  (`exogenous_sources[]`, possivelmente vazia); uma fonte não declarada não escreve entradas tipadas
+  no input ledger. Cada fonte grava entradas com `ingress_seq` durável e monotônico por `source_id`.
+
+Respostas de slot não pertencem a nenhuma das duas classes como entrada própria: o slot é unidade de
+fonte **derivada** — nasce com a `RoundDeclaration`, herda sua coordenada e seu fechamento por
+construção — e a resposta é o seu **preenchimento** (§3.2.5). Quem responde — gateway de LLM, adapter
+de timeout, operador — é um **respondedor de slot**, não uma `CausalSource`: não grava `SourceClosure`,
+não entra em `exogenous_sources[]` por responder e não tem `ingress_seq` com efeito de coordenada. Um
+adapter que seja, ao mesmo tempo, fonte exógena declarada e respondedor de slot tem obrigação de
+fechamento **apenas** sobre seus inputs exógenos tipados; suas respostas de slot ficam fora da
+condição de fechamento abaixo e nunca recebem coordenada `> C` por terem sido gravadas depois do
+fechamento da fonte.
 
 Uma fonte exógena declara o fim de sua contribuição a uma coordenada com um marcador durável:
 
@@ -237,7 +258,8 @@ SourceClosure {
 Regras:
 
 - `closed_through` nunca regride. Uma fonte pode fechar coordenadas muito à frente ou declarar-se
-  `final`; um run sem fontes exógenas tem a condição abaixo trivialmente satisfeita;
+  `final`; um run sem fontes exógenas — mesmo com rounds e respondedores de slot — tem a condição
+  abaixo trivialmente satisfeita;
 - **condição de fechamento:** um ciclo de coordenada `C` só deriva sua membresia quando toda fonte
   exógena declarada tem `closed_through >= C`. Até então o coordinator **aguarda**; ele nunca corta
   por conta própria. Uma fonte parada é condição operacional (telemetria, alerta), não decisão
@@ -252,10 +274,10 @@ Regras:
 
 Consequência: o momento em que uma fonte exógena fecha uma coordenada é um ato declarado **dela**,
 gravado no ledger, e o coordinator só consome fatos do ledger. Se um adapter usa relógio de parede
-para decidir quando fechar, esse relógio é input externo — exatamente o status de uma resposta de
-LLM —, não semântica da simulação. Duas execuções com o mesmo input ledger (entradas mais
-fechamentos) têm a mesma membresia em todo ciclo, qualquer que seja a latência de host, rede,
-coordinator ou entrega de agente. Duas execuções ao vivo em que a fonte fecha em momentos
+para decidir quando fechar, esse relógio é ato externo registrado — exatamente o status de uma
+resposta de slot (§3.2.5) —, não semântica da simulação. Duas execuções com o mesmo input ledger
+(entradas mais fechamentos) têm a mesma membresia em todo ciclo, qualquer que seja a latência de
+host, rede, coordinator ou entrega de agente. Duas execuções ao vivo em que a fonte fecha em momentos
 diferentes têm **inputs diferentes**, e essa diferença é durável, auditável e visível no digest do
 input ledger. Este ADR não torna determinístico o comportamento de uma fonte externa; ele garante
 que a simulação nunca acrescenta uma segunda escolha, oculta e dependente de timing, por cima dela.
@@ -295,15 +317,17 @@ Um ciclo hospeda exatamente uma **coorte de decisão**:
 - como toda `RoundDeclaration` vem de fonte derivada, não existe caminho pelo qual um round elegível a
   `C` passe a existir depois que o ciclo `C` abriu; a dobra sobre os ledgers devolve o mesmo conjunto
   em qualquer execução;
-- cada round mantém seus slots declarados e só está completo quando cada slot contém uma resposta
-  gravada — `ActionProposal` ou `NoProposal`. A solicitação ao agente só é despachada depois que a
-  coorte foi derivada e o barrier epistemológico da §10.1 liberou o destinatário;
+- cada round mantém seus slots declarados e só está completo quando cada slot contém sua única
+  resposta gravada — `ActionProposal` ou `NoProposal`. A solicitação ao agente é um `SlotDispatch`
+  (§3.2.5), emitido somente depois que a coorte foi derivada e o barrier epistemológico da §10.1
+  liberou o destinatário;
 - todos os rounds da coorte leem exatamente a mesma `base_revision` e seus candidatos entram no mesmo
   espaço de `ConflictSet`;
 - qual round completou primeiro é telemetria. Latência de LLM ou de orchestrator não escolhe qual
   round recebe a revisão mais antiga, porque dentro da coorte nenhum round recebe revisão diferente e
   nenhum round fica de fora por ter sido “visto” mais tarde;
-- resposta gravada depois do fence é ignorada e auditada; nunca é inserida retroativamente.
+- resposta dirigida a slot já preenchido ou a dispatch revogado — antes ou depois do fence — é
+  rejeitada na admissão e auditada; nunca é inserida retroativamente (§3.2.5).
 
 Rounds só se serializam por fato causal declarado: um round criado por evento commitado neste ciclo
 tem coordenada `(instant, cycle_ordinal + 1)` ou maior e cai na coorte seguinte, contando para o
@@ -319,6 +343,7 @@ AdmissionFence {
   run_id
   cycle_id
   attempt_ordinal
+  retry_ref?                  // AttemptRetryRecord consumido; obrigatório quando attempt_ordinal > 1
   instant
   cycle_ordinal
   base_revision + base_state_hash
@@ -330,15 +355,17 @@ AdmissionFence {
 }
 ```
 
-Uma **unidade admitida** é uma resposta de slot (`ActionProposal` ou `NoProposal`), um input
-exógeno, uma `ScheduledOccurrence` vencida ou uma ativação de trigger elegível. As
-`RoundDeclaration` da coorte são consumidas como contêineres e listadas em `cohort`; a unidade é o
-slot. Uma unidade é admitida quando, e somente quando:
+Uma **unidade admitida** é um slot preenchido — identificado pela sua única `SlotResponse`
+(`ActionProposal` ou `NoProposal`) —, um input exógeno, uma `ScheduledOccurrence` vencida ou uma
+ativação de trigger elegível. As `RoundDeclaration` da coorte são consumidas como contêineres e
+listadas em `cohort`; a unidade é o slot. Uma unidade é admitida quando, e somente quando:
 
 1. a condição de fechamento da sua fonte vale para a coordenada do ciclo — por construção, para
-   fontes derivadas; por `SourceClosure` gravado, para fontes exógenas;
-2. sua coordenada de elegibilidade é menor ou igual à coordenada do ciclo;
-3. ela ainda não foi consumida por um `CycleCommit` anterior.
+   fontes derivadas, inclusive os slots (§3.2.5); por `SourceClosure` gravado, para fontes exógenas;
+2. sua coordenada de elegibilidade é menor ou igual à coordenada do ciclo — para um slot, a
+   coordenada herdada da `RoundDeclaration`;
+3. ela ainda não foi consumida por um `CycleCommit` anterior;
+4. sendo slot, ele contém sua única resposta gravada (§3.2.5).
 
 O fence é uma **função**: `derive(ledgers, base_revision, C, versions)`. O coordinator não escolhe
 um high-water; ele registra em `closure_proof` os fechamentos dos quais a derivação dependeu. O fence
@@ -364,9 +391,10 @@ Consequências:
 
 Um run tem no máximo um ciclo aberto por vez e um ciclo tem no máximo um fence vigente. O fence é
 gravado assim que duas condições, ambas fatos de ledger, valem: (a) a condição de fechamento da
-§3.2.2 para a coordenada do ciclo; (b) toda unidade de slot da coorte tem resposta gravada. Nenhuma
+§3.2.2 para a coordenada do ciclo; (b) todo slot da coorte contém sua única resposta gravada. Nenhuma
 das duas depende de tempo de parede do coordinator para decidir **o que** entra — (a) é marcador de
-fonte, (b) é input externo registrado. Tempo de parede afeta somente **quando** as condições passam a
+fonte, (b) é preenchimento de slot admitido pelo ledger (§3.2.5); ambos são atos externos duráveis,
+nunca observação do coordinator. Tempo de parede afeta somente **quando** as condições passam a
 valer e, portanto, quando o fence é gravado. Depois do fence, nada no ciclo depende de tempo de
 parede: `base_revision`, `admitted_input_ids`, `ConflictSet`, vencedor, event log e digests são
 função exclusiva do fence gravado e das versões declaradas.
@@ -376,10 +404,12 @@ decide quando a solicitação de um round pode ser **despachada**. São gates co
 substituem.
 
 Se a tentativa aborta (§8.0.1), o `CycleAbortRecord` encerra aquele fence e o run fica parado
-(`HALTED_ON_ABORT`, §8.0.2). Uma tentativa reparada, aberta por `AttemptRetryRecord` explícito, grava
-um novo fence com `attempt_ordinal + 1`. Como o abort não consome nada e as fontes já estavam
-fechadas para a coordenada, a membresia e as `response_refs` do novo fence são **idênticas por
-construção**; mudam apenas `attempt_ordinal` e `rule_versions`.
+(`HALTED_ON_ABORT`, §8.0.2). Uma tentativa reparada, autorizada por `AttemptRetryRecord` explícito
+(`RETRY_AUTHORIZED`), grava um novo fence com `attempt_ordinal + 1` e `retry_ref` apontando para o
+registro que a autorizou. Como o abort não consome nada, as fontes já estavam fechadas para a
+coordenada e cada slot já contém sua única resposta, a membresia e as `response_refs` do novo fence
+são **idênticas por construção** e nenhum slot é redespachado; mudam apenas `attempt_ordinal`,
+`retry_ref` e `rule_versions`.
 
 Eventos commitados no mesmo ciclo recebem `LogicalSequence` em ordem canônica apenas para
 serialização e replay. Essa sequência não significa que um vencedor leu o resultado do evento
@@ -391,6 +421,75 @@ Pode haver mais de um ciclo no mesmo instante: por exemplo, um commit entrega um
 entrega ativa um trigger imediato. Esses ciclos têm ordinais crescentes e revisões diferentes. Uma
 configuração versionada limita a cascata de ciclos sem avanço temporal; excedê-la aborta o run com
 erro determinístico, em vez de truncar silenciosamente.
+
+##### 3.2.5 Resposta de slot e `SlotDispatch`
+
+Um slot `(decision_round_id, slot_id)` nasce com a `RoundDeclaration` e herda dela fonte, coordenada
+e fechamento por construção. O que lhe falta é o **preenchimento**: exatamente uma resposta gravada.
+O input ledger governa esse preenchimento com um registro de slot próprio, separado das entradas de
+fonte exógena:
+
+```text
+SlotDispatch {
+  dispatch_id                 // determinístico: (run_id, cycle_id, decision_round_id, slot_id,
+                              //                  dispatch_ordinal); dispatch_ordinal conta os
+                              //                  dispatches anteriores do slot, todos revogados
+  run_id + cycle_id
+  decision_round_id + slot_id
+  base_revision + eligibility  // herdadas da RoundDeclaration
+  request_digest
+}
+
+SlotDispatchRevocation {
+  dispatch_id
+  reason: RESUME_REISSUE | LIVENESS_POLICY | OPERATOR
+  policy_version?
+}
+
+SlotResponse := ActionProposal | NoProposal   // ambos carregam dispatch_id obrigatório
+```
+
+Regras, todas verificadas pelo `InputLedger` no momento da admissão, em escrita condicional única:
+
+1. **um dispatch aberto por slot:** um `SlotDispatch` só é gravado para slot da coorte derivada,
+   vazio e sem outro dispatch aberto. Um dispatch está **aberto** enquanto o slot está vazio e ele
+   não foi revogado; o preenchimento do slot o encerra;
+2. **uma resposta por slot:** o ledger aceita uma `SlotResponse` somente se `dispatch_id` aponta
+   para o dispatch aberto do slot **e** o slot está vazio. A escrita é condicional e atômica: ou
+   preenche o slot, ou é rejeitada. Reentrega bit a bit idêntica da resposta já gravada é
+   idempotente; qualquer outra escrita para o mesmo slot — segunda resposta, resposta atrasada,
+   resposta a dispatch revogado — é rejeitada e vai para a auditoria de respostas rejeitadas, fora do
+   digest causal. A chave de idempotência de uma resposta é o slot, não o payload;
+3. **redespacho só após revogação durável:** emitir um novo dispatch para o mesmo slot exige antes
+   um `SlotDispatchRevocation` do anterior. A partir da revogação, a resposta ao dispatch antigo não
+   pode mais preencher o slot, mesmo que chegue antes da resposta ao novo. Revogar é ato registrado
+   — de resume, de política de liveness versionada ou de operador —, nunca efeito de timing
+   observado pelo coordinator;
+4. **timeout é preenchimento, não concorrência:** o `NoProposal` de timeout é uma `SlotResponse`
+   comum, gravada contra o dispatch aberto. Ela e a resposta real do mesmo dispatch disputam o slot
+   apenas na escrita condicional da regra 2, que admite exatamente uma delas;
+5. **sem coordenada, sem fechamento:** a resposta não recebe `EligibilityCoordinate` própria, não
+   passa pela normalização de ingresso da §3.2.2 e não está sujeita a `SourceClosure`. O
+   `ingress_seq` que o ledger lhe atribui é auditoria; nenhuma regra o consulta.
+
+Consequências:
+
+- `cohort.rounds[].response_refs[]` é função do ledger: cada slot tem zero ou uma resposta, e a
+  derivação nunca escolhe entre respostas porque o ledger nunca contém duas. Nenhum desempate por
+  `ingress_seq` ou por conteúdo é necessário ou permitido (invariante 21);
+- qual escrita venceu a condicional da regra 2 — resposta real ou `NoProposal` de timeout — é um fato
+  externo durável com o mesmo status de um `SourceClosure`: duas execuções ao vivo em que
+  respondedores diferentes vencem têm **inputs diferentes**, visíveis no digest do input ledger; duas
+  execuções com o mesmo input ledger têm o mesmo fence. Timing decide **qual input existe**; nunca
+  decide prioridade causal de um input existente frente a outro, e nunca é consultado por
+  `derive()`;
+- **crash após o dispatch e antes da resposta:** o resume encontra dispatch aberto e slot vazio. Ele
+  aguarda a resposta ou grava `SlotDispatchRevocation` e redespacha; nunca emite um segundo dispatch
+  com o primeiro aberto. Se a chamada original ainda estiver em voo, sua resposta preenche o slot
+  (dispatch ainda aberto) ou é rejeitada (dispatch revogado); em nenhum caso duas respostas
+  coexistem, e em nenhum caso duas chamadas emitidas pela simulação disputam o mesmo slot;
+- um run sem `exogenous_sources[]` continua tendo dispatches e respostas de slot, e continua sem
+  `SourceClosure`: o ônus do respondedor é preencher cada dispatch aberto, não fechar coordenadas.
 
 #### 3.3 Avanço
 
@@ -558,7 +657,8 @@ O pipeline de um ciclo é:
 ```text
 freeze base revision; await the closure condition for the cycle coordinate
   → derive the DecisionCohort and the admitted units from base_revision + ledgers
-  → dispatch round requests (after the §10.1 barrier); record every slot response
+  → open one SlotDispatch per slot with no response and no open dispatch (after the §10.1 barrier);
+      admit the unique response per slot (§3.2.5)
   → record the AdmissionFence durably (closure proof + cohort + canonical admitted_input_ids)
   → deduplicate admitted units (canonical survivor; duplicates settle as DEDUPLICATED)
   → expand occurrences, trigger activations and exogenous inputs into CommitCandidates
@@ -761,21 +861,45 @@ log, os envelopes terminais e os registros de retentativa:
 
 ```text
 CycleControlState {
-  status: IDLE | ATTEMPT_IN_FLIGHT | HALTED_ON_ABORT
-  cycle_id?                    // ciclo em voo ou parado
-  attempt_ordinal?             // tentativa em voo ou abortada
-  fence_ref?                   // fence sem envelope terminal (ATTEMPT_IN_FLIGHT)
-  last_terminal_envelope_ref?  // CycleCommit ou CycleAbortRecord mais recente do run
-  next_attempt_ordinal         // próxima tentativa admissível para cycle_id
+  status: IDLE | ATTEMPT_IN_FLIGHT | RETRY_AUTHORIZED | HALTED_ON_ABORT
+  cycle_id?                    // ausente somente em IDLE
+  attempt_ordinal?             // tentativa em voo, autorizada ou abortada
+  fence_ref?                   // somente ATTEMPT_IN_FLIGHT: fence sem envelope terminal
+  retry_ref?                   // somente RETRY_AUTHORIZED: AttemptRetryRecord ainda sem fence
+  last_terminal_envelope_ref?  // envelope terminal mais recente do run; ausente no genesis
+  next_attempt_ordinal         // 1 + maior attempt_ordinal entre os fences de cycle_id; 1 sem fence
 }
 ```
 
-- `IDLE`: o último envelope do run é um `CycleCommit`, ou o run está no genesis; o próximo ciclo pode
-  abrir conforme §3.3;
-- `ATTEMPT_IN_FLIGHT`: existe fence sem envelope terminal; a única transição admissível é reexecutar
-  a tentativa a partir do fence e das respostas gravadas até um envelope terminal;
-- `HALTED_ON_ABORT`: o último envelope do ciclo é um `CycleAbortRecord`; o run está parado. Não abre
-  ciclo novo, não avança relógio, não retenta implicitamente.
+A dobra é uma função **total** dos ledgers, definida por regras **ordenadas**; a primeira regra cuja
+condição vale decide, e nenhuma configuração de ledgers escapa às quatro:
+
+1. existe fence sem envelope terminal ⇒ `ATTEMPT_IN_FLIGHT` com `cycle_id`, `attempt_ordinal` e
+   `fence_ref` desse fence. Por construção há no máximo um: um run tem um ciclo aberto por vez, e
+   nenhum fence é gravado enquanto o anterior não tiver envelope. Esta regra prevalece mesmo quando o
+   último envelope do run é o `CycleAbortRecord` da tentativa anterior do mesmo ciclo — esse abort já
+   foi consumido pelo `AttemptRetryRecord` que o fence referencia em `retry_ref`;
+2. senão, o último envelope terminal do run é um `CycleAbortRecord` `A` **e** existe
+   `AttemptRetryRecord` com `aborted_envelope_ref = A` ⇒ `RETRY_AUTHORIZED` com o mesmo `cycle_id`,
+   `attempt_ordinal = to_attempt_ordinal` e `retry_ref`;
+3. senão, o último envelope terminal do run é um `CycleAbortRecord` ⇒ `HALTED_ON_ABORT` com o
+   `cycle_id` e o `attempt_ordinal` abortados;
+4. senão — o último envelope é um `CycleCommit`, ou o run está no genesis — ⇒ `IDLE`.
+
+`next_attempt_ordinal` é definido em todos os estados pela mesma expressão — `1 +` o maior
+`attempt_ordinal` entre os fences gravados para `cycle_id`, ou `1` quando não há fence —, logo não
+muda ao gravar um `AttemptRetryRecord` (continua `N + 1` após o abort de `N`) e só avança quando o
+fence de `N + 1` existe. Transições admissíveis por estado:
+
+- `IDLE`: o próximo ciclo pode abrir conforme §3.3, com `attempt_ordinal = 1`;
+- `ATTEMPT_IN_FLIGHT`: a única transição é reexecutar a tentativa a partir do fence e das respostas
+  gravadas até um envelope terminal;
+- `RETRY_AUTHORIZED`: a única transição é gravar o fence de `(cycle_id, to_attempt_ordinal)`, com
+  `retry_ref` apontando para o registro. Esse estado **não** passa pela seleção de coordenada da
+  §3.3, não avança relógio e não abre ciclo novo: reabre o mesmo `cycle_id` na tentativa autorizada.
+  Um segundo `AttemptRetryRecord` para o mesmo abort é rejeitado na escrita;
+- `HALTED_ON_ABORT`: o run está parado. Não abre ciclo novo, não avança relógio, não retenta
+  implicitamente.
 
 Sair de `HALTED_ON_ABORT` exige um ato explícito e durável, gravado no decision ledger **antes** do
 novo fence:
@@ -783,17 +907,26 @@ novo fence:
 ```text
 AttemptRetryRecord {
   run_id + cycle_id
-  from_attempt_ordinal → to_attempt_ordinal      // to = next_attempt_ordinal
-  aborted_envelope_ref
+  from_attempt_ordinal → to_attempt_ordinal      // from = abortada; to = next_attempt_ordinal
+  aborted_envelope_ref                           // obrigatoriamente o último envelope terminal do run
   reason
   rule_versions                                  // conjunto de versões da nova tentativa
 }
 ```
 
+O registro é válido apenas se `aborted_envelope_ref` for o último envelope terminal do run e um
+`CycleAbortRecord`, se `to_attempt_ordinal` for igual a `next_attempt_ordinal` e se nenhum outro
+`AttemptRetryRecord` referenciar o mesmo abort; a escrita falha fechado fora dessas condições. Ele é
+**consumido** pelo fence que o referencia em `retry_ref`: depois desse fence, a regra 1 rege a
+tentativa e, se ela também abortar, o novo abort não tem retentativa e a regra 3 devolve
+`HALTED_ON_ABORT` novamente.
+
 A alternativa é fork de run (§12). Nenhum resume, watchdog ou política de liveness pode emitir um
 `AttemptRetryRecord`: retentativa é decisão de operador ou de política de domínio explicitamente
-versionada e registrada como tal. A nova tentativa grava fence com `to_attempt_ordinal` e membresia
-idêntica (§3.2.4); `attempt_ordinal` é contínuo e auditável por ciclo.
+versionada e registrada como tal. O resume que encontra `RETRY_AUTHORIZED` apenas completa a
+transição já autorizada — grava o fence de `to_attempt_ordinal` — sem emitir um segundo registro. A
+nova tentativa grava fence com `to_attempt_ordinal` e membresia idêntica (§3.2.4); `attempt_ordinal`
+é contínuo e auditável por ciclo.
 
 #### 8.1 Envelope de `Event`
 
@@ -837,10 +970,13 @@ percepção, salvo quando o contrato do canal público produz essas observaçõe
 
 #### 8.2 Quatro artefatos, quatro responsabilidades
 
-- **Input ledger:** entradas gravadas por fontes exógenas declaradas — inputs tipados,
-  `SourceClosure` e respostas de slot (`ActionProposal`, `NoProposal`) —, mais a auditoria de
-  respostas atrasadas ignoradas; uma futura intervenção de usuário só poderá entrar aqui por contrato
-  próprio, nunca pelo Observatory;
+- **Input ledger:** dois registros com admissão distinta. (i) Entradas de fontes exógenas
+  declaradas — inputs tipados e `SourceClosure` —, sujeitas a `ingress_seq`, normalização de ingresso
+  e condição de fechamento. (ii) O registro de slot — `SlotDispatch`, `SlotDispatchRevocation` e a
+  única `SlotResponse` por slot (`ActionProposal`, `NoProposal`) —, admitido por escrita condicional
+  contra o dispatch aberto, sem coordenada própria e sem fechamento (§3.2.5). A auditoria de
+  respostas rejeitadas fica fora do digest causal. Uma futura intervenção de usuário só poderá entrar
+  aqui por contrato próprio, nunca pelo Observatory;
 - **Decision ledger:** `AdmissionFence`, material provisório de avaliação (assessments, conflitos,
   sorteios, disposições provisórias), os envelopes terminais — `CycleCommit` com seus
   `DecisionRecord` e `CycleAbortRecord` — e `AttemptRetryRecord`. `DecisionRecord` é autoritativo
@@ -1022,7 +1158,8 @@ O contrato reproduzível é:
 
 ```text
 mesmo genesis snapshot/config (inclusive fontes exógenas declaradas)
-+ mesmo input ledger em bytes canônicos: inputs exógenos, SourceClosure e respostas de slot
++ mesmo input ledger em bytes canônicos: inputs exógenos, SourceClosure, registro de slot
+  (SlotDispatch, revogações e a única resposta por slot)
 + mesmas coordenadas de elegibilidade persistidas
 + mesmos AttemptRetryRecord
 + mesmas versões de schema/reducer/validator/resolver/RNG/fence policy
@@ -1063,10 +1200,12 @@ Um snapshot causal contém, no mínimo:
 - todo world state autoritativo, incluindo o subestado físico;
 - fila de `ScheduledOccurrence` e estado runtime de triggers;
 - cursores/digests do input, decision, event e evidence ledgers;
-- `CycleControlState` (§8.0.2) com referência ao último envelope terminal e, em
-  `ATTEMPT_IN_FLIGHT`, ao `AdmissionFence` sem envelope terminal e seu `attempt_ordinal`;
+- `CycleControlState` (§8.0.2) com referência ao último envelope terminal e, conforme o estado, ao
+  `AdmissionFence` sem envelope terminal (`ATTEMPT_IN_FLIGHT`) ou ao `AttemptRetryRecord` ainda sem
+  fence (`RETRY_AUTHORIZED`), com o `attempt_ordinal` correspondente;
 - último `SourceClosure` de cada fonte exógena declarada;
-- fila de `RoundDeclaration` pendentes e respostas de slot já gravadas para elas;
+- fila de `RoundDeclaration` pendentes e, para seus slots, dispatches abertos ou revogados e a
+  resposta já gravada, quando houver;
 - coordenadas de elegibilidade de toda entrada gravada e ainda não consumida;
 - schemas e versões de reducers, validators, resolvers e RNG necessários;
 - outboxes/inboxes causais cuja entrega ainda não foi confirmada;
@@ -1102,12 +1241,15 @@ Há duas provas distintas:
 1. **event replay:** genesis + event store reconstrói exatamente o mesmo `WorldState`/hash;
 2. **resume equivalence:** snapshot + tails dos ledgers produz o mesmo log e estado que a execução
    contínua. Essa prova inclui o estado epistemológico restaurado do checkpoint, nunca regenerado por
-   chamada de modelo, e a reconciliação dos três estados da §8.0.2. O resume recomputa
-   `CycleControlState` pela dobra sobre os ledgers e falha fechado se divergir do snapshot; então:
-   `IDLE` abre o próximo ciclo conforme §3.3; `ATTEMPT_IN_FLIGHT` reexecuta a tentativa a partir do
-   fence gravado antes de qualquer ciclo novo; `HALTED_ON_ABORT` restaura o run **parado**, com
-   `next_attempt_ordinal` preservado, e só um `AttemptRetryRecord` ou fork explícito o move. Resume
-   nunca converte `HALTED_ON_ABORT` em `IDLE` nem em retentativa implícita.
+   chamada de modelo, e a reconciliação dos quatro estados da §8.0.2. O resume recomputa
+   `CycleControlState` pela dobra total e ordenada sobre os ledgers e falha fechado se divergir do
+   snapshot; então: `IDLE` abre o próximo ciclo conforme §3.3; `ATTEMPT_IN_FLIGHT` reexecuta a
+   tentativa a partir do fence gravado antes de qualquer ciclo novo; `RETRY_AUTHORIZED` grava o fence
+   de `to_attempt_ordinal` para o **mesmo** `cycle_id`, sem seleção de coordenada e sem segundo
+   `AttemptRetryRecord`; `HALTED_ON_ABORT` restaura o run **parado**, com `next_attempt_ordinal`
+   preservado, e só um `AttemptRetryRecord` ou fork explícito o move. Slots com dispatch aberto e sem
+   resposta seguem a §3.2.5: aguardar ou revogar e redespachar, nunca um segundo dispatch aberto.
+   Resume nunca converte `HALTED_ON_ABORT` em `IDLE` nem em retentativa implícita.
 
 O event replay reconstrói agenda e trigger runtime porque suas transições são eventos. O evidence
 ledger pode ser verificado diretamente ou regenerado deterministicamente a partir de eventos,
@@ -1173,7 +1315,7 @@ uma leitura privilegiada não pode vazar por efeito colateral.
     derivação.
 21. `ingress_seq` só participa da normalização de ingresso — antes ou depois do `SourceClosure` da
     própria fonte. Ordem canônica, prioridade e desempate derivam de conteúdo e de política
-    versionada.
+    versionada; nenhuma derivação escolhe entre respostas de slot, porque o ledger nunca contém duas.
 22. A `DecisionCohort` de um ciclo é o conjunto derivado das `RoundDeclaration` elegíveis em
     `base_revision`; todos os seus rounds são admitidos no mesmo ciclo, leem a mesma `base_revision`
     e concorrem no mesmo espaço de `ConflictSet`. Latência nunca separa rounds simultâneos nem
@@ -1194,9 +1336,18 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 28. Nenhum ciclo de coordenada `C` deriva membresia ou grava fence enquanto alguma fonte exógena
     declarada tiver `closed_through < C`; entrada gravada após o fechamento da própria fonte recebe
     coordenada posterior por regra de ingresso, nunca por observação do coordinator.
-29. `CycleControlState` é derivado de fences, envelopes terminais e `AttemptRetryRecord`. Resume
-    restaura `HALTED_ON_ABORT` como run parado; só `AttemptRetryRecord` ou fork explícito abre
-    `attempt_ordinal + 1`, e `ATTEMPT_IN_FLIGHT` é reexecutado a partir do fence gravado.
+29. `CycleControlState` é uma dobra total e ordenada sobre fences, envelopes terminais e
+    `AttemptRetryRecord`: fence sem envelope ⇒ `ATTEMPT_IN_FLIGHT`; abort com retentativa
+    registrada e sem fence ⇒ `RETRY_AUTHORIZED`; abort sem retentativa ⇒ `HALTED_ON_ABORT`; senão
+    `IDLE`. Resume restaura `HALTED_ON_ABORT` como run parado; só `AttemptRetryRecord` ou fork
+    explícito abre `attempt_ordinal + 1`; `RETRY_AUTHORIZED` reabre o mesmo `cycle_id` na tentativa
+    autorizada sem seleção de coordenada; `ATTEMPT_IN_FLIGHT` é reexecutado a partir do fence
+    gravado. Cada `AttemptRetryRecord` referencia o último envelope terminal do run e é consumido por
+    exatamente um fence.
+30. A resposta de slot é o preenchimento de uma unidade derivada, não entrada de fonte exógena: não
+    tem coordenada própria, não está sujeita a `SourceClosure` nem à normalização de ingresso. Cada
+    slot tem no máximo um `SlotDispatch` aberto e no máximo uma `SlotResponse`, admitida por escrita
+    condicional contra o dispatch aberto; redespacho exige `SlotDispatchRevocation` durável.
 
 ## Cenários de stress e provas de aceite
 
@@ -1216,7 +1367,12 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 | Candidato A já tem `COMMIT` provisório quando B encontra `INDETERMINATE` | `CycleAbortRecord` sem nenhum `DecisionRecord`; o `COMMIT` de A é material provisório não autoritativo; A continua elegível e é reavaliado na tentativa seguinte junto com B |
 | Crash entre append de eventos e settlement da decisão | impossível: as cinco partes são uma transação; fence sem envelope terminal é reexecutado a partir do corte gravado |
 | Resume encontra fence gravado sem `CycleCommit` nem `CycleAbortRecord` | `CycleControlState = ATTEMPT_IN_FLIGHT`; tentativa reexecutada com o mesmo `fence_digest` e as respostas já registradas; mesmo resultado, sem duplicar mundo nem decisão |
-| Snapshot tirado depois de um `CycleAbortRecord` | `CycleControlState = HALTED_ON_ABORT` com `next_attempt_ordinal`; resume restaura o run parado, não abre ciclo nem retenta; um `AttemptRetryRecord` explícito abre `attempt_ordinal + 1` com fence de membresia idêntica |
+| Snapshot tirado depois de um `CycleAbortRecord` | `CycleControlState = HALTED_ON_ABORT` com `next_attempt_ordinal`; resume restaura o run parado, não abre ciclo nem retenta; um `AttemptRetryRecord` explícito leva a `RETRY_AUTHORIZED` e o fence seguinte abre `attempt_ordinal + 1` com membresia idêntica |
+| Snapshot ou crash entre o `AttemptRetryRecord` e o novo fence | dobra devolve `RETRY_AUTHORIZED` (`cycle_id`, `to_attempt_ordinal`, `retry_ref`), nunca `HALTED_ON_ABORT` nem `IDLE`; resume grava o fence de `to_attempt_ordinal` para o mesmo `cycle_id`, sem §3.3 e sem segundo `AttemptRetryRecord`; `next_attempt_ordinal` continua `N + 1` até o fence existir |
+| Fence de `N + 1` gravado sem envelope enquanto o último envelope do run é o abort de `N` | regra 1 prevalece: `ATTEMPT_IN_FLIGHT`; o abort de `N` foi consumido pelo `AttemptRetryRecord` em `retry_ref`; se `N + 1` abortar, a regra 3 devolve `HALTED_ON_ABORT` com `next_attempt_ordinal = N + 2` |
+| Timeout grava `NoProposal(s1)` e a `ActionProposal(s1)` real chega antes de o round fechar | ambas apontam para o mesmo dispatch aberto; a escrita condicional admite exatamente uma e rejeita a outra para auditoria; `response_refs` e `fence_digest` são função do ledger; qual venceu é input durável e visível no digest, não desempate do coordinator |
+| Crash após o dispatch de `s1` e antes da resposta; resume enquanto a chamada original ainda está em voo | resume encontra dispatch aberto e slot vazio; ou aguarda, ou grava `SlotDispatchRevocation` antes de redespachar; a resposta ao dispatch revogado é rejeitada mesmo chegando primeiro; nunca dois dispatches abertos nem duas respostas por slot |
+| Adapter que é fonte exógena declarada e também respondedor de slot fecha `closed_through >= C` antes de responder | suas respostas de slot não recebem `open_coordinate > C`: são preenchimento de unidade derivada, fora da condição de fechamento; o fence admite os slots com a coordenada herdada da `RoundDeclaration` |
 | `DEFER` para o próximo ciclo do mesmo instante | sucessor recebe `(instant, cycle_ordinal + 1)` persistido no mesmo commit; resume e replay readmitem exatamente naquele ciclo |
 | Dois candidatos vencem no mesmo ciclo | nenhum evento de um aparece como `causal_parent` do outro; reação exige ciclo posterior |
 | Resume de snapshot com crença formada por LLM | checkpoint epistemológico presente, versionado e coberto por hash; resume equivalente sem chamar modelo |
@@ -1246,9 +1402,9 @@ Os nomes concretos podem variar, mas a responsabilidade não:
 | Contrato | Responsabilidade única |
 |---|---|
 | `Clock` | expor/avançar `SimulationInstant` conforme próxima entrada causal |
-| `CycleCoordinator` | congelar a revisão base, aguardar a condição de fechamento, derivar coorte e fence e coordenar a tentativa até um envelope terminal; manter `CycleControlState` |
+| `CycleCoordinator` | congelar a revisão base, aguardar a condição de fechamento, derivar coorte e fence e coordenar a tentativa até um envelope terminal; manter `CycleControlState` pela dobra total da §8.0.2 |
 | `AdmissionFenceLog` | persistir o `AdmissionFence` por `(cycle_id, attempt_ordinal)` antes de qualquer avaliação e servi-lo a replay/resume para verificação contra a derivação |
-| `InputLedger` | registrar fontes exógenas declaradas, admitir entradas idempotentes, atribuir `ingress_seq` e coordenada normalizada, persistir `SourceClosure` monotônicos e expor a condição de fechamento |
+| `InputLedger` | registrar fontes exógenas declaradas, admitir entradas tipadas idempotentes, atribuir `ingress_seq` e coordenada normalizada, persistir `SourceClosure` monotônicos e expor a condição de fechamento; manter o registro de slot — `SlotDispatch`, `SlotDispatchRevocation` e no máximo uma `SlotResponse` por `(decision_round_id, slot_id)`, admitida por escrita condicional contra o dispatch aberto (§3.2.5) |
 | `ScheduleStore` | manter lifecycle de occurrences e `RoundDeclaration` e consultar as elegíveis à coordenada do ciclo |
 | `TriggerRegistry` | armazenar definition/version e runtime state |
 | `OccurrenceHandler` | transformar occurrence vencida em candidato, sem side effect |
@@ -1273,9 +1429,10 @@ existem para tornar impossível que dois módulos decidam o mesmo verbo.
 ## Sequência de implementação recomendada
 
 1. Value objects, coordenada de elegibilidade, envelopes canônicos, quatro ledgers e hashes.
-2. Clock, `WorldRevision`, fontes/`SourceClosure`, `RoundDeclaration`/coorte, derivação verificável
-   do `AdmissionFence`, agenda e lifecycle de trigger com testes de propriedade — incluindo a prova
-   de que permutar a ordem de gravação e o momento do fence não altera `fence_digest`.
+2. Clock, `WorldRevision`, fontes/`SourceClosure`, `RoundDeclaration`/coorte, registro de slot
+   (`SlotDispatch`, revogação, resposta única por escrita condicional), derivação verificável do
+   `AdmissionFence`, agenda e lifecycle de trigger com testes de propriedade — incluindo a prova de
+   que permutar a ordem de gravação e o momento do fence não altera `fence_digest`.
 3. `ActionProposal`, facets e um resolvedor de recurso mínimo, sem regra de exame.
 4. `EventBatch`, reducers, transação única (um `DecisionRecord` por unidade admitida + eventos +
    `CycleCommit` + revisão), envelope de abort sem settlement, `CycleControlState`/`AttemptRetryRecord`
@@ -1329,6 +1486,26 @@ unidade admitida restaura a bijeção.
 deliberada e transforma o resume em retentativa implícita. O estado de controle precisa distinguir os
 dois e a retentativa precisa ser um ato durável.
 
+**Estado de controle definido por predicados independentes sobre “o último envelope”.** Deixa a
+janela entre `AttemptRetryRecord` e o novo fence sem estado e faz “fence em voo” e “último envelope é
+abort” valerem ao mesmo tempo. A dobra precisa ser total e ordenada, com um estado próprio para a
+retentativa autorizada e ainda não iniciada.
+
+**Resposta de slot como entrada de fonte exógena.** Ou o respondedor precisa fechar a coordenada
+antes de responder — e a resposta, gravada depois do fechamento, recebe coordenada posterior à do
+ciclo e nunca é admitida —, ou o protocolo isenta a resposta por convenção não escrita. O slot é
+unidade derivada; a resposta é preenchimento, sem coordenada e sem fechamento.
+
+**“Primeira resposta gravada vence” sem dispatch vinculado.** Resolve o duplo `NoProposal` ×
+proposta real, mas não o redespacho após crash: duas chamadas emitidas pela própria simulação passam
+a disputar o slot e a latência de host escolhe o conteúdo. Com um único dispatch aberto por slot e
+revogação durável antes de redespachar, a única disputa restante é entre atos externos ao mesmo
+dispatch, e ela é resolvida pelo ledger na admissão, não por `derive()`.
+
+**Desempatar respostas duplicadas por `ingress_seq` ou por conteúdo.** Reintroduz ordem de chegada na
+membresia ou atribui significado causal a bytes de payload para escolher entre `NoProposal` e
+`ActionProposal`. O ledger não pode conter duas respostas para o mesmo slot.
+
 **Liquidar disposições em outbox depois do commit do mundo.** Permite mundo sem disposição — ou
 disposição sem mundo — após crash, e transforma retentativa técnica em duplicação causal.
 
@@ -1363,7 +1540,11 @@ de vazamento.
   causal e de tornar o settlement crash-consistente com o mundo.
 - Toda fonte exógena declarada carrega o ônus de liveness: ela precisa gravar `SourceClosure` para
   que o run avance. Isso move o relógio de parede de dentro do coordinator para o adapter, onde vira
-  input registrado; runs sem fontes exógenas não pagam nada.
+  input registrado; runs sem fontes exógenas não pagam fechamento algum. O respondedor de slot tem
+  ônus diferente — preencher cada dispatch aberto — e nunca fecha coordenada.
+- Cada slot custa um `SlotDispatch` durável antes da chamada e uma escrita condicional na resposta;
+  em troca, o ledger nunca contém duas respostas para o mesmo slot e o resume nunca cria duas
+  chamadas concorrentes para ele.
 - Rounds deixam de ser um detalhe do orchestrator e passam a ser entradas causais com lifecycle no
   event store; abrir um round custa um commit anterior que o declare.
 - Domínios futuros precisam declarar schemas, reads/writes, invariantes e versões; isso aumenta o

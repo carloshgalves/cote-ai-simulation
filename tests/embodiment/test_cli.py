@@ -1,6 +1,8 @@
-"""The observable result of PSV1-1, end to end.
+"""The observable results of PSV1-1 and PSV1-2, end to end.
 
     python -m embodiment seed-cohort --world-seed 42 --n 40 --out runs/demo/
+    python -m embodiment advance-clock --run runs/demo/ --character npc.0017 \
+        --days 3 --sleep 4h --quality poor
 
 Evidence of what happened is the **event log**, not the terminal output, so every
 assertion here reads the log or the snapshot.
@@ -12,15 +14,20 @@ import json
 from pathlib import Path
 
 import pytest
+import yaml
 
-from embodiment.cli import main
+import embodiment.cli as cli
+from embodiment.capability import capability_available
+from embodiment.cli import advance_clock_command, main
+from embodiment.dynamics import BodyTraits, Environment, load_params
 from embodiment.eventlog import (
     EVENT_COHORT_CORRELATION_REPORT,
     EVENT_RUN_STARTED,
+    RunContinuityError,
     normalised_bytes,
 )
-from embodiment.snapshot import read_snapshot
-from embodiment.types import Dimension
+from embodiment.snapshot import SnapshotShapeError, capacity_profile_of, read_snapshot
+from embodiment.types import Dimension, RunMetadata
 
 
 def run(out_dir: Path, *, world_seed: int = 42, count: int = 40) -> Path:
@@ -145,3 +152,347 @@ def test_an_empty_cohort_is_refused_clearly(tmp_path: Path) -> None:
 
     with pytest.raises(ValueError, match="at least one student"):
         seed_cohort_command(world_seed=42, count=0, out_dir=tmp_path / "demo")
+
+
+# --------------------------------------------------------------------------
+# PSV1-2 — `advance-clock`
+# --------------------------------------------------------------------------
+
+
+def advance(out_dir: Path, *, character: str = "npc.0017", days: int = 3, sleep: str = "4h", quality: str = "poor") -> int:
+    return main(
+        [
+            "advance-clock",
+            "--run", str(out_dir),
+            "--character", character,
+            "--days", str(days),
+            "--sleep", sleep,
+            "--quality", quality,
+        ]
+    )
+
+
+def test_a_seeded_character_has_a_rested_body_in_the_snapshot(tmp_path: Path) -> None:
+    snapshot = read_snapshot(run(tmp_path / "demo") / "snapshot.yaml")
+    body = snapshot["characters"]["npc.0001"]["body_state"]
+    assert body["character_id"] == "npc.0001"
+    assert body["t_hours"] == 0.0
+    assert body["central_fatigue"] == 0.0
+    assert body["sleep"]["debt_hours"] == 0.0
+    assert body["energy"]["substrate_availability"] == 1.0
+    assert set(body["peripheral_fatigue"]) == {"legs", "arms", "grip", "core"}
+    #: Serialised and empty, by decision 13.5 rather than by omission.
+    assert body["illnesses"] == []
+    assert snapshot["run_metadata"]["dynamics_version"]
+
+
+def test_the_snapshot_records_the_dynamics_version_that_actually_advanced_it(
+    tmp_path: Path,
+) -> None:
+    """Spec §9.2: the recorded version is what makes two snapshots comparable.
+
+    Asserted against the loaded parameter file rather than against a literal, so
+    it keeps proving the linkage after the next bump instead of becoming a string
+    somebody edits to make a test pass. Bodies advanced under different
+    BODY_DYNAMICS versions are not interchangeable, and this is where a reader
+    finds out which one they have.
+    """
+    out = run(tmp_path / "demo")
+    snapshot = read_snapshot(out / "snapshot.yaml")
+    version = load_params().model_version
+
+    assert snapshot["run_metadata"]["dynamics_version"] == version
+    #: `as_dict` writes spec §9.2's field name and `from_document` reads it back
+    #: by component; `advance-clock` rehydrates through that round trip, so a
+    #: version that survives only one direction is a version the second phase of
+    #: a run cannot check itself against.
+    assert (
+        RunMetadata.from_document(snapshot["run_metadata"]).component_versions["dynamics"]
+        == version
+    )
+
+    assert advance(out, character="npc.0001", days=1) == 0
+    advances = [record for record in events(out) if record["event"] == "body.advanced"]
+    assert advances
+    assert {record["payload"]["dynamics_version"] for record in advances} == {version}
+
+
+def test_an_old_body_is_not_reinterpreted_under_the_current_dynamics(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A model-version bump is a replay boundary, not a migration request."""
+    current = load_params()
+    legacy = current.model_copy(update={"model_version": "0.1.0-provisional"})
+    with monkeypatch.context() as legacy_loader:
+        legacy_loader.setattr(cli, "load_params", lambda: legacy)
+        out = run(tmp_path / "legacy", count=1)
+
+    before = (out / "events.jsonl").read_bytes()
+
+    current_schema_calls: list[str] = []
+
+    def current_schema_must_not_run(name: str):
+        def fail(*args, **kwargs):
+            current_schema_calls.append(name)
+            raise AssertionError(
+                f"version compatibility must be checked before current-schema {name}"
+            )
+
+        return fail
+
+    monkeypatch.setattr(
+        cli, "capacity_profile_of", current_schema_must_not_run("CapacityProfile rehydration")
+    )
+    monkeypatch.setattr(
+        cli.RunMetadata,
+        "from_document",
+        current_schema_must_not_run("RunMetadata validation"),
+    )
+    monkeypatch.setattr(
+        cli, "body_state_of", current_schema_must_not_run("BodyState rehydration")
+    )
+    monkeypatch.setattr(
+        cli.BodyTraits, "from_profile", current_schema_must_not_run("BodyTraits derivation")
+    )
+    monkeypatch.setattr(
+        cli, "capability_available", current_schema_must_not_run("capability calculation")
+    )
+    with pytest.raises(
+        RunContinuityError,
+        match=r"0\.1\.0-provisional.*0\.1\.1-provisional",
+    ):
+        advance_clock_command(run_dir=out, character_id="npc.0001", days=1)
+
+    assert current_schema_calls == []
+    assert (out / "events.jsonl").read_bytes() == before
+
+
+def test_a_tampered_snapshot_is_rejected_before_the_log_is_extended(tmp_path: Path) -> None:
+    """A domain-valid edit is still not world truth when its digest is stale."""
+    out = run(tmp_path / "demo", count=1)
+    snapshot_path = out / "snapshot.yaml"
+    snapshot = yaml.safe_load(snapshot_path.read_text(encoding="utf-8"))
+    snapshot["characters"]["npc.0001"]["body_state"]["central_fatigue"] = 0.9
+    snapshot_path.write_text(
+        yaml.safe_dump(snapshot, sort_keys=True, allow_unicode=True), encoding="utf-8"
+    )
+    before = (out / "events.jsonl").read_bytes()
+
+    with pytest.raises(SnapshotShapeError, match="snapshot_hash"):
+        advance_clock_command(run_dir=out, character_id="npc.0001", days=1)
+
+    assert (out / "events.jsonl").read_bytes() == before
+
+
+@pytest.mark.parametrize(
+    "wbgt_c",
+    [float("nan"), float("inf"), float("-inf")],
+    ids=["nan", "positive-infinity", "negative-infinity"],
+)
+def test_non_finite_wbgt_is_rejected_before_the_log_is_extended(
+    tmp_path: Path, wbgt_c: float
+) -> None:
+    out = run(tmp_path / "demo", count=1)
+    before = (out / "events.jsonl").read_bytes()
+
+    with pytest.raises(ValueError, match="finite"):
+        main(
+            [
+                "advance-clock",
+                "--run",
+                str(out),
+                "--character",
+                "npc.0001",
+                "--days",
+                "1",
+                f"--wbgt={wbgt_c}",
+            ]
+        )
+
+    assert (out / "events.jsonl").read_bytes() == before
+
+
+def test_the_command_advances_three_days_of_bad_sleep(tmp_path: Path, capsys) -> None:
+    """The ticket's observable result, from the terminal the reader will use."""
+    out = run(tmp_path / "demo")
+    assert advance(out) == 0
+    printed = capsys.readouterr().out
+    assert "sleep.debt_hours" in printed
+    assert "capability_available" in printed
+    assert "coordination" in printed
+
+
+def test_the_log_gains_one_body_advanced_per_interval(tmp_path: Path) -> None:
+    """Evidence is the log: six intervals over three days, with both sides."""
+    out = run(tmp_path / "demo")
+    advance(out)
+    advances = [record for record in events(out) if record["event"] == "body.advanced"]
+    assert len(advances) == 6
+    payload = advances[0]["payload"]
+    assert payload["character_id"] == "npc.0017"
+    assert payload["dt_hours"] == 20.0
+    assert payload["environment"]["asleep"] is False
+    assert payload["channels_changed"]["sleep"]["before"]["debt_hours"] == 0.0
+    assert payload["channels_changed"]["sleep"]["after"]["debt_hours"] > 0.0
+
+
+def test_advancing_zero_days_leaves_the_run_exactly_as_it_was(tmp_path: Path) -> None:
+    """The other half of the ticket, and as much its point as the first.
+
+    A command that looked at a body and wrote nothing changed nothing — not the
+    body, and not the audit artefact either.
+    """
+    out = run(tmp_path / "demo")
+    before = (out / "events.jsonl").read_bytes()
+    snapshot_before = (out / "snapshot.yaml").read_bytes()
+
+    assert advance(out, days=0) == 0
+
+    assert (out / "events.jsonl").read_bytes() == before
+    assert (out / "snapshot.yaml").read_bytes() == snapshot_before
+
+
+def test_advancing_the_same_run_twice_appends_rather_than_forking_it(tmp_path: Path) -> None:
+    out = run(tmp_path / "demo")
+    advance(out, days=1)
+    advance(out, character="npc.0002", days=1)
+    records = events(out)
+    assert records[0]["event"] == "run.started"
+    assert [record["seq"] for record in records] == list(range(len(records)))
+    assert len({record["payload"]["character_id"] for record in records if record["event"] == "body.advanced"}) == 2
+
+
+def test_advancing_the_same_character_twice_is_refused_without_forking_its_history(
+    tmp_path: Path,
+) -> None:
+    out = run(tmp_path / "demo")
+    assert advance(out, character="npc.0001", days=1) == 0
+    before = (out / "events.jsonl").read_bytes()
+
+    with pytest.raises(RuntimeError, match="npc.0001.*already been advanced.*PSV1-8"):
+        advance(out, character="npc.0001", days=1)
+
+    assert (out / "events.jsonl").read_bytes() == before
+
+
+def test_body_advanced_events_carry_the_logical_instant_the_body_reached(tmp_path: Path) -> None:
+    out = run(tmp_path / "demo")
+    assert advance(out, character="npc.0001", days=3) == 0
+    advances = [record for record in events(out) if record["event"] == "body.advanced"]
+
+    assert [record["sim_time"] for record in advances] == [
+        "Y1_START+00020.000h",
+        "Y1_START+00024.000h",
+        "Y1_START+00044.000h",
+        "Y1_START+00048.000h",
+        "Y1_START+00068.000h",
+        "Y1_START+00072.000h",
+    ]
+    assert [record["payload"]["t_hours_after"] for record in advances] == [
+        20.0,
+        24.0,
+        44.0,
+        48.0,
+        68.0,
+        72.0,
+    ]
+
+
+def test_event_instants_order_as_written_past_a_hundred_hours(tmp_path: Path) -> None:
+    """The property, not six literals: sorting the log by `sim_time` is the log.
+
+    An unpadded offset reads as ordered and is not — `Y1_START+100h` sorts before
+    `Y1_START+20h` — and the ticket's own exam week already runs past 100 h. A
+    consumer that compares timestamps has to get a wrong answer loudly or not at
+    all, so this asserts the whole log's order rather than one run's spelling.
+    """
+    out = run(tmp_path / "demo")
+    assert advance(out, character="npc.0001", days=9) == 0
+    records = events(out)
+
+    instants = [record["sim_time"] for record in records]
+    assert instants == sorted(instants), instants
+    assert any(record["payload"].get("t_hours_after", 0.0) > 100.0 for record in records)
+
+    advances = [record for record in records if record["event"] == "body.advanced"]
+    for record in advances:
+        rendered = f"Y1_START+{record['payload']['t_hours_after']:09.3f}h"
+        assert record["sim_time"] == rendered
+
+
+def test_capability_is_reported_in_the_environment_the_body_was_advanced_through(
+    tmp_path: Path,
+) -> None:
+    """`--wbgt` has to reach the number the ticket asks the command to print.
+
+    Reading capability in a neutral environment while the body is advanced through
+    a hot one prints what this body could do somewhere it is not. Both sides are
+    read in the run's own ambient WBGT, so the reported change is what the passage
+    of time did and not what walking into the sun did.
+    """
+    neutral = advance_clock_command(
+        run_dir=run(tmp_path / "cool"), character_id="npc.0001", days=1, wbgt_c=21.0
+    )
+    hot = advance_clock_command(
+        run_dir=run(tmp_path / "hot"), character_id="npc.0001", days=1, wbgt_c=34.0
+    )
+
+    for dimension in (Dimension.AEROBIC_CAPACITY, Dimension.MAX_STRENGTH, Dimension.COORDINATION):
+        assert hot["capability_after"][dimension] < neutral["capability_after"][dimension], dimension
+        assert hot["capability_before"][dimension] < neutral["capability_before"][dimension], dimension
+    #: Milliseconds: the heat makes this one bigger, not smaller.
+    assert (
+        hot["capability_after"][Dimension.REACTION_TIME]
+        > neutral["capability_after"][Dimension.REACTION_TIME]
+    )
+    #: A trait the dynamics govern rather than wear down is the same in both.
+    assert (
+        hot["capability_after"][Dimension.STATURE]
+        == neutral["capability_after"][Dimension.STATURE]
+    )
+
+
+def test_the_reported_capability_is_the_one_the_composition_computes(tmp_path: Path) -> None:
+    """No second composition: the command reports what `capability.py` returns."""
+    out = run(tmp_path / "demo")
+    result = advance_clock_command(run_dir=out, character_id="npc.0001", days=1, wbgt_c=34.0)
+    section = read_snapshot(out / "snapshot.yaml")["characters"]["npc.0001"]
+    profile = capacity_profile_of(section)
+
+    expected = capability_available(
+        profile,
+        result["after"],
+        environment=Environment(wbgt_c=34.0),
+        traits=BodyTraits.from_profile(profile),
+    )
+    assert dict(result["capability_after"]) == pytest.approx(dict(expected))
+
+
+def test_a_character_outside_the_run_is_named_rather_than_guessed(tmp_path: Path) -> None:
+    out = run(tmp_path / "demo")
+    with pytest.raises(KeyError, match="npc.9999"):
+        advance(out, character="npc.9999")
+
+
+def test_the_same_seed_and_the_same_days_produce_the_same_advance(tmp_path: Path) -> None:
+    first = run(tmp_path / "one")
+    second = run(tmp_path / "two")
+    advance(first)
+    advance(second)
+    assert normalised_bytes(first / "events.jsonl") == normalised_bytes(second / "events.jsonl")
+
+
+@pytest.mark.parametrize(
+    ("text", "hours"), [("4h", 4.0), ("30m", 0.5), ("90min", 1.5), ("1.5h", 1.5), ("8", 8.0)]
+)
+def test_durations_are_read_the_way_the_ticket_writes_them(text: str, hours: float) -> None:
+    from embodiment.cli import parse_hours
+
+    assert parse_hours(text) == hours
+
+
+def test_an_unreadable_duration_is_refused(tmp_path: Path) -> None:
+    from embodiment.cli import parse_hours
+
+    with pytest.raises(ValueError, match="duration"):
+        parse_hours("a whole night")

@@ -69,3 +69,32 @@ def walk(node: Any, path: str = "") -> Iterator[tuple[str, Any]]:
 @pytest.fixture(scope="session")
 def walk_document():
     return walk
+
+
+@pytest.fixture(scope="session")
+def dynamics_params():
+    from embodiment.dynamics import load_params
+
+    return load_params()
+
+
+@pytest.fixture(scope="session")
+def reference_profile(prior):
+    """One concrete body from the prior, for tests that need real units.
+
+    Drawn rather than written down: a hand-made profile in a test is the same
+    failure mode (F3) as one in a data file, and it would drift from the prior
+    the moment the marginals move.
+    """
+    from embodiment.rng import PURPOSE_CAPACITY_SAMPLE, SEEDING_EVENT_ID, substream
+
+    return prior.sample_profile(
+        substream(20260909, "npc.0001", SEEDING_EVENT_ID, PURPOSE_CAPACITY_SAMPLE), "male"
+    )
+
+
+@pytest.fixture(scope="session")
+def rested_body(reference_profile):
+    from embodiment.dynamics import initial_body_state
+
+    return initial_body_state("npc.0001", reference_profile)

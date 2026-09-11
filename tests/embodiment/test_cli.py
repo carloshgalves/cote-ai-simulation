@@ -229,16 +229,41 @@ def test_an_old_body_is_not_reinterpreted_under_the_current_dynamics(
 
     before = (out / "events.jsonl").read_bytes()
 
-    def capability_must_not_run(*args, **kwargs):
-        raise AssertionError("version compatibility must be checked before capability")
+    current_schema_calls: list[str] = []
 
-    monkeypatch.setattr(cli, "capability_available", capability_must_not_run)
+    def current_schema_must_not_run(name: str):
+        def fail(*args, **kwargs):
+            current_schema_calls.append(name)
+            raise AssertionError(
+                f"version compatibility must be checked before current-schema {name}"
+            )
+
+        return fail
+
+    monkeypatch.setattr(
+        cli, "capacity_profile_of", current_schema_must_not_run("CapacityProfile rehydration")
+    )
+    monkeypatch.setattr(
+        cli.RunMetadata,
+        "from_document",
+        current_schema_must_not_run("RunMetadata validation"),
+    )
+    monkeypatch.setattr(
+        cli, "body_state_of", current_schema_must_not_run("BodyState rehydration")
+    )
+    monkeypatch.setattr(
+        cli.BodyTraits, "from_profile", current_schema_must_not_run("BodyTraits derivation")
+    )
+    monkeypatch.setattr(
+        cli, "capability_available", current_schema_must_not_run("capability calculation")
+    )
     with pytest.raises(
         RunContinuityError,
         match=r"0\.1\.0-provisional.*0\.1\.1-provisional",
     ):
         advance_clock_command(run_dir=out, character_id="npc.0001", days=1)
 
+    assert current_schema_calls == []
     assert (out / "events.jsonl").read_bytes() == before
 
 

@@ -52,7 +52,15 @@ from .eventlog import (
 from .prior import POPULATION_PRIOR_PATH, PopulationPrior
 from .seeding import CapacityBaselineStore, Posterior, cohort_ids, posterior_for, seed_character
 from .snapshot import body_state_of, capacity_profile_of, read_snapshot, write_snapshot
-from .types import BodyState, Dimension, RunMetadata, SleepQuality, Y1_START, as_document
+from .types import (
+    BodyState,
+    Dimension,
+    MissingRunMetadataError,
+    RunMetadata,
+    SleepQuality,
+    Y1_START,
+    as_document,
+)
 
 __all__ = [
     "main",
@@ -330,6 +338,22 @@ def advance_clock_command(
         raise FileNotFoundError(f"no snapshot in {run_dir}: seed a cohort there first")
 
     snapshot = read_snapshot(snapshot_path)
+    metadata_document = snapshot.get("run_metadata")
+    if not isinstance(metadata_document, Mapping):
+        raise MissingRunMetadataError("dynamics_version")
+    recorded_dynamics = metadata_document.get("dynamics_version")
+    if not isinstance(recorded_dynamics, str) or not recorded_dynamics:
+        raise MissingRunMetadataError("dynamics_version")
+    params = load_params()
+    if recorded_dynamics != params.model_version:
+        raise RunContinuityError(
+            f"{snapshot_path} records dynamics_version {recorded_dynamics!r}, but the "
+            f"available BODY_DYNAMICS is {params.model_version!r}. An old body cannot be "
+            "migrated or reinterpreted by advance-clock; re-run it under the recorded model."
+        )
+
+    metadata = RunMetadata.from_document(metadata_document)
+    metadata.require(ADVANCE_COMPONENTS)
     characters = snapshot.get("characters") or {}
     if character_id not in characters:
         known = ", ".join(sorted(characters)[:5])
@@ -341,16 +365,6 @@ def advance_clock_command(
     profile = capacity_profile_of(section)
     body = body_state_of(section)
     traits = BodyTraits.from_profile(profile)
-    params = load_params()
-    metadata = RunMetadata.from_document(snapshot.get("run_metadata") or {})
-    metadata.require(ADVANCE_COMPONENTS)
-    recorded_dynamics = metadata.component_versions["dynamics"]
-    if recorded_dynamics != params.model_version:
-        raise RunContinuityError(
-            f"{snapshot_path} records dynamics_version {recorded_dynamics!r}, but the "
-            f"available BODY_DYNAMICS is {params.model_version!r}. An old body cannot be "
-            "migrated or reinterpreted by advance-clock; re-run it under the recorded model."
-        )
 
     sleep_hours = parse_hours(sleep)
     segments = day_segments(sleep_hours, quality, wbgt_c) * days

@@ -77,7 +77,7 @@ validador/resolvedor especializado chamado pela fundação, não uma segunda aut
 | `AffordanceAssessment` | diagnóstico facetado da proposta contra um snapshot |
 | `CommitCandidate` | unidade atômica que pode produzir zero ou mais eventos e declarar conflitos |
 | `Event` | fato imutável do mundo aceito em commit |
-| `CycleCommit` | envelope persistido do `EventBatch` de um ciclo, obrigatório mesmo com zero eventos |
+| `CycleCommit` | envelope persistido uma única vez no commit journal do `DecisionLedger`, obrigatório mesmo com zero eventos |
 | `DecisionRecord` | desfecho terminal canônico de exatamente uma unidade admitida; existe somente dentro de um `CycleCommit` |
 | `CycleAbortRecord` | envelope durável de tentativa abortada; audita `INDETERMINATE` e a causa sem publicar revisão nem liquidar nada |
 | `AttemptRetryRecord` | decisão explícita e durável de abrir `attempt_ordinal + 1` para um ciclo parado após abort; consumido pelo fence que abre essa tentativa |
@@ -164,8 +164,8 @@ Todas as propostas do ciclo leem exatamente `base_revision`. Nenhuma vê mutaç�
 mesmo ciclo. O lote é fechado por protocolo, não pela ordem de chegada:
 
 - uma solicitação a agente é um `SlotDispatch` durável (§3.2.5) e carrega `dispatch_id`,
-  `decision_round_id`, `slot_id`, `base_revision`, `effective_at` e a coordenada de elegibilidade da
-  `RoundDeclaration` à qual o slot pertence;
+  `decision_round_id`, `slot_id`, `actor_id`, `base_revision`, `effective_at` e a coordenada de
+  elegibilidade da `RoundDeclaration` à qual o slot pertence;
 - a resposta pertence àquele slot mesmo que outra chamada termine antes; um slot tem no máximo um
   dispatch aberto e no máximo uma resposta gravada;
 - os slots do round são declarados na criação da `RoundDeclaration` e o round só fecha quando cada
@@ -207,7 +207,8 @@ ciclo. A coordenada é atribuída **uma única vez**, por regra versionada, no m
 - input exógeno recebe `max((declared_effective_at, 0), open_coordinate(source_id))`, onde
   `open_coordinate` é o sucessor da última coordenada que a própria fonte fechou (§3.2.2). O valor
   declarado permanece no input ledger como provenance. Nunca se admite entrada no passado, e a
-  normalização é uma função do ledger da fonte — não de qual fence o coordinator já gravou;
+  normalização é uma função do ledger da fonte — não de qual fence o coordinator já gravou; se a
+  fonte já publicou `final`, a entrada é rejeitada em vez de normalizada;
 - `RoundDeclaration` recebe a coordenada escrita explicitamente por quem a criou: o genesis, ou o
   `CycleCommit` que a originou, com valor `(instant, cycle_ordinal + 1)` ou maior (§3.2.3); os slots
   herdam a coordenada da declaração, e a resposta que preenche um slot não recebe coordenada própria
@@ -248,6 +249,7 @@ Uma fonte exógena declara o fim de sua contribuição a uma coordenada com um m
 
 ```text
 SourceClosure {
+  closure_id                              // derivado de (run_id, source_id, ingress_seq, digest)
   source_id
   closed_through: EligibilityCoordinate     // monotônico por fonte; pode saltar à frente
   final: boolean                            // true = a fonte nunca mais grava
@@ -257,18 +259,28 @@ SourceClosure {
 
 Regras:
 
-- `closed_through` nunca regride. Uma fonte pode fechar coordenadas muito à frente ou declarar-se
-  `final`; um run sem fontes exógenas — mesmo com rounds e respondedores de slot — tem a condição
-  abaixo trivialmente satisfeita;
+- `closed_through` nunca regride. `ingress_seq` é alocado sem lacunas na mesma escrita atômica do
+  registro, e a leitura por fonte é prefix-consistente: observar o item `N` implica observar todos os
+  itens válidos `<= N`. Uma fonte pode fechar coordenadas muito à frente ou declarar-se `final`; um
+  run sem fontes exógenas — mesmo com rounds e respondedores de slot — tem a condição abaixo
+  trivialmente satisfeita;
 - **condição de fechamento:** um ciclo de coordenada `C` só deriva sua membresia quando toda fonte
-  exógena declarada tem `closed_through >= C`. Até então o coordinator **aguarda**; ele nunca corta
-  por conta própria. Uma fonte parada é condição operacional (telemetria, alerta), não decisão
-  semântica;
+  exógena declarada tem um `SourceClosure` que satisfaz `final = true` **ou**
+  `closed_through >= C`. Um marcador final cobre `C` e toda coordenada posterior, independentemente
+  do valor finito de `closed_through`. Até então o coordinator **aguarda**; ele nunca corta por conta
+  própria. Uma fonte parada é condição operacional (telemetria, alerta), não decisão semântica;
 - **normalização de ingresso:** `open_coordinate(source_id)` é o sucessor
   `(closed_through.instant, closed_through.ordinal + 1)` do último fechamento da fonte, ou a
   coordenada mínima do run quando ainda não houve fechamento. Uma entrada gravada depois do
   `SourceClosure` da própria fonte recebe coordenada `>= open_coordinate` por regra, então nunca cai
-  sob um fechamento já declarado. `ingress_seq` participa **apenas** desse antes/depois;
+  sob um fechamento já declarado. Depois de um marcador `final`, `open_coordinate` é indefinida e o
+  `InputLedger` rejeita atomicamente qualquer novo input ou `SourceClosure` daquela fonte; nem
+  normalização nem reabertura são permitidas. `ingress_seq` participa apenas dessa ordem durável e da
+  seleção da prova de fechamento, nunca da ordem/prioridade de unidades admitidas;
+- **prova canônica:** para cada `(source_id, C)`, `covering_closure(source_id, C)` é o primeiro
+  `SourceClosure` na ordem crescente de `ingress_seq` que satisfaz `final = true` ou
+  `closed_through >= C`. Esse seletor é total quando a condição de fechamento vale e é estável sob
+  append: marcadores posteriores nunca substituem o primeiro que cruzou `C`;
 - o coordinator publica, como sinal operacional, a coordenada cujo fechamento aguarda; uma fonte
   pode consultá-lo, mas o que vale é o marcador que ela grava.
 
@@ -290,6 +302,7 @@ causal durável, com lifecycle igual ao de uma `ScheduledOccurrence` (§4.1):
 ```text
 RoundDeclaration {
   decision_round_id
+  source_id                          // fonte derivada canônica; slots herdam este valor
   actor_id
   slot_ids[]                          // declarados na criação; imutáveis
   eligibility: EligibilityCoordinate
@@ -347,9 +360,11 @@ AdmissionFence {
   instant
   cycle_ordinal
   base_revision + base_state_hash
-  closure_proof: [{ source_id, closure_ref, closed_through }]   // toda fonte exógena declarada
+  closure_proof: [{ source_id, closure_ref, ingress_seq, closed_through, final }]
+                  // covering_closure(source_id, C) de toda fonte exógena declarada
   cohort: { cohort_id, rounds: [{ decision_round_id, slot_ids[], response_refs[] }] }
   admitted_input_ids[]        // unidades admitidas, em ordem canônica
+  admission_order_policy_version + admission_order_policy_hash
   fence_policy_version + rule_versions
   fence_digest
 }
@@ -368,21 +383,37 @@ listadas em `cohort`; a unidade é o slot. Uma unidade é admitida quando, e som
 4. sendo slot, ele contém sua única resposta gravada (§3.2.5).
 
 O fence é uma **função**: `derive(ledgers, base_revision, C, versions)`. O coordinator não escolhe
-um high-water; ele registra em `closure_proof` os fechamentos dos quais a derivação dependeu. O fence
-persistido precisa ser igual à derivação; replay e resume recomputam a derivação e verificam
+um high-water; para cada fonte ele registra em `closure_proof` exatamente o
+`covering_closure(source_id, C)` da §3.2.2. A leitura do ledger é prefix-consistente e a escrita
+condicional do fence verifica novamente base revision, versões e essas referências antes do append.
+O fence persistido precisa ser igual à derivação; replay e resume recomputam a derivação e verificam
 `fence_digest`, e uma divergência falha fechado como corrupção ou deriva de versão (§11).
 
 Consequências:
 
-- `ingress_seq` participa **apenas** da normalização de ingresso da §3.2.2. Ele nunca ordena,
-  prioriza nem desempata. A ordem canônica de `admitted_input_ids` é derivada de conteúdo:
-  `(not_before_instant, not_before_cycle_ordinal, source_rank, payload_digest, input_id)`;
+- `ingress_seq` participa apenas da normalização de ingresso e da escolha append-stable do primeiro
+  fechamento que cobre `C` na §3.2.2. Ele nunca ordena, prioriza nem desempata unidades admitidas. A
+  ordem canônica de `admitted_input_ids` é a ordenação lexicográfica total por
+  `(not_before_instant, not_before_cycle_ordinal, unit_kind_tag, canonical_source_id,
+  semantic_payload_digest, unit_id)`. A política V1 fixa `unit_kind_tag` em `00=SLOT`,
+  `01=EXOGENOUS_INPUT`, `02=SCHEDULED_OCCURRENCE`, `03=TRIGGER_ACTIVATION`; uma nova categoria exige
+  nova versão com tag única. `canonical_source_id` é o identificador namespaced imutável da fonte em
+  bytes UTF-8 NFC — o `source_id` persistido em toda unidade conforme a §3.2.2; slots herdam o da
+  `RoundDeclaration`, occurrences persistem o da fonte derivada que as criou e ativações usam
+  `trigger:<definition_id>`. Colisão de IDs namespaced é configuração inválida. Digests e IDs são
+  comparados por seus bytes canônicos unsigned, nunca por locale, ordem de registro, enum local ou
+  iteração de map;
+- `admission_order_policy_version` e o hash da tabela/serialização acima pertencem à configuração
+  imutável da run, entram no `AdmissionFence` e em `fence_digest`, e precisam estar disponíveis em
+  replay/resume. Empate até `unit_id` implica identidade duplicada/corrupção e falha fechado; assim a
+  chave é total sem recorrer a ordem incidental;
 - inverter a ordem de entrega de duas entradas gravadas antes do mesmo `SourceClosure` não muda o
   conjunto admitido nem o `fence_digest`: ambas ficam sob o fechamento e a ordenação não olha para
   `ingress_seq`;
 - gravar o fence cedo ou tarde — host rápido ou lento, coordinator reiniciado, rede congestionada —
-  não muda o fence: os fatos dos quais ele depende já estão nos ledgers e não se alteram entre a
-  derivação e a gravação. O que muda é telemetria;
+  não muda o fence: cada prova usa o primeiro fechamento que cobre `C`, estável sob append; inputs
+  posteriores a esse fechamento recebem coordenada `> C`, e a escrita condicional impede gravar uma
+  derivação sobre leitura incompleta ou revisão/versão divergente. O que muda é telemetria;
 - entrada gravada depois do fechamento da própria fonte nunca é inserida retroativamente. Ela
   permanece no ledger com sua coordenada normalizada e é admitida pelo primeiro fence posterior que
   a torne elegível;
@@ -436,7 +467,8 @@ SlotDispatch {
                               //                  dispatches anteriores do slot, todos revogados
   run_id + cycle_id
   decision_round_id + slot_id
-  base_revision + eligibility  // herdadas da RoundDeclaration
+  actor_id + eligibility       // herdados da RoundDeclaration
+  base_revision + effective_at // herdados do ResolutionCycle; effective_at = instant do ciclo
   request_digest
 }
 
@@ -446,7 +478,19 @@ SlotDispatchRevocation {
   policy_version?
 }
 
-SlotResponse := ActionProposal | NoProposal   // ambos carregam dispatch_id obrigatório
+NoProposal {
+  no_proposal_id
+  dispatch_id
+  run_id + cycle_id
+  decision_round_id + slot_id
+  actor_id
+  effective_at
+  submitted_against_revision
+  reason: ACTOR_DECLINED | TIMEOUT | RESPONDER_FAILURE
+  response_digest
+}
+
+SlotResponse := ActionProposal | NoProposal   // ambos carregam o vínculo causal completo acima
 ```
 
 Regras, todas verificadas pelo `InputLedger` no momento da admissão, em escrita condicional única:
@@ -454,21 +498,31 @@ Regras, todas verificadas pelo `InputLedger` no momento da admissão, em escrita
 1. **um dispatch aberto por slot:** um `SlotDispatch` só é gravado para slot da coorte derivada,
    vazio e sem outro dispatch aberto. Um dispatch está **aberto** enquanto o slot está vazio e ele
    não foi revogado; o preenchimento do slot o encerra;
-2. **uma resposta por slot:** o ledger aceita uma `SlotResponse` somente se `dispatch_id` aponta
-   para o dispatch aberto do slot **e** o slot está vazio. A escrita é condicional e atômica: ou
-   preenche o slot, ou é rejeitada. Reentrega bit a bit idêntica da resposta já gravada é
-   idempotente; qualquer outra escrita para o mesmo slot — segunda resposta, resposta atrasada,
-   resposta a dispatch revogado — é rejeitada e vai para a auditoria de respostas rejeitadas, fora do
-   digest causal. A chave de idempotência de uma resposta é o slot, não o payload;
-3. **redespacho só após revogação durável:** emitir um novo dispatch para o mesmo slot exige antes
+2. **vínculo causal fail-closed:** ao criar o dispatch, o ledger verifica que `run_id`, `cycle_id`,
+   `decision_round_id`, `slot_id`, `actor_id` e `eligibility` correspondem ao ciclo, à
+   `RoundDeclaration` e ao slot da coorte, e que `base_revision` e `effective_at` correspondem à
+   revisão base e ao instante do ciclo. Ao admitir a resposta, exige igualdade exata de
+   `dispatch_id`, `run_id`, `cycle_id`, `decision_round_id`, `slot_id`, `actor_id`, `effective_at` e
+   `submitted_against_revision` com o dispatch aberto. A resposta não pode declarar elegibilidade
+   própria; se um envelope de transporte a repetir, o valor precisa ser igual ao do dispatch e é
+   descartado antes da persistência canônica. `ActionProposal` e `NoProposal` obedecem à mesma
+   vinculação. Qualquer mismatch é rejeitado e auditado antes de preencher o slot ou participar de
+   `response_refs`, `input_digest` ou `fence_digest`;
+3. **uma resposta por slot:** satisfeita a vinculação da regra 2, o ledger aceita uma
+   `SlotResponse` somente se o slot está vazio. A escrita é condicional e atômica: ou preenche o slot,
+   ou é rejeitada. Reentrega bit a bit idêntica da resposta já gravada é idempotente; qualquer outra
+   escrita para o mesmo slot — segunda resposta, resposta atrasada, resposta a dispatch revogado — é
+   rejeitada e vai para a auditoria de respostas rejeitadas, fora do digest causal. A chave de
+   idempotência de uma resposta é o slot vinculado ao dispatch, não o payload;
+4. **redespacho só após revogação durável:** emitir um novo dispatch para o mesmo slot exige antes
    um `SlotDispatchRevocation` do anterior. A partir da revogação, a resposta ao dispatch antigo não
    pode mais preencher o slot, mesmo que chegue antes da resposta ao novo. Revogar é ato registrado
    — de resume, de política de liveness versionada ou de operador —, nunca efeito de timing
    observado pelo coordinator;
-4. **timeout é preenchimento, não concorrência:** o `NoProposal` de timeout é uma `SlotResponse`
+5. **timeout é preenchimento, não concorrência:** o `NoProposal` de timeout é uma `SlotResponse`
    comum, gravada contra o dispatch aberto. Ela e a resposta real do mesmo dispatch disputam o slot
-   apenas na escrita condicional da regra 2, que admite exatamente uma delas;
-5. **sem coordenada, sem fechamento:** a resposta não recebe `EligibilityCoordinate` própria, não
+   apenas na escrita condicional da regra 3, que admite exatamente uma delas;
+6. **sem coordenada, sem fechamento:** a resposta não recebe `EligibilityCoordinate` própria, não
    passa pela normalização de ingresso da §3.2.2 e não está sujeita a `SourceClosure`. O
    `ingress_seq` que o ledger lhe atribui é auditoria; nenhuma regra o consulta.
 
@@ -477,7 +531,7 @@ Consequências:
 - `cohort.rounds[].response_refs[]` é função do ledger: cada slot tem zero ou uma resposta, e a
   derivação nunca escolhe entre respostas porque o ledger nunca contém duas. Nenhum desempate por
   `ingress_seq` ou por conteúdo é necessário ou permitido (invariante 21);
-- qual escrita venceu a condicional da regra 2 — resposta real ou `NoProposal` de timeout — é um fato
+- qual escrita venceu a condicional da regra 3 — resposta real ou `NoProposal` de timeout — é um fato
   externo durável com o mesmo status de um `SourceClosure`: duas execuções ao vivo em que
   respondedores diferentes vencem têm **inputs diferentes**, visíveis no digest do input ledger; duas
   execuções com o mesmo input ledger têm o mesmo fence. Timing decide **qual input existe**; nunca
@@ -517,6 +571,7 @@ evento “prazo expirou” ter sido serializado antes de uma ação no mesmo ins
 ```text
 ScheduledOccurrence {
   occurrence_id
+  source_id
   due_at
   eligibility: EligibilityCoordinate   // (due_at, 0), salvo coordenada explícita de DEFER
   kind + schema_version
@@ -581,6 +636,8 @@ atrasada permanecem fatos determinísticos sem ator artificial.
 ```text
 ActionProposal {
   proposal_id
+  dispatch_id
+  run_id + cycle_id
   action_type + schema_version
   actor_id
   targets: [{ role, entity_id }]
@@ -660,7 +717,8 @@ freeze base revision; await the closure condition for the cycle coordinate
   → open one SlotDispatch per slot with no response and no open dispatch (after the §10.1 barrier);
       admit the unique response per slot (§3.2.5)
   → record the AdmissionFence durably (closure proof + cohort + canonical admitted_input_ids)
-  → deduplicate admitted units (canonical survivor; duplicates settle as DEDUPLICATED)
+  → validate scoped idempotency identities; abort on key/content conflict
+  → deduplicate semantically identical admitted units (canonical survivor; aliases settle as DEDUPLICATED)
   → expand occurrences, trigger activations and exogenous inputs into CommitCandidates
   → validate proposals against the frozen state
   → build CommitCandidates
@@ -736,15 +794,48 @@ lista `decision_record_ids[]` na mesma ordem canônica de `admitted_input_ids`, 
 cobre os pares `(unidade, desfecho)`. Assim o recibo de settlement prova a cobertura total, e
 auditoria/replay distinguem “slot sem proposta” e “duplicata descartada” de “fonte omitida por bug”:
 
+Antes da expansão, toda unidade que usa `idempotency_key` é vinculada a uma identidade persistente:
+
+```text
+IdempotencyIdentity {
+  run_id
+  unit_kind                    // tag canônica: EXOGENOUS_INPUT | ACTION | OCCURRENCE | TRIGGER ...
+  producer_scope               // source_id exógeno ou source_id derivado canônico
+  actor_scope                  // actor_id quando a unidade tem ator; NONE nos demais casos
+  idempotency_key
+  semantic_digest
+  idempotency_policy_version
+}
+```
+
+O namespace de uma chave é `(run_id, unit_kind, producer_scope, actor_scope, idempotency_key)`. Logo,
+tipos, fontes ou atores distintos nunca colidem por reutilizarem a mesma string. `semantic_digest` é
+o hash da serialização canônica de todo o conteúdo causal da unidade — tipo e schema, fonte, ator,
+payload, coordenada/effective time e provenance — excluindo somente identidade de entrega atribuída
+pelo ledger (`input_id`, `ingress_seq`) e telemetria de transporte. Duas entregas são equivalentes
+somente quando namespace, versão da política e esses bytes semânticos são iguais.
+
+O ledger mantém esse vínculo durante toda a run. Reuso do namespace com o mesmo `semantic_digest` é
+reentrega idempotente: se as unidades equivalentes estiverem no mesmo fence, a primeira pela ordem
+canônica da §3.2.4 é a sobrevivente e as demais são aliases `DEDUPLICATED`; se a sobrevivente já foi
+liquidada em ciclo anterior, a reentrega referencia o recibo terminal existente e não entra em novo
+fence. Reuso do mesmo namespace com `semantic_digest` diferente é `IDEMPOTENCY_CONFLICT`, nunca
+duplicata: o conflito é registrado com as duas referências, a tentativa termina em
+`CycleAbortRecord` antes de gerar candidatos, e nenhuma das unidades é consumida nem recebe
+`DecisionRecord`. O registro append-only não escolhe conteúdo por hash, id, ordem de chegada ou
+latência. Slots continuam sob a unicidade mais forte de `(decision_round_id, slot_id, dispatch_id)` da
+§3.2.5; uma chave arbitrária de proposta não contorna esse vínculo.
+
 - `COMMIT`, `REJECT`, `DEFER`: disposições do resolvedor sobre candidatos, com a liquidação da fonte
   descrita na §7;
 - `NO_PROPOSAL`: o slot foi respondido com `NoProposal`; nenhum candidato existiu, nenhum evento de
   domínio é produzido, o slot é consumido e o round vai a `CONSUMED` por evento de lifecycle quando
   todos os seus slots estão liquidados;
-- `DEDUPLICATED`: a unidade compartilha `idempotency_key` com outra unidade do mesmo fence; a
-  sobrevivente canônica é a primeira na ordem canônica de conteúdo, e o registro da duplicata aponta
-  para ela em `canonical_unit_id`. A duplicata é consumida sem candidato e sem evento; a disposição
-  de fato está no registro da sobrevivente.
+- `DEDUPLICATED`: a unidade compartilha a mesma `IdempotencyIdentity`, inclusive
+  `semantic_digest`, com outra unidade do mesmo fence; a sobrevivente canônica é a primeira na ordem
+  canônica da §3.2.4, e o registro do alias aponta para ela em `canonical_unit_id`. O alias é
+  consumido sem candidato e sem evento; a disposição de fato está no registro da sobrevivente.
+  Mesmo `idempotency_key` com namespace ou digest diferente nunca chega a este desfecho.
 
 `DecisionRecord` existe **exclusivamente** dentro da transação de um `CycleCommit`. Nenhuma outra
 escrita — envelope de abort, material provisório, telemetria — pode criar um. O decision ledger
@@ -759,7 +850,8 @@ O commit é uma transação única sobre `base_revision` e cobre, indivisivelmen
 2. exatamente um `DecisionRecord` terminal por unidade admitida, vencedora ou não;
 3. todos os eventos dos candidatos vencedores, incluindo os eventos de lifecycle de agenda, round e
    trigger;
-4. o `CycleCommit`, que referencia `fence_digest`, `decision_record_ids[]` e `decision_digest`;
+4. o `CycleCommit`, gravado uma única vez no commit journal canônico do `DecisionLedger`, que
+   referencia `fence_digest`, `decision_record_ids[]` e `decision_digest`;
 5. a publicação da nova `WorldRevision`.
 
 Ou as cinco partes persistem, ou nenhuma persiste. Não existe outbox de decisão que possa ficar para
@@ -777,8 +869,9 @@ em relação ao state store, nem disposição gravada sem o mundo correspondente
 
 #### 8.0 Envelope de commit do ciclo
 
-Todo ciclo fechado com sucesso persiste no event store um envelope do seu lote, **inclusive quando o
-lote tem zero eventos**:
+Todo ciclo fechado com sucesso persiste uma única vez no **commit journal append-only do
+`DecisionLedger`** um envelope do seu lote, **inclusive quando o lote tem zero eventos**. O event
+store não contém cópia desse envelope; contém somente os `Event` referenciados por ele:
 
 ```text
 CycleCommit {
@@ -801,9 +894,12 @@ CycleCommit {
 
 Um ciclo em que todos os slots produziram `NoProposal`, ou em que todo candidato foi rejeitado sem
 gerar evento de lifecycle, ainda avança `WorldRevision` e `cycle_ordinal`. O envelope é o registro que
-torna esse avanço reconstruível: o replay percorre a sequência de `CycleCommit` e reaplica os eventos
-de cada um, reproduzindo revisão vazia, ordinal e `next_logical_sequence` sem precisar de evento
-decorativo nem de um snapshot do coordinator. O envelope é também o recibo de settlement:
+torna esse avanço reconstruível: o replay causal percorre a sequência canônica de `CycleCommit` no
+commit journal e reaplica, na ordem de `event_ids[]`, os eventos referenciados no event store,
+reproduzindo revisão vazia, ordinal e `next_logical_sequence` sem precisar de evento decorativo nem de
+um snapshot do coordinator. Ausência, duplicação ou divergência entre uma referência do commit e o
+evento correspondente falha fechado; uma view que combine os dois stores é projeção descartável, não
+segunda cópia autoritativa. O envelope é também o recibo de settlement:
 `fence_digest` prova qual corte foi avaliado e `decision_record_ids[]`/`decision_digest` provam a
 bijeção da §7.1 — toda unidade admitida por aquele corte, inclusive slots `NoProposal` e duplicatas,
 recebeu um desfecho terminal na mesma transação. Tentativa abortada não produz `CycleCommit`, não
@@ -825,7 +921,7 @@ CycleAbortRecord {
   base_revision + base_state_hash
   fence_digest
   abort_reason: INDETERMINATE_FACET | INVARIANT_VIOLATION | REDUCER_FAILURE
-              | SCHEMA_FAILURE | PROVENANCE_FAILURE | CASCADE_LIMIT
+              | SCHEMA_FAILURE | PROVENANCE_FAILURE | IDEMPOTENCY_CONFLICT | CASCADE_LIMIT
   indeterminate_records[]    // facet, reason_code, evidence_refs, rule_version
   failure_evidence_refs[]    // material provisório da tentativa: facets, ConflictSets, sorteios,
                              // disposições provisórias, erro de reducer/invariante
@@ -978,11 +1074,14 @@ percepção, salvo quando o contrato do canal público produz essas observaçõe
   respostas rejeitadas fica fora do digest causal. Uma futura intervenção de usuário só poderá entrar
   aqui por contrato próprio, nunca pelo Observatory;
 - **Decision ledger:** `AdmissionFence`, material provisório de avaliação (assessments, conflitos,
-  sorteios, disposições provisórias), os envelopes terminais — `CycleCommit` com seus
-  `DecisionRecord` e `CycleAbortRecord` — e `AttemptRetryRecord`. `DecisionRecord` é autoritativo
-  somente quando coberto pelo `decision_digest` de um `CycleCommit`; `CycleAbortRecord` é autoritativo
-  para o fato do abort e sua evidência, nunca para settlement;
-- **Event store:** somente fatos do mundo commitados, fonte autoritativa para replay de estado.
+  sorteios, disposições provisórias), `AttemptRetryRecord` e o **único commit journal canônico** dos
+  envelopes terminais — `CycleCommit` com seus `DecisionRecord` e `CycleAbortRecord`. `CycleCommit`
+  não é duplicado no event store. `DecisionRecord` é autoritativo somente quando coberto pelo
+  `decision_digest` de um `CycleCommit`; `CycleAbortRecord` é autoritativo para o fato do abort e sua
+  evidência, nunca para settlement;
+- **Event store:** somente `Event` imutável do mundo commitado, identificado e referenciado pelo
+  `event_ids[]` do `CycleCommit`; é a autoridade dos fatos para redução de `WorldState`, não journal
+  de commits nem autoridade de revisão/ordinal;
 - **Evidence ledger:** observations e recibos `KnowledgeInput`, sempre particionados por destinatário;
   é a trilha epistemológica, não world truth nem belief inferida.
 
@@ -1162,7 +1261,7 @@ mesmo genesis snapshot/config (inclusive fontes exógenas declaradas)
   (SlotDispatch, revogações e a única resposta por slot)
 + mesmas coordenadas de elegibilidade persistidas
 + mesmos AttemptRetryRecord
-+ mesmas versões de schema/reducer/validator/resolver/RNG/fence policy
++ mesmas versões de schema/reducer/validator/resolver/RNG/fence, admission-order e idempotency policy
 + mesmo world seed
 → mesma DecisionCohort e mesmo AdmissionFence derivados por ciclo (fence_digest verificável)
 → mesmo input digest e mesmo decision_digest terminal
@@ -1203,11 +1302,13 @@ Um snapshot causal contém, no mínimo:
 - `CycleControlState` (§8.0.2) com referência ao último envelope terminal e, conforme o estado, ao
   `AdmissionFence` sem envelope terminal (`ATTEMPT_IN_FLIGHT`) ou ao `AttemptRetryRecord` ainda sem
   fence (`RETRY_AUTHORIZED`), com o `attempt_ordinal` correspondente;
-- último `SourceClosure` de cada fonte exógena declarada;
+- cursor do ledger e último `SourceClosure` de cada fonte exógena declarada, inclusive `final`,
+  preservando `closure_id`/`ingress_seq` para recomputar `covering_closure(source_id, C)`;
 - fila de `RoundDeclaration` pendentes e, para seus slots, dispatches abertos ou revogados e a
   resposta já gravada, quando houver;
 - coordenadas de elegibilidade de toda entrada gravada e ainda não consumida;
-- schemas e versões de reducers, validators, resolvers e RNG necessários;
+- schemas e versões de reducers, validators, resolvers, RNG, ordem de admissão e idempotência
+  necessários;
 - outboxes/inboxes causais cuja entrega ainda não foi confirmada;
 - `EpistemicCheckpointRef` versionado de cada ator com estado epistemológico;
 - hash canônico do snapshot.
@@ -1238,7 +1339,10 @@ verificada por hash: um sem o outro é snapshot inválido, não snapshot parcial
 
 Há duas provas distintas:
 
-1. **event replay:** genesis + event store reconstrói exatamente o mesmo `WorldState`/hash;
+1. **causal replay:** genesis + sequência de `CycleCommit` do commit journal do `DecisionLedger` +
+   `Event` referenciados no event store reconstrói exatamente `WorldState`/hash, `WorldRevision`,
+   ordinal do ciclo e `next_logical_sequence`; reduzir somente os eventos reconstrói o conteúdo do
+   mundo, mas não substitui o journal nem prova commits vazios;
 2. **resume equivalence:** snapshot + tails dos ledgers produz o mesmo log e estado que a execução
    contínua. Essa prova inclui o estado epistemológico restaurado do checkpoint, nunca regenerado por
    chamada de modelo, e a reconciliação dos quatro estados da §8.0.2. O resume recomputa
@@ -1251,7 +1355,7 @@ Há duas provas distintas:
    resposta seguem a §3.2.5: aguardar ou revogar e redespachar, nunca um segundo dispatch aberto.
    Resume nunca converte `HALTED_ON_ABORT` em `IDLE` nem em retentativa implícita.
 
-O event replay reconstrói agenda e trigger runtime porque suas transições são eventos. O evidence
+O causal replay reconstrói agenda e trigger runtime porque suas transições são eventos. O evidence
 ledger pode ser verificado diretamente ou regenerado deterministicamente a partir de eventos,
 outboxes, seed e versões; regeneração nunca consulta um LLM.
 
@@ -1311,11 +1415,14 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 20. Toda unidade causal é admitida por um `AdmissionFence` durável, derivado dos ledgers e gravado
     antes de qualquer avaliação; membresia é função da coordenada de elegibilidade, dos
     `SourceClosure` gravados e de `base_revision`, nunca da ordem de chegada, do wall clock do
-    coordinator nem da ausência momentânea de pendências. O fence persistido é verificável contra a
-    derivação.
-21. `ingress_seq` só participa da normalização de ingresso — antes ou depois do `SourceClosure` da
-    própria fonte. Ordem canônica, prioridade e desempate derivam de conteúdo e de política
-    versionada; nenhuma derivação escolhe entre respostas de slot, porque o ledger nunca contém duas.
+    coordinator nem da ausência momentânea de pendências. Para cada fonte, a prova usa o primeiro
+    `SourceClosure` por `ingress_seq` que cobre a coordenada, estável sob append; o fence persistido é
+    verificável contra a derivação por leitura prefix-consistente e escrita condicional.
+21. `ingress_seq` só participa da normalização de ingresso e da seleção append-stable da prova de
+    fechamento da própria fonte. A ordem total de `admitted_input_ids` usa a chave byte a byte e a
+    política versionada/hash da §3.2.4; prioridade e desempate nunca derivam de ordem de registro,
+    enum local ou iteração de map. Nenhuma derivação escolhe entre respostas de slot, porque o ledger
+    nunca contém duas.
 22. A `DecisionCohort` de um ciclo é o conjunto derivado das `RoundDeclaration` elegíveis em
     `base_revision`; todos os seus rounds são admitidos no mesmo ciclo, leem a mesma `base_revision`
     e concorrem no mesmo espaço de `ConflictSet`. Latência nunca separa rounds simultâneos nem
@@ -1334,8 +1441,9 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 27. Checkpoint resumível contém ou referencia atomicamente checkpoint epistemológico versionado de
     cada ator elegível.
 28. Nenhum ciclo de coordenada `C` deriva membresia ou grava fence enquanto alguma fonte exógena
-    declarada tiver `closed_through < C`; entrada gravada após o fechamento da própria fonte recebe
-    coordenada posterior por regra de ingresso, nunca por observação do coordinator.
+    declarada não tiver um fechamento não final com `closed_through >= C` ou um fechamento `final`.
+    Entrada após fechamento não final recebe coordenada posterior por regra de ingresso; depois de
+    `final`, qualquer input ou fechamento da fonte é rejeitado atomicamente.
 29. `CycleControlState` é uma dobra total e ordenada sobre fences, envelopes terminais e
     `AttemptRetryRecord`: fence sem envelope ⇒ `ATTEMPT_IN_FLIGHT`; abort com retentativa
     registrada e sem fence ⇒ `RETRY_AUTHORIZED`; abort sem retentativa ⇒ `HALTED_ON_ABORT`; senão
@@ -1347,7 +1455,15 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 30. A resposta de slot é o preenchimento de uma unidade derivada, não entrada de fonte exógena: não
     tem coordenada própria, não está sujeita a `SourceClosure` nem à normalização de ingresso. Cada
     slot tem no máximo um `SlotDispatch` aberto e no máximo uma `SlotResponse`, admitida por escrita
-    condicional contra o dispatch aberto; redespacho exige `SlotDispatchRevocation` durável.
+    condicional contra o dispatch aberto; dispatch e resposta correspondem exatamente em run, ciclo,
+    round, slot, ator, revisão e instante, e mismatch é rejeitado antes de preencher o slot.
+    Redespacho exige `SlotDispatchRevocation` durável.
+31. `idempotency_key` tem namespace por run, tipo, fonte e ator e é comprometida a
+    `semantic_digest`. Apenas reentrega semanticamente idêntica pode ser `DEDUPLICATED`; reuso do
+    mesmo namespace com digest diferente aborta fail-closed sem `DecisionRecord` nem consumo.
+32. `CycleCommit` existe uma única vez no commit journal canônico do `DecisionLedger`; o `EventStore`
+    contém somente `Event` referenciado. Replay causal lê ambos e nenhuma projeção combinada é fonte
+    de verdade.
 
 ## Cenários de stress e provas de aceite
 
@@ -1359,10 +1475,13 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 | Dois inputs exógenos E1 e E2 gravados antes do mesmo `SourceClosure`, em ordens opostas | mesmo `admitted_input_ids`, mesmo `fence_digest`, mesmo log; `ingress_seq` não entra em nenhuma ordenação |
 | Execução A grava E1, o coordinator deriva o fence, E2 chega; execução B grava E1 e E2 antes do fence | impossível divergir: sem `SourceClosure` cobrindo a coordenada o coordinator ainda não derivou nada; com o fechamento, E2 gravado depois dele recebe coordenada posterior por regra em ambas as execuções. Mesmo ledger ⇒ mesmo fence |
 | Coordinator grava o fence cedo ou tarde (host rápido/lento, reinício) | `fence_digest` idêntico; replay recomputa a derivação e verifica; só telemetria muda |
+| Fonte grava `close(C)` e depois `close(C+10)`; um coordinator deriva entre os dois e outro depois | ambos usam o primeiro fechamento por `ingress_seq` que cobre `C`; mesmos `closure_ref` e `fence_digest` |
 | Input exógeno gravado depois do `SourceClosure` da própria fonte | não é inserido retroativamente; recebe `open_coordinate` por regra de ingresso e é admitido pelo primeiro fence posterior que o torne elegível, com o valor declarado preservado como provenance |
+| Fonte grava `SourceClosure(final=true)` com `closed_through=C` e o relógio avança além de C | o marcador satisfaz todo fechamento futuro; qualquer input ou novo fechamento dessa fonte é rejeitado atomicamente; nenhum deadlock por `closed_through` finito |
 | Candidato de ocorrência vencida é rejeitado | ocorrência termina no mesmo commit; nenhum `PENDING` remanescente e nenhum redisparo a partir de estado velho |
 | Ciclo em que todos os slots respondem `NoProposal` | `CycleCommit` vazio persistido com um `DecisionRecord(NO_PROPOSAL)` por slot; bijeção `admitted_input_ids ↔ decision_record_ids`; replay reproduz revisão, ordinal e `next_logical_sequence` |
-| Duas entradas admitidas com a mesma `idempotency_key` | a sobrevivente canônica recebe a disposição; a duplicata recebe `DecisionRecord(DEDUPLICATED, canonical_unit_id)`; `decision_digest` cobre ambas |
+| Duas entregas do mesmo tipo/fonte/ator reutilizam `idempotency_key` com bytes semânticos idênticos | uma identidade canônica; no mesmo fence, a primeira pela ordem total recebe a disposição e o alias recebe `DecisionRecord(DEDUPLICATED, canonical_unit_id)`; depois de liquidada, a reentrega aponta ao recibo existente e não entra em novo fence |
+| Mesmo namespace de `idempotency_key` é reutilizado com payload, coordenada ou provenance diferente | `IDEMPOTENCY_CONFLICT`; `CycleAbortRecord` referencia ambas as unidades, sem `DecisionRecord`, consumo ou escolha por hash/id |
 | Faceta sem regra, dado ou resolvedor disponível | `INDETERMINATE` canônico dentro de um `CycleAbortRecord`; nenhum `CycleCommit`, nenhum `DecisionRecord`, nenhuma revisão publicada, nenhum avanço de ordinal |
 | Candidato A já tem `COMMIT` provisório quando B encontra `INDETERMINATE` | `CycleAbortRecord` sem nenhum `DecisionRecord`; o `COMMIT` de A é material provisório não autoritativo; A continua elegível e é reavaliado na tentativa seguinte junto com B |
 | Crash entre append de eventos e settlement da decisão | impossível: as cinco partes são uma transação; fence sem envelope terminal é reexecutado a partir do corte gravado |
@@ -1371,6 +1490,7 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 | Snapshot ou crash entre o `AttemptRetryRecord` e o novo fence | dobra devolve `RETRY_AUTHORIZED` (`cycle_id`, `to_attempt_ordinal`, `retry_ref`), nunca `HALTED_ON_ABORT` nem `IDLE`; resume grava o fence de `to_attempt_ordinal` para o mesmo `cycle_id`, sem §3.3 e sem segundo `AttemptRetryRecord`; `next_attempt_ordinal` continua `N + 1` até o fence existir |
 | Fence de `N + 1` gravado sem envelope enquanto o último envelope do run é o abort de `N` | regra 1 prevalece: `ATTEMPT_IN_FLIGHT`; o abort de `N` foi consumido pelo `AttemptRetryRecord` em `retry_ref`; se `N + 1` abortar, a regra 3 devolve `HALTED_ON_ABORT` com `next_attempt_ordinal = N + 2` |
 | Timeout grava `NoProposal(s1)` e a `ActionProposal(s1)` real chega antes de o round fechar | ambas apontam para o mesmo dispatch aberto; a escrita condicional admite exatamente uma e rejeita a outra para auditoria; `response_refs` e `fence_digest` são função do ledger; qual venceu é input durável e visível no digest, não desempate do coordinator |
+| Resposta ao dispatch de A repete B como ator, outro round/slot, revisão ou instante | admissão rejeita fail-closed antes de preencher o slot; resposta não entra em `response_refs`, `input_digest` ou `fence_digest` |
 | Crash após o dispatch de `s1` e antes da resposta; resume enquanto a chamada original ainda está em voo | resume encontra dispatch aberto e slot vazio; ou aguarda, ou grava `SlotDispatchRevocation` antes de redespachar; a resposta ao dispatch revogado é rejeitada mesmo chegando primeiro; nunca dois dispatches abertos nem duas respostas por slot |
 | Adapter que é fonte exógena declarada e também respondedor de slot fecha `closed_through >= C` antes de responder | suas respostas de slot não recebem `open_coordinate > C`: são preenchimento de unidade derivada, fora da condição de fechamento; o fence admite os slots com a coordenada herdada da `RoundDeclaration` |
 | `DEFER` para o próximo ciclo do mesmo instante | sucessor recebe `(instant, cycle_ordinal + 1)` persistido no mesmo commit; resume e replay readmitem exatamente naquele ciclo |
@@ -1394,6 +1514,8 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 | Snapshot no meio de comunicação em trânsito | contínuo e snapshot+resume geram mesmos tails e state hash |
 | Duas runs partem do mesmo checkpoint com inputs diferentes | prefixo/hash parental igual; tails e estados isolados; nenhum evento cruza a branch |
 | Mesmo seed/inputs com paralelismo diferente | event log causal byte a byte e final state hash idênticos |
+| Duas implementações registram fontes/categorias em ordens locais diferentes | mesma chave total da política versionada, mesmos `admitted_input_ids`/`fence_digest`; `source_rank` e ordem de map não existem no contrato |
+| `CycleCommit` vazio seguido de replay causal | journal do `DecisionLedger` restaura revisão, ordinal e `next_logical_sequence`; o `EventStore` permanece vazio para esse commit e não contém cópia do envelope |
 
 ## Contratos/ports mínimos para implementação
 
@@ -1403,8 +1525,8 @@ Os nomes concretos podem variar, mas a responsabilidade não:
 |---|---|
 | `Clock` | expor/avançar `SimulationInstant` conforme próxima entrada causal |
 | `CycleCoordinator` | congelar a revisão base, aguardar a condição de fechamento, derivar coorte e fence e coordenar a tentativa até um envelope terminal; manter `CycleControlState` pela dobra total da §8.0.2 |
-| `AdmissionFenceLog` | persistir o `AdmissionFence` por `(cycle_id, attempt_ordinal)` antes de qualquer avaliação e servi-lo a replay/resume para verificação contra a derivação |
-| `InputLedger` | registrar fontes exógenas declaradas, admitir entradas tipadas idempotentes, atribuir `ingress_seq` e coordenada normalizada, persistir `SourceClosure` monotônicos e expor a condição de fechamento; manter o registro de slot — `SlotDispatch`, `SlotDispatchRevocation` e no máximo uma `SlotResponse` por `(decision_round_id, slot_id)`, admitida por escrita condicional contra o dispatch aberto (§3.2.5) |
+| `AdmissionFenceLog` | persistir por escrita condicional o `AdmissionFence` por `(cycle_id, attempt_ordinal)` antes de qualquer avaliação e servi-lo a replay/resume para verificação da prova append-stable e da ordem total versionada |
+| `InputLedger` | registrar fontes exógenas declaradas em sequências prefix-consistentes, admitir entradas tipadas sob `IdempotencyIdentity`, atribuir `ingress_seq`/coordenada, persistir `SourceClosure` monotônicos/finais e selecionar o primeiro que cobre cada coordenada; rejeitar append após `final`; manter o registro de slot — `SlotDispatch`, `SlotDispatchRevocation` e no máximo uma `SlotResponse` por `(decision_round_id, slot_id)`, vinculada fail-closed ao dispatch aberto (§3.2.5) |
 | `ScheduleStore` | manter lifecycle de occurrences e `RoundDeclaration` e consultar as elegíveis à coordenada do ciclo |
 | `TriggerRegistry` | armazenar definition/version e runtime state |
 | `OccurrenceHandler` | transformar occurrence vencida em candidato, sem side effect |
@@ -1412,9 +1534,9 @@ Os nomes concretos podem variar, mas a responsabilidade não:
 | `AffordanceValidator` | produzir facets contra a revisão congelada |
 | `ConflictDetector` | construir conflict sets conservadores |
 | `ConflictResolver` | produzir disposições sob política/version/seed explícitos |
-| `DecisionLedger` | registrar material provisório de avaliação, os envelopes terminais (`CycleCommit` com `DecisionRecord`, `CycleAbortRecord`) e `AttemptRetryRecord` |
+| `DecisionLedger` | registrar material provisório de avaliação, `AttemptRetryRecord` e o commit journal canônico/único dos envelopes terminais (`CycleCommit` com `DecisionRecord`, `CycleAbortRecord`) |
 | `CommitCoordinator` | validar lote/post-state e persistir atomicamente fence closure + um `DecisionRecord` por unidade admitida + eventos + `CycleCommit` + revisão, ou o `CycleAbortRecord` sem nenhum `DecisionRecord` |
-| `EventStore` | append/read de eventos imutáveis; sem API update/delete |
+| `EventStore` | append/read somente de `Event` imutável referenciado pelo commit journal; sem `CycleCommit`, API update ou delete |
 | `ReducerRegistry` | mapear cada event type ao único owner/reducer versionado |
 | `PerceptionResolver` | transformar evento+acesso em observations endereçadas |
 | `EvidenceLedger` | persistir observations/recibos por destinatário, append-only |

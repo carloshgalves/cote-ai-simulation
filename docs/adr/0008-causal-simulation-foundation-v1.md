@@ -475,8 +475,9 @@ Uma **unidade admitida** é um slot preenchido — identificado pela sua única 
 ativação de trigger elegível. As `RoundDeclaration` da coorte são consumidas como contêineres e
 listadas em `cohort`; a unidade é o slot. Uma unidade é admitida quando, e somente quando:
 
-1. a condição de fechamento da sua fonte vale para a coordenada do ciclo — por construção, para
-   fontes derivadas, inclusive os slots (§3.2.5); por `SourceClosure` gravado, para fontes exógenas;
+1. a condição de fechamento da sua fonte vale para `closure_coordinate(C, cycle_plan)` — por
+   construção, para fontes derivadas, inclusive os slots (§3.2.5); por `SourceClosure` gravado, para
+   fontes exógenas;
 2. sua coordenada de elegibilidade é menor ou igual à coordenada do ciclo — para um slot, a
    coordenada herdada da `RoundDeclaration`;
 3. ela ainda não foi consumida por um `CycleCommit` anterior;
@@ -510,7 +511,8 @@ uma divergência falha fechado como corrupção ou deriva de versão (§11).
 Consequências:
 
 - `ingress_seq` participa apenas da normalização de ingresso e da escolha append-stable do primeiro
-  fechamento que cobre `C` na §3.2.2. Ele nunca ordena, prioriza nem desempata unidades admitidas. A
+  fechamento que cobre `closure_coordinate(C, cycle_plan)` na §3.2.2. Ele nunca ordena, prioriza nem
+  desempata unidades admitidas. A
   ordem canônica de `admitted_units` é a ordenação lexicográfica total por
   `(not_before_instant, not_before_cycle_ordinal, unit_kind_tag, canonical_source_id,
   unit_digest, unit_id)`. A política V1 fixa `unit_kind_tag` em `00=SLOT`,
@@ -550,13 +552,16 @@ Consequências:
 
 Um run tem no máximo um ciclo aberto por vez e um ciclo tem no máximo um fence vigente. O fence é
 gravado assim que duas condições, ambas fatos de ledger, valem: (a) a condição de fechamento da
-§3.2.2 para a coordenada do ciclo; (b) todo slot da coorte contém sua única resposta gravada. Nenhuma
-das duas depende de tempo de parede do coordinator para decidir **o que** entra — (a) é marcador de
-fonte, (b) é preenchimento de slot admitido pelo ledger (§3.2.5); ambos são atos externos duráveis,
-nunca observação do coordinator. Tempo de parede afeta somente **quando** as condições passam a
-valer e, portanto, quando o fence é gravado. Depois do fence, nada no ciclo depende de tempo de
-parede: `base_revision`, `admitted_input_ids`, `ConflictSet`, vencedor, event log e digests são
-função exclusiva do fence gravado e das versões declaradas.
+§3.2.2 para `closure_coordinate(C, cycle_plan)`; (b) todo slot da coorte contém sua única resposta
+gravada. Em `CLOCK_ADVANCE`, essa coordenada é obrigatoriamente
+`cycle_plan.clock_advance.target_coordinate`: fechamento apenas até `C` nunca autoriza gravar um
+fence cujo alvo é `P > C`. Nenhuma das duas condições depende de tempo de parede do coordinator para
+decidir **o que** entra — (a) é marcador de fonte, (b) é preenchimento de slot admitido pelo ledger
+(§3.2.5); ambos são atos externos duráveis, nunca observação do coordinator. Tempo de parede afeta
+somente **quando** as condições passam a valer e, portanto, quando o fence é gravado. Depois do
+fence, nada no ciclo depende de tempo de parede: `base_revision`, `admitted_input_ids`,
+`ConflictSet`, vencedor, event log e digests são função exclusiva do fence gravado e das versões
+declaradas.
 
 O fence de admissão decide quando um ciclo **fecha a entrada**; o barrier epistemológico da §10.1
 decide quando a solicitação de um round pode ser **despachada**. São gates complementares e não se
@@ -566,8 +571,8 @@ Se a tentativa aborta (§8.0.1), o `CycleAbortRecord` encerra aquele fence e o r
 (`HALTED_ON_ABORT`, §8.0.2). Uma tentativa reparada, autorizada por `AttemptRetryRecord` explícito
 (`RETRY_AUTHORIZED`), grava um novo fence com `attempt_ordinal + 1` e `retry_ref` apontando para o
 registro que a autorizou. Como o abort não consome nada, as fontes já estavam fechadas para a
-coordenada e cada slot já contém sua única resposta, a membresia e os pares
-`{slot_id, response_ref}` do novo fence são **idênticos por construção** e nenhum slot é
+mesma `closure_coordinate(C, cycle_plan)` e cada slot já contém sua única resposta, a membresia e os
+pares `{slot_id, response_ref}` do novo fence são **idênticos por construção** e nenhum slot é
 redespachado; mudam apenas `attempt_ordinal`,
 `retry_ref` e `rule_versions`.
 O array `admitted_units` e o `input_digest` também permanecem idênticos; uma retentativa nunca troca
@@ -1928,6 +1933,7 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 | Event store devolve evento com `EventOrderKey` ausente/alterada, ou commit permuta dois `event_ids[]` | replay recalcula cada `event_id`, reordena pelas chaves persistidas, valida `LogicalSequence` e `batch_digest`; qualquer ausência, id, posição, sequência ou digest divergente falha fechado antes do reducer |
 | Último ciclo foi `(t,1)` e a única pendência está em `(t,3)` | `next_cycle_coordinate` retorna `(t,3)`; não existe `CycleCommit` vazio em `(t,2)` e replay faz o mesmo salto |
 | Último ciclo foi `(t,1)` e a menor pendência é `(u,0)`, com `u > t`, sem novo trabalho materializado | após fechamento até o alvo, ciclo de avanço em `(t,2)` tem input vazio e commita `clock.advanced`; estado resultante é `(current_instant=u, cycle_ordinal_at_instant=-1)` e a nova derivação abre o ciclo de trabalho em `(u,0)` |
+| Fonte fechou apenas `C=(t,2)`, um plano provisório de avanço aponta para `P=(u,0)` e, antes de `close(P)`, chega `Q=(v,0)` com `t < v < u` | `close(C)` não permite gravar o fence; a confirmação condicional após o fechamento até o alvo detecta que `P` deixou de ser a menor pendência, rejeita a derivação antiga e a nova derivação escolhe `Q`; nenhum avanço salta sobre trabalho causal |
 | Menor pendência é `P=(u,3)` e `body.advanced` no ciclo de avanço torna um trigger verdadeiro | a `TriggerActivation` nasce com coordenada mínima `(u,0)`, nunca `(t,n+1)`; depois do commit, `next_cycle_coordinate` recalcula e abre `(u,0)` com a ativação, preserva `P` para `(u,3)` e não encontra trabalho vencido |
 | Resume de snapshot com crença formada por LLM | checkpoint epistemológico presente, versionado e coberto por hash; resume equivalente sem chamar modelo |
 | Duas ações consomem a última unidade | um `ConflictSet`; política/seed fixa seleciona o mesmo resultado; saldo nunca negativo |

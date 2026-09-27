@@ -1257,13 +1257,40 @@ CycleAbortRecord {
   input_digest
   abort_reason: INDETERMINATE_FACET | INVARIANT_VIOLATION | REDUCER_FAILURE
               | SCHEMA_FAILURE | PROVENANCE_FAILURE | IDEMPOTENCY_CONFLICT | CASCADE_LIMIT
-  indeterminate_records[]    // facet, reason_code, evidence_refs, rule_version
+  indeterminate_records: [IndeterminateRecord]
   failure_evidence_refs[]    // material provisório da tentativa: facets, ConflictSets, sorteios,
                              // disposições provisórias, erro de reducer/invariante
   rule_versions
   abort_digest
 }
 ```
+
+Cada resultado indeterminado identifica o objeto que foi efetivamente validado e o validator que
+produziu a conclusão:
+
+```text
+ValidationSubjectRef {
+  subject_kind_tag          // ADMITTED_UNIT | COMMIT_CANDIDATE
+  subject_id
+  subject_digest
+}
+
+IndeterminateRecord {
+  subject_ref: ValidationSubjectRef
+  facet
+  validator_id + validator_version + validator_hash
+  reason_code
+  evidence_refs[]
+  rule_version
+}
+```
+
+Um `ADMITTED_UNIT` precisa referenciar uma unidade do fence e repetir seu `unit_digest`; um
+`COMMIT_CANDIDATE` precisa referenciar um candidato cuja partição de `source_unit_ids[]` pertence ao
+mesmo fence, e `subject_digest` é o digest de seus bytes canônicos depois da validação de partição.
+Referência fora desse corte, digest divergente ou validator sem versão/hash disponível é
+`PROVENANCE_FAILURE`, nunca evidência parcial aceita. O algoritmo/schema desse digest integra
+`rule_versions` e a política de serialização canônica.
 
 O `cycle_plan` do abort também precisa ser byte a byte igual ao do fence, e `abort_digest` cobre a
 serialização canônica do record inteiro exceto o próprio digest. Assim commit, abort e resume
@@ -1273,11 +1300,15 @@ Os dois arrays de evidência têm semântica de conjunto e são normalizados **a
 
 - em cada `indeterminate_record`, `evidence_refs[]` é ordenado por
   `(ref_kind_tag, referenced_id, referenced_digest)` em bytes canônicos; o array externo é ordenado
-  lexicograficamente pelos bytes canônicos do record já normalizado;
+  por `(subject_kind_tag, subject_id, subject_digest, facet, validator_id, validator_version,
+  validator_hash, reason_code, digest(evidence_refs), rule_version)`, também em bytes canônicos;
 - `failure_evidence_refs[]` usa a mesma chave total
   `(ref_kind_tag, referenced_id, referenced_digest)`;
-- uma referência ou record byte a byte idêntico aparece uma vez; duas refs com o mesmo par
-  `(ref_kind_tag, referenced_id)` e digest diferente são corrupção e falham fechado.
+- uma referência ou record byte a byte idêntico aparece uma vez; records de sujeitos diferentes nunca
+  são deduplicados, mesmo que facet, reason e evidência coincidam; duas refs com o mesmo par
+  `(ref_kind_tag, referenced_id)` e digest diferente, ou dois records para a mesma identidade
+  `(subject_ref, facet, validator_id, validator_version, validator_hash)` com bytes diferentes, são
+  corrupção e falham fechado.
 
 Tags, schemas e comparação integram `rule_versions` e o hash da política de serialização canônica.
 Logo ordem de conclusão de validators/workers não altera o envelope, e `abort_digest` cobre somente
@@ -1393,13 +1424,30 @@ Event {
   payload
   causal_parents: [EventRef]
   source_inputs: [InputRef]
-  actor_refs[]
-  entity_refs[]
+  actor_refs: [ActorRef]
+  entity_refs: [EntityRef]
   location_ref?
   confidentiality: PUBLIC | RESTRICTED | SECRET
   producer + producer_version
 }
 ```
+
+As quatro coleções de referências têm semântica de conjunto e são normalizadas antes de persistir o
+evento ou calcular `batch_digest`:
+
+- `causal_parents` usa a chave total `event_id` do `EventRef`;
+- `source_inputs` usa `(input_kind_tag, input_id, input_digest)`;
+- `actor_refs` usa `(actor_namespace, actor_id)`;
+- `entity_refs` usa `(entity_kind_tag, entity_namespace, entity_id)`.
+
+Todos os componentes são comparados em bytes canônicos. Uma ref byte a byte idêntica aparece uma vez;
+duas `EventRef` com o mesmo `event_id`, duas `InputRef` com o mesmo `(input_kind_tag, input_id)` ou duas
+refs de ator/entidade com a mesma identidade namespaced mas outros bytes são corrupção e falham
+fechado. Quando a ordem entre participantes tiver significado de domínio, ela pertence ao `payload`
+tipado como papel/ordinal explícito, não a estes índices genéricos. As chaves, schemas e política de
+duplicatas integram `event_order_policy_version + event_order_policy_hash` e o hash da serialização
+canônica. Logo permutar a ordem local de construção não muda os bytes do `Event`; o mesmo `event_id`
+com envelope normalizado diferente continua sendo colisão/corrupção.
 
 `event_order_key` é a preimagem canônica persistida da identidade e precisa repetir o mesmo
 `producer + producer_version` do envelope; ausência ou divergência é corrupção. No replay,
@@ -1525,7 +1573,7 @@ Observation {
   task_id
   observer_id
   observation_role + observation_local_ordinal
-  observed_at
+  observed_at: SimulationInstant
   source_event_refs[]
   modality + channel_ref?
   percepts[]
@@ -1554,6 +1602,16 @@ ator somente com pares papel/ordinal distintos. `Observation` no completion é o
 canônicos. Mesmos componentes com bytes diferentes são colisão/corrupção e falham fechado; workers
 concorrentes calculam os mesmos ids e apenas uma escrita idempotente vence. Versão sem hash
 disponível, ou mudança de resolver sem nova versão/hash, também falha fechado.
+
+A `perception_policy_version + perception_policy_hash` também fixa uma função pura
+`epistemic_instant(task.event_id, event, channel_contract)`. Para a percepção produzida diretamente por
+uma `PerceptionTask`, `observed_at` é o `occurred_at` do evento referenciado pela task — o fato causal
+que tornou aquela pista disponível. Se um canal introduz atraso semântico, leitura posterior ou outra
+condição de disponibilidade, isso precisa existir no mundo como `ScheduledOccurrence` e evento de
+entrega/leitura/publicação; a task resultante referencia esse evento posterior e usa o `occurred_at`
+dele. O instante atual quando o worker executa, relógio de parede, duração da fila e momento físico do
+append são proibidos. Processar a mesma task antes ou depois de o clock lógico avançar produz os mesmos
+bytes ou encontra colisão/corrupção fail-closed sob os mesmos ids.
 
 `percepts` são descrições estruturadas do que ficou disponível aos sentidos, possivelmente parciais
 ou ruidosas; não são cópia irrestrita do payload secreto. Atenção, interpretação psicológica,
@@ -1641,7 +1699,7 @@ KnowledgeInput {
   knowledge_input_id
   input_role + input_local_ordinal
   recipient_id
-  received_at
+  received_at: SimulationInstant
   kind: DIRECT_PERCEPT | COMMUNICATED_CLAIM | PUBLICATION
   channel
   observation_ref
@@ -1649,6 +1707,12 @@ KnowledgeInput {
   evidence_chain[]
 }
 ```
+
+`received_at` é derivado, não escolhido pelo sink: ele precisa ser byte a byte igual ao
+`observed_at` da `Observation` referenciada. Uma disponibilidade posterior exige outra ocorrência/evento
+e outra observation; atraso operacional na entrega do recibo não altera cronologia epistemológica. A
+regra integra a mesma `perception_policy_version + perception_policy_hash`, e mismatch falha fechado
+antes de confirmar o `KnowledgeInput`.
 
 Persistir esse recibo prova apenas “evidência X ficou disponível ao ator Y neste instante”. Formar
 crença, estimar confiança, suspeitar, esquecer, conciliar contradições ou inferir intenção pertence a
@@ -1948,6 +2012,16 @@ uma leitura privilegiada não pode vazar por efeito colateral.
     `-1`. Seu `CyclePlan` persiste `from`, `to` e a pendência-alvo desde o fence até o envelope
     terminal. Outputs derivados pelo avanço têm piso `(to, 0)`; depois de materializá-los, a menor
     pendência é recalculada e abre exatamente na sua coordenada, nunca numa coordenada vencida.
+39. `causal_parents`, `source_inputs`, `actor_refs` e `entity_refs` de todo `Event` são conjuntos
+    normalizados pelas chaves totais da §8.1 antes de persistência e digest. Ordem de iteração nunca
+    muda o envelope; ordem de domínio vive no payload tipado, e identidade repetida com bytes
+    incompatíveis falha fechado.
+40. Todo `IndeterminateRecord` identifica por ref+digest o sujeito validado e por id+versão+hash o
+    validator. Normalização nunca colapsa falhas de sujeitos distintos, e nenhum record pode apontar
+    para unidade/candidato fora do fence abortado.
+41. `observed_at` e `received_at` derivam do evento causal que tornou a evidência disponível sob a
+    política perceptiva versionada; processamento, fila, append e wall clock nunca alteram a cronologia
+    epistemológica. Atraso semântico exige ocorrência e evento posteriores.
 
 ## Cenários de stress e provas de aceite
 
@@ -1986,6 +2060,7 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 | Dois candidatos vencem no mesmo ciclo | nenhum evento de um aparece como `causal_parent` do outro; reação exige ciclo posterior |
 | Dois candidatos vencedores A/B e seus outputs são entregues ao coordinator em ordens opostas | mesmos `candidate_id`; ordenação por `EventOrderKey` produz os mesmos `event_id`, `LogicalSequence`, `event_ids[]`, tarefas de percepção e `batch_digest` |
 | Event store devolve evento com `EventOrderKey` ausente/alterada, ou commit permuta dois `event_ids[]` | replay recalcula cada `event_id`, reordena pelas chaves persistidas, valida `LogicalSequence` e `batch_digest`; qualquer ausência, id, posição, sequência ou digest divergente falha fechado antes do reducer |
+| Dois produtores constroem o mesmo `EventDraft`, mas enumeram `causal_parents`, `source_inputs`, `actor_refs` e `entity_refs` em ordens opostas e repetem uma ref idêntica | as quatro coleções são deduplicadas e ordenadas pelas chaves da §8.1 antes da persistência; mesmo envelope, `event_id` e `batch_digest`; mesma identidade de ref com outros bytes falha fechado |
 | Dois eventos simultâneos E1/E2 de candidatos distintos tocam dependências do mesmo trigger e workers terminam em ordens opostas | `causing_event_ids[]` contém ambos pelo filtro de `dependency_footprint`, na ordem canônica do `EventBatch`; mesma ativação/`unit_digest`; os refs são provenance do post-state e nenhum evento de E1/E2 recebe causal parent cross-candidate |
 | Último ciclo foi `(t,1)` e a única pendência está em `(t,3)` | `next_cycle_coordinate` retorna `(t,3)`; não existe `CycleCommit` vazio em `(t,2)` e replay faz o mesmo salto |
 | Último ciclo foi `(t,1)` e a menor pendência é `(u,0)`, com `u > t`, sem novo trabalho materializado | após fechamento até o alvo, ciclo de avanço em `(t,2)` tem input vazio e commita `clock.advanced`; estado resultante é `(current_instant=u, cycle_ordinal_at_instant=-1)` e a nova derivação abre o ciclo de trabalho em `(u,0)` |
@@ -2007,6 +2082,7 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 | Trigger cria outro trigger no mesmo instante | ciclos ordinais diferentes, DAG causal e limite de cascata determinístico |
 | Reducer falha no terceiro evento do lote | nenhum evento, revisão, disposição terminal ou consumo de occurrence persiste; a tentativa termina em `CycleAbortRecord` |
 | Dois validators produzem os mesmos records/refs de falha nas ordens A→B e B→A | `evidence_refs`, `indeterminate_records` e `failure_evidence_refs` são normalizados pelas chaves da §8.0.1; mesmo envelope e `abort_digest` |
+| Propostas A e B falham a mesma facet pelo mesmo validator, reason e evidência | dois `IndeterminateRecord`, cada um com seu `subject_ref`; a normalização não os colapsa, e o abort permite atribuir cada falha ao sujeito correto |
 | Observatory lê segredo e depois fecha | hashes de world/knowledge/ledgers permanecem inalterados |
 | Reflexão resume um rumor como hipótese | provenance continua apontando ao claim; nenhum Event/world truth é criado |
 | Snapshot no meio de comunicação em trânsito | contínuo e snapshot+resume geram mesmos tails e state hash |
@@ -2016,6 +2092,7 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 | Duas implementações registram fontes/categorias ou constroem `closure_proof`, rounds e slots em ordens locais diferentes | mesma política de identidade/ordem, provas por fonte, rounds por id e pares slot/resposta por slot; mesmos pares de `admitted_units`, `input_digest` e `fence_digest`; `source_rank` e ordem de map não existem no contrato |
 | Crash depois do `CycleCommit` de evento perceptível e antes de qualquer percepção | `perception_task_ids[]` já referencia tarefa `PENDING` na outbox; resume a processa com ids idempotentes, persiste observations/inputs e completion antes de liberar o barrier; nenhuma evidência é perdida ou duplicada |
 | Dois workers processam a mesma `PerceptionTask` e um cai após gravar parte dos recibos | ambos derivam os mesmos ids de task/observation/`KnowledgeInput`/completion por papel e ordinal de schema; reinsert é idempotente, CAS publica um completion e nenhum destinatário recebe duplicata |
+| A mesma `PerceptionTask` de evento em `t` é processada imediatamente numa execução e, em outra, depois de o clock lógico chegar a `u > t` | ambas usam `observed_at=received_at=t` e produzem observations/inputs/completion byte a byte idênticos; latência operacional não muda availability, e atraso de canal só usa `u` quando há evento causal posterior em `u` |
 | Evento secreto não possui observador elegível | tarefa commitada termina com completion vazio; nenhum `Observation`/`KnowledgeInput` é criado e o barrier pode avançar sem fallback de divulgação |
 | `CycleCommit` vazio seguido de replay causal | journal do `DecisionLedger` restaura revisão, ordinal e `next_logical_sequence`; o `EventStore` permanece vazio para esse commit e não contém cópia do envelope |
 
@@ -2033,15 +2110,15 @@ Os nomes concretos podem variar, mas a responsabilidade não:
 | `TriggerRegistry` | armazenar definition/version, dependency selectors versionados, runtime state e lifecycle das `TriggerActivation`; derivar `causing_event_ids[]` pelo filtro canônico sobre os footprints expostos pelo `ReducerRegistry`, materializar runtime + ativação atomicamente com a revisão de origem e consultar ativações pendentes |
 | `OccurrenceHandler` | transformar occurrence vencida em candidato, sem side effect |
 | `ActionSchemaRegistry` | validar forma/versionamento de propostas |
-| `AffordanceValidator` | produzir facets contra a revisão congelada |
+| `AffordanceValidator` | produzir facets contra a revisão congelada e identificar cada resultado indeterminado por sujeito ref+digest e validator id+versão+hash |
 | `ConflictDetector` | construir conflict sets conservadores |
 | `ConflictResolver` | produzir disposições sob política/version/seed explícitos |
-| `DecisionLedger` | registrar material provisório de avaliação, `AttemptRetryRecord` e o commit journal canônico/único dos envelopes terminais (`CycleCommit` com `DecisionRecord` e referências/digest de `PerceptionTask`, `CycleAbortRecord` com evidência normalizada antes de `abort_digest`) |
-| `CommitCoordinator` | validar a partição exata unidade→candidato, plano/lote/post-state, derivar todo `SOURCE_LIFECYCLE` obrigatório mesmo sem candidato/evento de domínio, ordenar toda `EventDraft` pela `EventOrderKey`, persistir a chave no `Event`, validar ids/sequências e `batch_digest`, aplicar `commit_successor_floor` a todo output causal derivado, derivar provenance/transições/ativações de trigger e tarefas de percepção, e persistir atomicamente fence closure + um `DecisionRecord` por unidade admitida + eventos + `PerceptionTask` + `CycleCommit` + revisão, ou o `CycleAbortRecord` sem nenhum `DecisionRecord`/tarefa |
+| `DecisionLedger` | registrar material provisório de avaliação, `AttemptRetryRecord` e o commit journal canônico/único dos envelopes terminais (`CycleCommit` com `DecisionRecord` e referências/digest de `PerceptionTask`, `CycleAbortRecord` com evidência atribuída ao sujeito e normalizada antes de `abort_digest`) |
+| `CommitCoordinator` | validar a partição exata unidade→candidato, plano/lote/post-state, derivar todo `SOURCE_LIFECYCLE` obrigatório mesmo sem candidato/evento de domínio, ordenar toda `EventDraft` pela `EventOrderKey`, normalizar as coleções de refs e persistir a chave no `Event`, validar ids/sequências e `batch_digest`, aplicar `commit_successor_floor` a todo output causal derivado, derivar provenance/transições/ativações de trigger e tarefas de percepção, e persistir atomicamente fence closure + um `DecisionRecord` por unidade admitida + eventos + `PerceptionTask` + `CycleCommit` + revisão, ou o `CycleAbortRecord` sem nenhum `DecisionRecord`/tarefa |
 | `EventStore` | append/read somente de `Event` imutável com `EventOrderKey` persistida e referenciado pelo commit journal; sem `CycleCommit`, API update ou delete |
 | `ReducerRegistry` | mapear cada event type ao único owner/reducer versionado e expor sua função pura/versionada `dependency_footprint(event)` |
-| `PerceptionResolver` | transformar evento+acesso em outputs endereçados com papel/ordinal de schema e ids derivados pela política epistemológica |
-| `EvidenceLedger` | persistir observations/recibos por destinatário e identidade determinística, append-only e idempotente |
+| `PerceptionResolver` | transformar evento+acesso em outputs endereçados com papel/ordinal de schema, ids derivados e instante epistemológico calculado do evento causal pela política versionada |
+| `EvidenceLedger` | persistir observations/recibos por destinatário e identidade determinística, append-only e idempotente; exigir `received_at == observation.observed_at` e bytes idênticos em retries |
 | `EpistemicOutbox` | persistir `PerceptionTask` com versões/hashes atomicamente com o commit, registrar um completion determinístico somente após recibos verificáveis, reconciliar commit/tarefa/evidence e impor barrier antes do próximo round |
 | `KnowledgeInputSink` | entregar idempotentemente recibos, sem formar crença |
 | `SnapshotStore` | salvar/carregar checkpoint causal (inclusive `CycleControlState`) + referência epistemológica como unidade verificada por hash |

@@ -810,9 +810,27 @@ avalia nela os predicates cujas dependências foram tocadas e materializa, **na 
 commit**, as mudanças de `TriggerRuntimeState` e cada `TriggerActivation` exigida pela transição. A
 ativação recebe coordenada `>= commit_successor_floor(commit)` da §3.2.1 e identidade derivada de
 `(run_id, trigger_definition_id, trigger_version, result_revision, activation_count)` pela §2.2.
-`causing_event_ids[]` usa a ordem canônica do `EventBatch`. No bootstrap, o genesis executa a mesma
-função sobre o snapshot inicial e persiste runtime + ativações iniciais no manifesto/eventos de
-genesis, com identidade e coordenada declaradas; não há janela não registrada.
+Para essa derivação, `pre_trigger_events` é o conjunto canônico de drafts já validadas nas fases
+`TEMPORAL_ADVANCE`, `CANDIDATE_DOMAIN` e `SOURCE_LIFECYCLE` — exatamente o prefixo aplicado para
+obter o post-state sobre o qual o predicate foi avaliado, antes dos eventos de
+`TRIGGER_RUNTIME`/`TRIGGER_ACTIVATION` que a própria avaliação cria. Cada schema/reducer de evento
+declara uma função pura e versionada `dependency_footprint(event)` sobre seus bytes canônicos. Então:
+
+```text
+causing_event_ids(trigger, pre_trigger_events) =
+  [event_id(E) para E na ordem de EventOrderKey
+   se dependency_footprint(E) intersecta trigger.declared_dependencies]
+```
+
+A membresia contém **todos** os eventos que satisfazem o filtro, nunca um subconjunto mínimo, o último
+writer observado ou a ordem em que workers terminaram. Selectors de dependência, função de footprint
+e versões/hashes dos schemas/reducers pertencem à versão da definição e a `rule_versions`; replay
+recalcula o array pela mesma função. `causing_event_ids[]` é provenance do post-state combinado, não
+`Event.causal_parents`: refs de candidatos simultâneos distintos não criam link causal entre seus
+eventos nem autorizam que um candidato observe o outro (§8.1). No bootstrap, a origem é `GenesisRef`
+e não existe array sintético de eventos. O genesis executa a mesma função sobre o snapshot inicial e
+persiste runtime + ativações iniciais no manifesto/eventos de genesis, com identidade e coordenada
+declaradas; não há janela não registrada.
 
 Uma ativação `PENDING` participa do próximo fence elegível como `TriggerActivationRef`. Só o
 `CycleCommit` que registra seu `DecisionRecord` a move para `CONSUMED`; abort não a consome. O handler
@@ -932,8 +950,10 @@ freeze base revision; derive the provisional CyclePlan from the smallest pending
   → validate that candidate source sets partition exactly the candidate-producing admitted units
   → detect ConflictSets from declared reads/writes/resources/invariants
   → resolve with explicit versioned policies and named randomness
+  → derive every mandatory SOURCE_LIFECYCLE draft, including for NO_PROPOSAL and DEDUPLICATED
   → validate the candidate EventBatch and working post-state
-  → derive trigger runtime transitions/TriggerActivation into the EventBatch
+  → derive trigger runtime transitions/TriggerActivation from canonical pre_trigger_events
+      into the EventBatch
   → persist every final EventOrderKey; validate ids, total order, LogicalSequence, batch digest
       and final post-state; derive PerceptionTask records from the canonical events
   → atomically append exactly one terminal DecisionRecord per admitted unit
@@ -1109,8 +1129,18 @@ arbitrária de proposta não contorna esse vínculo.
   `idempotency_digest`, com a unidade canônica da operação. A canônica é a sobrevivente escolhida no
   primeiro fence da identidade e pode pertencer ao fence corrente ou a um ciclo anterior; o registro
   do alias aponta para ela em `canonical_unit_id`. O alias é sempre admitido e consumido pelo seu
-  próprio `CycleCommit`, sem candidato e sem evento; a disposição de fato está no registro da
-  canônica. Mesmo `idempotency_key` com namespace ou digest diferente nunca chega a este desfecho.
+  próprio `CycleCommit`, sem candidato nem evento **de domínio**; a disposição de fato está no
+  registro da canônica. Se o alias é uma `ScheduledOccurrence`, `TriggerActivation`, slot cujo
+  settlement completa uma `RoundDeclaration` ou qualquer outra fonte/container com lifecycle, o
+  mesmo lote inclui obrigatoriamente seu evento terminal de `SOURCE_LIFECYCLE`. Mesmo
+  `idempotency_key` com namespace ou digest diferente nunca chega a este desfecho.
+
+`NO_PROPOSAL` e `DEDUPLICATED` suprimem somente expansão de candidato e evento de domínio. Nenhum
+desfecho terminal suprime uma transição de lifecycle exigida pelo owner da fonte ou do container: o
+`CommitCoordinator` deriva sua `EventDraft` canônica na fase `SOURCE_LIFECYCLE`, e replay reconstrói o
+mesmo estado terminal pelo event store. Um `CycleCommit` só pode ter `event_ids=[]` quando nenhum
+desfecho do fence exige evento de domínio **nem** transição de lifecycle; settlement stateless no
+decision ledger não substitui lifecycle autoritativo de schedule, round ou trigger.
 
 `DecisionRecord` existe **exclusivamente** dentro da transação de um `CycleCommit`. Nenhuma outra
 escrita — envelope de abort, material provisório, telemetria — pode criar um. O decision ledger
@@ -1123,8 +1153,9 @@ O commit é uma transação única sobre `base_revision` e cobre, indivisivelmen
 
 1. o fechamento do fence — as unidades de `admitted_input_ids` passam a consumidas;
 2. exatamente um `DecisionRecord` terminal por unidade admitida, vencedora ou não;
-3. todos os eventos dos candidatos vencedores, incluindo os eventos de lifecycle de agenda, round e
-   trigger, inclusive criação das `TriggerActivation` derivadas do post-state;
+3. todos os eventos dos candidatos vencedores e todos os eventos obrigatórios de lifecycle de agenda,
+   round e trigger para **qualquer** desfecho terminal, inclusive criação das `TriggerActivation`
+   derivadas do post-state;
 4. o `CycleCommit`, gravado uma única vez no commit journal canônico do `DecisionLedger`, que
    referencia `fence_digest`, `decision_record_ids[]`, `decision_digest`, `perception_task_ids[]` e
    `perception_task_digest`;
@@ -1185,14 +1216,18 @@ digest e, para cada `event_id` na ordem gravada, os bytes canônicos do `Event` 
 sua `event_order_key`. Portanto ele compromete plano, envelopes de estado/settlement/percepção, ordem
 e conteúdo do lote sem depender de estado transitório do produtor.
 
-Um ciclo em que todos os slots produziram `NoProposal`, ou em que todo candidato foi rejeitado sem
-gerar evento de lifecycle, ainda avança `WorldRevision` e `cycle_ordinal`. O envelope é o registro que
-torna esse avanço reconstruível: o replay causal percorre a sequência canônica de `CycleCommit` no
-commit journal e reaplica, na ordem de `event_ids[]`, os eventos referenciados no event store,
-reproduzindo revisão vazia, ordinal e `next_logical_sequence` sem precisar de evento decorativo nem de
-um snapshot do coordinator. Ausência, duplicação ou divergência entre uma referência do commit e o
-evento correspondente falha fechado; uma view que combine os dois stores é projeção descartável, não
-segunda cópia autoritativa. O envelope é também o recibo de settlement:
+Um ciclo sem evento de domínio ainda avança `WorldRevision` e `cycle_ordinal`. Se seu settlement
+termina um round, occurrence ou trigger, porém, os eventos obrigatórios de `SOURCE_LIFECYCLE`
+continuam em `event_ids[]`; por isso um ciclo em que todos os slots produziram `NoProposal` não é
+event-empty quando consome suas `RoundDeclaration`. `event_ids=[]` é válido somente quando nenhum
+desfecho exige transição de lifecycle — por exemplo, um fence apenas com input exógeno stateless
+rejeitado sem fato de domínio. O envelope é o registro que torna até esse avanço vazio reconstruível:
+o replay causal percorre a sequência canônica de `CycleCommit` no commit journal e reaplica, na ordem
+de `event_ids[]`, os eventos referenciados no event store, reproduzindo revisão, ordinal e
+`next_logical_sequence` sem precisar de evento decorativo nem de um snapshot do coordinator.
+Ausência, duplicação ou divergência entre uma referência do commit e o evento correspondente falha
+fechado; uma view que combine os dois stores é projeção descartável, não segunda cópia autoritativa.
+O envelope é também o recibo de settlement:
 `fence_digest` e `input_digest` provam qual corte e quais bytes foram avaliados;
 `decision_record_ids[]`/`decision_digest` provam a bijeção da §7.1 — toda unidade admitida por aquele
 corte, inclusive slots `NoProposal` e duplicatas, recebeu um desfecho terminal na mesma transação.
@@ -1233,6 +1268,20 @@ CycleAbortRecord {
 O `cycle_plan` do abort também precisa ser byte a byte igual ao do fence, e `abort_digest` cobre a
 serialização canônica do record inteiro exceto o próprio digest. Assim commit, abort e resume
 concordam sobre o tipo e, quando aplicável, o destino da tentativa sem consultar seleção transitória.
+
+Os dois arrays de evidência têm semântica de conjunto e são normalizados **antes** da serialização:
+
+- em cada `indeterminate_record`, `evidence_refs[]` é ordenado por
+  `(ref_kind_tag, referenced_id, referenced_digest)` em bytes canônicos; o array externo é ordenado
+  lexicograficamente pelos bytes canônicos do record já normalizado;
+- `failure_evidence_refs[]` usa a mesma chave total
+  `(ref_kind_tag, referenced_id, referenced_digest)`;
+- uma referência ou record byte a byte idêntico aparece uma vez; duas refs com o mesmo par
+  `(ref_kind_tag, referenced_id)` e digest diferente são corrupção e falham fechado.
+
+Tags, schemas e comparação integram `rule_versions` e o hash da política de serialização canônica.
+Logo ordem de conclusão de validators/workers não altera o envelope, e `abort_digest` cobre somente
+a forma normalizada.
 
 O envelope de abort cobre **somente evidência de tentativa**. Ele **não** publica `WorldRevision`,
 não acrescenta evento ao event store nem `PerceptionTask` à causal outbox, não avança
@@ -1826,11 +1875,13 @@ uma leitura privilegiada não pode vazar por efeito colateral.
     fence closure, eventos e `WorldRevision`; há exatamente um por unidade admitida e nenhuma fonte
     vencida permanece `PENDING` no instante avaliado. Em `COMMIT|REJECT|DEFER`, o registro aponta ao
     único candidato cuja partição contém a unidade; em `DEDUPLICATED`, aponta à unidade canônica ainda
-    que ela pertença a ciclo anterior.
+    que ela pertença a ciclo anterior. Ausência de candidato ou evento de domínio nunca suprime o
+    evento de `SOURCE_LIFECYCLE` exigido para terminar schedule, round ou trigger.
 24. Todo fence gravado termina em exatamente um envelope: `CycleCommit` (mesmo com zero eventos) ou
     `CycleAbortRecord` (sem revisão, sem evento, sem `PerceptionTask`, sem avanço de ordinal, sem
     consumo e sem `DecisionRecord`). O envelope repete o `cycle_plan` do fence byte a byte e seu
-    digest terminal o cobre.
+    digest terminal o cobre; no abort, evidence refs e records são conjuntos normalizados pelas
+    chaves totais da §8.0.1 antes de calcular `abort_digest`.
 25. Elegibilidade de readmissão é a coordenada persistida `(not_before_instant,
     not_before_cycle_ordinal)`; `DEFER` de mesmo instante usa ordinal maior, nunca momento de
     inserção.
@@ -1875,7 +1926,10 @@ uma leitura privilegiada não pode vazar por efeito colateral.
     produzem os mesmos bytes independentemente da ordem local de registro ou iteração.
 35. Uma transição de predicate que ativa trigger cria exatamente uma `TriggerActivation` `PENDING`
     na mesma transação da revisão de origem; o `DecisionRecord` da ativação é a única forma de
-    consumi-la. Crash/replay não recria, perde nem duplica ativação a partir de memória do processo.
+    consumi-la. Seu `causing_event_ids[]` é o filtro total e versionado da §4.2 sobre os
+    `pre_trigger_events`, em ordem de `EventOrderKey`, e é provenance do post-state, não link causal
+    entre candidatos simultâneos. Crash/replay não recria, perde nem duplica ativação a partir de
+    memória do processo.
 36. Todo evento potencialmente perceptível possui `PerceptionTask` criada na mesma transação do
     `CycleCommit` e referenciada por ele. Completion só existe depois dos recibos idempotentes no
     evidence ledger; barrier e resume reconciliam commits, tarefas, completions e entregas antes de
@@ -1910,9 +1964,10 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 | Input exógeno gravado depois do `SourceClosure` da própria fonte | não é inserido retroativamente; recebe `open_coordinate` por regra de ingresso e é admitido pelo primeiro fence posterior que o torne elegível, com o valor declarado preservado como provenance |
 | Fonte grava `SourceClosure(final=true)` com `closed_through=C` e o relógio avança além de C | o marcador satisfaz todo fechamento futuro; qualquer input ou novo fechamento dessa fonte é rejeitado atomicamente; nenhum deadlock por `closed_through` finito |
 | Candidato de ocorrência vencida é rejeitado | ocorrência termina no mesmo commit; nenhum `PENDING` remanescente e nenhum redisparo a partir de estado velho |
-| Ciclo em que todos os slots respondem `NoProposal` | `CycleCommit` vazio persistido com um `DecisionRecord(NO_PROPOSAL)` por slot; bijeção `admitted_input_ids ↔ decision_record_ids`; replay reproduz revisão, ordinal e `next_logical_sequence` |
+| Ciclo em que todos os slots respondem `NoProposal` | um `DecisionRecord(NO_PROPOSAL)` por slot e evento `SOURCE_LIFECYCLE` que consome cada `RoundDeclaration` completada; não há evento de domínio, mas `event_ids[]` não é vazio; replay reconstrói rounds terminais, revisão, ordinal e `next_logical_sequence` |
 | Duas entregas usam `producer_unit_key` distintas, mas mesmo tipo/fonte/ator, `idempotency_key` e bytes lógicos | `input_id`/`unit_digest` distintos preservam cada entrega; `idempotency_digest` igual prova a mesma operação lógica; no mesmo fence, a primeira pela ordem total recebe a disposição e o alias recebe `DecisionRecord(DEDUPLICATED, canonical_unit_id)` |
 | Alias da mesma operação é reentregue depois de a canônica ter sido liquidada e recebe coordenada de admissão posterior | `unit_digest` reflete a nova coordenada, mas `idempotency_digest` usa o tempo declarado e permanece igual; a nova identidade continua pendente, entra no primeiro fence elegível e recebe seu próprio `DecisionRecord(DEDUPLICATED)` apontando à canônica do ciclo anterior; só esse commit a consome |
+| Alias `DEDUPLICATED` é uma occurrence/ativação `PENDING`, ou seu slot completa um round | não há candidato nem evento de domínio, mas o mesmo lote contém o evento `SOURCE_LIFECYCLE` terminal; replay do event store reconstrói a fonte/container consumido e nunca a readmite |
 | Mesmo namespace de `idempotency_key` é reutilizado com payload, tempo efetivo declarado/due time ou provenance causal diferente | `IDEMPOTENCY_CONFLICT`; `CycleAbortRecord` referencia a unidade corrente e a canônica/conflitante; nenhuma unidade do fence corrente recebe `DecisionRecord` ou é consumida, e settlement histórico permanece imutável; só a coordenada normalizada pelo ledger pode diferir sem mudar a operação |
 | Faceta sem regra, dado ou resolvedor disponível | `INDETERMINATE` canônico dentro de um `CycleAbortRecord`; nenhum `CycleCommit`, nenhum `DecisionRecord`, nenhuma revisão publicada, nenhum avanço de ordinal |
 | Candidato A já tem `COMMIT` provisório quando B encontra `INDETERMINATE` | `CycleAbortRecord` sem nenhum `DecisionRecord`; o `COMMIT` de A é material provisório não autoritativo; A continua elegível e é reavaliado na tentativa seguinte junto com B |
@@ -1931,6 +1986,7 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 | Dois candidatos vencem no mesmo ciclo | nenhum evento de um aparece como `causal_parent` do outro; reação exige ciclo posterior |
 | Dois candidatos vencedores A/B e seus outputs são entregues ao coordinator em ordens opostas | mesmos `candidate_id`; ordenação por `EventOrderKey` produz os mesmos `event_id`, `LogicalSequence`, `event_ids[]`, tarefas de percepção e `batch_digest` |
 | Event store devolve evento com `EventOrderKey` ausente/alterada, ou commit permuta dois `event_ids[]` | replay recalcula cada `event_id`, reordena pelas chaves persistidas, valida `LogicalSequence` e `batch_digest`; qualquer ausência, id, posição, sequência ou digest divergente falha fechado antes do reducer |
+| Dois eventos simultâneos E1/E2 de candidatos distintos tocam dependências do mesmo trigger e workers terminam em ordens opostas | `causing_event_ids[]` contém ambos pelo filtro de `dependency_footprint`, na ordem canônica do `EventBatch`; mesma ativação/`unit_digest`; os refs são provenance do post-state e nenhum evento de E1/E2 recebe causal parent cross-candidate |
 | Último ciclo foi `(t,1)` e a única pendência está em `(t,3)` | `next_cycle_coordinate` retorna `(t,3)`; não existe `CycleCommit` vazio em `(t,2)` e replay faz o mesmo salto |
 | Último ciclo foi `(t,1)` e a menor pendência é `(u,0)`, com `u > t`, sem novo trabalho materializado | após fechamento até o alvo, ciclo de avanço em `(t,2)` tem input vazio e commita `clock.advanced`; estado resultante é `(current_instant=u, cycle_ordinal_at_instant=-1)` e a nova derivação abre o ciclo de trabalho em `(u,0)` |
 | Fonte fechou apenas `C=(t,2)`, um plano provisório de avanço aponta para `P=(u,0)` e, antes de `close(P)`, chega `Q=(v,0)` com `t < v < u` | `close(C)` não permite gravar o fence; a confirmação condicional após o fechamento até o alvo detecta que `P` deixou de ser a menor pendência, rejeita a derivação antiga e a nova derivação escolhe `Q`; nenhum avanço salta sobre trabalho causal |
@@ -1950,6 +2006,7 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 | Commit R torna um `RISING_EDGE` verdadeiro e o processo cai antes de expandir a ativação | R publicou atomicamente runtime + `TriggerActivation(PENDING)` com coordenada do ciclo posterior; resume admite a mesma `activation_id` uma vez, sem reavaliar memória do host nem duplicar candidato |
 | Trigger cria outro trigger no mesmo instante | ciclos ordinais diferentes, DAG causal e limite de cascata determinístico |
 | Reducer falha no terceiro evento do lote | nenhum evento, revisão, disposição terminal ou consumo de occurrence persiste; a tentativa termina em `CycleAbortRecord` |
+| Dois validators produzem os mesmos records/refs de falha nas ordens A→B e B→A | `evidence_refs`, `indeterminate_records` e `failure_evidence_refs` são normalizados pelas chaves da §8.0.1; mesmo envelope e `abort_digest` |
 | Observatory lê segredo e depois fecha | hashes de world/knowledge/ledgers permanecem inalterados |
 | Reflexão resume um rumor como hipótese | provenance continua apontando ao claim; nenhum Event/world truth é criado |
 | Snapshot no meio de comunicação em trânsito | contínuo e snapshot+resume geram mesmos tails e state hash |
@@ -1973,16 +2030,16 @@ Os nomes concretos podem variar, mas a responsabilidade não:
 | `AdmissionFenceLog` | persistir por escrita condicional o `AdmissionFence` por `(cycle_id, attempt_ordinal)` antes de qualquer avaliação e servi-lo a replay/resume para verificar `CyclePlan`, prova append-stable, pares `(unit_id, unit_digest)`, `input_digest`, identidade causal e serialização total versionadas |
 | `InputLedger` | registrar fontes exógenas declaradas em sequências prefix-consistentes, exigir chaves estáveis do produtor, derivar ids/`unit_digest` pela `CausalIdentityPolicy`, separar identidade de entrega de `IdempotencyIdentity` sem pré-consumir aliases de canônica já liquidada, atribuir `ingress_seq`/coordenada, persistir `SourceClosure` monotônicos/finais e selecionar o primeiro que cobre cada coordenada; rejeitar append após `final`; manter o registro de slot — `SlotDispatch`, `SlotDispatchRevocation` e no máximo uma `SlotResponse` por `(decision_round_id, slot_id)`, vinculada fail-closed ao dispatch aberto (§3.2.5) |
 | `ScheduleStore` | manter lifecycle de occurrences e `RoundDeclaration` e consultar as elegíveis à coordenada do ciclo |
-| `TriggerRegistry` | armazenar definition/version, runtime state e lifecycle das `TriggerActivation`; materializar runtime + ativação atomicamente com a revisão de origem e consultar ativações pendentes |
+| `TriggerRegistry` | armazenar definition/version, dependency selectors versionados, runtime state e lifecycle das `TriggerActivation`; derivar `causing_event_ids[]` pelo filtro canônico sobre os footprints expostos pelo `ReducerRegistry`, materializar runtime + ativação atomicamente com a revisão de origem e consultar ativações pendentes |
 | `OccurrenceHandler` | transformar occurrence vencida em candidato, sem side effect |
 | `ActionSchemaRegistry` | validar forma/versionamento de propostas |
 | `AffordanceValidator` | produzir facets contra a revisão congelada |
 | `ConflictDetector` | construir conflict sets conservadores |
 | `ConflictResolver` | produzir disposições sob política/version/seed explícitos |
-| `DecisionLedger` | registrar material provisório de avaliação, `AttemptRetryRecord` e o commit journal canônico/único dos envelopes terminais (`CycleCommit` com `DecisionRecord` e referências/digest de `PerceptionTask`, `CycleAbortRecord`) |
-| `CommitCoordinator` | validar a partição exata unidade→candidato, plano/lote/post-state, ordenar toda `EventDraft` pela `EventOrderKey`, persistir a chave no `Event`, validar ids/sequências e `batch_digest`, aplicar `commit_successor_floor` a todo output causal derivado, derivar transições/ativações de trigger e tarefas de percepção, e persistir atomicamente fence closure + um `DecisionRecord` por unidade admitida + eventos + `PerceptionTask` + `CycleCommit` + revisão, ou o `CycleAbortRecord` sem nenhum `DecisionRecord`/tarefa |
+| `DecisionLedger` | registrar material provisório de avaliação, `AttemptRetryRecord` e o commit journal canônico/único dos envelopes terminais (`CycleCommit` com `DecisionRecord` e referências/digest de `PerceptionTask`, `CycleAbortRecord` com evidência normalizada antes de `abort_digest`) |
+| `CommitCoordinator` | validar a partição exata unidade→candidato, plano/lote/post-state, derivar todo `SOURCE_LIFECYCLE` obrigatório mesmo sem candidato/evento de domínio, ordenar toda `EventDraft` pela `EventOrderKey`, persistir a chave no `Event`, validar ids/sequências e `batch_digest`, aplicar `commit_successor_floor` a todo output causal derivado, derivar provenance/transições/ativações de trigger e tarefas de percepção, e persistir atomicamente fence closure + um `DecisionRecord` por unidade admitida + eventos + `PerceptionTask` + `CycleCommit` + revisão, ou o `CycleAbortRecord` sem nenhum `DecisionRecord`/tarefa |
 | `EventStore` | append/read somente de `Event` imutável com `EventOrderKey` persistida e referenciado pelo commit journal; sem `CycleCommit`, API update ou delete |
-| `ReducerRegistry` | mapear cada event type ao único owner/reducer versionado |
+| `ReducerRegistry` | mapear cada event type ao único owner/reducer versionado e expor sua função pura/versionada `dependency_footprint(event)` |
 | `PerceptionResolver` | transformar evento+acesso em outputs endereçados com papel/ordinal de schema e ids derivados pela política epistemológica |
 | `EvidenceLedger` | persistir observations/recibos por destinatário e identidade determinística, append-only e idempotente |
 | `EpistemicOutbox` | persistir `PerceptionTask` com versões/hashes atomicamente com o commit, registrar um completion determinístico somente após recibos verificáveis, reconciliar commit/tarefa/evidence e impor barrier antes do próximo round |

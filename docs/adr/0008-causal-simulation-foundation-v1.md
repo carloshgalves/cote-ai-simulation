@@ -1,6 +1,6 @@
 # ADR 0008 — Fundação causal da simulação V1
 
-**Status:** Proposed
+**Status:** Accepted
 **Data:** 2026-09-10
 **Relacionado:** ADR 0001 (world truth e conhecimento), ADR 0003 (tempo lógico), ADR 0006
 (resolução física dentro do Simulation Engine), ADR 0007 (fronteira de dados do `Embodiment`)

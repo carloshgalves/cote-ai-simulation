@@ -257,11 +257,14 @@ dentro desse limite, não um committer paralelo.
 O genesis persiste, no mínimo:
 
 - `run_id`, `world_seed`, `timezone=Asia/Tokyo` para o cenário COTE V1 e instante inicial;
-- schema/hash do genesis e referência parental quando houver fork;
+- schema/hash do genesis e, quando houver fork cross-policy, o
+  [`parent_checkpoint_history_ref`](../architecture/cross-policy-checkpoint-reference-v1.md);
 - fontes exógenas declaradas;
 - `codec_policy_id=cote.csf.codec.cbor-det.v1`, `codec_version=1`,
-  `identity_algorithm_version=cote.csf.sha256.v1`, NFC/NPSS Unicode 15.1.0,
-  `codec_policy_hash` e `schema_bundle_hash`;
+  `identity_algorithm_version=cote.csf.sha256.v1`, NFC pelo Normalization Process for Stabilized
+  Strings (NPSS) Unicode 15.1.0,
+  `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`
+  e `schema_bundle_hash=efbfb9abedbe3d7c9b6123f3613b0dffa2b13c2b8aad7f688e61845cdcfc4c81`;
 - causal identity, admission order, fence, coordinate, event order, idempotency, RNG, perception e
   perception identity policy: versão **e** hash;
 - versões/hashes de schemas, reducers, validators, resolvers e dependency footprints;
@@ -291,7 +294,7 @@ store nem os envelopes do decision ledger.
 Os campos e condições normativas são os schemas conceituais do ADR 0008. A implementação V1 fornece
 schemas versionados e canonicalização para, no mínimo:
 
-- `EligibilityCoordinate`, `CyclePlan`, `SourceClosure`, `RoundDeclaration`;
+- `EligibilityCoordinate`, `CyclePlan`, `ExogenousInput`, `SourceClosure`, `RoundDeclaration`;
 - `SlotDispatch`, `SlotDispatchRevocation`, `ActionProposal`, `NoProposal`;
 - `ScheduledOccurrence`, `TriggerDefinition`, `TriggerRuntimeState`, `TriggerActivation`;
 - `AdmissionFence`, `AffordanceAssessment`, `CommitCandidate`, `ConflictSet`;
@@ -305,7 +308,10 @@ Campos set-like declaram uma chave total. Maps são ordenados por chave canônic
 da linguagem nunca é usada para digest, identidade ou state hash. O contrato exato de records,
 primitivos, Unicode, floats, maps, sets, ids e strict decoding é o
 [Canonical Causal Codec V1](../architecture/canonical-codec-v1.md); CDDL, registries e golden vectors
-são a fonte independente de linguagem.
+são a fonte independente de linguagem no
+[`canonical-codec-v1-bundle`](../architecture/canonical-codec-v1-bundle/README.md). Todo texto é
+classificado como `machine-id` ASCII, `human-text` Unicode ou `ascii-uri`; human text nunca participa
+de identidade, map key ou ordering.
 
 ### 6.4 Estado do ciclo
 
@@ -374,7 +380,8 @@ referência epistemológica opaca e verificada.
 - Records são arrays de aridade fixa; maps usam a ordem bytewise lexicográfica do encoding canônico
   da chave; ordered lists preservam ordem e set-like arrays seguem a total ordering/duplicate policy
   do schema.
-- Strings são UTF-8 após NFC/NPSS Unicode 15.1.0. Integers têm range no schema; float é binary64
+- `human-text` é UTF-8 após NFC/NPSS Unicode 15.1.0; identificadores causais são `machine-id` ASCII.
+  Integers têm range no schema; float é binary64
   finito em preferred encoding, com `-0.0` normalizado e non-finite rejeitado.
 - IDs/digests dentro de records são byte strings de 32 bytes. A forma
   `csf1:<domain-tag>:sha-256:<lowercase-hex>` é somente view e nunca substitui esses bytes no hash.
@@ -476,7 +483,8 @@ referência epistemológica opaca e verificada.
   regenerado por modelo.
 - `ATTEMPT_IN_FLIGHT`, `RETRY_AUTHORIZED`, `HALTED_ON_ABORT` e `IDLE` são derivados pela precedência
   normativa do ADR; estado persistido divergente falha fechado.
-- Fork cria novo `run_id` com parent checkpoint/hash; nenhum id ou evento pós-fork cruza timelines.
+- Fork cria novo `run_id`; entre policies, o genesis usa a referência histórica autocontida com
+  policy/domain/schema/algoritmo de origem. Nenhum id ou evento pós-fork cruza timelines.
 - Observatory tem somente query ports. Consultar segredo, POV ou view pública não cria observation,
   atualiza cursor de ator ou altera hash causal.
 
@@ -614,8 +622,8 @@ dos hashes causais. Métricas mínimas:
 12. ids/completion de percepção idempotentes e instante epistemológico causal;
 13. substreams independentes de avaliações/atores irrelevantes;
 14. arquitetura sem cliente LLM no core e sem write port transitivo no Observatory;
-15. golden vectors positivos/negativos do codec executados por pelo menos duas implementações
-    independentes e linguagens diferentes;
+15. os 165 vetores/casos de conformidade do bundle executados por pelo menos duas
+    implementações independentes e linguagens diferentes;
 16. strict decode rejeita CBOR não preferido, indefinite, tag, `undefined`, duplicate key, Unicode
     fora do profile, non-finite, negative zero, schema/enum desconhecido e id com tamanho incorreto;
 17. mesmo valor sob domain/schema/version diferentes produz bytes/digests diferentes.
@@ -713,9 +721,13 @@ Replay exige a implementação exata identificada por versão **e** hash. “Mes
 política diferentes é corrupção. Remover uma política antiga do runtime torna o run não resumível até
 que o artefato seja restaurado ou uma migração/fork explícito seja executado.
 
-O codec é imutável dentro do run. Mudança em framing, profile CBOR, Unicode, primitivos, ordenação,
-float, domain tags ou hash cria `canonical_bytes_v2`; não rehasha histórico. A migração verifica o
-checkpoint V1 e abre um fork com novo `run_id`/policy, preservando o prefixo e os ids V1 para replay,
+O codec é imutável dentro do run. Mudança local de layout/type/range, enum/role ou ordering/duplicate
+policy cria schema version/bundle novo; mudança global em framing, profile CBOR, primitivos, Unicode,
+identifier grammar, map ordering, float, digest ou sua forma textual cria `canonical_bytes_v2`.
+Nenhuma versão nova entra numa run se não estava pinada no genesis. A migração verifica o checkpoint
+V1 e abre um fork com novo `run_id`/policy, preservando o prefixo e os ids V1 para replay; entre
+policies, o genesis usa o
+[`Cross-policy Checkpoint Reference V1`](../architecture/cross-policy-checkpoint-reference-v1.md),
 conforme o [contrato do codec](../architecture/canonical-codec-v1.md#10-evolução-e-migração).
 
 ---
@@ -748,7 +760,8 @@ provas de determinismo, crash consistency e isolamento.
 O [ADR 0008](../adr/0008-causal-simulation-foundation-v1.md) está `Accepted` desde o merge
 `a669ef6`; sua aceitação não é bloqueio. Codec/digest também está fechado pelo
 [ADR 0009](../adr/0009-canonical-causal-codec-and-digests.md) e pelo
-[Canonical Causal Codec V1](../architecture/canonical-codec-v1.md).
+[Canonical Causal Codec V1](../architecture/canonical-codec-v1.md), inclusive seu
+[policy/schema bundle imutável](../architecture/canonical-codec-v1-bundle/README.md).
 
 As três decisões abaixo continuam abertas. Esta revisão não as antecipa.
 

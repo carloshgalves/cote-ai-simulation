@@ -135,17 +135,23 @@ derive_id(domain_tag, canonical_components...) =
 ```
 
 `canonical_bytes_v1` é uma codificação tipada e length-prefixed: inteiros têm largura/sinal definidos
-pelo schema; strings são UTF-8 NFC; ids e digests são bytes, não texto reformatado; campos de record
+pelo schema; conteúdo humano é UTF-8 NFC e identificadores causais textuais são ASCII `machine-id`;
+ids e digests derivados são bytes, não texto reformatado; campos de record
 seguem a ordem do schema; maps são ordenados pela chave canônica; e coleções set-like usam a ordem
 total declarada pelo contrato que as possui. Nenhuma implementação pode usar serialização default da
 linguagem. Domain tags, algoritmo, schemas e regras de ordenação integram o hash da política; colisão
 de um id derivado com componentes diferentes é corrupção e falha fechado.
 
 O [ADR 0009](0009-canonical-causal-codec-and-digests.md) fixa a extensão compatível deste contrato:
-RFC 8949 core deterministic CBOR sob profile estrito, NFC/NPSS Unicode 15.1.0, CDDL e registries
+RFC 8949 core deterministic CBOR sob profile estrito, NFC pelo Normalization Process for Stabilized
+Strings (NPSS) Unicode 15.1.0, CDDL e registries
 versionados, domain separation por tag e SHA-256. O layout normativo vive em
-[`canonical-codec-v1.md`](../architecture/canonical-codec-v1.md); JSON/YAML e serialização default da
-linguagem não são imagens hasháveis.
+[`canonical-codec-v1.md`](../architecture/canonical-codec-v1.md), e os schemas/registries/vetores
+concretos vivem no
+[`canonical-codec-v1-bundle`](../architecture/canonical-codec-v1-bundle/README.md); JSON/YAML e
+serialização default da linguagem não são imagens hasháveis. Identificadores causais textuais usam a
+gramática ASCII `machine-id`; NFC/NPSS é reservado a conteúdo humano e não substitui política de
+segurança de identificadores.
 
 As origens são estáveis e independentes de execução:
 
@@ -525,7 +531,7 @@ Consequências:
   unit_digest, unit_id)`. A política V1 fixa `unit_kind_tag` em `00=SLOT`,
   `01=EXOGENOUS_INPUT`, `02=SCHEDULED_OCCURRENCE`, `03=TRIGGER_ACTIVATION`; uma nova categoria exige
   nova versão com tag única. `canonical_source_id` é o identificador namespaced imutável da fonte em
-  bytes UTF-8 NFC — o `source_id` persistido em toda unidade conforme a §3.2.2; slots herdam o da
+  bytes ASCII `machine-id` — o `source_id` persistido em toda unidade conforme a §3.2.2; slots herdam o da
   `RoundDeclaration`, occurrences persistem o da fonte derivada que as criou e ativações usam
   `trigger:<definition_id>`. Colisão de IDs namespaced é configuração inválida. Digests e IDs são
   comparados por seus bytes canônicos unsigned, nunca por locale, ordem de registro, enum local ou
@@ -1871,9 +1877,13 @@ Snapshot sem versão disponível falha fechado; migração exige função/versio
 o futuro schema do snapshot causal completo. A integração deve aninhá-lo ou adaptá-lo com versão
 declarada, nunca fundir árvores por coincidência de nomes.
 
-Criar uma linha divergente gera novo `run_id` com `parent_checkpoint_ref/hash`. O prefixo histórico é
-imutável e compartilhável; inputs, ids derivados, ledgers e revisões depois do fork pertencem somente
-à nova run. Merge de timelines não existe na V1.
+Criar uma linha divergente gera novo `run_id`. Quando origem e filha usam policies diferentes, o
+genesis carrega o
+[`parent_checkpoint_history_ref`](../architecture/cross-policy-checkpoint-reference-v1.md), com
+policy id/hash, domain/schema/version, algoritmo, comprimento e bytes do digest de origem; referência
+de 32 bytes cujo significado dependa da policy filha é inválida. O prefixo histórico é imutável e
+compartilhável; inputs, ids derivados, ledgers e revisões depois do fork pertencem somente à nova run.
+Merge de timelines não existe na V1.
 
 ### 13. Observatory
 

@@ -7,8 +7,10 @@
 **Base:** [RFC 8949](https://www.rfc-editor.org/rfc/rfc8949.html) core deterministic encoding,
 [RFC 8610](https://www.rfc-editor.org/rfc/rfc8610.html) CDDL,
 [Unicode 15.1.0](https://www.unicode.org/versions/components-15.1.0.html) com
-[UAX #15](https://www.unicode.org/reports/tr15/) e
+[UAX #15 revision 54](https://www.unicode.org/reports/tr15/tr15-54.html) e
 [FIPS 180-4 SHA-256](https://csrc.nist.gov/pubs/fips/180-4/upd1/final)
+
+**Bundle normativo:** [COTE Causal Canonical Codec V1 bundle](canonical-codec-v1-bundle/README.md)
 
 Este documento fixa os bytes de `canonical_bytes_v1` exigidos pelo ADR 0008. “CBOR canônico”, sem
 este profile, não é uma implementação conforme.
@@ -21,9 +23,11 @@ este profile, não é uma implementação conforme.
 | `codec_version` | `1` |
 | formato | CBOR, RFC 8949 core deterministic encoding (§4.2.1) |
 | schema notation | CDDL, RFC 8610, mais as restrições semânticas deste profile |
-| Unicode | NFC via NPSS, Unicode `15.1.0` |
+| Unicode | NFC pelo Normalization Process for Stabilized Strings (NPSS), Unicode `15.1.0` |
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
+| `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
+| `schema_bundle_hash` | `efbfb9abedbe3d7c9b6123f3613b0dffa2b13c2b8aad7f688e61845cdcfc4c81` |
 
 O manifesto imutável do run carrega esses valores, `codec_policy_hash`, `schema_bundle_hash` e os
 hashes dos registries de domain tags, enums, ordering keys e duplicate policies. Um nome igual com
@@ -48,24 +52,25 @@ canonical_bytes_v1(domain_tag, schema_id, schema_version, value) =
 O envelope é um array CBOR de comprimento exatamente seis. Nenhum campo pode ser omitido, inferido do
 nome do arquivo ou substituído por header de transporte.
 
-`domain_tag` e `schema_id` usam somente ASCII minúsculo e precisam satisfazer
-`[a-z][a-z0-9]*(\.[a-z][a-z0-9-]*)+`. Produção reserva o prefixo `cote.csf.`; fixtures de
-conformidade usam `cote.csf.test.`. Tags e ids de schema são registries append-only: um nome nunca é
-reutilizado com outro significado.
+`domain_tag` e `schema_id` usam somente ASCII minúsculo e seguem a ABNF
+`domain-schema-tag` de `profile.json`: dois ou mais segmentos separados por `.`, cada segmento
+iniciado por `[a-z]`, continuado por `[a-z0-9]` e com hífens internos sempre seguidos por pelo menos
+um `[a-z0-9]`. Produção reserva o prefixo `cote.csf.`; fixtures de conformidade usam
+`cote.csf.test.`. Tags e ids de schema são registries append-only: um nome nunca é reutilizado com
+outro significado.
 
 Cada operação de id ou digest possui domain tag próprio. Exemplos:
 
 ```text
 cote.csf.id.event
 cote.csf.id.commit-candidate
-cote.csf.digest.unit
+cote.csf.digest.action-proposal-unit
 cote.csf.digest.fence
 cote.csf.digest.decision
 cote.csf.digest.batch
 cote.csf.digest.abort
 cote.csf.hash.world-state
 cote.csf.hash.snapshot
-cote.csf.hash.codec-policy
 ```
 
 Não existe domain tag genérico `cote.csf.hash`. Acrescentar um tipo causal exige tag nova no registry
@@ -82,7 +87,8 @@ diferentes não compartilham namespace apenas porque possuem os mesmos campos.
 | signed integer | major type 0 ou 1, preferred/shortest encoding; range `i8/i16/i32/i64` validada pelo schema |
 | float | valor semântico IEEE-754 binary64 finito, CBOR float no menor width que preserve exatamente o valor |
 | byte string | major type 2, definite length |
-| text string | NFC/NPSS, UTF-8 válido, major type 3, definite length |
+| `human-text` | NFC/NPSS, UTF-8 válido, major type 3, definite length |
+| `machine-id` | ASCII minúsculo sob a gramática fechada do bundle, major type 3, definite length |
 | enum | código unsigned estável declarado no registry do schema |
 | timestamp | `SimulationInstant`: `i64` de microssegundos desde Unix epoch UTC; nenhum tag ou texto de data |
 | duration | integer de microssegundos com sinal/range declarado pelo schema |
@@ -114,7 +120,7 @@ Subnormals finitos são válidos. Esta regra estabiliza bytes; ela não promete 
 diferentes produzam o mesmo resultado. Regras de mundo que exigem igualdade aritmética usam integer ou
 fixed-point; integrações que usam float precisam de determinism eval próprio.
 
-### 3.3 Texto e Unicode
+### 3.3 Texto, Unicode e identificadores
 
 Antes do UTF-8:
 
@@ -123,12 +129,21 @@ Antes do UTF-8:
 3. rejeitar qualquer code point `General_Category=Unassigned` nessa versão;
 4. emitir UTF-8 shortest form, sem BOM e sem escape textual.
 
-Comparação, tamanho e ordenação usam os bytes UTF-8 **depois** dessa normalização. Case folding,
-compatibility normalization (NFKC), locale e collation não são aplicados. Duas chaves que colidem após
-NFC são duplicata inválida, mesmo que os inputs originais fossem byte a byte diferentes.
+Para `human-text`, comparação e tamanho usam os bytes UTF-8 **depois** dessa normalização. Case folding,
+compatibility normalization (NFKC), locale e collation não são aplicados.
 
 Atualizar a biblioteca Unicode do host não muda o run: a implementação usa os dados 15.1.0 ou prova
-conformidade com eles. O corpus oficial `NormalizationTest.txt` 15.1.0 integra a suíte.
+conformidade com eles. O bundle prende UAX #15 revision 54, `NormalizationTest.txt` e
+`DerivedGeneralCategory.txt` por URL, tamanho e SHA-256; este último define exatamente
+`General_Category=Unassigned (Cn)`.
+
+`human-text` é conteúdo, nunca identidade causal, map key ou ordering key. Todo identificador textual
+causal é `machine-id`: 1–128 octetos ASCII sob a ABNF integral de `profile.json`; começa por `[a-z]`
+e cada separador em `._:/-` precisa ser seguido por um ou mais `[a-z0-9]`. Domain/schema tags usam a
+gramática mais restrita da §2. Isso exclui controles bidi, default-ignorables, mistura de scripts e
+homoglyphs non-ASCII por construção. NFC/NPSS estabiliza conteúdo Unicode; não é uma política de
+segurança de identifiers. Todo campo textual precisa ser classificado no schema como `machine-id`,
+`human-text` ou `ascii-uri`; `text` sem classe é inválido.
 
 ### 3.4 IDs e digests
 
@@ -240,7 +255,8 @@ produtor. Assinatura/MAC, se necessários, são outra política e não alteram o
 
 ## 8. Policy e schema bundle
 
-A source of truth independente de linguagem contém:
+A source of truth independente de linguagem é o diretório
+[`canonical-codec-v1-bundle/`](canonical-codec-v1-bundle/README.md), que contém:
 
 - manifesto da policy;
 - CDDL por schema/version;
@@ -251,21 +267,27 @@ A source of truth independente de linguagem contém:
 - vetores positivos e negativos da §11;
 - versão e checksum do corpus Unicode de conformidade.
 
-O `codec_policy_hash` é:
+O bootstrap do bundle não pode depender do codec que ele próprio define. Por isso:
 
 ```text
-digest_v1(
-  "cote.csf.hash.codec-policy",
-  "cote.csf.schema.codec-policy-manifest",
-  1,
-  manifest_without_its_own_hash
+codec_policy_hash = SHA-256(
+  ASCII("cote.csf.bundle.codec-policy.v1") || 0x00 || raw_bytes("policy-manifest.json")
+)
+
+schema_bundle_hash = SHA-256(
+  ASCII("cote.csf.bundle.schema.v1") || 0x00 || raw_bytes("schema-manifest.json")
 )
 ```
 
-O manifest lista cada artefato por path ASCII normalizado e por
-`digest_v1("cote.csf.digest.policy-artifact", "cote.csf.schema.policy-artifact", 1,
-[path, raw_bytes])`, ordenado por path. Não existe ciclo: o próprio `codec_policy_hash` é excluído.
-`schema_bundle_hash` segue a mesma regra sob `cote.csf.hash.schema-bundle`.
+Cada manifesto lista path ASCII, tamanho e SHA-256 dos bytes exatos de cada artefato, em ordem de
+path. `BUNDLE.sha256` publica os dois hashes acima e os hashes raw dos manifestos; é recibo e não entra
+no preimage. Os valores V1 estão na §1. Item ausente/extra, path duplicado, bytes, tamanho ou hash
+divergente falham fechado.
+
+O policy manifest cobre somente `profile.json` e `unicode.json`, pois eles definem as regras globais
+que distinguem codec V1 de V2. O schema manifest cobre CDDL, registries e fixtures. Assim nova versão
+local muda `schema_bundle_hash`, não `codec_policy_hash`; mudar a regra global correspondente continua
+obrigando V2 pela matriz da §10.
 
 Geradores de código são adapters descartáveis. CDDL, registries, política semântica e golden vectors
 são autoridade; output gerado ou reflexão de runtime não é.
@@ -293,20 +315,26 @@ aberto, poderá convertê-lo a snapshot/evento causal V1; esta decisão não o r
 
 ### 10.1 Schema muda; codec não
 
-Adicionar/remover/reordenar campo, mudar type/range/optional semantics, enum code ou ordering policy
-cria nova `schema_version` e novo bundle hash. A versão antiga permanece disponível para replay. Runs
-podem usar somente as versões listadas em seu manifesto imutável.
+Adicionar/remover/reordenar campo de record, mudar type/range/optional semantics, código local de
+enum/variant/role, limite local ou ordering/duplicate policy de uma coleção cria nova
+`schema_version` e novo bundle hash. Alterar uma versão ou entrada existente é proibido. A versão
+antiga permanece disponível para replay. Uma run usa somente bundles e versões listados em seu
+manifesto imutável; se a nova versão não estava listada no genesis, seu uso exige novo genesis/fork.
 
 ### 10.2 Codec muda
 
-Qualquer mudança em envelope, subset CBOR, Unicode/repertoire, primitivos, map ordering, float,
-domain-tag grammar, digest algorithm ou formato de id cria `canonical_bytes_v2` e nova policy. Nunca
-se recalculam ids/digests de um histórico V1 in-place.
+Qualquer mudança global em envelope, subset/deterministic rules CBOR, representação de primitivos,
+Unicode/repertoire, gramática de identifiers/domain tags, map ordering, float, digest algorithm,
+formato de id/digest ou forma textual cria `canonical_bytes_v2` e nova policy. Adicionar um schema ou
+domain tag sem mudar essas regras cria bundle novo para nova run, mas preserva o encoder V1. Nunca se
+recalculam ids/digests de um histórico V1 in-place.
 
 Migração ocorre por checkpoint verificado e fork:
 
 1. replay V1 até checkpoint e verificar todos os hashes;
-2. criar novo `run_id` com `parent_checkpoint_ref/hash` e policy V2;
+2. criar novo `run_id` e gravar no genesis o
+   [`parent_checkpoint_history_ref`](cross-policy-checkpoint-reference-v1.md), que carrega policy
+   id/hash de origem, domain/schema/version, algoritmo, comprimento e bytes do digest;
 3. converter somente o estado de entrada por migrator versionado e com relatório;
 4. preservar o prefixo V1 imutável; novos fatos usam ids V2 na nova run.
 
@@ -315,12 +343,11 @@ ficam read-only até fork explícito; alias ou tabela de tradução não torna u
 
 ## 11. Vetores de conformidade
 
-Antes de qualquer implementação ser aceita, o policy bundle inclui uma AST de fixture independente de
-linguagem. JSON é permitido apenas como container da fixture, com todo tipo explícito e números em
-string decimal/hex; ele não é o dado hashado. Cada caso positivo contém:
+O policy bundle inclui `fixtures.json`, independente de linguagem. JSON é apenas container; não é o
+dado hashado. Cada caso positivo contém:
 
 - `case_id`, domain tag, schema id/version;
-- semantic AST tipada (`uint`, `nint`, `f64_bits`, `bytes_hex`, `text_codepoints`, `array`, `map`);
+- payload CBOR canônico validável sob o CDDL root indicado;
 - canonical CBOR em lowercase hex;
 - SHA-256 em lowercase hex;
 - forma textual esperada quando o resultado é id/digest.
@@ -332,7 +359,7 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 3. ordered list cuja permutação muda bytes;
 4. todas as permutações de um set/map que convergem aos mesmos bytes;
 5. map example do RFC 8949 core ordering e rejeição do length-first antigo;
-6. duplicate key, duplicate após NFC, `DEDUP_EXACT` e identity collision;
+6. duplicate map key, `DEDUP_EXACT` e identity collision;
 7. ASCII, português composto/decomposto, japonês, supplementary plane, invalid UTF-8, surrogate e
    code point unassigned em Unicode 15.1;
 8. `+0.0`, `-0.0`, valor que cabe em binary16, apenas binary32, apenas binary64, subnormal e maior
@@ -345,8 +372,10 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 14. records de todos os artefatos do ADR 0008, inclusive collections e envelopes vazios;
 15. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
 
-A CI de conformidade executa os mesmos golden vectors em pelo menos duas implementações independentes
-e linguagens diferentes. Ambas precisam provar semantic AST → bytes, bytes → semantic AST estrita,
+A suíte V1 contém 131 casos positivos — todos os roots persistidos e todas as operações registradas —,
+27 casos negativos com `error_code` estável, cinco casos de normalização e dois vetores SHA-256. CI de conformidade executa os mesmos golden vectors em
+pelo menos duas implementações independentes e linguagens diferentes. Ambas precisam provar valor
+tipado → bytes, bytes → valor tipado estrito,
 re-encoding idêntico, digest e os vetores negativos. Comparar somente objetos decodificados não basta.
 
 ## 12. Vetores-âncora

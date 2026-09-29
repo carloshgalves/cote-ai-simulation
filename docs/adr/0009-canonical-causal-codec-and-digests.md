@@ -11,6 +11,8 @@
 
 **Contrato normativo:** [Canonical Causal Codec V1](../architecture/canonical-codec-v1.md)
 
+**Policy bundle:** [COTE Causal Canonical Codec V1 bundle](../architecture/canonical-codec-v1-bundle/README.md)
+
 ## Contexto
 
 O ADR 0008 exige `canonical_bytes_v1`, ids derivados, digests, hashes de estado e verificação byte a
@@ -38,6 +40,12 @@ Adotar `COTE Causal Canonical Codec V1`, identificado por
   schema;
 - semantic tags, indefinite lengths, `undefined`, bignums e chaves complexas proibidos na V1.
 
+O bundle normativo fixa CDDL, domain/schema operations, códigos de enum/variant/role, políticas de
+ordering/duplicata, limites, dados Unicode e 165 vetores/casos de conformidade. Seus hashes V1 são:
+
+- `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`;
+- `schema_bundle_hash=efbfb9abedbe3d7c9b6123f3613b0dffa2b13c2b8aad7f688e61845cdcfc4c81`.
+
 O layout completo e os vetores-âncora estão no contrato normativo ligado acima.
 
 ### 2. Tipos e texto
@@ -48,8 +56,10 @@ O layout completo e os vetores-âncora estão no contrato normativo ligado acima
   `-0.0` para `+0.0` e rejeita NaN/infinities;
 - valores exatos usam integer coefficient + scale/unidade no schema, nunca float ou decimal tag;
 - timestamps são `i64` de microssegundos UTC; enums são códigos unsigned estáveis;
-- strings usam UTF-8 após NFC/NPSS sob Unicode 15.1.0; unassigned code point, surrogate ou UTF-8
-  inválido falha fechado;
+- conteúdo humano usa UTF-8 após NFC pelo Normalization Process for Stabilized Strings (NPSS) sob
+  Unicode 15.1.0; unassigned code point, surrogate ou UTF-8 inválido falha fechado;
+- todo identificador causal textual usa a gramática ASCII fechada `machine-id` do bundle; NFC/NPSS
+  não é política de segurança de identificador e human text não participa de identidade ou ordering;
 - ids/digests em records são byte strings de 32 bytes; forma textual é apenas view.
 
 ### 3. Digest e domain separation
@@ -81,13 +91,19 @@ Unicode, maps/sets, floats, domain separation, formas CBOR não preferidas e tod
 
 ### 5. Evolução
 
-Mudança apenas de schema cria nova schema version e preserva o codec. Mudança em framing, profile
-CBOR, Unicode/repertoire, tipo, ordenação, float, digest ou domain-tag grammar cria
-`canonical_bytes_v2` e nova policy.
+Mudança local declarada por schema — layout/ordem de campos de record, tipo/range/optional, código de
+enum/variant/role, limite local ou ordering/duplicate policy de uma coleção — cria nova
+`schema_version` e novo bundle; nunca altera uma versão existente. Mudança global do encoder —
+framing, subset/deterministic rules CBOR, representação de primitivos, Unicode/repertoire, gramática
+global de identifiers/domain tags, ordem de maps, float, algoritmo/formato de digest ou forma textual
+— cria `canonical_bytes_v2` e nova policy. Uma run só usa versões já listadas em seu manifesto
+imutável; bundle novo exige novo genesis/fork, ainda que o encoder continue V1.
 
 Um run não troca de codec no meio e histórico V1 nunca é rehashado. Migração verifica checkpoint V1 e
-abre novo run/fork com `parent_checkpoint_ref/hash`; o prefixo antigo permanece imutável e disponível
-para replay com sua policy original.
+abre novo run/fork cujo genesis carrega o
+[`parent_checkpoint_history_ref`](../architecture/cross-policy-checkpoint-reference-v1.md): envelope
+estável com policy id/hash de origem, domain/schema/version, algoritmo, comprimento e bytes do digest.
+O prefixo antigo permanece imutável e disponível para replay com sua policy original.
 
 ## Alternativas descartadas
 

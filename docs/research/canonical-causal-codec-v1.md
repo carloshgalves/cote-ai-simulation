@@ -48,11 +48,16 @@ Fontes consultadas em 2026-09-28:
 - BLAKE3 possui [especificação e implementações oficiais](https://github.com/BLAKE3-team/BLAKE3-specs),
   com vantagem declarada de throughput e paralelismo. Diferentemente de SHA-256, não é definido por
   um FIPS usado nesta comparação.
-- [UAX #15](https://www.unicode.org/reports/tr15/) define NFC e o Normalization Process for
-  Stabilized Strings (NPSS). NPSS rejeita code points não atribuídos na versão fixada e garante que
-  a string normalizada permaneça estável sob versões passadas ou futuras. A versão Unicode 15.1.0 e
-  seu [NormalizationTest.txt](https://www.unicode.org/Public/15.1.0/ucd/NormalizationTest.txt) são
-  artefatos versionados.
+- [UAX #15 revision 54](https://www.unicode.org/reports/tr15/tr15-54.html), para Unicode 15.1.0,
+  define NFC e o Normalization Process for Stabilized Strings (NPSS). NPSS rejeita code points não
+  atribuídos na versão fixada e garante que a string normalizada permaneça estável sob versões
+  passadas ou futuras. `NormalizationTest.txt` 15.1.0 tem SHA-256
+  `871238e37e3be0696ec2bd0891119a041b052da1a84485eda05a5438724b223e`; o arquivo
+  `extracted/DerivedGeneralCategory.txt` que define `General_Category=Unassigned (Cn)` tem SHA-256
+  `760720ac034f96b630a3055879a744e0907184e8aa811e89ba34583a7a487e85`.
+- [UAX #31 revision 39](https://www.unicode.org/reports/tr31/tr31-39.html) trata sintaxe de
+  identifiers Unicode, enquanto [UTS #39 revision 28](https://www.unicode.org/reports/tr39/tr39-28.html)
+  trata perfis de segurança, scripts e confusables. São problemas distintos de NFC/NPSS.
 
 ## 3. Alternativas de serialização
 
@@ -143,7 +148,41 @@ do host. Expandir o repertoire será mudança de política, não atualização i
 **Recomendação:** NFC por NPSS sob Unicode 15.1.0; rejeitar unassigned code points, surrogate isolado,
 UTF-8 inválido e chave duplicada depois da normalização.
 
-## 6. Recomendação final
+### Identificadores causais
+
+Foram comparadas duas opções para `source_id`, producer/idempotency keys, namespaces e ids de
+ator/entidade, policies, roles e reason codes:
+
+- um profile Unicode imutável baseado em UAX #31, acompanhado dos controles de segurança do UTS #39;
+- uma gramática ASCII fechada, mantendo Unicode somente em conteúdo humano.
+
+O primeiro preserva identifiers naturais, mas exige fixar repertoire, normalization, script policy,
+default-ignorables, bidi e confusable detection e ainda impõe decisões de produto sobre colisão e
+display. Nenhum identificador causal V1 precisa dessa expressividade. A segunda opção é menor,
+uniforme entre linguagens e elimina essas classes de spoofing por construção.
+
+**Recomendação:** classificar todo texto no schema. `machine-id` usa ASCII minúsculo e gramática
+fechada; `human-text` usa NFC/NPSS e não participa de identidade, map key ou ordering. UAX #31/UTS #39
+ficam como alternativa documentada, não como requisito implícito. NFC/NPSS não deve ser descrito como
+controle de segurança de identifiers.
+
+## 6. Evolução e referência entre policies
+
+Foram comparadas referências parentais implícitas — um digest cujo algoritmo/schema depende da run
+filha — e um framing mínimo estável, versionado fora do codec substituível. A primeira opção deixa um
+fork V2 incapaz de interpretar um checkpoint V1 quando mudam algoritmo, comprimento ou grammar. A
+segunda repete metadados, mas torna a verificação autocontida.
+
+**Recomendação:** usar o
+[`Cross-policy Checkpoint Reference V1`](../architecture/cross-policy-checkpoint-reference-v1.md),
+com policy id/hash de origem, domain/schema/version, algoritmo, comprimento e bytes do digest.
+
+A fronteira de evolução também precisa distinguir política global de regra local. Layout/type/range,
+enum/role e ordering/duplicate policy de campo são schema-versioned; envelope, CBOR profile,
+primitivos, Unicode, identifier grammar, map ordering, float e digest são codec-versioned. Bundle
+novo nunca entra numa run existente se não estava pinado no genesis.
+
+## 7. Recomendação final
 
 Adotar `COTE Causal Canonical Codec V1`:
 
@@ -152,11 +191,13 @@ Adotar `COTE Causal Canonical Codec V1`:
 - records como arrays na ordem do schema; CDDL como fonte de forma;
 - profile fechado para primitivos, maps, sequências e sets;
 - NFC/NPSS Unicode 15.1.0;
+- identificadores causais ASCII e conteúdo humano Unicode explicitamente separados;
 - floats finitos apenas, `-0.0` normalizado, sem coerção integer/float;
 - SHA-256 de 32 bytes;
 - ids e digests como bytes dentro de records; forma textual só para views;
 - domain tag distinto por papel semântico;
 - policy/schema bundle e vetores golden hashados e fixados no genesis;
+- referência cross-policy autocontida para checkpoint parental;
 - replay estrito com codec antigo; mudança de codec exige fork, nunca rehash in-place.
 
 O contrato completo está em

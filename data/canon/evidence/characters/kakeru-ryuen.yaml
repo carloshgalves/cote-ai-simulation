@@ -1,0 +1,145 @@
+schema_version: 1
+collection: evidence.characters.kakeru-ryuen
+note: Behavioral evidence for the Y1_START character pack; all observed events occur after the horizon.
+records:
+  - id: ev.ryuen.v02.proxy-sudo-trap
+    schema_version: 1
+    text: >
+      Ryūen is revealed as the organizer behind a scheme in which Class C students provoke Sudo and
+      then attempt to use the resulting incident against Class D, showing preference for indirect setup
+      before overt confrontation.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: Assault-incident arc in Volume 2.
+    actors: [actor.kakeru-ryuen]
+    situation_tags: [deception, proxy-action, coercion, strategy]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v02
+          locator: {section: "epilogue", scene: "Ryuen revealed behind Sudo incident"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_2/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.ryuen.v02.direct-challenge
+    schema_version: 1
+    text: >
+      After operating through others, Ryūen is willing to confront Horikita directly and use pressure
+      and intimidation once visibility serves his purpose.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: End of the Volume 2 conflict.
+    actors: [actor.kakeru-ryuen, actor.suzune-horikita]
+    situation_tags: [confrontation, intimidation, control]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v02
+          locator: {section: "epilogue", scene: "Ryuen confronts Horikita"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_2/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.ryuen.v03.spy-and-leader-control
+    schema_version: 1
+    text: >
+      During the island exam, Ryūen uses subordinate information sources and leader-identification
+      mechanics to pursue control of the scoring situation instead of relying only on his class's
+      visible performance.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: Deserted-island special test in Volume 3.
+    actors: [actor.kakeru-ryuen, actor.kiyotaka-ayanokoji]
+    situation_tags: [exam-strategy, information-gathering, delegation, control]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v03
+          locator: {scene: "Class C island strategy and leader information"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_3/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.ryuen.v03.hidden-state-miss
+    schema_version: 1
+    text: >
+      Ryūen's island plan fails when he commits to an inferred hidden leader state that Kiyotaka has
+      already changed, illustrating that aggressive information gathering does not make his conclusions infallible.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: Island-exam resolution in Volume 3.
+    actors: [actor.kakeru-ryuen, actor.kiyotaka-ayanokoji]
+    situation_tags: [blind-spot, inference-error, overconfidence, exam-strategy]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v03
+          locator: {section: "epilogue", scene: "leader-guess resolution"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_3/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.ryuen.v07.search-for-x
+    schema_version: 1
+    text: >
+      Later in the year Ryūen becomes focused on identifying the hidden Class D strategist he calls
+      X. This is recorded specifically as a future-only goal and must not exist in his Y1_START state.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM2}
+      origin: UNKNOWN
+      basis: Search-for-X storyline in Volume 7.
+    actors: [actor.kakeru-ryuen, actor.kiyotaka-ayanokoji]
+    situation_tags: [future-goal, investigation, opponent-modeling]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v07
+          locator: {section: "search for X"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Kakeru_Ry%C5%ABen"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]

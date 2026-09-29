@@ -1,0 +1,179 @@
+schema_version: 1
+collection: evidence.characters.kiyotaka-ayanokoji
+note: >
+  Behavioral evidence only. Later-volume observations may support pre-existing tendencies,
+  but never become Y1_START memories or privileged knowledge.
+records:
+  - id: ev.kiyotaka.v01.avoid-unnecessary-involvement
+    schema_version: 1
+    text: >
+      Early in his school life, Kiyotaka notices a public interpersonal problem and elects
+      not to insert himself when he has no compelling reason to do so.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_M01}
+      origin: UNKNOWN
+      basis: Occurs during the opening portion of Volume 1.
+    actors: [actor.kiyotaka-ayanokoji]
+    situation_tags: [nonintervention, exposure-management, social]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 1, scene: "commute / seat dispute"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.kiyotaka.v01.ordinary-social-life
+    schema_version: 1
+    text: >
+      Kiyotaka wants an ordinary school experience and social connections, but his first
+      attempts at self-introduction and friendship are noticeably awkward rather than socially dominant.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_M01}
+      origin: UNKNOWN
+      basis: Opening classroom interactions in Volume 1.
+    actors: [actor.kiyotaka-ayanokoji]
+    situation_tags: [social, self-presentation, ordinary-life]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 1, scene: "first classroom introductions"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.kiyotaka.v01.redirect-credit
+    schema_version: 1
+    text: >
+      When helping the class avoid academic failure, Kiyotaka obtains useful prior test material
+      but arranges for Kushida to receive the visible credit instead of presenting himself as the solver.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_M01}
+      origin: UNKNOWN
+      basis: Study-group and test-preparation events in Volume 1.
+    actors: [actor.kiyotaka-ayanokoji, actor.kikyo-kushida]
+    situation_tags: [academic, indirect-action, credit-routing, concealment]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 7, scene: "old test questions / class study effort"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.kiyotaka.v01.downplay-visible-ability
+    schema_version: 1
+    text: >
+      When attention is drawn to his apparent physical condition, Kiyotaka responds by minimizing
+      its significance and frames his immediate objective around not standing out rather than proving superiority.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_M01}
+      origin: UNKNOWN
+      basis: Early physical-education and pool interactions in Volume 1.
+    actors: [actor.kiyotaka-ayanokoji]
+    situation_tags: [self-presentation, concealment, physical-context]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 4, scene: "physical-education / pool conversation"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.kiyotaka.v03.hidden-island-strategy
+    schema_version: 1
+    text: >
+      During the island exam, Kiyotaka combines observations about opposing information gathering
+      with the exam rules, changes the exposed leader state, and lets Horikita remain the public face
+      of a successful outcome.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: Deserted-island special test in Volume 3.
+    actors: [actor.kiyotaka-ayanokoji, actor.suzune-horikita, actor.kakeru-ryuen]
+    situation_tags: [exam-strategy, observation, inference, deception, concealment]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v03
+          locator: {section: "epilogue", scene: "leader swap and strategy explanation"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_3/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.kiyotaka.pre-y1.white-room-self-knowledge
+    schema_version: 1
+    text: >
+      Later material establishes a pre-enrollment White Room upbringing for Kiyotaka. For the Y1_START
+      pack this supports only his private knowledge of his own past; it grants no other student access
+      to that background and no access to unrelated secrets.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: PRE_Y1}
+      origin: UNKNOWN
+      basis: The described upbringing predates enrollment; the narrative revelation occurs later.
+    actors: [actor.kiyotaka-ayanokoji]
+    situation_tags: [background, private-knowledge, white-room]
+    divergence_sensitive: false
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v07
+          locator: {section: "White Room background revelations"}
+          quote_policy: paraphrase-only
+          strength: primary
+        - work: ln.jp.y1.v00
+          locator: {section: "Kiyotaka pre-enrollment background"}
+          quote_policy: paraphrase-only
+          strength: corroborating
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Kiyotaka_Ayanok%C5%8Dji"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]

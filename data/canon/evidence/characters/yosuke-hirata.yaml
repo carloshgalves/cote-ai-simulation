@@ -1,0 +1,172 @@
+schema_version: 1
+collection: evidence.characters.yosuke-hirata
+note: Behavioral and private-background evidence for the Y1_START character pack.
+records:
+  - id: ev.hirata.v01.initiate-class-cohesion
+    schema_version: 1
+    text: >
+      Hirata takes initiative during the first classroom introductions, encouraging classmates to
+      speak and reducing social friction rather than waiting for a formal authority to organize them.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_M01}
+      origin: UNKNOWN
+      basis: Opening classroom interactions in Volume 1.
+    actors: [actor.yosuke-hirata]
+    situation_tags: [leadership, cohesion, social, facilitation]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 1, scene: "first classroom introductions"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.hirata.v01.organize-study-support
+    schema_version: 1
+    text: >
+      Hirata organizes a study group for weaker classmates and treats academic failure as a collective
+      problem to be addressed through support and coordination.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_M01}
+      origin: UNKNOWN
+      basis: Pre-midterm study effort in Volume 1.
+    actors: [actor.yosuke-hirata]
+    situation_tags: [academic, leadership, support, coordination]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 7, scene: "study group for weak students"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.hirata.v02.support-sudo-response
+    schema_version: 1
+    text: >
+      When Sudo is accused, Hirata supports the class effort to help him rather than using the crisis
+      as a reason to isolate a difficult classmate.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: Assault-incident response in Volume 2.
+    actors: [actor.yosuke-hirata, actor.kikyo-kushida]
+    situation_tags: [group-support, cohesion, conflict]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v02
+          locator: {chapter: 2, scene: "class response to Sudo accusation"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_2/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.hirata.v03.deescalate-confrontation
+    schema_version: 1
+    text: >
+      In a tense encounter involving Sudo and Ryūen, Hirata acts to prevent the confrontation from
+      escalating, prioritizing immediate group stability over dominance.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: First-semester special-test period in Volume 3.
+    actors: [actor.yosuke-hirata, actor.kakeru-ryuen]
+    situation_tags: [deescalation, conflict, leadership, risk-management]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v03
+          locator: {section: "epilogue", scene: "Sudo and Ryuen confrontation"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_3/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.hirata.pre-y1.bullying-trauma
+    schema_version: 1
+    text: >
+      Later material describes a severe pre-enrollment experience with peer bullying and its aftermath
+      that Hirata remembers at school entry. The pack uses this only as private background relevant to
+      his aversion to sacrificing or abandoning classmates.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: PRE_Y1}
+      origin: UNKNOWN
+      basis: The formative events occur before enrollment although the narrative reveals them later.
+    actors: [actor.yosuke-hirata]
+    situation_tags: [background, private-knowledge, cohesion, trauma-history]
+    divergence_sensitive: false
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v10
+          locator: {section: "Hirata background / class poll"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_10/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.hirata.v10.sacrifice-choice-breakdown
+    schema_version: 1
+    text: >
+      When an exam later forces the class to identify someone for expulsion, Hirata's usual consensus
+      strategy breaks down; he resists selecting a classmate and is willing to redirect the cost toward himself.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM3}
+      origin: UNKNOWN
+      basis: Class Poll events in Volume 10.
+    actors: [actor.yosuke-hirata]
+    situation_tags: [blind-spot, forced-choice, self-sacrifice, cohesion]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v10
+          locator: {section: "Class Poll"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_10/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]

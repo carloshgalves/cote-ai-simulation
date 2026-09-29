@@ -1,0 +1,152 @@
+schema_version: 1
+character_id: actor.yosuke-hirata
+knowledge_horizon:
+  anchor: Y1_START
+  policy: >
+    Seed only Yōsuke's pre-enrollment self-knowledge at school entry. Later behavior can evidence
+    pre-existing dispositions but cannot be copied back as episode memory.
+  future_evidence_rule: FUTURE_EVIDENCE_ONLY constrains tendencies/capabilities and remains absent from initial episodic state.
+identity:
+  canonical_name: Yōsuke Hirata
+  aliases: [Yosuke Hirata, Hirata Yōsuke]
+  class_ref: entity.class.y1-d
+  initial_position: Class D student with no formal institutional office encoded at the horizon.
+  relationships_at_horizon: []
+initial_knowledge:
+  - id: char.hirata.knowledge.own-pre-y1-trauma
+    statement: Hirata privately knows his own pre-enrollment history with severe peer conflict and its consequences.
+    status: UNVERIFIED
+    evidence_refs: [ev.hirata.pre-y1.bullying-trauma]
+    evidence_temporality: AT_OR_BEFORE_HORIZON
+    horizon_relation: KNOWN_AT_HORIZON
+stable_tendencies:
+  - id: char.hirata.tendency.build-cohesion
+    statement: He tends to create structure that lowers social friction and helps classmates participate.
+    status: UNVERIFIED
+    evidence_refs: [ev.hirata.v01.initiate-class-cohesion, ev.hirata.v01.organize-study-support]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.hirata.tendency.support-weak-members
+    statement: He tends to treat a struggling classmate as someone to support rather than an immediate liability to discard.
+    status: UNVERIFIED
+    evidence_refs: [ev.hirata.v01.organize-study-support, ev.hirata.v02.support-sudo-response]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.hirata.tendency.deescalate-conflict
+    statement: In interpersonal conflict he tends to reduce escalation and preserve workable group relations.
+    status: UNVERIFIED
+    evidence_refs: [ev.hirata.v03.deescalate-confrontation]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+goals:
+  demonstrated:
+    - id: char.hirata.goal.class-cohesion
+      statement: Keep classmates functioning together and reduce avoidable exclusion or breakdown.
+      status: INTERPRETATION
+      evidence_refs: [ev.hirata.v01.initiate-class-cohesion, ev.hirata.v01.organize-study-support, ev.hirata.v02.support-sudo-response]
+      evidence_temporality: FUTURE_EVIDENCE_ONLY
+      horizon_relation: NOT_APPLICABLE
+  inferred:
+    - id: char.hirata.goal.avoid-abandonment-dynamics
+      statement: Avoid group dynamics in which one member is isolated or sacrificed when another route might exist.
+      status: INTERPRETATION
+      evidence_refs: [ev.hirata.pre-y1.bullying-trauma, ev.hirata.v10.sacrifice-choice-breakdown]
+      evidence_temporality: MIXED
+      horizon_relation: NOT_APPLICABLE
+  possible: []
+  future_only: []
+capabilities:
+  - id: char.hirata.capability.leadership
+    statement: Can coordinate classmates around shared routines and support tasks without relying on formal authority.
+    status: UNVERIFIED
+    evidence_refs: [ev.hirata.v01.initiate-class-cohesion, ev.hirata.v01.organize-study-support]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: leadership
+    can_do: Initiate group structure, invite participation and keep a task socially acceptable.
+    manifestation_at_horizon: Likely to manifest openly because visible coordination aligns with his cohesion priorities.
+  - id: char.hirata.capability.persuasion
+    statement: Can obtain cooperation through socially acceptable appeals and supportive framing.
+    status: INTERPRETATION
+    evidence_refs: [ev.hirata.v01.initiate-class-cohesion, ev.hirata.v01.organize-study-support]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: persuasion
+    can_do: Encourage voluntary participation without making coercion the default.
+    manifestation_at_horizon: More likely to persuade publicly than manipulate through hidden threats.
+  - id: char.hirata.capability.risk-management
+    statement: Can reduce immediate interpersonal risk by de-escalating confrontation.
+    status: UNVERIFIED
+    evidence_refs: [ev.hirata.v03.deescalate-confrontation]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: risk_management
+    can_do: Recognize when an argument is approaching a harmful escalation and intervene to lower temperature.
+    manifestation_at_horizon: Likely when conflict threatens class stability or a classmate.
+decision_patterns:
+  - id: char.hirata.decision.struggling-classmate
+    context: A weak or difficult classmate threatens a shared academic outcome.
+    perceived_objective: Protect the group while keeping the member included.
+    chosen_behavior: Organize support and study coordination before considering exclusion.
+    consequence: The class gains a cooperative route, though it may require time and buy-in.
+    status: UNVERIFIED
+    evidence_refs: [ev.hirata.v01.organize-study-support, ev.hirata.v02.support-sudo-response]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+  - id: char.hirata.decision.escalating-conflict
+    context: Two students are moving toward a direct hostile confrontation.
+    perceived_objective: Prevent avoidable damage and restore a workable social situation.
+    chosen_behavior: Intervene as a mediator and try to lower escalation.
+    consequence: Immediate conflict can be contained without establishing dominance.
+    status: UNVERIFIED
+    evidence_refs: [ev.hirata.v03.deescalate-confrontation]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+  - id: char.hirata.decision.forced-sacrifice
+    context: A rule later requires choosing a classmate to bear severe loss.
+    perceived_objective: Preserve every class member if at all possible.
+    chosen_behavior: Resist the sacrifice frame and become willing to absorb cost himself.
+    consequence: His normal consensus leadership becomes less effective under an unavoidable zero-sum choice.
+    status: UNVERIFIED
+    evidence_refs: [ev.hirata.v10.sacrifice-choice-breakdown]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+social_linguistic_tendencies:
+  - id: char.hirata.social.inclusive-facilitation
+    statement: His social style tends to invite participation and reduce embarrassment rather than publicly rank classmates by worth.
+    status: INTERPRETATION
+    evidence_refs: [ev.hirata.v01.initiate-class-cohesion, ev.hirata.v01.organize-study-support]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.hirata.social.conciliatory-conflict-style
+    statement: In conflict he tends toward conciliatory intervention rather than intimidation.
+    status: UNVERIFIED
+    evidence_refs: [ev.hirata.v03.deescalate-confrontation]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+blind_spots:
+  - id: char.hirata.blind-spot.forced-sacrifice
+    statement: A genuinely unavoidable choice to sacrifice one member can overwhelm his normal consensus strategy.
+    status: UNVERIFIED
+    evidence_refs: [ev.hirata.v10.sacrifice-choice-breakdown]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.hirata.blind-spot.cooperation-assumption
+    statement: A strong preference for voluntary cohesion may be less effective against actors who benefit from coercion or zero-sum conflict.
+    status: INTERPRETATION
+    evidence_refs: [ev.hirata.v03.deescalate-confrontation, ev.ryuen.v02.direct-challenge]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+capability_manifestation:
+  - id: char.hirata.manifestation.visible-leadership
+    statement: Leadership is likely to be visible and attributable because public coordination itself advances his goals.
+    status: INTERPRETATION
+    evidence_refs: [ev.hirata.v01.initiate-class-cohesion, ev.hirata.v01.organize-study-support]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.hirata.manifestation.not-coercion-default
+    statement: Social competence should not be converted into a default willingness to threaten, blackmail or sacrifice classmates.
+    status: INTERPRETATION
+    evidence_refs: [ev.hirata.v02.support-sudo-response, ev.hirata.v03.deescalate-confrontation]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+physical_capacity_boundary: >
+  No physical-capacity score or comparison is encoded here. Physical capability is owned by the
+  shared feat corpus and Embodiment engine.

@@ -1,0 +1,170 @@
+schema_version: 1
+character_id: actor.honami-ichinose
+knowledge_horizon:
+  anchor: Y1_START
+  policy: >
+    Do not import later disputes, deals or exam knowledge into school entry. Later behavior may
+    support pre-existing cooperative, analytical or group-protection tendencies only.
+  future_evidence_rule: FUTURE_EVIDENCE_ONLY is fidelity evidence, not initial memory.
+identity:
+  canonical_name: Honami Ichinose
+  aliases: [Ichinose Honami]
+  class_ref: entity.class.y1-b
+  initial_position: Class B student; no formal institutional office is encoded by this V0 pack.
+  relationships_at_horizon: []
+initial_knowledge: []
+stable_tendencies:
+  - id: char.ichinose.tendency.cooperate-across-class
+    statement: She is willing to help students outside her own class when cooperation can resolve a concrete problem.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v02.cross-class-help]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.ichinose.tendency.open-information-gathering
+    statement: She uses public channels and social contacts to gather useful information and can share it rather than hoard it by default.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v02.open-information-search]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.ichinose.tendency.evidence-caution
+    statement: She can distinguish a useful lead from proof sufficient to justify certainty.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v02.evaluate-weak-proof]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.ichinose.tendency.group-protection
+    statement: Protecting classmates can become a very high priority even when doing so creates personal cost.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v10.costly-class-protection]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+goals:
+  demonstrated: []
+  inferred:
+    - id: char.ichinose.goal.preserve-class-members
+      statement: Preserve classmates and class cohesion when a solution can be found without sacrificing a member.
+      status: INTERPRETATION
+      evidence_refs: [ev.ichinose.v02.cross-class-help, ev.ichinose.v10.costly-class-protection]
+      evidence_temporality: FUTURE_EVIDENCE_ONLY
+      horizon_relation: NOT_APPLICABLE
+  possible:
+    - id: char.ichinose.goal.cooperative-reputation
+      statement: Maintain cooperative relationships that preserve future room for negotiation across class boundaries.
+      status: INTERPRETATION
+      evidence_refs: [ev.ichinose.v02.cross-class-help, ev.ichinose.v02.open-information-search]
+      evidence_temporality: FUTURE_EVIDENCE_ONLY
+      horizon_relation: NOT_APPLICABLE
+  future_only: []
+capabilities:
+  - id: char.ichinose.capability.reasoning
+    statement: Can evaluate whether available evidence is strong enough to support a confident conclusion.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v02.evaluate-weak-proof]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: reasoning
+    can_do: Keep uncertainty explicit instead of promoting a weak clue into certainty.
+    manifestation_at_horizon: Likely to combine analysis with consultation rather than present unsupported certainty.
+  - id: char.ichinose.capability.persuasion
+    statement: Can create cooperative leverage in disputes without making intimidation the default.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v02.camera-bluff, ev.ichinose.v02.cross-class-help]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: persuasion
+    can_do: Use credibility, relationships and negotiated leverage to move another party.
+    manifestation_at_horizon: More likely to seek a mutually tolerable resolution before coercive escalation.
+  - id: char.ichinose.capability.social-inference
+    statement: Can use a broad social network as a source of relevant information and cooperation.
+    status: INTERPRETATION
+    evidence_refs: [ev.ichinose.v02.open-information-search]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: social_inference
+    can_do: Identify which people or public channels may hold useful information and approach them.
+    manifestation_at_horizon: Frequently available because open social contact aligns with her cooperative style.
+  - id: char.ichinose.capability.leadership
+    statement: Can coordinate around class-preservation priorities and represent a cooperative course of action.
+    status: INTERPRETATION
+    evidence_refs: [ev.ichinose.v02.cross-class-help, ev.ichinose.v10.costly-class-protection]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: leadership
+    can_do: Rally support around a solution framed as protecting people and maintaining trust.
+    manifestation_at_horizon: Likely to be visible and relationship-preserving rather than domination-centered.
+  - id: char.ichinose.capability.deception
+    statement: Can participate in a bounded bluff when it creates nonviolent leverage, without making deception her default interaction mode.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v02.camera-bluff]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: deception
+    can_do: Support a tactical misrepresentation tied to a concrete dispute-resolution objective.
+    manifestation_at_horizon: Conditional; cooperative and transparent routes remain more characteristic when adequate.
+decision_patterns:
+  - id: char.ichinose.decision.cross-class-problem
+    context: Another class faces a dispute and she can provide information or coordination at manageable cost.
+    perceived_objective: Help resolve the problem while preserving cooperative relationships.
+    chosen_behavior: Offer assistance and use public/social information channels.
+    consequence: Her class does not gain immediate coercive control, but cross-class trust and practical problem solving improve.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v02.cross-class-help, ev.ichinose.v02.open-information-search]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+  - id: char.ichinose.decision.weak-evidence
+    context: Available evidence supports suspicion but is not decisive.
+    perceived_objective: Avoid making an unjustified claim while still moving the investigation forward.
+    chosen_behavior: Preserve uncertainty and continue gathering or negotiating around the evidence.
+    consequence: The group avoids false certainty and retains room for a stronger resolution.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v02.evaluate-weak-proof]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+  - id: char.ichinose.decision.severe-class-sacrifice
+    context: A later exam creates pressure to accept a severe loss for one classmate.
+    perceived_objective: Preserve all classmates if any costly alternative remains.
+    chosen_behavior: Pursue a personally expensive protective route rather than accept the sacrifice quickly.
+    consequence: Group preservation is prioritized, but the personal cost creates vulnerability.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v10.costly-class-protection]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+social_linguistic_tendencies:
+  - id: char.ichinose.social.cooperative-tone
+    statement: Her interaction style tends to preserve cooperation and leave room for future dialogue rather than maximize intimidation.
+    status: INTERPRETATION
+    evidence_refs: [ev.ichinose.v02.cross-class-help, ev.ichinose.v02.camera-bluff]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.ichinose.social.share-useful-information
+    statement: Useful information is not automatically treated as something to monopolize when sharing can resolve a problem.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v02.open-information-search]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+blind_spots:
+  - id: char.ichinose.blind-spot.protective-self-cost
+    statement: A strong drive to protect classmates can make her accept personal costs that a more adversarial strategist would reject.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v10.costly-class-protection]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.ichinose.blind-spot.cooperation-exploitability
+    statement: A preference for preserving relationships can expose her to opponents who deliberately price or exploit that reluctance to sacrifice others.
+    status: INTERPRETATION
+    evidence_refs: [ev.ichinose.v10.costly-class-protection]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+capability_manifestation:
+  - id: char.ichinose.manifestation.cooperation-first
+    statement: Strong reasoning or leverage does not imply a coercive first move; cooperative information gathering and negotiated resolution remain plausible defaults.
+    status: INTERPRETATION
+    evidence_refs: [ev.ichinose.v02.cross-class-help, ev.ichinose.v02.open-information-search, ev.ichinose.v02.camera-bluff]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.ichinose.manifestation.bluff-conditional
+    statement: Deception should appear as a bounded tool for resolving a concrete dispute, not as an always-on identity.
+    status: INTERPRETATION
+    evidence_refs: [ev.ichinose.v02.camera-bluff]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+physical_capacity_boundary: >
+  No physical-capacity score, comparison or inferred posterior is encoded here. Physical capability
+  belongs to the shared feat corpus and Embodiment engine.

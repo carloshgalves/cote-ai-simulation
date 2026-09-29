@@ -6,18 +6,9 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "schema_version",
-    "character_id",
-    "knowledge_horizon",
-    "identity",
-    "initial_knowledge",
-    "stable_tendencies",
-    "goals",
-    "capabilities",
-    "decision_patterns",
-    "social_linguistic_tendencies",
-    "blind_spots",
-    "capability_manifestation",
+    "schema_version", "character_id", "knowledge_horizon", "identity", "initial_knowledge",
+    "stable_tendencies", "goals", "capabilities", "decision_patterns",
+    "social_linguistic_tendencies", "blind_spots", "capability_manifestation",
     "physical_capacity_boundary"
   ],
   "$defs": {
@@ -36,24 +27,40 @@
     "Assertion": {
       "type": "object",
       "additionalProperties": false,
+      "required": ["id", "statement", "status", "evidence_refs", "evidence_temporality", "horizon_relation"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(\\.[a-z0-9-]+)+$" },
+        "statement": { "type": "string", "minLength": 1 },
+        "status": { "$ref": "#/$defs/PackStatus" },
+        "evidence_refs": { "type": "array", "items": { "type": "string", "pattern": "^ev\\.[a-z0-9.-]+$" } },
+        "evidence_temporality": { "$ref": "#/$defs/EvidenceTemporality" },
+        "horizon_relation": { "$ref": "#/$defs/HorizonRelation" },
+        "notes": { "type": "string" }
+      }
+    },
+    "Capability": {
+      "type": "object",
+      "additionalProperties": false,
       "required": [
-        "id",
-        "statement",
-        "status",
-        "evidence_refs",
-        "evidence_temporality",
-        "horizon_relation"
+        "id", "statement", "status", "evidence_refs", "evidence_temporality", "horizon_relation",
+        "dimension", "can_do", "manifestation_at_horizon"
       ],
       "properties": {
         "id": { "type": "string", "pattern": "^[a-z0-9]+(\\.[a-z0-9-]+)+$" },
         "statement": { "type": "string", "minLength": 1 },
         "status": { "$ref": "#/$defs/PackStatus" },
-        "evidence_refs": {
-          "type": "array",
-          "items": { "type": "string", "pattern": "^ev\\.[a-z0-9.-]+$" }
-        },
+        "evidence_refs": { "type": "array", "items": { "type": "string", "pattern": "^ev\\.[a-z0-9.-]+$" } },
         "evidence_temporality": { "$ref": "#/$defs/EvidenceTemporality" },
         "horizon_relation": { "$ref": "#/$defs/HorizonRelation" },
+        "dimension": {
+          "type": "string",
+          "enum": [
+            "academic", "reasoning", "strategic_planning", "social_inference", "deception",
+            "persuasion", "leadership", "observation", "memory", "self_control", "risk_management"
+          ]
+        },
+        "can_do": { "type": "string", "minLength": 1 },
+        "manifestation_at_horizon": { "type": "string", "minLength": 1 },
         "notes": { "type": "string" }
       }
     }
@@ -80,20 +87,11 @@
         "aliases": { "type": "array", "items": { "type": "string" } },
         "class_ref": { "type": "string" },
         "initial_position": { "type": "string" },
-        "relationships_at_horizon": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/Assertion" }
-        }
+        "relationships_at_horizon": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } }
       }
     },
-    "initial_knowledge": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/Assertion" }
-    },
-    "stable_tendencies": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/Assertion" }
-    },
+    "initial_knowledge": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } },
+    "stable_tendencies": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } },
     "goals": {
       "type": "object",
       "additionalProperties": false,
@@ -105,53 +103,13 @@
         "future_only": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } }
       }
     },
-    "capabilities": {
-      "type": "array",
-      "items": {
-        "allOf": [
-          { "$ref": "#/$defs/Assertion" },
-          {
-            "type": "object",
-            "required": ["dimension", "can_do", "manifestation_at_horizon"],
-            "properties": {
-              "dimension": {
-                "type": "string",
-                "enum": [
-                  "academic",
-                  "reasoning",
-                  "strategic_planning",
-                  "social_inference",
-                  "deception",
-                  "persuasion",
-                  "leadership",
-                  "observation",
-                  "memory",
-                  "self_control",
-                  "risk_management"
-                ]
-              },
-              "can_do": { "type": "string" },
-              "manifestation_at_horizon": { "type": "string" }
-            }
-          }
-        ]
-      }
-    },
+    "capabilities": { "type": "array", "items": { "$ref": "#/$defs/Capability" } },
     "decision_patterns": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "id",
-          "context",
-          "perceived_objective",
-          "chosen_behavior",
-          "consequence",
-          "status",
-          "evidence_refs",
-          "evidence_temporality"
-        ],
+        "required": ["id", "context", "perceived_objective", "chosen_behavior", "consequence", "status", "evidence_refs", "evidence_temporality"],
         "properties": {
           "id": { "type": "string" },
           "context": { "type": "string" },
@@ -159,26 +117,14 @@
           "chosen_behavior": { "type": "string" },
           "consequence": { "type": "string" },
           "status": { "$ref": "#/$defs/PackStatus" },
-          "evidence_refs": {
-            "type": "array",
-            "items": { "type": "string", "pattern": "^ev\\.[a-z0-9.-]+$" }
-          },
+          "evidence_refs": { "type": "array", "items": { "type": "string", "pattern": "^ev\\.[a-z0-9.-]+$" } },
           "evidence_temporality": { "$ref": "#/$defs/EvidenceTemporality" }
         }
       }
     },
-    "social_linguistic_tendencies": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/Assertion" }
-    },
-    "blind_spots": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/Assertion" }
-    },
-    "capability_manifestation": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/Assertion" }
-    },
+    "social_linguistic_tendencies": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } },
+    "blind_spots": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } },
+    "capability_manifestation": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } },
     "physical_capacity_boundary": {
       "type": "string",
       "minLength": 1,

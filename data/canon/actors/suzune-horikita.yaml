@@ -1,0 +1,20 @@
+id: actor.suzune-horikita
+schema_version: 1
+entity_type: person
+name: Suzune Horikita
+aliases: [Horikita Suzune]
+part_of: entity.class.y1-d
+provenance:
+  epistemic_status: UNVERIFIED
+  supports:
+    - work: ln.y1.v01
+      locator: {chapter: 1}
+      quote_policy: paraphrase-only
+      strength: primary
+  discovered_via:
+    - tier: 5
+      ref: "https://you-zitsu.fandom.com/wiki/Suzune_Horikita"
+      retrieved_at: "2026-09-29"
+  verified_by: null
+  verified_at: null
+  continuity: [ln]

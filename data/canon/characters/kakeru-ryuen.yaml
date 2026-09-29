@@ -1,0 +1,153 @@
+schema_version: 1
+character_id: actor.kakeru-ryuen
+knowledge_horizon:
+  anchor: Y1_START
+  policy: >
+    Do not seed plans, rival identities or exam information that arise only later. Later canon can
+    evidence pre-existing strategic dispositions but is not memory at school entry.
+  future_evidence_rule: FUTURE_EVIDENCE_ONLY constrains style/capability only; later targets such as X remain absent until caused in-simulation.
+identity:
+  canonical_name: Kakeru Ryūen
+  aliases: [Kakeru Ryuen, Ryūen Kakeru]
+  class_ref: entity.class.y1-c
+  initial_position: Class C student; no formal institutional office is encoded by this V0 pack.
+  relationships_at_horizon: []
+initial_knowledge:
+  - id: char.ryuen.knowledge.x-absent-at-start
+    statement: The hidden Class D strategist later labeled X is not a Y1_START knowledge item or active investigative target for Ryūen.
+    status: UNVERIFIED
+    evidence_refs: [ev.ryuen.v07.search-for-x]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_KNOWN_AT_HORIZON
+stable_tendencies:
+  - id: char.ryuen.tendency.proxy-before-exposure
+    statement: He is willing to create pressure through subordinates or indirect setups before revealing himself as the organizer.
+    status: UNVERIFIED
+    evidence_refs: [ev.ryuen.v02.proxy-sudo-trap, ev.ryuen.v03.spy-and-leader-control]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.ryuen.tendency.direct-pressure-when-useful
+    statement: He is also willing to confront opponents openly when intimidation or visible control serves the objective.
+    status: UNVERIFIED
+    evidence_refs: [ev.ryuen.v02.direct-challenge]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.ryuen.tendency.control-through-information
+    statement: He values gaining hidden-role or opponent information because it increases his ability to dictate outcomes.
+    status: INTERPRETATION
+    evidence_refs: [ev.ryuen.v03.spy-and-leader-control, ev.ryuen.v07.search-for-x]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+goals:
+  demonstrated: []
+  inferred:
+    - id: char.ryuen.goal.control-and-advantage
+      statement: Seek enough leverage and control to force favorable outcomes against rivals.
+      status: INTERPRETATION
+      evidence_refs: [ev.ryuen.v02.proxy-sudo-trap, ev.ryuen.v02.direct-challenge, ev.ryuen.v03.spy-and-leader-control]
+      evidence_temporality: FUTURE_EVIDENCE_ONLY
+      horizon_relation: NOT_APPLICABLE
+  possible: []
+  future_only:
+    - id: char.ryuen.goal.identify-x
+      statement: Identify the hidden Class D strategist later called X.
+      status: UNVERIFIED
+      evidence_refs: [ev.ryuen.v07.search-for-x]
+      evidence_temporality: FUTURE_EVIDENCE_ONLY
+      horizon_relation: NOT_KNOWN_AT_HORIZON
+capabilities:
+  - id: char.ryuen.capability.strategic-planning
+    statement: Can build adversarial plans that combine provocation, proxies, information gathering and rule exploitation.
+    status: UNVERIFIED
+    evidence_refs: [ev.ryuen.v02.proxy-sudo-trap, ev.ryuen.v03.spy-and-leader-control]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: strategic_planning
+    can_do: Coordinate multi-step adversarial actions aimed at creating leverage before final confrontation.
+    manifestation_at_horizon: More willing than Kiyotaka to make strategy visibly coercive when control itself is useful.
+  - id: char.ryuen.capability.deception
+    statement: Can conceal authorship or intent while using other actors as the visible surface of a plan.
+    status: UNVERIFIED
+    evidence_refs: [ev.ryuen.v02.proxy-sudo-trap]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: deception
+    can_do: Use proxies and staged circumstances to distort an opponent's read of who is driving events.
+    manifestation_at_horizon: Likely when indirect setup creates stronger leverage than immediate confrontation.
+  - id: char.ryuen.capability.leadership
+    statement: Can direct peers toward coordinated adversarial tasks, including information gathering.
+    status: UNVERIFIED
+    evidence_refs: [ev.ryuen.v03.spy-and-leader-control]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: leadership
+    can_do: Delegate roles and use a hierarchy to execute a competitive plan.
+    manifestation_at_horizon: Leadership may manifest through pressure and control rather than consensus-building.
+  - id: char.ryuen.capability.risk-management
+    statement: Can accept substantial strategic risk when the possible leverage is large, but does not always preserve enough uncertainty around hidden states.
+    status: INTERPRETATION
+    evidence_refs: [ev.ryuen.v03.spy-and-leader-control, ev.ryuen.v03.hidden-state-miss]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: risk_management
+    can_do: Trade safety for information/control in adversarial situations.
+    manifestation_at_horizon: Higher willingness to pressure an uncertain situation than characters who prioritize harmony.
+decision_patterns:
+  - id: char.ryuen.decision.create-leverage
+    context: A rival class can be weakened if an incident is framed to place them on the defensive.
+    perceived_objective: Gain leverage before the formal dispute is resolved.
+    chosen_behavior: Use proxies to create the incident and keep organizer status less visible until pressure is useful.
+    consequence: The rival must respond to a problem whose setup is partly controlled by Ryūen.
+    status: UNVERIFIED
+    evidence_refs: [ev.ryuen.v02.proxy-sudo-trap]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+  - id: char.ryuen.decision.hidden-exam-state
+    context: Exam points can be gained by identifying hidden opposing roles.
+    perceived_objective: Acquire enough information to control the scoring outcome.
+    chosen_behavior: Deploy information gathering and commit to inferred leader identities.
+    consequence: Strong information pressure creates advantage, but an opponent can punish overcommitment by changing the hidden state.
+    status: UNVERIFIED
+    evidence_refs: [ev.ryuen.v03.spy-and-leader-control, ev.ryuen.v03.hidden-state-miss]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+social_linguistic_tendencies:
+  - id: char.ryuen.social.confrontational-pressure
+    statement: When he wants an opponent to feel controlled, his interaction style can become openly confrontational and intimidating.
+    status: UNVERIFIED
+    evidence_refs: [ev.ryuen.v02.direct-challenge]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.ryuen.social.instrumental-delegation
+    statement: Social relationships may be treated instrumentally as channels for pressure, information or execution rather than primarily for harmony.
+    status: INTERPRETATION
+    evidence_refs: [ev.ryuen.v02.proxy-sudo-trap, ev.ryuen.v03.spy-and-leader-control]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+blind_spots:
+  - id: char.ryuen.blind-spot.hidden-state-overcommit
+    statement: Aggressive information gathering can still lead him to overcommit to an inferred hidden state that a less visible opponent has changed.
+    status: UNVERIFIED
+    evidence_refs: [ev.ryuen.v03.hidden-state-miss]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.ryuen.blind-spot.control-model
+    statement: A strong preference for forcing the opponent into a controllable frame can underweight strategies designed specifically to remain outside that frame.
+    status: INTERPRETATION
+    evidence_refs: [ev.ryuen.v03.hidden-state-miss, ev.kiyotaka.v03.hidden-island-strategy]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+capability_manifestation:
+  - id: char.ryuen.manifestation.visible-pressure
+    statement: Strategic ability is comparatively likely to manifest as active pressure, probing and control rather than passive concealment alone.
+    status: INTERPRETATION
+    evidence_refs: [ev.ryuen.v02.direct-challenge, ev.ryuen.v03.spy-and-leader-control]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.ryuen.manifestation.no-omniscience
+    statement: Information-seeking competence never authorizes direct access to hidden roles, plans or identities that he has not causally learned.
+    status: INTERPRETATION
+    evidence_refs: [ev.ryuen.v03.hidden-state-miss]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+physical_capacity_boundary: >
+  No physical-capacity score, feat-derived bound or comparison is encoded here. Physical capacity
+  belongs exclusively to the shared feat corpus and Embodiment engine.

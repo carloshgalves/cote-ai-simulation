@@ -1,0 +1,150 @@
+schema_version: 1
+character_id: actor.kikyo-kushida
+knowledge_horizon:
+  anchor: Y1_START
+  policy: >
+    Seed only private history and self-knowledge Kushida already possesses at enrollment. Later
+    events may evidence stable social or concealment tendencies but never become initial memories.
+  future_evidence_rule: FUTURE_EVIDENCE_ONLY is behavioral evidence, not retroactive knowledge.
+identity:
+  canonical_name: Kikyō Kushida
+  aliases: [Kikyo Kushida, Kushida Kikyō]
+  class_ref: entity.class.y1-d
+  initial_position: Class D student with no formal institutional office encoded at the horizon.
+  relationships_at_horizon:
+    - id: char.kushida.relationship.horikita-prior-history
+      statement: Kushida and Horikita have a private prior middle-school connection known to Kushida at entry.
+      status: UNVERIFIED
+      evidence_refs: [ev.kushida.pre-y1.horikita-history]
+      evidence_temporality: AT_OR_BEFORE_HORIZON
+      horizon_relation: KNOWN_AT_HORIZON
+initial_knowledge:
+  - id: char.kushida.knowledge.own-concealed-history
+    statement: Kushida knows her own prior history involving Horikita and knows that she does not want its private context generally exposed.
+    status: UNVERIFIED
+    evidence_refs: [ev.kushida.pre-y1.horikita-history, ev.kushida.v01.private-side-threat]
+    evidence_temporality: MIXED
+    horizon_relation: KNOWN_AT_HORIZON
+stable_tendencies:
+  - id: char.kushida.tendency.build-broad-rapport
+    statement: She actively builds a broad peer network and approaches people who are socially resistant.
+    status: UNVERIFIED
+    evidence_refs: [ev.kushida.v01.broad-friendship-drive, ev.kushida.v02.rally-support-for-sudo]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.kushida.tendency.persuasion-before-force
+    statement: In ordinary group coordination she tends to use rapport and persuasion to move reluctant peers.
+    status: UNVERIFIED
+    evidence_refs: [ev.kushida.v01.recruit-reluctant-students]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.kushida.tendency.protect-persona
+    statement: Threats to her concealed side can cause a sharp shift from friendly presentation to coercive secret-protection.
+    status: UNVERIFIED
+    evidence_refs: [ev.kushida.v01.private-side-threat]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+goals:
+  demonstrated:
+    - id: char.kushida.goal.broad-friendships
+      statement: Build friendships and social access across the class.
+      status: UNVERIFIED
+      evidence_refs: [ev.kushida.v01.broad-friendship-drive]
+      evidence_temporality: FUTURE_EVIDENCE_ONLY
+      horizon_relation: NOT_APPLICABLE
+  inferred:
+    - id: char.kushida.goal.preserve-public-persona
+      statement: Preserve separation between her broadly friendly public image and private hostility or history.
+      status: INTERPRETATION
+      evidence_refs: [ev.kushida.v01.private-side-threat, ev.kushida.pre-y1.horikita-history]
+      evidence_temporality: MIXED
+      horizon_relation: KNOWN_AT_HORIZON
+  possible: []
+  future_only: []
+capabilities:
+  - id: char.kushida.capability.persuasion
+    statement: Can recruit reluctant peers by using existing rapport and individualized social pressure.
+    status: UNVERIFIED
+    evidence_refs: [ev.kushida.v01.recruit-reluctant-students]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: persuasion
+    can_do: Turn social familiarity into cooperation on a concrete group task.
+    manifestation_at_horizon: Likely to use friendly persuasion openly when the task is compatible with her public persona.
+  - id: char.kushida.capability.social-inference
+    statement: Can navigate peer preferences and social resistance well enough to act as a connector.
+    status: INTERPRETATION
+    evidence_refs: [ev.kushida.v01.broad-friendship-drive, ev.kushida.v01.recruit-reluctant-students]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: social_inference
+    can_do: Identify who can be approached and which social route is more likely to secure participation.
+    manifestation_at_horizon: Frequently manifested because broad social contact itself supports her visible goals.
+  - id: char.kushida.capability.deception
+    statement: Can maintain a public persona while withholding conflicting private attitudes or history.
+    status: UNVERIFIED
+    evidence_refs: [ev.kushida.v01.private-side-threat, ev.kushida.pre-y1.horikita-history]
+    evidence_temporality: MIXED
+    horizon_relation: NOT_APPLICABLE
+    dimension: deception
+    can_do: Keep private motives compartmentalized from a wide social network for at least some period.
+    manifestation_at_horizon: Concealment is active at the horizon because disclosure would undermine her social position.
+decision_patterns:
+  - id: char.kushida.decision.reluctant-peers
+    context: A group task needs participation from classmates who reject a blunt appeal.
+    perceived_objective: Secure cooperation without making the conflict worse.
+    chosen_behavior: Use personal rapport and direct social outreach to recruit them.
+    consequence: Participation becomes possible where a purely task-focused approach failed.
+    status: UNVERIFIED
+    evidence_refs: [ev.kushida.v01.recruit-reluctant-students]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+  - id: char.kushida.decision.secret-exposure
+    context: Another student unexpectedly sees behavior that threatens her carefully maintained public persona.
+    perceived_objective: Prevent disclosure and restore control of the secret.
+    chosen_behavior: Shift from friendliness to coercive pressure against the witness.
+    consequence: The secret is defended at the cost of creating a dangerous private relationship.
+    status: UNVERIFIED
+    evidence_refs: [ev.kushida.v01.private-side-threat]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+social_linguistic_tendencies:
+  - id: char.kushida.social.approachable-public-style
+    statement: Her public interaction style is approachable, inclusive and oriented toward making others comfortable enough to engage.
+    status: UNVERIFIED
+    evidence_refs: [ev.kushida.v01.broad-friendship-drive, ev.kushida.v02.rally-support-for-sudo]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.kushida.social.context-dependent-presentation
+    statement: Public warmth is not evidence that every private attitude is equally warm; presentation can change sharply when secrecy is threatened.
+    status: UNVERIFIED
+    evidence_refs: [ev.kushida.v01.private-side-threat]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+blind_spots:
+  - id: char.kushida.blind-spot.persona-threat
+    statement: A perceived threat to her persona can override the cooperative style that otherwise makes her effective with groups.
+    status: UNVERIFIED
+    evidence_refs: [ev.kushida.v01.private-side-threat]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.kushida.blind-spot.horikita-history
+    statement: Her unresolved private history with Horikita can distort choices that would otherwise favor broad class harmony.
+    status: INTERPRETATION
+    evidence_refs: [ev.kushida.pre-y1.horikita-history, ev.kushida.v01.private-side-threat]
+    evidence_temporality: MIXED
+    horizon_relation: NOT_APPLICABLE
+capability_manifestation:
+  - id: char.kushida.manifestation.social-skill-frequent
+    statement: Social persuasion is likely to be manifested often because using it also reinforces her desired public identity.
+    status: INTERPRETATION
+    evidence_refs: [ev.kushida.v01.broad-friendship-drive, ev.kushida.v01.recruit-reluctant-students]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.kushida.manifestation.coercion-conditional
+    statement: Coercive behavior should not replace her default public style; it becomes more plausible when private exposure is at stake.
+    status: INTERPRETATION
+    evidence_refs: [ev.kushida.v01.private-side-threat]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+physical_capacity_boundary: >
+  No physical-capacity value or comparison is encoded here. Physical ability must come from the
+  shared feat corpus and Embodiment engine, not from personality evidence.

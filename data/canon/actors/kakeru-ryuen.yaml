@@ -1,0 +1,20 @@
+id: actor.kakeru-ryuen
+schema_version: 1
+entity_type: person
+name: Kakeru Ryūen
+aliases: [Kakeru Ryuen, Ryūen Kakeru]
+part_of: entity.class.y1-c
+provenance:
+  epistemic_status: UNVERIFIED
+  supports:
+    - work: ln.y1.v02
+      locator: {section: "Class C conflict arc"}
+      quote_policy: paraphrase-only
+      strength: primary
+  discovered_via:
+    - tier: 5
+      ref: "https://you-zitsu.fandom.com/wiki/Kakeru_Ry%C5%ABen"
+      retrieved_at: "2026-09-29"
+  verified_by: null
+  verified_at: null
+  continuity: [ln]

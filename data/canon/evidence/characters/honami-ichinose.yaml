@@ -1,0 +1,143 @@
+schema_version: 1
+collection: evidence.characters.honami-ichinose
+note: Behavioral evidence for the Y1_START character pack.
+records:
+  - id: ev.ichinose.v02.cross-class-help
+    schema_version: 1
+    text: >
+      Ichinose offers practical help to Class D during the Sudo incident even though the immediate
+      dispute is not her class's problem, treating useful cooperation as preferable to indifference.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: Assault-incident investigation in Volume 2.
+    actors: [actor.honami-ichinose, actor.suzune-horikita, actor.kiyotaka-ayanokoji]
+    situation_tags: [cooperation, cross-class, prosocial, negotiation]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v02
+          locator: {chapter: 3, scene: "Ichinose offers help in Sudo case"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_2/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.ichinose.v02.open-information-search
+    schema_version: 1
+    text: >
+      Ichinose uses public school channels and her social network to gather information relevant to
+      the Sudo case, then shares useful findings rather than hoarding them automatically.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: Evidence-gathering portion of Volume 2.
+    actors: [actor.honami-ichinose]
+    situation_tags: [information-gathering, networking, cooperation, investigation]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v02
+          locator: {chapter: 4, scene: "bulletin board and school information search"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_2/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.ichinose.v02.evaluate-weak-proof
+    schema_version: 1
+    text: >
+      Ichinose distinguishes useful leads from proof strong enough to settle the dispute, showing
+      caution about treating incomplete information as a certain conclusion.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: Evidence evaluation in Volume 2.
+    actors: [actor.honami-ichinose]
+    situation_tags: [reasoning, uncertainty, evidence-evaluation]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v02
+          locator: {chapter: 4, scene: "assessing evidence for the Sudo dispute"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_2/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.ichinose.v02.camera-bluff
+    schema_version: 1
+    text: >
+      Ichinose participates in a bluff involving supposed camera evidence to create bargaining leverage
+      and end the Sudo dispute without escalating into direct physical conflict.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: Resolution of the Volume 2 dispute.
+    actors: [actor.honami-ichinose, actor.kiyotaka-ayanokoji]
+    situation_tags: [deception, negotiation, deescalation, leverage]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v02
+          locator: {section: "epilogue", scene: "camera bluff resolution"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_2/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.ichinose.v10.costly-class-protection
+    schema_version: 1
+    text: >
+      In the later Class Poll crisis, Ichinose pursues a personally costly route to protect classmates
+      rather than accepting an easy sacrifice, showing how group-preservation priorities can become a vulnerability.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM3}
+      origin: UNKNOWN
+      basis: Class Poll events in Volume 10.
+    actors: [actor.honami-ichinose]
+    situation_tags: [group-protection, self-sacrifice, blind-spot, negotiation]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v10
+          locator: {section: "Class Poll / Ichinose negotiation"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_10/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]

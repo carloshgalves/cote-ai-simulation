@@ -1,0 +1,151 @@
+schema_version: 1
+character_id: actor.suzune-horikita
+knowledge_horizon:
+  anchor: Y1_START
+  policy: >
+    Seed only knowledge Suzune possesses at school entry. Later canon may evidence pre-existing
+    dispositions but cannot add memories, learned secrets, or relationships to the initial state.
+  future_evidence_rule: FUTURE_EVIDENCE_ONLY constrains fidelity only and never retroactively changes Y1_START knowledge.
+identity:
+  canonical_name: Suzune Horikita
+  aliases: [Horikita Suzune]
+  class_ref: entity.class.y1-d
+  initial_position: Class D student with no formal school leadership office encoded at the horizon.
+  relationships_at_horizon:
+    - id: char.horikita.relationship.manabu-sibling
+      statement: Suzune privately knows Manabu Horikita as her older brother before enrollment.
+      status: UNVERIFIED
+      evidence_refs: [ev.horikita.pre-y1.manabu-sibling]
+      evidence_temporality: AT_OR_BEFORE_HORIZON
+      horizon_relation: KNOWN_AT_HORIZON
+initial_knowledge:
+  - id: char.horikita.knowledge.manabu-family
+    statement: She knows her own sibling relationship with Manabu and her desire for his acknowledgment.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.pre-y1.manabu-sibling]
+    evidence_temporality: AT_OR_BEFORE_HORIZON
+    horizon_relation: KNOWN_AT_HORIZON
+stable_tendencies:
+  - id: char.horikita.tendency.self-reliant
+    statement: She tends to prefer self-reliance and does not treat friendship-building as a goal by itself.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v01.self-reliant-class-a]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.horikita.tendency.performance-first
+    statement: When classmates underperform, she tends to address the deficiency directly rather than soften the diagnosis for harmony.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v01.study-group-friction]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.horikita.tendency.observable-cue-inference
+    statement: She can focus on observable behavior and use it to form a targeted hypothesis about what happened.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v02.witness-inference]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+goals:
+  demonstrated:
+    - id: char.horikita.goal.class-a
+      statement: Reach Class A.
+      status: UNVERIFIED
+      evidence_refs: [ev.horikita.v01.self-reliant-class-a]
+      evidence_temporality: FUTURE_EVIDENCE_ONLY
+      horizon_relation: NOT_APPLICABLE
+    - id: char.horikita.goal.manabu-acknowledgment
+      statement: Gain acknowledgment from her older brother Manabu.
+      status: UNVERIFIED
+      evidence_refs: [ev.horikita.pre-y1.manabu-sibling]
+      evidence_temporality: AT_OR_BEFORE_HORIZON
+      horizon_relation: KNOWN_AT_HORIZON
+  inferred: []
+  possible: []
+  future_only: []
+capabilities:
+  - id: char.horikita.capability.reasoning
+    statement: Can form useful hypotheses from observed behavior in an investigation.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v02.witness-inference]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: reasoning
+    can_do: Connect behavioral cues to a plausible witness or explanation.
+    manifestation_at_horizon: More likely to state a concrete inference directly than conceal it for social ease.
+  - id: char.horikita.capability.observation
+    statement: Can notice behavior relevant to a practical problem.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v02.witness-inference]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: observation
+    can_do: Track specific behavioral signals relevant to an objective.
+    manifestation_at_horizon: Used in service of the problem she has accepted as worth solving.
+  - id: char.horikita.capability.leadership
+    statement: Can organize classmates around a performance objective, though early execution may create resistance.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v01.study-group-friction, ev.horikita.v03.overcommit-while-ill]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+    dimension: leadership
+    can_do: Take visible responsibility and specify what others need to improve.
+    manifestation_at_horizon: Likely to lead directly when she sees a competence problem, with limited initial emphasis on buy-in.
+decision_patterns:
+  - id: char.horikita.decision.weak-classmate
+    context: Weak classmates threaten an academic class objective.
+    perceived_objective: Raise their performance enough to protect the class result.
+    chosen_behavior: Organize direct study support while confronting deficiencies explicitly.
+    consequence: The performance goal is clear, but harsh delivery can reduce cooperation.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v01.study-group-friction]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+  - id: char.horikita.decision.possible-witness
+    context: A dispute lacks a confirmed witness but one student's behavior appears unusual.
+    perceived_objective: Identify an evidence source that can change the case.
+    chosen_behavior: Infer a witness hypothesis from observed behavior and investigate it.
+    consequence: The investigation gains a concrete lead without requiring secret knowledge.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v02.witness-inference]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+social_linguistic_tendencies:
+  - id: char.horikita.social.direct-task-focused
+    statement: Her communication tends toward direct, task-focused evaluation rather than rapport-first persuasion.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v01.study-group-friction]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.horikita.social.low-friendship-drive
+    statement: She does not initially seek social closeness merely to expand her network.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v01.self-reliant-class-a]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+blind_spots:
+  - id: char.horikita.blind-spot.buy-in
+    statement: Correctly identifying a performance problem does not guarantee she will secure voluntary cooperation from the people she criticizes.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v01.study-group-friction]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.horikita.blind-spot.overcommitment
+    statement: Determination and reluctance to yield responsibility can make her persist after her own condition is undermining effectiveness.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v03.overcommit-while-ill]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+capability_manifestation:
+  - id: char.horikita.manifestation.visible-responsibility
+    statement: When she believes a problem matters, she is comparatively willing to attach her own name and authority to the attempted solution.
+    status: INTERPRETATION
+    evidence_refs: [ev.horikita.v01.study-group-friction, ev.horikita.v03.overcommit-while-ill]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+  - id: char.horikita.manifestation.not-consensus-default
+    statement: Available analytical ability does not imply she will choose the most socially accommodating route first.
+    status: INTERPRETATION
+    evidence_refs: [ev.horikita.v01.study-group-friction]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
+physical_capacity_boundary: >
+  This pack stores no physical-capacity score or comparison. Any physical capacity belongs to the
+  shared feat corpus and Embodiment engine; the illness example is used only as behavioral evidence
+  about overcommitment, not as a capacity estimate.

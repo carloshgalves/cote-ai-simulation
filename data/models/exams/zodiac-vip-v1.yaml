@@ -1,0 +1,319 @@
+# ZODIAC_VIP_EXAM_V1 — executable reconstruction of the Y1 cruise-ship exam.
+#
+# NOT CANON. This file is a simulation model calibrated against a canon
+# reconstruction whose detailed rules are still UNVERIFIED under ADR 0005.
+# It MUST NOT appear in provenance.supports of a CanonClaim.
+#
+# Research: docs/research/first-special-exam-zodiac-vip.md
+# Spec:     docs/spec/zodiac-vip-exam-v1.md
+#
+# Status legend used here:
+#   UNVERIFIED          candidate canon rule awaiting Tier 0–1 human verification
+#   SIMULATION_AUTHORED executable choice made only because the engine needs one
+#
+# A future CANON_VERIFIED profile must be a versioned replacement; do not mutate
+# these labels after the fact.
+
+schema_version: 1
+not_canon: true
+model_kind: ZODIAC_VIP_SPECIAL_EXAM
+model_version: 0.1.0-provisional
+status: PROVISIONAL
+profile: CANON_ADAPTED
+
+identity:
+  exam_id: y1.zodiac-vip
+  canonical_work_dependency: ln.y1.v04
+  canonical_work_registry_status: MISSING_ON_2026_09_29
+  continuity: ln
+
+provenance:
+  research: docs/research/first-special-exam-zodiac-vip.md
+  spec: docs/spec/zodiac-vip-exam-v1.md
+  architecture:
+    - docs/architecture/exams.md
+    - docs/adr/0001-world-truth-and-knowledge-boundaries.md
+    - docs/adr/0003-logical-event-driven-time.md
+    - docs/adr/0005-canon-knowledge-base.md
+    - docs/adr/0008-causal-simulation-foundation-v1.md
+  canon_status: UNVERIFIED
+  simulation_authored_decisions:
+    - relative_time_anchors
+    - invalid_received_submission_consumes_quota
+    - simultaneous_submission_seeded_priority
+    - kana_ordinal_vip_assignment_until_verified
+    - institutional_pp_mint_semantics
+
+participants:
+  status: SIMULATION_AUTHORED
+  eligibility: active_first_year_student
+  active_count: 159
+  class_count: 4
+  class_size_multiset: [39, 40, 40, 40]
+  require_unique_actor_ids: true
+
+groups:
+  status: UNVERIFIED
+  count: 12
+  assignment_mode: PROVIDED_IN_SETUP
+  assignment_algorithm: null
+  require_partition: true
+  require_all_four_classes_per_group: true
+  per_class_count_allowed: [3, 4]
+  size_distribution:
+    13: 9
+    14: 3
+  zodiac:
+    - {id: RAT, ordinal: 1}
+    - {id: OX, ordinal: 2}
+    - {id: TIGER, ordinal: 3}
+    - {id: RABBIT, ordinal: 4}
+    - {id: DRAGON, ordinal: 5}
+    - {id: SNAKE, ordinal: 6}
+    - {id: HORSE, ordinal: 7}
+    - {id: GOAT, ordinal: 8}
+    - {id: MONKEY, ordinal: 9}
+    - {id: ROOSTER, ordinal: 10}
+    - {id: DOG, ordinal: 11}
+    - {id: BOAR, ordinal: 12}
+
+secret_roles:
+  role: VIP
+  role_count_per_group: 1
+  total_roles: 12
+  roles_per_class: 3
+  assignment:
+    status: SIMULATION_AUTHORED
+    algorithm: KANA_SURNAME_BY_ZODIAC_ORDINAL_V1
+    sort:
+      fields: [surname_kana_sort_key, actor_id]
+      direction: ASC
+    selector: zero_based_index_equals_zodiac_ordinal_minus_one
+    fail_if_class_balance_not_exact: true
+    rng: NONE
+
+disclosure:
+  public_at_setup:
+    - public_rules
+    - actor_own_group_id
+    - actor_own_group_roster
+    - actor_own_group_meeting_schedule
+    - submission_endpoint_contract
+    - outcome_table
+  private_at_role_disclosure:
+    payload_fields: [exam_id, group_id, is_vip]
+    reveal_other_actor_identity: false
+    source: school.exam-disclosure
+  hidden_from_agents:
+    - vip_by_group
+    - role_assignment_hash
+    - terminal_submitter_audit_identity
+    - simultaneous_priority_key
+  public_at_results:
+    - group_outcome
+    - class_point_deltas
+  never_public_by_exam_projection:
+    - vip_actor_id
+    - terminal_submitter_actor_id
+
+time:
+  status: SIMULATION_AUTHORED
+  mode: ABSOLUTE_ANCHORS_FROM_SETUP
+  required_anchors:
+    - role_disclosure_at
+    - active_close_at
+    - final_window_open
+    - final_window_close
+    - result_publish_at
+  constraints:
+    - role_disclosure_at < active_close_at
+    - active_close_at < final_window_open
+    - final_window_open < final_window_close
+    - final_window_close < result_publish_at
+  offsets:
+    final_window_open_after_active_close_minutes: 30
+    final_window_duration_minutes: 30
+    result_publication_after_active_close_minutes: 120
+  meeting_slots:
+    count_per_group: 6
+    duration_minutes: 60
+    all_before_active_close: true
+    absence_scoring_effect: NONE_IN_V1
+
+actions:
+  - type: SubmitVipGuess
+    fields:
+      - actor_id
+      - exam_id
+      - group_id
+      - guessed_actor_id
+      - submission_id
+    causal_fields_from_csf:
+      - simulation_instant
+      - resolution_cycle
+      - source_provenance
+
+submission:
+  individual_quota: 1
+  quota_scope: SCHOOL_RECEIVED_WELL_FORMED_SUBMISSION
+  quota_rule_status: SIMULATION_AUTHORED
+  phases:
+    ACTIVE:
+      accepted_semantic_action: EARLY_GUESS
+    QUIET_GAP:
+      accepted_semantic_action: NONE
+    FINAL_WINDOW:
+      accepted_semantic_action: FINAL_GUESS
+  semantic_validation_order:
+    - EXAM_ACCEPTS_SUBMISSIONS
+    - GROUP_NOT_TERMINAL
+    - ACTOR_IS_ACTIVE_PARTICIPANT
+    - ACTOR_TARGETS_OWN_GROUP
+    - GUESSED_ACTOR_IS_GROUP_MEMBER
+    - ACTOR_IS_NOT_VIP
+    - ACTOR_CLASS_DIFFERS_FROM_VIP_CLASS
+    - PHASE_ACCEPTS_GUESS
+  invalid_semantic_result: INVALIDATED_NO_GROUP_EFFECT
+  invalid_semantic_consumes_quota: true
+  schema_or_causal_rejection_consumes_quota: false
+
+simultaneity:
+  status: SIMULATION_AUTHORED
+  scope: same_group_same_phase_same_simulation_instant_same_resolution_cycle
+  algorithm: SEEDED_HASH_MIN
+  components:
+    - causal_identity_policy
+    - literal:zodiac-vip/submission-priority
+    - exam_seed
+    - group_id
+    - submission_id
+  winner: minimum_canonical_digest_bytes
+  losers_disposition: SUPERSEDED_BY_SIMULTANEOUS_SUBMISSION
+  losers_generate_rewards: false
+  host_arrival_order_forbidden: true
+
+scoring:
+  currency:
+    private_points:
+      standard_reward: 500000
+      vip_outcome_1_total: 1000000
+      transaction_kind: EXAM_REWARD
+      source: INSTITUTION
+      negative_amount_allowed: false
+    class_points:
+      swing: 50
+      apply_atomically: true
+  outcomes:
+    OUTCOME_1_SHARED_SUCCESS:
+      trigger: FIRST_VALID_FINAL_GUESS_CORRECT
+      terminal: true
+      pp:
+        vip: 1000000
+        each_other_group_member: 500000
+      cp: []
+    OUTCOME_2_VIP_HIDDEN:
+      trigger_any:
+        - FIRST_VALID_FINAL_GUESS_INCORRECT
+        - NO_VALID_FINAL_GUESS_AT_FINAL_WINDOW_CLOSE
+      terminal: true
+      pp:
+        vip: 500000
+      cp: []
+    OUTCOME_3_TRAITOR_CORRECT:
+      trigger: FIRST_VALID_EARLY_GUESS_CORRECT
+      terminal: true
+      pp:
+        submitter: 500000
+      cp:
+        submitter_class: 50
+        vip_class: -50
+    OUTCOME_4_TRAITOR_WRONG:
+      trigger: FIRST_VALID_EARLY_GUESS_INCORRECT
+      terminal: true
+      pp:
+        vip: 500000
+      cp:
+        submitter_class: -50
+        vip_class: 50
+
+terminality:
+  exactly_one_outcome_per_group: true
+  no_global_ranking: true
+  no_ranking_tie_breaker: true
+  no_action_at_final_close: OUTCOME_2_VIP_HIDDEN
+  exam_closes_when_all_groups_terminal: true
+  result_publication_may_happen_only_after_all_groups_terminal: true
+
+invariants:
+  setup:
+    - EXACTLY_159_ACTIVE_PARTICIPANTS
+    - FOUR_CLASSES_WITH_SIZE_MULTISET_39_40_40_40
+    - EXACTLY_12_GROUPS
+    - GROUP_SIZE_DISTRIBUTION_9x13_3x14
+    - PARTICIPANT_GROUP_PARTITION
+    - EVERY_GROUP_CONTAINS_ALL_FOUR_CLASSES
+    - EACH_GROUP_CLASS_COUNT_IN_3_4
+    - EXACTLY_ONE_VIP_PER_GROUP
+    - EXACTLY_THREE_VIPS_PER_CLASS
+    - ROLE_ASSIGNMENT_RECOMPUTES
+  runtime:
+    - AT_MOST_ONE_RECEIVED_SUBMISSION_PER_ACTOR
+    - EXACTLY_ONE_TERMINAL_OUTCOME_PER_GROUP
+    - TERMINAL_GROUP_CANNOT_REWARD_AGAIN
+    - INVALID_SUBMISSION_CANNOT_REWARD
+    - SUPERSEDED_SUBMISSION_CANNOT_REWARD
+    - SAME_CLASS_SUBMITTER_CANNOT_TRIGGER_OUTCOME_3_OR_4
+    - PUBLIC_RESULT_REDACTS_SECRET_IDENTITIES
+  economics:
+    - PP_REWARD_ONLY_NO_DEBIT
+    - OUTCOME_3_AND_4_CP_ZERO_SUM
+    - GLOBAL_CP_ZERO_SUM
+    - POSITIVE_GROSS_CP_AT_MOST_600
+    - NEGATIVE_GROSS_CP_ABS_AT_MOST_600
+    - MAX_PP_MINT_AT_ALL_OUTCOME_1_IS_85500000
+  reachability:
+    - OUTCOME_1_REACHABLE
+    - OUTCOME_2_REACHABLE
+    - OUTCOME_3_REACHABLE
+    - OUTCOME_4_REACHABLE
+    - EVERY_OPEN_GROUP_TERMINATES_BY_FINAL_WINDOW_CLOSE
+
+external_contracts:
+  csf:
+    required:
+      - ActionProposal
+      - SimulationInstant
+      - ResolutionCycle
+      - ScheduledOccurrence
+      - CommitCandidate
+      - KnowledgeInput
+      - Claim
+      - Transmission
+      - atomic_commit
+  cognition:
+    may_choose:
+      - whether_to_submit
+      - guessed_actor_id
+    may_not_choose:
+      - current_phase
+      - vip_truth
+      - outcome
+      - point_delta
+  canon_rag:
+    may_supply:
+      - verified_public_rules
+      - roster_metadata
+    may_not_supply:
+      - future_canon_vip_identity_to_agent
+      - current_run_world_truth_secret
+  economy:
+    required:
+      - award_pp_idempotently
+      - apply_cp_deltas_atomically
+      - audit_ledger
+
+implementation:
+  resolver_language: UNDECIDED
+  blocker: ADR_0007_DOES_NOT_GENERALIZE_PYTHON_TO_EXAMINATION_ENGINE
+  executable_code_in_this_version: false
+  normative_conformance_vectors: data/models/exams/conformance/zodiac-vip-v1.yaml

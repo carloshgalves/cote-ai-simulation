@@ -46,6 +46,7 @@ cycle-plan =
    target-coordinate: eligibility-coordinate]
 
 created-by = [event: 0, event-ref] / [input: 1, input-ref] / [genesis: 2, genesis-ref]
+round-created-by = [event: 0, event-ref] / [genesis: 2, genesis-ref]
 trigger-origin =
   [cycle: 0, cycle-id: id32, result-revision: world-revision, causing-event-ids: [* id32]] /
   [genesis: 1, genesis-ref]
@@ -71,20 +72,23 @@ exogenous-input-fields = (
   declared-effective-at: simulation-instant,
   eligibility: eligibility-coordinate,
   provenance: optional<causal-ref>,
-  idempotency-key: machine-id
+  idempotency-key: optional<machine-id>
 )
 exogenous-input-body = [exogenous-input-fields]
 exogenous-input = [exogenous-input-fields, unit-digest: digest32]
 
 round-declaration = [
   decision-round-id: id32,
+  run-id: id32,
   source-id: machine-id,
   actor: actor-ref,
   slot-ids: [1*1024 machine-id],
   eligibility: eligibility-coordinate,
-  created-by,
+  round-created-by,
+  round-role: u16,
+  round-local-ordinal: u32,
   lifecycle: u8,
-  idempotency-key: machine-id
+  idempotency-key: optional<machine-id>
 ]
 
 slot-dispatch = [
@@ -125,7 +129,7 @@ action-proposal-fields = (
   slot-id: machine-id,
   submitted-against-revision: world-revision,
   originating-intention-ref: optional<causal-ref>,
-  idempotency-key: machine-id
+  idempotency-key: optional<machine-id>
 )
 action-proposal-body = [action-proposal-fields]
 action-proposal = [action-proposal-fields, response-digest: digest32]
@@ -148,6 +152,7 @@ no-proposal = [no-proposal-fields, response-digest: digest32]
 recurrence-policy = [kind: u8, every: duration-micros, remaining: optional<u32>]
 scheduled-occurrence-fields = (
   occurrence-id: id32,
+  run-id: id32,
   source-id: machine-id,
   due-at: simulation-instant,
   eligibility: eligibility-coordinate,
@@ -156,8 +161,10 @@ scheduled-occurrence-fields = (
   payload: typed-value,
   lifecycle: u8,
   created-by,
+  occurrence-role: u16,
+  occurrence-local-ordinal: u32,
   recurrence: optional<recurrence-policy>,
-  idempotency-key: machine-id
+  idempotency-key: optional<machine-id>
 )
 scheduled-occurrence-body = [scheduled-occurrence-fields]
 scheduled-occurrence = [scheduled-occurrence-fields, unit-digest: digest32]
@@ -186,6 +193,7 @@ trigger-runtime-state = [
 
 trigger-activation-fields = (
   activation-id: id32,
+  run-id: id32,
   source-id: machine-id,
   trigger-definition-id: id32,
   trigger-version: u32,
@@ -194,7 +202,7 @@ trigger-activation-fields = (
   activation-count: u64,
   predicate-result-digest: digest32,
   lifecycle: u8,
-  idempotency-key: machine-id
+  idempotency-key: optional<machine-id>
 )
 trigger-activation-body = [trigger-activation-fields]
 trigger-activation = [trigger-activation-fields, unit-digest: digest32]
@@ -395,7 +403,8 @@ perception-task-completion = [perception-task-completion-fields, completion-dige
 
 proposition = [proposition-type: machine-id, polarity: u8, temporal-scope: typed-value,
                content: typed-value]
-claim-fields = (claim-id: id32, proposition: proposition, asserted-by: optional<actor-ref>,
+claim-fields = (claim-id: id32, origin: causal-ref, claim-role: u16, claim-local-ordinal: u32,
+                proposition: proposition, asserted-by: optional<actor-ref>,
                 asserted-at: simulation-instant, prior-claim-refs: [0*1024 causal-ref],
                 evidence-refs: [0*1024 evidence-ref])
 claim-body = [claim-fields]
@@ -415,7 +424,8 @@ knowledge-input-fields = (knowledge-input-id: id32, input-role: u16, input-local
 knowledge-input-body = [knowledge-input-fields]
 knowledge-input = [knowledge-input-fields, knowledge-input-digest: digest32]
 
-transmission-fields = (transmission-id: id32,
+transmission-fields = (transmission-id: id32, origin: causal-ref,
+                       transmission-role: u16, transmission-local-ordinal: u32,
                        content: [claims: 0, [1*1024 causal-ref]] / [encoded: 1, causal-ref],
                        actual-sender: actor-ref, presented-sender: human-text,
                        intended-recipients: [1*1024 actor-ref], channel: machine-id,
@@ -456,9 +466,12 @@ decision-pair-list = [0*65535 decision-pair]
 perception-task-id-list = [0*65535 id32]
 event-envelope-list = [0*65535 bstr]
 batch-preimage = [commit: cycle-commit-body, events: event-envelope-list]
-idempotency-preimage = [unit-kind: u8, producer-scope: machine-id,
+idempotency-preimage = [run-id: id32, unit-kind: u8, producer-scope: machine-id,
                         actor-scope: optional<actor-ref>, idempotency-key: machine-id,
-                        logical-operation: typed-value]
+                        logical-operation: typed-value, idempotency-policy: policy-ref]
+idempotency-identity = [run-id: id32, unit-kind: u8, producer-scope: machine-id,
+                        actor-scope: optional<actor-ref>, idempotency-key: machine-id,
+                        idempotency-digest: digest32, idempotency-policy: policy-ref]
 slot-request-preimage = [run-id: id32, cycle-id: id32, decision-round-id: id32,
                          slot-id: machine-id, actor: actor-ref, eligibility: eligibility-coordinate,
                          base-revision: world-revision, effective-at: simulation-instant]
@@ -469,6 +482,13 @@ conflict-set-id-preimage = [cycle-id: id32, candidate-ids: [2*65535 id32],
 exogenous-input-id-preimage = [run-id: id32, source-id: machine-id, producer-unit-key: machine-id]
 source-closure-id-preimage = [run-id: id32, source-id: machine-id, producer-closure-key: machine-id]
 cycle-id-preimage = [run-id: id32, coordinate: eligibility-coordinate]
+occurrence-id-preimage = [origin: created-by, occurrence-role: u16,
+                          occurrence-local-ordinal: u32]
+decision-round-id-preimage = [origin: round-created-by, round-role: u16,
+                              round-local-ordinal: u32]
+claim-id-preimage = [origin: causal-ref, claim-role: u16, claim-local-ordinal: u32]
+transmission-id-preimage = [origin: causal-ref, transmission-role: u16,
+                            transmission-local-ordinal: u32]
 origin-role-id-preimage = [origin: causal-ref, role: u16, local-ordinal: u32]
 trigger-activation-id-preimage = [run-id: id32, trigger-definition-id: id32,
                                   trigger-version: u32, result-revision: world-revision,
@@ -490,6 +510,19 @@ observation-id-preimage = [task-id: id32, observer: actor-ref, observation-role:
 knowledge-input-id-preimage = [observation-id: id32, recipient: actor-ref, kind: u8,
                                input-role: u16, input-local-ordinal: u32]
 perception-completion-id-preimage = [task-id: id32]
+admission-fence-id-preimage = [run-id: id32, cycle-id: id32, attempt-ordinal: u32]
+cycle-commit-id-preimage = [run-id: id32, cycle-id: id32, attempt-ordinal: u32]
+cycle-abort-id-preimage = [run-id: id32, cycle-id: id32, attempt-ordinal: u32]
+attempt-retry-id-preimage = [run-id: id32, cycle-id: id32, from-attempt-ordinal: u32,
+                             to-attempt-ordinal: u32]
+snapshot-id-preimage = [run-id: id32, snapshot-version: u32, revision: world-revision]
+genesis-id-preimage = [run-id: id32]
+epistemic-checkpoint-id-preimage = [actor: actor-ref, store-id: machine-id,
+                                    schema-version, covers-through: [
+                                      instant: simulation-instant,
+                                      revision: world-revision,
+                                      evidence-cursor: u64
+                                    ]]
 
 ; Fixture-only roots. They are not valid production schemas.
 test-null = null

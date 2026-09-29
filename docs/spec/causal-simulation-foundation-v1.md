@@ -264,7 +264,7 @@ O genesis persiste, no mínimo:
   `identity_algorithm_version=cote.csf.sha256.v1`, NFC pelo Normalization Process for Stabilized
   Strings (NPSS) Unicode 15.1.0,
   `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`
-  e `schema_bundle_hash=efbfb9abedbe3d7c9b6123f3613b0dffa2b13c2b8aad7f688e61845cdcfc4c81`;
+  e `schema_bundle_hash=244306fa4d9f304c96643209be6e70cb55d855155394cd0bdc01af49d6c78880`;
 - causal identity, admission order, fence, coordinate, event order, idempotency, RNG, perception e
   perception identity policy: versão **e** hash;
 - versões/hashes de schemas, reducers, validators, resolvers e dependency footprints;
@@ -304,7 +304,8 @@ schemas versionados e canonicalização para, no mínimo:
 - `Snapshot`, `EpistemicCheckpointRef` e manifesto de genesis.
 
 Todo record causal imutável possui schema/version ou é envolvido por um envelope que os comprometa.
-Campos set-like declaram uma chave total. Maps são ordenados por chave canônica. Representação default
+Campos set-like declaram ordering key, duplicate policy e identity key separadas. Maps são ordenados
+por chave canônica. Representação default
 da linguagem nunca é usada para digest, identidade ou state hash. O contrato exato de records,
 primitivos, Unicode, floats, maps, sets, ids e strict decoding é o
 [Canonical Causal Codec V1](../architecture/canonical-codec-v1.md); CDDL, registries e golden vectors
@@ -389,8 +390,11 @@ referência epistemológica opaca e verificada.
   bytes distintos falha fechado.
 - Identidade de entrega e `IdempotencyIdentity` são distintas. Alias novo entra em fence e recebe
   settlement próprio; nunca é pré-consumido no append.
-- `idempotency_key` é namespaced por run, kind, producer e ator. Mesmo namespace com digest lógico
-  divergente aborta como `IDEMPOTENCY_CONFLICT`.
+- `idempotency_key` é optional discriminado: `ABSENT` não cria identidade; `PRESENT` persiste
+  `IdempotencyIdentity` com run, kind, producer, ator, key, digest e policy ref. Mesmo namespace com
+  digest lógico divergente aborta como `IDEMPOTENCY_CONFLICT`.
+- Todo `CausalRef` resolve pelo `reference_kind` uma operação/preimage de id total e reconstruível dos
+  fields persistidos; replay rejeita ref cuja identidade dependa de contexto externo implícito.
 - UUID aleatório, wall clock, `ingress_seq`, posição de append e ordem de iteração são proibidos na
   alocação causal.
 
@@ -409,7 +413,8 @@ referência epistemológica opaca e verificada.
 
 ### 7.3 Rounds, dispatch e simultaneidade
 
-- `RoundDeclaration` nasce no genesis ou em commit anterior, com slots e coordenada imutáveis.
+- `RoundDeclaration` nasce no genesis ou em commit anterior, nunca diretamente de input, e persiste
+  `run_id`, papel/ordinal de criação, slots e coordenada imutáveis para recomputar sua identidade.
 - Todos os rounds elegíveis da revisão base formam uma única coorte e leem o mesmo snapshot.
 - Um slot tem no máximo um dispatch aberto e uma resposta. Redespacho exige revogação durável.
 - Resposta precisa coincidir em run, ciclo, round, slot, ator, revisão e instante com o dispatch
@@ -622,7 +627,7 @@ dos hashes causais. Métricas mínimas:
 12. ids/completion de percepção idempotentes e instante epistemológico causal;
 13. substreams independentes de avaliações/atores irrelevantes;
 14. arquitetura sem cliente LLM no core e sem write port transitivo no Observatory;
-15. os 165 vetores/casos de conformidade do bundle executados por pelo menos duas
+15. os 271 vetores/casos de conformidade do bundle executados por pelo menos duas
     implementações independentes e linguagens diferentes;
 16. strict decode rejeita CBOR não preferido, indefinite, tag, `undefined`, duplicate key, Unicode
     fora do profile, non-finite, negative zero, schema/enum desconhecido e id com tamanho incorreto;

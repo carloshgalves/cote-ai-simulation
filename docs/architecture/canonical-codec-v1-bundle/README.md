@@ -74,15 +74,36 @@ e o conjunto de schema versions admitidas. Uma run não incorpora bundle publica
 Roles/códigos extension-specific só são válidos quando o extension bundle requerido pelo registry os
 declara de forma append-only.
 
+`enum_bindings` e `role_bindings` ligam cada field path ao registry aplicável; o tipo base
+`u8`/`u16` sozinho nunca autoriza um código. `reference_identities` liga todos os 23
+`reference_kind` à operação/schema de id e aos componentes persistidos do preimage. Cada entrada de
+`set_like_collections` tem quatro posições normativas — field path, ordering key, duplicate policy e
+identity key —; mesma identity key com bytes diferentes é sempre `SET_IDENTITY_COLLISION`.
+
+`fixture_domain_operations` registra separadamente todas as combinações
+`(domain_tag, schema_id, schema_version)` usadas pelos casos positivos. Strict decode em modo de
+conformidade aceita essa tabela além de `domain_operations`; uma run de produção nunca a carrega nem
+aceita o prefixo `cote.csf.test.*`.
+`fixture_roles` cumpre a mesma função para códigos de role extension-specific usados pelos roots de
+teste; fora do modo de conformidade, ausência do registry da extensão continua `UNKNOWN_ROLE`.
+
+`RoundDeclaration`, `ScheduledOccurrence`, `Claim` e `Transmission` persistem origin, role e local
+ordinal requeridos por seus preimages de id; o primeiro restringe origin a evento ou genesis.
+`IdempotencyIdentity` é um root persistível separado e só existe quando o optional
+`idempotency-key` da unidade está PRESENT. Seu preimage fecha run, kind, producer/actor scopes, key,
+operação lógica e policy ref.
+
 ## Vetores e verificação independente
 
-`fixtures.json` contém 131 vetores positivos, 27 negativos, cinco casos de normalização convergente
-e dois vetores SHA-256. Os positivos cobrem primitivos e
-limites, Unicode, map/list/set, floats, todos os roots persistidos e as 57 operações de id/digest/hash
-do registry. Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
-`error_code` estável.
+`fixtures.json` contém 141 vetores positivos, 28 negativos, 95 casos semânticos, cinco casos de
+normalização convergente e dois vetores SHA-256. Os positivos cobrem primitivos e limites, Unicode,
+map/list/set, floats, todos os roots persistidos e as 65 operações de id/digest/hash do registry.
+Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
+`error_code` estável. Os casos semânticos executam bindings de enum, duplicata/colisão de cada família
+de ref, dois attempts do mesmo ciclo, permutação de `rule-versions` e idempotência
+ABSENT/PRESENT/conflitante.
 
-No checkpoint documental, os 131 vetores positivos foram produzidos por um encoder isolado em
+No checkpoint documental, os 141 vetores positivos foram produzidos por um encoder isolado em
 Node.js 22.22.1 e, independentemente, decoded, reencoded byte a byte e rehashados por um segundo
 encoder/decoder em Python 3.14.4; o segundo verificador também confirmou os cinco casos de
 normalização e os dois vetores SHA-256. Esses programas foram ferramentas temporárias, não

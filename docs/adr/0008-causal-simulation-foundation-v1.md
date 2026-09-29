@@ -179,6 +179,14 @@ As origens são estáveis e independentes de execução:
   função, com seus componentes causais completos definidos nas seções correspondentes; papel e
   ordinal de output vêm do schema, nunca da ordem do worker.
 
+Todo `CausalRef` é fechado pelo registry do codec: o `reference_kind` seleciona uma operação de id e
+um preimage total reconstruível do artefato persistido ou do envelope tipado de seu ledger. Fence,
+commit e abort usam
+`(run_id, cycle_id, attempt_ordinal)` sob domains distintos; retry usa ainda os ordinais de origem e
+destino; snapshot usa `(run_id, snapshot_version, revision)`; genesis usa `run_id`; checkpoint
+epistemológico usa ator, store, schema version e cursor coberto. Ausência, ambiguidade ou necessidade
+de metadado de chamada para reconstruir esse preimage é corrupção.
+
 UUID aleatório, relógio de parede, posição de append, `ingress_seq`, ordem de chegada e ordem de map
 são proibidos na alocação desses ids. Uma unidade sem chave externa estável ou origem derivável não é
 admitida. Essa regra mantém aliases semanticamente iguais distinguíveis por suas chaves de produtor,
@@ -410,13 +418,15 @@ causal durável, com lifecycle igual ao de uma `ScheduledOccurrence` (§4.1):
 ```text
 RoundDeclaration {
   decision_round_id
+  run_id
   source_id                          // fonte derivada canônica; slots herdam este valor
   actor_id
   slot_ids[]                          // declarados na criação; imutáveis
   eligibility: EligibilityCoordinate
   created_by: EventRef | GenesisRef
+  round_role + round_local_ordinal   // identidade declarada pelo schema produtor
   lifecycle: PENDING | CANCELLED | CONSUMED
-  idempotency_key
+  idempotency_key?
 }
 ```
 
@@ -751,6 +761,7 @@ evento “prazo expirou” ter sido serializado antes de uma ação no mesmo ins
 ```text
 ScheduledOccurrence {
   occurrence_id
+  run_id
   source_id
   due_at
   eligibility: EligibilityCoordinate   // (due_at, 0), salvo coordenada explícita de DEFER
@@ -758,8 +769,9 @@ ScheduledOccurrence {
   payload
   lifecycle: PENDING | CANCELLED | CONSUMED
   created_by: EventRef | InputRef | GenesisRef
+  occurrence_role + occurrence_local_ordinal
   recurrence?: RecurrencePolicy
-  idempotency_key
+  idempotency_key?
 }
 ```
 
@@ -807,6 +819,7 @@ entrada causal derivada e durável:
 ```text
 TriggerActivation {
   activation_id
+  run_id
   source_id                         // trigger:<definition_id>
   trigger_definition_id + trigger_version
   origin: { cycle_id, result_revision, causing_event_ids[] } | GenesisRef
@@ -814,7 +827,7 @@ TriggerActivation {
   activation_count
   predicate_result_digest
   lifecycle: PENDING | CONSUMED
-  idempotency_key
+  idempotency_key?
 }
 ```
 
@@ -884,7 +897,7 @@ ActionProposal {
   decision_round_id + slot_id
   submitted_against_revision
   originating_intention_ref?
-  idempotency_key
+  idempotency_key?
   response_digest             // unit_digest da SlotResponse
 }
 ```
@@ -1089,12 +1102,13 @@ lista `decision_record_ids[]` na mesma ordem canônica de `admitted_input_ids`, 
 cobre os pares `(unidade, desfecho)`. Assim o recibo de settlement prova a cobertura total, e
 auditoria/replay distinguem “slot sem proposta” e “duplicata descartada” de “fonte omitida por bug”.
 
-Antes da expansão, toda unidade que usa `idempotency_key` é vinculada a uma identidade persistente:
+Antes da expansão, toda unidade cujo optional discriminado `idempotency_key` está `PRESENT` é
+vinculada a uma identidade persistente; `ABSENT` não cria alias, sentinela nem registro:
 
 ```text
 IdempotencyIdentity {
   run_id
-  unit_kind                    // tag canônica: EXOGENOUS_INPUT | ACTION | OCCURRENCE | TRIGGER ...
+  unit_kind                    // tag canônica: SLOT | EXOGENOUS_INPUT | OCCURRENCE | TRIGGER | ROUND ...
   producer_scope               // source_id exógeno ou source_id derivado canônico
   actor_scope                  // actor_id quando a unidade tem ator; NONE nos demais casos
   idempotency_key
@@ -1102,6 +1116,10 @@ IdempotencyIdentity {
   idempotency_policy_version + idempotency_policy_hash
 }
 ```
+
+O preimage de `idempotency_digest` inclui explicitamente `run_id`, `unit_kind`, `producer_scope`,
+`actor_scope`, `idempotency_key`, a operação lógica tipada e a referência completa da policy. Esses
+componentes também ficam no `IdempotencyIdentity`; replay não os recupera de configuração transitória.
 
 O namespace de uma chave é `(run_id, unit_kind, producer_scope, actor_scope, idempotency_key)`. Logo,
 tipos, fontes ou atores distintos nunca colidem por reutilizarem a mesma string.
@@ -1317,6 +1335,8 @@ Os dois arrays de evidência têm semântica de conjunto e são normalizados **a
   validator_hash, reason_code, digest(evidence_refs), rule_version)`, também em bytes canônicos;
 - `failure_evidence_refs[]` usa a mesma chave total
   `(ref_kind_tag, referenced_id, referenced_digest)`;
+- `rule_versions` é set-like e usa a mesma chave total do fence
+  `(policy_id, version, hash)`; a mesma regra vale para `AttemptRetryRecord.rule_versions`;
 - uma referência ou record byte a byte idêntico aparece uma vez; records de sujeitos diferentes nunca
   são deduplicados, mesmo que facet, reason e evidência coincidam; duas refs com o mesmo par
   `(ref_kind_tag, referenced_id)` e digest diferente, ou dois records para a mesma identidade
@@ -1654,7 +1674,9 @@ prévia, o agente não recebe input.
 
 `Proposition` é o value object de conteúdo tipado, polaridade e escopo temporal. `Claim` é o artefato
 imutável e identificado que registra alguém/canal afirmando essa proposition, com `claim_id`,
-`asserted_by` (quando conhecido), instante da asserção e referências a claims/evidências anteriores.
+`origin`, `claim_role`, `claim_local_ordinal`, `asserted_by` (quando conhecido), instante da asserção
+e referências a claims/evidências anteriores. O id é recomputado exclusivamente de
+`(origin, claim_role, claim_local_ordinal)`; papel e ordinal vêm do schema produtor.
 Repetir o mesmo conteúdo pode criar outro claim; encaminhar sem nova asserção preserva a referência.
 Nenhum dos dois possui campo autoritativo `is_true`.
 
@@ -1670,6 +1692,7 @@ Uma comunicação aceita produz `communication.sent` e, quando há atraso/persis
 ```text
 Transmission {
   transmission_id
+  origin + transmission_role + transmission_local_ordinal
   claim_refs[] | encoded_content_ref
   actual_sender_id
   presented_sender

@@ -27,7 +27,7 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `efbfb9abedbe3d7c9b6123f3613b0dffa2b13c2b8aad7f688e61845cdcfc4c81` |
+| `schema_bundle_hash` | `244306fa4d9f304c96643209be6e70cb55d855155394cd0bdc01af49d6c78880` |
 
 O manifesto imutável do run carrega esses valores, `codec_policy_hash`, `schema_bundle_hash` e os
 hashes dos registries de domain tags, enums, ordering keys e duplicate policies. Um nome igual com
@@ -160,6 +160,12 @@ Essa forma é view. Um adapter a converte para domain tag validado + 32 bytes an
 o texto em si não é hashado. Uppercase, prefixo/algoritmo diferente, hex de tamanho errado ou domain
 tag incompatível com o campo são rejeitados.
 
+`causal-ref = [reference_kind, id, digest]` não admite identidade implícita. Para cada código de
+`reference_kind`, `registries.json.reference_identities` seleciona a operação de id, o schema do
+preimage e os fields persistidos que o constroem. Kinds discriminados (`input` e `slot_response`)
+fazem um segundo dispatch pelo discriminante registrado. Strict replay recompõe o id a partir desses
+fields antes de aceitar o digest; metadado de chamada/store não pode completar um preimage ausente.
+
 ## 4. Records, opcionais e sum types
 
 Record é array CBOR de tamanho fixo, com campos na ordem declarada pelo CDDL/schema. Nomes de campo
@@ -176,6 +182,11 @@ Se o domínio precisa distinguir `PRESENT(null)`, ele aparece como `[1, null]`. 
 unions começam por enum uint registrado e têm aridade fixa por variante. Ordinal local e role
 declarados por schema seguem a mesma regra: códigos são estáveis e nunca vêm do ordinal de enum da
 linguagem.
+
+`registries.json` liga cada field path ao registry de enum/variant ou ao registry de role exigido da
+extensão. Um `u8`/`u16` nu no CDDL não autoriza qualquer código: strict decode resolve o binding pelo
+path e rejeita código ou role ausente. Campos `idempotency_key` usam o optional discriminado; somente
+`PRESENT(machine-id)` produz `IdempotencyIdentity`, enquanto `ABSENT` não produz alias nem sentinela.
 
 ## 5. Containers e ordenação
 
@@ -261,8 +272,9 @@ A source of truth independente de linguagem é o diretório
 - manifesto da policy;
 - CDDL por schema/version;
 - registry append-only de domain tags;
-- registries de enum/role/variant;
-- ordering e duplicate policy de toda coleção set-like;
+- registries e field-path bindings de enum/role/variant;
+- ordering key, duplicate policy e identity key de toda coleção set-like;
+- tabela exaustiva de `reference_kind` para operação/preimage de identidade;
 - limites de tamanho/profundidade;
 - vetores positivos e negativos da §11;
 - versão e checksum do corpus Unicode de conformidade.
@@ -370,10 +382,15 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 12. mesmo payload sob domain/schema/version diferentes produzindo bytes e digests diferentes;
 13. preferred vs integer/length/float superdimensionado, indefinite item, tag e `undefined`;
 14. records de todos os artefatos do ADR 0008, inclusive collections e envelopes vazios;
-15. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
+15. binding válido/desconhecido de cada field enum e role registry obrigatório;
+16. duplicata exata e colisão de identidade de cada família de ref set-like;
+17. idempotência ABSENT/PRESENT, reuso conflitante e recomputação de toda identidade causal;
+18. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
 
-A suíte V1 contém 131 casos positivos — todos os roots persistidos e todas as operações registradas —,
-27 casos negativos com `error_code` estável, cinco casos de normalização e dois vetores SHA-256. CI de conformidade executa os mesmos golden vectors em
+A suíte V1 contém 141 casos positivos — todos os roots persistidos e todas as 65 operações
+registradas —, 28 casos negativos com `error_code` estável, 95 casos semânticos de binding,
+identidade, ordenação e idempotência, cinco casos de normalização e dois vetores SHA-256. CI de
+conformidade executa os mesmos golden vectors em
 pelo menos duas implementações independentes e linguagens diferentes. Ambas precisam provar valor
 tipado → bytes, bytes → valor tipado estrito,
 re-encoding idêntico, digest e os vetores negativos. Comparar somente objetos decodificados não basta.

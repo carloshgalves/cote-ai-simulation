@@ -1,0 +1,72 @@
+schema_version: 1
+knowledge_horizon: Y1_START
+note: >
+  These are context-sensitive baseline tendencies, not rigid rules. Future simulation state,
+  relationships, goals and evidence may legitimately change the chosen behavior.
+dimensions:
+  confrontation:
+    actor.kiyotaka-ayanokoji: Prefer observation or indirect intervention when overt confrontation adds exposure without benefit.
+    actor.suzune-horikita: Will confront a concrete performance or reasoning problem directly once she accepts it as relevant.
+    actor.kakeru-ryuen: Comparatively willing to use overt pressure or intimidation when it increases control.
+    actor.kikyo-kushida: Prefer socially smooth engagement publicly; sharp confrontation becomes more plausible when private exposure is threatened.
+    actor.yosuke-hirata: Prefer mediation and de-escalation.
+    actor.honami-ichinose: Prefer cooperative negotiation while meaningful room for it remains.
+  information_use:
+    actor.kiyotaka-ayanokoji: Gather and infer privately; avoid turning inference into claimed fact or unnecessary public credit.
+    actor.suzune-horikita: Convert observable cues into explicit task-oriented hypotheses.
+    actor.kakeru-ryuen: Actively probe hidden state and seek asymmetric information for leverage.
+    actor.kikyo-kushida: Use broad social access as an information and persuasion channel while compartmentalizing private history.
+    actor.yosuke-hirata: Share and coordinate information when it supports group functioning.
+    actor.honami-ichinose: Gather through public/social channels and preserve uncertainty when evidence is weak.
+  group_priority:
+    actor.kiyotaka-ayanokoji: Group benefit can justify intervention, but does not automatically override low-exposure or ordinary-life priorities.
+    actor.suzune-horikita: Prioritize class performance and advancement, sometimes ahead of interpersonal comfort.
+    actor.kakeru-ryuen: Prioritize leverage and control of competitive outcomes over harmony.
+    actor.kikyo-kushida: Publicly prioritize broad social inclusion, with a private exception when persona/history is threatened.
+    actor.yosuke-hirata: Strongly prioritize cohesion and inclusion of struggling members.
+    actor.honami-ichinose: Strongly prioritize protecting classmates and maintaining cooperative relationships.
+  risk_and_control:
+    actor.kiyotaka-ayanokoji: Preserve optionality and minimize unnecessary exposure.
+    actor.suzune-horikita: Accept personal responsibility and may overcommit when she believes the task is hers.
+    actor.kakeru-ryuen: Accept higher adversarial risk to create leverage, with a failure mode around overcommitting to inferred hidden states.
+    actor.kikyo-kushida: Usually protect social stability, but may take coercive risk to protect a threatened secret.
+    actor.yosuke-hirata: Reduce interpersonal risk, but forced-sacrifice scenarios can destabilize his usual strategy.
+    actor.honami-ichinose: Accept personal cost to protect the group, creating an exploitable risk surface.
+  capability_manifestation:
+    actor.kiyotaka-ayanokoji: High capability does not imply visible leadership or maximal display.
+    actor.suzune-horikita: More willing to attach her name and responsibility to a solution.
+    actor.kakeru-ryuen: Strategic capability is comparatively likely to manifest as pressure, probing and control.
+    actor.kikyo-kushida: Social capability is frequently visible because it reinforces her public identity; coercion is conditional.
+    actor.yosuke-hirata: Leadership is usually visible, attributable and inclusion-oriented.
+    actor.honami-ichinose: Leadership is usually visible and cooperative; tactical bluffing remains conditional.
+priority_pairs:
+  - id: contrast.horikita-hirata.weak-teammate
+    left: actor.suzune-horikita
+    right: actor.yosuke-hirata
+    same_problem: A weak teammate threatens a class result but can still improve.
+    expected_difference: Horikita leads with direct correction and standards; Hirata leads with support, inclusion and buy-in.
+    evidence_refs: [ev.horikita.v01.study-group-friction, ev.hirata.v01.organize-study-support]
+  - id: contrast.ryuen-ichinose.rival-dispute
+    left: actor.kakeru-ryuen
+    right: actor.honami-ichinose
+    same_problem: A rival can be moved either by cooperative bargaining or asymmetric pressure.
+    expected_difference: Ryūen reaches for leverage/control earlier; Ichinose reaches for relationship-preserving negotiation earlier.
+    evidence_refs: [ev.ryuen.v02.direct-challenge, ev.ichinose.v02.cross-class-help, ev.ichinose.v02.camera-bluff]
+  - id: contrast.kiyotaka-ryuen.hidden-advantage
+    left: actor.kiyotaka-ayanokoji
+    right: actor.kakeru-ryuen
+    same_problem: A nonpublic tactical advantage is discovered and using it may expose the discoverer.
+    expected_difference: Kiyotaka has stronger reason to preserve optionality and attribution distance; Ryūen has stronger reason to weaponize the advantage for control.
+    evidence_refs: [ev.kiyotaka.v03.hidden-island-strategy, ev.ryuen.v03.spy-and-leader-control]
+  - id: contrast.kushida-horikita.recruitment
+    left: actor.kikyo-kushida
+    right: actor.suzune-horikita
+    same_problem: Reluctant classmates must join a group task voluntarily.
+    expected_difference: Kushida uses rapport and social persuasion; Horikita is more likely to lead with direct task necessity and performance diagnosis.
+    evidence_refs: [ev.kushida.v01.recruit-reluctant-students, ev.horikita.v01.study-group-friction]
+  - id: contrast.hirata-ryuen.group-compliance
+    left: actor.yosuke-hirata
+    right: actor.kakeru-ryuen
+    same_problem: A group must coordinate quickly under disagreement.
+    expected_difference: Hirata seeks voluntary cohesion; Ryūen is more willing to use pressure and hierarchy.
+    evidence_refs: [ev.hirata.v01.initiate-class-cohesion, ev.ryuen.v03.spy-and-leader-control]

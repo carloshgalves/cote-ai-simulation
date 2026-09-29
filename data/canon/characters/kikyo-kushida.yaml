@@ -19,11 +19,11 @@ identity:
       evidence_temporality: AT_OR_BEFORE_HORIZON
       horizon_relation: KNOWN_AT_HORIZON
 initial_knowledge:
-  - id: char.kushida.knowledge.own-concealed-history
-    statement: Kushida knows her own prior history involving Horikita and knows that she does not want its private context generally exposed.
+  - id: char.kushida.knowledge.own-prior-history
+    statement: Kushida knows her own prior middle-school history involving Horikita; the pack does not grant that history to unrelated classmates.
     status: UNVERIFIED
-    evidence_refs: [ev.kushida.pre-y1.horikita-history, ev.kushida.v01.private-side-threat]
-    evidence_temporality: MIXED
+    evidence_refs: [ev.kushida.pre-y1.horikita-history]
+    evidence_temporality: AT_OR_BEFORE_HORIZON
     horizon_relation: KNOWN_AT_HORIZON
 stable_tendencies:
   - id: char.kushida.tendency.build-broad-rapport
@@ -58,7 +58,7 @@ goals:
       status: INTERPRETATION
       evidence_refs: [ev.kushida.v01.private-side-threat, ev.kushida.pre-y1.horikita-history]
       evidence_temporality: MIXED
-      horizon_relation: KNOWN_AT_HORIZON
+      horizon_relation: NOT_APPLICABLE
   possible: []
   future_only: []
 capabilities:

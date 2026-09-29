@@ -10,6 +10,8 @@ from __future__ import annotations
 import json
 
 import pytest
+import yaml
+from pydantic import BaseModel
 
 from embodiment.eventlog import (
     EVENT_CAPACITY_SAMPLED,
@@ -409,3 +411,255 @@ def test_the_hash_covers_the_body_and_not_itself(prior: PopulationPrior) -> None
     moved = json.loads(json.dumps(snapshot))
     moved["characters"]["npc.0001"]["capacity_baseline"]["dimensions"]["max_strength"]["value"] += 1.0
     assert snapshot_hash(moved) != digest
+
+
+def test_reading_a_snapshot_requires_its_hash(prior: PopulationPrior, tmp_path) -> None:
+    store, posteriors, metadata = make_run(prior)
+    path = tmp_path / "snapshot.yaml"
+    write_snapshot(
+        path,
+        world_seed=WORLD_SEED,
+        store=store,
+        metadata=metadata,
+        posteriors=posteriors,
+    )
+    snapshot = yaml.safe_load(path.read_text(encoding="utf-8"))
+    snapshot.pop("snapshot_hash")
+    path.write_text(
+        yaml.safe_dump(snapshot, sort_keys=True, allow_unicode=True), encoding="utf-8"
+    )
+
+    with pytest.raises(SnapshotShapeError, match="snapshot_hash"):
+        read_snapshot(path)
+
+
+# --------------------------------------------------------------------------
+# PSV1-2 — the body in the snapshot
+# --------------------------------------------------------------------------
+
+
+def make_bodies(store, params=None):
+    from embodiment.dynamics import initial_body_state
+
+    return {
+        character_id: initial_body_state(character_id, record.profile, params=params)
+        for character_id, record in store.items()
+    }
+
+
+def with_dynamics(metadata: RunMetadata, params) -> RunMetadata:
+    versions = {**metadata.component_versions, "dynamics": params.model_version}
+    return metadata.model_copy(update={"component_versions": versions})
+
+
+def test_the_snapshot_carries_the_body_whole(prior: PopulationPrior, dynamics_params) -> None:
+    """Spec §5.3: `characters.<id>.body_state`, integral, next to its baseline."""
+    store, posteriors, metadata = make_run(prior)
+    bodies = make_bodies(store, dynamics_params)
+    snapshot = build_snapshot(
+        world_seed=WORLD_SEED,
+        store=store,
+        metadata=with_dynamics(metadata, dynamics_params),
+        posteriors=posteriors,
+        bodies=bodies,
+    )
+    section = snapshot["characters"]["npc.0001"]
+    assert set(section) == {"capacity_baseline", "body_state"}
+    body = section["body_state"]
+    from embodiment.types import BodyState
+
+    assert set(body) == set(BodyState.model_fields)
+    #: Decision 13.5: present, empty, and nothing in V1 writes it.
+    assert body["illnesses"] == []
+    assert body["injuries"] == []
+    assert body["cumulative_load"] == {"acute_7d": 0.0, "chronic_28d": 0.0}
+
+
+def test_a_body_can_be_read_back_out_of_the_snapshot(prior: PopulationPrior, dynamics_params) -> None:
+    from embodiment.snapshot import body_state_of, capacity_profile_of
+    from embodiment.types import as_document
+
+    store, posteriors, metadata = make_run(prior)
+    bodies = make_bodies(store, dynamics_params)
+    snapshot = build_snapshot(
+        world_seed=WORLD_SEED,
+        store=store,
+        metadata=with_dynamics(metadata, dynamics_params),
+        posteriors=posteriors,
+        bodies=bodies,
+    )
+    section = snapshot["characters"]["npc.0001"]
+    assert as_document(body_state_of(section)) == as_document(bodies["npc.0001"])
+
+    profile = capacity_profile_of(section)
+    assert profile == store.get("npc.0001").profile
+
+
+def test_snapshot_revalidates_a_body_before_signing_world_truth(
+    prior: PopulationPrior, dynamics_params
+) -> None:
+    """Even an object forged around the public copy guard cannot be attested."""
+    store, posteriors, metadata = make_run(prior)
+    bodies = make_bodies(store, dynamics_params)
+    valid = bodies["npc.0001"]
+    bodies["npc.0001"] = BaseModel.model_copy(
+        valid, update={"central_fatigue": 9.0, "t_hours": -3.0}
+    )
+
+    with pytest.raises(ValueError):
+        build_snapshot(
+            world_seed=WORLD_SEED,
+            store=store,
+            metadata=with_dynamics(metadata, dynamics_params),
+            posteriors=posteriors,
+            bodies=bodies,
+        )
+
+
+def test_a_snapshot_with_bodies_must_say_which_dynamics_advanced_them(
+    prior: PopulationPrior, dynamics_params
+) -> None:
+    """A body means nothing without the parameter file it was advanced under."""
+    store, posteriors, metadata = make_run(prior)
+    with pytest.raises(SnapshotShapeError, match="dynamics_version"):
+        build_snapshot(
+            world_seed=WORLD_SEED,
+            store=store,
+            metadata=metadata,  # prior only
+            posteriors=posteriors,
+            bodies=make_bodies(store, dynamics_params),
+        )
+
+
+def test_every_character_in_the_snapshot_has_exactly_one_body(
+    prior: PopulationPrior, dynamics_params
+) -> None:
+    store, posteriors, metadata = make_run(prior)
+    bodies = make_bodies(store, dynamics_params)
+    bodies.pop("npc.0002")
+    with pytest.raises(SnapshotShapeError, match="exactly one body"):
+        build_snapshot(
+            world_seed=WORLD_SEED,
+            store=store,
+            metadata=with_dynamics(metadata, dynamics_params),
+            posteriors=posteriors,
+            bodies=bodies,
+        )
+
+
+def test_a_body_filed_under_the_wrong_character_is_refused(
+    prior: PopulationPrior, dynamics_params
+) -> None:
+    """The body and the baseline under one key have to be the same person."""
+    store, posteriors, metadata = make_run(prior)
+    bodies = make_bodies(store, dynamics_params)
+    bodies["npc.0002"] = bodies["npc.0001"]
+    with pytest.raises(SnapshotShapeError, match="carries the body of"):
+        build_snapshot(
+            world_seed=WORLD_SEED,
+            store=store,
+            metadata=with_dynamics(metadata, dynamics_params),
+            posteriors=posteriors,
+            bodies=bodies,
+        )
+
+
+def test_reading_a_body_from_a_snapshot_that_has_none_says_so(prior: PopulationPrior) -> None:
+    from embodiment.snapshot import body_state_of
+
+    store, posteriors, metadata = make_run(prior)
+    snapshot = build_snapshot(
+        world_seed=WORLD_SEED, store=store, metadata=metadata, posteriors=posteriors
+    )
+    with pytest.raises(SnapshotShapeError, match="no body_state"):
+        body_state_of(snapshot["characters"]["npc.0001"])
+
+
+# --------------------------------------------------------------------------
+# A run is one log: a later phase appends to it, or it is another run
+# --------------------------------------------------------------------------
+
+
+def test_a_later_phase_appends_to_the_run_it_belongs_to(prior, dynamics_params, tmp_path) -> None:
+    from embodiment.eventlog import EVENT_RUN_EXTENDED
+
+    store, posteriors, metadata = make_run(prior)
+    path = tmp_path / "events.jsonl"
+    with EventLog(path, metadata=metadata, required_components=("prior",)) as log:
+        seed_character(WORLD_SEED, "npc.0001", prior, log=log)
+
+    extended = with_dynamics(metadata, dynamics_params)
+    with EventLog.extend(path, metadata=extended, required_components=("prior", "dynamics")) as log:
+        log.append("body.advanced", {"character_id": "npc.0001"})
+
+    records = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+    assert [record["seq"] for record in records] == list(range(len(records)))
+    assert records[0]["event"] == EVENT_RUN_STARTED
+    assert any(record["event"] == EVENT_RUN_EXTENDED for record in records)
+
+
+def test_a_phase_that_declares_another_world_is_refused(prior, tmp_path) -> None:
+    """Two phases that disagree about the seed leave a log nobody can read."""
+    from embodiment.eventlog import RunContinuityError
+
+    store, posteriors, metadata = make_run(prior)
+    path = tmp_path / "events.jsonl"
+    with EventLog(path, metadata=metadata, required_components=("prior",)):
+        pass
+
+    other = metadata.model_copy(update={"world_seed": WORLD_SEED + 1})
+    with pytest.raises(RunContinuityError, match="world_seed"):
+        EventLog.extend(path, metadata=other, required_components=("prior",))
+
+
+def test_a_phase_under_another_parameter_version_is_refused(prior, tmp_path) -> None:
+    """Bodies advanced under one version of a file do not mean the same thing
+    under another (spec §10.2), so a run may not change one halfway through."""
+    from embodiment.eventlog import RunContinuityError
+
+    store, posteriors, metadata = make_run(prior)
+    path = tmp_path / "events.jsonl"
+    with EventLog(path, metadata=metadata, required_components=("prior",)):
+        pass
+
+    other = metadata.model_copy(
+        update={"component_versions": {"prior": "9.9.9"}}
+    )
+    with pytest.raises(RunContinuityError, match="prior_version"):
+        EventLog.extend(path, metadata=other, required_components=("prior",))
+
+
+def test_a_phase_over_another_cohort_is_refused(prior, tmp_path) -> None:
+    from embodiment.eventlog import RunContinuityError
+
+    store, posteriors, metadata = make_run(prior)
+    path = tmp_path / "events.jsonl"
+    with EventLog(path, metadata=metadata, required_components=("prior",)):
+        pass
+
+    hashes = {**metadata.posterior_hash_by_character, "npc.9999": "b" * 64}
+    with pytest.raises(RunContinuityError, match="cohort"):
+        EventLog.extend(
+            path,
+            metadata=metadata.model_copy(update={"posterior_hash_by_character": hashes}),
+            required_components=("prior",),
+        )
+
+
+def test_a_run_metadata_document_reads_back_the_way_it_was_written(prior, dynamics_params) -> None:
+    """`as_dict` and `from_document` are inverses, or a later phase cannot
+    declare what the first one did."""
+    store, posteriors, metadata = make_run(prior)
+    extended = with_dynamics(metadata, dynamics_params)
+    assert RunMetadata.from_document(extended.as_dict()).as_dict() == extended.as_dict()
+
+
+def test_event_log_refuses_a_non_finite_payload_without_appending(prior, tmp_path) -> None:
+    """Strict JSON is the last guard even when a caller bypasses domain models."""
+    store, posteriors, metadata = make_run(prior)
+    path = tmp_path / "events.jsonl"
+    with EventLog(path, metadata=metadata, required_components=("prior",)) as log:
+        before = path.read_bytes()
+        with pytest.raises(ValueError):
+            log.append("invalid.numeric_payload", {"value": float("nan")})
+        assert path.read_bytes() == before

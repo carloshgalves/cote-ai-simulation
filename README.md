@@ -17,12 +17,16 @@ Simulação multiagente inspirada em *Classroom of the Elite*, com personagens p
 
 Este bootstrap instala as Agent Skills e registra as primeiras decisões arquiteturais. Ainda não escolhe framework, provedor de LLM, banco vetorial ou stack de UI.
 
-O primeiro código do repositório é o subdomínio `Embodiment` do motor, em `src/embodiment/` — amostragem de capacidade física, sem nenhuma chamada de LLM. **Python vale para esse subdomínio e só para ele** ([ADR 0007](docs/adr/0007-python-para-o-subdominio-embodiment.md)); framework de agentes, provedor de LLM, banco vetorial e UI seguem em aberto.
+O primeiro código do repositório é o subdomínio `Embodiment` do motor, em `src/embodiment/` — amostragem de capacidade física e estado corporal que persiste no tempo, sem nenhuma chamada de LLM. **Python vale para esse subdomínio e só para ele** ([ADR 0007](docs/adr/0007-python-para-o-subdominio-embodiment.md)); framework de agentes, provedor de LLM, banco vetorial e UI seguem em aberto.
 
 ```bash
 uv sync --extra dev                                                   # ou: pip install -e '.[dev]'
 python -m embodiment seed-cohort --world-seed 42 --n 40 --out runs/demo/
+python -m embodiment advance-clock --run runs/demo/ --character npc.0017 \
+    --days 3 --sleep 4h --quality poor
 pytest
 ```
+
+O segundo comando avança três dias com sono ruim e mostra, por canal, o antes e o depois: `coordination` e `reaction_time` caem visivelmente, `max_strength` quase não se move, e a dívida de sono continua no corpo no dia seguinte. Rodá-lo com `--days 0` não muda nada — cena não cura.
 
 Veja `CONTEXT.md`, `docs/adr/` e `docs/research/ai-landscape.md`.

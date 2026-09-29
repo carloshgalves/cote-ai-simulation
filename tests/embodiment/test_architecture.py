@@ -371,15 +371,47 @@ def test_no_capacity_posterior_is_committed(data_documents, walk_document) -> No
             assert "capacity_posterior" not in where, f"{path}: {where}"
 
 
+#: Units that are themselves fractions, where a value inside `[0, 1]` is a
+#: plausible capacity rather than a coefficient. Everything else is scale
+#: bearing: laps, centimetres, kilograms, milliseconds, hours, degrees.
+FRACTION_UNITS = frozenset({"hit_rate", "risk_multiplier"})
+
+
 def nominal_capacity_dimensions(node: object) -> set[str]:
+    """Dimensions in this mapping that carry a value **in their physical unit**.
+
+    A parameter file may legitimately key a table by dimension — how sensitive
+    each dimension is to lost sleep, what a fatigued region costs each of them —
+    and such a table is a mechanism, not a body. What it may never carry is a
+    capacity *magnitude*: 40 kg of grip, 170 cm of stature, 250 ms of reaction.
+    So the lint asks for the unit, not for the key: a value tagged with a unit,
+    or a bare number too large to be a dimensionless coefficient in a dimension
+    whose unit has a scale.
+
+    The residual gap is a hand-written profile whose every dimension happens to
+    sit inside `[0, 1]` in its own physical unit — a student with half a
+    kilogram of grip strength and one centimetre of stature. That body cannot be
+    meant, and `CapacityProfile` would take it, which is why this is a lint and
+    the invariant is enforced by there being exactly one writer (above).
+    """
     if not isinstance(node, dict):
         return set()
-    dimension_names = {dimension.value for dimension in Dimension}
+    units = {dimension.value: DIMENSION_UNITS[dimension].unit for dimension in Dimension}
     return {
         key
         for key, value in node.items()
-        if key in dimension_names and is_serialised_capacity_value(value)
+        if key in units and is_capacity_magnitude(value, units[key])
     }
+
+
+def is_capacity_magnitude(value: object, unit: str) -> bool:
+    if isinstance(value, dict):
+        #: `{value: …, unit: …}` is the serialised shape of a capacity value, and
+        #: nothing else in this repository writes it.
+        return "unit" in value and is_serialised_capacity_value(value)
+    if not is_serialised_capacity_value(value):
+        return False
+    return unit not in FRACTION_UNITS and abs(float(value)) > 1.0  # type: ignore[arg-type]
 
 
 def is_serialised_capacity_value(value: object) -> bool:
@@ -410,6 +442,24 @@ def test_no_nominal_capacity_profile_compiles(data_documents, walk_document) -> 
                 f"{path}: {where} looks like a nominal capacity profile "
                 f"({sorted(numeric_dimensions)}). Capacity is sampled, never written down."
             )
+
+
+def test_nominal_profile_lint_leaves_a_coefficient_table_alone() -> None:
+    """A mechanism keyed by dimension is not a body (PSV1-2's own shape).
+
+    `body-dynamics.yaml` says how sensitive each dimension is to lost sleep. Those
+    are ratios between effects, and a lint that could not tell them from 40 kg of
+    grip strength would force the mechanism to be written somewhere it cannot be
+    reviewed next to its own constants.
+    """
+    sensitivities = {
+        "coordination": 0.87,
+        "aerobic_capacity": 0.66,
+        "anaerobic_power": 0.63,
+        "sprint_speed": 0.52,
+        "max_strength": 0.35,
+    }
+    assert nominal_capacity_dimensions(sensitivities) == set()
 
 
 def test_nominal_profile_lint_recognises_the_serialised_capacity_shape() -> None:

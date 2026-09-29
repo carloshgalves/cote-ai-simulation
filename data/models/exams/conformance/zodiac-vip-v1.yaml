@@ -325,6 +325,8 @@ economic_properties:
     expect_total_pp: 85500000
   - id: P06-no-duplicate-settlement
     assert: replaying_terminal_input_is_idempotent_by_cause_id
+  - id: P07-no-direct-expulsion
+    assert: no_outcome_or_invalid_submission_directly_expel_student_in_v1
 
 reachability:
   - {outcome: OUTCOME_1_SHARED_SUCCESS, witness: V01-final-correct-outcome-1}

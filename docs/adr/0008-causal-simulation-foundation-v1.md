@@ -3,7 +3,8 @@
 **Status:** Accepted
 **Data:** 2026-09-10
 **Relacionado:** ADR 0001 (world truth e conhecimento), ADR 0003 (tempo lógico), ADR 0006
-(resolução física dentro do Simulation Engine), ADR 0007 (fronteira de dados do `Embodiment`)
+(resolução física dentro do Simulation Engine), ADR 0007 (fronteira de dados do `Embodiment`),
+[ADR 0009](0009-canonical-causal-codec-and-digests.md) (codec e digests)
 
 ## Contexto
 
@@ -139,6 +140,12 @@ seguem a ordem do schema; maps são ordenados pela chave canônica; e coleções
 total declarada pelo contrato que as possui. Nenhuma implementação pode usar serialização default da
 linguagem. Domain tags, algoritmo, schemas e regras de ordenação integram o hash da política; colisão
 de um id derivado com componentes diferentes é corrupção e falha fechado.
+
+O [ADR 0009](0009-canonical-causal-codec-and-digests.md) fixa a extensão compatível deste contrato:
+RFC 8949 core deterministic CBOR sob profile estrito, NFC/NPSS Unicode 15.1.0, CDDL e registries
+versionados, domain separation por tag e SHA-256. O layout normativo vive em
+[`canonical-codec-v1.md`](../architecture/canonical-codec-v1.md); JSON/YAML e serialização default da
+linguagem não são imagens hasháveis.
 
 As origens são estáveis e independentes de execução:
 

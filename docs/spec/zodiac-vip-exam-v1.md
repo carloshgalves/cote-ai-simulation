@@ -229,9 +229,9 @@ A V1 não resolve a divergência de contagem “terceiro/quarto dia”. Usa temp
 ```text
 SETUP
   -> ROLE_DISCLOSURE at role_disclosure_at
-  -> ACTIVE          [role_disclosure_at, active_close_at)
-  -> QUIET_GAP       [active_close_at, final_window_open)
-  -> FINAL_WINDOW    [final_window_open, final_window_close)
+  -> ACTIVE              [role_disclosure_at, active_close_at)
+  -> POST_ACTIVE_EARLY   [active_close_at, final_window_open)
+  -> FINAL_WINDOW        [final_window_open, final_window_close)
   -> SETTLEMENT      at final_window_close
   -> RESULT_PUBLICATION at result_publish_at
   -> CLOSED
@@ -292,17 +292,17 @@ Depois da primeira `SchoolSubmissionReceived(actor_id)`, nova tentativa do ator 
 5. `guessed_actor_id` pertence ao grupo;
 6. actor não é o VIP;
 7. actor.class_id != vip.class_id;
-8. fase é `ACTIVE` ou `FINAL_WINDOW`.
+8. fase é `ACTIVE`, `POST_ACTIVE_EARLY` ou `FINAL_WINDOW`.
 
 Falhas 3–8 em uma school-received submission geram `SubmissionInvalidated(reason)`, não outcome.
 
 ### 10.3 Early submission
 
-Uma submission semanticamente válida em `ACTIVE` é terminal:
+Uma submission semanticamente válida em `ACTIVE` ou `POST_ACTIVE_EARLY` é terminal:
 - guess == VIP → Outcome 3;
 - guess != VIP → Outcome 4.
 
-`QUIET_GAP` não aceita palpite na V1. Isso evita estender “early” para um intervalo cuja regra textual precisa de verificação. Se a leitura mostrar que o período 21:00–21:30 aceita Outcomes 3/4, isso vira mudança explícita de model_version.
+`POST_ACTIVE_EARLY` não agenda novas reuniões, mas continua aceitando Outcomes 3/4 até a abertura da janela final. A regra permanece `UNVERIFIED` até leitura Tier 0–1, porém é a reconstrução usada pelo perfil `CANON_ADAPTED`.
 
 ### 10.4 Final submission
 

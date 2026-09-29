@@ -76,6 +76,8 @@ The packs cover:
 - context → objective → behavior → consequence decision patterns;
 - social interaction tendencies without prose imitation;
 - blind spots and failure modes;
+- explicit contextual risk tolerance, never a scalar score;
+- an explicit initial-beliefs slot that remains empty when evidence is insufficient;
 - explicit capability-versus-manifestation rules.
 
 Physical capacity is deliberately excluded. It remains owned by the shared feat corpus and Embodiment domain.
@@ -85,10 +87,11 @@ Physical capacity is deliberately excluded. It remains owned by the shared feat 
 1. **Primary verification remains open.** None of the 32 records is human-verified against Tier 0–1 text yet.
 2. **Exact Y1_START private-knowledge boundaries need direct reading.** The most sensitive records are Kiyotaka's pre-enrollment background, Suzune/Manabu family context, Kushida/Horikita prior history, and Hirata's pre-enrollment trauma.
 3. **Later behavior is not proof of an unchanged earlier goal.** V0 uses later events conservatively for tendencies/capabilities; event-specific goals stay future-only (for example Ryūen's search for X).
-4. **Ichinose has no distinctive private Y1_START knowledge encoded yet.** The registered V0 source set provides stronger behavioral than private-background evidence for her.
-5. **Ryūen's exact active Y1_START priorities remain underdetermined.** V0 records later control/leverage behavior as evidence while refusing to seed the later X objective.
-6. **Physical feats remain empty.** No character pack substitutes a guessed physical score for the missing feat corpus.
-7. **First-exam roster is an integration dependency.** If Trilha C selects an exam requiring another indispensable participant, add that participant deliberately rather than expanding the roster wholesale.
+4. **Initial beliefs are still sparse.** The pack contract now represents them explicitly, but V0 leaves unsupported entries empty rather than reverse-engineering school-entry beliefs from later behavior.
+5. **Ichinose has no distinctive private Y1_START knowledge encoded yet.** The registered V0 source set provides stronger behavioral than private-background evidence for her.
+6. **Ryūen's exact active Y1_START priorities remain underdetermined.** V0 records later control/leverage behavior as evidence while refusing to seed the later X objective.
+7. **Physical feats remain empty.** No character pack substitutes a guessed physical score for the missing feat corpus.
+8. **First-exam integration is now known.** Trilha C selected the Y1 V4 Zodiac/VIP exam. The ExamSpec can execute with the six focal packs plus simplified NPC participants, so no seventh high-fidelity pack is mechanically required for the first run. A later canon-comparison scenario may justify an additional focal pack only after its role in the selected group/roster is directly verified.
 
 ## Canon conflicts
 

@@ -19,6 +19,7 @@ initial_knowledge:
     evidence_refs: [ev.ryuen.v07.search-for-x]
     evidence_temporality: FUTURE_EVIDENCE_ONLY
     horizon_relation: NOT_KNOWN_AT_HORIZON
+initial_beliefs: []
 stable_tendencies:
   - id: char.ryuen.tendency.proxy-before-exposure
     statement: He is willing to create pressure through subordinates or indirect setups before revealing himself as the organizer.
@@ -92,6 +93,15 @@ capabilities:
     dimension: risk_management
     can_do: Trade safety for information/control in adversarial situations.
     manifestation_at_horizon: Higher willingness to pressure an uncertain situation than characters who prioritize harmony.
+risk_tolerance:
+  - id: char.ryuen.risk.adversarial-leverage
+    statement: >
+      He accepts comparatively high adversarial risk when pressure, probing, or a hidden-state bet can
+      create control or leverage, but may underweight uncertainty when he becomes committed to a model.
+    status: UNVERIFIED
+    evidence_refs: [ev.ryuen.v02.direct-challenge, ev.ryuen.v03.hidden-state-miss]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
 decision_patterns:
   - id: char.ryuen.decision.create-leverage
     context: A rival class can be weakened if an incident is framed to place them on the defensive.

@@ -13,6 +13,7 @@ identity:
   initial_position: Class B student; no formal institutional office is encoded by this V0 pack.
   relationships_at_horizon: []
 initial_knowledge: []
+initial_beliefs: []
 stable_tendencies:
   - id: char.ichinose.tendency.cooperate-across-class
     statement: She is willing to help students outside her own class when cooperation can resolve a concrete problem.
@@ -101,6 +102,15 @@ capabilities:
     dimension: deception
     can_do: Support a tactical misrepresentation tied to a concrete dispute-resolution objective.
     manifestation_at_horizon: Conditional; cooperative and transparent routes remain more characteristic when adequate.
+risk_tolerance:
+  - id: char.ichinose.risk.self-cost-for-group
+    statement: >
+      She prefers cooperative, relationship-preserving options, yet can accept substantial personal cost
+      when she believes doing so protects classmates; that willingness can become exploitable.
+    status: UNVERIFIED
+    evidence_refs: [ev.ichinose.v02.cross-class-help, ev.ichinose.v10.costly-class-protection]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
 decision_patterns:
   - id: char.ichinose.decision.cross-class-problem
     context: Another class faces a dispute and she can provide information or coordination at manageable cost.

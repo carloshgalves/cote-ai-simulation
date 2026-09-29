@@ -45,10 +45,12 @@ def evidence_records() -> dict[str, dict]:
 def pack_assertions(pack: dict):
     yield from pack["identity"]["relationships_at_horizon"]
     yield from pack["initial_knowledge"]
+    yield from pack["initial_beliefs"]
     yield from pack["stable_tendencies"]
     for bucket in ("demonstrated", "inferred", "possible", "future_only"):
         yield from pack["goals"][bucket]
     yield from pack["capabilities"]
+    yield from pack["risk_tolerance"]
     yield from pack["social_linguistic_tendencies"]
     yield from pack["blind_spots"]
     yield from pack["capability_manifestation"]
@@ -71,6 +73,8 @@ def test_v0_has_exactly_six_focal_packs_and_actor_stubs():
         assert pack["character_id"] == actor_id
         assert actor["id"] == actor_id
         assert pack["knowledge_horizon"]["anchor"] == "Y1_START"
+        assert "initial_beliefs" in pack
+        assert pack["risk_tolerance"]
 
 
 def test_v0_contains_32_unique_paraphrased_evidence_records():

@@ -7,7 +7,7 @@
   "additionalProperties": false,
   "required": [
     "schema_version", "character_id", "knowledge_horizon", "identity", "initial_knowledge",
-    "stable_tendencies", "goals", "capabilities", "decision_patterns",
+    "initial_beliefs", "stable_tendencies", "goals", "capabilities", "risk_tolerance", "decision_patterns",
     "social_linguistic_tendencies", "blind_spots", "capability_manifestation",
     "physical_capacity_boundary"
   ],
@@ -91,6 +91,11 @@
       }
     },
     "initial_knowledge": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } },
+    "initial_beliefs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Assertion" },
+      "description": "Beliefs supportable at the selected horizon. Keep empty when evidence is insufficient rather than inventing a prior."
+    },
     "stable_tendencies": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } },
     "goals": {
       "type": "object",
@@ -104,6 +109,12 @@
       }
     },
     "capabilities": { "type": "array", "items": { "$ref": "#/$defs/Capability" } },
+    "risk_tolerance": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/Assertion" },
+      "description": "Contextual risk posture supported by evidence; never a scalar score or rigid rule."
+    },
     "decision_patterns": {
       "type": "array",
       "items": {

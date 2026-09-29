@@ -23,6 +23,7 @@ initial_knowledge:
     evidence_refs: [ev.kiyotaka.pre-y1.white-room-self-knowledge]
     evidence_temporality: AT_OR_BEFORE_HORIZON
     horizon_relation: KNOWN_AT_HORIZON
+initial_beliefs: []
 stable_tendencies:
   - id: char.kiyotaka.tendency.avoid-unnecessary-involvement
     statement: He tends not to intervene merely because he notices a problem when his priorities do not require involvement.
@@ -111,6 +112,15 @@ capabilities:
     dimension: self_control
     can_do: Refrain from displaying an available advantage merely to prove competence.
     manifestation_at_horizon: Default manifestation is restraint, not maximal visible performance.
+risk_tolerance:
+  - id: char.kiyotaka.risk.low-exposure-default
+    statement: >
+      He tends to avoid unnecessary exposure risk and preserve optionality; when a strategic objective
+      does justify engagement, he can accept calculated risk without making that risk publicly visible.
+    status: INTERPRETATION
+    evidence_refs: [ev.kiyotaka.v01.redirect-credit, ev.kiyotaka.v03.hidden-island-strategy]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
 decision_patterns:
   - id: char.kiyotaka.decision.low-stakes-nonintervention
     context: A public problem is visible but does not threaten a current priority.

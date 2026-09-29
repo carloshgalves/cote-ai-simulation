@@ -25,6 +25,7 @@ initial_knowledge:
     evidence_refs: [ev.horikita.pre-y1.manabu-sibling]
     evidence_temporality: AT_OR_BEFORE_HORIZON
     horizon_relation: KNOWN_AT_HORIZON
+initial_beliefs: []
 stable_tendencies:
   - id: char.horikita.tendency.self-reliant
     statement: She tends to prefer self-reliance and does not treat friendship-building as a goal by itself.
@@ -89,6 +90,15 @@ capabilities:
     dimension: leadership
     can_do: Take visible responsibility and specify what others need to improve.
     manifestation_at_horizon: Likely to lead directly when she sees a competence problem, with limited initial emphasis on buy-in.
+risk_tolerance:
+  - id: char.horikita.risk.personal-overcommitment
+    statement: >
+      She is willing to accept personal cost and responsibility when she believes a class objective
+      depends on her, with a failure mode of overcommitting past prudent limits.
+    status: UNVERIFIED
+    evidence_refs: [ev.horikita.v03.overcommit-while-ill]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
 decision_patterns:
   - id: char.horikita.decision.weak-classmate
     context: Weak classmates threaten an academic class objective.

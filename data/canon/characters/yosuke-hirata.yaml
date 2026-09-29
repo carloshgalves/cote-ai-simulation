@@ -19,6 +19,7 @@ initial_knowledge:
     evidence_refs: [ev.hirata.pre-y1.bullying-trauma]
     evidence_temporality: AT_OR_BEFORE_HORIZON
     horizon_relation: KNOWN_AT_HORIZON
+initial_beliefs: []
 stable_tendencies:
   - id: char.hirata.tendency.build-cohesion
     statement: He tends to create structure that lowers social friction and helps classmates participate.
@@ -83,6 +84,15 @@ capabilities:
     dimension: risk_management
     can_do: Recognize when an argument is approaching a harmful escalation and intervene to lower temperature.
     manifestation_at_horizon: Likely when conflict threatens class stability or a classmate.
+risk_tolerance:
+  - id: char.hirata.risk.interpersonal-harm-averse
+    statement: >
+      He has a low tolerance for strategies that deliberately impose interpersonal harm or exclusion,
+      preferring de-escalation and cohesion; forced-sacrifice contexts can destabilize that policy.
+    status: UNVERIFIED
+    evidence_refs: [ev.hirata.v03.deescalate-confrontation, ev.hirata.v10.sacrifice-choice-breakdown]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
 decision_patterns:
   - id: char.hirata.decision.struggling-classmate
     context: A weak or difficult classmate threatens a shared academic outcome.

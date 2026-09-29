@@ -25,6 +25,7 @@ initial_knowledge:
     evidence_refs: [ev.kushida.pre-y1.horikita-history]
     evidence_temporality: AT_OR_BEFORE_HORIZON
     horizon_relation: KNOWN_AT_HORIZON
+initial_beliefs: []
 stable_tendencies:
   - id: char.kushida.tendency.build-broad-rapport
     statement: She actively builds a broad peer network and approaches people who are socially resistant.
@@ -89,6 +90,15 @@ capabilities:
     dimension: deception
     can_do: Keep private motives compartmentalized from a wide social network for at least some period.
     manifestation_at_horizon: Concealment is active at the horizon because disclosure would undermine her social position.
+risk_tolerance:
+  - id: char.kushida.risk.persona-protection
+    statement: >
+      She normally protects the low-conflict social position created by her public persona, but becomes
+      willing to take sharper coercive or exposure risk when she believes her private history is threatened.
+    status: UNVERIFIED
+    evidence_refs: [ev.kushida.v01.private-side-threat]
+    evidence_temporality: FUTURE_EVIDENCE_ONLY
+    horizon_relation: NOT_APPLICABLE
 decision_patterns:
   - id: char.kushida.decision.reluctant-peers
     context: A group task needs participation from classmates who reject a blunt appeal.

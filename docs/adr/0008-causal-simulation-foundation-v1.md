@@ -363,6 +363,7 @@ Uma fonte exógena declara o fim de sua contribuição a uma coordenada com um m
 ```text
 SourceClosure {
   closure_id                              // derivado de (run_id, source_id, producer_closure_key)
+  run_id
   source_id
   producer_closure_key                    // estável na fonte; reusada somente em reentrega idêntica
   closed_through: EligibilityCoordinate     // monotônico por fonte; pode saltar à frente
@@ -484,7 +485,8 @@ AdmissionFence {
                   // covering_closure(source_id, closure_coordinate) de toda fonte exógena declarada
   cohort: { cohort_id, rounds: [{ decision_round_id,
                                   slots: [{ slot_id, response_ref }] }] }
-  admitted_units: [{ unit_id, unit_digest }]  // ordem canônica; ids são a projeção deste array
+  admitted_units: [{ eligibility, unit_kind, source_id, unit_id, unit_digest }]
+                  // chave de ordem autocontida; ids são a projeção deste array
   input_digest
   admission_order_policy_version + admission_order_policy_hash
   causal_identity_policy_version + causal_identity_policy_hash
@@ -1448,6 +1450,7 @@ nova tentativa grava fence com `to_attempt_ordinal`, `cycle_plan` e membresia id
 ```text
 Event {
   event_id
+  run_id
   event_order_key: EventOrderKey
   event_type + schema_version
   occurred_at: SimulationInstant
@@ -2024,8 +2027,9 @@ uma leitura privilegiada não pode vazar por efeito colateral.
     append position, `ingress_seq` e ordem de iteração nunca alocam identidade; aliases iguais mas
     distintos preservam ids próprios por chaves de produtor distintas.
 34. `fence_digest` cobre bytes canônicos de toda a topologia do `AdmissionFence`: provas ordenadas por
-    fonte, rounds por id, pares slot/resposta por slot, `admitted_units` como pares
-    `(unit_id, unit_digest)`, `input_digest`, `cycle_plan` e maps/set-like collections por chave
+    fonte, rounds por id, pares slot/resposta por slot, `admitted_units` como records
+    `(eligibility, unit_kind, source_id, unit_id, unit_digest)`, `input_digest`, `cycle_plan` e
+    maps/set-like collections por chave
     normativa. Mesmo id com bytes diferentes falha antes da avaliação; mesmos conjuntos e políticas
     produzem os mesmos bytes independentemente da ordem local de registro ou iteração.
 35. Uma transição de predicate que ativa trigger cria exatamente uma `TriggerActivation` `PENDING`

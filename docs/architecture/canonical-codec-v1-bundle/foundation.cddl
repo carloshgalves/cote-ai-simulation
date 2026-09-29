@@ -25,10 +25,11 @@ actor-ref = [namespace: machine-id, actor-id: machine-id]
 entity-ref = [kind: u16, namespace: machine-id, entity-id: machine-id]
 location-ref = [namespace: machine-id, location-id: machine-id]
 policy-ref = [policy-id: machine-id, version: u32, hash: digest32]
-schema-ref = [schema-id, schema-version, hash: digest32]
+schema-ref = [schema-id, schema-version]
 causal-ref = [kind: u16, id: id32, digest: digest32]
 event-ref = [event-id: id32, event-digest: digest32]
 input-ref = [input-kind: u16, input-id: id32, input-digest: digest32]
+decision-subject-ref = [input-kind: u16, input-id: id32, input-digest: digest32]
 evidence-ref = [ref-kind: u16, referenced-id: id32, referenced-digest: digest32]
 genesis-ref = [genesis-id: id32, genesis-digest: digest32]
 typed-value = [schema-id, schema-version, canonical-envelope: bstr, envelope-digest: digest32]
@@ -53,6 +54,7 @@ trigger-origin =
 
 source-closure = [
   closure-id: id32,
+  run-id: id32,
   source-id: machine-id,
   producer-closure-key: machine-id,
   closed-through: eligibility-coordinate,
@@ -217,7 +219,8 @@ closure-proof-item = [
 cohort-slot = [slot-id: machine-id, response-ref: causal-ref]
 cohort-round = [decision-round-id: id32, slots: [0*1024 cohort-slot]]
 decision-cohort = [cohort-id: id32, rounds: [0*1024 cohort-round]]
-admitted-unit = [unit-id: id32, unit-digest: digest32]
+admitted-unit = [eligibility: eligibility-coordinate, unit-kind: u8, source-id: machine-id,
+                   unit-id: id32, unit-digest: digest32]
 
 admission-fence-fields = (
   run-id: id32,
@@ -295,7 +298,7 @@ decision-record-fields = (
   run-id: id32,
   cycle-id: id32,
   attempt-ordinal: u32,
-  subject: input-ref,
+  subject: decision-subject-ref,
   disposition: u8,
   candidate-id: optional<id32>,
   reason-code: machine-id,
@@ -371,6 +374,7 @@ cycle-control-state = [status: u8, cycle-id: optional<id32>, attempt-ordinal: op
 
 event-fields = (
   event-id: id32,
+  run-id: id32,
   event-order-key,
   event-type: machine-id,
   event-schema-version: schema-version,
@@ -443,6 +447,8 @@ epistemic-checkpoint-ref = [actor: actor-ref, store-id: machine-id, schema-versi
 genesis-manifest = [run-id: id32, world-seed: bstr .size 32, timezone: iana-timezone,
                     initial-instant: simulation-instant,
                     parent-checkpoint-history-ref: optional<bstr>, codec-policy-id: machine-id,
+                    codec-version: u32, identity-algorithm-version: machine-id,
+                    unicode-version: machine-id, normalization-profile-id: machine-id,
                     codec-policy-hash: digest32, schema-bundle-hash: digest32,
                     extension-bundles: [0*1024 [bundle-id: machine-id, hash: digest32]],
                     exogenous-source-ids: [0*1024 machine-id], policies: [1*1024 policy-ref],
@@ -550,4 +556,4 @@ test-i64 = i64
 test-u64 = u64
 test-empty = []
 test-machine-id = machine-id
-test-enum-u8 = u8
+test-enum-u8 = [value: u8]

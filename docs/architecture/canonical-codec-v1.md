@@ -27,11 +27,13 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `244306fa4d9f304c96643209be6e70cb55d855155394cd0bdc01af49d6c78880` |
+| `schema_bundle_hash` | `d8061407dd683fdce12980a54881ffb4a95eee0b0c5b35112f329e453bae1c1f` |
+| `conformance_suite_hash` | `ba90e34f29af301d8d92bece6a1dfccd249c9e4e07e37c97c842e7fcb36fb67e` |
 
-O manifesto imutável do run carrega esses valores, `codec_policy_hash`, `schema_bundle_hash` e os
-hashes dos registries de domain tags, enums, ordering keys e duplicate policies. Um nome igual com
-hash diferente é corrupção.
+O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
+cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
+`conformance_suite_hash` é recibo externo da suíte que valida o bundle, não campo causal do genesis —
+incluí-lo no próprio vetor criaria autorreferência. Um nome igual com hash diferente é corrupção.
 
 ## 2. Envelope canônico
 
@@ -161,10 +163,11 @@ o texto em si não é hashado. Uppercase, prefixo/algoritmo diferente, hex de ta
 tag incompatível com o campo são rejeitados.
 
 `causal-ref = [reference_kind, id, digest]` não admite identidade implícita. Para cada código de
-`reference_kind`, `registries.json.reference_identities` seleciona a operação de id, o schema do
-preimage e os fields persistidos que o constroem. Kinds discriminados (`input` e `slot_response`)
-fazem um segundo dispatch pelo discriminante registrado. Strict replay recompõe o id a partir desses
-fields antes de aceitar o digest; metadado de chamada/store não pode completar um preimage ausente.
+`reference_kind`, `registries.json.reference_identities` seleciona o root persistido e as operações,
+schemas e componentes tanto do id quanto do digest. Kinds discriminados (`input` e `slot_response`)
+fazem um segundo dispatch pelas tabelas normativas `unit_reference_dispatch` e
+`slot_response_reference_dispatch`. Strict replay recompõe ambos a partir dos records persistidos
+antes de aceitar a ref; metadado de chamada/store não pode completar um preimage ausente.
 
 ## 4. Records, opcionais e sum types
 
@@ -289,17 +292,24 @@ codec_policy_hash = SHA-256(
 schema_bundle_hash = SHA-256(
   ASCII("cote.csf.bundle.schema.v1") || 0x00 || raw_bytes("schema-manifest.json")
 )
+
+conformance_suite_hash = SHA-256(
+  ASCII("cote.csf.bundle.conformance.v1") || 0x00 || raw_bytes("conformance-manifest.json")
+)
 ```
 
 Cada manifesto lista path ASCII, tamanho e SHA-256 dos bytes exatos de cada artefato, em ordem de
-path. `BUNDLE.sha256` publica os dois hashes acima e os hashes raw dos manifestos; é recibo e não entra
+path. `BUNDLE.sha256` publica os três hashes acima e os hashes raw dos manifestos; é recibo e não entra
 no preimage. Os valores V1 estão na §1. Item ausente/extra, path duplicado, bytes, tamanho ou hash
 divergente falham fechado.
 
 O policy manifest cobre somente `profile.json` e `unicode.json`, pois eles definem as regras globais
-que distinguem codec V1 de V2. O schema manifest cobre CDDL, registries e fixtures. Assim nova versão
-local muda `schema_bundle_hash`, não `codec_policy_hash`; mudar a regra global correspondente continua
-obrigando V2 pela matriz da §10.
+que distinguem codec V1 de V2. O schema manifest cobre CDDL e registries; refs de schema no genesis
+fixam `(schema_id, schema_version)` sob esse único `schema_bundle_hash`, sem hashes locais sem
+derivação. `conformance-manifest.json` cobre `fixtures.json` separadamente. Essa separação elimina o
+ciclo que surgiria se um vetor de genesis precisasse carregar o hash de um manifesto que, por sua
+vez, incluísse o próprio vetor. Nova versão local muda `schema_bundle_hash`, não `codec_policy_hash`;
+mudar a regra global correspondente continua obrigando V2 pela matriz da §10.
 
 Geradores de código são adapters descartáveis. CDDL, registries, política semântica e golden vectors
 são autoridade; output gerado ou reflexão de runtime não é.
@@ -388,8 +398,8 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 18. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
 
 A suíte V1 contém 141 casos positivos — todos os roots persistidos e todas as 65 operações
-registradas —, 28 casos negativos com `error_code` estável, 95 casos semânticos de binding,
-identidade, ordenação e idempotência, cinco casos de normalização e dois vetores SHA-256. CI de
+registradas —, 28 casos negativos com `error_code` estável, 111 casos semânticos de binding,
+identidade, ordenação e idempotência, seis casos de normalização e dois vetores SHA-256. CI de
 conformidade executa os mesmos golden vectors em
 pelo menos duas implementações independentes e linguagens diferentes. Ambas precisam provar valor
 tipado → bytes, bytes → valor tipado estrito,

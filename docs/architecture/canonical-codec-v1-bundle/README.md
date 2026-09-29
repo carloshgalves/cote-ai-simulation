@@ -15,7 +15,8 @@ este bundle na seguinte ordem:
 3. `registries.json`, para domain tags, schemas, enums, variants, roles e coleções set-like;
 4. `unicode.json`, para a versão e os dados Unicode exatos;
 5. `fixtures.json`, para bytes/digests positivos e códigos de erro negativos;
-6. `policy-manifest.json` e `schema-manifest.json`, para a composição e os hashes do bundle.
+6. `policy-manifest.json`, `schema-manifest.json` e `conformance-manifest.json`, para a composição e
+   os hashes do bundle.
 
 Todos os arquivos são UTF-8 sem BOM, com LF e newline final. Paths são ASCII, relativos a este
 diretório, sem `.`/`..`, barra inicial ou barra invertida. O byte content dos artefatos é normativo;
@@ -36,16 +37,22 @@ codec_policy_hash = SHA-256(
 schema_bundle_hash = SHA-256(
   ASCII("cote.csf.bundle.schema.v1") || 0x00 || raw_file_bytes("schema-manifest.json")
 )
+
+conformance_suite_hash = SHA-256(
+  ASCII("cote.csf.bundle.conformance.v1") || 0x00 || raw_file_bytes("conformance-manifest.json")
+)
 ```
 
 Os manifestos são arrays JSON ordenados por `path`; cada entrada fixa `path`, `size` e
 `sha256_lower_hex`. O verificador precisa rejeitar path repetido, item ausente/extra, tamanho ou hash
-divergente e bytes JSON diferentes dos commitados. Os dois hashes resultantes estão em
-`BUNDLE.sha256`; esse arquivo é um recibo e não entra em nenhum dos dois hashes.
+divergente e bytes JSON diferentes dos commitados. Os três hashes resultantes estão em
+`BUNDLE.sha256`; esse arquivo é um recibo e não entra em nenhum deles.
 
 `policy-manifest.json` contém somente `profile.json` e `unicode.json`: regras globais cuja mudança
-cria codec V2. `schema-manifest.json` contém `foundation.cddl`, `registries.json` e `fixtures.json`:
-regras locais versionáveis sem mudar o encoder. Assim um novo schema/domain tag altera apenas um
+cria codec V2. `schema-manifest.json` contém `foundation.cddl` e `registries.json`: regras locais
+versionáveis sem mudar o encoder. `conformance-manifest.json` contém `fixtures.json`. Separar a suíte
+do schema evita autorreferência: o vetor de genesis pode persistir o `schema_bundle_hash` real sem que
+seus próprios bytes integrem esse hash. Assim um novo schema/domain tag altera apenas um
 schema/extension bundle e exige novo genesis quando não estava pinado, mas não cria falsamente um
 novo codec.
 
@@ -69,16 +76,23 @@ externo ser aceito.
 
 Uma extensão pode adicionar schema/domain tag, enum ou role sem alterar este diretório, mas não pode
 redefinir nome/código existente nem relaxar o profile. O genesis fixa o hash de cada extension bundle
-e o conjunto de schema versions admitidas. Uma run não incorpora bundle publicado depois do genesis.
+e o conjunto de pares `(schema_id, schema_version)` admitidos sob o `schema_bundle_hash`; não existe
+hash local de schema sem algoritmo próprio. Uma run não incorpora bundle publicado depois do genesis.
 `causal-ref` e `evidence-ref` usam os códigos de `reference_kind`; `input-ref` usa `unit_kind`.
 Roles/códigos extension-specific só são válidos quando o extension bundle requerido pelo registry os
 declara de forma append-only.
 
-`enum_bindings` e `role_bindings` ligam cada field path ao registry aplicável; o tipo base
-`u8`/`u16` sozinho nunca autoriza um código. `reference_identities` liga todos os 23
-`reference_kind` à operação/schema de id e aos componentes persistidos do preimage. Cada entrada de
+`enum_bindings` e `role_bindings` ligam cada field path ao registry aplicável; binding do path mais
+específico prevalece sobre o binding do tipo reutilizado, e `u8`/`u16` sozinho nunca autoriza um
+código. `reference_identities` liga todos os 23 `reference_kind` ao root persistido e às operações de
+id e digest. `unit_reference_dispatch` e `slot_response_reference_dispatch` fecham os dois dispatches
+discriminados. Cada entrada de
 `set_like_collections` tem quatro posições normativas — field path, ordering key, duplicate policy e
 identity key —; mesma identity key com bytes diferentes é sempre `SET_IDENTITY_COLLISION`.
+
+`Event` e `SourceClosure` persistem `run_id`, portanto seus ids são recomputáveis sem contexto do
+store. Cada `admitted-unit` persiste `eligibility`, `unit-kind` e `source-id` além de id/digest; sua
+ordering key inteira é obtida do próprio valor canônico e conferida contra o record do ledger.
 
 `fixture_domain_operations` registra separadamente todas as combinações
 `(domain_tag, schema_id, schema_version)` usadas pelos casos positivos. Strict decode em modo de
@@ -95,17 +109,19 @@ operação lógica e policy ref.
 
 ## Vetores e verificação independente
 
-`fixtures.json` contém 141 vetores positivos, 28 negativos, 95 casos semânticos, cinco casos de
+`fixtures.json` contém 141 vetores positivos, 28 negativos, 111 casos semânticos, seis casos de
 normalização convergente e dois vetores SHA-256. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 65 operações de id/digest/hash do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
-`error_code` estável. Os casos semânticos executam bindings de enum, duplicata/colisão de cada família
-de ref, dois attempts do mesmo ciclo, permutação de `rule-versions` e idempotência
+`error_code` estável. Os casos semânticos executam bindings de enum em roots completos,
+duplicata/colisão de cada família de ref, record persistido → ref para todos os dispatches de input e
+slot response, dois attempts do mesmo ciclo, permutação de `rule-versions`, fence completo permutado,
+mismatch/corrupção entre fence e ledger, pinning do genesis e idempotência
 ABSENT/PRESENT/conflitante.
 
 No checkpoint documental, os 141 vetores positivos foram produzidos por um encoder isolado em
 Node.js 22.22.1 e, independentemente, decoded, reencoded byte a byte e rehashados por um segundo
-encoder/decoder em Python 3.14.4; o segundo verificador também confirmou os cinco casos de
+encoder/decoder em Python 3.14.4; o segundo verificador também confirmou os seis casos de
 normalização e os dois vetores SHA-256. Esses programas foram ferramentas temporárias, não
 implementação da fundação nem parte do bundle. A aceitação de uma implementação continua exigindo que
 ela execute positivos e negativos e faça validação CDDL/semântica, conforme o contrato principal.

@@ -160,8 +160,8 @@ submission:
   phases:
     ACTIVE:
       accepted_semantic_action: EARLY_GUESS
-    QUIET_GAP:
-      accepted_semantic_action: NONE
+    POST_ACTIVE_EARLY:
+      accepted_semantic_action: EARLY_GUESS
     FINAL_WINDOW:
       accepted_semantic_action: FINAL_GUESS
   semantic_validation_order:

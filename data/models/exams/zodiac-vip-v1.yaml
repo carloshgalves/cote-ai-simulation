@@ -140,6 +140,31 @@ time:
     all_before_active_close: true
     absence_scoring_effect: NONE_IN_V1
 
+communication:
+  status: UNVERIFIED
+  formal_meetings:
+    count_per_group: 6
+    content_semantics: GROUP_DISCRETION
+  outside_formal_meetings:
+    exam_level_blanket_prohibition: NONE_IN_V1
+    owner: CSF
+  truth_semantics: CLAIMS_DO_NOT_BECOME_WORLD_TRUTH
+
+discipline:
+  direct_expulsion_from_outcomes: NONE
+  discovered_external_prohibitions:
+    status: UNVERIFIED
+    examples:
+      - coercion_or_intimidation
+      - taking_or_using_another_students_phone
+      - unauthorized_submission_from_another_students_device
+  active_expulsion_hook_in_v1: false
+  owner: CSF_OR_FUTURE_DISCIPLINARY_CONTEXT
+  note: >
+    The exam model may only apply a future verified disciplinary consequence to
+    a causal violation fact already established elsewhere. It does not decide
+    consent, possession, coercion or device use.
+
 actions:
   - type: SubmitVipGuess
     fields:

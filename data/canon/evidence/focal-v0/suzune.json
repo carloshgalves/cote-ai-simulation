@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "collection": "evidence.focal-v0.suzune",
+  "evidence": [
+    {
+      "id": "ev.suzune.v01.social-distance",
+      "schema_version": 2,
+      "retrieval_role": "BEHAVIORAL_CANON",
+      "text": "Horikita repeatedly declines attempts to draw her into casual group socializing, preferring distance to joining a gathering merely for harmony or appearance.",
+      "story_time": {
+        "mode": "HOLDS_BY",
+        "holds_by": {
+          "anchor": "Y1_M01"
+        },
+        "origin": "UNKNOWN",
+        "basis": "Early Volume 1 school life."
+      },
+      "narrative_position": {
+        "work": "ln.y1.v01",
+        "ordinal": 401
+      },
+      "actors": [
+        "actor.suzune-horikita"
+      ],
+      "topics": [
+        "social-distance",
+        "independence",
+        "class-relations"
+      ],
+      "situation_tags": [
+        "social-invitation",
+        "refusal"
+      ],
+      "provenance": {
+        "epistemic_status": "UNVERIFIED",
+        "supports": [
+          {
+            "work": "ln.y1.v01",
+            "locator": {
+              "chapter": 4,
+              "scene": "Horikita declines Kushida's invitation"
+            },
+            "edition": "seven-seas-en",
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "discovered_via": [
+          {
+            "tier": 5,
+            "ref": "you-zitsu-wiki:volume-1-summary",
+            "retrieved_at": "2026-09-29"
+          }
+        ],
+        "verified_by": null,
+        "verified_at": null,
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": []
+      }
+    }
+  ]
+}

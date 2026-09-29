@@ -1,0 +1,132 @@
+{
+  "fixture_records": [
+    {
+      "id": "fixture.ev.secret.other-actor",
+      "schema_version": 2,
+      "retrieval_role": "BEHAVIORAL_CANON",
+      "text": "A private tactical preference belonging to another actor is a strong lexical match for mediation.",
+      "story_time": {
+        "mode": "EXACT",
+        "exact": {
+          "anchor": "Y1_M01"
+        }
+      },
+      "narrative_position": {
+        "work": "fixture.work",
+        "ordinal": 10
+      },
+      "actors": [
+        "actor.yosuke-hirata"
+      ],
+      "topics": [
+        "mediation",
+        "class-cohesion"
+      ],
+      "supports_claims": [],
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "locator": {
+              "scene": "fixture only"
+            },
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": []
+      },
+      "fixture_only": true
+    },
+    {
+      "id": "fixture.ev.post-divergence.fact",
+      "schema_version": 2,
+      "retrieval_role": "KNOWLEDGE_EVIDENCE",
+      "text": "A future factual event after the divergence mentions the private point system.",
+      "story_time": {
+        "mode": "EXACT",
+        "exact": {
+          "anchor": "Y1_M03"
+        }
+      },
+      "narrative_position": {
+        "work": "fixture.work",
+        "ordinal": 30
+      },
+      "actors": [],
+      "topics": [
+        "private-points",
+        "future-event"
+      ],
+      "supports_claims": [
+        "fixture.claim.future"
+      ],
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "locator": {
+              "scene": "fixture only"
+            },
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": []
+      },
+      "fixture_only": true
+    },
+    {
+      "id": "fixture.ev.conflicted.fact",
+      "schema_version": 2,
+      "retrieval_role": "KNOWLEDGE_EVIDENCE",
+      "text": "A verified-looking factual statement is attached to an unresolved source conflict.",
+      "story_time": {
+        "mode": "EXACT",
+        "exact": {
+          "anchor": "Y1_M01"
+        }
+      },
+      "narrative_position": {
+        "work": "fixture.work",
+        "ordinal": 20
+      },
+      "actors": [],
+      "topics": [
+        "conflict",
+        "rule"
+      ],
+      "supports_claims": [
+        "fixture.claim.conflicted"
+      ],
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "locator": {
+              "scene": "fixture only"
+            },
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": [
+          "fixture.conflict.open"
+        ]
+      },
+      "fixture_only": true
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "cases": [
+    {
+      "id": "normal-kiyotaka-behavior",
+      "character_id": "actor.kiyotaka-ayanokoji",
+      "simulation_time": "Y1_M01",
+      "divergence_time": null,
+      "knowledge_horizon": {
+        "ln.y1.v01": 500
+      },
+      "query": {
+        "text": "low exposure visible social role",
+        "purpose": "BEHAVIORAL_GUIDANCE"
+      },
+      "knowledge_scope": {
+        "mode": "CANON_SEED",
+        "allowed_claim_ids": []
+      },
+      "filters": {
+        "retrieval_roles": [
+          "BEHAVIORAL_CANON"
+        ]
+      },
+      "top_k": 3,
+      "allow_unverified_behavioral": true,
+      "expected_evidence_ids": [
+        "ev.kiyotaka.v01.reluctant-social-help"
+      ],
+      "acceptable_evidence_ids": [
+        "ev.kiyotaka.v01.reluctant-social-help"
+      ],
+      "forbidden_evidence": {},
+      "abstention": "FORBIDDEN"
+    },
+    {
+      "id": "future-spoiler-ryuen",
+      "character_id": "actor.kakeru-ryuen",
+      "simulation_time": "Y1_M03",
+      "divergence_time": null,
+      "knowledge_horizon": {
+        "ln.y1.v03": 100
+      },
+      "query": {
+        "text": "confrontational public display strategic pressure",
+        "purpose": "BEHAVIORAL_GUIDANCE"
+      },
+      "knowledge_scope": {
+        "mode": "SIMULATION",
+        "allowed_claim_ids": []
+      },
+      "filters": {
+        "retrieval_roles": [
+          "BEHAVIORAL_CANON"
+        ]
+      },
+      "top_k": 3,
+      "allow_unverified_behavioral": true,
+      "expected_evidence_ids": [],
+      "acceptable_evidence_ids": [],
+      "forbidden_evidence": {
+        "ev.kakeru.v03.island-pressure-display": "SPOILER"
+      },
+      "abstention": "REQUIRED"
+    },
+    {
+      "id": "wrong-character-secret",
+      "character_id": "actor.kiyotaka-ayanokoji",
+      "simulation_time": "Y1_M01",
+      "divergence_time": null,
+      "knowledge_horizon": {
+        "fixture.work": 100,
+        "ln.y1.v01": 500
+      },
+      "query": {
+        "text": "mediation class cohesion tactical preference",
+        "purpose": "BEHAVIORAL_GUIDANCE"
+      },
+      "knowledge_scope": {
+        "mode": "SIMULATION",
+        "allowed_claim_ids": []
+      },
+      "filters": {
+        "retrieval_roles": [
+          "BEHAVIORAL_CANON"
+        ]
+      },
+      "top_k": 3,
+      "allow_unverified_behavioral": true,
+      "expected_evidence_ids": [
+        "ev.kiyotaka.v01.reluctant-social-help"
+      ],
+      "acceptable_evidence_ids": [
+        "ev.kiyotaka.v01.reluctant-social-help"
+      ],
+      "forbidden_evidence": {
+        "fixture.ev.secret.other-actor": "WRONG_ACTOR"
+      },
+      "abstention": "FORBIDDEN"
+    }
+  ]
+}

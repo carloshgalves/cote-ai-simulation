@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "collection": "evidence.focal-v0.kikyo",
+  "evidence": [
+    {
+      "id": "ev.kikyo.v01.social-bridging",
+      "schema_version": 2,
+      "retrieval_role": "BEHAVIORAL_CANON",
+      "text": "Kushida tries to include Horikita socially and, after refusal, recruits Kiyotaka as a relationship bridge instead of immediately abandoning the attempt.",
+      "story_time": {
+        "mode": "HOLDS_BY",
+        "holds_by": {
+          "anchor": "Y1_M01"
+        },
+        "origin": "UNKNOWN",
+        "basis": "Early Volume 1 school life."
+      },
+      "narrative_position": {
+        "work": "ln.y1.v01",
+        "ordinal": 402
+      },
+      "actors": [
+        "actor.kikyo-kushida"
+      ],
+      "topics": [
+        "social-networking",
+        "inclusion",
+        "peer-mediation"
+      ],
+      "situation_tags": [
+        "social-invitation",
+        "relationship-building"
+      ],
+      "provenance": {
+        "epistemic_status": "UNVERIFIED",
+        "supports": [
+          {
+            "work": "ln.y1.v01",
+            "locator": {
+              "chapter": 4,
+              "scene": "Kushida persists in trying to befriend Horikita"
+            },
+            "edition": "seven-seas-en",
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "discovered_via": [
+          {
+            "tier": 5,
+            "ref": "you-zitsu-wiki:volume-1-summary",
+            "retrieved_at": "2026-09-29"
+          }
+        ],
+        "verified_by": null,
+        "verified_at": null,
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": []
+      }
+    }
+  ]
+}

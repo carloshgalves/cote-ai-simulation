@@ -1,0 +1,100 @@
+{
+  "cases": [
+    {
+      "id": "post-divergence-fact",
+      "character_id": "actor.kiyotaka-ayanokoji",
+      "simulation_time": "Y1_M03",
+      "divergence_time": "Y1_M02",
+      "knowledge_horizon": {
+        "fixture.work": 100
+      },
+      "query": {
+        "text": "future factual private point event",
+        "purpose": "KNOWN_FACTS"
+      },
+      "knowledge_scope": {
+        "mode": "SIMULATION",
+        "allowed_claim_ids": [
+          "fixture.claim.future"
+        ]
+      },
+      "filters": {
+        "retrieval_roles": [
+          "KNOWLEDGE_EVIDENCE"
+        ]
+      },
+      "top_k": 3,
+      "allow_unverified_behavioral": false,
+      "expected_evidence_ids": [],
+      "acceptable_evidence_ids": [],
+      "forbidden_evidence": {
+        "fixture.ev.post-divergence.fact": "POST_DIVERGENCE_FACT"
+      },
+      "abstention": "REQUIRED"
+    },
+    {
+      "id": "open-conflict-fact",
+      "character_id": "actor.kiyotaka-ayanokoji",
+      "simulation_time": "Y1_M01",
+      "divergence_time": null,
+      "knowledge_horizon": {
+        "fixture.work": 100
+      },
+      "query": {
+        "text": "verified unresolved source conflict rule",
+        "purpose": "KNOWN_FACTS"
+      },
+      "knowledge_scope": {
+        "mode": "SIMULATION",
+        "allowed_claim_ids": [
+          "fixture.claim.conflicted"
+        ]
+      },
+      "filters": {
+        "retrieval_roles": [
+          "KNOWLEDGE_EVIDENCE"
+        ]
+      },
+      "top_k": 3,
+      "allow_unverified_behavioral": false,
+      "expected_evidence_ids": [],
+      "acceptable_evidence_ids": [],
+      "forbidden_evidence": {
+        "fixture.ev.conflicted.fact": "OPEN_CONFLICT"
+      },
+      "abstention": "REQUIRED"
+    },
+    {
+      "id": "unverified-fact-abstains",
+      "character_id": "actor.kiyotaka-ayanokoji",
+      "simulation_time": "Y1_START",
+      "divergence_time": null,
+      "knowledge_horizon": {
+        "ln.y1.v01": 500
+      },
+      "query": {
+        "text": "initial private point balance student identification card",
+        "purpose": "KNOWN_FACTS"
+      },
+      "knowledge_scope": {
+        "mode": "CANON_SEED",
+        "allowed_claim_ids": [
+          "rule.economy.initial-deposit"
+        ]
+      },
+      "filters": {
+        "retrieval_roles": [
+          "KNOWLEDGE_EVIDENCE"
+        ]
+      },
+      "top_k": 3,
+      "allow_unverified_behavioral": false,
+      "expected_evidence_ids": [],
+      "acceptable_evidence_ids": [],
+      "forbidden_evidence": {
+        "ev.institution.v01.initial-deposit": "UNVERIFIED_FACT"
+      },
+      "abstention": "REQUIRED"
+    }
+  ]
+}

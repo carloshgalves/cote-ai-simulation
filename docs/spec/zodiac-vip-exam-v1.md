@@ -267,6 +267,26 @@ O tempo, cycle e provenance vêm do envelope causal da CSF, não do payload cont
 
 Conversar, mentir, compartilhar screenshot, revelar “sou VIP”, negociar, observar telefone ou tentar coagir alguém **não** são actions do ExamSpec.
 
+### 9.1 Comunicação permitida
+
+A reconstrução candidata exige seis reuniões formais e deixa o conteúdo da conversa ao grupo. Na V1:
+
+- os meeting slots são eventos institucionais agendados;
+- durante uma reunião, qualquer conteúdo semântico permitido pela CSF pode ser comunicado;
+- fora das reuniões, o ExamSpec **não cria uma proibição geral de conversar ou enviar mensagens** que a fonte ainda não verificou;
+- comunicação externa ao meeting passa pelos canais normais da CSF;
+- uma fala/mensagem produz `Claim/Transmission`; ser comunicado não transforma a alegação em world truth.
+
+Assim, deception e coalizões são permitidas como estratégia sem dar ao Examination Engine autoridade sobre cognição/social.
+
+### 9.2 Conduta proibida e expulsão
+
+Nenhum dos quatro outcomes possui expulsão como efeito direto.
+
+Fontes de descoberta indicam regras adicionais contra coerção, subtração/uso indevido de telefone e, em particular, possível expulsão por usar o dispositivo de outro estudante sem permissão para submeter resposta. O status dessas regras é `UNVERIFIED`.
+
+A V1 **não autoexpulsa** com base nessa descoberta. Uso de dispositivo, consentimento, coerção e prova da violação são fatos causais externos ao menu do exame e pertencem à CSF/ao futuro owner disciplinar. Depois de verificação Tier 0–1, o ExamSpec pode declarar um hook institucional versionado que converta um fato já provado em consequência disciplinar; ele não pode inventar esse fato.
+
 ## 10. Validação e prioridade de submissions
 
 ### 10.1 Camadas

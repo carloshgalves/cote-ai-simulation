@@ -31,7 +31,6 @@ error_codes:
   - VIP_CANNOT_SUBMIT
   - SAME_CLASS_AS_VIP
   - PHASE_CLOSED
-  - PHASE_QUIET_GAP
   - SUPERSEDED_BY_SIMULTANEOUS_SUBMISSION
 
 group_fixture:
@@ -192,15 +191,17 @@ vectors:
       group_terminal: false
       rewards: none
 
-  - id: V11-quiet-gap-rejects-semantic-guess
+  - id: V11-post-active-early-correct-is-outcome-3
     initial: rabbit-13
     actions:
       - receive: {actor_id: b1, at: T115, guess: d2, submission_id: s-v11}
     expect:
-      disposition: PHASE_QUIET_GAP
+      disposition: ACCEPTED_TERMINAL
+      outcome: OUTCOME_3_TRAITOR_CORRECT
       quota_consumed: true
-      group_terminal: false
-      rewards: none
+      group_terminal: true
+      pp: {b1: 500000}
+      cp_deltas: {B: 50, D: -50}
 
   - id: V12-terminal-is-idempotent
     initial: rabbit-13

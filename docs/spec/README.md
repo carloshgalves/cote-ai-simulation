@@ -11,3 +11,4 @@ seção própria de **decisões abertas** — que nunca ficam escondidas dentro 
 | Spec | Status | Decisão de origem |
 |---|---|---|
 | [Physical Simulation V1](physical-simulation-v1.md) | Proposed | [ADR 0006](../adr/0006-physical-domain-model.md) |
+| [Zodiac/VIP Special Exam V1](zodiac-vip-exam-v1.md) | Proposed | [Examination architecture](../architecture/exams.md) + ADR 0001/0003/0005/0008 |

@@ -13,3 +13,4 @@ spec é corrigida primeiro e o ticket é reescrito depois.
 | Conjunto | Spec de origem | Estado |
 |---|---|---|
 | [Physical Simulation V1](physical-simulation-v1/) | [`docs/spec/physical-simulation-v1.md`](../spec/physical-simulation-v1.md) | aberto |
+| [Canon RAG V0](canon-rag-v0/) | [`docs/spec/canon-rag-v0.md`](../spec/canon-rag-v0.md) | aberto |

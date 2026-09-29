@@ -26,7 +26,8 @@ Esta política de corpus continua valendo. A partir do ADR 0005, o diretório ta
 | `sources/works.yaml` | registro bibliográfico; tier segue autoria e forma, não canal de distribuição |
 | `world/` | estrutura, regras e entidades não específicas do primeiro ano |
 | `y1/` | estado inicial do primeiro ano e linha de eventos canônica |
-| `actors/` | stubs de entidade (sem dossiers nesta fase) |
+| `actors/` | stubs de entidade com ids estáveis |
+| `characters/` | evidence packs declarativos dos personagens focais; não são agentes executáveis |
 | `exams/` | cânone dos exames especiais |
 | `evidence/` | paráfrases citáveis para RAG |
 | `feats/` | desempenhos físicos observados; corpus compartilhado, indexado por ator |

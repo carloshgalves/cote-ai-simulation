@@ -1,7 +1,14 @@
 # Evidence
 
-Unidades de RAG: paráfrases nossas de passagens canônicas, com locator, tempo de história e tags de situação.
+Units of RAG-facing canon evidence are our own paraphrases of passages, with locator, story time and
+situation tags. Never store protected source text.
 
-Nunca texto integral protegido. Ver `docs/canon/provenance.md` e a política de corpus em `../README.md`.
+Character V0 records live under `data/canon/evidence/characters/` and follow
+`evidence_collection.schema.json`. They may be consumed later by RAG, but this directory contains
+no retrieval infrastructure or embeddings.
 
-Vazio por ora: evidência comportamental pertence à fase de personagens, que vem depois do estado inicial do mundo.
+A later-volume passage may support a pre-existing tendency/capability while remaining
+divergence-sensitive. Character packs must mark such use as `FUTURE_EVIDENCE_ONLY`; it must not
+become initial memory or privileged knowledge.
+
+See `docs/canon/provenance.md` and the corpus policy in `../README.md`.

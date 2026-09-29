@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/canon/character_evidence_pack.schema.json",
+  "title": "CharacterEvidencePack",
+  "description": "Declarative evidence layer for a focal character. It is not an executable cognition model.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "character_id",
+    "knowledge_horizon",
+    "identity",
+    "initial_knowledge",
+    "stable_tendencies",
+    "goals",
+    "capabilities",
+    "decision_patterns",
+    "social_linguistic_tendencies",
+    "blind_spots",
+    "capability_manifestation",
+    "physical_capacity_boundary"
+  ],
+  "$defs": {
+    "EvidenceTemporality": {
+      "type": "string",
+      "enum": ["AT_OR_BEFORE_HORIZON", "FUTURE_EVIDENCE_ONLY", "MIXED", "UNKNOWN"]
+    },
+    "HorizonRelation": {
+      "type": "string",
+      "enum": ["KNOWN_AT_HORIZON", "NOT_KNOWN_AT_HORIZON", "NOT_APPLICABLE"]
+    },
+    "PackStatus": {
+      "type": "string",
+      "enum": ["UNVERIFIED", "INFERRED", "INTERPRETATION", "UNKNOWN"]
+    },
+    "Assertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "statement",
+        "status",
+        "evidence_refs",
+        "evidence_temporality",
+        "horizon_relation"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(\\.[a-z0-9-]+)+$" },
+        "statement": { "type": "string", "minLength": 1 },
+        "status": { "$ref": "#/$defs/PackStatus" },
+        "evidence_refs": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^ev\\.[a-z0-9.-]+$" }
+        },
+        "evidence_temporality": { "$ref": "#/$defs/EvidenceTemporality" },
+        "horizon_relation": { "$ref": "#/$defs/HorizonRelation" },
+        "notes": { "type": "string" }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "character_id": { "type": "string", "pattern": "^actor\\.[a-z0-9.-]+$" },
+    "knowledge_horizon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["anchor", "policy", "future_evidence_rule"],
+      "properties": {
+        "anchor": { "type": "string", "const": "Y1_START" },
+        "policy": { "type": "string" },
+        "future_evidence_rule": { "type": "string" }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_name", "aliases", "class_ref", "initial_position", "relationships_at_horizon"],
+      "properties": {
+        "canonical_name": { "type": "string" },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "class_ref": { "type": "string" },
+        "initial_position": { "type": "string" },
+        "relationships_at_horizon": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Assertion" }
+        }
+      }
+    },
+    "initial_knowledge": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Assertion" }
+    },
+    "stable_tendencies": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Assertion" }
+    },
+    "goals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["demonstrated", "inferred", "possible", "future_only"],
+      "properties": {
+        "demonstrated": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } },
+        "inferred": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } },
+        "possible": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } },
+        "future_only": { "type": "array", "items": { "$ref": "#/$defs/Assertion" } }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          { "$ref": "#/$defs/Assertion" },
+          {
+            "type": "object",
+            "required": ["dimension", "can_do", "manifestation_at_horizon"],
+            "properties": {
+              "dimension": {
+                "type": "string",
+                "enum": [
+                  "academic",
+                  "reasoning",
+                  "strategic_planning",
+                  "social_inference",
+                  "deception",
+                  "persuasion",
+                  "leadership",
+                  "observation",
+                  "memory",
+                  "self_control",
+                  "risk_management"
+                ]
+              },
+              "can_do": { "type": "string" },
+              "manifestation_at_horizon": { "type": "string" }
+            }
+          }
+        ]
+      }
+    },
+    "decision_patterns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "context",
+          "perceived_objective",
+          "chosen_behavior",
+          "consequence",
+          "status",
+          "evidence_refs",
+          "evidence_temporality"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "context": { "type": "string" },
+          "perceived_objective": { "type": "string" },
+          "chosen_behavior": { "type": "string" },
+          "consequence": { "type": "string" },
+          "status": { "$ref": "#/$defs/PackStatus" },
+          "evidence_refs": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^ev\\.[a-z0-9.-]+$" }
+          },
+          "evidence_temporality": { "$ref": "#/$defs/EvidenceTemporality" }
+        }
+      }
+    },
+    "social_linguistic_tendencies": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Assertion" }
+    },
+    "blind_spots": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Assertion" }
+    },
+    "capability_manifestation": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Assertion" }
+    },
+    "physical_capacity_boundary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "States that physical capacity belongs to the Embodiment domain and is not duplicated here."
+    }
+  }
+}

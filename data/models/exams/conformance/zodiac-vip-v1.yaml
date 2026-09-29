@@ -1,0 +1,389 @@
+# Normative conformance vectors for Zodiac/VIP V1.
+#
+# These are language-neutral test vectors. They are executable requirements for
+# a future Examination Engine implementation, not canon data.
+#
+# Spec: docs/spec/zodiac-vip-exam-v1.md
+# Model: data/models/exams/zodiac-vip-v1.yaml
+
+schema_version: 1
+suite_id: zodiac-vip-v1-conformance
+suite_version: 0.1.0-provisional
+not_canon: true
+
+error_codes:
+  - INVALID_SETUP_PARTICIPANT_COUNT
+  - INVALID_SETUP_CLASS_COUNTS
+  - INVALID_SETUP_GROUP_COUNT
+  - INVALID_SETUP_GROUP_SIZES
+  - INVALID_SETUP_NOT_A_PARTITION
+  - INVALID_SETUP_CLASS_MIX
+  - INVALID_SETUP_MISSING_KANA_SORT_KEY
+  - INVALID_SETUP_VIP_NOT_IN_GROUP
+  - INVALID_SETUP_VIP_COUNT
+  - INVALID_SETUP_VIP_CLASS_BALANCE
+  - REJECTED_SCHEMA_OR_CAUSAL
+  - REJECTED_ALREADY_SUBMITTED
+  - GROUP_TERMINAL
+  - ACTOR_NOT_ACTIVE
+  - WRONG_GROUP
+  - GUESS_NOT_GROUP_MEMBER
+  - VIP_CANNOT_SUBMIT
+  - SAME_CLASS_AS_VIP
+  - PHASE_CLOSED
+  - PHASE_QUIET_GAP
+  - SUPERSEDED_BY_SIMULTANEOUS_SUBMISSION
+
+group_fixture:
+  fixture_id: rabbit-13
+  scope: GROUP_RESOLVER
+  note: >
+    This fixture pins a valid local group and a VIP directly so group-resolution
+    tests do not depend on the still-provisional global assignment rule. Static
+    setup tests separately exercise the 159/12 topology and assignment.
+  group:
+    id: RABBIT
+    ordinal: 4
+    members:
+      - {actor_id: a1, class_id: A}
+      - {actor_id: a2, class_id: A}
+      - {actor_id: a3, class_id: A}
+      - {actor_id: b1, class_id: B}
+      - {actor_id: b2, class_id: B}
+      - {actor_id: b3, class_id: B}
+      - {actor_id: c1, class_id: C}
+      - {actor_id: c2, class_id: C}
+      - {actor_id: c3, class_id: C}
+      - {actor_id: d1, class_id: D}
+      - {actor_id: d2, class_id: D}
+      - {actor_id: d3, class_id: D}
+      - {actor_id: d4, class_id: D}
+  vip_actor_id: d2
+
+phase_anchors:
+  role_disclosure_at: T0
+  active_close_at: T100
+  final_window_open: T130
+  final_window_close: T160
+  result_publish_at: T220
+
+vectors:
+  - id: V01-final-correct-outcome-1
+    initial: rabbit-13
+    actions:
+      - receive: {actor_id: b1, at: T140, guess: d2, submission_id: s-v01}
+    expect:
+      disposition: ACCEPTED_TERMINAL
+      outcome: OUTCOME_1_SHARED_SUCCESS
+      group_terminal: true
+      cp_deltas: {}
+      pp:
+        d2: 1000000
+        each_other_member: 500000
+      total_pp: 7000000
+
+  - id: V02-final-incorrect-outcome-2
+    initial: rabbit-13
+    actions:
+      - receive: {actor_id: b1, at: T140, guess: c1, submission_id: s-v02}
+    expect:
+      disposition: ACCEPTED_TERMINAL
+      outcome: OUTCOME_2_VIP_HIDDEN
+      cp_deltas: {}
+      pp: {d2: 500000}
+      total_pp: 500000
+
+  - id: V03-no-action-outcome-2
+    initial: rabbit-13
+    actions:
+      - settle_at: T160
+    expect:
+      outcome: OUTCOME_2_VIP_HIDDEN
+      pp: {d2: 500000}
+      cp_deltas: {}
+      group_terminal: true
+
+  - id: V04-early-correct-outcome-3
+    initial: rabbit-13
+    actions:
+      - receive: {actor_id: b1, at: T50, guess: d2, submission_id: s-v04}
+    expect:
+      outcome: OUTCOME_3_TRAITOR_CORRECT
+      pp: {b1: 500000}
+      cp_deltas: {B: 50, D: -50}
+      cp_sum: 0
+      group_terminal: true
+
+  - id: V05-early-wrong-outcome-4
+    initial: rabbit-13
+    actions:
+      - receive: {actor_id: c1, at: T50, guess: a1, submission_id: s-v05}
+    expect:
+      outcome: OUTCOME_4_TRAITOR_WRONG
+      pp: {d2: 500000}
+      cp_deltas: {C: -50, D: 50}
+      cp_sum: 0
+      group_terminal: true
+
+  - id: V06-same-class-invalid-then-cross-class-terminal
+    initial: rabbit-13
+    actions:
+      - receive: {actor_id: d1, at: T40, guess: d2, submission_id: s-v06a}
+      - receive: {actor_id: b1, at: T50, guess: d2, submission_id: s-v06b}
+    expect_sequence:
+      - actor_id: d1
+        disposition: SAME_CLASS_AS_VIP
+        quota_consumed: true
+        group_terminal: false
+        rewards: none
+      - actor_id: b1
+        outcome: OUTCOME_3_TRAITOR_CORRECT
+        group_terminal: true
+    expect:
+      cp_deltas: {B: 50, D: -50}
+      pp: {b1: 500000}
+
+  - id: V07-vip-cannot-submit
+    initial: rabbit-13
+    actions:
+      - receive: {actor_id: d2, at: T40, guess: d2, submission_id: s-v07}
+    expect:
+      disposition: VIP_CANNOT_SUBMIT
+      quota_consumed: true
+      group_terminal: false
+      rewards: none
+
+  - id: V08-one-received-attempt-per-actor
+    initial: rabbit-13
+    actions:
+      - receive: {actor_id: d1, at: T40, guess: d2, submission_id: s-v08a}
+      - receive: {actor_id: d1, at: T50, guess: a1, submission_id: s-v08b}
+    expect_sequence:
+      - disposition: SAME_CLASS_AS_VIP
+        quota_consumed: true
+      - disposition: REJECTED_ALREADY_SUBMITTED
+        quota_consumed_again: false
+    expect:
+      group_terminal: false
+      rewards: none
+
+  - id: V09-wrong-group-invalid
+    initial: rabbit-13
+    actions:
+      - receive:
+          actor_id: b1
+          group_id: DRAGON
+          at: T50
+          guess: d2
+          submission_id: s-v09
+    expect:
+      disposition: WRONG_GROUP
+      quota_consumed: true
+      group_terminal: false
+      rewards: none
+
+  - id: V10-guess-must-be-group-member
+    initial: rabbit-13
+    actions:
+      - receive: {actor_id: b1, at: T50, guess: outsider-x, submission_id: s-v10}
+    expect:
+      disposition: GUESS_NOT_GROUP_MEMBER
+      quota_consumed: true
+      group_terminal: false
+      rewards: none
+
+  - id: V11-quiet-gap-rejects-semantic-guess
+    initial: rabbit-13
+    actions:
+      - receive: {actor_id: b1, at: T115, guess: d2, submission_id: s-v11}
+    expect:
+      disposition: PHASE_QUIET_GAP
+      quota_consumed: true
+      group_terminal: false
+      rewards: none
+
+  - id: V12-terminal-is-idempotent
+    initial: rabbit-13
+    actions:
+      - receive: {actor_id: b1, at: T50, guess: d2, submission_id: s-v12a}
+      - receive: {actor_id: c1, at: T60, guess: a1, submission_id: s-v12b}
+    expect_sequence:
+      - outcome: OUTCOME_3_TRAITOR_CORRECT
+      - disposition: GROUP_TERMINAL
+    expect:
+      pp_transactions_count: 1
+      cp_transactions_count: 2
+      outcomes_count: 1
+
+  - id: V13-schema-rejection-does-not-consume-quota
+    initial: rabbit-13
+    actions:
+      - reject_before_school_endpoint:
+          actor_id: b1
+          reason: MISSING_SUBMISSION_ID
+      - receive: {actor_id: b1, at: T50, guess: d2, submission_id: s-v13b}
+    expect_sequence:
+      - disposition: REJECTED_SCHEMA_OR_CAUSAL
+        quota_consumed: false
+      - outcome: OUTCOME_3_TRAITOR_CORRECT
+
+  - id: V14-simultaneous-order-independent
+    initial: rabbit-13
+    identity_policy_fixture:
+      note: >
+        The CSF derive-id port is stubbed only for this vector. The real run uses
+        its declared CausalIdentityPolicy. The lower bytes win.
+      derived_priority:
+        s-v14-correct: "20"
+        s-v14-wrong: "10"
+    action_set:
+      same_instant: T50
+      same_cycle: C7
+      submissions:
+        - {actor_id: b1, guess: d2, submission_id: s-v14-correct}
+        - {actor_id: c1, guess: a1, submission_id: s-v14-wrong}
+    execute_permutations:
+      - [s-v14-correct, s-v14-wrong]
+      - [s-v14-wrong, s-v14-correct]
+    expect_for_every_permutation:
+      priority_winner: s-v14-wrong
+      outcome: OUTCOME_4_TRAITOR_WRONG
+      cp_deltas: {C: -50, D: 50}
+      pp: {d2: 500000}
+      other_disposition: SUPERSEDED_BY_SIMULTANEOUS_SUBMISSION
+      final_state_hash_equal_across_permutations: true
+
+  - id: V15-public-projection-redacts-secrets
+    initial: rabbit-13
+    actions:
+      - receive: {actor_id: b1, at: T50, guess: d2, submission_id: s-v15}
+      - publish_at: T220
+    expect_audit:
+      outcome: OUTCOME_3_TRAITOR_CORRECT
+      vip_actor_id: d2
+      terminal_submitter_actor_id: b1
+    expect_public:
+      outcome: OUTCOME_3_TRAITOR_CORRECT
+      vip_actor_id: ABSENT
+      terminal_submitter_actor_id: ABSENT
+      class_point_deltas: {B: 50, D: -50}
+
+static_setup_generators:
+  valid_baseline:
+    participants: 159
+    class_size_multiset: [39, 40, 40, 40]
+    groups: 12
+    group_size_multiset:
+      13: 9
+      14: 3
+    all_groups_mix_four_classes: true
+    each_group_class_count_in: [3, 4]
+    unique_partition: true
+    all_have_kana_sort_key: true
+    vip_count_per_group: 1
+    vip_count_per_class: 3
+  mutations:
+    - id: S01-158-participants
+      mutate: participants=158
+      expect_error: INVALID_SETUP_PARTICIPANT_COUNT
+    - id: S02-wrong-class-counts
+      mutate: class_size_multiset=[38,40,40,41]
+      expect_error: INVALID_SETUP_CLASS_COUNTS
+    - id: S03-eleven-groups
+      mutate: groups=11
+      expect_error: INVALID_SETUP_GROUP_COUNT
+    - id: S04-group-size-12
+      mutate: one_group_size=12
+      expect_error: INVALID_SETUP_GROUP_SIZES
+    - id: S05-duplicate-member
+      mutate: duplicate_actor_across_two_groups
+      expect_error: INVALID_SETUP_NOT_A_PARTITION
+    - id: S06-group-misses-class
+      mutate: one_group_has_no_class_A
+      expect_error: INVALID_SETUP_CLASS_MIX
+    - id: S07-missing-kana-key
+      mutate: remove_one_surname_kana_sort_key
+      expect_error: INVALID_SETUP_MISSING_KANA_SORT_KEY
+    - id: S08-four-vips-one-class
+      mutate: vip_count_by_class={A:4,B:2,C:3,D:3}
+      expect_error: INVALID_SETUP_VIP_CLASS_BALANCE
+
+economic_properties:
+  - id: P01-every-outcome-has-bounded-pp
+    assert: each_group_total_pp_is_500k_except_O1_formula
+  - id: P02-early-cp-zero-sum
+    assert: every_O3_or_O4_has_exactly_one_plus50_and_one_minus50
+  - id: P03-global-cp-zero-sum
+    assert: sum_cp_delta_over_12_groups_equals_0
+  - id: P04-global-cp-bounded
+    assert:
+      positive_gross_at_most: 600
+      negative_gross_abs_at_most: 600
+  - id: P05-max-pp
+    given: all_12_groups_outcome_1_and_159_participants
+    expect_total_pp: 85500000
+  - id: P06-no-duplicate-settlement
+    assert: replaying_terminal_input_is_idempotent_by_cause_id
+
+reachability:
+  - {outcome: OUTCOME_1_SHARED_SUCCESS, witness: V01-final-correct-outcome-1}
+  - {outcome: OUTCOME_2_VIP_HIDDEN, witness: V02-final-incorrect-outcome-2}
+  - {outcome: OUTCOME_3_TRAITOR_CORRECT, witness: V04-early-correct-outcome-3}
+  - {outcome: OUTCOME_4_TRAITOR_WRONG, witness: V05-early-wrong-outcome-4}
+
+synthetic_sandbox:
+  purpose: >
+    Prove that resolution stays valid when decision quality is poor or adversarial.
+    Policies receive only authorized knowledge; expected outcome is from the
+    submitted actions, never from policy labels.
+  policies:
+    cooperative:
+      secret_access: false
+      behavior: wait_final_and_submit_only_candidate_supported_by_received_claims
+    selfish_vip:
+      secret_access: own_is_vip_only
+      behavior: do_not_voluntarily_reveal
+    random:
+      secret_access: false
+      rng: named_policy_substream
+      behavior: choose_eligible_group_member_without_world_truth
+    ultra_conservative:
+      secret_access: false
+      behavior: never_early_and_abstain_below_confidence_threshold
+    simple_strategist:
+      secret_access: false
+      behavior: infer_from_rosters_and_received_vip_examples
+    opportunistic_traitor:
+      secret_access: false
+      behavior: early_submit_when_policy_threshold_is_met
+  trajectory_recipe:
+    - group: RAT
+      policy_mix: [cooperative, ultra_conservative]
+      inject_causal_claims: all_non_vips_receive_true_vip_claim_before_final
+      expected_outcome: OUTCOME_1_SHARED_SUCCESS
+    - group: OX
+      policy_mix: [selfish_vip, ultra_conservative]
+      inject_causal_claims: none
+      expected_outcome: OUTCOME_2_VIP_HIDDEN
+    - group: TIGER
+      policy_mix: [opportunistic_traitor, cooperative]
+      inject_causal_claims: opportunistic_traitor_receives_true_but_not_authoritative_claim
+      expected_action: early_correct_guess
+      expected_outcome: OUTCOME_3_TRAITOR_CORRECT
+    - group: RABBIT
+      policy_mix: [random, selfish_vip]
+      force_policy_seed_to_choose_non_vip_wrong_candidate: true
+      expected_outcome: OUTCOME_4_TRAITOR_WRONG
+  assertions:
+    - no_policy_context_contains_vip_actor_id_unless_learned_causally
+    - poor_policy_quality_never_breaks_state_invariants
+    - all_action_order_permutations_inside_same_cycle_resolve_identically
+    - same_seed_same_inputs_same_event_and_ledger_hashes
+    - zero_actions_for_every_group_still_closes_exam_with_12_outcome_2
+
+implementation_status:
+  runnable_today: false
+  reason: Examination Engine language/runtime is not selected under ADR 0007
+  future_test_requirement: >
+    Every implementation MUST consume this file or an equivalent generated
+    representation as a black-box conformance suite.

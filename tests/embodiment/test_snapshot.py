@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 
 import pytest
+import yaml
 from pydantic import BaseModel
 
 from embodiment.eventlog import (
@@ -412,6 +413,26 @@ def test_the_hash_covers_the_body_and_not_itself(prior: PopulationPrior) -> None
     assert snapshot_hash(moved) != digest
 
 
+def test_reading_a_snapshot_requires_its_hash(prior: PopulationPrior, tmp_path) -> None:
+    store, posteriors, metadata = make_run(prior)
+    path = tmp_path / "snapshot.yaml"
+    write_snapshot(
+        path,
+        world_seed=WORLD_SEED,
+        store=store,
+        metadata=metadata,
+        posteriors=posteriors,
+    )
+    snapshot = yaml.safe_load(path.read_text(encoding="utf-8"))
+    snapshot.pop("snapshot_hash")
+    path.write_text(
+        yaml.safe_dump(snapshot, sort_keys=True, allow_unicode=True), encoding="utf-8"
+    )
+
+    with pytest.raises(SnapshotShapeError, match="snapshot_hash"):
+        read_snapshot(path)
+
+
 # --------------------------------------------------------------------------
 # PSV1-2 — the body in the snapshot
 # --------------------------------------------------------------------------
@@ -631,3 +652,14 @@ def test_a_run_metadata_document_reads_back_the_way_it_was_written(prior, dynami
     store, posteriors, metadata = make_run(prior)
     extended = with_dynamics(metadata, dynamics_params)
     assert RunMetadata.from_document(extended.as_dict()).as_dict() == extended.as_dict()
+
+
+def test_event_log_refuses_a_non_finite_payload_without_appending(prior, tmp_path) -> None:
+    """Strict JSON is the last guard even when a caller bypasses domain models."""
+    store, posteriors, metadata = make_run(prior)
+    path = tmp_path / "events.jsonl"
+    with EventLog(path, metadata=metadata, required_components=("prior",)) as log:
+        before = path.read_bytes()
+        with pytest.raises(ValueError):
+            log.append("invalid.numeric_payload", {"value": float("nan")})
+        assert path.read_bytes() == before

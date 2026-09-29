@@ -579,6 +579,8 @@ class _ValidatedStateModel(BaseModel):
     again as well as the field being updated.
     """
 
+    model_config = ConfigDict(allow_inf_nan=False)
+
     def model_copy(
         self, *, update: Mapping[str, Any] | None = None, deep: bool = False
     ) -> Self:

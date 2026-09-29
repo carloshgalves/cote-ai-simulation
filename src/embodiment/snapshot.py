@@ -289,15 +289,27 @@ def write_snapshot(
 
 
 def read_snapshot(path: str | Path) -> dict[str, Any]:
-    """Parse a snapshot back as plain data.
+    """Parse and verify a snapshot before returning its data as world truth.
 
     Deliberately does **not** reconstruct `CapacityBaselineRecord`: rebuilding a
     frozen sample outside `seeding.py` is the door failure mode F3 comes through.
     Rehydration of a run belongs to PSV1-8, and it will come through seeding.
+
+    Hash verification is not rehydration or migration. It is the read-side half
+    of the existing snapshot contract: a file whose contents no longer match the
+    digest written with them is not authoritative input to any engine phase.
     """
     data = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
     if not isinstance(data, dict):
         raise SnapshotShapeError(f"{path}: a snapshot must be a mapping at the top level")
+    stored_digest = data.get("snapshot_hash")
+    if not isinstance(stored_digest, str):
+        raise SnapshotShapeError(f"{path}: snapshot_hash is missing or is not a string")
+    actual_digest = snapshot_hash(data)
+    if stored_digest != actual_digest:
+        raise SnapshotShapeError(
+            f"{path}: snapshot_hash mismatch: stored {stored_digest}, computed {actual_digest}"
+        )
     return data
 
 

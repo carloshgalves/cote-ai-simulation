@@ -480,7 +480,7 @@ class Environment(BaseModel):
     perception, and nothing here reaches an agent.
     """
 
-    model_config = ConfigDict(frozen=True, extra="forbid")
+    model_config = ConfigDict(frozen=True, extra="forbid", allow_inf_nan=False)
 
     wbgt_c: float = 21.0
     work_rest_ratio: float = Field(default=1.0, gt=0.0)
@@ -510,7 +510,7 @@ class IntervalLoad(BaseModel):
     latent capacity, because a tired body working flat out is at intensity 1.0.
     """
 
-    model_config = ConfigDict(frozen=True, extra="forbid")
+    model_config = ConfigDict(frozen=True, extra="forbid", allow_inf_nan=False)
 
     intensity: float = Field(default=0.0, ge=0.0, le=2.0)
     #: Share of the work each fatigue region carried, `0..1` each.
@@ -547,7 +547,7 @@ class BodyTraits(BaseModel):
     six structures exist to prevent.
     """
 
-    model_config = ConfigDict(frozen=True, extra="forbid")
+    model_config = ConfigDict(frozen=True, extra="forbid", allow_inf_nan=False)
 
     body_mass_kg: float = Field(gt=0.0)
     recovery_rate_h: float = Field(gt=0.0)

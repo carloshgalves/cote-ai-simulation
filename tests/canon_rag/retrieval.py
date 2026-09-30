@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import math
+
 from common import lexical_score
 from gates import gate_reason
 
@@ -83,11 +85,29 @@ def _validate_request(request, seed_time):
     return top_k
 
 
+def _validate_time_order(order):
+    if not isinstance(order, dict):
+        raise ValueError("time_order must be an object")
+    normalized = {}
+    for time_ref, ordinal in order.items():
+        if not isinstance(time_ref, str) or not time_ref:
+            raise ValueError("time_order keys must be non-empty strings")
+        if (
+            isinstance(ordinal, bool)
+            or not isinstance(ordinal, (int, float))
+            or not math.isfinite(ordinal)
+        ):
+            raise ValueError("time_order values must be finite non-boolean numbers")
+        normalized[time_ref] = float(ordinal)
+    return normalized
+
+
 def retrieve(records, request, order, manifest_digest, seed_time=None):
     top_k = _validate_request(request, seed_time)
+    normalized_order = _validate_time_order(order)
     eligible, excluded = [], []
     for record in records:
-        reason, trace = gate_reason(record, request, order)
+        reason, trace = gate_reason(record, request, normalized_order)
         if reason is not None:
             excluded.append(
                 {"evidence_id": record.get("evidence_id"), "reason": reason, "gate_trace": trace}

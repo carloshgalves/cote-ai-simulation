@@ -108,14 +108,17 @@ def _work_continuity(work: dict[str, Any]) -> str:
     return "ln"
 
 
-def _normalized_continuity(provenance: dict[str, Any]) -> list[str]:
-    return sorted(
-        {
-            item
-            for item in provenance.get("continuity", [])
-            if isinstance(item, str) and item
-        }
-    )
+def _resolved_continuity(resolved_supports: list[dict[str, Any]]) -> list[str]:
+    return sorted({_work_continuity(item["work"]) for item in resolved_supports})
+
+
+def _verification_errors(provenance: dict[str, Any], kind: str) -> list[str]:
+    if provenance.get("epistemic_status") != "VERIFIED":
+        return []
+    verified_by = provenance.get("verified_by")
+    if not isinstance(verified_by, str) or not verified_by.strip():
+        return [f"blank_verified_by:{kind}"]
+    return []
 
 
 def _resolve_supports(
@@ -149,6 +152,7 @@ def _compiled_claim(
     provenance = claim.get("provenance", {})
     resolved_supports, errors = _resolve_supports(provenance, work_by_id)
     errors.extend(_schema_errors("claim", claim, "claim.schema.json"))
+    errors.extend(_verification_errors(provenance, "claim"))
     status = provenance.get("epistemic_status")
     claim_kind = claim.get("claim_kind")
     verified_tier_limit = {
@@ -173,7 +177,7 @@ def _compiled_claim(
             "verified_by": provenance.get("verified_by"),
             "verified_at": provenance.get("verified_at"),
         },
-        "continuity": _normalized_continuity(provenance),
+        "continuity": _resolved_continuity(resolved_supports),
         "resolved_supports": resolved_supports,
         "source_digest": sha256_json(claim),
         "compilation_errors": sorted(set(errors)),
@@ -214,11 +218,14 @@ def compile_records(
         elif work.get("edition") != primary.get("edition"):
             errors.append("source_edition_mismatch")
 
-        _, support_errors = _resolve_supports(ev.get("provenance") or {}, work_by_id)
+        resolved_supports, support_errors = _resolve_supports(
+            ev.get("provenance") or {}, work_by_id
+        )
         errors.extend(support_errors)
 
         provenance = ev.get("provenance") or {}
-        continuity = _normalized_continuity(provenance)
+        errors.extend(_verification_errors(provenance, "evidence"))
+        continuity = _resolved_continuity(resolved_supports)
         resolved_claims = []
         for claim_id in ev.get("supports_claims", []):
             claim = claim_by_id.get(claim_id)

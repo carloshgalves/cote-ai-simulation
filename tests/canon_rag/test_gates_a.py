@@ -21,7 +21,7 @@ def test_gate_before_rank_and_wrong_actor():
     out=retrieve(r,case(s,"wrong-character-secret"),s["time_order"],d,s["seed_time"])
     assert [x["evidence_id"] for x in out["items"]]==["ev.kiyotaka.v01.reluctant-social-help"]
     ex={x["evidence_id"]:x["reason"] for x in out["excluded"]}
-    assert ex["fixture.ev.secret.other-actor"]=="WRONG_ACTOR"
+    assert ex["ev.fixture.secret.other-actor"]=="WRONG_ACTOR"
 
 def test_same_query_same_time_differs_by_actor():
     _,s,r,d=setup()

@@ -13,8 +13,8 @@ def test_spoiler_post_divergence_and_conflict_fail_closed():
     d=corpus_manifest(c,claims,registry)["digest"]
     checks={
       "future-spoiler-ryuen":("ev.kakeru.v03.island-pressure-display","SPOILER"),
-      "post-divergence-fact":("fixture.ev.post-divergence.fact","POST_DIVERGENCE_FACT"),
-      "open-conflict-fact":("fixture.ev.conflicted.fact","OPEN_CONFLICT")}
+      "post-divergence-fact":("ev.fixture.post-divergence.fact","POST_DIVERGENCE_FACT"),
+      "open-conflict-fact":("ev.fixture.conflicted.fact","OPEN_CONFLICT")}
     for cid,(eid,reason) in checks.items():
         case=next(x for x in s["cases"] if x["id"]==cid)
         out=retrieve(r,case,s["time_order"],d,s["seed_time"])

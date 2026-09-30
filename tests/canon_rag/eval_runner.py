@@ -75,6 +75,7 @@ def evaluate_suite(corpus, claims, source_registry, suite):
     )
 
     total = hits = returned_n = irrelevant = provenance_bad = 0
+    hit_at_k_scores = []
     reciprocal_ranks, failures, case_reports = [], [], []
     wrong = timeline = post = 0
     for case in suite["cases"]:
@@ -92,6 +93,13 @@ def evaluate_suite(corpus, claims, source_registry, suite):
         total += len(expected)
         hits += sum(evidence_id in returned for evidence_id in expected)
         ranks = [returned.index(evidence_id) + 1 for evidence_id in expected if evidence_id in returned]
+        if expected:
+            case_hit_at_k = float(bool(ranks))
+        elif case.get("abstention") == "REQUIRED":
+            case_hit_at_k = float(result["abstained"])
+        else:
+            case_hit_at_k = 1.0
+        hit_at_k_scores.append(case_hit_at_k)
         reciprocal_ranks.append(
             1 / min(ranks) if ranks else (1.0 if not expected and result["abstained"] else 0.0)
         )
@@ -127,6 +135,7 @@ def evaluate_suite(corpus, claims, source_registry, suite):
         case_reports.append(
             {
                 "id": case["id"],
+                "hit_at_k": case_hit_at_k,
                 "request": request,
                 "result_evidence_ids": returned,
                 "exclusions": [
@@ -136,6 +145,7 @@ def evaluate_suite(corpus, claims, source_registry, suite):
             }
         )
     metrics = {
+        "hit_at_k": sum(hit_at_k_scores) / len(hit_at_k_scores),
         "recall_at_k": 1.0 if total == 0 else hits / total,
         "mean_reciprocal_rank": sum(reciprocal_ranks) / len(reciprocal_ranks),
         "irrelevant_context_rate": 0.0 if returned_n == 0 else irrelevant / returned_n,

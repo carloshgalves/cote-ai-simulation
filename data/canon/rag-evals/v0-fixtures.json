@@ -1,7 +1,7 @@
 {
   "fixture_records": [
     {
-      "id": "fixture.ev.secret.other-actor",
+      "id": "ev.fixture.secret.other-actor",
       "schema_version": 2,
       "retrieval_role": "BEHAVIORAL_CANON",
       "text": "A private tactical preference belonging to another actor is a strong lexical match for mediation.",
@@ -25,6 +25,8 @@
       "supports_claims": [],
       "provenance": {
         "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
         "supports": [
           {
             "work": "fixture.work",
@@ -40,11 +42,10 @@
           "ln"
         ],
         "conflicts": []
-      },
-      "fixture_only": true
+      }
     },
     {
-      "id": "fixture.ev.post-divergence.fact",
+      "id": "ev.fixture.post-divergence.fact",
       "schema_version": 2,
       "retrieval_role": "KNOWLEDGE_EVIDENCE",
       "text": "A future factual event after the divergence mentions the private point system.",
@@ -68,6 +69,8 @@
       ],
       "provenance": {
         "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
         "supports": [
           {
             "work": "fixture.work",
@@ -83,11 +86,10 @@
           "ln"
         ],
         "conflicts": []
-      },
-      "fixture_only": true
+      }
     },
     {
-      "id": "fixture.ev.conflicted.fact",
+      "id": "ev.fixture.conflicted.fact",
       "schema_version": 2,
       "retrieval_role": "KNOWLEDGE_EVIDENCE",
       "text": "A verified-looking factual statement is attached to an unresolved source conflict.",
@@ -111,6 +113,8 @@
       ],
       "provenance": {
         "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
         "supports": [
           {
             "work": "fixture.work",
@@ -128,8 +132,7 @@
         "conflicts": [
           "fixture.conflict.open"
         ]
-      },
-      "fixture_only": true
+      }
     }
   ],
   "fixture_claims": [
@@ -147,6 +150,8 @@
       "visibility_default": "PUBLIC",
       "provenance": {
         "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
         "supports": [
           {
             "work": "fixture.work",
@@ -174,6 +179,8 @@
       "visibility_default": "PUBLIC",
       "provenance": {
         "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
         "supports": [
           {
             "work": "fixture.work",

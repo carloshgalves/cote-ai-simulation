@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from functools import lru_cache
 import hashlib
 import json
 from pathlib import Path
@@ -8,6 +9,8 @@ import re
 import unicodedata
 from typing import Any
 
+import jsonschema
+from referencing import Registry, Resource
 import yaml
 
 
@@ -15,6 +18,7 @@ WORD_RE = re.compile(r"\w+", re.UNICODE)
 COMPILER_ID = "canon-rag-v0-reference"
 CHUNKING_ID = "evidence-1to1-max1600-no-overlap"
 BACKEND = {"id": "reference-lexical", "version": 1}
+SCHEMA_DIR = Path(__file__).resolve().parents[2] / "data/canon/schema"
 
 
 def canonical_json(value: Any) -> bytes:
@@ -61,6 +65,19 @@ def _index_unique(items: list[dict[str, Any]], kind: str) -> dict[str, dict[str,
     return indexed
 
 
+@lru_cache(maxsize=None)
+def _schema_validator(schema_name: str) -> jsonschema.Draft202012Validator:
+    schema = json.loads((SCHEMA_DIR / schema_name).read_text(encoding="utf-8"))
+    common = json.loads((SCHEMA_DIR / "common.schema.json").read_text(encoding="utf-8"))
+    registry = Registry().with_resource(common["$id"], Resource.from_contents(common))
+    return jsonschema.Draft202012Validator(schema, registry=registry)
+
+
+def _schema_errors(kind: str, value: dict[str, Any], schema_name: str) -> list[str]:
+    errors = sorted(_schema_validator(schema_name).iter_errors(value), key=lambda error: error.json_path)
+    return [f"schema:{kind}:{error.json_path}:{error.validator}" for error in errors]
+
+
 def merge_source_registries(*registries: dict[str, Any]) -> dict[str, Any]:
     merged = {"schema_version": 1, "works": []}
     seen: set[str] = set()
@@ -79,14 +96,72 @@ def merge_source_registries(*registries: dict[str, Any]) -> dict[str, Any]:
     return merged
 
 
-def _compiled_claim(claim: dict[str, Any]) -> dict[str, Any]:
+def _work_continuity(work: dict[str, Any]) -> str:
+    if work.get("medium") == "anime" or work.get("form") == "adaptation-anime":
+        return "anime"
+    if work.get("medium") == "manga" or work.get("form") == "adaptation-manga":
+        return "manga"
+    return "ln"
+
+
+def _resolve_supports(
+    provenance: dict[str, Any], work_by_id: dict[str, dict[str, Any]]
+) -> tuple[list[dict[str, Any]], list[str]]:
+    resolved = []
+    errors = []
+    continuity = set(provenance.get("continuity", []))
+    for support in provenance.get("supports", []):
+        work_id = support.get("work")
+        work = work_by_id.get(work_id)
+        if work is None:
+            errors.append(f"unresolved_support_work:{work_id}")
+            continue
+        tier = work.get("tier")
+        if not isinstance(tier, int) or tier > 3:
+            errors.append(f"support_tier_not_allowed:{work_id}")
+        support_edition = support.get("edition")
+        registry_edition = work.get("edition")
+        if support_edition is not None and support_edition != registry_edition:
+            errors.append(f"support_edition_mismatch:{work_id}")
+        if _work_continuity(work) not in continuity:
+            errors.append(f"support_continuity_mismatch:{work_id}")
+        resolved.append({"reference": deepcopy(support), "work": deepcopy(work)})
+    return resolved, errors
+
+
+def _compiled_claim(
+    claim: dict[str, Any], work_by_id: dict[str, dict[str, Any]]
+) -> dict[str, Any]:
     provenance = claim.get("provenance", {})
+    resolved_supports, errors = _resolve_supports(provenance, work_by_id)
+    errors.extend(_schema_errors("claim", claim, "claim.schema.json"))
+    status = provenance.get("epistemic_status")
+    claim_kind = claim.get("claim_kind")
+    verified_tier_limit = {
+        "WORLD_TRUTH": 1,
+        "INSTITUTIONAL_RULE": 1,
+        "ENTITY": 2,
+    }.get(claim_kind)
+    if status == "VERIFIED" and verified_tier_limit is not None:
+        if not any(
+            isinstance(item["work"].get("tier"), int)
+            and item["work"]["tier"] <= verified_tier_limit
+            for item in resolved_supports
+        ):
+            errors.append(f"verified_claim_tier_not_allowed:{claim_kind}")
     return {
         "claim_id": claim["id"],
+        "claim_kind": claim_kind,
         "effective_time": deepcopy(claim.get("temporal")),
-        "epistemic_status": provenance.get("epistemic_status"),
+        "epistemic_status": status,
         "open_conflicts": sorted(provenance.get("conflicts", [])),
+        "verification": {
+            "verified_by": provenance.get("verified_by"),
+            "verified_at": provenance.get("verified_at"),
+        },
+        "resolved_supports": resolved_supports,
         "source_digest": sha256_json(claim),
+        "compilation_errors": sorted(set(errors)),
     }
 
 
@@ -97,11 +172,14 @@ def compile_records(
 ) -> list[dict[str, Any]]:
     """Compile authoritative inputs while retaining invalid records for fail-closed traces."""
 
+    _index_unique(evidence, "evidence")
     claim_by_id = _index_unique(claims, "claim")
     work_by_id = _index_unique(source_registry.get("works", []), "source work")
+    registry_errors = _schema_errors("source_registry", source_registry, "source.schema.json")
     records = []
     for ev in sorted(evidence, key=lambda item: item.get("id", "")):
-        errors: list[str] = []
+        errors = list(registry_errors)
+        errors.extend(_schema_errors("evidence", ev, "evidence.schema.json"))
         primary: dict[str, Any] = {}
         resolved_source_id = None
         try:
@@ -121,13 +199,18 @@ def compile_records(
         elif work.get("edition") != primary.get("edition"):
             errors.append("source_edition_mismatch")
 
+        _, support_errors = _resolve_supports(ev.get("provenance") or {}, work_by_id)
+        errors.extend(support_errors)
+
         resolved_claims = []
         for claim_id in ev.get("supports_claims", []):
             claim = claim_by_id.get(claim_id)
             if claim is None:
                 errors.append(f"unresolved_claim:{claim_id}")
             else:
-                resolved_claims.append(_compiled_claim(claim))
+                compiled_claim = _compiled_claim(claim, work_by_id)
+                resolved_claims.append(compiled_claim)
+                errors.extend(compiled_claim["compilation_errors"])
 
         provenance = ev.get("provenance") or {}
         source_material = {"evidence": ev, "claims": resolved_claims, "work": work}
@@ -162,6 +245,7 @@ def corpus_manifest(
     claims: list[dict[str, Any]],
     source_registry: dict[str, Any],
 ) -> dict[str, Any]:
+    _index_unique(evidence, "evidence")
     ordered_evidence = sorted(evidence, key=lambda item: item["id"])
     ordered_claims = sorted(claims, key=lambda item: item["id"])
     referenced_work_ids = sorted(

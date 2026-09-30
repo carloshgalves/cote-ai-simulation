@@ -61,7 +61,7 @@ def test_role_drives_gates_and_cross_role_requests_are_filtered():
     fact_as_behavior["filters"] = {}
     output = retrieve(records, fact_as_behavior, suite["time_order"], manifest["digest"], suite["seed_time"])
     excluded = {item["evidence_id"]: item["reason"] for item in output["excluded"]}
-    assert excluded["fixture.ev.post-divergence.fact"] == "FILTERED_OUT"
+    assert excluded["ev.fixture.post-divergence.fact"] == "FILTERED_OUT"
 
 
 def test_factual_lane_requires_resolved_verified_temporally_valid_claim():
@@ -75,7 +75,7 @@ def test_factual_lane_requires_resolved_verified_temporally_valid_claim():
     compiled = compile_records(suite["fixture_records"], unverified_claims, registry)
     output = retrieve(compiled, request, suite["time_order"], manifest["digest"], suite["seed_time"])
     assert {item["evidence_id"]: item["reason"] for item in output["excluded"]}[
-        "fixture.ev.post-divergence.fact"
+        "ev.fixture.post-divergence.fact"
     ] == "UNVERIFIED_FACT"
 
     conflicted_claims = deepcopy(claims)
@@ -84,17 +84,17 @@ def test_factual_lane_requires_resolved_verified_temporally_valid_claim():
     compiled = compile_records(suite["fixture_records"], conflicted_claims, registry)
     output = retrieve(compiled, request, suite["time_order"], manifest["digest"], suite["seed_time"])
     assert {item["evidence_id"]: item["reason"] for item in output["excluded"]}[
-        "fixture.ev.post-divergence.fact"
+        "ev.fixture.post-divergence.fact"
     ] == "OPEN_CONFLICT"
 
     unresolved = deepcopy(suite["fixture_records"])
-    future = next(item for item in unresolved if item["id"] == "fixture.ev.post-divergence.fact")
+    future = next(item for item in unresolved if item["id"] == "ev.fixture.post-divergence.fact")
     future["supports_claims"] = ["fixture.claim.missing"]
     request["knowledge_scope"]["allowed_claim_ids"] = ["fixture.claim.missing"]
     compiled = compile_records(unresolved, claims, registry)
     output = retrieve(compiled, request, suite["time_order"], manifest["digest"], suite["seed_time"])
     assert {item["evidence_id"]: item["reason"] for item in output["excluded"]}[
-        "fixture.ev.post-divergence.fact"
+        "ev.fixture.post-divergence.fact"
     ] == "MISSING_GATE_METADATA"
 
     future_claims = deepcopy(claims)
@@ -104,7 +104,7 @@ def test_factual_lane_requires_resolved_verified_temporally_valid_claim():
     compiled = compile_records(suite["fixture_records"], future_claims, registry)
     output = retrieve(compiled, request, suite["time_order"], manifest["digest"], suite["seed_time"])
     assert {item["evidence_id"]: item["reason"] for item in output["excluded"]}[
-        "fixture.ev.post-divergence.fact"
+        "ev.fixture.post-divergence.fact"
     ] == "NOT_EFFECTIVE"
 
 
@@ -120,7 +120,7 @@ def test_topic_and_evidence_filters_apply_before_gates_with_empty_meaning_unrest
     suite, _, _, _, records, manifest = _inputs()
     request = _case(suite, "normal-kiyotaka-behavior")
     request["filters"]["topics"] = ["not-this-topic"]
-    request["filters"]["evidence_ids"] = ["fixture.ev.secret.other-actor"]
+    request["filters"]["evidence_ids"] = ["ev.fixture.secret.other-actor"]
     output = retrieve(records, request, suite["time_order"], manifest["digest"], suite["seed_time"])
     assert output["abstained"]
     assert {item["evidence_id"]: item["reason"] for item in output["excluded"]}[
@@ -209,7 +209,7 @@ def test_missing_or_inconsistent_primary_source_fails_closed():
     suite, _, claims, registry, _, manifest = _inputs()
     request = _case(suite, "post-divergence-fact")
     request["divergence_time"] = None
-    source = next(item for item in suite["fixture_records"] if item["id"] == "fixture.ev.post-divergence.fact")
+    source = next(item for item in suite["fixture_records"] if item["id"] == "ev.fixture.post-divergence.fact")
 
     for mutation in ("locator", "edition", "work_mismatch"):
         evidence = deepcopy(source)
@@ -237,3 +237,91 @@ def test_lexical_oracle_normalizes_unicode_and_handles_non_latin_words():
     evidence = {"text": "caf\u00e9 \u5354\u529b", "topics": [], "situation_tags": []}
     assert lexical_score("cafe\u0301", evidence) == 1.0
     assert lexical_score("\u5354\u529b", evidence) == 1.0
+
+
+def test_compiler_fails_closed_for_schema_invalid_evidence_and_claims():
+    suite, _, claims, registry, _, manifest = _inputs()
+    request = _case(suite, "post-divergence-fact")
+    request["divergence_time"] = None
+
+    invalid_evidence = deepcopy(
+        next(
+            item
+            for item in suite["fixture_records"]
+            if item["id"] == "ev.fixture.post-divergence.fact"
+        )
+    )
+    invalid_evidence["provenance"].pop("verified_by")
+    records = compile_records([invalid_evidence], claims, registry)
+    assert any(error.startswith("schema:evidence:") for error in records[0]["compilation_errors"])
+    output = retrieve(records, request, suite["time_order"], manifest["digest"], suite["seed_time"])
+    assert output["excluded"][0]["reason"] == "MISSING_GATE_METADATA"
+
+    invalid_claims = deepcopy(claims)
+    claim = next(item for item in invalid_claims if item["id"] == "fixture.claim.future")
+    claim["provenance"].pop("verified_at")
+    records = compile_records([suite["fixture_records"][1]], invalid_claims, registry)
+    assert any(error.startswith("schema:claim:") for error in records[0]["compilation_errors"])
+    output = retrieve(records, request, suite["time_order"], manifest["digest"], suite["seed_time"])
+    assert output["excluded"][0]["reason"] == "MISSING_GATE_METADATA"
+
+    oversized = deepcopy(suite["fixture_records"][0])
+    oversized["text"] = "x" * 1601
+    records = compile_records([oversized], claims, registry)
+    assert any(error.startswith("schema:evidence:") for error in records[0]["compilation_errors"])
+
+
+def test_source_tier_and_continuity_policy_fail_closed_before_factual_retrieval():
+    suite, _, claims, registry, _, manifest = _inputs()
+    request = _case(suite, "post-divergence-fact")
+    request["divergence_time"] = None
+
+    discovery_only_registry = deepcopy(registry)
+    fixture_work = next(
+        work for work in discovery_only_registry["works"] if work["id"] == "fixture.work"
+    )
+    fixture_work["tier"] = 5
+    records = compile_records([suite["fixture_records"][1]], claims, discovery_only_registry)
+    assert "support_tier_not_allowed:fixture.work" in records[0]["compilation_errors"]
+    output = retrieve(records, request, suite["time_order"], manifest["digest"], suite["seed_time"])
+    assert output["excluded"][0]["reason"] == "MISSING_GATE_METADATA"
+
+    secondary_registry = deepcopy(registry)
+    fixture_work = next(work for work in secondary_registry["works"] if work["id"] == "fixture.work")
+    fixture_work["tier"] = 3
+    institutional_claims = deepcopy(claims)
+    claim = next(item for item in institutional_claims if item["id"] == "fixture.claim.future")
+    claim["claim_kind"] = "INSTITUTIONAL_RULE"
+    records = compile_records([suite["fixture_records"][1]], institutional_claims, secondary_registry)
+    assert "verified_claim_tier_not_allowed:INSTITUTIONAL_RULE" in records[0][
+        "compilation_errors"
+    ]
+
+    incompatible_registry = deepcopy(registry)
+    fixture_work = next(
+        work for work in incompatible_registry["works"] if work["id"] == "fixture.work"
+    )
+    fixture_work["medium"] = "anime"
+    fixture_work["form"] = "adaptation-anime"
+    records = compile_records([suite["fixture_records"][1]], claims, incompatible_registry)
+    assert "support_continuity_mismatch:fixture.work" in records[0]["compilation_errors"]
+
+    wrong_edition_registry = deepcopy(registry)
+    fixture_work = next(
+        work for work in wrong_edition_registry["works"] if work["id"] == "fixture.work"
+    )
+    fixture_work["edition"] = "fixture-v2"
+    records = compile_records([suite["fixture_records"][1]], claims, wrong_edition_registry)
+    assert "support_edition_mismatch:fixture.work" in records[0]["compilation_errors"]
+
+
+def test_duplicate_evidence_ids_are_rejected_by_compiler_and_manifest():
+    evidence = load_corpus(REPO)
+    claims = load_claims(REPO)
+    registry = load_source_registry(REPO)
+    duplicate = evidence + [deepcopy(evidence[0])]
+
+    with pytest.raises(ValueError, match="duplicate evidence id"):
+        compile_records(duplicate, claims, registry)
+    with pytest.raises(ValueError, match="duplicate evidence id"):
+        corpus_manifest(duplicate, claims, registry)

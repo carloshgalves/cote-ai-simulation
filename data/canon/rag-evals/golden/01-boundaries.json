@@ -93,7 +93,7 @@
         "ev.kiyotaka.v01.reluctant-social-help"
       ],
       "forbidden_evidence": {
-        "fixture.ev.secret.other-actor": "WRONG_ACTOR"
+        "ev.fixture.secret.other-actor": "WRONG_ACTOR"
       },
       "abstention": "FORBIDDEN"
     }

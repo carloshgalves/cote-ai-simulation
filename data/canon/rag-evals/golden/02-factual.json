@@ -28,7 +28,7 @@
       "expected_evidence_ids": [],
       "acceptable_evidence_ids": [],
       "forbidden_evidence": {
-        "fixture.ev.post-divergence.fact": "POST_DIVERGENCE_FACT"
+        "ev.fixture.post-divergence.fact": "POST_DIVERGENCE_FACT"
       },
       "abstention": "REQUIRED"
     },
@@ -60,7 +60,7 @@
       "expected_evidence_ids": [],
       "acceptable_evidence_ids": [],
       "forbidden_evidence": {
-        "fixture.ev.conflicted.fact": "OPEN_CONFLICT"
+        "ev.fixture.conflicted.fact": "OPEN_CONFLICT"
       },
       "abstention": "REQUIRED"
     },

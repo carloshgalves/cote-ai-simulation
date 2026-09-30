@@ -1,3 +1,9 @@
 # RAG evals V0
 
-Golden cases live in `golden/`. `v0-config.json` stores the reference test configuration. `v0-fixtures.json` is synthetic test data only and is not canon.
+Golden cases live in `golden/`. `v0-config.json` stores the versioned reference backend and
+the caller-defined `CANON_SEED` instant. `v0-fixtures.json` contains synthetic evidence,
+claims and source-registry entries only; none of it is canon.
+
+Each eval report records the corpus manifest, suite/fixture digest, backend identity,
+normalized request, returned evidence IDs and exclusion reason codes. Filter lists are
+allow-lists when non-empty; an absent or empty list means no restriction.

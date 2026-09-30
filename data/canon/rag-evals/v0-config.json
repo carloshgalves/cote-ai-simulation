@@ -1,6 +1,8 @@
 {
   "suite_version": 1,
-  "backend_id": "reference-lexical-v0",
+  "backend_id": "reference-lexical",
+  "backend_version": 1,
+  "seed_time": "Y1_START",
   "time_order": {
     "Y1_START": 0,
     "Y1_M01": 10,

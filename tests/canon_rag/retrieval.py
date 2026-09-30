@@ -1,40 +1,77 @@
-from common import lexical_score, primary_support, source_id
+from __future__ import annotations
+
+from common import lexical_score
 from gates import gate_reason
 
-def retrieve(records, req, order, manifest_digest):
+
+def _validate_request(request, seed_time):
+    top_k = request.get("top_k", 5)
+    if isinstance(top_k, bool) or not isinstance(top_k, int) or top_k < 1:
+        raise ValueError("top_k must be a non-boolean integer >= 1")
+
+    mode = request.get("knowledge_scope", {}).get("mode")
+    if mode not in {"CANON_SEED", "SIMULATION"}:
+        raise ValueError("knowledge_scope.mode must be CANON_SEED or SIMULATION")
+    if mode == "CANON_SEED":
+        if seed_time is None:
+            raise ValueError("CANON_SEED requires an explicit seed_time contract")
+        if request.get("simulation_time") != seed_time:
+            raise ValueError("CANON_SEED is valid only at the configured seed_time")
+    return top_k
+
+
+def retrieve(records, request, order, manifest_digest, seed_time=None):
+    top_k = _validate_request(request, seed_time)
     eligible, excluded = [], []
-    for ev in records:
-        reason, trace = gate_reason(ev, req, order)
+    for record in records:
+        reason, trace = gate_reason(record, request, order)
         if reason is not None:
-            excluded.append({"evidence_id": ev.get("id"), "reason": reason, "gate_trace": trace})
+            excluded.append(
+                {"evidence_id": record.get("evidence_id"), "reason": reason, "gate_trace": trace}
+            )
             continue
-        score = lexical_score(req["query"]["text"], ev)
+        score = lexical_score(request["query"]["text"], record)
         if score <= 0:
-            excluded.append({"evidence_id": ev["id"], "reason": "FILTERED_OUT", "gate_trace": trace + ["rank=zero"]})
+            excluded.append(
+                {
+                    "evidence_id": record["evidence_id"],
+                    "reason": "FILTERED_OUT",
+                    "gate_trace": trace + ["rank=zero"],
+                }
+            )
             continue
-        eligible.append((score, ev, trace))
-    eligible.sort(key=lambda x: (-x[0], x[1]["id"]))
+        eligible.append((score, record, trace))
+    eligible.sort(key=lambda item: (-item[0], item[1]["evidence_id"]))
 
     items = []
-    allowed = set(req.get("knowledge_scope", {}).get("allowed_claim_ids", []))
-    for score, ev, trace in eligible[:req.get("top_k", 5)]:
-        primary = primary_support(ev)
-        items.append({
-            "evidence_id": ev["id"],
-            "score": score,
-            "work": ev["narrative_position"]["work"],
-            "locator": primary.get("locator"),
-            "source_id": source_id(ev),
-            "supported_claim_ids": list(ev.get("supports_claims", [])),
-            "retrieval_role": ev["retrieval_role"],
-            "epistemic_status": ev["provenance"]["epistemic_status"],
-            "authorization_claim_ids": sorted(set(ev.get("supports_claims", [])) & allowed),
-            "gate_trace": trace,
-            "provenance": ev["provenance"],
-            "manifest_digest": manifest_digest,
-            "text": ev["text"],
-        })
-    return {"items": items, "excluded": excluded, "abstained": not items, "manifest_digest": manifest_digest}
+    allowed = set(request.get("knowledge_scope", {}).get("allowed_claim_ids", []))
+    for score, record, trace in eligible[:top_k]:
+        items.append(
+            {
+                "evidence_id": record["evidence_id"],
+                "score": score,
+                "score_components": {"lexical_overlap": score},
+                "work": record["work"],
+                "locator": record["locator"],
+                "source_id": record["source_id"],
+                "supported_claim_ids": list(record["supported_claim_ids"]),
+                "retrieval_role": record["retrieval_role"],
+                "epistemic_status": record["epistemic_status"],
+                "authorization_claim_ids": sorted(set(record["supported_claim_ids"]) & allowed),
+                "gate_trace": trace,
+                "provenance": record["provenance"],
+                "source_digest": record["source_digest"],
+                "manifest_digest": manifest_digest,
+                "text": record["text"],
+            }
+        )
+    return {
+        "items": items,
+        "excluded": excluded,
+        "abstained": not items,
+        "manifest_digest": manifest_digest,
+    }
+
 
 def assemble_context(result):
     lanes = {"CANON_BEHAVIORAL_EVIDENCE": [], "KNOWN_CANON_FACTS": []}

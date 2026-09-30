@@ -28,6 +28,7 @@
         "supports": [
           {
             "work": "fixture.work",
+            "edition": "fixture-v1",
             "locator": {
               "scene": "fixture only"
             },
@@ -70,6 +71,7 @@
         "supports": [
           {
             "work": "fixture.work",
+            "edition": "fixture-v1",
             "locator": {
               "scene": "fixture only"
             },
@@ -112,6 +114,7 @@
         "supports": [
           {
             "work": "fixture.work",
+            "edition": "fixture-v1",
             "locator": {
               "scene": "fixture only"
             },
@@ -128,5 +131,74 @@
       },
       "fixture_only": true
     }
-  ]
+  ],
+  "fixture_claims": [
+    {
+      "id": "fixture.claim.future",
+      "schema_version": 1,
+      "claim_kind": "EVENT",
+      "statement": "Fixture-only future factual event.",
+      "temporal": {
+        "effective_from": {
+          "mode": "EXACT",
+          "exact": {"anchor": "Y1_M03"}
+        }
+      },
+      "visibility_default": "PUBLIC",
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "edition": "fixture-v1",
+            "locator": {"scene": "fixture only"},
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": ["ln"],
+        "conflicts": []
+      }
+    },
+    {
+      "id": "fixture.claim.conflicted",
+      "schema_version": 1,
+      "claim_kind": "INSTITUTIONAL_RULE",
+      "statement": "Fixture-only rule with an open conflict.",
+      "temporal": {
+        "effective_from": {
+          "mode": "EXACT",
+          "exact": {"anchor": "Y1_M01"}
+        }
+      },
+      "visibility_default": "PUBLIC",
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "edition": "fixture-v1",
+            "locator": {"scene": "fixture only"},
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": ["ln"],
+        "conflicts": ["fixture.conflict.open"]
+      }
+    }
+  ],
+  "fixture_source_registry": {
+    "schema_version": 1,
+    "works": [
+      {
+        "id": "fixture.work",
+        "title": "Fixture work",
+        "medium": "light-novel",
+        "form": "ln-prose",
+        "tier": 0,
+        "edition": "fixture-v1"
+      }
+    ]
+  }
 }

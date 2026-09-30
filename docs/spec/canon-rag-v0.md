@@ -185,6 +185,8 @@ Regras:
   ausente, `KNOWN_FACTS` abstém/falha fechado.
 - o retriever não deriva conhecimento pós-seed de `known_by` canônico.
 - `knowledge_horizon` é allow-list por obra. Obra ausente está fora do horizonte.
+- filtros ausentes ou com lista vazia não restringem candidatos; listas não vazias de
+  `retrieval_roles`, `topics` e `evidence_ids` são allow-lists aplicadas antes dos gates.
 - `top_k >= 1`.
 
 ## 7. Pipeline e gates

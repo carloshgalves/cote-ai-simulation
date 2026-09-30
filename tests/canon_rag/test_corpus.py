@@ -3,7 +3,7 @@ import sys
 HERE=Path(__file__).resolve().parent
 REPO=HERE.parents[1]
 sys.path.insert(0,str(HERE))
-from common import corpus_manifest,load_corpus
+from common import corpus_manifest,load_claims,load_corpus,load_source_registry
 
 def test_six_focal_actors_and_contract():
     evidence=load_corpus(REPO)
@@ -26,5 +26,8 @@ def test_six_focal_actors_and_contract():
 
 def test_manifest_is_deterministic():
     evidence=load_corpus(REPO)
-    assert corpus_manifest(evidence)==corpus_manifest(list(reversed(evidence)))
-    assert len(corpus_manifest(evidence)["digest"])==64
+    claims,registry=load_claims(REPO),load_source_registry(REPO)
+    assert corpus_manifest(evidence,claims,registry)==corpus_manifest(list(reversed(evidence)),list(reversed(claims)),registry)
+    reversed_registry={**registry,"works":list(reversed(registry["works"]))}
+    assert corpus_manifest(evidence,claims,registry)==corpus_manifest(evidence,claims,reversed_registry)
+    assert len(corpus_manifest(evidence,claims,registry)["digest"])==64

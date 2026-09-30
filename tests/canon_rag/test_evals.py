@@ -3,11 +3,11 @@ import sys
 HERE=Path(__file__).resolve().parent
 REPO=HERE.parents[1]
 sys.path.insert(0,str(HERE))
-from common import load_corpus,load_suite
+from common import load_claims,load_corpus,load_source_registry,load_suite
 from eval_runner import evaluate_suite
 
 def test_golden_suite_is_clean():
-    report=evaluate_suite(load_corpus(REPO),load_suite(REPO))
+    report=evaluate_suite(load_corpus(REPO),load_claims(REPO),load_source_registry(REPO),load_suite(REPO))
     assert report["critical_failures"]==[]
     m=report["metrics"]
     assert m["recall_at_k"]==1.0

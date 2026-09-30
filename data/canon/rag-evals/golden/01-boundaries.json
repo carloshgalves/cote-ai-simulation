@@ -13,7 +13,7 @@
         "purpose": "BEHAVIORAL_GUIDANCE"
       },
       "knowledge_scope": {
-        "mode": "CANON_SEED",
+        "mode": "SIMULATION",
         "allowed_claim_ids": []
       },
       "filters": {

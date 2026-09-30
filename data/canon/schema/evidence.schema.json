@@ -70,7 +70,18 @@
         {
           "type": "object",
           "required": ["supports"],
-          "properties": {"supports": {"minItems": 1}}
+          "properties": {
+            "supports": {
+              "minItems": 1,
+              "contains": {
+                "type": "object",
+                "required": ["strength"],
+                "properties": {"strength": {"const": "primary"}}
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          }
         }
       ]
     }

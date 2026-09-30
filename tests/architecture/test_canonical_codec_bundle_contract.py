@@ -151,3 +151,83 @@ def test_genesis_explicitly_pins_profile_and_schema_bundle_without_hash_cycle() 
     assert pinning["unicode_version"] == "unicode-15.1.0"
     assert pinning["normalization_profile_id"] == "unicode.npss.nfc.15.1.0"
     assert pinning["schema_bundle_hash"] == schema_bundle_hash
+
+
+def test_indeterminate_evidence_ordering_uses_a_registered_digest_operation() -> None:
+    cddl = (BUNDLE / "foundation.cddl").read_text(encoding="utf-8")
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+
+    operation = [
+        "cote.csf.digest.indeterminate-evidence-refs",
+        "cote.csf.schema.indeterminate-evidence-ref-list",
+        1,
+    ]
+    assert operation in registries["domain_operations"]
+    assert (
+        "indeterminate-evidence-ref-list = [0*1024 evidence-ref]" in cddl
+    )
+
+    derived = {
+        item[0]: item[1:] for item in registries["derived_ordering_components"]
+    }
+    assert derived["indeterminate-evidence-refs-digest"] == [
+        "cycle-abort.indeterminate-records[*].evidence-refs",
+        "cote.csf.digest.indeterminate-evidence-refs",
+        "cote.csf.schema.indeterminate-evidence-ref-list",
+        1,
+    ]
+
+    cases = {case["case_id"]: case for case in fixtures["semantic"]}
+    ordering_case = cases[
+        "normalize.cycle-abort-indeterminate-records-by-evidence-digest"
+    ]
+    assert len(ordering_case["input_cbor_hex"]) == 2
+    assert ordering_case["input_cbor_hex"][0] != ordering_case["input_cbor_hex"][1]
+    assert ordering_case["ordering_component_operation"] == operation[0]
+
+
+def test_registered_preimages_bind_all_causal_enum_and_role_fields() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    enum_bindings = dict(registries["enum_bindings"])
+    role_bindings = dict(registries["role_bindings"])
+
+    expected_enum_bindings = {
+        "conflict-set-id-preimage.conflict-kind": "conflict_kind",
+        "event-id-preimage.event-order-key.phase": "phase",
+        "knowledge-input-id-preimage.kind": "knowledge_kind",
+        "occurrence-id-preimage.origin[0]": "created_by_variant",
+        "decision-round-id-preimage.origin[0]": "round_created_by_variant",
+        "claim-id-preimage.origin.kind": "reference_kind",
+        "transmission-id-preimage.origin.kind": "reference_kind",
+    }
+    expected_role_bindings = {
+        "occurrence-id-preimage.occurrence-role": "occurrence_creation_role",
+        "decision-round-id-preimage.round-role": "decision_round_creation_role",
+        "claim-id-preimage.claim-role": "claim_creation_role",
+        "transmission-id-preimage.transmission-role": "transmission_creation_role",
+        "candidate-id-preimage.candidate-role": "extension:candidate_role",
+        "event-id-preimage.event-order-key.event-role": "extension:event_role",
+        "observation-id-preimage.observation-role": "extension:observation_role",
+        "knowledge-input-id-preimage.input-role": "extension:knowledge_input_role",
+    }
+    for path, registry in expected_enum_bindings.items():
+        assert enum_bindings[path] == registry
+    for path, registry in expected_role_bindings.items():
+        assert role_bindings[path] == registry
+
+    covered_paths = {
+        case["field_path"]
+        for case in fixtures["semantic"]
+        if case["kind"] == "operation_field_binding"
+    }
+    assert covered_paths >= expected_enum_bindings.keys() | expected_role_bindings.keys()
+
+
+def test_documentation_treats_two_language_conformance_as_future_gate() -> None:
+    contract = (BUNDLE.parent / "canonical-codec-v1.md").read_text(encoding="utf-8")
+    readme = (BUNDLE / "README.md").read_text(encoding="utf-8")
+
+    assert "O CI de uma\nimplementação candidata deve executar" in contract
+    assert "**Execução de conformidade neste checkpoint:** pendente" in readme

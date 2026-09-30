@@ -467,6 +467,7 @@ snapshot = [snapshot-fields, snapshot-hash: digest32]
 
 ; Digest preimages that are not record bodies.
 admitted-unit-list = [0*65535 admitted-unit]
+indeterminate-evidence-ref-list = [0*1024 evidence-ref]
 decision-pair = [unit-id: id32, decision-record-id: id32, record-digest: digest32]
 decision-pair-list = [0*65535 decision-pair]
 perception-task-id-list = [0*65535 id32]

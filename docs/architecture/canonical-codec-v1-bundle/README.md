@@ -84,11 +84,18 @@ declara de forma append-only.
 
 `enum_bindings` e `role_bindings` ligam cada field path ao registry aplicável; binding do path mais
 específico prevalece sobre o binding do tipo reutilizado, e `u8`/`u16` sozinho nunca autoriza um
-código. `reference_identities` liga todos os 23 `reference_kind` ao root persistido e às operações de
+código. Isso inclui os fields próprios dos preimages registrados: nenhum preimage herda
+informalmente o binding do record que o originou. `reference_identities` liga todos os 23
+`reference_kind` ao root persistido e às operações de
 id e digest. `unit_reference_dispatch` e `slot_response_reference_dispatch` fecham os dois dispatches
 discriminados. Cada entrada de
 `set_like_collections` tem quatro posições normativas — field path, ordering key, duplicate policy e
 identity key —; mesma identity key com bytes diferentes é sempre `SET_IDENTITY_COLLISION`.
+
+`derived_ordering_components` fecha qualquer componente de ordenação calculado. Em particular,
+`indeterminate-evidence-refs-digest` normaliza `evidence_refs` como
+`cote.csf.schema.indeterminate-evidence-ref-list` e aplica a operação registrada
+`cote.csf.digest.indeterminate-evidence-refs`; hash de array nu ou envelope inventado é inválido.
 
 `Event` e `SourceClosure` persistem `run_id`, portanto seus ids são recomputáveis sem contexto do
 store. Cada `admitted-unit` persiste `eligibility`, `unit-kind` e `source-id` além de id/digest; sua
@@ -109,22 +116,25 @@ operação lógica e policy ref.
 
 ## Vetores e verificação independente
 
-`fixtures.json` contém 141 vetores positivos, 28 negativos, 111 casos semânticos, seis casos de
+**Execução de conformidade neste checkpoint:** pendente. Este checkpoint arquitetural publica o
+contrato e os vetores, mas não inclui dois runners independentes nem um workflow que os execute. Uma
+implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
+
+`fixtures.json` contém 142 vetores positivos, 28 negativos, 128 casos semânticos, seis casos de
 normalização convergente e dois vetores SHA-256. Os positivos cobrem primitivos e limites, Unicode,
-map/list/set, floats, todos os roots persistidos e as 65 operações de id/digest/hash do registry.
+map/list/set, floats, todos os roots persistidos e as 66 operações de id/digest/hash do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
 `error_code` estável. Os casos semânticos executam bindings de enum em roots completos,
 duplicata/colisão de cada família de ref, record persistido → ref para todos os dispatches de input e
 slot response, dois attempts do mesmo ciclo, permutação de `rule-versions`, fence completo permutado,
-mismatch/corrupção entre fence e ledger, pinning do genesis e idempotência
+mismatch/corrupção entre fence e ledger, bindings dentro de envelopes de operação, o digest
+domain-separated de evidência indeterminada, pinning do genesis e idempotência
 ABSENT/PRESENT/conflitante.
 
-No checkpoint documental, os 141 vetores positivos foram produzidos por um encoder isolado em
-Node.js 22.22.1 e, independentemente, decoded, reencoded byte a byte e rehashados por um segundo
-encoder/decoder em Python 3.14.4; o segundo verificador também confirmou os seis casos de
-normalização e os dois vetores SHA-256. Esses programas foram ferramentas temporárias, não
-implementação da fundação nem parte do bundle. A aceitação de uma implementação continua exigindo que
-ela execute positivos e negativos e faça validação CDDL/semântica, conforme o contrato principal.
+Checagens temporárias usadas durante a autoria não foram preservadas e não contam como evidência de
+conformidade reproduzível. A aceitação de uma implementação exige dois runners preservados, em
+linguagens diferentes, executando positivos, negativos, normalização e semântica conforme o contrato
+principal.
 
 ## Classificação de texto
 

@@ -2,7 +2,7 @@
   "bundle_id": "cote.csf.schema.foundation.v1",
   "manifest_version": 1,
   "artifacts": [
-    ["foundation.cddl", 22870, "e580598ba508448d1df0867219efa8e4d9f035e4a6f388cd3b50e101f4b4d819"],
-    ["registries.json", 52866, "57fd0350e7de38ddbfdfc4fa95e0ec2610f0431130b1f8cf104edc3754382289"]
+    ["foundation.cddl", 22926, "88545ce9f06c65e9f087c479b44f83b3c9599823dafe7896aa4cc2d335c726d8"],
+    ["registries.json", 54989, "70eefa9d101b5afc5ec780f5df56799989930179eb61421f5200b94a47ef5065"]
   ]
 }

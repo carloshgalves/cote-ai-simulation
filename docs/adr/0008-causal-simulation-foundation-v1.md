@@ -1334,7 +1334,9 @@ Os dois arrays de evidência têm semântica de conjunto e são normalizados **a
 - em cada `indeterminate_record`, `evidence_refs[]` é ordenado por
   `(ref_kind_tag, referenced_id, referenced_digest)` em bytes canônicos; o array externo é ordenado
   por `(subject_kind_tag, subject_id, subject_digest, facet, validator_id, validator_version,
-  validator_hash, reason_code, digest(evidence_refs), rule_version)`, também em bytes canônicos;
+  validator_hash, reason_code, digest(evidence_refs), rule_version)`, também em bytes canônicos. Esse
+  digest é normativamente a operação `cote.csf.digest.indeterminate-evidence-refs` sobre o root
+  `cote.csf.schema.indeterminate-evidence-ref-list` já normalizado; hash do array nu é proibido;
 - `failure_evidence_refs[]` usa a mesma chave total
   `(ref_kind_tag, referenced_id, referenced_digest)`;
 - `rule_versions` é set-like e usa a mesma chave total do fence

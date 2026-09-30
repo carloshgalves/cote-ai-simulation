@@ -264,7 +264,7 @@ O genesis persiste, no mínimo:
   `identity_algorithm_version=cote.csf.sha256.v1`, NFC pelo Normalization Process for Stabilized
   Strings (NPSS) Unicode 15.1.0,
   `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`
-  e `schema_bundle_hash=d8061407dd683fdce12980a54881ffb4a95eee0b0c5b35112f329e453bae1c1f`;
+  e `schema_bundle_hash=11e6edfa2a812918a9162623c2b76757bfea000641b664921172909dd9e57e25`;
 - causal identity, admission order, fence, coordinate, event order, idempotency, RNG, perception e
   perception identity policy: versão **e** hash;
 - pares `(schema_id, schema_version)` sob `schema_bundle_hash`, mais versões/hashes de reducers,
@@ -628,7 +628,7 @@ dos hashes causais. Métricas mínimas:
 12. ids/completion de percepção idempotentes e instante epistemológico causal;
 13. substreams independentes de avaliações/atores irrelevantes;
 14. arquitetura sem cliente LLM no core e sem write port transitivo no Observatory;
-15. os 288 vetores/casos de conformidade do bundle executados por pelo menos duas
+15. os 306 vetores/casos de conformidade do bundle executados por pelo menos duas
     implementações independentes e linguagens diferentes;
 16. strict decode rejeita CBOR não preferido, indefinite, tag, `undefined`, duplicate key, Unicode
     fora do profile, non-finite, negative zero, schema/enum desconhecido e id com tamanho incorreto;

@@ -56,6 +56,7 @@
     ["cote.csf.digest.epistemic-checkpoint", "cote.csf.schema.epistemic-checkpoint-ref", 1],
     ["cote.csf.digest.genesis-manifest", "cote.csf.schema.genesis-manifest", 1],
     ["cote.csf.digest.idempotency", "cote.csf.schema.idempotency-preimage", 1],
+    ["cote.csf.digest.indeterminate-evidence-refs", "cote.csf.schema.indeterminate-evidence-ref-list", 1],
     ["cote.csf.hash.world-state", "cote.csf.schema.typed-value", 1],
     ["cote.csf.hash.snapshot", "cote.csf.schema.snapshot.body", 1],
     ["cote.csf.id.admission-fence", "cote.csf.schema.admission-fence-id-preimage", 1],
@@ -86,6 +87,7 @@
     ["cote.csf.digest.genesis-manifest", "cote.csf.schema.genesis-manifest", 1],
     ["cote.csf.digest.idempotency", "cote.csf.schema.idempotency-preimage", 1],
     ["cote.csf.digest.idempotency-identity", "cote.csf.schema.idempotency-identity", 1],
+    ["cote.csf.digest.indeterminate-evidence-refs", "cote.csf.schema.indeterminate-evidence-ref-list", 1],
     ["cote.csf.digest.input", "cote.csf.schema.admitted-unit-list", 1],
     ["cote.csf.digest.knowledge-input", "cote.csf.schema.knowledge-input.body", 1],
     ["cote.csf.digest.no-proposal-unit", "cote.csf.schema.no-proposal.body", 1],
@@ -243,6 +245,7 @@
     ["cote.csf.schema.snapshot.body", 1, "snapshot-body"],
     ["cote.csf.schema.typed-value", 1, "typed-value"],
     ["cote.csf.schema.admitted-unit-list", 1, "admitted-unit-list"],
+    ["cote.csf.schema.indeterminate-evidence-ref-list", 1, "indeterminate-evidence-ref-list"],
     ["cote.csf.schema.decision-pair-list", 1, "decision-pair-list"],
     ["cote.csf.schema.perception-task-id-list", 1, "perception-task-id-list"],
     ["cote.csf.schema.batch-preimage", 1, "batch-preimage"],
@@ -337,6 +340,10 @@
     "created_by_variant": [
       ["event", 0],
       ["input", 1],
+      ["genesis", 2]
+    ],
+    "round_created_by_variant": [
+      ["event", 0],
       ["genesis", 2]
     ],
     "cycle_kind": [
@@ -539,12 +546,14 @@
     ["cycle-commit.cycle-plan[0]", "cycle_kind"],
     ["cycle-control-state.status", "cycle_control_status"],
     ["conflict-set.conflict-kind", "conflict_kind"],
+    ["conflict-set-id-preimage.conflict-kind", "conflict_kind"],
     ["decision-record.disposition", "disposition"],
     ["decision-record.subject.input-kind", "admitted_unit_kind"],
     ["entity-ref.kind", "entity_kind"],
     ["epistemic-checkpoint-ref.content[0]", "checkpoint_content_variant"],
     ["event.confidentiality", "confidentiality"],
     ["event.event-order-key.phase", "phase"],
+    ["event-id-preimage.event-order-key.phase", "phase"],
     ["evidence-ref.ref-kind", "reference_kind"],
     ["genesis-manifest.parent-checkpoint-history-ref[0]", "optional_variant"],
     ["idempotency-identity.actor-scope[0]", "optional_variant"],
@@ -553,6 +562,7 @@
     ["idempotency-preimage.unit-kind", "unit_kind"],
     ["input-ref.input-kind", "unit_kind"],
     ["knowledge-input.kind", "knowledge_kind"],
+    ["knowledge-input-id-preimage.kind", "knowledge_kind"],
     ["no-proposal.reason", "no_proposal_reason"],
     ["observation.modality", "modality"],
     ["optional[*][0]", "optional_variant"],
@@ -560,6 +570,10 @@
     ["recurrence-policy.kind", "recurrence_kind"],
     ["resource-claim.mode", "resource_mode"],
     ["round-declaration.created-by[0]", "created_by_variant"],
+    ["occurrence-id-preimage.origin[0]", "created_by_variant"],
+    ["decision-round-id-preimage.origin[0]", "round_created_by_variant"],
+    ["claim-id-preimage.origin.kind", "reference_kind"],
+    ["transmission-id-preimage.origin.kind", "reference_kind"],
     ["round-declaration.lifecycle", "lifecycle"],
     ["scheduled-occurrence.created-by[0]", "created_by_variant"],
     ["scheduled-occurrence.lifecycle", "lifecycle"],
@@ -578,12 +592,20 @@
     ["commit-candidate.event-drafts[*].event-role", "extension:event_role"],
     ["commit-candidate.event-drafts[*].causal-parent-roles[*]", "extension:event_role"],
     ["event.event-order-key.event-role", "extension:event_role"],
+    ["event-id-preimage.event-order-key.event-role", "extension:event_role"],
     ["knowledge-input.input-role", "extension:knowledge_input_role"],
+    ["knowledge-input-id-preimage.input-role", "extension:knowledge_input_role"],
     ["observation.observation-role", "extension:observation_role"],
+    ["observation-id-preimage.observation-role", "extension:observation_role"],
+    ["candidate-id-preimage.candidate-role", "extension:candidate_role"],
     ["round-declaration.round-role", "decision_round_creation_role"],
+    ["decision-round-id-preimage.round-role", "decision_round_creation_role"],
     ["scheduled-occurrence.occurrence-role", "occurrence_creation_role"],
+    ["occurrence-id-preimage.occurrence-role", "occurrence_creation_role"],
     ["claim.claim-role", "claim_creation_role"],
-    ["transmission.transmission-role", "transmission_creation_role"]
+    ["claim-id-preimage.claim-role", "claim_creation_role"],
+    ["transmission.transmission-role", "transmission_creation_role"],
+    ["transmission-id-preimage.transmission-role", "transmission_creation_role"]
   ],
   "reference_identities": [
     {
@@ -714,6 +736,15 @@
     {"slot_response_kind": "no_proposal", "code": 1, "persisted_root": "cote.csf.schema.no-proposal", "id_operation": "cote.csf.id.no-proposal", "id_preimage_schema": "cote.csf.schema.slot-response-id-preimage", "digest_operation": "cote.csf.digest.no-proposal-unit", "digest_preimage_schema": "cote.csf.schema.no-proposal.body"}
   ],
   "extension_registries_required": ["action_type and action target roles", "event_type, event roles, and candidate roles", "occurrence_kind and payload schema", "trigger predicate and dependency selectors", "observation roles, input roles, percept schemas, and channel contracts", "domain entity kinds beyond the foundation codes", "reason codes scoped by their owning schema", "validator, resolver, reducer, producer, and policy identifiers"],
+  "derived_ordering_components": [
+    [
+      "indeterminate-evidence-refs-digest",
+      "cycle-abort.indeterminate-records[*].evidence-refs",
+      "cote.csf.digest.indeterminate-evidence-refs",
+      "cote.csf.schema.indeterminate-evidence-ref-list",
+      1
+    ]
+  ],
   "set_like_collections": [
     [
       "action-proposal.targets",
@@ -771,6 +802,18 @@
     ],
     [
       "facet-result.evidence-refs",
+      ["ref-kind", "referenced-id-bytes", "referenced-digest-bytes"],
+      "dedup_exact",
+      ["ref-kind", "referenced-id-bytes"]
+    ],
+    [
+      "indeterminate-evidence-ref-list",
+      ["ref-kind", "referenced-id-bytes", "referenced-digest-bytes"],
+      "dedup_exact",
+      ["ref-kind", "referenced-id-bytes"]
+    ],
+    [
+      "cycle-abort.indeterminate-records[*].evidence-refs",
       ["ref-kind", "referenced-id-bytes", "referenced-digest-bytes"],
       "dedup_exact",
       ["ref-kind", "referenced-id-bytes"]
@@ -837,7 +880,7 @@
     ],
     [
       "cycle-abort.indeterminate-records",
-      ["subject-kind", "subject-id-bytes", "subject-digest-bytes", "facet", "validator-id-bytes", "validator-version", "validator-hash-bytes", "reason-code-bytes", "digest-of-evidence-refs", "rule-version"],
+      ["subject-kind", "subject-id-bytes", "subject-digest-bytes", "facet", "validator-id-bytes", "validator-version", "validator-hash-bytes", "reason-code-bytes", "indeterminate-evidence-refs-digest", "rule-version"],
       "dedup_exact",
       ["subject-kind", "subject-id-bytes", "subject-digest-bytes", "facet", "validator-id-bytes", "validator-version", "validator-hash-bytes"]
     ],

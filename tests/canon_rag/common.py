@@ -70,7 +70,11 @@ def _schema_validator(schema_name: str) -> jsonschema.Draft202012Validator:
     schema = json.loads((SCHEMA_DIR / schema_name).read_text(encoding="utf-8"))
     common = json.loads((SCHEMA_DIR / "common.schema.json").read_text(encoding="utf-8"))
     registry = Registry().with_resource(common["$id"], Resource.from_contents(common))
-    return jsonschema.Draft202012Validator(schema, registry=registry)
+    return jsonschema.Draft202012Validator(
+        schema,
+        registry=registry,
+        format_checker=jsonschema.Draft202012Validator.FORMAT_CHECKER,
+    )
 
 
 def _schema_errors(kind: str, value: dict[str, Any], schema_name: str) -> list[str]:
@@ -102,6 +106,16 @@ def _work_continuity(work: dict[str, Any]) -> str:
     if work.get("medium") == "manga" or work.get("form") == "adaptation-manga":
         return "manga"
     return "ln"
+
+
+def _normalized_continuity(provenance: dict[str, Any]) -> list[str]:
+    return sorted(
+        {
+            item
+            for item in provenance.get("continuity", [])
+            if isinstance(item, str) and item
+        }
+    )
 
 
 def _resolve_supports(
@@ -159,6 +173,7 @@ def _compiled_claim(
             "verified_by": provenance.get("verified_by"),
             "verified_at": provenance.get("verified_at"),
         },
+        "continuity": _normalized_continuity(provenance),
         "resolved_supports": resolved_supports,
         "source_digest": sha256_json(claim),
         "compilation_errors": sorted(set(errors)),
@@ -202,6 +217,8 @@ def compile_records(
         _, support_errors = _resolve_supports(ev.get("provenance") or {}, work_by_id)
         errors.extend(support_errors)
 
+        provenance = ev.get("provenance") or {}
+        continuity = _normalized_continuity(provenance)
         resolved_claims = []
         for claim_id in ev.get("supports_claims", []):
             claim = claim_by_id.get(claim_id)
@@ -211,8 +228,9 @@ def compile_records(
                 compiled_claim = _compiled_claim(claim, work_by_id)
                 resolved_claims.append(compiled_claim)
                 errors.extend(compiled_claim["compilation_errors"])
+                if not set(continuity).intersection(compiled_claim["continuity"]):
+                    errors.append(f"claim_continuity_mismatch:{claim_id}")
 
-        provenance = ev.get("provenance") or {}
         source_material = {"evidence": ev, "claims": resolved_claims, "work": work}
         records.append(
             {
@@ -228,6 +246,7 @@ def compile_records(
                 "effective_time": deepcopy(ev.get("story_time")),
                 "retrieval_role": ev.get("retrieval_role"),
                 "epistemic_status": provenance.get("epistemic_status"),
+                "continuity": continuity,
                 "open_conflicts": sorted(provenance.get("conflicts", [])),
                 "topics": list(ev.get("topics", [])),
                 "situation_tags": list(ev.get("situation_tags", [])),
@@ -245,14 +264,21 @@ def corpus_manifest(
     claims: list[dict[str, Any]],
     source_registry: dict[str, Any],
 ) -> dict[str, Any]:
-    _index_unique(evidence, "evidence")
-    ordered_evidence = sorted(evidence, key=lambda item: item["id"])
-    ordered_claims = sorted(claims, key=lambda item: item["id"])
+    evidence_by_id = _index_unique(evidence, "evidence")
+    claim_by_id = _index_unique(claims, "claim")
+    ordered_evidence = sorted(evidence_by_id.values(), key=lambda item: item["id"])
+    ordered_claims = sorted(claim_by_id.values(), key=lambda item: item["id"])
     referenced_work_ids = sorted(
         {
             item.get("narrative_position", {}).get("work")
             for item in ordered_evidence
             if item.get("narrative_position", {}).get("work")
+        }
+        | {
+            support.get("work")
+            for item in [*ordered_evidence, *ordered_claims]
+            for support in item.get("provenance", {}).get("supports", [])
+            if support.get("work")
         }
     )
     work_by_id = _index_unique(source_registry.get("works", []), "source work")

@@ -5,6 +5,7 @@ PURPOSE_ROLE = {
     "BEHAVIORAL_GUIDANCE": "BEHAVIORAL_CANON",
     "KNOWN_FACTS": "KNOWLEDGE_EVIDENCE",
 }
+DEFAULT_CONTINUITY = "ln"
 
 
 def _anchor(time_bound):
@@ -34,6 +35,8 @@ def _record_missing(record):
     if record.get("compilation_errors"):
         return True
     if any(record.get(field) in (None, "", {}) for field in required):
+        return True
+    if not record.get("continuity"):
         return True
     role = record.get("retrieval_role")
     if role == "BEHAVIORAL_CANON" and not record.get("actors"):
@@ -105,6 +108,9 @@ def gate_reason(record, request, order):
     if _record_missing(record):
         return "MISSING_GATE_METADATA", trace + ["metadata=deny"]
 
+    if DEFAULT_CONTINUITY not in record["continuity"]:
+        return "FILTERED_OUT", trace + ["continuity=deny"]
+
     story = order.get(_anchor(record["effective_time"]))
     now = order.get(request.get("simulation_time"))
     if story is None or now is None:
@@ -116,6 +122,11 @@ def gate_reason(record, request, order):
     authorizing_ids = allowed.intersection(record.get("supported_claim_ids", []))
     claims_by_id = {claim["claim_id"]: claim for claim in record.get("resolved_claims", [])}
     if record["retrieval_role"] == "KNOWLEDGE_EVIDENCE":
+        if any(
+            DEFAULT_CONTINUITY not in claims_by_id[claim_id].get("continuity", [])
+            for claim_id in sorted(authorizing_ids)
+        ):
+            return "FILTERED_OUT", trace + ["continuity=deny"]
         for claim_id in sorted(authorizing_ids):
             reason = _claim_time_reason(claims_by_id[claim_id], now, order)
             if reason is not None:

@@ -4,12 +4,75 @@ from common import lexical_score
 from gates import gate_reason
 
 
+def _validate_string_list(value, field):
+    if not isinstance(value, list) or any(
+        not isinstance(item, str) or not item for item in value
+    ):
+        raise ValueError(f"{field} must be a list of non-empty strings")
+
+
 def _validate_request(request, seed_time):
+    if not isinstance(request, dict):
+        raise ValueError("request must be an object")
+
+    for field in ("character_id", "simulation_time"):
+        value = request.get(field)
+        if not isinstance(value, str) or not value:
+            raise ValueError(f"{field} must be a non-empty string")
+
+    divergence = request.get("divergence_time")
+    if divergence is not None and (not isinstance(divergence, str) or not divergence):
+        raise ValueError("divergence_time must be null or a non-empty string")
+
+    query = request.get("query")
+    if not isinstance(query, dict):
+        raise ValueError("query must be an object")
+    if not isinstance(query.get("text"), str):
+        raise ValueError("query.text must be a string")
+    purpose = query.get("purpose")
+    if not isinstance(purpose, str) or purpose not in {
+        "BEHAVIORAL_GUIDANCE",
+        "KNOWN_FACTS",
+    }:
+        raise ValueError(
+            "query.purpose must be BEHAVIORAL_GUIDANCE or KNOWN_FACTS"
+        )
+
     top_k = request.get("top_k", 5)
     if isinstance(top_k, bool) or not isinstance(top_k, int) or top_k < 1:
         raise ValueError("top_k must be a non-boolean integer >= 1")
 
-    mode = request.get("knowledge_scope", {}).get("mode")
+    allow_unverified = request.get("allow_unverified_behavioral", False)
+    if not isinstance(allow_unverified, bool):
+        raise ValueError("allow_unverified_behavioral must be a boolean")
+
+    horizon = request.get("knowledge_horizon", {})
+    if not isinstance(horizon, dict) or any(
+        not isinstance(work, str)
+        or not work
+        or isinstance(cap, bool)
+        or not isinstance(cap, int)
+        or cap < 0
+        for work, cap in horizon.items()
+    ):
+        raise ValueError(
+            "knowledge_horizon must map non-empty work ids to non-negative integer caps"
+        )
+
+    filters = request.get("filters", {})
+    if not isinstance(filters, dict):
+        raise ValueError("filters must be an object")
+    for field in ("retrieval_roles", "topics", "evidence_ids"):
+        if field in filters:
+            _validate_string_list(filters[field], field)
+
+    knowledge_scope = request.get("knowledge_scope")
+    if not isinstance(knowledge_scope, dict):
+        raise ValueError("knowledge_scope must be an object")
+    if "allowed_claim_ids" in knowledge_scope:
+        _validate_string_list(knowledge_scope["allowed_claim_ids"], "allowed_claim_ids")
+
+    mode = knowledge_scope.get("mode")
     if mode not in {"CANON_SEED", "SIMULATION"}:
         raise ValueError("knowledge_scope.mode must be CANON_SEED or SIMULATION")
     if mode == "CANON_SEED":

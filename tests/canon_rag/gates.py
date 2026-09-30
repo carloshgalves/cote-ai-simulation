@@ -80,6 +80,18 @@ def _claim_time_reason(claim, now, order):
     return None
 
 
+def _claim_divergence_reason(claim, divergence, order):
+    temporal = claim.get("effective_time")
+    if not isinstance(temporal, dict):
+        return "MISSING_GATE_METADATA"
+    start = order.get(_anchor(temporal.get("effective_from")))
+    if start is None:
+        return "MISSING_GATE_METADATA"
+    if start > divergence:
+        return "POST_DIVERGENCE_FACT"
+    return None
+
+
 def gate_reason(record, request, order):
     trace = []
     purpose = request.get("query", {}).get("purpose")
@@ -127,8 +139,15 @@ def gate_reason(record, request, order):
         divergence_value = order.get(divergence)
         if divergence_value is None:
             return "MISSING_GATE_METADATA", trace + ["divergence=unknown"]
-        if story > divergence_value and record["retrieval_role"] == "KNOWLEDGE_EVIDENCE":
-            return "POST_DIVERGENCE_FACT", trace + ["divergence=deny"]
+        if record["retrieval_role"] == "KNOWLEDGE_EVIDENCE":
+            if story > divergence_value:
+                return "POST_DIVERGENCE_FACT", trace + ["divergence=deny"]
+            for claim_id in sorted(authorizing_ids):
+                reason = _claim_divergence_reason(
+                    claims_by_id[claim_id], divergence_value, order
+                )
+                if reason is not None:
+                    return reason, trace + ["divergence=deny"]
     trace.append("divergence=allow")
 
     status = record["epistemic_status"]
@@ -139,6 +158,8 @@ def gate_reason(record, request, order):
             return "OPEN_CONFLICT", trace + ["epistemic=deny"]
         for claim_id in sorted(authorizing_ids):
             claim = claims_by_id[claim_id]
+            if claim.get("claim_kind") == "BELIEF":
+                return "NON_FACTUAL_STATUS", trace + ["epistemic=deny"]
             if claim.get("epistemic_status") != "VERIFIED":
                 return "UNVERIFIED_FACT", trace + ["epistemic=deny"]
             if claim.get("open_conflicts"):

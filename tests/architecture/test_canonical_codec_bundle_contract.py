@@ -600,8 +600,206 @@ def test_published_conformance_case_counts_match_the_bundle() -> None:
 
     assert len(fixtures["positive"]) == 152
     assert len(fixtures["negative"]) == 30
-    assert len(fixtures["semantic"]) == 166
+    assert len(fixtures["semantic"]) == 190
+    assert len(fixtures["normalization_cases"]) == 7
     assert "152 casos positivos" in contract
     assert "30 casos negativos" in contract
-    assert "166 casos semânticos" in contract
-    assert "152 vetores positivos, 30 negativos, 166 casos semânticos" in readme
+    assert "190 casos semânticos" in contract
+    assert "152 vetores positivos, 30 negativos, 190 casos semânticos" in readme
+
+
+def test_cycle_control_state_variants_are_closed_by_status() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    constraints = {
+        item["record"]: item for item in registries["record_constraints"]
+    }
+
+    constraint = constraints["cycle-control-state"]
+    assert constraint["discriminant"] == "cycle-control-state.status"
+    assert constraint["variants"] == [
+        {
+            "code": 0,
+            "required_present": [],
+            "required_absent": [
+                "cycle-id",
+                "attempt-ordinal",
+                "fence-ref",
+                "retry-ref",
+            ],
+            "reference_kind_constraints": [
+                {
+                    "field": "last-terminal-envelope-ref",
+                    "when_present": "cycle_commit_reference_kind",
+                }
+            ],
+            "relations": ["next-attempt-ordinal == 1"],
+        },
+        {
+            "code": 1,
+            "required_present": ["cycle-id", "attempt-ordinal", "fence-ref"],
+            "required_absent": ["retry-ref"],
+            "reference_kind_constraints": [],
+            "relations": ["next-attempt-ordinal == attempt-ordinal + 1"],
+        },
+        {
+            "code": 2,
+            "required_present": [
+                "cycle-id",
+                "attempt-ordinal",
+                "retry-ref",
+                "last-terminal-envelope-ref",
+            ],
+            "required_absent": ["fence-ref"],
+            "reference_kind_constraints": [
+                {
+                    "field": "last-terminal-envelope-ref",
+                    "when_present": "cycle_abort_reference_kind",
+                }
+            ],
+            "relations": ["next-attempt-ordinal == attempt-ordinal"],
+        },
+        {
+            "code": 3,
+            "required_present": [
+                "cycle-id",
+                "attempt-ordinal",
+                "last-terminal-envelope-ref",
+            ],
+            "required_absent": ["fence-ref", "retry-ref"],
+            "reference_kind_constraints": [
+                {
+                    "field": "last-terminal-envelope-ref",
+                    "when_present": "cycle_abort_reference_kind",
+                }
+            ],
+            "relations": ["next-attempt-ordinal == attempt-ordinal + 1"],
+        },
+    ]
+
+    cases = [
+        case
+        for case in fixtures["semantic"]
+        if case["kind"] == "record_conditional_constraint"
+        and case["record"] == "cycle-control-state"
+    ]
+    assert {case["status_code"] for case in cases} == set(range(4))
+    assert all(case["valid_payload_cbor_hex"] for case in cases)
+    assert all(case["invalid_payload_cbor_hex"] for case in cases)
+    assert all(case["invalid_error_code"] == "RECORD_CONSTRAINT" for case in cases)
+
+
+def test_repeat_while_true_requires_a_positive_explicit_cadence() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    constraints = {
+        item["record"]: item for item in registries["record_constraints"]
+    }
+
+    constraint = constraints["trigger-definition"]
+    assert constraint["discriminant"] == "trigger-definition.activation-policy"
+    assert constraint["variants"] == [
+        {"codes": [0, 1, 2], "required_absent": ["repeat-every"]},
+        {
+            "code": 3,
+            "required_present": ["repeat-every"],
+            "field_ranges": [
+                {"field": "repeat-every", "exclusive_minimum": 0}
+            ],
+        },
+    ]
+
+    cases = [
+        case
+        for case in fixtures["semantic"]
+        if case["kind"] == "record_conditional_constraint"
+        and case["record"] == "trigger-definition"
+    ]
+    assert {case["violation"] for case in cases} == {
+        "non_repeat_present",
+        "repeat_absent",
+        "repeat_zero",
+        "repeat_negative",
+    }
+    assert all(case["invalid_error_code"] == "RECORD_CONSTRAINT" for case in cases)
+
+
+def test_attempt_failure_identity_is_stable_under_worker_permutation() -> None:
+    cddl = (BUNDLE / "foundation.cddl").read_text(encoding="utf-8")
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    bindings = _enum_bindings(registries)
+    identity = next(
+        item
+        for item in registries["reference_identities"]
+        if item["reference_kind"] == "attempt_failure"
+    )
+
+    assert (
+        "attempt-failure-id-preimage = [run-id: id32, cycle-id: id32, "
+        "attempt-ordinal: u32,\n                               stage: u8, "
+        "component: policy-ref,\n                               "
+        "failure-local-ordinal: u32]"
+        in cddl
+    )
+    assert identity["id"]["components"] == [
+        "attempt-failure.run-id",
+        "attempt-failure.cycle-id",
+        "attempt-failure.attempt-ordinal",
+        "attempt-failure.stage",
+        "attempt-failure.component",
+        "attempt-failure.failure-local-ordinal",
+    ]
+    assert bindings["attempt-failure-id-preimage.stage"] == "attempt_failure_stage"
+
+    case = next(
+        item
+        for item in fixtures["normalization_cases"]
+        if item["case_id"] == "normalize.attempt-failure.worker-order"
+    )
+    assert len(case["inputs"]) == 2
+    assert case["inputs"][0] != case["inputs"][1]
+    assert case["recompute"] == ["abort-digest"]
+    assert case["expected_payload_cbor_hex"]
+    assert case["expected_abort_digest"]
+
+
+def test_every_reference_identity_has_a_linked_record_to_reference_case() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+
+    expected = {
+        entry["persisted_root"] for entry in registries["reference_identities"]
+    }
+    cases = {
+        case["persisted_root"]: case
+        for case in fixtures["semantic"]
+        if case["kind"] == "record_to_reference"
+    }
+
+    assert cases.keys() == expected
+    assert len(cases) == 28
+    for root, case in cases.items():
+        identity = next(
+            entry
+            for entry in registries["reference_identities"]
+            if entry["persisted_root"] == root
+        )
+        assert case["id_operation"] == identity["id"]["operation"]
+        assert case["digest_operation"] == identity["digest"]["operation"]
+        derived_id = hashlib.sha256(
+            bytes.fromhex(case["id_preimage_envelope_hex"])
+        ).digest()
+        derived_digest = hashlib.sha256(
+            bytes.fromhex(case["digest_preimage_envelope_hex"])
+        ).digest()
+        expected_ref = bytes.fromhex(case["expected_causal_ref_cbor_hex"])
+        encoded_code = (
+            bytes([identity["code"]])
+            if identity["code"] < 24
+            else b"\x18" + bytes([identity["code"]])
+        )
+        assert expected_ref == (
+            b"\x83" + encoded_code + b"\x58\x20" + derived_id
+            + b"\x58\x20" + derived_digest
+        )

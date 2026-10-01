@@ -264,7 +264,7 @@ O genesis persiste, no mínimo:
   `identity_algorithm_version=cote.csf.sha256.v1`, NFC pelo Normalization Process for Stabilized
   Strings (NPSS) Unicode 15.1.0,
   `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`
-  e `schema_bundle_hash=05cc37fbba2a5eaa917e4b743e245eb067a3fa8283e1570f053534d7ed84b0a3`;
+  e `schema_bundle_hash=9e577b6ba971e3aa5cb8f33c3d2a0e5e685308fae0d4b3ef47c7d2c64aeed73c`;
 - causal identity, admission order, fence, coordinate, event order, idempotency, RNG, perception e
   perception identity policy: versão **e** hash;
 - pares `(schema_id, schema_version)` sob `schema_bundle_hash`, mais versões/hashes de reducers,
@@ -439,6 +439,8 @@ referência epistemológica opaca e verificada.
 - Recorrência e defer criam sucessor novo com provenance e coordenada explícita.
 - Trigger avalia predicate puro apenas sob versão/dependências registradas. Edge, once e repeat têm
   runtime persistido; reavaliação isolada não duplica efeito.
+- `REPEAT_WHILE_TRUE` exige `repeat_every` explícito e positivo; as demais policies proíbem esse
+  campo.
 - Transição que ativa trigger publica runtime e `TriggerActivation(PENDING)` na mesma transação da
   revisão de origem, elegível somente a ciclo posterior.
 
@@ -455,6 +457,8 @@ referência epistemológica opaca e verificada.
 - Cada unidade admitida termina em `COMMIT`, `REJECT`, `DEFER`, `NO_PROPOSAL` ou `DEDUPLICATED` no
   mesmo `CycleCommit`; lifecycle obrigatório não é suprimido por ausência de evento de domínio.
 - Abort não cria `DecisionRecord`, não consome fonte, não publica evento/revisão e não avança ordinal.
+- `AttemptFailure` deriva identidade de tentativa + stage + component policy + ordinal nomeado pelo
+  schema do componente; scheduling/completion de worker nunca aloca esse ordinal.
 - Retentativa requer `AttemptRetryRecord`; resume sozinho nunca sai de `HALTED_ON_ABORT`.
 
 ### 7.6 Eventos, reducers e revisão
@@ -492,7 +496,8 @@ referência epistemológica opaca e verificada.
 - Snapshot+tails reproduz execução contínua. Checkpoint epistemológico é restaurado por hash e nunca
   regenerado por modelo.
 - `ATTEMPT_IN_FLIGHT`, `RETRY_AUTHORIZED`, `HALTED_ON_ABORT` e `IDLE` são derivados pela precedência
-  normativa do ADR; estado persistido divergente falha fechado.
+  normativa do ADR; presença das refs, kind do último envelope e relações de ordinal são validados
+  pela variante, e estado persistido divergente falha fechado.
 - Fork cria novo `run_id`; entre policies, o genesis usa a referência histórica autocontida com
   policy/domain/schema/algoritmo de origem. Nenhum id ou evento pós-fork cruza timelines.
 - Observatory tem somente query ports. Consultar segredo, POV ou view pública não cria observation,
@@ -632,7 +637,7 @@ dos hashes causais. Métricas mínimas:
 12. ids/completion de percepção idempotentes e instante epistemológico causal;
 13. substreams independentes de avaliações/atores irrelevantes;
 14. arquitetura sem cliente LLM no core e sem write port transitivo no Observatory;
-15. os 356 vetores/casos de conformidade do bundle executados por pelo menos duas
+15. os 381 vetores/casos de conformidade do bundle executados por pelo menos duas
     implementações independentes e linguagens diferentes;
 16. strict decode rejeita CBOR não preferido, indefinite, tag, `undefined`, duplicate key, Unicode
     fora do profile, non-finite, negative zero, schema/enum desconhecido e id com tamanho incorreto;

@@ -179,6 +179,10 @@ As origens são estáveis e independentes de execução:
   função, com seus componentes causais completos definidos nas seções correspondentes; papel e
   ordinal de output vêm do schema, nunca da ordem do worker.
 
+`AttemptFailure` segue a mesma disciplina: seu id inclui tentativa, stage, `component` versionado e
+`failure_local_ordinal`. Esse ordinal é uma saída nomeada pela policy/schema do componente e é estável
+sob permutação de workers; posição de append, ordem de detecção ou completion nunca o alocam.
+
 Todo `CausalRef` é fechado pelo registry do codec: o `reference_kind` seleciona um único root
 persistido, uma operação de id e um preimage total reconstruível do artefato ou do
 envelope tipado de seu ledger. Nenhum root possui dois `reference_kind` canônicos. Fence,
@@ -814,7 +818,8 @@ Toda definição escolhe exatamente uma política:
 `TriggerRuntimeState` persiste `last_value`, `armed/exhausted`, `activation_count` e, quando aplicável,
 `next_repeat_at`. O decision ledger registra quais revisões foram avaliadas; mudanças no runtime são
 eventos de lifecycle, de modo que edge/rearm/repeat também sejam replayable. Re-arm manual é uma
-transição causal explícita. `repeat_every > 0`; repetição de intervalo zero é inválida.
+transição causal explícita. O schema exige `repeat_every` PRESENT e `> 0` exatamente para
+`REPEAT_WHILE_TRUE`, e ABSENT nas outras três policies; repetição ausente, zero ou negativa é inválida.
 
 Uma ativação não é um instante efêmero entre avaliar o predicate e construir um candidato. É uma
 entrada causal derivada e durável:
@@ -1310,8 +1315,9 @@ CycleAbortRecord {
 `ProvisionalDisposition` e `AttemptFailure`. Os três papéis provisórios que antes não possuíam
 identidade recebem roots canônicos: assessment usa identidade content-addressed sobre sujeito +
 digest; disposição provisória identifica tentativa + sujeito e nunca é `DecisionRecord`; falha de
-tentativa identifica tentativa + ordinal local e registra stage, component policy, reason e details
-tipados. Nenhum outro `reference_kind`, em particular `Event` ou `DecisionRecord`, é válido nesse
+tentativa identifica tentativa + stage + component policy + ordinal local nomeado pelo schema desse
+componente e registra reason e details tipados. Nenhum outro `reference_kind`, em particular `Event`
+ou `DecisionRecord`, é válido nesse
 campo.
 
 Cada resultado indeterminado identifica o objeto que foi efetivamente validado e o validator que
@@ -1455,6 +1461,11 @@ O registro é válido apenas se `aborted_envelope_ref` for o último envelope te
 **consumido** pelo fence que o referencia em `retry_ref`: depois desse fence, a regra 1 rege a
 tentativa e, se ela também abortar, o novo abort não tem retentativa e a regra 3 devolve
 `HALTED_ON_ABORT` novamente.
+
+O schema canônico fecha essas quatro variantes: valida presença/ausência de cada optional, restringe
+o último envelope a `CycleCommit` em `IDLE` e a `CycleAbortRecord` em retry/halted, e aplica as
+relações de ordinal acima. Uma forma estruturalmente possível porém incompatível com o status falha
+antes de entrar em snapshot ou digest.
 
 A alternativa é fork de run (§12). Nenhum resume, watchdog ou política de liveness pode emitir um
 `AttemptRetryRecord`: retentativa é decisão de operador ou de política de domínio explicitamente

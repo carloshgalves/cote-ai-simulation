@@ -537,6 +537,9 @@
     "cycle_abort_reference_kind": [
       ["cycle_abort", 13]
     ],
+    "cycle_commit_reference_kind": [
+      ["cycle_commit", 12]
+    ],
     "attempt_retry_reference_kind": [
       ["attempt_retry", 14]
     ],
@@ -627,6 +630,7 @@
     ["affordance-assessment.subject.kind", "action_proposal_reference_kind"],
     ["affordance-assessment-id-preimage.subject.kind", "action_proposal_reference_kind"],
     ["attempt-failure.stage", "attempt_failure_stage"],
+    ["attempt-failure-id-preimage.stage", "attempt_failure_stage"],
     ["attempt-retry.aborted-envelope-ref.kind", "cycle_abort_reference_kind"],
     ["causal-ref.kind", "reference_kind"],
     ["claim.prior-claim-refs[*].kind", "claim_reference_kind"],
@@ -710,6 +714,24 @@
         {"code": 2, "required_present": ["candidate-id", "successor-input-id"], "required_empty": [], "required_absent": ["canonical-unit-id"]},
         {"code": 3, "required_present": [], "required_empty": ["conflict-set-refs"], "required_absent": ["candidate-id", "successor-input-id", "canonical-unit-id"]},
         {"code": 4, "required_present": ["canonical-unit-id"], "required_empty": ["conflict-set-refs"], "required_absent": ["candidate-id", "successor-input-id"]}
+      ]
+    },
+    {
+      "record": "cycle-control-state",
+      "discriminant": "cycle-control-state.status",
+      "variants": [
+        {"code": 0, "required_present": [], "required_absent": ["cycle-id", "attempt-ordinal", "fence-ref", "retry-ref"], "reference_kind_constraints": [{"field": "last-terminal-envelope-ref", "when_present": "cycle_commit_reference_kind"}], "relations": ["next-attempt-ordinal == 1"]},
+        {"code": 1, "required_present": ["cycle-id", "attempt-ordinal", "fence-ref"], "required_absent": ["retry-ref"], "reference_kind_constraints": [], "relations": ["next-attempt-ordinal == attempt-ordinal + 1"]},
+        {"code": 2, "required_present": ["cycle-id", "attempt-ordinal", "retry-ref", "last-terminal-envelope-ref"], "required_absent": ["fence-ref"], "reference_kind_constraints": [{"field": "last-terminal-envelope-ref", "when_present": "cycle_abort_reference_kind"}], "relations": ["next-attempt-ordinal == attempt-ordinal"]},
+        {"code": 3, "required_present": ["cycle-id", "attempt-ordinal", "last-terminal-envelope-ref"], "required_absent": ["fence-ref", "retry-ref"], "reference_kind_constraints": [{"field": "last-terminal-envelope-ref", "when_present": "cycle_abort_reference_kind"}], "relations": ["next-attempt-ordinal == attempt-ordinal + 1"]}
+      ]
+    },
+    {
+      "record": "trigger-definition",
+      "discriminant": "trigger-definition.activation-policy",
+      "variants": [
+        {"codes": [0, 1, 2], "required_absent": ["repeat-every"]},
+        {"code": 3, "required_present": ["repeat-every"], "field_ranges": [{"field": "repeat-every", "exclusive_minimum": 0}]}
       ]
     }
   ],
@@ -872,7 +894,7 @@
     },
     {
       "reference_kind": "attempt_failure", "code": 27, "persisted_root": "cote.csf.schema.attempt-failure",
-      "id": {"operation": "cote.csf.id.attempt-failure", "preimage_schema": "cote.csf.schema.attempt-failure-id-preimage", "components": ["attempt-failure.run-id", "attempt-failure.cycle-id", "attempt-failure.attempt-ordinal", "attempt-failure.failure-local-ordinal"]},
+      "id": {"operation": "cote.csf.id.attempt-failure", "preimage_schema": "cote.csf.schema.attempt-failure-id-preimage", "components": ["attempt-failure.run-id", "attempt-failure.cycle-id", "attempt-failure.attempt-ordinal", "attempt-failure.stage", "attempt-failure.component", "attempt-failure.failure-local-ordinal"]},
       "digest": {"operation": "cote.csf.digest.attempt-failure", "preimage_schema": "cote.csf.schema.attempt-failure.body", "components": ["attempt-failure body"]}
     }
   ],

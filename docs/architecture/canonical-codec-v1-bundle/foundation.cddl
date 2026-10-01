@@ -560,6 +560,7 @@ affordance-assessment-id-preimage = [subject: causal-ref, assessment-digest: dig
 provisional-disposition-id-preimage = [run-id: id32, cycle-id: id32,
                                        attempt-ordinal: u32, subject: decision-subject-ref]
 attempt-failure-id-preimage = [run-id: id32, cycle-id: id32, attempt-ordinal: u32,
+                               stage: u8, component: policy-ref,
                                failure-local-ordinal: u32]
 candidate-id-preimage = [run-id: id32, cycle-id: id32, source-unit-ids: [1*65535 id32],
                          producer: machine-id, producer-version: u32,

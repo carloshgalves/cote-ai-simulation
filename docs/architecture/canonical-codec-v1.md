@@ -27,8 +27,8 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `05cc37fbba2a5eaa917e4b743e245eb067a3fa8283e1570f053534d7ed84b0a3` |
-| `conformance_suite_hash` | `05b2bb4ed4a2ff13e932e6166153515145f998cdd7570b425eeeb4f30f000df3` |
+| `schema_bundle_hash` | `9e577b6ba971e3aa5cb8f33c3d2a0e5e685308fae0d4b3ef47c7d2c64aeed73c` |
+| `conformance_suite_hash` | `6c7158e15eac02d9c02f979095cdd6f59515465454d8b5020ae2c49817bfc20b` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -205,8 +205,10 @@ válida em contexto genérico. O binding do field path mais específico refina o
 
 `record_constraints` fecha invariantes condicionais que CDDL de aridade fixa não expressa sozinho.
 Para `DecisionRecord`, o decoder seleciona a variante por `disposition` e valida presença, ausência e
-vazio de candidate, conflicts, successor e canonical unit antes de aceitar o root. A mesma seção de
-registries liga `decision-record.rng-draw-refs` somente a `RngDraw` e
+vazio de candidate, conflicts, successor e canonical unit antes de aceitar o root. Para
+`CycleControlState`, fecha presence, kind do último envelope e relações de ordinal dos quatro status;
+para `TriggerDefinition`, exige cadência PRESENT e positiva somente em `REPEAT_WHILE_TRUE`. A mesma
+seção de registries liga `decision-record.rng-draw-refs` somente a `RngDraw` e
 `cycle-abort.failure-evidence-refs` somente a `ConflictSet`, `RngDraw`,
 `AffordanceAssessment`, `ProvisionalDisposition` ou `AttemptFailure`. O root standalone
 `Proposition` e a forma aninhada em `Claim` aplicam ambos o registry `polarity`.
@@ -418,8 +420,8 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 18. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
 
 A suíte V1 contém 152 casos positivos — todos os roots persistidos e todas as 73 operações
-registradas —, 30 casos negativos com `error_code` estável, 166 casos semânticos de binding,
-identidade, ordenação e idempotência, seis casos de normalização e dois vetores SHA-256. O CI de uma
+registradas —, 30 casos negativos com `error_code` estável, 190 casos semânticos de binding,
+identidade, ordenação e idempotência, sete casos de normalização e dois vetores SHA-256. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
 independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não
 contém esses runners ou workflow. Ambas precisam provar valor

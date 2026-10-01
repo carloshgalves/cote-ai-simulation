@@ -219,8 +219,9 @@ versão conservadora.
 ### 7.2 actor_gate(actor, t_sim)
 
 - `BEHAVIORAL_CANON`: `character_id` precisa constar em `actors[]`.
-- `KNOWN_FACTS`: pelo menos um `supported_claim_id` precisa constar em
-  `knowledge_scope.allowed_claim_ids`.
+- `KNOWN_FACTS`: todos os `supported_claim_ids` expostos pelo texto da passagem precisam constar
+  em `knowledge_scope.allowed_claim_ids`. Autorização parcial exclui o record inteiro; a V0 nunca
+  entrega texto factual que também sustente um claim não autorizado.
 - grupos (`group.first-years`) não são expandidos por palpite. Um futuro seed builder resolve
   membership e produz os claim IDs autorizados.
 
@@ -340,7 +341,8 @@ Cobertura mínima:
 
 1. recuperação normal;
 2. spoiler futuro;
-3. segredo de outro personagem;
+3. segredo factual não autorizado (`CLAIM_NOT_ALLOWED`) ou evidência comportamental do ator
+   errado (`WRONG_ACTOR`);
 4. cânone pós-divergência;
 5. source/claim conflitante;
 6. evidence insuficiente;

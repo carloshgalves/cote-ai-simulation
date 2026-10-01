@@ -12,3 +12,6 @@ allow-lists when non-empty; an absent or empty list means no restriction.
 whose required outcome is abstention and whose expected set is empty, abstaining is a
 hit. The aggregate is the mean across cases; `recall_at_k` remains micro-averaged over
 the expected evidence IDs.
+
+`wrong_character_leakage` counts both behavioral evidence rejected as `WRONG_ACTOR` and factual
+evidence rejected as `CLAIM_NOT_ALLOWED`.

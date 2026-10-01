@@ -45,6 +45,50 @@
       }
     },
     {
+      "id": "ev.fixture.secret.fact",
+      "schema_version": 2,
+      "retrieval_role": "KNOWLEDGE_EVIDENCE",
+      "text": "A hidden factual detail contains private information unavailable to the requesting actor.",
+      "story_time": {
+        "mode": "EXACT",
+        "exact": {
+          "anchor": "Y1_M01"
+        }
+      },
+      "narrative_position": {
+        "work": "fixture.work",
+        "ordinal": 15
+      },
+      "actors": [],
+      "topics": [
+        "secret-fact",
+        "private-information"
+      ],
+      "supports_claims": [
+        "fixture.claim.secret"
+      ],
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "edition": "fixture-v1",
+            "locator": {
+              "scene": "fixture only"
+            },
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": []
+      }
+    },
+    {
       "id": "ev.fixture.post-divergence.fact",
       "schema_version": 2,
       "retrieval_role": "KNOWLEDGE_EVIDENCE",
@@ -136,6 +180,35 @@
     }
   ],
   "fixture_claims": [
+    {
+      "id": "fixture.claim.secret",
+      "schema_version": 1,
+      "claim_kind": "WORLD_TRUTH",
+      "statement": "Fixture-only secret unavailable to the requesting actor.",
+      "temporal": {
+        "effective_from": {
+          "mode": "EXACT",
+          "exact": {"anchor": "Y1_M01"}
+        }
+      },
+      "visibility_default": "PRIVATE",
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "edition": "fixture-v1",
+            "locator": {"scene": "fixture only"},
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": ["ln"],
+        "conflicts": []
+      }
+    },
     {
       "id": "fixture.claim.future",
       "schema_version": 1,

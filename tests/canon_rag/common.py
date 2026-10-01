@@ -225,7 +225,7 @@ def compile_records(
 
         provenance = ev.get("provenance") or {}
         errors.extend(_verification_errors(provenance, "evidence"))
-        continuity = _resolved_continuity(resolved_supports)
+        continuity = [_work_continuity(work)] if work is not None else []
         resolved_claims = []
         for claim_id in ev.get("supports_claims", []):
             claim = claim_by_id.get(claim_id)

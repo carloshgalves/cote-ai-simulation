@@ -243,6 +243,11 @@ def test_compiler_fails_closed_for_schema_invalid_evidence_and_claims():
     suite, _, claims, registry, _, manifest = _inputs()
     request = _case(suite, "post-divergence-fact")
     request["divergence_time"] = None
+    future_evidence = next(
+        item
+        for item in suite["fixture_records"]
+        if item["id"] == "ev.fixture.post-divergence.fact"
+    )
 
     invalid_evidence = deepcopy(
         next(
@@ -260,7 +265,7 @@ def test_compiler_fails_closed_for_schema_invalid_evidence_and_claims():
     invalid_claims = deepcopy(claims)
     claim = next(item for item in invalid_claims if item["id"] == "fixture.claim.future")
     claim["provenance"].pop("verified_at")
-    records = compile_records([suite["fixture_records"][1]], invalid_claims, registry)
+    records = compile_records([future_evidence], invalid_claims, registry)
     assert any(error.startswith("schema:claim:") for error in records[0]["compilation_errors"])
     output = retrieve(records, request, suite["time_order"], manifest["digest"], suite["seed_time"])
     assert output["excluded"][0]["reason"] == "MISSING_GATE_METADATA"
@@ -275,13 +280,18 @@ def test_source_tier_and_continuity_policy_fail_closed_before_factual_retrieval(
     suite, _, claims, registry, _, manifest = _inputs()
     request = _case(suite, "post-divergence-fact")
     request["divergence_time"] = None
+    future_evidence = next(
+        item
+        for item in suite["fixture_records"]
+        if item["id"] == "ev.fixture.post-divergence.fact"
+    )
 
     discovery_only_registry = deepcopy(registry)
     fixture_work = next(
         work for work in discovery_only_registry["works"] if work["id"] == "fixture.work"
     )
     fixture_work["tier"] = 5
-    records = compile_records([suite["fixture_records"][1]], claims, discovery_only_registry)
+    records = compile_records([future_evidence], claims, discovery_only_registry)
     assert "support_tier_not_allowed:fixture.work" in records[0]["compilation_errors"]
     output = retrieve(records, request, suite["time_order"], manifest["digest"], suite["seed_time"])
     assert output["excluded"][0]["reason"] == "MISSING_GATE_METADATA"
@@ -292,7 +302,7 @@ def test_source_tier_and_continuity_policy_fail_closed_before_factual_retrieval(
     institutional_claims = deepcopy(claims)
     claim = next(item for item in institutional_claims if item["id"] == "fixture.claim.future")
     claim["claim_kind"] = "INSTITUTIONAL_RULE"
-    records = compile_records([suite["fixture_records"][1]], institutional_claims, secondary_registry)
+    records = compile_records([future_evidence], institutional_claims, secondary_registry)
     assert "verified_claim_tier_not_allowed:INSTITUTIONAL_RULE" in records[0][
         "compilation_errors"
     ]
@@ -303,7 +313,7 @@ def test_source_tier_and_continuity_policy_fail_closed_before_factual_retrieval(
     )
     fixture_work["medium"] = "anime"
     fixture_work["form"] = "adaptation-anime"
-    records = compile_records([suite["fixture_records"][1]], claims, incompatible_registry)
+    records = compile_records([future_evidence], claims, incompatible_registry)
     assert "support_continuity_mismatch:fixture.work" in records[0]["compilation_errors"]
 
     wrong_edition_registry = deepcopy(registry)
@@ -311,7 +321,7 @@ def test_source_tier_and_continuity_policy_fail_closed_before_factual_retrieval(
         work for work in wrong_edition_registry["works"] if work["id"] == "fixture.work"
     )
     fixture_work["edition"] = "fixture-v2"
-    records = compile_records([suite["fixture_records"][1]], claims, wrong_edition_registry)
+    records = compile_records([future_evidence], claims, wrong_edition_registry)
     assert "support_edition_mismatch:fixture.work" in records[0]["compilation_errors"]
 
 

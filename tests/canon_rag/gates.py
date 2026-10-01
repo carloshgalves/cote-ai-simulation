@@ -119,7 +119,8 @@ def gate_reason(record, request, order):
         return "NOT_EFFECTIVE", trace + ["effective=deny"]
 
     allowed = set(request.get("knowledge_scope", {}).get("allowed_claim_ids", []))
-    authorizing_ids = allowed.intersection(record.get("supported_claim_ids", []))
+    supported_ids = set(record.get("supported_claim_ids", []))
+    authorizing_ids = allowed.intersection(supported_ids)
     claims_by_id = {claim["claim_id"]: claim for claim in record.get("resolved_claims", [])}
     if record["retrieval_role"] == "KNOWLEDGE_EVIDENCE":
         if any(
@@ -136,7 +137,7 @@ def gate_reason(record, request, order):
     if record["retrieval_role"] == "BEHAVIORAL_CANON":
         if request.get("character_id") not in record["actors"]:
             return "WRONG_ACTOR", trace + ["actor=deny"]
-    elif not authorizing_ids:
+    elif authorizing_ids != supported_ids:
         return "CLAIM_NOT_ALLOWED", trace + ["actor=deny"]
     trace.append("actor=allow")
 

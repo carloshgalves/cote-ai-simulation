@@ -96,6 +96,36 @@
         "ev.fixture.secret.other-actor": "WRONG_ACTOR"
       },
       "abstention": "FORBIDDEN"
+    },
+    {
+      "id": "factual-secret-not-allowed",
+      "character_id": "actor.kiyotaka-ayanokoji",
+      "simulation_time": "Y1_M01",
+      "divergence_time": null,
+      "knowledge_horizon": {
+        "fixture.work": 100
+      },
+      "query": {
+        "text": "hidden factual detail private information",
+        "purpose": "KNOWN_FACTS"
+      },
+      "knowledge_scope": {
+        "mode": "SIMULATION",
+        "allowed_claim_ids": []
+      },
+      "filters": {
+        "retrieval_roles": [
+          "KNOWLEDGE_EVIDENCE"
+        ]
+      },
+      "top_k": 3,
+      "allow_unverified_behavioral": false,
+      "expected_evidence_ids": [],
+      "acceptable_evidence_ids": [],
+      "forbidden_evidence": {
+        "ev.fixture.secret.fact": "CLAIM_NOT_ALLOWED"
+      },
+      "abstention": "REQUIRED"
     }
   ]
 }

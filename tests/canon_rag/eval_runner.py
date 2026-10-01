@@ -121,7 +121,7 @@ def evaluate_suite(corpus, claims, source_registry, suite):
         for evidence_id, reason in case.get("forbidden_evidence", {}).items():
             if evidence_id in returned:
                 failures.append(f"{case['id']} leaked {evidence_id} ({reason})")
-                wrong += reason == "WRONG_ACTOR"
+                wrong += reason in {"WRONG_ACTOR", "CLAIM_NOT_ALLOWED"}
                 timeline += reason in {"SPOILER", "NOT_EFFECTIVE"}
                 post += reason == "POST_DIVERGENCE_FACT"
             if excluded.get(evidence_id) != reason:

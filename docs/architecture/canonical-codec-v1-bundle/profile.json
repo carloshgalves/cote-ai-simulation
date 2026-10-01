@@ -1,0 +1,61 @@
+{
+  "codec_policy_id": "cote.csf.codec.cbor-det.v1",
+  "codec_version": 1,
+  "envelope": ["bstr:43534600", "uint:1", "domain-tag", "schema-id", "schema-version", "payload"],
+  "deterministic_cbor": {
+    "standard": "RFC 8949 section 4.2.1 core deterministic encoding",
+    "preferred_serialization": true,
+    "definite_length_only": true,
+    "map_key_order": "bytewise lexicographic order of the complete deterministic key encoding",
+    "map_key_types": ["unsigned-integer", "byte-string", "machine-id"],
+    "allowed_simple_values": ["false", "true", "null"],
+    "forbidden": ["semantic-tag", "undefined", "custom-simple-value", "bignum", "indefinite-length"]
+  },
+  "float": {
+    "semantic_type": "ieee-754-binary64",
+    "encoding": "shortest binary16/binary32/binary64 preserving the exact binary64 value",
+    "negative_zero": "normalize-to-positive-zero",
+    "non_finite": "reject"
+  },
+  "text": {
+    "human_text": "Unicode 15.1.0 NFC by NPSS; reject unassigned and invalid scalar values",
+    "grammar_notation": "RFC 5234 ABNF; terminals are ASCII octets and matching consumes the entire string",
+    "abnf_core": [
+      "lower = %x61-7A",
+      "digit = %x30-39",
+      "upper = %x41-5A",
+      "vchar = %x21-7E"
+    ],
+    "machine_id_abnf": [
+      "machine-id = lower *(lower / digit) *(machine-sep 1*(lower / digit))",
+      "machine-sep = %x2E / %x5F / %x3A / %x2F / %x2D"
+    ],
+    "machine_id_min_bytes": 1,
+    "machine_id_max_bytes": 128,
+    "domain_schema_tag_abnf": [
+      "domain-schema-tag = tag-segment 1*(%x2E tag-segment)",
+      "tag-segment = lower *(lower / digit) *(%x2D 1*(lower / digit))"
+    ],
+    "ascii_uri_abnf": "ascii-uri = 1*vchar",
+    "iana_timezone_abnf": [
+      "iana-timezone = timezone-segment %x2F timezone-segment *(%x2F timezone-segment)",
+      "timezone-segment = 1*alpha *(timezone-sep 1*alpha)",
+      "timezone-sep = %x5F / %x2D",
+      "alpha = lower / upper"
+    ]
+  },
+  "digest": {
+    "algorithm": "sha-256",
+    "output_bytes": 32,
+    "text_view": "csf1:<domain-tag>:sha-256:<64 lowercase hex>"
+  },
+  "limits": {
+    "max_nesting_depth": 64,
+    "max_canonical_envelope_bytes": 16777216,
+    "max_text_utf8_bytes": 1048576,
+    "max_human_text_code_points": 1048576,
+    "max_byte_string_bytes": 16777216,
+    "max_map_entries": 65535,
+    "max_array_items": 65535
+  }
+}

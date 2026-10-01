@@ -3,7 +3,8 @@
 **Status:** Accepted
 **Data:** 2026-09-10
 **Relacionado:** ADR 0001 (world truth e conhecimento), ADR 0003 (tempo lógico), ADR 0006
-(resolução física dentro do Simulation Engine), ADR 0007 (fronteira de dados do `Embodiment`)
+(resolução física dentro do Simulation Engine), ADR 0007 (fronteira de dados do `Embodiment`),
+[ADR 0009](0009-canonical-causal-codec-and-digests.md) (codec e digests)
 
 ## Contexto
 
@@ -134,11 +135,23 @@ derive_id(domain_tag, canonical_components...) =
 ```
 
 `canonical_bytes_v1` é uma codificação tipada e length-prefixed: inteiros têm largura/sinal definidos
-pelo schema; strings são UTF-8 NFC; ids e digests são bytes, não texto reformatado; campos de record
+pelo schema; conteúdo humano é UTF-8 NFC e identificadores causais textuais são ASCII `machine-id`;
+ids e digests derivados são bytes, não texto reformatado; campos de record
 seguem a ordem do schema; maps são ordenados pela chave canônica; e coleções set-like usam a ordem
 total declarada pelo contrato que as possui. Nenhuma implementação pode usar serialização default da
 linguagem. Domain tags, algoritmo, schemas e regras de ordenação integram o hash da política; colisão
 de um id derivado com componentes diferentes é corrupção e falha fechado.
+
+O [ADR 0009](0009-canonical-causal-codec-and-digests.md) fixa a extensão compatível deste contrato:
+RFC 8949 core deterministic CBOR sob profile estrito, NFC pelo Normalization Process for Stabilized
+Strings (NPSS) Unicode 15.1.0, CDDL e registries
+versionados, domain separation por tag e SHA-256. O layout normativo vive em
+[`canonical-codec-v1.md`](../architecture/canonical-codec-v1.md), e os schemas/registries/vetores
+concretos vivem no
+[`canonical-codec-v1-bundle`](../architecture/canonical-codec-v1-bundle/README.md); JSON/YAML e
+serialização default da linguagem não são imagens hasháveis. Identificadores causais textuais usam a
+gramática ASCII `machine-id`; NFC/NPSS é reservado a conteúdo humano e não substitui política de
+segurança de identificadores.
 
 As origens são estáveis e independentes de execução:
 
@@ -165,6 +178,19 @@ As origens são estáveis e independentes de execução:
 - `dispatch_id`, `observation_id`, `knowledge_input_id` e ids de tarefa/completion seguem a mesma
   função, com seus componentes causais completos definidos nas seções correspondentes; papel e
   ordinal de output vêm do schema, nunca da ordem do worker.
+
+`AttemptFailure` segue a mesma disciplina: seu id inclui tentativa, stage, `component` versionado e
+`failure_local_ordinal`. Esse ordinal é uma saída nomeada pela policy/schema do componente e é estável
+sob permutação de workers; posição de append, ordem de detecção ou completion nunca o alocam.
+
+Todo `CausalRef` é fechado pelo registry do codec: o `reference_kind` seleciona um único root
+persistido, uma operação de id e um preimage total reconstruível do artefato ou do
+envelope tipado de seu ledger. Nenhum root possui dois `reference_kind` canônicos. Fence,
+commit e abort usam
+`(run_id, cycle_id, attempt_ordinal)` sob domains distintos; retry usa ainda os ordinais de origem e
+destino; snapshot usa `(run_id, snapshot_version, revision)`; genesis usa `run_id`; checkpoint
+epistemológico usa ator, store, schema version e cursor coberto. Ausência, ambiguidade ou necessidade
+de metadado de chamada para reconstruir esse preimage é corrupção.
 
 UUID aleatório, relógio de parede, posição de append, `ingress_seq`, ordem de chegada e ordem de map
 são proibidos na alocação desses ids. Uma unidade sem chave externa estável ou origem derivável não é
@@ -342,6 +368,7 @@ Uma fonte exógena declara o fim de sua contribuição a uma coordenada com um m
 ```text
 SourceClosure {
   closure_id                              // derivado de (run_id, source_id, producer_closure_key)
+  run_id
   source_id
   producer_closure_key                    // estável na fonte; reusada somente em reentrega idêntica
   closed_through: EligibilityCoordinate     // monotônico por fonte; pode saltar à frente
@@ -397,13 +424,15 @@ causal durável, com lifecycle igual ao de uma `ScheduledOccurrence` (§4.1):
 ```text
 RoundDeclaration {
   decision_round_id
+  run_id
   source_id                          // fonte derivada canônica; slots herdam este valor
   actor_id
   slot_ids[]                          // declarados na criação; imutáveis
   eligibility: EligibilityCoordinate
   created_by: EventRef | GenesisRef
+  round_role + round_local_ordinal   // identidade declarada pelo schema produtor
   lifecycle: PENDING | CANCELLED | CONSUMED
-  idempotency_key
+  idempotency_key?
 }
 ```
 
@@ -461,7 +490,8 @@ AdmissionFence {
                   // covering_closure(source_id, closure_coordinate) de toda fonte exógena declarada
   cohort: { cohort_id, rounds: [{ decision_round_id,
                                   slots: [{ slot_id, response_ref }] }] }
-  admitted_units: [{ unit_id, unit_digest }]  // ordem canônica; ids são a projeção deste array
+  admitted_units: [{ eligibility, unit_kind, source_id, unit_id, unit_digest }]
+                  // chave de ordem autocontida; ids são a projeção deste array
   input_digest
   admission_order_policy_version + admission_order_policy_hash
   causal_identity_policy_version + causal_identity_policy_hash
@@ -518,7 +548,7 @@ Consequências:
   unit_digest, unit_id)`. A política V1 fixa `unit_kind_tag` em `00=SLOT`,
   `01=EXOGENOUS_INPUT`, `02=SCHEDULED_OCCURRENCE`, `03=TRIGGER_ACTIVATION`; uma nova categoria exige
   nova versão com tag única. `canonical_source_id` é o identificador namespaced imutável da fonte em
-  bytes UTF-8 NFC — o `source_id` persistido em toda unidade conforme a §3.2.2; slots herdam o da
+  bytes ASCII `machine-id` — o `source_id` persistido em toda unidade conforme a §3.2.2; slots herdam o da
   `RoundDeclaration`, occurrences persistem o da fonte derivada que as criou e ativações usam
   `trigger:<definition_id>`. Colisão de IDs namespaced é configuração inválida. Digests e IDs são
   comparados por seus bytes canônicos unsigned, nunca por locale, ordem de registro, enum local ou
@@ -738,6 +768,7 @@ evento “prazo expirou” ter sido serializado antes de uma ação no mesmo ins
 ```text
 ScheduledOccurrence {
   occurrence_id
+  run_id
   source_id
   due_at
   eligibility: EligibilityCoordinate   // (due_at, 0), salvo coordenada explícita de DEFER
@@ -745,8 +776,9 @@ ScheduledOccurrence {
   payload
   lifecycle: PENDING | CANCELLED | CONSUMED
   created_by: EventRef | InputRef | GenesisRef
+  occurrence_role + occurrence_local_ordinal
   recurrence?: RecurrencePolicy
-  idempotency_key
+  idempotency_key?
 }
 ```
 
@@ -786,7 +818,8 @@ Toda definição escolhe exatamente uma política:
 `TriggerRuntimeState` persiste `last_value`, `armed/exhausted`, `activation_count` e, quando aplicável,
 `next_repeat_at`. O decision ledger registra quais revisões foram avaliadas; mudanças no runtime são
 eventos de lifecycle, de modo que edge/rearm/repeat também sejam replayable. Re-arm manual é uma
-transição causal explícita. `repeat_every > 0`; repetição de intervalo zero é inválida.
+transição causal explícita. O schema exige `repeat_every` PRESENT e `> 0` exatamente para
+`REPEAT_WHILE_TRUE`, e ABSENT nas outras três policies; repetição ausente, zero ou negativa é inválida.
 
 Uma ativação não é um instante efêmero entre avaliar o predicate e construir um candidato. É uma
 entrada causal derivada e durável:
@@ -794,6 +827,7 @@ entrada causal derivada e durável:
 ```text
 TriggerActivation {
   activation_id
+  run_id
   source_id                         // trigger:<definition_id>
   trigger_definition_id + trigger_version
   origin: { cycle_id, result_revision, causing_event_ids[] } | GenesisRef
@@ -801,7 +835,7 @@ TriggerActivation {
   activation_count
   predicate_result_digest
   lifecycle: PENDING | CONSUMED
-  idempotency_key
+  idempotency_key?
 }
 ```
 
@@ -871,7 +905,7 @@ ActionProposal {
   decision_round_id + slot_id
   submitted_against_revision
   originating_intention_ref?
-  idempotency_key
+  idempotency_key?
   response_digest             // unit_digest da SlotResponse
 }
 ```
@@ -1070,18 +1104,26 @@ DecisionRecord {
 }
 ```
 
+`rng_draw_refs[]` aceita exclusivamente `RngDraw`, nunca um `Event` genérico. O artefato persiste
+`draw_id`, `run_id + cycle_id + attempt_ordinal`, `subsystem`, `decision_key`, os
+`entity_ids` canônicos, `purpose`, a policy/version/hash do algoritmo, o resultado tipado e
+`draw_digest`. Sua identidade exclui o resultado e seu digest o inclui; assim replay verifica tanto
+a substream solicitada quanto o valor obtido, inclusive para `REJECT` ou `DEFER` sem evento
+produzido.
+
 Vale uma **bijeção**: para cada id em `admitted_input_ids` existe exatamente um `DecisionRecord` cujo
 `subject` o referencia, e nenhum `DecisionRecord` referencia unidade fora do fence. `CycleCommit`
 lista `decision_record_ids[]` na mesma ordem canônica de `admitted_input_ids`, e `decision_digest`
 cobre os pares `(unidade, desfecho)`. Assim o recibo de settlement prova a cobertura total, e
 auditoria/replay distinguem “slot sem proposta” e “duplicata descartada” de “fonte omitida por bug”.
 
-Antes da expansão, toda unidade que usa `idempotency_key` é vinculada a uma identidade persistente:
+Antes da expansão, toda unidade cujo optional discriminado `idempotency_key` está `PRESENT` é
+vinculada a uma identidade persistente; `ABSENT` não cria alias, sentinela nem registro:
 
 ```text
 IdempotencyIdentity {
   run_id
-  unit_kind                    // tag canônica: EXOGENOUS_INPUT | ACTION | OCCURRENCE | TRIGGER ...
+  unit_kind                    // tag canônica: SLOT | EXOGENOUS_INPUT | OCCURRENCE | TRIGGER | ROUND ...
   producer_scope               // source_id exógeno ou source_id derivado canônico
   actor_scope                  // actor_id quando a unidade tem ator; NONE nos demais casos
   idempotency_key
@@ -1089,6 +1131,10 @@ IdempotencyIdentity {
   idempotency_policy_version + idempotency_policy_hash
 }
 ```
+
+O preimage de `idempotency_digest` inclui explicitamente `run_id`, `unit_kind`, `producer_scope`,
+`actor_scope`, `idempotency_key`, a operação lógica tipada e a referência completa da policy. Esses
+componentes também ficam no `IdempotencyIdentity`; replay não os recupera de configuração transitória.
 
 O namespace de uma chave é `(run_id, unit_kind, producer_scope, actor_scope, idempotency_key)`. Logo,
 tipos, fontes ou atores distintos nunca colidem por reutilizarem a mesma string.
@@ -1265,6 +1311,15 @@ CycleAbortRecord {
 }
 ```
 
+`failure_evidence_refs[]` aceita exatamente `ConflictSet`, `RngDraw`, `AffordanceAssessment`,
+`ProvisionalDisposition` e `AttemptFailure`. Os três papéis provisórios que antes não possuíam
+identidade recebem roots canônicos: assessment usa identidade content-addressed sobre sujeito +
+digest; disposição provisória identifica tentativa + sujeito e nunca é `DecisionRecord`; falha de
+tentativa identifica tentativa + stage + component policy + ordinal local nomeado pelo schema desse
+componente e registra reason e details tipados. Nenhum outro `reference_kind`, em particular `Event`
+ou `DecisionRecord`, é válido nesse
+campo.
+
 Cada resultado indeterminado identifica o objeto que foi efetivamente validado e o validator que
 produziu a conclusão:
 
@@ -1301,9 +1356,13 @@ Os dois arrays de evidência têm semântica de conjunto e são normalizados **a
 - em cada `indeterminate_record`, `evidence_refs[]` é ordenado por
   `(ref_kind_tag, referenced_id, referenced_digest)` em bytes canônicos; o array externo é ordenado
   por `(subject_kind_tag, subject_id, subject_digest, facet, validator_id, validator_version,
-  validator_hash, reason_code, digest(evidence_refs), rule_version)`, também em bytes canônicos;
+  validator_hash, reason_code, digest(evidence_refs), rule_version)`, também em bytes canônicos. Esse
+  digest é normativamente a operação `cote.csf.digest.indeterminate-evidence-refs` sobre o root
+  `cote.csf.schema.indeterminate-evidence-ref-list` já normalizado; hash do array nu é proibido;
 - `failure_evidence_refs[]` usa a mesma chave total
   `(ref_kind_tag, referenced_id, referenced_digest)`;
+- `rule_versions` é set-like e usa a mesma chave total do fence
+  `(policy_id, version, hash)`; a mesma regra vale para `AttemptRetryRecord.rule_versions`;
 - uma referência ou record byte a byte idêntico aparece uma vez; records de sujeitos diferentes nunca
   são deduplicados, mesmo que facet, reason e evidência coincidam; duas refs com o mesmo par
   `(ref_kind_tag, referenced_id)` e digest diferente, ou dois records para a mesma identidade
@@ -1403,6 +1462,11 @@ O registro é válido apenas se `aborted_envelope_ref` for o último envelope te
 tentativa e, se ela também abortar, o novo abort não tem retentativa e a regra 3 devolve
 `HALTED_ON_ABORT` novamente.
 
+O schema canônico fecha essas quatro variantes: valida presença/ausência de cada optional, restringe
+o último envelope a `CycleCommit` em `IDLE` e a `CycleAbortRecord` em retry/halted, e aplica as
+relações de ordinal acima. Uma forma estruturalmente possível porém incompatível com o status falha
+antes de entrar em snapshot ou digest.
+
 A alternativa é fork de run (§12). Nenhum resume, watchdog ou política de liveness pode emitir um
 `AttemptRetryRecord`: retentativa é decisão de operador ou de política de domínio explicitamente
 versionada e registrada como tal. O resume que encontra `RETRY_AUTHORIZED` apenas completa a
@@ -1415,6 +1479,7 @@ nova tentativa grava fence com `to_attempt_ordinal`, `cycle_plan` e membresia id
 ```text
 Event {
   event_id
+  run_id
   event_order_key: EventOrderKey
   event_type + schema_version
   occurred_at: SimulationInstant
@@ -1436,12 +1501,13 @@ As quatro coleções de referências têm semântica de conjunto e são normaliz
 evento ou calcular `batch_digest`:
 
 - `causal_parents` usa a chave total `event_id` do `EventRef`;
-- `source_inputs` usa `(input_kind_tag, input_id, input_digest)`;
+- `source_inputs` usa `(input_kind_tag, slot_response_kind_or_absent, input_id, input_digest)`;
 - `actor_refs` usa `(actor_namespace, actor_id)`;
 - `entity_refs` usa `(entity_kind_tag, entity_namespace, entity_id)`.
 
 Todos os componentes são comparados em bytes canônicos. Uma ref byte a byte idêntica aparece uma vez;
-duas `EventRef` com o mesmo `event_id`, duas `InputRef` com o mesmo `(input_kind_tag, input_id)` ou duas
+duas `EventRef` com o mesmo `event_id`, duas `InputRef` com o mesmo
+`(input_kind_tag, slot_response_kind_or_absent, input_id)` ou duas
 refs de ator/entidade com a mesma identidade namespaced mas outros bytes são corrupção e falham
 fechado. Quando a ordem entre participantes tiver significado de domínio, ela pertence ao `payload`
 tipado como papel/ordinal explícito, não a estes índices genéricos. As chaves, schemas e política de
@@ -1641,7 +1707,9 @@ prévia, o agente não recebe input.
 
 `Proposition` é o value object de conteúdo tipado, polaridade e escopo temporal. `Claim` é o artefato
 imutável e identificado que registra alguém/canal afirmando essa proposition, com `claim_id`,
-`asserted_by` (quando conhecido), instante da asserção e referências a claims/evidências anteriores.
+`origin`, `claim_role`, `claim_local_ordinal`, `asserted_by` (quando conhecido), instante da asserção
+e referências a claims/evidências anteriores. O id é recomputado exclusivamente de
+`(origin, claim_role, claim_local_ordinal)`; papel e ordinal vêm do schema produtor.
 Repetir o mesmo conteúdo pode criar outro claim; encaminhar sem nova asserção preserva a referência.
 Nenhum dos dois possui campo autoritativo `is_true`.
 
@@ -1657,6 +1725,7 @@ Uma comunicação aceita produz `communication.sent` e, quando há atraso/persis
 ```text
 Transmission {
   transmission_id
+  origin + transmission_role + transmission_local_ordinal
   claim_refs[] | encoded_content_ref
   actual_sender_id
   presented_sender
@@ -1864,9 +1933,13 @@ Snapshot sem versão disponível falha fechado; migração exige função/versio
 o futuro schema do snapshot causal completo. A integração deve aninhá-lo ou adaptá-lo com versão
 declarada, nunca fundir árvores por coincidência de nomes.
 
-Criar uma linha divergente gera novo `run_id` com `parent_checkpoint_ref/hash`. O prefixo histórico é
-imutável e compartilhável; inputs, ids derivados, ledgers e revisões depois do fork pertencem somente
-à nova run. Merge de timelines não existe na V1.
+Criar uma linha divergente gera novo `run_id`. Quando origem e filha usam policies diferentes, o
+genesis carrega o
+[`parent_checkpoint_history_ref`](../architecture/cross-policy-checkpoint-reference-v1.md), com
+policy id/hash, domain/schema/version, algoritmo, comprimento e bytes do digest de origem; referência
+de 32 bytes cujo significado dependa da policy filha é inválida. O prefixo histórico é imutável e
+compartilhável; inputs, ids derivados, ledgers e revisões depois do fork pertencem somente à nova run.
+Merge de timelines não existe na V1.
 
 ### 13. Observatory
 
@@ -1984,8 +2057,9 @@ uma leitura privilegiada não pode vazar por efeito colateral.
     append position, `ingress_seq` e ordem de iteração nunca alocam identidade; aliases iguais mas
     distintos preservam ids próprios por chaves de produtor distintas.
 34. `fence_digest` cobre bytes canônicos de toda a topologia do `AdmissionFence`: provas ordenadas por
-    fonte, rounds por id, pares slot/resposta por slot, `admitted_units` como pares
-    `(unit_id, unit_digest)`, `input_digest`, `cycle_plan` e maps/set-like collections por chave
+    fonte, rounds por id, pares slot/resposta por slot, `admitted_units` como records
+    `(eligibility, unit_kind, source_id, unit_id, unit_digest)`, `input_digest`, `cycle_plan` e
+    maps/set-like collections por chave
     normativa. Mesmo id com bytes diferentes falha antes da avaliação; mesmos conjuntos e políticas
     produzem os mesmos bytes independentemente da ordem local de registro ou iteração.
 35. Uma transição de predicate que ativa trigger cria exatamente uma `TriggerActivation` `PENDING`

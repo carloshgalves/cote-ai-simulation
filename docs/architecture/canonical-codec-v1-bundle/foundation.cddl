@@ -1,0 +1,618 @@
+; COTE Causal Simulation Foundation V1
+; RFC 8610 CDDL. Field labels are documentary; records encode as arrays in this order.
+
+u8 = 0..255
+u16 = 0..65535
+u32 = 0..4294967295
+u64 = 0..18446744073709551615
+i64 = -9223372036854775808..9223372036854775807
+id32 = bstr .size 32
+digest32 = bstr .size 32
+simulation-instant = i64
+duration-micros = i64
+world-revision = u64
+logical-sequence = u64
+schema-version = u32
+machine-id = tstr ; semantic ABNF and byte limits are fixed by profile.json
+domain-tag = tstr ; semantic ABNF is fixed by profile.json
+schema-id = domain-tag
+human-text = tstr ; Unicode/NPSS semantics are fixed by profile.json and unicode.json
+ascii-uri = tstr ; semantic ABNF is fixed by profile.json
+iana-timezone = tstr ; semantic ABNF is fixed by profile.json
+
+optional<t> = [0] / [1, t]
+actor-ref = [namespace: machine-id, actor-id: machine-id]
+entity-ref = [kind: u16, namespace: machine-id, entity-id: machine-id]
+location-ref = [namespace: machine-id, location-id: machine-id]
+policy-ref = [policy-id: machine-id, version: u32, hash: digest32]
+schema-ref = [schema-id, schema-version]
+causal-ref = [kind: u16, id: id32, digest: digest32]
+event-ref = [event-id: id32, event-digest: digest32]
+input-ref =
+  [input-kind: 0, slot-response-kind: u8, input-id: id32, input-digest: digest32] /
+  [input-kind: 1..4, input-id: id32, input-digest: digest32]
+decision-subject-ref =
+  [input-kind: 0, slot-response-kind: u8, input-id: id32, input-digest: digest32] /
+  [input-kind: 1..3, input-id: id32, input-digest: digest32]
+evidence-ref = [ref-kind: u16, referenced-id: id32, referenced-digest: digest32]
+genesis-ref = [genesis-id: id32, genesis-digest: digest32]
+typed-value = [schema-id, schema-version, canonical-envelope: bstr, envelope-digest: digest32]
+resource-claim = [resource-kind: machine-id, resource-id: machine-id, mode: u8, amount: i64]
+named-value = [name: machine-id, value: typed-value]
+
+eligibility-coordinate = [
+  not-before-instant: simulation-instant,
+  not-before-cycle-ordinal: u64
+]
+
+cycle-plan =
+  [cycle-kind-work: 0] /
+  [cycle-kind-clock-advance: 1, from: simulation-instant, to: simulation-instant,
+   target-coordinate: eligibility-coordinate]
+
+created-by = [event: 0, event-ref] / [input: 1, input-ref] / [genesis: 2, genesis-ref]
+round-created-by = [event: 0, event-ref] / [genesis: 2, genesis-ref]
+trigger-origin =
+  [cycle: 0, cycle-id: id32, result-revision: world-revision, causing-event-ids: [* id32]] /
+  [genesis: 1, genesis-ref]
+
+source-closure = [
+  closure-id: id32,
+  run-id: id32,
+  source-id: machine-id,
+  producer-closure-key: machine-id,
+  closed-through: eligibility-coordinate,
+  final: bool,
+  ingress-seq: u64
+]
+
+exogenous-input-fields = (
+  input-id: id32,
+  run-id: id32,
+  source-id: machine-id,
+  producer-unit-key: machine-id,
+  input-kind: machine-id,
+  input-schema-version: schema-version,
+  actor: optional<actor-ref>,
+  payload: typed-value,
+  declared-effective-at: simulation-instant,
+  eligibility: eligibility-coordinate,
+  provenance: optional<causal-ref>,
+  idempotency-key: optional<machine-id>
+)
+exogenous-input-body = [exogenous-input-fields]
+exogenous-input = [exogenous-input-fields, unit-digest: digest32]
+
+round-declaration = [
+  decision-round-id: id32,
+  run-id: id32,
+  source-id: machine-id,
+  actor: actor-ref,
+  slot-ids: [1*1024 machine-id],
+  eligibility: eligibility-coordinate,
+  round-created-by,
+  round-role: u16,
+  round-local-ordinal: u32,
+  lifecycle: u8,
+  idempotency-key: optional<machine-id>
+]
+
+slot-dispatch = [
+  dispatch-id: id32,
+  run-id: id32,
+  cycle-id: id32,
+  decision-round-id: id32,
+  slot-id: machine-id,
+  dispatch-ordinal: u32,
+  actor: actor-ref,
+  eligibility: eligibility-coordinate,
+  base-revision: world-revision,
+  effective-at: simulation-instant,
+  request-digest: digest32
+]
+
+slot-dispatch-revocation = [
+  dispatch-id: id32,
+  reason: u8,
+  policy: optional<policy-ref>
+]
+
+action-proposal-fields = (
+  proposal-id: id32,
+  dispatch-id: id32,
+  run-id: id32,
+  cycle-id: id32,
+  action-type: machine-id,
+  action-schema-version: schema-version,
+  actor: actor-ref,
+  targets: [0*1024 [role: u16, entity: entity-ref]],
+  parameters: typed-value,
+  intended-resources: [0*1024 resource-claim],
+  location: optional<location-ref>,
+  effective-at: simulation-instant,
+  expected-duration: optional<duration-micros>,
+  decision-round-id: id32,
+  slot-id: machine-id,
+  submitted-against-revision: world-revision,
+  originating-intention-ref: optional<causal-ref>,
+  idempotency-key: optional<machine-id>
+)
+action-proposal-body = [action-proposal-fields]
+action-proposal = [action-proposal-fields, response-digest: digest32]
+
+no-proposal-fields = (
+  no-proposal-id: id32,
+  dispatch-id: id32,
+  run-id: id32,
+  cycle-id: id32,
+  decision-round-id: id32,
+  slot-id: machine-id,
+  actor: actor-ref,
+  effective-at: simulation-instant,
+  submitted-against-revision: world-revision,
+  reason: u8
+)
+no-proposal-body = [no-proposal-fields]
+no-proposal = [no-proposal-fields, response-digest: digest32]
+
+recurrence-policy = [kind: u8, every: duration-micros, remaining: optional<u32>]
+scheduled-occurrence-fields = (
+  occurrence-id: id32,
+  run-id: id32,
+  source-id: machine-id,
+  due-at: simulation-instant,
+  eligibility: eligibility-coordinate,
+  occurrence-kind: machine-id,
+  occurrence-schema-version: schema-version,
+  payload: typed-value,
+  lifecycle: u8,
+  created-by,
+  occurrence-role: u16,
+  occurrence-local-ordinal: u32,
+  recurrence: optional<recurrence-policy>,
+  idempotency-key: optional<machine-id>
+)
+scheduled-occurrence-body = [scheduled-occurrence-fields]
+scheduled-occurrence = [scheduled-occurrence-fields, unit-digest: digest32]
+
+trigger-definition = [
+  trigger-definition-id: id32,
+  trigger-version: u32,
+  predicate: typed-value,
+  activation-policy: u8,
+  fire-on-initial-true: bool,
+  repeat-every: optional<duration-micros>,
+  declared-dependencies: [0*1024 machine-id],
+  handler: policy-ref
+]
+
+trigger-runtime-state = [
+  trigger-definition-id: id32,
+  trigger-version: u32,
+  last-value: optional<bool>,
+  armed: bool,
+  exhausted: bool,
+  activation-count: u64,
+  next-repeat-at: optional<simulation-instant>,
+  evaluated-through-revision: world-revision
+]
+
+trigger-activation-fields = (
+  activation-id: id32,
+  run-id: id32,
+  source-id: machine-id,
+  trigger-definition-id: id32,
+  trigger-version: u32,
+  origin: trigger-origin,
+  eligibility: eligibility-coordinate,
+  activation-count: u64,
+  predicate-result-digest: digest32,
+  lifecycle: u8,
+  idempotency-key: optional<machine-id>
+)
+trigger-activation-body = [trigger-activation-fields]
+trigger-activation = [trigger-activation-fields, unit-digest: digest32]
+
+closure-proof-item = [
+  source-id: machine-id,
+  closure-ref: causal-ref,
+  ingress-seq: u64,
+  closed-through: eligibility-coordinate,
+  final: bool
+]
+cohort-slot = [slot-id: machine-id, response-ref: causal-ref]
+cohort-round = [decision-round-id: id32, slots: [0*1024 cohort-slot]]
+decision-cohort = [cohort-id: id32, rounds: [0*1024 cohort-round]]
+admitted-unit = [eligibility: eligibility-coordinate, unit-kind: u8, source-id: machine-id,
+                   unit-id: id32, unit-digest: digest32]
+
+admission-fence-fields = (
+  run-id: id32,
+  cycle-id: id32,
+  attempt-ordinal: u32,
+  retry-ref: optional<causal-ref>,
+  instant: simulation-instant,
+  cycle-ordinal: u64,
+  cycle-plan,
+  base-revision: world-revision,
+  base-state-hash: digest32,
+  closure-proof: [0*1024 closure-proof-item],
+  cohort: decision-cohort,
+  admitted-units: [0*65535 admitted-unit],
+  input-digest: digest32,
+  admission-order-policy: policy-ref,
+  causal-identity-policy: policy-ref,
+  fence-policy: policy-ref,
+  rule-versions: [0*1024 policy-ref]
+)
+admission-fence-body = [admission-fence-fields]
+admission-fence = [admission-fence-fields, fence-digest: digest32]
+
+facet-result = [
+  facet: u8,
+  status: u8,
+  policy-effect: u8,
+  reason-code: machine-id,
+  evidence-refs: [0*1024 evidence-ref],
+  rule: policy-ref
+]
+affordance-assessment-fields = (subject: causal-ref, facets: [1*64 facet-result])
+affordance-assessment-body = [affordance-assessment-fields]
+affordance-assessment = [affordance-assessment-fields, assessment-digest: digest32]
+
+rng-draw-fields = (
+  draw-id: id32,
+  run-id: id32,
+  cycle-id: id32,
+  attempt-ordinal: u32,
+  subsystem: machine-id,
+  decision-key: machine-id,
+  entity-ids: [0*1024 id32],
+  purpose: machine-id,
+  algorithm: policy-ref,
+  result: typed-value
+)
+rng-draw-body = [rng-draw-fields]
+rng-draw = [rng-draw-fields, draw-digest: digest32]
+
+provisional-disposition-fields = (
+  provisional-id: id32,
+  run-id: id32,
+  cycle-id: id32,
+  attempt-ordinal: u32,
+  subject: decision-subject-ref,
+  disposition: u8,
+  candidate-id: id32,
+  reason-code: machine-id,
+  conflict-set-refs: [0*1024 causal-ref],
+  rng-draw-refs: [0*1024 causal-ref]
+)
+provisional-disposition-body = [provisional-disposition-fields]
+provisional-disposition = [provisional-disposition-fields, provisional-digest: digest32]
+
+attempt-failure-fields = (
+  failure-id: id32,
+  run-id: id32,
+  cycle-id: id32,
+  attempt-ordinal: u32,
+  failure-local-ordinal: u32,
+  stage: u8,
+  component: policy-ref,
+  reason-code: machine-id,
+  details: typed-value
+)
+attempt-failure-body = [attempt-failure-fields]
+attempt-failure = [attempt-failure-fields, failure-digest: digest32]
+
+event-draft = [event-role: u16, event-local-ordinal: u32, event-type: machine-id,
+               payload: typed-value, causal-parent-roles: [0*1024 u16]]
+commit-candidate-fields = (
+  candidate-id: id32,
+  run-id: id32,
+  cycle-id: id32,
+  source-unit-ids: [1*65535 id32],
+  producer: machine-id,
+  producer-version: u32,
+  candidate-role: u16,
+  candidate-local-ordinal: u32,
+  event-drafts: [0*65535 event-draft],
+  resource-claims: [0*1024 resource-claim],
+  read-set: [0*1024 causal-ref],
+  write-set: [0*1024 causal-ref],
+  invariant-ids: [0*1024 machine-id],
+  provenance: [1*1024 causal-ref],
+  priority: i64,
+  resolver: policy-ref
+)
+commit-candidate-body = [commit-candidate-fields]
+commit-candidate = [commit-candidate-fields, candidate-digest: digest32]
+
+conflict-set-fields = (
+  conflict-set-id: id32,
+  candidate-ids: [2*65535 id32],
+  conflict-kind: u8,
+  resource-or-invariant: machine-id,
+  detector: policy-ref,
+  resolver: policy-ref
+)
+conflict-set-body = [conflict-set-fields]
+conflict-set = [conflict-set-fields, conflict-digest: digest32]
+
+event-order-key = [phase: u8, origin-ref: id32, producer: machine-id,
+                   producer-version: u32, event-local-ordinal: u32, event-role: u16]
+
+decision-record-fields = (
+  decision-id: id32,
+  run-id: id32,
+  cycle-id: id32,
+  attempt-ordinal: u32,
+  subject: decision-subject-ref,
+  disposition: u8,
+  candidate-id: optional<id32>,
+  reason-code: machine-id,
+  conflict-set-refs: [0*1024 causal-ref],
+  policy: policy-ref,
+  resolver: policy-ref,
+  rng-draw-refs: [0*1024 causal-ref],
+  produced-event-ids: [0*65535 id32],
+  successor-input-id: optional<id32>,
+  canonical-unit-id: optional<id32>
+)
+decision-record-body = [decision-record-fields]
+decision-record = [decision-record-fields, record-digest: digest32]
+
+cycle-commit-fields = (
+  run-id: id32,
+  cycle-id: id32,
+  attempt-ordinal: u32,
+  instant: simulation-instant,
+  cycle-ordinal: u64,
+  cycle-plan,
+  base-revision: world-revision,
+  base-state-hash: digest32,
+  result-revision: world-revision,
+  result-state-hash: digest32,
+  fence-digest: digest32,
+  admitted-input-ids: [0*65535 id32],
+  input-digest: digest32,
+  cycle-coordinate-policy: policy-ref,
+  event-order-policy: policy-ref,
+  event-ids: [0*65535 id32],
+  decision-record-ids: [0*65535 id32],
+  decision-digest: digest32,
+  perception-task-ids: [0*65535 id32],
+  perception-task-digest: digest32,
+  perception-policy: policy-ref,
+  perception-identity-policy: policy-ref,
+  next-logical-sequence: logical-sequence
+)
+cycle-commit-body = [cycle-commit-fields]
+cycle-commit = [cycle-commit-fields, batch-digest: digest32]
+
+validation-subject-ref = [subject-kind: u8, subject-id: id32, subject-digest: digest32]
+indeterminate-record = [subject: validation-subject-ref, facet: u8, validator-id: machine-id,
+                        validator-version: u32, validator-hash: digest32,
+                        reason-code: machine-id, evidence-refs: [0*1024 evidence-ref],
+                        rule: policy-ref]
+cycle-abort-fields = (
+  run-id: id32,
+  cycle-id: id32,
+  attempt-ordinal: u32,
+  instant: simulation-instant,
+  cycle-ordinal: u64,
+  cycle-plan,
+  base-revision: world-revision,
+  base-state-hash: digest32,
+  fence-digest: digest32,
+  input-digest: digest32,
+  abort-reason: u8,
+  indeterminate-records: [0*65535 indeterminate-record],
+  failure-evidence-refs: [0*65535 evidence-ref],
+  rule-versions: [0*1024 policy-ref]
+)
+cycle-abort-body = [cycle-abort-fields]
+cycle-abort-record = [cycle-abort-fields, abort-digest: digest32]
+
+attempt-retry-record = [run-id: id32, cycle-id: id32, from-attempt-ordinal: u32,
+                        to-attempt-ordinal: u32, aborted-envelope-ref: causal-ref,
+                        reason: machine-id, rule-versions: [0*1024 policy-ref]]
+cycle-control-state = [status: u8, cycle-id: optional<id32>, attempt-ordinal: optional<u32>,
+                       fence-ref: optional<causal-ref>, retry-ref: optional<causal-ref>,
+                       last-terminal-envelope-ref: optional<causal-ref>, next-attempt-ordinal: u32]
+
+event-fields = (
+  event-id: id32,
+  run-id: id32,
+  event-order-key,
+  event-type: machine-id,
+  event-schema-version: schema-version,
+  occurred-at: simulation-instant,
+  logical-sequence,
+  cycle-id: id32,
+  base-revision: world-revision,
+  payload: typed-value,
+  causal-parents: [0*65535 event-ref],
+  source-inputs: [0*65535 input-ref],
+  actor-refs: [0*65535 actor-ref],
+  entity-refs: [0*65535 entity-ref],
+  location: optional<location-ref>,
+  confidentiality: u8,
+  producer: machine-id,
+  producer-version: u32
+)
+event-body = [event-fields]
+event = [event-fields, event-digest: digest32]
+
+perception-task = [task-id: id32, run-id: id32, cycle-id: id32, event-id: id32,
+                   base-revision: world-revision, result-revision: world-revision,
+                   perception-policy: policy-ref, resolver: policy-ref,
+                   perception-identity-policy: policy-ref, lifecycle: u8]
+perception-task-completion-fields = (completion-id: id32, task-id: id32,
+                                     observation-ids: [0*65535 id32],
+                                     knowledge-input-ids: [0*65535 id32])
+perception-task-completion-body = [perception-task-completion-fields]
+perception-task-completion = [perception-task-completion-fields, completion-digest: digest32]
+
+proposition = [proposition-type: machine-id, polarity: u8, temporal-scope: typed-value,
+               content: typed-value]
+claim-fields = (claim-id: id32, origin: causal-ref, claim-role: u16, claim-local-ordinal: u32,
+                proposition: proposition, asserted-by: optional<actor-ref>,
+                asserted-at: simulation-instant, prior-claim-refs: [0*1024 causal-ref],
+                evidence-refs: [0*1024 evidence-ref])
+claim-body = [claim-fields]
+claim = [claim-fields, claim-digest: digest32]
+observation-fields = (observation-id: id32, task-id: id32, observer: actor-ref,
+                      observation-role: u16, observation-local-ordinal: u32,
+                      observed-at: simulation-instant, source-event-refs: [1*1024 event-ref],
+                      modality: u8, channel-ref: optional<causal-ref>, percepts: [0*1024 typed-value],
+                      claim-refs: [0*1024 causal-ref], omissions-redactions: [0*1024 machine-id],
+                      evidence-chain: [1*1024 evidence-ref], resolver: policy-ref)
+observation-body = [observation-fields]
+observation = [observation-fields, observation-digest: digest32]
+knowledge-input-fields = (knowledge-input-id: id32, input-role: u16, input-local-ordinal: u32,
+                          recipient: actor-ref, received-at: simulation-instant, kind: u8,
+                          channel: machine-id, observation-ref: causal-ref,
+                          claim-refs: [0*1024 causal-ref], evidence-chain: [1*1024 evidence-ref])
+knowledge-input-body = [knowledge-input-fields]
+knowledge-input = [knowledge-input-fields, knowledge-input-digest: digest32]
+
+transmission-fields = (transmission-id: id32, origin: causal-ref,
+                       transmission-role: u16, transmission-local-ordinal: u32,
+                       content: [claims: 0, [1*1024 causal-ref]] / [encoded: 1, causal-ref],
+                       actual-sender: actor-ref, presented-sender: human-text,
+                       intended-recipients: [1*1024 actor-ref], channel: machine-id,
+                       sent-at: simulation-instant, delivery-occurrence-id: optional<id32>,
+                       facts: [0*1024 named-value], status: u8)
+transmission-body = [transmission-fields]
+transmission = [transmission-fields, transmission-digest: digest32]
+
+epistemic-checkpoint-ref = [actor: actor-ref, store-id: machine-id, schema-version,
+                            content: [ref: 0, ascii-uri] / [inline: 1, bstr],
+                            content-hash: digest32, producer: machine-id, producer-version: u32,
+                            covers-through: [instant: simulation-instant, revision: world-revision,
+                                             evidence-cursor: u64]]
+
+genesis-manifest = [run-id: id32, world-seed: bstr .size 32, timezone: iana-timezone,
+                    initial-instant: simulation-instant,
+                    parent-checkpoint-history-ref: optional<bstr>, codec-policy-id: machine-id,
+                    codec-version: u32, identity-algorithm-version: machine-id,
+                    unicode-version: machine-id, normalization-profile-id: machine-id,
+                    codec-policy-hash: digest32, schema-bundle-hash: digest32,
+                    extension-bundles: [0*1024 [bundle-id: machine-id, hash: digest32]],
+                    exogenous-source-ids: [0*1024 machine-id], policies: [1*1024 policy-ref],
+                    schemas: [1*65535 schema-ref], initial-world-state: typed-value,
+                    epistemic-checkpoints: [0*1024 epistemic-checkpoint-ref]]
+
+snapshot-fields = (run-id: id32, snapshot-version: u32, instant: simulation-instant,
+                   revision: world-revision, next-logical-sequence: logical-sequence,
+                   cycle-ordinal-at-instant: i64, world-state: typed-value,
+                   pending-state: typed-value, ledger-cursors: [1*1024 [machine-id, u64, digest32]],
+                   cycle-control-state, epistemic-checkpoints: [0*1024 epistemic-checkpoint-ref],
+                   codec-policy-id: machine-id, codec-policy-hash: digest32,
+                   schema-bundle-hash: digest32)
+snapshot-body = [snapshot-fields]
+snapshot = [snapshot-fields, snapshot-hash: digest32]
+
+; Digest preimages that are not record bodies.
+admitted-unit-list = [0*65535 admitted-unit]
+indeterminate-evidence-ref-list = [0*1024 evidence-ref]
+decision-pair = [unit-id: id32, decision-record-id: id32, record-digest: digest32]
+decision-pair-list = [0*65535 decision-pair]
+perception-task-id-list = [0*65535 id32]
+event-envelope-list = [0*65535 bstr]
+batch-preimage = [commit: cycle-commit-body, events: event-envelope-list]
+idempotency-preimage = [run-id: id32, unit-kind: u8, producer-scope: machine-id,
+                        actor-scope: optional<actor-ref>, idempotency-key: machine-id,
+                        logical-operation: typed-value, idempotency-policy: policy-ref]
+idempotency-identity = [run-id: id32, unit-kind: u8, producer-scope: machine-id,
+                        actor-scope: optional<actor-ref>, idempotency-key: machine-id,
+                        idempotency-digest: digest32, idempotency-policy: policy-ref]
+slot-request-preimage = [run-id: id32, cycle-id: id32, decision-round-id: id32,
+                         slot-id: machine-id, actor: actor-ref, eligibility: eligibility-coordinate,
+                         base-revision: world-revision, effective-at: simulation-instant]
+conflict-set-id-preimage = [cycle-id: id32, candidate-ids: [2*65535 id32],
+                            conflict-kind: u8, resource-or-invariant: machine-id]
+
+; ID preimages. Every member order below is normative.
+exogenous-input-id-preimage = [run-id: id32, source-id: machine-id, producer-unit-key: machine-id]
+source-closure-id-preimage = [run-id: id32, source-id: machine-id, producer-closure-key: machine-id]
+cycle-id-preimage = [run-id: id32, coordinate: eligibility-coordinate]
+occurrence-id-preimage = [origin: created-by, occurrence-role: u16,
+                          occurrence-local-ordinal: u32]
+decision-round-id-preimage = [origin: round-created-by, round-role: u16,
+                              round-local-ordinal: u32]
+claim-id-preimage = [origin: causal-ref, claim-role: u16, claim-local-ordinal: u32]
+transmission-id-preimage = [origin: causal-ref, transmission-role: u16,
+                            transmission-local-ordinal: u32]
+origin-role-id-preimage = [origin: causal-ref, role: u16, local-ordinal: u32]
+trigger-activation-id-preimage = [run-id: id32, trigger-definition-id: id32,
+                                  trigger-version: u32, result-revision: world-revision,
+                                  activation-count: u64]
+slot-response-id-preimage = [dispatch-id: id32, response-kind: u8]
+cohort-id-preimage = [cycle-id: id32, base-revision: world-revision,
+                      decision-round-ids: [0*1024 id32]]
+decision-id-preimage = [cycle-id: id32, attempt-ordinal: u32, unit-id: id32]
+rng-draw-id-preimage = [run-id: id32, cycle-id: id32, attempt-ordinal: u32,
+                        subsystem: machine-id, decision-key: machine-id,
+                        entity-ids: [0*1024 id32], purpose: machine-id,
+                        algorithm: policy-ref]
+affordance-assessment-id-preimage = [subject: causal-ref, assessment-digest: digest32]
+provisional-disposition-id-preimage = [run-id: id32, cycle-id: id32,
+                                       attempt-ordinal: u32, subject: decision-subject-ref]
+attempt-failure-id-preimage = [run-id: id32, cycle-id: id32, attempt-ordinal: u32,
+                               stage: u8, component: policy-ref,
+                               failure-local-ordinal: u32]
+candidate-id-preimage = [run-id: id32, cycle-id: id32, source-unit-ids: [1*65535 id32],
+                         producer: machine-id, producer-version: u32,
+                         candidate-role: u16, candidate-local-ordinal: u32]
+event-id-preimage = [run-id: id32, cycle-id: id32, event-order-key]
+dispatch-id-preimage = [run-id: id32, cycle-id: id32, decision-round-id: id32,
+                        slot-id: machine-id, dispatch-ordinal: u32]
+perception-task-id-preimage = [run-id: id32, event-id: id32, perception-policy: policy-ref,
+                              resolver: policy-ref, perception-identity-policy: policy-ref]
+observation-id-preimage = [task-id: id32, observer: actor-ref, observation-role: u16,
+                           observation-local-ordinal: u32]
+knowledge-input-id-preimage = [observation-id: id32, recipient: actor-ref, kind: u8,
+                               input-role: u16, input-local-ordinal: u32]
+perception-completion-id-preimage = [task-id: id32]
+admission-fence-id-preimage = [run-id: id32, cycle-id: id32, attempt-ordinal: u32]
+cycle-commit-id-preimage = [run-id: id32, cycle-id: id32, attempt-ordinal: u32]
+cycle-abort-id-preimage = [run-id: id32, cycle-id: id32, attempt-ordinal: u32]
+attempt-retry-id-preimage = [run-id: id32, cycle-id: id32, from-attempt-ordinal: u32,
+                             to-attempt-ordinal: u32]
+snapshot-id-preimage = [run-id: id32, snapshot-version: u32, revision: world-revision]
+genesis-id-preimage = [run-id: id32]
+epistemic-checkpoint-id-preimage = [actor: actor-ref, store-id: machine-id,
+                                    schema-version, covers-through: [
+                                      instant: simulation-instant,
+                                      revision: world-revision,
+                                      evidence-cursor: u64
+                                    ]]
+
+; Fixture-only roots. They are not valid production schemas.
+test-null = null
+test-bool = bool
+test-uint = u64
+test-u8 = u8
+test-nint = -9223372036854775808..-1
+test-bytes = bstr
+test-text = human-text
+test-ordered-list = [* u8]
+test-set = [* u8]
+test-set-dedup-exact = [* u8]
+test-optional = optional<u8>
+test-optional-null = optional<null>
+test-id = id32
+test-scalar = u8
+test-map-key = u64 / machine-id
+test-map-order = {* test-map-key => u8}
+test-array = [* u8]
+test-map = {* test-map-key => u8}
+test-float = float
+test-timestamp = simulation-instant
+test-duration = duration-micros
+test-i64 = i64
+test-u64 = u64
+test-empty = []
+test-machine-id = machine-id
+test-enum-u8 = [value: u8]

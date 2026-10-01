@@ -1,0 +1,16 @@
+{
+  "bundle_id": "cote.csf.schema.foundation.v1",
+  "manifest_version": 1,
+  "artifacts": [
+    [
+      "foundation.cddl",
+      24955,
+      "313854f6e3a732f3ebfe8ba02848eb7e6d9a2b274dd3286c4ad572e87daab718"
+    ],
+    [
+      "registries.json",
+      67533,
+      "cafefa5df4d8f765b51973799be633f82ef421b67a3fbb2abfafbb71d86cf701"
+    ]
+  ]
+}

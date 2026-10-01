@@ -11,3 +11,4 @@ seção própria de **decisões abertas** — que nunca ficam escondidas dentro 
 | Spec | Status | Decisão de origem |
 |---|---|---|
 | [Physical Simulation V1](physical-simulation-v1.md) | Proposed | [ADR 0006](../adr/0006-physical-domain-model.md) |
+| [Causal Simulation Foundation V1](causal-simulation-foundation-v1.md) | Proposed | [ADR 0008](../adr/0008-causal-simulation-foundation-v1.md) |

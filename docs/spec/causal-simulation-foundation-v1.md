@@ -628,7 +628,7 @@ dos hashes causais. Métricas mínimas:
 12. ids/completion de percepção idempotentes e instante epistemológico causal;
 13. substreams independentes de avaliações/atores irrelevantes;
 14. arquitetura sem cliente LLM no core e sem write port transitivo no Observatory;
-15. os 306 vetores/casos de conformidade do bundle executados por pelo menos duas
+15. os 307 vetores/casos de conformidade do bundle executados por pelo menos duas
     implementações independentes e linguagens diferentes;
 16. strict decode rejeita CBOR não preferido, indefinite, tag, `undefined`, duplicate key, Unicode
     fora do profile, non-finite, negative zero, schema/enum desconhecido e id com tamanho incorreto;

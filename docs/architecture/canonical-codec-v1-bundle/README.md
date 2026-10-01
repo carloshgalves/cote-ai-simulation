@@ -120,7 +120,7 @@ operação lógica e policy ref.
 contrato e os vetores, mas não inclui dois runners independentes nem um workflow que os execute. Uma
 implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
 
-`fixtures.json` contém 142 vetores positivos, 28 negativos, 128 casos semânticos, seis casos de
+`fixtures.json` contém 142 vetores positivos, 28 negativos, 129 casos semânticos, seis casos de
 normalização convergente e dois vetores SHA-256. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 66 operações de id/digest/hash do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e

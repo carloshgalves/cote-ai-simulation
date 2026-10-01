@@ -27,6 +27,53 @@ def _enum_bindings(registries: dict) -> dict[str, str]:
     return dict(registries["enum_bindings"])
 
 
+def test_every_positive_vector_hashes_its_canonical_bytes() -> None:
+    fixtures = _json("fixtures.json")
+    mismatches = {}
+    for case in fixtures["positive"]:
+        actual = hashlib.sha256(bytes.fromhex(case["canonical_hex"])).hexdigest()
+        if actual != case["sha256"]:
+            mismatches[case["case_id"]] = {
+                "expected": case["sha256"],
+                "actual": actual,
+            }
+
+    assert mismatches == {}
+
+
+def test_semantic_enum_matrix_matches_normative_bindings() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    expected = _enum_bindings(registries)
+    covered: dict[str, set[str]] = {}
+
+    for case in fixtures["semantic"]:
+        field_path = case.get("field_path")
+        if field_path not in expected or case["kind"] not in {
+            "enum_binding",
+            "operation_field_binding",
+            "record_enum_binding",
+        }:
+            continue
+        covered.setdefault(field_path, set()).add(case["registry"])
+
+        if "accepted_code" in case:
+            valid_codes = {code for _, code in registries["enums"][expected[field_path]]}
+            assert case["accepted_code"] in valid_codes
+            assert case["rejected_code"] not in valid_codes
+
+    assert covered == {field_path: {registry} for field_path, registry in expected.items()}
+
+    cases = {case["case_id"]: case for case in fixtures["semantic"]}
+    perception = cases["enum-binding.perception-task.lifecycle"]
+    assert perception["registry"] == "pending_lifecycle"
+    assert perception["rejected_code"] == 2
+    trigger = cases["enum-binding.trigger-activation.lifecycle"]
+    assert trigger["registry"] == "pending_consumed_lifecycle"
+    assert trigger["accepted_code"] == 2
+    assert trigger["rejected_code"] == 1
+
+
 def test_persisted_records_contain_every_identity_preimage_component() -> None:
     cddl = (BUNDLE / "foundation.cddl").read_text(encoding="utf-8")
     registries = _json("registries.json")

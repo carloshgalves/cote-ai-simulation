@@ -28,8 +28,12 @@ policy-ref = [policy-id: machine-id, version: u32, hash: digest32]
 schema-ref = [schema-id, schema-version]
 causal-ref = [kind: u16, id: id32, digest: digest32]
 event-ref = [event-id: id32, event-digest: digest32]
-input-ref = [input-kind: u16, input-id: id32, input-digest: digest32]
-decision-subject-ref = [input-kind: u16, input-id: id32, input-digest: digest32]
+input-ref =
+  [input-kind: 0, slot-response-kind: u8, input-id: id32, input-digest: digest32] /
+  [input-kind: 1..4, input-id: id32, input-digest: digest32]
+decision-subject-ref =
+  [input-kind: 0, slot-response-kind: u8, input-id: id32, input-digest: digest32] /
+  [input-kind: 1..3, input-id: id32, input-digest: digest32]
 evidence-ref = [ref-kind: u16, referenced-id: id32, referenced-digest: digest32]
 genesis-ref = [genesis-id: id32, genesis-digest: digest32]
 typed-value = [schema-id, schema-version, canonical-envelope: bstr, envelope-digest: digest32]

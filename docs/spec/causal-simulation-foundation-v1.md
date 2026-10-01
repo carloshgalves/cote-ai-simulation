@@ -264,7 +264,7 @@ O genesis persiste, no mínimo:
   `identity_algorithm_version=cote.csf.sha256.v1`, NFC pelo Normalization Process for Stabilized
   Strings (NPSS) Unicode 15.1.0,
   `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`
-  e `schema_bundle_hash=11e6edfa2a812918a9162623c2b76757bfea000641b664921172909dd9e57e25`;
+  e `schema_bundle_hash=34d83e4d53e281005b3f012c238346ad8c8b07ee806903df4ad614d9ca4209a5`;
 - causal identity, admission order, fence, coordinate, event order, idempotency, RNG, perception e
   perception identity policy: versão **e** hash;
 - pares `(schema_id, schema_version)` sob `schema_bundle_hash`, mais versões/hashes de reducers,
@@ -394,8 +394,10 @@ referência epistemológica opaca e verificada.
 - `idempotency_key` é optional discriminado: `ABSENT` não cria identidade; `PRESENT` persiste
   `IdempotencyIdentity` com run, kind, producer, ator, key, digest e policy ref. Mesmo namespace com
   digest lógico divergente aborta como `IDEMPOTENCY_CONFLICT`.
-- Todo `CausalRef` resolve pelo `reference_kind` uma operação/preimage de id total e reconstruível dos
-  fields persistidos; replay rejeita ref cuja identidade dependa de contexto externo implícito.
+- Todo `CausalRef` resolve pelo `reference_kind` exatamente um root persistido e uma operação/preimage
+  de id total e reconstruível dos fields persistidos; roots não possuem aliases canônicos. `InputRef`
+  de slot inclui `slot_response_kind`; replay rejeita ref cujo dispatch ou identidade dependa de
+  contexto externo implícito.
 - UUID aleatório, wall clock, `ingress_seq`, posição de append e ordem de iteração são proibidos na
   alocação causal.
 
@@ -628,7 +630,7 @@ dos hashes causais. Métricas mínimas:
 12. ids/completion de percepção idempotentes e instante epistemológico causal;
 13. substreams independentes de avaliações/atores irrelevantes;
 14. arquitetura sem cliente LLM no core e sem write port transitivo no Observatory;
-15. os 307 vetores/casos de conformidade do bundle executados por pelo menos duas
+15. os 309 vetores/casos de conformidade do bundle executados por pelo menos duas
     implementações independentes e linguagens diferentes;
 16. strict decode rejeita CBOR não preferido, indefinite, tag, `undefined`, duplicate key, Unicode
     fora do profile, non-finite, negative zero, schema/enum desconhecido e id com tamanho incorreto;

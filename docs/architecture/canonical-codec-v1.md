@@ -27,8 +27,8 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `11e6edfa2a812918a9162623c2b76757bfea000641b664921172909dd9e57e25` |
-| `conformance_suite_hash` | `79f0af0360a15c654f341b2514bdbc7831de2214ab46b7197e25dce8b07a7b40` |
+| `schema_bundle_hash` | `34d83e4d53e281005b3f012c238346ad8c8b07ee806903df4ad614d9ca4209a5` |
+| `conformance_suite_hash` | `b16e1656a1490bc9b5c427b41c9915adfe6a2832ceb64dda2ca692a61056f3d1` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -162,12 +162,15 @@ Essa forma é view. Um adapter a converte para domain tag validado + 32 bytes an
 o texto em si não é hashado. Uppercase, prefixo/algoritmo diferente, hex de tamanho errado ou domain
 tag incompatível com o campo são rejeitados.
 
-`causal-ref = [reference_kind, id, digest]` não admite identidade implícita. Para cada código de
-`reference_kind`, `registries.json.reference_identities` seleciona o root persistido e as operações,
-schemas e componentes tanto do id quanto do digest. Kinds discriminados (`input` e `slot_response`)
-fazem um segundo dispatch pelas tabelas normativas `unit_reference_dispatch` e
-`slot_response_reference_dispatch`. Strict replay recompõe ambos a partir dos records persistidos
-antes de aceitar a ref; metadado de chamada/store não pode completar um preimage ausente.
+`causal-ref = [reference_kind, id, digest]` não admite identidade implícita. Cada código de
+`reference_kind` seleciona em `registries.json.reference_identities` exatamente um root persistido e
+as operações, schemas e componentes tanto do id quanto do digest; roots distintos nunca possuem
+aliases de `reference_kind`. `input-ref`, que é o índice genérico das unidades admitidas, usa
+`[unit_kind, id, digest]` para branches não-slot e
+`[slot, slot_response_kind, id, digest]` para distinguir `ActionProposal` de `NoProposal` sem consulta
+ao store. As tabelas normativas `unit_reference_dispatch` e `slot_response_reference_dispatch`
+resolvem somente esse `input-ref`. Strict replay recompõe toda ref a partir dos próprios bytes e do
+record persistido; metadado de chamada/store não pode completar um discriminante ou preimage ausente.
 
 ## 4. Records, opcionais e sum types
 
@@ -398,7 +401,7 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 18. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
 
 A suíte V1 contém 142 casos positivos — todos os roots persistidos e todas as 66 operações
-registradas —, 28 casos negativos com `error_code` estável, 129 casos semânticos de binding,
+registradas —, 28 casos negativos com `error_code` estável, 131 casos semânticos de binding,
 identidade, ordenação e idempotência, seis casos de normalização e dois vetores SHA-256. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
 independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não

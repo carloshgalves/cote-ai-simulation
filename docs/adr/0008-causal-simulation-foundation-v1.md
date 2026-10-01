@@ -179,8 +179,9 @@ As origens são estáveis e independentes de execução:
   função, com seus componentes causais completos definidos nas seções correspondentes; papel e
   ordinal de output vêm do schema, nunca da ordem do worker.
 
-Todo `CausalRef` é fechado pelo registry do codec: o `reference_kind` seleciona uma operação de id e
-um preimage total reconstruível do artefato persistido ou do envelope tipado de seu ledger. Fence,
+Todo `CausalRef` é fechado pelo registry do codec: o `reference_kind` seleciona um único root
+persistido, uma operação de id e um preimage total reconstruível do artefato ou do
+envelope tipado de seu ledger. Nenhum root possui dois `reference_kind` canônicos. Fence,
 commit e abort usam
 `(run_id, cycle_id, attempt_ordinal)` sob domains distintos; retry usa ainda os ordinais de origem e
 destino; snapshot usa `(run_id, snapshot_version, revision)`; genesis usa `run_id`; checkpoint
@@ -1474,12 +1475,13 @@ As quatro coleções de referências têm semântica de conjunto e são normaliz
 evento ou calcular `batch_digest`:
 
 - `causal_parents` usa a chave total `event_id` do `EventRef`;
-- `source_inputs` usa `(input_kind_tag, input_id, input_digest)`;
+- `source_inputs` usa `(input_kind_tag, slot_response_kind_or_absent, input_id, input_digest)`;
 - `actor_refs` usa `(actor_namespace, actor_id)`;
 - `entity_refs` usa `(entity_kind_tag, entity_namespace, entity_id)`.
 
 Todos os componentes são comparados em bytes canônicos. Uma ref byte a byte idêntica aparece uma vez;
-duas `EventRef` com o mesmo `event_id`, duas `InputRef` com o mesmo `(input_kind_tag, input_id)` ou duas
+duas `EventRef` com o mesmo `event_id`, duas `InputRef` com o mesmo
+`(input_kind_tag, slot_response_kind_or_absent, input_id)` ou duas
 refs de ator/entidade com a mesma identidade namespaced mas outros bytes são corrupção e falham
 fechado. Quando a ordem entre participantes tiver significado de domínio, ela pertence ao `payload`
 tipado como papel/ordinal explícito, não a estes índices genéricos. As chaves, schemas e política de

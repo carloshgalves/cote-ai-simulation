@@ -116,6 +116,57 @@ def test_reference_dispatch_is_total_for_ids_digests_and_roots() -> None:
             assert entry["digest_operation"] in operations
 
 
+def test_every_persisted_root_has_one_self_describing_reference() -> None:
+    cddl = (BUNDLE / "foundation.cddl").read_text(encoding="utf-8")
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+
+    identities = registries["reference_identities"]
+    by_root = {entry["persisted_root"]: entry for entry in identities}
+    assert len(by_root) == len(identities)
+    assert all("dispatch_registry" not in entry for entry in identities)
+
+    unit_roots = {
+        entry["persisted_root"]
+        for entry in registries["unit_reference_dispatch"]
+        if "dispatch_registry" not in entry
+    }
+    response_roots = {
+        entry["persisted_root"]
+        for entry in registries["slot_response_reference_dispatch"]
+    }
+    assert unit_roots | response_roots <= by_root.keys()
+
+    reference_cases = {
+        case["persisted_root"]: case
+        for case in fixtures["semantic"]
+        if case["kind"] == "record_to_reference"
+    }
+    for persisted_root in unit_roots | response_roots:
+        encoded = bytes.fromhex(
+            reference_cases[persisted_root]["expected_causal_ref_cbor_hex"]
+        )
+        assert encoded[0] == 0x83
+        assert encoded[1] == by_root[persisted_root]["code"]
+
+    slot_dispatch = next(
+        entry
+        for entry in registries["unit_reference_dispatch"]
+        if entry["unit_kind"] == "slot"
+    )
+    assert slot_dispatch["discriminant"] == "input-ref.slot-response-kind"
+    assert "input-ref =\n  [input-kind: 0, slot-response-kind: u8" in cddl
+
+    slot_cases = {
+        case["persisted_root"]: bytes.fromhex(case["expected_input_ref_cbor_hex"])
+        for case in reference_cases.values()
+        if case["persisted_root"] in response_roots
+    }
+    assert {encoded[0] for encoded in slot_cases.values()} == {0x84}
+    assert {encoded[1] for encoded in slot_cases.values()} == {0}
+    assert {encoded[2] for encoded in slot_cases.values()} == {0, 1}
+
+
 def test_field_domains_are_exact_and_use_real_record_paths() -> None:
     registries = _json("registries.json")
     bindings = _enum_bindings(registries)

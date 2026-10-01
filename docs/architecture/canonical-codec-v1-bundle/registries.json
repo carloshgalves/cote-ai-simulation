@@ -436,11 +436,11 @@
     ],
     "reference_kind": [
       ["event", 0],
-      ["input", 1],
+      ["exogenous_input", 1],
       ["source_closure", 2],
       ["round", 3],
       ["dispatch", 4],
-      ["slot_response", 5],
+      ["action_proposal", 5],
       ["occurrence", 6],
       ["trigger_activation", 7],
       ["commit_candidate", 8],
@@ -457,7 +457,8 @@
       ["transmission", 19],
       ["snapshot", 20],
       ["genesis", 21],
-      ["epistemic_checkpoint", 22]
+      ["epistemic_checkpoint", 22],
+      ["no_proposal", 23]
     ],
     "recurrence_kind": [
       ["fixed_interval", 0]
@@ -549,6 +550,7 @@
     ["conflict-set-id-preimage.conflict-kind", "conflict_kind"],
     ["decision-record.disposition", "disposition"],
     ["decision-record.subject.input-kind", "admitted_unit_kind"],
+    ["decision-record.subject.slot-response-kind", "slot_response_kind"],
     ["entity-ref.kind", "entity_kind"],
     ["epistemic-checkpoint-ref.content[0]", "checkpoint_content_variant"],
     ["event.confidentiality", "confidentiality"],
@@ -561,6 +563,7 @@
     ["idempotency-preimage.actor-scope[0]", "optional_variant"],
     ["idempotency-preimage.unit-kind", "unit_kind"],
     ["input-ref.input-kind", "unit_kind"],
+    ["input-ref.slot-response-kind", "slot_response_kind"],
     ["knowledge-input.kind", "knowledge_kind"],
     ["knowledge-input-id-preimage.kind", "knowledge_kind"],
     ["no-proposal.reason", "no_proposal_reason"],
@@ -614,9 +617,9 @@
       "digest": {"operation": "cote.csf.digest.event", "preimage_schema": "cote.csf.schema.event.body", "components": ["event body"]}
     },
     {
-      "reference_kind": "input", "code": 1,
-      "persisted_root": "selected by unit_reference_dispatch",
-      "dispatch_registry": "unit_reference_dispatch", "discriminant": "input-ref.input-kind"
+      "reference_kind": "exogenous_input", "code": 1, "persisted_root": "cote.csf.schema.exogenous-input",
+      "id": {"operation": "cote.csf.id.exogenous-input", "preimage_schema": "cote.csf.schema.exogenous-input-id-preimage", "components": ["exogenous-input.run-id", "exogenous-input.source-id", "exogenous-input.producer-unit-key"]},
+      "digest": {"operation": "cote.csf.digest.exogenous-input-unit", "preimage_schema": "cote.csf.schema.exogenous-input.body", "components": ["exogenous-input body"]}
     },
     {
       "reference_kind": "source_closure", "code": 2, "persisted_root": "cote.csf.schema.source-closure",
@@ -634,9 +637,9 @@
       "digest": {"operation": "cote.csf.digest.slot-dispatch", "preimage_schema": "cote.csf.schema.slot-dispatch", "components": ["slot-dispatch record"]}
     },
     {
-      "reference_kind": "slot_response", "code": 5,
-      "persisted_root": "selected by slot_response_reference_dispatch",
-      "dispatch_registry": "slot_response_reference_dispatch", "discriminant": "persisted slot-response root"
+      "reference_kind": "action_proposal", "code": 5, "persisted_root": "cote.csf.schema.action-proposal",
+      "id": {"operation": "cote.csf.id.action-proposal", "preimage_schema": "cote.csf.schema.slot-response-id-preimage", "components": ["action-proposal.dispatch-id", "slot-response-id-preimage.response-kind=action_proposal"]},
+      "digest": {"operation": "cote.csf.digest.action-proposal-unit", "preimage_schema": "cote.csf.schema.action-proposal.body", "components": ["action-proposal body"]}
     },
     {
       "reference_kind": "occurrence", "code": 6, "persisted_root": "cote.csf.schema.scheduled-occurrence",
@@ -722,10 +725,15 @@
       "reference_kind": "epistemic_checkpoint", "code": 22, "persisted_root": "cote.csf.schema.epistemic-checkpoint-ref",
       "id": {"operation": "cote.csf.id.epistemic-checkpoint", "preimage_schema": "cote.csf.schema.epistemic-checkpoint-id-preimage", "components": ["epistemic-checkpoint-ref.actor", "epistemic-checkpoint-ref.store-id", "epistemic-checkpoint-ref.schema-version", "epistemic-checkpoint-ref.covers-through"]},
       "digest": {"operation": "cote.csf.digest.epistemic-checkpoint", "preimage_schema": "cote.csf.schema.epistemic-checkpoint-ref", "components": ["epistemic-checkpoint-ref record"]}
+    },
+    {
+      "reference_kind": "no_proposal", "code": 23, "persisted_root": "cote.csf.schema.no-proposal",
+      "id": {"operation": "cote.csf.id.no-proposal", "preimage_schema": "cote.csf.schema.slot-response-id-preimage", "components": ["no-proposal.dispatch-id", "slot-response-id-preimage.response-kind=no_proposal"]},
+      "digest": {"operation": "cote.csf.digest.no-proposal-unit", "preimage_schema": "cote.csf.schema.no-proposal.body", "components": ["no-proposal body"]}
     }
   ],
   "unit_reference_dispatch": [
-    {"unit_kind": "slot", "code": 0, "persisted_root": "selected by slot_response_reference_dispatch", "dispatch_registry": "slot_response_reference_dispatch"},
+    {"unit_kind": "slot", "code": 0, "persisted_root": "selected by slot_response_reference_dispatch", "dispatch_registry": "slot_response_reference_dispatch", "discriminant": "input-ref.slot-response-kind"},
     {"unit_kind": "exogenous_input", "code": 1, "persisted_root": "cote.csf.schema.exogenous-input", "id_operation": "cote.csf.id.exogenous-input", "id_preimage_schema": "cote.csf.schema.exogenous-input-id-preimage", "digest_operation": "cote.csf.digest.exogenous-input-unit", "digest_preimage_schema": "cote.csf.schema.exogenous-input.body"},
     {"unit_kind": "scheduled_occurrence", "code": 2, "persisted_root": "cote.csf.schema.scheduled-occurrence", "id_operation": "cote.csf.id.occurrence", "id_preimage_schema": "cote.csf.schema.occurrence-id-preimage", "digest_operation": "cote.csf.digest.occurrence-unit", "digest_preimage_schema": "cote.csf.schema.scheduled-occurrence.body"},
     {"unit_kind": "trigger_activation", "code": 3, "persisted_root": "cote.csf.schema.trigger-activation", "id_operation": "cote.csf.id.trigger-activation", "id_preimage_schema": "cote.csf.schema.trigger-activation-id-preimage", "digest_operation": "cote.csf.digest.trigger-activation-unit", "digest_preimage_schema": "cote.csf.schema.trigger-activation.body"},
@@ -898,9 +906,9 @@
     ],
     [
       "event.source-inputs",
-      ["input-kind", "input-id-bytes", "input-digest-bytes"],
+      ["input-kind", "slot-response-kind-or-absent", "input-id-bytes", "input-digest-bytes"],
       "dedup_exact",
-      ["input-kind", "input-id-bytes"]
+      ["input-kind", "slot-response-kind-or-absent", "input-id-bytes"]
     ],
     [
       "event.actor-refs",

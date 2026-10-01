@@ -78,17 +78,19 @@ Uma extensão pode adicionar schema/domain tag, enum ou role sem alterar este di
 redefinir nome/código existente nem relaxar o profile. O genesis fixa o hash de cada extension bundle
 e o conjunto de pares `(schema_id, schema_version)` admitidos sob o `schema_bundle_hash`; não existe
 hash local de schema sem algoritmo próprio. Uma run não incorpora bundle publicado depois do genesis.
-`causal-ref` e `evidence-ref` usam os códigos de `reference_kind`; `input-ref` usa `unit_kind`.
+`causal-ref` e `evidence-ref` usam os códigos de `reference_kind`, com exatamente um root persistido
+por código e um código por root. `input-ref` usa `unit_kind`; sua branch `slot` inclui também
+`slot_response_kind`, portanto todos os dispatches são reconstruíveis dos próprios bytes.
 Roles/códigos extension-specific só são válidos quando o extension bundle requerido pelo registry os
 declara de forma append-only.
 
 `enum_bindings` e `role_bindings` ligam cada field path ao registry aplicável; binding do path mais
 específico prevalece sobre o binding do tipo reutilizado, e `u8`/`u16` sozinho nunca autoriza um
 código. Isso inclui os fields próprios dos preimages registrados: nenhum preimage herda
-informalmente o binding do record que o originou. `reference_identities` liga todos os 23
-`reference_kind` ao root persistido e às operações de
-id e digest. `unit_reference_dispatch` e `slot_response_reference_dispatch` fecham os dois dispatches
-discriminados. Cada entrada de
+informalmente o binding do record que o originou. `reference_identities` liga todos os 24
+`reference_kind` ao seu único root persistido e às operações de id e digest.
+`unit_reference_dispatch` e `slot_response_reference_dispatch` fecham os dois dispatches
+discriminados de `input-ref`. Cada entrada de
 `set_like_collections` tem quatro posições normativas — field path, ordering key, duplicate policy e
 identity key —; mesma identity key com bytes diferentes é sempre `SET_IDENTITY_COLLISION`.
 
@@ -120,7 +122,7 @@ operação lógica e policy ref.
 contrato e os vetores, mas não inclui dois runners independentes nem um workflow que os execute. Uma
 implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
 
-`fixtures.json` contém 142 vetores positivos, 28 negativos, 129 casos semânticos, seis casos de
+`fixtures.json` contém 142 vetores positivos, 28 negativos, 131 casos semânticos, seis casos de
 normalização convergente e dois vetores SHA-256. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 66 operações de id/digest/hash do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e

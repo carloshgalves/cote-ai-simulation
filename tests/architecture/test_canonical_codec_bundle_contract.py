@@ -362,6 +362,14 @@ def test_typed_causal_refs_use_exact_reference_kind_subsets() -> None:
             "conflict_set_reference_kind",
             {9},
         ),
+        "decision-record.rng-draw-refs[*].kind": (
+            "rng_draw_reference_kind",
+            {24},
+        ),
+        "cycle-abort.failure-evidence-refs[*].ref-kind": (
+            "failure_evidence_reference_kind",
+            {9, 24, 25, 26, 27},
+        ),
         "cycle-control-state.fence-ref.kind": (
             "admission_fence_reference_kind",
             {11},
@@ -401,6 +409,152 @@ def test_typed_causal_refs_use_exact_reference_kind_subsets() -> None:
         assert set(map(int, case["accepted_container_cbor_hex"])) == allowed_codes
         assert case["rejected_container_cbor_hex"]
         assert case["rejected_error_code"] == "UNKNOWN_ENUM"
+
+
+def test_decision_record_variants_close_all_conditional_fields() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+
+    constraint = next(
+        item
+        for item in registries["record_constraints"]
+        if item["record"] == "decision-record"
+    )
+    assert constraint["discriminant"] == "decision-record.disposition"
+    assert constraint["variants"] == [
+        {
+            "code": 0,
+            "required_present": ["candidate-id"],
+            "required_empty": [],
+            "required_absent": ["successor-input-id", "canonical-unit-id"],
+        },
+        {
+            "code": 1,
+            "required_present": ["candidate-id"],
+            "required_empty": [],
+            "required_absent": ["successor-input-id", "canonical-unit-id"],
+        },
+        {
+            "code": 2,
+            "required_present": ["candidate-id", "successor-input-id"],
+            "required_empty": [],
+            "required_absent": ["canonical-unit-id"],
+        },
+        {
+            "code": 3,
+            "required_present": [],
+            "required_empty": ["conflict-set-refs"],
+            "required_absent": [
+                "candidate-id",
+                "successor-input-id",
+                "canonical-unit-id",
+            ],
+        },
+        {
+            "code": 4,
+            "required_present": ["canonical-unit-id"],
+            "required_empty": ["conflict-set-refs"],
+            "required_absent": ["candidate-id", "successor-input-id"],
+        },
+    ]
+
+    cases = [
+        case
+        for case in fixtures["semantic"]
+        if case["kind"] == "record_conditional_constraint"
+        and case["record"] == "decision-record"
+    ]
+    assert {case["disposition_code"] for case in cases} == set(range(5))
+    for case in cases:
+        assert case["valid_payload_cbor_hex"]
+        assert case["invalid_payload_cbor_hex"]
+        assert case["invalid_error_code"] == "RECORD_CONSTRAINT"
+
+
+def test_attempt_evidence_and_rng_have_total_reference_contracts() -> None:
+    cddl = (BUNDLE / "foundation.cddl").read_text(encoding="utf-8")
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    identities = {
+        entry["reference_kind"]: entry for entry in registries["reference_identities"]
+    }
+
+    assert "rng-draw-fields = (" in cddl
+    assert "provisional-disposition-fields = (" in cddl
+    assert "attempt-failure-fields = (" in cddl
+    assert "affordance-assessment-id-preimage = [" in cddl
+
+    assert set(identities) >= {
+        "rng_draw",
+        "affordance_assessment",
+        "provisional_disposition",
+        "attempt_failure",
+    }
+    assert identities["rng_draw"]["persisted_root"] == "cote.csf.schema.rng-draw"
+    assert identities["affordance_assessment"]["persisted_root"] == (
+        "cote.csf.schema.affordance-assessment"
+    )
+    assert identities["provisional_disposition"]["persisted_root"] == (
+        "cote.csf.schema.provisional-disposition"
+    )
+    assert identities["attempt_failure"]["persisted_root"] == (
+        "cote.csf.schema.attempt-failure"
+    )
+
+    operations = {operation[0] for operation in registries["domain_operations"]}
+    covered_operations = {
+        case["domain_tag"]
+        for case in fixtures["positive"]
+        if case["case_id"].startswith("operation.")
+    }
+    assert covered_operations == operations
+
+    reference_cases = {
+        case["persisted_root"]: case
+        for case in fixtures["semantic"]
+        if case["kind"] == "record_to_reference"
+    }
+    for reference_kind in (
+        "rng_draw",
+        "affordance_assessment",
+        "provisional_disposition",
+        "attempt_failure",
+    ):
+        identity = identities[reference_kind]
+        case = reference_cases[identity["persisted_root"]]
+        derived_id = hashlib.sha256(
+            bytes.fromhex(case["id_preimage_envelope_hex"])
+        ).digest()
+        derived_digest = hashlib.sha256(
+            bytes.fromhex(case["digest_preimage_envelope_hex"])
+        ).digest()
+        expected_ref = (
+            b"\x83\x18"
+            + bytes([identity["code"]])
+            + b"\x58\x20"
+            + derived_id
+            + b"\x58\x20"
+            + derived_digest
+        )
+        assert bytes.fromhex(case["expected_causal_ref_cbor_hex"]) == expected_ref
+
+
+def test_standalone_proposition_binds_polarity() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    bindings = _enum_bindings(registries)
+
+    assert bindings["proposition.polarity"] == "polarity"
+    case = next(
+        item
+        for item in fixtures["semantic"]
+        if item["case_id"] == "enum-binding.proposition.polarity"
+    )
+    assert case["field_path"] == "proposition.polarity"
+    assert case["registry"] == "polarity"
+    assert case["accepted_code"] == 0
+    assert case["rejected_code"] == 3
+    assert case["rejected_error_code"] == "UNKNOWN_ENUM"
 
 
 def test_fragmentary_negative_vectors_name_their_field_path() -> None:
@@ -444,10 +598,10 @@ def test_published_conformance_case_counts_match_the_bundle() -> None:
     contract = (BUNDLE.parent / "canonical-codec-v1.md").read_text(encoding="utf-8")
     readme = (BUNDLE / "README.md").read_text(encoding="utf-8")
 
-    assert len(fixtures["positive"]) == 142
+    assert len(fixtures["positive"]) == 152
     assert len(fixtures["negative"]) == 30
-    assert len(fixtures["semantic"]) == 145
-    assert "142 casos positivos" in contract
+    assert len(fixtures["semantic"]) == 166
+    assert "152 casos positivos" in contract
     assert "30 casos negativos" in contract
-    assert "145 casos semânticos" in contract
-    assert "142 vetores positivos, 30 negativos, 145 casos semânticos" in readme
+    assert "166 casos semânticos" in contract
+    assert "152 vetores positivos, 30 negativos, 166 casos semânticos" in readme

@@ -260,6 +260,50 @@ affordance-assessment-fields = (subject: causal-ref, facets: [1*64 facet-result]
 affordance-assessment-body = [affordance-assessment-fields]
 affordance-assessment = [affordance-assessment-fields, assessment-digest: digest32]
 
+rng-draw-fields = (
+  draw-id: id32,
+  run-id: id32,
+  cycle-id: id32,
+  attempt-ordinal: u32,
+  subsystem: machine-id,
+  decision-key: machine-id,
+  entity-ids: [0*1024 id32],
+  purpose: machine-id,
+  algorithm: policy-ref,
+  result: typed-value
+)
+rng-draw-body = [rng-draw-fields]
+rng-draw = [rng-draw-fields, draw-digest: digest32]
+
+provisional-disposition-fields = (
+  provisional-id: id32,
+  run-id: id32,
+  cycle-id: id32,
+  attempt-ordinal: u32,
+  subject: decision-subject-ref,
+  disposition: u8,
+  candidate-id: id32,
+  reason-code: machine-id,
+  conflict-set-refs: [0*1024 causal-ref],
+  rng-draw-refs: [0*1024 causal-ref]
+)
+provisional-disposition-body = [provisional-disposition-fields]
+provisional-disposition = [provisional-disposition-fields, provisional-digest: digest32]
+
+attempt-failure-fields = (
+  failure-id: id32,
+  run-id: id32,
+  cycle-id: id32,
+  attempt-ordinal: u32,
+  failure-local-ordinal: u32,
+  stage: u8,
+  component: policy-ref,
+  reason-code: machine-id,
+  details: typed-value
+)
+attempt-failure-body = [attempt-failure-fields]
+attempt-failure = [attempt-failure-fields, failure-digest: digest32]
+
 event-draft = [event-role: u16, event-local-ordinal: u32, event-type: machine-id,
                payload: typed-value, causal-parent-roles: [0*1024 u16]]
 commit-candidate-fields = (
@@ -508,6 +552,15 @@ slot-response-id-preimage = [dispatch-id: id32, response-kind: u8]
 cohort-id-preimage = [cycle-id: id32, base-revision: world-revision,
                       decision-round-ids: [0*1024 id32]]
 decision-id-preimage = [cycle-id: id32, attempt-ordinal: u32, unit-id: id32]
+rng-draw-id-preimage = [run-id: id32, cycle-id: id32, attempt-ordinal: u32,
+                        subsystem: machine-id, decision-key: machine-id,
+                        entity-ids: [0*1024 id32], purpose: machine-id,
+                        algorithm: policy-ref]
+affordance-assessment-id-preimage = [subject: causal-ref, assessment-digest: digest32]
+provisional-disposition-id-preimage = [run-id: id32, cycle-id: id32,
+                                       attempt-ordinal: u32, subject: decision-subject-ref]
+attempt-failure-id-preimage = [run-id: id32, cycle-id: id32, attempt-ordinal: u32,
+                               failure-local-ordinal: u32]
 candidate-id-preimage = [run-id: id32, cycle-id: id32, source-unit-ids: [1*65535 id32],
                          producer: machine-id, producer-version: u32,
                          candidate-role: u16, candidate-local-ordinal: u32]

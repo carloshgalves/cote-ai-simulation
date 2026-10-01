@@ -2,6 +2,6 @@
   "bundle_id": "cote.csf.conformance.foundation.v1",
   "manifest_version": 1,
   "artifacts": [
-    ["fixtures.json", 253401, "e0940f715b077749f70676116e598311f538433e8af5bff85ea50d4c6472651a"]
+    ["fixtures.json", 293669, "a2371d37d7c569d2d7d390932f76af0a788ad4941567c36cdf4a4d14fb3c4774"]
   ]
 }

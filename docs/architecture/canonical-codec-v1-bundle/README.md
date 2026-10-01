@@ -87,7 +87,7 @@ declara de forma append-only.
 `enum_bindings` e `role_bindings` ligam cada field path ao registry aplicável; binding do path mais
 específico prevalece sobre o binding do tipo reutilizado, e `u8`/`u16` sozinho nunca autoriza um
 código. Isso inclui os fields próprios dos preimages registrados: nenhum preimage herda
-informalmente o binding do record que o originou. `reference_identities` liga todos os 24
+informalmente o binding do record que o originou. `reference_identities` liga todos os 28
 `reference_kind` ao seu único root persistido e às operações de id e digest.
 `unit_reference_dispatch` e `slot_response_reference_dispatch` fecham os dois dispatches
 discriminados de `input-ref`. Cada entrada de
@@ -122,9 +122,9 @@ operação lógica e policy ref.
 contrato e os vetores, mas não inclui dois runners independentes nem um workflow que os execute. Uma
 implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
 
-`fixtures.json` contém 142 vetores positivos, 30 negativos, 145 casos semânticos, seis casos de
+`fixtures.json` contém 152 vetores positivos, 30 negativos, 166 casos semânticos, seis casos de
 normalização convergente e dois vetores SHA-256. Os positivos cobrem primitivos e limites, Unicode,
-map/list/set, floats, todos os roots persistidos e as 66 operações de id/digest/hash do registry.
+map/list/set, floats, todos os roots persistidos e as 73 operações de id/digest/hash do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
 `error_code` estável. Os casos semânticos executam bindings de enum em roots completos, subsets de
 `reference_kind` por substituição tipada sobre um root-template completo, duplicata/colisão de cada
@@ -133,6 +133,11 @@ slot response, dois attempts do mesmo ciclo, permutação de `rule-versions`, fe
 mismatch/corrupção entre fence e ledger, bindings dentro de envelopes de operação, o digest
 domain-separated de evidência indeterminada, pinning do genesis e idempotência
 ABSENT/PRESENT/conflitante.
+
+`record_constraints` fecha as cinco variantes de `DecisionRecord` por disposition. `RngDraw` é um
+root referenciável próprio, e os subsets de field path impedem que uma ref genérica ocupe
+`rng-draw-refs` ou `failure-evidence-refs`. A evidência de abort admite somente ConflictSet, sorteio,
+assessment, disposição provisória e falha de tentativa, todos com identidade e digest totais.
 
 Checagens temporárias usadas durante a autoria não foram preservadas e não contam como evidência de
 conformidade reproduzível. A aceitação de uma implementação exige dois runners preservados, em

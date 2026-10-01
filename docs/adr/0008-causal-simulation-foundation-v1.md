@@ -1099,6 +1099,13 @@ DecisionRecord {
 }
 ```
 
+`rng_draw_refs[]` aceita exclusivamente `RngDraw`, nunca um `Event` genérico. O artefato persiste
+`draw_id`, `run_id + cycle_id + attempt_ordinal`, `subsystem`, `decision_key`, os
+`entity_ids` canônicos, `purpose`, a policy/version/hash do algoritmo, o resultado tipado e
+`draw_digest`. Sua identidade exclui o resultado e seu digest o inclui; assim replay verifica tanto
+a substream solicitada quanto o valor obtido, inclusive para `REJECT` ou `DEFER` sem evento
+produzido.
+
 Vale uma **bijeção**: para cada id em `admitted_input_ids` existe exatamente um `DecisionRecord` cujo
 `subject` o referencia, e nenhum `DecisionRecord` referencia unidade fora do fence. `CycleCommit`
 lista `decision_record_ids[]` na mesma ordem canônica de `admitted_input_ids`, e `decision_digest`
@@ -1298,6 +1305,14 @@ CycleAbortRecord {
   abort_digest
 }
 ```
+
+`failure_evidence_refs[]` aceita exatamente `ConflictSet`, `RngDraw`, `AffordanceAssessment`,
+`ProvisionalDisposition` e `AttemptFailure`. Os três papéis provisórios que antes não possuíam
+identidade recebem roots canônicos: assessment usa identidade content-addressed sobre sujeito +
+digest; disposição provisória identifica tentativa + sujeito e nunca é `DecisionRecord`; falha de
+tentativa identifica tentativa + ordinal local e registra stage, component policy, reason e details
+tipados. Nenhum outro `reference_kind`, em particular `Event` ou `DecisionRecord`, é válido nesse
+campo.
 
 Cada resultado indeterminado identifica o objeto que foi efetivamente validado e o validator que
 produziu a conclusão:

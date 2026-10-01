@@ -3,6 +3,6 @@
   "manifest_version": 1,
   "artifacts": [
     ["foundation.cddl", 23100, "dd15ffb8b6fc98ab22b92a4ece939ddf1db87e7a6d0c7716167e2b8322e5e191"],
-    ["registries.json", 56338, "8a64f80582c6984ea3db2beb51eddb695671e240ebb3dd29113c3796ad80c4b9"]
+    ["registries.json", 58092, "fcaf48d9df4cdb229eaec4e508da4cf1eff3dd9584a0bad67c8a0a7b72bc4f38"]
   ]
 }

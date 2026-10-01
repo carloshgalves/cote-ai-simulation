@@ -27,8 +27,8 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `34d83e4d53e281005b3f012c238346ad8c8b07ee806903df4ad614d9ca4209a5` |
-| `conformance_suite_hash` | `b16e1656a1490bc9b5c427b41c9915adfe6a2832ceb64dda2ca692a61056f3d1` |
+| `schema_bundle_hash` | `21976430fa967ce5ee55579c2ef3c2075fab49aa53de266c7ebf8fbd138ef191` |
+| `conformance_suite_hash` | `5c4fd0b69516917e6d57b79c1ed991b9d4404541cffc252d07e47d4c7a3b76a3` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -91,6 +91,8 @@ diferentes não compartilham namespace apenas porque possuem os mesmos campos.
 | byte string | major type 2, definite length |
 | `human-text` | NFC/NPSS, UTF-8 válido, major type 3, definite length |
 | `machine-id` | ASCII minúsculo sob a gramática fechada do bundle, major type 3, definite length |
+| `domain-tag`/`schema-id` | ASCII minúsculo sob a ABNF `domain-schema-tag`, mais restrita que `machine-id` |
+| `iana-timezone` | nome IANA sob a ABNF versionada do bundle; maiúsculas de nomes como `Asia/Tokyo` são significativas |
 | enum | código unsigned estável declarado no registry do schema |
 | timestamp | `SimulationInstant`: `i64` de microssegundos desde Unix epoch UTC; nenhum tag ou texto de data |
 | duration | integer de microssegundos com sinal/range declarado pelo schema |
@@ -139,13 +141,15 @@ conformidade com eles. O bundle prende UAX #15 revision 54, `NormalizationTest.t
 `DerivedGeneralCategory.txt` por URL, tamanho e SHA-256; este último define exatamente
 `General_Category=Unassigned (Cn)`.
 
-`human-text` é conteúdo, nunca identidade causal, map key ou ordering key. Todo identificador textual
-causal é `machine-id`: 1–128 octetos ASCII sob a ABNF integral de `profile.json`; começa por `[a-z]`
-e cada separador em `._:/-` precisa ser seguido por um ou mais `[a-z0-9]`. Domain/schema tags usam a
-gramática mais restrita da §2. Isso exclui controles bidi, default-ignorables, mistura de scripts e
-homoglyphs non-ASCII por construção. NFC/NPSS estabiliza conteúdo Unicode; não é uma política de
-segurança de identifiers. Todo campo textual precisa ser classificado no schema como `machine-id`,
-`human-text` ou `ascii-uri`; `text` sem classe é inválido.
+`human-text` é conteúdo, nunca identidade causal, map key ou ordering key. Identificadores textuais
+causais comuns usam `machine-id`: 1–128 octetos ASCII sob a ABNF integral de `profile.json`; começa por
+`[a-z]` e cada separador em `._:/-` precisa ser seguido por um ou mais `[a-z0-9]`. As subclasses
+`domain-tag`/`schema-id` usam a gramática mais restrita da §2. `iana-timezone` é uma classe textual
+de configuração separada, com sua própria ABNF e case significativo. Isso exclui controles bidi,
+default-ignorables, mistura de scripts e homoglyphs non-ASCII dos identificadores por construção.
+NFC/NPSS estabiliza conteúdo Unicode; não é uma política de segurança de identifiers. Todo campo
+textual precisa ser classificado no schema como `machine-id`, `domain-tag`/`schema-id`,
+`iana-timezone`, `human-text` ou `ascii-uri`; `text` sem classe é inválido.
 
 ### 3.4 IDs e digests
 
@@ -193,6 +197,11 @@ linguagem.
 extensão. Um `u8`/`u16` nu no CDDL não autoriza qualquer código: strict decode resolve o binding pelo
 path e rejeita código ou role ausente. Campos `idempotency_key` usam o optional discriminado; somente
 `PRESENT(machine-id)` produz `IdempotencyIdentity`, enquanto `ABSENT` não produz alias nem sentinela.
+O mesmo vale para `causal-ref`: campos semanticamente tipados resolvem um subset exato de
+`reference_kind` pelo path. Assim closure, resposta de slot, retry/abort, fence/envelope terminal,
+conflict set, observation e claim refs não aceitam outro root apenas porque ele é uma ref canônica
+válida em contexto genérico. O binding do field path mais específico refina o binding estrutural de
+`causal-ref.kind`; strict decode exige ambos, portanto o subset nunca é alargado pelo alias comum.
 
 ## 5. Containers e ordenação
 
@@ -401,7 +410,7 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 18. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
 
 A suíte V1 contém 142 casos positivos — todos os roots persistidos e todas as 66 operações
-registradas —, 28 casos negativos com `error_code` estável, 131 casos semânticos de binding,
+registradas —, 30 casos negativos com `error_code` estável, 145 casos semânticos de binding,
 identidade, ordenação e idempotência, seis casos de normalização e dois vetores SHA-256. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
 independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não

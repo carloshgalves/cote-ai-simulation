@@ -53,6 +53,7 @@ def test_semantic_enum_matrix_matches_normative_bindings() -> None:
             "enum_binding",
             "operation_field_binding",
             "record_enum_binding",
+            "record_reference_kind_binding",
         }:
             continue
         covered.setdefault(field_path, set()).add(case["registry"])
@@ -329,3 +330,124 @@ def test_documentation_treats_two_language_conformance_as_future_gate() -> None:
 
     assert "O CI de uma\nimplementação candidata deve executar" in contract
     assert "**Execução de conformidade neste checkpoint:** pendente" in readme
+
+
+def test_typed_causal_refs_use_exact_reference_kind_subsets() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    bindings = _enum_bindings(registries)
+
+    expected = {
+        "closure-proof-item.closure-ref.kind": (
+            "source_closure_reference_kind",
+            {2},
+        ),
+        "cohort-slot.response-ref.kind": (
+            "slot_response_reference_kind",
+            {5, 23},
+        ),
+        "admission-fence.retry-ref.kind": (
+            "attempt_retry_reference_kind",
+            {14},
+        ),
+        "affordance-assessment.subject.kind": (
+            "action_proposal_reference_kind",
+            {5},
+        ),
+        "attempt-retry.aborted-envelope-ref.kind": (
+            "cycle_abort_reference_kind",
+            {13},
+        ),
+        "decision-record.conflict-set-refs[*].kind": (
+            "conflict_set_reference_kind",
+            {9},
+        ),
+        "cycle-control-state.fence-ref.kind": (
+            "admission_fence_reference_kind",
+            {11},
+        ),
+        "cycle-control-state.retry-ref.kind": (
+            "attempt_retry_reference_kind",
+            {14},
+        ),
+        "cycle-control-state.last-terminal-envelope-ref.kind": (
+            "terminal_envelope_reference_kind",
+            {12, 13},
+        ),
+        "claim.prior-claim-refs[*].kind": ("claim_reference_kind", {18}),
+        "observation.claim-refs[*].kind": ("claim_reference_kind", {18}),
+        "knowledge-input.observation-ref.kind": (
+            "observation_reference_kind",
+            {16},
+        ),
+        "knowledge-input.claim-refs[*].kind": ("claim_reference_kind", {18}),
+        "transmission.content.claims[*].kind": ("claim_reference_kind", {18}),
+    }
+
+    semantic = {
+        case["field_path"]: case
+        for case in fixtures["semantic"]
+        if case["kind"] == "record_reference_kind_binding"
+    }
+    for field_path, (registry, allowed_codes) in expected.items():
+        assert bindings[field_path] == registry
+        assert {code for _, code in registries["enums"][registry]} == allowed_codes
+        case = semantic[field_path]
+        assert case["registry"] == registry
+        assert set(case["accepted_codes"]) == allowed_codes
+        assert case["rejected_code"] not in allowed_codes
+        assert case["record_template_case_id"].startswith("root.")
+        assert case["container_field_path"]
+        assert set(map(int, case["accepted_container_cbor_hex"])) == allowed_codes
+        assert case["rejected_container_cbor_hex"]
+        assert case["rejected_error_code"] == "UNKNOWN_ENUM"
+
+
+def test_fragmentary_negative_vectors_name_their_field_path() -> None:
+    fixtures = _json("fixtures.json")
+    cases = {case["case_id"]: case for case in fixtures["negative"]}
+
+    assert cases["reject.set-exact-duplicate"]["field_path"] == (
+        "conflict-set.candidate-ids"
+    )
+    assert cases["reject.set-identity-collision"]["field_path"] == (
+        "event.source-inputs"
+    )
+    assert "field_path supplies a set-like field fragment" in fixtures["rules"][
+        "negative"
+    ]
+
+
+def test_text_classification_and_specific_grammar_probes_are_exhaustive() -> None:
+    contract = (BUNDLE.parent / "canonical-codec-v1.md").read_text(encoding="utf-8")
+    readme = (BUNDLE / "README.md").read_text(encoding="utf-8")
+    spec = (
+        BUNDLE.parents[1] / "spec" / "causal-simulation-foundation-v1.md"
+    ).read_text(encoding="utf-8")
+    fixtures = _json("fixtures.json")
+    cases = {case["case_id"]: case for case in fixtures["negative"]}
+
+    for document in (contract, readme, spec):
+        assert "`domain-tag`/`schema-id`" in document
+        assert "`iana-timezone`" in document
+
+    assert cases["reject.domain-schema-tag-grammar"]["error_code"] == (
+        "DOMAIN_SCHEMA_TAG_GRAMMAR"
+    )
+    assert cases["reject.iana-timezone-grammar"]["error_code"] == (
+        "IANA_TIMEZONE_GRAMMAR"
+    )
+
+
+def test_published_conformance_case_counts_match_the_bundle() -> None:
+    fixtures = _json("fixtures.json")
+    contract = (BUNDLE.parent / "canonical-codec-v1.md").read_text(encoding="utf-8")
+    readme = (BUNDLE / "README.md").read_text(encoding="utf-8")
+
+    assert len(fixtures["positive"]) == 142
+    assert len(fixtures["negative"]) == 30
+    assert len(fixtures["semantic"]) == 145
+    assert "142 casos positivos" in contract
+    assert "30 casos negativos" in contract
+    assert "145 casos semânticos" in contract
+    assert "142 vetores positivos, 30 negativos, 145 casos semânticos" in readme

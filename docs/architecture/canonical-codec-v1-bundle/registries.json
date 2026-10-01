@@ -460,6 +460,38 @@
       ["epistemic_checkpoint", 22],
       ["no_proposal", 23]
     ],
+    "source_closure_reference_kind": [
+      ["source_closure", 2]
+    ],
+    "slot_response_reference_kind": [
+      ["action_proposal", 5],
+      ["no_proposal", 23]
+    ],
+    "action_proposal_reference_kind": [
+      ["action_proposal", 5]
+    ],
+    "conflict_set_reference_kind": [
+      ["conflict_set", 9]
+    ],
+    "admission_fence_reference_kind": [
+      ["admission_fence", 11]
+    ],
+    "terminal_envelope_reference_kind": [
+      ["cycle_commit", 12],
+      ["cycle_abort", 13]
+    ],
+    "cycle_abort_reference_kind": [
+      ["cycle_abort", 13]
+    ],
+    "attempt_retry_reference_kind": [
+      ["attempt_retry", 14]
+    ],
+    "observation_reference_kind": [
+      ["observation", 16]
+    ],
+    "claim_reference_kind": [
+      ["claim", 18]
+    ],
     "recurrence_kind": [
       ["fixed_interval", 0]
     ],
@@ -537,18 +569,27 @@
     ["affordance-assessment.facets[*].facet", "facet"],
     ["affordance-assessment.facets[*].policy-effect", "policy_effect"],
     ["affordance-assessment.facets[*].status", "facet_status"],
-    ["attempt-retry.aborted-envelope-ref.kind", "reference_kind"],
+    ["admission-fence.retry-ref.kind", "attempt_retry_reference_kind"],
+    ["affordance-assessment.subject.kind", "action_proposal_reference_kind"],
+    ["attempt-retry.aborted-envelope-ref.kind", "cycle_abort_reference_kind"],
     ["causal-ref.kind", "reference_kind"],
+    ["claim.prior-claim-refs[*].kind", "claim_reference_kind"],
     ["claim.proposition.polarity", "polarity"],
+    ["closure-proof-item.closure-ref.kind", "source_closure_reference_kind"],
+    ["cohort-slot.response-ref.kind", "slot_response_reference_kind"],
     ["cycle-abort.abort-reason", "abort_reason"],
     ["cycle-abort.cycle-plan[0]", "cycle_kind"],
     ["cycle-abort.indeterminate-records[*].facet", "facet"],
     ["cycle-abort.indeterminate-records[*].subject.subject-kind", "validation_subject_kind"],
     ["cycle-commit.cycle-plan[0]", "cycle_kind"],
+    ["cycle-control-state.fence-ref.kind", "admission_fence_reference_kind"],
+    ["cycle-control-state.last-terminal-envelope-ref.kind", "terminal_envelope_reference_kind"],
+    ["cycle-control-state.retry-ref.kind", "attempt_retry_reference_kind"],
     ["cycle-control-state.status", "cycle_control_status"],
     ["conflict-set.conflict-kind", "conflict_kind"],
     ["conflict-set-id-preimage.conflict-kind", "conflict_kind"],
     ["decision-record.disposition", "disposition"],
+    ["decision-record.conflict-set-refs[*].kind", "conflict_set_reference_kind"],
     ["decision-record.subject.input-kind", "admitted_unit_kind"],
     ["decision-record.subject.slot-response-kind", "slot_response_kind"],
     ["entity-ref.kind", "entity_kind"],
@@ -565,9 +606,12 @@
     ["input-ref.input-kind", "unit_kind"],
     ["input-ref.slot-response-kind", "slot_response_kind"],
     ["knowledge-input.kind", "knowledge_kind"],
+    ["knowledge-input.claim-refs[*].kind", "claim_reference_kind"],
+    ["knowledge-input.observation-ref.kind", "observation_reference_kind"],
     ["knowledge-input-id-preimage.kind", "knowledge_kind"],
     ["no-proposal.reason", "no_proposal_reason"],
     ["observation.modality", "modality"],
+    ["observation.claim-refs[*].kind", "claim_reference_kind"],
     ["optional[*][0]", "optional_variant"],
     ["perception-task.lifecycle", "pending_lifecycle"],
     ["recurrence-policy.kind", "recurrence_kind"],
@@ -584,6 +628,7 @@
     ["slot-response-id-preimage.response-kind", "slot_response_kind"],
     ["test-enum-u8.value", "fixture_test_enum_u8"],
     ["transmission.content[0]", "transmission_content_variant"],
+    ["transmission.content.claims[*].kind", "claim_reference_kind"],
     ["transmission.status", "transmission_status"],
     ["trigger-activation.lifecycle", "pending_consumed_lifecycle"],
     ["trigger-activation.origin[0]", "trigger_origin_variant"],

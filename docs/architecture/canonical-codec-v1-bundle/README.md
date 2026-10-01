@@ -122,12 +122,13 @@ operação lógica e policy ref.
 contrato e os vetores, mas não inclui dois runners independentes nem um workflow que os execute. Uma
 implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
 
-`fixtures.json` contém 142 vetores positivos, 28 negativos, 131 casos semânticos, seis casos de
+`fixtures.json` contém 142 vetores positivos, 30 negativos, 145 casos semânticos, seis casos de
 normalização convergente e dois vetores SHA-256. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 66 operações de id/digest/hash do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
-`error_code` estável. Os casos semânticos executam bindings de enum em roots completos,
-duplicata/colisão de cada família de ref, record persistido → ref para todos os dispatches de input e
+`error_code` estável. Os casos semânticos executam bindings de enum em roots completos, subsets de
+`reference_kind` por substituição tipada sobre um root-template completo, duplicata/colisão de cada
+família de ref, record persistido → ref para todos os dispatches de input e
 slot response, dois attempts do mesmo ciclo, permutação de `rule-versions`, fence completo permutado,
 mismatch/corrupção entre fence e ledger, bindings dentro de envelopes de operação, o digest
 domain-separated de evidência indeterminada, pinning do genesis e idempotência
@@ -140,11 +141,15 @@ principal.
 
 ## Classificação de texto
 
-Todo campo textual do schema é exatamente uma destas classes:
+Todo campo textual do schema é exatamente uma destas classes normativas:
 
-- `machine-id`: identidade, namespace, role, reason code, policy/schema/domain id ou chave causal;
+- `machine-id`: identidade, namespace, role, reason code, policy id ou chave causal;
   ASCII minúsculo, 1–128 octetos, sob a ABNF integral de `profile.json` — inicia por `[a-z]` e cada
   separador em `._:/-` é seguido por um ou mais `[a-z0-9]`;
+- `domain-tag`/`schema-id`: identificadores ASCII sob `domain-schema-tag`, a ABNF mais restrita que
+  exige pelo menos dois segmentos separados por ponto e permite hífen somente dentro de segmento;
+- `iana-timezone`: nome IANA sob a ABNF específica do profile, com case significativo, como
+  `Asia/Tokyo`;
 - `human-text`: conteúdo humano; Unicode scalar values, NFC pelo Normalization Process for
   Stabilized Strings (NPSS) de Unicode 15.1.0, sem code point unassigned nessa versão;
 - `ascii-uri`: locator não autoritativo, ASCII visível sob a gramática registrada no schema.
@@ -154,10 +159,16 @@ Isso é intencional: `.regexp` do RFC 8610 usa a linguagem de regex XML Schema, 
 sintaxe PCRE/ECMAScript seriam não portáveis. Validar somente o tipo CDDL, sem aplicar o profile e os
 dados Unicode, é não conforme.
 
-`machine-id` não aceita maiúscula, espaço, controle, bidi, default-ignorable ou qualquer non-ASCII;
-logo não depende de detecção de script/confusable. `human-text` nunca pode ser domain tag, schema id,
-map key, identity key ou ordering key. NFC/NPSS estabiliza bytes de conteúdo; não é apresentado como
-controle de spoofing de identificadores.
+Da mesma forma, `causal-ref` é a forma estrutural comum, mas não abre todos os roots em todo campo.
+`enum_bindings` seleciona subsets exatos de `reference_kind` para refs semanticamente tipadas; o
+decoder aplica tanto o binding estrutural comum quanto o binding mais específico do field path antes
+de aceitar a ref.
+
+`machine-id` e `domain-tag`/`schema-id` não aceitam maiúscula, espaço, controle, bidi,
+default-ignorable ou qualquer non-ASCII; logo não dependem de detecção de script/confusable.
+`iana-timezone` aceita maiúsculas somente conforme sua ABNF própria, não como `machine-id`.
+`human-text` nunca pode ser domain tag, schema id, map key, identity key ou ordering key. NFC/NPSS
+estabiliza bytes de conteúdo; não é apresentado como controle de spoofing de identificadores.
 
 ## Extensão e mudança
 

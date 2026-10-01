@@ -2,23 +2,110 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://cote-sim/canon/evidence.schema.json",
   "title": "CanonEvidence",
-  "description": "RAG unit. Our paraphrase of a canon passage, never the protected text itself.",
+  "description": "Authoritative paraphrased canon evidence. Retrieval records/indexes are derived from this record and may be rebuilt.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "schema_version", "text", "story_time", "provenance"],
+  "required": [
+    "id",
+    "schema_version",
+    "retrieval_role",
+    "text",
+    "story_time",
+    "narrative_position",
+    "topics",
+    "provenance"
+  ],
   "properties": {
-    "id": { "type": "string", "pattern": "^ev\\.[a-z0-9.-]+$" },
-    "schema_version": { "type": "integer", "const": 1 },
-    "text": { "type": "string", "description": "Paraphrase written by us. No verbatim source text." },
-    "story_time": { "$ref": "common.schema.json#/$defs/TimeBound" },
-    "actors": { "type": "array", "items": { "type": "string" } },
+    "id": {"type": "string", "pattern": "^ev\\.[a-z0-9.-]+$"},
+    "schema_version": {"type": "integer", "const": 2},
+    "retrieval_role": {
+      "type": "string",
+      "enum": ["BEHAVIORAL_CANON", "KNOWLEDGE_EVIDENCE"],
+      "description": "Behavioral examples are never current-world facts; knowledge evidence can enter factual context only after all gates authorize a supported claim."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1600,
+      "description": "Our paraphrase only. Never protected source text."
+    },
+    "story_time": {"$ref": "common.schema.json#/$defs/TimeBound"},
+    "narrative_position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["work", "ordinal"],
+      "properties": {
+        "work": {"type": "string", "description": "Work id from sources/works.yaml."},
+        "ordinal": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Monotonic position inside this work for spoiler gating. It is not story time."
+        }
+      }
+    },
+    "actors": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string"},
+      "description": "Actors whose behavior this evidence directly exemplifies."
+    },
+    "topics": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
     "situation_tags": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "Situation classes for retrieval, e.g. negotiation, deception, exam-strategy."
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
     },
-    "supports_claims": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/ClaimId" } },
-    "divergence_sensitive": { "type": "boolean", "default": true },
-    "provenance": { "$ref": "common.schema.json#/$defs/Provenance" }
-  }
+    "supports_claims": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/ClaimId"}
+    },
+    "provenance": {
+      "allOf": [
+        {"$ref": "common.schema.json#/$defs/Provenance"},
+        {
+          "type": "object",
+          "required": ["supports"],
+          "properties": {
+            "supports": {
+              "minItems": 1,
+              "contains": {
+                "type": "object",
+                "required": ["strength"],
+                "properties": {"strength": {"const": "primary"}}
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"retrieval_role": {"const": "BEHAVIORAL_CANON"}},
+        "required": ["retrieval_role"]
+      },
+      "then": {
+        "required": ["actors"],
+        "properties": {"actors": {"minItems": 1}}
+      }
+    },
+    {
+      "if": {
+        "properties": {"retrieval_role": {"const": "KNOWLEDGE_EVIDENCE"}},
+        "required": ["retrieval_role"]
+      },
+      "then": {
+        "required": ["supports_claims"],
+        "properties": {"supports_claims": {"minItems": 1}}
+      }
+    }
+  ]
 }

@@ -1,0 +1,284 @@
+{
+  "fixture_records": [
+    {
+      "id": "ev.fixture.secret.other-actor",
+      "schema_version": 2,
+      "retrieval_role": "BEHAVIORAL_CANON",
+      "text": "A private tactical preference belonging to another actor is a strong lexical match for mediation.",
+      "story_time": {
+        "mode": "EXACT",
+        "exact": {
+          "anchor": "Y1_M01"
+        }
+      },
+      "narrative_position": {
+        "work": "fixture.work",
+        "ordinal": 10
+      },
+      "actors": [
+        "actor.yosuke-hirata"
+      ],
+      "topics": [
+        "mediation",
+        "class-cohesion"
+      ],
+      "supports_claims": [],
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "edition": "fixture-v1",
+            "locator": {
+              "scene": "fixture only"
+            },
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": []
+      }
+    },
+    {
+      "id": "ev.fixture.secret.fact",
+      "schema_version": 2,
+      "retrieval_role": "KNOWLEDGE_EVIDENCE",
+      "text": "A hidden factual detail contains private information unavailable to the requesting actor.",
+      "story_time": {
+        "mode": "EXACT",
+        "exact": {
+          "anchor": "Y1_M01"
+        }
+      },
+      "narrative_position": {
+        "work": "fixture.work",
+        "ordinal": 15
+      },
+      "actors": [],
+      "topics": [
+        "secret-fact",
+        "private-information"
+      ],
+      "supports_claims": [
+        "fixture.claim.secret"
+      ],
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "edition": "fixture-v1",
+            "locator": {
+              "scene": "fixture only"
+            },
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": []
+      }
+    },
+    {
+      "id": "ev.fixture.post-divergence.fact",
+      "schema_version": 2,
+      "retrieval_role": "KNOWLEDGE_EVIDENCE",
+      "text": "A future factual event after the divergence mentions the private point system.",
+      "story_time": {
+        "mode": "EXACT",
+        "exact": {
+          "anchor": "Y1_M03"
+        }
+      },
+      "narrative_position": {
+        "work": "fixture.work",
+        "ordinal": 30
+      },
+      "actors": [],
+      "topics": [
+        "private-points",
+        "future-event"
+      ],
+      "supports_claims": [
+        "fixture.claim.future"
+      ],
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "edition": "fixture-v1",
+            "locator": {
+              "scene": "fixture only"
+            },
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": []
+      }
+    },
+    {
+      "id": "ev.fixture.conflicted.fact",
+      "schema_version": 2,
+      "retrieval_role": "KNOWLEDGE_EVIDENCE",
+      "text": "A verified-looking factual statement is attached to an unresolved source conflict.",
+      "story_time": {
+        "mode": "EXACT",
+        "exact": {
+          "anchor": "Y1_M01"
+        }
+      },
+      "narrative_position": {
+        "work": "fixture.work",
+        "ordinal": 20
+      },
+      "actors": [],
+      "topics": [
+        "conflict",
+        "rule"
+      ],
+      "supports_claims": [
+        "fixture.claim.conflicted"
+      ],
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "edition": "fixture-v1",
+            "locator": {
+              "scene": "fixture only"
+            },
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": [
+          "fixture.conflict.open"
+        ]
+      }
+    }
+  ],
+  "fixture_claims": [
+    {
+      "id": "fixture.claim.secret",
+      "schema_version": 1,
+      "claim_kind": "WORLD_TRUTH",
+      "statement": "Fixture-only secret unavailable to the requesting actor.",
+      "temporal": {
+        "effective_from": {
+          "mode": "EXACT",
+          "exact": {"anchor": "Y1_M01"}
+        }
+      },
+      "visibility_default": "PRIVATE",
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "edition": "fixture-v1",
+            "locator": {"scene": "fixture only"},
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": ["ln"],
+        "conflicts": []
+      }
+    },
+    {
+      "id": "fixture.claim.future",
+      "schema_version": 1,
+      "claim_kind": "EVENT",
+      "statement": "Fixture-only future factual event.",
+      "temporal": {
+        "effective_from": {
+          "mode": "EXACT",
+          "exact": {"anchor": "Y1_M03"}
+        }
+      },
+      "visibility_default": "PUBLIC",
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "edition": "fixture-v1",
+            "locator": {"scene": "fixture only"},
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": ["ln"],
+        "conflicts": []
+      }
+    },
+    {
+      "id": "fixture.claim.conflicted",
+      "schema_version": 1,
+      "claim_kind": "INSTITUTIONAL_RULE",
+      "statement": "Fixture-only rule with an open conflict.",
+      "temporal": {
+        "effective_from": {
+          "mode": "EXACT",
+          "exact": {"anchor": "Y1_M01"}
+        }
+      },
+      "visibility_default": "PUBLIC",
+      "provenance": {
+        "epistemic_status": "VERIFIED",
+        "verified_by": "fixture.synthetic",
+        "verified_at": "2026-09-29",
+        "supports": [
+          {
+            "work": "fixture.work",
+            "edition": "fixture-v1",
+            "locator": {"scene": "fixture only"},
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "continuity": ["ln"],
+        "conflicts": ["fixture.conflict.open"]
+      }
+    }
+  ],
+  "fixture_source_registry": {
+    "schema_version": 1,
+    "works": [
+      {
+        "id": "fixture.work",
+        "title": "Fixture work",
+        "medium": "light-novel",
+        "form": "ln-prose",
+        "tier": 0,
+        "edition": "fixture-v1"
+      }
+    ]
+  }
+}

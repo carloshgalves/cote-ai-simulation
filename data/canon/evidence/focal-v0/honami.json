@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "collection": "evidence.focal-v0.honami",
+  "evidence": [
+    {
+      "id": "ev.honami.v02.cross-class-assistance",
+      "schema_version": 2,
+      "retrieval_role": "BEHAVIORAL_CANON",
+      "text": "During the Sudo dispute, Ichinose offers practical help to another class and participates in a nonviolent resolution rather than exploiting its vulnerability.",
+      "story_time": {
+        "mode": "HOLDS_BY",
+        "holds_by": {
+          "anchor": "Y1_M02"
+        },
+        "origin": "UNKNOWN",
+        "basis": "Volume 2 Sudo dispute."
+      },
+      "narrative_position": {
+        "work": "ln.y1.v02",
+        "ordinal": 250
+      },
+      "actors": [
+        "actor.honami-ichinose"
+      ],
+      "topics": [
+        "cross-class-cooperation",
+        "dispute-resolution",
+        "information-sharing"
+      ],
+      "situation_tags": [
+        "investigation",
+        "assistance",
+        "negotiation"
+      ],
+      "provenance": {
+        "epistemic_status": "UNVERIFIED",
+        "supports": [
+          {
+            "work": "ln.y1.v02",
+            "locator": {
+              "chapter": 2,
+              "scene": "Ichinose offers to help with the Sudo dispute"
+            },
+            "edition": "seven-seas-en",
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "discovered_via": [
+          {
+            "tier": 5,
+            "ref": "you-zitsu-wiki:volume-2-summary",
+            "retrieved_at": "2026-09-29"
+          }
+        ],
+        "verified_by": null,
+        "verified_at": null,
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": []
+      }
+    }
+  ]
+}

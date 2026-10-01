@@ -1,0 +1,104 @@
+{
+  "cases": [
+    {
+      "id": "contrast-kiyotaka",
+      "character_id": "actor.kiyotaka-ayanokoji",
+      "simulation_time": "Y1_M01",
+      "divergence_time": null,
+      "knowledge_horizon": {
+        "ln.y1.v01": 500
+      },
+      "query": {
+        "text": "social mediation relationship bridge",
+        "purpose": "BEHAVIORAL_GUIDANCE"
+      },
+      "knowledge_scope": {
+        "mode": "SIMULATION",
+        "allowed_claim_ids": []
+      },
+      "filters": {
+        "retrieval_roles": [
+          "BEHAVIORAL_CANON"
+        ]
+      },
+      "top_k": 1,
+      "allow_unverified_behavioral": true,
+      "expected_evidence_ids": [
+        "ev.kiyotaka.v01.reluctant-social-help"
+      ],
+      "acceptable_evidence_ids": [
+        "ev.kiyotaka.v01.reluctant-social-help"
+      ],
+      "forbidden_evidence": {
+        "ev.kikyo.v01.social-bridging": "WRONG_ACTOR"
+      },
+      "abstention": "FORBIDDEN",
+      "contrast_group": "same-question-two-characters"
+    },
+    {
+      "id": "contrast-kikyo",
+      "character_id": "actor.kikyo-kushida",
+      "simulation_time": "Y1_M01",
+      "divergence_time": null,
+      "knowledge_horizon": {
+        "ln.y1.v01": 500
+      },
+      "query": {
+        "text": "social mediation relationship bridge",
+        "purpose": "BEHAVIORAL_GUIDANCE"
+      },
+      "knowledge_scope": {
+        "mode": "SIMULATION",
+        "allowed_claim_ids": []
+      },
+      "filters": {
+        "retrieval_roles": [
+          "BEHAVIORAL_CANON"
+        ]
+      },
+      "top_k": 1,
+      "allow_unverified_behavioral": true,
+      "expected_evidence_ids": [
+        "ev.kikyo.v01.social-bridging"
+      ],
+      "acceptable_evidence_ids": [
+        "ev.kikyo.v01.social-bridging"
+      ],
+      "forbidden_evidence": {
+        "ev.kiyotaka.v01.reluctant-social-help": "WRONG_ACTOR"
+      },
+      "abstention": "FORBIDDEN",
+      "contrast_group": "same-question-two-characters"
+    },
+    {
+      "id": "no-evidence-for-unknown-actor",
+      "character_id": "actor.unknown",
+      "simulation_time": "Y1_M03",
+      "divergence_time": null,
+      "knowledge_horizon": {
+        "ln.y1.v01": 500,
+        "ln.y1.v02": 500,
+        "ln.y1.v03": 500
+      },
+      "query": {
+        "text": "mediation strategy social pressure",
+        "purpose": "BEHAVIORAL_GUIDANCE"
+      },
+      "knowledge_scope": {
+        "mode": "SIMULATION",
+        "allowed_claim_ids": []
+      },
+      "filters": {
+        "retrieval_roles": [
+          "BEHAVIORAL_CANON"
+        ]
+      },
+      "top_k": 3,
+      "allow_unverified_behavioral": true,
+      "expected_evidence_ids": [],
+      "acceptable_evidence_ids": [],
+      "forbidden_evidence": {},
+      "abstention": "REQUIRED"
+    }
+  ]
+}

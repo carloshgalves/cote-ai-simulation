@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "collection": "evidence.focal-v0.institutional",
+  "note": "All records UNVERIFIED; human Tier 0-1 verification still required.",
+  "evidence": [
+    {
+      "id": "ev.institution.v01.initial-deposit",
+      "schema_version": 2,
+      "retrieval_role": "KNOWLEDGE_EVIDENCE",
+      "text": "The first homeroom includes access to the private-point system and an initial balance on student identification cards.",
+      "story_time": {
+        "mode": "EXACT",
+        "exact": {
+          "anchor": "Y1_START"
+        }
+      },
+      "narrative_position": {
+        "work": "ln.y1.v01",
+        "ordinal": 110
+      },
+      "actors": [],
+      "topics": [
+        "private-points",
+        "day-one-briefing",
+        "student-id"
+      ],
+      "situation_tags": [
+        "institutional-briefing"
+      ],
+      "supports_claims": [
+        "rule.economy.initial-deposit"
+      ],
+      "provenance": {
+        "epistemic_status": "UNVERIFIED",
+        "supports": [
+          {
+            "work": "ln.y1.v01",
+            "locator": {
+              "chapter": 1,
+              "scene": "first homeroom / ID card distribution"
+            },
+            "edition": "seven-seas-en",
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "discovered_via": [
+          {
+            "tier": 5,
+            "ref": "you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary",
+            "retrieved_at": "2026-09-29"
+          }
+        ],
+        "verified_by": null,
+        "verified_at": null,
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": [],
+        "open_questions": [
+          "oq.initial-state.day-one-briefing"
+        ]
+      }
+    },
+    {
+      "id": "ev.institution.v01.campus-confinement",
+      "schema_version": 2,
+      "retrieval_role": "KNOWLEDGE_EVIDENCE",
+      "text": "Early guidance places students on campus under restrictions on leaving the school and contacting people outside it.",
+      "story_time": {
+        "mode": "EXACT",
+        "exact": {
+          "anchor": "Y1_START"
+        }
+      },
+      "narrative_position": {
+        "work": "ln.y1.v01",
+        "ordinal": 150
+      },
+      "actors": [],
+      "topics": [
+        "campus-rules",
+        "dormitories",
+        "outside-contact"
+      ],
+      "situation_tags": [
+        "institutional-guidance"
+      ],
+      "supports_claims": [
+        "rule.mobility.campus-confinement"
+      ],
+      "provenance": {
+        "epistemic_status": "UNVERIFIED",
+        "supports": [
+          {
+            "work": "ln.y1.v01",
+            "locator": {
+              "chapter": 1,
+              "scene": "dormitory guidance / school restrictions"
+            },
+            "edition": "seven-seas-en",
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "discovered_via": [
+          {
+            "tier": 5,
+            "ref": "you-zitsu.fandom.com/wiki/Advanced_Nurturing_High_School",
+            "retrieved_at": "2026-09-29"
+          }
+        ],
+        "verified_by": null,
+        "verified_at": null,
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": [],
+        "open_questions": [
+          "oq.initial-state.dorm-handbook"
+        ]
+      }
+    }
+  ]
+}

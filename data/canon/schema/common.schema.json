@@ -145,7 +145,11 @@
           "items": { "$ref": "#/$defs/DiscoveryRef" },
           "description": "How we LOCATED the claim. Never migrates into supports."
         },
-        "verified_by": { "type": ["string", "null"] },
+        "verified_by": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "pattern": "\\S"
+        },
         "verified_at": { "type": ["string", "null"], "format": "date" },
         "continuity": {
           "type": "array",
@@ -164,7 +168,11 @@
           "then": {
             "required": ["supports", "verified_by", "verified_at"],
             "properties": {
-              "verified_by": { "type": "string" },
+              "verified_by": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
               "verified_at": { "type": "string" },
               "supports": { "minItems": 1 }
             }

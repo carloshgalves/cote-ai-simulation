@@ -27,8 +27,8 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `9e577b6ba971e3aa5cb8f33c3d2a0e5e685308fae0d4b3ef47c7d2c64aeed73c` |
-| `conformance_suite_hash` | `6c7158e15eac02d9c02f979095cdd6f59515465454d8b5020ae2c49817bfc20b` |
+| `schema_bundle_hash` | `31ae30ccd572eb1d81ea8c31542fb3bfa1edf40267a14ff6b5b2f1a557c1b98c` |
+| `conformance_suite_hash` | `b803ba7d035d5b97302cfcfa42693ae71fdbe2c2d191bd124b771cee0ff2f787` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -203,11 +203,21 @@ conflict set, observation e claim refs não aceitam outro root apenas porque ele
 válida em contexto genérico. O binding do field path mais específico refina o binding estrutural de
 `causal-ref.kind`; strict decode exige ambos, portanto o subset nunca é alargado pelo alias comum.
 
-`record_constraints` fecha invariantes condicionais que CDDL de aridade fixa não expressa sozinho.
+`record_constraints` fecha invariantes locais condicionais que CDDL de aridade fixa não expressa
+sozinho; `linked_record_constraints` fecha invariantes referenciais que exigem resolver mais de um
+record antes de persistir o resultado.
 Para `DecisionRecord`, o decoder seleciona a variante por `disposition` e valida presença, ausência e
 vazio de candidate, conflicts, successor e canonical unit antes de aceitar o root. Para
 `CycleControlState`, fecha presence, kind do último envelope e relações de ordinal dos quatro status;
-para `TriggerDefinition`, exige cadência PRESENT e positiva somente em `REPEAT_WHILE_TRUE`. A mesma
+para `TriggerDefinition`, exige cadência PRESENT e positiva somente em `REPEAT_WHILE_TRUE`. O primeiro
+fence exige attempt 1 sem retry; fences posteriores exigem `retry-ref`; cada `AttemptRetryRecord`
+avança exatamente um ordinal e resolve o último abort do mesmo run/cycle/attempt, enquanto o novo
+fence resolve esse retry.
+
+A cadeia epistemológica resolve `Event` → `PerceptionTask` → `Observation` → `KnowledgeInput` →
+completion. Task/event, task/observation, instante, recipient e membresia da completion devem
+coincidir. Claims do knowledge input são subset dos claims divulgados pela observation resolvida;
+uma observation privada nunca autoriza projetar claims ou evidence de outro ator. A mesma
 seção de registries liga `decision-record.rng-draw-refs` somente a `RngDraw` e
 `cycle-abort.failure-evidence-refs` somente a `ConflictSet`, `RngDraw`,
 `AffordanceAssessment`, `ProvisionalDisposition` ou `AttemptFailure`. O root standalone
@@ -420,7 +430,7 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 18. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
 
 A suíte V1 contém 152 casos positivos — todos os roots persistidos e todas as 73 operações
-registradas —, 30 casos negativos com `error_code` estável, 190 casos semânticos de binding,
+registradas —, 30 casos negativos com `error_code` estável, 211 casos semânticos de binding,
 identidade, ordenação e idempotência, sete casos de normalização e dois vetores SHA-256. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
 independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não

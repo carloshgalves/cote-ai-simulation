@@ -27,6 +27,65 @@ def _enum_bindings(registries: dict) -> dict[str, str]:
     return dict(registries["enum_bindings"])
 
 
+def _decode_cbor_item(encoded: bytes, offset: int = 0):
+    """Decode the small, definite-length CBOR subset used by these fixtures."""
+    initial = encoded[offset]
+    major, additional = initial >> 5, initial & 0x1F
+    offset += 1
+    if additional < 24:
+        argument = additional
+    elif additional == 24:
+        argument, offset = encoded[offset], offset + 1
+    elif additional == 25:
+        argument, offset = int.from_bytes(encoded[offset : offset + 2], "big"), offset + 2
+    elif additional == 26:
+        argument, offset = int.from_bytes(encoded[offset : offset + 4], "big"), offset + 4
+    elif additional == 27:
+        argument, offset = int.from_bytes(encoded[offset : offset + 8], "big"), offset + 8
+    else:
+        raise AssertionError("fixtures must use definite-length canonical CBOR")
+
+    if major == 0:
+        return argument, offset
+    if major == 1:
+        return -1 - argument, offset
+    if major in {2, 3}:
+        end = offset + argument
+        value = encoded[offset:end]
+        return (value if major == 2 else value.decode("utf-8")), end
+    if major == 4:
+        values = []
+        for _ in range(argument):
+            value, offset = _decode_cbor_item(encoded, offset)
+            values.append(value)
+        return values, offset
+    if major == 7 and argument in {20, 21, 22}:
+        return {20: False, 21: True, 22: None}[argument], offset
+    raise AssertionError(f"unsupported fixture CBOR major type {major}")
+
+
+def _decode_cbor_hex(encoded_hex: str):
+    encoded = bytes.fromhex(encoded_hex)
+    value, offset = _decode_cbor_item(encoded)
+    assert offset == len(encoded)
+    return value
+
+
+def _values_at_index_path(value, path: tuple[int | None, ...]):
+    if not path:
+        return [value]
+    index, *tail = path
+    if index is None:
+        return [
+            nested
+            for item in value
+            for nested in _values_at_index_path(item, tuple(tail))
+        ]
+    if not isinstance(value, list) or index >= len(value):
+        return []
+    return _values_at_index_path(value[index], tuple(tail))
+
+
 def test_every_positive_vector_hashes_its_canonical_bytes() -> None:
     fixtures = _json("fixtures.json")
     mismatches = {}
@@ -539,6 +598,181 @@ def test_attempt_evidence_and_rng_have_total_reference_contracts() -> None:
         assert bytes.fromhex(case["expected_causal_ref_cbor_hex"]) == expected_ref
 
 
+def test_every_positive_root_obeys_its_narrow_reference_kind_bindings() -> None:
+    fixtures = _json("fixtures.json")
+    reference_index_paths = {
+        "closure-proof-item.closure-ref.kind": (9, None, 1, 0),
+        "cohort-slot.response-ref.kind": (10, 1, None, 1, None, 1, 0),
+        "admission-fence.retry-ref.kind": (3, 1, 0),
+        "attempt-retry.aborted-envelope-ref.kind": (4, 0),
+        "affordance-assessment.subject.kind": (0, 0),
+        "decision-record.conflict-set-refs[*].kind": (8, None, 0),
+        "cycle-control-state.fence-ref.kind": (3, 1, 0),
+        "cycle-control-state.retry-ref.kind": (4, 1, 0),
+        "cycle-control-state.last-terminal-envelope-ref.kind": (5, 1, 0),
+        "claim.prior-claim-refs[*].kind": (7, None, 0),
+        "observation.claim-refs[*].kind": (10, None, 0),
+        "knowledge-input.observation-ref.kind": (7, 0),
+        "knowledge-input.claim-refs[*].kind": (8, None, 0),
+        "transmission.content.claims[*].kind": (4, 1, None, 0),
+        "cycle-abort.failure-evidence-refs[*].ref-kind": (12, None, 0),
+        "decision-record.rng-draw-refs[*].kind": (11, None, 0),
+        "provisional-disposition.conflict-set-refs[*].kind": (8, None, 0),
+        "provisional-disposition.rng-draw-refs[*].kind": (9, None, 0),
+    }
+    roots = {
+        case["case_id"]: _decode_cbor_hex(case["payload_cbor_hex"])
+        for case in fixtures["positive"]
+        if case["case_id"].startswith("root.")
+    }
+    cases = [
+        case
+        for case in fixtures["semantic"]
+        if case["kind"] == "record_reference_kind_binding"
+    ]
+    assert {case["field_path"] for case in cases} == reference_index_paths.keys()
+    for case in cases:
+        codes = _values_at_index_path(
+            roots[case["record_template_case_id"]],
+            reference_index_paths[case["field_path"]],
+        )
+        assert set(codes) <= set(case["accepted_codes"]), case["field_path"]
+
+    persisted = {
+        case["persisted_root"]: (
+            _decode_cbor_hex(case["record_envelope_hex"])[5],
+            _decode_cbor_hex(case["digest_preimage_envelope_hex"])[5],
+        )
+        for case in fixtures["semantic"]
+        if case["kind"] == "record_to_reference"
+    }
+    assert persisted["cote.csf.schema.affordance-assessment"][0][0][0] == 5
+    assert persisted["cote.csf.schema.affordance-assessment"][1][0][0] == 5
+    assert persisted["cote.csf.schema.attempt-retry"][0][4][0] == 13
+    assert persisted["cote.csf.schema.attempt-retry"][1][4][0] == 13
+    assert persisted["cote.csf.schema.transmission"][0][4][1][0][0] == 18
+    assert persisted["cote.csf.schema.transmission"][1][4][1][0][0] == 18
+    assert persisted["cote.csf.schema.knowledge-input"][0][7][0] == 16
+    assert persisted["cote.csf.schema.knowledge-input"][1][7][0] == 16
+
+
+def test_attempt_retry_chain_is_closed_locally_and_referentially() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    constraints = {
+        item["record"]: item for item in registries["record_constraints"]
+    }
+
+    assert constraints["admission-fence"] == {
+        "record": "admission-fence",
+        "discriminant": "admission-fence.attempt-ordinal",
+        "variants": [
+            {"value": 1, "required_absent": ["retry-ref"]},
+            {"exclusive_minimum": 1, "required_present": ["retry-ref"]},
+        ],
+    }
+    assert constraints["attempt-retry"] == {
+        "record": "attempt-retry",
+        "relations": ["to-attempt-ordinal == from-attempt-ordinal + 1"],
+    }
+
+    chain = next(
+        item
+        for item in registries["linked_record_constraints"]
+        if item["constraint_id"] == "attempt-retry-chain"
+    )
+    assert chain["records"] == [
+        "cycle-abort",
+        "attempt-retry",
+        "admission-fence",
+    ]
+    assert set(chain["relations"]) == {
+        "attempt-retry.run-id == cycle-abort.run-id == admission-fence.run-id",
+        "attempt-retry.cycle-id == cycle-abort.cycle-id == admission-fence.cycle-id",
+        "attempt-retry.from-attempt-ordinal == cycle-abort.attempt-ordinal",
+        "attempt-retry.to-attempt-ordinal == admission-fence.attempt-ordinal",
+        "attempt-retry.aborted-envelope-ref resolves cycle-abort",
+        "admission-fence.retry-ref resolves attempt-retry",
+        "cycle-abort is latest terminal envelope for run-id and cycle-id",
+    }
+
+    cases = [
+        case
+        for case in fixtures["semantic"]
+        if case["kind"] == "linked_record_constraint"
+        and case["constraint_id"] == "attempt-retry-chain"
+    ]
+    assert {case["violation"] for case in cases} == {
+        "first_attempt_has_retry_ref",
+        "later_attempt_missing_retry_ref",
+        "non_successor_attempt",
+        "run_id_mismatch",
+        "cycle_id_mismatch",
+        "from_attempt_mismatch",
+        "to_attempt_mismatch",
+        "aborted_envelope_ref_mismatch",
+        "retry_ref_mismatch",
+        "not_latest_abort",
+    }
+    assert all(case["invalid_error_code"] == "LINKED_RECORD_CONSTRAINT" for case in cases)
+
+
+def test_epistemic_projection_chain_is_causally_bound_and_covered() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    chain = next(
+        item
+        for item in registries["linked_record_constraints"]
+        if item["constraint_id"] == "epistemic-projection-chain"
+    )
+
+    assert chain["records"] == [
+        "event",
+        "perception-task",
+        "observation",
+        "knowledge-input",
+        "perception-task-completion",
+    ]
+    assert set(chain["relations"]) >= {
+        "perception-task.event-id resolves event.event-id",
+        "observation.task-id resolves perception-task.task-id",
+        "observation.observed-at == event.occurred-at",
+        "observation.source-event-refs contains event ref",
+        "knowledge-input.observation-ref resolves observation",
+        "knowledge-input.recipient == observation.observer",
+        "knowledge-input.received-at == observation.observed-at",
+        "knowledge-input.claim-refs is a subset of observation.claim-refs",
+        "perception-task-completion.task-id == perception-task.task-id",
+        "perception-task-completion.observation-ids contains observation.observation-id",
+        "perception-task-completion.knowledge-input-ids contains knowledge-input.knowledge-input-id",
+    }
+    assert chain["visibility_rule"] == (
+        "knowledge-input may project only claims and evidence disclosed by its "
+        "resolved observation to its observer-recipient"
+    )
+
+    cases = [
+        case
+        for case in fixtures["semantic"]
+        if case["kind"] == "linked_record_constraint"
+        and case["constraint_id"] == "epistemic-projection-chain"
+    ]
+    assert {case["violation"] for case in cases} == {
+        "task_event_id_mismatch",
+        "observation_task_id_mismatch",
+        "source_event_missing",
+        "observed_at_mismatch",
+        "observation_ref_mismatch",
+        "recipient_mismatch",
+        "received_at_mismatch",
+        "undisclosed_claim",
+        "completion_task_id_mismatch",
+        "completion_observation_missing",
+        "completion_knowledge_input_missing",
+    }
+    assert all(case["invalid_error_code"] == "LINKED_RECORD_CONSTRAINT" for case in cases)
+
+
 def test_standalone_proposition_binds_polarity() -> None:
     registries = _json("registries.json")
     fixtures = _json("fixtures.json")
@@ -600,12 +834,12 @@ def test_published_conformance_case_counts_match_the_bundle() -> None:
 
     assert len(fixtures["positive"]) == 152
     assert len(fixtures["negative"]) == 30
-    assert len(fixtures["semantic"]) == 190
+    assert len(fixtures["semantic"]) == 211
     assert len(fixtures["normalization_cases"]) == 7
     assert "152 casos positivos" in contract
     assert "30 casos negativos" in contract
-    assert "190 casos semânticos" in contract
-    assert "152 vetores positivos, 30 negativos, 190 casos semânticos" in readme
+    assert "211 casos semânticos" in contract
+    assert "152 vetores positivos, 30 negativos, 211 casos semânticos" in readme
 
 
 def test_cycle_control_state_variants_are_closed_by_status() -> None:
@@ -757,11 +991,64 @@ def test_attempt_failure_identity_is_stable_under_worker_permutation() -> None:
         for item in fixtures["normalization_cases"]
         if item["case_id"] == "normalize.attempt-failure.worker-order"
     )
-    assert len(case["inputs"]) == 2
-    assert case["inputs"][0] != case["inputs"][1]
+    failures = {item["semantic_key"]: item for item in case["attempt_failures"]}
+    assert len(failures) == 2
+    assert case["worker_orders"][0] == list(reversed(case["worker_orders"][1]))
+    assert case["component_policy_order"] == [
+        {"semantic_key": "admission", "failure-local-ordinal": 0},
+        {"semantic_key": "validation", "failure-local-ordinal": 1},
+    ]
+
+    normalized_by_order = []
+    for worker_order in case["worker_orders"]:
+        refs = []
+        for semantic_key in worker_order:
+            failure = failures[semantic_key]
+            record_envelope = _decode_cbor_hex(failure["record_envelope_hex"])
+            record = record_envelope[5]
+            id_preimage_envelope = _decode_cbor_hex(
+                failure["id_preimage_envelope_hex"]
+            )
+            digest_preimage_envelope = _decode_cbor_hex(
+                failure["digest_preimage_envelope_hex"]
+            )
+            assert failure["failure_local_ordinal"] == next(
+                item["failure-local-ordinal"]
+                for item in case["component_policy_order"]
+                if item["semantic_key"] == semantic_key
+            )
+            assert record[4] == failure["failure_local_ordinal"]
+            assert id_preimage_envelope[5] == [
+                record[1],
+                record[2],
+                record[3],
+                record[5],
+                record[6],
+                record[4],
+            ]
+            assert digest_preimage_envelope[5] == record[:-1]
+            failure_id = hashlib.sha256(
+                bytes.fromhex(failure["id_preimage_envelope_hex"])
+            ).digest()
+            failure_digest = hashlib.sha256(
+                bytes.fromhex(failure["digest_preimage_envelope_hex"])
+            ).digest()
+            assert record[0] == failure_id
+            assert record[-1] == failure_digest
+            expected_ref = b"\x83\x18\x1b\x58\x20" + failure_id + b"\x58\x20" + failure_digest
+            assert bytes.fromhex(failure["expected_causal_ref_cbor_hex"]) == expected_ref
+            refs.append(expected_ref)
+        normalized_by_order.append(sorted(refs, key=lambda ref: (ref[2], ref[5:37], ref[39:71])))
+
+    expected_refs = [
+        bytes.fromhex(item) for item in case["expected_normalized_refs_cbor_hex"]
+    ]
+    assert normalized_by_order == [expected_refs, expected_refs]
     assert case["recompute"] == ["abort-digest"]
     assert case["expected_payload_cbor_hex"]
-    assert case["expected_abort_digest"]
+    assert hashlib.sha256(
+        bytes.fromhex(case["abort_digest_preimage_envelope_hex"])
+    ).hexdigest() == case["expected_abort_digest"]
 
 
 def test_every_reference_identity_has_a_linked_record_to_reference_case() -> None:

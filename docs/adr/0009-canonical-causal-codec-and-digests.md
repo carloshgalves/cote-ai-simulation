@@ -42,11 +42,11 @@ Adotar `COTE Causal Canonical Codec V1`, identificado por
 
 O bundle normativo fixa CDDL, domain/schema operations, bindings de cada enum/variant/role,
 identidades de `CausalRef`, chaves separadas de ordering/identidade para coleções set-like, limites,
-dados Unicode e 381 vetores/casos de conformidade. Seus hashes V1 são:
+dados Unicode e 402 vetores/casos de conformidade. Seus hashes V1 são:
 
 - `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`;
-- `schema_bundle_hash=9e577b6ba971e3aa5cb8f33c3d2a0e5e685308fae0d4b3ef47c7d2c64aeed73c`;
-- `conformance_suite_hash=6c7158e15eac02d9c02f979095cdd6f59515465454d8b5020ae2c49817bfc20b`.
+- `schema_bundle_hash=31ae30ccd572eb1d81ea8c31542fb3bfa1edf40267a14ff6b5b2f1a557c1b98c`;
+- `conformance_suite_hash=b803ba7d035d5b97302cfcfa42693ae71fdbe2c2d191bd124b771cee0ff2f787`.
 
 O layout completo e os vetores-âncora estão no contrato normativo ligado acima.
 
@@ -84,7 +84,11 @@ de qualquer record e nunca é hashada como substituto dos bytes.
 
 O genesis fixa version/hash do codec, schema bundle, Unicode data e registries. Decoder causal é
 strict: valida profile/schema, reencoda e exige os mesmos bytes antes de verificar digest ou aplicar
-reducer. Biblioteca nova que emite bytes diferentes é incompatível com o run, não uma migração.
+reducer. Além da forma local, strict validation aplica `record_constraints` e resolve
+`linked_record_constraints`: retry deve avançar um único attempt desde o último abort do mesmo
+run/cycle, e a cadeia epistemológica deve conservar event/task, instante, observer-recipient,
+claims divulgados e membresia da completion. Biblioteca nova que emite bytes diferentes é
+incompatível com o run, não uma migração.
 
 O policy bundle contém golden vectors positivos/negativos e precisa ser executado por pelo menos duas
 implementações independentes e linguagens diferentes. A suíte cobre primitivos, limites numéricos,

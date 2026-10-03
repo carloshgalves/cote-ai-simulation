@@ -122,7 +122,7 @@ operação lógica e policy ref.
 contrato e os vetores, mas não inclui dois runners independentes nem um workflow que os execute. Uma
 implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
 
-`fixtures.json` contém 152 vetores positivos, 30 negativos, 190 casos semânticos, sete casos de
+`fixtures.json` contém 152 vetores positivos, 30 negativos, 211 casos semânticos, sete casos de
 normalização convergente e dois vetores SHA-256. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 73 operações de id/digest/hash do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
@@ -136,7 +136,10 @@ domain-separated de evidência indeterminada, pinning do genesis e idempotência
 ABSENT/PRESENT/conflitante.
 
 `record_constraints` fecha as cinco variantes de `DecisionRecord`, os quatro status de
-`CycleControlState` e a cadência condicional de `TriggerDefinition`. `RngDraw` é um root referenciável
+`CycleControlState`, a cadência condicional de `TriggerDefinition` e os ordinais/retry refs de
+`AdmissionFence`/`AttemptRetryRecord`. `linked_record_constraints` fecha a cadeia abort → retry →
+novo fence e a cadeia Event → task → observation → knowledge input → completion, incluindo o subset
+de claims divulgado ao observer-recipient. `RngDraw` é um root referenciável
 próprio, e os subsets de field path impedem que uma ref genérica ocupe
 `rng-draw-refs` ou `failure-evidence-refs`. A evidência de abort admite somente ConflictSet, sorteio,
 assessment, disposição provisória e falha de tentativa, todos com identidade e digest totais.

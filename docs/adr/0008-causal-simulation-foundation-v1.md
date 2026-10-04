@@ -1692,7 +1692,9 @@ Outbox, `Observation` e `KnowledgeInput` usam ids determinísticos e entrega ide
 resolvida. O completion só é anexado por compare-and-set quando suas listas são exatamente as
 projeções canônicas de todos os `Observation` e `KnowledgeInput` daquela task e todos estão
 duravelmente presentes no evidence ledger; extra, duplicata, omissão ou output de outra task falha
-fechado. Completion vazio é obrigatório quando nenhum output é elegível. Se houver crash durante a
+fechado. Completion vazio é obrigatório quando nenhum output é elegível. O completion é terminal:
+depois que ele existe, append de nova `Observation` ou `KnowledgeInput` para a task falha fechado,
+mesmo que o novo output seja estruturalmente válido. Se houver crash durante a
 entrega, resume relê as tarefas commitadas sem completion, reinsere os mesmos ids idempotentemente e
 só então completa a tarefa. Referência ausente ou digest divergente falha fechado.
 

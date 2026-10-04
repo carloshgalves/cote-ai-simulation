@@ -1040,6 +1040,32 @@
       "ordering": "evaluate events in cycle-commit.event-ids order"
     }
   ],
+  "fixture_reducer_contracts": [
+    {
+      "policy_id": "fixture-world-reducer-v1",
+      "version": 1,
+      "policy_hash_hex": "c5e65e00615648cd5cde986582022b86802624c604eb352e04c9931dd647eff0",
+      "owner": "fixture-world",
+      "selectors": [
+        {
+          "event_type": "event-0",
+          "schema_version": 1,
+          "producer": "producer-1",
+          "producer_version": 1,
+          "operation": "replace-state-with-event-payload"
+        },
+        {
+          "event_type": "event-1",
+          "schema_version": 1,
+          "producer": "producer-1",
+          "producer_version": 1,
+          "operation": "identity"
+        }
+      ],
+      "ordering": "apply every event exactly once in cycle-commit.event-ids/EventOrderKey order",
+      "result": "the exact typed-value after the final operation is world-state-transition.result-state"
+    }
+  ],
   "linked_state_models": [
     {
       "model_id": "source-unit-consumption-v1",
@@ -1053,15 +1079,16 @@
       "model_id": "world-state-transition-v1",
       "cddl_type": "world-state-transition",
       "authority": "world_state",
-      "precondition": "base-state exists at base-revision and hashes under cote.csf.hash.world-state to base-state-hash",
-      "postcondition": "result-state hashes under cote.csf.hash.world-state to result-state-hash and result-revision == base-revision + 1",
-      "cas": "compare base-revision and base-state-hash; publish exact result-state bytes and successor revision once"
+      "precondition": "base-state exists at base-revision and hashes under cote.csf.hash.world-state to base-state-hash; every ordered event resolves exactly one genesis-pinned owner/reducer version and hash",
+      "postcondition": "fold the ordered events over base-state through those reducers; the exact fold result equals result-state, hashes under cote.csf.hash.world-state to result-state-hash, and result-revision == base-revision + 1",
+      "cas": "compare base-revision and base-state-hash; publish the reducer-derived result-state bytes and successor revision once",
+      "fixture_contract_registry": "fixture_reducer_contracts"
     },
     {
       "model_id": "logical-sequence-transition-v1",
       "cddl_type": "logical-sequence-transition",
       "authority": "event_store + decision_ledger",
-      "precondition": "before is the first free global LogicalSequence at the transaction cursor",
+      "precondition": "before is derived from the latest prior CycleCommit.next-logical-sequence for the run at the transaction cursor, or from genesis.next-logical-sequence when no prior commit exists",
       "postcondition": "events in EventOrderKey order receive the contiguous range [before, after), and after == before + event-count",
       "cas": "an empty event batch preserves before == after"
     },
@@ -1094,6 +1121,42 @@
           "role": "abort",
           "root": "cycle-abort",
           "cardinality": "candidate"
+        },
+        {
+          "role": "commit-candidates",
+          "root": "commit-candidate",
+          "cardinality": "zero-or-more",
+          "source": "decision_ledger records resolved by COMMIT_CANDIDATE subjects or failure evidence at pre-append cursor"
+        },
+        {
+          "role": "conflict-sets",
+          "root": "conflict-set",
+          "cardinality": "zero-or-more",
+          "source": "decision_ledger records resolved by abort.failure-evidence-refs at pre-append cursor"
+        },
+        {
+          "role": "rng-draws",
+          "root": "rng-draw",
+          "cardinality": "zero-or-more",
+          "source": "decision_ledger records resolved by abort.failure-evidence-refs at pre-append cursor"
+        },
+        {
+          "role": "affordance-assessments",
+          "root": "affordance-assessment",
+          "cardinality": "zero-or-more",
+          "source": "decision_ledger records resolved by abort.failure-evidence-refs at pre-append cursor"
+        },
+        {
+          "role": "provisional-dispositions",
+          "root": "provisional-disposition",
+          "cardinality": "zero-or-more",
+          "source": "decision_ledger records resolved by abort.failure-evidence-refs at pre-append cursor"
+        },
+        {
+          "role": "attempt-failures",
+          "root": "attempt-failure",
+          "cardinality": "zero-or-more",
+          "source": "decision_ledger records resolved by abort.failure-evidence-refs at pre-append cursor"
         }
       ],
       "relations": [
@@ -1107,6 +1170,11 @@
         "abort.cycle-ordinal == aborted-fence.cycle-ordinal",
         "abort.base-revision == aborted-fence.base-revision",
         "abort.base-state-hash == aborted-fence.base-state-hash",
+        "every ADMITTED_UNIT indeterminate subject resolves one admitted unit in aborted-fence and repeats its unit-id and unit-digest",
+        "every COMMIT_CANDIDATE indeterminate subject resolves one commit-candidate whose run-id and cycle-id match abort, whose source-unit-ids belong to the aborted-fence partition, and whose subject-digest equals candidate-digest",
+        "every failure-evidence ref resolves its registered root; rng-draw, provisional-disposition, and attempt-failure match abort run-id, cycle-id, and attempt-ordinal",
+        "every affordance-assessment subject resolves an admitted unit or commit-candidate of aborted-fence",
+        "every conflict-set candidate-id resolves a commit-candidate in the aborted-fence partition",
         "no terminal envelope exists for abort run-id, cycle-id, and attempt-ordinal at pre-append cursor"
       ]
     },
@@ -1192,7 +1260,7 @@
         "candidate_role": "commit-batch",
         "root": "cycle-commit",
         "cursor": "unpublished transaction working set",
-        "publication": "fence consumption + decision settlement + events + cycle commit + tasks + world revision indivisible"
+        "publication": "fence consumption + commit candidates + decision settlement + events + cycle commit + tasks + world revision indivisible"
       },
       "record_roles": [
         {
@@ -1201,6 +1269,13 @@
           "cardinality": "one",
           "authority": "decision_ledger",
           "source": "admission fence selected by cycle-commit.fence-digest"
+        },
+        {
+          "role": "commit-candidates",
+          "root": "commit-candidate",
+          "cardinality": "exact-partition-of-candidate-producing-admitted-units",
+          "authority": "decision_ledger",
+          "source": "all candidate records selected by COMMIT, REJECT, and DEFER decision-record candidate-ids"
         },
         {
           "role": "decision-records",
@@ -1239,17 +1314,22 @@
         "decision-records form an exact bijection with fence.admitted-units by subject id and digest",
         "every decision-record has fence run-id, cycle-id, and attempt-ordinal",
         "cycle-commit.decision-digest commits canonical (unit-id, decision-id, record-digest) pairs",
+        "every COMMIT, REJECT, or DEFER decision-record candidate-id resolves exactly one commit-candidate in the transaction working set",
+        "commit-candidate.source-unit-ids form an exact non-overlapping partition of candidate-producing admitted units after NO_PROPOSAL and DEDUPLICATED are excluded",
+        "every commit-candidate has fence run-id and cycle-id and references only admitted unit ids from the same fence",
+        "each COMMIT, REJECT, or DEFER decision-record agrees with its commit-candidate on disposition scope, conflict refs, produced events, and successor semantics",
+        "every candidate-produced event is the canonical projection of one event-draft and has event-order-key.origin-ref equal to candidate-id",
         "every event has cycle-commit run-id, cycle-id, instant as occurred-at, and base-revision",
         "cycle-commit.event-ids == event-id projection of events in EventOrderKey order",
         "source-consumption contains exactly one eligible-to-consumed CAS witness for every admitted (unit-id, unit-digest), resolved from its real persisted root and record_authority",
-        "world-state-transition proves existing (base-revision, base-state-hash), deterministic post-state bytes, result-state-hash, and result-revision == base-revision + 1",
+        "world-state-transition proves existing (base-revision, base-state-hash), folds ordered events through their genesis-pinned owner/reducer version and hash, and equals the exact result-state bytes, result-state-hash, and successor revision",
         "events ordered by event-order-key have contiguous logical-sequence from logical-sequence-transition.before, and cycle-commit.next-logical-sequence == logical-sequence-transition.after == before + event count",
         "perception-classification evaluates every event under cycle-commit.perception-policy and tasks form an exact one-to-one ordered projection of events classified potentially perceptible",
         "cycle-commit.perception-policy resolves exactly one perception_policy_contracts entry by policy-id, version, and policy-hash",
         "cycle-commit.perception-task-ids == task-id projection of tasks in classified event order",
         "cycle-commit.perception-task-digest commits the canonical task-id projection",
-        "every task has cycle-commit run-id, cycle-id, base-revision, result-revision, and perception-policy",
-        "source consumption, decision-records, events, cycle-commit, tasks, world-state-transition, and logical-sequence-transition publish all-or-none"
+        "every task has cycle-commit run-id, cycle-id, base-revision, result-revision, perception-policy, and perception-identity-policy",
+        "source consumption, commit-candidates, decision-records, events, cycle-commit, tasks, world-state-transition, and logical-sequence-transition publish all-or-none"
       ],
       "state_roles": [
         {
@@ -1300,6 +1380,12 @@
           "source": "causal_outbox resolved by observation.task-id at pre-append cursor"
         },
         {
+          "role": "completions",
+          "root": "perception-task-completion",
+          "cardinality": "zero",
+          "source": "all causal_outbox completions for task.task-id at pre-append cursor"
+        },
+        {
           "role": "observation",
           "root": "observation",
           "cardinality": "candidate"
@@ -1309,7 +1395,9 @@
         "observation.task-id resolves task.task-id",
         "task.event-id resolves event.event-id",
         "observation.observed-at == event.occurred-at",
-        "observation.source-event-refs == [event ref]"
+        "observation.source-event-refs == [event ref]",
+        "observation.resolver == task.resolver byte-for-byte",
+        "no perception-task-completion for task.task-id exists at pre-append cursor"
       ]
     },
     {
@@ -1318,9 +1406,21 @@
         "operation": "append",
         "candidate_role": "knowledge-input",
         "root": "knowledge-input",
-        "cursor": "evidence-ledger pre-append prefix"
+        "cursor": "causal-outbox + evidence-ledger pre-append prefix"
       },
       "record_roles": [
+        {
+          "role": "task",
+          "root": "perception-task",
+          "cardinality": "one",
+          "source": "causal_outbox resolved through observation.task-id at pre-append cursor"
+        },
+        {
+          "role": "completions",
+          "root": "perception-task-completion",
+          "cardinality": "zero",
+          "source": "all causal_outbox completions for task.task-id at pre-append cursor"
+        },
         {
           "role": "observation",
           "root": "observation",
@@ -1339,6 +1439,8 @@
         "knowledge-input.received-at == observation.observed-at",
         "knowledge-input.claim-refs is a subset of observation.claim-refs",
         "knowledge-input.evidence-chain is a subset of observation.evidence-chain"
+        ,
+        "no perception-task-completion for task.task-id exists at pre-append cursor"
       ],
       "visibility_rule": "knowledge-input may project only claims and evidence disclosed by its resolved observation to its observer-recipient"
     },

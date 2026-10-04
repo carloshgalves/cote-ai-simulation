@@ -42,11 +42,11 @@ Adotar `COTE Causal Canonical Codec V1`, identificado por
 
 O bundle normativo fixa CDDL, domain/schema operations, bindings de cada enum/variant/role,
 identidades de `CausalRef`, chaves separadas de ordering/identidade para coleções set-like, limites,
-dados Unicode e 475 vetores/casos de conformidade. Seus hashes V1 são:
+dados Unicode e 497 vetores/casos de conformidade. Seus hashes V1 são:
 
 - `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`;
-- `schema_bundle_hash=6e2e899578b4fd782a740e7dea76ce1f87787d97b01e8590f5a8bf3e1569fe8a`;
-- `conformance_suite_hash=b035ca03976d9f5f92d343ade70a4eeab540de2f9faf46205b4416ddb07deb72`.
+- `schema_bundle_hash=61216aa68b9d922b8887a1c881d8e5e107a4eb8f502fdbc638cea737d7f58498`;
+- `conformance_suite_hash=ffe53c8a3e2edab39977e74e50f07c416fc275540859200e022b5d4a7e41ef96`.
 
 O layout completo e os vetores-âncora estão no contrato normativo ligado acima.
 

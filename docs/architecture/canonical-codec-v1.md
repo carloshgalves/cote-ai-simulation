@@ -27,8 +27,8 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `6e2e899578b4fd782a740e7dea76ce1f87787d97b01e8590f5a8bf3e1569fe8a` |
-| `conformance_suite_hash` | `b035ca03976d9f5f92d343ade70a4eeab540de2f9faf46205b4416ddb07deb72` |
+| `schema_bundle_hash` | `61216aa68b9d922b8887a1c881d8e5e107a4eb8f502fdbc638cea737d7f58498` |
+| `conformance_suite_hash` | `ffe53c8a3e2edab39977e74e50f07c416fc275540859200e022b5d4a7e41ef96` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -221,8 +221,13 @@ abort resolve o fence anterior e repete seus plano/digests; o novo fence resolve
 abortado, exceto por `attempt_ordinal`, `retry_ref`, `rule_versions` e o `fence_digest` resultante.
 
 A relação `Event` → `PerceptionTask` nasce somente dentro da publicação indivisível que também inclui
-CAS de consumo das unidades do fence, todos os `DecisionRecord`, `CycleCommit`, transição verificável
-de `WorldState` e cursor de `LogicalSequence`. Fence, commit, decisions, events e tasks compartilham
+CAS de consumo das unidades do fence, todos os `CommitCandidate`/`DecisionRecord`, `CycleCommit`,
+redução verificável de `WorldState` e cursor durável de `LogicalSequence`. Os candidatos formam a
+partição exata das unidades produtoras; cada decisão resolve seu candidato, e cada evento produzido
+projeta uma draft desse candidato. O pós-estado é o resultado exato da dobra dos eventos, em
+`EventOrderKey`, pelos reducers de owner/version/hash pinados — bytes arbitrários apenas
+autoconsistentes com seu hash não são testemunho válido. O cursor lógico de entrada deriva do último
+`CycleCommit` do prefixo, ou do genesis quando ainda não há commit. Fence, commit, decisions, events e tasks compartilham
 as coordenadas aplicáveis; eventos recebem sequência contígua por `EventOrderKey`, e a policy
 perceptiva pinada resolve um predicado versionado em `perception_policy_contracts` e produz uma
 bijeção entre eventos classificados e tasks. Não existe prefixo
@@ -231,11 +236,18 @@ resolve `PerceptionTask` → `Observation` → `KnowledgeInput` → completion r
 instante e observer-recipient coincidem. Claims e evidence do knowledge input são subsets do que a
 observation resolvida divulgou. As listas do completion são exatamente as projeções canônicas de
 todos os outputs daquela task, sem extras, duplicatas ou omissões; completion vazio representa zero
-outputs. Uma observation privada nunca autoriza projetar claims ou evidence de outro ator. A mesma
+outputs. A task e o commit repetem a mesma `perception-identity-policy`, a observation repete o
+resolver pinado pela task, e completion fecha terminalmente a task: nenhum output posterior é
+admitido. Uma observation privada nunca autoriza projetar claims ou evidence de outro ator. A mesma
 seção de registries liga `decision-record.rng-draw-refs` somente a `RngDraw` e
 `cycle-abort.failure-evidence-refs` somente a `ConflictSet`, `RngDraw`,
 `AffordanceAssessment`, `ProvisionalDisposition` ou `AttemptFailure`. O root standalone
 `Proposition` e a forma aninhada em `Claim` aplicam ambos o registry `polarity`.
+
+No append de `CycleAbortRecord`, todo sujeito `ADMITTED_UNIT` resolve id/digest no fence abortado e
+todo sujeito `COMMIT_CANDIDATE` resolve candidato cuja partição pertence ao mesmo fence. Evidências
+provisórias são resolvidas pelo root registrado: artefatos com coordenadas repetem run/cycle/attempt,
+assessments resolvem sujeito do corte e conflict sets resolvem somente candidatos daquela partição.
 
 ## 5. Containers e ordenação
 
@@ -444,7 +456,7 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 18. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
 
 A suíte V1 contém 152 casos positivos — todos os roots persistidos e todas as 73 operações
-registradas —, 30 casos negativos com `error_code` estável, 284 casos semânticos de binding,
+registradas —, 30 casos negativos com `error_code` estável, 306 casos semânticos de binding,
 identidade, ordenação e idempotência, sete casos de normalização e dois vetores SHA-256. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
 independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não

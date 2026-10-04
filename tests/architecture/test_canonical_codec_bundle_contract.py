@@ -348,14 +348,47 @@ def test_admitted_unit_ordering_is_self_contained_and_covered() -> None:
         if case["kind"] == "admitted_unit_ledger_mismatch"
     ]
     assert {case["mutate"][0] for case in mismatch_cases} == {
+        "eligibility",
+        "unit-kind",
+        "unit-id",
         "source-id",
         "unit-digest",
     }
+    authoritative_records = {
+        case["case_id"]: case
+        for case in fixtures["semantic"]
+        if case["kind"] == "record_to_reference"
+    }
+    for case in mismatch_cases:
+        authoritative = authoritative_records[case["referenced_record_case_id"]]
+        record = _decode_cbor_hex(authoritative["record_envelope_hex"])[5]
+        expected_ref = _decode_cbor_hex(authoritative["expected_input_ref_cbor_hex"])
+        projection = _decode_cbor_hex(case["authoritative_admitted_unit_cbor_hex"])
+        assert projection == [record[9], 1, record[2], expected_ref[-2], expected_ref[-1]]
+
+        mutated = list(projection)
+        field = case["mutate"][0]
+        index = {
+            "eligibility": 0,
+            "unit-kind": 1,
+            "source-id": 2,
+            "unit-id": 3,
+            "unit-digest": 4,
+        }[field]
+        replacement = case["mutate"][1]
+        if replacement == "flip-low-bit":
+            value = bytearray(mutated[index])
+            value[-1] ^= 1
+            mutated[index] = bytes(value)
+        else:
+            mutated[index] = replacement
+        assert mutated != projection
 
 
 def test_genesis_explicitly_pins_profile_and_schema_bundle_without_hash_cycle() -> None:
     cddl = (BUNDLE / "foundation.cddl").read_text(encoding="utf-8")
     fixtures = _json("fixtures.json")
+    policy_manifest = _json("policy-manifest.json")
     schema_manifest = _json("schema-manifest.json")
     conformance_manifest = _json("conformance-manifest.json")
 
@@ -388,7 +421,7 @@ def test_genesis_explicitly_pins_profile_and_schema_bundle_without_hash_cycle() 
     genesis = _decode_cbor_hex(pinning["genesis_envelope_hex"])
     assert genesis[5][11] == bytes.fromhex(schema_bundle_hash)
 
-    for manifest in (schema_manifest, conformance_manifest):
+    for manifest in (policy_manifest, schema_manifest, conformance_manifest):
         for name, size, expected_sha256 in manifest["artifacts"]:
             artifact = (BUNDLE / name).read_bytes()
             assert len(artifact) == size
@@ -399,6 +432,12 @@ def test_genesis_explicitly_pins_profile_and_schema_bundle_without_hash_cycle() 
         for line in (BUNDLE / "BUNDLE.sha256").read_text(encoding="utf-8").splitlines()
         if len(parts := line.split()) == 2
     }
+    codec_policy_hash = hashlib.sha256(
+        b"cote.csf.bundle.codec-policy.v1\x00"
+        + (BUNDLE / "policy-manifest.json").read_bytes()
+    ).hexdigest()
+    assert pinning["codec_policy_hash"] == codec_policy_hash
+    assert published_hashes["codec_policy_hash"] == codec_policy_hash
     assert published_hashes["schema_bundle_hash"] == schema_bundle_hash
     assert published_hashes["conformance_suite_hash"] == hashlib.sha256(
         b"cote.csf.bundle.conformance.v1\x00"
@@ -981,6 +1020,50 @@ def test_abort_immutable_coordinate_negatives_are_internally_hash_valid() -> Non
         assert any(abort[abort_index] != fence[fence_index] for abort_index, fence_index in immutable_pairs)
 
 
+def test_abort_provenance_is_resolved_against_the_aborted_fence() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    constraint = next(
+        item
+        for item in registries["linked_record_constraints"]
+        if item["constraint_id"] == "append-cycle-abort"
+    )
+    roles = {item["role"] for item in constraint["record_roles"]}
+    assert {
+        "commit-candidates",
+        "conflict-sets",
+        "rng-draws",
+        "affordance-assessments",
+        "provisional-dispositions",
+        "attempt-failures",
+    } <= roles
+    assert {
+        "every ADMITTED_UNIT indeterminate subject resolves one admitted unit in aborted-fence and repeats its unit-id and unit-digest",
+        "every COMMIT_CANDIDATE indeterminate subject resolves one commit-candidate whose run-id and cycle-id match abort, whose source-unit-ids belong to the aborted-fence partition, and whose subject-digest equals candidate-digest",
+        "every failure-evidence ref resolves its registered root; rng-draw, provisional-disposition, and attempt-failure match abort run-id, cycle-id, and attempt-ordinal",
+        "every affordance-assessment subject resolves an admitted unit or commit-candidate of aborted-fence",
+        "every conflict-set candidate-id resolves a commit-candidate in the aborted-fence partition",
+    } <= set(constraint["relations"])
+
+    cases = [
+        case
+        for case in fixtures["semantic"]
+        if case["kind"] == "cycle_abort_provenance"
+    ]
+    assert {case["violation"] for case in cases} == {
+        "admitted_unit_subject_foreign",
+        "admitted_unit_subject_digest_mismatch",
+        "commit_candidate_subject_foreign",
+        "conflict_set_foreign_candidate",
+        "rng_draw_foreign_attempt",
+        "affordance_assessment_foreign_subject",
+        "provisional_disposition_foreign_attempt",
+        "attempt_failure_foreign_attempt",
+    }
+    assert all(case["base_scenario_id"] == "retry.abort.valid" for case in cases)
+    assert all(case["mutation"] for case in cases)
+
+
 def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
     registries = _json("registries.json")
     fixtures = _json("fixtures.json")
@@ -1010,10 +1093,11 @@ def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
         "candidate_role": "commit-batch",
         "root": "cycle-commit",
         "cursor": "unpublished transaction working set",
-        "publication": "fence consumption + decision settlement + events + cycle commit + tasks + world revision indivisible",
+        "publication": "fence consumption + commit candidates + decision settlement + events + cycle commit + tasks + world revision indivisible",
     }
     assert {role["role"] for role in atomic["record_roles"]} == {
         "fence",
+        "commit-candidates",
         "decision-records",
         "cycle-commit",
         "events",
@@ -1032,14 +1116,19 @@ def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
         "decision-records form an exact bijection with fence.admitted-units by subject id and digest",
         "every decision-record has fence run-id, cycle-id, and attempt-ordinal",
         "cycle-commit.decision-digest commits canonical (unit-id, decision-id, record-digest) pairs",
+        "every COMMIT, REJECT, or DEFER decision-record candidate-id resolves exactly one commit-candidate in the transaction working set",
+        "commit-candidate.source-unit-ids form an exact non-overlapping partition of candidate-producing admitted units after NO_PROPOSAL and DEDUPLICATED are excluded",
+        "every commit-candidate has fence run-id and cycle-id and references only admitted unit ids from the same fence",
+        "each COMMIT, REJECT, or DEFER decision-record agrees with its commit-candidate on disposition scope, conflict refs, produced events, and successor semantics",
+        "every candidate-produced event is the canonical projection of one event-draft and has event-order-key.origin-ref equal to candidate-id",
         "every event has cycle-commit run-id, cycle-id, instant as occurred-at, and base-revision",
-        "every task has cycle-commit run-id, cycle-id, base-revision, result-revision, and perception-policy",
+        "every task has cycle-commit run-id, cycle-id, base-revision, result-revision, perception-policy, and perception-identity-policy",
         "source-consumption contains exactly one eligible-to-consumed CAS witness for every admitted (unit-id, unit-digest), resolved from its real persisted root and record_authority",
-        "world-state-transition proves existing (base-revision, base-state-hash), deterministic post-state bytes, result-state-hash, and result-revision == base-revision + 1",
+        "world-state-transition proves existing (base-revision, base-state-hash), folds ordered events through their genesis-pinned owner/reducer version and hash, and equals the exact result-state bytes, result-state-hash, and successor revision",
         "events ordered by event-order-key have contiguous logical-sequence from logical-sequence-transition.before, and cycle-commit.next-logical-sequence == logical-sequence-transition.after == before + event count",
         "perception-classification evaluates every event under cycle-commit.perception-policy and tasks form an exact one-to-one ordered projection of events classified potentially perceptible",
         "cycle-commit.perception-policy resolves exactly one perception_policy_contracts entry by policy-id, version, and policy-hash",
-        "source consumption, decision-records, events, cycle-commit, tasks, world-state-transition, and logical-sequence-transition publish all-or-none",
+        "source consumption, commit-candidates, decision-records, events, cycle-commit, tasks, world-state-transition, and logical-sequence-transition publish all-or-none",
     } <= set(atomic["relations"])
     assert registries["perception_policy_contracts"] == [
         {
@@ -1129,6 +1218,10 @@ def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
         "perceptible_event_task_omitted",
         "duplicate_task_for_event",
         "task_for_nonperceptible_event",
+        "task_perception_identity_policy_mismatch",
+        "observation_resolver_mismatch",
+        "observation_after_completion",
+        "knowledge_input_after_completion",
     }
     assert all(case["expected"] == "reject" for case in cases)
     assert all(
@@ -1235,7 +1328,7 @@ def test_record_authorities_exhaustively_cover_persisted_roots() -> None:
         "causal_outbox": [],
     }
     assert atomic["transaction_candidates"] == {
-        "decision_ledger": ["decision", "cycle-commit"],
+        "decision_ledger": ["candidate", "decision", "cycle-commit"],
         "event_store": ["event-0", "event-1"],
         "causal_outbox": ["task-0"],
     }
@@ -1245,6 +1338,7 @@ def test_record_authorities_exhaustively_cover_persisted_roots() -> None:
     }
     commit = atomic_records["cycle-commit"]
     fence = atomic_records["fence"]
+    candidate = atomic_records["candidate"]
     decision = atomic_records["decision"]
     source_unit = atomic_records["source-unit"]
     events = [atomic_records["event-0"], atomic_records["event-1"]]
@@ -1315,6 +1409,14 @@ def test_record_authorities_exhaustively_cover_persisted_roots() -> None:
     ).digest()
     assert decision[-1] == expected_decision_digest
     assert decision[1:4] == fence[0:3]
+    assert decision[6] == [1, candidate[0]]
+    assert candidate[1:3] == fence[0:2]
+    assert candidate[3] == admitted_unit_ids
+    assert candidate[-1] == _domain_digest(
+        "cote.csf.digest.commit-candidate",
+        "cote.csf.schema.commit-candidate.body",
+        candidate[:-1],
+    )
     expected_settlement_digest = hashlib.sha256(
         _encode_cbor_item(
             [
@@ -1400,6 +1502,7 @@ def test_record_authorities_exhaustively_cover_persisted_roots() -> None:
     )
     assert task[4] == commit[6]
     assert task[5] == commit[8]
+    assert task[8] == commit[21]
 
     empty = scenarios["epistemic.commit-batch.empty.valid"]
     empty_records = {
@@ -1415,6 +1518,12 @@ def test_record_authorities_exhaustively_cover_persisted_roots() -> None:
     assert empty_commit[18] == []
     assert empty_witnesses["logical-sequence-transition"] == [2, 2]
     assert empty_commit[22] == 2
+    prior_commit = empty_records["logical-cursor-anchor"]
+    assert empty["pre_append_cursor"]["decision_ledger"] == [
+        "logical-cursor-anchor",
+        "fence",
+    ]
+    assert prior_commit[22] == empty_witnesses["logical-sequence-transition"][0]
 
     invalid = scenarios["epistemic.commit-batch.event-without-task.invalid"]
     assert invalid["pre_append_cursor"]["event_store"] == ["event-0"]
@@ -1569,6 +1678,32 @@ def test_atomic_commit_negative_scenarios_recompute_cryptographic_fields() -> No
         task_scope["cycle-commit"][20],
     )
 
+    identity_scope = {
+        record["role"]: _decode_cbor_hex(record["record_cbor_hex"])
+        for record in by_violation[
+            "task_perception_identity_policy_mismatch"
+        ]["records"]
+    }
+    identity_task = identity_scope["task-0"]
+    identity_commit = identity_scope["cycle-commit"]
+    identity_events = [
+        identity_scope[role] for role in ("event-0", "event-1")
+    ]
+    assert identity_task[0] == _domain_digest(
+        "cote.csf.id.perception-task",
+        "cote.csf.schema.perception-task-id-preimage",
+        [
+            identity_task[1],
+            identity_task[3],
+            identity_task[6],
+            identity_task[7],
+            identity_task[8],
+        ],
+    )
+    assert identity_commit[18] == [identity_task[0]]
+    assert identity_commit[-1] == _batch_digest(identity_commit, identity_events)
+    assert identity_task[8] != identity_commit[21]
+
     source_violations = {
         "source_state_missing",
         "source_already_consumed",
@@ -1602,6 +1737,173 @@ def test_atomic_commit_negative_scenarios_recompute_cryptographic_fields() -> No
         scenario = by_violation[violation]
         assert scenario["records"]
         assert scenario.get("transition_witnesses") is not None
+
+
+def test_commit_candidate_partition_cases_are_executable() -> None:
+    fixtures = _json("fixtures.json")
+    scenarios = {
+        scenario["scenario_id"]: scenario
+        for scenario in fixtures["linked_record_scenarios"]
+    }
+    cases = [
+        case
+        for case in fixtures["semantic"]
+        if case["kind"] == "commit_candidate_partition"
+    ]
+    assert {case["violation"] for case in cases} == {
+        "candidate_missing",
+        "candidate_foreign",
+        "candidate_partition_gap",
+        "candidate_partition_overlap",
+        "candidate_produced_event_mismatch",
+    }
+    base = scenarios["epistemic.commit-batch.valid"]
+    records = {
+        record["role"]: _decode_cbor_hex(record["record_cbor_hex"])
+        for record in base["records"]
+    }
+    admitted_ids = {unit[3] for unit in records["fence"][11]}
+    candidate = records["candidate"]
+    decision = records["decision"]
+    assert set(candidate[3]) == admitted_ids
+    assert decision[6] == [1, candidate[0]]
+    assert decision[12] == records["cycle-commit"][15]
+    mutations = {case["violation"]: case["mutation"] for case in cases}
+    assert mutations["candidate_missing"] == {
+        "op": "remove_record",
+        "record_role": "candidate",
+    }
+    assert bytes.fromhex(mutations["candidate_foreign"]["value_hex"]) != candidate[1]
+    assert bytes.fromhex(
+        mutations["candidate_partition_gap"]["unit_id_hex"]
+    ) not in admitted_ids
+    assert bytes.fromhex(
+        mutations["candidate_partition_overlap"]["source_unit_id_hex"]
+    ) in admitted_ids
+    assert bytes.fromhex(
+        mutations["candidate_produced_event_mismatch"]["event_id_hex"]
+    ) not in {records["event-0"][0], records["event-1"][0]}
+
+
+def test_world_state_transition_executes_the_pinned_fixture_reducers() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    contract = registries["fixture_reducer_contracts"][0]
+    assert contract["policy_hash_hex"] == hashlib.sha256(
+        b"fixture-world-reducer-v1"
+    ).hexdigest()
+    selectors = {
+        (
+            item["event_type"],
+            item["schema_version"],
+            item["producer"],
+            item["producer_version"],
+        ): item["operation"]
+        for item in contract["selectors"]
+    }
+    scenario = next(
+        item
+        for item in fixtures["linked_record_scenarios"]
+        if item["scenario_id"] == "epistemic.commit-batch.valid"
+    )
+    records = {
+        record["role"]: _decode_cbor_hex(record["record_cbor_hex"])
+        for record in scenario["records"]
+    }
+    witnesses = {
+        witness["role"]: _decode_cbor_hex(witness["witness_cbor_hex"])
+        for witness in scenario["transition_witnesses"]
+    }
+    transition = witnesses["world-state-transition"]
+    state = transition[1]
+    for event in (records["event-0"], records["event-1"]):
+        operation = selectors[(event[3], event[4], event[16], event[17])]
+        if operation == "replace-state-with-event-payload":
+            state = event[9]
+        elif operation != "identity":
+            raise AssertionError(operation)
+    assert state == transition[4]
+
+    case = next(
+        item
+        for item in fixtures["semantic"]
+        if item["case_id"] == "linked-state.world-state.reducer-result-mismatch"
+    )
+    replacement = _decode_cbor_hex(case["mutation"]["result_state_cbor_hex"])
+    replacement_hash = _domain_digest(
+        "cote.csf.hash.world-state", "cote.csf.schema.typed-value", replacement
+    )
+    mutated_commit = list(records["cycle-commit"])
+    mutated_commit[9] = replacement_hash
+    mutated_commit[-1] = _batch_digest(
+        mutated_commit, [records["event-0"], records["event-1"]]
+    )
+    assert mutated_commit[9] == replacement_hash
+    assert mutated_commit[-1] == _batch_digest(
+        mutated_commit, [records["event-0"], records["event-1"]]
+    )
+    assert replacement != state
+
+
+def test_logical_cursor_anchor_rejects_a_locally_consistent_jump() -> None:
+    fixtures = _json("fixtures.json")
+    case = next(
+        item
+        for item in fixtures["semantic"]
+        if item["case_id"] == "linked-state.logical-sequence.cursor-anchor-mismatch"
+    )
+    assert case["durable_cursor"] == 2
+    assert case["witness_before"] == case["witness_after"] == case["commit_next"]
+    assert case["event_count"] == 0
+    assert case["witness_before"] != case["durable_cursor"]
+
+
+def test_epistemic_completion_is_terminal_and_policies_are_pinned() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+    constraints = {
+        item["constraint_id"]: item
+        for item in registries["linked_record_constraints"]
+    }
+    observation = constraints["append-observation"]
+    knowledge = constraints["append-knowledge-input"]
+    assert "observation.resolver == task.resolver byte-for-byte" in observation["relations"]
+    assert "no perception-task-completion for task.task-id exists at pre-append cursor" in observation["relations"]
+    assert "no perception-task-completion for task.task-id exists at pre-append cursor" in knowledge["relations"]
+    assert "causal-outbox" in knowledge["applies_on"]["cursor"]
+
+    scenarios = {
+        scenario["scenario_id"]: scenario
+        for scenario in fixtures["linked_record_scenarios"]
+    }
+    for scenario_id, candidate_role in (
+        ("epistemic.observation.after-completion.invalid", "observation"),
+        ("epistemic.knowledge-input.after-completion.invalid", "knowledge-input"),
+    ):
+        scenario = scenarios[scenario_id]
+        assert "completion" in scenario["pre_append_cursor"]["causal_outbox"]
+        assert candidate_role in {record["role"] for record in scenario["records"]}
+
+    resolver_case = next(
+        item
+        for item in fixtures["semantic"]
+        if item.get("violation") == "observation_resolver_mismatch"
+    )
+    mutated_observation = _decode_cbor_hex(
+        resolver_case["mutation"]["record_cbor_hex"]
+    )
+    valid = scenarios[resolver_case["base_scenario_id"]]
+    records = {
+        record["role"]: _decode_cbor_hex(record["record_cbor_hex"])
+        for record in valid["records"]
+    }
+    assert mutated_observation[-1] == _domain_digest(
+        "cote.csf.digest.observation",
+        "cote.csf.schema.observation.body",
+        mutated_observation[:-1],
+    )
+    assert mutated_observation[1] == records["task"][0]
+    assert mutated_observation[13] != records["task"][7]
 
 
 def test_linked_semantic_cases_are_self_contained_and_all_case_refs_resolve() -> None:
@@ -1772,12 +2074,12 @@ def test_published_conformance_case_counts_match_the_bundle() -> None:
 
     assert len(fixtures["positive"]) == 152
     assert len(fixtures["negative"]) == 30
-    assert len(fixtures["semantic"]) == 284
+    assert len(fixtures["semantic"]) == 306
     assert len(fixtures["normalization_cases"]) == 7
     assert "152 casos positivos" in contract
     assert "30 casos negativos" in contract
-    assert "284 casos semânticos" in contract
-    assert "152 vetores positivos, 30 negativos, 284 casos semânticos" in readme
+    assert "306 casos semânticos" in contract
+    assert "152 vetores positivos, 30 negativos, 306 casos semânticos" in readme
 
 
 def test_cycle_control_state_variants_are_closed_by_status() -> None:

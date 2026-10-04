@@ -124,7 +124,7 @@ operação lógica e policy ref.
 contrato e os vetores, mas não inclui dois runners independentes nem um workflow que os execute. Uma
 implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
 
-`fixtures.json` contém 152 vetores positivos, 30 negativos, 284 casos semânticos, sete casos de
+`fixtures.json` contém 152 vetores positivos, 30 negativos, 306 casos semânticos, sete casos de
 normalização convergente e dois vetores SHA-256. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 73 operações de id/digest/hash do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
@@ -145,25 +145,33 @@ idempotência. `record_authorities` atribui owner a cada um, incluindo input led
 trigger registry, decision ledger, event/evidence stores, causal outbox, world state e stores de
 snapshot/genesis. Em `linked_record_constraints`, cada entrada declara
 uma transição de append ou publicação atômica, o root candidato, o cursor e `record_roles` com fonte e
-cardinalidade. Os 45 `linked_record_scenarios` incluem oito estados positivos e 37 inputs duráveis
+cardinalidade. Os 48 `linked_record_scenarios` incluem oito estados positivos e 40 inputs duráveis
 completos rejeitados; os demais negativos fornecem o record CBOR substituto exato.
 A sequência fence abortado → abort → retry → novo fence é validada em três fronteiras duráveis,
 preserva byte a byte plano, base, closure, coorte, unidades, input e policies fora dos quatro campos
 que a retentativa pode mudar, e vincula `rule-versions` do retry ao novo fence. Consumo CAS das
-fontes, `DecisionRecord`, eventos, `CycleCommit`, tasks e transição CAS de mundo
+fontes, partição de `CommitCandidate`, `DecisionRecord`, eventos, `CycleCommit`, tasks e redução
+pinada de mundo
 são candidatos da mesma publicação indivisível, com coordenadas comuns e bijeção/digests de
-settlement. Witnesses CBOR tipados provam pre/post-state das fontes e do mundo, cursor lógico
-contíguo — inclusive lote vazio — e classificação perceptiva bijetiva sob a policy pinada;
+settlement. Witnesses CBOR tipados provam pre/post-state das fontes e do mundo, incluindo a dobra
+dos reducers por owner/version/hash, cursor lógico contíguo derivado do último commit ou genesis —
+inclusive lote vazio — e classificação perceptiva bijetiva sob a policy pinada;
 `perception_policy_contracts` fixa o predicado versionado usado pelos cenários e seu hash;
 observation → knowledge
-input → completion é validado depois nas suas fronteiras de append e restringe cada
+input → completion é validado depois nas suas fronteiras de append, repete identity policy/resolver
+pinados e restringe cada
 observation ao evento da task, projeta apenas claims/evidence divulgados e exige no completion
-exatamente todos os outputs já presentes no prefixo daquela task. `RngDraw` é um root referenciável
+exatamente todos os outputs já presentes no prefixo daquela task. Completion fecha a task e bloqueia
+qualquer observation ou knowledge input tardio. `RngDraw` é um root referenciável
 próprio, e os subsets de field path impedem que uma ref genérica ocupe
 `rng-draw-refs` ou `failure-evidence-refs`. A evidência de abort admite somente ConflictSet, sorteio,
 assessment, disposição provisória e falha de tentativa, todos com identidade e digest totais.
 `AttemptFailure` inclui stage e component policy no preimage; seu ordinal é nomeado pelo schema do
 componente e não pode vir de completion order.
+
+No append de abort, sujeitos e failure evidence resolvem no mesmo fence/attempt: admitted units
+repetem id/digest do corte, candidatos pertencem à sua partição, artefatos coordenados repetem
+run/cycle/attempt, assessments resolvem sujeito do corte e conflict sets somente candidatos dele.
 
 Checagens temporárias usadas durante a autoria não foram preservadas e não contam como evidência de
 conformidade reproduzível. A aceitação de uma implementação exige dois runners preservados, em

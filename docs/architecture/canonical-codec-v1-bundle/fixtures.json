@@ -5,7 +5,7 @@
     "negative": "Reject with the stable error_code before persistence or digest acceptance. When field_path supplies a set-like field fragment or another typed field fragment, input_cbor_hex is decoded as that field value under the named context; otherwise it is a complete root or canonical envelope.",
     "normalization": "AST nodes are [type, value], where type is uint, f64_bits, text_codepoints, array, map, or set; every listed input converges to expected_payload_cbor_hex. record_set_override supplies a complete persisted-root template plus a set-like field override; derived digests are recomputed after normalization.",
     "hex": "Lowercase, two digits per octet, no whitespace.",
-    "semantic": "Apply the registry selected by field_path. Enum cases prove accepted/rejected codes; set cases normalize or reject by the named ordering, duplicate, and identity policies; idempotency cases derive only PRESENT identities from the complete persisted namespace. record_enum_binding validates the complete root envelope. record_reference_kind_binding replaces container_field_path in the complete positive envelope named by record_template_case_id with each accepted or rejected container CBOR value before strict validation. operation_field_binding mutates the referenced complete operation envelope at field_path. derived_ordering_component computes the registered domain-separated component. record_to_reference recomputes both id and digest from every persisted record and the named operation envelopes. record_conditional_constraint validates a complete persisted record against discriminant-selected presence, absence, reference-kind, relation, and range rules. typed_value_constraint strict-decodes the complete inner envelope and verifies outer schema/version equality, authorized operation, exact-byte digest, and canonical re-encoding. linked_record_constraint applies one append-scoped or atomic-publication constraint to a self-contained scenario and either accepts it unchanged, rejects an exact replacement-record mutation, or rejects the complete durable input scenario named by input_scenario_id before persistence."
+    "semantic": "Apply the registry selected by field_path. Enum cases prove accepted/rejected codes; set cases normalize or reject by the named ordering, duplicate, and identity policies; idempotency cases derive only PRESENT identities from the complete persisted namespace. record_enum_binding validates the complete root envelope. record_reference_kind_binding replaces container_field_path in the complete positive envelope named by record_template_case_id with each accepted or rejected container CBOR value before strict validation. operation_field_binding mutates the referenced complete operation envelope at field_path. derived_ordering_component computes the registered domain-separated component. record_to_reference recomputes both id and digest from every persisted record and the named operation envelopes. record_conditional_constraint validates a complete persisted record against discriminant-selected presence, absence, reference-kind, relation, and range rules. typed_value_constraint strict-decodes the complete inner envelope and verifies outer schema/version equality, authorized operation, exact-byte digest, and canonical re-encoding. linked_record_constraint applies one append-scoped or atomic-publication constraint to a self-contained scenario and either accepts it unchanged, rejects an exact replacement-record mutation, or rejects the complete durable input scenario named by input_scenario_id before persistence. admitted_unit_ledger_mismatch resolves referenced_record_case_id, recomputes the input ref, constructs the authoritative [eligibility, unit-kind, source-id, unit-id, unit-digest] projection, applies mutate, and requires ADMITTED_UNIT_LEDGER_MISMATCH. commit_candidate_partition applies its exact working-set mutation and validates candidate existence, fence-scoped partition, and decision/event projection. cycle_abort_provenance materializes its named subject or evidence mutation against retry.abort.valid and resolves it through the registered persisted root. linked_state_constraint recomputes every named hash after mutation before applying the state model."
   },
   "normalization_cases": [
     {
@@ -926,9 +926,9 @@
       "domain_tag": "cote.csf.test.genesis-manifest",
       "schema_id": "cote.csf.schema.genesis-manifest",
       "schema_version": 1,
-      "payload_cbor_hex": "9258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d820358206e2e899578b4fd782a740e7dea76ce1f87787d97b01e8590f5a8bf3e1569fe8a808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
-      "canonical_hex": "86444353460001781e636f74652e6373662e746573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d820358206e2e899578b4fd782a740e7dea76ce1f87787d97b01e8590f5a8bf3e1569fe8a808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
-      "sha256": "3c0ba16e3356ae2211f79857a0816a93eb599dafcd3c31525859d7f0c85b91f5"
+      "payload_cbor_hex": "9258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582061216aa68b9d922b8887a1c881d8e5e107a4eb8f502fdbc638cea737d7f58498808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
+      "canonical_hex": "86444353460001781e636f74652e6373662e746573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582061216aa68b9d922b8887a1c881d8e5e107a4eb8f502fdbc638cea737d7f58498808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
+      "sha256": "bac51c82eb6ab05447be0dadc6ad88b632a49f90e5cd678d8727d2a15477682d"
     },
     {
       "case_id": "root.snapshot.minimal",
@@ -1421,9 +1421,9 @@
       "domain_tag": "cote.csf.digest.genesis-manifest",
       "schema_id": "cote.csf.schema.genesis-manifest",
       "schema_version": 1,
-      "payload_cbor_hex": "9258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d820358206e2e899578b4fd782a740e7dea76ce1f87787d97b01e8590f5a8bf3e1569fe8a808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
-      "canonical_hex": "864443534600017820636f74652e6373662e6469676573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d820358206e2e899578b4fd782a740e7dea76ce1f87787d97b01e8590f5a8bf3e1569fe8a808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
-      "sha256": "e7c99168634385ee5cc78f7c89c539ea55fca39bf9b925fc57b808e9f9e5efb3"
+      "payload_cbor_hex": "9258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582061216aa68b9d922b8887a1c881d8e5e107a4eb8f502fdbc638cea737d7f58498808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
+      "canonical_hex": "864443534600017820636f74652e6373662e6469676573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582061216aa68b9d922b8887a1c881d8e5e107a4eb8f502fdbc638cea737d7f58498808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
+      "sha256": "b35fc00cc6becedd9c0dae3505bef6ce04b8a7e68cc94a0f404be8d905782147"
     },
     {
       "case_id": "operation.digest.idempotency",
@@ -3099,9 +3099,9 @@
       "unicode_version": "unicode-15.1.0",
       "normalization_profile_id": "unicode.npss.nfc.15.1.0",
       "codec_policy_hash": "513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203",
-      "schema_bundle_hash": "6e2e899578b4fd782a740e7dea76ce1f87787d97b01e8590f5a8bf3e1569fe8a",
+      "schema_bundle_hash": "61216aa68b9d922b8887a1c881d8e5e107a4eb8f502fdbc638cea737d7f58498",
       "schema_refs_are_scoped_by": "schema_bundle_hash",
-      "genesis_envelope_hex": "86444353460001781e636f74652e6373662e746573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d820358206e2e899578b4fd782a740e7dea76ce1f87787d97b01e8590f5a8bf3e1569fe8a808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180"
+      "genesis_envelope_hex": "86444353460001781e636f74652e6373662e746573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582061216aa68b9d922b8887a1c881d8e5e107a4eb8f502fdbc638cea737d7f58498808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180"
     },
     {
       "case_id": "admission-fence.admitted-unit-source-mismatch",
@@ -3113,7 +3113,8 @@
         "source-id",
         "different-source"
       ],
-      "expected_error_code": "ADMITTED_UNIT_LEDGER_MISMATCH"
+      "expected_error_code": "ADMITTED_UNIT_LEDGER_MISMATCH",
+      "authoritative_admitted_unit_cbor_hex": "858200000168736f757263652d315820eb2ab99859e394a86ed4fc988cb7ca548aaa7226e6f9692df4eff515511c9aca582022b3c2cfc8f55584929b3eece632579934c9e028322908eb0da78e6bdf3e8fde"
     },
     {
       "case_id": "admission-fence.admitted-unit-digest-corruption",
@@ -3123,6 +3124,49 @@
       "referenced_record_case_id": "reference.record-to-ref.exogenous-input",
       "mutate": [
         "unit-digest",
+        "flip-low-bit"
+      ],
+      "expected_error_code": "ADMITTED_UNIT_LEDGER_MISMATCH",
+      "authoritative_admitted_unit_cbor_hex": "858200000168736f757263652d315820eb2ab99859e394a86ed4fc988cb7ca548aaa7226e6f9692df4eff515511c9aca582022b3c2cfc8f55584929b3eece632579934c9e028322908eb0da78e6bdf3e8fde"
+    },
+    {
+      "case_id": "admission-fence.admitted-unit-eligibility-mismatch",
+      "kind": "admitted_unit_ledger_mismatch",
+      "fence_case_id": "root.admission-fence.minimal",
+      "admitted_unit_index": 1,
+      "referenced_record_case_id": "reference.record-to-ref.exogenous-input",
+      "authoritative_admitted_unit_cbor_hex": "858200000168736f757263652d315820eb2ab99859e394a86ed4fc988cb7ca548aaa7226e6f9692df4eff515511c9aca582022b3c2cfc8f55584929b3eece632579934c9e028322908eb0da78e6bdf3e8fde",
+      "mutate": [
+        "eligibility",
+        [
+          0,
+          1
+        ]
+      ],
+      "expected_error_code": "ADMITTED_UNIT_LEDGER_MISMATCH"
+    },
+    {
+      "case_id": "admission-fence.admitted-unit-unit-kind-mismatch",
+      "kind": "admitted_unit_ledger_mismatch",
+      "fence_case_id": "root.admission-fence.minimal",
+      "admitted_unit_index": 1,
+      "referenced_record_case_id": "reference.record-to-ref.exogenous-input",
+      "authoritative_admitted_unit_cbor_hex": "858200000168736f757263652d315820eb2ab99859e394a86ed4fc988cb7ca548aaa7226e6f9692df4eff515511c9aca582022b3c2cfc8f55584929b3eece632579934c9e028322908eb0da78e6bdf3e8fde",
+      "mutate": [
+        "unit-kind",
+        2
+      ],
+      "expected_error_code": "ADMITTED_UNIT_LEDGER_MISMATCH"
+    },
+    {
+      "case_id": "admission-fence.admitted-unit-unit-id-corruption",
+      "kind": "admitted_unit_ledger_mismatch",
+      "fence_case_id": "root.admission-fence.minimal",
+      "admitted_unit_index": 1,
+      "referenced_record_case_id": "reference.record-to-ref.exogenous-input",
+      "authoritative_admitted_unit_cbor_hex": "858200000168736f757263652d315820eb2ab99859e394a86ed4fc988cb7ca548aaa7226e6f9692df4eff515511c9aca582022b3c2cfc8f55584929b3eece632579934c9e028322908eb0da78e6bdf3e8fde",
+      "mutate": [
+        "unit-id",
         "flip-low-bit"
       ],
       "expected_error_code": "ADMITTED_UNIT_LEDGER_MISMATCH"
@@ -3853,12 +3897,12 @@
       "case_id": "reference.record-to-ref.genesis-manifest",
       "kind": "record_to_reference",
       "persisted_root": "cote.csf.schema.genesis-manifest",
-      "record_envelope_hex": "86444353460001781e636f74652e6373662e746573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d820358206e2e899578b4fd782a740e7dea76ce1f87787d97b01e8590f5a8bf3e1569fe8a808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
+      "record_envelope_hex": "86444353460001781e636f74652e6373662e746573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582061216aa68b9d922b8887a1c881d8e5e107a4eb8f502fdbc638cea737d7f58498808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
       "id_operation": "cote.csf.id.genesis",
       "id_preimage_envelope_hex": "8644435346000173636f74652e6373662e69642e67656e657369737823636f74652e6373662e736368656d612e67656e657369732d69642d707265696d616765018158200000000000000000000000000000000000000000000000000000000000000000",
       "digest_operation": "cote.csf.digest.genesis-manifest",
-      "digest_preimage_envelope_hex": "864443534600017820636f74652e6373662e6469676573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d820358206e2e899578b4fd782a740e7dea76ce1f87787d97b01e8590f5a8bf3e1569fe8a808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
-      "expected_causal_ref_cbor_hex": "8315582099f8c067aef2a5d219e01efad7304ac6ebf3ec1ef768f23860fbc349554103fe5820e7c99168634385ee5cc78f7c89c539ea55fca39bf9b925fc57b808e9f9e5efb3"
+      "digest_preimage_envelope_hex": "864443534600017820636f74652e6373662e6469676573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582061216aa68b9d922b8887a1c881d8e5e107a4eb8f502fdbc638cea737d7f58498808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
+      "expected_causal_ref_cbor_hex": "8315582099f8c067aef2a5d219e01efad7304ac6ebf3ec1ef768f23860fbc349554103fe5820b35fc00cc6becedd9c0dae3505bef6ce04b8a7e68cc94a0f404be8d905782147"
     },
     {
       "case_id": "reference.record-to-ref.epistemic-checkpoint-ref",
@@ -5006,6 +5050,256 @@
         "record_cbor_hex": "8f5820000000000000000000000000000000000000000000000000000000000000000058200000000000000000000000000000000000000000000000000000000000000000010000810000582009090909090909090909090909090909090909090909090909090909090909095820adc947944adaadff0b5e331a1e2d32ada1120d44b96d165d9283f811cf599e0258206c6e578831c529793f7c1350ed32572c68dde61c59fc2f6846eee2dab94ad736038080818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000582037a53715233951ba5dfc4647d6d4d2af5a36dc0cbb8ce317434f9f24762eb4ca"
       },
       "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.publish-cycle-commit-batch.candidate-missing",
+      "kind": "commit_candidate_partition",
+      "constraint_id": "publish-cycle-commit-batch",
+      "base_scenario_id": "epistemic.commit-batch.valid",
+      "expected": "reject",
+      "violation": "candidate_missing",
+      "mutation": {
+        "op": "remove_record",
+        "record_role": "candidate"
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.publish-cycle-commit-batch.candidate-foreign",
+      "kind": "commit_candidate_partition",
+      "constraint_id": "publish-cycle-commit-batch",
+      "base_scenario_id": "epistemic.commit-batch.valid",
+      "expected": "reject",
+      "violation": "candidate_foreign",
+      "mutation": {
+        "op": "replace_candidate_run_id",
+        "value_hex": "4444444444444444444444444444444444444444444444444444444444444444"
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.publish-cycle-commit-batch.candidate-partition-gap",
+      "kind": "commit_candidate_partition",
+      "constraint_id": "publish-cycle-commit-batch",
+      "base_scenario_id": "epistemic.commit-batch.valid",
+      "expected": "reject",
+      "violation": "candidate_partition_gap",
+      "mutation": {
+        "op": "append_admitted_unit_without_candidate",
+        "unit_id_hex": "4545454545454545454545454545454545454545454545454545454545454545"
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.publish-cycle-commit-batch.candidate-partition-overlap",
+      "kind": "commit_candidate_partition",
+      "constraint_id": "publish-cycle-commit-batch",
+      "base_scenario_id": "epistemic.commit-batch.valid",
+      "expected": "reject",
+      "violation": "candidate_partition_overlap",
+      "mutation": {
+        "op": "append_candidate_with_existing_source",
+        "source_unit_id_hex": "a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe"
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.publish-cycle-commit-batch.candidate-produced-event-mismatch",
+      "kind": "commit_candidate_partition",
+      "constraint_id": "publish-cycle-commit-batch",
+      "base_scenario_id": "epistemic.commit-batch.valid",
+      "expected": "reject",
+      "violation": "candidate_produced_event_mismatch",
+      "mutation": {
+        "op": "replace_decision_produced_event",
+        "event_id_hex": "4646464646464646464646464646464646464646464646464646464646464646"
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.append-cycle-abort.admitted-unit-subject-foreign",
+      "kind": "cycle_abort_provenance",
+      "constraint_id": "append-cycle-abort",
+      "base_scenario_id": "retry.abort.valid",
+      "expected": "reject",
+      "violation": "admitted_unit_subject_foreign",
+      "mutation": {
+        "target": "indeterminate.subject",
+        "subject_kind": "admitted_unit",
+        "unit_id_hex": "4141414141414141414141414141414141414141414141414141414141414141"
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.append-cycle-abort.admitted-unit-subject-digest-mismatch",
+      "kind": "cycle_abort_provenance",
+      "constraint_id": "append-cycle-abort",
+      "base_scenario_id": "retry.abort.valid",
+      "expected": "reject",
+      "violation": "admitted_unit_subject_digest_mismatch",
+      "mutation": {
+        "target": "indeterminate.subject",
+        "subject_kind": "admitted_unit",
+        "digest_hex": "4242424242424242424242424242424242424242424242424242424242424242"
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.append-cycle-abort.commit-candidate-subject-foreign",
+      "kind": "cycle_abort_provenance",
+      "constraint_id": "append-cycle-abort",
+      "base_scenario_id": "retry.abort.valid",
+      "expected": "reject",
+      "violation": "commit_candidate_subject_foreign",
+      "mutation": {
+        "target": "indeterminate.subject",
+        "subject_kind": "commit_candidate",
+        "candidate_id_hex": "4343434343434343434343434343434343434343434343434343434343434343"
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.append-cycle-abort.conflict-set-foreign-candidate",
+      "kind": "cycle_abort_provenance",
+      "constraint_id": "append-cycle-abort",
+      "base_scenario_id": "retry.abort.valid",
+      "expected": "reject",
+      "violation": "conflict_set_foreign_candidate",
+      "mutation": {
+        "target": "failure_evidence",
+        "root": "conflict-set",
+        "candidate_id_hex": "4444444444444444444444444444444444444444444444444444444444444444"
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.append-cycle-abort.rng-draw-foreign-attempt",
+      "kind": "cycle_abort_provenance",
+      "constraint_id": "append-cycle-abort",
+      "base_scenario_id": "retry.abort.valid",
+      "expected": "reject",
+      "violation": "rng_draw_foreign_attempt",
+      "mutation": {
+        "target": "failure_evidence",
+        "root": "rng-draw",
+        "attempt_ordinal": 2
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.append-cycle-abort.affordance-assessment-foreign-subject",
+      "kind": "cycle_abort_provenance",
+      "constraint_id": "append-cycle-abort",
+      "base_scenario_id": "retry.abort.valid",
+      "expected": "reject",
+      "violation": "affordance_assessment_foreign_subject",
+      "mutation": {
+        "target": "failure_evidence",
+        "root": "affordance-assessment",
+        "subject_id_hex": "4545454545454545454545454545454545454545454545454545454545454545"
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.append-cycle-abort.provisional-disposition-foreign-attempt",
+      "kind": "cycle_abort_provenance",
+      "constraint_id": "append-cycle-abort",
+      "base_scenario_id": "retry.abort.valid",
+      "expected": "reject",
+      "violation": "provisional_disposition_foreign_attempt",
+      "mutation": {
+        "target": "failure_evidence",
+        "root": "provisional-disposition",
+        "attempt_ordinal": 2
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.append-cycle-abort.attempt-failure-foreign-attempt",
+      "kind": "cycle_abort_provenance",
+      "constraint_id": "append-cycle-abort",
+      "base_scenario_id": "retry.abort.valid",
+      "expected": "reject",
+      "violation": "attempt_failure_foreign_attempt",
+      "mutation": {
+        "target": "failure_evidence",
+        "root": "attempt-failure",
+        "attempt_ordinal": 2
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-state.world-state.reducer-result-mismatch",
+      "kind": "linked_state_constraint",
+      "model_id": "world-state-transition-v1",
+      "base_scenario_id": "epistemic.commit-batch.valid",
+      "expected": "reject",
+      "violation": "world_reducer_result_mismatch",
+      "mutation": {
+        "op": "replace-result-state",
+        "result_state_cbor_hex": "8474636f74652e6373662e746573742e7363616c61720158338644435346000174636f74652e6373662e746573742e7363616c617274636f74652e6373662e746573742e7363616c617201025820aeb1ce97e1dd2f64e4fe268251e2e2ae4d609d27b88ced7ed1104aa8d869e6bd",
+        "recompute": [
+          "world-state-transition.result-state-hash",
+          "cycle-commit.result-state-hash",
+          "cycle-commit.batch-digest"
+        ]
+      },
+      "invalid_error_code": "LINKED_STATE_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-state.logical-sequence.cursor-anchor-mismatch",
+      "kind": "linked_state_constraint",
+      "model_id": "logical-sequence-transition-v1",
+      "base_scenario_id": "epistemic.commit-batch.empty.valid",
+      "expected": "reject",
+      "violation": "logical_cursor_anchor_mismatch",
+      "durable_cursor": 2,
+      "witness_before": 200,
+      "witness_after": 200,
+      "commit_next": 200,
+      "event_count": 0,
+      "invalid_error_code": "LINKED_STATE_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.append-observation.observation-after-completion",
+      "kind": "linked_record_constraint",
+      "constraint_id": "append-observation",
+      "input_scenario_id": "epistemic.observation.after-completion.invalid",
+      "expected": "reject",
+      "violation": "observation_after_completion",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.append-knowledge-input.knowledge-input-after-completion",
+      "kind": "linked_record_constraint",
+      "constraint_id": "append-knowledge-input",
+      "input_scenario_id": "epistemic.knowledge-input.after-completion.invalid",
+      "expected": "reject",
+      "violation": "knowledge_input_after_completion",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.append-observation.resolver-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "append-observation",
+      "base_scenario_id": "epistemic.observation.valid",
+      "expected": "reject",
+      "violation": "observation_resolver_mismatch",
+      "mutation": {
+        "op": "replace_record",
+        "record_role": "observation",
+        "record_cbor_hex": "8f582076277fe1ef0c1577b3939a6e5d1c82e897905a5a345a263ce2e5ea99e4791d355820a5eeb4dc41869ba9c11c5c532c7f45cab52a93452ba8b39265088bf5a6eeeedc82667363686f6f6c676163746f722d310000008182582021931c3a696e0b797426aa51d06efab3977ab5117b72adf39b7baac1049fcdc958208487699312544c90150af58a20d2872b6e9f625d818de022aa7c1578f4415b26008100818473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f69218080818300582000000000000000000000000000000000000000000000000000000000000000005820000000000000000000000000000000000000000000000000000000000000000083716f746865722d7265736f6c7665722d76310158200bfa1fecc327a3d893a434dd88d03f1aafe6c0dd137ff1ac0a3a8f969b9767255820081af6d095cc384f7215a03b10d107232d028fd9422f75465489d09b9bd40055"
+      },
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.publish-cycle-commit-batch.task-perception-identity-policy-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "publish-cycle-commit-batch",
+      "input_scenario_id": "epistemic.commit-batch.task-perception-identity-policy-mismatch.invalid",
+      "expected": "reject",
+      "violation": "task_perception_identity_policy_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
     }
   ],
   "linked_record_scenarios": [
@@ -5274,6 +5568,7 @@
       },
       "transaction_candidates": {
         "decision_ledger": [
+          "candidate",
           "decision",
           "cycle-commit"
         ],
@@ -5297,29 +5592,34 @@
           "record_cbor_hex": "9258200101010101010101010101010101010101010101010101010101010101010101582002020202020202020202020202020202020202020202020202020202020202020181001903e80781000a5820d7b82435eecf3ddfa01672ad39db6b7d9fa988056c07966759e1fe733835542a80825820ee2c278e20755b2753b486b2e91b084f9e83ad55c9b5211fff41674856e66e00818258200303030303030303030303030303030303030303030303030303030303030303818266736c6f742d3183055820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa6188185821903e807006c726f756e642d736f757263655820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa61858207bbd34e8d24d6cba41f2f3828333e3d3bc66ac29a91bfc91381c9f597e20ade1837261646d697373696f6e2d6f726465722d76310158209dd6f8c64227518930ec5e080aa75b5295c6f86d94e06e73e5f56b0b010212c1837263617573616c2d6964656e746974792d7631015820264017e78ea1342b0ed6060875273d4c1e2b52552e727ae4734ea6b48a0b92fc837261646d697373696f6e2d66656e63652d7631015820d43509a77b21058e3d557f84e81d9a820c027930d3e1b05e84f0c47179dee203818373666f756e646174696f6e2d72756c65732d7631015820843dad4eb34489ed84bec4e72a275fa26431298b15f788d717a369d21f312943582087ab6f081a0b55c1a9397339947f17b638c36870239012769472fa4f40472f0d"
         },
         {
+          "role": "candidate",
+          "schema_id": "cote.csf.schema.commit-candidate",
+          "record_cbor_hex": "9158206b714be4c49bd456eed888c19d3a51ebbf784bfc019b5e710a0e1cdaa4099c655820010101010101010101010101010101010101010101010101010101010101010158200202020202020202020202020202020202020202020202020202020202020202815820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe6a70726f64756365722d3101000082850000676576656e742d308474636f74652e6373662e746573742e7363616c61720158338644435346000174636f74652e6373662e746573742e7363616c617274636f74652e6373662e746573742e7363616c6172010158204dd0986310b076c5d344d0f45b617c68a1f49998e0a9fecc9ce9bf068ad2078880850001676576656e742d318474636f74652e6373662e746573742e7363616c61720158338644435346000174636f74652e6373662e746573742e7363616c617274636f74652e6373662e746573742e7363616c6172010158204dd0986310b076c5d344d0f45b617c68a1f49998e0a9fecc9ce9bf068ad2078880808080808183055820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa618008374636f6e666c6963742d7265736f6c7665722d763101582031a0bb782136a3ec9e29d7a102fd315ab441e5996b6d535335be7bb9865a02fb5820d41a54263afeaf2b7bf3512d6f7d6f6190cafdb7f0ca7e6b6b974972ac2d44f9"
+        },
+        {
           "role": "decision",
           "schema_id": "cote.csf.schema.decision-record",
-          "record_cbor_hex": "905820ce1bde0db1d87d32911099bab66a33234e6cf773724228fb6e77474d101606f55820010101010101010101010101010101010101010101010101010101010101010158200202020202020202020202020202020202020202020202020202020202020202018400005820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa618018201582005050505050505050505050505050505050505050505050505050505050505056672656a6563748083726465636973696f6e2d706f6c6963792d7631015820590bee1e0e624aed01288a51e2fe312f5f617f65dcc88c47a53f0fc7d55d016d8374636f6e666c6963742d7265736f6c7665722d763101582031a0bb782136a3ec9e29d7a102fd315ab441e5996b6d535335be7bb9865a02fb8082582097accda99176ef177b5b1e883adb5e18234813bffc5d8bb4218444f5eafcfb8b5820ae93059591945b403e63cb60a2a5fc2931ae0ccb60ea0e336058226c47134bed8100810058207fb11fe657b8f1de995701c5fca33d8af08491a2d86758c64245053592c35d44"
+          "record_cbor_hex": "905820ce1bde0db1d87d32911099bab66a33234e6cf773724228fb6e77474d101606f55820010101010101010101010101010101010101010101010101010101010101010158200202020202020202020202020202020202020202020202020202020202020202018400005820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa61801820158206b714be4c49bd456eed888c19d3a51ebbf784bfc019b5e710a0e1cdaa4099c656672656a6563748083726465636973696f6e2d706f6c6963792d7631015820590bee1e0e624aed01288a51e2fe312f5f617f65dcc88c47a53f0fc7d55d016d8374636f6e666c6963742d7265736f6c7665722d763101582031a0bb782136a3ec9e29d7a102fd315ab441e5996b6d535335be7bb9865a02fb80825820d63e65646925928d337f4a2a609f22099a109681292c0e5843de8c809a019fb6582016d55bb75c272ed73bf38735fd8a53b92f8ae56f830d64b8c32bc2cd822709698100810058201f9913cc19e15e59e4863c5913e622a6c62ed0f4e35c2e1370cea2161640edc3"
         },
         {
           "role": "cycle-commit",
           "schema_id": "cote.csf.schema.cycle-commit",
-          "record_cbor_hex": "98185820010101010101010101010101010101010101010101010101010101010101010158200202020202020202020202020202020202020202020202020202020202020202011903e80781000a5820d7b82435eecf3ddfa01672ad39db6b7d9fa988056c07966759e1fe733835542a0b58200d6cbb441397ef8ecfa6e9ae62f6572838e2acc0493c61fa64d5a22b3e188c17582087ab6f081a0b55c1a9397339947f17b638c36870239012769472fa4f40472f0d815820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58207bbd34e8d24d6cba41f2f3828333e3d3bc66ac29a91bfc91381c9f597e20ade183736379636c652d636f6f7264696e6174652d76310158200bac988281bc2b0c4af79adfc9dbd238395ffee5b8ab8758eedc89a75bcd6a6c836e6576656e742d6f726465722d763101582073cabefb2d6bd144bd110f285e5aaa1e6d10dba1708991a4acbe0db7edad1e7782582097accda99176ef177b5b1e883adb5e18234813bffc5d8bb4218444f5eafcfb8b5820ae93059591945b403e63cb60a2a5fc2931ae0ccb60ea0e336058226c47134bed815820ce1bde0db1d87d32911099bab66a33234e6cf773724228fb6e77474d101606f55820a30fb91e669e081bd5576ebba2d0ebb5bbee022891bb9280f0363a509a90c5038158209b0c074b748eaf9fd8bc81aa4711e1226e3d7411ad8ce394549ea7db7936fd755820f403c23ceed1a46d95fca499c3cb57b6f8ca30c3fca100bf77811f161361448d83781b70657263657074696f6e2d76697369626c652d66697273742d76310158201377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e9837670657263657074696f6e2d6964656e746974792d763101582021851cfddca384b6a40cea7af8c1d09a6eba152a91292249c5d97e9ff3496c37025820e8e6192e69b35062b5dd0c9c16f132c15ecb8ff1363a93785fb1bf683d900838"
+          "record_cbor_hex": "98185820010101010101010101010101010101010101010101010101010101010101010158200202020202020202020202020202020202020202020202020202020202020202011903e80781000a5820d7b82435eecf3ddfa01672ad39db6b7d9fa988056c07966759e1fe733835542a0b58200d6cbb441397ef8ecfa6e9ae62f6572838e2acc0493c61fa64d5a22b3e188c17582087ab6f081a0b55c1a9397339947f17b638c36870239012769472fa4f40472f0d815820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58207bbd34e8d24d6cba41f2f3828333e3d3bc66ac29a91bfc91381c9f597e20ade183736379636c652d636f6f7264696e6174652d76310158200bac988281bc2b0c4af79adfc9dbd238395ffee5b8ab8758eedc89a75bcd6a6c836e6576656e742d6f726465722d763101582073cabefb2d6bd144bd110f285e5aaa1e6d10dba1708991a4acbe0db7edad1e77825820d63e65646925928d337f4a2a609f22099a109681292c0e5843de8c809a019fb6582016d55bb75c272ed73bf38735fd8a53b92f8ae56f830d64b8c32bc2cd82270969815820ce1bde0db1d87d32911099bab66a33234e6cf773724228fb6e77474d101606f5582088558a64cb65e8c92c29b83eb7b2b974751badc7bc94cfcb40b19be4d3a511b0815820b37180ed179111bcaf98fc037a15afade370df7fe5fdd7c39fe8192cc9ff17545820a22137ed0d0f919ec300199441e937bb3a4096cc85bb55ef302987304553999e83781b70657263657074696f6e2d76697369626c652d66697273742d76310158201377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e9837670657263657074696f6e2d6964656e746974792d763101582021851cfddca384b6a40cea7af8c1d09a6eba152a91292249c5d97e9ff3496c3702582087556e29fcdb30efd8042c2a475683a3092d9e9bc7b5b9d052a0f6bfb84d92f0"
         },
         {
           "role": "event-0",
           "schema_id": "cote.csf.schema.event",
-          "record_cbor_hex": "93582097accda99176ef177b5b1e883adb5e18234813bffc5d8bb4218444f5eafcfb8b5820010101010101010101010101010101010101010101010101010101010101010186005820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe6a70726f64756365722d31010000676576656e742d30011903e800582002020202020202020202020202020202020202020202020202020202020202020a8474636f74652e6373662e746573742e7363616c61720158338644435346000174636f74652e6373662e746573742e7363616c617274636f74652e6373662e746573742e7363616c6172010158204dd0986310b076c5d344d0f45b617c68a1f49998e0a9fecc9ce9bf068ad2078880818400005820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa6188182667363686f6f6c676163746f722d31818300667363686f6f6c68656e746974792d308100006a70726f64756365722d31015820cd0a8cbd14015eacbbcd9dfd80417073d1f830b803a92691c150e361354ec6a3"
+          "record_cbor_hex": "935820d63e65646925928d337f4a2a609f22099a109681292c0e5843de8c809a019fb658200101010101010101010101010101010101010101010101010101010101010101860058206b714be4c49bd456eed888c19d3a51ebbf784bfc019b5e710a0e1cdaa4099c656a70726f64756365722d31010000676576656e742d30011903e800582002020202020202020202020202020202020202020202020202020202020202020a8474636f74652e6373662e746573742e7363616c61720158338644435346000174636f74652e6373662e746573742e7363616c617274636f74652e6373662e746573742e7363616c6172010158204dd0986310b076c5d344d0f45b617c68a1f49998e0a9fecc9ce9bf068ad2078880818400005820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa6188182667363686f6f6c676163746f722d31818300667363686f6f6c68656e746974792d308100006a70726f64756365722d3101582074a38289f6004ca5aaac748b2fe4a7886ade2fe567942bbc6eb625270cb7a591"
         },
         {
           "role": "event-1",
           "schema_id": "cote.csf.schema.event",
-          "record_cbor_hex": "935820ae93059591945b403e63cb60a2a5fc2931ae0ccb60ea0e336058226c47134bed5820010101010101010101010101010101010101010101010101010101010101010186005820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe6a70726f64756365722d31010101676576656e742d31011903e801582002020202020202020202020202020202020202020202020202020202020202020a8474636f74652e6373662e746573742e7363616c61720158338644435346000174636f74652e6373662e746573742e7363616c617274636f74652e6373662e746573742e7363616c6172010158204dd0986310b076c5d344d0f45b617c68a1f49998e0a9fecc9ce9bf068ad2078880818400005820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa6188182667363686f6f6c676163746f722d31818300667363686f6f6c68656e746974792d318100006a70726f64756365722d3101582029df05cb3505e7dcb75ea940ca3805bb3b5017f349abaf291f4b6c8cf0327052"
+          "record_cbor_hex": "93582016d55bb75c272ed73bf38735fd8a53b92f8ae56f830d64b8c32bc2cd8227096958200101010101010101010101010101010101010101010101010101010101010101860058206b714be4c49bd456eed888c19d3a51ebbf784bfc019b5e710a0e1cdaa4099c656a70726f64756365722d31010101676576656e742d31011903e801582002020202020202020202020202020202020202020202020202020202020202020a8474636f74652e6373662e746573742e7363616c61720158338644435346000174636f74652e6373662e746573742e7363616c617274636f74652e6373662e746573742e7363616c6172010158204dd0986310b076c5d344d0f45b617c68a1f49998e0a9fecc9ce9bf068ad2078880818400005820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa6188182667363686f6f6c676163746f722d31818300667363686f6f6c68656e746974792d318100006a70726f64756365722d31015820fe5a647ab9cb014a07f7c283711b25ee7789704b8412d9f771c679c4364be4a6"
         },
         {
           "role": "task-0",
           "schema_id": "cote.csf.schema.perception-task",
-          "record_cbor_hex": "8a58209b0c074b748eaf9fd8bc81aa4711e1226e3d7411ad8ce394549ea7db7936fd755820010101010101010101010101010101010101010101010101010101010101010158200202020202020202020202020202020202020202020202020202020202020202582097accda99176ef177b5b1e883adb5e18234813bffc5d8bb4218444f5eafcfb8b0a0b83781b70657263657074696f6e2d76697369626c652d66697273742d76310158201377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e9837670657263657074696f6e2d7265736f6c7665722d7631015820521a3b67c1c22a3335a36b5877c52d7ffa7e573797684eb71b7c1a2036a3aa38837670657263657074696f6e2d6964656e746974792d763101582021851cfddca384b6a40cea7af8c1d09a6eba152a91292249c5d97e9ff3496c3700"
+          "record_cbor_hex": "8a5820b37180ed179111bcaf98fc037a15afade370df7fe5fdd7c39fe8192cc9ff175458200101010101010101010101010101010101010101010101010101010101010101582002020202020202020202020202020202020202020202020202020202020202025820d63e65646925928d337f4a2a609f22099a109681292c0e5843de8c809a019fb60a0b83781b70657263657074696f6e2d76697369626c652d66697273742d76310158201377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e9837670657263657074696f6e2d7265736f6c7665722d7631015820521a3b67c1c22a3335a36b5877c52d7ffa7e573797684eb71b7c1a2036a3aa38837670657263657074696f6e2d6964656e746974792d763101582021851cfddca384b6a40cea7af8c1d09a6eba152a91292249c5d97e9ff3496c3700"
         }
       ],
       "transition_witnesses": [
@@ -5341,7 +5641,7 @@
         {
           "role": "perception-classification",
           "cddl_type": "perception-classification",
-          "witness_cbor_hex": "8283781b70657263657074696f6e2d76697369626c652d66697273742d76310158201377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e98283582097accda99176ef177b5b1e883adb5e18234813bffc5d8bb4218444f5eafcfb8b5820cd0a8cbd14015eacbbcd9dfd80417073d1f830b803a92691c150e361354ec6a3f5835820ae93059591945b403e63cb60a2a5fc2931ae0ccb60ea0e336058226c47134bed582029df05cb3505e7dcb75ea940ca3805bb3b5017f349abaf291f4b6c8cf0327052f4"
+          "witness_cbor_hex": "8283781b70657263657074696f6e2d76697369626c652d66697273742d76310158201377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e982835820d63e65646925928d337f4a2a609f22099a109681292c0e5843de8c809a019fb6582074a38289f6004ca5aaac748b2fe4a7886ade2fe567942bbc6eb625270cb7a591f583582016d55bb75c272ed73bf38735fd8a53b92f8ae56f830d64b8c32bc2cd822709695820fe5a647ab9cb014a07f7c283711b25ee7789704b8412d9f771c679c4364be4a6f4"
         }
       ]
     },
@@ -5349,6 +5649,7 @@
       "scenario_id": "epistemic.commit-batch.empty.valid",
       "pre_append_cursor": {
         "decision_ledger": [
+          "logical-cursor-anchor",
           "fence"
         ],
         "event_store": [],
@@ -5362,6 +5663,11 @@
         "causal_outbox": []
       },
       "records": [
+        {
+          "role": "logical-cursor-anchor",
+          "schema_id": "cote.csf.schema.cycle-commit",
+          "record_cbor_hex": "98185820010101010101010101010101010101010101010101010101010101010101010158200909090909090909090909090909090909090909090909090909090909090909011903e7068100095820d7b82435eecf3ddfa01672ad39db6b7d9fa988056c07966759e1fe733835542a0a5820d7b82435eecf3ddfa01672ad39db6b7d9fa988056c07966759e1fe733835542a5820090909090909090909090909090909090909090909090909090909090909090980582062e5939148a0f3d9b029346924b1b3080f36d85c40ba8ab330a90283e7eeec8383736379636c652d636f6f7264696e6174652d76310158200bac988281bc2b0c4af79adfc9dbd238395ffee5b8ab8758eedc89a75bcd6a6c836e6576656e742d6f726465722d763101582073cabefb2d6bd144bd110f285e5aaa1e6d10dba1708991a4acbe0db7edad1e7780805820efa5b430fc0c81b67ae49a55762bd1bb785155d53d760d504ad6c30a4f99b960805820f31c028d33e827304c0b0864daed1f3a9d92455cf1c398fb0d9b8f77230e36c183781b70657263657074696f6e2d76697369626c652d66697273742d76310158201377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e9837670657263657074696f6e2d6964656e746974792d763101582021851cfddca384b6a40cea7af8c1d09a6eba152a91292249c5d97e9ff3496c370258202577ed171a15a9aef6d1f45684090f9a7e6c3f27886cb452b5ecc9a075ec33e2"
+        },
         {
           "role": "fence",
           "schema_id": "cote.csf.schema.admission-fence",
@@ -8305,6 +8611,166 @@
           "role": "perception-classification",
           "cddl_type": "perception-classification",
           "witness_cbor_hex": "8283781b70657263657074696f6e2d76697369626c652d66697273742d76310158201377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e98283582097accda99176ef177b5b1e883adb5e18234813bffc5d8bb4218444f5eafcfb8b5820cd0a8cbd14015eacbbcd9dfd80417073d1f830b803a92691c150e361354ec6a3f5835820ae93059591945b403e63cb60a2a5fc2931ae0ccb60ea0e336058226c47134bed582029df05cb3505e7dcb75ea940ca3805bb3b5017f349abaf291f4b6c8cf0327052f4"
+        }
+      ]
+    },
+    {
+      "scenario_id": "epistemic.observation.after-completion.invalid",
+      "pre_append_cursor": {
+        "event_store": [
+          "event"
+        ],
+        "causal_outbox": [
+          "task",
+          "completion"
+        ],
+        "evidence_ledger": []
+      },
+      "records": [
+        {
+          "role": "event",
+          "schema_id": "cote.csf.schema.event",
+          "record_cbor_hex": "93582021931c3a696e0b797426aa51d06efab3977ab5117b72adf39b7baac1049fcdc9582001010101010101010101010101010101010101010101010101010101010101018600582000000000000000000000000000000000000000000000000000000000000000006a70726f64756365722d31010000676576656e742d3101000058200000000000000000000000000000000000000000000000000000000000000000008473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180808182667363686f6f6c676163746f722d31818300667363686f6f6c68656e746974792d31820182667363686f6f6c66726f6f6d2d31006a70726f64756365722d310158208487699312544c90150af58a20d2872b6e9f625d818de022aa7c1578f4415b26"
+        },
+        {
+          "role": "task",
+          "schema_id": "cote.csf.schema.perception-task",
+          "record_cbor_hex": "8a5820a5eeb4dc41869ba9c11c5c532c7f45cab52a93452ba8b39265088bf5a6eeeedc5820010101010101010101010101010101010101010101010101010101010101010158200000000000000000000000000000000000000000000000000000000000000000582021931c3a696e0b797426aa51d06efab3977ab5117b72adf39b7baac1049fcdc900018368706f6c6963792d3101582000000000000000000000000000000000000000000000000000000000000000008368706f6c6963792d3101582000000000000000000000000000000000000000000000000000000000000000008368706f6c6963792d31015820000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "role": "observation",
+          "schema_id": "cote.csf.schema.observation",
+          "record_cbor_hex": "8f582076277fe1ef0c1577b3939a6e5d1c82e897905a5a345a263ce2e5ea99e4791d355820a5eeb4dc41869ba9c11c5c532c7f45cab52a93452ba8b39265088bf5a6eeeedc82667363686f6f6c676163746f722d310000008182582021931c3a696e0b797426aa51d06efab3977ab5117b72adf39b7baac1049fcdc958208487699312544c90150af58a20d2872b6e9f625d818de022aa7c1578f4415b26008100818473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f6921808081830058200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000008368706f6c6963792d31015820000000000000000000000000000000000000000000000000000000000000000058208fcb36b0c858b0487b713835538a83b5b9227fbcc8ec01b6d65af59893c01242"
+        },
+        {
+          "role": "completion",
+          "schema_id": "cote.csf.schema.perception-task-completion",
+          "record_cbor_hex": "855820dcb067359642814c9ae6254d4c8bc08f43441152283d48e08e50618e3fafb4ce5820a5eeb4dc41869ba9c11c5c532c7f45cab52a93452ba8b39265088bf5a6eeeedc808058206ab6dcc3c39ef27893a421173f8d1bb6e278b2b5a39f58a7adddd218c50cac69"
+        }
+      ]
+    },
+    {
+      "scenario_id": "epistemic.knowledge-input.after-completion.invalid",
+      "pre_append_cursor": {
+        "causal_outbox": [
+          "task",
+          "completion"
+        ],
+        "evidence_ledger": [
+          "observation"
+        ]
+      },
+      "records": [
+        {
+          "role": "task",
+          "schema_id": "cote.csf.schema.perception-task",
+          "record_cbor_hex": "8a5820a5eeb4dc41869ba9c11c5c532c7f45cab52a93452ba8b39265088bf5a6eeeedc5820010101010101010101010101010101010101010101010101010101010101010158200000000000000000000000000000000000000000000000000000000000000000582021931c3a696e0b797426aa51d06efab3977ab5117b72adf39b7baac1049fcdc900018368706f6c6963792d3101582000000000000000000000000000000000000000000000000000000000000000008368706f6c6963792d3101582000000000000000000000000000000000000000000000000000000000000000008368706f6c6963792d31015820000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "role": "observation",
+          "schema_id": "cote.csf.schema.observation",
+          "record_cbor_hex": "8f582076277fe1ef0c1577b3939a6e5d1c82e897905a5a345a263ce2e5ea99e4791d355820a5eeb4dc41869ba9c11c5c532c7f45cab52a93452ba8b39265088bf5a6eeeedc82667363686f6f6c676163746f722d310000008182582021931c3a696e0b797426aa51d06efab3977ab5117b72adf39b7baac1049fcdc958208487699312544c90150af58a20d2872b6e9f625d818de022aa7c1578f4415b26008100818473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f6921808081830058200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000008368706f6c6963792d31015820000000000000000000000000000000000000000000000000000000000000000058208fcb36b0c858b0487b713835538a83b5b9227fbcc8ec01b6d65af59893c01242"
+        },
+        {
+          "role": "knowledge-input",
+          "schema_id": "cote.csf.schema.knowledge-input",
+          "record_cbor_hex": "8b5820bfa2b6decd462ed5bae11a62bbddc071a78fcae3b443474adcb1770778083168000082667363686f6f6c676163746f722d310000667370656563688310582076277fe1ef0c1577b3939a6e5d1c82e897905a5a345a263ce2e5ea99e4791d3558208fcb36b0c858b0487b713835538a83b5b9227fbcc8ec01b6d65af59893c0124280818300582000000000000000000000000000000000000000000000000000000000000000005820000000000000000000000000000000000000000000000000000000000000000058208a4ecd0926ff9cca2528b8a7b3f7f56f6bc0640b268796eb038108de970bf394"
+        },
+        {
+          "role": "completion",
+          "schema_id": "cote.csf.schema.perception-task-completion",
+          "record_cbor_hex": "855820dcb067359642814c9ae6254d4c8bc08f43441152283d48e08e50618e3fafb4ce5820a5eeb4dc41869ba9c11c5c532c7f45cab52a93452ba8b39265088bf5a6eeeedc81582076277fe1ef0c1577b3939a6e5d1c82e897905a5a345a263ce2e5ea99e4791d35805820037b878b184ea9daaeaa348de74cf56935c4e9d31da7acc5245655975ea0de34"
+        }
+      ]
+    },
+    {
+      "scenario_id": "epistemic.commit-batch.task-perception-identity-policy-mismatch.invalid",
+      "pre_append_cursor": {
+        "input_ledger": [
+          "source-unit"
+        ],
+        "decision_ledger": [
+          "fence"
+        ],
+        "event_store": [],
+        "causal_outbox": []
+      },
+      "transaction_candidates": {
+        "decision_ledger": [
+          "candidate",
+          "decision",
+          "cycle-commit"
+        ],
+        "event_store": [
+          "event-0",
+          "event-1"
+        ],
+        "causal_outbox": [
+          "task-0"
+        ]
+      },
+      "records": [
+        {
+          "role": "source-unit",
+          "schema_id": "cote.csf.schema.action-proposal",
+          "record_cbor_hex": "935820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58200404040404040404040404040404040404040404040404040404040404040404582001010101010101010101010101010101010101010101010101010101010101015820020202020202020202020202020202020202020202020202020202020202020268616374696f6e2d310182667363686f6f6c676163746f722d31808473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f69218081001903e881005820030303030303030303030303030303030303030303030303030303030303030366736c6f742d310a8100810058205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa618"
+        },
+        {
+          "role": "fence",
+          "schema_id": "cote.csf.schema.admission-fence",
+          "record_cbor_hex": "9258200101010101010101010101010101010101010101010101010101010101010101582002020202020202020202020202020202020202020202020202020202020202020181001903e80781000a5820d7b82435eecf3ddfa01672ad39db6b7d9fa988056c07966759e1fe733835542a80825820ee2c278e20755b2753b486b2e91b084f9e83ad55c9b5211fff41674856e66e00818258200303030303030303030303030303030303030303030303030303030303030303818266736c6f742d3183055820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa6188185821903e807006c726f756e642d736f757263655820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa61858207bbd34e8d24d6cba41f2f3828333e3d3bc66ac29a91bfc91381c9f597e20ade1837261646d697373696f6e2d6f726465722d76310158209dd6f8c64227518930ec5e080aa75b5295c6f86d94e06e73e5f56b0b010212c1837263617573616c2d6964656e746974792d7631015820264017e78ea1342b0ed6060875273d4c1e2b52552e727ae4734ea6b48a0b92fc837261646d697373696f6e2d66656e63652d7631015820d43509a77b21058e3d557f84e81d9a820c027930d3e1b05e84f0c47179dee203818373666f756e646174696f6e2d72756c65732d7631015820843dad4eb34489ed84bec4e72a275fa26431298b15f788d717a369d21f312943582087ab6f081a0b55c1a9397339947f17b638c36870239012769472fa4f40472f0d"
+        },
+        {
+          "role": "candidate",
+          "schema_id": "cote.csf.schema.commit-candidate",
+          "record_cbor_hex": "9158206b714be4c49bd456eed888c19d3a51ebbf784bfc019b5e710a0e1cdaa4099c655820010101010101010101010101010101010101010101010101010101010101010158200202020202020202020202020202020202020202020202020202020202020202815820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe6a70726f64756365722d3101000082850000676576656e742d308474636f74652e6373662e746573742e7363616c61720158338644435346000174636f74652e6373662e746573742e7363616c617274636f74652e6373662e746573742e7363616c6172010158204dd0986310b076c5d344d0f45b617c68a1f49998e0a9fecc9ce9bf068ad2078880850001676576656e742d318474636f74652e6373662e746573742e7363616c61720158338644435346000174636f74652e6373662e746573742e7363616c617274636f74652e6373662e746573742e7363616c6172010158204dd0986310b076c5d344d0f45b617c68a1f49998e0a9fecc9ce9bf068ad2078880808080808183055820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa618008374636f6e666c6963742d7265736f6c7665722d763101582031a0bb782136a3ec9e29d7a102fd315ab441e5996b6d535335be7bb9865a02fb5820d41a54263afeaf2b7bf3512d6f7d6f6190cafdb7f0ca7e6b6b974972ac2d44f9"
+        },
+        {
+          "role": "decision",
+          "schema_id": "cote.csf.schema.decision-record",
+          "record_cbor_hex": "905820ce1bde0db1d87d32911099bab66a33234e6cf773724228fb6e77474d101606f55820010101010101010101010101010101010101010101010101010101010101010158200202020202020202020202020202020202020202020202020202020202020202018400005820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa61801820158206b714be4c49bd456eed888c19d3a51ebbf784bfc019b5e710a0e1cdaa4099c656672656a6563748083726465636973696f6e2d706f6c6963792d7631015820590bee1e0e624aed01288a51e2fe312f5f617f65dcc88c47a53f0fc7d55d016d8374636f6e666c6963742d7265736f6c7665722d763101582031a0bb782136a3ec9e29d7a102fd315ab441e5996b6d535335be7bb9865a02fb80825820d63e65646925928d337f4a2a609f22099a109681292c0e5843de8c809a019fb6582016d55bb75c272ed73bf38735fd8a53b92f8ae56f830d64b8c32bc2cd822709698100810058201f9913cc19e15e59e4863c5913e622a6c62ed0f4e35c2e1370cea2161640edc3"
+        },
+        {
+          "role": "cycle-commit",
+          "schema_id": "cote.csf.schema.cycle-commit",
+          "record_cbor_hex": "98185820010101010101010101010101010101010101010101010101010101010101010158200202020202020202020202020202020202020202020202020202020202020202011903e80781000a5820d7b82435eecf3ddfa01672ad39db6b7d9fa988056c07966759e1fe733835542a0b58200d6cbb441397ef8ecfa6e9ae62f6572838e2acc0493c61fa64d5a22b3e188c17582087ab6f081a0b55c1a9397339947f17b638c36870239012769472fa4f40472f0d815820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58207bbd34e8d24d6cba41f2f3828333e3d3bc66ac29a91bfc91381c9f597e20ade183736379636c652d636f6f7264696e6174652d76310158200bac988281bc2b0c4af79adfc9dbd238395ffee5b8ab8758eedc89a75bcd6a6c836e6576656e742d6f726465722d763101582073cabefb2d6bd144bd110f285e5aaa1e6d10dba1708991a4acbe0db7edad1e77825820d63e65646925928d337f4a2a609f22099a109681292c0e5843de8c809a019fb6582016d55bb75c272ed73bf38735fd8a53b92f8ae56f830d64b8c32bc2cd82270969815820ce1bde0db1d87d32911099bab66a33234e6cf773724228fb6e77474d101606f5582088558a64cb65e8c92c29b83eb7b2b974751badc7bc94cfcb40b19be4d3a511b0815820dd317ea67602753ce3d3e48df724d0f31e9e39f8ffbe2c1c0c8543e58e3a62a85820b992ecd1735a8de017ebba981df02b01dbf4aec1436670d10f0a1cc6b1001bed83781b70657263657074696f6e2d76697369626c652d66697273742d76310158201377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e9837670657263657074696f6e2d6964656e746974792d763101582021851cfddca384b6a40cea7af8c1d09a6eba152a91292249c5d97e9ff3496c370258203ebb8abd194fe80f3ca55a57b12db5e6dea531e4b4887f9420d4a363dd32badb"
+        },
+        {
+          "role": "event-0",
+          "schema_id": "cote.csf.schema.event",
+          "record_cbor_hex": "935820d63e65646925928d337f4a2a609f22099a109681292c0e5843de8c809a019fb658200101010101010101010101010101010101010101010101010101010101010101860058206b714be4c49bd456eed888c19d3a51ebbf784bfc019b5e710a0e1cdaa4099c656a70726f64756365722d31010000676576656e742d30011903e800582002020202020202020202020202020202020202020202020202020202020202020a8474636f74652e6373662e746573742e7363616c61720158338644435346000174636f74652e6373662e746573742e7363616c617274636f74652e6373662e746573742e7363616c6172010158204dd0986310b076c5d344d0f45b617c68a1f49998e0a9fecc9ce9bf068ad2078880818400005820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa6188182667363686f6f6c676163746f722d31818300667363686f6f6c68656e746974792d308100006a70726f64756365722d3101582074a38289f6004ca5aaac748b2fe4a7886ade2fe567942bbc6eb625270cb7a591"
+        },
+        {
+          "role": "event-1",
+          "schema_id": "cote.csf.schema.event",
+          "record_cbor_hex": "93582016d55bb75c272ed73bf38735fd8a53b92f8ae56f830d64b8c32bc2cd8227096958200101010101010101010101010101010101010101010101010101010101010101860058206b714be4c49bd456eed888c19d3a51ebbf784bfc019b5e710a0e1cdaa4099c656a70726f64756365722d31010101676576656e742d31011903e801582002020202020202020202020202020202020202020202020202020202020202020a8474636f74652e6373662e746573742e7363616c61720158338644435346000174636f74652e6373662e746573742e7363616c617274636f74652e6373662e746573742e7363616c6172010158204dd0986310b076c5d344d0f45b617c68a1f49998e0a9fecc9ce9bf068ad2078880818400005820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa6188182667363686f6f6c676163746f722d31818300667363686f6f6c68656e746974792d318100006a70726f64756365722d31015820fe5a647ab9cb014a07f7c283711b25ee7789704b8412d9f771c679c4364be4a6"
+        },
+        {
+          "role": "task-0",
+          "schema_id": "cote.csf.schema.perception-task",
+          "record_cbor_hex": "8a5820dd317ea67602753ce3d3e48df724d0f31e9e39f8ffbe2c1c0c8543e58e3a62a858200101010101010101010101010101010101010101010101010101010101010101582002020202020202020202020202020202020202020202020202020202020202025820d63e65646925928d337f4a2a609f22099a109681292c0e5843de8c809a019fb60a0b83781b70657263657074696f6e2d76697369626c652d66697273742d76310158201377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e9837670657263657074696f6e2d7265736f6c7665722d7631015820521a3b67c1c22a3335a36b5877c52d7ffa7e573797684eb71b7c1a2036a3aa3883781c6f746865722d70657263657074696f6e2d6964656e746974792d7631015820abae0a387794d10b8d15a06a58457ba42cfdc69fac0f290baccf5d68df164cff00"
+        }
+      ],
+      "transition_witnesses": [
+        {
+          "role": "source-consumption",
+          "cddl_type": "source-unit-consumption-transition",
+          "witness_cbor_hex": "87781f636f74652e6373662e736368656d612e616374696f6e2d70726f706f73616c6c696e7075745f6c65646765725820a293b53b90d10294375e55a09f523dd0d3c174b7d060879388d2b8fe958e48fe58205eb8602acd97359dd66497a2740c643ffb319ba9fba9e3de74e9c308fa2fa618f4f5582087ab6f081a0b55c1a9397339947f17b638c36870239012769472fa4f40472f0d"
+        },
+        {
+          "role": "world-state-transition",
+          "cddl_type": "world-state-transition",
+          "witness_cbor_hex": "860a8473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f69215820d7b82435eecf3ddfa01672ad39db6b7d9fa988056c07966759e1fe733835542a0b8474636f74652e6373662e746573742e7363616c61720158338644435346000174636f74652e6373662e746573742e7363616c617274636f74652e6373662e746573742e7363616c6172010158204dd0986310b076c5d344d0f45b617c68a1f49998e0a9fecc9ce9bf068ad2078858200d6cbb441397ef8ecfa6e9ae62f6572838e2acc0493c61fa64d5a22b3e188c17"
+        },
+        {
+          "role": "logical-sequence-transition",
+          "cddl_type": "logical-sequence-transition",
+          "witness_cbor_hex": "820002"
+        },
+        {
+          "role": "perception-classification",
+          "cddl_type": "perception-classification",
+          "witness_cbor_hex": "8283781b70657263657074696f6e2d76697369626c652d66697273742d76310158201377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e982835820d63e65646925928d337f4a2a609f22099a109681292c0e5843de8c809a019fb6582074a38289f6004ca5aaac748b2fe4a7886ade2fe567942bbc6eb625270cb7a591f583582016d55bb75c272ed73bf38735fd8a53b92f8ae56f830d64b8c32bc2cd822709695820fe5a647ab9cb014a07f7c283711b25ee7789704b8412d9f771c679c4364be4a6f4"
         }
       ]
     }

@@ -1662,7 +1662,10 @@ completion_id = derive_id(PERCEPTION_COMPLETION, task_id)
 
 `observation_role`/`input_role` e seus ordinais são saídas nomeadas pelo schema versionado do
 resolver, não posições de iteração. Um resolver pode produzir mais de uma observation para o mesmo
-ator somente com pares papel/ordinal distintos. `Observation` no completion é ordenada por
+ator somente com pares papel/ordinal distintos. Cada `Observation.source_event_refs[]` produzida
+diretamente pela task contém exatamente o `event_id` referenciado por ela; fonte adicional exige
+outra task/evento causal e não pode ser anexada por conveniência do resolver. `Observation` no
+completion é ordenada por
 `(observer_id, observation_role, observation_local_ordinal, observation_id)`; `KnowledgeInput`, por
 `(recipient_id, kind, input_role, input_local_ordinal, knowledge_input_id)`, sempre em bytes
 canônicos. Mesmos componentes com bytes diferentes são colisão/corrupção e falham fechado; workers
@@ -1684,12 +1687,14 @@ ou ruidosas; não são cópia irrestrita do payload secreto. Atenção, interpre
 confiança e inferência ficam para Cognition/Knowledge. Randomness perceptiva, quando existir, usa
 substream nomeado e o resultado fica persistido para replay.
 
-Outbox, `Observation` e `KnowledgeInput` usam ids determinísticos e entrega idempotente. O completion
-só é anexado por compare-and-set depois que todos os `Observation` e `KnowledgeInput` referenciados
-estão duravelmente presentes no evidence ledger; completion vazio é obrigatório quando nenhum
-observador é elegível. Se houver crash durante a entrega, resume relê as tarefas commitadas sem
-completion, reinsere os mesmos ids idempotentemente e só então completa a tarefa. Referência ausente
-ou digest divergente falha fechado.
+Outbox, `Observation` e `KnowledgeInput` usam ids determinísticos e entrega idempotente. Cada
+`KnowledgeInput` projeta somente `claim_refs[]` e `evidence_chain[]` presentes na `Observation`
+resolvida. O completion só é anexado por compare-and-set quando suas listas são exatamente as
+projeções canônicas de todos os `Observation` e `KnowledgeInput` daquela task e todos estão
+duravelmente presentes no evidence ledger; extra, duplicata, omissão ou output de outra task falha
+fechado. Completion vazio é obrigatório quando nenhum output é elegível. Se houver crash durante a
+entrega, resume relê as tarefas commitadas sem completion, reinsere os mesmos ids idempotentemente e
+só então completa a tarefa. Referência ausente ou digest divergente falha fechado.
 
 Um barrier do ciclo consulta a causal outbox durável — nunca uma fila em memória — e impede
 **despachar** a solicitação de um round já declarado para o destinatário enquanto existir tarefa

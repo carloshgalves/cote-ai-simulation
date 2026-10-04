@@ -926,9 +926,9 @@
       "domain_tag": "cote.csf.test.genesis-manifest",
       "schema_id": "cote.csf.schema.genesis-manifest",
       "schema_version": 1,
-      "payload_cbor_hex": "9258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582031ae30ccd572eb1d81ea8c31542fb3bfa1edf40267a14ff6b5b2f1a557c1b98c808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
-      "canonical_hex": "86444353460001781e636f74652e6373662e746573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582031ae30ccd572eb1d81ea8c31542fb3bfa1edf40267a14ff6b5b2f1a557c1b98c808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
-      "sha256": "3923cc5ce977ae37a4dbfe28f06ff0fe9f2720551875d16d5d49bdd198b65d59"
+      "payload_cbor_hex": "9258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582015d48f195a825db0f406188f041f6d3e310d97f05a3b6eb641571513f5871d0f808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
+      "canonical_hex": "86444353460001781e636f74652e6373662e746573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582015d48f195a825db0f406188f041f6d3e310d97f05a3b6eb641571513f5871d0f808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
+      "sha256": "127f39eb37454e8f4ec99d33574dce7c74fa6ddd95102d2c385342ee4b484162"
     },
     {
       "case_id": "root.snapshot.minimal",
@@ -1421,9 +1421,9 @@
       "domain_tag": "cote.csf.digest.genesis-manifest",
       "schema_id": "cote.csf.schema.genesis-manifest",
       "schema_version": 1,
-      "payload_cbor_hex": "9258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582031ae30ccd572eb1d81ea8c31542fb3bfa1edf40267a14ff6b5b2f1a557c1b98c808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
-      "canonical_hex": "864443534600017820636f74652e6373662e6469676573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582031ae30ccd572eb1d81ea8c31542fb3bfa1edf40267a14ff6b5b2f1a557c1b98c808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
-      "sha256": "69e5808378efcd16e20c6b32b26e4034787e91641eb54c21d1776f00d9c54313"
+      "payload_cbor_hex": "9258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582015d48f195a825db0f406188f041f6d3e310d97f05a3b6eb641571513f5871d0f808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
+      "canonical_hex": "864443534600017820636f74652e6373662e6469676573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582015d48f195a825db0f406188f041f6d3e310d97f05a3b6eb641571513f5871d0f808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
+      "sha256": "434edc542bae9253f685eb26f8de6d9fd81b906e98ef5a09a5661b040ef0e92e"
     },
     {
       "case_id": "operation.digest.idempotency",
@@ -3099,9 +3099,9 @@
       "unicode_version": "unicode-15.1.0",
       "normalization_profile_id": "unicode.npss.nfc.15.1.0",
       "codec_policy_hash": "513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203",
-      "schema_bundle_hash": "31ae30ccd572eb1d81ea8c31542fb3bfa1edf40267a14ff6b5b2f1a557c1b98c",
+      "schema_bundle_hash": "15d48f195a825db0f406188f041f6d3e310d97f05a3b6eb641571513f5871d0f",
       "schema_refs_are_scoped_by": "schema_bundle_hash",
-      "genesis_envelope_hex": "86444353460001781e636f74652e6373662e746573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582031ae30ccd572eb1d81ea8c31542fb3bfa1edf40267a14ff6b5b2f1a557c1b98c808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180"
+      "genesis_envelope_hex": "86444353460001781e636f74652e6373662e746573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582015d48f195a825db0f406188f041f6d3e310d97f05a3b6eb641571513f5871d0f808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180"
     },
     {
       "case_id": "admission-fence.admitted-unit-source-mismatch",
@@ -3853,12 +3853,12 @@
       "case_id": "reference.record-to-ref.genesis-manifest",
       "kind": "record_to_reference",
       "persisted_root": "cote.csf.schema.genesis-manifest",
-      "record_envelope_hex": "86444353460001781e636f74652e6373662e746573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582031ae30ccd572eb1d81ea8c31542fb3bfa1edf40267a14ff6b5b2f1a557c1b98c808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
+      "record_envelope_hex": "86444353460001781e636f74652e6373662e746573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582015d48f195a825db0f406188f041f6d3e310d97f05a3b6eb641571513f5871d0f808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
       "id_operation": "cote.csf.id.genesis",
       "id_preimage_envelope_hex": "8644435346000173636f74652e6373662e69642e67656e657369737823636f74652e6373662e736368656d612e67656e657369732d69642d707265696d616765018158200000000000000000000000000000000000000000000000000000000000000000",
       "digest_operation": "cote.csf.digest.genesis-manifest",
-      "digest_preimage_envelope_hex": "864443534600017820636f74652e6373662e6469676573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582031ae30ccd572eb1d81ea8c31542fb3bfa1edf40267a14ff6b5b2f1a557c1b98c808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
-      "expected_causal_ref_cbor_hex": "8315582099f8c067aef2a5d219e01efad7304ac6ebf3ec1ef768f23860fbc349554103fe582069e5808378efcd16e20c6b32b26e4034787e91641eb54c21d1776f00d9c54313"
+      "digest_preimage_envelope_hex": "864443534600017820636f74652e6373662e6469676573742e67656e657369732d6d616e69666573747820636f74652e6373662e736368656d612e67656e657369732d6d616e6966657374019258200000000000000000000000000000000000000000000000000000000000000000582000000000000000000000000000000000000000000000000000000000000000006a417369612f546f6b796f008100781a636f74652e6373662e636f6465632e63626f722d6465742e76310172636f74652e6373662e7368613235362e76316e756e69636f64652d31352e312e3077756e69636f64652e6e7073732e6e66632e31352e312e305820513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203582015d48f195a825db0f406188f041f6d3e310d97f05a3b6eb641571513f5871d0f808168736f757263652d31818368706f6c6963792d310158200000000000000000000000000000000000000000000000000000000000000000818275636f74652e6373662e736368656d612e6576656e74018473636f74652e6373662e746573742e656d7074790158318644435346000173636f74652e6373662e746573742e656d70747973636f74652e6373662e746573742e656d707479018058200bc3b587d236e3fe4e1589042ae822f881d2f4843eb0cd9f0d770355ac7f692180",
+      "expected_causal_ref_cbor_hex": "8315582099f8c067aef2a5d219e01efad7304ac6ebf3ec1ef768f23860fbc349554103fe5820434edc542bae9253f685eb26f8de6d9fd81b906e98ef5a09a5661b040ef0e92e"
     },
     {
       "case_id": "reference.record-to-ref.epistemic-checkpoint-ref",
@@ -3932,6 +3932,7 @@
       "kind": "linked_record_constraint",
       "constraint_id": "attempt-retry-chain",
       "record_template_case_ids": [
+        "root.admission-fence.minimal",
         "root.cycle-abort.minimal",
         "root.attempt-retry.minimal",
         "root.admission-fence.minimal"
@@ -3945,6 +3946,7 @@
       "kind": "linked_record_constraint",
       "constraint_id": "attempt-retry-chain",
       "record_template_case_ids": [
+        "root.admission-fence.minimal",
         "root.cycle-abort.minimal",
         "root.attempt-retry.minimal",
         "root.admission-fence.minimal"
@@ -3958,6 +3960,7 @@
       "kind": "linked_record_constraint",
       "constraint_id": "attempt-retry-chain",
       "record_template_case_ids": [
+        "root.admission-fence.minimal",
         "root.cycle-abort.minimal",
         "root.attempt-retry.minimal",
         "root.admission-fence.minimal"
@@ -3971,6 +3974,7 @@
       "kind": "linked_record_constraint",
       "constraint_id": "attempt-retry-chain",
       "record_template_case_ids": [
+        "root.admission-fence.minimal",
         "root.cycle-abort.minimal",
         "root.attempt-retry.minimal",
         "root.admission-fence.minimal"
@@ -3984,6 +3988,7 @@
       "kind": "linked_record_constraint",
       "constraint_id": "attempt-retry-chain",
       "record_template_case_ids": [
+        "root.admission-fence.minimal",
         "root.cycle-abort.minimal",
         "root.attempt-retry.minimal",
         "root.admission-fence.minimal"
@@ -3997,6 +4002,7 @@
       "kind": "linked_record_constraint",
       "constraint_id": "attempt-retry-chain",
       "record_template_case_ids": [
+        "root.admission-fence.minimal",
         "root.cycle-abort.minimal",
         "root.attempt-retry.minimal",
         "root.admission-fence.minimal"
@@ -4010,6 +4016,7 @@
       "kind": "linked_record_constraint",
       "constraint_id": "attempt-retry-chain",
       "record_template_case_ids": [
+        "root.admission-fence.minimal",
         "root.cycle-abort.minimal",
         "root.attempt-retry.minimal",
         "root.admission-fence.minimal"
@@ -4023,6 +4030,7 @@
       "kind": "linked_record_constraint",
       "constraint_id": "attempt-retry-chain",
       "record_template_case_ids": [
+        "root.admission-fence.minimal",
         "root.cycle-abort.minimal",
         "root.attempt-retry.minimal",
         "root.admission-fence.minimal"
@@ -4036,6 +4044,7 @@
       "kind": "linked_record_constraint",
       "constraint_id": "attempt-retry-chain",
       "record_template_case_ids": [
+        "root.admission-fence.minimal",
         "root.cycle-abort.minimal",
         "root.attempt-retry.minimal",
         "root.admission-fence.minimal"
@@ -4049,12 +4058,209 @@
       "kind": "linked_record_constraint",
       "constraint_id": "attempt-retry-chain",
       "record_template_case_ids": [
+        "root.admission-fence.minimal",
         "root.cycle-abort.minimal",
         "root.attempt-retry.minimal",
         "root.admission-fence.minimal"
       ],
       "violation": "not_latest_abort",
       "mutation": "not_latest_abort",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.abort-fence-digest-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "abort_fence_digest_mismatch",
+      "mutation": "abort_fence_digest_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.abort-input-digest-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "abort_input_digest_mismatch",
+      "mutation": "abort_input_digest_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.abort-cycle-plan-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "abort_cycle_plan_mismatch",
+      "mutation": "abort_cycle_plan_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.retry-instant-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "retry_instant_mismatch",
+      "mutation": "retry_instant_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.retry-cycle-ordinal-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "retry_cycle_ordinal_mismatch",
+      "mutation": "retry_cycle_ordinal_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.retry-cycle-plan-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "retry_cycle_plan_mismatch",
+      "mutation": "retry_cycle_plan_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.retry-base-revision-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "retry_base_revision_mismatch",
+      "mutation": "retry_base_revision_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.retry-base-state-hash-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "retry_base_state_hash_mismatch",
+      "mutation": "retry_base_state_hash_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.retry-closure-proof-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "retry_closure_proof_mismatch",
+      "mutation": "retry_closure_proof_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.retry-cohort-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "retry_cohort_mismatch",
+      "mutation": "retry_cohort_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.retry-admitted-units-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "retry_admitted_units_mismatch",
+      "mutation": "retry_admitted_units_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.retry-input-digest-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "retry_input_digest_mismatch",
+      "mutation": "retry_input_digest_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.retry-immutable-policy-mismatch",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "retry_immutable_policy_mismatch",
+      "mutation": "retry_immutable_policy_mismatch",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.attempt-retry-chain.later-terminal-other-cycle",
+      "kind": "linked_record_constraint",
+      "constraint_id": "attempt-retry-chain",
+      "record_template_case_ids": [
+        "root.admission-fence.minimal",
+        "root.cycle-abort.minimal",
+        "root.attempt-retry.minimal",
+        "root.admission-fence.minimal"
+      ],
+      "violation": "later_terminal_other_cycle",
+      "mutation": "later_terminal_other_cycle",
       "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
     },
     {
@@ -4220,6 +4426,96 @@
       ],
       "violation": "completion_knowledge_input_missing",
       "mutation": "completion_knowledge_input_missing",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.epistemic-projection-chain.source-event-extra",
+      "kind": "linked_record_constraint",
+      "constraint_id": "epistemic-projection-chain",
+      "record_template_case_ids": [
+        "root.event.minimal",
+        "root.perception-task.minimal",
+        "root.observation.minimal",
+        "root.knowledge-input.minimal",
+        "root.perception-task-completion.minimal"
+      ],
+      "violation": "source_event_extra",
+      "mutation": "source_event_extra",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.epistemic-projection-chain.undisclosed-evidence",
+      "kind": "linked_record_constraint",
+      "constraint_id": "epistemic-projection-chain",
+      "record_template_case_ids": [
+        "root.event.minimal",
+        "root.perception-task.minimal",
+        "root.observation.minimal",
+        "root.knowledge-input.minimal",
+        "root.perception-task-completion.minimal"
+      ],
+      "violation": "undisclosed_evidence",
+      "mutation": "undisclosed_evidence",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.epistemic-projection-chain.completion-foreign-observation",
+      "kind": "linked_record_constraint",
+      "constraint_id": "epistemic-projection-chain",
+      "record_template_case_ids": [
+        "root.event.minimal",
+        "root.perception-task.minimal",
+        "root.observation.minimal",
+        "root.knowledge-input.minimal",
+        "root.perception-task-completion.minimal"
+      ],
+      "violation": "completion_foreign_observation",
+      "mutation": "completion_foreign_observation",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.epistemic-projection-chain.completion-foreign-knowledge-input",
+      "kind": "linked_record_constraint",
+      "constraint_id": "epistemic-projection-chain",
+      "record_template_case_ids": [
+        "root.event.minimal",
+        "root.perception-task.minimal",
+        "root.observation.minimal",
+        "root.knowledge-input.minimal",
+        "root.perception-task-completion.minimal"
+      ],
+      "violation": "completion_foreign_knowledge_input",
+      "mutation": "completion_foreign_knowledge_input",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.epistemic-projection-chain.completion-duplicate-observation",
+      "kind": "linked_record_constraint",
+      "constraint_id": "epistemic-projection-chain",
+      "record_template_case_ids": [
+        "root.event.minimal",
+        "root.perception-task.minimal",
+        "root.observation.minimal",
+        "root.knowledge-input.minimal",
+        "root.perception-task-completion.minimal"
+      ],
+      "violation": "completion_duplicate_observation",
+      "mutation": "completion_duplicate_observation",
+      "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
+    },
+    {
+      "case_id": "linked-record.epistemic-projection-chain.completion-duplicate-knowledge-input",
+      "kind": "linked_record_constraint",
+      "constraint_id": "epistemic-projection-chain",
+      "record_template_case_ids": [
+        "root.event.minimal",
+        "root.perception-task.minimal",
+        "root.observation.minimal",
+        "root.knowledge-input.minimal",
+        "root.perception-task-completion.minimal"
+      ],
+      "violation": "completion_duplicate_knowledge_input",
+      "mutation": "completion_duplicate_knowledge_input",
       "invalid_error_code": "LINKED_RECORD_CONSTRAINT"
     }
   ]

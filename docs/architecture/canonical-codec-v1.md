@@ -27,8 +27,8 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `31ae30ccd572eb1d81ea8c31542fb3bfa1edf40267a14ff6b5b2f1a557c1b98c` |
-| `conformance_suite_hash` | `b803ba7d035d5b97302cfcfa42693ae71fdbe2c2d191bd124b771cee0ff2f787` |
+| `schema_bundle_hash` | `15d48f195a825db0f406188f041f6d3e310d97f05a3b6eb641571513f5871d0f` |
+| `conformance_suite_hash` | `aa020a010613b81eb0112d05e3be84b4deee95578b5b40a059c0d8463647f6e9` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -211,13 +211,16 @@ vazio de candidate, conflicts, successor e canonical unit antes de aceitar o roo
 `CycleControlState`, fecha presence, kind do último envelope e relações de ordinal dos quatro status;
 para `TriggerDefinition`, exige cadência PRESENT e positiva somente em `REPEAT_WHILE_TRUE`. O primeiro
 fence exige attempt 1 sem retry; fences posteriores exigem `retry-ref`; cada `AttemptRetryRecord`
-avança exatamente um ordinal e resolve o último abort do mesmo run/cycle/attempt, enquanto o novo
-fence resolve esse retry.
+avança exatamente um ordinal e resolve o último abort do run. O abort resolve o fence anterior e
+repete seus plano/digests; o novo fence resolve o retry e é byte a byte igual ao fence abortado,
+exceto por `attempt_ordinal`, `retry_ref`, `rule_versions` e o `fence_digest` resultante.
 
 A cadeia epistemológica resolve `Event` → `PerceptionTask` → `Observation` → `KnowledgeInput` →
-completion. Task/event, task/observation, instante, recipient e membresia da completion devem
-coincidir. Claims do knowledge input são subset dos claims divulgados pela observation resolvida;
-uma observation privada nunca autoriza projetar claims ou evidence de outro ator. A mesma
+completion. Cada observation da task tem exatamente seu evento como fonte; task/observation,
+instante e observer-recipient coincidem. Claims e evidence do knowledge input são subsets do que a
+observation resolvida divulgou. As listas do completion são exatamente as projeções canônicas de
+todos os outputs daquela task, sem extras, duplicatas ou omissões; completion vazio representa zero
+outputs. Uma observation privada nunca autoriza projetar claims ou evidence de outro ator. A mesma
 seção de registries liga `decision-record.rng-draw-refs` somente a `RngDraw` e
 `cycle-abort.failure-evidence-refs` somente a `ConflictSet`, `RngDraw`,
 `AffordanceAssessment`, `ProvisionalDisposition` ou `AttemptFailure`. O root standalone
@@ -430,7 +433,7 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 18. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
 
 A suíte V1 contém 152 casos positivos — todos os roots persistidos e todas as 73 operações
-registradas —, 30 casos negativos com `error_code` estável, 211 casos semânticos de binding,
+registradas —, 30 casos negativos com `error_code` estável, 231 casos semânticos de binding,
 identidade, ordenação e idempotência, sete casos de normalização e dois vetores SHA-256. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
 independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não

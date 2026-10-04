@@ -264,7 +264,7 @@ O genesis persiste, no mínimo:
   `identity_algorithm_version=cote.csf.sha256.v1`, NFC pelo Normalization Process for Stabilized
   Strings (NPSS) Unicode 15.1.0,
   `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`
-  e `schema_bundle_hash=31ae30ccd572eb1d81ea8c31542fb3bfa1edf40267a14ff6b5b2f1a557c1b98c`;
+  e `schema_bundle_hash=15d48f195a825db0f406188f041f6d3e310d97f05a3b6eb641571513f5871d0f`;
 - causal identity, admission order, fence, coordinate, event order, idempotency, RNG, perception e
   perception identity policy: versão **e** hash;
 - pares `(schema_id, schema_version)` sob `schema_bundle_hash`, mais versões/hashes de reducers,
@@ -460,8 +460,9 @@ referência epistemológica opaca e verificada.
 - `AttemptFailure` deriva identidade de tentativa + stage + component policy + ordinal nomeado pelo
   schema do componente; scheduling/completion de worker nunca aloca esse ordinal.
 - Retentativa requer `AttemptRetryRecord`; attempt 1 não tem retry, attempt posterior resolve o retry
-  que avança exatamente um ordinal desde o último abort do mesmo run/cycle/attempt. Resume sozinho
-  nunca sai de `HALTED_ON_ABORT`.
+  que avança exatamente um ordinal desde o último abort do run. O novo fence preserva byte a byte
+  plano, base, closure, coorte, unidades, input e policies do fence abortado, fora dos campos de
+  retentativa autorizados. Resume sozinho nunca sai de `HALTED_ON_ABORT`.
 
 ### 7.6 Eventos, reducers e revisão
 
@@ -480,13 +481,14 @@ referência epistemológica opaca e verificada.
 - Evento potencialmente perceptível cria `PerceptionTask` atomicamente; task não contém contexto de
   agente nem concede acesso.
 - Resolver carrega o evento por port autorizado e produz observations/inputs por papel e ordinal de
-  schema. Task resolve seu evento; observation resolve essa task, inclui o evento em suas fontes e
-  conserva seu instante; knowledge input resolve a observation, destina-se ao mesmo observer e só
-  projeta claims/evidence ali divulgados. Retry/concorrência derivam os mesmos ids.
+  schema. Task resolve seu evento; cada observation resolve essa task, tem exatamente esse evento
+  como fonte e conserva seu instante; knowledge input resolve a observation, destina-se ao mesmo
+  observer e só projeta claims/evidence ali divulgados. Retry/concorrência derivam os mesmos ids.
 - `observed_at` deriva do evento que tornou a evidência disponível; `received_at` é igual a ele.
   Latência operacional não altera cronologia.
-- Completion só é gravado depois que task, observations e knowledge inputs referenciados resolvem a
-  mesma cadeia; completion vazio é obrigatório quando não há observador elegível.
+- Completion só é gravado quando suas duas listas são as projeções canônicas exatas de todos os
+  observations e knowledge inputs da task, sem extras, duplicatas ou omissões; completion vazio é
+  obrigatório quando não há output elegível.
 - `Claim` não possui verdade embutida. Comparação com world truth, quando uma regra exige, produz novo
   fato e nova cadeia de acesso.
 - Envio não é entrega, entrega não é necessariamente leitura, e falsificação não revela autoria real.
@@ -641,7 +643,7 @@ dos hashes causais. Métricas mínimas:
 12. ids/completion de percepção idempotentes e instante epistemológico causal;
 13. substreams independentes de avaliações/atores irrelevantes;
 14. arquitetura sem cliente LLM no core e sem write port transitivo no Observatory;
-15. os 402 vetores/casos de conformidade do bundle executados por pelo menos duas
+15. os 422 vetores/casos de conformidade do bundle executados por pelo menos duas
     implementações independentes e linguagens diferentes;
 16. strict decode rejeita CBOR não preferido, indefinite, tag, `undefined`, duplicate key, Unicode
     fora do profile, non-finite, negative zero, schema/enum desconhecido e id com tamanho incorreto;

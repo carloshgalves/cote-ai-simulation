@@ -681,19 +681,24 @@ def test_attempt_retry_chain_is_closed_locally_and_referentially() -> None:
         for item in registries["linked_record_constraints"]
         if item["constraint_id"] == "attempt-retry-chain"
     )
-    assert chain["records"] == [
-        "cycle-abort",
-        "attempt-retry",
-        "admission-fence",
+    assert chain["record_roles"] == [
+        ["aborted-fence", "admission-fence", "one"],
+        ["abort", "cycle-abort", "one"],
+        ["retry", "attempt-retry", "one"],
+        ["retry-fence", "admission-fence", "one"],
     ]
     assert set(chain["relations"]) == {
-        "attempt-retry.run-id == cycle-abort.run-id == admission-fence.run-id",
-        "attempt-retry.cycle-id == cycle-abort.cycle-id == admission-fence.cycle-id",
-        "attempt-retry.from-attempt-ordinal == cycle-abort.attempt-ordinal",
-        "attempt-retry.to-attempt-ordinal == admission-fence.attempt-ordinal",
-        "attempt-retry.aborted-envelope-ref resolves cycle-abort",
-        "admission-fence.retry-ref resolves attempt-retry",
-        "cycle-abort is latest terminal envelope for run-id and cycle-id",
+        "aborted-fence.run-id == abort.run-id == retry.run-id == retry-fence.run-id",
+        "aborted-fence.cycle-id == abort.cycle-id == retry.cycle-id == retry-fence.cycle-id",
+        "aborted-fence.attempt-ordinal == abort.attempt-ordinal == retry.from-attempt-ordinal",
+        "retry.to-attempt-ordinal == retry-fence.attempt-ordinal",
+        "abort.fence-digest == aborted-fence.fence-digest",
+        "abort.input-digest == aborted-fence.input-digest",
+        "abort.cycle-plan == aborted-fence.cycle-plan",
+        "retry.aborted-envelope-ref resolves abort",
+        "retry-fence.retry-ref resolves retry",
+        "abort is latest terminal envelope for run-id",
+        "retry-fence fields other than attempt-ordinal, retry-ref, rule-versions, and fence-digest equal aborted-fence byte-for-byte",
     }
 
     cases = [
@@ -713,7 +718,32 @@ def test_attempt_retry_chain_is_closed_locally_and_referentially() -> None:
         "aborted_envelope_ref_mismatch",
         "retry_ref_mismatch",
         "not_latest_abort",
+        "abort_fence_digest_mismatch",
+        "abort_input_digest_mismatch",
+        "abort_cycle_plan_mismatch",
+        "retry_instant_mismatch",
+        "retry_cycle_ordinal_mismatch",
+        "retry_cycle_plan_mismatch",
+        "retry_base_revision_mismatch",
+        "retry_base_state_hash_mismatch",
+        "retry_closure_proof_mismatch",
+        "retry_cohort_mismatch",
+        "retry_admitted_units_mismatch",
+        "retry_input_digest_mismatch",
+        "retry_immutable_policy_mismatch",
+        "later_terminal_other_cycle",
     }
+    assert all(
+        case["record_template_case_ids"]
+        == [
+            "root.admission-fence.minimal",
+            "root.cycle-abort.minimal",
+            "root.attempt-retry.minimal",
+            "root.admission-fence.minimal",
+        ]
+        for case in cases
+    )
+    assert all(case["mutation"] == case["violation"] for case in cases)
     assert all(case["invalid_error_code"] == "LINKED_RECORD_CONSTRAINT" for case in cases)
 
 
@@ -726,25 +756,26 @@ def test_epistemic_projection_chain_is_causally_bound_and_covered() -> None:
         if item["constraint_id"] == "epistemic-projection-chain"
     )
 
-    assert chain["records"] == [
-        "event",
-        "perception-task",
-        "observation",
-        "knowledge-input",
-        "perception-task-completion",
+    assert chain["record_roles"] == [
+        ["event", "event", "one"],
+        ["task", "perception-task", "one"],
+        ["observations", "observation", "zero-or-more"],
+        ["knowledge-inputs", "knowledge-input", "zero-or-more"],
+        ["completion", "perception-task-completion", "one"],
     ]
-    assert set(chain["relations"]) >= {
-        "perception-task.event-id resolves event.event-id",
-        "observation.task-id resolves perception-task.task-id",
-        "observation.observed-at == event.occurred-at",
-        "observation.source-event-refs contains event ref",
-        "knowledge-input.observation-ref resolves observation",
-        "knowledge-input.recipient == observation.observer",
-        "knowledge-input.received-at == observation.observed-at",
-        "knowledge-input.claim-refs is a subset of observation.claim-refs",
-        "perception-task-completion.task-id == perception-task.task-id",
-        "perception-task-completion.observation-ids contains observation.observation-id",
-        "perception-task-completion.knowledge-input-ids contains knowledge-input.knowledge-input-id",
+    assert set(chain["relations"]) == {
+        "task.event-id resolves event.event-id",
+        "every observations.task-id resolves task.task-id",
+        "every observations.observed-at == event.occurred-at",
+        "every observations.source-event-refs == [event ref]",
+        "every knowledge-inputs.observation-ref resolves one of observations",
+        "every knowledge-inputs.recipient == resolved observation.observer",
+        "every knowledge-inputs.received-at == resolved observation.observed-at",
+        "every knowledge-inputs.claim-refs is a subset of resolved observation.claim-refs",
+        "every knowledge-inputs.evidence-chain is a subset of resolved observation.evidence-chain",
+        "completion.task-id == task.task-id",
+        "completion.observation-ids == observation-id projection of observations in canonical order",
+        "completion.knowledge-input-ids == knowledge-input-id projection of knowledge-inputs in canonical order",
     }
     assert chain["visibility_rule"] == (
         "knowledge-input may project only claims and evidence disclosed by its "
@@ -769,7 +800,25 @@ def test_epistemic_projection_chain_is_causally_bound_and_covered() -> None:
         "completion_task_id_mismatch",
         "completion_observation_missing",
         "completion_knowledge_input_missing",
+        "source_event_extra",
+        "undisclosed_evidence",
+        "completion_foreign_observation",
+        "completion_foreign_knowledge_input",
+        "completion_duplicate_observation",
+        "completion_duplicate_knowledge_input",
     }
+    assert all(
+        case["record_template_case_ids"]
+        == [
+            "root.event.minimal",
+            "root.perception-task.minimal",
+            "root.observation.minimal",
+            "root.knowledge-input.minimal",
+            "root.perception-task-completion.minimal",
+        ]
+        for case in cases
+    )
+    assert all(case["mutation"] == case["violation"] for case in cases)
     assert all(case["invalid_error_code"] == "LINKED_RECORD_CONSTRAINT" for case in cases)
 
 
@@ -834,12 +883,12 @@ def test_published_conformance_case_counts_match_the_bundle() -> None:
 
     assert len(fixtures["positive"]) == 152
     assert len(fixtures["negative"]) == 30
-    assert len(fixtures["semantic"]) == 211
+    assert len(fixtures["semantic"]) == 231
     assert len(fixtures["normalization_cases"]) == 7
     assert "152 casos positivos" in contract
     assert "30 casos negativos" in contract
-    assert "211 casos semânticos" in contract
-    assert "152 vetores positivos, 30 negativos, 211 casos semânticos" in readme
+    assert "231 casos semânticos" in contract
+    assert "152 vetores positivos, 30 negativos, 231 casos semânticos" in readme
 
 
 def test_cycle_control_state_variants_are_closed_by_status() -> None:

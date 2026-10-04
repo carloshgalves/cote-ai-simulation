@@ -865,6 +865,164 @@
       "authority": "causal_outbox"
     }
   ],
+  "typed_value_constraints": [
+    {
+      "constraint_id": "typed-value-inner-envelope",
+      "applies_on": "strict-decode every typed-value",
+      "inner_envelope": {
+        "magic_hex": "43534600",
+        "codec_version": 1,
+        "array_items": 6
+      },
+      "relations": [
+        {
+          "left": "typed-value.schema-id",
+          "operator": "equals",
+          "right": "inner-envelope.schema-id"
+        },
+        {
+          "left": "typed-value.schema-version",
+          "operator": "equals",
+          "right": "inner-envelope.schema-version"
+        }
+      ],
+      "domain_authorization": {
+        "operation": [
+          "inner-envelope.domain-tag",
+          "inner-envelope.schema-id",
+          "inner-envelope.schema-version"
+        ],
+        "registries": [
+          "domain_operations",
+          "genesis-pinned extension domain_operations"
+        ]
+      },
+      "digest": {
+        "algorithm": "sha-256",
+        "input": "typed-value.canonical-envelope exact bytes",
+        "expected": "typed-value.envelope-digest"
+      },
+      "canonicality": "strict-decode and byte-for-byte deterministic re-encode"
+    }
+  ],
+  "record_authorities": [
+    {
+      "root": "exogenous-input",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "source-closure",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "slot-dispatch",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "action-proposal",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "no-proposal",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "round-declaration",
+      "authority": "world_state"
+    },
+    {
+      "root": "scheduled-occurrence",
+      "authority": "world_state"
+    },
+    {
+      "root": "trigger-activation",
+      "authority": "world_state"
+    },
+    {
+      "root": "transmission",
+      "authority": "world_state"
+    },
+    {
+      "root": "admission-fence",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "affordance-assessment",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "commit-candidate",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "conflict-set",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "decision-record",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "cycle-abort",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "attempt-retry",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "cycle-commit",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "rng-draw",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "provisional-disposition",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "attempt-failure",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "event",
+      "authority": "event_store"
+    },
+    {
+      "root": "claim",
+      "authority": "evidence_ledger"
+    },
+    {
+      "root": "observation",
+      "authority": "evidence_ledger"
+    },
+    {
+      "root": "knowledge-input",
+      "authority": "evidence_ledger"
+    },
+    {
+      "root": "perception-task",
+      "authority": "causal_outbox"
+    },
+    {
+      "root": "perception-task-completion",
+      "authority": "causal_outbox"
+    },
+    {
+      "root": "snapshot",
+      "authority": "snapshot_store"
+    },
+    {
+      "root": "epistemic-checkpoint-ref",
+      "authority": "snapshot_store"
+    },
+    {
+      "root": "genesis-manifest",
+      "authority": "genesis_store"
+    }
+  ],
   "linked_record_constraints": [
     {
       "constraint_id": "append-cycle-abort",
@@ -979,9 +1137,29 @@
         "candidate_role": "commit-batch",
         "root": "cycle-commit",
         "cursor": "unpublished transaction working set",
-        "publication": "event store + decision ledger + causal outbox + world revision indivisible"
+        "publication": "fence consumption + decision settlement + events + cycle commit + tasks + world revision indivisible"
       },
       "record_roles": [
+        {
+          "role": "fence",
+          "root": "admission-fence",
+          "cardinality": "one",
+          "authority": "decision_ledger",
+          "source": "admission fence selected by cycle-commit.fence-digest"
+        },
+        {
+          "role": "fence-consumption",
+          "root": "fence-consumption-transition",
+          "cardinality": "candidate",
+          "authority": "source_consumption"
+        },
+        {
+          "role": "decision-records",
+          "root": "decision-record",
+          "cardinality": "one-per-admitted-unit",
+          "authority": "decision_ledger",
+          "source": "all settlement candidates selected by cycle-commit.decision-record-ids"
+        },
         {
           "role": "cycle-commit",
           "root": "cycle-commit",
@@ -1010,13 +1188,20 @@
         }
       ],
       "relations": [
+        "cycle-commit.fence-digest == fence.fence-digest",
+        "cycle-commit.input-digest == fence.input-digest",
+        "cycle-commit.admitted-input-ids == unit-id projection of fence.admitted-units in canonical order",
+        "cycle-commit.decision-record-ids == decision-id projection of decision-records in admitted unit order",
+        "decision-records form an exact bijection with fence.admitted-units by subject id and digest",
+        "cycle-commit.decision-digest commits canonical (unit-id, decision-id, record-digest) pairs",
+        "fence-consumption.unit-ids == cycle-commit.admitted-input-ids and every unit transitions eligible-to-consumed",
         "cycle-commit.event-ids == event-id projection of events in canonical order",
         "cycle-commit.perception-task-ids == task-id projection of tasks in canonical order",
         "cycle-commit.perception-task-digest commits the canonical task-id projection",
         "every tasks.event-id resolves one of events",
         "every tasks.base-revision == cycle-commit.base-revision",
         "every tasks.result-revision == cycle-commit.result-revision == result-revision",
-        "cycle-commit, events, tasks, and result-revision publish all-or-none"
+        "fence consumption, decision-records, events, cycle-commit, tasks, and result-revision publish all-or-none"
       ]
     },
     {

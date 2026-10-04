@@ -904,8 +904,25 @@ def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
         "candidate_role": "commit-batch",
         "root": "cycle-commit",
         "cursor": "unpublished transaction working set",
-        "publication": "event store + decision ledger + causal outbox + world revision indivisible",
+        "publication": "fence consumption + decision settlement + events + cycle commit + tasks + world revision indivisible",
     }
+    assert {role["role"] for role in atomic["record_roles"]} == {
+        "fence",
+        "fence-consumption",
+        "decision-records",
+        "cycle-commit",
+        "events",
+        "tasks",
+        "result-revision",
+    }
+    assert {
+        "cycle-commit.admitted-input-ids == unit-id projection of fence.admitted-units in canonical order",
+        "cycle-commit.decision-record-ids == decision-id projection of decision-records in admitted unit order",
+        "decision-records form an exact bijection with fence.admitted-units by subject id and digest",
+        "cycle-commit.decision-digest commits canonical (unit-id, decision-id, record-digest) pairs",
+        "fence-consumption.unit-ids == cycle-commit.admitted-input-ids and every unit transitions eligible-to-consumed",
+        "fence consumption, decision-records, events, cycle-commit, tasks, and result-revision publish all-or-none",
+    } <= set(atomic["relations"])
     assert all(
         constraints_by_id[constraint_id]["applies_on"]["operation"] == "append"
         for constraint_id in epistemic_ids - {"publish-cycle-commit-batch"}
@@ -948,6 +965,10 @@ def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
         "completion_duplicate_observation",
         "completion_duplicate_knowledge_input",
         "published_event_without_task",
+        "decision_record_missing",
+        "decision_record_extra",
+        "decision_record_foreign",
+        "fence_consumption_missing",
     }
     assert all(case["expected"] == "reject" for case in cases)
     assert all(
@@ -966,7 +987,7 @@ def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
     assert {case["constraint_id"] for case in accepted} == epistemic_ids
 
 
-def test_linked_constraints_use_the_five_authoritative_stores() -> None:
+def test_record_authorities_exhaustively_cover_persisted_roots() -> None:
     registries = _json("registries.json")
     fixtures = _json("fixtures.json")
     authorities = {
@@ -974,16 +995,42 @@ def test_linked_constraints_use_the_five_authoritative_stores() -> None:
         for item in registries["record_authorities"]
     }
     assert authorities == {
+        "exogenous-input": "input_ledger",
+        "source-closure": "input_ledger",
+        "slot-dispatch": "input_ledger",
+        "action-proposal": "input_ledger",
+        "no-proposal": "input_ledger",
+        "round-declaration": "world_state",
+        "scheduled-occurrence": "world_state",
+        "trigger-activation": "world_state",
+        "transmission": "world_state",
         "admission-fence": "decision_ledger",
+        "affordance-assessment": "decision_ledger",
+        "commit-candidate": "decision_ledger",
+        "conflict-set": "decision_ledger",
+        "decision-record": "decision_ledger",
         "cycle-abort": "decision_ledger",
         "attempt-retry": "decision_ledger",
         "cycle-commit": "decision_ledger",
+        "rng-draw": "decision_ledger",
+        "provisional-disposition": "decision_ledger",
+        "attempt-failure": "decision_ledger",
         "event": "event_store",
+        "claim": "evidence_ledger",
         "observation": "evidence_ledger",
         "knowledge-input": "evidence_ledger",
         "perception-task": "causal_outbox",
         "perception-task-completion": "causal_outbox",
+        "snapshot": "snapshot_store",
+        "epistemic-checkpoint-ref": "snapshot_store",
+        "genesis-manifest": "genesis_store",
     }
+    persisted_roots = {
+        item["persisted_root"].removeprefix("cote.csf.schema.")
+        for item in registries["reference_identities"]
+    } | {"perception-task-completion"}
+    assert authorities.keys() == persisted_roots
+    assert "input_ledger" in authorities.values()
 
     forbidden_authorities = {"fence_ledger", "event_ledger"}
     for constraint in registries["linked_record_constraints"]:
@@ -1000,7 +1047,7 @@ def test_linked_constraints_use_the_five_authoritative_stores() -> None:
                 schema = records[role]["schema_id"].removeprefix("cote.csf.schema.")
                 assert authorities[schema] == authority, (scenario["scenario_id"], role)
         for authority, roles in scenario.get("transaction_candidates", {}).items():
-            if authority == "world_state":
+            if authority in {"world_state", "source_consumption"}:
                 continue
             for role in roles:
                 schema = records[role]["schema_id"].removeprefix("cote.csf.schema.")
@@ -1011,20 +1058,92 @@ def test_linked_constraints_use_the_five_authoritative_stores() -> None:
         for scenario in fixtures["linked_record_scenarios"]
     }
     atomic = scenarios["epistemic.commit-batch.valid"]
-    assert all(not roles for roles in atomic["pre_append_cursor"].values())
+    assert atomic["pre_append_cursor"] == {
+        "decision_ledger": ["fence"],
+        "event_store": [],
+        "causal_outbox": [],
+        "world_state": [],
+    }
     assert atomic["transaction_candidates"] == {
-        "decision_ledger": ["cycle-commit"],
+        "decision_ledger": ["decision", "cycle-commit"],
         "event_store": ["event"],
         "causal_outbox": ["task"],
         "world_state": ["result-revision"],
+        "source_consumption": ["fence-consumption"],
     }
     atomic_records = {
         record["role"]: _decode_cbor_hex(record["record_cbor_hex"])
         for record in atomic["records"]
     }
     commit = atomic_records["cycle-commit"]
+    fence = atomic_records["fence"]
+    decision = atomic_records["decision"]
     event = atomic_records["event"]
     task = atomic_records["task"]
+    admitted_unit_ids = [unit[3] for unit in fence[11]]
+    assert admitted_unit_ids
+    expected_input_digest = hashlib.sha256(
+        _encode_cbor_item(
+            [
+                b"CSF\x00",
+                1,
+                "cote.csf.digest.input",
+                "cote.csf.schema.admitted-unit-list",
+                1,
+                fence[11],
+            ]
+        )
+    ).digest()
+    assert fence[12] == expected_input_digest
+    expected_fence_digest = hashlib.sha256(
+        _encode_cbor_item(
+            [
+                b"CSF\x00",
+                1,
+                "cote.csf.digest.fence",
+                "cote.csf.schema.admission-fence.body",
+                1,
+                fence[:-1],
+            ]
+        )
+    ).digest()
+    assert fence[-1] == expected_fence_digest
+    assert commit[10] == fence[-1]
+    assert commit[11] == admitted_unit_ids
+    assert commit[12] == fence[12]
+    assert commit[16] == [decision[0]]
+    assert decision[4][-2:] == [fence[11][0][3], fence[11][0][4]]
+    expected_decision_digest = hashlib.sha256(
+        _encode_cbor_item(
+            [
+                b"CSF\x00",
+                1,
+                "cote.csf.digest.decision-record",
+                "cote.csf.schema.decision-record.body",
+                1,
+                decision[:-1],
+            ]
+        )
+    ).digest()
+    assert decision[-1] == expected_decision_digest
+    expected_settlement_digest = hashlib.sha256(
+        _encode_cbor_item(
+            [
+                b"CSF\x00",
+                1,
+                "cote.csf.digest.decision",
+                "cote.csf.schema.decision-pair-list",
+                1,
+                [[admitted_unit_ids[0], decision[0], decision[-1]]],
+            ]
+        )
+    ).digest()
+    assert commit[17] == expected_settlement_digest
+    assert atomic["fence_consumption"] == {
+        "fence_role": "fence",
+        "unit_ids_cbor_hex": _encode_cbor_item(admitted_unit_ids).hex(),
+        "transition": "eligible-to-consumed",
+    }
     assert commit[15] == [event[0]]
     assert commit[18] == [task[0]]
     assert task[3] == event[0]
@@ -1042,6 +1161,40 @@ def test_linked_constraints_use_the_five_authoritative_stores() -> None:
         if record["role"] == "cycle-commit"
     )
     assert invalid_commit[18]
+
+    settlement_violations = {
+        "decision_record_missing",
+        "decision_record_extra",
+        "decision_record_foreign",
+        "fence_consumption_missing",
+    }
+    settlement_cases = {
+        case["violation"]: scenarios[case["input_scenario_id"]]
+        for case in fixtures["semantic"]
+        if case.get("violation") in settlement_violations
+    }
+    assert settlement_cases.keys() == settlement_violations
+    assert "decision" not in {
+        record["role"]
+        for record in settlement_cases["decision_record_missing"]["records"]
+    }
+    assert {
+        record["role"]
+        for record in settlement_cases["decision_record_extra"]["records"]
+        if record["role"].startswith("decision")
+    } == {"decision", "decision-extra"}
+    foreign = settlement_cases["decision_record_foreign"]
+    foreign_records = {
+        record["role"]: _decode_cbor_hex(record["record_cbor_hex"])
+        for record in foreign["records"]
+    }
+    assert foreign_records["decision"][4][-2] not in [
+        unit[3] for unit in foreign_records["fence"][11]
+    ]
+    assert foreign_records["cycle-commit"][16] == [foreign_records["decision"][0]]
+    assert "fence_consumption" not in settlement_cases["fence_consumption_missing"]
+
+
 def test_linked_semantic_cases_are_self_contained_and_all_case_refs_resolve() -> None:
     fixtures = _json("fixtures.json")
     registries = _json("registries.json")
@@ -1210,12 +1363,12 @@ def test_published_conformance_case_counts_match_the_bundle() -> None:
 
     assert len(fixtures["positive"]) == 152
     assert len(fixtures["negative"]) == 30
-    assert len(fixtures["semantic"]) == 246
+    assert len(fixtures["semantic"]) == 250
     assert len(fixtures["normalization_cases"]) == 7
     assert "152 casos positivos" in contract
     assert "30 casos negativos" in contract
-    assert "246 casos semânticos" in contract
-    assert "152 vetores positivos, 30 negativos, 246 casos semânticos" in readme
+    assert "250 casos semânticos" in contract
+    assert "152 vetores positivos, 30 negativos, 250 casos semânticos" in readme
 
 
 def test_cycle_control_state_variants_are_closed_by_status() -> None:

@@ -42,11 +42,11 @@ Adotar `COTE Causal Canonical Codec V1`, identificado por
 
 O bundle normativo fixa CDDL, domain/schema operations, bindings de cada enum/variant/role,
 identidades de `CausalRef`, chaves separadas de ordering/identidade para coleções set-like, limites,
-dados Unicode e 437 vetores/casos de conformidade. Seus hashes V1 são:
+dados Unicode e 441 vetores/casos de conformidade. Seus hashes V1 são:
 
 - `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`;
-- `schema_bundle_hash=185928983d156e477e242c665e1fbd84cfcf632e542e9b6ef830731e60b58cd1`;
-- `conformance_suite_hash=bf07c9d3ff824a299bf5a656bc24fc9d1d66da9b87ea5dbc3e61c613ad5579b5`.
+- `schema_bundle_hash=60396843a6b5d07c5d15e5a69026a9e92b58d1dba23d5b4736a649cf285dcd1d`;
+- `conformance_suite_hash=5d3ef9f581bd1e4de84c1d95525c65fec22f0c9061315f153859c45462c0e11b`.
 
 O layout completo e os vetores-âncora estão no contrato normativo ligado acima.
 
@@ -86,9 +86,11 @@ O genesis fixa version/hash do codec, schema bundle, Unicode data e registries. 
 strict: valida profile/schema, reencoda e exige os mesmos bytes antes de verificar digest ou aplicar
 reducer. Além da forma local, strict validation aplica `record_constraints`.
 `typed_value_constraints` valida schema/version externos, operação autorizada, digest dos bytes
-exatos e re-encoding canônico do envelope interno. `record_authorities` fixa os owners dos roots.
+exatos e re-encoding canônico do envelope interno. `record_authorities` fixa exaustivamente os
+owners dos roots persistidos, incluindo o input ledger.
 `linked_record_constraints` aplica cada regra na fronteira de append contra o prefixo durável ou na
-publicação indivisível de evento, task, `CycleCommit` e revisão: retry avança um único attempt desde o último abort do
+publicação indivisível de consumo do fence, `DecisionRecord`, eventos, tasks, `CycleCommit` e revisão,
+com bijeção e digests exatos de settlement: retry avança um único attempt desde o último abort do
 mesmo run/cycle, seus `rule-versions` coincidem com o novo fence após normalização, e o fence abortado
 é reutilizado byte a byte fora dos campos de retentativa; a cadeia epistemológica conserva
 event/task, instante, observer-recipient, somente claims/evidências divulgados e a membresia exata da

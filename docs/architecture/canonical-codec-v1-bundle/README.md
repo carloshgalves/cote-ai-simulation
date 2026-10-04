@@ -124,7 +124,7 @@ operação lógica e policy ref.
 contrato e os vetores, mas não inclui dois runners independentes nem um workflow que os execute. Uma
 implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
 
-`fixtures.json` contém 152 vetores positivos, 30 negativos, 246 casos semânticos, sete casos de
+`fixtures.json` contém 152 vetores positivos, 30 negativos, 250 casos semânticos, sete casos de
 normalização convergente e dois vetores SHA-256. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 73 operações de id/digest/hash do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
@@ -139,16 +139,18 @@ ABSENT/PRESENT/conflitante.
 
 `record_constraints` fecha as cinco variantes de `DecisionRecord`, os quatro status de
 `CycleControlState`, a cadência condicional de `TriggerDefinition` e os ordinais/retry refs de
-`AdmissionFence`/`AttemptRetryRecord`. `record_authorities` fixa o decision ledger para fences,
-retries e terminais, o event store para eventos, o evidence ledger para observations/knowledge
-inputs e a causal outbox para tasks/completions. Em `linked_record_constraints`, cada entrada declara
+`AdmissionFence`/`AttemptRetryRecord`. `record_authorities` cobre exaustivamente os roots de
+`reference_identities` mais completion: inclui o input ledger, fixa o decision ledger para material
+de decisão, o event store para eventos, o evidence ledger para claims/observations/knowledge inputs,
+a causal outbox para tasks/completions e explicita world state e stores de snapshot/genesis. Em `linked_record_constraints`, cada entrada declara
 uma transição de append ou publicação atômica, o root candidato, o cursor e `record_roles` com fonte e
-cardinalidade. Os dez `linked_record_scenarios` incluem sete estados positivos e três inputs duráveis
-completos rejeitados; os demais negativos fornecem o record CBOR substituto exato.
+cardinalidade. Os quatorze `linked_record_scenarios` incluem sete estados positivos e sete inputs
+duráveis completos rejeitados; os demais negativos fornecem o record CBOR substituto exato.
 A sequência fence abortado → abort → retry → novo fence é validada em três fronteiras duráveis,
 preserva byte a byte plano, base, closure, coorte, unidades, input e policies fora dos quatro campos
 que a retentativa pode mudar, e vincula `rule-versions` do retry ao novo fence. Event + task +
-`CycleCommit` + revisão são candidatos da mesma publicação indivisível; observation → knowledge
+consumo do fence + `DecisionRecord` + eventos + `CycleCommit` + tasks + revisão são candidatos da
+mesma publicação indivisível, com bijeção/digests de settlement; observation → knowledge
 input → completion é validado depois nas suas fronteiras de append e restringe cada
 observation ao evento da task, projeta apenas claims/evidence divulgados e exige no completion
 exatamente todos os outputs já presentes no prefixo daquela task. `RngDraw` é um root referenciável

@@ -27,8 +27,8 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `27f1517fdedde2b9fe4561bc950e2420d0f75c2fdbac2ddcfa12913801931aee` |
-| `conformance_suite_hash` | `975a9633ae4649c246966cdfd6cb3b1d87e3c0246aa69cd52b7f50555ce87242` |
+| `schema_bundle_hash` | `185928983d156e477e242c665e1fbd84cfcf632e542e9b6ef830731e60b58cd1` |
+| `conformance_suite_hash` | `bf07c9d3ff824a299bf5a656bc24fc9d1d66da9b87ea5dbc3e61c613ad5579b5` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -205,8 +205,9 @@ válida em contexto genérico. O binding do field path mais específico refina o
 
 `record_constraints` fecha invariantes locais condicionais que CDDL de aridade fixa não expressa
 sozinho; `typed_value_constraints` fecha a validação do envelope interno sob o mesmo schema bundle
-hasheado; `linked_record_constraints` fecha invariantes referenciais por transição de append, sempre
-contra o prefixo durável anterior à persistência do candidato.
+hasheado; `record_authorities` fixa o owner de cada root entre decision ledger, event store, evidence
+ledger e causal outbox; `linked_record_constraints` fecha invariantes referenciais por transição de
+append contra o prefixo durável anterior ou pela publicação atômica do commit batch.
 Para `DecisionRecord`, o decoder seleciona a variante por `disposition` e valida presença, ausência e
 vazio de candidate, conflicts, successor e canonical unit antes de aceitar o root. Para
 `CycleControlState`, fecha presence, kind do último envelope e relações de ordinal dos quatro status;
@@ -217,8 +218,9 @@ abort resolve o fence anterior e repete seus plano/digests; o novo fence resolve
 `rule_versions` igual ao do retry após normalização canônica e é byte a byte igual ao fence
 abortado, exceto por `attempt_ordinal`, `retry_ref`, `rule_versions` e o `fence_digest` resultante.
 
-A cadeia epistemológica resolve `Event` → `PerceptionTask` → `Observation` → `KnowledgeInput` →
-completion. Cada observation da task tem exatamente seu evento como fonte; task/observation,
+A relação `Event` → `PerceptionTask` nasce somente dentro da publicação indivisível que também inclui
+`CycleCommit` e a nova revisão; não existe prefixo publicado com evento sem sua task. Depois, a cadeia
+resolve `PerceptionTask` → `Observation` → `KnowledgeInput` → completion respeitando os owners. Cada observation da task tem exatamente seu evento como fonte; task/observation,
 instante e observer-recipient coincidem. Claims e evidence do knowledge input são subsets do que a
 observation resolvida divulgou. As listas do completion são exatamente as projeções canônicas de
 todos os outputs daquela task, sem extras, duplicatas ou omissões; completion vazio representa zero
@@ -435,7 +437,7 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 18. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
 
 A suíte V1 contém 152 casos positivos — todos os roots persistidos e todas as 73 operações
-registradas —, 30 casos negativos com `error_code` estável, 245 casos semânticos de binding,
+registradas —, 30 casos negativos com `error_code` estável, 246 casos semânticos de binding,
 identidade, ordenação e idempotência, sete casos de normalização e dois vetores SHA-256. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
 independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não

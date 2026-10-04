@@ -787,6 +787,84 @@
       "canonicality": "strict-decode and byte-for-byte deterministic re-encode"
     }
   ],
+  "typed_value_constraints": [
+    {
+      "constraint_id": "typed-value-inner-envelope",
+      "applies_on": "strict-decode every typed-value",
+      "inner_envelope": {
+        "magic_hex": "43534600",
+        "codec_version": 1,
+        "array_items": 6
+      },
+      "relations": [
+        {
+          "left": "typed-value.schema-id",
+          "operator": "equals",
+          "right": "inner-envelope.schema-id"
+        },
+        {
+          "left": "typed-value.schema-version",
+          "operator": "equals",
+          "right": "inner-envelope.schema-version"
+        }
+      ],
+      "domain_authorization": {
+        "operation": [
+          "inner-envelope.domain-tag",
+          "inner-envelope.schema-id",
+          "inner-envelope.schema-version"
+        ],
+        "registries": [
+          "domain_operations",
+          "genesis-pinned extension domain_operations"
+        ]
+      },
+      "digest": {
+        "algorithm": "sha-256",
+        "input": "typed-value.canonical-envelope exact bytes",
+        "expected": "typed-value.envelope-digest"
+      },
+      "canonicality": "strict-decode and byte-for-byte deterministic re-encode"
+    }
+  ],
+  "record_authorities": [
+    {
+      "root": "admission-fence",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "cycle-abort",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "attempt-retry",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "cycle-commit",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "event",
+      "authority": "event_store"
+    },
+    {
+      "root": "observation",
+      "authority": "evidence_ledger"
+    },
+    {
+      "root": "knowledge-input",
+      "authority": "evidence_ledger"
+    },
+    {
+      "root": "perception-task",
+      "authority": "causal_outbox"
+    },
+    {
+      "root": "perception-task-completion",
+      "authority": "causal_outbox"
+    }
+  ],
   "linked_record_constraints": [
     {
       "constraint_id": "append-cycle-abort",
@@ -801,7 +879,7 @@
           "role": "aborted-fence",
           "root": "admission-fence",
           "cardinality": "one",
-          "source": "fence ledger resolved by abort run-id, cycle-id, and attempt-ordinal at pre-append cursor"
+          "source": "decision_ledger resolved by abort run-id, cycle-id, and attempt-ordinal at pre-append cursor"
         },
         {
           "role": "abort",
@@ -857,14 +935,14 @@
         "candidate_role": "retry-fence",
         "root": "admission-fence",
         "when": "attempt-ordinal > 1",
-        "cursor": "fence and decision ledgers pre-append prefix"
+        "cursor": "decision-ledger pre-append prefix"
       },
       "record_roles": [
         {
           "role": "aborted-fence",
           "root": "admission-fence",
           "cardinality": "one",
-          "source": "fence ledger resolved through abort at pre-append cursor"
+          "source": "decision_ledger resolved through abort at pre-append cursor"
         },
         {
           "role": "abort",
@@ -895,28 +973,50 @@
       ]
     },
     {
-      "constraint_id": "append-perception-task",
+      "constraint_id": "publish-cycle-commit-batch",
       "applies_on": {
-        "operation": "append",
-        "candidate_role": "task",
-        "root": "perception-task",
-        "cursor": "event and evidence ledgers pre-append prefix"
+        "operation": "atomic-publish",
+        "candidate_role": "commit-batch",
+        "root": "cycle-commit",
+        "cursor": "unpublished transaction working set",
+        "publication": "event store + decision ledger + causal outbox + world revision indivisible"
       },
       "record_roles": [
         {
-          "role": "event",
-          "root": "event",
-          "cardinality": "one",
-          "source": "event ledger resolved by task.event-id at pre-append cursor"
+          "role": "cycle-commit",
+          "root": "cycle-commit",
+          "cardinality": "candidate",
+          "authority": "decision_ledger"
         },
         {
-          "role": "task",
+          "role": "events",
+          "root": "event",
+          "cardinality": "zero-or-more",
+          "authority": "event_store",
+          "source": "all event candidates selected by cycle-commit.event-ids"
+        },
+        {
+          "role": "tasks",
           "root": "perception-task",
-          "cardinality": "candidate"
+          "cardinality": "zero-or-more",
+          "authority": "causal_outbox",
+          "source": "all task candidates selected by cycle-commit.perception-task-ids"
+        },
+        {
+          "role": "result-revision",
+          "root": "world-revision",
+          "cardinality": "candidate",
+          "authority": "world_state"
         }
       ],
       "relations": [
-        "task.event-id resolves event.event-id"
+        "cycle-commit.event-ids == event-id projection of events in canonical order",
+        "cycle-commit.perception-task-ids == task-id projection of tasks in canonical order",
+        "cycle-commit.perception-task-digest commits the canonical task-id projection",
+        "every tasks.event-id resolves one of events",
+        "every tasks.base-revision == cycle-commit.base-revision",
+        "every tasks.result-revision == cycle-commit.result-revision == result-revision",
+        "cycle-commit, events, tasks, and result-revision publish all-or-none"
       ]
     },
     {
@@ -925,20 +1025,20 @@
         "operation": "append",
         "candidate_role": "observation",
         "root": "observation",
-        "cursor": "event and evidence ledgers pre-append prefix"
+        "cursor": "event-store + causal-outbox + evidence-ledger pre-append prefix"
       },
       "record_roles": [
         {
           "role": "event",
           "root": "event",
           "cardinality": "one",
-          "source": "event ledger resolved through task at pre-append cursor"
+          "source": "event_store resolved through task at pre-append cursor"
         },
         {
           "role": "task",
           "root": "perception-task",
           "cardinality": "one",
-          "source": "evidence ledger resolved by observation.task-id at pre-append cursor"
+          "source": "causal_outbox resolved by observation.task-id at pre-append cursor"
         },
         {
           "role": "observation",
@@ -966,7 +1066,7 @@
           "role": "observation",
           "root": "observation",
           "cardinality": "one",
-          "source": "knowledge-input.observation-ref resolved at pre-append cursor"
+          "source": "knowledge-input.observation-ref resolved in evidence_ledger at pre-append cursor"
         },
         {
           "role": "knowledge-input",
@@ -989,26 +1089,26 @@
         "operation": "append",
         "candidate_role": "completion",
         "root": "perception-task-completion",
-        "cursor": "evidence-ledger pre-append prefix"
+        "cursor": "causal-outbox + evidence-ledger pre-append prefix"
       },
       "record_roles": [
         {
           "role": "task",
           "root": "perception-task",
           "cardinality": "one",
-          "source": "evidence ledger resolved by completion.task-id at pre-append cursor"
+          "source": "causal_outbox resolved by completion.task-id at pre-append cursor"
         },
         {
           "role": "observations",
           "root": "observation",
           "cardinality": "zero-or-more",
-          "source": "all evidence-ledger observations for task.task-id at pre-append cursor"
+          "source": "all evidence_ledger observations for task.task-id at pre-append cursor"
         },
         {
           "role": "knowledge-inputs",
           "root": "knowledge-input",
           "cardinality": "zero-or-more",
-          "source": "all evidence-ledger knowledge-inputs for task.task-id at pre-append cursor"
+          "source": "all evidence_ledger knowledge-inputs for task.task-id at pre-append cursor"
         },
         {
           "role": "completion",

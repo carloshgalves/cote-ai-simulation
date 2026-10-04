@@ -1,6 +1,6 @@
 codec_policy_hash  513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203
-schema_bundle_hash 27f1517fdedde2b9fe4561bc950e2420d0f75c2fdbac2ddcfa12913801931aee
-conformance_suite_hash 975a9633ae4649c246966cdfd6cb3b1d87e3c0246aa69cd52b7f50555ce87242
+schema_bundle_hash 185928983d156e477e242c665e1fbd84cfcf632e542e9b6ef830731e60b58cd1
+conformance_suite_hash bf07c9d3ff824a299bf5a656bc24fc9d1d66da9b87ea5dbc3e61c613ad5579b5
 sha256               6c4db38cdec9e15a2f21195dd8f2110846ff86721b17c6b197b5d15dbe0ece68  policy-manifest.json
-sha256               0a3614045fdcafff787728f110ee2e8b56d90e0fd79140c05bd142a9675f5168  schema-manifest.json
-sha256               cfcdfc6082b0da4d0ed5e9d2dec36f3458949aa66b3c082a4c95adfff9d1f48c  conformance-manifest.json
+sha256               09f7c7bbc9843e3c25226e7168efd628c0266bca15b5180530720e62cc1cb113  schema-manifest.json
+sha256               9479da79cd0b714e1102b8731f9e8d9600af4cc1c6a41109b2ba5ca1270bbfa5  conformance-manifest.json

@@ -787,122 +787,108 @@
       "canonicality": "strict-decode and byte-for-byte deterministic re-encode"
     }
   ],
-  "typed_value_constraints": [
+  "persisted_roots": [
     {
-      "constraint_id": "typed-value-inner-envelope",
-      "applies_on": "strict-decode every typed-value",
-      "inner_envelope": {
-        "magic_hex": "43534600",
-        "codec_version": 1,
-        "array_items": 6
-      },
-      "relations": [
-        {
-          "left": "typed-value.schema-id",
-          "operator": "equals",
-          "right": "inner-envelope.schema-id"
-        },
-        {
-          "left": "typed-value.schema-version",
-          "operator": "equals",
-          "right": "inner-envelope.schema-version"
-        }
-      ],
-      "domain_authorization": {
-        "operation": [
-          "inner-envelope.domain-tag",
-          "inner-envelope.schema-id",
-          "inner-envelope.schema-version"
-        ],
-        "registries": [
-          "domain_operations",
-          "genesis-pinned extension domain_operations"
-        ]
-      },
-      "digest": {
-        "algorithm": "sha-256",
-        "input": "typed-value.canonical-envelope exact bytes",
-        "expected": "typed-value.envelope-digest"
-      },
-      "canonicality": "strict-decode and byte-for-byte deterministic re-encode"
-    }
-  ],
-  "record_authorities": [
-    {
-      "root": "admission-fence",
-      "authority": "decision_ledger"
+      "root": "exogenous-input"
     },
     {
-      "root": "cycle-abort",
-      "authority": "decision_ledger"
+      "root": "source-closure"
     },
     {
-      "root": "attempt-retry",
-      "authority": "decision_ledger"
+      "root": "slot-dispatch"
     },
     {
-      "root": "cycle-commit",
-      "authority": "decision_ledger"
+      "root": "slot-dispatch-revocation"
     },
     {
-      "root": "event",
-      "authority": "event_store"
+      "root": "action-proposal"
     },
     {
-      "root": "observation",
-      "authority": "evidence_ledger"
+      "root": "no-proposal"
     },
     {
-      "root": "knowledge-input",
-      "authority": "evidence_ledger"
+      "root": "idempotency-identity"
     },
     {
-      "root": "perception-task",
-      "authority": "causal_outbox"
+      "root": "round-declaration"
     },
     {
-      "root": "perception-task-completion",
-      "authority": "causal_outbox"
-    }
-  ],
-  "typed_value_constraints": [
+      "root": "scheduled-occurrence"
+    },
     {
-      "constraint_id": "typed-value-inner-envelope",
-      "applies_on": "strict-decode every typed-value",
-      "inner_envelope": {
-        "magic_hex": "43534600",
-        "codec_version": 1,
-        "array_items": 6
-      },
-      "relations": [
-        {
-          "left": "typed-value.schema-id",
-          "operator": "equals",
-          "right": "inner-envelope.schema-id"
-        },
-        {
-          "left": "typed-value.schema-version",
-          "operator": "equals",
-          "right": "inner-envelope.schema-version"
-        }
-      ],
-      "domain_authorization": {
-        "operation": [
-          "inner-envelope.domain-tag",
-          "inner-envelope.schema-id",
-          "inner-envelope.schema-version"
-        ],
-        "registries": [
-          "domain_operations",
-          "genesis-pinned extension domain_operations"
-        ]
-      },
-      "digest": {
-        "algorithm": "sha-256",
-        "input": "typed-value.canonical-envelope exact bytes",
-        "expected": "typed-value.envelope-digest"
-      },
-      "canonicality": "strict-decode and byte-for-byte deterministic re-encode"
+      "root": "trigger-definition"
+    },
+    {
+      "root": "trigger-runtime-state"
+    },
+    {
+      "root": "trigger-activation"
+    },
+    {
+      "root": "transmission"
+    },
+    {
+      "root": "admission-fence"
+    },
+    {
+      "root": "affordance-assessment"
+    },
+    {
+      "root": "commit-candidate"
+    },
+    {
+      "root": "conflict-set"
+    },
+    {
+      "root": "decision-record"
+    },
+    {
+      "root": "cycle-abort"
+    },
+    {
+      "root": "attempt-retry"
+    },
+    {
+      "root": "cycle-commit"
+    },
+    {
+      "root": "rng-draw"
+    },
+    {
+      "root": "provisional-disposition"
+    },
+    {
+      "root": "attempt-failure"
+    },
+    {
+      "root": "cycle-control-state"
+    },
+    {
+      "root": "event"
+    },
+    {
+      "root": "claim"
+    },
+    {
+      "root": "observation"
+    },
+    {
+      "root": "knowledge-input"
+    },
+    {
+      "root": "perception-task"
+    },
+    {
+      "root": "perception-task-completion"
+    },
+    {
+      "root": "snapshot"
+    },
+    {
+      "root": "epistemic-checkpoint-ref"
+    },
+    {
+      "root": "genesis-manifest"
     }
   ],
   "record_authorities": [
@@ -919,6 +905,10 @@
       "authority": "input_ledger"
     },
     {
+      "root": "slot-dispatch-revocation",
+      "authority": "input_ledger"
+    },
+    {
       "root": "action-proposal",
       "authority": "input_ledger"
     },
@@ -927,16 +917,28 @@
       "authority": "input_ledger"
     },
     {
+      "root": "idempotency-identity",
+      "authority": "input_ledger"
+    },
+    {
       "root": "round-declaration",
-      "authority": "world_state"
+      "authority": "schedule_store"
     },
     {
       "root": "scheduled-occurrence",
-      "authority": "world_state"
+      "authority": "schedule_store"
+    },
+    {
+      "root": "trigger-definition",
+      "authority": "trigger_registry"
+    },
+    {
+      "root": "trigger-runtime-state",
+      "authority": "trigger_registry"
     },
     {
       "root": "trigger-activation",
-      "authority": "world_state"
+      "authority": "trigger_registry"
     },
     {
       "root": "transmission",
@@ -987,6 +989,10 @@
       "authority": "decision_ledger"
     },
     {
+      "root": "cycle-control-state",
+      "authority": "decision_ledger"
+    },
+    {
       "root": "event",
       "authority": "event_store"
     },
@@ -1023,6 +1029,51 @@
       "authority": "genesis_store"
     }
   ],
+  "perception_policy_contracts": [
+    {
+      "policy_id": "perception-visible-first-v1",
+      "version": 1,
+      "policy_hash_hex": "1377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e9",
+      "input": "full canonical event record and event digest",
+      "predicate": "event.event-order-key.event-local-ordinal == 0",
+      "output": "potentially-perceptible boolean",
+      "ordering": "evaluate events in cycle-commit.event-ids order"
+    }
+  ],
+  "linked_state_models": [
+    {
+      "model_id": "source-unit-consumption-v1",
+      "cddl_type": "source-unit-consumption-transition",
+      "authority": "resolved from source-root through record_authorities",
+      "precondition": "the exact (unit-id, unit-digest) record exists and consumed=false in its authoritative store at the transaction cursor",
+      "postcondition": "the same record has consumed=true and consumed-by-fence-digest equal to the committing fence",
+      "cas": "compare source-root, authority, unit-id, unit-digest, and pre-consumed=false; publish post-consumed=true once"
+    },
+    {
+      "model_id": "world-state-transition-v1",
+      "cddl_type": "world-state-transition",
+      "authority": "world_state",
+      "precondition": "base-state exists at base-revision and hashes under cote.csf.hash.world-state to base-state-hash",
+      "postcondition": "result-state hashes under cote.csf.hash.world-state to result-state-hash and result-revision == base-revision + 1",
+      "cas": "compare base-revision and base-state-hash; publish exact result-state bytes and successor revision once"
+    },
+    {
+      "model_id": "logical-sequence-transition-v1",
+      "cddl_type": "logical-sequence-transition",
+      "authority": "event_store + decision_ledger",
+      "precondition": "before is the first free global LogicalSequence at the transaction cursor",
+      "postcondition": "events in EventOrderKey order receive the contiguous range [before, after), and after == before + event-count",
+      "cas": "an empty event batch preserves before == after"
+    },
+    {
+      "model_id": "perception-classification-v1",
+      "cddl_type": "perception-classification",
+      "authority": "cycle-commit.perception-policy",
+      "precondition": "evaluate the full canonical bytes and digest of every candidate Event under the pinned policy ref",
+      "postcondition": "exactly one PerceptionTask exists for each true result, in event-id order, and none exists for a false result",
+      "cas": "classification and task projection are part of the same atomic working set"
+    }
+  ],
   "linked_record_constraints": [
     {
       "constraint_id": "append-cycle-abort",
@@ -1052,6 +1103,10 @@
         "abort.fence-digest == aborted-fence.fence-digest",
         "abort.input-digest == aborted-fence.input-digest",
         "abort.cycle-plan == aborted-fence.cycle-plan",
+        "abort.instant == aborted-fence.instant",
+        "abort.cycle-ordinal == aborted-fence.cycle-ordinal",
+        "abort.base-revision == aborted-fence.base-revision",
+        "abort.base-state-hash == aborted-fence.base-state-hash",
         "no terminal envelope exists for abort run-id, cycle-id, and attempt-ordinal at pre-append cursor"
       ]
     },
@@ -1148,12 +1203,6 @@
           "source": "admission fence selected by cycle-commit.fence-digest"
         },
         {
-          "role": "fence-consumption",
-          "root": "fence-consumption-transition",
-          "cardinality": "candidate",
-          "authority": "source_consumption"
-        },
-        {
           "role": "decision-records",
           "root": "decision-record",
           "cardinality": "one-per-admitted-unit",
@@ -1179,29 +1228,54 @@
           "cardinality": "zero-or-more",
           "authority": "causal_outbox",
           "source": "all task candidates selected by cycle-commit.perception-task-ids"
-        },
-        {
-          "role": "result-revision",
-          "root": "world-revision",
-          "cardinality": "candidate",
-          "authority": "world_state"
         }
       ],
       "relations": [
         "cycle-commit.fence-digest == fence.fence-digest",
         "cycle-commit.input-digest == fence.input-digest",
+        "fence and cycle-commit have identical run-id, cycle-id, attempt-ordinal, instant, cycle-ordinal, cycle-plan, base-revision, and base-state-hash",
         "cycle-commit.admitted-input-ids == unit-id projection of fence.admitted-units in canonical order",
         "cycle-commit.decision-record-ids == decision-id projection of decision-records in admitted unit order",
         "decision-records form an exact bijection with fence.admitted-units by subject id and digest",
+        "every decision-record has fence run-id, cycle-id, and attempt-ordinal",
         "cycle-commit.decision-digest commits canonical (unit-id, decision-id, record-digest) pairs",
-        "fence-consumption.unit-ids == cycle-commit.admitted-input-ids and every unit transitions eligible-to-consumed",
-        "cycle-commit.event-ids == event-id projection of events in canonical order",
-        "cycle-commit.perception-task-ids == task-id projection of tasks in canonical order",
+        "every event has cycle-commit run-id, cycle-id, instant as occurred-at, and base-revision",
+        "cycle-commit.event-ids == event-id projection of events in EventOrderKey order",
+        "source-consumption contains exactly one eligible-to-consumed CAS witness for every admitted (unit-id, unit-digest), resolved from its real persisted root and record_authority",
+        "world-state-transition proves existing (base-revision, base-state-hash), deterministic post-state bytes, result-state-hash, and result-revision == base-revision + 1",
+        "events ordered by event-order-key have contiguous logical-sequence from logical-sequence-transition.before, and cycle-commit.next-logical-sequence == logical-sequence-transition.after == before + event count",
+        "perception-classification evaluates every event under cycle-commit.perception-policy and tasks form an exact one-to-one ordered projection of events classified potentially perceptible",
+        "cycle-commit.perception-policy resolves exactly one perception_policy_contracts entry by policy-id, version, and policy-hash",
+        "cycle-commit.perception-task-ids == task-id projection of tasks in classified event order",
         "cycle-commit.perception-task-digest commits the canonical task-id projection",
-        "every tasks.event-id resolves one of events",
-        "every tasks.base-revision == cycle-commit.base-revision",
-        "every tasks.result-revision == cycle-commit.result-revision == result-revision",
-        "fence consumption, decision-records, events, cycle-commit, tasks, and result-revision publish all-or-none"
+        "every task has cycle-commit run-id, cycle-id, base-revision, result-revision, and perception-policy",
+        "source consumption, decision-records, events, cycle-commit, tasks, world-state-transition, and logical-sequence-transition publish all-or-none"
+      ],
+      "state_roles": [
+        {
+          "role": "source-consumption",
+          "model": "source-unit-consumption-v1",
+          "cardinality": "one-per-admitted-unit",
+          "source": "authoritative source records resolved from fence.admitted-units"
+        },
+        {
+          "role": "world-state-transition",
+          "model": "world-state-transition-v1",
+          "cardinality": "one",
+          "source": "world_state pre-state cursor and candidate post-state"
+        },
+        {
+          "role": "logical-sequence-transition",
+          "model": "logical-sequence-transition-v1",
+          "cardinality": "one",
+          "source": "global logical-sequence cursor and ordered candidate events"
+        },
+        {
+          "role": "perception-classification",
+          "model": "perception-classification-v1",
+          "cardinality": "one",
+          "source": "pinned perception policy evaluated over every candidate event"
+        }
       ]
     },
     {

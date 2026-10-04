@@ -27,8 +27,8 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `60396843a6b5d07c5d15e5a69026a9e92b58d1dba23d5b4736a649cf285dcd1d` |
-| `conformance_suite_hash` | `5d3ef9f581bd1e4de84c1d95525c65fec22f0c9061315f153859c45462c0e11b` |
+| `schema_bundle_hash` | `6e2e899578b4fd782a740e7dea76ce1f87787d97b01e8590f5a8bf3e1569fe8a` |
+| `conformance_suite_hash` | `b035ca03976d9f5f92d343ade70a4eeab540de2f9faf46205b4416ddb07deb72` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -205,9 +205,10 @@ válida em contexto genérico. O binding do field path mais específico refina o
 
 `record_constraints` fecha invariantes locais condicionais que CDDL de aridade fixa não expressa
 sozinho; `typed_value_constraints` fecha a validação do envelope interno sob o mesmo schema bundle
-hasheado; `record_authorities` cobre todos os roots referenciáveis mais completion e fixa
-explicitamente input ledger, decision ledger, event store, evidence ledger, causal outbox, world
-state e stores de snapshot/genesis; `linked_record_constraints` fecha invariantes referenciais por transição de
+hasheado; `persisted_roots` declara por lista fechada todos os records persistidos, referenciáveis ou
+não, e `record_authorities` fixa seus owners entre input ledger, schedule store, trigger registry,
+decision ledger, event store, evidence ledger, causal outbox, world state e stores de
+snapshot/genesis; `linked_record_constraints` fecha invariantes referenciais por transição de
 append contra o prefixo durável anterior ou pela publicação atômica do commit batch.
 Para `DecisionRecord`, o decoder seleciona a variante por `disposition` e valida presença, ausência e
 vazio de candidate, conflicts, successor e canonical unit antes de aceitar o root. Para
@@ -220,8 +221,12 @@ abort resolve o fence anterior e repete seus plano/digests; o novo fence resolve
 abortado, exceto por `attempt_ordinal`, `retry_ref`, `rule_versions` e o `fence_digest` resultante.
 
 A relação `Event` → `PerceptionTask` nasce somente dentro da publicação indivisível que também inclui
-consumo das unidades do fence, todos os `DecisionRecord`, `CycleCommit` e a nova revisão; não existe
-prefixo publicado com settlement incompleto, evento sem task ou unidade reutilizável. Depois, a cadeia
+CAS de consumo das unidades do fence, todos os `DecisionRecord`, `CycleCommit`, transição verificável
+de `WorldState` e cursor de `LogicalSequence`. Fence, commit, decisions, events e tasks compartilham
+as coordenadas aplicáveis; eventos recebem sequência contígua por `EventOrderKey`, e a policy
+perceptiva pinada resolve um predicado versionado em `perception_policy_contracts` e produz uma
+bijeção entre eventos classificados e tasks. Não existe prefixo
+publicado com settlement incompleto, evento perceptível sem task ou unidade reutilizável. Depois, a cadeia
 resolve `PerceptionTask` → `Observation` → `KnowledgeInput` → completion respeitando os owners. Cada observation da task tem exatamente seu evento como fonte; task/observation,
 instante e observer-recipient coincidem. Claims e evidence do knowledge input são subsets do que a
 observation resolvida divulgou. As listas do completion são exatamente as projeções canônicas de
@@ -439,7 +444,7 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 18. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
 
 A suíte V1 contém 152 casos positivos — todos os roots persistidos e todas as 73 operações
-registradas —, 30 casos negativos com `error_code` estável, 250 casos semânticos de binding,
+registradas —, 30 casos negativos com `error_code` estável, 284 casos semânticos de binding,
 identidade, ordenação e idempotência, sete casos de normalização e dois vetores SHA-256. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
 independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não

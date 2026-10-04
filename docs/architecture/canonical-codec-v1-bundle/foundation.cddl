@@ -226,6 +226,20 @@ decision-cohort = [cohort-id: id32, rounds: [0*1024 cohort-round]]
 admitted-unit = [eligibility: eligibility-coordinate, unit-kind: u8, source-id: machine-id,
                    unit-id: id32, unit-digest: digest32]
 
+; Transaction witnesses are canonical working-set values, not additional persisted roots.
+source-unit-consumption-transition = [source-root: schema-id, authority: machine-id,
+                                      unit-id: id32, unit-digest: digest32,
+                                      pre-consumed: bool, post-consumed: bool,
+                                      consumed-by-fence-digest: digest32]
+world-state-transition = [base-revision: world-revision, base-state: typed-value,
+                          base-state-hash: digest32, result-revision: world-revision,
+                          result-state: typed-value, result-state-hash: digest32]
+logical-sequence-transition = [before: logical-sequence, after: logical-sequence]
+perception-classification-item = [event-id: id32, event-digest: digest32,
+                                  potentially-perceptible: bool]
+perception-classification = [perception-policy: policy-ref,
+                             events: [0*65535 perception-classification-item]]
+
 admission-fence-fields = (
   run-id: id32,
   cycle-id: id32,

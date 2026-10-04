@@ -4,13 +4,13 @@
   "artifacts": [
     [
       "foundation.cddl",
-      24955,
-      "313854f6e3a732f3ebfe8ba02848eb7e6d9a2b274dd3286c4ad572e87daab718"
+      25970,
+      "f8b0d13f2a1290506a94e9f770f6feea180f978aefb03bf42a2190d0daf3ef1d"
     ],
     [
       "registries.json",
-      85296,
-      "553bc3d4f56e5e78ad18ab6e7ea06917522e2694c13a4f3d642b157d5c76bca9"
+      88724,
+      "d0f55bfa31173118ff358144962b14cbd70eaf5000c7221cfa366902ef033506"
     ]
   ]
 }

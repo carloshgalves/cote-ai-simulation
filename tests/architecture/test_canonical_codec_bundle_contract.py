@@ -71,6 +71,38 @@ def _decode_cbor_hex(encoded_hex: str):
     return value
 
 
+def _encode_cbor_item(value) -> bytes:
+    """Encode the deterministic CBOR subset needed by semantic fixtures."""
+
+    def head(major: int, argument: int) -> bytes:
+        if argument < 24:
+            return bytes([(major << 5) | argument])
+        if argument <= 0xFF:
+            return bytes([(major << 5) | 24, argument])
+        if argument <= 0xFFFF:
+            return bytes([(major << 5) | 25]) + argument.to_bytes(2, "big")
+        if argument <= 0xFFFFFFFF:
+            return bytes([(major << 5) | 26]) + argument.to_bytes(4, "big")
+        return bytes([(major << 5) | 27]) + argument.to_bytes(8, "big")
+
+    if value is None:
+        return b"\xf6"
+    if value is False:
+        return b"\xf4"
+    if value is True:
+        return b"\xf5"
+    if isinstance(value, int):
+        return head(0, value) if value >= 0 else head(1, -1 - value)
+    if isinstance(value, bytes):
+        return head(2, len(value)) + value
+    if isinstance(value, str):
+        encoded = value.encode("utf-8")
+        return head(3, len(encoded)) + encoded
+    if isinstance(value, list):
+        return head(4, len(value)) + b"".join(_encode_cbor_item(item) for item in value)
+    raise AssertionError(f"unsupported semantic fixture value {type(value)!r}")
+
+
 def _values_at_index_path(value, path: tuple[int | None, ...]):
     if not path:
         return [value]
@@ -656,7 +688,83 @@ def test_every_positive_root_obeys_its_narrow_reference_kind_bindings() -> None:
     assert persisted["cote.csf.schema.knowledge-input"][1][7][0] == 16
 
 
-def test_attempt_retry_chain_is_closed_locally_and_referentially() -> None:
+def test_typed_value_inner_envelope_constraint_is_hashed_and_executable() -> None:
+    registries = _json("registries.json")
+    fixtures = _json("fixtures.json")
+
+    assert registries["typed_value_constraints"] == [
+        {
+            "constraint_id": "typed-value-inner-envelope",
+            "applies_on": "strict-decode every typed-value",
+            "inner_envelope": {
+                "magic_hex": "43534600",
+                "codec_version": 1,
+                "array_items": 6,
+            },
+            "relations": [
+                {
+                    "left": "typed-value.schema-id",
+                    "operator": "equals",
+                    "right": "inner-envelope.schema-id",
+                },
+                {
+                    "left": "typed-value.schema-version",
+                    "operator": "equals",
+                    "right": "inner-envelope.schema-version",
+                },
+            ],
+            "domain_authorization": {
+                "operation": [
+                    "inner-envelope.domain-tag",
+                    "inner-envelope.schema-id",
+                    "inner-envelope.schema-version",
+                ],
+                "registries": [
+                    "domain_operations",
+                    "genesis-pinned extension domain_operations",
+                ],
+            },
+            "digest": {
+                "algorithm": "sha-256",
+                "input": "typed-value.canonical-envelope exact bytes",
+                "expected": "typed-value.envelope-digest",
+            },
+            "canonicality": "strict-decode and byte-for-byte deterministic re-encode",
+        }
+    ]
+
+    cases = [
+        case
+        for case in fixtures["semantic"]
+        if case["kind"] == "typed_value_constraint"
+    ]
+    assert len(cases) == 6
+    assert {case["expected"] for case in cases} == {"accept", "reject"}
+
+    for case in cases:
+        schema_id, schema_version, inner_bytes, envelope_digest = _decode_cbor_hex(
+            case["typed_value_cbor_hex"]
+        )
+        inner = _decode_cbor_hex(inner_bytes.hex())
+        errors = []
+        if schema_id != inner[3]:
+            errors.append("TYPED_VALUE_SCHEMA_MISMATCH")
+        if schema_version != inner[4]:
+            errors.append("TYPED_VALUE_VERSION_MISMATCH")
+        if [inner[2], inner[3], inner[4]] not in case["authorized_operations"]:
+            errors.append("TYPED_VALUE_DOMAIN_UNAUTHORIZED")
+        if hashlib.sha256(inner_bytes).digest() != envelope_digest:
+            errors.append("TYPED_VALUE_DIGEST_MISMATCH")
+        if _encode_cbor_item(inner) != inner_bytes:
+            errors.append("TYPED_VALUE_INNER_NON_CANONICAL")
+
+        if case["expected"] == "accept":
+            assert errors == [], case["case_id"]
+        else:
+            assert errors == [case["invalid_error_code"]], case["case_id"]
+
+
+def test_retry_constraints_are_scoped_to_durable_append_transitions() -> None:
     registries = _json("registries.json")
     fixtures = _json("fixtures.json")
     constraints = {
@@ -676,36 +784,52 @@ def test_attempt_retry_chain_is_closed_locally_and_referentially() -> None:
         "relations": ["to-attempt-ordinal == from-attempt-ordinal + 1"],
     }
 
-    chain = next(
-        item
+    constraints_by_id = {
+        item["constraint_id"]: item
         for item in registries["linked_record_constraints"]
-        if item["constraint_id"] == "attempt-retry-chain"
-    )
-    assert chain["record_roles"] == [
-        ["aborted-fence", "admission-fence", "one"],
-        ["abort", "cycle-abort", "one"],
-        ["retry", "attempt-retry", "one"],
-        ["retry-fence", "admission-fence", "one"],
-    ]
-    assert set(chain["relations"]) == {
-        "aborted-fence.run-id == abort.run-id == retry.run-id == retry-fence.run-id",
-        "aborted-fence.cycle-id == abort.cycle-id == retry.cycle-id == retry-fence.cycle-id",
-        "aborted-fence.attempt-ordinal == abort.attempt-ordinal == retry.from-attempt-ordinal",
-        "retry.to-attempt-ordinal == retry-fence.attempt-ordinal",
-        "abort.fence-digest == aborted-fence.fence-digest",
-        "abort.input-digest == aborted-fence.input-digest",
-        "abort.cycle-plan == aborted-fence.cycle-plan",
-        "retry.aborted-envelope-ref resolves abort",
-        "retry-fence.retry-ref resolves retry",
-        "abort is latest terminal envelope for run-id",
-        "retry-fence fields other than attempt-ordinal, retry-ref, rule-versions, and fence-digest equal aborted-fence byte-for-byte",
     }
+    retry_ids = {
+        "append-cycle-abort",
+        "append-attempt-retry",
+        "append-retry-fence",
+    }
+    assert retry_ids <= constraints_by_id.keys()
+    assert constraints_by_id["append-cycle-abort"]["applies_on"] == {
+        "operation": "append",
+        "candidate_role": "abort",
+        "root": "cycle-abort",
+        "cursor": "decision-ledger pre-append prefix",
+    }
+    assert constraints_by_id["append-attempt-retry"]["applies_on"] == {
+        "operation": "append",
+        "candidate_role": "retry",
+        "root": "attempt-retry",
+        "cursor": "decision-ledger pre-append prefix",
+    }
+    retry_fence = constraints_by_id["append-retry-fence"]
+    assert retry_fence["applies_on"] == {
+        "operation": "append",
+        "candidate_role": "retry-fence",
+        "root": "admission-fence",
+        "when": "attempt-ordinal > 1",
+        "cursor": "fence and decision ledgers pre-append prefix",
+    }
+    assert (
+        "retry.rule-versions == retry-fence.rule-versions after canonical set normalization"
+        in retry_fence["relations"]
+    )
+    assert all(
+        "at pre-append cursor" in relation
+        for relation in constraints_by_id["append-attempt-retry"]["relations"]
+        if "latest terminal" in relation
+    )
 
     cases = [
         case
         for case in fixtures["semantic"]
         if case["kind"] == "linked_record_constraint"
-        and case["constraint_id"] == "attempt-retry-chain"
+        and case["constraint_id"] in retry_ids
+        and case["expected"] == "reject"
     ]
     assert {case["violation"] for case in cases} == {
         "first_attempt_has_retry_ref",
@@ -731,62 +855,68 @@ def test_attempt_retry_chain_is_closed_locally_and_referentially() -> None:
         "retry_admitted_units_mismatch",
         "retry_input_digest_mismatch",
         "retry_immutable_policy_mismatch",
+        "retry_rule_versions_mismatch",
         "later_terminal_other_cycle",
     }
-    assert all(
-        case["record_template_case_ids"]
-        == [
-            "root.admission-fence.minimal",
-            "root.cycle-abort.minimal",
-            "root.attempt-retry.minimal",
-            "root.admission-fence.minimal",
-        ]
-        for case in cases
-    )
-    assert all(case["mutation"] == case["violation"] for case in cases)
+    assert all(case["expected"] == "reject" for case in cases)
+    assert all(isinstance(case["mutation"], dict) for case in cases)
     assert all(case["invalid_error_code"] == "LINKED_RECORD_CONSTRAINT" for case in cases)
 
+    accepted = [
+        case
+        for case in fixtures["semantic"]
+        if case["kind"] == "linked_record_constraint"
+        and case["constraint_id"] in retry_ids
+        and case["expected"] == "accept"
+    ]
+    assert {case["constraint_id"] for case in accepted} == retry_ids
 
-def test_epistemic_projection_chain_is_causally_bound_and_covered() -> None:
+
+def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
     registries = _json("registries.json")
     fixtures = _json("fixtures.json")
-    chain = next(
-        item
+    constraints_by_id = {
+        item["constraint_id"]: item
         for item in registries["linked_record_constraints"]
-        if item["constraint_id"] == "epistemic-projection-chain"
-    )
-
-    assert chain["record_roles"] == [
-        ["event", "event", "one"],
-        ["task", "perception-task", "one"],
-        ["observations", "observation", "zero-or-more"],
-        ["knowledge-inputs", "knowledge-input", "zero-or-more"],
-        ["completion", "perception-task-completion", "one"],
-    ]
-    assert set(chain["relations"]) == {
-        "task.event-id resolves event.event-id",
-        "every observations.task-id resolves task.task-id",
-        "every observations.observed-at == event.occurred-at",
-        "every observations.source-event-refs == [event ref]",
-        "every knowledge-inputs.observation-ref resolves one of observations",
-        "every knowledge-inputs.recipient == resolved observation.observer",
-        "every knowledge-inputs.received-at == resolved observation.observed-at",
-        "every knowledge-inputs.claim-refs is a subset of resolved observation.claim-refs",
-        "every knowledge-inputs.evidence-chain is a subset of resolved observation.evidence-chain",
-        "completion.task-id == task.task-id",
-        "completion.observation-ids == observation-id projection of observations in canonical order",
-        "completion.knowledge-input-ids == knowledge-input-id projection of knowledge-inputs in canonical order",
     }
-    assert chain["visibility_rule"] == (
-        "knowledge-input may project only claims and evidence disclosed by its "
-        "resolved observation to its observer-recipient"
+    epistemic_ids = {
+        "append-perception-task",
+        "append-observation",
+        "append-knowledge-input",
+        "append-perception-completion",
+    }
+    assert epistemic_ids <= constraints_by_id.keys()
+    assert {
+        constraint_id: constraints_by_id[constraint_id]["applies_on"]["root"]
+        for constraint_id in epistemic_ids
+    } == {
+        "append-perception-task": "perception-task",
+        "append-observation": "observation",
+        "append-knowledge-input": "knowledge-input",
+        "append-perception-completion": "perception-task-completion",
+    }
+    assert all(
+        constraints_by_id[constraint_id]["applies_on"]["operation"] == "append"
+        for constraint_id in epistemic_ids
+    )
+    completion = constraints_by_id["append-perception-completion"]
+    assert any(
+        role["role"] == "observations"
+        and role["source"] == "all evidence-ledger observations for task.task-id at pre-append cursor"
+        for role in completion["record_roles"]
+    )
+    assert any(
+        role["role"] == "knowledge-inputs"
+        and role["source"] == "all evidence-ledger knowledge-inputs for task.task-id at pre-append cursor"
+        for role in completion["record_roles"]
     )
 
     cases = [
         case
         for case in fixtures["semantic"]
         if case["kind"] == "linked_record_constraint"
-        and case["constraint_id"] == "epistemic-projection-chain"
+        and case["constraint_id"] in epistemic_ids
+        and case["expected"] == "reject"
     ]
     assert {case["violation"] for case in cases} == {
         "task_event_id_mismatch",
@@ -807,19 +937,73 @@ def test_epistemic_projection_chain_is_causally_bound_and_covered() -> None:
         "completion_duplicate_observation",
         "completion_duplicate_knowledge_input",
     }
-    assert all(
-        case["record_template_case_ids"]
-        == [
-            "root.event.minimal",
-            "root.perception-task.minimal",
-            "root.observation.minimal",
-            "root.knowledge-input.minimal",
-            "root.perception-task-completion.minimal",
-        ]
-        for case in cases
-    )
-    assert all(case["mutation"] == case["violation"] for case in cases)
+    assert all(case["expected"] == "reject" for case in cases)
+    assert all(isinstance(case["mutation"], dict) for case in cases)
     assert all(case["invalid_error_code"] == "LINKED_RECORD_CONSTRAINT" for case in cases)
+
+    accepted = [
+        case
+        for case in fixtures["semantic"]
+        if case["kind"] == "linked_record_constraint"
+        and case["constraint_id"] in epistemic_ids
+        and case["expected"] == "accept"
+    ]
+    assert {case["constraint_id"] for case in accepted} == epistemic_ids
+
+
+def test_linked_semantic_cases_are_self_contained_and_all_case_refs_resolve() -> None:
+    fixtures = _json("fixtures.json")
+    registries = _json("registries.json")
+    constraints = {
+        item["constraint_id"] for item in registries["linked_record_constraints"]
+    }
+    scenarios = {
+        scenario["scenario_id"]: scenario
+        for scenario in fixtures["linked_record_scenarios"]
+    }
+    assert len(scenarios) == len(fixtures["linked_record_scenarios"])
+
+    for scenario in scenarios.values():
+        assert scenario["records"]
+        for record in scenario["records"]:
+            assert _decode_cbor_hex(record["record_cbor_hex"])
+            assert record["schema_id"].startswith("cote.csf.schema.")
+
+    linked_cases = [
+        case
+        for case in fixtures["semantic"]
+        if case["kind"] == "linked_record_constraint"
+    ]
+    for case in linked_cases:
+        assert case["constraint_id"] in constraints
+        assert case["base_scenario_id"] in scenarios
+        if case["expected"] == "reject":
+            mutation = case["mutation"]
+            assert mutation["op"] in {"replace_record", "replace_ledger_field"}
+            if mutation["op"] == "replace_record":
+                assert _decode_cbor_hex(mutation["record_cbor_hex"])
+            assert case["invalid_error_code"] == "LINKED_RECORD_CONSTRAINT"
+        else:
+            assert "mutation" not in case
+
+    all_case_ids = {
+        case["case_id"]
+        for value in fixtures.values()
+        if isinstance(value, list)
+        for case in value
+        if isinstance(case, dict) and "case_id" in case
+    }
+    for value in fixtures.values():
+        if not isinstance(value, list):
+            continue
+        for case in value:
+            if not isinstance(case, dict):
+                continue
+            for field, referenced in case.items():
+                if field.endswith("_case_id") and field != "case_id":
+                    assert referenced in all_case_ids, (case.get("case_id"), field)
+                if field.endswith("_case_ids"):
+                    assert set(referenced) <= all_case_ids, (case.get("case_id"), field)
 
 
 def test_standalone_proposition_binds_polarity() -> None:
@@ -883,12 +1067,12 @@ def test_published_conformance_case_counts_match_the_bundle() -> None:
 
     assert len(fixtures["positive"]) == 152
     assert len(fixtures["negative"]) == 30
-    assert len(fixtures["semantic"]) == 231
+    assert len(fixtures["semantic"]) == 245
     assert len(fixtures["normalization_cases"]) == 7
     assert "152 casos positivos" in contract
     assert "30 casos negativos" in contract
-    assert "231 casos semânticos" in contract
-    assert "152 vetores positivos, 30 negativos, 231 casos semânticos" in readme
+    assert "245 casos semânticos" in contract
+    assert "152 vetores positivos, 30 negativos, 245 casos semânticos" in readme
 
 
 def test_cycle_control_state_variants_are_closed_by_status() -> None:

@@ -747,53 +747,280 @@
       ]
     }
   ],
+  "typed_value_constraints": [
+    {
+      "constraint_id": "typed-value-inner-envelope",
+      "applies_on": "strict-decode every typed-value",
+      "inner_envelope": {
+        "magic_hex": "43534600",
+        "codec_version": 1,
+        "array_items": 6
+      },
+      "relations": [
+        {
+          "left": "typed-value.schema-id",
+          "operator": "equals",
+          "right": "inner-envelope.schema-id"
+        },
+        {
+          "left": "typed-value.schema-version",
+          "operator": "equals",
+          "right": "inner-envelope.schema-version"
+        }
+      ],
+      "domain_authorization": {
+        "operation": [
+          "inner-envelope.domain-tag",
+          "inner-envelope.schema-id",
+          "inner-envelope.schema-version"
+        ],
+        "registries": [
+          "domain_operations",
+          "genesis-pinned extension domain_operations"
+        ]
+      },
+      "digest": {
+        "algorithm": "sha-256",
+        "input": "typed-value.canonical-envelope exact bytes",
+        "expected": "typed-value.envelope-digest"
+      },
+      "canonicality": "strict-decode and byte-for-byte deterministic re-encode"
+    }
+  ],
   "linked_record_constraints": [
     {
-      "constraint_id": "attempt-retry-chain",
+      "constraint_id": "append-cycle-abort",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "abort",
+        "root": "cycle-abort",
+        "cursor": "decision-ledger pre-append prefix"
+      },
       "record_roles": [
-        ["aborted-fence", "admission-fence", "one"],
-        ["abort", "cycle-abort", "one"],
-        ["retry", "attempt-retry", "one"],
-        ["retry-fence", "admission-fence", "one"]
+        {
+          "role": "aborted-fence",
+          "root": "admission-fence",
+          "cardinality": "one",
+          "source": "fence ledger resolved by abort run-id, cycle-id, and attempt-ordinal at pre-append cursor"
+        },
+        {
+          "role": "abort",
+          "root": "cycle-abort",
+          "cardinality": "candidate"
+        }
+      ],
+      "relations": [
+        "aborted-fence.run-id == abort.run-id",
+        "aborted-fence.cycle-id == abort.cycle-id",
+        "aborted-fence.attempt-ordinal == abort.attempt-ordinal",
+        "abort.fence-digest == aborted-fence.fence-digest",
+        "abort.input-digest == aborted-fence.input-digest",
+        "abort.cycle-plan == aborted-fence.cycle-plan",
+        "no terminal envelope exists for abort run-id, cycle-id, and attempt-ordinal at pre-append cursor"
+      ]
+    },
+    {
+      "constraint_id": "append-attempt-retry",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "retry",
+        "root": "attempt-retry",
+        "cursor": "decision-ledger pre-append prefix"
+      },
+      "record_roles": [
+        {
+          "role": "abort",
+          "root": "cycle-abort",
+          "cardinality": "one",
+          "source": "retry.aborted-envelope-ref resolved in decision-ledger pre-append prefix"
+        },
+        {
+          "role": "retry",
+          "root": "attempt-retry",
+          "cardinality": "candidate"
+        }
+      ],
+      "relations": [
+        "abort.run-id == retry.run-id",
+        "abort.cycle-id == retry.cycle-id",
+        "abort.attempt-ordinal == retry.from-attempt-ordinal",
+        "retry.to-attempt-ordinal == retry.from-attempt-ordinal + 1",
+        "retry.aborted-envelope-ref resolves abort",
+        "abort is latest terminal envelope for retry run-id at pre-append cursor",
+        "no retry resolving abort exists at pre-append cursor"
+      ]
+    },
+    {
+      "constraint_id": "append-retry-fence",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "retry-fence",
+        "root": "admission-fence",
+        "when": "attempt-ordinal > 1",
+        "cursor": "fence and decision ledgers pre-append prefix"
+      },
+      "record_roles": [
+        {
+          "role": "aborted-fence",
+          "root": "admission-fence",
+          "cardinality": "one",
+          "source": "fence ledger resolved through abort at pre-append cursor"
+        },
+        {
+          "role": "abort",
+          "root": "cycle-abort",
+          "cardinality": "one",
+          "source": "decision-ledger pre-append prefix"
+        },
+        {
+          "role": "retry",
+          "root": "attempt-retry",
+          "cardinality": "one",
+          "source": "retry-fence.retry-ref resolved in decision-ledger pre-append prefix"
+        },
+        {
+          "role": "retry-fence",
+          "root": "admission-fence",
+          "cardinality": "candidate"
+        }
       ],
       "relations": [
         "aborted-fence.run-id == abort.run-id == retry.run-id == retry-fence.run-id",
         "aborted-fence.cycle-id == abort.cycle-id == retry.cycle-id == retry-fence.cycle-id",
         "aborted-fence.attempt-ordinal == abort.attempt-ordinal == retry.from-attempt-ordinal",
         "retry.to-attempt-ordinal == retry-fence.attempt-ordinal",
-        "abort.fence-digest == aborted-fence.fence-digest",
-        "abort.input-digest == aborted-fence.input-digest",
-        "abort.cycle-plan == aborted-fence.cycle-plan",
-        "retry.aborted-envelope-ref resolves abort",
         "retry-fence.retry-ref resolves retry",
-        "abort is latest terminal envelope for run-id",
+        "retry.rule-versions == retry-fence.rule-versions after canonical set normalization",
         "retry-fence fields other than attempt-ordinal, retry-ref, rule-versions, and fence-digest equal aborted-fence byte-for-byte"
       ]
     },
     {
-      "constraint_id": "epistemic-projection-chain",
+      "constraint_id": "append-perception-task",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "task",
+        "root": "perception-task",
+        "cursor": "event and evidence ledgers pre-append prefix"
+      },
       "record_roles": [
-        ["event", "event", "one"],
-        ["task", "perception-task", "one"],
-        ["observations", "observation", "zero-or-more"],
-        ["knowledge-inputs", "knowledge-input", "zero-or-more"],
-        ["completion", "perception-task-completion", "one"]
+        {
+          "role": "event",
+          "root": "event",
+          "cardinality": "one",
+          "source": "event ledger resolved by task.event-id at pre-append cursor"
+        },
+        {
+          "role": "task",
+          "root": "perception-task",
+          "cardinality": "candidate"
+        }
       ],
       "relations": [
+        "task.event-id resolves event.event-id"
+      ]
+    },
+    {
+      "constraint_id": "append-observation",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "observation",
+        "root": "observation",
+        "cursor": "event and evidence ledgers pre-append prefix"
+      },
+      "record_roles": [
+        {
+          "role": "event",
+          "root": "event",
+          "cardinality": "one",
+          "source": "event ledger resolved through task at pre-append cursor"
+        },
+        {
+          "role": "task",
+          "root": "perception-task",
+          "cardinality": "one",
+          "source": "evidence ledger resolved by observation.task-id at pre-append cursor"
+        },
+        {
+          "role": "observation",
+          "root": "observation",
+          "cardinality": "candidate"
+        }
+      ],
+      "relations": [
+        "observation.task-id resolves task.task-id",
         "task.event-id resolves event.event-id",
-        "every observations.task-id resolves task.task-id",
-        "every observations.observed-at == event.occurred-at",
-        "every observations.source-event-refs == [event ref]",
-        "every knowledge-inputs.observation-ref resolves one of observations",
-        "every knowledge-inputs.recipient == resolved observation.observer",
-        "every knowledge-inputs.received-at == resolved observation.observed-at",
-        "every knowledge-inputs.claim-refs is a subset of resolved observation.claim-refs",
-        "every knowledge-inputs.evidence-chain is a subset of resolved observation.evidence-chain",
+        "observation.observed-at == event.occurred-at",
+        "observation.source-event-refs == [event ref]"
+      ]
+    },
+    {
+      "constraint_id": "append-knowledge-input",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "knowledge-input",
+        "root": "knowledge-input",
+        "cursor": "evidence-ledger pre-append prefix"
+      },
+      "record_roles": [
+        {
+          "role": "observation",
+          "root": "observation",
+          "cardinality": "one",
+          "source": "knowledge-input.observation-ref resolved at pre-append cursor"
+        },
+        {
+          "role": "knowledge-input",
+          "root": "knowledge-input",
+          "cardinality": "candidate"
+        }
+      ],
+      "relations": [
+        "knowledge-input.observation-ref resolves observation",
+        "knowledge-input.recipient == observation.observer",
+        "knowledge-input.received-at == observation.observed-at",
+        "knowledge-input.claim-refs is a subset of observation.claim-refs",
+        "knowledge-input.evidence-chain is a subset of observation.evidence-chain"
+      ],
+      "visibility_rule": "knowledge-input may project only claims and evidence disclosed by its resolved observation to its observer-recipient"
+    },
+    {
+      "constraint_id": "append-perception-completion",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "completion",
+        "root": "perception-task-completion",
+        "cursor": "evidence-ledger pre-append prefix"
+      },
+      "record_roles": [
+        {
+          "role": "task",
+          "root": "perception-task",
+          "cardinality": "one",
+          "source": "evidence ledger resolved by completion.task-id at pre-append cursor"
+        },
+        {
+          "role": "observations",
+          "root": "observation",
+          "cardinality": "zero-or-more",
+          "source": "all evidence-ledger observations for task.task-id at pre-append cursor"
+        },
+        {
+          "role": "knowledge-inputs",
+          "root": "knowledge-input",
+          "cardinality": "zero-or-more",
+          "source": "all evidence-ledger knowledge-inputs for task.task-id at pre-append cursor"
+        },
+        {
+          "role": "completion",
+          "root": "perception-task-completion",
+          "cardinality": "candidate"
+        }
+      ],
+      "relations": [
         "completion.task-id == task.task-id",
         "completion.observation-ids == observation-id projection of observations in canonical order",
         "completion.knowledge-input-ids == knowledge-input-id projection of knowledge-inputs in canonical order"
-      ],
-      "visibility_rule": "knowledge-input may project only claims and evidence disclosed by its resolved observation to its observer-recipient"
+      ]
     }
   ],
   "role_bindings": [

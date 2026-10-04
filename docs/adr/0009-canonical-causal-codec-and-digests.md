@@ -42,11 +42,11 @@ Adotar `COTE Causal Canonical Codec V1`, identificado por
 
 O bundle normativo fixa CDDL, domain/schema operations, bindings de cada enum/variant/role,
 identidades de `CausalRef`, chaves separadas de ordering/identidade para coleções set-like, limites,
-dados Unicode e 422 vetores/casos de conformidade. Seus hashes V1 são:
+dados Unicode e 436 vetores/casos de conformidade. Seus hashes V1 são:
 
 - `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`;
-- `schema_bundle_hash=15d48f195a825db0f406188f041f6d3e310d97f05a3b6eb641571513f5871d0f`;
-- `conformance_suite_hash=aa020a010613b81eb0112d05e3be84b4deee95578b5b40a059c0d8463647f6e9`.
+- `schema_bundle_hash=27f1517fdedde2b9fe4561bc950e2420d0f75c2fdbac2ddcfa12913801931aee`;
+- `conformance_suite_hash=975a9633ae4649c246966cdfd6cb3b1d87e3c0246aa69cd52b7f50555ce87242`.
 
 O layout completo e os vetores-âncora estão no contrato normativo ligado acima.
 
@@ -85,10 +85,13 @@ de qualquer record e nunca é hashada como substituto dos bytes.
 O genesis fixa version/hash do codec, schema bundle, Unicode data e registries. Decoder causal é
 strict: valida profile/schema, reencoda e exige os mesmos bytes antes de verificar digest ou aplicar
 reducer. Além da forma local, strict validation aplica `record_constraints` e resolve
-`linked_record_constraints`: retry deve avançar um único attempt desde o último abort do run e
-reutilizar byte a byte o fence abortado fora dos campos de retentativa; a cadeia epistemológica deve
-conservar event/task, instante, observer-recipient, somente claims/evidências divulgados e a
-membresia exata da completion. Biblioteca nova que emite bytes diferentes é
+`typed_value_constraints` valida schema/version externos, operação autorizada, digest dos bytes
+exatos e re-encoding canônico do envelope interno. `linked_record_constraints` aplica cada regra na
+fronteira de append contra o prefixo durável: retry avança um único attempt desde o último abort do
+mesmo run/cycle, seus `rule-versions` coincidem com o novo fence após normalização, e o fence abortado
+é reutilizado byte a byte fora dos campos de retentativa; a cadeia epistemológica conserva
+event/task, instante, observer-recipient, somente claims/evidências divulgados e a membresia exata da
+completion já observável no cursor. Biblioteca nova que emite bytes diferentes é
 incompatível com o run, não uma migração.
 
 O policy bundle contém golden vectors positivos/negativos e precisa ser executado por pelo menos duas

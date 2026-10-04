@@ -72,7 +72,9 @@ Em `typed-value`, `schema-id` e `schema-version` externos precisam ser iguais ao
 envelope interno. O `domain-tag` interno precisa estar registrado pela extensão para aquele papel, e
 `envelope-digest` é SHA-256 dos bytes exatos do envelope. Divergência de tag/schema/version/digest,
 tag reutilizada para outro papel ou envelope não strict-canonical falha fechado antes de o record
-externo ser aceito.
+externo ser aceito. `typed_value_constraints` representa essas relações em dados cobertos pelo
+`schema_bundle_hash`; os seis casos `typed_value_constraint` exercitam a aceitação e cada falha
+isoladamente.
 
 Uma extensão pode adicionar schema/domain tag, enum ou role sem alterar este diretório, mas não pode
 redefinir nome/código existente nem relaxar o profile. O genesis fixa o hash de cada extension bundle
@@ -122,7 +124,7 @@ operação lógica e policy ref.
 contrato e os vetores, mas não inclui dois runners independentes nem um workflow que os execute. Uma
 implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
 
-`fixtures.json` contém 152 vetores positivos, 30 negativos, 231 casos semânticos, sete casos de
+`fixtures.json` contém 152 vetores positivos, 30 negativos, 245 casos semânticos, sete casos de
 normalização convergente e dois vetores SHA-256. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 73 operações de id/digest/hash do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
@@ -137,14 +139,16 @@ ABSENT/PRESENT/conflitante.
 
 `record_constraints` fecha as cinco variantes de `DecisionRecord`, os quatro status de
 `CycleControlState`, a cadência condicional de `TriggerDefinition` e os ordinais/retry refs de
-`AdmissionFence`/`AttemptRetryRecord`. Em `linked_record_constraints`, cada entrada declara
-`record_roles` como triplas `(papel, root, cardinalidade)`; relações com `every` quantificam todos os
-records daquele papel, e projeção `==` exige igualdade de coleção já em ordem canônica.
-A cadeia fence abortado → abort → retry → novo fence valida o último envelope global do run e
+`AdmissionFence`/`AttemptRetryRecord`. Em `linked_record_constraints`, cada entrada declara uma
+transição de append, o root candidato, o cursor pre-append e `record_roles` com fonte e cardinalidade.
+Os sete `linked_record_scenarios` são estados positivos autocontidos; cada caso negativo fornece o
+record CBOR substituto ou o campo exato do ledger que torna a transição inválida.
+A sequência fence abortado → abort → retry → novo fence é validada em três fronteiras duráveis,
 preserva byte a byte plano, base, closure, coorte, unidades, input e policies fora dos quatro campos
-que a retentativa pode mudar. A cadeia Event → task → observations → knowledge inputs → completion
-restringe cada observation ao evento da task, projeta apenas claims/evidence divulgados e exige no
-completion exatamente todos os outputs dessa task, sem extras, duplicatas ou omissões. `RngDraw` é um root referenciável
+que a retentativa pode mudar, e vincula `rule-versions` do retry ao novo fence. Event → task →
+observation → knowledge input → completion é validado em quatro fronteiras: restringe cada
+observation ao evento da task, projeta apenas claims/evidence divulgados e exige no completion
+exatamente todos os outputs já presentes no prefixo daquela task. `RngDraw` é um root referenciável
 próprio, e os subsets de field path impedem que uma ref genérica ocupe
 `rng-draw-refs` ou `failure-evidence-refs`. A evidência de abort admite somente ConflictSet, sorteio,
 assessment, disposição provisória e falha de tentativa, todos com identidade e digest totais.

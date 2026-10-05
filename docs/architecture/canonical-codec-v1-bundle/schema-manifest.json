@@ -4,13 +4,18 @@
   "artifacts": [
     [
       "foundation.cddl",
-      25970,
-      "f8b0d13f2a1290506a94e9f770f6feea180f978aefb03bf42a2190d0daf3ef1d"
+      26509,
+      "551fa0363593724de25da7a23e32fdc364717854c5fb2487fb79c19ba5c13fc1"
     ],
     [
       "registries.json",
-      94357,
-      "b181bd9ec7243a509f6d031e6420602b0c68eec627c3cbad646e6274ad491e31"
+      104878,
+      "d72b977d8c6654188bc40842358bb93d975acc3be25d2e5b46ff87eab538099e"
+    ],
+    [
+      "causal-transition-contracts.json",
+      8443,
+      "ea96eaa9e2b4a39186fcf93b931b3500c86673893330aa62dd581eb700bd7f37"
     ]
   ]
 }

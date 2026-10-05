@@ -1,0 +1,285 @@
+{
+  "bundle_id": "cote.csf.conformance.foundation.v1",
+  "fixture_version": 1,
+  "patch_language": {
+    "pointer": "RFC 6901 JSON Pointer",
+    "operations": ["add", "remove", "replace"],
+    "materialization": "deep-copy base scenario, apply patch operations in array order, then execute the named transition contract",
+    "cryptographic_recompute": "semantic fixtures operate after strict local record validation; production CBOR cases must recompute local ids/digests before this linked transition is evaluated"
+  },
+  "base_scenarios": [
+    {
+      "scenario_id": "source-closure.valid",
+      "operation": "append-source-record",
+      "state": {
+        "configured_sources": ["driver"],
+        "prefix": [
+          {"kind": "closure", "source_id": "driver", "closed_through": [5, 0], "final": false, "ingress_seq": 1}
+        ],
+        "candidate": {"kind": "closure", "source_id": "driver", "closed_through": [10, 0], "final": false, "ingress_seq": 2}
+      }
+    },
+    {
+      "scenario_id": "source-input.valid",
+      "operation": "append-source-record",
+      "state": {
+        "configured_sources": ["driver"],
+        "prefix": [
+          {"kind": "closure", "source_id": "driver", "closed_through": [5, 0], "final": false, "ingress_seq": 1}
+        ],
+        "candidate": {"kind": "input", "source_id": "driver", "eligibility": [5, 1], "ingress_seq": 2}
+      }
+    },
+    {
+      "scenario_id": "slot-dispatch.valid",
+      "operation": "append-slot-dispatch",
+      "state": {
+        "round": {"run_id": "run-1", "decision_round_id": "round-1", "slot_ids": ["slot-1"], "actor": "actor-1", "eligibility": [10, 0], "base_revision": 7, "effective_at": 1000},
+        "dispatches": [],
+        "prior_perception_tasks": [{"task_id": "task-0", "completed": true}],
+        "required_knowledge_inputs": [{"input_id": "knowledge-0", "confirmed": true}],
+        "candidate": {"dispatch_id": "dispatch-1", "run_id": "run-1", "cycle_id": "cycle-1", "decision_round_id": "round-1", "slot_id": "slot-1", "actor": "actor-1", "eligibility": [10, 0], "base_revision": 7, "effective_at": 1000}
+      }
+    },
+    {
+      "scenario_id": "slot-response.valid",
+      "operation": "append-slot-response",
+      "state": {
+        "dispatches": [{"dispatch_id": "dispatch-1", "run_id": "run-1", "cycle_id": "cycle-1", "decision_round_id": "round-1", "slot_id": "slot-1", "actor": "actor-1", "effective_at": 1000, "base_revision": 7, "revoked": false}],
+        "responses": [],
+        "candidate": {"kind": "action-proposal", "dispatch_id": "dispatch-1", "run_id": "run-1", "cycle_id": "cycle-1", "decision_round_id": "round-1", "slot_id": "slot-1", "actor": "actor-1", "effective_at": 1000, "base_revision": 7}
+      }
+    },
+    {
+      "scenario_id": "admission-fence.valid",
+      "operation": "append-admission-fence",
+      "state": {
+        "coordinate": [10, 0],
+        "exogenous_sources": ["driver"],
+        "closures": [
+          {"closure_id": "closure-0", "source_id": "driver", "closed_through": [5, 0], "final": false, "ingress_seq": 1},
+          {"closure_id": "closure-1", "source_id": "driver", "closed_through": [10, 0], "final": false, "ingress_seq": 2}
+        ],
+        "rounds": [{"round_id": "round-1", "source_id": "round-source", "slot_ids": ["slot-1"], "eligibility": [10, 0], "lifecycle": "PENDING"}],
+        "responses": [{"round_id": "round-1", "slot_id": "slot-1", "unit_id": "unit-slot"}],
+        "inputs": [{"unit_id": "unit-input", "source_id": "driver", "eligibility": [9, 0]}],
+        "occurrences": [{"unit_id": "unit-occurrence", "source_id": "schedule", "eligibility": [10, 0]}],
+        "activations": [{"unit_id": "unit-future-trigger", "source_id": "trigger:t1", "eligibility": [11, 0]}],
+        "consumed_ids": [],
+        "derived_cycle_plan": ["WORK"],
+        "candidate": {
+          "closure_proof": ["closure-1"],
+          "cohort": [["round-1", [["slot-1", "unit-slot"]]]],
+          "admitted_units": [
+            [[9, 0], "EXOGENOUS_INPUT", "driver", "unit-input"],
+            [[10, 0], "SLOT", "round-source", "unit-slot"],
+            [[10, 0], "SCHEDULED_OCCURRENCE", "schedule", "unit-occurrence"]
+          ],
+          "cycle_plan": ["WORK"]
+        }
+      }
+    },
+    {
+      "scenario_id": "commit.valid",
+      "operation": "publish-cycle-commit-batch",
+      "state": {
+        "fence": {
+          "run_id": "run-1", "cycle_id": "cycle-1", "attempt": 1, "commit_successor_floor": [1000, 8],
+          "policies": {"cycle-coordinate": "coordinate-v1@1#01", "event-order": "event-order-v1@1#02", "perception": "perception-v1@1#03", "perception-identity": "perception-identity-v1@1#04"},
+          "admitted_units": [
+            {"unit_id": "unit-action", "root": "action-proposal", "idempotency_digest": "idem-action"},
+            {"unit_id": "unit-none", "root": "no-proposal", "idempotency_digest": "idem-none"}
+          ]
+        },
+        "decision_ledger": {
+          "terminals": [],
+          "commit_candidates": [{"candidate_id": "candidate-1", "source_unit_ids": ["unit-action"], "event_ids": ["event-1"]}],
+          "provisional_dispositions": [{"subject_id": "unit-action", "disposition": "COMMIT", "candidate_id": "candidate-1", "conflict_set_refs": [], "rng_draw_refs": [], "policy": "decision-v1", "resolver": "resolver-v1"}],
+          "conflict_sets": [],
+          "rng_draws": []
+        },
+        "historical_units": {},
+        "prior_events": [],
+        "containers": [{"container_id": "round-1", "unit_ids": ["unit-action", "unit-none"]}],
+        "trigger_expected": [],
+        "transaction": {
+          "commit_candidates": [],
+          "decisions": [
+            {"subject_id": "unit-action", "disposition": "COMMIT", "candidate_id": "candidate-1", "produced_event_ids": ["event-1"], "successor_input_id": null, "canonical_unit_id": null, "conflict_set_refs": [], "rng_draw_refs": [], "policy": "decision-v1", "resolver": "resolver-v1"},
+            {"subject_id": "unit-none", "disposition": "NO_PROPOSAL", "candidate_id": null, "produced_event_ids": [], "successor_input_id": null, "canonical_unit_id": null, "conflict_set_refs": [], "rng_draw_refs": [], "policy": "decision-v1", "resolver": "resolver-v1"}
+          ],
+          "events": [{"event_id": "event-1", "origin_kind": "COMMIT_CANDIDATE", "phase": "CANDIDATE_DOMAIN", "causal_parents": [], "source_inputs": ["unit-action"]}],
+          "successors": [],
+          "lifecycle_events": [{"subject": "unit:unit-action"}, {"subject": "unit:unit-none"}, {"subject": "container:round-1"}],
+          "source_settlements": [
+            {"unit_id": "unit-action", "authority": "decision_ledger", "proof": "terminal-decision-record-and-cycle-commit"},
+            {"unit_id": "unit-none", "authority": "decision_ledger", "proof": "terminal-decision-record-and-cycle-commit"}
+          ],
+          "cycle_commit": {"policies": {"cycle-coordinate": "coordinate-v1@1#01", "event-order": "event-order-v1@1#02", "perception": "perception-v1@1#03", "perception-identity": "perception-identity-v1@1#04"}},
+          "trigger_publication": []
+        }
+      }
+    },
+    {
+      "scenario_id": "control.in-flight.valid",
+      "operation": "derive-cycle-control-state",
+      "state": {"decision_ledger": [{"kind": "fence", "cycle_id": "cycle-1", "attempt": 1}], "candidate_status": "ATTEMPT_IN_FLIGHT"}
+    },
+    {
+      "scenario_id": "cycle-abort.valid",
+      "operation": "append-cycle-abort",
+      "state": {
+        "fence": {"run_id": "run-1", "cycle_id": "cycle-1", "attempt": 1, "admitted_units": [{"unit_id": "unit-1", "digest": "digest-unit-1"}]},
+        "commit_candidates": [{"candidate_id": "candidate-1", "source_unit_ids": ["unit-1"]}],
+        "failure_evidence": [
+          {"evidence_id": "conflict-1", "kind": "conflict-set", "candidate_ids": ["candidate-1"]},
+          {"evidence_id": "rng-1", "kind": "rng-draw", "run_id": "run-1", "cycle_id": "cycle-1", "attempt": 1},
+          {"evidence_id": "assessment-1", "kind": "affordance-assessment", "subject_id": "unit-1"},
+          {"evidence_id": "provisional-1", "kind": "provisional-disposition", "run_id": "run-1", "cycle_id": "cycle-1", "attempt": 1},
+          {"evidence_id": "failure-1", "kind": "attempt-failure", "run_id": "run-1", "cycle_id": "cycle-1", "attempt": 1}
+        ],
+        "abort": {
+          "indeterminate_subjects": [
+            {"kind": "ADMITTED_UNIT", "id": "unit-1", "digest": "digest-unit-1"},
+            {"kind": "COMMIT_CANDIDATE", "id": "candidate-1", "digest": "digest-candidate-1"}
+          ],
+          "failure_evidence_refs": ["conflict-1", "rng-1", "assessment-1", "provisional-1", "failure-1"]
+        }
+      }
+    },
+    {
+      "scenario_id": "control.halted.valid",
+      "operation": "derive-cycle-control-state",
+      "state": {"decision_ledger": [{"kind": "fence", "cycle_id": "cycle-1", "attempt": 1}, {"kind": "abort", "cycle_id": "cycle-1", "attempt": 1, "abort_id": "abort-1"}], "candidate_status": "HALTED_ON_ABORT"}
+    },
+    {
+      "scenario_id": "control.retry.valid",
+      "operation": "derive-cycle-control-state",
+      "state": {"decision_ledger": [{"kind": "fence", "cycle_id": "cycle-1", "attempt": 1}, {"kind": "abort", "cycle_id": "cycle-1", "attempt": 1, "abort_id": "abort-1"}, {"kind": "retry", "abort_id": "abort-1"}], "candidate_status": "RETRY_AUTHORIZED"}
+    },
+    {
+      "scenario_id": "genesis.valid",
+      "operation": "validate-genesis",
+      "state": {"policy_roles": ["causal-identity", "admission-order", "admission-fence", "cycle-coordinate", "event-order", "idempotency", "rng", "perception", "perception-identity", "reducers", "validators", "conflict-resolvers", "dependency-footprints"]}
+    },
+    {
+      "scenario_id": "rng.valid",
+      "operation": "validate-rng-draw",
+      "state": {
+        "world_seed_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+        "draw": {"subsystem": "conflict", "decision_key": "decision-1", "entity_ids_hex": ["1111111111111111111111111111111111111111111111111111111111111111"], "purpose": "tie-break", "algorithm": {"id": "cote.csf.rng.sha256-substream.fixture.v1", "version": 1, "hash_hex": "aa89f466bf326f823708ad24192d7ca300f29983f773ace69eb9bc601890e91f"}, "result_hex": "cee984efa443e4523c129ccef82917e5c7eda7e7dad2cb30bc91d0ab30c6d2b6"}
+      }
+    },
+    {
+      "scenario_id": "checkpoint.inline.valid",
+      "operation": "validate-epistemic-checkpoint",
+      "state": {"checkpoint": {"mode": "inline", "inline_content_hex": "aabb", "resolved_content_hex": "aabb", "content_hash_hex": "d798d1fac6bd4bb1c11f50312760351013379a0ab6f0a8c0af8a506b96b2525a"}}
+    },
+    {
+      "scenario_id": "checkpoint.locator.valid",
+      "operation": "validate-epistemic-checkpoint",
+      "state": {"checkpoint": {"mode": "locator", "locator": "cas:sha-256:d798d1fa", "resolved_content_hex": "aabb", "content_hash_hex": "d798d1fac6bd4bb1c11f50312760351013379a0ab6f0a8c0af8a506b96b2525a"}}
+    },
+    {
+      "scenario_id": "parent-history.valid",
+      "operation": "validate-parent-history-ref",
+      "state": {"reference_hex": "435346485245460001001a636f74652e6373662e636f6465632e63626f722d6465742e76310020000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0016636f74652e6373662e686173682e736e617073686f740018636f74652e6373662e736368656d612e736e617073686f74000000000000000100077368612d3235360020000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"}
+    },
+    {
+      "scenario_id": "snapshot.valid",
+      "operation": "validate-snapshot",
+      "state": {
+        "genesis": {"world_seed_hex": "0000000000000000000000000000000000000000000000000000000000000000", "policy_refs": {"rng": "rng-v1#01", "reducers": "reducers-v1#02", "validators": "validators-v1#03", "resolvers": "resolvers-v1#04"}},
+        "eligible_actors": ["actor-1"],
+        "snapshot": {
+          "instant": 1000, "revision": 10,
+          "world_seed_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "world_state_hex": "00", "world_state_hash_hex": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "policy_refs": {"rng": "rng-v1#01", "reducers": "reducers-v1#02", "validators": "validators-v1#03", "resolvers": "resolvers-v1#04"},
+          "ledger_cursors": {"input_ledger": [4, "h1"], "decision_ledger": [5, "h2"], "event_store": [7, "h3"], "evidence_ledger": [5, "h4"], "causal_outbox": [3, "h5"]},
+          "epistemic_checkpoints": [{"actor": "actor-1", "covers_through": [1000, 10, 5], "resolved_content_hex": "aabb", "content_hash_hex": "d798d1fac6bd4bb1c11f50312760351013379a0ab6f0a8c0af8a506b96b2525a"}]
+        }
+      }
+    }
+  ],
+  "cases": [
+    {"case_id": "source-closure.accept", "base_scenario_id": "source-closure.valid", "findings": [85]},
+    {"case_id": "source-closure.regression", "base_scenario_id": "source-closure.valid", "findings": [85], "patch": [{"op": "replace", "path": "/candidate/closed_through", "value": [4, 0]}], "expected_error": "CLOSURE_REGRESSION"},
+    {"case_id": "source-closure.ingress-gap", "base_scenario_id": "source-closure.valid", "findings": [85], "patch": [{"op": "replace", "path": "/candidate/ingress_seq", "value": 3}], "expected_error": "INGRESS_NOT_CONTIGUOUS"},
+    {"case_id": "source-closure.after-final", "base_scenario_id": "source-closure.valid", "findings": [85], "patch": [{"op": "replace", "path": "/prefix/0/final", "value": true}], "expected_error": "SOURCE_FINAL"},
+    {"case_id": "source-input.retroactive", "base_scenario_id": "source-input.valid", "findings": [85], "patch": [{"op": "replace", "path": "/candidate/eligibility", "value": [5, 0]}], "expected_error": "RETROACTIVE_ELIGIBILITY"},
+
+    {"case_id": "dispatch.accept", "base_scenario_id": "slot-dispatch.valid", "findings": [88]},
+    {"case_id": "dispatch.pending-task", "base_scenario_id": "slot-dispatch.valid", "findings": [88], "patch": [{"op": "replace", "path": "/prior_perception_tasks/0/completed", "value": false}], "expected_error": "EPISTEMIC_TASK_PENDING"},
+    {"case_id": "dispatch.pending-delivery", "base_scenario_id": "slot-dispatch.valid", "findings": [88], "patch": [{"op": "replace", "path": "/required_knowledge_inputs/0/confirmed", "value": false}], "expected_error": "EPISTEMIC_DELIVERY_PENDING"},
+    {"case_id": "response.accept", "base_scenario_id": "slot-response.valid", "findings": [82]},
+    {"case_id": "response.actor-mismatch", "base_scenario_id": "slot-response.valid", "findings": [82], "patch": [{"op": "replace", "path": "/candidate/actor", "value": "actor-2"}], "expected_error": "RESPONSE_DISPATCH_MISMATCH"},
+    {"case_id": "response.revoked", "base_scenario_id": "slot-response.valid", "findings": [82], "patch": [{"op": "replace", "path": "/dispatches/0/revoked", "value": true}], "expected_error": "DISPATCH_NOT_OPEN"},
+    {"case_id": "response.duplicate", "base_scenario_id": "slot-response.valid", "findings": [82], "patch": [{"op": "add", "path": "/responses/-", "value": {"dispatch_id": "dispatch-1"}}], "expected_error": "SLOT_ALREADY_FILLED"},
+
+    {"case_id": "fence.accept", "base_scenario_id": "admission-fence.valid", "findings": [81]},
+    {"case_id": "fence.omitted-unit", "base_scenario_id": "admission-fence.valid", "findings": [74, 81], "patch": [{"op": "remove", "path": "/candidate/admitted_units/2"}], "expected_error": "FENCE_DERIVATION_MISMATCH"},
+    {"case_id": "fence.non-first-covering-closure", "base_scenario_id": "admission-fence.valid", "findings": [81], "patch": [{"op": "replace", "path": "/candidate/closure_proof/0", "value": "closure-0"}], "expected_error": "FENCE_DERIVATION_MISMATCH"},
+    {"case_id": "fence.plan-mismatch", "base_scenario_id": "admission-fence.valid", "findings": [81], "patch": [{"op": "replace", "path": "/candidate/cycle_plan", "value": ["CLOCK_ADVANCE", 11]}], "expected_error": "FENCE_DERIVATION_MISMATCH"},
+
+    {"case_id": "commit.accept", "base_scenario_id": "commit.valid", "findings": [68, 69, 71, 72, 75, 76, 77, 83, 84, 86, 91]},
+    {"case_id": "commit.reject-publishes-domain-event", "base_scenario_id": "commit.valid", "findings": [68], "patch": [{"op": "replace", "path": "/transaction/decisions/0/disposition", "value": "REJECT"}, {"op": "replace", "path": "/decision_ledger/provisional_dispositions/0/disposition", "value": "REJECT"}], "expected_error": "DISPOSITION_EVENT_MISMATCH"},
+    {"case_id": "commit.candidate-event-wrong-phase", "base_scenario_id": "commit.valid", "findings": [69], "patch": [{"op": "replace", "path": "/transaction/events/0/phase", "value": "TEMPORAL_ADVANCE"}], "expected_error": "EVENT_PHASE_MISMATCH"},
+    {"case_id": "commit.defer-successor-missing", "base_scenario_id": "commit.valid", "findings": [70], "patch": [{"op": "replace", "path": "/transaction/decisions/0/disposition", "value": "DEFER"}, {"op": "replace", "path": "/transaction/decisions/0/produced_event_ids", "value": []}, {"op": "replace", "path": "/transaction/decisions/0/successor_input_id", "value": "successor-1"}, {"op": "replace", "path": "/decision_ledger/provisional_dispositions/0/disposition", "value": "DEFER"}, {"op": "remove", "path": "/transaction/events/0"}], "expected_error": "DEFER_SUCCESSOR_MISMATCH"},
+    {"case_id": "commit.defer-successor-valid", "base_scenario_id": "commit.valid", "findings": [70], "patch": [{"op": "replace", "path": "/transaction/decisions/0/disposition", "value": "DEFER"}, {"op": "replace", "path": "/transaction/decisions/0/produced_event_ids", "value": []}, {"op": "replace", "path": "/transaction/decisions/0/successor_input_id", "value": "successor-1"}, {"op": "replace", "path": "/decision_ledger/provisional_dispositions/0/disposition", "value": "DEFER"}, {"op": "remove", "path": "/transaction/events/0"}, {"op": "add", "path": "/transaction/successors/-", "value": {"unit_id": "successor-1", "predecessor_id": "unit-action", "eligibility": [1000, 8]}}]},
+    {"case_id": "commit.action-as-no-proposal", "base_scenario_id": "commit.valid", "findings": [71], "patch": [{"op": "replace", "path": "/transaction/decisions/0/disposition", "value": "NO_PROPOSAL"}, {"op": "replace", "path": "/transaction/decisions/0/produced_event_ids", "value": []}, {"op": "remove", "path": "/transaction/events/0"}], "expected_error": "NO_PROPOSAL_SUBJECT_MISMATCH"},
+    {"case_id": "commit.dedup-digest-mismatch", "base_scenario_id": "commit.valid", "findings": [71], "patch": [{"op": "replace", "path": "/transaction/decisions/0/disposition", "value": "DEDUPLICATED"}, {"op": "replace", "path": "/transaction/decisions/0/produced_event_ids", "value": []}, {"op": "replace", "path": "/transaction/decisions/0/canonical_unit_id", "value": "unit-none"}, {"op": "remove", "path": "/transaction/events/0"}], "expected_error": "DEDUPLICATION_PROOF_MISMATCH"},
+    {"case_id": "commit.provisional-policy-mismatch", "base_scenario_id": "commit.valid", "findings": [72], "patch": [{"op": "replace", "path": "/transaction/decisions/0/policy", "value": "other-policy"}], "expected_error": "PROVISIONAL_SETTLEMENT_MISMATCH"},
+    {"case_id": "commit.conflict-unresolved", "base_scenario_id": "commit.valid", "findings": [72], "patch": [{"op": "add", "path": "/transaction/decisions/0/conflict_set_refs/-", "value": "conflict-x"}, {"op": "add", "path": "/decision_ledger/provisional_dispositions/0/conflict_set_refs/-", "value": "conflict-x"}], "expected_error": "CONFLICT_SET_UNRESOLVED"},
+    {"case_id": "commit.rng-unresolved", "base_scenario_id": "commit.valid", "findings": [72], "patch": [{"op": "add", "path": "/transaction/decisions/0/rng_draw_refs/-", "value": "draw-x"}, {"op": "add", "path": "/decision_ledger/provisional_dispositions/0/rng_draw_refs/-", "value": "draw-x"}], "expected_error": "RNG_DRAW_UNRESOLVED"},
+    {"case_id": "commit.source-settlement-wrong-authority", "base_scenario_id": "commit.valid", "findings": [75], "patch": [{"op": "replace", "path": "/transaction/source_settlements/0/authority", "value": "input_ledger"}], "expected_error": "SOURCE_SETTLEMENT_AUTHORITY_MISMATCH"},
+    {"case_id": "commit.lifecycle-omitted", "base_scenario_id": "commit.valid", "findings": [76], "patch": [{"op": "remove", "path": "/transaction/lifecycle_events/2"}], "expected_error": "SOURCE_LIFECYCLE_MISMATCH"},
+    {"case_id": "commit.policy-swapped", "base_scenario_id": "commit.valid", "findings": [77], "patch": [{"op": "replace", "path": "/transaction/cycle_commit/policies/event-order", "value": "event-order-v2@2#99"}], "expected_error": "COMMIT_POLICY_MISMATCH"},
+    {"case_id": "commit.parent-dangling", "base_scenario_id": "commit.valid", "findings": [83], "patch": [{"op": "add", "path": "/transaction/events/0/causal_parents/-", "value": "missing-event"}], "expected_error": "CAUSAL_PARENT_UNRESOLVED"},
+    {"case_id": "commit.source-outside-fence", "base_scenario_id": "commit.valid", "findings": [83], "patch": [{"op": "add", "path": "/transaction/events/0/source_inputs/-", "value": "foreign-unit"}], "expected_error": "EVENT_SOURCE_OUTSIDE_FENCE"},
+    {"case_id": "commit.candidate-republished", "base_scenario_id": "commit.valid", "findings": [74, 84], "patch": [{"op": "add", "path": "/transaction/commit_candidates/-", "value": {"candidate_id": "candidate-1"}}], "expected_error": "CANDIDATE_REPUBLISHED"},
+    {"case_id": "commit.provisional-candidate-missing", "base_scenario_id": "commit.valid", "findings": [74, 84], "patch": [{"op": "remove", "path": "/decision_ledger/commit_candidates/0"}], "expected_error": "CANDIDATE_PARTITION_MISMATCH"},
+    {"case_id": "commit.candidate-partition-gap", "base_scenario_id": "commit.valid", "findings": [74], "patch": [{"op": "replace", "path": "/decision_ledger/commit_candidates/0/source_unit_ids", "value": []}], "expected_error": "CANDIDATE_PARTITION_MISMATCH"},
+    {"case_id": "commit.candidate-partition-overlap", "base_scenario_id": "commit.valid", "findings": [74], "patch": [{"op": "replace", "path": "/transaction/decisions/1/disposition", "value": "COMMIT"}, {"op": "replace", "path": "/transaction/decisions/1/candidate_id", "value": "candidate-1"}, {"op": "replace", "path": "/transaction/decisions/1/produced_event_ids", "value": ["event-1"]}, {"op": "add", "path": "/decision_ledger/provisional_dispositions/-", "value": {"subject_id": "unit-none", "disposition": "COMMIT", "candidate_id": "candidate-1", "conflict_set_refs": [], "rng_draw_refs": [], "policy": "decision-v1", "resolver": "resolver-v1"}}], "expected_error": "CANDIDATE_PARTITION_MISMATCH"},
+    {"case_id": "commit.trigger-publication-omitted", "base_scenario_id": "commit.valid", "findings": [86], "patch": [{"op": "add", "path": "/trigger_expected/-", "value": {"trigger_id": "trigger-1", "runtime_revision": 11, "activation_count": 1, "causing_event_ids": ["event-1"], "eligibility": [1000, 8]}}], "expected_error": "TRIGGER_TRANSITION_MISMATCH"},
+    {"case_id": "commit.trigger-publication-valid", "base_scenario_id": "commit.valid", "findings": [86], "patch": [{"op": "add", "path": "/trigger_expected/-", "value": {"trigger_id": "trigger-1", "runtime_revision": 11, "activation_count": 1, "causing_event_ids": ["event-1"], "eligibility": [1000, 8]}}, {"op": "add", "path": "/transaction/trigger_publication/-", "value": {"trigger_id": "trigger-1", "runtime_revision": 11, "activation_count": 1, "causing_event_ids": ["event-1"], "eligibility": [1000, 8]}}]},
+    {"case_id": "commit.after-abort", "base_scenario_id": "commit.valid", "findings": [91], "patch": [{"op": "add", "path": "/decision_ledger/terminals/-", "value": {"kind": "abort", "run_id": "run-1", "cycle_id": "cycle-1", "attempt": 1}}], "expected_error": "TERMINAL_ALREADY_EXISTS"},
+
+    {"case_id": "abort.accept", "base_scenario_id": "cycle-abort.valid", "findings": [74]},
+    {"case_id": "abort.admitted-unit-foreign", "base_scenario_id": "cycle-abort.valid", "findings": [74], "patch": [{"op": "replace", "path": "/abort/indeterminate_subjects/0/id", "value": "unit-x"}], "expected_error": "ABORT_SUBJECT_MISMATCH"},
+    {"case_id": "abort.admitted-unit-digest-mismatch", "base_scenario_id": "cycle-abort.valid", "findings": [74], "patch": [{"op": "replace", "path": "/abort/indeterminate_subjects/0/digest", "value": "other-digest"}], "expected_error": "ABORT_SUBJECT_MISMATCH"},
+    {"case_id": "abort.candidate-foreign", "base_scenario_id": "cycle-abort.valid", "findings": [74], "patch": [{"op": "replace", "path": "/abort/indeterminate_subjects/1/id", "value": "candidate-x"}], "expected_error": "ABORT_CANDIDATE_MISMATCH"},
+    {"case_id": "abort.conflict-foreign-candidate", "base_scenario_id": "cycle-abort.valid", "findings": [74], "patch": [{"op": "replace", "path": "/failure_evidence/0/candidate_ids/0", "value": "candidate-x"}], "expected_error": "ABORT_EVIDENCE_SCOPE_MISMATCH"},
+    {"case_id": "abort.rng-foreign-attempt", "base_scenario_id": "cycle-abort.valid", "findings": [74], "patch": [{"op": "replace", "path": "/failure_evidence/1/attempt", "value": 2}], "expected_error": "ABORT_EVIDENCE_SCOPE_MISMATCH"},
+    {"case_id": "abort.assessment-foreign-subject", "base_scenario_id": "cycle-abort.valid", "findings": [74], "patch": [{"op": "replace", "path": "/failure_evidence/2/subject_id", "value": "unit-x"}], "expected_error": "ABORT_EVIDENCE_SCOPE_MISMATCH"},
+    {"case_id": "abort.provisional-foreign-attempt", "base_scenario_id": "cycle-abort.valid", "findings": [74], "patch": [{"op": "replace", "path": "/failure_evidence/3/attempt", "value": 2}], "expected_error": "ABORT_EVIDENCE_SCOPE_MISMATCH"},
+    {"case_id": "abort.failure-foreign-attempt", "base_scenario_id": "cycle-abort.valid", "findings": [74], "patch": [{"op": "replace", "path": "/failure_evidence/4/attempt", "value": 2}], "expected_error": "ABORT_EVIDENCE_SCOPE_MISMATCH"},
+
+    {"case_id": "control.in-flight.accept", "base_scenario_id": "control.in-flight.valid", "findings": [73]},
+    {"case_id": "control.in-flight-as-idle", "base_scenario_id": "control.in-flight.valid", "findings": [73], "patch": [{"op": "replace", "path": "/candidate_status", "value": "IDLE"}], "expected_error": "CONTROL_STATE_FOLD_MISMATCH"},
+    {"case_id": "control.halted.accept", "base_scenario_id": "control.halted.valid", "findings": [73]},
+    {"case_id": "control.retry.accept", "base_scenario_id": "control.retry.valid", "findings": [73]},
+
+    {"case_id": "genesis.accept", "base_scenario_id": "genesis.valid", "findings": [80]},
+    {"case_id": "genesis.missing-rng", "base_scenario_id": "genesis.valid", "findings": [80], "patch": [{"op": "remove", "path": "/policy_roles/6"}], "expected_error": "GENESIS_POLICY_SET_INCOMPLETE"},
+    {"case_id": "rng.accept", "base_scenario_id": "rng.valid", "findings": [87]},
+    {"case_id": "rng.result-altered", "base_scenario_id": "rng.valid", "findings": [87], "patch": [{"op": "replace", "path": "/draw/result_hex", "value": "0000000000000000000000000000000000000000000000000000000000000000"}], "expected_error": "RNG_RESULT_MISMATCH"},
+
+    {"case_id": "checkpoint.inline.accept", "base_scenario_id": "checkpoint.inline.valid", "findings": [89]},
+    {"case_id": "checkpoint.locator.accept", "base_scenario_id": "checkpoint.locator.valid", "findings": [89]},
+    {"case_id": "checkpoint.inline-content-altered", "base_scenario_id": "checkpoint.inline.valid", "findings": [89], "patch": [{"op": "replace", "path": "/checkpoint/resolved_content_hex", "value": "aabc"}], "expected_error": "CHECKPOINT_CONTENT_HASH_MISMATCH"},
+    {"case_id": "checkpoint.locator-content-altered", "base_scenario_id": "checkpoint.locator.valid", "findings": [89], "patch": [{"op": "replace", "path": "/checkpoint/resolved_content_hex", "value": "aabc"}], "expected_error": "CHECKPOINT_CONTENT_HASH_MISMATCH"},
+
+    {"case_id": "parent-history.accept", "base_scenario_id": "parent-history.valid", "findings": [90]},
+    {"case_id": "parent-history.bad-magic", "base_scenario_id": "parent-history.valid", "findings": [90], "patch": [{"op": "replace", "path": "/reference_hex", "value": "005346485245460001001a636f74652e6373662e636f6465632e63626f722d6465742e76310020000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0016636f74652e6373662e686173682e736e617073686f740018636f74652e6373662e736368656d612e736e617073686f74000000000000000100077368612d3235360020000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"}], "expected_error": "PARENT_HISTORY_REF_INVALID"},
+    {"case_id": "parent-history.trailing-byte", "base_scenario_id": "parent-history.valid", "findings": [90], "patch": [{"op": "replace", "path": "/reference_hex", "value": "435346485245460001001a636f74652e6373662e636f6465632e63626f722d6465742e76310020000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0016636f74652e6373662e686173682e736e617073686f740018636f74652e6373662e736368656d612e736e617073686f74000000000000000100077368612d3235360020000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f00"}], "expected_error": "PARENT_HISTORY_REF_INVALID"},
+
+    {"case_id": "snapshot.accept", "base_scenario_id": "snapshot.valid", "findings": [78, 79, 89]},
+    {"case_id": "snapshot.missing-actor-checkpoint", "base_scenario_id": "snapshot.valid", "findings": [78], "patch": [{"op": "remove", "path": "/snapshot/epistemic_checkpoints/0"}], "expected_error": "SNAPSHOT_CHECKPOINT_SET_MISMATCH"},
+    {"case_id": "snapshot.stale-checkpoint", "base_scenario_id": "snapshot.valid", "findings": [78], "patch": [{"op": "replace", "path": "/snapshot/epistemic_checkpoints/0/covers_through", "value": [1000, 9, 5]}], "expected_error": "SNAPSHOT_CHECKPOINT_STALE"},
+    {"case_id": "snapshot.missing-event-cursor", "base_scenario_id": "snapshot.valid", "findings": [79], "patch": [{"op": "remove", "path": "/snapshot/ledger_cursors/event_store"}], "expected_error": "SNAPSHOT_LEDGER_SET_INCOMPLETE"},
+    {"case_id": "snapshot.world-hash-mismatch", "base_scenario_id": "snapshot.valid", "findings": [79], "patch": [{"op": "replace", "path": "/snapshot/world_state_hash_hex", "value": "0000000000000000000000000000000000000000000000000000000000000000"}], "expected_error": "SNAPSHOT_WORLD_HASH_MISMATCH"},
+    {"case_id": "snapshot.policy-mismatch", "base_scenario_id": "snapshot.valid", "findings": [79], "patch": [{"op": "replace", "path": "/snapshot/policy_refs/rng", "value": "rng-v2#99"}], "expected_error": "SNAPSHOT_GENESIS_CONFIG_MISMATCH"},
+    {"case_id": "snapshot.checkpoint-content-mismatch", "base_scenario_id": "snapshot.valid", "findings": [89], "patch": [{"op": "replace", "path": "/snapshot/epistemic_checkpoints/0/resolved_content_hex", "value": "aabc"}], "expected_error": "CHECKPOINT_CONTENT_HASH_MISMATCH"}
+  ]
+}

@@ -27,8 +27,8 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `61216aa68b9d922b8887a1c881d8e5e107a4eb8f502fdbc638cea737d7f58498` |
-| `conformance_suite_hash` | `ffe53c8a3e2edab39977e74e50f07c416fc275540859200e022b5d4a7e41ef96` |
+| `schema_bundle_hash` | `ed108212c69aa18c96edd84c8768f02c0e9d3ff55069d20b893dca9d8654cec3` |
+| `conformance_suite_hash` | `e6306df231f0d854ba4b5c15679a68a0ace4a054328d29bf92981def50f31571` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -210,6 +210,10 @@ não, e `record_authorities` fixa seus owners entre input ledger, schedule store
 decision ledger, event store, evidence ledger, causal outbox, world state e stores de
 snapshot/genesis; `linked_record_constraints` fecha invariantes referenciais por transição de
 append contra o prefixo durável anterior ou pela publicação atômica do commit batch.
+`causal-transition-contracts.json` é a forma executável dessas relações: fecha append de
+source/dispatch/response/fence, dobra de controle, settlement terminal, triggers, genesis e snapshot.
+Se prose de uma relation divergir do programa de transição, o artefato coberto pelo
+`schema_bundle_hash` prevalece.
 Para `DecisionRecord`, o decoder seleciona a variante por `disposition` e valida presença, ausência e
 vazio de candidate, conflicts, successor e canonical unit antes de aceitar o root. Para
 `CycleControlState`, fecha presence, kind do último envelope e relações de ordinal dos quatro status;
@@ -221,17 +225,21 @@ abort resolve o fence anterior e repete seus plano/digests; o novo fence resolve
 abortado, exceto por `attempt_ordinal`, `retry_ref`, `rule_versions` e o `fence_digest` resultante.
 
 A relação `Event` → `PerceptionTask` nasce somente dentro da publicação indivisível que também inclui
-CAS de consumo das unidades do fence, todos os `CommitCandidate`/`DecisionRecord`, `CycleCommit`,
+settlement das unidades do fence, `DecisionRecord`, sucessores de `DEFER`, lifecycle das fontes,
+runtime/ativações de trigger, `CycleCommit`,
 redução verificável de `WorldState` e cursor durável de `LogicalSequence`. Os candidatos formam a
-partição exata das unidades produtoras; cada decisão resolve seu candidato, e cada evento produzido
-projeta uma draft desse candidato. O pós-estado é o resultado exato da dobra dos eventos, em
+partição exata das unidades produtoras, mas `CommitCandidate` e todo material provisório já precisam
+existir imutavelmente no prefixo do `DecisionLedger`; o terminal não os republica. Cada decisão
+resolve sua disposição provisória/conflitos/RNG. Somente `COMMIT` projeta drafts de domínio, sempre em
+phase `CANDIDATE_DOMAIN`; `REJECT` e `DEFER` não publicam esses efeitos. O pós-estado é o resultado exato da dobra dos eventos, em
 `EventOrderKey`, pelos reducers de owner/version/hash pinados — bytes arbitrários apenas
 autoconsistentes com seu hash não são testemunho válido. O cursor lógico de entrada deriva do último
 `CycleCommit` do prefixo, ou do genesis quando ainda não há commit. Fence, commit, decisions, events e tasks compartilham
 as coordenadas aplicáveis; eventos recebem sequência contígua por `EventOrderKey`, e a policy
 perceptiva pinada resolve um predicado versionado em `perception_policy_contracts` e produz uma
 bijeção entre eventos classificados e tasks. Não existe prefixo
-publicado com settlement incompleto, evento perceptível sem task ou unidade reutilizável. Depois, a cadeia
+publicado depois de terminal do mesmo fence, com settlement incompleto, evento perceptível sem task
+ou unidade reutilizável. Depois, a cadeia
 resolve `PerceptionTask` → `Observation` → `KnowledgeInput` → completion respeitando os owners. Cada observation da task tem exatamente seu evento como fonte; task/observation,
 instante e observer-recipient coincidem. Claims e evidence do knowledge input são subsets do que a
 observation resolvida divulgou. As listas do completion são exatamente as projeções canônicas de
@@ -243,6 +251,15 @@ seção de registries liga `decision-record.rng-draw-refs` somente a `RngDraw` e
 `cycle-abort.failure-evidence-refs` somente a `ConflictSet`, `RngDraw`,
 `AffordanceAssessment`, `ProvisionalDisposition` ou `AttemptFailure`. O root standalone
 `Proposition` e a forma aninhada em `Claim` aplicam ambos o registry `polarity`.
+
+O append de `SourceClosure`/input valida sequência sem lacunas, monotonicidade, final e
+`open_coordinate`. Dispatch e resposta resolvem round/slot e consultam o barrier epistemológico no
+cursor durável. O primeiro fence é igual byte a byte a `derive(ledgers, base, coordinate, plan,
+versions)`. `CycleControlState` é comparado à dobra total do `DecisionLedger`. `RngDraw.result` é
+recomputado pela policy pinada sobre `world_seed` e a substream; seu digest local não prova a
+derivação. Snapshot V1 inclui world seed/hash, genesis, policies de replay e os cinco cursores fixos;
+checkpoints epistemológicos usam SHA-256 dos bytes opacos exatos. Um locator é resolvido antes da
+verificação. `parent_checkpoint_history_ref` PRESENT é parseado e validado no append do genesis.
 
 No append de `CycleAbortRecord`, todo sujeito `ADMITTED_UNIT` resolve id/digest no fence abortado e
 todo sujeito `COMMIT_CANDIDATE` resolve candidato cuja partição pertence ao mesmo fence. Evidências
@@ -457,7 +474,8 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 
 A suíte V1 contém 152 casos positivos — todos os roots persistidos e todas as 73 operações
 registradas —, 30 casos negativos com `error_code` estável, 306 casos semânticos de binding,
-identidade, ordenação e idempotência, sete casos de normalização e dois vetores SHA-256. O CI de uma
+identidade, ordenação e idempotência, 69 casos executáveis de transição causal, sete casos de
+normalização e dois vetores SHA-256: 566 vetores/casos ao todo. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
 independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não
 contém esses runners ou workflow. Ambas precisam provar valor

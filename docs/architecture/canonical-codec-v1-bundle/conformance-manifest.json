@@ -4,8 +4,13 @@
   "artifacts": [
     [
       "fixtures.json",
-      845347,
-      "e4a797729e0988e0eef1f5bd127a9b3516ac3a2fe65f5b844889eca31820eab6"
+      863052,
+      "61ff8b85842cb8cc39ad5b30a0a1b68924a7250235b7ad0a79004f2b87706292"
+    ],
+    [
+      "causal-transition-fixtures.json",
+      30625,
+      "63ea85bfb5e24b79a5e420fb9733d372990c6d48ea06170f55b44a637183019f"
     ]
   ]
 }

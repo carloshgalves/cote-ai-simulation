@@ -517,10 +517,19 @@ genesis-manifest = [run-id: id32, world-seed: bstr .size 32, timezone: iana-time
                     schemas: [1*65535 schema-ref], initial-world-state: typed-value,
                     epistemic-checkpoints: [0*1024 epistemic-checkpoint-ref]]
 
+snapshot-ledger-cursors = [
+  input-ledger: [ledger-id: machine-id, cursor: u64, digest: digest32],
+  decision-ledger: [ledger-id: machine-id, cursor: u64, digest: digest32],
+  event-store: [ledger-id: machine-id, cursor: u64, digest: digest32],
+  evidence-ledger: [ledger-id: machine-id, cursor: u64, digest: digest32],
+  causal-outbox: [ledger-id: machine-id, cursor: u64, digest: digest32]
+]
 snapshot-fields = (run-id: id32, snapshot-version: u32, instant: simulation-instant,
                    revision: world-revision, next-logical-sequence: logical-sequence,
                    cycle-ordinal-at-instant: i64, world-state: typed-value,
-                   pending-state: typed-value, ledger-cursors: [1*1024 [machine-id, u64, digest32]],
+                   world-state-hash: digest32, world-seed: bstr .size 32,
+                   genesis-ref: genesis-ref, replay-policies: [1*1024 policy-ref],
+                   pending-state: typed-value, ledger-cursors: snapshot-ledger-cursors,
                    cycle-control-state, epistemic-checkpoints: [0*1024 epistemic-checkpoint-ref],
                    codec-policy-id: machine-id, codec-policy-hash: digest32,
                    schema-bundle-hash: digest32)

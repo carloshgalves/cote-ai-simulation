@@ -13,9 +13,11 @@ este bundle na seguinte ordem:
 1. `profile.json`, para regras globais do encoder, texto, digest e limites;
 2. `foundation.cddl`, para forma e ordem de campos;
 3. `registries.json`, para domain tags, schemas, enums, variants, roles e coleções set-like;
-4. `unicode.json`, para a versão e os dados Unicode exatos;
-5. `fixtures.json`, para bytes/digests positivos e códigos de erro negativos;
-6. `policy-manifest.json`, `schema-manifest.json` e `conformance-manifest.json`, para a composição e
+4. `causal-transition-contracts.json`, para regras executáveis entre records e estados duráveis;
+5. `unicode.json`, para a versão e os dados Unicode exatos;
+6. `fixtures.json` e `causal-transition-fixtures.json`, para bytes/digests e transições positivas e
+   negativas;
+7. `policy-manifest.json`, `schema-manifest.json` e `conformance-manifest.json`, para a composição e
    os hashes do bundle.
 
 Todos os arquivos são UTF-8 sem BOM, com LF e newline final. Paths são ASCII, relativos a este
@@ -49,8 +51,9 @@ divergente e bytes JSON diferentes dos commitados. Os três hashes resultantes e
 `BUNDLE.sha256`; esse arquivo é um recibo e não entra em nenhum deles.
 
 `policy-manifest.json` contém somente `profile.json` e `unicode.json`: regras globais cuja mudança
-cria codec V2. `schema-manifest.json` contém `foundation.cddl` e `registries.json`: regras locais
-versionáveis sem mudar o encoder. `conformance-manifest.json` contém `fixtures.json`. Separar a suíte
+cria codec V2. `schema-manifest.json` contém `foundation.cddl`, `registries.json` e
+`causal-transition-contracts.json`: regras locais versionáveis sem mudar o encoder.
+`conformance-manifest.json` contém os dois arquivos de fixtures. Separar a suíte
 do schema evita autorreferência: o vetor de genesis pode persistir o `schema_bundle_hash` real sem que
 seus próprios bytes integrem esse hash. Assim um novo schema/domain tag altera apenas um
 schema/extension bundle e exige novo genesis quando não estava pinado, mas não cria falsamente um
@@ -125,7 +128,8 @@ contrato e os vetores, mas não inclui dois runners independentes nem um workflo
 implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
 
 `fixtures.json` contém 152 vetores positivos, 30 negativos, 306 casos semânticos, sete casos de
-normalização convergente e dois vetores SHA-256. Os positivos cobrem primitivos e limites, Unicode,
+normalização convergente e dois vetores SHA-256. `causal-transition-fixtures.json` acrescenta 69 casos
+de transição executáveis, totalizando 566 vetores/casos de conformidade. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 73 operações de id/digest/hash do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
 `error_code` estável. Os casos semânticos executam bindings de enum em roots completos, subsets de
@@ -145,14 +149,21 @@ idempotência. `record_authorities` atribui owner a cada um, incluindo input led
 trigger registry, decision ledger, event/evidence stores, causal outbox, world state e stores de
 snapshot/genesis. Em `linked_record_constraints`, cada entrada declara
 uma transição de append ou publicação atômica, o root candidato, o cursor e `record_roles` com fonte e
-cardinalidade. Os 48 `linked_record_scenarios` incluem oito estados positivos e 40 inputs duráveis
+cardinalidade. `causal-transition-contracts.json` torna normativas as fronteiras de append de fonte,
+dispatch/resposta, fence, terminal commit, genesis e snapshot e a dobra de controle. Seus casos usam
+JSON Pointer e apenas `add/remove/replace`; o runner materializa integralmente cada estado antes de
+executar a regra, portanto labels de mutação não contam como evidência. Os 48
+`linked_record_scenarios` incluem oito estados positivos e 40 inputs duráveis
 completos rejeitados; os demais negativos fornecem o record CBOR substituto exato.
 A sequência fence abortado → abort → retry → novo fence é validada em três fronteiras duráveis,
 preserva byte a byte plano, base, closure, coorte, unidades, input e policies fora dos quatro campos
-que a retentativa pode mudar, e vincula `rule-versions` do retry ao novo fence. Consumo CAS das
-fontes, partição de `CommitCandidate`, `DecisionRecord`, eventos, `CycleCommit`, tasks e redução
-pinada de mundo
-são candidatos da mesma publicação indivisível, com coordenadas comuns e bijeção/digests de
+que a retentativa pode mudar, e vincula `rule-versions` do retry ao novo fence.
+`CommitCandidate`, `ProvisionalDisposition`, `ConflictSet` e `RngDraw` são material provisório
+imutável já durável no `DecisionLedger`; o terminal apenas os resolve. Inputs imutáveis são
+liquidados por `DecisionRecord` + `CycleCommit`, enquanto agenda e trigger exigem transição do reducer
+de um evento `SOURCE_LIFECYCLE`. Essas provas, sucessores de `DEFER`, decisões, eventos,
+runtime/ativações de trigger, tasks e redução pinada de mundo são candidatos da mesma publicação
+indivisível, com coordenadas comuns e bijeção/digests de
 settlement. Witnesses CBOR tipados provam pre/post-state das fontes e do mundo, incluindo a dobra
 dos reducers por owner/version/hash, cursor lógico contíguo derivado do último commit ou genesis —
 inclusive lote vazio — e classificação perceptiva bijetiva sob a policy pinada;
@@ -166,6 +177,11 @@ qualquer observation ou knowledge input tardio. `RngDraw` é um root referenciá
 próprio, e os subsets de field path impedem que uma ref genérica ocupe
 `rng-draw-refs` ou `failure-evidence-refs`. A evidência de abort admite somente ConflictSet, sorteio,
 assessment, disposição provisória e falha de tentativa, todos com identidade e digest totais.
+O resultado de `RngDraw` é ainda derivado da policy pinada sobre `world_seed` e a tuple de substream;
+digest local não substitui essa prova. O snapshot carrega seed/hash, genesis, policies de replay e os
+cinco cursores fixos. Checkpoints epistemológicos usam SHA-256 dos bytes opacos exatos, resolvidos
+antes do hash quando há locator. `parent_checkpoint_history_ref` PRESENT é parseado e verificado no
+append do genesis pelo framing Cross-policy V1.
 `AttemptFailure` inclui stage e component policy no preimage; seu ordinal é nomeado pelo schema do
 componente e não pode vir de completion order.
 

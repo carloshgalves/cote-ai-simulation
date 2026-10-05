@@ -1,0 +1,207 @@
+{
+  "bundle_id": "cote.csf.schema.foundation.v1",
+  "contract_version": 1,
+  "status": "normative",
+  "description": "Executable cross-record and durable-state rules. A conforming implementation MUST evaluate these rules at the named append/publication boundary, after strict canonical decode and before accepting the candidate bytes.",
+  "unit_kind_order": [
+    "SLOT",
+    "EXOGENOUS_INPUT",
+    "SCHEDULED_OCCURRENCE",
+    "TRIGGER_ACTIVATION"
+  ],
+  "event_phase_by_origin": {
+    "CLOCK": "TEMPORAL_ADVANCE",
+    "COMMIT_CANDIDATE": "CANDIDATE_DOMAIN",
+    "SOURCE": "SOURCE_LIFECYCLE",
+    "TRIGGER_RUNTIME": "TRIGGER_RUNTIME",
+    "TRIGGER_ACTIVATION": "TRIGGER_ACTIVATION"
+  },
+  "required_genesis_policy_roles": [
+    "causal-identity",
+    "admission-order",
+    "admission-fence",
+    "cycle-coordinate",
+    "event-order",
+    "idempotency",
+    "rng",
+    "perception",
+    "perception-identity",
+    "reducers",
+    "validators",
+    "conflict-resolvers",
+    "dependency-footprints"
+  ],
+  "required_snapshot_ledgers": [
+    "input_ledger",
+    "decision_ledger",
+    "event_store",
+    "evidence_ledger",
+    "causal_outbox"
+  ],
+  "source_settlement_authority": {
+    "action-proposal": {
+      "authority": "decision_ledger",
+      "proof": "terminal-decision-record-and-cycle-commit"
+    },
+    "no-proposal": {
+      "authority": "decision_ledger",
+      "proof": "terminal-decision-record-and-cycle-commit"
+    },
+    "exogenous-input": {
+      "authority": "decision_ledger",
+      "proof": "terminal-decision-record-and-cycle-commit"
+    },
+    "scheduled-occurrence": {
+      "authority": "schedule_store",
+      "proof": "source-lifecycle-event-reducer-transition"
+    },
+    "trigger-activation": {
+      "authority": "trigger_registry",
+      "proof": "source-lifecycle-event-reducer-transition"
+    }
+  },
+  "commit_candidate_lifecycle": "persisted-provisional-before-terminal",
+  "checkpoint_content_integrity": {
+    "algorithm": "sha-256",
+    "preimage": "exact resolved opaque content bytes",
+    "inline": "hash inline bytes before accepting the checkpoint",
+    "locator": "resolve bytes then hash before accepting the checkpoint"
+  },
+  "parent_history_reference": {
+    "parser": "cross-policy-checkpoint-reference-v1",
+    "acceptance_boundary": "genesis-manifest append",
+    "requirements": [
+      "parse all fields with no trailing bytes",
+      "resolve origin policy by id and 32-byte hash",
+      "require sha-256 and a 32-byte checkpoint digest in V1",
+      "resolve and verify the referenced checkpoint under the origin policy"
+    ]
+  },
+  "rng_policy_contracts": [
+    {
+      "policy_id": "cote.csf.rng.sha256-substream.fixture.v1",
+      "version": 1,
+      "policy_hash_hex": "aa89f466bf326f823708ad24192d7ca300f29983f773ace69eb9bc601890e91f",
+      "preimage": "deterministic-CBOR([world-seed, subsystem, decision-key, entity-ids, purpose, [policy-id, version, policy-hash]])",
+      "result": "sha-256(preimage) as a 32-byte typed fixture value",
+      "production_use": false
+    }
+  ],
+  "operations": [
+    {
+      "operation_id": "append-source-record",
+      "cursor": "input_ledger prefix for the declared source",
+      "rules": [
+        "source is declared by genesis",
+        "ingress-seq is gapless and monotonic across inputs and closures",
+        "closed-through never regresses",
+        "final forbids every later input or closure",
+        "an input after a non-final closure has eligibility at or after open-coordinate"
+      ]
+    },
+    {
+      "operation_id": "append-slot-dispatch",
+      "cursor": "schedule_store + input_ledger + causal_outbox + evidence_ledger",
+      "rules": [
+        "round and slot exist and all inherited coordinates match",
+        "there is no other open dispatch",
+        "all causally prior perception tasks are complete",
+        "all required addressed knowledge inputs are confirmed"
+      ]
+    },
+    {
+      "operation_id": "append-slot-response",
+      "cursor": "schedule_store + input_ledger",
+      "rules": [
+        "dispatch exists, is open, and is not revoked",
+        "run, cycle, round, slot, actor, revision, and effective instant match",
+        "the slot has no prior response"
+      ]
+    },
+    {
+      "operation_id": "append-admission-fence",
+      "cursor": "clock + world revision + all authoritative source prefixes",
+      "rules": [
+        "closure proof uses the first closure that covers the required coordinate for every exogenous source",
+        "cohort is exactly all pending eligible rounds and all slots are filled once",
+        "admitted units are exactly all eligible unconsumed units",
+        "cycle plan is the derived work plan or minimum-pending clock advance",
+        "candidate fence equals the derivation byte for byte before append"
+      ]
+    },
+    {
+      "operation_id": "publish-cycle-commit-batch",
+      "cursor": "pre-publication durable prefixes plus one indivisible transaction working set",
+      "rules": [
+        "no terminal exists for the fence attempt",
+        "commit candidates, provisional dispositions, conflict sets, and RNG draws already exist as immutable provisional material",
+        "NO_PROPOSAL resolves a NoProposal subject and DEDUPLICATED resolves an equal idempotency digest",
+        "COMMIT alone projects candidate-domain events; REJECT and DEFER project none",
+        "DEFER publishes one new successor with predecessor provenance and eligibility at or after commit-successor-floor",
+        "event phase is determined by origin kind",
+        "candidate domain events, source lifecycle events, trigger runtime, and trigger activations are exact derivations",
+        "causal parents and source inputs resolve with correct scope and order",
+        "source settlement is proved by the real owning authority",
+        "cycle coordinate, event order, perception, and perception identity policies equal the fence/genesis pins",
+        "source settlement, decisions, events, successors, trigger state, tasks, commit, and world revision publish all-or-none"
+      ]
+    },
+    {
+      "operation_id": "append-cycle-abort",
+      "cursor": "decision-ledger pre-append prefix",
+      "rules": [
+        "every ADMITTED_UNIT subject repeats one admitted id and digest from the aborted fence",
+        "every COMMIT_CANDIDATE subject resolves immutable provisional material whose source units belong to the fence",
+        "ConflictSet candidates belong to that partition",
+        "RngDraw, ProvisionalDisposition, and AttemptFailure repeat run, cycle, and attempt",
+        "AffordanceAssessment resolves an admitted unit or candidate",
+        "the attempt has no prior terminal envelope"
+      ]
+    },
+    {
+      "operation_id": "derive-cycle-control-state",
+      "cursor": "ordered admission-fence, terminal-envelope, and retry prefix",
+      "precedence": [
+        "latest fence without terminal -> ATTEMPT_IN_FLIGHT",
+        "latest abort with resolving retry -> RETRY_AUTHORIZED",
+        "latest abort without resolving retry -> HALTED_ON_ABORT",
+        "no open fence or latest successful commit -> IDLE"
+      ]
+    },
+    {
+      "operation_id": "validate-genesis",
+      "rules": [
+        "every required policy role is present exactly once",
+        "every role resolves by id, version, and hash",
+        "parent history reference PRESENT is parsed and verified at append"
+      ]
+    },
+    {
+      "operation_id": "validate-rng-draw",
+      "rules": [
+        "resolve genesis world seed and pinned RNG contract",
+        "derive the named substream preimage exactly",
+        "reject a result different from the policy output even when local ids and digests were recomputed"
+      ]
+    },
+    {
+      "operation_id": "validate-epistemic-checkpoint",
+      "rules": [
+        "inline bytes are hashed directly",
+        "locator bytes are resolved before hashing",
+        "the exact resolved bytes must match content-hash"
+      ]
+    },
+    {
+      "operation_id": "validate-snapshot",
+      "rules": [
+        "world-state bytes match world-state-hash",
+        "world seed and replay policy refs equal genesis",
+        "all five mandatory ledger cursors and digests are present exactly once",
+        "every eligible cognitive actor has exactly one checkpoint",
+        "checkpoint coverage reaches snapshot instant, revision, and evidence cursor",
+        "checkpoint content integrity is verified"
+      ]
+    }
+  ]
+}

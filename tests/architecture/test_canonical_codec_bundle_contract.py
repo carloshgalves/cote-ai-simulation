@@ -401,9 +401,11 @@ def test_genesis_explicitly_pins_profile_and_schema_bundle_without_hash_cycle() 
     assert {entry[0] for entry in schema_manifest["artifacts"]} == {
         "foundation.cddl",
         "registries.json",
+        "causal-transition-contracts.json",
     }
     assert {entry[0] for entry in conformance_manifest["artifacts"]} == {
-        "fixtures.json"
+        "fixtures.json",
+        "causal-transition-fixtures.json",
     }
 
     schema_manifest_bytes = (BUNDLE / "schema-manifest.json").read_bytes()
@@ -1092,8 +1094,8 @@ def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
         "operation": "atomic-publish",
         "candidate_role": "commit-batch",
         "root": "cycle-commit",
-        "cursor": "unpublished transaction working set",
-        "publication": "fence consumption + commit candidates + decision settlement + events + cycle commit + tasks + world revision indivisible",
+        "cursor": "decision-ledger/event-store/source-authority/trigger-registry pre-publication prefixes plus unpublished transaction working set",
+        "publication": "source settlement + decision settlement + successors + source lifecycle + events + trigger runtime/activations + cycle commit + tasks + world revision indivisible",
     }
     assert {role["role"] for role in atomic["record_roles"]} == {
         "fence",
@@ -1109,27 +1111,23 @@ def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
         "logical-sequence-transition",
         "perception-classification",
     }
-    assert {
-        "fence and cycle-commit have identical run-id, cycle-id, attempt-ordinal, instant, cycle-ordinal, cycle-plan, base-revision, and base-state-hash",
-        "cycle-commit.admitted-input-ids == unit-id projection of fence.admitted-units in canonical order",
-        "cycle-commit.decision-record-ids == decision-id projection of decision-records in admitted unit order",
-        "decision-records form an exact bijection with fence.admitted-units by subject id and digest",
-        "every decision-record has fence run-id, cycle-id, and attempt-ordinal",
-        "cycle-commit.decision-digest commits canonical (unit-id, decision-id, record-digest) pairs",
-        "every COMMIT, REJECT, or DEFER decision-record candidate-id resolves exactly one commit-candidate in the transaction working set",
-        "commit-candidate.source-unit-ids form an exact non-overlapping partition of candidate-producing admitted units after NO_PROPOSAL and DEDUPLICATED are excluded",
-        "every commit-candidate has fence run-id and cycle-id and references only admitted unit ids from the same fence",
-        "each COMMIT, REJECT, or DEFER decision-record agrees with its commit-candidate on disposition scope, conflict refs, produced events, and successor semantics",
-        "every candidate-produced event is the canonical projection of one event-draft and has event-order-key.origin-ref equal to candidate-id",
-        "every event has cycle-commit run-id, cycle-id, instant as occurred-at, and base-revision",
-        "every task has cycle-commit run-id, cycle-id, base-revision, result-revision, perception-policy, and perception-identity-policy",
-        "source-consumption contains exactly one eligible-to-consumed CAS witness for every admitted (unit-id, unit-digest), resolved from its real persisted root and record_authority",
-        "world-state-transition proves existing (base-revision, base-state-hash), folds ordered events through their genesis-pinned owner/reducer version and hash, and equals the exact result-state bytes, result-state-hash, and successor revision",
-        "events ordered by event-order-key have contiguous logical-sequence from logical-sequence-transition.before, and cycle-commit.next-logical-sequence == logical-sequence-transition.after == before + event count",
-        "perception-classification evaluates every event under cycle-commit.perception-policy and tasks form an exact one-to-one ordered projection of events classified potentially perceptible",
-        "cycle-commit.perception-policy resolves exactly one perception_policy_contracts entry by policy-id, version, and policy-hash",
-        "source consumption, commit-candidates, decision-records, events, cycle-commit, tasks, world-state-transition, and logical-sequence-transition publish all-or-none",
-    } <= set(atomic["relations"])
+    required_relation_fragments = {
+        "no CycleCommit or CycleAbortRecord exists",
+        "immutable commit-candidate in the decision-ledger pre-publication prefix",
+        "NO_PROPOSAL resolves a NoProposal subject",
+        "terminal decision equals its resolved ProvisionalDisposition",
+        "REJECT and DEFER produced-event-ids are empty",
+        "DEFER publishes exactly one new successor",
+        "phase CANDIDATE_DOMAIN",
+        "SOURCE_LIFECYCLE event is the exact policy-derived projection",
+        "same-cycle parent is earlier within the same candidate",
+        "authority-specific proof for every admitted",
+        "policy refs equal the corresponding AdmissionFence.rule-versions/genesis pins",
+        "exact TriggerRuntimeState successors and TriggerActivations",
+        "publish all-or-none",
+    }
+    relations = "\n".join(atomic["relations"])
+    assert all(fragment in relations for fragment in required_relation_fragments)
     assert registries["perception_policy_contracts"] == [
         {
             "policy_id": "perception-visible-first-v1",
@@ -1766,8 +1764,10 @@ def test_commit_candidate_partition_cases_are_executable() -> None:
     candidate = records["candidate"]
     decision = records["decision"]
     assert set(candidate[3]) == admitted_ids
+    assert decision[5] == 0  # COMMIT; REJECT/DEFER never project candidate-domain events.
     assert decision[6] == [1, candidate[0]]
     assert decision[12] == records["cycle-commit"][15]
+    assert {records[role][2][0] for role in ("event-0", "event-1")} == {1}
     mutations = {case["violation"]: case["mutation"] for case in cases}
     assert mutations["candidate_missing"] == {
         "op": "remove_record",
@@ -2069,6 +2069,7 @@ def test_text_classification_and_specific_grammar_probes_are_exhaustive() -> Non
 
 def test_published_conformance_case_counts_match_the_bundle() -> None:
     fixtures = _json("fixtures.json")
+    transitions = _json("causal-transition-fixtures.json")
     contract = (BUNDLE.parent / "canonical-codec-v1.md").read_text(encoding="utf-8")
     readme = (BUNDLE / "README.md").read_text(encoding="utf-8")
 
@@ -2076,10 +2077,13 @@ def test_published_conformance_case_counts_match_the_bundle() -> None:
     assert len(fixtures["negative"]) == 30
     assert len(fixtures["semantic"]) == 306
     assert len(fixtures["normalization_cases"]) == 7
+    assert len(transitions["cases"]) == 69
     assert "152 casos positivos" in contract
     assert "30 casos negativos" in contract
     assert "306 casos semânticos" in contract
+    assert "69 casos executáveis de transição causal" in contract
     assert "152 vetores positivos, 30 negativos, 306 casos semânticos" in readme
+    assert "totalizando 566 vetores/casos de conformidade" in readme
 
 
 def test_cycle_control_state_variants_are_closed_by_status() -> None:
@@ -2330,3 +2334,340 @@ def test_every_reference_identity_has_a_linked_record_to_reference_case() -> Non
             b"\x83" + encoded_code + b"\x58\x20" + derived_id
             + b"\x58\x20" + derived_digest
         )
+
+
+def _json_pointer_parent(document, pointer: str):
+    parts = [part.replace("~1", "/").replace("~0", "~") for part in pointer.split("/")[1:]]
+    target = document
+    for part in parts[:-1]:
+        target = target[int(part)] if isinstance(target, list) else target[part]
+    return target, parts[-1]
+
+
+def _apply_fixture_patch(document, operations: list[dict]):
+    import copy
+
+    result = copy.deepcopy(document)
+    for operation in operations:
+        parent, key = _json_pointer_parent(result, operation["path"])
+        if operation["op"] == "replace":
+            if isinstance(parent, list):
+                parent[int(key)] = operation["value"]
+            else:
+                parent[key] = operation["value"]
+        elif operation["op"] == "remove":
+            parent.pop(int(key)) if isinstance(parent, list) else parent.pop(key)
+        elif operation["op"] == "add":
+            if isinstance(parent, list):
+                parent.append(operation["value"]) if key == "-" else parent.insert(int(key), operation["value"])
+            else:
+                parent[key] = operation["value"]
+        else:
+            raise AssertionError(operation)
+    return result
+
+
+def _coordinate(value: list[int]) -> tuple[int, int]:
+    return value[0], value[1]
+
+
+def _transition_error(operation: str, state: dict, contracts: dict) -> str | None:
+    if operation == "append-source-record":
+        configured = state["configured_sources"]
+        candidate = state["candidate"]
+        if candidate["source_id"] not in configured:
+            return "SOURCE_NOT_DECLARED"
+        prefix = [item for item in state["prefix"] if item["source_id"] == candidate["source_id"]]
+        if any(item.get("final", False) for item in prefix):
+            return "SOURCE_FINAL"
+        expected_seq = (prefix[-1]["ingress_seq"] + 1) if prefix else 1
+        if candidate["ingress_seq"] != expected_seq:
+            return "INGRESS_NOT_CONTIGUOUS"
+        closures = [item for item in prefix if item["kind"] == "closure"]
+        if candidate["kind"] == "closure":
+            if closures and _coordinate(candidate["closed_through"]) < _coordinate(closures[-1]["closed_through"]):
+                return "CLOSURE_REGRESSION"
+        elif closures:
+            open_coordinate = [closures[-1]["closed_through"][0], closures[-1]["closed_through"][1] + 1]
+            if _coordinate(candidate["eligibility"]) < _coordinate(open_coordinate):
+                return "RETROACTIVE_ELIGIBILITY"
+        return None
+
+    if operation == "append-slot-dispatch":
+        dispatch = state["candidate"]
+        round_ = state["round"]
+        inherited = ("run_id", "decision_round_id", "actor", "eligibility", "base_revision", "effective_at")
+        if dispatch["slot_id"] not in round_["slot_ids"] or any(dispatch[name] != round_[name] for name in inherited):
+            return "DISPATCH_ROUND_MISMATCH"
+        if any(item["decision_round_id"] == dispatch["decision_round_id"] and item["slot_id"] == dispatch["slot_id"] and not item["revoked"] for item in state["dispatches"]):
+            return "DISPATCH_ALREADY_OPEN"
+        if any(not task["completed"] for task in state["prior_perception_tasks"]):
+            return "EPISTEMIC_TASK_PENDING"
+        if any(not delivery["confirmed"] for delivery in state["required_knowledge_inputs"]):
+            return "EPISTEMIC_DELIVERY_PENDING"
+        return None
+
+    if operation == "append-slot-response":
+        response = state["candidate"]
+        dispatch = next((item for item in state["dispatches"] if item["dispatch_id"] == response["dispatch_id"]), None)
+        if dispatch is None or dispatch["revoked"]:
+            return "DISPATCH_NOT_OPEN"
+        inherited = ("run_id", "cycle_id", "decision_round_id", "slot_id", "actor", "effective_at", "base_revision")
+        if any(response[name] != dispatch[name] for name in inherited):
+            return "RESPONSE_DISPATCH_MISMATCH"
+        if any(item["dispatch_id"] == response["dispatch_id"] for item in state["responses"]):
+            return "SLOT_ALREADY_FILLED"
+        return None
+
+    if operation == "append-admission-fence":
+        coordinate = _coordinate(state["coordinate"])
+        closures = []
+        for source_id in state["exogenous_sources"]:
+            covering = [item for item in state["closures"] if item["source_id"] == source_id and (item["final"] or _coordinate(item["closed_through"]) >= coordinate)]
+            if not covering:
+                return "SOURCE_NOT_CLOSED"
+            closures.append(min(covering, key=lambda item: item["ingress_seq"])["closure_id"])
+        rounds = sorted(
+            [item for item in state["rounds"] if item["lifecycle"] == "PENDING" and _coordinate(item["eligibility"]) <= coordinate],
+            key=lambda item: item["round_id"],
+        )
+        cohort = []
+        units = []
+        for round_ in rounds:
+            slots = []
+            for slot_id in sorted(round_["slot_ids"]):
+                response = next((item for item in state["responses"] if item["round_id"] == round_["round_id"] and item["slot_id"] == slot_id), None)
+                if response is None:
+                    return "COHORT_SLOT_UNFILLED"
+                slots.append([slot_id, response["unit_id"]])
+                if response["unit_id"] not in state["consumed_ids"]:
+                    units.append([round_["eligibility"], "SLOT", round_["source_id"], response["unit_id"]])
+            cohort.append([round_["round_id"], slots])
+        for collection, kind in ((state["inputs"], "EXOGENOUS_INPUT"), (state["occurrences"], "SCHEDULED_OCCURRENCE"), (state["activations"], "TRIGGER_ACTIVATION")):
+            for item in collection:
+                if item["unit_id"] not in state["consumed_ids"] and _coordinate(item["eligibility"]) <= coordinate:
+                    units.append([item["eligibility"], kind, item["source_id"], item["unit_id"]])
+        units.sort(key=lambda item: (_coordinate(item[0]), contracts["unit_kind_order"].index(item[1]), item[2], item[3]))
+        derived = {"closure_proof": closures, "cohort": cohort, "admitted_units": units, "cycle_plan": state["derived_cycle_plan"]}
+        return None if state["candidate"] == derived else "FENCE_DERIVATION_MISMATCH"
+
+    if operation == "publish-cycle-commit-batch":
+        return _commit_transition_error(state, contracts)
+
+    if operation == "append-cycle-abort":
+        fence = state["fence"]
+        abort = state["abort"]
+        units = {item["unit_id"]: item for item in fence["admitted_units"]}
+        candidates = {item["candidate_id"]: item for item in state["commit_candidates"]}
+        for subject in abort["indeterminate_subjects"]:
+            if subject["kind"] == "ADMITTED_UNIT":
+                unit = units.get(subject["id"])
+                if unit is None or unit["digest"] != subject["digest"]:
+                    return "ABORT_SUBJECT_MISMATCH"
+            elif subject["kind"] == "COMMIT_CANDIDATE":
+                candidate = candidates.get(subject["id"])
+                if candidate is None or not set(candidate["source_unit_ids"]) <= units.keys():
+                    return "ABORT_CANDIDATE_MISMATCH"
+        evidence = {item["evidence_id"]: item for item in state["failure_evidence"]}
+        for evidence_id in abort["failure_evidence_refs"]:
+            item = evidence.get(evidence_id)
+            if item is None:
+                return "ABORT_EVIDENCE_UNRESOLVED"
+            if item["kind"] == "conflict-set" and not set(item["candidate_ids"]) <= candidates.keys():
+                return "ABORT_EVIDENCE_SCOPE_MISMATCH"
+            if item["kind"] in {"rng-draw", "provisional-disposition", "attempt-failure"} and (item["run_id"], item["cycle_id"], item["attempt"]) != (fence["run_id"], fence["cycle_id"], fence["attempt"]):
+                return "ABORT_EVIDENCE_SCOPE_MISMATCH"
+            if item["kind"] == "affordance-assessment" and item["subject_id"] not in units | candidates:
+                return "ABORT_EVIDENCE_SCOPE_MISMATCH"
+        return None
+
+    if operation == "derive-cycle-control-state":
+        prefix = state["decision_ledger"]
+        latest_fence = next((item for item in reversed(prefix) if item["kind"] == "fence"), None)
+        terminal = next((item for item in reversed(prefix) if item["kind"] in {"abort", "commit"} and latest_fence and item["cycle_id"] == latest_fence["cycle_id"] and item["attempt"] == latest_fence["attempt"]), None)
+        retry = next((item for item in reversed(prefix) if item["kind"] == "retry" and terminal and item["abort_id"] == terminal.get("abort_id")), None)
+        if latest_fence is None or (terminal and terminal["kind"] == "commit"):
+            derived = "IDLE"
+        elif terminal is None:
+            derived = "ATTEMPT_IN_FLIGHT"
+        elif retry is not None:
+            derived = "RETRY_AUTHORIZED"
+        else:
+            derived = "HALTED_ON_ABORT"
+        return None if state["candidate_status"] == derived else "CONTROL_STATE_FOLD_MISMATCH"
+
+    if operation == "validate-genesis":
+        roles = state["policy_roles"]
+        required = set(contracts["required_genesis_policy_roles"])
+        return None if set(roles) == required and len(roles) == len(set(roles)) else "GENESIS_POLICY_SET_INCOMPLETE"
+
+    if operation == "validate-rng-draw":
+        draw = state["draw"]
+        preimage = [bytes.fromhex(state["world_seed_hex"]), draw["subsystem"], draw["decision_key"], [bytes.fromhex(item) for item in draw["entity_ids_hex"]], draw["purpose"], [draw["algorithm"]["id"], draw["algorithm"]["version"], bytes.fromhex(draw["algorithm"]["hash_hex"])]]
+        derived = hashlib.sha256(_encode_cbor_item(preimage)).hexdigest()
+        return None if draw["result_hex"] == derived else "RNG_RESULT_MISMATCH"
+
+    if operation == "validate-epistemic-checkpoint":
+        checkpoint = state["checkpoint"]
+        content = bytes.fromhex(checkpoint["resolved_content_hex"])
+        if hashlib.sha256(content).hexdigest() != checkpoint["content_hash_hex"]:
+            return "CHECKPOINT_CONTENT_HASH_MISMATCH"
+        if checkpoint["mode"] == "inline" and checkpoint["inline_content_hex"] != checkpoint["resolved_content_hex"]:
+            return "CHECKPOINT_INLINE_CONTENT_MISMATCH"
+        return None
+
+    if operation == "validate-parent-history-ref":
+        return _parent_history_ref_error(state)
+
+    if operation == "validate-snapshot":
+        snapshot = state["snapshot"]
+        if hashlib.sha256(bytes.fromhex(snapshot["world_state_hex"])).hexdigest() != snapshot["world_state_hash_hex"]:
+            return "SNAPSHOT_WORLD_HASH_MISMATCH"
+        if set(snapshot["ledger_cursors"]) != set(contracts["required_snapshot_ledgers"]):
+            return "SNAPSHOT_LEDGER_SET_INCOMPLETE"
+        if snapshot["world_seed_hex"] != state["genesis"]["world_seed_hex"] or snapshot["policy_refs"] != state["genesis"]["policy_refs"]:
+            return "SNAPSHOT_GENESIS_CONFIG_MISMATCH"
+        checkpoints = {item["actor"]: item for item in snapshot["epistemic_checkpoints"]}
+        if set(checkpoints) != set(state["eligible_actors"]):
+            return "SNAPSHOT_CHECKPOINT_SET_MISMATCH"
+        required_cover = (snapshot["instant"], snapshot["revision"], snapshot["ledger_cursors"]["evidence_ledger"][0])
+        if any(tuple(item["covers_through"]) < required_cover for item in checkpoints.values()):
+            return "SNAPSHOT_CHECKPOINT_STALE"
+        if any(hashlib.sha256(bytes.fromhex(item["resolved_content_hex"])).hexdigest() != item["content_hash_hex"] for item in checkpoints.values()):
+            return "CHECKPOINT_CONTENT_HASH_MISMATCH"
+        return None
+
+    raise AssertionError(operation)
+
+
+def _commit_transition_error(state: dict, contracts: dict) -> str | None:
+    fence = state["fence"]
+    tx = state["transaction"]
+    ledger = state["decision_ledger"]
+    if any(item["run_id"] == fence["run_id"] and item["cycle_id"] == fence["cycle_id"] and item["attempt"] == fence["attempt"] for item in ledger["terminals"]):
+        return "TERMINAL_ALREADY_EXISTS"
+    if tx["commit_candidates"]:
+        return "CANDIDATE_REPUBLISHED"
+    candidates = {item["candidate_id"]: item for item in ledger["commit_candidates"]}
+    units = {item["unit_id"]: item for item in fence["admitted_units"]}
+    decisions = {item["subject_id"]: item for item in tx["decisions"]}
+    if decisions.keys() != units.keys():
+        return "SETTLEMENT_NOT_BIJECTIVE"
+    candidate_units: list[str] = []
+    for unit_id, decision in decisions.items():
+        unit = units[unit_id]
+        disposition = decision["disposition"]
+        if disposition == "NO_PROPOSAL" and unit["root"] != "no-proposal":
+            return "NO_PROPOSAL_SUBJECT_MISMATCH"
+        if disposition == "DEDUPLICATED":
+            canonical = units.get(decision.get("canonical_unit_id")) or state["historical_units"].get(decision.get("canonical_unit_id"))
+            if canonical is None or canonical.get("idempotency_digest") != unit.get("idempotency_digest"):
+                return "DEDUPLICATION_PROOF_MISMATCH"
+            continue
+        if disposition in {"COMMIT", "REJECT", "DEFER"}:
+            candidate = candidates.get(decision.get("candidate_id"))
+            if candidate is None or unit_id not in candidate["source_unit_ids"]:
+                return "CANDIDATE_PARTITION_MISMATCH"
+            candidate_units.extend(candidate["source_unit_ids"])
+            expected_events = candidate["event_ids"] if disposition == "COMMIT" else []
+            if decision["produced_event_ids"] != expected_events:
+                return "DISPOSITION_EVENT_MISMATCH"
+            if disposition == "DEFER":
+                successor = next((item for item in tx["successors"] if item["unit_id"] == decision.get("successor_input_id")), None)
+                if successor is None or successor["predecessor_id"] != unit_id or successor["unit_id"] == unit_id or _coordinate(successor["eligibility"]) < _coordinate(fence["commit_successor_floor"]):
+                    return "DEFER_SUCCESSOR_MISMATCH"
+    expected_candidate_units = sorted(unit_id for unit_id, decision in decisions.items() if decision["disposition"] in {"COMMIT", "REJECT", "DEFER"})
+    if sorted(candidate_units) != expected_candidate_units:
+        return "CANDIDATE_PARTITION_MISMATCH"
+    provisional = {item["subject_id"]: item for item in ledger["provisional_dispositions"]}
+    for unit_id, decision in decisions.items():
+        if decision["disposition"] in {"COMMIT", "REJECT", "DEFER"}:
+            material = provisional.get(unit_id)
+            compared = ("disposition", "candidate_id", "conflict_set_refs", "rng_draw_refs", "policy", "resolver")
+            if material is None or any(material[name] != decision[name] for name in compared):
+                return "PROVISIONAL_SETTLEMENT_MISMATCH"
+            if any(ref not in {item["conflict_set_id"] for item in ledger["conflict_sets"]} for ref in decision["conflict_set_refs"]):
+                return "CONFLICT_SET_UNRESOLVED"
+            if any(ref not in {item["draw_id"] for item in ledger["rng_draws"]} for ref in decision["rng_draw_refs"]):
+                return "RNG_DRAW_UNRESOLVED"
+    prior_ids = {item["event_id"] for item in state["prior_events"]}
+    seen_ids: set[str] = set()
+    for event in tx["events"]:
+        if event["phase"] != contracts["event_phase_by_origin"][event["origin_kind"]]:
+            return "EVENT_PHASE_MISMATCH"
+        if any(parent not in prior_ids | seen_ids for parent in event["causal_parents"]):
+            return "CAUSAL_PARENT_UNRESOLVED"
+        if any(source not in units for source in event["source_inputs"]):
+            return "EVENT_SOURCE_OUTSIDE_FENCE"
+        seen_ids.add(event["event_id"])
+    expected_lifecycle = sorted([f"unit:{unit_id}" for unit_id in units] + [f"container:{item['container_id']}" for item in state["containers"] if set(item["unit_ids"]) <= units.keys()])
+    if sorted(item["subject"] for item in tx["lifecycle_events"]) != expected_lifecycle:
+        return "SOURCE_LIFECYCLE_MISMATCH"
+    settlement_by_unit = {item["unit_id"]: item for item in tx["source_settlements"]}
+    if settlement_by_unit.keys() != units.keys():
+        return "SOURCE_SETTLEMENT_MISSING"
+    for unit_id, unit in units.items():
+        required = contracts["source_settlement_authority"][unit["root"]]
+        if settlement_by_unit[unit_id]["authority"] != required["authority"] or settlement_by_unit[unit_id]["proof"] != required["proof"]:
+            return "SOURCE_SETTLEMENT_AUTHORITY_MISMATCH"
+    if tx["cycle_commit"]["policies"] != fence["policies"]:
+        return "COMMIT_POLICY_MISMATCH"
+    if tx["trigger_publication"] != state["trigger_expected"]:
+        return "TRIGGER_TRANSITION_MISMATCH"
+    return None
+
+
+def _parent_history_ref_error(state: dict) -> str | None:
+    data = bytes.fromhex(state["reference_hex"])
+    try:
+        if data[:8] != b"CSFHREF\x00" or data[8] != 1:
+            raise ValueError
+        offset = 9
+        values = []
+        for _ in range(4):
+            size = int.from_bytes(data[offset:offset + 2], "big"); offset += 2
+            values.append(data[offset:offset + size]); offset += size
+        schema_version = int.from_bytes(data[offset:offset + 8], "big"); offset += 8
+        for _ in range(2):
+            size = int.from_bytes(data[offset:offset + 2], "big"); offset += 2
+            values.append(data[offset:offset + size]); offset += size
+        policy_id, policy_hash, domain, schema_id, algorithm, digest = values
+        if offset != len(data) or len(policy_hash) != 32 or len(digest) != 32 or algorithm != b"sha-256" or schema_version < 1:
+            raise ValueError
+        for value in (policy_id, domain, schema_id):
+            value.decode("ascii")
+    except (ValueError, UnicodeDecodeError, IndexError):
+        return "PARENT_HISTORY_REF_INVALID"
+    return None
+
+
+def test_causal_transition_contracts_execute_all_review_regressions() -> None:
+    contracts = _json("causal-transition-contracts.json")
+    fixtures = _json("causal-transition-fixtures.json")
+    bases = {item["scenario_id"]: item for item in fixtures["base_scenarios"]}
+    findings = set()
+    for case in fixtures["cases"]:
+        findings.update(case["findings"])
+        state = _apply_fixture_patch(bases[case["base_scenario_id"]]["state"], case.get("patch", []))
+        actual = _transition_error(bases[case["base_scenario_id"]]["operation"], state, contracts)
+        assert actual == case.get("expected_error"), case["case_id"]
+    assert findings == set(range(68, 92))
+
+
+def test_transition_bundle_declares_normative_ownership_and_integrity_algorithms() -> None:
+    contracts = _json("causal-transition-contracts.json")
+    assert contracts["checkpoint_content_integrity"] == {
+        "algorithm": "sha-256",
+        "preimage": "exact resolved opaque content bytes",
+        "inline": "hash inline bytes before accepting the checkpoint",
+        "locator": "resolve bytes then hash before accepting the checkpoint",
+    }
+    assert contracts["commit_candidate_lifecycle"] == "persisted-provisional-before-terminal"
+    assert contracts["parent_history_reference"]["parser"] == "cross-policy-checkpoint-reference-v1"
+    assert set(contracts["required_snapshot_ledgers"]) == {
+        "input_ledger",
+        "decision_ledger",
+        "event_store",
+        "evidence_ledger",
+        "causal_outbox",
+    }

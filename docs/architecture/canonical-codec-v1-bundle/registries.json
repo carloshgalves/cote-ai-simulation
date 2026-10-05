@@ -1071,9 +1071,10 @@
       "model_id": "source-unit-consumption-v1",
       "cddl_type": "source-unit-consumption-transition",
       "authority": "resolved from source-root through record_authorities",
-      "precondition": "the exact (unit-id, unit-digest) record exists and consumed=false in its authoritative store at the transaction cursor",
-      "postcondition": "the same record has consumed=true and consumed-by-fence-digest equal to the committing fence",
-      "cas": "compare source-root, authority, unit-id, unit-digest, and pre-consumed=false; publish post-consumed=true once"
+      "precondition": "the exact (unit-id, unit-digest) record exists and no earlier DecisionRecord+CycleCommit or lifecycle reducer transition has settled it",
+      "postcondition": "action-proposal, no-proposal, and exogenous-input are settled durably by their terminal DecisionRecord plus CycleCommit; scheduled-occurrence and trigger-activation are settled by an exact SOURCE_LIFECYCLE event and owner reducer transition",
+      "cas": "the witness summarizes an authority-specific compare-and-set; its booleans never replace the DecisionLedger, ScheduleStore, or TriggerRegistry durable proof",
+      "normative_dispatch": "causal-transition-contracts.json#source_settlement_authority"
     },
     {
       "model_id": "world-state-transition-v1",
@@ -1099,6 +1100,32 @@
       "precondition": "evaluate the full canonical bytes and digest of every candidate Event under the pinned policy ref",
       "postcondition": "exactly one PerceptionTask exists for each true result, in event-id order, and none exists for a false result",
       "cas": "classification and task projection are part of the same atomic working set"
+    },
+    {
+      "model_id": "cycle-control-fold-v1",
+      "cddl_type": "cycle-control-state",
+      "authority": "decision_ledger",
+      "precondition": "fold the total ordered prefix of AdmissionFence, CycleCommit, CycleAbortRecord, and AttemptRetryRecord",
+      "postcondition": "derive exactly IDLE, ATTEMPT_IN_FLIGHT, HALTED_ON_ABORT, or RETRY_AUTHORIZED with the refs and ordinals fixed by ADR-0008",
+      "cas": "a persisted or snapshotted CycleControlState must equal the fold byte-for-byte",
+      "normative_dispatch": "causal-transition-contracts.json#derive-cycle-control-state"
+    },
+    {
+      "model_id": "trigger-publication-v1",
+      "authority": "trigger_registry",
+      "precondition": "resolve every relevant TriggerDefinition and prior TriggerRuntimeState whose dependency footprint intersects the ordered event batch",
+      "postcondition": "evaluate the pinned predicate over result-state and derive exact runtime successor plus zero or one activation with complete causing-event ids and eligibility >= commit-successor-floor",
+      "cas": "runtime successors and activations publish all-or-none with CycleCommit and WorldState",
+      "normative_dispatch": "causal-transition-contracts.json#publish-cycle-commit-batch"
+    },
+    {
+      "model_id": "snapshot-resume-contract-v1",
+      "cddl_type": "snapshot",
+      "authority": "snapshot_store + genesis_store + all five ledger prefixes",
+      "precondition": "resolve genesis, world state, mandatory ledgers, eligible cognitive actors, and checkpoint contents",
+      "postcondition": "world seed/policies match genesis, world hash and ledger digests verify, and checkpoint coverage reaches snapshot instant/revision/evidence cursor for every eligible actor",
+      "cas": "accept or restore the snapshot only after the complete linked validation succeeds",
+      "normative_dispatch": "causal-transition-contracts.json#validate-snapshot"
     }
   ],
   "linked_record_constraints": [
@@ -1259,8 +1286,8 @@
         "operation": "atomic-publish",
         "candidate_role": "commit-batch",
         "root": "cycle-commit",
-        "cursor": "unpublished transaction working set",
-        "publication": "fence consumption + commit candidates + decision settlement + events + cycle commit + tasks + world revision indivisible"
+        "cursor": "decision-ledger/event-store/source-authority/trigger-registry pre-publication prefixes plus unpublished transaction working set",
+        "publication": "source settlement + decision settlement + successors + source lifecycle + events + trigger runtime/activations + cycle commit + tasks + world revision indivisible"
       },
       "record_roles": [
         {
@@ -1275,7 +1302,7 @@
           "root": "commit-candidate",
           "cardinality": "exact-partition-of-candidate-producing-admitted-units",
           "authority": "decision_ledger",
-          "source": "all candidate records selected by COMMIT, REJECT, and DEFER decision-record candidate-ids"
+          "source": "immutable provisional records already present in the decision_ledger pre-publication prefix and selected by COMMIT, REJECT, and DEFER decision-record candidate-ids"
         },
         {
           "role": "decision-records",
@@ -1314,22 +1341,31 @@
         "decision-records form an exact bijection with fence.admitted-units by subject id and digest",
         "every decision-record has fence run-id, cycle-id, and attempt-ordinal",
         "cycle-commit.decision-digest commits canonical (unit-id, decision-id, record-digest) pairs",
-        "every COMMIT, REJECT, or DEFER decision-record candidate-id resolves exactly one commit-candidate in the transaction working set",
+        "no CycleCommit or CycleAbortRecord exists for fence run-id, cycle-id, and attempt-ordinal at the decision-ledger pre-publication cursor",
+        "every COMMIT, REJECT, or DEFER decision-record candidate-id resolves exactly one immutable commit-candidate in the decision-ledger pre-publication prefix; the transaction MUST NOT republish it",
         "commit-candidate.source-unit-ids form an exact non-overlapping partition of candidate-producing admitted units after NO_PROPOSAL and DEDUPLICATED are excluded",
         "every commit-candidate has fence run-id and cycle-id and references only admitted unit ids from the same fence",
-        "each COMMIT, REJECT, or DEFER decision-record agrees with its commit-candidate on disposition scope, conflict refs, produced events, and successor semantics",
-        "every candidate-produced event is the canonical projection of one event-draft and has event-order-key.origin-ref equal to candidate-id",
+        "NO_PROPOSAL resolves a NoProposal subject; DEDUPLICATED resolves a canonical unit with the same IdempotencyIdentity and idempotency-digest",
+        "each terminal decision equals its resolved ProvisionalDisposition and resolved ConflictSet/RngDraw material in run, cycle, attempt, subject, candidate, disposition, reason, policy, resolver, conflict refs, and rng refs",
+        "COMMIT produced-event-ids are exactly the canonical projections of its candidate event-drafts; REJECT and DEFER produced-event-ids are empty and publish no CANDIDATE_DOMAIN event",
+        "every DEFER publishes exactly one new successor in the owning source authority with a distinct identity, predecessor provenance, and eligibility >= commit-successor-floor",
+        "every candidate-produced event is the canonical projection of one event-draft, has event-order-key.origin-ref equal to candidate-id, and has phase CANDIDATE_DOMAIN",
+        "every SOURCE_LIFECYCLE event is the exact policy-derived projection required to settle admitted source units and completed containers; omission and extra lifecycle output are invalid",
+        "every Event causal-parent resolves by id+digest to an earlier event; a same-cycle parent is earlier within the same candidate; every source-input resolves to an authorized fence unit",
         "every event has cycle-commit run-id, cycle-id, instant as occurred-at, and base-revision",
         "cycle-commit.event-ids == event-id projection of events in EventOrderKey order",
-        "source-consumption contains exactly one eligible-to-consumed CAS witness for every admitted (unit-id, unit-digest), resolved from its real persisted root and record_authority",
+        "source settlement contains exactly one authority-specific proof for every admitted (unit-id, unit-digest): immutable inputs are settled by DecisionRecord+CycleCommit, schedule/trigger sources by their SOURCE_LIFECYCLE reducer transition",
         "world-state-transition proves existing (base-revision, base-state-hash), folds ordered events through their genesis-pinned owner/reducer version and hash, and equals the exact result-state bytes, result-state-hash, and successor revision",
         "events ordered by event-order-key have contiguous logical-sequence from logical-sequence-transition.before, and cycle-commit.next-logical-sequence == logical-sequence-transition.after == before + event count",
         "perception-classification evaluates every event under cycle-commit.perception-policy and tasks form an exact one-to-one ordered projection of events classified potentially perceptible",
+        "cycle-commit cycle-coordinate, event-order, perception, and perception-identity policy refs equal the corresponding AdmissionFence.rule-versions/genesis pins byte-for-byte",
         "cycle-commit.perception-policy resolves exactly one perception_policy_contracts entry by policy-id, version, and policy-hash",
         "cycle-commit.perception-task-ids == task-id projection of tasks in classified event order",
         "cycle-commit.perception-task-digest commits the canonical task-id projection",
         "every task has cycle-commit run-id, cycle-id, base-revision, result-revision, perception-policy, and perception-identity-policy",
-        "source consumption, commit-candidates, decision-records, events, cycle-commit, tasks, world-state-transition, and logical-sequence-transition publish all-or-none"
+        "trigger definitions whose dependencies intersect the ordered event batch are evaluated under the genesis-pinned predicate contract; exact TriggerRuntimeState successors and TriggerActivations with eligibility >= commit-successor-floor publish in trigger_registry",
+        "source settlement, decision-records, successors, source lifecycle, events, trigger runtime/activations, cycle-commit, tasks, world-state-transition, and logical-sequence-transition publish all-or-none",
+        "the complete executable rule and error precedence are in causal-transition-contracts.json#publish-cycle-commit-batch"
       ],
       "state_roles": [
         {
@@ -1482,6 +1518,62 @@
         "completion.observation-ids == observation-id projection of observations in canonical order",
         "completion.knowledge-input-ids == knowledge-input-id projection of knowledge-inputs in canonical order"
       ]
+    },
+    {
+      "constraint_id": "append-source-record",
+      "applies_on": {"operation": "append", "candidate_role": "source-closure-or-exogenous-input", "root": "source-closure|exogenous-input", "cursor": "input-ledger prefix for source-id"},
+      "record_roles": [
+        {"role": "genesis", "root": "genesis-manifest", "cardinality": "one", "source": "genesis_store for run-id"},
+        {"role": "source-prefix", "root": "source-closure|exogenous-input", "cardinality": "zero-or-more", "source": "all input_ledger records for source-id through pre-append cursor"},
+        {"role": "candidate", "root": "source-closure|exogenous-input", "cardinality": "candidate"}
+      ],
+      "relations": ["declared source, gapless ingress sequence, monotonic closure, finality, and open-coordinate normalization are evaluated exactly by causal-transition-contracts.json#append-source-record"]
+    },
+    {
+      "constraint_id": "append-slot-dispatch",
+      "applies_on": {"operation": "append", "candidate_role": "dispatch", "root": "slot-dispatch", "cursor": "schedule-store + input-ledger + causal-outbox + evidence-ledger pre-append prefixes"},
+      "record_roles": [
+        {"role": "round", "root": "round-declaration", "cardinality": "one", "source": "schedule_store resolved by decision-round-id"},
+        {"role": "prior-tasks-and-deliveries", "root": "perception-task|perception-task-completion|knowledge-input", "cardinality": "zero-or-more", "source": "causal outbox/evidence prefixes causally prior for the actor"},
+        {"role": "dispatch", "root": "slot-dispatch", "cardinality": "candidate"}
+      ],
+      "relations": ["round/slot binding, unique open dispatch, and the epistemic barrier are evaluated exactly by causal-transition-contracts.json#append-slot-dispatch"]
+    },
+    {
+      "constraint_id": "append-slot-response",
+      "applies_on": {"operation": "append", "candidate_role": "slot-response", "root": "action-proposal|no-proposal", "cursor": "schedule-store + input-ledger pre-append prefixes"},
+      "record_roles": [
+        {"role": "round", "root": "round-declaration", "cardinality": "one", "source": "schedule_store resolved through dispatch"},
+        {"role": "dispatch", "root": "slot-dispatch", "cardinality": "one-open", "source": "input_ledger resolved by dispatch-id with no later revocation"},
+        {"role": "response", "root": "action-proposal|no-proposal", "cardinality": "candidate"}
+      ],
+      "relations": ["dispatch existence/open state, inherited fields, revocation, and single fill are evaluated exactly by causal-transition-contracts.json#append-slot-response"]
+    },
+    {
+      "constraint_id": "append-admission-fence",
+      "applies_on": {"operation": "append", "candidate_role": "initial-fence", "root": "admission-fence", "cursor": "clock + world revision + complete authoritative source prefixes"},
+      "record_roles": [
+        {"role": "source-prefixes", "root": "source-closure|exogenous-input|round-declaration|action-proposal|no-proposal|scheduled-occurrence|trigger-activation", "cardinality": "complete-prefixes", "source": "all authorities at the conditional append cursor"},
+        {"role": "fence", "root": "admission-fence", "cardinality": "candidate"}
+      ],
+      "relations": ["candidate fence must equal derive(ledgers, base revision, coordinate, plan, versions) byte-for-byte under causal-transition-contracts.json#append-admission-fence"]
+    },
+    {
+      "constraint_id": "validate-genesis-manifest",
+      "applies_on": {"operation": "append", "candidate_role": "genesis", "root": "genesis-manifest", "cursor": "policy/schema stores and optional origin checkpoint"},
+      "record_roles": [{"role": "genesis", "root": "genesis-manifest", "cardinality": "candidate"}],
+      "relations": ["required policy roles are complete and unique", "PRESENT parent-checkpoint-history-ref parses under Cross-policy Checkpoint Reference V1, resolves the origin policy by id+hash, and verifies the referenced checkpoint before genesis append"],
+      "normative_dispatch": "causal-transition-contracts.json#validate-genesis"
+    },
+    {
+      "constraint_id": "validate-snapshot",
+      "applies_on": {"operation": "append-or-restore", "candidate_role": "snapshot", "root": "snapshot", "cursor": "genesis + world state + all mandatory ledgers + checkpoint store"},
+      "record_roles": [
+        {"role": "genesis", "root": "genesis-manifest", "cardinality": "one", "source": "snapshot.genesis-ref"},
+        {"role": "checkpoints", "root": "epistemic-checkpoint-ref", "cardinality": "one-per-eligible-actor", "source": "snapshot.epistemic-checkpoints"},
+        {"role": "snapshot", "root": "snapshot", "cardinality": "candidate"}
+      ],
+      "relations": ["resume completeness, five ledger cursors, world-state hash, genesis configuration, checkpoint coverage, and opaque content integrity are evaluated exactly by causal-transition-contracts.json#validate-snapshot"]
     }
   ],
   "role_bindings": [
@@ -1958,10 +2050,10 @@
       ["actor-namespace-bytes", "actor-id-bytes"]
     ],
     [
-      "snapshot.ledger-cursors",
-      ["ledger-id-bytes"],
+      "snapshot.replay-policies",
+      ["policy-id-bytes", "version", "hash-bytes"],
       "reject",
-      ["ledger-id-bytes"]
+      ["policy-id-bytes", "version"]
     ],
     [
       "snapshot.epistemic-checkpoints",
@@ -1982,7 +2074,28 @@
       ["policy-id-bytes", "version"]
     ]
   ],
-  "ordered_collections": ["trigger-origin.causing-event-ids", "commit-candidate.source-unit-ids", "event-draft.causal-parent-roles", "cycle-commit.admitted-input-ids", "cycle-commit.event-ids", "cycle-commit.decision-record-ids", "cycle-commit.perception-task-ids", "decision-record.produced-event-ids", "perception-task-completion.observation-ids", "perception-task-completion.knowledge-input-ids", "observation.percepts", "admitted-unit-list", "decision-pair-list", "perception-task-id-list", "batch-preimage.events", "cohort-id-preimage.decision-round-ids", "candidate-id-preimage.source-unit-ids"],
+  "causal_transition_contract": "causal-transition-contracts.json",
+  "causal_transition_fixtures": "causal-transition-fixtures.json",
+  "opaque_content_hash_operations": [
+    {
+      "operation_id": "cote.csf.hash.epistemic-checkpoint-content.v1",
+      "algorithm": "sha-256",
+      "preimage": "exact resolved opaque content bytes",
+      "verification": "inline hashes its bstr; locator resolves bytes then hashes before acceptance"
+    }
+  ],
+  "genesis_policy_roles": ["causal-identity", "admission-order", "admission-fence", "cycle-coordinate", "event-order", "idempotency", "rng", "perception", "perception-identity", "reducers", "validators", "conflict-resolvers", "dependency-footprints"],
+  "rng_policy_contracts": [
+    {
+      "policy_id": "cote.csf.rng.sha256-substream.fixture.v1",
+      "version": 1,
+      "policy_hash_hex": "aa89f466bf326f823708ad24192d7ca300f29983f773ace69eb9bc601890e91f",
+      "preimage": "deterministic-CBOR([world-seed, subsystem, decision-key, entity-ids, purpose, policy-ref])",
+      "result": "sha-256(preimage)",
+      "production_use": false
+    }
+  ],
+  "ordered_collections": ["snapshot.ledger-cursors(fixed input,decision,event,evidence,outbox order)", "trigger-origin.causing-event-ids", "commit-candidate.source-unit-ids", "event-draft.causal-parent-roles", "cycle-commit.admitted-input-ids", "cycle-commit.event-ids", "cycle-commit.decision-record-ids", "cycle-commit.perception-task-ids", "decision-record.produced-event-ids", "perception-task-completion.observation-ids", "perception-task-completion.knowledge-input-ids", "observation.percepts", "admitted-unit-list", "decision-pair-list", "perception-task-id-list", "batch-preimage.events", "cohort-id-preimage.decision-round-ids", "candidate-id-preimage.source-unit-ids"],
   "identity_text_fields": ["source-id", "producer-unit-key", "producer-closure-key", "slot-id", "idempotency-key", "actor-ref.namespace", "actor-ref.actor-id", "entity-ref.namespace", "entity-ref.entity-id", "location-ref.namespace", "location-ref.location-id", "action-type", "event-type", "occurrence-kind", "resource-kind", "resource-id", "reason-code", "channel", "producer", "validator-id", "resolver-id", "store-id", "policy-id", "bundle-id", "role-name", "subsystem", "decision-key", "purpose"],
   "human_text_fields": ["transmission.presented-sender"]
 }

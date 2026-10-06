@@ -66,6 +66,11 @@ source-closure = [
   ingress-seq: u64
 ]
 
+; Durable InputLedger position assigned atomically with either source record.
+; ExogenousInput deliberately does not duplicate ingress-seq in its own identity/digest.
+source-ingress-receipt = [source-id: machine-id, ingress-seq: u64,
+                          record-ref: causal-ref]
+
 exogenous-input-fields = (
   input-id: id32,
   run-id: id32,
@@ -524,6 +529,17 @@ snapshot-ledger-cursors = [
   evidence-ledger: [ledger-id: machine-id, cursor: u64, digest: digest32],
   causal-outbox: [ledger-id: machine-id, cursor: u64, digest: digest32]
 ]
+snapshot-pending-state = [occurrences: [0*65535 causal-ref],
+                          trigger-runtime: [0*65535 causal-ref],
+                          trigger-activations: [0*65535 causal-ref],
+                          source-closures: [0*1024 causal-ref],
+                          rounds: [0*65535 causal-ref],
+                          dispatches: [0*65535 causal-ref],
+                          responses: [0*65535 causal-ref],
+                          pending-units: [0*65535 input-ref],
+                          perception-tasks: [0*65535 causal-ref],
+                          perception-completions: [0*65535 causal-ref],
+                          knowledge-inboxes: [0*65535 causal-ref]]
 snapshot-fields = (run-id: id32, snapshot-version: u32, instant: simulation-instant,
                    revision: world-revision, next-logical-sequence: logical-sequence,
                    cycle-ordinal-at-instant: i64, world-state: typed-value,

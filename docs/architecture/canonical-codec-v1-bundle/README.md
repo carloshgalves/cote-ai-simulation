@@ -128,8 +128,8 @@ contrato e os vetores, mas não inclui dois runners independentes nem um workflo
 implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
 
 `fixtures.json` contém 152 vetores positivos, 30 negativos, 306 casos semânticos, sete casos de
-normalização convergente e dois vetores SHA-256. `causal-transition-fixtures.json` acrescenta 69 casos
-de transição executáveis, totalizando 566 vetores/casos de conformidade. Os positivos cobrem primitivos e limites, Unicode,
+normalização convergente e dois vetores SHA-256. `causal-transition-fixtures.json` acrescenta 101 casos
+de transição executáveis, totalizando 598 vetores/casos de conformidade. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 73 operações de id/digest/hash do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
 `error_code` estável. Os casos semânticos executam bindings de enum em roots completos, subsets de

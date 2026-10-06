@@ -38,6 +38,23 @@
     "evidence_ledger",
     "causal_outbox"
   ],
+  "initial_logical_sequence": 0,
+  "fence_policy_role_prefixes": {
+    "cycle-coordinate": "coordinate-v1@",
+    "event-order": "event-order-v1@",
+    "perception": "perception-v1@",
+    "perception-identity": "perception-identity-v1@"
+  },
+  "source_ingress_receipt": {
+    "cddl_type": "source-ingress-receipt",
+    "authority": "input_ledger",
+    "rule": "Every exogenous input and SourceClosure append atomically persists a receipt with source-id, gapless ingress-seq, record id and record digest; ExogenousInput does not invent a non-canonical ingress-seq field."
+  },
+  "snapshot_pending_state": {
+    "schema_id": "cote.csf.schema.snapshot-pending-state",
+    "schema_version": 1,
+    "rule": "The closed pending-state projection is reconciled exactly against schedule, trigger, input, decision, outbox and evidence prefixes at the snapshot cursors."
+  },
   "source_settlement_authority": {
     "action-proposal": {
       "authority": "decision_ledger",
@@ -59,6 +76,11 @@
       "authority": "trigger_registry",
       "proof": "source-lifecycle-event-reducer-transition"
     }
+  },
+  "lifecycle_reducer_owners": {
+    "round-declaration": "schedule_store",
+    "scheduled-occurrence": "schedule_store",
+    "trigger-activation": "trigger_registry"
   },
   "commit_candidate_lifecycle": "persisted-provisional-before-terminal",
   "checkpoint_content_integrity": {

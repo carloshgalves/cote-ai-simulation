@@ -31,6 +31,21 @@
     "conflict-resolvers",
     "dependency-footprints"
   ],
+  "genesis_policy_bindings": [
+    {"role": "causal-identity", "ref": ["causal-identity-v1", 1, "0101010101010101010101010101010101010101010101010101010101010101"]},
+    {"role": "admission-order", "ref": ["admission-order-v1", 1, "0202020202020202020202020202020202020202020202020202020202020202"]},
+    {"role": "admission-fence", "ref": ["admission-fence-v1", 1, "0303030303030303030303030303030303030303030303030303030303030303"]},
+    {"role": "cycle-coordinate", "ref": ["cycle-coordinate-v1", 1, "0404040404040404040404040404040404040404040404040404040404040404"]},
+    {"role": "event-order", "ref": ["event-order-v1", 1, "0505050505050505050505050505050505050505050505050505050505050505"]},
+    {"role": "idempotency", "ref": ["idempotency-v1", 1, "0606060606060606060606060606060606060606060606060606060606060606"]},
+    {"role": "rng", "ref": ["rng-v1", 1, "0707070707070707070707070707070707070707070707070707070707070707"]},
+    {"role": "perception", "ref": ["perception-visible-first-v1", 1, "0808080808080808080808080808080808080808080808080808080808080808"]},
+    {"role": "perception-identity", "ref": ["perception-identity-v1", 1, "0909090909090909090909090909090909090909090909090909090909090909"]},
+    {"role": "reducers", "ref": ["reducers-v1", 1, "0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a"]},
+    {"role": "validators", "ref": ["validators-v1", 1, "0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b"]},
+    {"role": "conflict-resolvers", "ref": ["conflict-resolvers-v1", 1, "0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c"]},
+    {"role": "dependency-footprints", "ref": ["dependency-footprints-v1", 1, "0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d"]}
+  ],
   "required_snapshot_ledgers": [
     "input_ledger",
     "decision_ledger",
@@ -39,21 +54,34 @@
     "causal_outbox"
   ],
   "initial_logical_sequence": 0,
-  "fence_policy_role_prefixes": {
-    "cycle-coordinate": "coordinate-v1@",
-    "event-order": "event-order-v1@",
-    "perception": "perception-v1@",
-    "perception-identity": "perception-identity-v1@"
+  "commit_policy_sources": {
+    "cycle-coordinate": "genesis policy binding for cycle-coordinate",
+    "event-order": "genesis policy binding for event-order",
+    "perception": "genesis policy binding for perception",
+    "perception-identity": "genesis policy binding for perception-identity"
   },
   "source_ingress_receipt": {
     "cddl_type": "source-ingress-receipt",
+    "schema_id": "cote.csf.schema.source-ingress-receipt",
+    "domain_tag": "cote.csf.record.source-ingress-receipt",
     "authority": "input_ledger",
     "rule": "Every exogenous input and SourceClosure append atomically persists a receipt with source-id, gapless ingress-seq, record id and record digest; ExogenousInput does not invent a non-canonical ingress-seq field."
   },
   "snapshot_pending_state": {
     "schema_id": "cote.csf.schema.snapshot-pending-state",
     "schema_version": 1,
-    "rule": "The closed pending-state projection is reconciled exactly against schedule, trigger, input, decision, outbox and evidence prefixes at the snapshot cursors."
+    "domain_tag": "cote.csf.snapshot.pending-state",
+    "rule": "The closed pending-state projection is derived exactly from schedule, trigger, input, decision, outbox and evidence authorities at the snapshot cursors; trigger runtime and perception completions are embedded canonical records rather than non-constructible refs."
+  },
+  "ledger_prefix_digest": {
+    "domain_tag": "cote.csf.digest.ledger-prefix",
+    "schema_id": "cote.csf.schema.ledger-prefix-digest-preimage",
+    "schema_version": 1,
+    "preimage": "[ledger-id, ordered exact canonical record envelopes through cursor]"
+  },
+  "eligible_actor_authority": {
+    "authority": "actor_registry projection in authoritative world/config state",
+    "rule": "Eligible cognitive actors are derived at snapshot.revision; callers cannot supply or narrow the set."
   },
   "source_settlement_authority": {
     "action-proposal": {
@@ -109,6 +137,17 @@
       "production_use": false
     }
   ],
+  "trigger_activation_policies": {
+    "RISING_EDGE": "fire on armed false-to-true, including initial true only when fire-on-initial-true; rearm on false",
+    "FALLING_EDGE": "fire on armed true-to-false; rearm on true",
+    "ONCE_WHEN_TRUE": "fire once when true and persist exhausted",
+    "REPEAT_WHILE_TRUE": "fire only when true and next-repeat-at is absent or due; persist the next positive cadence",
+    "authority": "complete TriggerRegistry prefix plus genesis-pinned reducer dependency-footprint contracts and reducer-derived result WorldState"
+  },
+  "source_lifecycle_policy": {
+    "authority": "versioned lifecycle policy registry addressed by the policy ref persisted on each ScheduledOccurrence",
+    "rule": "The exact terminal is derived from root plus DecisionRecord disposition plus complete policy ref; REJECT may yield CANCELLED only when the pinned policy says so, and swapping CANCELLED/CONSUMED fails closed."
+  },
   "operations": [
     {
       "operation_id": "append-source-record",
@@ -126,9 +165,10 @@
       "cursor": "schedule_store + input_ledger + causal_outbox + evidence_ledger",
       "rules": [
         "round and slot exist and all inherited coordinates match",
+        "round lifecycle is PENDING and the round belongs to the authoritative cohort for the cycle",
         "there is no other open dispatch",
-        "all causally prior perception tasks are complete",
-        "all required addressed knowledge inputs are confirmed"
+        "causal precedence is derived from prior CycleCommit.result-revision and perception-task-ids, never synthetic recipient or causal-ordinal fields",
+        "all causally prior perception tasks are complete and all completed KnowledgeInputs addressed to the actor are confirmed"
       ]
     },
     {
@@ -144,6 +184,8 @@
       "operation_id": "append-admission-fence",
       "cursor": "clock + world revision + all authoritative source prefixes",
       "rules": [
+        "next_cycle_coordinate includes PENDING rounds and every other unconsumed input authority",
+        "no pending work leaves the run IDLE; P <= current coordinate fails closed as stale lifecycle",
         "closure proof uses the first closure that covers the required coordinate for every exogenous source",
         "cohort is exactly all pending eligible rounds and all slots are filled once",
         "admitted units are exactly all eligible unconsumed units",
@@ -158,13 +200,17 @@
         "no terminal exists for the fence attempt",
         "commit candidates, provisional dispositions, conflict sets, and RNG draws already exist as immutable provisional material",
         "NO_PROPOSAL resolves a NoProposal subject and DEDUPLICATED resolves an equal idempotency digest",
+        "all DecisionRecords for one multi-unit candidate repeat one byte-identical atomic outcome",
         "COMMIT alone projects candidate-domain events; REJECT and DEFER project none",
-        "DEFER publishes one new successor with predecessor provenance and eligibility at or after commit-successor-floor",
-        "event phase is determined by origin kind",
-        "candidate domain events, source lifecycle events, trigger runtime, and trigger activations are exact derivations",
+        "DEFER successors are a bijection with distinct deferred candidate outcomes and each full ExogenousInput or ScheduledOccurrence has recomputed identity, digest, provenance, run and eligibility",
+        "event phase is determined by origin kind across TEMPORAL_ADVANCE, CANDIDATE_DOMAIN, SOURCE_LIFECYCLE, TRIGGER_RUNTIME and TRIGGER_ACTIVATION",
+        "event-id uses cote.csf.id.event and every draft causal-parent-role resolves exactly one strictly earlier event of the same candidate",
+        "candidate domain events, source lifecycle events, trigger runtime, and trigger activations are exact EventStore derivations",
+        "source lifecycle subjects are derived from fence cohort plus source authorities, duplicates/extras fail closed, and terminal state follows the pinned lifecycle policy including CANCELLED",
         "causal parents and source inputs resolve with correct scope and order",
         "source settlement is proved by the real owning authority",
-        "cycle coordinate, event order, perception, and perception identity policies equal the fence/genesis pins",
+        "cycle coordinate, event order, perception, and perception identity policies equal their complete genesis role bindings",
+        "CycleCommit event, decision and perception-task receipts and their domain-separated digests equal the exact ordered transaction projections",
         "source settlement, decisions, events, successors, trigger state, tasks, commit, and world revision publish all-or-none"
       ]
     },
@@ -177,6 +223,7 @@
         "ConflictSet candidates belong to that partition",
         "RngDraw, ProvisionalDisposition, and AttemptFailure repeat run, cycle, and attempt",
         "AffordanceAssessment resolves an admitted unit or candidate",
+        "COMMIT_CANDIDATE subjects repeat candidate digest, run and cycle",
         "the attempt has no prior terminal envelope"
       ]
     },
@@ -193,8 +240,8 @@
     {
       "operation_id": "validate-genesis",
       "rules": [
-        "every required policy role is present exactly once",
-        "every role resolves by id, version, and hash",
+        "every required policy role is present exactly once through the normative role-to-policy-ref registry",
+        "every role resolves by complete id, version, and hash without caller-supplied role metadata",
         "parent history reference PRESENT is parsed and verified at append"
       ]
     },
@@ -219,8 +266,9 @@
       "rules": [
         "world-state bytes match world-state-hash",
         "world seed and replay policy refs equal genesis",
-        "all five mandatory ledger cursors and digests are present exactly once",
-        "every eligible cognitive actor has exactly one checkpoint",
+        "all five mandatory ledger authorities and snapshot cursors are present exactly once and each prefix digest uses the registered ledger-prefix operation",
+        "pending-state is strict canonical typed-value derived from the authoritative prefixes, never an oracle",
+        "every cognitive actor derived from actor_registry at the snapshot revision has exactly one checkpoint",
         "checkpoint coverage reaches snapshot instant, revision, and evidence cursor",
         "checkpoint content integrity is verified"
       ]

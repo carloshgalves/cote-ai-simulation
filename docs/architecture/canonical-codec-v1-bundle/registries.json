@@ -57,6 +57,9 @@
     ["cote.csf.digest.genesis-manifest", "cote.csf.schema.genesis-manifest", 1],
     ["cote.csf.digest.idempotency", "cote.csf.schema.idempotency-preimage", 1],
     ["cote.csf.digest.indeterminate-evidence-refs", "cote.csf.schema.indeterminate-evidence-ref-list", 1],
+    ["cote.csf.digest.ledger-prefix", "cote.csf.schema.ledger-prefix-digest-preimage", 1],
+    ["cote.csf.record.source-ingress-receipt", "cote.csf.schema.source-ingress-receipt", 1],
+    ["cote.csf.snapshot.pending-state", "cote.csf.schema.snapshot-pending-state", 1],
     ["cote.csf.hash.world-state", "cote.csf.schema.typed-value", 1],
     ["cote.csf.hash.snapshot", "cote.csf.schema.snapshot.body", 1],
     ["cote.csf.id.admission-fence", "cote.csf.schema.admission-fence-id-preimage", 1],
@@ -76,6 +79,7 @@
     ["cote.csf.digest.attempt-failure", "cote.csf.schema.attempt-failure.body", 1]
   ],
   "fixture_domain_operations": [
+    ["cote.csf.record.source-ingress-receipt", "cote.csf.schema.source-ingress-receipt", 1],
     ["cote.csf.digest.abort", "cote.csf.schema.cycle-abort.body", 1],
     ["cote.csf.digest.action-proposal-unit", "cote.csf.schema.action-proposal.body", 1],
     ["cote.csf.digest.affordance-assessment", "cote.csf.schema.affordance-assessment.body", 1],
@@ -95,6 +99,7 @@
     ["cote.csf.digest.idempotency", "cote.csf.schema.idempotency-preimage", 1],
     ["cote.csf.digest.idempotency-identity", "cote.csf.schema.idempotency-identity", 1],
     ["cote.csf.digest.indeterminate-evidence-refs", "cote.csf.schema.indeterminate-evidence-ref-list", 1],
+    ["cote.csf.digest.ledger-prefix", "cote.csf.schema.ledger-prefix-digest-preimage", 1],
     ["cote.csf.digest.input", "cote.csf.schema.admitted-unit-list", 1],
     ["cote.csf.digest.knowledge-input", "cote.csf.schema.knowledge-input.body", 1],
     ["cote.csf.digest.no-proposal-unit", "cote.csf.schema.no-proposal.body", 1],
@@ -150,6 +155,9 @@
     ["cote.csf.test.b", "cote.csf.test.scalar", 1],
     ["cote.csf.test.bool", "cote.csf.test.bool", 1],
     ["cote.csf.test.bytes", "cote.csf.test.bytes", 1],
+    ["cote.csf.test.bytes32", "cote.csf.test.bytes32", 1],
+    ["cote.csf.test.rng-result", "cote.csf.test.bytes32", 1],
+    ["cote.csf.snapshot.pending-state", "cote.csf.schema.snapshot-pending-state", 1],
     ["cote.csf.test.claim", "cote.csf.schema.claim", 1],
     ["cote.csf.test.commit-candidate", "cote.csf.schema.commit-candidate", 1],
     ["cote.csf.test.conflict-set", "cote.csf.schema.conflict-set", 1],
@@ -211,6 +219,7 @@
   ],
   "schemas": [
     ["cote.csf.schema.source-closure", 1, "source-closure"],
+    ["cote.csf.schema.source-ingress-receipt", 1, "source-ingress-receipt"],
     ["cote.csf.schema.exogenous-input", 1, "exogenous-input"],
     ["cote.csf.schema.exogenous-input.body", 1, "exogenous-input-body"],
     ["cote.csf.schema.round-declaration", 1, "round-declaration"],
@@ -260,12 +269,14 @@
     ["cote.csf.schema.genesis-manifest", 1, "genesis-manifest"],
     ["cote.csf.schema.snapshot", 1, "snapshot"],
     ["cote.csf.schema.snapshot.body", 1, "snapshot-body"],
+    ["cote.csf.schema.snapshot-pending-state", 1, "snapshot-pending-state"],
     ["cote.csf.schema.typed-value", 1, "typed-value"],
     ["cote.csf.schema.admitted-unit-list", 1, "admitted-unit-list"],
     ["cote.csf.schema.indeterminate-evidence-ref-list", 1, "indeterminate-evidence-ref-list"],
     ["cote.csf.schema.decision-pair-list", 1, "decision-pair-list"],
     ["cote.csf.schema.perception-task-id-list", 1, "perception-task-id-list"],
     ["cote.csf.schema.batch-preimage", 1, "batch-preimage"],
+    ["cote.csf.schema.ledger-prefix-digest-preimage", 1, "ledger-prefix-digest-preimage"],
     ["cote.csf.schema.idempotency-preimage", 1, "idempotency-preimage"],
     ["cote.csf.schema.slot-request-preimage", 1, "slot-request-preimage"],
     ["cote.csf.schema.conflict-set-id-preimage", 1, "conflict-set-id-preimage"],
@@ -308,6 +319,7 @@
     ["cote.csf.schema.attempt-failure-id-preimage", 1, "attempt-failure-id-preimage"]
   ],
   "fixture_schemas": [
+    ["cote.csf.test.bytes32", 1, "test-bytes32"],
     ["cote.csf.test.null", 1, "test-null"],
     ["cote.csf.test.bool", 1, "test-bool"],
     ["cote.csf.test.uint", 1, "test-uint"],
@@ -795,6 +807,9 @@
       "root": "source-closure"
     },
     {
+      "root": "source-ingress-receipt"
+    },
+    {
       "root": "slot-dispatch"
     },
     {
@@ -898,6 +913,10 @@
     },
     {
       "root": "source-closure",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "source-ingress-receipt",
       "authority": "input_ledger"
     },
     {
@@ -1089,7 +1108,7 @@
       "model_id": "logical-sequence-transition-v1",
       "cddl_type": "logical-sequence-transition",
       "authority": "event_store + decision_ledger",
-      "precondition": "before is derived from the latest prior CycleCommit.next-logical-sequence for the run at the transaction cursor, or from genesis.next-logical-sequence when no prior commit exists",
+      "precondition": "before is derived from the latest prior CycleCommit.next-logical-sequence for the run at the transaction cursor, or is the codec V1 constant zero when no prior commit exists",
       "postcondition": "events in EventOrderKey order receive the contiguous range [before, after), and after == before + event-count",
       "cas": "an empty event batch preserves before == after"
     },
@@ -1121,8 +1140,8 @@
     {
       "model_id": "snapshot-resume-contract-v1",
       "cddl_type": "snapshot",
-      "authority": "snapshot_store + genesis_store + all five ledger prefixes",
-      "precondition": "resolve genesis, world state, mandatory ledgers, eligible cognitive actors, and checkpoint contents",
+      "authority": "snapshot_store + genesis_store + all five ledger prefixes + schedule_store + trigger_registry + actor_registry",
+      "precondition": "resolve genesis, world state, exactly the five mandatory ledger prefixes, schedule/trigger authorities, eligible cognitive actors from actor_registry at the snapshot revision, and checkpoint contents",
       "postcondition": "world seed/policies match genesis, world hash and ledger digests verify, and checkpoint coverage reaches snapshot instant/revision/evidence cursor for every eligible actor",
       "cas": "accept or restore the snapshot only after the complete linked validation succeeds",
       "normative_dispatch": "causal-transition-contracts.json#validate-snapshot"
@@ -1524,8 +1543,9 @@
       "applies_on": {"operation": "append", "candidate_role": "source-closure-or-exogenous-input", "root": "source-closure|exogenous-input", "cursor": "input-ledger prefix for source-id"},
       "record_roles": [
         {"role": "genesis", "root": "genesis-manifest", "cardinality": "one", "source": "genesis_store for run-id"},
-        {"role": "source-prefix", "root": "source-closure|exogenous-input", "cardinality": "zero-or-more", "source": "all input_ledger records for source-id through pre-append cursor"},
-        {"role": "candidate", "root": "source-closure|exogenous-input", "cardinality": "candidate"}
+        {"role": "source-prefix", "root": "source-closure|exogenous-input|source-ingress-receipt", "cardinality": "zero-or-more", "source": "all input_ledger records and their durable receipts for source-id through pre-append cursor"},
+        {"role": "candidate", "root": "source-closure|exogenous-input", "cardinality": "candidate"},
+        {"role": "candidate-receipt", "root": "source-ingress-receipt", "cardinality": "one", "source": "same atomic input_ledger append as candidate"}
       ],
       "relations": ["declared source, gapless ingress sequence, monotonic closure, finality, and open-coordinate normalization are evaluated exactly by causal-transition-contracts.json#append-source-record"]
     },
@@ -2085,6 +2105,13 @@
     }
   ],
   "genesis_policy_roles": ["causal-identity", "admission-order", "admission-fence", "cycle-coordinate", "event-order", "idempotency", "rng", "perception", "perception-identity", "reducers", "validators", "conflict-resolvers", "dependency-footprints"],
+  "genesis_policy_bindings": "causal-transition-contracts.json#genesis_policy_bindings; every role maps to exactly one complete policy-ref [id, version, hash]",
+  "ledger_prefix_digest_operation": {
+    "domain_tag": "cote.csf.digest.ledger-prefix",
+    "schema_id": "cote.csf.schema.ledger-prefix-digest-preimage",
+    "schema_version": 1,
+    "preimage": "[ledger-id, ordered exact canonical record envelopes through cursor]"
+  },
   "rng_policy_contracts": [
     {
       "policy_id": "cote.csf.rng.sha256-substream.fixture.v1",

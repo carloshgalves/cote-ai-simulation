@@ -219,7 +219,8 @@ ClockState {
 ```
 
 O relógio não usa tempo de parede para semântica. Pausa, velocidade de execução e duração de chamada
-LLM são operacionais.
+LLM são operacionais. No genesis V1, `next_logical_sequence` começa na constante normativa `0`; ela
+não é um campo livre fornecido pelo manifesto.
 
 #### 3.2 `ResolutionCycle`
 
@@ -351,7 +352,10 @@ Toda entrada causal pertence a exatamente uma fonte declarada. Há duas classes:
 - **Fontes exógenas:** adapters de harness/driver, genesis-only sources e, no futuro, intervenção de
   usuário por contrato próprio. Elas são declaradas na configuração imutável do run
   (`exogenous_sources[]`, possivelmente vazia); uma fonte não declarada não escreve entradas tipadas
-  no input ledger. Cada fonte grava entradas com `ingress_seq` durável e monotônico por `source_id`.
+  no input ledger. Cada append de input ou fechamento persiste atomicamente um
+  `SourceIngressReceipt` canônico com `source_id`, `ingress_seq` gapless e a referência id+digest do
+  record. `ExogenousInput` não duplica essa sequência; `SourceClosure` a repete em seu record para a
+  seleção da prova e precisa coincidir com o recibo atômico.
 
 Respostas de slot não pertencem a nenhuma das duas classes como entrada própria: o slot é unidade de
 fonte **derivada** — nasce com a `RoundDeclaration`, herda sua coordenada e seu fechamento por
@@ -373,15 +377,21 @@ SourceClosure {
   producer_closure_key                    // estável na fonte; reusada somente em reentrega idêntica
   closed_through: EligibilityCoordinate     // monotônico por fonte; pode saltar à frente
   final: boolean                            // true = a fonte nunca mais grava
+  ingress_seq                               // igual ao SourceIngressReceipt atômico
+}
+
+SourceIngressReceipt {
+  source_id
   ingress_seq
+  record_ref: { kind, id, digest }
 }
 ```
 
 Regras:
 
-- `closed_through` nunca regride. `ingress_seq` é alocado sem lacunas na mesma escrita atômica do
-  registro, e a leitura por fonte é prefix-consistente: observar o item `N` implica observar todos os
-  itens válidos `<= N`. Uma fonte pode fechar coordenadas muito à frente ou declarar-se `final`; um
+- `closed_through` nunca regride. O `ingress_seq` do recibo é alocado sem lacunas na mesma escrita
+  atômica do registro, e a leitura por fonte é prefix-consistente: observar o recibo `N` implica
+  observar todos os itens válidos `<= N`. Uma fonte pode fechar coordenadas muito à frente ou declarar-se `final`; um
   run sem fontes exógenas — mesmo com rounds e respondedores de slot — tem a condição abaixo
   trivialmente satisfeita;
 - **condição de fechamento:** seja `closure_coordinate(C, cycle_plan) = C` em `WORK` e
@@ -397,10 +407,10 @@ Regras:
   `SourceClosure` da própria fonte recebe coordenada `>= open_coordinate` por regra, então nunca cai
   sob um fechamento já declarado. Depois de um marcador `final`, `open_coordinate` é indefinida e o
   `InputLedger` rejeita atomicamente qualquer novo input ou `SourceClosure` daquela fonte; nem
-  normalização nem reabertura são permitidas. `ingress_seq` participa apenas dessa ordem durável e da
+  normalização nem reabertura são permitidas. O `ingress_seq` do recibo participa apenas dessa ordem durável e da
   seleção da prova de fechamento, nunca da ordem/prioridade de unidades admitidas;
 - **prova canônica:** para cada `(source_id, C)`, `covering_closure(source_id, C)` é o primeiro
-  `SourceClosure` na ordem crescente de `ingress_seq` que satisfaz `final = true` ou
+  `SourceClosure` na ordem crescente do `ingress_seq` de seu recibo que satisfaz `final = true` ou
   `closed_through >= C`. Esse seletor é total quando a condição de fechamento vale e é estável sob
   append: marcadores posteriores nunca substituem o primeiro que cruzou `C`;
 - o coordinator publica, como sinal operacional, a coordenada cujo fechamento aguarda; uma fonte
@@ -515,8 +525,9 @@ listadas em `cohort`; a unidade é o slot. Uma unidade é admitida quando, e som
 
 Toda unidade persistida possui `unit_digest`, calculado sobre os bytes canônicos de **todo** o record
 causal imutável — schema/tipo, fonte, chave estável do produtor quando houver, ator, payload,
-coordenada/instante, provenance e identidade de idempotência — excluindo somente o próprio digest,
-`ingress_seq` e telemetria de transporte. Para slots, `response_digest` de `ActionProposal` ou
+coordenada/instante, provenance e identidade de idempotência — excluindo somente o próprio digest e
+telemetria de transporte. O `ingress_seq` do input exógeno fica no `SourceIngressReceipt` associado
+e, portanto, não integra o `ExogenousInput`. Para slots, `response_digest` de `ActionProposal` ou
 `NoProposal` é esse `unit_digest`; occurrences, ativações e inputs tipados seguem a mesma função no
 schema correspondente. O ledger rejeita a mesma identidade com outro digest.
 
@@ -540,7 +551,7 @@ uma divergência falha fechado como corrupção ou deriva de versão (§11).
 
 Consequências:
 
-- `ingress_seq` participa apenas da normalização de ingresso e da escolha append-stable do primeiro
+- o `ingress_seq` do recibo participa apenas da normalização de ingresso e da escolha append-stable do primeiro
   fechamento que cobre `closure_coordinate(C, cycle_plan)` na §3.2.2. Ele nunca ordena, prioriza nem
   desempata unidades admitidas. A
   ordem canônica de `admitted_units` é a ordenação lexicográfica total por
@@ -1882,6 +1893,14 @@ Um snapshot causal contém, no mínimo:
   foi confirmada;
 - `EpistemicCheckpointRef` versionado de cada ator com estado epistemológico;
 - hash canônico do snapshot.
+
+Os cursores cobrem **exatamente** `input_ledger`, `decision_ledger`, `event_store`,
+`evidence_ledger` e `causal_outbox`. Cada digest usa a operação registrada
+`cote.csf.digest.ledger-prefix` sobre `[ledger_id, envelopes canônicos ordenados]`. O `pending_state`
+é uma typed value fechada derivada de schedule, trigger, input, decision, outbox e evidence; inclui
+os records canônicos completos de runtime de trigger e completion perceptiva, sem listas auxiliares
+fornecidas pelo caller. O conjunto de checkpoints não recebe `eligible_actors` do caller: ele é
+derivado do actor registry autoritativo na revisão do snapshot.
 
 Projeções reconstruíveis e caches não entram como autoridade. Estado de crença, memória e reflexão,
 porém, não é projeção reconstruível: ele deriva de LLM e o replay é proibido de chamar modelo (§11).

@@ -530,7 +530,7 @@ snapshot-ledger-cursors = [
   causal-outbox: [ledger-id: machine-id, cursor: u64, digest: digest32]
 ]
 snapshot-pending-state = [occurrences: [0*65535 causal-ref],
-                          trigger-runtime: [0*65535 causal-ref],
+                          trigger-runtime: [0*65535 trigger-runtime-state],
                           trigger-activations: [0*65535 causal-ref],
                           source-closures: [0*1024 causal-ref],
                           rounds: [0*65535 causal-ref],
@@ -538,7 +538,7 @@ snapshot-pending-state = [occurrences: [0*65535 causal-ref],
                           responses: [0*65535 causal-ref],
                           pending-units: [0*65535 input-ref],
                           perception-tasks: [0*65535 causal-ref],
-                          perception-completions: [0*65535 causal-ref],
+                          perception-completions: [0*65535 perception-task-completion],
                           knowledge-inboxes: [0*65535 causal-ref]]
 snapshot-fields = (run-id: id32, snapshot-version: u32, instant: simulation-instant,
                    revision: world-revision, next-logical-sequence: logical-sequence,
@@ -559,6 +559,8 @@ decision-pair = [unit-id: id32, decision-record-id: id32, record-digest: digest3
 decision-pair-list = [0*65535 decision-pair]
 perception-task-id-list = [0*65535 id32]
 event-envelope-list = [0*65535 bstr]
+ledger-prefix-digest-preimage = [ledger-id: machine-id,
+                                 canonical-record-envelopes: [0*4294967295 bstr]]
 batch-preimage = [commit: cycle-commit-body, events: event-envelope-list]
 idempotency-preimage = [run-id: id32, unit-kind: u8, producer-scope: machine-id,
                         actor-scope: optional<actor-ref>, idempotency-key: machine-id,
@@ -635,6 +637,7 @@ test-uint = u64
 test-u8 = u8
 test-nint = -9223372036854775808..-1
 test-bytes = bstr
+test-bytes32 = bstr .size 32
 test-text = human-text
 test-ordered-list = [* u8]
 test-set = [* u8]

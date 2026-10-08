@@ -27,8 +27,8 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `89368278dc83d4565582c6c93e8e9ff9366318282d41eca02e1a3e3359ce76c1` |
-| `conformance_suite_hash` | `238a4f580f68b30f21a1948f8e0c32ee01ff353317e36891876b090c20eeee25` |
+| `schema_bundle_hash` | `af3b8f4ef92c2558947ef7d00f475408aa508bd8bca492c7e3c1f08d47530d21` |
+| `conformance_suite_hash` | `16f966d7f8a557f54370717e609fed3ca274cff3dc37169ff825b9519824b764` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -231,7 +231,11 @@ redução verificável de `WorldState` e cursor durável de `LogicalSequence`. O
 partição exata das unidades produtoras, mas `CommitCandidate` e todo material provisório já precisam
 existir imutavelmente no prefixo do `DecisionLedger`; o terminal não os republica. Cada decisão
 resolve sua disposição provisória/conflitos/RNG. Somente `COMMIT` projeta drafts de domínio, sempre em
-phase `CANDIDATE_DOMAIN`; `REJECT` e `DEFER` não publicam esses efeitos. O pós-estado é o resultado exato da dobra dos eventos, em
+phase `CANDIDATE_DOMAIN`; `REJECT` e `DEFER` não publicam esses efeitos. A projeção candidata fecha o
+envelope completo — schema, payload, parents, sources, actors, entities, location e confidentiality —
+a partir do candidate, das fontes imutáveis por id+digest e do contract do event type. Toda fase
+recalcula `event_id`; `commit_successor_floor` vem exclusivamente de instant/ordinal/`CyclePlan`.
+O pós-estado é o resultado exato da dobra dos eventos, em
 `EventOrderKey`, pelos reducers de owner/version/hash pinados — bytes arbitrários apenas
 autoconsistentes com seu hash não são testemunho válido. O cursor lógico de entrada deriva do último
 `CycleCommit` do prefixo, ou do genesis quando ainda não há commit. Fence, commit, decisions, events e tasks compartilham
@@ -240,9 +244,13 @@ perceptiva pinada resolve um predicado versionado em `perception_policy_contract
 bijeção entre eventos classificados e tasks. Não existe prefixo
 publicado depois de terminal do mesmo fence, com settlement incompleto, evento perceptível sem task
 ou unidade reutilizável. Depois, a cadeia
-resolve `PerceptionTask` → `Observation` → `KnowledgeInput` → completion respeitando os owners. Cada observation da task tem exatamente seu evento como fonte; task/observation,
-instante e observer-recipient coincidem. Claims e evidence do knowledge input são subsets do que a
-observation resolvida divulgou. As listas do completion são exatamente as projeções canônicas de
+resolve `PerceptionTask` → `Observation` → `KnowledgeInput` → completion respeitando os owners. Cada
+observation da task tem exatamente seu evento como fonte; task/observation, instante e
+observer-recipient coincidem. A policy pinada deriva allow-list e output exato por observer sobre
+task/event/pre/post/channel; observer não autorizado ou percept/claim/evidence/omissão divergente
+falha no append. Claims e evidence do knowledge input são subsets do que a observation resolvida
+divulgou. Persistir o `KnowledgeInput` é a confirmação durável; não existe ack/flag paralelo. As
+listas do completion são exatamente as projeções canônicas de
 todos os outputs daquela task, sem extras, duplicatas ou omissões; completion vazio representa zero
 outputs. A task e o commit repetem a mesma `perception-identity-policy`, a observation repete o
 resolver pinado pela task, e completion fecha terminalmente a task: nenhum output posterior é
@@ -474,8 +482,8 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 
 A suíte V1 contém 156 casos positivos — todos os roots persistidos e todas as 76 operações
 registradas —, 30 casos negativos com `error_code` estável, 306 casos semânticos de binding,
-identidade, ordenação e idempotência, 101 casos executáveis de transição causal, sete casos de
-normalização e dois vetores SHA-256: 602 vetores/casos ao todo. O CI de uma
+identidade, ordenação e idempotência, 111 casos executáveis de transição causal, sete casos de
+normalização e dois vetores SHA-256: 612 vetores/casos ao todo. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
 independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não
 contém esses runners ou workflow. Ambas precisam provar valor

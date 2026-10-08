@@ -180,9 +180,6 @@
               "knowledge_input_id": "knowledge-0",
               "recipient": "actor-1"
             }
-          ],
-          "confirmed_knowledge_input_ids": [
-            "knowledge-0"
           ]
         },
         "candidate": {
@@ -481,12 +478,10 @@
           "run_id": "run-1",
           "cycle_id": "cycle-1",
           "attempt": 1,
+          "instant": 1000,
+          "cycle_ordinal": 7,
           "cycle_plan": [
             "WORK"
-          ],
-          "commit_successor_floor": [
-            1000,
-            8
           ],
           "rule_versions": [
             "coordinate-v1@1#01",
@@ -499,6 +494,14 @@
               "unit_id": "unit-action",
               "unit_digest": "digest-action",
               "root": "action-proposal",
+              "actor_refs": [
+                "actor-1"
+              ],
+              "entity_refs": [
+                "resource-1"
+              ],
+              "location_ref": "room-1",
+              "confidentiality": "SECRET",
               "first_fence_ordinal": 1,
               "admission_index": 0,
               "idempotency_identity": {
@@ -810,6 +813,7 @@
                 "event_role": 0
               },
               "event_type": "domain.changed",
+              "event_schema_version": 1,
               "payload": [
                 "value",
                 1
@@ -820,7 +824,15 @@
                   "id": "unit-action",
                   "digest": "digest-action"
                 }
-              ]
+              ],
+              "actor_refs": [
+                "actor-1"
+              ],
+              "entity_refs": [
+                "resource-1"
+              ],
+              "location_ref": "room-1",
+              "confidentiality": "SECRET"
             },
             {
               "event_id": "d5cb24649ee130e21366854ca1a982a44d1d02f08dc7d10e79956a5f72db194b",
@@ -1283,7 +1295,7 @@
             "completions": []
           },
           "evidence_ledger": {
-            "knowledge_inputs": [{"knowledge_input_id": "knowledge-1", "confirmed": false}]
+            "knowledge_inputs": [{"knowledge_input_id": "knowledge-1"}]
           },
           "actor_registry": [
             {"actor": "actor-1", "cognitive_state_required": true, "active_at_revision": 0}
@@ -1344,8 +1356,8 @@
           "pending_state": {
             "schema_id": "cote.csf.schema.snapshot-pending-state",
             "schema_version": 1,
-            "canonical_envelope_hex": "86444353460001781f636f74652e6373662e736e617073686f742e70656e64696e672d73746174657826636f74652e6373662e736368656d612e736e617073686f742d70656e64696e672d7374617465018b816c6f6363757272656e63652d31818869747269676765722d3101f4f5f400810007808169636c6f737572652d318167726f756e642d31816a64697370617463682d31808166756e69742d3181667461736b2d3180816b6b6e6f776c656467652d31",
-            "envelope_digest_hex": "6062ca96fb13e210b0d138bdb897f4b295f17802b9a8c1a6969c2da870e16226",
+            "canonical_envelope_hex": "86444353460001781f636f74652e6373662e736e617073686f742e70656e64696e672d73746174657826636f74652e6373662e736368656d612e736e617073686f742d70656e64696e672d7374617465018a816c6f6363757272656e63652d31818869747269676765722d3101f4f5f400810007808169636c6f737572652d318167726f756e642d31816a64697370617463682d31808166756e69742d3181667461736b2d3180",
+            "envelope_digest_hex": "0fc8b100213ef8475e374b0bf0379874dd9cb3fc693242957732821c4afa99df",
             "value": {
               "occurrences": [
                 "occurrence-1"
@@ -1370,10 +1382,7 @@
               "perception_tasks": [
                 "task-1"
               ],
-              "perception_completions": [],
-              "knowledge_inboxes": [
-                "knowledge-1"
-              ]
+              "perception_completions": []
             }
           },
           "cycle_control_state": {
@@ -1397,6 +1406,91 @@
               "content_hash_hex": "d798d1fac6bd4bb1c11f50312760351013379a0ab6f0a8c0af8a506b96b2525a"
             }
           ]
+        }
+      }
+    },
+    {
+      "scenario_id": "observation.valid",
+      "operation": "append-observation",
+      "state": {
+        "event": {
+          "event_id": "event-secret-1",
+          "event_digest": "digest-event-secret-1",
+          "event_type": "secret.notice",
+          "occurred_at": 1000,
+          "confidentiality": "SECRET"
+        },
+        "task": {
+          "task_id": "task-secret-1",
+          "event_id": "event-secret-1",
+          "perception_policy": [
+            "perception-visible-first-v1",
+            1,
+            "03"
+          ],
+          "resolver": [
+            "perception-resolver-v1",
+            1,
+            "08"
+          ]
+        },
+        "completions": [],
+        "channel_state": {
+          "event_access": {
+            "event-secret-1": [
+              "actor-1"
+            ]
+          },
+          "observer_outputs": {
+            "event-secret-1": {
+              "actor-1": {
+                "percepts": [
+                  "visible-cue"
+                ],
+                "claim_refs": [
+                  "claim-visible"
+                ],
+                "evidence_chain": [
+                  "evidence-visible"
+                ],
+                "omissions_redactions": [
+                  "secret-detail"
+                ],
+                "modality": "VISION",
+                "channel_ref": "room-channel"
+              }
+            }
+          }
+        },
+        "candidate": {
+          "task_id": "task-secret-1",
+          "observer": "actor-1",
+          "observed_at": 1000,
+          "source_event_refs": [
+            {
+              "id": "event-secret-1",
+              "digest": "digest-event-secret-1"
+            }
+          ],
+          "resolver": [
+            "perception-resolver-v1",
+            1,
+            "08"
+          ],
+          "percepts": [
+            "visible-cue"
+          ],
+          "claim_refs": [
+            "claim-visible"
+          ],
+          "evidence_chain": [
+            "evidence-visible"
+          ],
+          "omissions_redactions": [
+            "secret-detail"
+          ],
+          "modality": "VISION",
+          "channel_ref": "room-channel"
         }
       }
     }
@@ -1524,7 +1618,7 @@
       "patch": [
         {
           "op": "remove",
-          "path": "/evidence_ledger/confirmed_knowledge_input_ids/0"
+          "path": "/evidence_ledger/knowledge_inputs/0"
         }
       ],
       "expected_error": "EPISTEMIC_DELIVERY_PENDING"
@@ -2608,6 +2702,14 @@
         },
         {
           "op": "add",
+          "path": "/transaction/events/0/source_inputs/-",
+          "value": {
+            "id": "unit-none",
+            "digest": "digest-none"
+          }
+        },
+        {
+          "op": "add",
           "path": "/decision_ledger/provisional_dispositions/-",
           "value": {
             "run_id": "run-1",
@@ -3338,6 +3440,119 @@
         }
       ],
       "expected_error": "SNAPSHOT_GENESIS_CONFIG_MISMATCH"
+    },
+    {
+      "case_id": "commit.candidate-source-projection-mismatch",
+      "base_scenario_id": "commit.valid",
+      "findings": [146],
+      "patch": [
+        {
+          "op": "replace",
+          "path": "/transaction/events/0/source_inputs/0",
+          "value": {"id": "unit-none", "digest": "digest-none"}
+        }
+      ],
+      "expected_error": "EVENT_DRAFT_PROJECTION_MISMATCH"
+    },
+    {
+      "case_id": "commit.candidate-actor-projection-mismatch",
+      "base_scenario_id": "commit.valid",
+      "findings": [146],
+      "patch": [
+        {
+          "op": "replace",
+          "path": "/transaction/events/0/actor_refs/0",
+          "value": "actor-2"
+        }
+      ],
+      "expected_error": "EVENT_DRAFT_PROJECTION_MISMATCH"
+    },
+    {
+      "case_id": "commit.candidate-confidentiality-projection-mismatch",
+      "base_scenario_id": "commit.valid",
+      "findings": [146],
+      "patch": [
+        {
+          "op": "replace",
+          "path": "/transaction/events/0/confidentiality",
+          "value": "PUBLIC"
+        }
+      ],
+      "expected_error": "EVENT_DRAFT_PROJECTION_MISMATCH"
+    },
+    {
+      "case_id": "observation.authorized",
+      "base_scenario_id": "observation.valid",
+      "findings": [147]
+    },
+    {
+      "case_id": "observation.secret-observer-denied",
+      "base_scenario_id": "observation.valid",
+      "findings": [147],
+      "patch": [
+        {
+          "op": "replace",
+          "path": "/candidate/observer",
+          "value": "actor-2"
+        }
+      ],
+      "expected_error": "OBSERVATION_ACCESS_DENIED"
+    },
+    {
+      "case_id": "observation.undisclosed-percept-denied",
+      "base_scenario_id": "observation.valid",
+      "findings": [147],
+      "patch": [
+        {
+          "op": "replace",
+          "path": "/candidate/percepts/0",
+          "value": "secret-detail"
+        }
+      ],
+      "expected_error": "OBSERVATION_PROJECTION_MISMATCH"
+    },
+    {
+      "case_id": "dispatch.persisted-knowledge-input-is-delivered",
+      "base_scenario_id": "slot-dispatch.valid",
+      "findings": [148]
+    },
+    {
+      "case_id": "dispatch.missing-durable-knowledge-input",
+      "base_scenario_id": "slot-dispatch.valid",
+      "findings": [148],
+      "patch": [
+        {
+          "op": "remove",
+          "path": "/evidence_ledger/knowledge_inputs/0"
+        }
+      ],
+      "expected_error": "EPISTEMIC_DELIVERY_PENDING"
+    },
+    {
+      "case_id": "commit.lifecycle-event-id-mismatch",
+      "base_scenario_id": "commit.valid",
+      "findings": [149],
+      "patch": [
+        {
+          "op": "replace",
+          "path": "/transaction/events/1/event_id",
+          "value": "arbitrary-lifecycle-id"
+        }
+      ],
+      "expected_error": "EVENT_ID_MISMATCH"
+    },
+    {
+      "case_id": "commit.caller-successor-floor-forbidden",
+      "base_scenario_id": "commit.valid",
+      "findings": [150],
+      "patch": [
+        {
+          "op": "add",
+          "path": "/fence/commit_successor_floor",
+          "value": [1000, 99]
+        }
+      ],
+      "expected_error": "COMMIT_SUCCESSOR_FLOOR_NOT_DERIVED"
     }
   ]
 }

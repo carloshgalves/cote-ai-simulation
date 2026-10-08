@@ -42,11 +42,11 @@ Adotar `COTE Causal Canonical Codec V1`, identificado por
 
 O bundle normativo fixa CDDL, domain/schema operations, bindings de cada enum/variant/role,
 identidades de `CausalRef`, chaves separadas de ordering/identidade para coleções set-like, limites,
-dados Unicode e 602 vetores/casos de conformidade. Seus hashes V1 são:
+dados Unicode e 612 vetores/casos de conformidade. Seus hashes V1 são:
 
 - `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`;
-- `schema_bundle_hash=89368278dc83d4565582c6c93e8e9ff9366318282d41eca02e1a3e3359ce76c1`;
-- `conformance_suite_hash=238a4f580f68b30f21a1948f8e0c32ee01ff353317e36891876b090c20eeee25`.
+- `schema_bundle_hash=af3b8f4ef92c2558947ef7d00f475408aa508bd8bca492c7e3c1f08d47530d21`;
+- `conformance_suite_hash=16f966d7f8a557f54370717e609fed3ca274cff3dc37169ff825b9519824b764`.
 
 O layout completo e os vetores-âncora estão no contrato normativo ligado acima.
 
@@ -107,6 +107,12 @@ completion já observável no cursor, sem permitir um prefixo publicado event-wi
 fonte, dispatch/resposta, primeiro fence, RNG, dobra de controle, snapshot/checkpoints e referência
 histórica também têm transições executáveis com fixtures materializadas. Biblioteca nova que emite bytes diferentes é
 incompatível com o run, não uma migração.
+
+O contrato executável também fecha as cinco lacunas de publicação críticas: todo Event candidato
+projeta schema, provenance e visibilidade a partir de candidate + fontes imutáveis; autorização
+perceptiva é observer-specific e compara o output exato; persistir `KnowledgeInput` é a única
+confirmação durável; `event_id` é recalculado em todas as fases; e `commit_successor_floor` é derivado
+do `CyclePlan`, nunca fornecido pelo caller.
 
 O policy bundle contém golden vectors positivos/negativos e precisa ser executado por pelo menos duas
 implementações independentes e linguagens diferentes. A suíte cobre primitivos, limites numéricos,

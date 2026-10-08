@@ -1120,7 +1120,8 @@ def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
         "terminal decision equals its resolved ProvisionalDisposition",
         "REJECT and DEFER produced-event-ids are empty",
         "DEFER publishes exactly one new successor",
-        "phase CANDIDATE_DOMAIN",
+        "canonical full-envelope projection",
+        "event-id is recomputed",
         "SOURCE_LIFECYCLE event is the exact policy-derived projection",
         "same-cycle parent is earlier within the same candidate",
         "authority-specific proof for every admitted",
@@ -1141,6 +1142,10 @@ def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
             "predicate": "event.event-order-key.event-local-ordinal == 0",
             "output": "potentially-perceptible boolean",
             "ordering": "evaluate events in cycle-commit.event-ids order",
+            "observer_projection_input": "PerceptionTask + full Event + task base/result state + authoritative channel/access state",
+            "observer_access": "derive the exact observer allow-list; confidentiality never grants fallback access",
+            "observer_output": "derive exact modality, channel, percepts, claim refs, evidence chain and omissions for each allowed observer",
+            "append_rule": "reject an unauthorized observer or any extra, omitted or substituted observer output",
         }
     ]
     assert all(
@@ -1871,6 +1876,8 @@ def test_epistemic_completion_is_terminal_and_policies_are_pinned() -> None:
     observation = constraints["append-observation"]
     knowledge = constraints["append-knowledge-input"]
     assert "observation.resolver == task.resolver byte-for-byte" in observation["relations"]
+    assert any("exact observer allow-list" in relation for relation in observation["relations"])
+    assert any("observer-specific projection" in relation for relation in observation["relations"])
     assert "no perception-task-completion for task.task-id exists at pre-append cursor" in observation["relations"]
     assert "no perception-task-completion for task.task-id exists at pre-append cursor" in knowledge["relations"]
     assert "causal-outbox" in knowledge["applies_on"]["cursor"]
@@ -2080,13 +2087,13 @@ def test_published_conformance_case_counts_match_the_bundle() -> None:
     assert len(fixtures["negative"]) == 30
     assert len(fixtures["semantic"]) == 306
     assert len(fixtures["normalization_cases"]) == 7
-    assert len(transitions["cases"]) == 101
+    assert len(transitions["cases"]) == 111
     assert "156 casos positivos" in contract
     assert "30 casos negativos" in contract
     assert "306 casos semânticos" in contract
-    assert "101 casos executáveis de transição causal" in contract
+    assert "111 casos executáveis de transição causal" in contract
     assert "156 vetores positivos, 30 negativos, 306 casos semânticos" in readme
-    assert "totalizando 602 vetores/casos de conformidade" in readme
+    assert "totalizando 612 vetores/casos de conformidade" in readme
 
 
 def test_cycle_control_state_variants_are_closed_by_status() -> None:
@@ -2426,7 +2433,6 @@ def _derive_snapshot_pending_state(authorities: dict) -> dict:
     trigger = authorities["trigger_registry"]
     input_ledger = authorities["input_ledger"]
     outbox = authorities["causal_outbox"]
-    evidence = authorities["evidence_ledger"]
     completed = {item["task_id"] for item in outbox["completions"]}
     responded_dispatches = {item["dispatch_id"] for item in input_ledger["responses"]}
     revoked_dispatches = {item["dispatch_id"] for item in input_ledger["revocations"]}
@@ -2441,13 +2447,18 @@ def _derive_snapshot_pending_state(authorities: dict) -> dict:
         "pending_units": sorted(item["id"] for item in input_ledger["units"] if not item["settled"]),
         "perception_tasks": sorted(item["task_id"] for item in outbox["tasks"] if item["task_id"] not in completed),
         "perception_completions": sorted((item["record"] for item in outbox["completions"]), key=lambda item: item[1]),
-        "knowledge_inboxes": sorted(item["knowledge_input_id"] for item in evidence["knowledge_inputs"] if not item["confirmed"]),
     }
+
+
+def _commit_successor_floor(fence: dict) -> list[int]:
+    if fence["cycle_plan"][0] == "CLOCK_ADVANCE":
+        return [fence["cycle_plan"][2], 0]
+    return [fence["instant"], fence["cycle_ordinal"] + 1]
 
 
 def _defer_successor_error(successor: dict, predecessor: dict, fence: dict) -> bool:
     successor_id = successor.get("input_id", successor.get("occurrence_id"))
-    if successor_id == predecessor["unit_id"] or _coordinate(successor["eligibility"]) < _coordinate(fence["commit_successor_floor"]):
+    if successor_id == predecessor["unit_id"] or _coordinate(successor["eligibility"]) < _coordinate(_commit_successor_floor(fence)):
         return True
     if successor["run_id"] != fence["run_id"]:
         return True
@@ -2553,7 +2564,8 @@ def _derive_trigger_outputs(state: dict, fence: dict, tx: dict, result_state: di
         for event in tx["events"]
         if _EVENT_PHASE_ORDER[event["order_key"]["phase"]] <= 2
     ]
-    now = fence["commit_successor_floor"][0]
+    successor_floor = _commit_successor_floor(fence)
+    now = successor_floor[0]
     for definition in definitions:
         before = runtime_by_id[definition["trigger_id"]]
         touched = [
@@ -2602,10 +2614,93 @@ def _derive_trigger_outputs(state: dict, fence: dict, tx: dict, result_state: di
                     "trigger_id": definition["trigger_id"],
                     "activation_count": count,
                     "causing_event_ids": touched,
-                    "eligibility": fence["commit_successor_floor"],
+                    "eligibility": successor_floor,
                 }
             )
     return runtime_outputs, activations
+
+
+def _candidate_event_projection(
+    candidate: dict,
+    draft: dict,
+    units: dict[str, dict],
+    contracts: dict,
+) -> dict | None:
+    event_contract = contracts["event_projection_contracts"].get(draft["event_type"])
+    if event_contract is None:
+        return None
+    sources = [units.get(unit_id) for unit_id in candidate["source_unit_ids"]]
+    if any(source is None for source in sources):
+        return None
+    actor_refs = sorted({ref for source in sources for ref in source.get("actor_refs", [])})
+    entity_refs = sorted({ref for source in sources for ref in source.get("entity_refs", [])})
+    locations = {source.get("location_ref") for source in sources} - {None}
+    if len(locations) > 1:
+        return None
+    confidentiality_rank = {"PUBLIC": 0, "RESTRICTED": 1, "SECRET": 2}
+    confidentiality = max(
+        (source.get("confidentiality", event_contract["default_confidentiality"]) for source in sources),
+        key=confidentiality_rank.__getitem__,
+    )
+    return {
+        "event_schema_version": event_contract["schema_version"],
+        "source_inputs": [
+            {"id": unit_id, "digest": units[unit_id]["unit_digest"]}
+            for unit_id in candidate["source_unit_ids"]
+        ],
+        "actor_refs": actor_refs,
+        "entity_refs": entity_refs,
+        "location_ref": next(iter(locations), None),
+        "confidentiality": confidentiality,
+    }
+
+
+def _observation_transition_error(state: dict, contracts: dict) -> str | None:
+    observation = state["candidate"]
+    task = state["task"]
+    event = state["event"]
+    if observation["task_id"] != task["task_id"] or task["event_id"] != event["event_id"]:
+        return "OBSERVATION_TASK_MISMATCH"
+    if state["completions"]:
+        return "PERCEPTION_TASK_ALREADY_COMPLETE"
+    if observation["observed_at"] != event["occurred_at"]:
+        return "OBSERVATION_INSTANT_MISMATCH"
+    if observation["source_event_refs"] != [
+        {"id": event["event_id"], "digest": event["event_digest"]}
+    ]:
+        return "OBSERVATION_SOURCE_MISMATCH"
+    if observation["resolver"] != task["resolver"]:
+        return "OBSERVATION_RESOLVER_MISMATCH"
+    policy = next(
+        (
+            item
+            for item in contracts["observer_projection_contracts"]
+            if item["policy_ref"] == task["perception_policy"]
+        ),
+        None,
+    )
+    if policy is None:
+        return "OBSERVATION_POLICY_UNRESOLVED"
+    channel = state["channel_state"]
+    allowed_observers = channel["event_access"].get(event["event_id"], [])
+    if observation["observer"] not in allowed_observers:
+        return "OBSERVATION_ACCESS_DENIED"
+    projection = channel["observer_outputs"].get(event["event_id"], {}).get(
+        observation["observer"]
+    )
+    if projection is None:
+        return "OBSERVATION_ACCESS_DENIED"
+    projected_fields = (
+        "percepts",
+        "claim_refs",
+        "evidence_chain",
+        "omissions_redactions",
+        "modality",
+        "channel_ref",
+    )
+    if any(observation[field] != projection[field] for field in projected_fields):
+        return "OBSERVATION_PROJECTION_MISMATCH"
+    return None
 
 
 def _derive_perception_tasks(state: dict, fence: dict, events: list[dict]) -> list[dict]:
@@ -2720,16 +2815,29 @@ def _transition_error(operation: str, state: dict, contracts: dict) -> str | Non
         if any(task_id not in task_by_id or task_id not in completion_by_task for task_id in prior_task_ids):
             return "EPISTEMIC_TASK_PENDING"
         knowledge_by_id = {item["knowledge_input_id"]: item for item in state["evidence_ledger"]["knowledge_inputs"]}
-        confirmed = set(state["evidence_ledger"]["confirmed_knowledge_input_ids"])
         addressed = {
             knowledge_input_id
             for task_id in prior_task_ids
             for knowledge_input_id in completion_by_task[task_id]["knowledge_input_ids"]
             if knowledge_by_id.get(knowledge_input_id, {}).get("recipient") == dispatch["actor"]
         }
-        if any(item not in confirmed for item in addressed):
+        expected_addressed = {
+            knowledge_input_id
+            for task_id in prior_task_ids
+            for knowledge_input_id in completion_by_task[task_id]["knowledge_input_ids"]
+            if knowledge_input_id in knowledge_by_id
+            and knowledge_by_id[knowledge_input_id].get("recipient") == dispatch["actor"]
+        }
+        if addressed != expected_addressed or any(
+            knowledge_input_id not in knowledge_by_id
+            for task_id in prior_task_ids
+            for knowledge_input_id in completion_by_task[task_id]["knowledge_input_ids"]
+        ):
             return "EPISTEMIC_DELIVERY_PENDING"
         return None
+
+    if operation == "append-observation":
+        return _observation_transition_error(state, contracts)
 
     if operation == "append-slot-response":
         response = state["candidate"]
@@ -2935,7 +3043,6 @@ def _transition_error(operation: str, state: dict, contracts: dict) -> str | Non
                     "pending_units",
                     "perception_tasks",
                     "perception_completions",
-                    "knowledge_inboxes",
                 )
             ],
         )
@@ -2966,6 +3073,8 @@ def _commit_transition_error(state: dict, contracts: dict) -> str | None:
     fence = state["fence"]
     tx = state["transaction"]
     ledger = state["decision_ledger"]
+    if "commit_successor_floor" in fence:
+        return "COMMIT_SUCCESSOR_FLOOR_NOT_DERIVED"
     if any(item["run_id"] == fence["run_id"] and item["cycle_id"] == fence["cycle_id"] and item["attempt"] == fence["attempt"] for item in ledger["terminals"]):
         return "TERMINAL_ALREADY_EXISTS"
     if tx["commit_candidates"]:
@@ -3085,6 +3194,14 @@ def _commit_transition_error(state: dict, contracts: dict) -> str | None:
     current = {item["event_id"]: item for item in tx["events"]}
     for event in tx["events"]:
         phase = event["order_key"]["phase"]
+        if event["event_id"] != _derived_event_id(fence, event["order_key"]):
+            return "EVENT_ID_MISMATCH"
+        if any(
+            source["id"] not in units
+            or units[source["id"]]["unit_digest"] != source["digest"]
+            for source in event["source_inputs"]
+        ):
+            return "EVENT_SOURCE_OUTSIDE_FENCE"
         if phase == "CANDIDATE_DOMAIN":
             candidate = candidates.get(event["order_key"]["origin_ref"])
             if candidate is None:
@@ -3104,7 +3221,12 @@ def _commit_transition_error(state: dict, contracts: dict) -> str | None:
                 if parent is None or tuple(_event_order_components(parent["order_key"])) >= tuple(_event_order_components(event["order_key"])):
                     return "EVENT_CAUSAL_PARENT_ROLE_MISMATCH"
                 expected_parents.append({"id": parent["event_id"], "digest": parent["event_digest"]})
-            if draft is None or event["order_key"] != expected_key or event["event_id"] != expected_id or event["event_type"] != draft["event_type"] or event["payload"] != draft["payload"] or event["causal_parents"] != expected_parents:
+            projection = (
+                _candidate_event_projection(candidate, draft, units, contracts)
+                if draft is not None
+                else None
+            )
+            if draft is None or projection is None or event["order_key"] != expected_key or event["event_id"] != expected_id or event["event_type"] != draft["event_type"] or event["payload"] != draft["payload"] or event["causal_parents"] != expected_parents or any(event.get(field) != value for field, value in projection.items()):
                 return "EVENT_DRAFT_PROJECTION_MISMATCH"
         elif phase == "TEMPORAL_ADVANCE":
             if fence["cycle_plan"][0] != "CLOCK_ADVANCE" or event["order_key"]["origin_ref"] != state["clock_advance_origin"]:
@@ -3124,8 +3246,6 @@ def _commit_transition_error(state: dict, contracts: dict) -> str | None:
                 >= tuple(_event_order_components(event["order_key"]))
             ):
                 return "CAUSAL_PARENT_SCOPE_MISMATCH"
-        if any(source["id"] not in units or units[source["id"]]["unit_digest"] != source["digest"] for source in event["source_inputs"]):
-            return "EVENT_SOURCE_OUTSIDE_FENCE"
     lifecycle_subjects = {}
     for cohort_round in fence["cohort"]:
         round_record = state["round_authority"].get(cohort_round["round_id"])
@@ -3384,7 +3504,7 @@ def test_causal_transition_contracts_execute_all_review_regressions() -> None:
         state = _apply_fixture_patch(bases[case["base_scenario_id"]]["state"], case.get("patch", []))
         actual = _transition_error(bases[case["base_scenario_id"]]["operation"], state, contracts)
         assert actual == case.get("expected_error"), case["case_id"]
-    assert findings == set(range(68, 146))
+    assert findings == set(range(68, 151))
 
 
 def test_transition_fixtures_use_canonical_authorities_not_parallel_oracles() -> None:
@@ -3399,6 +3519,7 @@ def test_transition_fixtures_use_canonical_authorities_not_parallel_oracles() ->
     dispatch = bases["slot-dispatch.valid"]
     assert "prior_perception_tasks" not in dispatch
     assert "required_knowledge_inputs" not in dispatch
+    assert "confirmed_knowledge_input_ids" not in dispatch["evidence_ledger"]
     assert "recipient" not in dispatch["causal_outbox"]["tasks"][0]
     assert "causal_ordinal" not in dispatch["causal_outbox"]["tasks"][0]
     assert {item["task_id"] for item in dispatch["causal_outbox"]["tasks"]} == {
@@ -3455,6 +3576,7 @@ def test_transition_fixtures_use_canonical_authorities_not_parallel_oracles() ->
     assert snapshot["snapshot"]["pending_state"]["schema_id"] == (
         "cote.csf.schema.snapshot-pending-state"
     )
+    assert "knowledge_inboxes" not in snapshot["snapshot"]["pending_state"]["value"]
 
 
 def test_adr_0009_followup_rejects_reintroduced_parallel_or_stale_state() -> None:
@@ -3546,7 +3668,7 @@ def test_adr_0009_followup_commit_projection_is_closed_and_derived() -> None:
     state["transaction"]["decisions"][0]["produced_event_ids"] = [
         state["transaction"]["events"][0]["event_id"]
     ]
-    assert _commit_transition_error(state, contracts) == "EVENT_DRAFT_PROJECTION_MISMATCH"
+    assert _commit_transition_error(state, contracts) == "EVENT_ID_MISMATCH"
 
     state = deepcopy(base)
     state["decision_ledger"]["commit_candidates"][0]["event_drafts"][0][
@@ -3621,6 +3743,199 @@ def test_adr_0009_followup_commit_projection_is_closed_and_derived() -> None:
     }
     state["result_state"]["resource.balance"] = 2
     assert _commit_transition_error(state, contracts) == "TRIGGER_TRANSITION_MISMATCH"
+
+
+def test_findings_146_to_150_fail_closed_at_the_authoritative_seams() -> None:
+    contracts = _json("causal-transition-contracts.json")
+    fixtures = _json("causal-transition-fixtures.json")
+    bases = {item["scenario_id"]: item["state"] for item in fixtures["base_scenarios"]}
+
+    commit = bases["commit.valid"]
+
+    state = deepcopy(commit)
+    state["transaction"]["events"][0]["source_inputs"] = [
+        {"id": "unit-none", "digest": "digest-none"}
+    ]
+    assert _commit_transition_error(state, contracts) == "EVENT_DRAFT_PROJECTION_MISMATCH"
+
+    state = deepcopy(commit)
+    state["transaction"]["events"][0]["actor_refs"] = ["actor-2"]
+    assert _commit_transition_error(state, contracts) == "EVENT_DRAFT_PROJECTION_MISMATCH"
+
+    state = deepcopy(commit)
+    state["transaction"]["events"][0]["confidentiality"] = "PUBLIC"
+    assert _commit_transition_error(state, contracts) == "EVENT_DRAFT_PROJECTION_MISMATCH"
+
+    observation = deepcopy(bases["observation.valid"])
+    observation["candidate"]["observer"] = "actor-2"
+    assert _transition_error("append-observation", observation, contracts) == (
+        "OBSERVATION_ACCESS_DENIED"
+    )
+
+    observation = deepcopy(bases["observation.valid"])
+    observation["candidate"]["percepts"] = ["secret-detail"]
+    assert _transition_error("append-observation", observation, contracts) == (
+        "OBSERVATION_PROJECTION_MISMATCH"
+    )
+
+    dispatch = deepcopy(bases["slot-dispatch.valid"])
+    assert "confirmed_knowledge_input_ids" not in dispatch["evidence_ledger"]
+    assert _transition_error("append-slot-dispatch", dispatch, contracts) is None
+
+    state = deepcopy(commit)
+    state["transaction"]["events"][1]["event_id"] = "arbitrary-lifecycle-id"
+    assert _commit_transition_error(state, contracts) == "EVENT_ID_MISMATCH"
+
+    state = deepcopy(commit)
+    state["fence"]["commit_successor_floor"] = [1000, 99]
+    assert _commit_transition_error(state, contracts) == (
+        "COMMIT_SUCCESSOR_FLOOR_NOT_DERIVED"
+    )
+
+
+def test_clock_advance_derives_destination_floor_and_validates_trigger_event_ids() -> None:
+    contracts = _json("causal-transition-contracts.json")
+    fixtures = _json("causal-transition-fixtures.json")
+    base = next(
+        item["state"]
+        for item in fixtures["base_scenarios"]
+        if item["scenario_id"] == "commit.valid"
+    )
+    state = deepcopy(base)
+    fence = state["fence"]
+    fence["cycle_plan"] = ["CLOCK_ADVANCE", 1000, 2000, [2000, 0]]
+    fence["admitted_units"] = []
+    fence["cohort"] = []
+    assert _commit_successor_floor(fence) == [2000, 0]
+
+    state["clock_advance_origin"] = "clock-advance-1"
+    state["decision_ledger"]["commit_candidates"] = []
+    state["decision_ledger"]["provisional_dispositions"] = []
+    state["round_authority"] = {}
+    state["source_authority_after"] = {
+        "schedule_store": {},
+        "trigger_registry": {},
+    }
+    state["world_state_before"] = {"clock.current": 1000}
+    state["result_state"] = {"clock.current": 2000}
+    state["reducer_registry"] = {
+        "clock.advanced": {
+            "operation": "set-path-from-payload",
+            "dependency_footprint": ["clock.current"],
+        },
+        "trigger.runtime.changed": {
+            "operation": "noop",
+            "dependency_footprint": ["trigger.runtime"],
+        },
+        "trigger.activation.created": {
+            "operation": "noop",
+            "dependency_footprint": ["trigger.activation"],
+        },
+    }
+    state["trigger_registry"] = {
+        "definitions": [
+            {
+                "trigger_id": "trigger-clock",
+                "dependencies": ["clock.current"],
+                "predicate": {"path": "clock.current", "equals": 2000},
+                "activation_policy": "RISING_EDGE",
+                "fire_on_initial_true": False,
+                "repeat_every": None,
+            }
+        ],
+        "runtime_states": [
+            {
+                "trigger_id": "trigger-clock",
+                "last_value": False,
+                "armed": True,
+                "exhausted": False,
+                "activation_count": 0,
+                "next_repeat_at": None,
+                "evaluated_through_revision": 7,
+            }
+        ],
+    }
+
+    temporal_key = {
+        "phase": "TEMPORAL_ADVANCE",
+        "origin_ref": "clock-advance-1",
+        "producer": "clock",
+        "producer_version": 1,
+        "event_local_ordinal": 0,
+        "event_role": 0,
+    }
+    temporal = {
+        "event_id": _derived_event_id(fence, temporal_key),
+        "event_digest": "digest-clock",
+        "order_key": temporal_key,
+        "event_type": "clock.advanced",
+        "payload": ["clock.current", 2000],
+        "causal_parents": [],
+        "source_inputs": [],
+    }
+    transaction = state["transaction"]
+    transaction["decisions"] = []
+    transaction["successors"] = []
+    transaction["source_settlements"] = []
+    transaction["events"] = [temporal]
+    runtime, activations = _derive_trigger_outputs(
+        state, fence, transaction, state["result_state"]
+    )
+    assert activations[0]["eligibility"] == [2000, 0]
+
+    runtime_key = {
+        "phase": "TRIGGER_RUNTIME",
+        "origin_ref": "trigger-clock-runtime-1",
+        "producer": "trigger-engine",
+        "producer_version": 1,
+        "event_local_ordinal": 0,
+        "event_role": 0,
+    }
+    activation_key = {
+        "phase": "TRIGGER_ACTIVATION",
+        "origin_ref": "trigger-clock-activation-1",
+        "producer": "trigger-engine",
+        "producer_version": 1,
+        "event_local_ordinal": 0,
+        "event_role": 0,
+    }
+    transaction["events"].extend(
+        [
+            {
+                "event_id": _derived_event_id(fence, runtime_key),
+                "event_digest": "digest-trigger-runtime",
+                "order_key": runtime_key,
+                "event_type": "trigger.runtime.changed",
+                "payload": runtime[0],
+                "causal_parents": [],
+                "source_inputs": [],
+            },
+            {
+                "event_id": _derived_event_id(fence, activation_key),
+                "event_digest": "digest-trigger-activation",
+                "order_key": activation_key,
+                "event_type": "trigger.activation.created",
+                "payload": activations[0],
+                "causal_parents": [],
+                "source_inputs": [],
+            },
+        ]
+    )
+    transaction["trigger_runtime_states"] = runtime
+    transaction["trigger_activations"] = activations
+    commit = transaction["cycle_commit"]
+    commit["admitted_input_ids"] = []
+    commit["decision_record_ids"] = []
+    commit["decision_digest"] = _domain_digest(
+        "cote.csf.digest.decision", "cote.csf.schema.decision-pair-list", []
+    ).hex()
+    commit["event_ids"] = [event["event_id"] for event in transaction["events"]]
+    commit["next_logical_sequence"] = 3
+    state["logical_sequence_transition"] = {"before": 0, "after": 3}
+
+    assert _commit_transition_error(state, contracts) is None
+    state["transaction"]["events"][1]["event_id"] = "arbitrary-trigger-id"
+    assert _commit_transition_error(state, contracts) == "EVENT_ID_MISMATCH"
 
 
 def test_adr_0009_trigger_policies_are_derived_from_authoritative_state() -> None:

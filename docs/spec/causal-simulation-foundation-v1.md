@@ -264,7 +264,7 @@ O genesis persiste, no mínimo:
   `identity_algorithm_version=cote.csf.sha256.v1`, NFC pelo Normalization Process for Stabilized
   Strings (NPSS) Unicode 15.1.0,
   `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`
-  e `schema_bundle_hash=89368278dc83d4565582c6c93e8e9ff9366318282d41eca02e1a3e3359ce76c1`;
+  e `schema_bundle_hash=af3b8f4ef92c2558947ef7d00f475408aa508bd8bca492c7e3c1f08d47530d21`;
 - causal identity, admission order, fence, coordinate, event order, idempotency, RNG, perception e
   perception identity policy: versão **e** hash;
 - pares `(schema_id, schema_version)` sob `schema_bundle_hash`, mais versões/hashes de reducers,
@@ -364,7 +364,8 @@ O snapshot causal V1 inclui:
 - pendências de agenda, rounds, slots, triggers e inputs, com coordenadas/digests;
 - `CycleControlState`, último envelope e refs de fence/retry quando aplicável;
 - versões/hashes necessários a replay/resume;
-- tasks sem completion e inboxes ainda não confirmados;
+- tasks sem completion e completion receipts; todo id de `KnowledgeInput` listado resolve um record
+  durável, sem flag/lista paralela de confirmação;
 - `EpistemicCheckpointRef` coberto para cada ator elegível;
 - hash canônico do snapshot inteiro.
 
@@ -469,6 +470,10 @@ referência epistemológica opaca e verificada.
 - Cada event type tem um owner e reducer puro/versionado. Reducer não emite evento, usa RNG, rede,
   LLM ou wall clock.
 - `EventOrderKey` é persistida; sua ordem total define `event_id`, `LogicalSequence` e `event_ids[]`.
+- `event_id` é recalculado em todas as fases antes de reducer. Evento `CANDIDATE_DOMAIN` é a projeção
+  exata e versionada de draft + candidate + records-fonte por id/digest: schema, sources, atores,
+  entidades, localização e confidentiality não podem ser escolhidos depois do candidate.
+- `commit_successor_floor` é derivado de instant/ordinal/`CyclePlan`; não existe input livre do caller.
 - Refs set-like são normalizadas antes de bytes/digest. Ordem com significado vive no payload
   tipado.
 - Pais no mesmo ciclo só ligam eventos do mesmo candidato atômico e na ordem interna declarada.
@@ -484,12 +489,17 @@ referência epistemológica opaca e verificada.
   schema. Task resolve seu evento; cada observation resolve essa task, tem exatamente esse evento
   como fonte e conserva seu instante; knowledge input resolve a observation, destina-se ao mesmo
   observer e só projeta claims/evidence ali divulgados. Retry/concorrência derivam os mesmos ids.
+- Policy/resolver deriva uma allow-list e uma projeção exata por observer a partir de task, evento,
+  pre/post state e canal. Append rejeita observer não autorizado e percept/claim/evidence/omissão
+  diferente da projeção, inclusive para eventos `SECRET`/`RESTRICTED`.
 - `observed_at` deriva do evento que tornou a evidência disponível; `received_at` é igual a ele.
   Latência operacional não altera cronologia.
 - Completion só é gravado quando suas duas listas são as projeções canônicas exatas de todos os
   observations e knowledge inputs da task, sem extras, duplicatas ou omissões; completion vazio é
   obrigatório quando não há output elegível. Depois do completion, nenhum novo output para a task é
   aceito; task/commit repetem a mesma policy de identidade e observation/task o mesmo resolver.
+- Persistir `KnowledgeInput` é a confirmação durável de entrega. Crash antes mantém a task sem
+  completion; crash depois reutiliza o mesmo record idempotente. Não existe segundo ack/flag.
 - `Claim` não possui verdade embutida. Comparação com world truth, quando uma regra exige, produz novo
   fato e nova cadeia de acesso.
 - Envio não é entrega, entrega não é necessariamente leitura, e falsificação não revela autoria real.
@@ -644,7 +654,7 @@ dos hashes causais. Métricas mínimas:
 12. ids/completion de percepção idempotentes e instante epistemológico causal;
 13. substreams independentes de avaliações/atores irrelevantes;
 14. arquitetura sem cliente LLM no core e sem write port transitivo no Observatory;
-15. os 602 vetores/casos de conformidade do bundle executados por pelo menos duas
+15. os 612 vetores/casos de conformidade do bundle executados por pelo menos duas
     implementações independentes e linguagens diferentes;
 16. strict decode rejeita CBOR não preferido, indefinite, tag, `undefined`, duplicate key, Unicode
     fora do profile, non-finite, negative zero, schema/enum desconhecido e id com tamanho incorreto;

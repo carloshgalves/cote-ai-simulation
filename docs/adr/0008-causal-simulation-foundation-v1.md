@@ -317,6 +317,10 @@ O segundo caso é reconhecido pelo discriminante persistido em `cycle_plan`, cuj
 materialização temporal pode nascer já vencido depois que o relógio salta. Aplicam-se então as
 regras específicas:
 
+`commit_successor_floor` é uma função derivada do `AdmissionFence`/`CyclePlan` e do futuro
+`CycleCommit`; não é campo canônico nem argumento livre do caller. Coordinator, settlement de
+`DEFER`, agenda e triggers recomputam o mesmo valor antes de aceitar qualquer output derivado.
+
 - input exógeno recebe `max((declared_effective_at, 0), open_coordinate(source_id))`, onde
   `open_coordinate` é o sucessor da última coordenada que a própria fonte fechou (§3.2.2). O valor
   declarado permanece no input ledger como provenance. Nunca se admite entrada no passado, e a
@@ -1065,6 +1069,16 @@ corrupção. O `EventBatch` é a ordenação lexicográfica total por
 `LogicalSequence` é atribuído somente depois dessa ordenação. Assim eventos candidatos e derivados
 compartilham uma única regra, sem depender da coleção retornada pelo resolvedor.
 
+Para a fase `CANDIDATE_DOMAIN`, o envelope completo do `Event` é uma projeção pura e versionada do
+`EventDraft`, do `CommitCandidate`, dos records-fonte imutáveis resolvidos por `source_unit_ids[]` +
+`unit_digest` e do registry do `event_type`. A projeção fixa `event_type/schema_version`, payload,
+pais, o conjunto **exato** de `source_inputs`, `actor_refs`, `entity_refs`, `location_ref` e
+`confidentiality`; o commit compara todos esses campos antes de publicar. Nenhum metadado factual,
+de provenance ou visibilidade pode ser escolhido depois que candidate, fontes e policies foram
+fixados. Para todas as cinco fases, inclusive `TEMPORAL_ADVANCE`, `TRIGGER_RUNTIME` e
+`TRIGGER_ACTIVATION`, o coordinator recalcula `event_id` de `(run_id, cycle_id, EventOrderKey)` antes
+de qualquer reducer.
+
 Dois candidatos sem conflito podem ambos vencer. Em conflito, o resolvedor produz uma disposição
 determinística (`COMMIT`, `REJECT`, `DEFER`) para cada candidato. Empate estocástico só usa substream
 nomeado. Unidades admitidas que não geram candidato — slot com `NoProposal` e entrada removida pela
@@ -1644,6 +1658,13 @@ observador potencial. O adapter versionado do `event_type` declara se cada pista
 anterior, do resultado ou da transição; assim, uma pessoa que sai de uma sala não desaparece antes que
 os presentes possam vê-la sair. O resultado é imutável:
 
+A mesma policy/resolver pinada define uma função pura observer-specific sobre
+`(task, Event, pre-state, post-state, channel/access state)`. Ela deriva a allow-list exata de
+observadores e, para cada um, modalidade, canal, percepts, claims, evidence e omissões permitidos.
+`append(Observation)` recomputa essa projeção e rejeita tanto observer não autorizado quanto output
+extra, omitido ou substituído; `confidentiality` ou a existência do evento nunca cria fallback de
+acesso.
+
 ```text
 Observation {
   observation_id
@@ -1711,7 +1732,8 @@ só então completa a tarefa. Referência ausente ou digest divergente falha fec
 
 Um barrier do ciclo consulta a causal outbox durável — nunca uma fila em memória — e impede
 **despachar** a solicitação de um round já declarado para o destinatário enquanto existir tarefa
-causalmente anterior sem completion ou `KnowledgeInput` endereçado ainda não confirmado. Antes de
+causalmente anterior sem completion, ou enquanto um id listado pelo completion não resolver um
+`KnowledgeInput` durável endereçado ao ator. Antes de
 liberar o barrier, o coordinator reconcilia `CycleCommit.perception_task_ids[]` com a outbox e
 `PerceptionTaskCompletion` com o evidence ledger. A `RoundDeclaration`, sua coordenada e sua
 pertinência à coorte não mudam por causa do barrier. Assim, crash depois do commit e antes da
@@ -1801,6 +1823,12 @@ e outra observation; atraso operacional na entrega do recibo não altera cronolo
 regra integra a mesma `perception_policy_version + perception_policy_hash`, e mismatch falha fechado
 antes de confirmar o `KnowledgeInput`.
 
+O append durável de `KnowledgeInput` **é** a confirmação de entrega na fronteira do evidence ledger;
+não existe segundo campo `confirmed`, lista paralela de ids confirmados ou ack em memória. O
+`PerceptionTaskCompletion` só pode listar o input depois que esse record está presente. Crash antes
+do append deixa a task sem completion e refaz a entrega idempotente; crash depois do append encontra
+o mesmo recibo e pode completar a task sem criar outro estado.
+
 Persistir esse recibo prova apenas “evidência X ficou disponível ao ator Y neste instante”. Formar
 crença, estimar confiança, suspeitar, esquecer, conciliar contradições ou inferir intenção pertence a
 outro contexto. O context builder de decisão lê o inbox/estado epistemológico do ator; nunca consulta
@@ -1889,8 +1917,8 @@ Um snapshot causal contém, no mínimo:
 - coordenadas de elegibilidade e `unit_digest` de toda entrada gravada e ainda não consumida;
 - schemas e versões/hashes de reducers, validators, resolvers, RNG, ordem de admissão, coordenada de
   ciclo, ordem de eventos, percepção/identidade epistemológica e idempotência necessários;
-- `PerceptionTask` sem completion, seus completion receipts e inboxes causais cuja entrega ainda não
-  foi confirmada;
+- `PerceptionTask` sem completion e seus completion receipts; ids de `KnowledgeInput` listados por um
+  completion precisam resolver records duráveis, sem inbox/flag de confirmação paralelo;
 - `EpistemicCheckpointRef` versionado de cada ator com estado epistemológico;
 - hash canônico do snapshot.
 
@@ -2011,8 +2039,8 @@ uma leitura privilegiada não pode vazar por efeito colateral.
     `TriggerActivation` causados por uma revisão são publicados atomicamente no `CycleCommit` dessa
     revisão, com elegibilidade `>= commit_successor_floor(commit)`; avanço temporal usa `(to, 0)` e
     nunca cria trabalho pendente no instante de origem já abandonado.
-18. Nenhum ator começa novo round enquanto houver `KnowledgeInput` causalmente anterior pendente para
-    ele.
+18. Nenhum ator começa novo round enquanto houver task causalmente anterior sem completion ou id de
+    `KnowledgeInput` listado pelo completion sem record durável endereçado a ele.
 19. Contexto de agente é allow-list por holder/timeline/provenance; não é uma view redigida do estado
     global.
 20. Toda unidade causal é admitida por um `AdmissionFence` durável, derivado dos ledgers e gravado
@@ -2098,12 +2126,17 @@ uma leitura privilegiada não pode vazar por efeito colateral.
     `CycleCommit` e referenciada por ele. Completion só existe depois dos recibos idempotentes no
     evidence ledger; barrier e resume reconciliam commits, tarefas, completions e entregas antes de
     despachar novo round. A tarefa não é conteúdo de agente e nenhuma rota concede observação sem
-    avaliação de acesso endereçada. Task, observation, `KnowledgeInput` e completion derivam ids dos
+    avaliação observer-specific de acesso e comparação exata do output permitido. Persistir
+    `KnowledgeInput` já confirma a entrega; nenhuma authority paralela pode alterar esse fato. Task,
+    observation, `KnowledgeInput` e completion derivam ids dos
     componentes normativos da §10.1; concorrência/retry nunca alocam nova identidade.
-37. Todo `CommitCandidate` tem identidade derivada de unidades-fonte e papel/ordinal de schema. Todo
+37. Todo `CommitCandidate` tem identidade derivada de unidades-fonte e papel/ordinal de schema. Seu
+    `EventDraft`, os records-fonte por id+digest e o contrato versionado do event type projetam o
+    envelope factual/provenance/visibilidade completo do evento candidato. Todo
     evento persiste sua `EventOrderKey`; `EventBatch`, `event_id` e `LogicalSequence` usam a única
     ordem total da §7, versionada e independente da ordem em que candidatos/workers terminam. Replay
-    recalcula id, ordem e sequência a partir dessas preimagens, e `batch_digest` cobre os envelopes.
+    recalcula id em todas as fases, ordem e sequência a partir dessas preimagens, e `batch_digest`
+    cobre os envelopes.
     Os conjuntos
     `source_unit_ids[]` formam partição exata das unidades produtoras; overlap, gap ou referência fora
     do fence aborta antes da resolução, e cada unidade aponta a exatamente um candidato.
@@ -2160,7 +2193,7 @@ uma leitura privilegiada não pode vazar por efeito colateral.
 | Dois candidatos vencem no mesmo ciclo | nenhum evento de um aparece como `causal_parent` do outro; reação exige ciclo posterior |
 | Dois candidatos vencedores A/B e seus outputs são entregues ao coordinator em ordens opostas | mesmos `candidate_id`; ordenação por `EventOrderKey` produz os mesmos `event_id`, `LogicalSequence`, `event_ids[]`, tarefas de percepção e `batch_digest` |
 | Event store devolve evento com `EventOrderKey` ausente/alterada, ou commit permuta dois `event_ids[]` | replay recalcula cada `event_id`, reordena pelas chaves persistidas, valida `LogicalSequence` e `batch_digest`; qualquer ausência, id, posição, sequência ou digest divergente falha fechado antes do reducer |
-| Dois produtores constroem o mesmo `EventDraft`, mas enumeram `causal_parents`, `source_inputs`, `actor_refs` e `entity_refs` em ordens opostas e repetem uma ref idêntica | as quatro coleções são deduplicadas e ordenadas pelas chaves da §8.1 antes da persistência; mesmo envelope, `event_id` e `batch_digest`; mesma identidade de ref com outros bytes falha fechado |
+| Dois produtores constroem a mesma projeção candidata, mas enumeram `causal_parents`, `source_inputs`, `actor_refs` e `entity_refs` em ordens opostas e repetem uma ref idêntica | as quatro coleções são deduplicadas e ordenadas pelas chaves da §8.1 antes da persistência; mesmo envelope, `event_id` e `batch_digest`; mesma identidade de ref com outros bytes falha fechado |
 | Dois eventos simultâneos E1/E2 de candidatos distintos tocam dependências do mesmo trigger e workers terminam em ordens opostas | `causing_event_ids[]` contém ambos pelo filtro de `dependency_footprint`, na ordem canônica do `EventBatch`; mesma ativação/`unit_digest`; os refs são provenance do post-state e nenhum evento de E1/E2 recebe causal parent cross-candidate |
 | Último ciclo foi `(t,1)` e a única pendência está em `(t,3)` | `next_cycle_coordinate` retorna `(t,3)`; não existe `CycleCommit` vazio em `(t,2)` e replay faz o mesmo salto |
 | Último ciclo foi `(t,1)` e a menor pendência é `(u,0)`, com `u > t`, sem novo trabalho materializado | após fechamento até o alvo, ciclo de avanço em `(t,2)` tem input vazio e commita `clock.advanced`; estado resultante é `(current_instant=u, cycle_ordinal_at_instant=-1)` e a nova derivação abre o ciclo de trabalho em `(u,0)` |

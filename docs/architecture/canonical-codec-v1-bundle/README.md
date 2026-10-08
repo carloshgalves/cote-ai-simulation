@@ -128,8 +128,8 @@ contrato e os vetores, mas não inclui dois runners independentes nem um workflo
 implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
 
 `fixtures.json` contém 156 vetores positivos, 30 negativos, 306 casos semânticos, sete casos de
-normalização convergente e dois vetores SHA-256. `causal-transition-fixtures.json` acrescenta 101 casos
-de transição executáveis, totalizando 602 vetores/casos de conformidade. Os positivos cobrem primitivos e limites, Unicode,
+normalização convergente e dois vetores SHA-256. `causal-transition-fixtures.json` acrescenta 111 casos
+de transição executáveis, totalizando 612 vetores/casos de conformidade. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 76 operações de id/digest/hash/record do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
 `error_code` estável. Os casos semânticos executam bindings de enum em roots completos, subsets de
@@ -167,13 +167,12 @@ indivisível, com coordenadas comuns e bijeção/digests de
 settlement. Witnesses CBOR tipados provam pre/post-state das fontes e do mundo, incluindo a dobra
 dos reducers por owner/version/hash, cursor lógico contíguo derivado do último commit ou genesis —
 inclusive lote vazio — e classificação perceptiva bijetiva sob a policy pinada;
-`perception_policy_contracts` fixa o predicado versionado usado pelos cenários e seu hash;
-observation → knowledge
-input → completion é validado depois nas suas fronteiras de append, repete identity policy/resolver
-pinados e restringe cada
-observation ao evento da task, projeta apenas claims/evidence divulgados e exige no completion
-exatamente todos os outputs já presentes no prefixo daquela task. Completion fecha a task e bloqueia
-qualquer observation ou knowledge input tardio. `RngDraw` é um root referenciável
+`perception_policy_contracts` fixa o predicado de classificação e a projeção observer-specific
+versionada. Observation → knowledge input → completion é validado nas suas fronteiras de append,
+repete identity policy/resolver pinados, restringe cada observation ao evento da task e exige
+observer + outputs exatamente permitidos por pre/post/channel. Persistir `KnowledgeInput` é o único
+receipt de entrega; completion exige todos esses records e não existe flag/ack paralelo. Completion
+fecha a task e bloqueia qualquer observation ou knowledge input tardio. `RngDraw` é um root referenciável
 próprio, e os subsets de field path impedem que uma ref genérica ocupe
 `rng-draw-refs` ou `failure-evidence-refs`. A evidência de abort admite somente ConflictSet, sorteio,
 assessment, disposição provisória e falha de tentativa, todos com identidade e digest totais.

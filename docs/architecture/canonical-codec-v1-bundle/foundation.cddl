@@ -538,8 +538,7 @@ snapshot-pending-state = [occurrences: [0*65535 causal-ref],
                           responses: [0*65535 causal-ref],
                           pending-units: [0*65535 input-ref],
                           perception-tasks: [0*65535 causal-ref],
-                          perception-completions: [0*65535 perception-task-completion],
-                          knowledge-inboxes: [0*65535 causal-ref]]
+                          perception-completions: [0*65535 perception-task-completion]]
 snapshot-fields = (run-id: id32, snapshot-version: u32, instant: simulation-instant,
                    revision: world-revision, next-logical-sequence: logical-sequence,
                    cycle-ordinal-at-instant: i64, world-state: typed-value,

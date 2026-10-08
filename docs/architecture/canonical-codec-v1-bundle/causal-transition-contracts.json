@@ -105,13 +105,29 @@
       "digest_schema": "cote.csf.schema.no-proposal.body",
       "unit_id_index": 0,
       "actor_index": 6
+    },
+    "exogenous-input": {
+      "digest_operation": "cote.csf.digest.exogenous-input-unit",
+      "digest_schema": "cote.csf.schema.exogenous-input.body",
+      "unit_id_index": 0,
+      "actor_index": 6
+    },
+    "scheduled-occurrence": {
+      "digest_operation": "cote.csf.digest.occurrence-unit",
+      "digest_schema": "cote.csf.schema.scheduled-occurrence.body",
+      "unit_id_index": 0
+    },
+    "trigger-activation": {
+      "digest_operation": "cote.csf.digest.trigger-activation-unit",
+      "digest_schema": "cote.csf.schema.trigger-activation.body",
+      "unit_id_index": 0
     }
   },
   "observer_projection_contracts": [
     {
       "policy_ref": ["perception-visible-first-v1", 1, "03"],
       "resolver_ref": ["perception-resolver-v1", 1, "08"],
-      "input": "PerceptionTask + complete Event + task base/result state + authoritative channel/access state",
+      "input": "PerceptionTask + complete Event + task base/result WorldState snapshots containing channel and actor access state",
       "access": "observer must be present in the event channel at both task revisions and have clearance at least the event confidentiality",
       "output": "modality and channel come from the authoritative channel; percepts, claim refs, evidence chain and omissions are projected from the registered Event payload fields",
       "payload_projection": {

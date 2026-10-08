@@ -307,7 +307,7 @@
         "occurrences": [
           {
             "unit_id": "unit-occurrence",
-            "unit_digest": "digest-occurrence",
+            "unit_digest": "204d9dd35440b87aa256da6f00b9236e271230b3f0a201a84d32ab1494f7fd96",
             "source_id": "schedule",
             "eligibility": [
               10,
@@ -318,7 +318,7 @@
         "activations": [
           {
             "unit_id": "unit-future-trigger",
-            "unit_digest": "digest-trigger",
+            "unit_digest": "2e31105de22cdc03de31c3c9187e72e23903a7b41ac10ee46cabf4c81348fc72",
             "source_id": "trigger:t1",
             "eligibility": [
               11,
@@ -380,7 +380,7 @@
               "SCHEDULED_OCCURRENCE",
               "schedule",
               "unit-occurrence",
-              "digest-occurrence"
+              "204d9dd35440b87aa256da6f00b9236e271230b3f0a201a84d32ab1494f7fd96"
             ]
           ],
           "cycle_plan": [
@@ -509,14 +509,14 @@
               "unit_kind": "SCHEDULED_OCCURRENCE",
               "source_id": "schedule-source",
               "unit_id": "unit-occurrence",
-              "unit_digest": "digest-occurrence"
+              "unit_digest": "204d9dd35440b87aa256da6f00b9236e271230b3f0a201a84d32ab1494f7fd96"
             },
             {
               "eligibility": [1000, 7],
               "unit_kind": "TRIGGER_ACTIVATION",
               "source_id": "trigger-source",
               "unit_id": "unit-trigger",
-              "unit_digest": "digest-trigger"
+              "unit_digest": "2e31105de22cdc03de31c3c9187e72e23903a7b41ac10ee46cabf4c81348fc72"
             }
           ],
           "cohort": [
@@ -686,7 +686,23 @@
             "unit-occurrence": {
               "root": "scheduled-occurrence",
               "unit_id": "unit-occurrence",
-              "unit_digest": "digest-occurrence",
+              "unit_digest": "204d9dd35440b87aa256da6f00b9236e271230b3f0a201a84d32ab1494f7fd96",
+              "record_body": [
+                "unit-occurrence",
+                "run-1",
+                "schedule-source",
+                1000,
+                [1000, 7],
+                "domain-change",
+                1,
+                ["value", 1],
+                "PENDING",
+                ["GENESIS", "genesis-1"],
+                0,
+                0,
+                null,
+                "occurrence-1"
+              ],
               "lifecycle": "PENDING",
               "lifecycle_policy": ["occurrence-lifecycle-v1", 1, "09"]
             }
@@ -695,7 +711,20 @@
             "unit-trigger": {
               "root": "trigger-activation",
               "unit_id": "unit-trigger",
-              "unit_digest": "digest-trigger",
+              "unit_digest": "2e31105de22cdc03de31c3c9187e72e23903a7b41ac10ee46cabf4c81348fc72",
+              "record_body": [
+                "unit-trigger",
+                "run-1",
+                "trigger-source",
+                "trigger-1",
+                1,
+                ["EVENT", "event-origin"],
+                [1000, 7],
+                1,
+                "predicate-digest",
+                "PENDING",
+                "trigger-1"
+              ],
               "lifecycle": "PENDING"
             }
           }
@@ -950,7 +979,7 @@
               "source_inputs": [
                 {
                   "id": "unit-occurrence",
-                  "digest": "digest-occurrence"
+                  "digest": "204d9dd35440b87aa256da6f00b9236e271230b3f0a201a84d32ab1494f7fd96"
                 }
               ]
             },
@@ -976,7 +1005,7 @@
               "source_inputs": [
                 {
                   "id": "unit-trigger",
-                  "digest": "digest-trigger"
+                  "digest": "2e31105de22cdc03de31c3c9187e72e23903a7b41ac10ee46cabf4c81348fc72"
                 }
               ]
             }
@@ -1510,25 +1539,31 @@
         "completions": [],
         "world_state_by_revision": {
           "7": {
-            "channel_members": {
-              "room-channel": ["actor-1"]
+            "channels": {
+              "room-channel": {
+                "location_ref": "room-1",
+                "modality": "VISION",
+                "members": ["actor-1", "actor-2"]
+              }
+            },
+            "actors": {
+              "actor-1": {"clearance": "SECRET", "active": true},
+              "actor-2": {"clearance": "PUBLIC", "active": true}
             }
           },
           "8": {
-            "channel_members": {
-              "room-channel": ["actor-1"]
+            "channels": {
+              "room-channel": {
+                "location_ref": "room-1",
+                "modality": "VISION",
+                "members": ["actor-1", "actor-2"]
+              }
+            },
+            "actors": {
+              "actor-1": {"clearance": "SECRET", "active": true},
+              "actor-2": {"clearance": "PUBLIC", "active": true}
             }
           }
-        },
-        "channel_authority": {
-          "room-channel": {
-            "location_ref": "room-1",
-            "modality": "VISION"
-          }
-        },
-        "actor_authority": {
-          "actor-1": {"clearance": "SECRET", "active": true},
-          "actor-2": {"clearance": "PUBLIC", "active": true}
         },
         "candidate": {
           "task_id": "task-secret-1",
@@ -3707,6 +3742,99 @@
           "path": "/candidate/omissions_redactions",
           "value": []
         }
+      ],
+      "expected_error": "OBSERVATION_ACCESS_DENIED"
+    },
+    {
+      "case_id": "commit.exogenous-source-domain-event",
+      "base_scenario_id": "commit.valid",
+      "findings": [153],
+      "patch": [
+        {"op": "replace", "path": "/fence/admitted_units/0/unit_kind", "value": "EXOGENOUS_INPUT"},
+        {"op": "replace", "path": "/fence/admitted_units/0/source_id", "value": "driver"},
+        {"op": "replace", "path": "/fence/admitted_units/0/unit_digest", "value": "edc89b22bf305b5bb96a254888e174840c895c9e97bbe39aa7826cd22f3dd576"},
+        {"op": "replace", "path": "/source_authorities/input_ledger/unit-action/root", "value": "exogenous-input"},
+        {"op": "replace", "path": "/source_authorities/input_ledger/unit-action/unit_digest", "value": "edc89b22bf305b5bb96a254888e174840c895c9e97bbe39aa7826cd22f3dd576"},
+        {"op": "replace", "path": "/source_authorities/input_ledger/unit-action/record_body", "value": ["unit-action", "run-1", "driver", "producer-unit-1", "domain-change", 1, "actor-1", ["value", 1], 1000, [1000, 7], null, "exogenous-1"]},
+        {"op": "replace", "path": "/transaction/events/0/source_inputs/0/digest", "value": "edc89b22bf305b5bb96a254888e174840c895c9e97bbe39aa7826cd22f3dd576"},
+        {"op": "replace", "path": "/transaction/events/0/entity_refs", "value": []},
+        {"op": "replace", "path": "/transaction/events/0/location_ref", "value": null},
+        {"op": "replace", "path": "/transaction/events/1/source_inputs/0/digest", "value": "edc89b22bf305b5bb96a254888e174840c895c9e97bbe39aa7826cd22f3dd576"}
+      ]
+    },
+    {
+      "case_id": "commit.occurrence-source-domain-event",
+      "base_scenario_id": "commit.valid",
+      "findings": [153],
+      "patch": [
+        {"op": "replace", "path": "/decision_ledger/commit_candidates/0/source_unit_ids/0", "value": "unit-occurrence"},
+        {"op": "replace", "path": "/decision_ledger/commit_candidates/1/source_unit_ids/0", "value": "unit-action"},
+        {"op": "replace", "path": "/decision_ledger/provisional_dispositions/0/disposition", "value": "REJECT"},
+        {"op": "replace", "path": "/decision_ledger/provisional_dispositions/0/candidate_id", "value": "candidate-occurrence"},
+        {"op": "replace", "path": "/decision_ledger/provisional_dispositions/0/reason_code", "value": "rejected"},
+        {"op": "replace", "path": "/decision_ledger/provisional_dispositions/1/disposition", "value": "COMMIT"},
+        {"op": "replace", "path": "/decision_ledger/provisional_dispositions/1/candidate_id", "value": "candidate-1"},
+        {"op": "replace", "path": "/decision_ledger/provisional_dispositions/1/reason_code", "value": "accepted"},
+        {"op": "replace", "path": "/transaction/decisions/0/disposition", "value": "REJECT"},
+        {"op": "replace", "path": "/transaction/decisions/0/candidate_id", "value": "candidate-occurrence"},
+        {"op": "replace", "path": "/transaction/decisions/0/reason_code", "value": "rejected"},
+        {"op": "replace", "path": "/transaction/decisions/0/produced_event_ids", "value": []},
+        {"op": "replace", "path": "/transaction/decisions/2/disposition", "value": "COMMIT"},
+        {"op": "replace", "path": "/transaction/decisions/2/candidate_id", "value": "candidate-1"},
+        {"op": "replace", "path": "/transaction/decisions/2/reason_code", "value": "accepted"},
+        {"op": "replace", "path": "/transaction/decisions/2/produced_event_ids", "value": ["8545d4a9a83df2387853ec19deaaea014f8df38d647660666caad87aaa34f95d"]},
+        {"op": "replace", "path": "/transaction/events/0/source_inputs", "value": [{"id": "unit-occurrence", "digest": "204d9dd35440b87aa256da6f00b9236e271230b3f0a201a84d32ab1494f7fd96"}]},
+        {"op": "replace", "path": "/transaction/events/0/actor_refs", "value": []},
+        {"op": "replace", "path": "/transaction/events/0/entity_refs", "value": []},
+        {"op": "replace", "path": "/transaction/events/0/location_ref", "value": null},
+        {"op": "replace", "path": "/transaction/events/2/payload/to", "value": "CONSUMED"},
+        {"op": "replace", "path": "/source_authority_after/schedule_store/unit-occurrence", "value": "CONSUMED"}
+      ]
+    },
+    {
+      "case_id": "commit.trigger-source-domain-event",
+      "base_scenario_id": "commit.valid",
+      "findings": [153],
+      "patch": [
+        {"op": "replace", "path": "/decision_ledger/commit_candidates/0/source_unit_ids/0", "value": "unit-trigger"},
+        {"op": "replace", "path": "/decision_ledger/commit_candidates/2/source_unit_ids/0", "value": "unit-action"},
+        {"op": "replace", "path": "/decision_ledger/provisional_dispositions/0/disposition", "value": "REJECT"},
+        {"op": "replace", "path": "/decision_ledger/provisional_dispositions/0/candidate_id", "value": "candidate-trigger"},
+        {"op": "replace", "path": "/decision_ledger/provisional_dispositions/0/reason_code", "value": "rejected"},
+        {"op": "replace", "path": "/decision_ledger/provisional_dispositions/2/disposition", "value": "COMMIT"},
+        {"op": "replace", "path": "/decision_ledger/provisional_dispositions/2/candidate_id", "value": "candidate-1"},
+        {"op": "replace", "path": "/decision_ledger/provisional_dispositions/2/reason_code", "value": "accepted"},
+        {"op": "replace", "path": "/transaction/decisions/0/disposition", "value": "REJECT"},
+        {"op": "replace", "path": "/transaction/decisions/0/candidate_id", "value": "candidate-trigger"},
+        {"op": "replace", "path": "/transaction/decisions/0/reason_code", "value": "rejected"},
+        {"op": "replace", "path": "/transaction/decisions/0/produced_event_ids", "value": []},
+        {"op": "replace", "path": "/transaction/decisions/3/disposition", "value": "COMMIT"},
+        {"op": "replace", "path": "/transaction/decisions/3/candidate_id", "value": "candidate-1"},
+        {"op": "replace", "path": "/transaction/decisions/3/reason_code", "value": "accepted"},
+        {"op": "replace", "path": "/transaction/decisions/3/produced_event_ids", "value": ["8545d4a9a83df2387853ec19deaaea014f8df38d647660666caad87aaa34f95d"]},
+        {"op": "replace", "path": "/transaction/events/0/source_inputs", "value": [{"id": "unit-trigger", "digest": "2e31105de22cdc03de31c3c9187e72e23903a7b41ac10ee46cabf4c81348fc72"}]},
+        {"op": "replace", "path": "/transaction/events/0/actor_refs", "value": []},
+        {"op": "replace", "path": "/transaction/events/0/entity_refs", "value": []},
+        {"op": "replace", "path": "/transaction/events/0/location_ref", "value": null}
+      ]
+    },
+    {
+      "case_id": "commit.occurrence-body-changed-under-same-digest",
+      "base_scenario_id": "commit.valid",
+      "findings": [153],
+      "patch": [
+        {"op": "replace", "path": "/source_authorities/schedule_store/unit-occurrence/record_body/5", "value": "tampered-kind"}
+      ],
+      "expected_error": "SOURCE_RECORD_DIGEST_MISMATCH"
+    },
+    {
+      "case_id": "observation.later-authority-cannot-upgrade-access",
+      "base_scenario_id": "observation.valid",
+      "findings": [154],
+      "patch": [
+        {"op": "replace", "path": "/candidate/observer", "value": "actor-2"},
+        {"op": "add", "path": "/current_actor_authority", "value": {"actor-2": {"clearance": "SECRET", "active": true}}},
+        {"op": "add", "path": "/current_channel_authority", "value": {"room-channel": {"location_ref": "room-1", "modality": "VISION", "members": ["actor-2"]}}}
       ],
       "expected_error": "OBSERVATION_ACCESS_DENIED"
     }

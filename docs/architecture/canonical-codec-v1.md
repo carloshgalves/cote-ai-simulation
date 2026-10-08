@@ -27,8 +27,8 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `4c83a9c5fdd144bba1dbb1b7f168174a3a8ed590d74db455fd69a1aacfce1b7a` |
-| `conformance_suite_hash` | `85b5e382d39ba0bf595291801a2c0a241992cc465166f77409116a43b7bac267` |
+| `schema_bundle_hash` | `ef7c1e4cec18f1491e4b72bd7dd35f49a1c28d77a5bdd89d435122074f5cba18` |
+| `conformance_suite_hash` | `f9c75b6647ec14b0205806bcfd7b481dcd0d29c9408fb18aa2a50dea1e86dee2` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -485,8 +485,8 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 
 A suíte V1 contém 156 casos positivos — todos os roots persistidos e todas as 76 operações
 registradas —, 30 casos negativos com `error_code` estável, 306 casos semânticos de binding,
-identidade, ordenação e idempotência, 114 casos executáveis de transição causal, sete casos de
-normalização e dois vetores SHA-256: 615 vetores/casos ao todo. O CI de uma
+identidade, ordenação e idempotência, 119 casos executáveis de transição causal, sete casos de
+normalização e dois vetores SHA-256: 620 vetores/casos ao todo. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
 independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não
 contém esses runners ou workflow. Ambas precisam provar valor

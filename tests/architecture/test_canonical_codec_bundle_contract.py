@@ -2088,13 +2088,13 @@ def test_published_conformance_case_counts_match_the_bundle() -> None:
     assert len(fixtures["negative"]) == 30
     assert len(fixtures["semantic"]) == 306
     assert len(fixtures["normalization_cases"]) == 7
-    assert len(transitions["cases"]) == 114
+    assert len(transitions["cases"]) == 119
     assert "156 casos positivos" in contract
     assert "30 casos negativos" in contract
     assert "306 casos semânticos" in contract
-    assert "114 casos executáveis de transição causal" in contract
+    assert "119 casos executáveis de transição causal" in contract
     assert "156 vetores positivos, 30 negativos, 306 casos semânticos" in readme
-    assert "totalizando 615 vetores/casos de conformidade" in readme
+    assert "totalizando 620 vetores/casos de conformidade" in readme
 
 
 def test_cycle_control_state_variants_are_closed_by_status() -> None:
@@ -2692,7 +2692,10 @@ def _candidate_event_projection(
     for source in sources:
         source_contract = source_contracts[source["root"]]
         body = source["record_body"]
-        actor_refs.add(body[source_contract["actor_index"]])
+        if "actor_index" in source_contract:
+            actor = body[source_contract["actor_index"]]
+            if actor is not None:
+                actor_refs.add(actor)
         if "targets_index" in source_contract:
             entity_refs.update(target[1] for target in body[source_contract["targets_index"]])
         if "location_index" in source_contract:
@@ -2744,25 +2747,37 @@ def _observation_transition_error(state: dict, contracts: dict) -> str | None:
     revisions = state["world_state_by_revision"]
     before = revisions.get(str(task["base_revision"]))
     after = revisions.get(str(task["result_revision"]))
-    channels = [
-        (channel_ref, channel)
-        for channel_ref, channel in state["channel_authority"].items()
-        if channel["location_ref"] == event["location_ref"]
-    ]
-    if before is None or after is None or len(channels) != 1:
+    if before is None or after is None:
         return "OBSERVATION_AUTHORITY_UNRESOLVED"
-    channel_ref, channel = channels[0]
-    before_members = set(before["channel_members"].get(channel_ref, []))
-    after_members = set(after["channel_members"].get(channel_ref, []))
+    before_channels = before.get("channels", {})
+    after_channels = after.get("channels", {})
+    channels = [
+        (channel_ref, before_channel, after_channels.get(channel_ref))
+        for channel_ref, before_channel in before_channels.items()
+        if before_channel["location_ref"] == event["location_ref"]
+        and after_channels.get(channel_ref, {}).get("location_ref")
+        == event["location_ref"]
+    ]
+    if len(channels) != 1:
+        return "OBSERVATION_AUTHORITY_UNRESOLVED"
+    channel_ref, before_channel, after_channel = channels[0]
+    if (
+        after_channel is None
+        or before_channel["modality"] != after_channel["modality"]
+    ):
+        return "OBSERVATION_AUTHORITY_UNRESOLVED"
+    before_members = set(before_channel["members"])
+    after_members = set(after_channel["members"])
     confidentiality_rank = {"PUBLIC": 0, "RESTRICTED": 1, "SECRET": 2}
     allowed_observers = {
         actor
         for actor in before_members & after_members
-        if state["actor_authority"].get(actor, {}).get("active")
-        and confidentiality_rank[
-            state["actor_authority"][actor]["clearance"]
-        ]
-        >= confidentiality_rank[event["confidentiality"]]
+        if before.get("actors", {}).get(actor, {}).get("active")
+        and after.get("actors", {}).get(actor, {}).get("active")
+        and min(
+            confidentiality_rank[before["actors"][actor]["clearance"]],
+            confidentiality_rank[after["actors"][actor]["clearance"]],
+        ) >= confidentiality_rank[event["confidentiality"]]
     }
     if observation["observer"] not in allowed_observers:
         return "OBSERVATION_ACCESS_DENIED"
@@ -2770,7 +2785,7 @@ def _observation_transition_error(state: dict, contracts: dict) -> str | None:
     fields = policy["payload_projection"]
     projection = {
         field: payload[payload_field] for field, payload_field in fields.items()
-    } | {"modality": channel["modality"], "channel_ref": channel_ref}
+    } | {"modality": after_channel["modality"], "channel_ref": channel_ref}
     projected_fields = (
         "percepts",
         "claim_refs",
@@ -3587,7 +3602,7 @@ def test_causal_transition_contracts_execute_all_review_regressions() -> None:
         state = _apply_fixture_patch(bases[case["base_scenario_id"]]["state"], case.get("patch", []))
         actual = _transition_error(bases[case["base_scenario_id"]]["operation"], state, contracts)
         assert actual == case.get("expected_error"), case["case_id"]
-    assert findings == set(range(68, 153))
+    assert findings == set(range(68, 155))
 
 
 def test_transition_fixtures_use_canonical_authorities_not_parallel_oracles() -> None:
@@ -3632,7 +3647,14 @@ def test_transition_fixtures_use_canonical_authorities_not_parallel_oracles() ->
     observation = bases["observation.valid"]
     assert "channel_state" not in observation
     assert set(observation["world_state_by_revision"]) == {"7", "8"}
-    assert observation["actor_authority"]["actor-2"]["clearance"] == "PUBLIC"
+    assert "actor_authority" not in observation
+    assert "channel_authority" not in observation
+    assert (
+        observation["world_state_by_revision"]["7"]["actors"]["actor-2"][
+            "clearance"
+        ]
+        == "PUBLIC"
+    )
 
     control = bases["control.in-flight.valid"]
     assert "candidate_status" not in control
@@ -3938,6 +3960,39 @@ def test_findings_151_and_152_reject_coordinated_authority_oracle_tampering() ->
             "omissions_redactions": [],
         }
     )
+    assert _transition_error("append-observation", observation, contracts) == (
+        "OBSERVATION_ACCESS_DENIED"
+    )
+
+
+def test_findings_153_and_154_close_source_projection_and_revision_authority() -> None:
+    contracts = _json("causal-transition-contracts.json")
+    fixtures = _json("causal-transition-fixtures.json")
+    bases = {item["scenario_id"]: item["state"] for item in fixtures["base_scenarios"]}
+
+    assert set(contracts["source_record_projection_contracts"]) == set(
+        contracts["source_record_authorities"]
+    )
+
+    commit = deepcopy(bases["commit.valid"])
+    occurrence = commit["source_authorities"]["schedule_store"]["unit-occurrence"]
+    occurrence["record_body"][5] = "tampered-kind"
+    assert _commit_transition_error(commit, contracts) == (
+        "SOURCE_RECORD_DIGEST_MISMATCH"
+    )
+
+    observation = deepcopy(bases["observation.valid"])
+    observation["candidate"]["observer"] = "actor-2"
+    observation["current_actor_authority"] = {
+        "actor-2": {"clearance": "SECRET", "active": True}
+    }
+    observation["current_channel_authority"] = {
+        "room-channel": {
+            "location_ref": "room-1",
+            "modality": "VISION",
+            "members": ["actor-2"],
+        }
+    }
     assert _transition_error("append-observation", observation, contracts) == (
         "OBSERVATION_ACCESS_DENIED"
     )

@@ -23,8 +23,9 @@ da linguagem, o enum runtime, a iteração de map e o RNG do host não podem ser
 
 ## Decisão proposta
 
-Escolher **Go 1.25.x** para o Simulation Engine causal V1. O patch exato será fixado no primeiro
-ticket de implementação; a pesquisa registrou Go 1.25.14, lançado em 2026-08-19.
+Escolher **Go 1.27.2** para o Simulation Engine causal V1. A pesquisa de 2026-10-08 registra essa
+revisão como a patch release corrente da linha suportada; o toolchain exato deve permanecer pinado no
+primeiro ticket de implementação e no CI.
 
 O core usará:
 
@@ -34,7 +35,8 @@ O core usará:
   como ponto de partida;
 - validação adicional obrigatória contra `profile.json`, `foundation.cddl`, `registries.json`,
   `causal-transition-contracts.json`, Unicode 15.1.0 e os fixtures do bundle;
-- `database/sql` somente através do port de persistência definido pelo ADR 0011;
+- `database/sql` somente através do port de persistência definido pelo ADR 0011, usando o driver
+  pinado `modernc.org/sqlite` v1.60.1 no adapter SQLite V1;
 - subprocesso local e framing de dados para consumir `Embodiment` Python.
 
 O domínio não importa diretamente `fxamacker/cbor`, SQLite, Python, um cliente de LLM, framework de

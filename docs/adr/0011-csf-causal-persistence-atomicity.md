@@ -31,6 +31,14 @@ arquivo principal por run/workspace**, com:
 - tabelas separadas por responsabilidade, mas não arquivos/bancos separados;
 - snapshot e checkpoint epistemológico opaco na mesma unidade de persistência na V1.
 
+O adapter Go V1 fixa `modernc.org/sqlite` **v1.60.1**, CGo-free, cujo pacote publicado para os alvos
+suportados carrega SQLite 3.53.4. A identidade esperada do core SQLite é
+`SQLITE_SOURCE_ID=2026-07-24 19:02:57 bf7c7f30031888f4e796e429ab3978879485813aaca6f641c7b33e4e09459bcc`,
+com SHA3-256 de `sqlite3.c`
+`67f423e9ebbbdc473cbc4772c872ee6b89f31fde4ed0279a5c25d5f65c043a16`. O primeiro ticket de
+implementação deve piná-los no `go.mod`/`go.sum` e falhar fechado se `sqlite_version()` ou
+`sqlite_source_id()` divergir.
+
 O arquivo inclui as autoridades lógicas `InputLedger`, `DecisionLedger`, `EventStore`,
 `EvidenceLedger`, `CausalOutbox`, `WorldRevision`, `CycleControlState`, genesis e `SnapshotStore`.
 Views, índices, JSON de diagnóstico, métricas e caches podem ser reconstruídos e não são autoridade.
@@ -61,6 +69,20 @@ SQLite permite leitores concorrentes e um writer por banco. Isso é suficiente p
 engine já possui um `CommitCoordinator` único para a autoridade de mundo; cálculo de candidatos,
 validators, reducers puros e queries podem ocorrer em paralelo. A espera de lock deve gerar retry
 operacional sem atribuir prioridade causal ao primeiro worker que chegou.
+
+O adapter não usa `sql.Open` com um DSN solto. Ele cria um `sqlite.NewConnector` e chama `sql.OpenDB`;
+o writer autoritativo usa uma conexão dedicada (`SetMaxOpenConns(1)`) e não compartilha o pool com
+leitores. Toda conexão que o connector abrir recebe, antes de ser entregue ao caller, uma
+connection hook que executa e verifica `PRAGMA journal_mode=WAL` e `PRAGMA synchronous=FULL`; o
+resultado efetivo deve ser `WAL` e `2` (`FULL`). Falha em qualquer verificação impede a conexão e o
+commit autoritativo. A configuração é repetida/verificada quando uma conexão é criada, não apenas na
+conexão de bootstrap.
+
+O teste de configuração também coleta `PRAGMA compile_options`, ordena o resultado e o compara com
+um manifesto pinado por `GOOS/GOARCH`. O manifesto registra, no mínimo, `THREADSAFE`,
+`DEFAULT_SYNCHRONOUS`, `DEFAULT_WAL_SYNCHRONOUS` e os diagnósticos de compile options; nenhuma
+diferença nesses itens, nem substituição de source/vendor do driver, é aceita sem atualizar a policy
+e os hashes. Os defaults de compilação não substituem as PRAGMAs explícitas verificadas acima.
 
 Não usar `synchronous=NORMAL`, `OFF`, tabelas `UNLOGGED`, `ATTACH` para dividir os quatro artefatos
 autoritativos, nem copiar apenas o arquivo `.db` enquanto um WAL necessário está separado. Backups

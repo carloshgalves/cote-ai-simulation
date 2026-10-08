@@ -19,13 +19,14 @@ produção.
 
 Recomenda-se:
 
-- **D1:** Go 1.25.x para o Simulation Engine causal, com o codec e os schemas do bundle V1 atrás de
-  um adapter próprio. A referência de pesquisa é Go 1.25.14 (2026-08-19), com `fxamacker/cbor/v2`
-  2.9.2 (2026-05-03) como implementação CBOR avaliada. O domínio não depende diretamente da API da
-  biblioteca.
+- **D1:** Go 1.27.2 para o Simulation Engine causal, com o codec e os schemas do bundle V1 atrás de
+  um adapter próprio. A referência de pesquisa é a patch release corrente da linha suportada em
+  2026-10-08, com `fxamacker/cbor/v2` 2.9.2 (2026-05-03) como implementação CBOR avaliada. O domínio
+  não depende diretamente da API da biblioteca.
 - **D2:** um único banco SQLite 3.53.4 (2026-07-24) por run/local workspace, em WAL com
-  `PRAGMA synchronous=FULL`, contendo no mesmo arquivo as tabelas dos ledgers, outbox, revisão e
-  snapshots. O commit causal é uma transação única; a outbox só é consumida depois do commit.
+  `PRAGMA synchronous=FULL`, usando `modernc.org/sqlite` v1.60.1 como driver Go pinado, contendo no
+  mesmo arquivo as tabelas dos ledgers, outbox, revisão e snapshots. O commit causal é uma transação
+  única; a outbox só é consumida depois do commit.
 - **Evolução:** PostgreSQL pode receber os mesmos ports e records quando houver necessidade real de
   concorrência multi-processo/host. Stores separados só serão admissíveis com um protocolo de commit
   durável que não exponha nenhum store como autoridade antes de todos os participantes confirmarem;
@@ -62,7 +63,7 @@ Pontuações e recomendações são **decisões de projeto**, não propriedades 
 |---|---|---|---|
 | Python | documentação Python 3.14.8, consultada em 2026-10-08 | `asyncio` oferece concorrência cooperativa, I/O, IPC, filas e subprocessos; `hashlib.sha256` é garantido na biblioteca padrão | `cbor2` 6.1.4 oferece `canonical=True`, mas a opção genérica não substitui o profile V1: o projeto exige RFC 8949 core deterministic, profile Unicode/float/registry e strict decode próprios |
 | TypeScript/Node.js | Node 22.23.3 LTS, publicado em 2026-09-23; TypeScript 7.0.2, publicado em 2026-08-20 | `worker_threads` é uma API estável para paralelismo CPU; `node:crypto` expõe SHA-256; TypeScript fornece checagem estática antes da execução | tipos TypeScript são apagados em runtime; `number`, `BigInt`, `Buffer`, objetos e iteração precisam de disciplina explícita para não contaminar bytes causais; codec CBOR e validação V1 continuam sendo trabalho de adapter |
-| Go | Go 1.25.14, 2026-08-19 | goroutines/channels e `testing/synctest` suportam concorrência testável; `crypto/sha256` e `database/sql` são standard library; há suporte oficial/documentado a PostgreSQL e SQLite por drivers | CBOR não está na standard library; a biblioteca avaliada ainda precisa de wrapper para records, Unicode 15.1, registries, profile e strict re-encoding |
+| Go | Go 1.27.2, 2026-10-08 | goroutines/channels e `testing/synctest` suportam concorrência testável; `crypto/sha256` e `database/sql` são standard library; há suporte oficial/documentado a PostgreSQL e SQLite por drivers | CBOR não está na standard library; a biblioteca avaliada ainda precisa de wrapper para records, Unicode 15.1, registries, profile e strict re-encoding |
 
 Fontes primárias da tabela: [Python asyncio](https://docs.python.org/3.14/library/asyncio.html),
 [Python hashlib](https://docs.python.org/3.14/library/hashlib.html),
@@ -71,7 +72,7 @@ Fontes primárias da tabela: [Python asyncio](https://docs.python.org/3.14/libra
 [Node worker_threads](https://nodejs.org/download/release/latest/docs/api/worker_threads.html),
 [Node crypto](https://nodejs.org/download/release/v26.8.1/docs/api/crypto.html),
 [TypeScript 7.0 release](https://github.com/microsoft/TypeScript/releases),
-[Go 1.25 release notes](https://go.dev/doc/go1.25),
+[Go 1.27 release notes](https://go.dev/doc/go1.27),
 [Go release history](https://go.dev/doc/devel/release),
 [Go database/sql guidance](https://go.dev/doc/database/) e
 [fxamacker/cbor 2.9.2](https://github.com/fxamacker/cbor/releases/tag/v2.9.2).
@@ -82,7 +83,23 @@ RFC 8949, preferred serialization, ordem bytewise de map e modos de decoder conf
 um bom componente, não prova de conformidade do CSF: tags, tipos, ranges, bindings e relações de
 records ainda precisam ser validados contra o bundle.
 
-### 3.2 Matriz de critérios vinculados aos invariantes
+### 3.2 Driver SQLite e configuração por conexão
+
+`database/sql` não inclui um driver SQLite e `sql.DB` é um pool que pode abrir várias conexões. A
+decisão V1 fixa `modernc.org/sqlite` v1.60.1: o pacote é CGo-free, expõe `NewConnector` para
+`sql.OpenDB` e documenta SQLite 3.53.4 nos alvos suportados. A alternativa
+`github.com/mattn/go-sqlite3` é madura e compatível com `database/sql`, mas requer CGo e um compilador
+C; isso adiciona uma dependência de toolchain e uma superfície de build que a V1 não precisa.
+
+O driver escolhido não torna defaults implícitos autoridade. O adapter usa `NewConnector`/`OpenDB`,
+limita a conexão writer autoritativa a um único slot e registra hook executado para cada conexão. O
+hook aplica e verifica `journal_mode=WAL` e `synchronous=FULL`; o teste de configuração consulta
+também `sqlite_version()`, `sqlite_source_id()` e `PRAGMA compile_options`. As opções são ordenadas e
+comparadas a um manifesto por alvo; diferenças em `THREADSAFE`, `DEFAULT_SYNCHRONOUS`,
+`DEFAULT_WAL_SYNCHRONOUS` ou no source/vendor pinado falham fechado. A configuração efetiva da
+conexão que faz o commit, e não apenas o arquivo ou a conexão inicial, é a evidência de aceitação.
+
+### 3.3 Matriz de critérios vinculados aos invariantes
 
 Escala: 1 = risco/custo alto ou suporte fraco; 5 = melhor ajuste. Os pesos são específicos desta
 V1, não um ranking geral de linguagens.
@@ -141,9 +158,9 @@ registries e os 620 vetores. O coletor de lixo e goroutines não são uma garant
 commit coordinator, a política de substreams e o uso exclusivo de valores inteiros/fixed-point em
 regras exatas são obrigatórios.
 
-### 3.3 Decisão recomendada
+### 3.4 Decisão recomendada
 
-Escolher **Go 1.25.x** para o core do Simulation Engine causal, com o patch do toolchain e as
+Escolher **Go 1.27.2** para o core do Simulation Engine causal, com o patch do toolchain e as
 dependências travados no primeiro ticket de implementação. O domínio importa apenas interfaces e
 tipos do CSF; codec, SQLite e processo Python ficam em adapters.
 
@@ -178,6 +195,13 @@ core.
 
 ### 4.1 Fatos verificados
 
+- A documentação Go registra que `database/sql` depende de um driver externo, que `sql.DB` representa
+  um pool de conexões e que `sql.OpenDB` aceita um `driver.Connector`; isso torna a configuração por
+  conexão parte do contrato do adapter. Veja [opening a database handle](https://go.dev/doc/database/open-handle)
+  e [`driver.Connector`](https://pkg.go.dev/database/sql/driver#Connector).
+- O pacote [`modernc.org/sqlite` v1.60.1](https://pkg.go.dev/modernc.org/sqlite) é CGo-free, expõe
+  `NewConnector`/`RegisterConnectionHook` e registra SQLite 3.53.4 nos alvos suportados. A alternativa
+  [`mattn/go-sqlite3`](https://github.com/mattn/go-sqlite3) requer CGo e GCC.
 - SQLite documenta que uma transação é all-or-nothing, que há múltiplos leitores mas apenas um
   escritor por banco, e que WAL permite leitores durante a escrita. Veja
   [transactions](https://sqlite.org/lang_transaction.html),
@@ -228,7 +252,11 @@ hosts; isso não é requisito da primeira milestone.
 ### 4.4 Decisão recomendada e protocolo
 
 Escolher **SQLite em um único arquivo principal por run/workspace**, não um arquivo por ledger. A
-versão de pesquisa é SQLite 3.53.4. Os stores lógicos continuam separados por tabela/port:
+versão de pesquisa é SQLite 3.53.4, com `modernc.org/sqlite` v1.60.1 como driver pinado. A identidade
+do core esperado é `SQLITE_SOURCE_ID=2026-07-24 19:02:57 bf7c7f30031888f4e796e429ab3978879485813aaca6f641c7b33e4e09459bcc`
+e SHA3-256 de `sqlite3.c`
+`67f423e9ebbbdc473cbc4772c872ee6b89f31fde4ed0279a5c25d5f65c043a16`. Os stores lógicos continuam
+separados por tabela/port:
 
 - `InputLedger`;
 - `DecisionLedger` e `CycleControlState`;
@@ -244,16 +272,20 @@ replay.
 
 O adapter de persistência deve:
 
-1. abrir uma transação de escrita curta (`BEGIN IMMEDIATE` ou equivalente), depois que o trabalho puro
+1. criar o handle via `sqlite.NewConnector` + `sql.OpenDB`; o writer autoritativo deve ter um único
+   slot de conexão e cada conexão nova deve passar pelo hook de configuração/verificação;
+2. abrir uma transação de escrita curta (`BEGIN IMMEDIATE` ou equivalente), depois que o trabalho puro
    já estiver calculado;
-2. confirmar fence, revisão base, cursors e chaves idempotentes por CAS/constraints;
-3. inserir settlement, `DecisionRecord`, `Event`, lifecycle/trigger, `PerceptionTask`,
+3. confirmar `sqlite_version()`/`sqlite_source_id()` e o manifesto de `PRAGMA compile_options`, além
+   de `journal_mode=WAL` e `synchronous=FULL` efetivos na conexão que fará o commit;
+4. confirmar fence, revisão base, cursors e chaves idempotentes por CAS/constraints;
+5. inserir settlement, `DecisionRecord`, `Event`, lifecycle/trigger, `PerceptionTask`,
    `CycleCommit`/abort e `WorldRevision` na mesma transação;
-4. exigir bytes idênticos em reinsert idempotente e rejeitar digest/identity collision;
-5. executar `COMMIT` com WAL + `synchronous=FULL`; um erro faz rollback e não deixa projeção parcial;
-6. só entregar tarefas à outbox depois de observar o commit durável; o worker de percepção nunca
+6. exigir bytes idênticos em reinsert idempotente e rejeitar digest/identity collision;
+7. executar `COMMIT` com WAL + `synchronous=FULL`; um erro faz rollback e não deixa projeção parcial;
+8. só entregar tarefas à outbox depois de observar o commit durável; o worker de percepção nunca
    participa da transação do mundo;
-7. armazenar, na V1, o checkpoint epistemológico opaco ou sua referência verificável no mesmo banco.
+9. armazenar, na V1, o checkpoint epistemológico opaco ou sua referência verificável no mesmo banco.
    Objeto externo só poderá ser usado depois de uma decisão própria sobre durabilidade-before-ref e
    recovery.
 
@@ -281,14 +313,15 @@ reconstruir/reverter o lote. Isso é um protocolo distribuído local, não uma e
 
 O plano segue a sequência da spec §13 e não implementa nenhum runtime nesta decisão:
 
-1. Fixar toolchain Go, dependências, layout de módulos e processo Python de teste; não tocar em
-   `Embodiment`.
+1. Fixar Go 1.27.2, `modernc.org/sqlite` v1.60.1, source-id/SHA3, manifesto de compile options,
+   dependências, layout de módulos e processo Python de teste; não tocar em `Embodiment`.
 2. Implementar o adapter de codec e executar os 620 vetores com um segundo runner independente;
    manter records causais como bytes.
 3. Definir ports de `Clock`, ledgers, `ReducerRegistry`, `CommitCoordinator`, outbox, snapshots e
    Observatory read-only; adicionar testes de arquitetura para a direção das dependências.
-4. Criar schema SQLite único, migrations versionadas e constraints de identidade/append-only;
-   validar WAL + FULL em ambiente local.
+4. Criar schema SQLite único, migrations versionadas e constraints de identidade/append-only; validar
+   em cada conexão o driver/source-id, manifesto de compile options, WAL + FULL e o comportamento do
+   writer dedicado em ambiente local.
 5. Implementar fontes, closures, rounds, slots, fence e clock em memória; persistir inputs e
    fences numa transação curta.
 6. Implementar candidatos, validators, conflitos, substreams e settlement puro; permutar ordem de
@@ -324,6 +357,8 @@ O plano segue a sequência da spec §13 e não implementa nenhum runtime nesta d
 - replay e snapshot+resume reproduzem bytes, digests, revisões, cursores e state hash;
 - backup/restauração inclui o estado WAL necessário e passa verificação de bundle, genesis e
   records;
+- o build/runtime rejeita driver, source-id, compile options, journal mode ou synchronous efetivos
+  incompatíveis com a policy pinada;
 - concorrência de leitores não altera resultados, e writers concorrentes são serializados sem
   escolher prioridade causal por chegada;
 - uma migração/alteração de schema ausente, SQLite em modo inseguro ou policy/hash divergente falha
@@ -337,6 +372,7 @@ O plano segue a sequência da spec §13 e não implementa nenhum runtime nesta d
 | FMA/float ou runtime muda resultado físico | cenários com floats permitidos sob diferentes arquiteturas/toolchains; regras causais migradas para integer/fixed-point quando exigirem igualdade |
 | worker completion vira autoridade por acidente | property test que permuta goroutines, ordem de resposta, maps e callbacks |
 | SQLite perde durabilidade no filesystem do notebook | matrix de crash/power-loss em filesystem suportado, `synchronous=FULL`, restore e validação de prefixo/commit |
+| pool abre conexão sem a configuração autoritativa | abrir/reciclar conexões pelo `Connector`, forçar o caminho de commit e verificar em cada uma source-id, compile options, WAL e FULL |
 | um índice/view divergente passa por autoridade | apagar/reconstruir índices e views a partir dos BLOBs; replay só a partir dos records canônicos |
 | tamanho do WAL prejudica execução | benchmark com cenário de referência, checkpoint periódico e limite de journal; se falhar o orçamento, avaliar PostgreSQL sem mudar ports |
 | checkpoint epistemológico externo quebra atomicidade | teste de crash entre blob/ref/commit; a V1 deve manter o payload/ref no mesmo arquivo até haver protocolo explícito |
@@ -361,6 +397,11 @@ Além das fontes ligadas acima, foram consultados [SQLite atomic commit](https:/
 [SQLite appropriate uses](https://www.sqlite.org/whentouse.html),
 [PostgreSQL reliability](https://www.postgresql.org/docs/17/wal-reliability.html),
 [TypeScript Handbook — erased types](https://www.typescriptlang.org/docs/handbook/2/basic-types),
+[Go release history](https://go.dev/doc/devel/release),
+[SQLite release history](https://www.sqlite.org/changes.html),
+[SQLite compile-time options](https://www.sqlite.org/compile.html),
+[modernc.org/sqlite v1.60.1](https://pkg.go.dev/modernc.org/sqlite),
+[mattn/go-sqlite3](https://github.com/mattn/go-sqlite3),
 [RFC 8610](https://www.rfc-editor.org/rfc/rfc8610.html) e o
 [bundle canônico local](../architecture/canonical-codec-v1-bundle/README.md).
 

@@ -1,6 +1,6 @@
 # ADR 0011 — Persistência e atomicidade da Fundação causal V1
 
-**Status:** Proposed
+**Status:** Accepted
 
 **Data:** 2026-10-08
 

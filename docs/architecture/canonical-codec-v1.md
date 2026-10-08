@@ -27,8 +27,8 @@ este profile, não é uma implementação conforme.
 | hash | SHA-256, FIPS 180-4, saída de 32 bytes |
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
-| `schema_bundle_hash` | `af3b8f4ef92c2558947ef7d00f475408aa508bd8bca492c7e3c1f08d47530d21` |
-| `conformance_suite_hash` | `16f966d7f8a557f54370717e609fed3ca274cff3dc37169ff825b9519824b764` |
+| `schema_bundle_hash` | `4c83a9c5fdd144bba1dbb1b7f168174a3a8ed590d74db455fd69a1aacfce1b7a` |
+| `conformance_suite_hash` | `85b5e382d39ba0bf595291801a2c0a241992cc465166f77409116a43b7bac267` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -233,7 +233,9 @@ existir imutavelmente no prefixo do `DecisionLedger`; o terminal não os republi
 resolve sua disposição provisória/conflitos/RNG. Somente `COMMIT` projeta drafts de domínio, sempre em
 phase `CANDIDATE_DOMAIN`; `REJECT` e `DEFER` não publicam esses efeitos. A projeção candidata fecha o
 envelope completo — schema, payload, parents, sources, actors, entities, location e confidentiality —
-a partir do candidate, das fontes imutáveis por id+digest e do contract do event type. Toda fase
+a partir do candidate, das fontes imutáveis carregadas do owner registrado por id+digest e do contract
+do event type. O fence conserva somente os cinco campos canônicos de `admitted-unit`; metadados extras
+nele são rejeitados e nunca servem como fonte da projeção. Toda fase
 recalcula `event_id`; `commit_successor_floor` vem exclusivamente de instant/ordinal/`CyclePlan`.
 O pós-estado é o resultado exato da dobra dos eventos, em
 `EventOrderKey`, pelos reducers de owner/version/hash pinados — bytes arbitrários apenas
@@ -248,7 +250,8 @@ resolve `PerceptionTask` → `Observation` → `KnowledgeInput` → completion r
 observation da task tem exatamente seu evento como fonte; task/observation, instante e
 observer-recipient coincidem. A policy pinada deriva allow-list e output exato por observer sobre
 task/event/pre/post/channel; observer não autorizado ou percept/claim/evidence/omissão divergente
-falha no append. Claims e evidence do knowledge input são subsets do que a observation resolvida
+falha no append. Pre/post state são resolvidos pelas revisões da task e canal/acesso por authorities
+duráveis; allow-list/output pré-computados fornecidos pelo caller não são authority. Claims e evidence do knowledge input são subsets do que a observation resolvida
 divulgou. Persistir o `KnowledgeInput` é a confirmação durável; não existe ack/flag paralelo. As
 listas do completion são exatamente as projeções canônicas de
 todos os outputs daquela task, sem extras, duplicatas ou omissões; completion vazio representa zero
@@ -482,8 +485,8 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 
 A suíte V1 contém 156 casos positivos — todos os roots persistidos e todas as 76 operações
 registradas —, 30 casos negativos com `error_code` estável, 306 casos semânticos de binding,
-identidade, ordenação e idempotência, 111 casos executáveis de transição causal, sete casos de
-normalização e dois vetores SHA-256: 612 vetores/casos ao todo. O CI de uma
+identidade, ordenação e idempotência, 114 casos executáveis de transição causal, sete casos de
+normalização e dois vetores SHA-256: 615 vetores/casos ao todo. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
 independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não
 contém esses runners ou workflow. Ambas precisam provar valor

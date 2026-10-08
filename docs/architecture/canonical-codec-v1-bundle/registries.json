@@ -1057,9 +1057,9 @@
       "predicate": "event.event-order-key.event-local-ordinal == 0",
       "output": "potentially-perceptible boolean",
       "ordering": "evaluate events in cycle-commit.event-ids order",
-      "observer_projection_input": "PerceptionTask + full Event + task base/result state + authoritative channel/access state",
-      "observer_access": "derive the exact observer allow-list; confidentiality never grants fallback access",
-      "observer_output": "derive exact modality, channel, percepts, claim refs, evidence chain and omissions for each allowed observer",
+      "observer_projection_input": "PerceptionTask + full Event + base/result state loaded by task revisions + authenticated channel/access authorities; no supplied allow-list/output",
+      "observer_access": "derive the exact observer allow-list from channel membership and actor clearance; confidentiality never grants fallback access",
+      "observer_output": "derive exact modality/channel from the channel authority and percepts, claim refs, evidence chain and omissions from the registered Event payload projection",
       "append_rule": "reject an unauthorized observer or any extra, omitted or substituted observer output"
     }
   ],
@@ -1372,7 +1372,8 @@
         "each terminal decision equals its resolved ProvisionalDisposition and resolved ConflictSet/RngDraw material in run, cycle, attempt, subject, candidate, disposition, reason, policy, resolver, conflict refs, and rng refs",
         "COMMIT produced-event-ids are exactly the canonical projections of its candidate event-drafts; REJECT and DEFER produced-event-ids are empty and publish no CANDIDATE_DOMAIN event",
         "every DEFER publishes exactly one new successor in the owning source authority with a distinct identity, predecessor provenance, and eligibility >= the commit-successor-floor derived from fence instant, cycle-ordinal and cycle-plan; caller-supplied floor is forbidden",
-        "every candidate-produced event is the canonical full-envelope projection of one event-draft plus its immutable source records and event-type contract, including schema-version, source-inputs, actor-refs, entity-refs, location-ref and confidentiality; it has event-order-key.origin-ref equal to candidate-id and phase CANDIDATE_DOMAIN",
+        "fence.admitted-units contain exactly the five fields of the canonical admitted-unit schema; source records are resolved by id+digest from their record_authorities owner and canonical digest is verified",
+        "every candidate-produced event is the canonical full-envelope projection of one event-draft plus those owner-resolved immutable source records and event-type contract, including schema-version, source-inputs, actor-refs, entity-refs, location-ref and confidentiality; it has event-order-key.origin-ref equal to candidate-id and phase CANDIDATE_DOMAIN",
         "every SOURCE_LIFECYCLE event is the exact policy-derived projection required to settle admitted source units and completed containers; omission and extra lifecycle output are invalid",
         "every Event causal-parent resolves by id+digest to an earlier event; a same-cycle parent is earlier within the same candidate; every source-input resolves to an authorized fence unit",
         "every event has cycle-commit run-id, cycle-id, instant as occurred-at, and base-revision; event-id is recomputed from run-id, cycle-id and EventOrderKey for every phase",
@@ -1456,11 +1457,11 @@
         "observation.observed-at == event.occurred-at",
         "observation.source-event-refs == [event ref]",
         "observation.resolver == task.resolver byte-for-byte",
-        "task.perception-policy resolves one perception_policy_contracts entry and derives the exact observer allow-list from task, event, pre/post state and channel state",
+        "task.perception-policy resolves one perception_policy_contracts entry and derives the exact observer allow-list from task, event, pre/post state loaded by task revisions and authenticated channel/access authorities; a supplied allow-list/output is ignored",
         "observation.observer belongs to that allow-list and modality, channel-ref, percepts, claim-refs, evidence-chain and omissions-redactions equal its exact observer-specific projection",
         "no perception-task-completion for task.task-id exists at pre-append cursor"
       ],
-      "visibility_rule": "append rejects unauthorized observers and extra, omitted or substituted output; SECRET/RESTRICTED never implies fallback disclosure"
+      "visibility_rule": "append rejects unauthorized observers and extra, omitted or substituted output; SECRET/RESTRICTED never implies fallback disclosure and caller-provided access/output oracles are not authorities"
     },
     {
       "constraint_id": "append-knowledge-input",

@@ -42,11 +42,11 @@ Adotar `COTE Causal Canonical Codec V1`, identificado por
 
 O bundle normativo fixa CDDL, domain/schema operations, bindings de cada enum/variant/role,
 identidades de `CausalRef`, chaves separadas de ordering/identidade para coleções set-like, limites,
-dados Unicode e 612 vetores/casos de conformidade. Seus hashes V1 são:
+dados Unicode e 615 vetores/casos de conformidade. Seus hashes V1 são:
 
 - `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`;
-- `schema_bundle_hash=af3b8f4ef92c2558947ef7d00f475408aa508bd8bca492c7e3c1f08d47530d21`;
-- `conformance_suite_hash=16f966d7f8a557f54370717e609fed3ca274cff3dc37169ff825b9519824b764`.
+- `schema_bundle_hash=4c83a9c5fdd144bba1dbb1b7f168174a3a8ed590d74db455fd69a1aacfce1b7a`;
+- `conformance_suite_hash=85b5e382d39ba0bf595291801a2c0a241992cc465166f77409116a43b7bac267`.
 
 O layout completo e os vetores-âncora estão no contrato normativo ligado acima.
 
@@ -109,8 +109,10 @@ histórica também têm transições executáveis com fixtures materializadas. B
 incompatível com o run, não uma migração.
 
 O contrato executável também fecha as cinco lacunas de publicação críticas: todo Event candidato
-projeta schema, provenance e visibilidade a partir de candidate + fontes imutáveis; autorização
-perceptiva é observer-specific e compara o output exato; persistir `KnowledgeInput` é a única
+projeta schema, provenance e visibilidade a partir de candidate + fontes imutáveis carregadas dos
+owners registrados por id+digest, nunca de metadados auxiliares do fence; autorização perceptiva é
+observer-specific e recomputa acesso/output de pre/post/channel autenticados, sem oracle fornecido;
+persistir `KnowledgeInput` é a única
 confirmação durável; `event_id` é recalculado em todas as fases; e `commit_successor_floor` é derivado
 do `CyclePlan`, nunca fornecido pelo caller.
 

@@ -1075,7 +1075,10 @@ Para a fase `CANDIDATE_DOMAIN`, o envelope completo do `Event` é uma projeção
 pais, o conjunto **exato** de `source_inputs`, `actor_refs`, `entity_refs`, `location_ref` e
 `confidentiality`; o commit compara todos esses campos antes de publicar. Nenhum metadado factual,
 de provenance ou visibilidade pode ser escolhido depois que candidate, fontes e policies foram
-fixados. Para todas as cinco fases, inclusive `TEMPORAL_ADVANCE`, `TRIGGER_RUNTIME` e
+fixados. Cada fonte é carregada do owner registrado (`InputLedger`, `ScheduleStore` ou
+`TriggerRegistry`) pelo par id+digest e tem seu digest canônico verificado; `admitted_unit` permanece
+estritamente o witness canônico de cinco campos e nunca transporta actor/entity/location/confidentiality
+como authority auxiliar. Para todas as cinco fases, inclusive `TEMPORAL_ADVANCE`, `TRIGGER_RUNTIME` e
 `TRIGGER_ACTIVATION`, o coordinator recalcula `event_id` de `(run_id, cycle_id, EventOrderKey)` antes
 de qualquer reducer.
 
@@ -1663,7 +1666,8 @@ A mesma policy/resolver pinada define uma função pura observer-specific sobre
 observadores e, para cada um, modalidade, canal, percepts, claims, evidence e omissões permitidos.
 `append(Observation)` recomputa essa projeção e rejeita tanto observer não autorizado quanto output
 extra, omitido ou substituído; `confidentiality` ou a existência do evento nunca cria fallback de
-acesso.
+acesso. Allow-list e output final não são inputs da fronteira: pre/post state são carregados pelas
+revisões da task e o canal/acesso vem de authorities duráveis autenticadas.
 
 ```text
 Observation {
@@ -2132,7 +2136,8 @@ uma leitura privilegiada não pode vazar por efeito colateral.
     componentes normativos da §10.1; concorrência/retry nunca alocam nova identidade.
 37. Todo `CommitCandidate` tem identidade derivada de unidades-fonte e papel/ordinal de schema. Seu
     `EventDraft`, os records-fonte por id+digest e o contrato versionado do event type projetam o
-    envelope factual/provenance/visibilidade completo do evento candidato. Todo
+    envelope factual/provenance/visibilidade completo do evento candidato; records são resolvidos
+    nos owners registrados e nenhum metadado extra no fence participa dessa projeção. Todo
     evento persiste sua `EventOrderKey`; `EventBatch`, `event_id` e `LogicalSequence` usam a única
     ordem total da §7, versionada e independente da ordem em que candidatos/workers terminam. Replay
     recalcula id em todas as fases, ordem e sequência a partir dessas preimagens, e `batch_digest`

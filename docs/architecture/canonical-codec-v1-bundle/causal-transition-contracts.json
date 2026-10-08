@@ -76,7 +76,7 @@
   "event_projection_contracts": {
     "domain.changed": {
       "schema_version": 1,
-      "default_confidentiality": "RESTRICTED",
+      "default_confidentiality": "SECRET",
       "source_inputs": "all commit-candidate.source-unit-ids resolved by id+unit-digest in their canonical candidate order",
       "actor_refs": "normalized union of actor refs committed by those immutable source records",
       "entity_refs": "normalized union of entity refs committed by those immutable source records",
@@ -84,12 +84,42 @@
       "confidentiality": "maximum restriction committed by those immutable source records, or the registered default when none declares one"
     }
   },
+  "source_record_authorities": {
+    "action-proposal": "input_ledger",
+    "no-proposal": "input_ledger",
+    "exogenous-input": "input_ledger",
+    "scheduled-occurrence": "schedule_store",
+    "trigger-activation": "trigger_registry"
+  },
+  "source_record_projection_contracts": {
+    "action-proposal": {
+      "digest_operation": "cote.csf.digest.action-proposal-unit",
+      "digest_schema": "cote.csf.schema.action-proposal.body",
+      "unit_id_index": 0,
+      "actor_index": 6,
+      "targets_index": 7,
+      "location_index": 10
+    },
+    "no-proposal": {
+      "digest_operation": "cote.csf.digest.no-proposal-unit",
+      "digest_schema": "cote.csf.schema.no-proposal.body",
+      "unit_id_index": 0,
+      "actor_index": 6
+    }
+  },
   "observer_projection_contracts": [
     {
       "policy_ref": ["perception-visible-first-v1", 1, "03"],
+      "resolver_ref": ["perception-resolver-v1", 1, "08"],
       "input": "PerceptionTask + complete Event + task base/result state + authoritative channel/access state",
-      "access": "observer must belong to the exact event-specific allow-list derived by the pinned resolver",
-      "output": "observer, modality, channel, percepts, claim refs, evidence chain and omissions must equal the exact observer-specific projection",
+      "access": "observer must be present in the event channel at both task revisions and have clearance at least the event confidentiality",
+      "output": "modality and channel come from the authoritative channel; percepts, claim refs, evidence chain and omissions are projected from the registered Event payload fields",
+      "payload_projection": {
+        "percepts": "observable_cues",
+        "claim_refs": "observable_claim_refs",
+        "evidence_chain": "observable_evidence_refs",
+        "omissions_redactions": "private_details"
+      },
       "fail_closed": "missing access or any extra, omitted or substituted output rejects append"
     }
   ],
@@ -225,7 +255,7 @@
         "DEFER successors are a bijection with distinct deferred candidate outcomes and each full ExogenousInput or ScheduledOccurrence has recomputed identity, digest, provenance, run and eligibility",
         "event phase is determined by origin kind across TEMPORAL_ADVANCE, CANDIDATE_DOMAIN, SOURCE_LIFECYCLE, TRIGGER_RUNTIME and TRIGGER_ACTIVATION",
         "event-id uses cote.csf.id.event for every phase and every draft causal-parent-role resolves exactly one strictly earlier event of the same candidate",
-        "candidate domain events commit the exact registered projection of type/schema, payload, parents, source inputs, actors, entities, location and confidentiality from the immutable candidate plus resolved source records",
+        "candidate domain events commit the exact registered projection of type/schema, payload, parents, source inputs, actors, entities, location and confidentiality from the immutable candidate plus source records resolved by id+digest from their registered owners; admitted-unit has exactly its five canonical fields and supplies no projection metadata",
         "candidate domain events, temporal advance events, source lifecycle events, trigger runtime, and trigger activations are exact EventStore derivations",
         "source lifecycle subjects are derived from fence cohort plus source authorities, duplicates/extras fail closed, and terminal state follows the pinned lifecycle policy including CANCELLED",
         "causal parents and source inputs resolve with correct scope and order; caller-supplied commit-successor-floor is forbidden and the floor is derived from fence instant/cycle-ordinal/cycle-plan",
@@ -241,7 +271,7 @@
       "rules": [
         "task resolves exactly one event and has no completion",
         "observation source, instant and resolver equal the task/event authority",
-        "the pinned observer-projection contract derives an exact observer allow-list from task, event, pre/post state and channel state",
+        "the pinned observer-projection contract derives an exact observer allow-list from task, event, pre/post state loaded by task revision, and authenticated channel/access authorities; caller-supplied allow-list/output is not an input",
         "observer, percepts, claims, evidence, omissions, modality and channel equal the exact observer-specific projection",
         "secret/restricted event content is never copied by fallback or by a caller-selected observer"
       ]

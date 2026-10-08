@@ -1142,9 +1142,9 @@ def test_epistemic_constraints_are_scoped_to_each_append_boundary() -> None:
             "predicate": "event.event-order-key.event-local-ordinal == 0",
             "output": "potentially-perceptible boolean",
             "ordering": "evaluate events in cycle-commit.event-ids order",
-            "observer_projection_input": "PerceptionTask + full Event + task base/result state + authoritative channel/access state",
-            "observer_access": "derive the exact observer allow-list; confidentiality never grants fallback access",
-            "observer_output": "derive exact modality, channel, percepts, claim refs, evidence chain and omissions for each allowed observer",
+            "observer_projection_input": "PerceptionTask + full Event + base/result state loaded by task revisions + authenticated channel/access authorities; no supplied allow-list/output",
+            "observer_access": "derive the exact observer allow-list from channel membership and actor clearance; confidentiality never grants fallback access",
+            "observer_output": "derive exact modality/channel from the channel authority and percepts, claim refs, evidence chain and omissions from the registered Event payload projection",
             "append_rule": "reject an unauthorized observer or any extra, omitted or substituted observer output",
         }
     ]
@@ -1878,6 +1878,7 @@ def test_epistemic_completion_is_terminal_and_policies_are_pinned() -> None:
     assert "observation.resolver == task.resolver byte-for-byte" in observation["relations"]
     assert any("exact observer allow-list" in relation for relation in observation["relations"])
     assert any("observer-specific projection" in relation for relation in observation["relations"])
+    assert any("supplied allow-list/output is ignored" in relation for relation in observation["relations"])
     assert "no perception-task-completion for task.task-id exists at pre-append cursor" in observation["relations"]
     assert "no perception-task-completion for task.task-id exists at pre-append cursor" in knowledge["relations"]
     assert "causal-outbox" in knowledge["applies_on"]["cursor"]
@@ -2087,13 +2088,13 @@ def test_published_conformance_case_counts_match_the_bundle() -> None:
     assert len(fixtures["negative"]) == 30
     assert len(fixtures["semantic"]) == 306
     assert len(fixtures["normalization_cases"]) == 7
-    assert len(transitions["cases"]) == 111
+    assert len(transitions["cases"]) == 114
     assert "156 casos positivos" in contract
     assert "30 casos negativos" in contract
     assert "306 casos semânticos" in contract
-    assert "111 casos executáveis de transição causal" in contract
+    assert "114 casos executáveis de transição causal" in contract
     assert "156 vetores positivos, 30 negativos, 306 casos semânticos" in readme
-    assert "totalizando 612 vetores/casos de conformidade" in readme
+    assert "totalizando 615 vetores/casos de conformidade" in readme
 
 
 def test_cycle_control_state_variants_are_closed_by_status() -> None:
@@ -2620,6 +2621,56 @@ def _derive_trigger_outputs(state: dict, fence: dict, tx: dict, result_state: di
     return runtime_outputs, activations
 
 
+_CANONICAL_ADMITTED_UNIT_FIELDS = {
+    "eligibility",
+    "unit_kind",
+    "source_id",
+    "unit_id",
+    "unit_digest",
+}
+
+
+def _resolve_source_units(
+    state: dict, fence: dict, contracts: dict
+) -> tuple[dict[str, dict], str | None]:
+    resolved: dict[str, dict] = {}
+    authorities = state["source_authorities"]
+    admission_history = state["unit_admission_history"]
+    owner_by_root = contracts["source_record_authorities"]
+    projections = contracts["source_record_projection_contracts"]
+    for admitted in fence["admitted_units"]:
+        if set(admitted) != _CANONICAL_ADMITTED_UNIT_FIELDS:
+            return {}, "ADMISSION_FENCE_UNIT_NOT_CANONICAL"
+        matches = [
+            (owner, records[admitted["unit_id"]])
+            for owner, records in authorities.items()
+            if admitted["unit_id"] in records
+            and records[admitted["unit_id"]]["unit_digest"]
+            == admitted["unit_digest"]
+        ]
+        if len(matches) != 1:
+            return {}, "SOURCE_RECORD_UNRESOLVED"
+        owner, record = matches[0]
+        if owner_by_root.get(record["root"]) != owner:
+            return {}, "SOURCE_RECORD_AUTHORITY_MISMATCH"
+        projection = projections.get(record["root"])
+        if projection is not None:
+            body = record.get("record_body")
+            if (
+                body is None
+                or body[projection["unit_id_index"]] != admitted["unit_id"]
+                or _domain_digest(
+                    projection["digest_operation"], projection["digest_schema"], body
+                ).hex()
+                != admitted["unit_digest"]
+            ):
+                return {}, "SOURCE_RECORD_DIGEST_MISMATCH"
+        resolved[admitted["unit_id"]] = (
+            admitted | record | admission_history.get(admitted["unit_id"], {})
+        )
+    return resolved, None
+
+
 def _candidate_event_projection(
     candidate: dict,
     draft: dict,
@@ -2632,26 +2683,34 @@ def _candidate_event_projection(
     sources = [units.get(unit_id) for unit_id in candidate["source_unit_ids"]]
     if any(source is None for source in sources):
         return None
-    actor_refs = sorted({ref for source in sources for ref in source.get("actor_refs", [])})
-    entity_refs = sorted({ref for source in sources for ref in source.get("entity_refs", [])})
-    locations = {source.get("location_ref") for source in sources} - {None}
+    source_contracts = contracts["source_record_projection_contracts"]
+    if any(source["root"] not in source_contracts for source in sources):
+        return None
+    actor_refs: set[str] = set()
+    entity_refs: set[str] = set()
+    locations: set[str] = set()
+    for source in sources:
+        source_contract = source_contracts[source["root"]]
+        body = source["record_body"]
+        actor_refs.add(body[source_contract["actor_index"]])
+        if "targets_index" in source_contract:
+            entity_refs.update(target[1] for target in body[source_contract["targets_index"]])
+        if "location_index" in source_contract:
+            location = body[source_contract["location_index"]]
+            if location is not None:
+                locations.add(location)
     if len(locations) > 1:
         return None
-    confidentiality_rank = {"PUBLIC": 0, "RESTRICTED": 1, "SECRET": 2}
-    confidentiality = max(
-        (source.get("confidentiality", event_contract["default_confidentiality"]) for source in sources),
-        key=confidentiality_rank.__getitem__,
-    )
     return {
         "event_schema_version": event_contract["schema_version"],
         "source_inputs": [
             {"id": unit_id, "digest": units[unit_id]["unit_digest"]}
             for unit_id in candidate["source_unit_ids"]
         ],
-        "actor_refs": actor_refs,
-        "entity_refs": entity_refs,
+        "actor_refs": sorted(actor_refs),
+        "entity_refs": sorted(entity_refs),
         "location_ref": next(iter(locations), None),
-        "confidentiality": confidentiality,
+        "confidentiality": event_contract["default_confidentiality"],
     }
 
 
@@ -2676,20 +2735,42 @@ def _observation_transition_error(state: dict, contracts: dict) -> str | None:
             item
             for item in contracts["observer_projection_contracts"]
             if item["policy_ref"] == task["perception_policy"]
+            and item["resolver_ref"] == task["resolver"]
         ),
         None,
     )
     if policy is None:
         return "OBSERVATION_POLICY_UNRESOLVED"
-    channel = state["channel_state"]
-    allowed_observers = channel["event_access"].get(event["event_id"], [])
+    revisions = state["world_state_by_revision"]
+    before = revisions.get(str(task["base_revision"]))
+    after = revisions.get(str(task["result_revision"]))
+    channels = [
+        (channel_ref, channel)
+        for channel_ref, channel in state["channel_authority"].items()
+        if channel["location_ref"] == event["location_ref"]
+    ]
+    if before is None or after is None or len(channels) != 1:
+        return "OBSERVATION_AUTHORITY_UNRESOLVED"
+    channel_ref, channel = channels[0]
+    before_members = set(before["channel_members"].get(channel_ref, []))
+    after_members = set(after["channel_members"].get(channel_ref, []))
+    confidentiality_rank = {"PUBLIC": 0, "RESTRICTED": 1, "SECRET": 2}
+    allowed_observers = {
+        actor
+        for actor in before_members & after_members
+        if state["actor_authority"].get(actor, {}).get("active")
+        and confidentiality_rank[
+            state["actor_authority"][actor]["clearance"]
+        ]
+        >= confidentiality_rank[event["confidentiality"]]
+    }
     if observation["observer"] not in allowed_observers:
         return "OBSERVATION_ACCESS_DENIED"
-    projection = channel["observer_outputs"].get(event["event_id"], {}).get(
-        observation["observer"]
-    )
-    if projection is None:
-        return "OBSERVATION_ACCESS_DENIED"
+    payload = event["payload"]
+    fields = policy["payload_projection"]
+    projection = {
+        field: payload[payload_field] for field, payload_field in fields.items()
+    } | {"modality": channel["modality"], "channel_ref": channel_ref}
     projected_fields = (
         "percepts",
         "claim_refs",
@@ -3082,7 +3163,9 @@ def _commit_transition_error(state: dict, contracts: dict) -> str | None:
     candidates = {item["candidate_id"]: item for item in ledger["commit_candidates"]}
     if any(event["order_key"]["origin_ref"] in candidates and event["order_key"]["phase"] != "CANDIDATE_DOMAIN" for event in tx["events"]):
         return "EVENT_PHASE_MISMATCH"
-    units = {item["unit_id"]: item for item in fence["admitted_units"]}
+    units, source_error = _resolve_source_units(state, fence, contracts)
+    if source_error:
+        return source_error
     decisions = {item["subject_id"]: item for item in tx["decisions"]}
     if decisions.keys() != units.keys():
         return "SETTLEMENT_NOT_BIJECTIVE"
@@ -3504,7 +3587,7 @@ def test_causal_transition_contracts_execute_all_review_regressions() -> None:
         state = _apply_fixture_patch(bases[case["base_scenario_id"]]["state"], case.get("patch", []))
         actual = _transition_error(bases[case["base_scenario_id"]]["operation"], state, contracts)
         assert actual == case.get("expected_error"), case["case_id"]
-    assert findings == set(range(68, 151))
+    assert findings == set(range(68, 153))
 
 
 def test_transition_fixtures_use_canonical_authorities_not_parallel_oracles() -> None:
@@ -3537,6 +3620,19 @@ def test_transition_fixtures_use_canonical_authorities_not_parallel_oracles() ->
     assert "trigger_activations_source" not in commit["transaction"]
     assert "policies" not in commit["fence"]
     assert "policies" not in commit["transaction"]["cycle_commit"]
+    assert all(
+        set(unit) == _CANONICAL_ADMITTED_UNIT_FIELDS
+        for unit in commit["fence"]["admitted_units"]
+    )
+    assert (
+        commit["source_authorities"]["input_ledger"]["unit-action"]["root"]
+        == "action-proposal"
+    )
+
+    observation = bases["observation.valid"]
+    assert "channel_state" not in observation
+    assert set(observation["world_state_by_revision"]) == {"7", "8"}
+    assert observation["actor_authority"]["actor-2"]["clearance"] == "PUBLIC"
 
     control = bases["control.in-flight.valid"]
     assert "candidate_status" not in control
@@ -3754,7 +3850,10 @@ def test_findings_146_to_150_fail_closed_at_the_authoritative_seams() -> None:
 
     state = deepcopy(commit)
     state["transaction"]["events"][0]["source_inputs"] = [
-        {"id": "unit-none", "digest": "digest-none"}
+        {
+            "id": "unit-none",
+            "digest": "524bcb79e731c5d0a3b8be7762351757442eaacc16a09619e97141463878911e",
+        }
     ]
     assert _commit_transition_error(state, contracts) == "EVENT_DRAFT_PROJECTION_MISMATCH"
 
@@ -3790,6 +3889,57 @@ def test_findings_146_to_150_fail_closed_at_the_authoritative_seams() -> None:
     state["fence"]["commit_successor_floor"] = [1000, 99]
     assert _commit_transition_error(state, contracts) == (
         "COMMIT_SUCCESSOR_FLOOR_NOT_DERIVED"
+    )
+
+
+def test_findings_151_and_152_reject_coordinated_authority_oracle_tampering() -> None:
+    contracts = _json("causal-transition-contracts.json")
+    fixtures = _json("causal-transition-fixtures.json")
+    bases = {item["scenario_id"]: item["state"] for item in fixtures["base_scenarios"]}
+
+    commit = deepcopy(bases["commit.valid"])
+    commit["fence"]["admitted_units"][0]["confidentiality"] = "PUBLIC"
+    commit["transaction"]["events"][0]["confidentiality"] = "PUBLIC"
+    assert _commit_transition_error(commit, contracts) == (
+        "ADMISSION_FENCE_UNIT_NOT_CANONICAL"
+    )
+
+    commit = deepcopy(bases["commit.valid"])
+    commit["source_authorities"]["input_ledger"]["unit-action"]["record_body"][6] = (
+        "actor-2"
+    )
+    commit["transaction"]["events"][0]["actor_refs"] = ["actor-2"]
+    assert _commit_transition_error(commit, contracts) == (
+        "SOURCE_RECORD_DIGEST_MISMATCH"
+    )
+
+    observation = deepcopy(bases["observation.valid"])
+    observation["channel_state"] = {
+        "event_access": {"event-secret-1": ["actor-1", "actor-2"]},
+        "observer_outputs": {
+            "event-secret-1": {
+                "actor-2": {
+                    "percepts": ["secret-detail"],
+                    "claim_refs": ["claim-secret"],
+                    "evidence_chain": ["evidence-secret"],
+                    "omissions_redactions": [],
+                    "modality": "VISION",
+                    "channel_ref": "room-channel",
+                }
+            }
+        },
+    }
+    observation["candidate"].update(
+        {
+            "observer": "actor-2",
+            "percepts": ["secret-detail"],
+            "claim_refs": ["claim-secret"],
+            "evidence_chain": ["evidence-secret"],
+            "omissions_redactions": [],
+        }
+    )
+    assert _transition_error("append-observation", observation, contracts) == (
+        "OBSERVATION_ACCESS_DENIED"
     )
 
 

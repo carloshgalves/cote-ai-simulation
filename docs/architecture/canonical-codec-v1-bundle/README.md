@@ -128,8 +128,8 @@ contrato e os vetores, mas não inclui dois runners independentes nem um workflo
 implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
 
 `fixtures.json` contém 156 vetores positivos, 30 negativos, 306 casos semânticos, sete casos de
-normalização convergente e dois vetores SHA-256. `causal-transition-fixtures.json` acrescenta 111 casos
-de transição executáveis, totalizando 612 vetores/casos de conformidade. Os positivos cobrem primitivos e limites, Unicode,
+normalização convergente e dois vetores SHA-256. `causal-transition-fixtures.json` acrescenta 114 casos
+de transição executáveis, totalizando 615 vetores/casos de conformidade. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 76 operações de id/digest/hash/record do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
 `error_code` estável. Os casos semânticos executam bindings de enum em roots completos, subsets de
@@ -170,7 +170,9 @@ inclusive lote vazio — e classificação perceptiva bijetiva sob a policy pina
 `perception_policy_contracts` fixa o predicado de classificação e a projeção observer-specific
 versionada. Observation → knowledge input → completion é validado nas suas fronteiras de append,
 repete identity policy/resolver pinados, restringe cada observation ao evento da task e exige
-observer + outputs exatamente permitidos por pre/post/channel. Persistir `KnowledgeInput` é o único
+observer + outputs recomputados de pre/post/channel autenticados — nunca de allow-list/output fornecido.
+Na projeção Candidate→Event, as fontes são carregadas dos owners registrados por id+digest e o fence
+mantém somente a forma canônica de `admitted-unit`. Persistir `KnowledgeInput` é o único
 receipt de entrega; completion exige todos esses records e não existe flag/ack paralelo. Completion
 fecha a task e bloqueia qualquer observation ou knowledge input tardio. `RngDraw` é um root referenciável
 próprio, e os subsets de field path impedem que uma ref genérica ocupe

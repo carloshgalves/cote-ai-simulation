@@ -491,49 +491,32 @@
           ],
           "admitted_units": [
             {
+              "eligibility": [1000, 7],
+              "unit_kind": "SLOT",
+              "source_id": "round-source",
               "unit_id": "unit-action",
-              "unit_digest": "digest-action",
-              "root": "action-proposal",
-              "actor_refs": [
-                "actor-1"
-              ],
-              "entity_refs": [
-                "resource-1"
-              ],
-              "location_ref": "room-1",
-              "confidentiality": "SECRET",
-              "first_fence_ordinal": 1,
-              "admission_index": 0,
-              "idempotency_identity": {
-                "run_id": "run-1",
-                "unit_kind": "SLOT",
-                "producer_scope": "round-source",
-                "actor_scope": "actor-1",
-                "idempotency_key": "action-1",
-                "policy": "idempotency-v1@1#05",
-                "idempotency_digest": "idem-action"
-              }
+              "unit_digest": "d83db4252eff3919679d0f2471854f9ea3b3577b11b74274c64bd7da033ec152"
             },
             {
+              "eligibility": [1000, 7],
+              "unit_kind": "SLOT",
+              "source_id": "round-source",
               "unit_id": "unit-none",
-              "unit_digest": "digest-none",
-              "root": "no-proposal",
-              "idempotency_identity": null
+              "unit_digest": "524bcb79e731c5d0a3b8be7762351757442eaacc16a09619e97141463878911e"
             },
             {
+              "eligibility": [1000, 7],
+              "unit_kind": "SCHEDULED_OCCURRENCE",
+              "source_id": "schedule-source",
               "unit_id": "unit-occurrence",
-              "unit_digest": "digest-occurrence",
-              "root": "scheduled-occurrence",
-              "lifecycle": "PENDING",
-              "lifecycle_policy": ["occurrence-lifecycle-v1", 1, "09"],
-              "idempotency_identity": null
+              "unit_digest": "digest-occurrence"
             },
             {
+              "eligibility": [1000, 7],
+              "unit_kind": "TRIGGER_ACTIVATION",
+              "source_id": "trigger-source",
               "unit_id": "unit-trigger",
-              "unit_digest": "digest-trigger",
-              "root": "trigger-activation",
-              "lifecycle": "PENDING",
-              "idempotency_identity": null
+              "unit_digest": "digest-trigger"
             }
           ],
           "cohort": [
@@ -636,6 +619,87 @@
           "rng_draws": []
         },
         "historical_units": {},
+        "unit_admission_history": {
+          "unit-action": {
+            "first_fence_ordinal": 1,
+            "admission_index": 0,
+            "idempotency_identity": {
+              "run_id": "run-1",
+              "unit_kind": "SLOT",
+              "producer_scope": "round-source",
+              "actor_scope": "actor-1",
+              "idempotency_key": "action-1",
+              "policy": "idempotency-v1@1#05",
+              "idempotency_digest": "idem-action"
+            }
+          },
+          "unit-none": {"idempotency_identity": null},
+          "unit-occurrence": {"idempotency_identity": null},
+          "unit-trigger": {"idempotency_identity": null}
+        },
+        "source_authorities": {
+          "input_ledger": {
+            "unit-action": {
+              "root": "action-proposal",
+              "unit_id": "unit-action",
+              "unit_digest": "d83db4252eff3919679d0f2471854f9ea3b3577b11b74274c64bd7da033ec152",
+              "record_body": [
+                "unit-action",
+                "dispatch-1",
+                "run-1",
+                "cycle-1",
+                "secret-action",
+                1,
+                "actor-1",
+                [[0, "resource-1"]],
+                ["value", 1],
+                [],
+                "room-1",
+                1000,
+                null,
+                "round-1",
+                "slot-1",
+                7,
+                null,
+                "action-1"
+              ]
+            },
+            "unit-none": {
+              "root": "no-proposal",
+              "unit_id": "unit-none",
+              "unit_digest": "524bcb79e731c5d0a3b8be7762351757442eaacc16a09619e97141463878911e",
+              "record_body": [
+                "unit-none",
+                "dispatch-2",
+                "run-1",
+                "cycle-1",
+                "round-1",
+                "slot-2",
+                "actor-1",
+                1000,
+                7,
+                0
+              ]
+            }
+          },
+          "schedule_store": {
+            "unit-occurrence": {
+              "root": "scheduled-occurrence",
+              "unit_id": "unit-occurrence",
+              "unit_digest": "digest-occurrence",
+              "lifecycle": "PENDING",
+              "lifecycle_policy": ["occurrence-lifecycle-v1", 1, "09"]
+            }
+          },
+          "trigger_registry": {
+            "unit-trigger": {
+              "root": "trigger-activation",
+              "unit_id": "unit-trigger",
+              "unit_digest": "digest-trigger",
+              "lifecycle": "PENDING"
+            }
+          }
+        },
         "prior_events": [],
         "round_authority": {
           "round-1": {
@@ -822,7 +886,7 @@
               "source_inputs": [
                 {
                   "id": "unit-action",
-                  "digest": "digest-action"
+                  "digest": "d83db4252eff3919679d0f2471854f9ea3b3577b11b74274c64bd7da033ec152"
                 }
               ],
               "actor_refs": [
@@ -856,11 +920,11 @@
               "source_inputs": [
                 {
                   "id": "unit-action",
-                  "digest": "digest-action"
+                  "digest": "d83db4252eff3919679d0f2471854f9ea3b3577b11b74274c64bd7da033ec152"
                 },
                 {
                   "id": "unit-none",
-                  "digest": "digest-none"
+                  "digest": "524bcb79e731c5d0a3b8be7762351757442eaacc16a09619e97141463878911e"
                 }
               ]
             },
@@ -1418,11 +1482,20 @@
           "event_digest": "digest-event-secret-1",
           "event_type": "secret.notice",
           "occurred_at": 1000,
-          "confidentiality": "SECRET"
+          "location_ref": "room-1",
+          "confidentiality": "SECRET",
+          "payload": {
+            "observable_cues": ["visible-cue"],
+            "observable_claim_refs": ["claim-visible"],
+            "observable_evidence_refs": ["evidence-visible"],
+            "private_details": ["secret-detail"]
+          }
         },
         "task": {
           "task_id": "task-secret-1",
           "event_id": "event-secret-1",
+          "base_revision": 7,
+          "result_revision": 8,
           "perception_policy": [
             "perception-visible-first-v1",
             1,
@@ -1435,32 +1508,27 @@
           ]
         },
         "completions": [],
-        "channel_state": {
-          "event_access": {
-            "event-secret-1": [
-              "actor-1"
-            ]
+        "world_state_by_revision": {
+          "7": {
+            "channel_members": {
+              "room-channel": ["actor-1"]
+            }
           },
-          "observer_outputs": {
-            "event-secret-1": {
-              "actor-1": {
-                "percepts": [
-                  "visible-cue"
-                ],
-                "claim_refs": [
-                  "claim-visible"
-                ],
-                "evidence_chain": [
-                  "evidence-visible"
-                ],
-                "omissions_redactions": [
-                  "secret-detail"
-                ],
-                "modality": "VISION",
-                "channel_ref": "room-channel"
-              }
+          "8": {
+            "channel_members": {
+              "room-channel": ["actor-1"]
             }
           }
+        },
+        "channel_authority": {
+          "room-channel": {
+            "location_ref": "room-1",
+            "modality": "VISION"
+          }
+        },
+        "actor_authority": {
+          "actor-1": {"clearance": "SECRET", "active": true},
+          "actor-2": {"clearance": "PUBLIC", "active": true}
         },
         "candidate": {
           "task_id": "task-secret-1",
@@ -1988,10 +2056,10 @@
             "provenance": {
               "kind": "action-proposal",
               "id": "unit-action",
-              "digest": "digest-action"
+              "digest": "d83db4252eff3919679d0f2471854f9ea3b3577b11b74274c64bd7da033ec152"
             },
             "idempotency_key": null,
-            "unit_digest": "d6bb14217a51b0bae27d580e3007c02780d9977e5f0795c27174db75612ba0ab"
+            "unit_digest": "49a1bcd14cc5fe5cc5a28c062c523cef78538b24eab3075d53407acb3bc0c031"
           }
         }
       ]
@@ -2705,7 +2773,7 @@
           "path": "/transaction/events/0/source_inputs/-",
           "value": {
             "id": "unit-none",
-            "digest": "digest-none"
+            "digest": "524bcb79e731c5d0a3b8be7762351757442eaacc16a09619e97141463878911e"
           }
         },
         {
@@ -3449,7 +3517,7 @@
         {
           "op": "replace",
           "path": "/transaction/events/0/source_inputs/0",
-          "value": {"id": "unit-none", "digest": "digest-none"}
+          "value": {"id": "unit-none", "digest": "524bcb79e731c5d0a3b8be7762351757442eaacc16a09619e97141463878911e"}
         }
       ],
       "expected_error": "EVENT_DRAFT_PROJECTION_MISMATCH"
@@ -3553,6 +3621,94 @@
         }
       ],
       "expected_error": "COMMIT_SUCCESSOR_FLOOR_NOT_DERIVED"
+    },
+    {
+      "case_id": "commit.coordinated-fence-metadata-oracle-forbidden",
+      "base_scenario_id": "commit.valid",
+      "findings": [151],
+      "patch": [
+        {
+          "op": "add",
+          "path": "/fence/admitted_units/0/confidentiality",
+          "value": "PUBLIC"
+        },
+        {
+          "op": "replace",
+          "path": "/transaction/events/0/confidentiality",
+          "value": "PUBLIC"
+        }
+      ],
+      "expected_error": "ADMISSION_FENCE_UNIT_NOT_CANONICAL"
+    },
+    {
+      "case_id": "commit.coordinated-source-record-and-event-tamper",
+      "base_scenario_id": "commit.valid",
+      "findings": [151],
+      "patch": [
+        {
+          "op": "replace",
+          "path": "/source_authorities/input_ledger/unit-action/record_body/6",
+          "value": "actor-2"
+        },
+        {
+          "op": "replace",
+          "path": "/transaction/events/0/actor_refs/0",
+          "value": "actor-2"
+        }
+      ],
+      "expected_error": "SOURCE_RECORD_DIGEST_MISMATCH"
+    },
+    {
+      "case_id": "observation.coordinated-channel-oracle-forbidden",
+      "base_scenario_id": "observation.valid",
+      "findings": [152],
+      "patch": [
+        {
+          "op": "add",
+          "path": "/channel_state",
+          "value": {
+            "event_access": {"event-secret-1": ["actor-1", "actor-2"]},
+            "observer_outputs": {
+              "event-secret-1": {
+                "actor-2": {
+                  "percepts": ["secret-detail"],
+                  "claim_refs": ["claim-secret"],
+                  "evidence_chain": ["evidence-secret"],
+                  "omissions_redactions": [],
+                  "modality": "VISION",
+                  "channel_ref": "room-channel"
+                }
+              }
+            }
+          }
+        },
+        {
+          "op": "replace",
+          "path": "/candidate/observer",
+          "value": "actor-2"
+        },
+        {
+          "op": "replace",
+          "path": "/candidate/percepts",
+          "value": ["secret-detail"]
+        },
+        {
+          "op": "replace",
+          "path": "/candidate/claim_refs",
+          "value": ["claim-secret"]
+        },
+        {
+          "op": "replace",
+          "path": "/candidate/evidence_chain",
+          "value": ["evidence-secret"]
+        },
+        {
+          "op": "replace",
+          "path": "/candidate/omissions_redactions",
+          "value": []
+        }
+      ],
+      "expected_error": "OBSERVATION_ACCESS_DENIED"
     }
   ]
 }

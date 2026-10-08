@@ -1,6 +1,6 @@
 # ADR 0010 — Stack do Simulation Engine causal V1
 
-**Status:** Proposed
+**Status:** Accepted
 
 **Data:** 2026-10-08
 

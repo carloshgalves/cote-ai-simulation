@@ -1,0 +1,2136 @@
+{
+  "bundle_id": "cote.csf.registry.foundation.v1",
+  "domain_operations": [
+    ["cote.csf.id.exogenous-input", "cote.csf.schema.exogenous-input-id-preimage", 1],
+    ["cote.csf.id.source-closure", "cote.csf.schema.source-closure-id-preimage", 1],
+    ["cote.csf.id.cycle", "cote.csf.schema.cycle-id-preimage", 1],
+    ["cote.csf.id.occurrence", "cote.csf.schema.occurrence-id-preimage", 1],
+    ["cote.csf.id.decision-round", "cote.csf.schema.decision-round-id-preimage", 1],
+    ["cote.csf.id.trigger-activation", "cote.csf.schema.trigger-activation-id-preimage", 1],
+    ["cote.csf.id.action-proposal", "cote.csf.schema.slot-response-id-preimage", 1],
+    ["cote.csf.id.no-proposal", "cote.csf.schema.slot-response-id-preimage", 1],
+    ["cote.csf.id.cohort", "cote.csf.schema.cohort-id-preimage", 1],
+    ["cote.csf.id.decision", "cote.csf.schema.decision-id-preimage", 1],
+    ["cote.csf.id.commit-candidate", "cote.csf.schema.candidate-id-preimage", 1],
+    ["cote.csf.id.event", "cote.csf.schema.event-id-preimage", 1],
+    ["cote.csf.id.dispatch", "cote.csf.schema.dispatch-id-preimage", 1],
+    ["cote.csf.id.perception-task", "cote.csf.schema.perception-task-id-preimage", 1],
+    ["cote.csf.id.observation", "cote.csf.schema.observation-id-preimage", 1],
+    ["cote.csf.id.knowledge-input", "cote.csf.schema.knowledge-input-id-preimage", 1],
+    ["cote.csf.id.perception-completion", "cote.csf.schema.perception-completion-id-preimage", 1],
+    ["cote.csf.id.claim", "cote.csf.schema.claim-id-preimage", 1],
+    ["cote.csf.id.transmission", "cote.csf.schema.transmission-id-preimage", 1],
+    ["cote.csf.id.conflict-set", "cote.csf.schema.conflict-set-id-preimage", 1],
+    ["cote.csf.digest.source-closure", "cote.csf.schema.source-closure", 1],
+    ["cote.csf.digest.round-declaration", "cote.csf.schema.round-declaration", 1],
+    ["cote.csf.digest.slot-dispatch", "cote.csf.schema.slot-dispatch", 1],
+    ["cote.csf.digest.slot-dispatch-revocation", "cote.csf.schema.slot-dispatch-revocation", 1],
+    ["cote.csf.digest.slot-request", "cote.csf.schema.slot-request-preimage", 1],
+    ["cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1],
+    ["cote.csf.digest.action-proposal-unit", "cote.csf.schema.action-proposal.body", 1],
+    ["cote.csf.digest.no-proposal-unit", "cote.csf.schema.no-proposal.body", 1],
+    ["cote.csf.digest.occurrence-unit", "cote.csf.schema.scheduled-occurrence.body", 1],
+    ["cote.csf.digest.trigger-activation-unit", "cote.csf.schema.trigger-activation.body", 1],
+    ["cote.csf.digest.trigger-definition", "cote.csf.schema.trigger-definition", 1],
+    ["cote.csf.digest.trigger-runtime", "cote.csf.schema.trigger-runtime-state", 1],
+    ["cote.csf.digest.trigger-predicate-result", "cote.csf.schema.typed-value", 1],
+    ["cote.csf.digest.input", "cote.csf.schema.admitted-unit-list", 1],
+    ["cote.csf.digest.fence", "cote.csf.schema.admission-fence.body", 1],
+    ["cote.csf.digest.affordance-assessment", "cote.csf.schema.affordance-assessment.body", 1],
+    ["cote.csf.digest.commit-candidate", "cote.csf.schema.commit-candidate.body", 1],
+    ["cote.csf.digest.conflict-set", "cote.csf.schema.conflict-set.body", 1],
+    ["cote.csf.digest.decision-record", "cote.csf.schema.decision-record.body", 1],
+    ["cote.csf.digest.decision", "cote.csf.schema.decision-pair-list", 1],
+    ["cote.csf.digest.event", "cote.csf.schema.event.body", 1],
+    ["cote.csf.digest.batch", "cote.csf.schema.batch-preimage", 1],
+    ["cote.csf.digest.abort", "cote.csf.schema.cycle-abort.body", 1],
+    ["cote.csf.digest.perception-task-list", "cote.csf.schema.perception-task-id-list", 1],
+    ["cote.csf.digest.perception-completion", "cote.csf.schema.perception-task-completion.body", 1],
+    ["cote.csf.digest.attempt-retry", "cote.csf.schema.attempt-retry", 1],
+    ["cote.csf.digest.cycle-control-state", "cote.csf.schema.cycle-control-state", 1],
+    ["cote.csf.digest.perception-task", "cote.csf.schema.perception-task", 1],
+    ["cote.csf.digest.claim", "cote.csf.schema.claim.body", 1],
+    ["cote.csf.digest.transmission", "cote.csf.schema.transmission.body", 1],
+    ["cote.csf.digest.observation", "cote.csf.schema.observation.body", 1],
+    ["cote.csf.digest.knowledge-input", "cote.csf.schema.knowledge-input.body", 1],
+    ["cote.csf.digest.epistemic-checkpoint", "cote.csf.schema.epistemic-checkpoint-ref", 1],
+    ["cote.csf.digest.genesis-manifest", "cote.csf.schema.genesis-manifest", 1],
+    ["cote.csf.digest.idempotency", "cote.csf.schema.idempotency-preimage", 1],
+    ["cote.csf.digest.indeterminate-evidence-refs", "cote.csf.schema.indeterminate-evidence-ref-list", 1],
+    ["cote.csf.digest.ledger-prefix", "cote.csf.schema.ledger-prefix-digest-preimage", 1],
+    ["cote.csf.record.source-ingress-receipt", "cote.csf.schema.source-ingress-receipt", 1],
+    ["cote.csf.snapshot.pending-state", "cote.csf.schema.snapshot-pending-state", 1],
+    ["cote.csf.hash.world-state", "cote.csf.schema.typed-value", 1],
+    ["cote.csf.hash.snapshot", "cote.csf.schema.snapshot.body", 1],
+    ["cote.csf.id.admission-fence", "cote.csf.schema.admission-fence-id-preimage", 1],
+    ["cote.csf.id.cycle-commit", "cote.csf.schema.cycle-commit-id-preimage", 1],
+    ["cote.csf.id.cycle-abort", "cote.csf.schema.cycle-abort-id-preimage", 1],
+    ["cote.csf.id.attempt-retry", "cote.csf.schema.attempt-retry-id-preimage", 1],
+    ["cote.csf.id.snapshot", "cote.csf.schema.snapshot-id-preimage", 1],
+    ["cote.csf.id.genesis", "cote.csf.schema.genesis-id-preimage", 1],
+    ["cote.csf.id.epistemic-checkpoint", "cote.csf.schema.epistemic-checkpoint-id-preimage", 1],
+    ["cote.csf.digest.idempotency-identity", "cote.csf.schema.idempotency-identity", 1],
+    ["cote.csf.id.affordance-assessment", "cote.csf.schema.affordance-assessment-id-preimage", 1],
+    ["cote.csf.id.rng-draw", "cote.csf.schema.rng-draw-id-preimage", 1],
+    ["cote.csf.digest.rng-draw", "cote.csf.schema.rng-draw.body", 1],
+    ["cote.csf.id.provisional-disposition", "cote.csf.schema.provisional-disposition-id-preimage", 1],
+    ["cote.csf.digest.provisional-disposition", "cote.csf.schema.provisional-disposition.body", 1],
+    ["cote.csf.id.attempt-failure", "cote.csf.schema.attempt-failure-id-preimage", 1],
+    ["cote.csf.digest.attempt-failure", "cote.csf.schema.attempt-failure.body", 1]
+  ],
+  "fixture_domain_operations": [
+    ["cote.csf.record.source-ingress-receipt", "cote.csf.schema.source-ingress-receipt", 1],
+    ["cote.csf.digest.abort", "cote.csf.schema.cycle-abort.body", 1],
+    ["cote.csf.digest.action-proposal-unit", "cote.csf.schema.action-proposal.body", 1],
+    ["cote.csf.digest.affordance-assessment", "cote.csf.schema.affordance-assessment.body", 1],
+    ["cote.csf.digest.attempt-retry", "cote.csf.schema.attempt-retry", 1],
+    ["cote.csf.digest.batch", "cote.csf.schema.batch-preimage", 1],
+    ["cote.csf.digest.claim", "cote.csf.schema.claim.body", 1],
+    ["cote.csf.digest.commit-candidate", "cote.csf.schema.commit-candidate.body", 1],
+    ["cote.csf.digest.conflict-set", "cote.csf.schema.conflict-set.body", 1],
+    ["cote.csf.digest.cycle-control-state", "cote.csf.schema.cycle-control-state", 1],
+    ["cote.csf.digest.decision", "cote.csf.schema.decision-pair-list", 1],
+    ["cote.csf.digest.decision-record", "cote.csf.schema.decision-record.body", 1],
+    ["cote.csf.digest.epistemic-checkpoint", "cote.csf.schema.epistemic-checkpoint-ref", 1],
+    ["cote.csf.digest.event", "cote.csf.schema.event.body", 1],
+    ["cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1],
+    ["cote.csf.digest.fence", "cote.csf.schema.admission-fence.body", 1],
+    ["cote.csf.digest.genesis-manifest", "cote.csf.schema.genesis-manifest", 1],
+    ["cote.csf.digest.idempotency", "cote.csf.schema.idempotency-preimage", 1],
+    ["cote.csf.digest.idempotency-identity", "cote.csf.schema.idempotency-identity", 1],
+    ["cote.csf.digest.indeterminate-evidence-refs", "cote.csf.schema.indeterminate-evidence-ref-list", 1],
+    ["cote.csf.digest.ledger-prefix", "cote.csf.schema.ledger-prefix-digest-preimage", 1],
+    ["cote.csf.digest.input", "cote.csf.schema.admitted-unit-list", 1],
+    ["cote.csf.digest.knowledge-input", "cote.csf.schema.knowledge-input.body", 1],
+    ["cote.csf.digest.no-proposal-unit", "cote.csf.schema.no-proposal.body", 1],
+    ["cote.csf.digest.observation", "cote.csf.schema.observation.body", 1],
+    ["cote.csf.digest.occurrence-unit", "cote.csf.schema.scheduled-occurrence.body", 1],
+    ["cote.csf.digest.perception-completion", "cote.csf.schema.perception-task-completion.body", 1],
+    ["cote.csf.digest.perception-task", "cote.csf.schema.perception-task", 1],
+    ["cote.csf.digest.perception-task-list", "cote.csf.schema.perception-task-id-list", 1],
+    ["cote.csf.digest.round-declaration", "cote.csf.schema.round-declaration", 1],
+    ["cote.csf.digest.slot-dispatch", "cote.csf.schema.slot-dispatch", 1],
+    ["cote.csf.digest.slot-dispatch-revocation", "cote.csf.schema.slot-dispatch-revocation", 1],
+    ["cote.csf.digest.slot-request", "cote.csf.schema.slot-request-preimage", 1],
+    ["cote.csf.digest.source-closure", "cote.csf.schema.source-closure", 1],
+    ["cote.csf.digest.transmission", "cote.csf.schema.transmission.body", 1],
+    ["cote.csf.digest.trigger-activation-unit", "cote.csf.schema.trigger-activation.body", 1],
+    ["cote.csf.digest.trigger-definition", "cote.csf.schema.trigger-definition", 1],
+    ["cote.csf.digest.trigger-predicate-result", "cote.csf.schema.typed-value", 1],
+    ["cote.csf.digest.trigger-runtime", "cote.csf.schema.trigger-runtime-state", 1],
+    ["cote.csf.hash.snapshot", "cote.csf.schema.snapshot.body", 1],
+    ["cote.csf.hash.world-state", "cote.csf.schema.typed-value", 1],
+    ["cote.csf.id.action-proposal", "cote.csf.schema.slot-response-id-preimage", 1],
+    ["cote.csf.id.admission-fence", "cote.csf.schema.admission-fence-id-preimage", 1],
+    ["cote.csf.id.attempt-retry", "cote.csf.schema.attempt-retry-id-preimage", 1],
+    ["cote.csf.id.claim", "cote.csf.schema.claim-id-preimage", 1],
+    ["cote.csf.id.cohort", "cote.csf.schema.cohort-id-preimage", 1],
+    ["cote.csf.id.commit-candidate", "cote.csf.schema.candidate-id-preimage", 1],
+    ["cote.csf.id.conflict-set", "cote.csf.schema.conflict-set-id-preimage", 1],
+    ["cote.csf.id.cycle", "cote.csf.schema.cycle-id-preimage", 1],
+    ["cote.csf.id.cycle-abort", "cote.csf.schema.cycle-abort-id-preimage", 1],
+    ["cote.csf.id.cycle-commit", "cote.csf.schema.cycle-commit-id-preimage", 1],
+    ["cote.csf.id.decision", "cote.csf.schema.decision-id-preimage", 1],
+    ["cote.csf.id.decision-round", "cote.csf.schema.decision-round-id-preimage", 1],
+    ["cote.csf.id.dispatch", "cote.csf.schema.dispatch-id-preimage", 1],
+    ["cote.csf.id.epistemic-checkpoint", "cote.csf.schema.epistemic-checkpoint-id-preimage", 1],
+    ["cote.csf.id.event", "cote.csf.schema.event-id-preimage", 1],
+    ["cote.csf.id.exogenous-input", "cote.csf.schema.exogenous-input-id-preimage", 1],
+    ["cote.csf.id.genesis", "cote.csf.schema.genesis-id-preimage", 1],
+    ["cote.csf.id.knowledge-input", "cote.csf.schema.knowledge-input-id-preimage", 1],
+    ["cote.csf.id.no-proposal", "cote.csf.schema.slot-response-id-preimage", 1],
+    ["cote.csf.id.observation", "cote.csf.schema.observation-id-preimage", 1],
+    ["cote.csf.id.occurrence", "cote.csf.schema.occurrence-id-preimage", 1],
+    ["cote.csf.id.perception-completion", "cote.csf.schema.perception-completion-id-preimage", 1],
+    ["cote.csf.id.perception-task", "cote.csf.schema.perception-task-id-preimage", 1],
+    ["cote.csf.id.snapshot", "cote.csf.schema.snapshot-id-preimage", 1],
+    ["cote.csf.id.source-closure", "cote.csf.schema.source-closure-id-preimage", 1],
+    ["cote.csf.id.transmission", "cote.csf.schema.transmission-id-preimage", 1],
+    ["cote.csf.id.trigger-activation", "cote.csf.schema.trigger-activation-id-preimage", 1],
+    ["cote.csf.test.a", "cote.csf.test.scalar", 1],
+    ["cote.csf.test.action-proposal", "cote.csf.schema.action-proposal", 1],
+    ["cote.csf.test.admission-fence", "cote.csf.schema.admission-fence", 1],
+    ["cote.csf.test.affordance-assessment", "cote.csf.schema.affordance-assessment", 1],
+    ["cote.csf.test.attempt-retry", "cote.csf.schema.attempt-retry", 1],
+    ["cote.csf.test.b", "cote.csf.test.scalar", 1],
+    ["cote.csf.test.bool", "cote.csf.test.bool", 1],
+    ["cote.csf.test.bytes", "cote.csf.test.bytes", 1],
+    ["cote.csf.test.bytes32", "cote.csf.test.bytes32", 1],
+    ["cote.csf.test.rng-result", "cote.csf.test.bytes32", 1],
+    ["cote.csf.snapshot.pending-state", "cote.csf.schema.snapshot-pending-state", 1],
+    ["cote.csf.test.claim", "cote.csf.schema.claim", 1],
+    ["cote.csf.test.commit-candidate", "cote.csf.schema.commit-candidate", 1],
+    ["cote.csf.test.conflict-set", "cote.csf.schema.conflict-set", 1],
+    ["cote.csf.test.cycle-abort", "cote.csf.schema.cycle-abort", 1],
+    ["cote.csf.test.cycle-commit", "cote.csf.schema.cycle-commit", 1],
+    ["cote.csf.test.cycle-control-state", "cote.csf.schema.cycle-control-state", 1],
+    ["cote.csf.test.decision-record", "cote.csf.schema.decision-record", 1],
+    ["cote.csf.test.duration", "cote.csf.test.duration", 1],
+    ["cote.csf.test.enum-u8", "cote.csf.test.enum-u8", 1],
+    ["cote.csf.test.epistemic-checkpoint-ref", "cote.csf.schema.epistemic-checkpoint-ref", 1],
+    ["cote.csf.test.event", "cote.csf.schema.event", 1],
+    ["cote.csf.test.exogenous-input", "cote.csf.schema.exogenous-input", 1],
+    ["cote.csf.test.float", "cote.csf.test.float", 1],
+    ["cote.csf.test.genesis-manifest", "cote.csf.schema.genesis-manifest", 1],
+    ["cote.csf.test.i64", "cote.csf.test.i64", 1],
+    ["cote.csf.test.id", "cote.csf.test.id", 1],
+    ["cote.csf.test.idempotency-identity", "cote.csf.schema.idempotency-identity", 1],
+    ["cote.csf.test.knowledge-input", "cote.csf.schema.knowledge-input", 1],
+    ["cote.csf.test.map-order", "cote.csf.test.map-order", 1],
+    ["cote.csf.test.nint", "cote.csf.test.nint", 1],
+    ["cote.csf.test.no-proposal", "cote.csf.schema.no-proposal", 1],
+    ["cote.csf.test.null", "cote.csf.test.null", 1],
+    ["cote.csf.test.observation", "cote.csf.schema.observation", 1],
+    ["cote.csf.test.optional", "cote.csf.test.optional", 1],
+    ["cote.csf.test.optional-null", "cote.csf.test.optional-null", 1],
+    ["cote.csf.test.ordered-list", "cote.csf.test.ordered-list", 1],
+    ["cote.csf.test.perception-task", "cote.csf.schema.perception-task", 1],
+    ["cote.csf.test.perception-task-completion", "cote.csf.schema.perception-task-completion", 1],
+    ["cote.csf.test.proposition", "cote.csf.schema.proposition", 1],
+    ["cote.csf.test.round-declaration", "cote.csf.schema.round-declaration", 1],
+    ["cote.csf.test.scheduled-occurrence", "cote.csf.schema.scheduled-occurrence", 1],
+    ["cote.csf.test.separation", "cote.csf.test.scalar-a", 1],
+    ["cote.csf.test.separation", "cote.csf.test.scalar-b", 1],
+    ["cote.csf.test.separation", "cote.csf.test.versioned", 1],
+    ["cote.csf.test.separation", "cote.csf.test.versioned", 2],
+    ["cote.csf.test.set", "cote.csf.test.set", 1],
+    ["cote.csf.test.slot-dispatch", "cote.csf.schema.slot-dispatch", 1],
+    ["cote.csf.test.slot-dispatch-revocation", "cote.csf.schema.slot-dispatch-revocation", 1],
+    ["cote.csf.test.snapshot", "cote.csf.schema.snapshot", 1],
+    ["cote.csf.test.source-closure", "cote.csf.schema.source-closure", 1],
+    ["cote.csf.test.text", "cote.csf.test.text", 1],
+    ["cote.csf.test.timestamp", "cote.csf.test.timestamp", 1],
+    ["cote.csf.test.transmission", "cote.csf.schema.transmission", 1],
+    ["cote.csf.test.trigger-activation", "cote.csf.schema.trigger-activation", 1],
+    ["cote.csf.test.trigger-definition", "cote.csf.schema.trigger-definition", 1],
+    ["cote.csf.test.trigger-runtime-state", "cote.csf.schema.trigger-runtime-state", 1],
+    ["cote.csf.test.u64", "cote.csf.test.u64", 1],
+    ["cote.csf.test.uint", "cote.csf.test.uint", 1],
+    ["cote.csf.id.affordance-assessment", "cote.csf.schema.affordance-assessment-id-preimage", 1],
+    ["cote.csf.id.rng-draw", "cote.csf.schema.rng-draw-id-preimage", 1],
+    ["cote.csf.digest.rng-draw", "cote.csf.schema.rng-draw.body", 1],
+    ["cote.csf.id.provisional-disposition", "cote.csf.schema.provisional-disposition-id-preimage", 1],
+    ["cote.csf.digest.provisional-disposition", "cote.csf.schema.provisional-disposition.body", 1],
+    ["cote.csf.id.attempt-failure", "cote.csf.schema.attempt-failure-id-preimage", 1],
+    ["cote.csf.digest.attempt-failure", "cote.csf.schema.attempt-failure.body", 1],
+    ["cote.csf.test.rng-draw", "cote.csf.schema.rng-draw", 1],
+    ["cote.csf.test.provisional-disposition", "cote.csf.schema.provisional-disposition", 1],
+    ["cote.csf.test.attempt-failure", "cote.csf.schema.attempt-failure", 1]
+  ],
+  "schemas": [
+    ["cote.csf.schema.source-closure", 1, "source-closure"],
+    ["cote.csf.schema.source-ingress-receipt", 1, "source-ingress-receipt"],
+    ["cote.csf.schema.exogenous-input", 1, "exogenous-input"],
+    ["cote.csf.schema.exogenous-input.body", 1, "exogenous-input-body"],
+    ["cote.csf.schema.round-declaration", 1, "round-declaration"],
+    ["cote.csf.schema.slot-dispatch", 1, "slot-dispatch"],
+    ["cote.csf.schema.slot-dispatch-revocation", 1, "slot-dispatch-revocation"],
+    ["cote.csf.schema.action-proposal", 1, "action-proposal"],
+    ["cote.csf.schema.action-proposal.body", 1, "action-proposal-body"],
+    ["cote.csf.schema.no-proposal", 1, "no-proposal"],
+    ["cote.csf.schema.no-proposal.body", 1, "no-proposal-body"],
+    ["cote.csf.schema.scheduled-occurrence", 1, "scheduled-occurrence"],
+    ["cote.csf.schema.scheduled-occurrence.body", 1, "scheduled-occurrence-body"],
+    ["cote.csf.schema.trigger-definition", 1, "trigger-definition"],
+    ["cote.csf.schema.trigger-runtime-state", 1, "trigger-runtime-state"],
+    ["cote.csf.schema.trigger-activation", 1, "trigger-activation"],
+    ["cote.csf.schema.trigger-activation.body", 1, "trigger-activation-body"],
+    ["cote.csf.schema.admission-fence", 1, "admission-fence"],
+    ["cote.csf.schema.admission-fence.body", 1, "admission-fence-body"],
+    ["cote.csf.schema.affordance-assessment", 1, "affordance-assessment"],
+    ["cote.csf.schema.affordance-assessment.body", 1, "affordance-assessment-body"],
+    ["cote.csf.schema.commit-candidate", 1, "commit-candidate"],
+    ["cote.csf.schema.commit-candidate.body", 1, "commit-candidate-body"],
+    ["cote.csf.schema.conflict-set", 1, "conflict-set"],
+    ["cote.csf.schema.conflict-set.body", 1, "conflict-set-body"],
+    ["cote.csf.schema.decision-record", 1, "decision-record"],
+    ["cote.csf.schema.decision-record.body", 1, "decision-record-body"],
+    ["cote.csf.schema.cycle-commit", 1, "cycle-commit"],
+    ["cote.csf.schema.cycle-commit.body", 1, "cycle-commit-body"],
+    ["cote.csf.schema.cycle-abort", 1, "cycle-abort-record"],
+    ["cote.csf.schema.cycle-abort.body", 1, "cycle-abort-body"],
+    ["cote.csf.schema.attempt-retry", 1, "attempt-retry-record"],
+    ["cote.csf.schema.cycle-control-state", 1, "cycle-control-state"],
+    ["cote.csf.schema.event", 1, "event"],
+    ["cote.csf.schema.event.body", 1, "event-body"],
+    ["cote.csf.schema.perception-task", 1, "perception-task"],
+    ["cote.csf.schema.perception-task-completion", 1, "perception-task-completion"],
+    ["cote.csf.schema.perception-task-completion.body", 1, "perception-task-completion-body"],
+    ["cote.csf.schema.proposition", 1, "proposition"],
+    ["cote.csf.schema.claim", 1, "claim"],
+    ["cote.csf.schema.claim.body", 1, "claim-body"],
+    ["cote.csf.schema.transmission", 1, "transmission"],
+    ["cote.csf.schema.transmission.body", 1, "transmission-body"],
+    ["cote.csf.schema.observation", 1, "observation"],
+    ["cote.csf.schema.observation.body", 1, "observation-body"],
+    ["cote.csf.schema.knowledge-input", 1, "knowledge-input"],
+    ["cote.csf.schema.knowledge-input.body", 1, "knowledge-input-body"],
+    ["cote.csf.schema.epistemic-checkpoint-ref", 1, "epistemic-checkpoint-ref"],
+    ["cote.csf.schema.genesis-manifest", 1, "genesis-manifest"],
+    ["cote.csf.schema.snapshot", 1, "snapshot"],
+    ["cote.csf.schema.snapshot.body", 1, "snapshot-body"],
+    ["cote.csf.schema.snapshot-pending-state", 1, "snapshot-pending-state"],
+    ["cote.csf.schema.typed-value", 1, "typed-value"],
+    ["cote.csf.schema.admitted-unit-list", 1, "admitted-unit-list"],
+    ["cote.csf.schema.indeterminate-evidence-ref-list", 1, "indeterminate-evidence-ref-list"],
+    ["cote.csf.schema.decision-pair-list", 1, "decision-pair-list"],
+    ["cote.csf.schema.perception-task-id-list", 1, "perception-task-id-list"],
+    ["cote.csf.schema.batch-preimage", 1, "batch-preimage"],
+    ["cote.csf.schema.ledger-prefix-digest-preimage", 1, "ledger-prefix-digest-preimage"],
+    ["cote.csf.schema.idempotency-preimage", 1, "idempotency-preimage"],
+    ["cote.csf.schema.slot-request-preimage", 1, "slot-request-preimage"],
+    ["cote.csf.schema.conflict-set-id-preimage", 1, "conflict-set-id-preimage"],
+    ["cote.csf.schema.exogenous-input-id-preimage", 1, "exogenous-input-id-preimage"],
+    ["cote.csf.schema.source-closure-id-preimage", 1, "source-closure-id-preimage"],
+    ["cote.csf.schema.cycle-id-preimage", 1, "cycle-id-preimage"],
+    ["cote.csf.schema.origin-role-id-preimage", 1, "origin-role-id-preimage"],
+    ["cote.csf.schema.trigger-activation-id-preimage", 1, "trigger-activation-id-preimage"],
+    ["cote.csf.schema.slot-response-id-preimage", 1, "slot-response-id-preimage"],
+    ["cote.csf.schema.cohort-id-preimage", 1, "cohort-id-preimage"],
+    ["cote.csf.schema.decision-id-preimage", 1, "decision-id-preimage"],
+    ["cote.csf.schema.candidate-id-preimage", 1, "candidate-id-preimage"],
+    ["cote.csf.schema.event-id-preimage", 1, "event-id-preimage"],
+    ["cote.csf.schema.dispatch-id-preimage", 1, "dispatch-id-preimage"],
+    ["cote.csf.schema.perception-task-id-preimage", 1, "perception-task-id-preimage"],
+    ["cote.csf.schema.observation-id-preimage", 1, "observation-id-preimage"],
+    ["cote.csf.schema.knowledge-input-id-preimage", 1, "knowledge-input-id-preimage"],
+    ["cote.csf.schema.perception-completion-id-preimage", 1, "perception-completion-id-preimage"],
+    ["cote.csf.schema.idempotency-identity", 1, "idempotency-identity"],
+    ["cote.csf.schema.occurrence-id-preimage", 1, "occurrence-id-preimage"],
+    ["cote.csf.schema.decision-round-id-preimage", 1, "decision-round-id-preimage"],
+    ["cote.csf.schema.claim-id-preimage", 1, "claim-id-preimage"],
+    ["cote.csf.schema.transmission-id-preimage", 1, "transmission-id-preimage"],
+    ["cote.csf.schema.admission-fence-id-preimage", 1, "admission-fence-id-preimage"],
+    ["cote.csf.schema.cycle-commit-id-preimage", 1, "cycle-commit-id-preimage"],
+    ["cote.csf.schema.cycle-abort-id-preimage", 1, "cycle-abort-id-preimage"],
+    ["cote.csf.schema.attempt-retry-id-preimage", 1, "attempt-retry-id-preimage"],
+    ["cote.csf.schema.snapshot-id-preimage", 1, "snapshot-id-preimage"],
+    ["cote.csf.schema.genesis-id-preimage", 1, "genesis-id-preimage"],
+    ["cote.csf.schema.epistemic-checkpoint-id-preimage", 1, "epistemic-checkpoint-id-preimage"],
+    ["cote.csf.schema.affordance-assessment-id-preimage", 1, "affordance-assessment-id-preimage"],
+    ["cote.csf.schema.rng-draw", 1, "rng-draw"],
+    ["cote.csf.schema.rng-draw.body", 1, "rng-draw-body"],
+    ["cote.csf.schema.rng-draw-id-preimage", 1, "rng-draw-id-preimage"],
+    ["cote.csf.schema.provisional-disposition", 1, "provisional-disposition"],
+    ["cote.csf.schema.provisional-disposition.body", 1, "provisional-disposition-body"],
+    ["cote.csf.schema.provisional-disposition-id-preimage", 1, "provisional-disposition-id-preimage"],
+    ["cote.csf.schema.attempt-failure", 1, "attempt-failure"],
+    ["cote.csf.schema.attempt-failure.body", 1, "attempt-failure-body"],
+    ["cote.csf.schema.attempt-failure-id-preimage", 1, "attempt-failure-id-preimage"]
+  ],
+  "fixture_schemas": [
+    ["cote.csf.test.bytes32", 1, "test-bytes32"],
+    ["cote.csf.test.null", 1, "test-null"],
+    ["cote.csf.test.bool", 1, "test-bool"],
+    ["cote.csf.test.uint", 1, "test-uint"],
+    ["cote.csf.test.u8", 1, "test-u8"],
+    ["cote.csf.test.nint", 1, "test-nint"],
+    ["cote.csf.test.bytes", 1, "test-bytes"],
+    ["cote.csf.test.text", 1, "test-text"],
+    ["cote.csf.test.ordered-list", 1, "test-ordered-list"],
+    ["cote.csf.test.set", 1, "test-set"],
+    ["cote.csf.test.set-dedup-exact", 1, "test-set-dedup-exact"],
+    ["cote.csf.test.optional", 1, "test-optional"],
+    ["cote.csf.test.optional-null", 1, "test-optional-null"],
+    ["cote.csf.test.id", 1, "test-id"],
+    ["cote.csf.test.scalar", 1, "test-scalar"],
+    ["cote.csf.test.scalar-a", 1, "test-scalar"],
+    ["cote.csf.test.scalar-b", 1, "test-scalar"],
+    ["cote.csf.test.versioned", 1, "test-scalar"],
+    ["cote.csf.test.versioned", 2, "test-scalar"],
+    ["cote.csf.test.map-order", 1, "test-map-order"],
+    ["cote.csf.test.array", 1, "test-array"],
+    ["cote.csf.test.map", 1, "test-map"],
+    ["cote.csf.test.float", 1, "test-float"],
+    ["cote.csf.test.timestamp", 1, "test-timestamp"],
+    ["cote.csf.test.duration", 1, "test-duration"],
+    ["cote.csf.test.i64", 1, "test-i64"],
+    ["cote.csf.test.u64", 1, "test-u64"],
+    ["cote.csf.test.empty", 1, "test-empty"],
+    ["cote.csf.test.machine-id", 1, "test-machine-id"],
+    ["cote.csf.test.enum-u8", 1, "test-enum-u8"]
+  ],
+  "enums": {
+    "abort_reason": [
+      ["indeterminate_facet", 0],
+      ["invariant_violation", 1],
+      ["reducer_failure", 2],
+      ["schema_failure", 3],
+      ["provenance_failure", 4],
+      ["idempotency_conflict", 5],
+      ["cascade_limit", 6]
+    ],
+    "activation_policy": [
+      ["rising_edge", 0],
+      ["falling_edge", 1],
+      ["once_when_true", 2],
+      ["repeat_while_true", 3]
+    ],
+    "confidentiality": [
+      ["public", 0],
+      ["restricted", 1],
+      ["secret", 2]
+    ],
+    "conflict_kind": [
+      ["resource", 0],
+      ["write", 1],
+      ["invariant", 2]
+    ],
+    "created_by_variant": [
+      ["event", 0],
+      ["input", 1],
+      ["genesis", 2]
+    ],
+    "round_created_by_variant": [
+      ["event", 0],
+      ["genesis", 2]
+    ],
+    "cycle_kind": [
+      ["work", 0],
+      ["clock_advance", 1]
+    ],
+    "cycle_control_status": [
+      ["idle", 0],
+      ["attempt_in_flight", 1],
+      ["retry_authorized", 2],
+      ["halted_on_abort", 3]
+    ],
+    "disposition": [
+      ["commit", 0],
+      ["reject", 1],
+      ["defer", 2],
+      ["no_proposal", 3],
+      ["deduplicated", 4]
+    ],
+    "provisional_disposition": [
+      ["commit", 0],
+      ["reject", 1],
+      ["defer", 2]
+    ],
+    "attempt_failure_stage": [
+      ["invariant", 0],
+      ["reducer", 1],
+      ["schema", 2],
+      ["provenance", 3],
+      ["idempotency", 4],
+      ["cascade", 5]
+    ],
+    "entity_kind": [
+      ["actor", 0],
+      ["location", 1],
+      ["resource", 2],
+      ["domain", 3]
+    ],
+    "facet": [
+      ["physical", 0],
+      ["access", 1],
+      ["resource", 2],
+      ["temporal", 3],
+      ["institutional", 4],
+      ["legal", 5]
+    ],
+    "facet_status": [
+      ["satisfied", 0],
+      ["unsatisfied", 1],
+      ["not_applicable", 2],
+      ["indeterminate", 3]
+    ],
+    "knowledge_kind": [
+      ["direct_percept", 0],
+      ["communicated_claim", 1],
+      ["publication", 2]
+    ],
+    "lifecycle": [
+      ["pending", 0],
+      ["cancelled", 1],
+      ["consumed", 2]
+    ],
+    "pending_consumed_lifecycle": [
+      ["pending", 0],
+      ["consumed", 2]
+    ],
+    "pending_lifecycle": [
+      ["pending", 0]
+    ],
+    "modality": [
+      ["visual", 0],
+      ["auditory", 1],
+      ["tactile", 2],
+      ["interoceptive", 3],
+      ["documentary", 4],
+      ["digital", 5]
+    ],
+    "no_proposal_reason": [
+      ["actor_declined", 0],
+      ["timeout", 1],
+      ["responder_failure", 2]
+    ],
+    "phase": [
+      ["temporal_advance", 0],
+      ["candidate_domain", 1],
+      ["source_lifecycle", 2],
+      ["trigger_runtime", 3],
+      ["trigger_activation", 4]
+    ],
+    "policy_effect": [
+      ["blocks_execution", 0],
+      ["records_violation", 1],
+      ["informational", 2]
+    ],
+    "polarity": [
+      ["affirmed", 0],
+      ["negated", 1],
+      ["unknown", 2]
+    ],
+    "optional_variant": [
+      ["absent", 0],
+      ["present", 1]
+    ],
+    "reference_kind": [
+      ["event", 0],
+      ["exogenous_input", 1],
+      ["source_closure", 2],
+      ["round", 3],
+      ["dispatch", 4],
+      ["action_proposal", 5],
+      ["occurrence", 6],
+      ["trigger_activation", 7],
+      ["commit_candidate", 8],
+      ["conflict_set", 9],
+      ["decision", 10],
+      ["admission_fence", 11],
+      ["cycle_commit", 12],
+      ["cycle_abort", 13],
+      ["attempt_retry", 14],
+      ["perception_task", 15],
+      ["observation", 16],
+      ["knowledge_input", 17],
+      ["claim", 18],
+      ["transmission", 19],
+      ["snapshot", 20],
+      ["genesis", 21],
+      ["epistemic_checkpoint", 22],
+      ["no_proposal", 23],
+      ["rng_draw", 24],
+      ["affordance_assessment", 25],
+      ["provisional_disposition", 26],
+      ["attempt_failure", 27]
+    ],
+    "source_closure_reference_kind": [
+      ["source_closure", 2]
+    ],
+    "slot_response_reference_kind": [
+      ["action_proposal", 5],
+      ["no_proposal", 23]
+    ],
+    "action_proposal_reference_kind": [
+      ["action_proposal", 5]
+    ],
+    "conflict_set_reference_kind": [
+      ["conflict_set", 9]
+    ],
+    "rng_draw_reference_kind": [
+      ["rng_draw", 24]
+    ],
+    "failure_evidence_reference_kind": [
+      ["conflict_set", 9],
+      ["rng_draw", 24],
+      ["affordance_assessment", 25],
+      ["provisional_disposition", 26],
+      ["attempt_failure", 27]
+    ],
+    "admission_fence_reference_kind": [
+      ["admission_fence", 11]
+    ],
+    "terminal_envelope_reference_kind": [
+      ["cycle_commit", 12],
+      ["cycle_abort", 13]
+    ],
+    "cycle_abort_reference_kind": [
+      ["cycle_abort", 13]
+    ],
+    "cycle_commit_reference_kind": [
+      ["cycle_commit", 12]
+    ],
+    "attempt_retry_reference_kind": [
+      ["attempt_retry", 14]
+    ],
+    "observation_reference_kind": [
+      ["observation", 16]
+    ],
+    "claim_reference_kind": [
+      ["claim", 18]
+    ],
+    "recurrence_kind": [
+      ["fixed_interval", 0]
+    ],
+    "resource_mode": [
+      ["read", 0],
+      ["reserve", 1],
+      ["consume", 2],
+      ["write", 3]
+    ],
+    "revocation_reason": [
+      ["resume_reissue", 0],
+      ["liveness_policy", 1],
+      ["operator", 2]
+    ],
+    "slot_response_kind": [
+      ["action_proposal", 0],
+      ["no_proposal", 1]
+    ],
+    "transmission_status": [
+      ["in_transit", 0],
+      ["delivered", 1],
+      ["failed", 2],
+      ["cancelled", 3]
+    ],
+    "transmission_content_variant": [
+      ["claims", 0],
+      ["encoded", 1]
+    ],
+    "trigger_origin_variant": [
+      ["cycle", 0],
+      ["genesis", 1]
+    ],
+    "checkpoint_content_variant": [
+      ["ref", 0],
+      ["inline", 1]
+    ],
+    "unit_kind": [
+      ["slot", 0],
+      ["exogenous_input", 1],
+      ["scheduled_occurrence", 2],
+      ["trigger_activation", 3],
+      ["round_declaration", 4]
+    ],
+    "admitted_unit_kind": [
+      ["slot", 0],
+      ["exogenous_input", 1],
+      ["scheduled_occurrence", 2],
+      ["trigger_activation", 3]
+    ],
+    "validation_subject_kind": [
+      ["admitted_unit", 0],
+      ["commit_candidate", 1]
+    ],
+    "fixture_test_enum_u8": [
+      ["zero", 0],
+      ["one", 1]
+    ]
+  },
+  "roles": {
+    "decision_round_creation_role": [["decision_round", 0]],
+    "occurrence_creation_role": [["scheduled_occurrence", 0]],
+    "claim_creation_role": [["claim", 0]],
+    "transmission_creation_role": [["transmission", 0]]
+  },
+  "fixture_roles": {
+    "action_target_role": [["fixture_target", 0]],
+    "candidate_role": [["fixture_candidate", 0]],
+    "event_role": [["fixture_event", 0]],
+    "knowledge_input_role": [["fixture_input", 0]],
+    "observation_role": [["fixture_observation", 0]]
+  },
+  "enum_bindings": [
+    ["admitted-unit.unit-kind", "admitted_unit_kind"],
+    ["admission-fence.cycle-plan[0]", "cycle_kind"],
+    ["affordance-assessment.facets[*].facet", "facet"],
+    ["affordance-assessment.facets[*].policy-effect", "policy_effect"],
+    ["affordance-assessment.facets[*].status", "facet_status"],
+    ["admission-fence.retry-ref.kind", "attempt_retry_reference_kind"],
+    ["affordance-assessment.subject.kind", "action_proposal_reference_kind"],
+    ["affordance-assessment-id-preimage.subject.kind", "action_proposal_reference_kind"],
+    ["attempt-failure.stage", "attempt_failure_stage"],
+    ["attempt-failure-id-preimage.stage", "attempt_failure_stage"],
+    ["attempt-retry.aborted-envelope-ref.kind", "cycle_abort_reference_kind"],
+    ["causal-ref.kind", "reference_kind"],
+    ["claim.prior-claim-refs[*].kind", "claim_reference_kind"],
+    ["claim.proposition.polarity", "polarity"],
+    ["proposition.polarity", "polarity"],
+    ["closure-proof-item.closure-ref.kind", "source_closure_reference_kind"],
+    ["cohort-slot.response-ref.kind", "slot_response_reference_kind"],
+    ["cycle-abort.abort-reason", "abort_reason"],
+    ["cycle-abort.cycle-plan[0]", "cycle_kind"],
+    ["cycle-abort.indeterminate-records[*].facet", "facet"],
+    ["cycle-abort.indeterminate-records[*].subject.subject-kind", "validation_subject_kind"],
+    ["cycle-abort.failure-evidence-refs[*].ref-kind", "failure_evidence_reference_kind"],
+    ["cycle-commit.cycle-plan[0]", "cycle_kind"],
+    ["cycle-control-state.fence-ref.kind", "admission_fence_reference_kind"],
+    ["cycle-control-state.last-terminal-envelope-ref.kind", "terminal_envelope_reference_kind"],
+    ["cycle-control-state.retry-ref.kind", "attempt_retry_reference_kind"],
+    ["cycle-control-state.status", "cycle_control_status"],
+    ["conflict-set.conflict-kind", "conflict_kind"],
+    ["conflict-set-id-preimage.conflict-kind", "conflict_kind"],
+    ["decision-record.disposition", "disposition"],
+    ["decision-record.conflict-set-refs[*].kind", "conflict_set_reference_kind"],
+    ["decision-record.rng-draw-refs[*].kind", "rng_draw_reference_kind"],
+    ["decision-record.subject.input-kind", "admitted_unit_kind"],
+    ["decision-record.subject.slot-response-kind", "slot_response_kind"],
+    ["entity-ref.kind", "entity_kind"],
+    ["epistemic-checkpoint-ref.content[0]", "checkpoint_content_variant"],
+    ["event.confidentiality", "confidentiality"],
+    ["event.event-order-key.phase", "phase"],
+    ["event-id-preimage.event-order-key.phase", "phase"],
+    ["evidence-ref.ref-kind", "reference_kind"],
+    ["genesis-manifest.parent-checkpoint-history-ref[0]", "optional_variant"],
+    ["idempotency-identity.actor-scope[0]", "optional_variant"],
+    ["idempotency-identity.unit-kind", "unit_kind"],
+    ["idempotency-preimage.actor-scope[0]", "optional_variant"],
+    ["idempotency-preimage.unit-kind", "unit_kind"],
+    ["input-ref.input-kind", "unit_kind"],
+    ["input-ref.slot-response-kind", "slot_response_kind"],
+    ["knowledge-input.kind", "knowledge_kind"],
+    ["knowledge-input.claim-refs[*].kind", "claim_reference_kind"],
+    ["knowledge-input.observation-ref.kind", "observation_reference_kind"],
+    ["knowledge-input-id-preimage.kind", "knowledge_kind"],
+    ["no-proposal.reason", "no_proposal_reason"],
+    ["observation.modality", "modality"],
+    ["observation.claim-refs[*].kind", "claim_reference_kind"],
+    ["optional[*][0]", "optional_variant"],
+    ["perception-task.lifecycle", "pending_lifecycle"],
+    ["provisional-disposition.disposition", "provisional_disposition"],
+    ["provisional-disposition.subject.input-kind", "admitted_unit_kind"],
+    ["provisional-disposition.subject.slot-response-kind", "slot_response_kind"],
+    ["provisional-disposition.conflict-set-refs[*].kind", "conflict_set_reference_kind"],
+    ["provisional-disposition.rng-draw-refs[*].kind", "rng_draw_reference_kind"],
+    ["provisional-disposition-id-preimage.subject.input-kind", "admitted_unit_kind"],
+    ["provisional-disposition-id-preimage.subject.slot-response-kind", "slot_response_kind"],
+    ["recurrence-policy.kind", "recurrence_kind"],
+    ["resource-claim.mode", "resource_mode"],
+    ["round-declaration.created-by[0]", "created_by_variant"],
+    ["occurrence-id-preimage.origin[0]", "created_by_variant"],
+    ["decision-round-id-preimage.origin[0]", "round_created_by_variant"],
+    ["claim-id-preimage.origin.kind", "reference_kind"],
+    ["transmission-id-preimage.origin.kind", "reference_kind"],
+    ["round-declaration.lifecycle", "lifecycle"],
+    ["scheduled-occurrence.created-by[0]", "created_by_variant"],
+    ["scheduled-occurrence.lifecycle", "lifecycle"],
+    ["slot-dispatch-revocation.reason", "revocation_reason"],
+    ["slot-response-id-preimage.response-kind", "slot_response_kind"],
+    ["test-enum-u8.value", "fixture_test_enum_u8"],
+    ["transmission.content[0]", "transmission_content_variant"],
+    ["transmission.content.claims[*].kind", "claim_reference_kind"],
+    ["transmission.status", "transmission_status"],
+    ["trigger-activation.lifecycle", "pending_consumed_lifecycle"],
+    ["trigger-activation.origin[0]", "trigger_origin_variant"],
+    ["trigger-definition.activation-policy", "activation_policy"]
+  ],
+  "record_constraints": [
+    {
+      "record": "decision-record",
+      "discriminant": "decision-record.disposition",
+      "variants": [
+        {"code": 0, "required_present": ["candidate-id"], "required_empty": [], "required_absent": ["successor-input-id", "canonical-unit-id"]},
+        {"code": 1, "required_present": ["candidate-id"], "required_empty": [], "required_absent": ["successor-input-id", "canonical-unit-id"]},
+        {"code": 2, "required_present": ["candidate-id", "successor-input-id"], "required_empty": [], "required_absent": ["canonical-unit-id"]},
+        {"code": 3, "required_present": [], "required_empty": ["conflict-set-refs"], "required_absent": ["candidate-id", "successor-input-id", "canonical-unit-id"]},
+        {"code": 4, "required_present": ["canonical-unit-id"], "required_empty": ["conflict-set-refs"], "required_absent": ["candidate-id", "successor-input-id"]}
+      ]
+    },
+    {
+      "record": "cycle-control-state",
+      "discriminant": "cycle-control-state.status",
+      "variants": [
+        {"code": 0, "required_present": [], "required_absent": ["cycle-id", "attempt-ordinal", "fence-ref", "retry-ref"], "reference_kind_constraints": [{"field": "last-terminal-envelope-ref", "when_present": "cycle_commit_reference_kind"}], "relations": ["next-attempt-ordinal == 1"]},
+        {"code": 1, "required_present": ["cycle-id", "attempt-ordinal", "fence-ref"], "required_absent": ["retry-ref"], "reference_kind_constraints": [], "relations": ["next-attempt-ordinal == attempt-ordinal + 1"]},
+        {"code": 2, "required_present": ["cycle-id", "attempt-ordinal", "retry-ref", "last-terminal-envelope-ref"], "required_absent": ["fence-ref"], "reference_kind_constraints": [{"field": "last-terminal-envelope-ref", "when_present": "cycle_abort_reference_kind"}], "relations": ["next-attempt-ordinal == attempt-ordinal"]},
+        {"code": 3, "required_present": ["cycle-id", "attempt-ordinal", "last-terminal-envelope-ref"], "required_absent": ["fence-ref", "retry-ref"], "reference_kind_constraints": [{"field": "last-terminal-envelope-ref", "when_present": "cycle_abort_reference_kind"}], "relations": ["next-attempt-ordinal == attempt-ordinal + 1"]}
+      ]
+    },
+    {
+      "record": "admission-fence",
+      "discriminant": "admission-fence.attempt-ordinal",
+      "variants": [
+        {"value": 1, "required_absent": ["retry-ref"]},
+        {"exclusive_minimum": 1, "required_present": ["retry-ref"]}
+      ]
+    },
+    {
+      "record": "attempt-retry",
+      "relations": ["to-attempt-ordinal == from-attempt-ordinal + 1"]
+    },
+    {
+      "record": "trigger-definition",
+      "discriminant": "trigger-definition.activation-policy",
+      "variants": [
+        {"codes": [0, 1, 2], "required_absent": ["repeat-every"]},
+        {"code": 3, "required_present": ["repeat-every"], "field_ranges": [{"field": "repeat-every", "exclusive_minimum": 0}]}
+      ]
+    }
+  ],
+  "typed_value_constraints": [
+    {
+      "constraint_id": "typed-value-inner-envelope",
+      "applies_on": "strict-decode every typed-value",
+      "inner_envelope": {
+        "magic_hex": "43534600",
+        "codec_version": 1,
+        "array_items": 6
+      },
+      "relations": [
+        {
+          "left": "typed-value.schema-id",
+          "operator": "equals",
+          "right": "inner-envelope.schema-id"
+        },
+        {
+          "left": "typed-value.schema-version",
+          "operator": "equals",
+          "right": "inner-envelope.schema-version"
+        }
+      ],
+      "domain_authorization": {
+        "operation": [
+          "inner-envelope.domain-tag",
+          "inner-envelope.schema-id",
+          "inner-envelope.schema-version"
+        ],
+        "registries": [
+          "domain_operations",
+          "genesis-pinned extension domain_operations"
+        ]
+      },
+      "digest": {
+        "algorithm": "sha-256",
+        "input": "typed-value.canonical-envelope exact bytes",
+        "expected": "typed-value.envelope-digest"
+      },
+      "canonicality": "strict-decode and byte-for-byte deterministic re-encode"
+    }
+  ],
+  "persisted_roots": [
+    {
+      "root": "exogenous-input"
+    },
+    {
+      "root": "source-closure"
+    },
+    {
+      "root": "source-ingress-receipt"
+    },
+    {
+      "root": "slot-dispatch"
+    },
+    {
+      "root": "slot-dispatch-revocation"
+    },
+    {
+      "root": "action-proposal"
+    },
+    {
+      "root": "no-proposal"
+    },
+    {
+      "root": "idempotency-identity"
+    },
+    {
+      "root": "round-declaration"
+    },
+    {
+      "root": "scheduled-occurrence"
+    },
+    {
+      "root": "trigger-definition"
+    },
+    {
+      "root": "trigger-runtime-state"
+    },
+    {
+      "root": "trigger-activation"
+    },
+    {
+      "root": "transmission"
+    },
+    {
+      "root": "admission-fence"
+    },
+    {
+      "root": "affordance-assessment"
+    },
+    {
+      "root": "commit-candidate"
+    },
+    {
+      "root": "conflict-set"
+    },
+    {
+      "root": "decision-record"
+    },
+    {
+      "root": "cycle-abort"
+    },
+    {
+      "root": "attempt-retry"
+    },
+    {
+      "root": "cycle-commit"
+    },
+    {
+      "root": "rng-draw"
+    },
+    {
+      "root": "provisional-disposition"
+    },
+    {
+      "root": "attempt-failure"
+    },
+    {
+      "root": "cycle-control-state"
+    },
+    {
+      "root": "event"
+    },
+    {
+      "root": "claim"
+    },
+    {
+      "root": "observation"
+    },
+    {
+      "root": "knowledge-input"
+    },
+    {
+      "root": "perception-task"
+    },
+    {
+      "root": "perception-task-completion"
+    },
+    {
+      "root": "snapshot"
+    },
+    {
+      "root": "epistemic-checkpoint-ref"
+    },
+    {
+      "root": "genesis-manifest"
+    }
+  ],
+  "record_authorities": [
+    {
+      "root": "exogenous-input",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "source-closure",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "source-ingress-receipt",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "slot-dispatch",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "slot-dispatch-revocation",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "action-proposal",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "no-proposal",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "idempotency-identity",
+      "authority": "input_ledger"
+    },
+    {
+      "root": "round-declaration",
+      "authority": "schedule_store"
+    },
+    {
+      "root": "scheduled-occurrence",
+      "authority": "schedule_store"
+    },
+    {
+      "root": "trigger-definition",
+      "authority": "trigger_registry"
+    },
+    {
+      "root": "trigger-runtime-state",
+      "authority": "trigger_registry"
+    },
+    {
+      "root": "trigger-activation",
+      "authority": "trigger_registry"
+    },
+    {
+      "root": "transmission",
+      "authority": "world_state"
+    },
+    {
+      "root": "admission-fence",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "affordance-assessment",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "commit-candidate",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "conflict-set",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "decision-record",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "cycle-abort",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "attempt-retry",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "cycle-commit",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "rng-draw",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "provisional-disposition",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "attempt-failure",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "cycle-control-state",
+      "authority": "decision_ledger"
+    },
+    {
+      "root": "event",
+      "authority": "event_store"
+    },
+    {
+      "root": "claim",
+      "authority": "evidence_ledger"
+    },
+    {
+      "root": "observation",
+      "authority": "evidence_ledger"
+    },
+    {
+      "root": "knowledge-input",
+      "authority": "evidence_ledger"
+    },
+    {
+      "root": "perception-task",
+      "authority": "causal_outbox"
+    },
+    {
+      "root": "perception-task-completion",
+      "authority": "causal_outbox"
+    },
+    {
+      "root": "snapshot",
+      "authority": "snapshot_store"
+    },
+    {
+      "root": "epistemic-checkpoint-ref",
+      "authority": "snapshot_store"
+    },
+    {
+      "root": "genesis-manifest",
+      "authority": "genesis_store"
+    }
+  ],
+  "perception_policy_contracts": [
+    {
+      "policy_id": "perception-visible-first-v1",
+      "version": 1,
+      "policy_hash_hex": "1377e457058aaa8e9a134a2a9837b8e7873feacd1f9319fbde541366208be1e9",
+      "input": "full canonical event record and event digest",
+      "predicate": "event.event-order-key.event-local-ordinal == 0",
+      "output": "potentially-perceptible boolean",
+      "ordering": "evaluate events in cycle-commit.event-ids order",
+      "observer_projection_input": "PerceptionTask + full Event + base/result state loaded by task revisions + authenticated channel/access authorities; no supplied allow-list/output",
+      "observer_access": "derive the exact observer allow-list from channel membership and actor clearance; confidentiality never grants fallback access",
+      "observer_output": "derive exact modality/channel from the channel authority and percepts, claim refs, evidence chain and omissions from the registered Event payload projection",
+      "append_rule": "reject an unauthorized observer or any extra, omitted or substituted observer output"
+    }
+  ],
+  "fixture_reducer_contracts": [
+    {
+      "policy_id": "fixture-world-reducer-v1",
+      "version": 1,
+      "policy_hash_hex": "c5e65e00615648cd5cde986582022b86802624c604eb352e04c9931dd647eff0",
+      "owner": "fixture-world",
+      "selectors": [
+        {
+          "event_type": "event-0",
+          "schema_version": 1,
+          "producer": "producer-1",
+          "producer_version": 1,
+          "operation": "replace-state-with-event-payload"
+        },
+        {
+          "event_type": "event-1",
+          "schema_version": 1,
+          "producer": "producer-1",
+          "producer_version": 1,
+          "operation": "identity"
+        }
+      ],
+      "ordering": "apply every event exactly once in cycle-commit.event-ids/EventOrderKey order",
+      "result": "the exact typed-value after the final operation is world-state-transition.result-state"
+    }
+  ],
+  "linked_state_models": [
+    {
+      "model_id": "source-unit-consumption-v1",
+      "cddl_type": "source-unit-consumption-transition",
+      "authority": "resolved from source-root through record_authorities",
+      "precondition": "the exact (unit-id, unit-digest) record exists and no earlier DecisionRecord+CycleCommit or lifecycle reducer transition has settled it",
+      "postcondition": "action-proposal, no-proposal, and exogenous-input are settled durably by their terminal DecisionRecord plus CycleCommit; scheduled-occurrence and trigger-activation are settled by an exact SOURCE_LIFECYCLE event and owner reducer transition",
+      "cas": "the witness summarizes an authority-specific compare-and-set; its booleans never replace the DecisionLedger, ScheduleStore, or TriggerRegistry durable proof",
+      "normative_dispatch": "causal-transition-contracts.json#source_settlement_authority"
+    },
+    {
+      "model_id": "world-state-transition-v1",
+      "cddl_type": "world-state-transition",
+      "authority": "world_state",
+      "precondition": "base-state exists at base-revision and hashes under cote.csf.hash.world-state to base-state-hash; every ordered event resolves exactly one genesis-pinned owner/reducer version and hash",
+      "postcondition": "fold the ordered events over base-state through those reducers; the exact fold result equals result-state, hashes under cote.csf.hash.world-state to result-state-hash, and result-revision == base-revision + 1",
+      "cas": "compare base-revision and base-state-hash; publish the reducer-derived result-state bytes and successor revision once",
+      "fixture_contract_registry": "fixture_reducer_contracts"
+    },
+    {
+      "model_id": "logical-sequence-transition-v1",
+      "cddl_type": "logical-sequence-transition",
+      "authority": "event_store + decision_ledger",
+      "precondition": "before is derived from the latest prior CycleCommit.next-logical-sequence for the run at the transaction cursor, or is the codec V1 constant zero when no prior commit exists",
+      "postcondition": "events in EventOrderKey order receive the contiguous range [before, after), and after == before + event-count",
+      "cas": "an empty event batch preserves before == after"
+    },
+    {
+      "model_id": "perception-classification-v1",
+      "cddl_type": "perception-classification",
+      "authority": "cycle-commit.perception-policy",
+      "precondition": "evaluate the full canonical bytes and digest of every candidate Event under the pinned policy ref",
+      "postcondition": "exactly one PerceptionTask exists for each true result, in event-id order, and none exists for a false result",
+      "cas": "classification and task projection are part of the same atomic working set"
+    },
+    {
+      "model_id": "cycle-control-fold-v1",
+      "cddl_type": "cycle-control-state",
+      "authority": "decision_ledger",
+      "precondition": "fold the total ordered prefix of AdmissionFence, CycleCommit, CycleAbortRecord, and AttemptRetryRecord",
+      "postcondition": "derive exactly IDLE, ATTEMPT_IN_FLIGHT, HALTED_ON_ABORT, or RETRY_AUTHORIZED with the refs and ordinals fixed by ADR-0008",
+      "cas": "a persisted or snapshotted CycleControlState must equal the fold byte-for-byte",
+      "normative_dispatch": "causal-transition-contracts.json#derive-cycle-control-state"
+    },
+    {
+      "model_id": "trigger-publication-v1",
+      "authority": "trigger_registry",
+      "precondition": "resolve every relevant TriggerDefinition and prior TriggerRuntimeState whose dependency footprint intersects the ordered event batch",
+      "postcondition": "evaluate the pinned predicate over result-state and derive exact runtime successor plus zero or one activation with complete causing-event ids and eligibility >= commit-successor-floor",
+      "cas": "runtime successors and activations publish all-or-none with CycleCommit and WorldState",
+      "normative_dispatch": "causal-transition-contracts.json#publish-cycle-commit-batch"
+    },
+    {
+      "model_id": "snapshot-resume-contract-v1",
+      "cddl_type": "snapshot",
+      "authority": "snapshot_store + genesis_store + all five ledger prefixes + schedule_store + trigger_registry + actor_registry",
+      "precondition": "resolve genesis, world state, exactly the five mandatory ledger prefixes, schedule/trigger authorities, eligible cognitive actors from actor_registry at the snapshot revision, and checkpoint contents",
+      "postcondition": "world seed/policies match genesis, world hash and ledger digests verify, and checkpoint coverage reaches snapshot instant/revision/evidence cursor for every eligible actor",
+      "cas": "accept or restore the snapshot only after the complete linked validation succeeds",
+      "normative_dispatch": "causal-transition-contracts.json#validate-snapshot"
+    }
+  ],
+  "linked_record_constraints": [
+    {
+      "constraint_id": "append-cycle-abort",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "abort",
+        "root": "cycle-abort",
+        "cursor": "decision-ledger pre-append prefix"
+      },
+      "record_roles": [
+        {
+          "role": "aborted-fence",
+          "root": "admission-fence",
+          "cardinality": "one",
+          "source": "decision_ledger resolved by abort run-id, cycle-id, and attempt-ordinal at pre-append cursor"
+        },
+        {
+          "role": "abort",
+          "root": "cycle-abort",
+          "cardinality": "candidate"
+        },
+        {
+          "role": "commit-candidates",
+          "root": "commit-candidate",
+          "cardinality": "zero-or-more",
+          "source": "decision_ledger records resolved by COMMIT_CANDIDATE subjects or failure evidence at pre-append cursor"
+        },
+        {
+          "role": "conflict-sets",
+          "root": "conflict-set",
+          "cardinality": "zero-or-more",
+          "source": "decision_ledger records resolved by abort.failure-evidence-refs at pre-append cursor"
+        },
+        {
+          "role": "rng-draws",
+          "root": "rng-draw",
+          "cardinality": "zero-or-more",
+          "source": "decision_ledger records resolved by abort.failure-evidence-refs at pre-append cursor"
+        },
+        {
+          "role": "affordance-assessments",
+          "root": "affordance-assessment",
+          "cardinality": "zero-or-more",
+          "source": "decision_ledger records resolved by abort.failure-evidence-refs at pre-append cursor"
+        },
+        {
+          "role": "provisional-dispositions",
+          "root": "provisional-disposition",
+          "cardinality": "zero-or-more",
+          "source": "decision_ledger records resolved by abort.failure-evidence-refs at pre-append cursor"
+        },
+        {
+          "role": "attempt-failures",
+          "root": "attempt-failure",
+          "cardinality": "zero-or-more",
+          "source": "decision_ledger records resolved by abort.failure-evidence-refs at pre-append cursor"
+        }
+      ],
+      "relations": [
+        "aborted-fence.run-id == abort.run-id",
+        "aborted-fence.cycle-id == abort.cycle-id",
+        "aborted-fence.attempt-ordinal == abort.attempt-ordinal",
+        "abort.fence-digest == aborted-fence.fence-digest",
+        "abort.input-digest == aborted-fence.input-digest",
+        "abort.cycle-plan == aborted-fence.cycle-plan",
+        "abort.instant == aborted-fence.instant",
+        "abort.cycle-ordinal == aborted-fence.cycle-ordinal",
+        "abort.base-revision == aborted-fence.base-revision",
+        "abort.base-state-hash == aborted-fence.base-state-hash",
+        "every ADMITTED_UNIT indeterminate subject resolves one admitted unit in aborted-fence and repeats its unit-id and unit-digest",
+        "every COMMIT_CANDIDATE indeterminate subject resolves one commit-candidate whose run-id and cycle-id match abort, whose source-unit-ids belong to the aborted-fence partition, and whose subject-digest equals candidate-digest",
+        "every failure-evidence ref resolves its registered root; rng-draw, provisional-disposition, and attempt-failure match abort run-id, cycle-id, and attempt-ordinal",
+        "every affordance-assessment subject resolves an admitted unit or commit-candidate of aborted-fence",
+        "every conflict-set candidate-id resolves a commit-candidate in the aborted-fence partition",
+        "no terminal envelope exists for abort run-id, cycle-id, and attempt-ordinal at pre-append cursor"
+      ]
+    },
+    {
+      "constraint_id": "append-attempt-retry",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "retry",
+        "root": "attempt-retry",
+        "cursor": "decision-ledger pre-append prefix"
+      },
+      "record_roles": [
+        {
+          "role": "abort",
+          "root": "cycle-abort",
+          "cardinality": "one",
+          "source": "retry.aborted-envelope-ref resolved in decision-ledger pre-append prefix"
+        },
+        {
+          "role": "retry",
+          "root": "attempt-retry",
+          "cardinality": "candidate"
+        }
+      ],
+      "relations": [
+        "abort.run-id == retry.run-id",
+        "abort.cycle-id == retry.cycle-id",
+        "abort.attempt-ordinal == retry.from-attempt-ordinal",
+        "retry.to-attempt-ordinal == retry.from-attempt-ordinal + 1",
+        "retry.aborted-envelope-ref resolves abort",
+        "abort is latest terminal envelope for retry run-id at pre-append cursor",
+        "no retry resolving abort exists at pre-append cursor"
+      ]
+    },
+    {
+      "constraint_id": "append-retry-fence",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "retry-fence",
+        "root": "admission-fence",
+        "when": "attempt-ordinal > 1",
+        "cursor": "decision-ledger pre-append prefix"
+      },
+      "record_roles": [
+        {
+          "role": "aborted-fence",
+          "root": "admission-fence",
+          "cardinality": "one",
+          "source": "decision_ledger resolved through abort at pre-append cursor"
+        },
+        {
+          "role": "abort",
+          "root": "cycle-abort",
+          "cardinality": "one",
+          "source": "decision-ledger pre-append prefix"
+        },
+        {
+          "role": "retry",
+          "root": "attempt-retry",
+          "cardinality": "one",
+          "source": "retry-fence.retry-ref resolved in decision-ledger pre-append prefix"
+        },
+        {
+          "role": "retry-fence",
+          "root": "admission-fence",
+          "cardinality": "candidate"
+        }
+      ],
+      "relations": [
+        "aborted-fence.run-id == abort.run-id == retry.run-id == retry-fence.run-id",
+        "aborted-fence.cycle-id == abort.cycle-id == retry.cycle-id == retry-fence.cycle-id",
+        "aborted-fence.attempt-ordinal == abort.attempt-ordinal == retry.from-attempt-ordinal",
+        "retry.to-attempt-ordinal == retry-fence.attempt-ordinal",
+        "retry-fence.retry-ref resolves retry",
+        "retry.rule-versions == retry-fence.rule-versions after canonical set normalization",
+        "retry-fence fields other than attempt-ordinal, retry-ref, rule-versions, and fence-digest equal aborted-fence byte-for-byte"
+      ]
+    },
+    {
+      "constraint_id": "publish-cycle-commit-batch",
+      "applies_on": {
+        "operation": "atomic-publish",
+        "candidate_role": "commit-batch",
+        "root": "cycle-commit",
+        "cursor": "decision-ledger/event-store/source-authority/trigger-registry pre-publication prefixes plus unpublished transaction working set",
+        "publication": "source settlement + decision settlement + successors + source lifecycle + events + trigger runtime/activations + cycle commit + tasks + world revision indivisible"
+      },
+      "record_roles": [
+        {
+          "role": "fence",
+          "root": "admission-fence",
+          "cardinality": "one",
+          "authority": "decision_ledger",
+          "source": "admission fence selected by cycle-commit.fence-digest"
+        },
+        {
+          "role": "commit-candidates",
+          "root": "commit-candidate",
+          "cardinality": "exact-partition-of-candidate-producing-admitted-units",
+          "authority": "decision_ledger",
+          "source": "immutable provisional records already present in the decision_ledger pre-publication prefix and selected by COMMIT, REJECT, and DEFER decision-record candidate-ids"
+        },
+        {
+          "role": "decision-records",
+          "root": "decision-record",
+          "cardinality": "one-per-admitted-unit",
+          "authority": "decision_ledger",
+          "source": "all settlement candidates selected by cycle-commit.decision-record-ids"
+        },
+        {
+          "role": "cycle-commit",
+          "root": "cycle-commit",
+          "cardinality": "candidate",
+          "authority": "decision_ledger"
+        },
+        {
+          "role": "events",
+          "root": "event",
+          "cardinality": "zero-or-more",
+          "authority": "event_store",
+          "source": "all event candidates selected by cycle-commit.event-ids"
+        },
+        {
+          "role": "tasks",
+          "root": "perception-task",
+          "cardinality": "zero-or-more",
+          "authority": "causal_outbox",
+          "source": "all task candidates selected by cycle-commit.perception-task-ids"
+        }
+      ],
+      "relations": [
+        "cycle-commit.fence-digest == fence.fence-digest",
+        "cycle-commit.input-digest == fence.input-digest",
+        "fence and cycle-commit have identical run-id, cycle-id, attempt-ordinal, instant, cycle-ordinal, cycle-plan, base-revision, and base-state-hash",
+        "cycle-commit.admitted-input-ids == unit-id projection of fence.admitted-units in canonical order",
+        "cycle-commit.decision-record-ids == decision-id projection of decision-records in admitted unit order",
+        "decision-records form an exact bijection with fence.admitted-units by subject id and digest",
+        "every decision-record has fence run-id, cycle-id, and attempt-ordinal",
+        "cycle-commit.decision-digest commits canonical (unit-id, decision-id, record-digest) pairs",
+        "no CycleCommit or CycleAbortRecord exists for fence run-id, cycle-id, and attempt-ordinal at the decision-ledger pre-publication cursor",
+        "every COMMIT, REJECT, or DEFER decision-record candidate-id resolves exactly one immutable commit-candidate in the decision-ledger pre-publication prefix; the transaction MUST NOT republish it",
+        "commit-candidate.source-unit-ids form an exact non-overlapping partition of candidate-producing admitted units after NO_PROPOSAL and DEDUPLICATED are excluded",
+        "every commit-candidate has fence run-id and cycle-id and references only admitted unit ids from the same fence",
+        "NO_PROPOSAL resolves a NoProposal subject; DEDUPLICATED resolves a canonical unit with the same IdempotencyIdentity and idempotency-digest",
+        "each terminal decision equals its resolved ProvisionalDisposition and resolved ConflictSet/RngDraw material in run, cycle, attempt, subject, candidate, disposition, reason, policy, resolver, conflict refs, and rng refs",
+        "COMMIT produced-event-ids are exactly the canonical projections of its candidate event-drafts; REJECT and DEFER produced-event-ids are empty and publish no CANDIDATE_DOMAIN event",
+        "every DEFER publishes exactly one new successor in the owning source authority with a distinct identity, predecessor provenance, and eligibility >= the commit-successor-floor derived from fence instant, cycle-ordinal and cycle-plan; caller-supplied floor is forbidden",
+        "fence.admitted-units contain exactly the five fields of the canonical admitted-unit schema; source records are resolved by id+digest from their record_authorities owner and canonical digest is verified",
+        "every candidate-produced event is the canonical full-envelope projection of one event-draft plus those owner-resolved immutable source records and event-type contract, including schema-version, source-inputs, actor-refs, entity-refs, location-ref and confidentiality; it has event-order-key.origin-ref equal to candidate-id and phase CANDIDATE_DOMAIN",
+        "every SOURCE_LIFECYCLE event is the exact policy-derived projection required to settle admitted source units and completed containers; omission and extra lifecycle output are invalid",
+        "every Event causal-parent resolves by id+digest to an earlier event; a same-cycle parent is earlier within the same candidate; every source-input resolves to an authorized fence unit",
+        "every event has cycle-commit run-id, cycle-id, instant as occurred-at, and base-revision; event-id is recomputed from run-id, cycle-id and EventOrderKey for every phase",
+        "cycle-commit.event-ids == event-id projection of events in EventOrderKey order",
+        "source settlement contains exactly one authority-specific proof for every admitted (unit-id, unit-digest): immutable inputs are settled by DecisionRecord+CycleCommit, schedule/trigger sources by their SOURCE_LIFECYCLE reducer transition",
+        "world-state-transition proves existing (base-revision, base-state-hash), folds ordered events through their genesis-pinned owner/reducer version and hash, and equals the exact result-state bytes, result-state-hash, and successor revision",
+        "events ordered by event-order-key have contiguous logical-sequence from logical-sequence-transition.before, and cycle-commit.next-logical-sequence == logical-sequence-transition.after == before + event count",
+        "perception-classification evaluates every event under cycle-commit.perception-policy and tasks form an exact one-to-one ordered projection of events classified potentially perceptible",
+        "cycle-commit cycle-coordinate, event-order, perception, and perception-identity policy refs equal the corresponding AdmissionFence.rule-versions/genesis pins byte-for-byte",
+        "cycle-commit.perception-policy resolves exactly one perception_policy_contracts entry by policy-id, version, and policy-hash",
+        "cycle-commit.perception-task-ids == task-id projection of tasks in classified event order",
+        "cycle-commit.perception-task-digest commits the canonical task-id projection",
+        "every task has cycle-commit run-id, cycle-id, base-revision, result-revision, perception-policy, and perception-identity-policy",
+        "trigger definitions whose dependencies intersect the ordered event batch are evaluated under the genesis-pinned predicate contract; exact TriggerRuntimeState successors and TriggerActivations with eligibility >= the internally derived commit-successor-floor publish in trigger_registry",
+        "source settlement, decision-records, successors, source lifecycle, events, trigger runtime/activations, cycle-commit, tasks, world-state-transition, and logical-sequence-transition publish all-or-none",
+        "the complete executable rule and error precedence are in causal-transition-contracts.json#publish-cycle-commit-batch"
+      ],
+      "state_roles": [
+        {
+          "role": "source-consumption",
+          "model": "source-unit-consumption-v1",
+          "cardinality": "one-per-admitted-unit",
+          "source": "authoritative source records resolved from fence.admitted-units"
+        },
+        {
+          "role": "world-state-transition",
+          "model": "world-state-transition-v1",
+          "cardinality": "one",
+          "source": "world_state pre-state cursor and candidate post-state"
+        },
+        {
+          "role": "logical-sequence-transition",
+          "model": "logical-sequence-transition-v1",
+          "cardinality": "one",
+          "source": "global logical-sequence cursor and ordered candidate events"
+        },
+        {
+          "role": "perception-classification",
+          "model": "perception-classification-v1",
+          "cardinality": "one",
+          "source": "pinned perception policy evaluated over every candidate event"
+        }
+      ]
+    },
+    {
+      "constraint_id": "append-observation",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "observation",
+        "root": "observation",
+        "cursor": "event-store + causal-outbox + evidence-ledger + authoritative pre/post/channel state at pre-append prefix"
+      },
+      "record_roles": [
+        {
+          "role": "event",
+          "root": "event",
+          "cardinality": "one",
+          "source": "event_store resolved through task at pre-append cursor"
+        },
+        {
+          "role": "task",
+          "root": "perception-task",
+          "cardinality": "one",
+          "source": "causal_outbox resolved by observation.task-id at pre-append cursor"
+        },
+        {
+          "role": "completions",
+          "root": "perception-task-completion",
+          "cardinality": "zero",
+          "source": "all causal_outbox completions for task.task-id at pre-append cursor"
+        },
+        {
+          "role": "observation",
+          "root": "observation",
+          "cardinality": "candidate"
+        }
+      ],
+      "relations": [
+        "observation.task-id resolves task.task-id",
+        "task.event-id resolves event.event-id",
+        "observation.observed-at == event.occurred-at",
+        "observation.source-event-refs == [event ref]",
+        "observation.resolver == task.resolver byte-for-byte",
+        "task.perception-policy resolves one perception_policy_contracts entry and derives the exact observer allow-list from task, event, pre/post state loaded by task revisions and authenticated channel/access authorities; a supplied allow-list/output is ignored",
+        "observation.observer belongs to that allow-list and modality, channel-ref, percepts, claim-refs, evidence-chain and omissions-redactions equal its exact observer-specific projection",
+        "no perception-task-completion for task.task-id exists at pre-append cursor"
+      ],
+      "visibility_rule": "append rejects unauthorized observers and extra, omitted or substituted output; SECRET/RESTRICTED never implies fallback disclosure and caller-provided access/output oracles are not authorities"
+    },
+    {
+      "constraint_id": "append-knowledge-input",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "knowledge-input",
+        "root": "knowledge-input",
+        "cursor": "causal-outbox + evidence-ledger pre-append prefix"
+      },
+      "record_roles": [
+        {
+          "role": "task",
+          "root": "perception-task",
+          "cardinality": "one",
+          "source": "causal_outbox resolved through observation.task-id at pre-append cursor"
+        },
+        {
+          "role": "completions",
+          "root": "perception-task-completion",
+          "cardinality": "zero",
+          "source": "all causal_outbox completions for task.task-id at pre-append cursor"
+        },
+        {
+          "role": "observation",
+          "root": "observation",
+          "cardinality": "one",
+          "source": "knowledge-input.observation-ref resolved in evidence_ledger at pre-append cursor"
+        },
+        {
+          "role": "knowledge-input",
+          "root": "knowledge-input",
+          "cardinality": "candidate"
+        }
+      ],
+      "relations": [
+        "knowledge-input.observation-ref resolves observation",
+        "knowledge-input.recipient == observation.observer",
+        "knowledge-input.received-at == observation.observed-at",
+        "knowledge-input.claim-refs is a subset of observation.claim-refs",
+        "knowledge-input.evidence-chain is a subset of observation.evidence-chain"
+        ,
+        "no perception-task-completion for task.task-id exists at pre-append cursor"
+      ],
+      "visibility_rule": "knowledge-input may project only claims and evidence disclosed by its resolved observation to its observer-recipient; durable append is the delivery confirmation and no second confirmed flag/list is authoritative"
+    },
+    {
+      "constraint_id": "append-perception-completion",
+      "applies_on": {
+        "operation": "append",
+        "candidate_role": "completion",
+        "root": "perception-task-completion",
+        "cursor": "causal-outbox + evidence-ledger pre-append prefix"
+      },
+      "record_roles": [
+        {
+          "role": "task",
+          "root": "perception-task",
+          "cardinality": "one",
+          "source": "causal_outbox resolved by completion.task-id at pre-append cursor"
+        },
+        {
+          "role": "observations",
+          "root": "observation",
+          "cardinality": "zero-or-more",
+          "source": "all evidence_ledger observations for task.task-id at pre-append cursor"
+        },
+        {
+          "role": "knowledge-inputs",
+          "root": "knowledge-input",
+          "cardinality": "zero-or-more",
+          "source": "all evidence_ledger knowledge-inputs for task.task-id at pre-append cursor"
+        },
+        {
+          "role": "completion",
+          "root": "perception-task-completion",
+          "cardinality": "candidate"
+        }
+      ],
+      "relations": [
+        "completion.task-id == task.task-id",
+        "completion.observation-ids == observation-id projection of observations in canonical order",
+        "completion.knowledge-input-ids == knowledge-input-id projection of knowledge-inputs in canonical order"
+      ]
+    },
+    {
+      "constraint_id": "append-source-record",
+      "applies_on": {"operation": "append", "candidate_role": "source-closure-or-exogenous-input", "root": "source-closure|exogenous-input", "cursor": "input-ledger prefix for source-id"},
+      "record_roles": [
+        {"role": "genesis", "root": "genesis-manifest", "cardinality": "one", "source": "genesis_store for run-id"},
+        {"role": "source-prefix", "root": "source-closure|exogenous-input|source-ingress-receipt", "cardinality": "zero-or-more", "source": "all input_ledger records and their durable receipts for source-id through pre-append cursor"},
+        {"role": "candidate", "root": "source-closure|exogenous-input", "cardinality": "candidate"},
+        {"role": "candidate-receipt", "root": "source-ingress-receipt", "cardinality": "one", "source": "same atomic input_ledger append as candidate"}
+      ],
+      "relations": ["declared source, gapless ingress sequence, monotonic closure, finality, and open-coordinate normalization are evaluated exactly by causal-transition-contracts.json#append-source-record"]
+    },
+    {
+      "constraint_id": "append-slot-dispatch",
+      "applies_on": {"operation": "append", "candidate_role": "dispatch", "root": "slot-dispatch", "cursor": "schedule-store + input-ledger + causal-outbox + evidence-ledger pre-append prefixes"},
+      "record_roles": [
+        {"role": "round", "root": "round-declaration", "cardinality": "one", "source": "schedule_store resolved by decision-round-id"},
+        {"role": "prior-tasks-and-deliveries", "root": "perception-task|perception-task-completion|knowledge-input", "cardinality": "zero-or-more", "source": "causal outbox/evidence prefixes causally prior for the actor"},
+        {"role": "dispatch", "root": "slot-dispatch", "cardinality": "candidate"}
+      ],
+      "relations": ["round/slot binding, unique open dispatch, and the epistemic barrier are evaluated exactly by causal-transition-contracts.json#append-slot-dispatch"]
+    },
+    {
+      "constraint_id": "append-slot-response",
+      "applies_on": {"operation": "append", "candidate_role": "slot-response", "root": "action-proposal|no-proposal", "cursor": "schedule-store + input-ledger pre-append prefixes"},
+      "record_roles": [
+        {"role": "round", "root": "round-declaration", "cardinality": "one", "source": "schedule_store resolved through dispatch"},
+        {"role": "dispatch", "root": "slot-dispatch", "cardinality": "one-open", "source": "input_ledger resolved by dispatch-id with no later revocation"},
+        {"role": "response", "root": "action-proposal|no-proposal", "cardinality": "candidate"}
+      ],
+      "relations": ["dispatch existence/open state, inherited fields, revocation, and single fill are evaluated exactly by causal-transition-contracts.json#append-slot-response"]
+    },
+    {
+      "constraint_id": "append-admission-fence",
+      "applies_on": {"operation": "append", "candidate_role": "initial-fence", "root": "admission-fence", "cursor": "clock + world revision + complete authoritative source prefixes"},
+      "record_roles": [
+        {"role": "source-prefixes", "root": "source-closure|exogenous-input|round-declaration|action-proposal|no-proposal|scheduled-occurrence|trigger-activation", "cardinality": "complete-prefixes", "source": "all authorities at the conditional append cursor"},
+        {"role": "fence", "root": "admission-fence", "cardinality": "candidate"}
+      ],
+      "relations": ["candidate fence must equal derive(ledgers, base revision, coordinate, plan, versions) byte-for-byte under causal-transition-contracts.json#append-admission-fence"]
+    },
+    {
+      "constraint_id": "validate-genesis-manifest",
+      "applies_on": {"operation": "append", "candidate_role": "genesis", "root": "genesis-manifest", "cursor": "policy/schema stores and optional origin checkpoint"},
+      "record_roles": [{"role": "genesis", "root": "genesis-manifest", "cardinality": "candidate"}],
+      "relations": ["required policy roles are complete and unique", "PRESENT parent-checkpoint-history-ref parses under Cross-policy Checkpoint Reference V1, resolves the origin policy by id+hash, and verifies the referenced checkpoint before genesis append"],
+      "normative_dispatch": "causal-transition-contracts.json#validate-genesis"
+    },
+    {
+      "constraint_id": "validate-snapshot",
+      "applies_on": {"operation": "append-or-restore", "candidate_role": "snapshot", "root": "snapshot", "cursor": "genesis + world state + all mandatory ledgers + checkpoint store"},
+      "record_roles": [
+        {"role": "genesis", "root": "genesis-manifest", "cardinality": "one", "source": "snapshot.genesis-ref"},
+        {"role": "checkpoints", "root": "epistemic-checkpoint-ref", "cardinality": "one-per-eligible-actor", "source": "snapshot.epistemic-checkpoints"},
+        {"role": "snapshot", "root": "snapshot", "cardinality": "candidate"}
+      ],
+      "relations": ["resume completeness, five ledger cursors, world-state hash, genesis configuration, checkpoint coverage, and opaque content integrity are evaluated exactly by causal-transition-contracts.json#validate-snapshot"]
+    }
+  ],
+  "role_bindings": [
+    ["action-proposal.targets[*].role", "extension:action_target_role"],
+    ["commit-candidate.candidate-role", "extension:candidate_role"],
+    ["commit-candidate.event-drafts[*].event-role", "extension:event_role"],
+    ["commit-candidate.event-drafts[*].causal-parent-roles[*]", "extension:event_role"],
+    ["event.event-order-key.event-role", "extension:event_role"],
+    ["event-id-preimage.event-order-key.event-role", "extension:event_role"],
+    ["knowledge-input.input-role", "extension:knowledge_input_role"],
+    ["knowledge-input-id-preimage.input-role", "extension:knowledge_input_role"],
+    ["observation.observation-role", "extension:observation_role"],
+    ["observation-id-preimage.observation-role", "extension:observation_role"],
+    ["candidate-id-preimage.candidate-role", "extension:candidate_role"],
+    ["round-declaration.round-role", "decision_round_creation_role"],
+    ["decision-round-id-preimage.round-role", "decision_round_creation_role"],
+    ["scheduled-occurrence.occurrence-role", "occurrence_creation_role"],
+    ["occurrence-id-preimage.occurrence-role", "occurrence_creation_role"],
+    ["claim.claim-role", "claim_creation_role"],
+    ["claim-id-preimage.claim-role", "claim_creation_role"],
+    ["transmission.transmission-role", "transmission_creation_role"],
+    ["transmission-id-preimage.transmission-role", "transmission_creation_role"]
+  ],
+  "reference_identities": [
+    {
+      "reference_kind": "event", "code": 0, "persisted_root": "cote.csf.schema.event",
+      "id": {"operation": "cote.csf.id.event", "preimage_schema": "cote.csf.schema.event-id-preimage", "components": ["event.run-id", "event.cycle-id", "event.event-order-key"]},
+      "digest": {"operation": "cote.csf.digest.event", "preimage_schema": "cote.csf.schema.event.body", "components": ["event body"]}
+    },
+    {
+      "reference_kind": "exogenous_input", "code": 1, "persisted_root": "cote.csf.schema.exogenous-input",
+      "id": {"operation": "cote.csf.id.exogenous-input", "preimage_schema": "cote.csf.schema.exogenous-input-id-preimage", "components": ["exogenous-input.run-id", "exogenous-input.source-id", "exogenous-input.producer-unit-key"]},
+      "digest": {"operation": "cote.csf.digest.exogenous-input-unit", "preimage_schema": "cote.csf.schema.exogenous-input.body", "components": ["exogenous-input body"]}
+    },
+    {
+      "reference_kind": "source_closure", "code": 2, "persisted_root": "cote.csf.schema.source-closure",
+      "id": {"operation": "cote.csf.id.source-closure", "preimage_schema": "cote.csf.schema.source-closure-id-preimage", "components": ["source-closure.run-id", "source-closure.source-id", "source-closure.producer-closure-key"]},
+      "digest": {"operation": "cote.csf.digest.source-closure", "preimage_schema": "cote.csf.schema.source-closure", "components": ["source-closure record"]}
+    },
+    {
+      "reference_kind": "round", "code": 3, "persisted_root": "cote.csf.schema.round-declaration",
+      "id": {"operation": "cote.csf.id.decision-round", "preimage_schema": "cote.csf.schema.decision-round-id-preimage", "components": ["round-declaration.created-by", "round-declaration.round-role", "round-declaration.round-local-ordinal"]},
+      "digest": {"operation": "cote.csf.digest.round-declaration", "preimage_schema": "cote.csf.schema.round-declaration", "components": ["round-declaration record"]}
+    },
+    {
+      "reference_kind": "dispatch", "code": 4, "persisted_root": "cote.csf.schema.slot-dispatch",
+      "id": {"operation": "cote.csf.id.dispatch", "preimage_schema": "cote.csf.schema.dispatch-id-preimage", "components": ["slot-dispatch.run-id", "slot-dispatch.cycle-id", "slot-dispatch.decision-round-id", "slot-dispatch.slot-id", "slot-dispatch.dispatch-ordinal"]},
+      "digest": {"operation": "cote.csf.digest.slot-dispatch", "preimage_schema": "cote.csf.schema.slot-dispatch", "components": ["slot-dispatch record"]}
+    },
+    {
+      "reference_kind": "action_proposal", "code": 5, "persisted_root": "cote.csf.schema.action-proposal",
+      "id": {"operation": "cote.csf.id.action-proposal", "preimage_schema": "cote.csf.schema.slot-response-id-preimage", "components": ["action-proposal.dispatch-id", "slot-response-id-preimage.response-kind=action_proposal"]},
+      "digest": {"operation": "cote.csf.digest.action-proposal-unit", "preimage_schema": "cote.csf.schema.action-proposal.body", "components": ["action-proposal body"]}
+    },
+    {
+      "reference_kind": "occurrence", "code": 6, "persisted_root": "cote.csf.schema.scheduled-occurrence",
+      "id": {"operation": "cote.csf.id.occurrence", "preimage_schema": "cote.csf.schema.occurrence-id-preimage", "components": ["scheduled-occurrence.created-by", "scheduled-occurrence.occurrence-role", "scheduled-occurrence.occurrence-local-ordinal"]},
+      "digest": {"operation": "cote.csf.digest.occurrence-unit", "preimage_schema": "cote.csf.schema.scheduled-occurrence.body", "components": ["scheduled-occurrence body"]}
+    },
+    {
+      "reference_kind": "trigger_activation", "code": 7, "persisted_root": "cote.csf.schema.trigger-activation",
+      "id": {"operation": "cote.csf.id.trigger-activation", "preimage_schema": "cote.csf.schema.trigger-activation-id-preimage", "components": ["trigger-activation.run-id", "trigger-activation.trigger-definition-id", "trigger-activation.trigger-version", "origin result revision or genesis revision 0", "trigger-activation.activation-count"]},
+      "digest": {"operation": "cote.csf.digest.trigger-activation-unit", "preimage_schema": "cote.csf.schema.trigger-activation.body", "components": ["trigger-activation body"]}
+    },
+    {
+      "reference_kind": "commit_candidate", "code": 8, "persisted_root": "cote.csf.schema.commit-candidate",
+      "id": {"operation": "cote.csf.id.commit-candidate", "preimage_schema": "cote.csf.schema.candidate-id-preimage", "components": ["commit-candidate fields named by the preimage"]},
+      "digest": {"operation": "cote.csf.digest.commit-candidate", "preimage_schema": "cote.csf.schema.commit-candidate.body", "components": ["commit-candidate body"]}
+    },
+    {
+      "reference_kind": "conflict_set", "code": 9, "persisted_root": "cote.csf.schema.conflict-set",
+      "id": {"operation": "cote.csf.id.conflict-set", "preimage_schema": "cote.csf.schema.conflict-set-id-preimage", "components": ["conflict-set fields named by the preimage"]},
+      "digest": {"operation": "cote.csf.digest.conflict-set", "preimage_schema": "cote.csf.schema.conflict-set.body", "components": ["conflict-set body"]}
+    },
+    {
+      "reference_kind": "decision", "code": 10, "persisted_root": "cote.csf.schema.decision-record",
+      "id": {"operation": "cote.csf.id.decision", "preimage_schema": "cote.csf.schema.decision-id-preimage", "components": ["decision-record.cycle-id", "decision-record.attempt-ordinal", "decision-record.subject.input-id"]},
+      "digest": {"operation": "cote.csf.digest.decision-record", "preimage_schema": "cote.csf.schema.decision-record.body", "components": ["decision-record body"]}
+    },
+    {
+      "reference_kind": "admission_fence", "code": 11, "persisted_root": "cote.csf.schema.admission-fence",
+      "id": {"operation": "cote.csf.id.admission-fence", "preimage_schema": "cote.csf.schema.admission-fence-id-preimage", "components": ["admission-fence.run-id", "admission-fence.cycle-id", "admission-fence.attempt-ordinal"]},
+      "digest": {"operation": "cote.csf.digest.fence", "preimage_schema": "cote.csf.schema.admission-fence.body", "components": ["admission-fence body"]}
+    },
+    {
+      "reference_kind": "cycle_commit", "code": 12, "persisted_root": "cote.csf.schema.cycle-commit",
+      "id": {"operation": "cote.csf.id.cycle-commit", "preimage_schema": "cote.csf.schema.cycle-commit-id-preimage", "components": ["cycle-commit.run-id", "cycle-commit.cycle-id", "cycle-commit.attempt-ordinal"]},
+      "digest": {"operation": "cote.csf.digest.batch", "preimage_schema": "cote.csf.schema.batch-preimage", "components": ["cycle-commit body", "event envelopes selected by cycle-commit.event-ids"]}
+    },
+    {
+      "reference_kind": "cycle_abort", "code": 13, "persisted_root": "cote.csf.schema.cycle-abort",
+      "id": {"operation": "cote.csf.id.cycle-abort", "preimage_schema": "cote.csf.schema.cycle-abort-id-preimage", "components": ["cycle-abort.run-id", "cycle-abort.cycle-id", "cycle-abort.attempt-ordinal"]},
+      "digest": {"operation": "cote.csf.digest.abort", "preimage_schema": "cote.csf.schema.cycle-abort.body", "components": ["cycle-abort body"]}
+    },
+    {
+      "reference_kind": "attempt_retry", "code": 14, "persisted_root": "cote.csf.schema.attempt-retry",
+      "id": {"operation": "cote.csf.id.attempt-retry", "preimage_schema": "cote.csf.schema.attempt-retry-id-preimage", "components": ["attempt-retry.run-id", "attempt-retry.cycle-id", "attempt-retry.from-attempt-ordinal", "attempt-retry.to-attempt-ordinal"]},
+      "digest": {"operation": "cote.csf.digest.attempt-retry", "preimage_schema": "cote.csf.schema.attempt-retry", "components": ["attempt-retry record"]}
+    },
+    {
+      "reference_kind": "perception_task", "code": 15, "persisted_root": "cote.csf.schema.perception-task",
+      "id": {"operation": "cote.csf.id.perception-task", "preimage_schema": "cote.csf.schema.perception-task-id-preimage", "components": ["perception-task.run-id", "perception-task.event-id", "perception-task.perception-policy", "perception-task.resolver", "perception-task.perception-identity-policy"]},
+      "digest": {"operation": "cote.csf.digest.perception-task", "preimage_schema": "cote.csf.schema.perception-task", "components": ["perception-task record"]}
+    },
+    {
+      "reference_kind": "observation", "code": 16, "persisted_root": "cote.csf.schema.observation",
+      "id": {"operation": "cote.csf.id.observation", "preimage_schema": "cote.csf.schema.observation-id-preimage", "components": ["observation.task-id", "observation.observer", "observation.observation-role", "observation.observation-local-ordinal"]},
+      "digest": {"operation": "cote.csf.digest.observation", "preimage_schema": "cote.csf.schema.observation.body", "components": ["observation body"]}
+    },
+    {
+      "reference_kind": "knowledge_input", "code": 17, "persisted_root": "cote.csf.schema.knowledge-input",
+      "id": {"operation": "cote.csf.id.knowledge-input", "preimage_schema": "cote.csf.schema.knowledge-input-id-preimage", "components": ["knowledge-input.observation-ref.id", "knowledge-input.recipient", "knowledge-input.kind", "knowledge-input.input-role", "knowledge-input.input-local-ordinal"]},
+      "digest": {"operation": "cote.csf.digest.knowledge-input", "preimage_schema": "cote.csf.schema.knowledge-input.body", "components": ["knowledge-input body"]}
+    },
+    {
+      "reference_kind": "claim", "code": 18, "persisted_root": "cote.csf.schema.claim",
+      "id": {"operation": "cote.csf.id.claim", "preimage_schema": "cote.csf.schema.claim-id-preimage", "components": ["claim.origin", "claim.claim-role", "claim.claim-local-ordinal"]},
+      "digest": {"operation": "cote.csf.digest.claim", "preimage_schema": "cote.csf.schema.claim.body", "components": ["claim body"]}
+    },
+    {
+      "reference_kind": "transmission", "code": 19, "persisted_root": "cote.csf.schema.transmission",
+      "id": {"operation": "cote.csf.id.transmission", "preimage_schema": "cote.csf.schema.transmission-id-preimage", "components": ["transmission.origin", "transmission.transmission-role", "transmission.transmission-local-ordinal"]},
+      "digest": {"operation": "cote.csf.digest.transmission", "preimage_schema": "cote.csf.schema.transmission.body", "components": ["transmission body"]}
+    },
+    {
+      "reference_kind": "snapshot", "code": 20, "persisted_root": "cote.csf.schema.snapshot",
+      "id": {"operation": "cote.csf.id.snapshot", "preimage_schema": "cote.csf.schema.snapshot-id-preimage", "components": ["snapshot.run-id", "snapshot.snapshot-version", "snapshot.revision"]},
+      "digest": {"operation": "cote.csf.hash.snapshot", "preimage_schema": "cote.csf.schema.snapshot.body", "components": ["snapshot body"]}
+    },
+    {
+      "reference_kind": "genesis", "code": 21, "persisted_root": "cote.csf.schema.genesis-manifest",
+      "id": {"operation": "cote.csf.id.genesis", "preimage_schema": "cote.csf.schema.genesis-id-preimage", "components": ["genesis-manifest.run-id"]},
+      "digest": {"operation": "cote.csf.digest.genesis-manifest", "preimage_schema": "cote.csf.schema.genesis-manifest", "components": ["genesis-manifest record"]}
+    },
+    {
+      "reference_kind": "epistemic_checkpoint", "code": 22, "persisted_root": "cote.csf.schema.epistemic-checkpoint-ref",
+      "id": {"operation": "cote.csf.id.epistemic-checkpoint", "preimage_schema": "cote.csf.schema.epistemic-checkpoint-id-preimage", "components": ["epistemic-checkpoint-ref.actor", "epistemic-checkpoint-ref.store-id", "epistemic-checkpoint-ref.schema-version", "epistemic-checkpoint-ref.covers-through"]},
+      "digest": {"operation": "cote.csf.digest.epistemic-checkpoint", "preimage_schema": "cote.csf.schema.epistemic-checkpoint-ref", "components": ["epistemic-checkpoint-ref record"]}
+    },
+    {
+      "reference_kind": "no_proposal", "code": 23, "persisted_root": "cote.csf.schema.no-proposal",
+      "id": {"operation": "cote.csf.id.no-proposal", "preimage_schema": "cote.csf.schema.slot-response-id-preimage", "components": ["no-proposal.dispatch-id", "slot-response-id-preimage.response-kind=no_proposal"]},
+      "digest": {"operation": "cote.csf.digest.no-proposal-unit", "preimage_schema": "cote.csf.schema.no-proposal.body", "components": ["no-proposal body"]}
+    },
+    {
+      "reference_kind": "rng_draw", "code": 24, "persisted_root": "cote.csf.schema.rng-draw",
+      "id": {"operation": "cote.csf.id.rng-draw", "preimage_schema": "cote.csf.schema.rng-draw-id-preimage", "components": ["rng-draw.run-id", "rng-draw.cycle-id", "rng-draw.attempt-ordinal", "rng-draw.subsystem", "rng-draw.decision-key", "rng-draw.entity-ids", "rng-draw.purpose", "rng-draw.algorithm"]},
+      "digest": {"operation": "cote.csf.digest.rng-draw", "preimage_schema": "cote.csf.schema.rng-draw.body", "components": ["rng-draw body"]}
+    },
+    {
+      "reference_kind": "affordance_assessment", "code": 25, "persisted_root": "cote.csf.schema.affordance-assessment",
+      "id": {"operation": "cote.csf.id.affordance-assessment", "preimage_schema": "cote.csf.schema.affordance-assessment-id-preimage", "components": ["affordance-assessment.subject", "affordance-assessment.assessment-digest"]},
+      "digest": {"operation": "cote.csf.digest.affordance-assessment", "preimage_schema": "cote.csf.schema.affordance-assessment.body", "components": ["affordance-assessment body"]}
+    },
+    {
+      "reference_kind": "provisional_disposition", "code": 26, "persisted_root": "cote.csf.schema.provisional-disposition",
+      "id": {"operation": "cote.csf.id.provisional-disposition", "preimage_schema": "cote.csf.schema.provisional-disposition-id-preimage", "components": ["provisional-disposition.run-id", "provisional-disposition.cycle-id", "provisional-disposition.attempt-ordinal", "provisional-disposition.subject"]},
+      "digest": {"operation": "cote.csf.digest.provisional-disposition", "preimage_schema": "cote.csf.schema.provisional-disposition.body", "components": ["provisional-disposition body"]}
+    },
+    {
+      "reference_kind": "attempt_failure", "code": 27, "persisted_root": "cote.csf.schema.attempt-failure",
+      "id": {"operation": "cote.csf.id.attempt-failure", "preimage_schema": "cote.csf.schema.attempt-failure-id-preimage", "components": ["attempt-failure.run-id", "attempt-failure.cycle-id", "attempt-failure.attempt-ordinal", "attempt-failure.stage", "attempt-failure.component", "attempt-failure.failure-local-ordinal"]},
+      "digest": {"operation": "cote.csf.digest.attempt-failure", "preimage_schema": "cote.csf.schema.attempt-failure.body", "components": ["attempt-failure body"]}
+    }
+  ],
+  "unit_reference_dispatch": [
+    {"unit_kind": "slot", "code": 0, "persisted_root": "selected by slot_response_reference_dispatch", "dispatch_registry": "slot_response_reference_dispatch", "discriminant": "input-ref.slot-response-kind"},
+    {"unit_kind": "exogenous_input", "code": 1, "persisted_root": "cote.csf.schema.exogenous-input", "id_operation": "cote.csf.id.exogenous-input", "id_preimage_schema": "cote.csf.schema.exogenous-input-id-preimage", "digest_operation": "cote.csf.digest.exogenous-input-unit", "digest_preimage_schema": "cote.csf.schema.exogenous-input.body"},
+    {"unit_kind": "scheduled_occurrence", "code": 2, "persisted_root": "cote.csf.schema.scheduled-occurrence", "id_operation": "cote.csf.id.occurrence", "id_preimage_schema": "cote.csf.schema.occurrence-id-preimage", "digest_operation": "cote.csf.digest.occurrence-unit", "digest_preimage_schema": "cote.csf.schema.scheduled-occurrence.body"},
+    {"unit_kind": "trigger_activation", "code": 3, "persisted_root": "cote.csf.schema.trigger-activation", "id_operation": "cote.csf.id.trigger-activation", "id_preimage_schema": "cote.csf.schema.trigger-activation-id-preimage", "digest_operation": "cote.csf.digest.trigger-activation-unit", "digest_preimage_schema": "cote.csf.schema.trigger-activation.body"},
+    {"unit_kind": "round_declaration", "code": 4, "persisted_root": "cote.csf.schema.round-declaration", "id_operation": "cote.csf.id.decision-round", "id_preimage_schema": "cote.csf.schema.decision-round-id-preimage", "digest_operation": "cote.csf.digest.round-declaration", "digest_preimage_schema": "cote.csf.schema.round-declaration"}
+  ],
+  "slot_response_reference_dispatch": [
+    {"slot_response_kind": "action_proposal", "code": 0, "persisted_root": "cote.csf.schema.action-proposal", "id_operation": "cote.csf.id.action-proposal", "id_preimage_schema": "cote.csf.schema.slot-response-id-preimage", "digest_operation": "cote.csf.digest.action-proposal-unit", "digest_preimage_schema": "cote.csf.schema.action-proposal.body"},
+    {"slot_response_kind": "no_proposal", "code": 1, "persisted_root": "cote.csf.schema.no-proposal", "id_operation": "cote.csf.id.no-proposal", "id_preimage_schema": "cote.csf.schema.slot-response-id-preimage", "digest_operation": "cote.csf.digest.no-proposal-unit", "digest_preimage_schema": "cote.csf.schema.no-proposal.body"}
+  ],
+  "extension_registries_required": ["action_type and action target roles", "event_type, event roles, and candidate roles", "occurrence_kind and payload schema", "trigger predicate and dependency selectors", "observation roles, input roles, percept schemas, and channel contracts", "domain entity kinds beyond the foundation codes", "reason codes scoped by their owning schema", "validator, resolver, reducer, producer, and policy identifiers"],
+  "derived_ordering_components": [
+    [
+      "indeterminate-evidence-refs-digest",
+      "cycle-abort.indeterminate-records[*].evidence-refs",
+      "cote.csf.digest.indeterminate-evidence-refs",
+      "cote.csf.schema.indeterminate-evidence-ref-list",
+      1
+    ]
+  ],
+  "set_like_collections": [
+    [
+      "action-proposal.targets",
+      ["role", "entity-kind", "entity-namespace-bytes", "entity-id-bytes"],
+      "reject",
+      ["role", "entity-kind", "entity-namespace-bytes", "entity-id-bytes"]
+    ],
+    [
+      "action-proposal.intended-resources",
+      ["resource-kind-bytes", "resource-id-bytes", "mode", "amount"],
+      "dedup_exact",
+      ["resource-kind-bytes", "resource-id-bytes", "mode"]
+    ],
+    [
+      "round-declaration.slot-ids",
+      ["machine-id-bytes"],
+      "reject",
+      ["machine-id-bytes"]
+    ],
+    [
+      "trigger-definition.declared-dependencies",
+      ["machine-id-bytes"],
+      "dedup_exact",
+      ["machine-id-bytes"]
+    ],
+    [
+      "admission-fence.closure-proof",
+      ["source-id-bytes"],
+      "reject",
+      ["source-id-bytes"]
+    ],
+    [
+      "admission-fence.cohort.rounds",
+      ["decision-round-id-bytes"],
+      "reject",
+      ["decision-round-id-bytes"]
+    ],
+    [
+      "admission-fence.cohort.rounds.slots",
+      ["slot-id-bytes"],
+      "reject",
+      ["slot-id-bytes"]
+    ],
+    [
+      "admission-fence.admitted-units",
+      ["eligibility", "unit-kind", "source-id-bytes", "unit-digest-bytes", "unit-id-bytes"],
+      "reject",
+      ["unit-id-bytes"]
+    ],
+    [
+      "admission-fence.rule-versions",
+      ["policy-id-bytes", "version", "hash-bytes"],
+      "reject",
+      ["policy-id-bytes", "version"]
+    ],
+    [
+      "facet-result.evidence-refs",
+      ["ref-kind", "referenced-id-bytes", "referenced-digest-bytes"],
+      "dedup_exact",
+      ["ref-kind", "referenced-id-bytes"]
+    ],
+    [
+      "indeterminate-evidence-ref-list",
+      ["ref-kind", "referenced-id-bytes", "referenced-digest-bytes"],
+      "dedup_exact",
+      ["ref-kind", "referenced-id-bytes"]
+    ],
+    [
+      "cycle-abort.indeterminate-records[*].evidence-refs",
+      ["ref-kind", "referenced-id-bytes", "referenced-digest-bytes"],
+      "dedup_exact",
+      ["ref-kind", "referenced-id-bytes"]
+    ],
+    [
+      "affordance-assessment.facets",
+      ["facet", "rule-policy-id-bytes", "rule-version", "rule-hash-bytes"],
+      "reject",
+      ["facet"]
+    ],
+    [
+      "rng-draw.entity-ids",
+      ["id-bytes"],
+      "dedup_exact",
+      ["id-bytes"]
+    ],
+    [
+      "rng-draw-id-preimage.entity-ids",
+      ["id-bytes"],
+      "dedup_exact",
+      ["id-bytes"]
+    ],
+    [
+      "commit-candidate.event-drafts",
+      ["event-local-ordinal", "event-role"],
+      "reject",
+      ["event-local-ordinal", "event-role"]
+    ],
+    [
+      "commit-candidate.resource-claims",
+      ["resource-kind-bytes", "resource-id-bytes", "mode", "amount"],
+      "dedup_exact",
+      ["resource-kind-bytes", "resource-id-bytes", "mode"]
+    ],
+    [
+      "commit-candidate.read-set",
+      ["kind", "id-bytes", "digest-bytes"],
+      "dedup_exact",
+      ["kind", "id-bytes"]
+    ],
+    [
+      "commit-candidate.write-set",
+      ["kind", "id-bytes", "digest-bytes"],
+      "dedup_exact",
+      ["kind", "id-bytes"]
+    ],
+    [
+      "commit-candidate.invariant-ids",
+      ["machine-id-bytes"],
+      "dedup_exact",
+      ["machine-id-bytes"]
+    ],
+    [
+      "commit-candidate.provenance",
+      ["kind", "id-bytes", "digest-bytes"],
+      "dedup_exact",
+      ["kind", "id-bytes"]
+    ],
+    [
+      "conflict-set.candidate-ids",
+      ["id-bytes"],
+      "reject",
+      ["id-bytes"]
+    ],
+    [
+      "decision-record.conflict-set-refs",
+      ["kind", "id-bytes", "digest-bytes"],
+      "dedup_exact",
+      ["kind", "id-bytes"]
+    ],
+    [
+      "decision-record.rng-draw-refs",
+      ["kind", "id-bytes", "digest-bytes"],
+      "dedup_exact",
+      ["kind", "id-bytes"]
+    ],
+    [
+      "provisional-disposition.conflict-set-refs",
+      ["kind", "id-bytes", "digest-bytes"],
+      "dedup_exact",
+      ["kind", "id-bytes"]
+    ],
+    [
+      "provisional-disposition.rng-draw-refs",
+      ["kind", "id-bytes", "digest-bytes"],
+      "dedup_exact",
+      ["kind", "id-bytes"]
+    ],
+    [
+      "cycle-abort.indeterminate-records",
+      ["subject-kind", "subject-id-bytes", "subject-digest-bytes", "facet", "validator-id-bytes", "validator-version", "validator-hash-bytes", "reason-code-bytes", "indeterminate-evidence-refs-digest", "rule-version"],
+      "dedup_exact",
+      ["subject-kind", "subject-id-bytes", "subject-digest-bytes", "facet", "validator-id-bytes", "validator-version", "validator-hash-bytes"]
+    ],
+    [
+      "cycle-abort.failure-evidence-refs",
+      ["ref-kind", "referenced-id-bytes", "referenced-digest-bytes"],
+      "dedup_exact",
+      ["ref-kind", "referenced-id-bytes"]
+    ],
+    [
+      "event.causal-parents",
+      ["event-id-bytes"],
+      "dedup_exact",
+      ["event-id-bytes"]
+    ],
+    [
+      "event.source-inputs",
+      ["input-kind", "slot-response-kind-or-absent", "input-id-bytes", "input-digest-bytes"],
+      "dedup_exact",
+      ["input-kind", "slot-response-kind-or-absent", "input-id-bytes"]
+    ],
+    [
+      "event.actor-refs",
+      ["namespace-bytes", "actor-id-bytes"],
+      "dedup_exact",
+      ["namespace-bytes", "actor-id-bytes"]
+    ],
+    [
+      "event.entity-refs",
+      ["kind", "namespace-bytes", "entity-id-bytes"],
+      "dedup_exact",
+      ["kind", "namespace-bytes", "entity-id-bytes"]
+    ],
+    [
+      "claim.prior-claim-refs",
+      ["kind", "id-bytes", "digest-bytes"],
+      "dedup_exact",
+      ["kind", "id-bytes"]
+    ],
+    [
+      "claim.evidence-refs",
+      ["ref-kind", "referenced-id-bytes", "referenced-digest-bytes"],
+      "dedup_exact",
+      ["ref-kind", "referenced-id-bytes"]
+    ],
+    [
+      "observation.source-event-refs",
+      ["event-id-bytes"],
+      "dedup_exact",
+      ["event-id-bytes"]
+    ],
+    [
+      "observation.claim-refs",
+      ["kind", "id-bytes", "digest-bytes"],
+      "dedup_exact",
+      ["kind", "id-bytes"]
+    ],
+    [
+      "observation.omissions-redactions",
+      ["machine-id-bytes"],
+      "dedup_exact",
+      ["machine-id-bytes"]
+    ],
+    [
+      "observation.evidence-chain",
+      ["ref-kind", "referenced-id-bytes", "referenced-digest-bytes"],
+      "dedup_exact",
+      ["ref-kind", "referenced-id-bytes"]
+    ],
+    [
+      "knowledge-input.claim-refs",
+      ["kind", "id-bytes", "digest-bytes"],
+      "dedup_exact",
+      ["kind", "id-bytes"]
+    ],
+    [
+      "knowledge-input.evidence-chain",
+      ["ref-kind", "referenced-id-bytes", "referenced-digest-bytes"],
+      "dedup_exact",
+      ["ref-kind", "referenced-id-bytes"]
+    ],
+    [
+      "transmission.content.claims",
+      ["kind", "id-bytes", "digest-bytes"],
+      "dedup_exact",
+      ["kind", "id-bytes"]
+    ],
+    [
+      "transmission.intended-recipients",
+      ["namespace-bytes", "actor-id-bytes"],
+      "dedup_exact",
+      ["namespace-bytes", "actor-id-bytes"]
+    ],
+    [
+      "transmission.facts",
+      ["name-bytes"],
+      "reject",
+      ["name-bytes"]
+    ],
+    [
+      "genesis-manifest.extension-bundles",
+      ["bundle-id-bytes"],
+      "reject",
+      ["bundle-id-bytes"]
+    ],
+    [
+      "genesis-manifest.exogenous-source-ids",
+      ["source-id-bytes"],
+      "reject",
+      ["source-id-bytes"]
+    ],
+    [
+      "genesis-manifest.policies",
+      ["policy-id-bytes", "version", "hash-bytes"],
+      "reject",
+      ["policy-id-bytes", "version"]
+    ],
+    [
+      "genesis-manifest.schemas",
+      ["schema-id-bytes", "schema-version"],
+      "reject",
+      ["schema-id-bytes", "schema-version"]
+    ],
+    [
+      "genesis-manifest.epistemic-checkpoints",
+      ["actor-namespace-bytes", "actor-id-bytes"],
+      "reject",
+      ["actor-namespace-bytes", "actor-id-bytes"]
+    ],
+    [
+      "snapshot.replay-policies",
+      ["policy-id-bytes", "version", "hash-bytes"],
+      "reject",
+      ["policy-id-bytes", "version"]
+    ],
+    [
+      "snapshot.epistemic-checkpoints",
+      ["actor-namespace-bytes", "actor-id-bytes"],
+      "reject",
+      ["actor-namespace-bytes", "actor-id-bytes"]
+    ],
+    [
+      "cycle-abort.rule-versions",
+      ["policy-id-bytes", "version", "hash-bytes"],
+      "reject",
+      ["policy-id-bytes", "version"]
+    ],
+    [
+      "attempt-retry.rule-versions",
+      ["policy-id-bytes", "version", "hash-bytes"],
+      "reject",
+      ["policy-id-bytes", "version"]
+    ]
+  ],
+  "causal_transition_contract": "causal-transition-contracts.json",
+  "causal_transition_fixtures": "causal-transition-fixtures.json",
+  "opaque_content_hash_operations": [
+    {
+      "operation_id": "cote.csf.hash.epistemic-checkpoint-content.v1",
+      "algorithm": "sha-256",
+      "preimage": "exact resolved opaque content bytes",
+      "verification": "inline hashes its bstr; locator resolves bytes then hashes before acceptance"
+    }
+  ],
+  "genesis_policy_roles": ["causal-identity", "admission-order", "admission-fence", "cycle-coordinate", "event-order", "idempotency", "rng", "perception", "perception-identity", "reducers", "validators", "conflict-resolvers", "dependency-footprints"],
+  "genesis_policy_bindings": "causal-transition-contracts.json#genesis_policy_bindings; every role maps to exactly one complete policy-ref [id, version, hash]",
+  "ledger_prefix_digest_operation": {
+    "domain_tag": "cote.csf.digest.ledger-prefix",
+    "schema_id": "cote.csf.schema.ledger-prefix-digest-preimage",
+    "schema_version": 1,
+    "preimage": "[ledger-id, ordered exact canonical record envelopes through cursor]"
+  },
+  "rng_policy_contracts": [
+    {
+      "policy_id": "cote.csf.rng.sha256-substream.fixture.v1",
+      "version": 1,
+      "policy_hash_hex": "aa89f466bf326f823708ad24192d7ca300f29983f773ace69eb9bc601890e91f",
+      "preimage": "deterministic-CBOR([world-seed, subsystem, decision-key, entity-ids, purpose, policy-ref])",
+      "result": "sha-256(preimage)",
+      "production_use": false
+    }
+  ],
+  "ordered_collections": ["snapshot.ledger-cursors(fixed input,decision,event,evidence,outbox order)", "trigger-origin.causing-event-ids", "commit-candidate.source-unit-ids", "event-draft.causal-parent-roles", "cycle-commit.admitted-input-ids", "cycle-commit.event-ids", "cycle-commit.decision-record-ids", "cycle-commit.perception-task-ids", "decision-record.produced-event-ids", "perception-task-completion.observation-ids", "perception-task-completion.knowledge-input-ids", "observation.percepts", "admitted-unit-list", "decision-pair-list", "perception-task-id-list", "batch-preimage.events", "cohort-id-preimage.decision-round-ids", "candidate-id-preimage.source-unit-ids"],
+  "identity_text_fields": ["source-id", "producer-unit-key", "producer-closure-key", "slot-id", "idempotency-key", "actor-ref.namespace", "actor-ref.actor-id", "entity-ref.namespace", "entity-ref.entity-id", "location-ref.namespace", "location-ref.location-id", "action-type", "event-type", "occurrence-kind", "resource-kind", "resource-id", "reason-code", "channel", "producer", "validator-id", "resolver-id", "store-id", "policy-id", "bundle-id", "role-name", "subsystem", "decision-key", "purpose"],
+  "human_text_fields": ["transmission.presented-sender"]
+}

@@ -80,8 +80,8 @@ O primeiro ticket listado implementa; tickets posteriores podem reexercitar em i
 | 13 commit multi-evento atômico | CSFRV1-3 | 32 journal ≠ event store | CSFRV1-5 |
 | 14 RNG nomeado | CSFRV1-4 | 33 identidade causal | CSFRV1-1 |
 | 15 replay sem modelo/wall clock | CSFRV1-8 | 34 digest/topologia do fence | CSFRV1-2 |
-| 16 Observatory sem escrita | CSFRV1-9 | 35 ativação atômica | CSFRV1-3 |
-| 17 schedule/trigger autoritativos | CSFRV1-3 | 36 task/evidence/completion | CSFRV1-6 |
+| 16 Observatory sem escrita | CSFRV1-9 | 35 ativação atômica | CSFRV1-5 |
+| 17 schedule/trigger autoritativos | CSFRV1-5 | 36 task/evidence/completion | CSFRV1-6 |
 | 18 barrier antes de round | CSFRV1-6 | 37 candidato/event ordering | CSFRV1-5 |
 | 19 contexto allow-list | CSFRV1-6 | 38 próxima coordenada total | CSFRV1-3 |
 | 20 fence antes de avaliação | CSFRV1-2 | 39 refs set-like canônicas | CSFRV1-5 |
@@ -95,13 +95,13 @@ O primeiro ticket listado implementa; tickets posteriores podem reexercitar em i
 - **Ingresso, closure, rounds, slots e fence:** CSFRV1-2 possui os cenários desde respostas em ordens
   opostas até dispatch revogado, incluindo fonte que também responde slot.
 - **Clock, agenda e triggers:** CSFRV1-3 cobre a primitiva única de commit atômico, saltos de ordinal,
-  avanço, menor pendência concorrente, trigger no destino, edge/once/repeat e o `COMMIT` bem-sucedido
-  de uma ativação. Settlement terminal de occurrences e abort de cascata ficam no CSFRV1-5.
+  avanço, menor pendência concorrente, trigger no destino, edge/once/repeat e criação atômica da
+  ativação `PENDING`; seu processamento terminal fica fora deste slice.
 - **Decisão:** CSFRV1-4 cobre recurso único, resultado provisório `INDETERMINATE`, partição inválida,
   alias e proibição fisicamente possível. O abort normativo só fecha no CSFRV1-5.
 - **Commit e terminalidade:** CSFRV1-5 cobre ordem de outputs, refs permutadas, reducer que falha,
-  commits vazios, `REJECT`/`DEFER` e sucessores de occurrence, abort por cascade limit, lifecycle e os
-  quatro estados de controle.
+  commits vazios, consumo terminal de `TriggerActivation`, `REJECT`/`DEFER` e sucessores de
+  occurrence, abort por cascade limit, lifecycle e os quatro estados de controle.
 - **Evidência e isolamento:** CSFRV1-6 cobre segredo sem observador, papel secreto, partição privada,
   White Room/canon futuro, workers concorrentes e latência operacional.
 - **Comunicação:** CSFRV1-7 cobre falsidade, remetente apresentado, atraso e pausa antes da entrega.

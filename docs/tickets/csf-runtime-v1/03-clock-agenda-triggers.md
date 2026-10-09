@@ -1,7 +1,7 @@
 # CSFRV1-3 — Clock, agenda e triggers duráveis
 
 **Spec:** §7.4 · §11.1 (5, 11)<br>
-**ADRs:** 0008 invariantes 1–2, 6, 13, 17, 35, 38 · 0011
+**ADRs:** 0008 invariantes 1–2, 6, 13, 38 e cobertura preparatória de 17/35 · 0011
 **Bloqueado por:** CSFRV1-2  
 **Bloqueia:** CSFRV1-4
 
@@ -10,7 +10,8 @@
 Partindo de `(t,1)`, o harness salta uma lacuna ordinal e publica um ciclo `CLOCK_ADVANCE` por uma
 primitiva mínima, completa e única de `CycleCommit` SQLite. O mesmo commit contém eventos internos
 sintéticos, revisão, trigger runtime e `TriggerActivation` com piso `(u,0)`. O ciclo seguinte
-processa a ativação sem reavaliar memória do host e sem saltar uma pendência concorrente.
+seleciona essa ativação como próxima pendência elegível, sem reavaliar memória do host nem
+consumi-la antes do pipeline terminal entregue pelos CSFRV1-4/5.
 
 ## Escopo
 
@@ -23,10 +24,9 @@ processa a ativação sem reavaliar memória do host e sem saltar uma pendência
 - Primeira implementação do único port transacional do ADR 0011: um SQLite, uma transação curta e
   um `CommitCoordinator` mínimo para `CLOCK_ADVANCE`, com journal, eventos, runtime/ativação e
   revisão indivisíveis. Não existe store, envelope ou autoridade provisória.
-- O subconjunto terminal deste slice fecha apenas `CLOCK_ADVANCE` com input vazio e o `COMMIT`
-  bem-sucedido da `TriggerActivation`: quando há unidade admitida, `DecisionRecord`, evento de
-  lifecycle, eventos do candidato, `CycleCommit` e revisão usam a mesma primitiva/transação. O
-  CSFRV1-5 amplia esse caminho para settlement total e abort; não há mutação direta da ativação.
+- O subconjunto terminal deste slice fecha somente `CLOCK_ADVANCE` com input vazio. A ativação
+  criada permanece `PENDING`: handler, `CommitCandidate`, settlement, lifecycle e consumo terminal
+  entram depois da decisão mínima do CSFRV1-4, no CSFRV1-5. Não existe atalho ou mutação direta.
 - O evento sintético de avanço é classificado de forma pinada como não perceptível neste slice; o
   conjunto de tasks é canonicamente vazio. Nova classificação exige policy/version e o caminho
   completo de percepção do CSFRV1-6.
@@ -49,8 +49,8 @@ tests/scenarios/time_and_triggers_test.go
 - Nova pendência Q entre t e u invalida condicionalmente plano provisório para P; nenhum salto ocorre.
 - Outputs do avanço nunca recebem `(t,n+1)`; piso é `(u,0)`.
 - Trigger que permanece true ativa uma vez em edge/once e somente nas cadências de repeat.
-- Processar uma `TriggerActivation` com sucesso persiste seu `DecisionRecord(COMMIT)` e lifecycle no
-  mesmo `CycleCommit`; crash não permite ativação consumida sem envelope terminal ou vice-versa.
+- Depois do commit de origem, a `TriggerActivation(PENDING)` é a próxima unidade elegível em
+  `(u,0)`; este ticket não a expande em candidato nem a consome.
 - Dois eventos simultâneos que tocam dependências produzem `causing_event_ids` na ordem do batch,
   sem parent cross-candidate.
 - Falha antes/depois de journal, eventos, runtime/ativação ou revisão recupera o prefixo anterior ou
@@ -72,7 +72,8 @@ sintética, não integração com `Embodiment`.
 
 ## Fora do escopo
 
-Resolver ação/conflito, reducer global completo, percepção e adapter físico real.
+Expandir occurrence/ativação em candidato, resolver ação/conflito, settlement/lifecycle terminal,
+reducer global completo, percepção e adapter físico real.
 
 ## Evidência de conclusão
 
@@ -81,4 +82,5 @@ Resolver ação/conflito, reducer global completo, percepção e adapter físico
 3. Failure injection prova atomicidade do primeiro `CycleCommit`; crash após commit encontra a mesma
    activation pendente, sem recriar nem duplicar.
 4. Journal/event store/revisão validam o mesmo commit digest; não há mecanismo provisório.
-5. Suíte demonstra lacuna ordinal, pendência concorrente e consumo atômico da ativação.
+5. Suíte demonstra lacuna ordinal, pendência concorrente e elegibilidade da ativação ainda
+   `PENDING`, sem caminho antecipado de consumo.

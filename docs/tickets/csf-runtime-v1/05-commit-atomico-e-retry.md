@@ -1,7 +1,7 @@
 # CSFRV1-5 — Commit terminal atômico, abort e retry explícito
 
 **Spec:** §6.4–6.5 · §7.5–7.6 · §9 · §11.1 (8–10) · §11.2 (atomicidade)  
-**ADRs:** 0008 invariantes 7, 12, 23–26, 29, 32, 37, 39 e revalidação de 1–2/13 · 0011
+**ADRs:** 0008 invariantes 7, 12, 17, 23–26, 29, 32, 35, 37, 39 e revalidação de 1–2/13 · 0011
 **Bloqueado por:** CSFRV1-4
 **Bloqueia:** CSFRV1-6
 
@@ -12,7 +12,8 @@ unidade, eventos ordenados, lifecycle das fontes, tarefas de percepção, um `Cy
 `WorldRevision`. Uma falha injetada em qualquer passo deixa ou o prefixo anterior completo ou o
 commit completo. Um `INDETERMINATE` produz somente `CycleAbortRecord`; resume para parado e só um
 `AttemptRetryRecord` durável autoriza nova tentativa sobre o mesmo fence semântico. `REJECT`/`DEFER`
-liquidam occurrences no mesmo envelope, e exceder o limite de cascata produz abort auditável.
+liquidam occurrences no mesmo envelope, uma `TriggerActivation(PENDING)` é consumida somente pelo
+caminho terminal completo, e exceder o limite de cascata produz abort auditável.
 
 ## Escopo
 
@@ -22,6 +23,9 @@ liquidam occurrences no mesmo envelope, e exceder o limite de cascata produz abo
 - `EventDraft` → `EventOrderKey` → `event_id`/`LogicalSequence` contíguos → `EventBatch`.
 - Reducer registry com owner, versão/hash e dependency footprint; cópia de trabalho e invariantes.
 - Settlement total: `COMMIT|REJECT|DEFER|NO_PROPOSAL|DEDUPLICATED`, lifecycle e sucessores.
+- Processamento bem-sucedido de `TriggerActivation(PENDING)` pelo handler/candidato entregue no
+  CSFRV1-4: partição da unidade, `DecisionRecord(COMMIT)`, `SOURCE_LIFECYCLE`, eventos do candidato,
+  tasks aplicáveis, `CycleCommit` e revisão na mesma transação.
 - Lifecycle terminal de `ScheduledOccurrence`: `REJECT` encerra a identidade; `DEFER` e recorrência
   criam sucessor com nova identidade, provenance e coordenada explícita dentro do mesmo commit.
 - Publicação única das seis partes da spec §6.5, inclusive tasks ainda não processadas.
@@ -52,6 +56,8 @@ tests/scenarios/{terminal_commit,abort_and_retry,event_ordering}_test.go
 - Reducer puro não emite eventos, usa RNG/rede/LLM/wall clock nem escreve store.
 - Falha no terceiro reducer, schema, provenance ou invariante aborta tudo.
 - `NoProposal`/`DEDUPLICATED` ainda encerram round/occurrence/activation via lifecycle.
+- `TriggerActivation(PENDING)` bem-sucedida só vira `CONSUMED` quando candidato, decision, lifecycle,
+  eventos, tasks, commit e revisão passam juntos pela fronteira terminal; crash preserva tudo ou nada.
 - Occurrence em `REJECT`/`DEFER` termina a identidade antiga; `DEFER`/recorrência cria exatamente um
   sucessor e o `DecisionRecord` referencia o candidato normativo.
 - Fence tem exatamente um terminal envelope; abort não avança ordinal, consome fonte ou cria task.
@@ -81,8 +87,10 @@ Processar tasks, formar observations, comunicação, snapshot completo ou Observ
 
 1. Relatório de failure injection prova prefixo anterior ou commit completo em todos os pontos.
 2. Auditoria reconstrói fence → decisions → events → revision e verifica digests.
-3. Trace prova settlement/lifecycle atômico de `REJECT`/`DEFER` e identidade nova do sucessor.
-4. Abort por cascade limit e abort/restore não retentam; retry explícito abre exatamente
+3. Trace prova o consumo atômico de `TriggerActivation` por candidato/decision/lifecycle e as seis
+   partes do commit, sem caminho especial de mutação.
+4. Trace prova settlement/lifecycle atômico de `REJECT`/`DEFER` e identidade nova do sucessor.
+5. Abort por cascade limit e abort/restore não retentam; retry explícito abre exatamente
    `attempt + 1` com corte preservado.
-5. Event store não contém `CycleCommit`; journal não contém cópia autoritativa de eventos.
-6. Teste de arquitetura encontra um único write path para events/revisions.
+6. Event store não contém `CycleCommit`; journal não contém cópia autoritativa de eventos.
+7. Teste de arquitetura encontra um único write path para events/revisions.

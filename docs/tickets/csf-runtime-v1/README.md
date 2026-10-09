@@ -95,11 +95,13 @@ O primeiro ticket listado implementa; tickets posteriores podem reexercitar em i
 - **Ingresso, closure, rounds, slots e fence:** CSFRV1-2 possui os cenários desde respostas em ordens
   opostas até dispatch revogado, incluindo fonte que também responde slot.
 - **Clock, agenda e triggers:** CSFRV1-3 cobre a primitiva única de commit atômico, saltos de ordinal,
-  avanço, menor pendência concorrente, trigger no destino, edge/once/repeat e cascata.
+  avanço, menor pendência concorrente, trigger no destino, edge/once/repeat e o `COMMIT` bem-sucedido
+  de uma ativação. Settlement terminal de occurrences e abort de cascata ficam no CSFRV1-5.
 - **Decisão:** CSFRV1-4 cobre recurso único, resultado provisório `INDETERMINATE`, partição inválida,
   alias e proibição fisicamente possível. O abort normativo só fecha no CSFRV1-5.
 - **Commit e terminalidade:** CSFRV1-5 cobre ordem de outputs, refs permutadas, reducer que falha,
-  commits vazios, lifecycle e os quatro estados de controle.
+  commits vazios, `REJECT`/`DEFER` e sucessores de occurrence, abort por cascade limit, lifecycle e os
+  quatro estados de controle.
 - **Evidência e isolamento:** CSFRV1-6 cobre segredo sem observador, papel secreto, partição privada,
   White Room/canon futuro, workers concorrentes e latência operacional.
 - **Comunicação:** CSFRV1-7 cobre falsidade, remetente apresentado, atraso e pausa antes da entrega.

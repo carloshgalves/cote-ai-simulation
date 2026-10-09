@@ -11,7 +11,8 @@ O cenário do recurso publica, em uma fronteira indivisível, exatamente um `Dec
 unidade, eventos ordenados, lifecycle das fontes, tarefas de percepção, um `CycleCommit` e a nova
 `WorldRevision`. Uma falha injetada em qualquer passo deixa ou o prefixo anterior completo ou o
 commit completo. Um `INDETERMINATE` produz somente `CycleAbortRecord`; resume para parado e só um
-`AttemptRetryRecord` durável autoriza nova tentativa sobre o mesmo fence semântico.
+`AttemptRetryRecord` durável autoriza nova tentativa sobre o mesmo fence semântico. `REJECT`/`DEFER`
+liquidam occurrences no mesmo envelope, e exceder o limite de cascata produz abort auditável.
 
 ## Escopo
 
@@ -21,9 +22,13 @@ commit completo. Um `INDETERMINATE` produz somente `CycleAbortRecord`; resume pa
 - `EventDraft` → `EventOrderKey` → `event_id`/`LogicalSequence` contíguos → `EventBatch`.
 - Reducer registry com owner, versão/hash e dependency footprint; cópia de trabalho e invariantes.
 - Settlement total: `COMMIT|REJECT|DEFER|NO_PROPOSAL|DEDUPLICATED`, lifecycle e sucessores.
+- Lifecycle terminal de `ScheduledOccurrence`: `REJECT` encerra a identidade; `DEFER` e recorrência
+  criam sucessor com nova identidade, provenance e coordenada explícita dentro do mesmo commit.
 - Publicação única das seis partes da spec §6.5, inclusive tasks ainda não processadas.
 - `INDETERMINATE` e demais falhas viram `CycleAbortRecord` autoritativo antes de qualquer disposição;
   evidence normalizada, `CycleControlState` total e retry explícito.
+- Limite versionado de cascata no mesmo instante; excedê-lo depois do fence produz
+  `CycleAbortRecord`, sem truncamento, settlement, lifecycle ou revisão parcial.
 - Commit vazio válido e revisão/ordinal/sequence reconstruíveis pelo journal.
 
 ## Arquivos e módulos prováveis
@@ -47,7 +52,11 @@ tests/scenarios/{terminal_commit,abort_and_retry,event_ordering}_test.go
 - Reducer puro não emite eventos, usa RNG/rede/LLM/wall clock nem escreve store.
 - Falha no terceiro reducer, schema, provenance ou invariante aborta tudo.
 - `NoProposal`/`DEDUPLICATED` ainda encerram round/occurrence/activation via lifecycle.
+- Occurrence em `REJECT`/`DEFER` termina a identidade antiga; `DEFER`/recorrência cria exatamente um
+  sucessor e o `DecisionRecord` referencia o candidato normativo.
 - Fence tem exatamente um terminal envelope; abort não avança ordinal, consome fonte ou cria task.
+- Cascata excedida depois do fence termina em `CycleAbortRecord`; não trunca outputs nem publica
+  `DecisionRecord`, lifecycle, evento ou revisão.
 - `INDETERMINATE` persiste dentro do abort auditável, sem nenhuma disposição ou publicação parcial;
   somente aqui a invariante 7 entra na matriz 41/41.
 - Dobra cobre `ATTEMPT_IN_FLIGHT`, `HALTED_ON_ABORT`, `RETRY_AUTHORIZED`, `IDLE` e precedência.
@@ -72,6 +81,8 @@ Processar tasks, formar observations, comunicação, snapshot completo ou Observ
 
 1. Relatório de failure injection prova prefixo anterior ou commit completo em todos os pontos.
 2. Auditoria reconstrói fence → decisions → events → revision e verifica digests.
-3. Abort/restore não retenta; retry explícito abre exatamente `attempt + 1` com corte preservado.
-4. Event store não contém `CycleCommit`; journal não contém cópia autoritativa de eventos.
-5. Teste de arquitetura encontra um único write path para events/revisions.
+3. Trace prova settlement/lifecycle atômico de `REJECT`/`DEFER` e identidade nova do sucessor.
+4. Abort por cascade limit e abort/restore não retentam; retry explícito abre exatamente
+   `attempt + 1` com corte preservado.
+5. Event store não contém `CycleCommit`; journal não contém cópia autoritativa de eventos.
+6. Teste de arquitetura encontra um único write path para events/revisions.

@@ -1,15 +1,16 @@
 # CSFRV1-3 — Clock, agenda e triggers duráveis
 
 **Spec:** §7.4 · §9 (agenda/trigger/cascata) · §11.1 (5, 11)  
-**ADR 0008:** invariantes 6, 17, 35, 38  
+**ADRs:** 0008 invariantes 1–2, 6, 13, 17, 35, 38 · 0011
 **Bloqueado por:** CSFRV1-2  
 **Bloqueia:** CSFRV1-4
 
 ## Resultado observável
 
-Partindo de `(t,1)`, o harness salta uma lacuna ordinal, cria um ciclo `CLOCK_ADVANCE` persistido até
-`u`, aplica `body.advanced` sintético e materializa uma `TriggerActivation` com piso `(u,0)`. O ciclo
-seguinte processa a ativação sem reavaliar memória do host e sem saltar uma pendência concorrente.
+Partindo de `(t,1)`, o harness salta uma lacuna ordinal e publica um ciclo `CLOCK_ADVANCE` por uma
+primitiva mínima, completa e única de `CycleCommit` SQLite. O mesmo commit contém eventos internos
+sintéticos, revisão, trigger runtime e `TriggerActivation` com piso `(u,0)`. O ciclo seguinte
+processa a ativação sem reavaliar memória do host e sem saltar uma pendência concorrente.
 
 ## Escopo
 
@@ -18,17 +19,22 @@ seguinte processa a ativação sem reavaliar memória do host e sem saltar uma p
 - `ScheduledOccurrence` e lifecycle terminal; recorrência cria sucessor com nova identidade.
 - `TriggerDefinition`, dependency footprint, runtime persistido, edge/once/repeat/rearm e
   `TriggerActivation(PENDING)`.
-- Ativação e runtime entram na publicação da revisão de origem; o scaffold transacional usa a
-  abstração escolhida no CSFRV1-0 e será fechado com o commit completo no CSFRV1-5.
+- Primeira implementação do único port transacional do ADR 0011: um SQLite, uma transação curta e
+  um `CommitCoordinator` mínimo para `CLOCK_ADVANCE`, com journal, eventos, runtime/ativação e
+  revisão indivisíveis. Não existe store, envelope ou autoridade provisória.
+- O evento sintético de avanço é classificado de forma pinada como não perceptível neste slice; o
+  conjunto de tasks é canonicamente vazio. Nova classificação exige policy/version e o caminho
+  completo de percepção do CSFRV1-6.
 - Limite versionado de cascata no mesmo instante e abort determinístico quando excedido.
 
 ## Arquivos e módulos prováveis
 
 ```text
-runtime/csf/{clock,schedule_store,triggers,coordinator}
-tests/csf/{clock,schedule,triggers}/
-tests/csf/properties/{next_coordinate,trigger_lifecycle}/
-tests/csf/scenarios/time_and_triggers.*
+internal/csf/{clock,schedule,trigger,coordinator,commit}/
+internal/csf/persistence/sqlite/
+internal/csf/{clock,schedule,trigger,commit}/**/*_test.go
+tests/properties/{next_coordinate,trigger_lifecycle}_test.go
+tests/scenarios/time_and_triggers_test.go
 ```
 
 ## Testes determinísticos
@@ -43,6 +49,10 @@ tests/csf/scenarios/time_and_triggers.*
 - Dois eventos simultâneos que tocam dependências produzem `causing_event_ids` na ordem do batch,
   sem parent cross-candidate.
 - Cascata excedida aborta, não trunca.
+- Falha antes/depois de journal, eventos, runtime/ativação ou revisão recupera o prefixo anterior ou
+  o `CycleCommit` completo; nada parcial fica observável.
+- Teste de arquitetura prova que somente o `CommitCoordinator` chama o port transacional e publica
+  eventos/revisão.
 
 ## Property tests
 
@@ -64,5 +74,7 @@ Resolver ação/conflito, reducer global completo, percepção e adapter físico
 
 1. Trace persistido mostra advance em t, estado em u e ativação elegível em `(u,0)`.
 2. Reexecução com ordem de worker invertida produz os mesmos records e digests.
-3. Crash após revisão encontra a mesma activation pendente; não a recria nem duplica.
-4. Suíte demonstra lacuna ordinal, pendência concorrente e cascade limit.
+3. Failure injection prova atomicidade do primeiro `CycleCommit`; crash após commit encontra a mesma
+   activation pendente, sem recriar nem duplicar.
+4. Journal/event store/revisão validam o mesmo commit digest; não há mecanismo provisório.
+5. Suíte demonstra lacuna ordinal, pendência concorrente e cascade limit.

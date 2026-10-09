@@ -26,10 +26,10 @@ três rotas produzem os mesmos bytes autoritativos, revisões, cursores e state 
 ## Arquivos e módulos prováveis
 
 ```text
-runtime/csf/{replay,snapshot,resume,fork}
-tests/csf/{replay,snapshot,resume,fork,version_gating}/
-tests/csf/failure_injection/end_to_end.*
-tests/csf/properties/{determinism,parallelism,substream_isolation}/
+internal/csf/{replay,snapshot,resume,fork}/
+internal/csf/{replay,snapshot,resume,fork}/**/*_test.go
+tests/failureinjection/end_to_end_test.go
+tests/properties/{determinism,parallelism,substream_isolation}_test.go
 evals/simulation/csf-runtime-v1/
 ```
 

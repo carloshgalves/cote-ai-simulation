@@ -25,9 +25,9 @@ anteriores, enquanto B nunca obtém acesso à partição de A.
 ## Arquivos e módulos prováveis
 
 ```text
-runtime/csf/{perception,evidence_ledger,knowledge_sink,epistemic_outbox,context_boundary}
-tests/csf/{perception,evidence,barrier}/
-tests/csf/failure_injection/perception.*
+internal/csf/{perception,evidenceledger,knowledgesink,epistemicoutbox,contextboundary}/
+internal/csf/{perception,evidence,barrier}/**/*_test.go
+tests/failureinjection/perception_test.go
 evals/knowledge-boundary/csf-runtime-v1/
 ```
 

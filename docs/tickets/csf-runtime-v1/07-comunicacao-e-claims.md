@@ -24,10 +24,10 @@ produz fato de falha e nenhum input.
 ## Arquivos e módulos prováveis
 
 ```text
-runtime/csf/{communication,claims}
-runtime/csf/extensions/communication_v1/
-tests/csf/{communication,claims}/
-tests/csf/scenarios/{false_claim,forged_sender,delayed_delivery}.*
+internal/csf/{communication,claim}/
+internal/csf/extensions/communicationv1/
+internal/csf/{communication,claim}/**/*_test.go
+tests/scenarios/{false_claim,forged_sender,delayed_delivery}_test.go
 evals/knowledge-boundary/csf-runtime-v1/communication.*
 ```
 

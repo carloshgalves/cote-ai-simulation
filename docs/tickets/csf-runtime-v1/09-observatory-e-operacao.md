@@ -25,9 +25,9 @@ cursores ou qualquer byte causal.
 ## Arquivos e módulos prováveis
 
 ```text
-runtime/csf/observatory/{queries,views,audit_report,metrics}
-tests/csf/observatory/{architecture,views,audit_report,metrics}/
-tests/csf/scenarios/observatory_no_side_effects.*
+internal/csf/observatory/{query,view,auditreport,metric}/
+internal/csf/observatory/**/*_test.go
+tests/scenarios/observatory_no_side_effects_test.go
 ```
 
 ## Testes determinísticos

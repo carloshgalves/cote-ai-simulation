@@ -26,10 +26,10 @@ o mesmo `AdmissionFence` byte a byte antes de qualquer avaliação.
 ## Arquivos e módulos prováveis
 
 ```text
-runtime/csf/{input_ledger,schedule_store,rounds,admission,coordinator}
-tests/csf/{input_ledger,rounds,admission}/
-tests/csf/properties/{closure_permutations,fence_stability}/
-tests/csf/scenarios/admission_and_rounds.*
+internal/csf/{inputledger,schedule,round,admission,coordinator}/
+internal/csf/{inputledger,round,admission}/**/*_test.go
+tests/properties/{closure_permutations,fence_stability}_test.go
+tests/scenarios/admission_and_rounds_test.go
 ```
 
 ## Testes determinísticos

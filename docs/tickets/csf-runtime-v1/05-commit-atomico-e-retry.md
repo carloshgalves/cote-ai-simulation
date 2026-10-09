@@ -1,8 +1,8 @@
 # CSFRV1-5 — Commit terminal atômico, abort e retry explícito
 
 **Spec:** §6.4–6.5 · §7.5–7.6 · §9 · §11.1 (8–10) · §11.2 (atomicidade)  
-**ADR 0008:** invariantes 1–2, 12–13, 23–26, 29, 32, 37, 39  
-**Bloqueado por:** CSFRV1-4 e decisão de persistência do CSFRV1-0  
+**ADRs:** 0008 invariantes 7, 12, 23–26, 29, 32, 37, 39 e revalidação de 1–2/13 · 0011
+**Bloqueado por:** CSFRV1-4
 **Bloqueia:** CSFRV1-6
 
 ## Resultado observável
@@ -15,23 +15,25 @@ commit completo. Um `INDETERMINATE` produz somente `CycleAbortRecord`; resume pa
 
 ## Escopo
 
-- Implementar a topologia transacional escolhida no ADR do CSFRV1-0.
+- Ampliar a mesma primitiva SQLite/`CommitCoordinator` entregue no CSFRV1-3; não criar outro port,
+  envelope, store combinado ou caminho de publicação.
 - `DecisionLedger` como journal canônico; `EventStore` contém somente eventos.
 - `EventDraft` → `EventOrderKey` → `event_id`/`LogicalSequence` contíguos → `EventBatch`.
 - Reducer registry com owner, versão/hash e dependency footprint; cópia de trabalho e invariantes.
 - Settlement total: `COMMIT|REJECT|DEFER|NO_PROPOSAL|DEDUPLICATED`, lifecycle e sucessores.
 - Publicação única das seis partes da spec §6.5, inclusive tasks ainda não processadas.
-- `CycleAbortRecord`, evidence normalizada, `CycleControlState` total e retry explícito.
+- `INDETERMINATE` e demais falhas viram `CycleAbortRecord` autoritativo antes de qualquer disposição;
+  evidence normalizada, `CycleControlState` total e retry explícito.
 - Commit vazio válido e revisão/ordinal/sequence reconstruíveis pelo journal.
 
 ## Arquivos e módulos prováveis
 
 ```text
-runtime/csf/{decision_ledger,event_store,world_state,reducers,commit,control_state}
-runtime/csf/persistence/
-tests/csf/{commit,reducers,settlement,control_state}/
-tests/csf/failure_injection/
-tests/csf/scenarios/{terminal_commit,abort_and_retry,event_ordering}.*
+internal/csf/{decisionledger,eventstore,worldstate,reducer,commit,controlstate}/
+internal/csf/persistence/sqlite/
+internal/csf/{commit,reducer,settlement,controlstate}/**/*_test.go
+tests/failureinjection/
+tests/scenarios/{terminal_commit,abort_and_retry,event_ordering}_test.go
 ```
 
 ## Testes determinísticos
@@ -46,6 +48,8 @@ tests/csf/scenarios/{terminal_commit,abort_and_retry,event_ordering}.*
 - Falha no terceiro reducer, schema, provenance ou invariante aborta tudo.
 - `NoProposal`/`DEDUPLICATED` ainda encerram round/occurrence/activation via lifecycle.
 - Fence tem exatamente um terminal envelope; abort não avança ordinal, consome fonte ou cria task.
+- `INDETERMINATE` persiste dentro do abort auditável, sem nenhuma disposição ou publicação parcial;
+  somente aqui a invariante 7 entra na matriz 41/41.
 - Dobra cobre `ATTEMPT_IN_FLIGHT`, `HALTED_ON_ABORT`, `RETRY_AUTHORIZED`, `IDLE` e precedência.
 
 ## Property tests e failure injection

@@ -1,8 +1,8 @@
 # CSFRV1-10 — Adapter físico e cenário causal de referência
 
 **Spec:** §1 · §3.1 (integração física) · §11.3–11.5 · §12.2  
-**ADRs:** 0006, 0007, 0008 e contrato de adapter decidido no CSFRV1-0  
-**Bloqueado por:** CSFRV1-9 e entregas físicas consumidas pelo contrato  
+**ADRs:** 0006, 0007, 0008, 0010 e contrato do CSFRV1-9A
+**Bloqueado por:** CSFRV1-9, CSFRV1-9A e entregas físicas consumidas pelo contrato
 **Bloqueia:** primeira integração de `ExamSpec`/Agent Cognition; não autoriza merge por si só
 
 ## Resultado observável
@@ -16,7 +16,7 @@ paralelismos e resumes.
 
 ## Escopo
 
-- Implementar o contrato `Embodiment` → CSF definido no CSFRV1-0 como fronteira de dados/processo.
+- Implementar o contrato `Embodiment` → CSF fechado no CSFRV1-9A como fronteira de dados/processo.
 - Verificar hash/version do snapshot/log físico de origem e mapear apenas records suportados.
 - Derivar typed payload, candidate, event provenance/order e reducer global; somente o
   `CommitCoordinator` publica revisão.
@@ -29,11 +29,11 @@ paralelismos e resumes.
 ## Arquivos e módulos prováveis
 
 ```text
-runtime/csf/adapters/embodiment_v1/
-runtime/csf/extensions/embodiment_v1/
-tests/csf/adapters/embodiment_v1/
-tests/csf/scenarios/reference_run.*
-tests/csf/invariants/test_invariant_01...41_*.{ext}
+internal/csf/adapter/embodimentv1/
+internal/csf/extensions/embodimentv1/
+internal/csf/adapter/embodimentv1/**/*_test.go
+tests/scenarios/reference_run_test.go
+tests/invariants/invariant_01_*.go ... tests/invariants/invariant_41_*.go
 evals/{simulation,determinism,knowledge-boundary}/csf-runtime-v1/
 docs/operations/csf-runtime-v1.md
 ```

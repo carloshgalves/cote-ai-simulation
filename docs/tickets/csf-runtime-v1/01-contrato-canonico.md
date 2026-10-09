@@ -15,6 +15,9 @@ produzem o mesmo relatório de conformidade.
 ## Escopo
 
 - Esqueleto do runtime e harness, sem framework de agentes ou cliente LLM.
+- Toolchain Go 1.27.2 pinado; `fxamacker/cbor/v2` 2.9.2 isolado no adapter canônico.
+- Adapter SQLite com `modernc.org/sqlite` v1.60.1 pinado, verificação de versão/source id/PRAGMAs e
+  schema mínimo de genesis antes de aceitar o run.
 - `Genesis`, policy registry, `SimulationInstant`, `EligibilityCoordinate`, causal refs e policy refs.
 - Encoder/strict decoder CBOR determinístico V1; NPSS Unicode 15.1; SHA-256 domain-separated.
 - `derive_id`, digests e state/envelope hashes apenas pelas operações registradas.
@@ -25,12 +28,15 @@ produzem o mesmo relatório de conformidade.
 
 ## Arquivos e módulos prováveis
 
-Os paths exatos são atualizados pelo CSFRV1-0; responsabilidades esperadas:
-
 ```text
-runtime/csf/{codec,identity,genesis,policies,types,stores,harness}
-tools/csf-conformance-runner-2/
-tests/csf/{codec,identity,genesis,architecture}/
+go.mod
+go.sum
+internal/csf/{codec,identity,genesis,policy,domain}/
+internal/csf/persistence/sqlite/
+cmd/csf-harness/
+tools/csf-conformance-ts/
+internal/csf/{codec,identity,genesis}/**/*_test.go
+tests/architecture/csf_*_test.go
 .github/workflows/csf-conformance.*
 ```
 
@@ -46,6 +52,8 @@ O bundle normativo é consumido sem alteração.
 - Permutar map/set não altera bytes; identity collision com bytes divergentes falha fechado.
 - Genesis sem qualquer pin/hash obrigatório, timezone distinto do declarado ou
   `next_logical_sequence != 0` é recusado.
+- SQLite diverge de 3.53.4/source id, WAL, `synchronous=FULL` ou compile-options pinadas: run recusa
+  abertura antes de qualquer append causal.
 - Teste de arquitetura proíbe cliente LLM, RNG global, UUID aleatório e wall clock na identidade.
 
 ## Evals e fronteira de conhecimento

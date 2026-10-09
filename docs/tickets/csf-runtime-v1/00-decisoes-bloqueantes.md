@@ -1,71 +1,59 @@
-# CSFRV1-0 — Fechar decisões bloqueantes e aceitar a spec
+# CSFRV1-0 — Incorporar decisões aceitas e liberar o runtime
 
 **Spec:** §14  
 **Bloqueado por:** —  
-**Bloqueia:** CSFRV1-1 e, transitivamente, todo código de produção  
+**Bloqueia:** CSFRV1-1 e CSFRV1-9A
 **Natureza:** pesquisa/arquitetura/documentação; nenhuma implementação do runtime.
 
 ## Resultado observável
 
-A spec passa de `Proposed` para `Accepted` depois que três decisões rastreáveis definem: stack da
-fundação, topologia de persistência/atomicidade e interface versionada do adapter físico. Cada
-ticket seguinte encontra linguagem, toolchain, fronteira transacional e contrato físico explícitos;
-nenhuma dessas escolhas nasce por acidente no primeiro commit de código.
+A spec passa de `Proposed` para `Accepted`, com os incrementos 1–9 liberados pelos ADRs 0010/0011 já
+aceitos e o incremento 10 explicitamente bloqueado apenas pelo futuro contrato do adapter físico.
+O plano referencia Go 1.27.2, SQLite/modernc e seus caminhos concretos; nenhum implementador repete
+pesquisa encerrada ou cria ADR concorrente.
 
 ## Escopo
 
-1. **Stack da fundação (§14.1).** Pesquisa curta compara as opções apropriadas ao Simulation Engine,
-   escolhe linguagem/runtime/toolchain e fixa a fronteira de processo/dados com Python
-   `src/embodiment/`. A decisão não escolhe framework de agentes, LLM, RAG ou UI.
-2. **Persistência e atomicidade (§14.2).** Pesquisa e ADR comparam ao menos transação única no mesmo
-   banco e protocolo reconciliável por `fence_digest` entre stores. A escolha cobre isolamento,
-   CAS, snapshot, retenção, backup, recovery e failure injection e demonstra que nenhum consumidor
-   atravessa commit incompleto.
-3. **Adapter físico (§14.3).** Contrato versionado mapeia JSONL/snapshot do `Embodiment` para inputs,
-   typed values e eventos globais. `seq` e `sim_time` locais nunca viram sequência/instante globais;
-   o pacote físico não recebe port de commit nem publica revisão.
-4. Atualizar a §14 com links/linhas `**Decidido:**`, mudar o status da spec para `Accepted` e
-   substituir placeholders de paths/tooling deste conjunto pela stack decidida.
+1. **Stack (§14.1).** Referenciar o ADR 0010 aceito: Go 1.27.2, core atrás de ports, segundo runner
+   independente e fronteira de processo/dados com Python `src/embodiment/`.
+2. **Persistência (§14.2).** Referenciar o ADR 0011 aceito: um SQLite/modernc por run/workspace,
+   WAL + `synchronous=FULL`, BLOBs canônicos e transação local única.
+3. **Adapter físico (§14.3).** Registrar sem ambiguidade que continua aberto e bloqueia somente o
+   incremento 10. O contrato, schemas e fixtures pertencem ao CSFRV1-9A, que pode ocorrer em paralelo.
+4. Atualizar status e §14 da spec, índice e tickets com links, toolchain, dependências e paths reais.
 
 ## Arquivos e módulos
 
 ```text
-docs/research/csf-runtime-stack-and-persistence.md             novo
-docs/adr/0010-csf-runtime-stack.md                             novo
-docs/adr/0011-csf-persistence-and-atomicity.md                 novo
-docs/architecture/embodiment-causal-adapter-v1.md              novo
+docs/research/csf-runtime-and-persistence-v1.md                referência existente
+docs/adr/0010-csf-causal-engine-stack.md                       referência existente
+docs/adr/0011-csf-causal-persistence-atomicity.md              referência existente
 docs/spec/causal-simulation-foundation-v1.md
 docs/tickets/csf-runtime-v1/*.md
 ```
 
-Os números de ADR são indicativos: usar os próximos ids livres no momento da execução.
-
 ## Testes/validação determinística
 
-- Protótipo descartável de atomicidade injeta falha em cada fronteira candidata e prova estado
-  anterior completo ou commit completo, nunca mistura.
-- Spike de fronteira física converte fixtures existentes duas vezes e produz bytes idênticos, sem
-  importar `src/embodiment` quando a stack escolhida exigir processo separado.
-- Checagem documental falha se a spec estiver `Accepted` sem links para as três decisões.
-- Checagem de arquitetura proposta no ADR mostra como impedir write ports fora do
-  `CommitCoordinator` e no `Observatory`.
+- Links da spec resolvem para os paths reais dos ADRs 0010/0011 e da pesquisa.
+- A spec aceita nomeia Go 1.27.2 e SQLite/modernc por referência, sem copiar política divergente.
+- Busca documental falha se §14.3 aparecer como resolvida antes do CSFRV1-9A ou bloquear 1–9.
+- Todos os módulos previstos usam `internal/csf/`, `cmd/` e testes Go; o segundo runner tem path
+  explícito e independente.
 
 ## Evals e fronteira de conhecimento
 
-Não há eval comportamental. O contrato do adapter enumera explicitamente os campos que jamais podem
-virar `Observation`/`KnowledgeInput`: `BodyState`, capacidade/posterior, RNG, telemetria e estado de
-terceiro. Essa allow-list será executada no CSFRV1-10.
+Não há eval comportamental. Este ticket apenas preserva no CSFRV1-9A a obrigação futura de definir a
+allow-list física e executá-la no CSFRV1-10.
 
 ## Fora do escopo
 
-Implementar a stack escolhida; migrar JSONL físico; escolher framework de agentes/provedor de LLM;
-alterar semântica, codec, invariantes ou atomicidade do ADR 0008. Alternativa que exija enfraquecer
-esses contratos reabre o ADR, não fecha este ticket.
+Repetir a pesquisa de stack/persistência; criar ADRs substitutos; desenhar/implementar o adapter;
+escolher framework de agentes/provedor de LLM; alterar semântica do ADR 0008.
 
 ## Evidência de conclusão
 
-1. Três decisões aceitas e ligadas pela spec.
-2. Matriz de alternativas e protótipos reproduzíveis anexos à pesquisa.
-3. Spec com status `Accepted` e zero decisão aberta na §14.
-4. Este conjunto atualizado com comandos e paths concretos da stack escolhida.
-5. Diff exclusivamente documental/protótipos descartáveis, sem runtime de produção.
+1. ADRs 0010/0011 e pesquisa estão presentes na branch e ligados pela spec.
+2. Spec está `Accepted` para 1–9 e declara §14.3 como gate exclusivo do incremento 10.
+3. Grafo mostra CSFRV1-9A paralelo e dependência exclusiva de CSFRV1-10.
+4. Plano usa Go 1.27.2, SQLite/modernc e paths concretos, sem placeholders.
+5. Diff exclusivamente documental, sem runtime de produção ou spike físico prematuro.

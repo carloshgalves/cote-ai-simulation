@@ -1,7 +1,7 @@
 # CSFRV1-4 — Decisão determinística sobre um recurso mínimo
 
 **Spec:** §7.5 · §9 (`INDETERMINATE`, idempotência, provenance) · §11.1 (7, 13)  
-**ADR 0008:** invariantes 3–5, 7–8, 14, 31, 40  
+**ADR 0008:** invariantes 3–5, 8, 14, 31, 40; cobertura preparatória da 7
 **Bloqueado por:** CSFRV1-3  
 **Bloqueia:** CSFRV1-5
 
@@ -21,17 +21,18 @@ dos workers não muda assessments, candidatos, conflito, RNG ou disposições pr
 - Read/write/resource/invariant claims, detector conservador e resolvedor mínimo de recurso.
 - Substream RNG nomeado/versionado e `RngDraw` persistido como material provisório.
 - Idempotency namespace/digest, alias no mesmo ciclo e alias de canônica histórica.
-- `INDETERMINATE`/`IndeterminateRecord` por sujeito; neste ticket produz intenção de abort consumida
-  pelo envelope terminal do CSFRV1-5.
+- `INDETERMINATE`/`IndeterminateRecord` por sujeito; neste ticket o resultado é somente material
+  provisório fail-closed. A invariante 7 não é considerada implementada até o `CycleAbortRecord`
+  autoritativo do CSFRV1-5.
 
 ## Arquivos e módulos prováveis
 
 ```text
-runtime/csf/{actions,handlers,affordance,candidates,conflicts,rng,idempotency}
-runtime/csf/extensions/test_resource_v1/
-tests/csf/{actions,affordance,candidates,conflicts,idempotency}/
-tests/csf/properties/{candidate_partition,rng_isolation,decision_permutations}/
-tests/csf/scenarios/last_resource.*
+internal/csf/{action,handler,affordance,candidate,conflict,rng,idempotency}/
+internal/csf/extensions/testresourcev1/
+internal/csf/{action,affordance,candidate,conflict,idempotency}/**/*_test.go
+tests/properties/{candidate_partition,rng_isolation,decision_permutations}_test.go
+tests/scenarios/last_resource_test.go
 ```
 
 ## Testes determinísticos
@@ -66,5 +67,6 @@ ser descartadas integralmente pelo CSFRV1-5.
 
 1. Cenário persistido contém dois candidates, um conflict set, draw/policy e um vencedor estável.
 2. Execuções com workers invertidos produzem material provisório byte a byte idêntico.
-3. Casos indeterminate e partição inválida não publicam qualquer fato do mundo.
+3. Casos indeterminate e partição inválida não publicam qualquer fato do mundo; o relatório os
+   marca como cobertura preparatória, não como invariante 7 concluída.
 4. Teste de arquitetura prova que handlers/validators/resolvers não recebem stores mutáveis.

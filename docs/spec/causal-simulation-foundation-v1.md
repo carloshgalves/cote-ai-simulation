@@ -1,6 +1,6 @@
 # Spec — Causal Simulation Foundation V1
 
-**Status:** Proposed — bloqueada somente pelas decisões ainda abertas da §14
+**Status:** Accepted — incrementos 1–9 liberados; incremento 10 aguarda somente o contrato da §14.3
 
 **Decisão de origem:** [ADR 0008 — Fundação causal da simulação V1](../adr/0008-causal-simulation-foundation-v1.md)
 
@@ -9,8 +9,10 @@
 [ADR 0003](../adr/0003-logical-event-driven-time.md),
 [ADR 0005](../adr/0005-canon-knowledge-base.md),
 [ADR 0006](../adr/0006-physical-domain-model.md),
-[ADR 0007](../adr/0007-python-para-o-subdominio-embodiment.md) e
-[ADR 0009](../adr/0009-canonical-causal-codec-and-digests.md)
+[ADR 0007](../adr/0007-python-para-o-subdominio-embodiment.md),
+[ADR 0009](../adr/0009-canonical-causal-codec-and-digests.md),
+[ADR 0010](../adr/0010-csf-causal-engine-stack.md) e
+[ADR 0011](../adr/0011-csf-causal-persistence-atomicity.md)
 
 Esta spec traduz o ADR 0008 em uma entrega fatiável. O ADR é normativo para a semântica causal e
 para os schemas conceituais; esta spec define a superfície demonstrável, os incrementos de entrega e
@@ -349,10 +351,12 @@ Um commit bem-sucedido publica indivisivelmente:
 5. um `CycleCommit` no journal canônico do decision ledger;
 6. a nova `WorldRevision` e seus hashes/cursores.
 
-Se a tecnologia escolhida não oferece transação local sobre esses artefatos, o design precisa
-oferecer commit determinístico por `fence_digest` e impedir que ciclo, replay, resume ou barrier
-ultrapasse reconciliação incompleta. A escolha concreta está aberta na §14; enfraquecer atomicidade
-não é opção.
+Conforme o [ADR 0011](../adr/0011-csf-causal-persistence-atomicity.md), a V1 persiste esses artefatos
+como BLOBs canônicos em tabelas separadas de um único arquivo SQLite por run/workspace. O adapter
+SQLite/modernc usa WAL, `synchronous=FULL`, writer dedicado e uma única transação local curta; ciclo,
+replay, resume e barrier não podem ultrapassar commit incompleto. Os detalhes de versão, identidade
+do SQLite, configuração por conexão e política de backup permanecem normativos no ADR, sem cópia
+concorrente nesta spec.
 
 ### 6.6 Mudanças no snapshot
 
@@ -769,8 +773,9 @@ conforme o [contrato do codec](../architecture/canonical-codec-v1.md#10-evoluç�
 
 ## 13. Sequência de entrega recomendada
 
-Cada item deve ser um tracer bullet com testes e artefato executável; a divisão final cabe a
-`/to-tickets` depois que a §14 estiver resolvida.
+Cada item é um tracer bullet com testes e artefato executável. A divisão aceita e suas dependências
+estão no plano [CSF Runtime V1](../tickets/csf-runtime-v1/README.md); o contrato físico pode avançar
+em paralelo, mas somente sua integração continua bloqueada pela §14.3.
 
 1. **Contrato canônico:** manifesto, value objects, canonical bytes, ids/digests, policies e stores
    append-only em memória para teste.
@@ -790,42 +795,52 @@ provas de determinismo, crash consistency e isolamento.
 
 ---
 
-## 14. Decisões e bloqueios
+## 14. Decisões aceitas e gate remanescente
 
 O [ADR 0008](../adr/0008-causal-simulation-foundation-v1.md) está `Accepted` desde o merge
 `a669ef6`; sua aceitação não é bloqueio. Codec/digest também está fechado pelo
 [ADR 0009](../adr/0009-canonical-causal-codec-and-digests.md) e pelo
 [Canonical Causal Codec V1](../architecture/canonical-codec-v1.md), inclusive seu
 [policy/schema bundle imutável](../architecture/canonical-codec-v1-bundle/README.md).
+As decisões de stack e persistência foram fechadas a partir da
+[pesquisa de runtime e persistência](../research/csf-runtime-and-persistence-v1.md) pelos ADRs 0010 e
+0011. Elas liberam os incrementos 1–9 sem alterar a semântica causal do ADR 0008.
 
-As três decisões abaixo continuam abertas. Esta revisão não as antecipa.
+### 14.1 Stack da fundação — aceita e não bloqueante
 
-### 14.1 Stack da fundação — bloqueante para código de produção
+O [ADR 0010](../adr/0010-csf-causal-engine-stack.md) escolhe Go 1.27.2 para o Simulation Engine
+causal V1. O toolchain é pinado no `go.mod`; domínio e ports ficam em `internal/csf/`, comandos em
+`cmd/` e o harness inicial em `cmd/csf-harness/`. O runner Go e o segundo runner independente em
+TypeScript/Node, preservado em `tools/csf-conformance-ts/`, executam os 620 casos do bundle.
 
-O ADR 0007 escolhe Python somente para `Embodiment`; não é precedente para esta fundação. Um ADR de
-stack precisa escolher a linguagem/runtime do Simulation Engine causal e explicar a fronteira com o
-pacote físico. O protótipo de contratos pode usar uma implementação de teste descartável, mas não
-deve transformar essa conveniência em decisão arquitetural implícita.
+O core depende apenas de tipos/funções de domínio e ports; codec, persistência, Observatory e
+processo físico são adapters. O `Embodiment` permanece Python em `src/embodiment/` e só atravessa a
+fronteira por subprocesso e dados versionados. Nenhum adapter recebe autoridade para publicar
+`WorldRevision`, e nenhum cliente de LLM, framework de agentes ou banco vetorial entra no core.
 
-### 14.2 Topologia de persistência e atomicidade — bloqueante para o incremento 5
+### 14.2 Topologia de persistência e atomicidade — aceita e não bloqueante
 
-O ADR exige atomicidade entre decision ledger, event store, causal outbox e revisão, mas não escolhe
-banco ou topologia. Uma pesquisa curta seguida de ADR deve comparar pelo menos:
+O [ADR 0011](../adr/0011-csf-causal-persistence-atomicity.md) escolhe um único arquivo SQLite por
+run/workspace, acessado em Go pelo adapter `internal/csf/persistence/sqlite/` com
+`modernc.org/sqlite` v1.60.1. Genesis, ledgers, outbox, revisão, snapshot e checkpoint
+epistemológico opaco ocupam tabelas separadas na mesma autoridade transacional; records causais são
+preservados como BLOBs canônicos.
 
-- uma transação local sobre tabelas/streams no mesmo banco;
-- commit determinístico/reconciliável por `fence_digest` sobre stores separados;
-- estratégia de snapshot, retenção, backup e failure injection para cada opção.
-
-A decisão precisa demonstrar que ciclo posterior, replay, resume e barrier não ultrapassam um commit
-incompleto. “Eventual consistency” sem esse protocolo não satisfaz o ADR.
+O caminho autoritativo usa WAL, `synchronous=FULL`, configuração e verificação por conexão, writer
+dedicado e uma transação local única para settlement, decisions, events, lifecycle/trigger,
+`PerceptionTask`, journal terminal e revisão. Versão/source id do SQLite, compile options, hashes,
+backup e failure injection seguem o ADR; stores separados ou eventual consistency não são opções V1.
 
 ### 14.3 Interface do adapter físico — bloqueante apenas para o incremento 10
 
 Antes da integração, um contrato versionado precisa mapear o JSONL/snapshot atual do `Embodiment`
 para schemas globais sem confundir sequência local com global, nem permitir que o pacote publique
-revisão diretamente. A decisão pode ser tomada em um ticket de design do adapter, desde que produza
-schema/fixtures revisáveis antes do código de integração e preserve os ADRs 0006/0007.
+revisão diretamente. O [CSFRV1-9A](../tickets/csf-runtime-v1/09a-contrato-adapter-fisico.md) fecha
+esse gate em `docs/architecture/embodiment-causal-adapter-v1.md`, com schemas/fixtures versionados e
+allow-list física revisável antes do código de integração. Ele pode avançar em paralelo aos
+incrementos 1–9 e não os bloqueia.
 
-Nenhuma das decisões 14.1–14.3 altera a semântica causal do ADR 0008. Se uma alternativa exigir
-enfraquecer identidade, atomicidade, isolamento ou replay, ela reabre o ADR em vez de ser resolvida
-localmente.
+Os incrementos 1–9 estão liberados pelos ADRs 0010/0011. O incremento 10 começa somente após o
+CSFRV1-9A e o incremento 9; até lá, a interface física permanece aberta. Nenhuma decisão desta seção
+altera a semântica causal do ADR 0008: alternativa que enfraqueça identidade, atomicidade,
+isolamento ou replay reabre o ADR em vez de ser resolvida localmente.

@@ -7,13 +7,13 @@
 **Stack:** [ADR 0010](../../adr/0010-csf-causal-engine-stack.md) — Go 1.27.2
 **Persistência:** [ADR 0011](../../adr/0011-csf-causal-persistence-atomicity.md) — SQLite/modernc,
 transação local única
-**Estado:** stack e persistência aceitas; CSFRV1-0 alinha a spec para liberar 1–9, enquanto
+**Estado:** spec aceita; stack e persistência incorporadas; incrementos 1–9 liberados, enquanto
 CSFRV1-9A fecha somente o gate físico do CSFRV1-10.
 
 Este conjunto entrega a fundação causal como dez slices executáveis e dois gates documentais.
-CSFRV1-0 não repete pesquisa: incorpora na spec as decisões já aceitas dos ADRs 0010/0011 e explicita
-que a interface física continua bloqueando apenas a integração final. CSFRV1-9A fecha esse contrato
-com schemas/fixtures antes do CSFRV1-10. Nenhum ticket escolhe stack ou autoridade por omissão.
+CSFRV1-0 incorporou na spec as decisões dos ADRs 0010/0011 sem repetir pesquisa e explicitou que a
+interface física bloqueia apenas a integração final. CSFRV1-9A fecha esse contrato com
+schemas/fixtures antes do CSFRV1-10. Nenhum ticket escolhe stack ou autoridade por omissão.
 
 ## Ordem e dependências
 

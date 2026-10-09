@@ -13,4 +13,4 @@ spec é corrigida primeiro e o ticket é reescrito depois.
 | Conjunto | Spec de origem | Estado |
 |---|---|---|
 | [Physical Simulation V1](physical-simulation-v1/) | [`docs/spec/physical-simulation-v1.md`](../spec/physical-simulation-v1.md) | aberto |
-| [CSF Runtime V1](csf-runtime-v1/) | [`docs/spec/causal-simulation-foundation-v1.md`](../spec/causal-simulation-foundation-v1.md) | planejado; alinhamento documental CSFRV1-0 |
+| [CSF Runtime V1](csf-runtime-v1/) | [`docs/spec/causal-simulation-foundation-v1.md`](../spec/causal-simulation-foundation-v1.md) | spec aceita; incrementos 1–9 liberados; 10 aguarda CSFRV1-9A |

@@ -5,6 +5,8 @@ import (
 	"bytes"
 	"encoding/hex"
 	"fmt"
+	"sort"
+	"strings"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
@@ -31,6 +33,9 @@ func ValidateCanonical(encoded []byte, bundle *policy.Bundle) (*Genesis, error) 
 	}
 	if envelope.SchemaID != schemaID || envelope.SchemaVersion != 1 {
 		return nil, fmt.Errorf("genesis schema/version mismatch")
+	}
+	if _, err := bundle.Operation(envelope.DomainTag, envelope.SchemaID, envelope.SchemaVersion, true); err != nil {
+		return nil, fmt.Errorf("genesis envelope operation: %w", err)
 	}
 	payload, ok := envelope.Value.([]any)
 	if !ok || len(payload) != 18 {
@@ -65,11 +70,23 @@ func ValidateCanonical(encoded []byte, bundle *policy.Bundle) (*Genesis, error) 
 	if !equalHexBytes(payload[10], policy.CodecPolicyHashHex) || !equalHexBytes(payload[11], policy.SchemaBundleHashHex) {
 		return nil, fmt.Errorf("genesis bundle hash pin mismatch")
 	}
+	if err := validateExtensionBundles(payload[12]); err != nil {
+		return nil, err
+	}
+	if err := validateMachineIDSet(payload[13], "exogenous source ids"); err != nil {
+		return nil, err
+	}
 	if err := validatePolicies(payload[14], bundle); err != nil {
 		return nil, err
 	}
-	if schemas, ok := payload[15].([]any); !ok || len(schemas) == 0 {
-		return nil, fmt.Errorf("genesis schema set is empty")
+	if err := validateSchemas(payload[15], bundle); err != nil {
+		return nil, err
+	}
+	if err := validateTypedValue(payload[16], bundle); err != nil {
+		return nil, fmt.Errorf("genesis initial world state: %w", err)
+	}
+	if err := validateCheckpoints(payload[17]); err != nil {
+		return nil, err
 	}
 	deriver := identity.New(bundle)
 	genesisIDHash, _, err := deriver.Sum("cote.csf.id.genesis", "cote.csf.schema.genesis-id-preimage", 1, []any{runBytes})
@@ -90,24 +107,9 @@ func validatePolicies(value any, bundle *policy.Bundle) error {
 	if !ok {
 		return fmt.Errorf("genesis policies must be an array")
 	}
-	bindings, ok := bundle.Transitions["genesis_policy_bindings"].([]any)
-	if !ok || len(policies) != len(bindings) {
+	expected, err := bundle.GenesisPolicyRefs()
+	if err != nil || len(policies) != len(expected) {
 		return fmt.Errorf("genesis policy set incomplete")
-	}
-	expected := map[string][]any{}
-	for _, raw := range bindings {
-		binding, ok := raw.(map[any]any)
-		if !ok {
-			// JSON maps loaded by encoding/json use string keys.
-			if stringBinding, stringOK := raw.(map[string]any); stringOK {
-				role, _ := stringBinding["role"].(string)
-				ref, _ := stringBinding["ref"].([]any)
-				expected[role] = ref
-				continue
-			}
-			return fmt.Errorf("invalid policy binding")
-		}
-		_ = binding
 	}
 	roles, err := bundle.RequiredPolicyRoles()
 	if err != nil {
@@ -116,13 +118,8 @@ func validatePolicies(value any, bundle *policy.Bundle) error {
 	if len(expected) != len(roles) {
 		return fmt.Errorf("genesis policy binding registry incomplete")
 	}
-	seen := map[string]struct{}{}
-	roleByID := map[string]string{}
-	for _, role := range roles {
-		roleByID[role+"-v1"] = role
-	}
-	roleByID["perception-visible-first-v1"] = "perception"
-	for _, item := range policies {
+	previousID := ""
+	for index, item := range policies {
 		ref, ok := item.([]any)
 		if !ok || len(ref) != 3 {
 			return fmt.Errorf("invalid policy ref")
@@ -131,25 +128,221 @@ func validatePolicies(value any, bundle *policy.Bundle) error {
 		if !ok {
 			return fmt.Errorf("invalid policy id")
 		}
-		matched := roleByID[id]
-		for role, wanted := range expected {
-			if len(wanted) == 3 && wanted[0] == id && numericEqual(wanted[1], ref[1]) && hexOrBytesEqual(wanted[2], ref[2]) {
-				matched = role
-				break
+		wanted := expected[index]
+		actualHash, hashOK := ref[2].([]byte)
+		if !hashOK || wanted[0] != id || !numericEqual(wanted[1], ref[1]) || !bytes.Equal(wanted[2].([]byte), actualHash) {
+			return fmt.Errorf("unknown or mismatched policy ref %q version=%v hash=%x", id, ref[1], ref[2])
+		}
+		if previousID != "" && id <= previousID {
+			return fmt.Errorf("genesis policies are not in canonical policy-id order")
+		}
+		previousID = id
+	}
+	return nil
+}
+
+func validateExtensionBundles(value any) error {
+	items, ok := value.([]any)
+	if !ok || len(items) > 1024 {
+		return fmt.Errorf("invalid genesis extension bundles")
+	}
+	previous := ""
+	for _, raw := range items {
+		fields, ok := raw.([]any)
+		if !ok || len(fields) != 2 {
+			return fmt.Errorf("invalid extension bundle ref")
+		}
+		id, ok := fields[0].(string)
+		hash, hashOK := fields[1].([]byte)
+		if !ok || domain.ValidateMachineID(id) != nil || !hashOK || len(hash) != 32 {
+			return fmt.Errorf("invalid extension bundle ref")
+		}
+		if previous != "" && id <= previous {
+			return fmt.Errorf("extension bundles are not a canonical set")
+		}
+		previous = id
+	}
+	return nil
+}
+
+func validateMachineIDSet(value any, label string) error {
+	items, ok := value.([]any)
+	if !ok || len(items) > 1024 {
+		return fmt.Errorf("invalid genesis %s", label)
+	}
+	previous := ""
+	for _, raw := range items {
+		id, ok := raw.(string)
+		if !ok || domain.ValidateMachineID(id) != nil || (previous != "" && id <= previous) {
+			return fmt.Errorf("invalid or non-canonical genesis %s", label)
+		}
+		previous = id
+	}
+	return nil
+}
+
+func validateSchemas(value any, bundle *policy.Bundle) error {
+	items, ok := value.([]any)
+	if !ok || len(items) == 0 || len(items) > 65535 {
+		return fmt.Errorf("genesis schema set is empty or invalid")
+	}
+	registered := map[string]struct{}{}
+	for _, registry := range []string{"schemas", "fixture_schemas"} {
+		entries, ok := bundle.Registries[registry].([]any)
+		if !ok {
+			continue
+		}
+		for _, raw := range entries {
+			fields, ok := raw.([]any)
+			if !ok || len(fields) < 2 {
+				continue
+			}
+			id, idOK := fields[0].(string)
+			version, versionOK := unsigned(fields[1])
+			if idOK && versionOK {
+				registered[fmt.Sprintf("%s@%d", id, version)] = struct{}{}
 			}
 		}
-		version, versionOK := unsigned(ref[1])
-		hash, hashOK := ref[2].([]byte)
-		if matched == "" || !versionOK || version == 0 || !hashOK || len(hash) != 32 {
-			return fmt.Errorf("unknown or mismatched policy ref %q", id)
-		}
-		if _, duplicate := seen[matched]; duplicate {
-			return fmt.Errorf("duplicate policy role %q", matched)
-		}
-		seen[matched] = struct{}{}
 	}
-	if len(seen) != len(roles) {
-		return fmt.Errorf("genesis policy set incomplete")
+	previous := ""
+	for _, raw := range items {
+		fields, ok := raw.([]any)
+		if !ok || len(fields) != 2 {
+			return fmt.Errorf("invalid genesis schema ref")
+		}
+		id, idOK := fields[0].(string)
+		version, versionOK := unsigned(fields[1])
+		key := fmt.Sprintf("%s@%d", id, version)
+		if !idOK || domain.ValidateDomainTag(id) != nil || !versionOK || version == 0 || version > uint64(^uint32(0)) {
+			return fmt.Errorf("invalid genesis schema ref")
+		}
+		if _, ok := registered[key]; !ok {
+			return fmt.Errorf("unregistered genesis schema ref %s", key)
+		}
+		if previous != "" && key <= previous {
+			return fmt.Errorf("genesis schemas are not a canonical set")
+		}
+		previous = key
+	}
+	return nil
+}
+
+func validateTypedValue(value any, bundle *policy.Bundle) error {
+	fields, ok := value.([]any)
+	if !ok || len(fields) != 4 {
+		return fmt.Errorf("typed value must have four fields")
+	}
+	schema, schemaOK := fields[0].(string)
+	version, versionOK := unsigned(fields[1])
+	encoded, encodedOK := fields[2].([]byte)
+	digest, digestOK := fields[3].([]byte)
+	if !schemaOK || domain.ValidateDomainTag(schema) != nil || !versionOK || version == 0 || version > uint64(^uint32(0)) || !encodedOK || !digestOK || len(digest) != 32 {
+		return fmt.Errorf("invalid typed value fields")
+	}
+	inner, err := codec.StrictDecodeEnvelope(encoded)
+	if err != nil {
+		return fmt.Errorf("invalid inner envelope: %w", err)
+	}
+	if inner.SchemaID != schema || uint64(inner.SchemaVersion) != version {
+		return fmt.Errorf("typed value schema/version mismatch")
+	}
+	if _, err := bundle.Operation(inner.DomainTag, inner.SchemaID, inner.SchemaVersion, true); err != nil {
+		if !strings.HasPrefix(inner.DomainTag, "cote.csf.test.") || inner.DomainTag != inner.SchemaID || !registeredSchema(bundle, inner.SchemaID, inner.SchemaVersion, "fixture_schemas") {
+			return fmt.Errorf("typed value operation: %w", err)
+		}
+	}
+	actual := identity.OpaqueContentHash(encoded)
+	if !bytes.Equal(actual[:], digest) {
+		return fmt.Errorf("typed value digest mismatch")
+	}
+	return nil
+}
+
+func registeredSchema(bundle *policy.Bundle, schemaID string, schemaVersion uint32, registry string) bool {
+	entries, ok := bundle.Registries[registry].([]any)
+	if !ok {
+		return false
+	}
+	for _, raw := range entries {
+		fields, ok := raw.([]any)
+		if !ok || len(fields) < 2 {
+			continue
+		}
+		version, versionOK := unsigned(fields[1])
+		if fields[0] == schemaID && versionOK && version == uint64(schemaVersion) {
+			return true
+		}
+	}
+	return false
+}
+
+func validateCheckpoints(value any) error {
+	items, ok := value.([]any)
+	if !ok || len(items) > 1024 {
+		return fmt.Errorf("invalid genesis epistemic checkpoints")
+	}
+	keys := make([]string, 0, len(items))
+	for _, raw := range items {
+		fields, ok := raw.([]any)
+		if !ok || len(fields) != 8 {
+			return fmt.Errorf("invalid epistemic checkpoint ref")
+		}
+		actor, ok := fields[0].([]any)
+		if !ok || len(actor) != 2 {
+			return fmt.Errorf("invalid checkpoint actor ref")
+		}
+		namespace, namespaceOK := actor[0].(string)
+		actorID, actorOK := actor[1].(string)
+		storeID, storeOK := fields[1].(string)
+		version, versionOK := unsigned(fields[2])
+		content, contentOK := fields[3].([]any)
+		hash, hashOK := fields[4].([]byte)
+		producer, producerOK := fields[5].(string)
+		producerVersion, producerVersionOK := unsigned(fields[6])
+		covers, coversOK := fields[7].([]any)
+		if !namespaceOK || !actorOK || !storeOK || !versionOK || version == 0 || version > uint64(^uint32(0)) || !contentOK || !hashOK || len(hash) != 32 || !producerOK || !producerVersionOK || producerVersion > uint64(^uint32(0)) || !coversOK || len(covers) != 3 || domain.ValidateMachineID(namespace) != nil || domain.ValidateMachineID(actorID) != nil || domain.ValidateMachineID(storeID) != nil || domain.ValidateMachineID(producer) != nil {
+			return fmt.Errorf("invalid epistemic checkpoint ref")
+		}
+		if len(content) != 2 {
+			return fmt.Errorf("invalid checkpoint content variant")
+		}
+		variant, variantOK := unsigned(content[0])
+		if !variantOK || variant > 1 {
+			return fmt.Errorf("invalid checkpoint content variant")
+		}
+		if variant == 0 {
+			uri, ok := content[1].(string)
+			if !ok || uri == "" {
+				return fmt.Errorf("invalid checkpoint locator")
+			}
+		} else {
+			inline, ok := content[1].([]byte)
+			if !ok {
+				return fmt.Errorf("invalid inline checkpoint")
+			}
+			actual := identity.OpaqueContentHash(inline)
+			if !bytes.Equal(actual[:], hash) {
+				return fmt.Errorf("inline checkpoint content hash mismatch")
+			}
+		}
+		if _, ok := signed(covers[0]); !ok {
+			return fmt.Errorf("invalid checkpoint coverage instant")
+		}
+		if _, ok := unsigned(covers[1]); !ok {
+			return fmt.Errorf("invalid checkpoint coverage revision")
+		}
+		if _, ok := unsigned(covers[2]); !ok {
+			return fmt.Errorf("invalid checkpoint evidence cursor")
+		}
+		keys = append(keys, namespace+"\x00"+actorID)
+	}
+	if !sort.StringsAreSorted(keys) {
+		return fmt.Errorf("epistemic checkpoints are not canonically ordered")
+	}
+	for index := 1; index < len(keys); index++ {
+		if keys[index] == keys[index-1] {
+			return fmt.Errorf("duplicate epistemic checkpoint actor")
+		}
 	}
 	return nil
 }
@@ -174,15 +367,6 @@ func validateOptionalBytes(value any) error {
 func equalHexBytes(value any, expected string) bool {
 	bytesValue, ok := value.([]byte)
 	return ok && hex.EncodeToString(bytesValue) == expected
-}
-
-func hexOrBytesEqual(expected, actual any) bool {
-	expectedHex, ok := expected.(string)
-	if !ok {
-		return false
-	}
-	actualBytes, ok := actual.([]byte)
-	return ok && hex.EncodeToString(actualBytes) == expectedHex
 }
 
 func numericEqual(left, right any) bool {

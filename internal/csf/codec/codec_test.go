@@ -1,6 +1,7 @@
 package codec
 
 import (
+	"bytes"
 	"encoding/hex"
 	"math"
 	"testing"
@@ -41,5 +42,37 @@ func TestStrictDecodeRejectsNonCanonicalBytes(t *testing.T) {
 func TestUnicode151UnassignedCodePointIsRejected(t *testing.T) {
 	if _, err := CanonicalPayload("\u0378"); err == nil {
 		t.Fatal("accepted a Unicode 15.1 General_Category=Cn code point")
+	}
+}
+
+func TestCanonicalPayloadNormalizesStringsInsideTypedMaps(t *testing.T) {
+	composed, err := CanonicalPayload(map[string]any{"key": "é"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	decomposed, err := CanonicalPayload(map[string]any{"key": "e\u0301"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Equal(composed, decomposed) {
+		t.Fatalf("NFC-equivalent typed maps diverged:\n%x\n%x", composed, decomposed)
+	}
+	if _, err := StrictDecodePayload(composed); err != nil {
+		t.Fatalf("encoder emitted bytes rejected by strict decoder: %v", err)
+	}
+}
+
+func TestCanonicalPayloadRejectsUnassignedUnicodeInsideTypedMap(t *testing.T) {
+	if _, err := CanonicalPayload(map[string]any{"key": "\u0378"}); err == nil {
+		t.Fatal("accepted Unicode 15.1 unassigned code point inside typed map")
+	}
+}
+
+func TestCanonicalPayloadRejectsStructInputs(t *testing.T) {
+	type unsafeStruct struct {
+		Text string
+	}
+	if _, err := CanonicalPayload(unsafeStruct{Text: "\u0378"}); err == nil {
+		t.Fatal("accepted struct that bypasses the closed canonical value AST")
 	}
 }

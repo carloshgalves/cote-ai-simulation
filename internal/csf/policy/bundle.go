@@ -10,6 +10,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 )
 
 const (
@@ -223,4 +225,53 @@ func (b *Bundle) RequiredPolicyRoles() ([]string, error) {
 		roles[index] = role
 	}
 	return roles, nil
+}
+
+// GenesisPolicyRefs returns the exact, canonically ordered policy refs pinned by
+// this bundle. Callers must not synthesize refs from a recognized policy ID.
+func (b *Bundle) GenesisPolicyRefs() ([][]any, error) {
+	var fixtures map[string]any
+	if err := decodeStrictJSON(filepath.Join(b.Directory, "fixtures.json"), &fixtures); err != nil {
+		return nil, err
+	}
+	var refs [][]any
+	for _, raw := range fixtures["semantic"].([]any) {
+		item := raw.(map[string]any)
+		if item["case_id"] != "genesis.pinning" {
+			continue
+		}
+		encoded, err := hex.DecodeString(item["genesis_envelope_hex"].(string))
+		if err != nil {
+			return nil, err
+		}
+		envelope, err := codec.StrictDecodeEnvelope(encoded)
+		if err != nil {
+			return nil, err
+		}
+		payload, ok := envelope.Value.([]any)
+		if !ok || len(payload) != 18 {
+			return nil, fmt.Errorf("canonical genesis fixture has invalid shape")
+		}
+		policies, ok := payload[14].([]any)
+		if !ok {
+			return nil, fmt.Errorf("canonical genesis policy set missing")
+		}
+		refs = make([][]any, len(policies))
+		for index, rawRef := range policies {
+			ref, ok := rawRef.([]any)
+			if !ok || len(ref) != 3 {
+				return nil, fmt.Errorf("invalid canonical genesis policy ref")
+			}
+			hash, hashOK := ref[2].([]byte)
+			if !hashOK || len(hash) != 32 {
+				return nil, fmt.Errorf("invalid canonical genesis policy hash")
+			}
+			refs[index] = []any{ref[0], ref[1], bytes.Clone(hash)}
+		}
+		break
+	}
+	if len(refs) == 0 {
+		return nil, fmt.Errorf("canonical genesis policy fixture missing")
+	}
+	return refs, nil
 }

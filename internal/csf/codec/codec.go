@@ -206,7 +206,34 @@ func normalize(value any) (any, error) {
 		return result, nil
 	default:
 		rv := reflect.ValueOf(value)
-		if rv.IsValid() && rv.Kind() == reflect.Slice {
+		if !rv.IsValid() {
+			return nil, fmt.Errorf("invalid canonical value")
+		}
+		switch rv.Kind() {
+		case reflect.Interface:
+			if rv.IsNil() {
+				return nil, nil
+			}
+			return normalize(rv.Elem().Interface())
+		case reflect.String:
+			return normalize(rv.String())
+		case reflect.Bool:
+			return rv.Bool(), nil
+		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+			return rv.Int(), nil
+		case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+			return rv.Uint(), nil
+		case reflect.Float32, reflect.Float64:
+			return normalize(rv.Float())
+		case reflect.Slice:
+			if rv.Type().Elem().Kind() == reflect.Uint8 {
+				if rv.IsNil() {
+					return []byte(nil), nil
+				}
+				result := make([]byte, rv.Len())
+				reflect.Copy(reflect.ValueOf(result), rv)
+				return result, nil
+			}
 			result := make([]any, rv.Len())
 			for index := range result {
 				normalized, err := normalize(rv.Index(index).Interface())
@@ -216,8 +243,48 @@ func normalize(value any) (any, error) {
 				result[index] = normalized
 			}
 			return result, nil
+		case reflect.Array:
+			result := make([]any, rv.Len())
+			for index := range result {
+				normalized, err := normalize(rv.Index(index).Interface())
+				if err != nil {
+					return nil, err
+				}
+				result[index] = normalized
+			}
+			return result, nil
+		case reflect.Map:
+			if rv.IsNil() {
+				return map[any]any(nil), nil
+			}
+			result := make(map[any]any, rv.Len())
+			iterator := rv.MapRange()
+			for iterator.Next() {
+				normalizedKey, err := normalize(iterator.Key().Interface())
+				if err != nil {
+					return nil, fmt.Errorf("normalize map key: %w", err)
+				}
+				keyType := reflect.TypeOf(normalizedKey)
+				if keyType != nil && !keyType.Comparable() {
+					return nil, fmt.Errorf("complex map key is forbidden")
+				}
+				if _, duplicate := result[normalizedKey]; duplicate {
+					return nil, fmt.Errorf("duplicate map key after normalization")
+				}
+				normalizedItem, err := normalize(iterator.Value().Interface())
+				if err != nil {
+					return nil, err
+				}
+				result[normalizedKey] = normalizedItem
+			}
+			return result, nil
+		case reflect.Struct:
+			return nil, fmt.Errorf("struct input is outside the canonical value AST")
+		case reflect.Pointer:
+			return nil, fmt.Errorf("pointer input is outside the canonical value AST")
+		default:
+			return nil, fmt.Errorf("unsupported canonical value type %T", value)
 		}
-		return value, nil
 	}
 }
 

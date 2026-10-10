@@ -31,3 +31,7 @@ func (d Deriver) Sum(domainTag, schemaID string, schemaVersion uint32, value any
 	}
 	return sha256.Sum256(encoded), encoded, nil
 }
+
+// OpaqueContentHash hashes content bytes whose digest is stored as data rather
+// than used as a causal ID or registered domain-operation digest.
+func OpaqueContentHash(content []byte) domain.Digest { return sha256.Sum256(content) }

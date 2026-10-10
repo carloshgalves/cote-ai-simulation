@@ -1,0 +1,42 @@
+name: CSF canonical conformance
+
+on:
+  pull_request:
+    paths:
+      - "go.mod"
+      - "go.sum"
+      - "cmd/csf-harness/**"
+      - "internal/csf/**"
+      - "tools/csf-conformance-ts/**"
+      - "docs/architecture/canonical-codec-v1-bundle/**"
+      - ".github/workflows/csf-conformance.yml"
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Test Go runtime
+        run: go test ./...
+      - name: Run independent Go conformance runner
+        run: go run ./cmd/csf-harness --bundle docs/architecture/canonical-codec-v1-bundle --report /tmp/csf-go-report.json
+      - name: Run independent TypeScript conformance runner
+        run: node --no-warnings --experimental-loader ./tools/csf-conformance-ts/loader.mjs tools/csf-conformance-ts/runner.ts docs/architecture/canonical-codec-v1-bundle /tmp/csf-ts-report.json
+      - name: Require identical 620-case reports
+        run: cmp /tmp/csf-go-report.json /tmp/csf-ts-report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: csf-conformance-report
+          path: /tmp/csf-go-report.json

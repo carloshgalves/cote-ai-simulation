@@ -30,3 +30,22 @@ pytest
 O segundo comando avança três dias com sono ruim e mostra, por canal, o antes e o depois: `coordination` e `reaction_time` caem visivelmente, `max_strength` quase não se move, e a dívida de sono continua no corpo no dia seguinte. Rodá-lo com `--days 0` não muda nada — cena não cura.
 
 Veja `CONTEXT.md`, `docs/adr/` e `docs/research/ai-landscape.md`.
+
+## Causal Simulation Foundation
+
+O contrato canônico da CSF V1 possui runners independentes em Go e TypeScript. Ambos validam o
+bundle normativo e precisam emitir o mesmo relatório de 620 casos:
+
+```bash
+go run ./cmd/csf-harness --report /tmp/csf-go-report.json
+node --no-warnings --experimental-loader ./tools/csf-conformance-ts/loader.mjs \
+  tools/csf-conformance-ts/runner.ts docs/architecture/canonical-codec-v1-bundle \
+  /tmp/csf-ts-report.json
+cmp /tmp/csf-go-report.json /tmp/csf-ts-report.json
+```
+
+Para criar um run vazio, forneça um envelope CBOR canônico de genesis e um arquivo SQLite novo:
+
+```bash
+go run ./cmd/csf-harness --genesis /path/to/genesis.cbor --db /path/to/run.db
+```

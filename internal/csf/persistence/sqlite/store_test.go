@@ -7,7 +7,9 @@ import (
 	"os"
 	"testing"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
@@ -53,6 +55,27 @@ func TestGenesisRoundTripsByteForByteAndCollisionFails(t *testing.T) {
 	for _, item := range fixtures.Semantic {
 		if item.CaseID == "genesis.pinning" {
 			encoded, err = hex.DecodeString(item.GenesisEnvelopeHex)
+			if err != nil {
+				t.Fatal(err)
+			}
+			envelope, err := codec.StrictDecodeEnvelope(encoded)
+			if err != nil {
+				t.Fatal(err)
+			}
+			payload := envelope.Value.([]any)
+			envelope.DomainTag = "cote.csf.digest.genesis-manifest"
+			payload[15] = []any{[]any{"cote.csf.schema.snapshot-pending-state", uint64(1)}}
+			state := make([]any, 10)
+			for i := range state {
+				state[i] = []any{}
+			}
+			stateEnvelope, err := codec.CanonicalBytes("cote.csf.snapshot.pending-state", "cote.csf.schema.snapshot-pending-state", 1, state)
+			if err != nil {
+				t.Fatal(err)
+			}
+			digest := identity.OpaqueContentHash(stateEnvelope)
+			payload[16] = []any{"cote.csf.schema.snapshot-pending-state", uint64(1), stateEnvelope, digest[:]}
+			encoded, err = codec.CanonicalBytes(envelope.DomainTag, envelope.SchemaID, envelope.SchemaVersion, payload)
 			if err != nil {
 				t.Fatal(err)
 			}

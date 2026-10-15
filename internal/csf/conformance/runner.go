@@ -576,9 +576,7 @@ func executeSemantic(item, fixtures map[string]any, bundle *policy.Bundle) error
 		if kind == "record_conditional_constraint" {
 			return executeRecordConstraint(item)
 		}
-		if !hasDistinctProbeBytes(item) || !validateRecordBindingCodes(item, bundle) {
-			return fmt.Errorf("record constraint lacks distinct valid/invalid probes")
-		}
+		return executeRecordBinding(item, fixtures, bundle)
 	case "set_exact_duplicate":
 		return executeSetExactDuplicate(item)
 	case "set_identity_collision":
@@ -668,7 +666,14 @@ func executeLinkedConstraint(item, fixtures map[string]any, bundle *policy.Bundl
 	if expected == "accept" && valid {
 		return nil
 	}
-	if expected == "reject" && !valid && item["invalid_error_code"] != nil {
+	if expected == "reject" && !valid {
+		code := "LINKED_RECORD_CONSTRAINT"
+		if item["kind"] == "linked_state_constraint" {
+			code = "LINKED_STATE_CONSTRAINT"
+		}
+		if item["invalid_error_code"] != code {
+			return fmt.Errorf("linked constraint error code mismatch: got %v want %s", item["invalid_error_code"], code)
+		}
 		return nil
 	}
 	return fmt.Errorf("linked constraint outcome mismatch")
@@ -790,14 +795,252 @@ func validateOperationProbe(item, fixtures map[string]any) error {
 	return fmt.Errorf("operation probe %q missing", wanted)
 }
 
-func validateRecordBindingCodes(item map[string]any, bundle *policy.Bundle) bool {
-	accepted, acceptedOK := number(item["accepted_code"])
-	rejected, rejectedOK := number(item["rejected_code"])
-	if !acceptedOK || !rejectedOK {
-		return item["accepted_code"] == nil && item["rejected_code"] == nil
-	}
+func executeRecordBinding(item, fixtures map[string]any, bundle *policy.Bundle) error {
+	kind := item["kind"].(string)
 	registry, _ := item["registry"].(string)
-	return registryContainsCode(bundle, "enums", registry, accepted) && !registryContainsCode(bundle, "enums", registry, rejected)
+	acceptedCodes := []uint64{}
+	if raw, ok := item["accepted_codes"].([]any); ok {
+		for _, value := range raw {
+			code, valid := number(value)
+			if !valid {
+				return fmt.Errorf("invalid accepted record binding code")
+			}
+			acceptedCodes = append(acceptedCodes, code)
+		}
+	} else if value, valid := number(item["accepted_code"]); valid {
+		acceptedCodes = append(acceptedCodes, value)
+	} else if kind != "record_enum_binding" {
+		return fmt.Errorf("record binding accepted code missing")
+	}
+	if kind == "record_enum_binding" {
+		for _, probe := range []struct {
+			key      string
+			accepted bool
+		}{{"accepted_envelope_hex", true}, {"rejected_envelope_hex", false}} {
+			encoded, err := decodeHex(item, probe.key)
+			if err != nil {
+				return err
+			}
+			envelope, err := codec.StrictDecodeEnvelope(encoded)
+			if err != nil {
+				return err
+			}
+			fields, ok := envelope.Value.([]any)
+			if !ok {
+				return fmt.Errorf("record enum envelope payload is not a record")
+			}
+			codeValue, err := recordEnumValue(fields, item["field_path"].(string))
+			if err != nil {
+				return err
+			}
+			code, ok := number(codeValue)
+			if !ok {
+				return fmt.Errorf("record enum value is not unsigned")
+			}
+			if probe.accepted {
+				if len(acceptedCodes) > 0 && !containsCode(acceptedCodes, code) || !registryContainsCode(bundle, "enums", registry, code) {
+					return fmt.Errorf("accepted envelope has unregistered enum")
+				}
+			} else {
+				if registryContainsCode(bundle, "enums", registry, code) || item["rejected_error_code"] != "UNKNOWN_ENUM" {
+					return fmt.Errorf("rejected envelope does not prove unknown enum")
+				}
+			}
+		}
+		return nil
+	}
+	if len(acceptedCodes) == 0 {
+		return fmt.Errorf("record binding has no accepted code")
+	}
+	for _, code := range acceptedCodes {
+		if !registryContainsCode(bundle, "enums", registry, code) {
+			return fmt.Errorf("accepted code is not in registry")
+		}
+	}
+	return executeReferenceBinding(item, fixtures, bundle, acceptedCodes)
+}
+
+func recordEnumValue(fields []any, fieldPath string) (any, error) {
+	var value any
+	switch fieldPath {
+	case "conflict-set.conflict-kind":
+		value = at(fields, 2)
+	case "trigger-activation.lifecycle":
+		value = at(fields, 9)
+	case "perception-task.lifecycle":
+		value = at(fields, 9)
+	case "decision-record.subject.input-kind":
+		subject, ok := at(fields, 4).([]any)
+		if !ok {
+			return nil, fmt.Errorf("decision subject is not an array")
+		}
+		value = at(subject, 0)
+	default:
+		return nil, fmt.Errorf("unsupported record enum field %q", fieldPath)
+	}
+	if value == nil {
+		return nil, fmt.Errorf("record enum field %q missing", fieldPath)
+	}
+	return value, nil
+}
+
+func at(fields []any, index int) any {
+	if index < 0 || index >= len(fields) {
+		return nil
+	}
+	return fields[index]
+}
+
+func containsCode(codes []uint64, code uint64) bool {
+	for _, candidate := range codes {
+		if candidate == code {
+			return true
+		}
+	}
+	return false
+}
+
+func executeReferenceBinding(item, fixtures map[string]any, bundle *policy.Bundle, acceptedCodes []uint64) error {
+	templateID, _ := item["record_template_case_id"].(string)
+	var encodedTemplate []byte
+	for _, raw := range fixtures["positive"].([]any) {
+		candidate := raw.(map[string]any)
+		if caseID(candidate) == templateID {
+			var err error
+			encodedTemplate, err = decodeHex(candidate, "canonical_hex")
+			if err != nil {
+				return err
+			}
+			break
+		}
+	}
+	if len(encodedTemplate) == 0 {
+		return fmt.Errorf("record template %q missing", templateID)
+	}
+	containerPath, _ := item["container_field_path"].(string)
+	index, err := recordContainerIndex(containerPath)
+	if err != nil {
+		return err
+	}
+	template, err := codec.StrictDecodeEnvelope(encodedTemplate)
+	if err != nil {
+		return err
+	}
+	payload, ok := template.Value.([]any)
+	if !ok || index >= len(payload) {
+		return fmt.Errorf("record template path is invalid")
+	}
+	accepted, ok := item["accepted_container_cbor_hex"].(map[string]any)
+	if !ok {
+		return fmt.Errorf("accepted reference container map missing")
+	}
+	acceptedKeys := map[string]bool{}
+	for _, code := range acceptedCodes {
+		acceptedKeys[strconv.FormatUint(code, 10)] = true
+	}
+	for codeText, rawHex := range accepted {
+		code, parseErr := strconv.ParseUint(codeText, 10, 64)
+		if parseErr != nil || !acceptedKeys[codeText] || !registryContainsCode(bundle, "enums", item["registry"].(string), code) {
+			return fmt.Errorf("accepted reference code mismatch")
+		}
+		value, err := payloadFromHex(rawHex)
+		if err != nil {
+			return err
+		}
+		payload[index] = value
+		if err := validateReferenceContainer(payload[index], acceptedCodes, bundle, item["registry"].(string), true); err != nil {
+			return err
+		}
+		if _, err := codec.CanonicalBytes(template.DomainTag, template.SchemaID, template.SchemaVersion, payload); err != nil {
+			return err
+		}
+	}
+	rejectedHex, ok := item["rejected_container_cbor_hex"].(string)
+	if !ok {
+		return fmt.Errorf("rejected reference container missing")
+	}
+	rejected, err := payloadFromHex(rejectedHex)
+	if err != nil {
+		return err
+	}
+	if err := validateReferenceContainer(rejected, acceptedCodes, bundle, item["registry"].(string), false); err != nil || item["rejected_error_code"] != "UNKNOWN_ENUM" {
+		return fmt.Errorf("rejected reference container was not rejected as unknown enum")
+	}
+	return nil
+}
+
+func payloadFromHex(value any) (any, error) {
+	encoded, ok := value.(string)
+	if !ok {
+		return nil, fmt.Errorf("reference probe must be CBOR hex")
+	}
+	bytes, err := hex.DecodeString(encoded)
+	if err != nil {
+		return nil, err
+	}
+	return codec.StrictDecodePayload(bytes)
+}
+
+func recordContainerIndex(path string) (int, error) {
+	indices := map[string]int{
+		"admission-fence.closure-proof": 9, "admission-fence.cohort": 10, "admission-fence.retry-ref": 3,
+		"attempt-retry.aborted-envelope-ref": 4, "affordance-assessment.subject": 0,
+		"decision-record.conflict-set-refs": 8, "decision-record.rng-draw-refs": 11,
+		"cycle-control-state.fence-ref": 3, "cycle-control-state.retry-ref": 4, "cycle-control-state.last-terminal-envelope-ref": 5,
+		"claim.prior-claim-refs": 7, "observation.claim-refs": 10,
+		"knowledge-input.observation-ref": 7, "knowledge-input.claim-refs": 8,
+		"transmission.content": 4, "cycle-abort.failure-evidence-refs": 12,
+		"provisional-disposition.conflict-set-refs": 8, "provisional-disposition.rng-draw-refs": 9,
+	}
+	index, ok := indices[path]
+	if !ok {
+		return 0, fmt.Errorf("unsupported record reference path %q", path)
+	}
+	return index, nil
+}
+
+func validateReferenceContainer(value any, accepted []uint64, bundle *policy.Bundle, registry string, wantValid bool) error {
+	codes := []uint64{}
+	collectReferenceCodes(value, &codes)
+	if len(codes) == 0 {
+		return fmt.Errorf("reference container has no causal refs")
+	}
+	invalid := false
+	for _, code := range codes {
+		allowed := containsCode(accepted, code) && registryContainsCode(bundle, "enums", registry, code)
+		if !allowed {
+			invalid = true
+		}
+	}
+	if wantValid && invalid {
+		return fmt.Errorf("accepted reference container has an invalid kind")
+	}
+	if !wantValid && !invalid {
+		return fmt.Errorf("rejected reference container has no invalid kind")
+	}
+	return nil
+}
+
+func collectReferenceCodes(value any, result *[]uint64) {
+	switch current := value.(type) {
+	case []any:
+		if len(current) == 3 {
+			if code, ok := number(current[0]); ok {
+				id, idOK := current[1].([]byte)
+				digest, digestOK := current[2].([]byte)
+				if idOK && digestOK && len(id) == 32 && len(digest) == 32 {
+					*result = append(*result, code)
+				}
+			}
+		}
+		for _, child := range current {
+			collectReferenceCodes(child, result)
+		}
+	case map[any]any:
+		for _, child := range current {
+			collectReferenceCodes(child, result)
+		}
+	}
 }
 
 func executeSetExactDuplicate(item map[string]any) error {

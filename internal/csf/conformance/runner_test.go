@@ -3,6 +3,8 @@ package conformance
 import (
 	"strings"
 	"testing"
+
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
 const bundlePath = "../../../docs/architecture/canonical-codec-v1-bundle"
@@ -64,4 +66,81 @@ func TestNormalizationRunnerFailsWhenExpectedBytesAreMutated(t *testing.T) {
 	if err := executeNormalization(item); err == nil {
 		t.Fatal("mutated normalization expectation must fail")
 	}
+}
+
+func TestLinkedConstraintRejectsMutatedErrorCode(t *testing.T) {
+	fixtures, err := readObject(bundlePath + "/fixtures.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	bundle, err := policy.Load(bundlePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, raw := range fixtures["semantic"].([]any) {
+		item := raw.(map[string]any)
+		if item["case_id"] != "linked-record.append-cycle-abort.first-attempt-has-retry-ref" {
+			continue
+		}
+		mutated := cloneValue(item).(map[string]any)
+		mutated["invalid_error_code"] = "NOT_A_REAL_ERROR"
+		if err := executeSemantic(mutated, fixtures, bundle); err == nil {
+			t.Fatal("linked case accepted a mutated error code")
+		}
+		mutated = cloneValue(item).(map[string]any)
+		delete(mutated, "mutation")
+		if err := executeSemantic(mutated, fixtures, bundle); err == nil {
+			t.Fatal("linked case accepted its unchanged valid base as a rejection")
+		}
+		return
+	}
+	t.Fatal("linked retry fixture missing")
+}
+
+func TestReferenceBindingRejectsCorruptedContainerBytes(t *testing.T) {
+	fixtures, err := readObject(bundlePath + "/fixtures.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	bundle, err := policy.Load(bundlePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, raw := range fixtures["semantic"].([]any) {
+		item := raw.(map[string]any)
+		if item["kind"] != "record_reference_kind_binding" {
+			continue
+		}
+		mutated := cloneValue(item).(map[string]any)
+		mutated["accepted_container_cbor_hex"] = map[string]any{"2": "00"}
+		if err := executeSemantic(mutated, fixtures, bundle); err == nil {
+			t.Fatal("reference binding accepted malformed replacement bytes")
+		}
+		return
+	}
+	t.Fatal("record reference fixture missing")
+}
+
+func TestRecordBindingRejectsMutatedEnvelopeBytes(t *testing.T) {
+	fixtures, err := readObject(bundlePath + "/fixtures.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	bundle, err := policy.Load(bundlePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, raw := range fixtures["semantic"].([]any) {
+		item := raw.(map[string]any)
+		if item["case_id"] != "record-enum.conflict-set.conflict-kind" {
+			continue
+		}
+		mutated := cloneValue(item).(map[string]any)
+		mutated["accepted_envelope_hex"] = "00"
+		if err := executeSemantic(mutated, fixtures, bundle); err == nil {
+			t.Fatal("record binding accepted a malformed complete envelope")
+		}
+		return
+	}
+	t.Fatal("record enum fixture missing")
 }

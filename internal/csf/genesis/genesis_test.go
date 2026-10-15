@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
@@ -34,11 +35,38 @@ func genesisFixture(t *testing.T) []byte {
 			if err != nil {
 				t.Fatal(err)
 			}
-			return encoded
+			return productionGenesis(t, encoded)
 		}
 	}
 	t.Fatal("genesis fixture not found")
 	return nil
+}
+
+func productionGenesis(t *testing.T, encoded []byte) []byte {
+	t.Helper()
+	envelope, err := codec.StrictDecodeEnvelope(encoded)
+	if err != nil {
+		t.Fatal(err)
+	}
+	payload := envelope.Value.([]any)
+	envelope.DomainTag = "cote.csf.digest.genesis-manifest"
+	envelope.SchemaID = "cote.csf.schema.genesis-manifest"
+	payload[15] = []any{[]any{"cote.csf.schema.snapshot-pending-state", uint64(1)}}
+	state := make([]any, 10)
+	for i := range state {
+		state[i] = []any{}
+	}
+	stateEnvelope, err := codec.CanonicalBytes("cote.csf.snapshot.pending-state", "cote.csf.schema.snapshot-pending-state", 1, state)
+	if err != nil {
+		t.Fatal(err)
+	}
+	digest := identity.OpaqueContentHash(stateEnvelope)
+	payload[16] = []any{"cote.csf.schema.snapshot-pending-state", uint64(1), stateEnvelope, digest[:]}
+	result, err := codec.CanonicalBytes(envelope.DomainTag, envelope.SchemaID, envelope.SchemaVersion, payload)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return result
 }
 
 func TestValidateCanonicalGenesis(t *testing.T) {
@@ -138,4 +166,48 @@ func TestRejectGenesisFieldsOutsideManifestContract(t *testing.T) {
 			requireRejectedGenesis(t, mutateGenesis(t, test.mutate))
 		})
 	}
+}
+
+func TestRejectIntegralFloatForUnsignedGenesisField(t *testing.T) {
+	corrupt := mutateGenesis(t, func(_ *codec.Envelope, payload []any) { payload[6] = float64(1) })
+	requireRejectedGenesis(t, corrupt)
+}
+
+func TestRejectInitialWorldStateWithWrongSchemaShapeEvenWhenDigestMatches(t *testing.T) {
+	corrupt := mutateGenesis(t, func(_ *codec.Envelope, payload []any) {
+		inner, err := codec.CanonicalBytes("cote.csf.snapshot.pending-state", "cote.csf.schema.snapshot-pending-state", 1, true)
+		if err != nil {
+			t.Fatal(err)
+		}
+		digest := identity.OpaqueContentHash(inner)
+		payload[16] = []any{"cote.csf.schema.snapshot-pending-state", uint64(1), inner, digest[:]}
+	})
+	requireRejectedGenesis(t, corrupt)
+}
+
+func TestProductionGenesisRejectsFixtureOperationAndSchema(t *testing.T) {
+	fixture, err := os.ReadFile(bundlePath + "/fixtures.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var doc struct {
+		Semantic []struct {
+			CaseID     string `json:"case_id"`
+			GenesisHex string `json:"genesis_envelope_hex"`
+		} `json:"semantic"`
+	}
+	if err := json.Unmarshal(fixture, &doc); err != nil {
+		t.Fatal(err)
+	}
+	for _, item := range doc.Semantic {
+		if item.CaseID == "genesis.pinning" {
+			encoded, err := hex.DecodeString(item.GenesisHex)
+			if err != nil {
+				t.Fatal(err)
+			}
+			requireRejectedGenesis(t, encoded)
+			return
+		}
+	}
+	t.Fatal("genesis fixture not found")
 }

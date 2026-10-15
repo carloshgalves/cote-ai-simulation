@@ -5,8 +5,8 @@ import (
 	"bytes"
 	"encoding/hex"
 	"fmt"
+	"math"
 	"sort"
-	"strings"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
@@ -34,7 +34,7 @@ func ValidateCanonical(encoded []byte, bundle *policy.Bundle) (*Genesis, error) 
 	if envelope.SchemaID != schemaID || envelope.SchemaVersion != 1 {
 		return nil, fmt.Errorf("genesis schema/version mismatch")
 	}
-	if _, err := bundle.Operation(envelope.DomainTag, envelope.SchemaID, envelope.SchemaVersion, true); err != nil {
+	if _, err := bundle.Operation(envelope.DomainTag, envelope.SchemaID, envelope.SchemaVersion, false); err != nil {
 		return nil, fmt.Errorf("genesis envelope operation: %w", err)
 	}
 	payload, ok := envelope.Value.([]any)
@@ -82,7 +82,7 @@ func ValidateCanonical(encoded []byte, bundle *policy.Bundle) (*Genesis, error) 
 	if err := validateSchemas(payload[15], bundle); err != nil {
 		return nil, err
 	}
-	if err := validateTypedValue(payload[16], bundle); err != nil {
+	if err := validateTypedValue(payload[16], payload[15], bundle); err != nil {
 		return nil, fmt.Errorf("genesis initial world state: %w", err)
 	}
 	if err := validateCheckpoints(payload[17]); err != nil {
@@ -130,7 +130,7 @@ func validatePolicies(value any, bundle *policy.Bundle) error {
 		}
 		wanted := expected[index]
 		actualHash, hashOK := ref[2].([]byte)
-		if !hashOK || wanted[0] != id || !numericEqual(wanted[1], ref[1]) || !bytes.Equal(wanted[2].([]byte), actualHash) {
+		if !hashOK || wanted[0] != id || !registryUnsignedEqual(wanted[1], ref[1]) || !bytes.Equal(wanted[2].([]byte), actualHash) {
 			return fmt.Errorf("unknown or mismatched policy ref %q version=%v hash=%x", id, ref[1], ref[2])
 		}
 		if previousID != "" && id <= previousID {
@@ -187,7 +187,7 @@ func validateSchemas(value any, bundle *policy.Bundle) error {
 		return fmt.Errorf("genesis schema set is empty or invalid")
 	}
 	registered := map[string]struct{}{}
-	for _, registry := range []string{"schemas", "fixture_schemas"} {
+	for _, registry := range []string{"schemas"} {
 		entries, ok := bundle.Registries[registry].([]any)
 		if !ok {
 			continue
@@ -198,7 +198,7 @@ func validateSchemas(value any, bundle *policy.Bundle) error {
 				continue
 			}
 			id, idOK := fields[0].(string)
-			version, versionOK := unsigned(fields[1])
+			version, versionOK := registryUnsigned(fields[1])
 			if idOK && versionOK {
 				registered[fmt.Sprintf("%s@%d", id, version)] = struct{}{}
 			}
@@ -227,7 +227,7 @@ func validateSchemas(value any, bundle *policy.Bundle) error {
 	return nil
 }
 
-func validateTypedValue(value any, bundle *policy.Bundle) error {
+func validateTypedValue(value any, schemaRefs any, bundle *policy.Bundle) error {
 	fields, ok := value.([]any)
 	if !ok || len(fields) != 4 {
 		return fmt.Errorf("typed value must have four fields")
@@ -246,10 +246,14 @@ func validateTypedValue(value any, bundle *policy.Bundle) error {
 	if inner.SchemaID != schema || uint64(inner.SchemaVersion) != version {
 		return fmt.Errorf("typed value schema/version mismatch")
 	}
-	if _, err := bundle.Operation(inner.DomainTag, inner.SchemaID, inner.SchemaVersion, true); err != nil {
-		if !strings.HasPrefix(inner.DomainTag, "cote.csf.test.") || inner.DomainTag != inner.SchemaID || !registeredSchema(bundle, inner.SchemaID, inner.SchemaVersion, "fixture_schemas") {
-			return fmt.Errorf("typed value operation: %w", err)
-		}
+	if !schemaRefContains(schemaRefs, schema, uint32(version)) {
+		return fmt.Errorf("typed value schema is not admitted by genesis")
+	}
+	if _, err := bundle.Operation(inner.DomainTag, inner.SchemaID, inner.SchemaVersion, false); err != nil {
+		return fmt.Errorf("typed value operation: %w", err)
+	}
+	if err := validateKnownPayloadShape(inner.SchemaID, inner.Value); err != nil {
+		return err
 	}
 	actual := identity.OpaqueContentHash(encoded)
 	if !bytes.Equal(actual[:], digest) {
@@ -258,22 +262,40 @@ func validateTypedValue(value any, bundle *policy.Bundle) error {
 	return nil
 }
 
-func registeredSchema(bundle *policy.Bundle, schemaID string, schemaVersion uint32, registry string) bool {
-	entries, ok := bundle.Registries[registry].([]any)
+func schemaRefContains(value any, schema string, version uint32) bool {
+	refs, ok := value.([]any)
 	if !ok {
 		return false
 	}
-	for _, raw := range entries {
+	for _, raw := range refs {
 		fields, ok := raw.([]any)
-		if !ok || len(fields) < 2 {
+		if !ok || len(fields) != 2 || fields[0] != schema {
 			continue
 		}
-		version, versionOK := unsigned(fields[1])
-		if fields[0] == schemaID && versionOK && version == uint64(schemaVersion) {
+		if actual, ok := unsigned(fields[1]); ok && actual == uint64(version) {
 			return true
 		}
 	}
 	return false
+}
+
+// The runtime's base bundle currently admits snapshot-pending-state as the
+// initial world state. Extension schemas are not loaded by this ticket's
+// runtime, so an unknown schema cannot be treated as validated.
+func validateKnownPayloadShape(schema string, value any) error {
+	if schema != "cote.csf.schema.snapshot-pending-state" {
+		return fmt.Errorf("typed value schema %q has no loaded validator", schema)
+	}
+	fields, ok := value.([]any)
+	if !ok || len(fields) != 10 {
+		return fmt.Errorf("snapshot pending state must contain 10 fields")
+	}
+	for _, field := range fields {
+		if _, ok := field.([]any); !ok {
+			return fmt.Errorf("snapshot pending state sections must be arrays")
+		}
+	}
+	return nil
 }
 
 func validateCheckpoints(value any) error {
@@ -369,10 +391,17 @@ func equalHexBytes(value any, expected string) bool {
 	return ok && hex.EncodeToString(bytesValue) == expected
 }
 
-func numericEqual(left, right any) bool {
-	l, lok := unsigned(left)
+func registryUnsignedEqual(left, right any) bool {
+	l, lok := registryUnsigned(left)
 	r, rok := unsigned(right)
 	return lok && rok && l == r
+}
+
+func registryUnsigned(value any) (uint64, bool) {
+	if value, ok := value.(float64); ok && value >= 0 && value < math.Ldexp(1, 64) && value == math.Trunc(value) {
+		return uint64(value), true
+	}
+	return unsigned(value)
 }
 
 func isUnsigned(value any, expected uint64) bool {
@@ -384,10 +413,6 @@ func unsigned(value any) (uint64, bool) {
 	switch item := value.(type) {
 	case uint64:
 		return item, true
-	case float64:
-		if item >= 0 && item == float64(uint64(item)) {
-			return uint64(item), true
-		}
 	}
 	return 0, false
 }

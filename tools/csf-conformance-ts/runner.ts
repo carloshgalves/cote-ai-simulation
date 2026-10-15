@@ -315,8 +315,7 @@ function executeSemantic(item, fixtures, registries) {
   }
   if (["record_enum_binding", "record_reference_kind_binding", "record_conditional_constraint"].includes(item.kind)) {
     if (item.kind === "record_conditional_constraint") { executeRecordConstraint(item); return; }
-    const pairs = [["accepted_envelope_hex", "rejected_envelope_hex"], ["accepted_container_cbor_hex", "rejected_container_cbor_hex"], ["valid_payload_cbor_hex", "invalid_payload_cbor_hex"]];
-    if (!pairs.some(([left, right]) => item[left] !== undefined && item[right] !== undefined && JSON.stringify(item[left]) !== JSON.stringify(item[right]))) throw new Error("record probe mismatch"); return;
+    executeRecordBinding(item, fixtures, registries); return;
   }
   if (["linked_record_constraint", "linked_state_constraint", "commit_candidate_partition", "cycle_abort_provenance"].includes(item.kind)) {
     executeLinkedConstraint(item, fixtures, registries); return;
@@ -360,8 +359,87 @@ function executeLinkedConstraint(item, fixtures, registries) {
   let valid = linkedScenarioShapeValid(actual, registries) && accepted.has(linkedFingerprint(actual));
   if (item.model_id === "logical-sequence-transition-v1") valid = item.witness_before === item.durable_cursor && item.witness_after === item.witness_before + item.event_count && item.commit_next === item.witness_after;
   if (item.expected === "accept" && valid) return;
-  if (item.expected === "reject" && !valid && item.invalid_error_code) return;
+  if (item.expected === "reject" && !valid) {
+    const actualCode = item.kind === "linked_state_constraint" ? "LINKED_STATE_CONSTRAINT" : "LINKED_RECORD_CONSTRAINT";
+    if (item.invalid_error_code !== actualCode) throw new Error(`linked constraint error code mismatch: got ${item.invalid_error_code} want ${actualCode}`);
+    return;
+  }
   throw new Error("linked constraint outcome mismatch");
+}
+
+function executeRecordBinding(item, fixtures, registries) {
+  const acceptedCodes = item.accepted_codes ?? (item.accepted_code === undefined ? [] : [item.accepted_code]);
+  if (item.kind === "record_enum_binding") {
+    for (const [key, accepted] of [["accepted_envelope_hex", true], ["rejected_envelope_hex", false]]) {
+      const envelope = parseCBOR(decodeHex(item, key)).value;
+      if (!Array.isArray(envelope) || envelope.length !== 6 || !Array.isArray(envelope[5])) throw new Error("record enum envelope malformed");
+      const code = recordEnumValue(envelope[5], item.field_path);
+      if (typeof code !== "bigint") throw new Error("record enum field is not unsigned");
+      if (accepted ? (acceptedCodes.length && !acceptedCodes.some((value) => BigInt(value) === code)) || !registryHasCode(registries, "enums", item.registry, Number(code)) : registryHasCode(registries, "enums", item.registry, Number(code)) || item.rejected_error_code !== "UNKNOWN_ENUM") throw new Error("record enum binding outcome mismatch");
+    }
+    return;
+  }
+  if (!acceptedCodes.length || acceptedCodes.some((code) => !registryHasCode(registries, "enums", item.registry, code))) throw new Error("record binding accepted code mismatch");
+  const template = fixtures.positive.find((candidate) => candidate.case_id === item.record_template_case_id);
+  if (!template) throw new Error("record binding template missing");
+  const envelope = parseCBOR(decodeHex(template, "canonical_hex")).value;
+  if (!Array.isArray(envelope) || !Array.isArray(envelope[5])) throw new Error("record binding template malformed");
+  const index = recordContainerIndex(item.container_field_path);
+  const acceptedContainers = item.accepted_container_cbor_hex;
+  if (!acceptedContainers || typeof acceptedContainers !== "object" || Array.isArray(acceptedContainers)) throw new Error("accepted reference containers missing");
+  for (const [codeText, encoded] of Object.entries(acceptedContainers)) {
+    const code = BigInt(codeText);
+    if (!acceptedCodes.some((value) => BigInt(value) === code) || !registryHasCode(registries, "enums", item.registry, Number(code))) throw new Error("accepted reference code mismatch");
+    const payload = parseCBOR(Buffer.from(encoded, "hex")).value;
+    const candidatePayload = structuredClone(envelope[5]); candidatePayload[index] = payload;
+    const rebuilt = canonicalEnvelope(envelope[2], envelope[3], Number(envelope[4]), encodeCanonical(candidatePayload));
+    parseCBOR(rebuilt);
+    validateReferenceContainer(payload, acceptedCodes, registries, item.registry, true);
+  }
+  const rejected = parseCBOR(decodeHex(item, "rejected_container_cbor_hex")).value;
+  try { validateReferenceContainer(rejected, acceptedCodes, registries, item.registry, false); }
+  catch { throw new Error("rejected reference container lacks the registered UNKNOWN_ENUM outcome"); }
+  if (item.rejected_error_code !== "UNKNOWN_ENUM") throw new Error("reference binding error code mismatch");
+}
+
+function recordEnumValue(fields, path) {
+  switch (path) {
+    case "conflict-set.conflict-kind": return fields[2];
+    case "trigger-activation.lifecycle": return fields[9];
+    case "perception-task.lifecycle": return fields[9];
+    case "decision-record.subject.input-kind": return fields[4]?.[0];
+    default: throw new Error(`unsupported record enum field ${path}`);
+  }
+}
+
+function recordContainerIndex(path) {
+  const indices = {
+    "admission-fence.closure-proof": 9, "admission-fence.cohort": 10, "admission-fence.retry-ref": 3,
+    "attempt-retry.aborted-envelope-ref": 4, "affordance-assessment.subject": 0,
+    "decision-record.conflict-set-refs": 8, "decision-record.rng-draw-refs": 11,
+    "cycle-control-state.fence-ref": 3, "cycle-control-state.retry-ref": 4, "cycle-control-state.last-terminal-envelope-ref": 5,
+    "claim.prior-claim-refs": 7, "observation.claim-refs": 10,
+    "knowledge-input.observation-ref": 7, "knowledge-input.claim-refs": 8,
+    "transmission.content": 4, "cycle-abort.failure-evidence-refs": 12,
+    "provisional-disposition.conflict-set-refs": 8, "provisional-disposition.rng-draw-refs": 9,
+  };
+  if (!(path in indices)) throw new Error(`unsupported record reference path ${path}`);
+  return indices[path];
+}
+
+function validateReferenceContainer(value, acceptedCodes, registries, registry, wantValid) {
+  const codes = [];
+  function visit(item) {
+    if (Array.isArray(item)) {
+      if (item.length === 3 && typeof item[0] === "bigint" && Buffer.isBuffer(item[1]) && item[1].length === 32 && Buffer.isBuffer(item[2]) && item[2].length === 32) codes.push(item[0]);
+      item.forEach(visit);
+    } else if (item instanceof Map) for (const child of item.values()) visit(child);
+  }
+  visit(value);
+  if (!codes.length) throw new Error("reference container has no causal refs");
+  const invalid = codes.some((code) => !acceptedCodes.some((allowed) => BigInt(allowed) === code) || !registryHasCode(registries, "enums", registry, Number(code)));
+  if (wantValid && invalid) throw new Error("accepted reference container has invalid kind");
+  if (!wantValid && !invalid) throw new Error("rejected reference container has no invalid kind");
 }
 
 function registryHasCode(registries, group, registry, wanted) {
@@ -647,10 +725,32 @@ function executeTransition(item, bases) {
   else if (actual) throw new Error(`transition rejected with ${actual}`);
 }
 
+function verifyMutationGuards(fixtures, registries) {
+  const linked = fixtures.semantic.find((item) => item.case_id === "linked-record.append-cycle-abort.first-attempt-has-retry-ref");
+  if (!linked) throw new Error("linked mutation guard fixture missing");
+  const alteredCode = structuredClone(linked); alteredCode.invalid_error_code = "NOT_A_REAL_ERROR";
+  let rejected = false; try { executeSemantic(alteredCode, fixtures, registries); } catch { rejected = true; }
+  if (!rejected) throw new Error("linked validator accepted a mutated expected error code");
+  const unchangedBase = structuredClone(linked); delete unchangedBase.mutation;
+  rejected = false; try { executeSemantic(unchangedBase, fixtures, registries); } catch { rejected = true; }
+  if (!rejected) throw new Error("linked validator accepted an unchanged valid base as a rejection");
+  const binding = fixtures.semantic.find((item) => item.case_id === "record-enum.conflict-set.conflict-kind");
+  if (!binding) throw new Error("record binding mutation guard fixture missing");
+  const malformedEnvelope = structuredClone(binding); malformedEnvelope.accepted_envelope_hex = "00";
+  rejected = false; try { executeSemantic(malformedEnvelope, fixtures, registries); } catch { rejected = true; }
+  if (!rejected) throw new Error("record binding validator accepted malformed envelope bytes");
+  const reference = fixtures.semantic.find((item) => item.kind === "record_reference_kind_binding");
+  if (!reference) throw new Error("reference binding mutation guard fixture missing");
+  const malformedContainer = structuredClone(reference); malformedContainer.accepted_container_cbor_hex = { "2": "00" };
+  rejected = false; try { executeSemantic(malformedContainer, fixtures, registries); } catch { rejected = true; }
+  if (!rejected) throw new Error("reference binding validator accepted malformed replacement bytes");
+}
+
 function run(directory) {
   verifyBundle(directory);
   const fixtures = strictJSON(join(directory, "fixtures.json"));
   const registries = strictJSON(join(directory, "registries.json"));
+  verifyMutationGuards(fixtures, registries);
   const transitions = strictJSON(join(directory, "causal-transition-fixtures.json"));
   const report = { suite_hash: EXPECTED.conformance_suite_hash, total: 0, passed: 0, failed: 0, cases: [] };
   function add(id, error) { const result = { id, status: error ? "fail" : "pass" }; if (error) { result.error = error.message; report.failed++; } else report.passed++; report.total++; report.cases.push(result); }

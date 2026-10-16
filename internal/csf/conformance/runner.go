@@ -4,8 +4,10 @@ package conformance
 import (
 	"bytes"
 	"crypto/sha256"
+	"encoding/binary"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"math"
 	"os"
@@ -14,10 +16,13 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+	"github.com/fxamacker/cbor/v2"
+	"golang.org/x/text/unicode/norm"
 )
 
 type CaseResult struct {
@@ -145,10 +150,18 @@ func executeFixture(section string, item, fixtures map[string]any, bundle *polic
 		if err != nil {
 			return err
 		}
-		if negativeRejected(input, item, bundle) {
-			return nil
+		actual, err := negativeRejected(input, item, bundle)
+		if err != nil {
+			return err
 		}
-		return fmt.Errorf("negative vector was accepted")
+		expected, ok := item["error_code"].(string)
+		if !ok || !knownNegativeCode(expected) {
+			return fmt.Errorf("unknown expected negative error code %v", item["error_code"])
+		}
+		if actual != expected {
+			return fmt.Errorf("negative error code mismatch: want %s, got %s", expected, actual)
+		}
+		return nil
 	case "normalization_cases":
 		return executeNormalization(item)
 	case "semantic":
@@ -158,77 +171,374 @@ func executeFixture(section string, item, fixtures map[string]any, bundle *polic
 	}
 }
 
-func negativeRejected(input []byte, item map[string]any, bundle *policy.Bundle) bool {
-	errorCode, _ := item["error_code"].(string)
-	value, err := codec.StrictDecodePayload(input)
-	if err != nil {
-		return true
+func negativeRejected(input []byte, item map[string]any, bundle *policy.Bundle) (string, error) {
+	value, decodeErr := codec.StrictDecodePayload(input)
+	if decodeErr != nil {
+		actual, _, ok := scanNegativeCBOR(input, 0)
+		if !ok || actual == "" || !knownNegativeCode(actual) {
+			return "", fmt.Errorf("unclassified strict CBOR error: %w", decodeErr)
+		}
+		if !matchesStructuralDecoderError(actual, decodeErr) {
+			return "", fmt.Errorf("unexpected strict CBOR error for %s: %w", actual, decodeErr)
+		}
+		return actual, nil
 	}
-	actual := ""
-	switch errorCode {
-	case "INTEGER_RANGE":
+	actual := semanticNegativeErrorCode(value, item, bundle)
+	if actual == "" || !knownNegativeCode(actual) {
+		return "", fmt.Errorf("negative vector did not produce a recognized error")
+	}
+	return actual, nil
+}
+
+func knownNegativeCode(code string) bool {
+	switch code {
+	case "NON_PREFERRED_INTEGER", "INTEGER_RANGE", "INDEFINITE_LENGTH", "SEMANTIC_TAG_FORBIDDEN",
+		"SIMPLE_VALUE_FORBIDDEN", "DUPLICATE_MAP_KEY", "MAP_KEY_ORDER", "INVALID_UTF8",
+		"INVALID_UNICODE_SCALAR", "UNICODE_UNASSIGNED", "TEXT_NOT_CANONICAL", "NEGATIVE_ZERO",
+		"NON_FINITE_FLOAT", "NON_PREFERRED_FLOAT", "ID_LENGTH", "MACHINE_ID_GRAMMAR",
+		"DOMAIN_SCHEMA_TAG_GRAMMAR", "IANA_TIMEZONE_GRAMMAR", "UNKNOWN_SCHEMA", "TRAILING_BYTES",
+		"UNKNOWN_VARIANT", "SET_DUPLICATE", "SET_IDENTITY_COLLISION", "UNKNOWN_ENUM",
+		"TYPE_MISMATCH", "ROUND_CREATED_BY_INPUT":
+		return true
+	default:
+		return false
+	}
+}
+
+func matchesStructuralDecoderError(code string, err error) bool {
+	switch code {
+	case "NON_PREFERRED_INTEGER", "MAP_KEY_ORDER", "TEXT_NOT_CANONICAL", "NEGATIVE_ZERO",
+		"NON_PREFERRED_FLOAT", "SIMPLE_VALUE_FORBIDDEN":
+		return errors.Is(err, codec.ErrNonCanonical)
+	case "UNICODE_UNASSIGNED":
+		return strings.Contains(err.Error(), "Unicode 15.1 unassigned code point")
+	case "NON_FINITE_FLOAT":
+		return errors.Is(err, codec.ErrNonFinite)
+	case "INDEFINITE_LENGTH":
+		var target *cbor.IndefiniteLengthError
+		return errors.As(err, &target)
+	case "SEMANTIC_TAG_FORBIDDEN":
+		var target *cbor.TagsMdError
+		return errors.As(err, &target)
+	case "DUPLICATE_MAP_KEY":
+		var target *cbor.DupMapKeyError
+		return errors.As(err, &target)
+	case "TRAILING_BYTES":
+		var target *cbor.ExtraneousDataError
+		return errors.As(err, &target)
+	case "INVALID_UTF8", "INVALID_UNICODE_SCALAR":
+		var target *cbor.SemanticError
+		return errors.As(err, &target) && strings.Contains(err.Error(), "invalid UTF-8")
+	default:
+		return false
+	}
+}
+
+func semanticNegativeErrorCode(value any, item map[string]any, bundle *policy.Bundle) string {
+	context, _ := item["context_schema_id"].(string)
+	fieldPath, _ := item["field_path"].(string)
+	if context == "cote.csf.test.u8" {
 		if numberValue, ok := number(value); ok && numberValue > 255 {
-			actual = errorCode
+			return "INTEGER_RANGE"
 		}
-	case "ID_LENGTH":
+	}
+	if context == "cote.csf.test.id" {
 		if bytesValue, ok := value.([]byte); ok && len(bytesValue) != 32 {
-			actual = errorCode
+			return "ID_LENGTH"
 		}
-	case "MACHINE_ID_GRAMMAR":
+		if _, ok := value.(string); ok {
+			return "TYPE_MISMATCH"
+		}
+	}
+	if context == "cote.csf.test.machine-id" {
 		if textValue, ok := value.(string); ok && domain.ValidateMachineID(textValue) != nil {
-			actual = errorCode
+			return "MACHINE_ID_GRAMMAR"
 		}
-	case "DOMAIN_SCHEMA_TAG_GRAMMAR":
-		if _, err := codec.StrictDecodeEnvelope(input); err != nil {
-			actual = errorCode
+	}
+	if context == "cote.csf.test.empty" {
+		if fields, ok := value.([]any); ok && len(fields) == 6 {
+			if domainTag, ok := fields[2].(string); !ok || domain.ValidateDomainTag(domainTag) != nil {
+				return "DOMAIN_SCHEMA_TAG_GRAMMAR"
+			}
+			if schemaID, ok := fields[3].(string); !ok || domain.ValidateDomainTag(schemaID) != nil {
+				return "DOMAIN_SCHEMA_TAG_GRAMMAR"
+			}
+			if !bundleHasSchema(bundle, fields[3]) {
+				return "UNKNOWN_SCHEMA"
+			}
 		}
-	case "IANA_TIMEZONE_GRAMMAR":
+	}
+	if context == "cote.csf.test.unknown" {
+		if fields, ok := value.([]any); ok && len(fields) == 6 {
+			if schemaID, ok := fields[3].(string); ok && !bundleHasSchema(bundle, schemaID) {
+				return "UNKNOWN_SCHEMA"
+			}
+		}
+	}
+	if fieldPath == "genesis-manifest.timezone" {
 		if textValue, ok := value.(string); ok && domain.ValidateTimezone(textValue) != nil {
-			actual = errorCode
+			return "IANA_TIMEZONE_GRAMMAR"
 		}
-	case "UNKNOWN_SCHEMA":
-		fields, ok := value.([]any)
-		if ok && len(fields) == 6 && !bundleHasSchema(bundle, fields[3]) {
-			actual = errorCode
-		}
-	case "UNKNOWN_VARIANT":
-		if fields, ok := value.([]any); ok && len(fields) > 0 {
-			if discriminant, valid := number(fields[0]); valid && discriminant > 1 {
-				actual = errorCode
-			}
-		}
-	case "SET_DUPLICATE":
-		if hasExactDuplicate(value) {
-			actual = errorCode
-		}
-	case "SET_IDENTITY_COLLISION":
-		if hasIdentityCollision(value) {
-			actual = errorCode
-		}
-	case "UNKNOWN_ENUM":
+	}
+	if context == "cote.csf.test.optional" {
 		if fields, ok := value.([]any); ok && len(fields) == 1 {
-			if code, valid := number(fields[0]); valid && !registryContainsCode(bundle, "enums", "cote.csf.test.enum-u8", code) {
-				actual = errorCode
+			if discriminator, ok := number(fields[0]); ok && discriminator > 1 {
+				return "UNKNOWN_VARIANT"
 			}
 		}
-	case "TYPE_MISMATCH":
-		if _, ok := value.([]byte); !ok {
-			actual = errorCode
+	}
+	if fieldPath == "conflict-set.candidate-ids" && hasExactDuplicate(value) {
+		return "SET_DUPLICATE"
+	}
+	if fieldPath == "event.source-inputs" && hasIdentityCollision(value) {
+		return "SET_IDENTITY_COLLISION"
+	}
+	if fieldPath == "test-enum-u8.value" {
+		if fields, ok := value.([]any); ok && len(fields) == 1 {
+			if code, ok := number(fields[0]); ok && !registryContainsCode(bundle, "enums", "cote.csf.test.enum-u8", code) {
+				return "UNKNOWN_ENUM"
+			}
 		}
-	case "ROUND_CREATED_BY_INPUT":
-		if envelope, err := codec.StrictDecodeEnvelope(input); err == nil {
-			if fields, ok := envelope.Value.([]any); ok && len(fields) > 6 {
-				createdBy, _ := fields[6].([]any)
-				kind, _ := number(createdBy[0])
-				if kind == 1 {
-					actual = errorCode
+	}
+	if item["schema_id"] == "cote.csf.schema.round-declaration" {
+		if envelope, ok := value.([]any); ok && len(envelope) == 6 {
+			if fields, ok := envelope[5].([]any); ok && len(fields) > 6 {
+				if createdBy, ok := fields[6].([]any); ok && len(createdBy) > 0 {
+					if discriminator, ok := number(createdBy[0]); ok && discriminator == 1 {
+						return "ROUND_CREATED_BY_INPUT"
+					}
 				}
 			}
 		}
 	}
-	return actual == errorCode
+	return ""
 }
 
+// scanNegativeCBOR classifies the first structural/canonical violation from bytes,
+// independently of the fixture's expected error_code.
+func scanNegativeCBOR(data []byte, offset int) (string, any, bool) {
+	value, end, code, ok := scanNegativeCBORItem(data, offset)
+	if !ok {
+		return "", nil, false
+	}
+	if code != "" {
+		return code, value, true
+	}
+	if end != len(data) && offset == 0 {
+		return "TRAILING_BYTES", value, true
+	}
+	return "", value, true
+}
+
+func scanNegativeCBORItem(data []byte, start int) (any, int, string, bool) {
+	if start >= len(data) {
+		return nil, start, "", false
+	}
+	initial := data[start]
+	major, additional := initial>>5, initial&31
+	offset := start + 1
+	if additional == 31 {
+		return nil, offset, "INDEFINITE_LENGTH", true
+	}
+	if major == 7 {
+		switch additional {
+		case 20:
+			return false, offset, "", true
+		case 21:
+			return true, offset, "", true
+		case 22:
+			return nil, offset, "", true
+		case 23, 24:
+			return nil, offset, "SIMPLE_VALUE_FORBIDDEN", true
+		case 25, 26, 27:
+			width := map[byte]int{25: 2, 26: 4, 27: 8}[additional]
+			if len(data)-offset < width {
+				return nil, offset, "", false
+			}
+			var value float64
+			switch width {
+			case 2:
+				bits := binary.BigEndian.Uint16(data[offset : offset+2])
+				value = halfToFloat64(bits)
+			case 4:
+				value = float64(math.Float32frombits(binary.BigEndian.Uint32(data[offset : offset+4])))
+			case 8:
+				value = math.Float64frombits(binary.BigEndian.Uint64(data[offset : offset+8]))
+			}
+			offset += width
+			raw := data[start:offset]
+			if math.IsNaN(value) || math.IsInf(value, 0) {
+				return value, offset, "NON_FINITE_FLOAT", true
+			}
+			if value == 0 && math.Signbit(value) {
+				return value, offset, "NEGATIVE_ZERO", true
+			}
+			preferred, err := codec.CanonicalPayload(value)
+			if err != nil {
+				if errors.Is(err, codec.ErrNonFinite) {
+					return value, offset, "NON_FINITE_FLOAT", true
+				}
+				return nil, offset, "", false
+			}
+			if !bytes.Equal(raw, preferred) {
+				return value, offset, "NON_PREFERRED_FLOAT", true
+			}
+			return value, offset, "", true
+		default:
+			return nil, offset, "", false
+		}
+	}
+	if additional >= 28 {
+		return nil, offset, "", false
+	}
+	var argument uint64
+	switch {
+	case additional < 24:
+		argument = uint64(additional)
+	case additional == 24:
+		if len(data)-offset < 1 {
+			return nil, offset, "", false
+		}
+		argument = uint64(data[offset])
+		offset++
+		if argument < 24 {
+			return nil, offset, "NON_PREFERRED_INTEGER", true
+		}
+	case additional == 25:
+		if len(data)-offset < 2 {
+			return nil, offset, "", false
+		}
+		argument = uint64(binary.BigEndian.Uint16(data[offset : offset+2]))
+		offset += 2
+		if argument <= 0xff {
+			return nil, offset, "NON_PREFERRED_INTEGER", true
+		}
+	case additional == 26:
+		if len(data)-offset < 4 {
+			return nil, offset, "", false
+		}
+		argument = uint64(binary.BigEndian.Uint32(data[offset : offset+4]))
+		offset += 4
+		if argument <= 0xffff {
+			return nil, offset, "NON_PREFERRED_INTEGER", true
+		}
+	case additional == 27:
+		if len(data)-offset < 8 {
+			return nil, offset, "", false
+		}
+		argument = binary.BigEndian.Uint64(data[offset : offset+8])
+		offset += 8
+		if argument <= 0xffffffff {
+			return nil, offset, "NON_PREFERRED_INTEGER", true
+		}
+	}
+	switch major {
+	case 0:
+		return argument, offset, "", true
+	case 1:
+		return int64(-1) - int64(argument), offset, "", true
+	case 2, 3:
+		if argument > uint64(len(data)-offset) {
+			return nil, offset, "", false
+		}
+		rawValue := data[offset : offset+int(argument)]
+		offset += int(argument)
+		if major == 2 {
+			return append([]byte(nil), rawValue...), offset, "", true
+		}
+		if !utf8.Valid(rawValue) {
+			if hasSurrogateEncoding(rawValue) {
+				return nil, offset, "INVALID_UNICODE_SCALAR", true
+			}
+			return nil, offset, "INVALID_UTF8", true
+		}
+		textValue := string(rawValue)
+		if !norm.NFC.IsNormalString(textValue) {
+			return textValue, offset, "TEXT_NOT_CANONICAL", true
+		}
+		if _, err := codec.CanonicalPayload(textValue); err != nil && strings.Contains(err.Error(), "Unicode 15.1 unassigned code point") {
+			return textValue, offset, "UNICODE_UNASSIGNED", true
+		}
+		return textValue, offset, "", true
+	case 4:
+		if argument > uint64(len(data)-offset) {
+			return nil, offset, "", false
+		}
+		values := make([]any, 0, int(argument))
+		for range int(argument) {
+			value, next, code, ok := scanNegativeCBORItem(data, offset)
+			if !ok || code != "" {
+				return value, next, code, ok
+			}
+			values = append(values, value)
+			offset = next
+		}
+		return values, offset, "", true
+	case 5:
+		if argument > uint64((len(data)-offset)/2) {
+			return nil, offset, "", false
+		}
+		var previous []byte
+		for range int(argument) {
+			keyStart := offset
+			_, next, code, ok := scanNegativeCBORItem(data, offset)
+			if !ok || code != "" {
+				return nil, next, code, ok
+			}
+			keyRaw := data[keyStart:next]
+			if previous != nil {
+				if bytes.Equal(previous, keyRaw) {
+					return nil, next, "DUPLICATE_MAP_KEY", true
+				}
+				if bytes.Compare(previous, keyRaw) >= 0 {
+					return nil, next, "MAP_KEY_ORDER", true
+				}
+			}
+			previous = keyRaw
+			offset = next
+			child, next, code, ok := scanNegativeCBORItem(data, offset)
+			if !ok || code != "" {
+				return child, next, code, ok
+			}
+			offset = next
+		}
+		return values, offset, "", true
+	case 6:
+		return nil, offset, "SEMANTIC_TAG_FORBIDDEN", true
+	default:
+		return nil, offset, "", false
+	}
+}
+
+func hasSurrogateEncoding(value []byte) bool {
+	for index := 0; index+2 < len(value); index++ {
+		if value[index] == 0xed && value[index+1] >= 0xa0 && value[index+1] <= 0xbf &&
+			value[index+2] >= 0x80 && value[index+2] <= 0xbf {
+			return true
+		}
+	}
+	return false
+}
+
+func halfToFloat64(value uint16) float64 {
+	sign := 1.0
+	if value&0x8000 != 0 {
+		sign = -1
+	}
+	exponent := int((value >> 10) & 0x1f)
+	fraction := int(value & 0x03ff)
+	switch exponent {
+	case 0:
+		return sign * math.Ldexp(float64(fraction), -24)
+	case 31:
+		if fraction == 0 {
+			return sign * math.Inf(1)
+		}
+		return math.NaN()
+	default:
+		return sign * math.Ldexp(1+float64(fraction)/1024, exponent-15)
+	}
+}
 func bundleHasSchema(bundle *policy.Bundle, wanted any) bool {
 	for _, group := range []string{"schemas", "fixture_schemas"} {
 		for _, raw := range bundle.Registries[group].([]any) {

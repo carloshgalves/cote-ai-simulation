@@ -96,22 +96,38 @@ function preferredFloat(value) {
 
 const utf8 = new TextDecoder("utf-8", { fatal: true });
 
+class CBORDecodeError extends Error {
+  constructor(code) {
+    super(code);
+    this.name = "CBORDecodeError";
+    this.code = code;
+  }
+}
+
+function hasSurrogateUTF8(value) {
+  for (let index = 0; index + 2 < value.length; index++) {
+    if (value[index] === 0xed && value[index + 1] >= 0xa0 && value[index + 1] <= 0xbf &&
+        value[index + 2] >= 0x80 && value[index + 2] <= 0xbf) return true;
+  }
+  return false;
+}
+
 function parseCBOR(encoded) {
   const bytes = Buffer.from(encoded);
   function parse(offset, depth) {
-    if (depth > 64 || offset >= bytes.length) throw new Error("CBOR_TRUNCATED");
+    if (depth > 64 || offset >= bytes.length) throw new CBORDecodeError("CBOR_TRUNCATED");
     const start = offset;
     const initial = bytes[offset++];
     const major = initial >> 5;
     const additional = initial & 31;
-    if (additional === 31) throw new Error("INDEFINITE_LENGTH");
+    if (additional === 31) throw new CBORDecodeError("INDEFINITE_LENGTH");
     let argument;
     if (additional < 24) argument = BigInt(additional);
-    else if (additional === 24) { argument = BigInt(bytes[offset++]); if (argument < 24n) throw new Error("NON_PREFERRED_INTEGER"); }
-    else if (additional === 25) { argument = BigInt(bytes.readUInt16BE(offset)); offset += 2; if (argument <= 0xffn && major !== 7) throw new Error("NON_PREFERRED_INTEGER"); }
-    else if (additional === 26) { argument = BigInt(bytes.readUInt32BE(offset)); offset += 4; if (argument <= 0xffffn && major !== 7) throw new Error("NON_PREFERRED_INTEGER"); }
-    else if (additional === 27) { argument = bytes.readBigUInt64BE(offset); offset += 8; if (argument <= 0xffffffffn && major !== 7) throw new Error("NON_PREFERRED_INTEGER"); }
-    else throw new Error("SIMPLE_VALUE_FORBIDDEN");
+    else if (additional === 24) { argument = BigInt(bytes[offset++]); if (argument < 24n) throw new CBORDecodeError("NON_PREFERRED_INTEGER"); }
+    else if (additional === 25) { argument = BigInt(bytes.readUInt16BE(offset)); offset += 2; if (argument <= 0xffn && major !== 7) throw new CBORDecodeError("NON_PREFERRED_INTEGER"); }
+    else if (additional === 26) { argument = BigInt(bytes.readUInt32BE(offset)); offset += 4; if (argument <= 0xffffn && major !== 7) throw new CBORDecodeError("NON_PREFERRED_INTEGER"); }
+    else if (additional === 27) { argument = bytes.readBigUInt64BE(offset); offset += 8; if (argument <= 0xffffffffn && major !== 7) throw new CBORDecodeError("NON_PREFERRED_INTEGER"); }
+    else throw new CBORDecodeError("SIMPLE_VALUE_FORBIDDEN");
 
     if (major === 0 || major === 1) {
       const value = major === 0 ? argument : -1n - argument;
@@ -119,13 +135,16 @@ function parseCBOR(encoded) {
     }
     if (major === 2 || major === 3) {
       const length = Number(argument); const end = offset + length;
-      if (end > bytes.length) throw new Error("CBOR_TRUNCATED");
+      if (end > bytes.length) throw new CBORDecodeError("CBOR_TRUNCATED");
       const rawValue = bytes.subarray(offset, end); let value;
       if (major === 2) value = Buffer.from(rawValue);
       else {
-        value = utf8.decode(rawValue);
-        if (value.normalize("NFC") !== value) throw new Error("TEXT_NOT_CANONICAL");
-        if (containsUnicode15Unassigned(value)) throw new Error("UNICODE_UNASSIGNED");
+        try { value = utf8.decode(rawValue); }
+        catch {
+          throw new CBORDecodeError(hasSurrogateUTF8(rawValue) ? "INVALID_UNICODE_SCALAR" : "INVALID_UTF8");
+        }
+        if (value.normalize("NFC") !== value) throw new CBORDecodeError("TEXT_NOT_CANONICAL");
+        if (containsUnicode15Unassigned(value)) throw new CBORDecodeError("UNICODE_UNASSIGNED");
       }
       return { value, offset: end, raw: bytes.subarray(start, end) };
     }
@@ -138,31 +157,33 @@ function parseCBOR(encoded) {
       const value = new Map(); let previous = null; const keys = new Set();
       for (let index = 0; index < Number(argument); index++) {
         const key = parse(offset, depth + 1); offset = key.offset;
-        if (previous && compareBytes(previous, key.raw) >= 0) throw new Error(keys.has(hex(key.raw)) ? "DUPLICATE_MAP_KEY" : "MAP_KEY_ORDER");
-        if (keys.has(hex(key.raw))) throw new Error("DUPLICATE_MAP_KEY");
+        if (previous && compareBytes(previous, key.raw) >= 0) throw new CBORDecodeError(keys.has(hex(key.raw)) ? "DUPLICATE_MAP_KEY" : "MAP_KEY_ORDER");
+        if (keys.has(hex(key.raw))) throw new CBORDecodeError("DUPLICATE_MAP_KEY");
         keys.add(hex(key.raw)); previous = key.raw;
         const child = parse(offset, depth + 1); offset = child.offset; value.set(key.value, child.value);
       }
       return { value, offset, raw: bytes.subarray(start, offset) };
     }
-    if (major === 6) throw new Error("SEMANTIC_TAG_FORBIDDEN");
+    if (major === 6) throw new CBORDecodeError("SEMANTIC_TAG_FORBIDDEN");
     if (major === 7) {
       if (additional === 20 || additional === 21 || additional === 22) return { value: additional === 20 ? false : additional === 21 ? true : null, offset, raw: bytes.subarray(start, offset) };
-      if (additional === 23 || additional === 24) throw new Error("SIMPLE_VALUE_FORBIDDEN");
+      if (additional === 23 || additional === 24) throw new CBORDecodeError("SIMPLE_VALUE_FORBIDDEN");
       let value;
       if (additional === 25) value = halfToNumber(Number(argument));
       else if (additional === 26) value = bytes.readFloatBE(start + 1);
       else if (additional === 27) value = bytes.readDoubleBE(start + 1);
-      else throw new Error("SIMPLE_VALUE_FORBIDDEN");
+      else throw new CBORDecodeError("SIMPLE_VALUE_FORBIDDEN");
+      if (!Number.isFinite(value)) throw new CBORDecodeError("NON_FINITE_FLOAT");
+      if (Object.is(value, -0)) throw new CBORDecodeError("NEGATIVE_ZERO");
       const preferred = preferredFloat(value);
       const raw = bytes.subarray(start, offset);
-      if (!raw.equals(preferred)) throw new Error("NON_PREFERRED_FLOAT");
+      if (!raw.equals(preferred)) throw new CBORDecodeError("NON_PREFERRED_FLOAT");
       return { value, offset, raw };
     }
-    throw new Error("CBOR_TYPE");
+    throw new CBORDecodeError("CBOR_TYPE");
   }
   const result = parse(0, 0);
-  if (result.offset !== bytes.length) throw new Error("TRAILING_BYTES");
+  if (result.offset !== bytes.length) throw new CBORDecodeError("TRAILING_BYTES");
   return result;
 }
 
@@ -257,10 +278,25 @@ function executeFixture(section, item, fixtures, registries) {
     if (hex(sha256(actual)) !== item.sha256) throw new Error("canonical digest mismatch"); return;
   }
   if (section === "negative") {
-    const input = decodeHex(item, "input_cbor_hex"); let value;
-    try { value = parseCBOR(input).value; }
-    catch { return; }
-    if (semanticNegativeCode(value, item, registries) !== item.error_code) throw new Error("negative vector was accepted"); return;
+    if (!knownNegativeCode(item.error_code)) throw new Error(`unknown expected negative error code ${item.error_code}`);
+    const input = decodeHex(item, "input_cbor_hex");
+    let value;
+    try {
+      const parsed = parseCBOR(input);
+      value = parsed.value;
+    } catch (error) {
+      if (!(error instanceof CBORDecodeError) || !knownNegativeCode(error.code)) throw error;
+      if (error.code !== item.error_code) {
+        throw new Error(`negative error code mismatch: want ${item.error_code}, got ${error.code}`);
+      }
+      return;
+    }
+    const actual = semanticNegativeErrorCode(value, item, registries);
+    if (!actual || !knownNegativeCode(actual)) throw new Error("negative vector did not produce a recognized error");
+    if (actual !== item.error_code) {
+      throw new Error(`negative error code mismatch: want ${item.error_code}, got ${actual}`);
+    }
+    return;
   }
   if (section === "normalization_cases") {
     executeNormalization(item); return;
@@ -273,22 +309,43 @@ function domainTagValid(value) { return typeof value === "string" && value.lengt
 function timezoneValid(value) { return typeof value === "string" && /^[A-Za-z]+(?:[_-][A-Za-z]+)*(?:\/[A-Za-z]+(?:[_-][A-Za-z]+)*)+$/.test(value); }
 function hasExactDuplicateValue(value) { if (!Array.isArray(value)) return false; const seen = new Set(); for (const member of value) { const encoded = hex(encodeCanonical(member)); if (seen.has(encoded)) return true; seen.add(encoded); } return false; }
 function hasIdentityCollisionValue(value) { if (!Array.isArray(value)) return false; const identities = new Map(); for (const member of value) { if (!Array.isArray(member) || member.length < 2) return false; const identity = hex(encodeCanonical(member.slice(0, -1))), full = encodeCanonical(member); if (identities.has(identity) && !identities.get(identity).equals(full)) return true; identities.set(identity, full); } return false; }
-function semanticNegativeCode(value, item, registries) {
-  if (item.error_code === "INTEGER_RANGE" && typeof value === "bigint" && value > 255n) return item.error_code;
-  if (item.error_code === "ID_LENGTH" && Buffer.isBuffer(value) && value.length !== 32) return item.error_code;
-  if (item.error_code === "MACHINE_ID_GRAMMAR" && !machineIDValid(value)) return item.error_code;
-  if (item.error_code === "DOMAIN_SCHEMA_TAG_GRAMMAR" && Array.isArray(value) && value.length === 6 && (!domainTagValid(value[2]) || !domainTagValid(value[3]))) return item.error_code;
-  if (item.error_code === "IANA_TIMEZONE_GRAMMAR" && !timezoneValid(value)) return item.error_code;
-  if (item.error_code === "UNKNOWN_SCHEMA" && Array.isArray(value) && value.length === 6 && ![...registries.schemas, ...registries.fixture_schemas].some((schema) => schema[0] === value[3])) return item.error_code;
-  if (item.error_code === "UNKNOWN_VARIANT" && Array.isArray(value) && Number(value[0]) > 1) return item.error_code;
-  if (item.error_code === "SET_DUPLICATE" && hasExactDuplicateValue(value)) return item.error_code;
-  if (item.error_code === "SET_IDENTITY_COLLISION" && hasIdentityCollisionValue(value)) return item.error_code;
-  if (item.error_code === "UNKNOWN_ENUM" && Array.isArray(value) && value.length === 1 && !registryHasCode(registries, "enums", item.schema_id, Number(value[0]))) return item.error_code;
-  if (item.error_code === "TYPE_MISMATCH" && !Buffer.isBuffer(value)) return item.error_code;
-  if (item.error_code === "ROUND_CREATED_BY_INPUT" && Array.isArray(value) && value.length === 6 && Array.isArray(value[5]) && Number(value[5][6][0]) === 1) return item.error_code;
-  return null;
+function knownNegativeCode(code) {
+  return new Set([
+    "NON_PREFERRED_INTEGER", "INTEGER_RANGE", "INDEFINITE_LENGTH", "SEMANTIC_TAG_FORBIDDEN",
+    "SIMPLE_VALUE_FORBIDDEN", "DUPLICATE_MAP_KEY", "MAP_KEY_ORDER", "INVALID_UTF8",
+    "INVALID_UNICODE_SCALAR", "UNICODE_UNASSIGNED", "TEXT_NOT_CANONICAL", "NEGATIVE_ZERO",
+    "NON_FINITE_FLOAT", "NON_PREFERRED_FLOAT", "ID_LENGTH", "MACHINE_ID_GRAMMAR",
+    "DOMAIN_SCHEMA_TAG_GRAMMAR", "IANA_TIMEZONE_GRAMMAR", "UNKNOWN_SCHEMA", "TRAILING_BYTES",
+    "UNKNOWN_VARIANT", "SET_DUPLICATE", "SET_IDENTITY_COLLISION", "UNKNOWN_ENUM",
+    "TYPE_MISMATCH", "ROUND_CREATED_BY_INPUT",
+  ]).has(code);
 }
 
+function semanticNegativeErrorCode(value, item, registries) {
+  const context = item.context_schema_id;
+  const fieldPath = item.field_path;
+  if (context === "cote.csf.test.u8" && typeof value === "bigint" && value > 255n) return "INTEGER_RANGE";
+  if (context === "cote.csf.test.id") {
+    if (Buffer.isBuffer(value) && value.length !== 32) return "ID_LENGTH";
+    if (typeof value === "string") return "TYPE_MISMATCH";
+  }
+  if (context === "cote.csf.test.machine-id" && !machineIDValid(value)) return "MACHINE_ID_GRAMMAR";
+  if (context === "cote.csf.test.empty" && Array.isArray(value) && value.length === 6) {
+    if (!domainTagValid(value[2]) || !domainTagValid(value[3])) return "DOMAIN_SCHEMA_TAG_GRAMMAR";
+  }
+  if (context === "cote.csf.test.unknown" && Array.isArray(value) && value.length === 6 &&
+      ![...registries.schemas, ...registries.fixture_schemas].some((schema) => schema[0] === value[3])) return "UNKNOWN_SCHEMA";
+  if (fieldPath === "genesis-manifest.timezone" && !timezoneValid(value)) return "IANA_TIMEZONE_GRAMMAR";
+  if (context === "cote.csf.test.optional" && Array.isArray(value) && value.length === 1 && Number(value[0]) > 1) return "UNKNOWN_VARIANT";
+  if (fieldPath === "conflict-set.candidate-ids" && hasExactDuplicateValue(value)) return "SET_DUPLICATE";
+  if (fieldPath === "event.source-inputs" && hasIdentityCollisionValue(value)) return "SET_IDENTITY_COLLISION";
+  if (fieldPath === "test-enum-u8.value" && Array.isArray(value) && value.length === 1 &&
+      !registryHasCode(registries, "enums", "cote.csf.test.enum-u8", Number(value[0]))) return "UNKNOWN_ENUM";
+  if (item.schema_id === "cote.csf.schema.round-declaration" && Array.isArray(value) && value.length === 6 &&
+      Array.isArray(value[5]) && value[5].length > 6 && Array.isArray(value[5][6]) &&
+      value[5][6].length > 0 && Number(value[5][6][0]) === 1) return "ROUND_CREATED_BY_INPUT";
+  return null;
+}
 
 function verifyExogenousRecordPreimages(item) {
   if (item.persisted_root !== "cote.csf.schema.exogenous-input" ||
@@ -1203,6 +1260,30 @@ function executeTransition(item, bases) {
 }
 
 function verifyMutationGuards(fixtures, registries) {
+
+  const negativeMutationCases = [
+    ["reject.nonpreferred-integer", ["INTEGER_RANGE", "NOT_A_REAL_ERROR"]],
+    ["reject.machine-id-uppercase", ["UNKNOWN_ENUM"]],
+  ];
+  for (const [id, replacements] of negativeMutationCases) {
+    const original = fixtures.negative.find((item) => item.case_id === id);
+    if (!original) throw new Error(`negative mutation vector missing: ${id}`);
+    for (const replacement of replacements) {
+      const input = original.input_cbor_hex;
+      const mutated = { ...original, error_code: replacement };
+      if (mutated.input_cbor_hex !== input) throw new Error(`negative mutation changed input bytes: ${id}`);
+      let error;
+      try { executeFixture("negative", mutated, fixtures, registries); } catch (caught) { error = caught; }
+      if (!error) throw new Error(`negative vector accepted mutated error_code: ${id}`);
+      if (!(error instanceof Error)) throw new Error(`negative vector failed with a non-error value: ${id}`);
+      if (replacement === "NOT_A_REAL_ERROR" && !error.message.includes("unknown expected negative error code")) {
+        throw new Error(`unknown expected code did not fail closed for ${id}: ${error.message}`);
+      }
+      if (replacement !== "NOT_A_REAL_ERROR" && !error.message.includes("negative error code mismatch")) {
+        throw new Error(`mutated error code did not report actual-code mismatch for ${id}: ${error.message}`);
+      }
+    }
+  }
   const referenceCases = fixtures.semantic.filter((item) => item.kind === "record_to_reference");
   if (referenceCases.length !== 29) throw new Error("29 normative reference cases covering 28 roots required");
   function alterFirstField(value) {

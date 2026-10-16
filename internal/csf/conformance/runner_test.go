@@ -27,6 +27,54 @@ func TestNormativeSuiteHas621PassingCases(t *testing.T) {
 	}
 }
 
+func TestNegativeVectorsRejectMutatedErrorCodes(t *testing.T) {
+	fixtures, err := readObject(bundlePath + "/fixtures.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	bundle, err := policy.Load(bundlePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	wanted := map[string][]string{
+		"reject.nonpreferred-integer": {"INTEGER_RANGE", "NOT_A_REAL_ERROR"},
+		"reject.machine-id-uppercase": {"UNKNOWN_ENUM"},
+	}
+	seen := map[string]bool{}
+	for _, raw := range fixtures["negative"].([]any) {
+		item := raw.(map[string]any)
+		id, _ := item["case_id"].(string)
+		replacements, ok := wanted[id]
+		if !ok {
+			continue
+		}
+		for _, replacement := range replacements {
+			input := item["input_cbor_hex"]
+			mutated := cloneValue(item).(map[string]any)
+			mutated["error_code"] = replacement
+			if mutated["input_cbor_hex"] != input {
+				t.Fatalf("%s mutation changed input bytes", id)
+			}
+			err := executeFixture("negative", mutated, fixtures, bundle)
+			if err == nil {
+				t.Fatalf("%s accepted mutated error_code %q", id, replacement)
+			}
+			if replacement != "NOT_A_REAL_ERROR" && !strings.Contains(err.Error(), "negative error code mismatch") {
+				t.Fatalf("%s did not report actual-code mismatch for %q: %v", id, replacement, err)
+			}
+			if replacement == "NOT_A_REAL_ERROR" && !strings.Contains(err.Error(), "unknown expected negative error code") {
+				t.Fatalf("%s did not fail closed for unknown expected code: %v", id, err)
+			}
+		}
+		seen[id] = true
+	}
+	for id := range wanted {
+		if !seen[id] {
+			t.Fatalf("negative regression vector %q missing", id)
+		}
+	}
+}
+
 func TestParentHistoryFixtureParses(t *testing.T) {
 	const encoded = "435346485245460001001a636f74652e6373662e636f6465632e63626f722d6465742e76310020000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0016636f74652e6373662e686173682e736e617073686f740018636f74652e6373662e736368656d612e736e617073686f74000000000000000100077368612d3235360020000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
 	if _, err := parseParentHistory(encoded); err != nil {

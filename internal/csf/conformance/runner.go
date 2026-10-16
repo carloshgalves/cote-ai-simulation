@@ -700,6 +700,8 @@ func validateLinkedRelations(item, scenario map[string]any, bundle *policy.Bundl
 			for _, event := range events { valid = valid && eq(event[1],commit[0]) && eq(event[7],commit[1]) && eq(event[5],commit[3]) && eq(event[8],commit[6]) }
 			for _, task := range tasks { valid = valid && containsValue(commit[15],task[3]) && eq(task[1],commit[0]) && eq(task[2],commit[1]) && eq(task[4],commit[6]) && eq(task[5],commit[8]) && eq(task[6],commit[20]) && eq(task[8],commit[21]) }
 			valid = valid && matchesPerceptionClassification(scenario, commit, events, tasks)
+			valid = valid && matchesCommitWorldAndSources(scenario, fence, commit, events, records)
+			for _, decision := range decisions { valid = valid && decisionCandidateResolves(decision, records) }
 			cursor := scenario["pre_append_cursor"].(map[string]any)["decision_ledger"].([]any); before := uint64(0)
 			for i:=len(cursor)-1;i>=0;i-- { if role,ok:=cursor[i].(string);ok { if record,exists:=records[role]; exists && isCycleCommitRole(scenario,role) { before,_=number(record[22]); break } } }
 			if uint64(len(events))==0 { valid = valid && numberEqual(commit[22],before) } else { next,ok:=number(commit[22]); valid=valid&&ok&&next==before+uint64(len(events)); ordered:=projectByIDs(events,commit[15]); for i,event:=range ordered { seq,seqOK:=number(event[6]);valid=valid&&seqOK&&seq==before+uint64(i) } }
@@ -792,6 +794,53 @@ func matchesPerceptionClassification(scenario map[string]any, commit []any, even
 	actualEvents, actualTaskIDs := make([]any, 0, len(tasks)), make([]any, 0, len(tasks))
 	for _, task := range tasks { if len(task) < 4 { return false }; actualTaskIDs = append(actualTaskIDs, task[0]); actualEvents = append(actualEvents, task[3]) }
 	return reflect.DeepEqual(expectedEvents, actualEvents) && reflect.DeepEqual(actualTaskIDs, commit[18])
+}
+
+func transitionWitness(scenario map[string]any, role string) ([]any, bool) {
+	witnesses, ok := scenario["transition_witnesses"].([]any); if !ok { return nil, false }
+	for _, raw := range witnesses {
+		witness, ok := raw.(map[string]any); if !ok { return nil, false }
+		if witness["role"] != role { continue }
+		encodedText, ok := witness["witness_cbor_hex"].(string); if !ok { return nil, false }
+		encoded, err := hex.DecodeString(encodedText); if err != nil { return nil, false }
+		value, err := codec.StrictDecodePayload(encoded); if err != nil { return nil, false }
+		fields, ok := value.([]any); return fields, ok
+	}
+	return nil, false
+}
+
+func matchesCommitWorldAndSources(scenario map[string]any, fence, commit []any, events [][]any, records map[string][]any) bool {
+	world, ok := transitionWitness(scenario, "world-state-transition")
+	if !ok || len(world) != 6 || world[2] == nil || world[4] == nil || !reflect.DeepEqual(world[0], commit[6]) || !reflect.DeepEqual(world[2], commit[7]) || !reflect.DeepEqual(world[3], commit[8]) || !reflect.DeepEqual(world[5], commit[9]) { return false }
+	base, bok := number(world[0]); result, rok := number(world[3]); if !bok || !rok || result != base+1 { return false }
+	for _, pair := range [][2]int{{1,2},{4,5}} {
+		encoded, err := codec.CanonicalBytes("cote.csf.hash.world-state", "cote.csf.schema.typed-value", 1, world[pair[0]])
+		if err != nil { return false }; digest := sha256.Sum256(encoded); expected, ok := world[pair[1]].([]byte); if !ok || !bytes.Equal(digest[:], expected) { return false }
+	}
+	var resultingState any
+	for _, event := range events { if len(event) < 10 { return false }; if event[3] == "event-0" { resultingState = event[9] } else if event[3] != "event-1" { return false } }
+	if resultingState == nil { resultingState = world[1] }
+	if !reflect.DeepEqual(resultingState, world[4]) { return false }
+	units, ok := fence[11].([]any); if !ok { return false }
+	consumption, hasConsumption := transitionWitness(scenario, "source-consumption")
+	if len(units) == 0 { if hasConsumption { return false } } else {
+		if !hasConsumption || len(units) != 1 || len(consumption) != 7 { return false }
+		unit, ok := units[0].([]any); if !ok || len(unit) != 5 || !reflect.DeepEqual(consumption[2], unit[3]) || !reflect.DeepEqual(consumption[3], unit[4]) || !reflect.DeepEqual(consumption[4], false) || !reflect.DeepEqual(consumption[5], true) || !reflect.DeepEqual(consumption[6], fence[17]) { return false }
+	}
+	if source, ok := records["source-unit"]; ok {
+		if len(source) < 1 || len(units) != 1 { return false }
+		if !reflect.DeepEqual(source[0], units[0].([]any)[3]) || !reflect.DeepEqual(source[len(source)-1], units[0].([]any)[4]) { return false }
+	} else if len(units) != 0 { return false }
+	return true
+}
+
+func decisionCandidateResolves(decision []any, records map[string][]any) bool {
+	if len(decision) < 8 { return false }
+	if decision[7] != "commit" { return true }
+	ref, ok := decision[6].([]any); if !ok || len(ref) != 2 || !numberEqual(ref[0], 1) { return false }
+	id, ok := ref[1].([]byte); if !ok { return false }
+	for role, candidate := range records { if strings.HasPrefix(role, "candidate") && len(candidate) > 0 && bytes.Equal(candidate[0].([]byte), id) { return true } }
+	return false
 }
 
 func applyLinkedMutation(scenario, mutation map[string]any) error {

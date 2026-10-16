@@ -424,7 +424,7 @@ function validateLinkedRelations(item, scenario, registries) {
       const fence = get("fence"), commit = get("cycle-commit");
       valid = Array.isArray(fence) && fence.length === 18 && Array.isArray(commit) && commit.length === 24;
       if (valid) {
-        for (const [a, b] of [[0,0],[1,1],[2,2],[4,3],[5,4],[6,5],[7,6],[17,10],[12,12]]) valid &&= equal(fence[a], commit[b]);
+        for (const [a, b] of [[0,0],[1,1],[2,2],[4,3],[5,4],[6,5],[7,6],[8,7],[17,10],[12,12]]) valid &&= equal(fence[a], commit[b]);
         const admitted = fence[11]; valid &&= Array.isArray(admitted) && equal(commit[11], admitted.map((unit) => unit[3]));
         const decisions = [...records.entries()].filter(([role]) => role === "decision" || role.startsWith("decision-" )).map(([, value]) => value);
         const events = [...records.entries()].filter(([role]) => role.startsWith("event-")).map(([, value]) => value);
@@ -435,6 +435,8 @@ function validateLinkedRelations(item, scenario, registries) {
         const eventIDs = new Set(events.map((event) => Buffer.from(event[0]).toString("hex")));
         for (const task of tasks) valid &&= eventIDs.has(Buffer.from(task[3]).toString("hex")) && equal(task[1], commit[0]) && equal(task[2], commit[1]) && equal(task[4], commit[6]) && equal(task[5], commit[8]) && equal(task[6], commit[20]) && equal(task[8], commit[21]);
         valid &&= matchesPerceptionClassification(scenario, commit, events, tasks);
+        valid &&= matchesCommitWorldAndSources(scenario, fence, commit, events, records);
+        for (const decision of decisions) valid &&= decisionCandidateResolves(decision, records);
         const cursorRoles = scenario.pre_append_cursor?.decision_ledger ?? [], priorCommitRole = [...cursorRoles].reverse().find((role) => descriptorsRecordIsCommit(scenario, role));
         const priorCommit = priorCommitRole ? records.get(priorCommitRole) : null, before = priorCommit ? priorCommit[22] : 0n;
         valid &&= commit[22] === before + BigInt(events.length);
@@ -484,6 +486,40 @@ function matchesPerceptionClassification(scenario, commit, events, tasks) {
     if (row[2]) expected.push(row[0]);
   }
   return isDeepStrictEqual(expected, tasks.map((task) => task[3])) && isDeepStrictEqual(tasks.map((task) => task[0]), commit[18]);
+}
+function scenarioTransitionWitness(scenario, role) {
+  const witness = scenario.transition_witnesses?.find((item) => item.role === role);
+  if (!witness) return null;
+  try { return parseCBOR(Buffer.from(witness.witness_cbor_hex, "hex")).value; } catch { return null; }
+}
+function matchesCommitWorldAndSources(scenario, fence, commit, events, records) {
+  const world = scenarioTransitionWitness(scenario, "world-state-transition");
+  if (!Array.isArray(world) || world.length !== 6 || world[2] === null || world[4] === null || !isDeepStrictEqual(world[0], commit[6]) || !isDeepStrictEqual(world[2], commit[7]) || !isDeepStrictEqual(world[3], commit[8]) || !isDeepStrictEqual(world[5], commit[9]) || world[3] !== world[0] + 1n) return false;
+  for (const [stateIndex, digestIndex] of [[1,2],[4,5]]) {
+    try { if (!sha256(canonicalEnvelope("cote.csf.hash.world-state", "cote.csf.schema.typed-value", 1, encodeCanonical(world[stateIndex]))).equals(world[digestIndex])) return false; } catch { return false; }
+  }
+  let resultState;
+  for (const event of events) { if (event.length < 10) return false; if (event[3] === "event-0") resultState = event[9]; else if (event[3] !== "event-1") return false; }
+  if (resultState === undefined) resultState = world[1];
+  if (!isDeepStrictEqual(resultState, world[4])) return false;
+  const units = fence[11]; if (!Array.isArray(units)) return false;
+  const consumption = scenarioTransitionWitness(scenario, "source-consumption");
+  if (units.length === 0) { if (consumption !== null) return false; }
+  else {
+    if (units.length !== 1 || !Array.isArray(consumption) || consumption.length !== 7) return false;
+    const unit = units[0];
+    if (!Array.isArray(unit) || unit.length !== 5 || !isDeepStrictEqual(consumption[2], unit[3]) || !isDeepStrictEqual(consumption[3], unit[4]) || consumption[4] !== false || consumption[5] !== true || !isDeepStrictEqual(consumption[6], fence[17])) return false;
+  }
+  const source = records.get("source-unit");
+  if (source) { if (units.length !== 1 || !isDeepStrictEqual(source[0], units[0][3]) || !isDeepStrictEqual(source.at(-1), units[0][4])) return false; }
+  else if (units.length !== 0) return false;
+  return true;
+}
+function decisionCandidateResolves(decision, records) {
+  if (!Array.isArray(decision) || decision.length < 8) return false;
+  if (decision[7] !== "commit") return true;
+  const ref = decision[6];
+  return Array.isArray(ref) && ref.length === 2 && ref[0] === 1n && [...records.entries()].some(([role, candidate]) => role.startsWith("candidate") && Buffer.isBuffer(candidate[0]) && candidate[0].equals(ref[1]));
 }
 function validateWorldReducerResult(item, records) {
   const mutation = item.mutation; if (!mutation || !Array.isArray(mutation.recompute)) return false;

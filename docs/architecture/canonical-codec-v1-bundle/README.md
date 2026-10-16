@@ -123,10 +123,12 @@ operação lógica e policy ref.
 
 ## Vetores e verificação independente
 
-**Execução de conformidade do checkpoint arquitetural:** pendente. A retificação acrescenta
-validadores independentes Go e TypeScript para os vínculos record → referência, executados juntos no
-workflow desta branch. Os runners gerais de conformidade e a homologação do bundle continuam sendo
-gates separados; este checkpoint não declara a homologação.
+**Homologação integrada (2026-10-16):** concluída no checkpoint
+`4273833cbe552d1cde6f8affb5b6c9e695dcf6bf`. `go test ./...` passou, incluindo as regressões de
+Genesis e SQLite; os runners completos Go e TypeScript passaram `621/621` e emitiram relatórios
+byte a byte idênticos. Os auditores independentes passaram `29` fixtures em `28` roots, rejeitaram
+`32` mutações record-only e concordaram em seus relatórios. A integração usa o record de Snapshot
+homologado e seu hash derivado, sem divergência de bytes.
 
 `fixtures.json` contém 156 vetores positivos, 30 negativos, 307 casos semânticos, sete casos de
 normalização convergente e dois vetores SHA-256. `causal-transition-fixtures.json` acrescenta 119 casos
@@ -264,6 +266,8 @@ no próprio caso semântico para resolver e conferir o `cycle-id` de origem. Um 
 `CycleCommit` cobre um evento não vazio: verifica o owner run/cycle, a lista ordenada de event IDs,
 os envelopes selecionados, o digest de batch e `next-logical-sequence`; o caso original vazio fica
 intacto.
-O congelamento definitivo ocorre somente após essa homologação, antes da primeira
-execução integrada. Não interpretar a simples atualização dos hashes como prova
-independente de conformidade.
+O bundle V1 foi congelado após essa homologação integrada. Seu recibo vigente fixa
+`conformance_suite_hash=05a226340c4211045d6f3df8f034434f3ac336001158379833f7230df4038dfd`.
+Mudanças futuras em fixtures exigem nova suíte e novo recibo; alterações de CDDL, registry ou policy
+seguem as regras de versionamento acima. A atualização dos hashes, por si só, não substitui as provas
+independentes registradas nesta seção.

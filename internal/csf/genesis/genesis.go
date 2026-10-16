@@ -64,6 +64,11 @@ func ValidateCanonical(encoded []byte, bundle *policy.Bundle) (*Genesis, error) 
 	if err := validateOptionalBytes(payload[4]); err != nil {
 		return nil, fmt.Errorf("parent checkpoint history ref: %w", err)
 	}
+	// CSFRV1-1 only admits a new base-policy run. A fork requires resolving
+	// the parent policy and checkpoint before the genesis can be authoritative.
+	if len(payload[4].([]any)) != 1 {
+		return nil, fmt.Errorf("parent checkpoint history requires a verified fork bootstrap")
+	}
 	if payload[5] != policy.CodecPolicyID || !isUnsigned(payload[6], policy.CodecVersion) || payload[7] != policy.IdentityAlgorithm || payload[8] != policy.UnicodeVersion || payload[9] != policy.NormalizationID {
 		return nil, fmt.Errorf("genesis codec/unicode pins mismatch")
 	}
@@ -72,6 +77,11 @@ func ValidateCanonical(encoded []byte, bundle *policy.Bundle) (*Genesis, error) 
 	}
 	if err := validateExtensionBundles(payload[12]); err != nil {
 		return nil, err
+	}
+	// No extension loader is installed in this slice: a pin alone does not
+	// prove that its schema and causal authorities can be replayed.
+	if len(payload[12].([]any)) != 0 {
+		return nil, fmt.Errorf("genesis extension bundles require verified extension bootstrap")
 	}
 	if err := validateMachineIDSet(payload[13], "exogenous source ids"); err != nil {
 		return nil, err

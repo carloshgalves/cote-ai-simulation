@@ -269,6 +269,45 @@ func TestRejectInitialPendingStateWithUnseededAuthoritativeReferences(t *testing
 	}
 }
 
+func TestRejectGenesisWithUnverifiedExternalDependencies(t *testing.T) {
+	framedParent, err := hex.DecodeString(
+		"435346485245460001001a636f74652e6373662e636f6465632e63626f722d6465742e76310020000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0016636f74652e6373662e686173682e736e617073686f740018636f74652e6373662e736368656d612e736e617073686f74000000000000000100077368612d3235360020000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, test := range []struct {
+		name   string
+		mutate func([]any)
+	}{
+		{
+			name: "unloaded-extension-bundle",
+			mutate: func(payload []any) {
+				payload[12] = []any{[]any{"missing-extension", bytes.Repeat([]byte{0x5a}, 32)}}
+			},
+		},
+		{
+			name: "malformed-parent-checkpoint",
+			mutate: func(payload []any) {
+				payload[4] = []any{uint64(1), []byte{0x00}}
+			},
+		},
+		{
+			name: "well-framed-but-unresolved-parent-checkpoint",
+			mutate: func(payload []any) {
+				payload[4] = []any{uint64(1), framedParent}
+			},
+		},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			encoded := mutateGenesis(t, func(_ *codec.Envelope, payload []any) {
+				test.mutate(payload)
+			})
+			requireRejectedGenesis(t, encoded)
+		})
+	}
+}
+
 func TestProductionGenesisRejectsFixtureOperationAndSchema(t *testing.T) {
 	fixture, err := os.ReadFile(bundlePath + "/fixtures.json")
 	if err != nil {

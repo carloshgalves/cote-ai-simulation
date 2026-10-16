@@ -1,6 +1,7 @@
 package conformance
 
 import (
+	"encoding/hex"
 	"strings"
 	"testing"
 
@@ -209,4 +210,46 @@ func TestAdmittedUnitLedgerMismatchRejectsMutatedOutcomes(t *testing.T) {
 		}
 	}
 	for field, ok := range seen { if !ok { t.Fatalf("missing normative mutation %s", field) } }
+}
+
+
+func TestExogenousRecordIdentityRejectsMutatedRecordWithUnchangedPreimages(t *testing.T) {
+	fixtures, err := readObject(bundlePath + "/fixtures.json")
+	if err != nil { t.Fatal(err) }
+	bundle, err := policy.Load(bundlePath)
+	if err != nil { t.Fatal(err) }
+	for _, change := range []struct { name string; index int; replacement string }{
+		{"producer-unit-key", 3, "unit-2"},
+		{"input-kind-body", 4, "input-2"},
+	} {
+		t.Run(change.name, func(t *testing.T) {
+			copyFixtures := cloneValue(fixtures).(map[string]any)
+			semantic := copyFixtures["semantic"].([]any)
+			var reference map[string]any
+			var admitted []map[string]any
+			for _, raw := range semantic {
+				item := raw.(map[string]any)
+				if item["case_id"] == "reference.record-to-ref.exogenous-input" { reference = item }
+				if item["kind"] == "admitted_unit_ledger_mismatch" { admitted = append(admitted, item) }
+			}
+			if reference == nil || len(admitted) != 5 { t.Fatal("missing normative exogenous fixtures") }
+			encoded, err := decodeHex(reference, "record_envelope_hex")
+			if err != nil { t.Fatal(err) }
+			envelope, err := codec.StrictDecodeEnvelope(encoded)
+			if err != nil { t.Fatal(err) }
+			record := envelope.Value.([]any)
+			record[change.index] = change.replacement
+			altered, err := codec.CanonicalBytes(envelope.DomainTag, envelope.SchemaID, envelope.SchemaVersion, record)
+			if err != nil { t.Fatal(err) }
+			reference["record_envelope_hex"] = hex.EncodeToString(altered)
+			if err := executeSemantic(reference, copyFixtures, bundle); err == nil {
+				t.Fatal("record-to-reference accepted stale ID or body preimages")
+			}
+			for _, unit := range admitted {
+				if err := executeSemantic(unit, copyFixtures, bundle); err == nil {
+					t.Fatalf("%s: admission validator accepted stale preimage", unit["case_id"])
+				}
+			}
+		})
+	}
 }

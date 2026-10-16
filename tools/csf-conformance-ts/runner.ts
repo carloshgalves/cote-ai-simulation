@@ -289,6 +289,35 @@ function semanticNegativeCode(value, item, registries) {
   return null;
 }
 
+
+function verifyExogenousRecordPreimages(item) {
+  if (item.persisted_root !== "cote.csf.schema.exogenous-input" ||
+      item.id_operation !== "cote.csf.id.exogenous-input" ||
+      item.digest_operation !== "cote.csf.digest.exogenous-input-unit") {
+    throw new Error("exogenous reference operation mismatch");
+  }
+  const record = parseCBOR(decodeHex(item, "record_envelope_hex")).value;
+  if (!Array.isArray(record) || record.length !== 6 ||
+      record[3] !== "cote.csf.schema.exogenous-input" || record[4] !== 1n ||
+      !Array.isArray(record[5]) || record[5].length !== 13) {
+    throw new Error("invalid exogenous input root");
+  }
+  const fields = record[5];
+  const idBytes = canonicalEnvelope("cote.csf.id.exogenous-input", "cote.csf.schema.exogenous-input-id-preimage", 1,
+    encodeCanonical([fields[1], fields[2], fields[3]]));
+  if (!idBytes.equals(decodeHex(item, "id_preimage_envelope_hex"))) {
+    throw new Error("exogenous ID preimage is not derived from record");
+  }
+  const bodyBytes = canonicalEnvelope("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1,
+    encodeCanonical(fields.slice(0, 12)));
+  if (!bodyBytes.equals(decodeHex(item, "digest_preimage_envelope_hex"))) {
+    throw new Error("exogenous digest preimage is not derived from record body");
+  }
+  if (!Buffer.from(fields[12]).equals(sha256(bodyBytes))) {
+    throw new Error("exogenous record digest mismatch");
+  }
+}
+
 function executeAdmittedUnitLedgerMismatch(item, fixtures) {
   const positive = fixtures.positive.find((value) => value.case_id === item.fence_case_id);
   const source = fixtures.semantic.find((value) => value.case_id === item.referenced_record_case_id);
@@ -301,6 +330,7 @@ function executeAdmittedUnitLedgerMismatch(item, fixtures) {
     throw new Error("admitted unit fence template invalid");
   }
   const template = fence[11][index];
+  verifyExogenousRecordPreimages(source);
   const record = parseCBOR(decodeHex(source, "record_envelope_hex")).value;
   if (!Array.isArray(record) || record.length !== 6 || record[3] !== "cote.csf.schema.exogenous-input" ||
       !Array.isArray(record[5]) || record[5].length !== 13) throw new Error("ledger source record invalid");
@@ -350,6 +380,7 @@ function executeAdmittedUnitLedgerMismatch(item, fixtures) {
 
 function executeSemantic(item, fixtures, registries) {
   if (item.kind === "record_to_reference") {
+    if (item.persisted_root === "cote.csf.schema.exogenous-input") verifyExogenousRecordPreimages(item);
     const ref = parseCBOR(decodeHex(item, "expected_causal_ref_cbor_hex")).value;
     if (!Buffer.from(ref[1]).equals(sha256(decodeHex(item, "id_preimage_envelope_hex"))) || !Buffer.from(ref[2]).equals(sha256(decodeHex(item, "digest_preimage_envelope_hex")))) throw new Error("record reference mismatch"); return;
   }
@@ -990,6 +1021,24 @@ function executeTransition(item, bases) {
 }
 
 function verifyMutationGuards(fixtures, registries) {
+  const exogenous = fixtures.semantic.find((item) => item.case_id === "reference.record-to-ref.exogenous-input");
+  if (!exogenous) throw new Error("exogenous reference fixture missing");
+  for (const [field, index, replacement] of [["producer-unit-key", 3, "unit-2"], ["input-kind", 4, "input-2"]]) {
+    const copied = structuredClone(fixtures);
+    const source = copied.semantic.find((item) => item.case_id === "reference.record-to-ref.exogenous-input");
+    const record = parseCBOR(decodeHex(source, "record_envelope_hex")).value;
+    record[5][index] = replacement;
+    source.record_envelope_hex = hex(encodeCanonical(record));
+    let rejected = false;
+    try { executeSemantic(source, copied, registries); } catch { rejected = true; }
+    if (!rejected) throw new Error(`exogenous ${field} mutation was accepted as valid record identity`);
+    for (const admitted of copied.semantic.filter((item) => item.kind === "admitted_unit_ledger_mismatch")) {
+      rejected = false;
+      try { executeSemantic(admitted, copied, registries); } catch { rejected = true; }
+      if (!rejected) throw new Error(`exogenous ${field} mutation was accepted by admitted unit ${admitted.case_id}`);
+    }
+  }
+
   const admitted = fixtures.semantic.filter((item) => item.kind === "admitted_unit_ledger_mismatch");
   if (admitted.length !== 5) throw new Error("five normative admitted-unit cases are required");
   for (const item of admitted) {

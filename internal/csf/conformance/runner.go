@@ -497,10 +497,65 @@ func cloneValue(value any) any {
 	}
 }
 
+
+func verifyExogenousRecordPreimages(item map[string]any, bundle *policy.Bundle) error {
+	if item["persisted_root"] != "cote.csf.schema.exogenous-input" ||
+		item["id_operation"] != "cote.csf.id.exogenous-input" ||
+		item["digest_operation"] != "cote.csf.digest.exogenous-input-unit" {
+		return fmt.Errorf("exogenous reference operations mismatch")
+	}
+	for _, operation := range [][2]string{
+		{"cote.csf.id.exogenous-input", "cote.csf.schema.exogenous-input-id-preimage"},
+		{"cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body"},
+	} {
+		if _, err := bundle.Operation(operation[0], operation[1], 1, false); err != nil {
+			return fmt.Errorf("exogenous operation not registered: %w", err)
+		}
+	}
+	recordBytes, err := decodeHex(item, "record_envelope_hex")
+	if err != nil { return err }
+	record, err := codec.StrictDecodeEnvelope(recordBytes)
+	if err != nil { return err }
+	if record.SchemaID != "cote.csf.schema.exogenous-input" || record.SchemaVersion != 1 {
+		return fmt.Errorf("invalid exogenous record schema")
+	}
+	fields, ok := record.Value.([]any)
+	if !ok || len(fields) != 13 { return fmt.Errorf("invalid exogenous record fields") }
+	reconstructedID, err := codec.CanonicalBytes(
+		"cote.csf.id.exogenous-input", "cote.csf.schema.exogenous-input-id-preimage", 1,
+		[]any{fields[1], fields[2], fields[3]},
+	)
+	if err != nil { return err }
+	providedID, err := decodeHex(item, "id_preimage_envelope_hex")
+	if err != nil { return err }
+	if !bytes.Equal(reconstructedID, providedID) {
+		return fmt.Errorf("exogenous ID preimage is not derived from its record")
+	}
+	reconstructedDigest, err := codec.CanonicalBytes(
+		"cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1,
+		fields[:12],
+	)
+	if err != nil { return err }
+	providedDigest, err := decodeHex(item, "digest_preimage_envelope_hex")
+	if err != nil { return err }
+	if !bytes.Equal(reconstructedDigest, providedDigest) {
+		return fmt.Errorf("exogenous digest preimage is not derived from its record body")
+	}
+	sum := sha256.Sum256(reconstructedDigest)
+	recordDigest, ok := fields[12].([]byte)
+	if !ok || !bytes.Equal(recordDigest, sum[:]) {
+		return fmt.Errorf("exogenous record digest is not derived from its body")
+	}
+	return nil
+}
+
 func executeSemantic(item, fixtures map[string]any, bundle *policy.Bundle) error {
 	kind, _ := item["kind"].(string)
 	switch kind {
 	case "record_to_reference":
+		if item["persisted_root"] == "cote.csf.schema.exogenous-input" {
+			if err := verifyExogenousRecordPreimages(item, bundle); err != nil { return err }
+		}
 		idPreimage, err := decodeHex(item, "id_preimage_envelope_hex")
 		if err != nil {
 			return err
@@ -590,7 +645,7 @@ func executeSemantic(item, fixtures map[string]any, bundle *policy.Bundle) error
 	case "idempotency_conflict", "optional_idempotency":
 		return executeIdempotency(kind, item)
 	case "admitted_unit_ledger_mismatch":
-		return executeAdmittedUnitLedgerMismatch(item, fixtures)
+		return executeAdmittedUnitLedgerMismatch(item, fixtures, bundle)
 	case "linked_record_constraint", "linked_state_constraint", "commit_candidate_partition", "cycle_abort_provenance":
 		return executeLinkedConstraint(item, fixtures, bundle)
 	default:
@@ -602,7 +657,7 @@ func executeSemantic(item, fixtures map[string]any, bundle *policy.Bundle) error
 // executeAdmittedUnitLedgerMismatch reconstructs an admitted-unit directly
 // from its ledger record and registered ID/digest preimages. The positive
 // fence provides the slot layout, not authoritative placeholder IDs.
-func executeAdmittedUnitLedgerMismatch(item, fixtures map[string]any) error {
+func executeAdmittedUnitLedgerMismatch(item, fixtures map[string]any, bundle *policy.Bundle) error {
 	lookup := func(section, id string) (map[string]any, error) {
 		entries, ok := fixtures[section].([]any)
 		if !ok { return nil, fmt.Errorf("missing %s fixtures", section) }
@@ -632,6 +687,7 @@ func executeAdmittedUnitLedgerMismatch(item, fixtures map[string]any) error {
 	if !ok { return fmt.Errorf("missing source record reference") }
 	recordFixture, err := lookup("semantic", recordID)
 	if err != nil { return err }
+	if err := verifyExogenousRecordPreimages(recordFixture, bundle); err != nil { return err }
 	recordBytes, err := decodeHex(recordFixture, "record_envelope_hex")
 	if err != nil { return err }
 	record, err := codec.StrictDecodeEnvelope(recordBytes)

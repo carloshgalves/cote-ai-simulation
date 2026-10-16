@@ -371,8 +371,8 @@ func validateTriggerRuntimeState(value any) error {
 	}
 	id, idOK := fields[0].([]byte)
 	version, versionOK := unsigned(fields[1])
-	armed, armedOK := fields[3].(bool)
-	exhausted, exhaustedOK := fields[4].(bool)
+	_, armedOK := fields[3].(bool)
+	_, exhaustedOK := fields[4].(bool)
 	_, countOK := unsigned(fields[5])
 	_, revisionOK := unsigned(fields[7])
 	if !idOK || len(id) != 32 || !versionOK || version > uint64(^uint32(0)) || !armedOK || !exhaustedOK || !countOK || !revisionOK {

@@ -162,8 +162,24 @@ function verify(item) {
   assert(eq(identity[5], project(root, record[5], prior)), `record→ID mismatch for ${root}`);
   const recordFields = record[5];
   if (root === "cycle-commit") {
-    assert(eq(digest[5][0], recordFields.slice(0, -1)), "cycle-commit batch body mismatch");
-    assert.equal(digest[5][1].length, recordFields[15].length, "cycle-commit events not resolved");
+    const eventEnvelopes = (item.event_record_envelopes_hex ?? []).map((raw) => Buffer.from(raw, "hex"));
+    assert(eq(digest[5], [recordFields.slice(0, -1), eventEnvelopes]), "cycle-commit batch body mismatch");
+    assert.equal(eventEnvelopes.length, recordFields[15].length, "cycle-commit event witnesses not resolved");
+    const events = eventEnvelopes.map((raw) => decode(raw));
+    assert(events.every((event) => event[3] === "cote.csf.schema.event"), "cycle-commit witness is not Event");
+    assert(eq(events.map((event) => event[5][0]), recordFields[15]), "cycle-commit event IDs do not match witnesses");
+    for (const event of events) {
+      const fields = event[5];
+      assert(fields[1].equals(recordFields[0]) && fields[7].equals(recordFields[1]), "event owner run/cycle mismatch");
+      const idEnvelope = [Buffer.from([67, 83, 70, 0]), 1n, "cote.csf.id.event", "cote.csf.schema.event-id-preimage", 1n, [fields[1], fields[7], fields[2]]];
+      const digestEnvelope = [Buffer.from([67, 83, 70, 0]), 1n, "cote.csf.digest.event", "cote.csf.schema.event.body", 1n, fields.slice(0, -1)];
+      assert(fields[0].equals(sha256(encode(idEnvelope))), "cycle-commit Event ID mismatch");
+      assert(fields.at(-1).equals(sha256(encode(digestEnvelope))), "cycle-commit Event digest mismatch");
+    }
+    const nextLogicalSequence = events.length === 0
+      ? 0n
+      : events.reduce((next, event) => event[5][6] >= next ? event[5][6] + 1n : next, 0n);
+    assert.equal(recordFields[22], nextLogicalSequence, "cycle-commit next logical sequence mismatch");
   } else assert(eq(digest[5], bodyDigest.has(root) ? recordFields.slice(0, -1) : recordFields), `record→digest mismatch for ${root}`);
   const computedID = sha256(Buffer.from(item.id_preimage_envelope_hex, "hex"));
   const computedDigest = sha256(Buffer.from(item.digest_preimage_envelope_hex, "hex"));
@@ -180,7 +196,7 @@ function verify(item) {
 }
 
 const cases = fixtures.semantic.filter((item) => item.kind === "record_to_reference");
-assert.equal(cases.length, 28, "exactly 28 reference identities required");
+assert.equal(cases.length, 29, "28 roots plus the non-empty CycleCommit batch witness required");
 assert.equal(new Set(cases.map((item) => item.persisted_root)).size, 28, "reference schemas must be unique");
 const checked = cases.map(verify);
 const mutationIndex = {
@@ -207,8 +223,20 @@ for (const item of cases) {
   const mutated = { ...item, record_envelope_hex: encode(parsed).toString("hex") };
   assert.throws(() => verify(mutated), `record→reference mutation escaped verification: ${root}`);
 }
-console.log("Negative record mutations rejected for all 28 reference roots.");
-
+const dispatchCase = cases.find((item) => item.persisted_root === "cote.csf.schema.slot-dispatch");
+const dispatchRecord = decode(Buffer.from(dispatchCase.record_envelope_hex, "hex"));
+dispatchRecord[5][4] = "slot-2";
+assert.throws(() => verify({ ...dispatchCase, record_envelope_hex: encode(dispatchRecord).toString("hex") }),
+  "slot-2 record-only mutation escaped ID verification");
+const digestOnlyRecord = decode(Buffer.from(dispatchCase.record_envelope_hex, "hex"));
+digestOnlyRecord[5][6][1] = "actor-2";
+assert.throws(() => verify({ ...dispatchCase, record_envelope_hex: encode(digestOnlyRecord).toString("hex") }),
+  "digest-only record mutation escaped digest verification");
+const roundCase = cases.find((item) => item.persisted_root === "cote.csf.schema.round-declaration");
+const nestedOriginRecord = decode(Buffer.from(roundCase.record_envelope_hex, "hex"));
+nestedOriginRecord[5][6][0] = nestedOriginRecord[5][6][0] === 0n ? 1n : 0n;
+assert.throws(() => verify({ ...roundCase, record_envelope_hex: encode(nestedOriginRecord).toString("hex") }),
+  "created-by discriminant record-only mutation escaped ID verification");
 const source = cases.find((item) => item.case_id === "reference.record-to-ref.exogenous-input");
 assert(source, "exogenous fixture absent");
 const inputRef = decode(Buffer.from(source.expected_input_ref_cbor_hex, "hex"));
@@ -218,5 +246,10 @@ for (const item of fixtures.semantic.filter((item) => item.kind === "admitted_un
   assert(authority[3].equals(inputRef.at(-2)) && authority[4].equals(inputRef.at(-1)), "admitted source identity mismatch");
 }
 assert.equal(fixtures.semantic.filter((item) => item.kind === "admitted_unit_ledger_mismatch").length, 5);
-console.log(`Validated ${checked.length}/28 record bindings and five admitted-unit dependencies.`);
-console.log("ConflictSet cycle-id verified from two independently derived CommitCandidate records.");
+console.log(JSON.stringify({
+  cases: checked.length,
+  roots: new Set(checked.map((item) => item.root)).size,
+  admitted_authorities: fixtures.semantic.filter((item) => item.kind === "admitted_unit_ledger_mismatch").length,
+  conflict_candidates: 2,
+  record_mutations_rejected: cases.length + 3,
+}));

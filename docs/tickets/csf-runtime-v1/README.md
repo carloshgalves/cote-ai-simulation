@@ -31,7 +31,7 @@ estiverem concluídos.
 | Ticket | Slice observável | Bloqueado por |
 |---|---|---|
 | [CSFRV1-0](00-decisoes-bloqueantes.md) | ADRs 0010/0011 refletidos na spec/plano; runtime 1–9 liberado | — |
-| [CSFRV1-1](01-contrato-canonico.md) | genesis validado e 620 casos do codec em dois runtimes | 0 |
+| [CSFRV1-1](01-contrato-canonico.md) | genesis validado e 621 casos do codec em dois runtimes | 0 |
 | [CSFRV1-2](02-ingresso-coorte-fence.md) | fontes fechadas + dois rounds simultâneos produzem um fence estável | 1 |
 | [CSFRV1-3](03-clock-agenda-triggers.md) | clock avança por `CycleCommit` atômico e materializa trigger posterior | 2 |
 | [CSFRV1-4](04-decisao-recurso-minimo.md) | duas ações disputam a última unidade contra a mesma revisão | 3 |

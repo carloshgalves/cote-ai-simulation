@@ -27,6 +27,7 @@ type fixture struct {
     AuthoritativeAdmittedUnitHex string `json:"authoritative_admitted_unit_cbor_hex"`
     ReferencedRecordCaseID string `json:"referenced_record_case_id"`
     Candidates []string `json:"candidate_record_envelopes_hex"`
+    EventRecordEnvelopes []string `json:"event_record_envelopes_hex"`
 }
 type doc struct {
     Semantic []fixture `json:"semantic"`
@@ -207,7 +208,25 @@ func checkReference(f fixture,registries registry) error{
         parts,err:=asFields(digParts[5]);if err!=nil{return err}
         events,err:=asFields(parts[1]);if err!=nil{return err}
         expectedEventIDs,err:=asFields(r[15]);if err!=nil{return err}
-        if len(events)!=len(expectedEventIDs) ||len(events)>0{return fmt.Errorf("cycle commit event witness missing")}
+        if len(events)!=len(expectedEventIDs) ||len(events)!=len(f.EventRecordEnvelopes){return fmt.Errorf("cycle commit event witness missing")}
+        var nextLogicalSequence uint64
+        for i,raw:=range f.EventRecordEnvelopes{
+            eventBytes,err:=hex.DecodeString(raw);if err!=nil{return err}
+            eventValue,err:=decodeBytes(eventBytes);if err!=nil{return err}
+            event,err:=asFields(eventValue);if err!=nil{return err}
+            eventFields,err:=asFields(event[5]);if err!=nil{return err}
+            if !bytes.Equal(events[i].([]byte),eventBytes)||!bytes.Equal(expectedEventIDs[i].([]byte),eventFields[0].([]byte)){return fmt.Errorf("cycle commit selected event mismatch")}
+            if !bytes.Equal(eventFields[1].([]byte),r[0].([]byte))||!bytes.Equal(eventFields[7].([]byte),r[1].([]byte)){return fmt.Errorf("cycle commit event owner mismatch")}
+            eventIDEnvelope:=[]any{[]byte{'C','S','F',0},uint64(1),"cote.csf.id.event","cote.csf.schema.event-id-preimage",uint64(1),[]any{eventFields[1],eventFields[7],eventFields[2]}}
+            eventIDBytes,err:=encode(eventIDEnvelope);if err!=nil{return err};eventID:=sha256.Sum256(eventIDBytes)
+            if !bytes.Equal(eventFields[0].([]byte),eventID[:]){return fmt.Errorf("cycle commit event ID mismatch")}
+            eventDigestEnvelope:=[]any{[]byte{'C','S','F',0},uint64(1),"cote.csf.digest.event","cote.csf.schema.event.body",uint64(1),eventFields[:len(eventFields)-1]}
+            eventDigestBytes,err:=encode(eventDigestEnvelope);if err!=nil{return err};eventDigest:=sha256.Sum256(eventDigestBytes)
+            if !bytes.Equal(eventFields[len(eventFields)-1].([]byte),eventDigest[:]){return fmt.Errorf("cycle commit event digest mismatch")}
+            sequence:=eventFields[6].(uint64)+1
+            if sequence>nextLogicalSequence{nextLogicalSequence=sequence}
+        }
+        if r[22].(uint64)!=nextLogicalSequence{return fmt.Errorf("cycle commit next logical sequence mismatch")}
         body=[]any{r[:len(r)-1],events}
     }else if includes(root,bodyDigest){body=r[:len(r)-1]}else{body=r}
     if !eq(digParts[5],body){return fmt.Errorf("digest preimage disconnected from record")}
@@ -253,6 +272,26 @@ func verifyMutationGuard(original fixture, r registry) error{
     if err=checkReference(modified,r);err==nil{return fmt.Errorf("record mutation false-green for %s",root)}
     return nil
 }
+func rejectAdversarialMutation(original fixture, r registry, mutate func([]any) error) error {
+    raw,err:=decodeHex(original.RecordHex);if err!=nil{return err}
+    envelope,err:=asFields(raw);if err!=nil{return err}
+    fields,err:=asFields(envelope[5]);if err!=nil{return err}
+    if err=mutate(fields);err!=nil{return err}
+    changed,err:=encode(envelope);if err!=nil{return err}
+    modified:=original;modified.RecordHex=hex.EncodeToString(changed)
+    if err=checkReference(modified,r);err==nil{return fmt.Errorf("record-only adversarial mutation false-green: %s",original.CaseID)}
+    return nil
+}
+func verifyAdversarialMutations(f doc,r registry) error {
+    cases:=map[string]fixture{}
+    for _,item:=range f.Semantic{if item.Kind=="record_to_reference"{cases[item.PersistedRoot]=item}}
+    dispatch,ok:=cases["cote.csf.schema.slot-dispatch"];if !ok{return fmt.Errorf("slot-dispatch fixture missing")}
+    if err:=rejectAdversarialMutation(dispatch,r,func(fields []any)error{fields[4]="slot-2";return nil});err!=nil{return err}
+    if err:=rejectAdversarialMutation(dispatch,r,func(fields []any)error{actor,err:=asFields(fields[6]);if err!=nil{return err};actor[1]="actor-2";return nil});err!=nil{return err}
+    round,ok:=cases["cote.csf.schema.round-declaration"];if !ok{return fmt.Errorf("round-declaration fixture missing")}
+    if err:=rejectAdversarialMutation(round,r,func(fields []any)error{origin,err:=asFields(fields[6]);if err!=nil{return err};if origin[0].(uint64)==0{origin[0]=uint64(1)}else{origin[0]=uint64(0)};return nil});err!=nil{return err}
+    return nil
+}
 func run()error{
     constDir:="docs/architecture/canonical-codec-v1-bundle/"
     raw,err:=os.ReadFile(constDir+"fixtures.json");if err!=nil{return err}
@@ -267,7 +306,8 @@ func run()error{
         if err:=checkReference(item,r);err!=nil{return fmt.Errorf("%s: %w",item.CaseID,err)}
         if err:=verifyMutationGuard(item,r);err!=nil{return fmt.Errorf("%s: %w",item.CaseID,err)}
     }
-    if count!=28||len(roots)!=28{return fmt.Errorf("expected 28 distinct reference roots, got %d/%d",count,len(roots))}
+    if count!=29||len(roots)!=28{return fmt.Errorf("expected 29 record reference cases covering 28 roots, got %d/%d",count,len(roots))}
+    if err=verifyAdversarialMutations(f,r);err!=nil{return err}
     x,ok:=byID["reference.record-to-ref.exogenous-input"];if !ok{return fmt.Errorf("missing exogenous source")}
     ref,err:=decodeHex(x.ExpectedInputRefHex);if err!=nil{return err}
     fields,err:=asFields(ref);if err!=nil{return err}
@@ -281,7 +321,7 @@ func run()error{
         if !bytes.Equal(v[3].([]byte),fields[len(fields)-2].([]byte))||!bytes.Equal(v[4].([]byte),fields[len(fields)-1].([]byte)){return fmt.Errorf("admitted authority ID/digest mismatch")}
     }
     if admitted!=5{return fmt.Errorf("expected five admitted cases, got %d",admitted)}
-    fmt.Printf("Independent Go verification: %d/28 record references, %d admitted authorities, ConflictSet candidates proven\n",count,admitted)
+    fmt.Printf("{\"cases\":%d,\"roots\":%d,\"admitted_authorities\":%d,\"conflict_candidates\":2,\"record_mutations_rejected\":%d}\n",count,len(roots),admitted,count+3)
     return nil
 }
 func main(){if err:=run();err!=nil{fmt.Fprintln(os.Stderr,err);os.Exit(1)}}

@@ -28,7 +28,7 @@ este profile, não é uma implementação conforme.
 | `identity_algorithm_version` | `cote.csf.sha256.v1` |
 | `codec_policy_hash` | `513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203` |
 | `schema_bundle_hash` | `ef7c1e4cec18f1491e4b72bd7dd35f49a1c28d77a5bdd89d435122074f5cba18` |
-| `conformance_suite_hash` | `f9c75b6647ec14b0205806bcfd7b481dcd0d29c9408fb18aa2a50dea1e86dee2` |
+| `conformance_suite_hash` | `05a226340c4211045d6f3df8f034434f3ac336001158379833f7230df4038dfd` |
 
 O manifesto imutável do run carrega os campos de policy/profile e o `schema_bundle_hash`; este último
 cobre os registries de domain tags, enums, ordering keys e duplicate policies. O
@@ -484,12 +484,13 @@ Cada caso negativo contém bytes/input e `error_code` estável. Cobertura mínim
 18. vetores SHA-256 conhecidos do FIPS/NIST e envelopes completos deste profile.
 
 A suíte V1 contém 156 casos positivos — todos os roots persistidos e todas as 76 operações
-registradas —, 30 casos negativos com `error_code` estável, 306 casos semânticos de binding,
+registradas —, 30 casos negativos com `error_code` estável, 307 casos semânticos de binding,
 identidade, ordenação e idempotência, 119 casos executáveis de transição causal, sete casos de
-normalização e dois vetores SHA-256: 620 vetores/casos ao todo. O CI de uma
+normalização e dois vetores SHA-256: 621 vetores/casos ao todo. O CI de uma
 implementação candidata deve executar os mesmos golden vectors em pelo menos duas implementações
-independentes e linguagens diferentes como gate de aceitação; este checkpoint arquitetural ainda não
-contém esses runners ou workflow. Ambas precisam provar valor
+independentes e linguagens diferentes como gate de aceitação. A retificação adiciona um workflow
+com auditores Go e TypeScript para os vínculos record → referência; os runners completos dos golden
+vectors seguem como um gate separado. Ambas as implementações precisam provar valor
 tipado → bytes, bytes → valor tipado estrito,
 re-encoding idêntico, digest e os vetores negativos. Comparar somente objetos decodificados não basta.
 

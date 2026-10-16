@@ -183,3 +183,30 @@ func TestRecordBindingRejectsMutatedEnvelopeBytes(t *testing.T) {
 	}
 	t.Fatal("record enum fixture missing")
 }
+
+func TestAdmittedUnitLedgerMismatchRejectsMutatedOutcomes(t *testing.T) {
+	fixtures, err := readObject(bundlePath + "/fixtures.json")
+	if err != nil { t.Fatal(err) }
+	bundle, err := policy.Load(bundlePath)
+	if err != nil { t.Fatal(err) }
+	seen := map[string]bool{"source-id": false, "unit-id": false, "unit-digest": false, "eligibility": false, "unit-kind": false}
+	for _, raw := range fixtures["semantic"].([]any) {
+		item := raw.(map[string]any)
+		if item["kind"] != "admitted_unit_ledger_mismatch" { continue }
+		field := item["mutate"].([]any)[0].(string)
+		if _, ok := seen[field]; !ok { t.Fatalf("unexpected mutation %s", field) }
+		seen[field] = true
+		if err := executeSemantic(item, fixtures, bundle); err != nil { t.Fatalf("%s: %v", item["case_id"], err) }
+		badError := cloneValue(item).(map[string]any)
+		badError["expected_error_code"] = "NOT_A_REAL_ERROR"
+		if err := executeSemantic(badError, fixtures, bundle); err == nil {
+			t.Fatalf("%s: accepted invalid expected error", item["case_id"])
+		}
+		noOp := cloneValue(item).(map[string]any)
+		noOp["mutate"] = []any{"source-id", "source-1"}
+		if err := executeSemantic(noOp, fixtures, bundle); err == nil {
+			t.Fatalf("%s: accepted no-op mutation as ledger mismatch", item["case_id"])
+		}
+	}
+	for field, ok := range seen { if !ok { t.Fatalf("missing normative mutation %s", field) } }
+}

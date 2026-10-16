@@ -65,7 +65,7 @@ func createRun(ctx context.Context, bundlePath, genesisPath, databasePath string
 		return err
 	}
 	defer store.Close()
-	if err := store.PersistGenesis(ctx, manifest); err != nil {
+	if err := store.PersistGenesis(ctx, manifest, bundle); err != nil {
 		return err
 	}
 	stored, err := store.LoadGenesis(ctx, manifest.RunID)

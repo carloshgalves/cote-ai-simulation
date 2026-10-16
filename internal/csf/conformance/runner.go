@@ -590,13 +590,123 @@ func executeSemantic(item, fixtures map[string]any, bundle *policy.Bundle) error
 	case "idempotency_conflict", "optional_idempotency":
 		return executeIdempotency(kind, item)
 	case "admitted_unit_ledger_mismatch":
-		if err := semanticHexFields(item); err != nil {
-			return err
-		}
+		return executeAdmittedUnitLedgerMismatch(item, fixtures)
 	case "linked_record_constraint", "linked_state_constraint", "commit_candidate_partition", "cycle_abort_provenance":
 		return executeLinkedConstraint(item, fixtures, bundle)
 	default:
 		return fmt.Errorf("unknown semantic case kind %q", kind)
+	}
+	return nil
+}
+
+// executeAdmittedUnitLedgerMismatch reconstructs an admitted-unit directly
+// from its ledger record and registered ID/digest preimages. The positive
+// fence provides the slot layout, not authoritative placeholder IDs.
+func executeAdmittedUnitLedgerMismatch(item, fixtures map[string]any) error {
+	lookup := func(section, id string) (map[string]any, error) {
+		entries, ok := fixtures[section].([]any)
+		if !ok { return nil, fmt.Errorf("missing %s fixtures", section) }
+		for _, raw := range entries {
+			value, ok := raw.(map[string]any)
+			if ok && value["case_id"] == id { return value, nil }
+		}
+		return nil, fmt.Errorf("missing fixture %s in %s", id, section)
+	}
+	fenceID, ok := item["fence_case_id"].(string)
+	if !ok { return fmt.Errorf("missing admission fence reference") }
+	fenceFixture, err := lookup("positive", fenceID)
+	if err != nil { return err }
+	rawFence, err := decodeHex(fenceFixture, "payload_cbor_hex")
+	if err != nil { return err }
+	decodedFence, err := codec.StrictDecodePayload(rawFence)
+	if err != nil { return err }
+	fence, ok := decodedFence.([]any)
+	if !ok || len(fence) != 18 { return fmt.Errorf("invalid admission fence root") }
+	units, ok := fence[11].([]any)
+	index, indexed := number(item["admitted_unit_index"])
+	if !ok || !indexed || index >= uint64(len(units)) { return fmt.Errorf("invalid admitted unit index") }
+	template, ok := units[index].([]any)
+	if !ok || len(template) != 5 { return fmt.Errorf("invalid admitted unit template") }
+
+	recordID, ok := item["referenced_record_case_id"].(string)
+	if !ok { return fmt.Errorf("missing source record reference") }
+	recordFixture, err := lookup("semantic", recordID)
+	if err != nil { return err }
+	recordBytes, err := decodeHex(recordFixture, "record_envelope_hex")
+	if err != nil { return err }
+	record, err := codec.StrictDecodeEnvelope(recordBytes)
+	if err != nil { return err }
+	fields, ok := record.Value.([]any)
+	if !ok || len(fields) != 13 || record.SchemaID != "cote.csf.schema.exogenous-input" {
+		return fmt.Errorf("invalid exogenous input root")
+	}
+	idPreimage, err := decodeHex(recordFixture, "id_preimage_envelope_hex")
+	if err != nil { return err }
+	digestPreimage, err := decodeHex(recordFixture, "digest_preimage_envelope_hex")
+	if err != nil { return err }
+	id := sha256.Sum256(idPreimage)
+	digest := sha256.Sum256(digestPreimage)
+	referenceBytes, err := decodeHex(recordFixture, "expected_input_ref_cbor_hex")
+	if err != nil { return err }
+	referenceValue, err := codec.StrictDecodePayload(referenceBytes)
+	if err != nil { return err }
+	reference, ok := referenceValue.([]any)
+	if !ok || len(reference) != 3 { return fmt.Errorf("invalid referenced input ref") }
+	refID, idOK := reference[1].([]byte)
+	refDigest, digestOK := reference[2].([]byte)
+	if reference[0] != uint64(1) || !idOK || !digestOK ||
+		!bytes.Equal(refID, id[:]) || !bytes.Equal(refDigest, digest[:]) {
+		return fmt.Errorf("input ref is not linked to record identity")
+	}
+	recordDigest, ok := fields[12].([]byte)
+	if !ok || !bytes.Equal(recordDigest, digest[:]) {
+		return fmt.Errorf("exogenous input unit digest mismatch")
+	}
+	authority := []any{fields[9], uint64(1), fields[2], id[:], digest[:]}
+	rawAuthority, err := decodeHex(item, "authoritative_admitted_unit_cbor_hex")
+	if err != nil { return err }
+	expectedAuthority, err := codec.StrictDecodePayload(rawAuthority)
+	if err != nil { return err }
+	if !reflect.DeepEqual(expectedAuthority, authority) ||
+		!reflect.DeepEqual(template[:3], authority[:3]) {
+		return fmt.Errorf("admitted unit authority disagrees with its record or template")
+	}
+	mutation, ok := item["mutate"].([]any)
+	if !ok || len(mutation) != 2 { return fmt.Errorf("admitted unit mutation missing") }
+	field, ok := mutation[0].(string)
+	if !ok { return fmt.Errorf("admitted unit mutation path invalid") }
+	candidate := append([]any(nil), authority...)
+	switch field {
+	case "source-id":
+		value, ok := mutation[1].(string)
+		if !ok { return fmt.Errorf("source-id mutation is not text") }
+		candidate[2] = value
+	case "unit-kind":
+		value, ok := number(mutation[1])
+		if !ok || value > 255 { return fmt.Errorf("invalid unit-kind mutation") }
+		candidate[1] = value
+	case "eligibility":
+		value, ok := mutation[1].([]any)
+		if !ok || len(value) != 2 { return fmt.Errorf("invalid eligibility mutation") }
+		instant, iOK := number(value[0])
+		ordinal, oOK := number(value[1])
+		if !iOK || !oOK { return fmt.Errorf("invalid eligibility coordinate") }
+		candidate[0] = []any{instant, ordinal}
+	case "unit-id", "unit-digest":
+		if mutation[1] != "flip-low-bit" { return fmt.Errorf("invalid identity mutation") }
+		position := 3
+		if field == "unit-digest" { position = 4 }
+		mutated := bytes.Clone(candidate[position].([]byte))
+		mutated[len(mutated)-1] ^= 1
+		candidate[position] = mutated
+	default:
+		return fmt.Errorf("unrecognized admitted-unit mutation %q", field)
+	}
+	actual := ""
+	if !reflect.DeepEqual(candidate, authority) { actual = "ADMITTED_UNIT_LEDGER_MISMATCH" }
+	expected, ok := item["expected_error_code"].(string)
+	if !ok || actual != expected {
+		return fmt.Errorf("admitted unit error mismatch: want %v, got %s", item["expected_error_code"], actual)
 	}
 	return nil
 }

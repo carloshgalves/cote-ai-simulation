@@ -289,6 +289,65 @@ function semanticNegativeCode(value, item, registries) {
   return null;
 }
 
+function executeAdmittedUnitLedgerMismatch(item, fixtures) {
+  const positive = fixtures.positive.find((value) => value.case_id === item.fence_case_id);
+  const source = fixtures.semantic.find((value) => value.case_id === item.referenced_record_case_id);
+  if (!positive || !source || source.kind !== "record_to_reference") throw new Error("admitted unit linked fixtures missing");
+  const fence = parseCBOR(decodeHex(positive, "payload_cbor_hex")).value;
+  const index = item.admitted_unit_index;
+  if (!Array.isArray(fence) || fence.length !== 18 || !Array.isArray(fence[11]) ||
+      !Number.isSafeInteger(index) || index < 0 || index >= fence[11].length ||
+      !Array.isArray(fence[11][index]) || fence[11][index].length !== 5) {
+    throw new Error("admitted unit fence template invalid");
+  }
+  const template = fence[11][index];
+  const record = parseCBOR(decodeHex(source, "record_envelope_hex")).value;
+  if (!Array.isArray(record) || record.length !== 6 || record[3] !== "cote.csf.schema.exogenous-input" ||
+      !Array.isArray(record[5]) || record[5].length !== 13) throw new Error("ledger source record invalid");
+  const fields = record[5];
+  const id = sha256(decodeHex(source, "id_preimage_envelope_hex"));
+  const digest = sha256(decodeHex(source, "digest_preimage_envelope_hex"));
+  const inputRef = parseCBOR(decodeHex(source, "expected_input_ref_cbor_hex")).value;
+  if (!Array.isArray(inputRef) || inputRef.length !== 3 || inputRef[0] !== 1n ||
+      !Buffer.from(inputRef[1]).equals(id) || !Buffer.from(inputRef[2]).equals(digest) ||
+      !Buffer.from(fields[12]).equals(digest)) throw new Error("source input reference or digest mismatch");
+  const authority = [fields[9], 1n, fields[2], id, digest];
+  if (!encodeCanonical(authority).equals(decodeHex(item, "authoritative_admitted_unit_cbor_hex")) ||
+      !isDeepStrictEqual(template.slice(0, 3), authority.slice(0, 3))) {
+    throw new Error("authoritative admitted unit disagrees with source or fence template");
+  }
+  const mutation = item.mutate;
+  if (!Array.isArray(mutation) || mutation.length !== 2 || typeof mutation[0] !== "string") {
+    throw new Error("admitted unit mutation missing");
+  }
+  const candidate = parseCBOR(encodeCanonical(authority)).value;
+  const [field, value] = mutation;
+  switch (field) {
+    case "source-id":
+      if (typeof value !== "string") throw new Error("invalid source-id mutation");
+      candidate[2] = value; break;
+    case "unit-kind":
+      if (!Number.isSafeInteger(value) || value < 0 || value > 255) throw new Error("invalid unit-kind mutation");
+      candidate[1] = BigInt(value); break;
+    case "eligibility":
+      if (!Array.isArray(value) || value.length !== 2 ||
+          !value.every((part) => Number.isSafeInteger(part) && part >= 0)) throw new Error("invalid eligibility mutation");
+      candidate[0] = value.map((part) => BigInt(part)); break;
+    case "unit-id":
+    case "unit-digest": {
+      if (value !== "flip-low-bit") throw new Error("invalid identity mutation");
+      const position = field === "unit-id" ? 3 : 4, changed = Buffer.from(candidate[position]);
+      changed[changed.length - 1] ^= 1;
+      candidate[position] = changed; break;
+    }
+    default: throw new Error(`unknown admitted unit mutation ${field}`);
+  }
+  const actual = encodeCanonical(candidate).equals(encodeCanonical(authority)) ? "" : "ADMITTED_UNIT_LEDGER_MISMATCH";
+  if (actual !== item.expected_error_code) {
+    throw new Error(`admitted unit error mismatch: want ${item.expected_error_code}, got ${actual}`);
+  }
+}
+
 function executeSemantic(item, fixtures, registries) {
   if (item.kind === "record_to_reference") {
     const ref = parseCBOR(decodeHex(item, "expected_causal_ref_cbor_hex")).value;
@@ -327,12 +386,10 @@ function executeSemantic(item, fixtures, registries) {
   if (item.kind === "set_permutation_by_member_index") { executeMemberPermutation(item); return; }
   if (item.kind === "derived_ordering_component") { executeDerivedOrdering(item); return; }
   if (["idempotency_conflict", "optional_idempotency"].includes(item.kind)) { executeIdempotency(item); return; }
-  const remaining = new Set(["admitted_unit_ledger_mismatch"]);
-  if (!remaining.has(item.kind)) throw new Error(`unknown semantic kind ${item.kind}`);
-  let found = false;
-  function visit(value) { if (typeof value === "string" && /^[0-9a-f]*$/.test(value) && value.length % 2 === 0) found = true; else if (Array.isArray(value)) value.forEach(visit); else if (value && typeof value === "object") Object.values(value).forEach(visit); }
-  for (const [key, value] of Object.entries(item)) if (key.includes("hex")) visit(value);
-  if (!found && item.persisted_identity === undefined) throw new Error("semantic bytes missing");
+  if (item.kind === "admitted_unit_ledger_mismatch") {
+    executeAdmittedUnitLedgerMismatch(item, fixtures); return;
+  }
+  throw new Error(`unknown semantic kind ${item.kind}`);
 }
 
 function applyLinkedMutation(scenario, mutation) {
@@ -933,6 +990,20 @@ function executeTransition(item, bases) {
 }
 
 function verifyMutationGuards(fixtures, registries) {
+  const admitted = fixtures.semantic.filter((item) => item.kind === "admitted_unit_ledger_mismatch");
+  if (admitted.length !== 5) throw new Error("five normative admitted-unit cases are required");
+  for (const item of admitted) {
+    executeSemantic(item, fixtures, registries);
+    const badError = structuredClone(item); badError.expected_error_code = "NOT_A_REAL_ERROR";
+    let rejected = false;
+    try { executeSemantic(badError, fixtures, registries); } catch { rejected = true; }
+    if (!rejected) throw new Error(`admitted unit ignored invalid expected error: ${item.case_id}`);
+    const noOp = structuredClone(item); noOp.mutate = ["source-id", "source-1"];
+    rejected = false;
+    try { executeSemantic(noOp, fixtures, registries); } catch { rejected = true; }
+    if (!rejected) throw new Error(`admitted unit accepted a no-op mutation: ${item.case_id}`);
+  }
+
   const linked = fixtures.semantic.find((item) => item.case_id === "linked-record.append-cycle-abort.first-attempt-has-retry-ref");
   if (!linked) throw new Error("linked mutation guard fixture missing");
   const alteredCode = structuredClone(linked); alteredCode.invalid_error_code = "NOT_A_REAL_ERROR";

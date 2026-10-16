@@ -11,11 +11,13 @@ import (
 	"fmt"
 	"net/url"
 	"path/filepath"
+	"reflect"
 	"runtime"
 	"sort"
 	"strings"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	modernsqlite "modernc.org/sqlite"
 )
 
@@ -145,8 +147,23 @@ CREATE TABLE IF NOT EXISTS snapshots (id BLOB PRIMARY KEY CHECK(length(id)=32), 
 	return err
 }
 
-func (s *Store) PersistGenesis(ctx context.Context, manifest *genesis.Genesis) error {
-	result, err := s.db.ExecContext(ctx, `INSERT OR IGNORE INTO genesis_records(run_id, genesis_id, digest, canonical) VALUES(?,?,?,?)`, manifest.RunID[:], manifest.ID[:], manifest.Digest[:], manifest.CanonicalBytes)
+// PersistGenesis checks all mutable fields against the canonical root before
+// the first insert, and persists only the independently verified snapshot.
+func (s *Store) PersistGenesis(ctx context.Context, manifest *genesis.Genesis, bundle *policy.Bundle) error {
+	if manifest == nil || bundle == nil {
+		return fmt.Errorf("genesis manifest and policy bundle are required")
+	}
+	verified, err := genesis.ValidateCanonical(manifest.CanonicalBytes, bundle)
+	if err != nil {
+		return fmt.Errorf("invalid persisted genesis: %w", err)
+	}
+	if manifest.RunID != verified.RunID || manifest.ID != verified.ID ||
+		manifest.Digest != verified.Digest || manifest.WorldSeed != verified.WorldSeed ||
+		manifest.InitialInstant != verified.InitialInstant ||
+		!reflect.DeepEqual(manifest.Payload, verified.Payload) {
+		return fmt.Errorf("genesis identity or payload does not match canonical bytes")
+	}
+	result, err := s.db.ExecContext(ctx, `INSERT OR IGNORE INTO genesis_records(run_id, genesis_id, digest, canonical) VALUES(?,?,?,?)`, verified.RunID[:], verified.ID[:], verified.Digest[:], verified.CanonicalBytes)
 	if err != nil {
 		return err
 	}
@@ -158,10 +175,10 @@ func (s *Store) PersistGenesis(ctx context.Context, manifest *genesis.Genesis) e
 		return nil
 	}
 	var existingID, existingDigest, existingCanonical []byte
-	if err := s.db.QueryRowContext(ctx, `SELECT genesis_id,digest,canonical FROM genesis_records WHERE run_id=?`, manifest.RunID[:]).Scan(&existingID, &existingDigest, &existingCanonical); err != nil {
+	if err := s.db.QueryRowContext(ctx, `SELECT genesis_id,digest,canonical FROM genesis_records WHERE run_id=?`, verified.RunID[:]).Scan(&existingID, &existingDigest, &existingCanonical); err != nil {
 		return err
 	}
-	if !bytes.Equal(existingID, manifest.ID[:]) || !bytes.Equal(existingDigest, manifest.Digest[:]) || !bytes.Equal(existingCanonical, manifest.CanonicalBytes) {
+	if !bytes.Equal(existingID, verified.ID[:]) || !bytes.Equal(existingDigest, verified.Digest[:]) || !bytes.Equal(existingCanonical, verified.CanonicalBytes) {
 		return errors.New("genesis identity collision or pin corruption")
 	}
 	return nil

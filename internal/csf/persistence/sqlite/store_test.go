@@ -93,10 +93,10 @@ func TestGenesisRoundTripsByteForByteAndCollisionFails(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer store.Close()
-	if err := store.PersistGenesis(context.Background(), manifest); err != nil {
+	if err := store.PersistGenesis(context.Background(), manifest, bundle); err != nil {
 		t.Fatal(err)
 	}
-	if err := store.PersistGenesis(context.Background(), manifest); err != nil {
+	if err := store.PersistGenesis(context.Background(), manifest, bundle); err != nil {
 		t.Fatal(err)
 	}
 	stored, err := store.LoadGenesis(context.Background(), manifest.RunID)
@@ -109,7 +109,32 @@ func TestGenesisRoundTripsByteForByteAndCollisionFails(t *testing.T) {
 	corrupt := *manifest
 	corrupt.CanonicalBytes = append([]byte(nil), manifest.CanonicalBytes...)
 	corrupt.CanonicalBytes[len(corrupt.CanonicalBytes)-1] ^= 1
-	if err := store.PersistGenesis(context.Background(), &corrupt); err == nil {
+	if err := store.PersistGenesis(context.Background(), &corrupt, bundle); err == nil {
 		t.Fatal("accepted same run identity with divergent genesis bytes")
+	}
+
+	for _, scenario := range []struct {
+		name string
+		mutate func(*genesis.Genesis)
+	}{
+		{"noncanonical-first-write", func(v *genesis.Genesis) { v.CanonicalBytes = []byte{0xff} }},
+		{"run-id-mismatch", func(v *genesis.Genesis) { v.RunID[0] ^= 1 }},
+		{"genesis-id-mismatch", func(v *genesis.Genesis) { v.ID[0] ^= 1 }},
+		{"digest-mismatch", func(v *genesis.Genesis) { v.Digest[0] ^= 1 }},
+		{"payload-mismatch", func(v *genesis.Genesis) { v.Payload = []any{} }},
+	} {
+		t.Run(scenario.name, func(t *testing.T) {
+			fresh, err := Open(context.Background(), t.TempDir()+"/untrusted.db")
+			if err != nil { t.Fatal(err) }
+			defer fresh.Close()
+			bad := *manifest
+			scenario.mutate(&bad)
+			if err := fresh.PersistGenesis(context.Background(), &bad, bundle); err == nil {
+				t.Fatal("accepted invalid genesis on first insertion")
+			}
+			var count int
+			if err := fresh.db.QueryRow("SELECT COUNT(*) FROM genesis_records").Scan(&count); err != nil { t.Fatal(err) }
+			if count != 0 { t.Fatal("invalid genesis was persisted") }
+		})
 	}
 }

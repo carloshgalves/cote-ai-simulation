@@ -29,7 +29,7 @@ jobs:
           import assert from 'node:assert/strict';
           const d = 'docs/architecture/canonical-codec-v1-bundle/';
           const hash = (data) => createHash('sha256').update(data).digest('hex');
-          const receipt = Object.fromEntries(readFileSync(d + 'BUNDLE.sha256','utf8').split('\n').filter(x=>x.includes('  ')).map(x=>x.trim().split(/\s+/)).filter(x=>x.length===2));
+          const receipt = Object.fromEntries(readFileSync(d + 'BUNDLE.sha256','utf8').split('\n').map(x=>x.trim()).filter(x=>x && !x.startsWith('sha256')).map(x=>x.split(/\s+/)).filter(x=>x.length===2));
           const manifest = readFileSync(d + 'conformance-manifest.json');
           const expected = hash(Buffer.concat([Buffer.from('cote.csf.bundle.conformance.v1\0'), manifest]));
           assert.equal(receipt['conformance_suite_hash'], expected);

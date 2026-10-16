@@ -4,6 +4,7 @@ package sqlite
 import (
 	"bytes"
 	"context"
+	"crypto/sha256"
 	"database/sql"
 	_ "embed"
 	"encoding/json"
@@ -18,6 +19,7 @@ import (
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 	modernsqlite "modernc.org/sqlite"
 )
 
@@ -136,6 +138,9 @@ CREATE TABLE IF NOT EXISTS genesis_records (
   canonical BLOB NOT NULL
 ) STRICT;
 CREATE TABLE IF NOT EXISTS input_ledger (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
+CREATE TABLE IF NOT EXISTS input_slot_responses (slot_key BLOB PRIMARY KEY CHECK(length(slot_key)=32), record_id BLOB NOT NULL UNIQUE CHECK(length(record_id)=32), canonical BLOB NOT NULL) STRICT;
+CREATE TABLE IF NOT EXISTS input_source_cursors (source_id TEXT PRIMARY KEY, next_seq INTEGER NOT NULL CHECK(next_seq>=0)) STRICT;
+CREATE TABLE IF NOT EXISTS source_ingress_receipts (source_id TEXT NOT NULL, ingress_seq INTEGER NOT NULL CHECK(ingress_seq>=0), record_id BLOB NOT NULL CHECK(length(record_id)=32), canonical BLOB NOT NULL, PRIMARY KEY(source_id,ingress_seq)) STRICT;
 CREATE TABLE IF NOT EXISTS decision_ledger (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS event_store (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS evidence_ledger (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
@@ -145,6 +150,159 @@ CREATE TABLE IF NOT EXISTS cycle_control_state (run_id BLOB PRIMARY KEY CHECK(le
 CREATE TABLE IF NOT EXISTS snapshots (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
 `)
 	return err
+}
+
+// Append stores one canonical input-ledger record idempotently.
+func (s *Store) Append(ctx context.Context, record ports.CanonicalRecord) error {
+	return appendTo(ctx, s.db, "input_ledger", record)
+}
+
+func (s *Store) AppendFence(ctx context.Context, record ports.CanonicalRecord) error {
+	return appendTo(ctx, s.db, "decision_ledger", record)
+}
+
+func (s *Store) GetFence(ctx context.Context, id [32]byte) ([]byte, error) {
+	var canonical []byte
+	err := s.db.QueryRowContext(ctx, `SELECT canonical FROM decision_ledger WHERE id=?`, id[:]).Scan(&canonical)
+	return canonical, err
+}
+
+func appendTo(ctx context.Context, db *sql.DB, table string, record ports.CanonicalRecord) error {
+	if table != "input_ledger" && table != "decision_ledger" {
+		return errors.New("unsupported causal append authority")
+	}
+	result, err := db.ExecContext(ctx, `INSERT OR IGNORE INTO `+table+`(id,canonical) VALUES(?,?)`, record.Identity[:], record.Canonical)
+	if err != nil {
+		return err
+	}
+	affected, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if affected == 1 {
+		return nil
+	}
+	var existing []byte
+	if err := db.QueryRowContext(ctx, `SELECT canonical FROM `+table+` WHERE id=?`, record.Identity[:]).Scan(&existing); err != nil {
+		return err
+	}
+	if !bytes.Equal(existing, record.Canonical) {
+		return errors.New("causal record identity collision")
+	}
+	return nil
+}
+
+func (s *Store) Get(ctx context.Context, id [32]byte) ([]byte, error) {
+	var canonical []byte
+	err := s.db.QueryRowContext(ctx, `SELECT canonical FROM input_ledger WHERE id=?`, id[:]).Scan(&canonical)
+	return canonical, err
+}
+
+func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint64, record, receipt ports.CanonicalRecord) error {
+	tx, err := s.db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+	var current uint64
+	err = tx.QueryRowContext(ctx, `SELECT next_seq FROM input_source_cursors WHERE source_id=?`, source).Scan(&current)
+	if err != nil && err != sql.ErrNoRows {
+		return err
+	}
+	if sequence != current {
+		return errors.New("source ingress sequence is not gapless")
+	}
+	if err := appendTx(ctx, tx, record); err != nil {
+		return err
+	}
+	receiptID := sha256.Sum256(receipt.Canonical)
+	if err := appendTx(ctx, tx, ports.CanonicalRecord{Identity: receiptID, Canonical: receipt.Canonical}); err != nil {
+		return err
+	}
+	if _, err := tx.ExecContext(ctx, `INSERT INTO source_ingress_receipts(source_id,ingress_seq,record_id,canonical) VALUES(?,?,?,?)`, source, sequence, record.Identity[:], receipt.Canonical); err != nil {
+		return err
+	}
+	if _, err := tx.ExecContext(ctx, `INSERT INTO input_source_cursors(source_id,next_seq) VALUES(?,?) ON CONFLICT(source_id) DO UPDATE SET next_seq=excluded.next_seq`, source, sequence+1); err != nil {
+		return err
+	}
+	return tx.Commit()
+}
+
+func (s *Store) NextIngressSequence(ctx context.Context, source string) (uint64, error) {
+	var sequence uint64
+	err := s.db.QueryRowContext(ctx, `SELECT next_seq FROM input_source_cursors WHERE source_id=?`, source).Scan(&sequence)
+	if err == sql.ErrNoRows {
+		return 0, nil
+	}
+	return sequence, err
+}
+
+func appendTx(ctx context.Context, tx *sql.Tx, record ports.CanonicalRecord) error {
+	result, err := tx.ExecContext(ctx, `INSERT OR IGNORE INTO input_ledger(id,canonical) VALUES(?,?)`, record.Identity[:], record.Canonical)
+	if err != nil {
+		return err
+	}
+	affected, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if affected == 1 {
+		return nil
+	}
+	var existing []byte
+	if err := tx.QueryRowContext(ctx, `SELECT canonical FROM input_ledger WHERE id=?`, record.Identity[:]).Scan(&existing); err != nil {
+		return err
+	}
+	if !bytes.Equal(existing, record.Canonical) {
+		return errors.New("input-ledger identity collision")
+	}
+	return nil
+}
+
+// AppendIfAbsent persists a response under the stable slot key in one SQLite
+// transaction. Only one process can win the slot, regardless of response ID.
+func (s *Store) AppendIfAbsent(ctx context.Context, key [32]byte, record ports.CanonicalRecord) (bool, []byte, error) {
+	tx, err := s.db.BeginTx(ctx, nil)
+	if err != nil {
+		return false, nil, err
+	}
+	defer tx.Rollback()
+	result, err := tx.ExecContext(ctx, `INSERT OR IGNORE INTO input_slot_responses(slot_key,record_id,canonical) VALUES(?,?,?)`, key[:], record.Identity[:], record.Canonical)
+	if err != nil {
+		return false, nil, err
+	}
+	affected, err := result.RowsAffected()
+	if err != nil {
+		return false, nil, err
+	}
+	if affected == 0 {
+		var existing []byte
+		if err := tx.QueryRowContext(ctx, `SELECT canonical FROM input_slot_responses WHERE slot_key=?`, key[:]).Scan(&existing); err != nil {
+			return false, nil, err
+		}
+		return false, existing, nil
+	}
+	result, err = tx.ExecContext(ctx, `INSERT OR IGNORE INTO input_ledger(id,canonical) VALUES(?,?)`, record.Identity[:], record.Canonical)
+	if err != nil {
+		return false, nil, err
+	}
+	affected, err = result.RowsAffected()
+	if err != nil {
+		return false, nil, err
+	}
+	if affected == 0 {
+		var existing []byte
+		if err := tx.QueryRowContext(ctx, `SELECT canonical FROM input_ledger WHERE id=?`, record.Identity[:]).Scan(&existing); err != nil {
+			return false, nil, err
+		}
+		if !bytes.Equal(existing, record.Canonical) {
+			return false, nil, errors.New("input-ledger identity collision")
+		}
+	}
+	if err := tx.Commit(); err != nil {
+		return false, nil, err
+	}
+	return true, nil, nil
 }
 
 // PersistGenesis checks all mutable fields against the canonical root before

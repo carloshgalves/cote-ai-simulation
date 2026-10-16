@@ -1,6 +1,7 @@
 package sqlite
 
 import (
+	"bytes"
 	"context"
 	"encoding/hex"
 	"encoding/json"
@@ -11,7 +12,50 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
+
+func TestInputIngressAndSlotResponseAreAtomicAndConditional(t *testing.T) {
+	store, err := Open(context.Background(), t.TempDir()+"/ledger.db")
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	var inputID, receiptID, slotKey, responseA, responseB [32]byte
+	inputID[0] = 1
+	receiptID[0] = 2
+	slotKey[0] = 3
+	responseA[0] = 4
+	responseB[0] = 5
+	input := ports.CanonicalRecord{Identity: inputID, Canonical: []byte{1, 2, 3}}
+	receipt := ports.CanonicalRecord{Identity: receiptID, Canonical: []byte{4, 5, 6}}
+	if err := store.AppendIngress(context.Background(), "source-a", 0, input, receipt); err != nil {
+		t.Fatal(err)
+	}
+	if err := store.AppendIngress(context.Background(), "source-a", 2, ports.CanonicalRecord{Identity: responseA, Canonical: []byte{7}}, receipt); err == nil {
+		t.Fatal("accepted a gap in source ingress")
+	}
+	var next uint64
+	if err := store.db.QueryRow(`SELECT next_seq FROM input_source_cursors WHERE source_id='source-a'`).Scan(&next); err != nil {
+		t.Fatal(err)
+	}
+	if next != 1 {
+		t.Fatalf("failed append advanced cursor to %d", next)
+	}
+	first := ports.CanonicalRecord{Identity: responseA, Canonical: []byte{7, 8}}
+	inserted, existing, err := store.AppendIfAbsent(context.Background(), slotKey, first)
+	if err != nil || !inserted || existing != nil {
+		t.Fatalf("first slot CAS = %v %x %v", inserted, existing, err)
+	}
+	second := ports.CanonicalRecord{Identity: responseB, Canonical: []byte{9, 10}}
+	inserted, existing, err = store.AppendIfAbsent(context.Background(), slotKey, second)
+	if err != nil || inserted || !bytes.Equal(existing, first.Canonical) {
+		t.Fatalf("competing slot CAS = %v %x %v", inserted, existing, err)
+	}
+	if _, err := store.Get(context.Background(), responseB); err == nil {
+		t.Fatal("losing response was persisted")
+	}
+}
 
 func TestOpenPinsSQLiteIdentityAndPragmas(t *testing.T) {
 	store, err := Open(context.Background(), t.TempDir()+"/run.db")
@@ -114,7 +158,7 @@ func TestGenesisRoundTripsByteForByteAndCollisionFails(t *testing.T) {
 	}
 
 	for _, scenario := range []struct {
-		name string
+		name   string
 		mutate func(*genesis.Genesis)
 	}{
 		{"noncanonical-first-write", func(v *genesis.Genesis) { v.CanonicalBytes = []byte{0xff} }},
@@ -125,7 +169,9 @@ func TestGenesisRoundTripsByteForByteAndCollisionFails(t *testing.T) {
 	} {
 		t.Run(scenario.name, func(t *testing.T) {
 			fresh, err := Open(context.Background(), t.TempDir()+"/untrusted.db")
-			if err != nil { t.Fatal(err) }
+			if err != nil {
+				t.Fatal(err)
+			}
 			defer fresh.Close()
 			bad := *manifest
 			scenario.mutate(&bad)
@@ -133,8 +179,12 @@ func TestGenesisRoundTripsByteForByteAndCollisionFails(t *testing.T) {
 				t.Fatal("accepted invalid genesis on first insertion")
 			}
 			var count int
-			if err := fresh.db.QueryRow("SELECT COUNT(*) FROM genesis_records").Scan(&count); err != nil { t.Fatal(err) }
-			if count != 0 { t.Fatal("invalid genesis was persisted") }
+			if err := fresh.db.QueryRow("SELECT COUNT(*) FROM genesis_records").Scan(&count); err != nil {
+				t.Fatal(err)
+			}
+			if count != 0 {
+				t.Fatal("invalid genesis was persisted")
+			}
 		})
 	}
 }

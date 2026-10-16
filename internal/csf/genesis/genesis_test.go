@@ -334,3 +334,28 @@ func TestProductionGenesisRejectsFixtureOperationAndSchema(t *testing.T) {
 	}
 	t.Fatal("genesis fixture not found")
 }
+
+func TestRejectGenesisWithUnverifiedInitialEpistemicCheckpoint(t *testing.T) {
+	inlineContent := []byte("initial-epistemic-state")
+	inlineDigest := identity.OpaqueContentHash(inlineContent)
+	for _, test := range []struct {
+		name string
+		content []any
+		digest []byte
+	}{
+		{"non-ascii-locator", []any{uint64(0), "mémoire:missing"}, bytes.Repeat([]byte{0x11}, 32)},
+		{"unresolved-ascii-locator", []any{uint64(0), "memory:missing"}, bytes.Repeat([]byte{0x22}, 32)},
+		{"inline-with-correct-hash-but-unseeded", []any{uint64(1), inlineContent}, inlineDigest[:]},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			corrupt := mutateGenesis(t, func(_ *codec.Envelope, payload []any) {
+				payload[17] = []any{[]any{
+					[]any{"school", "student-1"}, "memory-1", uint64(1),
+					test.content, test.digest, "cognition-1", uint64(1),
+					[]any{int64(0), uint64(0), uint64(0)},
+				}}
+			})
+			requireRejectedGenesis(t, corrupt)
+		})
+	}
+}

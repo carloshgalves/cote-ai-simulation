@@ -98,6 +98,12 @@ func ValidateCanonical(encoded []byte, bundle *policy.Bundle) (*Genesis, error) 
 	if err := validateCheckpoints(payload[17]); err != nil {
 		return nil, err
 	}
+	// The CSFRV1-1 bootstrap creates an empty run. Checkpoints from cognition
+	// cannot become authoritative until their owner verifies and atomically
+	// supplies their content and coverage; neither exists in this slice.
+	if len(payload[17].([]any)) != 0 {
+		return nil, fmt.Errorf("initial epistemic checkpoints require verified cognition bootstrap")
+	}
 	deriver := identity.New(bundle)
 	genesisIDHash, _, err := deriver.Sum("cote.csf.id.genesis", "cote.csf.schema.genesis-id-preimage", 1, []any{runBytes})
 	if err != nil {

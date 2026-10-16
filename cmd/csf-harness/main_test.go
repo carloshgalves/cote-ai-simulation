@@ -169,3 +169,39 @@ func TestCreateRunRejectsUnverifiedExternalDependenciesBeforeOpeningDatabase(t *
 		})
 	}
 }
+
+func TestCreateRunRejectsUnverifiedEpistemicCheckpointsBeforeOpeningDatabase(t *testing.T) {
+	inlineContent := []byte("initial-epistemic-state")
+	inlineDigest := identity.OpaqueContentHash(inlineContent)
+	for _, test := range []struct {
+		name string
+		content []any
+		digest []byte
+	}{
+		{"non-ascii-locator", []any{uint64(0), "mémoire:missing"}, bytes.Repeat([]byte{0x11}, 32)},
+		{"unresolved-ascii-locator", []any{uint64(0), "memory:missing"}, bytes.Repeat([]byte{0x22}, 32)},
+		{"valid-inline-but-unseeded", []any{uint64(1), inlineContent}, inlineDigest[:]},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			envelope, err := codec.StrictDecodeEnvelope(validEmptyGenesis(t))
+			if err != nil { t.Fatal(err) }
+			payload := envelope.Value.([]any)
+			payload[17] = []any{[]any{
+				[]any{"school", "student-1"}, "memory-1", uint64(1),
+				test.content, test.digest, "cognition-1", uint64(1),
+				[]any{int64(0), uint64(0), uint64(0)},
+			}}
+			encoded, err := codec.CanonicalBytes(envelope.DomainTag, envelope.SchemaID, envelope.SchemaVersion, payload)
+			if err != nil { t.Fatal(err) }
+			dir := t.TempDir()
+			genesisPath, dbPath := filepath.Join(dir, "unverified.cbor"), filepath.Join(dir, "run.db")
+			if err := os.WriteFile(genesisPath, encoded, 0o600); err != nil { t.Fatal(err) }
+			if err := createRun(context.Background(), testBundle, genesisPath, dbPath); err == nil {
+				t.Fatal("created a run with unverified initial epistemic checkpoint")
+			}
+			if _, err := os.Stat(dbPath); !os.IsNotExist(err) {
+				t.Fatalf("invalid genesis must not open SQLite database, stat: %v", err)
+			}
+		})
+	}
+}

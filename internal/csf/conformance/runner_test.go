@@ -116,6 +116,26 @@ func TestLinkedRetryReferenceAndLogicalBatchRules(t *testing.T) {
 	for id, seen := range wanted { if !seen { t.Fatalf("linked regression case %q missing", id) } }
 }
 
+func TestLinkedFinding5RegressionCases(t *testing.T) {
+	fixtures, err := readObject(bundlePath + "/fixtures.json")
+	if err != nil { t.Fatal(err) }
+	bundle, err := policy.Load(bundlePath)
+	if err != nil { t.Fatal(err) }
+	wanted := map[string]bool{
+		"linked-record.publish-cycle-commit-batch.valid": false,
+		"linked-record.publish-cycle-commit-batch.perceptible-event-task-omitted": false,
+		"linked-record.append-cycle-abort.abort-base-state-hash-mismatch": false,
+	}
+	for _, raw := range fixtures["semantic"].([]any) {
+		item := raw.(map[string]any)
+		id, _ := item["case_id"].(string)
+		if _, ok := wanted[id]; !ok { continue }
+		if err := executeSemantic(item, fixtures, bundle); err != nil { t.Errorf("%s: %v", id, err) }
+		wanted[id] = true
+	}
+	for id, seen := range wanted { if !seen { t.Errorf("linked regression case %q missing", id) } }
+}
+
 func TestReferenceBindingRejectsCorruptedContainerBytes(t *testing.T) {
 	fixtures, err := readObject(bundlePath + "/fixtures.json")
 	if err != nil {

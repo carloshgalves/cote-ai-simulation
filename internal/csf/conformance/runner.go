@@ -657,7 +657,7 @@ func validateLinkedRelations(item, scenario map[string]any, bundle *policy.Bundl
 		fence, fok := records["aborted-fence"]; abort, aok := records["abort"]
 		valid = fok && aok && len(fence) == 18 && len(abort) == 15
 		if valid {
-			for _, pair := range [][2]int{{0,0},{1,1},{2,2},{4,3},{5,4},{6,5},{7,6},{17,8},{12,9}} { valid = valid && eq(fence[pair[0]], abort[pair[1]]) }
+			for _, pair := range [][2]int{{0,0},{1,1},{2,2},{4,3},{5,4},{6,5},{7,6},{8,7},{17,8},{12,9}} { valid = valid && eq(fence[pair[0]], abort[pair[1]]) }
 			attempt, ok := number(fence[2])
 			valid = valid && ok && (attempt == 1 && optionalAbsent(fence[3]) || attempt > 1 && optionalPresent(fence[3]))
 		}
@@ -698,7 +698,8 @@ func validateLinkedRelations(item, scenario map[string]any, bundle *policy.Bundl
 			valid = valid && uniqueProjection(commit[16],decisions,0) && uniqueProjection(commit[15],events,0) && uniqueProjection(commit[18],tasks,0)
 			for _, record := range decisions { valid = valid && eq(record[1],fence[0]) && eq(record[2],fence[1]) && eq(record[3],fence[2]) }
 			for _, event := range events { valid = valid && eq(event[1],commit[0]) && eq(event[7],commit[1]) && eq(event[5],commit[3]) && eq(event[8],commit[6]) }
-			for _, task := range tasks { valid = valid && containsValue(projectionField(commit[15],0),task[3]) && eq(task[1],commit[0]) && eq(task[2],commit[1]) && eq(task[4],commit[6]) && eq(task[5],commit[8]) && eq(task[6],commit[20]) && eq(task[8],commit[21]) }
+			for _, task := range tasks { valid = valid && containsValue(commit[15],task[3]) && eq(task[1],commit[0]) && eq(task[2],commit[1]) && eq(task[4],commit[6]) && eq(task[5],commit[8]) && eq(task[6],commit[20]) && eq(task[8],commit[21]) }
+			valid = valid && matchesPerceptionClassification(scenario, commit, events, tasks)
 			cursor := scenario["pre_append_cursor"].(map[string]any)["decision_ledger"].([]any); before := uint64(0)
 			for i:=len(cursor)-1;i>=0;i-- { if role,ok:=cursor[i].(string);ok { if record,exists:=records[role]; exists && isCycleCommitRole(scenario,role) { before,_=number(record[22]); break } } }
 			if uint64(len(events))==0 { valid = valid && numberEqual(commit[22],before) } else { next,ok:=number(commit[22]); valid=valid&&ok&&next==before+uint64(len(events)); ordered:=projectByIDs(events,commit[15]); for i,event:=range ordered { seq,seqOK:=number(event[6]);valid=valid&&seqOK&&seq==before+uint64(i) } }
@@ -765,6 +766,33 @@ func validateCommitMutation(mutation map[string]any,fence,commit []any,records m
 func subsetValues(values, source any) bool { a,aok:=values.([]any); b,bok:=source.([]any); if !aok||!bok{return false}; for _,v:=range a { found:=false; for _,w:=range b { if reflect.DeepEqual(v,w){found=true;break} }; if !found{return false} }; return true }
 func roleIDs(records map[string][]any, role string) []any { if r,ok:=records[role];ok&&len(r)>0{return []any{r[0]}}; return []any{} }
 func projectionField(value any, index int) any { rows,ok:=value.([]any); if !ok{return nil}; out:=make([]any,0,len(rows)); for _,row:=range rows { fields,ok:=row.([]any); if !ok||index>=len(fields){return nil}; out=append(out,fields[index]) }; return out }
+
+// matchesPerceptionClassification enforces the normative observer-classification
+// witness against persisted event/task records and the CycleCommit projection.
+func matchesPerceptionClassification(scenario map[string]any, commit []any, events, tasks [][]any) bool {
+	witnesses, ok := scenario["transition_witnesses"].([]any)
+	if !ok { return false }
+	var classification []any
+	for _, raw := range witnesses {
+		witness, ok := raw.(map[string]any); if !ok { return false }
+		if witness["role"] != "perception-classification" { continue }
+		encoded, err := hex.DecodeString(witness["witness_cbor_hex"].(string)); if err != nil { return false }
+		value, err := codec.StrictDecodePayload(encoded); if err != nil { return false }
+		classification, ok = value.([]any); if !ok { return false }
+		break
+	}
+	if len(classification) != 2 || !reflect.DeepEqual(classification[0], commit[20]) { return false }
+	classified, ok := classification[1].([]any); if !ok || len(classified) != len(events) { return false }
+	expectedEvents := make([]any, 0, len(tasks))
+	for i, raw := range classified {
+		row, ok := raw.([]any); if !ok || len(row) != 3 || !reflect.DeepEqual(row[0], events[i][0]) || !reflect.DeepEqual(row[1], events[i][len(events[i])-1]) { return false }
+		perceptible, ok := row[2].(bool); if !ok { return false }
+		if perceptible { expectedEvents = append(expectedEvents, row[0]) }
+	}
+	actualEvents, actualTaskIDs := make([]any, 0, len(tasks)), make([]any, 0, len(tasks))
+	for _, task := range tasks { if len(task) < 4 { return false }; actualTaskIDs = append(actualTaskIDs, task[0]); actualEvents = append(actualEvents, task[3]) }
+	return reflect.DeepEqual(expectedEvents, actualEvents) && reflect.DeepEqual(actualTaskIDs, commit[18])
+}
 
 func applyLinkedMutation(scenario, mutation map[string]any) error {
 	op, _ := mutation["op"].(string)

@@ -434,6 +434,7 @@ function validateLinkedRelations(item, scenario, registries) {
         for (const event of events) valid &&= equal(event[1], commit[0]) && equal(event[7], commit[1]) && equal(event[5], commit[3]) && equal(event[8], commit[6]);
         const eventIDs = new Set(events.map((event) => Buffer.from(event[0]).toString("hex")));
         for (const task of tasks) valid &&= eventIDs.has(Buffer.from(task[3]).toString("hex")) && equal(task[1], commit[0]) && equal(task[2], commit[1]) && equal(task[4], commit[6]) && equal(task[5], commit[8]) && equal(task[6], commit[20]) && equal(task[8], commit[21]);
+        valid &&= matchesPerceptionClassification(scenario, commit, events, tasks);
         const cursorRoles = scenario.pre_append_cursor?.decision_ledger ?? [], priorCommitRole = [...cursorRoles].reverse().find((role) => descriptorsRecordIsCommit(scenario, role));
         const priorCommit = priorCommitRole ? records.get(priorCommitRole) : null, before = priorCommit ? priorCommit[22] : 0n;
         valid &&= commit[22] === before + BigInt(events.length);
@@ -470,6 +471,20 @@ function attemptRetryRef(retry) { return [14n, sha256(canonicalEnvelope("cote.cs
 function cycleAbortRef(abort) { return [13n, sha256(canonicalEnvelope("cote.csf.id.cycle-abort", "cote.csf.schema.cycle-abort-id-preimage", 1, encodeCanonical([abort[0], abort[1], abort[2]]))), Buffer.from(abort.at(-1))]; }
 function uniqueProjection(expected, records, index) { return Array.isArray(expected) && records.length === expected.length && records.every((record, position) => Buffer.isBuffer(record[index]) && Buffer.from(expected[position]).equals(record[index])) && new Set(expected.map((value) => Buffer.from(value).toString("hex"))).size === expected.length; }
 function descriptorsRecordIsCommit(scenario, role) { return scenario.records.some((record) => record.role === role && record.schema_id === "cote.csf.schema.cycle-commit"); }
+function matchesPerceptionClassification(scenario, commit, events, tasks) {
+  const witness = scenario.transition_witnesses?.find((item) => item.role === "perception-classification");
+  if (!witness) return false;
+  let classification;
+  try { classification = parseCBOR(Buffer.from(witness.witness_cbor_hex, "hex")).value; } catch { return false; }
+  if (!Array.isArray(classification) || classification.length !== 2 || !isDeepStrictEqual(classification[0], commit[20]) || !Array.isArray(classification[1]) || classification[1].length !== events.length) return false;
+  const expected = [];
+  for (let i = 0; i < classification[1].length; i++) {
+    const row = classification[1][i];
+    if (!Array.isArray(row) || row.length !== 3 || !Buffer.isBuffer(row[0]) || !Buffer.from(events[i][0]).equals(row[0]) || !Buffer.isBuffer(row[1]) || !Buffer.from(events[i].at(-1)).equals(row[1]) || typeof row[2] !== "boolean") return false;
+    if (row[2]) expected.push(row[0]);
+  }
+  return isDeepStrictEqual(expected, tasks.map((task) => task[3])) && isDeepStrictEqual(tasks.map((task) => task[0]), commit[18]);
+}
 function validateWorldReducerResult(item, records) {
   const mutation = item.mutation; if (!mutation || !Array.isArray(mutation.recompute)) return false;
   const events = [...records.entries()].filter(([role]) => role.startsWith("event-")).map(([, record]) => record);

@@ -836,8 +836,9 @@ func matchesCommitWorldAndSources(scenario map[string]any, fence, commit []any, 
 
 func decisionCandidateResolves(decision []any, records map[string][]any) bool {
 	if len(decision) < 8 { return false }
-	if decision[7] != "commit" { return true }
-	ref, ok := decision[6].([]any); if !ok || len(ref) != 2 || !numberEqual(ref[0], 1) { return false }
+	ref, ok := decision[6].([]any); if !ok { return false }
+	if len(ref) == 1 && numberEqual(ref[0], 0) { return true }
+	if len(ref) != 2 || !numberEqual(ref[0], 1) { return false }
 	id, ok := ref[1].([]byte); if !ok { return false }
 	for role, candidate := range records { if strings.HasPrefix(role, "candidate") && len(candidate) > 0 && bytes.Equal(candidate[0].([]byte), id) { return true } }
 	return false

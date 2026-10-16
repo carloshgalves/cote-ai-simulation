@@ -444,10 +444,7 @@ function validateLinkedRelations(item, scenario, registries) {
         valid &&= orderedEvents.every((event, index) => event && event[6] === before + BigInt(index));
         const source = get("source-unit");
         if (source) valid &&= admitted.some((unit) => Buffer.from(unit[3]).equals(source[0]));
-        for (const decision of decisions) {
-          const candidateRef = decision[6];
-          if (Array.isArray(candidateRef) && candidateRef.length === 2 && candidateRef[0] === 1n) valid &&= [...records.entries()].some(([role, candidate]) => role.startsWith("candidate") && Buffer.isBuffer(candidate[0]) && candidate[0].equals(candidateRef[1]));
-        }
+        for (const decision of decisions) valid &&= decisionCandidateResolves(decision, records);
       }
       if (scenario.executed_mutation) valid = validateCommitMutation(scenario.executed_mutation, fence, commit, records);
       break;
@@ -516,9 +513,9 @@ function matchesCommitWorldAndSources(scenario, fence, commit, events, records) 
   return true;
 }
 function decisionCandidateResolves(decision, records) {
-  if (!Array.isArray(decision) || decision.length < 8) return false;
-  if (decision[7] !== "commit") return true;
+  if (!Array.isArray(decision) || decision.length < 8 || !Array.isArray(decision[6])) return false;
   const ref = decision[6];
+  if (ref.length === 1 && ref[0] === 0n) return true;
   return Array.isArray(ref) && ref.length === 2 && ref[0] === 1n && [...records.entries()].some(([role, candidate]) => role.startsWith("candidate") && Buffer.isBuffer(candidate[0]) && candidate[0].equals(ref[1]));
 }
 function validateWorldReducerResult(item, records) {

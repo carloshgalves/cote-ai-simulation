@@ -5,6 +5,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 

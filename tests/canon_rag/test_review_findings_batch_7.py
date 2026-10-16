@@ -21,6 +21,7 @@ from common import (  # noqa: E402
     load_suite,
     merge_source_registries,
 )
+from eval_runner import evaluate_suite  # noqa: E402
 from retrieval import retrieve  # noqa: E402
 
 
@@ -164,3 +165,41 @@ def test_collection_file_digest_and_schema_identity_change_manifest():
     corpus.collection_sources = [dict(corpus.collection_sources[0], digest="changed")]
     changed = corpus_manifest(corpus, claims, registry)
     assert base["digest"] != changed["digest"]
+
+
+def test_default_compiler_and_manifest_load_repository_conflicts():
+    suite = load_suite(REPO)
+    claim = next(
+        item for item in load_claims(REPO)
+        if item["id"] == "y1.initial.class-labels"
+    )
+    conflict_id = "conflict.governance.class-label-reassignment"
+    evidence = deepcopy(next(
+        item for item in suite["fixture_records"]
+        if item["id"] == "ev.fixture.post-divergence.fact"
+    ))
+    evidence["supports_claims"] = [claim["id"]]
+    registry = merge_source_registries(
+        load_source_registry(REPO), suite["fixture_source_registry"]
+    )
+
+    record = compile_records([evidence], [claim], registry)[0]
+    assert record["resolved_claims"][0]["open_conflicts"] == [conflict_id]
+
+    manifest = corpus_manifest([], [claim], load_source_registry(REPO))
+    assert conflict_id in manifest["conflict_ids"]
+
+
+def test_fixture_conflict_changes_suite_and_run_identity():
+    suite = load_suite(REPO)
+    evidence = load_corpus(REPO)
+    claims = load_claims(REPO)
+    registry = load_source_registry(REPO)
+
+    open_report = evaluate_suite(evidence, claims, registry, suite)
+    resolved_suite = deepcopy(suite)
+    resolved_suite["fixture_conflicts"][0]["status"] = "resolved"
+    resolved_report = evaluate_suite(evidence, claims, registry, resolved_suite)
+
+    assert open_report["suite"]["digest"] != resolved_report["suite"]["digest"]
+    assert open_report["run_digest"] != resolved_report["run_digest"]

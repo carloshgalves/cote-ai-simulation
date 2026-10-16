@@ -49,11 +49,14 @@ def normalize_request(case):
 def evaluate_suite(corpus, claims, source_registry, suite):
     fixture_claims = suite.get("fixture_claims", [])
     fixture_registry = suite.get("fixture_source_registry", {"schema_version": 1, "works": []})
+    fixture_conflicts = sorted(
+        deepcopy(suite.get("fixture_conflicts", [])), key=lambda conflict: conflict["id"]
+    )
     records = compile_records(
         corpus + suite.get("fixture_records", []),
         claims + fixture_claims,
         merge_source_registries(source_registry, fixture_registry),
-        load_conflicts(Path(__file__).resolve().parents[2]) + suite.get("fixture_conflicts", []),
+        load_conflicts(Path(__file__).resolve().parents[2]) + fixture_conflicts,
     )
     manifest = corpus_manifest(corpus, claims, source_registry)
     suite_identity = {
@@ -63,6 +66,7 @@ def evaluate_suite(corpus, claims, source_registry, suite):
         "fixture_records": suite.get("fixture_records", []),
         "fixture_claims": fixture_claims,
         "fixture_source_registry": fixture_registry,
+        "fixture_conflicts": fixture_conflicts,
         "cases": suite["cases"],
     }
     suite_digest = sha256_json(suite_identity)

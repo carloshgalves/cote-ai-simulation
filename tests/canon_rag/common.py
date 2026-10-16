@@ -20,6 +20,7 @@ COMPILER_VERSION = 2
 CHUNKING_ID = "evidence-1to1-max1600-no-overlap"
 BACKEND = {"id": "reference-lexical", "version": 1}
 SCHEMA_DIR = Path(__file__).resolve().parents[2] / "data/canon/schema"
+REPO_ROOT = SCHEMA_DIR.parents[2]
 
 
 def canonical_json(value: Any) -> bytes:
@@ -230,7 +231,7 @@ def compile_records(
     claim_by_id = _index_unique(claims, "claim")
     work_by_id = _index_unique(source_registry.get("works", []), "source work")
     if conflicts is None:
-        conflicts = load_conflicts(SCHEMA_DIR.parents[0])
+        conflicts = load_conflicts(REPO_ROOT)
     conflict_by_id = _index_unique(conflicts, "conflict")
     registry_errors = _schema_errors("source_registry", source_registry, "source.schema.json")
     registry_errors.extend(
@@ -334,7 +335,7 @@ def corpus_manifest(
     )
     work_by_id = _index_unique(source_registry.get("works", []), "source work")
     if conflicts is None:
-        conflicts = load_conflicts(SCHEMA_DIR.parents[0])
+        conflicts = load_conflicts(REPO_ROOT)
     conflict_by_id = _index_unique(conflicts, "conflict")
     normalized_registry = deepcopy(source_registry)
     normalized_registry["works"] = sorted(

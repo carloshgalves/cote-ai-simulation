@@ -378,11 +378,138 @@ function executeAdmittedUnitLedgerMismatch(item, fixtures) {
   }
 }
 
+// Independent TS projection of record fields into their registered causal
+// identity and digest preimages. The fixture's preimages are never authority.
+function recordIdentityProjection(root, fields, oldPreimage) {
+  const indices = {
+    "event": [1, 7, 2],
+    "exogenous-input": [1, 2, 3], "source-closure": [1, 2, 3],
+    "round-declaration": [6, 7, 8], "slot-dispatch": [1, 2, 3, 4, 5],
+    "scheduled-occurrence": [9, 10, 11],
+    "commit-candidate": [1, 2, 3, 4, 5, 6, 7],
+    "admission-fence": [0, 1, 2], "cycle-commit": [0, 1, 2], "cycle-abort": [0, 1, 2],
+    "attempt-retry": [0, 1, 2, 3], "perception-task": [1, 3, 6, 7, 8],
+    "observation": [1, 2, 3, 4], "claim": [1, 2, 3], "transmission": [1, 2, 3],
+    "snapshot": [0, 1, 3], "genesis-manifest": [0],
+    "epistemic-checkpoint-ref": [0, 1, 2, 7],
+    "rng-draw": [1, 2, 3, 4, 5, 6, 7, 8],
+    "affordance-assessment": [0, 2], "provisional-disposition": [1, 2, 3, 4],
+    "attempt-failure": [1, 2, 3, 5, 6, 4],
+  };
+  if (indices[root]) {
+    const v = indices[root].map((i) => fields[i]);
+    if (v.some((x) => x === undefined)) throw new Error(`missing identity fields of ${root}`);
+    return v;
+  }
+  if (root === "action-proposal") return [fields[1], 0n];
+  if (root === "no-proposal") return [fields[1], 1n];
+  if (root === "trigger-activation") {
+    const origin = fields[5];
+    if (!Array.isArray(origin) || ![0n, 1n].includes(origin[0]) ||
+        (origin[0] === 0n && origin.length !== 4) ||
+        (origin[0] === 1n && origin.length !== 2)) throw new Error("invalid trigger origin");
+    return [fields[1], fields[3], fields[4], origin[0] === 0n ? origin[2] : 0n, fields[7]];
+  }
+  if (root === "decision-record") {
+    const subject = fields[4], inputIndex = subject?.[0] === 0n ? 2 : 1;
+    if (!Array.isArray(subject) || subject[inputIndex] === undefined) throw new Error("invalid decision subject");
+    return [fields[2], fields[3], subject[inputIndex]];
+  }
+  if (root === "knowledge-input") {
+    const observation = fields[7];
+    if (!Array.isArray(observation) || observation.length !== 3) throw new Error("invalid knowledge observation ref");
+    return [observation[1], fields[3], fields[5], fields[1], fields[2]];
+  }
+  if (root === "conflict-set") {
+    // This preimage's cycle ID is an external ledger authority, not a
+    // field of ConflictSet itself. The other components are record-owned.
+    if (!Array.isArray(oldPreimage) || oldPreimage.length !== 4 ||
+        !Buffer.isBuffer(oldPreimage[0]) || oldPreimage[0].length !== 32) {
+      throw new Error("invalid conflict cycle witness");
+    }
+    return [oldPreimage[0], fields[1], fields[2], fields[3]];
+  }
+  throw new Error(`unsupported reference root ${root}`);
+}
+
+function storesOwnID(root) {
+  return new Set([
+    "event", "source-closure", "round-declaration", "slot-dispatch",
+    "action-proposal", "scheduled-occurrence", "trigger-activation",
+    "commit-candidate", "conflict-set", "decision-record", "perception-task",
+    "observation", "knowledge-input", "claim", "transmission", "no-proposal",
+    "rng-draw", "provisional-disposition", "attempt-failure",
+  ]).has(root);
+}
+
+function verifyRecordReferenceBinding(item, registries) {
+  const binding = registries.reference_identities.find((x) => x.persisted_root === item.persisted_root);
+  if (!binding || item.id_operation !== binding.id.operation ||
+      item.digest_operation !== binding.digest.operation) throw new Error("unregistered record reference operations");
+  const encodedRecord = decodeHex(item, "record_envelope_hex");
+  const record = parseCBOR(encodedRecord).value;
+  if (!Array.isArray(record) || record.length !== 6 ||
+      !encodeCanonical(record).equals(encodedRecord) ||
+      record[3] !== item.persisted_root || record[4] !== 1n ||
+      !Array.isArray(record[5]) || record[5].length === 0) throw new Error("invalid source record envelope");
+  const fields = record[5], root = item.persisted_root.slice("cote.csf.schema.".length);
+  const idBytes = decodeHex(item, "id_preimage_envelope_hex");
+  const id = parseCBOR(idBytes).value;
+  if (!Array.isArray(id) || id.length !== 6 ||
+      id[2] !== binding.id.operation || id[3] !== binding.id.preimage_schema ||
+      id[4] !== 1n) throw new Error("invalid registered identity envelope");
+  const digestBytes = decodeHex(item, "digest_preimage_envelope_hex");
+  const dig = parseCBOR(digestBytes).value;
+  if (!Array.isArray(dig) || dig.length !== 6 ||
+      dig[2] !== binding.digest.operation || dig[3] !== binding.digest.preimage_schema ||
+      dig[4] !== 1n) throw new Error("invalid registered digest envelope");
+  for (const [domain, schema] of [[id[2], id[3]], [dig[2], dig[3]]]) {
+    if (!registries.domain_operations.some((op) => op[0] === domain && op[1] === schema && op[2] === 1)) {
+      throw new Error(`unregistered preimage domain ${domain}/${schema}`);
+    }
+  }
+  const expectedID = recordIdentityProjection(root, fields, id[5]);
+  if (!canonicalEnvelope(id[2], id[3], 1, encodeCanonical(expectedID)).equals(idBytes)) {
+    throw new Error(`record-derived ID preimage mismatch: ${root}`);
+  }
+  let body = fields;
+  if (dig[3] === "cote.csf.schema.batch-preimage") {
+    if (!Array.isArray(fields[15]) || fields[15].length !== 0) {
+      throw new Error("cycle commit fixture lacks authoritative event envelopes");
+    }
+    body = [fields.slice(0, -1), []];
+  } else if (dig[3] !== item.persisted_root) {
+    body = fields.slice(0, -1);
+  }
+  if (!canonicalEnvelope(dig[2], dig[3], 1, encodeCanonical(body)).equals(digestBytes)) {
+    throw new Error(`record-derived digest preimage mismatch: ${root}`);
+  }
+  const computedID = sha256(idBytes), computedDigest = sha256(digestBytes);
+  const ref = parseCBOR(decodeHex(item, "expected_causal_ref_cbor_hex")).value;
+  if (!Array.isArray(ref) || ref.length !== 3 ||
+      ref[0] !== BigInt(binding.code) ||
+      !Buffer.from(ref[1]).equals(computedID) || !Buffer.from(ref[2]).equals(computedDigest)) {
+    throw new Error("causal reference not linked to record");
+  }
+  if (storesOwnID(root) && !Buffer.from(fields[0]).equals(computedID)) {
+    throw new Error(`record's embedded ID does not match ${root}`);
+  }
+  if (dig[3] !== item.persisted_root && !Buffer.from(fields.at(-1)).equals(computedDigest)) {
+    throw new Error(`record's embedded digest does not match ${root}`);
+  }
+  if (item.expected_input_ref_cbor_hex) {
+    const iref = parseCBOR(decodeHex(item, "expected_input_ref_cbor_hex")).value;
+    if (!Array.isArray(iref) || iref.length < 3 ||
+        !Buffer.from(iref.at(-2)).equals(computedID) ||
+        !Buffer.from(iref.at(-1)).equals(computedDigest)) {
+      throw new Error(`input reference not linked to ${root}`);
+    }
+  }
+}
+
 function executeSemantic(item, fixtures, registries) {
   if (item.kind === "record_to_reference") {
-    if (item.persisted_root === "cote.csf.schema.exogenous-input") verifyExogenousRecordPreimages(item);
-    const ref = parseCBOR(decodeHex(item, "expected_causal_ref_cbor_hex")).value;
-    if (!Buffer.from(ref[1]).equals(sha256(decodeHex(item, "id_preimage_envelope_hex"))) || !Buffer.from(ref[2]).equals(sha256(decodeHex(item, "digest_preimage_envelope_hex")))) throw new Error("record reference mismatch"); return;
+    verifyRecordReferenceBinding(item, registries); return;
   }
   if (item.kind === "causal_reference_identity") {
     for (const pair of Object.values(item.ids)) if (pair.length !== 2 || pair[0] === pair[1]) throw new Error("identity separation mismatch"); return;
@@ -1021,6 +1148,51 @@ function executeTransition(item, bases) {
 }
 
 function verifyMutationGuards(fixtures, registries) {
+  const referenceCases = fixtures.semantic.filter((item) => item.kind === "record_to_reference");
+  if (referenceCases.length !== 28) throw new Error("exactly 28 normative reference cases required");
+  function alterFirstField(value) {
+    if (Buffer.isBuffer(value) || value instanceof Uint8Array) {
+      const result = Buffer.from(value);
+      if (result.length === 0) return Buffer.from([1]);
+      result[0] ^= 1;
+      return result;
+    }
+    if (typeof value === "string") return value + "-changed";
+    if (typeof value === "bigint") return value + 1n;
+    if (typeof value === "boolean") return !value;
+    if (Array.isArray(value)) {
+      const result = [...value];
+      if (result.length === 0) return [1n];
+      result[0] = alterFirstField(result[0]);
+      return result;
+    }
+    throw new Error("unsupported mutation type");
+  }
+  for (const item of referenceCases) {
+    verifyRecordReferenceBinding(item, registries);
+    const mutated = structuredClone(item);
+    const envelope = parseCBOR(decodeHex(mutated, "record_envelope_hex")).value;
+    envelope[5][0] = alterFirstField(envelope[5][0]);
+    mutated.record_envelope_hex = hex(encodeCanonical(envelope));
+    let rejected = false;
+    try { executeSemantic(mutated, fixtures, registries); } catch { rejected = true; }
+    if (!rejected) throw new Error(`record→reference accepted mutated source with stale preimages: ${item.case_id}`);
+  }
+  const dispatch = fixtures.semantic.find((item) => item.case_id === "reference.record-to-ref.slot-dispatch");
+  if (!dispatch) throw new Error("slot-dispatch reference fixture missing");
+  for (const [label, mutate] of [
+    ["slot-id", (fields) => { fields[4] = "slot-2"; }],
+    ["request-digest", (fields) => { const b = Buffer.from(fields[10]); b[0] ^= 1; fields[10] = b; }],
+  ]) {
+    const changed = structuredClone(dispatch);
+    const envelope = parseCBOR(decodeHex(changed, "record_envelope_hex")).value;
+    mutate(envelope[5]);
+    changed.record_envelope_hex = hex(encodeCanonical(envelope));
+    let rejected = false;
+    try { executeSemantic(changed, fixtures, registries); } catch { rejected = true; }
+    if (!rejected) throw new Error(`dispatch ${label} mutation did not invalidate reference binding`);
+  }
+
   const exogenous = fixtures.semantic.find((item) => item.case_id === "reference.record-to-ref.exogenous-input");
   if (!exogenous) throw new Error("exogenous reference fixture missing");
   for (const [field, index, replacement] of [["producer-unit-key", 3, "unit-2"], ["input-kind", 4, "input-2"]]) {

@@ -1,6 +1,7 @@
 package conformance
 
 import (
+	"bytes"
 	"encoding/hex"
 	"strings"
 	"testing"
@@ -251,6 +252,89 @@ func TestExogenousRecordIdentityRejectsMutatedRecordWithUnchangedPreimages(t *te
 					t.Fatalf("%s: admission validator accepted stale preimage", unit["case_id"])
 				}
 			}
+		})
+	}
+}
+
+func alterReferenceRecordField(value any) any {
+	switch v := value.(type) {
+	case []byte:
+		changed := bytes.Clone(v)
+		if len(changed) == 0 { return []byte{1} }
+		changed[0] ^= 1
+		return changed
+	case string:
+		return v + "-changed"
+	case uint64:
+		return v + 1
+	case int64:
+		return v + 1
+	case []any:
+		changed := append([]any(nil), v...)
+		if len(changed) == 0 { return []any{uint64(1)} }
+		changed[0] = alterReferenceRecordField(changed[0])
+		return changed
+	case bool:
+		return !v
+	default:
+		return []any{uint64(1)}
+	}
+}
+
+func TestEveryNormativeReferenceBindsToCanonicalRecord(t *testing.T) {
+	fixtures, err := readObject(bundlePath + "/fixtures.json")
+	if err != nil { t.Fatal(err) }
+	bundle, err := policy.Load(bundlePath)
+	if err != nil { t.Fatal(err) }
+	count := 0
+	for _, raw := range fixtures["semantic"].([]any) {
+		item := raw.(map[string]any)
+		if item["kind"] != "record_to_reference" { continue }
+		count++
+		if err := executeSemantic(item, fixtures, bundle); err != nil {
+			t.Fatalf("%s: %v", item["case_id"], err)
+		}
+		mutated := cloneValue(item).(map[string]any)
+		b, err := decodeHex(mutated, "record_envelope_hex")
+		if err != nil { t.Fatal(err) }
+		record, err := codec.StrictDecodeEnvelope(b)
+		if err != nil { t.Fatal(err) }
+		fields := record.Value.([]any)
+		fields[0] = alterReferenceRecordField(fields[0])
+		bad, err := codec.CanonicalBytes(record.DomainTag,record.SchemaID,record.SchemaVersion,fields)
+		if err != nil { t.Fatal(err) }
+		mutated["record_envelope_hex"] = hex.EncodeToString(bad)
+		if err := executeSemantic(mutated, fixtures, bundle); err == nil {
+			t.Fatalf("%s: accepted record alteration with unchanged ID/digest preimages", item["case_id"])
+		}
+	}
+	if count != 28 { t.Fatalf("expected all 28 reference roots, got %d", count) }
+	for _, change := range []struct { name string; field int; mutate func([]any) }{
+		{"dispatch-slot-id",4,func(fields []any){ fields[4]="slot-2" }},
+		{"dispatch-request-digest",10,func(fields []any){
+			b := bytes.Clone(fields[10].([]byte));b[0] ^= 1;fields[10]=b
+		}},
+	} {
+		t.Run(change.name, func(t *testing.T){
+			for _, raw := range fixtures["semantic"].([]any) {
+				item := raw.(map[string]any)
+				if item["case_id"]!="reference.record-to-ref.slot-dispatch" {continue}
+				mutated := cloneValue(item).(map[string]any)
+				b, err := decodeHex(mutated,"record_envelope_hex")
+				if err != nil {t.Fatal(err)}
+				env, err := codec.StrictDecodeEnvelope(b)
+				if err != nil {t.Fatal(err)}
+				fields := env.Value.([]any)
+				change.mutate(fields)
+				changed, err := codec.CanonicalBytes(env.DomainTag,env.SchemaID,env.SchemaVersion,fields)
+				if err != nil {t.Fatal(err)}
+				mutated["record_envelope_hex"]=hex.EncodeToString(changed)
+				if err := executeSemantic(mutated,fixtures,bundle); err == nil {
+					t.Fatal("accepted mutation with stale normative preimage")
+				}
+				return
+			}
+			t.Fatal("slot-dispatch case missing")
 		})
 	}
 }

@@ -553,34 +553,7 @@ func executeSemantic(item, fixtures map[string]any, bundle *policy.Bundle) error
 	kind, _ := item["kind"].(string)
 	switch kind {
 	case "record_to_reference":
-		if item["persisted_root"] == "cote.csf.schema.exogenous-input" {
-			if err := verifyExogenousRecordPreimages(item, bundle); err != nil { return err }
-		}
-		idPreimage, err := decodeHex(item, "id_preimage_envelope_hex")
-		if err != nil {
-			return err
-		}
-		digestPreimage, err := decodeHex(item, "digest_preimage_envelope_hex")
-		if err != nil {
-			return err
-		}
-		expected, err := decodeHex(item, "expected_causal_ref_cbor_hex")
-		if err != nil {
-			return err
-		}
-		ref, err := codec.StrictDecodePayload(expected)
-		if err != nil {
-			return err
-		}
-		fields, ok := ref.([]any)
-		if !ok || len(fields) != 3 {
-			return fmt.Errorf("invalid causal ref")
-		}
-		id := sha256.Sum256(idPreimage)
-		digest := sha256.Sum256(digestPreimage)
-		if !bytes.Equal(fields[1].([]byte), id[:]) || !bytes.Equal(fields[2].([]byte), digest[:]) {
-			return fmt.Errorf("record reference derivation mismatch")
-		}
+		return verifyRecordReferenceBinding(item, bundle)
 	case "causal_reference_identity":
 		ids, ok := item["ids"].(map[string]any)
 		if !ok || len(ids) == 0 {

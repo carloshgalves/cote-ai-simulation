@@ -312,6 +312,12 @@ func validateKnownPayloadShape(schema string, value any, bundle *policy.Bundle) 
 				return fmt.Errorf("snapshot pending state section %d: %w", i, err)
 			}
 		}
+		// CSFRV1-1 creates an empty run. A nonempty pending projection requires
+		// corresponding authoritative records committed during the same bootstrap.
+		// No such records are seeded by this ticket; reject even well-formed refs.
+		if len(items) != 0 {
+			return fmt.Errorf("initial pending state section %d has no seeded authoritative records", i)
+		}
 	}
 	return nil
 }

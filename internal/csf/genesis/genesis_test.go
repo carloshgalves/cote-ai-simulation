@@ -217,6 +217,58 @@ func TestRejectInitialWorldStateWithMalformedNestedValuesEvenWhenDigestMatches(t
 	}
 }
 
+func TestRejectInitialPendingStateWithUnseededAuthoritativeReferences(t *testing.T) {
+	tests := []struct {
+		name    string
+		section int
+		value   any
+	}{
+		{
+			name:    "occurrence-ref-wrong-kind",
+			section: 0,
+			value:   []any{uint64(17), bytes.Repeat([]byte{0x11}, 32), bytes.Repeat([]byte{0x22}, 32)},
+		},
+		{
+			name:    "occurrence-ref-orphan",
+			section: 0,
+			value:   []any{uint64(6), bytes.Repeat([]byte{0x33}, 32), bytes.Repeat([]byte{0x44}, 32)},
+		},
+		{
+			name:    "pending-input-orphan",
+			section: 7,
+			value:   []any{uint64(1), bytes.Repeat([]byte{0x55}, 32), bytes.Repeat([]byte{0x66}, 32)},
+		},
+		{
+			name:    "trigger-runtime-orphan",
+			section: 1,
+			value: []any{
+				bytes.Repeat([]byte{0x77}, 32), uint64(1), []any{uint64(0)},
+				true, false, uint64(0), []any{uint64(0)}, uint64(0),
+			},
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			corrupt := mutateGenesis(t, func(_ *codec.Envelope, payload []any) {
+				typed := payload[16].([]any)
+				inner, err := codec.StrictDecodeEnvelope(typed[2].([]byte))
+				if err != nil {
+					t.Fatal(err)
+				}
+				state := inner.Value.([]any)
+				state[test.section] = []any{test.value}
+				encoded, err := codec.CanonicalBytes(inner.DomainTag, inner.SchemaID, inner.SchemaVersion, state)
+				if err != nil {
+					t.Fatal(err)
+				}
+				digest := identity.OpaqueContentHash(encoded)
+				payload[16] = []any{typed[0], typed[1], encoded, digest[:]}
+			})
+			requireRejectedGenesis(t, corrupt)
+		})
+	}
+}
+
 func TestProductionGenesisRejectsFixtureOperationAndSchema(t *testing.T) {
 	fixture, err := os.ReadFile(bundlePath + "/fixtures.json")
 	if err != nil {

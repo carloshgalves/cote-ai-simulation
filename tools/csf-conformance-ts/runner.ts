@@ -7,7 +7,7 @@ import { unicode15Unassigned } from "./unicode15-unassigned.ts";
 const EXPECTED = {
   codec_policy_hash: "513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203",
   schema_bundle_hash: "ef7c1e4cec18f1491e4b72bd7dd35f49a1c28d77a5bdd89d435122074f5cba18",
-  conformance_suite_hash: "081649d1201e356dde034515ff776fe7af2df3cbe94e5388209282e0cb47aee1",
+  conformance_suite_hash: "05a226340c4211045d6f3df8f034434f3ac336001158379833f7230df4038dfd",
 };
 
 function sha256(value) {
@@ -442,6 +442,64 @@ function storesOwnID(root) {
   ]).has(root);
 }
 
+function verifyCycleCommitEventWitnesses(item, fields) {
+  const eventIDs = fields[15];
+  const witnessHex = item.event_record_envelopes_hex ?? [];
+  if (!Array.isArray(eventIDs) || !Array.isArray(witnessHex) || witnessHex.length !== eventIDs.length) {
+    throw new Error("cycle commit event witness count mismatch");
+  }
+  const eventEnvelopes = [];
+  let nextLogicalSequence = 0n;
+  for (const [index, value] of witnessHex.entries()) {
+    if (typeof value !== "string" || !/^(?:[0-9a-f]{2})+$/i.test(value)) {
+      throw new Error(`cycle commit event witness ${index} is not canonical hex`);
+    }
+    const encoded = Buffer.from(value, "hex");
+    const envelope = parseCBOR(encoded).value;
+    if (!Array.isArray(envelope) || envelope.length !== 6 ||
+        envelope[2] !== "cote.csf.test.event" ||
+        envelope[3] !== "cote.csf.schema.event" || envelope[4] !== 1n ||
+        !Array.isArray(envelope[5]) || envelope[5].length < 8) {
+      throw new Error(`cycle commit witness ${index} is not an Event record`);
+    }
+    const event = envelope[5];
+    if (!Buffer.from(event[1]).equals(Buffer.from(fields[0])) ||
+        !Buffer.from(event[7]).equals(Buffer.from(fields[1]))) {
+      throw new Error("cycle commit event owner mismatch");
+    }
+    if (!Buffer.from(eventIDs[index]).equals(Buffer.from(event[0]))) {
+      throw new Error("cycle commit event IDs differ from witnesses");
+    }
+    const idBytes = canonicalEnvelope(
+      "cote.csf.id.event",
+      "cote.csf.schema.event-id-preimage",
+      1,
+      encodeCanonical([event[1], event[7], event[2]]),
+    );
+    if (!Buffer.from(event[0]).equals(sha256(idBytes))) {
+      throw new Error("cycle commit event ID does not derive from its record");
+    }
+    const digestBytes = canonicalEnvelope(
+      "cote.csf.digest.event",
+      "cote.csf.schema.event.body",
+      1,
+      encodeCanonical(event.slice(0, -1)),
+    );
+    if (!Buffer.from(event.at(-1)).equals(sha256(digestBytes))) {
+      throw new Error("cycle commit event digest mismatch");
+    }
+    if (typeof event[6] !== "bigint" || event[6] === 0xffffffffffffffffn) {
+      throw new Error("cycle commit event sequence is invalid");
+    }
+    if (event[6] + 1n > nextLogicalSequence) nextLogicalSequence = event[6] + 1n;
+    eventEnvelopes.push(encoded);
+  }
+  if (fields[22] !== nextLogicalSequence) {
+    throw new Error("cycle commit next logical sequence mismatch");
+  }
+  return eventEnvelopes;
+}
+
 function verifyRecordReferenceBinding(item, registries) {
   const binding = registries.reference_identities.find((x) => x.persisted_root === item.persisted_root);
   if (!binding || item.id_operation !== binding.id.operation ||
@@ -474,10 +532,7 @@ function verifyRecordReferenceBinding(item, registries) {
   }
   let body = fields;
   if (dig[3] === "cote.csf.schema.batch-preimage") {
-    if (!Array.isArray(fields[15]) || fields[15].length !== 0) {
-      throw new Error("cycle commit fixture lacks authoritative event envelopes");
-    }
-    body = [fields.slice(0, -1), []];
+    body = [fields.slice(0, -1), verifyCycleCommitEventWitnesses(item, fields)];
   } else if (dig[3] !== item.persisted_root) {
     body = fields.slice(0, -1);
   }
@@ -1149,7 +1204,7 @@ function executeTransition(item, bases) {
 
 function verifyMutationGuards(fixtures, registries) {
   const referenceCases = fixtures.semantic.filter((item) => item.kind === "record_to_reference");
-  if (referenceCases.length !== 28) throw new Error("exactly 28 normative reference cases required");
+  if (referenceCases.length !== 29) throw new Error("29 normative reference cases covering 28 roots required");
   function alterFirstField(value) {
     if (Buffer.isBuffer(value) || value instanceof Uint8Array) {
       const result = Buffer.from(value);
@@ -1263,7 +1318,7 @@ function run(directory) {
   for (const section of ["normalization_cases", "sha256_vectors", "positive", "negative", "semantic"]) for (const item of fixtures[section]) { try { executeFixture(section, item, fixtures, registries); add(item.case_id); } catch (error) { add(item.case_id, error); } }
   const bases = new Map(transitions.base_scenarios.map((base) => [base.scenario_id, base]));
   for (const item of transitions.cases) { try { executeTransition(item, bases); add(item.case_id); } catch (error) { add(item.case_id, error); } }
-  if (report.total !== 620) throw new Error(`expected 620 cases, got ${report.total}`);
+  if (report.total !== 621) throw new Error(`expected 621 cases, got ${report.total}`);
   return report;
 }
 

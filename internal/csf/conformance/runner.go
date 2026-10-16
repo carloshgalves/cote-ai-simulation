@@ -71,8 +71,8 @@ func Run(bundleDirectory string) (Report, error) {
 		item := raw.(map[string]any)
 		report.add(caseID(item), executeTransition(item, bases))
 	}
-	if report.Total != 620 {
-		return Report{}, fmt.Errorf("conformance suite must contain 620 cases, got %d", report.Total)
+	if report.Total != 621 {
+		return Report{}, fmt.Errorf("conformance suite must contain 621 cases, got %d", report.Total)
 	}
 	return report, nil
 }

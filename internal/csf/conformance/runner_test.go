@@ -12,12 +12,12 @@ import (
 
 const bundlePath = "../../../docs/architecture/canonical-codec-v1-bundle"
 
-func TestNormativeSuiteHas620PassingCases(t *testing.T) {
+func TestNormativeSuiteHas621PassingCases(t *testing.T) {
 	report, err := Run(bundlePath)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if report.Total != 620 || report.Passed != 620 || report.Failed != 0 {
+	if report.Total != 621 || report.Passed != 621 || report.Failed != 0 {
 		for _, result := range report.Cases {
 			if result.Status == "fail" {
 				t.Logf("%s: %s", result.ID, result.Error)
@@ -287,10 +287,12 @@ func TestEveryNormativeReferenceBindsToCanonicalRecord(t *testing.T) {
 	bundle, err := policy.Load(bundlePath)
 	if err != nil { t.Fatal(err) }
 	count := 0
+	roots := map[string]bool{}
 	for _, raw := range fixtures["semantic"].([]any) {
 		item := raw.(map[string]any)
 		if item["kind"] != "record_to_reference" { continue }
 		count++
+		roots[item["persisted_root"].(string)] = true
 		if err := executeSemantic(item, fixtures, bundle); err != nil {
 			t.Fatalf("%s: %v", item["case_id"], err)
 		}
@@ -308,7 +310,7 @@ func TestEveryNormativeReferenceBindsToCanonicalRecord(t *testing.T) {
 			t.Fatalf("%s: accepted record alteration with unchanged ID/digest preimages", item["case_id"])
 		}
 	}
-	if count != 28 { t.Fatalf("expected all 28 reference roots, got %d", count) }
+	if count != 29 || len(roots) != 28 { t.Fatalf("expected 29 reference fixtures covering 28 roots, got %d/%d", count, len(roots)) }
 	for _, change := range []struct { name string; field int; mutate func([]any) }{
 		{"dispatch-slot-id",4,func(fields []any){ fields[4]="slot-2" }},
 		{"dispatch-request-digest",10,func(fields []any){

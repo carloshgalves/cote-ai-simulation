@@ -661,7 +661,7 @@ dos hashes causais. Métricas mínimas:
 12. ids/completion de percepção idempotentes e instante epistemológico causal;
 13. substreams independentes de avaliações/atores irrelevantes;
 14. arquitetura sem cliente LLM no core e sem write port transitivo no Observatory;
-15. os 620 vetores/casos de conformidade do bundle executados por pelo menos duas
+15. os 621 vetores/casos de conformidade do bundle executados por pelo menos duas
     implementações independentes e linguagens diferentes;
 16. strict decode rejeita CBOR não preferido, indefinite, tag, `undefined`, duplicate key, Unicode
     fora do profile, non-finite, negative zero, schema/enum desconhecido e id com tamanho incorreto;
@@ -811,7 +811,7 @@ As decisões de stack e persistência foram fechadas a partir da
 O [ADR 0010](../adr/0010-csf-causal-engine-stack.md) escolhe Go 1.27.2 para o Simulation Engine
 causal V1. O toolchain é pinado no `go.mod`; domínio e ports ficam em `internal/csf/`, comandos em
 `cmd/` e o harness inicial em `cmd/csf-harness/`. O runner Go e o segundo runner independente em
-TypeScript/Node, preservado em `tools/csf-conformance-ts/`, executam os 620 casos do bundle.
+TypeScript/Node, preservado em `tools/csf-conformance-ts/`, executam os 621 casos do bundle.
 
 O core depende apenas de tipos/funções de domínio e ports; codec, persistência, Observatory e
 processo físico são adapters. O `Embodiment` permanece Python em `src/embodiment/` e só atravessa a

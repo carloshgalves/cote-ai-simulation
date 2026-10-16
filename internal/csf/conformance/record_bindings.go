@@ -5,6 +5,7 @@ package conformance
 import (
 	"bytes"
 	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
@@ -96,6 +97,87 @@ func containsStoredIdentity(root string) bool {
 	return false
 }
 
+func verifyCycleCommitEventWitnesses(item map[string]any, fields []any, bundle *policy.Bundle) ([]any, error) {
+	eventIDs, ok := fields[15].([]any)
+	if !ok {
+		return nil, fmt.Errorf("cycle commit event IDs are not an array")
+	}
+	witnessValues, ok := item["event_record_envelopes_hex"].([]any)
+	if !ok {
+		witnessValues = []any{}
+	}
+	if len(witnessValues) != len(eventIDs) {
+		return nil, fmt.Errorf("cycle commit event witness count mismatch")
+	}
+	eventEnvelopes := make([]any, 0, len(witnessValues))
+	nextLogicalSequence := uint64(0)
+	for i, raw := range witnessValues {
+		hexValue, ok := raw.(string)
+		if !ok {
+			return nil, fmt.Errorf("cycle commit event witness %d is not hex text", i)
+		}
+		encoded, err := hex.DecodeString(hexValue)
+		if err != nil {
+			return nil, fmt.Errorf("cycle commit event witness %d: %w", i, err)
+		}
+		envelope, err := codec.StrictDecodeEnvelope(encoded)
+		if err != nil {
+			return nil, fmt.Errorf("cycle commit event witness %d: %w", i, err)
+		}
+		if envelope.DomainTag != "cote.csf.test.event" || envelope.SchemaID != "cote.csf.schema.event" || envelope.SchemaVersion != 1 {
+			return nil, fmt.Errorf("cycle commit witness %d is not an Event", i)
+		}
+		eventFields, ok := envelope.Value.([]any)
+		if !ok || len(eventFields) < 8 {
+			return nil, fmt.Errorf("cycle commit witness %d has malformed Event fields", i)
+		}
+		if !bytes.Equal(eventFields[1].([]byte), fields[0].([]byte)) || !bytes.Equal(eventFields[7].([]byte), fields[1].([]byte)) {
+			return nil, fmt.Errorf("cycle commit event owner mismatch")
+		}
+		eventID, ok := eventFields[0].([]byte)
+		if !ok || !bytes.Equal(eventIDs[i].([]byte), eventID) {
+			return nil, fmt.Errorf("cycle commit event IDs differ from witnesses")
+		}
+		idDomain, idSchema := "cote.csf.id.event", "cote.csf.schema.event-id-preimage"
+		if _, err := bundle.Operation(idDomain, idSchema, 1, false); err != nil {
+			return nil, err
+		}
+		idBytes, err := codec.CanonicalBytes(idDomain, idSchema, 1, []any{eventFields[1], eventFields[7], eventFields[2]})
+		if err != nil {
+			return nil, err
+		}
+		derivedID := sha256.Sum256(idBytes)
+		if !bytes.Equal(eventID, derivedID[:]) {
+			return nil, fmt.Errorf("cycle commit event ID does not derive from its record")
+		}
+		digestDomain, digestSchema := "cote.csf.digest.event", "cote.csf.schema.event.body"
+		if _, err := bundle.Operation(digestDomain, digestSchema, 1, false); err != nil {
+			return nil, err
+		}
+		digestBytes, err := codec.CanonicalBytes(digestDomain, digestSchema, 1, eventFields[:len(eventFields)-1])
+		if err != nil {
+			return nil, err
+		}
+		digest := sha256.Sum256(digestBytes)
+		if !bytes.Equal(eventFields[len(eventFields)-1].([]byte), digest[:]) {
+			return nil, fmt.Errorf("cycle commit event digest mismatch")
+		}
+		sequence, ok := number(eventFields[6])
+		if !ok || sequence == ^uint64(0) {
+			return nil, fmt.Errorf("cycle commit event sequence is invalid")
+		}
+		if sequence+1 > nextLogicalSequence {
+			nextLogicalSequence = sequence + 1
+		}
+		eventEnvelopes = append(eventEnvelopes, encoded)
+	}
+	storedNext, ok := number(fields[22])
+	if !ok || storedNext != nextLogicalSequence {
+		return nil, fmt.Errorf("cycle commit next logical sequence mismatch")
+	}
+	return eventEnvelopes, nil
+}
+
 func verifyRecordReferenceBinding(item map[string]any, bundle *policy.Bundle) error {
 	rootID, ok := item["persisted_root"].(string)
 	if !ok { return fmt.Errorf("reference persisted root missing") }
@@ -151,9 +233,9 @@ func verifyRecordReferenceBinding(item map[string]any, bundle *policy.Bundle) er
 	if _, err := bundle.Operation(digestEnvelope.DomainTag, digestEnvelope.SchemaID, 1, false); err != nil { return err }
 	var digestValue any = fields
 	if digestEnvelope.SchemaID == "cote.csf.schema.batch-preimage" {
-		eventIDs, ok := fields[15].([]any)
-		if !ok || len(eventIDs) != 0 { return fmt.Errorf("fixture needs event envelopes to prove commit batch digest") }
-		digestValue = []any{fields[:len(fields)-1], []any{}}
+		eventEnvelopes, err := verifyCycleCommitEventWitnesses(item, fields, bundle)
+		if err != nil { return err }
+		digestValue = []any{fields[:len(fields)-1], eventEnvelopes}
 	} else if digestEnvelope.SchemaID != rootID {
 		digestValue = fields[:len(fields)-1]
 	}

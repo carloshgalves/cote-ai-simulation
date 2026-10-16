@@ -34,7 +34,7 @@ Veja `CONTEXT.md`, `docs/adr/` e `docs/research/ai-landscape.md`.
 ## Causal Simulation Foundation
 
 O contrato canônico da CSF V1 possui runners independentes em Go e TypeScript. Ambos validam o
-bundle normativo e precisam emitir o mesmo relatório de 620 casos:
+bundle normativo e precisam emitir o mesmo relatório de 621 casos:
 
 ```bash
 go run ./cmd/csf-harness --report /tmp/csf-go-report.json

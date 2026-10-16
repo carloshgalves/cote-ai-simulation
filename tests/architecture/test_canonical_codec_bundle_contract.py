@@ -526,7 +526,8 @@ def test_documentation_treats_two_language_conformance_as_future_gate() -> None:
     readme = (BUNDLE / "README.md").read_text(encoding="utf-8")
 
     assert "O CI de uma\nimplementação candidata deve executar" in contract
-    assert "**Execução de conformidade neste checkpoint:** pendente" in readme
+    assert "com auditores Go e TypeScript para os vínculos record → referência" in contract
+    assert "**Execução de conformidade do checkpoint arquitetural:** pendente" in readme
 
 
 def test_typed_causal_refs_use_exact_reference_kind_subsets() -> None:
@@ -2086,15 +2087,15 @@ def test_published_conformance_case_counts_match_the_bundle() -> None:
 
     assert len(fixtures["positive"]) == 156
     assert len(fixtures["negative"]) == 30
-    assert len(fixtures["semantic"]) == 306
+    assert len(fixtures["semantic"]) == 307
     assert len(fixtures["normalization_cases"]) == 7
     assert len(transitions["cases"]) == 119
     assert "156 casos positivos" in contract
     assert "30 casos negativos" in contract
-    assert "306 casos semânticos" in contract
+    assert "307 casos semânticos" in contract
     assert "119 casos executáveis de transição causal" in contract
-    assert "156 vetores positivos, 30 negativos, 306 casos semânticos" in readme
-    assert "totalizando 620 vetores/casos de conformidade" in readme
+    assert "156 vetores positivos, 30 negativos, 307 casos semânticos" in readme
+    assert "totalizando 621 vetores/casos de conformidade" in readme
 
 
 def test_cycle_control_state_variants_are_closed_by_status() -> None:
@@ -2313,14 +2314,22 @@ def test_every_reference_identity_has_a_linked_record_to_reference_case() -> Non
     expected = {
         entry["persisted_root"] for entry in registries["reference_identities"]
     }
-    cases = {
-        case["persisted_root"]: case
-        for case in fixtures["semantic"]
-        if case["kind"] == "record_to_reference"
-    }
+    linked_cases = [
+        case for case in fixtures["semantic"] if case["kind"] == "record_to_reference"
+    ]
+    cases = {}
+    for case in linked_cases:
+        cases.setdefault(case["persisted_root"], case)
 
     assert cases.keys() == expected
+    assert len(linked_cases) == 29
     assert len(cases) == 28
+    nonempty_commit = next(
+        case for case in linked_cases
+        if case["case_id"] == "reference.record-to-ref.cycle-commit.nonempty-events"
+    )
+    assert nonempty_commit["event_record_envelopes_hex"]
+    assert len(nonempty_commit["event_record_envelopes_hex"]) == 1
     for root, case in cases.items():
         identity = next(
             entry

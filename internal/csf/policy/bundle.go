@@ -22,7 +22,7 @@ const (
 	NormalizationID     = "unicode.npss.nfc.15.1.0"
 	CodecPolicyHashHex  = "513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203"
 	SchemaBundleHashHex = "ef7c1e4cec18f1491e4b72bd7dd35f49a1c28d77a5bdd89d435122074f5cba18"
-	SuiteHashHex        = "081649d1201e356dde034515ff776fe7af2df3cbe94e5388209282e0cb47aee1"
+	SuiteHashHex        = "05a226340c4211045d6f3df8f034434f3ac336001158379833f7230df4038dfd"
 )
 
 type Bundle struct {

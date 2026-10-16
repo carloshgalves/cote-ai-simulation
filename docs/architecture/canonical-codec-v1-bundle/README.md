@@ -121,35 +121,16 @@ ordinal requeridos por seus preimages de id; o primeiro restringe origin a event
 `idempotency-key` da unidade está PRESENT. Seu preimage fecha run, kind, producer/actor scopes, key,
 operação lógica e policy ref.
 
-## Retificação controlada da suíte V1 (2026-10-16)
-
-Quatro preimages de ID e cinco IDs embutidos em fixtures semânticos de `record_to_reference` para `event`, `source-closure`,
-`round-declaration` e `scheduled-occurrence` tiveram seus preimages de ID
-reconciliados com os campos de seus records. IDs embutidos, digests e referências dependentes foram rederivados
-conforme seus preimages, sem mudar CDDL, registries, codec, Unicode
-ou os vetores positivos de operações matemáticas independentes.
-
-Hash anterior da suíte de conformidade: `f9c75b6647ec14b0205806bcfd7b481dcd0d29c9408fb18aa2a50dea1e86dee2`.
-Hash vigente: `081649d1201e356dde034515ff776fe7af2df3cbe94e5388209282e0cb47aee1`. O hash anterior e os bytes originais
-continuam consultáveis no histórico Git (baseline `0f78d82ca55ba3e53812de11ce2def648b7d2b45`).
-`codec_policy_hash` e `schema_bundle_hash` permanecem inalterados.
-Uma suíte corrigida não comprova, por si só, todos os 28 vínculos:
-os runners precisam reconstruir cada preimage do record de origem, em
-Go e TypeScript, e rejeitar mutações dos campos de ID e digest.
-
-**Homologação:** a retificação é proposta nesta PR; considerar o bundle
-congelado somente depois do merge autorizado e da validação independente
-dos 28 vínculos no checkpoint integrado, antes da primeira run.
-
 ## Vetores e verificação independente
 
-**Execução de conformidade neste checkpoint:** pendente. Este checkpoint arquitetural publica o
-contrato e os vetores, mas não inclui dois runners independentes nem um workflow que os execute. Uma
-implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
+**Execução de conformidade do checkpoint arquitetural:** pendente. A retificação acrescenta
+validadores independentes Go e TypeScript para os vínculos record → referência, executados juntos no
+workflow desta branch. Os runners gerais de conformidade e a homologação do bundle continuam sendo
+gates separados; este checkpoint não declara a homologação.
 
-`fixtures.json` contém 156 vetores positivos, 30 negativos, 306 casos semânticos, sete casos de
+`fixtures.json` contém 156 vetores positivos, 30 negativos, 307 casos semânticos, sete casos de
 normalização convergente e dois vetores SHA-256. `causal-transition-fixtures.json` acrescenta 119 casos
-de transição executáveis, totalizando 620 vetores/casos de conformidade. Os positivos cobrem primitivos e limites, Unicode,
+de transição executáveis, totalizando 621 vetores/casos de conformidade. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 76 operações de id/digest/hash/record do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
 `error_code` estável. Os casos semânticos executam bindings de enum em roots completos, subsets de
@@ -258,3 +239,31 @@ representação de primitivo, versão/repertoire Unicode, gramática global de i
 ordem global de map, regra global de float, algoritmo/formato de digest ou forma textual de digest.
 Adicionar um schema/domain tag novo sem mudar essas regras cria novo bundle para um novo run, mas não
 transforma o encoder V1 em V2.
+
+### Retificação controlada dos fixtures (2026-10-16)
+
+Antes da primeira execução integrada, foram corrigidos os casos semânticos de
+`record_to_reference` para vincular preimages e IDs/digests aos records CBOR reais.
+Os 156 vetores positivos de **serialização** permanecem byte a byte inalterados;
+eles não constituem, isoladamente, prova de identidade causal entre record e ref.
+A revisão dos casos semânticos também atualiza os cinco exemplos de
+`admitted_unit_ledger_mismatch` dependentes de `ExogenousInput`.
+Não houve alteração de `profile.json`, `unicode.json`, `foundation.cddl`,
+`registries.json` ou `causal-transition-contracts.json`.
+
+- `codec_policy_hash` e `schema_bundle_hash`: preservados.
+- `conformance_suite_hash` anterior: `f9c75b6647ec14b0205806bcfd7b481dcd0d29c9408fb18aa2a50dea1e86dee2`.
+- `conformance_suite_hash` retificado: `05a226340c4211045d6f3df8f034434f3ac336001158379833f7230df4038dfd`.
+
+Esta correção substitui os fixtures existentes **sem duplicar o bundle**; os bytes
+anteriores continuam recuperáveis pelo histórico Git. A homologação da suíte
+retificada exige verificar os 28 vínculos nos runners Go e TypeScript, inclusive
+campos de identidade e digest que sejam derivados de authorities externas.
+O caso de `ConflictSet` agora inclui dois envelopes de `CommitCandidate`
+no próprio caso semântico para resolver e conferir o `cycle-id` de origem. Um caso adicional de
+`CycleCommit` cobre um evento não vazio: verifica o owner run/cycle, a lista ordenada de event IDs,
+os envelopes selecionados, o digest de batch e `next-logical-sequence`; o caso original vazio fica
+intacto.
+O congelamento definitivo ocorre somente após essa homologação, antes da primeira
+execução integrada. Não interpretar a simples atualização dos hashes como prova
+independente de conformidade.

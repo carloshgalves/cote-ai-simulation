@@ -18,7 +18,7 @@ percepção e snapshots determinísticos, além de despachar trabalho concorrent
 de completion em ordem causal.
 
 O ADR 0009 também torna o engine potencialmente multilíngue: pelo menos duas implementações, em
-linguagens diferentes, devem executar os 620 vetores/casos do bundle. Portanto a serialização default
+linguagens diferentes, devem executar os 621 vetores/casos do bundle. Portanto a serialização default
 da linguagem, o enum runtime, a iteração de map e o RNG do host não podem ser autoridade.
 
 ## Decisão proposta
@@ -98,7 +98,7 @@ no domínio canônico. Continua uma alternativa adequada para o segundo runner i
 
 Escolhido por combinar concorrência explícita, binário portátil, SHA-256 padrão, testes de concorrência
 e uma implementação CBOR RFC 8949 com modo determinístico documentado. Isso reduz risco operacional,
-mas não elimina a necessidade do adapter/profile e dos 620 vetores.
+mas não elimina a necessidade do adapter/profile e dos 621 vetores.
 
 ## Consequências
 
@@ -118,7 +118,7 @@ Custos:
 
 ## Critérios de aceitação
 
-- duas implementações em linguagens diferentes passam os 620 vetores/casos;
+- duas implementações em linguagens diferentes passam os 621 vetores/casos;
 - permutações de workers, maps, callbacks e entradas irrelevantes não alteram bytes autoritativos;
 - architecture tests provam que o core não importa cliente de LLM, framework, RAG ou Python;
 - `Embodiment` só atravessa a fronteira via dados/processo e não escreve stores;

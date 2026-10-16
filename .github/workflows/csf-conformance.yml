@@ -34,7 +34,7 @@ jobs:
         run: go run ./cmd/csf-harness --bundle docs/architecture/canonical-codec-v1-bundle --report /tmp/csf-go-report.json
       - name: Run independent TypeScript conformance runner
         run: node --no-warnings --experimental-loader ./tools/csf-conformance-ts/loader.mjs tools/csf-conformance-ts/runner.ts docs/architecture/canonical-codec-v1-bundle /tmp/csf-ts-report.json
-      - name: Require identical 620-case reports
+      - name: Require identical 621-case reports
         run: cmp /tmp/csf-go-report.json /tmp/csf-ts-report.json
       - uses: actions/upload-artifact@v4
         with:

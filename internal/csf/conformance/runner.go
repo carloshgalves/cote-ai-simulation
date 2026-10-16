@@ -473,7 +473,7 @@ func scanNegativeCBORItem(data []byte, start int) (any, int, string, bool) {
 			values = append(values, value)
 			offset = next
 		}
-		return values, offset, "", true
+		return nil, offset, "", true
 	case 5:
 		if argument > uint64((len(data)-offset)/2) {
 			return nil, offset, "", false
@@ -502,7 +502,7 @@ func scanNegativeCBORItem(data []byte, start int) (any, int, string, bool) {
 			}
 			offset = next
 		}
-		return values, offset, "", true
+		return nil, offset, "", true
 	case 6:
 		return nil, offset, "SEMANTIC_TAG_FORBIDDEN", true
 	default:

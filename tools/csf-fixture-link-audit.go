@@ -252,8 +252,7 @@ func run()error{
         if !bytes.Equal(v[3].([]byte),fields[len(fields)-2].([]byte))||!bytes.Equal(v[4].([]byte),fields[len(fields)-1].([]byte)){return fmt.Errorf("admitted authority ID/digest mismatch")}
     }
     if admitted!=5{return fmt.Errorf("expected five admitted cases, got %d",admitted)}
-    fmt.Printf("Independent Go verification: %d/28 record references, %d admitted authorities, ConflictSet candidates proven
-",count,admitted)
+    fmt.Printf("Independent Go verification: %d/28 record references, %d admitted authorities, ConflictSet candidates proven\n",count,admitted)
     return nil
 }
 func main(){if err:=run();err!=nil{fmt.Fprintln(os.Stderr,err);os.Exit(1)}}

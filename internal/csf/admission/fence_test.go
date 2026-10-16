@@ -45,6 +45,31 @@ func TestFenceStableAcrossIngressAndRoundCompletionPermutations(t *testing.T) {
 	}
 }
 
+func TestOpenRestoresPersistedLedgerAndDerivesIdenticalFence(t *testing.T) {
+	bundle, err := policy.Load(bundlePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	s := buildScenario(t, bundle, false)
+	want, err := Derive(bundle, s.ledger, s.cycle, s.policies)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var runID domain.ID
+	runID[0] = 0x41
+	reopened, err := inputledger.Open(context.Background(), runID, bundle, s.store)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got, err := Derive(bundle, reopened, s.cycle, s.policies)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Equal(want.Canonical, got.Canonical) {
+		t.Fatal("restored ledger derived different AdmissionFence bytes")
+	}
+}
+
 func TestFenceWaitsForEveryClosureAndSlot(t *testing.T) {
 	bundle, err := policy.Load(bundlePath)
 	if err != nil {
@@ -57,6 +82,18 @@ func TestFenceWaitsForEveryClosureAndSlot(t *testing.T) {
 	}
 	if _, err := Derive(bundle, s.ledger, s.cycle, s.policies); !errors.Is(err, ErrWaitingForClosure) {
 		t.Fatalf("expected explicit closure wait, got %v", err)
+	}
+}
+
+func TestLedgerRejectsMembershipChangesAfterFenceSnapshot(t *testing.T) {
+	bundle, err := policy.Load(bundlePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	s := buildScenario(t, bundle, false)
+	s.ledger.Snapshot()
+	if err := s.ledger.DeclareSource(inputledger.Source{ID: "late-source"}); !errors.Is(err, inputledger.ErrSourcesFrozen) {
+		t.Fatalf("source declaration after snapshot = %v", err)
 	}
 }
 
@@ -114,6 +151,7 @@ func TestDivergentUnitBytesFailBeforeFenceOrEvaluation(t *testing.T) {
 
 type scenario struct {
 	ledger   *inputledger.Ledger
+	store    *memory.Store
 	cycle    Cycle
 	policies Policies
 }
@@ -122,7 +160,11 @@ func buildScenario(t *testing.T, bundle *policy.Bundle, reverse bool) scenario {
 	t.Helper()
 	var runID domain.ID
 	runID[0] = 0x41
-	ledger := inputledger.New(runID, bundle, memory.New())
+	store := memory.New()
+	ledger, err := inputledger.New(context.Background(), runID, bundle, store)
+	if err != nil {
+		t.Fatal(err)
+	}
 	sources := []string{"source-a", "source-b"}
 	if reverse {
 		sources[0], sources[1] = sources[1], sources[0]
@@ -190,7 +232,7 @@ func buildScenario(t *testing.T, bundle *policy.Bundle, reverse bool) scenario {
 		var did domain.ID
 		copy(did[:], dispatchID[:])
 		dispatch := inputledger.Dispatch{ID: did, RunID: runID, CycleID: cycleID, RoundID: round.ID, SlotID: "act", Actor: round.Actor, Eligibility: round.Eligibility, BaseRevision: 0, EffectiveAt: 100}
-		if err := ledger.RegisterDispatch(context.Background(), dispatch); err != nil {
+		if err := ledger.RegisterDispatch(context.Background(), dispatch, inputledger.CycleBinding{ID: cycleID, BaseRevision: 0, Instant: 100}); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -216,5 +258,5 @@ func buildScenario(t *testing.T, bundle *policy.Bundle, reverse bool) scenario {
 	}
 	cycle := Cycle{ID: cycleID, Instant: 100, Ordinal: 0, BaseRevision: 0, BaseStateHash: base, RetryRef: []any{uint64(0)}}
 	pol := Policies{AdmissionOrder: []any{"admission-order-v1", uint64(1), bytes.Repeat([]byte{2}, 32)}, CausalIdentity: []any{"causal-identity-v1", uint64(1), bytes.Repeat([]byte{1}, 32)}, Fence: []any{"admission-fence-v1", uint64(1), bytes.Repeat([]byte{3}, 32)}, Rules: [][]any{}}
-	return scenario{ledger: ledger, cycle: cycle, policies: pol}
+	return scenario{ledger: ledger, store: store, cycle: cycle, policies: pol}
 }

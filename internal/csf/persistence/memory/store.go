@@ -3,11 +3,11 @@ package memory
 import (
 	"bytes"
 	"context"
-	"crypto/sha256"
 	"errors"
 	"sync"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
@@ -42,7 +42,7 @@ func (s *Store) AppendIngress(_ context.Context, source string, sequence uint64,
 	if sequence != s.ingressCursor[source] {
 		return errors.New("source ingress sequence is not gapless")
 	}
-	receiptID := sha256.Sum256(receipt.Canonical)
+	receiptID := [32]byte(identity.OpaqueContentHash(receipt.Canonical))
 	if existing, ok := s.records[record.Identity]; ok {
 		if err := domain.EqualPreimage(existing, record.Canonical); err != nil {
 			return err
@@ -102,6 +102,16 @@ func (s *Store) Get(_ context.Context, identity [32]byte) ([]byte, error) {
 		return nil, ErrNotFound
 	}
 	return bytes.Clone(record), nil
+}
+
+func (s *Store) Records(_ context.Context) ([]ports.CanonicalRecord, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	result := make([]ports.CanonicalRecord, 0, len(s.order))
+	for _, id := range s.order {
+		result = append(result, ports.CanonicalRecord{Identity: id, Canonical: bytes.Clone(s.records[id])})
+	}
+	return result, nil
 }
 
 func (s *Store) Len() int {

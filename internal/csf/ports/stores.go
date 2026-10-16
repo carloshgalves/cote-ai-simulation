@@ -13,6 +13,10 @@ type AppendOnlyStore interface {
 	Get(context.Context, [32]byte) ([]byte, error)
 }
 
+type RecordListingStore interface {
+	Records(context.Context) ([]CanonicalRecord, error)
+}
+
 // ConditionalAppendStore provides the slot's single-winner CAS. Existing bytes
 // are returned so exact redelivery can be distinguished from a competing reply.
 type ConditionalAppendStore interface {

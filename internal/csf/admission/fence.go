@@ -105,6 +105,9 @@ func Derive(bundle *policy.Bundle, ledger *inputledger.Ledger, cycle Cycle, poli
 			if !ok {
 				return Fence{}, fmt.Errorf("%w: round %x slot %s", ErrWaitingForSlot, round.ID[:], slot)
 			}
+			if response.RunID != runID || response.CycleID != cycle.ID || response.EffectiveAt != cycle.Instant || response.SubmittedAgainstRevision != cycle.BaseRevision {
+				return Fence{}, fmt.Errorf("slot response does not match admission cycle: round %x slot %s", round.ID[:], slot)
+			}
 			kind := uint64(5)
 			if response.Kind == 1 {
 				kind = 23
@@ -174,6 +177,9 @@ func verifyInputs(d identity.Deriver, records []inputledger.StoredInput) error {
 		if len(f) != 13 {
 			return errors.New("malformed ExogenousInput record")
 		}
+		if _, ok := parseCoordinate(f[9]); !ok {
+			return errors.New("malformed ExogenousInput eligibility coordinate")
+		}
 		id, _, err := d.Sum("cote.csf.id.exogenous-input", "cote.csf.schema.exogenous-input-id-preimage", 1, []any{f[1], f[2], f[3]})
 		if err != nil {
 			return err
@@ -218,6 +224,9 @@ func verifyClosures(d identity.Deriver, records []inputledger.StoredClosure) err
 		if len(f) != 7 {
 			return errors.New("malformed SourceClosure record")
 		}
+		if _, ok := parseCoordinate(f[4]); !ok {
+			return errors.New("malformed SourceClosure coordinate")
+		}
 		id, _, err := d.Sum("cote.csf.id.source-closure", "cote.csf.schema.source-closure-id-preimage", 1, []any{f[1], f[2], f[3]})
 		if err != nil {
 			return err
@@ -261,6 +270,9 @@ func verifyRounds(d identity.Deriver, records []inputledger.Round) error {
 		f := record.Fields
 		if len(f) != 11 {
 			return errors.New("malformed RoundDeclaration record")
+		}
+		if _, ok := parseCoordinate(f[5]); !ok {
+			return errors.New("malformed RoundDeclaration eligibility coordinate")
 		}
 		id, _, err := d.Sum("cote.csf.id.decision-round", "cote.csf.schema.decision-round-id-preimage", 1, []any{f[6], f[7], f[8]})
 		if err != nil {
@@ -353,8 +365,39 @@ func coordValue(c domain.EligibilityCoordinate) []any {
 	return []any{int64(c.NotBeforeInstant), uint64(c.NotBeforeCycleOrdinal)}
 }
 func coordinate(v any) domain.EligibilityCoordinate {
-	a := v.([]any)
-	return domain.EligibilityCoordinate{NotBeforeInstant: domain.SimulationInstant(a[0].(int64)), NotBeforeCycleOrdinal: domain.CycleOrdinal(a[1].(uint64))}
+	c, _ := parseCoordinate(v)
+	return c
+}
+func parseCoordinate(value any) (domain.EligibilityCoordinate, bool) {
+	a, ok := value.([]any)
+	if !ok || len(a) != 2 {
+		return domain.EligibilityCoordinate{}, false
+	}
+	var instant int64
+	switch n := a[0].(type) {
+	case int64:
+		instant = n
+	case uint64:
+		if n > uint64(^uint64(0)>>1) {
+			return domain.EligibilityCoordinate{}, false
+		}
+		instant = int64(n)
+	default:
+		return domain.EligibilityCoordinate{}, false
+	}
+	var ordinal uint64
+	switch n := a[1].(type) {
+	case uint64:
+		ordinal = n
+	case int64:
+		if n < 0 {
+			return domain.EligibilityCoordinate{}, false
+		}
+		ordinal = uint64(n)
+	default:
+		return domain.EligibilityCoordinate{}, false
+	}
+	return domain.EligibilityCoordinate{NotBeforeInstant: domain.SimulationInstant(instant), NotBeforeCycleOrdinal: domain.CycleOrdinal(ordinal)}, true
 }
 func indexRound(rounds []inputledger.Round, target inputledger.Round) int {
 	for i := range rounds {

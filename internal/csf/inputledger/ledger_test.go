@@ -1,6 +1,7 @@
 package inputledger
 
 import (
+	"bytes"
 	"context"
 	"errors"
 	"testing"
@@ -20,7 +21,10 @@ func TestClosureIsMonotonicAndLateInputMovesToNextCoordinate(t *testing.T) {
 	}
 	var runID domain.ID
 	runID[0] = 0x51
-	ledger := New(runID, bundle, memory.New())
+	ledger, err := New(context.Background(), runID, bundle, memory.New())
+	if err != nil {
+		t.Fatal(err)
+	}
 	if err := ledger.DeclareSource(Source{ID: "external"}); err != nil {
 		t.Fatal(err)
 	}
@@ -28,11 +32,16 @@ func TestClosureIsMonotonicAndLateInputMovesToNextCoordinate(t *testing.T) {
 	input := func(key string) Input {
 		return Input{ProducerUnitKey: key, Kind: "event.input", SchemaVersion: 1, Actor: []any{uint64(0)}, Payload: []any{}, DeclaredEffectiveAt: 42, Eligibility: coord, Provenance: []any{uint64(0)}, IdempotencyKey: []any{uint64(0)}}
 	}
-	if _, err := ledger.AppendInput(context.Background(), "external", input("before")); err != nil {
+	before, err := ledger.AppendInput(context.Background(), "external", input("before"))
+	if err != nil {
 		t.Fatal(err)
 	}
 	if _, err := ledger.CloseSource(context.Background(), "external", Closure{ProducerKey: "close-1", ClosedThrough: coord}); err != nil {
 		t.Fatal(err)
+	}
+	redelivered, err := ledger.AppendInput(context.Background(), "external", input("before"))
+	if err != nil || !bytes.Equal(redelivered.Canonical, before.Canonical) {
+		t.Fatalf("identical input retry after closure was not idempotent: %v", err)
 	}
 	late, err := ledger.AppendInput(context.Background(), "external", input("after"))
 	if err != nil {
@@ -58,12 +67,21 @@ func TestFinalClosureRejectsFutureInputAndClosureAtomically(t *testing.T) {
 	}
 	var runID domain.ID
 	runID[0] = 0x52
-	ledger := New(runID, bundle, memory.New())
+	ledger, err := New(context.Background(), runID, bundle, memory.New())
+	if err != nil {
+		t.Fatal(err)
+	}
 	if err := ledger.DeclareSource(Source{ID: "external"}); err != nil {
 		t.Fatal(err)
 	}
-	if _, err := ledger.CloseSource(context.Background(), "external", Closure{ProducerKey: "final", ClosedThrough: domain.EligibilityCoordinate{NotBeforeInstant: 5}, Final: true}); err != nil {
+	finalClosure := Closure{ProducerKey: "final", ClosedThrough: domain.EligibilityCoordinate{NotBeforeInstant: 5}, Final: true}
+	first, err := ledger.CloseSource(context.Background(), "external", finalClosure)
+	if err != nil {
 		t.Fatal(err)
+	}
+	retry, err := ledger.CloseSource(context.Background(), "external", finalClosure)
+	if err != nil || !bytes.Equal(first.Canonical, retry.Canonical) {
+		t.Fatalf("identical final-closure retry was not idempotent: %v", err)
 	}
 	input := Input{ProducerUnitKey: "late", Kind: "event.input", SchemaVersion: 1, Actor: []any{uint64(0)}, Payload: []any{}, DeclaredEffectiveAt: 6, Eligibility: domain.EligibilityCoordinate{NotBeforeInstant: 6}, Provenance: []any{uint64(0)}, IdempotencyKey: []any{uint64(0)}}
 	if _, err := ledger.AppendInput(context.Background(), "external", input); !errors.Is(err, ErrFinalSource) {
@@ -87,7 +105,10 @@ func TestRevocationGatesLateResponseAndSlotHasOneWinner(t *testing.T) {
 	runID[0] = 0x53
 	cycleID[0] = 0x54
 	store := memory.New()
-	ledger := New(runID, bundle, store)
+	ledger, err := New(context.Background(), runID, bundle, store)
+	if err != nil {
+		t.Fatal(err)
+	}
 	if err := ledger.DeclareSource(Source{ID: "external"}); err != nil {
 		t.Fatal(err)
 	}
@@ -109,7 +130,17 @@ func TestRevocationGatesLateResponseAndSlotHasOneWinner(t *testing.T) {
 		return Dispatch{ID: dispatchID, RunID: runID, CycleID: cycleID, RoundID: round.ID, SlotID: "act", Ordinal: ordinal, Actor: round.Actor, Eligibility: round.Eligibility, EffectiveAt: 9}
 	}
 	first := makeDispatch(0)
-	if err := ledger.RegisterDispatch(context.Background(), first); err != nil {
+	for _, invalid := range []CycleBinding{
+		{ID: domain.ID{0xff}, BaseRevision: 0, Instant: 9},
+		{ID: cycleID, BaseRevision: 1, Instant: 9},
+		{ID: cycleID, BaseRevision: 0, Instant: 10},
+	} {
+		if err := ledger.RegisterDispatch(context.Background(), first, invalid); !errors.Is(err, ErrSlotMismatch) {
+			t.Fatalf("dispatch accepted against mismatched cycle binding %+v: %v", invalid, err)
+		}
+	}
+	binding := CycleBinding{ID: cycleID, BaseRevision: 0, Instant: 9}
+	if err := ledger.RegisterDispatch(context.Background(), first, binding); err != nil {
 		t.Fatal(err)
 	}
 	if err := ledger.RevokeDispatch(context.Background(), round.ID, "act", 0, []any{uint64(0)}); err != nil {
@@ -120,12 +151,20 @@ func TestRevocationGatesLateResponseAndSlotHasOneWinner(t *testing.T) {
 		t.Fatalf("revoked dispatch response accepted: %v", err)
 	}
 	second := makeDispatch(1)
-	if err := ledger.RegisterDispatch(context.Background(), second); err != nil {
+	if err := ledger.RegisterDispatch(context.Background(), second, binding); err != nil {
 		t.Fatal(err)
 	}
 	winner := noProposal(t, deriver, second, 0)
 	if err := ledger.Respond(context.Background(), winner); err != nil {
 		t.Fatal(err)
+	}
+	reopened, err := Open(context.Background(), runID, bundle, store)
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, _, _, _, restoredSlots, _ := reopened.Snapshot()
+	if got := restoredSlots[round.ID]["act"]; got.ID != winner.ID || got.DispatchID != second.ID {
+		t.Fatalf("restored slot response = %+v", got)
 	}
 	loser := noProposal(t, deriver, second, 1)
 	if err := ledger.Respond(context.Background(), loser); !errors.Is(err, ErrSlotFilled) {

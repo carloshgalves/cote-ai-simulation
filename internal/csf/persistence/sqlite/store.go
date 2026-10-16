@@ -4,7 +4,6 @@ package sqlite
 import (
 	"bytes"
 	"context"
-	"crypto/sha256"
 	"database/sql"
 	_ "embed"
 	"encoding/json"
@@ -18,6 +17,7 @@ import (
 	"strings"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 	modernsqlite "modernc.org/sqlite"
@@ -198,6 +198,31 @@ func (s *Store) Get(ctx context.Context, id [32]byte) ([]byte, error) {
 	return canonical, err
 }
 
+func (s *Store) Records(ctx context.Context) ([]ports.CanonicalRecord, error) {
+	rows, err := s.db.QueryContext(ctx, `SELECT id,canonical FROM input_ledger ORDER BY rowid`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var records []ports.CanonicalRecord
+	for rows.Next() {
+		var id, canonical []byte
+		if err := rows.Scan(&id, &canonical); err != nil {
+			return nil, err
+		}
+		if len(id) != 32 {
+			return nil, errors.New("input ledger contains an invalid record identity")
+		}
+		var identity [32]byte
+		copy(identity[:], id)
+		records = append(records, ports.CanonicalRecord{Identity: identity, Canonical: bytes.Clone(canonical)})
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return records, nil
+}
+
 func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint64, record, receipt ports.CanonicalRecord) error {
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
@@ -215,7 +240,7 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
 	if err := appendTx(ctx, tx, record); err != nil {
 		return err
 	}
-	receiptID := sha256.Sum256(receipt.Canonical)
+	receiptID := [32]byte(identity.OpaqueContentHash(receipt.Canonical))
 	if err := appendTx(ctx, tx, ports.CanonicalRecord{Identity: receiptID, Canonical: receipt.Canonical}); err != nil {
 		return err
 	}

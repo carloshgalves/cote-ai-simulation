@@ -6,7 +6,6 @@ package inputledger
 import (
 	"bytes"
 	"context"
-	"crypto/sha256"
 	"encoding/hex"
 	"errors"
 	"fmt"
@@ -29,6 +28,7 @@ var (
 	ErrSlotMismatch             = errors.New("slot response does not match its open dispatch")
 	ErrSlotFilled               = errors.New("slot already has a response")
 	ErrSlotRevoked              = errors.New("slot dispatch was revoked")
+	ErrSourcesFrozen            = errors.New("causal source set is frozen")
 )
 
 type Source struct {
@@ -95,18 +95,19 @@ type Round struct {
 // Ledger is the serialized owner of source prefixes and slot lifecycles. The
 // optional stores are separated by authority; each causal record is canonical.
 type Ledger struct {
-	mu          sync.Mutex
-	runID       domain.ID
-	deriver     identity.Deriver
-	sources     map[string]bool
-	cursors     map[string]uint64
-	inputs      map[string][]StoredInput
-	closures    map[string][]StoredClosure
-	inputByID   map[domain.ID]StoredInput
-	closureByID map[domain.ID]StoredClosure
-	rounds      map[domain.ID]Round
-	providers   map[string]map[string]*slotState
-	inputStore  ports.AppendOnlyStore
+	mu            sync.Mutex
+	runID         domain.ID
+	deriver       identity.Deriver
+	sources       map[string]bool
+	cursors       map[string]uint64
+	inputs        map[string][]StoredInput
+	closures      map[string][]StoredClosure
+	inputByID     map[domain.ID]StoredInput
+	closureByID   map[domain.ID]StoredClosure
+	rounds        map[domain.ID]Round
+	providers     map[string]map[string]*slotState
+	inputStore    ports.AppendOnlyStore
+	sourcesFrozen bool
 }
 
 type slotState struct {
@@ -132,6 +133,13 @@ type Dispatch struct {
 	Canonical     []byte
 }
 
+// CycleBinding is the authoritative cycle tuple a slot dispatch must inherit.
+type CycleBinding struct {
+	ID           domain.ID
+	BaseRevision domain.WorldRevision
+	Instant      domain.SimulationInstant
+}
+
 // Response holds the canonical fields (without the trailing response digest).
 // Kind is 0 for ActionProposal and 1 for NoProposal.
 type Response struct {
@@ -150,8 +158,411 @@ type Response struct {
 	Canonical                []byte
 }
 
-func New(runID domain.ID, bundle *policy.Bundle, inputStore ports.AppendOnlyStore) *Ledger {
+func newLedger(runID domain.ID, bundle *policy.Bundle, inputStore ports.AppendOnlyStore) *Ledger {
 	return &Ledger{runID: runID, deriver: identity.New(bundle), sources: map[string]bool{}, cursors: map[string]uint64{}, inputs: map[string][]StoredInput{}, closures: map[string][]StoredClosure{}, inputByID: map[domain.ID]StoredInput{}, closureByID: map[domain.ID]StoredClosure{}, rounds: map[domain.ID]Round{}, providers: map[string]map[string]*slotState{}, inputStore: inputStore}
+}
+
+// New opens an existing prefix or initializes an empty one. It never returns a
+// ledger whose in-memory state silently omits records already in the store.
+func New(ctx context.Context, runID domain.ID, bundle *policy.Bundle, inputStore ports.AppendOnlyStore) (*Ledger, error) {
+	return Open(ctx, runID, bundle, inputStore)
+}
+
+// Open restores a ledger from its canonical input-store prefix before allowing
+// callers to append or derive another fence.
+func Open(ctx context.Context, runID domain.ID, bundle *policy.Bundle, inputStore ports.AppendOnlyStore) (*Ledger, error) {
+	if inputStore == nil {
+		return nil, ErrStoreRequired
+	}
+	l := newLedger(runID, bundle, inputStore)
+	lister, ok := inputStore.(ports.RecordListingStore)
+	if !ok {
+		return nil, errors.New("input ledger store does not support prefix restoration")
+	}
+	records, err := lister.Records(ctx)
+	if err != nil {
+		return nil, err
+	}
+	if err := l.restore(records); err != nil {
+		return nil, err
+	}
+	return l, nil
+}
+
+func (l *Ledger) restore(records []ports.CanonicalRecord) error {
+	type receiptRecord struct {
+		source string
+		seq    uint64
+		kind   uint64
+		id     domain.ID
+		digest domain.Digest
+		bytes  []byte
+	}
+	receipts := map[domain.ID]receiptRecord{}
+	inputs := map[domain.ID]StoredInput{}
+	closures := map[domain.ID]StoredClosure{}
+	dispatches := map[domain.ID]Dispatch{}
+	for _, record := range records {
+		if envelope, err := codec.StrictDecodeEnvelope(record.Canonical); err == nil && envelope.DomainTag == "cote.csf.record.source-ingress-receipt" {
+			if [32]byte(identity.OpaqueContentHash(record.Canonical)) != record.Identity {
+				return errors.New("persisted SourceIngressReceipt identity mismatch")
+			}
+			f, ok := envelope.Value.([]any)
+			if !ok || len(f) != 3 {
+				return errors.New("malformed persisted SourceIngressReceipt")
+			}
+			source, sourceOK := f[0].(string)
+			seq, seqOK := f[1].(uint64)
+			ref, refOK := f[2].([]any)
+			if !sourceOK || domain.ValidateMachineID(source) != nil || !seqOK || !refOK || len(ref) != 3 {
+				return errors.New("malformed persisted SourceIngressReceipt fields")
+			}
+			kind, kindOK := ref[0].(uint64)
+			idBytes, idOK := ref[1].([]byte)
+			digestBytes, digestOK := ref[2].([]byte)
+			if !kindOK || (kind != 1 && kind != 2) || !idOK || len(idBytes) != 32 || !digestOK || len(digestBytes) != 32 {
+				return errors.New("malformed persisted SourceIngressReceipt reference")
+			}
+			var id domain.ID
+			var digest domain.Digest
+			copy(id[:], idBytes)
+			copy(digest[:], digestBytes)
+			receipts[id] = receiptRecord{source: source, seq: seq, kind: kind, id: id, digest: digest, bytes: bytes.Clone(record.Canonical)}
+			continue
+		}
+		f, err := codec.StrictDecodePayload(record.Canonical)
+		if err != nil {
+			return fmt.Errorf("decode persisted input-ledger record %x: %w", record.Identity[:], err)
+		}
+		fields, ok := f.([]any)
+		if !ok {
+			return errors.New("persisted input-ledger record is not an array")
+		}
+		if len(fields) == 3 && fields[0] == "source-declaration-v1" {
+			if !matchesBytes(l.runID[:], fields[1]) {
+				return errors.New("persisted source declaration belongs to another run")
+			}
+			source, ok := fields[2].(string)
+			if !ok || domain.ValidateMachineID(source) != nil || [32]byte(identity.OpaqueContentHash(record.Canonical)) != record.Identity {
+				return errors.New("invalid persisted source declaration")
+			}
+			l.sources[source] = true
+			continue
+		}
+		if len(fields) == 13 && isString(fields[2]) && isString(fields[3]) && isString(fields[4]) {
+			stored, err := l.restoreInput(record, fields)
+			if err != nil {
+				return err
+			}
+			inputs[stored.ID] = stored
+			continue
+		}
+		if len(fields) == 7 && isString(fields[2]) && isString(fields[3]) && isBool(fields[5]) {
+			stored, err := l.restoreClosure(record, fields)
+			if err != nil {
+				return err
+			}
+			closures[stored.ID] = stored
+			continue
+		}
+		if len(fields) == 11 && isString(fields[2]) {
+			round, err := l.restoreRound(record, fields)
+			if err != nil {
+				return err
+			}
+			l.rounds[round.ID] = round
+			continue
+		}
+		if len(fields) == 11 && isBytes(fields[2]) && isString(fields[4]) {
+			dispatch, err := l.restoreDispatch(record, fields)
+			if err != nil {
+				return err
+			}
+			round, exists := l.rounds[dispatch.RoundID]
+			if !exists || round.Actor != dispatch.Actor || round.Eligibility != dispatch.Eligibility || !contains(round.Slots, dispatch.SlotID) {
+				return errors.New("persisted SlotDispatch is not bound to its RoundDeclaration")
+			}
+			dispatches[dispatch.ID] = dispatch
+			key := idKey(dispatch.RoundID)
+			if l.providers[key] == nil {
+				l.providers[key] = map[string]*slotState{}
+			}
+			l.providers[key][dispatch.SlotID] = &slotState{Dispatch: &dispatch}
+			continue
+		}
+		if (len(fields) == 11 || len(fields) == 19) && isBytes(fields[1]) {
+			dispatchID, ok := idFrom(fields[1])
+			if ok {
+				if dispatch, exists := dispatches[dispatchID]; exists {
+					response, err := l.restoreResponse(record, fields, dispatch)
+					if err != nil {
+						return err
+					}
+					l.providers[idKey(response.RoundID)][response.SlotID].Response = &response
+					continue
+				}
+			}
+		}
+		if len(fields) == 3 && isBytes(fields[0]) {
+			dispatchID, ok := idFrom(fields[0])
+			if ok {
+				state := l.findDispatchState(dispatchID)
+				if state != nil {
+					if [32]byte(identity.OpaqueContentHash(record.Canonical)) != record.Identity {
+						return errors.New("persisted dispatch revocation identity mismatch")
+					}
+					state.Revoked = true
+					continue
+				}
+			}
+		}
+		return fmt.Errorf("unrecognized persisted input-ledger record %x", record.Identity[:])
+	}
+
+	bySource := map[string][]receiptRecord{}
+	attachedIngress := map[domain.ID]bool{}
+	for _, receipt := range receipts {
+		bySource[receipt.source] = append(bySource[receipt.source], receipt)
+	}
+	for source, list := range bySource {
+		if !l.sources[source] {
+			return fmt.Errorf("ingress receipt references undeclared source %q", source)
+		}
+		sort.Slice(list, func(i, j int) bool { return list[i].seq < list[j].seq })
+		for i, receipt := range list {
+			if receipt.seq != uint64(i) {
+				return fmt.Errorf("source %q ingress prefix has a gap at %d", source, i)
+			}
+			if input, ok := inputs[receipt.id]; ok {
+				if receipt.kind != 1 || receipt.digest != input.Digest || input.Fields[2] != source {
+					return errors.New("persisted input receipt does not match its record")
+				}
+				input.Receipt = IngressReceipt{SourceID: source, Sequence: receipt.seq, RecordRef: [3]any{receipt.kind, input.ID[:], input.Digest[:]}, Canonical: receipt.bytes}
+				l.inputs[source] = append(l.inputs[source], input)
+				l.inputByID[input.ID] = input
+				attachedIngress[input.ID] = true
+				continue
+			}
+			if closure, ok := closures[receipt.id]; ok {
+				if receipt.kind != 2 || receipt.digest != closure.Digest || closure.Fields[2] != source || closure.Fields[6] != receipt.seq {
+					return errors.New("persisted closure receipt does not match its record")
+				}
+				closure.Receipt = IngressReceipt{SourceID: source, Sequence: receipt.seq, RecordRef: [3]any{receipt.kind, closure.ID[:], closure.Digest[:]}, Canonical: receipt.bytes}
+				l.closures[source] = append(l.closures[source], closure)
+				l.closureByID[closure.ID] = closure
+				attachedIngress[closure.ID] = true
+				continue
+			}
+			return fmt.Errorf("source %q receipt references a missing input record", source)
+		}
+		l.cursors[source] = uint64(len(list))
+	}
+	for id := range inputs {
+		if !attachedIngress[id] {
+			return errors.New("persisted input is missing its ingress receipt")
+		}
+	}
+	for id := range closures {
+		if !attachedIngress[id] {
+			return errors.New("persisted closure is missing its ingress receipt")
+		}
+	}
+	l.sourcesFrozen = len(records) > 0
+	return nil
+}
+
+func (l *Ledger) restoreInput(record ports.CanonicalRecord, fields []any) (StoredInput, error) {
+	if !matchesBytes(l.runID[:], fields[1]) {
+		return StoredInput{}, errors.New("persisted ExogenousInput belongs to another run")
+	}
+	id, _, err := l.deriver.Sum("cote.csf.id.exogenous-input", "cote.csf.schema.exogenous-input-id-preimage", 1, []any{fields[1], fields[2], fields[3]})
+	if err != nil || !matchesBytes(id[:], fields[0]) || !bytes.Equal(id[:], record.Identity[:]) {
+		return StoredInput{}, errors.New("persisted ExogenousInput identity mismatch")
+	}
+	digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, []any{fields[:12]})
+	if err != nil || !matchesBytes(digest[:], fields[12]) {
+		return StoredInput{}, errors.New("persisted ExogenousInput digest mismatch")
+	}
+	canonical, err := codec.CanonicalPayload(fields)
+	if err != nil || !bytes.Equal(canonical, record.Canonical) {
+		return StoredInput{}, errors.New("persisted ExogenousInput bytes are not canonical")
+	}
+	var idValue domain.ID
+	var digestValue domain.Digest
+	copy(idValue[:], id[:])
+	copy(digestValue[:], digest[:])
+	return StoredInput{ID: idValue, Digest: digestValue, Fields: fields, Canonical: canonical}, nil
+}
+
+func (l *Ledger) restoreClosure(record ports.CanonicalRecord, fields []any) (StoredClosure, error) {
+	if !matchesBytes(l.runID[:], fields[1]) {
+		return StoredClosure{}, errors.New("persisted SourceClosure belongs to another run")
+	}
+	id, _, err := l.deriver.Sum("cote.csf.id.source-closure", "cote.csf.schema.source-closure-id-preimage", 1, []any{fields[1], fields[2], fields[3]})
+	if err != nil || !matchesBytes(id[:], fields[0]) || !bytes.Equal(id[:], record.Identity[:]) {
+		return StoredClosure{}, errors.New("persisted SourceClosure identity mismatch")
+	}
+	digest, _, err := l.deriver.Sum("cote.csf.digest.source-closure", "cote.csf.schema.source-closure", 1, fields)
+	if err != nil {
+		return StoredClosure{}, errors.New("persisted SourceClosure digest cannot be verified")
+	}
+	canonical, err := codec.CanonicalPayload(fields)
+	if err != nil || !bytes.Equal(canonical, record.Canonical) {
+		return StoredClosure{}, errors.New("persisted SourceClosure bytes are not canonical")
+	}
+	var idValue domain.ID
+	var digestValue domain.Digest
+	copy(idValue[:], id[:])
+	copy(digestValue[:], digest[:])
+	return StoredClosure{ID: idValue, Digest: digestValue, Fields: fields, Canonical: canonical}, nil
+}
+
+func (l *Ledger) restoreRound(record ports.CanonicalRecord, fields []any) (Round, error) {
+	if !matchesBytes(l.runID[:], fields[1]) {
+		return Round{}, errors.New("persisted RoundDeclaration belongs to another run")
+	}
+	id, _, err := l.deriver.Sum("cote.csf.id.decision-round", "cote.csf.schema.decision-round-id-preimage", 1, []any{fields[6], fields[7], fields[8]})
+	if err != nil || !matchesBytes(id[:], fields[0]) || !bytes.Equal(id[:], record.Identity[:]) {
+		return Round{}, errors.New("persisted RoundDeclaration identity mismatch")
+	}
+	digest, _, err := l.deriver.Sum("cote.csf.digest.round-declaration", "cote.csf.schema.round-declaration", 1, fields)
+	if err != nil {
+		return Round{}, errors.New("persisted RoundDeclaration digest cannot be verified")
+	}
+	canonical, err := codec.CanonicalPayload(fields)
+	if err != nil || !bytes.Equal(canonical, record.Canonical) {
+		return Round{}, errors.New("persisted RoundDeclaration bytes are not canonical")
+	}
+	actor, ok := fields[3].([]any)
+	slots, slotsOK := fields[4].([]any)
+	eligibility, coordinateOK := parseCoordinate(fields[5])
+	if !ok || len(actor) != 2 || !slotsOK || len(slots) == 0 || !coordinateOK {
+		return Round{}, errors.New("malformed persisted RoundDeclaration")
+	}
+	var idValue domain.ID
+	var digestValue domain.Digest
+	copy(idValue[:], id[:])
+	copy(digestValue[:], digest[:])
+	role, _ := fields[7].(uint64)
+	ordinal, _ := fields[8].(uint64)
+	lifecycle, _ := fields[9].(uint64)
+	return Round{ID: idValue, SourceID: fields[2].(string), Actor: [2]string{actor[0].(string), actor[1].(string)}, Slots: stringSlice(slots), Eligibility: eligibility, CreatedBy: fields[6], Role: uint16(role), LocalOrdinal: uint32(ordinal), Lifecycle: uint8(lifecycle), IdempotencyKey: fields[10], Digest: digestValue, Fields: fields, Canonical: canonical}, nil
+}
+
+func (l *Ledger) restoreDispatch(record ports.CanonicalRecord, fields []any) (Dispatch, error) {
+	if !matchesBytes(l.runID[:], fields[1]) {
+		return Dispatch{}, errors.New("persisted SlotDispatch belongs to another run")
+	}
+	id, _, err := l.deriver.Sum("cote.csf.id.dispatch", "cote.csf.schema.dispatch-id-preimage", 1, []any{fields[1], fields[2], fields[3], fields[4], fields[5]})
+	if err != nil || !matchesBytes(id[:], fields[0]) || !bytes.Equal(id[:], record.Identity[:]) {
+		return Dispatch{}, errors.New("persisted SlotDispatch identity mismatch")
+	}
+	digest, _, err := l.deriver.Sum("cote.csf.digest.slot-dispatch", "cote.csf.schema.slot-dispatch", 1, fields)
+	if err != nil {
+		return Dispatch{}, errors.New("persisted SlotDispatch digest cannot be verified")
+	}
+	actor, ok := fields[6].([]any)
+	if !ok || len(actor) != 2 {
+		return Dispatch{}, errors.New("malformed persisted SlotDispatch actor")
+	}
+	cycleID, ok1 := idFrom(fields[2])
+	roundID, ok2 := idFrom(fields[3])
+	var idValue domain.ID
+	var digestValue domain.Digest
+	copy(idValue[:], id[:])
+	copy(digestValue[:], digest[:])
+	ordinal, _ := fields[5].(uint64)
+	revision, _ := fields[8].(uint64)
+	instant, instantOK := signedInt64(fields[9])
+	requestDigest, ok3 := digestFrom(fields[10])
+	eligibility, eligibilityOK := parseCoordinate(fields[7])
+	if !ok1 || !ok2 || !ok3 || !instantOK || !eligibilityOK {
+		return Dispatch{}, errors.New("malformed persisted SlotDispatch references")
+	}
+	canonical, err := codec.CanonicalPayload(fields)
+	if err != nil || !bytes.Equal(canonical, record.Canonical) {
+		return Dispatch{}, errors.New("persisted SlotDispatch bytes are not canonical")
+	}
+	return Dispatch{ID: idValue, RunID: l.runID, CycleID: cycleID, RoundID: roundID, SlotID: fields[4].(string), Ordinal: uint32(ordinal), Actor: [2]string{actor[0].(string), actor[1].(string)}, Eligibility: eligibility, BaseRevision: domain.WorldRevision(revision), EffectiveAt: domain.SimulationInstant(instant), RequestDigest: requestDigest, Digest: digestValue, Canonical: canonical}, nil
+}
+
+func (l *Ledger) restoreResponse(record ports.CanonicalRecord, fields []any, dispatch Dispatch) (Response, error) {
+	kind := uint8(1)
+	if len(fields) == 19 {
+		kind = 0
+	} else if len(fields) != 11 {
+		return Response{}, errors.New("malformed persisted SlotResponse")
+	}
+	body := fields[:len(fields)-1]
+	id, _, err := l.deriver.Sum(map[bool]string{true: "cote.csf.id.action-proposal", false: "cote.csf.id.no-proposal"}[kind == 0], "cote.csf.schema.slot-response-id-preimage", 1, []any{dispatch.ID[:], uint64(kind)})
+	if err != nil || !matchesBytes(id[:], fields[0]) || record.Identity != dispatchResponseID(id) {
+		return Response{}, errors.New("persisted SlotResponse identity mismatch")
+	}
+	digestSchema, bodySchema := "cote.csf.digest.no-proposal-unit", "cote.csf.schema.no-proposal.body"
+	if kind == 0 {
+		digestSchema, bodySchema = "cote.csf.digest.action-proposal-unit", "cote.csf.schema.action-proposal.body"
+	}
+	digest, _, err := l.deriver.Sum(digestSchema, bodySchema, 1, []any{body})
+	if err != nil || !matchesBytes(digest[:], fields[len(fields)-1]) {
+		return Response{}, errors.New("persisted SlotResponse digest mismatch")
+	}
+	canonical, err := codec.CanonicalPayload(fields)
+	if err != nil || !bytes.Equal(canonical, record.Canonical) {
+		return Response{}, errors.New("persisted SlotResponse bytes are not canonical")
+	}
+	response := Response{Kind: kind, ID: dispatchResponseID(id), DispatchID: dispatch.ID, RunID: dispatch.RunID, CycleID: dispatch.CycleID, RoundID: dispatch.RoundID, SlotID: dispatch.SlotID, Actor: dispatch.Actor, EffectiveAt: dispatch.EffectiveAt, SubmittedAgainstRevision: dispatch.BaseRevision, Body: body, Digest: digest}
+	if err := validateResponseBody(response); err != nil {
+		return Response{}, err
+	}
+	response.Canonical = canonical
+	return response, nil
+}
+
+func (l *Ledger) findDispatchState(id domain.ID) *slotState {
+	for _, bySlot := range l.providers {
+		for _, state := range bySlot {
+			if state.Dispatch != nil && state.Dispatch.ID == id {
+				return state
+			}
+		}
+	}
+	return nil
+}
+
+func dispatchResponseID(value domain.Digest) domain.ID {
+	return domain.ID(value)
+}
+func isString(v any) bool { _, ok := v.(string); return ok }
+func isBytes(v any) bool  { _, ok := v.([]byte); return ok }
+func isBool(v any) bool   { _, ok := v.(bool); return ok }
+func matchesBytes(expected []byte, value any) bool {
+	actual, ok := value.([]byte)
+	return ok && bytes.Equal(expected, actual)
+}
+func idFrom(value any) (domain.ID, bool) {
+	var result domain.ID
+	data, ok := value.([]byte)
+	if !ok || len(data) != len(result) {
+		return result, false
+	}
+	copy(result[:], data)
+	return result, true
+}
+func digestFrom(value any) (domain.Digest, bool) {
+	var result domain.Digest
+	data, ok := value.([]byte)
+	if !ok || len(data) != len(result) {
+		return result, false
+	}
+	copy(result[:], data)
+	return result, true
+}
+func stringSlice(values []any) []string {
+	result := make([]string, len(values))
+	for i, value := range values {
+		result[i], _ = value.(string)
+	}
+	return result
 }
 
 // DeclareRound admits only a round whose origin is already causal (genesis or
@@ -229,8 +640,21 @@ func (l *Ledger) DeclareSource(source Source) error {
 	}
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	if l.inputStore == nil {
+		return ErrStoreRequired
+	}
+	if l.sourcesFrozen {
+		return ErrSourcesFrozen
+	}
 	if _, exists := l.sources[source.ID]; exists {
 		return fmt.Errorf("source %q already declared", source.ID)
+	}
+	canonical, err := codec.CanonicalPayload([]any{"source-declaration-v1", l.runID[:], source.ID})
+	if err != nil {
+		return err
+	}
+	if err := l.inputStore.Append(context.Background(), ports.CanonicalRecord{Identity: [32]byte(identity.OpaqueContentHash(canonical)), Canonical: canonical}); err != nil {
+		return err
 	}
 	l.sources[source.ID] = true
 	return nil
@@ -251,6 +675,28 @@ func (l *Ledger) AppendInput(ctx context.Context, sourceID string, input Input) 
 	if err := domain.ValidateMachineID(input.Kind); err != nil {
 		return StoredInput{}, err
 	}
+	identityFields := []any{l.runID[:], sourceID, input.ProducerUnitKey}
+	id, _, err := l.deriver.Sum("cote.csf.id.exogenous-input", "cote.csf.schema.exogenous-input-id-preimage", 1, identityFields)
+	if err != nil {
+		return StoredInput{}, err
+	}
+	var causalID domain.ID
+	copy(causalID[:], id[:])
+	if old, exists := l.inputByID[causalID]; exists {
+		body := []any{id[:], l.runID[:], sourceID, input.ProducerUnitKey, input.Kind, input.SchemaVersion, input.Actor, input.Payload, int64(input.DeclaredEffectiveAt), old.Fields[9], input.Provenance, input.IdempotencyKey}
+		digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, []any{body})
+		if err != nil {
+			return StoredInput{}, err
+		}
+		canonical, err := codec.CanonicalPayload(append(append([]any{}, body...), digest[:]))
+		if err != nil {
+			return StoredInput{}, err
+		}
+		if !bytes.Equal(old.Canonical, canonical) {
+			return StoredInput{}, domain.ErrIdentityCollision
+		}
+		return old, nil
+	}
 	for _, closure := range l.closures[sourceID] {
 		if closure.Fields[5] == true {
 			return StoredInput{}, ErrFinalSource
@@ -266,11 +712,6 @@ func (l *Ledger) AppendInput(ctx context.Context, sourceID string, input Input) 
 			eligibility = next
 		}
 	}
-	fields := []any{l.runID[:], sourceID, input.ProducerUnitKey}
-	id, _, err := l.deriver.Sum("cote.csf.id.exogenous-input", "cote.csf.schema.exogenous-input-id-preimage", 1, fields)
-	if err != nil {
-		return StoredInput{}, err
-	}
 	body := []any{id[:], l.runID[:], sourceID, input.ProducerUnitKey, input.Kind, input.SchemaVersion, input.Actor, input.Payload, int64(input.DeclaredEffectiveAt), coordValue(eligibility), input.Provenance, input.IdempotencyKey}
 	digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, []any{body})
 	if err != nil {
@@ -280,14 +721,6 @@ func (l *Ledger) AppendInput(ctx context.Context, sourceID string, input Input) 
 	canonical, err := codec.CanonicalPayload(full)
 	if err != nil {
 		return StoredInput{}, err
-	}
-	var causalID domain.ID
-	copy(causalID[:], id[:])
-	if old, exists := l.inputByID[causalID]; exists {
-		if !bytes.Equal(old.Canonical, canonical) {
-			return StoredInput{}, domain.ErrIdentityCollision
-		}
-		return old, nil
 	}
 	_, receipt, err := l.appendIngress(ctx, sourceID, 1, causalID, digest, canonical)
 	if err != nil {
@@ -311,14 +744,6 @@ func (l *Ledger) CloseSource(ctx context.Context, sourceID string, closure Closu
 	if err := domain.ValidateMachineID(closure.ProducerKey); err != nil {
 		return StoredClosure{}, err
 	}
-	for _, prior := range l.closures[sourceID] {
-		if prior.Fields[5] == true {
-			return StoredClosure{}, ErrFinalSource
-		}
-		if coordinate(prior.Fields[4]).Compare(closure.ClosedThrough) > 0 {
-			return StoredClosure{}, fmt.Errorf("source closure cannot move backward")
-		}
-	}
 	identityFields := []any{l.runID[:], sourceID, closure.ProducerKey}
 	id, _, err := l.deriver.Sum("cote.csf.id.source-closure", "cote.csf.schema.source-closure-id-preimage", 1, identityFields)
 	if err != nil {
@@ -327,10 +752,18 @@ func (l *Ledger) CloseSource(ctx context.Context, sourceID string, closure Closu
 	var causalID domain.ID
 	copy(causalID[:], id[:])
 	if old, exists := l.closureByID[causalID]; exists {
-		if old.Fields[4] != nil && !bytes.Equal(closureCanonicalShape(old.Fields), closureCanonicalShape([]any{id[:], l.runID[:], sourceID, closure.ProducerKey, coordValue(closure.ClosedThrough), closure.Final, old.Fields[6]})) {
+		if coordinate(old.Fields[4]).Compare(closure.ClosedThrough) != 0 || old.Fields[5] != closure.Final {
 			return StoredClosure{}, domain.ErrIdentityCollision
 		}
 		return old, nil
+	}
+	for _, prior := range l.closures[sourceID] {
+		if prior.Fields[5] == true {
+			return StoredClosure{}, ErrFinalSource
+		}
+		if coordinate(prior.Fields[4]).Compare(closure.ClosedThrough) > 0 {
+			return StoredClosure{}, fmt.Errorf("source closure cannot move backward")
+		}
 	}
 	store, ok := l.inputStore.(ports.IngressAppendStore)
 	if !ok {
@@ -373,7 +806,7 @@ func (l *Ledger) appendIngress(ctx context.Context, source string, refKind uint6
 	if err != nil {
 		return ports.CanonicalRecord{}, IngressReceipt{}, err
 	}
-	receiptID := sha256.Sum256(receiptBytes)
+	receiptID := [32]byte(identity.OpaqueContentHash(receiptBytes))
 	if err := store.AppendIngress(ctx, source, seq, ports.CanonicalRecord{Identity: id, Canonical: canonical}, ports.CanonicalRecord{Identity: receiptID, Canonical: receiptBytes}); err != nil {
 		return ports.CanonicalRecord{}, IngressReceipt{}, err
 	}
@@ -381,13 +814,13 @@ func (l *Ledger) appendIngress(ctx context.Context, source string, refKind uint6
 	return ports.CanonicalRecord{Identity: id, Canonical: canonical}, IngressReceipt{SourceID: source, Sequence: seq, RecordRef: ref, Canonical: receiptBytes}, nil
 }
 
-func (l *Ledger) RegisterDispatch(ctx context.Context, d Dispatch) error {
+func (l *Ledger) RegisterDispatch(ctx context.Context, d Dispatch, cycle CycleBinding) error {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	if l.inputStore == nil {
 		return ErrStoreRequired
 	}
-	if d.RunID != l.runID || d.SlotID == "" {
+	if d.RunID != l.runID || d.CycleID != cycle.ID || d.BaseRevision != cycle.BaseRevision || d.EffectiveAt != cycle.Instant || d.SlotID == "" {
 		return ErrSlotMismatch
 	}
 	if err := domain.ValidateMachineID(d.SlotID); err != nil {
@@ -462,7 +895,7 @@ func (l *Ledger) RevokeDispatch(ctx context.Context, roundID domain.ID, slotID s
 		return err
 	}
 	if l.inputStore != nil {
-		operationalID := sha256.Sum256(canonical)
+		operationalID := [32]byte(identity.OpaqueContentHash(canonical))
 		if err := l.inputStore.Append(ctx, ports.CanonicalRecord{Identity: operationalID, Canonical: canonical}); err != nil {
 			return err
 		}
@@ -530,7 +963,7 @@ func (l *Ledger) Respond(ctx context.Context, response Response) error {
 	if err != nil {
 		return err
 	}
-	key := sha256.Sum256(append([]byte("csf-slot-response-v1\x00"), keyBytes...))
+	key := [32]byte(identity.OpaqueContentHash(append([]byte("csf-slot-response-v1\x00"), keyBytes...)))
 	inserted, existing, err := conditional.AppendIfAbsent(ctx, key, ports.CanonicalRecord{Identity: response.ID, Canonical: canonical})
 	if err != nil {
 		return err
@@ -565,6 +998,7 @@ func (l *Ledger) Prefix(source string) (inputs []StoredInput, closures []StoredC
 func (l *Ledger) Snapshot() (sources []string, inputs []StoredInput, closures []StoredClosure, rounds []Round, slots map[domain.ID]map[string]Response, runID domain.ID) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	l.sourcesFrozen = true
 	for source := range l.sources {
 		sources = append(sources, source)
 	}
@@ -641,17 +1075,12 @@ func validRoundOrigin(value any) bool {
 	digest, digestOK := ref[1].([]byte)
 	return idOK && digestOK && len(id) == 32 && len(digest) == 32
 }
-func closureCanonicalShape(fields []any) []byte {
-	encoded, _ := codec.CanonicalPayload(fields)
-	return encoded
-}
-
 func validateResponseBody(r Response) error {
 	if r.Kind == 0 {
 		if len(r.Body) != 18 {
 			return fmt.Errorf("ActionProposal must contain 18 fields")
 		}
-		if !bytesAt(r.Body, 0, r.ID) || !bytesAt(r.Body, 1, r.DispatchID) || !bytesAt(r.Body, 2, r.RunID) || !bytesAt(r.Body, 3, r.CycleID) || !bytesAt(r.Body, 13, r.RoundID) || r.Body[14] != r.SlotID || r.Body[11] != int64(r.EffectiveAt) || r.Body[15] != uint64(r.SubmittedAgainstRevision) {
+		if !bytesAt(r.Body, 0, r.ID) || !bytesAt(r.Body, 1, r.DispatchID) || !bytesAt(r.Body, 2, r.RunID) || !bytesAt(r.Body, 3, r.CycleID) || !bytesAt(r.Body, 13, r.RoundID) || r.Body[14] != r.SlotID || !equalsInt64(r.Body[11], int64(r.EffectiveAt)) || !equalsUint64(r.Body[15], uint64(r.SubmittedAgainstRevision)) {
 			return ErrSlotMismatch
 		}
 		if !actorAt(r.Body, 6, r.Actor) {
@@ -661,7 +1090,7 @@ func validateResponseBody(r Response) error {
 		if len(r.Body) != 10 {
 			return fmt.Errorf("NoProposal must contain 10 fields")
 		}
-		if !bytesAt(r.Body, 0, r.ID) || !bytesAt(r.Body, 1, r.DispatchID) || !bytesAt(r.Body, 2, r.RunID) || !bytesAt(r.Body, 3, r.CycleID) || !bytesAt(r.Body, 4, r.RoundID) || r.Body[5] != r.SlotID || r.Body[7] != int64(r.EffectiveAt) || r.Body[8] != uint64(r.SubmittedAgainstRevision) {
+		if !bytesAt(r.Body, 0, r.ID) || !bytesAt(r.Body, 1, r.DispatchID) || !bytesAt(r.Body, 2, r.RunID) || !bytesAt(r.Body, 3, r.CycleID) || !bytesAt(r.Body, 4, r.RoundID) || r.Body[5] != r.SlotID || !equalsInt64(r.Body[7], int64(r.EffectiveAt)) || !equalsUint64(r.Body[8], uint64(r.SubmittedAgainstRevision)) {
 			return ErrSlotMismatch
 		}
 		if !actorAt(r.Body, 6, r.Actor) {
@@ -679,8 +1108,55 @@ func actorAt(fields []any, index int, expected [2]string) bool {
 	return ok && len(actor) == 2 && actor[0] == expected[0] && actor[1] == expected[1]
 }
 func coordinate(v any) domain.EligibilityCoordinate {
-	a := v.([]any)
-	return domain.EligibilityCoordinate{NotBeforeInstant: domain.SimulationInstant(a[0].(int64)), NotBeforeCycleOrdinal: domain.CycleOrdinal(a[1].(uint64))}
+	coordinate, _ := parseCoordinate(v)
+	return coordinate
+}
+
+func parseCoordinate(value any) (domain.EligibilityCoordinate, bool) {
+	fields, ok := value.([]any)
+	if !ok || len(fields) != 2 {
+		return domain.EligibilityCoordinate{}, false
+	}
+	instant, instantOK := signedInt64(fields[0])
+	ordinal, ordinalOK := unsigned64(fields[1])
+	if !instantOK || !ordinalOK {
+		return domain.EligibilityCoordinate{}, false
+	}
+	return domain.EligibilityCoordinate{NotBeforeInstant: domain.SimulationInstant(instant), NotBeforeCycleOrdinal: domain.CycleOrdinal(ordinal)}, true
+}
+
+func signedInt64(value any) (int64, bool) {
+	switch number := value.(type) {
+	case int64:
+		return number, true
+	case uint64:
+		if number <= uint64(^uint64(0)>>1) {
+			return int64(number), true
+		}
+	}
+	return 0, false
+}
+
+func unsigned64(value any) (uint64, bool) {
+	switch number := value.(type) {
+	case uint64:
+		return number, true
+	case int64:
+		if number >= 0 {
+			return uint64(number), true
+		}
+	}
+	return 0, false
+}
+
+func equalsInt64(value any, expected int64) bool {
+	actual, ok := signedInt64(value)
+	return ok && actual == expected
+}
+
+func equalsUint64(value any, expected uint64) bool {
+	actual, ok := unsigned64(value)
+	return ok && actual == expected
 }
 func nextOpen(c domain.EligibilityCoordinate) domain.EligibilityCoordinate {
 	if c.NotBeforeCycleOrdinal < ^domain.CycleOrdinal(0) {

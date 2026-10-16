@@ -123,14 +123,14 @@ operação lógica e policy ref.
 
 ## Retificação controlada da suíte V1 (2026-10-16)
 
-Os quatro fixtures semânticos de `record_to_reference` para `event`, `source-closure`,
+Quatro preimages de ID e cinco IDs embutidos em fixtures semânticos de `record_to_reference` para `event`, `source-closure`,
 `round-declaration` e `scheduled-occurrence` tiveram seus preimages de ID
-reconciliados com os campos de seus records. Os ID/digests e referências
-afetados foram rederivados, sem mudar CDDL, registries, codec, Unicode
+reconciliados com os campos de seus records. IDs embutidos, digests e referências dependentes foram rederivados
+conforme seus preimages, sem mudar CDDL, registries, codec, Unicode
 ou os vetores positivos de operações matemáticas independentes.
 
 Hash anterior da suíte de conformidade: `f9c75b6647ec14b0205806bcfd7b481dcd0d29c9408fb18aa2a50dea1e86dee2`.
-Hash vigente: `8ab912f39e9b2de26888fcf02c96b58f3223cce8a06f3f9b236dee6dfe046abb`. O hash anterior e os bytes originais
+Hash vigente: `081649d1201e356dde034515ff776fe7af2df3cbe94e5388209282e0cb47aee1`. O hash anterior e os bytes originais
 continuam consultáveis no histórico Git (baseline `0f78d82ca55ba3e53812de11ce2def648b7d2b45`).
 `codec_policy_hash` e `schema_bundle_hash` permanecem inalterados.
 Uma suíte corrigida não comprova, por si só, todos os 28 vínculos:

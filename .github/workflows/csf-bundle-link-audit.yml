@@ -1,0 +1,43 @@
+name: CSF Canonical Bundle Link Audit
+on:
+  pull_request:
+    paths:
+      - "docs/architecture/canonical-codec-v1-bundle/**"
+      - "tools/csf-fixture-link-audit.mjs"
+      - ".github/workflows/csf-bundle-link-audit.yml"
+  push:
+    branches:
+      - "fix/csf-v1-conformance-fixtures-errata"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify record-to-reference semantic bindings
+        run: node tools/csf-fixture-link-audit.mjs
+      - name: Verify conformance receipt and unchanged schema hashes
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { createHash } from 'node:crypto';
+          import { readFileSync } from 'node:fs';
+          import assert from 'node:assert/strict';
+          const d = 'docs/architecture/canonical-codec-v1-bundle/';
+          const hash = (data) => createHash('sha256').update(data).digest('hex');
+          const receipt = Object.fromEntries(readFileSync(d + 'BUNDLE.sha256','utf8').split('\n').filter(x=>x.includes('  ')).map(x=>x.trim().split(/\s+/)).filter(x=>x.length===2));
+          const manifest = readFileSync(d + 'conformance-manifest.json');
+          const expected = hash(Buffer.concat([Buffer.from('cote.csf.bundle.conformance.v1\0'), manifest]));
+          assert.equal(receipt['conformance_suite_hash'], expected);
+          assert.equal(receipt['codec_policy_hash'], '513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203');
+          assert.equal(receipt['schema_bundle_hash'], 'ef7c1e4cec18f1491e4b72bd7dd35f49a1c28d77a5bdd89d435122074f5cba18');
+          for (const [path, size, expectedHash] of JSON.parse(manifest).artifacts) {
+            const bytes = readFileSync(d + path);
+            assert.equal(bytes.length, size);
+            assert.equal(hash(bytes), expectedHash);
+          }
+          NODE

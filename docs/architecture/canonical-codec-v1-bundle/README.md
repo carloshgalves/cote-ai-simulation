@@ -238,3 +238,26 @@ representação de primitivo, versão/repertoire Unicode, gramática global de i
 ordem global de map, regra global de float, algoritmo/formato de digest ou forma textual de digest.
 Adicionar um schema/domain tag novo sem mudar essas regras cria novo bundle para um novo run, mas não
 transforma o encoder V1 em V2.
+
+### Retificação controlada dos fixtures (2026-10-16)
+
+Antes da primeira execução integrada, foram corrigidos os casos semânticos de
+`record_to_reference` para vincular preimages e IDs/digests aos records CBOR reais.
+Os 156 vetores positivos de **serialização** permanecem byte a byte inalterados;
+eles não constituem, isoladamente, prova de identidade causal entre record e ref.
+A revisão dos casos semânticos também atualiza os cinco exemplos de
+`admitted_unit_ledger_mismatch` dependentes de `ExogenousInput`.
+Não houve alteração de `profile.json`, `unicode.json`, `foundation.cddl`,
+`registries.json` ou `causal-transition-contracts.json`.
+
+- `codec_policy_hash` e `schema_bundle_hash`: preservados.
+- `conformance_suite_hash` anterior: `f9c75b6647ec14b0205806bcfd7b481dcd0d29c9408fb18aa2a50dea1e86dee2`.
+- `conformance_suite_hash` retificado: `6015fd7cc6899da33f3bd7e9aa89b03102aae71539bfd9d164cb08438d39b4a4`.
+
+Esta correção substitui os fixtures existentes **sem duplicar o bundle**; os bytes
+anteriores continuam recuperáveis pelo histórico Git. A homologação da suíte
+retificada exige verificar os 28 vínculos nos runners Go e TypeScript, inclusive
+campos de identidade e digest que sejam derivados de authorities externas.
+O congelamento definitivo ocorre somente após essa homologação, antes da primeira
+execução integrada. Não interpretar a simples atualização dos hashes como prova
+independente de conformidade.

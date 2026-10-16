@@ -121,6 +121,30 @@ function project(root, record, prior) {
   });
 }
 
+function verifyConflictWitness(item, conflictFields) {
+  const witnesses = item.candidate_record_envelopes_hex;
+  assert(Array.isArray(witnesses) && witnesses.length === 2, "conflict-set requires two authoritative candidate records");
+  const candidateIds = [];
+  let cycle = null;
+  for (const raw of witnesses) {
+    const record = decode(Buffer.from(raw, "hex"));
+    assert.equal(record[3], "cote.csf.schema.commit-candidate");
+    const fields = record[5];
+    const idPayload = [fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7]];
+    const idEnvelope = [Buffer.from([67, 83, 70, 0]), 1n, "cote.csf.id.commit-candidate", "cote.csf.schema.candidate-id-preimage", 1n, idPayload];
+    const id = sha256(encode(idEnvelope));
+    assert(fields[0].equals(id), "candidate ID does not derive from candidate's record");
+    const digestEnvelope = [Buffer.from([67, 83, 70, 0]), 1n, "cote.csf.digest.commit-candidate", "cote.csf.schema.commit-candidate.body", 1n, fields.slice(0, -1)];
+    assert(fields.at(-1).equals(sha256(encode(digestEnvelope))), "candidate digest mismatch");
+    if (cycle !== null) assert(fields[2].equals(cycle), "conflict candidates belong to different cycles");
+    cycle = fields[2];
+    candidateIds.push(id);
+  }
+  assert(candidateIds[0].equals(conflictFields[1][0]) && candidateIds[1].equals(conflictFields[1][1]),
+    "conflict candidates and recorded candidate IDs disagree");
+  return cycle;
+}
+
 function verify(item) {
   const root = item.persisted_root.split(".").at(-1), registered = registries.reference_identities.find((r) => r.persisted_root === item.persisted_root);
   assert(registered, `reference root missing registry: ${root}`);
@@ -134,7 +158,8 @@ function verify(item) {
   assert.equal(identity[3], registered.id.preimage_schema);
   assert.equal(digest[2], registered.digest.operation);
   assert.equal(digest[3], registered.digest.preimage_schema);
-  assert(eq(identity[5], project(root, record[5], identity[5])), `record→ID mismatch for ${root}`);
+  const prior = root === "conflict-set" ? [verifyConflictWitness(item, record[5])] : identity[5];
+  assert(eq(identity[5], project(root, record[5], prior)), `record→ID mismatch for ${root}`);
   const recordFields = record[5];
   if (root === "cycle-commit") {
     assert(eq(digest[5][0], recordFields.slice(0, -1)), "cycle-commit batch body mismatch");
@@ -151,7 +176,7 @@ function verify(item) {
     const inputRef = decode(Buffer.from(item.expected_input_ref_cbor_hex, "hex"));
     assert(inputRef.at(-2).equals(computedID) && inputRef.at(-1).equals(computedDigest), `input reference mismatch for ${root}`);
   }
-  return { root, external: root === "conflict-set" };
+  return { root, external: false };
 }
 
 const cases = fixtures.semantic.filter((item) => item.kind === "record_to_reference");
@@ -168,4 +193,4 @@ for (const item of fixtures.semantic.filter((item) => item.kind === "admitted_un
 }
 assert.equal(fixtures.semantic.filter((item) => item.kind === "admitted_unit_ledger_mismatch").length, 5);
 console.log(`Validated ${checked.length}/28 record bindings and five admitted-unit dependencies.`);
-console.log("External authority still required for conflict-set.cycle-id; not presented as fully resolved.");
+console.log("ConflictSet cycle-id verified from two independently derived CommitCandidate records.");

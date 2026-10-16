@@ -183,6 +183,32 @@ const cases = fixtures.semantic.filter((item) => item.kind === "record_to_refere
 assert.equal(cases.length, 28, "exactly 28 reference identities required");
 assert.equal(new Set(cases.map((item) => item.persisted_root)).size, 28, "reference schemas must be unique");
 const checked = cases.map(verify);
+const mutationIndex = {
+  "event":1, "exogenous-input":3, "source-closure":1,
+  "round-declaration":7, "slot-dispatch":4, "action-proposal":1,
+  "scheduled-occurrence":10, "trigger-activation":3, "commit-candidate":4,
+  "conflict-set":2, "decision-record":3, "admission-fence":2,
+  "cycle-commit":2, "cycle-abort":2, "attempt-retry":3,
+  "perception-task":3, "observation":3, "knowledge-input":1,
+  "claim":2, "transmission":2, "snapshot":3, "genesis-manifest":0,
+  "epistemic-checkpoint-ref":1, "no-proposal":1, "rng-draw":3,
+  "affordance-assessment":2, "provisional-disposition":3, "attempt-failure":3,
+};
+for (const item of cases) {
+  const root = item.persisted_root.split(".").at(-1);
+  const parsed = decode(Buffer.from(item.record_envelope_hex, "hex"));
+  const fields = parsed[5], index = mutationIndex[root], oldValue = fields[index];
+  assert(index !== undefined, `mutation guard missing for ${root}`);
+  if (Buffer.isBuffer(oldValue)) {
+    const modified = Buffer.from(oldValue); modified[0] ^= 1; fields[index] = modified;
+  } else if (typeof oldValue === "string") fields[index] = oldValue + "-2";
+  else if (typeof oldValue === "bigint") fields[index] = oldValue + 1n;
+  else throw new Error(`mutation field not scalar: ${root}`);
+  const mutated = { ...item, record_envelope_hex: encode(parsed).toString("hex") };
+  assert.throws(() => verify(mutated), `record→reference mutation escaped verification: ${root}`);
+}
+console.log("Negative record mutations rejected for all 28 reference roots.");
+
 const source = cases.find((item) => item.case_id === "reference.record-to-ref.exogenous-input");
 assert(source, "exogenous fixture absent");
 const inputRef = decode(Buffer.from(source.expected_input_ref_cbor_hex, "hex"));

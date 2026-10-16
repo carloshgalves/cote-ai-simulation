@@ -225,6 +225,34 @@ func checkReference(f fixture,registries registry) error{
     }
     return nil
 }
+func verifyMutationGuard(original fixture, r registry) error{
+    root:=original.PersistedRoot[len("cote.csf.schema."):]
+    indices:=map[string]int{
+      "event":1,"exogenous-input":3,"source-closure":1,"round-declaration":7,
+      "slot-dispatch":4,"action-proposal":1,"scheduled-occurrence":10,
+      "trigger-activation":3,"commit-candidate":4,"conflict-set":2,
+      "decision-record":3,"admission-fence":2,"cycle-commit":2,
+      "cycle-abort":2,"attempt-retry":3,"perception-task":3,
+      "observation":3,"knowledge-input":1,"claim":2,"transmission":2,
+      "snapshot":3,"genesis-manifest":0,"epistemic-checkpoint-ref":1,
+      "no-proposal":1,"rng-draw":3,"affordance-assessment":2,
+      "provisional-disposition":3,"attempt-failure":3,
+    }
+    index,ok:=indices[root];if !ok{return fmt.Errorf("no mutation index for %s",root)}
+    v,err:=decodeHex(original.RecordHex);if err!=nil{return err}
+    envelope,err:=asFields(v);if err!=nil{return err}
+    fields,err:=asFields(envelope[5]);if err!=nil{return err}
+    switch x:=fields[index].(type){
+    case []byte: copied:=bytes.Clone(x);copied[0]^=1;fields[index]=copied
+    case string:fields[index]=x+"-2"
+    case uint64:fields[index]=x+1
+    default:return fmt.Errorf("no canonical mutation for %s at %d (%T)",root,index,fields[index])
+    }
+    mutated,err:=encode(envelope);if err!=nil{return err}
+    modified:=original;modified.RecordHex=hex.EncodeToString(mutated)
+    if err=checkReference(modified,r);err==nil{return fmt.Errorf("record mutation false-green for %s",root)}
+    return nil
+}
 func run()error{
     constDir:="docs/architecture/canonical-codec-v1-bundle/"
     raw,err:=os.ReadFile(constDir+"fixtures.json");if err!=nil{return err}
@@ -237,6 +265,7 @@ func run()error{
         if item.Kind!="record_to_reference"{continue}
         count++;roots[item.PersistedRoot]=true;byID[item.CaseID]=item
         if err:=checkReference(item,r);err!=nil{return fmt.Errorf("%s: %w",item.CaseID,err)}
+        if err:=verifyMutationGuard(item,r);err!=nil{return fmt.Errorf("%s: %w",item.CaseID,err)}
     }
     if count!=28||len(roots)!=28{return fmt.Errorf("expected 28 distinct reference roots, got %d/%d",count,len(roots))}
     x,ok:=byID["reference.record-to-ref.exogenous-input"];if !ok{return fmt.Errorf("missing exogenous source")}

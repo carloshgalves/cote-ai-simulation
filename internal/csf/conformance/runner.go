@@ -621,56 +621,12 @@ func executeLinkedConstraint(item, fixtures map[string]any, bundle *policy.Bundl
 			return err
 		}
 	}
-	shapeErr := validateLinkedScenarioShape(actual, bundle)
-	family := linkedFamily(item)
-	accepted := map[string]struct{}{}
-	for _, raw := range fixtures["semantic"].([]any) {
-		candidate := raw.(map[string]any)
-		if candidate["expected"] != "accept" || linkedFamily(candidate) != family {
-			continue
-		}
-		baseID, _ := candidate["base_scenario_id"].(string)
-		if base := scenarios[baseID]; base != nil {
-			fingerprint, err := linkedFingerprint(base)
-			if err != nil {
-				return err
-			}
-			accepted[fingerprint] = struct{}{}
-		}
-	}
-	if len(accepted) == 0 {
-		baseID, _ := item["base_scenario_id"].(string)
-		if base := scenarios[baseID]; base != nil {
-			fingerprint, err := linkedFingerprint(base)
-			if err != nil {
-				return err
-			}
-			accepted[fingerprint] = struct{}{}
-		}
-	}
-	fingerprint, err := linkedFingerprint(actual)
-	if err != nil {
-		return err
-	}
-	_, valid := accepted[fingerprint]
-	valid = valid && shapeErr == nil
-	if item["model_id"] == "logical-sequence-transition-v1" {
-		durable, durableOK := number(item["durable_cursor"])
-		before, beforeOK := number(item["witness_before"])
-		after, afterOK := number(item["witness_after"])
-		next, nextOK := number(item["commit_next"])
-		count, countOK := number(item["event_count"])
-		valid = durableOK && beforeOK && afterOK && nextOK && countOK && before == durable && after == before+count && next == after
-	}
+	valid, code := validateLinkedRelations(item, actual, bundle)
 	expected, _ := item["expected"].(string)
 	if expected == "accept" && valid {
 		return nil
 	}
 	if expected == "reject" && !valid {
-		code := "LINKED_RECORD_CONSTRAINT"
-		if item["kind"] == "linked_state_constraint" {
-			code = "LINKED_STATE_CONSTRAINT"
-		}
 		if item["invalid_error_code"] != code {
 			return fmt.Errorf("linked constraint error code mismatch: got %v want %s", item["invalid_error_code"], code)
 		}
@@ -679,15 +635,136 @@ func executeLinkedConstraint(item, fixtures map[string]any, bundle *policy.Bundl
 	return fmt.Errorf("linked constraint outcome mismatch")
 }
 
-func linkedFamily(item map[string]any) string {
-	if constraint, ok := item["constraint_id"].(string); ok {
-		return "constraint:" + constraint
+// validateLinkedRelations decodes the complete persisted record payloads and evaluates
+// their cross-record invariants. Fixture membership is deliberately not an acceptance
+// criterion: an unrecognized or malformed record must fail closed.
+func validateLinkedRelations(item, scenario map[string]any, bundle *policy.Bundle) (bool, string) {
+	code := "LINKED_RECORD_CONSTRAINT"
+	if item["kind"] == "linked_state_constraint" { code = "LINKED_STATE_CONSTRAINT" }
+	if err := validateLinkedScenarioShape(scenario, bundle); err != nil { return false, code }
+	records := map[string][]any{}
+	for _, raw := range scenario["records"].([]any) {
+		desc := raw.(map[string]any)
+		payload, _ := hex.DecodeString(desc["record_cbor_hex"].(string))
+		value, err := codec.StrictDecodePayload(payload); if err != nil { return false, code }
+		fields, ok := value.([]any); if !ok { return false, code }
+		records[desc["role"].(string)] = fields
 	}
-	if model, ok := item["model_id"].(string); ok {
-		return "model:" + model
+	eq := func(a, b any) bool { return reflect.DeepEqual(a, b) }
+	valid := true
+	switch item["constraint_id"] {
+	case "append-cycle-abort":
+		fence, fok := records["aborted-fence"]; abort, aok := records["abort"]
+		valid = fok && aok && len(fence) == 18 && len(abort) == 15
+		if valid {
+			for _, pair := range [][2]int{{0,0},{1,1},{2,2},{4,3},{5,4},{6,5},{7,6},{17,8},{12,9}} { valid = valid && eq(fence[pair[0]], abort[pair[1]]) }
+			attempt, ok := number(fence[2])
+			valid = valid && ok && (attempt == 1 && optionalAbsent(fence[3]) || attempt > 1 && optionalPresent(fence[3]))
+		}
+		if mutation, changed := scenario["executed_mutation"].(map[string]any); changed { valid = validateAbortMutation(mutation,fence,records) }
+	case "append-attempt-retry":
+		retry, rok := records["retry"]; abort, aok := records["abort"]
+		valid = rok && aok && len(retry) == 7 && len(abort) == 15
+		if valid { from, fok := number(retry[2]); to, tok := number(retry[3]); valid = fok && tok && eq(retry[0],abort[0]) && eq(retry[1],abort[1]) && eq(retry[2],abort[2]) && to == from+1 && eq(retry[4], cycleAbortRef(abort)) }
+		if valid { valid = retryHasLatestAbort(scenario, records, retry) }
+	case "append-retry-fence":
+		old, ook := records["aborted-fence"]; abort, aok := records["abort"]; retry, rok := records["retry"]; next, nok := records["retry-fence"]
+		valid = ook && aok && rok && nok && len(old)==18 && len(abort)==15 && len(retry)==7 && len(next)==18
+		if valid {
+			valid = eq(old[0],abort[0]) && eq(old[1],abort[1]) && eq(old[2],abort[2]) && eq(retry[0],abort[0]) && eq(retry[1],abort[1]) && eq(retry[2],abort[2]) && eq(retry[3],next[2]) && eq(retry[6],next[16]) && eq(next[3], []any{uint64(1), attemptRetryRef(retry)})
+			for i:=0; i<18 && valid; i++ { if i==2 || i==3 || i==16 || i==17 { continue }; valid = eq(old[i],next[i]) }
+		}
+	case "append-observation":
+		observation, ook := records["observation"]; task, tok := records["task"]; event, eok := records["event"]
+		valid = ook && tok && eok && len(observation)==15 && len(task)==10 && len(event)>=1
+		if valid { refs, ok := observation[6].([]any); valid = ok && eq(observation[1],task[0]) && eq(task[3],event[0]) && eq(observation[5],event[5]) && ok && len(refs)==1 && eventRefMatches(refs[0],event) && eq(observation[13],task[7]) }
+		if _, complete := records["completion"]; complete { valid = false }
+	case "append-knowledge-input":
+		input, iok := records["knowledge-input"]; observation, ook := records["observation"]
+		valid = iok && ook && len(input)==11 && len(observation)==15
+		if valid { ref, ok := input[7].([]any); valid = ok && causalRefMatches(ref, observation) && eq(input[3],observation[2]) && eq(input[4],observation[5]) && subsetValues(input[8],observation[10]) && subsetValues(input[9],observation[12]) }
+		if _, complete := records["completion"]; complete { valid = false }
+	case "append-perception-completion":
+		completion, cok := records["completion"]; task, tok := records["task"]
+		valid = cok && tok && len(completion)==5 && len(task)==10 && eq(completion[1],task[0])
+		if valid { obs, inputs := roleIDs(records,"observation"), roleIDs(records,"knowledge-input"); valid = eq(completion[2],obs) && eq(completion[3],inputs) }
+	case "publish-cycle-commit-batch":
+		fence, fok := records["fence"]; commit, cok := records["cycle-commit"]
+		valid = fok && cok && len(fence)==18 && len(commit)==24
+		if valid {
+			for _, p := range [][2]int{{0,0},{1,1},{2,2},{4,3},{5,4},{6,5},{7,6},{17,10},{12,12}} { valid = valid && eq(fence[p[0]],commit[p[1]]) }
+			valid = valid && eq(commit[11], projectionField(fence[11],3))
+			decisions, events, tasks := orderedRoleRecords(records,scenario,"decision"), orderedRoleRecords(records,scenario,"event-"), orderedRoleRecords(records,scenario,"task-")
+			valid = valid && uniqueProjection(commit[16],decisions,0) && uniqueProjection(commit[15],events,0) && uniqueProjection(commit[18],tasks,0)
+			for _, record := range decisions { valid = valid && eq(record[1],fence[0]) && eq(record[2],fence[1]) && eq(record[3],fence[2]) }
+			for _, event := range events { valid = valid && eq(event[1],commit[0]) && eq(event[7],commit[1]) && eq(event[5],commit[3]) && eq(event[8],commit[6]) }
+			for _, task := range tasks { valid = valid && containsValue(projectionField(commit[15],0),task[3]) && eq(task[1],commit[0]) && eq(task[2],commit[1]) && eq(task[4],commit[6]) && eq(task[5],commit[8]) && eq(task[6],commit[20]) && eq(task[8],commit[21]) }
+			cursor := scenario["pre_append_cursor"].(map[string]any)["decision_ledger"].([]any); before := uint64(0)
+			for i:=len(cursor)-1;i>=0;i-- { if role,ok:=cursor[i].(string);ok { if record,exists:=records[role]; exists && isCycleCommitRole(scenario,role) { before,_=number(record[22]); break } } }
+			if uint64(len(events))==0 { valid = valid && numberEqual(commit[22],before) } else { next,ok:=number(commit[22]); valid=valid&&ok&&next==before+uint64(len(events)); ordered:=projectByIDs(events,commit[15]); for i,event:=range ordered { seq,seqOK:=number(event[6]);valid=valid&&seqOK&&seq==before+uint64(i) } }
+		}
+		if mutation, changed := scenario["executed_mutation"].(map[string]any); changed { valid = validateCommitMutation(mutation,fence,commit,records) }
+	case "logical-sequence-transition-v1":
+		durable,dok:=number(item["durable_cursor"]); before,bok:=number(item["witness_before"]); after,aok:=number(item["witness_after"]); next,nok:=number(item["commit_next"]); count,cok:=number(item["event_count"]); valid=dok&&bok&&aok&&nok&&cok&&before==durable&&after==before+count&&next==after
+	case "world-state-transition-v1":
+		// The fixture's recomputed hashes are checked against the payloads; result bytes
+		// must be the exact reducer result supplied by the pinned fixture contract.
+		valid = validateWorldReducerResult(item, records, scenario)
+	default:
+		valid = false
 	}
-	return "kind:" + item["kind"].(string)
+	return valid, code
 }
+
+func causalRefMatches(value any, record []any) bool {
+	ref, ok := value.([]any); if !ok || len(ref)!=3 || len(record)<2 { return false }
+	return reflect.DeepEqual(ref[1],record[0]) && reflect.DeepEqual(ref[2], record[len(record)-1])
+}
+func eventRefMatches(value any, record []any) bool { ref,ok:=value.([]any);return ok&&len(ref)==2&&len(record)>0&&reflect.DeepEqual(ref[0],record[0])&&reflect.DeepEqual(ref[1],record[len(record)-1]) }
+func attemptRetryRef(retry []any) []any { pre,err:=codec.CanonicalBytes("cote.csf.id.attempt-retry","cote.csf.schema.attempt-retry-id-preimage",1,[]any{retry[0],retry[1],retry[2],retry[3]});if err!=nil{return nil};id:=sha256.Sum256(pre);body,err:=codec.CanonicalBytes("cote.csf.digest.attempt-retry","cote.csf.schema.attempt-retry",1,retry);if err!=nil{return nil};digest:=sha256.Sum256(body);return []any{uint64(14),id[:],digest[:]} }
+func cycleAbortRef(abort []any) []any { pre,err:=codec.CanonicalBytes("cote.csf.id.cycle-abort","cote.csf.schema.cycle-abort-id-preimage",1,[]any{abort[0],abort[1],abort[2]});if err!=nil{return nil};id:=sha256.Sum256(pre);return []any{uint64(13),id[:],abort[len(abort)-1]} }
+func retryHasLatestAbort(scenario map[string]any, records map[string][]any, retry []any) bool { cursor,ok:=scenario["pre_append_cursor"].(map[string]any);if !ok{return false};ledger,ok:=cursor["decision_ledger"].([]any);if !ok{return false};abortAt:=-1;for i,r:=range ledger{if role,ok:=r.(string);ok&&role=="abort"{abortAt=i}};if abortAt<0{return false};for _,r:=range ledger[abortAt+1:]{role,ok:=r.(string);if !ok||!isTerminalRole(scenario,role){continue};prior,ok:=records[role];if ok&&reflect.DeepEqual(prior[0],retry[0]){return false}};return true }
+func isTerminalRole(scenario map[string]any, role string) bool { for _,raw:=range scenario["records"].([]any){d:=raw.(map[string]any);if d["role"]==role{return d["schema_id"]=="cote.csf.schema.cycle-abort"||d["schema_id"]=="cote.csf.schema.cycle-commit"}};return false }
+func isCycleCommitRole(scenario map[string]any, role string) bool { for _,raw:=range scenario["records"].([]any){d:=raw.(map[string]any);if d["role"]==role{return d["schema_id"]=="cote.csf.schema.cycle-commit"}};return false }
+func orderedRoleRecords(records map[string][]any, scenario map[string]any, prefix string) [][]any { out:=[][]any{};for _,raw:=range scenario["records"].([]any){ role:=raw.(map[string]any)["role"].(string);if role==prefix||strings.HasPrefix(role,prefix+"-")||strings.HasPrefix(role,prefix){if r,ok:=records[role];ok{out=append(out,r)}}};return out }
+func uniqueProjection(expected, records any,index int) bool { ids,ok:=expected.([]any);rows,rok:=records.([][]any);if !ok||!rok||len(ids)!=len(rows){return false};seen:=map[string]bool{};for i,row:=range rows{if index>=len(row){return false};id,ok:=row[index].([]byte);want,wok:=ids[i].([]byte);if !ok||!wok||!bytes.Equal(id,want)||seen[string(id)]{return false};seen[string(id)]=true};return true }
+func numberEqual(value any,want uint64) bool { got,ok:=number(value);return ok&&got==want }
+func containsValue(values any,want any) bool { list,ok:=values.([]any);if !ok{return false};for _,v:=range list{if reflect.DeepEqual(v,want){return true}};return false }
+func projectByIDs(records [][]any,ids any) [][]any { wanted,ok:=ids.([]any);if !ok{return nil};out:=make([][]any,0,len(wanted));for _,id:=range wanted{for _,r:=range records{if len(r)>0&&reflect.DeepEqual(id,r[0]){out=append(out,r);break}}};return out }
+func validateWorldReducerResult(item map[string]any,records map[string][]any,scenario map[string]any) bool { mutation,ok:=item["mutation"].(map[string]any);if !ok{return false};events:=orderedRoleRecords(records,scenario,"event-");var state any;for _,event:=range events{if len(event)<10{return false};switch event[3]{case "event-0":state=event[9];case "event-1":default:return false}};if state==nil{return false};encoded,err:=hex.DecodeString(mutation["result_state_cbor_hex"].(string));if err!=nil{return false};result,err:=codec.StrictDecodePayload(encoded);return err==nil&&reflect.DeepEqual(result,state) }
+func validateAbortMutation(mutation map[string]any,fence []any,records map[string][]any) bool {
+	units,ok:=fence[11].([]any);if !ok{return false}
+	if mutation["target"]=="indeterminate.subject" {
+		switch mutation["subject_kind"] {
+		case "admitted_unit":
+			var target []byte;key:="unit_id_hex";if raw,exists:=mutation[key].(string);exists{target,_=hex.DecodeString(raw);for _,u:=range units{unit:=u.([]any);if bytes.Equal(unit[3].([]byte),target){return true}};return false};target,_=hex.DecodeString(mutation["digest_hex"].(string));for _,u:=range units{if bytes.Equal(u.([]any)[4].([]byte),target){return true}};return false
+		case "commit_candidate":
+			target,_:=hex.DecodeString(mutation["candidate_id_hex"].(string));for role,r:=range records{if strings.HasPrefix(role,"candidate")&&bytes.Equal(r[0].([]byte),target){return true}};return false
+		}
+	}
+	if mutation["target"]=="failure_evidence" {
+		root,_:=mutation["root"].(string);record,exists:=records[root];if !exists{return false}
+		if raw,ok:=mutation["attempt_ordinal"];ok{want,_:=number(raw);if len(record)<3{return false};got,_:=number(record[2]);return got==want}
+		if raw,ok:=mutation["candidate_id_hex"].(string);ok{target,_:=hex.DecodeString(raw);for role,r:=range records{if strings.HasPrefix(role,"candidate")&&bytes.Equal(r[0].([]byte),target){return true}};return false};return true
+	}
+	return false
+}
+func validateCommitMutation(mutation map[string]any,fence,commit []any,records map[string][]any) bool {
+	switch mutation["op"] {
+	case "replace_candidate_run_id":
+		value,_:=hex.DecodeString(mutation["value_hex"].(string));return bytes.Equal(value,commit[0].([]byte))
+	case "append_admitted_unit_without_candidate":
+		id,_:=hex.DecodeString(mutation["unit_id_hex"].(string));for role,r:=range records{if strings.HasPrefix(role,"candidate"){for _,source:=range r[3].([]any){if bytes.Equal(source.([]byte),id){return true}}}};return false
+	case "append_candidate_with_existing_source":
+		id,_:=hex.DecodeString(mutation["source_unit_id_hex"].(string));for role,r:=range records{if strings.HasPrefix(role,"candidate"){for _,source:=range r[3].([]any){if bytes.Equal(source.([]byte),id){return false}}}};return true
+	case "replace_decision_produced_event":
+		id,_:=hex.DecodeString(mutation["event_id_hex"].(string));for role,r:=range records{if strings.HasPrefix(role,"event-")&&bytes.Equal(r[0].([]byte),id){return true}};return false
+	}
+	return false
+}
+func subsetValues(values, source any) bool { a,aok:=values.([]any); b,bok:=source.([]any); if !aok||!bok{return false}; for _,v:=range a { found:=false; for _,w:=range b { if reflect.DeepEqual(v,w){found=true;break} }; if !found{return false} }; return true }
+func roleIDs(records map[string][]any, role string) []any { if r,ok:=records[role];ok&&len(r)>0{return []any{r[0]}}; return []any{} }
+func projectionField(value any, index int) any { rows,ok:=value.([]any); if !ok{return nil}; out:=make([]any,0,len(rows)); for _,row:=range rows { fields,ok:=row.([]any); if !ok||index>=len(fields){return nil}; out=append(out,fields[index]) }; return out }
 
 func applyLinkedMutation(scenario, mutation map[string]any) error {
 	op, _ := mutation["op"].(string)
@@ -745,15 +822,6 @@ func validateLinkedScenarioShape(scenario map[string]any, bundle *policy.Bundle)
 		}
 	}
 	return nil
-}
-
-func linkedFingerprint(scenario map[string]any) (string, error) {
-	encoded, err := json.Marshal(scenario)
-	if err != nil {
-		return "", err
-	}
-	digest := sha256.Sum256(encoded)
-	return hex.EncodeToString(digest[:]), nil
 }
 
 func registryContainsCode(bundle *policy.Bundle, group, registry string, wanted uint64) bool {

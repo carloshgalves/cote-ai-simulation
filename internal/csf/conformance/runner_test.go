@@ -97,6 +97,25 @@ func TestLinkedConstraintRejectsMutatedErrorCode(t *testing.T) {
 	t.Fatal("linked retry fixture missing")
 }
 
+func TestLinkedRetryReferenceAndLogicalBatchRules(t *testing.T) {
+	fixtures, err := readObject(bundlePath + "/fixtures.json")
+	if err != nil { t.Fatal(err) }
+	bundle, err := policy.Load(bundlePath)
+	if err != nil { t.Fatal(err) }
+	wanted := map[string]bool{
+		"linked-record.append-retry-fence.retry-ref-mismatch": false,
+		"linked-record.append-attempt-retry.valid": false,
+		"linked-record.publish-cycle-commit-batch.empty-commit-advances-logical-sequence": false,
+	}
+	for _, raw := range fixtures["semantic"].([]any) {
+		item := raw.(map[string]any)
+		if _, ok := wanted[item["case_id"].(string)]; !ok { continue }
+		if err := executeSemantic(item, fixtures, bundle); err != nil { t.Fatalf("%s: %v", item["case_id"], err) }
+		wanted[item["case_id"].(string)] = true
+	}
+	for id, seen := range wanted { if !seen { t.Fatalf("linked regression case %q missing", id) } }
+}
+
 func TestReferenceBindingRejectsCorruptedContainerBytes(t *testing.T) {
 	fixtures, err := readObject(bundlePath + "/fixtures.json")
 	if err != nil {

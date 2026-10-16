@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
+import { isDeepStrictEqual } from "node:util";
 import { unicode15Unassigned } from "./unicode15-unassigned.ts";
 
 const EXPECTED = {
@@ -334,8 +335,6 @@ function executeSemantic(item, fixtures, registries) {
   if (!found && item.persisted_identity === undefined) throw new Error("semantic bytes missing");
 }
 
-function linkedFamily(item) { return item.constraint_id ? `constraint:${item.constraint_id}` : item.model_id ? `model:${item.model_id}` : `kind:${item.kind}`; }
-function linkedFingerprint(scenario) { return hex(sha256(Buffer.from(JSON.stringify(scenario)))); }
 function applyLinkedMutation(scenario, mutation) {
   if (["replace_record", "remove_record"].includes(mutation.op)) {
     const index = scenario.records.findIndex((record) => record.role === mutation.record_role); if (index < 0) throw new Error(`linked mutation role ${mutation.record_role} missing`);
@@ -353,18 +352,178 @@ function executeLinkedConstraint(item, fixtures, registries) {
   const scenarios = new Map(fixtures.linked_record_scenarios.map((scenario) => [scenario.scenario_id, scenario]));
   const scenarioID = item.input_scenario_id ?? item.base_scenario_id, source = scenarios.get(scenarioID); if (!source) throw new Error(`linked scenario ${scenarioID} missing`);
   const actual = structuredClone(source); if (item.mutation) applyLinkedMutation(actual, item.mutation);
-  const accepted = new Set(); const family = linkedFamily(item);
-  for (const candidate of fixtures.semantic) if (candidate.expected === "accept" && linkedFamily(candidate) === family && scenarios.has(candidate.base_scenario_id)) accepted.add(linkedFingerprint(scenarios.get(candidate.base_scenario_id)));
-  if (!accepted.size && scenarios.has(item.base_scenario_id)) accepted.add(linkedFingerprint(scenarios.get(item.base_scenario_id)));
-  let valid = linkedScenarioShapeValid(actual, registries) && accepted.has(linkedFingerprint(actual));
-  if (item.model_id === "logical-sequence-transition-v1") valid = item.witness_before === item.durable_cursor && item.witness_after === item.witness_before + item.event_count && item.commit_next === item.witness_after;
+  const { valid, code } = validateLinkedRelations(item, actual, registries);
   if (item.expected === "accept" && valid) return;
   if (item.expected === "reject" && !valid) {
-    const actualCode = item.kind === "linked_state_constraint" ? "LINKED_STATE_CONSTRAINT" : "LINKED_RECORD_CONSTRAINT";
-    if (item.invalid_error_code !== actualCode) throw new Error(`linked constraint error code mismatch: got ${item.invalid_error_code} want ${actualCode}`);
+    if (item.invalid_error_code !== code) throw new Error(`linked constraint error code mismatch: got ${item.invalid_error_code} want ${code}`);
     return;
   }
-  throw new Error("linked constraint outcome mismatch");
+  throw new Error(`linked constraint outcome mismatch (valid=${valid})`);
+}
+
+function validateLinkedRelations(item, scenario, registries) {
+  const code = item.kind === "linked_state_constraint" ? "LINKED_STATE_CONSTRAINT" : "LINKED_RECORD_CONSTRAINT";
+  if (!linkedScenarioShapeValid(scenario, registries)) return { valid: false, code };
+  const records = new Map();
+  for (const record of scenario.records) {
+    try { records.set(record.role, parseCBOR(Buffer.from(record.record_cbor_hex, "hex")).value); }
+    catch { return { valid: false, code }; }
+  }
+  const get = (role) => records.get(role);
+  const equal = isDeepStrictEqual;
+  let valid = false;
+  switch (item.constraint_id) {
+    case "append-cycle-abort": {
+      const fence = get("aborted-fence"), abort = get("abort");
+      valid = Array.isArray(fence) && fence.length === 18 && Array.isArray(abort) && abort.length === 15;
+      if (valid) {
+        for (const [a, b] of [[0,0],[1,1],[2,2],[4,3],[5,4],[6,5],[7,6],[8,7],[17,8],[12,9]]) valid &&= equal(fence[a], abort[b]);
+        valid &&= fence[2] === 1n ? equal(fence[3], [0n]) : fence[2] > 1n && Array.isArray(fence[3]) && fence[3][0] === 1n;
+      }
+      if (scenario.executed_mutation) valid = validateAbortMutation(scenario.executed_mutation, fence, records);
+      break;
+    }
+    case "append-attempt-retry": {
+      const retry = get("retry"), abort = get("abort");
+      valid = Array.isArray(retry) && retry.length === 7 && Array.isArray(abort) && abort.length === 15;
+      if (valid) {
+        valid = equal(retry[0], abort[0]) && equal(retry[1], abort[1]) && equal(retry[2], abort[2]) && retry[3] === retry[2] + 1n && equal(retry[4], cycleAbortRef(abort));
+        const cursor = scenario.pre_append_cursor?.decision_ledger ?? [], abortIndex = cursor.indexOf("abort"), descriptors = new Map(scenario.records.map((record) => [record.role, record]));
+        for (const role of cursor.slice(abortIndex + 1)) { const descriptor = descriptors.get(role), terminal = descriptor && ["cote.csf.schema.cycle-abort", "cote.csf.schema.cycle-commit"].includes(descriptor.schema_id); const prior = get(role); if (terminal && Array.isArray(prior) && equal(prior[0], retry[0])) valid = false; }
+      }
+      break;
+    }
+    case "append-retry-fence": {
+      const old = get("aborted-fence"), abort = get("abort"), retry = get("retry"), next = get("retry-fence");
+      valid = Array.isArray(old) && old.length === 18 && Array.isArray(abort) && abort.length === 15 && Array.isArray(retry) && retry.length === 7 && Array.isArray(next) && next.length === 18;
+      if (valid) {
+        valid = equal(old[0], abort[0]) && equal(old[1], abort[1]) && equal(old[2], abort[2]) && equal(retry[0], abort[0]) && equal(retry[1], abort[1]) && equal(retry[2], abort[2]) && equal(retry[3], next[2]) && equal(retry[6], next[16]) && equal(next[3], [1n, attemptRetryRef(retry)]);
+        for (let i = 0; i < 18 && valid; i++) if (![2,3,16,17].includes(i)) valid = equal(old[i], next[i]);
+      }
+      break;
+    }
+    case "append-observation": {
+      const observation = get("observation"), task = get("task"), event = get("event");
+      valid = Array.isArray(observation) && observation.length === 15 && Array.isArray(task) && task.length === 10 && Array.isArray(event) && event.length >= 1;
+      if (valid) valid = equal(observation[1], task[0]) && equal(task[3], event[0]) && equal(observation[5], event[5]) && Array.isArray(observation[6]) && observation[6].length === 1 && eventRefMatches(observation[6][0], event) && equal(observation[13], task[7]) && !records.has("completion");
+      break;
+    }
+    case "append-knowledge-input": {
+      const input = get("knowledge-input"), observation = get("observation");
+      valid = Array.isArray(input) && input.length === 11 && Array.isArray(observation) && observation.length === 15;
+      if (valid) valid = causalRefMatches(input[7], observation, 16) && equal(input[3], observation[2]) && equal(input[4], observation[5]) && isSubset(input[8], observation[10]) && isSubset(input[9], observation[12]) && !records.has("completion");
+      break;
+    }
+    case "append-perception-completion": {
+      const completion = get("completion"), task = get("task");
+      valid = Array.isArray(completion) && completion.length === 5 && Array.isArray(task) && task.length === 10 && equal(completion[1], task[0]);
+      if (valid) valid = equal(completion[2], records.has("observation") ? [get("observation")[0]] : []) && equal(completion[3], records.has("knowledge-input") ? [get("knowledge-input")[0]] : []);
+      break;
+    }
+    case "publish-cycle-commit-batch": {
+      const fence = get("fence"), commit = get("cycle-commit");
+      valid = Array.isArray(fence) && fence.length === 18 && Array.isArray(commit) && commit.length === 24;
+      if (valid) {
+        for (const [a, b] of [[0,0],[1,1],[2,2],[4,3],[5,4],[6,5],[7,6],[17,10],[12,12]]) valid &&= equal(fence[a], commit[b]);
+        const admitted = fence[11]; valid &&= Array.isArray(admitted) && equal(commit[11], admitted.map((unit) => unit[3]));
+        const decisions = [...records.entries()].filter(([role]) => role === "decision" || role.startsWith("decision-" )).map(([, value]) => value);
+        const events = [...records.entries()].filter(([role]) => role.startsWith("event-")).map(([, value]) => value);
+        const tasks = [...records.entries()].filter(([role]) => role.startsWith("task-")).map(([, value]) => value);
+        valid &&= uniqueProjection(commit[16], decisions, 0) && uniqueProjection(commit[15], events, 0) && uniqueProjection(commit[18], tasks, 0);
+        for (const record of decisions) valid &&= equal(record[1], fence[0]) && equal(record[2], fence[1]) && equal(record[3], fence[2]);
+        for (const event of events) valid &&= equal(event[1], commit[0]) && equal(event[7], commit[1]) && equal(event[5], commit[3]) && equal(event[8], commit[6]);
+        const eventIDs = new Set(events.map((event) => Buffer.from(event[0]).toString("hex")));
+        for (const task of tasks) valid &&= eventIDs.has(Buffer.from(task[3]).toString("hex")) && equal(task[1], commit[0]) && equal(task[2], commit[1]) && equal(task[4], commit[6]) && equal(task[5], commit[8]) && equal(task[6], commit[20]) && equal(task[8], commit[21]);
+        const cursorRoles = scenario.pre_append_cursor?.decision_ledger ?? [], priorCommitRole = [...cursorRoles].reverse().find((role) => descriptorsRecordIsCommit(scenario, role));
+        const priorCommit = priorCommitRole ? records.get(priorCommitRole) : null, before = priorCommit ? priorCommit[22] : 0n;
+        valid &&= commit[22] === before + BigInt(events.length);
+        const orderedEvents = (commit[15] ?? []).map((id) => events.find((event) => Buffer.from(event[0]).equals(id)));
+        valid &&= orderedEvents.every((event, index) => event && event[6] === before + BigInt(index));
+        const source = get("source-unit");
+        if (source) valid &&= admitted.some((unit) => Buffer.from(unit[3]).equals(source[0]));
+        for (const decision of decisions) {
+          const candidateRef = decision[6];
+          if (Array.isArray(candidateRef) && candidateRef.length === 2 && candidateRef[0] === 1n) valid &&= [...records.entries()].some(([role, candidate]) => role.startsWith("candidate") && Buffer.isBuffer(candidate[0]) && candidate[0].equals(candidateRef[1]));
+        }
+      }
+      if (scenario.executed_mutation) valid = validateCommitMutation(scenario.executed_mutation, fence, commit, records);
+      break;
+    }
+    case "logical-sequence-transition-v1":
+      valid = item.witness_before === item.durable_cursor && item.witness_after === item.witness_before + item.event_count && item.commit_next === item.witness_after;
+      break;
+    case "world-state-transition-v1":
+      valid = validateWorldReducerResult(item, records);
+      break;
+  }
+  return { valid, code };
+}
+
+function causalRefMatches(ref, target, kind) {
+  return derivedRefMatches(ref, target, kind) && Buffer.isBuffer(ref[1]) && Buffer.from(target[0]).equals(ref[1]);
+}
+function derivedRefMatches(ref, target, kind) { return Array.isArray(ref) && ref.length === 3 && typeof ref[0] === "bigint" && ref[0] === BigInt(kind) && Buffer.isBuffer(ref[2]) && Buffer.isBuffer(target.at(-1)) && ref[2].equals(target.at(-1)); }
+function optionalDerivedRefMatches(value, target, kind) { return Array.isArray(value) && value.length === 2 && value[0] === 1n && derivedRefMatches(value[1], target, kind); }
+function linkedOptionalRefKind(value, kind) { return Array.isArray(value) && value.length === 2 && value[0] === 1n && Array.isArray(value[1]) && value[1][0] === BigInt(kind); }
+function eventRefMatches(ref, event) { return Array.isArray(ref) && ref.length === 2 && Buffer.isBuffer(ref[0]) && Buffer.isBuffer(ref[1]) && ref[0].equals(event[0]) && ref[1].equals(event.at(-1)); }
+function attemptRetryRef(retry) { return [14n, sha256(canonicalEnvelope("cote.csf.id.attempt-retry", "cote.csf.schema.attempt-retry-id-preimage", 1, encodeCanonical([retry[0], retry[1], retry[2], retry[3]]))), sha256(canonicalEnvelope("cote.csf.digest.attempt-retry", "cote.csf.schema.attempt-retry", 1, encodeCanonical(retry)))]; }
+function cycleAbortRef(abort) { return [13n, sha256(canonicalEnvelope("cote.csf.id.cycle-abort", "cote.csf.schema.cycle-abort-id-preimage", 1, encodeCanonical([abort[0], abort[1], abort[2]]))), Buffer.from(abort.at(-1))]; }
+function uniqueProjection(expected, records, index) { return Array.isArray(expected) && records.length === expected.length && records.every((record, position) => Buffer.isBuffer(record[index]) && Buffer.from(expected[position]).equals(record[index])) && new Set(expected.map((value) => Buffer.from(value).toString("hex"))).size === expected.length; }
+function descriptorsRecordIsCommit(scenario, role) { return scenario.records.some((record) => record.role === role && record.schema_id === "cote.csf.schema.cycle-commit"); }
+function validateWorldReducerResult(item, records) {
+  const mutation = item.mutation; if (!mutation || !Array.isArray(mutation.recompute)) return false;
+  const events = [...records.entries()].filter(([role]) => role.startsWith("event-")).map(([, record]) => record);
+  let state = null;
+  for (const event of events) {
+    const eventType = event[3];
+    if (eventType === "event-0") state = event[9];
+    else if (eventType !== "event-1") return false;
+  }
+  if (!state) return false;
+  try { return Buffer.from(mutation.result_state_cbor_hex, "hex").equals(encodeCanonical(state)); } catch { return false; }
+}
+function validateAbortMutation(mutation, fence, records) {
+  const units = fence?.[11]; if (!Array.isArray(units)) return false;
+  if (mutation.target === "indeterminate.subject") {
+    if (mutation.subject_kind === "admitted_unit") {
+      const id = mutation.unit_id_hex ? Buffer.from(mutation.unit_id_hex, "hex") : null;
+      const matches = units.filter((unit) => id ? Buffer.from(unit[3]).equals(id) : Buffer.from(unit[4]).equals(Buffer.from(mutation.digest_hex ?? "", "hex")));
+      return matches.length === 1;
+    }
+    if (mutation.subject_kind === "commit_candidate") {
+      const id = Buffer.from(mutation.candidate_id_hex, "hex");
+      return [...records.entries()].some(([role, record]) => role.startsWith("candidate") && Buffer.from(record[0]).equals(id));
+    }
+  }
+  if (mutation.target === "failure_evidence") {
+    const registered = [...records.entries()].some(([role, record]) => role === mutation.root && record.length > 0);
+    if (!registered) return false;
+    const targetAttempt = mutation.attempt_ordinal;
+    if (targetAttempt !== undefined) return records.get(mutation.root)?.[2] === BigInt(targetAttempt);
+    if (mutation.candidate_id_hex) return [...records.entries()].some(([role, record]) => role.startsWith("candidate") && Buffer.from(record[0]).equals(Buffer.from(mutation.candidate_id_hex, "hex")));
+    return true;
+  }
+  return false;
+}
+function validateCommitMutation(mutation, fence, commit, records) {
+  if (mutation.op === "replace_candidate_run_id") return Buffer.from(mutation.value_hex, "hex").equals(Buffer.from(commit[0]));
+  if (mutation.op === "append_admitted_unit_without_candidate") {
+    const id = Buffer.from(mutation.unit_id_hex, "hex");
+    return [...records.entries()].filter(([role]) => role.startsWith("candidate")).some(([, candidate]) => candidate[3].some((unitID) => Buffer.from(unitID).equals(id)));
+  }
+  if (mutation.op === "append_candidate_with_existing_source") {
+    const id = Buffer.from(mutation.source_unit_id_hex, "hex");
+    const existing = [...records.entries()].filter(([role]) => role.startsWith("candidate")).some(([, candidate]) => candidate[3].some((unitID) => Buffer.from(unitID).equals(id)));
+    return !existing;
+  }
+  if (mutation.op === "replace_decision_produced_event") {
+    const id = Buffer.from(mutation.event_id_hex, "hex");
+    return [...records.entries()].filter(([role]) => role.startsWith("event-")).some(([, event]) => Buffer.from(event[0]).equals(id));
+  }
+  return false;
+}
+function isSubset(values, source) {
+  return Array.isArray(values) && Array.isArray(source) && values.every((value) => source.some((candidate) => isDeepStrictEqual(value, candidate)));
 }
 
 function executeRecordBinding(item, fixtures, registries) {
@@ -734,6 +893,13 @@ function verifyMutationGuards(fixtures, registries) {
   const unchangedBase = structuredClone(linked); delete unchangedBase.mutation;
   rejected = false; try { executeSemantic(unchangedBase, fixtures, registries); } catch { rejected = true; }
   if (!rejected) throw new Error("linked validator accepted an unchanged valid base as a rejection");
+  for (const caseID of ["linked-record.append-retry-fence.retry-ref-mismatch", "linked-record.publish-cycle-commit-batch.empty-commit-advances-logical-sequence"]) {
+    const regression = fixtures.semantic.find((item) => item.case_id === caseID);
+    if (!regression) throw new Error(`linked regression fixture missing: ${caseID}`);
+    const changedError = structuredClone(regression); changedError.invalid_error_code = "NOT_A_REAL_ERROR";
+    rejected = false; try { executeSemantic(changedError, fixtures, registries); } catch { rejected = true; }
+    if (!rejected) throw new Error(`linked validator accepted a mutated error code: ${caseID}`);
+  }
   const binding = fixtures.semantic.find((item) => item.case_id === "record-enum.conflict-set.conflict-kind");
   if (!binding) throw new Error("record binding mutation guard fixture missing");
   const malformedEnvelope = structuredClone(binding); malformedEnvelope.accepted_envelope_hex = "00";

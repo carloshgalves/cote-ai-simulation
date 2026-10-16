@@ -20,6 +20,12 @@ jobs:
           node-version: "22"
       - name: Verify record-to-reference semantic bindings
         run: node tools/csf-fixture-link-audit.mjs
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: false
+      - name: Independently verify all 28 links in Go
+        run: go run tools/csf-fixture-link-audit.go
       - name: Verify conformance receipt and unchanged schema hashes
         shell: bash
         run: |

@@ -64,6 +64,9 @@ def _validate_request(request, seed_time):
     filters = request.get("filters", {})
     if not isinstance(filters, dict):
         raise ValueError("filters must be an object")
+    unknown_filters = set(filters) - {"retrieval_roles", "topics", "evidence_ids"}
+    if unknown_filters:
+        raise ValueError(f"filters contains unknown keys: {sorted(unknown_filters)}")
     for field in ("retrieval_roles", "topics", "evidence_ids"):
         if field in filters:
             _validate_string_list(filters[field], field)

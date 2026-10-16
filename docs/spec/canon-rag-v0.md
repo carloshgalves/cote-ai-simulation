@@ -44,7 +44,7 @@ nem linguagem do runtime de produção.
 ### Dentro
 
 - CanonEvidence V2;
-- compilação conceitual `CanonEvidence + CanonClaim + SourceRegistry → RetrievalRecord`;
+- compilação conceitual `CanonEvidence + CanonClaim + SourceRegistry + ConflictRegistry → RetrievalRecord`;
 - corpus manifest;
 - request/result provider-neutral;
 - quatro gates do ADR-0005 + gate epistêmico/conflito;
@@ -90,13 +90,20 @@ Cada evidence V2 possui:
 - `situation_tags[]`;
 - `provenance`.
 
+`supports_claims` contém claims apenas em `KNOWLEDGE_EVIDENCE`. `BEHAVIORAL_CANON` não pode
+transportar claims factuais; quando um texto exemplifica comportamento, sua liberação depende da
+lane, do ator e do tempo, sem carregar fatos secretos embutidos em claims.
+
 A V0 exige exatamente uma referência `strength: primary` por evidence. Referências
 `corroborating` podem existir, mas não mudam a identidade narrativa da unidade.
 
 ### 4.2 RetrievalRecord
 
 Artefato derivado, nunca editado à mão. Uma unidade recuperável mantém identidade 1:1 com um
-CanonEvidence. Campos mínimos:
+CanonEvidence. O compiler resolve claims contra o registro autoritativo de conflitos; somente
+conflitos `open` cujo `blocks_compilation_of` inclui um claim bloqueiam esse claim. A referência
+em provenance precisa apontar para conflito conhecido, e todo bloqueio aberto precisa aparecer
+na provenance do claim. Campos mínimos:
 
 - `record_id`: derivado de `evidence_id`;
 - `evidence_id`;
@@ -126,9 +133,10 @@ Artefato derivado contendo:
 - digest dos arquivos fonte;
 - lista de evidence IDs;
 - work IDs e versões;
-- algoritmo de compilação;
+- algoritmo e versão imutável de compilação;
 - algoritmo de chunking;
 - backend id;
+- digests do registro de conflitos, do schema de collection e dos arquivos de collection validados;
 - timestamp apenas informativo.
 
 O mesmo conjunto de fontes + mesma versão de compiler produz o mesmo digest e os mesmos records.
@@ -188,6 +196,14 @@ Regras:
 - filtros ausentes ou com lista vazia não restringem candidatos; listas não vazias de
   `retrieval_roles`, `topics` e `evidence_ids` são allow-lists aplicadas antes dos gates.
 - `top_k >= 1`.
+- Propriedades desconhecidas em `filters` são erro de contrato, nunca filtros silenciosamente
+  ignorados.
+- Cada `EvidenceCollection` é validada contra o schema de container antes do flattening; versão
+  desconhecida ou campos adicionais são rejeitados.
+
+`TimePoint` aceita exatamente uma coordenada causal entre `anchor`, `date` e
+`years_before_y1` (`note` é auxiliar). `TimeBound` rejeita campos específicos de outros modes.
+Metadados temporais ambíguos não chegam aos gates.
 
 ## 7. Pipeline e gates
 

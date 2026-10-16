@@ -17,6 +17,7 @@ from common import (  # noqa: E402
     corpus_manifest,
     lexical_score,
     load_claims,
+    load_conflicts,
     load_corpus,
     load_source_registry,
     load_suite,
@@ -33,7 +34,7 @@ def _inputs():
     registry = load_source_registry(REPO)
     registry = merge_source_registries(registry, suite["fixture_source_registry"])
     claims = claims + suite["fixture_claims"]
-    records = compile_records(evidence + suite["fixture_records"], claims, registry)
+    records = compile_records(evidence + suite["fixture_records"], claims, registry, load_conflicts(REPO) + suite["fixture_conflicts"])
     manifest = corpus_manifest(evidence, load_claims(REPO), load_source_registry(REPO))
     return suite, evidence, claims, registry, records, manifest
 
@@ -80,8 +81,16 @@ def test_factual_lane_requires_resolved_verified_temporally_valid_claim():
 
     conflicted_claims = deepcopy(claims)
     claim = next(item for item in conflicted_claims if item["id"] == "fixture.claim.future")
-    claim["provenance"]["conflicts"] = ["fixture.conflict.claim-only"]
-    compiled = compile_records(suite["fixture_records"], conflicted_claims, registry)
+    claim["provenance"]["conflicts"] = ["conflict.fixture.claim-only"]
+    fixture_conflict = {
+        "id": "conflict.fixture.claim-only",
+        "schema_version": 1,
+        "question": "Fixture conflict on a claim.",
+        "positions": [{"label": "a", "statement": "a"}, {"label": "b", "statement": "b"}],
+        "status": "open",
+        "blocks_compilation_of": ["fixture.claim.future"],
+    }
+    compiled = compile_records(suite["fixture_records"], conflicted_claims, registry, load_conflicts(REPO) + [fixture_conflict])
     output = retrieve(compiled, request, suite["time_order"], manifest["digest"], suite["seed_time"])
     assert {item["evidence_id"]: item["reason"] for item in output["excluded"]}[
         "ev.fixture.post-divergence.fact"

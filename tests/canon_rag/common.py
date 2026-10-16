@@ -16,6 +16,7 @@ import yaml
 
 WORD_RE = re.compile(r"\w+", re.UNICODE)
 COMPILER_ID = "canon-rag-v0-reference"
+COMPILER_VERSION = 2
 CHUNKING_ID = "evidence-1to1-max1600-no-overlap"
 BACKEND = {"id": "reference-lexical", "version": 1}
 SCHEMA_DIR = Path(__file__).resolve().parents[2] / "data/canon/schema"
@@ -23,6 +24,14 @@ SCHEMA_DIR = Path(__file__).resolve().parents[2] / "data/canon/schema"
 
 def canonical_json(value: Any) -> bytes:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("utf-8")
+
+
+class CorpusEvidence(list):
+    """Flattened evidence retaining validated collection-file identities."""
+
+    def __init__(self, values=(), collection_sources=()):
+        super().__init__(values)
+        self.collection_sources = list(collection_sources)
 
 
 def sha256_json(value: Any) -> str:
@@ -69,7 +78,12 @@ def _index_unique(items: list[dict[str, Any]], kind: str) -> dict[str, dict[str,
 def _schema_validator(schema_name: str) -> jsonschema.Draft202012Validator:
     schema = json.loads((SCHEMA_DIR / schema_name).read_text(encoding="utf-8"))
     common = json.loads((SCHEMA_DIR / "common.schema.json").read_text(encoding="utf-8"))
-    registry = Registry().with_resource(common["$id"], Resource.from_contents(common))
+    evidence = json.loads((SCHEMA_DIR / "evidence.schema.json").read_text(encoding="utf-8"))
+    registry = (
+        Registry()
+        .with_resource(common["$id"], Resource.from_contents(common))
+        .with_resource(evidence["$id"], Resource.from_contents(evidence))
+    )
     return jsonschema.Draft202012Validator(
         schema,
         registry=registry,
@@ -147,7 +161,9 @@ def _resolve_supports(
 
 
 def _compiled_claim(
-    claim: dict[str, Any], work_by_id: dict[str, dict[str, Any]]
+    claim: dict[str, Any],
+    work_by_id: dict[str, dict[str, Any]],
+    conflict_by_id: dict[str, dict[str, Any]],
 ) -> dict[str, Any]:
     provenance = claim.get("provenance", {})
     resolved_supports, errors = _resolve_supports(provenance, work_by_id)
@@ -167,12 +183,30 @@ def _compiled_claim(
             for item in resolved_supports
         ):
             errors.append(f"verified_claim_tier_not_allowed:{claim_kind}")
+    referenced_conflicts = set(provenance.get("conflicts", []))
+    for conflict_id in referenced_conflicts:
+        if conflict_id not in conflict_by_id:
+            errors.append(f"unresolved_conflict:{conflict_id}")
+    blocking_conflicts = {
+        conflict_id
+        for conflict_id, conflict in conflict_by_id.items()
+        if conflict.get("status") == "open"
+        and claim["id"] in conflict.get("blocks_compilation_of", [])
+    }
+    referenced_open_conflicts = {
+        conflict_id
+        for conflict_id in referenced_conflicts
+        if conflict_id in conflict_by_id
+        and conflict_by_id[conflict_id].get("status") == "open"
+    }
+    if blocking_conflicts != referenced_open_conflicts:
+        errors.append("conflict_provenance_mismatch")
     return {
         "claim_id": claim["id"],
         "claim_kind": claim_kind,
         "effective_time": deepcopy(claim.get("temporal")),
         "epistemic_status": status,
-        "open_conflicts": sorted(provenance.get("conflicts", [])),
+        "open_conflicts": sorted(blocking_conflicts),
         "verification": {
             "verified_by": provenance.get("verified_by"),
             "verified_at": provenance.get("verified_at"),
@@ -188,13 +222,22 @@ def compile_records(
     evidence: list[dict[str, Any]],
     claims: list[dict[str, Any]],
     source_registry: dict[str, Any],
+    conflicts: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     """Compile authoritative inputs while retaining invalid records for fail-closed traces."""
 
     _index_unique(evidence, "evidence")
     claim_by_id = _index_unique(claims, "claim")
     work_by_id = _index_unique(source_registry.get("works", []), "source work")
+    if conflicts is None:
+        conflicts = load_conflicts(SCHEMA_DIR.parents[0])
+    conflict_by_id = _index_unique(conflicts, "conflict")
     registry_errors = _schema_errors("source_registry", source_registry, "source.schema.json")
+    registry_errors.extend(
+        error
+        for conflict in conflict_by_id.values()
+        for error in _schema_errors("conflict", conflict, "conflict.schema.json")
+    )
     records = []
     for ev in sorted(evidence, key=lambda item: item.get("id", "")):
         errors = list(registry_errors)
@@ -232,7 +275,7 @@ def compile_records(
             if claim is None:
                 errors.append(f"unresolved_claim:{claim_id}")
             else:
-                compiled_claim = _compiled_claim(claim, work_by_id)
+                compiled_claim = _compiled_claim(claim, work_by_id, conflict_by_id)
                 resolved_claims.append(compiled_claim)
                 errors.extend(compiled_claim["compilation_errors"])
                 if not set(continuity).intersection(compiled_claim["continuity"]):
@@ -270,6 +313,7 @@ def corpus_manifest(
     evidence: list[dict[str, Any]],
     claims: list[dict[str, Any]],
     source_registry: dict[str, Any],
+    conflicts: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     evidence_by_id = _index_unique(evidence, "evidence")
     claim_by_id = _index_unique(claims, "claim")
@@ -289,6 +333,9 @@ def corpus_manifest(
         }
     )
     work_by_id = _index_unique(source_registry.get("works", []), "source work")
+    if conflicts is None:
+        conflicts = load_conflicts(SCHEMA_DIR.parents[0])
+    conflict_by_id = _index_unique(conflicts, "conflict")
     normalized_registry = deepcopy(source_registry)
     normalized_registry["works"] = sorted(
         normalized_registry.get("works", []), key=lambda item: item["id"]
@@ -310,6 +357,13 @@ def corpus_manifest(
     manifest = {
         "manifest_version": 1,
         "compiler_id": COMPILER_ID,
+        "compiler_version": COMPILER_VERSION,
+        "evidence_collection_schema_digest": sha256_json(
+            json.loads((SCHEMA_DIR / "evidence_collection.schema.json").read_text(encoding="utf-8"))
+        ),
+        "evidence_collections": sorted(
+            getattr(evidence, "collection_sources", []), key=lambda item: item["path"]
+        ),
         "chunking_id": CHUNKING_ID,
         "backend": BACKEND,
         "evidence_ids": [item["id"] for item in ordered_evidence],
@@ -319,7 +373,12 @@ def corpus_manifest(
             "evidence": [{"id": item["id"], "digest": sha256_json(item)} for item in ordered_evidence],
             "claims": [{"id": item["id"], "digest": sha256_json(item)} for item in ordered_claims],
             "source_registry": sha256_json(normalized_registry),
+            "conflicts": [
+                {"id": item["id"], "digest": sha256_json(item)}
+                for item in sorted(conflict_by_id.values(), key=lambda item: item["id"])
+            ],
         },
+        "conflict_ids": sorted(conflict_by_id),
     }
     manifest["digest"] = sha256_json(manifest)
     return manifest
@@ -342,9 +401,31 @@ def lexical_score(query: str, record: dict[str, Any]) -> float:
 
 def load_corpus(repo: Path) -> list[dict[str, Any]]:
     output = []
+    collection_sources = []
     for path in sorted((repo / "data/canon/evidence/focal-v0").glob("*.json")):
-        output.extend(json.loads(path.read_text(encoding="utf-8"))["evidence"])
-    return output
+        raw = path.read_bytes()
+        document = json.loads(raw)
+        _schema_validator("evidence_collection.schema.json").validate(document)
+        output.extend(document["evidence"])
+        collection_sources.append(
+            {
+                "path": path.relative_to(repo).as_posix(),
+                "digest": hashlib.sha256(raw).hexdigest(),
+            }
+        )
+    return CorpusEvidence(output, collection_sources)
+
+
+def load_conflicts(repo: Path) -> list[dict[str, Any]]:
+    conflicts = []
+    for path in sorted((repo / "data/canon/conflicts").glob("*.yaml")):
+        conflict = yaml.safe_load(path.read_text(encoding="utf-8"))
+        errors = _schema_errors("conflict", conflict, "conflict.schema.json")
+        if errors:
+            raise ValueError(f"{path}: {'; '.join(errors)}")
+        conflicts.append(conflict)
+    _index_unique(conflicts, "conflict")
+    return sorted(conflicts, key=lambda item: item["id"])
 
 
 def load_claims(repo: Path) -> list[dict[str, Any]]:

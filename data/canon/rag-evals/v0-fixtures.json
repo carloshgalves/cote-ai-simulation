@@ -174,7 +174,7 @@
           "ln"
         ],
         "conflicts": [
-          "fixture.conflict.open"
+          "conflict.fixture.open"
         ]
       }
     }
@@ -264,7 +264,7 @@
           }
         ],
         "continuity": ["ln"],
-        "conflicts": ["fixture.conflict.open"]
+        "conflicts": ["conflict.fixture.open"]
       }
     }
   ],
@@ -280,5 +280,18 @@
         "edition": "fixture-v1"
       }
     ]
-  }
+  },
+  "fixture_conflicts": [
+    {
+      "id": "conflict.fixture.open",
+      "schema_version": 1,
+      "question": "Does the fixture rule hold?",
+      "positions": [
+        {"label": "support", "statement": "A fixture supports the rule."},
+        {"label": "counter", "statement": "A fixture challenges the rule."}
+      ],
+      "status": "open",
+      "blocks_compilation_of": ["fixture.claim.conflicted"]
+    }
+  ]
 }

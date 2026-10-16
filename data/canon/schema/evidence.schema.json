@@ -94,7 +94,7 @@
       },
       "then": {
         "required": ["actors"],
-        "properties": {"actors": {"minItems": 1}}
+        "properties": {"actors": {"minItems": 1}, "supports_claims": {"maxItems": 0}}
       }
     },
     {

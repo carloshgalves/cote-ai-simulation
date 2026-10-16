@@ -3,14 +3,14 @@ import sys
 HERE=Path(__file__).resolve().parent
 REPO=HERE.parents[1]
 sys.path.insert(0,str(HERE))
-from common import compile_records,corpus_manifest,load_claims,load_corpus,load_source_registry,load_suite,merge_source_registries
+from common import compile_records,corpus_manifest,load_claims,load_conflicts,load_corpus,load_source_registry,load_suite,merge_source_registries
 from retrieval import retrieve
 
 def setup():
     c,s=load_corpus(REPO),load_suite(REPO)
     claims=load_claims(REPO)
     registry=load_source_registry(REPO)
-    records=compile_records(c+s["fixture_records"],claims+s["fixture_claims"],merge_source_registries(registry,s["fixture_source_registry"]))
+    records=compile_records(c+s["fixture_records"],claims+s["fixture_claims"],merge_source_registries(registry,s["fixture_source_registry"]),load_conflicts(REPO)+s["fixture_conflicts"])
     return c,s,records,corpus_manifest(c,claims,registry)["digest"]
 
 def case(s,i):

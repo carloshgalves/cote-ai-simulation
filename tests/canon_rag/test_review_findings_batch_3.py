@@ -13,6 +13,7 @@ from common import (  # noqa: E402
     compile_records,
     corpus_manifest,
     load_claims,
+    load_conflicts,
     load_corpus,
     load_source_registry,
     load_suite,
@@ -103,7 +104,7 @@ def test_belief_claim_cannot_authorize_the_known_canon_facts_lane():
 @pytest.mark.parametrize("invalid_opt_in", ["false", 1, 0, None])
 def test_unverified_behavioral_opt_in_requires_a_real_boolean(invalid_opt_in):
     suite, claims, registry, manifest = _inputs()
-    records = compile_records(suite["fixture_records"], claims, registry)
+    records = compile_records(suite["fixture_records"], claims, registry, load_conflicts(REPO) + suite["fixture_conflicts"])
     request = _case(suite, "normal-kiyotaka-behavior")
     request["allow_unverified_behavioral"] = invalid_opt_in
 
@@ -130,7 +131,7 @@ def test_unverified_behavioral_opt_in_requires_a_real_boolean(invalid_opt_in):
 )
 def test_safety_relevant_request_collections_reject_wrong_types(field, invalid_value):
     suite, claims, registry, manifest = _inputs()
-    records = compile_records(suite["fixture_records"], claims, registry)
+    records = compile_records(suite["fixture_records"], claims, registry, load_conflicts(REPO) + suite["fixture_conflicts"])
     request = _case(suite, "post-divergence-fact")
     if field == "knowledge_horizon":
         request[field] = invalid_value

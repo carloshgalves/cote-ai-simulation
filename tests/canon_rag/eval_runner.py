@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from pathlib import Path
 import unicodedata
 
 from common import (
     BACKEND,
     compile_records,
     corpus_manifest,
+    load_conflicts,
     merge_source_registries,
     sha256_json,
 )
@@ -51,6 +53,7 @@ def evaluate_suite(corpus, claims, source_registry, suite):
         corpus + suite.get("fixture_records", []),
         claims + fixture_claims,
         merge_source_registries(source_registry, fixture_registry),
+        load_conflicts(Path(__file__).resolve().parents[2]) + suite.get("fixture_conflicts", []),
     )
     manifest = corpus_manifest(corpus, claims, source_registry)
     suite_identity = {

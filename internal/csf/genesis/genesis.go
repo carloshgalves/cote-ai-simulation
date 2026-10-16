@@ -252,7 +252,7 @@ func validateTypedValue(value any, schemaRefs any, bundle *policy.Bundle) error 
 	if _, err := bundle.Operation(inner.DomainTag, inner.SchemaID, inner.SchemaVersion, false); err != nil {
 		return fmt.Errorf("typed value operation: %w", err)
 	}
-	if err := validateKnownPayloadShape(inner.SchemaID, inner.Value); err != nil {
+	if err := validateKnownPayloadShape(inner.SchemaID, inner.Value, bundle); err != nil {
 		return err
 	}
 	actual := identity.OpaqueContentHash(encoded)
@@ -282,7 +282,7 @@ func schemaRefContains(value any, schema string, version uint32) bool {
 // The runtime's base bundle currently admits snapshot-pending-state as the
 // initial world state. Extension schemas are not loaded by this ticket's
 // runtime, so an unknown schema cannot be treated as validated.
-func validateKnownPayloadShape(schema string, value any) error {
+func validateKnownPayloadShape(schema string, value any, bundle *policy.Bundle) error {
 	if schema != "cote.csf.schema.snapshot-pending-state" {
 		return fmt.Errorf("typed value schema %q has no loaded validator", schema)
 	}
@@ -290,12 +290,160 @@ func validateKnownPayloadShape(schema string, value any) error {
 	if !ok || len(fields) != 10 {
 		return fmt.Errorf("snapshot pending state must contain 10 fields")
 	}
-	for _, field := range fields {
-		if _, ok := field.([]any); !ok {
-			return fmt.Errorf("snapshot pending state sections must be arrays")
+	limits := []int{65535, 65535, 65535, 1024, 65535, 65535, 65535, 65535, 65535, 65535}
+	for i, field := range fields {
+		items, ok := field.([]any)
+		if !ok || len(items) > limits[i] {
+			return fmt.Errorf("snapshot pending state section %d has invalid cardinality", i)
+		}
+		for _, item := range items {
+			var err error
+			switch i {
+			case 0, 2, 3, 4, 5, 6, 8:
+				err = validateCausalRef(item, bundle)
+			case 1:
+				err = validateTriggerRuntimeState(item)
+			case 7:
+				err = validateInputRef(item, bundle)
+			case 9:
+				err = validatePerceptionTaskCompletion(item)
+			}
+			if err != nil {
+				return fmt.Errorf("snapshot pending state section %d: %w", i, err)
+			}
 		}
 	}
 	return nil
+}
+
+func validateCausalRef(value any, bundle *policy.Bundle) error {
+	fields, ok := value.([]any)
+	if !ok || len(fields) != 3 {
+		return fmt.Errorf("invalid causal ref")
+	}
+	kind, kindOK := unsigned(fields[0])
+	id, idOK := fields[1].([]byte)
+	digest, digestOK := fields[2].([]byte)
+	if !kindOK || kind > uint64(^uint16(0)) || !registryEnumContains(bundle, "reference_kind", kind) || !idOK || len(id) != 32 || !digestOK || len(digest) != 32 {
+		return fmt.Errorf("invalid causal ref fields")
+	}
+	return nil
+}
+
+func validateInputRef(value any, bundle *policy.Bundle) error {
+	fields, ok := value.([]any)
+	if !ok || len(fields) == 0 {
+		return fmt.Errorf("invalid input ref")
+	}
+	kind, kindOK := unsigned(fields[0])
+	if !kindOK || !registryEnumContains(bundle, "unit_kind", kind) {
+		return fmt.Errorf("invalid input ref kind")
+	}
+	if kind == 0 {
+		if len(fields) != 4 {
+			return fmt.Errorf("slot input ref must contain four fields")
+		}
+		slotKind, ok := unsigned(fields[1])
+		if !ok || slotKind > uint64(^uint8(0)) || !registryEnumContains(bundle, "slot_response_kind", slotKind) {
+			return fmt.Errorf("invalid slot response kind")
+		}
+	} else if kind <= 4 && len(fields) != 3 {
+		return fmt.Errorf("non-slot input ref must contain three fields")
+	} else if kind > 4 {
+		return fmt.Errorf("input ref kind is outside the admitted input-ref range")
+	}
+	idIndex := 1
+	if kind == 0 {
+		idIndex = 2
+	}
+	id, idOK := fields[idIndex].([]byte)
+	digest, digestOK := fields[idIndex+1].([]byte)
+	if !idOK || len(id) != 32 || !digestOK || len(digest) != 32 {
+		return fmt.Errorf("invalid input ref id or digest")
+	}
+	return nil
+}
+
+func validateTriggerRuntimeState(value any) error {
+	fields, ok := value.([]any)
+	if !ok || len(fields) != 8 {
+		return fmt.Errorf("invalid trigger runtime state")
+	}
+	id, idOK := fields[0].([]byte)
+	version, versionOK := unsigned(fields[1])
+	armed, armedOK := fields[3].(bool)
+	exhausted, exhaustedOK := fields[4].(bool)
+	_, countOK := unsigned(fields[5])
+	_, revisionOK := unsigned(fields[7])
+	if !idOK || len(id) != 32 || !versionOK || version > uint64(^uint32(0)) || !armedOK || !exhaustedOK || !countOK || !revisionOK {
+		return fmt.Errorf("invalid trigger runtime state fields")
+	}
+	if err := validateOptional(fields[2], func(v any) bool { _, ok := v.(bool); return ok }); err != nil {
+		return fmt.Errorf("invalid trigger runtime last value: %w", err)
+	}
+	if err := validateOptional(fields[6], func(v any) bool { _, ok := signed(v); return ok }); err != nil {
+		return fmt.Errorf("invalid trigger runtime repeat instant: %w", err)
+	}
+	return nil
+}
+
+func validatePerceptionTaskCompletion(value any) error {
+	fields, ok := value.([]any)
+	if !ok || len(fields) != 5 {
+		return fmt.Errorf("invalid perception task completion")
+	}
+	for _, index := range []int{0, 1, 4} {
+		bytesValue, ok := fields[index].([]byte)
+		if !ok || len(bytesValue) != 32 {
+			return fmt.Errorf("invalid perception task completion id or digest")
+		}
+	}
+	for _, index := range []int{2, 3} {
+		items, ok := fields[index].([]any)
+		if !ok || len(items) > 65535 {
+			return fmt.Errorf("invalid perception task completion list")
+		}
+		for _, item := range items {
+			id, ok := item.([]byte)
+			if !ok || len(id) != 32 {
+				return fmt.Errorf("invalid perception task completion list id")
+			}
+		}
+	}
+	return nil
+}
+
+func validateOptional(value any, valid func(any) bool) error {
+	fields, ok := value.([]any)
+	if !ok || len(fields) == 0 || len(fields) > 2 {
+		return fmt.Errorf("invalid optional value")
+	}
+	variant, ok := unsigned(fields[0])
+	if !ok || variant > 1 || (variant == 0 && len(fields) != 1) || (variant == 1 && (len(fields) != 2 || !valid(fields[1]))) {
+		return fmt.Errorf("invalid optional variant")
+	}
+	return nil
+}
+
+func registryEnumContains(bundle *policy.Bundle, name string, code uint64) bool {
+	enums, ok := bundle.Registries["enums"].(map[string]any)
+	if !ok {
+		return false
+	}
+	entries, ok := enums[name].([]any)
+	if !ok {
+		return false
+	}
+	for _, raw := range entries {
+		fields, ok := raw.([]any)
+		if !ok || len(fields) != 2 {
+			continue
+		}
+		if actual, ok := registryUnsigned(fields[1]); ok && actual == code {
+			return true
+		}
+	}
+	return false
 }
 
 func validateCheckpoints(value any) error {

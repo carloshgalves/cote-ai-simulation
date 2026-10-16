@@ -185,6 +185,38 @@ func TestRejectInitialWorldStateWithWrongSchemaShapeEvenWhenDigestMatches(t *tes
 	requireRejectedGenesis(t, corrupt)
 }
 
+func TestRejectInitialWorldStateWithMalformedNestedValuesEvenWhenDigestMatches(t *testing.T) {
+	validCompletion := []any{bytes.Repeat([]byte{3}, 32), bytes.Repeat([]byte{4}, 32), []any{}, []any{}, bytes.Repeat([]byte{5}, 32)}
+	tests := []struct {
+		name    string
+		section int
+		value   any
+	}{
+		{name: "occurrence-causal-ref-shape", section: 0, value: []any{true}},
+		{name: "pending-unit-input-ref-discriminant", section: 7, value: []any{uint64(0), uint64(9), bytes.Repeat([]byte{1}, 32), bytes.Repeat([]byte{2}, 32)}},
+		{name: "perception-completion-field-count", section: 9, value: []any{validCompletion[0], validCompletion[1], []any{}, []any{}}},
+		{name: "trigger-runtime-state-field-type", section: 1, value: []any{bytes.Repeat([]byte{1}, 32), uint64(1), []any{uint64(1), uint64(1)}, true, false, uint64(0), []any{uint64(0)}, uint64(0)}},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			corrupt := mutateGenesis(t, func(_ *codec.Envelope, payload []any) {
+				state := make([]any, 10)
+				for i := range state {
+					state[i] = []any{}
+				}
+				state[test.section] = []any{test.value}
+				inner, err := codec.CanonicalBytes("cote.csf.snapshot.pending-state", "cote.csf.schema.snapshot-pending-state", 1, state)
+				if err != nil {
+					t.Fatal(err)
+				}
+				digest := identity.OpaqueContentHash(inner)
+				payload[16] = []any{"cote.csf.schema.snapshot-pending-state", uint64(1), inner, digest[:]}
+			})
+			requireRejectedGenesis(t, corrupt)
+		})
+	}
+}
+
 func TestProductionGenesisRejectsFixtureOperationAndSchema(t *testing.T) {
 	fixture, err := os.ReadFile(bundlePath + "/fixtures.json")
 	if err != nil {

@@ -9,7 +9,7 @@
 
 O harness cria um run vazio a partir de um manifesto, valida todos os pins de policy/schema/Unicode,
 serializa records do bundle, deriva ids/digests domain-separated e recusa qualquer byte não
-canônico. Dois runners independentes, em linguagens diferentes, executam os 620 casos normativos e
+canônico. Dois runners independentes, em linguagens diferentes, executam os 621 casos normativos e
 produzem o mesmo relatório de conformidade.
 
 ## Escopo
@@ -44,7 +44,7 @@ O bundle normativo é consumido sem alteração.
 
 ## Testes determinísticos e de propriedade
 
-- 620 casos positivos, negativos, semânticos e de transição passam nos dois runners.
+- 621 casos positivos, negativos, semânticos e de transição passam nos dois runners.
 - Primitivos, inteiros-limite, floats, maps, sets, records, refs e texto produzem golden bytes.
 - Strict decode rejeita CBOR não preferido, indefinite, tags, `undefined`, duplicate key, `-0.0`,
   não-finito, Unicode fora do profile, schema/enum desconhecido e digest/id de tamanho errado.
@@ -68,7 +68,7 @@ locais alternativos aos records já fechados pelo bundle.
 
 ## Evidência de conclusão
 
-1. Relatórios dos dois runners identificam os mesmos 620 casos e ficam verdes no CI.
+1. Relatórios dos dois runners identificam os mesmos 621 casos e ficam verdes no CI.
 2. Um genesis válido é persistido e reencoda byte a byte; corrupção de um pin impede abertura.
 3. Golden ids/digests batem com `BUNDLE.sha256` e fixtures.
 4. Testes de arquitetura provam ausência de LLM, UUID/wall-clock identity e hash genérico causal.

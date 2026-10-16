@@ -42,13 +42,19 @@ Adotar `COTE Causal Canonical Codec V1`, identificado por
 
 O bundle normativo fixa CDDL, domain/schema operations, bindings de cada enum/variant/role,
 identidades de `CausalRef`, chaves separadas de ordering/identidade para coleções set-like, limites,
-dados Unicode e 620 vetores/casos de conformidade. Seus hashes V1 são:
+dados Unicode e 621 vetores/casos de conformidade. Seus hashes V1 são:
 
 - `codec_policy_hash=513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203`;
 - `schema_bundle_hash=ef7c1e4cec18f1491e4b72bd7dd35f49a1c28d77a5bdd89d435122074f5cba18`;
-- `conformance_suite_hash=f9c75b6647ec14b0205806bcfd7b481dcd0d29c9408fb18aa2a50dea1e86dee2`.
+- `conformance_suite_hash=05a226340c4211045d6f3df8f034434f3ac336001158379833f7230df4038dfd`.
 
 O layout completo e os vetores-âncora estão no contrato normativo ligado acima.
+
+A suíte V1 recebeu uma retificação controlada de fixtures semânticos, sem
+alterar codec, CDDL ou registries. O `conformance_suite_hash` anterior foi
+`f9c75b6647ec14b0205806bcfd7b481dcd0d29c9408fb18aa2a50dea1e86dee2`; os bytes históricos permanecem no Git.
+A homologação exige provas executáveis de record → ID/digest → ref para
+todos os 28 roots, com verificadores independentes em Go e TypeScript.
 
 ### 2. Tipos e texto
 

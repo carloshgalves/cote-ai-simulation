@@ -123,13 +123,16 @@ operação lógica e policy ref.
 
 ## Vetores e verificação independente
 
-**Execução de conformidade neste checkpoint:** pendente. Este checkpoint arquitetural publica o
-contrato e os vetores, mas não inclui dois runners independentes nem um workflow que os execute. Uma
-implementação da fundação não pode alegar conformidade até satisfazer esse gate em seu CI.
+**Homologação integrada (2026-10-16):** concluída no checkpoint
+`4273833cbe552d1cde6f8affb5b6c9e695dcf6bf`. `go test ./...` passou, incluindo as regressões de
+Genesis e SQLite; os runners completos Go e TypeScript passaram `621/621` e emitiram relatórios
+byte a byte idênticos. Os auditores independentes passaram `29` fixtures em `28` roots, rejeitaram
+`32` mutações record-only e concordaram em seus relatórios. A integração usa o record de Snapshot
+homologado e seu hash derivado, sem divergência de bytes.
 
-`fixtures.json` contém 156 vetores positivos, 30 negativos, 306 casos semânticos, sete casos de
+`fixtures.json` contém 156 vetores positivos, 30 negativos, 307 casos semânticos, sete casos de
 normalização convergente e dois vetores SHA-256. `causal-transition-fixtures.json` acrescenta 119 casos
-de transição executáveis, totalizando 620 vetores/casos de conformidade. Os positivos cobrem primitivos e limites, Unicode,
+de transição executáveis, totalizando 621 vetores/casos de conformidade. Os positivos cobrem primitivos e limites, Unicode,
 map/list/set, floats, todos os roots persistidos e as 76 operações de id/digest/hash/record do registry.
 Cada um fixa payload CBOR, envelope completo e SHA-256. Os negativos fixam bytes/input e
 `error_code` estável. Os casos semânticos executam bindings de enum em roots completos, subsets de
@@ -238,3 +241,33 @@ representação de primitivo, versão/repertoire Unicode, gramática global de i
 ordem global de map, regra global de float, algoritmo/formato de digest ou forma textual de digest.
 Adicionar um schema/domain tag novo sem mudar essas regras cria novo bundle para um novo run, mas não
 transforma o encoder V1 em V2.
+
+### Retificação controlada dos fixtures (2026-10-16)
+
+Antes da primeira execução integrada, foram corrigidos os casos semânticos de
+`record_to_reference` para vincular preimages e IDs/digests aos records CBOR reais.
+Os 156 vetores positivos de **serialização** permanecem byte a byte inalterados;
+eles não constituem, isoladamente, prova de identidade causal entre record e ref.
+A revisão dos casos semânticos também atualiza os cinco exemplos de
+`admitted_unit_ledger_mismatch` dependentes de `ExogenousInput`.
+Não houve alteração de `profile.json`, `unicode.json`, `foundation.cddl`,
+`registries.json` ou `causal-transition-contracts.json`.
+
+- `codec_policy_hash` e `schema_bundle_hash`: preservados.
+- `conformance_suite_hash` anterior: `f9c75b6647ec14b0205806bcfd7b481dcd0d29c9408fb18aa2a50dea1e86dee2`.
+- `conformance_suite_hash` retificado: `05a226340c4211045d6f3df8f034434f3ac336001158379833f7230df4038dfd`.
+
+Esta correção substitui os fixtures existentes **sem duplicar o bundle**; os bytes
+anteriores continuam recuperáveis pelo histórico Git. A homologação da suíte
+retificada exige verificar os 28 vínculos nos runners Go e TypeScript, inclusive
+campos de identidade e digest que sejam derivados de authorities externas.
+O caso de `ConflictSet` agora inclui dois envelopes de `CommitCandidate`
+no próprio caso semântico para resolver e conferir o `cycle-id` de origem. Um caso adicional de
+`CycleCommit` cobre um evento não vazio: verifica o owner run/cycle, a lista ordenada de event IDs,
+os envelopes selecionados, o digest de batch e `next-logical-sequence`; o caso original vazio fica
+intacto.
+O bundle V1 foi congelado após essa homologação integrada. Seu recibo vigente fixa
+`conformance_suite_hash=05a226340c4211045d6f3df8f034434f3ac336001158379833f7230df4038dfd`.
+Mudanças futuras em fixtures exigem nova suíte e novo recibo; alterações de CDDL, registry ou policy
+seguem as regras de versionamento acima. A atualização dos hashes, por si só, não substitui as provas
+independentes registradas nesta seção.

@@ -218,3 +218,30 @@ func TestFencePublicationRejectsStalePrefixAcrossSQLiteConnections(t *testing.T)
 	got, err := second.GetFence(ctx, fenceID)
 	if err != nil || !bytes.Equal(got, fence.Canonical) { t.Fatalf("durable fence mismatch: %x %v", got, err) }
 }
+
+
+func TestSQLiteFenceSealRejectsLateSourcesAndRoundsAcrossConnections(t *testing.T) {
+	ctx:=context.Background()
+	path:=t.TempDir()+"/sealed.db"
+	first,err:=Open(ctx,path);if err!=nil{t.Fatal(err)};defer first.Close()
+	second,err:=Open(ctx,path);if err!=nil{t.Fatal(err)};defer second.Close()
+	var runID,cycleID,fenceID,sourceID,roundID [32]byte
+	runID[0],cycleID[0],fenceID[0],sourceID[0],roundID[0]=41,42,43,44,45
+	fenceBody,err:=codec.CanonicalPayload([]any{runID[:],cycleID[:],uint64(0),nil,int64(100),uint64(0)})
+	if err!=nil{t.Fatal(err)}
+	if err:=first.AppendFenceIfPrefix(ctx,ports.CanonicalRecord{Identity:fenceID,Canonical:fenceBody},nil);err!=nil{t.Fatal(err)}
+	sourceBytes,err:=codec.CanonicalPayload([]any{"source-declaration-v1",runID[:],"unlisted"})
+	if err!=nil{t.Fatal(err)}
+	sourceRecord:=ports.CanonicalRecord{Identity:sourceID,Canonical:sourceBytes}
+	if err:=second.AppendSourceDeclaration(ctx,runID,sourceRecord);err==nil{t.Fatal("independent connection admitted source after fence")}
+	if err:=second.Append(ctx,sourceRecord);err==nil{t.Fatal("generic store append bypassed durable source seal")}
+	coord:=[]any{int64(100),uint64(0)}
+	roundBytes,err:=codec.CanonicalPayload([]any{roundID[:],runID[:],"schedule",[]any{"cote","actor"},[]any{"act"},coord,[]any{uint64(2),[]any{cycleID[:],fenceID[:]}},uint64(0),uint64(9),uint64(0),nil})
+	if err!=nil{t.Fatal(err)}
+	roundRecord:=ports.CanonicalRecord{Identity:roundID,Canonical:roundBytes}
+	if err:=second.AppendRoundDeclaration(ctx,runID,100,0,roundRecord);err==nil{t.Fatal("independent connection admitted retroactive round")}
+	if err:=second.Append(ctx,roundRecord);err==nil{t.Fatal("generic store append bypassed round seal")}
+	records,err:=first.Records(ctx);if err!=nil{t.Fatal(err)}
+	if len(records)!=0{t.Fatalf("post-fence rejected records were written: %d",len(records))}
+	found,err:=second.GetFence(ctx,fenceID);if err!=nil||!bytes.Equal(found,fenceBody){t.Fatal("published fence is not durable across connections")}
+}

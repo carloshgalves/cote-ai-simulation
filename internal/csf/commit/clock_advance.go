@@ -5,10 +5,8 @@ package commit
 
 import (
     "context"
-    "crypto/sha256"
     "encoding/hex"
     "errors"
-    "fmt"
 
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
@@ -77,7 +75,7 @@ func eventValue(from,to domain.SimulationInstant)([]any,error){
     // perceptual task. Its schema is local to the CLOCK_ADVANCE slice.
     data,err:=codec.CanonicalBytes("cote.csf.event.clock-advanced","cote.csf.schema.clock-advanced",1,[]any{int64(from),int64(to)})
     if err!=nil{return nil,err}
-    h:=sha256.Sum256(data)
+    h:=identity.OpaqueContentHash(data)
     return []any{"cote.csf.schema.clock-advanced",uint64(1),data,h[:]},nil
 }
 func bytes32(v any)([32]byte,error){
@@ -131,7 +129,7 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
     next,err:=clock.ApplyAdvance(state,plan);if err!=nil{return empty,err}
     beforeBytes,err:=clock.Encode(state);if err!=nil{return empty,err}
     afterBytes,err:=clock.Encode(next);if err!=nil{return empty,err}
-    origin,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,[]any{runID[:],[]any{int64(plan.From),uint64(plan.OriginOrdinal)}})
+    origin,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,[]any{runID[:],[]any{int64(plan.From),uint64(plan.OriginOrdinal)}})
     if err!=nil{return empty,err}
     eventOrder:=[]any{uint64(0),origin[:],"clock",uint64(1),uint64(0),uint64(0)}
     eventID,_,err:=d.Sum("cote.csf.id.event","cote.csf.schema.event-id-preimage",1,[]any{runID[:],origin[:],eventOrder})
@@ -185,7 +183,8 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
         if err!=nil{return empty,err}
         pbytes,err:=codec.CanonicalBytes("cote.csf.trigger.predicate","cote.csf.schema.typed-value",1,item.Predicate(next))
         if err!=nil{return empty,err}
-        value:=[]any{"cote.csf.schema.typed-value",uint64(1),pbytes,sha256.Sum256(pbytes)}
+        predicateContentDigest:=identity.OpaqueContentHash(pbytes)
+        value:=[]any{"cote.csf.schema.typed-value",uint64(1),pbytes,predicateContentDigest[:]}
         predicateDigest,_,err:=d.Sum("cote.csf.digest.trigger-predicate-result","cote.csf.schema.typed-value",1,value)
         if err!=nil{return empty,err}
         originRef:=[]any{uint64(0),origin[:],uint64(next.Revision),anyIDs(fired.CausingEventIDs)}

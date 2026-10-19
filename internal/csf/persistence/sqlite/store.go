@@ -18,6 +18,7 @@ import (
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ingressguard"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
@@ -374,6 +375,27 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
 	if sequence != current {
 		return errors.New("source ingress sequence is not gapless")
 	}
+	// A second Ledger opened before closure/fence can hold a stale source
+	// snapshot. Check the canonical eligibility against all durable fences in
+	// the *same transaction* as record+receipt+cursor publication.
+	seals, err := tx.QueryContext(ctx, "SELECT canonical FROM decision_ledger")
+	if err != nil { return err }
+	var entry ingressguard.Entry
+	parsed := false
+	for seals.Next() {
+		var fence []byte
+		if err := seals.Scan(&fence); err != nil { seals.Close(); return err }
+		if !parsed {
+			entry,err=ingressguard.Parse(record,source)
+			if err!=nil {seals.Close();return err}
+			parsed=true
+		}
+		sealedRun,cut,err:=ingressguard.FenceCoordinate(fence)
+		if err!=nil {seals.Close();return err}
+		if err:=ingressguard.Check(entry,sealedRun,cut);err!=nil {seals.Close();return err}
+	}
+	if err:=seals.Err();err!=nil {seals.Close();return err}
+	if err:=seals.Close();err!=nil {return err}
 	if err := appendTx(ctx, tx, record); err != nil {
 		return err
 	}

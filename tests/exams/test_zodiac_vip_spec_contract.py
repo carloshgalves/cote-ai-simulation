@@ -38,7 +38,7 @@ def test_conformance_vectors_and_setup_mutations_are_complete_and_unique():
     vectors = suite["vectors"]
     ids = [item["id"] for item in vectors]
     assert len(vectors) == 18
-    assert len(set(ids)) == 15
+    assert len(set(ids)) == 18
     assert {f"V{n:02d}" for n in range(1, 19)} == {
         item.split("-")[0] for item in ids
     }

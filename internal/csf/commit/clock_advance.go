@@ -55,6 +55,9 @@ type Coordinator struct {
     store Store
     bundle *policy.Bundle
     admissionPolicies admission.Policies
+    // Fault injection is deliberately unexported; only same-package tests
+    // can interrupt a SQLite transaction before its commit.
+    failAfterStep uint8
 }
 
 func New(store Store,bundle *policy.Bundle,policies admission.Policies)*Coordinator {
@@ -115,6 +118,7 @@ func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,run
     fence,err:=fenceCoord.AdmitThenEvaluate(ctx,c.bundle,ledger,cycle,c.admissionPolicies,func(f admission.Fence)error{
         prepared,err:=c.buildBatch(ctx,runID,state,plan,f,typed,triggerWork)
         if err!=nil{return err}
+        prepared.FailAfterStep=c.failAfterStep
         applied=prepared
         return c.store.CommitClockAdvance(ctx,prepared)
     })

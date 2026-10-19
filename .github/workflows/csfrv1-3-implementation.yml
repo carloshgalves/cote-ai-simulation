@@ -19,6 +19,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Check remediation whitespace against reviewed HEAD
+        run: |
+          git fetch --no-tags --depth=1 origin 114d4a9beaac9740b53099a726212ac473041149
+          git diff --check 114d4a9beaac9740b53099a726212ac473041149 HEAD
       - name: Go implementation tests
         run: go test ./...
       - name: Existing Go conformance

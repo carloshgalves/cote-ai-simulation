@@ -1,11 +1,12 @@
 # CSFRV1-3 — checkpoint de implementação (19/10/2026)
 
-**Situação: IMPLEMENTATION IN PROGRESS — PR #19 Draft.** Nenhum merge
-e nenhuma revisão independente executados. Este é o escopo executado
-e testado, não um certificado de homologação.
+**Situação: REVIEW REMEDIATION IMPLEMENTED — PR #19 Draft, aguardando nova revisão independente.**
+Nenhum merge ou aprovação automática. A revisão independente original foi executada
+e seus seis findings foram tratados na branch; validação do implementador
+não substitui re-review.
 
 **Base:** `main@7b7fc7edaf844ff6eeb637299fd6e00ec93f48db`.
-**HEAD de código validado nesta atualização:** `4a1eb737dabc9c719be508b0aeed136966d06fd9`;
+**HEAD do checkpoint anterior à revisão:** `4a1eb737dabc9c719be508b0aeed136966d06fd9`;
 CI de implementação e conformance verdes (`go test ./...`, 621/621 Go,
 621/621 TypeScript, relatórios comparados byte a byte).
 [Go CSFRV1-3](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39313704003/job/118269598597) · [conformance](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39313712927/job/118269627412).
@@ -16,9 +17,11 @@ CI de implementação e conformance verdes (`go test ./...`, 621/621 Go,
   avança lacunas ordinais sem ciclo fictício, confirma `P` contra
   ingressos `Q < P` e atribui piso sucessor correto.
 - SQLite persiste em **uma transação** `CycleCommit`, dois eventos
-  sintéticos não perceptíveis (`clock.advanced` e `body.advanced`),
-  revisão, novo `ClockState`, runtime e `TriggerActivation(PENDING)`.
-  A entrada original do input ledger permanece imutável.
+  temporais sintéticos não perceptíveis (`clock.advanced` e `body.advanced`)
+  e eventos internos de lifecycle `TRIGGER_RUNTIME`/`TRIGGER_ACTIVATION`
+  para as transições registradas. Revisão, novo `ClockState`, runtime,
+  `TriggerActivation(PENDING)` e o conjunto completo de eventos são indivisíveis.
+  A sequência lógica cobre todos os eventos do batch e o input ledger permanece imutável.
 - `TriggerDefinition` v1 é codificada conforme `foundation.cddl`,
   com typed-value versionado `clock-threshold.v1`, dependencies
   canônicas, policy e handler ligado ao policy ref de
@@ -38,9 +41,10 @@ CI de implementação e conformance verdes (`go test ./...`, 621/621 Go,
   apenas **todas** as definições gravadas, reexecuta os predicados
   registrados dentro do commit e exige runtime/ativações exatamente
   correspondentes; não permite omitir triggers nem forjar origem.
-- `ReplayClock` reconstrói `ClockState`, eventos e transições de
-  triggers a partir de genesis, definições seladas, journals e eventos
-  persistidos. Valida digests, causas, ativações e runtime resultante,
+- `ReplayClock` reconstrói `ClockState`, eventos (temporais e lifecycle),
+  transições de triggers e ativações a partir de genesis, definições seladas,
+  journals e eventos persistidos. Valida bytes canônicos integrais, causas,
+  vínculo com AdmissionFence, states tipados e projeções SQL,
   sem receber `TriggerWork` ou predicados do host.
 - `RearmPure` existe como transição pura e requer ID de evento
   causal explícito; não é uma operação de escrita nem uma autorização
@@ -73,9 +77,9 @@ CI de implementação e conformance verdes (`go test ./...`, 621/621 Go,
 11. Replay de um run concluído falha fechado diante de corrupção
     dos registros SQLite de `TriggerDefinition`, runtime, ativação,
     journal, evento ou relógio.
-12. Para avanço temporal puro, cada hash de revisão do mundo é
-    confrontado com o hash validado no genesis; divergência em
-    `world_revisions.state_hash` é detectada, mesmo após reopen.
+12. Para avanço temporal puro, cada hash e os typed-values pré/pós
+    da revisão do mundo são confrontados com o genesis; divergência em
+    `world_revisions.state_hash` ou nos bytes de estado é detectada após reopen.
 13. Teste de arquitetura percorre arquivos Go de produção e exige que
     só o coordinator de `internal/csf/commit/clock_advance.go`
     invoque o port transacional `CommitClockAdvance`.
@@ -99,12 +103,51 @@ aprovação versionada, não mudança de callback de host.
 
 ## Próxima fase
 
-Congelar esta implementação, atualizar o review checklist e executar
-`code-review` independente quando a dependência de rearm estiver
-formalmente delimitada/aceita como interface futura pelo ticket.
+Após a remediação, executar uma **nova sessão independente de `code-review`**
+somente quando solicitada. Não iniciar outra revisão nesta fase de correção.
 **Estado do gate:** parte temporal de CSFRV1-3 validada; rearm manual ainda
 não tem publicação causal executável e permanece pendente do WORK
 CycleCommit. Não inferir aprovação do ticket inteiro a partir da CI verde.
 
 Não mesclar à `main` sem revisão e aprovação formal. Não tocar em
 CSFRV1-4/5, Canon RAG ou Examination Engine nesta branch.
+
+## Checkpoint pós-revisão — 19/10/2026
+
+**Findings congelados da revisão da PR #19:** 1–6, todos High.
+**Commits de correção:** `ba5b602877f5e48d26a1b5f04207ad9e6f7ddd43`,
+`decc67522f3a2523a2fd0a16931bab8b0b947a4e` e
+`657dfd12238c7a06a37fe7a93f47fa3ed0ffdeab`.
+O commit documental/CI subsequente é apenas o checkpoint de validação.
+
+**Correções por finding:**
+
+1. Fatos internos `trigger.runtime.transition` (phase 3) e
+   `trigger.activation.created` (phase 4) acompanham os dois eventos
+   temporais no mesmo `CycleCommit`. O replay reconstrói bytes/ids/ordem
+   integralmente; lifecycle não entra nos `pre_trigger_events`.
+2. `pendingClock` valida todas as linhas de occurrence/activation,
+   inclusive as declaradas consumidas por índice SQL, contra record canônico,
+   identidade, digest, elegibilidade e lifecycle. Replay compartilha o gate.
+3. Commit e replay exigem o `AdmissionFence` durável, derivam seu ID/digest
+   e vinculam plano, cursor de input e prova de fechamento às autoridades
+   de fonte e a seus ingress receipts. Fence ausente não admite replay.
+4. Replay refaz integralmente os bytes da `TriggerActivation` a partir
+   de genesis, definição, runtime e ciclo, não apenas seu próprio digest.
+5. `WorldRevision` tem transição de typed-values íntegros também na
+   revisão zero; estados pré/pós e hashes são confrontados com o genesis.
+6. Bootstrap das occurrences deriva ID/digest, valida coordenação e
+   lifecycle e exige `created-by` correspondente ao genesis persistido.
+
+**Regressões:** index-only tamper de lifecycle, remoção de fence,
+activation re-hashed com eligibility forjada, adulteração de typed
+world state mantendo hash, occurrence com ID/digest falsos, contagem
+e reconstituição de lifecycle events. Permanecem as provas anteriores
+de rollback, worker permutation, rearm clandestino e replay sem host.
+
+**Gate mantido:** rearm manual causal ainda requer `WORK CycleCommit`
+(CSFRV1-4/5), sem `UPDATE` paralelo de runtime. O sucesso da
+remediação não declara esse feature completo nem autoriza merge.
+
+**Próxima fase:** `$code-review CSFRV1-3` independente, apenas por
+solicitação explícita após as checks da PR.

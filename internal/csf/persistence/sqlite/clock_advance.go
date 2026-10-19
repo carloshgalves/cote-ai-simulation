@@ -351,9 +351,14 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
   if !ok||len(origin)!=4||origin[0]!=uint64(0)||!equalBytes(origin[1],b.CycleID[:])||origin[2]!=b.ResultRevision {
    return errors.New("trigger activation origin not bound to committed revision")
   }
-  causeIDs,ok:=origin[3].([]any);if !ok||len(causeIDs)>1{return errors.New("invalid trigger causing event set")}
-  if len(causeIDs)==1&&!equalBytes(causeIDs[0],b.Events[0].Identity[:]) {
-   return errors.New("trigger causal origin is outside committed events")
+  causeIDs,ok:=origin[3].([]any)
+  if !ok||len(causeIDs)>len(b.Events){return errors.New("invalid trigger causing event set")}
+  previousIndex:=-1
+  for _,cause:=range causeIDs {
+   found:=-1
+   for i,item:=range b.Events {if equalBytes(cause,item.Identity[:]){found=i;break}}
+   if found<=previousIndex{return errors.New("trigger cause order/authority is invalid")}
+   previousIndex=found
   }
   wantedID,err:=registeredDigest("cote.csf.id.trigger-activation","cote.csf.schema.trigger-activation-id-preimage",[]any{b.RunID[:],definitionID,fields[4],b.ResultRevision,fields[7]})
   if err!=nil{return err}

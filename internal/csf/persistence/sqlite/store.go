@@ -161,6 +161,40 @@ func (s *Store) AppendFence(ctx context.Context, record ports.CanonicalRecord) e
 	return appendTo(ctx, s.db, "decision_ledger", record)
 }
 
+// AppendFenceIfPrefix compares the input prefix and inserts the fence in one
+// SQLite transaction. A concurrent writer invalidates the read transaction
+// or changes the compared prefix; in either case publication fails closed.
+func (s *Store) AppendFenceIfPrefix(ctx context.Context, fence ports.CanonicalRecord, expected []ports.CanonicalRecord) error {
+	tx, err := s.db.BeginTx(ctx, nil)
+	if err != nil { return err }
+	defer tx.Rollback()
+	rows, err := tx.QueryContext(ctx, "SELECT id,canonical FROM input_ledger ORDER BY rowid")
+	if err != nil { return err }
+	index := 0
+	for rows.Next() {
+		var id, canonical []byte
+		if err := rows.Scan(&id, &canonical); err != nil { rows.Close(); return err }
+		if index >= len(expected) || !bytes.Equal(id, expected[index].Identity[:]) || !bytes.Equal(canonical, expected[index].Canonical) {
+			rows.Close()
+			return errors.New("input ledger changed before fence publication")
+		}
+		index++
+	}
+	if err := rows.Err(); err != nil { rows.Close(); return err }
+	if err := rows.Close(); err != nil { return err }
+	if index != len(expected) { return errors.New("input ledger changed before fence publication") }
+	result, err := tx.ExecContext(ctx, "INSERT OR IGNORE INTO decision_ledger(id,canonical) VALUES(?,?)", fence.Identity[:], fence.Canonical)
+	if err != nil { return err }
+	affected, err := result.RowsAffected()
+	if err != nil { return err }
+	if affected == 0 {
+		var persisted []byte
+		if err := tx.QueryRowContext(ctx, "SELECT canonical FROM decision_ledger WHERE id=?", fence.Identity[:]).Scan(&persisted); err != nil { return err }
+		if !bytes.Equal(persisted, fence.Canonical) { return errors.New("admission fence identity collision") }
+	}
+	return tx.Commit()
+}
+
 func (s *Store) GetFence(ctx context.Context, id [32]byte) ([]byte, error) {
 	var canonical []byte
 	err := s.db.QueryRowContext(ctx, `SELECT canonical FROM decision_ledger WHERE id=?`, id[:]).Scan(&canonical)

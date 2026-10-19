@@ -1,0 +1,35 @@
+name: Canon RAG V0 isolation and determinism
+
+on:
+  pull_request:
+    paths:
+      - "tests/canon_rag/**"
+      - "data/canon/**"
+      - "docs/spec/canon-rag-v0.md"
+      - ".github/workflows/canon-rag-v0.yml"
+  push:
+    branches:
+      - feat/canon-rag-v0
+
+permissions:
+  contents: read
+
+jobs:
+  rag-reference:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+        hash-seed: ["0", "123"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install reference test dependencies
+        run: python -m pip install "pytest>=8,<10" "jsonschema>=4.21,<5" "PyYAML>=6,<7"
+      - name: Validate corpus gates, isolation and golden determinism
+        env:
+          PYTHONHASHSEED: ${{ matrix.hash-seed }}
+        run: python -m pytest tests/canon_rag -q

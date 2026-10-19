@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "collection": "evidence.focal-v0.kakeru",
+  "evidence": [
+    {
+      "id": "ev.kakeru.v03.island-pressure-display",
+      "schema_version": 2,
+      "retrieval_role": "BEHAVIORAL_CANON",
+      "text": "On the island test, Ryuen uses a confrontational public display, pressures disobedient classmates and makes uncertainty about his objective strategically useful.",
+      "story_time": {
+        "mode": "HOLDS_BY",
+        "holds_by": {
+          "anchor": "Y1_M03"
+        },
+        "origin": "UNKNOWN",
+        "basis": "Volume 3 island test."
+      },
+      "narrative_position": {
+        "work": "ln.y1.v03",
+        "ordinal": 220
+      },
+      "actors": [
+        "actor.kakeru-ryuen"
+      ],
+      "topics": [
+        "strategic-pressure",
+        "intimidation",
+        "deception",
+        "special-exam"
+      ],
+      "situation_tags": [
+        "island-exam",
+        "rival-contact",
+        "public-display"
+      ],
+      "provenance": {
+        "epistemic_status": "UNVERIFIED",
+        "supports": [
+          {
+            "work": "ln.y1.v03",
+            "locator": {
+              "chapter": 2,
+              "scene": "Class C beach camp and Ryuen's public strategy"
+            },
+            "edition": "seven-seas-en",
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "discovered_via": [
+          {
+            "tier": 5,
+            "ref": "you-zitsu-wiki:volume-3-summary",
+            "retrieved_at": "2026-09-29"
+          }
+        ],
+        "verified_by": null,
+        "verified_at": null,
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": []
+      }
+    }
+  ]
+}

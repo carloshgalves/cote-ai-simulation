@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "collection": "evidence.focal-v0.kiyotaka",
+  "evidence": [
+    {
+      "id": "ev.kiyotaka.v01.reluctant-social-help",
+      "schema_version": 2,
+      "retrieval_role": "BEHAVIORAL_CANON",
+      "text": "Kiyotaka initially resists helping Kushida bridge the distance with Horikita and agrees only after pressure, preferring low exposure to a visible social role.",
+      "story_time": {
+        "mode": "HOLDS_BY",
+        "holds_by": {
+          "anchor": "Y1_M01"
+        },
+        "origin": "UNKNOWN",
+        "basis": "Early Volume 1 school life."
+      },
+      "narrative_position": {
+        "work": "ln.y1.v01",
+        "ordinal": 400
+      },
+      "actors": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "topics": [
+        "social-involvement",
+        "self-concealment",
+        "peer-mediation"
+      ],
+      "situation_tags": [
+        "social-request",
+        "reluctant-assistance"
+      ],
+      "provenance": {
+        "epistemic_status": "UNVERIFIED",
+        "supports": [
+          {
+            "work": "ln.y1.v01",
+            "locator": {
+              "chapter": 4,
+              "scene": "Kushida asks Kiyotaka to help approach Horikita"
+            },
+            "edition": "seven-seas-en",
+            "quote_policy": "paraphrase-only",
+            "strength": "primary"
+          }
+        ],
+        "discovered_via": [
+          {
+            "tier": 5,
+            "ref": "you-zitsu-wiki:volume-1-summary",
+            "retrieved_at": "2026-09-29"
+          }
+        ],
+        "verified_by": null,
+        "verified_at": null,
+        "continuity": [
+          "ln"
+        ],
+        "conflicts": []
+      }
+    }
+  ]
+}

@@ -41,7 +41,7 @@ func DefinitionBytes(d Definition, handler []any) ([]byte,error) {
  for i,x:=range d.Dependencies{deps[i]=x}
  return codec.CanonicalPayload([]any{d.ID[:],uint64(d.Version),
   []any{PredicateSchemaID,uint64(1),payload,h[:]},uint64(d.Policy),
-  d.FireOnInitialTrue,repeat,deps,handler}),nil
+  d.FireOnInitialTrue,repeat,deps,handler})
 }
 
 func DecodeDefinition(raw []byte,allowedHandlers [][]any,bundle *policy.Bundle)(Definition,[]any,error){

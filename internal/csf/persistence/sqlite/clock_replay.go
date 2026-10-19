@@ -211,6 +211,25 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  // All temporal events in this slice belong to replayed CycleCommits.
  if err:=s.db.QueryRowContext(ctx,"SELECT count(*) FROM event_store").Scan(&count);err!=nil{return report,err}
  if count!=report.ReplayedEvents{return report,errors.New("event store diverged from CycleCommit history")}
+ // WorldRevision is an authoritative ledger: every row must have exactly
+ // one terminal CycleCommit, with revision zero as the sole genesis row.
+ // Checking only the revisions referenced by known commits misses orphans.
+ revisions,err:=s.db.QueryContext(ctx,"SELECT revision FROM world_revisions ORDER BY revision")
+ if err!=nil{return report,err}
+ var expectedRevision uint64
+ for revisions.Next(){
+  var revision int64
+  if err:=revisions.Scan(&revision);err!=nil{revisions.Close();return report,err}
+  if revision<0||uint64(revision)!=expectedRevision{
+   revisions.Close();return report,errors.New("world revisions contain a missing or orphaned causal revision")
+  }
+  expectedRevision++
+ }
+ if err:=revisions.Err();err!=nil{revisions.Close();return report,err}
+ if err:=revisions.Close();err!=nil{return report,err}
+ if expectedRevision!=uint64(current.Revision)+1{
+  return report,errors.New("world revision count differs from replayed CycleCommit history")
+ }
  return report,nil
 }
 

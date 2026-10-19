@@ -404,6 +404,28 @@ func verifyCommittedFence(ctx context.Context,q queryOne,runID,cycleID [32]byte,
   if !sameCanonical(fence[pair[0]],journal[pair[1]]){return zero,errors.New("CycleCommit is not the admitted fence plan/inputs")}
  }
  admitted,ok:=fence[11].([]any);if !ok||len(admitted)!=0{return zero,errors.New("CLOCK_ADVANCE admitted WORK units")}
+  // The terminal empty cohorts are versioned claims, not arbitrary 32-byte
+  // strings. Hash the actual empty lists, including the cohort identity,
+  // before trusting even an internally re-hashed fence and journal.
+  emptyInput,err:=registeredDigest("cote.csf.digest.input","cote.csf.schema.admitted-unit-list",[]any{})
+  if err!=nil{return zero,err}
+  if !equalBytes(fence[12],emptyInput[:])||!equalBytes(journal[12],emptyInput[:]){
+   return zero,errors.New("CLOCK_ADVANCE input digest is not the canonical empty digest")
+  }
+  cohort,ok:=fence[10].([]any)
+  if !ok||len(cohort)!=2{return zero,errors.New("CLOCK_ADVANCE cohort malformed")}
+  rounds,ok:=cohort[1].([]any)
+  if !ok||len(rounds)!=0{return zero,errors.New("CLOCK_ADVANCE cannot contain a round cohort")}
+  cohortID,err:=registeredDigest("cote.csf.id.cohort","cote.csf.schema.cohort-id-preimage",[]any{cycleID[:],journal[6],[]any{}})
+  if err!=nil{return zero,err}
+  if !equalBytes(cohort[0],cohortID[:]){return zero,errors.New("CLOCK_ADVANCE empty cohort identity mismatch")}
+  emptyDecision,err:=registeredDigest("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",[]any{})
+  if err!=nil{return zero,err}
+  if !equalBytes(journal[17],emptyDecision[:]){return zero,errors.New("CLOCK_ADVANCE decision digest differs from empty decision list")}
+  emptyTasks,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",[]any{})
+  if err!=nil{return zero,err}
+  if !equalBytes(journal[19],emptyTasks[:]){return zero,errors.New("CLOCK_ADVANCE perception digest differs from empty task list")}
+
  proofs,ok:=fence[9].([]any);if !ok{return zero,errors.New("AdmissionFence proof shape invalid")}
  var previous string
  for i,item:=range proofs{
@@ -542,6 +564,12 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  var current []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",b.RunID[:]).Scan(&current);err!=nil{return err}
  if !bytes.Equal(current,b.ExpectedClock){return errors.New("clock revision changed before publication")}
+  // A clock CAS alone does not prove the predecessor WorldRevision still
+  // exists: publication cannot mint a revision with an orphaned parent.
+  var predecessorHash []byte
+  if err:=tx.QueryRowContext(ctx,"SELECT state_hash FROM world_revisions WHERE revision=?",b.ExpectedRevision).Scan(&predecessorHash);err!=nil{return fmt.Errorf("missing predecessor world revision: %w",err)}
+  if !bytes.Equal(predecessorHash,b.BaseStateHash[:]){return errors.New("predecessor world revision hash mismatch")}
+
  derivedFence,err:=verifyCommittedFence(ctx,tx,b.RunID,b.CycleID,journal)
  if err!=nil{return err}
  if derivedFence!=b.FenceID{return errors.New("clock batch references a different admission fence")}

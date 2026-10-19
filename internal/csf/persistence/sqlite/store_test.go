@@ -245,3 +245,36 @@ func TestSQLiteFenceSealRejectsLateSourcesAndRoundsAcrossConnections(t *testing.
 	if len(records)!=0{t.Fatalf("post-fence rejected records were written: %d",len(records))}
 	found,err:=second.GetFence(ctx,fenceID);if err!=nil||!bytes.Equal(found,fenceBody){t.Fatal("published fence is not durable across connections")}
 }
+
+func TestSQLiteAdmissionGuardsBindArgumentsToCanonicalRecord(t *testing.T) {
+	ctx := context.Background()
+	path := t.TempDir()+"/guarded.db"
+	first,err:=Open(ctx,path);if err!=nil{t.Fatal(err)};defer first.Close()
+	second,err:=Open(ctx,path);if err!=nil{t.Fatal(err)};defer second.Close()
+	var run,other,cycle,sourceID,roundID,fenceID [32]byte
+	run[0],other[0],cycle[0],sourceID[0],roundID[0],fenceID[0]=1,2,3,4,5,6
+	fenceBytes,err:=codec.CanonicalPayload([]any{run[:],cycle[:],uint64(0),nil,int64(100),uint64(1)});if err!=nil{t.Fatal(err)}
+	if err:=first.AppendFenceIfPrefix(ctx,ports.CanonicalRecord{Identity:fenceID,Canonical:fenceBytes},nil);err!=nil{t.Fatal(err)}
+	sourceBytes,err:=codec.CanonicalPayload([]any{"source-declaration-v1",run[:],"late-source"});if err!=nil{t.Fatal(err)}
+	source:=ports.CanonicalRecord{Identity:sourceID,Canonical:sourceBytes}
+	if err:=second.AppendSourceDeclaration(ctx,other,source);err==nil{t.Fatal("cross-run source guard bypass succeeded")}
+	if err:=second.AppendSourceDeclaration(ctx,run,source);err==nil{t.Fatal("source after fence succeeded")}
+	roundBytes,err:=codec.CanonicalPayload([]any{roundID[:],run[:],"schedule",[]any{"school","actor"},[]any{"slot"},[]any{int64(100),uint64(1)},[]any{uint64(2),[]any{cycle[:],fenceID[:]}},uint64(0),uint64(3),uint64(0),nil})
+	if err!=nil{t.Fatal(err)}
+	round:=ports.CanonicalRecord{Identity:roundID,Canonical:roundBytes}
+	if err:=second.AppendRoundDeclaration(ctx,run,101,0,round);err==nil{t.Fatal("future coordinate argument bypass succeeded")}
+	if err:=second.AppendRoundDeclaration(ctx,other,100,1,round);err==nil{t.Fatal("cross-run round guard bypass succeeded")}
+	if err:=second.AppendRoundDeclaration(ctx,run,100,1,round);err==nil{t.Fatal("sealed-coordinate round was persisted")}
+	recorded,err:=second.Records(ctx);if err!=nil{t.Fatal(err)}
+	if len(recorded)!=0{t.Fatalf("invalid guarded writes mutated input ledger: %d",len(recorded))}
+	got,err:=first.GetFence(ctx,fenceID);if err!=nil||!bytes.Equal(got,fenceBytes){t.Fatalf("seal changed: %v",err)}
+}
+
+func TestSQLiteRejectsUnconditionalFenceAppend(t *testing.T) {
+	ctx:=context.Background()
+	store,err:=Open(ctx,t.TempDir()+"/no-unconditional-fence.db");if err!=nil{t.Fatal(err)};defer store.Close()
+	var id [32]byte;id[0]=9
+	record:=ports.CanonicalRecord{Identity:id,Canonical:[]byte{1,2,3}}
+	if err:=store.AppendFence(ctx,record);err==nil{t.Fatal("unconditional fence append succeeded")}
+	if _,err:=store.GetFence(ctx,id);err==nil{t.Fatal("unconditional fence persisted")}
+}

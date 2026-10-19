@@ -56,8 +56,13 @@ func (s *Store) LoadClock(ctx context.Context,runID [32]byte)(clock.State,error)
 // CycleCommit publisher and cannot call this bootstrap seam.
 func (s *Store) SeedGenesisOccurrence(ctx context.Context,occ domain.ID,runID domain.ID,elig domain.EligibilityCoordinate,canonical []byte) error {
  decoded,err:=codec.StrictDecodePayload(canonical);if err!=nil{return err}
- fields,ok:=decoded.([]any);if !ok||len(fields)!=16{return errors.New("invalid scheduled occurrence schema")}
+ fields,ok:=decoded.([]any);if !ok||len(fields)!=15{return errors.New("invalid scheduled occurrence schema")}
  if !equalBytes(fields[0],occ[:])||!equalBytes(fields[1],runID[:]){return errors.New("occurrence identity mismatch")}
+ storedCoord,ok:=fields[4].([]any)
+ if !ok||len(storedCoord)!=2{return errors.New("occurrence eligibility missing")}
+ storedInstant,ok:=asSigned64(storedCoord[0]);if !ok{return errors.New("invalid occurrence instant")}
+ storedOrdinal,ok:=storedCoord[1].(uint64)
+ if !ok||storedInstant!=int64(elig.NotBeforeInstant)||storedOrdinal!=uint64(elig.NotBeforeCycleOrdinal){return errors.New("occurrence eligibility bytes mismatch")}
  if state,err:=s.LoadClock(ctx,[32]byte(runID));err!=nil||state.Revision!=0{return errors.New("genesis occurrence requires initial clock")}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return err}
  defer tx.Rollback()
@@ -111,7 +116,9 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  state,err:=clock.Decode(b.ExpectedClock);if err!=nil{return err}
  next,err:=clock.Decode(b.ResultClock);if err!=nil{return err}
  if uint64(state.Revision)!=b.ExpectedRevision||uint64(next.Revision)!=b.ResultRevision||next.Instant<=state.Instant||next.LastOrdinal!=-1 {return errors.New("invalid clock revision or destination")}
- journal,err:=strictFull(b.Journal,24);if err!=nil{return err}
+ journalRaw,err:=codec.StrictDecodePayload(b.Journal.Canonical)
+ if err!=nil{return err}
+ journal,ok:=journalRaw.([]any);if !ok||len(journal)!=24{return errors.New("invalid canonical CycleCommit")}
  if !equalBytes(journal[0],b.RunID[:])||!equalBytes(journal[1],b.CycleID[:])||journal[6]!=b.ExpectedRevision||journal[8]!=b.ResultRevision {return errors.New("clock journal authority mismatch")}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return err}
  defer tx.Rollback()
@@ -125,7 +132,7 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  if !ok||len(ff)<17||!equalBytes(ff[0],b.RunID[:])||!equalBytes(ff[1],b.CycleID[:]) {return errors.New("invalid clock admission fence")}
  plan,ok:=ff[6].([]any)
  if !ok||len(plan)!=4||plan[0]!=uint64(1){return errors.New("CLOCK_ADVANCE requires persisted clock-advance fence")}
- if len(ff[11].([]any))!=0{return errors.New("CLOCK_ADVANCE cannot admit work units")}
+ units,ok:=ff[11].([]any);if !ok||len(units)!=0{return errors.New("CLOCK_ADVANCE cannot admit work units")}
  if !(plan[1]==int64(state.Instant)||plan[1]==uint64(state.Instant)) || !(plan[2]==int64(next.Instant)||plan[2]==uint64(next.Instant)) {
   return errors.New("fence plan does not match clock transition")
  }
@@ -149,7 +156,7 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
   return errors.New("provisional clock plan invalidated by pending work")
  }
  // Fence closure proof must have covered the target, not merely origin.
- actualTarget:=plan[3].([]any)
+ actualTarget,ok:=plan[3].([]any);if !ok||len(actualTarget)!=2{return errors.New("invalid fence target")}
  if actualTarget[0]!=b.TargetInstant&&actualTarget[0]!=uint64(b.TargetInstant) {return errors.New("fence target mismatch")}
  if actualTarget[1]!=b.TargetOrdinal {return errors.New("fence ordinal mismatch")}
  if err:=appendTx(ctx,tx,b.Journal);err!=nil{return err}
@@ -174,7 +181,7 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  }
  if err:=failClock(b.FailAfterStep,3);err!=nil{return err}
  for _,item:=range b.Activations {
-  fields,err:=strictFull(item,13);if err!=nil{return err}
+  fields,err:=strictFull(item,12);if err!=nil{return err}
   eligibility,ok:=fields[6].([]any);if !ok||len(eligibility)!=2{return errors.New("invalid trigger activation eligibility")}
   instant,ok:=asSigned64(eligibility[0]);if !ok{return errors.New("invalid trigger activation instant")}
   ordinal,ok:=eligibility[1].(uint64);if !ok||instant<int64(next.Instant){return errors.New("trigger activation precedes successor floor")}

@@ -91,5 +91,5 @@ func SuccessorFloor(plan Plan) (domain.EligibilityCoordinate,error) {
 func ApplyAdvance(state State, plan Plan) (State,error) {
     if plan.Kind!=ClockAdvance || plan.From!=state.Instant {return State{},ErrInvalidAdvance}
     if plan.To<=plan.From {return State{},ErrInvalidAdvance}
-    return State{Instant:plan.To,Revision:state.Revision+1,NextLogicalSequence:state.NextLogicalSequence+1,LastOrdinal:-1},nil
+    return State{Instant:plan.To,Revision:state.Revision+1,NextLogicalSequence:state.NextLogicalSequence+2,LastOrdinal:-1},nil
 }

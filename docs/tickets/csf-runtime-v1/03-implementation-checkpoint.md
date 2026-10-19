@@ -8,7 +8,7 @@ e testado, não um certificado de homologação.
 **HEAD de código validado nesta atualização:** `4a1eb737dabc9c719be508b0aeed136966d06fd9`;
 CI de implementação e conformance verdes (`go test ./...`, 621/621 Go,
 621/621 TypeScript, relatórios comparados byte a byte).
-[Go CSFRV1-3](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39313687102/job/118269598597) · [conformance](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39313692536/job/118269627412).
+[Go CSFRV1-3](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39313704003/job/118269598597) · [conformance](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39313712927/job/118269627412).
 
 ## Implementação integrada
 

@@ -510,7 +510,7 @@ func verifyJournalPolicyPins(ctx context.Context,q queryOne,runID [32]byte,fence
   {fence[15],"admission-fence-v1"},
   {journal[13],"cycle-coordinate-v1"},
   {journal[14],"event-order-v1"},
-  {journal[20],"perception-visible-first-v1"},
+  {journal[20],"perception-v1"},
   {journal[21],"perception-identity-v1"},
  }
  for _,binding:=range bindings{

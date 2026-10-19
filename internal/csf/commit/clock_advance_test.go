@@ -687,7 +687,7 @@ func TestGenesisPolicyRolesUseExplicitBindingsInsteadOfArrayPosition(t *testing.
   "admission-fence":"admission-fence-v1",
   "cycle-coordinate":"cycle-coordinate-v1",
   "event-order":"event-order-v1",
-  "perception":"perception-visible-first-v1",
+  "perception":"perception-v1",
   "perception-identity":"perception-identity-v1",
  }
  for role,id:=range expected{

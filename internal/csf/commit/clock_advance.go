@@ -72,6 +72,9 @@ func policiesByRole(bundle *policy.Bundle)(map[string][]any,error){
   role,ok:=binding["role"].(string);if !ok{return nil,errors.New("genesis policy role malformed")}
   declared,ok:=binding["ref"].([]any);if !ok||len(declared)!=3{return nil,errors.New("genesis binding ref malformed")}
   id,ok:=declared[0].(string);if !ok{return nil,errors.New("genesis binding policy id malformed")}
+  // The frozen V1 transition metadata retains a pre-rename perception ID.
+  // The verified genesis fixture is authoritative for the actual pinned ref.
+  if role=="perception"&&id=="perception-visible-first-v1"{id="perception-v1"}
   if _,exists:=result[role];exists{return nil,errors.New("duplicate genesis role binding")}
   for _,ref:=range refs {
    if len(ref)==3&&ref[0]==id{

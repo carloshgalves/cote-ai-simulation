@@ -1,0 +1,29 @@
+name: CSFRV1-3 Implementation Checkpoint
+
+on:
+  push:
+    branches: [feat/csfrv1-3-clock-agenda-triggers]
+
+permissions:
+  contents: read
+
+jobs:
+  csf-clock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Go implementation tests
+        run: go test ./...
+      - name: Existing Go conformance
+        run: go run ./cmd/csf-harness --bundle docs/architecture/canonical-codec-v1-bundle --report /tmp/csf-go.json
+      - name: Existing TypeScript conformance
+        run: node --no-warnings --experimental-loader ./tools/csf-conformance-ts/loader.mjs tools/csf-conformance-ts/runner.ts docs/architecture/canonical-codec-v1-bundle /tmp/csf-ts.json
+      - name: Require identical canonical receipts
+        run: cmp /tmp/csf-go.json /tmp/csf-ts.json

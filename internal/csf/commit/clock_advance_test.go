@@ -194,11 +194,11 @@ func TestProvisionalAdvanceIsRejectedAfterEarlierRoundArrives(t *testing.T){
  }
  result,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{item})
  if err==nil||!injected{t.Fatalf("advance with earlier Q was not rejected: %+v %v",result,err)}
- actual,err:=store.LoadClock(ctx,[32]byte(runID])
+ actual,err:=store.LoadClock(ctx,[32]byte(runID))
  if err!=nil||actual!=state{t.Fatalf("premature clock transition: %+v %v",actual,err)}
- audit,err:=store.AuditClock(ctx,[32]byte(runID])
+ audit,err:=store.AuditClock(ctx,[32]byte(runID))
  if err!=nil||audit.CommitCount!=0||audit.EventCount!=0||audit.RevisionCount!=1{t.Fatalf("uncommitted effects persisted: %+v %v",audit,err)}
- pending,err:=store.PendingClock(ctx,[32]byte(runID]);if err!=nil{t.Fatal(err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  replacement,ok,err:=clock.Next(state,pending)
  if err!=nil||!ok||replacement.To!=now+50{t.Fatalf("Q did not become minimum: %+v %v",replacement,err)}
 }
@@ -213,7 +213,7 @@ func TestRepeatCadenceIsPersistedAsFuturePendingWork(t *testing.T){
  outcome,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{w})
  if err!=nil{t.Fatal(err)}
  if len(outcome.Activations)!=1{t.Fatal("repeat did not activate at initial true")}
- pending,err:=store.PendingClock(ctx,[32]byte(runID]);if err!=nil{t.Fatal(err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  var hasCadence bool
  for _,item:=range pending{
   if item.ID==w.Definition.ID {

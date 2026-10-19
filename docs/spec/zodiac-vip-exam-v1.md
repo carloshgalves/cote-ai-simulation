@@ -298,10 +298,28 @@ A V1 **não autoexpulsa** com base nessa descoberta. Uso de dispositivo, consent
 
 Resultado: `REJECTED_SCHEMA_OR_CAUSAL`; nenhum estado do exame muda e a cota individual não é consumida.
 
-**B. School-received submission**
-Uma mensagem bem-formada que alcançou o endpoint institucional consome a cota individual exatamente uma vez, mesmo se for depois invalidada por regra semântica. Esta escolha é `SIMULATION_AUTHORED`.
+**B. Ingresso institucional e cota por coorte fechada**
+Mensagens bem-formadas que chegam ao endpoint são candidatas ao consumo de cota, mas
+**não** podem alterar o estado do exame ao chegar no transporte. A CSF fornece
+a coorte causal fechada (instante e ciclo) antes de qualquer
+`SchoolSubmissionReceived` que consuma cota, invalidação semântica ou outcome.
 
-Depois da primeira `SchoolSubmissionReceived(actor_id)`, nova tentativa do ator é `REJECTED_ALREADY_SUBMITTED`.
+O resolver executa `canonicalize_actor_submissions` (§10.5) sobre toda a
+coorte sob um único snapshot causal. Somente a submissão canônica escolhida de
+cada ator é `SchoolSubmissionReceived(actor_id, submission_id)` e consome a
+cota, uma única vez, mesmo se depois invalidada semanticamente; esta é uma
+escolha `SIMULATION_AUTHORED`.
+
+Tentativas distintas do mesmo ator no mesmo instante/ciclo que perdem a
+canonicalização recebem `SUPERSEDED_BY_SAME_ACTOR_COHORT` e **não** consomem
+cota adicional. Retransmissões com a mesma identidade e payload canônico
+produzem a mesma receipt, sem um segundo `SchoolSubmissionReceived`.
+Reuso da mesma identidade com payload divergente é corrupção causal,
+`REJECTED_SCHEMA_OR_CAUSAL`/abort fail-closed da coorte sem efeitos.
+Se a cota já foi consumida em um ciclo causal anterior, qualquer nova
+identidade é `REJECTED_ALREADY_SUBMITTED`, independentemente da ordem do
+transporte. A prioridade e a ordem de ciclos pertencem à CSF, não a
+timestamps declarados pelo ator.
 
 ### 10.2 Validações semânticas, nesta ordem
 
@@ -332,11 +350,38 @@ Em `FINAL_WINDOW`, a primeira submission semanticamente válida é terminal:
 
 Se nenhuma submission válida existir até `final_window_close`, o settlement produz Outcome 2.
 
-### 10.5 Simultaneidade
+### 10.5 Simultaneidade e deduplicação de cota
 
-Ordem de chegada do transporte, ordem de conclusão de LLM e thread scheduling **não** podem decidir o resultado.
+A CSF entrega uma **coorte fechada**, cuja identidade causal e ordem são
+independentes do transporte e do tempo de conclusão de workers. O Exame não
+aplica decisões de cota/outcome por callbacks individuais. Todas as etapas
+abaixo avaliam o mesmo estado pré-coorte e publicam efeitos conjuntamente:
 
-Para todas as submissions semanticamente elegíveis do mesmo `group_id`, mesma fase, mesmo `SimulationInstant` e mesmo `ResolutionCycle`:
+1. Validar envelopes/schema/identidades causais; retransmissões com mesmo
+   `submission_id` **e payload canônico idêntico** colapsam em uma receipt;
+   mesmo ID com payload diferente, inclusive entre atores, é colisão
+   causal e aborta a coorte sem estado parcial.
+2. Entre as submissions bem-formadas de **um mesmo ator** em um mesmo
+   `SimulationInstant` e `ResolutionCycle`, escolher **uma** canônica pelo
+   menor `priority_key` (abaixo), antes de qualquer consumo de cota ou
+   validação semântica. As demais são
+   `SUPERSEDED_BY_SAME_ACTOR_COHORT`, sem segunda receipt/consumo.
+   Se a cota estava consumida em ciclo anterior, rejeitar as novas tentativas
+   com `REJECTED_ALREADY_SUBMITTED` antes de decidir outcomes.
+3. Aplicar a validação semântica (§10.2) a cada representante canônico
+   contra o mesmo snapshot pré-coorte. Cada representante bem-formado e
+   anteriormente não consumido gera exatamente uma
+   `SchoolSubmissionReceived` e consome a cota, **inclusive se inválido**.
+4. Entre representantes semanticamente elegíveis do **mesmo grupo, fase,
+   instante e ciclo**, escolher o menor `priority_key`. Só o vencedor
+   produz outcome e deltas de PP/CP; os outros recebem
+   `SUPERSEDED_BY_SIMULTANEOUS_SUBMISSION` sem recompensas adicionais.
+5. Publicar receipts, invalidações, terminalidade e ledger no mesmo
+   commit causal atômico da CSF. Uma falha de publicação não pode
+   consumir quota, terminalizar parcialmente nem atribuir recompensa.
+
+A prioridade V1 `SIMULATION_AUTHORED` (bytes canônicos da política de
+identidade declarada pela CSF) é:
 
 ```text
 priority_key =
@@ -349,11 +394,13 @@ priority_key =
 winner = minimum(priority_key bytes)
 ```
 
-Somente `winner` entra na regra terminal; as demais recebem `SUPERSEDED_BY_SIMULTANEOUS_SUBMISSION` e não geram recompensa. A cota delas já foi consumida porque chegaram ao endpoint.
-
-Hash collision com componentes distintos é corrupção/fail-closed conforme ADR 0008.
-
-Esta prioridade é `SIMULATION_AUTHORED` e deve ficar fora do contexto dos agentes; ela resolve um empate sem “vantagem por actor_id”.
+Um empate de digest entre identidades distintas é corrupção/fail-closed
+conforme ADR 0008. O `priority_key` permanece fora dos contextos dos agentes.
+O ator não pode usar ordem do transporte ou timestamps próprios como
+prioridade. A mesma coorte, inclusive sob permutação e replay, deve produzir
+os mesmos IDs de receipt, cota, outcome, deltas e hash de estado.
+A cláusula de cota vale também para tentativas semanticamente inválidas:
+não se escolhe retroativamente a tentativa válida de um mesmo ator.
 
 ## 11. Outcomes e scoring
 
@@ -432,7 +479,7 @@ O Examination Engine calcula a intenção de delta; a autoridade que aplica Clas
 Por grupo, exatamente um outcome terminal.
 
 Um grupo fecha quando:
-- Outcome 3/4 acontece durante `ACTIVE`;
+- Outcome 3/4 acontece durante `ACTIVE` ou `POST_ACTIVE_EARLY`;
 - Outcome 1/2 acontece em `FINAL_WINDOW`;
 - settlement em `final_window_close` produz Outcome 2.
 
@@ -484,7 +531,10 @@ Falha antes de disclosure se:
 
 ### 13.3 Runtime invariants
 
-- uma pessoa tem no máximo uma `SchoolSubmissionReceived`;
+- uma pessoa tem no máximo uma `SchoolSubmissionReceived` após canonicalização da coorte;
+- retransmissões idênticas conservam a receipt sem novo consumo de cota;
+- colisão de identidade/payload aborta a coorte sem efeitos;
+- representantes concorrentes do mesmo ator são selecionados antes da cota, independentemente da ordem de transporte;
 - grupo terminal rejeita novos effects;
 - um grupo tem exatamente um `OutcomeCommitted`;
 - um outcome tem uma única causa terminal;
@@ -640,7 +690,7 @@ Critérios:
 - random não acessa VIP;
 - estrategista só acerta por dados entregues;
 - same seed repete setup/tie-break;
-- permutar ordem de entrega de proposals dentro do mesmo cycle não altera resultado.
+- permutar ordem de entrega de proposals dentro do mesmo cycle não altera resultado, quota, receipts, ledger nem hash; inclui dois palpites distintos do **mesmo ator** e retries idênticos.
 
 Vetores normativos ficam em `data/models/exams/conformance/zodiac-vip-v1.yaml`.
 

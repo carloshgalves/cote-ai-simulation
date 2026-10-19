@@ -188,3 +188,33 @@ func TestGenesisRoundTripsByteForByteAndCollisionFails(t *testing.T) {
 		})
 	}
 }
+
+
+// TestFencePublicationRejectsStalePrefixAcrossSQLiteConnections verifies that
+// another ledger writer cannot silently invalidate an admission snapshot.
+func TestFencePublicationRejectsStalePrefixAcrossSQLiteConnections(t *testing.T) {
+	ctx := context.Background()
+	path := t.TempDir() + "/shared.db"
+	first, err := Open(ctx, path)
+	if err != nil { t.Fatal(err) }
+	defer first.Close()
+	second, err := Open(ctx, path)
+	if err != nil { t.Fatal(err) }
+	defer second.Close()
+	var inputID, secondID, fenceID [32]byte
+	inputID[0], secondID[0], fenceID[0] = 41, 42, 43
+	if err := first.Append(ctx, ports.CanonicalRecord{Identity: inputID, Canonical: []byte{1}}); err != nil { t.Fatal(err) }
+	stale, err := first.Records(ctx)
+	if err != nil { t.Fatal(err) }
+	if err := second.Append(ctx, ports.CanonicalRecord{Identity: secondID, Canonical: []byte{2}}); err != nil { t.Fatal(err) }
+	fence := ports.CanonicalRecord{Identity: fenceID, Canonical: []byte{3}}
+	if err := first.AppendFenceIfPrefix(ctx, fence, stale); err == nil {
+		t.Fatal("published fence after another SQLite connection changed the input prefix")
+	}
+	if _, err := first.GetFence(ctx, fenceID); err == nil { t.Fatal("stale fence was persisted") }
+	current, err := first.Records(ctx)
+	if err != nil { t.Fatal(err) }
+	if err := first.AppendFenceIfPrefix(ctx, fence, current); err != nil { t.Fatal(err) }
+	got, err := second.GetFence(ctx, fenceID)
+	if err != nil || !bytes.Equal(got, fence.Canonical) { t.Fatalf("durable fence mismatch: %x %v", got, err) }
+}

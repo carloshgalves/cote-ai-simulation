@@ -79,6 +79,14 @@ func eventValue(from,to domain.SimulationInstant)([]any,error){
     h:=identity.OpaqueContentHash(data)
     return []any{"cote.csf.schema.clock-advanced",uint64(1),data,h[:]},nil
 }
+func bodyValue(from,to domain.SimulationInstant)([]any,error){
+    // Temporal fixture only: not a physical reducer or Embodiment update.
+    bytes,err:=codec.CanonicalBytes("cote.csf.body.synthetic-advance.v1","cote.csf.schema.typed-value",1,[]any{int64(from),int64(to)})
+    if err!=nil{return nil,err}
+    digest:=identity.OpaqueContentHash(bytes)
+    return []any{"cote.csf.schema.typed-value",uint64(1),bytes,digest[:]},nil
+}
+
 func bytes32(v any)([32]byte,error){
     var dst [32]byte
     b,ok:=v.([]byte);if !ok||len(b)!=32{return dst,errors.New("expected a pinned 32-byte digest")}
@@ -135,19 +143,35 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
     afterBytes,err:=clock.Encode(next);if err!=nil{return empty,err}
     origin,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,[]any{runID[:],[]any{int64(plan.From),uint64(plan.OriginOrdinal)}})
     if err!=nil{return empty,err}
-    eventOrder:=[]any{uint64(0),origin[:],"clock",uint64(1),uint64(0),uint64(0)}
-    eventID,_,err:=d.Sum("cote.csf.id.event","cote.csf.schema.event-id-preimage",1,[]any{runID[:],origin[:],eventOrder})
-    if err!=nil{return empty,err}
-    payload,err:=eventValue(plan.From,plan.To);if err!=nil{return empty,err}
-    eventBody:=[]any{
-        eventID[:],runID[:],eventOrder,"clock.advanced",uint64(1),int64(plan.From),
-        uint64(state.NextLogicalSequence),origin[:],uint64(state.Revision),payload,
-        []any{},[]any{},[]any{},[]any{},[]any{uint64(0)},uint64(2),"clock",uint64(1),
+    // Versioned synthetic time and body passage share this one commit.
+    // Both are explicitly not perceptible (privacy=2, tasks=[]).
+    events:=make([]ports.CanonicalRecord,0,2)
+    preTriggerEvents:=make([]trigger.Event,0,2)
+    eventIDs:=make([]any,0,2)
+    canonicalEvents:=make([]any,0,2)
+    for index,kind:=range []string{"clock.advanced","body.advanced"}{
+        key:=[]any{uint64(0),origin[:],"clock",uint64(1),uint64(index),uint64(0)}
+        id,_,err:=d.Sum("cote.csf.id.event","cote.csf.schema.event-id-preimage",1,[]any{runID[:],origin[:],key})
+        if err!=nil{return empty,err}
+        var value []any
+        if kind=="clock.advanced" {value,err=eventValue(plan.From,plan.To)
+        } else {value,err=bodyValue(plan.From,plan.To)}
+        if err!=nil{return empty,err}
+        body:=[]any{
+            id[:],runID[:],key,kind,uint64(1),int64(plan.From),
+            uint64(state.NextLogicalSequence)+uint64(index),origin[:],uint64(state.Revision),value,
+            []any{},[]any{},[]any{},[]any{},[]any{uint64(0)},uint64(2),"clock",uint64(1),
+        }
+        digest,_,err:=d.Sum("cote.csf.digest.event","cote.csf.schema.event.body",1,body)
+        if err!=nil{return empty,err}
+        canonical,err:=codec.CanonicalPayload(append(cloneAny(body),digest[:]));if err!=nil{return empty,err}
+        events=append(events,ports.CanonicalRecord{Identity:[32]byte(id),Canonical:canonical})
+        eventIDs=append(eventIDs,id[:])
+        canonicalEvents=append(canonicalEvents,canonical)
+        footprint,err:=trigger.EventFootprint(kind);if err!=nil{return empty,err}
+        keyBytes,err:=codec.CanonicalPayload(key);if err!=nil{return empty,err}
+        preTriggerEvents=append(preTriggerEvents,trigger.Event{ID:domain.ID(id),OrderKey:keyBytes,Footprint:footprint})
     }
-    eventDigest,_,err:=d.Sum("cote.csf.digest.event","cote.csf.schema.event.body",1,eventBody)
-    if err!=nil{return empty,err}
-    eventBytes,err:=codec.CanonicalPayload(append(cloneAny(eventBody),eventDigest[:]));if err!=nil{return empty,err}
-    event:=ports.CanonicalRecord{Identity:[32]byte(eventID),Canonical:eventBytes}
     noDecisions:=[]any{}
     decisionDigest,_,err:=d.Sum("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",1,noDecisions);if err!=nil{return empty,err}
     emptyTasks:=[]any{}
@@ -159,10 +183,10 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
         runID[:],origin[:],uint64(0),int64(state.Instant),uint64(plan.OriginOrdinal),planBytes,
         uint64(state.Revision),f.Fields[8],uint64(next.Revision),f.Fields[8],
         f.Digest[:],[]any{},fb[:],policies["cycle-coordinate"],policies["event-order"],
-        []any{eventID[:]},[]any{},decisionDigest[:],[]any{},taskDigest[:],
+        eventIDs,[]any{},decisionDigest[:],[]any{},taskDigest[:],
         policies["perception"],policies["perception-identity"],uint64(next.NextLogicalSequence),
     }
-    batchDigest,_,err:=d.Sum("cote.csf.digest.batch","cote.csf.schema.batch-preimage",1,[]any{commitBody,[]any{eventBytes}})
+    batchDigest,_,err:=d.Sum("cote.csf.digest.batch","cote.csf.schema.batch-preimage",1,[]any{commitBody,canonicalEvents})
     if err!=nil{return empty,err}
     journalBytes,err:=codec.CanonicalPayload(append(cloneAny(commitBody),batchDigest[:]));if err!=nil{return empty,err}
     commitID,_,err:=d.Sum("cote.csf.id.cycle-commit","cote.csf.schema.cycle-commit-id-preimage",1,[]any{runID[:],origin[:],uint64(0)});if err!=nil{return empty,err}
@@ -182,7 +206,7 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
             return empty,errors.New("duplicate trigger definition in one cycle")
         }
         predicateResult:=trigger.PredicateValue(item.Definition,next.Instant)
-        fired,err:=trigger.Evaluate(item.Definition,item.Runtime,next.Instant,next.Revision,predicateResult,[]trigger.Event{{ID:domain.ID(eventID),OrderKey:eventBytes,Footprint:[]string{"clock"}}})
+        fired,err:=trigger.Evaluate(item.Definition,item.Runtime,next.Instant,next.Revision,predicateResult,preTriggerEvents)
         if err!=nil{return empty,err}
         runtime:=fired.Runtime
         prior:=item.RuntimeCanonical
@@ -213,7 +237,7 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
         ExpectedClock:beforeBytes,ResultClock:afterBytes,
         BaseStateHash:stateDigest,ResultStateHash:stateDigest,
         Journal:ports.CanonicalRecord{Identity:[32]byte(commitID),Canonical:journalBytes},
-        Events:[]ports.CanonicalRecord{event},TriggerRuntime:changes,Activations:activations,
+        Events:events,TriggerRuntime:changes,Activations:activations,
         RevisionCanonical:revisionCanonical,
     },nil
 }

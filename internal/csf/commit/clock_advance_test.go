@@ -272,3 +272,81 @@ func TestSQLiteRejectsTamperedClockBatchWithoutPartialState(t *testing.T) {
   })
  }
 }
+
+func TestGenesisBoundRegistryCannotChangeAndNeverNeedsHostTriggerWork(t *testing.T) {
+ ctx:=context.Background()
+ def:=activeTrigger()
+ coord,store,ledger,runID,bundle,_:=testFixture(t,def)
+ records,err:=store.LoadRegisteredTriggers(ctx,[32]byte(runID),bundle)
+ if err!=nil||len(records)!=1||records[0].Definition.ID!=def.ID ||len(records[0].RuntimeCanonical)==0{
+  t.Fatalf("registered trigger is not durable: %v %+v",err,records)
+ }
+ root:=validGenesis(t,bundle)
+ changed:=def
+ changed.PredicateThreshold+=1
+ if err:=store.BootstrapGenesisTriggers(ctx,root,bundle,[]trigger.Definition{changed});err==nil{
+  t.Fatal("same genesis admitted modified trigger definition")
+ }
+ before,err:=store.ReplayClock(ctx,[32]byte(runID),bundle)
+ if err!=nil||before.ReplayedCommits!=0||before.ReplayedTriggerTransitions!=0{
+  t.Fatalf("genesis-only trigger replay invalid: %+v %v",before,err)
+ }
+ // No supplied definitions/runtime on invocation. The persisted registry is
+ // the only source from which the coordinator can evaluate predicates.
+ outcome,err:=coord.Advance(ctx,ledger,runID)
+ if err!=nil||len(outcome.Activations)!=1{t.Fatalf("registered trigger not executed: %v",err)}
+ after,err:=store.ReplayClock(ctx,[32]byte(runID),bundle)
+ if err!=nil||after.ReplayedTriggerTransitions!=1||after.VerifiedActivations!=1{
+  t.Fatalf("durable registry replay failed: %+v %v",after,err)
+ }
+}
+
+func TestSyntheticBodyDependencyHasSeparateCanonicalCause(t *testing.T) {
+ ctx:=context.Background()
+ clockDef:=activeTrigger()
+ bodyDef:=activeTrigger()
+ bodyDef.ID[0]=0x83
+ bodyDef.Dependencies=[]string{"body"}
+ coord,store,ledger,runID,bundle,_:=testFixture(t,clockDef,bodyDef)
+ result,err:=coord.Advance(ctx,ledger,runID)
+ if err!=nil{t.Fatal(err)}
+ if len(result.Events)!=2||len(result.Activations)!=2{t.Fatal("missing synthetic events or triggered activations")}
+ expected:=map[domain.ID]domain.ID{
+  clockDef.ID:domain.ID(result.Events[0].Identity),
+  bodyDef.ID:domain.ID(result.Events[1].Identity),
+ }
+ for _,activation:=range result.Activations {
+  raw,err:=codec.StrictDecodePayload(activation.Canonical)
+  if err!=nil{t.Fatal(err)}
+  fields:=raw.([]any)
+  rawDefinition:=fields[3].([]byte)
+  var defID domain.ID
+  copy(defID[:],rawDefinition)
+  origin:=fields[5].([]any)
+  causing:=origin[3].([]any)
+  if len(causing)!=1||!bytes.Equal(causing[0].([]byte),func()[]byte{id:=expected[defID];return id[:]}()){
+   t.Fatalf("wrong synthetic dependency cause for %x: %#v",defID,causing)
+  }
+ }
+ replay,err:=store.ReplayClock(ctx,[32]byte(runID),bundle)
+ if err!=nil||replay.VerifiedActivations!=2{
+  t.Fatalf("synthetic footprint replay diverged: %+v %v",replay,err)
+ }
+}
+
+func TestRearmRequiresExplicitCausalProvenance(t *testing.T){
+ d:=activeTrigger()
+ d.Policy=trigger.OnceWhenTrue
+ exhausted:=trigger.Runtime{DefinitionID:d.ID,Version:1,Exhausted:true,HasLast:true,Last:true,ActivationCount:1}
+ if _,err:=trigger.RearmPure(d,exhausted,domain.ID{});err==nil{
+  t.Fatal("an uncaused rearm was allowed")
+ }
+ var event domain.ID
+ event[0]=19
+ changed,err:=trigger.RearmPure(d,exhausted,event)
+ if err!=nil||changed.Exhausted||!changed.Armed||changed.HasLast||changed.ActivationCount!=exhausted.ActivationCount{
+  t.Fatalf("rearm transition invalid: %+v %v",changed,err)
+ }
+ // RearmPure does NOT persist anything: a WORK CycleCommit with the causal
+ // lifecycle event is required to publish it.
+}

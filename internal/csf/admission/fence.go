@@ -430,26 +430,25 @@ type Coordinator struct{ log *FenceLog }
 func NewCoordinator(log *FenceLog) *Coordinator { return &Coordinator{log: log} }
 func (c *Coordinator) AdmitThenEvaluate(ctx context.Context, bundle *policy.Bundle, ledger *inputledger.Ledger, cycle Cycle, policies Policies, evaluate func(Fence) error) (Fence, error) {
 	var fence Fence
-	// Admission must not be separated from publication by another local
-	// ingress/slot mutation. The callback runs only after durable append.
 	err := ledger.WithAdmissionBoundary(func() error {
-		derived, err := Derive(bundle, ledger, cycle, policies)
-		if err != nil {
-			return err
-		}
-		if err := c.log.AppendIfAbsent(ctx, derived); err != nil {
-			return err
+		view, prefix, err := ledger.AdmissionView(ctx, bundle)
+		if err != nil { return err }
+		derived, err := Derive(bundle, view, cycle, policies)
+		if err != nil { return err }
+		if c.log == nil || c.log.store == nil { return errors.New("admission fence store is required") }
+		if conditional, ok := c.log.store.(ports.PrefixConditionalFenceStore); ok {
+			if err := conditional.AppendFenceIfPrefix(ctx, ports.CanonicalRecord{Identity: derived.ID, Canonical: derived.Canonical}, prefix); err != nil { return err }
+		} else {
+			// Compatibility with in-memory harness stores. Production SQLite
+			// uses the cross-process prefix-conditional transaction above.
+			if err := c.log.AppendIfAbsent(ctx, derived); err != nil { return err }
 		}
 		fence = derived
 		return nil
 	})
-	if err != nil {
-		return Fence{}, err
-	}
+	if err != nil { return Fence{}, err }
 	if evaluate != nil {
-		if err := evaluate(fence); err != nil {
-			return fence, err
-		}
+		if err := evaluate(fence); err != nil { return fence, err }
 	}
 	return fence, nil
 }

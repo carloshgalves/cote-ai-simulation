@@ -6,6 +6,7 @@ import (
  "database/sql"
  "errors"
  "fmt"
+ "encoding/hex"
  "sort"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
@@ -298,7 +299,11 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  }
  if err:=failClock(b.FailAfterStep,2);err!=nil{return err}
  for _,change:=range b.TriggerRuntime {
-  if _,err:=codec.StrictDecodePayload(change.After);err!=nil{return err}
+  raw,err:=codec.StrictDecodePayload(change.After);if err!=nil{return err}
+  runtime,ok:=raw.([]any)
+  if !ok||len(runtime)!=8||!equalBytes(runtime[0],change.DefinitionID[:])||runtime[7]!=b.ResultRevision {
+   return errors.New("trigger runtime authority/revision mismatch")
+  }
   var prior []byte
   err:=tx.QueryRowContext(ctx,"SELECT canonical FROM trigger_runtime WHERE definition_id=? AND run_id=?",change.DefinitionID[:],b.RunID[:]).Scan(&prior)
   if err!=nil&&err!=sql.ErrNoRows{return err}
@@ -313,6 +318,29 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  if err:=failClock(b.FailAfterStep,3);err!=nil{return err}
  for _,item:=range b.Activations {
   fields,err:=strictFull(item,12);if err!=nil{return err}
+  if !equalBytes(fields[1],b.RunID[:])||fields[9]!=uint64(0) {
+   return errors.New("invalid trigger run/lifecycle")
+  }
+  definitionID,ok:=fields[3].([]byte);if !ok||len(definitionID)!=32 {
+   return errors.New("invalid trigger definition ID")
+  }
+  if fields[2]!="trigger:"+hex.EncodeToString(definitionID) {
+   return errors.New("trigger source is not bound to definition")
+  }
+  origin,ok:=fields[5].([]any)
+  if !ok||len(origin)!=4||origin[0]!=uint64(0)||!equalBytes(origin[1],b.CycleID[:])||origin[2]!=b.ResultRevision {
+   return errors.New("trigger activation origin not bound to committed revision")
+  }
+  causeIDs,ok:=origin[3].([]any);if !ok||len(causeIDs)>1{return errors.New("invalid trigger causing event set")}
+  if len(causeIDs)==1&&!equalBytes(causeIDs[0],b.Events[0].Identity[:]) {
+   return errors.New("trigger causal origin is outside committed events")
+  }
+  wantedID,err:=registeredDigest("cote.csf.id.trigger-activation","cote.csf.schema.trigger-activation-id-preimage",[]any{b.RunID[:],definitionID,fields[4],b.ResultRevision,fields[7]})
+  if err!=nil{return err}
+  if wantedID!=item.Identity{return errors.New("trigger activation identity mismatch")}
+  unitDigest,err:=registeredDigest("cote.csf.digest.trigger-activation-unit","cote.csf.schema.trigger-activation.body",fields[:11])
+  if err!=nil{return err}
+  if !equalBytes(fields[11],unitDigest[:]){return errors.New("trigger activation digest mismatch")}
   eligibility,ok:=fields[6].([]any);if !ok||len(eligibility)!=2{return errors.New("invalid trigger activation eligibility")}
   instant,ok:=asSigned64(eligibility[0]);if !ok{return errors.New("invalid trigger activation instant")}
   ordinal,ok:=eligibility[1].(uint64);if !ok||instant<int64(next.Instant){return errors.New("trigger activation precedes successor floor")}

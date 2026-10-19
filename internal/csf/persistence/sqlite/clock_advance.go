@@ -518,7 +518,7 @@ func verifyJournalPolicyPins(ctx context.Context,q queryOne,runID [32]byte,fence
   for _,raw:=range refs{
    ref,ok:=raw.([]any)
    if ok&&len(ref)==3&&ref[0]==binding.id{
-    if !sameCanonical(binding.observed,ref){return errors.New("cycle policy ref not bound to genesis")}
+    if !sameCanonical(binding.observed,ref){return fmt.Errorf("cycle policy ref %s not bound to genesis: journal/fence=%v, genesis=%v",binding.id,binding.observed,ref)}
     matched=true;break
    }
   }

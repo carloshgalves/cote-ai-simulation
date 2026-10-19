@@ -5,10 +5,10 @@ e nenhuma revisão independente executados. Este é o escopo executado
 e testado, não um certificado de homologação.
 
 **Base:** `main@7b7fc7edaf844ff6eeb637299fd6e00ec93f48db`.
-**HEAD de implementação validado nesta atualização:** `f8c5d81a67d7bfb7b145a75697819569668271e0`;
+**HEAD de código validado nesta atualização:** `4a1eb737dabc9c719be508b0aeed136966d06fd9`;
 CI de implementação e conformance verdes (`go test ./...`, 621/621 Go,
 621/621 TypeScript, relatórios comparados byte a byte).
-[Go CSFRV1-3](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39313289835/job/118268177434) · [conformance](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39313297126/job/118268201791).
+[Go CSFRV1-3](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39313687102/job/118269598597) · [conformance](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39313692536/job/118269627412).
 
 ## Implementação integrada
 
@@ -76,6 +76,9 @@ CI de implementação e conformance verdes (`go test ./...`, 621/621 Go,
 12. Para avanço temporal puro, cada hash de revisão do mundo é
     confrontado com o hash validado no genesis; divergência em
     `world_revisions.state_hash` é detectada, mesmo após reopen.
+13. Teste de arquitetura percorre arquivos Go de produção e exige que
+    só o coordinator de `internal/csf/commit/clock_advance.go`
+    invoque o port transacional `CommitClockAdvance`.
 
 ## Gate de escopo ainda aberto
 

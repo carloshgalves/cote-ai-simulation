@@ -115,6 +115,7 @@ func (s *Store) SeedGenesisOccurrence(ctx context.Context,occ domain.ID,runID do
  var current []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",runID[:]).Scan(&current);err!=nil{return err}
  state,err:=clock.Decode(current);if err!=nil||state.Revision!=0{return errors.New("genesis occurrence requires initial clock")}
+ if elig.NotBeforeInstant<state.Instant{return errors.New("genesis occurrence cannot be eligible before the initial clock")}
  var count int
  if err:=tx.QueryRowContext(ctx,"SELECT count(*) FROM committed_cycles WHERE run_id=?",runID[:]).Scan(&count);err!=nil||count!=0{return errors.New("cannot seed after a cycle commit")}
  if err:=tx.QueryRowContext(ctx,"SELECT count(*) FROM decision_ledger").Scan(&count);err!=nil||count!=0{return errors.New("cannot seed occurrences after fence publication")}
@@ -310,6 +311,11 @@ func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next cl
    canonicalEvents=append(canonicalEvents,item.Canonical)
    continue
   }
+  if !sameCanonical(fields[14],[]any{uint64(0)}){return errors.New("synthetic event location mismatch")}
+  for _,slot:=range []int{10,11,12,13}{
+   part,ok:=fields[slot].([]any)
+   if !ok||len(part)!=0{return errors.New("synthetic event carries unauthorized causal provenance")}
+  }
   kind:="clock.advanced"
   tag:="cote.csf.event.clock-advanced"
   schema:="cote.csf.schema.clock-advanced"
@@ -377,7 +383,10 @@ func (s *Store) initialTypedState(ctx context.Context,runID [32]byte)([]any,erro
  return typed,nil
 }
 
-type queryOne interface{QueryRowContext(context.Context,string,...any)*sql.Row}
+type queryOne interface{
+ QueryRowContext(context.Context,string,...any)*sql.Row
+ QueryContext(context.Context,string,...any)(*sql.Rows,error)
+}
 // Confirm the full admitted coordinate and the authentic fence whose stable
 // (run,cycle,attempt) identity must exist before a terminal CycleCommit.
 func verifyCommittedFence(ctx context.Context,q queryOne,runID,cycleID [32]byte,journal []any)([32]byte,error){
@@ -426,7 +435,96 @@ func verifyCommittedFence(ctx context.Context,q queryOne,runID,cycleID [32]byte,
   targetOrdinal,ok:=target[1].(uint64);if !ok{return zero,errors.New("clock target ordinal invalid")}
   if proof[4]!=true&&(from<to||(from==to&&ordinal<targetOrdinal)){return zero,errors.New("closure proof does not cover target")}
  }
+ if err:=verifyFenceClosureRoster(ctx,q,runID,fence[9],fence[6]);err!=nil{return zero,err}
+ if err:=verifyJournalPolicyPins(ctx,q,runID,fence,journal);err!=nil{return zero,err}
  return [32]byte(fenceID),nil
+}
+
+// The closure proof is a function of every declared source and the FIRST
+// covering closure by ingress sequence, not a user-chosen witness subset.
+func verifyFenceClosureRoster(ctx context.Context,q queryOne,runID [32]byte,proofsRaw,planRaw any) error {
+ proofs,ok:=proofsRaw.([]any);if !ok{return errors.New("invalid fence closure proofs")}
+ plan,ok:=planRaw.([]any);if !ok||len(plan)!=4||plan[0]!=uint64(1){return errors.New("invalid CLOCK_ADVANCE closure target")}
+ target,ok:=plan[3].([]any);if !ok||len(target)!=2{return errors.New("missing closure target")}
+ targetInstant,ok:=asSigned64(target[0]);if !ok{return errors.New("invalid closure target instant")}
+ targetOrdinal,ok:=target[1].(uint64);if !ok{return errors.New("invalid closure target ordinal")}
+ type witness struct{seq uint64;data []any}
+ declared:=map[string]bool{}
+ first:=map[string]witness{}
+ rows,err:=q.QueryContext(ctx,"SELECT id,canonical FROM input_ledger ORDER BY rowid")
+ if err!=nil{return err}
+ for rows.Next(){
+  var id,raw []byte
+  if err:=rows.Scan(&id,&raw);err!=nil{rows.Close();return err}
+  fieldsAny,err:=codec.StrictDecodePayload(raw)
+  if err!=nil{continue} // SourceIngressReceipt is an enveloped record.
+  fields,ok:=fieldsAny.([]any);if !ok{rows.Close();return errors.New("input ledger has invalid canonical record")}
+  if len(fields)==3 && fields[0]=="source-declaration-v1" && equalBytes(fields[1],runID[:]){
+   source,ok:=fields[2].(string)
+   h:=identity.OpaqueContentHash(raw)
+   if !ok||source==""||!bytes.Equal(h[:],id)||declared[source]{rows.Close();return errors.New("source roster not canonical")}
+   declared[source]=true
+  }
+  if len(fields)!=7||!equalBytes(fields[1],runID[:]){continue}
+  source,ok:=fields[2].(string);if !ok||source==""{rows.Close();return errors.New("closure source invalid")}
+  seq,ok:=fields[6].(uint64);if !ok{return errors.New("closure ingress sequence invalid")}
+  coverage,ok:=fields[4].([]any);if !ok||len(coverage)!=2{rows.Close();return errors.New("closure eligibility invalid")}
+  at,ok:=asSigned64(coverage[0]);if !ok{rows.Close();return errors.New("closure coverage instant invalid")}
+  ord,ok:=coverage[1].(uint64);if !ok{rows.Close();return errors.New("closure coverage ordinal invalid")}
+  final,ok:=fields[5].(bool);if !ok{rows.Close();return errors.New("closure final flag invalid")}
+  if !final&&(at<targetInstant||(at==targetInstant&&ord<targetOrdinal)){continue}
+  expectedID,err:=registeredDigest("cote.csf.id.source-closure","cote.csf.schema.source-closure-id-preimage",[]any{fields[1],fields[2],fields[3]})
+  if err!=nil{rows.Close();return err}
+  if !equalBytes(fields[0],id)||!bytes.Equal(expectedID[:],id){rows.Close();return errors.New("covering closure identity invalid")}
+  digest,err:=registeredDigest("cote.csf.digest.source-closure","cote.csf.schema.source-closure",fields)
+  if err!=nil{rows.Close();return err}
+  candidate:=witness{seq:seq,data:[]any{source,[]any{uint64(2),id,digest[:]},seq,fields[4],final}}
+  previous,ok:=first[source];if !ok||seq<previous.seq{first[source]=candidate}
+ }
+ if err:=rows.Err();err!=nil{rows.Close();return err}
+ if err:=rows.Close();err!=nil{return err}
+ if len(declared)!=len(proofs){return errors.New("admission fence omitted a declared source closure")}
+ previousSource:=""
+ for _,raw:=range proofs{
+  proof,ok:=raw.([]any);if !ok||len(proof)!=5{return errors.New("malformed canonical closure witness")}
+  source,ok:=proof[0].(string)
+  if !ok||!declared[source]||source<=previousSource{return errors.New("fence closure roster/order differs from declared sources")}
+  previousSource=source
+  expected,ok:=first[source]
+  if !ok||!sameCanonical(proof,expected.data){return errors.New("fence closure witness is not the first covering closure")}
+ }
+ return nil
+}
+
+// Only the role-specific policy refs persisted by the verified genesis are
+// permitted in either the fence or its CycleCommit journal.
+func verifyJournalPolicyPins(ctx context.Context,q queryOne,runID [32]byte,fence,journal []any) error {
+ var canonical []byte
+ if err:=q.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",runID[:]).Scan(&canonical);err!=nil{return err}
+ envelope,err:=codec.StrictDecodeEnvelope(canonical);if err!=nil{return err}
+ payload,ok:=envelope.Value.([]any);if !ok||len(payload)!=18{return errors.New("genesis policy contract not found")}
+ refs,ok:=payload[14].([]any);if !ok{return errors.New("genesis policy registry not found")}
+ bindings:=[]struct{observed any;id string}{
+  {fence[13],"admission-order-v1"},
+  {fence[14],"causal-identity-v1"},
+  {fence[15],"admission-fence-v1"},
+  {journal[13],"cycle-coordinate-v1"},
+  {journal[14],"event-order-v1"},
+  {journal[20],"perception-visible-first-v1"},
+  {journal[21],"perception-identity-v1"},
+ }
+ for _,binding:=range bindings{
+  matched:=false
+  for _,raw:=range refs{
+   ref,ok:=raw.([]any)
+   if ok&&len(ref)==3&&ref[0]==binding.id{
+    if !sameCanonical(binding.observed,ref){return errors.New("cycle policy ref not bound to genesis")}
+    matched=true;break
+   }
+  }
+  if !matched{return errors.New("missing required genesis policy role")}
+ }
+ return nil
 }
 
 func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch) error {

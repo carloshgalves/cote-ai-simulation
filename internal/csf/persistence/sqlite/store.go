@@ -17,6 +17,7 @@ import (
 	"strings"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+    "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ingressguard"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -297,14 +298,13 @@ func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundG
 		if !ok || len(fenceRun)!=32 {rows.Close();return errors.New("invalid persisted fence run")}
 		if !bytes.Equal(fenceRun,runID[:]) {continue}
 		if round==nil {rows.Close();return errors.New("source declaration after admission fence")}
-		instant,ok:=decodedInstant(body[4])
-		if !ok {rows.Close();return errors.New("invalid persisted fence instant")}
-		ordinal,ok:=body[5].(uint64)
-		if !ok {rows.Close();return errors.New("invalid persisted fence ordinal")}
-		if round.instant<instant || (round.instant==instant && round.ordinal<=ordinal) {
-			rows.Close()
-			return errors.New("round eligible at or before published admission fence")
-		}
+        _,cut,err:=ingressguard.FenceCoordinate(canonical)
+        if err!=nil{rows.Close();return err}
+        proposed:=domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(round.instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(round.ordinal)}
+        if proposed.Compare(cut)<=0{
+            rows.Close()
+            return errors.New("round eligible at or before sealed admission target")
+        }
 	}
 	if err:=rows.Err();err!=nil {rows.Close();return err}
 	if err:=rows.Close();err!=nil{return err}

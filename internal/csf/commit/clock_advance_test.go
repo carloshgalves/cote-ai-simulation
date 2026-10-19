@@ -186,30 +186,41 @@ func TestAdvanceReopenAndWorkerPermutationPreserveAuthoritativeBytes(t *testing.
  }
 }
 
-func TestProvisionalAdvanceIsRejectedAfterEarlierRoundArrives(t *testing.T){
+// A post-fence Q <= the advance destination must be rejected at the input
+// authority, or the same cycle/fence identity becomes permanently un-retryable.
+func TestPostFenceEarlierRoundIsRejectedAndClockCanCommit(t *testing.T){
+ ctx:=context.Background()
+ coordinator,store,ledger,runID,_,_:=testFixture(t)
+ state,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
+ var attempted bool
+ var rejected error
+ coordinator.beforeCommit=func(){
+  attempted=true
+  g:=validGenesis(t,coordinator.bundle)
+  origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+  q:=domain.EligibilityCoordinate{NotBeforeInstant:state.Instant+50,NotBeforeCycleOrdinal:0}
+  _,rejected=ledger.DeclareRound(ctx,"schedule",[2]string{"school","actor-a"},[]string{"decision"},q,origin,0,57,0,[]any{uint64(0)})
+ }
+ result,err:=coordinator.Advance(ctx,ledger,runID)
+ if err!=nil||!attempted||rejected==nil{t.Fatalf("post-fence Q must fail while the original advance commits: attempt=%v rejected=%v outcome=%+v commit=%v",attempted,rejected,result,err)}
+ audit,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
+ if audit.CommitCount!=1||audit.RevisionCount!=2||audit.EventCount!=2{t.Fatalf("fenced advance was stranded: %+v",audit)}
+ pending,err:=store.PendingClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
+ next,has,err:=clock.Next(result.ResultClock,pending)
+ if err!=nil||!has||next.Kind!=clock.Work{t.Fatalf("clock did not resume at admitted P: %+v %v",next,err)}
+}
+
+// Q arriving BEFORE the admission fence must change the minimum legitimately.
+func TestEarlierRoundBeforeFenceBecomesClockTarget(t *testing.T){
  ctx:=context.Background()
  coordinator,store,ledger,runID,bundle,_:=testFixture(t)
  state,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  g:=validGenesis(t,bundle)
  origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
- now:=state.Instant
- var injected bool
- coordinator.beforeCommit=func(){
-  // Simulate independently arriving Q after provisional P was read but
-  // before SQLite checks the global pending minimum and commits.
-  q:=domain.EligibilityCoordinate{NotBeforeInstant:now+50,NotBeforeCycleOrdinal:0}
-  _,e:=ledger.DeclareRound(ctx,"schedule",[2]string{"school","actor-a"},[]string{"decision"},q,origin,0,57,0,[]any{uint64(0)})
-  if e!=nil{t.Errorf("could not insert concurrent Q: %v",e)} else{injected=true}
- }
- result,err:=coordinator.Advance(ctx,ledger,runID)
- if err==nil||!injected{t.Fatalf("advance with earlier Q was not rejected: %+v %v",result,err)}
- actual,err:=store.LoadClock(ctx,[32]byte(runID))
- if err!=nil||actual!=state{t.Fatalf("premature clock transition: %+v %v",actual,err)}
- audit,err:=store.AuditClock(ctx,[32]byte(runID))
- if err!=nil||audit.CommitCount!=0||audit.EventCount!=0||audit.RevisionCount!=1{t.Fatalf("uncommitted effects persisted: %+v %v",audit,err)}
- pending,err:=store.PendingClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
- replacement,ok,err:=clock.Next(state,pending)
- if err!=nil||!ok||replacement.To!=now+50{t.Fatalf("Q did not become minimum: %+v %v",replacement,err)}
+ q:=domain.EligibilityCoordinate{NotBeforeInstant:state.Instant+50,NotBeforeCycleOrdinal:0}
+ if _,err:=ledger.DeclareRound(ctx,"schedule",[2]string{"school","actor-a"},[]string{"decision"},q,origin,0,57,0,[]any{uint64(0)});err!=nil{t.Fatal(err)}
+ advance,err:=coordinator.Advance(ctx,ledger,runID)
+ if err!=nil||advance.ResultClock.Instant!=q.NotBeforeInstant{t.Fatalf("pre-fence Q did not determine target: %+v %v",advance,err)}
 }
 
 func TestRepeatCadenceIsPersistedAsFuturePendingWork(t *testing.T){
@@ -594,5 +605,12 @@ func TestGenesisOccurrenceRejectsForgedUnitDigestAndID(t *testing.T){
  forgedID:=id;forgedID[0]^=0x80;corruptID[0]=forgedID[:]
  badID,err:=codec.CanonicalPayload(append(corruptID,digest[:]));if err!=nil{t.Fatal(err)}
  if err:=store.SeedGenesisOccurrence(ctx,domain.ID(forgedID),g.RunID,eligibility,badID);err==nil{t.Fatal("bootstrap accepted occurrence with forged ID")}
+ backdated:=append([]any(nil),fields...)
+ backdated[3]=int64(g.InitialInstant)-1
+ backdated[4]=[]any{int64(g.InitialInstant)-1,uint64(0)}
+ digestBackdated,_,err:=d.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,backdated);if err!=nil{t.Fatal(err)}
+ retro,err:=codec.CanonicalPayload(append(backdated,digestBackdated[:]));if err!=nil{t.Fatal(err)}
+ if err:=store.SeedGenesisOccurrence(ctx,domain.ID(id),g.RunID,domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant-1},retro);err==nil{t.Fatal("retroactive pending occurrence was admitted at genesis")}
+ 
  if err:=store.SeedGenesisOccurrence(ctx,domain.ID(id),g.RunID,eligibility,canonical);err!=nil{t.Fatalf("valid genesis occurrence rejected: %v",err)}
 }

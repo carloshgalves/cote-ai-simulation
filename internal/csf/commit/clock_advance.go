@@ -211,7 +211,7 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
         runtime:=fired.Runtime
         prior:=item.RuntimeCanonical
         after,err:=trigger.RuntimeBytes(runtime);if err!=nil{return empty,err}
-        changes=append(changes,ports.TriggerStateChange{DefinitionID:[32]byte(item.Definition.ID),Before:prior,After:after})
+        changes=append(changes,ports.TriggerStateChange{DefinitionID:[32]byte(item.Definition.ID),DefinitionCanonical:item.DefinitionCanonical,Before:prior,After:after})
         if !fired.Fired{continue}
         activationID,_,err:=d.Sum("cote.csf.id.trigger-activation","cote.csf.schema.trigger-activation-id-preimage",1,[]any{runID[:],item.Definition.ID[:],uint64(item.Definition.Version),uint64(next.Revision),runtime.ActivationCount})
         if err!=nil{return empty,err}

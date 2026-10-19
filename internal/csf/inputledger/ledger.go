@@ -96,6 +96,7 @@ type Round struct {
 // optional stores are separated by authority; each causal record is canonical.
 type Ledger struct {
 	mu            sync.Mutex
+	admissionMu   sync.RWMutex
 	runID         domain.ID
 	deriver       identity.Deriver
 	sources       map[string]bool
@@ -568,6 +569,8 @@ func stringSlice(values []any) []string {
 // DeclareRound admits only a round whose origin is already causal (genesis or
 // committed event). It does not create a round from an exogenous input.
 func (l *Ledger) DeclareRound(ctx context.Context, sourceID string, actor [2]string, slots []string, eligibility domain.EligibilityCoordinate, createdBy any, role uint16, ordinal uint32, lifecycle uint8, idempotencyKey any) (Round, error) {
+	l.admissionMu.RLock()
+	defer l.admissionMu.RUnlock()
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	if l.inputStore == nil {
@@ -638,6 +641,8 @@ func (l *Ledger) DeclareSource(source Source) error {
 	if err := domain.ValidateMachineID(source.ID); err != nil {
 		return err
 	}
+	l.admissionMu.RLock()
+	defer l.admissionMu.RUnlock()
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	if l.inputStore == nil {
@@ -661,6 +666,8 @@ func (l *Ledger) DeclareSource(source Source) error {
 }
 
 func (l *Ledger) AppendInput(ctx context.Context, sourceID string, input Input) (StoredInput, error) {
+	l.admissionMu.RLock()
+	defer l.admissionMu.RUnlock()
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	if l.inputStore == nil {
@@ -733,6 +740,8 @@ func (l *Ledger) AppendInput(ctx context.Context, sourceID string, input Input) 
 }
 
 func (l *Ledger) CloseSource(ctx context.Context, sourceID string, closure Closure) (StoredClosure, error) {
+	l.admissionMu.RLock()
+	defer l.admissionMu.RUnlock()
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	if l.inputStore == nil {
@@ -815,6 +824,8 @@ func (l *Ledger) appendIngress(ctx context.Context, source string, refKind uint6
 }
 
 func (l *Ledger) RegisterDispatch(ctx context.Context, d Dispatch, cycle CycleBinding) error {
+	l.admissionMu.RLock()
+	defer l.admissionMu.RUnlock()
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	if l.inputStore == nil {
@@ -881,6 +892,8 @@ func (l *Ledger) RegisterDispatch(ctx context.Context, d Dispatch, cycle CycleBi
 }
 
 func (l *Ledger) RevokeDispatch(ctx context.Context, roundID domain.ID, slotID string, reason uint8, policyRef any) error {
+	l.admissionMu.RLock()
+	defer l.admissionMu.RUnlock()
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	if l.inputStore == nil {
@@ -905,6 +918,8 @@ func (l *Ledger) RevokeDispatch(ctx context.Context, roundID domain.ID, slotID s
 }
 
 func (l *Ledger) Respond(ctx context.Context, response Response) error {
+	l.admissionMu.RLock()
+	defer l.admissionMu.RUnlock()
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	if l.inputStore == nil {
@@ -992,6 +1007,14 @@ func (l *Ledger) Prefix(source string) (inputs []StoredInput, closures []StoredC
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	return append([]StoredInput(nil), l.inputs[source]...), append([]StoredClosure(nil), l.closures[source]...), l.cursors[source]
+}
+
+// WithAdmissionBoundary serializes same-ledger writers against fence derivation
+// and durable append. It does not replace cross-process database coordination.
+func (l *Ledger) WithAdmissionBoundary(publish func() error) error {
+	l.admissionMu.Lock()
+	defer l.admissionMu.Unlock()
+	return publish()
 }
 
 // Snapshot returns a coherent ledger prefix for deterministic fence derivation.

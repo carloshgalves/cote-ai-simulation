@@ -50,6 +50,16 @@ func (s *Store) appendInputLocked(record ports.CanonicalRecord) error {
 	return nil
 }
 
+// CBOR positive integers decode as uint64 even when the encoder input was int64.
+// Preserve negative instants and reject values overflowing int64.
+func decodedInstant(value any) (int64,bool) {
+	switch n:=value.(type) {
+	case int64: return n,true
+	case uint64: if n<=uint64(^uint64(0)>>1) {return int64(n),true}
+	}
+	return 0,false
+}
+
 func guardedKind(record ports.CanonicalRecord) (string,[32]byte,int64,uint64,error) {
 	var run [32]byte
 	payload,err:=codec.StrictDecodePayload(record.Canonical)
@@ -65,7 +75,7 @@ func guardedKind(record ports.CanonicalRecord) (string,[32]byte,int64,uint64,err
 	if source{return "source",run,0,0,nil}
 	coord,ok:=fields[5].([]any)
 	if !ok||len(coord)!=2{return "",run,0,0,errors.New("guarded round invalid coordinate")}
-	instant,ok:=coord[0].(int64)
+	instant,ok:=decodedInstant(coord[0])
 	if !ok{return "",run,0,0,errors.New("guarded round invalid instant")}
 	ordinal,ok:=coord[1].(uint64)
 	if !ok{return "",run,0,0,errors.New("guarded round invalid ordinal")}
@@ -146,7 +156,7 @@ func (s *Store) AppendFenceIfPrefix(_ context.Context,fence ports.CanonicalRecor
 	fields,ok:=value.([]any)
 	if !ok||len(fields)<6{return errors.New("invalid admission fence payload")}
 	id,ok:=fields[0].([]byte);if !ok||len(id)!=32{return errors.New("invalid admission fence run")}
-	instant,ok:=fields[4].(int64);if !ok{return errors.New("invalid fence instant")}
+	instant,ok:=decodedInstant(fields[4]);if !ok{return errors.New("invalid fence instant")}
 	ordinal,ok:=fields[5].(uint64);if !ok{return errors.New("invalid fence ordinal")}
 	if prior,ok:=s.fences[fence.Identity];ok{return domain.EqualPreimage(prior,fence.Canonical)}
 	var runID [32]byte;copy(runID[:],id)

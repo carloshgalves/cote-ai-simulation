@@ -1009,6 +1009,25 @@ func (l *Ledger) Prefix(source string) (inputs []StoredInput, closures []StoredC
 	return append([]StoredInput(nil), l.inputs[source]...), append([]StoredClosure(nil), l.closures[source]...), l.cursors[source]
 }
 
+// AdmissionView restores a coherent persisted prefix and returns its exact
+// records for a storage-level compare-and-append. Never derive from a stale
+// ledger snapshot when another process may have appended records.
+func (l *Ledger) AdmissionView(ctx context.Context, bundle *policy.Bundle) (*Ledger, []ports.CanonicalRecord, error) {
+	lister, ok := l.inputStore.(ports.RecordListingStore)
+	if !ok {
+		return nil, nil, errors.New("input store cannot list durable prefix")
+	}
+	records, err := lister.Records(ctx)
+	if err != nil {
+		return nil, nil, err
+	}
+	view := newLedger(l.runID, bundle, l.inputStore)
+	if err := view.restore(records); err != nil {
+		return nil, nil, err
+	}
+	return view, records, nil
+}
+
 // WithAdmissionBoundary serializes same-ledger writers against fence derivation
 // and durable append. It does not replace cross-process database coordination.
 func (l *Ledger) WithAdmissionBoundary(publish func() error) error {

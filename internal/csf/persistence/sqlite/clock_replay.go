@@ -36,6 +36,15 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  genesisRoot,err:=genesis.ValidateCanonical(graw,bundle);if err!=nil{return report,err}
  if [32]byte(genesisRoot.RunID)!=runID{return report,errors.New("genesis run mismatch")}
  report.GenesisID=genesisRoot.ID
+ // CLOCK_ADVANCE in this slice changes logical time, not physical world.
+ // All revision hashes must remain anchored to the verified genesis state.
+ genesisTyped,ok:=genesisRoot.Payload[16].([]any)
+ if !ok||len(genesisTyped)!=4{return report,errors.New("genesis state typed-value malformed")}
+ initialStateHash,ok:=genesisTyped[3].([]byte)
+ if !ok||len(initialStateHash)!=32{return report,errors.New("genesis state hash malformed")}
+ var revZeroHash []byte
+ if err:=s.db.QueryRowContext(ctx,"SELECT state_hash FROM world_revisions WHERE revision=0").Scan(&revZeroHash);err!=nil{return report,err}
+ if !bytes.Equal(revZeroHash,initialStateHash){return report,errors.New("genesis state differs from first durable revision")}
  definitions,err:=s.LoadRegisteredTriggers(ctx,runID,bundle);if err!=nil{return report,err}
  current:=clock.State{Instant:genesisRoot.InitialInstant,LastOrdinal:-1}
  runtime:=make(map[domain.ID]trigger.Runtime,len(definitions))
@@ -105,6 +114,12 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
   if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM world_revisions WHERE revision=?",uint64(next.Revision)).Scan(&revBytes);err!=nil{return report,err}
   baseHash,ok:=journal[7].([]byte);if !ok||len(baseHash)!=32{return report,errors.New("replay base hash malformed")}
   resultHash,ok:=journal[9].([]byte);if !ok||len(resultHash)!=32{return report,errors.New("replay resulting hash malformed")}
+  if !bytes.Equal(baseHash,initialStateHash)||!bytes.Equal(resultHash,initialStateHash){
+   return report,errors.New("CLOCK_ADVANCE changed genesis world state hash")
+  }
+  var storedRevisionHash []byte
+  if err:=s.db.QueryRowContext(ctx,"SELECT state_hash FROM world_revisions WHERE revision=?",uint64(next.Revision)).Scan(&storedRevisionHash);err!=nil{return report,err}
+  if !bytes.Equal(storedRevisionHash,initialStateHash){return report,errors.New("world revision state hash conflicts with genesis")}
   var bh,rh [32]byte;copy(bh[:],baseHash);copy(rh[:],resultHash)
   record:=ports.ClockAdvanceBatch{RunID:runID,CycleID:entry.cycleID,ExpectedRevision:uint64(current.Revision),ResultRevision:uint64(next.Revision),
    BaseStateHash:bh,ResultStateHash:rh,ExpectedClock:expectedClock,ResultClock:resultClock,

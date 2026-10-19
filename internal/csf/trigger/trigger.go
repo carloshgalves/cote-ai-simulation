@@ -20,6 +20,9 @@ const (
 
 type Definition struct {
  ID domain.ID
+ // Pure clock-only predicate for CSFRV1-3. Future domain predicates require
+ // a version-pinned registry; arbitrary callbacks are never accepted.
+ PredicateThreshold domain.SimulationInstant
  Version uint32
  Policy Policy
  FireOnInitialTrue bool
@@ -51,6 +54,12 @@ type Result struct {
  Runtime Runtime
  Fired bool
  CausingEventIDs []domain.ID
+}
+
+// PredicateValue is wholly derived from the persisted logical instant.
+// No caller-provided predicate function, host clock, or knowledge API.
+func PredicateValue(d Definition, instant domain.SimulationInstant) bool {
+ return instant >= d.PredicateThreshold
 }
 
 func Validate(d Definition) error {

@@ -8,6 +8,7 @@ import (
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ingressguard"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
@@ -120,6 +121,17 @@ func (s *Store) AppendIngress(_ context.Context, source string, sequence uint64,
 	defer s.mu.Unlock()
 	if sequence != s.ingressCursor[source] {
 		return errors.New("source ingress sequence is not gapless")
+	}
+	if len(s.seals)>0 {
+		entry,err:=ingressguard.Parse(record,source)
+		if err!=nil{return err}
+		for _,seal:=range s.seals {
+			cut:=domain.EligibilityCoordinate{
+				NotBeforeInstant:domain.SimulationInstant(seal.instant),
+				NotBeforeCycleOrdinal:domain.CycleOrdinal(seal.ordinal),
+			}
+			if err:=ingressguard.Check(entry,seal.runID,cut);err!=nil{return err}
+		}
 	}
 	receiptID := [32]byte(identity.OpaqueContentHash(receipt.Canonical))
 	if existing, ok := s.records[record.Identity]; ok {

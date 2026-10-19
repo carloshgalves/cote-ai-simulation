@@ -6,6 +6,7 @@ import (
  "database/sql"
  "errors"
  "fmt"
+ "sort"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
@@ -94,7 +95,50 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
   var key domain.ID;copy(key[:],id)
   out=append(out,clock.Pending{ID:key,Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)}})
  }
- return out,rows.Err()
+ if err:=rows.Err();err!=nil{return nil,err}
+ // RoundDeclarations and exogenous inputs share the input authority; they
+ // participate in the exact same global minimum as schedule/activations.
+ inputs,err:=q.QueryContext(ctx,"SELECT id,canonical FROM input_ledger ORDER BY rowid")
+ if err!=nil{return nil,err}
+ defer inputs.Close()
+ for inputs.Next() {
+  var key,raw []byte
+  if err:=inputs.Scan(&key,&raw);err!=nil{return nil,err}
+  decoded,err:=codec.StrictDecodePayload(raw)
+  if err!=nil{continue} // canonical enveloped receipt is not pending work
+  fields,ok:=decoded.([]any);if !ok||len(key)!=32{continue}
+  var index int
+  switch len(fields) {
+  case 13:
+   // ExogenousInput: the canonical producer and kind are machine IDs.
+   if _,ok:=fields[3].(string);!ok{continue}
+   if _,ok:=fields[4].(string);!ok{continue}
+   index=9
+  case 11:
+   // RoundDeclaration: actor, slots and lifecycle are schema-bound.
+   if _,ok:=fields[3].([]any);!ok{continue}
+   if _,ok:=fields[4].([]any);!ok{continue}
+   status,ok:=fields[9].(uint64);if !ok||status!=0{continue}
+   index=5
+  default:continue
+  }
+  if !equalBytes(fields[1],runID[:]) {continue}
+  if !equalBytes(fields[0],key) {return nil,errors.New("pending record ID differs from canonical bytes")}
+  coord,ok:=fields[index].([]any)
+  if !ok||len(coord)!=2{return nil,errors.New("pending coordinate missing")}
+  instant,ok:=asSigned64(coord[0]);if !ok{return nil,errors.New("invalid pending instant")}
+  ordinal,ok:=coord[1].(uint64);if !ok{return nil,errors.New("invalid pending ordinal")}
+  var id domain.ID;copy(id[:],key)
+  out=append(out,clock.Pending{ID:id,Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)}})
+ }
+ if err:=inputs.Err();err!=nil{return nil,err}
+ // The clock's minimum is order-insensitive, but the stored projection has
+ // stable byte ordering for deterministic tests and audit queries.
+ sort.Slice(out,func(i,j int)bool {
+  if d:=out[i].Eligibility.Compare(out[j].Eligibility);d!=0{return d<0}
+  return bytes.Compare(out[i].ID[:],out[j].ID[:])<0
+ })
+ return out,nil
 }
 
 func strictFull(record ports.CanonicalRecord,minFields int) ([]any,error){

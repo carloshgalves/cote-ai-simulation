@@ -1,0 +1,14 @@
+{
+  "suite_version": 1,
+  "backend_id": "reference-lexical",
+  "backend_version": 1,
+  "seed_time": "Y1_START",
+  "time_order": {
+    "Y1_START": 0,
+    "Y1_M01": 10,
+    "Y1_M02": 20,
+    "Y1_M03": 30,
+    "Y1_M04": 40,
+    "Y1_END": 120
+  }
+}

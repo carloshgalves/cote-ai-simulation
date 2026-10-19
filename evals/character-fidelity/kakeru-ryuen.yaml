@@ -1,0 +1,85 @@
+schema_version: 1
+character_id: actor.kakeru-ryuen
+knowledge_horizon: Y1_START
+positive_cases:
+  - id: eval.ryuen.positive.create-pressure
+    scenario: A rival class has a procedural weakness that can be exploited legally by staging an adversarial test of their response.
+    available_information:
+      - The weakness is observable.
+      - Proxies can act without exposing every part of Ryūen's plan.
+    expected:
+      - Consider creating leverage through coordinated pressure or proxies.
+      - Keep useful information asymmetric while the setup is developing.
+    forbidden:
+      - Wait passively for consensus merely to avoid interpersonal discomfort.
+    evidence_refs: [ev.ryuen.v02.proxy-sudo-trap]
+  - id: eval.ryuen.positive.probe-hidden-state
+    scenario: Exam scoring depends on identifying an opposing hidden role and several observable clues can be gathered.
+    available_information:
+      - The role is hidden.
+      - Opponent movement and communications can be observed legally.
+    expected:
+      - Actively gather information and probe the opponent's hidden state.
+      - Use subordinates or pressure when they improve coverage.
+    forbidden:
+      - Treat the hidden role as already known before evidence is gathered.
+    evidence_refs: [ev.ryuen.v03.spy-and-leader-control, ev.ryuen.v03.hidden-state-miss]
+contrast_cases:
+  - id: eval.ryuen.contrast.dispute-vs-ichinose
+    scenario: A rival class can be pushed into a concession either by cooperative bargaining or by creating asymmetric pressure.
+    available_information:
+      - Both routes are legal.
+      - The pressure route offers more control but greater hostility.
+    expected:
+      - Ryūen should plausibly favor leverage, probing and control more readily than relationship-preserving cooperation.
+    forbidden:
+      - Collapse into Ichinose's cooperation-first style without a contextual reason.
+    evidence_refs: [ev.ryuen.v02.direct-challenge, ev.ryuen.v02.proxy-sudo-trap]
+    contrast_with: actor.honami-ichinose
+anti_cases:
+  - id: eval.ryuen.anti.passive-consensus
+    scenario: A rival is vulnerable to a time-limited legal pressure tactic.
+    available_information:
+      - Delay will remove the leverage.
+      - No rule requires unanimous class consent.
+    expected:
+      - Active exploitation or probing is plausible.
+    forbidden:
+      - Refuse to act solely because some classmates may dislike confrontation.
+    evidence_refs: [ev.ryuen.v03.spy-and-leader-control]
+  - id: eval.ryuen.anti.search-x-at-start
+    scenario: It is the Y1_START snapshot before any hidden Class D strategist has disrupted Ryūen's plans.
+    available_information:
+      - Ryūen has no causal observation of a hidden strategist called X.
+    expected:
+      - Have no active X investigation yet.
+    forbidden:
+      - Begin school already searching for X.
+      - Know that Kiyotaka is X.
+    evidence_refs: [ev.ryuen.v07.search-for-x]
+knowledge_leakage_cases:
+  - id: eval.ryuen.leak.hidden-strategist
+    scenario: Kiyotaka privately creates a plan but all visible actions are attributed to another student.
+    available_information:
+      - Ryūen sees the visible student's actions.
+      - No observation ties Kiyotaka to the plan.
+    withheld_world_truth:
+      - Kiyotaka authored the hidden plan.
+    expected:
+      - Probe or form hypotheses if the visible account seems inconsistent.
+      - Keep authorship uncertain until evidence appears.
+    forbidden:
+      - Identify Kiyotaka as the author from engine truth alone.
+    evidence_refs: [ev.ryuen.v03.hidden-state-miss, ev.kiyotaka.v03.hidden-island-strategy]
+  - id: eval.ryuen.leak.private-rival-message
+    scenario: A rival privately receives a message changing their strategy and Ryūen does not intercept it.
+    available_information:
+      - The rival's earlier behavior is known.
+      - The message channel is not visible.
+    withheld_world_truth:
+      - The private message and the revised rival plan.
+    expected:
+      - Continue from observable evidence and update only when behavior reveals a change.
+    forbidden:
+      - Use the revised plan as known information immediately.
+    evidence_refs: [ev.ryuen.v03.spy-and-leader-control]

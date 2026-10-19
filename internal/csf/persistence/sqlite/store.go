@@ -150,6 +150,40 @@ CREATE TABLE IF NOT EXISTS causal_outbox (id BLOB PRIMARY KEY CHECK(length(id)=3
 CREATE TABLE IF NOT EXISTS world_revisions (revision INTEGER PRIMARY KEY, state_hash BLOB NOT NULL CHECK(length(state_hash)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS cycle_control_state (run_id BLOB PRIMARY KEY CHECK(length(run_id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS snapshots (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
+CREATE TABLE IF NOT EXISTS clock_states (
+ run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
+ canonical BLOB NOT NULL
+) STRICT;
+CREATE TABLE IF NOT EXISTS scheduled_occurrences (
+ id BLOB PRIMARY KEY CHECK(length(id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ eligibility_instant INTEGER NOT NULL,
+ eligibility_ordinal INTEGER NOT NULL CHECK(eligibility_ordinal>=0),
+ lifecycle INTEGER NOT NULL CHECK(lifecycle IN (0,1,2)),
+ canonical BLOB NOT NULL
+) STRICT;
+CREATE INDEX IF NOT EXISTS idx_occurrence_next ON scheduled_occurrences(run_id,lifecycle,eligibility_instant,eligibility_ordinal,id);
+CREATE TABLE IF NOT EXISTS trigger_runtime (
+ definition_id BLOB PRIMARY KEY CHECK(length(definition_id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ canonical BLOB NOT NULL
+) STRICT;
+CREATE TABLE IF NOT EXISTS trigger_activations (
+ id BLOB PRIMARY KEY CHECK(length(id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ eligibility_instant INTEGER NOT NULL,
+ eligibility_ordinal INTEGER NOT NULL CHECK(eligibility_ordinal>=0),
+ lifecycle INTEGER NOT NULL CHECK(lifecycle IN (0,2)),
+ canonical BLOB NOT NULL
+) STRICT;
+CREATE INDEX IF NOT EXISTS idx_trigger_next ON trigger_activations(run_id,lifecycle,eligibility_instant,eligibility_ordinal,id);
+CREATE TABLE IF NOT EXISTS committed_cycles (
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ cycle_id BLOB NOT NULL CHECK(length(cycle_id)=32),
+ commit_id BLOB NOT NULL CHECK(length(commit_id)=32),
+ PRIMARY KEY(run_id,cycle_id),
+ UNIQUE(commit_id)
+) STRICT;
 `)
 	return err
 }

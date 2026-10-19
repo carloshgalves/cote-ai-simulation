@@ -192,7 +192,8 @@ func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next cl
  if len(b.Events)!=1{return errors.New("clock advance requires exactly one temporal event")}
  if len(journal)!=24{return errors.New("malformed CycleCommit body")}
  if !equalBytes(journal[0],b.RunID[:])||!equalBytes(journal[1],b.CycleID[:]){return errors.New("CycleCommit run/cycle mismatch")}
- if journal[2]!=uint64(0)||journal[3]!=uint64(state.Instant)||journal[4]!=uint64(state.LastOrdinal+1) {
+ instant,ok:=asSigned64(journal[3])
+ if !ok||instant!=int64(state.Instant)||journal[2]!=uint64(0)||journal[4]!=uint64(state.LastOrdinal+1) {
   return errors.New("CycleCommit attempt/origin mismatch")
  }
  if journal[6]!=b.ExpectedRevision||journal[8]!=b.ResultRevision||journal[22]!=uint64(next.NextLogicalSequence){

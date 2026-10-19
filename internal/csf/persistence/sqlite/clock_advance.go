@@ -204,7 +204,8 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  actualTarget,ok:=plan[3].([]any);if !ok||len(actualTarget)!=2{return errors.New("invalid fence target")}
  if actualTarget[0]!=b.TargetInstant&&actualTarget[0]!=uint64(b.TargetInstant) {return errors.New("fence target mismatch")}
  if actualTarget[1]!=b.TargetOrdinal {return errors.New("fence ordinal mismatch")}
- if err:=appendTx(ctx,tx,b.Journal);err!=nil{return err}
+ // CycleCommit is terminal decision authority, NEVER an input record.
+ if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.Journal.Identity[:],b.Journal.Canonical);err!=nil{return err}
  if err:=failClock(b.FailAfterStep,1);err!=nil{return err}
  for _,item:=range b.Events {
   if _,err:=strictFull(item,19);err!=nil{return err}

@@ -68,6 +68,9 @@ type ClockAdvanceBatch struct {
  RunID [32]byte
  CycleID [32]byte
  FenceID [32]byte
+ TargetInstant int64
+ TargetOrdinal uint64
+ ExpectedInputPrefix []CanonicalRecord
  ExpectedRevision uint64
  ResultRevision uint64
  ExpectedClock []byte

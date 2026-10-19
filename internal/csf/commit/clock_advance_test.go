@@ -16,6 +16,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
 )
@@ -221,4 +222,46 @@ func TestRepeatCadenceIsPersistedAsFuturePendingWork(t *testing.T){
   }
  }
  if !hasCadence{t.Fatal("persisted repeat runtime did not contribute to pending minimum")}
+}
+
+func TestSQLiteRejectsTamperedClockBatchWithoutPartialState(t *testing.T) {
+ tests:=[]struct{
+  name string
+  alter func(t *testing.T,b *ports.ClockAdvanceBatch)
+ }{
+  {"journal-batch-digest",func(t *testing.T,b *ports.ClockAdvanceBatch){
+    decoded,err:=codec.StrictDecodePayload(b.Journal.Canonical);if err!=nil{t.Fatal(err)}
+    fields:=decoded.([]any);fields[23]=make([]byte,32)
+    b.Journal.Canonical,err=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+  }},
+  {"event-content-digest",func(t *testing.T,b *ports.ClockAdvanceBatch){
+    decoded,err:=codec.StrictDecodePayload(b.Events[0].Canonical);if err!=nil{t.Fatal(err)}
+    fields:=decoded.([]any);fields[18]=make([]byte,32)
+    b.Events[0].Canonical,err=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+  }},
+  {"activation-provenance",func(t *testing.T,b *ports.ClockAdvanceBatch){
+    if len(b.Activations)==0{t.Fatal("missing activation")}
+    decoded,err:=codec.StrictDecodePayload(b.Activations[0].Canonical);if err!=nil{t.Fatal(err)}
+    fields:=decoded.([]any);fields[2]="trigger:forged-source"
+    b.Activations[0].Canonical,err=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+  }},
+  {"revision-hash",func(t *testing.T,b *ports.ClockAdvanceBatch){
+    decoded,err:=codec.StrictDecodePayload(b.RevisionCanonical);if err!=nil{t.Fatal(err)}
+    fields:=decoded.([]any);fields[5]=make([]byte,32)
+    b.RevisionCanonical,err=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+  }},
+ }
+ for _,test:=range tests {
+  t.Run(test.name,func(t *testing.T){
+   ctx:=context.Background()
+   coordinator,store,ledger,runID,_,_:=testFixture(t)
+   before,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
+   coordinator.tamperBatch=func(b *ports.ClockAdvanceBatch){test.alter(t,b)}
+   if _,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{activeTrigger()});err==nil {
+    t.Fatal("corrupted causal batch was accepted")
+   }
+   after,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
+   if after!=before{t.Fatalf("corrupted batch leaked partial publication: before=%+v after=%+v",before,after)}
+  })
+ }
 }

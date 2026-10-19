@@ -171,24 +171,6 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
         keyBytes,err:=codec.CanonicalPayload(key);if err!=nil{return empty,err}
         preTriggerEvents=append(preTriggerEvents,trigger.Event{ID:domain.ID(id),OrderKey:keyBytes,Footprint:footprint})
     }
-    noDecisions:=[]any{}
-    decisionDigest,_,err:=d.Sum("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",1,noDecisions);if err!=nil{return empty,err}
-    emptyTasks:=[]any{}
-    taskDigest,_,err:=d.Sum("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",1,emptyTasks);if err!=nil{return empty,err}
-    policies,err:=policiesByRole(c.bundle);if err!=nil{return empty,err}
-    fb:=f.InputDigest
-    planBytes,err:=clock.EncodePlan(plan);if err!=nil{return empty,err}
-    commitBody:=[]any{
-        runID[:],origin[:],uint64(0),int64(state.Instant),uint64(plan.OriginOrdinal),planBytes,
-        uint64(state.Revision),f.Fields[8],uint64(next.Revision),f.Fields[8],
-        f.Digest[:],[]any{},fb[:],policies["cycle-coordinate"],policies["event-order"],
-        eventIDs,[]any{},decisionDigest[:],[]any{},taskDigest[:],
-        policies["perception"],policies["perception-identity"],uint64(next.NextLogicalSequence),
-    }
-    batchDigest,_,err:=d.Sum("cote.csf.digest.batch","cote.csf.schema.batch-preimage",1,[]any{commitBody,canonicalEvents})
-    if err!=nil{return empty,err}
-    journalBytes,err:=codec.CanonicalPayload(append(cloneAny(commitBody),batchDigest[:]));if err!=nil{return empty,err}
-    commitID,_,err:=d.Sum("cote.csf.id.cycle-commit","cote.csf.schema.cycle-commit-id-preimage",1,[]any{runID[:],origin[:],uint64(0)});if err!=nil{return empty,err}
     canonicalState,ok:=baseTyped[2].([]byte);if !ok{return empty,errors.New("genesis state envelope malformed")}
     stateDigest,err:=bytes32(baseTyped[3]);if err!=nil{return empty,err}
     revisionCanonical,err:=codec.CanonicalPayload([]any{uint64(state.Revision),baseTyped,stateDigest[:],uint64(next.Revision),baseTyped,stateDigest[:]})
@@ -216,6 +198,49 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
          if err!=nil{return empty,err}
 activations=append(activations,ports.CanonicalRecord{Identity:[32]byte(activationID),Canonical:raw})
     }
+    // Trigger state transitions and newly-created activations are internal
+    // lifecycle facts in the SAME terminal batch; only the two temporal
+    // events participate in pre-trigger footprint evaluation.
+    sequence:=state.NextLogicalSequence+2
+    for _,change:=range changes{
+        delta,err:=codec.CanonicalPayload([]any{change.DefinitionID[:],change.Before,change.After})
+        if err!=nil{return empty,err}
+        id,raw,err:=trigger.LifecycleEvent(c.bundle,runID,domain.ID(origin),state.Instant,state.Revision,
+            sequence,3,domain.ID(change.DefinitionID),delta)
+        if err!=nil{return empty,err}
+        events=append(events,ports.CanonicalRecord{Identity:[32]byte(id),Canonical:raw})
+        eventIDs=append(eventIDs,id[:]);canonicalEvents=append(canonicalEvents,raw);sequence++
+    }
+    // Phase 4 is ordered by EventOrderKey origin_ref = activation identity.
+    sort.Slice(activations,func(i,j int)bool{return bytes.Compare(activations[i].Identity[:],activations[j].Identity[:])<0})
+    for _,activation:=range activations{
+        id,raw,err:=trigger.LifecycleEvent(c.bundle,runID,domain.ID(origin),state.Instant,state.Revision,
+            sequence,4,domain.ID(activation.Identity),activation.Canonical)
+        if err!=nil{return empty,err}
+        events=append(events,ports.CanonicalRecord{Identity:[32]byte(id),Canonical:raw})
+        eventIDs=append(eventIDs,id[:]);canonicalEvents=append(canonicalEvents,raw);sequence++
+    }
+    next.NextLogicalSequence=sequence
+    afterBytes,err=clock.Encode(next);if err!=nil{return empty,err}
+    noDecisions:=[]any{}
+    decisionDigest,_,err:=d.Sum("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",1,noDecisions)
+    if err!=nil{return empty,err}
+    taskDigest,_,err:=d.Sum("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",1,[]any{})
+    if err!=nil{return empty,err}
+    policies,err:=policiesByRole(c.bundle);if err!=nil{return empty,err}
+    planBytes,err:=clock.EncodePlan(plan);if err!=nil{return empty,err}
+    commitBody:=[]any{
+        runID[:],origin[:],uint64(0),int64(state.Instant),uint64(plan.OriginOrdinal),planBytes,
+        uint64(state.Revision),f.Fields[8],uint64(next.Revision),f.Fields[8],
+        f.Digest[:],[]any{},f.InputDigest[:],policies["cycle-coordinate"],policies["event-order"],
+        eventIDs,[]any{},decisionDigest[:],[]any{},taskDigest[:],
+        policies["perception"],policies["perception-identity"],uint64(next.NextLogicalSequence),
+    }
+    batchDigest,_,err:=d.Sum("cote.csf.digest.batch","cote.csf.schema.batch-preimage",1,[]any{commitBody,canonicalEvents})
+    if err!=nil{return empty,err}
+    journalBytes,err:=codec.CanonicalPayload(append(cloneAny(commitBody),batchDigest[:]));if err!=nil{return empty,err}
+    commitID,_,err:=d.Sum("cote.csf.id.cycle-commit","cote.csf.schema.cycle-commit-id-preimage",1,[]any{runID[:],origin[:],uint64(0)})
+    if err!=nil{return empty,err}
     return ports.ClockAdvanceBatch{
         RunID:[32]byte(runID),CycleID:[32]byte(origin),FenceID:f.ID,
         TargetInstant:int64(plan.To),TargetOrdinal:uint64(plan.Target.NotBeforeCycleOrdinal),

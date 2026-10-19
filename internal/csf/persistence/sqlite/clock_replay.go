@@ -97,10 +97,10 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
   plan:=clock.Plan{Kind:clock.ClockAdvance,From:current.Instant,To:domain.SimulationInstant(to),OriginOrdinal:domain.CycleOrdinal(current.LastOrdinal+1),
    Target:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(to),NotBeforeCycleOrdinal:domain.CycleOrdinal(targetOrdinal)}}
   next,err:=clock.ApplyAdvance(current,plan);if err!=nil{return report,err}
-  eventIDs,ok:=journal[15].([]any);if !ok||len(eventIDs)!=2{return report,errors.New("replay event IDs incomplete")}
+  eventIDs,ok:=journal[15].([]any);if !ok||len(eventIDs)<2{return report,errors.New("replay temporal event IDs incomplete")}
   events:=make([]ports.CanonicalRecord,0,len(eventIDs))
   triggerEvents:=make([]trigger.Event,0,len(eventIDs))
-  for _,rawID:=range eventIDs{
+  for eventIndex,rawID:=range eventIDs{
    id,ok:=rawID.([]byte);if !ok||len(id)!=32{return report,errors.New("invalid replay event id")}
    var eventID [32]byte;copy(eventID[:],id)
    encoded,err:=s.ReadClockEvent(ctx,eventID);if err!=nil{return report,err}
@@ -108,10 +108,13 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
    ev,err:=codec.StrictDecodePayload(encoded);if err!=nil{return report,err}
    fields,ok:=ev.([]any);if !ok||len(fields)!=19{return report,errors.New("invalid event schema in replay")}
    kind,ok:=fields[3].(string);if !ok{return report,errors.New("replay event kind missing")}
-   footprint,err:=trigger.EventFootprint(kind);if err!=nil{return report,err}
-   orderKey,err:=codec.CanonicalPayload(fields[2]);if err!=nil{return report,err}
-   triggerEvents=append(triggerEvents,trigger.Event{ID:domain.ID(eventID),OrderKey:orderKey,Footprint:footprint})
+   if eventIndex<2 {
+    footprint,err:=trigger.EventFootprint(kind);if err!=nil{return report,err}
+    orderKey,err:=codec.CanonicalPayload(fields[2]);if err!=nil{return report,err}
+    triggerEvents=append(triggerEvents,trigger.Event{ID:domain.ID(eventID),OrderKey:orderKey,Footprint:footprint})
+   }
   }
+  next.NextLogicalSequence=current.NextLogicalSequence+domain.LogicalSequence(len(events))
   expectedClock,err:=clock.Encode(current);if err!=nil{return report,err}
   resultClock,err:=clock.Encode(next);if err!=nil{return report,err}
   revBytes:=[]byte{}
@@ -129,6 +132,8 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
    BaseStateHash:bh,ResultStateHash:rh,ExpectedClock:expectedClock,ResultClock:resultClock,
    Journal:ports.CanonicalRecord{Identity:entry.commitID,Canonical:raw},Events:events,RevisionCanonical:revBytes}
   if err:=verifyAdvanceEnvelope(record,journal,current,next,genesisTyped);err!=nil{return report,fmt.Errorf("replay commit integrity: %w",err)}
+  runtimeEvents:=make([]ports.CanonicalRecord,0,len(definitions))
+  activationPayloads:=make([]ports.CanonicalRecord,0)
   for _,registered:=range definitions{
    def:=registered.Definition
    old:=runtime[def.ID]
@@ -136,6 +141,13 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
    if err!=nil{return report,err}
    runtime[def.ID]=decision.Runtime
    report.ReplayedTriggerTransitions++
+   beforeRaw,err:=trigger.RuntimeBytes(old);if err!=nil{return report,err}
+   afterRaw,err:=trigger.RuntimeBytes(decision.Runtime);if err!=nil{return report,err}
+   delta,err:=codec.CanonicalPayload([]any{def.ID[:],beforeRaw,afterRaw});if err!=nil{return report,err}
+   runtimeID,runtimeEvent,err:=trigger.LifecycleEvent(bundle,domain.ID(runID),domain.ID(entry.cycleID),
+    current.Instant,current.Revision,current.NextLogicalSequence+2+domain.LogicalSequence(len(runtimeEvents)),3,def.ID,delta)
+   if err!=nil{return report,err}
+   runtimeEvents=append(runtimeEvents,ports.CanonicalRecord{Identity:[32]byte(runtimeID),Canonical:runtimeEvent})
    if decision.Fired{
     expected,_,err:=d.Sum("cote.csf.id.trigger-activation","cote.csf.schema.trigger-activation-id-preimage",1,
      []any{runID[:],def.ID[:],uint64(def.Version),uint64(next.Revision),decision.Runtime.ActivationCount})
@@ -145,6 +157,7 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
     expectedID,expectedBytes,err:=trigger.CycleActivation(bundle,domain.ID(runID),def,decision.Runtime,domain.ID(entry.cycleID),next.Revision,next.Instant,decision.CausingEventIDs)
     if err!=nil{return report,err}
     if expectedID!=domain.ID(expected)||!bytes.Equal(rawActivation,expectedBytes){return report,errors.New("replay activation body differs from deterministic transition")}
+    activationPayloads=append(activationPayloads,ports.CanonicalRecord{Identity:[32]byte(expectedID),Canonical:rawActivation})
     decoded,err:=codec.StrictDecodePayload(rawActivation);if err!=nil{return report,err}
     fields,ok:=decoded.([]any);if !ok||len(fields)!=12{return report,errors.New("activation replay schema malformed")}
     origin,ok:=fields[5].([]any);if !ok||len(origin)!=4{return report,errors.New("activation replay origin malformed")}
@@ -161,6 +174,21 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
     if !equalBytes(fields[11],digest[:]){return report,errors.New("replay activation digest mismatch")}
     report.VerifiedActivations++
    }
+  }
+  // Reconstruct both lifecycle phases rather than trusting self-hashed
+  // persisted records; every runtime revision and activation is an event.
+  sort.Slice(activationPayloads,func(i,j int)bool{return bytes.Compare(activationPayloads[i].Identity[:],activationPayloads[j].Identity[:])<0})
+  lifecycles:=append([]ports.CanonicalRecord(nil),runtimeEvents...)
+  for _,activation:=range activationPayloads{
+   eventID,raw,err:=trigger.LifecycleEvent(bundle,domain.ID(runID),domain.ID(entry.cycleID),
+    current.Instant,current.Revision,current.NextLogicalSequence+2+domain.LogicalSequence(len(lifecycles)),4,domain.ID(activation.Identity),activation.Canonical)
+   if err!=nil{return report,err}
+   lifecycles=append(lifecycles,ports.CanonicalRecord{Identity:[32]byte(eventID),Canonical:raw})
+  }
+  if len(events)!=2+len(lifecycles){return report,errors.New("replay lifecycle event set incomplete")}
+  for i,expected:=range lifecycles{
+   actual:=events[2+i]
+   if actual.Identity!=expected.Identity||!bytes.Equal(actual.Canonical,expected.Canonical){return report,errors.New("replay lifecycle event differs from causal trigger transition")}
   }
   current=next
   report.ReplayedCommits++

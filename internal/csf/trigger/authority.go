@@ -142,3 +142,33 @@ func CycleActivation(bundle *policy.Bundle,runID domain.ID,def Definition,r Runt
  raw,err:=codec.CanonicalPayload(append(fields,fullDigest[:]));if err!=nil{return zero,nil,err}
  return domain.ID(id),raw,nil
 }
+
+// LifecycleEvent makes the temporal trigger transition observable to causal
+// replay without invoking an action handler. Only the two closed V1 phases
+// are admitted; these are internal, non-perceptible lifecycle events.
+func LifecycleEvent(bundle *policy.Bundle,runID,cycleID domain.ID,
+ from domain.SimulationInstant,base domain.WorldRevision,
+ sequence domain.LogicalSequence,phase uint64,origin domain.ID,
+ payload []byte)(domain.ID,[]byte,error){
+ var zero domain.ID
+ var kind,tag string
+ switch phase{
+ case 3:kind="trigger.runtime.transition";tag="cote.csf.trigger.runtime-transition.v1"
+ case 4:kind="trigger.activation.created";tag="cote.csf.trigger.activation-created.v1"
+ default:return zero,nil,errors.New("unknown trigger lifecycle phase")
+ }
+ deriver:=identity.New(bundle)
+ key:=[]any{phase,origin[:],"trigger",uint64(1),uint64(0),uint64(0)}
+ id,_,err:=deriver.Sum("cote.csf.id.event","cote.csf.schema.event-id-preimage",1,[]any{runID[:],cycleID[:],key})
+ if err!=nil{return zero,nil,err}
+ env,err:=codec.CanonicalBytes(tag,"cote.csf.schema.typed-value",1,[]any{origin[:],payload})
+ if err!=nil{return zero,nil,err}
+ h:=identity.OpaqueContentHash(env)
+ typed:=[]any{"cote.csf.schema.typed-value",uint64(1),env,h[:]}
+ body:=[]any{id[:],runID[:],key,kind,uint64(1),int64(from),uint64(sequence),cycleID[:],uint64(base),typed,
+  []any{},[]any{},[]any{},[]any{},[]any{uint64(0)},uint64(2),"trigger",uint64(1)}
+ digest,_,err:=deriver.Sum("cote.csf.digest.event","cote.csf.schema.event.body",1,body)
+ if err!=nil{return zero,nil,err}
+ raw,err:=codec.CanonicalPayload(append(body,digest[:]));if err!=nil{return zero,nil,err}
+ return domain.ID(id),raw,nil
+}

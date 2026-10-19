@@ -93,7 +93,7 @@ func TestClockAdvancePublishesCycleAndPendingActivation(t *testing.T){
  result,err:=coordinator.Advance(ctx,ledger,runID)
  if err!=nil{t.Fatal(err)}
  if result.Plan.Kind!=clock.ClockAdvance||result.ResultClock.Instant<=before.Instant||result.ResultClock.LastOrdinal!=-1{t.Fatal(result.Plan,result.ResultClock)}
- if len(result.Events)!=2||len(result.Activations)!=1{t.Fatalf("events=%d activations=%d",len(result.Events),len(result.Activations))}
+ if len(result.Events)!=4||len(result.Activations)!=1{t.Fatalf("events=%d activations=%d",len(result.Events),len(result.Activations))}
  if result.Commit.Identity==([32]byte{}){t.Fatal("zero commit id")}
  again,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  if again!=result.ResultClock||again.Revision!=1||again.NextLogicalSequence!=2{t.Fatal(again)}
@@ -134,7 +134,7 @@ func TestAdvanceAtomicRollbackAtEveryWriteBoundary(t *testing.T){
    result,err:=coordinator.Advance(ctx,ledger,runID)
    if err!=nil{t.Fatalf("retry after rollback: %v",err)}
    audit,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
-   if audit.CommitCount!=1||audit.EventCount!=2||audit.RuntimeCount!=1||audit.ActivationCount!=1||audit.RevisionCount!=2||audit.InputCount!=before.InputCount{
+   if audit.CommitCount!=1||audit.EventCount!=4||audit.RuntimeCount!=1||audit.ActivationCount!=1||audit.RevisionCount!=2||audit.InputCount!=before.InputCount{
     t.Fatalf("incomplete committed state: %+v",audit)
    }
    journal,err:=store.ReadCycleCommit(ctx,result.Commit.Identity)
@@ -157,7 +157,7 @@ func TestAdvanceReopenAndWorkerPermutationPreserveAuthoritativeBytes(t *testing.
   coordinator,store,ledger,runID,bundle,path:=testFixture(t,work...)
   result,err:=coordinator.Advance(ctx,ledger,runID)
   if err!=nil{t.Fatal(err)}
-  if len(result.Events)!=2||len(result.Activations)!=2{t.Fatal("missing trigger activations")}
+  if len(result.Events)!=6||len(result.Activations)!=2{t.Fatal("missing trigger activations")}
   if iteration==0 {
    baselineJournal=append([]byte(nil),result.Commit.Canonical...)
    baselineEvent=append([]byte(nil),result.Events[0].Canonical...)
@@ -178,7 +178,7 @@ func TestAdvanceReopenAndWorkerPermutationPreserveAuthoritativeBytes(t *testing.
   report,err:=reopened.ReplayClock(ctx,[32]byte(runID),bundle)
   if err!=nil{reopened.Close();t.Fatalf("durable-only replay failed: %v",err)}
   if report.ReconstructedClock!=result.ResultClock || report.ReplayedCommits!=1 ||
-    report.ReplayedEvents!=2 || report.ReplayedTriggerTransitions!=2 || report.VerifiedActivations!=2 {
+    report.ReplayedEvents!=6 || report.ReplayedTriggerTransitions!=2 || report.VerifiedActivations!=2 {
     reopened.Close();t.Fatalf("incomplete replay: %+v",report)
   }
   reopened.Close()
@@ -324,7 +324,7 @@ func TestSyntheticBodyDependencyHasSeparateCanonicalCause(t *testing.T) {
  coord,store,ledger,runID,bundle,_:=testFixture(t,clockDef,bodyDef)
  result,err:=coord.Advance(ctx,ledger,runID)
  if err!=nil{t.Fatal(err)}
- if len(result.Events)!=2||len(result.Activations)!=2{t.Fatal("missing synthetic events or triggered activations")}
+ if len(result.Events)!=6||len(result.Activations)!=2{t.Fatal("missing synthetic events, lifecycle events or triggered activations")}
  expected:=map[domain.ID]domain.ID{
   clockDef.ID:domain.ID(result.Events[0].Identity),
   bodyDef.ID:domain.ID(result.Events[1].Identity),
@@ -475,6 +475,26 @@ func TestReplayRejectsWorldRevisionHashNotAnchoredToGenesis(t *testing.T){
  defer reopened.Close()
  if _,err:=reopened.ReplayClock(ctx,[32]byte(runID),bundle);err==nil{
   t.Fatal("replay accepted world revision hash differing from genesis")
+ }
+}
+
+// Regression finding #1: runtime and creation are persisted in the same
+// CycleCommit event set, after the two pre-trigger temporal events.
+func TestTriggerLifecycleEventsBelongToClockCommit(t *testing.T){
+ ctx:=context.Background()
+ coordinator,store,ledger,run,bundle,_:=testFixture(t,activeTrigger())
+ result,err:=coordinator.Advance(ctx,ledger,run);if err!=nil{t.Fatal(err)}
+ if len(result.Events)!=4{t.Fatalf("expected 2 temporal + runtime + activation events, got %d",len(result.Events))}
+ for i,event:=range result.Events {
+  v,err:=codec.StrictDecodePayload(event.Canonical);if err!=nil{t.Fatal(err)}
+  fields:=v.([]any);key:=fields[2].([]any)
+  want:=uint64(0);if i==2{want=3};if i==3{want=4}
+  if key[0]!=want{t.Fatalf("event %d phase %v, want %d",i,key[0],want)}
+  if fields[15]!=uint64(2){t.Fatal("lifecycle event improperly perceptible")}
+ }
+ report,err:=store.ReplayClock(ctx,[32]byte(run),bundle)
+ if err!=nil||report.ReplayedEvents!=4||report.ReplayedTriggerTransitions!=1||report.VerifiedActivations!=1{
+  t.Fatalf("replay could not reproduce trigger lifecycle: %+v %v",report,err)
  }
 }
 

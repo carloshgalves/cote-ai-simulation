@@ -248,14 +248,14 @@ func registeredDigest(domainTag,schemaID string,value any)(domain.Digest,error){
  return identity.OpaqueContentHash(encoded),nil
 }
 func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next clock.State,initialState []any) error {
- if len(b.Events)!=2{return errors.New("clock advance requires clock and synthetic body events")}
+ if len(b.Events)<2{return errors.New("clock advance requires clock and synthetic body events")}
  if len(journal)!=24{return errors.New("malformed CycleCommit body")}
  if !equalBytes(journal[0],b.RunID[:])||!equalBytes(journal[1],b.CycleID[:]){return errors.New("CycleCommit run/cycle mismatch")}
  instant,ok:=asSigned64(journal[3])
  if !ok||instant!=int64(state.Instant)||journal[2]!=uint64(0)||journal[4]!=uint64(state.LastOrdinal+1){
   return errors.New("CycleCommit attempt/origin mismatch")
  }
- if next.NextLogicalSequence!=state.NextLogicalSequence+2||journal[6]!=b.ExpectedRevision||
+ if uint64(next.NextLogicalSequence)!=uint64(state.NextLogicalSequence)+uint64(len(b.Events))||journal[6]!=b.ExpectedRevision||
   journal[8]!=b.ResultRevision||journal[22]!=uint64(next.NextLogicalSequence){
   return errors.New("CycleCommit revision/logical sequence mismatch")
  }
@@ -267,11 +267,49 @@ func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next cl
   if !ok||len(group)!=0{return errors.New("CLOCK_ADVANCE cannot settle work or perception tasks")}
  }
  ids,ok:=journal[15].([]any)
- if !ok||len(ids)!=2{return errors.New("CycleCommit event count mismatch")}
+ if !ok||len(ids)!=len(b.Events){return errors.New("CycleCommit event count mismatch")}
  canonicalEvents:=make([]any,0,2)
  for i,item:=range b.Events{
   if !equalBytes(ids[i],item.Identity[:]){return errors.New("CycleCommit event order mismatch")}
   fields,err:=strictFull(item,19);if err!=nil{return err}
+  if i>=2{
+   var kind,tag string
+   key,ok:=fields[2].([]any)
+   if !ok||len(key)!=6{return errors.New("trigger lifecycle event order key malformed")}
+   phase,ok:=key[0].(uint64);if !ok{return errors.New("trigger lifecycle event phase malformed")}
+   switch phase{
+   case 3:kind="trigger.runtime.transition";tag="cote.csf.trigger.runtime-transition.v1"
+   case 4:kind="trigger.activation.created";tag="cote.csf.trigger.activation-created.v1"
+   default:return errors.New("unexpected event phase in temporal CycleCommit")
+   }
+   if !equalBytes(fields[1],b.RunID[:])||!equalBytes(fields[7],b.CycleID[:])||
+    fields[3]!=kind||fields[4]!=uint64(1)||fields[6]!=uint64(state.NextLogicalSequence)+uint64(i)||
+    fields[8]!=b.ExpectedRevision||fields[15]!=uint64(2)||fields[16]!="trigger"||fields[17]!=uint64(1)||
+    key[2]!="trigger"||key[3]!=uint64(1)||key[4]!=uint64(0)||key[5]!=uint64(0){
+    return errors.New("trigger lifecycle event origin/sequence invalid")
+   }
+   from,ok:=asSigned64(fields[5]);if !ok||from!=int64(state.Instant){return errors.New("trigger lifecycle event instant invalid")}
+   typed,ok:=fields[9].([]any);if !ok||len(typed)!=4||typed[0]!="cote.csf.schema.typed-value"||typed[1]!=uint64(1){return errors.New("trigger lifecycle typed-value invalid")}
+   payload,ok:=typed[2].([]byte);if !ok{return errors.New("trigger lifecycle payload invalid")}
+   hash:=identity.OpaqueContentHash(payload)
+   if !equalBytes(typed[3],hash[:]){return errors.New("trigger lifecycle payload hash invalid")}
+   env,err:=codec.StrictDecodeEnvelope(payload);if err!=nil||env.DomainTag!=tag||env.SchemaID!="cote.csf.schema.typed-value"||env.SchemaVersion!=1{return errors.New("trigger lifecycle schema invalid")}
+   val,ok:=env.Value.([]any);if !ok||len(val)!=2||!sameCanonical(val[0],key[1]){return errors.New("trigger lifecycle origin payload mismatch")}
+   for _,slot:=range []int{10,11,12,13}{part,ok:=fields[slot].([]any);if !ok||len(part)!=0{return errors.New("trigger lifecycle leaks source or observer refs")}}
+   if !sameCanonical(fields[14],[]any{uint64(0)}){return errors.New("trigger lifecycle location unexpected")}
+   derived,err:=registeredDigest("cote.csf.id.event","cote.csf.schema.event-id-preimage",[]any{b.RunID[:],b.CycleID[:],fields[2]});if err!=nil{return err}
+   if derived!=domain.Digest(item.Identity){return errors.New("trigger lifecycle event ID invalid")}
+   digest,err:=registeredDigest("cote.csf.digest.event","cote.csf.schema.event.body",fields[:18]);if err!=nil{return err}
+   if !equalBytes(fields[18],digest[:]){return errors.New("trigger lifecycle event digest invalid")}
+   // EventOrderKey must increase strictly, including across phase 3 and 4.
+   preceding,err:=codec.StrictDecodePayload(b.Events[i-1].Canonical);if err!=nil{return err}
+   pre:=preceding.([]any)
+   lastKey,err:=codec.CanonicalPayload(pre[2]);if err!=nil{return err}
+   thisKey,err:=codec.CanonicalPayload(key);if err!=nil{return err}
+   if bytes.Compare(lastKey,thisKey)>=0{return errors.New("trigger lifecycle events out of causal order")}
+   canonicalEvents=append(canonicalEvents,item.Canonical)
+   continue
+  }
   kind:="clock.advanced"
   tag:="cote.csf.event.clock-advanced"
   schema:="cote.csf.schema.clock-advanced"
@@ -467,8 +505,8 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  if err:=registered.Err();err!=nil{registered.Close();return err}
  if err:=registered.Close();err!=nil{return err}
  if len(definitions)!=len(b.TriggerRuntime){return errors.New("CLOCK_ADVANCE omitted or invented registered trigger")}
- preEvents:=make([]trigger.Event,0,len(b.Events))
- for _,event:=range b.Events{
+ preEvents:=make([]trigger.Event,0,2)
+ for _,event:=range b.Events[:2]{
   raw,err:=codec.StrictDecodePayload(event.Canonical);if err!=nil{return err}
   fields,ok:=raw.([]any);if !ok||len(fields)!=19{return errors.New("invalid pre-trigger event")}
   kind,ok:=fields[3].(string);if !ok{return errors.New("missing event kind")}
@@ -558,6 +596,16 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
   ordinal,ok:=eligibility[1].(uint64);if !ok||instant<int64(next.Instant){return errors.New("trigger activation precedes successor floor")}
   if _,err:=tx.ExecContext(ctx,"INSERT INTO trigger_activations(id,run_id,eligibility_instant,eligibility_ordinal,lifecycle,canonical) VALUES(?,?,?,?,0,?)",item.Identity[:],b.RunID[:],instant,ordinal,item.Canonical);err!=nil{return err}
  }
+ if len(b.Events)!=2+len(b.TriggerRuntime)+len(b.Activations){return errors.New("temporal batch omitted trigger lifecycle events")}
+ for i,change:=range b.TriggerRuntime{
+  delta,err:=codec.CanonicalPayload([]any{change.DefinitionID[:],change.Before,change.After});if err!=nil{return err}
+  if err:=verifyLifecyclePayload(b.Events[2+i],3,change.DefinitionID,delta);err!=nil{return err}
+ }
+ orderedActivations:=append([]ports.CanonicalRecord(nil),b.Activations...)
+ sort.Slice(orderedActivations,func(i,j int)bool{return bytes.Compare(orderedActivations[i].Identity[:],orderedActivations[j].Identity[:])<0})
+ for i,activation:=range orderedActivations{
+  if err:=verifyLifecyclePayload(b.Events[2+len(b.TriggerRuntime)+i],4,activation.Identity,activation.Canonical);err!=nil{return err}
+ }
  if err:=failClock(b.FailAfterStep,4);err!=nil{return err}
  if _,err:=tx.ExecContext(ctx,"INSERT INTO world_revisions(revision,state_hash,canonical) VALUES(?,?,?)",b.ResultRevision,b.ResultStateHash[:],b.RevisionCanonical);err!=nil{return err}
  if err:=failClock(b.FailAfterStep,5);err!=nil{return err}
@@ -569,6 +617,19 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  return tx.Commit()
 }
 
+// A lifecycle event must assert exactly the runtime delta or activation
+// record that this one transaction is materializing; a valid self-hash alone
+// does not prove the correct causal state transition.
+func verifyLifecyclePayload(event ports.CanonicalRecord,phase uint64,origin [32]byte,payload []byte)error{
+ decoded,err:=codec.StrictDecodePayload(event.Canonical);if err!=nil{return err}
+ fields,ok:=decoded.([]any);if !ok||len(fields)!=19{return errors.New("lifecycle event malformed")}
+ key,ok:=fields[2].([]any);if !ok||len(key)!=6||key[0]!=phase||!equalBytes(key[1],origin[:]){return errors.New("lifecycle event order key origin mismatch")}
+ typed,ok:=fields[9].([]any);if !ok||len(typed)!=4{return errors.New("lifecycle event typed value malformed")}
+ envBytes,ok:=typed[2].([]byte);if !ok{return errors.New("lifecycle event payload absent")}
+ env,err:=codec.StrictDecodeEnvelope(envBytes);if err!=nil{return err}
+ data,ok:=env.Value.([]any);if !ok||len(data)!=2||!equalBytes(data[0],origin[:])||!equalBytes(data[1],payload){return errors.New("lifecycle event payload diverges from committed trigger mutation")}
+ return nil
+}
 func failClock(inject,stage uint8)error {if inject==stage{return errors.New("injected clock commit failure")};return nil}
 func asSigned64(v any)(int64,bool){
  switch n:=v.(type){case int64:return n,true;case uint64:if n<=uint64(^uint64(0)>>1){return int64(n),true}}

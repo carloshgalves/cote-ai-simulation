@@ -151,3 +151,53 @@ remediação não declara esse feature completo nem autoriza merge.
 
 **Próxima fase:** `$code-review CSFRV1-3` independente, apenas por
 solicitação explícita após as checks da PR.
+
+## Segunda remediação de code-review — findings 7–11 (19/10/2026)
+
+**PR #19:** permanece Draft, sem merge ou aprovação automática.
+**Base de review:** `ffdc4940f73f54213e198b1f9ec830425fe32e67`.
+**Commits da remediação:** `4a4fecfcd62143b68b9e93afc2ce88f0392e6151`,
+`41da1f81ccf8e476d7add2ec8da9d522038d58b5`,
+`ec1ccc9be0cea67d54d148bf362d510ed91b9ab9` (instrumentação da falha),
+`5f5b495f18b2bbebc9465ff5d615e526018ee357` e
+`d9cfa731bf6a26c18a435335dbe8016b365c4393`.
+
+- **#7:** tanto `AppendRoundDeclaration` quanto `AppendIngress`
+  interpretam o corte do `AdmissionFence` como `cycle_plan.target_coordinate`
+  quando o ciclo é `CLOCK_ADVANCE`, e como a origem quando é `WORK`.
+  Regressões verificam Q concorrente pré-fence (muda o alvo) e pós-fence
+  (inserção rejeitada e avanço original concluído). Nenhum abort/segunda
+  identidade de retry provisório foi adicionado.
+- **#8:** commit e replay verificam o conjunto completo de fontes exógenas
+  declaradas e a **primeira** `SourceClosure` que cobre P por `ingress_seq`.
+  Não aceitam um conjunto de provas vazio com fonte declarada, nem substituir
+  a testemunha pela segunda closure após re-hash.
+- **#9:** referências de policy são confrontadas com os bytes efetivamente
+  fixados no genesis em commit e replay. A associação `role → policy ref`
+  deixou de usar índices posicionais: utiliza `genesis_policy_bindings`
+  e as refs canônicas do genesis. **Compatibilidade V1 delimitada:** o
+  contrato de transições registra `perception-visible-first-v1`, porém a
+  ref congelada no genesis de V1 é `perception-v1`. O runtime usa **somente**
+  a ref efetivamente comprometida no genesis, sem alterar bundle, hashes
+  ou a semântica de percepção.
+- **#10:** eventos sintéticos de `CLOCK_ADVANCE` rejeitam parent/source/
+  actor/entity refs ou location não canônicos, mesmo com `Event` e batch
+  hashes recalculados.
+- **#11:** `SeedGenesisOccurrence` proíbe `PENDING` elegível em instante
+  anterior ao `Genesis.InitialInstant`, antes de inserir. Fixture negativa
+  usa occurrence com ID/digest válidos e coordenada retroativa.
+
+**Regressões adicionadas:** corte pós-fence, seleção pré-fence, policy roles,
+fence sem closure, closure posterior usada como primeiro witness, policy
+ref trocada com batch re-hash, event provenance forjada com digests re-hashados,
+occurrence pré-genesis.
+
+**Validação executada sobre `d9cfa731`:**
+
+- [CSFRV1-3 Implementation Checkpoint](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39340606389): **success** — `git diff --check` desde o HEAD anterior à primeira revisão, `go test ./...`, harness Go, harness TS e `cmp` canônico.
+- [CSF canonical conformance](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39340614237): **success**.
+
+**Gates mantidos:** lifecycle/settlement de WORK e rearm manual durável
+continuam dependentes de CSFRV1-4/5, sem bypass do CycleCommit.
+Próxima etapa: novo `$code-review CSFRV1-3` independente apenas mediante
+solicitação. Este checkpoint não autoriza merge nem Ready for review.

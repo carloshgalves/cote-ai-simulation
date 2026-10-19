@@ -3,6 +3,9 @@
 This deliberately does not claim the Examination Engine is implemented.
 """
 from pathlib import Path
+import hashlib
+import itertools
+import json
 
 import yaml
 
@@ -34,9 +37,9 @@ def test_conformance_vectors_and_setup_mutations_are_complete_and_unique():
     assert suite["not_canon"] is True
     vectors = suite["vectors"]
     ids = [item["id"] for item in vectors]
-    assert len(vectors) == 15
+    assert len(vectors) == 18
     assert len(set(ids)) == 15
-    assert {f"V{n:02d}" for n in range(1, 16)} == {
+    assert {f"V{n:02d}" for n in range(1, 19)} == {
         item.split("-")[0] for item in ids
     }
     assert len(suite["static_setup_generators"]["mutations"]) == 8
@@ -87,3 +90,108 @@ def test_no_direct_expulsion_and_micro_exam_remain_declared_only():
     spec = SPEC.read_text(encoding="utf-8")
     assert "### D2" in spec and "### D3" in spec
     assert "SIMULATION_AUTHORED" in spec
+
+def _fixture_cohort_resolution(vector, permutation):
+    """Small deterministic fixture oracle; NOT an executable Examination Engine.
+
+    Input order may change; only the full closed cohort determines the receipt,
+    quota and terminal outcome. This checks the new normative vectors.
+    """
+    messages = vector["action_set"]["submissions"]
+    by_transport = {
+        x.get("transport_attempt_id", x["submission_id"]): x for x in messages
+    }
+    seen_id = {}
+    for arrival in permutation:
+        msg = by_transport[arrival]
+        canonical_fields = (msg["actor_id"], msg["guess"], msg["submission_id"])
+        original = seen_id.setdefault(msg["submission_id"], canonical_fields)
+        if original != canonical_fields:
+            raise ValueError("causal identity reused with divergent payload")
+    ranks = vector["identity_policy_fixture"]["derived_priority"]
+    per_actor = {}
+    for submission_id, fields in seen_id.items():
+        actor_id, guess, _ = fields
+        per_actor.setdefault(actor_id, []).append((int(ranks[submission_id], 16), submission_id, guess))
+    selected = {
+        actor_id: min(candidates) for actor_id, candidates in per_actor.items()
+    }
+    if set(selected) != {"b1"}:
+        raise AssertionError("fixture only covers same-actor arbitration")
+    priority, submission_id, guess = selected["b1"]
+    right = guess == "d2"
+    outcome = "OUTCOME_3_TRAITOR_CORRECT" if right else "OUTCOME_4_TRAITOR_WRONG"
+    result = {
+        "canonical_actor_submission": submission_id,
+        "received_unique_count": 1,
+        "receipt_ids": [submission_id],
+        "quota_consumed_by_actor": {"b1": 1},
+        "outcomes_count": 1,
+        "outcome": outcome,
+        "cp_deltas": {"B": 50 if right else -50, "D": -50 if right else 50},
+        "pp": {"b1": 500000} if right else {"d2": 500000},
+    }
+    return result
+
+
+def test_closed_cohort_quota_is_permutation_invariant_for_same_actor():
+    suite = read_yaml(VECTORS)
+    by_id = {item["id"].split("-")[0]: item for item in suite["vectors"]}
+    for vector_id in ("V16", "V17"):
+        vector = by_id[vector_id]
+        output = [
+            _fixture_cohort_resolution(vector, ordering)
+            for ordering in vector["execute_permutations"]
+        ]
+        assert output[0] == output[1]
+        expected = vector["expect_for_every_permutation"]
+        for key in (
+            "canonical_actor_submission", "received_unique_count",
+            "quota_consumed_by_actor", "outcome", "cp_deltas", "pp", "outcomes_count"
+        ):
+            assert output[0][key] == expected[key], (vector_id, key)
+        fingerprints = [
+            hashlib.sha256(json.dumps(x, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+            for x in output
+        ]
+        assert len(set(fingerprints)) == 1
+        assert expected["final_state_hash_equal_across_permutations"]
+        assert expected["economic_ledger_hash_equal_across_permutations"]
+        assert expected["receipt_ids_equal_across_permutations"]
+    assert by_id["V16"]["expect_for_every_permutation"]["other_disposition"] == "SUPERSEDED_BY_SAME_ACTOR_COHORT"
+    assert by_id["V17"]["expect_for_every_permutation"]["retransmission_disposition"] == "SAME_RECEIPT"
+
+
+def test_reused_causal_identity_with_divergent_payload_fails_both_orders():
+    suite = read_yaml(VECTORS)
+    vector = next(item for item in suite["vectors"] if item["id"].startswith("V18-"))
+    for ordering in vector["execute_permutations"]:
+        try:
+            _fixture_cohort_resolution(vector, ordering)
+        except ValueError as exc:
+            assert "divergent payload" in str(exc)
+        else:
+            raise AssertionError("same identity with two payloads did not fail closed")
+    expected = vector["expect_for_every_permutation"]
+    assert expected["cohort_rejected"] is True
+    assert expected["received_unique_count"] == 0
+    assert expected["quota_consumed_by_actor"] == {"b1": 0}
+    assert expected["outcomes_count"] == 0
+    assert expected["state_hash_equals_pre_cohort"] is True
+    assert expected["economic_ledger_hash_equals_pre_cohort"] is True
+
+
+def test_spec_and_model_make_actor_canonicalization_a_pre_quota_stage():
+    model = read_yaml(MODEL)
+    assert model["submission"]["admission_boundary"] == "CLOSED_CSF_COHORT"
+    assert model["submission"]["per_actor_canonicalization_before_quota"] is True
+    assert model["submission"]["identity_same_id_different_payload"] == "FAIL_CLOSED_NO_PARTIAL_EFFECTS"
+    stages = model["simultaneity"]["cohort_preparation"]
+    assert stages.index("SELECT_ONE_REPRESENTATIVE_PER_ACTOR_BY_PRIORITY") < stages.index(
+        "APPLY_PRE_COHORT_QUOTA_AND_SEMANTIC_VALIDATION"
+    )
+    assert stages[-1] == "COMMIT_RECEIPTS_OUTCOME_AND_ECONOMY_ATOMICALLY"
+    text = SPEC.read_text(encoding="utf-8")
+    assert "SUPERSEDED_BY_SAME_ACTOR_COHORT" in text
+    assert "mesmo estado pré-coorte" in text
+    assert "payload diferente" in text

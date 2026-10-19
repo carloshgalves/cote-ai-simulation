@@ -50,7 +50,7 @@ func validGenesis(t *testing.T,b *policy.Bundle)*genesis.Genesis{
  return nil
 }
 
-func testFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,domain.ID,*policy.Bundle,string) {
+func testFixture(t *testing.T,definitions ...trigger.Definition)(*Coordinator,*sqlite.Store,*inputledger.Ledger,domain.ID,*policy.Bundle,string) {
  t.Helper()
  ctx:=context.Background()
  bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
@@ -62,6 +62,8 @@ func testFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,do
  if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
  d:=identity.New(bundle)
  due:=g.InitialInstant+100
+ for i:=range definitions {definitions[i].PredicateThreshold=due}
+ if err:=store.BootstrapGenesisTriggers(ctx,g,bundle,definitions);err!=nil{t.Fatal(err)}
  origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
  occID,_,err:=d.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,[]any{origin,uint64(0),uint64(0)})
  if err!=nil{t.Fatal(err)}
@@ -82,12 +84,11 @@ func testFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,do
 
 func TestClockAdvancePublishesCycleAndPendingActivation(t *testing.T){
  ctx:=context.Background()
- coordinator,store,ledger,runID,_,_:=testFixture(t)
- before,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  var triggerID domain.ID;triggerID[0]=0x80
  definition:=trigger.Definition{ID:triggerID,Version:1,Policy:trigger.RisingEdge,FireOnInitialTrue:true,Dependencies:[]string{"clock"}}
- prior:=trigger.Runtime{DefinitionID:triggerID,Version:1,Armed:true}
- result,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{{Definition:definition,Previous:prior}})
+ coordinator,store,ledger,runID,_,_:=testFixture(t,definition)
+ before,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
+ result,err:=coordinator.Advance(ctx,ledger,runID)
  if err!=nil{t.Fatal(err)}
  if result.Plan.Kind!=clock.ClockAdvance||result.ResultClock.Instant<=before.Instant||result.ResultClock.LastOrdinal!=-1{t.Fatal(result.Plan,result.ResultClock)}
  if len(result.Events)!=1||len(result.Activations)!=1{t.Fatalf("events=%d activations=%d",len(result.Events),len(result.Activations))}
@@ -97,16 +98,17 @@ func TestClockAdvancePublishesCycleAndPendingActivation(t *testing.T){
  pending,err:=store.PendingClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  next,ok,err:=clock.Next(again,pending)
  if err!=nil||!ok||next.Kind!=clock.Work||next.OriginOrdinal!=0 {t.Fatal(next,err)}
- if _,err:=coordinator.Advance(ctx,ledger,runID,nil);err==nil {t.Fatal("advance repeated while WORK activation is pending")}
+ if _,err:=coordinator.Advance(ctx,ledger,runID);err==nil {t.Fatal("advance repeated while WORK activation is pending")}
  fence,err:=store.GetFence(ctx,result.Fence.ID)
  if err!=nil||!bytes.Equal(fence,result.Fence.Canonical){t.Fatal("fence changed")}
 }
 
-func activeTrigger() TriggerWork {
+func activeTrigger() trigger.Definition {
  var id domain.ID;id[0]=0x81
  d:=trigger.Definition{ID:id,Version:1,Policy:trigger.RisingEdge,FireOnInitialTrue:true,Dependencies:[]string{"clock"}}
  r:=trigger.Runtime{DefinitionID:id,Version:1,Armed:true}
- return TriggerWork{Definition:d,Previous:r}
+ _=r
+ return d
 }
 
 // A failure anywhere inside the one SQLite transaction must roll back every
@@ -116,18 +118,18 @@ func TestAdvanceAtomicRollbackAtEveryWriteBoundary(t *testing.T){
  for step:=uint8(1);step<=6;step++ {
   t.Run(string(rune('0'+step)),func(t *testing.T) {
    ctx:=context.Background()
-   coordinator,store,ledger,runID,_,_:=testFixture(t)
+   coordinator,store,ledger,runID,_,_:=testFixture(t,activeTrigger())
    initial,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
    before,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
    coordinator.failAfterStep=step
-   if _,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{activeTrigger()});err==nil{t.Fatal("injected failure was ignored")}
+   if _,err:=coordinator.Advance(ctx,ledger,runID);err==nil{t.Fatal("injected failure was ignored")}
    state,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil||state!=initial{t.Fatalf("clock changed after rollback: %+v %v",state,err)}
    after,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
    if after!=before {t.Fatalf("incomplete transaction leaked to authorities: before=%+v after=%+v",before,after)}
    // The persisted fence is not a terminal commit: repeat from the same
    // closed cohort after simulated process interruption.
    coordinator.failAfterStep=0
-   result,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{activeTrigger()})
+   result,err:=coordinator.Advance(ctx,ledger,runID)
    if err!=nil{t.Fatalf("retry after rollback: %v",err)}
    audit,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
    if audit.CommitCount!=1||audit.EventCount!=1||audit.RuntimeCount!=1||audit.ActivationCount!=1||audit.RevisionCount!=2||audit.InputCount!=before.InputCount{
@@ -145,13 +147,13 @@ func TestAdvanceReopenAndWorkerPermutationPreserveAuthoritativeBytes(t *testing.
  ctx:=context.Background()
  var baselineJournal,baselineEvent,baselineActivation []byte
  for iteration:=0;iteration<2;iteration++{
-  coordinator,store,ledger,runID,_,path:=testFixture(t)
   one:=activeTrigger()
   two:=activeTrigger()
-  two.Definition.ID[0]=0x82;two.Previous.DefinitionID=two.Definition.ID
-  work:=[]TriggerWork{one,two}
+  two.ID[0]=0x82
+  work:=[]trigger.Definition{one,two}
   if iteration==1{work[0],work[1]=work[1],work[0]}
-  result,err:=coordinator.Advance(ctx,ledger,runID,work)
+  coordinator,store,ledger,runID,_,path:=testFixture(t,work...)
+  result,err:=coordinator.Advance(ctx,ledger,runID)
   if err!=nil{t.Fatal(err)}
   if len(result.Events)!=1||len(result.Activations)!=2{t.Fatal("missing trigger activations")}
   if iteration==0 {
@@ -184,7 +186,6 @@ func TestProvisionalAdvanceIsRejectedAfterEarlierRoundArrives(t *testing.T){
  origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
  now:=state.Instant
  var injected bool
- item:=activeTrigger()
  coordinator.beforeCommit=func(){
   // Simulate independently arriving Q after provisional P was read but
   // before SQLite checks the global pending minimum and commits.
@@ -192,7 +193,7 @@ func TestProvisionalAdvanceIsRejectedAfterEarlierRoundArrives(t *testing.T){
   _,e:=ledger.DeclareRound(ctx,"schedule",[2]string{"school","actor-a"},[]string{"decision"},q,origin,0,57,0,[]any{uint64(0)})
   if e!=nil{t.Errorf("could not insert concurrent Q: %v",e)} else{injected=true}
  }
- result,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{item})
+ result,err:=coordinator.Advance(ctx,ledger,runID)
  if err==nil||!injected{t.Fatalf("advance with earlier Q was not rejected: %+v %v",result,err)}
  actual,err:=store.LoadClock(ctx,[32]byte(runID))
  if err!=nil||actual!=state{t.Fatalf("premature clock transition: %+v %v",actual,err)}
@@ -205,18 +206,18 @@ func TestProvisionalAdvanceIsRejectedAfterEarlierRoundArrives(t *testing.T){
 
 func TestRepeatCadenceIsPersistedAsFuturePendingWork(t *testing.T){
  ctx:=context.Background()
- coordinator,store,ledger,runID,_,_:=testFixture(t)
  w:=activeTrigger()
- w.Definition.Policy=trigger.RepeatWhileTrue
- w.Definition.FireOnInitialTrue=false
- w.Definition.RepeatEvery=25
- outcome,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{w})
+ w.Policy=trigger.RepeatWhileTrue
+ w.FireOnInitialTrue=false
+ w.RepeatEvery=25
+ coordinator,store,ledger,runID,_,_:=testFixture(t,w)
+ outcome,err:=coordinator.Advance(ctx,ledger,runID)
  if err!=nil{t.Fatal(err)}
  if len(outcome.Activations)!=1{t.Fatal("repeat did not activate at initial true")}
  pending,err:=store.PendingClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  var hasCadence bool
  for _,item:=range pending{
-  if item.ID==w.Definition.ID {
+  if item.ID==w.ID {
    hasCadence=true
    if item.Eligibility.NotBeforeInstant!=outcome.ResultClock.Instant+25 {t.Fatalf("repeat cadence was not durable: %+v",item)}
   }
@@ -254,10 +255,10 @@ func TestSQLiteRejectsTamperedClockBatchWithoutPartialState(t *testing.T) {
  for _,test:=range tests {
   t.Run(test.name,func(t *testing.T){
    ctx:=context.Background()
-   coordinator,store,ledger,runID,_,_:=testFixture(t)
+   coordinator,store,ledger,runID,_,_:=testFixture(t,activeTrigger())
    before,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
    coordinator.tamperBatch=func(b *ports.ClockAdvanceBatch){test.alter(t,b)}
-   if _,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{activeTrigger()});err==nil {
+   if _,err:=coordinator.Advance(ctx,ledger,runID);err==nil {
     t.Fatal("corrupted causal batch was accepted")
    }
    after,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}

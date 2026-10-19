@@ -155,7 +155,7 @@ func TestAdvanceReopenAndWorkerPermutationPreserveAuthoritativeBytes(t *testing.
   coordinator,store,ledger,runID,_,path:=testFixture(t,work...)
   result,err:=coordinator.Advance(ctx,ledger,runID)
   if err!=nil{t.Fatal(err)}
-  if len(result.Events)!=1||len(result.Activations)!=2{t.Fatal("missing trigger activations")}
+  if len(result.Events)!=2||len(result.Activations)!=2{t.Fatal("missing trigger activations")}
   if iteration==0 {
    baselineJournal=append([]byte(nil),result.Commit.Canonical...)
    baselineEvent=append([]byte(nil),result.Events[0].Canonical...)

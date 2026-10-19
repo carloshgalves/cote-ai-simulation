@@ -91,10 +91,10 @@ func TestClockAdvancePublishesCycleAndPendingActivation(t *testing.T){
  result,err:=coordinator.Advance(ctx,ledger,runID)
  if err!=nil{t.Fatal(err)}
  if result.Plan.Kind!=clock.ClockAdvance||result.ResultClock.Instant<=before.Instant||result.ResultClock.LastOrdinal!=-1{t.Fatal(result.Plan,result.ResultClock)}
- if len(result.Events)!=1||len(result.Activations)!=1{t.Fatalf("events=%d activations=%d",len(result.Events),len(result.Activations))}
+ if len(result.Events)!=2||len(result.Activations)!=1{t.Fatalf("events=%d activations=%d",len(result.Events),len(result.Activations))}
  if result.Commit.Identity==([32]byte{}){t.Fatal("zero commit id")}
  again,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
- if again!=result.ResultClock||again.Revision!=1||again.NextLogicalSequence!=1{t.Fatal(again)}
+ if again!=result.ResultClock||again.Revision!=1||again.NextLogicalSequence!=2{t.Fatal(again)}
  pending,err:=store.PendingClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  next,ok,err:=clock.Next(again,pending)
  if err!=nil||!ok||next.Kind!=clock.Work||next.OriginOrdinal!=0 {t.Fatal(next,err)}
@@ -132,7 +132,7 @@ func TestAdvanceAtomicRollbackAtEveryWriteBoundary(t *testing.T){
    result,err:=coordinator.Advance(ctx,ledger,runID)
    if err!=nil{t.Fatalf("retry after rollback: %v",err)}
    audit,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
-   if audit.CommitCount!=1||audit.EventCount!=1||audit.RuntimeCount!=1||audit.ActivationCount!=1||audit.RevisionCount!=2||audit.InputCount!=before.InputCount{
+   if audit.CommitCount!=1||audit.EventCount!=2||audit.RuntimeCount!=1||audit.ActivationCount!=1||audit.RevisionCount!=2||audit.InputCount!=before.InputCount{
     t.Fatalf("incomplete committed state: %+v",audit)
    }
    journal,err:=store.ReadCycleCommit(ctx,result.Commit.Identity)

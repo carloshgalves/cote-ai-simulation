@@ -86,7 +86,7 @@ func TestClockAdvancePublishesCycleAndPendingActivation(t *testing.T){
  var triggerID domain.ID;triggerID[0]=0x80
  definition:=trigger.Definition{ID:triggerID,Version:1,Policy:trigger.RisingEdge,FireOnInitialTrue:true,Dependencies:[]string{"clock"}}
  prior:=trigger.Runtime{DefinitionID:triggerID,Version:1,Armed:true}
- result,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{{Definition:definition,Previous:prior,Predicate:func(clock.State)bool{return true}}})
+ result,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{{Definition:definition,Previous:prior}})
  if err!=nil{t.Fatal(err)}
  if result.Plan.Kind!=clock.ClockAdvance||result.ResultClock.Instant<=before.Instant||result.ResultClock.LastOrdinal!=-1{t.Fatal(result.Plan,result.ResultClock)}
  if len(result.Events)!=1||len(result.Activations)!=1{t.Fatalf("events=%d activations=%d",len(result.Events),len(result.Activations))}
@@ -105,7 +105,7 @@ func activeTrigger() TriggerWork {
  var id domain.ID;id[0]=0x81
  d:=trigger.Definition{ID:id,Version:1,Policy:trigger.RisingEdge,FireOnInitialTrue:true,Dependencies:[]string{"clock"}}
  r:=trigger.Runtime{DefinitionID:id,Version:1,Armed:true}
- return TriggerWork{Definition:d,Previous:r,Predicate:func(clock.State)bool{return true}}
+ return TriggerWork{Definition:d,Previous:r}
 }
 
 // A failure anywhere inside the one SQLite transaction must roll back every
@@ -184,13 +184,12 @@ func TestProvisionalAdvanceIsRejectedAfterEarlierRoundArrives(t *testing.T){
  now:=state.Instant
  var injected bool
  item:=activeTrigger()
- item.Predicate=func(clock.State)bool{
-  // An independently scheduled Q arrives after provisional P was read
-  // but before the SQLite clock journal is published.
+ coordinator.beforeCommit=func(){
+  // Simulate independently arriving Q after provisional P was read but
+  // before SQLite checks the global pending minimum and commits.
   q:=domain.EligibilityCoordinate{NotBeforeInstant:now+50,NotBeforeCycleOrdinal:0}
   _,e:=ledger.DeclareRound(ctx,"schedule",[2]string{"school","actor-a"},[]string{"decision"},q,origin,0,57,0,[]any{uint64(0)})
   if e!=nil{t.Errorf("could not insert concurrent Q: %v",e)} else{injected=true}
-  return true
  }
  result,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{item})
  if err==nil||!injected{t.Fatalf("advance with earlier Q was not rejected: %+v %v",result,err)}

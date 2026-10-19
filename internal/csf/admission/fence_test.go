@@ -166,6 +166,20 @@ func TestCorruptedCachedUnitCannotPolluteAuthoritativeFence(t *testing.T) {
 }
 
 
+
+func TestFenceLogDirectPublicationNeverWrites(t *testing.T) {
+    ctx:=context.Background()
+    bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+    fixture:=buildScenario(t,bundle,false)
+    derived,err:=Derive(bundle,fixture.ledger,fixture.cycle,fixture.policies)
+    if err!=nil{t.Fatal(err)}
+    log:=NewFenceLog(fixture.store)
+    count:=fixture.store.Len()
+    if err:=log.AppendIfAbsent(ctx,derived);err==nil {t.Fatal("direct log fence publication bypassed prefix CAS")}
+    if fixture.store.Len()!=count {t.Fatal("unauthorized log append mutated input prefix")}
+    if _,err:=log.Get(ctx,derived.ID);err==nil {t.Fatal("unauthorized fence was persisted")}
+}
+
 type deliberatelyUnguardedFenceStore struct{}
 func (*deliberatelyUnguardedFenceStore) AppendFence(context.Context, ports.CanonicalRecord) error { panic("unguarded append must never be called") }
 func (*deliberatelyUnguardedFenceStore) GetFence(context.Context, [32]byte) ([]byte,error) { return nil,errors.New("missing") }

@@ -69,6 +69,7 @@ func (s *Store) SeedGenesisOccurrence(ctx context.Context,occ domain.ID,runID do
  defer tx.Rollback()
  var count int
  if err:=tx.QueryRowContext(ctx,"SELECT count(*) FROM committed_cycles WHERE run_id=?",runID[:]).Scan(&count);err!=nil||count!=0{return errors.New("cannot seed after a cycle commit")}
+ if err:=tx.QueryRowContext(ctx,"SELECT count(*) FROM decision_ledger").Scan(&count);err!=nil||count!=0{return errors.New("cannot seed occurrences after fence publication")}
  if _,err=tx.ExecContext(ctx,"INSERT INTO scheduled_occurrences(id,run_id,eligibility_instant,eligibility_ordinal,lifecycle,canonical) VALUES(?,?,?,?,0,?)",occ[:],runID[:],int64(elig.NotBeforeInstant),int64(elig.NotBeforeCycleOrdinal),canonical);err!=nil{return err}
  return tx.Commit()
 }

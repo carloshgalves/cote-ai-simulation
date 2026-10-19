@@ -32,13 +32,8 @@ type Store interface {
     ports.ClockAdvanceStore
     LoadClock(context.Context,[32]byte)(clock.State,error)
     PendingClock(context.Context,[32]byte)([]clock.Pending,error)
+    LoadRegisteredTriggers(context.Context,[32]byte,*policy.Bundle)([]trigger.Registered,error)
     LoadGenesis(context.Context,[32]byte)([]byte,error)
-}
-
-type TriggerWork struct {
-    Definition trigger.Definition
-    Previous trigger.Runtime
-    PreviousCanonical []byte
 }
 
 type Outcome struct {
@@ -91,7 +86,7 @@ func bytes32(v any)([32]byte,error){
 }
 func cloneAny(x []any)[]any {v:=make([]any,len(x));copy(v,x);return v}
 
-func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,runID domain.ID,triggerWork []TriggerWork)(Outcome,error){
+func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,runID domain.ID)(Outcome,error){
     var result Outcome
     if c==nil||c.store==nil||c.bundle==nil||ledger==nil{return result,errors.New("clock coordinator requires store, bundle and input ledger")}
     if !ledger.SharesFenceAuthority(c.store){return result,errors.New("input ledger and clock coordinator must share adapter instance")}
@@ -119,7 +114,7 @@ func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,run
     fenceCoord:=admission.NewCoordinator(admission.NewFenceLog(c.store))
     var applied ports.ClockAdvanceBatch
     fence,err:=fenceCoord.AdmitThenEvaluate(ctx,c.bundle,ledger,cycle,c.admissionPolicies,func(f admission.Fence)error{
-        prepared,err:=c.buildBatch(ctx,runID,state,plan,f,typed,triggerWork)
+        prepared,err:=c.buildBatch(ctx,runID,state,plan,f,typed)
         if err!=nil{return err}
         prepared.FailAfterStep=c.failAfterStep
         if c.beforeCommit!=nil {c.beforeCommit()}
@@ -132,7 +127,7 @@ func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,run
     return Outcome{Plan:plan,Fence:fence,Commit:applied.Journal,Events:applied.Events,Activations:applied.Activations,ResultClock:after},nil
 }
 
-func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock.State,plan clock.Plan,f admission.Fence,baseTyped []any,work []TriggerWork)(ports.ClockAdvanceBatch,error){
+func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock.State,plan clock.Plan,f admission.Fence,baseTyped []any)(ports.ClockAdvanceBatch,error){
     var empty ports.ClockAdvanceBatch
     d:=identity.New(c.bundle)
     next,err:=clock.ApplyAdvance(state,plan);if err!=nil{return empty,err}
@@ -179,18 +174,19 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
     _=canonicalState
     changes:=make([]ports.TriggerStateChange,0,len(work))
     activations:=make([]ports.CanonicalRecord,0)
-    ordered:=append([]TriggerWork(nil),work...)
+    ordered,err:=c.store.LoadRegisteredTriggers(ctx,[32]byte(runID),c.bundle)
+    if err!=nil{return empty,err}
     sort.Slice(ordered,func(i,j int)bool{return bytes.Compare(ordered[i].Definition.ID[:],ordered[j].Definition.ID[:])<0})
     for i,item:=range ordered {
         if i>0 && item.Definition.ID==ordered[i-1].Definition.ID {
             return empty,errors.New("duplicate trigger definition in one cycle")
         }
         predicateResult:=trigger.PredicateValue(item.Definition,next.Instant)
-        fired,err:=trigger.Evaluate(item.Definition,item.Previous,next.Instant,next.Revision,predicateResult,[]trigger.Event{{ID:domain.ID(eventID),OrderKey:eventBytes,Footprint:[]string{"clock"}}})
+        fired,err:=trigger.Evaluate(item.Definition,item.Runtime,next.Instant,next.Revision,predicateResult,[]trigger.Event{{ID:domain.ID(eventID),OrderKey:eventBytes,Footprint:[]string{"clock"}}})
         if err!=nil{return empty,err}
         runtime:=fired.Runtime
-        prior:=item.PreviousCanonical
-        after,err:=encodeRuntime(runtime);if err!=nil{return empty,err}
+        prior:=item.RuntimeCanonical
+        after,err:=trigger.RuntimeBytes(runtime);if err!=nil{return empty,err}
         changes=append(changes,ports.TriggerStateChange{DefinitionID:[32]byte(item.Definition.ID),Before:prior,After:after})
         if !fired.Fired{continue}
         activationID,_,err:=d.Sum("cote.csf.id.trigger-activation","cote.csf.schema.trigger-activation-id-preimage",1,[]any{runID[:],item.Definition.ID[:],uint64(item.Definition.Version),uint64(next.Revision),runtime.ActivationCount})
@@ -222,8 +218,3 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
     },nil
 }
 func anyIDs(in []domain.ID) []any {out:=make([]any,len(in));for i,id:=range in{out[i]=id[:]};return out}
-func encodeRuntime(r trigger.Runtime)([]byte,error){
-    last:=[]any{uint64(0)};if r.HasLast{last=[]any{uint64(1),r.Last}}
-    next:=[]any{uint64(0)};if r.HasNextRepeat{next=[]any{uint64(1),int64(r.NextRepeat)}}
-    return codec.CanonicalPayload([]any{r.DefinitionID[:],uint64(r.Version),last,r.Armed,r.Exhausted,r.ActivationCount,next,uint64(r.EvaluatedThrough)})
-}

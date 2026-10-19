@@ -62,12 +62,28 @@ func New(store Store,bundle *policy.Bundle,policies admission.Policies)*Coordina
 }
 
 func policiesByRole(bundle *policy.Bundle)(map[string][]any,error){
-    roles,err:=bundle.RequiredPolicyRoles();if err!=nil{return nil,err}
-    refs,err:=bundle.GenesisPolicyRefs();if err!=nil{return nil,err}
-    if len(roles)!=len(refs){return nil,errors.New("policy role and ref count differ")}
-    result:=map[string][]any{}
-    for i,r:=range roles{result[r]=refs[i]}
-    return result,nil
+ roles,err:=bundle.RequiredPolicyRoles();if err!=nil{return nil,err}
+ refs,err:=bundle.GenesisPolicyRefs();if err!=nil{return nil,err}
+ bindings,ok:=bundle.Transitions["genesis_policy_bindings"].([]any)
+ if !ok||len(bindings)!=len(roles){return nil,errors.New("missing canonical role-to-policy binding registry")}
+ result:=map[string][]any{}
+ for _,item:=range bindings{
+  binding,ok:=item.(map[string]any);if !ok{return nil,errors.New("malformed genesis role binding")}
+  role,ok:=binding["role"].(string);if !ok{return nil,errors.New("genesis policy role malformed")}
+  declared,ok:=binding["ref"].([]any);if !ok||len(declared)!=3{return nil,errors.New("genesis binding ref malformed")}
+  id,ok:=declared[0].(string);if !ok{return nil,errors.New("genesis binding policy id malformed")}
+  if _,exists:=result[role];exists{return nil,errors.New("duplicate genesis role binding")}
+  for _,ref:=range refs {
+   if len(ref)==3&&ref[0]==id{
+    result[role]=ref
+    break
+   }
+  }
+  if _,exists:=result[role];!exists{return nil,errors.New("genesis policy role missing pinned ref")}
+ }
+ for _,role:=range roles{if _,ok:=result[role];!ok{return nil,errors.New("required genesis policy role unbound")}}
+ if len(result)!=len(roles){return nil,errors.New("unregistered policy role in binding contract")}
+ return result,nil
 }
 
 func eventValue(from,to domain.SimulationInstant)([]any,error){

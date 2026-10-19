@@ -677,3 +677,21 @@ func TestReplayRejectsRehashedAuthorityForgeries(t *testing.T){
   })
  }
 }
+
+func TestGenesisPolicyRolesUseExplicitBindingsInsteadOfArrayPosition(t *testing.T){
+ bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ policies,err:=policiesByRole(bundle);if err!=nil{t.Fatal(err)}
+ expected:=map[string]string{
+  "admission-order":"admission-order-v1",
+  "causal-identity":"causal-identity-v1",
+  "admission-fence":"admission-fence-v1",
+  "cycle-coordinate":"cycle-coordinate-v1",
+  "event-order":"event-order-v1",
+  "perception":"perception-visible-first-v1",
+  "perception-identity":"perception-identity-v1",
+ }
+ for role,id:=range expected{
+  ref,ok:=policies[role]
+  if !ok||len(ref)!=3||ref[0]!=id{t.Fatalf("role %q bound to %v, want policy %q",role,ref,id)}
+ }
+}

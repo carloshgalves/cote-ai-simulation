@@ -178,7 +178,7 @@ func TestAdvanceReopenAndWorkerPermutationPreserveAuthoritativeBytes(t *testing.
 func TestProvisionalAdvanceIsRejectedAfterEarlierRoundArrives(t *testing.T){
  ctx:=context.Background()
  coordinator,store,ledger,runID,bundle,_:=testFixture(t)
- state,err:=store.LoadClock(ctx,[32]byte(runID]);if err!=nil{t.Fatal(err)}
+ state,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  g:=validGenesis(t,bundle)
  origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
  now:=state.Instant

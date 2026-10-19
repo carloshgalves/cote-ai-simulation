@@ -26,6 +26,46 @@ type ClockReplayReport struct{
  VerifiedActivations int
 }
 
+// Reconstruct the pending set that motivated the first CLOCK_ADVANCE. No
+// WORK or schedule settlement is implemented in CSFRV1-3, so original
+// occurrences/rounds/inputs remain durable. Exclude only the activations and
+// repeat cadences materialized by the advance itself, not source work.
+func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte)([]clock.Pending,error){
+ pending,err:=pendingClock(ctx,s.db,runID)
+ if err!=nil{return nil,err}
+ generated:=map[domain.ID]bool{}
+ rows,err:=s.db.QueryContext(ctx,"SELECT id,canonical FROM trigger_activations WHERE run_id=?",runID[:])
+ if err!=nil{return nil,err}
+ for rows.Next(){
+  var id,raw []byte
+  if err:=rows.Scan(&id,&raw);err!=nil{rows.Close();return nil,err}
+  if len(id)!=32{rows.Close();return nil,errors.New("invalid replay activation ID")}
+  value,err:=codec.StrictDecodePayload(raw);if err!=nil{rows.Close();return nil,err}
+  fields,ok:=value.([]any);if !ok||len(fields)!=12{rows.Close();return nil,errors.New("invalid replay activation body")}
+  origin,ok:=fields[5].([]any);if !ok||len(origin)==0{rows.Close();return nil,errors.New("activation has no causal origin")}
+  kind,ok:=origin[0].(uint64);if !ok{rows.Close();return nil,errors.New("invalid activation origin tag")}
+  if kind==0 {
+   var key domain.ID;copy(key[:],id);generated[key]=true
+  }else if kind!=1{rows.Close();return nil,errors.New("unexpected activation origin tag")}
+ }
+ if err:=rows.Err();err!=nil{rows.Close();return nil,err}
+ if err:=rows.Close();err!=nil{return nil,err}
+ // A post-advance repeat cadence is likewise not a pre-fence pending unit.
+ runtimeRows,err:=s.db.QueryContext(ctx,"SELECT definition_id FROM trigger_runtime WHERE run_id=?",runID[:])
+ if err!=nil{return nil,err}
+ for runtimeRows.Next(){
+  var id []byte
+  if err:=runtimeRows.Scan(&id);err!=nil{runtimeRows.Close();return nil,err}
+  if len(id)!=32{runtimeRows.Close();return nil,errors.New("invalid replay trigger definition ID")}
+  var key domain.ID;copy(key[:],id);generated[key]=true
+ }
+ if err:=runtimeRows.Err();err!=nil{runtimeRows.Close();return nil,err}
+ if err:=runtimeRows.Close();err!=nil{return nil,err}
+ original:=make([]clock.Pending,0,len(pending))
+ for _,item:=range pending{if !generated[item.ID]{original=append(original,item)}}
+ return original,nil
+}
+
 // ReplayClock rebuilds temporal state, triggers and activation provenance
 // from only durable Genesis/definitions, CycleCommit, event and revision bytes.
 // It does not accept predicate callbacks, worker results or caller definitions.
@@ -96,6 +136,13 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
   targetOrdinal,ok:=coord[1].(uint64);if !ok{return report,errors.New("replay target ordinal invalid")}
   plan:=clock.Plan{Kind:clock.ClockAdvance,From:current.Instant,To:domain.SimulationInstant(to),OriginOrdinal:domain.CycleOrdinal(current.LastOrdinal+1),
    Target:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(to),NotBeforeCycleOrdinal:domain.CycleOrdinal(targetOrdinal)}}
+  // A well-formed journal cannot assert a destination that was not
+  // the earliest persisted pending before its terminal advance.
+  original,err:=s.replayAdvanceInputs(ctx,runID)
+  if err!=nil{return report,err}
+  selected,has,err:=clock.Next(current,original)
+  if err!=nil{return report,fmt.Errorf("replay has stale pre-advance pending: %w",err)}
+  if !has||selected!=plan{return report,errors.New("replay target differs from authoritative pending minimum")}
   next,err:=clock.ApplyAdvance(current,plan);if err!=nil{return report,err}
   eventIDs,ok:=journal[15].([]any);if !ok||len(eventIDs)<2{return report,errors.New("replay temporal event IDs incomplete")}
   events:=make([]ports.CanonicalRecord,0,len(eventIDs))

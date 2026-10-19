@@ -66,6 +66,7 @@ type Authorities struct {
 // unit in one transaction, never through individual append methods.
 type TriggerStateChange struct {
  DefinitionID [32]byte
+ DefinitionCanonical []byte
  Before []byte
  After []byte
 }

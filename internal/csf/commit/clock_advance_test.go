@@ -362,3 +362,27 @@ func TestRearmRequiresExplicitCausalProvenance(t *testing.T){
  // RearmPure does NOT persist anything: a WORK CycleCommit with the causal
  // lifecycle event is required to publish it.
 }
+
+func TestInitiallyTrueTriggerIsBootstrappedAtGenesisAndReplayed(t *testing.T) {
+ ctx:=context.Background()
+ bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ root:=validGenesis(t,bundle)
+ store,err:=sqlite.Open(ctx,t.TempDir()+"/initial-trigger.db");if err!=nil{t.Fatal(err)};defer store.Close()
+ if err:=store.PersistGenesis(ctx,root,bundle);err!=nil{t.Fatal(err)}
+ if err:=store.BootstrapClock(ctx,root,bundle);err!=nil{t.Fatal(err)}
+ d:=activeTrigger()
+ d.PredicateThreshold=root.InitialInstant-1
+ d.FireOnInitialTrue=true
+ if err:=store.BootstrapGenesisTriggers(ctx,root,bundle,[]trigger.Definition{d});err!=nil{t.Fatal(err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(root.RunID));if err!=nil{t.Fatal(err)}
+ if len(pending)!=1||pending[0].Eligibility.NotBeforeInstant!=root.InitialInstant||pending[0].Eligibility.NotBeforeCycleOrdinal!=0 {
+  t.Fatalf("initially true trigger was not committed to genesis pending state: %+v",pending)
+ }
+ replay,err:=store.ReplayClock(ctx,[32]byte(root.RunID),bundle)
+ if err!=nil||replay.VerifiedActivations!=1||replay.ReplayedCommits!=0{
+  t.Fatalf("initial activation not reconstructible from persisted registry: %+v %v",replay,err)
+ }
+ initial,err:=store.LoadClock(ctx,[32]byte(root.RunID));if err!=nil{t.Fatal(err)}
+ p,ok,err:=clock.Next(initial,pending)
+ if err!=nil||!ok||p.Kind!=clock.Work||p.OriginOrdinal!=0{t.Fatalf("genesis trigger should be WORK (t,0): %+v %v",p,err)}
+}

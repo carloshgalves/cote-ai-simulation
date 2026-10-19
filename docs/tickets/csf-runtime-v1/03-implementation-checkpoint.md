@@ -5,9 +5,10 @@ e nenhuma revisão independente executados. Este é o escopo executado
 e testado, não um certificado de homologação.
 
 **Base:** `main@7b7fc7edaf844ff6eeb637299fd6e00ec93f48db`.
-**HEAD validado antes deste registro:** `423b1e0402ed5d11574e6447ca840353872d05f8`;
+**HEAD de implementação validado nesta atualização:** `f8c5d81a67d7bfb7b145a75697819569668271e0`;
 CI de implementação e conformance verdes (`go test ./...`, 621/621 Go,
 621/621 TypeScript, relatórios comparados byte a byte).
+[Go CSFRV1-3](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39313289835/job/118268177434) · [conformance](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39313297126/job/118268201791).
 
 ## Implementação integrada
 
@@ -67,10 +68,18 @@ CI de implementação e conformance verdes (`go test ./...`, 621/621 Go,
    proveniência falsa) rejeitado sem mutações parciais.
 9. Replay sem inputs de trigger fornecidos pelo host, inclusive do
    genesis ainda sem commits e de uma revisão já publicada.
+10. `CLOCK_ADVANCE` rejeita tentativa de rearm não publicada por evento
+    causal de WORK, sem alterar a revisão ou o runtime.
+11. Replay de um run concluído falha fechado diante de corrupção
+    dos registros SQLite de `TriggerDefinition`, runtime, ativação,
+    journal, evento ou relógio.
+12. Para avanço temporal puro, cada hash de revisão do mundo é
+    confrontado com o hash validado no genesis; divergência em
+    `world_revisions.state_hash` é detectada, mesmo após reopen.
 
 ## Gate de escopo ainda aberto
 
-**Rearm manual durável:** o reducer `RearmPure` tem contrato explícito
+**Rearm manual durável (dependência arquitetural de WORK):** o reducer `RearmPure` tem contrato explícito
 e não aceita evento causal ausente, mas publicar manual rearm e seu
 evento de lifecycle exige um `WORK CycleCommit`. Isso depende do
 pipeline terminal CSFRV1-4/5, que está **explicitamente fora do
@@ -90,5 +99,9 @@ aprovação versionada, não mudança de callback de host.
 Congelar esta implementação, atualizar o review checklist e executar
 `code-review` independente quando a dependência de rearm estiver
 formalmente delimitada/aceita como interface futura pelo ticket.
+**Estado do gate:** parte temporal de CSFRV1-3 validada; rearm manual ainda
+não tem publicação causal executável e permanece pendente do WORK
+CycleCommit. Não inferir aprovação do ticket inteiro a partir da CI verde.
+
 Não mesclar à `main` sem revisão e aprovação formal. Não tocar em
 CSFRV1-4/5, Canon RAG ou Examination Engine nesta branch.

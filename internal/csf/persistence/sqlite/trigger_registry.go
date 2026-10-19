@@ -8,6 +8,7 @@ import (
  "fmt"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -61,7 +62,7 @@ func (s *Store) BootstrapGenesisTriggers(ctx context.Context,g *genesis.Genesis,
  if !bytes.Equal(persisted,g.CanonicalBytes){return errors.New("genesis record differs from trigger authority")}
  var current []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",g.RunID[:]).Scan(&current);err!=nil{return err}
- initial,err:=clockStateFromCanonical(current);if err!=nil{return err}
+ initial,err:=clock.Decode(current);if err!=nil{return err}
  if initial.Revision!=0||initial.Instant!=g.InitialInstant{return errors.New("trigger bootstrap requires genesis revision")}
  var count int
  if err:=tx.QueryRowContext(ctx,"SELECT count(*) FROM decision_ledger").Scan(&count);err!=nil||count!=0{return errors.New("trigger registry cannot change after admission fence")}

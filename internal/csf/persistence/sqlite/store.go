@@ -199,13 +199,29 @@ func guardedKind(record ports.CanonicalRecord) (string, [32]byte, int64, uint64,
 
 func isRoundSource(value any) bool { _, ok := value.(string); return ok }
 
+// The guard's authority comes from the persisted canonical record, never from
+// caller-supplied routing arguments. A mismatch is rejected before opening the
+// admission transaction.
+func validateGuardArguments(record ports.CanonicalRecord, wantedKind string, runID [32]byte, instant int64, ordinal uint64) error {
+	kind, canonicalRun, canonicalInstant, canonicalOrdinal, err := guardedKind(record)
+	if err != nil { return err }
+	if kind != wantedKind || canonicalRun != runID {
+		return errors.New("guarded record kind or run does not match canonical bytes")
+	}
+	if wantedKind == "round" && (canonicalInstant != instant || canonicalOrdinal != ordinal) {
+		return errors.New("guarded round coordinate does not match canonical bytes")
+	}
+	return nil
+}
+
 func (s *Store) AppendSourceDeclaration(ctx context.Context, runID [32]byte, record ports.CanonicalRecord) error {
+	if err := validateGuardArguments(record, "source", runID, 0, 0); err != nil { return err }
 	return s.guardedAppend(ctx, runID, nil, record)
 }
 
 func (s *Store) AppendRoundDeclaration(ctx context.Context, runID [32]byte, instant int64, ordinal uint64, record ports.CanonicalRecord) error {
-	coord := [2]int64{instant, 0}
-	return s.guardedAppend(ctx, runID, &roundGuardCoordinate{instant: coord[0], ordinal: ordinal}, record)
+	if err := validateGuardArguments(record, "round", runID, instant, ordinal); err != nil { return err }
+	return s.guardedAppend(ctx, runID, &roundGuardCoordinate{instant: instant, ordinal: ordinal}, record)
 }
 
 type roundGuardCoordinate struct { instant int64; ordinal uint64 }
@@ -242,8 +258,10 @@ func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundG
 	return tx.Commit()
 }
 
-func (s *Store) AppendFence(ctx context.Context, record ports.CanonicalRecord) error {
-	return appendTo(ctx, s.db, "decision_ledger", record)
+// Direct fence writes cannot prove membership of the closed input prefix.
+// Publication is only supported via AppendFenceIfPrefix's atomic CAS.
+func (s *Store) AppendFence(_ context.Context, _ ports.CanonicalRecord) error {
+	return errors.New("admission fence requires prefix-conditional publication")
 }
 
 // AppendFenceIfPrefix compares the input prefix and inserts the fence in one

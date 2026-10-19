@@ -44,7 +44,9 @@ func (s *Store) BootstrapClock(ctx context.Context, manifest *genesis.Genesis, b
  if err!=sql.ErrNoRows{return err}
  if _,err=tx.ExecContext(ctx,"INSERT INTO clock_states(run_id,canonical) VALUES(?,?)",verified.RunID[:],encoded);err!=nil{return err}
  // The revision zero is anchored by the genesis typed state (not an event).
- if _,err=tx.ExecContext(ctx,"INSERT INTO world_revisions(revision,state_hash,canonical) VALUES(?,?,?)",0,hash,typed[2]);err!=nil{return err}
+ revisionZero,err:=codec.CanonicalPayload([]any{uint64(0),typed,hash,uint64(0),typed,hash})
+ if err!=nil{return err}
+ if _,err=tx.ExecContext(ctx,"INSERT INTO world_revisions(revision,state_hash,canonical) VALUES(?,?,?)",0,hash,revisionZero);err!=nil{return err}
  return tx.Commit()
 }
 
@@ -58,18 +60,61 @@ func (s *Store) LoadClock(ctx context.Context,runID [32]byte)(clock.State,error)
 // SeedGenesisOccurrence is intentionally available only at genesis revision,
 // before a cycle is committed. Later schedule changes belong to the future
 // CycleCommit publisher and cannot call this bootstrap seam.
+// validateScheduledOccurrence authenticates the authoritative record rather than
+// trusting its query index. The lifecycle/coordinate columns are projections.
+func validateScheduledOccurrence(runID [32]byte,id [32]byte,raw []byte)(domain.EligibilityCoordinate,uint64,error){
+ var coord domain.EligibilityCoordinate
+ decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{return coord,0,err}
+ fields,ok:=decoded.([]any);if !ok||len(fields)!=15||!equalBytes(fields[0],id[:])||!equalBytes(fields[1],runID[:]){return coord,0,errors.New("invalid scheduled occurrence identity/schema")}
+ if _,ok:=fields[2].(string);!ok{return coord,0,errors.New("occurrence source missing")}
+ if _,ok:=fields[5].(string);!ok{return coord,0,errors.New("occurrence kind missing")}
+ due,ok:=asSigned64(fields[3]);if !ok{return coord,0,errors.New("invalid occurrence due instant")}
+ pair,ok:=fields[4].([]any);if !ok||len(pair)!=2{return coord,0,errors.New("occurrence eligibility missing")}
+ instant,ok:=asSigned64(pair[0]);if !ok||due>instant{return coord,0,errors.New("occurrence due after eligibility")}
+ ordinal,ok:=pair[1].(uint64);if !ok||ordinal>uint64(^uint64(0)>>1){return coord,0,errors.New("invalid occurrence ordinal")}
+ life,ok:=fields[8].(uint64);if !ok||life>2{return coord,0,errors.New("invalid occurrence lifecycle")}
+ origin,ok:=fields[9].([]any);if !ok||len(origin)!=2{return coord,0,errors.New("invalid occurrence origin")}
+ role,ok:=fields[10].(uint64);if !ok||role>65535{return coord,0,errors.New("invalid occurrence role")}
+ local,ok:=fields[11].(uint64);if !ok||local>uint64(^uint32(0)){return coord,0,errors.New("invalid occurrence local ordinal")}
+ derived,err:=registeredDigest("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",[]any{fields[9],fields[10],fields[11]});if err!=nil{return coord,0,err}
+ if derived!=domain.Digest(id){return coord,0,errors.New("scheduled occurrence ID preimage mismatch")}
+ digest,err:=registeredDigest("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",fields[:14]);if err!=nil{return coord,0,err}
+ if !equalBytes(fields[14],digest[:]){return coord,0,errors.New("scheduled occurrence digest mismatch")}
+ return domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)},life,nil
+}
+
+func validateTriggerActivation(runID [32]byte,id [32]byte,raw []byte)(domain.EligibilityCoordinate,uint64,error){
+ var coord domain.EligibilityCoordinate
+ decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{return coord,0,err}
+ fields,ok:=decoded.([]any);if !ok||len(fields)!=12||!equalBytes(fields[0],id[:])||!equalBytes(fields[1],runID[:]){return coord,0,errors.New("invalid trigger activation identity/schema")}
+ pair,ok:=fields[6].([]any);if !ok||len(pair)!=2{return coord,0,errors.New("trigger activation eligibility missing")}
+ instant,ok:=asSigned64(pair[0]);if !ok{return coord,0,errors.New("invalid trigger activation instant")}
+ ordinal,ok:=pair[1].(uint64);if !ok||ordinal>uint64(^uint64(0)>>1){return coord,0,errors.New("invalid trigger activation ordinal")}
+ life,ok:=fields[9].(uint64);if !ok||(life!=0&&life!=2){return coord,0,errors.New("invalid trigger activation lifecycle")}
+ digest,err:=registeredDigest("cote.csf.digest.trigger-activation-unit","cote.csf.schema.trigger-activation.body",fields[:11]);if err!=nil{return coord,0,err}
+ if !equalBytes(fields[11],digest[:]){return coord,0,errors.New("trigger activation digest mismatch")}
+ return domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)},life,nil
+}
+
+// Genesis seeding is a one-time authorized mutation; the persisted source
+// must be fully derivable from the genesis identity and canonical bytes.
 func (s *Store) SeedGenesisOccurrence(ctx context.Context,occ domain.ID,runID domain.ID,elig domain.EligibilityCoordinate,canonical []byte) error {
- decoded,err:=codec.StrictDecodePayload(canonical);if err!=nil{return err}
- fields,ok:=decoded.([]any);if !ok||len(fields)!=15{return errors.New("invalid scheduled occurrence schema")}
- if !equalBytes(fields[0],occ[:])||!equalBytes(fields[1],runID[:]){return errors.New("occurrence identity mismatch")}
- storedCoord,ok:=fields[4].([]any)
- if !ok||len(storedCoord)!=2{return errors.New("occurrence eligibility missing")}
- storedInstant,ok:=asSigned64(storedCoord[0]);if !ok{return errors.New("invalid occurrence instant")}
- storedOrdinal,ok:=storedCoord[1].(uint64)
- if !ok||storedInstant!=int64(elig.NotBeforeInstant)||storedOrdinal!=uint64(elig.NotBeforeCycleOrdinal){return errors.New("occurrence eligibility bytes mismatch")}
- if state,err:=s.LoadClock(ctx,[32]byte(runID));err!=nil||state.Revision!=0{return errors.New("genesis occurrence requires initial clock")}
+ computed,life,err:=validateScheduledOccurrence([32]byte(runID),[32]byte(occ),canonical)
+ if err!=nil{return err}
+ if life!=0||computed!=elig{return errors.New("initial occurrence must be pending at its declared eligibility")}
+ decoded,_:=codec.StrictDecodePayload(canonical)
+ fields:=decoded.([]any)
+ origin:=fields[9].([]any)
+ if origin[0]!=uint64(2){return errors.New("bootstrap occurrence must originate at genesis")}
+ genesisRef,ok:=origin[1].([]any);if !ok||len(genesisRef)!=2{return errors.New("invalid genesis occurrence origin")}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return err}
  defer tx.Rollback()
+ var genesisID,genesisDigest []byte
+ if err:=tx.QueryRowContext(ctx,"SELECT genesis_id,digest FROM genesis_records WHERE run_id=?",runID[:]).Scan(&genesisID,&genesisDigest);err!=nil{return err}
+ if !equalBytes(genesisRef[0],genesisID)||!equalBytes(genesisRef[1],genesisDigest){return errors.New("occurrence origin does not match verified genesis")}
+ var current []byte
+ if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",runID[:]).Scan(&current);err!=nil{return err}
+ state,err:=clock.Decode(current);if err!=nil||state.Revision!=0{return errors.New("genesis occurrence requires initial clock")}
  var count int
  if err:=tx.QueryRowContext(ctx,"SELECT count(*) FROM committed_cycles WHERE run_id=?",runID[:]).Scan(&count);err!=nil||count!=0{return errors.New("cannot seed after a cycle commit")}
  if err:=tx.QueryRowContext(ctx,"SELECT count(*) FROM decision_ledger").Scan(&count);err!=nil||count!=0{return errors.New("cannot seed occurrences after fence publication")}
@@ -84,22 +129,34 @@ func (s *Store) PendingClock(ctx context.Context, runID [32]byte) ([]clock.Pendi
 }
 type clockQuery interface { QueryContext(context.Context,string,...any)(*sql.Rows,error) }
 func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pending,error) {
- rows,err:=q.QueryContext(ctx,`
- SELECT id,eligibility_instant,eligibility_ordinal FROM scheduled_occurrences WHERE run_id=? AND lifecycle=0
- UNION ALL
- SELECT id,eligibility_instant,eligibility_ordinal FROM trigger_activations WHERE run_id=? AND lifecycle=0
- ORDER BY 2,3,1`,runID[:],runID[:])
- if err!=nil{return nil,err}
- defer rows.Close()
- var out []clock.Pending
- for rows.Next(){
-  var id []byte;var instant,ordinal int64
-  if err:=rows.Scan(&id,&instant,&ordinal);err!=nil{return nil,err}
-  if len(id)!=32||ordinal<0{return nil,errors.New("corrupted pending authority")}
-  var key domain.ID;copy(key[:],id)
-  out=append(out,clock.Pending{ID:key,Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)}})
+ // Read every row, including terminal rows: filtering lifecycle before
+ // comparing its indexed projection with the canonical record hides corruption.
+ selections:=[]struct{query string;activation bool}{
+  {"SELECT id,eligibility_instant,eligibility_ordinal,lifecycle,canonical FROM scheduled_occurrences WHERE run_id=?",false},
+  {"SELECT id,eligibility_instant,eligibility_ordinal,lifecycle,canonical FROM trigger_activations WHERE run_id=?",true},
  }
- if err:=rows.Err();err!=nil{return nil,err}
+ var out []clock.Pending
+ for _,selection:=range selections{
+  rows,err:=q.QueryContext(ctx,selection.query,runID[:]);if err!=nil{return nil,err}
+  for rows.Next(){
+   var id,raw []byte
+   var instant,ordinal,life int64
+   if err:=rows.Scan(&id,&instant,&ordinal,&life,&raw);err!=nil{rows.Close();return nil,err}
+   if len(id)!=32||ordinal<0||life<0{return nil,errors.New("corrupted pending authority columns")}
+   var key [32]byte;copy(key[:],id)
+   var derived domain.EligibilityCoordinate
+   var derivedLife uint64
+   if selection.activation {derived,derivedLife,err=validateTriggerActivation(runID,key,raw)
+   }else{derived,derivedLife,err=validateScheduledOccurrence(runID,key,raw)}
+   if err!=nil{rows.Close();return nil,err}
+   if int64(derived.NotBeforeInstant)!=instant||uint64(derived.NotBeforeCycleOrdinal)!=uint64(ordinal)||derivedLife!=uint64(life){
+    rows.Close();return nil,errors.New("pending index columns disagree with canonical authority")
+   }
+   if life==0{out=append(out,clock.Pending{ID:domain.ID(key),Eligibility:derived})}
+  }
+  if err:=rows.Err();err!=nil{rows.Close();return nil,err}
+  if err:=rows.Close();err!=nil{return nil,err}
+ }
  // RoundDeclarations and exogenous inputs share the input authority; they
  // participate in the exact same global minimum as schedule/activations.
  inputs,err:=q.QueryContext(ctx,"SELECT id,canonical FROM input_ledger ORDER BY rowid")
@@ -190,7 +247,7 @@ func registeredDigest(domainTag,schemaID string,value any)(domain.Digest,error){
  if err!=nil{return domain.Digest{},err}
  return identity.OpaqueContentHash(encoded),nil
 }
-func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next clock.State) error {
+func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next clock.State,initialState []any) error {
  if len(b.Events)!=2{return errors.New("clock advance requires clock and synthetic body events")}
  if len(journal)!=24{return errors.New("malformed CycleCommit body")}
  if !equalBytes(journal[0],b.RunID[:])||!equalBytes(journal[1],b.CycleID[:]){return errors.New("CycleCommit run/cycle mismatch")}
@@ -260,7 +317,78 @@ func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next cl
   !equalBytes(fields[2],b.BaseStateHash[:])||!equalBytes(fields[5],b.ResultStateHash[:]){
   return errors.New("world revision transition does not match journal")
  }
+ if len(initialState)!=4||!equalBytes(initialState[3],b.BaseStateHash[:])||
+  !sameCanonical(fields[1],initialState)||!sameCanonical(fields[4],initialState){
+  return errors.New("temporal world revision state differs from genesis")
+ }
  return nil
+}
+
+func sameCanonical(a,b any) bool{
+ ab,err:=codec.CanonicalPayload(a);if err!=nil{return false}
+ bb,err:=codec.CanonicalPayload(b);return err==nil&&bytes.Equal(ab,bb)
+}
+func (s *Store) initialTypedState(ctx context.Context,runID [32]byte)([]any,error){
+ raw,err:=s.LoadGenesis(ctx,runID);if err!=nil{return nil,err}
+ env,err:=codec.StrictDecodeEnvelope(raw);if err!=nil{return nil,err}
+ payload,ok:=env.Value.([]any);if !ok||len(payload)<17{return nil,errors.New("invalid stored genesis payload")}
+ typed,ok:=payload[16].([]any);if !ok||len(typed)!=4{return nil,errors.New("invalid genesis state typed value")}
+ stateRaw,ok:=typed[2].([]byte);if !ok{return nil,errors.New("genesis state envelope missing")}
+ h:=identity.OpaqueContentHash(stateRaw)
+ if !equalBytes(typed[3],h[:]){return nil,errors.New("genesis state typed-value hash differs")}
+ return typed,nil
+}
+
+type queryOne interface{QueryRowContext(context.Context,string,...any)*sql.Row}
+// Confirm the full admitted coordinate and the authentic fence whose stable
+// (run,cycle,attempt) identity must exist before a terminal CycleCommit.
+func verifyCommittedFence(ctx context.Context,q queryOne,runID,cycleID [32]byte,journal []any)([32]byte,error){
+ var zero [32]byte
+ fenceID,err:=registeredDigest("cote.csf.id.admission-fence","cote.csf.schema.admission-fence-id-preimage",[]any{runID[:],cycleID[:],uint64(0)})
+ if err!=nil{return zero,err}
+ var canonical []byte
+ if err:=q.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",fenceID[:]).Scan(&canonical);err!=nil{return zero,fmt.Errorf("CycleCommit without AdmissionFence: %w",err)}
+ decoded,err:=codec.StrictDecodePayload(canonical);if err!=nil{return zero,err}
+ fence,ok:=decoded.([]any)
+ if !ok||len(fence)!=18||!equalBytes(fence[0],runID[:])||!equalBytes(fence[1],cycleID[:])||fence[2]!=uint64(0){return zero,errors.New("AdmissionFence identity invalid")}
+ fd,err:=registeredDigest("cote.csf.digest.fence","cote.csf.schema.admission-fence.body",fence[:17]);if err!=nil{return zero,err}
+ if !equalBytes(fence[17],fd[:])||!equalBytes(journal[10],fd[:]){return zero,errors.New("CycleCommit has wrong persisted AdmissionFence digest")}
+ for _,pair:=range [][2]int{{4,3},{5,4},{6,5},{7,6},{8,7},{11,11},{12,12}}{
+  if !sameCanonical(fence[pair[0]],journal[pair[1]]){return zero,errors.New("CycleCommit is not the admitted fence plan/inputs")}
+ }
+ admitted,ok:=fence[11].([]any);if !ok||len(admitted)!=0{return zero,errors.New("CLOCK_ADVANCE admitted WORK units")}
+ proofs,ok:=fence[9].([]any);if !ok{return zero,errors.New("AdmissionFence proof shape invalid")}
+ var previous string
+ for i,item:=range proofs{
+  proof,ok:=item.([]any);if !ok||len(proof)!=5{return zero,errors.New("AdmissionFence closure proof malformed")}
+  source,ok:=proof[0].(string);if !ok||source==""||(i>0&&source<=previous){return zero,errors.New("AdmissionFence closure sources unordered")}
+  previous=source
+  ref,ok:=proof[1].([]any);if !ok||len(ref)!=3||ref[0]!=uint64(2){return zero,errors.New("closure proof ref malformed")}
+  id,ok:=ref[1].([]byte);if !ok||len(id)!=32{return zero,errors.New("closure proof source ID malformed")}
+  var stored []byte
+  if err:=q.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",id).Scan(&stored);err!=nil{return zero,err}
+  root,err:=codec.StrictDecodePayload(stored);if err!=nil{return zero,err}
+  fields,ok:=root.([]any)
+  if !ok||len(fields)!=7||!equalBytes(fields[0],id)||fields[2]!=source||
+   !sameCanonical(fields[4],proof[3])||!sameCanonical(fields[5],proof[4])||!sameCanonical(fields[6],proof[2]){
+   return zero,errors.New("closure proof fields not supported by SourceClosure")
+  }
+  expectedID,err:=registeredDigest("cote.csf.id.source-closure","cote.csf.schema.source-closure-id-preimage",[]any{fields[1],fields[2],fields[3]});if err!=nil{return zero,err}
+  expectedDigest,err:=registeredDigest("cote.csf.digest.source-closure","cote.csf.schema.source-closure",fields);if err!=nil{return zero,err}
+  if !bytes.Equal(expectedID[:],id)||!equalBytes(ref[2],expectedDigest[:]){return zero,errors.New("closure proof source hash mismatch")}
+  var receiptID []byte
+  if err:=q.QueryRowContext(ctx,"SELECT record_id FROM source_ingress_receipts WHERE source_id=? AND ingress_seq=?",source,proof[2]).Scan(&receiptID);err!=nil{return zero,err}
+  if !bytes.Equal(receiptID,id){return zero,errors.New("closure proof receipt differs from source")}
+  coverage,ok:=proof[3].([]any);if !ok||len(coverage)!=2{return zero,errors.New("closure proof coordinate malformed")}
+  from,ok:=asSigned64(coverage[0]);if !ok{return zero,errors.New("closure proof instant malformed")}
+  ordinal,ok:=coverage[1].(uint64);if !ok{return zero,errors.New("closure proof ordinal malformed")}
+  plan,ok:=journal[5].([]any);if !ok||len(plan)!=4{return zero,errors.New("clock plan invalid")}
+  target,ok:=plan[3].([]any);if !ok||len(target)!=2{return zero,errors.New("clock target invalid")}
+  to,ok:=asSigned64(target[0]);if !ok{return zero,errors.New("clock target instant invalid")}
+  targetOrdinal,ok:=target[1].(uint64);if !ok{return zero,errors.New("clock target ordinal invalid")}
+  if proof[4]!=true&&(from<to||(from==to&&ordinal<targetOrdinal)){return zero,errors.New("closure proof does not cover target")}
+ }
+ return [32]byte(fenceID),nil
 }
 
 func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch) error {
@@ -271,17 +399,20 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  journalRaw,err:=codec.StrictDecodePayload(b.Journal.Canonical)
  if err!=nil{return err}
  journal,ok:=journalRaw.([]any);if !ok||len(journal)!=24{return errors.New("invalid canonical CycleCommit")}
- if err:=verifyAdvanceEnvelope(b,journal,state,next);err!=nil{return err}
+ initialState,err:=s.initialTypedState(ctx,b.RunID);if err!=nil{return err}
+ if err:=verifyAdvanceEnvelope(b,journal,state,next,initialState);err!=nil{return err}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return err}
  defer tx.Rollback()
  var current []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",b.RunID[:]).Scan(&current);err!=nil{return err}
  if !bytes.Equal(current,b.ExpectedClock){return errors.New("clock revision changed before publication")}
+ derivedFence,err:=verifyCommittedFence(ctx,tx,b.RunID,b.CycleID,journal)
+ if err!=nil{return err}
+ if derivedFence!=b.FenceID{return errors.New("clock batch references a different admission fence")}
  var fence []byte
- if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",b.FenceID[:]).Scan(&fence);err!=nil{return fmt.Errorf("clock advance has no persisted admission fence: %w",err)}
+ if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",b.FenceID[:]).Scan(&fence);err!=nil{return err}
  f,err:=codec.StrictDecodePayload(fence);if err!=nil{return err}
- ff,ok:=f.([]any)
- if !ok||len(ff)<17||!equalBytes(ff[0],b.RunID[:])||!equalBytes(ff[1],b.CycleID[:]) {return errors.New("invalid clock admission fence")}
+ ff:=f.([]any)
  plan,ok:=ff[6].([]any)
  if !ok||len(plan)!=4||plan[0]!=uint64(1){return errors.New("CLOCK_ADVANCE requires persisted clock-advance fence")}
  units,ok:=ff[11].([]any);if !ok||len(units)!=0{return errors.New("CLOCK_ADVANCE cannot admit work units")}

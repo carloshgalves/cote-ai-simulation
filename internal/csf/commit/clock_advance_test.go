@@ -477,3 +477,102 @@ func TestReplayRejectsWorldRevisionHashNotAnchoredToGenesis(t *testing.T){
   t.Fatal("replay accepted world revision hash differing from genesis")
  }
 }
+
+// Regression finding #2: an index column is not an alternate causal authority.
+// Changing only the index must fail both live planning and a persisted replay.
+func TestPendingProjectionMismatchFailsClosed(t *testing.T){
+ ctx:=context.Background()
+ coordinator,store,ledger,run,bundle,path:=testFixture(t,activeTrigger())
+ if _,err:=coordinator.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ if _,err:=db.ExecContext(ctx,"UPDATE trigger_activations SET lifecycle=2 WHERE run_id=?",run[:]);err!=nil{t.Fatal(err)}
+ db.Close()
+ if _,err:=store.PendingClock(ctx,[32]byte(run));err==nil{t.Fatal("index-only lifecycle corruption hid an activation")}
+ opened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer opened.Close()
+ if _,err:=opened.ReplayClock(ctx,[32]byte(run),bundle);err==nil{t.Fatal("replay overlooked index-only lifecycle corruption")}
+}
+
+// Regression finding #3: terminal cycles cannot exist without the admitted
+// fence, even when their journal and event digests remain self-consistent.
+func TestReplayRejectsMissingPersistedAdmissionFence(t *testing.T){
+ ctx:=context.Background()
+ coordinator,_,ledger,run,bundle,path:=testFixture(t,activeTrigger())
+ outcome,err:=coordinator.Advance(ctx,ledger,run);if err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ if _,err:=db.ExecContext(ctx,"DELETE FROM decision_ledger WHERE id=?",outcome.Fence.ID[:]);err!=nil{t.Fatal(err)}
+ db.Close()
+ opened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer opened.Close()
+ if _,err:=opened.ReplayClock(ctx,[32]byte(run),bundle);err==nil{t.Fatal("replay accepted CycleCommit with missing AdmissionFence")}
+}
+
+// Regression finding #4: unlike a broken CBOR byte, this mutation preserves
+// the entire record's own recomputed digest and indexed SQL coordinate.
+func TestReplayRejectsAuthenticallyRehashedActivationAtWrongCoordinate(t *testing.T){
+ ctx:=context.Background()
+ coordinator,_,ledger,run,bundle,path:=testFixture(t,activeTrigger())
+ outcome,err:=coordinator.Advance(ctx,ledger,run);if err!=nil{t.Fatal(err)}
+ if len(outcome.Activations)!=1{t.Fatal("fixture has no activation")}
+ id:=outcome.Activations[0].Identity
+ fieldsAny,err:=codec.StrictDecodePayload(outcome.Activations[0].Canonical);if err!=nil{t.Fatal(err)}
+ fields:=fieldsAny.([]any)
+ coord:=fields[6].([]any);to,_:=coord[0].(int64);if to==0{to=int64(outcome.ResultClock.Instant)}
+ fields[6]=[]any{to-1,uint64(0)}
+ dig,_,err:=identity.New(bundle).Sum("cote.csf.digest.trigger-activation-unit","cote.csf.schema.trigger-activation.body",1,fields[:11]);if err!=nil{t.Fatal(err)}
+ fields[11]=dig[:]
+ raw,err:=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ if _,err:=db.ExecContext(ctx,"UPDATE trigger_activations SET canonical=?,eligibility_instant=? WHERE id=?",raw,to-1,id[:]);err!=nil{t.Fatal(err)}
+ db.Close()
+ opened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer opened.Close()
+ if _,err:=opened.ReplayClock(ctx,[32]byte(run),bundle);err==nil{t.Fatal("replay accepted rehashed activation with forged eligibility")}
+}
+
+// Regression finding #5: state hash columns are insufficient to authenticate
+// the nested pre/post typed-values persisted in WorldRevision transitions.
+func TestReplayRejectsRevisionStateMutationWithUntouchedHash(t *testing.T){
+ ctx:=context.Background()
+ coordinator,_,ledger,run,bundle,path:=testFixture(t,activeTrigger())
+ if _,err:=coordinator.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ var raw []byte
+ if err:=db.QueryRowContext(ctx,"SELECT canonical FROM world_revisions WHERE revision=1").Scan(&raw);err!=nil{t.Fatal(err)}
+ v,err:=codec.StrictDecodePayload(raw);if err!=nil{t.Fatal(err)}
+ fields:=v.([]any);typed:=append([]any(nil),fields[1].([]any)...)
+ typed[0]="cote.csf.schema.tampered-state"
+ fields[1]=typed
+ changed,err:=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+ if _,err:=db.ExecContext(ctx,"UPDATE world_revisions SET canonical=? WHERE revision=1",changed);err!=nil{t.Fatal(err)}
+ db.Close()
+ opened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer opened.Close()
+ if _,err:=opened.ReplayClock(ctx,[32]byte(run),bundle);err==nil{t.Fatal("replay accepted forged typed world state")}
+}
+
+// Regression finding #6: no initial schedule entry may choose its own
+// identity or digest just because its indexed eligibility matches.
+// Negative occurrence seeding is exercised on genesis-only fixtures to
+// distinguish validation failure from a pre-existing fence or duplicate ID.
+func TestGenesisOccurrenceRejectsForgedUnitDigestAndID(t *testing.T){
+ ctx:=context.Background()
+ bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,bundle)
+ store,err:=sqlite.Open(ctx,t.TempDir()+"/seed-validation.db");if err!=nil{t.Fatal(err)};defer store.Close()
+ if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+ d:=identity.New(bundle)
+ id,_,err:=d.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,[]any{origin,uint64(0),uint64(0)});if err!=nil{t.Fatal(err)}
+ due:=g.InitialInstant+100
+ eligibility:=domain.EligibilityCoordinate{NotBeforeInstant:due,NotBeforeCycleOrdinal:0}
+ fields:=[]any{id[:],g.RunID[:],"schedule",int64(due),[]any{int64(due),uint64(0)},"seed.test",uint64(1),
+  g.Payload[16],uint64(0),origin,uint64(0),uint64(0),[]any{uint64(0)},[]any{uint64(0)}}
+ digest,_,err:=d.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,fields);if err!=nil{t.Fatal(err)}
+ canonical,err:=codec.CanonicalPayload(append(append([]any(nil),fields...),digest[:]));if err!=nil{t.Fatal(err)}
+ corruptDigest:=append([]any(nil),fields...)
+ badDigest,err:=codec.CanonicalPayload(append(corruptDigest,bytes.Repeat([]byte{0xab},32)));if err!=nil{t.Fatal(err)}
+ if err:=store.SeedGenesisOccurrence(ctx,domain.ID(id),g.RunID,eligibility,badDigest);err==nil{t.Fatal("bootstrap accepted forged occurrence digest")}
+ corruptID:=append([]any(nil),fields...)
+ forgedID:=id;forgedID[0]^=0x80;corruptID[0]=forgedID[:]
+ badID,err:=codec.CanonicalPayload(append(corruptID,digest[:]));if err!=nil{t.Fatal(err)}
+ if err:=store.SeedGenesisOccurrence(ctx,domain.ID(forgedID),g.RunID,eligibility,badID);err==nil{t.Fatal("bootstrap accepted occurrence with forged ID")}
+ if err:=store.SeedGenesisOccurrence(ctx,domain.ID(id),g.RunID,eligibility,canonical);err!=nil{t.Fatalf("valid genesis occurrence rejected: %v",err)}
+}

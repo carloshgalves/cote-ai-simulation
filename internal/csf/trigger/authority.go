@@ -2,6 +2,7 @@ package trigger
 
 import (
  "bytes"
+ "encoding/hex"
  "errors"
  "fmt"
  "sort"
@@ -113,4 +114,31 @@ func EventFootprint(kind string)([]string,error){
  case "body.advanced":return []string{"body"},nil
  default:return nil,fmt.Errorf("unregistered synthetic event footprint %q",kind)
  }
+}
+
+// CycleActivation derives every authenticated field of an activation from
+// the pinned trigger definition and causal cycle, without host authority.
+func CycleActivation(bundle *policy.Bundle,runID domain.ID,def Definition,r Runtime,
+ cycleID domain.ID,revision domain.WorldRevision,instant domain.SimulationInstant,
+ causes []domain.ID)(domain.ID,[]byte,error){
+ var zero domain.ID
+ d:=identity.New(bundle)
+ id,_,err:=d.Sum("cote.csf.id.trigger-activation","cote.csf.schema.trigger-activation-id-preimage",1,
+  []any{runID[:],def.ID[:],uint64(def.Version),uint64(revision),r.ActivationCount})
+ if err!=nil{return zero,nil,err}
+ predicate:=PredicateValue(def,instant)
+ pbytes,err:=codec.CanonicalBytes("cote.csf.trigger.predicate","cote.csf.schema.typed-value",1,predicate)
+ if err!=nil{return zero,nil,err}
+ digest:=identity.OpaqueContentHash(pbytes)
+ pd,_,err:=d.Sum("cote.csf.digest.trigger-predicate-result","cote.csf.schema.typed-value",1,
+  []any{"cote.csf.schema.typed-value",uint64(1),pbytes,digest[:]})
+ if err!=nil{return zero,nil,err}
+ causalIDs:=make([]any,len(causes));for i,c:=range causes{causalIDs[i]=c[:]}
+ origin:=[]any{uint64(0),cycleID[:],uint64(revision),causalIDs}
+ fields:=[]any{id[:],runID[:],"trigger:"+hex.EncodeToString(def.ID[:]),def.ID[:],uint64(def.Version),origin,
+  []any{int64(instant),uint64(0)},r.ActivationCount,pd[:],uint64(0),[]any{uint64(0)}}
+ fullDigest,_,err:=d.Sum("cote.csf.digest.trigger-activation-unit","cote.csf.schema.trigger-activation.body",1,fields)
+ if err!=nil{return zero,nil,err}
+ raw,err:=codec.CanonicalPayload(append(fields,fullDigest[:]));if err!=nil{return zero,nil,err}
+ return domain.ID(id),raw,nil
 }

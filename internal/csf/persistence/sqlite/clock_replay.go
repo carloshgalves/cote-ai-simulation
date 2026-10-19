@@ -42,9 +42,12 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  if !ok||len(genesisTyped)!=4{return report,errors.New("genesis state typed-value malformed")}
  initialStateHash,ok:=genesisTyped[3].([]byte)
  if !ok||len(initialStateHash)!=32{return report,errors.New("genesis state hash malformed")}
- var revZeroHash []byte
- if err:=s.db.QueryRowContext(ctx,"SELECT state_hash FROM world_revisions WHERE revision=0").Scan(&revZeroHash);err!=nil{return report,err}
+ var revZeroHash,revZeroCanonical []byte
+ if err:=s.db.QueryRowContext(ctx,"SELECT state_hash,canonical FROM world_revisions WHERE revision=0").Scan(&revZeroHash,&revZeroCanonical);err!=nil{return report,err}
  if !bytes.Equal(revZeroHash,initialStateHash){return report,errors.New("genesis state differs from first durable revision")}
+ canonicalZero,err:=codec.CanonicalPayload([]any{uint64(0),genesisTyped,initialStateHash,uint64(0),genesisTyped,initialStateHash})
+ if err!=nil{return report,err}
+ if !bytes.Equal(revZeroCanonical,canonicalZero){return report,errors.New("genesis revision bytes disagree with typed world state")}
  definitions,err:=s.LoadRegisteredTriggers(ctx,runID,bundle);if err!=nil{return report,err}
  current:=clock.State{Instant:genesisRoot.InitialInstant,LastOrdinal:-1}
  runtime:=make(map[domain.ID]trigger.Runtime,len(definitions))
@@ -83,6 +86,7 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
   v,err:=codec.StrictDecodePayload(raw);if err!=nil{return report,err}
   journal,ok:=v.([]any);if !ok||len(journal)!=24{return report,errors.New("replay CycleCommit not canonical")}
   if !equalBytes(journal[0],runID[:])||!equalBytes(journal[1],entry.cycleID[:]){return report,errors.New("replay cycle reference mismatch")}
+ if _,err:=verifyCommittedFence(ctx,s.db,runID,entry.cycleID,journal);err!=nil{return report,err}
   planFields,ok:=journal[5].([]any)
   if !ok||len(planFields)!=4||planFields[0]!=uint64(1){return report,errors.New("replay only supports CLOCK_ADVANCE in this slice")}
   from,ok:=asSigned64(planFields[1]);if !ok||from!=int64(current.Instant){return report,errors.New("replay clock origin mismatch")}
@@ -124,7 +128,7 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
   record:=ports.ClockAdvanceBatch{RunID:runID,CycleID:entry.cycleID,ExpectedRevision:uint64(current.Revision),ResultRevision:uint64(next.Revision),
    BaseStateHash:bh,ResultStateHash:rh,ExpectedClock:expectedClock,ResultClock:resultClock,
    Journal:ports.CanonicalRecord{Identity:entry.commitID,Canonical:raw},Events:events,RevisionCanonical:revBytes}
-  if err:=verifyAdvanceEnvelope(record,journal,current,next);err!=nil{return report,fmt.Errorf("replay commit integrity: %w",err)}
+  if err:=verifyAdvanceEnvelope(record,journal,current,next,genesisTyped);err!=nil{return report,fmt.Errorf("replay commit integrity: %w",err)}
   for _,registered:=range definitions{
    def:=registered.Definition
    old:=runtime[def.ID]
@@ -138,6 +142,9 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
     if err!=nil{return report,err}
     var rawActivation []byte
     if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM trigger_activations WHERE id=? AND run_id=?",expected[:],runID[:]).Scan(&rawActivation);err!=nil{return report,err}
+    expectedID,expectedBytes,err:=trigger.CycleActivation(bundle,domain.ID(runID),def,decision.Runtime,domain.ID(entry.cycleID),next.Revision,next.Instant,decision.CausingEventIDs)
+    if err!=nil{return report,err}
+    if expectedID!=domain.ID(expected)||!bytes.Equal(rawActivation,expectedBytes){return report,errors.New("replay activation body differs from deterministic transition")}
     decoded,err:=codec.StrictDecodePayload(rawActivation);if err!=nil{return report,err}
     fields,ok:=decoded.([]any);if !ok||len(fields)!=12{return report,errors.New("activation replay schema malformed")}
     origin,ok:=fields[5].([]any);if !ok||len(origin)!=4{return report,errors.New("activation replay origin malformed")}
@@ -160,6 +167,9 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
   lastEventCounter+=len(events)
  }
  report.ReplayedEvents=lastEventCounter
+ // Validate every indexed pending record, including rows whose projected
+ // lifecycle was changed to hide an otherwise durable pending activation.
+ if _,err:=pendingClock(ctx,s.db,runID);err!=nil{return report,err}
  persisted,err:=s.LoadClock(ctx,runID);if err!=nil{return report,err}
  if current!=persisted{return report,errors.New("replayed clock differs from durable clock")}
  report.ReconstructedClock=current

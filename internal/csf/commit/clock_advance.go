@@ -7,7 +7,6 @@ import (
     "bytes"
     "context"
     "sort"
-    "encoding/hex"
     "errors"
 
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
@@ -213,22 +212,9 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
         after,err:=trigger.RuntimeBytes(runtime);if err!=nil{return empty,err}
         changes=append(changes,ports.TriggerStateChange{DefinitionID:[32]byte(item.Definition.ID),DefinitionCanonical:item.DefinitionCanonical,Before:prior,After:after})
         if !fired.Fired{continue}
-        activationID,_,err:=d.Sum("cote.csf.id.trigger-activation","cote.csf.schema.trigger-activation-id-preimage",1,[]any{runID[:],item.Definition.ID[:],uint64(item.Definition.Version),uint64(next.Revision),runtime.ActivationCount})
-        if err!=nil{return empty,err}
-        pbytes,err:=codec.CanonicalBytes("cote.csf.trigger.predicate","cote.csf.schema.typed-value",1,predicateResult)
-        if err!=nil{return empty,err}
-        predicateContentDigest:=identity.OpaqueContentHash(pbytes)
-        value:=[]any{"cote.csf.schema.typed-value",uint64(1),pbytes,predicateContentDigest[:]}
-        predicateDigest,_,err:=d.Sum("cote.csf.digest.trigger-predicate-result","cote.csf.schema.typed-value",1,value)
-        if err!=nil{return empty,err}
-        originRef:=[]any{uint64(0),origin[:],uint64(next.Revision),anyIDs(fired.CausingEventIDs)}
-        source:="trigger:"+hex.EncodeToString(item.Definition.ID[:])
-        fields:=[]any{activationID[:],runID[:],source,item.Definition.ID[:],uint64(item.Definition.Version),originRef,
-            []any{int64(next.Instant),uint64(0)},runtime.ActivationCount,predicateDigest[:],uint64(0),[]any{uint64(0)}}
-        digest,_,err:=d.Sum("cote.csf.digest.trigger-activation-unit","cote.csf.schema.trigger-activation.body",1,fields)
-        if err!=nil{return empty,err}
-        raw,err:=codec.CanonicalPayload(append(cloneAny(fields),digest[:]));if err!=nil{return empty,err}
-        activations=append(activations,ports.CanonicalRecord{Identity:[32]byte(activationID),Canonical:raw})
+         activationID,raw,err:=trigger.CycleActivation(c.bundle,runID,item.Definition,runtime,domain.ID(origin),next.Revision,next.Instant,fired.CausingEventIDs)
+         if err!=nil{return empty,err}
+activations=append(activations,ports.CanonicalRecord{Identity:[32]byte(activationID),Canonical:raw})
     }
     return ports.ClockAdvanceBatch{
         RunID:[32]byte(runID),CycleID:[32]byte(origin),FenceID:f.ID,

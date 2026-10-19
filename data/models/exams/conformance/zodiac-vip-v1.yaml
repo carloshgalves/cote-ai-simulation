@@ -32,6 +32,7 @@ error_codes:
   - SAME_CLASS_AS_VIP
   - PHASE_CLOSED
   - SUPERSEDED_BY_SIMULTANEOUS_SUBMISSION
+  - SUPERSEDED_BY_SAME_ACTOR_COHORT
 
 group_fixture:
   fixture_id: rabbit-13
@@ -268,6 +269,90 @@ vectors:
       vip_actor_id: ABSENT
       terminal_submitter_actor_id: ABSENT
       class_point_deltas: {B: 50, D: -50}
+
+
+  - id: V16-same-actor-same-cycle-quota-order-independent
+    initial: rabbit-13
+    identity_policy_fixture:
+      note: >
+        This vector stubs derived priority bytes to prove that quota selection
+        happens before semantic validation, independent of transport order.
+      derived_priority:
+        s-v16-correct: "20"
+        s-v16-wrong: "10"
+    action_set:
+      same_instant: T50
+      same_cycle: C8
+      submissions:
+        - {actor_id: b1, guess: d2, submission_id: s-v16-correct}
+        - {actor_id: b1, guess: a1, submission_id: s-v16-wrong}
+    execute_permutations:
+      - [s-v16-correct, s-v16-wrong]
+      - [s-v16-wrong, s-v16-correct]
+    expect_for_every_permutation:
+      canonical_actor_submission: s-v16-wrong
+      other_disposition: SUPERSEDED_BY_SAME_ACTOR_COHORT
+      received_unique_count: 1
+      quota_consumed_by_actor: {b1: 1}
+      outcome: OUTCOME_4_TRAITOR_WRONG
+      cp_deltas: {B: -50, D: 50}
+      pp: {d2: 500000}
+      outcomes_count: 1
+      final_state_hash_equal_across_permutations: true
+      economic_ledger_hash_equal_across_permutations: true
+      receipt_ids_equal_across_permutations: true
+
+  - id: V17-identical-retry-does-not-double-consume-quota
+    initial: rabbit-13
+    identity_policy_fixture:
+      derived_priority:
+        s-v17: "10"
+    action_set:
+      same_instant: T50
+      same_cycle: C9
+      submissions:
+        - {transport_attempt_id: retry-one, actor_id: b1, guess: d2, submission_id: s-v17}
+        - {transport_attempt_id: retry-two, actor_id: b1, guess: d2, submission_id: s-v17}
+    execute_permutations:
+      - [retry-one, retry-two]
+      - [retry-two, retry-one]
+    expect_for_every_permutation:
+      canonical_actor_submission: s-v17
+      retransmission_disposition: SAME_RECEIPT
+      received_unique_count: 1
+      quota_consumed_by_actor: {b1: 1}
+      outcome: OUTCOME_3_TRAITOR_CORRECT
+      cp_deltas: {B: 50, D: -50}
+      pp: {b1: 500000}
+      outcomes_count: 1
+      final_state_hash_equal_across_permutations: true
+      economic_ledger_hash_equal_across_permutations: true
+      receipt_ids_equal_across_permutations: true
+
+  - id: V18-same-identity-different-payload-aborts-cohort
+    initial: rabbit-13
+    identity_policy_fixture:
+      derived_priority:
+        s-v18: "10"
+    action_set:
+      same_instant: T50
+      same_cycle: C10
+      submissions:
+        - {transport_attempt_id: collision-one, actor_id: b1, guess: d2, submission_id: s-v18}
+        - {transport_attempt_id: collision-two, actor_id: b1, guess: a1, submission_id: s-v18}
+    execute_permutations:
+      - [collision-one, collision-two]
+      - [collision-two, collision-one]
+    expect_for_every_permutation:
+      disposition: REJECTED_SCHEMA_OR_CAUSAL
+      cohort_rejected: true
+      received_unique_count: 0
+      quota_consumed_by_actor: {b1: 0}
+      outcomes_count: 0
+      pp: {}
+      cp_deltas: {}
+      state_hash_equals_pre_cohort: true
+      economic_ledger_hash_equals_pre_cohort: true
 
 static_setup_generators:
   valid_baseline:

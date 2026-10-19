@@ -305,7 +305,7 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
    return errors.New("trigger runtime authority/revision mismatch")
   }
   var prior []byte
-  err:=tx.QueryRowContext(ctx,"SELECT canonical FROM trigger_runtime WHERE definition_id=? AND run_id=?",change.DefinitionID[:],b.RunID[:]).Scan(&prior)
+  err=tx.QueryRowContext(ctx,"SELECT canonical FROM trigger_runtime WHERE definition_id=? AND run_id=?",change.DefinitionID[:],b.RunID[:]).Scan(&prior)
   if err!=nil&&err!=sql.ErrNoRows{return err}
   if err==sql.ErrNoRows {
    if len(change.Before)!=0{return errors.New("trigger runtime missing expected prior state")}

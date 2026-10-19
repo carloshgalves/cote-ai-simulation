@@ -4,7 +4,9 @@
 package commit
 
 import (
+    "bytes"
     "context"
+    "sort"
     "encoding/hex"
     "errors"
 
@@ -174,7 +176,12 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
     _=canonicalState
     changes:=make([]ports.TriggerStateChange,0,len(work))
     activations:=make([]ports.CanonicalRecord,0)
-    for _,item:=range work {
+    ordered:=append([]TriggerWork(nil),work...)
+    sort.Slice(ordered,func(i,j int)bool{return bytes.Compare(ordered[i].Definition.ID[:],ordered[j].Definition.ID[:])<0})
+    for i,item:=range ordered {
+        if i>0 && item.Definition.ID==ordered[i-1].Definition.ID {
+            return empty,errors.New("duplicate trigger definition in one cycle")
+        }
         if item.Predicate==nil{return empty,errors.New("nil trigger predicate")}
         predicateResult:=item.Predicate(next)
         fired,err:=trigger.Evaluate(item.Definition,item.Previous,next.Instant,next.Revision,predicateResult,[]trigger.Event{{ID:domain.ID(eventID),OrderKey:eventBytes,Footprint:[]string{"clock"}}})

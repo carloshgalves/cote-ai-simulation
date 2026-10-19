@@ -64,6 +64,11 @@ type Authorities struct {
 // derives all records against one frozen revision. Only a CommitCoordinator may
 // invoke ClockAdvanceStore; a storage adapter must compare and publish the whole
 // unit in one transaction, never through individual append methods.
+type TriggerStateChange struct {
+ DefinitionID [32]byte
+ Before []byte
+ After []byte
+}
 type ClockAdvanceBatch struct {
  RunID [32]byte
  CycleID [32]byte
@@ -79,7 +84,7 @@ type ClockAdvanceBatch struct {
  ResultStateHash [32]byte
  Journal CanonicalRecord
  Events []CanonicalRecord
- TriggerRuntime []CanonicalRecord
+ TriggerRuntime []TriggerStateChange
  Activations []CanonicalRecord
  RevisionCanonical []byte
  // Test-only crash injection inside the one transaction; any injected failure

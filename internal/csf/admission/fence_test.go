@@ -119,7 +119,7 @@ func TestCoordinatorPersistsFenceBeforeEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	s := buildScenario(t, bundle, false)
-	store := memory.New()
+	store := s.store
 	log := NewFenceLog(store)
 	coordinator := NewCoordinator(log)
 	called := false
@@ -153,7 +153,7 @@ func TestCorruptedCachedUnitCannotPolluteAuthoritativeFence(t *testing.T) {
 	if _, err := Derive(bundle, s.ledger, s.cycle, s.policies); err == nil {
 		t.Fatal("direct derivation accepted corrupted cached unit")
 	}
-	store := memory.New()
+	store := s.store
 	called := false
 	coordinator := NewCoordinator(NewFenceLog(store))
 	got, err := coordinator.AdmitThenEvaluate(context.Background(), bundle, s.ledger, s.cycle, s.policies, func(Fence) error { called = true; return nil })

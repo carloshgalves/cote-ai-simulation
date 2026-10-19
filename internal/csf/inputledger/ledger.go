@@ -627,10 +627,10 @@ func (l *Ledger) DeclareRound(ctx context.Context, sourceID string, actor [2]str
 		}
 		return prior, nil
 	}
-	if l.inputStore != nil {
-		if err := l.inputStore.Append(ctx, ports.CanonicalRecord{Identity: roundID, Canonical: canonical}); err != nil {
-			return Round{}, err
-		}
+	guard, ok := l.inputStore.(ports.AdmissionGuardedAppendStore)
+	if !ok { return Round{}, errors.New("store lacks durable admission round guard") }
+	if err := guard.AppendRoundDeclaration(ctx, [32]byte(l.runID), int64(eligibility.NotBeforeInstant), uint64(eligibility.NotBeforeCycleOrdinal), ports.CanonicalRecord{Identity: roundID, Canonical: canonical}); err != nil {
+		return Round{}, err
 	}
 	round := Round{ID: roundID, SourceID: sourceID, Actor: actor, Slots: canonicalSlots, Eligibility: eligibility, CreatedBy: createdBy, Role: role, LocalOrdinal: ordinal, Lifecycle: lifecycle, IdempotencyKey: idempotencyKey, Digest: digest, Fields: fields, Canonical: canonical}
 	l.rounds[roundID] = round
@@ -658,7 +658,9 @@ func (l *Ledger) DeclareSource(source Source) error {
 	if err != nil {
 		return err
 	}
-	if err := l.inputStore.Append(context.Background(), ports.CanonicalRecord{Identity: [32]byte(identity.OpaqueContentHash(canonical)), Canonical: canonical}); err != nil {
+	guard, ok := l.inputStore.(ports.AdmissionGuardedAppendStore)
+	if !ok { return errors.New("store lacks durable admission source guard") }
+	if err := guard.AppendSourceDeclaration(context.Background(), [32]byte(l.runID), ports.CanonicalRecord{Identity: [32]byte(identity.OpaqueContentHash(canonical)), Canonical: canonical}); err != nil {
 		return err
 	}
 	l.sources[source.ID] = true
@@ -1034,6 +1036,14 @@ func (l *Ledger) WithAdmissionBoundary(publish func() error) error {
 	l.admissionMu.Lock()
 	defer l.admissionMu.Unlock()
 	return publish()
+}
+
+// FreezeSourceDeclarations marks this ledger's local cache after the durable
+// fence append succeeds; stores independently enforce the persistent seal.
+func (l *Ledger) FreezeSourceDeclarations() {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	l.sourcesFrozen = true
 }
 
 // Snapshot returns a coherent ledger prefix for deterministic fence derivation.

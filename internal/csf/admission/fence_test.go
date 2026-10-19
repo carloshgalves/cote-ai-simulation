@@ -10,6 +10,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/memory"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
@@ -162,6 +163,62 @@ func TestCorruptedCachedUnitCannotPolluteAuthoritativeFence(t *testing.T) {
 	if !bytes.Equal(got.Canonical, original.Canonical) {
 		t.Fatal("mutated in-memory cache changed durable admission fence")
 	}
+}
+
+
+type deliberatelyUnguardedFenceStore struct{}
+func (*deliberatelyUnguardedFenceStore) AppendFence(context.Context, ports.CanonicalRecord) error { panic("unguarded append must never be called") }
+func (*deliberatelyUnguardedFenceStore) GetFence(context.Context, [32]byte) ([]byte,error) { return nil,errors.New("missing") }
+
+func TestCoordinatorRejectsStoreWithoutPrefixCAS(t *testing.T) {
+	bundle,err:=policy.Load(bundlePath); if err!=nil {t.Fatal(err)}
+	s:=buildScenario(t,bundle,false)
+	count:=s.store.Len()
+	called:=false
+	_,err=NewCoordinator(NewFenceLog(&deliberatelyUnguardedFenceStore{})).AdmitThenEvaluate(context.Background(),bundle,s.ledger,s.cycle,s.policies,func(Fence)error{called=true;return nil})
+	if err==nil || called {t.Fatalf("unsafe store published or evaluated: err=%v called=%v",err,called)}
+	if s.store.Len()!=count {t.Fatal("unsafe publication changed input prefix")}
+}
+
+func TestFenceSealRejectsPostPublicationSourcesAndRetroactiveRounds(t *testing.T) {
+	bundle,err:=policy.Load(bundlePath);if err!=nil {t.Fatal(err)}
+	s:=buildScenario(t,bundle,false)
+	fence,err:=NewCoordinator(NewFenceLog(s.store)).AdmitThenEvaluate(context.Background(),bundle,s.ledger,s.cycle,s.policies,nil)
+	if err!=nil {t.Fatal(err)}
+	count:=s.store.Len()
+	if err:=s.ledger.DeclareSource(inputledger.Source{ID:"source-after-fence"});!errors.Is(err,inputledger.ErrSourcesFrozen){t.Fatalf("live source not frozen: %v",err)}
+	var genesisID,genesisDigest domain.ID
+	genesisID[0],genesisDigest[0]=1,2
+	created:=[]any{uint64(2),[]any{genesisID[:],genesisDigest[:]}}
+	declare:=func(l *inputledger.Ledger,instant domain.SimulationInstant,ordinal domain.CycleOrdinal)(error){
+		_,err:=l.DeclareRound(context.Background(),"schedule",[2]string{"cote","actor-c"},[]string{"act"},domain.EligibilityCoordinate{NotBeforeInstant:instant,NotBeforeCycleOrdinal:ordinal},created,0,99,0,[]any{uint64(0)})
+		return err
+	}
+	if err:=declare(s.ledger,100,0);err==nil {t.Fatal("retroactive round appended after fence")}
+	reopened,err:=inputledger.Open(context.Background(),func()domain.ID{var id domain.ID;id[0]=0x41;return id}(),bundle,s.store)
+	if err!=nil {t.Fatal(err)}
+	if err:=reopened.DeclareSource(inputledger.Source{ID:"source-reopened"});!errors.Is(err,inputledger.ErrSourcesFrozen){t.Fatalf("reopened source not frozen: %v",err)}
+	if err:=declare(reopened,100,0);err==nil {t.Fatal("reopened ledger accepted retroactive round")}
+	if s.store.Len()!=count {t.Fatal("rejected records altered durable input ledger")}
+	got,err:=s.store.GetFence(context.Background(),fence.ID);if err!=nil||!bytes.Equal(got,fence.Canonical){t.Fatal("published fence changed after rejected records")}
+	// A future-cycle round is legal; the previous fence must stay immutable.
+	if err:=declare(reopened,101,0);err!=nil {t.Fatalf("future round improperly sealed: %v",err)}
+	got,err=s.store.GetFence(context.Background(),fence.ID);if err!=nil||!bytes.Equal(got,fence.Canonical){t.Fatal("future round mutated old fence")}
+}
+
+func TestTwoMemoryLedgersRejectStalePrefixBeforeFence(t *testing.T) {
+	bundle,err:=policy.Load(bundlePath);if err!=nil {t.Fatal(err)}
+	s:=buildScenario(t,bundle,false)
+	view,prefix,err:=s.ledger.AdmissionView(context.Background(),bundle);if err!=nil {t.Fatal(err)}
+	fence,err:=Derive(bundle,view,s.cycle,s.policies);if err!=nil {t.Fatal(err)}
+	var genesisID,genesisDigest domain.ID;genesisID[0],genesisDigest[0]=1,2
+	var runID domain.ID;runID[0]=0x41
+	other,err:=inputledger.Open(context.Background(),runID,bundle,s.store);if err!=nil {t.Fatal(err)}
+	created:=[]any{uint64(2),[]any{genesisID[:],genesisDigest[:]}}
+	_,err=other.DeclareRound(context.Background(),"schedule",[2]string{"cote","actor-new"},[]string{"act"},domain.EligibilityCoordinate{NotBeforeInstant:101},created,0,88,0,[]any{uint64(0)})
+	if err!=nil {t.Fatal(err)}
+	if err:=s.store.AppendFenceIfPrefix(context.Background(),ports.CanonicalRecord{Identity:fence.ID,Canonical:fence.Canonical},prefix);err==nil {t.Fatal("stale fence accepted after independent ledger wrote")}
+	if _,err:=s.store.GetFence(context.Background(),fence.ID);err==nil {t.Fatal("stale fence persisted")}
 }
 
 type scenario struct {

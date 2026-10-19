@@ -70,6 +70,22 @@ func TestOpenRestoresPersistedLedgerAndDerivesIdenticalFence(t *testing.T) {
 	}
 }
 
+// Reopen must not silently re-enable declarations after the source set was
+// frozen. This guards the behavior whose absence was originally suspected.
+func TestReopenKeepsSourceSetFrozen(t *testing.T) {
+	bundle, err := policy.Load(bundlePath)
+	if err != nil { t.Fatal(err) }
+	scenario := buildScenario(t, bundle, false)
+	if _, err := Derive(bundle, scenario.ledger, scenario.cycle, scenario.policies); err != nil { t.Fatal(err) }
+	var runID domain.ID
+	runID[0] = 0x41
+	reopened, err := inputledger.Open(context.Background(), runID, bundle, scenario.store)
+	if err != nil { t.Fatal(err) }
+	if err := reopened.DeclareSource(inputledger.Source{ID: "late-reopen-source"}); !errors.Is(err, inputledger.ErrSourcesFrozen) {
+		t.Fatalf("source declared after reopened frozen prefix: %v", err)
+	}
+}
+
 func TestFenceWaitsForEveryClosureAndSlot(t *testing.T) {
 	bundle, err := policy.Load(bundlePath)
 	if err != nil {

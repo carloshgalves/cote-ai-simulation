@@ -83,13 +83,29 @@ func guardedKind(record ports.CanonicalRecord) (string,[32]byte,int64,uint64,err
 }
 func isString(v any) bool {_,ok:=v.(string);return ok}
 
+// The admission seal is selected from the record's canonical run/coordinate;
+// caller routing arguments cannot redirect it to another run or cycle.
+func validateGuardArguments(record ports.CanonicalRecord, wantedKind string, runID [32]byte, instant int64, ordinal uint64) error {
+	kind, actualRun, actualInstant, actualOrdinal, err := guardedKind(record)
+	if err != nil { return err }
+	if kind != wantedKind || actualRun != runID {
+		return errors.New("guarded record kind or run does not match canonical bytes")
+	}
+	if wantedKind == "round" && (actualInstant != instant || actualOrdinal != ordinal) {
+		return errors.New("guarded round coordinate does not match canonical bytes")
+	}
+	return nil
+}
+
 func (s *Store) AppendSourceDeclaration(_ context.Context, runID [32]byte, record ports.CanonicalRecord) error {
+	if err := validateGuardArguments(record, "source", runID, 0, 0); err != nil { return err }
 	s.mu.Lock();defer s.mu.Unlock()
 	for _,seal:=range s.seals {if seal.runID==runID {return errors.New("source declaration after admission fence")}}
 	return s.appendInputLocked(record)
 }
 
 func (s *Store) AppendRoundDeclaration(_ context.Context,runID [32]byte,instant int64,ordinal uint64,record ports.CanonicalRecord) error {
+	if err := validateGuardArguments(record, "round", runID, instant, ordinal); err != nil { return err }
 	s.mu.Lock();defer s.mu.Unlock()
 	for _,seal:=range s.seals {
 		if seal.runID==runID && (instant<seal.instant || (instant==seal.instant && ordinal<=seal.ordinal)) {

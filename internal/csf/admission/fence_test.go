@@ -167,6 +167,27 @@ func TestCorruptedCachedUnitCannotPolluteAuthoritativeFence(t *testing.T) {
 
 
 
+func TestCoordinatorRejectsFenceStoreFromIndependentAuthority(t *testing.T) {
+	ctx := context.Background()
+	bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+	fixture:=buildScenario(t,bundle,false)
+	foreign:=memory.New()
+	called:=false
+	_,err=NewCoordinator(NewFenceLog(foreign)).AdmitThenEvaluate(ctx,bundle,fixture.ledger,fixture.cycle,fixture.policies,func(Fence)error{called=true;return nil})
+	if err==nil || called {t.Fatalf("cross-store fence CAS permitted: err=%v, called=%v",err,called)}
+	if _,err:=foreign.Records(ctx);err!=nil{t.Fatal(err)}
+	if foreign.Len()!=0 {t.Fatal("cross-store publication mutated a foreign authority")}
+	// An empty prefix is especially dangerous: two independent stores
+	// otherwise both report the same zero-length snapshot and pass CAS.
+	inputStore:=memory.New()
+	var runID domain.ID;runID[0]=0x41
+	empty,err:=inputledger.New(ctx,runID,bundle,inputStore);if err!=nil{t.Fatal(err)}
+	called=false
+	_,err=NewCoordinator(NewFenceLog(foreign)).AdmitThenEvaluate(ctx,bundle,empty,fixture.cycle,fixture.policies,func(Fence)error{called=true;return nil})
+	if err==nil || called {t.Fatalf("empty-prefix cross-store fence CAS permitted: err=%v called=%v",err,called)}
+	if foreign.Len()!=0 {t.Fatal("empty-prefix foreign authority mutated")}
+}
+
 func TestFenceLogDirectPublicationNeverWrites(t *testing.T) {
     ctx:=context.Background()
     bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}

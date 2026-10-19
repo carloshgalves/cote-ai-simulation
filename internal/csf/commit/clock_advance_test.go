@@ -252,7 +252,19 @@ func TestSQLiteRejectsTamperedClockBatchWithoutPartialState(t *testing.T) {
     fields:=decoded.([]any);fields[2]="trigger:forged-source"
     b.Activations[0].Canonical,err=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
   }},
-  {"revision-hash",func(t *testing.T,b *ports.ClockAdvanceBatch){
+  {"missing-registered-trigger",func(t *testing.T,b *ports.ClockAdvanceBatch){ b.TriggerRuntime=nil }},
+   {"omitted-due-activation",func(t *testing.T,b *ports.ClockAdvanceBatch){ b.Activations=nil }},
+   {"modified-trigger-runtime",func(t *testing.T,b *ports.ClockAdvanceBatch){
+      decoded,err:=codec.StrictDecodePayload(b.TriggerRuntime[0].After);if err!=nil{t.Fatal(err)}
+      fields:=decoded.([]any);fields[5]=uint64(99)
+      b.TriggerRuntime[0].After,err=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+   }},
+   {"changed-immutable-definition",func(t *testing.T,b *ports.ClockAdvanceBatch){
+      decoded,err:=codec.StrictDecodePayload(b.TriggerRuntime[0].DefinitionCanonical);if err!=nil{t.Fatal(err)}
+      fields:=decoded.([]any);fields[4]=false
+      b.TriggerRuntime[0].DefinitionCanonical,err=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+   }},
+   {"revision-hash",func(t *testing.T,b *ports.ClockAdvanceBatch){
     decoded,err:=codec.StrictDecodePayload(b.RevisionCanonical);if err!=nil{t.Fatal(err)}
     fields:=decoded.([]any);fields[5]=make([]byte,32)
     b.RevisionCanonical,err=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}

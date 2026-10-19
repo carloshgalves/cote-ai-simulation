@@ -49,12 +49,13 @@ func validGenesis(t *testing.T,b *policy.Bundle)*genesis.Genesis{
  return nil
 }
 
-func testFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,domain.ID,*policy.Bundle) {
+func testFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,domain.ID,*policy.Bundle,string) {
  t.Helper()
  ctx:=context.Background()
  bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
  g:=validGenesis(t,bundle)
- store,err:=sqlite.Open(ctx,t.TempDir()+"/clock.db");if err!=nil{t.Fatal(err)}
+ path:=t.TempDir()+"/clock.db"
+ store,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
  t.Cleanup(func(){store.Close()})
  if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
  if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
@@ -75,12 +76,12 @@ func testFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,do
  if _,err:=ledger.CloseSource(ctx,"driver",inputledger.Closure{ProducerKey:"closed-through-next",ClosedThrough:closedAt});err!=nil{t.Fatal(err)}
  roles,err:=policiesByRole(bundle);if err!=nil{t.Fatal(err)}
  policies:=admission.Policies{AdmissionOrder:roles["admission-order"],CausalIdentity:roles["causal-identity"],Fence:roles["admission-fence"],Rules:[][]any{}}
- return New(store,bundle,policies),store,ledger,g.RunID,bundle
+ return New(store,bundle,policies),store,ledger,g.RunID,bundle,path
 }
 
 func TestClockAdvancePublishesCycleAndPendingActivation(t *testing.T){
  ctx:=context.Background()
- coordinator,store,ledger,runID,_:=testFixture(t)
+ coordinator,store,ledger,runID,_,_:=testFixture(t)
  before,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  var triggerID domain.ID;triggerID[0]=0x80
  definition:=trigger.Definition{ID:triggerID,Version:1,Policy:trigger.RisingEdge,FireOnInitialTrue:true,Dependencies:[]string{"clock"}}
@@ -98,4 +99,78 @@ func TestClockAdvancePublishesCycleAndPendingActivation(t *testing.T){
  if _,err:=coordinator.Advance(ctx,ledger,runID,nil);err==nil {t.Fatal("advance repeated while WORK activation is pending")}
  fence,err:=store.GetFence(ctx,result.Fence.ID)
  if err!=nil||!bytes.Equal(fence,result.Fence.Canonical){t.Fatal("fence changed")}
+}
+
+func activeTrigger() TriggerWork {
+ var id domain.ID;id[0]=0x81
+ d:=trigger.Definition{ID:id,Version:1,Policy:trigger.RisingEdge,FireOnInitialTrue:true,Dependencies:[]string{"clock"}}
+ r:=trigger.Runtime{DefinitionID:id,Version:1,Armed:true}
+ return TriggerWork{Definition:d,Previous:r,Predicate:func(clock.State)bool{return true}}
+}
+
+// A failure anywhere inside the one SQLite transaction must roll back every
+// authoritative table, including the journal (decision, not input ledger).
+// Fence publication precedes the commit transaction by design and remains.
+func TestAdvanceAtomicRollbackAtEveryWriteBoundary(t *testing.T){
+ for step:=uint8(1);step<=6;step++ {
+  t.Run(string(rune('0'+step)),func(t *testing.T) {
+   ctx:=context.Background()
+   coordinator,store,ledger,runID,_,_:=testFixture(t)
+   initial,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
+   before,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
+   coordinator.failAfterStep=step
+   if _,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{activeTrigger()});err==nil{t.Fatal("injected failure was ignored")}
+   state,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil||state!=initial{t.Fatalf("clock changed after rollback: %+v %v",state,err)}
+   after,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
+   if after!=before {t.Fatalf("incomplete transaction leaked to authorities: before=%+v after=%+v",before,after)}
+   // The persisted fence is not a terminal commit: repeat from the same
+   // closed cohort after simulated process interruption.
+   coordinator.failAfterStep=0
+   result,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{activeTrigger()})
+   if err!=nil{t.Fatalf("retry after rollback: %v",err)}
+   audit,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
+   if audit.CommitCount!=1||audit.EventCount!=1||audit.RuntimeCount!=1||audit.ActivationCount!=1||audit.RevisionCount!=2||audit.InputCount!=before.InputCount{
+    t.Fatalf("incomplete committed state: %+v",audit)
+   }
+   journal,err:=store.ReadCycleCommit(ctx,result.Commit.Identity)
+   if err!=nil||!bytes.Equal(journal,result.Commit.Canonical){t.Fatal("CycleCommit missing from decision ledger")}
+   event,err:=store.ReadClockEvent(ctx,result.Events[0].Identity)
+   if err!=nil||!bytes.Equal(event,result.Events[0].Canonical){t.Fatal("clock event missing from event store")}
+  })
+ }
+}
+
+func TestAdvanceReopenAndWorkerPermutationPreserveAuthoritativeBytes(t *testing.T) {
+ ctx:=context.Background()
+ var baselineJournal,baselineEvent,baselineActivation []byte
+ for iteration:=0;iteration<2;iteration++{
+  coordinator,store,ledger,runID,_,path:=testFixture(t)
+  one:=activeTrigger()
+  two:=activeTrigger()
+  two.Definition.ID[0]=0x82;two.Previous.DefinitionID=two.Definition.ID
+  work:=[]TriggerWork{one,two}
+  if iteration==1{work[0],work[1]=work[1],work[0]}
+  result,err:=coordinator.Advance(ctx,ledger,runID,work)
+  if err!=nil{t.Fatal(err)}
+  if len(result.Events)!=1||len(result.Activations)!=2{t.Fatal("missing trigger activations")}
+  if iteration==0 {
+   baselineJournal=append([]byte(nil),result.Commit.Canonical...)
+   baselineEvent=append([]byte(nil),result.Events[0].Canonical...)
+   baselineActivation=append([]byte(nil),result.Activations[0].Canonical...)
+  }else{
+   if !bytes.Equal(baselineJournal,result.Commit.Canonical)||!bytes.Equal(baselineEvent,result.Events[0].Canonical)||!bytes.Equal(baselineActivation,result.Activations[0].Canonical){
+    t.Fatal("worker completion order changed canonical bytes")
+   }
+  }
+  reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+  state,err:=reopened.LoadClock(ctx,[32]byte(runID));if err!=nil||state!=result.ResultClock{reopened.Close();t.Fatal("clock did not survive reopen")}
+  actualJournal,err:=reopened.ReadCycleCommit(ctx,result.Commit.Identity)
+  if err!=nil||!bytes.Equal(actualJournal,result.Commit.Canonical){reopened.Close();t.Fatal("commit did not survive reopen")}
+  actualEvent,err:=reopened.ReadClockEvent(ctx,result.Events[0].Identity)
+  if err!=nil||!bytes.Equal(actualEvent,result.Events[0].Canonical){reopened.Close();t.Fatal("event did not survive reopen")}
+  pending,err:=reopened.PendingClock(ctx,[32]byte(runID))
+  if err!=nil||len(pending)!=3 {reopened.Close();t.Fatalf("lost pending trigger/occurrence: %v %+v",err,pending)}
+  reopened.Close()
+  _=store
+ }
 }

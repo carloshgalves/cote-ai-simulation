@@ -1,7 +1,7 @@
 # Character Evidence V0 -> Canon RAG V2: controlled compatibility boundary
 
 **Integration source:** historical `feat/character-evidence-v0` (four commits).
-**Reference contract:** Canon RAG V0 `feat/canon-rag-v0`, `CanonEvidence` V2.
+**Reference contract:** Canon RAG V0 now integrated in `main` (PR #7); `CanonEvidence` V2.
 
 ## What is preserved
 
@@ -18,25 +18,37 @@ overwriting RAG's authoritative `evidence.schema.json` (V2) or
 The Canon RAG loader indexes only `data/canon/evidence/focal-v0/*.json`.
 It **does not** scan the legacy character YAML collections.
 
-## Export conditions — fail closed
+## Export conditions — fail closed (remediated Finding 1)
 
-`tools/character_evidence_v2_bridge.py` supports projection of an individual
-historical record to schema-valid `BEHAVIORAL_CANON` V2 only after:
-1. explicit individual evidence-ID approval by a named reviewer;
-2. explicit review of private/secret/factual content before behavioral classification;
-3. confirmed (not automatically invented) narrative *work and ordinal*;
-4. one resolvable primary source, plus edition and locator for each support;
-5. no factual `supports_claims` piggybacking on a behavioral record;
-6. source epistemic status stays `UNVERIFIED`; Tier 5 discovery is not primary proof.
+Public conversion functions do **not** accept caller-supplied approval dictionaries
+or reviewer strings. The *only* authority source is the versioned file
+`data/canon/reviews/character-evidence-v2-approvals.json`, read at a fixed path
+and checked against a SHA-256 digest pinned in the bridge implementation.
+The current file has **zero approved records**, so exporting any of the 32
+legacy records is denied. Changing the manifest AND its code pin requires a
+separate, independently reviewed repository PR: the repository's reviewed
+release is the trust boundary. This scheme does **not** cryptographically
+authenticate a human GitHub reviewer or independently verify review URLs;
+repository access controls and human review are required for new grants.
 
-No approvals or narrative ordinals are supplied in the repository. Therefore the
-**default V2 export is empty** and 32/32 records remain quarantined. The positive
-synthetic test does not authorize any real evidence for runtime retrieval.
+Every future per-record grant must include evidence ID, complete canonical
+record SHA-256 (including text, actors, story time and provenance), authorized
+behavioral role, private-content review, named reviewer, review PR reference,
+and verified narrative work/ordinal. A changed record invalidates the grant.
+A source locator alone cannot invent an ordinal. The public adapter must still
+validate source edition/locator, one primary source, factual-claim exclusion,
+V2 schema, role, horizon and provenance. `UNVERIFIED` stays `UNVERIFIED`
+and later plot facts remain prohibited from initial agent memory.
 
-Approval is necessary but does not promote a source to `VERIFIED`, convert
-`FUTURE_EVIDENCE_ONLY` to initial memory, or authorize use beyond the RAG gate.
-Any exported item must still pass the RAG's time, character, horizon, continuity,
-divergence and provenance gates.
+The private helper `_project_reviewed_record` is solely a schema projection
+seam and accepts synthetic review fixtures for tests; it **is not an authority
+or an API to be called by the RAG importer**. A direct call to it bypasses
+the release authority and must never be used as a runtime export entrypoint.
+Only `convert_for_v2` / `eligible_records` have authorization semantics,
+and neither currently exports a record.
+
+The default V2 export is empty and 32/32 records remain quarantined; the
+positive synthetic test is not evidence that a human authorized export.
 
 ## Before this Draft PR can be integrated
 
@@ -53,7 +65,7 @@ divergence and provenance gates.
 
 ## Delivery ordering
 
-This PR is **stacked on PR #7** to verify V2 compatibility against the actual V2
-schemas and gates. It is independent from the Zodiac/VIP spec PR and the CSF PR.
-When PR #7 merges to `main`, retarget this Draft PR to `main` and validate it
-again. Never merge the stack directly into `main` before that dependency.
+PR #7 is integrated into `main` (merge `f2339acf`). This PR #18 now
+targets `main`, with the historical four character-evidence commits intact.
+No data is exported before a separately reviewed release-authority update,
+source verification and semantic deduplication against `focal-v0`.

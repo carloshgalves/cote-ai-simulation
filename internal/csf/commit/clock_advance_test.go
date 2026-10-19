@@ -174,3 +174,52 @@ func TestAdvanceReopenAndWorkerPermutationPreserveAuthoritativeBytes(t *testing.
   _=store
  }
 }
+
+func TestProvisionalAdvanceIsRejectedAfterEarlierRoundArrives(t *testing.T){
+ ctx:=context.Background()
+ coordinator,store,ledger,runID,bundle,_:=testFixture(t)
+ state,err:=store.LoadClock(ctx,[32]byte(runID]);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,bundle)
+ origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+ now:=state.Instant
+ var injected bool
+ item:=activeTrigger()
+ item.Predicate=func(clock.State)bool{
+  // An independently scheduled Q arrives after provisional P was read
+  // but before the SQLite clock journal is published.
+  q:=domain.EligibilityCoordinate{NotBeforeInstant:now+50,NotBeforeCycleOrdinal:0}
+  _,e:=ledger.DeclareRound(ctx,"schedule",[2]string{"school","actor-a"},[]string{"decision"},q,origin,0,57,0,[]any{uint64(0)})
+  if e!=nil{t.Errorf("could not insert concurrent Q: %v",e)} else{injected=true}
+  return true
+ }
+ result,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{item})
+ if err==nil||!injected{t.Fatalf("advance with earlier Q was not rejected: %+v %v",result,err)}
+ actual,err:=store.LoadClock(ctx,[32]byte(runID])
+ if err!=nil||actual!=state{t.Fatalf("premature clock transition: %+v %v",actual,err)}
+ audit,err:=store.AuditClock(ctx,[32]byte(runID])
+ if err!=nil||audit.CommitCount!=0||audit.EventCount!=0||audit.RevisionCount!=1{t.Fatalf("uncommitted effects persisted: %+v %v",audit,err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(runID]);if err!=nil{t.Fatal(err)}
+ replacement,ok,err:=clock.Next(state,pending)
+ if err!=nil||!ok||replacement.To!=now+50{t.Fatalf("Q did not become minimum: %+v %v",replacement,err)}
+}
+
+func TestRepeatCadenceIsPersistedAsFuturePendingWork(t *testing.T){
+ ctx:=context.Background()
+ coordinator,store,ledger,runID,_,_:=testFixture(t)
+ w:=activeTrigger()
+ w.Definition.Policy=trigger.RepeatWhileTrue
+ w.Definition.FireOnInitialTrue=false
+ w.Definition.RepeatEvery=25
+ outcome,err:=coordinator.Advance(ctx,ledger,runID,[]TriggerWork{w})
+ if err!=nil{t.Fatal(err)}
+ if len(outcome.Activations)!=1{t.Fatal("repeat did not activate at initial true")}
+ pending,err:=store.PendingClock(ctx,[32]byte(runID]);if err!=nil{t.Fatal(err)}
+ var hasCadence bool
+ for _,item:=range pending{
+  if item.ID==w.Definition.ID {
+   hasCadence=true
+   if item.Eligibility.NotBeforeInstant!=outcome.ResultClock.Instant+25 {t.Fatalf("repeat cadence was not durable: %+v",item)}
+  }
+ }
+ if !hasCadence{t.Fatal("persisted repeat runtime did not contribute to pending minimum")}
+}

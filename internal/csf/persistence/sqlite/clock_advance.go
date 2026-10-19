@@ -133,6 +133,30 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
   out=append(out,clock.Pending{ID:id,Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)}})
  }
  if err:=inputs.Err();err!=nil{return nil,err}
+ // REPEAT_WHILE_TRUE registers its next due instant durably in the
+ // trigger runtime. A pending cadence participates in the minimum even
+ // without an intervening world-domain event.
+ runtimes,err:=q.QueryContext(ctx,"SELECT definition_id,canonical FROM trigger_runtime WHERE run_id=?",runID[:])
+ if err!=nil{return nil,err}
+ for runtimes.Next(){
+  var id,raw []byte
+  if err:=runtimes.Scan(&id,&raw);err!=nil{runtimes.Close();return nil,err}
+  v,err:=codec.StrictDecodePayload(raw)
+  if err!=nil{runtimes.Close();return nil,err}
+  fields,ok:=v.([]any)
+  if !ok||len(fields)!=8||len(id)!=32||!equalBytes(fields[0],id) {runtimes.Close();return nil,errors.New("corrupted repeat runtime authority")}
+  last,ok:=fields[2].([]any);if !ok{runtimes.Close();return nil,errors.New("invalid repeat last-value option")}
+  // Only runtime with a true predicate and a next cadence may schedule
+  // another repeat. Other policies have ABSENT next-repeat by contract.
+  next,ok:=fields[6].([]any);if !ok{runtimes.Close();return nil,errors.New("invalid repeat next option")}
+  if len(next)==2 && next[0]==uint64(1) && len(last)==2 && last[0]==uint64(1) && last[1]==true {
+   instant,ok:=asSigned64(next[1]);if !ok{runtimes.Close();return nil,errors.New("invalid next repeat instant")}
+   var def domain.ID;copy(def[:],id)
+   out=append(out,clock.Pending{ID:def,Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:0}})
+  } else if len(next)!=1 && len(next)!=2 {runtimes.Close();return nil,errors.New("invalid repeat option shape")}
+ }
+ if err:=runtimes.Err();err!=nil{runtimes.Close();return nil,err}
+ if err:=runtimes.Close();err!=nil{return nil,err}
  // The clock's minimum is order-insensitive, but the stored projection has
  // stable byte ordering for deterministic tests and audit queries.
  sort.Slice(out,func(i,j int)bool {

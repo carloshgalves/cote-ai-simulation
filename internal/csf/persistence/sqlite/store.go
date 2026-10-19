@@ -16,6 +16,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
@@ -154,7 +155,82 @@ CREATE TABLE IF NOT EXISTS snapshots (id BLOB PRIMARY KEY CHECK(length(id)=32), 
 
 // Append stores one canonical input-ledger record idempotently.
 func (s *Store) Append(ctx context.Context, record ports.CanonicalRecord) error {
-	return appendTo(ctx, s.db, "input_ledger", record)
+	// Guarded records cannot bypass the seal even through the generic adapter API.
+	kind, runID, instant, ordinal, err := guardedKind(record)
+	if err != nil { return err }
+	switch kind {
+	case "source": return s.AppendSourceDeclaration(ctx, runID, record)
+	case "round": return s.AppendRoundDeclaration(ctx, runID, instant, ordinal, record)
+	default: return appendTo(ctx, s.db, "input_ledger", record)
+	}
+}
+
+func guardedKind(record ports.CanonicalRecord) (string, [32]byte, int64, uint64, error) {
+	var runID [32]byte
+	payload, err := codec.StrictDecodePayload(record.Canonical)
+	if err != nil { return "", runID, 0, 0, nil } // envelope receipt, etc.
+	fields, ok := payload.([]any)
+	if !ok { return "", runID, 0, 0, nil }
+	isSource := len(fields)==3 && fields[0]=="source-declaration-v1"
+	isRound := len(fields)==11 && fields[2]!=nil && isRoundSource(fields[2])
+	if !isSource && !isRound { return "", runID, 0, 0, nil }
+	if len(fields)<2 { return "",runID,0,0,errors.New("guarded append invalid fields") }
+	id, ok := fields[1].([]byte)
+	if !ok || len(id)!=32 { return "",runID,0,0,errors.New("guarded append invalid run id") }
+	copy(runID[:],id)
+	if isSource { return "source",runID,0,0,nil }
+	coord,ok := fields[5].([]any)
+	if !ok || len(coord)!=2 { return "",runID,0,0,errors.New("guarded round invalid coordinate") }
+	instant,ok := coord[0].(int64)
+	if !ok { return "",runID,0,0,errors.New("guarded round invalid instant") }
+	ordinal,ok := coord[1].(uint64)
+	if !ok { return "",runID,0,0,errors.New("guarded round invalid ordinal") }
+	return "round",runID,instant,ordinal,nil
+}
+
+func isRoundSource(value any) bool { _, ok := value.(string); return ok }
+
+func (s *Store) AppendSourceDeclaration(ctx context.Context, runID [32]byte, record ports.CanonicalRecord) error {
+	return s.guardedAppend(ctx, runID, nil, record)
+}
+
+func (s *Store) AppendRoundDeclaration(ctx context.Context, runID [32]byte, instant int64, ordinal uint64, record ports.CanonicalRecord) error {
+	coord := [2]int64{instant, 0}
+	return s.guardedAppend(ctx, runID, &roundGuardCoordinate{instant: coord[0], ordinal: ordinal}, record)
+}
+
+type roundGuardCoordinate struct { instant int64; ordinal uint64 }
+
+func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundGuardCoordinate, record ports.CanonicalRecord) error {
+	tx, err := s.db.BeginTx(ctx,nil)
+	if err!=nil { return err }
+	defer tx.Rollback()
+	rows,err := tx.QueryContext(ctx,"SELECT canonical FROM decision_ledger")
+	if err!=nil { return err }
+	for rows.Next() {
+		var canonical []byte
+		if err:=rows.Scan(&canonical);err!=nil { rows.Close();return err }
+		fields,err:=codec.StrictDecodePayload(canonical)
+		if err!=nil {rows.Close();return errors.New("invalid persisted fence")}
+		body,ok:=fields.([]any)
+		if !ok || len(body)<6 {rows.Close();return errors.New("invalid persisted fence body")}
+		fenceRun,ok:=body[0].([]byte)
+		if !ok || len(fenceRun)!=32 {rows.Close();return errors.New("invalid persisted fence run")}
+		if !bytes.Equal(fenceRun,runID[:]) {continue}
+		if round==nil {rows.Close();return errors.New("source declaration after admission fence")}
+		instant,ok:=body[4].(int64)
+		if !ok {rows.Close();return errors.New("invalid persisted fence instant")}
+		ordinal,ok:=body[5].(uint64)
+		if !ok {rows.Close();return errors.New("invalid persisted fence ordinal")}
+		if round.instant<instant || (round.instant==instant && round.ordinal<=ordinal) {
+			rows.Close()
+			return errors.New("round eligible at or before published admission fence")
+		}
+	}
+	if err:=rows.Err();err!=nil {rows.Close();return err}
+	if err:=rows.Close();err!=nil{return err}
+	if err:=appendTx(ctx,tx,record);err!=nil{return err}
+	return tx.Commit()
 }
 
 func (s *Store) AppendFence(ctx context.Context, record ports.CanonicalRecord) error {

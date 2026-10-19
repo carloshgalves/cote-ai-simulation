@@ -452,7 +452,7 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
  entry,err:=ingressguard.Parse(record,source)
  if err!=nil{return err}
  if err:=verifyIngressClockFloor(ctx,tx,entry.RunID,entry.Coordinate);err!=nil{return err}
- 	// A second Ledger opened before closure/fence can hold a stale source
+	// A second Ledger opened before closure/fence can hold a stale source
 	// snapshot. Check the canonical eligibility against all durable fences in
 	// the *same transaction* as record+receipt+cursor publication.
 	seals, err := tx.QueryContext(ctx, "SELECT canonical FROM decision_ledger")

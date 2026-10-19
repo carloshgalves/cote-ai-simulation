@@ -142,26 +142,25 @@ func TestCoordinatorPersistsFenceBeforeEvaluation(t *testing.T) {
 	}
 }
 
-func TestDivergentUnitBytesFailBeforeFenceOrEvaluation(t *testing.T) {
+func TestCorruptedCachedUnitCannotPolluteAuthoritativeFence(t *testing.T) {
 	bundle, err := policy.Load(bundlePath)
-	if err != nil {
-		t.Fatal(err)
-	}
+	if err != nil { t.Fatal(err) }
 	s := buildScenario(t, bundle, false)
+	original, err := Derive(bundle, s.ledger, s.cycle, s.policies)
+	if err != nil { t.Fatal(err) }
 	inputs, _, _ := s.ledger.Prefix("source-a")
 	inputs[0].Fields[0].([]byte)[0] ^= 1
+	if _, err := Derive(bundle, s.ledger, s.cycle, s.policies); err == nil {
+		t.Fatal("direct derivation accepted corrupted cached unit")
+	}
 	store := memory.New()
 	called := false
 	coordinator := NewCoordinator(NewFenceLog(store))
-	_, err = coordinator.AdmitThenEvaluate(context.Background(), bundle, s.ledger, s.cycle, s.policies, func(Fence) error { called = true; return nil })
-	if err == nil {
-		t.Fatal("accepted a unit whose ID bytes diverged from its persisted record")
-	}
-	if called {
-		t.Fatal("evaluation ran before unit verification")
-	}
-	if store.Len() != 0 {
-		t.Fatal("divergent unit wrote an admission fence")
+	got, err := coordinator.AdmitThenEvaluate(context.Background(), bundle, s.ledger, s.cycle, s.policies, func(Fence) error { called = true; return nil })
+	if err != nil { t.Fatal(err) }
+	if !called { t.Fatal("evaluation was not reached after durable prefix restoration") }
+	if !bytes.Equal(got.Canonical, original.Canonical) {
+		t.Fatal("mutated in-memory cache changed durable admission fence")
 	}
 }
 

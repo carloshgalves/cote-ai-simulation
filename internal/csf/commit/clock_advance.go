@@ -38,9 +38,6 @@ type Store interface {
 type TriggerWork struct {
     Definition trigger.Definition
     Previous trigger.Runtime
-    // Pure, versioned predicates may read ONLY post-state and declared
-    // dependencies. They must not consult wall clock, LLM or mutable stores.
-    Predicate func(clock.State) bool
     PreviousCanonical []byte
 }
 
@@ -60,6 +57,8 @@ type Coordinator struct {
     // Fault injection is deliberately unexported; only same-package tests
     // can interrupt a SQLite transaction before its commit.
     failAfterStep uint8
+    // Test-only interleaving hook; production coordinator has no callback.
+    beforeCommit func()
 }
 
 func New(store Store,bundle *policy.Bundle,policies admission.Policies)*Coordinator {
@@ -121,6 +120,7 @@ func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,run
         prepared,err:=c.buildBatch(ctx,runID,state,plan,f,typed,triggerWork)
         if err!=nil{return err}
         prepared.FailAfterStep=c.failAfterStep
+        if c.beforeCommit!=nil {c.beforeCommit()}
         applied=prepared
         return c.store.CommitClockAdvance(ctx,prepared)
     })
@@ -182,8 +182,7 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
         if i>0 && item.Definition.ID==ordered[i-1].Definition.ID {
             return empty,errors.New("duplicate trigger definition in one cycle")
         }
-        if item.Predicate==nil{return empty,errors.New("nil trigger predicate")}
-        predicateResult:=item.Predicate(next)
+        predicateResult:=trigger.PredicateValue(item.Definition,next.Instant)
         fired,err:=trigger.Evaluate(item.Definition,item.Previous,next.Instant,next.Revision,predicateResult,[]trigger.Event{{ID:domain.ID(eventID),OrderKey:eventBytes,Footprint:[]string{"clock"}}})
         if err!=nil{return empty,err}
         runtime:=fired.Runtime

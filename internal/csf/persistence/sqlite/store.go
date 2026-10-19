@@ -16,6 +16,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
@@ -277,10 +278,28 @@ func (s *Store) AppendRoundDeclaration(ctx context.Context, runID [32]byte, inst
 
 type roundGuardCoordinate struct { instant int64; ordinal uint64 }
 
+// The current clock is read in the SAME transaction as ingress publication.
+// The first executable coordinate is (genesis instant,0), and after a commit
+// is (current instant,last ordinal+1); old pending cannot be made causal later.
+func verifyIngressClockFloor(ctx context.Context,tx *sql.Tx,runID [32]byte,at domain.EligibilityCoordinate)error{
+ var raw []byte
+ if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",runID[:]).Scan(&raw);err!=nil{return fmt.Errorf("missing clock floor for causal ingress: %w",err)}
+ current,err:=clock.Decode(raw);if err!=nil{return err}
+ if current.LastOrdinal==int64(^uint64(0)>>1){return errors.New("causal ordinal exhausted")}
+ floor:=domain.EligibilityCoordinate{NotBeforeInstant:current.Instant,NotBeforeCycleOrdinal:domain.CycleOrdinal(current.LastOrdinal+1)}
+ if at.Compare(floor)<0{return errors.New("causal ingress precedes current clock floor")}
+ return nil
+}
+
+
 func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundGuardCoordinate, record ports.CanonicalRecord) error {
 	tx, err := s.db.BeginTx(ctx,nil)
 	if err!=nil { return err }
 	defer tx.Rollback()
+ if round!=nil{
+  at:=domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(round.instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(round.ordinal)}
+  if err:=verifyIngressClockFloor(ctx,tx,runID,at);err!=nil{return err}
+ }
 	rows,err := tx.QueryContext(ctx,"SELECT canonical FROM decision_ledger")
 	if err!=nil { return err }
 	for rows.Next() {
@@ -428,21 +447,19 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
 	if sequence != current {
 		return errors.New("source ingress sequence is not gapless")
 	}
-	// A second Ledger opened before closure/fence can hold a stale source
+	// Parse and compare against the actual durable clock even when no fence
+ // has yet been published. No input/closure may enter before genesis.
+ entry,err:=ingressguard.Parse(record,source)
+ if err!=nil{return err}
+ if err:=verifyIngressClockFloor(ctx,tx,entry.RunID,entry.Coordinate);err!=nil{return err}
+ 	// A second Ledger opened before closure/fence can hold a stale source
 	// snapshot. Check the canonical eligibility against all durable fences in
 	// the *same transaction* as record+receipt+cursor publication.
 	seals, err := tx.QueryContext(ctx, "SELECT canonical FROM decision_ledger")
 	if err != nil { return err }
-	var entry ingressguard.Entry
-	parsed := false
 	for seals.Next() {
 		var fence []byte
 		if err := seals.Scan(&fence); err != nil { seals.Close(); return err }
-		if !parsed {
-			entry,err=ingressguard.Parse(record,source)
-			if err!=nil {seals.Close();return err}
-			parsed=true
-		}
 		fields,err:=codec.StrictDecodePayload(fence)
 		if err!=nil {seals.Close();return err}
 		body,ok:=fields.([]any)

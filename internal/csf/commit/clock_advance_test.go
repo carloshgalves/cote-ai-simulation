@@ -461,3 +461,19 @@ func TestReplayRejectsCorruptedDurableAuthority(t *testing.T) {
   })
  }
 }
+
+func TestReplayRejectsWorldRevisionHashNotAnchoredToGenesis(t *testing.T){
+ ctx:=context.Background()
+ coordinator,_,ledger,runID,bundle,path:=testFixture(t,activeTrigger())
+ if _,err:=coordinator.Advance(ctx,ledger,runID);err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ result,err:=db.ExecContext(ctx,"UPDATE world_revisions SET state_hash=? WHERE revision=1",bytes.Repeat([]byte{0xF1},32))
+ db.Close()
+ if err!=nil{t.Fatal(err)}
+ affected,err:=result.RowsAffected();if err!=nil||affected!=1{t.Fatalf("expected one revision change, got %d %v",affected,err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer reopened.Close()
+ if _,err:=reopened.ReplayClock(ctx,[32]byte(runID),bundle);err==nil{
+  t.Fatal("replay accepted world revision hash differing from genesis")
+ }
+}

@@ -277,7 +277,7 @@ func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundG
 		// fence and must never be mistaken for a causal seal.
 		if !ok {rows.Close();return errors.New("invalid decision record body")}
 		if len(body)==24 {continue}
-		if len(body)!=18 {rows.Close();return errors.New("unknown decision record in admission guard")}
+		if len(body)!=18 && len(body)!=6 {rows.Close();return errors.New("unknown decision record in admission guard")}
 		fenceRun,ok:=body[0].([]byte)
 		if !ok || len(fenceRun)!=32 {rows.Close();return errors.New("invalid persisted fence run")}
 		if !bytes.Equal(fenceRun,runID[:]) {continue}
@@ -433,7 +433,7 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
 		body,ok:=fields.([]any)
 		if !ok {seals.Close();return errors.New("invalid decision ledger record")}
 		if len(body)==24 {continue} // A CycleCommit is not a fence.
-		if len(body)!=18 {seals.Close();return errors.New("unknown decision record kind")}
+		if len(body)!=18 && len(body)!=6 {seals.Close();return errors.New("unknown decision record kind")}
 		sealedRun,cut,err:=ingressguard.FenceCoordinate(fence)
 		if err!=nil {seals.Close();return err}
 		if err:=ingressguard.Check(entry,sealedRun,cut);err!=nil {seals.Close();return err}

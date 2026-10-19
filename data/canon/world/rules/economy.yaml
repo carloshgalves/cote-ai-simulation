@@ -30,7 +30,7 @@ claims:
         channel: lived-experience
         note: Inferred from upperclassmen taking free meals at month end.
       - actor: group.first-years
-        since: {anchor: Y1_M02, date: "Y1-05-01"}
+        since: {anchor: Y1_M02}
         channel: announcement
         via_event: evt.y1.m02.point-system-revealed
     unknown_by:
@@ -71,7 +71,7 @@ claims:
     temporal:
       effective_from:
         mode: HOLDS_BY
-        holds_by: {anchor: Y1_START, date: "Y1-04-06"}
+        holds_by: {anchor: Y1_START}
         origin: UNKNOWN
         basis: Observed on day one; origin of the practice not stated.
       effective_to: null

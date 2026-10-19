@@ -23,7 +23,7 @@ claims:
         basis: Held from the first day.
       effective_to:
         mode: EXACT
-        exact: {anchor: Y1_M02, date: "Y1-05-01"}
+        exact: {anchor: Y1_M02}
         basis: Corrected when the second month's deposit fails to arrive.
     visibility_default: PUBLIC
     provenance:

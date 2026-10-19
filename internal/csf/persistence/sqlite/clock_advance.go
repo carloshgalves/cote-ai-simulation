@@ -122,7 +122,7 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",b.FenceID[:]).Scan(&fence);err!=nil{return fmt.Errorf("clock advance has no persisted admission fence: %w",err)}
  f,err:=codec.StrictDecodePayload(fence);if err!=nil{return err}
  ff,ok:=f.([]any)
- if !ok||len(ff)<17||!equalBytes(ff[0],b.RunID[:])||!equalBytes(ff[1],b.CycleID[:])||!equalBytes(ff[4],[]byte{})&&false{return errors.New("invalid clock admission fence")}
+ if !ok||len(ff)<17||!equalBytes(ff[0],b.RunID[:])||!equalBytes(ff[1],b.CycleID[:]) {return errors.New("invalid clock admission fence")}
  plan,ok:=ff[6].([]any)
  if !ok||len(plan)!=4||plan[0]!=uint64(1){return errors.New("CLOCK_ADVANCE requires persisted clock-advance fence")}
  if len(ff[11].([]any))!=0{return errors.New("CLOCK_ADVANCE cannot admit work units")}
@@ -159,10 +159,18 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
   if err:=appendToTx(ctx,tx,"event_store",item);err!=nil{return err}
  }
  if err:=failClock(b.FailAfterStep,2);err!=nil{return err}
- for _,item:=range b.TriggerRuntime {
-  fields,err:=strictFullRelaxed(item,8);if err!=nil{return err}
-  id,ok:=fields[0].([]byte);if !ok||len(id)!=32{return errors.New("invalid trigger runtime identity")}
-  if _,err:=tx.ExecContext(ctx,"INSERT INTO trigger_runtime(definition_id,run_id,canonical) VALUES(?,?,?) ON CONFLICT(definition_id) DO UPDATE SET canonical=excluded.canonical",id,b.RunID[:],item.Canonical);err!=nil{return err}
+ for _,change:=range b.TriggerRuntime {
+  if _,err:=codec.StrictDecodePayload(change.After);err!=nil{return err}
+  var prior []byte
+  err:=tx.QueryRowContext(ctx,"SELECT canonical FROM trigger_runtime WHERE definition_id=? AND run_id=?",change.DefinitionID[:],b.RunID[:]).Scan(&prior)
+  if err!=nil&&err!=sql.ErrNoRows{return err}
+  if err==sql.ErrNoRows {
+   if len(change.Before)!=0{return errors.New("trigger runtime missing expected prior state")}
+   if _,err:=tx.ExecContext(ctx,"INSERT INTO trigger_runtime(definition_id,run_id,canonical) VALUES(?,?,?)",change.DefinitionID[:],b.RunID[:],change.After);err!=nil{return err}
+  } else {
+   if !bytes.Equal(prior,change.Before){return errors.New("trigger runtime changed")}
+   if _,err:=tx.ExecContext(ctx,"UPDATE trigger_runtime SET canonical=? WHERE definition_id=? AND run_id=? AND canonical=?",change.After,change.DefinitionID[:],b.RunID[:],change.Before);err!=nil{return err}
+  }
  }
  if err:=failClock(b.FailAfterStep,3);err!=nil{return err}
  for _,item:=range b.Activations {

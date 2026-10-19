@@ -59,6 +59,8 @@ type Coordinator struct {
     failAfterStep uint8
     // Test-only interleaving hook; production coordinator has no callback.
     beforeCommit func()
+    // Same-package tests may submit damaged bytes to the durable adapter.
+    tamperBatch func(*ports.ClockAdvanceBatch)
 }
 
 func New(store Store,bundle *policy.Bundle,policies admission.Policies)*Coordinator {
@@ -121,6 +123,7 @@ func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,run
         if err!=nil{return err}
         prepared.FailAfterStep=c.failAfterStep
         if c.beforeCommit!=nil {c.beforeCommit()}
+        if c.tamperBatch!=nil {c.tamperBatch(&prepared)}
         applied=prepared
         return c.store.CommitClockAdvance(ctx,prepared)
     })

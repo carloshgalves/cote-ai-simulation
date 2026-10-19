@@ -6,10 +6,12 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/memory"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
@@ -186,6 +188,45 @@ func TestCoordinatorRejectsFenceStoreFromIndependentAuthority(t *testing.T) {
 	_,err=NewCoordinator(NewFenceLog(foreign)).AdmitThenEvaluate(ctx,bundle,empty,fixture.cycle,fixture.policies,func(Fence)error{called=true;return nil})
 	if err==nil || called {t.Fatalf("empty-prefix cross-store fence CAS permitted: err=%v called=%v",err,called)}
 	if foreign.Len()!=0 {t.Fatal("empty-prefix foreign authority mutated")}
+}
+
+
+func testStaleSourceIngressAfterFence(t *testing.T, activeStore, staleStore ports.AppendOnlyStore, publisher ports.PrefixConditionalFenceStore) {
+    t.Helper()
+    ctx:=context.Background()
+    bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+    var runID,cycleID,fenceID [32]byte
+    runID[0],cycleID[0],fenceID[0]=0x47,0x48,0x49
+    active,err:=inputledger.New(ctx,domain.ID(runID),bundle,activeStore);if err!=nil{t.Fatal(err)}
+    if err:=active.DeclareSource(inputledger.Source{ID:"external"});err!=nil{t.Fatal(err)}
+    stale,err:=inputledger.Open(ctx,domain.ID(runID),bundle,staleStore);if err!=nil{t.Fatal(err)}
+    sealed:=domain.EligibilityCoordinate{NotBeforeInstant:100,NotBeforeCycleOrdinal:0}
+    if _,err:=active.CloseSource(ctx,"external",inputledger.Closure{ProducerKey:"close-100",ClosedThrough:sealed});err!=nil{t.Fatal(err)}
+    recordsBefore,err:=activeStore.(ports.RecordListingStore).Records(ctx);if err!=nil{t.Fatal(err)}
+    fenceBytes,err:=codec.CanonicalPayload([]any{runID[:],cycleID[:],uint64(0),nil,int64(100),uint64(0)});if err!=nil{t.Fatal(err)}
+    if err:=publisher.AppendFenceIfPrefix(ctx,ports.CanonicalRecord{Identity:fenceID,Canonical:fenceBytes},recordsBefore);err!=nil{t.Fatal(err)}
+    early:=inputledger.Input{ProducerUnitKey:"post-cut",Kind:"external.event",SchemaVersion:1,Actor:[]any{uint64(0)},Payload:[]any{},DeclaredEffectiveAt:100,Eligibility:sealed,Provenance:[]any{uint64(0)},IdempotencyKey:[]any{uint64(0)}}
+    if _,err:=stale.AppendInput(ctx,"external",early);err==nil{t.Fatal("stale ledger appended input eligible before published fence")}
+    if _,err:=stale.CloseSource(ctx,"external",inputledger.Closure{ProducerKey:"stale-close-100",ClosedThrough:sealed});err==nil{t.Fatal("stale ledger appended retroactive source closure")}
+    after,err:=activeStore.(ports.RecordListingStore).Records(ctx);if err!=nil{t.Fatal(err)}
+    if len(after)!=len(recordsBefore){t.Fatalf("rejected stale ingress changed prefix: %d -> %d",len(recordsBefore),len(after))}
+    for i:=range after {if after[i].Identity!=recordsBefore[i].Identity||!bytes.Equal(after[i].Canonical,recordsBefore[i].Canonical){t.Fatal("stale ingress changed persisted bytes")}}
+    next,err:=activeStore.(ports.IngressAppendStore).NextIngressSequence(ctx,"external");if err!=nil||next!=1 {t.Fatalf("failed append advanced receipt cursor: %d, %v",next,err)}
+    late,err:=active.AppendInput(ctx,"external",early);if err!=nil{t.Fatalf("properly renormalized late input rejected: %v",err)}
+    if got:=late.Fields[9].([]any);got[0]!=int64(100)||got[1]!=uint64(1){t.Fatalf("late input was not moved to next cycle: %#v",got)}
+}
+
+func TestStaleLedgerCannotWritePreFenceIngressMemory(t *testing.T) {
+    store:=memory.New()
+    testStaleSourceIngressAfterFence(t,store,store,store)
+}
+
+func TestStaleLedgerCannotWritePreFenceIngressSQLite(t *testing.T) {
+    ctx:=context.Background()
+    path:=t.TempDir()+"/multi-instance-fence.db"
+    active,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer active.Close()
+    stale,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer stale.Close()
+    testStaleSourceIngressAfterFence(t,active,stale,active)
 }
 
 func TestFenceLogDirectPublicationNeverWrites(t *testing.T) {

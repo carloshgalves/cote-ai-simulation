@@ -43,11 +43,8 @@ def test_conformance_vectors_and_setup_mutations_are_complete_and_unique():
     mutations = suite["static_setup_generators"]["mutations"]
     assert len({item["id"] for item in mutations}) == len(mutations)
     assert len(suite["economic_properties"]) == 7
-    assert {p["id"] for p in suite["economic_properties"]} == {
-        f"P{n:02d}-" + p["id"].split("-", 1)[1]
-        for n in range(1, 8)
-        for p in suite["economic_properties"]
-        if p["id"].startswith(f"P{n:02d}-")
+    assert {p["id"].split("-", 1)[0] for p in suite["economic_properties"]} == {
+        f"P{n:02d}" for n in range(1, 8)
     }
 
 

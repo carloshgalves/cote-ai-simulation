@@ -165,6 +165,15 @@ func (s *Store) Append(ctx context.Context, record ports.CanonicalRecord) error 
 	}
 }
 
+// CBOR positive instants decode as uint64 despite an int64 input.
+func decodedInstant(v any) (int64,bool) {
+	switch n:=v.(type) {
+	case int64:return n,true
+	case uint64:if n<=uint64(^uint64(0)>>1){return int64(n),true}
+	}
+	return 0,false
+}
+
 func guardedKind(record ports.CanonicalRecord) (string, [32]byte, int64, uint64, error) {
 	var runID [32]byte
 	payload, err := codec.StrictDecodePayload(record.Canonical)
@@ -181,7 +190,7 @@ func guardedKind(record ports.CanonicalRecord) (string, [32]byte, int64, uint64,
 	if isSource { return "source",runID,0,0,nil }
 	coord,ok := fields[5].([]any)
 	if !ok || len(coord)!=2 { return "",runID,0,0,errors.New("guarded round invalid coordinate") }
-	instant,ok := coord[0].(int64)
+	instant,ok := decodedInstant(coord[0])
 	if !ok { return "",runID,0,0,errors.New("guarded round invalid instant") }
 	ordinal,ok := coord[1].(uint64)
 	if !ok { return "",runID,0,0,errors.New("guarded round invalid ordinal") }
@@ -218,7 +227,7 @@ func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundG
 		if !ok || len(fenceRun)!=32 {rows.Close();return errors.New("invalid persisted fence run")}
 		if !bytes.Equal(fenceRun,runID[:]) {continue}
 		if round==nil {rows.Close();return errors.New("source declaration after admission fence")}
-		instant,ok:=body[4].(int64)
+		instant,ok:=decodedInstant(body[4])
 		if !ok {rows.Close();return errors.New("invalid persisted fence instant")}
 		ordinal,ok:=body[5].(uint64)
 		if !ok {rows.Close();return errors.New("invalid persisted fence ordinal")}

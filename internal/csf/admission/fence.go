@@ -410,11 +410,11 @@ func indexRound(rounds []inputledger.Round, target inputledger.Round) int {
 
 // AppendIfAbsent is a compare-and-append boundary: the exact bytes are durable
 // before the caller can invoke any validator or handler.
-func (l *FenceLog) AppendIfAbsent(ctx context.Context, fence Fence) error {
-	if l.store == nil {
-		return errors.New("admission fence store is required")
-	}
-	return l.store.AppendFence(ctx, ports.CanonicalRecord{Identity: fence.ID, Canonical: fence.Canonical})
+// AppendIfAbsent is intentionally disabled: a standalone fence append has no
+// authoritative prefix snapshot or CAS. Call Coordinator.AdmitThenEvaluate,
+// which derives and durably commits the fence under one admission boundary.
+func (l *FenceLog) AppendIfAbsent(_ context.Context, _ Fence) error {
+	return errors.New("direct admission fence append forbidden: use prefix-conditional coordinator")
 }
 
 func (l *FenceLog) Get(ctx context.Context, id domain.ID) ([]byte, error) {

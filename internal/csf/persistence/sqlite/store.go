@@ -163,6 +163,15 @@ CREATE TABLE IF NOT EXISTS scheduled_occurrences (
  canonical BLOB NOT NULL
 ) STRICT;
 CREATE INDEX IF NOT EXISTS idx_occurrence_next ON scheduled_occurrences(run_id,lifecycle,eligibility_instant,eligibility_ordinal,id);
+CREATE TABLE IF NOT EXISTS trigger_definitions (
+ definition_id BLOB PRIMARY KEY CHECK(length(definition_id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ genesis_id BLOB NOT NULL CHECK(length(genesis_id)=32),
+ genesis_digest BLOB NOT NULL CHECK(length(genesis_digest)=32),
+ content_digest BLOB NOT NULL CHECK(length(content_digest)=32),
+ canonical BLOB NOT NULL
+) STRICT;
+CREATE INDEX IF NOT EXISTS idx_trigger_definitions_run ON trigger_definitions(run_id,definition_id);
 CREATE TABLE IF NOT EXISTS trigger_runtime (
  definition_id BLOB PRIMARY KEY CHECK(length(definition_id)=32),
  run_id BLOB NOT NULL CHECK(length(run_id)=32),

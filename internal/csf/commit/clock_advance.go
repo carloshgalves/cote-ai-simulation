@@ -172,7 +172,8 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
     activations:=make([]ports.CanonicalRecord,0)
     for _,item:=range work {
         if item.Predicate==nil{return empty,errors.New("nil trigger predicate")}
-        fired,err:=trigger.Evaluate(item.Definition,item.Previous,next.Instant,next.Revision,item.Predicate(next),[]trigger.Event{{ID:domain.ID(eventID),OrderKey:eventBytes,Footprint:[]string{"clock"}}})
+        predicateResult:=item.Predicate(next)
+        fired,err:=trigger.Evaluate(item.Definition,item.Previous,next.Instant,next.Revision,predicateResult,[]trigger.Event{{ID:domain.ID(eventID),OrderKey:eventBytes,Footprint:[]string{"clock"}}})
         if err!=nil{return empty,err}
         runtime:=fired.Runtime
         prior:=item.PreviousCanonical
@@ -181,7 +182,7 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
         if !fired.Fired{continue}
         activationID,_,err:=d.Sum("cote.csf.id.trigger-activation","cote.csf.schema.trigger-activation-id-preimage",1,[]any{runID[:],item.Definition.ID[:],uint64(item.Definition.Version),uint64(next.Revision),runtime.ActivationCount})
         if err!=nil{return empty,err}
-        pbytes,err:=codec.CanonicalBytes("cote.csf.trigger.predicate","cote.csf.schema.typed-value",1,item.Predicate(next))
+        pbytes,err:=codec.CanonicalBytes("cote.csf.trigger.predicate","cote.csf.schema.typed-value",1,predicateResult)
         if err!=nil{return empty,err}
         predicateContentDigest:=identity.OpaqueContentHash(pbytes)
         value:=[]any{"cote.csf.schema.typed-value",uint64(1),pbytes,predicateContentDigest[:]}

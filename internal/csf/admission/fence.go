@@ -429,11 +429,21 @@ type Coordinator struct{ log *FenceLog }
 
 func NewCoordinator(log *FenceLog) *Coordinator { return &Coordinator{log: log} }
 func (c *Coordinator) AdmitThenEvaluate(ctx context.Context, bundle *policy.Bundle, ledger *inputledger.Ledger, cycle Cycle, policies Policies, evaluate func(Fence) error) (Fence, error) {
-	fence, err := Derive(bundle, ledger, cycle, policies)
+	var fence Fence
+	// Admission must not be separated from publication by another local
+	// ingress/slot mutation. The callback runs only after durable append.
+	err := ledger.WithAdmissionBoundary(func() error {
+		derived, err := Derive(bundle, ledger, cycle, policies)
+		if err != nil {
+			return err
+		}
+		if err := c.log.AppendIfAbsent(ctx, derived); err != nil {
+			return err
+		}
+		fence = derived
+		return nil
+	})
 	if err != nil {
-		return Fence{}, err
-	}
-	if err := c.log.AppendIfAbsent(ctx, fence); err != nil {
 		return Fence{}, err
 	}
 	if evaluate != nil {

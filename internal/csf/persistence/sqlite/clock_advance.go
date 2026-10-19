@@ -189,18 +189,19 @@ func registeredDigest(domainTag,schemaID string,value any)(domain.Digest,error){
  if err!=nil{return domain.Digest{},err}
  return identity.OpaqueContentHash(encoded),nil
 }
-func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next clock.State)(error){
- if len(b.Events)!=1{return errors.New("clock advance requires exactly one temporal event")}
+func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next clock.State) error {
+ if len(b.Events)!=2{return errors.New("clock advance requires clock and synthetic body events")}
  if len(journal)!=24{return errors.New("malformed CycleCommit body")}
  if !equalBytes(journal[0],b.RunID[:])||!equalBytes(journal[1],b.CycleID[:]){return errors.New("CycleCommit run/cycle mismatch")}
  instant,ok:=asSigned64(journal[3])
- if !ok||instant!=int64(state.Instant)||journal[2]!=uint64(0)||journal[4]!=uint64(state.LastOrdinal+1) {
+ if !ok||instant!=int64(state.Instant)||journal[2]!=uint64(0)||journal[4]!=uint64(state.LastOrdinal+1){
   return errors.New("CycleCommit attempt/origin mismatch")
  }
- if journal[6]!=b.ExpectedRevision||journal[8]!=b.ResultRevision||journal[22]!=uint64(next.NextLogicalSequence){
+ if next.NextLogicalSequence!=state.NextLogicalSequence+2||journal[6]!=b.ExpectedRevision||
+  journal[8]!=b.ResultRevision||journal[22]!=uint64(next.NextLogicalSequence){
   return errors.New("CycleCommit revision/logical sequence mismatch")
  }
- if !equalBytes(journal[7],b.BaseStateHash[:])||!equalBytes(journal[9],b.ResultStateHash[:]) {
+ if !equalBytes(journal[7],b.BaseStateHash[:])||!equalBytes(journal[9],b.ResultStateHash[:]){
   return errors.New("CycleCommit world hash mismatch")
  }
  for _,index:=range []int{11,16,18}{
@@ -208,35 +209,54 @@ func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next cl
   if !ok||len(group)!=0{return errors.New("CLOCK_ADVANCE cannot settle work or perception tasks")}
  }
  ids,ok:=journal[15].([]any)
- if !ok||len(ids)!=1||!equalBytes(ids[0],b.Events[0].Identity[:]) {
-  return errors.New("CycleCommit references an event outside its batch")
+ if !ok||len(ids)!=2{return errors.New("CycleCommit event count mismatch")}
+ canonicalEvents:=make([]any,0,2)
+ for i,item:=range b.Events{
+  if !equalBytes(ids[i],item.Identity[:]){return errors.New("CycleCommit event order mismatch")}
+  fields,err:=strictFull(item,19);if err!=nil{return err}
+  kind:="clock.advanced"
+  tag:="cote.csf.event.clock-advanced"
+  schema:="cote.csf.schema.clock-advanced"
+  if i==1{kind="body.advanced";tag="cote.csf.body.synthetic-advance.v1";schema="cote.csf.schema.typed-value"}
+  if !equalBytes(fields[1],b.RunID[:])||!equalBytes(fields[7],b.CycleID[:])||
+   fields[3]!=kind||fields[4]!=uint64(1)||fields[6]!=uint64(state.NextLogicalSequence)+uint64(i)||
+   fields[8]!=b.ExpectedRevision||fields[15]!=uint64(2)||fields[16]!="clock"||fields[17]!=uint64(1){
+   return errors.New("invalid synthetic event origin, sequence or confidentiality")
+  }
+  instant,ok:=asSigned64(fields[5]);if !ok||instant!=int64(state.Instant){return errors.New("synthetic event at wrong source instant")}
+  order:=[]any{uint64(0),b.CycleID[:],"clock",uint64(1),uint64(i),uint64(0)}
+  expectedOrder,err:=codec.CanonicalPayload(order);if err!=nil{return err}
+  actualOrder,err:=codec.CanonicalPayload(fields[2]);if err!=nil||!bytes.Equal(actualOrder,expectedOrder){return errors.New("synthetic event order changed")}
+  typed,ok:=fields[9].([]any)
+  if !ok||len(typed)!=4||typed[0]!=schema||typed[1]!=uint64(1){return errors.New("synthetic event payload typed-value mismatch")}
+  payloadBytes,ok:=typed[2].([]byte);if !ok{return errors.New("synthetic event payload missing")}
+  givenHash,ok:=typed[3].([]byte);if !ok{return errors.New("synthetic event value hash missing")}
+  payloadHash:=identity.OpaqueContentHash(payloadBytes)
+  if !bytes.Equal(payloadHash[:],givenHash){return errors.New("synthetic event value digest mismatch")}
+  env,err:=codec.StrictDecodeEnvelope(payloadBytes)
+  if err!=nil||env.DomainTag!=tag||env.SchemaID!=schema||env.SchemaVersion!=1{return errors.New("unregistered synthetic event contract")}
+  data,ok:=env.Value.([]any)
+  if !ok||len(data)!=2{return errors.New("synthetic event temporal payload malformed")}
+  from,ok:=asSigned64(data[0]);if !ok||from!=int64(state.Instant){return errors.New("synthetic event temporal origin mismatch")}
+  to,ok:=asSigned64(data[1]);if !ok||to!=int64(next.Instant){return errors.New("synthetic event temporal target mismatch")}
+  id,err:=registeredDigest("cote.csf.id.event","cote.csf.schema.event-id-preimage",[]any{b.RunID[:],b.CycleID[:],fields[2]})
+  if err!=nil{return err}
+  if id!=item.Identity{return errors.New("synthetic event identity preimage mismatch")}
+  digest,err:=registeredDigest("cote.csf.digest.event","cote.csf.schema.event.body",fields[:18])
+  if err!=nil{return err}
+  if !equalBytes(fields[18],digest[:]){return errors.New("synthetic event digest mismatch")}
+  canonicalEvents=append(canonicalEvents,item.Canonical)
  }
- actualEvent,err:=strictFull(b.Events[0],19)
- if err!=nil{return err}
- if !equalBytes(actualEvent[1],b.RunID[:])||!equalBytes(actualEvent[7],b.CycleID[:]) ||
-  actualEvent[3]!="clock.advanced"||actualEvent[6]!=uint64(state.NextLogicalSequence)||
-  actualEvent[8]!=b.ExpectedRevision||actualEvent[15]!=uint64(2) {
-  return errors.New("invalid clock event origin, ordering or confidentiality")
- }
- sourceAt,ok:=asSigned64(actualEvent[5])
- if !ok||sourceAt!=int64(state.Instant){return errors.New("clock event at wrong source instant")}
- id,err:=registeredDigest("cote.csf.id.event","cote.csf.schema.event-id-preimage",[]any{b.RunID[:],b.CycleID[:],actualEvent[2]})
- if err!=nil{return err}
- if id!=b.Events[0].Identity{return errors.New("clock event identity preimage mismatch")}
- digest,err:=registeredDigest("cote.csf.digest.event","cote.csf.schema.event.body",actualEvent[:18])
- if err!=nil{return err}
- if !equalBytes(actualEvent[18],digest[:]){return errors.New("clock event digest mismatch")}
  commitID,err:=registeredDigest("cote.csf.id.cycle-commit","cote.csf.schema.cycle-commit-id-preimage",[]any{b.RunID[:],b.CycleID[:],uint64(0)})
  if err!=nil{return err}
- if commitID!=b.Journal.Identity {return errors.New("CycleCommit identity mismatch")}
- digest,err=registeredDigest("cote.csf.digest.batch","cote.csf.schema.batch-preimage",[]any{journal[:23],[]any{b.Events[0].Canonical}})
+ if commitID!=b.Journal.Identity{return errors.New("CycleCommit identity mismatch")}
+ digest,err:=registeredDigest("cote.csf.digest.batch","cote.csf.schema.batch-preimage",[]any{journal[:23],canonicalEvents})
  if err!=nil{return err}
  if !equalBytes(journal[23],digest[:]){return errors.New("CycleCommit batch digest mismatch")}
- revision,err:=codec.StrictDecodePayload(b.RevisionCanonical)
- if err!=nil{return err}
+ revision,err:=codec.StrictDecodePayload(b.RevisionCanonical);if err!=nil{return err}
  fields,ok:=revision.([]any)
- if !ok||len(fields)!=6||fields[0]!=b.ExpectedRevision||fields[3]!=b.ResultRevision ||
- !equalBytes(fields[2],b.BaseStateHash[:])||!equalBytes(fields[5],b.ResultStateHash[:]){
+ if !ok||len(fields)!=6||fields[0]!=b.ExpectedRevision||fields[3]!=b.ResultRevision||
+  !equalBytes(fields[2],b.BaseStateHash[:])||!equalBytes(fields[5],b.ResultStateHash[:]){
   return errors.New("world revision transition does not match journal")
  }
  return nil

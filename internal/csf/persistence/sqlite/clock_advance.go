@@ -16,6 +16,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
 )
 
 func (s *Store) BootstrapClock(ctx context.Context, manifest *genesis.Genesis, bundle *policy.Bundle) error {
@@ -318,6 +319,55 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
   if err:=appendToTx(ctx,tx,"event_store",item);err!=nil{return err}
  }
  if err:=failClock(b.FailAfterStep,2);err!=nil{return err}
+ // An omitted trigger is just as unsafe as a forged runtime. Compare the
+ // complete registered definition set and re-evaluate each predicate from
+ // the database's immutable definition and previous runtime.
+ registered,err:=tx.QueryContext(ctx,"SELECT definition_id,canonical FROM trigger_definitions WHERE run_id=? ORDER BY definition_id",b.RunID[:])
+ if err!=nil{return err}
+ type defRow struct{id [32]byte;raw []byte}
+ var definitions []defRow
+ for registered.Next(){
+  var id,raw []byte
+  if err:=registered.Scan(&id,&raw);err!=nil{registered.Close();return err}
+  if len(id)!=32{registered.Close();return errors.New("invalid registered trigger ID")}
+  var entry defRow;copy(entry.id[:],id);entry.raw=raw
+  definitions=append(definitions,entry)
+ }
+ if err:=registered.Err();err!=nil{registered.Close();return err}
+ if err:=registered.Close();err!=nil{return err}
+ if len(definitions)!=len(b.TriggerRuntime){return errors.New("CLOCK_ADVANCE omitted or invented registered trigger")}
+ preEvents:=make([]trigger.Event,0,len(b.Events))
+ for _,event:=range b.Events{
+  raw,err:=codec.StrictDecodePayload(event.Canonical);if err!=nil{return err}
+  fields,ok:=raw.([]any);if !ok||len(fields)!=19{return errors.New("invalid pre-trigger event")}
+  kind,ok:=fields[3].(string);if !ok{return errors.New("missing event kind")}
+  deps,err:=trigger.EventFootprint(kind);if err!=nil{return err}
+  key,err:=codec.CanonicalPayload(fields[2]);if err!=nil{return err}
+  preEvents=append(preEvents,trigger.Event{ID:domain.ID(event.Identity),OrderKey:key,Footprint:deps})
+ }
+ expectedActivations:=make(map[[32]byte][]domain.ID)
+ for i,change:=range b.TriggerRuntime {
+  if change.DefinitionID!=definitions[i].id||!bytes.Equal(change.DefinitionCanonical,definitions[i].raw){
+   return errors.New("trigger state change targets a different definition registry")
+  }
+  raw,err:=codec.StrictDecodePayload(change.DefinitionCanonical);if err!=nil{return err}
+  fields,ok:=raw.([]any);if !ok||len(fields)!=8{return errors.New("invalid persisted definition shape")}
+  handler,ok:=fields[7].([]any);if !ok{return errors.New("trigger definition handler missing")}
+  definition,_,err:=trigger.DecodeDefinition(change.DefinitionCanonical,[][]any{handler},nil)
+  if err!=nil{return err}
+  before,err:=trigger.DecodeRuntime(change.Before);if err!=nil{return err}
+  after,err:=trigger.Evaluate(definition,before,next.Instant,next.Revision,trigger.PredicateValue(definition,next.Instant),preEvents)
+  if err!=nil{return err}
+  expectedAfter,err:=trigger.RuntimeBytes(after.Runtime);if err!=nil{return err}
+  if !bytes.Equal(expectedAfter,change.After){return errors.New("trigger runtime changed outside deterministic predicate")}
+  if after.Fired{
+   id,err:=registeredDigest("cote.csf.id.trigger-activation","cote.csf.schema.trigger-activation-id-preimage",
+    []any{b.RunID[:],definition.ID[:],uint64(definition.Version),b.ResultRevision,after.Runtime.ActivationCount})
+   if err!=nil{return err}
+   expectedActivations[[32]byte(id)]=after.CausingEventIDs
+  }
+ }
+ if len(expectedActivations)!=len(b.Activations){return errors.New("missing or invented trigger activation")}
  for _,change:=range b.TriggerRuntime {
   raw,err:=codec.StrictDecodePayload(change.After);if err!=nil{return err}
   runtime,ok:=raw.([]any)
@@ -359,6 +409,12 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
    for i,item:=range b.Events {if equalBytes(cause,item.Identity[:]){found=i;break}}
    if found<=previousIndex{return errors.New("trigger cause order/authority is invalid")}
    previousIndex=found
+  }
+  wantedCauses,ok:=expectedActivations[item.Identity]
+  if !ok{return errors.New("activation not emitted by persisted trigger predicate")}
+  if len(causeIDs)!=len(wantedCauses){return errors.New("activation omitted declared dependency causes")}
+  for i,expected:=range wantedCauses{
+   if !equalBytes(causeIDs[i],expected[:]){return errors.New("activation cause differs from registered footprint")}
   }
   wantedID,err:=registeredDigest("cote.csf.id.trigger-activation","cote.csf.schema.trigger-activation-id-preimage",[]any{b.RunID[:],definitionID,fields[4],b.ResultRevision,fields[7]})
   if err!=nil{return err}

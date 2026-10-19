@@ -9,6 +9,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"reflect"
 	"sort"
 	"sync"
 
@@ -1009,6 +1010,19 @@ func (l *Ledger) Prefix(source string) (inputs []StoredInput, closures []StoredC
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	return append([]StoredInput(nil), l.inputs[source]...), append([]StoredClosure(nil), l.closures[source]...), l.cursors[source]
+}
+
+// SharesFenceAuthority deliberately requires the very same store instance for
+// input and decision fence publication. V1 does not support cross-adapter or
+// cross-database transactions; separate connections are rejected conservatively.
+// No store records or locks are modified by this check.
+func (l *Ledger) SharesFenceAuthority(store ports.AdmissionFenceStore) bool {
+	if l == nil || l.inputStore == nil || store == nil { return false }
+	input := reflect.ValueOf(l.inputStore)
+	fence := reflect.ValueOf(store)
+	return input.Kind() == reflect.Pointer && fence.Kind() == reflect.Pointer &&
+		input.Type() == fence.Type() && !input.IsNil() && !fence.IsNil() &&
+		input.Pointer() == fence.Pointer()
 }
 
 // AdmissionView restores a coherent persisted prefix and returns its exact

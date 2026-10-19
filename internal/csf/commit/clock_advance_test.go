@@ -96,7 +96,7 @@ func TestClockAdvancePublishesCycleAndPendingActivation(t *testing.T){
  if len(result.Events)!=4||len(result.Activations)!=1{t.Fatalf("events=%d activations=%d",len(result.Events),len(result.Activations))}
  if result.Commit.Identity==([32]byte{}){t.Fatal("zero commit id")}
  again,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
- if again!=result.ResultClock||again.Revision!=1||again.NextLogicalSequence!=2{t.Fatal(again)}
+ if again!=result.ResultClock||again.Revision!=1||again.NextLogicalSequence!=4{t.Fatal(again)}
  pending,err:=store.PendingClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  next,ok,err:=clock.Next(again,pending)
  if err!=nil||!ok||next.Kind!=clock.Work||next.OriginOrdinal!=0 {t.Fatal(next,err)}

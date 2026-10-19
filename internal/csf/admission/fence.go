@@ -22,6 +22,9 @@ var ErrWaitingForSlot = errors.New("waiting for slot response")
 type Cycle struct {
 	ID            domain.ID
 	Attempt       uint32
+	// Plan is the normative persisted CyclePlan. Nil is WORK for CSFRV1-2.
+	// A CLOCK_ADVANCE plan must be [1,from,to,targetCoordinate].
+	Plan          []any
 	Instant       domain.SimulationInstant
 	Ordinal       domain.CycleOrdinal
 	BaseRevision  domain.WorldRevision
@@ -50,6 +53,14 @@ type FenceLog struct {
 
 func NewFenceLog(store ports.AdmissionFenceStore) *FenceLog { return &FenceLog{store: store} }
 
+func signedInstant(v any) (int64,bool) {
+	switch x:=v.(type) {
+	case int64: return x,true
+	case uint64: if x<=uint64(^uint64(0)>>1) { return int64(x),true }
+	}
+	return 0,false
+}
+
 func Derive(bundle *policy.Bundle, ledger *inputledger.Ledger, cycle Cycle, policies Policies) (Fence, error) {
 	sources, inputs, closures, rounds, slots, runID := ledger.Snapshot()
 	d := identity.New(bundle)
@@ -66,6 +77,23 @@ func Derive(bundle *policy.Bundle, ledger *inputledger.Ledger, cycle Cycle, poli
 		return Fence{}, err
 	}
 	cycleAt := domain.EligibilityCoordinate{NotBeforeInstant: cycle.Instant, NotBeforeCycleOrdinal: cycle.Ordinal}
+	closureAt := cycleAt
+	cyclePlan := []any{uint64(0)} // WORK
+	if cycle.Plan != nil {
+		if len(cycle.Plan)!=4 || cycle.Plan[0]!=uint64(1) {
+			return Fence{}, errors.New("invalid CLOCK_ADVANCE CyclePlan")
+		}
+		from,ok:=signedInstant(cycle.Plan[1])
+		if !ok||from!=int64(cycle.Instant){return Fence{},errors.New("clock advance origin differs from cycle")}
+		to,ok:=signedInstant(cycle.Plan[2])
+		if !ok||to<=from {return Fence{},errors.New("invalid clock advance destination")}
+		target,ok:=cycle.Plan[3].([]any)
+		if !ok||len(target)!=2{return Fence{},errors.New("invalid clock advance target")}
+		targetInstant,ok:=signedInstant(target[0]);if !ok||targetInstant!=to{return Fence{},errors.New("target must be at destination")}
+		targetOrdinal,ok:=target[1].(uint64);if !ok{return Fence{},errors.New("invalid target ordinal")}
+		closureAt=domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(targetInstant),NotBeforeCycleOrdinal:domain.CycleOrdinal(targetOrdinal)}
+		cyclePlan=cycle.Plan
+	}
 	proofs := make([]any, 0, len(sources))
 	for _, source := range sources {
 		var selected *inputledger.StoredClosure
@@ -74,7 +102,7 @@ func Derive(bundle *policy.Bundle, ledger *inputledger.Ledger, cycle Cycle, poli
 			if c.Receipt.SourceID != source {
 				continue
 			}
-			if c.Fields[5] == true || coordinate(c.Fields[4]).Compare(cycleAt) >= 0 {
+			if c.Fields[5] == true || coordinate(c.Fields[4]).Compare(closureAt) >= 0 {
 				if selected == nil || c.Receipt.Sequence < selected.Receipt.Sequence {
 					selected = c
 				}
@@ -138,7 +166,9 @@ func Derive(bundle *policy.Bundle, ledger *inputledger.Ledger, cycle Cycle, poli
 	if err != nil {
 		return Fence{}, err
 	}
-	cyclePlan := []any{uint64(0)} // WORK
+	if cycle.Plan != nil && len(units)>0 {
+		return Fence{},errors.New("clock advance must have empty admitted cohort")
+	}
 	fields := []any{runID[:], cycle.ID[:], uint64(cycle.Attempt), cycle.RetryRef, int64(cycle.Instant), uint64(cycle.Ordinal), cyclePlan, uint64(cycle.BaseRevision), cycle.BaseStateHash[:], proofs, cohort, unitValues, inputDigest[:], policies.AdmissionOrder, policies.CausalIdentity, policies.Fence, policies.Rules}
 	digest, _, err := d.Sum("cote.csf.digest.fence", "cote.csf.schema.admission-fence.body", 1, fields)
 	if err != nil {

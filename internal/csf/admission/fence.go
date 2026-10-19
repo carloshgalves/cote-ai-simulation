@@ -436,13 +436,12 @@ func (c *Coordinator) AdmitThenEvaluate(ctx context.Context, bundle *policy.Bund
 		derived, err := Derive(bundle, view, cycle, policies)
 		if err != nil { return err }
 		if c.log == nil || c.log.store == nil { return errors.New("admission fence store is required") }
-		if conditional, ok := c.log.store.(ports.PrefixConditionalFenceStore); ok {
-			if err := conditional.AppendFenceIfPrefix(ctx, ports.CanonicalRecord{Identity: derived.ID, Canonical: derived.Canonical}, prefix); err != nil { return err }
-		} else {
-			// Compatibility with in-memory harness stores. Production SQLite
-			// uses the cross-process prefix-conditional transaction above.
-			if err := c.log.AppendIfAbsent(ctx, derived); err != nil { return err }
-		}
+		conditional, ok := c.log.store.(ports.PrefixConditionalFenceStore)
+		if !ok { return errors.New("admission fence requires atomic prefix-conditional store") }
+		if err := conditional.AppendFenceIfPrefix(ctx, ports.CanonicalRecord{Identity: derived.ID, Canonical: derived.Canonical}, prefix); err != nil { return err }
+		// The store's seal and fence have committed; mirror the source freeze
+		// in this ledger so live/reopened instances reject identically.
+		ledger.FreezeSourceDeclarations()
 		fence = derived
 		return nil
 	})

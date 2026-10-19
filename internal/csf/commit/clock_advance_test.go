@@ -611,6 +611,69 @@ func TestGenesisOccurrenceRejectsForgedUnitDigestAndID(t *testing.T){
  digestBackdated,_,err:=d.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,backdated);if err!=nil{t.Fatal(err)}
  retro,err:=codec.CanonicalPayload(append(backdated,digestBackdated[:]));if err!=nil{t.Fatal(err)}
  if err:=store.SeedGenesisOccurrence(ctx,domain.ID(id),g.RunID,domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant-1},retro);err==nil{t.Fatal("retroactive pending occurrence was admitted at genesis")}
- 
+
  if err:=store.SeedGenesisOccurrence(ctx,domain.ID(id),g.RunID,eligibility,canonical);err!=nil{t.Fatalf("valid genesis occurrence rejected: %v",err)}
+}
+
+// A self-consistent rehash is required here: simple broken-digest fixtures
+// would not exercise the closure/policy/provenance semantic validators.
+func TestReplayRejectsRehashedAuthorityForgeries(t *testing.T){
+ cases:=[]struct{
+  name string
+  mutate func(context.Context,*testing.T,*inputledger.Ledger,Outcome,[]any,[]any,[]ports.CanonicalRecord,*policy.Bundle)
+ }{
+  {"missing-declared-source-closure",func(_ context.Context,_ *testing.T,_ *inputledger.Ledger,_ Outcome,f,_ []any,_ []ports.CanonicalRecord,_ *policy.Bundle){
+   f[9]=[]any{}
+  }},
+  {"later-covering-closure-instead-of-first",func(ctx context.Context,t *testing.T,l *inputledger.Ledger,out Outcome,f,_ []any,_ []ports.CanonicalRecord,_ *policy.Bundle){
+   newer,err:=l.CloseSource(ctx,"driver",inputledger.Closure{
+    ProducerKey:"later-coverage",ClosedThrough:domain.EligibilityCoordinate{NotBeforeInstant:out.Plan.To+1},
+   });if err!=nil{t.Fatal(err)}
+   f[9]=[]any{[]any{"driver",[]any{uint64(2),newer.ID[:],newer.Digest[:]},newer.Receipt.Sequence,newer.Fields[4],newer.Fields[5]}}
+  }},
+  {"different-versioned-policy-ref",func(_ context.Context,_ *testing.T,_ *inputledger.Ledger,_ Outcome,_,j []any,_ []ports.CanonicalRecord,_ *policy.Bundle){
+   j[13]=j[14] // event-order is not a cycle-coordinate policy.
+  }},
+  {"synthetic-event-forged-source-provenance",func(_ context.Context,t *testing.T,_ *inputledger.Ledger,_ Outcome,_,_ []any,events []ports.CanonicalRecord,b *policy.Bundle){
+   decoded,err:=codec.StrictDecodePayload(events[0].Canonical);if err!=nil{t.Fatal(err)}
+   fields:=decoded.([]any)
+   fields[11]=[]any{bytes.Repeat([]byte{0x77},32)}
+   digest,_,err:=identity.New(b).Sum("cote.csf.digest.event","cote.csf.schema.event.body",1,fields[:18]);if err!=nil{t.Fatal(err)}
+   fields[18]=digest[:]
+   events[0].Canonical,err=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+  }},
+ }
+ for _,tc:=range cases{
+  t.Run(tc.name,func(t *testing.T){
+   ctx:=context.Background()
+   coordinator,store,ledger,run,bundle,path:=testFixture(t,activeTrigger())
+   out,err:=coordinator.Advance(ctx,ledger,run);if err!=nil{t.Fatal(err)}
+   fAny,err:=codec.StrictDecodePayload(out.Fence.Canonical);if err!=nil{t.Fatal(err)}
+   fence:=fAny.([]any)
+   jAny,err:=codec.StrictDecodePayload(out.Commit.Canonical);if err!=nil{t.Fatal(err)}
+   journal:=jAny.([]any)
+   events:=append([]ports.CanonicalRecord(nil),out.Events...)
+   tc.mutate(ctx,t,ledger,out,fence,journal,events,bundle)
+   d:=identity.New(bundle)
+   fd,_,err:=d.Sum("cote.csf.digest.fence","cote.csf.schema.admission-fence.body",1,fence[:17]);if err!=nil{t.Fatal(err)}
+   fence[17]=fd[:]
+   journal[10]=fd[:]
+   eventBytes:=make([]any,len(events))
+   for i,event:=range events{eventBytes[i]=event.Canonical}
+   jd,_,err:=d.Sum("cote.csf.digest.batch","cote.csf.schema.batch-preimage",1,[]any{journal[:23],eventBytes});if err!=nil{t.Fatal(err)}
+   journal[23]=jd[:]
+   sealed,err:=codec.CanonicalPayload(fence);if err!=nil{t.Fatal(err)}
+   committed,err:=codec.CanonicalPayload(journal);if err!=nil{t.Fatal(err)}
+   db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+   if _,err:=db.ExecContext(ctx,"UPDATE decision_ledger SET canonical=? WHERE id=?",sealed,out.Fence.ID[:]);err!=nil{t.Fatal(err)}
+   if _,err:=db.ExecContext(ctx,"UPDATE decision_ledger SET canonical=? WHERE id=?",committed,out.Commit.Identity[:]);err!=nil{t.Fatal(err)}
+   for _,event:=range events{
+    if _,err:=db.ExecContext(ctx,"UPDATE event_store SET canonical=? WHERE id=?",event.Canonical,event.Identity[:]);err!=nil{t.Fatal(err)}
+   }
+   if err:=db.Close();err!=nil{t.Fatal(err)}
+   if _,err:=store.ReplayClock(ctx,[32]byte(run),bundle);err==nil{
+    t.Fatal("replay accepted rehashed but causally forged authoritative records")
+   }
+  })
+ }
 }

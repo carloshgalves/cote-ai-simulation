@@ -92,7 +92,7 @@ def test_v0_contains_32_unique_paraphrased_evidence_records():
 def test_pack_and_eval_schemas_are_valid_and_packs_conform():
     pack_schema = load_json(SCHEMA_DIR / "character_evidence_pack.schema.json")
     eval_schema = load_json(SCHEMA_DIR / "character_fidelity_eval.schema.json")
-    evidence_collection_schema = load_json(SCHEMA_DIR / "evidence_collection.schema.json")
+    evidence_collection_schema = load_json(SCHEMA_DIR / "character_evidence_legacy_collection.schema.json")
 
     for schema in (pack_schema, eval_schema, evidence_collection_schema):
         Draft202012Validator.check_schema(schema)

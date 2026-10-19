@@ -1,0 +1,21 @@
+{
+  "bundle_id": "cote.csf.schema.foundation.v1",
+  "manifest_version": 1,
+  "artifacts": [
+    [
+      "foundation.cddl",
+      27622,
+      "7aef8599856d22b6f53aedaa7911ea486466328f4b31c626fd02945eca7094a4"
+    ],
+    [
+      "registries.json",
+      108811,
+      "8bf6c42d03f8625acaf441bc8a050168daadd96ec786fccb3744c2e2f7e87a81"
+    ],
+    [
+      "causal-transition-contracts.json",
+      19234,
+      "0134eec17a206293fbeb09da6f545d036895c3f12a8abbab04558731843d8962"
+    ]
+  ]
+}

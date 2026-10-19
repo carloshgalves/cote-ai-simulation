@@ -172,7 +172,7 @@ func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock
     if err!=nil{return empty,err}
     inputs,err:=c.store.Records(ctx);if err!=nil{return empty,err}
     _=canonicalState
-    changes:=make([]ports.TriggerStateChange,0,len(work))
+    changes:=make([]ports.TriggerStateChange,0)
     activations:=make([]ports.CanonicalRecord,0)
     ordered,err:=c.store.LoadRegisteredTriggers(ctx,[32]byte(runID),c.bundle)
     if err!=nil{return empty,err}

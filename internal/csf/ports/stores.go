@@ -35,6 +35,14 @@ type IngressAppendStore interface {
 	NextIngressSequence(context.Context, string) (uint64, error)
 }
 
+// AdmissionGuardedAppendStore atomically prevents source-set expansion and
+// retroactively eligible rounds after a durable fence for the same run.
+// Implementations must serialize these checks with AppendFenceIfPrefix.
+type AdmissionGuardedAppendStore interface {
+	AppendSourceDeclaration(context.Context, [32]byte, CanonicalRecord) error
+	AppendRoundDeclaration(context.Context, [32]byte, int64, uint64, CanonicalRecord) error
+}
+
 // PrefixConditionalFenceStore publishes a fence only if the input-ledger prefix
 // is exactly the one used for derivation. The comparison and insert must share
 // one storage transaction, including across independently opened processes.

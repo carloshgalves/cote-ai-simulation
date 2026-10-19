@@ -429,6 +429,11 @@ type Coordinator struct{ log *FenceLog }
 
 func NewCoordinator(log *FenceLog) *Coordinator { return &Coordinator{log: log} }
 func (c *Coordinator) AdmitThenEvaluate(ctx context.Context, bundle *policy.Bundle, ledger *inputledger.Ledger, cycle Cycle, policies Policies, evaluate func(Fence) error) (Fence, error) {
+	// Fence CAS must seal exactly the authority whose prefix was derived.
+	// Distinct instances/files are not a supported atomic V1 boundary.
+	if c == nil || c.log == nil || c.log.store == nil || ledger == nil || !ledger.SharesFenceAuthority(c.log.store) {
+		return Fence{}, errors.New("fence and input ledger must share one atomic admission authority")
+	}
 	var fence Fence
 	err := ledger.WithAdmissionBoundary(func() error {
 		view, prefix, err := ledger.AdmissionView(ctx, bundle)

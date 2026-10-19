@@ -7,6 +7,7 @@ and a confirmed narrative position. This module does not index anything.
 from __future__ import annotations
 
 from copy import deepcopy
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -18,6 +19,41 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMAS = ROOT / "data/canon/schema"
 LEGACY_DIR = ROOT / "data/canon/evidence/characters"
+REVIEW_MANIFEST_PATH = ROOT / "data/canon/reviews/character-evidence-v2-approvals.json"
+# Release-controlled content pin; the manifest contains no approved records.
+# Changing this value requires a separately reviewed code + data change.
+REVIEW_MANIFEST_SHA256 = "53a88c2985b2844923c6e8eef4f439d9766bff7227de961c57f259642b022d6d"
+
+
+def evidence_digest(record: dict[str, Any]) -> str:
+    """Bind a review decision to the complete canonical evidence content."""
+    canonical = json.dumps(record, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def _trusted_review_registry() -> dict[str, dict[str, Any]]:
+    """The sole authorization source is a pinned, versioned repository artifact."""
+    try:
+        raw = REVIEW_MANIFEST_PATH.read_bytes()
+    except OSError as exc:
+        raise EvidenceNotAdmitted("trusted review manifest unavailable") from exc
+    if hashlib.sha256(raw).hexdigest() != REVIEW_MANIFEST_SHA256:
+        raise EvidenceNotAdmitted("trusted review manifest digest mismatch")
+    try:
+        document = json.loads(raw)
+    except (UnicodeError, ValueError) as exc:
+        raise EvidenceNotAdmitted("trusted review manifest malformed") from exc
+    if (
+        not isinstance(document, dict)
+        or set(document) != {"schema_version", "reviewed_records"}
+        or type(document["schema_version"]) is not int
+        or document["schema_version"] != 1
+        or not isinstance(document["reviewed_records"], dict)
+    ):
+        raise EvidenceNotAdmitted("trusted review manifest schema invalid")
+    return document["reviewed_records"]
+
+
 
 
 class EvidenceNotAdmitted(ValueError):
@@ -60,18 +96,13 @@ def load_legacy_records() -> dict[str, dict[str, Any]]:
     return records
 
 
-def convert_for_v2(
+def _project_reviewed_record(
     record: dict[str, Any],
     *,
     approval: dict[str, Any] | None,
     source_registry: dict[str, Any],
 ) -> dict[str, Any]:
-    """Build one schema-valid V2 BEHAVIORAL_CANON item, or refuse to export.
-
-    Approval must be a separately maintained human-reviewed decision. A
-    locator alone must never generate an invented narrative ordinal, and a
-    behavioral classification must not smuggle factual/private claims.
-    """
+    """Internal projection helper, NOT a public authorization entrypoint."""
     if record.get("schema_version") != 1:
         raise EvidenceNotAdmitted("expected legacy evidence schema V1")
     if not isinstance(approval, dict):
@@ -82,8 +113,14 @@ def convert_for_v2(
         or approval.get("private_content_reviewed") is not True
         or not isinstance(approval.get("reviewer"), str)
         or not approval["reviewer"].strip()
+        or not isinstance(approval.get("review_reference"), str)
+        or not approval["review_reference"].startswith(
+            "https://github.com/carloshgalves/cote-ai-simulation/pull/"
+        )
     ):
         raise EvidenceNotAdmitted("behavioral authorization/private-content review missing")
+    if approval.get("reviewed_record_sha256") != evidence_digest(record):
+        raise EvidenceNotAdmitted("record changed since human review")
     ordinal = approval.get("narrative_ordinal")
     if isinstance(ordinal, bool) or not isinstance(ordinal, int) or ordinal < 0:
         raise EvidenceNotAdmitted("confirmed nonnegative narrative ordinal required")
@@ -132,17 +169,35 @@ def convert_for_v2(
     return evidence
 
 
+def convert_for_v2(
+    record: dict[str, Any],
+    *,
+    source_registry: dict[str, Any],
+) -> dict[str, Any]:
+    """Public conversion: ONLY pinned release-controlled approval is authoritative.
+
+    Caller-controlled approval/reviewer fields cannot be passed to this function.
+    Empty manifest means no item can currently be exported.
+    """
+    trusted = _trusted_review_registry()
+    return _project_reviewed_record(
+        record, approval=trusted.get(record.get("id")), source_registry=source_registry
+    )
+
+
 def eligible_records(
     records: dict[str, dict[str, Any]],
     *,
-    approvals: dict[str, dict[str, Any]],
     source_registry: dict[str, Any],
 ) -> list[dict[str, Any]]:
-    """Only explicitly reviewed records may enter the V2 export; fail closed."""
-    unknown = set(approvals) - set(records)
+    """Only explicitly approved, unchanged records may be exported (default none)."""
+    trusted = _trusted_review_registry()
+    unknown = set(trusted) - set(records)
     if unknown:
         raise EvidenceNotAdmitted(f"unknown approved evidence IDs: {sorted(unknown)}")
     return [
-        convert_for_v2(records[key], approval=approvals[key], source_registry=source_registry)
-        for key in sorted(approvals)
+        _project_reviewed_record(
+            records[key], approval=trusted[key], source_registry=source_registry
+        )
+        for key in sorted(trusted)
     ]

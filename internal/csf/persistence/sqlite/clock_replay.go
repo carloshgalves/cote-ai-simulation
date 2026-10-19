@@ -147,6 +147,7 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  report.ReplayedEvents=lastEventCounter
  persisted,err:=s.LoadClock(ctx,runID);if err!=nil{return report,err}
  if current!=persisted{return report,errors.New("replayed clock differs from durable clock")}
+ report.ReconstructedClock=current
  for _,registered:=range definitions{
   actual,err:=trigger.RuntimeBytes(runtime[registered.Definition.ID]);if err!=nil{return report,err}
   if !bytes.Equal(actual,registered.RuntimeCanonical){return report,errors.New("replayed trigger runtime differs from stored state")}

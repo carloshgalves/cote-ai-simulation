@@ -12,6 +12,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
@@ -180,6 +181,65 @@ func strictFull(record ports.CanonicalRecord,minFields int) ([]any,error){
 // It checks the admitted fence and input prefix, reselects pending work,
 // and atomically publishes journal, events, trigger updates/activations,
 // revision and clock. All failures (including fault injection) roll back.
+// The SQLite adapter is the last authority boundary. Verify the registered
+// ID/digest preimages against the exact canonical bytes, not only record counts.
+func registeredDigest(domainTag,schemaID string,value any)(domain.Digest,error){
+ encoded,err:=codec.CanonicalBytes(domainTag,schemaID,1,value)
+ if err!=nil{return domain.Digest{},err}
+ return identity.OpaqueContentHash(encoded),nil
+}
+func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next clock.State)(error){
+ if len(b.Events)!=1{return errors.New("clock advance requires exactly one temporal event")}
+ if len(journal)!=24{return errors.New("malformed CycleCommit body")}
+ if !equalBytes(journal[0],b.RunID[:])||!equalBytes(journal[1],b.CycleID[:]){return errors.New("CycleCommit run/cycle mismatch")}
+ if journal[2]!=uint64(0)||journal[3]!=uint64(state.Instant)||journal[4]!=uint64(state.LastOrdinal+1) {
+  return errors.New("CycleCommit attempt/origin mismatch")
+ }
+ if journal[6]!=b.ExpectedRevision||journal[8]!=b.ResultRevision||journal[22]!=uint64(next.NextLogicalSequence){
+  return errors.New("CycleCommit revision/logical sequence mismatch")
+ }
+ if !equalBytes(journal[7],b.BaseStateHash[:])||!equalBytes(journal[9],b.ResultStateHash[:]) {
+  return errors.New("CycleCommit world hash mismatch")
+ }
+ for _,index:=range []int{11,16,18}{
+  group,ok:=journal[index].([]any)
+  if !ok||len(group)!=0{return errors.New("CLOCK_ADVANCE cannot settle work or perception tasks")}
+ }
+ ids,ok:=journal[15].([]any)
+ if !ok||len(ids)!=1||!equalBytes(ids[0],b.Events[0].Identity[:]) {
+  return errors.New("CycleCommit references an event outside its batch")
+ }
+ actualEvent,err:=strictFull(b.Events[0],19)
+ if err!=nil{return err}
+ if !equalBytes(actualEvent[1],b.RunID[:])||!equalBytes(actualEvent[7],b.CycleID[:]) ||
+  actualEvent[3]!="clock.advanced"||actualEvent[6]!=uint64(state.NextLogicalSequence)||
+  actualEvent[8]!=b.ExpectedRevision||actualEvent[15]!=uint64(2) {
+  return errors.New("invalid clock event origin, ordering or confidentiality")
+ }
+ sourceAt,ok:=asSigned64(actualEvent[5])
+ if !ok||sourceAt!=int64(state.Instant){return errors.New("clock event at wrong source instant")}
+ id,err:=registeredDigest("cote.csf.id.event","cote.csf.schema.event-id-preimage",[]any{b.RunID[:],b.CycleID[:],actualEvent[2]})
+ if err!=nil{return err}
+ if id!=b.Events[0].Identity{return errors.New("clock event identity preimage mismatch")}
+ digest,err:=registeredDigest("cote.csf.digest.event","cote.csf.schema.event.body",actualEvent[:18])
+ if err!=nil{return err}
+ if !equalBytes(actualEvent[18],digest[:]){return errors.New("clock event digest mismatch")}
+ commitID,err:=registeredDigest("cote.csf.id.cycle-commit","cote.csf.schema.cycle-commit-id-preimage",[]any{b.RunID[:],b.CycleID[:],uint64(0)})
+ if err!=nil{return err}
+ if commitID!=b.Journal.Identity {return errors.New("CycleCommit identity mismatch")}
+ digest,err=registeredDigest("cote.csf.digest.batch","cote.csf.schema.batch-preimage",[]any{journal[:23],[]any{b.Events[0].Canonical}})
+ if err!=nil{return err}
+ if !equalBytes(journal[23],digest[:]){return errors.New("CycleCommit batch digest mismatch")}
+ revision,err:=codec.StrictDecodePayload(b.RevisionCanonical)
+ if err!=nil{return err}
+ fields,ok:=revision.([]any)
+ if !ok||len(fields)!=6||fields[0]!=b.ExpectedRevision||fields[3]!=b.ResultRevision ||
+ !equalBytes(fields[2],b.BaseStateHash[:])||!equalBytes(fields[5],b.ResultStateHash[:]){
+  return errors.New("world revision transition does not match journal")
+ }
+ return nil
+}
+
 func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch) error {
  if b.ResultRevision!=b.ExpectedRevision+1 || len(b.Events)==0||len(b.Journal.Canonical)==0{return errors.New("incomplete clock advance batch")}
  state,err:=clock.Decode(b.ExpectedClock);if err!=nil{return err}
@@ -188,7 +248,7 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  journalRaw,err:=codec.StrictDecodePayload(b.Journal.Canonical)
  if err!=nil{return err}
  journal,ok:=journalRaw.([]any);if !ok||len(journal)!=24{return errors.New("invalid canonical CycleCommit")}
- if !equalBytes(journal[0],b.RunID[:])||!equalBytes(journal[1],b.CycleID[:])||journal[6]!=b.ExpectedRevision||journal[8]!=b.ResultRevision {return errors.New("clock journal authority mismatch")}
+ if err:=verifyAdvanceEnvelope(b,journal,state,next);err!=nil{return err}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return err}
  defer tx.Rollback()
  var current []byte

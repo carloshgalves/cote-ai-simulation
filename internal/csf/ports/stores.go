@@ -35,6 +35,13 @@ type IngressAppendStore interface {
 	NextIngressSequence(context.Context, string) (uint64, error)
 }
 
+// PrefixConditionalFenceStore publishes a fence only if the input-ledger prefix
+// is exactly the one used for derivation. The comparison and insert must share
+// one storage transaction, including across independently opened processes.
+type PrefixConditionalFenceStore interface {
+	AppendFenceIfPrefix(context.Context, CanonicalRecord, []CanonicalRecord) error
+}
+
 // Authorities deliberately exposes distinct owners instead of a global store.
 type Authorities struct {
 	InputLedger    AppendOnlyStore

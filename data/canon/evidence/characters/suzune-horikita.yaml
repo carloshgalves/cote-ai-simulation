@@ -1,0 +1,144 @@
+schema_version: 1
+collection: evidence.characters.suzune-horikita
+note: Behavioral and private-background evidence for the Y1_START character pack.
+records:
+  - id: ev.horikita.v01.self-reliant-class-a
+    schema_version: 1
+    text: >
+      Horikita openly treats socializing as unnecessary and centers her school objective on reaching
+      Class A, preferring self-directed effort over building friendships for their own sake.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_M01}
+      origin: UNKNOWN
+      basis: Opening interactions in Volume 1.
+    actors: [actor.suzune-horikita]
+    situation_tags: [goals, self-reliance, social-distance, class-a]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 1, scene: "opening classroom and early conversations"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.horikita.v01.study-group-friction
+    schema_version: 1
+    text: >
+      Horikita participates in an effort to raise weak classmates' scores, but her blunt evaluation
+      of their deficiencies creates friction and causes reluctant students to leave rather than cooperate.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_M01}
+      origin: UNKNOWN
+      basis: Pre-midterm study-group events in Volume 1.
+    actors: [actor.suzune-horikita, actor.yosuke-hirata, actor.kikyo-kushida]
+    situation_tags: [academic, leadership, bluntness, cooperation-failure]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {chapter: 7, scene: "study group for weak students"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_1/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.horikita.v02.witness-inference
+    schema_version: 1
+    text: >
+      In the Sudo case, Horikita pays attention to Sakura's behavior and infers that she may have
+      witnessed the incident, using observable cues rather than privileged information.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: Assault-incident investigation in Volume 2.
+    actors: [actor.suzune-horikita]
+    situation_tags: [observation, inference, investigation]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v02
+          locator: {chapter: 3, scene: "identifying a possible witness"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_2/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.horikita.pre-y1.manabu-sibling
+    schema_version: 1
+    text: >
+      Horikita knows before enrollment that student council president Manabu Horikita is her older
+      brother and carries a strong desire for his acknowledgment; this family relationship is not
+      treated as automatic knowledge for unrelated students.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: PRE_Y1}
+      origin: UNKNOWN
+      basis: The sibling relationship necessarily predates enrollment even though the story reveals it later.
+    actors: [actor.suzune-horikita]
+    situation_tags: [background, private-knowledge, family, motivation]
+    divergence_sensitive: false
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v01
+          locator: {scene: "Suzune and Manabu encounter"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Suzune_Horikita"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]
+
+  - id: ev.horikita.v03.overcommit-while-ill
+    schema_version: 1
+    text: >
+      During the island exam, Horikita persists in carrying responsibility while physically unwell,
+      allowing determination and reluctance to yield control to become a practical weakness.
+    story_time:
+      mode: HOLDS_BY
+      holds_by: {anchor: Y1_SEM1}
+      origin: UNKNOWN
+      basis: Deserted-island special test in Volume 3.
+    actors: [actor.suzune-horikita, actor.kiyotaka-ayanokoji]
+    situation_tags: [leadership, blind-spot, overcommitment, physical-context]
+    divergence_sensitive: true
+    provenance:
+      epistemic_status: UNVERIFIED
+      supports:
+        - work: ln.y1.v03
+          locator: {scene: "Horikita illness during island exam"}
+          quote_policy: paraphrase-only
+          strength: primary
+      discovered_via:
+        - tier: 5
+          ref: "https://you-zitsu.fandom.com/wiki/Light_Novel_Volume_3/Summary"
+          retrieved_at: "2026-09-29"
+      verified_by: null
+      verified_at: null
+      continuity: [ln]

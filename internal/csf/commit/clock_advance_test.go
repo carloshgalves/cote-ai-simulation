@@ -3,10 +3,12 @@ package commit
 import (
  "bytes"
  "context"
+ "database/sql"
  "encoding/hex"
  "encoding/json"
  "os"
  "testing"
+ _ "modernc.org/sqlite"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
@@ -385,4 +387,77 @@ func TestInitiallyTrueTriggerIsBootstrappedAtGenesisAndReplayed(t *testing.T) {
  initial,err:=store.LoadClock(ctx,[32]byte(root.RunID));if err!=nil{t.Fatal(err)}
  p,ok,err:=clock.Next(initial,pending)
  if err!=nil||!ok||p.Kind!=clock.Work||p.OriginOrdinal!=0{t.Fatalf("genesis trigger should be WORK (t,0): %+v %v",p,err)}
+}
+
+func TestClockAdvanceCannotSmuggleUncommittedManualRearm(t *testing.T) {
+ ctx:=context.Background()
+ def:=activeTrigger()
+ def.Policy=trigger.OnceWhenTrue
+ coordinator,store,ledger,runID,_,_:=testFixture(t,def)
+ before,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
+ coordinator.tamperBatch=func(b *ports.ClockAdvanceBatch){
+  if len(b.TriggerRuntime)!=1{t.Fatal("one trigger expected")}
+  next,err:=trigger.DecodeRuntime(b.TriggerRuntime[0].After)
+  if err!=nil{t.Fatal(err)}
+  if !next.Exhausted {t.Fatal("ONCE predicate should be exhausted")}
+  forged:=next
+  forged.Exhausted=false
+  forged.Armed=true
+  forged.HasLast=false
+  b.TriggerRuntime[0].After,err=trigger.RuntimeBytes(forged)
+  if err!=nil{t.Fatal(err)}
+ }
+ if _,err:=coordinator.Advance(ctx,ledger,runID);err==nil {
+  t.Fatal("CLOCK_ADVANCE accepted a manual rearm without WORK event")
+ }
+ after,err:=store.AuditClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
+ if after!=before {t.Fatalf("manual rearm polluted causal tables: before=%+v after=%+v",before,after)}
+}
+
+// A malicious or damaged SQLite row must be detected by replay from
+// genesis, immutable definitions and journal. This test intentionally
+// corrupts disposable test databases; no production write port is exposed.
+func TestReplayRejectsCorruptedDurableAuthority(t *testing.T) {
+ tests:=[]struct{
+  name string
+  statement string
+  key func(Outcome,[32]byte)[]byte
+ }{
+  {"definition","UPDATE trigger_definitions SET canonical=? WHERE run_id=?",
+   func(_ Outcome,run [32]byte)[]byte{return run[:]}},
+  {"runtime","UPDATE trigger_runtime SET canonical=? WHERE run_id=?",
+   func(_ Outcome,run [32]byte)[]byte{return run[:]}},
+  {"activation","UPDATE trigger_activations SET canonical=? WHERE run_id=?",
+   func(_ Outcome,run [32]byte)[]byte{return run[:]}},
+  {"journal","UPDATE decision_ledger SET canonical=? WHERE id=?",
+   func(o Outcome,_ [32]byte)[]byte{return o.Commit.Identity[:]}},
+  {"event","UPDATE event_store SET canonical=? WHERE id=?",
+   func(o Outcome,_ [32]byte)[]byte{return o.Events[0].Identity[:]}},
+  {"clock","UPDATE clock_states SET canonical=? WHERE run_id=?",
+   func(_ Outcome,run [32]byte)[]byte{return run[:]}},
+ }
+ for _,tc:=range tests{
+  t.Run(tc.name,func(t *testing.T){
+   ctx:=context.Background()
+   coordinator,_,ledger,run,bundle,path:=testFixture(t,activeTrigger())
+   o,err:=coordinator.Advance(ctx,ledger,run)
+   if err!=nil{t.Fatal(err)}
+   // The unmodified persisted state must be fully replayable first.
+   clean,err:=sqlite.Open(ctx,path)
+   if err!=nil{t.Fatal(err)}
+   _,err=clean.ReplayClock(ctx,[32]byte(run),bundle)
+   clean.Close()
+   if err!=nil{t.Fatalf("precondition replay failure: %v",err)}
+   db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+   result,err:=db.ExecContext(ctx,tc.statement,[]byte{0x80},tc.key(o,[32]byte(run)))
+   db.Close()
+   if err!=nil{t.Fatal(err)}
+   count,err:=result.RowsAffected()
+   if err!=nil||count!=1{t.Fatalf("expected one corrupted authority row, got %d: %v",count,err)}
+   reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+   _,err=reopened.ReplayClock(ctx,[32]byte(run),bundle)
+   reopened.Close()
+   if err==nil{t.Fatal("replay accepted corrupted durable causal authority")}
+  })
+ }
 }

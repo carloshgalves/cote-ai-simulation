@@ -152,7 +152,7 @@ func TestAdvanceReopenAndWorkerPermutationPreserveAuthoritativeBytes(t *testing.
   two.ID[0]=0x82
   work:=[]trigger.Definition{one,two}
   if iteration==1{work[0],work[1]=work[1],work[0]}
-  coordinator,store,ledger,runID,_,path:=testFixture(t,work...)
+  coordinator,store,ledger,runID,bundle,path:=testFixture(t,work...)
   result,err:=coordinator.Advance(ctx,ledger,runID)
   if err!=nil{t.Fatal(err)}
   if len(result.Events)!=2||len(result.Activations)!=2{t.Fatal("missing trigger activations")}
@@ -173,6 +173,12 @@ func TestAdvanceReopenAndWorkerPermutationPreserveAuthoritativeBytes(t *testing.
   if err!=nil||!bytes.Equal(actualEvent,result.Events[0].Canonical){reopened.Close();t.Fatal("event did not survive reopen")}
   pending,err:=reopened.PendingClock(ctx,[32]byte(runID))
   if err!=nil||len(pending)!=3 {reopened.Close();t.Fatalf("lost pending trigger/occurrence: %v %+v",err,pending)}
+  report,err:=reopened.ReplayClock(ctx,[32]byte(runID),bundle)
+  if err!=nil{reopened.Close();t.Fatalf("durable-only replay failed: %v",err)}
+  if report.ReconstructedClock!=result.ResultClock || report.ReplayedCommits!=1 ||
+    report.ReplayedEvents!=2 || report.ReplayedTriggerTransitions!=2 || report.VerifiedActivations!=2 {
+    reopened.Close();t.Fatalf("incomplete replay: %+v",report)
+  }
   reopened.Close()
   _=store
  }

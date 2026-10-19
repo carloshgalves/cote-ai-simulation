@@ -180,8 +180,16 @@ actions:
 
 submission:
   individual_quota: 1
-  quota_scope: SCHOOL_RECEIVED_WELL_FORMED_SUBMISSION
+  quota_scope: CANONICAL_SCHOOL_RECEIVED_WELL_FORMED_SUBMISSION
   quota_rule_status: SIMULATION_AUTHORED
+  admission_boundary: CLOSED_CSF_COHORT
+  admission_state_reference: SAME_PRE_COHORT_SNAPSHOT
+  per_actor_canonicalization_before_quota: true
+  retransmission_same_id_same_payload: SAME_RECEIPT_NO_ADDITIONAL_QUOTA
+  identity_same_id_different_payload: FAIL_CLOSED_NO_PARTIAL_EFFECTS
+  concurrent_same_actor_losers: SUPERSEDED_BY_SAME_ACTOR_COHORT
+  prior_cycle_quota_consumed: REJECTED_ALREADY_SUBMITTED
+  commit_quota_outcome_economy: ATOMIC_CSF_COMMIT
   phases:
     ACTIVE:
       accepted_semantic_action: EARLY_GUESS
@@ -206,6 +214,18 @@ simultaneity:
   status: SIMULATION_AUTHORED
   scope: same_group_same_phase_same_simulation_instant_same_resolution_cycle
   algorithm: SEEDED_HASH_MIN
+  cohort_preparation:
+    - VALIDATE_SCHEMA_AND_CAUSAL_IDENTITIES
+    - COALESCE_SAME_ID_IDENTICAL_PAYLOAD_RETRIES
+    - FAIL_CLOSED_ON_SAME_ID_DIFFERENT_PAYLOAD
+    - SELECT_ONE_REPRESENTATIVE_PER_ACTOR_BY_PRIORITY
+    - APPLY_PRE_COHORT_QUOTA_AND_SEMANTIC_VALIDATION
+    - SELECT_ONE_ELIGIBLE_GROUP_WINNER_BY_PRIORITY
+    - COMMIT_RECEIPTS_OUTCOME_AND_ECONOMY_ATOMICALLY
+  same_actor_priority_stage: BEFORE_ANY_QUOTA_CONSUMPTION
+  same_actor_loser_disposition: SUPERSEDED_BY_SAME_ACTOR_COHORT
+  same_actor_losers_consume_quota: false
+  selected_actor_submissions_consume_quota_even_if_semantically_invalid: true
   components:
     - causal_identity_policy
     - literal:zodiac-vip/submission-priority
@@ -283,6 +303,10 @@ invariants:
     - ROLE_ASSIGNMENT_RECOMPUTES
   runtime:
     - AT_MOST_ONE_RECEIVED_SUBMISSION_PER_ACTOR
+    - PER_ACTOR_CANONICALIZATION_BEFORE_QUOTA
+    - IDENTICAL_RETRANSMISSION_IDEMPOTENT
+    - CAUSAL_IDENTITY_PAYLOAD_COLLISION_FAIL_CLOSED
+    - SAME_COHORT_PERMUTATION_IDENTICAL_STATE_AND_LEDGER_HASH
     - EXACTLY_ONE_TERMINAL_OUTCOME_PER_GROUP
     - TERMINAL_GROUP_CANNOT_REWARD_AGAIN
     - INVALID_SUBMISSION_CANNOT_REWARD

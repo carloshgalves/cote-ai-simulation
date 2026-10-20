@@ -31,7 +31,7 @@ type ClockReplayReport struct{
 // WORK or schedule settlement is implemented in CSFRV1-3, so original
 // occurrences/rounds/inputs remain durable. Exclude only the activations and
 // repeat cadences materialized by the advance itself, not source work.
-func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte)([]clock.Pending,error){
+func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte,replayRevision uint64)([]clock.Pending,error){
  pending,err:=pendingClock(ctx,s.db,runID)
  if err!=nil{return nil,err}
  generated:=map[domain.ID]bool{}
@@ -63,7 +63,17 @@ func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte)([]clock.
  if err:=runtimeRows.Err();err!=nil{runtimeRows.Close();return nil,err}
  if err:=runtimeRows.Close();err!=nil{return nil,err}
  original:=make([]clock.Pending,0,len(pending))
- for _,item:=range pending{if !generated[item.ID]{original=append(original,item)}}
+ known:=map[domain.ID]bool{}
+ for _,item:=range pending{
+  if !generated[item.ID]{original=append(original,item);known[item.ID]=true}
+ }
+ // A later terminal WORK removes its RoundDeclarations from live pending.
+ // Reinstate only rounds that were still unsettled at this replay revision.
+ historical,err:=s.historicalWorkRounds(ctx,runID,replayRevision)
+ if err!=nil{return nil,err}
+ for _,item:=range historical{
+  if !known[item.ID]{original=append(original,item)}
+ }
  return original,nil
 }
 
@@ -167,7 +177,7 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
    Target:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(to),NotBeforeCycleOrdinal:domain.CycleOrdinal(targetOrdinal)}}
   // A well-formed journal cannot assert a destination that was not
   // the earliest persisted pending before its terminal advance.
-  original,err:=s.replayAdvanceInputs(ctx,runID)
+  original,err:=s.replayAdvanceInputs(ctx,runID,uint64(current.Revision))
   if err!=nil{return report,err}
   selected,has,err:=clock.Next(current,original)
   if err!=nil{return report,fmt.Errorf("replay has stale pre-advance pending: %w",err)}

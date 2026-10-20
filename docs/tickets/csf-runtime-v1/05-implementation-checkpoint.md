@@ -1,7 +1,7 @@
 # CSFRV1-5 — checkpoint de implementação
 
-**Branch:** `feat/csfrv1-5-atomic-terminal-commit`  
-**Draft PR:** [#21](https://github.com/carloshgalves/cote-ai-simulation/pull/21)  
+**Branch:** `feat/csfrv1-5-atomic-terminal-commit`
+**Draft PR:** [#21](https://github.com/carloshgalves/cote-ai-simulation/pull/21)
 **Contrato:** [05-commit-atomico-e-retry.md](05-commit-atomico-e-retry.md), ADR-0008 e ADR-0011.
 
 > **STATUS: PARCIAL — PR NÃO APROVADA PARA MERGE.** Os caminhos

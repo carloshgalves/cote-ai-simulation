@@ -254,3 +254,44 @@ schema ou conformance foi modificado; a PR não publica
 WORK/settlement, perception nem segunda autoridade de escrita.
 Testes e evidências do HEAD final devem ser anexados ao comentário
 de conclusão da PR antes de qualquer outra fase.
+
+## Quarta remediação de review — findings #16–18 (19/10/2026)
+
+**Lote congelado:** findings High #16, #17 e #18.
+**Base revisada:** `817e2efab65101985df7c619e54be50ebc429796`.
+**PR:** [Draft #19](https://github.com/carloshgalves/cote-ai-simulation/pull/19),
+sem merge ou antecipação de `WORK`/settlement.
+
+- **#16 — único caminho de ingresso.** `Store.Append` rejeita
+  `ExogenousInput` e `SourceClosure` com run e source canônicos,
+  reservando `AppendIngress` para a inserção conjunta do record,
+  `SourceIngressReceipt` e incremento do cursor, sob guard de fence
+  e relógio. A regressão usa um input distinto e retroativo
+  depois do fence, além da tentativa de inserir input/closure por
+  port genérico.
+- **#17 — integridade além da menor pendência.** Antes de reproduzir o
+  clock, o replay reabre o `InputLedger` canônico com os validators
+  existentes, obrigando identidade, `unit_digest`, origem, receipts
+  e sequência contígua para toda a entrada, incluindo itens futuros.
+  Como o ID de `RoundDeclaration` não inclui ator/slots, o
+  `round_integrity_seals` guarda somente seu hash canônico,
+  gravado atomicamente com o record na **mesma SQLite transaction**.
+  Replay comprova hash e cardinalidade desses índices para rounds
+  persistidos, sem criar segunda autoridade de publicação.
+- **#18 — contrato fechado da tentativa inicial.** O verificador
+  do `AdmissionFence` recusa `retry_ref` diferente de ABSENT e
+  `rule_versions` diferente de lista vazia no único caminho
+  `CLOCK_ADVANCE` de tentativa zero, mesmo com `fence_digest`
+  e `batch_digest` recalculados consistentemente.
+
+**TDD:** regressões de `review_cycle4_test.go` falharam no estado
+anterior à correção — [run vermelho](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39352257316).
+Após o patch: [Go/TS e diff check](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39352484836)
+e [conformance canônica](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39352490091)
+ficaram `success`. O HEAD final com este checkpoint também deve
+passar as mesmas duas pipelines antes de fechar os markers
+`RESOLVED`.
+
+**Imutabilidade do bundle:** nenhum contrato/hash pinado ou
+fixture de conformance foi reescrito. Runtime continua com
+`CLOCK_ADVANCE` como único publisher terminal deste slice.

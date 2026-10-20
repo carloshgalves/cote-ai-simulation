@@ -98,7 +98,7 @@ func (s *Store) CommitCycleAbort(ctx context.Context,b ports.TerminalAbortBatch)
  if reason==0&&len(ind)==0{return errors.New("INDETERMINATE_FACET missing per-subject evidence")}
  for _,v:=range ind{
   fields,ok:=v.([]any)
-  if !ok||len(fields)!=9||!sameCanonical(fields[8],[]any{fields[2],fields[3],fields[4]}){
+  if !ok||len(fields)!=8||!sameCanonical(fields[7],[]any{fields[2],fields[3],fields[4]}){
    return errors.New("unbound indeterminate policy evidence")
   }
   subj,ok:=fields[0].([]any);if !ok||len(subj)!=3{return errors.New("invalid indeterminate validation subject")}
@@ -112,8 +112,7 @@ func (s *Store) CommitCycleAbort(ctx context.Context,b ports.TerminalAbortBatch)
  for _,pair:=range [][2]int{{4,3},{5,4},{6,5},{7,6},{8,7},{12,9},{16,13}}{
   if !sameCanonical(fence[pair[0]],body[pair[1]]){return errors.New("abort differs from frozen fence")}
  }
- if !equalBytes(fence[17],body[8].([]byte)){return errors.New("abort fence digest invalid")}
- if state.Revision!=0 && uint64(state.Revision)!=fence[7]{return errors.New("abort base revision stale")}
+ if !equalBytes(fence[17],func()[]byte{v,_:=body[8].([]byte);return v}()){return errors.New("abort fence digest invalid")}
  if uint64(state.Revision)!=fence[7]{return errors.New("abort revision mismatch")}
  if int64(state.Instant)!=func()int64{n,_:=asSigned64(fence[4]);return n}(){return errors.New("abort instant differs from clock")}
  var baseHash []byte
@@ -166,7 +165,7 @@ func (s *Store) AuthorizeAttemptRetry(ctx context.Context,b ports.AttemptRetryBa
  h,err:=registeredDigest("cote.csf.digest.abort","cote.csf.schema.cycle-abort.body",abort[:14])
  if err!=nil{return err}
  wantRef:=fullRef(13,b.AbortID[:],h[:])
- if !present(fields[4],wantRef)||!present(aborted[5],wantRef){
+ if !sameCanonical(fields[4],wantRef)||!present(aborted[5],wantRef){
   return errors.New("retry must cite the exact authoritative abort")
  }
  if !sameCanonical(fields[6],abort[13]){return errors.New("retry rule versions differ from aborted cycle")}

@@ -181,9 +181,11 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
   // NoProposal is a slot response, not pending work of its own. The
   // declared round remains pending until EVERY slot has a committed
   // settlement. The original RoundDeclaration stays append-only.
-  if len(fields)==11&&equalBytes(fields[2],runID[:]){
-   rb,isRoundRef:=fields[4].([]byte)
-   slot,isSlot:=fields[5].(string)
+  if (len(fields)==11||len(fields)==19)&&equalBytes(fields[2],runID[:]){
+   roundAt,slotAt:=4,5 // NoProposal fields
+   if len(fields)==19{roundAt,slotAt=13,14} // ActionProposal fields
+   rb,isRoundRef:=fields[roundAt].([]byte)
+   slot,isSlot:=fields[slotAt].(string)
    if isRoundRef&&len(rb)==32&&isSlot&&equalBytes(fields[0],key){
     var round,unit domain.ID;copy(round[:],rb);copy(unit[:],key)
     if responded[round]==nil{responded[round]=map[string]domain.ID{}}

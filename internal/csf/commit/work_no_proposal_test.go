@@ -66,7 +66,7 @@ func TestNoProposalWorkAtomicityAcrossAllFailurePoints(t *testing.T){
  ctx:=context.Background()
  c,store,ledger,cycle,fence,path:=noProposalWorkFixture(t)
  before,err:=store.LoadClock(ctx,[32]byte(func()domain.ID{_,_,_,_,_,run:=ledger.Snapshot();return run}()));if err!=nil{t.Fatal(err)}
- for stage:=uint8(1);stage<=6;stage++{
+ for stage:=uint8(1);stage<=7;stage++{
   c.failAfterStep=stage
   if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err==nil{t.Fatalf("WORK failpoint %d skipped",stage)}
   _,_,_,_,_,run:=ledger.Snapshot()
@@ -89,7 +89,7 @@ func TestNoProposalWorkAtomicityAcrossAllFailurePoints(t *testing.T){
  _,_,_,_,_,run:=ledger.Snapshot()
  after,err:=store.LoadClock(ctx,[32]byte(run))
  if err!=nil||after.Revision!=before.Revision+1||after.LastOrdinal!=0||
-  after.NextLogicalSequence!=before.NextLogicalSequence{t.Fatalf("wrong WORK terminal clock: %+v %v",after,err)}
+  after.NextLogicalSequence!=before.NextLogicalSequence+2{t.Fatalf("wrong WORK terminal clock: %+v %v",after,err)}
  persisted,err:=store.GetFence(ctx,commit.Identity)
  if err!=nil||!bytes.Equal(persisted,commit.Canonical){t.Fatal("WORK journal not durably stored")}
  ctl,err:=store.LoadCycleControl(ctx,[32]byte(run))
@@ -99,7 +99,7 @@ func TestNoProposalWorkAtomicityAcrossAllFailurePoints(t *testing.T){
  recovered,err:=reopened.LoadClock(ctx,[32]byte(run))
  if err!=nil||recovered!=after{t.Fatal("resume changed WORK successor",err)}
  report,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle)
- if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=0||
+ if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=2||
   report.ReconstructedClock!=after{
   t.Fatalf("zero-effect WORK not independently replayable: %+v %v",report,err)
  }
@@ -118,7 +118,7 @@ func TestNoProposalWorkAtomicityAcrossAllFailurePoints(t *testing.T){
   {"world_revisions",&world},{"committed_cycles",&committed}}{
   if err:=sqlDB.QueryRowContext(ctx,"SELECT count(*) FROM "+p.table).Scan(p.out);err!=nil{t.Fatal(err)}
  }
- if decisions!=4||world!=2||committed!=1||events!=0{
+ if decisions!=4||world!=2||committed!=1||events!=2{
   t.Fatalf("WORK publication missing a part: decisions=%d events=%d world=%d committed=%d",decisions,events,world,committed)
  }
 }
@@ -313,7 +313,7 @@ func TestReplayClockAdvanceThenNoProposalWorkInOneDurableHistory(t *testing.T){
  if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
  reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
  report,err:=reopened.ReplayClock(ctx,[32]byte(run),bundle)
- if err!=nil||report.ReplayedCommits!=2||report.ReplayedEvents!=2||report.ReconstructedClock.Revision!=2{
+ if err!=nil||report.ReplayedCommits!=2||report.ReplayedEvents!=3||report.ReconstructedClock.Revision!=2{
   t.Fatalf("mixed journal does not replay: %+v %v",report,err)
  }
 }

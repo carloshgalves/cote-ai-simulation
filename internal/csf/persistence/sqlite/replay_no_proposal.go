@@ -21,8 +21,10 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
  attempt,ok:=journal[2].(uint64);if !ok||attempt>math.MaxUint32{return clock.State{},errors.New("WORK replay attempt invalid")}
  commit,err:=registeredDigest("cote.csf.id.cycle-commit","cote.csf.schema.cycle-commit-id-preimage",
   []any{runID[:],cycleID[:],attempt});if err!=nil{return clock.State{},err}
+ events,err:=loadJournalEvents(ctx,s.db,journal)
+ if err!=nil{return clock.State{},err}
  batch,err:=registeredDigest("cote.csf.digest.batch","cote.csf.schema.batch-preimage",
-  []any{journal[:23],[]any{}});if err!=nil{return clock.State{},err}
+  []any{journal[:23],events});if err!=nil{return clock.State{},err}
  if commit!=commitID||!equalBytes(journal[23],batch[:]){return clock.State{},errors.New("WORK replay journal identity/hash differs")}
  // Read the predecessor outside the SQLite transaction; the store may
  // run with one connection, so a nested s.db query would deadlock here.
@@ -55,13 +57,15 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
  next:=prior
  next.Revision++
  next.LastOrdinal=int64(ordinal)
+ if uint64(len(events))>math.MaxUint64-uint64(next.NextLogicalSequence){
+  return clock.State{},errors.New("WORK replay logical sequence overflow")
+ }
+ next.NextLogicalSequence+=domain.LogicalSequence(len(events))
  if journal[8]!=uint64(next.Revision)||journal[22]!=uint64(next.NextLogicalSequence){
   return clock.State{},errors.New("WORK replay successor clock invalid")
  }
- for _,index:=range []int{15,18}{
-  items,ok:=journal[index].([]any)
-  if !ok||len(items)!=0{return clock.State{},errors.New("NoProposal cannot replay unregistered events/tasks")}
- }
+ tasks,ok:=journal[18].([]any)
+ if !ok||len(tasks)!=0{return clock.State{},errors.New("NoProposal cannot replay visible tasks")}
  if !equalBytes(journal[7],hash[:])||!equalBytes(journal[9],hash[:]){
   return clock.State{},errors.New("WORK replay changed world-state hash without a reducer")
  }

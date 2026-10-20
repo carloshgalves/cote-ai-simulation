@@ -8,6 +8,7 @@ import (
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
@@ -109,6 +110,29 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   uint64(plan.OriginOrdinal)!=uint64(next.LastOrdinal){
   return errors.New("WORK source coordinate not selected by canonical clock")
  }
+ cohort,ok:=fence[10].([]any)
+ if !ok||len(cohort)!=2{return errors.New("WORK fence cohort missing")}
+ rounds,ok:=cohort[1].([]any)
+ if !ok{return errors.New("WORK round cohort missing")}
+ admittedRounds:=map[domain.ID]bool{}
+ for _,v:=range rounds{
+  item,ok:=v.([]any);if !ok||len(item)!=2{return errors.New("malformed round cohort item")}
+  idBytes,ok:=item[0].([]byte);if !ok||len(idBytes)!=32{return errors.New("round cohort identity invalid")}
+  var id domain.ID;copy(id[:],idBytes)
+  if admittedRounds[id]{return errors.New("duplicate cohort round")}
+  admittedRounds[id]=true
+ }
+ // An unrelated due occurrence, trigger activation or exogenous input
+ // cannot be silently skipped by settling only the visible NoProposal
+ // rounds. Until those handlers exist, the whole attempt fails closed.
+ due:=domain.EligibilityCoordinate{NotBeforeInstant:prior.Instant,NotBeforeCycleOrdinal:domain.CycleOrdinal(next.LastOrdinal)}
+ seenRounds:=map[domain.ID]bool{}
+ for _,p:=range pending{
+  if p.Eligibility.Compare(due)>0{continue}
+  if !admittedRounds[p.ID]{return errors.New("WORK has pending non-slot causal work without a source lifecycle handler")}
+  seenRounds[p.ID]=true
+ }
+ if len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
  var prevHash []byte
  var priorWorld []byte
  if err:=tx.QueryRowContext(ctx,"SELECT state_hash,canonical FROM world_revisions WHERE revision=?",

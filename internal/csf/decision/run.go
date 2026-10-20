@@ -60,7 +60,7 @@ func Run(input Input)(Result,error){
   if p.aliasFound{aliases[p.id]=true;continue}
   if p.indeterminate||!input.Snapshot.Known {
    result.Indeterminate=append(result.Indeterminate,Indeterminate{
-    Subject:p.id,Facet:2,Validator:refs["validators"],Reason:"resource.validator.missing",Evidence:[]any{},
+    Subject:p.id,SubjectDigest:p.unit.Response.Digest,SubjectKind:0,Facet:2,Validator:refs["validators"],Reason:"resource.validator.missing",Evidence:[]any{},
    })
    continue
   }
@@ -106,14 +106,14 @@ func Run(input Input)(Result,error){
  } else {
   if len(viable)!=2 {
    for _,c:=range viable{result.Indeterminate=append(result.Indeterminate,Indeterminate{
-    Subject:c.SourceUnitIDs[0],Facet:2,Validator:refs["conflict-resolvers"],Reason:"resource.resolver.unavailable",Evidence:[]any{},
+    Subject:c.ID,SubjectDigest:c.Digest,SubjectKind:1,Facet:2,Validator:refs["conflict-resolvers"],Reason:"resource.resolver.unavailable",Evidence:[]any{},
    })}
    result.Failure="INDETERMINATE_FACET";seal(&result,input);return result,ErrIndeterminate
   }
   // This V0 resolver supports exactly two claims for one last unit.
   if current[viable[0].ID]!=input.Snapshot.Available||current[viable[1].ID]!=input.Snapshot.Available{
    for _,c:=range viable{result.Indeterminate=append(result.Indeterminate,Indeterminate{
-    Subject:c.SourceUnitIDs[0],Facet:2,Validator:refs["conflict-resolvers"],Reason:"resource.resolver.unsupported",Evidence:[]any{},
+    Subject:c.ID,SubjectDigest:c.Digest,SubjectKind:1,Facet:2,Validator:refs["conflict-resolvers"],Reason:"resource.resolver.unsupported",Evidence:[]any{},
    })}
    result.Failure="INDETERMINATE_FACET";seal(&result,input)
    return result,ErrIndeterminate
@@ -171,7 +171,14 @@ func seal(r *Result,input Input)error{
  draws:=make([]any,len(r.Draws))
  for i,v:=range r.Draws{draws[i]=v.Canonical}
  ind:=make([]any,len(r.Indeterminate))
- for i,v:=range r.Indeterminate{ind[i]=[]any{v.Subject[:],uint64(v.Facet),v.Validator,v.Reason,v.Evidence}}
+ for i,v:=range r.Indeterminate{
+  if len(v.Validator)!=3{return fmt.Errorf("%w: incomplete validator policy ref",ErrProvenance)}
+  ind[i]=[]any{
+   []any{uint64(v.SubjectKind),v.Subject[:],v.SubjectDigest[:]},
+   uint64(v.Facet),v.Validator[0],v.Validator[1],v.Validator[2],
+   v.Reason,v.Evidence,v.Validator,
+  }
+ }
  disp:=make([]any,len(r.Dispositions))
  for i,v:=range r.Dispositions{disp[i]=[]any{v.Subject[:],v.CandidateID[:],v.Status,v.Reason,v.CanonicalUnit[:]}}
  raw,e:=codec.CanonicalPayload([]any{"csfrv1-4.provisional",input.RunID[:],input.CycleID[:],

@@ -70,7 +70,15 @@ type Candidate struct{
 }
 type Conflict struct{ ID domain.ID; CandidateIDs []domain.ID; Fields []any; Digest domain.Digest; Canonical []byte }
 type Draw struct{ ID domain.ID; Fields []any; Digest domain.Digest; Canonical []byte }
-type Indeterminate struct{ Subject domain.ID; Facet uint8; Validator []any; Reason string; Evidence []any }
+type Indeterminate struct{
+ Subject domain.ID
+ SubjectDigest domain.Digest
+ SubjectKind uint8 // canonical validation-subject-kind (0 admitted unit; 1 candidate)
+ Facet uint8
+ Validator []any
+ Reason string
+ Evidence []any
+}
 type Disposition struct{ Subject domain.ID; CandidateID domain.ID; Status string; Reason string; CanonicalUnit domain.ID }
 type Result struct {
  Assessments []Assessment

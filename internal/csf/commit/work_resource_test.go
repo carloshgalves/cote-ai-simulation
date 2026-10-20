@@ -15,6 +15,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 )
 func singleResourceFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
@@ -97,5 +98,46 @@ func TestSingleResourceCommitAtomicAndReplayable(t *testing.T){
  if err!=nil{t.Fatal(err)}
  if _,available,err:=clock.Next(successor,nextPending);err!=nil||available{
   t.Fatalf("committed resource round became pending again: %v %v",available,err)
+ }
+}
+
+func TestSingleResourceCommitRejectsForgedProofsWithoutPublishing(t *testing.T){
+ cases:=[]struct{name string;mutate func(*ports.WorkBatch)}{
+  {"candidate-digest",func(b *ports.WorkBatch){b.ResourceCandidate.Canonical=[]byte{0x80}}},
+  {"resource-event",func(b *ports.WorkBatch){b.Events[0].Canonical=[]byte{0x80}}},
+  {"lifecycle-event-order",func(b *ports.WorkBatch){b.Events[0],b.Events[1]=b.Events[1],b.Events[0]}},
+  {"forged-result-hash",func(b *ports.WorkBatch){b.ResultStateHash[0]^=0xff}},
+  {"world-revision",func(b *ports.WorkBatch){b.RevisionCanonical=[]byte{0x80}}},
+  {"forged-decision",func(b *ports.WorkBatch){b.Decisions[0].Canonical=[]byte{0x80}}},
+  {"truncated-admission-prefix",func(b *ports.WorkBatch){
+   if len(b.ExpectedInputPrefix)>0{b.ExpectedInputPrefix=b.ExpectedInputPrefix[:len(b.ExpectedInputPrefix)-1]}
+  }},
+ }
+ for _,tc:=range cases{
+  t.Run(tc.name,func(t *testing.T){
+   ctx:=context.Background()
+   c,store,ledger,cycle,fence,path:=singleResourceFixture(t)
+   c.tamperWorkBatch=tc.mutate
+   if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err==nil{
+    t.Fatal("SQLite accepted a forged or truncated resource terminal batch")
+   }
+   _,_,_,_,_,run:=ledger.Snapshot()
+   state,err:=store.LoadClock(ctx,[32]byte(run))
+   if err!=nil||state.Revision!=0||state.NextLogicalSequence!=0{t.Fatal("failed terminal mutated clock",err)}
+   before,_,err:=store.LoadWorldState(ctx,0)
+   if err!=nil{t.Fatal(err)}
+   stock,err:=reducer.DecodeStock(before)
+   if err!=nil||stock.Available!=1{t.Fatal("failed terminal mutated world",err)}
+   db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)};defer db.Close()
+   for _,table:=range []string{"event_store","committed_cycles"}{
+    var n int
+    if err:=db.QueryRowContext(ctx,"SELECT count(*) FROM "+table).Scan(&n);err!=nil{t.Fatal(err)}
+    if n!=0{t.Fatalf("failed resource terminal emitted %d rows to %s",n,table)}
+   }
+   c.tamperWorkBatch=nil
+   if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{
+    t.Fatalf("valid retry of unchanged in-flight fence failed: %v",err)
+   }
+  })
  }
 }

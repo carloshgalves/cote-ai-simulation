@@ -165,6 +165,10 @@ func validateResponse(d identity.Deriver,req Input,u Unit)(prepared,error){
   if !sameBytes(x.Body[4],x.RoundID[:])||x.Body[5]!=x.SlotID||!sameActor(x.Body[6],x.Actor)||x.Body[8]!=uint64(x.SubmittedAgainstRevision)||!sameInstant(x.Body[7],x.EffectiveAt){
    return p,fmt.Errorf("%w: no-proposal fields",ErrProvenance)
   }
+  reason,ok:=x.Body[9].(uint64)
+  // Pinned no_proposal_reason registry: actor_declined, timeout,
+  // responder_failure. No other u8 (or non-integer) is a valid source.
+  if !ok||reason>2{return p,fmt.Errorf("%w: unknown no-proposal reason",ErrProvenance)}
   return p,nil
  }
  if !sameActor(x.Body[6],x.Actor)||!sameBytes(x.Body[13],x.RoundID[:])||x.Body[14]!=x.SlotID||x.Body[15]!=uint64(x.SubmittedAgainstRevision){

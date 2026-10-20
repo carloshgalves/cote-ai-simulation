@@ -160,6 +160,11 @@ type clockQuery interface {
  QueryRowContext(context.Context,string,...any)*sql.Row
 }
 func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pending,error) {
+ // A source row is append-only: authoritative terminality comes from
+ // the verified CycleCommit/DecisionRecord projection, not SQL lifecycle
+ // updates that would contradict immutable canonical record digests.
+ settled,err:=settledNoProposalUnits(ctx,q,runID)
+ if err!=nil{return nil,err}
  // Read every row, including terminal rows: filtering lifecycle before
  // comparing its indexed projection with the canonical record hides corruption.
  selections:=[]struct{query string;activation bool}{
@@ -183,14 +188,15 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
    if int64(derived.NotBeforeInstant)!=instant||uint64(derived.NotBeforeCycleOrdinal)!=uint64(ordinal)||derivedLife!=uint64(life){
     rows.Close();return nil,errors.New("pending index columns disagree with canonical authority")
    }
-   if life==0{out=append(out,clock.Pending{ID:domain.ID(key),Eligibility:derived})}
+   if life==0&&!settled[domain.ID(key)]{
+    out=append(out,clock.Pending{ID:domain.ID(key),Eligibility:derived})
+   }
   }
   if err:=rows.Err();err!=nil{rows.Close();return nil,err}
   if err:=rows.Close();err!=nil{return nil,err}
  }
  // Project only terminal, hash-verified NoProposal DecisionRecords backed
  // by CycleCommit; a provisional disposition cannot consume a round.
- settled,err:=settledNoProposalUnits(ctx,q,runID);if err!=nil{return nil,err}
  type roundPending struct{pending clock.Pending;slots []any}
  roundRows:=make([]roundPending,0)
  responded:=map[domain.ID]map[string]domain.ID{}

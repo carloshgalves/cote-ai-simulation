@@ -410,16 +410,16 @@ func (s *Store) AppendFenceIfPrefix(ctx context.Context, fence ports.CanonicalRe
 		var persisted []byte
 		if err := tx.QueryRowContext(ctx, "SELECT canonical FROM decision_ledger WHERE id=?", fence.Identity[:]).Scan(&persisted); err != nil { return err }
 		if !bytes.Equal(persisted, fence.Canonical) { return errors.New("admission fence identity collision") }
-	} else {
-        // Persist CycleControlState with the same admission CAS, not in a
-        // second transaction after the fence becomes visible.
-        next,err:=admitTerminalFence(ctx,tx,fence);if err!=nil{return err}
-        if next!=nil{
-            opt:=next[1].([]any)
-            runBytes:=opt[1].([]byte)
-            var run [32]byte;copy(run[:],runBytes)
-            if err:=storeCycleControl(ctx,tx,run,next);err!=nil{return err}
-        }
+	}
+    // Reconcile the exact persisted fence even when the SQLite driver reports
+    // an idempotent INSERT OR IGNORE. An existing byte-identical fence must
+    // not bypass the cycle-control transition.
+    next,err:=admitTerminalFence(ctx,tx,fence);if err!=nil{return err}
+    if next!=nil{
+        opt:=next[1].([]any)
+        runBytes:=opt[1].([]byte)
+        var run [32]byte;copy(run[:],runBytes)
+        if err:=storeCycleControl(ctx,tx,run,next);err!=nil{return err}
     }
 	return tx.Commit()
 }

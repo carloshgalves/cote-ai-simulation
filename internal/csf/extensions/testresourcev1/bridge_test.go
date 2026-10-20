@@ -51,7 +51,9 @@ func TestDecisionInputMustResolvePersistedAdmissionFence(t *testing.T){
  fence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).AdmitThenEvaluate(ctx,bundle,ledger,cycle,pol,
   func(admission.Fence)error{return nil})
  if err!=nil{t.Fatal(err)}
- snapshot:=decision.Snapshot{BaseRevision:7,ResourceKind:"inventory",ResourceID:"last.resource",Available:1,Known:true}
+ snapshot:=decision.Snapshot{BaseRevision:7,ResourceKind:"inventory",ResourceID:"last.resource",Available:1,Known:true,
+  AccessibleActors:map[string]bool{"school:a":true,"school:b":true},
+  ForbiddenActors:map[string]bool{"school:a":false,"school:b":false}}
  config,err:=LastUnit(bundle);if err!=nil{t.Fatal(err)}
  req,err:=decision.FromPersistedFence(ctx,bundle,ledger,cycle,pol,fence,store,snapshot,config.Schemas,config.Seed,nil)
  if err!=nil{t.Fatal(err)}

@@ -32,12 +32,9 @@ func (c *Coordinator) CommitNoProposal(ctx context.Context,ledger *inputledger.L
  if err:=admission.VerifyFence(c.bundle,view,cycle,c.admissionPolicies,fence);err!=nil{return empty,err}
  persisted,err:=c.store.GetFence(ctx,[32]byte(fence.ID))
  if err!=nil||!bytes.Equal(persisted,fence.Canonical){return empty,errors.New("NoProposal fence is not durably published")}
- state,err:=c.store.LoadClock(ctx,[32]byte(cycle.ID)) // never substitute cycle ID for run ID
- _=state
- _=err
  _,_,_,rounds,slots,runID:=view.Snapshot()
  if runID==cycle.ID{return empty,errors.New("cycle identity must differ from run identity")}
- state,err=c.store.LoadClock(ctx,[32]byte(runID));if err!=nil{return empty,err}
+ state,err:=c.store.LoadClock(ctx,[32]byte(runID));if err!=nil{return empty,err}
  if state.Instant!=cycle.Instant||state.Revision!=cycle.BaseRevision||state.LastOrdinal>=int64(cycle.Ordinal)||
   state.Revision==domain.WorldRevision(math.MaxUint64)||cycle.Ordinal>math.MaxInt64{
   return empty,errors.New("stale or overflowing WORK clock")
@@ -59,16 +56,17 @@ func (c *Coordinator) CommitNoProposal(ctx context.Context,ledger *inputledger.L
  policies,err:=policiesByRole(c.bundle);if err!=nil{return empty,err}
  decisions:=make([]ports.CanonicalRecord,0,len(unitValues))
  ids,pairs,admitted:=make([]any,0,len(unitValues)),make([]any,0,len(unitValues)),make([]any,0,len(unitValues))
- var prev domain.ID
- for i,raw:=range unitValues{
+ seen:=map[domain.ID]bool{}
+ for _,raw:=range unitValues{
   entry,ok:=raw.([]any)
   if !ok||len(entry)!=5||entry[1]!=uint64(0){return empty,errors.New("WORK unit is not an admitted slot response")}
   b,ok:=entry[3].([]byte);if !ok||len(b)!=32{return empty,errors.New("invalid source response ID")}
   var id domain.ID;copy(id[:],b)
-  if i>0&&id==prev{return empty,errors.New("duplicate source response")}
-  prev=id
+  if seen[id]{return empty,errors.New("duplicate source response")}
+  seen[id]=true
   response,found:=byID[id]
-  if !found||response.Kind!=1||!bytes.Equal(entry[4].([]byte),response.Digest[:]){
+  dig,valid:=entry[4].([]byte)
+  if !valid||len(dig)!=32||!found||response.Kind!=1||!bytes.Equal(dig,response.Digest[:]){
    return empty,errors.New("cannot commit proposal or an unauthenticated NoProposal as zero-effect WORK")
   }
   decisionID,_,err:=d.Sum("cote.csf.id.decision","cote.csf.schema.decision-id-preimage",1,

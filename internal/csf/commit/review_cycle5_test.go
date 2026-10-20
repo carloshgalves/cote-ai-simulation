@@ -122,3 +122,47 @@ func TestReview5ReplayRejectsTamperedIngressCursorOrIndex(t *testing.T){
   })
  }
 }
+
+func review5ForceIngress(t *testing.T,ctx context.Context,path,source string,seq uint64,record,receipt ports.CanonicalRecord){
+ t.Helper()
+ db:=review3DB(t,path)
+ tx,err:=db.BeginTx(ctx,nil);if err!=nil{t.Fatal(err)}
+ defer tx.Rollback()
+ for _,item:=range []ports.CanonicalRecord{record,receipt}{
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO input_ledger(id,canonical) VALUES(?,?)",item.Identity[:],item.Canonical);err!=nil{t.Fatal(err)}
+ }
+ if _,err:=tx.ExecContext(ctx,"INSERT INTO source_ingress_receipts(source_id,ingress_seq,record_id,canonical) VALUES(?,?,?,?)",source,seq,record.Identity[:],receipt.Canonical);err!=nil{t.Fatal(err)}
+ if _,err:=tx.ExecContext(ctx,"UPDATE input_source_cursors SET next_seq=? WHERE source_id=?",seq+1,source);err!=nil{t.Fatal(err)}
+ if err:=tx.Commit();err!=nil{t.Fatal(err)}
+}
+
+func TestReview5ReplayRejectsForgedPostFinalOrRegressiveHistory(t *testing.T){
+ for _,kind:=range []string{"post-final","regressive-closure"}{
+  t.Run(kind,func(t *testing.T){
+   ctx:=context.Background()
+   coordinator,store,ledger,run,bundle,path:=testFixture(t)
+   outcome,err:=coordinator.Advance(ctx,ledger,run);if err!=nil{t.Fatal(err)}
+   existing:=review4LateInput(t,ctx,ledger,outcome.ResultClock.Instant)
+   terminal:=kind=="post-final"
+   prior:=domain.EligibilityCoordinate{NotBeforeInstant:outcome.ResultClock.Instant+200}
+   if _,err:=ledger.CloseSource(ctx,"driver",inputledger.Closure{ProducerKey:"review5-prefix",ClosedThrough:prior,Final:terminal});err!=nil{t.Fatal(err)}
+   seq,err:=store.NextIngressSequence(ctx,"driver");if err!=nil{t.Fatal(err)}
+   var record ports.CanonicalRecord
+   var digest []byte
+   var receiptKind uint64
+   if terminal{
+    record,digest=review5RekeyInput(t,bundle,existing,"driver","forged-post-final",outcome.ResultClock.Instant+250)
+    receiptKind=1
+   }else{
+    record,digest=review5Closure(t,bundle,run,"driver","forged-regressive",
+     domain.EligibilityCoordinate{NotBeforeInstant:outcome.ResultClock.Instant+150},false,seq)
+    receiptKind=2
+   }
+   receipt:=review5Receipt(t,"driver",seq,receiptKind,record.Identity[:],digest)
+   review5ForceIngress(t,ctx,path,"driver",seq,record,receipt)
+   if _,err:=store.ReplayClock(ctx,[32]byte(run),bundle);err==nil{
+    t.Fatalf("replay accepted %s source history with internally consistent receipts and SQL projections",kind)
+   }
+  })
+ }
+}

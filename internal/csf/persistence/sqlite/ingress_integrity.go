@@ -78,6 +78,15 @@ func verifyIngressProjections(ctx context.Context,q ingressQuery)error{
   if !declared[receipt.source]{return errors.New("ingress receipt refers to undeclared source")}
   expected[receipt.source]++
  }
+ // Projection equality alone must not certify an internally consistent but
+ // non-gapless set of source receipt keys.
+ for source,count:=range expected{
+  for sequence:=uint64(0);sequence<count;sequence++{
+   if _,ok:=canonical[fmt.Sprintf("%s/%d",source,sequence)];!ok{
+    return errors.New("canonical source receipt sequence contains a gap")
+   }
+  }
+ }
  indices,err:=q.QueryContext(ctx,"SELECT source_id,ingress_seq,record_id,canonical FROM source_ingress_receipts")
  if err!=nil{return err}
  var indexCount int

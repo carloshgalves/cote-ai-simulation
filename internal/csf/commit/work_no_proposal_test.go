@@ -268,3 +268,50 @@ func TestWorkReplayRejectsMissingTerminalDecision(t *testing.T){
   t.Fatal("replay accepted an orphaned CycleCommit with a missing terminal decision")
  }
 }
+
+func TestReplayClockAdvanceThenNoProposalWorkInOneDurableHistory(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,run,bundle,path:=testFixture(t)
+ if _,err:=c.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
+ clockBefore,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ if clockBefore.Revision!=1||clockBefore.LastOrdinal!=-1{t.Fatal("expected temporal successor before WORK")}
+ g:=validGenesis(t,bundle)
+ d:=identity.New(bundle)
+ cycleID,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{run[:],[]any{int64(clockBefore.Instant),uint64(0)}});if err!=nil{t.Fatal(err)}
+ created:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+ round,err:=ledger.DeclareRound(ctx,"driver",[2]string{"school","a"},[]string{"act"},
+  domain.EligibilityCoordinate{NotBeforeInstant:clockBefore.Instant},
+  created,0,0,0,[]any{uint64(0)})
+ if err!=nil{t.Fatal(err)}
+ dispatchID,_,err:=d.Sum("cote.csf.id.dispatch","cote.csf.schema.dispatch-id-preimage",1,
+  []any{run[:],cycleID[:],round.ID[:],"act",uint64(0)});if err!=nil{t.Fatal(err)}
+ dispatch:=inputledger.Dispatch{ID:domain.ID(dispatchID),RunID:run,CycleID:domain.ID(cycleID),RoundID:round.ID,
+  SlotID:"act",Actor:round.Actor,Eligibility:round.Eligibility,
+  BaseRevision:clockBefore.Revision,EffectiveAt:clockBefore.Instant}
+ if err:=ledger.RegisterDispatch(ctx,dispatch,inputledger.CycleBinding{
+  ID:domain.ID(cycleID),BaseRevision:clockBefore.Revision,Instant:clockBefore.Instant});err!=nil{t.Fatal(err)}
+ unitID,_,err:=d.Sum("cote.csf.id.no-proposal","cote.csf.schema.slot-response-id-preimage",1,
+  []any{dispatch.ID[:],uint64(1)});if err!=nil{t.Fatal(err)}
+ fields:=[]any{unitID[:],dispatch.ID[:],run[:],cycleID[:],round.ID[:],dispatch.SlotID,
+  []any{dispatch.Actor[0],dispatch.Actor[1]},int64(dispatch.EffectiveAt),uint64(dispatch.BaseRevision),uint64(0)}
+ dig,_,err:=d.Sum("cote.csf.digest.no-proposal-unit","cote.csf.schema.no-proposal.body",1,[]any{fields})
+ if err!=nil{t.Fatal(err)}
+ canonical,err:=codec.CanonicalPayload(append(cloneAny(fields),dig[:]));if err!=nil{t.Fatal(err)}
+ response:=inputledger.Response{Kind:1,ID:domain.ID(unitID),Digest:dig,Canonical:canonical,Body:fields,
+  DispatchID:dispatch.ID,RunID:run,CycleID:domain.ID(cycleID),RoundID:round.ID,SlotID:dispatch.SlotID,
+  Actor:dispatch.Actor,EffectiveAt:dispatch.EffectiveAt,SubmittedAgainstRevision:dispatch.BaseRevision}
+ if err:=ledger.Respond(ctx,response);err!=nil{t.Fatal(err)}
+ typed,hash,err:=store.LoadWorldState(ctx,uint64(clockBefore.Revision))
+ if err!=nil||len(typed)!=4{t.Fatalf("no authoritative revision after clock advance: %v",err)}
+ cycle:=admission.Cycle{ID:domain.ID(cycleID),Attempt:0,Instant:clockBefore.Instant,Ordinal:0,
+  BaseRevision:clockBefore.Revision,BaseStateHash:domain.Digest(hash),RetryRef:[]any{uint64(0)}}
+ fence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).AdmitThenEvaluate(
+  ctx,bundle,ledger,cycle,c.admissionPolicies,nil);if err!=nil{t.Fatal(err)}
+ if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
+ report,err:=reopened.ReplayClock(ctx,[32]byte(run),bundle)
+ if err!=nil||report.ReplayedCommits!=2||report.ReplayedEvents!=2||report.ReconstructedClock.Revision!=2{
+  t.Fatalf("mixed journal does not replay: %+v %v",report,err)
+ }
+}

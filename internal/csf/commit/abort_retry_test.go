@@ -163,8 +163,7 @@ func TestTerminalControlSurvivesIndependentSQLiteReopen(t *testing.T){
 
 func TestIndeterminateResourceFenceOnlyPublishesAbort(t *testing.T){
  ctx:=context.Background()
- c,store,ledger,run,bundle,path:=testFixture(t)
- if _,err:=c.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
+ c,store,ledger,run,bundle,path:=freshResourceWorkFixture(t)
  state,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
  g:=validGenesis(t,bundle)
  created:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
@@ -213,9 +212,9 @@ func TestIndeterminateResourceFenceOnlyPublishesAbort(t *testing.T){
  var decisionRecords, events int
  if err:=other.QueryRowContext(ctx,"SELECT count(*) FROM decision_ledger").Scan(&decisionRecords);err!=nil{t.Fatal(err)}
  if err:=other.QueryRowContext(ctx,"SELECT count(*) FROM event_store").Scan(&events);err!=nil{t.Fatal(err)}
- // Previous CLOCK_ADVANCE contributed its fence and CycleCommit; the
- // resource abort adds exactly its own AdmissionFence and CycleAbortRecord.
- if decisionRecords!=4||events!=2{t.Fatalf("abort invented terminal decisions/events: ledger=%d events=%d",decisionRecords,events)}
+ // This fresh run contains exactly the durable WORK fence and abort,
+ // and no event, terminal decision or world revision successor.
+ if decisionRecords!=2||events!=0{t.Fatalf("abort invented terminal decisions/events: ledger=%d events=%d",decisionRecords,events)}
  for _,unknown:=range evaluated.Indeterminate{
   forged:=unknown
   forged.Subject[0]^=0xff
@@ -223,4 +222,24 @@ func TestIndeterminateResourceFenceOnlyPublishesAbort(t *testing.T){
    t.Fatal("accepted fabricated admitted source in an abort record")
   }
  }
+}
+
+func freshResourceWorkFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,domain.ID,*policy.Bundle,string){
+ t.Helper()
+ ctx:=context.Background()
+ bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,bundle)
+ path:=t.TempDir()+"/resource-work.db"
+ store,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ t.Cleanup(func(){store.Close()})
+ if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ ledger,err:=inputledger.New(ctx,g.RunID,bundle,store);if err!=nil{t.Fatal(err)}
+ if err:=ledger.DeclareSource(inputledger.Source{ID:"driver"});err!=nil{t.Fatal(err)}
+ covered:=domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant}
+ if _,err:=ledger.CloseSource(ctx,"driver",inputledger.Closure{ProducerKey:"ready",ClosedThrough:covered});err!=nil{t.Fatal(err)}
+ refs,err:=policiesByRole(bundle);if err!=nil{t.Fatal(err)}
+ policies:=admission.Policies{AdmissionOrder:refs["admission-order"],
+  CausalIdentity:refs["causal-identity"],Fence:refs["admission-fence"],Rules:[][]any{}}
+ return New(store,bundle,policies),store,ledger,g.RunID,bundle,path
 }

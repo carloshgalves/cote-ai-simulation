@@ -5,6 +5,7 @@ import (
  "database/sql"
  "errors"
 
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
@@ -13,16 +14,37 @@ import (
 // the immutable AdmissionFence. A halted run cannot skip explicit retry by
 // publishing a second fence. Retry preserves the entire semantic cut.
 func admitTerminalFence(ctx context.Context,tx *sql.Tx,record ports.CanonicalRecord)([]any,error){
- var clockBytes []byte
- err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states LIMIT 1").Scan(&clockBytes)
- if err==sql.ErrNoRows{return nil,nil} // standalone ingress-guard fixtures with no bootstrapped run
- if err!=nil{return nil,err}
- decoded,err:=codec.StrictDecodePayload(record.Canonical);if err!=nil{return nil,err}
+ decoded,err:=codec.StrictDecodePayload(record.Canonical);if err!=nil{
+  // Legacy ingress-guard fixtures exercise conditional writes before
+  // bootstrapping a causal run. A bootstrapped run never bypasses this check.
+  var count int
+  if e:=tx.QueryRowContext(ctx,"SELECT count(*) FROM clock_states").Scan(&count);e!=nil{return nil,e}
+  if count==0{return nil,nil}
+  return nil,err
+ }
  fence,ok:=decoded.([]any)
  if !ok||len(fence)!=18{return nil,errors.New("active run requires canonical AdmissionFence")}
  runBytes,ok:=fence[0].([]byte);if !ok||len(runBytes)!=32{return nil,errors.New("fence run missing")}
  cycleBytes,ok:=fence[1].([]byte);if !ok||len(cycleBytes)!=32{return nil,errors.New("fence cycle missing")}
  var run,cycle [32]byte;copy(run[:],runBytes);copy(cycle[:],cycleBytes)
+ var clockBytes []byte
+ err=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",run[:]).Scan(&clockBytes)
+ if err==sql.ErrNoRows{return nil,nil} // no causal run: legacy standalone source guard
+ if err!=nil{return nil,err}
+ state,err:=clock.Decode(clockBytes);if err!=nil{return nil,err}
+ at,ok:=asSigned64(fence[4])
+ if !ok||at!=int64(state.Instant)||fence[7]!=uint64(state.Revision){
+  return nil,errors.New("AdmissionFence clock/revision is stale")
+ }
+ ordinal,ok:=fence[5].(uint64)
+ if !ok||state.LastOrdinal< -1||ordinal<=uint64(state.LastOrdinal){
+  // When LastOrdinal=-1 no cycle has committed at this instant, so
+  // ordinal=0 is valid. Handle that sentinel below.
+  if state.LastOrdinal!= -1||!ok{return nil,errors.New("AdmissionFence ordinal not after last terminal")}
+ }
+ var persistedHash []byte
+ if err:=tx.QueryRowContext(ctx,"SELECT state_hash FROM world_revisions WHERE revision=?",uint64(state.Revision)).Scan(&persistedHash);err!=nil{return nil,err}
+ if !equalBytes(fence[8],persistedHash){return nil,errors.New("AdmissionFence world hash not authoritative")}
  attempt,ok:=fence[2].(uint64);if !ok||attempt>uint64(^uint32(0)){return nil,errors.New("fence attempt invalid")}
  id,err:=registeredDigest("cote.csf.id.admission-fence","cote.csf.schema.admission-fence-id-preimage",[]any{run[:],cycle[:],attempt})
  if err!=nil{return nil,err}

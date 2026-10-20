@@ -27,13 +27,20 @@ func (s *Store) BootstrapGenesisTriggers(ctx context.Context,g *genesis.Genesis,
  if err!=nil{return err}
  if verified.ID!=g.ID||verified.Digest!=g.Digest||verified.RunID!=g.RunID{return errors.New("trigger registry genesis mismatch")}
  refs,err:=bundle.GenesisPolicyRefs();if err!=nil{return err}
- roles,err:=bundle.RequiredPolicyRoles();if err!=nil{return err}
- if len(roles)!=len(refs){return errors.New("trigger role registry mismatch")}
+ // Policy refs are sorted by canonical identifier; RequiredPolicyRoles is
+ // not sorted in that order. Match the dependency-footprint binding by ID.
+ bindings,ok:=bundle.Transitions["genesis_policy_bindings"].([]any)
+ if !ok{return errors.New("trigger policy bindings missing")}
  var handler []any
- for i,role:=range roles {
-  if role=="dependency-footprints"{handler=refs[i];break}
+ for _,item:=range bindings{
+  v,ok:=item.(map[string]any);if !ok{return errors.New("trigger policy binding malformed")}
+  if v["role"]!="dependency-footprints"{continue}
+  declared,ok:=v["ref"].([]any);if !ok||len(declared)!=3{return errors.New("trigger handler policy binding malformed")}
+  for _,pinned:=range refs{
+   if len(pinned)==3&&pinned[0]==declared[0]{handler=pinned;break}
+  }
  }
- if handler==nil{return errors.New("genesis lacks dependency-footprint policy")}
+ if handler==nil{return errors.New("genesis lacks pinned dependency-footprint policy")}
  canonical,err:=trigger.CanonicalDefinitions(defs);if err!=nil{return err}
  if len(canonical)>1024{return errors.New("too many initial triggers")}
  entries:=make([]definitionEntry,0,len(canonical))

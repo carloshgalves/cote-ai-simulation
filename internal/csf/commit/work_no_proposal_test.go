@@ -14,6 +14,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 func noProposalWorkFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,
  admission.Cycle,admission.Fence,string){
@@ -111,3 +112,49 @@ func TestNoProposalWorkAtomicityAcrossAllFailurePoints(t *testing.T){
  }
 }
 var _=clock.State{}
+
+func TestNoProposalWorkRejectsTamperedTerminalRecordAndRecovers(t *testing.T){
+ cases:=[]struct{
+  name string
+  mutate func(*ports.WorkBatch)
+ }{
+  {"decision-order",func(b *ports.WorkBatch){
+   b.Decisions[0],b.Decisions[1]=b.Decisions[1],b.Decisions[0]
+  }},
+  {"decision-body",func(b *ports.WorkBatch){
+   b.Decisions[0].Canonical=[]byte{0x80}
+  }},
+  {"commit-batch-digest",func(b *ports.WorkBatch){
+   b.Journal.Canonical=[]byte{0x80}
+  }},
+  {"world-revision",func(b *ports.WorkBatch){
+   b.RevisionCanonical=[]byte{0x80}
+  }},
+  {"foreign-input-prefix",func(b *ports.WorkBatch){
+   b.ExpectedInputPrefix=b.ExpectedInputPrefix[:len(b.ExpectedInputPrefix)-1]
+  }},
+  {"missing-terminal-record",func(b *ports.WorkBatch){
+   b.Decisions=b.Decisions[:1]
+  }},
+ }
+ for _,tc:=range cases{
+  t.Run(tc.name,func(t *testing.T){
+   ctx:=context.Background()
+   c,store,ledger,cycle,fence,path:=noProposalWorkFixture(t)
+   c.tamperWorkBatch=tc.mutate
+   if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err==nil{
+    t.Fatal("transaction accepted tampered authoritative WORK input")
+   }
+   sqlDB,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)};defer sqlDB.Close()
+   var decisions,world int
+   if err:=sqlDB.QueryRowContext(ctx,"SELECT count(*) FROM decision_ledger").Scan(&decisions);err!=nil{t.Fatal(err)}
+   if err:=sqlDB.QueryRowContext(ctx,"SELECT count(*) FROM world_revisions").Scan(&world);err!=nil{t.Fatal(err)}
+   if decisions!=1||world!=1{t.Fatalf("tampering persisted an orphan: decision=%d world=%d",decisions,world)}
+   c.tamperWorkBatch=nil
+   if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err!=nil{
+    t.Fatalf("valid deterministic retry after rejected tamper failed: %v",err)
+   }
+   _=store
+  })
+ }
+}

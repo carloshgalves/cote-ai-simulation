@@ -3,15 +3,19 @@ package commit
 import (
  "bytes"
  "context"
+ "database/sql"
+ "errors"
  "testing"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/decision"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/extensions/testresourcev1"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
@@ -155,4 +159,68 @@ func TestTerminalControlSurvivesIndependentSQLiteReopen(t *testing.T){
   t.Fatalf("reopened process missed RETRY_AUTHORIZED: %v %v",ctl,err)
  }
  if _,err:=second.GetFence(ctx,retry.Identity);err!=nil{t.Fatal("retry not durable",err)}
+}
+
+func TestIndeterminateResourceFenceOnlyPublishesAbort(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,run,bundle,path:=testFixture(t)
+ if _,err:=c.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
+ state,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,bundle)
+ created:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+ d:=identity.New(bundle)
+ cycleDigest,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{run[:],[]any{int64(state.Instant),uint64(0)}})
+ if err!=nil{t.Fatal(err)}
+ cycleID:=domain.ID(cycleDigest)
+ for i,actor:=range []string{"a","b"}{
+  round,err:=ledger.DeclareRound(ctx,"schedule",[2]string{"school",actor},[]string{"act"},
+   domain.EligibilityCoordinate{NotBeforeInstant:state.Instant},created,0,uint32(i),0,[]any{uint64(0)})
+  if err!=nil{t.Fatal(err)}
+  id,_,err:=d.Sum("cote.csf.id.dispatch","cote.csf.schema.dispatch-id-preimage",1,
+   []any{run[:],cycleID[:],round.ID[:],"act",uint64(0)})
+  if err!=nil{t.Fatal(err)}
+  dispatch:=inputledger.Dispatch{ID:domain.ID(id),RunID:run,CycleID:cycleID,RoundID:round.ID,
+   SlotID:"act",Actor:round.Actor,Eligibility:round.Eligibility,
+   BaseRevision:state.Revision,EffectiveAt:state.Instant}
+  if err:=ledger.RegisterDispatch(ctx,dispatch,inputledger.CycleBinding{
+   ID:cycleID,BaseRevision:state.Revision,Instant:state.Instant});err!=nil{t.Fatal(err)}
+  response,err:=testresourcev1.ProposalForDispatch(bundle,dispatch);if err!=nil{t.Fatal(err)}
+  if err:=ledger.Respond(ctx,response);err!=nil{t.Fatal(err)}
+ }
+ var hash domain.Digest;copy(hash[:],g.Payload[16].([]any)[3].([]byte))
+ cycle:=admission.Cycle{ID:cycleID,Attempt:0,Instant:state.Instant,Ordinal:0,
+  BaseRevision:state.Revision,BaseStateHash:hash,RetryRef:[]any{uint64(0)}}
+ fence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).AdmitThenEvaluate(
+  ctx,bundle,ledger,cycle,c.admissionPolicies,nil)
+ if err!=nil{t.Fatal(err)}
+ request,err:=decision.FromPersistedFence(ctx,bundle,ledger,cycle,c.admissionPolicies,fence,store,
+  decision.Snapshot{BaseRevision:state.Revision,ResourceKind:"inventory",ResourceID:"last.resource",
+   Available:1,Known:false,AccessibleActors:map[string]bool{"school:a":true,"school:b":true},
+   ForbiddenActors:map[string]bool{"school:a":false,"school:b":false}},
+  []decision.ActionSchema{{Type:"resource.consume",Version:1,Operation:"resource.consume",Producer:"resource.consume"}},
+  domain.Digest{},nil)
+ if err!=nil{t.Fatal(err)}
+ evaluated,err:=decision.Run(request)
+ if !errors.Is(err,decision.ErrIndeterminate)||len(evaluated.Indeterminate)!=2||
+  len(evaluated.Dispositions)!=0{t.Fatalf("invalid tentative decision: %v %+v",err,evaluated)}
+ abort,err:=c.Abort(ctx,run,cycleID,fence,0,evaluated.Indeterminate)
+ if err!=nil{t.Fatalf("INDETERMINATE did not close as terminal abort: %v",err)}
+ if _,err:=store.GetFence(ctx,abort.Identity);err!=nil{t.Fatal(err)}
+ after,err:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil||after!=state{t.Fatal("INDETERMINATE changed world revision/clock",err)}
+ other,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)};defer other.Close()
+ var decisionRecords, events int
+ if err:=other.QueryRowContext(ctx,"SELECT count(*) FROM decision_ledger").Scan(&decisionRecords);err!=nil{t.Fatal(err)}
+ if err:=other.QueryRowContext(ctx,"SELECT count(*) FROM event_store").Scan(&events);err!=nil{t.Fatal(err)}
+ // Previous CLOCK_ADVANCE contributed its fence and CycleCommit; the
+ // resource abort adds exactly its own AdmissionFence and CycleAbortRecord.
+ if decisionRecords!=4||events!=2{t.Fatalf("abort invented terminal decisions/events: ledger=%d events=%d",decisionRecords,events)}
+ for _,unknown:=range evaluated.Indeterminate{
+  forged:=unknown
+  forged.Subject[0]^=0xff
+  if _,err:=c.Abort(ctx,run,cycleID,fence,0,[]decision.Indeterminate{forged});err==nil{
+   t.Fatal("accepted fabricated admitted source in an abort record")
+  }
+ }
 }

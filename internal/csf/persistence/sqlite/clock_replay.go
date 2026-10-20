@@ -119,6 +119,8 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  if seals!=len(rounds){return report,errors.New("replay round integrity seal set diverges from declarations")}
  definitions,err:=s.LoadRegisteredTriggers(ctx,runID,bundle);if err!=nil{return report,err}
  current:=clock.State{Instant:genesisRoot.InitialInstant,LastOrdinal:-1}
+ currentTyped:=genesisTyped
+ var currentHash [32]byte;copy(currentHash[:],initialStateHash)
  runtime:=make(map[domain.ID]trigger.Runtime,len(definitions))
  for _,registered:=range definitions{
   d:=registered.Definition
@@ -163,6 +165,8 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
    successor,err:=s.replayNoProposalCommit(ctx,runID,entry.cycleID,entry.commitID,journal,current)
    if err!=nil{return report,fmt.Errorf("replay zero-event WORK: %w",err)}
    current=successor
+   currentTyped,currentHash,err=s.LoadWorldState(ctx,uint64(current.Revision))
+   if err!=nil{return report,err}
    report.ReplayedCommits++
    eventIDs,ok:=journal[15].([]any)
    if !ok{return report,errors.New("replayed WORK event ID list malformed")}
@@ -210,17 +214,17 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
   if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM world_revisions WHERE revision=?",uint64(next.Revision)).Scan(&revBytes);err!=nil{return report,err}
   baseHash,ok:=journal[7].([]byte);if !ok||len(baseHash)!=32{return report,errors.New("replay base hash malformed")}
   resultHash,ok:=journal[9].([]byte);if !ok||len(resultHash)!=32{return report,errors.New("replay resulting hash malformed")}
-  if !bytes.Equal(baseHash,initialStateHash)||!bytes.Equal(resultHash,initialStateHash){
-   return report,errors.New("CLOCK_ADVANCE changed genesis world state hash")
+  if !bytes.Equal(baseHash,currentHash[:])||!bytes.Equal(resultHash,currentHash[:]){
+   return report,errors.New("CLOCK_ADVANCE changed the current causal WorldState")
   }
   var storedRevisionHash []byte
   if err:=s.db.QueryRowContext(ctx,"SELECT state_hash FROM world_revisions WHERE revision=?",uint64(next.Revision)).Scan(&storedRevisionHash);err!=nil{return report,err}
-  if !bytes.Equal(storedRevisionHash,initialStateHash){return report,errors.New("world revision state hash conflicts with genesis")}
+  if !bytes.Equal(storedRevisionHash,currentHash[:]){return report,errors.New("temporal revision hash conflicts with current world")}
   var bh,rh [32]byte;copy(bh[:],baseHash);copy(rh[:],resultHash)
   record:=ports.ClockAdvanceBatch{RunID:runID,CycleID:entry.cycleID,ExpectedRevision:uint64(current.Revision),ResultRevision:uint64(next.Revision),
    BaseStateHash:bh,ResultStateHash:rh,ExpectedClock:expectedClock,ResultClock:resultClock,
    Journal:ports.CanonicalRecord{Identity:entry.commitID,Canonical:raw},Events:events,RevisionCanonical:revBytes}
-  if err:=verifyAdvanceEnvelope(record,journal,current,next,genesisTyped);err!=nil{return report,fmt.Errorf("replay commit integrity: %w",err)}
+  if err:=verifyAdvanceEnvelope(record,journal,current,next,currentTyped);err!=nil{return report,fmt.Errorf("replay commit integrity: %w",err)}
   runtimeEvents:=make([]ports.CanonicalRecord,0,len(definitions))
   activationPayloads:=make([]ports.CanonicalRecord,0)
   for _,registered:=range definitions{

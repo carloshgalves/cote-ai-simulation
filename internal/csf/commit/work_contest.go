@@ -144,7 +144,7 @@ func (c *Coordinator) CommitTwoResourceContest(ctx context.Context,ledger *input
  if err!=nil{return empty,err}
  proof:=make([]ports.CanonicalRecord,0,6)
  for _,v:=range tentative.Candidates{proof=append(proof,ports.CanonicalRecord{Identity:[32]byte(v.ID),Canonical:v.Canonical})}
- for _,v:=range tentative.Assessments{proof=append(proof,ports.CanonicalRecord{Identity:[32]byte(v.Subject),Canonical:v.Canonical})}
+ for _,v:=range tentative.Assessments{proof=append(proof,ports.CanonicalRecord{Identity:[32]byte(v.Digest),Canonical:v.Canonical})}
  proof=append(proof,ports.CanonicalRecord{Identity:[32]byte(conflict.ID),Canonical:conflict.Canonical},
   ports.CanonicalRecord{Identity:[32]byte(draw.ID),Canonical:draw.Canonical})
  sort.Slice(proof,func(i,j int)bool{return bytes.Compare(proof[i].Identity[:],proof[j].Identity[:])<0})

@@ -272,18 +272,20 @@ func TestWorkReplayRejectsMissingTerminalDecision(t *testing.T){
 func TestReplayClockAdvanceThenNoProposalWorkInOneDurableHistory(t *testing.T){
  ctx:=context.Background()
  c,store,ledger,run,bundle,path:=testFixture(t)
+ g:=validGenesis(t,bundle)
+ d:=identity.New(bundle)
+ created:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+ // The round MUST be declared before the future-clock fence is sealed.
+ // A post-fence round retroeligible at the target is rightly rejected.
+ round,err:=ledger.DeclareRound(ctx,"driver",[2]string{"school","a"},[]string{"act"},
+  domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant+100},
+  created,0,0,0,[]any{uint64(0)})
+ if err!=nil{t.Fatal(err)}
  if _,err:=c.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
  clockBefore,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
  if clockBefore.Revision!=1||clockBefore.LastOrdinal!=-1{t.Fatal("expected temporal successor before WORK")}
- g:=validGenesis(t,bundle)
- d:=identity.New(bundle)
  cycleID,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
   []any{run[:],[]any{int64(clockBefore.Instant),uint64(0)}});if err!=nil{t.Fatal(err)}
- created:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
- round,err:=ledger.DeclareRound(ctx,"driver",[2]string{"school","a"},[]string{"act"},
-  domain.EligibilityCoordinate{NotBeforeInstant:clockBefore.Instant},
-  created,0,0,0,[]any{uint64(0)})
- if err!=nil{t.Fatal(err)}
  dispatchID,_,err:=d.Sum("cote.csf.id.dispatch","cote.csf.schema.dispatch-id-preimage",1,
   []any{run[:],cycleID[:],round.ID[:],"act",uint64(0)});if err!=nil{t.Fatal(err)}
  dispatch:=inputledger.Dispatch{ID:domain.ID(dispatchID),RunID:run,CycleID:domain.ID(cycleID),RoundID:round.ID,

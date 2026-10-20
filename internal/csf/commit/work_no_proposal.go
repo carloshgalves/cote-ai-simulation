@@ -114,6 +114,7 @@ func (c *Coordinator) CommitNoProposal(ctx context.Context,ledger *inputledger.L
   FenceID:[32]byte(fence.ID),ExpectedClock:originalClock,ResultClock:nextClock,
   ExpectedInputPrefix:prefix,Journal:journal,Decisions:decisions,
   BaseStateHash:hash,RevisionCanonical:revision,FailAfterStep:c.failAfterStep}
+ if c.tamperWorkBatch!=nil{c.tamperWorkBatch(&batch)}
  if err:=c.store.CommitWork(ctx,batch);err!=nil{return empty,fmt.Errorf("NoProposal WORK transaction rejected: %w",err)}
  return journal,nil
 }

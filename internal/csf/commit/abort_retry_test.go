@@ -50,7 +50,7 @@ func TestAbortAtomicFailpointsAndExplicitRetry(t *testing.T){
   if _,err:=c.Abort(ctx,runID,cycleID,fence,4,nil);err==nil{t.Fatalf("abort step %d did not fail",stage)}
   if after,err:=store.LoadClock(ctx,[32]byte(runID));err!=nil||after!=original{t.Fatal("abort mutated clock",err)}
   ctl,err:=store.LoadCycleControl(ctx,[32]byte(runID))
-  if err!=nil||ctl[0]!=uint64(0){t.Fatalf("partial abort state at %d: %v %v",stage,ctl,err)}
+  if err!=nil||ctl[0]!=uint64(1){t.Fatalf("abort rollback lost the in-flight fence at %d: %v %v",stage,ctl,err)}
  }
  c.failAfterStep=0
  abort,err:=c.Abort(ctx,runID,cycleID,fence,4,nil)
@@ -84,7 +84,7 @@ func TestAbortRejectsMalformedOrForeignFence(t *testing.T){
  forged.ID[0]^=0xff
  if _,err:=c.Abort(ctx,runID,cycleID,forged,4,nil);err==nil{t.Fatal("accepted foreign fence root")}
  ctl,err:=store.LoadCycleControl(ctx,[32]byte(runID))
- if err!=nil||ctl[0]!=uint64(0){t.Fatal("foreign fence mutated run")}
+ if err!=nil||ctl[0]!=uint64(1){t.Fatal("foreign fence changed the authenticated in-flight state")}
 }
 
 // Compile-time assertion: the existing coordinator store remains the one

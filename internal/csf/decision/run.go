@@ -54,6 +54,7 @@ func Run(input Input)(Result,error){
  }
  noProposals,aliases:=map[domain.ID]bool{},map[domain.ID]bool{}
  blocked:=map[domain.ID]bool{}
+ accessBlocked:=map[domain.ID]bool{}
  current:=map[domain.ID]int64{}
  for _,p:=range ordered{
   if p.noProposal{noProposals[p.id]=true;continue}
@@ -64,12 +65,24 @@ func Run(input Input)(Result,error){
    })
    continue
   }
-  p.blocked=p.amount>input.Snapshot.Available
   actor:=p.unit.Response.Actor[0]+":"+p.unit.Response.Actor[1]
-  assessment,err:=assess(d,p,true,p.blocked,input.Snapshot.ForbiddenActors[actor],refs["validators"])
+  canAccess,accessKnown:=input.Snapshot.AccessibleActors[actor]
+  forbidden,institutionKnown:=input.Snapshot.ForbiddenActors[actor]
+  if !accessKnown||!institutionKnown{
+   facet,reason:=uint8(1),"access.validator.missing"
+   if accessKnown{facet=4;reason="institution.validator.missing"}
+   result.Indeterminate=append(result.Indeterminate,Indeterminate{
+    Subject:p.id,SubjectDigest:p.unit.Response.Digest,SubjectKind:0,
+    Facet:facet,Validator:refs["validators"],Reason:reason,Evidence:[]any{},
+   })
+   continue
+  }
+  resourceBlocked:=p.amount>input.Snapshot.Available
+  assessment,err:=assess(d,p,resourceBlocked,canAccess,forbidden,refs["validators"])
   if err!=nil{return result,err}
   result.Assessments=append(result.Assessments,assessment)
-  blocked[p.id]=p.blocked
+  blocked[p.id]=resourceBlocked||!canAccess
+  accessBlocked[p.id]=!canAccess
   // Candidate provenance resolves the authentic ActionProposal unit root.
   source:=[]any{uint64(5),p.id[:],p.unit.Response.Digest[:]}
   claims:=p.unit.Response.Body[9].([]any)
@@ -199,6 +212,7 @@ func Run(input Input)(Result,error){
    c,ok:=bySource[p.id];if !ok{return result,ErrProvenance}
    disposition.CandidateID=c.ID
    switch{
+   case accessBlocked[p.id]:disposition.Status="REJECT";disposition.Reason="access.denied"
    case blocked[p.id]:disposition.Status="REJECT";disposition.Reason="resource.insufficient"
    case winners[c.ID]:
     disposition.Status="COMMIT";disposition.Reason="resource.allocated"

@@ -345,3 +345,40 @@ os novos testes de restauração de histórias forjadas:
 `WORK`, handler, settlement ou percepção; nenhum hash ou
 artefato pinado do codec/conformance mudou. A PR continua
 Draft, sem merge, e a próxima revisão é fase separada.
+
+## Sexta remediação de review — finding #22 (19/10/2026)
+
+**Lote congelado:** um finding `High`, #22 (reentrega duplicada de
+`SourceIngressReceipt`). **Base revisada:**
+`8681158b2da4f3e635712baa0dcee6a493bbb3a1`.
+
+- **#22 — um recibo por identidade causal.** Dentro da transação de
+  `Store.AppendIngress`, antes de escrever qualquer record, recibo
+  ou cursor, o adapter consulta a identidade no `input_ledger`.
+  Se a identidade já está publicada com bytes idênticos, a chamada
+  de um `Ledger` desatualizado é rejeitada sem mutação; reabrir o
+  ledger permite recuperar o recibo original. Bytes diferentes sob
+  a mesma identidade causam erro explícito de colisão.
+- **Recuperação fail-closed.** `verifyIngressProjections` rejeita
+  dois `SourceIngressReceipt` que referenciem o mesmo record ID,
+  ainda que suas sequências individuais sejam gapless. A
+  `inputledger.restore` não sobrescreve silenciosamente o
+  recibo anterior no mapa indexado pelo ID causal; reporta a
+  duplicata com erro específico.
+- **Regressões adversariais.** Duas instâncias de `InputLedger`
+  abertas antes do append reproduzem a reentrega idêntica e
+  confirmam que não é criado segundo recibo, que o cursor não muda
+  e que `Open`/`ReplayClock` continuam válidos. Há cobertura de
+  bytes conflitantes sob a mesma identidade e de legado adulterado
+  com dois recibos distintos para um único record ID.
+
+**TDD:** [regressões vermelhas antes do patch](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39358040730)
+comprovaram a segunda sequência e a projeção permissiva.
+[Suíte Go, conformance Go e TypeScript, recibos idênticos e diff
+check](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39358229359)
+e [conformance canônica](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39358234016)
+ficaram verdes no commit de correção.
+
+**Escopo preservado:** nenhum publisher `WORK`, settlement, handler,
+percepção nem modificação no codec/schema bundle. PR permanece
+Draft sem merge; a re-revisão é uma fase separada.

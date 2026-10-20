@@ -164,6 +164,9 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
    if err!=nil{return report,fmt.Errorf("replay zero-event WORK: %w",err)}
    current=successor
    report.ReplayedCommits++
+   eventIDs,ok:=journal[15].([]any)
+   if !ok{return report,errors.New("replayed WORK event ID list malformed")}
+   lastEventCounter+=len(eventIDs)
    continue
   }
   if len(planFields)!=4||planFields[0]!=uint64(1){return report,errors.New("unregistered replay cycle-plan variant")}

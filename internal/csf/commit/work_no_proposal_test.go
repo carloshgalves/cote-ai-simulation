@@ -362,3 +362,41 @@ func TestNoProposalWorkerResponsePermutationPreservesTerminalArtifacts(t *testin
   _=store;_=ledger
  }
 }
+
+func TestScheduledOccurrenceIsExplicitlyAdmittedToSealedFence(t *testing.T){
+ ctx:=context.Background()
+ var seeded domain.ID
+ c,store,ledger,cycle,fence,_:=noProposalWorkFixtureWithSetup(t,func(store *sqlite.Store,run domain.ID,bundle *policy.Bundle)error{
+  g:=validGenesis(t,bundle)
+  d:=identity.New(bundle)
+  origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+  value,_,err:=d.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+   []any{origin,uint64(0),uint64(0)});if err!=nil{return err}
+  seeded=domain.ID(value)
+  fields:=[]any{value[:],run[:],"schedule",int64(g.InitialInstant),
+   []any{int64(g.InitialInstant),uint64(0)},"test.occurrence",uint64(1),
+   g.Payload[16],uint64(0),origin,uint64(0),uint64(0),[]any{uint64(0)},[]any{uint64(0)}}
+  dg,_,err:=d.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,fields)
+  if err!=nil{return err}
+  raw,err:=codec.CanonicalPayload(append(cloneAny(fields),dg[:]));if err!=nil{return err}
+  return store.SeedGenesisOccurrence(ctx,seeded,run,
+   domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant},raw)
+ })
+ entries,ok:=fence.Fields[11].([]any)
+ if !ok||len(entries)!=3{t.Fatalf("fence lost due occurrence, admitted=%#v",fence.Fields[11])}
+ found:=false
+ for _,item:=range entries{
+  v,ok:=item.([]any);if !ok||len(v)!=5{t.Fatal("malformed source ref")}
+  if v[1]==uint64(2){
+   if !bytes.Equal(v[3].([]byte),seeded[:]){t.Fatal("wrong due occurrence admitted")}
+   found=true
+  }
+ }
+ if !found{t.Fatal("occurrence not in frozen admitted source cut")}
+ if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err==nil{
+  t.Fatal("slot-only handler settled occurrence without an explicit terminal lifecycle")
+ }
+ _,_,_,_,_,run:=ledger.Snapshot()
+ state,err:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil||state.Revision!=0{t.Fatal("failed closed WORK mutated clock",err)}
+}

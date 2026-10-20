@@ -23,6 +23,10 @@ func noProposalWorkFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger
 }
 func noProposalWorkFixtureWithSetup(t *testing.T,setup func(*sqlite.Store,domain.ID,*policy.Bundle)error)(*Coordinator,*sqlite.Store,*inputledger.Ledger,
  admission.Cycle,admission.Fence,string){
+ return noProposalWorkFixtureWithDelivery(t,setup,false)
+}
+func noProposalWorkFixtureWithDelivery(t *testing.T,setup func(*sqlite.Store,domain.ID,*policy.Bundle)error,reverse bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,
+ admission.Cycle,admission.Fence,string){
  t.Helper()
  ctx:=context.Background()
  c,store,ledger,run,bundle,path:=freshResourceWorkFixture(t)
@@ -33,6 +37,7 @@ func noProposalWorkFixtureWithSetup(t *testing.T,setup func(*sqlite.Store,domain
  cycleID,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
   []any{run[:],[]any{int64(state.Instant),uint64(0)}});if err!=nil{t.Fatal(err)}
  created:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+ responseQueue:=make([]inputledger.Response,0,2)
  for i,actor:=range []string{"a","b"}{
   round,err:=ledger.DeclareRound(ctx,"schedule",[2]string{"school",actor},[]string{"act"},
    domain.EligibilityCoordinate{NotBeforeInstant:state.Instant},created,0,uint32(i),0,[]any{uint64(0)})
@@ -53,6 +58,10 @@ func noProposalWorkFixtureWithSetup(t *testing.T,setup func(*sqlite.Store,domain
   response:=inputledger.Response{Kind:1,ID:domain.ID(id),Digest:digest,Canonical:canonical,Body:body,
    DispatchID:dispatch.ID,RunID:run,CycleID:domain.ID(cycleID),RoundID:round.ID,SlotID:dispatch.SlotID,
    Actor:dispatch.Actor,EffectiveAt:dispatch.EffectiveAt,SubmittedAgainstRevision:dispatch.BaseRevision}
+  responseQueue=append(responseQueue,response)
+ }
+ if reverse{responseQueue[0],responseQueue[1]=responseQueue[1],responseQueue[0]}
+ for _,response:=range responseQueue{
   if err:=ledger.Respond(ctx,response);err!=nil{t.Fatal(err)}
  }
  var base domain.Digest;copy(base[:],g.Payload[16].([]any)[3].([]byte))
@@ -315,5 +324,41 @@ func TestReplayClockAdvanceThenNoProposalWorkInOneDurableHistory(t *testing.T){
  report,err:=reopened.ReplayClock(ctx,[32]byte(run),bundle)
  if err!=nil||report.ReplayedCommits!=2||report.ReplayedEvents!=3||report.ReconstructedClock.Revision!=2{
   t.Fatalf("mixed journal does not replay: %+v %v",report,err)
+ }
+}
+
+func TestNoProposalWorkerResponsePermutationPreservesTerminalArtifacts(t *testing.T){
+ ctx:=context.Background()
+ type output struct{fence,commit []byte;events,decisions [][]byte}
+ var baseline *output
+ for _,reverse:=range []bool{false,true}{
+  c,store,ledger,cycle,fence,path:=noProposalWorkFixtureWithDelivery(t,nil,reverse)
+  terminal,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);if err!=nil{t.Fatal(err)}
+  db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+  result:=&output{fence:fence.Canonical,commit:terminal.Canonical}
+  for _,query:=range []struct{stmt string;out *[][]byte}{
+   {"SELECT canonical FROM event_store ORDER BY id",&result.events},
+   {"SELECT canonical FROM decision_ledger WHERE id NOT IN (?,?) ORDER BY id",&result.decisions},
+  }{
+   var rows *sql.Rows
+   if query.stmt=="SELECT canonical FROM event_store ORDER BY id"{
+    rows,err=db.QueryContext(ctx,query.stmt)
+   }else{
+    rows,err=db.QueryContext(ctx,query.stmt,fence.ID[:],terminal.Identity[:])
+   }
+   if err!=nil{t.Fatal(err)}
+   for rows.Next(){var raw []byte;if err:=rows.Scan(&raw);err!=nil{t.Fatal(err)};*query.out=append(*query.out,raw)}
+   if err:=rows.Err();err!=nil{t.Fatal(err)};rows.Close()
+  }
+  db.Close()
+  if baseline==nil{baseline=result;continue}
+  if !bytes.Equal(result.fence,baseline.fence)||!bytes.Equal(result.commit,baseline.commit){
+   t.Fatal("worker response arrival order changed fenced or terminal canonical bytes")
+  }
+  for i,pair:=range []struct{a,b [][]byte}{{result.events,baseline.events},{result.decisions,baseline.decisions}}{
+   if len(pair.a)!=len(pair.b){t.Fatalf("permutation changed artifact set %d",i)}
+   for j:=range pair.a{if !bytes.Equal(pair.a[j],pair.b[j]){t.Fatalf("worker arrival order altered artifact %d/%d",i,j)}}
+  }
+  _=store;_=ledger
  }
 }

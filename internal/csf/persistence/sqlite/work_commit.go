@@ -19,7 +19,7 @@ import (
 // genuine NoProposal slot responses, one terminal decision each, and no event,
 // outbox, trigger or reducer effect. Unsupported eventful WORK fails CLOSED.
 func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
- if b.Mode>2{return errors.New("unregistered WORK terminal variant")}
+ if b.Mode>3{return errors.New("unregistered WORK terminal variant")}
  if len(b.ExpectedClock)==0||len(b.ResultClock)==0||len(b.Journal.Canonical)==0{
   return errors.New("incomplete WORK publication batch")
  }
@@ -137,10 +137,17 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  seenRounds:=map[domain.ID]bool{}
  for _,p:=range pending{
   if p.Eligibility.Compare(due)>0{continue}
-  if !admittedRounds[p.ID]{return errors.New("WORK has pending non-slot causal work without a source lifecycle handler")}
+  if b.Mode==3{
+   sys,ok:=fence[11].([]any)
+   if !ok||len(sys)!=1{return errors.New("system WORK source cardinality invalid")}
+   entry,ok:=sys[0].([]any);if !ok||len(entry)!=5{return errors.New("system fence unit malformed")}
+   source,ok:=entry[3].([]byte)
+   if !ok||len(source)!=32||!equalBytes(source,p.ID[:]){return errors.New("system WORK cannot skip another due unit")}
+  }else if !admittedRounds[p.ID]{return errors.New("WORK has pending non-slot causal work without a source lifecycle handler")}
   seenRounds[p.ID]=true
  }
- if len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
+ if b.Mode!=3&&len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
+ if b.Mode==3&&len(admittedRounds)!=0{return errors.New("system-only handler cannot omit a due decision round")}
  // A selected RoundDeclaration is indivisible: a subset of its slots
  // cannot become a terminal cycle, since the stranded slot would then
  // remain eligible at a clock ordinal that has already advanced.
@@ -190,6 +197,8 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  }
  if b.Mode==1{
   if err:=verifySingleResourceTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
+ }else if b.Mode==3{
+  if err:=verifySystemTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
  }else if b.Mode==2{
   if err:=verifyTwoResourceTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,genesisFields,allowed,expectedSlots);err!=nil{return err}
  }else{
@@ -296,6 +305,17 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  }
  if b.Mode==1{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.ResourceCandidate.Identity[:],b.ResourceCandidate.Canonical);err!=nil{return err}
+ }
+ if b.Mode==3{
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.SystemCandidate.Identity[:],b.SystemCandidate.Canonical);err!=nil{return err}
+  for _,item:=range b.SystemSuccessors{
+   fields,err:=strictFull(item,15);if err!=nil{return err}
+   if len(fields)!=15{return errors.New("invalid deferred occurrence successor")}
+   eligibility,life,err:=validateScheduledOccurrence(b.RunID,item.Identity,item.Canonical)
+   if err!=nil||life!=0{return errors.New("invalid non-pending deferred successor")}
+   if _,err:=tx.ExecContext(ctx,"INSERT INTO scheduled_occurrences(id,run_id,eligibility_instant,eligibility_ordinal,lifecycle,canonical) VALUES(?,?,?,?,0,?)",
+    item.Identity[:],b.RunID[:],int64(eligibility.NotBeforeInstant),uint64(eligibility.NotBeforeCycleOrdinal),item.Canonical);err!=nil{return err}
+  }
  }
  if b.Mode==2{
   for _,proof:=range b.ContestProofs{

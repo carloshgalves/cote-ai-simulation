@@ -3,7 +3,6 @@ package sqlite
 import (
  "bytes"
  "context"
- "database/sql"
  "errors"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
@@ -17,7 +16,7 @@ import (
 // verifySingleResourceTerminal runs under the *same* SQLite transaction as
 // the source settlement, EventStore, journal, world revision and clock CAS.
 // It never delegates world truth to the provisional decision output.
-func verifySingleResourceTerminal(ctx context.Context,tx *sql.Tx,b ports.WorkBatch,
+func verifySingleResourceTerminal(ctx context.Context,tx queryOne,b ports.WorkBatch,
  prior,next clock.State,fence,journal,predecessor,revision []any,
  allowed map[string]any,expectedSlots map[domain.ID]map[string]bool)error{
  if len(b.Decisions)!=1||len(b.Events)!=2||len(expectedSlots)!=1{

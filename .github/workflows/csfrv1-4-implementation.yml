@@ -1,0 +1,51 @@
+name: CSFRV1-4 Decision Kernel Checkpoint
+
+on:
+  push:
+    branches: [feat/csfrv1-4-minimal-decision-kernel]
+  pull_request:
+    paths:
+      - "internal/csf/decision/**"
+      - "internal/csf/extensions/testresourcev1/**"
+      - "cmd/csf-resource/**"
+      - "docs/tickets/csf-runtime-v1/04-implementation-checkpoint.md"
+
+permissions:
+  contents: read
+
+jobs:
+  resource-decision:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Diff whitespace check
+        run: |
+          git fetch --no-tags --depth=1 origin 43574722e3f22eb629da47e17bf573dad4a68369
+          git diff --check 43574722e3f22eb629da47e17bf573dad4a68369 HEAD
+      - name: Deterministic decision kernel tests
+        run: go test -count=1 ./internal/csf/decision/... ./internal/csf/extensions/testresourcev1/...
+      - name: Full Go regression suite
+        run: go test ./...
+      - name: Go canonical conformance
+        run: go run ./cmd/csf-harness --bundle docs/architecture/canonical-codec-v1-bundle --report /tmp/csf-go.json
+      - name: TypeScript canonical conformance
+        run: node --no-warnings --experimental-loader ./tools/csf-conformance-ts/loader.mjs tools/csf-conformance-ts/runner.ts docs/architecture/canonical-codec-v1-bundle /tmp/csf-ts.json
+      - name: Require identical canonical receipts
+        run: cmp /tmp/csf-go.json /tmp/csf-ts.json
+      - name: Generate persisted provisional scenario
+        run: |
+          mkdir -p /tmp/csfrv1-4
+          go run ./cmd/csf-resource --output /tmp/csfrv1-4/provisional.cbor
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: csfrv1-4-provisional-scenario
+          path: /tmp/csfrv1-4/provisional.cbor
+          retention-days: 30

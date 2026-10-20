@@ -283,12 +283,14 @@ func assess(d identity.Deriver,p prepared,known,blocked,forbidden bool,validator
   []any{uint64(0),uint64(0),uint64(2),"physical.possible",[]any{},validator},
   []any{uint64(1),uint64(0),uint64(2),"access.granted",[]any{},validator},
   []any{uint64(2),status,uint64(0),reason,[]any{},validator},
+  []any{uint64(3),uint64(2),uint64(2),"temporal.not-applicable",[]any{},validator},
  }
  if forbidden{
   facets=append(facets,[]any{uint64(4),uint64(1),uint64(1),"institution.prohibited",[]any{},validator})
  }else{
   facets=append(facets,[]any{uint64(4),uint64(0),uint64(2),"institution.allowed",[]any{},validator})
  }
+ facets=append(facets,[]any{uint64(5),uint64(2),uint64(2),"legal.not-applicable",[]any{},validator})
  subj:=[]any{uint64(0),p.id[:],p.unit.Response.Digest[:]}
  fields:=[]any{subj,facets}
  dg,e:=digest(d,"cote.csf.digest.affordance-assessment","cote.csf.schema.affordance-assessment.body",fields)

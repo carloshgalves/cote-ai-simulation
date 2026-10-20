@@ -60,8 +60,8 @@ func TestLastResourceStableAcrossWorkerPermutation(t *testing.T){
  // Institutional prohibition records a violation without simulating a
  // physical force or ruling out actor A.
  fac,ok:=baseline.Assessments[0].Fields[1].([]any)
- if !ok||len(fac)!=4{t.Fatal("missing typed prohibition facet")}
- prohibited:=fac[3].([]any)
+ if !ok||len(fac)!=6{t.Fatal("missing typed prohibition facet")}
+ prohibited:=fac[4].([]any)
  if prohibited[0]!=uint64(4)||prohibited[1]!=uint64(1)||prohibited[2]!=uint64(1){t.Fatal("institutional prohibition incorrectly blocks physical possibility")}
  in.Units[0],in.Units[1]=in.Units[1],in.Units[0]
  permuted,e:=Run(in);if e!=nil{t.Fatal(e)}
@@ -143,4 +143,74 @@ func TestAuditBytesPersistAndReopenWithoutWorldMutation(t *testing.T){
  fields:=v.([]any)
  if fields[0]!="csfrv1-4.provisional"||!bytes.Equal(again,out.Canonical)||
  fields[len(fields)-2]!=uint64(0){t.Fatal("durable provisional audit corrupted")}
+}
+
+func TestNoProposalSettlesOnlyProvisionallyWithoutCandidate(t *testing.T){
+ in,a,b:=fixture(t,true)
+ d:=identity.New(in.Bundle)
+ id,_,e:=d.Sum("cote.csf.id.no-proposal","cote.csf.schema.slot-response-id-preimage",1,[]any{a.DispatchID[:],uint64(1)})
+ if e!=nil{t.Fatal(e)}
+ body:=[]any{id[:],a.DispatchID[:],in.RunID[:],in.CycleID[:],a.RoundID[:],a.SlotID,
+  []any{"school","a"},int64(a.EffectiveAt),uint64(a.SubmittedAgainstRevision),uint64(0)}
+ dg,_,e:=d.Sum("cote.csf.digest.no-proposal-unit","cote.csf.schema.no-proposal.body",1,[]any{body})
+ if e!=nil{t.Fatal(e)}
+ raw,e:=codec.CanonicalPayload(append(append([]any{},body...),dg[:]))
+ if e!=nil{t.Fatal(e)}
+ no:=inputledger.Response{Kind:1,ID:domain.ID(id),DispatchID:a.DispatchID,RunID:a.RunID,CycleID:a.CycleID,RoundID:a.RoundID,
+  SlotID:a.SlotID,Actor:a.Actor,EffectiveAt:a.EffectiveAt,SubmittedAgainstRevision:a.SubmittedAgainstRevision,
+  Body:body,Digest:dg,Canonical:raw}
+ in.Admitted=[]domain.ID{no.ID,b.ID}
+ in.Units=[]Unit{{Response:b,ProducerScope:"exam"},{Response:no,ProducerScope:"exam"}}
+ out,e:=Run(in);if e!=nil{t.Fatal(e)}
+ if len(out.Candidates)!=1||len(out.Conflicts)!=0||len(out.Draws)!=0||len(out.Dispositions)!=2||
+  out.Dispositions[0].Status!="NO_PROPOSAL"||out.Dispositions[1].Status!="COMMIT"||out.PostAvailable!=0{
+  t.Fatalf("NoProposal got an illegitimate candidate or consumed two units: %+v",out)
+ }
+}
+
+func TestHistoricalAliasKeepsIndependentSourceUnit(t *testing.T){
+ in,a,b:=fixture(t,true)
+ b.Body[6]=[]any{"school","a"}
+ b.Actor=a.Actor
+ a.Body[17]=[]any{uint64(1),"same-logical-operation"}
+ b.Body[17]=[]any{uint64(1),"same-logical-operation"}
+ d:=identity.New(in.Bundle)
+ for _,resp:=range []*inputledger.Response{&a,&b}{
+  h,_,e:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,[]any{resp.Body})
+  if e!=nil{t.Fatal(e)}
+  resp.Digest=h
+  resp.Canonical,e=codec.CanonicalPayload(append(append([]any{},resp.Body...),h[:]))
+  if e!=nil{t.Fatal(e)}
+ }
+ tmp:=in
+ tmp.Units=[]Unit{{Response:a,ProducerScope:"exam"}}
+ tmp.Admitted=[]domain.ID{a.ID}
+ prepared,e:=validateResponse(d,tmp,tmp.Units[0]);if e!=nil{t.Fatal(e)}
+ refs,e:=policyRefs(in.Bundle);if e!=nil{t.Fatal(e)}
+ candidates,e:=resolveAliases(d,[]prepared{prepared},nil,refs["idempotency"])
+ if e!=nil{t.Fatal(e)}
+ binding:=HistoryBinding{Namespace:candidates[0].ns,LogicalDigest:candidates[0].logical,CanonicalUnit:a.ID}
+ in.Admitted=[]domain.ID{b.ID}
+ in.Units=[]Unit{{Response:b,ProducerScope:"exam"}}
+ in.History=[]HistoryBinding{binding}
+ out,e:=Run(in);if e!=nil{t.Fatal(e)}
+ if len(out.Candidates)!=0||len(out.Dispositions)!=1||out.Dispositions[0].Status!="DEDUPLICATED"||
+ out.Dispositions[0].Subject!=b.ID||out.Dispositions[0].CanonicalUnit!=a.ID||out.PostAvailable!=1{
+  t.Fatalf("historical alias was pre-consumed or settled as new action: %+v",out)
+ }
+}
+
+func TestUnregisteredActionCannotSilentlyBecomeSatisfied(t *testing.T){
+ in,a,_:=fixture(t,true)
+ a.Body[4]="unknown.action"
+ d:=identity.New(in.Bundle)
+ h,_,e:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,[]any{a.Body})
+ if e!=nil{t.Fatal(e)}
+ a.Digest=h
+ a.Canonical,e=codec.CanonicalPayload(append(append([]any{},a.Body...),h[:]))
+ if e!=nil{t.Fatal(e)}
+ in.Admitted=[]domain.ID{a.ID};in.Units=[]Unit{{Response:a,ProducerScope:"exam"}}
+ out,e:=Run(in)
+ if !errors.Is(e,ErrIndeterminate)||len(out.Indeterminate)!=1||out.Indeterminate[0].Subject!=a.ID||
+ len(out.Dispositions)!=0||out.PostAvailable!=1{t.Fatal("unregistered handler granted action by default")}
 }

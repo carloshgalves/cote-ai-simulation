@@ -19,7 +19,7 @@ import (
 // genuine NoProposal slot responses, one terminal decision each, and no event,
 // outbox, trigger or reducer effect. Unsupported eventful WORK fails CLOSED.
 func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
- if b.Mode>1{return errors.New("unregistered WORK terminal variant")}
+ if b.Mode>2{return errors.New("unregistered WORK terminal variant")}
  if len(b.ExpectedClock)==0||len(b.ResultClock)==0||len(b.Journal.Canonical)==0{
   return errors.New("incomplete WORK publication batch")
  }
@@ -87,7 +87,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  if !sameCanonical(journal[10],fence[17])||!sameCanonical(journal[11],noProposalIDs(fence)){
   return errors.New("WORK journal does not match sealed source membership")
  }
- if !sameCanonical(journal[7],b.BaseStateHash[:])||!sameCanonical(journal[9],func()[]byte{if b.Mode==1{return b.ResultStateHash[:]}else{return b.BaseStateHash[:]}}())||
+ if !sameCanonical(journal[7],b.BaseStateHash[:])||!sameCanonical(journal[9],func()[]byte{if b.Mode!=0{return b.ResultStateHash[:]}else{return b.BaseStateHash[:]}}())||
   journal[8]!=uint64(next.Revision)||journal[22]!=uint64(next.NextLogicalSequence){
   return errors.New("WORK revision or next sequence not from current state")
  }
@@ -190,6 +190,8 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  }
  if b.Mode==1{
   if err:=verifySingleResourceTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
+ }else if b.Mode==2{
+  if err:=verifyTwoResourceTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,genesisFields,allowed,expectedSlots);err!=nil{return err}
  }else{
  pairing:=make([]any,0,len(units))
  coveredSlots:=map[domain.ID]map[string]bool{}
@@ -295,6 +297,11 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  if b.Mode==1{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.ResourceCandidate.Identity[:],b.ResourceCandidate.Canonical);err!=nil{return err}
  }
+ if b.Mode==2{
+  for _,proof:=range b.ContestProofs{
+   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",proof.Identity[:],proof.Canonical);err!=nil{return err}
+  }
+ }
  for _,item:=range b.Decisions{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",item.Identity[:],item.Canonical);err!=nil{return err}
  }
@@ -307,7 +314,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.Journal.Identity[:],b.Journal.Canonical);err!=nil{return err}
  if err:=failClock(b.FailAfterStep,3);err!=nil{return err}
  outputHash:=b.BaseStateHash
- if b.Mode==1{outputHash=b.ResultStateHash}
+ if b.Mode!=0{outputHash=b.ResultStateHash}
  if _,err:=tx.ExecContext(ctx,"INSERT INTO world_revisions(revision,state_hash,canonical) VALUES(?,?,?)",uint64(next.Revision),outputHash[:],b.RevisionCanonical);err!=nil{return err}
  if err:=failClock(b.FailAfterStep,4);err!=nil{return err}
  updated,err:=tx.ExecContext(ctx,"UPDATE clock_states SET canonical=? WHERE run_id=? AND canonical=?",b.ResultClock,b.RunID[:],b.ExpectedClock)

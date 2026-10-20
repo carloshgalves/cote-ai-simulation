@@ -327,19 +327,26 @@ func (l *Ledger) restore(records []ports.CanonicalRecord) error {
 		bySource[receipt.source] = append(bySource[receipt.source], receipt)
 	}
 	for source, list := range bySource {
-		if !l.sources[source] {
-			return fmt.Errorf("ingress receipt references undeclared source %q", source)
-		}
-		sort.Slice(list, func(i, j int) bool { return list[i].seq < list[j].seq })
-		for i, receipt := range list {
+  if !l.sources[source] {return fmt.Errorf("ingress receipt references undeclared source %q",source)}
+  sort.Slice(list,func(i,j int)bool{return list[i].seq<list[j].seq})
+  var lastClosed domain.EligibilityCoordinate
+  hasClosure:=false
+  sourceFinal:=false
+  for i,receipt:=range list{
+   // Reopening and replay must reject malformed source histories even when
+   // each individually authenticated SourceIngressReceipt is valid.
+   if sourceFinal{return fmt.Errorf("source %q ingressed after a final SourceClosure",source)}
 			if receipt.seq != uint64(i) {
 				return fmt.Errorf("source %q ingress prefix has a gap at %d", source, i)
 			}
 			if input, ok := inputs[receipt.id]; ok {
 				if receipt.kind != 1 || receipt.digest != input.Digest || input.Fields[2] != source {
-					return errors.New("persisted input receipt does not match its record")
-				}
-				input.Receipt = IngressReceipt{SourceID: source, Sequence: receipt.seq, RecordRef: [3]any{receipt.kind, input.ID[:], input.Digest[:]}, Canonical: receipt.bytes}
+     return errors.New("persisted input receipt does not match its record")
+    }
+    if hasClosure&&coordinate(input.Fields[9]).Compare(lastClosed)<=0{
+     return errors.New("persisted input was not normalized above a prior source closure")
+    }
+    input.Receipt = IngressReceipt{SourceID: source, Sequence: receipt.seq, RecordRef: [3]any{receipt.kind, input.ID[:], input.Digest[:]}, Canonical: receipt.bytes}
 				l.inputs[source] = append(l.inputs[source], input)
 				l.inputByID[input.ID] = input
 				attachedIngress[input.ID] = true
@@ -347,9 +354,14 @@ func (l *Ledger) restore(records []ports.CanonicalRecord) error {
 			}
 			if closure, ok := closures[receipt.id]; ok {
 				if receipt.kind != 2 || receipt.digest != closure.Digest || closure.Fields[2] != source || closure.Fields[6] != receipt.seq {
-					return errors.New("persisted closure receipt does not match its record")
-				}
-				closure.Receipt = IngressReceipt{SourceID: source, Sequence: receipt.seq, RecordRef: [3]any{receipt.kind, closure.ID[:], closure.Digest[:]}, Canonical: receipt.bytes}
+     return errors.New("persisted closure receipt does not match its record")
+    }
+    at:=coordinate(closure.Fields[4])
+    if hasClosure&&at.Compare(lastClosed)<0{return errors.New("persisted source closure regressed")}
+    lastClosed=at
+    hasClosure=true
+    sourceFinal=closure.Fields[5]==true
+    closure.Receipt = IngressReceipt{SourceID: source, Sequence: receipt.seq, RecordRef: [3]any{receipt.kind, closure.ID[:], closure.Digest[:]}, Canonical: receipt.bytes}
 				l.closures[source] = append(l.closures[source], closure)
 				l.closureByID[closure.ID] = closure
 				attachedIngress[closure.ID] = true

@@ -482,7 +482,11 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
 		return err
 	}
 	defer tx.Rollback()
-	var current uint64
+	// Compare projections with the canonical ledger while the same writer
+ // transaction holds the admission boundary. A stale SQL cursor must not
+ // mint a gapless-looking but causally invalid sequence.
+ if err:=verifyIngressProjections(ctx,tx);err!=nil{return err}
+ var current uint64
 	err = tx.QueryRowContext(ctx, `SELECT next_seq FROM input_source_cursors WHERE source_id=?`, source).Scan(&current)
 	if err != nil && err != sql.ErrNoRows {
 		return err
@@ -501,6 +505,7 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
   if err:=tx.QueryRowContext(ctx,"SELECT (SELECT count(*) FROM genesis_records)+(SELECT count(*) FROM clock_states)+(SELECT count(*) FROM decision_ledger)").Scan(&authorityCount);err!=nil{return err}
   if authorityCount!=0{return parseErr}
  }else{
+  if err:=validateCausalIngress(ctx,tx,source,sequence,record,receipt,entry);err!=nil{return err}
   if err:=verifyIngressClockFloor(ctx,tx,entry.RunID,entry.Coordinate);err!=nil{return err}
  }
 	// A second Ledger opened before closure/fence can hold a stale source
@@ -540,7 +545,8 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
 }
 
 func (s *Store) NextIngressSequence(ctx context.Context, source string) (uint64, error) {
-	var sequence uint64
+ if err:=verifyIngressProjections(ctx,s.db);err!=nil{return 0,err}
+ var sequence uint64
 	err := s.db.QueryRowContext(ctx, `SELECT next_seq FROM input_source_cursors WHERE source_id=?`, source).Scan(&sequence)
 	if err == sql.ErrNoRows {
 		return 0, nil

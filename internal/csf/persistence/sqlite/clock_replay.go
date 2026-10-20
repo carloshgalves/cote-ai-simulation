@@ -94,6 +94,7 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  // and gapless source ingress sequences are restored from canonical bytes.
  restored,err:=inputledger.Open(ctx,domain.ID(runID),bundle,s)
  if err!=nil{return report,fmt.Errorf("replay input ledger integrity: %w",err)}
+ if err:=verifyIngressProjections(ctx,s.db);err!=nil{return report,fmt.Errorf("replay ingress SQL projection diverged: %w",err)}
  _,_,_,rounds,_,_:=restored.Snapshot()
  for _,round:=range rounds{
   hash:=identity.OpaqueContentHash(round.Canonical)

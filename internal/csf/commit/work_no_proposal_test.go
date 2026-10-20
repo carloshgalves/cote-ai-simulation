@@ -15,6 +15,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 func noProposalWorkFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,
  admission.Cycle,admission.Fence,string){
@@ -114,6 +115,7 @@ func TestNoProposalWorkAtomicityAcrossAllFailurePoints(t *testing.T){
 var _=clock.State{}
 
 func TestNoProposalWorkRejectsTamperedTerminalRecordAndRecovers(t *testing.T){
+ bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
  cases:=[]struct{
   name string
   mutate func(*ports.WorkBatch)
@@ -123,6 +125,16 @@ func TestNoProposalWorkRejectsTamperedTerminalRecordAndRecovers(t *testing.T){
   }},
   {"decision-body",func(b *ports.WorkBatch){
    b.Decisions[0].Canonical=[]byte{0x80}
+  }},
+  {"policy-forgery-with-valid-record-digest",func(b *ports.WorkBatch){
+   raw,e:=codec.StrictDecodePayload(b.Decisions[0].Canonical);if e!=nil{t.Fatal(e)}
+   fields:=raw.([]any)
+   fields[9]=[]any{"rogue-validator-v1",uint64(1),make([]byte,32)}
+   digest,_,e:=identity.New(bundle).Sum("cote.csf.digest.decision-record",
+    "cote.csf.schema.decision-record.body",1,fields[:15])
+   if e!=nil{t.Fatal(e)}
+   b.Decisions[0].Canonical,e=codec.CanonicalPayload(append(cloneAny(fields[:15]),digest[:]))
+   if e!=nil{t.Fatal(e)}
   }},
   {"commit-batch-digest",func(b *ports.WorkBatch){
    b.Journal.Canonical=[]byte{0x80}

@@ -54,3 +54,30 @@ func LastUnit(bundle *policy.Bundle)(decision.Input,error){
    ForbiddenActors:map[string]bool{"school:a":true}},
   Admitted:[]domain.ID{a.ID,b.ID},Units:[]decision.Unit{{Response:a,ProducerScope:"exam"},{Response:b,ProducerScope:"exam"}}},nil
 }
+
+// ProposalForDispatch uses the exact durable dispatch identity, actor, round
+// and frozen revision. No handler may invent a slot or rebalance proposals
+// based on their arrival order.
+func ProposalForDispatch(bundle *policy.Bundle,dispatch inputledger.Dispatch)(inputledger.Response,error){
+ r,err:=Proposal(bundle,dispatch.RunID,dispatch.CycleID,dispatch.Actor[1],dispatch.SlotID)
+ if err!=nil{return r,err}
+ d:=identity.New(bundle)
+ id,_,err:=d.Sum("cote.csf.id.action-proposal","cote.csf.schema.slot-response-id-preimage",1,[]any{dispatch.ID[:],uint64(0)})
+ if err!=nil{return r,err}
+ r.Body[0]=id[:]
+ r.Body[1]=dispatch.ID[:]
+ r.Body[6]=[]any{dispatch.Actor[0],dispatch.Actor[1]}
+ r.Body[11]=int64(dispatch.EffectiveAt)
+ r.Body[13]=dispatch.RoundID[:]
+ r.Body[14]=dispatch.SlotID
+ r.Body[15]=uint64(dispatch.BaseRevision)
+ dig,_,err:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,[]any{r.Body})
+ if err!=nil{return r,err}
+ raw,err:=codec.CanonicalPayload(append(append([]any(nil),r.Body...),dig[:]))
+ if err!=nil{return r,err}
+ r.ID=domain.ID(id);r.DispatchID=dispatch.ID;r.RoundID=dispatch.RoundID
+ r.Actor=dispatch.Actor;r.EffectiveAt=dispatch.EffectiveAt
+ r.SubmittedAgainstRevision=dispatch.BaseRevision
+ r.Canonical=raw;r.Digest=dig
+ return r,nil
+}

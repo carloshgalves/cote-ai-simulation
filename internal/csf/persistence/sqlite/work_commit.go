@@ -118,6 +118,11 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   uint64(plan.OriginOrdinal)!=uint64(next.LastOrdinal){
   return errors.New("WORK source coordinate not selected by canonical clock")
  }
+ committed,err:=countWorkAt(ctx,tx,b.RunID,int64(prior.Instant))
+ if err!=nil{return err}
+ if clock.CascadeExceeded(committed){
+  return errors.New("CASCADE_LIMIT: terminal WORK cannot exceed pinned same-instant count; publish CycleAbortRecord")
+ }
  cohort,ok:=fence[10].([]any)
  if !ok||len(cohort)!=2{return errors.New("WORK fence cohort missing")}
  rounds,ok:=cohort[1].([]any)

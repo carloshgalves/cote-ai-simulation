@@ -20,7 +20,7 @@ func root(tag,schema string,value any)(domain.Digest,error){
 
 // ConsumedRoundEvent is a SOURCE_LIFECYCLE (phase=2) event ordered by the
 // canonical round ID. Its payload and source-input refs contain exactly the
-// NoProposal units that close every declared slot, not observer-visible
+// slot response units that close every declared slot, not observer-visible
 // source material or arbitrarily supplied author metadata.
 func ConsumedRoundEvent(run,cycle,round domain.ID,
  instant domain.SimulationInstant,revision domain.WorldRevision,
@@ -29,9 +29,11 @@ func ConsumedRoundEvent(run,cycle,round domain.ID,
  if len(sourceRefs)==0{return out,errors.New("cannot consume a round without committed slot roots")}
  for _,v:=range sourceRefs{
   r,ok:=v.([]any)
-  if !ok||len(r)!=4||r[0]!=uint64(0)||r[1]!=uint64(1){
-   return out,errors.New("round lifecycle requires exact NoProposal input references")
+  if !ok||len(r)!=4||r[0]!=uint64(0){
+   return out,errors.New("round lifecycle requires exact slot response references")
   }
+  kind,valid:=r[1].(uint64)
+  if !valid||kind>1{return out,errors.New("round lifecycle slot response kind invalid")}
   id,ok:=r[2].([]byte);if !ok||len(id)!=32{return out,errors.New("invalid source unit ID")}
   h,ok:=r[3].([]byte);if !ok||len(h)!=32{return out,errors.New("invalid source unit digest")}
  }

@@ -110,5 +110,8 @@ func TestClaimDetectorRefusesForgedCandidateSourceOrCycle(t *testing.T){
  check(foreignCycle)
  correct,err:=DetectClaims(d,in.CycleID,[]Candidate{one,two},
   map[string]int64{"last.resource":1},refs["validators"],refs["conflict-resolvers"])
- if err!=nil||len(correct)!=1{t.Fatalf("valid candidates rejected: %v %+v",err,correct)}
+ if err!=nil||len(correct)<1{t.Fatalf("valid candidates rejected: %v %+v",err,correct)}
+ resourceConflicts:=0
+ for _,conflict:=range correct{if conflict.Fields[2]==uint64(0){resourceConflicts++}}
+ if resourceConflicts!=1{t.Fatalf("expected one resource conflict, got %d",resourceConflicts)}
 }

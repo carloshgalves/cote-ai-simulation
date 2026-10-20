@@ -416,8 +416,12 @@ func (s *Store) AppendFenceIfPrefix(ctx context.Context, fence ports.CanonicalRe
     // not bypass the cycle-control transition.
     next,err:=admitTerminalFence(ctx,tx,fence);if err!=nil{return err}
     if next!=nil{
-        opt:=next[1].([]any)
-        runBytes:=opt[1].([]byte)
+        // CycleControlState is indexed by RUN, not by cycle identity.
+        // The control payload's optional cycle ID must never be mistaken for
+        // its owning run key.
+        decoded,err:=codec.StrictDecodePayload(fence.Canonical);if err!=nil{return err}
+        fields:=decoded.([]any)
+        runBytes:=fields[0].([]byte)
         var run [32]byte;copy(run[:],runBytes)
         if err:=storeCycleControl(ctx,tx,run,next);err!=nil{return err}
     }

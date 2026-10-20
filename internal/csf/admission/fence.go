@@ -62,6 +62,9 @@ func signedInstant(v any) (int64,bool) {
 }
 
 func Derive(bundle *policy.Bundle, ledger *inputledger.Ledger, cycle Cycle, policies Policies) (Fence, error) {
+ return DeriveWithContext(context.Background(),bundle,ledger,cycle,policies)
+}
+func DeriveWithContext(ctx context.Context,bundle *policy.Bundle,ledger *inputledger.Ledger,cycle Cycle,policies Policies)(Fence,error){
 	sources, inputs, closures, rounds, slots, runID := ledger.Snapshot()
 	d := identity.New(bundle)
 	if err := verifyInputs(d, inputs); err != nil {
@@ -157,6 +160,13 @@ func Derive(bundle *policy.Bundle, ledger *inputledger.Ledger, cycle Cycle, poli
 			units = append(units, unit{eligibility: eligibility, kind: 1, source: input.Receipt.SourceID, id: input.ID, digest: input.Digest})
 		}
 	}
+ system,err:=ledger.SystemUnits(ctx,cycleAt)
+ if err!=nil{return Fence{},err}
+ for _,item:=range system{
+  if item.Kind!=2&&item.Kind!=3{return Fence{},errors.New("unregistered system source kind")}
+  if item.Eligibility.Compare(cycleAt)>0{return Fence{},errors.New("system source exceeds admission coordinate")}
+  units=append(units,unit{eligibility:item.Eligibility,kind:item.Kind,source:item.Source,id:item.ID,digest:item.Digest})
+ }
 	sort.Slice(units, func(i, j int) bool { return units[i].less(units[j]) })
 	unitValues := make([]any, len(units))
 	for i, u := range units {
@@ -468,7 +478,7 @@ func (c *Coordinator) AdmitThenEvaluate(ctx context.Context, bundle *policy.Bund
 	err := ledger.WithAdmissionBoundary(func() error {
 		view, prefix, err := ledger.AdmissionView(ctx, bundle)
 		if err != nil { return err }
-		derived, err := Derive(bundle, view, cycle, policies)
+		derived, err := DeriveWithContext(ctx,bundle,view,cycle,policies)
 		if err != nil { return err }
 		if c.log == nil || c.log.store == nil { return errors.New("admission fence store is required") }
 		conditional, ok := c.log.store.(ports.PrefixConditionalFenceStore)

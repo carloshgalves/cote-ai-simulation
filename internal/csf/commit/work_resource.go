@@ -37,6 +37,7 @@ func (c *Coordinator) CommitSingleResource(ctx context.Context,ledger *inputledg
  if state.Revision!=cycle.BaseRevision||state.Instant!=cycle.Instant||
   state.LastOrdinal>=int64(cycle.Ordinal)||state.Revision==domain.WorldRevision(math.MaxUint64)||
   cycle.Ordinal>math.MaxInt64{return empty,errors.New("stale resource cycle coordinate")}
+ if abort,hit,err:=c.abortIfCascadeExceeded(ctx,run,cycle,fence);hit||err!=nil{return abort,err}
  before,hash,err:=c.store.LoadWorldState(ctx,uint64(state.Revision));if err!=nil{return empty,err}
  if hash!=cycle.BaseStateHash{return empty,errors.New("resource base hash differs from fence")}
  stock,err:=reducer.DecodeStock(before);if err!=nil{return empty,err}

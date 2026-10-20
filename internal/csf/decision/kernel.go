@@ -5,6 +5,7 @@ package decision
 import (
  "bytes"
  "errors"
+ "encoding/hex"
  "fmt"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
@@ -314,7 +315,7 @@ func assess(d identity.Deriver,p prepared,known,blocked,forbidden bool,validator
   facets=append(facets,[]any{uint64(4),uint64(0),uint64(2),"institution.allowed",[]any{},validator})
  }
  facets=append(facets,[]any{uint64(5),uint64(2),uint64(2),"legal.not-applicable",[]any{},validator})
- subj:=[]any{uint64(0),p.id[:],p.unit.Response.Digest[:]}
+ subj:=[]any{uint64(5),p.id[:],p.unit.Response.Digest[:]}
  fields:=[]any{subj,facets}
  dg,e:=digest(d,"cote.csf.digest.affordance-assessment","cote.csf.schema.affordance-assessment.body",fields)
  if e!=nil{return Assessment{},e}
@@ -325,11 +326,18 @@ func assess(d identity.Deriver,p prepared,known,blocked,forbidden bool,validator
 func namedDraw(d identity.Deriver,input Input,ids []domain.ID,ref []any)(Draw,uint64,error){
  var out Draw
  if len(ids)<2{return out,0,errors.New("named conflict draw requires competitors")}
- subsystem,decisionKey,purpose:="resource","last-unit","resolve"
- id,e:=derive(d,"cote.csf.id.rng-draw","cote.csf.schema.rng-draw-id-preimage",
-  []any{input.RunID[:],input.CycleID[:],uint64(input.Attempt),subsystem,decisionKey,bytesIDs(ids),purpose,ref})
+ subsystem,purpose:="resource","resolve"
+ conflictID,e:=derive(d,"cote.csf.id.conflict-set","cote.csf.schema.conflict-set-id-preimage",
+  []any{input.CycleID[:],bytesIDs(ids),uint64(0),input.Snapshot.ResourceID})
  if e!=nil{return out,0,e}
- bits,e:=identity.NamedSubstreamV1(input.Seed,subsystem,decisionKey,bytesIDs(ids),purpose,ref)
+ // The decision key is the exact conflict identity; candidates are causal
+ // units, not entity IDs, and therefore are not inserted as fake entity refs.
+ decisionKey:="conflict."+hex.EncodeToString(conflictID[:])
+ entityIDs:=[]any{}
+ id,e:=derive(d,"cote.csf.id.rng-draw","cote.csf.schema.rng-draw-id-preimage",
+  []any{input.RunID[:],input.CycleID[:],uint64(input.Attempt),subsystem,decisionKey,entityIDs,purpose,ref})
+ if e!=nil{return out,0,e}
+ bits,e:=identity.NamedSubstreamV1(input.Seed,subsystem,decisionKey,entityIDs,purpose,ref)
  if e!=nil{return out,0,e}
  // Two contenders: one unbiased bit; never derive a stream from worker order.
  selected:=uint64(bits[0]&1)
@@ -337,7 +345,7 @@ func namedDraw(d identity.Deriver,input Input,ids []domain.ID,ref []any)(Draw,ui
  if e!=nil{return out,0,e}
  h:=identity.OpaqueContentHash(envelope)
  result:=[]any{"cote.csf.schema.typed-value",uint64(1),envelope,h[:]}
- fields:=[]any{id[:],input.RunID[:],input.CycleID[:],uint64(input.Attempt),subsystem,decisionKey,bytesIDs(ids),purpose,ref,result}
+ fields:=[]any{id[:],input.RunID[:],input.CycleID[:],uint64(input.Attempt),subsystem,decisionKey,entityIDs,purpose,ref,result}
  dg,e:=digest(d,"cote.csf.digest.rng-draw","cote.csf.schema.rng-draw.body",fields)
  if e!=nil{return out,0,e}
  raw,e:=encode(fields,dg)

@@ -231,6 +231,21 @@ func Run(input Input)(Result,error){
 // Explicitly non-authoritative audit data. It has no registered causal
 // identity: CSFRV1-5 must revalidate and derive its own terminal records.
 func seal(r *Result,input Input)error{
+ // Bind every admitted unit, including NoProposal and deduplicated aliases,
+ // by its exact source digest. Walking Admitted preserves the durable fence's
+ // normative order, not worker completion or map iteration order.
+ digests:=map[domain.ID]domain.Digest{}
+ for _,unit:=range input.Units{
+  if _,exists:=digests[unit.Response.ID];exists{return ErrProvenance}
+  digests[unit.Response.ID]=unit.Response.Digest
+ }
+ sources:=make([]any,0,len(input.Admitted))
+ for _,id:=range input.Admitted{
+  dig,exists:=digests[id]
+  if !exists{return ErrProvenance}
+  sources=append(sources,[]any{id[:],dig[:]})
+ }
+ if len(sources)!=len(digests){return ErrProvenance}
  a:=make([]any,len(r.Assessments))
  for i,v:=range r.Assessments{a[i]=v.Canonical}
  c:=make([]any,len(r.Candidates))
@@ -252,7 +267,7 @@ func seal(r *Result,input Input)error{
  for i,v:=range r.Dispositions{disp[i]=[]any{v.Subject[:],v.CandidateID[:],v.Status,v.Reason,v.CanonicalUnit[:]}}
  raw,e:=codec.CanonicalPayload([]any{"csfrv1-4.provisional",input.RunID[:],input.CycleID[:],
   uint64(input.Attempt),uint64(input.Snapshot.BaseRevision),input.Snapshot.ResourceKind,
-  input.Snapshot.ResourceID,input.Snapshot.Available,a,c,conflicts,draws,ind,disp,r.PostAvailable,r.Failure})
+  input.Snapshot.ResourceID,input.Snapshot.Available,sources,a,c,conflicts,draws,ind,disp,r.PostAvailable,r.Failure})
  if e==nil{r.Canonical=raw}
  return e
 }

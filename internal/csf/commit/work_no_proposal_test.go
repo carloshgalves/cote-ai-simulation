@@ -19,9 +19,14 @@ import (
 )
 func noProposalWorkFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,
  admission.Cycle,admission.Fence,string){
+ return noProposalWorkFixtureWithSetup(t,nil)
+}
+func noProposalWorkFixtureWithSetup(t *testing.T,setup func(*sqlite.Store,domain.ID,*policy.Bundle)error)(*Coordinator,*sqlite.Store,*inputledger.Ledger,
+ admission.Cycle,admission.Fence,string){
  t.Helper()
  ctx:=context.Background()
  c,store,ledger,run,bundle,path:=freshResourceWorkFixture(t)
+ if setup!=nil{if err:=setup(store,run,bundle);err!=nil{t.Fatal(err)}}
  state,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
  g:=validGenesis(t,bundle)
  d:=identity.New(bundle)
@@ -202,4 +207,35 @@ func TestNoProposalWorkCanCommitOnlyAfterExplicitAbortedAttemptRetry(t *testing.
  if err!=nil||state.Revision!=1||state.LastOrdinal!=0{t.Fatalf("WORK retry failed to commit revision: %v %+v",err,state)}
  ctl,err:=store.LoadCycleControl(ctx,[32]byte(run))
  if err!=nil||ctl[0]!=uint64(0){t.Fatalf("WORK retry did not release control state: %v %v",ctl,err)}
+}
+
+func TestNoProposalWorkRejectsUnsettledScheduledOccurrenceAtSameCoordinate(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,_:=noProposalWorkFixtureWithSetup(t,
+  func(s *sqlite.Store,run domain.ID,b *policy.Bundle)error{
+   g:=validGenesis(t,b)
+   d:=identity.New(b)
+   created:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+   id,_,err:=d.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+    []any{created,uint64(0),uint64(0)});if err!=nil{return err}
+   fields:=[]any{id[:],run[:],"schedule",int64(g.InitialInstant),
+    []any{int64(g.InitialInstant),uint64(0)},"test.occurrence",uint64(1),
+    g.Payload[16],uint64(0),created,uint64(0),uint64(0),
+    []any{uint64(0)},[]any{uint64(0)}}
+   digest,_,err:=d.Sum("cote.csf.digest.occurrence-unit",
+    "cote.csf.schema.scheduled-occurrence.body",1,fields)
+   if err!=nil{return err}
+   raw,err:=codec.CanonicalPayload(append(cloneAny(fields),digest[:]))
+   if err!=nil{return err}
+   return s.SeedGenesisOccurrence(ctx,domain.ID(id),run,
+    domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant},raw)
+  })
+ if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err==nil{
+  t.Fatal("NoProposal-only WORK hid an unrelated due scheduled occurrence")
+ }
+ _,_,_,_,_,run:=ledger.Snapshot()
+ state,err:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil||state.Revision!=0{t.Fatal("invalid WORK mutated world",err)}
+ ctl,err:=store.LoadCycleControl(ctx,[32]byte(run))
+ if err!=nil||ctl[0]!=uint64(1){t.Fatalf("rejected WORK did not retain in-flight fence: %v %v",ctl,err)}
 }

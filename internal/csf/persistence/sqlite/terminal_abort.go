@@ -77,6 +77,65 @@ func rejectTerminalDuplicate(ctx context.Context,tx *sql.Tx,runID,cycleID [32]by
  if count!=0{return errors.New("cycle already has authoritative CycleCommit")}
  return nil
 }
+// Abort subjects are authenticated against the exact sealed source set or
+// canonical candidate records committed in the *same* terminal transaction.
+// A standalone candidate digest is insufficient without the source partition.
+func verifyAbortSubjects(fence []any,items []any,candidates []ports.CanonicalRecord,run,cycle [32]byte)error{
+ admitted,ok:=fence[11].([]any);if !ok{return errors.New("fence admitted unit list missing")}
+ sourceDigests:=map[[32]byte][32]byte{}
+ for _,v:=range admitted{
+  entry,ok:=v.([]any);if !ok||len(entry)!=5{return errors.New("fence unit malformed")}
+  idBytes,ok:=entry[3].([]byte);if !ok||len(idBytes)!=32{return errors.New("fence unit ID malformed")}
+  digBytes,ok:=entry[4].([]byte);if !ok||len(digBytes)!=32{return errors.New("fence unit digest malformed")}
+  var id,digest [32]byte;copy(id[:],idBytes);copy(digest[:],digBytes)
+  if _,dup:=sourceDigests[id];dup{return errors.New("duplicate admitted unit root")}
+  sourceDigests[id]=digest
+ }
+ candidateDigests:=map[[32]byte][32]byte{}
+ for _,c:=range candidates{
+  fields,err:=strictFull(c,17);if err!=nil{return err}
+  if !equalBytes(fields[1],run[:])||!equalBytes(fields[2],cycle[:]){
+   return errors.New("candidate not derived in the aborted cycle")
+  }
+  sourceIDs,ok:=fields[3].([]any);if !ok||len(sourceIDs)==0{return errors.New("candidate source set missing")}
+  var prior []byte
+  for _,v:=range sourceIDs{
+   source,ok:=v.([]byte);if !ok||len(source)!=32{return errors.New("candidate source ID malformed")}
+   var id [32]byte;copy(id[:],source)
+   if _,exists:=sourceDigests[id];!exists{return errors.New("candidate uses unit outside AdmissionFence")}
+   if prior!=nil&&bytes.Compare(prior,source)>=0{return errors.New("candidate sources are not canonical")}
+   prior=source
+  }
+  expected,err:=registeredDigest("cote.csf.id.commit-candidate","cote.csf.schema.candidate-id-preimage",
+   []any{fields[1],fields[2],fields[3],fields[4],fields[5],fields[6],fields[7]})
+  if err!=nil||expected!=c.Identity{return errors.New("candidate ID preimage does not match source identity")}
+  hash,err:=registeredDigest("cote.csf.digest.commit-candidate","cote.csf.schema.commit-candidate.body",fields[:16])
+  if err!=nil||!equalBytes(fields[16],hash[:]){return errors.New("candidate body digest invalid")}
+  if _,dup:=candidateDigests[c.Identity];dup{return errors.New("duplicate candidate audit root")}
+  candidateDigests[c.Identity]=hash
+ }
+ used:=map[[32]byte]bool{}
+ previousKind:=uint64(0)
+ var previous [32]byte
+ for index,raw:=range items{
+  entry,ok:=raw.([]any);if !ok||len(entry)!=8{return errors.New("invalid abort evidence shape")}
+  subject,ok:=entry[0].([]any);if !ok||len(subject)!=3{return errors.New("invalid abort subject ref")}
+  kind,ok:=subject[0].(uint64);if !ok||kind>1{return errors.New("unknown abort subject kind")}
+  idBytes,ok:=subject[1].([]byte);if !ok||len(idBytes)!=32{return errors.New("abort subject ID missing")}
+  digestBytes,ok:=subject[2].([]byte);if !ok||len(digestBytes)!=32{return errors.New("abort subject digest missing")}
+  var id,digest [32]byte;copy(id[:],idBytes);copy(digest[:],digestBytes)
+  if index>0&&(kind<previousKind||(kind==previousKind&&bytes.Compare(id[:],previous[:])<=0)){
+   return errors.New("abort subjects unordered or duplicated")
+  }
+  previousKind=kind;previous=id
+  var expected [32]byte;var exists bool
+  if kind==0{expected,exists=sourceDigests[id]}else{expected,exists=candidateDigests[id];used[id]=true}
+  if !exists||expected!=digest{return errors.New("abort evidence subject not authenticated by fenced source/candidate")}
+ }
+ if len(used)!=len(candidateDigests){return errors.New("extraneous candidate audit material")}
+ return nil
+}
+
 func (s *Store) CommitCycleAbort(ctx context.Context,b ports.TerminalAbortBatch)error{
  if len(b.Envelope.Canonical)==0{return errors.New("incomplete cycle abort")}
  decoded,err:=codec.StrictDecodePayload(b.Envelope.Canonical);if err!=nil{return err}
@@ -109,6 +168,7 @@ func (s *Store) CommitCycleAbort(ctx context.Context,b ports.TerminalAbortBatch)
  if err:=rejectTerminalDuplicate(ctx,tx,b.RunID,b.CycleID);err!=nil{return err}
  fence,err:=workFence(ctx,tx,b.RunID,b.CycleID,b.FenceID);if err!=nil{return err}
  if fence[2]!=attempt{return errors.New("abort attempt differs from fence")}
+ if err:=verifyAbortSubjects(fence,ind,b.CandidateEvidence,b.RunID,b.CycleID);err!=nil{return err}
  for _,pair:=range [][2]int{{4,3},{5,4},{6,5},{7,6},{8,7},{12,9},{16,13}}{
   if !sameCanonical(fence[pair[0]],body[pair[1]]){return errors.New("abort differs from frozen fence")}
  }
@@ -128,6 +188,9 @@ func (s *Store) CommitCycleAbort(ctx context.Context,b ports.TerminalAbortBatch)
   if !sameCanonical(previous[4],noRef()){return errors.New("first attempt has forged retry ref")}
  }else if !sameCanonical(previous[4],fence[3]){
   return errors.New("retrial abort lost its retry ref")
+ }
+ for _,candidate:=range b.CandidateEvidence{
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",candidate.Identity[:],candidate.Canonical);err!=nil{return err}
  }
  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.Envelope.Identity[:],b.Envelope.Canonical);err!=nil{return err}
  if b.FailAfterStep==1{return errors.New("injected abort journal failure")}

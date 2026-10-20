@@ -751,7 +751,7 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  // be visible to a resumed process.
  ctl,err:=cycleControl(ctx,tx,b.RunID);if err!=nil{return err}
  if ctl==nil||ctl[0]!=uint64(1)||!present(ctl[1],b.CycleID[:])||
-  !present(ctl[2],uint64(0)){return errors.New("CLOCK_ADVANCE control state not in flight")}
+  !present(ctl[2],uint64(0)){return fmt.Errorf("CLOCK_ADVANCE control state not in flight: %#v",ctl)}
  if err:=storeCycleControl(ctx,tx,b.RunID,[]any{uint64(0),noRef(),noRef(),noRef(),noRef(),noRef(),uint64(0)});err!=nil{return err}
  return tx.Commit()
 }

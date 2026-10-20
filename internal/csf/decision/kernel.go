@@ -141,13 +141,39 @@ func validateResponse(d identity.Deriver,req Input,u Unit)(prepared,error){
   return p,fmt.Errorf("%w: response body references",ErrProvenance)
  }
  if p.noProposal {
-  if !sameBytes(x.Body[4],x.RoundID[:])||x.Body[5]!=x.SlotID||!sameActor(x.Body[6],x.Actor)||x.Body[8]!=uint64(x.SubmittedAgainstRevision){
+  if !sameBytes(x.Body[4],x.RoundID[:])||x.Body[5]!=x.SlotID||!sameActor(x.Body[6],x.Actor)||x.Body[8]!=uint64(x.SubmittedAgainstRevision)||!sameInstant(x.Body[7],x.EffectiveAt){
    return p,fmt.Errorf("%w: no-proposal fields",ErrProvenance)
   }
   return p,nil
  }
  if !sameActor(x.Body[6],x.Actor)||!sameBytes(x.Body[13],x.RoundID[:])||x.Body[14]!=x.SlotID||x.Body[15]!=uint64(x.SubmittedAgainstRevision){
   return p,fmt.Errorf("%w: action fields",ErrProvenance)
+ }
+ if !sameInstant(x.Body[11],x.EffectiveAt) || !sameInstant(x.Body[11],100) {
+  return p,fmt.Errorf("%w: mismatched effective instant",ErrProvenance)
+ }
+ if targets,ok:=x.Body[7].([]any);!ok||len(targets)!=0{
+  return p,fmt.Errorf("%w: test resource action forbids target injection",ErrProvenance)
+ }
+ // The synthetic extension cannot accept an opaque or mismatched typed-value
+ // payload that the handler has never validated.
+ params,ok:=x.Body[8].([]any)
+ if !ok||len(params)!=4||params[0]!="cote.csf.schema.typed-value"||params[1]!=uint64(1){
+  return p,fmt.Errorf("%w: invalid typed parameters",ErrProvenance)
+ }
+ encoded,ok:=params[2].([]byte)
+ if !ok||!validTypedHash(encoded,params[3]){
+  return p,fmt.Errorf("%w: typed parameter digest",ErrProvenance)
+ }
+ env,err:=codec.StrictDecodeEnvelope(encoded)
+ if err!=nil||env.SchemaID!="cote.csf.schema.typed-value"||env.SchemaVersion!=1{
+  return p,fmt.Errorf("%w: opaque typed parameters",ErrProvenance)
+ }
+ value,ok:=env.Value.([]any);if !ok||len(value)!=0{
+  return p,fmt.Errorf("%w: unregistered resource parameters",ErrProvenance)
+ }
+ if !refsEqual(x.Body[10],[]any{uint64(0)})||!refsEqual(x.Body[12],[]any{uint64(0)}){
+  return p,fmt.Errorf("%w: resource action location/duration not supported",ErrProvenance)
  }
  if x.Body[4]!="resource.consume"||x.Body[5]!=uint64(1){p.indeterminate=true;return p,nil}
  claims,ok:=x.Body[9].([]any)
@@ -165,6 +191,13 @@ func validateResponse(d identity.Deriver,req Input,u Unit)(prepared,error){
 func sameBytes(value any,want []byte)bool{a,ok:=value.([]byte);return ok&&bytes.Equal(a,want)}
 func sameActor(value any,actor [2]string)bool{
  a,ok:=value.([]any);return ok&&len(a)==2&&a[0]==actor[0]&&a[1]==actor[1]
+}
+func sameInstant(v any,expected domain.SimulationInstant)bool{
+ switch n:=v.(type){
+ case int64: return n==int64(expected)
+ case uint64: return expected>=0&&n==uint64(expected)
+ }
+ return false
 }
 
 func namespace(p prepared,key string)string{
@@ -284,4 +317,9 @@ func namedDraw(d identity.Deriver,input Input,ids []domain.ID,ref []any)(Draw,ui
  if e!=nil{return out,0,e}
  raw,e:=encode(fields,dg)
  return Draw{ID:id,Fields:fields,Digest:dg,Canonical:raw},selected,e
+}
+
+func validTypedHash(raw []byte,witness any)bool {
+ h:=identity.OpaqueContentHash(raw)
+ return sameBytes(witness,h[:])
 }

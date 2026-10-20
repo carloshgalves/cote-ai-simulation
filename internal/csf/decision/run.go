@@ -84,13 +84,14 @@ func Run(input Input)(Result,error){
  sort.Slice(viable,func(i,j int)bool{return canonicalIDLess(viable[i].ID,viable[j].ID)})
  winners:=map[domain.ID]bool{}
  var total int64
+ exhausted:=false
  for _,c:=range viable{
   qty:=current[c.ID]
   if qty<=0||qty>input.Snapshot.Available{return result,ErrProvenance}
-  if total>input.Snapshot.Available-qty{total=input.Snapshot.Available+1;break}
+  if total>input.Snapshot.Available-qty{exhausted=true;break}
   total+=qty
  }
- if total<=input.Snapshot.Available {
+ if !exhausted {
   for _,c:=range viable {winners[c.ID]=true}
  } else {
   if len(viable)!=2 {
@@ -101,7 +102,11 @@ func Run(input Input)(Result,error){
   }
   // This V0 resolver supports exactly two claims for one last unit.
   if current[viable[0].ID]!=input.Snapshot.Available||current[viable[1].ID]!=input.Snapshot.Available{
-   return result,fmt.Errorf("%w: unsupported resource allocation policy",ErrIndeterminate)
+   for _,c:=range viable{result.Indeterminate=append(result.Indeterminate,Indeterminate{
+    Subject:c.SourceUnitIDs[0],Facet:2,Validator:refs["conflict-resolvers"],Reason:"resource.resolver.unsupported",Evidence:[]any{},
+   })}
+   result.Failure="INDETERMINATE_FACET";seal(&result,input)
+   return result,ErrIndeterminate
   }
   ids:=[]domain.ID{viable[0].ID,viable[1].ID}
   id,e:=derive(d,"cote.csf.id.conflict-set","cote.csf.schema.conflict-set-id-preimage",

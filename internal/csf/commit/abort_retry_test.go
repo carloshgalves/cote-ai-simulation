@@ -234,6 +234,7 @@ func freshResourceWorkFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputled
  t.Cleanup(func(){store.Close()})
  if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
  if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ if err:=store.BootstrapGenesisTriggers(ctx,g,bundle,nil);err!=nil{t.Fatal(err)}
  ledger,err:=inputledger.New(ctx,g.RunID,bundle,store);if err!=nil{t.Fatal(err)}
  if err:=ledger.DeclareSource(inputledger.Source{ID:"driver"});err!=nil{t.Fatal(err)}
  covered:=domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant}

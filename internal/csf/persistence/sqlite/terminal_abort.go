@@ -163,6 +163,7 @@ func (s *Store) CommitCycleAbort(ctx context.Context,b ports.TerminalAbortBatch)
  ind,ok:=body[11].([]any);if !ok{return errors.New("abort indeterminate list missing")}
  evidence,ok:=body[12].([]any);if !ok||len(evidence)!=0{return errors.New("unauthenticated abort evidence refs")}
  if reason==0&&len(ind)==0{return errors.New("INDETERMINATE_FACET missing per-subject evidence")}
+ if reason==6&&len(ind)!=0{return errors.New("CASCADE_LIMIT is not a fabricated validator failure")}
  for _,v:=range ind{
   fields,ok:=v.([]any)
   if !ok||len(fields)!=8||!sameCanonical(fields[7],[]any{fields[2],fields[3],fields[4]}){
@@ -187,6 +188,13 @@ func (s *Store) CommitCycleAbort(ctx context.Context,b ports.TerminalAbortBatch)
  if err:=tx.QueryRowContext(ctx,"SELECT state_hash FROM world_revisions WHERE revision=?",uint64(state.Revision)).Scan(&baseHash);err!=nil{return err}
  if !equalBytes(fence[8],baseHash){return errors.New("abort base world hash mismatch")}
  previous,err:=cycleControl(ctx,tx,b.RunID);if err!=nil{return err}
+ if reason==6{
+  count,err:=countWorkAt(ctx,tx,b.RunID,int64(state.Instant))
+  if err!=nil{return err}
+  if !clock.CascadeExceeded(count){
+   return errors.New("CASCADE_LIMIT abort claimed before versioned threshold")
+  }
+ }
  if previous==nil||previous[0]!=uint64(1)||
   !present(previous[1],b.CycleID[:])||!present(previous[2],attempt)||
   !present(previous[3],fullRef(11,b.FenceID[:],body[8].([]byte))){

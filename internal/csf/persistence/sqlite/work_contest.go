@@ -27,7 +27,7 @@ func verifyTwoResourceTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
  if len(b.Decisions)!=2||len(b.Events)!=3||len(b.ContestProofs)!=6||
   len(expectedSlots)!=2{return errors.New("two-agent contest requires two decisions and three events")}
  rawSources,ok:=fence[11].([]any);if !ok||len(rawSources)!=2{return errors.New("two-agent contest source set invalid")}
- type competitor struct{source,round,candidate domain.ID;digest domain.Digest;slot string;candidateBody []any}
+ type competitor struct{source,round,candidate domain.ID;digest domain.Digest;slot string;candidateBody,proposal []any}
  competitors:=make([]competitor,0,2)
  for _,item:=range rawSources{
   fields,ok:=item.([]any)
@@ -66,7 +66,7 @@ func verifyTwoResourceTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
    "cote.csf.schema.candidate-id-preimage",
    []any{b.RunID[:],b.CycleID[:],[]any{source},"resource.consume",uint64(1),uint64(0),uint64(0)})
   if err!=nil{return err}
-  competitors=append(competitors,competitor{source:s,round:r,candidate:domain.ID(candidateID),digest:domain.Digest(dg),slot:slot})
+  competitors=append(competitors,competitor{source:s,round:r,candidate:domain.ID(candidateID),digest:domain.Digest(dg),slot:slot,proposal:prop})
  }
  if competitors[0].round==competitors[1].round||competitors[0].source==competitors[1].source{
   return errors.New("contest sources or rounds duplicate")
@@ -90,11 +90,14 @@ func verifyTwoResourceTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
    !equalBytes(candidate[1],b.RunID[:])||!equalBytes(candidate[2],b.CycleID[:])||
    !sameCanonical(candidate[3],wanted)||candidate[4]!="resource.consume"||
    candidate[5]!=uint64(1)||candidate[6]!=uint64(0)||candidate[7]!=uint64(0)||
-   candidate[14]!=int64(0)||!sameCanonical(candidate[15],allowed["conflict-resolvers-v1"]){
+   !sameCanonical(candidate[14],uint64(0))||!sameCanonical(candidate[15],allowed["conflict-resolvers-v1"]){
    return errors.New("contest candidate identity/producer/resolver mismatch")
   }
   provenance:=[]any{[]any{uint64(5),competitor.source[:],competitor.digest[:]}}
-  if !sameCanonical(candidate[13],provenance)||!sameCanonical(candidate[12],[]any{"resource.nonnegative"}){
+  wantDraft:=[]any{[]any{uint64(0),uint64(0),"resource.consumed",competitor.proposal[8],[]any{}}}
+  if !sameCanonical(candidate[8],wantDraft)||!sameCanonical(candidate[9],competitor.proposal[9])||
+   !sameCanonical(candidate[10],[]any{})||!sameCanonical(candidate[11],[]any{})||
+   !sameCanonical(candidate[13],provenance)||!sameCanonical(candidate[12],[]any{"resource.nonnegative"}){
    return errors.New("contest candidate lacks sealed provenance")
   }
   digest,err:=registeredDigest("cote.csf.digest.commit-candidate","cote.csf.schema.commit-candidate.body",candidate[:16])

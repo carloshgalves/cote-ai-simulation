@@ -41,6 +41,9 @@ type Snapshot struct {
  ResourceID string
  Available int64
  Known bool
+ // A missing actor is UNKNOWN, not an implicit grant.
+ AccessibleActors map[string]bool
+ // A missing actor is UNKNOWN, not implicitly policy-compliant.
  ForbiddenActors map[string]bool
 }
 type HistoryBinding struct {
@@ -311,14 +314,15 @@ func CheckPartition(admitted []domain.ID,noProposal,aliases map[domain.ID]bool,c
  return nil
 }
 
-func assess(d identity.Deriver,p prepared,known,blocked,forbidden bool,validator []any)(Assessment,error){
- status:=uint64(0);reason:="resource.available"
- if !known{status=3;reason="resource.missing"}
- if blocked{status=1;reason="resource.insufficient"}
+func assess(d identity.Deriver,p prepared,resourceBlocked,accessGranted,forbidden bool,validator []any)(Assessment,error){
+ resourceStatus:=uint64(0);resourceReason:="resource.available"
+ if resourceBlocked{resourceStatus=1;resourceReason="resource.insufficient"}
+ accessStatus,accessEffect,accessReason:=uint64(0),uint64(2),"access.granted"
+ if !accessGranted{accessStatus=1;accessEffect=0;accessReason="access.denied"}
  facets:=[]any{
   []any{uint64(0),uint64(0),uint64(2),"physical.possible",[]any{},validator},
-  []any{uint64(1),uint64(0),uint64(2),"access.granted",[]any{},validator},
-  []any{uint64(2),status,uint64(0),reason,[]any{},validator},
+  []any{uint64(1),accessStatus,accessEffect,accessReason,[]any{},validator},
+  []any{uint64(2),resourceStatus,uint64(0),resourceReason,[]any{},validator},
   []any{uint64(3),uint64(2),uint64(2),"temporal.not-applicable",[]any{},validator},
  }
  if forbidden{

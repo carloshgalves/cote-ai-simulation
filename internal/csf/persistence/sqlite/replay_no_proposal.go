@@ -83,10 +83,13 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
  tasks,ok:=journal[18].([]any)
  if !ok||len(tasks)!=0{return clock.State{},errors.New("NoProposal cannot replay visible tasks")}
  resultTyped,resultHash:=typed,hash
- if len(events)==2{
-  eventValue,err:=codec.StrictDecodePayload(events[0].([]byte));if err!=nil{return clock.State{},err}
+ if len(events)>=2{
+  first,ok:=events[0].([]byte)
+  if !ok{return clock.State{},errors.New("WORK event proof must contain canonical bytes")}
+  eventValue,err:=codec.StrictDecodePayload(first);if err!=nil{return clock.State{},err}
   fields,ok:=eventValue.([]any)
   if ok&&len(fields)==19&&fields[3]=="resource.consumed"{
+   if len(events)!=2&&len(events)!=3{return clock.State{},errors.New("unsupported resource event batch cardinality")}
    resultTyped,resultHash,err=reducer.Consume(typed,1)
    if err!=nil{return clock.State{},err}
   }

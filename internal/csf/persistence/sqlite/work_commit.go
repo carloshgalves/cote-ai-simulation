@@ -4,13 +4,10 @@ import (
  "bytes"
  "context"
  "errors"
- "fmt"
  "math"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
@@ -58,6 +55,23 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  fence,err:=workFence(ctx,tx,b.RunID,b.CycleID,b.FenceID);if err!=nil{return err}
  if fence[2]!=attempt{return errors.New("WORK attempt differs from persisted fence")}
  if err:=verifyJournalPolicyPins(ctx,tx,b.RunID,fence,journal);err!=nil{return err}
+ var genesisRaw []byte
+ if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",b.RunID[:]).Scan(&genesisRaw);err!=nil{return err}
+ genesisEnv,err:=codec.StrictDecodeEnvelope(genesisRaw);if err!=nil{return err}
+ genesisFields,ok:=genesisEnv.Value.([]any)
+ if !ok||len(genesisFields)!=18{return errors.New("genesis policy registry malformed")}
+ genesisRefs,ok:=genesisFields[14].([]any)
+ if !ok{return errors.New("genesis policy refs absent")}
+ allowed:=map[string]any{}
+ for _,v:=range genesisRefs{
+  ref,ok:=v.([]any)
+  if !ok||len(ref)!=3{return errors.New("malformed genesis policy ref")}
+  name,ok:=ref[0].(string);if !ok{return errors.New("genesis policy name malformed")}
+  allowed[name]=ref
+ }
+ for _,name:=range []string{"validators-v1","conflict-resolvers-v1"}{
+  if allowed[name]==nil{return errors.New("NoProposal decision policy unbound by genesis")}
+ }
  for _,pair:=range [][2]int{{4,3},{5,4},{6,5},{7,6},{8,7},{12,12}}{
   if !sameCanonical(fence[pair[0]],journal[pair[1]]){return errors.New("WORK journal differs from admission cut")}
  }
@@ -155,6 +169,10 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
    !sameCanonical(dr[4],subject)||dr[5]!=uint64(3)||dr[7]!="slot.no-proposal"{
    return errors.New("invalid terminal NoProposal DecisionRecord")
   }
+  if !sameCanonical(dr[9],allowed["validators-v1"])||
+   !sameCanonical(dr[10],allowed["conflict-resolvers-v1"]){
+   return errors.New("NoProposal decision uses a policy not pinned at genesis")
+  }
   for _,opt:=range []int{6,13,14}{
    if !sameCanonical(dr[opt],noRef()){return errors.New("NoProposal may not claim candidate or successor")}
   }
@@ -207,8 +225,3 @@ func noProposalIDs(fence []any)[]any{
  return out
 }
 
-// Canonical terminal decisions cannot enter generic append-by-ID paths.
-// The only supported WORK publication is CommitWork.
-var _=fmt.Sprintf
-var _=identity.OpaqueContentHash
-var _=domain.ID{}

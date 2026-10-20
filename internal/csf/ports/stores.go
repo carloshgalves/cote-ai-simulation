@@ -118,8 +118,11 @@ type AttemptRetryBatch struct {
 // accepts a closed, zero-event NoProposal batch. The adapter must fail closed
 // on resource-consuming or lifecycle-bearing variants until reducers exist.
 type WorkBatch struct {
- // 0: NoProposal only; 1: one authenticated resource.consume candidate.
+ // 0: NoProposal only; 1: single resource candidate; 2: two resource contenders.
  Mode uint8
+ // Mode 2 publishes its complete pure candidate/conflict/RNG assessment
+ // evidence only after the same terminal SQLite CAS succeeds.
+ ContestProofs []CanonicalRecord
  ResourceCandidate CanonicalRecord
  ResultStateHash [32]byte
  RunID [32]byte

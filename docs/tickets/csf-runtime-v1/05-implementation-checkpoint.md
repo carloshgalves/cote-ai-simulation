@@ -109,6 +109,10 @@
   reaberto exclui os rounds consumidos de novos AdmissionFences.
 - [x] Seis adulterações de WORK (ordem, bytes, digest, world revision,
   prefixo e cardinalidade) + policy ref com digest recalculado rejeitadas.
+- [x] WORK NoProposal falha fechado se o conjunto global pendente contém
+  uma ScheduledOccurrence, TriggerActivation ou entrada exógena vencida e
+  sem lifecycle handler; teste com occurrence real na mesma coordenada.
+  Nenhuma revisão é avançada nesse caso.
 - [x] Teste executa `Abort -> HALTED_ON_ABORT -> AttemptRetryRecord ->`
   novo `AdmissionFence` semântico -> `WORK` commit de tentativa 1.
 - [x] Regressão de `CLOCK_ADVANCE` e conformance canônica preservadas.
@@ -118,6 +122,13 @@
 - [CSFRV1-5 Atomic Terminal Commit — 39469319549](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39469319549): **success**.
 - [CSF canonical conformance — 39469314456](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39469314456): **success**.
 - [CSFRV1-4 kernel regression — 39469314422](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39469314422): **success**.
+
+### CI de regressão final deste checkpoint
+
+- [CSFRV1-5 terminal suite — 39470393012](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39470393012): **success**; Go focado/completo, sete adulterações, seis failpoints, retry/reopen, cenário de occurrence vencida.
+- [Canonical Go/TypeScript — 39470393027](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39470393027): **success**.
+- [CSFRV1-4 kernel regression — 39470392950](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39470392950): **success**.
+- `git diff --check` incluído no workflow.
 
 ## Próxima implementação dentro desta mesma Draft PR
 

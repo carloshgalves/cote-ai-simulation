@@ -410,3 +410,22 @@ func TestAccessRuleIsExplicitAndDenialBlocksWithoutRewritingPossibility(t *testi
   t.Fatalf("missing institutional policy treated as permission: %v %+v",err,missingInstitution)
  }
 }
+
+func TestDecisionPolicyRefsAreGenesisRoleBoundNotPositionBound(t *testing.T) {
+ input,_,_:=fixture(t,true)
+ roles,err:=input.Bundle.RequiredPolicyRoles();if err!=nil{t.Fatal(err)}
+ bindings,ok:=input.Bundle.Transitions["genesis_policy_bindings"].([]any)
+ if !ok||len(roles)!=len(bindings){t.Fatal("missing role bindings")}
+ got,err:=policyRefs(input.Bundle);if err!=nil{t.Fatal(err)}
+ for _,entry:=range bindings{
+  fields:=entry.(map[string]any)
+  role:=fields["role"].(string)
+  ref:=fields["ref"].([]any)
+  name:=ref[0].(string)
+  if role=="perception"&&name=="perception-visible-first-v1"{name="perception-v1"}
+  value,exists:=got[role]
+  if !exists||value[0]!=name{
+   t.Fatalf("role %s linked to %v instead of pinned %s",role,value,name)
+  }
+ }
+}

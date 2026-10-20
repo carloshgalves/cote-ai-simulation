@@ -158,3 +158,36 @@ func TestNoProposalWorkRejectsTamperedTerminalRecordAndRecovers(t *testing.T){
   })
  }
 }
+
+func TestNoProposalWorkCanCommitOnlyAfterExplicitAbortedAttemptRetry(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,_:=noProposalWorkFixture(t)
+ _,_,_,_,_,run:=ledger.Snapshot()
+ abort,err:=c.Abort(ctx,run,cycle.ID,fence,4,nil)
+ if err!=nil{t.Fatal(err)}
+ if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err==nil{
+  t.Fatal("HALTED_ON_ABORT allowed a WORK commit without an explicit retry")
+ }
+ retry,err:=c.Retry(ctx,run,cycle.ID,abort,"operator.retry")
+ if err!=nil{t.Fatal(err)}
+ retryRaw,err:=codec.StrictDecodePayload(retry.Canonical);if err!=nil{t.Fatal(err)}
+ digest,_,err:=identity.New(c.bundle).Sum("cote.csf.digest.attempt-retry",
+  "cote.csf.schema.attempt-retry",1,retryRaw)
+ if err!=nil{t.Fatal(err)}
+ cycle.Attempt=1
+ cycle.RetryRef=[]any{uint64(1),[]any{uint64(14),retry.Identity[:],digest[:]}}
+ newFence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).AdmitThenEvaluate(
+  ctx,c.bundle,ledger,cycle,c.admissionPolicies,nil)
+ if err!=nil{t.Fatal(err)}
+ if newFence.InputDigest!=fence.InputDigest||newFence.ID==fence.ID{
+  t.Fatal("retry fence did not preserve semantic admitted units")
+ }
+ journal,err:=c.CommitNoProposal(ctx,ledger,cycle,newFence)
+ if err!=nil{t.Fatal(err)}
+ canonical,err:=store.GetFence(ctx,journal.Identity)
+ if err!=nil||!bytes.Equal(canonical,journal.Canonical){t.Fatal("retried successful WORK journal missing")}
+ state,err:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil||state.Revision!=1||state.LastOrdinal!=0{t.Fatalf("WORK retry failed to commit revision: %v %+v",err,state)}
+ ctl,err:=store.LoadCycleControl(ctx,[32]byte(run))
+ if err!=nil||ctl[0]!=uint64(0){t.Fatalf("WORK retry did not release control state: %v %v",ctl,err)}
+}

@@ -145,9 +145,19 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
   v,err:=codec.StrictDecodePayload(raw);if err!=nil{return report,err}
   journal,ok:=v.([]any);if !ok||len(journal)!=24{return report,errors.New("replay CycleCommit not canonical")}
   if !equalBytes(journal[0],runID[:])||!equalBytes(journal[1],entry.cycleID[:]){return report,errors.New("replay cycle reference mismatch")}
- if _,err:=verifyCommittedFence(ctx,s.db,runID,entry.cycleID,journal);err!=nil{return report,err}
   planFields,ok:=journal[5].([]any)
-  if !ok||len(planFields)!=4||planFields[0]!=uint64(1){return report,errors.New("replay only supports CLOCK_ADVANCE in this slice")}
+  if !ok||len(planFields)==0{return report,errors.New("replay cycle plan missing")}
+  if len(planFields)==1&&planFields[0]==uint64(0){
+   // WORK NoProposal contributes one revision and zero events. Rebuild
+   // from journal/fence/decision roots, never from runtime cache.
+   successor,err:=s.replayNoProposalCommit(ctx,runID,entry.cycleID,entry.commitID,journal,current)
+   if err!=nil{return report,fmt.Errorf("replay zero-event WORK: %w",err)}
+   current=successor
+   report.ReplayedCommits++
+   continue
+  }
+  if len(planFields)!=4||planFields[0]!=uint64(1){return report,errors.New("unregistered replay cycle-plan variant")}
+  if _,err:=verifyCommittedFence(ctx,s.db,runID,entry.cycleID,journal);err!=nil{return report,err}
   from,ok:=asSigned64(planFields[1]);if !ok||from!=int64(current.Instant){return report,errors.New("replay clock origin mismatch")}
   to,ok:=asSigned64(planFields[2]);if !ok||to<=from{return report,errors.New("replay destination invalid")}
   coord,ok:=planFields[3].([]any);if !ok||len(coord)!=2{return report,errors.New("replay target coordinate invalid")}

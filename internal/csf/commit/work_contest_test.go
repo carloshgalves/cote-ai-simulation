@@ -9,6 +9,7 @@ import (
  _ "modernc.org/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/extensions/testresourcev1"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -161,4 +162,32 @@ func TestTwoResourceContestRejectsForgedEventAndRNGProof(t *testing.T){
    t.Fatalf("clean contested batch cannot succeed after rollback: %v",err)
   }
  })}
+}
+
+func TestTwoResourceContestReplayRejectsMissingAffordanceProof(t *testing.T){
+ ctx:=context.Background()
+ c,_,ledger,cycle,fence,path:=twoResourceContestFixture(t,false)
+ if _,err:=c.CommitTwoResourceContest(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ _,_,_,_,_,run:=ledger.Snapshot()
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ rows,err:=db.QueryContext(ctx,"SELECT id,canonical FROM decision_ledger")
+ if err!=nil{t.Fatal(err)}
+ var target []byte
+ for rows.Next(){
+  var id,raw []byte
+  if err:=rows.Scan(&id,&raw);err!=nil{t.Fatal(err)}
+  decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{t.Fatal(err)}
+  fields,ok:=decoded.([]any)
+  if !ok||len(fields)!=3{continue}
+  subject,ok:=fields[0].([]any)
+  if ok&&len(subject)==3&&subject[0]==uint64(5){target=append([]byte(nil),id...);break}
+ }
+ rows.Close()
+ if len(target)!=32{t.Fatal("contested assessment proof absent from durable journal")}
+ if _,err:=db.ExecContext(ctx,"DELETE FROM decision_ledger WHERE id=?",target);err!=nil{t.Fatal(err)}
+ db.Close()
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
+ if _,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
+  t.Fatal("replay accepted a contested settlement with one missing affordance assessment")
+ }
 }

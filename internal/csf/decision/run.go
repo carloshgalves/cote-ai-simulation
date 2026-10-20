@@ -101,35 +101,78 @@ func Run(input Input)(Result,error){
   if total>input.Snapshot.Available-qty{exhausted=true;break}
   total+=qty
  }
- if !exhausted {
-  for _,c:=range viable {winners[c.ID]=true}
- } else {
-  if len(viable)!=2 {
-   for _,c:=range viable{result.Indeterminate=append(result.Indeterminate,Indeterminate{
-    Subject:c.ID,SubjectDigest:c.Digest,SubjectKind:1,Facet:2,Validator:refs["conflict-resolvers"],Reason:"resource.resolver.unavailable",Evidence:[]any{},
-   })}
-   result.Failure="INDETERMINATE_FACET";seal(&result,input);return result,ErrIndeterminate
+ // The resolver must consume the conservative detector's authenticated
+ // candidate claims rather than reconstructing a separate conflict model.
+ detected,e:=DetectClaims(d,input.CycleID,viable,
+  map[string]int64{input.Snapshot.ResourceID:input.Snapshot.Available},
+  refs["validators"],refs["conflict-resolvers"])
+ if e!=nil{return result,e}
+ var resourceConflict *Conflict
+ unsupported:=map[domain.ID]bool{}
+ for _,c:=range detected{
+  kind,key:=c.Fields[2],c.Fields[3]
+  if kind==uint64(2)&&key=="resource.nonnegative"{
+   // The resource capacity/quantity check already discharges this exact
+   // invariant. It must not create a second lottery for the same stock.
+   continue
   }
-  // This V0 resolver supports exactly two claims for one last unit.
-  if current[viable[0].ID]!=input.Snapshot.Available||current[viable[1].ID]!=input.Snapshot.Available{
+  if kind==uint64(0)&&key==input.Snapshot.ResourceID{
+   if resourceConflict!=nil{return result,ErrProvenance}
+   copied:=c
+   resourceConflict=&copied
+   continue
+  }
+  result.Conflicts=append(result.Conflicts,c)
+  for _,id:=range c.CandidateIDs{unsupported[id]=true}
+ }
+ if len(unsupported)>0{
+  if resourceConflict!=nil{result.Conflicts=append(result.Conflicts,*resourceConflict)}
+  sort.Slice(result.Conflicts,func(i,j int)bool{
+   return canonicalIDLess(result.Conflicts[i].ID,result.Conflicts[j].ID)
+  })
+  for _,c:=range viable{
+   if unsupported[c.ID]{
+    result.Indeterminate=append(result.Indeterminate,Indeterminate{
+     Subject:c.ID,SubjectDigest:c.Digest,SubjectKind:1,Facet:2,
+     Validator:refs["conflict-resolvers"],
+     Reason:"resource.resolver.unsupported-claims",Evidence:[]any{},
+    })
+   }
+  }
+  result.Failure="INDETERMINATE_FACET"
+  if err:=seal(&result,input);err!=nil{return result,err}
+  return result,ErrIndeterminate
+ }
+ if (resourceConflict==nil)!=(!exhausted){
+  return result,fmt.Errorf("%w: detector and resource capacity disagree",ErrProvenance)
+ }
+ if !exhausted{
+  for _,c:=range viable{winners[c.ID]=true}
+ }else{
+  // V0 resolves only two full-capacity consumers, never a generic allocation.
+  if len(viable)!=2||len(resourceConflict.CandidateIDs)!=2{
    for _,c:=range viable{result.Indeterminate=append(result.Indeterminate,Indeterminate{
-    Subject:c.ID,SubjectDigest:c.Digest,SubjectKind:1,Facet:2,Validator:refs["conflict-resolvers"],Reason:"resource.resolver.unsupported",Evidence:[]any{},
+    Subject:c.ID,SubjectDigest:c.Digest,SubjectKind:1,Facet:2,
+    Validator:refs["conflict-resolvers"],Reason:"resource.resolver.unavailable",Evidence:[]any{},
    })}
-   result.Failure="INDETERMINATE_FACET";seal(&result,input)
+   result.Failure="INDETERMINATE_FACET"
+   if err:=seal(&result,input);err!=nil{return result,err}
    return result,ErrIndeterminate
   }
-  ids:=[]domain.ID{viable[0].ID,viable[1].ID}
-  id,e:=derive(d,"cote.csf.id.conflict-set","cote.csf.schema.conflict-set-id-preimage",
-   []any{input.CycleID[:],bytesIDs(ids),uint64(0),input.Snapshot.ResourceID})
+  if current[viable[0].ID]!=input.Snapshot.Available||current[viable[1].ID]!=input.Snapshot.Available{
+   for _,c:=range viable{result.Indeterminate=append(result.Indeterminate,Indeterminate{
+    Subject:c.ID,SubjectDigest:c.Digest,SubjectKind:1,Facet:2,
+    Validator:refs["conflict-resolvers"],Reason:"resource.resolver.unsupported",Evidence:[]any{},
+   })}
+   result.Failure="INDETERMINATE_FACET"
+   if err:=seal(&result,input);err!=nil{return result,err}
+   return result,ErrIndeterminate
+  }
+  result.Conflicts=append(result.Conflicts,*resourceConflict)
+  draw,index,e:=namedDraw(d,input,resourceConflict.CandidateIDs,refs["rng"])
   if e!=nil{return result,e}
-  fields:=[]any{id[:],bytesIDs(ids),uint64(0),input.Snapshot.ResourceID,refs["validators"],refs["conflict-resolvers"]}
-  dg,e:=digest(d,"cote.csf.digest.conflict-set","cote.csf.schema.conflict-set.body",fields)
-  if e!=nil{return result,e}
-  raw,e:=encode(fields,dg);if e!=nil{return result,e}
-  result.Conflicts=append(result.Conflicts,Conflict{ID:id,CandidateIDs:ids,Fields:fields,Digest:dg,Canonical:raw})
-  draw,index,e:=namedDraw(d,input,ids,refs["rng"]);if e!=nil{return result,e}
   result.Draws=append(result.Draws,draw)
-  winners[ids[index]]=true
+  winners[resourceConflict.CandidateIDs[index]]=true
  }
  // All resulting dispositions are still provisional. No lifecycle output,
  // DecisionRecord, Event or WorldRevision may be inferred from them here.

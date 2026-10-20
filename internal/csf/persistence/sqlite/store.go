@@ -695,3 +695,31 @@ func (s *Store) LoadGenesis(ctx context.Context, runID [32]byte) ([]byte, error)
 	err := s.db.QueryRowContext(ctx, `SELECT canonical FROM genesis_records WHERE run_id=?`, runID[:]).Scan(&encoded)
 	return encoded, err
 }
+
+func (s *Store) LoadWorldState(ctx context.Context,revision uint64)([]any,[32]byte,error){
+ var zero [32]byte
+ var canonical,hash []byte
+ err:=s.db.QueryRowContext(ctx,"SELECT canonical,state_hash FROM world_revisions WHERE revision=?",revision).Scan(&canonical,&hash)
+ if err!=nil{return nil,zero,err}
+ if len(hash)!=32{return nil,zero,errors.New("persisted WorldRevision hash invalid")}
+ raw,err:=codec.StrictDecodePayload(canonical);if err!=nil{return nil,zero,err}
+ fields,ok:=raw.([]any)
+ if !ok||len(fields)!=6||fields[3]!=revision||!bytes.Equal(hash,func()[]byte{v,_:=fields[5].([]byte);return v}()){
+  return nil,zero,errors.New("persisted WorldRevision does not authenticate selected revision")
+ }
+ typed,ok:=fields[4].([]any)
+ if !ok||len(typed)!=4{return nil,zero,errors.New("persisted WorldState typed value invalid")}
+ encoded,ok:=typed[2].([]byte)
+ if !ok{return nil,zero,errors.New("WorldState missing canonical typed envelope")}
+ env,err:=codec.StrictDecodeEnvelope(encoded)
+ if err!=nil{return nil,zero,err}
+ if !sameCanonical([]any{typed[0],typed[1]},[]any{env.SchemaID,uint64(env.SchemaVersion)}){
+  return nil,zero,errors.New("WorldState typed descriptor mismatches canonical envelope")
+ }
+ digest:=identity.OpaqueContentHash(encoded)
+ if !bytes.Equal(digest[:],hash)||!bytes.Equal(digest[:],func()[]byte{v,_:=typed[3].([]byte);return v}()){
+  return nil,zero,errors.New("persisted WorldState envelope digest invalid")
+ }
+ copy(zero[:],hash)
+ return typed,zero,nil
+}

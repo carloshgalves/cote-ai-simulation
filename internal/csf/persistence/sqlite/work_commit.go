@@ -224,4 +224,3 @@ func noProposalIDs(fence []any)[]any{
  }
  return out
 }
-

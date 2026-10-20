@@ -33,7 +33,7 @@ func DetectClaims(d identity.Deriver,cycle domain.ID,candidates []Candidate,
  for _,c:=range candidates{
   if candidatesSeen[c.ID]||len(c.Fields)!=16{return nil,ErrProvenance}
   candidatesSeen[c.ID]=true
-  if !sameBytes(c.Fields[0],c.ID[:]){return nil,ErrProvenance}
+  if err:=verifyCandidateIdentity(d,cycle,c);err!=nil{return nil,err}
   expected,e:=digest(d,"cote.csf.digest.commit-candidate","cote.csf.schema.commit-candidate.body",c.Fields)
   if e!=nil||expected!=c.Digest{return nil,ErrProvenance}
   raw,e:=encode(c.Fields,c.Digest);if e!=nil||!bytes.Equal(raw,c.Canonical){return nil,ErrProvenance}
@@ -100,6 +100,37 @@ func DetectClaims(d identity.Deriver,cycle domain.ID,candidates []Candidate,
  }
  sort.Slice(result,func(i,j int)bool{return canonicalIDLess(result[i].ID,result[j].ID)})
  return result,nil
+}
+
+
+// verifyCandidateIdentity binds the claim detector to the registered
+// candidate ID preimage, rather than merely trusting a self-hashed body.
+func verifyCandidateIdentity(d identity.Deriver,cycle domain.ID,c Candidate)error{
+ if len(c.Fields)!=16||!sameBytes(c.Fields[0],c.ID[:])||!sameBytes(c.Fields[2],cycle[:]){
+  return ErrProvenance
+ }
+ run,ok:=c.Fields[1].([]byte)
+ if !ok||len(run)!=32{return ErrProvenance}
+ sources,ok:=c.Fields[3].([]any)
+ if !ok||len(sources)==0||len(sources)!=len(c.SourceUnitIDs){return ErrProvenance}
+ for i,id:=range c.SourceUnitIDs{
+  if id==(domain.ID{})||!sameBytes(sources[i],id[:])||
+   (i>0&&!canonicalIDLess(c.SourceUnitIDs[i-1],id)){
+   return ErrProvenance
+  }
+ }
+ producer,ok:=c.Fields[4].(string)
+ if !ok||domain.ValidateMachineID(producer)!=nil{return ErrProvenance}
+ version,ok:=c.Fields[5].(uint64)
+ if !ok||version==0||version>uint64(^uint32(0)){return ErrProvenance}
+ role,ok:=c.Fields[6].(uint64)
+ if !ok||role>uint64(^uint16(0)){return ErrProvenance}
+ ordinal,ok:=c.Fields[7].(uint64)
+ if !ok||ordinal>uint64(^uint32(0)){return ErrProvenance}
+ wanted,err:=derive(d,"cote.csf.id.commit-candidate","cote.csf.schema.candidate-id-preimage",
+  []any{run,cycle[:],bytesIDs(c.SourceUnitIDs),producer,version,role,ordinal})
+ if err!=nil||wanted!=c.ID{return ErrProvenance}
+ return nil
 }
 
 func asPositiveAmount(v any)(int64,bool){

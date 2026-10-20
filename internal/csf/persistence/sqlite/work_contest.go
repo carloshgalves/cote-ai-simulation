@@ -30,6 +30,7 @@ func verifyTwoResourceTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
  rawSources,ok:=fence[11].([]any);if !ok||len(rawSources)!=2{return errors.New("two-agent contest source set invalid")}
  type competitor struct{source,round,candidate domain.ID;digest domain.Digest;slot string;candidateBody,proposal []any}
  competitors:=make([]competitor,0,2)
+ seenActors:=map[string]bool{}
  for _,item:=range rawSources{
   fields,ok:=item.([]any)
   if !ok||len(fields)!=5||fields[1]!=uint64(0){return errors.New("contest admits non-slot input")}
@@ -50,6 +51,32 @@ func verifyTwoResourceTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
   }
   actor,ok:=prop[6].([]any);if !ok||len(actor)!=2||actor[0]!="school"{
    return errors.New("contest action actor not eligible for synthetic resource")
+  }
+  actorID,ok:=actor[1].(string)
+  if !ok||actorID==""||seenActors[actorID]{return errors.New("contest actor duplicated or invalid")}
+  seenActors[actorID]=true
+  targets,ok:=prop[7].([]any)
+  if !ok||len(targets)!=0||!sameCanonical(prop[10],noRef())||
+   !sameCanonical(prop[12],noRef())||!sameCanonical(prop[17],noRef()){
+   return errors.New("contest proposal references unregistered target, location, duration or idempotency")
+  }
+  effective,ok:=asSigned64(prop[11])
+  if !ok||effective!=int64(prior.Instant){return errors.New("contest proposal execution instant does not match sealed clock")}
+  params,ok:=prop[8].([]any)
+  if !ok||len(params)!=4||params[0]!="cote.csf.schema.typed-value"||params[1]!=uint64(1){
+   return errors.New("contest proposal typed payload malformed")
+  }
+  payload,ok:=params[2].([]byte)
+  if !ok{return errors.New("contest proposal typed payload missing")}
+  envelope,err:=codec.StrictDecodeEnvelope(payload)
+  if err!=nil||envelope.DomainTag!="cote.csf.testresource.params"||
+   envelope.SchemaID!="cote.csf.schema.typed-value"||envelope.SchemaVersion!=1||
+   !sameCanonical(envelope.Value,[]any{}){
+   return errors.New("contest proposal parameters are not registered resource input")
+  }
+  paramHash:=identity.OpaqueContentHash(payload)
+  if !equalBytes(params[3],paramHash[:]){
+   return errors.New("contest proposal parameters have invalid typed digest")
   }
   id,err:=registeredDigest("cote.csf.id.action-proposal","cote.csf.schema.slot-response-id-preimage",
    []any{prop[1],uint64(0)});if err!=nil{return err}

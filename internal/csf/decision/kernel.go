@@ -275,7 +275,7 @@ func MakeCandidate(d identity.Deriver,run,cycle domain.ID,sourceIDs []domain.ID,
  var out Candidate
  if len(sourceIDs)==0||len(provenance)==0{return out,ErrProvenance}
  if err:=domain.ValidateMachineID(producer);err!=nil{return out,err}
- for i,id:=range sourceIDs{if id==(domain.ID{})||(i>0&&sourceIDs[i-1]==id){return out,ErrProvenance}}
+ for i,id:=range sourceIDs{if id==(domain.ID{})||(i>0&&!canonicalIDLess(sourceIDs[i-1],id)){return out,ErrProvenance}}
  id,e:=derive(d,"cote.csf.id.commit-candidate","cote.csf.schema.candidate-id-preimage",
   []any{run[:],cycle[:],bytesIDs(sourceIDs),producer,uint64(version),uint64(role),uint64(ordinal)})
  if e!=nil{return out,e}

@@ -133,6 +133,26 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   seenRounds[p.ID]=true
  }
  if len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
+ // A selected RoundDeclaration is indivisible: a subset of its slots
+ // cannot become a terminal cycle, since the stranded slot would then
+ // remain eligible at a clock ordinal that has already advanced.
+ expectedSlots:=map[domain.ID]map[string]bool{}
+ for roundID:=range admittedRounds{
+  var raw []byte
+  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",roundID[:]).Scan(&raw);err!=nil{return err}
+  parsed,err:=codec.StrictDecodePayload(raw);if err!=nil{return err}
+  fields,ok:=parsed.([]any)
+  if !ok||len(fields)!=11||!equalBytes(fields[0],roundID[:])||!equalBytes(fields[1],b.RunID[:])||
+   fields[9]!=uint64(0){return errors.New("WORK cohort contains non-pending RoundDeclaration")}
+  slots,ok:=fields[4].([]any)
+  if !ok||len(slots)==0{return errors.New("selected round has no slots")}
+  membership:=map[string]bool{}
+  for _,v:=range slots{
+   slot,ok:=v.(string);if !ok||slot==""||membership[slot]{return errors.New("selected round has malformed or repeated slot")}
+   membership[slot]=true
+  }
+  expectedSlots[roundID]=membership
+ }
  var prevHash []byte
  var priorWorld []byte
  if err:=tx.QueryRowContext(ctx,"SELECT state_hash,canonical FROM world_revisions WHERE revision=?",
@@ -159,6 +179,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   return errors.New("CycleCommit omits terminal decision references")
  }
  pairing:=make([]any,0,len(units))
+ coveredSlots:=map[domain.ID]map[string]bool{}
  for i,unit:=range units{
   source,ok:=unit.([]any)
   if !ok||len(source)!=5||source[1]!=uint64(0){
@@ -174,6 +195,15 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
    !equalBytes(src[3],b.CycleID[:])||src[8]!=uint64(prior.Revision){
    return errors.New("WORK source is not an authentic NoProposal")
   }
+  roundBytes,ok:=src[4].([]byte);if !ok||len(roundBytes)!=32{return errors.New("NoProposal round root invalid")}
+  slot,ok:=src[5].(string);if !ok{return errors.New("NoProposal slot ID invalid")}
+  var roundID domain.ID;copy(roundID[:],roundBytes)
+  if !expectedSlots[roundID][slot]{
+   return errors.New("NoProposal source belongs to no selected round slot")
+  }
+  if coveredSlots[roundID]==nil{coveredSlots[roundID]=map[string]bool{}}
+  if coveredSlots[roundID][slot]{return errors.New("two NoProposal records settle the same round slot")}
+  coveredSlots[roundID][slot]=true
   responseDigest,err:=registeredDigest("cote.csf.digest.no-proposal-unit",
    "cote.csf.schema.no-proposal.body",[]any{src[:10]});if err!=nil{return err}
   responseID,err:=registeredDigest("cote.csf.id.no-proposal",
@@ -207,6 +237,11 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
    return errors.New("WORK decision IDs not in admitted order")
   }
   pairing=append(pairing,[]any{sourceID,b.Decisions[i].Identity[:],hash[:]})
+ }
+ for roundID,slots:=range expectedSlots{
+  if len(coveredSlots[roundID])!=len(slots){
+   return errors.New("terminal WORK cannot settle a strict subset of round slots")
+  }
  }
  dd,err:=registeredDigest("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",pairing)
  if err!=nil{return err}

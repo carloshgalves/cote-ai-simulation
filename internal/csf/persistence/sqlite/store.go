@@ -486,6 +486,19 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
  // transaction holds the admission boundary. A stale SQL cursor must not
  // mint a gapless-looking but causally invalid sequence.
  if err:=verifyIngressProjections(ctx,tx);err!=nil{return err}
+ // A source record identity has exactly one canonical ingress receipt.
+ // Stale Ledger instances may retry an existing producer ID with the next
+ // sequence. Reject atomically; callers can reopen to obtain the original
+ // receipt rather than creating a second receipt for the same causal unit.
+ var existingIngress []byte
+ err=tx.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",record.Identity[:]).Scan(&existingIngress)
+ if err==nil {
+  if !bytes.Equal(existingIngress,record.Canonical) {
+   return errors.New("source ingress identity collision")
+  }
+  return errors.New("source ingress record already published; reopen ledger for existing receipt")
+ }
+ if err!=sql.ErrNoRows{return err}
  var current uint64
 	err = tx.QueryRowContext(ctx, `SELECT next_seq FROM input_source_cursors WHERE source_id=?`, source).Scan(&current)
 	if err != nil && err != sql.ErrNoRows {

@@ -229,6 +229,9 @@ func (l *Ledger) restore(records []ports.CanonicalRecord) error {
 			var digest domain.Digest
 			copy(id[:], idBytes)
 			copy(digest[:], digestBytes)
+            if _, exists := receipts[id]; exists {
+                return errors.New("duplicate persisted SourceIngressReceipt for one causal record ID")
+            }
 			receipts[id] = receiptRecord{source: source, seq: seq, kind: kind, id: id, digest: digest, bytes: bytes.Clone(record.Canonical)}
 			continue
 		}

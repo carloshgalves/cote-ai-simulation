@@ -36,6 +36,7 @@ func verifyIngressProjections(ctx context.Context,q ingressQuery)error{
  if authorityCount==0{return nil}
  declared:=map[string]bool{}
  canonical:=map[string]ingressProjection{}
+ receiptRecordIDs:=map[[32]byte]struct{}{}
  rows,err:=q.QueryContext(ctx,"SELECT id,canonical FROM input_ledger ORDER BY rowid")
  if err!=nil{return err}
  for rows.Next(){
@@ -69,6 +70,10 @@ func verifyIngressProjections(ctx context.Context,q ingressQuery)error{
   key:=fmt.Sprintf("%s/%d",source,seq)
   if _,exists:=canonical[key];exists{rows.Close();return errors.New("duplicate canonical ingress receipt coordinate")}
   var rid [32]byte;copy(rid[:],idRef)
+  if _,exists:=receiptRecordIDs[rid];exists{
+   rows.Close();return errors.New("duplicate ingress receipts for one causal record ID")
+  }
+  receiptRecordIDs[rid]=struct{}{}
   canonical[key]=ingressProjection{source:source,seq:seq,record:rid,raw:raw}
  }
  if err:=rows.Err();err!=nil{rows.Close();return err}

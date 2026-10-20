@@ -20,6 +20,9 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 )
 func singleResourceFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
+ return singleResourceFixtureWithFuture(t,false)
+}
+func singleResourceFixtureWithFuture(t *testing.T,future bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
  t.Helper();ctx:=context.Background()
  bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
  g:=stockGenesis(t,bundle)
@@ -28,10 +31,28 @@ func singleResourceFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger
  if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
  if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
  if err:=store.BootstrapGenesisTriggers(ctx,g,bundle,nil);err!=nil{t.Fatal(err)}
+ if future{
+  d:=identity.New(bundle)
+  origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+  id,_,err:=d.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+   []any{origin,uint64(0),uint64(0)});if err!=nil{t.Fatal(err)}
+  due:=g.InitialInstant+100
+  fields:=[]any{id[:],g.RunID[:],"schedule",int64(due),[]any{int64(due),uint64(0)},
+   "test.occurrence",uint64(1),g.Payload[16],uint64(0),origin,uint64(0),uint64(0),
+   []any{uint64(0)},[]any{uint64(0)}}
+  dg,_,err:=d.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,fields)
+  if err!=nil{t.Fatal(err)}
+  canonical,err:=codec.CanonicalPayload(append(cloneAny(fields),dg[:]))
+  if err!=nil{t.Fatal(err)}
+  if err:=store.SeedGenesisOccurrence(ctx,domain.ID(id),g.RunID,
+   domain.EligibilityCoordinate{NotBeforeInstant:due},canonical);err!=nil{t.Fatal(err)}
+ }
  ledger,err:=inputledger.New(ctx,g.RunID,bundle,store);if err!=nil{t.Fatal(err)}
  if err:=ledger.DeclareSource(inputledger.Source{ID:"driver"});err!=nil{t.Fatal(err)}
  at:=domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant}
- if _,err:=ledger.CloseSource(ctx,"driver",inputledger.Closure{ProducerKey:"source.closed",ClosedThrough:at});err!=nil{t.Fatal(err)}
+ closed:=at
+ if future{closed.NotBeforeInstant+=100}
+ if _,err:=ledger.CloseSource(ctx,"driver",inputledger.Closure{ProducerKey:"source.closed",ClosedThrough:closed});err!=nil{t.Fatal(err)}
  d:=identity.New(bundle)
  cycleID,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
   []any{g.RunID[:],[]any{int64(g.InitialInstant),uint64(0)}});if err!=nil{t.Fatal(err)}
@@ -153,5 +174,28 @@ func TestSingleResourceCommitRejectsForgedProofsWithoutPublishing(t *testing.T){
     t.Fatalf("valid retry of unchanged in-flight fence failed: %v",err)
    }
   })
+ }
+}
+
+func TestResourceConsumedThenClockAdvancePreservesStockAndReplays(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=singleResourceFixtureWithFuture(t,true)
+ if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ _,_,_,_,_,run:=ledger.Snapshot()
+ before,_,err:=store.LoadWorldState(ctx,1);if err!=nil{t.Fatal(err)}
+ used,err:=reducer.DecodeStock(before);if err!=nil||used.Available!=0{t.Fatal("resource reducer missed unit",err)}
+ advance,err:=c.Advance(ctx,ledger,run)
+ if err!=nil{t.Fatalf("CLOCK_ADVANCE could not advance a mutated world: %v",err)}
+ if advance.ResultClock.Revision!=2||advance.ResultClock.Instant<=cycle.Instant{
+  t.Fatal("resource successor did not advance time",advance.ResultClock)
+ }
+ after,_,err:=store.LoadWorldState(ctx,2);if err!=nil{t.Fatal(err)}
+ remaining,err:=reducer.DecodeStock(after)
+ if err!=nil||remaining.Available!=0{t.Fatal("temporal advance replenished spent resource",err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
+ report,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle)
+ if err!=nil||report.ReplayedCommits!=2||report.ReplayedEvents!=4||
+  report.ReconstructedClock!=advance.ResultClock{
+  t.Fatalf("resource WORK + CLOCK_ADVANCE replay failed: %+v %v",report,err)
  }
 }

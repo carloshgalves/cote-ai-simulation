@@ -9,6 +9,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 )
 
 // replayNoProposalCommit is the zero-event WORK fold. Every decision and its
@@ -81,14 +82,23 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
  }
  tasks,ok:=journal[18].([]any)
  if !ok||len(tasks)!=0{return clock.State{},errors.New("NoProposal cannot replay visible tasks")}
- if !equalBytes(journal[7],hash[:])||!equalBytes(journal[9],hash[:]){
-  return clock.State{},errors.New("WORK replay changed world-state hash without a reducer")
+ resultTyped,resultHash:=typed,hash
+ if len(events)==2{
+  eventValue,err:=codec.StrictDecodePayload(events[0].([]byte));if err!=nil{return clock.State{},err}
+  fields,ok:=eventValue.([]any)
+  if ok&&len(fields)==19&&fields[3]=="resource.consumed"{
+   resultTyped,resultHash,err=reducer.Consume(typed,1)
+   if err!=nil{return clock.State{},err}
+  }
+ }
+ if !equalBytes(journal[7],hash[:])||!equalBytes(journal[9],resultHash[:]){
+  return clock.State{},errors.New("WORK replay WorldState hashes not from registered reducer")
  }
  var raw []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM world_revisions WHERE revision=?",uint64(next.Revision)).Scan(&raw);err!=nil{return clock.State{},err}
  want,err:=codec.CanonicalPayload([]any{uint64(prior.Revision),typed,hash[:],
-  uint64(next.Revision),typed,hash[:]});if err!=nil{return clock.State{},err}
- if !bytes.Equal(raw,want){return clock.State{},errors.New("WORK replay world transition differs from derived zero-effect reducer")}
+  uint64(next.Revision),resultTyped,resultHash[:]});if err!=nil{return clock.State{},err}
+ if !bytes.Equal(raw,want){return clock.State{},errors.New("WORK replay world transition differs from registered reducer")}
  // This verifies every NoProposal input-ref, DecisionRecord identity/hash,
  // ordered decision pair digest, and the exact committed fence root.
  if _,err:=settledNoProposalUnits(ctx,tx,runID);err!=nil{return clock.State{},err}

@@ -100,6 +100,9 @@ type TerminalAbortBatch struct {
  FenceID [32]byte
  ExpectedClock []byte
  Envelope CanonicalRecord
+ // Candidate subject roots, canonical and source-bound; committed together
+ // with the abort journal if a per-candidate INDETERMINATE is emitted.
+ CandidateEvidence []CanonicalRecord
  FailAfterStep uint8
 }
 type AttemptRetryBatch struct {

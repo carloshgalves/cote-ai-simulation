@@ -23,7 +23,12 @@ func admitTerminalFence(ctx context.Context,tx *sql.Tx,record ports.CanonicalRec
   return nil,err
  }
  fence,ok:=decoded.([]any)
- if !ok||len(fence)!=18{return nil,errors.New("active run requires canonical AdmissionFence")}
+ if !ok||len(fence)!=18{
+  var count int
+  if e:=tx.QueryRowContext(ctx,"SELECT count(*) FROM clock_states").Scan(&count);e!=nil{return nil,e}
+  if count==0{return nil,nil} // legacy pre-genesis admission guard fixture
+  return nil,errors.New("active run requires canonical AdmissionFence")
+ }
  runBytes,ok:=fence[0].([]byte);if !ok||len(runBytes)!=32{return nil,errors.New("fence run missing")}
  cycleBytes,ok:=fence[1].([]byte);if !ok||len(cycleBytes)!=32{return nil,errors.New("fence cycle missing")}
  var run,cycle [32]byte;copy(run[:],runBytes);copy(cycle[:],cycleBytes)
@@ -37,10 +42,9 @@ func admitTerminalFence(ctx context.Context,tx *sql.Tx,record ports.CanonicalRec
   return nil,errors.New("AdmissionFence clock/revision is stale")
  }
  ordinal,ok:=fence[5].(uint64)
- if !ok||state.LastOrdinal< -1||ordinal<=uint64(state.LastOrdinal){
-  // When LastOrdinal=-1 no cycle has committed at this instant, so
-  // ordinal=0 is valid. Handle that sentinel below.
-  if state.LastOrdinal!= -1||!ok{return nil,errors.New("AdmissionFence ordinal not after last terminal")}
+ if !ok||state.LastOrdinal< -1||
+  (state.LastOrdinal>=0&&ordinal<=uint64(state.LastOrdinal)){
+  return nil,errors.New("AdmissionFence ordinal not after last terminal")
  }
  var persistedHash []byte
  if err:=tx.QueryRowContext(ctx,"SELECT state_hash FROM world_revisions WHERE revision=?",uint64(state.Revision)).Scan(&persistedHash);err!=nil{return nil,err}

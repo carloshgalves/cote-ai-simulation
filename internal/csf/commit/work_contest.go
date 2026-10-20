@@ -37,6 +37,7 @@ func (c *Coordinator) CommitTwoResourceContest(ctx context.Context,ledger *input
  if state.Revision!=cycle.BaseRevision||state.Instant!=cycle.Instant||
   cycle.Ordinal>math.MaxInt64||state.LastOrdinal>=int64(cycle.Ordinal)||
   state.Revision==domain.WorldRevision(math.MaxUint64){return empty,errors.New("stale contest coordinate")}
+ if abort,hit,err:=c.abortIfCascadeExceeded(ctx,run,cycle,fence);hit||err!=nil{return abort,err}
  before,hash,err:=c.store.LoadWorldState(ctx,uint64(state.Revision));if err!=nil{return empty,err}
  if hash!=cycle.BaseStateHash{return empty,errors.New("contest WorldState base differs from fence")}
  stock,err:=reducer.DecodeStock(before);if err!=nil||stock.Available!=1{return empty,errors.New("two contenders require precisely one real inventory unit")}

@@ -9,13 +9,6 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 )
 
-// CascadePolicyVersionV1 is the immutable CSFRV1-5 same-instant execution
-// bound for the first base-policy runtime. Each subsequent policy change must
-// issue a different bundle/version. This is a count of terminal WORK cycles,
-// NOT the (possibly sparse) logical cycle ordinal.
-const CascadePolicyVersionV1 uint64=1
-const MaxSameInstantWorkV1 uint64=64
-
 func countWorkAt(ctx context.Context,q queryOne,run [32]byte,instant int64)(uint64,error){
  rows,err:=q.QueryContext(ctx,"SELECT cycle_id,commit_id FROM committed_cycles WHERE run_id=?",run[:])
  if err!=nil{return 0,err}

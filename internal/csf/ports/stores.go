@@ -92,6 +92,26 @@ type ClockAdvanceBatch struct {
  // must roll back all authorities and leave exactly the old prefix.
  FailAfterStep uint8
 }
+// TerminalAbortBatch and AttemptRetryBatch extend the existing SQLite
+// transaction boundary; they do not establish a second ledger writer.
+type TerminalAbortBatch struct {
+ RunID [32]byte
+ CycleID [32]byte
+ FenceID [32]byte
+ ExpectedClock []byte
+ Envelope CanonicalRecord
+ FailAfterStep uint8
+}
+type AttemptRetryBatch struct {
+ RunID [32]byte
+ CycleID [32]byte
+ AbortID [32]byte
+ ExpectedClock []byte
+ Record CanonicalRecord
+ FailAfterStep uint8
+}
 type ClockAdvanceStore interface {
  CommitClockAdvance(context.Context, ClockAdvanceBatch) error
+ CommitCycleAbort(context.Context, TerminalAbortBatch) error
+ AuthorizeAttemptRetry(context.Context, AttemptRetryBatch) error
 }

@@ -4,7 +4,6 @@ package decision
 
 import (
  "bytes"
- "crypto/sha256"
  "errors"
  "fmt"
 
@@ -272,9 +271,8 @@ func namedDraw(d identity.Deriver,input Input,ids []domain.ID,ref []any)(Draw,ui
  id,e:=derive(d,"cote.csf.id.rng-draw","cote.csf.schema.rng-draw-id-preimage",
   []any{input.RunID[:],input.CycleID[:],uint64(input.Attempt),subsystem,decisionKey,bytesIDs(ids),purpose,ref})
  if e!=nil{return out,0,e}
- seedData,e:=codec.CanonicalPayload([]any{input.Seed[:],subsystem,decisionKey,bytesIDs(ids),purpose,ref})
+ bits,e:=identity.NamedSubstreamV1(input.Seed,subsystem,decisionKey,bytesIDs(ids),purpose,ref)
  if e!=nil{return out,0,e}
- bits:=sha256.Sum256(seedData)
  // Two contenders: one unbiased bit; never derive a stream from worker order.
  selected:=uint64(bits[0]&1)
  envelope,e:=codec.CanonicalBytes("cote.csf.test.resource-rng-result","cote.csf.schema.typed-value",1,selected)

@@ -61,3 +61,54 @@ func TestConservativeDetectorCoversResourceReadsWritesAndInvariants(t *testing.T
   t.Fatal("altered candidate claims accepted without digest")
  }
 }
+
+func TestClaimDetectorRefusesForgedCandidateSourceOrCycle(t *testing.T){
+ in,a,b:=fixture(t,true)
+ d:=identity.New(in.Bundle)
+ refs,err:=policyRefs(in.Bundle);if err!=nil{t.Fatal(err)}
+ makeCandidate:=func(id domain.ID,origin domain.Digest)Candidate{
+  candidate,err:=MakeCandidate(d,in.RunID,in.CycleID,[]domain.ID{id},
+   "resource.consume",1,0,0,a.Body[9].([]any),
+   []any{[]any{uint64(5),id[:],origin[:]}},0,refs["conflict-resolvers"])
+  if err!=nil{t.Fatal(err)}
+  return candidate
+ }
+ one:=makeCandidate(a.ID,a.Digest)
+ two:=makeCandidate(b.ID,b.Digest)
+ check:=func(c Candidate){
+  t.Helper()
+  if _,err:=DetectClaims(d,in.CycleID,[]Candidate{c,two},
+   map[string]int64{"last.resource":1},refs["validators"],refs["conflict-resolvers"]);
+   !errors.Is(err,ErrProvenance){
+   t.Fatalf("forged candidate passed conflict grouping: %v",err)
+  }
+ }
+ replacedSource:=one
+ replacedSource.SourceUnitIDs=[]domain.ID{b.ID}
+ check(replacedSource)
+ rehash:=func(c *Candidate){
+  t.Helper()
+  digest,err:=digest(d,"cote.csf.digest.commit-candidate",
+   "cote.csf.schema.commit-candidate.body",c.Fields)
+  if err!=nil{t.Fatal(err)}
+  c.Digest=digest
+  c.Canonical,err=encode(c.Fields,digest)
+  if err!=nil{t.Fatal(err)}
+ }
+ forgedID:=one
+ forgedID.Fields=append([]any(nil),one.Fields...)
+ forgedID.ID[0]^=0xff
+ forgedID.Fields[0]=forgedID.ID[:]
+ rehash(&forgedID)
+ check(forgedID)
+ foreignCycle:=one
+ foreignCycle.Fields=append([]any(nil),one.Fields...)
+ foreign:=in.CycleID
+ foreign[0]^=0xf0
+ foreignCycle.Fields[2]=foreign[:]
+ rehash(&foreignCycle)
+ check(foreignCycle)
+ correct,err:=DetectClaims(d,in.CycleID,[]Candidate{one,two},
+  map[string]int64{"last.resource":1},refs["validators"],refs["conflict-resolvers"])
+ if err!=nil||len(correct)!=1{t.Fatalf("valid candidates rejected: %v %+v",err,correct)}
+}

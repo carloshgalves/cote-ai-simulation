@@ -98,11 +98,19 @@ func verifyAbortSubjects(fence []any,items []any,candidates []ports.CanonicalRec
    return errors.New("candidate not derived in the aborted cycle")
   }
   sourceIDs,ok:=fields[3].([]any);if !ok||len(sourceIDs)==0{return errors.New("candidate source set missing")}
+  provenance,ok:=fields[13].([]any)
+  if !ok||len(provenance)!=len(sourceIDs){return errors.New("candidate lacks exact source provenance")}
   var prior []byte
-  for _,v:=range sourceIDs{
+  for i,v:=range sourceIDs{
    source,ok:=v.([]byte);if !ok||len(source)!=32{return errors.New("candidate source ID malformed")}
    var id [32]byte;copy(id[:],source)
-   if _,exists:=sourceDigests[id];!exists{return errors.New("candidate uses unit outside AdmissionFence")}
+   digest,exists:=sourceDigests[id]
+   if !exists{return errors.New("candidate uses unit outside AdmissionFence")}
+   ref,ok:=provenance[i].([]any)
+   if !ok||len(ref)!=3||!equalBytes(ref[1],source)||!equalBytes(ref[2],digest[:]){
+    return errors.New("candidate source provenance digest differs from sealed unit")
+   }
+   kind,ok:=ref[0].(uint64);if !ok||kind>27{return errors.New("candidate source reference kind invalid")}
    if prior!=nil&&bytes.Compare(prior,source)>=0{return errors.New("candidate sources are not canonical")}
    prior=source
   }

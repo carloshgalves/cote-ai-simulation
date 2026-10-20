@@ -185,9 +185,9 @@ func TestHistoricalAliasKeepsIndependentSourceUnit(t *testing.T){
  tmp:=in
  tmp.Units=[]Unit{{Response:a,ProducerScope:"exam"}}
  tmp.Admitted=[]domain.ID{a.ID}
- prepared,e:=validateResponse(d,tmp,tmp.Units[0]);if e!=nil{t.Fatal(e)}
+ unitPrep,e:=validateResponse(d,tmp,tmp.Units[0]);if e!=nil{t.Fatal(e)}
  refs,e:=policyRefs(in.Bundle);if e!=nil{t.Fatal(e)}
- candidates,e:=resolveAliases(d,[]prepared{prepared},nil,refs["idempotency"])
+ candidates,e:=resolveAliases(d,[]prepared{unitPrep},nil,refs["idempotency"])
  if e!=nil{t.Fatal(e)}
  binding:=HistoryBinding{Namespace:candidates[0].ns,LogicalDigest:candidates[0].logical,CanonicalUnit:a.ID}
  in.Admitted=[]domain.ID{b.ID}

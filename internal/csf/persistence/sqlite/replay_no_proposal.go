@@ -8,6 +8,7 @@ import (
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 )
 
 // replayNoProposalCommit is the zero-event WORK fold. Every decision and its
@@ -74,4 +75,75 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
  if _,err:=settledNoProposalUnits(ctx,tx,runID);err!=nil{return clock.State{},err}
  if err:=tx.Commit();err!=nil{return clock.State{},err}
  return next,nil
+}
+
+// historicalWorkRounds recovers the original pending round set at a replay
+// revision. A fully-settled round disappears from the live PendingClock, but
+// was pending before its terminal WORK. Its immutable RoundDeclaration and
+// committed revision/AdmissionFence reproduce that historical interval.
+func (s *Store) historicalWorkRounds(ctx context.Context,runID [32]byte,replayRevision uint64)([]clock.Pending,error){
+ type committed struct{cycleID,commitID [32]byte}
+ rows,err:=s.db.QueryContext(ctx,"SELECT cycle_id,commit_id FROM committed_cycles WHERE run_id=? ORDER BY rowid",runID[:])
+ if err!=nil{return nil,err}
+ var commits []committed
+ for rows.Next(){
+  var a,b []byte
+  if err:=rows.Scan(&a,&b);err!=nil{rows.Close();return nil,err}
+  if len(a)!=32||len(b)!=32{rows.Close();return nil,errors.New("replay committed cycle key malformed")}
+  var pair committed;copy(pair.cycleID[:],a);copy(pair.commitID[:],b);commits=append(commits,pair)
+ }
+ if err:=rows.Err();err!=nil{rows.Close();return nil,err}
+ if err:=rows.Close();err!=nil{return nil,err}
+ settledAt:=map[[32]byte]uint64{}
+ for _,item:=range commits{
+  var raw []byte
+  if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",item.commitID[:]).Scan(&raw);err!=nil{return nil,err}
+  v,err:=codec.StrictDecodePayload(raw);if err!=nil{return nil,err}
+  journal,ok:=v.([]any);if !ok||len(journal)!=24{return nil,errors.New("replay journal invalid")}
+  plan,ok:=journal[5].([]any);if !ok||len(plan)==0{return nil,errors.New("replay historical plan missing")}
+  if len(plan)==4&&plan[0]==uint64(1){continue}
+  if len(plan)!=1||plan[0]!=uint64(0){return nil,errors.New("replay unsupported WORK handler")}
+  at,ok:=journal[8].(uint64);if !ok{return nil,errors.New("WORK resulting revision missing")}
+  attempt,ok:=journal[2].(uint64);if !ok{return nil,errors.New("WORK attempt missing")}
+  fid,err:=registeredDigest("cote.csf.id.admission-fence","cote.csf.schema.admission-fence-id-preimage",
+   []any{runID[:],item.cycleID[:],attempt});if err!=nil{return nil,err}
+  var fenceRaw []byte
+  if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",fid[:]).Scan(&fenceRaw);err!=nil{return nil,err}
+  rawFence,err:=codec.StrictDecodePayload(fenceRaw);if err!=nil{return nil,err}
+  fence,ok:=rawFence.([]any);if !ok||len(fence)!=18{return nil,errors.New("historical round fence corrupt")}
+  cohort,ok:=fence[10].([]any);if !ok||len(cohort)!=2{return nil,errors.New("historical round cohort malformed")}
+  rounds,ok:=cohort[1].([]any);if !ok{return nil,errors.New("historical round members missing")}
+  for _,v:=range rounds{
+   r,ok:=v.([]any);if !ok||len(r)!=2{return nil,errors.New("historical member invalid")}
+   id,ok:=r[0].([]byte);if !ok||len(id)!=32{return nil,errors.New("historical round ID invalid")}
+   var key [32]byte;copy(key[:],id)
+   if _,dup:=settledAt[key];dup{return nil,errors.New("round committed more than once")}
+   settledAt[key]=at
+  }
+ }
+ list,err:=s.db.QueryContext(ctx,"SELECT id,canonical FROM input_ledger ORDER BY rowid")
+ if err!=nil{return nil,err}
+ result:=make([]clock.Pending,0)
+ for list.Next(){
+  var id,raw []byte
+  if err:=list.Scan(&id,&raw);err!=nil{list.Close();return nil,err}
+  fieldsAny,err:=codec.StrictDecodePayload(raw);if err!=nil{continue}
+  fields,ok:=fieldsAny.([]any)
+  if !ok||len(fields)!=11||len(id)!=32||!equalBytes(fields[0],id)||
+   !equalBytes(fields[1],runID[:]){continue}
+  if _,ok:=fields[3].([]any);!ok{continue}
+  if _,ok:=fields[4].([]any);!ok{continue}
+  if fields[9]!=uint64(0){continue}
+  var key [32]byte;copy(key[:],id)
+  if terminal,ok:=settledAt[key];ok&&terminal<=replayRevision{continue}
+  coord,ok:=fields[5].([]any);if !ok||len(coord)!=2{list.Close();return nil,errors.New("round eligibility malformed")}
+  instant,ok:=asSigned64(coord[0]);if !ok{list.Close();return nil,errors.New("round instant malformed")}
+  ordinal,ok:=coord[1].(uint64);if !ok{list.Close();return nil,errors.New("round ordinal malformed")}
+  result=append(result,clock.Pending{ID:domain.ID(key),
+   Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),
+    NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)}})
+ }
+ if err:=list.Err();err!=nil{list.Close();return nil,err}
+ if err:=list.Close();err!=nil{return nil,err}
+ return result,nil
 }

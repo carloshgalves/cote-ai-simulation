@@ -289,3 +289,32 @@ func TestCandidateSourcesAreCanonicalSortedSet(t *testing.T){
   t.Fatal("nonadjacent duplicate source could create a candidate")
  }
 }
+
+func TestResourceAccumulatorOverflowProducesAttributedIndeterminate(t *testing.T){
+ in,_,_:=fixture(t,true)
+ in.Snapshot.Available=int64(^uint64(0)>>1)
+ d:=identity.New(in.Bundle)
+ for i:=range in.Units{
+  r:=&in.Units[i].Response
+  r.Body=append([]any(nil),r.Body...)
+  r.Body[9]=[]any{[]any{"inventory","last.resource",uint64(1),in.Snapshot.Available}}
+  hash,_,err:=d.Sum("cote.csf.digest.action-proposal-unit",
+   "cote.csf.schema.action-proposal.body",1,[]any{r.Body})
+  if err!=nil{t.Fatal(err)}
+  r.Digest=hash
+  r.Canonical,err=codec.CanonicalPayload(
+   append(append([]any(nil),r.Body...),hash[:]))
+  if err!=nil{t.Fatal(err)}
+ }
+ result,err:=Run(in)
+ if !errors.Is(err,ErrIndeterminate)||result.Failure!="INDETERMINATE_FACET"||
+  len(result.Indeterminate)!=2||len(result.Dispositions)!=0||
+  result.PostAvailable!=in.Snapshot.Available||len(result.Canonical)==0{
+  t.Fatalf("overflow may not discard subjects or grant resource: %v %+v",err,result)
+ }
+ for i,rec:=range result.Indeterminate{
+  if rec.SubjectKind!=1||rec.Subject!=result.Candidates[i].ID{
+   t.Fatal("detector failure missing authentic candidate subject")
+  }
+ }
+}

@@ -16,10 +16,10 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
-func abortFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Fence,domain.ID,domain.ID){
+func abortFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Fence,domain.ID,domain.ID,string){
  t.Helper()
  ctx:=context.Background()
- c,store,ledger,runID,bundle,_:=testFixture(t)
+ c,store,ledger,runID,bundle,path:=testFixture(t)
  if _,err:=c.Advance(ctx,ledger,runID);err!=nil{t.Fatal(err)}
  state,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  pending,err:=store.PendingClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
@@ -37,12 +37,12 @@ func abortFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,a
  fence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).AdmitThenEvaluate(
   ctx,bundle,ledger,cycle,c.admissionPolicies,nil)
  if err!=nil{t.Fatal(err)}
- return c,store,ledger,fence,runID,cycle.ID
+ return c,store,ledger,fence,runID,cycle.ID,path
 }
 
 func TestAbortAtomicFailpointsAndExplicitRetry(t *testing.T){
  ctx:=context.Background()
- c,store,_,fence,runID,cycleID:=abortFixture(t)
+ c,store,_,fence,runID,cycleID,_:=abortFixture(t)
  original,err:=store.LoadClock(ctx,[32]byte(runID));if err!=nil{t.Fatal(err)}
  input,err:=clock.Encode(original);if err!=nil{t.Fatal(err)}
  for _,stage:=range []uint8{1,2}{
@@ -79,7 +79,7 @@ func TestAbortAtomicFailpointsAndExplicitRetry(t *testing.T){
 }
 func TestAbortRejectsMalformedOrForeignFence(t *testing.T){
  ctx:=context.Background()
- c,store,_,fence,runID,cycleID:=abortFixture(t)
+ c,store,_,fence,runID,cycleID,_:=abortFixture(t)
  forged:=fence
  forged.ID[0]^=0xff
  if _,err:=c.Abort(ctx,runID,cycleID,forged,4,nil);err==nil{t.Fatal("accepted foreign fence root")}
@@ -96,7 +96,7 @@ var _ =codec.CanonicalPayload
 
 func TestRetryMustReopenTheSameSemanticCut(t *testing.T){
  ctx:=context.Background()
- c,store,ledger,fence,runID,cycleID:=abortFixture(t)
+ c,store,ledger,fence,runID,cycleID,_:=abortFixture(t)
  abort,err:=c.Abort(ctx,runID,cycleID,fence,4,nil)
  if err!=nil{t.Fatal(err)}
  d:=identity.New(c.bundle)
@@ -136,4 +136,23 @@ func abortDigest(t *testing.T,b *policy.Bundle,record ports.CanonicalRecord)[]by
  dig,_,err:=identity.New(b).Sum("cote.csf.digest.abort","cote.csf.schema.cycle-abort.body",1,fields[:14])
  if err!=nil{t.Fatal(err)}
  return dig[:]
+}
+
+func TestTerminalControlSurvivesIndependentSQLiteReopen(t *testing.T){
+ ctx:=context.Background()
+ c,_,_,fence,run,cycle,path:=abortFixture(t)
+ abort,err:=c.Abort(ctx,run,cycle,fence,4,nil);if err!=nil{t.Fatal(err)}
+ second,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer second.Close()
+ ctl,err:=second.LoadCycleControl(ctx,[32]byte(run))
+ if err!=nil||ctl[0]!=uint64(3)||ctl[6]!=uint64(1){
+  t.Fatalf("reopened process missed HALTED_ON_ABORT: %v %v",ctl,err)
+ }
+ if _,err:=second.GetFence(ctx,abort.Identity);err!=nil{t.Fatal("abort not durable",err)}
+ retry,err:=c.Retry(ctx,run,cycle,abort,"operator.retry");if err!=nil{t.Fatal(err)}
+ ctl,err=second.LoadCycleControl(ctx,[32]byte(run))
+ if err!=nil||ctl[0]!=uint64(2)||ctl[6]!=uint64(1){
+  t.Fatalf("reopened process missed RETRY_AUTHORIZED: %v %v",ctl,err)
+ }
+ if _,err:=second.GetFence(ctx,retry.Identity);err!=nil{t.Fatal("retry not durable",err)}
 }

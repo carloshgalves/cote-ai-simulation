@@ -57,8 +57,8 @@ func DetectClaims(d identity.Deriver,cycle domain.ID,candidates []Candidate,
    for _,ref:=range pair.items{
     raw,e:=codec.CanonicalPayload(ref);if e!=nil{return nil,e}
     // Opaque ref bytes are only grouped, not used to derive causal IDs.
-    label:="claim."+hex.EncodeToString(raw)
-    if len(label)>128{return nil,ErrProvenance}
+    opaque:=identity.OpaqueContentHash(raw)
+    label:="claim."+hex.EncodeToString(opaque[:])
     if pair.dst[label]==nil{pair.dst[label]=map[domain.ID]bool{}}
     pair.dst[label][c.ID]=true
    }

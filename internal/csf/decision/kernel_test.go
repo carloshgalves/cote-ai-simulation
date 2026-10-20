@@ -268,3 +268,24 @@ func TestSharedNonnegativeInvariantDoesNotWasteAvailableResource(t *testing.T){
   t.Fatalf("no-conflict decision depends on worker order: %v",err)
  }
 }
+
+func TestCandidateSourcesAreCanonicalSortedSet(t *testing.T){
+ in,a,b:=fixture(t,true)
+ ids:=[]domain.ID{a.ID,b.ID}
+ if canonicalIDLess(ids[1],ids[0]){ids[0],ids[1]=ids[1],ids[0]}
+ d:=identity.New(in.Bundle)
+ refs,err:=policyRefs(in.Bundle);if err!=nil{t.Fatal(err)}
+ makeCandidate:=func(source []domain.ID)error{
+  _,err:=MakeCandidate(d,in.RunID,in.CycleID,source,"resource.consume",1,0,0,
+   a.Body[9].([]any),[]any{[]any{uint64(5),a.ID[:],a.Digest[:]}},
+   0,refs["conflict-resolvers"])
+  return err
+ }
+ if err:=makeCandidate(ids);err!=nil{t.Fatalf("canonical order rejected: %v",err)}
+ if err:=makeCandidate([]domain.ID{ids[1],ids[0]});!errors.Is(err,ErrProvenance){
+  t.Fatal("permutation created a second identity for the same source set")
+ }
+ if err:=makeCandidate([]domain.ID{ids[0],ids[1],ids[0]});!errors.Is(err,ErrProvenance){
+  t.Fatal("nonadjacent duplicate source could create a candidate")
+ }
+}

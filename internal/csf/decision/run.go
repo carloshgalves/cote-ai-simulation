@@ -20,6 +20,16 @@ func Run(input Input)(Result,error){
   return result,fmt.Errorf("%w: malformed resource identity",ErrProvenance)
  }
  refs,e:=policyRefs(input.Bundle);if e!=nil{return result,e}
+ seenSchemas:=map[string]bool{}
+ for _,schema:=range input.Schemas{
+  for _,s:=range []string{schema.Type,schema.Operation,schema.Producer}{
+   if domain.ValidateMachineID(s)!=nil{return result,fmt.Errorf("%w: malformed action registry entry",ErrProvenance)}
+  }
+  if schema.Version==0{return result,fmt.Errorf("%w: zero schema version",ErrProvenance)}
+  key:=fmt.Sprintf("%s/%d",schema.Type,schema.Version)
+  if seenSchemas[key]{return result,fmt.Errorf("%w: duplicate action schema registration",ErrProvenance)}
+  seenSchemas[key]=true
+ }
  d:=identity.New(input.Bundle)
  byID:=map[domain.ID]prepared{}
  for _,unit:=range input.Units{
@@ -64,7 +74,7 @@ func Run(input Input)(Result,error){
   source:=[]any{uint64(5),p.id[:],p.unit.Response.Digest[:]}
   claims:=p.unit.Response.Body[9].([]any)
   candidate,err:=MakeCandidate(d,input.RunID,input.CycleID,[]domain.ID{p.id},
-   "resource.consume",1,0,0,claims,[]any{source},0,refs["conflict-resolvers"])
+   p.producer,1,0,0,claims,[]any{source},0,refs["conflict-resolvers"])
   if err!=nil{return result,err}
   result.Candidates=append(result.Candidates,candidate)
   current[candidate.ID]=p.amount

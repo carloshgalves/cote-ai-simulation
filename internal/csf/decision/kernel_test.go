@@ -43,7 +43,7 @@ func fixture(t *testing.T,known bool)(Input,inputledger.Response,inputledger.Res
  }
  a,b:=makeResp("a","one"),makeResp("b","two")
  return Input{RunID:run,CycleID:cycle,Attempt:0,Bundle:bundle,
-  Seed:domain.Digest(seed),Snapshot:Snapshot{BaseRevision:7,ResourceKind:"inventory",ResourceID:"last.resource",Available:1,Known:known,
+  Seed:domain.Digest(seed),Schemas:[]ActionSchema{{Type:"resource.consume",Version:1,Operation:"resource.consume",Producer:"resource.consume"}},Snapshot:Snapshot{BaseRevision:7,ResourceKind:"inventory",ResourceID:"last.resource",Available:1,Known:known,
   ForbiddenActors:map[string]bool{"school:a":true}},
   Admitted:[]domain.ID{a.ID,b.ID},Units:[]Unit{{Response:a,ProducerScope:"exam"},{Response:b,ProducerScope:"exam"}}},a,b
 }
@@ -213,4 +213,17 @@ func TestUnregisteredActionCannotSilentlyBecomeSatisfied(t *testing.T){
  out,e:=Run(in)
  if !errors.Is(e,ErrIndeterminate)||len(out.Indeterminate)!=1||out.Indeterminate[0].Subject!=a.ID||
  len(out.Dispositions)!=0||out.PostAvailable!=1{t.Fatal("unregistered handler granted action by default")}
+}
+
+func TestRegistryPermutationAndIrrelevantHandlerDoNotChangeDraws(t *testing.T){
+ in,_,_:=fixture(t,true)
+ before,e:=Run(in);if e!=nil{t.Fatal(e)}
+ in.Schemas=append(in.Schemas,ActionSchema{Type:"irrelevant.action",Version:1,Operation:"not.available",Producer:"other.handler"})
+ after,e:=Run(in);if e!=nil||!bytes.Equal(before.Canonical,after.Canonical){
+  t.Fatalf("irrelevant registered handler changed causal decision: %v",e)
+ }
+ in.Schemas[0],in.Schemas[1]=in.Schemas[1],in.Schemas[0]
+ again,e:=Run(in);if e!=nil||!bytes.Equal(before.Canonical,again.Canonical){t.Fatalf("registration order changed policy: %v",e)}
+ in.Schemas=append(in.Schemas,in.Schemas[1])
+ if _,e:=Run(in);!errors.Is(e,ErrProvenance){t.Fatal("duplicate action schema silently replaced the registered handler")}
 }

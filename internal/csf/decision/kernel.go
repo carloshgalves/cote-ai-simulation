@@ -24,6 +24,16 @@ type Unit struct {
  Response inputledger.Response
  ProducerScope string
 }
+
+// ActionSchema is a pure, versioned and explicitly registered handler
+// capability. The minimum kernel only supports resource.consume semantics;
+// a handler never receives a database handle or authority to settle a unit.
+type ActionSchema struct {
+ Type string
+ Version uint64
+ Operation string
+ Producer string
+}
 type Snapshot struct {
  BaseRevision domain.WorldRevision
  ResourceKind string
@@ -42,6 +52,7 @@ type Input struct {
  CycleID domain.ID
  Attempt uint32
  Units []Unit
+ Schemas []ActionSchema
  Admitted []domain.ID // the exact fence order; NOT completion order
  Snapshot Snapshot
  History []HistoryBinding
@@ -118,6 +129,7 @@ type prepared struct{
  blocked bool
  indeterminate bool
  noProposal bool
+ producer string
 }
 
 func validateResponse(d identity.Deriver,req Input,u Unit)(prepared,error){
@@ -175,7 +187,18 @@ func validateResponse(d identity.Deriver,req Input,u Unit)(prepared,error){
  if !refsEqual(x.Body[10],[]any{uint64(0)})||!refsEqual(x.Body[12],[]any{uint64(0)}){
   return p,fmt.Errorf("%w: resource action location/duration not supported",ErrProvenance)
  }
- if x.Body[4]!="resource.consume"||x.Body[5]!=uint64(1){p.indeterminate=true;return p,nil}
+ kind,ok:=x.Body[4].(string)
+ if !ok||domain.ValidateMachineID(kind)!=nil{return p,ErrProvenance}
+ ver,ok:=x.Body[5].(uint64)
+ if !ok{return p,ErrProvenance}
+ p.indeterminate=true
+ for _,schema:=range req.Schemas{
+  if schema.Type==kind&&schema.Version==ver&&schema.Operation=="resource.consume"{
+   p.indeterminate=false;p.producer=schema.Producer
+   break
+  }
+ }
+ if p.indeterminate{return p,nil}
  claims,ok:=x.Body[9].([]any)
  if !ok||len(claims)!=1 {return p,fmt.Errorf("%w: expected one resource claim",ErrProvenance)}
  claim,ok:=claims[0].([]any)

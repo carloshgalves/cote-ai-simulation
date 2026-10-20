@@ -295,3 +295,53 @@ passar as mesmas duas pipelines antes de fechar os markers
 **Imutabilidade do bundle:** nenhum contrato/hash pinado ou
 fixture de conformance foi reescrito. Runtime continua com
 `CLOCK_ADVANCE` como único publisher terminal deste slice.
+
+## Quinta remediação de review — findings #19–21 (19/10/2026)
+
+**Lote congelado:** três findings `High`, #19, #20 e #21, todos
+originados da quinta revisão independente da Draft PR #19.
+**Base de implementação:** `6fe475b8e38a6935c33efe70b86cf4663a856ebc`.
+
+- **#19 — fonte e recibo são provas, não argumentos.** O writer
+  `Store.AppendIngress` rederiva identidade e digest de
+  `ExogenousInput`/`SourceClosure`, comprova `SourceDeclaration`
+  para o run e exige que o `SourceIngressReceipt` canônico tenha
+  exatamente a fonte, sequência, kind, ID e digest do record. A
+  verificação acontece na mesma transação que publica record,
+  receipt, índice e cursor. A exceção do adapter sem
+  Genesis/Clock/Fence permanece somente para testes antigos com
+  records opacos e sem autoridade causal inicializada.
+- **#20 — histórico exógeno monotônico e terminal.** O port
+  transacional recusa qualquer novo ingresso após closure
+  `final=true`; fechamento posterior não pode regredir, e
+  `ExogenousInput` precisa ter elegibilidade estritamente maior
+  que o último `closed_through` da própria fonte. A restauração
+  `inputledger.Open` também valida essas propriedades na ordem dos
+  `ingress_seq` canônicos, não somente na memória de um Ledger
+  vivo. Testes usam recibos e projeções internamente coerentes
+  injetados diretamente no SQLite após `final` e após fechamento
+  mais avançado; replay falha fechado.
+- **#21 — projeções SQL verificáveis.** A comparação de
+  `SourceIngressReceipt` canônico com
+  `source_ingress_receipts` e `input_source_cursors` inclui
+  cardinalidade, sequência contígua, `record_id`, bytes do
+  recibo e `next_seq`. É executada antes da escrita na própria
+  SQLite transaction, na consulta de próxima sequência e em
+  `ReplayClock`. Divergência de índice/cursor não é aceita como
+  autoridade de sequência. A verificação da leitura durante
+  `NextIngressSequence` não substitui o compare atômico do
+  write path.
+
+**TDD:** [CI vermelha em testes adversariais antes das
+correções](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39354741700):
+ingresso de fonte `ghost`, receipt incompatível, append
+após `final`, closure regressiva e drift nos índices/cursores.
+As duas pipelines ficaram verdes após o patch e também com
+os novos testes de restauração de histórias forjadas:
+[Go, TypeScript, receipts e whitespace](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39355271986) e
+[conformance canônica](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39355276322).
+
+**Fronteira preservada:** nenhum novo publicador terminal
+`WORK`, handler, settlement ou percepção; nenhum hash ou
+artefato pinado do codec/conformance mudou. A PR continua
+Draft, sem merge, e a próxima revisão é fase separada.

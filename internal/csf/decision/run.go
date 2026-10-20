@@ -106,7 +106,19 @@ func Run(input Input)(Result,error){
  detected,e:=DetectClaims(d,input.CycleID,viable,
   map[string]int64{input.Snapshot.ResourceID:input.Snapshot.Available},
   refs["validators"],refs["conflict-resolvers"])
- if e!=nil{return result,e}
+ if e!=nil{
+  if errors.Is(e,ErrIndeterminate){
+   for _,c:=range viable{
+    result.Indeterminate=append(result.Indeterminate,Indeterminate{
+     Subject:c.ID,SubjectDigest:c.Digest,SubjectKind:1,Facet:2,
+     Validator:refs["validators"],Reason:"resource.detector.indeterminate",Evidence:[]any{},
+    })
+   }
+   result.Failure="INDETERMINATE_FACET"
+   if err:=seal(&result,input);err!=nil{return result,err}
+  }
+  return result,e
+ }
  var resourceConflict *Conflict
  unsupported:=map[domain.ID]bool{}
  for _,c:=range detected{

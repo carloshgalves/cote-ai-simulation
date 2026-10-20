@@ -49,7 +49,7 @@ func Run(input Input)(Result,error){
  if len(ordered)!=len(byID){return result,fmt.Errorf("%w: unfenced response",ErrProvenance)}
  ordered,e=resolveAliases(d,ordered,input.History,refs["idempotency"])
  if e!=nil {
-  if errors.Is(e,ErrIdempotency){result.Failure="IDEMPOTENCY_CONFLICT";seal(&result,input);return result,e}
+  if errors.Is(e,ErrIdempotency){result.Failure="IDEMPOTENCY_CONFLICT";if se:=seal(&result,input);se!=nil{return result,se};return result,e}
   return result,e
  }
  noProposals,aliases:=map[domain.ID]bool{},map[domain.ID]bool{}
@@ -81,11 +81,11 @@ func Run(input Input)(Result,error){
  }
  if len(result.Indeterminate)>0 {
   result.Failure="INDETERMINATE_FACET"
-  seal(&result,input)
+  if err:=seal(&result,input);err!=nil{return result,err}
   return result,ErrIndeterminate
  }
  if err:=CheckPartition(input.Admitted,noProposals,aliases,result.Candidates);err!=nil{
-  result.Failure="PROVENANCE_FAILURE";seal(&result,input);return result,err
+  result.Failure="PROVENANCE_FAILURE";if se:=seal(&result,input);se!=nil{return result,se};return result,err
  }
  // Ignore losers rejected individually by the affordability facet; they
  // cannot participate in a resource conflict and receive REJECT later.

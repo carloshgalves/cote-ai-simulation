@@ -128,7 +128,10 @@ func equalBytes(v any,other []byte) bool {b,ok:=v.([]byte);return ok&&bytes.Equa
 func (s *Store) PendingClock(ctx context.Context, runID [32]byte) ([]clock.Pending,error) {
  return pendingClock(ctx,s.db,runID)
 }
-type clockQuery interface { QueryContext(context.Context,string,...any)(*sql.Rows,error) }
+type clockQuery interface {
+ QueryContext(context.Context,string,...any)(*sql.Rows,error)
+ QueryRowContext(context.Context,string,...any)*sql.Row
+}
 func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pending,error) {
  // Read every row, including terminal rows: filtering lifecycle before
  // comparing its indexed projection with the canonical record hides corruption.
@@ -158,6 +161,12 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
   if err:=rows.Err();err!=nil{rows.Close();return nil,err}
   if err:=rows.Close();err!=nil{return nil,err}
  }
+ // Project only terminal, hash-verified NoProposal DecisionRecords backed
+ // by CycleCommit; a provisional disposition cannot consume a round.
+ settled,err:=settledNoProposalUnits(ctx,q,runID);if err!=nil{return nil,err}
+ type roundPending struct{pending clock.Pending;slots []any}
+ roundRows:=make([]roundPending,0)
+ responded:=map[domain.ID]map[string]domain.ID{}
  // RoundDeclarations and exogenous inputs share the input authority; they
  // participate in the exact same global minimum as schedule/activations.
  inputs,err:=q.QueryContext(ctx,"SELECT id,canonical FROM input_ledger ORDER BY rowid")
@@ -169,6 +178,20 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
   decoded,err:=codec.StrictDecodePayload(raw)
   if err!=nil{continue} // canonical enveloped receipt is not pending work
   fields,ok:=decoded.([]any);if !ok||len(key)!=32{continue}
+  // NoProposal is a slot response, not pending work of its own. The
+  // declared round remains pending until EVERY slot has a committed
+  // settlement. The original RoundDeclaration stays append-only.
+  if len(fields)==11&&equalBytes(fields[2],runID[:]){
+   rb,isRoundRef:=fields[4].([]byte)
+   slot,isSlot:=fields[5].(string)
+   if isRoundRef&&len(rb)==32&&isSlot&&equalBytes(fields[0],key){
+    var round,unit domain.ID;copy(round[:],rb);copy(unit[:],key)
+    if responded[round]==nil{responded[round]=map[string]domain.ID{}}
+    if _,duplicate:=responded[round][slot];duplicate{return nil,errors.New("multiple persisted responses in one round slot")}
+    responded[round][slot]=unit
+    continue
+   }
+  }
   var index int
   switch len(fields) {
   case 13:
@@ -191,9 +214,23 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
   instant,ok:=asSigned64(coord[0]);if !ok{return nil,errors.New("invalid pending instant")}
   ordinal,ok:=coord[1].(uint64);if !ok{return nil,errors.New("invalid pending ordinal")}
   var id domain.ID;copy(id[:],key)
-  out=append(out,clock.Pending{ID:id,Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)}})
+  point:=clock.Pending{ID:id,Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)}}
+  if len(fields)==11{
+   slots,ok:=fields[4].([]any);if !ok||len(slots)==0{return nil,errors.New("round has no declared slots")}
+   roundRows=append(roundRows,roundPending{pending:point,slots:slots})
+  }else{out=append(out,point)}
  }
  if err:=inputs.Err();err!=nil{return nil,err}
+ if err:=inputs.Close();err!=nil{return nil,err}
+ for _,round:=range roundRows{
+  complete:=true
+  for _,rawSlot:=range round.slots{
+   slot,ok:=rawSlot.(string);if !ok{return nil,errors.New("round slot invalid")}
+   unit,exists:=responded[round.pending.ID][slot]
+   if !exists||!settled[unit]{complete=false;break}
+  }
+  if !complete{out=append(out,round.pending)}
+ }
  // REPEAT_WHILE_TRUE registers its next due instant durably in the
  // trigger runtime. A pending cadence participates in the minimum even
  // without an intervening world-domain event.

@@ -9,6 +9,7 @@ import (
  _ "modernc.org/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/extensions/testresourcev1"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -83,11 +84,24 @@ func TestSingleResourceCommitAtomicAndReplayable(t *testing.T){
  if err!=nil{t.Fatal(err)}
  stock,err:=reducer.DecodeStock(world);if err!=nil||stock.Available!=0{t.Fatal("successful cycle failed to consume stock",err)}
  db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)};defer db.Close()
- for _,item:=range []struct{table string;want int}{{"event_store",2},{"decision_ledger",4},{"world_revisions",2},{"committed_cycles",1}}{
+ for _,item:=range []struct{table string;want int}{{"event_store",2},{"decision_ledger",4},{"world_revisions",2},{"committed_cycles",1},{"causal_outbox",0},{"evidence_ledger",0}}{
   var got int
   if err:=db.QueryRowContext(ctx,"SELECT count(*) FROM "+item.table).Scan(&got);err!=nil{t.Fatal(err)}
   if got!=item.want{t.Fatalf("resource terminal %s contains %d, want %d",item.table,got,item.want)}
  }
+ events,err:=db.QueryContext(ctx,"SELECT canonical FROM event_store")
+ if err!=nil{t.Fatal(err)}
+ for events.Next(){
+  var raw []byte
+  if err:=events.Scan(&raw);err!=nil{events.Close();t.Fatal(err)}
+  decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{events.Close();t.Fatal(err)}
+  fields,ok:=decoded.([]any)
+  if !ok||len(fields)!=19||fields[15]!=uint64(2){
+   events.Close();t.Fatal("resource/lifecycle event entered observable agent route")
+  }
+ }
+ if err:=events.Err();err!=nil{events.Close();t.Fatal(err)}
+ events.Close()
  reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
  report,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle)
  if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=2||

@@ -695,3 +695,31 @@ func TestGenesisPolicyRolesUseExplicitBindingsInsteadOfArrayPosition(t *testing.
   if !ok||len(ref)!=3||ref[0]!=id{t.Fatalf("role %q bound to %v, want policy %q",role,ref,id)}
  }
 }
+
+func TestPendingTriggerActivationIncludedInNextWorkFence(t *testing.T){
+ ctx:=context.Background()
+ var id domain.ID;id[0]=0x8e
+ def:=trigger.Definition{ID:id,Version:1,Policy:trigger.RisingEdge,FireOnInitialTrue:true,
+  Dependencies:[]string{"clock"}}
+ coordinator,store,ledger,run,bundle,_:=testFixture(t,def)
+ if _,err:=coordinator.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
+ state,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ _,hash,err:=store.LoadWorldState(ctx,uint64(state.Revision));if err!=nil{t.Fatal(err)}
+ derivation:=identity.New(bundle)
+ rawID,_,err:=derivation.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{run[:],[]any{int64(state.Instant),uint64(0)}});if err!=nil{t.Fatal(err)}
+ cycle:=admission.Cycle{ID:domain.ID(rawID),Instant:state.Instant,Ordinal:0,
+  BaseRevision:state.Revision,BaseStateHash:domain.Digest(hash),RetryRef:[]any{uint64(0)}}
+ fence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).AdmitThenEvaluate(
+  ctx,bundle,ledger,cycle,coordinator.admissionPolicies,nil)
+ if err!=nil{t.Fatal(err)}
+ entries,ok:=fence.Fields[11].([]any)
+ if !ok||len(entries)!=1{t.Fatalf("missing pending trigger unit at first WORK ordinal: %#v",fence.Fields[11])}
+ v,ok:=entries[0].([]any)
+ if !ok||len(v)!=5||v[1]!=uint64(3)||v[2]!="trigger"{t.Fatalf("trigger source not correctly admitted: %#v",entries[0])}
+ if _,err:=coordinator.CommitNoProposal(ctx,ledger,cycle,fence);err==nil{
+  t.Fatal("NoProposal-only handler stole a trigger activation's terminal lifecycle")
+ }
+ current,err:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil||current!=state{t.Fatalf("unhandled trigger changed world clock: %+v %v",current,err)}
+}

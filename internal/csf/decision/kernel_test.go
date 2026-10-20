@@ -105,7 +105,7 @@ func TestPartitionRejectsGapOverlapAndExternalUnit(t *testing.T){
    t.Fatal("invalid partition was accepted")
   }
  }
- if err:=CheckPartition(in.Admitted,map[domain.ID]bool{},map[domain.ID]bool{},{mk(a.ID),mk(b.ID)});err!=nil{t.Fatal(err)}
+ if err:=CheckPartition(in.Admitted,map[domain.ID]bool{},map[domain.ID]bool{},[]Candidate{mk(a.ID),mk(b.ID)});err!=nil{t.Fatal(err)}
 }
 
 func TestIdempotentAliasWithoutRemovingDelivery(t *testing.T){

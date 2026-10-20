@@ -83,6 +83,22 @@ func settledNoProposalUnits(ctx context.Context,q queryOne,runID [32]byte)(map[d
    return nil,errors.New("committed WORK fence source identity differs")
   }
   units,ok:=fence[11].([]any);if !ok||len(units)!=len(unitIDs){return nil,errors.New("invalid fenced units")}
+  if len(eventIDs)==1{
+   raw,ok:=eventRaw[0].([]byte)
+   if !ok{return nil,errors.New("system Event bytes missing")}
+   decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{return nil,err}
+   event,ok:=decoded.([]any)
+   if ok&&len(event)==19{
+    kind,ok:=event[3].(string)
+    if ok&&(kind=="occurrence.rejected"||kind=="occurrence.deferred"||kind=="trigger.activation.consumed"){
+     sourceID,err:=verifyPublishedSystem(ctx,q,runID,root.cycle,root.commit,journal,fence,eventRaw)
+     if err!=nil{return nil,err}
+     if result[sourceID]{return nil,errors.New("system causal unit settled more than once")}
+     result[sourceID]=true
+     continue
+    }
+   }
+  }
   if len(eventIDs)==2||len(eventIDs)==3{
    first,ok:=eventRaw[0].([]byte)
    if !ok{return nil,errors.New("WORK event bytes missing")}

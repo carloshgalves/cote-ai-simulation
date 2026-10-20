@@ -83,6 +83,18 @@ func settledNoProposalUnits(ctx context.Context,q queryOne,runID [32]byte)(map[d
    return nil,errors.New("committed WORK fence source identity differs")
   }
   units,ok:=fence[11].([]any);if !ok||len(units)!=len(unitIDs){return nil,errors.New("invalid fenced units")}
+  if len(eventIDs)==2{
+   body,err:=codec.StrictDecodePayload(eventRaw[0].([]byte))
+   if err!=nil{return nil,err}
+   fields,ok:=body.([]any)
+   if ok&&len(fields)==19&&fields[3]=="resource.consumed"{
+    unitID,err:=verifyPublishedSingleResource(ctx,q,runID,root.cycle,root.commit,journal,fence,eventRaw)
+    if err!=nil{return nil,err}
+    if result[unitID]{return nil,errors.New("resource unit settled twice")}
+    result[unitID]=true
+    continue
+   }
+  }
   pairs:=make([]any,0,len(units))
   type slotProof struct{slot string;id,digest []byte}
   eventRefs:=map[domain.ID][]slotProof{}

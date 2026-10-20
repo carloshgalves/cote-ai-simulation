@@ -36,7 +36,8 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
  if err!=nil{return clock.State{},err}
  selected,exists,err:=clock.Next(prior,oldPending)
  if err!=nil{return clock.State{},err}
- if !exists||selected.Kind!=clock.Work||selected.OriginOrdinal!=domain.CycleOrdinal(journal[4].(uint64)){
+ claimedOrdinal,valid:=journal[4].(uint64)
+ if !valid||!exists||selected.Kind!=clock.Work||selected.OriginOrdinal!=domain.CycleOrdinal(claimedOrdinal){
   return clock.State{},errors.New("WORK replay did not select the earliest pending coordinate")
  }
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return clock.State{},err}

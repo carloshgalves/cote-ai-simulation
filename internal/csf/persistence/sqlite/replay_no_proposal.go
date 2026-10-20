@@ -23,6 +23,10 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
  batch,err:=registeredDigest("cote.csf.digest.batch","cote.csf.schema.batch-preimage",
   []any{journal[:23],[]any{}});if err!=nil{return clock.State{},err}
  if commit!=commitID||!equalBytes(journal[23],batch[:]){return clock.State{},errors.New("WORK replay journal identity/hash differs")}
+ // Read the predecessor outside the SQLite transaction; the store may
+ // run with one connection, so a nested s.db query would deadlock here.
+ typed,hash,err:=s.LoadWorldState(ctx,uint64(prior.Revision))
+ if err!=nil{return clock.State{},err}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return clock.State{},err}
  defer tx.Rollback()
  fenceID,err:=registeredDigest("cote.csf.id.admission-fence","cote.csf.schema.admission-fence-id-preimage",
@@ -57,8 +61,6 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
   items,ok:=journal[index].([]any)
   if !ok||len(items)!=0{return clock.State{},errors.New("NoProposal cannot replay unregistered events/tasks")}
  }
- typed,hash,err:=s.LoadWorldState(ctx,uint64(prior.Revision))
- if err!=nil{return clock.State{},err}
  if !equalBytes(journal[7],hash[:])||!equalBytes(journal[9],hash[:]){
   return clock.State{},errors.New("WORK replay changed world-state hash without a reducer")
  }

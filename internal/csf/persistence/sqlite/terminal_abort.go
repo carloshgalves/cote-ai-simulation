@@ -119,12 +119,15 @@ func (s *Store) CommitCycleAbort(ctx context.Context,b ports.TerminalAbortBatch)
  if err:=tx.QueryRowContext(ctx,"SELECT state_hash FROM world_revisions WHERE revision=?",uint64(state.Revision)).Scan(&baseHash);err!=nil{return err}
  if !equalBytes(fence[8],baseHash){return errors.New("abort base world hash mismatch")}
  previous,err:=cycleControl(ctx,tx,b.RunID);if err!=nil{return err}
+ if previous==nil||previous[0]!=uint64(1)||
+  !present(previous[1],b.CycleID[:])||!present(previous[2],attempt)||
+  !present(previous[3],fullRef(11,b.FenceID[:],body[8].([]byte))){
+  return errors.New("abort requires the same persisted in-flight fence")
+ }
  if attempt==0{
-  if previous!=nil&&previous[0]!=uint64(0)&&previous[0]!=uint64(1){return errors.New("run halted or retry already authorized")}
- }else{
-  if previous==nil||previous[0]!=uint64(2)||!present(previous[1],b.CycleID[:])||previous[6]!=attempt{
-   return errors.New("retry authorization missing for abort attempt")
-  }
+  if !sameCanonical(previous[4],noRef()){return errors.New("first attempt has forged retry ref")}
+ }else if !sameCanonical(previous[4],fence[3]){
+  return errors.New("retrial abort lost its retry ref")
  }
  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.Envelope.Identity[:],b.Envelope.Canonical);err!=nil{return err}
  if b.FailAfterStep==1{return errors.New("injected abort journal failure")}

@@ -51,7 +51,8 @@ func LastUnit(bundle *policy.Bundle)(decision.Input,error){
  return decision.Input{RunID:run,CycleID:cycle,Attempt:0,Bundle:bundle,Seed:seed,
   Schemas:[]decision.ActionSchema{{Type:ActionType,Version:SchemaVersion,Operation:"resource.consume",Producer:"resource.consume"}},
   Snapshot:decision.Snapshot{BaseRevision:7,ResourceKind:"inventory",ResourceID:"last.resource",Available:1,Known:true,
-   ForbiddenActors:map[string]bool{"school:a":true}},
+   AccessibleActors:map[string]bool{"school:a":true,"school:b":true},
+   ForbiddenActors:map[string]bool{"school:a":true,"school:b":false}},
   Admitted:[]domain.ID{a.ID,b.ID},Units:[]decision.Unit{{Response:a,ProducerScope:"exam"},{Response:b,ProducerScope:"exam"}}},nil
 }
 

@@ -12,6 +12,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
@@ -88,6 +89,23 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  canonicalZero,err:=codec.CanonicalPayload([]any{uint64(0),genesisTyped,initialStateHash,uint64(0),genesisTyped,initialStateHash})
  if err!=nil{return report,err}
  if !bytes.Equal(revZeroCanonical,canonicalZero){return report,errors.New("genesis revision bytes disagree with typed world state")}
+ // Validate the complete durable InputLedger, not just the minimum used
+ // for clock selection: identity, source, unit digests, receipt association
+ // and gapless source ingress sequences are restored from canonical bytes.
+ restored,err:=inputledger.Open(ctx,domain.ID(runID),bundle,s)
+ if err!=nil{return report,fmt.Errorf("replay input ledger integrity: %w",err)}
+ _,_,_,rounds,_,_:=restored.Snapshot()
+ for _,round:=range rounds{
+  hash:=identity.OpaqueContentHash(round.Canonical)
+  var pinned []byte
+  if err:=s.db.QueryRowContext(ctx,"SELECT canonical_hash FROM round_integrity_seals WHERE id=? AND run_id=?",round.ID[:],runID[:]).Scan(&pinned);err!=nil{
+   return report,fmt.Errorf("round missing atomic canonical seal: %w",err)
+  }
+  if !bytes.Equal(pinned,hash[:]){return report,errors.New("replay round actor/slots changed after admission")}
+ }
+ var seals int
+ if err:=s.db.QueryRowContext(ctx,"SELECT count(*) FROM round_integrity_seals WHERE run_id=?",runID[:]).Scan(&seals);err!=nil{return report,err}
+ if seals!=len(rounds){return report,errors.New("replay round integrity seal set diverges from declarations")}
  definitions,err:=s.LoadRegisteredTriggers(ctx,runID,bundle);if err!=nil{return report,err}
  current:=clock.State{Instant:genesisRoot.InitialInstant,LastOrdinal:-1}
  runtime:=make(map[domain.ID]trigger.Runtime,len(definitions))

@@ -400,6 +400,12 @@ func verifyCommittedFence(ctx context.Context,q queryOne,runID,cycleID [32]byte,
  if !ok||len(fence)!=18||!equalBytes(fence[0],runID[:])||!equalBytes(fence[1],cycleID[:])||fence[2]!=uint64(0){return zero,errors.New("AdmissionFence identity invalid")}
  fd,err:=registeredDigest("cote.csf.digest.fence","cote.csf.schema.admission-fence.body",fence[:17]);if err!=nil{return zero,err}
  if !equalBytes(fence[17],fd[:])||!equalBytes(journal[10],fd[:]){return zero,errors.New("CycleCommit has wrong persisted AdmissionFence digest")}
+ // This slice only publishes the initial CLOCK_ADVANCE attempt. No
+ // AttemptRetryRecord or alternate rule version can be introduced here.
+ if !sameCanonical(fence[3],[]any{uint64(0)}) {return zero,errors.New("initial clock advance cannot claim retry authority")}
+ rules,ok:=fence[16].([]any)
+ if !ok||len(rules)!=0{return zero,errors.New("clock advance fence has unapproved rule versions")}
+
  for _,pair:=range [][2]int{{4,3},{5,4},{6,5},{7,6},{8,7},{11,11},{12,12}}{
   if !sameCanonical(fence[pair[0]],journal[pair[1]]){return zero,errors.New("CycleCommit is not the admitted fence plan/inputs")}
  }

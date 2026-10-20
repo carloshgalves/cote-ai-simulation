@@ -142,6 +142,11 @@ CREATE TABLE IF NOT EXISTS genesis_records (
   canonical BLOB NOT NULL
 ) STRICT;
 CREATE TABLE IF NOT EXISTS input_ledger (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
+CREATE TABLE IF NOT EXISTS round_integrity_seals (
+ id BLOB PRIMARY KEY CHECK(length(id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ canonical_hash BLOB NOT NULL CHECK(length(canonical_hash)=32)
+) STRICT;
 CREATE TABLE IF NOT EXISTS input_slot_responses (slot_key BLOB PRIMARY KEY CHECK(length(slot_key)=32), record_id BLOB NOT NULL UNIQUE CHECK(length(record_id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS input_source_cursors (source_id TEXT PRIMARY KEY, next_seq INTEGER NOT NULL CHECK(next_seq>=0)) STRICT;
 CREATE TABLE IF NOT EXISTS source_ingress_receipts (source_id TEXT NOT NULL, ingress_seq INTEGER NOT NULL CHECK(ingress_seq>=0), record_id BLOB NOT NULL CHECK(length(record_id)=32), canonical BLOB NOT NULL, PRIMARY KEY(source_id,ingress_seq)) STRICT;
@@ -213,7 +218,19 @@ func (s *Store) Append(ctx context.Context, record ports.CanonicalRecord) error 
 	switch kind {
 	case "source": return s.AppendSourceDeclaration(ctx, runID, record)
 	case "round": return s.AppendRoundDeclaration(ctx, runID, instant, ordinal, record)
-	default: return appendTo(ctx, s.db, "input_ledger", record)
+ default:
+  // ExogenousInput and SourceClosure must enter with their ingress receipt
+  // and source cursor in one transaction, never through generic Append.
+  decoded,err:=codec.StrictDecodePayload(record.Canonical)
+  if err==nil{
+   fields,ok:=decoded.([]any)
+   if ok&&(len(fields)==13||len(fields)==7)&&len(fields)>2{
+    _,runOK:=fields[1].([]byte)
+    _,sourceOK:=fields[2].(string)
+    if runOK&&sourceOK{return errors.New("source ingress requires AppendIngress and atomic receipt")}
+   }
+  }
+  return appendTo(ctx,s.db,"input_ledger",record)
 	}
 }
 
@@ -344,7 +361,17 @@ func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundG
 	if err:=rows.Err();err!=nil {rows.Close();return err}
 	if err:=rows.Close();err!=nil{return err}
 	if err:=appendTx(ctx,tx,record);err!=nil{return err}
-	return tx.Commit()
+ if round!=nil{
+  // Round IDs do not include the actor and slots. Record their complete
+  // canonical hash atomically as a derived integrity index; never let a
+  // later payload substitution keep the same causal identity unnoticed.
+  hash:=identity.OpaqueContentHash(record.Canonical)
+  if _,err:=tx.ExecContext(ctx,"INSERT OR IGNORE INTO round_integrity_seals(id,run_id,canonical_hash) VALUES(?,?,?)",record.Identity[:],runID[:],hash[:]);err!=nil{return err}
+  var pinned []byte
+  if err:=tx.QueryRowContext(ctx,"SELECT canonical_hash FROM round_integrity_seals WHERE id=? AND run_id=?",record.Identity[:],runID[:]).Scan(&pinned);err!=nil{return err}
+  if !bytes.Equal(pinned,hash[:]){return errors.New("round declaration changed after canonical sealing")}
+ }
+ return tx.Commit()
 }
 
 // Direct fence writes cannot prove membership of the closed input prefix.

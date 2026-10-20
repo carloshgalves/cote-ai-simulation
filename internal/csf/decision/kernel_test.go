@@ -167,6 +167,22 @@ func TestNoProposalSettlesOnlyProvisionallyWithoutCandidate(t *testing.T){
   out.Dispositions[0].Status!="NO_PROPOSAL"||out.Dispositions[1].Status!="COMMIT"||out.PostAvailable!=0{
   t.Fatalf("NoProposal got an illegitimate candidate or consumed two units: %+v",out)
  }
+ for _,bad:=range []any{uint64(3),"not-a-reason"}{
+  corrupted:=no
+  corrupted.Body=append([]any(nil),no.Body...)
+  corrupted.Body[9]=bad
+  badDigest,_,err:=d.Sum("cote.csf.digest.no-proposal-unit",
+   "cote.csf.schema.no-proposal.body",1,[]any{corrupted.Body})
+  if err!=nil{t.Fatal(err)}
+  corrupted.Digest=badDigest
+  corrupted.Canonical,err=codec.CanonicalPayload(
+   append(append([]any(nil),corrupted.Body...),badDigest[:]))
+  if err!=nil{t.Fatal(err)}
+  in.Units=[]Unit{{Response:b,ProducerScope:"exam"},{Response:corrupted,ProducerScope:"exam"}}
+  if _,err:=Run(in);!errors.Is(err,ErrProvenance){
+   t.Fatalf("unknown/retyped no-proposal reason %v accepted: %v",bad,err)
+  }
+ }
 }
 
 func TestHistoricalAliasKeepsIndependentSourceUnit(t *testing.T){

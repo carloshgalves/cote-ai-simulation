@@ -5,6 +5,7 @@ import (
  "context"
  "encoding/hex"
  "errors"
+ "fmt"
  "math"
  "sort"
 
@@ -86,13 +87,19 @@ func verifyTwoResourceTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
   candidate,ok:=proofByID[[32]byte(competitor.candidate)]
   if !ok||len(candidate)!=17{return errors.New("missing contestant candidate audit root")}
   wanted:=[]any{competitor.source[:]}
-  if !sameCanonical(candidate[0],competitor.candidate[:])||
-   !equalBytes(candidate[1],b.RunID[:])||!equalBytes(candidate[2],b.CycleID[:])||
-   !sameCanonical(candidate[3],wanted)||candidate[4]!="resource.consume"||
-   candidate[5]!=uint64(1)||candidate[6]!=uint64(0)||candidate[7]!=uint64(0)||
-   !sameCanonical(candidate[14],uint64(0))||!sameCanonical(candidate[15],allowed["conflict-resolvers-v1"]){
-   return errors.New("contest candidate identity/producer/resolver mismatch")
+  checks:=[]struct{name string;valid bool}{
+   {"candidate-id",sameCanonical(candidate[0],competitor.candidate[:])},
+   {"run",equalBytes(candidate[1],b.RunID[:])},
+   {"cycle",equalBytes(candidate[2],b.CycleID[:])},
+   {"sources",sameCanonical(candidate[3],wanted)},
+   {"producer",candidate[4]=="resource.consume"},
+   {"version",candidate[5]==uint64(1)},
+   {"role",candidate[6]==uint64(0)},
+   {"ordinal",candidate[7]==uint64(0)},
+   {"priority",sameCanonical(candidate[14],uint64(0))},
+   {"resolver",sameCanonical(candidate[15],allowed["conflict-resolvers-v1"])},
   }
+  for _,item:=range checks{if !item.valid{return fmt.Errorf("contest candidate %s does not match registered causal evidence",item.name)}}
   provenance:=[]any{[]any{uint64(5),competitor.source[:],competitor.digest[:]}}
   wantDraft:=[]any{[]any{uint64(0),uint64(0),"resource.consumed",competitor.proposal[8],[]any{}}}
   if !sameCanonical(candidate[8],wantDraft)||!sameCanonical(candidate[9],competitor.proposal[9])||

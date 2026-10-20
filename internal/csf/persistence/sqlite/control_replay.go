@@ -8,6 +8,7 @@ import (
  "fmt"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
 )
 
 // VerifyCycleControl rechecks every projected control reference against the
@@ -20,7 +21,22 @@ func (s *Store) VerifyCycleControl(ctx context.Context,runID [32]byte)error{
  defer tx.Rollback()
  ctl,err:=cycleControl(ctx,tx,runID)
  if err!=nil{return err}
- if ctl==nil{return errors.New("causal run missing authoritative CycleControlState")}
+ if ctl==nil{
+  // Pre-first-fence runs have no control row by design. That is IDLE
+  // only for the pristine genesis clock with an empty terminal journal;
+  // a deleted control row on an executed run must never silently reset it.
+  var raw []byte
+  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",runID[:]).Scan(&raw);err!=nil{return err}
+  initial,err:=clock.Decode(raw);if err!=nil{return err}
+  if initial.Revision!=0||initial.NextLogicalSequence!=0||initial.LastOrdinal!=-1{
+   return errors.New("control row missing after clock or revision has advanced")
+  }
+  var decisions,commits int
+  if err:=tx.QueryRowContext(ctx,"SELECT count(*) FROM decision_ledger").Scan(&decisions);err!=nil{return err}
+  if err:=tx.QueryRowContext(ctx,"SELECT count(*) FROM committed_cycles WHERE run_id=?",runID[:]).Scan(&commits);err!=nil{return err}
+  if decisions!=0||commits!=0{return errors.New("missing control row with existing causal journal")}
+  return tx.Commit()
+ }
  status,ok:=ctl[0].(uint64)
  if !ok||status>3{return errors.New("unknown persisted cycle control status")}
  next,ok:=ctl[6].(uint64)

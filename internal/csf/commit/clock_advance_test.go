@@ -716,7 +716,7 @@ func TestPendingTriggerActivationIncludedInNextWorkFence(t *testing.T){
  entries,ok:=fence.Fields[11].([]any)
  if !ok||len(entries)!=1{t.Fatalf("missing pending trigger unit at first WORK ordinal: %#v",fence.Fields[11])}
  v,ok:=entries[0].([]any)
- if !ok||len(v)!=5||v[1]!=uint64(3)||v[2]!="trigger"{t.Fatalf("trigger source not correctly admitted: %#v",entries[0])}
+ if !ok||len(v)!=5||v[1]!=uint64(3)||v[2]!="trigger:"+hex.EncodeToString(id[:]){t.Fatalf("trigger source not correctly admitted: %#v",entries[0])}
  if _,err:=coordinator.CommitNoProposal(ctx,ledger,cycle,fence);err==nil{
   t.Fatal("NoProposal-only handler stole a trigger activation's terminal lifecycle")
  }

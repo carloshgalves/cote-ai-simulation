@@ -22,6 +22,7 @@ func verifyPublishedTwoResource(ctx context.Context,q queryOne,runID,cycleID,com
  admitted,ok:=fence[11].([]any)
  if !ok||len(admitted)!=2{return nil,errors.New("contested terminal source count malformed")}
  sources:=map[string]bool{}
+ candidateIDs:=map[string]bool{}
  rounds:=map[domain.ID]map[string]bool{}
  settled:=make([]domain.ID,0,2)
  for _,v:=range admitted{
@@ -30,6 +31,11 @@ func verifyPublishedTwoResource(ctx context.Context,q queryOne,runID,cycleID,com
   if sources[string(id)]{return nil,errors.New("duplicate contest source")}
   sources[string(id)]=true
   var unitID domain.ID;copy(unitID[:],id);settled=append(settled,unitID)
+  candidateID,err:=registeredDigest("cote.csf.id.commit-candidate",
+   "cote.csf.schema.candidate-id-preimage",
+   []any{runID[:],cycleID[:],[]any{id},"resource.consume",uint64(1),uint64(0),uint64(0)})
+  if err!=nil{return nil,err}
+  candidateIDs[string(candidateID[:])]=true
   var raw []byte
   if err:=q.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",id).Scan(&raw);err!=nil{return nil,err}
   value,err:=codec.StrictDecodePayload(raw);if err!=nil{return nil,err}
@@ -97,7 +103,7 @@ func verifyPublishedTwoResource(ctx context.Context,q queryOne,runID,cycleID,com
   include:=false
   switch len(fields){
   case 17:
-   include=equalBytes(fields[1],runID[:])&&equalBytes(fields[2],cycleID[:])
+   include=candidateIDs[string(id)]&&equalBytes(fields[1],runID[:])&&equalBytes(fields[2],cycleID[:])
   case 3:
    subj,ok:=fields[0].([]any)
    include=ok&&len(subj)==3&&subj[0]==uint64(5)&&func()bool{v,ok:=subj[1].([]byte);return ok&&sources[string(v)]}()
@@ -106,7 +112,8 @@ func verifyPublishedTwoResource(ctx context.Context,q queryOne,runID,cycleID,com
    include=ok&&len(participants)==2
    if include{
     for _,p:=range participants{
-     b,ok:=p.([]byte);if !ok||len(b)!=32{include=false;break}
+     b,ok:=p.([]byte)
+     if !ok||len(b)!=32||!candidateIDs[string(b)]{include=false;break}
     }
    }
   case 11:

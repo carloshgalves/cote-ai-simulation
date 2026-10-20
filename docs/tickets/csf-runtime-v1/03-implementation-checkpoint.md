@@ -201,3 +201,56 @@ occurrence pré-genesis.
 continuam dependentes de CSFRV1-4/5, sem bypass do CycleCommit.
 Próxima etapa: novo `$code-review CSFRV1-3` independente apenas mediante
 solicitação. Este checkpoint não autoriza merge nem Ready for review.
+
+## Terceira remediação de review — findings #12–15 (19/10/2026)
+
+**PR:** Draft #19 · **ponto revisado:** `b8950b9502b734136034d9954f47176e2bed07bf`.
+**Lote congelado:** quatro findings High — #12, #13, #14, #15.
+**Status de implementação:** corrigidos no checkpoint desta seção; markers da PR
+são atualizados somente após execução verde de CI no HEAD final.
+
+- **#12 — compromissos canônicos vazios.** A autoridade de
+  `verifyCommittedFence`, comum ao commit e ao replay, recalcula o
+  `input_digest` de `admitted_units=[]`, `decision_digest` da lista
+  de decisões vazia, `perception_task_digest` da lista vazia e o
+  `cohort_id` dos rounds vazios a partir do `cycle_id` e
+  `base_revision`. Rejeita digests forjados mesmo quando
+  `fence_digest` e `batch_digest` são consistentemente refeitos.
+- **#13 — seleção do avanço na repetição.** Na execução apenas
+  `CLOCK_ADVANCE`, a agenda genesis e as unidades originais de
+  ingresso não são liquidadas pelo slice e permanecem observáveis.
+  Replay rederiva o mínimo a partir dessas autoridades, excluindo
+  somente `TriggerActivation` originadas **pelo próprio avanço**
+  e o próximo repeat cadence materializado pelo trigger runtime
+  posterior. O plano durável tem de coincidir com `clock.Next`
+  original; desaparecimento do target e sua retrodatação falham
+  fechados. Este mecanismo não é um replay de WORK/settlement:
+  essa extensão permanece bloqueada pelos tickets 4/5.
+- **#14 — piso de elegibilidade.** Rounds e SourceIngress
+  consultam o ClockState no mesmo SQLite `tx` de publicação;
+  rejeitam coordenadas anteriores ao próximo cursor do relógio.
+  Se o genesis está gravado mas o relógio ainda não foi
+  bootstrapped, seu `InitialInstant` já impõe o piso.
+  Adaptadores SQLite sem genesis, clock nem fence inicializados
+  continuam aptos a testes unitários isolados de atomicidade, sem
+  presumir uma run executável.
+- **#15 — cadeia de revisões.** Replay verifica a enumeração integral
+  `0..ReconstructedClock.Revision` de `world_revisions`, não
+  somente as linhas referenciadas por journals. Commit confirma a
+  existência e hash da revisão predecessora dentro da transação,
+  antes de inserir um novo `CycleCommit`.
+
+**Regressões red/green:** `review_cycle3_test.go` comprova o estado
+vermelho anterior à correção (run
+[39343784391](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39343784391))
+para cinco adulterações de claims vazios com hashes externos
+recalculados, target ausente ou anterior, round pré-genesis,
+WorldRevision órfã e predecessor apagado. Há também cobertura
+positiva da aceitação no piso genesis e do caminho
+pré-`BootstrapClock`.
+
+**Artefatos preservados:** nenhum hash do bundle canônico,
+schema ou conformance foi modificado; a PR não publica
+WORK/settlement, perception nem segunda autoridade de escrita.
+Testes e evidências do HEAD final devem ser anexados ao comentário
+de conclusão da PR antes de qualquer outra fase.

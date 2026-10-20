@@ -10,6 +10,8 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
 func review3DB(t *testing.T,path string)*sql.DB{
@@ -121,4 +123,30 @@ func TestReview3CommitRejectsMissingPredecessorRevision(t *testing.T){
  if _,err:=coordinator.Advance(ctx,ledger,run);err==nil{t.Fatal("commit published revision without predecessor")}
  audit,err:=store.AuditClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
  if audit.CommitCount!=0||audit.RevisionCount!=0{t.Fatalf("partial commit after missing predecessor: %+v",audit)}
+}
+
+func TestReview3GenesisFloorAppliesBeforeClockBootstrap(t *testing.T){
+ ctx:=context.Background()
+ bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,bundle)
+ store,err:=sqlite.Open(ctx,t.TempDir()+"/pre-clock.db");if err!=nil{t.Fatal(err)}
+ defer store.Close()
+ if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ ledger,err:=inputledger.New(ctx,g.RunID,bundle,store);if err!=nil{t.Fatal(err)}
+ if err:=ledger.DeclareSource(inputledger.Source{ID:"pre-clock"});err!=nil{t.Fatal(err)}
+ origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+ before:=domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant-1}
+ floor:=domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant}
+ if _,err:=ledger.DeclareRound(ctx,"pre-clock",[2]string{"school","actor-y"},[]string{"slot"},before,origin,0,444,0,[]any{uint64(0)});err==nil{
+  t.Fatal("round bypassed durable genesis floor before clock bootstrap")
+ }
+ if _,err:=ledger.DeclareRound(ctx,"pre-clock",[2]string{"school","actor-y"},[]string{"slot"},floor,origin,0,444,0,[]any{uint64(0)});err!=nil{
+  t.Fatalf("at-genesis round rejected before clock bootstrap: %v",err)
+ }
+ input:=inputledger.Input{ProducerUnitKey:"pre-clock-input",Kind:"test.input",SchemaVersion:1,
+  Actor:[]any{uint64(0)},Payload:g.Payload[16],DeclaredEffectiveAt:g.InitialInstant-1,
+  Eligibility:before,Provenance:[]any{uint64(0)},IdempotencyKey:[]any{uint64(0)}}
+ if _,err:=ledger.AppendInput(ctx,"pre-clock",input);err==nil{t.Fatal("input bypassed durable genesis floor before clock bootstrap")}
+ input.Eligibility=floor
+ if _,err:=ledger.AppendInput(ctx,"pre-clock",input);err!=nil{t.Fatalf("at-genesis input rejected before clock bootstrap: %v",err)}
 }

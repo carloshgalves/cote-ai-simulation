@@ -149,7 +149,7 @@ func validateResponse(d identity.Deriver,req Input,u Unit)(prepared,error){
  if !sameActor(x.Body[6],x.Actor)||!sameBytes(x.Body[13],x.RoundID[:])||x.Body[14]!=x.SlotID||x.Body[15]!=uint64(x.SubmittedAgainstRevision){
   return p,fmt.Errorf("%w: action fields",ErrProvenance)
  }
- if !sameInstant(x.Body[11],x.EffectiveAt) || !sameInstant(x.Body[11],100) {
+ if !sameInstant(x.Body[11],x.EffectiveAt) {
   return p,fmt.Errorf("%w: mismatched effective instant",ErrProvenance)
  }
  if targets,ok:=x.Body[7].([]any);!ok||len(targets)!=0{

@@ -74,14 +74,27 @@ func (s *Store) VerifyCycleControl(ctx context.Context,runID [32]byte)error{
   switch wantKind{
   case 11:
    if len(fields)!=18{return nil,nil,errors.New("control fence arity mismatch")}
+   attempt,ok:=fields[2].(uint64);if !ok{return nil,nil,errors.New("control fence attempt malformed")}
+   expected,err:=registeredDigest("cote.csf.id.admission-fence","cote.csf.schema.admission-fence-id-preimage",
+    []any{runID[:],cycle[:],attempt})
+   if err!=nil||!bytes.Equal(expected[:],id){return nil,nil,errors.New("control fence ID preimage mismatch")}
    got,err:=registeredDigest("cote.csf.digest.fence","cote.csf.schema.admission-fence.body",fields[:17]);if err!=nil{return nil,nil,err}
    if !bytes.Equal(got[:],digest)||!equalBytes(fields[17],digest){return nil,nil,errors.New("control fence digest invalid")}
   case 13:
    if len(fields)!=15{return nil,nil,errors.New("control abort arity mismatch")}
+   attempt,ok:=fields[2].(uint64);if !ok{return nil,nil,errors.New("control abort attempt malformed")}
+   expected,err:=registeredDigest("cote.csf.id.cycle-abort","cote.csf.schema.cycle-abort-id-preimage",
+    []any{runID[:],cycle[:],attempt})
+   if err!=nil||!bytes.Equal(expected[:],id){return nil,nil,errors.New("control abort ID preimage mismatch")}
    got,err:=registeredDigest("cote.csf.digest.abort","cote.csf.schema.cycle-abort.body",fields[:14]);if err!=nil{return nil,nil,err}
    if !bytes.Equal(got[:],digest)||!equalBytes(fields[14],digest){return nil,nil,errors.New("control abort digest invalid")}
   case 14:
    if len(fields)!=7{return nil,nil,errors.New("control retry arity mismatch")}
+   from,ok:=fields[2].(uint64);if !ok||from>=uint64(^uint32(0)){return nil,nil,errors.New("control retry from invalid")}
+   to,ok:=fields[3].(uint64);if !ok||to!=from+1{return nil,nil,errors.New("control retry successor invalid")}
+   expected,err:=registeredDigest("cote.csf.id.attempt-retry","cote.csf.schema.attempt-retry-id-preimage",
+    []any{runID[:],cycle[:],from,to})
+   if err!=nil||!bytes.Equal(expected[:],id){return nil,nil,errors.New("control retry ID preimage mismatch")}
    got,err:=registeredDigest("cote.csf.digest.attempt-retry","cote.csf.schema.attempt-retry",fields);if err!=nil{return nil,nil,err}
    if !bytes.Equal(got[:],digest){return nil,nil,errors.New("control retry digest invalid")}
   default:return nil,nil,errors.New("unknown control record kind")

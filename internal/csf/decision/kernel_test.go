@@ -312,9 +312,13 @@ func TestResourceAccumulatorOverflowProducesAttributedIndeterminate(t *testing.T
   result.PostAvailable!=in.Snapshot.Available||len(result.Canonical)==0{
   t.Fatalf("overflow may not discard subjects or grant resource: %v %+v",err,result)
  }
- for i,rec:=range result.Indeterminate{
-  if rec.SubjectKind!=1||rec.Subject!=result.Candidates[i].ID{
+ subjects:=map[domain.ID]bool{}
+ for _,c:=range result.Candidates{subjects[c.ID]=true}
+ for _,rec:=range result.Indeterminate{
+  if rec.SubjectKind!=1||!subjects[rec.Subject]{
    t.Fatal("detector failure missing authentic candidate subject")
   }
+  delete(subjects,rec.Subject)
  }
+ if len(subjects)!=0{t.Fatal("detector failure conflated candidate subjects")}
 }

@@ -406,6 +406,42 @@ func (s *Store) AppendFenceIfPrefix(ctx context.Context, fence ports.CanonicalRe
 	if err := rows.Err(); err != nil { rows.Close(); return err }
 	if err := rows.Close(); err != nil { return err }
 	if index != len(expected) { return errors.New("input ledger changed before fence publication") }
+ // The scheduling/trigger roster is part of the same durable fence cut as
+ // the input-ledger prefix. Verify it under this SQLite transaction to
+ // prevent a scheduled row being added, consumed or replaced after Derive.
+ parsed,parseErr:=codec.StrictDecodePayload(fence.Canonical)
+ if parseErr==nil{
+  fields,ok:=parsed.([]any)
+  if ok&&len(fields)==18{
+   runBytes,ok:=fields[0].([]byte);if !ok||len(runBytes)!=32{return errors.New("admission run ID invalid")}
+   instant,ok:=asSigned64(fields[4]);if !ok{return errors.New("admission instant invalid")}
+   ordinal,ok:=fields[5].(uint64);if !ok{return errors.New("admission ordinal invalid")}
+   admitted,ok:=fields[11].([]any);if !ok{return errors.New("admitted source list missing")}
+   var run [32]byte;copy(run[:],runBytes)
+   roster,err:=systemUnits(ctx,tx,run,domain.EligibilityCoordinate{
+    NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)})
+   if err!=nil{return err}
+   included:=make([][]any,0)
+   for _,item:=range admitted{
+    v,ok:=item.([]any);if !ok||len(v)!=5{return errors.New("malformed admitted unit")}
+    kind,ok:=v[1].(uint64);if !ok{return errors.New("invalid admitted kind")}
+    if kind==2||kind==3{included=append(included,v)}
+   }
+   if len(included)!=len(roster){return errors.New("system source roster changed before durable admission")}
+   for _,unit:=range roster{
+    found:=false
+    for _,v:=range included{
+     coordinate:=[]any{int64(unit.Eligibility.NotBeforeInstant),uint64(unit.Eligibility.NotBeforeCycleOrdinal)}
+     if v[1]==uint64(unit.Kind)&&v[2]==unit.Source&&
+      sameCanonical(v[0],coordinate)&&equalBytes(v[3],unit.ID[:])&&equalBytes(v[4],unit.Digest[:]){
+      if found{return errors.New("duplicate scheduled unit in fence")}
+      found=true
+     }
+    }
+    if !found{return errors.New("fence omitted or forged pending system unit")}
+   }
+  }
+ }
 	result, err := tx.ExecContext(ctx, "INSERT OR IGNORE INTO decision_ledger(id,canonical) VALUES(?,?)", fence.Identity[:], fence.Canonical)
 	if err != nil { return err }
 	affected, err := result.RowsAffected()

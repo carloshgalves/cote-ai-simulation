@@ -38,6 +38,7 @@ func (c *Coordinator) CommitSystemUnit(ctx context.Context,ledger *inputledger.L
   cycle.Ordinal>math.MaxInt64||clockBefore.LastOrdinal>=int64(cycle.Ordinal)||
   uint64(clockBefore.NextLogicalSequence)==math.MaxUint64||
   uint64(clockBefore.Revision)==math.MaxUint64{return empty,errors.New("system cycle is stale or overflowing")}
+ if abort,hit,err:=c.abortIfCascadeExceeded(ctx,run,cycle,fence);hit||err!=nil{return abort,err}
  typed,hash,err:=c.store.LoadWorldState(ctx,uint64(clockBefore.Revision))
  if err!=nil||hash!=cycle.BaseStateHash{return empty,errors.New("system cycle predecessor state hash invalid")}
  entries,ok:=fence.Fields[11].([]any)

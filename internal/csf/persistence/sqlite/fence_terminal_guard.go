@@ -35,6 +35,10 @@ func admitTerminalFence(ctx context.Context,tx *sql.Tx,record ports.CanonicalRec
  case previous==nil||previous[0]==uint64(0):
   if attempt!=0||!sameCanonical(fence[3],noRef()){return nil,errors.New("first fence cannot claim retry")}
  case previous[0]==uint64(1):
+  if present(previous[1],cycle[:])&&present(previous[2],attempt)&&
+   present(previous[3],fullRef(11,id[:],hash[:])){
+   return previous,nil // byte-identical AdmissionFence re-delivery
+  }
   return nil,errors.New("another AdmissionFence is already in flight")
  case previous[0]==uint64(3):
   return nil,errors.New("run HALTED_ON_ABORT until durable AttemptRetryRecord")

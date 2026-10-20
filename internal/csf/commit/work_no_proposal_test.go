@@ -91,6 +91,15 @@ func TestNoProposalWorkAtomicityAcrossAllFailurePoints(t *testing.T){
  reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
  recovered,err:=reopened.LoadClock(ctx,[32]byte(run))
  if err!=nil||recovered!=after{t.Fatal("resume changed WORK successor",err)}
+ pending,err:=reopened.PendingClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ if next,ok,err:=clock.Next(recovered,pending);err!=nil||ok{
+  t.Fatalf("completed NoProposal rounds re-entered pending clock: %+v %v %v",next,ok,err)
+ }
+ view,_,err:=ledger.AdmissionView(ctx,c.bundle);if err!=nil{t.Fatal(err)}
+ _,_,_,rounds,_,_:=view.Snapshot()
+ for _,round:=range rounds{
+  if round.Lifecycle!=2{t.Fatalf("reopened input ledger re-admitted settled round %x",round.ID[:])}
+ }
  sqlDB,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)};defer sqlDB.Close()
  var decisions,events,world,committed int
  for _,p:=range []struct{table string;out *int}{{"decision_ledger",&decisions},{"event_store",&events},

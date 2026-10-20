@@ -243,3 +243,67 @@ func freshResourceWorkFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputled
   CausalIdentity:refs["causal-identity"],Fence:refs["admission-fence"],Rules:[][]any{}}
  return New(store,bundle,policies),store,ledger,g.RunID,bundle,path
 }
+
+func TestCandidateIndeterminateEvidenceBoundToSealedAdmittedUnits(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,run,bundle,path:=freshResourceWorkFixture(t)
+ state,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ genesis:=validGenesis(t,bundle)
+ created:=[]any{uint64(2),[]any{genesis.ID[:],genesis.Digest[:]}}
+ d:=identity.New(bundle)
+ cycleHash,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{run[:],[]any{int64(state.Instant),uint64(0)}});if err!=nil{t.Fatal(err)}
+ cycleID:=domain.ID(cycleHash)
+ access:=map[string]bool{}
+ forbidden:=map[string]bool{}
+ for i,actor:=range []string{"a","b","c"}{
+  round,err:=ledger.DeclareRound(ctx,"schedule",[2]string{"school",actor},[]string{"act"},
+   domain.EligibilityCoordinate{NotBeforeInstant:state.Instant},created,0,uint32(i),0,[]any{uint64(0)})
+  if err!=nil{t.Fatal(err)}
+  id,_,err:=d.Sum("cote.csf.id.dispatch","cote.csf.schema.dispatch-id-preimage",1,
+   []any{run[:],cycleID[:],round.ID[:],"act",uint64(0)});if err!=nil{t.Fatal(err)}
+  dispatch:=inputledger.Dispatch{ID:domain.ID(id),RunID:run,CycleID:cycleID,RoundID:round.ID,
+   SlotID:"act",Actor:round.Actor,Eligibility:round.Eligibility,
+   BaseRevision:state.Revision,EffectiveAt:state.Instant}
+  if err:=ledger.RegisterDispatch(ctx,dispatch,inputledger.CycleBinding{
+   ID:cycleID,BaseRevision:state.Revision,Instant:state.Instant});err!=nil{t.Fatal(err)}
+  response,err:=testresourcev1.ProposalForDispatch(bundle,dispatch);if err!=nil{t.Fatal(err)}
+  if err:=ledger.Respond(ctx,response);err!=nil{t.Fatal(err)}
+  access["school:"+actor]=true;forbidden["school:"+actor]=false
+ }
+ var worldHash domain.Digest;copy(worldHash[:],genesis.Payload[16].([]any)[3].([]byte))
+ cycle:=admission.Cycle{ID:cycleID,Attempt:0,Instant:state.Instant,Ordinal:0,
+  BaseRevision:state.Revision,BaseStateHash:worldHash,RetryRef:[]any{uint64(0)}}
+ fence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).AdmitThenEvaluate(
+  ctx,bundle,ledger,cycle,c.admissionPolicies,nil);if err!=nil{t.Fatal(err)}
+ req,err:=decision.FromPersistedFence(ctx,bundle,ledger,cycle,c.admissionPolicies,fence,store,
+  decision.Snapshot{BaseRevision:state.Revision,ResourceKind:"inventory",ResourceID:"last.resource",
+   Available:1,Known:true,AccessibleActors:access,ForbiddenActors:forbidden},
+  []decision.ActionSchema{{Type:"resource.consume",Version:1,Operation:"resource.consume",Producer:"resource.consume"}},
+  domain.Digest{},nil)
+ if err!=nil{t.Fatal(err)}
+ out,err:=decision.Run(req)
+ if !errors.Is(err,decision.ErrIndeterminate)||len(out.Indeterminate)!=3||
+  len(out.Candidates)!=3||len(out.Dispositions)!=0{
+  t.Fatalf("three contenders unexpectedly received an unapproved resolver: %v %+v",err,out)
+ }
+ forged:=append([]decision.Candidate(nil),out.Candidates...)
+ forged[0].Canonical=[]byte{0x80}
+ if _,err:=c.Abort(ctx,run,cycleID,fence,0,out.Indeterminate,forged...);err==nil{
+  t.Fatal("accepted malformed candidate proof")
+ }
+ ctl,err:=store.LoadCycleControl(ctx,[32]byte(run))
+ if err!=nil||ctl[0]!=uint64(1){t.Fatalf("failed candidate proof did not roll back: %v %v",ctl,err)}
+ abort,err:=c.Abort(ctx,run,cycleID,fence,0,out.Indeterminate,out.Candidates...)
+ if err!=nil{t.Fatalf("fenced candidate proof failed: %v",err)}
+ second,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)};defer second.Close()
+ var records int
+ if err:=second.QueryRowContext(ctx,"SELECT count(*) FROM decision_ledger").Scan(&records);err!=nil{t.Fatal(err)}
+ if records!=5{t.Fatalf("candidate audit roots not durably grouped with abort: %d",records)}
+ for _,candidate:=range out.Candidates{
+  raw,err:=store.GetFence(ctx,candidate.ID)
+  if err!=nil||!bytes.Equal(raw,candidate.Canonical){t.Fatalf("candidate evidence lost: %v",err)}
+ }
+ if _,err:=store.GetFence(ctx,abort.Identity);err!=nil{t.Fatal(err)}
+ after,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil||after!=state{t.Fatal("failed candidate resolution mutated world",err)}
+}

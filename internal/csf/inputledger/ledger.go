@@ -1276,3 +1276,22 @@ func (l *Ledger) projectSettledNoProposalRounds(ctx context.Context) error{
  }
  return nil
 }
+
+ // SystemUnit is a read-only authenticated pending scheduling/trigger source.
+ // It does not grant mutation authority outside CommitWork.
+type SystemUnit struct {
+ Kind uint8 // 2 = ScheduledOccurrence, 3 = TriggerActivation
+ Source string
+ ID domain.ID
+ Digest domain.Digest
+ Eligibility domain.EligibilityCoordinate
+}
+type systemUnitReader interface {
+ SystemUnits(context.Context,[32]byte,domain.EligibilityCoordinate)([]SystemUnit,error)
+}
+func (l *Ledger) SystemUnits(ctx context.Context,upTo domain.EligibilityCoordinate)([]SystemUnit,error){
+ if l==nil||l.inputStore==nil{return nil,errors.New("system-unit authority unavailable")}
+ reader,ok:=l.inputStore.(systemUnitReader)
+ if !ok{return nil,nil} // memory stores have no schedule or trigger authority
+ return reader.SystemUnits(ctx,[32]byte(l.runID),upTo)
+}

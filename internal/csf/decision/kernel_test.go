@@ -44,7 +44,8 @@ func fixture(t *testing.T,known bool)(Input,inputledger.Response,inputledger.Res
  a,b:=makeResp("a","one"),makeResp("b","two")
  return Input{RunID:run,CycleID:cycle,Attempt:0,Bundle:bundle,
   Seed:domain.Digest(seed),Schemas:[]ActionSchema{{Type:"resource.consume",Version:1,Operation:"resource.consume",Producer:"resource.consume"}},Snapshot:Snapshot{BaseRevision:7,ResourceKind:"inventory",ResourceID:"last.resource",Available:1,Known:known,
-  ForbiddenActors:map[string]bool{"school:a":true}},
+  AccessibleActors:map[string]bool{"school:a":true,"school:b":true},
+  ForbiddenActors:map[string]bool{"school:a":true,"school:b":false}},
   Admitted:[]domain.ID{a.ID,b.ID},Units:[]Unit{{Response:a,ProducerScope:"exam"},{Response:b,ProducerScope:"exam"}}},a,b
 }
 

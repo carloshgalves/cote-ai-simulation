@@ -42,6 +42,14 @@ func SystemLifecycleEvent(run,cycle,source domain.ID,sourceDigest domain.Digest,
  return ports.CanonicalRecord{Identity:[32]byte(id),Canonical:encoded},nil
 }
 
+func signedSystem(value any)(int64,bool){
+ switch v:=value.(type){
+ case int64:return v,true
+ case uint64:if v<=math.MaxInt64{return int64(v),true}
+ }
+ return 0,false
+}
+
 // OccurrenceOutcome derives the only registered synthetic scheduling handler.
 // A nonrecurring test.occurrence is REJECT (1). A fixed-interval recurrence
 // with remaining work is DEFER (2) with an event-origin successor.
@@ -55,7 +63,7 @@ func OccurrenceOutcome(run domain.ID,fields []any,at domain.SimulationInstant)(u
  if !ok||len(recurrence)!=3||recurrence[0]!=uint64(0){
   return 0,0,nil,errors.New("only fixed-interval recurrence is registered")
  }
- every,ok:=recurrence[1].(int64)
+ every,ok:=signedSystem(recurrence[1])
  if !ok||every<=0{return 0,0,nil,errors.New("nonpositive recurrence interval")}
  remaining,ok:=recurrence[2].([]any)
  if !ok||len(remaining)==0{return 0,0,nil,errors.New("recurrence remaining-count option malformed")}
@@ -69,7 +77,7 @@ func OccurrenceOutcome(run domain.ID,fields []any,at domain.SimulationInstant)(u
  }else if remaining[0]!=uint64(0)||len(remaining)!=1{
   return 0,0,nil,errors.New("remaining-count invalid")
  }
- due,ok:=fields[3].(int64)
+ due,ok:=signedSystem(fields[3])
  if !ok{return 0,0,nil,errors.New("occurrence due timestamp not signed")}
  if due>math.MaxInt64-every{return 0,0,nil,errors.New("successor timestamp overflow")}
  newDue:=due+every

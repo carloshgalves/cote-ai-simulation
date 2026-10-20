@@ -20,7 +20,7 @@ import (
 // fence and publishes the abort envelope/control state in one SQLite tx.
 // No provisional disposition is translated into a terminal DecisionRecord.
 func (c *Coordinator) Abort(ctx context.Context,runID,cycleID domain.ID,fence admission.Fence,
- reason uint64,unknown []decision.Indeterminate)(ports.CanonicalRecord,error){
+ reason uint64,unknown []decision.Indeterminate,candidates ...decision.Candidate)(ports.CanonicalRecord,error){
  if c==nil||c.bundle==nil||c.store==nil{return ports.CanonicalRecord{},errors.New("terminal coordinator not initialized")}
  if len(fence.Fields)!=18||reason>6{return ports.CanonicalRecord{},errors.New("invalid abort request")}
  if reason==0&&len(unknown)==0{return ports.CanonicalRecord{},errors.New("missing indeterminate subjects")}
@@ -52,9 +52,14 @@ func (c *Coordinator) Abort(ctx context.Context,runID,cycleID domain.ID,fence ad
  if err!=nil{return ports.CanonicalRecord{},err}
  canonical,err:=codec.CanonicalPayload(append(cloneAny(fields),dg[:]));if err!=nil{return ports.CanonicalRecord{},err}
  record:=ports.CanonicalRecord{Identity:[32]byte(id),Canonical:canonical}
+ proof:=make([]ports.CanonicalRecord,0,len(candidates))
+ for _,candidate:=range candidates{
+  proof=append(proof,ports.CanonicalRecord{Identity:[32]byte(candidate.ID),Canonical:candidate.Canonical})
+ }
+ sort.Slice(proof,func(i,j int)bool{return bytes.Compare(proof[i].Identity[:],proof[j].Identity[:])<0})
  err=c.store.CommitCycleAbort(ctx,ports.TerminalAbortBatch{
   RunID:[32]byte(runID),CycleID:[32]byte(cycleID),FenceID:[32]byte(fence.ID),
-  ExpectedClock:expectedClock,Envelope:record,FailAfterStep:c.failAfterStep})
+  ExpectedClock:expectedClock,Envelope:record,CandidateEvidence:proof,FailAfterStep:c.failAfterStep})
  return record,err
 }
 

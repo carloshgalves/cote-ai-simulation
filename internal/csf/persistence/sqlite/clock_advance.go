@@ -746,6 +746,13 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  changed,err:=result.RowsAffected();if err!=nil||changed!=1{return errors.New("clock CAS did not update exactly one state")}
  if err:=failClock(b.FailAfterStep,6);err!=nil{return err}
  if _,err:=tx.ExecContext(ctx,"INSERT INTO committed_cycles(run_id,cycle_id,commit_id) VALUES(?,?,?)",b.RunID[:],b.CycleID[:],b.Journal.Identity[:]);err!=nil{return err}
+ // The success terminal resets the same authoritative state which the
+ // AdmissionFence advanced to ATTEMPT_IN_FLIGHT. No transient mismatch can
+ // be visible to a resumed process.
+ ctl,err:=cycleControl(ctx,tx,b.RunID);if err!=nil{return err}
+ if ctl==nil||ctl[0]!=uint64(1)||!present(ctl[1],b.CycleID[:])||
+  !present(ctl[2],uint64(0)){return errors.New("CLOCK_ADVANCE control state not in flight")}
+ if err:=storeCycleControl(ctx,tx,b.RunID,[]any{uint64(0),noRef(),noRef(),noRef(),noRef(),noRef(),uint64(0)});err!=nil{return err}
  return tx.Commit()
 }
 

@@ -45,12 +45,24 @@ func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte,replayRev
   fields,ok:=value.([]any);if !ok||len(fields)!=12{rows.Close();return nil,errors.New("invalid replay activation body")}
   origin,ok:=fields[5].([]any);if !ok||len(origin)==0{rows.Close();return nil,errors.New("activation has no causal origin")}
   kind,ok:=origin[0].(uint64);if !ok{rows.Close();return nil,errors.New("invalid activation origin tag")}
-  if kind==0 {
-   var key domain.ID;copy(key[:],id);generated[key]=true
-  }else if kind!=1{rows.Close();return nil,errors.New("unexpected activation origin tag")}
+  if kind!=0&&kind!=1{rows.Close();return nil,errors.New("unexpected activation origin tag")}
+  var key domain.ID;copy(key[:],id);generated[key]=true
  }
  if err:=rows.Err();err!=nil{rows.Close();return nil,err}
  if err:=rows.Close();err!=nil{return nil,err}
+ // Current schedule rows can include DEFER successors created at revisions
+ // later than the replay position. Remove live schedule units and add the
+ // exact historically-existing roster below.
+ scheduled,err:=s.db.QueryContext(ctx,"SELECT id FROM scheduled_occurrences WHERE run_id=?",runID[:])
+ if err!=nil{return nil,err}
+ for scheduled.Next(){
+  var id []byte
+  if err:=scheduled.Scan(&id);err!=nil{scheduled.Close();return nil,err}
+  if len(id)!=32{scheduled.Close();return nil,errors.New("historical occurrence ID malformed")}
+  var key domain.ID;copy(key[:],id);generated[key]=true
+ }
+ if err:=scheduled.Err();err!=nil{scheduled.Close();return nil,err}
+ if err:=scheduled.Close();err!=nil{return nil,err}
  // A post-advance repeat cadence is likewise not a pre-fence pending unit.
  runtimeRows,err:=s.db.QueryContext(ctx,"SELECT definition_id FROM trigger_runtime WHERE run_id=?",runID[:])
  if err!=nil{return nil,err}
@@ -72,7 +84,12 @@ func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte,replayRev
  historical,err:=s.historicalWorkRounds(ctx,runID,replayRevision)
  if err!=nil{return nil,err}
  for _,item:=range historical{
-  if !known[item.ID]{original=append(original,item)}
+  if !known[item.ID]{original=append(original,item);known[item.ID]=true}
+ }
+ system,err:=s.historicalSystemUnits(ctx,runID,replayRevision)
+ if err!=nil{return nil,err}
+ for _,item:=range system{
+  if !known[item.ID]{original=append(original,item);known[item.ID]=true}
  }
  return original,nil
 }

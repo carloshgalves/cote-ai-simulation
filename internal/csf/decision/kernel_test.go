@@ -227,3 +227,44 @@ func TestRegistryPermutationAndIrrelevantHandlerDoNotChangeDraws(t *testing.T){
  in.Schemas=append(in.Schemas,in.Schemas[1])
  if _,e:=Run(in);!errors.Is(e,ErrProvenance){t.Fatal("duplicate action schema silently replaced the registered handler")}
 }
+
+func TestResolverUsesConservativeResourceConflictIdentity(t *testing.T){
+ in,_,_:=fixture(t,true)
+ result,err:=Run(in);if err!=nil{t.Fatal(err)}
+ if len(result.Conflicts)!=1||len(result.Draws)!=1{t.Fatal("expected one resource conflict and one draw")}
+ refs,err:=policyRefs(in.Bundle);if err!=nil{t.Fatal(err)}
+ d:=identity.New(in.Bundle)
+ detected,err:=DetectClaims(d,in.CycleID,result.Candidates,
+  map[string]int64{in.Snapshot.ResourceID:in.Snapshot.Available},
+  refs["validators"],refs["conflict-resolvers"])
+ if err!=nil{t.Fatal(err)}
+ resource:=0
+ for _,conflict:=range detected{
+  if conflict.Fields[2]==uint64(0)&&conflict.Fields[3]==in.Snapshot.ResourceID{
+   resource++
+   if conflict.ID!=result.Conflicts[0].ID||
+    !bytes.Equal(conflict.Canonical,result.Conflicts[0].Canonical){
+    t.Fatal("resolver substituted a conflict not emitted by the claim detector")
+   }
+  }
+ }
+ if resource!=1{t.Fatalf("detector must expose exactly one resource conflict; got %d",resource)}
+}
+
+func TestSharedNonnegativeInvariantDoesNotWasteAvailableResource(t *testing.T){
+ in,_,_:=fixture(t,true)
+ in.Snapshot.Available=2
+ result,err:=Run(in);if err!=nil{t.Fatal(err)}
+ if result.PostAvailable!=0||len(result.Candidates)!=2||len(result.Conflicts)!=0||len(result.Draws)!=0{
+  t.Fatalf("two affordable consumes must not require a lottery: %+v",result)
+ }
+ for _,disposition:=range result.Dispositions{
+  if disposition.Status!="COMMIT"{t.Fatalf("affordable claimant rejected: %+v",disposition)}
+ }
+ if in.Snapshot.Available!=2{t.Fatal("pure kernel mutated caller snapshot")}
+ in.Units[0],in.Units[1]=in.Units[1],in.Units[0]
+ permuted,err:=Run(in)
+ if err!=nil||!bytes.Equal(result.Canonical,permuted.Canonical){
+  t.Fatalf("no-conflict decision depends on worker order: %v",err)
+ }
+}

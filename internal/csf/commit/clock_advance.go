@@ -55,6 +55,9 @@ type Coordinator struct {
     beforeCommit func()
     // Same-package tests may submit damaged bytes to the durable adapter.
     tamperBatch func(*ports.ClockAdvanceBatch)
+    // Test-only tamper hook for WORK; production never injects arbitrary
+    // records into the terminal publication boundary.
+    tamperWorkBatch func(*ports.WorkBatch)
 }
 
 func New(store Store,bundle *policy.Bundle,policies admission.Policies)*Coordinator {

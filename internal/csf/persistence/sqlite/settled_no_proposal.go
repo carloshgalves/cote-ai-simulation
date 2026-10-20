@@ -83,15 +83,26 @@ func settledNoProposalUnits(ctx context.Context,q queryOne,runID [32]byte)(map[d
    return nil,errors.New("committed WORK fence source identity differs")
   }
   units,ok:=fence[11].([]any);if !ok||len(units)!=len(unitIDs){return nil,errors.New("invalid fenced units")}
-  if len(eventIDs)==2{
-   body,err:=codec.StrictDecodePayload(eventRaw[0].([]byte))
+  if len(eventIDs)==2||len(eventIDs)==3{
+   first,ok:=eventRaw[0].([]byte)
+   if !ok{return nil,errors.New("WORK event bytes missing")}
+   body,err:=codec.StrictDecodePayload(first)
    if err!=nil{return nil,err}
    fields,ok:=body.([]any)
    if ok&&len(fields)==19&&fields[3]=="resource.consumed"{
-    unitID,err:=verifyPublishedSingleResource(ctx,q,runID,root.cycle,root.commit,journal,fence,eventRaw)
-    if err!=nil{return nil,err}
-    if result[unitID]{return nil,errors.New("resource unit settled twice")}
-    result[unitID]=true
+    if len(eventIDs)==2{
+     unitID,err:=verifyPublishedSingleResource(ctx,q,runID,root.cycle,root.commit,journal,fence,eventRaw)
+     if err!=nil{return nil,err}
+     if result[unitID]{return nil,errors.New("resource unit settled twice")}
+     result[unitID]=true
+    }else{
+     settled,err:=verifyPublishedTwoResource(ctx,q,runID,root.cycle,root.commit,journal,fence,eventRaw)
+     if err!=nil{return nil,err}
+     for _,unitID:=range settled{
+      if result[unitID]{return nil,errors.New("contested resource unit settled twice")}
+      result[unitID]=true
+     }
+    }
     continue
    }
   }

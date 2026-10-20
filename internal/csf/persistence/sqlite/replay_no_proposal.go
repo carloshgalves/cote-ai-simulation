@@ -30,6 +30,15 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
  // run with one connection, so a nested s.db query would deadlock here.
  typed,hash,err:=s.LoadWorldState(ctx,uint64(prior.Revision))
  if err!=nil{return clock.State{},err}
+ // The terminal journal cannot arbitrarily pick a later round or ordinal.
+ // Replay the historical minimum, not today's already-settled projection.
+ oldPending,err:=s.replayAdvanceInputs(ctx,runID,uint64(prior.Revision))
+ if err!=nil{return clock.State{},err}
+ selected,exists,err:=clock.Next(prior,oldPending)
+ if err!=nil{return clock.State{},err}
+ if !exists||selected.Kind!=clock.Work||selected.OriginOrdinal!=domain.CycleOrdinal(journal[4].(uint64)){
+  return clock.State{},errors.New("WORK replay did not select the earliest pending coordinate")
+ }
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return clock.State{},err}
  defer tx.Rollback()
  fenceID,err:=registeredDigest("cote.csf.id.admission-fence","cote.csf.schema.admission-fence-id-preimage",
@@ -53,6 +62,11 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
  if fence[5]!=ordinal||fence[7]!=uint64(prior.Revision)||
   !sameCanonical(fence[4],journal[3]){
   return clock.State{},errors.New("WORK replay coordinate differs from frozen fence")
+ }
+ expectedCycle,err:=registeredDigest("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",
+  []any{runID[:],[]any{int64(prior.Instant),ordinal}})
+ if err!=nil||[32]byte(expectedCycle)!=cycleID{
+  return clock.State{},errors.New("WORK replay cycle identity not derived from authoritative coordinate")
  }
  next:=prior
  next.Revision++

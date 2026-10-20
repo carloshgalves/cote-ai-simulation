@@ -113,7 +113,25 @@ type AttemptRetryBatch struct {
  Record CanonicalRecord
  FailAfterStep uint8
 }
+// WorkBatch is an indivisible WORK publication in the same authoritative
+// SQLite transaction owner as ClockAdvanceBatch. The initial V1-5 slice only
+// accepts a closed, zero-event NoProposal batch. The adapter must fail closed
+// on resource-consuming or lifecycle-bearing variants until reducers exist.
+type WorkBatch struct {
+ RunID [32]byte
+ CycleID [32]byte
+ FenceID [32]byte
+ ExpectedClock []byte
+ ResultClock []byte
+ ExpectedInputPrefix []CanonicalRecord
+ Journal CanonicalRecord
+ Decisions []CanonicalRecord
+ BaseStateHash [32]byte
+ RevisionCanonical []byte
+ FailAfterStep uint8
+}
 type ClockAdvanceStore interface {
+ CommitWork(context.Context, WorkBatch) error
  CommitClockAdvance(context.Context, ClockAdvanceBatch) error
  CommitCycleAbort(context.Context, TerminalAbortBatch) error
  AuthorizeAttemptRetry(context.Context, AttemptRetryBatch) error

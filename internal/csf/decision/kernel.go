@@ -7,7 +7,6 @@ import (
  "crypto/sha256"
  "errors"
  "fmt"
- "sort"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"

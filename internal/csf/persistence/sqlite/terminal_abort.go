@@ -78,7 +78,7 @@ func rejectTerminalDuplicate(ctx context.Context,tx *sql.Tx,runID,cycleID [32]by
  return nil
 }
 func (s *Store) CommitCycleAbort(ctx context.Context,b ports.TerminalAbortBatch)error{
- if b.RunID==([32]byte{})||b.CycleID==([32]byte{})||len(b.Envelope.Canonical)==0{return errors.New("incomplete cycle abort")}
+ if len(b.Envelope.Canonical)==0{return errors.New("incomplete cycle abort")}
  decoded,err:=codec.StrictDecodePayload(b.Envelope.Canonical);if err!=nil{return err}
  body,ok:=decoded.([]any)
  if !ok||len(body)!=15{return errors.New("invalid CycleAbortRecord body")}
@@ -135,7 +135,7 @@ func (s *Store) CommitCycleAbort(ctx context.Context,b ports.TerminalAbortBatch)
  return tx.Commit()
 }
 func (s *Store) AuthorizeAttemptRetry(ctx context.Context,b ports.AttemptRetryBatch)error{
- if b.RunID==([32]byte{})||b.CycleID==([32]byte{})||len(b.Record.Canonical)==0{return errors.New("incomplete retry")}
+ if len(b.Record.Canonical)==0{return errors.New("incomplete retry")}
  raw,err:=codec.StrictDecodePayload(b.Record.Canonical);if err!=nil{return err}
  fields,ok:=raw.([]any)
  if !ok||len(fields)!=7||!equalBytes(fields[0],b.RunID[:])||!equalBytes(fields[1],b.CycleID[:]){

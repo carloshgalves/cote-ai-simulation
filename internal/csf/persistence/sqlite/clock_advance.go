@@ -602,8 +602,13 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  journalRaw,err:=codec.StrictDecodePayload(b.Journal.Canonical)
  if err!=nil{return err}
  journal,ok:=journalRaw.([]any);if !ok||len(journal)!=24{return errors.New("invalid canonical CycleCommit")}
- initialState,err:=s.initialTypedState(ctx,b.RunID);if err!=nil{return err}
- if err:=verifyAdvanceEnvelope(b,journal,state,next,initialState);err!=nil{return err}
+ currentTyped,currentHash,err:=s.LoadWorldState(ctx,b.ExpectedRevision)
+ if err!=nil{return err}
+ if !bytes.Equal(currentHash[:],b.BaseStateHash[:])||
+  !bytes.Equal(currentHash[:],b.ResultStateHash[:]){
+  return errors.New("CLOCK_ADVANCE cannot mutate current WorldState")
+ }
+ if err:=verifyAdvanceEnvelope(b,journal,state,next,currentTyped);err!=nil{return err}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return err}
  defer tx.Rollback()
  var current []byte

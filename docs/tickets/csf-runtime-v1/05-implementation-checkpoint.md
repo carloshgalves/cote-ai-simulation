@@ -5,10 +5,11 @@
 **Base:** `main` após o merge da CSFRV1-4 (#20).
 **Contrato:** [05-commit-atomico-e-retry.md](05-commit-atomico-e-retry.md); ADR-0008/0011.
 
-> **Status: PARCIAL — NÃO APROVADO PARA MERGE.** O caminho **Abort/Retry**
-> está implementado e testado. A publicação **bem-sucedida** de WORK com
-> `CycleCommit`, `DecisionRecord`, efeitos e revisão permanece por fazer.
-> O teste verde da branch NÃO constitui evidência de conclusão do ticket.
+> **Status: PARCIAL — NÃO APROVADO PARA MERGE.** Os caminhos **Abort/Retry**
+> e **WORK sem efeito (`NoProposal`)** estão implementados e testados.
+> `WORK` com alocação real de recursos, eventos, reducer, tasks e lifecycle
+> de fontes de agenda/triggers **ainda não está implementado**.
+> O CI verde não constitui evidência de conclusão integral do ticket.
 
 ## Entregue, versionado e testado
 
@@ -53,9 +54,10 @@
 
 ## NÃO implementado / critérios de aceite ainda abertos
 
-- [ ] Transação de **sucesso WORK**: exatamente um `DecisionRecord`
+- [ ] Transação de **sucesso WORK com efeitos**: exatamente um `DecisionRecord`
   por unidade do fence e um `CycleCommit`, com revision, clock,
-  source lifecycle, eventos e outbox atômicos.
+  source lifecycle, eventos e outbox atômicos. O subconjunto `NoProposal`
+  já publica decisões, journal, revisão/relógio e controle sem eventos.
 - [ ] `EventDraft` -> `EventOrderKey` -> `event_id`, logical sequence
   contínua, reducers puros versionados, world working copy,
   state hash e invariantes.
@@ -68,9 +70,9 @@
   armazenamento** e revalidação de replay/resume, inclusive erros
   de schema/reducer e decisões vencedoras, não só abort/retry.
 - [ ] Limite versionado de cascata em mesmo instante e abort associado.
-- [ ] Suite de fault injection em cada barreira da transação **de sucesso**,
-  worker/event order permutations, world reducer invariants e
-  scenario trace das seis partes publicadas.
+- [ ] Suite de fault injection do `WORK` **com efeitos**, worker/event
+  order permutations, world reducer invariants e trace das seis partes
+  publicadas. A variante zero-evento já tem seis failpoints de sucesso.
 
 ### Restrições técnicas observadas na integração
 
@@ -82,11 +84,40 @@
    lista de `EventDraft` vazia. Promover um consumo que altera resource
    stock sem evento registrado e sem reducer seria **estado causal inválido**.
    Não fabricamos um `CycleCommit` verde por cima dessa lacuna.
-3. O ledger provisório de candidates no abort preserva auditabilidade,
-   mas não substitui ainda o `DecisionRecord`, `Event` nem a
-   `WorldRevision` do caminho de sucesso.
+3. O ledger provisório de candidates no abort preserva auditabilidade;
+   os `DecisionRecord` definitivos, `CycleCommit` e `WorldRevision` já
+   existem na variante `NoProposal`, mas não autorizam promover um consumo
+   de recurso sem `EventDraft` e reducer canônico.
 4. Nenhuma mudança nesta PR publica material de conflito, sorteios ou
    estado interno dos agentes como `KnowledgeInput`.
+
+## Checkpoint adicional — WORK NoProposal transacional
+
+- [x] `CommitWork` na **mesma** interface de commit SQLite da CSFRV1-3,
+  restrito a unidades autenticamente `NoProposal` e lote de eventos vazio;
+  qualquer tentativa de publicar `COMMIT` de recurso sem reducer falha fechado.
+- [x] Exatamente um `DecisionRecord(NO_PROPOSAL)` por unidade do fence;
+  IDs por `(cycle,attempt,unit)`, digest do record e `DecisionPairList`
+  reconstruíveis, policy/resolver ligados ao genesis pinado.
+- [x] `CycleCommit` com IDs, input digest, decision digest, task digest vazio,
+  batch digest registrado, state hash inalterado e revisão incrementada.
+- [x] SQLite publica decision records, journal, WorldRevision, clock,
+  committed_cycles e controle `IDLE` **em uma transação**; seis failpoints
+  provam rollback integral e ausência de evento ou decisão órfã.
+- [x] Projeção read-only de settlement rederivada de DecisionLedger +
+  CycleCommit: `PendingClock` não reexecuta rounds concluídos; `InputLedger`
+  reaberto exclui os rounds consumidos de novos AdmissionFences.
+- [x] Seis adulterações de WORK (ordem, bytes, digest, world revision,
+  prefixo e cardinalidade) + policy ref com digest recalculado rejeitadas.
+- [x] Teste executa `Abort -> HALTED_ON_ABORT -> AttemptRetryRecord ->`
+  novo `AdmissionFence` semântico -> `WORK` commit de tentativa 1.
+- [x] Regressão de `CLOCK_ADVANCE` e conformance canônica preservadas.
+
+### CI do último checkpoint de sucesso pré-hardening
+
+- [CSFRV1-5 Atomic Terminal Commit — 39469319549](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39469319549): **success**.
+- [CSF canonical conformance — 39469314456](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39469314456): **success**.
+- [CSFRV1-4 kernel regression — 39469314422](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39469314422): **success**.
 
 ## Próxima implementação dentro desta mesma Draft PR
 

@@ -11,7 +11,6 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
@@ -39,11 +38,9 @@ func (c *Coordinator) CommitNoProposal(ctx context.Context,ledger *inputledger.L
   state.Revision==domain.WorldRevision(math.MaxUint64)||cycle.Ordinal>math.MaxInt64{
   return empty,errors.New("stale or overflowing WORK clock")
  }
- genesisBytes,err:=c.store.LoadGenesis(ctx,[32]byte(runID));if err!=nil{return empty,err}
- g,err:=genesis.ValidateCanonical(genesisBytes,c.bundle);if err!=nil{return empty,err}
- typed,ok:=g.Payload[16].([]any);if !ok||len(typed)!=4{return empty,errors.New("invalid genesis world state")}
- hash,err:=bytes32(typed[3]);if err!=nil{return empty,err}
- if !bytes.Equal(cycle.BaseStateHash[:],hash[:]){return empty,errors.New("NoProposal requires unchanged typed world state")}
+ typed,hash,err:=c.store.LoadWorldState(ctx,uint64(state.Revision))
+ if err!=nil{return empty,err}
+ if !bytes.Equal(cycle.BaseStateHash[:],hash[:]){return empty,errors.New("NoProposal requires the authenticated current world state")}
  byID:=map[domain.ID]inputledger.Response{}
  for _,round:=range rounds{
   for _,response:=range slots[round.ID]{

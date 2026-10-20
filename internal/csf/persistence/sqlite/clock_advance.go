@@ -87,6 +87,33 @@ func validateTriggerActivation(runID [32]byte,id [32]byte,raw []byte)(domain.Eli
  var coord domain.EligibilityCoordinate
  decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{return coord,0,err}
  fields,ok:=decoded.([]any);if !ok||len(fields)!=12||!equalBytes(fields[0],id[:])||!equalBytes(fields[1],runID[:]){return coord,0,errors.New("invalid trigger activation identity/schema")}
+ definition,ok:=fields[3].([]byte)
+ if !ok||len(definition)!=32{return coord,0,errors.New("trigger activation definition ID malformed")}
+ if fields[2]!="trigger:"+hex.EncodeToString(definition){
+  return coord,0,errors.New("trigger activation source not bound to definition")
+ }
+ version,ok:=fields[4].(uint64);if !ok||version==0{return coord,0,errors.New("trigger version invalid")}
+ count,ok:=fields[7].(uint64);if !ok||count==0{return coord,0,errors.New("trigger activation count invalid")}
+ origin,ok:=fields[5].([]any);if !ok||len(origin)<2{return coord,0,errors.New("trigger activation origin missing")}
+ kind,ok:=origin[0].(uint64);if !ok{return coord,0,errors.New("trigger activation origin kind invalid")}
+ var revision uint64
+ switch kind{
+ case 0:
+  if len(origin)!=4{return coord,0,errors.New("cycle activation origin malformed")}
+  revision,ok=origin[2].(uint64);if !ok{return coord,0,errors.New("trigger activation revision missing")}
+  cycleID,valid:=origin[1].([]byte);if !valid||len(cycleID)!=32{return coord,0,errors.New("trigger activation cycle ref malformed")}
+  causes,valid:=origin[3].([]any);if !valid{return coord,0,errors.New("trigger activation cause list malformed")}
+  _=causes
+ case 1:
+  if len(origin)!=2{return coord,0,errors.New("genesis trigger activation origin malformed")}
+  ref,valid:=origin[1].([]any);if !valid||len(ref)!=2{return coord,0,errors.New("genesis trigger ref malformed")}
+  for _,v:=range ref{b,valid:=v.([]byte);if !valid||len(b)!=32{return coord,0,errors.New("genesis trigger reference malformed")}}
+ default:return coord,0,errors.New("unregistered activation origin kind")
+ }
+ derivedID,err:=registeredDigest("cote.csf.id.trigger-activation",
+  "cote.csf.schema.trigger-activation-id-preimage",
+  []any{runID[:],definition,version,revision,count})
+ if err!=nil||derivedID!=domain.Digest(id){return coord,0,errors.New("trigger activation ID does not match causal preimage")}
  pair,ok:=fields[6].([]any);if !ok||len(pair)!=2{return coord,0,errors.New("trigger activation eligibility missing")}
  instant,ok:=asSigned64(pair[0]);if !ok{return coord,0,errors.New("invalid trigger activation instant")}
  ordinal,ok:=pair[1].(uint64);if !ok||ordinal>uint64(^uint64(0)>>1){return coord,0,errors.New("invalid trigger activation ordinal")}

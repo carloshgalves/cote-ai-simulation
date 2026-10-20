@@ -3,6 +3,7 @@ package sqlite
 import (
  "bytes"
  "context"
+ "database/sql"
  "errors"
  "sort"
 
@@ -71,4 +72,24 @@ func systemUnits(ctx context.Context,q queryOne,run [32]byte,upTo domain.Eligibi
 
 func (s *Store) SystemUnits(ctx context.Context,run [32]byte,upTo domain.EligibilityCoordinate)([]inputledger.SystemUnit,error){
  return systemUnits(ctx,s.db,run,upTo)
+}
+
+func (s *Store) LoadSystemUnit(ctx context.Context,run,unit [32]byte)([]byte,uint8,error){
+ for _,entry:=range []struct{kind uint8;table string}{{2,"scheduled_occurrences"},{3,"trigger_activations"}}{
+  var raw []byte
+  err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM "+entry.table+" WHERE run_id=? AND id=?",run[:],unit[:]).Scan(&raw)
+  if err!=nil{
+   if err==sql.ErrNoRows{continue}
+   return nil,0,err
+  }
+  var coord domain.EligibilityCoordinate
+  var life uint64
+  if entry.kind==2{coord,life,err=validateScheduledOccurrence(run,unit,raw)
+  }else{coord,life,err=validateTriggerActivation(run,unit,raw)}
+  if err!=nil{return nil,0,err}
+  if life!=0{return nil,0,errors.New("system-unit already terminal")}
+  _=coord
+  return raw,entry.kind,nil
+ }
+ return nil,0,errors.New("system-unit ID not found in run")
 }

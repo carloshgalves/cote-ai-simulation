@@ -183,6 +183,31 @@ func TestNoProposalSettlesOnlyProvisionallyWithoutCandidate(t *testing.T){
    t.Fatalf("unknown/retyped no-proposal reason %v accepted: %v",bad,err)
   }
  }
+ // Two *valid* NoProposal reasons share the dispatch-derived unit ID.
+ // Their distinct source digests must change provisional audit bytes.
+ alternate:=no
+ alternate.Body=append([]any(nil),no.Body...)
+ alternate.Body[9]=uint64(1)
+ different,_,err:=d.Sum("cote.csf.digest.no-proposal-unit",
+  "cote.csf.schema.no-proposal.body",1,[]any{alternate.Body})
+ if err!=nil{t.Fatal(err)}
+ alternate.Digest=different
+ alternate.Canonical,err=codec.CanonicalPayload(
+  append(append([]any(nil),alternate.Body...),different[:]))
+ if err!=nil{t.Fatal(err)}
+ in.Units=[]Unit{{Response:alternate,ProducerScope:"exam"},{Response:b,ProducerScope:"exam"}}
+ updated,err:=Run(in)
+ if err!=nil{t.Fatal(err)}
+ if bytes.Equal(out.Canonical,updated.Canonical)||
+  len(out.Dispositions)!=len(updated.Dispositions)||
+  out.Dispositions[0]!=updated.Dispositions[0]{
+  t.Fatal("provisional audit ignored changed NoProposal source digest")
+ }
+ in.Units[0],in.Units[1]=in.Units[1],in.Units[0]
+ permuted,err:=Run(in)
+ if err!=nil||!bytes.Equal(updated.Canonical,permuted.Canonical){
+  t.Fatalf("admitted source binding depends on delivery order: %v",err)
+ }
 }
 
 func TestHistoricalAliasKeepsIndependentSourceUnit(t *testing.T){

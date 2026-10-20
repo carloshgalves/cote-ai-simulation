@@ -126,6 +126,7 @@ type WorkBatch struct {
  ExpectedInputPrefix []CanonicalRecord
  Journal CanonicalRecord
  Decisions []CanonicalRecord
+ Events []CanonicalRecord // internal SOURCE_LIFECYCLE events in EventOrderKey order
  BaseStateHash [32]byte
  RevisionCanonical []byte
  FailAfterStep uint8

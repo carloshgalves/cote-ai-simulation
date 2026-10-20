@@ -40,6 +40,7 @@ func (c *Coordinator) CommitNoProposal(ctx context.Context,ledger *inputledger.L
   state.Revision==domain.WorldRevision(math.MaxUint64)||cycle.Ordinal>math.MaxInt64{
   return empty,errors.New("stale or overflowing WORK clock")
  }
+ if abort,hit,err:=c.abortIfCascadeExceeded(ctx,runID,cycle,fence);hit||err!=nil{return abort,err}
  typed,hash,err:=c.store.LoadWorldState(ctx,uint64(state.Revision))
  if err!=nil{return empty,err}
  if !bytes.Equal(cycle.BaseStateHash[:],hash[:]){return empty,errors.New("NoProposal requires the authenticated current world state")}

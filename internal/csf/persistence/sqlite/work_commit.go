@@ -19,6 +19,7 @@ import (
 // genuine NoProposal slot responses, one terminal decision each, and no event,
 // outbox, trigger or reducer effect. Unsupported eventful WORK fails CLOSED.
 func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
+ if b.Mode>1{return errors.New("unregistered WORK terminal variant")}
  if len(b.ExpectedClock)==0||len(b.ResultClock)==0||len(b.Journal.Canonical)==0{
   return errors.New("incomplete WORK publication batch")
  }
@@ -86,7 +87,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  if !sameCanonical(journal[10],fence[17])||!sameCanonical(journal[11],noProposalIDs(fence)){
   return errors.New("WORK journal does not match sealed source membership")
  }
- if !sameCanonical(journal[7],b.BaseStateHash[:])||!sameCanonical(journal[9],b.BaseStateHash[:])||
+ if !sameCanonical(journal[7],b.BaseStateHash[:])||!sameCanonical(journal[9],func()[]byte{if b.Mode==1{return b.ResultStateHash[:]}else{return b.BaseStateHash[:]}}())||
   journal[8]!=uint64(next.Revision)||journal[22]!=uint64(next.NextLogicalSequence){
   return errors.New("WORK revision or next sequence not from current state")
  }
@@ -174,8 +175,10 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  revision,ok:=rv.([]any)
  if !ok||len(revision)!=6||revision[0]!=uint64(prior.Revision)||
   revision[3]!=uint64(next.Revision)||!sameCanonical(revision[1],predecessor[4])||
-  !sameCanonical(revision[4],predecessor[4])||
-  !sameCanonical(revision[2],prevHash)||!sameCanonical(revision[5],prevHash){
+  !sameCanonical(revision[2],prevHash){
+  return errors.New("WORK WorldRevision does not match authenticated predecessor")
+ }
+ if b.Mode==0&&(!sameCanonical(revision[4],predecessor[4])||!sameCanonical(revision[5],prevHash)){
   return errors.New("NoProposal cannot mutate canonical WorldState")
  }
  // Decisions correspond exactly to the authenticated fence units in order.
@@ -185,6 +188,9 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  list,ok:=journal[16].([]any);if !ok||len(list)!=len(units){
   return errors.New("CycleCommit omits terminal decision references")
  }
+ if b.Mode==1{
+  if err:=verifySingleResourceTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
+ }else{
  pairing:=make([]any,0,len(units))
  coveredSlots:=map[domain.ID]map[string]bool{}
  type slotProof struct{slot string;id,digest []byte}
@@ -279,11 +285,15 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  if !equalBytes(journal[17],dd[:])||!equalBytes(journal[19],tasks[:]){
   return errors.New("WORK decision/task digest not bound to authoritative output")
  }
+ }
  control,err:=cycleControl(ctx,tx,b.RunID);if err!=nil{return err}
  if control==nil||control[0]!=uint64(1)||
   !present(control[1],b.CycleID[:])||!present(control[2],attempt)||
   !present(control[3],fullRef(11,b.FenceID[:],fence[17].([]byte))){
   return errors.New("WORK not current in-flight authorized attempt")
+ }
+ if b.Mode==1{
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.ResourceCandidate.Identity[:],b.ResourceCandidate.Canonical);err!=nil{return err}
  }
  for _,item:=range b.Decisions{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",item.Identity[:],item.Canonical);err!=nil{return err}
@@ -296,7 +306,9 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  if err:=failClock(b.FailAfterStep,2);err!=nil{return err}
  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.Journal.Identity[:],b.Journal.Canonical);err!=nil{return err}
  if err:=failClock(b.FailAfterStep,3);err!=nil{return err}
- if _,err:=tx.ExecContext(ctx,"INSERT INTO world_revisions(revision,state_hash,canonical) VALUES(?,?,?)",uint64(next.Revision),b.BaseStateHash[:],b.RevisionCanonical);err!=nil{return err}
+ outputHash:=b.BaseStateHash
+ if b.Mode==1{outputHash=b.ResultStateHash}
+ if _,err:=tx.ExecContext(ctx,"INSERT INTO world_revisions(revision,state_hash,canonical) VALUES(?,?,?)",uint64(next.Revision),outputHash[:],b.RevisionCanonical);err!=nil{return err}
  if err:=failClock(b.FailAfterStep,4);err!=nil{return err}
  updated,err:=tx.ExecContext(ctx,"UPDATE clock_states SET canonical=? WHERE run_id=? AND canonical=?",b.ResultClock,b.RunID[:],b.ExpectedClock)
  if err!=nil{return err}

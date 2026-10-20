@@ -98,6 +98,11 @@ func TestNoProposalWorkAtomicityAcrossAllFailurePoints(t *testing.T){
  reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
  recovered,err:=reopened.LoadClock(ctx,[32]byte(run))
  if err!=nil||recovered!=after{t.Fatal("resume changed WORK successor",err)}
+ report,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle)
+ if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=0||
+  report.ReconstructedClock!=after{
+  t.Fatalf("zero-effect WORK not independently replayable: %+v %v",report,err)
+ }
  pending,err:=reopened.PendingClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
  if next,ok,err:=clock.Next(recovered,pending);err!=nil||ok{
   t.Fatalf("completed NoProposal rounds re-entered pending clock: %+v %v %v",next,ok,err)
@@ -238,4 +243,28 @@ func TestNoProposalWorkRejectsUnsettledScheduledOccurrenceAtSameCoordinate(t *te
  if err!=nil||state.Revision!=0{t.Fatal("invalid WORK mutated world",err)}
  ctl,err:=store.LoadCycleControl(ctx,[32]byte(run))
  if err!=nil||ctl[0]!=uint64(1){t.Fatalf("rejected WORK did not retain in-flight fence: %v %v",ctl,err)}
+}
+
+func TestWorkReplayRejectsMissingTerminalDecision(t *testing.T){
+ ctx:=context.Background()
+ c,_,ledger,cycle,fence,path:=noProposalWorkFixture(t)
+ if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ // Delete exactly one terminal decision while retaining the CycleCommit
+ // and revision bytes: replay must reject the incomplete publication.
+ // Fetch the first decision via the committed journal ID list, rather
+ // than assuming rowid or DB append order means causal priority.
+ _,_,_,_,_,run:=ledger.Snapshot()
+ var journalRaw []byte
+ if err:=db.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id IN (SELECT commit_id FROM committed_cycles WHERE run_id=?)",run[:]).Scan(&journalRaw);err!=nil{t.Fatal(err)}
+ v,err:=codec.StrictDecodePayload(journalRaw);if err!=nil{t.Fatal(err)}
+ ids:=v.([]any)[16].([]any)
+ target:=ids[0].([]byte)
+ if _,err:=db.ExecContext(ctx,"DELETE FROM decision_ledger WHERE id=?",target);err!=nil{t.Fatal(err)}
+ db.Close()
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer reopened.Close()
+ if _,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
+  t.Fatal("replay accepted an orphaned CycleCommit with a missing terminal decision")
+ }
 }

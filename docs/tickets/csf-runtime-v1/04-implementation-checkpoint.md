@@ -3,7 +3,7 @@
 **Branch:** `feat/csfrv1-4-minimal-decision-kernel`
 **Base:** `main@43574722e3f22eb629da47e17bf573dad4a68369` (CSFRV1-3 merged)
 **State:** implementation checkpoint validated in CI; Draft PR #20 remains unmerged.
-**Verified code head:** `b010b0dafeb8e0a1094f0a017f728f7bb6e1028a`
+**Validated remediation code head:** `cda9a291be311371a374a982a1f27bcac40db487`
 
 ## Accepted boundary
 
@@ -25,7 +25,7 @@ against one `base_revision`.
 1. Registered versioned synthetic action schema, fully typed proposal and
    `NoProposal` parsing, same frozen base revision and canonical ID/digest
    validation. Unknown action/validator never silently grants permission.
-2. Six separate affordance facets: physical possibility, access, resource
+2. Six separate affordance facets: physical possibility, explicitly proven access, resource
    availability, temporal applicability, institutional prohibition, and
    legality. A typed prohibition does not rewrite physical possibility.
 3. Exact source-unit partition with no gaps, overlaps or external sources;
@@ -85,3 +85,30 @@ Code head `b010b0dafeb8e0a1094f0a017f728f7bb6e1028a`:
 - Implementation has been tested, **not independently code-reviewed or
   approved for merge**. Keep PR #20 Draft until a separate `$code-review
   CSFRV1-4` phase and any requested remediation.
+
+## Review/remediation rounds (2026-10-20)
+
+- [Finding 1](https://github.com/carloshgalves/cote-ai-simulation/pull/20#issuecomment-6293157136):
+  **RESOLVED**. Access is actor-scoped evidence, not a silent grant.
+  Missing institutional rule also fails closed; denied access is filtered
+  before resource contention.
+- [Finding 2](https://github.com/carloshgalves/cote-ai-simulation/pull/20#issuecomment-6293158376):
+  **RESOLVED**. DetectClaims verifies candidate identity preimage,
+  canonical source IDs and cycle binding before grouping conflict evidence.
+- [Finding 3](https://github.com/carloshgalves/cote-ai-simulation/pull/20#issuecomment-6293159352):
+  **RESOLVED**. NoProposal reason must be one of the three registered
+  uint8 values, including when source digest/bytes are self-consistent.
+- [Finding 4](https://github.com/carloshgalves/cote-ai-simulation/pull/20#issuecomment-6293348676):
+  **RESOLVED**. Provisional audit CBOR now binds the exact fence-ordered
+  (admitted unit ID, admitted unit digest) pairs, including NoProposal
+  and idempotent alias units; worker completion remains irrelevant.
+
+CI: [decision run 39440500500](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39440500500)
+and [cross-language canonical conformance 39440500486](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39440500486)
+both succeeded after the remediation. All four review findings have
+terminal RESOLVED markers, with correction SHAs in their original PR
+conversation comments.
+
+The clean-review result is scoped to **CSFRV1-4 provisional semantics**;
+it does not claim that CSFRV1-5's atomic terminal publisher, authenticated
+historical alias retrieval or authoritative replay already exists.

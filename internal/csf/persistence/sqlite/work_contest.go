@@ -111,6 +111,30 @@ func verifyTwoResourceTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
   if err!=nil||!equalBytes(candidate[16],digest[:]){return errors.New("contest candidate digest invalid")}
   competitor.candidateBody=candidate
  }
+ // Each affordance assessment is itself a signed, content-addressed
+ // validation of the admitted ActionProposal. Require both exact roots,
+ // not just a proof-list length that could hide arbitrary material.
+ validator:=allowed["validators-v1"]
+ for _,contender:=range competitors{
+  facets:=[]any{
+   []any{uint64(0),uint64(0),uint64(2),"physical.possible",[]any{},validator},
+   []any{uint64(1),uint64(0),uint64(2),"access.granted",[]any{},validator},
+   []any{uint64(2),uint64(0),uint64(0),"resource.available",[]any{},validator},
+   []any{uint64(3),uint64(2),uint64(2),"temporal.not-applicable",[]any{},validator},
+   []any{uint64(4),uint64(0),uint64(2),"institution.allowed",[]any{},validator},
+   []any{uint64(5),uint64(2),uint64(2),"legal.not-applicable",[]any{},validator},
+  }
+  subject:=[]any{uint64(5),contender.source[:],contender.digest[:]}
+  expectedBody:=[]any{subject,facets}
+  digest,err:=registeredDigest("cote.csf.digest.affordance-assessment",
+   "cote.csf.schema.affordance-assessment.body",expectedBody)
+  if err!=nil{return err}
+  saved,found:=proofByID[[32]byte(digest)]
+  if !found||len(saved)!=3||!sameCanonical(saved[:2],expectedBody)||
+   !equalBytes(saved[2],digest[:]){
+   return errors.New("contest affordance assessment missing or inconsistent with admitted actor")
+  }
+ }
  sorted:=[]domain.ID{competitors[0].candidate,competitors[1].candidate}
  sort.Slice(sorted,func(i,j int)bool{return bytes.Compare(sorted[i][:],sorted[j][:])<0})
  conflictID,err:=registeredDigest("cote.csf.id.conflict-set","cote.csf.schema.conflict-set-id-preimage",

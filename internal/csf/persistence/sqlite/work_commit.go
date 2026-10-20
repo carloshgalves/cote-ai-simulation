@@ -5,11 +5,13 @@ import (
  "context"
  "errors"
  "math"
+ "sort"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/settlement"
 )
 
 // CommitWork is the WORK arm of the SAME pinned SQLite commit authority as
@@ -24,7 +26,9 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  next,err:=clock.Decode(b.ResultClock);if err!=nil{return err}
  if uint64(prior.Revision)==math.MaxUint64||
   next.Revision!=prior.Revision+1||next.Instant!=prior.Instant||
-  next.NextLogicalSequence!=prior.NextLogicalSequence||next.LastOrdinal<0{
+  uint64(len(b.Events))>math.MaxUint64-uint64(prior.NextLogicalSequence)||
+  uint64(next.NextLogicalSequence)!=uint64(prior.NextLogicalSequence)+uint64(len(b.Events))||
+  next.LastOrdinal<0{
   return errors.New("zero-event WORK changes clock or logical sequence illegally")
  }
  raw,err:=codec.StrictDecodePayload(b.Journal.Canonical);if err!=nil{return err}
@@ -32,18 +36,21 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  attempt,ok:=journal[2].(uint64);if !ok||attempt>math.MaxUint32{return errors.New("WORK attempt invalid")}
  id,err:=registeredDigest("cote.csf.id.cycle-commit","cote.csf.schema.cycle-commit-id-preimage",
   []any{b.RunID[:],b.CycleID[:],attempt});if err!=nil{return err}
+ canonicalEvents:=make([]any,len(b.Events))
+ for i,item:=range b.Events{canonicalEvents[i]=item.Canonical}
  batchHash,err:=registeredDigest("cote.csf.digest.batch","cote.csf.schema.batch-preimage",
-  []any{journal[:23],[]any{}});if err!=nil{return err}
+  []any{journal[:23],canonicalEvents});if err!=nil{return err}
  if id!=b.Journal.Identity||!equalBytes(journal[23],batchHash[:])||
   !equalBytes(journal[0],b.RunID[:])||!equalBytes(journal[1],b.CycleID[:]){
   return errors.New("unauthenticated WORK batch ID/digest/run")
  }
- // An eventful/visible/resource-mutating WORK must not be accepted by a
- // no-effect branch before registered event drafts and reducers are available.
- for _,index:=range []int{15,18}{
-  values,ok:=journal[index].([]any)
-  if !ok||len(values)!=0{return errors.New("unsupported WORK event/task batch")}
- }
+ // The only registered WORK events in this first slice are internal
+ // SOURCE_LIFECYCLE (round.consumed) transitions; no domain event or
+ // perception task may be forged through this gate.
+ eventIDs,ok:=journal[15].([]any)
+ if !ok||len(eventIDs)!=len(b.Events){return errors.New("WORK event batch differs from journal")}
+ taskIDs,ok:=journal[18].([]any)
+ if !ok||len(taskIDs)!=0{return errors.New("unregistered WORK perception tasks")}
  if len(b.Decisions)==0{return errors.New("WORK has no settled source units")}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return err}
  defer tx.Rollback()
@@ -180,6 +187,8 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  }
  pairing:=make([]any,0,len(units))
  coveredSlots:=map[domain.ID]map[string]bool{}
+ type slotProof struct{slot string;id,digest []byte}
+ eventSources:=map[domain.ID][]slotProof{}
  for i,unit:=range units{
   source,ok:=unit.([]any)
   if !ok||len(source)!=5||source[1]!=uint64(0){
@@ -204,6 +213,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   if coveredSlots[roundID]==nil{coveredSlots[roundID]=map[string]bool{}}
   if coveredSlots[roundID][slot]{return errors.New("two NoProposal records settle the same round slot")}
   coveredSlots[roundID][slot]=true
+  eventSources[roundID]=append(eventSources[roundID],slotProof{slot:slot,id:sourceID,digest:sourceHash})
   responseDigest,err:=registeredDigest("cote.csf.digest.no-proposal-unit",
    "cote.csf.schema.no-proposal.body",[]any{src[:10]});if err!=nil{return err}
   responseID,err:=registeredDigest("cote.csf.id.no-proposal",
@@ -243,6 +253,25 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
    return errors.New("terminal WORK cannot settle a strict subset of round slots")
   }
  }
+ if len(b.Events)!=len(expectedSlots){
+  return errors.New("SOURCE_LIFECYCLE event count differs from terminal rounds")
+ }
+ roundIDs:=make([]domain.ID,0,len(expectedSlots))
+ for id:=range expectedSlots{roundIDs=append(roundIDs,id)}
+ sort.Slice(roundIDs,func(i,j int)bool{return bytes.Compare(roundIDs[i][:],roundIDs[j][:])<0})
+ for i,roundID:=range roundIDs{
+  parts:=eventSources[roundID]
+  sort.Slice(parts,func(i,j int)bool{return parts[i].slot<parts[j].slot})
+  refs:=make([]any,len(parts))
+  for j,v:=range parts{refs[j]=[]any{uint64(0),uint64(1),v.id,v.digest}}
+  derived,err:=settlement.ConsumedRoundEvent(domain.ID(b.RunID),domain.ID(b.CycleID),roundID,
+   prior.Instant,prior.Revision,prior.NextLogicalSequence+domain.LogicalSequence(i),refs)
+  if err!=nil{return err}
+  if derived.Identity!=b.Events[i].Identity||!bytes.Equal(derived.Canonical,b.Events[i].Canonical)||
+   !sameCanonical(eventIDs[i],derived.Identity[:]){
+   return errors.New("SOURCE_LIFECYCLE event differs from sealed round settlement")
+  }
+ }
  dd,err:=registeredDigest("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",pairing)
  if err!=nil{return err}
  tasks,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",[]any{})
@@ -260,18 +289,23 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",item.Identity[:],item.Canonical);err!=nil{return err}
  }
  if err:=failClock(b.FailAfterStep,1);err!=nil{return err}
- if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.Journal.Identity[:],b.Journal.Canonical);err!=nil{return err}
+ for _,item:=range b.Events{
+  if _,err:=strictFull(item,19);err!=nil{return err}
+  if err:=appendToTx(ctx,tx,"event_store",item);err!=nil{return err}
+ }
  if err:=failClock(b.FailAfterStep,2);err!=nil{return err}
- if _,err:=tx.ExecContext(ctx,"INSERT INTO world_revisions(revision,state_hash,canonical) VALUES(?,?,?)",uint64(next.Revision),b.BaseStateHash[:],b.RevisionCanonical);err!=nil{return err}
+ if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.Journal.Identity[:],b.Journal.Canonical);err!=nil{return err}
  if err:=failClock(b.FailAfterStep,3);err!=nil{return err}
+ if _,err:=tx.ExecContext(ctx,"INSERT INTO world_revisions(revision,state_hash,canonical) VALUES(?,?,?)",uint64(next.Revision),b.BaseStateHash[:],b.RevisionCanonical);err!=nil{return err}
+ if err:=failClock(b.FailAfterStep,4);err!=nil{return err}
  updated,err:=tx.ExecContext(ctx,"UPDATE clock_states SET canonical=? WHERE run_id=? AND canonical=?",b.ResultClock,b.RunID[:],b.ExpectedClock)
  if err!=nil{return err}
  n,err:=updated.RowsAffected();if err!=nil||n!=1{return errors.New("WORK clock CAS rejected")}
- if err:=failClock(b.FailAfterStep,4);err!=nil{return err}
- if _,err:=tx.ExecContext(ctx,"INSERT INTO committed_cycles(run_id,cycle_id,commit_id) VALUES(?,?,?)",b.RunID[:],b.CycleID[:],b.Journal.Identity[:]);err!=nil{return err}
  if err:=failClock(b.FailAfterStep,5);err!=nil{return err}
- if err:=storeCycleControl(ctx,tx,b.RunID,[]any{uint64(0),noRef(),noRef(),noRef(),noRef(),noRef(),uint64(0)});err!=nil{return err}
+ if _,err:=tx.ExecContext(ctx,"INSERT INTO committed_cycles(run_id,cycle_id,commit_id) VALUES(?,?,?)",b.RunID[:],b.CycleID[:],b.Journal.Identity[:]);err!=nil{return err}
  if err:=failClock(b.FailAfterStep,6);err!=nil{return err}
+ if err:=storeCycleControl(ctx,tx,b.RunID,[]any{uint64(0),noRef(),noRef(),noRef(),noRef(),noRef(),uint64(0)});err!=nil{return err}
+ if err:=failClock(b.FailAfterStep,7);err!=nil{return err}
  return tx.Commit()
 }
 func noProposalIDs(fence []any)[]any{

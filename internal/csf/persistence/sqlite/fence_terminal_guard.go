@@ -57,7 +57,7 @@ func admitTerminalFence(ctx context.Context,tx *sql.Tx,record ports.CanonicalRec
   if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",oldID).Scan(&oldCanonical);err!=nil{return nil,err}
   oldValue,err:=codec.StrictDecodePayload(oldCanonical);if err!=nil{return nil,err}
   old,ok:=oldValue.([]any)
-  if !ok||len(old)!=18||!equalBytes(causal[2],old[17].([]byte)){return nil,errors.New("invalid predecessor fence")}
+  if !ok||len(old)!=18||!sameCanonical(causal[2],old[17]){return nil,errors.New("invalid predecessor fence")}
   for _,index:=range []int{0,1,4,5,6,7,8,9,10,11,12,13,14,15,16}{
    if !sameCanonical(fence[index],old[index]){return nil,errors.New("retry changed sealed semantic cut")}
   }

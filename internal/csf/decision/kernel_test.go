@@ -323,3 +323,49 @@ func TestResourceAccumulatorOverflowProducesAttributedIndeterminate(t *testing.T
  }
  if len(subjects)!=0{t.Fatal("detector failure conflated candidate subjects")}
 }
+
+func TestAccessRuleIsExplicitAndDenialBlocksWithoutRewritingPossibility(t *testing.T){
+ input,a,b:=fixture(t,true)
+ delete(input.Snapshot.AccessibleActors,"school:a")
+ unknown,err:=Run(input)
+ if !errors.Is(err,ErrIndeterminate)||unknown.Failure!="INDETERMINATE_FACET"||
+  len(unknown.Indeterminate)!=1||unknown.Indeterminate[0].Subject!=a.ID||
+  unknown.Indeterminate[0].Facet!=1||len(unknown.Dispositions)!=0||
+  unknown.PostAvailable!=1{
+  t.Fatalf("absent access rule must fail closed: %v %+v",err,unknown)
+ }
+ input.Snapshot.AccessibleActors["school:a"]=false
+ denied,err:=Run(input)
+ if err!=nil{t.Fatal(err)}
+ if len(denied.Conflicts)!=0||len(denied.Draws)!=0||
+  len(denied.Dispositions)!=2||denied.PostAvailable!=0{
+  t.Fatalf("denied actor must not enter the conflict lottery: %+v",denied)
+ }
+ if denied.Dispositions[0].Subject!=a.ID||
+  denied.Dispositions[0].Status!="REJECT"||
+  denied.Dispositions[0].Reason!="access.denied"||
+  denied.Dispositions[1].Subject!=b.ID||
+  denied.Dispositions[1].Status!="COMMIT"{
+  t.Fatalf("access-denied action was admitted: %+v",denied.Dispositions)
+ }
+ facets,ok:=denied.Assessments[0].Fields[1].([]any)
+ if !ok||facets[0].([]any)[1]!=uint64(0)||
+  facets[1].([]any)[1]!=uint64(1)||
+  facets[1].([]any)[2]!=uint64(0){
+  t.Fatal("denial incorrectly changed physical possibility or failed to block")
+ }
+ input.Units[0],input.Units[1]=input.Units[1],input.Units[0]
+ reversed,err:=Run(input)
+ if err!=nil||!bytes.Equal(denied.Canonical,reversed.Canonical){
+  t.Fatalf("access decision depends on completion order: %v",err)
+ }
+ input.Snapshot.AccessibleActors["school:a"]=true
+ delete(input.Snapshot.ForbiddenActors,"school:b")
+ missingInstitution,err:=Run(input)
+ if !errors.Is(err,ErrIndeterminate)||len(missingInstitution.Indeterminate)!=1||
+  missingInstitution.Indeterminate[0].Facet!=4||
+  missingInstitution.Indeterminate[0].Subject!=b.ID||
+  len(missingInstitution.Dispositions)!=0{
+  t.Fatalf("missing institutional policy treated as permission: %v %+v",err,missingInstitution)
+ }
+}

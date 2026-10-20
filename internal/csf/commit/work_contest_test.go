@@ -15,6 +15,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 )
 func twoResourceContestFixture(t *testing.T,reverse bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
@@ -102,4 +103,62 @@ func TestTwoResourceContestCommitReplaysAndDoesNotDependOnArrival(t *testing.T){
    t.Fatal("settled losing contender still pending",exists,err)
   }
  }
+}
+
+func TestTwoResourceContestAtomicAcrossSevenCrashPoints(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=twoResourceContestFixture(t,false)
+ _,_,_,_,_,run:=ledger.Snapshot()
+ original,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ for step:=uint8(1);step<=7;step++{
+  c.failAfterStep=step
+  if _,err:=c.CommitTwoResourceContest(ctx,ledger,cycle,fence);err==nil{
+   t.Fatalf("contested resource failpoint %d was bypassed",step)
+  }
+  current,err:=store.LoadClock(ctx,[32]byte(run))
+  if err!=nil||current!=original{t.Fatalf("crash %d advanced world clock: %+v %v",step,current,err)}
+  state,_,err:=store.LoadWorldState(ctx,0);if err!=nil{t.Fatal(err)}
+  stock,err:=reducer.DecodeStock(state)
+  if err!=nil||stock.Available!=1{t.Fatalf("failpoint %d consumed uncommitted resource",step)}
+  db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+  for _,test:=range []struct{table string;expected int}{
+   {"event_store",0},{"committed_cycles",0},{"decision_ledger",1},{"world_revisions",1},
+  }{
+   var count int
+   if err:=db.QueryRowContext(ctx,"SELECT count(*) FROM "+test.table).Scan(&count);err!=nil{t.Fatal(err)}
+   if count!=test.expected{t.Fatalf("failpoint %d leaked %s: got %d expected %d",step,test.table,count,test.expected)}
+  }
+  db.Close()
+ }
+ c.failAfterStep=0
+ if _,err:=c.CommitTwoResourceContest(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ if _,err:=c.CommitTwoResourceContest(ctx,ledger,cycle,fence);err==nil{
+  t.Fatal("duplicate contested resource allocation accepted")
+ }
+}
+func TestTwoResourceContestRejectsForgedEventAndRNGProof(t *testing.T){
+ cases:=[]struct{name string;mutate func(*ports.WorkBatch)}{
+  {"event",func(b *ports.WorkBatch){b.Events[0].Canonical=[]byte{0x80}}},
+  {"winner-decision",func(b *ports.WorkBatch){b.Decisions[0].Canonical=[]byte{0x80}}},
+  {"candidate-proof",func(b *ports.WorkBatch){b.ContestProofs[0].Canonical=[]byte{0x80}}},
+  {"proof-order",func(b *ports.WorkBatch){b.ContestProofs[0],b.ContestProofs[1]=b.ContestProofs[1],b.ContestProofs[0]}},
+  {"stock-result",func(b *ports.WorkBatch){b.ResultStateHash[0]^=0xff}},
+  {"lifecycle-event-order",func(b *ports.WorkBatch){b.Events[1],b.Events[2]=b.Events[2],b.Events[1]}},
+  {"input-cut",func(b *ports.WorkBatch){b.ExpectedInputPrefix=b.ExpectedInputPrefix[:len(b.ExpectedInputPrefix)-1]}},
+ }
+ for _,tc:=range cases{t.Run(tc.name,func(t *testing.T){
+  ctx:=context.Background()
+  c,store,ledger,cycle,fence,_:=twoResourceContestFixture(t,false)
+  c.tamperWorkBatch=tc.mutate
+  if _,err:=c.CommitTwoResourceContest(ctx,ledger,cycle,fence);err==nil{
+   t.Fatal("forged contested terminal batch accepted by SQLite")
+  }
+  _,_,_,_,_,run:=ledger.Snapshot()
+  state,err:=store.LoadClock(ctx,[32]byte(run))
+  if err!=nil||state.Revision!=0{t.Fatal("rejected contested batch advanced clock",err)}
+  c.tamperWorkBatch=nil
+  if _,err:=c.CommitTwoResourceContest(ctx,ledger,cycle,fence);err!=nil{
+   t.Fatalf("clean contested batch cannot succeed after rollback: %v",err)
+  }
+ })}
 }

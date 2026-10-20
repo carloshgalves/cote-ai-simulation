@@ -133,11 +133,11 @@ func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,run
     initial,err:=c.store.LoadGenesis(ctx,[32]byte(runID));if err!=nil{return result,err}
     g,err:=genesis.ValidateCanonical(initial,c.bundle);if err!=nil{return result,err}
     if g.RunID!=runID{return result,errors.New("clock run ID differs from persisted genesis")}
-    typed,ok:=g.Payload[16].([]any)
-    if !ok||len(typed)!=4{return result,errors.New("genesis initial state not a typed value")}
-    baseHash,err:=bytes32(typed[3]);if err!=nil{return result,err}
-    // This slice publishes only temporal change: synthetic body.advanced is
-    // NOT a physical reducer. World-state bytes/hash stay unchanged.
+    typed,baseHash,err:=c.store.LoadWorldState(ctx,uint64(state.Revision))
+    if err!=nil{return result,err}
+    // A clock advance is an identity WorldState reducer over the CURRENT
+    // committed revision, not over the genesis fixture. Resource and other
+    // valid prior mutations must survive all later temporal transitions.
     cycle:=admission.Cycle{
         ID:domain.ID(cycleID),Attempt:0,Instant:state.Instant,Ordinal:plan.OriginOrdinal,
         Plan:clockPlan,BaseRevision:state.Revision,BaseStateHash:domain.Digest(baseHash),

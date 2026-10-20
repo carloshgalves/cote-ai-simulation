@@ -42,8 +42,6 @@ func verifySystemTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
  var eligibility domain.EligibilityCoordinate
  var computedLife uint64
  var err error
- if kind==2{eligibility,computedLife,err=validateScheduledOccurrence(b.RunID,b.SystemCandidate.Identity,raw)
- }else{eligibility,computedLife,err=validateTriggerActivation(b.RunID,b.SystemCandidate.Identity,raw)}
  // The source identity comes from the fence, never the candidate.
  if kind==2{eligibility,computedLife,err=validateScheduledOccurrence(b.RunID,[32]byte(source),raw)
  }else{eligibility,computedLife,err=validateTriggerActivation(b.RunID,[32]byte(source),raw)}

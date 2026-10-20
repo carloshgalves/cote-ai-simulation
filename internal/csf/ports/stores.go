@@ -118,6 +118,10 @@ type AttemptRetryBatch struct {
 // accepts a closed, zero-event NoProposal batch. The adapter must fail closed
 // on resource-consuming or lifecycle-bearing variants until reducers exist.
 type WorkBatch struct {
+ // 0: NoProposal only; 1: one authenticated resource.consume candidate.
+ Mode uint8
+ ResourceCandidate CanonicalRecord
+ ResultStateHash [32]byte
  RunID [32]byte
  CycleID [32]byte
  FenceID [32]byte

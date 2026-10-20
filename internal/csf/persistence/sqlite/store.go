@@ -348,7 +348,7 @@ func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundG
 		// candidate audit roots are not admission fences. Their canonical
 		// identities are checked at their individual transaction insertion
 		// gates, and they cannot widen the previous input cut.
-		if len(body)==24||len(body)==15||len(body)==7||len(body)==17 {continue}
+		if len(body)==24||len(body)==16||len(body)==15||len(body)==7||len(body)==17 {continue}
 		if len(body)!=18 && len(body)!=6 {rows.Close();return errors.New("unknown decision record in admission guard")}
 		fenceRun,ok:=body[0].([]byte)
 		if !ok || len(fenceRun)!=32 {rows.Close();return errors.New("invalid persisted fence run")}

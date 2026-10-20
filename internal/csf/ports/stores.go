@@ -59,3 +59,39 @@ type Authorities struct {
 	CausalOutbox   AppendOnlyStore
 	SnapshotStore  AppendOnlyStore
 }
+
+// ClockAdvanceBatch is the complete CLOCK_ADVANCE publication unit. The caller
+// derives all records against one frozen revision. Only a CommitCoordinator may
+// invoke ClockAdvanceStore; a storage adapter must compare and publish the whole
+// unit in one transaction, never through individual append methods.
+type TriggerStateChange struct {
+ DefinitionID [32]byte
+ DefinitionCanonical []byte
+ Before []byte
+ After []byte
+}
+type ClockAdvanceBatch struct {
+ RunID [32]byte
+ CycleID [32]byte
+ FenceID [32]byte
+ TargetInstant int64
+ TargetOrdinal uint64
+ ExpectedInputPrefix []CanonicalRecord
+ ExpectedRevision uint64
+ ResultRevision uint64
+ ExpectedClock []byte
+ ResultClock []byte
+ BaseStateHash [32]byte
+ ResultStateHash [32]byte
+ Journal CanonicalRecord
+ Events []CanonicalRecord
+ TriggerRuntime []TriggerStateChange
+ Activations []CanonicalRecord
+ RevisionCanonical []byte
+ // Test-only crash injection inside the one transaction; any injected failure
+ // must roll back all authorities and leave exactly the old prefix.
+ FailAfterStep uint8
+}
+type ClockAdvanceStore interface {
+ CommitClockAdvance(context.Context, ClockAdvanceBatch) error
+}

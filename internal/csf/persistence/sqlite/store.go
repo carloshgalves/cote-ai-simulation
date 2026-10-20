@@ -16,7 +16,9 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+    "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ingressguard"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -140,6 +142,11 @@ CREATE TABLE IF NOT EXISTS genesis_records (
   canonical BLOB NOT NULL
 ) STRICT;
 CREATE TABLE IF NOT EXISTS input_ledger (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
+CREATE TABLE IF NOT EXISTS round_integrity_seals (
+ id BLOB PRIMARY KEY CHECK(length(id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ canonical_hash BLOB NOT NULL CHECK(length(canonical_hash)=32)
+) STRICT;
 CREATE TABLE IF NOT EXISTS input_slot_responses (slot_key BLOB PRIMARY KEY CHECK(length(slot_key)=32), record_id BLOB NOT NULL UNIQUE CHECK(length(record_id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS input_source_cursors (source_id TEXT PRIMARY KEY, next_seq INTEGER NOT NULL CHECK(next_seq>=0)) STRICT;
 CREATE TABLE IF NOT EXISTS source_ingress_receipts (source_id TEXT NOT NULL, ingress_seq INTEGER NOT NULL CHECK(ingress_seq>=0), record_id BLOB NOT NULL CHECK(length(record_id)=32), canonical BLOB NOT NULL, PRIMARY KEY(source_id,ingress_seq)) STRICT;
@@ -150,6 +157,55 @@ CREATE TABLE IF NOT EXISTS causal_outbox (id BLOB PRIMARY KEY CHECK(length(id)=3
 CREATE TABLE IF NOT EXISTS world_revisions (revision INTEGER PRIMARY KEY, state_hash BLOB NOT NULL CHECK(length(state_hash)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS cycle_control_state (run_id BLOB PRIMARY KEY CHECK(length(run_id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS snapshots (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
+CREATE TABLE IF NOT EXISTS clock_states (
+ run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
+ canonical BLOB NOT NULL
+) STRICT;
+CREATE TABLE IF NOT EXISTS scheduled_occurrences (
+ id BLOB PRIMARY KEY CHECK(length(id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ eligibility_instant INTEGER NOT NULL,
+ eligibility_ordinal INTEGER NOT NULL CHECK(eligibility_ordinal>=0),
+ lifecycle INTEGER NOT NULL CHECK(lifecycle IN (0,1,2)),
+ canonical BLOB NOT NULL
+) STRICT;
+CREATE INDEX IF NOT EXISTS idx_occurrence_next ON scheduled_occurrences(run_id,lifecycle,eligibility_instant,eligibility_ordinal,id);
+CREATE TABLE IF NOT EXISTS trigger_registry_seals (
+ run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
+ genesis_id BLOB NOT NULL CHECK(length(genesis_id)=32),
+ genesis_digest BLOB NOT NULL CHECK(length(genesis_digest)=32),
+ registry_hash BLOB NOT NULL CHECK(length(registry_hash)=32)
+) STRICT;
+CREATE TABLE IF NOT EXISTS trigger_definitions (
+ definition_id BLOB PRIMARY KEY CHECK(length(definition_id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ genesis_id BLOB NOT NULL CHECK(length(genesis_id)=32),
+ genesis_digest BLOB NOT NULL CHECK(length(genesis_digest)=32),
+ content_digest BLOB NOT NULL CHECK(length(content_digest)=32),
+ canonical BLOB NOT NULL
+) STRICT;
+CREATE INDEX IF NOT EXISTS idx_trigger_definitions_run ON trigger_definitions(run_id,definition_id);
+CREATE TABLE IF NOT EXISTS trigger_runtime (
+ definition_id BLOB PRIMARY KEY CHECK(length(definition_id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ canonical BLOB NOT NULL
+) STRICT;
+CREATE TABLE IF NOT EXISTS trigger_activations (
+ id BLOB PRIMARY KEY CHECK(length(id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ eligibility_instant INTEGER NOT NULL,
+ eligibility_ordinal INTEGER NOT NULL CHECK(eligibility_ordinal>=0),
+ lifecycle INTEGER NOT NULL CHECK(lifecycle IN (0,2)),
+ canonical BLOB NOT NULL
+) STRICT;
+CREATE INDEX IF NOT EXISTS idx_trigger_next ON trigger_activations(run_id,lifecycle,eligibility_instant,eligibility_ordinal,id);
+CREATE TABLE IF NOT EXISTS committed_cycles (
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ cycle_id BLOB NOT NULL CHECK(length(cycle_id)=32),
+ commit_id BLOB NOT NULL CHECK(length(commit_id)=32),
+ PRIMARY KEY(run_id,cycle_id),
+ UNIQUE(commit_id)
+) STRICT;
 `)
 	return err
 }
@@ -162,7 +218,19 @@ func (s *Store) Append(ctx context.Context, record ports.CanonicalRecord) error 
 	switch kind {
 	case "source": return s.AppendSourceDeclaration(ctx, runID, record)
 	case "round": return s.AppendRoundDeclaration(ctx, runID, instant, ordinal, record)
-	default: return appendTo(ctx, s.db, "input_ledger", record)
+ default:
+  // ExogenousInput and SourceClosure must enter with their ingress receipt
+  // and source cursor in one transaction, never through generic Append.
+  decoded,err:=codec.StrictDecodePayload(record.Canonical)
+  if err==nil{
+   fields,ok:=decoded.([]any)
+   if ok&&(len(fields)==13||len(fields)==7)&&len(fields)>2{
+    _,runOK:=fields[1].([]byte)
+    _,sourceOK:=fields[2].(string)
+    if runOK&&sourceOK{return errors.New("source ingress requires AppendIngress and atomic receipt")}
+   }
+  }
+  return appendTo(ctx,s.db,"input_ledger",record)
 	}
 }
 
@@ -227,10 +295,44 @@ func (s *Store) AppendRoundDeclaration(ctx context.Context, runID [32]byte, inst
 
 type roundGuardCoordinate struct { instant int64; ordinal uint64 }
 
+// The current clock is read in the SAME transaction as ingress publication.
+// The first executable coordinate is (genesis instant,0), and after a commit
+// is (current instant,last ordinal+1); old pending cannot be made causal later.
+func verifyIngressClockFloor(ctx context.Context,tx *sql.Tx,runID [32]byte,at domain.EligibilityCoordinate)error{
+ var raw []byte
+ err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",runID[:]).Scan(&raw)
+ var floor domain.EligibilityCoordinate
+ if err==sql.ErrNoRows {
+  // The admission ledger has legacy standalone tests that intentionally do
+  // not initialize a run. With an actual persisted genesis, however, its
+  // verified initial instant is already a durable eligibility floor.
+  var genesisRaw []byte
+  err=tx.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",runID[:]).Scan(&genesisRaw)
+  if err==sql.ErrNoRows{return nil}
+  if err!=nil{return err}
+  env,err:=codec.StrictDecodeEnvelope(genesisRaw);if err!=nil{return err}
+  payload,ok:=env.Value.([]any);if !ok||len(payload)<4{return errors.New("genesis floor malformed")}
+  instant,ok:=decodedInstant(payload[3]);if !ok{return errors.New("genesis instant malformed")}
+  floor=domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant)}
+ }else{
+  if err!=nil{return err}
+  current,err:=clock.Decode(raw);if err!=nil{return err}
+  if current.LastOrdinal==int64(^uint64(0)>>1){return errors.New("causal ordinal exhausted")}
+  floor=domain.EligibilityCoordinate{NotBeforeInstant:current.Instant,NotBeforeCycleOrdinal:domain.CycleOrdinal(current.LastOrdinal+1)}
+ }
+ if at.Compare(floor)<0{return errors.New("causal ingress precedes current clock floor")}
+ return nil
+}
+
+
 func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundGuardCoordinate, record ports.CanonicalRecord) error {
 	tx, err := s.db.BeginTx(ctx,nil)
 	if err!=nil { return err }
 	defer tx.Rollback()
+ if round!=nil{
+  at:=domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(round.instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(round.ordinal)}
+  if err:=verifyIngressClockFloor(ctx,tx,runID,at);err!=nil{return err}
+ }
 	rows,err := tx.QueryContext(ctx,"SELECT canonical FROM decision_ledger")
 	if err!=nil { return err }
 	for rows.Next() {
@@ -239,24 +341,37 @@ func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundG
 		fields,err:=codec.StrictDecodePayload(canonical)
 		if err!=nil {rows.Close();return errors.New("invalid persisted fence")}
 		body,ok:=fields.([]any)
-		if !ok || len(body)<6 {rows.Close();return errors.New("invalid persisted fence body")}
+		// CycleCommit lives in decision_ledger too; it is NOT an admission
+		// fence and must never be mistaken for a causal seal.
+		if !ok {rows.Close();return errors.New("invalid decision record body")}
+		if len(body)==24 {continue}
+		if len(body)!=18 && len(body)!=6 {rows.Close();return errors.New("unknown decision record in admission guard")}
 		fenceRun,ok:=body[0].([]byte)
 		if !ok || len(fenceRun)!=32 {rows.Close();return errors.New("invalid persisted fence run")}
 		if !bytes.Equal(fenceRun,runID[:]) {continue}
 		if round==nil {rows.Close();return errors.New("source declaration after admission fence")}
-		instant,ok:=decodedInstant(body[4])
-		if !ok {rows.Close();return errors.New("invalid persisted fence instant")}
-		ordinal,ok:=body[5].(uint64)
-		if !ok {rows.Close();return errors.New("invalid persisted fence ordinal")}
-		if round.instant<instant || (round.instant==instant && round.ordinal<=ordinal) {
-			rows.Close()
-			return errors.New("round eligible at or before published admission fence")
-		}
+        _,cut,err:=ingressguard.FenceCoordinate(canonical)
+        if err!=nil{rows.Close();return err}
+        proposed:=domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(round.instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(round.ordinal)}
+        if proposed.Compare(cut)<=0{
+            rows.Close()
+            return errors.New("round eligible at or before sealed admission target")
+        }
 	}
 	if err:=rows.Err();err!=nil {rows.Close();return err}
 	if err:=rows.Close();err!=nil{return err}
 	if err:=appendTx(ctx,tx,record);err!=nil{return err}
-	return tx.Commit()
+ if round!=nil{
+  // Round IDs do not include the actor and slots. Record their complete
+  // canonical hash atomically as a derived integrity index; never let a
+  // later payload substitution keep the same causal identity unnoticed.
+  hash:=identity.OpaqueContentHash(record.Canonical)
+  if _,err:=tx.ExecContext(ctx,"INSERT OR IGNORE INTO round_integrity_seals(id,run_id,canonical_hash) VALUES(?,?,?)",record.Identity[:],runID[:],hash[:]);err!=nil{return err}
+  var pinned []byte
+  if err:=tx.QueryRowContext(ctx,"SELECT canonical_hash FROM round_integrity_seals WHERE id=? AND run_id=?",record.Identity[:],runID[:]).Scan(&pinned);err!=nil{return err}
+  if !bytes.Equal(pinned,hash[:]){return errors.New("round declaration changed after canonical sealing")}
+ }
+ return tx.Commit()
 }
 
 // Direct fence writes cannot prove membership of the closed input prefix.
@@ -367,7 +482,24 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
 		return err
 	}
 	defer tx.Rollback()
-	var current uint64
+	// Compare projections with the canonical ledger while the same writer
+ // transaction holds the admission boundary. A stale SQL cursor must not
+ // mint a gapless-looking but causally invalid sequence.
+ if err:=verifyIngressProjections(ctx,tx);err!=nil{return err}
+ // A source record identity has exactly one canonical ingress receipt.
+ // Stale Ledger instances may retry an existing producer ID with the next
+ // sequence. Reject atomically; callers can reopen to obtain the original
+ // receipt rather than creating a second receipt for the same causal unit.
+ var existingIngress []byte
+ err=tx.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",record.Identity[:]).Scan(&existingIngress)
+ if err==nil {
+  if !bytes.Equal(existingIngress,record.Canonical) {
+   return errors.New("source ingress identity collision")
+  }
+  return errors.New("source ingress record already published; reopen ledger for existing receipt")
+ }
+ if err!=sql.ErrNoRows{return err}
+ var current uint64
 	err = tx.QueryRowContext(ctx, `SELECT next_seq FROM input_source_cursors WHERE source_id=?`, source).Scan(&current)
 	if err != nil && err != sql.ErrNoRows {
 		return err
@@ -375,21 +507,34 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
 	if sequence != current {
 		return errors.New("source ingress sequence is not gapless")
 	}
+	// Parse and compare against the actual durable clock even when no fence
+ // has yet been published. No input/closure may enter before genesis.
+ entry,parseErr:=ingressguard.Parse(record,source)
+ if parseErr!=nil {
+  // Keep raw atomic-store unit tests working only when the adapter has not
+  // bootstrapped ANY temporal or fence authority. In an initialized run
+  // malformed causal ingress must fail closed.
+  var authorityCount int
+  if err:=tx.QueryRowContext(ctx,"SELECT (SELECT count(*) FROM genesis_records)+(SELECT count(*) FROM clock_states)+(SELECT count(*) FROM decision_ledger)").Scan(&authorityCount);err!=nil{return err}
+  if authorityCount!=0{return parseErr}
+ }else{
+  if err:=validateCausalIngress(ctx,tx,source,sequence,record,receipt,entry);err!=nil{return err}
+  if err:=verifyIngressClockFloor(ctx,tx,entry.RunID,entry.Coordinate);err!=nil{return err}
+ }
 	// A second Ledger opened before closure/fence can hold a stale source
 	// snapshot. Check the canonical eligibility against all durable fences in
 	// the *same transaction* as record+receipt+cursor publication.
 	seals, err := tx.QueryContext(ctx, "SELECT canonical FROM decision_ledger")
 	if err != nil { return err }
-	var entry ingressguard.Entry
-	parsed := false
 	for seals.Next() {
 		var fence []byte
 		if err := seals.Scan(&fence); err != nil { seals.Close(); return err }
-		if !parsed {
-			entry,err=ingressguard.Parse(record,source)
-			if err!=nil {seals.Close();return err}
-			parsed=true
-		}
+		fields,err:=codec.StrictDecodePayload(fence)
+		if err!=nil {seals.Close();return err}
+		body,ok:=fields.([]any)
+		if !ok {seals.Close();return errors.New("invalid decision ledger record")}
+		if len(body)==24 {continue} // A CycleCommit is not a fence.
+		if len(body)!=18 && len(body)!=6 {seals.Close();return errors.New("unknown decision record kind")}
 		sealedRun,cut,err:=ingressguard.FenceCoordinate(fence)
 		if err!=nil {seals.Close();return err}
 		if err:=ingressguard.Check(entry,sealedRun,cut);err!=nil {seals.Close();return err}
@@ -413,7 +558,8 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
 }
 
 func (s *Store) NextIngressSequence(ctx context.Context, source string) (uint64, error) {
-	var sequence uint64
+ if err:=verifyIngressProjections(ctx,s.db);err!=nil{return 0,err}
+ var sequence uint64
 	err := s.db.QueryRowContext(ctx, `SELECT next_seq FROM input_source_cursors WHERE source_id=?`, source).Scan(&sequence)
 	if err == sql.ErrNoRows {
 		return 0, nil

@@ -82,7 +82,26 @@ func FenceCoordinate(fence []byte) ([32]byte,domain.EligibilityCoordinate,error)
     if err!=nil {return zero,domain.EligibilityCoordinate{},err}
     ordinal,ok:=fields[5].(uint64)
     if !ok {return zero,domain.EligibilityCoordinate{},errors.New("invalid persisted fence ordinal")}
-    return run,domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)},nil
+    cut:=domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)}
+    // A CLOCK_ADVANCE seals its destination P rather than the origin.
+    if len(fields)==18 {
+        plan,ok:=fields[6].([]any)
+        if !ok||len(plan)==0{return zero,cut,errors.New("invalid persisted fence plan")}
+        kind,ok:=plan[0].(uint64)
+        if !ok{return zero,cut,errors.New("invalid fence plan kind")}
+        switch kind {
+        case 0:
+            if len(plan)!=1{return zero,cut,errors.New("invalid WORK fence plan")}
+        case 1:
+            if len(plan)!=4{return zero,cut,errors.New("invalid CLOCK_ADVANCE fence plan")}
+            target,err:=coord(plan[3]);if err!=nil{return zero,cut,err}
+            if target.Compare(cut)<=0{return zero,cut,errors.New("CLOCK_ADVANCE target not after origin")}
+            cut=target
+        default:
+            return zero,cut,errors.New("unknown fence plan kind")
+        }
+    }
+    return run,cut,nil
 }
 
 // Check enforces that a stale actor cannot append an input/closure eligible at

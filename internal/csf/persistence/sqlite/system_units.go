@@ -47,7 +47,7 @@ func systemUnits(ctx context.Context,q queryOne,run [32]byte,upTo domain.Eligibi
     source,err=func()(string,error){v,ok:=fields[2].(string);if !ok||v==""{return "",errors.New("scheduled source missing")};return v,nil}()
     dg,_=fields[14].([]byte)
    }else{
-    source="trigger"
+    source,_=fields[2].(string)
     dg,_=fields[11].([]byte)
    }
    if err!=nil||len(dg)!=32{rows.Close();return nil,errors.New("canonical system-unit digest or source missing")}

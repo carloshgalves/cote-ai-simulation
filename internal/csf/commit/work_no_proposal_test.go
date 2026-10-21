@@ -432,6 +432,22 @@ func TestMixedNoProposalAndOccurrenceMustCloseOneFrozenCohort(t *testing.T){
   if err!=nil||state!=previous{t.Fatal("failed mixed WORK half-published clock",err)}
  }
  c.failAfterStep=0
+ for _,variant:=range []struct{name string;mutate func(*ports.WorkBatch)}{
+  {"system-candidate",func(b *ports.WorkBatch){b.SystemCandidate.Canonical=[]byte{0x80}}},
+  {"system-candidate-identity",func(b *ports.WorkBatch){b.SystemCandidate.Identity[0]^=0x40}},
+  {"first-slot-decision",func(b *ports.WorkBatch){b.Decisions[0].Canonical=[]byte{0x80}}},
+  {"system-decision",func(b *ports.WorkBatch){b.Decisions[2].Canonical=[]byte{0x80}}},
+  {"event-order",func(b *ports.WorkBatch){b.Events[0],b.Events[1]=b.Events[1],b.Events[0]}},
+  {"world-hash",func(b *ports.WorkBatch){b.ResultStateHash[0]^=0x40}},
+ }{
+  c.tamperWorkBatch=variant.mutate
+  if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err==nil{
+   t.Fatalf("mixed WORK accepted forged %s",variant.name)
+  }
+  state,err:=store.LoadClock(ctx,[32]byte(run))
+  if err!=nil||state!=previous{t.Fatalf("forged %s mutated world",variant.name)}
+ }
+ c.tamperWorkBatch=nil
  if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err!=nil{
   t.Fatalf("mixed NoProposal/occurrence cohort cannot complete as one terminal WORK: %v",err)
  }

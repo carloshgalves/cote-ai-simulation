@@ -60,7 +60,9 @@ func (c *Coordinator) CommitSingleResource(ctx context.Context,ledger *inputledg
  genRaw,err:=c.store.LoadGenesis(ctx,[32]byte(run));if err!=nil{return empty,err}
  manifest,err:=genesis.ValidateCanonical(genRaw,c.bundle);if err!=nil{return empty,err}
  actor:=response.Actor[0]+":"+response.Actor[1]
- input,err:=decision.FromPersistedFence(ctx,c.bundle,view,cycle,c.admissionPolicies,fence,c.store,
+ assemble:=decision.FromPersistedFence
+ if len(units)>1{assemble=decision.FromPersistedFenceWithSystemHandlers}
+ input,err:=assemble(ctx,c.bundle,view,cycle,c.admissionPolicies,fence,c.store,
   decision.Snapshot{BaseRevision:state.Revision,ResourceKind:"inventory",ResourceID:"last.resource",
    Available:int64(stock.Available),Known:true,
    AccessibleActors:map[string]bool{actor:true},ForbiddenActors:map[string]bool{actor:false}},

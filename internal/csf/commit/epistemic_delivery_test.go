@@ -117,3 +117,89 @@ func sameTestCanonical(a,b any)bool{
  ra,ea:=codec.CanonicalPayload(a);rb,eb:=codec.CanonicalPayload(b)
  return ea==nil&&eb==nil&&bytes.Equal(ra,rb)
 }
+
+
+func findTerminalRoundTask(t *testing.T,ctx context.Context,db *sql.DB)[32]byte{
+ t.Helper()
+ rows,err:=db.QueryContext(ctx,"SELECT id,canonical FROM causal_outbox")
+ if err!=nil{t.Fatal(err)}
+ defer rows.Close()
+ for rows.Next(){
+  var id,raw []byte
+  if err:=rows.Scan(&id,&raw);err!=nil{t.Fatal(err)}
+  v,err:=codec.StrictDecodePayload(raw);if err!=nil{t.Fatal(err)}
+  f,ok:=v.([]any)
+  if !ok||len(f)!=10{continue}
+  var eventRaw []byte
+  if err:=db.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",f[3]).Scan(&eventRaw);err!=nil{t.Fatal(err)}
+  value,err:=codec.StrictDecodePayload(eventRaw);if err!=nil{t.Fatal(err)}
+  if value.([]any)[3]=="round.consumed"{
+   var task [32]byte;copy(task[:],id);return task
+  }
+ }
+ if err:=rows.Err();err!=nil{t.Fatal(err)}
+ t.Fatal("missing addressed round task")
+ return [32]byte{}
+}
+
+func TestCSFRV16DeliveryFaultsRollbackEveryReceipt(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=singleResourceFixture(t)
+ if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ task:=findTerminalRoundTask(t,ctx,db)
+ for _,scenario:=range []struct{name,trigger string}{
+  {"after-observation",
+   "CREATE TRIGGER block_evidence_route BEFORE INSERT ON evidence_routes WHEN NEW.kind=0 BEGIN SELECT RAISE(ABORT,'fault-observation'); END"},
+  {"after-input",
+   "CREATE TRIGGER block_evidence_route BEFORE INSERT ON evidence_routes WHEN NEW.kind=1 BEGIN SELECT RAISE(ABORT,'fault-input'); END"},
+  {"before-completion",
+   "CREATE TRIGGER block_evidence_route BEFORE INSERT ON causal_outbox BEGIN SELECT RAISE(ABORT,'fault-completion'); END"},
+ }{
+  if _,err:=db.ExecContext(ctx,scenario.trigger);err!=nil{t.Fatal(err)}
+  if _,err:=store.DeliverRoundPerception(ctx,task);err==nil{
+   t.Fatalf("worker crash %s allowed partial publication",scenario.name)
+  }
+  if _,err:=db.ExecContext(ctx,"DROP TRIGGER block_evidence_route");err!=nil{t.Fatal(err)}
+  for _,table:=range []string{"evidence_ledger","evidence_routes"}{
+   var count int
+   if err:=db.QueryRowContext(ctx,"SELECT COUNT(*) FROM "+table).Scan(&count);err!=nil{t.Fatal(err)}
+   if count!=0{t.Fatalf("%s survived worker crash %s: %d",table,scenario.name,count)}
+  }
+  var remaining int
+  if err:=db.QueryRowContext(ctx,"SELECT COUNT(*) FROM causal_outbox").Scan(&remaining);err!=nil{t.Fatal(err)}
+  if remaining!=2{t.Fatalf("completion survived crash %s",scenario.name)}
+ }
+ if _,err:=store.DeliverRoundPerception(ctx,task);err!=nil{t.Fatal("retry failed",err)}
+ _,_,_,_,_,run:=ledger.Snapshot()
+ replay,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer replay.Close()
+ if _,err:=replay.ReplayClock(ctx,[32]byte(run),c.bundle);err!=nil{t.Fatal("replay after injected failures:",err)}
+}
+
+func TestCSFRV16TamperedAddressedEvidenceFailsClosed(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=singleResourceFixture(t)
+ if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ task:=findTerminalRoundTask(t,ctx,db)
+ if _,err:=store.DeliverRoundPerception(ctx,task);err!=nil{t.Fatal(err)}
+ var obsID,raw []byte
+ if err:=db.QueryRowContext(ctx,"SELECT record_id,canonical FROM evidence_ledger "+
+ "JOIN evidence_routes ON evidence_routes.record_id=evidence_ledger.id "+
+ "WHERE evidence_routes.kind=0 AND evidence_routes.task_id=?",task[:]).Scan(&obsID,&raw);err!=nil{t.Fatal(err)}
+ modified:=bytes.Clone(raw)
+ modified[len(modified)-1]^=1
+ if _,err:=db.ExecContext(ctx,"UPDATE evidence_ledger SET canonical=? WHERE id=?",modified,obsID);err!=nil{t.Fatal(err)}
+ if _,_,err:=store.ReadAddressedEvidence(ctx,[2]string{"school","a"});err==nil{
+  t.Fatal("tampered Observation passed the holder-only read seal")
+ }
+ _,_,_,_,_,run:=ledger.Snapshot()
+ replay,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer replay.Close()
+ if _,err:=replay.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
+  t.Fatal("causal replay accepted a tampered private observation")
+ }
+}

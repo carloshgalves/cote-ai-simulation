@@ -166,19 +166,43 @@ func (s *Store) deliverRoundPerception(ctx context.Context,taskID [32]byte,bundl
 // This read port never queries EventStore or WorldState and cannot return
 // raw PerceptionTask, resource state, Observatory data, or other holders.
 // It will fail closed if route bytes and record recipient disagree.
-func (s *Store) readAddressedEvidence(ctx context.Context,run [32]byte,actor [2]string)(
+func (s *Store) readAddressedEvidence(ctx context.Context,run [32]byte,actor [2]string,through uint64)(
  []ports.CanonicalRecord,[]ports.CanonicalRecord,error){
  if s==nil||actor[0]==""||actor[1]==""{return nil,nil,errors.New("invalid holder")}
- rows,err:=s.db.QueryContext(ctx,"SELECT r.record_id,r.kind,e.canonical,r.canonical_hash "+
+ // One read-only snapshot protects the causal cutoff, exact receipts and
+ // final inbox contents against a concurrent publication/tamper race.
+ tx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true})
+ if err!=nil{return nil,nil,err}
+ defer tx.Rollback()
+ if err:=verifyPriorPerceptionEmpty(ctx,tx,run,through);err!=nil{
+  return nil,nil,errors.New("inbox prior causal completion/barrier failed: "+err.Error())
+ }
+ rows,err:=tx.QueryContext(ctx,"SELECT r.record_id,r.task_id,r.kind,e.canonical,r.canonical_hash "+
  "FROM evidence_routes r JOIN evidence_ledger e ON e.id=r.record_id "+
  "WHERE r.run_id=? AND r.holder_namespace=? AND r.holder_id=? "+
  "ORDER BY r.kind,r.task_id,r.record_id",run[:],actor[0],actor[1])
  if err!=nil{return nil,nil,err}
- defer rows.Close()
  var observations,inputs []ports.CanonicalRecord
  for rows.Next(){
-  var id,raw,storedHash []byte;var kind int
-  if err:=rows.Scan(&id,&kind,&raw,&storedHash);err!=nil{return nil,nil,err}
+  var id,ownerTask,raw,storedHash []byte;var kind int
+  if err:=rows.Scan(&id,&ownerTask,&kind,&raw,&storedHash);err!=nil{
+   rows.Close();return nil,nil,err
+  }
+  // A dispatch cannot be used to inspect future evidence that became
+  // durable after its base revision, even within the same actor/run.
+  var taskRaw []byte
+  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM causal_outbox WHERE id=?",ownerTask).Scan(&taskRaw);err!=nil{
+   rows.Close();return nil,nil,errors.New("addressed evidence lacks causal task")
+  }
+  taskValue,err:=codec.StrictDecodePayload(taskRaw)
+  if err!=nil{rows.Close();return nil,nil,err}
+  taskFields,valid:=taskValue.([]any)
+  if !valid||len(taskFields)!=10||!equalBytes(taskFields[0],ownerTask)||!equalBytes(taskFields[1],run[:]){
+   rows.Close();return nil,nil,errors.New("inbox evidence task invalid/foreign")
+  }
+  revision,valid:=taskFields[5].(uint64)
+  if !valid{rows.Close();return nil,nil,errors.New("addressed evidence revision invalid")}
+  if revision>through{continue}
   computed:=identity.OpaqueContentHash(raw)
   if !bytes.Equal(computed[:],storedHash){return nil,nil,errors.New("addressed evidence tampered after delivery")}
   identity,ok:=idField(id);if !ok{return nil,nil,errors.New("evidence identity corrupt")}
@@ -212,7 +236,7 @@ func (s *Store) readAddressedEvidence(ctx context.Context,run [32]byte,actor [2]
   default:return nil,nil,errors.New("unregistered evidence kind")
   }
  }
- if err:=rows.Err();err!=nil{return nil,nil,err}
+ if err:=rows.Err();err!=nil{rows.Close();return nil,nil,err}
  if err:=rows.Close();err!=nil{return nil,nil,err}
  // A holder must never see an Observation before its KnowledgeInput and
  // the task's terminal receipt are durable. The inbox reads no EventStore.
@@ -247,7 +271,7 @@ func (s *Store) readAddressedEvidence(ctx context.Context,run [32]byte,actor [2]
   expected,err:=codec.CanonicalPayload(append(body,receiptHash[:]))
   if err!=nil{return nil,nil,err}
   var actual []byte
-  if err:=s.db.QueryRowContext(ctx,
+  if err:=tx.QueryRowContext(ctx,
    "SELECT canonical FROM causal_outbox WHERE id=?",completionID[:]).Scan(&actual);err!=nil{
    return nil,nil,errors.New("inbox cannot expose evidence without durable completion")
   }
@@ -255,5 +279,5 @@ func (s *Store) readAddressedEvidence(ctx context.Context,run [32]byte,actor [2]
    return nil,nil,errors.New("inbox completion differs from addressed receipt list")
   }
  }
- return observations,inputs,nil
+ return observations,inputs,tx.Commit()
 }

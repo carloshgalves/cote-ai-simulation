@@ -232,6 +232,11 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
     triggerEvents=append(triggerEvents,trigger.Event{ID:domain.ID(eventID),OrderKey:orderKey,Footprint:footprint})
    }
   }
+  emitted:=make([][]byte,len(events))
+  for i,event:=range events{emitted[i]=event.Canonical}
+  if err:=verifyPublishedWorkTasks(ctx,s.db,runID,entry.cycleID,journal,genesisRoot.Payload,emitted);err!=nil{
+   return report,fmt.Errorf("CLOCK_ADVANCE perception outbox replay: %w",err)
+  }
   next.NextLogicalSequence=current.NextLogicalSequence+domain.LogicalSequence(len(events))
   expectedClock,err:=clock.Encode(current);if err!=nil{return report,err}
   resultClock,err:=clock.Encode(next);if err!=nil{return report,err}

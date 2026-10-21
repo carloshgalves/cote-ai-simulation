@@ -90,7 +90,11 @@ func verifyEvidenceRegistryExact(ctx context.Context,q queryOne) error {
   obs,ok:=records[rec.obs]
   if !ok||obs.kind!=0{return errors.New("orphan KnowledgeInput lacks Observation")}
   ref:=rec.fields[7].([]any)
-  if !equalBytes(ref[2],obs.fields[14].([]byte))||
+  expectedDigest,validDigest:=obs.fields[14].([]byte)
+  if !validDigest||len(expectedDigest)!=32{
+   return errors.New("Observation digest reference malformed")
+  }
+  if !equalBytes(ref[2],expectedDigest)||
    rec.actor!=obs.actor||
    !sameCanonical(rec.fields[4],obs.fields[5])||
    !sameCanonical(rec.fields[8],obs.fields[10])||

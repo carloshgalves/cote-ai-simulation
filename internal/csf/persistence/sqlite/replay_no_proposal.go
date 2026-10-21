@@ -80,8 +80,9 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
  if journal[8]!=uint64(next.Revision)||journal[22]!=uint64(next.NextLogicalSequence){
   return clock.State{},errors.New("WORK replay successor clock invalid")
  }
- tasks,ok:=journal[18].([]any)
- if !ok||len(tasks)!=0{return clock.State{},errors.New("NoProposal cannot replay visible tasks")}
+ if _,ok:=journal[18].([]any);!ok{return clock.State{},errors.New("WORK perception-task reference list malformed")}
+ // Outbox membership and canonical contents are reconstructed independently
+ // by settledNoProposalUnits from Genesis pins and durable EventStore.
  resultTyped,resultHash:=typed,hash
  if len(events)>=2{
   first,ok:=events[0].([]byte)

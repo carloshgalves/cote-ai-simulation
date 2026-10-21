@@ -155,7 +155,6 @@ func (c *Coordinator) CommitTwoResourceContest(ctx context.Context,ledger *input
   Journal:ports.CanonicalRecord{Identity:[32]byte(cid),Canonical:journalBytes},
   Decisions:decisions,Events:output.Events,BaseStateHash:[32]byte(hash),
   RevisionCanonical:revision,FailAfterStep:c.failAfterStep}
- if c.tamperWorkBatch!=nil{c.tamperWorkBatch(&batch)}
- if err:=c.store.CommitWork(ctx,batch);err!=nil{return empty,err}
+ if err:=c.commitPreparedWork(ctx,&batch);err!=nil{return empty,err}
  return batch.Journal,nil
 }

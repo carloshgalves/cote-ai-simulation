@@ -5,6 +5,7 @@ import (
  "errors"
  "math"
  "bytes"
+ "encoding/hex"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
@@ -30,7 +31,10 @@ func verifyCascadePolicyRefs(refs []any)error{
  if clock.CascadePolicyVersionV1!=1||clock.MaxSameInstantWorkV1!=64{
   return errors.New("CASCADE_LIMIT V1 semantics changed without a new policy version")
  }
- expectedHash:=bytes.Repeat([]byte{0x04},32)
+ // Hash from the canonical genesis.pinning fixture. The abstract
+ // transition-contract role declaration is not the canonical hash.
+ expectedHash,err:=hex.DecodeString("0bac988281bc2b0c4af79adfc9dbd238395ffee5b8ab8758eedc89a75bcd6a6c8")
+ if err!=nil{return err}
  matched:=0
  for _,v:=range refs{
   ref,ok:=v.([]any)

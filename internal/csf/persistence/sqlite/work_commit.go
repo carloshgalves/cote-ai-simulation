@@ -20,7 +20,7 @@ import (
 // PerceptionTasks, WorldRevision, lifecycle, clock and CycleCommit. Unsupported
 // combinations fail closed rather than committing a strict subset.
 func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
- if b.Mode>4{return errors.New("unregistered WORK terminal variant")}
+ if b.Mode>5{return errors.New("unregistered WORK terminal variant")}
  if len(b.ExpectedClock)==0||len(b.ResultClock)==0||len(b.Journal.Canonical)==0{
   return errors.New("incomplete WORK publication batch")
  }
@@ -144,7 +144,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  seenRounds:=map[domain.ID]bool{}
  for _,p:=range pending{
   if p.Eligibility.Compare(due)>0{continue}
-  if b.Mode==3||b.Mode==4{
+  if b.Mode==3||b.Mode==4||b.Mode==5{
    sys,ok:=fence[11].([]any)
    if !ok||len(sys)==0{return errors.New("system WORK source cardinality invalid")}
    matched:=false
@@ -158,8 +158,8 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   }else if !admittedRounds[p.ID]{return errors.New("WORK has pending non-slot causal work without a source lifecycle handler")}
   seenRounds[p.ID]=true
  }
- if b.Mode!=3&&b.Mode!=4&&len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
- if b.Mode==4{
+ if b.Mode!=3&&b.Mode!=4&&b.Mode!=5&&len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
+ if b.Mode==4||b.Mode==5{
   for round:=range admittedRounds{if !seenRounds[round]{return errors.New("hybrid omitted due round")}}
  }
  if b.Mode==3&&len(admittedRounds)!=0{return errors.New("system-only handler cannot omit a due decision round")}
@@ -210,7 +210,9 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  list,ok:=journal[16].([]any);if !ok||len(list)!=len(units){
   return errors.New("CycleCommit omits terminal decision references")
  }
- if b.Mode==1{
+ if b.Mode==5{
+  if err:=verifyResourceSystemTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
+ }else if b.Mode==1{
   if err:=verifySingleResourceTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
  }else if b.Mode==3{
   if err:=verifySystemBatch(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
@@ -320,10 +322,10 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   !present(control[3],fullRef(11,b.FenceID[:],fence[17].([]byte))){
   return errors.New("WORK not current in-flight authorized attempt")
  }
- if b.Mode==1{
+ if b.Mode==1||b.Mode==5{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.ResourceCandidate.Identity[:],b.ResourceCandidate.Canonical);err!=nil{return err}
  }
- if b.Mode==3||b.Mode==4{
+ if b.Mode==3||b.Mode==4||b.Mode==5{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.SystemCandidate.Identity[:],b.SystemCandidate.Canonical);err!=nil{return err}
   for _,item:=range b.SystemExtraCandidates{
    if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",item.Identity[:],item.Canonical);err!=nil{return err}

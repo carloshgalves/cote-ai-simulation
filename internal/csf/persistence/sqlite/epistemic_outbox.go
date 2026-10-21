@@ -61,13 +61,10 @@ func (s *Store) CompleteInternalPerception(
     if err := tx.QueryRowContext(ctx, "SELECT canonical FROM genesis_records WHERE run_id=?", run[:]).Scan(&genesisRaw); err != nil {
         return zero, fmt.Errorf("perception genesis missing: %w", err)
     }
-    if _, err := genesis.ValidateCanonical(genesisRaw, bundle); err != nil {
-        return zero, fmt.Errorf("perception genesis invalid: %w", err)
-    }
-    g, err := codec.StrictDecodePayload(genesisRaw)
-    if err != nil { return zero, err }
-    genesisFields, ok := g.([]any)
-    if !ok || len(genesisFields) != 18 || !equalBytes(genesisFields[0], run[:]) {
+    manifest, err := genesis.ValidateCanonical(genesisRaw, bundle)
+    if err != nil { return zero, fmt.Errorf("perception genesis invalid: %w", err) }
+    genesisFields := manifest.Payload
+    if manifest.RunID != domain.ID(run) || len(genesisFields) != 18 {
         return zero, errors.New("perception genesis and task run disagree")
     }
     roster, ok := genesisFields[14].([]any)

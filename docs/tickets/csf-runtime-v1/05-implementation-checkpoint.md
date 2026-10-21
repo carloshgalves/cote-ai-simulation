@@ -4,15 +4,17 @@
 **Draft PR:** [#21](https://github.com/carloshgalves/cote-ai-simulation/pull/21)
 **Contrato:** [05-commit-atomico-e-retry.md](05-commit-atomico-e-retry.md), ADR-0008 e ADR-0011.
 
-> **STATUS: PARCIAL — PR NÃO APROVADA PARA MERGE.** Os caminhos
-> `NoProposal`, consumo do recurso, disputa entre agentes,
-> `ScheduledOccurrence(REJECT/DEFER)`, `TriggerActivation(COMMIT)` e
-> `CASCADE_LIMIT` estão implementados e exercitados com SQLite/replay.
-> Coortes simultâneas de sistema e coortes mistas `NoProposal` +
-> sistema funcionam. Restam `ActionProposal(resource.consume)` combinado
-> com sistema e o aceite integral da CSFRV1-5. A publicação de
-> PerceptionTask PENDING para WORK e CLOCK_ADVANCE está integrada e
-> auditável; observations reais continuam fora desta etapa.
+> **STATUS: IMPLEMENTAÇÃO DA PRIMEIRA RUN VALIDADA; PR AINDA DRAFT.**
+> `NoProposal`, recurso único, disputa entre dois agentes,
+> `ScheduledOccurrence(REJECT/DEFER)`, `TriggerActivation(COMMIT)`,
+> `CASCADE_LIMIT` e publicação `PerceptionTask(PENDING)` passaram pelo
+> mesmo SQLite/replay. Coortes simultâneas de sistema, `NoProposal` +
+> sistema, recurso único + sistema e **duas propostas concorrentes +
+> ocorrência + trigger** são commitadas como uma única partição causal.
+> O marco da primeira run não depende de `DEDUPLICATED` ou de um
+> WORK vazio sem fontes admitidas; essas variantes continuam dívida
+> de escopo, sem alegação de suporte implementado. Observations reais
+> e processamento das tasks continuam fora desta etapa.
 
 ## Autoridade de execução entregue
 
@@ -119,12 +121,14 @@
 - [x] Limite de cascata versionado, `CASCADE_LIMIT` e replay fail-closed.
 - [x] Admissão de múltiplas fontes **de sistema** na mesma coordenada,
   com bijeção de eventos/decisões e failpoints.
-- [ ] **Finding 1 — High:** coortes mistas `NoProposal` +
-  sistema e coortes `ActionProposal(resource.consume)` único + fontes
-  de sistema estão implementadas no mesmo WORK/SQLite CAS, incluindo
-  `DEFER`, trigger e evento/reducer. Resta comprovar a composição de
-  **duas propostas em conflito pelo recurso** + fonte de sistema no
-  mesmo fence e concluir revisão adversarial de toda a mudança.
+- [x] **Finding 1 — High:** mesmo `CommitWork` fecha todos os
+  tipos combinados necessários à primeira run: `NoProposal` + sistema,
+  proposta única + sistema e **duas propostas em disputa + sistema**.
+  `Mode 5/6` preservam a prova do redutor/recurso, conflito/RNG,
+  decisões de todas as fontes, `DEFER` e outbox; SQL e replay
+  rederivam a partição. Testes de sete failpoints, oito/nove adulterações,
+  reabertura de SQLite, trigger + ocorrência na mesma coorte, e
+  permutação de chegada A/B demonstram atomicidade e determinismo.
 - [x] **Finding 2 — Medium:** o limiar V1 agora exige pin canônico
   exato do `cycle-coordinate-v1`; comentário original RESOLVED.
 - [x] **Finding 3 — High:** classificador puro de `PerceptionTask`
@@ -136,9 +140,11 @@
   inserção de task órfã. Uma `PerceptionTask` é **somente PENDING**:
   não concede Observation, destinatário ou KnowledgeInput; o processamento
   downstream permanece fora deste ticket. Comentário original RESOLVED.
-- [ ] Commit vazio canônico, `DEDUPLICATED` e demais variantes de
-  settlement e matriz completa de fault injection, se exigidos pelo
-  ticket de aceite.
+- [ ] **Dívida pós-primeira-run:** commit vazio sem fontes elegíveis,
+  disposition `DEDUPLICATED` e variantes futuras de reducer/settlement
+  genéricos. O clock atual só admite WORK com fonte causal elegível,
+  portanto essas variantes não são exercidas pelo primeiro experimento.
+  Não confundir dívida rastreada com funcionalidade implementada.
 - [x] Planner puro de tarefas potencialmente perceptíveis, com
   publicação/rollback/replay das tasks em ambas as variantes de ciclo.
   O predicado V1 é o ordinal local do evento, não a confidencialidade;
@@ -146,8 +152,8 @@
 - [x] Replayed causal_outbox é uma partição exata dos task IDs de
   CycleCommits: eventos sem task, task órfã, task com conteúdo alterado
   e task duplicada tornam o histórico inválido.
-- [ ] Uma última revisão separada depois de fechar os bloqueios
-  anteriores; manter Draft até isso acontecer.
+- [ ] Revisão adversarial final de todos os diffs da PR,
+  depois do CI verde do HEAD; manter Draft até essa revisão.
 
 **Comentários de revisão:** [Finding 1](https://github.com/carloshgalves/cote-ai-simulation/pull/21#issuecomment-6305195593),
 [Finding 2](https://github.com/carloshgalves/cote-ai-simulation/pull/21#issuecomment-6305215141)

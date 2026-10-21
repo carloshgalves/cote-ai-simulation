@@ -19,12 +19,12 @@ func isSlotDispatchRecord(record ports.CanonicalRecord) bool {
  if err!=nil{return false}
  f,ok:=value.([]any)
  if !ok||len(f)!=11{return false}
+ // A malformed dispatch candidate must be rejected by the guarded path,
+ // not disguised as a harmless generic input by changing its coordinate,
+ // actor, revision or timestamp type. Other native 11-field inputs have a
+ // non-string field 4.
  _,slot:=f[4].(string)
- _,actor:=f[6].([]any)
- _,coordinate:=f[7].([]any)
- _,revision:=f[8].(uint64)
- _,instant:=decodedInstant(f[9])
- return slot&&actor&&coordinate&&revision&&instant
+ return slot
 }
 
 // appendDispatchGuarded serializes the barrier check and the actual dispatch
@@ -43,6 +43,14 @@ func (s *Store) appendDispatchGuarded(ctx context.Context,record ports.Canonical
  }
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return err}
  defer tx.Rollback()
+ var already []byte
+ lookupErr:=tx.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",record.Identity[:]).Scan(&already)
+ if lookupErr==nil{
+  if !bytes.Equal(already,record.Canonical){return errors.New("dispatch identity collision")}
+  return tx.Commit() // exact retry does not publish new bytes or escape older tasks
+ }
+ if lookupErr!=sql.ErrNoRows{return lookupErr}
+ if err:=verifyDispatchAuthority(ctx,tx,f);err!=nil{return err}
  if err:=verifyPriorPerceptionEmpty(ctx,tx,run,base);err!=nil{return err}
  // Dispatch idempotency uses the same byte collision semantics as the
  // input-ledger append; never use INSERT OR REPLACE.

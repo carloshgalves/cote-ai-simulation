@@ -95,6 +95,12 @@ func ProjectRoundNotice(task,event,round ports.CanonicalRecord)(RoundProjection,
   body[1]!=uint64(2){return out,errors.New("round lifecycle payload differs from source")}
  sourceRefs,ok:=body[2].([]any)
  if !ok||len(sourceRefs)==0{return out,errors.New("round lifecycle lacks source closure")}
+ typedRefs,err:=codec.CanonicalPayload(sourceRefs)
+ if err!=nil{return out,err}
+ eventRefs,err:=codec.CanonicalPayload(e[11])
+ if err!=nil||!bytes.Equal(typedRefs,eventRefs){
+  return out,errors.New("round Event source refs differ from lifecycle payload")
+ }
  if decoded.DomainTag!="cote.csf.round.consumed.v1"||
   decoded.SchemaID!="cote.csf.schema.typed-value"||
   decoded.SchemaVersion!=1||

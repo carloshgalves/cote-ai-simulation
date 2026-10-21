@@ -107,7 +107,7 @@ func verifyPendingOutboxExact(ctx context.Context,q queryOne,run [32]byte)error{
    if !bytes.Equal(completionRaw,projected.Completion.Canonical){
     return errors.New("round task completion differs from deterministic addressed projection")
    }
-   if err:=checkProjectionEvidence(ctx,q,taskID,projected);err!=nil{return err}
+   if err:=checkProjectionEvidence(ctx,q,run,taskID,projected);err!=nil{return err}
   case "clock.advanced","resource.consumed":
    if ev[15]!=uint64(2){return errors.New("empty completion source is not secret")}
    actors,ok:=ev[12].([]any)

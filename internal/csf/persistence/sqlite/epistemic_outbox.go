@@ -83,17 +83,10 @@ func (s *Store) CompleteInternalPerception(
     if err != nil { return zero, err }
     event, ok := eventValue.([]any)
     if !ok || len(event) != 19 { return zero, errors.New("invalid source Event shape") }
-    // This allow-list is intentionally narrow. A resource or internal state
-    // transition does not authorize an agent's knowledge even if the task's
-    // potential-perceptibility predicate selected the event.
-    kind, kindOK := event[3].(string)
-    if !kindOK || (kind != "resource.consumed" &&
-        kind != "clock.advanced") {
-        return zero, errors.New("event requires a registered observer/channel resolver")
-    }
-    actors, ok := event[12].([]any)
-    if !ok || len(actors) != 0 || event[15] != uint64(2) {
-        return zero, errors.New("internal-only completion denied for addressable Event")
+    // Only a type/producer/phase-registered internal event can have empty
+    // completion. A private flag alone never implies zero observers.
+    if err := registeredInvisibleEngineEvent(event); err != nil {
+        return zero, err
     }
     expected, err := perception.PlanPinned(refs, domain.ID(run), domain.ID(cycle),
         domain.WorldRevision(base), domain.WorldRevision(result),

@@ -148,11 +148,11 @@ func (s *Store) deliverRoundPerception(ctx context.Context,taskID [32]byte,failA
  return p,nil
 }
 
-// ReadAddressedEvidence returns only the holder's own observations/inputs.
+// readAddressedEvidence returns only the holder's own observations/inputs.
 // This read port never queries EventStore or WorldState and cannot return
 // raw PerceptionTask, resource state, Observatory data, or other holders.
 // It will fail closed if route bytes and record recipient disagree.
-func (s *Store) ReadAddressedEvidence(ctx context.Context,actor [2]string)(
+func (s *Store) readAddressedEvidence(ctx context.Context,actor [2]string)(
  []ports.CanonicalRecord,[]ports.CanonicalRecord,error){
  if s==nil||actor[0]==""||actor[1]==""{return nil,nil,errors.New("invalid holder")}
  rows,err:=s.db.QueryContext(ctx,"SELECT r.record_id,r.kind,e.canonical,r.canonical_hash "+

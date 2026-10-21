@@ -337,6 +337,10 @@ func TestCSFRV16ReplayRejectsIncompleteOrExtraDelivery(t *testing.T){
   {"missing-input",func(t *testing.T,db *sql.DB,p perception.RoundProjection){
    if _,err:=db.Exec("DELETE FROM evidence_ledger WHERE id=?",p.Input.Identity[:]);err!=nil{t.Fatal(err)}
   }},
+  {"missing-input-and-route",func(t *testing.T,db *sql.DB,p perception.RoundProjection){
+   if _,err:=db.Exec("DELETE FROM evidence_routes WHERE record_id=?",p.Input.Identity[:]);err!=nil{t.Fatal(err)}
+   if _,err:=db.Exec("DELETE FROM evidence_ledger WHERE id=?",p.Input.Identity[:]);err!=nil{t.Fatal(err)}
+  }},
   {"foreign-recipient-route",func(t *testing.T,db *sql.DB,p perception.RoundProjection){
    if _,err:=db.Exec("UPDATE evidence_routes SET holder_id='b' WHERE record_id=?",p.Input.Identity[:]);err!=nil{t.Fatal(err)}
   }},

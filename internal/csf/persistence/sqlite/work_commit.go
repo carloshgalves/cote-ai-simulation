@@ -144,7 +144,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  seenRounds:=map[domain.ID]bool{}
  for _,p:=range pending{
   if p.Eligibility.Compare(due)>0{continue}
-  if b.Mode==3||b.Mode==4||b.Mode==5{
+  if b.Mode==3||b.Mode==4||b.Mode==5||b.Mode==6{
    sys,ok:=fence[11].([]any)
    if !ok||len(sys)==0{return errors.New("system WORK source cardinality invalid")}
    matched:=false

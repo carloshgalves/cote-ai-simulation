@@ -42,7 +42,8 @@ func (c *Coordinator) CommitSystemUnit(ctx context.Context,ledger *inputledger.L
  typed,hash,err:=c.store.LoadWorldState(ctx,uint64(clockBefore.Revision))
  if err!=nil||hash!=cycle.BaseStateHash{return empty,errors.New("system cycle predecessor state hash invalid")}
  entries,ok:=fence.Fields[11].([]any)
- if !ok||len(entries)!=1{return empty,errors.New("synthetic system handler requires one admitted unit")}
+ if !ok||len(entries)==0{return empty,errors.New("synthetic system handler requires admitted units")}
+ if len(entries)>1{return c.commitSystemBatch(ctx,ledger,cycle,fence)}
  value,ok:=entries[0].([]any)
  if !ok||len(value)!=5{return empty,errors.New("system admitted unit malformed")}
  kind,ok:=value[1].(uint64)

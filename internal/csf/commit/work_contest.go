@@ -42,12 +42,18 @@ func (c *Coordinator) CommitTwoResourceContest(ctx context.Context,ledger *input
  if hash!=cycle.BaseStateHash{return empty,errors.New("contest WorldState base differs from fence")}
  stock,err:=reducer.DecodeStock(before);if err!=nil||stock.Available!=1{return empty,errors.New("two contenders require precisely one real inventory unit")}
  units,ok:=fence.Fields[11].([]any)
- if !ok||len(units)!=2{return empty,errors.New("contest requires two admitted slot responses")}
+ if !ok||len(units)<2{return empty,errors.New("contest requires two admitted slot responses")}
  responses:=map[domain.ID]inputledger.Response{}
  for _,unit:=range slots{for _,response:=range unit{responses[response.ID]=response}}
  actors,forbidden:=map[string]bool{},map[string]bool{}
+ slotCount:=0
  for _,raw:=range units{
-  fields,ok:=raw.([]any);if !ok||len(fields)!=5||fields[1]!=uint64(0){return empty,errors.New("non-slot source cannot join a resource contest")}
+  fields,ok:=raw.([]any);if !ok||len(fields)!=5{return empty,errors.New("malformed source in contest fence")}
+  if fields[1]!=uint64(0){
+   if fields[1]!=uint64(2)&&fields[1]!=uint64(3){return empty,errors.New("unregistered co-admitted contest source")}
+   continue
+  }
+  slotCount++
   idBytes,ok:=fields[3].([]byte);if !ok||len(idBytes)!=32{return empty,errors.New("contest source identity malformed")}
   var id domain.ID;copy(id[:],idBytes)
   response,exists:=responses[id]
@@ -56,9 +62,12 @@ func (c *Coordinator) CommitTwoResourceContest(ctx context.Context,ledger *input
   if actors[actor]{return empty,errors.New("contest duplicates an actor")}
   actors[actor]=true;forbidden[actor]=false
  }
+ if slotCount!=2{return empty,errors.New("contest requires exactly two authenticated school slot responses")}
  rawGenesis,err:=c.store.LoadGenesis(ctx,[32]byte(run));if err!=nil{return empty,err}
  manifest,err:=genesis.ValidateCanonical(rawGenesis,c.bundle);if err!=nil{return empty,err}
- input,err:=decision.FromPersistedFence(ctx,c.bundle,view,cycle,c.admissionPolicies,fence,c.store,
+ assemble:=decision.FromPersistedFence
+ if len(units)>2{assemble=decision.FromPersistedFenceWithSystemHandlers}
+ input,err:=assemble(ctx,c.bundle,view,cycle,c.admissionPolicies,fence,c.store,
   decision.Snapshot{BaseRevision:state.Revision,ResourceKind:"inventory",ResourceID:"last.resource",
    Available:1,Known:true,AccessibleActors:actors,ForbiddenActors:forbidden},
   []decision.ActionSchema{{Type:"resource.consume",Version:1,Operation:"resource.consume",Producer:"resource.consume"}},
@@ -155,6 +164,7 @@ func (c *Coordinator) CommitTwoResourceContest(ctx context.Context,ledger *input
   Journal:ports.CanonicalRecord{Identity:[32]byte(cid),Canonical:journalBytes},
   Decisions:decisions,Events:output.Events,BaseStateHash:[32]byte(hash),
   RevisionCanonical:revision,FailAfterStep:c.failAfterStep}
+ if len(units)>2{return c.commitResourceSystem(ctx,ledger,cycle,fence,batch)}
  if err:=c.commitPreparedWork(ctx,&batch);err!=nil{return empty,err}
  return batch.Journal,nil
 }

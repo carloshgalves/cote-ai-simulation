@@ -144,11 +144,12 @@ func verifySystemTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
  if !equalBytes(journal[17],pair[:])||!equalBytes(journal[19],task[:]){
   return errors.New("system decision/task digest does not match journal")
  }
- if !sameCanonical(revision[4],predecessor[4])||!sameCanonical(revision[5],predecessor[5])||
-  !sameCanonical(journal[9],predecessor[5])||
+ if (b.Mode!=5&&(!sameCanonical(revision[4],predecessor[4])||
+  !sameCanonical(revision[5],predecessor[5])||
+  !sameCanonical(journal[9],predecessor[5])))||
   uint64(prior.NextLogicalSequence)==math.MaxUint64||
   next.NextLogicalSequence!=prior.NextLogicalSequence+1{
-  return errors.New("source-only handler illegally changed world or sequence")
+  return errors.New("source lifecycle changed world outside resource reducer or sequence")
  }
  return nil
 }

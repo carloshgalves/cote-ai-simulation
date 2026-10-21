@@ -1,28 +1,35 @@
-# CSFRV1-6 — checkpoint de implementação (parcial)
+# CSFRV1-6 — implementação e revisão de evidência endereçada
 
 **Branch:** `feat/csfrv1-6-epistemic-evidence`
 **Draft PR:** [#23](https://github.com/carloshgalves/cote-ai-simulation/pull/23)
-**Base:** `main@bf03fa2d7ce7fc65e0b2124295be8b543948b28e` (CSFRV1-5 mesclada)
-**Ticket:** [06 — Evidência endereçada e barreira](06-evidencia-e-barreira.md)
+**Base:** `main@bf03fa2d7ce7fc65e0b2124295be8b543948b28e`
+**Aceite:** [06 — Evidência endereçada e barreira](06-evidencia-e-barreira.md)
 
-## Slice implementado
+## Código implementado
 
-- `perception.EmptyCompletion` deriva `PerceptionTaskCompletion` canônico, com ID e digest registrados; ele **não** decide a elegibilidade do observador.
-- `sqlite.CompleteInternalPerception` consulta evento/outbox/genesis/CycleCommit duráveis e rederiva o task pelo predicado fixado; somente eventos internos, secretos e sem atores aceitam **completion vazio**. A transação SQLite faz CAS idempotente, falhando se os bytes divergem.
-- `sqlite.assertNoAddressedOutputs` compara a ligação de `Observation` e `KnowledgeInput` ao task, IDs/digests canônicos, destinatário, referência, instante, claims e evidências. Recibos de outras tasks não constituem bloqueio global; registro desconhecido ou inconsistente falha fechado.
-- `sqlite.CheckEmptyPerceptionBarrier` reconcilia refs do journal e registros outbox do run até a revisão exigida, bloqueando ausência/corrupção de task ou completion.
-- Casos negativos exercitam ausência de task commitada, completion inválido, input órfão, outro destinatário/task e tentativa de completar task sem commit.
+- `PerceptionTaskCompletion` usa identidade e digest canônicos. O fluxo vazio é restrito a eventos internos sem observador; `round.consumed` nunca pode ser completado vazio.
+- `PerceptionResolver` positivo registrado para `school.round.lifecycle.v1`: carrega a task publicada, Event, CycleCommit, políticas do Genesis e revisões WorldState pré/pós, e valida a `RoundDeclaration` e seu selo. O ator destinatário é derivado, nunca informado pelo worker.
+- `ProjectRoundNotice` publica somente aviso mínimo de round encerrado. Receipts de slot, resultados privados e estado físico ficam no EventStore, fora do contexto.
+- `DeliverRoundPerception` grava a Observation, o KnowledgeInput e o completion em **uma transação**, com CAS idempotente e rejeição de identidade/bytes divergentes. As rotas indexadas são particionadas por run, holder e task.
+- `Store.Append` detecta candidatos a SlotDispatch antes do roteamento genérico. A validação de autoridade, o limite causal e o append ocorrem na **mesma transação**. Clock, RoundDeclaration, ator, slot e histórico de dispatch/revogação precisam concordar.
+- `ActorInbox` só expõe dados do run, ator e horizonte causal do SlotDispatch ao qual foi vinculado. `contextboundary.Build` só aceita recibos tipados e endereçados, sem dependência direta de WorldState, EventStore, Observatory ou RAG.
+- `ReplayClock` reconcilia tasks `PENDING`, completions, todos os registros de EvidenceLedger e rotas indexadas. Falha em dados órfãos, ausentes, extras ou adulterados.
 
-## Limites explícitos — **NÃO CONCLUÍDO**
+## Provas automatizadas
 
-O presente código **não libera um dispatch real**. `CheckEmptyPerceptionBarrier` é apenas uma verificação diagnóstica, não há ainda a integração atômica com `SlotDispatch`. Também não há resolver de canal que produza a observação positiva de A, `KnowledgeInputSink` de produção, particionamento de evidência com autorização por recipient nem builder allow-listed de contexto. Uma autorização de observador não pode ser fabricada a partir de `Event.confidentiality` ou de uma lista passada pelo worker.
+- Cenário de dois eventos: A recebe exatamente uma Observation e um KnowledgeInput; B não recebe evidência destinada a A; segredo interno conclui com zero outputs.
+- Permutação de ordem de tasks, número de workers e retries mantém identidade e bytes; workers concorrentes não duplicam registros.
+- Fault injection de publicação parcial força rollback; reprocessamento e replay/reopen conservam a mesma projeção.
+- Testes adversariais para deleção, adulteração, órfãos, cross-run, falso completion vazio, dispatch malformado/retroativo, leitor de ator errado e dispatch histórico usado para consultar conhecimento futuro.
+- Audits negativos de VIP secreto, White Room, canon futuro, telemetria física sem autorização e Observatory. Evidência e comandos em [knowledge-boundary audit](../../../evals/knowledge-boundary/csf-runtime-v1/README.md).
 
-A aceitação de CSFRV1-6 depende ainda de: cenário A/B/segredo, completions com projeção exata não vazia, leitura isolada por agente, queda após entrega parcial, dois workers concorrentes, property tests, reconciliação sob replay/reopen, bloqueio efetivo de dispatch e `knowledge-boundary-audit` completo. A presença de testes de integridade de bytes **não comprova** esses critérios.
+## Verificação de aceite
 
-## Revisão e validação
+O resultado **não deve ser declarado homologado apenas porque houve commit**, nem com workflow verde de HEAD anterior. Confirmar no HEAD final, depois da última correção:
 
-Revisão adversarial persistida na PR #23, findings individuais 1–3. O finding de integração completa da barreira/percepção positiva permanece aberto. Os findings de desaparecimento de task e bloqueio cruzado têm correções e testes dedicados.
+1. `CSFRV1-6 Epistemic Evidence Checkpoint`, incluindo audit A/B/segredo e testes de permutação.
+2. `CSFRV1-5 Atomic Terminal Commit Checkpoint` (regressão).
+3. `CSF canonical conformance`.
+4. `git diff --check`, revisão integral do diff e todos os comentários `cote-review-finding:v1` em situação terminal verificada.
 
-Workflow dedicado `.github/workflows/csfrv1-6-implementation.yml`: diff whitespace, regressão Go focal e suíte completa. **A verificação do último commit deve ser confirmada no GitHub Actions antes de qualquer aceite; não reutilizar checks de HEAD anterior.**
-
-**Proibição de merge:** manter a PR Draft e o ticket em andamento até cobertura dos critérios acima e revisão adversarial independente final, com todos os findings efetivamente encerrados.
+A PR permanece **Draft e sem merge** durante a revisão. Nenhuma evidência deste documento amplia o escopo a crenças, claims, memória, RAG, percepção genérica, handlers de WORK ou outros itens posteriores da issue #22.

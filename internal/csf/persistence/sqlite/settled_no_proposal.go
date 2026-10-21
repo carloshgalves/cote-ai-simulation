@@ -102,10 +102,25 @@ func settledNoProposalUnits(ctx context.Context,q queryOne,runID [32]byte)(map[d
    if unit[1]==uint64(2)||unit[1]==uint64(3){hasSystem=true}
   }
   if hasSlot&&hasSystem{
-   sources,err:=verifyPublishedHybrid(ctx,q,runID,root.cycle,root.commit,journal,fence,eventRaw)
+   var first []byte
+   for _,v:=range units{
+    ref:=v.([]any)
+    if ref[1]==uint64(0){first=ref[3].([]byte);break}
+   }
+   var sourceRaw []byte
+   if err:=q.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",first).Scan(&sourceRaw);err!=nil{return nil,err}
+   decoded,err:=codec.StrictDecodePayload(sourceRaw);if err!=nil{return nil,err}
+   fields,ok:=decoded.([]any)
+   if !ok{return nil,errors.New("mixed input source is not canonical")}
+   var sources []domain.ID
+   if len(fields)==19{
+    sources,err=verifyPublishedResourceSystem(ctx,q,runID,root.cycle,root.commit,journal,fence,eventRaw)
+   }else if len(fields)==11{
+    sources,err=verifyPublishedHybrid(ctx,q,runID,root.cycle,root.commit,journal,fence,eventRaw)
+   }else{return nil,errors.New("mixed source handler is unregistered")}
    if err!=nil{return nil,err}
    for _,source:=range sources{
-    if result[source]{return nil,errors.New("hybrid source settled more than once")}
+    if result[source]{return nil,errors.New("mixed source settled more than once")}
     result[source]=true
    }
    continue

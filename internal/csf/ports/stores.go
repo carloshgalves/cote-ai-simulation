@@ -139,7 +139,8 @@ type WorkBatch struct {
  ExpectedInputPrefix []CanonicalRecord
  Journal CanonicalRecord
  Decisions []CanonicalRecord
- Events []CanonicalRecord // internal SOURCE_LIFECYCLE events in EventOrderKey order
+ Events []CanonicalRecord // authenticated EventOrderKey order
+ PerceptionTasks []CanonicalRecord // canonical PENDING entries, never observer outputs
  BaseStateHash [32]byte
  RevisionCanonical []byte
  FailAfterStep uint8

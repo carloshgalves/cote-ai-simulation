@@ -28,21 +28,21 @@ func insertExactEvidence(ctx context.Context,tx *sql.Tx,record ports.CanonicalRe
  return nil
 }
 
-func insertExactRoute(ctx context.Context,tx *sql.Tx,record ports.CanonicalRecord,task [32]byte,actor [2]string,kind int)error{
+func insertExactRoute(ctx context.Context,tx *sql.Tx,record ports.CanonicalRecord,run,task [32]byte,actor [2]string,kind int)error{
  id:=record.Identity
  seal:=identity.OpaqueContentHash(record.Canonical)
  res,err:=tx.ExecContext(ctx,"INSERT OR IGNORE INTO evidence_routes "+
-  "(record_id,task_id,holder_namespace,holder_id,kind,canonical_hash) VALUES(?,?,?,?,?,?)",
-  id[:],task[:],actor[0],actor[1],kind,seal[:])
+  "(record_id,run_id,task_id,holder_namespace,holder_id,kind,canonical_hash) VALUES(?,?,?,?,?,?,?)",
+  id[:],run[:],task[:],actor[0],actor[1],kind,seal[:])
  if err!=nil{return err}
  changed,err:=res.RowsAffected();if err!=nil{return err}
  if changed==1{return nil}
- var taskID,savedHash []byte
+ var taskID,savedHash,savedRun []byte
  var ns,name string
  var savedKind int
- if err:=tx.QueryRowContext(ctx,"SELECT task_id,holder_namespace,holder_id,kind,canonical_hash "+
- "FROM evidence_routes WHERE record_id=?",id[:]).Scan(&taskID,&ns,&name,&savedKind,&savedHash);err!=nil{return err}
- if !bytes.Equal(taskID,task[:])||ns!=actor[0]||name!=actor[1]||savedKind!=kind||!bytes.Equal(savedHash,seal[:]){
+ if err:=tx.QueryRowContext(ctx,"SELECT run_id,task_id,holder_namespace,holder_id,kind,canonical_hash "+
+ "FROM evidence_routes WHERE record_id=?",id[:]).Scan(&savedRun,&taskID,&ns,&name,&savedKind,&savedHash);err!=nil{return err}
+ if !bytes.Equal(savedRun,run[:])||!bytes.Equal(taskID,task[:])||ns!=actor[0]||name!=actor[1]||savedKind!=kind||!bytes.Equal(savedHash,seal[:]){
   return errors.New("addressed evidence route identity collision")
  }
  return nil
@@ -51,16 +51,17 @@ func insertExactRoute(ctx context.Context,tx *sql.Tx,record ports.CanonicalRecor
 // checkProjectionEvidence enforces a two-way ledger/index reconciliation.
 // It rejects extra, missing, tampered or misaddressed evidence even when
 // the completion lists the two expected IDs.
-func checkProjectionEvidence(ctx context.Context,q queryOne,task [32]byte,
+func checkProjectionEvidence(ctx context.Context,q queryOne,run,task [32]byte,
  p perception.RoundProjection)error{
- rows,err:=q.QueryContext(ctx,"SELECT record_id,holder_namespace,holder_id,kind "+
+ rows,err:=q.QueryContext(ctx,"SELECT record_id,run_id,holder_namespace,holder_id,kind "+
  "FROM evidence_routes WHERE task_id=? ORDER BY kind,record_id",task[:])
  if err!=nil{return err}
  seen:=map[[32]byte]bool{}
  count:=0
  for rows.Next(){
-  var id []byte;var ns,name string;var kind int
-  if err:=rows.Scan(&id,&ns,&name,&kind);err!=nil{rows.Close();return err}
+  var id,routeRun []byte;var ns,name string;var kind int
+  if err:=rows.Scan(&id,&routeRun,&ns,&name,&kind);err!=nil{rows.Close();return err}
+  if !bytes.Equal(routeRun,run[:]){rows.Close();return errors.New("addressed route crosses timelines")}
   recordID,ok:=idField(id)
   if !ok||seen[recordID]||ns!=p.Actor[0]||name!=p.Actor[1]{
    rows.Close();return errors.New("evidence route duplicate/foreign holder")
@@ -140,12 +141,12 @@ func (s *Store) deliverRoundPerception(ctx context.Context,taskID [32]byte,bundl
  p,err:=loadVerifiedRoundProjection(ctx,tx,taskID)
  if err!=nil{return zero,err}
  if err:=insertExactEvidence(ctx,tx,p.Observation);err!=nil{return zero,err}
- if err:=insertExactRoute(ctx,tx,p.Observation,taskID,p.Actor,0);err!=nil{return zero,err}
+ if err:=insertExactRoute(ctx,tx,p.Observation,run,taskID,p.Actor,0);err!=nil{return zero,err}
  if failAfter==1{return zero,errors.New("injected failure after observation")}
  if err:=insertExactEvidence(ctx,tx,p.Input);err!=nil{return zero,err}
- if err:=insertExactRoute(ctx,tx,p.Input,taskID,p.Actor,1);err!=nil{return zero,err}
+ if err:=insertExactRoute(ctx,tx,p.Input,run,taskID,p.Actor,1);err!=nil{return zero,err}
  if failAfter==2{return zero,errors.New("injected failure after knowledge input")}
- if err:=checkProjectionEvidence(ctx,tx,taskID,p);err!=nil{return zero,err}
+ if err:=checkProjectionEvidence(ctx,tx,run,taskID,p);err!=nil{return zero,err}
  res,err:=tx.ExecContext(ctx,"INSERT OR IGNORE INTO causal_outbox(id,canonical) VALUES(?,?)",
   p.Completion.Identity[:],p.Completion.Canonical)
  if err!=nil{return zero,err}
@@ -165,13 +166,13 @@ func (s *Store) deliverRoundPerception(ctx context.Context,taskID [32]byte,bundl
 // This read port never queries EventStore or WorldState and cannot return
 // raw PerceptionTask, resource state, Observatory data, or other holders.
 // It will fail closed if route bytes and record recipient disagree.
-func (s *Store) readAddressedEvidence(ctx context.Context,actor [2]string)(
+func (s *Store) readAddressedEvidence(ctx context.Context,run [32]byte,actor [2]string)(
  []ports.CanonicalRecord,[]ports.CanonicalRecord,error){
  if s==nil||actor[0]==""||actor[1]==""{return nil,nil,errors.New("invalid holder")}
  rows,err:=s.db.QueryContext(ctx,"SELECT r.record_id,r.kind,e.canonical,r.canonical_hash "+
  "FROM evidence_routes r JOIN evidence_ledger e ON e.id=r.record_id "+
- "WHERE r.holder_namespace=? AND r.holder_id=? "+
- "ORDER BY r.kind,r.task_id,r.record_id",actor[0],actor[1])
+ "WHERE r.run_id=? AND r.holder_namespace=? AND r.holder_id=? "+
+ "ORDER BY r.kind,r.task_id,r.record_id",run[:],actor[0],actor[1])
  if err!=nil{return nil,nil,err}
  defer rows.Close()
  var observations,inputs []ports.CanonicalRecord

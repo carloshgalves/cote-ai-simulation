@@ -54,6 +54,15 @@ func verifyDispatchAuthority(ctx context.Context,tx *sql.Tx,fields []any)error{
  if uint64(state.Revision)!=base||int64(state.Instant)!=effective{
   return errors.New("dispatch base revision or effective instant differs from current authoritative clock")
  }
+ if state.LastOrdinal==math.MaxInt64{
+  return errors.New("dispatch cycle ordinal exhausted")
+ }
+ expectedCycle,err:=registeredDigest("cote.csf.id.cycle",
+  "cote.csf.schema.cycle-id-preimage",
+  []any{run[:],[]any{int64(state.Instant),uint64(state.LastOrdinal+1)}})
+ if err!=nil||!equalBytes(fields[2],expectedCycle[:]){
+  return errors.New("dispatch CycleID does not match current causal coordinate")
+ }
  var roundRaw,sealed []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",roundID[:]).Scan(&roundRaw);err!=nil{
   return errors.New("dispatch has no registered RoundDeclaration")

@@ -8,6 +8,7 @@
 ## Código implementado
 
 - `PerceptionTaskCompletion` usa identidade e digest canônicos. O fluxo vazio é restrito a eventos internos sem observador; `round.consumed` nunca pode ser completado vazio.
+- A autoridade de completion vazio usa contrato fechado de `kind`/produtor/fase para `clock.advanced`, `resource.consumed`, `occurrence.rejected`, `occurrence.deferred` e os eventos internos registrados de trigger (`activation.consumed`, `runtime.transition`, `activation.created`). Confidencialidade isolada nunca autoriza um completion vazio.
 - `PerceptionResolver` positivo registrado para `school.round.lifecycle.v1`: carrega a task publicada, Event, CycleCommit, políticas do Genesis e revisões WorldState pré/pós, e valida a `RoundDeclaration` e seu selo. O ator destinatário é derivado, nunca informado pelo worker.
 - `ProjectRoundNotice` publica somente aviso mínimo de round encerrado. Receipts de slot, resultados privados e estado físico ficam no EventStore, fora do contexto.
 - `DeliverRoundPerception` grava a Observation, o KnowledgeInput e o completion em **uma transação**, com CAS idempotente e rejeição de identidade/bytes divergentes. As rotas indexadas são particionadas por run, holder e task.

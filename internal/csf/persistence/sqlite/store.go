@@ -161,6 +161,10 @@ CREATE TABLE IF NOT EXISTS clock_states (
  run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
  canonical BLOB NOT NULL
 ) STRICT;
+CREATE TABLE IF NOT EXISTS genesis_schedule_seals (
+ run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
+ roster_digest BLOB NOT NULL CHECK(length(roster_digest)=32)
+) STRICT;
 CREATE TABLE IF NOT EXISTS scheduled_occurrences (
  id BLOB PRIMARY KEY CHECK(length(id)=32),
  run_id BLOB NOT NULL CHECK(length(run_id)=32),
@@ -344,7 +348,11 @@ func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundG
 		// CycleCommit lives in decision_ledger too; it is NOT an admission
 		// fence and must never be mistaken for a causal seal.
 		if !ok {rows.Close();return errors.New("invalid decision record body")}
-		if len(body)==24 {continue}
+		// Published terminal journal records (commit, abort, retry) and
+		// candidate audit roots are not admission fences. Their canonical
+		// identities are checked at their individual transaction insertion
+		// gates, and they cannot widen the previous input cut.
+		if len(body)==24||len(body)==16||len(body)==15||len(body)==7||len(body)==17 {continue}
 		if len(body)!=18 && len(body)!=6 {rows.Close();return errors.New("unknown decision record in admission guard")}
 		fenceRun,ok:=body[0].([]byte)
 		if !ok || len(fenceRun)!=32 {rows.Close();return errors.New("invalid persisted fence run")}
@@ -402,6 +410,51 @@ func (s *Store) AppendFenceIfPrefix(ctx context.Context, fence ports.CanonicalRe
 	if err := rows.Err(); err != nil { rows.Close(); return err }
 	if err := rows.Close(); err != nil { return err }
 	if index != len(expected) { return errors.New("input ledger changed before fence publication") }
+ // The scheduling/trigger roster is part of the same durable fence cut as
+ // the input-ledger prefix. Verify it under this SQLite transaction to
+ // prevent a scheduled row being added, consumed or replaced after Derive.
+ parsed,parseErr:=codec.StrictDecodePayload(fence.Canonical)
+ if parseErr==nil{
+  fields,ok:=parsed.([]any)
+  if ok&&len(fields)==18{
+   runBytes,ok:=fields[0].([]byte);if !ok||len(runBytes)!=32{return errors.New("admission run ID invalid")}
+   instant,ok:=asSigned64(fields[4]);if !ok{return errors.New("admission instant invalid")}
+   ordinal,ok:=fields[5].(uint64);if !ok{return errors.New("admission ordinal invalid")}
+   admitted,ok:=fields[11].([]any);if !ok{return errors.New("admitted source list missing")}
+   var run [32]byte;copy(run[:],runBytes)
+   roster,err:=systemUnits(ctx,tx,run,domain.EligibilityCoordinate{
+    NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)})
+   if err!=nil{return err}
+   included:=make([][]any,0)
+   for _,item:=range admitted{
+    v,ok:=item.([]any);if !ok||len(v)!=5{return errors.New("malformed admitted unit")}
+    kind,ok:=v[1].(uint64);if !ok{return errors.New("invalid admitted kind")}
+    if kind==2||kind==3{included=append(included,v)}
+   }
+   if len(included)!=len(roster){return errors.New("system source roster changed before durable admission")}
+   for _,unit:=range roster{
+    found:=false
+    for _,v:=range included{
+     coordinate:=[]any{int64(unit.Eligibility.NotBeforeInstant),uint64(unit.Eligibility.NotBeforeCycleOrdinal)}
+     if v[1]==uint64(unit.Kind)&&v[2]==unit.Source&&
+      sameCanonical(v[0],coordinate)&&equalBytes(v[3],unit.ID[:])&&equalBytes(v[4],unit.Digest[:]){
+      if found{return errors.New("duplicate scheduled unit in fence")}
+      found=true
+     }
+    }
+    if !found{return errors.New("fence omitted or forged pending system unit")}
+   }
+  }
+ }
+ // First admission atomically seals ALL genesis-authored occurrences,
+ // including those eligible in the future and not yet in this fence.
+ if parsed,err:=codec.StrictDecodePayload(fence.Canonical);err==nil{
+  if fields,ok:=parsed.([]any);ok&&len(fields)==18{
+   raw,ok:=fields[0].([]byte);if !ok||len(raw)!=32{return errors.New("fence run ID invalid")}
+   var run [32]byte;copy(run[:],raw)
+   if err:=ensureGenesisScheduleSeal(ctx,tx,run);err!=nil{return err}
+  }
+ }
 	result, err := tx.ExecContext(ctx, "INSERT OR IGNORE INTO decision_ledger(id,canonical) VALUES(?,?)", fence.Identity[:], fence.Canonical)
 	if err != nil { return err }
 	affected, err := result.RowsAffected()
@@ -411,6 +464,20 @@ func (s *Store) AppendFenceIfPrefix(ctx context.Context, fence ports.CanonicalRe
 		if err := tx.QueryRowContext(ctx, "SELECT canonical FROM decision_ledger WHERE id=?", fence.Identity[:]).Scan(&persisted); err != nil { return err }
 		if !bytes.Equal(persisted, fence.Canonical) { return errors.New("admission fence identity collision") }
 	}
+    // Reconcile the exact persisted fence even when the SQLite driver reports
+    // an idempotent INSERT OR IGNORE. An existing byte-identical fence must
+    // not bypass the cycle-control transition.
+    next,err:=admitTerminalFence(ctx,tx,fence);if err!=nil{return err}
+    if next!=nil{
+        // CycleControlState is indexed by RUN, not by cycle identity.
+        // The control payload's optional cycle ID must never be mistaken for
+        // its owning run key.
+        decoded,err:=codec.StrictDecodePayload(fence.Canonical);if err!=nil{return err}
+        fields:=decoded.([]any)
+        runBytes:=fields[0].([]byte)
+        var run [32]byte;copy(run[:],runBytes)
+        if err:=storeCycleControl(ctx,tx,run,next);err!=nil{return err}
+    }
 	return tx.Commit()
 }
 
@@ -676,4 +743,32 @@ func (s *Store) LoadGenesis(ctx context.Context, runID [32]byte) ([]byte, error)
 	var encoded []byte
 	err := s.db.QueryRowContext(ctx, `SELECT canonical FROM genesis_records WHERE run_id=?`, runID[:]).Scan(&encoded)
 	return encoded, err
+}
+
+func (s *Store) LoadWorldState(ctx context.Context,revision uint64)([]any,[32]byte,error){
+ var zero [32]byte
+ var canonical,hash []byte
+ err:=s.db.QueryRowContext(ctx,"SELECT canonical,state_hash FROM world_revisions WHERE revision=?",revision).Scan(&canonical,&hash)
+ if err!=nil{return nil,zero,err}
+ if len(hash)!=32{return nil,zero,errors.New("persisted WorldRevision hash invalid")}
+ raw,err:=codec.StrictDecodePayload(canonical);if err!=nil{return nil,zero,err}
+ fields,ok:=raw.([]any)
+ if !ok||len(fields)!=6||fields[3]!=revision||!bytes.Equal(hash,func()[]byte{v,_:=fields[5].([]byte);return v}()){
+  return nil,zero,errors.New("persisted WorldRevision does not authenticate selected revision")
+ }
+ typed,ok:=fields[4].([]any)
+ if !ok||len(typed)!=4{return nil,zero,errors.New("persisted WorldState typed value invalid")}
+ encoded,ok:=typed[2].([]byte)
+ if !ok{return nil,zero,errors.New("WorldState missing canonical typed envelope")}
+ env,err:=codec.StrictDecodeEnvelope(encoded)
+ if err!=nil{return nil,zero,err}
+ if !sameCanonical([]any{typed[0],typed[1]},[]any{env.SchemaID,uint64(env.SchemaVersion)}){
+  return nil,zero,errors.New("WorldState typed descriptor mismatches canonical envelope")
+ }
+ digest:=identity.OpaqueContentHash(encoded)
+ if !bytes.Equal(digest[:],hash)||!bytes.Equal(digest[:],func()[]byte{v,_:=typed[3].([]byte);return v}()){
+  return nil,zero,errors.New("persisted WorldState envelope digest invalid")
+ }
+ copy(zero[:],hash)
+ return typed,zero,nil
 }

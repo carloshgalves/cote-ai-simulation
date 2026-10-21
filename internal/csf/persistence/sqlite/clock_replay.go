@@ -27,11 +27,11 @@ type ClockReplayReport struct{
  VerifiedActivations int
 }
 
-// Reconstruct the pending set that motivated the first CLOCK_ADVANCE. No
-// WORK or schedule settlement is implemented in CSFRV1-3, so original
-// occurrences/rounds/inputs remain durable. Exclude only the activations and
-// repeat cadences materialized by the advance itself, not source work.
-func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte)([]clock.Pending,error){
+// Reconstruct historical pending membership for a CLOCK_ADVANCE or WORK.
+// Immutable source rows are not treated as live by default: settlement and
+// causal birth are proved from prior CycleCommit/DecisionRecord/Event roots.
+// Future successors and activations must not appear retroactively.
+func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte,replayRevision uint64)([]clock.Pending,error){
  pending,err:=pendingClock(ctx,s.db,runID)
  if err!=nil{return nil,err}
  generated:=map[domain.ID]bool{}
@@ -45,12 +45,24 @@ func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte)([]clock.
   fields,ok:=value.([]any);if !ok||len(fields)!=12{rows.Close();return nil,errors.New("invalid replay activation body")}
   origin,ok:=fields[5].([]any);if !ok||len(origin)==0{rows.Close();return nil,errors.New("activation has no causal origin")}
   kind,ok:=origin[0].(uint64);if !ok{rows.Close();return nil,errors.New("invalid activation origin tag")}
-  if kind==0 {
-   var key domain.ID;copy(key[:],id);generated[key]=true
-  }else if kind!=1{rows.Close();return nil,errors.New("unexpected activation origin tag")}
+  if kind!=0&&kind!=1{rows.Close();return nil,errors.New("unexpected activation origin tag")}
+  var key domain.ID;copy(key[:],id);generated[key]=true
  }
  if err:=rows.Err();err!=nil{rows.Close();return nil,err}
  if err:=rows.Close();err!=nil{return nil,err}
+ // Current schedule rows can include DEFER successors created at revisions
+ // later than the replay position. Remove live schedule units and add the
+ // exact historically-existing roster below.
+ scheduled,err:=s.db.QueryContext(ctx,"SELECT id FROM scheduled_occurrences WHERE run_id=?",runID[:])
+ if err!=nil{return nil,err}
+ for scheduled.Next(){
+  var id []byte
+  if err:=scheduled.Scan(&id);err!=nil{scheduled.Close();return nil,err}
+  if len(id)!=32{scheduled.Close();return nil,errors.New("historical occurrence ID malformed")}
+  var key domain.ID;copy(key[:],id);generated[key]=true
+ }
+ if err:=scheduled.Err();err!=nil{scheduled.Close();return nil,err}
+ if err:=scheduled.Close();err!=nil{return nil,err}
  // A post-advance repeat cadence is likewise not a pre-fence pending unit.
  runtimeRows,err:=s.db.QueryContext(ctx,"SELECT definition_id FROM trigger_runtime WHERE run_id=?",runID[:])
  if err!=nil{return nil,err}
@@ -63,7 +75,22 @@ func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte)([]clock.
  if err:=runtimeRows.Err();err!=nil{runtimeRows.Close();return nil,err}
  if err:=runtimeRows.Close();err!=nil{return nil,err}
  original:=make([]clock.Pending,0,len(pending))
- for _,item:=range pending{if !generated[item.ID]{original=append(original,item)}}
+ known:=map[domain.ID]bool{}
+ for _,item:=range pending{
+  if !generated[item.ID]{original=append(original,item);known[item.ID]=true}
+ }
+ // A later terminal WORK removes its RoundDeclarations from live pending.
+ // Reinstate only rounds that were still unsettled at this replay revision.
+ historical,err:=s.historicalWorkRounds(ctx,runID,replayRevision)
+ if err!=nil{return nil,err}
+ for _,item:=range historical{
+  if !known[item.ID]{original=append(original,item);known[item.ID]=true}
+ }
+ system,err:=s.historicalSystemUnits(ctx,runID,replayRevision)
+ if err!=nil{return nil,err}
+ for _,item:=range system{
+  if !known[item.ID]{original=append(original,item);known[item.ID]=true}
+ }
  return original,nil
 }
 
@@ -76,6 +103,7 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  graw,err:=s.LoadGenesis(ctx,runID);if err!=nil{return report,err}
  genesisRoot,err:=genesis.ValidateCanonical(graw,bundle);if err!=nil{return report,err}
  if [32]byte(genesisRoot.RunID)!=runID{return report,errors.New("genesis run mismatch")}
+ if err:=verifyCascadePolicy(ctx,s.db,runID);err!=nil{return report,err}
  report.GenesisID=genesisRoot.ID
  // CLOCK_ADVANCE in this slice changes logical time, not physical world.
  // All revision hashes must remain anchored to the verified genesis state.
@@ -109,6 +137,8 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  if seals!=len(rounds){return report,errors.New("replay round integrity seal set diverges from declarations")}
  definitions,err:=s.LoadRegisteredTriggers(ctx,runID,bundle);if err!=nil{return report,err}
  current:=clock.State{Instant:genesisRoot.InitialInstant,LastOrdinal:-1}
+ currentTyped:=genesisTyped
+ var currentHash [32]byte;copy(currentHash[:],initialStateHash)
  runtime:=make(map[domain.ID]trigger.Runtime,len(definitions))
  for _,registered:=range definitions{
   d:=registered.Definition
@@ -139,15 +169,37 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  if err:=rows.Err();err!=nil{rows.Close();return report,err}
  if err:=rows.Close();err!=nil{return report,err}
  var lastEventCounter int
+ sameInstantWork:=map[int64]uint64{}
  d:=identity.New(bundle)
  for _,entry:=range entries{
   raw,err:=s.ReadCycleCommit(ctx,entry.commitID);if err!=nil{return report,err}
   v,err:=codec.StrictDecodePayload(raw);if err!=nil{return report,err}
   journal,ok:=v.([]any);if !ok||len(journal)!=24{return report,errors.New("replay CycleCommit not canonical")}
   if !equalBytes(journal[0],runID[:])||!equalBytes(journal[1],entry.cycleID[:]){return report,errors.New("replay cycle reference mismatch")}
- if _,err:=verifyCommittedFence(ctx,s.db,runID,entry.cycleID,journal);err!=nil{return report,err}
   planFields,ok:=journal[5].([]any)
-  if !ok||len(planFields)!=4||planFields[0]!=uint64(1){return report,errors.New("replay only supports CLOCK_ADVANCE in this slice")}
+  if !ok||len(planFields)==0{return report,errors.New("replay cycle plan missing")}
+  if len(planFields)==1&&planFields[0]==uint64(0){
+   at,ok:=asSigned64(journal[3])
+   if !ok{return report,errors.New("WORK replay instant malformed")}
+   if clock.CascadeExceeded(sameInstantWork[at]){
+    return report,errors.New("CASCADE_LIMIT: replay contains too many WORK cycles at one instant")
+   }
+   sameInstantWork[at]++
+   // WORK NoProposal contributes one revision and zero events. Rebuild
+   // from journal/fence/decision roots, never from runtime cache.
+   successor,err:=s.replayNoProposalCommit(ctx,runID,entry.cycleID,entry.commitID,journal,current)
+   if err!=nil{return report,fmt.Errorf("replay zero-event WORK: %w",err)}
+   current=successor
+   currentTyped,currentHash,err=s.LoadWorldState(ctx,uint64(current.Revision))
+   if err!=nil{return report,err}
+   report.ReplayedCommits++
+   eventIDs,ok:=journal[15].([]any)
+   if !ok{return report,errors.New("replayed WORK event ID list malformed")}
+   lastEventCounter+=len(eventIDs)
+   continue
+  }
+  if len(planFields)!=4||planFields[0]!=uint64(1){return report,errors.New("unregistered replay cycle-plan variant")}
+  if _,err:=verifyCommittedFence(ctx,s.db,runID,entry.cycleID,journal);err!=nil{return report,err}
   from,ok:=asSigned64(planFields[1]);if !ok||from!=int64(current.Instant){return report,errors.New("replay clock origin mismatch")}
   to,ok:=asSigned64(planFields[2]);if !ok||to<=from{return report,errors.New("replay destination invalid")}
   coord,ok:=planFields[3].([]any);if !ok||len(coord)!=2{return report,errors.New("replay target coordinate invalid")}
@@ -157,7 +209,7 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
    Target:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(to),NotBeforeCycleOrdinal:domain.CycleOrdinal(targetOrdinal)}}
   // A well-formed journal cannot assert a destination that was not
   // the earliest persisted pending before its terminal advance.
-  original,err:=s.replayAdvanceInputs(ctx,runID)
+  original,err:=s.replayAdvanceInputs(ctx,runID,uint64(current.Revision))
   if err!=nil{return report,err}
   selected,has,err:=clock.Next(current,original)
   if err!=nil{return report,fmt.Errorf("replay has stale pre-advance pending: %w",err)}
@@ -180,6 +232,11 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
     triggerEvents=append(triggerEvents,trigger.Event{ID:domain.ID(eventID),OrderKey:orderKey,Footprint:footprint})
    }
   }
+  emitted:=make([][]byte,len(events))
+  for i,event:=range events{emitted[i]=event.Canonical}
+  if err:=verifyPublishedWorkTasks(ctx,s.db,runID,entry.cycleID,journal,genesisRoot.Payload,emitted);err!=nil{
+   return report,fmt.Errorf("CLOCK_ADVANCE perception outbox replay: %w",err)
+  }
   next.NextLogicalSequence=current.NextLogicalSequence+domain.LogicalSequence(len(events))
   expectedClock,err:=clock.Encode(current);if err!=nil{return report,err}
   resultClock,err:=clock.Encode(next);if err!=nil{return report,err}
@@ -187,17 +244,17 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
   if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM world_revisions WHERE revision=?",uint64(next.Revision)).Scan(&revBytes);err!=nil{return report,err}
   baseHash,ok:=journal[7].([]byte);if !ok||len(baseHash)!=32{return report,errors.New("replay base hash malformed")}
   resultHash,ok:=journal[9].([]byte);if !ok||len(resultHash)!=32{return report,errors.New("replay resulting hash malformed")}
-  if !bytes.Equal(baseHash,initialStateHash)||!bytes.Equal(resultHash,initialStateHash){
-   return report,errors.New("CLOCK_ADVANCE changed genesis world state hash")
+  if !bytes.Equal(baseHash,currentHash[:])||!bytes.Equal(resultHash,currentHash[:]){
+   return report,errors.New("CLOCK_ADVANCE changed the current causal WorldState")
   }
   var storedRevisionHash []byte
   if err:=s.db.QueryRowContext(ctx,"SELECT state_hash FROM world_revisions WHERE revision=?",uint64(next.Revision)).Scan(&storedRevisionHash);err!=nil{return report,err}
-  if !bytes.Equal(storedRevisionHash,initialStateHash){return report,errors.New("world revision state hash conflicts with genesis")}
+  if !bytes.Equal(storedRevisionHash,currentHash[:]){return report,errors.New("temporal revision hash conflicts with current world")}
   var bh,rh [32]byte;copy(bh[:],baseHash);copy(rh[:],resultHash)
   record:=ports.ClockAdvanceBatch{RunID:runID,CycleID:entry.cycleID,ExpectedRevision:uint64(current.Revision),ResultRevision:uint64(next.Revision),
    BaseStateHash:bh,ResultStateHash:rh,ExpectedClock:expectedClock,ResultClock:resultClock,
    Journal:ports.CanonicalRecord{Identity:entry.commitID,Canonical:raw},Events:events,RevisionCanonical:revBytes}
-  if err:=verifyAdvanceEnvelope(record,journal,current,next,genesisTyped);err!=nil{return report,fmt.Errorf("replay commit integrity: %w",err)}
+  if err:=verifyAdvanceEnvelope(record,journal,current,next,currentTyped);err!=nil{return report,fmt.Errorf("replay commit integrity: %w",err)}
   runtimeEvents:=make([]ports.CanonicalRecord,0,len(definitions))
   activationPayloads:=make([]ports.CanonicalRecord,0)
   for _,registered:=range definitions{
@@ -295,6 +352,12 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  if err:=revisions.Close();err!=nil{return report,err}
  if expectedRevision!=uint64(current.Revision)+1{
   return report,errors.New("world revision count differs from replayed CycleCommit history")
+ }
+ if err:=verifyPendingOutboxExact(ctx,s.db,runID);err!=nil{
+  return report,fmt.Errorf("replay pending outbox completeness: %w",err)
+ }
+ if err:=s.VerifyCycleControl(ctx,runID);err!=nil{
+  return report,fmt.Errorf("replay/resume CycleControlState: %w",err)
  }
  return report,nil
 }

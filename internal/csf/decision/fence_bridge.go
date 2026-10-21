@@ -28,6 +28,28 @@ func FromPersistedFence(
  fence admission.Fence,reader FenceReader,snapshot Snapshot,
  schemas []ActionSchema,seed domain.Digest,history []HistoryBinding,
 )(Input,error){
+ return fromPersistedFence(ctx,bundle,ledger,cycle,policies,fence,reader,snapshot,schemas,seed,history,false)
+}
+
+// FromPersistedFenceWithSystemHandlers projects only authenticated slot units
+// to the *resource* decision kernel while leaving schedule/trigger sources
+// untouched for a separate registered lifecycle handler inside the SAME
+// CycleCommit. Never use this projection without terminal SQL co-settlement.
+func FromPersistedFenceWithSystemHandlers(
+ ctx context.Context,bundle *policy.Bundle,ledger *inputledger.Ledger,
+ cycle admission.Cycle,policies admission.Policies,
+ fence admission.Fence,reader FenceReader,snapshot Snapshot,
+ schemas []ActionSchema,seed domain.Digest,history []HistoryBinding,
+)(Input,error){
+ return fromPersistedFence(ctx,bundle,ledger,cycle,policies,fence,reader,snapshot,schemas,seed,history,true)
+}
+func fromPersistedFence(
+ ctx context.Context,bundle *policy.Bundle,ledger *inputledger.Ledger,
+ cycle admission.Cycle,policies admission.Policies,
+ fence admission.Fence,reader FenceReader,snapshot Snapshot,
+ schemas []ActionSchema,seed domain.Digest,history []HistoryBinding,
+ allowSystem bool,
+)(Input,error){
  var result Input
  if ledger==nil||reader==nil||bundle==nil{return result,ErrProvenance}
  persisted,err:=reader.GetFence(ctx,[32]byte(fence.ID))
@@ -53,7 +75,11 @@ func FromPersistedFence(
   unit,ok:=raw.([]any)
   if !ok||len(unit)!=5{return Input{},ErrProvenance}
   kind,ok:=unit[1].(uint64)
-  if !ok||kind!=0{return Input{},fmt.Errorf("%w: non-slot admitted unit needs a registered source handler",ErrIndeterminate)}
+  if !ok{return Input{},ErrProvenance}
+  if kind!=0{
+   if allowSystem&&(kind==2||kind==3){continue}
+   return Input{},fmt.Errorf("%w: non-slot admitted unit needs a registered source handler",ErrIndeterminate)
+  }
   source,ok:=unit[2].(string);if !ok{return Input{},ErrProvenance}
   idBytes,ok:=unit[3].([]byte);if !ok||len(idBytes)!=32{return Input{},ErrProvenance}
   digBytes,ok:=unit[4].([]byte);if !ok||len(digBytes)!=32{return Input{},ErrProvenance}

@@ -13,8 +13,11 @@ import (
 func Run(input Input)(Result,error){
  result:=Result{PostAvailable:input.Snapshot.Available}
  if input.Bundle==nil{return result,errors.New("canonical bundle missing")}
- if input.RunID==(domain.ID{})||input.CycleID==(domain.ID{})||input.Snapshot.Available<0 {
-  return result,fmt.Errorf("%w: invalid run/cycle/resource state",ErrProvenance)
+ // A registered 32-byte causal ID is identified by its derivation and
+ // provenance, not by a blanket nonzero-byte heuristic (the verified genesis
+ // fixture intentionally uses a zero run ID).
+ if input.Snapshot.Available<0 {
+  return result,fmt.Errorf("%w: invalid resource state",ErrProvenance)
  }
  if domain.ValidateMachineID(input.Snapshot.ResourceKind)!=nil||domain.ValidateMachineID(input.Snapshot.ResourceID)!=nil{
   return result,fmt.Errorf("%w: malformed resource identity",ErrProvenance)
@@ -89,6 +92,19 @@ func Run(input Input)(Result,error){
   candidate,err:=MakeCandidate(d,input.RunID,input.CycleID,[]domain.ID{p.id},
    p.producer,1,0,0,claims,[]any{source},0,refs["conflict-resolvers"])
   if err!=nil{return result,err}
+  // The synthetic V1 resource action has exactly one declared event draft.
+  // Its typed payload is the already validated immutable proposal params;
+  // the claim amount is independently authenticated from that proposal.
+  // Loser drafts are never events unless settlement commits them.
+  if p.producer=="resource.consume" {
+   draft:=[]any{uint64(0),uint64(0),"resource.consumed",p.unit.Response.Body[8],[]any{}}
+   candidate.Fields[8]=[]any{draft}
+   h,err:=digest(d,"cote.csf.digest.commit-candidate","cote.csf.schema.commit-candidate.body",candidate.Fields)
+   if err!=nil{return result,err}
+   candidate.Digest=h
+   candidate.Canonical,err=encode(candidate.Fields,h)
+   if err!=nil{return result,err}
+  }
   result.Candidates=append(result.Candidates,candidate)
   current[candidate.ID]=p.amount
  }

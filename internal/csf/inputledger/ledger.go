@@ -188,6 +188,7 @@ func Open(ctx context.Context, runID domain.ID, bundle *policy.Bundle, inputStor
 	if err := l.restore(records); err != nil {
 		return nil, err
 	}
+	if err:=l.projectSettledNoProposalRounds(ctx);err!=nil{return nil,err}
 	return l, nil
 }
 
@@ -1056,6 +1057,7 @@ func (l *Ledger) AdmissionView(ctx context.Context, bundle *policy.Bundle) (*Led
 	if err := view.restore(records); err != nil {
 		return nil, nil, err
 	}
+	if err:=view.projectSettledNoProposalRounds(ctx);err!=nil{return nil,nil,err}
 	return view, records, nil
 }
 
@@ -1248,4 +1250,48 @@ func nextOpen(c domain.EligibilityCoordinate) domain.EligibilityCoordinate {
 		return domain.EligibilityCoordinate{NotBeforeInstant: c.NotBeforeInstant + 1}
 	}
 	return c
+}
+
+// projectSettledNoProposalRounds consumes a read-only, authoritative
+// DecisionRecord+CycleCommit projection. Neither RoundDeclaration bytes nor
+// any source response are mutated: this is a rebuilt lifecycle view.
+func (l *Ledger) projectSettledNoProposalRounds(ctx context.Context) error{
+ reader,ok:=l.inputStore.(interface{
+  SettledNoProposalUnits(context.Context,[32]byte)(map[domain.ID]bool,error)
+ })
+ if !ok{return nil} // in-memory admission fixtures have no WORK publisher
+ settled,err:=reader.SettledNoProposalUnits(ctx,[32]byte(l.runID))
+ if err!=nil{return err}
+ for id,round:=range l.rounds{
+  if round.Lifecycle!=0{continue}
+  providers:=l.providers[idKey(id)]
+  complete:=len(round.Slots)>0
+  for _,slot:=range round.Slots{
+   state:=providers[slot]
+   if state==nil||state.Response==nil||!settled[state.Response.ID]{
+    complete=false;break
+   }
+  }
+  if complete{round.Lifecycle=2;l.rounds[id]=round}
+ }
+ return nil
+}
+
+ // SystemUnit is a read-only authenticated pending scheduling/trigger source.
+ // It does not grant mutation authority outside CommitWork.
+type SystemUnit struct {
+ Kind uint8 // 2 = ScheduledOccurrence, 3 = TriggerActivation
+ Source string
+ ID domain.ID
+ Digest domain.Digest
+ Eligibility domain.EligibilityCoordinate
+}
+type systemUnitReader interface {
+ SystemUnits(context.Context,[32]byte,domain.EligibilityCoordinate)([]SystemUnit,error)
+}
+func (l *Ledger) SystemUnits(ctx context.Context,upTo domain.EligibilityCoordinate)([]SystemUnit,error){
+ if l==nil||l.inputStore==nil{return nil,errors.New("system-unit authority unavailable")}
+ reader,ok:=l.inputStore.(systemUnitReader)
+ if !ok{return nil,nil} // memory stores have no schedule or trigger authority
+ return reader.SystemUnits(ctx,[32]byte(l.runID),upTo)
 }

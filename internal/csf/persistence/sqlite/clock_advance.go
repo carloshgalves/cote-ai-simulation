@@ -87,6 +87,33 @@ func validateTriggerActivation(runID [32]byte,id [32]byte,raw []byte)(domain.Eli
  var coord domain.EligibilityCoordinate
  decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{return coord,0,err}
  fields,ok:=decoded.([]any);if !ok||len(fields)!=12||!equalBytes(fields[0],id[:])||!equalBytes(fields[1],runID[:]){return coord,0,errors.New("invalid trigger activation identity/schema")}
+ definition,ok:=fields[3].([]byte)
+ if !ok||len(definition)!=32{return coord,0,errors.New("trigger activation definition ID malformed")}
+ if fields[2]!="trigger:"+hex.EncodeToString(definition){
+  return coord,0,errors.New("trigger activation source not bound to definition")
+ }
+ version,ok:=fields[4].(uint64);if !ok||version==0{return coord,0,errors.New("trigger version invalid")}
+ count,ok:=fields[7].(uint64);if !ok||count==0{return coord,0,errors.New("trigger activation count invalid")}
+ origin,ok:=fields[5].([]any);if !ok||len(origin)<2{return coord,0,errors.New("trigger activation origin missing")}
+ kind,ok:=origin[0].(uint64);if !ok{return coord,0,errors.New("trigger activation origin kind invalid")}
+ var revision uint64
+ switch kind{
+ case 0:
+  if len(origin)!=4{return coord,0,errors.New("cycle activation origin malformed")}
+  revision,ok=origin[2].(uint64);if !ok{return coord,0,errors.New("trigger activation revision missing")}
+  cycleID,valid:=origin[1].([]byte);if !valid||len(cycleID)!=32{return coord,0,errors.New("trigger activation cycle ref malformed")}
+  causes,valid:=origin[3].([]any);if !valid{return coord,0,errors.New("trigger activation cause list malformed")}
+  _=causes
+ case 1:
+  if len(origin)!=2{return coord,0,errors.New("genesis trigger activation origin malformed")}
+  ref,valid:=origin[1].([]any);if !valid||len(ref)!=2{return coord,0,errors.New("genesis trigger ref malformed")}
+  for _,v:=range ref{b,valid:=v.([]byte);if !valid||len(b)!=32{return coord,0,errors.New("genesis trigger reference malformed")}}
+ default:return coord,0,errors.New("unregistered activation origin kind")
+ }
+ derivedID,err:=registeredDigest("cote.csf.id.trigger-activation",
+  "cote.csf.schema.trigger-activation-id-preimage",
+  []any{runID[:],definition,version,revision,count})
+ if err!=nil||derivedID!=domain.Digest(id){return coord,0,errors.New("trigger activation ID does not match causal preimage")}
  pair,ok:=fields[6].([]any);if !ok||len(pair)!=2{return coord,0,errors.New("trigger activation eligibility missing")}
  instant,ok:=asSigned64(pair[0]);if !ok{return coord,0,errors.New("invalid trigger activation instant")}
  ordinal,ok:=pair[1].(uint64);if !ok||ordinal>uint64(^uint64(0)>>1){return coord,0,errors.New("invalid trigger activation ordinal")}
@@ -128,8 +155,22 @@ func equalBytes(v any,other []byte) bool {b,ok:=v.([]byte);return ok&&bytes.Equa
 func (s *Store) PendingClock(ctx context.Context, runID [32]byte) ([]clock.Pending,error) {
  return pendingClock(ctx,s.db,runID)
 }
-type clockQuery interface { QueryContext(context.Context,string,...any)(*sql.Rows,error) }
+type clockQuery interface {
+ QueryContext(context.Context,string,...any)(*sql.Rows,error)
+ QueryRowContext(context.Context,string,...any)*sql.Row
+}
 func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pending,error) {
+ // A source row is append-only: authoritative terminality comes from
+ // the verified CycleCommit/DecisionRecord projection, not SQL lifecycle
+ // updates that would contradict immutable canonical record digests.
+ settled,err:=settledNoProposalUnits(ctx,q,runID)
+ if err!=nil{return nil,err}
+ var clockBytes []byte
+ if err:=q.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",runID[:]).Scan(&clockBytes);err!=nil{return nil,err}
+ present,err:=clock.Decode(clockBytes);if err!=nil{return nil,err}
+ history,err:=historicalSystemUnits(ctx,q,runID,uint64(present.Revision));if err!=nil{return nil,err}
+ validSystem:=map[domain.ID]bool{}
+ for _,item:=range history{validSystem[item.ID]=true}
  // Read every row, including terminal rows: filtering lifecycle before
  // comparing its indexed projection with the canonical record hides corruption.
  selections:=[]struct{query string;activation bool}{
@@ -153,11 +194,19 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
    if int64(derived.NotBeforeInstant)!=instant||uint64(derived.NotBeforeCycleOrdinal)!=uint64(ordinal)||derivedLife!=uint64(life){
     rows.Close();return nil,errors.New("pending index columns disagree with canonical authority")
    }
-   if life==0{out=append(out,clock.Pending{ID:domain.ID(key),Eligibility:derived})}
+   if life==0&&!settled[domain.ID(key)]{
+    if !validSystem[domain.ID(key)]{rows.Close();return nil,errors.New("pending source has no committed causal birth")}
+    out=append(out,clock.Pending{ID:domain.ID(key),Eligibility:derived})
+   }
   }
   if err:=rows.Err();err!=nil{rows.Close();return nil,err}
   if err:=rows.Close();err!=nil{return nil,err}
  }
+ // Project only terminal, hash-verified NoProposal DecisionRecords backed
+ // by CycleCommit; a provisional disposition cannot consume a round.
+ type roundPending struct{pending clock.Pending;slots []any}
+ roundRows:=make([]roundPending,0)
+ responded:=map[domain.ID]map[string]domain.ID{}
  // RoundDeclarations and exogenous inputs share the input authority; they
  // participate in the exact same global minimum as schedule/activations.
  inputs,err:=q.QueryContext(ctx,"SELECT id,canonical FROM input_ledger ORDER BY rowid")
@@ -169,6 +218,22 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
   decoded,err:=codec.StrictDecodePayload(raw)
   if err!=nil{continue} // canonical enveloped receipt is not pending work
   fields,ok:=decoded.([]any);if !ok||len(key)!=32{continue}
+  // NoProposal is a slot response, not pending work of its own. The
+  // declared round remains pending until EVERY slot has a committed
+  // settlement. The original RoundDeclaration stays append-only.
+  if (len(fields)==11||len(fields)==19)&&equalBytes(fields[2],runID[:]){
+   roundAt,slotAt:=4,5 // NoProposal fields
+   if len(fields)==19{roundAt,slotAt=13,14} // ActionProposal fields
+   rb,isRoundRef:=fields[roundAt].([]byte)
+   slot,isSlot:=fields[slotAt].(string)
+   if isRoundRef&&len(rb)==32&&isSlot&&equalBytes(fields[0],key){
+    var round,unit domain.ID;copy(round[:],rb);copy(unit[:],key)
+    if responded[round]==nil{responded[round]=map[string]domain.ID{}}
+    if _,duplicate:=responded[round][slot];duplicate{return nil,errors.New("multiple persisted responses in one round slot")}
+    responded[round][slot]=unit
+    continue
+   }
+  }
   var index int
   switch len(fields) {
   case 13:
@@ -191,9 +256,23 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
   instant,ok:=asSigned64(coord[0]);if !ok{return nil,errors.New("invalid pending instant")}
   ordinal,ok:=coord[1].(uint64);if !ok{return nil,errors.New("invalid pending ordinal")}
   var id domain.ID;copy(id[:],key)
-  out=append(out,clock.Pending{ID:id,Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)}})
+  point:=clock.Pending{ID:id,Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)}}
+  if len(fields)==11{
+   slots,ok:=fields[4].([]any);if !ok||len(slots)==0{return nil,errors.New("round has no declared slots")}
+   roundRows=append(roundRows,roundPending{pending:point,slots:slots})
+  }else{out=append(out,point)}
  }
  if err:=inputs.Err();err!=nil{return nil,err}
+ if err:=inputs.Close();err!=nil{return nil,err}
+ for _,round:=range roundRows{
+  complete:=true
+  for _,rawSlot:=range round.slots{
+   slot,ok:=rawSlot.(string);if !ok{return nil,errors.New("round slot invalid")}
+   unit,exists:=responded[round.pending.ID][slot]
+   if !exists||!settled[unit]{complete=false;break}
+  }
+  if !complete{out=append(out,round.pending)}
+ }
  // REPEAT_WHILE_TRUE registers its next due instant durably in the
  // trigger runtime. A pending cadence participates in the minimum even
  // without an intervening world-domain event.
@@ -263,7 +342,7 @@ func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next cl
  if !equalBytes(journal[7],b.BaseStateHash[:])||!equalBytes(journal[9],b.ResultStateHash[:]){
   return errors.New("CycleCommit world hash mismatch")
  }
- for _,index:=range []int{11,16,18}{
+ for _,index:=range []int{11,16}{
   group,ok:=journal[index].([]any)
   if !ok||len(group)!=0{return errors.New("CLOCK_ADVANCE cannot settle work or perception tasks")}
  }
@@ -428,9 +507,11 @@ func verifyCommittedFence(ctx context.Context,q queryOne,runID,cycleID [32]byte,
   emptyDecision,err:=registeredDigest("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",[]any{})
   if err!=nil{return zero,err}
   if !equalBytes(journal[17],emptyDecision[:]){return zero,errors.New("CLOCK_ADVANCE decision digest differs from empty decision list")}
-  emptyTasks,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",[]any{})
+  taskIDs,ok:=journal[18].([]any)
+  if !ok{return zero,errors.New("CLOCK_ADVANCE perception task IDs malformed")}
+  taskDigest,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",taskIDs)
   if err!=nil{return zero,err}
-  if !equalBytes(journal[19],emptyTasks[:]){return zero,errors.New("CLOCK_ADVANCE perception digest differs from empty task list")}
+  if !equalBytes(journal[19],taskDigest[:]){return zero,errors.New("CLOCK_ADVANCE perception digest differs from authenticated task list")}
 
  proofs,ok:=fence[9].([]any);if !ok{return zero,errors.New("AdmissionFence proof shape invalid")}
  var previous string
@@ -563,8 +644,13 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  journalRaw,err:=codec.StrictDecodePayload(b.Journal.Canonical)
  if err!=nil{return err}
  journal,ok:=journalRaw.([]any);if !ok||len(journal)!=24{return errors.New("invalid canonical CycleCommit")}
- initialState,err:=s.initialTypedState(ctx,b.RunID);if err!=nil{return err}
- if err:=verifyAdvanceEnvelope(b,journal,state,next,initialState);err!=nil{return err}
+ currentTyped,currentHash,err:=s.LoadWorldState(ctx,b.ExpectedRevision)
+ if err!=nil{return err}
+ if !bytes.Equal(currentHash[:],b.BaseStateHash[:])||
+  !bytes.Equal(currentHash[:],b.ResultStateHash[:]){
+  return errors.New("CLOCK_ADVANCE cannot mutate current WorldState")
+ }
+ if err:=verifyAdvanceEnvelope(b,journal,state,next,currentTyped);err!=nil{return err}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return err}
  defer tx.Rollback()
  var current []byte
@@ -579,6 +665,13 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  derivedFence,err:=verifyCommittedFence(ctx,tx,b.RunID,b.CycleID,journal)
  if err!=nil{return err}
  if derivedFence!=b.FenceID{return errors.New("clock batch references a different admission fence")}
+ var genesisRaw []byte
+ if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",b.RunID[:]).Scan(&genesisRaw);err!=nil{return err}
+ genesisEnv,err:=codec.StrictDecodeEnvelope(genesisRaw);if err!=nil{return err}
+ genesisFields,ok:=genesisEnv.Value.([]any)
+ if !ok||len(genesisFields)!=18{return errors.New("CLOCK_ADVANCE Genesis policy reference malformed")}
+ taskBatch:=ports.WorkBatch{RunID:b.RunID,CycleID:b.CycleID,Events:b.Events,PerceptionTasks:b.PerceptionTasks}
+ if _,err:=verifyWorkPerception(taskBatch,journal,genesisFields);err!=nil{return err}
  var fence []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",b.FenceID[:]).Scan(&fence);err!=nil{return err}
  f,err:=codec.StrictDecodePayload(fence);if err!=nil{return err}
@@ -620,6 +713,9 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
   if err:=appendToTx(ctx,tx,"event_store",item);err!=nil{return err}
  }
  if err:=failClock(b.FailAfterStep,2);err!=nil{return err}
+ for _,task:=range b.PerceptionTasks{
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO causal_outbox(id,canonical) VALUES(?,?)",task.Identity[:],task.Canonical);err!=nil{return err}
+ }
  // An omitted trigger is just as unsafe as a forged runtime. Compare the
  // complete registered definition set and re-evaluate each predicate from
  // the database's immutable definition and previous runtime.
@@ -746,6 +842,13 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  changed,err:=result.RowsAffected();if err!=nil||changed!=1{return errors.New("clock CAS did not update exactly one state")}
  if err:=failClock(b.FailAfterStep,6);err!=nil{return err}
  if _,err:=tx.ExecContext(ctx,"INSERT INTO committed_cycles(run_id,cycle_id,commit_id) VALUES(?,?,?)",b.RunID[:],b.CycleID[:],b.Journal.Identity[:]);err!=nil{return err}
+ // The success terminal resets the same authoritative state which the
+ // AdmissionFence advanced to ATTEMPT_IN_FLIGHT. No transient mismatch can
+ // be visible to a resumed process.
+ ctl,err:=cycleControl(ctx,tx,b.RunID);if err!=nil{return err}
+ if ctl==nil||ctl[0]!=uint64(1)||!present(ctl[1],b.CycleID[:])||
+  !present(ctl[2],uint64(0)){return fmt.Errorf("CLOCK_ADVANCE control state not in flight: %#v",ctl)}
+ if err:=storeCycleControl(ctx,tx,b.RunID,[]any{uint64(0),noRef(),noRef(),noRef(),noRef(),noRef(),uint64(0)});err!=nil{return err}
  return tx.Commit()
 }
 

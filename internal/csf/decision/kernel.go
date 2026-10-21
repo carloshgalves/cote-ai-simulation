@@ -101,12 +101,30 @@ func policyRefs(b *policy.Bundle)(map[string][]any,error){
  if b==nil{return nil,errors.New("pinned bundle required")}
  roles,err:=b.RequiredPolicyRoles();if err!=nil{return nil,err}
  refs,err:=b.GenesisPolicyRefs();if err!=nil{return nil,err}
- if len(roles)!=len(refs){return nil,errors.New("genesis policy registry inconsistent")}
- result:=map[string][]any{}
- for i,k:=range roles{result[k]=refs[i]}
- for _,k:=range []string{"validators","conflict-resolvers","rng","idempotency"}{
-  if result[k]==nil{return nil,fmt.Errorf("missing pinned %s policy",k)}
+ bindings,ok:=b.Transitions["genesis_policy_bindings"].([]any)
+ if !ok||len(bindings)!=len(roles)||len(refs)!=len(roles){
+  return nil,errors.New("genesis policy role bindings inconsistent")
  }
+ result:=map[string][]any{}
+ declared:=map[string]bool{}
+ for _,item:=range bindings{
+  binding,ok:=item.(map[string]any)
+  if !ok{return nil,errors.New("invalid genesis policy binding")}
+  role,ok:=binding["role"].(string)
+  if !ok||declared[role]{return nil,errors.New("duplicate/invalid genesis role")}
+  declared[role]=true
+  ref,ok:=binding["ref"].([]any)
+  if !ok||len(ref)!=3{return nil,errors.New("genesis role ref malformed")}
+  name,ok:=ref[0].(string)
+  if !ok{return nil,errors.New("genesis policy ID malformed")}
+  if role=="perception"&&name=="perception-visible-first-v1"{name="perception-v1"}
+  for _,pinned:=range refs{
+   if len(pinned)==3&&pinned[0]==name{result[role]=pinned;break}
+  }
+  if result[role]==nil{return nil,fmt.Errorf("unbound genesis role: %s",role)}
+ }
+ for _,role:=range roles{if result[role]==nil{return nil,fmt.Errorf("missing pinned %s policy",role)}}
+ if len(result)!=len(roles){return nil,errors.New("genesis policy role set differs from declared roles")}
  return result,nil
 }
 func refsEqual(a,b any)bool{

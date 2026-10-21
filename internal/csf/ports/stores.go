@@ -85,6 +85,7 @@ type ClockAdvanceBatch struct {
  ResultStateHash [32]byte
  Journal CanonicalRecord
  Events []CanonicalRecord
+ PerceptionTasks []CanonicalRecord // PENDING task envelopes from Genesis-pinned event classification
  TriggerRuntime []TriggerStateChange
  Activations []CanonicalRecord
  RevisionCanonical []byte
@@ -92,6 +93,62 @@ type ClockAdvanceBatch struct {
  // must roll back all authorities and leave exactly the old prefix.
  FailAfterStep uint8
 }
+// TerminalAbortBatch and AttemptRetryBatch extend the existing SQLite
+// transaction boundary; they do not establish a second ledger writer.
+type TerminalAbortBatch struct {
+ RunID [32]byte
+ CycleID [32]byte
+ FenceID [32]byte
+ ExpectedClock []byte
+ Envelope CanonicalRecord
+ // Candidate subject roots, canonical and source-bound; committed together
+ // with the abort journal if a per-candidate INDETERMINATE is emitted.
+ CandidateEvidence []CanonicalRecord
+ FailAfterStep uint8
+}
+type AttemptRetryBatch struct {
+ RunID [32]byte
+ CycleID [32]byte
+ AbortID [32]byte
+ ExpectedClock []byte
+ Record CanonicalRecord
+ FailAfterStep uint8
+}
+// WorkBatch is an indivisible WORK publication in the same authoritative
+// SQLite transaction owner as ClockAdvanceBatch. The initial V1-5 slice only
+// accepts a closed, zero-event NoProposal batch. The adapter must fail closed
+// on resource-consuming or lifecycle-bearing variants until reducers exist.
+type WorkBatch struct {
+ // 0: NoProposal; 1: single resource; 2: two contenders;
+ // 3: authenticated system-only cohort; 4: NoProposal slots and system
+ // sources atomically combined in the same AdmissionFence/WorldRevision.
+ Mode uint8
+ SystemCandidate CanonicalRecord
+ // Remaining independent system-unit candidates in AdmissionFence order.
+ SystemExtraCandidates []CanonicalRecord
+ SystemSuccessors []CanonicalRecord
+ // Mode 2 publishes its complete pure candidate/conflict/RNG assessment
+ // evidence only after the same terminal SQLite CAS succeeds.
+ ContestProofs []CanonicalRecord
+ ResourceCandidate CanonicalRecord
+ ResultStateHash [32]byte
+ RunID [32]byte
+ CycleID [32]byte
+ FenceID [32]byte
+ ExpectedClock []byte
+ ResultClock []byte
+ ExpectedInputPrefix []CanonicalRecord
+ Journal CanonicalRecord
+ Decisions []CanonicalRecord
+ Events []CanonicalRecord // authenticated EventOrderKey order
+ PerceptionTasks []CanonicalRecord // canonical PENDING entries, never observer outputs
+ BaseStateHash [32]byte
+ RevisionCanonical []byte
+ FailAfterStep uint8
+}
 type ClockAdvanceStore interface {
+ CommitWork(context.Context, WorkBatch) error
  CommitClockAdvance(context.Context, ClockAdvanceBatch) error
+ CommitCycleAbort(context.Context, TerminalAbortBatch) error
+ AuthorizeAttemptRetry(context.Context, AttemptRetryBatch) error
 }

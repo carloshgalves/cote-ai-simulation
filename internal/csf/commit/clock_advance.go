@@ -33,6 +33,9 @@ type Store interface {
     PendingClock(context.Context,[32]byte)([]clock.Pending,error)
     LoadRegisteredTriggers(context.Context,[32]byte,*policy.Bundle)([]trigger.Registered,error)
     LoadGenesis(context.Context,[32]byte)([]byte,error)
+    // LoadWorldState reads the verified persistent revision, not the genesis
+    // fixture, for every WORK cycle after the first world transition.
+    LoadWorldState(context.Context,uint64)([]any,[32]byte,error)
 }
 
 type Outcome struct {
@@ -55,6 +58,9 @@ type Coordinator struct {
     beforeCommit func()
     // Same-package tests may submit damaged bytes to the durable adapter.
     tamperBatch func(*ports.ClockAdvanceBatch)
+    // Test-only tamper hook for WORK; production never injects arbitrary
+    // records into the terminal publication boundary.
+    tamperWorkBatch func(*ports.WorkBatch)
 }
 
 func New(store Store,bundle *policy.Bundle,policies admission.Policies)*Coordinator {
@@ -127,11 +133,11 @@ func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,run
     initial,err:=c.store.LoadGenesis(ctx,[32]byte(runID));if err!=nil{return result,err}
     g,err:=genesis.ValidateCanonical(initial,c.bundle);if err!=nil{return result,err}
     if g.RunID!=runID{return result,errors.New("clock run ID differs from persisted genesis")}
-    typed,ok:=g.Payload[16].([]any)
-    if !ok||len(typed)!=4{return result,errors.New("genesis initial state not a typed value")}
-    baseHash,err:=bytes32(typed[3]);if err!=nil{return result,err}
-    // This slice publishes only temporal change: synthetic body.advanced is
-    // NOT a physical reducer. World-state bytes/hash stay unchanged.
+    typed,baseHash,err:=c.store.LoadWorldState(ctx,uint64(state.Revision))
+    if err!=nil{return result,err}
+    // A clock advance is an identity WorldState reducer over the CURRENT
+    // committed revision, not over the genesis fixture. Resource and other
+    // valid prior mutations must survive all later temporal transitions.
     cycle:=admission.Cycle{
         ID:domain.ID(cycleID),Attempt:0,Instant:state.Instant,Ordinal:plan.OriginOrdinal,
         Plan:clockPlan,BaseRevision:state.Revision,BaseStateHash:domain.Digest(baseHash),
@@ -143,6 +149,7 @@ func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,run
         prepared,err:=c.buildBatch(ctx,runID,state,plan,f,typed)
         if err!=nil{return err}
         prepared.FailAfterStep=c.failAfterStep
+        if err:=c.prepareClockPerception(&prepared);err!=nil{return err}
         if c.beforeCommit!=nil {c.beforeCommit()}
         if c.tamperBatch!=nil {c.tamperBatch(&prepared)}
         applied=prepared

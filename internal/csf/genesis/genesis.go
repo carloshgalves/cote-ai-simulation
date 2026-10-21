@@ -12,6 +12,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 )
 
 const schemaID = "cote.csf.schema.genesis-manifest"
@@ -299,6 +300,11 @@ func schemaRefContains(value any, schema string, version uint32) bool {
 // initial world state. Extension schemas are not loaded by this ticket's
 // runtime, so an unknown schema cannot be treated as validated.
 func validateKnownPayloadShape(schema string, value any, bundle *policy.Bundle) error {
+	// The first executable inventory scenario has an explicit, versioned
+	// built-in state validator. Generic/unknown typed values remain forbidden.
+	if schema == reducer.StockSchemaID {
+		return reducer.ValidateStockPayload(value)
+	}
 	if schema != "cote.csf.schema.snapshot-pending-state" {
 		return fmt.Errorf("typed value schema %q has no loaded validator", schema)
 	}

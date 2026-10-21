@@ -1,0 +1,38 @@
+name: CSFRV1-5 Atomic Terminal Commit Checkpoint
+on:
+  push:
+    branches: [feat/csfrv1-5-atomic-terminal-commit]
+  pull_request:
+    paths:
+      - "internal/csf/commit/**"
+      - "internal/csf/ports/**"
+      - "internal/csf/persistence/sqlite/**"
+      - "docs/tickets/csf-runtime-v1/05-implementation-checkpoint.md"
+permissions:
+  contents: read
+jobs:
+  terminal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check diff whitespace
+        run: |
+          git fetch --no-tags --depth=1 origin main
+          git diff --check origin/main HEAD
+      - name: Focused SQLite terminal tests
+        run: go test -count=1 ./internal/csf/persistence/sqlite/... ./internal/csf/commit/...
+      - name: All Go tests
+        run: go test ./...
+      - name: Conformance Go
+        run: go run ./cmd/csf-harness --bundle docs/architecture/canonical-codec-v1-bundle --report /tmp/csf-go.json
+      - name: Conformance TypeScript
+        run: node --no-warnings --experimental-loader ./tools/csf-conformance-ts/loader.mjs tools/csf-conformance-ts/runner.ts docs/architecture/canonical-codec-v1-bundle /tmp/csf-ts.json
+      - name: Check identical receipts
+        run: cmp /tmp/csf-go.json /tmp/csf-ts.json

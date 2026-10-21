@@ -127,7 +127,6 @@ func (c *Coordinator) CommitSingleResource(ctx context.Context,ledger *inputledg
   ExpectedClock:beforeClock,ResultClock:afterClock,ExpectedInputPrefix:prefix,
   Journal:journal,Decisions:[]ports.CanonicalRecord{record},Events:output.Events,
   BaseStateHash:[32]byte(hash),RevisionCanonical:worldRevision,FailAfterStep:c.failAfterStep}
- if c.tamperWorkBatch!=nil{c.tamperWorkBatch(&batch)}
- if err:=c.store.CommitWork(ctx,batch);err!=nil{return empty,err}
- return journal,nil
+ if err:=c.commitPreparedWork(ctx,&batch);err!=nil{return empty,err}
+ return batch.Journal,nil
 }

@@ -18,11 +18,15 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
 )
 func twoResourceContestFixture(t *testing.T,reverse bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
  return twoResourceContestFixtureWithOccurrence(t,reverse,false)
 }
 func twoResourceContestFixtureWithOccurrence(t *testing.T,reverse,dueNow bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
+ return twoResourceContestFixtureWithSystem(t,reverse,dueNow,false)
+}
+func twoResourceContestFixtureWithSystem(t *testing.T,reverse,dueNow,activeTrigger bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
  t.Helper()
  ctx:=context.Background()
  bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
@@ -32,7 +36,13 @@ func twoResourceContestFixtureWithOccurrence(t *testing.T,reverse,dueNow bool)(*
  t.Cleanup(func(){store.Close()})
  if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
  if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
- if err:=store.BootstrapGenesisTriggers(ctx,g,bundle,nil);err!=nil{t.Fatal(err)}
+ definitions:=[]trigger.Definition(nil)
+ if activeTrigger{
+  var key domain.ID;key[0]=0xa9
+  definitions=append(definitions,trigger.Definition{ID:key,Version:1,Policy:trigger.RisingEdge,
+   FireOnInitialTrue:true,Dependencies:[]string{"clock"},PredicateThreshold:g.InitialInstant})
+ }
+ if err:=store.BootstrapGenesisTriggers(ctx,g,bundle,definitions);err!=nil{t.Fatal(err)}
  if dueNow{
   d:=identity.New(bundle)
   origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
@@ -302,4 +312,22 @@ func TestContestWithScheduledSourceRejectsForgedResourceAndLifecycleProofs(t *te
    t.Fatal("valid contested source batch cannot retry cleanly after rejected evidence",err)
   }
  })}
+}
+
+func TestTwoResourceContestWithSimultaneousTriggerAndSchedule(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=twoResourceContestFixtureWithSystem(t,false,true,true)
+ if len(fence.Fields[11].([]any))!=4{t.Fatal("both resource slots and two system units not admitted")}
+ if _,err:=c.CommitTwoResourceContest(ctx,ledger,cycle,fence);err!=nil{t.Fatal("contested resource plus schedule/trigger failed",err)}
+ _,_,_,_,_,run:=ledger.Snapshot()
+ now,err:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil||now.Revision!=1||now.NextLogicalSequence!=5{t.Fatal("contest and system lifecycle count mismatch",err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(run))
+ if err!=nil||len(pending)!=0{t.Fatal("contest/system left due unit pending",err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ report,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle)
+ reopened.Close()
+ if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=5{
+  t.Fatalf("resource conflict, trigger, schedule replay not deterministic: %+v %v",report,err)
+ }
 }

@@ -23,6 +23,9 @@ func singleResourceFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger
  return singleResourceFixtureWithFuture(t,false)
 }
 func singleResourceFixtureWithFuture(t *testing.T,future bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
+ return singleResourceFixtureWithOccurrence(t,future,false)
+}
+func singleResourceFixtureWithOccurrence(t *testing.T,future,dueNow bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
  t.Helper();ctx:=context.Background()
  bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
  g:=stockGenesis(t,bundle)
@@ -31,12 +34,13 @@ func singleResourceFixtureWithFuture(t *testing.T,future bool)(*Coordinator,*sql
  if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
  if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
  if err:=store.BootstrapGenesisTriggers(ctx,g,bundle,nil);err!=nil{t.Fatal(err)}
- if future{
+ if future||dueNow{
   d:=identity.New(bundle)
   origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
   id,_,err:=d.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
    []any{origin,uint64(0),uint64(0)});if err!=nil{t.Fatal(err)}
-  due:=g.InitialInstant+100
+  due:=g.InitialInstant
+  if future{due+=100}
   fields:=[]any{id[:],g.RunID[:],"schedule",int64(due),[]any{int64(due),uint64(0)},
    "test.occurrence",uint64(1),g.Payload[16],uint64(0),origin,uint64(0),uint64(0),
    []any{uint64(0)},[]any{uint64(0)}}
@@ -269,4 +273,32 @@ func TestUnreferencedPerceptionTaskCannotAppearAsAuthorizedCausalOutbox(t *testi
  if _,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
   t.Fatal("replay admitted an extra uncommitted task that could become an unauthorized observation")
  }
+}
+
+func TestResourceAndDueOccurrenceMustShareOneTerminalCommit(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=singleResourceFixtureWithOccurrence(t,false,true)
+ if len(fence.Fields[11].([]any))!=2{t.Fatal("resource/occurrence co-admission not frozen together")}
+ _,_,_,_,_,run:=ledger.Snapshot()
+ initial,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ for step:=uint8(1);step<=7;step++{
+  c.failAfterStep=step
+  if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err==nil{t.Fatalf("mixed resource WORK failpoint %d bypassed",step)}
+  state,err:=store.LoadClock(ctx,[32]byte(run))
+  if err!=nil||state!=initial{t.Fatalf("mixed resource crash half-mutated world at %d",step)}
+ }
+ c.failAfterStep=0
+ if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatalf("co-eligible resource+occurrence must settle atomically: %v",err)}
+ state,err:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil||state.Revision!=1||state.NextLogicalSequence!=3{t.Fatal("resource+system committed incomplete event sequence",err)}
+ world,_,err:=store.LoadWorldState(ctx,1)
+ if err!=nil{t.Fatal(err)}
+ stock,err:=reducer.DecodeStock(world)
+ if err!=nil||stock.Available!=0{t.Fatal("resource consumption discarded when scheduled source present",err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(run))
+ if err!=nil||len(pending)!=0{t.Fatal("due scheduled occurrence left pending after resource commit",err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ report,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle)
+ reopened.Close()
+ if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=3{t.Fatalf("resource+system replay failed: %+v %v",report,err)}
 }

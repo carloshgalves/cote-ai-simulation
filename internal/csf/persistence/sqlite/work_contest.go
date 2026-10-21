@@ -268,8 +268,18 @@ func verifyTwoResourceTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
   var contestant competitor
   if competitors[0].round==round{contestant=competitors[0]}else{contestant=competitors[1]}
   refs:=[]any{[]any{uint64(0),uint64(0),contestant.source[:],contestant.digest[:]}}
+  sequence:=prior.NextLogicalSequence+domain.LogicalSequence(i)+1
+  if b.Mode==6{
+   decoded,err:=codec.StrictDecodePayload(b.Events[i+1].Canonical)
+   if err!=nil{return err}
+   fields,ok:=decoded.([]any)
+   if !ok||len(fields)!=19{return errors.New("contest-system lifecycle Event malformed")}
+   value,ok:=fields[6].(uint64)
+   if !ok||value<=uint64(prior.NextLogicalSequence){return errors.New("contest-system lifecycle logical sequence invalid")}
+   sequence=domain.LogicalSequence(value)
+  }
   expected,err:=settlement.ConsumedRoundEvent(domain.ID(b.RunID),domain.ID(b.CycleID),round,
-   prior.Instant,prior.Revision,prior.NextLogicalSequence+domain.LogicalSequence(i)+1,refs)
+   prior.Instant,prior.Revision,sequence,refs)
   if err!=nil{return err}
   if b.Events[i+1].Identity!=expected.Identity||!bytes.Equal(b.Events[i+1].Canonical,expected.Canonical){
    return errors.New("loser or winner round lifecycle not consumed")

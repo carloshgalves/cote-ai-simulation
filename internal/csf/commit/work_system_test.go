@@ -16,6 +16,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
 )
 
@@ -237,4 +238,52 @@ func TestReplayAndAdmissionRejectUnpublishedOccurrenceSuccessor(t *testing.T){
  if _,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
   t.Fatal("replay accepted orphaned future occurrence not referenced by any terminal DecisionRecord")
  }
+}
+
+func TestSystemTerminalRejectsAdversarialBatchWithoutPartialSettlement(t *testing.T){
+ variants:=[]struct{
+  name string
+  mutate func(*ports.WorkBatch)
+ }{
+  {"candidate-contents",func(b *ports.WorkBatch){b.SystemCandidate.Canonical=[]byte{0x80}}},
+  {"candidate-identity",func(b *ports.WorkBatch){b.SystemCandidate.Identity[0]^=1}},
+  {"decision",func(b *ports.WorkBatch){b.Decisions[0].Canonical=[]byte{0x80}}},
+  {"lifecycle-event",func(b *ports.WorkBatch){b.Events[0].Canonical=[]byte{0x80}}},
+  {"result-state-hash",func(b *ports.WorkBatch){b.ResultStateHash[0]^=1}},
+  {"event-identity",func(b *ports.WorkBatch){b.Events[0].Identity[0]^=1}},
+ }
+ for _,kind:=range []string{"reject","defer","trigger"}{
+  for _,variant:=range variants{t.Run(kind+"/"+variant.name,func(t *testing.T){
+   ctx:=context.Background()
+   c,store,ledger,cycle,fence,_:=systemWorkFixture(t,kind)
+   _,_,_,_,_,run:=ledger.Snapshot()
+   prior,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+   c.tamperWorkBatch=variant.mutate
+   if _,err:=c.CommitSystemUnit(ctx,ledger,cycle,fence);err==nil{
+    t.Fatal("forged system source terminal crossed SQLite authority")
+   }
+   after,err:=store.LoadClock(ctx,[32]byte(run))
+   if err!=nil||after!=prior{t.Fatal("rejected system terminal advanced world",err)}
+   c.tamperWorkBatch=nil
+   if _,err:=c.CommitSystemUnit(ctx,ledger,cycle,fence);err!=nil{
+    t.Fatalf("clean same-fence retry failed: %v",err)
+   }
+  })}
+ }
+}
+func TestDeferredSuccessorProofCannotBeReplacedIndependently(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,_:=systemWorkFixture(t,"defer")
+ c.tamperWorkBatch=func(b *ports.WorkBatch){
+  if len(b.SystemSuccessors)!=1{t.Fatal("DEFER successor proof absent")}
+  b.SystemSuccessors[0].Identity[0]^=1
+ }
+ if _,err:=c.CommitSystemUnit(ctx,ledger,cycle,fence);err==nil{
+  t.Fatal("SQLite accepted forged successor identity")
+ }
+ _,_,_,_,_,run:=ledger.Snapshot()
+ current,err:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil||current.Revision!=0{t.Fatal("forged DEFER mutated clock",err)}
+ c.tamperWorkBatch=nil
+ if _,err:=c.CommitSystemUnit(ctx,ledger,cycle,fence);err!=nil{t.Fatal("valid DEFER recovery failed",err)}
 }

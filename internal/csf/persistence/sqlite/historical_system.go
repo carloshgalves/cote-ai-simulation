@@ -18,6 +18,7 @@ func (s *Store) historicalSystemUnits(ctx context.Context,run [32]byte,revision 
  return historicalSystemUnits(ctx,s.db,run,revision)
 }
 func historicalSystemUnits(ctx context.Context,q queryOne,run [32]byte,revision uint64)([]clock.Pending,error){
+ if err:=verifyGenesisScheduleSeal(ctx,q,run);err!=nil{return nil,err}
  type historical struct{id domain.ID;kind uint8;canonical []byte;eligibility domain.EligibilityCoordinate}
  all:=map[domain.ID]historical{}
  for _,entry:=range []struct{kind uint8;table string}{{2,"scheduled_occurrences"},{3,"trigger_activations"}}{

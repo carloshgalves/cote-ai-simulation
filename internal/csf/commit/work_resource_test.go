@@ -199,3 +199,55 @@ func TestResourceConsumedThenClockAdvancePreservesStockAndReplays(t *testing.T){
   t.Fatalf("resource WORK + CLOCK_ADVANCE replay failed: %+v %v",report,err)
  }
 }
+
+func TestPerceptionTaskOutboxIsAtomicPrivateAndReplayAuthenticated(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=singleResourceFixture(t)
+ _,_,_,_,_,run:=ledger.Snapshot()
+ before,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ for step:=uint8(1);step<=7;step++{
+  c.failAfterStep=step
+  if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err==nil{
+   t.Fatalf("perception task WORK failpoint %d bypassed",step)
+  }
+  var tasks int
+  if err:=db.QueryRowContext(ctx,"SELECT count(*) FROM causal_outbox").Scan(&tasks);err!=nil{t.Fatal(err)}
+  after,err:=store.LoadClock(ctx,[32]byte(run))
+  if err!=nil||after!=before||tasks!=0{
+   t.Fatalf("failpoint %d leaked task or advanced clock: %v %+v tasks=%d",step,err,after,tasks)
+  }
+ }
+ c.failAfterStep=0
+ commit,err:=c.CommitSingleResource(ctx,ledger,cycle,fence)
+ if err!=nil{t.Fatal(err)}
+ decoded,err:=codec.StrictDecodePayload(commit.Canonical);if err!=nil{t.Fatal(err)}
+ fields:=decoded.([]any)
+ ids:=fields[18].([]any)
+ if len(ids)!=2{t.Fatalf("registered visible-first V1 events require 2 pending tasks, got %d",len(ids))}
+ for _,item:=range ids{
+  id,ok:=item.([]byte);if !ok||len(id)!=32{t.Fatal("task identity malformed")}
+  var raw []byte
+  if err:=db.QueryRowContext(ctx,"SELECT canonical FROM causal_outbox WHERE id=?",id).Scan(&raw);err!=nil{t.Fatal(err)}
+  task,err:=codec.StrictDecodePayload(raw);if err!=nil{t.Fatal(err)}
+  body,ok:=task.([]any)
+  if !ok||len(body)!=10||body[9]!=uint64(0)||body[4]!=uint64(0)||body[5]!=uint64(1){
+   t.Fatal("outbox projected an unregistered/non-PENDING task")
+  }
+  // Tasks contain only event/revision/policies. They must not contain an
+  // observation, allow-list, KnowledgeInput, or source response payload.
+  if len(raw)>1200{t.Fatal("PENDING task appears to carry unauthorized context")}
+ }
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ if _,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle);err!=nil{
+  reopened.Close();t.Fatal("complete causal outbox failed replay",err)
+ }
+ reopened.Close()
+ if _,err:=db.ExecContext(ctx,"DELETE FROM causal_outbox WHERE id=?",ids[0].([]byte));err!=nil{t.Fatal(err)}
+ reopened,err=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer reopened.Close()
+ if _,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
+  t.Fatal("replay accepted committed Event without its Genesis-pinned PerceptionTask")
+ }
+}

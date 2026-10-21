@@ -15,6 +15,7 @@ import (
 type ActorInbox struct{
  store *Store
  run [32]byte
+ throughRevision uint64
  actor [2]string
 }
 
@@ -40,6 +41,8 @@ func (s *Store) BindActorInbox(ctx context.Context,dispatchID [32]byte,actor [2]
   "cote.csf.schema.dispatch-id-preimage",[]any{f[1],f[2],f[3],f[4],f[5]})
  if err!=nil||want!=dispatchID{return nil,errors.New("inbox dispatch is not an authenticated causal ID")}
  run,runOK:=idField(f[1]);round,roundOK:=idField(f[3])
+ through,revisionOK:=f[8].(uint64)
+ if !revisionOK{return nil,errors.New("inbox dispatch base revision malformed")}
  if !runOK||!roundOK{return nil,errors.New("inbox dispatch run/round invalid")}
  var roundRaw,seal []byte
  if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",round[:]).Scan(&roundRaw);err!=nil{
@@ -55,7 +58,7 @@ func (s *Store) BindActorInbox(ctx context.Context,dispatchID [32]byte,actor [2]
  if !ok||len(roundFields)!=11||!sameCanonical(roundFields[3],[]any{actor[0],actor[1]}){
   return nil,errors.New("inbox round owner differs from actor")
  }
- return &ActorInbox{store:s,run:run,actor:actor},nil
+ return &ActorInbox{store:s,run:run,throughRevision:through,actor:actor},nil
 }
 
 // The actor parameter remains for the context-builder interface, but cannot
@@ -65,5 +68,5 @@ func (i *ActorInbox) ReadAddressedEvidence(ctx context.Context,actor [2]string)(
  if i==nil||i.store==nil||actor!=i.actor{
   return nil,nil,errors.New("recipient capability denies cross-actor evidence")
  }
- return i.store.readAddressedEvidence(ctx,i.run,i.actor)
+ return i.store.readAddressedEvidence(ctx,i.run,i.actor,i.throughRevision)
 }

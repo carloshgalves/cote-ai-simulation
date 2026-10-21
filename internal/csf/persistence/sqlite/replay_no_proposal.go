@@ -12,10 +12,10 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 )
 
-// replayNoProposalCommit is the zero-event WORK fold. Every decision and its
-// source/fence link are independently checked by settledNoProposalUnits. The
-// fold checks revision, ordinal, world-state transition and journal authority
-// instead of interpreting an eventless CycleCommit as CLOCK_ADVANCE.
+// replayNoProposalCommit folds any registered terminal WORK variant.
+// Every decision, system lifecycle and PerceptionTask is independently
+// checked against its source/fence and EventStore roots by the settlement and
+// outbox validators before trusting the resulting WorldRevision.
 func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitID [32]byte,
  journal []any,prior clock.State)(clock.State,error){
  if len(journal)!=24||prior.Revision==math.MaxUint64{return clock.State{},errors.New("invalid WORK journal/revision")}

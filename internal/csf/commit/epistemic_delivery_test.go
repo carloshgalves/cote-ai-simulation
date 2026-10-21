@@ -10,6 +10,10 @@ import (
  _ "modernc.org/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/contextboundary"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/perception"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
@@ -89,7 +93,7 @@ func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){
  if err:=store.CheckPerceptionBarrier(ctx,[32]byte(run),1);err!=nil{
   t.Fatal("full addressed/empty task barrier did not release after completion",err)
  }
- actorInbox:=resourceActorInbox(t,ctx,store,path)
+ actorInbox:=resourceActorInbox(t,ctx,store,path,ledger,c.bundle)
  obs,inputs,err:=actorInbox.ReadAddressedEvidence(ctx,[2]string{"school","a"})
  if err!=nil||len(obs)!=1||len(inputs)!=1{t.Fatal("A must receive exactly one observation/input",err,len(obs),len(inputs))}
  if _,_,err:=actorInbox.ReadAddressedEvidence(ctx,[2]string{"school","b"});err==nil{
@@ -110,7 +114,7 @@ func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){
  if err!=nil||report.ReplayedCommits!=1||report.ReconstructedClock.Revision!=1{
   t.Fatalf("addressed/secret task completion failed causal replay: %+v %v",report,err)
  }
- reopenedInbox:=resourceActorInbox(t,ctx,reopened,path)
+ reopenedInbox:=resourceActorInbox(t,ctx,reopened,path,ledger,c.bundle)
  a2,i2,err:=reopenedInbox.ReadAddressedEvidence(ctx,[2]string{"school","a"})
  if err!=nil||len(a2)!=1||len(i2)!=1||!bytes.Equal(a2[0].Canonical,obs[0].Canonical){
   t.Fatal("reopen did not preserve addressed bytes",err)
@@ -195,6 +199,7 @@ func TestCSFRV16TamperedAddressedEvidenceFailsClosed(t *testing.T){
  defer db.Close()
  task:=findTerminalRoundTask(t,ctx,db)
  if _,err:=store.DeliverRoundPerception(ctx,task,c.bundle);err!=nil{t.Fatal(err)}
+ actorInbox:=resourceActorInbox(t,ctx,store,path,ledger,c.bundle)
  var obsID,raw []byte
  if err:=db.QueryRowContext(ctx,"SELECT record_id,canonical FROM evidence_ledger "+
  "JOIN evidence_routes ON evidence_routes.record_id=evidence_ledger.id "+
@@ -202,7 +207,6 @@ func TestCSFRV16TamperedAddressedEvidenceFailsClosed(t *testing.T){
  modified:=bytes.Clone(raw)
  modified[len(modified)-1]^=1
  if _,err:=db.ExecContext(ctx,"UPDATE evidence_ledger SET canonical=? WHERE id=?",modified,obsID);err!=nil{t.Fatal(err)}
- actorInbox:=resourceActorInbox(t,ctx,store,path)
  if _,_,err:=actorInbox.ReadAddressedEvidence(ctx,[2]string{"school","a"});err==nil{
   t.Fatal("tampered Observation passed the holder-only read seal")
  }
@@ -215,13 +219,19 @@ func TestCSFRV16TamperedAddressedEvidenceFailsClosed(t *testing.T){
 }
 
 
-func resourceActorInbox(t *testing.T,ctx context.Context,store *sqlite.Store,path string)*sqlite.ActorInbox{
+func resourceActorInbox(t *testing.T,ctx context.Context,store *sqlite.Store,path string,
+ ledger *inputledger.Ledger,bundle *policy.Bundle)*sqlite.ActorInbox{
  t.Helper()
- db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
- defer db.Close()
- rows,err:=db.QueryContext(ctx,"SELECT id,canonical FROM input_ledger")
+ _,_,_,_,_,run:=ledger.Snapshot()
+ clock,err:=store.LoadClock(ctx,[32]byte(run))
  if err!=nil{t.Fatal(err)}
- defer rows.Close()
+ // The first dispatch occurred at base revision zero. It is causally
+ // impossible for that request to see the round notice committed in rev 1.
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ rows,err:=db.QueryContext(ctx,"SELECT id,canonical FROM input_ledger")
+ if err!=nil{db.Close();t.Fatal(err)}
+ var matched [32]byte
+ var old [32]byte
  for rows.Next(){
   var id,raw []byte
   if err:=rows.Scan(&id,&raw);err!=nil{t.Fatal(err)}
@@ -230,19 +240,59 @@ func resourceActorInbox(t *testing.T,ctx context.Context,store *sqlite.Store,pat
   if !ok||len(fields)!=11||fields[4]!="act"{continue}
   actor,ok:=fields[6].([]any)
   if !ok||len(actor)!=2||actor[0]!="school"||actor[1]!="a"{continue}
-  var dispatch [32]byte;copy(dispatch[:],id)
-  inbox,err:=store.BindActorInbox(ctx,dispatch,[2]string{"school","a"})
-  if err!=nil{t.Fatal(err)}
-  if _,err:=store.BindActorInbox(ctx,dispatch,[2]string{"school","b"});err==nil{
-   t.Fatal("B can mint a capability with A's dispatch")
-  }
-  return inbox
+  revision,ok:=fields[8].(uint64)
+  if !ok{continue}
+  if revision==0{copy(old[:],id)}
+  if revision==uint64(clock.Revision){copy(matched[:],id)}
  }
  if err:=rows.Err();err!=nil{t.Fatal(err)}
- t.Fatal("cannot find A's authenticated dispatch for inbox binding")
- return nil
+ rows.Close();db.Close()
+ if old!=([32]byte{}){
+  stale,err:=store.BindActorInbox(ctx,old,[2]string{"school","a"})
+  if err!=nil{t.Fatal(err)}
+  oldObs,oldInputs,err:=stale.ReadAddressedEvidence(ctx,[2]string{"school","a"})
+  if err!=nil||len(oldObs)!=0||len(oldInputs)!=0{
+   t.Fatal("stale revision-zero dispatch accessed future addressed evidence",err,len(oldObs),len(oldInputs))
+  }
+ }
+ if matched==([32]byte{}){
+  root,err:=store.LoadGenesis(ctx,[32]byte(run))
+  if err!=nil{t.Fatal(err)}
+  manifest,err:=genesis.ValidateCanonical(root,bundle)
+  if err!=nil{t.Fatal(err)}
+  nextOrdinal:=uint64(clock.LastOrdinal+1)
+  coord:=domain.EligibilityCoordinate{NotBeforeInstant:clock.Instant,
+   NotBeforeCycleOrdinal:nextOrdinal}
+  origin:=[]any{uint64(2),[]any{manifest.ID[:],manifest.Digest[:]}}
+  nextRound,err:=ledger.DeclareRound(ctx,"schedule",[2]string{"school","a"},
+   []string{"act"},coord,origin,0,1,0,[]any{uint64(0)})
+  if err!=nil{t.Fatal("next round declaration failed:",err)}
+  deriver:=identity.New(bundle)
+  cycleID,_,err:=deriver.Sum("cote.csf.id.cycle",
+   "cote.csf.schema.cycle-id-preimage",1,
+   []any{run[:],[]any{int64(clock.Instant),nextOrdinal}})
+  if err!=nil{t.Fatal(err)}
+  dispatchID,_,err:=deriver.Sum("cote.csf.id.dispatch",
+   "cote.csf.schema.dispatch-id-preimage",1,
+   []any{run[:],cycleID[:],nextRound.ID[:],"act",uint64(0)})
+  if err!=nil{t.Fatal(err)}
+  dispatch:=inputledger.Dispatch{ID:domain.ID(dispatchID),RunID:run,
+   CycleID:domain.ID(cycleID),RoundID:nextRound.ID,SlotID:"act",
+   Actor:nextRound.Actor,Eligibility:coord,BaseRevision:clock.Revision,
+   EffectiveAt:clock.Instant}
+  if err:=ledger.RegisterDispatch(ctx,dispatch,inputledger.CycleBinding{
+   ID:domain.ID(cycleID),BaseRevision:clock.Revision,Instant:clock.Instant});err!=nil{
+   t.Fatal("future authorized dispatch failed:",err)
+  }
+  matched=[32]byte(dispatchID)
+ }
+ inbox,err:=store.BindActorInbox(ctx,matched,[2]string{"school","a"})
+ if err!=nil{t.Fatal(err)}
+ if _,err:=store.BindActorInbox(ctx,matched,[2]string{"school","b"});err==nil{
+  t.Fatal("B can mint a capability using A's dispatch")
+ }
+ return inbox
 }
-
 
 func TestCSFRV16ReplayRejectsIncompleteOrExtraDelivery(t *testing.T){
  for _,tc:=range []struct{name string; mutate func(*testing.T,*sql.DB,perception.RoundProjection)}{
@@ -282,9 +332,12 @@ func TestCSFRV16ReplayRejectsIncompleteOrExtraDelivery(t *testing.T){
    defer db.Close()
    task:=findTerminalRoundTask(t,ctx,db)
    p,err:=store.DeliverRoundPerception(ctx,task,c.bundle);if err!=nil{t.Fatal(err)}
+   var inbox *sqlite.ActorInbox
+   if tc.name!="extra-unindexed-observation"{
+    inbox=resourceActorInbox(t,ctx,store,path,ledger,c.bundle)
+   }
    tc.mutate(t,db,p)
    if tc.name!="extra-unindexed-observation"{
-    inbox:=resourceActorInbox(t,ctx,store,path)
     if _,_,err:=inbox.ReadAddressedEvidence(ctx,[2]string{"school","a"});err==nil{
      t.Fatal("actor inbox exposed incomplete or misaddressed evidence")
     }
@@ -308,7 +361,7 @@ func TestCSFRV16ActorInboxCannotReadAnotherRunSameActor(t *testing.T){
  defer db.Close()
  task:=findTerminalRoundTask(t,ctx,db)
  p,err:=store.DeliverRoundPerception(ctx,task,c.bundle);if err!=nil{t.Fatal(err)}
- inbox:=resourceActorInbox(t,ctx,store,path)
+ inbox:=resourceActorInbox(t,ctx,store,path,ledger,c.bundle)
  var foreignRun,foreignTask [32]byte
  foreignRun[0],foreignTask[0]=0xfa,0xfb
  decoded,err:=codec.StrictDecodePayload(p.Observation.Canonical);if err!=nil{t.Fatal(err)}

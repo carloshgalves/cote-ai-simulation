@@ -153,7 +153,6 @@ func (c *Coordinator) CommitSystemUnit(ctx context.Context,ledger *inputledger.L
   Events:[]ports.CanonicalRecord{event},Decisions:[]ports.CanonicalRecord{decisionRecord},
   BaseStateHash:[32]byte(hash),ResultStateHash:[32]byte(hash),RevisionCanonical:revision,
   FailAfterStep:c.failAfterStep}
- if c.tamperWorkBatch!=nil{c.tamperWorkBatch(&batch)}
- if err:=c.store.CommitWork(ctx,batch);err!=nil{return empty,err}
+ if err:=c.commitPreparedWork(ctx,&batch);err!=nil{return empty,err}
  return batch.Journal,nil
 }

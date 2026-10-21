@@ -5,10 +5,12 @@
 **Contrato:** [05-commit-atomico-e-retry.md](05-commit-atomico-e-retry.md), ADR-0008 e ADR-0011.
 
 > **STATUS: PARCIAL — PR NÃO APROVADA PARA MERGE.** Os caminhos
-> `NoProposal`, consumo único de estoque e disputa determinística entre dois
-> agentes estão implementados com publicação atômica e replay. O ticket
-> completo ainda exige lifecycle de occurrence/trigger, `REJECT/DEFER`,
-> política de cascata e cobertura integral dos critérios.
+> `NoProposal`, consumo do recurso, disputa entre agentes,
+> `ScheduledOccurrence(REJECT/DEFER)`, `TriggerActivation(COMMIT)` e
+> `CASCADE_LIMIT` estão implementados e exercitados com SQLite/replay.
+> Coortes simultâneas de fontes de sistema funcionam. Restam coortes
+> mistas slot + sistema, eventos observáveis/perception tasks quando
+> aplicáveis e o aceite integral da CSFRV1-5.
 
 ## Autoridade de execução entregue
 
@@ -72,30 +74,61 @@
 - Replay adversarial: remover `AffordanceAssessment` persistido
   invalida a prova do vencedor, sem tolerar auditoria parcial.
 
-**Último checkpoint conhecido verde anterior ao hardening atual:**
+## Evidência de agenda, triggers e limite de cascata
 
-- [CSFRV1-5 — 39493082054](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39493082054).
-- [Conformance canônica — 39493081590](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39493081590).
-- [CSFRV1-4 regressão — 39493081444](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39493081444).
+- A lista de ocorrências iniciais é selada no primeiro fence, inclusive
+  unidades que só vencerão no futuro. Novos sucessores têm sua identidade
+  e seu nascimento reconstituídos a partir do evento e da decisão DEFER
+  efetivamente persistidos. Um ID/hash autêntico, sem causalidade, falha.
+- `ScheduledOccurrence(test.occurrence)` suporta `REJECT` não recorrente
+  e `DEFER` de intervalo fixo com sucessor de identidade distinta e
+  elegibilidade futura. `TriggerActivation` é validada contra a definição
+  pinada e encerrada por `DecisionRecord` e `SOURCE_LIFECYCLE`.
+- Coortes de duas ocorrências e de ocorrência + trigger publicam uma
+  partição completa de decisões/eventos numa transação; rollback ocorre
+  em cada um dos sete failpoints e replay valida a autoridade.
+- A regra `CascadePolicyVersionV1` permite no máximo 64 WORKs no mesmo
+  instante; a 65ª tentativa emite `CycleAbortRecord(CASCADE_LIMIT)`,
+  preserva a fonte ainda pendente e não altera estado. Commit e replay
+  exigem o pin exato `cycle-coordinate-v1@1` do Genesis, com teste
+  adversarial de ID, versão e hash.
+- Regressões: adulteração de candidato, decisão, evento, sucessor e
+  WorldState em cada caminho terminal; remoção de affordance persistida;
+  tentativa de inserção retroativa de fonte de genesis ou sucessor sem
+  decisão `DEFER`; replay após reabertura de SQLite.
 
-## Critérios ainda abertos (bloqueadores reais para CSFRV1-5)
+**Último checkpoint de código totalmente verde antes deste registro:**
 
-- [ ] Processar `ScheduledOccurrence` como unidade admitida,
-  `REJECT/DEFER` com encerramento irrevogável da identidade antiga e
-  sucessor novo, recurrence e provenance explícita.
-- [ ] Processar `TriggerActivation(PENDING)` com handler/candidato
-  autenticado, DecisionRecord, SOURCE_LIFECYCLE e transição para
-  `CONSUMED` no mesmo commit — jamais por caminho paralelo.
-- [ ] Integrar as fontes acima à partição completa de `AdmissionFence`
-  e ao fold de replay, mantendo validações e testes de rollback em cada
-  barreira de publication/settlement.
-- [ ] Limite **versionado** de cascata no mesmo instante, falha fechada
-  como `CycleAbortRecord(CASCADE_LIMIT)`, replay sem truncamento.
-- [ ] Evidência end-to-end da publicação total das seis partes exigidas
-  pela spec, inclusive tarefas perceptivas **quando realmente aplicáveis**
-  (as atuais ações secretas não geram tasks).
-- [ ] Auditoria/review independente e ciclos de correção até não
-  restar finding bloqueador; só então avaliar merge.
+- [CSFRV1-5 — 39529820349](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39529820349).
+- [Conformance Go/TypeScript — 39529820385](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39529820385).
+- [Regressão do kernel — 39529820419](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39529820419).
+
+## Revisão adversarial e critérios abertos
+
+- [x] Ocorrências agendadas: `REJECT/DEFER`, sucessor, lifecycle e
+  replay sem mutação parcial.
+- [x] Ativações de trigger: handler pinado, consumo terminal e replay.
+- [x] Limite de cascata versionado, `CASCADE_LIMIT` e replay fail-closed.
+- [x] Admissão de múltiplas fontes **de sistema** na mesma coordenada,
+  com bijeção de eventos/decisões e failpoints.
+- [ ] **Finding 1 — High:** coortes mistas de respostas de slots +
+  fontes de sistema no mesmo WORK ainda falham fechado; falta um
+  combinador autenticado que não deixe nenhuma fonte órfã.
+- [x] **Finding 2 — Medium:** o limiar V1 agora exige pin canônico
+  exato do `cycle-coordinate-v1`; comentário original RESOLVED.
+- [ ] **Finding 3 — High:** emissão e persistência atômica de
+  `PerceptionTask` para evento legitimamente observável e validação
+  de replay/outbox com tarefas não vazias. Hoje todos os eventos dos
+  cenários integrados são secretos e autenticam lista vazia.
+- [ ] Commit vazio canônico, `DEDUPLICATED` e demais variantes de
+  settlement e matriz completa de fault injection, se exigidos pelo
+  ticket de aceite.
+- [ ] Uma última revisão separada depois de fechar os bloqueios
+  anteriores; manter Draft até isso acontecer.
+
+**Comentários de revisão:** [Finding 1](https://github.com/carloshgalves/cote-ai-simulation/pull/21#issuecomment-6305195593),
+[Finding 2](https://github.com/carloshgalves/cote-ai-simulation/pull/21#issuecomment-6305215141)
+e [Finding 3](https://github.com/carloshgalves/cote-ai-simulation/pull/21#issuecomment-6305215875).
 
 **Atenção:** um sucesso na variante estreita do último recurso não equivale
 a um handler genérico para todas as fontes e dispositions de WORK. Esta PR

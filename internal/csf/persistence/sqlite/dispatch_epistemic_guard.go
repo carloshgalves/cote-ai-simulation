@@ -69,6 +69,7 @@ func verifyPriorPerceptionEmpty(ctx context.Context,tx *sql.Tx,run [32]byte,thro
  type expectedTask struct{id [32]byte;revision uint64}
  tasks:=make([]expectedTask,0)
  seen:=map[[32]byte]bool{}
+ coveredRevisions:=map[uint64]bool{}
  for rows.Next(){
   var raw []byte
   if err:=rows.Scan(&raw);err!=nil{rows.Close();return err}
@@ -76,8 +77,14 @@ func verifyPriorPerceptionEmpty(ctx context.Context,tx *sql.Tx,run [32]byte,thro
   f,ok:=decoded.([]any)
   if !ok||len(f)!=24||!equalBytes(f[0],run[:]){rows.Close();return errors.New("barrier invalid CycleCommit")}
   revision,ok:=f[8].(uint64)
-  if !ok{rows.Close();return errors.New("barrier invalid revision")}
+  if !ok||revision==0{rows.Close();return errors.New("barrier invalid revision")}
   if revision>through{continue}
+  base,validBase:=f[6].(uint64)
+  if !validBase||base!=revision-1||coveredRevisions[revision]{
+   rows.Close()
+   return errors.New("barrier duplicate or discontinuous CycleCommit revision")
+  }
+  coveredRevisions[revision]=true
   listed,ok:=f[18].([]any)
   if !ok{rows.Close();return errors.New("barrier task roster missing")}
   for _,v:=range listed{
@@ -88,6 +95,12 @@ func verifyPriorPerceptionEmpty(ctx context.Context,tx *sql.Tx,run [32]byte,thro
  }
  if err:=rows.Err();err!=nil{rows.Close();return err}
  if err:=rows.Close();err!=nil{return err}
+ // Exactly the revisions 1..through must be present. Every key is nonzero
+ // and <= through, unique by construction, so matching cardinality rules
+ // out missing intermediate or terminal commits without an unbounded loop.
+ if uint64(len(coveredRevisions))!=through{
+  return errors.New("dispatch held: committed causal revision missing")
+ }
  for _,task:=range tasks{
   var raw []byte
   if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM causal_outbox WHERE id=?",task.id[:]).Scan(&raw);err!=nil{

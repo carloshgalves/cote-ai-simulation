@@ -169,10 +169,10 @@ func containsRoot(value any, id [32]byte) bool {
     return false
 }
 
-// CheckEmptyPerceptionBarrier is a fail-closed audit gate for the implemented
-// zero-observer slice. It is NOT the final recipient-specific dispatch barrier.
-// It checks every committed task at or before the requested revision. An
-// unknown or positive-output completion cannot silently satisfy this gate.
+// CheckEmptyPerceptionBarrier is a fail-closed, read-only audit gate for
+// the implemented zero-observer slice. It is NOT the final recipient-specific
+// dispatch barrier. It reconciles committed task references to the actual
+// outbox first: a deleted task must NEVER make the barrier look empty.
 func (s *Store) CheckEmptyPerceptionBarrier(
     ctx context.Context, run [32]byte, throughRevision uint64, bundle *policy.Bundle,
 ) error {
@@ -181,9 +181,48 @@ func (s *Store) CheckEmptyPerceptionBarrier(
     if err != nil { return err }
     defer tx.Rollback()
 
+    var genesisID []byte
+    if err := tx.QueryRowContext(ctx, "SELECT genesis_id FROM genesis_records WHERE run_id=?", run[:]).Scan(&genesisID); err != nil {
+        return fmt.Errorf("epistemic barrier run has no genesis: %w", err)
+    }
+    if len(genesisID) != 32 { return errors.New("epistemic barrier genesis reference malformed") }
+
+    journalRows, err := tx.QueryContext(ctx,
+        "SELECT d.canonical FROM committed_cycles c JOIN decision_ledger d ON d.id=c.commit_id WHERE c.run_id=?",
+        run[:])
+    if err != nil { return err }
+    expected := map[[32]byte]struct{}{}
+    for journalRows.Next() {
+        var raw []byte
+        if err := journalRows.Scan(&raw); err != nil { journalRows.Close(); return err }
+        payload, err := codec.StrictDecodePayload(raw)
+        if err != nil { journalRows.Close(); return err }
+        fields, ok := payload.([]any)
+        if !ok || len(fields) != 24 || !equalBytes(fields[0],run[:]) {
+            journalRows.Close()
+            return errors.New("epistemic barrier cannot authenticate committed CycleCommit")
+        }
+        revision, ok := fields[8].(uint64)
+        if !ok { journalRows.Close(); return errors.New("CycleCommit has invalid resulting revision") }
+        if revision > throughRevision { continue }
+        ids, ok := fields[18].([]any)
+        if !ok { journalRows.Close(); return errors.New("CycleCommit lacks perception task roster") }
+        for _, item := range ids {
+            id, ok := idField(item)
+            if !ok { journalRows.Close(); return errors.New("CycleCommit task id malformed") }
+            if _, duplicate := expected[id]; duplicate {
+                journalRows.Close()
+                return errors.New("same perception task claimed by multiple commits")
+            }
+            expected[id] = struct{}{}
+        }
+    }
+    if err := journalRows.Err(); err != nil { journalRows.Close(); return err }
+    if err := journalRows.Close(); err != nil { return err }
+
     rows, err := tx.QueryContext(ctx, "SELECT id,canonical FROM causal_outbox ORDER BY id")
     if err != nil { return err }
-    var tasks []ports.CanonicalRecord
+    seen := map[[32]byte]ports.CanonicalRecord{}
     for rows.Next() {
         var id, raw []byte
         if err := rows.Scan(&id, &raw); err != nil { rows.Close(); return err }
@@ -191,27 +230,33 @@ func (s *Store) CheckEmptyPerceptionBarrier(
         if err != nil { rows.Close(); return err }
         fields, ok := record.([]any)
         if !ok { rows.Close(); return errors.New("invalid outbox record shape") }
-        if len(fields) != 10 { continue } // completion or later outbox record
+        if len(fields) != 10 { continue } // other outbox record, e.g. completion
         key, keyOK := idField(id)
         if !keyOK || !equalBytes(fields[0], id) { rows.Close(); return errors.New("corrupt outbox task key") }
         if !equalBytes(fields[1], run[:]) { continue }
         revision, ok := fields[5].(uint64)
         if !ok { rows.Close(); return errors.New("corrupt outbox task revision") }
-        if revision <= throughRevision {
-            tasks = append(tasks, ports.CanonicalRecord{Identity:key, Canonical:raw})
+        if revision > throughRevision { continue }
+        if _, found := expected[key]; !found {
+            rows.Close()
+            return errors.New("outbox task was not referenced by a committed CycleCommit")
         }
+        seen[key] = ports.CanonicalRecord{Identity:key, Canonical:raw}
     }
     if err := rows.Err(); err != nil { rows.Close(); return err }
     if err := rows.Close(); err != nil { return err }
-    for _, task := range tasks {
-        expected, err := perception.EmptyCompletion(bundle, task)
+    if len(seen) != len(expected) {
+        return errors.New("epistemic barrier: committed PerceptionTask missing from outbox")
+    }
+    for _, task := range seen {
+        completion, err := perception.EmptyCompletion(bundle, task)
         if err != nil { return err }
         var persisted []byte
         err = tx.QueryRowContext(ctx, "SELECT canonical FROM causal_outbox WHERE id=?",
-            expected.Identity[:]).Scan(&persisted)
+            completion.Identity[:]).Scan(&persisted)
         if err == sql.ErrNoRows { return errors.New("perception barrier: prior task has no completion") }
         if err != nil { return err }
-        if !bytes.Equal(persisted, expected.Canonical) {
+        if !bytes.Equal(persisted, completion.Canonical) {
             return errors.New("perception barrier: completion does not match zero-output projection")
         }
     }

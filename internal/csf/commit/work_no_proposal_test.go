@@ -510,3 +510,40 @@ func TestMixedRoundAndOccurrenceReversedDeliveryHasIdenticalTerminalBytes(t *tes
   if !bytes.Equal(ef[i],eb[i]){t.Fatalf("mixed Event %d changed after response delivery permutation",i)}
  }
 }
+
+func TestMixedNoProposalAndDeferredRecurrenceKeepsOnlyFutureSuccessor(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=noProposalWorkFixtureWithSetup(t,func(store *sqlite.Store,run domain.ID,bundle *policy.Bundle)error{
+  g:=validGenesis(t,bundle)
+  d:=identity.New(bundle)
+  origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+  id,_,err:=d.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+   []any{origin,uint64(0),uint64(0)});if err!=nil{return err}
+  fields:=[]any{id[:],run[:],"schedule",int64(g.InitialInstant),
+   []any{int64(g.InitialInstant),uint64(0)},"test.occurrence",uint64(1),
+   g.Payload[16],uint64(0),origin,uint64(0),uint64(0),
+   []any{uint64(1),[]any{uint64(0),int64(100),[]any{uint64(0)}}},[]any{uint64(0)}}
+  dg,_,err:=d.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,fields)
+  if err!=nil{return err}
+  raw,err:=codec.CanonicalPayload(append(cloneAny(fields),dg[:]));if err!=nil{return err}
+  return store.SeedGenesisOccurrence(ctx,domain.ID(id),run,
+   domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant},raw)
+ })
+ if len(fence.Fields[11].([]any))!=3{t.Fatal("mixed DEFER did not admit complete slot/system cut")}
+ if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err!=nil{
+  t.Fatal("valid mixed DEFER and slots failed terminal transaction",err)
+ }
+ _,_,_,_,_,run:=ledger.Snapshot()
+ state,err:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil||state.Revision!=1||state.NextLogicalSequence!=3{t.Fatal("mixed DEFER wrong state",err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(run))
+ if err!=nil||len(pending)!=1||pending[0].Eligibility.NotBeforeInstant<=state.Instant{
+  t.Fatal("mixed DEFER failed to replace settled occurrence with future-only successor",err)
+ }
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ report,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle)
+ reopened.Close()
+ if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=3{
+  t.Fatalf("mixed deferred recurrence did not replay: %+v %v",report,err)
+ }
+}

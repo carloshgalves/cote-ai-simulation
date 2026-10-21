@@ -467,3 +467,46 @@ func TestMixedNoProposalAndOccurrenceMustCloseOneFrozenCohort(t *testing.T){
   t.Fatalf("mixed WORK not replayable: %+v %v",report,err)
  }
 }
+
+func TestMixedRoundAndOccurrenceReversedDeliveryHasIdenticalTerminalBytes(t *testing.T){
+ ctx:=context.Background()
+ setup:=func(store *sqlite.Store,run domain.ID,bundle *policy.Bundle)error{
+  g:=validGenesis(t,bundle)
+  d:=identity.New(bundle)
+  origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+  id,_,err:=d.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+   []any{origin,uint64(0),uint64(0)});if err!=nil{return err}
+  fields:=[]any{id[:],run[:],"schedule",int64(g.InitialInstant),
+   []any{int64(g.InitialInstant),uint64(0)},"test.occurrence",uint64(1),
+   g.Payload[16],uint64(0),origin,uint64(0),uint64(0),[]any{uint64(0)},[]any{uint64(0)}}
+  dg,_,err:=d.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,fields)
+  if err!=nil{return err}
+  raw,err:=codec.CanonicalPayload(append(cloneAny(fields),dg[:]));if err!=nil{return err}
+  return store.SeedGenesisOccurrence(ctx,domain.ID(id),run,
+   domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant},raw)
+ }
+ execute:=func(reverse bool)([]byte,[][]byte){
+  c,_,ledger,cycle,fence,path:=noProposalWorkFixtureWithDelivery(t,setup,reverse)
+  journal,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);if err!=nil{t.Fatal(err)}
+  db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+  defer db.Close()
+  rows,err:=db.QueryContext(ctx,"SELECT canonical FROM event_store ORDER BY id");if err!=nil{t.Fatal(err)}
+  var events [][]byte
+  for rows.Next(){
+   var raw []byte
+   if err:=rows.Scan(&raw);err!=nil{t.Fatal(err)}
+   events=append(events,append([]byte(nil),raw...))
+  }
+  if err:=rows.Err();err!=nil{t.Fatal(err)}
+  rows.Close()
+  return journal.Canonical,events
+ }
+ forward,ef:=execute(false)
+ backward,eb:=execute(true)
+ if !bytes.Equal(forward,backward)||len(ef)!=len(eb){
+  t.Fatal("mixed WORK depends on worker slot response arrival order")
+ }
+ for i:=range ef{
+  if !bytes.Equal(ef[i],eb[i]){t.Fatalf("mixed Event %d changed after response delivery permutation",i)}
+ }
+}

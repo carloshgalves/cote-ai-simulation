@@ -8,6 +8,7 @@ import (
  "fmt"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/perception"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
@@ -25,19 +26,21 @@ func insertExactEvidence(ctx context.Context,tx *sql.Tx,record ports.CanonicalRe
  return nil
 }
 
-func insertExactRoute(ctx context.Context,tx *sql.Tx,id,task [32]byte,actor [2]string,kind int)error{
+func insertExactRoute(ctx context.Context,tx *sql.Tx,record ports.CanonicalRecord,task [32]byte,actor [2]string,kind int)error{
+ id:=record.Identity
+ seal:=identity.OpaqueContentHash(record.Canonical)
  res,err:=tx.ExecContext(ctx,"INSERT OR IGNORE INTO evidence_routes "+
-  "(record_id,task_id,holder_namespace,holder_id,kind) VALUES(?,?,?,?,?)",
-  id[:],task[:],actor[0],actor[1],kind)
+  "(record_id,task_id,holder_namespace,holder_id,kind,canonical_hash) VALUES(?,?,?,?,?,?)",
+  id[:],task[:],actor[0],actor[1],kind,seal[:])
  if err!=nil{return err}
  changed,err:=res.RowsAffected();if err!=nil{return err}
  if changed==1{return nil}
- var taskID []byte
+ var taskID,savedHash []byte
  var ns,name string
  var savedKind int
- if err:=tx.QueryRowContext(ctx,"SELECT task_id,holder_namespace,holder_id,kind "+
- "FROM evidence_routes WHERE record_id=?",id[:]).Scan(&taskID,&ns,&name,&savedKind);err!=nil{return err}
- if !bytes.Equal(taskID,task[:])||ns!=actor[0]||name!=actor[1]||savedKind!=kind{
+ if err:=tx.QueryRowContext(ctx,"SELECT task_id,holder_namespace,holder_id,kind,canonical_hash "+
+ "FROM evidence_routes WHERE record_id=?",id[:]).Scan(&taskID,&ns,&name,&savedKind,&savedHash);err!=nil{return err}
+ if !bytes.Equal(taskID,task[:])||ns!=actor[0]||name!=actor[1]||savedKind!=kind||!bytes.Equal(savedHash,seal[:]){
   return errors.New("addressed evidence route identity collision")
  }
  return nil
@@ -124,10 +127,10 @@ func (s *Store) deliverRoundPerception(ctx context.Context,taskID [32]byte,failA
  p,err:=loadVerifiedRoundProjection(ctx,tx,taskID)
  if err!=nil{return zero,err}
  if err:=insertExactEvidence(ctx,tx,p.Observation);err!=nil{return zero,err}
- if err:=insertExactRoute(ctx,tx,p.Observation.Identity,taskID,p.Actor,0);err!=nil{return zero,err}
+ if err:=insertExactRoute(ctx,tx,p.Observation,taskID,p.Actor,0);err!=nil{return zero,err}
  if failAfter==1{return zero,errors.New("injected failure after observation")}
  if err:=insertExactEvidence(ctx,tx,p.Input);err!=nil{return zero,err}
- if err:=insertExactRoute(ctx,tx,p.Input.Identity,taskID,p.Actor,1);err!=nil{return zero,err}
+ if err:=insertExactRoute(ctx,tx,p.Input,taskID,p.Actor,1);err!=nil{return zero,err}
  if failAfter==2{return zero,errors.New("injected failure after knowledge input")}
  if err:=checkProjectionEvidence(ctx,tx,taskID,p);err!=nil{return zero,err}
  res,err:=tx.ExecContext(ctx,"INSERT OR IGNORE INTO causal_outbox(id,canonical) VALUES(?,?)",
@@ -152,7 +155,7 @@ func (s *Store) deliverRoundPerception(ctx context.Context,taskID [32]byte,failA
 func (s *Store) ReadAddressedEvidence(ctx context.Context,actor [2]string)(
  []ports.CanonicalRecord,[]ports.CanonicalRecord,error){
  if s==nil||actor[0]==""||actor[1]==""{return nil,nil,errors.New("invalid holder")}
- rows,err:=s.db.QueryContext(ctx,"SELECT r.record_id,r.kind,e.canonical "+
+ rows,err:=s.db.QueryContext(ctx,"SELECT r.record_id,r.kind,e.canonical,r.canonical_hash "+
  "FROM evidence_routes r JOIN evidence_ledger e ON e.id=r.record_id "+
  "WHERE r.holder_namespace=? AND r.holder_id=? "+
  "ORDER BY r.kind,r.task_id,r.record_id",actor[0],actor[1])
@@ -160,8 +163,10 @@ func (s *Store) ReadAddressedEvidence(ctx context.Context,actor [2]string)(
  defer rows.Close()
  var observations,inputs []ports.CanonicalRecord
  for rows.Next(){
-  var id,raw []byte;var kind int
-  if err:=rows.Scan(&id,&kind,&raw);err!=nil{return nil,nil,err}
+  var id,raw,storedHash []byte;var kind int
+  if err:=rows.Scan(&id,&kind,&raw,&storedHash);err!=nil{return nil,nil,err}
+  computed:=identity.OpaqueContentHash(raw)
+  if !bytes.Equal(computed[:],storedHash){return nil,nil,errors.New("addressed evidence tampered after delivery")}
   identity,ok:=idField(id);if !ok{return nil,nil,errors.New("evidence identity corrupt")}
   v,err:=codec.StrictDecodePayload(raw);if err!=nil{return nil,nil,err}
   f,ok:=v.([]any);if !ok{return nil,nil,errors.New("invalid addressed evidence")}

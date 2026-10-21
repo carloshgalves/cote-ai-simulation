@@ -325,7 +325,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  if b.Mode==1||b.Mode==5{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.ResourceCandidate.Identity[:],b.ResourceCandidate.Canonical);err!=nil{return err}
  }
- if b.Mode==3||b.Mode==4||b.Mode==5{
+ if b.Mode==3||b.Mode==4||b.Mode==5||b.Mode==6{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.SystemCandidate.Identity[:],b.SystemCandidate.Canonical);err!=nil{return err}
   for _,item:=range b.SystemExtraCandidates{
    if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",item.Identity[:],item.Canonical);err!=nil{return err}

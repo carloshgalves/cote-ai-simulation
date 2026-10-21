@@ -85,6 +85,7 @@ type ClockAdvanceBatch struct {
  ResultStateHash [32]byte
  Journal CanonicalRecord
  Events []CanonicalRecord
+ PerceptionTasks []CanonicalRecord // PENDING task envelopes from Genesis-pinned event classification
  TriggerRuntime []TriggerStateChange
  Activations []CanonicalRecord
  RevisionCanonical []byte

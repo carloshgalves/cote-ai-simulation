@@ -7,6 +7,7 @@ import (
  "errors"
  "sort"
 
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
@@ -18,6 +19,13 @@ import (
 func systemUnits(ctx context.Context,q queryOne,run [32]byte,upTo domain.EligibilityCoordinate)([]inputledger.SystemUnit,error){
  settled,err:=settledNoProposalUnits(ctx,q,run)
  if err!=nil{return nil,err}
+ var clockRaw []byte
+ if err:=q.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",run[:]).Scan(&clockRaw);err!=nil{return nil,err}
+ current,err:=clock.Decode(clockRaw);if err!=nil{return nil,err}
+ authorized,err:=historicalSystemUnits(ctx,q,run,uint64(current.Revision))
+ if err!=nil{return nil,err}
+ active:=map[domain.ID]bool{}
+ for _,item:=range authorized{active[item.ID]=true}
  selections:=[]struct{kind uint8;table string}{
   {2,"scheduled_occurrences"},{3,"trigger_activations"},
  }
@@ -41,7 +49,9 @@ func systemUnits(ctx context.Context,q queryOne,run [32]byte,upTo domain.Eligibi
     uint64(coord.NotBeforeCycleOrdinal)!=uint64(ordinal){
     rows.Close();return nil,errors.New("system-unit index differs from signed canonical authority")
    }
-   if lifecycle!=0||settled[domain.ID(key)]||coord.Compare(upTo)>0{continue}
+   if lifecycle!=0||settled[domain.ID(key)]{continue}
+   if !active[domain.ID(key)]{rows.Close();return nil,errors.New("pending system source not derived from genesis or terminal event")}
+   if coord.Compare(upTo)>0{continue}
    decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{rows.Close();return nil,err}
    fields:=decoded.([]any)
    var source string

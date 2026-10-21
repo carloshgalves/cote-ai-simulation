@@ -10,6 +10,7 @@ import (
  _ "modernc.org/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/contextboundary"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/perception"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 )
@@ -233,4 +234,54 @@ func resourceActorInbox(t *testing.T,ctx context.Context,store *sqlite.Store,pat
  if err:=rows.Err();err!=nil{t.Fatal(err)}
  t.Fatal("cannot find A's authenticated dispatch for inbox binding")
  return nil
+}
+
+
+func TestCSFRV16ReplayRejectsIncompleteOrExtraDelivery(t *testing.T){
+ for _,tc:=range []struct{name string; mutate func(*testing.T,*sql.DB,perception.RoundProjection)}{
+  {"missing-input",func(t *testing.T,db *sql.DB,p perception.RoundProjection){
+   if _,err:=db.Exec("DELETE FROM evidence_ledger WHERE id=?",p.Input.Identity[:]);err!=nil{t.Fatal(err)}
+  }},
+  {"foreign-recipient-route",func(t *testing.T,db *sql.DB,p perception.RoundProjection){
+   if _,err:=db.Exec("UPDATE evidence_routes SET holder_id='b' WHERE record_id=?",p.Input.Identity[:]);err!=nil{t.Fatal(err)}
+  }},
+  {"missing-completion",func(t *testing.T,db *sql.DB,p perception.RoundProjection){
+   if _,err:=db.Exec("DELETE FROM causal_outbox WHERE id=?",p.Completion.Identity[:]);err!=nil{t.Fatal(err)}
+  }},
+  {"extra-unindexed-observation",func(t *testing.T,db *sql.DB,p perception.RoundProjection){
+   value,err:=codec.StrictDecodePayload(p.Observation.Canonical);if err!=nil{t.Fatal(err)}
+   fields:=append([]any(nil),value.([]any)...)
+   fields[3]=uint64(1)
+   id,err:=codec.CanonicalBytes("cote.csf.id.observation",
+    "cote.csf.schema.observation-id-preimage",1,
+    []any{fields[1],fields[2],fields[3],fields[4]})
+   if err!=nil{t.Fatal(err)}
+   hash:=identity.OpaqueContentHash(id)
+   fields[0]=hash[:]
+   digestData,err:=codec.CanonicalBytes("cote.csf.digest.observation",
+    "cote.csf.schema.observation.body",1,fields[:14])
+   if err!=nil{t.Fatal(err)}
+   digest:=identity.OpaqueContentHash(digestData)
+   fields[14]=digest[:]
+   raw,err:=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+   if _,err:=db.Exec("INSERT INTO evidence_ledger(id,canonical) VALUES(?,?)",hash[:],raw);err!=nil{t.Fatal(err)}
+  }},
+ }{
+  t.Run(tc.name,func(t *testing.T){
+   ctx:=context.Background()
+   c,store,ledger,cycle,fence,path:=singleResourceFixture(t)
+   if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+   db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+   defer db.Close()
+   task:=findTerminalRoundTask(t,ctx,db)
+   p,err:=store.DeliverRoundPerception(ctx,task,c.bundle);if err!=nil{t.Fatal(err)}
+   tc.mutate(t,db,p)
+   _,_,_,_,_,run:=ledger.Snapshot()
+   reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+   defer reopened.Close()
+   if _,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
+    t.Fatal("replay accepted missing, extra or misaddressed causal evidence")
+   }
+  })
+ }
 }

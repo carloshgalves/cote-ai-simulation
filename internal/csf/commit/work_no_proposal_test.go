@@ -293,6 +293,25 @@ func TestReplayClockAdvanceThenNoProposalWorkInOneDurableHistory(t *testing.T){
   created,0,0,0,[]any{uint64(0)})
  if err!=nil{t.Fatal(err)}
  if _,err:=c.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
+ // CSFRV1-6 requires epistemic completion before the next dispatch.
+ // The temporal synthetic task is unobserved and must finish with an
+ // authenticated empty completion rather than bypassing the barrier.
+ outboxDB,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ pendingRows,err:=outboxDB.QueryContext(ctx,"SELECT id FROM causal_outbox")
+ if err!=nil{outboxDB.Close();t.Fatal(err)}
+ var pendingIDs [][32]byte
+ for pendingRows.Next(){
+  var raw []byte
+  if err:=pendingRows.Scan(&raw);err!=nil{t.Fatal(err)}
+  if len(raw)!=32{t.Fatal("malformed published perception task")}
+  var id [32]byte;copy(id[:],raw);pendingIDs=append(pendingIDs,id)
+ }
+ if err:=pendingRows.Err();err!=nil{t.Fatal(err)}
+ pendingRows.Close();outboxDB.Close()
+ if len(pendingIDs)!=1{t.Fatalf("expected one temporal perception task; got %d",len(pendingIDs))}
+ for _,id:=range pendingIDs{
+  if _,err:=store.CompleteInternalPerception(ctx,id,bundle);err!=nil{t.Fatal(err)}
+ }
  clockBefore,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
  if clockBefore.Revision!=1||clockBefore.LastOrdinal!=-1{t.Fatal("expected temporal successor before WORK")}
  cycleID,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,

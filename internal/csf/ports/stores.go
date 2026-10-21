@@ -122,6 +122,8 @@ type WorkBatch struct {
  // 3: one authenticated schedule/trigger system unit.
  Mode uint8
  SystemCandidate CanonicalRecord
+ // Remaining independent system-unit candidates in AdmissionFence order.
+ SystemExtraCandidates []CanonicalRecord
  SystemSuccessors []CanonicalRecord
  // Mode 2 publishes its complete pure candidate/conflict/RNG assessment
  // evidence only after the same terminal SQLite CAS succeeds.

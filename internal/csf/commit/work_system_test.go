@@ -197,7 +197,7 @@ func TestSameInstantCascadeLimitAbortsAfterSixtyFourCompleteWorkCycles(t *testin
  reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
  report,err:=reopened.ReplayClock(ctx,[32]byte(g.RunID),bundle)
  reopened.Close()
- if err!=nil||report.ReplayedCommits!=clock.MaxSameInstantWorkV1{
+ if err!=nil||uint64(report.ReplayedCommits)!=clock.MaxSameInstantWorkV1{
   t.Fatalf("replay omitted or truncated valid cascade prefix: %+v %v",report,err)
  }
 }

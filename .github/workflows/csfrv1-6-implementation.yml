@@ -25,5 +25,10 @@ jobs:
           git diff --check origin/main HEAD
       - name: Focused perception and SQLite tests
         run: go test -count=1 ./internal/csf/perception/... ./internal/csf/persistence/sqlite/...
+      - name: Knowledge-boundary audit (forbidden disclosures and scoped inbox)
+        run: go test -count=1 -v ./internal/csf/contextboundary -run '^TestKnowledgeBoundary'
+      - name: Determinism under retries and worker permutations
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV16DeliveryPermutationsPreserveCanonicalRoots
+
       - name: Full Go regression
         run: go test ./...

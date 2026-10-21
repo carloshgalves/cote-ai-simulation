@@ -251,3 +251,22 @@ func TestPerceptionTaskOutboxIsAtomicPrivateAndReplayAuthenticated(t *testing.T)
   t.Fatal("replay accepted committed Event without its Genesis-pinned PerceptionTask")
  }
 }
+
+func TestUnreferencedPerceptionTaskCannotAppearAsAuthorizedCausalOutbox(t *testing.T){
+ ctx:=context.Background()
+ c,_,ledger,cycle,fence,path:=singleResourceFixture(t)
+ if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ _,_,_,_,_,run:=ledger.Snapshot()
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ var id,canonical []byte
+ if err:=db.QueryRowContext(ctx,"SELECT id,canonical FROM causal_outbox LIMIT 1").Scan(&id,&canonical);err!=nil{t.Fatal(err)}
+ orphan:=append([]byte(nil),id...)
+ orphan[0]^=0x8f
+ if _,err:=db.ExecContext(ctx,"INSERT INTO causal_outbox(id,canonical) VALUES(?,?)",orphan,canonical);err!=nil{t.Fatal(err)}
+ db.Close()
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer reopened.Close()
+ if _,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
+  t.Fatal("replay admitted an extra uncommitted task that could become an unauthorized observation")
+ }
+}

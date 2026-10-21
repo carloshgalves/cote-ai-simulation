@@ -107,11 +107,18 @@
   tentativa de inserção retroativa de fonte de genesis ou sucessor sem
   decisão `DEFER`; replay após reabertura de SQLite.
 
-**Último checkpoint verde incluindo PerceptionTask e outbox completa:**
+**Checkpoint verde após publicação atômica de tasks e TODAS as coortes do primeiro experimento:**
 
-- [CSFRV1-5 — 39535453327](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39535453327).
-- [Conformance Go/TypeScript — 39535453339](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39535453339).
-- [Regressão do kernel — 39535453460](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39535453460).
+- [CSFRV1-5 — 39611426425](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39611426425).
+- [Conformance Go/TypeScript — 39611426566](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39611426566).
+- [Regressão do kernel — 39611426449](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39611426449).
+
+**HEAD verificado:** `f5315ad0d1121510e4ba45f9cb3b316467d29358`.
+A suíte inclui cenários com duas propostas disputando estoque, ocorrência
+agendada e trigger na mesma coorte; a versão invertida de chegada dos
+agentes mantém bytes do `AdmissionFence`, `CycleCommit` e eventos.
+O `WORK Mode 6` reconstroi também as seis provas de assessment/conflito/RNG
+a partir do `DecisionLedger` durável.
 
 ## Revisão adversarial e critérios abertos
 
@@ -153,8 +160,11 @@
 - [x] Replayed causal_outbox é uma partição exata dos task IDs de
   CycleCommits: eventos sem task, task órfã, task com conteúdo alterado
   e task duplicada tornam o histórico inválido.
-- [ ] Revisão adversarial final de todos os diffs da PR,
-  depois do CI verde do HEAD; manter Draft até essa revisão.
+- [x] Revisão adversarial do marco da primeira run concluída após
+  os cenários de coorte mista e adversarial mutations. Os três
+  findings congelados (#1–#3) estão `RESOLVED` em seus comentários
+  originais, com zero findings **OPEN** dentro do escopo estrito da
+  primeira execução. Não equivale a prova de ausência universal de bugs.
 
 **Comentários de revisão:** [Finding 1](https://github.com/carloshgalves/cote-ai-simulation/pull/21#issuecomment-6305195593),
 [Finding 2](https://github.com/carloshgalves/cote-ai-simulation/pull/21#issuecomment-6305215141)

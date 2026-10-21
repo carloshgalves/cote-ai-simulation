@@ -189,7 +189,6 @@ func (c *Coordinator) commitSystemBatch(ctx context.Context,ledger *inputledger.
   SystemCandidate:candidates[0],SystemExtraCandidates:candidates[1:],SystemSuccessors:successors,
   Decisions:decisions,Events:events,BaseStateHash:[32]byte(hash),ResultStateHash:[32]byte(hash),
   RevisionCanonical:revision,FailAfterStep:c.failAfterStep}
- if c.tamperWorkBatch!=nil{c.tamperWorkBatch(&batch)}
- if err:=c.store.CommitWork(ctx,batch);err!=nil{return empty,err}
+ if err:=c.commitPreparedWork(ctx,&batch);err!=nil{return empty,err}
  return batch.Journal,nil
 }

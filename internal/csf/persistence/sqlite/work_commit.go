@@ -20,7 +20,7 @@ import (
 // PerceptionTasks, WorldRevision, lifecycle, clock and CycleCommit. Unsupported
 // combinations fail closed rather than committing a strict subset.
 func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
- if b.Mode>5{return errors.New("unregistered WORK terminal variant")}
+ if b.Mode>6{return errors.New("unregistered WORK terminal variant")}
  if len(b.ExpectedClock)==0||len(b.ResultClock)==0||len(b.Journal.Canonical)==0{
   return errors.New("incomplete WORK publication batch")
  }

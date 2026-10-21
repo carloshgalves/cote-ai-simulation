@@ -1,8 +1,8 @@
 # CSFRV1-6 — checkpoint de implementação (parcial)
 
-**Branch:** `feat/csfrv1-6-epistemic-evidence`  
-**Draft PR:** [#23](https://github.com/carloshgalves/cote-ai-simulation/pull/23)  
-**Base:** `main@bf03fa2d7ce7fc65e0b2124295be8b543948b28e` (CSFRV1-5 mesclada)  
+**Branch:** `feat/csfrv1-6-epistemic-evidence`
+**Draft PR:** [#23](https://github.com/carloshgalves/cote-ai-simulation/pull/23)
+**Base:** `main@bf03fa2d7ce7fc65e0b2124295be8b543948b28e` (CSFRV1-5 mesclada)
 **Ticket:** [06 — Evidência endereçada e barreira](06-evidencia-e-barreira.md)
 
 ## Slice implementado

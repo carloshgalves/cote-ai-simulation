@@ -10,8 +10,9 @@
 > `CASCADE_LIMIT` estão implementados e exercitados com SQLite/replay.
 > Coortes simultâneas de sistema e coortes mistas `NoProposal` +
 > sistema funcionam. Restam `ActionProposal(resource.consume)` combinado
-> com sistema, eventos observáveis/perception tasks quando aplicáveis
-> e o aceite integral da CSFRV1-5.
+> com sistema e o aceite integral da CSFRV1-5. A publicação de
+> PerceptionTask PENDING para WORK e CLOCK_ADVANCE está integrada e
+> auditável; observations reais continuam fora desta etapa.
 
 ## Autoridade de execução entregue
 
@@ -104,11 +105,11 @@
   tentativa de inserção retroativa de fonte de genesis ou sucessor sem
   decisão `DEFER`; replay após reabertura de SQLite.
 
-**Último checkpoint de código totalmente verde antes deste registro:**
+**Último checkpoint verde incluindo PerceptionTask e outbox completa:**
 
-- [CSFRV1-5 — 39529820349](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39529820349).
-- [Conformance Go/TypeScript — 39529820385](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39529820385).
-- [Regressão do kernel — 39529820419](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39529820419).
+- [CSFRV1-5 — 39535453327](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39535453327).
+- [Conformance Go/TypeScript — 39535453339](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39535453339).
+- [Regressão do kernel — 39535453460](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39535453460).
 
 ## Revisão adversarial e critérios abertos
 
@@ -124,20 +125,25 @@
   no mesmo fence; não há settlement parcial silencioso.
 - [x] **Finding 2 — Medium:** o limiar V1 agora exige pin canônico
   exato do `cycle-coordinate-v1`; comentário original RESOLVED.
-- [ ] **Finding 3 — High:** derivação pura de `PerceptionTask` agora
-  disponível em `internal/csf/perception/plan.go`, com classificador V1
-  `event-local-ordinal=0`, hash de Event e pins exatos de políticas do Genesis.
-  Ainda falta integrar a task no `CommitWork` e na `causal_outbox`,
-  construir cenário com tasks não vazias e autenticar as referências no replay.
-  A task não contém payload, observadores ou `KnowledgeInput`; esta separação
-  é intencional e testada. Não declarar o finding resolvido antes do
-  commit atômico de tasks.
+- [x] **Finding 3 — High:** classificador puro de `PerceptionTask`
+  `event-local-ordinal=0` do `perception-visible-first-v1`, com
+  política, resolver e identidade vinculados ao Genesis; publicação
+  atômica para WORK e CLOCK_ADVANCE na `causal_outbox`, hashes e
+  referências do `CycleCommit`, rederivação pelo SQLite e replay.
+  Testes provam tasks não vazias, sete failpoints, remoção de task e
+  inserção de task órfã. Uma `PerceptionTask` é **somente PENDING**:
+  não concede Observation, destinatário ou KnowledgeInput; o processamento
+  downstream permanece fora deste ticket. Comentário original RESOLVED.
 - [ ] Commit vazio canônico, `DEDUPLICATED` e demais variantes de
   settlement e matriz completa de fault injection, se exigidos pelo
   ticket de aceite.
-- [x] Planner puro de tarefas potencialmente perceptíveis; confirmação
-  de que `PerceptionTask` não constitui `Observation` nem autoriza
-  conhecimento de agente.
+- [x] Planner puro de tarefas potencialmente perceptíveis, com
+  publicação/rollback/replay das tasks em ambas as variantes de ciclo.
+  O predicado V1 é o ordinal local do evento, não a confidencialidade;
+  a tarefa não constitui `Observation` nem autoriza conhecimento.
+- [x] Replayed causal_outbox é uma partição exata dos task IDs de
+  CycleCommits: eventos sem task, task órfã, task com conteúdo alterado
+  e task duplicada tornam o histórico inválido.
 - [ ] Uma última revisão separada depois de fechar os bloqueios
   anteriores; manter Draft até isso acontecer.
 

@@ -43,6 +43,11 @@ func (c *Coordinator) CommitSystemUnit(ctx context.Context,ledger *inputledger.L
  if err!=nil||hash!=cycle.BaseStateHash{return empty,errors.New("system cycle predecessor state hash invalid")}
  entries,ok:=fence.Fields[11].([]any)
  if !ok||len(entries)==0{return empty,errors.New("synthetic system handler requires admitted units")}
+ for _,raw:=range entries{
+  entry,ok:=raw.([]any)
+  if !ok||len(entry)!=5{return empty,errors.New("system admission entry malformed")}
+  if entry[1]==uint64(0){return c.commitMixedWork(ctx,ledger,cycle,fence)}
+ }
  if len(entries)>1{return c.commitSystemBatch(ctx,ledger,cycle,fence)}
  value,ok:=entries[0].([]any)
  if !ok||len(value)!=5{return empty,errors.New("system admitted unit malformed")}

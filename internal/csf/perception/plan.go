@@ -6,6 +6,7 @@ package perception
 import (
  "bytes"
  "errors"
+ "math"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
@@ -36,7 +37,7 @@ func Plan(bundle *policy.Bundle,run,cycle domain.ID,base,result domain.WorldRevi
   h,good:=v[2].([]byte)
   if !ok||!good||len(h)!=32{return nil,errors.New("perception policy version/hash invalid")}
  }
- if uint64(result)!=uint64(base)+1{return nil,errors.New("perception task revisions not adjacent")}
+ if uint64(base)==math.MaxUint64||uint64(result)!=uint64(base)+1{return nil,errors.New("perception task revisions not adjacent")}
  d:=identity.New(bundle)
  resultRecords:=make([]ports.CanonicalRecord,0)
  seen:=map[domain.ID]bool{}
@@ -45,8 +46,11 @@ func Plan(bundle *policy.Bundle,run,cycle domain.ID,base,result domain.WorldRevi
   fields,ok:=decoded.([]any)
   if !ok||len(fields)!=19{return nil,errors.New("perception source Event not canonical")}
   eventID,ok:=fields[0].([]byte)
-  if !ok||len(eventID)!=32||!bytes.Equal(eventID,event.Identity[:])||
-   !bytes.Equal(fields[1].([]byte),run[:])||!bytes.Equal(fields[7].([]byte),cycle[:]){
+  eventRun,validRun:=fields[1].([]byte)
+  eventCycle,validCycle:=fields[7].([]byte)
+  if !ok||!validRun||!validCycle||len(eventID)!=32||
+   !bytes.Equal(eventID,event.Identity[:])||!bytes.Equal(eventRun,run[:])||
+   !bytes.Equal(eventCycle,cycle[:]){
    return nil,errors.New("perception task event/run/cycle identity differs from authority")
   }
   if seen[domain.ID(event.Identity)]{return nil,errors.New("duplicate perceptible Event identity")}

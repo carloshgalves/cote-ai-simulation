@@ -180,17 +180,16 @@ func TestSameInstantCascadeLimitAbortsAfterSixtyFourCompleteWorkCycles(t *testin
    continue
   }
   last:=before
-  if _,err:=coordinator.Abort(ctx,g.RunID,cycle.ID,fence,6,nil);err!=nil{
-   t.Fatal("genuine over-limit CASCADE abort not admitted",err)
+  if record,err:=coordinator.CommitSystemUnit(ctx,ledger,cycle,fence);!errors.Is(err,ErrCascadeLimit)||len(record.Canonical)==0{
+   t.Fatalf("65th WORK did not produce durable CASCADE_LIMIT abort: %v",err)
   }
   state,err:=store.LoadClock(ctx,[32]byte(g.RunID));if err!=nil||state!=last{
    t.Fatal("CASCADE_LIMIT mutated authoritative clock",err)
   }
   control,err:=store.LoadCycleControl(ctx,[32]byte(g.RunID))
   if err!=nil||control[0]!=uint64(3){t.Fatal("CASCADE_LIMIT did not HALT with durable abort",err)}
-  if _,err:=coordinator.CommitSystemUnit(ctx,ledger,cycle,fence);err==nil||
-   (!errors.Is(err,ErrCascadeLimit)&&control[0]!=uint64(3)){
-   t.Fatal("attempt committed after cascade abort",err)
+  if _,err:=coordinator.CommitSystemUnit(ctx,ledger,cycle,fence);err==nil{
+   t.Fatal("attempt committed after cascade abort")
   }
   pending,err:=store.PendingClock(ctx,[32]byte(g.RunID))
   if err!=nil||len(pending)!=1{t.Fatalf("cascade truncated last pending occurrence: %d %v",len(pending),err)}

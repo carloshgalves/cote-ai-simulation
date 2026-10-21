@@ -8,6 +8,7 @@ import (
  "sort"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/decision"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"

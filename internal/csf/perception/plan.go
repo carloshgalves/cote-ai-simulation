@@ -54,7 +54,16 @@ func PlanPinned(genesisPins [][]any,run,cycle domain.ID,base,result domain.World
  // The caller supplies refs from a validated Genesis; task planning never
  // reads fixture files or trusts a machine-local policy lookup.
  allowed:=map[string][]any{}
- for _,ref:=range genesisPins{allowed[ref[0].(string)]=ref}
+ for _,ref:=range genesisPins{
+  if len(ref)!=3{return nil,errors.New("perception Genesis policy shape malformed")}
+  id,ok:=ref[0].(string)
+  v,versionOK:=ref[1].(uint64)
+  digest,digestOK:=ref[2].([]byte)
+  if !ok||id==""||!versionOK||v==0||!digestOK||len(digest)!=32||allowed[id]!=nil{
+   return nil,errors.New("perception Genesis policy identity/version/hash malformed")
+  }
+  allowed[id]=ref
+ }
  for _,ref:=range [][]any{pins.Classification,pins.Resolver,pins.Identity}{
   pinned,found:=allowed[ref[0].(string)]
   if !found||pinned[1]!=ref[1]||!bytes.Equal(pinned[2].([]byte),ref[2].([]byte)){

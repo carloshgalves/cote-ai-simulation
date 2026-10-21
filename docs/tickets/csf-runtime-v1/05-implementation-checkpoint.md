@@ -120,9 +120,11 @@
 - [x] Admissão de múltiplas fontes **de sistema** na mesma coordenada,
   com bijeção de eventos/decisões e failpoints.
 - [ ] **Finding 1 — High:** coortes mistas `NoProposal` +
-  fontes de sistema resolvidas com WORK híbrido e replay. Permanece
-  aberta a composição de `ActionProposal(resource.consume)` + sistema
-  no mesmo fence; não há settlement parcial silencioso.
+  sistema e coortes `ActionProposal(resource.consume)` único + fontes
+  de sistema estão implementadas no mesmo WORK/SQLite CAS, incluindo
+  `DEFER`, trigger e evento/reducer. Resta comprovar a composição de
+  **duas propostas em conflito pelo recurso** + fonte de sistema no
+  mesmo fence e concluir revisão adversarial de toda a mudança.
 - [x] **Finding 2 — Medium:** o limiar V1 agora exige pin canônico
   exato do `cycle-coordinate-v1`; comentário original RESOLVED.
 - [x] **Finding 3 — High:** classificador puro de `PerceptionTask`

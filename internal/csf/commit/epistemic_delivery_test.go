@@ -59,6 +59,9 @@ func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){
  if _,err:=store.CompleteInternalPerception(ctx,internalTask,c.bundle);err!=nil{
   t.Fatal("invisible source must complete empty",err)
  }
+ if err:=store.CheckPerceptionBarrier(ctx,[32]byte(run),1);err==nil{
+  t.Fatal("completed secret task must not release a still-pending addressed round")
+ }
  var workers sync.WaitGroup
  results:=make(chan perception.RoundProjection,2)
  errs:=make(chan error,2)
@@ -82,6 +85,9 @@ func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){
   }
  }
  if first==nil||first.Actor!=([2]string{"school","a"}){t.Fatal("invalid recipient policy")}
+ if err:=store.CheckPerceptionBarrier(ctx,[32]byte(run),1);err!=nil{
+  t.Fatal("full addressed/empty task barrier did not release after completion",err)
+ }
  actorInbox:=resourceActorInbox(t,ctx,store,path)
  obs,inputs,err:=actorInbox.ReadAddressedEvidence(ctx,[2]string{"school","a"})
  if err!=nil||len(obs)!=1||len(inputs)!=1{t.Fatal("A must receive exactly one observation/input",err,len(obs),len(inputs))}
@@ -276,6 +282,12 @@ func TestCSFRV16ReplayRejectsIncompleteOrExtraDelivery(t *testing.T){
    task:=findTerminalRoundTask(t,ctx,db)
    p,err:=store.DeliverRoundPerception(ctx,task,c.bundle);if err!=nil{t.Fatal(err)}
    tc.mutate(t,db,p)
+   if tc.name!="extra-unindexed-observation"{
+    inbox:=resourceActorInbox(t,ctx,store,path)
+    if _,_,err:=inbox.ReadAddressedEvidence(ctx,[2]string{"school","a"});err==nil{
+     t.Fatal("actor inbox exposed incomplete or misaddressed evidence")
+    }
+   }
    _,_,_,_,_,run:=ledger.Snapshot()
    reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
    defer reopened.Close()

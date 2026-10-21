@@ -73,10 +73,11 @@ func (s *Store) appendDispatchGuarded(ctx context.Context,record ports.Canonical
  return tx.Commit()
 }
 
-// verifyPriorPerceptionEmpty proves complete, *empty* results only. It must
-// fail closed, rather than treating an unimplemented positive projection as
-// a completed task. The full addressed/positive extension will widen this
-// gate with exact Observation/KnowledgeInput verification.
+// verifyPriorPerceptionEmpty retains its original function name for the
+// existing storage boundary. It now proves complete *empty or addressed*
+// results, reconciling every prior committed task against its exact terminal
+// Observation/KnowledgeInput projection, under the dispatch transaction.
+// An unknown producer or missing receipt always fails closed.
 func verifyPriorPerceptionEmpty(ctx context.Context,tx *sql.Tx,run [32]byte,through uint64)error{
  rows,err:=tx.QueryContext(ctx,"SELECT d.canonical FROM committed_cycles c JOIN decision_ledger d ON d.id=c.commit_id WHERE c.run_id=?",run[:])
  if err!=nil{return err}

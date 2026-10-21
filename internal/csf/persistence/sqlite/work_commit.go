@@ -51,7 +51,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  eventIDs,ok:=journal[15].([]any)
  if !ok||len(eventIDs)!=len(b.Events){return errors.New("WORK event batch differs from journal")}
  taskIDs,ok:=journal[18].([]any)
- if !ok||len(taskIDs)!=0{return errors.New("unregistered WORK perception tasks")}
+ if !ok||len(taskIDs)!=len(b.PerceptionTasks){return errors.New("WORK perception-task batch differs from journal")}
  if len(b.Decisions)==0{return errors.New("WORK has no settled source units")}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return err}
  defer tx.Rollback()
@@ -78,6 +78,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   name,ok:=ref[0].(string);if !ok{return errors.New("genesis policy name malformed")}
   allowed[name]=ref
  }
+ if _,err:=verifyWorkPerception(b,journal,genesisFields);err!=nil{return err}
  for _,name:=range []string{"validators-v1","conflict-resolvers-v1"}{
   if allowed[name]==nil{return errors.New("NoProposal decision policy unbound by genesis")}
  }
@@ -306,7 +307,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  }
  dd,err:=registeredDigest("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",pairing)
  if err!=nil{return err}
- tasks,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",[]any{})
+ tasks,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",taskIDs)
  if err!=nil{return err}
  if !equalBytes(journal[17],dd[:])||!equalBytes(journal[19],tasks[:]){
   return errors.New("WORK decision/task digest not bound to authoritative output")
@@ -349,6 +350,9 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   if err:=appendToTx(ctx,tx,"event_store",item);err!=nil{return err}
  }
  if err:=failClock(b.FailAfterStep,2);err!=nil{return err}
+ for _,task:=range b.PerceptionTasks{
+  if err:=appendToTx(ctx,tx,"causal_outbox",task);err!=nil{return err}
+ }
  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.Journal.Identity[:],b.Journal.Canonical);err!=nil{return err}
  if err:=failClock(b.FailAfterStep,3);err!=nil{return err}
  outputHash:=b.BaseStateHash

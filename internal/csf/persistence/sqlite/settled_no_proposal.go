@@ -62,6 +62,18 @@ func settledNoProposalUnits(ctx context.Context,q queryOne,runID [32]byte)(map[d
   if expected!=root.commit||!equalBytes(journal[23],digest[:]){
    return nil,errors.New("WORK terminal journal identity/digest invalid")
   }
+  var genesisRaw []byte
+  if err:=q.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",runID[:]).Scan(&genesisRaw);err!=nil{return nil,err}
+  env,err:=codec.StrictDecodeEnvelope(genesisRaw);if err!=nil{return nil,err}
+  genesis,ok:=env.Value.([]any)
+  if !ok||len(genesis)!=18{return nil,errors.New("WORK replay Genesis malformed")}
+  canonicalEvents:=make([][]byte,len(eventRaw))
+  for i,event:=range eventRaw{
+   bytes,ok:=event.([]byte)
+   if !ok{return nil,errors.New("WORK replay EventStore canonical bytes malformed")}
+   canonicalEvents[i]=bytes
+  }
+  if err:=verifyPublishedWorkTasks(ctx,q,runID,root.cycle,journal,genesis,canonicalEvents);err!=nil{return nil,err}
   eventIDs,ok:=journal[15].([]any)
   if !ok||len(eventIDs)==0{return nil,errors.New("WORK omitted required lifecycle events")}
   unitIDs,ok:=journal[11].([]any)

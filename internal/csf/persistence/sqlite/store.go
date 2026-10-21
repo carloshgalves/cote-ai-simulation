@@ -216,6 +216,11 @@ CREATE TABLE IF NOT EXISTS committed_cycles (
 
 // Append stores one canonical input-ledger record idempotently.
 func (s *Store) Append(ctx context.Context, record ports.CanonicalRecord) error {
+	// A SlotDispatch is the security-critical knowledge boundary. Check
+	// all prior durable completions under the same transaction as append.
+	if isSlotDispatchRecord(record) {
+		return s.appendDispatchGuarded(ctx, record)
+	}
 	// Guarded records cannot bypass the seal even through the generic adapter API.
 	kind, runID, instant, ordinal, err := guardedKind(record)
 	if err != nil { return err }

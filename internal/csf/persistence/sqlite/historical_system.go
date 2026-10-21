@@ -15,10 +15,13 @@ import (
 // The live pending projection deliberately excludes all terminal units, so
 // reusing its current membership for previous cycle proofs would be wrong.
 func (s *Store) historicalSystemUnits(ctx context.Context,run [32]byte,revision uint64)([]clock.Pending,error){
+ return historicalSystemUnits(ctx,s.db,run,revision)
+}
+func historicalSystemUnits(ctx context.Context,q queryOne,run [32]byte,revision uint64)([]clock.Pending,error){
  type historical struct{id domain.ID;kind uint8;canonical []byte;eligibility domain.EligibilityCoordinate}
  all:=map[domain.ID]historical{}
  for _,entry:=range []struct{kind uint8;table string}{{2,"scheduled_occurrences"},{3,"trigger_activations"}}{
-  rows,err:=s.db.QueryContext(ctx,"SELECT id,canonical FROM "+entry.table+" WHERE run_id=?",run[:])
+  rows,err:=q.QueryContext(ctx,"SELECT id,canonical FROM "+entry.table+" WHERE run_id=?",run[:])
   if err!=nil{return nil,err}
   for rows.Next(){
    var id,raw []byte
@@ -41,7 +44,7 @@ func (s *Store) historicalSystemUnits(ctx context.Context,run [32]byte,revision 
  eventAt:=map[string]uint64{}
  settledAt:=map[domain.ID]uint64{}
  successorBornAt:=map[domain.ID]uint64{}
- rows,err:=s.db.QueryContext(ctx,"SELECT commit_id FROM committed_cycles WHERE run_id=?",run[:])
+ rows,err:=q.QueryContext(ctx,"SELECT commit_id FROM committed_cycles WHERE run_id=?",run[:])
  if err!=nil{return nil,err}
  var commits [][]byte
  for rows.Next(){
@@ -54,7 +57,7 @@ func (s *Store) historicalSystemUnits(ctx context.Context,run [32]byte,revision 
  if err:=rows.Close();err!=nil{return nil,err}
  for _,commitID:=range commits{
   var raw []byte
-  if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",commitID).Scan(&raw);err!=nil{return nil,err}
+  if err:=q.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",commitID).Scan(&raw);err!=nil{return nil,err}
   decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{return nil,err}
   fields,ok:=decoded.([]any)
   if !ok||len(fields)!=24||!equalBytes(fields[0],run[:]){return nil,errors.New("historical CycleCommit invalid")}
@@ -71,7 +74,7 @@ func (s *Store) historicalSystemUnits(ctx context.Context,run [32]byte,revision 
    id,ok:=decisionID.([]byte)
    if !ok||len(id)!=32{return nil,errors.New("historical decision ID invalid")}
    var decisionRaw []byte
-   if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",id).Scan(&decisionRaw);err!=nil{return nil,err}
+   if err:=q.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",id).Scan(&decisionRaw);err!=nil{return nil,err}
    parsed,err:=codec.StrictDecodePayload(decisionRaw);if err!=nil{return nil,err}
    decision,ok:=parsed.([]any)
    if !ok||len(decision)!=16{return nil,errors.New("historical terminal DecisionRecord malformed")}
@@ -115,7 +118,7 @@ func (s *Store) historicalSystemUnits(ctx context.Context,run [32]byte,revision 
      return nil,errors.New("occurrence successor not authorized by committed DEFER decision")
     }
     var eventRaw []byte
-    if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",eid).Scan(&eventRaw);err!=nil{return nil,err}
+    if err:=q.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",eid).Scan(&eventRaw);err!=nil{return nil,err}
     eventValue,err:=codec.StrictDecodePayload(eventRaw);if err!=nil{return nil,err}
     parentDigest,valid:=ref[1].([]byte)
     if !valid||len(parentDigest)!=32{return nil,errors.New("occurrence parent digest malformed")}

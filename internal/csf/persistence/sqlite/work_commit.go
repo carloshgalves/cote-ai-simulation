@@ -15,9 +15,10 @@ import (
 )
 
 // CommitWork is the WORK arm of the SAME pinned SQLite commit authority as
-// CommitClockAdvance. Its first registered, non-mutating variant accepts only
-// genuine NoProposal slot responses, one terminal decision each, and no event,
-// outbox, trigger or reducer effect. Unsupported eventful WORK fails CLOSED.
+// CommitClockAdvance. Every registered variant verifies complete admitted
+// source partitions and atomically publishes DecisionRecords, Events,
+// PerceptionTasks, WorldRevision, lifecycle, clock and CycleCommit. Unsupported
+// combinations fail closed rather than committing a strict subset.
 func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  if b.Mode>4{return errors.New("unregistered WORK terminal variant")}
  if len(b.ExpectedClock)==0||len(b.ResultClock)==0||len(b.Journal.Canonical)==0{

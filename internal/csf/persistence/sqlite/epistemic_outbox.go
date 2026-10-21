@@ -122,15 +122,10 @@ func (s *Store) CompleteInternalPerception(
         !containsRoot(journal[15], eventID) || !containsRoot(journal[18], taskID) {
         return zero, errors.New("perception task/event not covered by committed CycleCommit")
     }
-    // The current CSFRV1-5 has no authorized evidence write path. If any
-    // evidence exists we must not assert an empty projection without a
-    // complete, per-task evidence reconciliation (CSFRV1-6 next slice).
-    var evidenceCount int
-    if err := tx.QueryRowContext(ctx, "SELECT COUNT(*) FROM evidence_ledger").Scan(&evidenceCount); err != nil {
+    // Only records causally linked to this task can invalidate an empty
+    // completion. Evidence for other tasks/runs is not a global blocker.
+    if err := assertNoAddressedOutputs(ctx, tx, taskID, bundle); err != nil {
         return zero, err
-    }
-    if evidenceCount != 0 {
-        return zero, errors.New("nonempty evidence ledger requires addressed resolver and task reconciliation")
     }
     completion, err := perception.EmptyCompletion(bundle, task)
     if err != nil { return zero, err }

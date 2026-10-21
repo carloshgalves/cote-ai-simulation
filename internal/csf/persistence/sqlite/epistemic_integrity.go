@@ -23,8 +23,24 @@ func assertNoAddressedOutputs(
     if err != nil { return err }
     defer rows.Close()
     deriver := identity.New(bundle)
-    observationTasks := map[[32]byte][32]byte{}
-    inputRefs := make([][32]byte,0)
+    type observedRecord struct {
+        task [32]byte
+        digest []byte
+        observer any
+        observedAt any
+        claims any
+        evidence any
+    }
+    type inputRecord struct {
+        observation [32]byte
+        referencedDigest []byte
+        recipient any
+        receivedAt any
+        claims any
+        evidence any
+    }
+    observations := map[[32]byte]observedRecord{}
+    inputs := make([]inputRecord,0)
     for rows.Next() {
         var id, raw []byte
         if err := rows.Scan(&id, &raw); err != nil { return err }
@@ -52,7 +68,8 @@ func assertNoAddressedOutputs(
             if owningTask == taskID {
                 return errors.New("invisible task has addressed Observation")
             }
-            observationTasks[key]=owningTask
+            observations[key]=observedRecord{task:owningTask,digest:bytes.Clone(digest[:]),
+                observer:fields[2],observedAt:fields[5],claims:fields[10],evidence:fields[12]}
         case 11: // KnowledgeInput
             if !equalBytes(fields[0],id) { return errors.New("KnowledgeInput authority malformed") }
             ref,ok:=fields[7].([]any)
@@ -72,7 +89,11 @@ func assertNoAddressedOutputs(
             if err!=nil || !equalBytes(fields[10],digest[:]) {
                 return errors.New("KnowledgeInput digest mismatch")
             }
-            inputRefs=append(inputRefs,observationID)
+            refDigest,ok:=ref[2].([]byte)
+            if !ok||len(refDigest)!=32{return errors.New("KnowledgeInput Observation digest reference malformed")}
+            inputs=append(inputs,inputRecord{observation:observationID,
+                referencedDigest:bytes.Clone(refDigest),recipient:fields[3],
+                receivedAt:fields[4],claims:fields[8],evidence:fields[9]})
         case 10: // Claim (CSFRV1-7). No direct Observation relation.
             return errors.New("claim evidence requires registered CSFRV1-7 reconciliation")
         default:
@@ -80,9 +101,16 @@ func assertNoAddressedOutputs(
         }
     }
     if err := rows.Err(); err != nil { return err }
-    for _, observationID := range inputRefs {
-        if _,ok:=observationTasks[observationID];!ok {
-            return errors.New("KnowledgeInput has no durable Observation")
+    for _, input := range inputs {
+        observation,ok:=observations[input.observation]
+        if !ok {return errors.New("KnowledgeInput has no durable Observation")}
+        if observation.task==taskID{return errors.New("invisible task has addressed KnowledgeInput")}
+        if !bytes.Equal(input.referencedDigest,observation.digest) ||
+            !sameCanonical(input.recipient,observation.observer) ||
+            !sameCanonical(input.receivedAt,observation.observedAt) ||
+            !sameCanonical(input.claims,observation.claims) ||
+            !sameCanonical(input.evidence,observation.evidence) {
+            return errors.New("KnowledgeInput is not the exact addressed Observation projection")
         }
     }
     return nil

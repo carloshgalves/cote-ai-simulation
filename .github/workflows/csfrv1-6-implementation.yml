@@ -1,0 +1,32 @@
+name: CSFRV1-6 Epistemic Evidence Checkpoint
+on:
+  push:
+    branches: [feat/csfrv1-6-epistemic-evidence]
+  pull_request:
+    paths:
+      - "internal/csf/perception/**"
+      - "internal/csf/persistence/sqlite/**"
+      - "internal/csf/contextboundary/**"
+      - ".github/workflows/csfrv1-6-implementation.yml"
+permissions:
+  contents: read
+jobs:
+  epistemic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Check diff whitespace
+        run: |
+          git fetch --no-tags --depth=1 origin main
+          git diff --check origin/main HEAD
+      - name: Verify gofmt
+        run: |
+          test -z "$(gofmt -l internal/csf/perception/completion*.go internal/csf/persistence/sqlite/epistemic*.go)"
+      - name: Focused perception and SQLite tests
+        run: go test -count=1 ./internal/csf/perception/... ./internal/csf/persistence/sqlite/...
+      - name: Full Go regression
+        run: go test ./...

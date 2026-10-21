@@ -189,10 +189,25 @@ func (s *Store) readAddressedEvidence(ctx context.Context,run [32]byte,actor [2]
   case 0:
    if len(f)!=15||!sameCanonical(f[2],[]any{actor[0],actor[1]})||
     !equalBytes(f[0],id){return nil,nil,errors.New("cross-holder Observation")}
+   computedID,err:=registeredDigest("cote.csf.id.observation",
+    "cote.csf.schema.observation-id-preimage",[]any{f[1],f[2],f[3],f[4]})
+   if err!=nil||computedID!=identity{return nil,nil,errors.New("addressed Observation ID invalid")}
+   digest,err:=registeredDigest("cote.csf.digest.observation",
+    "cote.csf.schema.observation.body",f[:14])
+   if err!=nil||!equalBytes(f[14],digest[:]){return nil,nil,errors.New("addressed Observation digest invalid")}
    observations=append(observations,record)
   case 1:
    if len(f)!=11||!sameCanonical(f[3],[]any{actor[0],actor[1]})||
     !equalBytes(f[0],id){return nil,nil,errors.New("cross-holder KnowledgeInput")}
+   ref,ok:=f[7].([]any)
+   if !ok||len(ref)!=3||ref[0]!=uint64(16){return nil,nil,errors.New("addressed input Observation reference invalid")}
+   computedID,err:=registeredDigest("cote.csf.id.knowledge-input",
+    "cote.csf.schema.knowledge-input-id-preimage",
+    []any{ref[1],f[3],f[5],f[1],f[2]})
+   if err!=nil||computedID!=identity{return nil,nil,errors.New("addressed KnowledgeInput ID invalid")}
+   digest,err:=registeredDigest("cote.csf.digest.knowledge-input",
+    "cote.csf.schema.knowledge-input.body",f[:10])
+   if err!=nil||!equalBytes(f[10],digest[:]){return nil,nil,errors.New("addressed KnowledgeInput digest invalid")}
    inputs=append(inputs,record)
   default:return nil,nil,errors.New("unregistered evidence kind")
   }

@@ -324,3 +324,54 @@ func TestGenesisSourceRosterIsSealedAtFirstFence(t *testing.T){
   t.Fatal("replay accepted tampered initial source roster")
  }
 }
+
+func TestTwoSimultaneousOccurrencesSettleInOneCausalCycle(t *testing.T){
+ ctx:=context.Background()
+ bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,bundle)
+ path:=t.TempDir()+"/simultaneous.db"
+ store,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ t.Cleanup(func(){store.Close()})
+ if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ if err:=store.BootstrapGenesisTriggers(ctx,g,bundle,nil);err!=nil{t.Fatal(err)}
+ d:=identity.New(bundle)
+ origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+ for n:=uint64(0);n<2;n++{
+  id,_,err:=d.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+   []any{origin,uint64(0),n});if err!=nil{t.Fatal(err)}
+  instant:=int64(g.InitialInstant)
+  fields:=[]any{id[:],g.RunID[:],"schedule",instant,[]any{instant,uint64(0)},
+   "test.occurrence",uint64(1),g.Payload[16],uint64(0),origin,uint64(0),n,
+   []any{uint64(0)},[]any{uint64(0)}}
+  digest,_,err:=d.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,fields)
+  if err!=nil{t.Fatal(err)}
+  raw,err:=codec.CanonicalPayload(append(cloneAny(fields),digest[:]));if err!=nil{t.Fatal(err)}
+  if err:=store.SeedGenesisOccurrence(ctx,domain.ID(id),g.RunID,
+   domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant},raw);err!=nil{t.Fatal(err)}
+ }
+ ledger,err:=inputledger.New(ctx,g.RunID,bundle,store);if err!=nil{t.Fatal(err)}
+ roles,err:=policiesByRole(bundle);if err!=nil{t.Fatal(err)}
+ policies:=admission.Policies{AdmissionOrder:roles["admission-order"],
+  CausalIdentity:roles["causal-identity"],Fence:roles["admission-fence"],Rules:[][]any{}}
+ c:=New(store,bundle,policies)
+ cid,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{g.RunID[:],[]any{int64(g.InitialInstant),uint64(0)}});if err!=nil{t.Fatal(err)}
+ _,hash,err:=store.LoadWorldState(ctx,0);if err!=nil{t.Fatal(err)}
+ cycle:=admission.Cycle{ID:domain.ID(cid),Instant:g.InitialInstant,Ordinal:0,
+  BaseRevision:0,BaseStateHash:domain.Digest(hash),RetryRef:[]any{uint64(0)}}
+ fence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).AdmitThenEvaluate(
+  ctx,bundle,ledger,cycle,policies,nil);if err!=nil{t.Fatal(err)}
+ if len(fence.Fields[11].([]any))!=2{t.Fatal("admission omitted simultaneous source")}
+ if _,err:=c.CommitSystemUnit(ctx,ledger,cycle,fence);err!=nil{t.Fatalf("valid simultaneous schedule deadlocked WORK: %v",err)}
+ current,err:=store.LoadClock(ctx,[32]byte(g.RunID))
+ if err!=nil||current.Revision!=1||current.NextLogicalSequence!=2{t.Fatal("incomplete co-admission result",err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(g.RunID))
+ if err!=nil||len(pending)!=0{t.Fatalf("partial simultaneous source settlement: %v %v",pending,err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ report,err:=reopened.ReplayClock(ctx,[32]byte(g.RunID),bundle)
+ reopened.Close()
+ if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=2{
+  t.Fatalf("simultaneous lifecycle not deterministically replayable: %+v %v",report,err)
+ }
+}

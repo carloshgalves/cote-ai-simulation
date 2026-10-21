@@ -19,7 +19,7 @@ import (
 // genuine NoProposal slot responses, one terminal decision each, and no event,
 // outbox, trigger or reducer effect. Unsupported eventful WORK fails CLOSED.
 func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
- if b.Mode>3{return errors.New("unregistered WORK terminal variant")}
+ if b.Mode>4{return errors.New("unregistered WORK terminal variant")}
  if len(b.ExpectedClock)==0||len(b.ResultClock)==0||len(b.Journal.Canonical)==0{
   return errors.New("incomplete WORK publication batch")
  }
@@ -142,7 +142,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  seenRounds:=map[domain.ID]bool{}
  for _,p:=range pending{
   if p.Eligibility.Compare(due)>0{continue}
-  if b.Mode==3{
+  if b.Mode==3||b.Mode==4{
    sys,ok:=fence[11].([]any)
    if !ok||len(sys)==0{return errors.New("system WORK source cardinality invalid")}
    matched:=false
@@ -155,7 +155,10 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   }else if !admittedRounds[p.ID]{return errors.New("WORK has pending non-slot causal work without a source lifecycle handler")}
   seenRounds[p.ID]=true
  }
- if b.Mode!=3&&len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
+ if b.Mode!=3&&b.Mode!=4&&len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
+ if b.Mode==4{
+  for round:=range admittedRounds{if !seenRounds[round]{return errors.New("hybrid omitted due round")}}
+ }
  if b.Mode==3&&len(admittedRounds)!=0{return errors.New("system-only handler cannot omit a due decision round")}
  // A selected RoundDeclaration is indivisible: a subset of its slots
  // cannot become a terminal cycle, since the stranded slot would then
@@ -208,6 +211,8 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   if err:=verifySingleResourceTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
  }else if b.Mode==3{
   if err:=verifySystemBatch(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
+ }else if b.Mode==4{
+  if err:=verifyHybridTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
  }else if b.Mode==2{
   if err:=verifyTwoResourceTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,genesisFields,allowed,expectedSlots);err!=nil{return err}
  }else{
@@ -315,7 +320,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  if b.Mode==1{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.ResourceCandidate.Identity[:],b.ResourceCandidate.Canonical);err!=nil{return err}
  }
- if b.Mode==3{
+ if b.Mode==3||b.Mode==4{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.SystemCandidate.Identity[:],b.SystemCandidate.Canonical);err!=nil{return err}
   for _,item:=range b.SystemExtraCandidates{
    if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",item.Identity[:],item.Canonical);err!=nil{return err}

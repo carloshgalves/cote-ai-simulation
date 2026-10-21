@@ -7,7 +7,7 @@ import (
 )
 
 func TestCascadeLimitRequiresExactGenesisPolicyIDVersionAndDigest(t *testing.T){
- pinned,err:=hex.DecodeString("0bac988281bc2b0c4af79adfc9dbd238395ffee5b8ab8758eedc89a75bcd6a6c8")
+ pinned,err:=hex.DecodeString("0bac988281bc2b0c4af79adfc9dbd238395ffee5b8ab8758eedc89a75bcd6a6c")
  if err!=nil{t.Fatal(err)}
  valid:=[]any{[]any{"cycle-coordinate-v1",uint64(1),pinned}}
  cases:=[]struct{name string;refs []any;accepted bool}{

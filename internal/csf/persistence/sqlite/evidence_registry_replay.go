@@ -36,7 +36,7 @@ func verifyEvidenceRegistryExact(ctx context.Context,q queryOne) error {
   decoded,err:=codec.StrictDecodePayload(raw)
   if err!=nil{rows.Close();return err}
   f,ok:=decoded.([]any)
-  if !ok||!equalBytes(f[0],id[:]){rows.Close();return errors.New("evidence replay identity/shape malformed")}
+  if !ok||len(f)==0||!equalBytes(f[0],id[:]){rows.Close();return errors.New("evidence replay identity/shape malformed")}
   rec:=entry{id:id,raw:bytes.Clone(raw),fields:f}
   switch len(f){
   case 15:

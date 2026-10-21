@@ -87,8 +87,7 @@ func (s *Store) CompleteInternalPerception(
     // transition does not authorize an agent's knowledge even if the task's
     // potential-perceptibility predicate selected the event.
     kind, kindOK := event[3].(string)
-    if !kindOK || (kind != "round.consumed" &&
-        kind != "resource.consumed" &&
+    if !kindOK || (kind != "resource.consumed" &&
         kind != "clock.advanced") {
         return zero, errors.New("event requires a registered observer/channel resolver")
     }

@@ -90,7 +90,10 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
   eventValue,err:=codec.StrictDecodePayload(first);if err!=nil{return clock.State{},err}
   fields,ok:=eventValue.([]any)
   if ok&&len(fields)==19&&fields[3]=="resource.consumed"{
-   if len(events)!=2&&len(events)!=3{return clock.State{},errors.New("unsupported resource event batch cardinality")}
+   sources,ok:=journal[11].([]any)
+   if !ok||len(sources)==0||len(events)!=len(sources)+1{
+    return clock.State{},errors.New("resource EventBatch not bijective with resource and lifecycle sources")
+   }
    resultTyped,resultHash,err=reducer.Consume(typed,1)
    if err!=nil{return clock.State{},err}
   }

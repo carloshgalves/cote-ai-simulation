@@ -38,6 +38,15 @@ func TestPotentialPerceptibilityHasNoObserverOrPayloadProjection(t *testing.T){
  if bytes.Contains(tasks[0].Canonical,source[:]){t.Fatal("task leaked private slot-response ID")}
  other,err:=Plan(bundle,refs,run,cycle,0,1,[]ports.CanonicalRecord{event},pins)
  if err!=nil||!bytes.Equal(other[0].Canonical,tasks[0].Canonical){t.Fatal("perception task not deterministic",err)}
+ for _,malformed:=range [][][]any{
+  {[]any{uint64(1)}},
+  {[]any{"perception-v1",uint64(1),[]byte{1}}},
+  {[]any{"perception-v1",uint64(1),bytes.Repeat([]byte{1},32)},[]any{"perception-v1",uint64(1),bytes.Repeat([]byte{1},32)}},
+ }{
+  if _,err:=PlanPinned(malformed,run,cycle,0,1,[]ports.CanonicalRecord{event},pins);err==nil{
+   t.Fatal("malformed or duplicate policy roots were treated as valid replay authority")
+  }
+ }
  fake:=pins
  fake.Identity=[]any{"perception-identity-v1",uint64(1),bytes.Repeat([]byte{0xff},32)}
  if _,err:=Plan(bundle,refs,run,cycle,0,1,[]ports.CanonicalRecord{event},fake);err==nil{

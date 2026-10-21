@@ -103,6 +103,7 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  graw,err:=s.LoadGenesis(ctx,runID);if err!=nil{return report,err}
  genesisRoot,err:=genesis.ValidateCanonical(graw,bundle);if err!=nil{return report,err}
  if [32]byte(genesisRoot.RunID)!=runID{return report,errors.New("genesis run mismatch")}
+ if err:=verifyCascadePolicy(ctx,s.db,runID);err!=nil{return report,err}
  report.GenesisID=genesisRoot.ID
  // CLOCK_ADVANCE in this slice changes logical time, not physical world.
  // All revision hashes must remain anchored to the verified genesis state.

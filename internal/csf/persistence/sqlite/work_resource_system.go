@@ -28,6 +28,13 @@ func verifyResourceSystemTerminal(ctx context.Context,q queryOne,b ports.WorkBat
  if !ok||len(primaryID)!=32{return errors.New("resource-system proposal ID malformed")}
  ids,ok:=journal[15].([]any)
  if !ok||len(ids)!=len(b.Events){return errors.New("resource-system Event IDs differ from journal")}
+ decisions,ok:=journal[16].([]any)
+ if !ok||len(decisions)!=len(b.Decisions){return errors.New("resource-system DecisionRecord references missing")}
+ for i,item:=range b.Decisions{
+  if !sameCanonical(decisions[i],item.Identity[:]){
+   return errors.New("resource-system journal omitted or reordered terminal decision")
+  }
+ }
  var prev []byte
  indexed:=map[string]int{}
  for i,event:=range b.Events{

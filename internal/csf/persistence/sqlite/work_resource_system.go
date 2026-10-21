@@ -155,6 +155,9 @@ func verifyResourceSystemTerminal(ctx context.Context,q queryOne,b ports.WorkBat
   single:=b
   single.SystemCandidate=candidates[i-slots]
   single.SystemExtraCandidates=nil
+  // Contest proof roots belong only to the resource sub-verifier; the
+  // independent schedule/trigger lifecycle handler has no RNG dependency.
+  single.ContestProofs=nil
   single.SystemSuccessors=children
   single.Events=[]ports.CanonicalRecord{b.Events[eventIndex]}
   single.Decisions=[]ports.CanonicalRecord{b.Decisions[i]}

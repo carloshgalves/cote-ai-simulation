@@ -375,3 +375,63 @@ func TestTwoSimultaneousOccurrencesSettleInOneCausalCycle(t *testing.T){
   t.Fatalf("simultaneous lifecycle not deterministically replayable: %+v %v",report,err)
  }
 }
+
+func TestSimultaneousOccurrenceAndTriggerAreOneAtomicPartition(t *testing.T){
+ ctx:=context.Background()
+ bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,bundle)
+ path:=t.TempDir()+"/mixed-system.db"
+ store,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ t.Cleanup(func(){store.Close()})
+ if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ var triggerID domain.ID;triggerID[0]=0xe6
+ definition:=trigger.Definition{ID:triggerID,Version:1,Policy:trigger.RisingEdge,
+  FireOnInitialTrue:true,Dependencies:[]string{"clock"},PredicateThreshold:g.InitialInstant}
+ if err:=store.BootstrapGenesisTriggers(ctx,g,bundle,[]trigger.Definition{definition});err!=nil{t.Fatal(err)}
+ d:=identity.New(bundle)
+ origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+ id,_,err:=d.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+  []any{origin,uint64(0),uint64(0)});if err!=nil{t.Fatal(err)}
+ fields:=[]any{id[:],g.RunID[:],"schedule",int64(g.InitialInstant),
+  []any{int64(g.InitialInstant),uint64(0)},"test.occurrence",uint64(1),
+  g.Payload[16],uint64(0),origin,uint64(0),uint64(0),[]any{uint64(0)},[]any{uint64(0)}}
+ dg,_,err:=d.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,fields)
+ if err!=nil{t.Fatal(err)}
+ raw,err:=codec.CanonicalPayload(append(cloneAny(fields),dg[:]));if err!=nil{t.Fatal(err)}
+ if err:=store.SeedGenesisOccurrence(ctx,domain.ID(id),g.RunID,
+  domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant},raw);err!=nil{t.Fatal(err)}
+ ledger,err:=inputledger.New(ctx,g.RunID,bundle,store);if err!=nil{t.Fatal(err)}
+ roles,err:=policiesByRole(bundle);if err!=nil{t.Fatal(err)}
+ policies:=admission.Policies{AdmissionOrder:roles["admission-order"],
+  CausalIdentity:roles["causal-identity"],Fence:roles["admission-fence"],Rules:[][]any{}}
+ c:=New(store,bundle,policies)
+ cid,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{g.RunID[:],[]any{int64(g.InitialInstant),uint64(0)}});if err!=nil{t.Fatal(err)}
+ _,hash,err:=store.LoadWorldState(ctx,0);if err!=nil{t.Fatal(err)}
+ cycle:=admission.Cycle{ID:domain.ID(cid),Instant:g.InitialInstant,Ordinal:0,
+  BaseRevision:0,BaseStateHash:domain.Digest(hash),RetryRef:[]any{uint64(0)}}
+ fence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).AdmitThenEvaluate(
+  ctx,bundle,ledger,cycle,policies,nil);if err!=nil{t.Fatal(err)}
+ units:=fence.Fields[11].([]any)
+ if len(units)!=2||units[0].([]any)[1]!=uint64(2)||units[1].([]any)[1]!=uint64(3){
+  t.Fatal("same-coordinate system admission order is not canonical",units)
+ }
+ original,err:=store.LoadClock(ctx,[32]byte(g.RunID));if err!=nil{t.Fatal(err)}
+ for step:=uint8(1);step<=7;step++{
+  c.failAfterStep=step
+  if _,err:=c.CommitSystemUnit(ctx,ledger,cycle,fence);err==nil{t.Fatalf("crash point %d bypassed",step)}
+  state,err:=store.LoadClock(ctx,[32]byte(g.RunID))
+  if err!=nil||state!=original{t.Fatal("mixed system crash leaked world mutation",step,err)}
+ }
+ c.failAfterStep=0
+ if _,err:=c.CommitSystemUnit(ctx,ledger,cycle,fence);err!=nil{t.Fatalf("mixed trigger/schedule failed: %v",err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(g.RunID))
+ if err!=nil||len(pending)!=0{t.Fatal("mixed sources not fully settled",err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ report,err:=reopened.ReplayClock(ctx,[32]byte(g.RunID),bundle)
+ reopened.Close()
+ if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=2{
+  t.Fatalf("mixed source replay changed causal result: %+v %v",report,err)
+ }
+}

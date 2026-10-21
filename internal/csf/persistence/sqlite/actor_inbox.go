@@ -3,7 +3,9 @@ package sqlite
 import (
  "bytes"
  "context"
+ "database/sql"
  "errors"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -55,8 +57,53 @@ func (s *Store) BindActorInbox(ctx context.Context,dispatchID [32]byte,actor [2]
  if !bytes.Equal(seal,h[:]){return nil,errors.New("inbox round owner seal changed")}
  rv,err:=codec.StrictDecodePayload(roundRaw);if err!=nil{return nil,err}
  roundFields,ok:=rv.([]any)
- if !ok||len(roundFields)!=11||!sameCanonical(roundFields[3],[]any{actor[0],actor[1]}){
-  return nil,errors.New("inbox round owner differs from actor")
+ if !ok||len(roundFields)!=11||!sameCanonical(roundFields[3],[]any{actor[0],actor[1]})||
+  !sameCanonical(roundFields[5],f[7]){
+  return nil,errors.New("inbox round owner/eligibility differs from dispatch")
+ }
+ slot,ok:=f[4].(string)
+ if !ok{return nil,errors.New("inbox dispatch slot malformed")}
+ slots,ok:=roundFields[4].([]any)
+ allowed:=false
+ if ok{for _,v:=range slots{if v==slot{allowed=true;break}}}
+ if !allowed{return nil,errors.New("inbox slot is not declared by sealed round")}
+ // Dispatch IDs deliberately exclude base revision and effective timestamp.
+ // Do not let an altered record escalate its causal cutoff: authenticate
+ // historic bindings with their committed cycle, and pending bindings with
+ // the current clock/cycle coordinate. No global actor authority is granted.
+ var journalRaw []byte
+ err=s.db.QueryRowContext(ctx,
+  "SELECT d.canonical FROM committed_cycles c JOIN decision_ledger d ON d.id=c.commit_id "+
+  "WHERE c.run_id=? AND c.cycle_id=?",run[:],f[2]).Scan(&journalRaw)
+ switch err{
+ case nil:
+  parsed,err:=codec.StrictDecodePayload(journalRaw)
+  if err!=nil{return nil,err}
+  journal,ok:=parsed.([]any)
+  if !ok||len(journal)!=24||!equalBytes(journal[0],run[:])||
+   !sameCanonical(journal[1],f[2])||
+   !sameCanonical(journal[3],f[9])||journal[6]!=through{
+   return nil,errors.New("historic inbox dispatch disagrees with committed cycle")
+  }
+ case sql.ErrNoRows:
+  var clockRaw []byte
+  if err:=s.db.QueryRowContext(ctx,
+   "SELECT canonical FROM clock_states WHERE run_id=?",run[:]).Scan(&clockRaw);err!=nil{return nil,err}
+  state,err:=clock.Decode(clockRaw)
+  if err!=nil{return nil,err}
+  effective,ok:=decodedInstant(f[9])
+  if !ok||uint64(state.Revision)!=through||int64(state.Instant)!=effective||
+   state.LastOrdinal< -1{
+   return nil,errors.New("pending inbox dispatch disagrees with current clock")
+  }
+  next:=uint64(state.LastOrdinal+1)
+  cycle,err:=registeredDigest("cote.csf.id.cycle",
+   "cote.csf.schema.cycle-id-preimage",
+   []any{run[:],[]any{int64(state.Instant),next}})
+  if err!=nil||!equalBytes(f[2],cycle[:]){
+   return nil,errors.New("pending inbox dispatch has unauthorized cycle")
+  }
+ default:return nil,err
  }
  return &ActorInbox{store:s,run:run,throughRevision:through,actor:actor},nil
 }

@@ -201,3 +201,40 @@ func TestSameInstantCascadeLimitAbortsAfterSixtyFourCompleteWorkCycles(t *testin
   t.Fatalf("replay omitted or truncated valid cascade prefix: %+v %v",report,err)
  }
 }
+
+func TestReplayAndAdmissionRejectUnpublishedOccurrenceSuccessor(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=systemWorkFixture(t,"defer")
+ if _,err:=c.CommitSystemUnit(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ _,_,_,_,_,run:=ledger.Snapshot()
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ var eventID,eventBytes []byte
+ if err:=db.QueryRowContext(ctx,"SELECT id,canonical FROM event_store").Scan(&eventID,&eventBytes);err!=nil{t.Fatal(err)}
+ event,err:=codec.StrictDecodePayload(eventBytes);if err!=nil{t.Fatal(err)}
+ original:=fence.Fields[11].([]any)[0].([]any)
+ sourceID:=original[3].([]byte)
+ var sourceRaw []byte
+ if err:=db.QueryRowContext(ctx,"SELECT canonical FROM scheduled_occurrences WHERE id=?",sourceID).Scan(&sourceRaw);err!=nil{t.Fatal(err)}
+ raw,err:=codec.StrictDecodePayload(sourceRaw);if err!=nil{t.Fatal(err)}
+ fields:=append([]any(nil),raw.([]any)[:14]...)
+ origin:=[]any{uint64(0),[]any{eventID,event.([]any)[18]}}
+ derivation:=identity.New(c.bundle)
+ fakeID,_,err:=derivation.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+  []any{origin,uint64(0),uint64(1)});if err!=nil{t.Fatal(err)}
+ later:=int64(cycle.Instant)+100
+ fields[0],fields[3],fields[4],fields[9],fields[11]=fakeID[:],later,[]any{later,uint64(0)},origin,uint64(1)
+ digest,_,err:=derivation.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,fields)
+ if err!=nil{t.Fatal(err)}
+ canonical,err:=codec.CanonicalPayload(append(fields,digest[:]));if err!=nil{t.Fatal(err)}
+ if _,err:=db.ExecContext(ctx,"INSERT INTO scheduled_occurrences(id,run_id,eligibility_instant,eligibility_ordinal,lifecycle,canonical) VALUES(?,?,?,?,0,?)",
+  fakeID[:],run[:],later,uint64(0),canonical);err!=nil{t.Fatal(err)}
+ db.Close()
+ if _,err:=store.PendingClock(ctx,[32]byte(run));err==nil{
+  t.Fatal("admission accepted a plausible, correctly self-hashed but unauthorised DEFER successor")
+ }
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer reopened.Close()
+ if _,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
+  t.Fatal("replay accepted orphaned future occurrence not referenced by any terminal DecisionRecord")
+ }
+}

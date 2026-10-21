@@ -23,6 +23,7 @@ unrestricted RAG access.
 | --- | --- | --- | --- |
 | Closed round notice, role 0 / ordinal 0 | 1 Observation + 1 KnowledgeInput, after causal completion | 0 | No |
 | Internal `resource.consumed` event | 0 | 0 | No |
+| Internal scheduling REJECT/DEFER and trigger consumed/runtime/created transitions | 0 Observations, 0 KnowledgeInputs; task completion empty | 0 | No |
 | `source_event_refs` | Event ID and digest only, not raw event | None | No raw source payload |
 | Private slot response roots | Redacted | None | No |
 | Future event after dispatch base revision | Not accessible through stale dispatch | Not accessible | No |

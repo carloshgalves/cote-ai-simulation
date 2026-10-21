@@ -33,7 +33,7 @@ func verifyCascadePolicyRefs(refs []any)error{
  }
  // Hash from the canonical genesis.pinning fixture. The abstract
  // transition-contract role declaration is not the canonical hash.
- expectedHash,err:=hex.DecodeString("0bac988281bc2b0c4af79adfc9dbd238395ffee5b8ab8758eedc89a75bcd6a6c8")
+ expectedHash,err:=hex.DecodeString("0bac988281bc2b0c4af79adfc9dbd238395ffee5b8ab8758eedc89a75bcd6a6c")
  if err!=nil{return err}
  matched:=0
  for _,v:=range refs{

@@ -159,7 +159,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   seenRounds[p.ID]=true
  }
  if b.Mode!=3&&b.Mode!=4&&b.Mode!=5&&b.Mode!=6&&len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
- if b.Mode==4||b.Mode==5{
+ if b.Mode==4||b.Mode==5||b.Mode==6{
   for round:=range admittedRounds{if !seenRounds[round]{return errors.New("hybrid omitted due round")}}
  }
  if b.Mode==3&&len(admittedRounds)!=0{return errors.New("system-only handler cannot omit a due decision round")}

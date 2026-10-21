@@ -87,8 +87,18 @@ func verifySingleResourceTerminal(ctx context.Context,tx queryOne,b ports.WorkBa
   prior.NextLogicalSequence,draft)
  if err!=nil{return err}
  refs:=[]any{[]any{uint64(0),uint64(0),sourceID,sourceDigest}}
+ roundSequence:=prior.NextLogicalSequence+1
+ if b.Mode==5{
+  decoded,err:=codec.StrictDecodePayload(b.Events[1].Canonical)
+  if err!=nil{return err}
+  full,ok:=decoded.([]any)
+  if !ok||len(full)!=19{return errors.New("mixed resource round Event malformed")}
+  v,ok:=full[6].(uint64)
+  if !ok||v<=uint64(prior.NextLogicalSequence){return errors.New("mixed resource round logical sequence invalid")}
+  roundSequence=domain.LogicalSequence(v)
+ }
  lifecycleEvent,err:=settlement.ConsumedRoundEvent(domain.ID(b.RunID),domain.ID(b.CycleID),
-  roundID,prior.Instant,prior.Revision,prior.NextLogicalSequence+1,refs)
+  roundID,prior.Instant,prior.Revision,roundSequence,refs)
  if err!=nil{return err}
  for i,expect:=range []ports.CanonicalRecord{resourceEvent,lifecycleEvent}{
   if b.Events[i].Identity!=expect.Identity||!bytes.Equal(b.Events[i].Canonical,expect.Canonical){

@@ -1,0 +1,75 @@
+// Package perception derives potential perceptibility from pinned Event
+// authority. A PerceptionTask contains no observation, observer list, claim,
+// Event payload, or recipient knowledge; task processing belongs downstream.
+package perception
+
+import (
+ "bytes"
+ "errors"
+
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
+)
+
+type Pins struct {
+ Classification []any
+ Resolver []any
+ Identity []any
+}
+
+// Plan is pure and stable under worker/event insertion permutations once
+// passed EventOrderKey-sorted canonical Events. The V1 registered predicate
+// is event-local-ordinal==0, not Event confidentiality. A task never grants
+// an observation or bypasses observer/channel authorization.
+func Plan(bundle *policy.Bundle,run,cycle domain.ID,base,result domain.WorldRevision,
+ events []ports.CanonicalRecord,pins Pins)([]ports.CanonicalRecord,error){
+ if bundle==nil{return nil,errors.New("perception needs authenticated canonical bundle")}
+ for _,ref:=range []any{pins.Classification,pins.Resolver,pins.Identity}{
+  v,ok:=ref.([]any)
+  if !ok||len(v)!=3{return nil,errors.New("perception policy/ref missing")}
+  id,ok:=v[0].(string)
+  if !ok||id==""{return nil,errors.New("perception policy identity invalid")}
+  _,ok=v[1].(uint64)
+  h,good:=v[2].([]byte)
+  if !ok||!good||len(h)!=32{return nil,errors.New("perception policy version/hash invalid")}
+ }
+ if uint64(result)!=uint64(base)+1{return nil,errors.New("perception task revisions not adjacent")}
+ d:=identity.New(bundle)
+ resultRecords:=make([]ports.CanonicalRecord,0)
+ seen:=map[domain.ID]bool{}
+ for _,event:=range events{
+  decoded,err:=codec.StrictDecodePayload(event.Canonical);if err!=nil{return nil,err}
+  fields,ok:=decoded.([]any)
+  if !ok||len(fields)!=19{return nil,errors.New("perception source Event not canonical")}
+  eventID,ok:=fields[0].([]byte)
+  if !ok||len(eventID)!=32||!bytes.Equal(eventID,event.Identity[:])||
+   !bytes.Equal(fields[1].([]byte),run[:])||!bytes.Equal(fields[7].([]byte),cycle[:]){
+   return nil,errors.New("perception task event/run/cycle identity differs from authority")
+  }
+  if seen[domain.ID(event.Identity)]{return nil,errors.New("duplicate perceptible Event identity")}
+  seen[domain.ID(event.Identity)]=true
+  key,ok:=fields[2].([]any)
+  if !ok||len(key)!=6{return nil,errors.New("event source has malformed EventOrderKey")}
+  ordinal,ok:=key[4].(uint64)
+  if !ok{return nil,errors.New("event local ordinal malformed")}
+  h,_,err:=d.Sum("cote.csf.digest.event","cote.csf.schema.event.body",1,fields[:18])
+  if err!=nil{return nil,err}
+  digest,ok:=fields[18].([]byte)
+  if !ok||!bytes.Equal(digest,h[:]){return nil,errors.New("perception task event digest not verified")}
+  id,_,err:=d.Sum("cote.csf.id.event","cote.csf.schema.event-id-preimage",1,
+   []any{run[:],cycle[:],key})
+  if err!=nil||id!=domain.Digest(event.Identity){return nil,errors.New("perception source EventOrderKey identity invalid")}
+  if ordinal!=0{continue}
+  task,_,err:=d.Sum("cote.csf.id.perception-task","cote.csf.schema.perception-task-id-preimage",1,
+   []any{run[:],event.Identity[:],pins.Classification,pins.Resolver,pins.Identity})
+  if err!=nil{return nil,err}
+  body:=[]any{task[:],run[:],cycle[:],event.Identity[:],uint64(base),uint64(result),
+   pins.Classification,pins.Resolver,pins.Identity,uint64(0)}
+  raw,err:=codec.CanonicalPayload(body);if err!=nil{return nil,err}
+  resultRecords=append(resultRecords,ports.CanonicalRecord{Identity:[32]byte(task),Canonical:raw})
+ }
+ return resultRecords,nil
+}

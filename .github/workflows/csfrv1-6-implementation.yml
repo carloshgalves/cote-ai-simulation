@@ -6,6 +6,7 @@ on:
     paths:
       - "internal/csf/perception/**"
       - "internal/csf/persistence/sqlite/**"
+      - "internal/csf/commit/**"
       - "internal/csf/contextboundary/**"
       - ".github/workflows/csfrv1-6-implementation.yml"
 permissions:
@@ -28,11 +29,6 @@ jobs:
       - name: Knowledge-boundary audit (forbidden disclosures and scoped inbox)
         run: go test -count=1 -v ./internal/csf/contextboundary -run '^TestKnowledgeBoundary'
       - name: Determinism under retries and worker permutations
-        run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV16DeliveryPermutationsPreserveCanonicalRoots
-
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV16DeliveryPermutationsPreserveCanonicalRoots'
       - name: Full Go regression
-        run: go test ./...
-
-
-      - name: Full Go regression
-        run: go test ./...
+        run: go test -count=1 ./...

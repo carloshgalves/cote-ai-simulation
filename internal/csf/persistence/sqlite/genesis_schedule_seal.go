@@ -81,4 +81,3 @@ func ensureGenesisScheduleSeal(ctx context.Context,tx *sql.Tx,run [32]byte)error
  if _,err:=tx.ExecContext(ctx,"INSERT INTO genesis_schedule_seals(run_id,roster_digest) VALUES(?,?)",run[:],digest[:]);err!=nil{return err}
  return nil
 }
-

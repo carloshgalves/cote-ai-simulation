@@ -108,7 +108,7 @@ func (s *Store) CompleteInternalPerception(
         return zero, errors.New("task does not match the genesis-pinned Event projection")
     }
 
-    if err := tx.QueryRowContext(ctx, 
+    if err := tx.QueryRowContext(ctx,
         "SELECT d.canonical FROM committed_cycles c JOIN decision_ledger d ON d.id=c.commit_id WHERE c.run_id=? AND c.cycle_id=?",
         run[:], cycle[:]).Scan(&journalRaw); err != nil {
         return zero, fmt.Errorf("perception source not committed: %w", err)

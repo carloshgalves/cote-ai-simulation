@@ -144,10 +144,14 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   if p.Eligibility.Compare(due)>0{continue}
   if b.Mode==3{
    sys,ok:=fence[11].([]any)
-   if !ok||len(sys)!=1{return errors.New("system WORK source cardinality invalid")}
-   entry,ok:=sys[0].([]any);if !ok||len(entry)!=5{return errors.New("system fence unit malformed")}
-   source,ok:=entry[3].([]byte)
-   if !ok||len(source)!=32||!equalBytes(source,p.ID[:]){return errors.New("system WORK cannot skip another due unit")}
+   if !ok||len(sys)==0{return errors.New("system WORK source cardinality invalid")}
+   matched:=false
+   for _,v:=range sys{
+    entry,ok:=v.([]any);if !ok||len(entry)!=5{return errors.New("system fence unit malformed")}
+    source,ok:=entry[3].([]byte)
+    if ok&&len(source)==32&&equalBytes(source,p.ID[:]){matched=true;break}
+   }
+   if !matched{return errors.New("system WORK cannot skip another due unit")}
   }else if !admittedRounds[p.ID]{return errors.New("WORK has pending non-slot causal work without a source lifecycle handler")}
   seenRounds[p.ID]=true
  }
@@ -203,7 +207,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  if b.Mode==1{
   if err:=verifySingleResourceTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
  }else if b.Mode==3{
-  if err:=verifySystemTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
+  if err:=verifySystemBatch(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
  }else if b.Mode==2{
   if err:=verifyTwoResourceTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,genesisFields,allowed,expectedSlots);err!=nil{return err}
  }else{
@@ -313,6 +317,9 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  }
  if b.Mode==3{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.SystemCandidate.Identity[:],b.SystemCandidate.Canonical);err!=nil{return err}
+  for _,item:=range b.SystemExtraCandidates{
+   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",item.Identity[:],item.Canonical);err!=nil{return err}
+  }
   for _,item:=range b.SystemSuccessors{
    fields,err:=strictFull(item,15);if err!=nil{return err}
    if len(fields)!=15{return errors.New("invalid deferred occurrence successor")}

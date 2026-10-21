@@ -133,7 +133,7 @@ func verifySingleResourceTerminal(ctx context.Context,tx queryOne,b ports.WorkBa
  pair:=[]any{[]any{sourceID,b.Decisions[0].Identity[:],decisionDigest[:]}}
  pairHash,err:=registeredDigest("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",pair)
  if err!=nil||!equalBytes(journal[17],pairHash[:]){return errors.New("resource decision digest mismatch")}
- tasksHash,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",[]any{})
+ tasksHash,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",journal[18]
  if err!=nil||!equalBytes(journal[19],tasksHash[:]){return errors.New("secret-only resource events must have empty task digest")}
  if next.NextLogicalSequence!=prior.NextLogicalSequence+2{return errors.New("resource logical sequence is not contiguous")}
  return nil

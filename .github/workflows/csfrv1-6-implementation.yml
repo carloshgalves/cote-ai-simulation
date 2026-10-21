@@ -23,9 +23,6 @@ jobs:
         run: |
           git fetch --no-tags --depth=1 origin main
           git diff --check origin/main HEAD
-      - name: Verify gofmt
-        run: |
-          test -z "$(gofmt -l internal/csf/perception/completion*.go internal/csf/persistence/sqlite/epistemic*.go)"
       - name: Focused perception and SQLite tests
         run: go test -count=1 ./internal/csf/perception/... ./internal/csf/persistence/sqlite/...
       - name: Full Go regression

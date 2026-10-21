@@ -111,7 +111,7 @@ func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){
  if err!=nil||len(viewA.Inbox)!=1{
   t.Fatal("allow-list context lost addressed evidence",err)
  }
- viewB,err:=contextboundary.Build(ctx,reopenedInbox,[2]string{"school","b"})
+ _,err=contextboundary.Build(ctx,reopenedInbox,[2]string{"school","b"})
  if err==nil{t.Fatal("B obtained a context through A's scoped inbox")}
 }
 func sameTestCanonical(a,b any)bool{

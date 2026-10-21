@@ -342,7 +342,7 @@ func verifyAdvanceEnvelope(b ports.ClockAdvanceBatch,journal []any,state,next cl
  if !equalBytes(journal[7],b.BaseStateHash[:])||!equalBytes(journal[9],b.ResultStateHash[:]){
   return errors.New("CycleCommit world hash mismatch")
  }
- for _,index:=range []int{11,16,18}{
+ for _,index:=range []int{11,16}{
   group,ok:=journal[index].([]any)
   if !ok||len(group)!=0{return errors.New("CLOCK_ADVANCE cannot settle work or perception tasks")}
  }

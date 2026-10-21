@@ -353,6 +353,9 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  if expectedRevision!=uint64(current.Revision)+1{
   return report,errors.New("world revision count differs from replayed CycleCommit history")
  }
+ if err:=verifyPendingOutboxExact(ctx,s.db,runID);err!=nil{
+  return report,fmt.Errorf("replay pending outbox completeness: %w",err)
+ }
  if err:=s.VerifyCycleControl(ctx,runID);err!=nil{
   return report,fmt.Errorf("replay/resume CycleControlState: %w",err)
  }

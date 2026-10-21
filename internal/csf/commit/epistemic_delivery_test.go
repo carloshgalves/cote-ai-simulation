@@ -62,8 +62,16 @@ func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){
  if _,err:=store.DeliverRoundPerception(ctx,internalTask,c.bundle);err==nil{
   t.Fatal("secret resource event delivered as actor knowledge")
  }
- if _,err:=store.CompleteInternalPerception(ctx,internalTask,c.bundle);err!=nil{
-  t.Fatal("invisible source must complete empty",err)
+ secretCompletion,err:=store.CompleteInternalPerception(ctx,internalTask,c.bundle)
+ if err!=nil{t.Fatal("invisible source must complete empty",err)}
+ secretValue,err:=codec.StrictDecodePayload(secretCompletion.Canonical)
+ if err!=nil{t.Fatal(err)}
+ secretFields,ok:=secretValue.([]any)
+ if !ok||len(secretFields)!=5{t.Fatal("secret completion shape malformed")}
+ emptyObs,obsOK:=secretFields[2].([]any)
+ emptyInputs,inOK:=secretFields[3].([]any)
+ if !obsOK||!inOK||len(emptyObs)!=0||len(emptyInputs)!=0{
+  t.Fatal("secret task emitted addressed knowledge")
  }
  if err:=store.CheckPerceptionBarrier(ctx,[32]byte(run),1);err==nil{
   t.Fatal("completed secret task must not release a still-pending addressed round")
@@ -100,6 +108,16 @@ func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){
  if _,_,err:=actorInbox.ReadAddressedEvidence(ctx,[2]string{"school","b"});err==nil{
   t.Fatal("B accessed A's capability/partition")
  }
+ auditDB,err:=sql.Open("sqlite","file:"+path)
+ if err!=nil{t.Fatal(err)}
+ var aCount,bCount int
+ if err:=auditDB.QueryRowContext(ctx,"SELECT COUNT(*) FROM evidence_routes WHERE holder_namespace='school' AND holder_id='a' AND run_id=?",run[:]).Scan(&aCount);err!=nil{t.Fatal(err)}
+ if err:=auditDB.QueryRowContext(ctx,"SELECT COUNT(*) FROM evidence_routes WHERE holder_namespace='school' AND holder_id='b' AND run_id=?",run[:]).Scan(&bCount);err!=nil{t.Fatal(err)}
+ auditDB.Close()
+ if aCount!=2||bCount!=0{t.Fatalf("audit holder route counts A=%d B=%d",aCount,bCount)}
+ t.Logf("KNOWLEDGE-BOUNDARY-AUDIT run=%x recipient=school/a observation=%x input=%x observations=1 inputs=1",run,obs[0].Identity,inputs[0].Identity)
+ t.Logf("KNOWLEDGE-BOUNDARY-AUDIT run=%x recipient=school/b observations=0 inputs=0",run)
+ t.Logf("KNOWLEDGE-BOUNDARY-AUDIT run=%x secret_task=%x completion=%x observations=0 inputs=0",run,internalTask,secretCompletion.Identity)
  if bytes.Contains(obs[0].Canonical,privateSource)||bytes.Contains(inputs[0].Canonical,privateSource){
   t.Fatal("private response source leaked into A's redacted evidence")
  }

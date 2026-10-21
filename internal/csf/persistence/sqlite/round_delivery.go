@@ -212,5 +212,48 @@ func (s *Store) readAddressedEvidence(ctx context.Context,run [32]byte,actor [2]
   default:return nil,nil,errors.New("unregistered evidence kind")
   }
  }
- return observations,inputs,rows.Err()
+ if err:=rows.Err();err!=nil{return nil,nil,err}
+ if err:=rows.Close();err!=nil{return nil,nil,err}
+ // A holder must never see an Observation before its KnowledgeInput and
+ // the task's terminal receipt are durable. The inbox reads no EventStore.
+ byObservation:=map[[32]byte]ports.CanonicalRecord{}
+ for _,item:=range inputs{
+  parsed,err:=codec.StrictDecodePayload(item.Canonical);if err!=nil{return nil,nil,err}
+  fields:=parsed.([]any)
+  ref,ok:=fields[7].([]any)
+  if !ok||len(ref)!=3{return nil,nil,errors.New("inbox input observation link malformed")}
+  id,ok:=idField(ref[1])
+  if !ok{return nil,nil,errors.New("inbox input observation ID malformed")}
+  if _,duplicate:=byObservation[id];duplicate{return nil,nil,errors.New("duplicate addressed input for Observation")}
+  byObservation[id]=item
+ }
+ if len(byObservation)!=len(observations){
+  return nil,nil,errors.New("inbox contains unmatched Observation or KnowledgeInput")
+ }
+ for _,obs:=range observations{
+  linked,ok:=byObservation[obs.Identity]
+  if !ok{return nil,nil,errors.New("inbox Observation not durably delivered")}
+  decoded,err:=codec.StrictDecodePayload(obs.Canonical);if err!=nil{return nil,nil,err}
+  fields:=decoded.([]any)
+  task,ok:=idField(fields[1])
+  if !ok{return nil,nil,errors.New("inbox Observation missing task identity")}
+  completionID,err:=registeredDigest("cote.csf.id.perception-completion",
+   "cote.csf.schema.perception-completion-id-preimage",[]any{task[:]})
+  if err!=nil{return nil,nil,err}
+  body:=[]any{completionID[:],task[:],[]any{obs.Identity[:]},[]any{linked.Identity[:]}}
+  receiptHash,err:=registeredDigest("cote.csf.digest.perception-completion",
+   "cote.csf.schema.perception-task-completion.body",body)
+  if err!=nil{return nil,nil,err}
+  expected,err:=codec.CanonicalPayload(append(body,receiptHash[:]))
+  if err!=nil{return nil,nil,err}
+  var actual []byte
+  if err:=s.db.QueryRowContext(ctx,
+   "SELECT canonical FROM causal_outbox WHERE id=?",completionID[:]).Scan(&actual);err!=nil{
+   return nil,nil,errors.New("inbox cannot expose evidence without durable completion")
+  }
+  if !bytes.Equal(expected,actual){
+   return nil,nil,errors.New("inbox completion differs from addressed receipt list")
+  }
+ }
+ return observations,inputs,nil
 }

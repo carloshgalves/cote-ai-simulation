@@ -8,7 +8,6 @@ import (
  "sort"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/decision"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
@@ -74,8 +73,10 @@ func (c *Coordinator) commitSystemBatch(ctx context.Context,ledger *inputledger.
   if err!=nil||uint64(actualKind)!=kind{return empty,errors.New("system unit not in active source authority")}
   decoded,err:=codec.StrictDecodePayload(canonical);if err!=nil{return empty,err}
   fields,ok:=decoded.([]any)
-  if !ok||len(fields)<12||!bytes.Equal(fields[0].([]byte),id)||
-   !bytes.Equal(fields[len(fields)-1].([]byte),dig)||fields[2]!=entry[2]{
+  first,validID:=fields[0].([]byte)
+  last,validDigest:=fields[len(fields)-1].([]byte)
+  if !ok||len(fields)<12||!validID||!validDigest||!bytes.Equal(first,id)||
+   !bytes.Equal(last,dig)||fields[2]!=entry[2]{
    return empty,errors.New("source canonical bytes differ from admitted unit")
   }
   item:=systemOutput{kind:kind,source:source,digest:digest,fields:fields}

@@ -74,6 +74,15 @@ func loadVerifiedRoundProjection(ctx context.Context,q queryOne,taskID [32]byte)
  ev,err:=codec.StrictDecodePayload(eventRaw);if err!=nil{return empty,err}
  e,ok:=ev.([]any)
  if !ok||len(e)!=19{return empty,errors.New("source Event malformed")}
+ if !sameCanonical(e[5],journal[3])||!sameCanonical(e[8],t[4]){
+  return empty,errors.New("source Event effective time/base revision differs from CycleCommit")
+ }
+ classifier:=t[6].([]any)
+ identityPolicy:=t[8].([]any)
+ if classifier[0]!="perception-v1"||classifier[1]!=uint64(1)||
+  identityPolicy[0]!="perception-identity-v1"||identityPolicy[1]!=uint64(1){
+  return empty,errors.New("event uses unregistered observer identity/classification policy")
+ }
  key,ok:=e[2].([]any)
  if !ok||len(key)!=6{return empty,errors.New("EventOrderKey malformed")}
  roundID,ok:=idField(key[1]);if !ok{return empty,errors.New("round lifecycle key missing")}

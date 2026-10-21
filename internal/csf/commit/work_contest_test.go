@@ -242,3 +242,36 @@ func TestTwoResourceContendersWithScheduledOccurrenceOneAtomicCommit(t *testing.
   t.Fatalf("contest/system replay failed: %+v %v",report,err)
  }
 }
+
+func TestContestedResourceAndScheduleWorkerPermutationPreservesTerminalBytes(t *testing.T){
+ ctx:=context.Background()
+ var previous,previousFence []byte
+ var previousEvents [][]byte
+ for index,reverse:=range []bool{false,true}{
+  c,_,ledger,cycle,fence,path:=twoResourceContestFixtureWithOccurrence(t,reverse,true)
+  journal,err:=c.CommitTwoResourceContest(ctx,ledger,cycle,fence)
+  if err!=nil{t.Fatal("contest+schedule does not commit under worker response permutation",err)}
+  db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+  rows,err:=db.QueryContext(ctx,"SELECT canonical FROM event_store ORDER BY id");if err!=nil{t.Fatal(err)}
+  var events [][]byte
+  for rows.Next(){
+   var raw []byte
+   if err:=rows.Scan(&raw);err!=nil{t.Fatal(err)}
+   events=append(events,append([]byte(nil),raw...))
+  }
+  if err:=rows.Err();err!=nil{t.Fatal(err)}
+  rows.Close();db.Close()
+  if index==0{
+   previous=append([]byte(nil),journal.Canonical...)
+   previousFence=append([]byte(nil),fence.Canonical...)
+   previousEvents=events
+  }else{
+   if !bytes.Equal(previous,journal.Canonical)||!bytes.Equal(previousFence,fence.Canonical)||len(previousEvents)!=len(events){
+    t.Fatal("contest plus schedule depends on worker arrival order")
+   }
+   for i,raw:=range events{
+    if !bytes.Equal(previousEvents[i],raw){t.Fatalf("contested source lifecycle Event %d changed by arrival order",i)}
+   }
+  }
+ }
+}

@@ -27,7 +27,7 @@ func TestPotentialPerceptibilityHasNoObserverOrPayloadProjection(t *testing.T){
  event,err:=settlement.ConsumedRoundEvent(run,cycle,round,100,0,0,
   []any{[]any{uint64(0),uint64(1),source[:],digest[:]}})
  if err!=nil{t.Fatal(err)}
- tasks,err:=Plan(bundle,run,cycle,0,1,[]ports.CanonicalRecord{event},pins)
+ tasks,err:=Plan(bundle,refs,run,cycle,0,1,[]ports.CanonicalRecord{event},pins)
  if err!=nil||len(tasks)!=1{t.Fatalf("registered ordinal-zero event should make one potential task: %d %v",len(tasks),err)}
  parsed,err:=codec.StrictDecodePayload(tasks[0].Canonical);if err!=nil{t.Fatal(err)}
  fields:=parsed.([]any)
@@ -36,16 +36,16 @@ func TestPotentialPerceptibilityHasNoObserverOrPayloadProjection(t *testing.T){
   t.Fatal("perception task missing canonical event coordinate")
  }
  if bytes.Contains(tasks[0].Canonical,source[:]){t.Fatal("task leaked private slot-response ID")}
- other,err:=Plan(bundle,run,cycle,0,1,[]ports.CanonicalRecord{event},pins)
+ other,err:=Plan(bundle,refs,run,cycle,0,1,[]ports.CanonicalRecord{event},pins)
  if err!=nil||!bytes.Equal(other[0].Canonical,tasks[0].Canonical){t.Fatal("perception task not deterministic",err)}
  forged:=event
  forged.Identity[0]^=0xff
- if _,err:=Plan(bundle,run,cycle,0,1,[]ports.CanonicalRecord{forged},pins);err==nil{
+ if _,err:=Plan(bundle,refs,run,cycle,0,1,[]ports.CanonicalRecord{forged},pins);err==nil{
   t.Fatal("planner accepted self-inconsistent Event identity")
  }
  bad:=event
  bad.Canonical=[]byte{0x80}
- if _,err:=Plan(bundle,run,cycle,0,1,[]ports.CanonicalRecord{bad},pins);err==nil{
+ if _,err:=Plan(bundle,refs,run,cycle,0,1,[]ports.CanonicalRecord{bad},pins);err==nil{
   t.Fatal("planner accepted unauthenticated Event bytes")
  }
  decoded,err:=codec.StrictDecodePayload(event.Canonical);if err!=nil{t.Fatal(err)}
@@ -60,6 +60,6 @@ func TestPotentialPerceptibilityHasNoObserverOrPayloadProjection(t *testing.T){
  if err!=nil{t.Fatal(err)}
  fields2[18]=h[:]
  alt,err:=codec.CanonicalPayload(fields2);if err!=nil{t.Fatal(err)}
- skipped,err:=Plan(bundle,run,cycle,0,1,[]ports.CanonicalRecord{{Identity:[32]byte(alternative),Canonical:alt}},pins)
+ skipped,err:=Plan(bundle,refs,run,cycle,0,1,[]ports.CanonicalRecord{{Identity:[32]byte(alternative),Canonical:alt}},pins)
  if err!=nil||len(skipped)!=0{t.Fatal("planner created task for event-local-ordinal 1",err)}
 }

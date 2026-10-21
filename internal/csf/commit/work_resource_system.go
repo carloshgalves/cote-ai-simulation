@@ -53,7 +53,10 @@ func (c *Coordinator) commitResourceSystem(ctx context.Context,ledger *inputledg
  policies,err:=policiesByRole(c.bundle);if err!=nil{return empty,err}
  d:=identity.New(c.bundle)
  parts:=make([]resourceSystemPart,0,len(entries)-1)
- if entries[0].([]any)[1]!=uint64(0){return empty,errors.New("resource+system first unit not a slot")}
+ first,ok:=entries[0].([]any)
+ if !ok||len(first)!=5||first[1]!=uint64(0){
+  return empty,errors.New("resource+system first unit not an authenticated slot")
+ }
  roundValue,err:=codec.StrictDecodePayload(b.Events[1].Canonical);if err!=nil{return empty,err}
  roundEvent,ok:=roundValue.([]any)
  if !ok||len(roundEvent)!=19{return empty,errors.New("resource lifecycle Event malformed")}

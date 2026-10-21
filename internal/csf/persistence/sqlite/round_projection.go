@@ -29,6 +29,12 @@ func loadVerifiedRoundProjection(ctx context.Context,q queryOne,taskID [32]byte)
  }
  run,runOK:=idField(t[1]);cycle,cycOK:=idField(t[2]);eventID,evtOK:=idField(t[3])
  if !runOK||!cycOK||!evtOK{return empty,errors.New("task run/cycle/event malformed")}
+ base,baseOK:=t[4].(uint64)
+ result,resultOK:=t[5].(uint64)
+ if !baseOK||!resultOK{return empty,errors.New("task base/result state revision malformed")}
+ if err:=verifyTaskStateTransition(ctx,q,base,result);err!=nil{
+  return empty,fmt.Errorf("perception pre/post authority mismatch: %w",err)
+ }
  for _,idx:=range []int{6,7,8}{
   ref,ok:=t[idx].([]any)
   if !ok||len(ref)!=3{return empty,errors.New("malformed pinned perception policy")}

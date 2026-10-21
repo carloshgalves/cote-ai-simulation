@@ -52,7 +52,7 @@ func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){
  if _,err:=store.CompleteInternalPerception(ctx,addressedTask,c.bundle);err==nil{
   t.Fatal("internal empty resolver erased legitimate addressed evidence")
  }
- if _,err:=store.DeliverRoundPerception(ctx,internalTask);err==nil{
+ if _,err:=store.DeliverRoundPerception(ctx,internalTask,c.bundle);err==nil{
   t.Fatal("secret resource event delivered as actor knowledge")
  }
  if _,err:=store.CompleteInternalPerception(ctx,internalTask,c.bundle);err!=nil{
@@ -65,7 +65,7 @@ func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){
   workers.Add(1)
   go func(){
    defer workers.Done()
-   p,err:=store.DeliverRoundPerception(ctx,addressedTask)
+   p,err:=store.DeliverRoundPerception(ctx,addressedTask,c.bundle)
    results<-p;errs<-err
   }()
  }
@@ -159,7 +159,7 @@ func TestCSFRV16DeliveryFaultsRollbackEveryReceipt(t *testing.T){
    "CREATE TRIGGER block_evidence_route BEFORE INSERT ON causal_outbox BEGIN SELECT RAISE(ABORT,'fault-completion'); END"},
  }{
   if _,err:=db.ExecContext(ctx,scenario.trigger);err!=nil{t.Fatal(err)}
-  if _,err:=store.DeliverRoundPerception(ctx,task);err==nil{
+  if _,err:=store.DeliverRoundPerception(ctx,task,c.bundle);err==nil{
    t.Fatalf("worker crash %s allowed partial publication",scenario.name)
   }
   if _,err:=db.ExecContext(ctx,"DROP TRIGGER block_evidence_route");err!=nil{t.Fatal(err)}
@@ -172,7 +172,7 @@ func TestCSFRV16DeliveryFaultsRollbackEveryReceipt(t *testing.T){
   if err:=db.QueryRowContext(ctx,"SELECT COUNT(*) FROM causal_outbox").Scan(&remaining);err!=nil{t.Fatal(err)}
   if remaining!=2{t.Fatalf("completion survived crash %s",scenario.name)}
  }
- if _,err:=store.DeliverRoundPerception(ctx,task);err!=nil{t.Fatal("retry failed",err)}
+ if _,err:=store.DeliverRoundPerception(ctx,task,c.bundle);err!=nil{t.Fatal("retry failed",err)}
  _,_,_,_,_,run:=ledger.Snapshot()
  replay,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
  defer replay.Close()
@@ -186,7 +186,7 @@ func TestCSFRV16TamperedAddressedEvidenceFailsClosed(t *testing.T){
  db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
  defer db.Close()
  task:=findTerminalRoundTask(t,ctx,db)
- if _,err:=store.DeliverRoundPerception(ctx,task);err!=nil{t.Fatal(err)}
+ if _,err:=store.DeliverRoundPerception(ctx,task,c.bundle);err!=nil{t.Fatal(err)}
  var obsID,raw []byte
  if err:=db.QueryRowContext(ctx,"SELECT record_id,canonical FROM evidence_ledger "+
  "JOIN evidence_routes ON evidence_routes.record_id=evidence_ledger.id "+

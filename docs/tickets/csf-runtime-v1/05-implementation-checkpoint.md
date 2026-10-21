@@ -144,6 +144,7 @@
   disposition `DEDUPLICATED` e variantes futuras de reducer/settlement
   genéricos. O clock atual só admite WORK com fonte causal elegível,
   portanto essas variantes não são exercidas pelo primeiro experimento.
+  Rastreada na [issue #22](https://github.com/carloshgalves/cote-ai-simulation/issues/22).
   Não confundir dívida rastreada com funcionalidade implementada.
 - [x] Planner puro de tarefas potencialmente perceptíveis, com
   publicação/rollback/replay das tasks em ambas as variantes de ciclo.

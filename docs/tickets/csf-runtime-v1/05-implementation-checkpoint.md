@@ -8,9 +8,10 @@
 > `NoProposal`, consumo do recurso, disputa entre agentes,
 > `ScheduledOccurrence(REJECT/DEFER)`, `TriggerActivation(COMMIT)` e
 > `CASCADE_LIMIT` estão implementados e exercitados com SQLite/replay.
-> Coortes simultâneas de fontes de sistema funcionam. Restam coortes
-> mistas slot + sistema, eventos observáveis/perception tasks quando
-> aplicáveis e o aceite integral da CSFRV1-5.
+> Coortes simultâneas de sistema e coortes mistas `NoProposal` +
+> sistema funcionam. Restam `ActionProposal(resource.consume)` combinado
+> com sistema, eventos observáveis/perception tasks quando aplicáveis
+> e o aceite integral da CSFRV1-5.
 
 ## Autoridade de execução entregue
 
@@ -84,9 +85,15 @@
   e `DEFER` de intervalo fixo com sucessor de identidade distinta e
   elegibilidade futura. `TriggerActivation` é validada contra a definição
   pinada e encerrada por `DecisionRecord` e `SOURCE_LIFECYCLE`.
-- Coortes de duas ocorrências e de ocorrência + trigger publicam uma
-  partição completa de decisões/eventos numa transação; rollback ocorre
-  em cada um dos sete failpoints e replay valida a autoridade.
+- Coortes de duas ocorrências, ocorrência + trigger e coortes mistas
+  `NoProposal` + sistema publicam uma partição completa de decisões/eventos
+  numa transação. O híbrido usa `CommitWork Mode 4` no mesmo port, ordenação
+  global de `EventOrderKey`, replay com prova de ambas as classes e
+  testes de rollback em sete failpoints. `DEFER` combinado com dois slots
+  deixa somente o novo sucessor futuro pendente.
+- Permutar a chegada dos trabalhadores no cenário misto preserva
+  exatamente os bytes do `CycleCommit` e dos eventos; manipular candidato,
+  decisão, ordem de eventos ou hash de mundo falha fechado.
 - A regra `CascadePolicyVersionV1` permite no máximo 64 WORKs no mesmo
   instante; a 65ª tentativa emite `CycleAbortRecord(CASCADE_LIMIT)`,
   preserva a fonte ainda pendente e não altera estado. Commit e replay
@@ -111,9 +118,10 @@
 - [x] Limite de cascata versionado, `CASCADE_LIMIT` e replay fail-closed.
 - [x] Admissão de múltiplas fontes **de sistema** na mesma coordenada,
   com bijeção de eventos/decisões e failpoints.
-- [ ] **Finding 1 — High:** coortes mistas de respostas de slots +
-  fontes de sistema no mesmo WORK ainda falham fechado; falta um
-  combinador autenticado que não deixe nenhuma fonte órfã.
+- [ ] **Finding 1 — High:** coortes mistas `NoProposal` +
+  fontes de sistema resolvidas com WORK híbrido e replay. Permanece
+  aberta a composição de `ActionProposal(resource.consume)` + sistema
+  no mesmo fence; não há settlement parcial silencioso.
 - [x] **Finding 2 — Medium:** o limiar V1 agora exige pin canônico
   exato do `cycle-coordinate-v1`; comentário original RESOLVED.
 - [ ] **Finding 3 — High:** emissão e persistência atômica de

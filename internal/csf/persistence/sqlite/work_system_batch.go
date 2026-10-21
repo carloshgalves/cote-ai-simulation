@@ -6,7 +6,6 @@ import (
  "errors"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
@@ -49,7 +48,8 @@ func verifySystemBatch(ctx context.Context,q queryOne,b ports.WorkBatch,
   if !ok{return errors.New("missing lifecycle Event for admitted system source")}
   decision,err:=strictFull(b.Decisions[i],16);if err!=nil{return err}
   ref,ok:=decision[4].([]any)
-  if !ok||len(ref)!=3||!equalBytes(ref[1],sourceID)||!equalBytes(ref[2],unit[4].([]byte)){
+  digest,valid:=unit[4].([]byte)
+  if !ok||len(ref)!=3||!valid||len(digest)!=32||!equalBytes(ref[1],sourceID)||!equalBytes(ref[2],digest){
    return errors.New("multi-system DecisionRecord subject not equal to fence unit")
   }
   childOpt,ok:=decision[13].([]any)

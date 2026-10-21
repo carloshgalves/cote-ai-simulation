@@ -2,6 +2,7 @@ package sqlite
 
 import (
  "bytes"
+ "sort"
  "context"
  "errors"
 
@@ -16,16 +17,19 @@ import (
 // global journal enforces complete one-to-one source/event/decision partition.
 func verifyResourceSystemTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
  prior,next clock.State,fence,journal,predecessor,revision []any,
- allowed map[string]any,expectedSlots map[domain.ID]map[string]bool)error{
+ genesis []any,allowed map[string]any,expectedSlots map[domain.ID]map[string]bool)error{
  units,ok:=fence[11].([]any)
- if !ok||len(units)<2||len(b.Decisions)!=len(units)||
+ if !ok||len(units)<2{return errors.New("mixed resource/system source list invalid")}
+ slots:=1
+ if b.Mode==6{slots=2}else if b.Mode!=5{return errors.New("unregistered resource-system terminal mode")}
+ if len(units)<=slots||len(b.Decisions)!=len(units)||
   len(b.Events)!=len(units)+1||
-  len(b.SystemExtraCandidates)!=len(units)-2||
-  len(expectedSlots)!=1{return errors.New("mixed resource/system source/decision/event bijection invalid")}
- primary,ok:=units[0].([]any)
- if !ok||len(primary)!=5||primary[1]!=uint64(0){return errors.New("resource-system first admitted unit must be resource slot")}
- primaryID,ok:=primary[3].([]byte)
- if !ok||len(primaryID)!=32{return errors.New("resource-system proposal ID malformed")}
+  len(b.SystemExtraCandidates)!=len(units)-slots-1||
+  len(expectedSlots)!=slots{return errors.New("mixed resource/system source/decision/event bijection invalid")}
+ for i:=0;i<slots;i++{
+  unit,ok:=units[i].([]any)
+  if !ok||len(unit)!=5||unit[1]!=uint64(0){return errors.New("resource-system first units must be resource slots")}
+ }
  ids,ok:=journal[15].([]any)
  if !ok||len(ids)!=len(b.Events){return errors.New("resource-system Event IDs differ from journal")}
  decisions,ok:=journal[16].([]any)
@@ -58,39 +62,59 @@ func verifyResourceSystemTerminal(ctx context.Context,q queryOne,b ports.WorkBat
   }
   if !sameCanonical(ids[i],event.Identity[:]){return errors.New("resource-system journal order differs from event batch")}
  }
- resourceChoice,err:=strictFull(b.Decisions[0],16);if err!=nil{return err}
- resourceRound:=map[domain.ID]bool{}
- for round:=range expectedSlots{resourceRound[round]=true}
- if len(resourceRound)!=1{return errors.New("resource-system expected one complete resource round")}
- var round domain.ID
- for key:=range resourceRound{round=key}
- roundIndex,ok:=indexed[string(round[:])]
- if !ok{return errors.New("resource-system omitted consumed resource RoundDeclaration")}
+ roundIDs:=make([]domain.ID,0,len(expectedSlots))
+ for round:=range expectedSlots{roundIDs=append(roundIDs,round)}
+ sort.Slice(roundIDs,func(i,j int)bool{return bytes.Compare(roundIDs[i][:],roundIDs[j][:])<0})
+ roundEvents:=make([]ports.CanonicalRecord,0,slots)
+ resourceIDs:=make([]any,slots)
+ resourceDecisionIDs:=make([]any,slots)
+ pairing:=make([]any,slots)
+ usedEvents:=map[int]bool{0:true}
+ for i:=0;i<slots;i++{
+  index,ok:=indexed[string(roundIDs[i][:])]
+  if !ok||usedEvents[index]{return errors.New("resource-system omitted or duplicated consumed resource round")}
+  usedEvents[index]=true
+  roundEvents=append(roundEvents,b.Events[index])
+  unit:=units[i].([]any)
+  source,ok:=unit[3].([]byte)
+  if !ok||len(source)!=32{return errors.New("resource-system slot ID invalid")}
+  decision,err:=strictFull(b.Decisions[i],16)
+  if err!=nil{return err}
+  h,err:=registeredDigest("cote.csf.digest.decision-record","cote.csf.schema.decision-record.body",decision[:15])
+  if err!=nil{return err}
+  resourceIDs[i]=source
+  resourceDecisionIDs[i]=b.Decisions[i].Identity[:]
+  pairing[i]=[]any{source,b.Decisions[i].Identity[:],h[:]}
+ }
  subFence:=append([]any(nil),fence...)
- subFence[11]=[]any{primary}
+ subFence[11]=append([]any(nil),units[:slots]...)
  subJournal:=append([]any(nil),journal...)
- subJournal[11]=[]any{primaryID}
- subJournal[15]=[]any{b.Events[0].Identity[:],b.Events[roundIndex].Identity[:]}
- subJournal[16]=[]any{b.Decisions[0].Identity[:]}
- h,err:=registeredDigest("cote.csf.digest.decision-record","cote.csf.schema.decision-record.body",resourceChoice[:15])
- if err!=nil{return err}
- pairing:=[]any{[]any{primaryID,b.Decisions[0].Identity[:],h[:]}}
+ subJournal[11]=resourceIDs
+ subJournal[15]=make([]any,slots+1)
+ subJournal[15].([]any)[0]=b.Events[0].Identity[:]
+ for i,event:=range roundEvents{subJournal[15].([]any)[i+1]=event.Identity[:]}
+ subJournal[16]=resourceDecisionIDs
  digest,err:=registeredDigest("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",pairing)
  if err!=nil{return err}
  subJournal[17]=digest[:]
+ subJournal[22]=uint64(prior.NextLogicalSequence)+uint64(slots+1)
  resourceBatch:=b
- resourceBatch.Events=[]ports.CanonicalRecord{b.Events[0],b.Events[roundIndex]}
- resourceBatch.Decisions=[]ports.CanonicalRecord{b.Decisions[0]}
+ resourceBatch.Events=append([]ports.CanonicalRecord{b.Events[0]},roundEvents...)
+ resourceBatch.Decisions=append([]ports.CanonicalRecord(nil),b.Decisions[:slots]...)
  resourceNext:=next
- resourceNext.NextLogicalSequence=prior.NextLogicalSequence+2
- if err:=verifySingleResourceTerminal(ctx,q,resourceBatch,prior,resourceNext,
-  subFence,subJournal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
+ resourceNext.NextLogicalSequence=prior.NextLogicalSequence+domain.LogicalSequence(slots+1)
+ if slots==1{
+  if err:=verifySingleResourceTerminal(ctx,q,resourceBatch,prior,resourceNext,
+   subFence,subJournal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
+ }else{
+  if err:=verifyTwoResourceTerminal(ctx,q,resourceBatch,prior,resourceNext,
+   subFence,subJournal,predecessor,revision,genesis,allowed,expectedSlots);err!=nil{return err}
+ }
  candidates:=append([]ports.CanonicalRecord{b.SystemCandidate},b.SystemExtraCandidates...)
  pairs:=make([]any,len(units))
- pairs[0]=pairing[0]
- usedEvents:=map[int]bool{0:true,roundIndex:true}
+ copy(pairs,pairing)
  usedSuccessors:=map[[32]byte]bool{}
- for i:=1;i<len(units);i++{
+ for i:=slots;i<len(units);i++{
   unit,ok:=units[i].([]any)
   if !ok||len(unit)!=5{return errors.New("resource-system unit malformed")}
   kind,ok:=unit[1].(uint64)
@@ -129,7 +153,7 @@ func verifyResourceSystemTerminal(ctx context.Context,q queryOne,b ports.WorkBat
   oneJournal[16]=[]any{b.Decisions[i].Identity[:]}
   oneJournal[17]=pd[:]
   single:=b
-  single.SystemCandidate=candidates[i-1]
+  single.SystemCandidate=candidates[i-slots]
   single.SystemExtraCandidates=nil
   single.SystemSuccessors=children
   single.Events=[]ports.CanonicalRecord{b.Events[eventIndex]}

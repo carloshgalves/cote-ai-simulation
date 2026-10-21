@@ -117,7 +117,9 @@ func (s *Store) historicalSystemUnits(ctx context.Context,run [32]byte,revision 
     var eventRaw []byte
     if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",eid).Scan(&eventRaw);err!=nil{return nil,err}
     eventValue,err:=codec.StrictDecodePayload(eventRaw);if err!=nil{return nil,err}
-    ev,ok:=eventValue.([]any);if !ok||len(ev)!=19||!equalBytes(ev[18],ref[1].([]byte)){
+    parentDigest,valid:=ref[1].([]byte)
+    if !valid||len(parentDigest)!=32{return nil,errors.New("occurrence parent digest malformed")}
+    ev,ok:=eventValue.([]any);if !ok||len(ev)!=19||!equalBytes(ev[18],parentDigest){
      return nil,errors.New("occurrence origin event-digest provenance mismatch")
     }
     created=at

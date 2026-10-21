@@ -23,6 +23,10 @@ func verifyCascadePolicy(ctx context.Context,q queryOne,run [32]byte)error{
  if !ok||len(fields)!=18{return errors.New("CASCADE_LIMIT genesis envelope malformed")}
  refs,ok:=fields[14].([]any)
  if !ok{return errors.New("CASCADE_LIMIT policy refs missing")}
+ return verifyCascadePolicyRefs(refs)
+}
+
+func verifyCascadePolicyRefs(refs []any)error{
  if clock.CascadePolicyVersionV1!=1||clock.MaxSameInstantWorkV1!=64{
   return errors.New("CASCADE_LIMIT V1 semantics changed without a new policy version")
  }

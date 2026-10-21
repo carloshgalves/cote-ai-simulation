@@ -168,6 +168,7 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  if err:=rows.Err();err!=nil{rows.Close();return report,err}
  if err:=rows.Close();err!=nil{return report,err}
  var lastEventCounter int
+ sameInstantWork:=map[int64]uint64{}
  d:=identity.New(bundle)
  for _,entry:=range entries{
   raw,err:=s.ReadCycleCommit(ctx,entry.commitID);if err!=nil{return report,err}
@@ -177,6 +178,12 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
   planFields,ok:=journal[5].([]any)
   if !ok||len(planFields)==0{return report,errors.New("replay cycle plan missing")}
   if len(planFields)==1&&planFields[0]==uint64(0){
+   at,ok:=asSigned64(journal[3])
+   if !ok{return report,errors.New("WORK replay instant malformed")}
+   if clock.CascadeExceeded(sameInstantWork[at]){
+    return report,errors.New("CASCADE_LIMIT: replay contains too many WORK cycles at one instant")
+   }
+   sameInstantWork[at]++
    // WORK NoProposal contributes one revision and zero events. Rebuild
    // from journal/fence/decision roots, never from runtime cache.
    successor,err:=s.replayNoProposalCommit(ctx,runID,entry.cycleID,entry.commitID,journal,current)

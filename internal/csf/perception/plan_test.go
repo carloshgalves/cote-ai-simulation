@@ -38,6 +38,16 @@ func TestPotentialPerceptibilityHasNoObserverOrPayloadProjection(t *testing.T){
  if bytes.Contains(tasks[0].Canonical,source[:]){t.Fatal("task leaked private slot-response ID")}
  other,err:=Plan(bundle,refs,run,cycle,0,1,[]ports.CanonicalRecord{event},pins)
  if err!=nil||!bytes.Equal(other[0].Canonical,tasks[0].Canonical){t.Fatal("perception task not deterministic",err)}
+ fake:=pins
+ fake.Identity=[]any{"perception-identity-v1",uint64(1),bytes.Repeat([]byte{0xff},32)}
+ if _,err:=Plan(bundle,refs,run,cycle,0,1,[]ports.CanonicalRecord{event},fake);err==nil{
+  t.Fatal("unregistered perception identity policy hash accepted")
+ }
+ fake=pins
+ fake.Classification=[]any{"perception-v2",uint64(2),pins.Classification[2]}
+ if _,err:=Plan(bundle,refs,run,cycle,0,1,[]ports.CanonicalRecord{event},fake);err==nil{
+  t.Fatal("unregistered perceptibility predicate accepted")
+ }
  forged:=event
  forged.Identity[0]^=0xff
  if _,err:=Plan(bundle,refs,run,cycle,0,1,[]ports.CanonicalRecord{forged},pins);err==nil{

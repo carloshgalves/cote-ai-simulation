@@ -161,6 +161,10 @@ CREATE TABLE IF NOT EXISTS clock_states (
  run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
  canonical BLOB NOT NULL
 ) STRICT;
+CREATE TABLE IF NOT EXISTS genesis_schedule_seals (
+ run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
+ roster_digest BLOB NOT NULL CHECK(length(roster_digest)=32)
+) STRICT;
 CREATE TABLE IF NOT EXISTS scheduled_occurrences (
  id BLOB PRIMARY KEY CHECK(length(id)=32),
  run_id BLOB NOT NULL CHECK(length(run_id)=32),
@@ -440,6 +444,15 @@ func (s *Store) AppendFenceIfPrefix(ctx context.Context, fence ports.CanonicalRe
     }
     if !found{return errors.New("fence omitted or forged pending system unit")}
    }
+  }
+ }
+ // First admission atomically seals ALL genesis-authored occurrences,
+ // including those eligible in the future and not yet in this fence.
+ if parsed,err:=codec.StrictDecodePayload(fence.Canonical);err==nil{
+  if fields,ok:=parsed.([]any);ok&&len(fields)==18{
+   raw,ok:=fields[0].([]byte);if !ok||len(raw)!=32{return errors.New("fence run ID invalid")}
+   var run [32]byte;copy(run[:],raw)
+   if err:=ensureGenesisScheduleSeal(ctx,tx,run);err!=nil{return err}
   }
  }
 	result, err := tx.ExecContext(ctx, "INSERT OR IGNORE INTO decision_ledger(id,canonical) VALUES(?,?)", fence.Identity[:], fence.Canonical)

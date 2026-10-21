@@ -47,7 +47,13 @@ func (s *Store) appendDispatchGuarded(ctx context.Context,record ports.Canonical
  lookupErr:=tx.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",record.Identity[:]).Scan(&already)
  if lookupErr==nil{
   if !bytes.Equal(already,record.Canonical){return errors.New("dispatch identity collision")}
-  return tx.Commit() // exact retry does not publish new bytes or escape older tasks
+  // A retry is a fresh authorization to hand off this request, even when
+  // its immutable bytes were appended earlier. A deleted prior completion
+  // must not turn this path into a fail-open bypass of the causal barrier.
+  // Current-clock equality is intentionally not required for historical
+  // idempotent retries; the task audit is against the recorded base.
+  if err:=verifyPriorPerceptionEmpty(ctx,tx,run,base);err!=nil{return err}
+  return tx.Commit()
  }
  if lookupErr!=sql.ErrNoRows{return lookupErr}
  if err:=verifyDispatchAuthority(ctx,tx,f);err!=nil{return err}

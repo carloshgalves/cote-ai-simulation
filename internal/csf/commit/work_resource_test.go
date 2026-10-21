@@ -18,6 +18,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
 )
 func singleResourceFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
  return singleResourceFixtureWithFuture(t,false)
@@ -26,6 +27,9 @@ func singleResourceFixtureWithFuture(t *testing.T,future bool)(*Coordinator,*sql
  return singleResourceFixtureWithOccurrence(t,future,false)
 }
 func singleResourceFixtureWithOccurrence(t *testing.T,future,dueNow bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
+ return singleResourceFixtureWithSystem(t,future,dueNow,false,false)
+}
+func singleResourceFixtureWithSystem(t *testing.T,future,dueNow,activeTrigger,recurring bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
  t.Helper();ctx:=context.Background()
  bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
  g:=stockGenesis(t,bundle)
@@ -33,7 +37,13 @@ func singleResourceFixtureWithOccurrence(t *testing.T,future,dueNow bool)(*Coord
  store,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};t.Cleanup(func(){store.Close()})
  if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
  if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
- if err:=store.BootstrapGenesisTriggers(ctx,g,bundle,nil);err!=nil{t.Fatal(err)}
+ definitions:=[]trigger.Definition(nil)
+ if activeTrigger{
+  var id domain.ID;id[0]=0xa4
+  definitions=append(definitions,trigger.Definition{ID:id,Version:1,Policy:trigger.RisingEdge,
+   FireOnInitialTrue:true,Dependencies:[]string{"clock"},PredicateThreshold:g.InitialInstant})
+ }
+ if err:=store.BootstrapGenesisTriggers(ctx,g,bundle,definitions);err!=nil{t.Fatal(err)}
  if future||dueNow{
   d:=identity.New(bundle)
   origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
@@ -41,9 +51,11 @@ func singleResourceFixtureWithOccurrence(t *testing.T,future,dueNow bool)(*Coord
    []any{origin,uint64(0),uint64(0)});if err!=nil{t.Fatal(err)}
   due:=g.InitialInstant
   if future{due+=100}
+  recurrence:=[]any{uint64(0)}
+  if recurring{recurrence=[]any{uint64(1),[]any{uint64(0),int64(100),[]any{uint64(0)}}}}
   fields:=[]any{id[:],g.RunID[:],"schedule",int64(due),[]any{int64(due),uint64(0)},
    "test.occurrence",uint64(1),g.Payload[16],uint64(0),origin,uint64(0),uint64(0),
-   []any{uint64(0)},[]any{uint64(0)}}
+   recurrence,[]any{uint64(0)}}
   dg,_,err:=d.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,fields)
   if err!=nil{t.Fatal(err)}
   canonical,err:=codec.CanonicalPayload(append(cloneAny(fields),dg[:]))
@@ -301,4 +313,42 @@ func TestResourceAndDueOccurrenceMustShareOneTerminalCommit(t *testing.T){
  report,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle)
  reopened.Close()
  if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=3{t.Fatalf("resource+system replay failed: %+v %v",report,err)}
+}
+
+func TestResourceWithSimultaneousTriggerAndDeferredOccurrence(t *testing.T){
+ for _,tc:=range []struct{name string;trigger,due,recurring bool;events,remaining int}{
+  {"trigger-only",true,false,false,3,0},
+  {"deferred-occurrence",false,true,true,3,1},
+  {"trigger-and-deferred-occurrence",true,true,true,4,1},
+ }{t.Run(tc.name,func(t *testing.T){
+  ctx:=context.Background()
+  c,store,ledger,cycle,fence,path:=singleResourceFixtureWithSystem(t,false,tc.due,tc.trigger,tc.recurring)
+  _,_,_,_,_,run:=ledger.Snapshot()
+  if len(fence.Fields[11].([]any))!=tc.events-1{t.Fatal("incomplete mixed system resource admission")}
+  before,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+  for failure:=uint8(1);failure<=7;failure++{
+   c.failAfterStep=failure
+   if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err==nil{t.Fatalf("resource+system crash point %d committed",failure)}
+   after,err:=store.LoadClock(ctx,[32]byte(run))
+   if err!=nil||after!=before{t.Fatal("crash published partial resource/system outcome",err)}
+  }
+  c.failAfterStep=0
+  if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+  after,err:=store.LoadClock(ctx,[32]byte(run))
+  if err!=nil||after.Revision!=1||uint64(after.NextLogicalSequence)!=uint64(tc.events){
+   t.Fatal("mixed terminal omitted lifecycle Event",err)
+  }
+  typed,_,err:=store.LoadWorldState(ctx,1);if err!=nil{t.Fatal(err)}
+  stock,err:=reducer.DecodeStock(typed);if err!=nil||stock.Available!=0{
+   t.Fatal("resource+system lost registered reducer output",err)
+  }
+  pending,err:=store.PendingClock(ctx,[32]byte(run))
+  if err!=nil||len(pending)!=tc.remaining{t.Fatal("resource+system left incorrect system pending membership",err)}
+  reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+  report,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle)
+  reopened.Close()
+  if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=tc.events{
+   t.Fatalf("mixed resource/system replay failed: %+v %v",report,err)
+  }
+ })}
 }

@@ -38,6 +38,20 @@ func Plan(bundle *policy.Bundle,run,cycle domain.ID,base,result domain.WorldRevi
   if !ok||!good||len(h)!=32{return nil,errors.New("perception policy version/hash invalid")}
  }
  if uint64(base)==math.MaxUint64||uint64(result)!=uint64(base)+1{return nil,errors.New("perception task revisions not adjacent")}
+ if pins.Classification[0]!="perception-v1"||pins.Classification[1]!=uint64(1)||
+  pins.Identity[0]!="perception-identity-v1"||pins.Identity[1]!=uint64(1){
+  return nil,errors.New("unregistered perception classifier/identity policy version")
+ }
+ genesisPins,err:=bundle.GenesisPolicyRefs()
+ if err!=nil{return nil,err}
+ allowed:=map[string][]any{}
+ for _,ref:=range genesisPins{allowed[ref[0].(string)]=ref}
+ for _,ref:=range [][]any{pins.Classification,pins.Resolver,pins.Identity}{
+  pinned,found:=allowed[ref[0].(string)]
+  if !found||pinned[1]!=ref[1]||!bytes.Equal(pinned[2].([]byte),ref[2].([]byte)){
+   return nil,errors.New("perception policy ref not bound to canonical Genesis pins")
+  }
+ }
  d:=identity.New(bundle)
  resultRecords:=make([]ports.CanonicalRecord,0)
  seen:=map[domain.ID]bool{}

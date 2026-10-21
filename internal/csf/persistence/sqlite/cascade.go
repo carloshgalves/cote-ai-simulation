@@ -4,12 +4,47 @@ import (
  "context"
  "errors"
  "math"
+ "bytes"
 
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 )
 
+// The V1 cascade limit is a semantic part of the Genesis-bound
+// cycle-coordinate-v1@1 policy. Its exact 32-byte pin is in the canonical
+// Genesis fixture and verified by genesis.ValidateCanonical. A future
+// runtime must allocate a NEW policy ID/hash before changing this limit.
+func verifyCascadePolicy(ctx context.Context,q queryOne,run [32]byte)error{
+ var genesisRaw []byte
+ if err:=q.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",run[:]).Scan(&genesisRaw);err!=nil{return err}
+ envelope,err:=codec.StrictDecodeEnvelope(genesisRaw);if err!=nil{return err}
+ fields,ok:=envelope.Value.([]any)
+ if !ok||len(fields)!=18{return errors.New("CASCADE_LIMIT genesis envelope malformed")}
+ refs,ok:=fields[14].([]any)
+ if !ok{return errors.New("CASCADE_LIMIT policy refs missing")}
+ if clock.CascadePolicyVersionV1!=1||clock.MaxSameInstantWorkV1!=64{
+  return errors.New("CASCADE_LIMIT V1 semantics changed without a new policy version")
+ }
+ expectedHash:=bytes.Repeat([]byte{0x04},32)
+ matched:=0
+ for _,v:=range refs{
+  ref,ok:=v.([]any)
+  if !ok||len(ref)!=3{return errors.New("CASCADE_LIMIT malformed genesis policy ref")}
+  if ref[0]!="cycle-coordinate-v1"{continue}
+  ver,valid:=ref[1].(uint64)
+  hash,hashOK:=ref[2].([]byte)
+  if !valid||ver!=clock.CascadePolicyVersionV1||!hashOK||!bytes.Equal(hash,expectedHash){
+   return errors.New("CASCADE_LIMIT genesis cycle-coordinate policy pin incompatible with V1")
+  }
+  matched++
+ }
+ if matched!=1{return errors.New("CASCADE_LIMIT requires exactly one pinned cycle-coordinate-v1 policy")}
+ return nil
+}
+
 func countWorkAt(ctx context.Context,q queryOne,run [32]byte,instant int64)(uint64,error){
+ if err:=verifyCascadePolicy(ctx,q,run);err!=nil{return 0,err}
  rows,err:=q.QueryContext(ctx,"SELECT cycle_id,commit_id FROM committed_cycles WHERE run_id=?",run[:])
  if err!=nil{return 0,err}
  type root struct{cycle,commit [32]byte}

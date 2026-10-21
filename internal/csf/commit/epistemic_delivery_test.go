@@ -4,6 +4,7 @@ import (
  "bytes"
  "context"
  "database/sql"
+ "fmt"
  "sync"
  "testing"
 
@@ -256,6 +257,9 @@ func resourceActorInbox(t *testing.T,ctx context.Context,store *sqlite.Store,pat
   }
  }
  if matched==([32]byte{}){
+  // This fixture publishes a second internal secret task alongside the
+  // round notice. The next real dispatch must follow *both* completions.
+  if err:=completeInternalFixtureTasks(ctx,store,path,bundle);err!=nil{t.Fatal(err)}
   root,err:=store.LoadGenesis(ctx,[32]byte(run))
   if err!=nil{t.Fatal(err)}
   manifest,err:=genesis.ValidateCanonical(root,bundle)
@@ -293,6 +297,40 @@ func resourceActorInbox(t *testing.T,ctx context.Context,store *sqlite.Store,pat
  }
  return inbox
 }
+
+func completeInternalFixtureTasks(ctx context.Context,store *sqlite.Store,path string,bundle *policy.Bundle)error{
+ db,err:=sql.Open("sqlite","file:"+path)
+ if err!=nil{return err}
+ rows,err:=db.QueryContext(ctx,"SELECT id,canonical FROM causal_outbox")
+ if err!=nil{db.Close();return err}
+ var ids [][32]byte
+ for rows.Next(){
+  var id,raw []byte
+  if err:=rows.Scan(&id,&raw);err!=nil{rows.Close();db.Close();return err}
+  decoded,err:=codec.StrictDecodePayload(raw)
+  if err!=nil{rows.Close();db.Close();return err}
+  task,ok:=decoded.([]any)
+  if !ok||len(task)!=10{continue}
+  var eventRaw []byte
+  if err:=db.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",task[3]).Scan(&eventRaw);err!=nil{
+   rows.Close();db.Close();return err
+  }
+  value,err:=codec.StrictDecodePayload(eventRaw)
+  if err!=nil{rows.Close();db.Close();return err}
+  e,ok:=value.([]any)
+  if !ok||len(e)!=19{rows.Close();db.Close();return fmt.Errorf("fixture Event invalid")}
+  if e[3]=="resource.consumed"{
+   var taskID [32]byte;copy(taskID[:],id);ids=append(ids,taskID)
+  }
+ }
+ if err:=rows.Err();err!=nil{rows.Close();db.Close();return err}
+ rows.Close();db.Close()
+ for _,id:=range ids{
+  if _,err:=store.CompleteInternalPerception(ctx,id,bundle);err!=nil{return err}
+ }
+ return nil
+}
+
 
 func TestCSFRV16ReplayRejectsIncompleteOrExtraDelivery(t *testing.T){
  for _,tc:=range []struct{name string; mutate func(*testing.T,*sql.DB,perception.RoundProjection)}{

@@ -144,5 +144,5 @@ func verifyPendingOutboxExact(ctx context.Context,q queryOne,run [32]byte)error{
   default:return errors.New("completion has no registered perception resolver")
   }
  }
- return nil
+ return verifyEvidenceRegistryExact(ctx,q)
 }

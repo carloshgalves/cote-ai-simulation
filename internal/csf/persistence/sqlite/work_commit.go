@@ -151,6 +151,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
     source,ok:=entry[3].([]byte)
     if ok&&len(source)==32&&equalBytes(source,p.ID[:]){matched=true;break}
    }
+   if b.Mode==4&&admittedRounds[p.ID]{matched=true}
    if !matched{return errors.New("system WORK cannot skip another due unit")}
   }else if !admittedRounds[p.ID]{return errors.New("WORK has pending non-slot causal work without a source lifecycle handler")}
   seenRounds[p.ID]=true

@@ -105,7 +105,7 @@ func TestSingleResourceCommitAtomicAndReplayable(t *testing.T){
  if err!=nil{t.Fatal(err)}
  stock,err:=reducer.DecodeStock(world);if err!=nil||stock.Available!=0{t.Fatal("successful cycle failed to consume stock",err)}
  db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)};defer db.Close()
- for _,item:=range []struct{table string;want int}{{"event_store",2},{"decision_ledger",4},{"world_revisions",2},{"committed_cycles",1},{"causal_outbox",0},{"evidence_ledger",0}}{
+ for _,item:=range []struct{table string;want int}{{"event_store",2},{"decision_ledger",4},{"world_revisions",2},{"committed_cycles",1},{"causal_outbox",2},{"evidence_ledger",0}}{
   var got int
   if err:=db.QueryRowContext(ctx,"SELECT count(*) FROM "+item.table).Scan(&got);err!=nil{t.Fatal(err)}
   if got!=item.want{t.Fatalf("resource terminal %s contains %d, want %d",item.table,got,item.want)}

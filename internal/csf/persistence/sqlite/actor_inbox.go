@@ -14,6 +14,7 @@ import (
 // Store, EventStore, global EvidenceLedger, or a method to change the holder.
 type ActorInbox struct{
  store *Store
+ run [32]byte
  actor [2]string
 }
 
@@ -54,7 +55,7 @@ func (s *Store) BindActorInbox(ctx context.Context,dispatchID [32]byte,actor [2]
  if !ok||len(roundFields)!=11||!sameCanonical(roundFields[3],[]any{actor[0],actor[1]}){
   return nil,errors.New("inbox round owner differs from actor")
  }
- return &ActorInbox{store:s,actor:actor},nil
+ return &ActorInbox{store:s,run:run,actor:actor},nil
 }
 
 // The actor parameter remains for the context-builder interface, but cannot
@@ -64,5 +65,5 @@ func (i *ActorInbox) ReadAddressedEvidence(ctx context.Context,actor [2]string)(
  if i==nil||i.store==nil||actor!=i.actor{
   return nil,nil,errors.New("recipient capability denies cross-actor evidence")
  }
- return i.store.readAddressedEvidence(ctx,i.actor)
+ return i.store.readAddressedEvidence(ctx,i.run,i.actor)
 }

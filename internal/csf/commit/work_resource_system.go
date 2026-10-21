@@ -32,6 +32,7 @@ type resourceSystemPart struct{
 }
 type resourceSystemLifecycle struct{
  origin domain.ID
+ refs []any
  system int // -1 for consumed resource RoundDeclaration
 }
 
@@ -52,24 +53,34 @@ func (c *Coordinator) commitResourceSystem(ctx context.Context,ledger *inputledg
  var run domain.ID;copy(run[:],b.RunID[:])
  policies,err:=policiesByRole(c.bundle);if err!=nil{return empty,err}
  d:=identity.New(c.bundle)
- parts:=make([]resourceSystemPart,0,len(entries)-1)
- first,ok:=entries[0].([]any)
- if !ok||len(first)!=5||first[1]!=uint64(0){
-  return empty,errors.New("resource+system first unit not an authenticated slot")
+ slotCount:=len(b.Decisions)
+ if (b.Mode!=1&&b.Mode!=2)||slotCount<1||slotCount>2||
+  len(b.Events)!=slotCount+1||len(entries)<=slotCount{
+  return empty,errors.New("resource+system base handler must settle 1 or 2 complete resource slots")
  }
- roundValue,err:=codec.StrictDecodePayload(b.Events[1].Canonical);if err!=nil{return empty,err}
- roundEvent,ok:=roundValue.([]any)
- if !ok||len(roundEvent)!=19{return empty,errors.New("resource lifecycle Event malformed")}
- key,ok:=roundEvent[2].([]any)
- if !ok||len(key)!=6{return empty,errors.New("resource Round EventOrderKey invalid")}
- roundIDBytes,ok:=key[1].([]byte)
- if !ok||len(roundIDBytes)!=32{return empty,errors.New("resource round EventOrderKey source invalid")}
- var roundID domain.ID;copy(roundID[:],roundIDBytes)
- refs,ok:=roundEvent[11].([]any)
- if !ok||len(refs)!=1{return empty,errors.New("resource round must settle one slot")}
- lifecycles:=[]resourceSystemLifecycle{{origin:roundID,system:-1}}
+ parts:=make([]resourceSystemPart,0,len(entries)-slotCount)
+ for i:=0;i<slotCount;i++{
+  unit,ok:=entries[i].([]any)
+  if !ok||len(unit)!=5||unit[1]!=uint64(0){
+   return empty,errors.New("resource+system source slot order malformed")
+  }
+ }
+ lifecycles:=make([]resourceSystemLifecycle,0,len(entries))
+ for i:=1;i<len(b.Events);i++{
+  roundValue,err:=codec.StrictDecodePayload(b.Events[i].Canonical);if err!=nil{return empty,err}
+  roundEvent,ok:=roundValue.([]any)
+  if !ok||len(roundEvent)!=19{return empty,errors.New("resource round lifecycle Event malformed")}
+  key,ok:=roundEvent[2].([]any)
+  if !ok||len(key)!=6||key[0]!=uint64(2){return empty,errors.New("resource round EventOrderKey invalid")}
+  roundIDBytes,ok:=key[1].([]byte)
+  if !ok||len(roundIDBytes)!=32{return empty,errors.New("resource RoundDeclaration ID invalid")}
+  var roundID domain.ID;copy(roundID[:],roundIDBytes)
+  refs,ok:=roundEvent[11].([]any)
+  if !ok||len(refs)!=1{return empty,errors.New("resource round must settle one slot")}
+  lifecycles=append(lifecycles,resourceSystemLifecycle{origin:roundID,refs:refs,system:-1})
+ }
  for index,entryRaw:=range entries{
-  if index==0{continue}
+  if index<slotCount{continue}
   entry,ok:=entryRaw.([]any)
   if !ok||len(entry)!=5{return empty,errors.New("malformed resource+system admitted unit")}
   kind,ok:=entry[1].(uint64)
@@ -111,7 +122,7 @@ func (c *Coordinator) commitResourceSystem(ctx context.Context,ledger *inputledg
   lifecycles=append(lifecycles,resourceSystemLifecycle{origin:source,system:len(parts)})
   parts=append(parts,part)
  }
- if len(parts)==0||uint64(len(parts)+2)>math.MaxUint64-uint64(before.NextLogicalSequence){
+ if len(parts)==0||uint64(len(parts)+1+slotCount)>math.MaxUint64-uint64(before.NextLogicalSequence){
   return empty,errors.New("resource+system event sequence overflow or missing system unit")
  }
  sort.Slice(lifecycles,func(i,j int)bool{return bytes.Compare(lifecycles[i].origin[:],lifecycles[j].origin[:])<0})
@@ -124,7 +135,7 @@ func (c *Coordinator) commitResourceSystem(ctx context.Context,ledger *inputledg
   seq:=before.NextLogicalSequence+domain.LogicalSequence(i+1)
   var event ports.CanonicalRecord
   if item.system<0{
-   event,err=settlement.ConsumedRoundEvent(run,cycle.ID,roundID,before.Instant,before.Revision,seq,refs)
+   event,err=settlement.ConsumedRoundEvent(run,cycle.ID,item.origin,before.Instant,before.Revision,seq,item.refs)
   }else{
    part:=&parts[item.system]
    event,err=settlement.SystemLifecycleEvent(run,cycle.ID,part.source,part.digest,part.kind,
@@ -137,7 +148,7 @@ func (c *Coordinator) commitResourceSystem(ctx context.Context,ledger *inputledg
  successors:=make([]ports.CanonicalRecord,0)
  candidates:=make([]ports.CanonicalRecord,len(parts))
  decisions:=make([]ports.CanonicalRecord,len(entries))
- decisions[0]=b.Decisions[0]
+ copy(decisions,b.Decisions)
  for i,part:=range parts{
   sourceRef:=[]any{part.kind,part.source[:],part.digest[:]}
   successorRef:=[]any{uint64(0)}
@@ -199,7 +210,8 @@ func (c *Coordinator) commitResourceSystem(ctx context.Context,ledger *inputledg
  if err!=nil{return empty,err}
  journal[23]=hash[:]
  canonical,err:=codec.CanonicalPayload(journal);if err!=nil{return empty,err}
- b.Mode=5;b.ResultClock=newClock;b.Events=events;b.Decisions=decisions
+ if slotCount==1{b.Mode=5}else{b.Mode=6}
+ b.ResultClock=newClock;b.Events=events;b.Decisions=decisions
  b.SystemCandidate=candidates[0];b.SystemExtraCandidates=candidates[1:];b.SystemSuccessors=successors
  b.Journal.Canonical=canonical
  if err:=c.commitPreparedWork(ctx,&b);err!=nil{return empty,err}

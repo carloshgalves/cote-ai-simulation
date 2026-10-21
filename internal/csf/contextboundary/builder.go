@@ -49,8 +49,18 @@ func Build(ctx context.Context,reader AddressedReader,actor [2]string)(View,erro
  for _,obs:=range observations{
   v,err:=codec.StrictDecodePayload(obs.Canonical);if err!=nil{return out,err}
   f,ok:=v.([]any)
-  if !ok||len(f)!=15||!bytes.Equal(f[0].([]byte),obs.Identity[:])||
-   !canonicalActor(f[2],actor){return out,errors.New("foreign or malformed Observation")}
+  if !ok||len(f)!=15||!bytes.Equal(rawBytes(f[0]),obs.Identity[:])||
+   !canonicalActor(f[2],actor)||f[3]!=uint64(0)||f[4]!=uint64(0)||
+   f[7]!=uint64(5) {
+   return out,errors.New("foreign or malformed Observation")
+  }
+  projected,err:=sum("cote.csf.id.observation",
+   "cote.csf.schema.observation-id-preimage",[]any{f[1],f[2],f[3],f[4]})
+  if err!=nil||projected!=obs.Identity{return out,errors.New("Observation ID forged")}
+  obsDigest,err:=sum("cote.csf.digest.observation","cote.csf.schema.observation.body",f[:14])
+  if err!=nil||!bytes.Equal(obsDigest[:],rawBytes(f[14])){
+   return out,errors.New("Observation digest corrupt")
+  }
   time,valid:=signedTime(f[5])
   if !valid{return out,errors.New("Observation time invalid")}
   percepts,ok:=f[9].([]any)
@@ -71,10 +81,10 @@ func Build(ctx context.Context,reader AddressedReader,actor [2]string)(View,erro
   confidential,ok:=parts[2].([]any)
   if !ok||len(confidential)!=0{return out,errors.New("context includes unredacted event sources")}
   h:=identity.OpaqueContentHash(encoded)
-  if !bytes.Equal(h[:],percept[3].([]byte)){
+  if !bytes.Equal(h[:],rawBytes(percept[3])){
    return out,errors.New("context percept digest mismatch")
   }
-  if len(f[10].([]any))!=0||!sameTextList(f[11],[]string{"source-inputs-redacted"}){
+  if !isEmptyArray(f[10])||!sameTextList(f[11],[]string{"source-inputs-redacted"}){
    return out,errors.New("context observation leaked claim/raw payload")
   }
   if _,exists:=byID[obs.Identity];exists{return out,errors.New("duplicate observation")}
@@ -85,6 +95,7 @@ func Build(ctx context.Context,reader AddressedReader,actor [2]string)(View,erro
   v,err:=codec.StrictDecodePayload(record.Canonical);if err!=nil{return out,err}
   f,ok:=v.([]any)
   if !ok||len(f)!=11||!canonicalActor(f[3],actor)||
+   f[1]!=uint64(0)||f[2]!=uint64(0)||
    f[5]!=uint64(0)||f[6]!="school.round.lifecycle.v1"{
    return out,errors.New("unregistered or foreign KnowledgeInput")
   }
@@ -98,15 +109,25 @@ func Build(ctx context.Context,reader AddressedReader,actor [2]string)(View,erro
   decoded,err:=codec.StrictDecodePayload(obs.Canonical);if err!=nil{return out,err}
   of:=decoded.([]any)
   digest,err:=sum("cote.csf.digest.observation","cote.csf.schema.observation.body",of[:14])
-  if err!=nil||!bytes.Equal(ref[2].([]byte),digest[:]){
+  if err!=nil||!bytes.Equal(rawBytes(ref[2]),digest[:]){
    return out,errors.New("KnowledgeInput references wrong Observation digest")
   }
   received,valid:=signedTime(f[4])
   if !valid||received!=byTime[key]{return out,errors.New("epistemic time differs from causal event")}
-  if len(f[8].([]any))!=0||!sameCBOR(f[9],of[12]){
+  if !isEmptyArray(f[8])||!sameCBOR(f[9],of[12]){
    return out,errors.New("KnowledgeInput extends disclosed claims/evidence")
   }
-  if !bytes.Equal(f[0].([]byte),record.Identity[:]){return out,errors.New("KnowledgeInput ID mismatch")}
+  inputID,err:=sum("cote.csf.id.knowledge-input",
+   "cote.csf.schema.knowledge-input-id-preimage",
+   []any{ref[1],f[3],f[5],f[1],f[2]})
+  if err!=nil||inputID!=record.Identity||!bytes.Equal(rawBytes(f[0]),record.Identity[:]){
+   return out,errors.New("KnowledgeInput ID mismatch")
+  }
+  inputDigest,err:=sum("cote.csf.digest.knowledge-input",
+   "cote.csf.schema.knowledge-input.body",f[:10])
+  if err!=nil||!bytes.Equal(inputDigest[:],rawBytes(f[10])){
+   return out,errors.New("KnowledgeInput digest corrupt")
+  }
   used[key]=true
   out.Inbox=append(out.Inbox,Entry{Observation:obs,Input:record,ReceivedAt:received})
  }
@@ -137,3 +158,6 @@ func sameTextList(value any,want []string)bool{
  for i:=range want{if v[i]!=want[i]{return false}}
  return true
 }
+
+func rawBytes(value any)[]byte{v,_:=value.([]byte);return v}
+func isEmptyArray(value any)bool{v,ok:=value.([]any);return ok&&len(v)==0}

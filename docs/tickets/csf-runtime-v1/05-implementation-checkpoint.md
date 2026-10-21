@@ -124,13 +124,20 @@
   no mesmo fence; não há settlement parcial silencioso.
 - [x] **Finding 2 — Medium:** o limiar V1 agora exige pin canônico
   exato do `cycle-coordinate-v1`; comentário original RESOLVED.
-- [ ] **Finding 3 — High:** emissão e persistência atômica de
-  `PerceptionTask` para evento legitimamente observável e validação
-  de replay/outbox com tarefas não vazias. Hoje todos os eventos dos
-  cenários integrados são secretos e autenticam lista vazia.
+- [ ] **Finding 3 — High:** derivação pura de `PerceptionTask` agora
+  disponível em `internal/csf/perception/plan.go`, com classificador V1
+  `event-local-ordinal=0`, hash de Event e pins exatos de políticas do Genesis.
+  Ainda falta integrar a task no `CommitWork` e na `causal_outbox`,
+  construir cenário com tasks não vazias e autenticar as referências no replay.
+  A task não contém payload, observadores ou `KnowledgeInput`; esta separação
+  é intencional e testada. Não declarar o finding resolvido antes do
+  commit atômico de tasks.
 - [ ] Commit vazio canônico, `DEDUPLICATED` e demais variantes de
   settlement e matriz completa de fault injection, se exigidos pelo
   ticket de aceite.
+- [x] Planner puro de tarefas potencialmente perceptíveis; confirmação
+  de que `PerceptionTask` não constitui `Observation` nem autoriza
+  conhecimento de agente.
 - [ ] Uma última revisão separada depois de fechar os bloqueios
   anteriores; manter Draft até isso acontecer.
 

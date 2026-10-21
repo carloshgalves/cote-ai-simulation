@@ -73,9 +73,10 @@ func (c *Coordinator) commitSystemBatch(ctx context.Context,ledger *inputledger.
   if err!=nil||uint64(actualKind)!=kind{return empty,errors.New("system unit not in active source authority")}
   decoded,err:=codec.StrictDecodePayload(canonical);if err!=nil{return empty,err}
   fields,ok:=decoded.([]any)
+  if !ok||len(fields)<12{return empty,errors.New("system canonical source field count invalid")}
   first,validID:=fields[0].([]byte)
   last,validDigest:=fields[len(fields)-1].([]byte)
-  if !ok||len(fields)<12||!validID||!validDigest||!bytes.Equal(first,id)||
+  if !validID||!validDigest||!bytes.Equal(first,id)||
    !bytes.Equal(last,dig)||fields[2]!=entry[2]{
    return empty,errors.New("source canonical bytes differ from admitted unit")
   }

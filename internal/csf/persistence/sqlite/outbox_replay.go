@@ -88,7 +88,10 @@ func verifyPendingOutboxExact(ctx context.Context,q queryOne,run [32]byte)error{
  if len(tasks)!=len(expected){return errors.New("outbox is missing a committed PerceptionTask")}
  for taskID,taskRaw:=range tasks{
   completionRaw:=completions[taskID]
-  if completionRaw==nil{continue}
+  if completionRaw==nil{
+   if err:=noTaskEvidence(ctx,q,taskID);err!=nil{return err}
+   continue
+  }
   parsed,err:=codec.StrictDecodePayload(taskRaw);if err!=nil{return err}
   task:=parsed.([]any)
   eventID,ok:=idField(task[3]);if !ok{return errors.New("task source ID invalid")}
@@ -119,6 +122,7 @@ func verifyPendingOutboxExact(ctx context.Context,q queryOne,run [32]byte)error{
    want,err:=codec.CanonicalPayload(append(body,digest[:]))
    if err!=nil{return err}
    if !bytes.Equal(want,completionRaw){return errors.New("unobserved task has nonempty/altered completion")}
+   if err:=noTaskEvidence(ctx,q,taskID);err!=nil{return err}
   default:return errors.New("completion has no registered perception resolver")
   }
  }

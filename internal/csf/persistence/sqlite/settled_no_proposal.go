@@ -83,6 +83,21 @@ func settledNoProposalUnits(ctx context.Context,q queryOne,runID [32]byte)(map[d
    return nil,errors.New("committed WORK fence source identity differs")
   }
   units,ok:=fence[11].([]any);if !ok||len(units)!=len(unitIDs){return nil,errors.New("invalid fenced units")}
+  hasSlot,hasSystem:=false,false
+  for _,raw:=range units{
+   unit,ok:=raw.([]any);if !ok||len(unit)!=5{return nil,errors.New("settled source ref malformed")}
+   if unit[1]==uint64(0){hasSlot=true}
+   if unit[1]==uint64(2)||unit[1]==uint64(3){hasSystem=true}
+  }
+  if hasSlot&&hasSystem{
+   sources,err:=verifyPublishedHybrid(ctx,q,runID,root.cycle,root.commit,journal,fence,eventRaw)
+   if err!=nil{return nil,err}
+   for _,source:=range sources{
+    if result[source]{return nil,errors.New("hybrid source settled more than once")}
+    result[source]=true
+   }
+   continue
+  }
   if len(eventIDs)>0{
    raw,ok:=eventRaw[0].([]byte)
    if !ok{return nil,errors.New("system Event bytes missing")}

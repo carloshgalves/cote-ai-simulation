@@ -20,6 +20,9 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 )
 func twoResourceContestFixture(t *testing.T,reverse bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
+ return twoResourceContestFixtureWithOccurrence(t,reverse,false)
+}
+func twoResourceContestFixtureWithOccurrence(t *testing.T,reverse,dueNow bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
  t.Helper()
  ctx:=context.Background()
  bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
@@ -30,6 +33,21 @@ func twoResourceContestFixture(t *testing.T,reverse bool)(*Coordinator,*sqlite.S
  if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
  if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
  if err:=store.BootstrapGenesisTriggers(ctx,g,bundle,nil);err!=nil{t.Fatal(err)}
+ if dueNow{
+  d:=identity.New(bundle)
+  origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+  id,_,err:=d.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+   []any{origin,uint64(0),uint64(0)});if err!=nil{t.Fatal(err)}
+  due:=int64(g.InitialInstant)
+  fields:=[]any{id[:],g.RunID[:],"schedule",due,[]any{due,uint64(0)},
+   "test.occurrence",uint64(1),g.Payload[16],uint64(0),origin,uint64(0),uint64(0),
+   []any{uint64(0)},[]any{uint64(0)}}
+  dg,_,err:=d.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,fields)
+  if err!=nil{t.Fatal(err)}
+  raw,err:=codec.CanonicalPayload(append(cloneAny(fields),dg[:]));if err!=nil{t.Fatal(err)}
+  if err:=store.SeedGenesisOccurrence(ctx,domain.ID(id),g.RunID,
+   domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant},raw);err!=nil{t.Fatal(err)}
+ }
  ledger,err:=inputledger.New(ctx,g.RunID,bundle,store);if err!=nil{t.Fatal(err)}
  if err:=ledger.DeclareSource(inputledger.Source{ID:"driver"});err!=nil{t.Fatal(err)}
  at:=domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant}
@@ -189,5 +207,38 @@ func TestTwoResourceContestReplayRejectsMissingAffordanceProof(t *testing.T){
  reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
  if _,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
   t.Fatal("replay accepted a contested settlement with one missing affordance assessment")
+ }
+}
+
+func TestTwoResourceContendersWithScheduledOccurrenceOneAtomicCommit(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=twoResourceContestFixtureWithOccurrence(t,false,true)
+ if len(fence.Fields[11].([]any))!=3{t.Fatal("contest/system fence omitted source")}
+ _,_,_,_,_,run:=ledger.Snapshot()
+ original,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ for crash:=uint8(1);crash<=7;crash++{
+  c.failAfterStep=crash
+  if _,err:=c.CommitTwoResourceContest(ctx,ledger,cycle,fence);err==nil{
+   t.Fatalf("contest/system failpoint %d committed",crash)
+  }
+  after,err:=store.LoadClock(ctx,[32]byte(run))
+  if err!=nil||after!=original{t.Fatal("contest/system partially changed clock",err)}
+ }
+ c.failAfterStep=0
+ if _,err:=c.CommitTwoResourceContest(ctx,ledger,cycle,fence);err!=nil{
+  t.Fatalf("two contenders and schedule cannot settle same fence: %v",err)
+ }
+ now,err:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil||now.Revision!=1||now.NextLogicalSequence!=4{t.Fatal("contest/system event batch incomplete",err)}
+ typed,_,err:=store.LoadWorldState(ctx,1);if err!=nil{t.Fatal(err)}
+ stock,err:=reducer.DecodeStock(typed)
+ if err!=nil||stock.Available!=0{t.Fatal("contest winner did not consume last resource",err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(run))
+ if err!=nil||len(pending)!=0{t.Fatal("contest/system left admitted source pending",err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ report,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle)
+ reopened.Close()
+ if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=4{
+  t.Fatalf("contest/system replay failed: %+v %v",report,err)
  }
 }

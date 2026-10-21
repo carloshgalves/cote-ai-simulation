@@ -119,7 +119,8 @@ type AttemptRetryBatch struct {
 // on resource-consuming or lifecycle-bearing variants until reducers exist.
 type WorkBatch struct {
  // 0: NoProposal; 1: single resource; 2: two contenders;
- // 3: one authenticated schedule/trigger system unit.
+ // 3: authenticated system-only cohort; 4: NoProposal slots and system
+ // sources atomically combined in the same AdmissionFence/WorldRevision.
  Mode uint8
  SystemCandidate CanonicalRecord
  // Remaining independent system-unit candidates in AdmissionFence order.

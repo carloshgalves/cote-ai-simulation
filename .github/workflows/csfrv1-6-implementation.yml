@@ -35,3 +35,7 @@ jobs:
 
       - name: Full Go regression
         run: go test -count=1 ./...
+
+
+      - name: Full Go regression
+        run: go test -count=1 ./...

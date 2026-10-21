@@ -105,14 +105,33 @@ func verifyPriorPerceptionEmpty(ctx context.Context,tx *sql.Tx,run [32]byte,thro
   if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM causal_outbox WHERE id=?",id[:]).Scan(&completionRaw);err!=nil{
    return errors.New("dispatch held: prior perception has no durable completion")
   }
-  body:=[]any{id[:],task.id[:],[]any{},[]any{}}
-  digest,err:=registeredDigest("cote.csf.digest.perception-completion",
-   "cote.csf.schema.perception-task-completion.body",body)
-  if err!=nil{return err}
-  canonical,err:=codec.CanonicalPayload(append(body,digest[:]))
-  if err!=nil{return err}
-  if !bytes.Equal(completionRaw,canonical){
-   return errors.New("dispatch held: incomplete or mismatched perception receipt")
+  var eventRaw []byte
+  eventID,ok:=idField(f[3])
+  if !ok{return errors.New("dispatch task Event link invalid")}
+  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",eventID[:]).Scan(&eventRaw);err!=nil{return err}
+  decodedEvent,err:=codec.StrictDecodePayload(eventRaw);if err!=nil{return err}
+  eventFields,ok:=decodedEvent.([]any)
+  if !ok||len(eventFields)!=19{return errors.New("dispatch task Event invalid")}
+  if eventFields[3]=="round.consumed"{
+   projection,err:=loadVerifiedRoundProjection(ctx,tx,task.id)
+   if err!=nil{return err}
+   if !bytes.Equal(completionRaw,projection.Completion.Canonical){
+    return errors.New("dispatch held: addressed completion differs from expected projection")
+   }
+   if err:=checkProjectionEvidence(ctx,tx,task.id,projection);err!=nil{return err}
+  }else{
+   if eventFields[3]!="resource.consumed"&&eventFields[3]!="clock.advanced"{
+    return errors.New("dispatch held: unregistered perception route")
+   }
+   body:=[]any{id[:],task.id[:],[]any{},[]any{}}
+   digest,err:=registeredDigest("cote.csf.digest.perception-completion",
+    "cote.csf.schema.perception-task-completion.body",body)
+   if err!=nil{return err}
+   canonical,err:=codec.CanonicalPayload(append(body,digest[:]))
+   if err!=nil{return err}
+   if !bytes.Equal(completionRaw,canonical){
+    return errors.New("dispatch held: incomplete or mismatched perception receipt")
+   }
   }
  }
  return nil

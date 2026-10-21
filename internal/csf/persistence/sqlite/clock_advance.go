@@ -165,6 +165,12 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
  // updates that would contradict immutable canonical record digests.
  settled,err:=settledNoProposalUnits(ctx,q,runID)
  if err!=nil{return nil,err}
+ var clockBytes []byte
+ if err:=q.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",runID[:]).Scan(&clockBytes);err!=nil{return nil,err}
+ present,err:=clock.Decode(clockBytes);if err!=nil{return nil,err}
+ history,err:=historicalSystemUnits(ctx,q,runID,uint64(present.Revision));if err!=nil{return nil,err}
+ validSystem:=map[domain.ID]bool{}
+ for _,item:=range history{validSystem[item.ID]=true}
  // Read every row, including terminal rows: filtering lifecycle before
  // comparing its indexed projection with the canonical record hides corruption.
  selections:=[]struct{query string;activation bool}{
@@ -189,6 +195,7 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
     rows.Close();return nil,errors.New("pending index columns disagree with canonical authority")
    }
    if life==0&&!settled[domain.ID(key)]{
+    if !validSystem[domain.ID(key)]{rows.Close();return nil,errors.New("pending source has no committed causal birth")}
     out=append(out,clock.Pending{ID:domain.ID(key),Eligibility:derived})
    }
   }

@@ -158,7 +158,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   }else if !admittedRounds[p.ID]{return errors.New("WORK has pending non-slot causal work without a source lifecycle handler")}
   seenRounds[p.ID]=true
  }
- if b.Mode!=3&&b.Mode!=4&&b.Mode!=5&&len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
+ if b.Mode!=3&&b.Mode!=4&&b.Mode!=5&&b.Mode!=6&&len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
  if b.Mode==4||b.Mode==5{
   for round:=range admittedRounds{if !seenRounds[round]{return errors.New("hybrid omitted due round")}}
  }

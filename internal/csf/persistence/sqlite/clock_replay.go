@@ -27,10 +27,10 @@ type ClockReplayReport struct{
  VerifiedActivations int
 }
 
-// Reconstruct the pending set that motivated the first CLOCK_ADVANCE. No
-// WORK or schedule settlement is implemented in CSFRV1-3, so original
-// occurrences/rounds/inputs remain durable. Exclude only the activations and
-// repeat cadences materialized by the advance itself, not source work.
+// Reconstruct historical pending membership for a CLOCK_ADVANCE or WORK.
+// Immutable source rows are not treated as live by default: settlement and
+// causal birth are proved from prior CycleCommit/DecisionRecord/Event roots.
+// Future successors and activations must not appear retroactively.
 func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte,replayRevision uint64)([]clock.Pending,error){
  pending,err:=pendingClock(ctx,s.db,runID)
  if err!=nil{return nil,err}

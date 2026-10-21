@@ -262,7 +262,7 @@ func resourceActorInbox(t *testing.T,ctx context.Context,store *sqlite.Store,pat
   if err!=nil{t.Fatal(err)}
   nextOrdinal:=uint64(clock.LastOrdinal+1)
   coord:=domain.EligibilityCoordinate{NotBeforeInstant:clock.Instant,
-   NotBeforeCycleOrdinal:nextOrdinal}
+   NotBeforeCycleOrdinal:domain.CycleOrdinal(nextOrdinal)}
   origin:=[]any{uint64(2),[]any{manifest.ID[:],manifest.Digest[:]}}
   nextRound,err:=ledger.DeclareRound(ctx,"schedule",[2]string{"school","a"},
    []string{"act"},coord,origin,0,1,0,[]any{uint64(0)})

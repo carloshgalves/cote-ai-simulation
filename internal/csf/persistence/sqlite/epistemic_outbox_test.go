@@ -26,6 +26,23 @@ func TestEmptyEpistemicBarrierFailsClosedOnPendingAndCorruptCompletion(t *testin
         []any{"validators-v1",uint64(1),bytes.Repeat([]byte{2},32)},
         []any{"perception-identity-v1",uint64(1),bytes.Repeat([]byte{3},32)},uint64(0)})
     if err!=nil{t.Fatal(err)}
+    // Materialize a journal/task fixture only for the barrier's ledger
+    // reconciliation test; this is not a canonical CycleCommit builder.
+    var genesisID, commitID [32]byte
+    genesisID[0],commitID[0]=5,6
+    _,err=store.db.ExecContext(ctx,"INSERT INTO genesis_records(run_id,genesis_id,digest,canonical) VALUES(?,?,?,?)",
+        run[:],genesisID[:],genesisID[:],[]byte{0x80})
+    if err!=nil{t.Fatal(err)}
+    journal:=make([]any,24)
+    for i:=range journal {journal[i]=[]any{}}
+    journal[0],journal[1],journal[8],journal[18]=run[:],cycle[:],uint64(1),[]any{task[:]}
+    journalRaw,err:=codec.CanonicalPayload(journal)
+    if err!=nil{t.Fatal(err)}
+    _,err=store.db.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",commitID[:],journalRaw)
+    if err!=nil{t.Fatal(err)}
+    _,err=store.db.ExecContext(ctx,"INSERT INTO committed_cycles(run_id,cycle_id,commit_id) VALUES(?,?,?)",
+        run[:],cycle[:],commitID[:])
+    if err!=nil{t.Fatal(err)}
     _,err=store.db.ExecContext(ctx,"INSERT INTO causal_outbox(id,canonical) VALUES(?,?)",task[:],raw)
     if err!=nil{t.Fatal(err)}
     if err:=store.CheckEmptyPerceptionBarrier(ctx,run,0,bundle);err!=nil{
@@ -51,6 +68,13 @@ func TestEmptyEpistemicBarrierFailsClosedOnPendingAndCorruptCompletion(t *testin
     if err!=nil{t.Fatal(err)}
     if err:=store.CheckEmptyPerceptionBarrier(ctx,run,1,bundle);err==nil{
         t.Fatal("corrupted completion released barrier")
+    }
+    // Removing the task row while leaving its committed journal reference
+    // must not turn a pending task into an apparently empty queue.
+    _,err=store.db.ExecContext(ctx,"DELETE FROM causal_outbox WHERE id=?",task[:])
+    if err!=nil{t.Fatal(err)}
+    if err:=store.CheckEmptyPerceptionBarrier(ctx,run,1,bundle);err==nil{
+        t.Fatal("missing committed task released barrier")
     }
 }
 

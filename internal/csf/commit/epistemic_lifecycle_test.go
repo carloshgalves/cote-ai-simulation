@@ -68,3 +68,52 @@ func TestCSFRV16ScheduledAndTriggerLifecycleCompleteWithoutDisclosure(t *testing
   })
  }
 }
+
+
+func TestCSFRV16TemporalTriggerEventsArePrivateAndCompletionReplayable(t *testing.T){
+ ctx:=context.Background()
+ definition:=activeTrigger()
+ c,store,ledger,run,bundle,path:=testFixture(t,definition)
+ output,err:=c.Advance(ctx,ledger,run);if err!=nil{t.Fatal(err)}
+ if len(output.Events)!=4{t.Fatalf("expected CLOCK/BODY plus two trigger lifecycle Events, got %d",len(output.Events))}
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ rows,err:=db.QueryContext(ctx,"SELECT id,canonical FROM causal_outbox")
+ if err!=nil{t.Fatal(err)}
+ found:=map[string]bool{}
+ for rows.Next(){
+  var id,raw []byte
+  if err:=rows.Scan(&id,&raw);err!=nil{t.Fatal(err)}
+  parsed,err:=codec.StrictDecodePayload(raw);if err!=nil{t.Fatal(err)}
+  task,ok:=parsed.([]any)
+  if !ok||len(task)!=10{t.Fatal("unexpected temporal outbox root")}
+  var eventRaw []byte
+  if err:=db.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",task[3]).Scan(&eventRaw);err!=nil{t.Fatal(err)}
+  event,err:=codec.StrictDecodePayload(eventRaw);if err!=nil{t.Fatal(err)}
+  kind,ok:=event.([]any)[3].(string);if !ok{t.Fatal("missing trigger event kind")}
+  if found[kind]{t.Fatal("duplicate temporal perception producer:",kind)}
+  found[kind]=true
+  var taskID [32]byte;copy(taskID[:],id)
+  if _,err:=store.CompleteInternalPerception(ctx,taskID,bundle);err!=nil{
+   t.Fatalf("registered internal producer %s could not terminate: %v",kind,err)
+  }
+ }
+ if err:=rows.Err();err!=nil{t.Fatal(err)}
+ rows.Close()
+ for _,name:=range []string{"clock.advanced","trigger.runtime.transition","trigger.activation.created"}{
+  if !found[name]{t.Fatal("missing registered private temporal task:",name)}
+ }
+ if found["body.advanced"]{t.Fatal("BODY local ordinal 1 cannot produce a V1-6 task")}
+ if err:=store.CheckPerceptionBarrier(ctx,[32]byte(run),1);err!=nil{
+  t.Fatal("private temporal tasks were not all completed:",err)
+ }
+ var n int
+ if err:=db.QueryRowContext(ctx,"SELECT COUNT(*) FROM evidence_ledger").Scan(&n);err!=nil{t.Fatal(err)}
+ if n!=0{t.Fatal("private temporal transition leaked knowledge to an actor")}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer reopened.Close()
+ report,err:=reopened.ReplayClock(ctx,[32]byte(run),bundle)
+ if err!=nil||report.ReplayedCommits!=1||report.ReplayedEvents!=4{
+  t.Fatalf("temporal trigger completion not replayable: %+v %v",report,err)
+ }
+}

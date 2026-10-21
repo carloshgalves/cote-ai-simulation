@@ -16,6 +16,8 @@ import (
 // validates terminal rows as well; an altered SQL lifecycle projection must
 // never silently remove a unit from the next fence.
 func systemUnits(ctx context.Context,q queryOne,run [32]byte,upTo domain.EligibilityCoordinate)([]inputledger.SystemUnit,error){
+ settled,err:=settledNoProposalUnits(ctx,q,run)
+ if err!=nil{return nil,err}
  selections:=[]struct{kind uint8;table string}{
   {2,"scheduled_occurrences"},{3,"trigger_activations"},
  }
@@ -39,7 +41,7 @@ func systemUnits(ctx context.Context,q queryOne,run [32]byte,upTo domain.Eligibi
     uint64(coord.NotBeforeCycleOrdinal)!=uint64(ordinal){
     rows.Close();return nil,errors.New("system-unit index differs from signed canonical authority")
    }
-   if lifecycle!=0||coord.Compare(upTo)>0{continue}
+   if lifecycle!=0||settled[domain.ID(key)]||coord.Compare(upTo)>0{continue}
    decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{rows.Close();return nil,err}
    fields:=decoded.([]any)
    var source string

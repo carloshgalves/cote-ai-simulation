@@ -285,3 +285,37 @@ func TestCSFRV16ReplayRejectsIncompleteOrExtraDelivery(t *testing.T){
   })
  }
 }
+
+
+func TestCSFRV16ActorInboxCannotReadAnotherRunSameActor(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=singleResourceFixture(t)
+ if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ task:=findTerminalRoundTask(t,ctx,db)
+ p,err:=store.DeliverRoundPerception(ctx,task,c.bundle);if err!=nil{t.Fatal(err)}
+ inbox:=resourceActorInbox(t,ctx,store,path)
+ var foreignRun,foreignTask [32]byte
+ foreignRun[0],foreignTask[0]=0xfa,0xfb
+ decoded,err:=codec.StrictDecodePayload(p.Observation.Canonical);if err!=nil{t.Fatal(err)}
+ f:=append([]any(nil),decoded.([]any)...)
+ f[1]=foreignTask[:]
+ derived,_,err:=identity.New(c.bundle).Sum("cote.csf.id.observation",
+  "cote.csf.schema.observation-id-preimage",1,[]any{f[1],f[2],f[3],f[4]})
+ if err!=nil{t.Fatal(err)}
+ f[0]=derived[:]
+ digest,_,err:=identity.New(c.bundle).Sum("cote.csf.digest.observation",
+  "cote.csf.schema.observation.body",1,f[:14]);if err!=nil{t.Fatal(err)}
+ f[14]=digest[:]
+ raw,err:=codec.CanonicalPayload(f);if err!=nil{t.Fatal(err)}
+ hash:=identity.OpaqueContentHash(raw)
+ if _,err:=db.ExecContext(ctx,"INSERT INTO evidence_ledger(id,canonical) VALUES(?,?)",derived[:],raw);err!=nil{t.Fatal(err)}
+ if _,err:=db.ExecContext(ctx,"INSERT INTO evidence_routes(record_id,run_id,task_id,holder_namespace,holder_id,kind,canonical_hash) VALUES(?,?,?,?,?,?,?)",
+  derived[:],foreignRun[:],foreignTask[:],"school","a",0,hash[:]);err!=nil{t.Fatal(err)}
+ obs,inputs,err:=inbox.ReadAddressedEvidence(ctx,[2]string{"school","a"})
+ if err!=nil||len(obs)!=1||len(inputs)!=1||
+  !bytes.Equal(obs[0].Canonical,p.Observation.Canonical){
+  t.Fatal("same actor in another run crossed the timeline boundary",err,len(obs),len(inputs))
+ }
+}

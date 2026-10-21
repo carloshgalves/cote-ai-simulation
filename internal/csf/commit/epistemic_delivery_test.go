@@ -81,10 +81,12 @@ func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){
   }
  }
  if first==nil||first.Actor!=([2]string{"school","a"}){t.Fatal("invalid recipient policy")}
- obs,inputs,err:=store.ReadAddressedEvidence(ctx,[2]string{"school","a"})
+ actorInbox:=resourceActorInbox(t,ctx,store,path)
+ obs,inputs,err:=actorInbox.ReadAddressedEvidence(ctx,[2]string{"school","a"})
  if err!=nil||len(obs)!=1||len(inputs)!=1{t.Fatal("A must receive exactly one observation/input",err,len(obs),len(inputs))}
- bObs,bInputs,err:=store.ReadAddressedEvidence(ctx,[2]string{"school","b"})
- if err!=nil||len(bObs)!=0||len(bInputs)!=0{t.Fatal("B must never see A's evidence",err)}
+ if _,_,err:=actorInbox.ReadAddressedEvidence(ctx,[2]string{"school","b"});err==nil{
+  t.Fatal("B accessed A's capability/partition")
+ }
  if bytes.Contains(obs[0].Canonical,privateSource)||bytes.Contains(inputs[0].Canonical,privateSource){
   t.Fatal("private response source leaked into A's redacted evidence")
  }
@@ -100,18 +102,17 @@ func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){
  if err!=nil||report.ReplayedCommits!=1||report.ReconstructedClock.Revision!=1{
   t.Fatalf("addressed/secret task completion failed causal replay: %+v %v",report,err)
  }
- a2,i2,err:=reopened.ReadAddressedEvidence(ctx,[2]string{"school","a"})
+ reopenedInbox:=resourceActorInbox(t,ctx,reopened,path)
+ a2,i2,err:=reopenedInbox.ReadAddressedEvidence(ctx,[2]string{"school","a"})
  if err!=nil||len(a2)!=1||len(i2)!=1||!bytes.Equal(a2[0].Canonical,obs[0].Canonical){
   t.Fatal("reopen did not preserve addressed bytes",err)
  }
- viewA,err:=contextboundary.Build(ctx,reopened,[2]string{"school","a"})
+ viewA,err:=contextboundary.Build(ctx,reopenedInbox,[2]string{"school","a"})
  if err!=nil||len(viewA.Inbox)!=1{
   t.Fatal("allow-list context lost addressed evidence",err)
  }
- viewB,err:=contextboundary.Build(ctx,reopened,[2]string{"school","b"})
- if err!=nil||len(viewB.Inbox)!=0{
-  t.Fatal("allow-list context leaked evidence to B",err)
- }
+ viewB,err:=contextboundary.Build(ctx,reopenedInbox,[2]string{"school","b"})
+ if err==nil{t.Fatal("B obtained a context through A's scoped inbox")}
 }
 func sameTestCanonical(a,b any)bool{
  ra,ea:=codec.CanonicalPayload(a);rb,eb:=codec.CanonicalPayload(b)
@@ -193,7 +194,8 @@ func TestCSFRV16TamperedAddressedEvidenceFailsClosed(t *testing.T){
  modified:=bytes.Clone(raw)
  modified[len(modified)-1]^=1
  if _,err:=db.ExecContext(ctx,"UPDATE evidence_ledger SET canonical=? WHERE id=?",modified,obsID);err!=nil{t.Fatal(err)}
- if _,_,err:=store.ReadAddressedEvidence(ctx,[2]string{"school","a"});err==nil{
+ actorInbox:=resourceActorInbox(t,ctx,store,path)
+ if _,_,err:=actorInbox.ReadAddressedEvidence(ctx,[2]string{"school","a"});err==nil{
   t.Fatal("tampered Observation passed the holder-only read seal")
  }
  _,_,_,_,_,run:=ledger.Snapshot()
@@ -202,4 +204,33 @@ func TestCSFRV16TamperedAddressedEvidenceFailsClosed(t *testing.T){
  if _,err:=replay.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
   t.Fatal("causal replay accepted a tampered private observation")
  }
+}
+
+
+func resourceActorInbox(t *testing.T,ctx context.Context,store *sqlite.Store,path string)*sqlite.ActorInbox{
+ t.Helper()
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ rows,err:=db.QueryContext(ctx,"SELECT id,canonical FROM input_ledger")
+ if err!=nil{t.Fatal(err)}
+ defer rows.Close()
+ for rows.Next(){
+  var id,raw []byte
+  if err:=rows.Scan(&id,&raw);err!=nil{t.Fatal(err)}
+  v,err:=codec.StrictDecodePayload(raw);if err!=nil{continue}
+  fields,ok:=v.([]any)
+  if !ok||len(fields)!=11||fields[4]!="act"{continue}
+  actor,ok:=fields[6].([]any)
+  if !ok||len(actor)!=2||actor[0]!="school"||actor[1]!="a"{continue}
+  var dispatch [32]byte;copy(dispatch[:],id)
+  inbox,err:=store.BindActorInbox(ctx,dispatch,[2]string{"school","a"})
+  if err!=nil{t.Fatal(err)}
+  if _,err:=store.BindActorInbox(ctx,dispatch,[2]string{"school","b"});err==nil{
+   t.Fatal("B can mint a capability with A's dispatch")
+  }
+  return inbox
+ }
+ if err:=rows.Err();err!=nil{t.Fatal(err)}
+ t.Fatal("cannot find A's authenticated dispatch for inbox binding")
+ return nil
 }

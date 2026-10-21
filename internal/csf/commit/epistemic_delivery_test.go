@@ -478,3 +478,47 @@ func TestCSFRV16StorageRejectsForgedAndLateDispatch(t *testing.T){
   fields[8]=uint64(0) // current durable clock revision is one, not zero
  })
 }
+
+
+func TestCSFRV16InboxRejectsMutatedHistoricalDispatchCutoff(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=singleResourceFixture(t)
+ if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite","file:"+path)
+ if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ rows,err:=db.QueryContext(ctx,"SELECT id,canonical FROM input_ledger")
+ if err!=nil{t.Fatal(err)}
+ var selected [32]byte
+ var original []byte
+ for rows.Next(){
+  var id,raw []byte
+  if err:=rows.Scan(&id,&raw);err!=nil{t.Fatal(err)}
+  value,err:=codec.StrictDecodePayload(raw)
+  if err!=nil{continue}
+  f,ok:=value.([]any)
+  if !ok||len(f)!=11||f[4]!="act"||f[8]!=uint64(0){continue}
+  copy(selected[:],id);original=bytes.Clone(raw);break
+ }
+ rows.Close()
+ if selected==([32]byte{}){t.Fatal("missing historic dispatch")}
+ for _,tc:=range []struct{name string;idx int;value any}{
+  {"future-revision",8,uint64(1)},
+  {"future-instant",9,int64(987654321)},
+ }{
+  t.Run(tc.name,func(t *testing.T){
+   payload,err:=codec.StrictDecodePayload(original);if err!=nil{t.Fatal(err)}
+   fields:=append([]any(nil),payload.([]any)...)
+   fields[tc.idx]=tc.value
+   forged,err:=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+   if _,err:=db.ExecContext(ctx,"UPDATE input_ledger SET canonical=? WHERE id=?",forged,selected[:]);err!=nil{t.Fatal(err)}
+   if _,err:=store.BindActorInbox(ctx,selected,[2]string{"school","a"});err==nil{
+    t.Fatal("altered historical dispatch escalated inbox causal cutoff")
+   }
+   if _,err:=db.ExecContext(ctx,"UPDATE input_ledger SET canonical=? WHERE id=?",original,selected[:]);err!=nil{t.Fatal(err)}
+  })
+ }
+ if _,err:=store.BindActorInbox(ctx,selected,[2]string{"school","a"});err!=nil{
+  t.Fatal("unchanged historical dispatch lost valid empty-scoped capability:",err)
+ }
+}

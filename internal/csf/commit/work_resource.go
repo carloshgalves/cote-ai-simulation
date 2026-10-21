@@ -43,7 +43,7 @@ func (c *Coordinator) CommitSingleResource(ctx context.Context,ledger *inputledg
  stock,err:=reducer.DecodeStock(before);if err!=nil{return empty,err}
  if stock.Available>math.MaxInt64{return empty,errors.New("resource stock too large for registered signed claim")}
  units,ok:=fence.Fields[11].([]any)
- if !ok||len(units)!=1{return empty,errors.New("single-resource handler requires one admitted proposal")}
+ if !ok||len(units)==0{return empty,errors.New("resource handler requires admitted proposal")}
  entry,ok:=units[0].([]any);if !ok||len(entry)!=5||entry[1]!=uint64(0){
   return empty,errors.New("resource handler cannot silently consume occurrence or trigger")
  }
@@ -127,6 +127,9 @@ func (c *Coordinator) CommitSingleResource(ctx context.Context,ledger *inputledg
   ExpectedClock:beforeClock,ResultClock:afterClock,ExpectedInputPrefix:prefix,
   Journal:journal,Decisions:[]ports.CanonicalRecord{record},Events:output.Events,
   BaseStateHash:[32]byte(hash),RevisionCanonical:worldRevision,FailAfterStep:c.failAfterStep}
+ if len(units)>1{
+  return c.commitResourceSystem(ctx,ledger,cycle,fence,batch)
+ }
  if err:=c.commitPreparedWork(ctx,&batch);err!=nil{return empty,err}
  return batch.Journal,nil
 }

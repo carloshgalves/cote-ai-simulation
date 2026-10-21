@@ -7,6 +7,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 )
 
 // RoundProjection contains only observer-addressed, redacted evidence.
@@ -94,7 +95,12 @@ func ProjectRoundNotice(task,event,round ports.CanonicalRecord)(RoundProjection,
   body[1]!=uint64(2){return out,errors.New("round lifecycle payload differs from source")}
  sourceRefs,ok:=body[2].([]any)
  if !ok||len(sourceRefs)==0{return out,errors.New("round lifecycle lacks source closure")}
- if !sameBytesOrDigest(typed[3],identity.OpaqueContentHash(payload)){
+ if decoded.DomainTag!="cote.csf.round.consumed.v1"||
+  decoded.SchemaID!="cote.csf.schema.typed-value"||
+  decoded.SchemaVersion!=1||
+  typed[0]!="cote.csf.schema.typed-value"||
+  typed[1]!=uint64(1)||
+  !sameBytesOrDigest(typed[3],identity.OpaqueContentHash(payload)){
   return out,errors.New("round Event payload digest mismatch")
  }
  // Only a fixed, minimal notice is visible: this round closed. Source refs,
@@ -142,13 +148,13 @@ func ProjectRoundNotice(task,event,round ports.CanonicalRecord)(RoundProjection,
  if err!=nil{return out,err}
  completionRaw,err:=codec.CanonicalPayload(append(completionBody,completionDigest[:]))
  if err!=nil{return out,err}
- _=roundDigest // verified round root; ledger has no digest column for RoundDeclarations
+ _=roundDigest // SQLite must independently verify the immutable round_integrity_seals hash
  out.Actor=[2]string{ns,name}
  out.Observation=ports.CanonicalRecord{Identity:observationID,Canonical:obsRaw}
  out.Input=ports.CanonicalRecord{Identity:inputID,Canonical:inputRaw}
  out.Completion=ports.CanonicalRecord{Identity:completionID,Canonical:completionRaw}
  return out,nil
 }
-func sameBytesOrDigest(value any,hash [32]byte)bool{
+func sameBytesOrDigest(value any,hash domain.Digest)bool{
  return bytes.Equal(asBytes(value),hash[:])
 }

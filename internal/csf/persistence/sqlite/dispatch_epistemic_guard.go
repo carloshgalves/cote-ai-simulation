@@ -137,3 +137,17 @@ func verifyPriorPerceptionEmpty(ctx context.Context,tx *sql.Tx,run [32]byte,thro
  }
  return nil
 }
+
+
+// CheckPerceptionBarrier is the non-mutating counterpart of the actual
+// transactional SlotDispatch guard. It verifies that all committed tasks
+// causally preceding the target revision have exact durable completions.
+// It does not admit a slot or change a round's membership/coordinate.
+func (s *Store) CheckPerceptionBarrier(ctx context.Context,run [32]byte,throughRevision uint64)error{
+ if s==nil{return errors.New("epistemic barrier requires Store")}
+ tx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true})
+ if err!=nil{return err}
+ defer tx.Rollback()
+ if err:=verifyPriorPerceptionEmpty(ctx,tx,run,throughRevision);err!=nil{return err}
+ return tx.Commit()
+}

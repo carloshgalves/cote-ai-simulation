@@ -52,6 +52,13 @@ func (c *Coordinator) CommitNoProposal(ctx context.Context,ledger *inputledger.L
   }
  }
  unitValues,ok:=fence.Fields[11].([]any);if !ok{return empty,errors.New("fence admitted source list missing")}
+ for _,raw:=range unitValues{
+  entry,ok:=raw.([]any)
+  if !ok||len(entry)!=5{return empty,errors.New("mixed admission entry malformed")}
+  kind,ok:=entry[1].(uint64)
+  if !ok{return empty,errors.New("mixed admission kind malformed")}
+  if kind!=0{return c.commitMixedWork(ctx,ledger,cycle,fence)}
+ }
  d:=identity.New(c.bundle)
  policies,err:=policiesByRole(c.bundle);if err!=nil{return empty,err}
  decisions:=make([]ports.CanonicalRecord,0,len(unitValues))

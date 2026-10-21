@@ -210,8 +210,8 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  list,ok:=journal[16].([]any);if !ok||len(list)!=len(units){
   return errors.New("CycleCommit omits terminal decision references")
  }
- if b.Mode==5{
-  if err:=verifyResourceSystemTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
+ if b.Mode==5||b.Mode==6{
+  if err:=verifyResourceSystemTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,genesisFields,allowed,expectedSlots);err!=nil{return err}
  }else if b.Mode==1{
   if err:=verifySingleResourceTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
  }else if b.Mode==3{

@@ -158,7 +158,8 @@ CREATE TABLE IF NOT EXISTS evidence_routes (
  task_id BLOB NOT NULL CHECK(length(task_id)=32),
  holder_namespace TEXT NOT NULL,
  holder_id TEXT NOT NULL,
- kind INTEGER NOT NULL CHECK(kind IN (0,1))
+ kind INTEGER NOT NULL CHECK(kind IN (0,1)),
+ canonical_hash BLOB NOT NULL CHECK(length(canonical_hash)=32)
 ) STRICT;
 CREATE INDEX IF NOT EXISTS idx_evidence_holder ON evidence_routes(holder_namespace,holder_id,kind,task_id,record_id);
 CREATE INDEX IF NOT EXISTS idx_evidence_task ON evidence_routes(task_id,kind,record_id);

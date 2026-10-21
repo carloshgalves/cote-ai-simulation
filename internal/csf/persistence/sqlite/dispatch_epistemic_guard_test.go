@@ -62,6 +62,12 @@ func TestDispatchAppendRequiresDurablePriorPerception(t *testing.T){
  if err!=nil{t.Fatal(err)}
  if _,err:=s.db.ExecContext(ctx,"INSERT INTO causal_outbox(id,canonical) VALUES(?,?)",
   cid[:],canonical);err!=nil{t.Fatal(err)}
+ eventFields:=make([]any,19)
+ for i:=range eventFields{eventFields[i]=[]any{}}
+ eventFields[0],eventFields[3],eventFields[15],eventFields[12]=event[:],"clock.advanced",uint64(2),[]any{}
+ eventRaw,err:=codec.CanonicalPayload(eventFields);if err!=nil{t.Fatal(err)}
+ if _,err:=s.db.ExecContext(ctx,"INSERT INTO event_store(id,canonical) VALUES(?,?)",
+  event[:],eventRaw);err!=nil{t.Fatal(err)}
  if err:=s.Append(ctx,dispatch);err!=nil{t.Fatal("durable completed task must allow dispatch",err)}
  if err:=s.Append(ctx,dispatch);err!=nil{t.Fatal("same dispatch bytes should be idempotent",err)}
  if err:=s.db.QueryRow("SELECT COUNT(*) FROM input_ledger WHERE id=?",did[:]).Scan(&count);err!=nil||count!=1{

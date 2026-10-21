@@ -36,6 +36,11 @@ func (s *Store) appendDispatchGuarded(ctx context.Context,record ports.Canonical
  if !ok||len(f)!=11{return errors.New("invalid SlotDispatch record")}
  run,ok:=idField(f[1]);if !ok{return errors.New("dispatch run malformed")}
  base,ok:=f[8].(uint64);if !ok{return errors.New("dispatch revision malformed")}
+ wantID,err:=registeredDigest("cote.csf.id.dispatch",
+  "cote.csf.schema.dispatch-id-preimage",[]any{f[1],f[2],f[3],f[4],f[5]})
+ if err!=nil||!bytes.Equal(wantID[:],record.Identity[:]){
+  return errors.New("dispatch identity differs from canonical preimage")
+ }
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return err}
  defer tx.Rollback()
  if err:=verifyPriorPerceptionEmpty(ctx,tx,run,base);err!=nil{return err}

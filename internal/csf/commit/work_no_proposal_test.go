@@ -223,7 +223,7 @@ func TestNoProposalWorkCanCommitOnlyAfterExplicitAbortedAttemptRetry(t *testing.
  if err!=nil||ctl[0]!=uint64(0){t.Fatalf("WORK retry did not release control state: %v %v",ctl,err)}
 }
 
-func TestNoProposalWorkRejectsUnsettledScheduledOccurrenceAtSameCoordinate(t *testing.T){
+func TestNoProposalWorkAtomicallySettlesScheduledOccurrenceAtSameCoordinate(t *testing.T){
  ctx:=context.Background()
  c,store,ledger,cycle,fence,_:=noProposalWorkFixtureWithSetup(t,
   func(s *sqlite.Store,run domain.ID,b *policy.Bundle)error{
@@ -244,14 +244,16 @@ func TestNoProposalWorkRejectsUnsettledScheduledOccurrenceAtSameCoordinate(t *te
    return s.SeedGenesisOccurrence(ctx,domain.ID(id),run,
     domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant},raw)
   })
- if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err==nil{
-  t.Fatal("NoProposal-only WORK hid an unrelated due scheduled occurrence")
+ if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err!=nil{
+  t.Fatal("same-coordinate source and slots must settle in ONE cycle",err)
  }
  _,_,_,_,_,run:=ledger.Snapshot()
  state,err:=store.LoadClock(ctx,[32]byte(run))
- if err!=nil||state.Revision!=0{t.Fatal("invalid WORK mutated world",err)}
+ if err!=nil||state.Revision!=1||state.NextLogicalSequence!=3{
+  t.Fatal("mixed WORK did not publish complete causal batch",err)
+ }
  ctl,err:=store.LoadCycleControl(ctx,[32]byte(run))
- if err!=nil||ctl[0]!=uint64(1){t.Fatalf("rejected WORK did not retain in-flight fence: %v %v",ctl,err)}
+ if err!=nil||ctl[0]!=uint64(0){t.Fatalf("mixed WORK did not return IDLE: %v %v",ctl,err)}
 }
 
 func TestWorkReplayRejectsMissingTerminalDecision(t *testing.T){

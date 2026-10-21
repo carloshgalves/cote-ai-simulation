@@ -382,3 +382,34 @@ func TestResourceAndSystemMixRejectsEveryForgedTerminalProof(t *testing.T){
   }
  })}
 }
+
+func TestResourceSystemJournalCannotOmitDecisionEvenWithValidBatchDigest(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,_:=singleResourceFixtureWithSystem(t,false,true,true,false)
+ _,_,_,_,_,run:=ledger.Snapshot()
+ before,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ c.tamperWorkBatch=func(batch *ports.WorkBatch){
+  decoded,err:=codec.StrictDecodePayload(batch.Journal.Canonical);if err!=nil{t.Fatal(err)}
+  journal:=decoded.([]any)
+  refs:=append([]any(nil),journal[16].([]any)...)
+  refs[1]=refs[0] // resource DecisionRecord masquerades as trigger decision
+  journal[16]=refs
+  rawEvents:=make([]any,len(batch.Events))
+  for i,event:=range batch.Events{rawEvents[i]=event.Canonical}
+  d:=identity.New(c.bundle)
+  checksum,_,err:=d.Sum("cote.csf.digest.batch","cote.csf.schema.batch-preimage",1,
+   []any{journal[:23],rawEvents});if err!=nil{t.Fatal(err)}
+  journal[23]=checksum[:]
+  batch.Journal.Canonical,err=codec.CanonicalPayload(journal)
+  if err!=nil{t.Fatal(err)}
+ }
+ if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err==nil{
+  t.Fatal("SQLite accepted self-consistent batch hash with forged decision references")
+ }
+ after,err:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil||after!=before{t.Fatal("forged journal partially committed",err)}
+ c.tamperWorkBatch=nil
+ if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{
+  t.Fatal("intact resource-system batch could not recover after forged journal",err)
+ }
+}

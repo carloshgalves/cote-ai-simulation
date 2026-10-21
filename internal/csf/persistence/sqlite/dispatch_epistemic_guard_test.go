@@ -68,10 +68,14 @@ func TestDispatchAppendRequiresDurablePriorPerception(t *testing.T){
  eventRaw,err:=codec.CanonicalPayload(eventFields);if err!=nil{t.Fatal(err)}
  if _,err:=s.db.ExecContext(ctx,"INSERT INTO event_store(id,canonical) VALUES(?,?)",
   event[:],eventRaw);err!=nil{t.Fatal(err)}
- if err:=s.Append(ctx,dispatch);err!=nil{t.Fatal("durable completed task must allow dispatch",err)}
- if err:=s.Append(ctx,dispatch);err!=nil{t.Fatal("same dispatch bytes should be idempotent",err)}
- if err:=s.db.QueryRow("SELECT COUNT(*) FROM input_ledger WHERE id=?",did[:]).Scan(&count);err!=nil||count!=1{
-  t.Fatal("dispatch not persisted exactly once",err,count)
+ // A completion alone never authorizes an unregistered dispatch: this
+ // synthetic fixture deliberately lacks clock/genesis/round authority.
+ // The positive case is tested against a real completed run in commit tests.
+ if err:=s.Append(ctx,dispatch);err==nil{
+  t.Fatal("synthetic round without sealed owner and clock released dispatch")
+ }
+ if err:=s.db.QueryRow("SELECT COUNT(*) FROM input_ledger WHERE id=?",did[:]).Scan(&count);err!=nil||count!=0{
+  t.Fatal("unauthorized dispatch persisted",err,count)
  }
  // A deleted CycleCommit must not be treated as an empty work queue.
  if _,err:=s.db.ExecContext(ctx,"DELETE FROM committed_cycles WHERE run_id=? AND cycle_id=?",run[:],cycle[:]);err!=nil{t.Fatal(err)}

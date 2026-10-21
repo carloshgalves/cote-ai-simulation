@@ -166,7 +166,7 @@ func verifyHybridTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
  if len(usedEvents)!=len(b.Events){return errors.New("hybrid published orphaned Event")}
  wantPairs,err:=registeredDigest("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",pairs)
  if err!=nil||!sameCanonical(journal[17],wantPairs[:]){return errors.New("hybrid decision digest differs from validated causal partition")}
- tasks,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",journal[18]
+ tasks,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",journal[18])
  if err!=nil||!sameCanonical(journal[19],tasks[:]){return errors.New("hybrid private events unexpectedly created visible tasks")}
  return nil
 }

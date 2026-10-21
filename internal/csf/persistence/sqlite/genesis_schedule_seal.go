@@ -7,7 +7,6 @@ import (
  "errors"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 )
 
@@ -83,4 +82,3 @@ func ensureGenesisScheduleSeal(ctx context.Context,tx *sql.Tx,run [32]byte)error
  return nil
 }
 
-var _ domain.ID

@@ -90,7 +90,7 @@ func verifyEvidenceRegistryExact(ctx context.Context,q queryOne) error {
   obs,ok:=records[rec.obs]
   if !ok||obs.kind!=0{return errors.New("orphan KnowledgeInput lacks Observation")}
   ref:=rec.fields[7].([]any)
-  if !equalBytes(ref[2],obs.fields[14])||
+  if !equalBytes(ref[2],obs.fields[14].([]byte))||
    rec.actor!=obs.actor||
    !sameCanonical(rec.fields[4],obs.fields[5])||
    !sameCanonical(rec.fields[8],obs.fields[10])||

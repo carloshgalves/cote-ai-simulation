@@ -118,7 +118,7 @@ func verifyPriorPerceptionEmpty(ctx context.Context,tx *sql.Tx,run [32]byte,thro
    if !bytes.Equal(completionRaw,projection.Completion.Canonical){
     return errors.New("dispatch held: addressed completion differs from expected projection")
    }
-   if err:=checkProjectionEvidence(ctx,tx,task.id,projection);err!=nil{return err}
+   if err:=checkProjectionEvidence(ctx,tx,run,task.id,projection);err!=nil{return err}
   }else{
    if eventFields[3]!="resource.consumed"&&eventFields[3]!="clock.advanced"{
     return errors.New("dispatch held: unregistered perception route")

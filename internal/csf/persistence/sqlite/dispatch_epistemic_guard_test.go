@@ -18,7 +18,7 @@ func TestDispatchAppendRequiresDurablePriorPerception(t *testing.T){
  // This fixture creates a committed roster, not a fabricated event observer.
  journal:=make([]any,24)
  for i:=range journal{journal[i]=[]any{}}
- journal[0],journal[1],journal[8],journal[18]=run[:],cycle[:],uint64(1),[]any{task[:]}
+ journal[0],journal[1],journal[6],journal[8],journal[18]=run[:],cycle[:],uint64(0),uint64(1),[]any{task[:]}
  journalRaw,err:=codec.CanonicalPayload(journal)
  if err!=nil{t.Fatal(err)}
  if _,err:=s.db.ExecContext(ctx,
@@ -73,6 +73,22 @@ func TestDispatchAppendRequiresDurablePriorPerception(t *testing.T){
  if err:=s.db.QueryRow("SELECT COUNT(*) FROM input_ledger WHERE id=?",did[:]).Scan(&count);err!=nil||count!=1{
   t.Fatal("dispatch not persisted exactly once",err,count)
  }
+ // A deleted CycleCommit must not be treated as an empty work queue.
+ if _,err:=s.db.ExecContext(ctx,"DELETE FROM committed_cycles WHERE run_id=? AND cycle_id=?",run[:],cycle[:]);err!=nil{t.Fatal(err)}
+ var anotherCycle [32]byte
+ anotherCycle[0]=0x44
+ fields[2]=anotherCycle[:]
+ second,err:=registeredDigest("cote.csf.id.dispatch",
+  "cote.csf.schema.dispatch-id-preimage",[]any{fields[1],fields[2],fields[3],fields[4],fields[5]})
+ if err!=nil{t.Fatal(err)}
+ fields[0]=second[:]
+ missingCommitRaw,err:=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+ if err:=s.Append(ctx,portsRecord(second[:],missingCommitRaw));err==nil{
+  t.Fatal("missing committed CycleCommit released dispatch")
+ }
+ if _,err:=s.db.ExecContext(ctx,"INSERT INTO committed_cycles(run_id,cycle_id,commit_id) VALUES(?,?,?)",
+  run[:],cycle[:],commit[:]);err!=nil{t.Fatal(err)}
+
  if _,err:=s.db.ExecContext(ctx,"UPDATE causal_outbox SET canonical=? WHERE id=?",
   []byte{0x80},cid[:]);err!=nil{t.Fatal(err)}
  var next [32]byte;next[0]=9

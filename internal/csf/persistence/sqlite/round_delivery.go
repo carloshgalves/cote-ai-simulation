@@ -9,6 +9,8 @@ import (
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/perception"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
@@ -111,19 +113,30 @@ func checkProjectionEvidence(ctx context.Context,q queryOne,task [32]byte,
 // from authenticated durable authority, never from a worker payload. The
 // two receipts and completion use one SQLite CAS. A competing worker can
 // only discover the same canonical bytes.
-func (s *Store) DeliverRoundPerception(ctx context.Context,taskID [32]byte)(
+func (s *Store) DeliverRoundPerception(ctx context.Context,taskID [32]byte,bundle *policy.Bundle)(
  perception.RoundProjection,error){
- return s.deliverRoundPerception(ctx,taskID,0)
+ return s.deliverRoundPerception(ctx,taskID,bundle,0)
 }
 
 // Test failpoint injects rollback after each logical append. No partial
 // delivery or partial completion may be published.
-func (s *Store) deliverRoundPerception(ctx context.Context,taskID [32]byte,failAfter uint8)(
+func (s *Store) deliverRoundPerception(ctx context.Context,taskID [32]byte,bundle *policy.Bundle,failAfter uint8)(
  perception.RoundProjection,error){
  var zero perception.RoundProjection
- if s==nil{return zero,errors.New("nil evidence store")}
+ if s==nil||bundle==nil{return zero,errors.New("perception delivery requires validated policy bundle")}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return zero,err}
  defer tx.Rollback()
+ var taskRaw []byte
+ if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM causal_outbox WHERE id=?",taskID[:]).Scan(&taskRaw);err!=nil{return zero,err}
+ parsed,err:=codec.StrictDecodePayload(taskRaw);if err!=nil{return zero,err}
+ taskFields,ok:=parsed.([]any)
+ if !ok||len(taskFields)!=10{return zero,errors.New("perception task shape invalid")}
+ run,ok:=idField(taskFields[1]);if !ok{return zero,errors.New("perception run missing")}
+ var genesisRaw []byte
+ if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",run[:]).Scan(&genesisRaw);err!=nil{return zero,err}
+ if _,err:=genesis.ValidateCanonical(genesisRaw,bundle);err!=nil{
+  return zero,fmt.Errorf("perception delivery Genesis pin mismatch: %w",err)
+ }
  p,err:=loadVerifiedRoundProjection(ctx,tx,taskID)
  if err!=nil{return zero,err}
  if err:=insertExactEvidence(ctx,tx,p.Observation);err!=nil{return zero,err}

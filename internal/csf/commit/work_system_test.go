@@ -287,3 +287,40 @@ func TestDeferredSuccessorProofCannotBeReplacedIndependently(t *testing.T){
  c.tamperWorkBatch=nil
  if _,err:=c.CommitSystemUnit(ctx,ledger,cycle,fence);err!=nil{t.Fatal("valid DEFER recovery failed",err)}
 }
+
+func TestGenesisSourceRosterIsSealedAtFirstFence(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=systemWorkFixture(t,"reject")
+ if _,err:=c.CommitSystemUnit(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ _,_,_,_,_,run:=ledger.Snapshot()
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ var roster []byte
+ if err:=db.QueryRowContext(ctx,"SELECT roster_digest FROM genesis_schedule_seals WHERE run_id=?",run[:]).Scan(&roster);err!=nil{t.Fatal(err)}
+ if len(roster)!=32{t.Fatal("initial schedule not sealed")}
+ original:=fence.Fields[11].([]any)[0].([]any)
+ id:=original[3].([]byte)
+ var raw []byte
+ if err:=db.QueryRowContext(ctx,"SELECT canonical FROM scheduled_occurrences WHERE id=?",id).Scan(&raw);err!=nil{t.Fatal(err)}
+ parsed,err:=codec.StrictDecodePayload(raw);if err!=nil{t.Fatal(err)}
+ fields:=append([]any(nil),parsed.([]any)[:14]...)
+ origin:=fields[9]
+ derivation:=identity.New(c.bundle)
+ forgedID,_,err:=derivation.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+  []any{origin,uint64(0),uint64(99)});if err!=nil{t.Fatal(err)}
+ due:=int64(cycle.Instant)+1000
+ fields[0],fields[3],fields[4],fields[11]=forgedID[:],due,[]any{due,uint64(0)},uint64(99)
+ digest,_,err:=derivation.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,fields)
+ if err!=nil{t.Fatal(err)}
+ canonical,err:=codec.CanonicalPayload(append(fields,digest[:]));if err!=nil{t.Fatal(err)}
+ if _,err:=db.ExecContext(ctx,"INSERT INTO scheduled_occurrences(id,run_id,eligibility_instant,eligibility_ordinal,lifecycle,canonical) VALUES(?,?,?,?,0,?)",
+  forgedID[:],run[:],due,uint64(0),canonical);err!=nil{t.Fatal(err)}
+ db.Close()
+ if _,err:=store.PendingClock(ctx,[32]byte(run));err==nil{
+  t.Fatal("scheduler trusted genesis-authored source silently inserted after seal")
+ }
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer reopened.Close()
+ if _,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
+  t.Fatal("replay accepted tampered initial source roster")
+ }
+}

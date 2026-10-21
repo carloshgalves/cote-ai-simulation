@@ -147,8 +147,8 @@ func verifyPriorPerceptionEmpty(ctx context.Context,tx *sql.Tx,run [32]byte,thro
    }
    if err:=checkProjectionEvidence(ctx,tx,run,task.id,projection);err!=nil{return err}
   }else{
-   if eventFields[3]!="resource.consumed"&&eventFields[3]!="clock.advanced"{
-    return errors.New("dispatch held: unregistered perception route")
+   if err:=registeredInvisibleEngineEvent(eventFields);err!=nil{
+    return errors.New("dispatch held: secret producer/phase not registered: "+err.Error())
    }
    body:=[]any{id[:],task.id[:],[]any{},[]any{}}
    digest,err:=registeredDigest("cote.csf.digest.perception-completion",

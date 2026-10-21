@@ -40,6 +40,7 @@ func (s *Store) historicalSystemUnits(ctx context.Context,run [32]byte,revision 
  // and each system source's unique terminal revision.
  eventAt:=map[string]uint64{}
  settledAt:=map[domain.ID]uint64{}
+ successorBornAt:=map[domain.ID]uint64{}
  rows,err:=s.db.QueryContext(ctx,"SELECT commit_id FROM committed_cycles WHERE run_id=?",run[:])
  if err!=nil{return nil,err}
  var commits [][]byte
@@ -63,6 +64,27 @@ func (s *Store) historicalSystemUnits(ctx context.Context,run [32]byte,revision 
    id,ok:=v.([]byte);if !ok||len(id)!=32{return nil,errors.New("historical event ID invalid")}
    if _,dup:=eventAt[string(id)];dup{return nil,errors.New("event committed in multiple revisions")}
    eventAt[string(id)]=at
+  }
+  decisionIDs,ok:=fields[16].([]any)
+  if !ok{return nil,errors.New("historical terminal decisions missing")}
+  for _,decisionID:=range decisionIDs{
+   id,ok:=decisionID.([]byte)
+   if !ok||len(id)!=32{return nil,errors.New("historical decision ID invalid")}
+   var decisionRaw []byte
+   if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",id).Scan(&decisionRaw);err!=nil{return nil,err}
+   parsed,err:=codec.StrictDecodePayload(decisionRaw);if err!=nil{return nil,err}
+   decision,ok:=parsed.([]any)
+   if !ok||len(decision)!=16{return nil,errors.New("historical terminal DecisionRecord malformed")}
+   sourceRef,ok:=decision[4].([]any)
+   if !ok||len(sourceRef)<3||sourceRef[0]!=uint64(2){continue}
+   if decision[5]!=uint64(2){continue}
+   opt,ok:=decision[13].([]any)
+   if !ok||len(opt)!=2||opt[0]!=uint64(1){return nil,errors.New("deferred source lost successor reference")}
+   child,ok:=opt[1].([]byte)
+   if !ok||len(child)!=32{return nil,errors.New("deferred successor identity malformed")}
+   var key domain.ID;copy(key[:],child)
+   if _,duplicate:=successorBornAt[key];duplicate{return nil,errors.New("successor created more than once")}
+   successorBornAt[key]=at
   }
   admitted,ok:=fields[11].([]any);if !ok{return nil,errors.New("historical unit set missing")}
   for _,v:=range admitted{
@@ -88,6 +110,16 @@ func (s *Store) historicalSystemUnits(ctx context.Context,run [32]byte,revision 
     eid,ok:=ref[0].([]byte);if !ok||len(eid)!=32{return nil,errors.New("occurrence parent event ID invalid")}
     at,exists:=eventAt[string(eid)]
     if !exists{return nil,errors.New("occurrence successor event absent from terminal journal")}
+    declared,authorized:=successorBornAt[id]
+    if !authorized||declared!=at{
+     return nil,errors.New("occurrence successor not authorized by committed DEFER decision")
+    }
+    var eventRaw []byte
+    if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",eid).Scan(&eventRaw);err!=nil{return nil,err}
+    eventValue,err:=codec.StrictDecodePayload(eventRaw);if err!=nil{return nil,err}
+    ev,ok:=eventValue.([]any);if !ok||len(ev)!=19||!equalBytes(ev[18],ref[1].([]byte)){
+     return nil,errors.New("occurrence origin event-digest provenance mismatch")
+    }
     created=at
    }else{return nil,fmt.Errorf("unsupported occurrence origin %d",v)}
   }else{

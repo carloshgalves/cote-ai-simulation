@@ -132,6 +132,7 @@ func verifyPriorPerceptionEmpty(ctx context.Context,tx *sql.Tx,run [32]byte,thro
    if !bytes.Equal(completionRaw,canonical){
     return errors.New("dispatch held: incomplete or mismatched perception receipt")
    }
+   if err:=noTaskEvidence(ctx,tx,task.id);err!=nil{return err}
   }
  }
  return nil

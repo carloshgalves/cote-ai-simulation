@@ -25,7 +25,7 @@ type Pins struct {
 // passed EventOrderKey-sorted canonical Events. The V1 registered predicate
 // is event-local-ordinal==0, not Event confidentiality. A task never grants
 // an observation or bypasses observer/channel authorization.
-func Plan(bundle *policy.Bundle,run,cycle domain.ID,base,result domain.WorldRevision,
+func Plan(bundle *policy.Bundle,genesisPins [][]any,run,cycle domain.ID,base,result domain.WorldRevision,
  events []ports.CanonicalRecord,pins Pins)([]ports.CanonicalRecord,error){
  if bundle==nil{return nil,errors.New("perception needs authenticated canonical bundle")}
  for _,ref:=range []any{pins.Classification,pins.Resolver,pins.Identity}{
@@ -42,8 +42,8 @@ func Plan(bundle *policy.Bundle,run,cycle domain.ID,base,result domain.WorldRevi
   pins.Identity[0]!="perception-identity-v1"||pins.Identity[1]!=uint64(1){
   return nil,errors.New("unregistered perception classifier/identity policy version")
  }
- genesisPins,err:=bundle.GenesisPolicyRefs()
- if err!=nil{return nil,err}
+ // The caller supplies refs from a validated Genesis; task planning never
+ // reads fixture files or trusts a machine-local policy lookup.
  allowed:=map[string][]any{}
  for _,ref:=range genesisPins{allowed[ref[0].(string)]=ref}
  for _,ref:=range [][]any{pins.Classification,pins.Resolver,pins.Identity}{

@@ -352,3 +352,33 @@ func TestResourceWithSimultaneousTriggerAndDeferredOccurrence(t *testing.T){
   }
  })}
 }
+
+func TestResourceAndSystemMixRejectsEveryForgedTerminalProof(t *testing.T){
+ variants:=[]struct{name string;mutate func(*ports.WorkBatch)}{
+  {"resource-candidate",func(b *ports.WorkBatch){b.ResourceCandidate.Identity[0]^=1}},
+  {"system-candidate",func(b *ports.WorkBatch){b.SystemCandidate.Canonical=[]byte{0x80}}},
+  {"resource-decision",func(b *ports.WorkBatch){b.Decisions[0].Canonical=[]byte{0x80}}},
+  {"system-decision",func(b *ports.WorkBatch){b.Decisions[1].Canonical=[]byte{0x80}}},
+  {"resource-event",func(b *ports.WorkBatch){b.Events[0].Canonical=[]byte{0x80}}},
+  {"global-event-order",func(b *ports.WorkBatch){b.Events[1],b.Events[2]=b.Events[2],b.Events[1]}},
+  {"world-hash",func(b *ports.WorkBatch){b.ResultStateHash[0]^=1}},
+  {"deferred-successor",func(b *ports.WorkBatch){b.SystemSuccessors[0].Identity[0]^=1}},
+  {"perception-task",func(b *ports.WorkBatch){b.PerceptionTasks[0].Canonical=[]byte{0x80}}},
+ }
+ for _,variant:=range variants{t.Run(variant.name,func(t *testing.T){
+  ctx:=context.Background()
+  c,store,ledger,cycle,fence,_:=singleResourceFixtureWithSystem(t,false,true,false,true)
+  _,_,_,_,_,run:=ledger.Snapshot()
+  before,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+  c.tamperWorkBatch=variant.mutate
+  if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err==nil{
+   t.Fatal("forged resource+system terminal crossed SQLite causal authority")
+  }
+  after,err:=store.LoadClock(ctx,[32]byte(run))
+  if err!=nil||after!=before{t.Fatal("forged mixed WORK advanced world",err)}
+  c.tamperWorkBatch=nil
+  if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{
+   t.Fatal("valid retry after denied mixed resource evidence failed",err)
+  }
+ })}
+}

@@ -13,6 +13,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/perception"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
 func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){

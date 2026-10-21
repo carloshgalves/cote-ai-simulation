@@ -287,7 +287,7 @@ func verifyTwoResourceTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
   !equalBytes(b.ResultStateHash[:],hash[:]){
   return errors.New("contest state was not derived by registered reducer")
  }
- taskHash,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",journal[18]
+ taskHash,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",journal[18])
  if err!=nil||!equalBytes(journal[19],taskHash[:]){
   return errors.New("secret-only contest must not produce perception tasks")
  }

@@ -331,3 +331,54 @@ func TestCSFRV16ActorInboxCannotReadAnotherRunSameActor(t *testing.T){
   t.Fatal("same actor in another run crossed the timeline boundary",err,len(obs),len(inputs))
  }
 }
+
+
+func TestCSFRV16StorageRejectsForgedAndLateDispatch(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=singleResourceFixture(t)
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ rows,err:=db.QueryContext(ctx,"SELECT canonical FROM input_ledger")
+ if err!=nil{t.Fatal(err)}
+ var dispatch []any
+ for rows.Next(){
+  var raw []byte
+  if err:=rows.Scan(&raw);err!=nil{t.Fatal(err)}
+  v,err:=codec.StrictDecodePayload(raw);if err!=nil{continue}
+  fields,ok:=v.([]any)
+  if ok&&len(fields)==11{
+   if _,ok:=fields[4].(string);ok{dispatch=fields;break}
+  }
+ }
+ rows.Close()
+ if dispatch==nil{t.Fatal("no authentic initial SlotDispatch")}
+ deriver:=identity.New(c.bundle)
+ attempt:=func(name string,mutate func([]any)) {
+  t.Helper()
+  t.Run(name,func(t *testing.T){
+   fields:=append([]any(nil),dispatch...)
+   fields[5]=uint64(1)
+   mutate(fields)
+   derived,_,err:=deriver.Sum("cote.csf.id.dispatch",
+    "cote.csf.schema.dispatch-id-preimage",1,
+    []any{fields[1],fields[2],fields[3],fields[4],fields[5]})
+   if err!=nil{t.Fatal(err)}
+   fields[0]=derived[:]
+   raw,err:=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+   if err:=store.Append(ctx,ports.CanonicalRecord{Identity:[32]byte(derived),Canonical:raw});err==nil{
+    t.Fatal("storage accepted forged/stale SlotDispatch")
+   }
+   var n int
+   if err:=db.QueryRowContext(ctx,"SELECT COUNT(*) FROM input_ledger WHERE id=?",derived[:]).Scan(&n);err!=nil{t.Fatal(err)}
+   if n!=0{t.Fatal("rejected dispatch persisted")}
+  })
+ }
+ attempt("malformed-coordinate-bypasses-classifier",func(fields []any){fields[7]="forged-coordinate"})
+ attempt("foreign-owner",func(fields []any){fields[6]=[]any{"school","b"}})
+ attempt("undeclared-slot",func(fields []any){fields[4]="foreign-slot"})
+ if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ attempt("late-base-revision",func(fields []any){
+  fields[5]=uint64(2)
+  fields[8]=uint64(0) // current durable clock revision is one, not zero
+ })
+}

@@ -18,6 +18,16 @@ func verifyPublishedResourceSystem(ctx context.Context,q queryOne,run,cycle,comm
  journal,fence []any,eventRaw []any)([]domain.ID,error){
  units,ok:=fence[11].([]any)
  if !ok||len(units)<2{return nil,errors.New("resource-system replay requires full mixed fence")}
+ slotCount:=0
+ for _,raw:=range units{
+  entry,ok:=raw.([]any)
+  if !ok||len(entry)!=5{return nil,errors.New("resource-system replay admitted source malformed")}
+  if entry[1]!=uint64(0){break}
+  slotCount++
+ }
+ if slotCount<1||slotCount>2||slotCount>=len(units){
+  return nil,errors.New("resource-system replay needs one or two contestant slots and pending system sources")
+ }
  names,ok:=journal[16].([]any)
  if !ok||len(names)!=len(units){return nil,errors.New("resource-system decision roster incomplete")}
  decisions:=make([]ports.CanonicalRecord,len(units))
@@ -50,8 +60,9 @@ func verifyPublishedResourceSystem(ctx context.Context,q queryOne,run,cycle,comm
   if err:=q.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",cid).Scan(&candRaw);err!=nil{return nil,err}
   var ckey [32]byte;copy(ckey[:],cid)
   candidate:=ports.CanonicalRecord{Identity:ckey,Canonical:candRaw}
-  if i==0{resourceCandidate=candidate}else{candidates=append(candidates,candidate)}
-  if i==0{continue}
+  if i==0{resourceCandidate=candidate}
+  if i<slotCount{continue}
+  candidates=append(candidates,candidate)
   option,ok:=body[13].([]any)
   if !ok{return nil,errors.New("resource-system deferred successor option malformed")}
   if len(option)==2&&option[0]==uint64(1){
@@ -114,38 +125,45 @@ func verifyPublishedResourceSystem(ctx context.Context,q queryOne,run,cycle,comm
   NextLogicalSequence:domain.LogicalSequence(end-uint64(len(events))),LastOrdinal:int64(ordinal)-1}
  after:=before;after.Revision++;after.LastOrdinal=int64(ordinal);after.NextLogicalSequence=domain.LogicalSequence(end)
  var hash [32]byte;copy(hash[:],stateHash)
- batch:=ports.WorkBatch{Mode:5,RunID:run,CycleID:cycle,ResourceCandidate:resourceCandidate,
+ mode:=uint8(5)
+ if slotCount==2{mode=6}
+ batch:=ports.WorkBatch{Mode:mode,RunID:run,CycleID:cycle,ResourceCandidate:resourceCandidate,
   SystemCandidate:candidates[0],SystemExtraCandidates:candidates[1:],SystemSuccessors:successors,
   Events:events,Decisions:decisions,RevisionCanonical:newRaw,
   BaseStateHash:hash,Journal:ports.CanonicalRecord{Identity:commit}}
  resultHash,ok:=nextRevision[5].([]byte)
  if !ok||len(resultHash)!=32{return nil,errors.New("resource-system result hash invalid")}
  copy(batch.ResultStateHash[:],resultHash)
- // The resource ActionProposal's RoundDeclaration defines the complete
- // admitted slot set; never infer the authoritative cohort from the decision.
- var sourceRaw []byte
- if err:=q.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",sources[0][:]).Scan(&sourceRaw);err!=nil{return nil,err}
- rawProposal,err:=codec.StrictDecodePayload(sourceRaw);if err!=nil{return nil,err}
- proposal,ok:=rawProposal.([]any)
- if !ok||len(proposal)!=19{return nil,errors.New("resource-system source not ActionProposal")}
- roundID,ok:=proposal[13].([]byte)
- if !ok||len(roundID)!=32{return nil,errors.New("resource-system proposal RoundDeclaration missing")}
- var roundRaw []byte
- if err:=q.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",roundID).Scan(&roundRaw);err!=nil{return nil,err}
- rawRound,err:=codec.StrictDecodePayload(roundRaw);if err!=nil{return nil,err}
- roundFields,ok:=rawRound.([]any)
- if !ok||len(roundFields)!=11{return nil,errors.New("resource-system RoundDeclaration malformed")}
- slots,ok:=roundFields[4].([]any)
- if !ok||len(slots)!=1{return nil,errors.New("resource-system first run expected one slot")}
- members:=map[string]bool{}
- for _,value:=range slots{
-  name,ok:=value.(string)
-  if !ok||name==""||members[name]{return nil,errors.New("resource-system duplicated/invalid round slot")}
-  members[name]=true
+ // Rebuild each complete resource RoundDeclaration from its authenticated
+ // ActionProposal; it is not safe to infer the round from the decision list.
+ expectedSlots:=map[domain.ID]map[string]bool{}
+ for i:=0;i<slotCount;i++{
+  var sourceRaw []byte
+  if err:=q.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",sources[i][:]).Scan(&sourceRaw);err!=nil{return nil,err}
+  rawProposal,err:=codec.StrictDecodePayload(sourceRaw);if err!=nil{return nil,err}
+  proposal,ok:=rawProposal.([]any)
+  if !ok||len(proposal)!=19{return nil,errors.New("resource-system source not ActionProposal")}
+  roundID,ok:=proposal[13].([]byte)
+  if !ok||len(roundID)!=32{return nil,errors.New("resource-system proposal RoundDeclaration missing")}
+  slotName,ok:=proposal[14].(string)
+  if !ok||slotName==""{return nil,errors.New("resource-system ActionProposal slot missing")}
+  var roundRaw []byte
+  if err:=q.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",roundID).Scan(&roundRaw);err!=nil{return nil,err}
+  rawRound,err:=codec.StrictDecodePayload(roundRaw);if err!=nil{return nil,err}
+  roundFields,ok:=rawRound.([]any)
+  if !ok||len(roundFields)!=11{return nil,errors.New("resource-system RoundDeclaration malformed")}
+  slots,ok:=roundFields[4].([]any)
+  if !ok||len(slots)!=1||slots[0]!=slotName{return nil,errors.New("resource-system RoundDeclaration did not authorize exact sole slot")}
+  var rid domain.ID;copy(rid[:],roundID)
+  if expectedSlots[rid]!=nil{return nil,errors.New("resource-system contest repeats a RoundDeclaration")}
+  expectedSlots[rid]=map[string]bool{slotName:true}
  }
- var rid domain.ID;copy(rid[:],roundID)
- expectedSlots:=map[domain.ID]map[string]bool{rid:members}
+ if slotCount==2{
+  proof,err:=replayContestProofSet(ctx,q,run,cycle,sources[:2])
+  if err!=nil{return nil,err}
+  batch.ContestProofs=proof
+ }
  if err:=verifyResourceSystemTerminal(ctx,q,batch,before,after,fence,journal,
-  predecessor,nextRevision,allowed,expectedSlots);err!=nil{return nil,err}
+  predecessor,nextRevision,manifest,allowed,expectedSlots);err!=nil{return nil,err}
  return sources,nil
 }

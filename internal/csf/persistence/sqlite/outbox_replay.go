@@ -66,7 +66,25 @@ func verifyPendingOutboxExact(ctx context.Context,q queryOne,run [32]byte)error{
    if !equalBytes(fields[0],id){rows.Close();return errors.New("completion key differs from canonical record")}
    taskID,ok:=idField(fields[1])
    if !ok{rows.Close();return errors.New("completion task link malformed")}
-   if !expected[taskID]{continue} // other runs' completions validated by their replay
+   if !expected[taskID]{
+    // Completion carries no run ID: resolve its source task before
+    // classifying it as another run. An orphan completion must never
+    // disappear from the replay just because its task was deleted.
+    var ownerRaw []byte
+    if err:=q.QueryRowContext(ctx,"SELECT canonical FROM causal_outbox WHERE id=?",taskID[:]).Scan(&ownerRaw);err!=nil{
+     rows.Close();return errors.New("orphan perception completion has no durable task")
+    }
+    ownerValue,err:=codec.StrictDecodePayload(ownerRaw)
+    if err!=nil{rows.Close();return err}
+    owner,ok:=ownerValue.([]any)
+    if !ok||len(owner)!=10||!equalBytes(owner[0],taskID[:]){
+     rows.Close();return errors.New("completion points to invalid task")
+    }
+    if equalBytes(owner[1],run[:]){
+     rows.Close();return errors.New("same-run completion is not covered by a committed task")
+    }
+    continue // authenticated other-run task is checked by its own replay
+   }
    if completions[taskID]!=nil{
     rows.Close();return errors.New("duplicate PerceptionTask completion")
    }

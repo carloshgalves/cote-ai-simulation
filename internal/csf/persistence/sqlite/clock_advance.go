@@ -507,9 +507,11 @@ func verifyCommittedFence(ctx context.Context,q queryOne,runID,cycleID [32]byte,
   emptyDecision,err:=registeredDigest("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",[]any{})
   if err!=nil{return zero,err}
   if !equalBytes(journal[17],emptyDecision[:]){return zero,errors.New("CLOCK_ADVANCE decision digest differs from empty decision list")}
-  emptyTasks,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",[]any{})
+  taskIDs,ok:=journal[18].([]any)
+  if !ok{return zero,errors.New("CLOCK_ADVANCE perception task IDs malformed")}
+  taskDigest,err:=registeredDigest("cote.csf.digest.perception-task-list","cote.csf.schema.perception-task-id-list",taskIDs)
   if err!=nil{return zero,err}
-  if !equalBytes(journal[19],emptyTasks[:]){return zero,errors.New("CLOCK_ADVANCE perception digest differs from empty task list")}
+  if !equalBytes(journal[19],taskDigest[:]){return zero,errors.New("CLOCK_ADVANCE perception digest differs from authenticated task list")}
 
  proofs,ok:=fence[9].([]any);if !ok{return zero,errors.New("AdmissionFence proof shape invalid")}
  var previous string
@@ -663,6 +665,13 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
  derivedFence,err:=verifyCommittedFence(ctx,tx,b.RunID,b.CycleID,journal)
  if err!=nil{return err}
  if derivedFence!=b.FenceID{return errors.New("clock batch references a different admission fence")}
+ var genesisRaw []byte
+ if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",b.RunID[:]).Scan(&genesisRaw);err!=nil{return err}
+ genesisEnv,err:=codec.StrictDecodeEnvelope(genesisRaw);if err!=nil{return err}
+ genesisFields,ok:=genesisEnv.Value.([]any)
+ if !ok||len(genesisFields)!=18{return errors.New("CLOCK_ADVANCE Genesis policy reference malformed")}
+ taskBatch:=ports.WorkBatch{RunID:b.RunID,CycleID:b.CycleID,Events:b.Events,PerceptionTasks:b.PerceptionTasks}
+ if _,err:=verifyWorkPerception(taskBatch,journal,genesisFields);err!=nil{return err}
  var fence []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",b.FenceID[:]).Scan(&fence);err!=nil{return err}
  f,err:=codec.StrictDecodePayload(fence);if err!=nil{return err}
@@ -704,6 +713,9 @@ func (s *Store) CommitClockAdvance(ctx context.Context,b ports.ClockAdvanceBatch
   if err:=appendToTx(ctx,tx,"event_store",item);err!=nil{return err}
  }
  if err:=failClock(b.FailAfterStep,2);err!=nil{return err}
+ for _,task:=range b.PerceptionTasks{
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO causal_outbox(id,canonical) VALUES(?,?)",task.Identity[:],task.Canonical);err!=nil{return err}
+ }
  // An omitted trigger is just as unsafe as a forged runtime. Compare the
  // complete registered definition set and re-evaluate each predicate from
  // the database's immutable definition and previous runtime.

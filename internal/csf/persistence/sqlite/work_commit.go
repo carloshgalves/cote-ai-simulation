@@ -339,7 +339,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
     item.Identity[:],b.RunID[:],int64(eligibility.NotBeforeInstant),uint64(eligibility.NotBeforeCycleOrdinal),item.Canonical);err!=nil{return err}
   }
  }
- if b.Mode==2{
+ if b.Mode==2||b.Mode==6{
   for _,proof:=range b.ContestProofs{
    if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",proof.Identity[:],proof.Canonical);err!=nil{return err}
   }

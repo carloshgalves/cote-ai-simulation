@@ -351,7 +351,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  }
  if err:=failClock(b.FailAfterStep,2);err!=nil{return err}
  for _,task:=range b.PerceptionTasks{
-  if err:=appendToTx(ctx,tx,"causal_outbox",task);err!=nil{return err}
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO causal_outbox(id,canonical) VALUES(?,?)",task.Identity[:],task.Canonical);err!=nil{return err}
  }
  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.Journal.Identity[:],b.Journal.Canonical);err!=nil{return err}
  if err:=failClock(b.FailAfterStep,3);err!=nil{return err}

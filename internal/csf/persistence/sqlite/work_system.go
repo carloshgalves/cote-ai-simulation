@@ -140,7 +140,7 @@ func verifySystemTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
  pair,err:=registeredDigest("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",
   []any{[]any{id,decisionID[:],recordHash[:]}});if err!=nil{return err}
  task,err:=registeredDigest("cote.csf.digest.perception-task-list",
-  "cote.csf.schema.perception-task-id-list",[]any{});if err!=nil{return err}
+  "cote.csf.schema.perception-task-id-list",journal[18];if err!=nil{return err}
  if !equalBytes(journal[17],pair[:])||!equalBytes(journal[19],task[:]){
   return errors.New("system decision/task digest does not match journal")
  }

@@ -149,6 +149,7 @@ func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,run
         prepared,err:=c.buildBatch(ctx,runID,state,plan,f,typed)
         if err!=nil{return err}
         prepared.FailAfterStep=c.failAfterStep
+        if err:=c.prepareClockPerception(&prepared);err!=nil{return err}
         if c.beforeCommit!=nil {c.beforeCommit()}
         if c.tamperBatch!=nil {c.tamperBatch(&prepared)}
         applied=prepared

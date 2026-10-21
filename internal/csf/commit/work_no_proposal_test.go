@@ -393,12 +393,14 @@ func TestScheduledOccurrenceIsExplicitlyAdmittedToSealedFence(t *testing.T){
   }
  }
  if !found{t.Fatal("occurrence not in frozen admitted source cut")}
- if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err==nil{
-  t.Fatal("slot-only handler settled occurrence without an explicit terminal lifecycle")
+ if _,err:=c.CommitNoProposal(ctx,ledger,cycle,fence);err!=nil{
+  t.Fatal("combined handler could not atomically settle admitted slots and occurrence",err)
  }
  _,_,_,_,_,run:=ledger.Snapshot()
  state,err:=store.LoadClock(ctx,[32]byte(run))
- if err!=nil||state.Revision!=0{t.Fatal("failed closed WORK mutated clock",err)}
+ if err!=nil||state.Revision!=1||state.NextLogicalSequence!=3{
+  t.Fatal("mixed source settlement did not advance exactly once",err)
+ }
 }
 
 func TestMixedNoProposalAndOccurrenceMustCloseOneFrozenCohort(t *testing.T){

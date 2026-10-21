@@ -5,7 +5,6 @@ import (
  "context"
  "errors"
 
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/perception"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"

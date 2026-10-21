@@ -9,6 +9,7 @@ import (
 
  _ "modernc.org/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/contextboundary"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/perception"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 )
@@ -102,6 +103,14 @@ func TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd(t *testing.T){
  a2,i2,err:=reopened.ReadAddressedEvidence(ctx,[2]string{"school","a"})
  if err!=nil||len(a2)!=1||len(i2)!=1||!bytes.Equal(a2[0].Canonical,obs[0].Canonical){
   t.Fatal("reopen did not preserve addressed bytes",err)
+ }
+ viewA,err:=contextboundary.Build(ctx,reopened,[2]string{"school","a"})
+ if err!=nil||len(viewA.Inbox)!=1{
+  t.Fatal("allow-list context lost addressed evidence",err)
+ }
+ viewB,err:=contextboundary.Build(ctx,reopened,[2]string{"school","b"})
+ if err!=nil||len(viewB.Inbox)!=0{
+  t.Fatal("allow-list context leaked evidence to B",err)
  }
 }
 func sameTestCanonical(a,b any)bool{

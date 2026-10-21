@@ -18,7 +18,8 @@ import (
 // CompleteInternalPerception handles ONLY the registered, secret engine
 // lifecycle/synthetic events with zero observers. It deliberately has no
 // argument for an observer list, output bytes, or worker-selected completion.
-// A positive observation requires a future authenticated channel resolver.
+// Addressed round observations use a separate, authenticated channel
+// resolver and cannot be authorized through this zero-output method.
 // The persisted commit, event, task and genesis are reconciled under one
 // SQLite transaction before the immutable completion is appended.
 func (s *Store) CompleteInternalPerception(

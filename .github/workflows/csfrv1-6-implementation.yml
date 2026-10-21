@@ -30,5 +30,8 @@ jobs:
         run: go test -count=1 -v ./internal/csf/contextboundary -run '^TestKnowledgeBoundary'
       - name: Determinism under retries and worker permutations
         run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV16DeliveryPermutationsPreserveCanonicalRoots'
+      - name: Addressed A/B/secret audit (recipient IDs and zero-leak proof)
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd
+
       - name: Full Go regression
         run: go test -count=1 ./...

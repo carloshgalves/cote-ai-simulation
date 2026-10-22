@@ -3,6 +3,7 @@ package sqlite
 import (
  "bytes"
  "context"
+ "database/sql"
  "errors"
  "fmt"
 
@@ -60,7 +61,13 @@ func (s *Store) PrepareInTransitDependenciesV1(ctx context.Context,
   if _,duplicate:=expected[id];duplicate{return nil,errors.New("duplicate pending communication schedule ID")}
   expected[id]=bytes.Clone(digest)
  }
- rows,err:=s.db.QueryContext(ctx,
+ // Read every linked SQL authority under one immutable database view.
+ // Snapshot/replay has been authenticated above; a concurrent producer may
+ // append later, but cannot cause a mixed-epoch Claim/Transmission graph.
+ readTx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true})
+ if err!=nil{return nil,err}
+ defer readTx.Rollback()
+ rows,err:=readTx.QueryContext(ctx,
   "SELECT id,claim_id,occurrence_id,sent_commit_id,status,canonical "+
    "FROM communication_transmissions WHERE run_id=? ORDER BY id",parentRun[:])
  if err!=nil{return nil,err}
@@ -113,7 +120,7 @@ func (s *Store) PrepareInTransitDependenciesV1(ctx context.Context,
   if err!=nil||!bytes.Equal(wantID[:],tid){
    return nil,errors.New("in-transit Transmission ID is not derived from origin")
   }
-  if err:=s.db.QueryRowContext(ctx,
+  if err:=readTx.QueryRowContext(ctx,
    "SELECT canonical FROM communication_claims WHERE run_id=? AND id=?",parentRun[:],cid).
    Scan(&dependency.Claim);err!=nil{return nil,err}
   claimValue,err:=codec.StrictDecodePayload(dependency.Claim);if err!=nil{return nil,err}
@@ -131,7 +138,7 @@ func (s *Store) PrepareInTransitDependenciesV1(ctx context.Context,
   if err!=nil||!equalBytes(claim[9],claimDigest[:]){
    return nil,errors.New("in-transit Claim canonical digest forged")
   }
-  if err:=s.db.QueryRowContext(ctx,
+  if err:=readTx.QueryRowContext(ctx,
    "SELECT canonical FROM scheduled_occurrences WHERE run_id=? AND id=?",parentRun[:],oid).
    Scan(&dependency.Occurrence);err!=nil{return nil,err}
   coordinate,life,err:=validateScheduledOccurrence(parentRun,dependency.OccurrenceID,dependency.Occurrence)
@@ -156,7 +163,22 @@ func (s *Store) PrepareInTransitDependenciesV1(ctx context.Context,
   result=append(result,dependency)
   delete(expected,dependency.OccurrenceID)
  }
- // It is fine for another pending Genesis schedule to remain; the real
- // consumer uses the typed delivery envelope to select the due subset.
+ // Every pending communication.delivery occurrence needs one and only
+ // one in-transit transmission. Otherwise a future V2 migrator could
+ // accidentally drop a due communication with no source Claim.
+ for occurrenceID:=range expected{
+  var raw []byte
+  if err:=readTx.QueryRowContext(ctx,
+   "SELECT canonical FROM scheduled_occurrences WHERE run_id=? AND id=?",
+   parentRun[:],occurrenceID[:]).Scan(&raw);err!=nil{return nil,err}
+  value,err:=codec.StrictDecodePayload(raw)
+  if err!=nil{return nil,err}
+  fields,ok:=value.([]any)
+  if !ok||len(fields)!=15{return nil,errors.New("unmatched pending occurrence malformed")}
+  if fields[5]=="communication.delivery"{
+   return nil,errors.New("pending communication delivery lacks a matching in-transit Transmission")
+  }
+ }
+ if err:=readTx.Commit();err!=nil{return nil,err}
  return result,nil
 }

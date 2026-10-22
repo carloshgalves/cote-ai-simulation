@@ -326,7 +326,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   return errors.New("WORK not current in-flight authorized attempt")
  }
  if b.Mode==7{
-  if err:=appendToTx(ctx,tx,"decision_ledger",b.CommunicationCandidate);err!=nil{return err}
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.CommunicationCandidate.Identity[:],b.CommunicationCandidate.Canonical);err!=nil{return err}
   claim:=b.Communication.Claim
   transmission:=b.Communication.Transmission
   occurrence:=b.Communication.Occurrence

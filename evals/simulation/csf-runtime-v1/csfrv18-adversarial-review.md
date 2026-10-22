@@ -21,6 +21,12 @@
 | R6/F10 | Fonte exógena declarada, sem closure, não aparecia no roster de closures | Fork agora rejeita histórico com source declaration sem SourceClosure final |
 | R6/F11 | Filho podia reabrir com mesmo ID uma fonte finalizada no pai | Guard transacional de source declaration lê prefixo parental, rejeita reabertura e falha fechado em archive corrupto |
 | R6/F12 | A equivalência entre execução contínua e processo reaberto não era comparada diretamente | Cenário de envio/entrega é executado em quatro rotas, com snapshots finais comparados byte a byte e restore por SQLite novo |
+| R7/F13 | Ator cognitivo sem `evidence_routes` não era obrigado a fornecer checkpoint | `cognitive_actor_registry` imutável por run e roster selado em snapshot; testes de ausência e corrupção |
+| R7/F14 | Snapshot existente tornava-se não-resumível após abort/retry sem incremento de revisão | Histórico `snapshot_prefix_members` + replay causal das alterações posteriores; crash points na mesma revisão e colisões V1 testados |
+| R8/F15 | Resume parava antes de concluir `PerceptionTask` pendente | `DrainPendingPerceptionV1` com dispatch por evento autenticado e idempotência após recibo parcial |
+| R8/F16 | `ResumeAction` dependia de implementação manual para restaurar o fence do WORK | `Coordinator.ReopenFencedCycle` reconstrói bytes e coordenada originais sem chamar seleção ou modelo |
+| R8/F17 | Retry autenticado não tinha caminho operacional de reenfileiramento do mesmo corte | `Coordinator.ReopenAuthorizedRetry` exige `AttemptRetryRecord`, drena tasks e publica só o fence sucessor |
+| R9/F18 | Evals comparavam digests de prefixo, mas não bytes literais de cada ledger | Comparação de todos os registros canônicos em `input_ledger`, `decision_ledger`, `event_store`, `evidence_ledger` e `causal_outbox` após quatro rotas |
 
 ## Evidência automatizada
 
@@ -36,9 +42,9 @@
 
 1. **OPEN-01 — CROSS-POLICY:** suporte atual verifica framing/hashes da policy de origem, mas só executa fork V1→V1. Runtime de policy filha distinta, migrador versionado e policy-resolution V2 não estão implementados. Rejeição é fail-closed, não aceite positivo.
 2. **OPEN-02 — FORK NON-IDLE:** com triggers ativas, schedule/activation/round/dispatch pendentes ou tasks perceptivas incompletas, o bootstrap rejeita. Falta migração determinística dessas autoridades para novos IDs e replay do tail divergente, sem compartilhamento de estado filho/pai.
-3. **OPEN-03 — ACTOR REGISTRY:** os checkpoints epistemológicos são comparados ao roster dos holders de evidence, e não a um actor registry epistemológico autoritativo cobrindo todos os atores cognitivos elegíveis. Essa diferença pode omitir ator sem evidence.
-4. **OPEN-04 — EXECUTOR DE RESUME:** `VerifySnapshotV1` reconcilia e retorna plano seguro, mas ainda não há executor de retomada acionado automaticamente que reaplique o fence in-flight, gere o fence de retry autorizado e drene todas as tasks antes de novo dispatch.
+3. **RESOLVED-03 — ACTOR REGISTRY:** `RegisterCognitiveActor` persiste o roster de agentes cognitivos elegíveis, incluindo atores sem observação. O selo de snapshot fixa o roster; snapshot sem checkpoint completo ou com membro removido falha fechado. A elegibilidade só existe após registro explícito do ator pelo agente proprietário.
+4. **OPEN-04 — EXECUTOR DE RESUME:** há drenagem idempotente de `PerceptionTask` e reabertura operacional de `AdmissionFence`/retry autorizado a partir de bytes verificados. A coordenação geral de todos os handlers de `CommitWork`, inclusive o cenário misto, ainda não foi integrada ao orquestrador de execução.
 5. **OPEN-05 — MATRIZ DIFERENCIAL COMPLETA:** estão presentes provas por componente e por cenários, mas falta o mesmo cenário integrado com conflito de recurso + trigger + comunicação em trânsito, comparando execução contínua, replay e múltiplos resumes para todos os cinco ledgers, hash/world e permutações/crash points.
-6. **OPEN-06 — SNAPSHOTS NO MESMO WORLD REVISION:** a identidade normativa V1 usa [run, version, revision]. Ingress/percepção/abort podem mudar autoridades sem incrementar revision. A segunda publicação diferente da mesma revisão falha por identidade (seguro), mas snapshots em vários pontos do mesmo rev não são suportados sem decisão explícita de contrato/versionamento.
+6. **RESOLVED-06 — SNAPSHOT V1 DE UMA REVISÃO:** preservada a identidade normativa [run, version, revision], sem reemitir um segundo snapshot diferente na mesma revisão. O checkpoint imutável mais os tails autenticados de fence/abort/retry/percepção reproduzem pontos de crash na mesma revisão; tentativa de sobrescrever o snapshot original falha fechado. Um futuro schema V2 é necessário somente para múltiplos snapshots físicos distintos da mesma revisão.
 
-Nenhum desses OPEN deve ser mascarado por CI verde. Não é válido afirmar “zero findings”, concluir ticket ou realizar merge antes da resolução com evidência nova.
+Os findings ainda marcados OPEN (01, 02, 04 e 05) não podem ser mascarados por CI verde. Não é válido afirmar “zero findings”, concluir ticket ou realizar merge antes da resolução com evidência nova.

@@ -2,7 +2,6 @@ package communication
 
 import (
  "errors"
- "math"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
@@ -47,7 +46,7 @@ func ValidateMigratedOccurrenceV2(b *policy.Bundle,p SendPlan,rootID domain.ID,
   return 0,errors.New("V2 imported due occurrence not canonical")
  }
  ordinal,ok:=f[11].(uint64)
- if !ok||ordinal>math.MaxUint32{return 0,errors.New("V2 imported occurrence ordinal invalid")}
+ if !ok||ordinal>uint64(^uint32(0)){return 0,errors.New("V2 imported occurrence ordinal invalid")}
  genesisOrigin:=[]any{uint64(2),[]any{rootID[:],rootDigest[:]}}
  if !sameCBOR(f[9],genesisOrigin){return 0,errors.New("V2 due origin is not child Genesis")}
  want,_,err:=identity.New(b).Sum("cote.csf.id.occurrence",

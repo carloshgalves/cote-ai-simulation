@@ -349,6 +349,11 @@ func (s *Store) CreateSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bund
   if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM snapshots WHERE id=?",id[:]).Scan(&existing);err!=nil{return zero,err}
   if !bytes.Equal(existing,canonical){return zero,errors.New("snapshot same-revision identity collision")}
   if err:=verifySnapshotSeal(ctx,tx,id,run,hash,uint64(state.Revision));err!=nil{return zero,err}
+  // Same-revision re-publication may not silently change cognitive eligibility.
+  currentActors,err:=snapshotCognitiveActorRoster(ctx,tx,run,nil);if err!=nil{return zero,err}
+  frozenActors,err:=snapshotCognitiveActorRoster(ctx,tx,run,&id);if err!=nil{return zero,err}
+  if len(currentActors)!=len(frozenActors){return zero,errors.New("snapshot actor eligibility changed after publication")}
+  for actor:=range currentActors{if !frozenActors[actor]{return zero,errors.New("snapshot actor membership diverged")}}
   for i,name:=range snapshotLedgerNames{
    proof,err:=snapshotVerifiedPrefix(ctx,tx,id,name,b);if err!=nil{return zero,err}
    if !sameCanonical(proof,cursors[i]){return zero,errors.New("idempotent snapshot prefix proof differs from live authorities")}

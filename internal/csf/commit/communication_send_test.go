@@ -10,6 +10,7 @@ import (
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/communication"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -135,4 +136,62 @@ func TestCSFRV17CommunicationSendAtomicAndTruthNeutral(t *testing.T){
  if err!=nil||next.Revision!=1||next.NextLogicalSequence!=2{
   t.Fatal("message did not advance causal revision atomically",err,next)
  }
+}
+
+func TestCSFRV17DelayedDeliveryExactlyOnceAndCausalReplay(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,sendCycle,sendFence,path:=communicationFixture(t)
+ _,_,_,_,_,run:=ledger.Snapshot()
+ if _,err:=c.CommitCommunicationSend(ctx,ledger,sendCycle,sendFence);err!=nil{t.Fatal("send:",err)}
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ var status,count int
+ if err:=db.QueryRowContext(ctx,"SELECT status FROM communication_transmissions").Scan(&status);err!=nil||status!=0{
+  t.Fatal("send did not leave a pending transmission",err,status)
+ }
+ if err:=db.QueryRowContext(ctx,"SELECT count(*) FROM evidence_ledger").Scan(&count);err!=nil||count!=0{
+  t.Fatal("B saw a non-delivered claim",err,count)
+ }
+ advance,err:=c.Advance(ctx,ledger,run)
+ if err!=nil{t.Fatal("expected causal CLOCK_ADVANCE until scheduled delivery:",err)}
+ clockNow:=advance.ResultClock
+ pending,err:=store.PendingClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ plan,ok,err:=clock.Next(clockNow,pending)
+ if err!=nil||!ok||plan.Kind!=clock.Work{t.Fatal("expected due WORK after advance",plan,err)}
+ id,_,err:=identity.New(c.bundle).Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{run[:],[]any{int64(clockNow.Instant),uint64(plan.OriginOrdinal)}})
+ if err!=nil{t.Fatal(err)}
+ _,hash,err:=store.LoadWorldState(ctx,uint64(clockNow.Revision));if err!=nil{t.Fatal(err)}
+ cycle:=admission.Cycle{ID:domain.ID(id),Attempt:0,Instant:clockNow.Instant,
+  Ordinal:plan.OriginOrdinal,BaseRevision:clockNow.Revision,
+  BaseStateHash:domain.Digest(hash),RetryRef:[]any{uint64(0)}}
+ fence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).
+  AdmitThenEvaluate(ctx,c.bundle,ledger,cycle,c.admissionPolicies,nil)
+ if err!=nil{t.Fatal("due admission:",err)}
+ for step:=uint8(1);step<=7;step++{
+  c.failAfterStep=step
+  if _,err:=c.CommitCommunicationDue(ctx,ledger,cycle,fence);err==nil{
+   t.Fatalf("due transaction survived failpoint %d",step)
+  }
+  var s,n int
+  if e:=db.QueryRowContext(ctx,"SELECT status FROM communication_transmissions").Scan(&s);e!=nil||s!=0{
+   t.Fatal("rollback consumed channel",step,s,e)
+  }
+  if e:=db.QueryRowContext(ctx,"SELECT count(*) FROM event_store").Scan(&n);e!=nil||n!=4{
+   t.Fatal("rollback published delivery Event",step,n,e)
+  }
+ }
+ c.failAfterStep=0
+ if _,err:=c.CommitCommunicationDue(ctx,ledger,cycle,fence);err!=nil{t.Fatal("delivery:",err)}
+ if _,err:=c.CommitCommunicationDue(ctx,ledger,cycle,fence);err==nil{t.Fatal("due source delivered twice")}
+ if err:=db.QueryRowContext(ctx,"SELECT status FROM communication_transmissions").Scan(&status);err!=nil||status!=1{
+  t.Fatal("transmission remained IN_TRANSIT",status,err)
+ }
+ if err:=db.QueryRowContext(ctx,"SELECT count(*) FROM event_store").Scan(&count);err!=nil||count!=5{
+  t.Fatal("exact event history changed",count,err)
+ }
+ pending,err=store.PendingClock(ctx,[32]byte(run))
+ if err!=nil{t.Fatal(err)}
+ next,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ if _,exists,err:=clock.Next(next,pending);err!=nil||exists{t.Fatal("due occurrence remained pending",exists,err)}
 }

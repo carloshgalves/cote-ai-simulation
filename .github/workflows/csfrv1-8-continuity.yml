@@ -26,6 +26,10 @@ jobs:
           git diff --check origin/main HEAD
       - name: Snapshot and resume negative tests
         run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18'
+      - name: Cross-policy reference and negative vectors
+        run: go test -count=1 -v ./internal/csf/fork
+      - name: Snapshot and fork race regression
+        run: go test -race -count=1 ./internal/csf/commit -run '^TestCSFRV18'
       - name: SQLite replay and terminal regression
         run: go test -count=1 ./internal/csf/persistence/sqlite ./internal/csf/clock ./internal/csf/perception
       - name: Full Go regression

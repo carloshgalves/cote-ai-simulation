@@ -118,11 +118,22 @@ type AttemptRetryBatch struct {
 // SQLite transaction owner as ClockAdvanceBatch. The initial V1-5 slice only
 // accepts a closed, zero-event NoProposal batch. The adapter must fail closed
 // on resource-consuming or lifecycle-bearing variants until reducers exist.
+// CommunicationPublication is a draft trio that may become durable ONLY
+// inside the existing terminal CommitWork SQLite transaction. It does not
+// grant an independent Claim/Transmission or scheduling append authority.
+type CommunicationPublication struct {
+ Claim CanonicalRecord
+ Transmission CanonicalRecord
+ Occurrence CanonicalRecord
+}
 type WorkBatch struct {
  // 0: NoProposal; 1: single resource; 2: two contenders;
  // 3: authenticated system-only cohort; 4: NoProposal slots and system
  // sources atomically combined in the same AdmissionFence/WorldRevision.
  Mode uint8
+ // Mode 7: registered communication send, without world truth mutation.
+ Communication *CommunicationPublication
+ CommunicationCandidate CanonicalRecord
  SystemCandidate CanonicalRecord
  // Remaining independent system-unit candidates in AdmissionFence order.
  SystemExtraCandidates []CanonicalRecord

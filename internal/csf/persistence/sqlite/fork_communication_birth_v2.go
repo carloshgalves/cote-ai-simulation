@@ -90,8 +90,9 @@ func validateV2ImportedBirthTx(ctx context.Context,tx *sql.Tx,childRun,childTxID
   if !ok||len(raw)!=32{return errors.New("V2 proof root ID malformed")}
   copy(entry.dst[:],raw)
  }
- copy(checkpoint[:],rawBytesImport(f[5]))
- if !bytes.Equal(f[5].([]byte),checkpoint[:]){return errors.New("V2 proof checkpoint invalid")}
+ checkpointRaw,ok:=f[5].([]byte)
+ if !ok||len(checkpointRaw)!=32{return errors.New("V2 proof checkpoint invalid")}
+ copy(checkpoint[:],checkpointRaw)
  var lineageParent,lineageSnap,lineagePolicy []byte
  if err:=tx.QueryRowContext(ctx,
   "SELECT parent_run,parent_snapshot_id,origin_policy_hash FROM fork_lineage WHERE child_run=?",
@@ -109,7 +110,7 @@ func validateV2ImportedBirthTx(ctx context.Context,tx *sql.Tx,childRun,childTxID
  if err!=nil||child.ID!=domain.ID(rootID)||child.Digest!=domain.Digest(rootDigest){
   return errors.New("V2 imported authority differs from child Genesis")
  }
- var originalClaim,originalTransmission,originalDue,claimRaw,transmissionRaw []byte
+ var originalClaim,originalTransmission,originalDue []byte
  var originalClaimID,originalTXID,originalDueID,childClaimID,childDueID [32]byte
  for _,entry:=range []struct{index int;dst *[32]byte}{
   {8,&originalClaimID},{9,&originalTXID},{10,&originalDueID},

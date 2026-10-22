@@ -12,6 +12,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/fork"
@@ -415,5 +416,24 @@ func TestCSFRV18ForkCanArchiveFinalSourceClosureWithoutReopeningIngress(t *testi
   "UPDATE fork_history_records SET canonical=x'01' WHERE child_run=? AND ledger_name='input_ledger' AND ordinal=0",id[:]);err!=nil{t.Fatal(err)}
  if _,err:=child.ValidatedGenesis(ctx,id,bundle);err==nil{
   t.Fatal("tampered historical parent prefix was accepted by child fork")
+ }
+}
+
+func TestCSFRV18SnapshotDeterministicAcrossWorkerAndTriggerOrder(t *testing.T){
+ ctx:=context.Background()
+ var baseline []byte
+ var baseDigest [32]byte
+ for seed:=0;seed<4;seed++{
+  first:=activeTrigger();second:=activeTrigger();second.ID[0]=0x82
+  defs:=[]trigger.Definition{first,second}
+  if seed%2==1{defs[0],defs[1]=defs[1],defs[0]}
+  c,store,ledger,run,bundle,_:=testFixture(t,defs...)
+  if _,err:=c.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
+  snap,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,nil)
+  if err!=nil{t.Fatal(err)}
+  if seed==0{baseline=bytes.Clone(snap.Canonical);baseDigest=snap.Digest;continue}
+  if !bytes.Equal(baseline,snap.Canonical)||baseDigest!=snap.Digest{
+   t.Fatalf("same semantic run changed snapshot bytes under trigger permutation %d",seed)
+  }
  }
 }

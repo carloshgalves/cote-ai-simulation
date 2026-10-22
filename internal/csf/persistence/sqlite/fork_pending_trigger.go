@@ -139,11 +139,17 @@ func migrateGenesisPendingTriggers(ctx context.Context,s *Store,
    return result,errors.New("fork trigger activation violates child clock floor")
   }
   var id [32]byte;copy(id[:],newID[:])
+  if !expectedBirths[id]{
+   return result,errors.New("fork activation was not reproducibly born from child Genesis")
+  }
   for _,prior:=range result.Activations{
    if prior.ID==id{return result,errors.New("fork duplicate child trigger activation")}
   }
   result.Activations=append(result.Activations,forkTriggerActivation{
    ID:id,Instant:instant,Ordinal:ordinal,Canonical:canonical})
+ }
+ if len(expectedBirths)!=len(result.Activations){
+  return result,errors.New("fork omitted an initial Genesis trigger activation")
  }
  if len(registered)==0&&len(activationRefs)>0{return result,fmt.Errorf("activation without trigger definitions")}
  return result,nil

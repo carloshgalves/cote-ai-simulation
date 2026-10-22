@@ -25,21 +25,24 @@ O probe executa baseline, injeta um único mutante numa **worktree descartável 
 
 ## 3. Fleet real de agentes de implementação
 
-Em **Actions → Bounded agent implementation fleet → Run workflow**, fornecer `issue_1` e, se realmente independentes, `issue_2`/`issue_3`.
+Depois do merge, em **Actions → Bounded agent implementation fleet → Run workflow**, selecione uma Issue aberta que já tenha sido explicitamente marcada com o label `ready-for-agent`; até outras duas Issues realmente independentes são opcionais. Somente `carloshgalves` está autorizado pelo workflow a disparar essa fleet.
 
-- Cada Issue aberta e única recebe seu próprio runner/worktree e branch de checkpoint `agent/fleet/issue-N`. Até **2 agentes simultâneos**; terceiro aguarda. O workflow verifica números e estado da Issue; **não** comprova ausência de conflito de arquivos entre Issues. Avaliar paths/contratos/migrações antes de disparar em paralelo.
-- Modelo `openai/gpt-oss-20b` por padrão, opção `openai/gpt-oss-120b`; usa OpenCode `1.19.3` e `GROQ_API_KEY`. O modelo precisa estar habilitado na conta e respeitar TPM/RPM/RPD compartilhados; `max-parallel=2` não garante cota para dois trabalhos. Se a quota falhar, baixar para uma única Issue por execução ou reduzir contexto/segmentos.
-- Executa 1 ou 2 sessões explícitas de **6 minutos** por Issue, com checkpoint no final de cada sessão (inclusive falha comum/timeout), limitado a allowlist `internal src tests evals cmd`. Não persiste arquivos fora dessa allowlist nem pode salvar o último intervalo em um desligamento abrupto do runner.
-- A branch pode ser retomada em nova execução da mesma Issue. Checkpoint WIP não significa CI green ou issue concluída. Um job de agente com erro permanece vermelho.
-- Neste repo, checkpoint cria automaticamente Draft PR? **Não. A revisão independente posterior é dona dessa transição.**
-- O token de GitHub é entregue apenas às etapas confiáveis de preparação/publicação; o worker recebe a chave de inferência. Ainda assim, permissões do agente e runners descartáveis não substituem um isolamento de segurança forte. Não utilizar Issues ou fontes de terceiros não confiáveis nem dados privados nas instruções.
+- **Isolamento de credenciais**: cada worker de OpenCode recebe um GITHUB_TOKEN apenas de leitura, com uma chave Groq e um worktree próprio. O código do agente pode ser não confiável. O job **publish** nasce em outro runner, obtém scripts da branch padrão e recebe separadamente o GITHUB_TOKEN de escrita. Nunca executa código recebido do worker.
+- O worker coleta só arquivos rastreados e novos não ignorados da allowlist `internal src tests evals cmd`, com limites de tamanho e proibição de segredos comuns/symlinks, e gera um `manifest.json` com hashes SHA-256. `actions/upload-artifact` persiste o WIP, mesmo se a inferência falhar normalmente. O publicador verifica integridade, allowlist e symlinks antes de restaurar o snapshot e executar `fleet_checkpoint.sh`.
+- **Um único worker de inferência por repositório neste estágio** (`max-parallel: 1`). Há no máximo três slots por disparo, mas são processados serialmente; no máximo uma execução fleet por repositório. Cotas da organização Groq **não são sincronizadas entre projetos**. Não executar fleets simultâneas em repositórios diferentes até instalar um escalonador central.
+- Uma sessão de **6 minutos por Issue por disparo**, seguida de artifact e publicação separada. Nova execução da mesma Issue retoma sua branch `agent/fleet/issue-N`. Se a VM cair antes do upload do artifact, as edições da sessão podem ser perdidas. Checkpoint WIP não é CI verde; ausência de alteração não cria PR.
+- O publicador salva somente a branch de checkpoint; a PR continua pertencendo à fase separada de code-review.
+- O modelo padrão é `openai/gpt-oss-20b`, opcionalmente `openai/gpt-oss-120b`; a organização ainda está sujeita aos limites efetivos de TPM/RPM/RPD e à disponibilidade desses modelos.
+- A publicação com escrita está isolada do shell do agente, mas **não é um sandbox completo**: workloads maliciosos podem tentar exfiltrar a chave de inferência ou alterar os arquivos enviados ao artifact. Usar somente Issues aprovadas e evitar dados privados/clientes.
+
+Consulte `docs/agents/autonomous-orchestration-policy.md` para o escopo futuro de ciclos completos. Ela é **uma proposta NÃO ATIVA**; não autoriza IMPLEMENT -> REVIEW -> REMEDIATE automaticamente.
 
 ## 4. Revisão headless (somente candidatos não verificados)
 
 Em **Actions → Agent headless PR review → Run workflow**, informar a `pr_number`, a `issue_number` aceita e o modelo.
 
 1. O workflow extrai Issue e **diff completo** de PR aberta contra seu HEAD exato, sem checkout/execução do código da PR.
-2. **Falha fechada** quando diff excede 4.000 caracteres ou Issue excede 12.000; não trunca fingindo revisão completa.
+2. **Falha fechada** quando diff excede 12.000 caracteres ou Issue excede 4.000; não trunca fingindo revisão completa.
 3. O Groq retorna JSON com candidatos sustentados pelo diff. A etapa confiável confere HEAD ainda idêntico e publica comentário como `ai-headless-review:v1`, sem o marcador canônico de finding OPEN.
 4. Isso não executa testes nem fecha findings. Um reviewer independente, conforme a skill original de cada repo, deve validar ou descartar sugestões e realizar review final; **zero candidatos não implica GO**.
 
@@ -63,7 +66,7 @@ Em **Actions → Agent headless PR review → Run workflow**, informar a `pr_num
 - Harness offline passou + YAML/actionlint passaram em CI.
 - Pilotar uma Issue **sintética ou de baixo risco** via fleet, observar execução real e branch WIP.
 - Revisão headless manual em PR com conteúdo compartilhável, conferir comentário/head SHA; não registrar candidatos como findings formais sem prova.
-- Testar retomada da Issue após falha simulada; verificar que só paths allowlisted foram persistidos.
+- Testar retomada da Issue após falha simulada; verificar que só paths allowlisted foram persistidos e que o publicador executou em runner distinto.
 - Rever segurança/custo/cotas e logs antes de ampliar o número de agentes.
 
 Se o runner nem iniciar ou a cota estiver esgotada, classificar como **NÃO VALIDADO** e manter a PR em Draft.

@@ -59,12 +59,12 @@ jobs:
           if pr["state"]!="OPEN" or issue["state"]!="OPEN":
               raise SystemExit("PR and source Issue must be open")
           diff=(tmp/"full.diff").read_text()
-          if not diff.startswith("diff --git ") or len(diff)>48000:
+          if not diff.startswith("diff --git ") or len(diff)>12000:
               raise SystemExit("Full PR diff too large or unavailable: refusing partial review")
           spec=issue.get("body") or ""
-          if len(spec)>12000:
+          if len(spec)>4000:
               raise SystemExit("Issue acceptance text too large for this bounded run")
-          policy=pathlib.Path("AGENTS.md").read_text()[:10000]
+          policy=pathlib.Path("AGENTS.md").read_text()[:2500]
           data={"pr_title":pr["title"],"pr_head":pr["headRefOid"],"issue_title":issue["title"],
                 "issue_body":spec,"agent_policy":policy,"diff":diff}
           (tmp/"review-context.json").write_text(json.dumps(data))

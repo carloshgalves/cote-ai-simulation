@@ -28,7 +28,8 @@ func fixture(t *testing.T)(*policy.Bundle,ClaimSpec,TransmissionSpec){
  parsed,err:=codec.StrictDecodePayload(record.Canonical);if err!=nil{t.Fatal(err)}
  parts:=parsed.([]any)
  var claimDigest domain.Digest;copy(claimDigest[:],parts[9].([]byte))
- tx:=TransmissionSpec{Origin:origin,Role:0,Ordinal:0,
+ var due domain.ID;due[0]=7
+ tx:=TransmissionSpec{Origin:origin,Role:0,Ordinal:0,DeliveryOccurrence:&due,
   ActualSender:Actor{"school","a"},PresentedSender:"C",Recipients:[]Actor{{"school","b"}},
   Channel:"school.message.v1",SentAt:4,Status:0,
   ClaimRefs:[]domain.CausalRef{{Kind:18,ID:domain.ID(record.Identity),Digest:claimDigest}}}

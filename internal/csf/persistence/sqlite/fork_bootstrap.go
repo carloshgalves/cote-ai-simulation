@@ -85,7 +85,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   // All other live partitions, including dispatches, trigger runtimes,
   // perception tasks and unfinished rounds, still fail closed.
   for i,raw:=range lists {
-   if i==0||i==3||i==6||i==7||i==9{continue} // completed perception receipts remain archived
+   if i==0||i==3||i==4||i==6||i==7||i==9{continue} // migrated rounds and completed receipts
    items,ok:=raw.([]any)
    if !ok||len(items)!=0{return nil,fmt.Errorf("V1-to-V2 fork needs migrator for pending partition %d",i)}
   }
@@ -223,9 +223,27 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   importBirths,err=s.PrepareV2CommunicationBirths(ctx,sourceRun,parentSnapshotID,
    childGenesis,origin,childPolicy)
   if err!=nil{return nil,fmt.Errorf("V1-to-V2 pending transmission migration: %w",err)}
-  if len(importBirths)!=len(lists[0].([]any)){
-   return nil,errors.New("V2 communication migration omits pending non-communication occurrence")
+  pendingRefs:=lists[0].([]any)
+  importedRefs:=map[string]bool{}
+  for _,birth:=range importBirths {
+   if importedRefs[string(birth.Parent.OccurrenceID[:])]{return nil,errors.New("duplicate V2 imported communication source")}
+   importedRefs[string(birth.Parent.OccurrenceID[:])]=true
   }
+  genesisRefs:=make([]any,0,len(pendingRefs))
+  for _,raw:=range pendingRefs{
+   ref,ok:=raw.([]any)
+   if !ok||len(ref)!=3||ref[0]!=uint64(6){return nil,errors.New("invalid cross-policy pending occurrence ref")}
+   parentID,ok:=ref[1].([]byte)
+   if !ok||len(parentID)!=32{return nil,errors.New("invalid cross-policy pending occurrence ID")}
+   if importedRefs[string(parentID)]{delete(importedRefs,string(parentID));continue}
+   // The independent Genesis-owned migrator will reject Event/Claim
+   // occurrences; no parent-owned live work is silently discarded.
+   genesisRefs=append(genesisRefs,raw)
+  }
+  if len(importedRefs)!=0{return nil,errors.New("in-transit transmission is absent from source checkpoint")}
+  generated,err:=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,genesisRefs,origin,childPolicy)
+  if err!=nil{return nil,fmt.Errorf("V2 Genesis schedule migration: %w",err)}
+  migrated=append(migrated,generated...)
   for _,birth:=range importBirths {
    value,err:=codec.StrictDecodePayload(birth.ChildOccurrence.Canonical)
    if err!=nil{return nil,err}
@@ -239,10 +257,10 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
    })
   }
  }else{
-  migrated,err=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,lists[0].([]any),origin)
+  migrated,err=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,lists[0].([]any),origin,childPolicy)
   if err!=nil{return nil,err}
  }
- migratedRounds,err:=migrateGenesisPendingRounds(ctx,s,parent,childGenesis,lists[4].([]any),origin)
+ migratedRounds,err:=migrateGenesisPendingRounds(ctx,s,parent,childGenesis,lists[4].([]any),origin,childPolicy)
  if err!=nil{return nil,fmt.Errorf("fork Genesis round migration: %w",err)}
  triggerMigration,err:=migrateGenesisPendingTriggers(ctx,s,parent,childGenesis,origin,
   lists[1].([]any),lists[2].([]any))

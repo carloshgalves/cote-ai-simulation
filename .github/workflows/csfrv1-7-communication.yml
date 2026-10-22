@@ -1,0 +1,36 @@
+name: CSFRV1-7 Communication Checkpoint
+on:
+  push:
+    branches: [feat/csfrv1-7-communication-claims]
+  pull_request:
+    paths:
+      - "internal/csf/communication/**"
+      - "internal/csf/claim/**"
+      - "internal/csf/commit/**"
+      - "internal/csf/persistence/sqlite/**"
+      - "internal/csf/perception/**"
+      - "internal/csf/contextboundary/**"
+      - ".github/workflows/csfrv1-7-communication.yml"
+permissions:
+  contents: read
+jobs:
+  communication:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Whitespace validation
+        run: |
+          git fetch --no-tags --depth=1 origin main
+          git diff --check origin/main HEAD
+      - name: Communication canonical and negative tests
+        run: go test -count=1 -v ./internal/csf/communication/...
+      - name: Knowledge boundary - forged sender and unverified claim
+        run: go test -count=1 -v ./internal/csf/contextboundary -run '^TestCSFRV17KnowledgeBoundary'
+      - name: End-to-end false claim, exact receipt and replay
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV17'
+      - name: Full Go regression
+        run: go test -count=1 ./...

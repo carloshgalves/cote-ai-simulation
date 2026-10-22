@@ -119,6 +119,11 @@ func verifyPendingOutboxExact(ctx context.Context,q queryOne,run [32]byte)error{
   ev,ok:=decoded.([]any)
   if !ok||len(ev)!=19{return errors.New("task Event malformed")}
   switch ev[3]{
+  case "communication.delivered":
+   projected,err:=loadVerifiedCommunicationProjection(ctx,q,taskID)
+   if err!=nil{return err}
+   if !bytes.Equal(completionRaw,projected.Completion.Canonical){return errors.New("communication completion differs from addressed projection")}
+   if err:=checkProjectionEvidence(ctx,q,run,taskID,projected);err!=nil{return err}
   case "round.consumed":
    projected,err:=loadVerifiedRoundProjection(ctx,q,taskID)
    if err!=nil{return err}
@@ -126,7 +131,8 @@ func verifyPendingOutboxExact(ctx context.Context,q queryOne,run [32]byte)error{
     return errors.New("round task completion differs from deterministic addressed projection")
    }
    if err:=checkProjectionEvidence(ctx,q,run,taskID,projected);err!=nil{return err}
-  case "clock.advanced","resource.consumed",
+  case "communication.sent","communication.delivery_failed",
+   "clock.advanced","resource.consumed",
    "occurrence.rejected","occurrence.deferred",
    "trigger.activation.consumed","trigger.runtime.transition",
    "trigger.activation.created":

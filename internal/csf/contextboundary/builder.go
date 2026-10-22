@@ -46,6 +46,7 @@ func Build(ctx context.Context,reader AddressedReader,actor [2]string)(View,erro
  if err!=nil{return out,err}
  byID:=map[[32]byte]ports.CanonicalRecord{}
  byTime:=map[[32]byte]int64{}
+ byChannel:=map[[32]byte]string{}
  for _,obs:=range observations{
   v,err:=codec.StrictDecodePayload(obs.Canonical);if err!=nil{return out,err}
   f,ok:=v.([]any)
@@ -72,31 +73,39 @@ func Build(ctx context.Context,reader AddressedReader,actor [2]string)(View,erro
    return out,errors.New("context percept unregistered")
   }
   payload,err:=codec.StrictDecodeEnvelope(encoded)
-  if err!=nil||payload.DomainTag!="cote.csf.round.consumed.v1"||
-   payload.SchemaID!="cote.csf.schema.typed-value"||payload.SchemaVersion!=1{
+  if err!=nil||payload.SchemaID!="cote.csf.schema.typed-value"||payload.SchemaVersion!=1{
+   return out,errors.New("context rejected unregistered/privileged typed percept")
+  }
+  channel:=""
+  switch payload.DomainTag{
+  case "cote.csf.round.consumed.v1":
+   parts,ok:=payload.Value.([]any)
+   if !ok||len(parts)!=3||parts[1]!=uint64(2){return out,errors.New("context notice malformed")}
+   confidential,ok:=parts[2].([]any)
+   if !ok||len(confidential)!=0{return out,errors.New("context includes unredacted event sources")}
+   if !isEmptyArray(f[10])||!sameTextList(f[11],[]string{"source-inputs-redacted"}){
+    return out,errors.New("context observation leaked claim/raw payload")
+   }
+   channel="school.round.lifecycle.v1"
+  case "cote.csf.communication.delivered.v1":
+   channel,err=checkCommunicationContext(f,actor,payload.Value)
+   if err!=nil{return out,err}
+  default:
    return out,errors.New("context rejected non-addressed percept (canon/physical/privileged)")
   }
-  parts,ok:=payload.Value.([]any)
-  if !ok||len(parts)!=3||parts[1]!=uint64(2){return out,errors.New("context notice malformed")}
-  confidential,ok:=parts[2].([]any)
-  if !ok||len(confidential)!=0{return out,errors.New("context includes unredacted event sources")}
   h:=identity.OpaqueContentHash(encoded)
   if !bytes.Equal(h[:],rawBytes(percept[3])){
    return out,errors.New("context percept digest mismatch")
   }
-  if !isEmptyArray(f[10])||!sameTextList(f[11],[]string{"source-inputs-redacted"}){
-   return out,errors.New("context observation leaked claim/raw payload")
-  }
   if _,exists:=byID[obs.Identity];exists{return out,errors.New("duplicate observation")}
-  byID[obs.Identity]=obs;byTime[obs.Identity]=time
+  byID[obs.Identity]=obs;byTime[obs.Identity]=time;byChannel[obs.Identity]=channel
  }
  used:=map[[32]byte]bool{}
  for _,record:=range inputs{
   v,err:=codec.StrictDecodePayload(record.Canonical);if err!=nil{return out,err}
   f,ok:=v.([]any)
   if !ok||len(f)!=11||!canonicalActor(f[3],actor)||
-   f[1]!=uint64(0)||f[2]!=uint64(0)||
-   f[5]!=uint64(0)||f[6]!="school.round.lifecycle.v1"{
+   f[1]!=uint64(0)||f[2]!=uint64(0){
    return out,errors.New("unregistered or foreign KnowledgeInput")
   }
   ref,ok:=f[7].([]any)
@@ -106,6 +115,12 @@ func Build(ctx context.Context,reader AddressedReader,actor [2]string)(View,erro
   var key [32]byte;copy(key[:],id)
   obs,exists:=byID[key]
   if !exists||used[key]{return out,errors.New("missing/duplicate addressed Observation")}
+  expectedChannel:=byChannel[key]
+  modality:=uint64(0)
+  if expectedChannel=="school.message.v1"{modality=1}
+  if f[5]!=modality||f[6]!=expectedChannel{
+   return out,errors.New("KnowledgeInput modality/channel contradicts addressed Observation")
+  }
   decoded,err:=codec.StrictDecodePayload(obs.Canonical);if err!=nil{return out,err}
   of:=decoded.([]any)
   digest,err:=sum("cote.csf.digest.observation","cote.csf.schema.observation.body",of[:14])
@@ -114,7 +129,7 @@ func Build(ctx context.Context,reader AddressedReader,actor [2]string)(View,erro
   }
   received,valid:=signedTime(f[4])
   if !valid||received!=byTime[key]{return out,errors.New("epistemic time differs from causal event")}
-  if !isEmptyArray(f[8])||!sameCBOR(f[9],of[12]){
+  if !sameCBOR(f[8],of[10])||!sameCBOR(f[9],of[12]){
    return out,errors.New("KnowledgeInput extends disclosed claims/evidence")
   }
   inputID,err:=sum("cote.csf.id.knowledge-input",

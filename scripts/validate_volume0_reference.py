@@ -67,6 +67,34 @@ def main():
         if file.name == "white-room.json":
             validate_source(obj, str(file))
             assert len(obj["cohort_policy"]) == 8, "cohort chronology truncated"
+    # Relationships and relative events are not privileged agent memories.
+    graph = json.loads((ROOT / "relationships/relationship-edges.json").read_text(encoding="utf-8"))
+    timeline = json.loads((ROOT / "events/relative-timeline.json").read_text(encoding="utf-8"))
+    deep = json.loads((ROOT / "characters/deep-profile-index.json").read_text(encoding="utf-8"))
+    faction = json.loads((ROOT / "organizations/faction-history.json").read_text(encoding="utf-8"))
+    assert len(graph["edges"]) == 31
+    assert len(timeline["events"]) == 15
+    assert len(deep["profiles"]) == 15
+    assert len(faction["temporal_states"]) == 4
+    for edge in graph["edges"]:
+        assert edge["from"] in actor_ids and edge["to"] in actor_ids
+        validate_pages(edge, edge["id"])
+    for event in timeline["events"]:
+        validate_pages(event, event["id"])
+        assert "not universally known" not in event.get("knowledge_gate", "").lower() or bool(event["knowledge_gate"])
+    for person in deep["profiles"]:
+        assert person["actor_id"] in actor_ids
+        validate_pages(person, person["actor_id"])
+
+    # The narrative expressly distinguishes uncertainties from universal truths.
+    actors_by_id = {obj["character_id"]: obj for _, obj in characters}
+    assert "Tsubaki" in " ".join(actors_by_id["actor.yuki_younger_sister_unidentified"]["identity_and_epistemic_warnings"])
+    assert "alive" in " ".join(actors_by_id["actor.naoe"]["identity_and_epistemic_warnings"]).lower()
+    assert "voluntary" in " ".join(actors_by_id["actor.shiro"]["identity_and_epistemic_warnings"]).lower()
+    keyed = {obj["case_id"]: obj for _, obj in cases}
+    assert "wrong" in keyed["v0.case.kiyotaka.gummy"]["observed_outcome"].lower()
+    assert "fifty" in keyed["v0.case.kiyotaka.cards"]["observed_outcome"].lower()
+    assert "not specified" in keyed["v0.case.kiyotaka.adult-baton"]["limits"].lower()
     print(f"Volume 0 reference validation passed: {len(characters)} characters, "
           f"{len(organizations)} organizations, {len(cases)} behavioral cases.")
     print("This is structural validation, NOT a claim-level verification or a release approval.")

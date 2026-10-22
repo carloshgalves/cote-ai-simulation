@@ -1039,3 +1039,45 @@ func csfrv18SyntheticActorCheckpoints(t *testing.T,path string,at domain.Simulat
  if err:=rows.Err();err!=nil{t.Fatal(err)}
  return refs
 }
+
+func TestCSFRV18ForkMigratesPendingGenesisScheduleIntoChildIDs(t *testing.T){
+ ctx:=context.Background()
+ b,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,b)
+ source,err:=sqlite.Open(ctx,t.TempDir()+"/genesis-parent.db");if err!=nil{t.Fatal(err)};defer source.Close()
+ if err:=source.PersistGenesis(ctx,g,b);err!=nil{t.Fatal(err)}
+ if err:=source.BootstrapClock(ctx,g,b);err!=nil{t.Fatal(err)}
+ if err:=source.BootstrapGenesisTriggers(ctx,g,b,nil);err!=nil{t.Fatal(err)}
+ deriver:=identity.New(b)
+ origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+ parentID,_,err:=deriver.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+  []any{origin,uint64(0),uint64(0)});if err!=nil{t.Fatal(err)}
+ due:=int64(g.InitialInstant)+100
+ body:=[]any{parentID[:],g.RunID[:],"schedule",due,[]any{due,uint64(0)},
+  "test.occurrence",uint64(1),g.Payload[16],uint64(0),origin,uint64(0),uint64(0),
+  []any{uint64(0)},[]any{uint64(0)}}
+ digest,_,err:=deriver.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,body)
+ if err!=nil{t.Fatal(err)}
+ canonical,err:=codec.CanonicalPayload(append(cloneAny(body),digest[:]));if err!=nil{t.Fatal(err)}
+ if err:=source.SeedGenesisOccurrence(ctx,domain.ID(parentID),g.RunID,
+  domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(due)},canonical);err!=nil{t.Fatal(err)}
+ originSnapshot,err:=source.CreateSnapshotV1(ctx,[32]byte(g.RunID),b,nil);if err!=nil{t.Fatal(err)}
+ target,err:=sqlite.Open(ctx,t.TempDir()+"/genesis-fork.db");if err!=nil{t.Fatal(err)};defer target.Close()
+ childID:=[32]byte(g.RunID);childID[0]^=0x96
+ childGenesis,err:=source.ForkIdleSnapshotV1(ctx,[32]byte(g.RunID),originSnapshot.ID,childID,target,b)
+ if err!=nil{t.Fatalf("pending genesis schedule was not migrated: %v",err)}
+ if childGenesis.RunID!=domain.ID(childID){t.Fatal("fork run ID was not derived")}
+ parentPending,err:=source.PendingClock(ctx,[32]byte(g.RunID));if err!=nil{t.Fatal(err)}
+ childPending,err:=target.PendingClock(ctx,childID);if err!=nil{t.Fatal(err)}
+ if len(parentPending)!=1||len(childPending)!=1||childPending[0].ID==parentPending[0].ID||
+  childPending[0].Instant!=parentPending[0].Instant{
+  t.Fatalf("scheduled fork changed semantic due coordinate or reused parent identity: %v %v",parentPending,childPending)
+ }
+ if _,err:=target.ValidatedGenesis(ctx,childID,b);err!=nil{t.Fatal(err)}
+ if _,err:=target.ReplayClock(ctx,childID,b);err!=nil{t.Fatal(err)}
+ childSnap,err:=target.CreateSnapshotV1(ctx,childID,b,nil);if err!=nil{t.Fatal(err)}
+ if _,err:=target.VerifySnapshotV1(ctx,childID,childSnap.ID,b);err!=nil{t.Fatal(err)}
+ if _,err:=source.VerifySnapshotV1(ctx,[32]byte(g.RunID),originSnapshot.ID,b);err!=nil{
+  t.Fatal("fork altered parent schedule or prefix",err)
+ }
+}

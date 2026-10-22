@@ -127,16 +127,23 @@ func rejectForkFinalSourceReopening(ctx context.Context,tx *sql.Tx,run [32]byte,
  for rows.Next(){
   var raw []byte
   if err:=rows.Scan(&raw);err!=nil{return err}
-  value,err:=codec.StrictDecodePayload(raw)
-  if err!=nil{
-   // A valid enveloped ingress receipt cannot be a SourceClosure. Corrupt
-   // archived bytes must not disable the final-source guard.
-   if _,envelopeErr:=codec.StrictDecodeEnvelope(raw);envelopeErr==nil{continue}
-   return fmt.Errorf("fork history corrupt while guarding source finality: %w",err)
+  if envelope,err:=codec.StrictDecodeEnvelope(raw);err==nil{
+   if envelope.DomainTag!="cote.csf.record.source-ingress-receipt"{
+    return errors.New("fork historical envelope is not a SourceIngressReceipt")
+   }
+   continue
   }
+  value,err:=codec.StrictDecodePayload(raw)
+  if err!=nil{return fmt.Errorf("fork history corrupt while guarding source finality: %w",err)}
   f,ok:=value.([]any)
-  if !ok||len(f)!=7{continue}
-  name,ok:=f[2].(string);if !ok||name!=source{continue}
+  if !ok{return errors.New("fork archived input record is not a canonical array")}
+  switch len(f){
+  case 3,11,13,19:continue // source declaration, round, dispatch, response or input
+  case 7:
+  default:return errors.New("unknown fork historical input record shape")
+  }
+  name,ok:=f[2].(string);if !ok{return errors.New("fork SourceClosure id malformed")}
+  if name!=source{continue}
   terminal,ok:=f[5].(bool)
   if !ok{return errors.New("fork SourceClosure final marker malformed")}
   if terminal{return fmt.Errorf("source %q finalized by immutable fork history",source)}

@@ -116,10 +116,12 @@ func Decode(raw []byte)(HistoryReference,error){
 
 func NewSnapshotReference(bundle *policy.Bundle,canonical []byte)(HistoryReference,error){
  if bundle==nil||len(canonical)==0{return HistoryReference{},errors.New("missing origin policy or canonical checkpoint")}
+ originID,_,originHash,_,err:=bundle.CodecIdentity()
+ if err!=nil{return HistoryReference{},fmt.Errorf("unverified origin policy: %w",err)}
  digest:=identity.OpaqueContentHash(canonical)
  h:=HistoryReference{
-  OriginPolicyID:policy.CodecPolicyID,
-  OriginPolicyHash:bundle.CodecPolicyHash,
+  OriginPolicyID:originID,
+  OriginPolicyHash:originHash,
   CheckpointDomainTag:SnapshotDomain,
   CheckpointSchemaID:SnapshotSchema,
   CheckpointSchemaVersion:1,
@@ -134,7 +136,9 @@ func NewSnapshotReference(bundle *policy.Bundle,canonical []byte)(HistoryReferen
 func VerifyOriginSnapshot(h HistoryReference,canonical []byte,origin *policy.Bundle)error{
  if origin==nil{return errors.New("origin policy bundle not available")}
  if err:=h.Validate();err!=nil{return err}
- if h.OriginPolicyID!=policy.CodecPolicyID||h.OriginPolicyHash!=origin.CodecPolicyHash||
+ installedID,_,installedHash,_,err:=origin.CodecIdentity()
+ if err!=nil{return fmt.Errorf("origin policy not verified: %w",err)}
+ if h.OriginPolicyID!=installedID||h.OriginPolicyHash!=installedHash||
   h.CheckpointDomainTag!=SnapshotDomain||h.CheckpointSchemaID!=SnapshotSchema||
   h.CheckpointSchemaVersion!=1{
   return errors.New("checkpoint reference origin policy or snapshot schema unsupported")

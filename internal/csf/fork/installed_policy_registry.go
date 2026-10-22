@@ -2,8 +2,6 @@ package fork
 
 import (
  "context"
- "crypto/sha256"
- "encoding/json"
  "errors"
  "fmt"
 
@@ -43,7 +41,7 @@ func NewInstalledPolicyRegistry(bundles ...*policy.Bundle) (*InstalledPolicyRegi
   }
   key:=policyVersion{id:id,hash:bundle.CodecPolicyHash}
   if _,exists:=out.entries[key];exists{return nil,fmt.Errorf("duplicate installed policy %q",id)}
-  fp,err:=installedPolicyFingerprint(bundle)
+  fp,err:=bundle.RuntimeFingerprint()
   if err!=nil{return nil,fmt.Errorf("cannot seal installed policy %q: %w",id,err)}
   out.entries[key]=installedPolicy{bundle:bundle,fingerprint:fp}
  }
@@ -59,30 +57,10 @@ func (r *InstalledPolicyRegistry) ResolveOriginPolicy(_ context.Context,id strin
  if b==nil||b.CodecPolicyHash!=hash||b.Profile["codec_policy_id"]!=id {
   return nil,errors.New("registered origin policy identity mutated")
  }
- fp,err:=installedPolicyFingerprint(b)
+ fp,err:=b.RuntimeFingerprint()
  if err!=nil||fp!=entry.fingerprint {
   return nil,errors.New("registered origin policy contents mutated after installation")
  }
  return b,nil
 }
 
-// installedPolicyFingerprint seals the complete parsed policy authority, not
-// merely the lookup key. JSON encoding orders map keys deterministically; all
-// loaded profile/registry/transition values are JSON-derived. Replacing a
-// domain operation, reducer policy, schema or transition in memory must never
-// change how an already installed historical bundle interprets a checkpoint.
-// The bundle's manifest hashes remain independently verified by policy.Load.
-func installedPolicyFingerprint(b *policy.Bundle)([32]byte,error){
- if b==nil{return [32]byte{},errors.New("nil installed bundle")}
- canonical,err:=json.Marshal(struct{
-  Directory string
-  Profile map[string]any
-  Registries map[string]any
-  Transitions map[string]any
-  CodecHash [32]byte
-  SchemaHash [32]byte
-  SuiteHash [32]byte
- }{b.Directory,b.Profile,b.Registries,b.Transitions,b.CodecPolicyHash,b.SchemaHash,b.SuiteHash})
- if err!=nil{return [32]byte{},err}
- return sha256.Sum256(canonical),nil
-}

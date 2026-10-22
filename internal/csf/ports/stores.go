@@ -1,7 +1,8 @@
 // Package ports defines the narrow persistence seams owned by the causal core.
 package ports
 
-import "context"
+import ("context"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy")
 
 type CanonicalRecord struct {
 	Identity  [32]byte
@@ -133,6 +134,7 @@ type WorkBatch struct {
  Mode uint8
  // Mode 7: registered communication send, without world truth mutation.
  Communication *CommunicationPublication
+ CommunicationBundle *policy.Bundle // verified against persisted Genesis before use
  CommunicationCandidate CanonicalRecord
  SystemCandidate CanonicalRecord
  // Remaining independent system-unit candidates in AdmissionFence order.

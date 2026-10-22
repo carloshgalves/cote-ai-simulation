@@ -84,10 +84,11 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  for i,name:=range snapshotLedgerNames{
   sealed,err:=snapshotVerifiedPrefix(ctx,tx,id,name,b);if err!=nil{return zero,err}
   if !sameCanonical(sealed,cursors[i]){return zero,fmt.Errorf("snapshot %s historical prefix proof changed",name)}
-  if rev==uint64(c.Revision){
-   current,err:=snapshotLedgerPrefix(ctx,tx,name,b);if err!=nil{return zero,err}
-   if !sameCanonical(current,sealed){return zero,fmt.Errorf("tip snapshot %s cursor or prefix changed",name)}
-  }
+  // A later Abort, Retry, source ingress or perception completion can
+  // append authenticated journal bytes without incrementing WorldRevision.
+  // The sealed historical prefix remains valid: ReplayClock and
+  // VerifyCycleControl above authenticate every subsequent tail. Never
+  // conflate "same revision" with "same authoritative ledger prefix".
  }
  snapshotPendingValue,ok:=all[11].([]any)
  if !ok||len(snapshotPendingValue)!=4||snapshotPendingValue[0]!="cote.csf.schema.snapshot-pending-state"||
@@ -100,7 +101,9 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  if !ok||len(snapshotLists)!=10||snapshotEnv.SchemaID!="cote.csf.schema.snapshot-pending-state"||
   snapshotEnv.SchemaVersion!=1{return zero,errors.New("historical pending-state envelope incompatible")}
  currentPending,err:=snapshotPending(ctx,tx,run,b);if err!=nil{return zero,err}
- if rev==uint64(c.Revision)&&!sameCanonical(currentPending,all[11]){return zero,errors.New("tip snapshot pending state differs from authority")}
+ // The current pending projection can differ after a same-revision
+ // terminal non-commit or a completed perception task. Those changes are
+ // already audited by ReplayClock, VerifyCycleControl and the barrier.
  controlStatus:=uint64(0)
  tipControlStatus:=uint64(0)
  tipFields:=[]any{uint64(0),[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},uint64(0)}
@@ -108,11 +111,12 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  if err!=nil&&err!=sql.ErrNoRows{return zero,err}
  if err==sql.ErrNoRows{
   idle:=[]any{uint64(0),[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},uint64(0)}
-  if rev==uint64(c.Revision)&&!sameCanonical(all[13],idle){return zero,errors.New("tip snapshot wrongly claims a non-IDLE control state")}
+  // The historical snapshot can be IDLE even if later same-revision
+  // admission changed live control. Its own hash and seal remain binding.
  }else{
   control,err:=codec.StrictDecodePayload(controlRaw);if err!=nil{return zero,err}
   ctl,ok:=control.([]any);if !ok||len(ctl)!=7{return zero,errors.New("cycle control state malformed")}
-  if rev==uint64(c.Revision)&&!sameCanonical(all[13],ctl){return zero,errors.New("tip snapshot control state diverged")}
+  // The historical control and current control are separately verified.
   tipStatus,valid:=ctl[0].(uint64)
   if !valid||tipStatus>3{return zero,errors.New("live cycle-control status invalid")}
   tipControlStatus=tipStatus

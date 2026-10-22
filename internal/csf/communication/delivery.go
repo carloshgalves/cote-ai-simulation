@@ -74,8 +74,8 @@ func AuthenticateClaim(bundle *policy.Bundle,record ports.CanonicalRecord)(Verif
  polarity,ok:=proposition[1].(uint64);if !ok||polarity>2{return zero,errors.New("Proposition polarity invalid")}
  scope,ok:=proposition[2].([]any);if !ok{return zero,errors.New("Proposition time scope malformed")}
  content,ok:=proposition[3].([]any);if !ok{return zero,errors.New("Proposition content malformed")}
- if err:=checkedTyped(scope);err!=nil{return zero,err}
- if err:=checkedTyped(content);err!=nil{return zero,err}
+ if err:=checkedRegisteredProposition(scope,"cote.csf.communication.scope.v1");err!=nil{return zero,err}
+ if err:=checkedRegisteredProposition(content,"cote.csf.communication.allegation.v1");err!=nil{return zero,err}
  present,ok:=f[5].([]any);if !ok||len(present)!=2||present[0]!=uint64(1){return zero,errors.New("Claim actual author required")}
  actor,ok:=asActor(present[1]);if !ok{return zero,errors.New("Claim author invalid")}
  time,ok:=causalTime(f[6]);if !ok{return zero,errors.New("Claim asserted-at invalid")}

@@ -130,9 +130,10 @@ func validateV2ImportedBirthTx(ctx context.Context,tx *sql.Tx,childRun,childTxID
  oldClaim:=ports.CanonicalRecord{Identity:originalClaimID,Canonical:originalClaim}
  oldTX:=ports.CanonicalRecord{Identity:originalTXID,Canonical:originalTransmission}
  oldDue:=ports.CanonicalRecord{Identity:originalDueID,Canonical:originalDue}
- if _,err:=communication.ValidateOccurrence(historic,communication.SendPlan{
+ parentDue,err:=communication.ValidateOccurrence(historic,communication.SendPlan{
   Run:domain.ID(parentRun),Claim:oldClaim,Transmission:oldTX,Occurrence:oldDue,
- });err!=nil{return fmt.Errorf("imported parent due not historically authentic: %w",err)}
+ })
+ if err!=nil{return fmt.Errorf("imported parent due not historically authentic: %w",err)}
  var originalCommit []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM fork_history_records "+
   "WHERE child_run=? AND ledger_name='decision_ledger' AND record_id=?",
@@ -186,8 +187,60 @@ func validateV2ImportedBirthTx(ctx context.Context,tx *sql.Tx,childRun,childTxID
   Transmission:ports.CanonicalRecord{Identity:childTxID,Canonical:txDB},
   Occurrence:ports.CanonicalRecord{Identity:childDueID,Canonical:rawBytesImport(f[19])},
  }
- if _,err:=communication.ValidateMigratedOccurrenceV2(childPolicy,planChild,child.ID,child.Digest);err!=nil{
-  return fmt.Errorf("invalid V2 child imported due: %w",err)
+ childDue,err:=communication.ValidateMigratedOccurrenceV2(childPolicy,planChild,child.ID,child.Digest)
+ if err!=nil{return fmt.Errorf("invalid V2 child imported due: %w",err)}
+ // An attacker must not be able to rewrite a child's allegation and
+ // recompute the unkeyed SQL integrity hash. Cross-policy migration
+ // preserves all communication semantics, not only the causal ID links.
+ newClaim,err:=communication.AuthenticateClaim(childPolicy,planChild.Claim)
+ if err!=nil{return err}
+ newTX,err:=communication.AuthenticateTransmission(childPolicy,planChild.Transmission)
+ if err!=nil{return err}
+ if childDue!=parentDue||
+  newClaim.AssertedBy!=oldVerified.AssertedBy||
+  newClaim.AssertedAt!=oldVerified.AssertedAt||
+  !sameCanonical(newClaim.Proposition,oldVerified.Proposition)||
+  newTX.ActualSender!=oldVerifiedTX.ActualSender||
+  newTX.PresentedSender!=oldVerifiedTX.PresentedSender||
+  newTX.Recipient!=oldVerifiedTX.Recipient||
+  newTX.Channel!=oldVerifiedTX.Channel||
+  newTX.SentAt!=oldVerifiedTX.SentAt||
+  newTX.Status!=oldVerifiedTX.Status||
+  parentRun==childRun||
+  childClaimID==originalClaimID||childTxID==originalTXID||
+  childDueID==originalDueID {
+  return errors.New("V2 import changed parental communication semantics or reused identity")
+ }
+ oldClaimFields,err:=codec.StrictDecodePayload(originalClaim)
+ if err!=nil{return err}
+ newClaimFields,err:=codec.StrictDecodePayload(claimDB)
+ if err!=nil{return err}
+ oldTransmissionFields,err:=codec.StrictDecodePayload(originalTransmission)
+ if err!=nil{return err}
+ newTransmissionFields,err:=codec.StrictDecodePayload(txDB)
+ if err!=nil{return err}
+ oldCF,okOldC:=oldClaimFields.([]any)
+ childCF,okChildC:=newClaimFields.([]any)
+ oldTF,okOldT:=oldTransmissionFields.([]any)
+ childTF,okChildT:=newTransmissionFields.([]any)
+ if !okOldC||!okChildC||!okOldT||!okChildT||
+  len(oldCF)!=10||len(childCF)!=10||len(oldTF)!=14||len(childTF)!=14||
+  childCF[2]!=uint64(0)||childTF[2]!=uint64(0)||
+  childCF[3]!=childTF[3]||childCF[3]!=func()any{
+   dueFields,err:=codec.StrictDecodePayload(planChild.Occurrence.Canonical)
+   if err!=nil{return nil}
+   parsed,ok:=dueFields.([]any)
+   if !ok||len(parsed)!=15{return nil}
+   return parsed[11]
+  }()||!sameCanonical(oldCF[4],childCF[4])||
+  !sameCanonical(oldCF[5],childCF[5])||
+  !sameCanonical(oldTF[5],childTF[5])||
+  !sameCanonical(oldTF[6],childTF[6])||
+  !sameCanonical(oldTF[7],childTF[7])||
+  !sameCanonical(oldTF[8],childTF[8])||
+  !sameCanonical(oldTF[9],childTF[9])||
+  !sameCanonical(oldTF[11],childTF[11]){
+  return errors.New("V2 import changed body fields or cross-record ordinal")
  }
  return nil
 }

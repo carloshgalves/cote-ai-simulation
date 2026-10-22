@@ -282,3 +282,63 @@ func TestCSFRV17CausalClaimDeliversExactlyOnePrivateInputToB(t *testing.T){
  if err!=nil||report.ReconstructedClock!=current{t.Fatal("communication replay differs from completed terminal:",report,err)}
  _=theft
 }
+
+func TestCSFRV17DroppedChannelProducesFailureAndZeroBKnowledge(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=communicationFixtureWithChannel(t,"school.drop.v1")
+ _,_,_,_,_,run:=ledger.Snapshot()
+ if _,err:=c.CommitCommunicationSend(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ advance,err:=c.Advance(ctx,ledger,run);if err!=nil{t.Fatal(err)}
+ current:=advance.ResultClock
+ pending,err:=store.PendingClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ next,ok,err:=clock.Next(current,pending)
+ if err!=nil||!ok||next.Kind!=clock.Work{t.Fatal("delivery failure wasn't scheduled",err)}
+ id,_,err:=identity.New(c.bundle).Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{run[:],[]any{int64(current.Instant),uint64(next.OriginOrdinal)}})
+ if err!=nil{t.Fatal(err)}
+ _,hash,err:=store.LoadWorldState(ctx,uint64(current.Revision));if err!=nil{t.Fatal(err)}
+ dueCycle:=admission.Cycle{ID:domain.ID(id),Instant:current.Instant,
+  Ordinal:next.OriginOrdinal,BaseRevision:current.Revision,
+  BaseStateHash:domain.Digest(hash),RetryRef:[]any{uint64(0)}}
+ dueFence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).AdmitThenEvaluate(
+  ctx,c.bundle,ledger,dueCycle,c.admissionPolicies,nil)
+ if err!=nil{t.Fatal(err)}
+ if _,err:=c.CommitCommunicationDue(ctx,ledger,dueCycle,dueFence);err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ var status int
+ if err:=db.QueryRowContext(ctx,"SELECT status FROM communication_transmissions").Scan(&status);err!=nil||status!=2{
+  t.Fatal("channel failure didn't terminate transmission",status,err)
+ }
+ rows,err:=db.QueryContext(ctx,"SELECT canonical FROM causal_outbox")
+ if err!=nil{t.Fatal(err)}
+ var taskID [32]byte;var found bool
+ for rows.Next(){
+  var raw []byte
+  if err:=rows.Scan(&raw);err!=nil{rows.Close();t.Fatal(err)}
+  v,err:=codec.StrictDecodePayload(raw);if err!=nil{rows.Close();t.Fatal(err)}
+  task,ok:=v.([]any);if !ok||len(task)!=10{continue}
+  var ev []byte
+  if err:=db.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",task[3]).Scan(&ev);err!=nil{rows.Close();t.Fatal(err)}
+  e,err:=codec.StrictDecodePayload(ev);if err!=nil{rows.Close();t.Fatal(err)}
+  if e.([]any)[3]=="communication.delivery_failed"{
+   copy(taskID[:],task[0].([]byte));found=true
+  }
+ }
+ if err:=rows.Err();err!=nil{rows.Close();t.Fatal(err)}
+ rows.Close()
+ if !found{t.Fatal("failed-channel Event lacks terminal perception task")}
+ if _,err:=store.CompleteInternalPerception(ctx,taskID,c.bundle);err!=nil{t.Fatal(err)}
+ if _,err:=store.DeliverCommunicationPerception(ctx,taskID);err==nil{
+  t.Fatal("failed channel produced an addressed claim")
+ }
+ var count int
+ if err:=db.QueryRowContext(ctx,"SELECT COUNT(*) FROM evidence_routes WHERE holder_id='b'").Scan(&count);err!=nil||count!=0{
+  t.Fatal("failed channel published B knowledge",count,err)
+ }
+ report,err:=store.ReplayClock(ctx,[32]byte(run),c.bundle)
+ final,loadErr:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil||loadErr!=nil||report.ReconstructedClock!=final{
+  t.Fatal("failed-channel replay diverged",report,err,loadErr)
+ }
+}

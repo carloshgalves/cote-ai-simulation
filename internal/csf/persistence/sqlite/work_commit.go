@@ -20,7 +20,8 @@ import (
 // PerceptionTasks, WorldRevision, lifecycle, clock and CycleCommit. Unsupported
 // combinations fail closed rather than committing a strict subset.
 func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
- if b.Mode>6{return errors.New("unregistered WORK terminal variant")}
+ if b.Mode>7{return errors.New("unregistered WORK terminal variant")}
+ if b.Mode!=7&&(b.Communication!=nil||b.CommunicationBundle!=nil){return errors.New("communication artefacts require verified registered terminal mode")}
  if len(b.ExpectedClock)==0||len(b.ResultClock)==0||len(b.Journal.Canonical)==0{
   return errors.New("incomplete WORK publication batch")
  }
@@ -210,7 +211,9 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  list,ok:=journal[16].([]any);if !ok||len(list)!=len(units){
   return errors.New("CycleCommit omits terminal decision references")
  }
- if b.Mode==5||b.Mode==6{
+ if b.Mode==7{
+  if err:=verifyCommunicationSendTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,expectedSlots);err!=nil{return err}
+ }else if b.Mode==5||b.Mode==6{
   if err:=verifyResourceSystemTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,genesisFields,allowed,expectedSlots);err!=nil{return err}
  }else if b.Mode==1{
   if err:=verifySingleResourceTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,allowed,expectedSlots);err!=nil{return err}
@@ -321,6 +324,25 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   !present(control[1],b.CycleID[:])||!present(control[2],attempt)||
   !present(control[3],fullRef(11,b.FenceID[:],fence[17].([]byte))){
   return errors.New("WORK not current in-flight authorized attempt")
+ }
+ if b.Mode==7{
+  if err:=appendToTx(ctx,tx,"decision_ledger",b.CommunicationCandidate);err!=nil{return err}
+  claim:=b.Communication.Claim
+  transmission:=b.Communication.Transmission
+  occurrence:=b.Communication.Occurrence
+  if _,err:=tx.ExecContext(ctx,
+   "INSERT INTO communication_claims(id,run_id,canonical) VALUES(?,?,?)",
+   claim.Identity[:],b.RunID[:],claim.Canonical);err!=nil{return err}
+  if _,err:=tx.ExecContext(ctx,
+   "INSERT INTO communication_transmissions(id,run_id,claim_id,occurrence_id,sent_commit_id,status,canonical) VALUES(?,?,?,?,?,0,?)",
+   transmission.Identity[:],b.RunID[:],claim.Identity[:],occurrence.Identity[:],
+   b.Journal.Identity[:],transmission.Canonical);err!=nil{return err}
+  eligibility,lifecycle,err:=validateScheduledOccurrence(b.RunID,occurrence.Identity,occurrence.Canonical)
+  if err!=nil||lifecycle!=0{return errors.New("communication occurrence not a pending canonical scheduled unit")}
+  if _,err:=tx.ExecContext(ctx,
+   "INSERT INTO scheduled_occurrences(id,run_id,eligibility_instant,eligibility_ordinal,lifecycle,canonical) VALUES(?,?,?,?,0,?)",
+   occurrence.Identity[:],b.RunID[:],int64(eligibility.NotBeforeInstant),
+   uint64(eligibility.NotBeforeCycleOrdinal),occurrence.Canonical);err!=nil{return err}
  }
  if b.Mode==1||b.Mode==5{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.ResourceCandidate.Identity[:],b.ResourceCandidate.Canonical);err!=nil{return err}

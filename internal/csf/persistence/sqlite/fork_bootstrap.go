@@ -25,12 +25,34 @@ import (
 // The immutable parental prefix remains archived, never child ledger authority.
 func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotID,childRun [32]byte,
  child *Store,b *policy.Bundle)(*genesis.Genesis,error){
- if s==nil||child==nil||b==nil||s==child{return nil,errors.New("fork requires distinct parent/child stores and policy")}
+ return s.forkSnapshotWithInstalledPolicies(ctx,sourceRun,parentSnapshotID,childRun,child,b,b,false)
+}
+
+// ForkIdleSnapshotV1ToV2 is the positive cross-policy bootstrap for verified
+// IDLE cuts WITHOUT unsettled migration units. Parent V1 history is preserved
+// byte-for-byte, while child Genesis, clock and future authorities are V2.
+// The in-transit path requires an additional migration birth executor and is
+// intentionally not implicitly enabled by this bounded operation.
+func (s *Store) ForkIdleSnapshotV1ToV2(ctx context.Context,sourceRun,parentSnapshotID,childRun [32]byte,
+ child *Store,origin,version2 *policy.Bundle)(*genesis.Genesis,error){
+ if origin==nil||version2==nil{return nil,errors.New("cross-policy fork requires both installed bundles")}
+ id,v,_,_,err:=origin.CodecIdentity()
+ if err!=nil||id!=policy.CodecPolicyID||v!=1{return nil,errors.New("cross-policy fork origin must be installed V1")}
+ id,v,_,_,err=version2.CodecIdentity()
+ if err!=nil||id!=policy.CodecPolicyV2ID||v!=2{return nil,errors.New("cross-policy fork child must be installed V2")}
+ historic,err:=version2.ResolveHistoricalOrigin(policy.CodecPolicyID,origin.CodecPolicyHash)
+ if err!=nil||historic==version2{return nil,errors.New("V2 lacks exactly pinned V1 origin")}
+ return s.forkSnapshotWithInstalledPolicies(ctx,sourceRun,parentSnapshotID,childRun,child,origin,version2,true)
+}
+
+func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,parentSnapshotID,childRun [32]byte,
+ child *Store,origin,childPolicy *policy.Bundle,crossPolicy bool)(*genesis.Genesis,error){
+ if s==nil||child==nil||origin==nil||childPolicy==nil||s==child{return nil,errors.New("fork requires distinct parent/child stores and policy")}
  if sourceRun==childRun||childRun==([32]byte{}){return nil,errors.New("fork must allocate a new nonzero run ID")}
- resume,err:=s.VerifySnapshotV1(ctx,sourceRun,parentSnapshotID,b)
+ resume,err:=s.VerifySnapshotV1(ctx,sourceRun,parentSnapshotID,origin)
  if err!=nil{return nil,fmt.Errorf("fork source checkpoint replay: %w",err)}
  if resume.SnapshotControlStatus!=0{return nil,errors.New("fork origin checkpoint must be IDLE")}
- parent,err:=s.ValidatedGenesis(ctx,sourceRun,b)
+ parent,err:=s.ValidatedGenesis(ctx,sourceRun,origin)
  if err!=nil{return nil,err}
  if len(parent.Payload[4].([]any))!=1{
   return nil,errors.New("recursive fork origin requires a transitive lineage archive")
@@ -44,6 +66,15 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  typed,ok:=snapshot[11].([]any);if !ok||len(typed)!=4{return nil,errors.New("source pending envelope absent")}
  penv,err:=codec.StrictDecodeEnvelope(typed[2].([]byte));if err!=nil{return nil,err}
  lists,ok:=penv.Value.([]any);if !ok||len(lists)!=10{return nil,errors.New("unsupported pending-state schema")}
+ if crossPolicy {
+  // Version 2's communication/response migrators remain independently gated.
+  // Only a fully quiescent cut is eligible for this positive empty-work fork.
+  for i,raw:=range lists {
+   if i==3{continue} // final historical SourceClosures are archive-only
+   items,ok:=raw.([]any)
+   if !ok||len(items)!=0{return nil,fmt.Errorf("V1-to-V2 fork needs migrator for pending partition %d",i)}
+  }
+ }
  for i,raw:=range lists{
   items,ok:=raw.([]any)
   if !ok{return nil,fmt.Errorf("fork pending partition %d is malformed",i)}
@@ -145,31 +176,37 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  // Parent's registered snapshot body hash is distinct from the exact-byte
  // digest in CSFHREF. The latter binds immutable archive content across
  // origin/child policy versions without rehashing historical identities.
- href,err:=fork.NewSnapshotReference(b,resume.Snapshot.Canonical)
+ href,err:=fork.NewSnapshotReference(origin,resume.Snapshot.Canonical)
  if err!=nil{return nil,err}
  refRaw,err:=fork.Encode(href);if err!=nil{return nil,err}
  // Always resolve the immutable origin by its own id+hash before
  // interpreting its checkpoint, even for the same-policy V1 subset.
- installed,err:=fork.NewInstalledPolicyRegistry(b)
+ installed,err:=fork.NewInstalledPolicyRegistry(origin)
  if err!=nil{return nil,err}
  _,verifiedOrigin,err:=fork.VerifyOriginWithResolver(ctx,refRaw,resume.Snapshot.Canonical,installed)
  if err!=nil{return nil,err}
- if verifiedOrigin!=b{return nil,errors.New("fork origin policy unexpectedly switched during validation")}
+ if verifiedOrigin!=origin{return nil,errors.New("fork origin policy unexpectedly switched during validation")}
  payload:=append([]any(nil),parent.Payload...)
  payload[0]=bytes.Clone(childRun[:])
  payload[3]=int64(resume.SnapshotClock.Instant)
  payload[4]=[]any{uint64(1),refRaw}
+ targetID,targetVersion,codecHash,schemaHash,err:=childPolicy.CodecIdentity()
+ if err!=nil{return nil,err}
+ payload[5]=targetID
+ payload[6]=targetVersion
+ payload[10]=codecHash[:]
+ payload[11]=schemaHash[:]
  payload[16]=snapshot[6]
  payload[17]=snapshot[14]
  canonical,err:=codec.CanonicalBytes("cote.csf.digest.genesis-manifest","cote.csf.schema.genesis-manifest",1,payload)
  if err!=nil{return nil,err}
- childGenesis,err:=genesis.ValidateForkCanonical(canonical,b);if err!=nil{return nil,err}
+ childGenesis,err:=genesis.ValidateForkCanonical(canonical,childPolicy);if err!=nil{return nil,err}
  if [32]byte(childGenesis.RunID)!=childRun{return nil,errors.New("fork generated wrong run")}
- migrated,err:=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,lists[0].([]any),b)
+ migrated,err:=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,lists[0].([]any),origin)
  if err!=nil{return nil,err}
- migratedRounds,err:=migrateGenesisPendingRounds(ctx,s,parent,childGenesis,lists[4].([]any),b)
+ migratedRounds,err:=migrateGenesisPendingRounds(ctx,s,parent,childGenesis,lists[4].([]any),origin)
  if err!=nil{return nil,fmt.Errorf("fork Genesis round migration: %w",err)}
- triggerMigration,err:=migrateGenesisPendingTriggers(ctx,s,parent,childGenesis,b,
+ triggerMigration,err:=migrateGenesisPendingTriggers(ctx,s,parent,childGenesis,origin,
   lists[1].([]any),lists[2].([]any))
  if err!=nil{return nil,fmt.Errorf("fork trigger migration: %w",err)}
  // The parent workspace must remain verifiably immutable: copy the exact
@@ -180,7 +217,7 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  type member struct{id,canonical []byte}
  archived:=make([][]member,len(snapshotLedgerNames))
  for i,name:=range snapshotLedgerNames{
-  proof,err:=snapshotVerifiedPrefix(ctx,originTx,parentSnapshotID,name,b);if err!=nil{return nil,err}
+  proof,err:=snapshotVerifiedPrefix(ctx,originTx,parentSnapshotID,name,origin);if err!=nil{return nil,err}
   if !sameCanonical(cursors[i],proof){return nil,errors.New("origin prefix changed while preparing fork")}
   rows,err:=originTx.QueryContext(ctx,
    "SELECT m.ordinal,m.record_id,t.canonical FROM snapshot_prefix_members m "+
@@ -217,7 +254,7 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
   childRun[:],childGenesis.ID[:],childGenesis.Digest[:],childGenesis.CanonicalBytes);err!=nil{return nil,err}
  if _,err:=tx.ExecContext(ctx,
   "INSERT INTO fork_lineage(child_run,parent_run,parent_snapshot_id,origin_policy_hash,reference_canonical,parent_genesis_canonical,parent_snapshot_canonical) "+
-  "VALUES(?,?,?,?,?,?,?)",childRun[:],sourceRun[:],parentSnapshotID[:],b.CodecPolicyHash[:],
+  "VALUES(?,?,?,?,?,?,?)",childRun[:],sourceRun[:],parentSnapshotID[:],origin.CodecPolicyHash[:],
   refRaw,parent.CanonicalBytes,resume.Snapshot.Canonical);err!=nil{return nil,err}
  for i,name:=range snapshotLedgerNames{
   for ordinal,record:=range archived[i]{
@@ -265,7 +302,7 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  }
  if _,err:=tx.ExecContext(ctx,"INSERT INTO trigger_registry_seals(run_id,genesis_id,genesis_digest,registry_hash) VALUES(?,?,?,?)",
   childRun[:],childGenesis.ID[:],childGenesis.Digest[:],triggerMigration.Seal[:]);err!=nil{return nil,err}
- if err:=validateForkLineageTx(ctx,tx,childGenesis,b);err!=nil{return nil,err}
+ if err:=validateForkLineageTx(ctx,tx,childGenesis,childPolicy);err!=nil{return nil,err}
  if err:=tx.Commit();err!=nil{return nil,err}
  return childGenesis,nil
 }

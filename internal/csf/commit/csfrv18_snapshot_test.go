@@ -451,7 +451,7 @@ func TestCSFRV18SnapshotDeterministicAcrossWorkerAndTriggerOrder(t *testing.T){
 
 func TestCSFRV18ContinuousVersusReopenedDeliverySnapshotByteEquivalence(t *testing.T){
  ctx:=context.Background()
- var baseline []byte
+ var baseline,baselineLedgers []byte
  for mode:=0;mode<4;mode++{
   t.Run(fmt.Sprintf("reopen-after-step-%d",mode),func(t *testing.T){
    c,store,ledger,cycle,fence,path:=communicationFixture(t)
@@ -491,8 +491,18 @@ func TestCSFRV18ContinuousVersusReopenedDeliverySnapshotByteEquivalence(t *testi
    finished,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
    if err!=nil{t.Fatal(err)}
    if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),finished.ID,c.bundle);err!=nil{t.Fatal(err)}
-   if mode==0{baseline=bytes.Clone(finished.Canonical)}else if !bytes.Equal(baseline,finished.Canonical){
-    t.Fatal("continuous and restarted delivery produced divergent canonical snapshot/ledger prefix")
+   rawLedgers,err:=csfrv18ExactFiveLedgers(path)
+   if err!=nil{t.Fatal(err)}
+   if mode==0{
+    baseline=bytes.Clone(finished.Canonical)
+    baselineLedgers=bytes.Clone(rawLedgers)
+   }else{
+    if !bytes.Equal(baseline,finished.Canonical){
+     t.Fatal("continuous and restarted delivery produced divergent canonical snapshot/ledger prefix")
+    }
+    if !bytes.Equal(baselineLedgers,rawLedgers){
+     t.Fatal("continuous and resumed execution differ in authoritative five-ledger canonical bytes")
+    }
    }
   })
  }
@@ -619,4 +629,23 @@ func TestCSFRV18ResumeDrainsCausallyCommittedPerceptionExactlyOnce(t *testing.T)
  if _,err:=reconnected.VerifySnapshotV1(ctx,[32]byte(run),frozen.ID,coordinator.bundle);err!=nil{
   t.Fatal("historical snapshot lost provenance after partial perception tail:",err)
  }
+}
+
+func csfrv18ExactFiveLedgers(path string)([]byte,error){
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{return nil,err}
+ defer db.Close()
+ var out bytes.Buffer
+ for _,name:=range []string{"input_ledger","decision_ledger","event_store","evidence_ledger","causal_outbox"}{
+  rows,err:=db.Query("SELECT id,canonical FROM "+name+" ORDER BY id")
+  if err!=nil{return nil,err}
+  out.WriteString(name)
+  for rows.Next(){
+   var id,canonical []byte
+   if err:=rows.Scan(&id,&canonical);err!=nil{rows.Close();return nil,err}
+   fmt.Fprintf(&out,"%08x%x%08x%x",len(id),id,len(canonical),canonical)
+  }
+  if err:=rows.Err();err!=nil{rows.Close();return nil,err}
+  if err:=rows.Close();err!=nil{return nil,err}
+ }
+ return out.Bytes(),nil
 }

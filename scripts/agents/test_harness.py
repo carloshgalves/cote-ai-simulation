@@ -120,5 +120,27 @@ class HarnessTests(unittest.TestCase):
             self.assertTrue(f.is_symlink())
 
 
+    def test_snapshot_rejects_stale_branch_head(self):
+        with tempfile.TemporaryDirectory() as d:
+            temp = Path(d)
+            repo = temp / "repo"
+            repo.mkdir()
+            for args in (["git", "init", "-q"], ["git", "config", "user.name", "Fixture"],
+                         ["git", "config", "user.email", "fixture@example.invalid"]):
+                self.assertEqual(command(args, repo).returncode, 0)
+            (repo / "src").mkdir()
+            file = repo / "src" / "feature.py"
+            file.write_text("ready = True\\n")
+            self.assertEqual(command(["git", "add", "."], repo).returncode, 0)
+            self.assertEqual(command(["git", "commit", "-qm", "baseline"], repo).returncode, 0)
+            snapshot = temp / "snapshot"
+            export_snapshot(repo, snapshot, ["src"])
+            file.write_text("ready = False\\n")
+            self.assertEqual(command(["git", "commit", "-qam", "parallel change"], repo).returncode, 0)
+            with self.assertRaisesRegex(ValueError, "Concurrent branch change"):
+                restore_snapshot(repo, snapshot, ["src"])
+            self.assertEqual(file.read_text(), "ready = False\\n")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -337,11 +337,19 @@ func (s *Store) CreateSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bund
  res,err:=tx.ExecContext(ctx,"INSERT OR IGNORE INTO snapshots(id,canonical) VALUES(?,?)",id[:],canonical)
  if err!=nil{return zero,err}
  n,err:=res.RowsAffected();if err!=nil{return zero,err}
+ checkpoint:=SnapshotV1{ID:id,Digest:hash,Canonical:canonical,Revision:uint64(state.Revision)}
  if n==0{
   var existing []byte
   if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM snapshots WHERE id=?",id[:]).Scan(&existing);err!=nil{return zero,err}
   if !bytes.Equal(existing,canonical){return zero,errors.New("snapshot same-revision identity collision")}
- }
+  if err:=verifySnapshotSeal(ctx,tx,id,run,hash,uint64(state.Revision));err!=nil{return zero,err}
+  for i,name:=range snapshotLedgerNames{
+   proof,err:=snapshotVerifiedPrefix(ctx,tx,id,name,b);if err!=nil{return zero,err}
+   if !sameCanonical(proof,cursors[i]){return zero,errors.New("idempotent snapshot prefix proof differs from live authorities")}
+  }
+ }else if n==1{
+  if err:=sealSnapshot(ctx,tx,checkpoint,run);err!=nil{return zero,err}
+ }else{return zero,errors.New("invalid snapshot insertion count")}
  if err:=tx.Commit();err!=nil{return zero,err}
- return SnapshotV1{ID:id,Digest:hash,Canonical:canonical,Revision:uint64(state.Revision)},nil
+ return checkpoint,nil
 }

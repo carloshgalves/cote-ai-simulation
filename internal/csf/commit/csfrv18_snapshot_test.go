@@ -920,11 +920,17 @@ func TestCSFRV18RunnerRejectsFakeCompletionWithoutJournalCommit(t *testing.T){
 func TestCSFRV18IntegratedResourceTriggerCommunicationInTransit(t *testing.T){
  ctx:=context.Background()
  var baseline,allLedgers []byte
- for _,variant:=range []struct{name string;reverse,restore,failed bool}{
-  {"continuous",false,false,false},
-  {"reverse-workers",true,false,false},
-  {"resume-before-communication",false,true,false},
-  {"crash-in-communication",true,true,true},
+ for _,variant:=range []struct{name string;reverse,restore bool;failStep uint8}{
+  {"continuous",false,false,0},
+  {"reverse-workers",true,false,0},
+  {"resume-before-communication",false,true,0},
+  {"crash-in-communication",true,true,4},
+  {"crash-step-1",false,true,1},
+  {"crash-step-2",true,true,2},
+  {"crash-step-3",false,true,3},
+  {"crash-step-5",true,true,5},
+  {"crash-step-6",false,true,6},
+  {"crash-step-7",true,true,7},
  }{
   t.Run(variant.name,func(t *testing.T){
    c,store,ledger,contest,fence,path:=twoResourceContestFixtureWithSystem(t,variant.reverse,true,true)
@@ -939,7 +945,9 @@ func TestCSFRV18IntegratedResourceTriggerCommunicationInTransit(t *testing.T){
     ledger,err=inputledger.Open(ctx,run,c.bundle,independent);if err!=nil{t.Fatal(err)}
     c=New(independent,c.bundle,c.admissionPolicies)
     store=independent
-    if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),pre.ID,c.bundle);err!=nil{t.Fatal(err)}
+    resumed,err:=c.ResumeRegisteredWorkV1(ctx,ledger,[32]byte(run),pre.ID)
+    if err!=nil{t.Fatalf("verified resume after resource commit: %v",err)}
+    if resumed.Continued{t.Fatal("reconnected run duplicated already committed resource WORK")}
    }
    g:=stockGenesis(t,c.bundle)
    state,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
@@ -991,10 +999,10 @@ func TestCSFRV18IntegratedResourceTriggerCommunicationInTransit(t *testing.T){
    messageFence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).
     AdmitThenEvaluate(ctx,c.bundle,ledger,messageCycle,c.admissionPolicies,nil)
    if err!=nil{t.Fatal(err)}
-   if variant.failed{
-    c.failAfterStep=4
+   if variant.failStep!=0{
+    c.failAfterStep=variant.failStep
     if _,err:=c.CommitCommunicationSend(ctx,ledger,messageCycle,messageFence);err==nil{
-     t.Fatal("communication failpoint failed to roll back mixed-timeline transmission")
+     t.Fatalf("communication failpoint %d failed to roll back mixed-timeline transmission",variant.failStep)
     }
     c.failAfterStep=0
    }

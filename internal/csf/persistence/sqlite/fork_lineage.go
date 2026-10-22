@@ -115,3 +115,26 @@ func validateForkLineageTx(ctx context.Context,tx *sql.Tx,child *genesis.Genesis
  // input and causal identities are always derived in the child run.
  return nil
 }
+
+// A fork's final external source cannot be reopened under the same source
+// identifier in its child run. This decision is made under the admission
+// transaction's SQLite lock, including when callers try generic Append().
+func rejectForkFinalSourceReopening(ctx context.Context,tx *sql.Tx,run [32]byte,source string)error{
+ rows,err:=tx.QueryContext(ctx,
+  "SELECT canonical FROM fork_history_records WHERE child_run=? AND ledger_name='input_ledger' ORDER BY ordinal",run[:])
+ if err!=nil{return err}
+ defer rows.Close()
+ for rows.Next(){
+  var raw []byte
+  if err:=rows.Scan(&raw);err!=nil{return err}
+  value,err:=codec.StrictDecodePayload(raw)
+  if err!=nil{continue} // envelope receipts are not SourceClosure records
+  f,ok:=value.([]any)
+  if !ok||len(f)!=7{continue}
+  name,ok:=f[2].(string);if !ok||name!=source{continue}
+  terminal,ok:=f[5].(bool)
+  if !ok{return errors.New("fork SourceClosure final marker malformed")}
+  if terminal{return fmt.Errorf("source %q finalized by immutable fork history",source)}
+ }
+ return rows.Err()
+}

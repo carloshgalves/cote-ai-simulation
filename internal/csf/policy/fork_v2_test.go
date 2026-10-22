@@ -68,3 +68,38 @@ func TestCSFRV18V2RejectsTamperedTransitionAndContractVectors(t *testing.T){
   })
  }
 }
+
+func TestCSFRV18SignedRuntimeProfileCaptureCannotSwapAfterManifestCheck(t *testing.T){
+ tests:=[]struct{name,dir,domain string;load func(string)(*Bundle,error)}{
+  {"V1",bundlePath,"cote.csf.bundle.codec-policy.v1",Load},
+  {"V2",v2BundlePath,"cote.csf.bundle.codec-policy.v2",LoadV2},
+ }
+ for _,tc:=range tests{
+  t.Run(tc.name,func(t *testing.T){
+   installed,err:=tc.load(tc.dir);if err!=nil{t.Fatal(err)}
+   temp:=t.TempDir()
+   for _,name:=range []string{"policy-manifest.json","profile.json"}{
+    raw,err:=os.ReadFile(filepath.Join(tc.dir,name));if err!=nil{t.Fatal(err)}
+    if err:=os.WriteFile(filepath.Join(temp,name),raw,0600);err!=nil{t.Fatal(err)}
+   }
+   var parsed map[string]any
+   if err:=decodePinnedJSON(temp,"policy-manifest.json",tc.domain,
+    installed.CodecPolicyHash,"profile.json",&parsed);err!=nil{
+    t.Fatal("authentic captured runtime policy rejected:",err)
+   }
+   raw,err:=os.ReadFile(filepath.Join(temp,"profile.json"));if err!=nil{t.Fatal(err)}
+   if err:=os.WriteFile(filepath.Join(temp,"profile.json"),append(raw,' '),0600);err!=nil{t.Fatal(err)}
+   if err:=decodePinnedJSON(temp,"policy-manifest.json",tc.domain,
+    installed.CodecPolicyHash,"profile.json",&parsed);err==nil{
+    t.Fatal("runtime profile swapped after signed manifest accepted")
+   }
+   if err:=os.WriteFile(filepath.Join(temp,"profile.json"),raw,0600);err!=nil{t.Fatal(err)}
+   manifest,err:=os.ReadFile(filepath.Join(temp,"policy-manifest.json"));if err!=nil{t.Fatal(err)}
+   if err:=os.WriteFile(filepath.Join(temp,"policy-manifest.json"),append(manifest,' '),0600);err!=nil{t.Fatal(err)}
+   if err:=decodePinnedJSON(temp,"policy-manifest.json",tc.domain,
+    installed.CodecPolicyHash,"profile.json",&parsed);err==nil{
+    t.Fatal("runtime policy manifest swapped after verification accepted")
+   }
+  })
+ }
+}

@@ -374,4 +374,13 @@ func TestCSFRV18CommunicationSnapshotInTransitReplayAndDeliveryOnce(t *testing.T
  _,beforeHash,err:=store.LoadWorldState(ctx,0);if err!=nil{t.Fatal(err)}
  _,afterHash,err:=store.LoadWorldState(ctx,3);if err!=nil{t.Fatal(err)}
  if beforeHash!=afterHash{t.Fatal("replayed allegation promoted false claim to world truth")}
+ tipSnapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
+ if err!=nil{t.Fatal("tip snapshot after channel delivery:",err)}
+ data,err:=codec.StrictDecodePayload(tipSnapshot.Canonical);if err!=nil{t.Fatal(err)}
+ parts:=data.([]any)[11].([]any)
+ pendingEnvelope,err:=codec.StrictDecodeEnvelope(parts[2].([]byte));if err!=nil{t.Fatal(err)}
+ partitions:=pendingEnvelope.Value.([]any)
+ if len(partitions[0].([]any))!=0{
+  t.Fatal("already delivered ScheduledOccurrence remained as pending checkpoint authority")
+ }
 }

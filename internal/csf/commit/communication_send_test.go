@@ -255,7 +255,7 @@ func TestCSFRV17CausalClaimDeliversExactlyOnePrivateInputToB(t *testing.T){
  if err:=db.QueryRowContext(ctx,"SELECT occurrence_id FROM communication_transmissions").Scan(&occurrenceID);err!=nil{t.Fatal(err)}
  if len(occurrenceID)!=32{t.Fatal("communication occurrence ID missing")}
  var dueKey [32]byte;copy(dueKey[:],occurrenceID)
- pub,err:=store.LoadCommunicationForOccurrence(ctx,[32]byte(run),dueKey)
+ _,err=store.LoadCommunicationForOccurrence(ctx,[32]byte(run),dueKey)
  if err==nil{t.Fatal("terminal occurrence unexpectedly returned IN_TRANSIT transmission")}
  var claimID,txID []byte
  var claimRaw,txRaw,occRaw []byte

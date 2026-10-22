@@ -110,7 +110,6 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  err=tx.QueryRowContext(ctx,"SELECT canonical FROM cycle_control_state WHERE run_id=?",run[:]).Scan(&controlRaw)
  if err!=nil&&err!=sql.ErrNoRows{return zero,err}
  if err==sql.ErrNoRows{
-  idle:=[]any{uint64(0),[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},uint64(0)}
   // The historical snapshot can be IDLE even if later same-revision
   // admission changed live control. Its own hash and seal remain binding.
  }else{

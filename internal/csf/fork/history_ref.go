@@ -114,8 +114,9 @@ func Decode(raw []byte)(HistoryReference,error){
  return h,nil
 }
 
-func NewSnapshotReference(bundle *policy.Bundle,digest [32]byte)(HistoryReference,error){
- if bundle==nil{return HistoryReference{},errors.New("missing source checkpoint policy")}
+func NewSnapshotReference(bundle *policy.Bundle,canonical []byte)(HistoryReference,error){
+ if bundle==nil||len(canonical)==0{return HistoryReference{},errors.New("missing origin policy or canonical checkpoint")}
+ digest:=identity.OpaqueContentHash(canonical)
  h:=HistoryReference{
   OriginPolicyID:policy.CodecPolicyID,
   OriginPolicyHash:bundle.CodecPolicyHash,
@@ -144,8 +145,10 @@ func VerifyOriginSnapshot(h HistoryReference,canonical []byte,origin *policy.Bun
  digest,_,err:=identity.New(origin).Sum(SnapshotDomain,"cote.csf.schema.snapshot.body",1,fields[:18])
  if err!=nil{return err}
  stored,ok:=fields[18].([]byte)
- if !ok||len(stored)!=32||!bytes.Equal(stored,digest[:])||h.CheckpointDigest!=[32]byte(digest){
+ if !ok||len(stored)!=32||!bytes.Equal(stored,digest[:]){
   return errors.New("referenced checkpoint hash differs from origin policy digest")
  }
+ exactBytes:=identity.OpaqueContentHash(canonical)
+ if h.CheckpointDigest!=[32]byte(exactBytes){return errors.New("origin checkpoint exact-byte SHA256 mismatch")}
  return nil
 }

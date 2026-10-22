@@ -88,6 +88,21 @@ func checkedTyped(value []any)error{
  }
  return nil
 }
+// checkedRegisteredProposition prevents workers from depositing privileged
+// typed world/canon data into a recipient's durable evidence. This same
+// scope/content allow-list is enforced by the agent context reader.
+func checkedRegisteredProposition(value []any,expectedTag string)error{
+ if err:=checkedTyped(value);err!=nil{return err}
+ if value[0]!="cote.csf.schema.typed-value"||value[1]!=uint64(1){
+  return errors.New("registered communication proposition requires typed-value schema v1")
+ }
+ env,err:=codec.StrictDecodeEnvelope(rawBytes(value[2]))
+ if err!=nil||env.DomainTag!=expectedTag||env.SchemaID!="cote.csf.schema.typed-value"||
+  env.SchemaVersion!=1{
+  return errors.New("unregistered communication scope/content typed domain")
+ }
+ return nil
+}
 func MakeTyped(tag,schema string,content any)([]any,error){
  raw,err:=codec.CanonicalBytes(tag,schema,1,content);if err!=nil{return nil,err}
  h:=identity.OpaqueContentHash(raw)
@@ -99,8 +114,10 @@ func NewClaim(bundle *policy.Bundle,s ClaimSpec)(ports.CanonicalRecord,error){
  origin,err:=originValue(s.Origin);if err!=nil{return zero,err}
  if err:=domain.ValidateMachineID(s.Proposition.Type);err!=nil{return zero,err}
  if s.Proposition.Polarity>2{return zero,errors.New("claim polarity invalid")}
- if err:=checkedTyped(s.Proposition.TemporalScope);err!=nil{return zero,err}
- if err:=checkedTyped(s.Proposition.Content);err!=nil{return zero,err}
+ if err:=checkedRegisteredProposition(s.Proposition.TemporalScope,
+  "cote.csf.communication.scope.v1");err!=nil{return zero,err}
+ if err:=checkedRegisteredProposition(s.Proposition.Content,
+  "cote.csf.communication.allegation.v1");err!=nil{return zero,err}
  actor,err:=actorValue(s.AssertedBy);if err!=nil{return zero,err}
  prev,err:=refs(s.PriorClaims,18);if err!=nil{return zero,err}
  evidence,err:=refs(s.Evidence,-1);if err!=nil{return zero,err}

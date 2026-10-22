@@ -39,6 +39,12 @@ func migrateGenesisPendingTriggers(ctx context.Context,s *Store,
  var result forkTriggerMigration
  registered,err:=s.LoadRegisteredTriggers(ctx,[32]byte(parent.RunID),b);if err!=nil{return result,err}
  if len(registered)!=len(runtimes){return result,errors.New("fork trigger runtime roster not fully covered")}
+ // The V1 Genesis trigger migrator has no authority to replay a non-Genesis
+ // transition at a different clock origin. Reject those cases instead of
+ // publishing a child which cannot causally reconstruct its trigger runtime.
+ if len(registered)>0 && child.InitialInstant!=parent.InitialInstant{
+  return result,errors.New("fork advanced trigger runtime requires a versioned transition migrator")
+ }
  runtimeByID:=map[string][]byte{}
  for _,raw:=range runtimes{
   fields,ok:=raw.([]any)

@@ -404,6 +404,12 @@ func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundG
 	tx, err := s.db.BeginTx(ctx,nil)
 	if err!=nil { return err }
 	defer tx.Rollback()
+ if round==nil{
+  decoded,err:=codec.StrictDecodePayload(record.Canonical);if err!=nil{return err}
+  fields,ok:=decoded.([]any);if !ok||len(fields)!=3{return errors.New("source declaration malformed")}
+  source,ok:=fields[2].(string);if !ok{return errors.New("source declaration ID malformed")}
+  if err:=rejectForkFinalSourceReopening(ctx,tx,runID,source);err!=nil{return err}
+ }
  if round!=nil{
   at:=domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(round.instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(round.ordinal)}
   if err:=verifyIngressClockFloor(ctx,tx,runID,at);err!=nil{return err}

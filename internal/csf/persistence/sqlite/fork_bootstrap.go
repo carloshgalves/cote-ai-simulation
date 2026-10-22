@@ -51,6 +51,10 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
    return nil,fmt.Errorf("fork requires an idle, migration-free pending partition %d",i)
   }
  }
+ // Every source declared in the historical input prefix must have a
+ // final SourceClosure. A source declared but never closed is NOT represented
+ // by lists[3], so inspecting closure refs alone would silently discard it.
+ finalSourceNames:=map[string]bool{}
  // Every source cursor inherited only as archived history must be final:
  // otherwise a child would silently drop unfinished exogenous input ingress.
  for _,item:=range lists[3].([]any){
@@ -68,7 +72,28 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
    !equalBytes(record[1],sourceRun[:]){
    return nil,errors.New("fork would lose an unfinished or invalid source cursor")
   }
+  name,ok:=record[2].(string);if !ok||name==""{return nil,errors.New("fork source id malformed")}
+  finalSourceNames[name]=true
  }
+ sourceRows,err:=s.db.QueryContext(ctx,
+  "SELECT t.canonical FROM snapshot_prefix_members m "+
+   "JOIN input_ledger t ON t.id=m.record_id WHERE m.snapshot_id=? "+
+   "AND m.ledger_name='input_ledger' ORDER BY m.ordinal",parentSnapshotID[:])
+ if err!=nil{return nil,err}
+ for sourceRows.Next(){
+  var canonical []byte
+  if err:=sourceRows.Scan(&canonical);err!=nil{sourceRows.Close();return nil,err}
+  record,err:=codec.StrictDecodePayload(canonical)
+  if err!=nil{continue} // an enveloped SourceIngressReceipt cannot declare a new source
+  fields,ok:=record.([]any)
+  if !ok||len(fields)!=3||fields[0]!="source-declaration-v1"{continue}
+  sourceID,ok:=fields[2].(string)
+  if !ok||!finalSourceNames[sourceID]{
+   sourceRows.Close();return nil,errors.New("fork has a declared but non-final exogenous source")
+  }
+ }
+ if err:=sourceRows.Err();err!=nil{sourceRows.Close();return nil,err}
+ if err:=sourceRows.Close();err!=nil{return nil,err}
  // Parent's registered snapshot body hash is distinct from the exact-byte
  // digest in CSFHREF. The latter binds immutable archive content across
  // origin/child policy versions without rehashing historical identities.

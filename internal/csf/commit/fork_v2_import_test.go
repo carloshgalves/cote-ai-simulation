@@ -7,17 +7,51 @@ import (
  "testing"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/communication"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  _ "modernc.org/sqlite"
 )
 
+// Complete parent-internal perception of its send/round lifecycle before
+// crossing policy boundaries. Unfinished perception tasks are not allowed
+// to disappear merely because the delivery itself is still IN_TRANSIT.
+func csfrv18SettleSendOutbox(t *testing.T,store *sqlite.Store,b *policy.Bundle,path string){
+ t.Helper();ctx:=context.Background()
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ rows,err:=db.QueryContext(ctx,"SELECT canonical FROM causal_outbox")
+ if err!=nil{t.Fatal(err)}
+ tasks:=map[string][32]byte{}
+ for rows.Next(){
+  var raw []byte
+  if err:=rows.Scan(&raw);err!=nil{rows.Close();t.Fatal(err)}
+  value,err:=codec.StrictDecodePayload(raw);if err!=nil{rows.Close();t.Fatal(err)}
+  f,ok:=value.([]any);if !ok||len(f)!=10{continue}
+  id,ok:=f[0].([]byte);if !ok||len(id)!=32{rows.Close();t.Fatal("bad task ID")}
+  var event []byte
+  if err:=db.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",f[3]).Scan(&event);err!=nil{
+   rows.Close();t.Fatal(err)
+  }
+  ev,err:=codec.StrictDecodePayload(event);if err!=nil{rows.Close();t.Fatal(err)}
+  kind,ok:=ev.([]any)[3].(string);if !ok{rows.Close();t.Fatal("task Event kind invalid")}
+  var taskID [32]byte;copy(taskID[:],id);tasks[kind]=taskID
+ }
+ if err:=rows.Err();err!=nil{rows.Close();t.Fatal(err)}
+ if err:=rows.Close();err!=nil{t.Fatal(err)}
+ if _,ok:=tasks["communication.sent"];!ok{t.Fatal("missing sent Event perception task")}
+ if _,ok:=tasks["round.consumed"];!ok{t.Fatal("missing round closure perception task")}
+ if _,err:=store.CompleteInternalPerception(ctx,tasks["communication.sent"],b);err!=nil{t.Fatal(err)}
+ if _,err:=store.DeliverRoundPerception(ctx,tasks["round.consumed"],b);err!=nil{t.Fatal(err)}
+}
+
 func TestCSFRV18V2ForkImportsInTransitAsChildOwnedAuthorities(t *testing.T){
  ctx:=context.Background()
- c,source,ledger,cycle,fence,_:=communicationFixture(t)
+ c,source,ledger,cycle,fence,sourcePath:=communicationFixture(t)
  _,_,_,_,_,run:=ledger.Snapshot()
  if _,err:=c.CommitCommunicationSend(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ csfrv18SettleSendOutbox(t,source,c.bundle,sourcePath)
  snap,err:=source.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
  if err!=nil{t.Fatal(err)}
  v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
@@ -65,9 +99,10 @@ func TestCSFRV18V2ForkImportsInTransitAsChildOwnedAuthorities(t *testing.T){
 
 func TestCSFRV18V2ForkImportFaultRollsBackEveryChildTable(t *testing.T){
  ctx:=context.Background()
- c,source,ledger,cycle,fence,_:=communicationFixture(t)
+ c,source,ledger,cycle,fence,sourcePath:=communicationFixture(t)
  _,_,_,_,_,run:=ledger.Snapshot()
  if _,err:=c.CommitCommunicationSend(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ csfrv18SettleSendOutbox(t,source,c.bundle,sourcePath)
  snap,err:=source.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
  if err!=nil{t.Fatal(err)}
  v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")

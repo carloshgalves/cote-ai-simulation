@@ -27,6 +27,7 @@ type SendSpec struct{
  Proposition Proposition
 }
 type SendPlan struct{
+ Run domain.ID
  Claim ports.CanonicalRecord
  Transmission ports.CanonicalRecord
  Occurrence ports.CanonicalRecord
@@ -74,7 +75,7 @@ func PrepareSend(bundle *policy.Bundle,s SendSpec)(SendPlan,error){
  digest,_,err:=d.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,body)
  if err!=nil{return zero,err}
  raw,err:=codec.CanonicalPayload(append(body,digest[:]));if err!=nil{return zero,err}
- return SendPlan{Claim:claim,Transmission:tx,
+ return SendPlan{Run:s.Run,Claim:claim,Transmission:tx,
   Occurrence:ports.CanonicalRecord{Identity:[32]byte(occID),Canonical:raw}},nil
 }
 
@@ -86,11 +87,21 @@ func ValidateOccurrence(bundle *policy.Bundle,p SendPlan)(domain.SimulationInsta
  if bundle==nil{return 0,errors.New("missing bundle")}
  c,err:=AuthenticateClaim(bundle,p.Claim);if err!=nil{return 0,err}
  tx,err:=AuthenticateTransmission(bundle,p.Transmission);if err!=nil{return 0,err}
- if tx.Occurrence!=domain.ID(p.Occurrence.Identity){return 0,errors.New("transmission due occurrence mismatch")}
+ if tx.Occurrence!=domain.ID(p.Occurrence.Identity)||p.Run==([32]byte{}){
+  return 0,errors.New("transmission due occurrence mismatch")
+ }
+ if c.Origin!=tx.Origin||tx.Origin.Kind!=5{return 0,errors.New("transmission and claim origin mismatch")}
+ createdBy:=[]any{uint64(1),[]any{uint64(0),uint64(0),tx.Origin.ID[:],tx.Origin.Digest[:]}}
+ expectedID,_,err:=identity.New(bundle).Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+  []any{createdBy,uint64(0),uint64(0)})
+ if err!=nil||domain.ID(expectedID)!=tx.Occurrence{return 0,errors.New("occurrence not derived from source ActionProposal")}
  value,err:=codec.StrictDecodePayload(p.Occurrence.Canonical);if err!=nil{return 0,err}
  fields,ok:=value.([]any)
- if !ok||len(fields)!=15||!bytesEqualID(fields[0],domain.ID(p.Occurrence.Identity))||fields[5]!="communication.delivery"||
-  fields[6]!=uint64(1)||fields[8]!=uint64(0)||fields[10]!=uint64(0)||fields[11]!=uint64(0){
+ if !ok||len(fields)!=15||!bytesEqualID(fields[0],domain.ID(p.Occurrence.Identity))||
+  !bytesEqualID(fields[1],p.Run)||fields[2]!="communication"||fields[5]!="communication.delivery"||
+  fields[6]!=uint64(1)||fields[8]!=uint64(0)||fields[10]!=uint64(0)||fields[11]!=uint64(0)||
+  !sameCBOR(fields[9],createdBy)||!sameCBOR(fields[12],[]any{uint64(0)})||
+  !sameCBOR(fields[13],[]any{uint64(0)}){
   return 0,errors.New("delivery occurrence forged")
  }
  due,ok:=causalTime(fields[3]);if !ok||due<=tx.SentAt{return 0,errors.New("delivery due invalid")}
@@ -113,3 +124,9 @@ func ValidateOccurrence(bundle *policy.Bundle,p SendPlan)(domain.SimulationInsta
 }
 func bytesEqualID(v any,want domain.ID)bool{x,ok:=v.([]byte);return ok&&len(x)==32&&string(x)==string(want[:])}
 func bytesEqualDigest(v any,want domain.Digest)bool{x,ok:=v.([]byte);return ok&&len(x)==32&&string(x)==string(want[:])}
+
+func sameCBOR(a,b any)bool{
+ x,e1:=codec.CanonicalPayload(a)
+ y,e2:=codec.CanonicalPayload(b)
+ return e1==nil&&e2==nil&&string(x)==string(y)
+}

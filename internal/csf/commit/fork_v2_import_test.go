@@ -52,7 +52,11 @@ func TestCSFRV18V2ForkImportsInTransitAsChildOwnedAuthorities(t *testing.T){
  _,_,_,_,_,run:=ledger.Snapshot()
  if _,err:=c.CommitCommunicationSend(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
  csfrv18SettleSendOutbox(t,source,c.bundle,sourcePath)
- snap,err:=source.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
+ clockState,err:=source.LoadClock(ctx,[32]byte(run))
+ if err!=nil{t.Fatal(err)}
+ checkpoints:=csfrv18SyntheticActorCheckpoints(t,sourcePath,clockState.Instant,int64(clockState.Revision))
+ if len(checkpoints)==0{t.Fatal("no source cognitive actor to migrate")}
+ snap,err:=source.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,checkpoints)
  if err!=nil{t.Fatal(err)}
  v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
  if err!=nil{t.Fatal(err)}
@@ -103,7 +107,11 @@ func TestCSFRV18V2ForkImportFaultRollsBackEveryChildTable(t *testing.T){
  _,_,_,_,_,run:=ledger.Snapshot()
  if _,err:=c.CommitCommunicationSend(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
  csfrv18SettleSendOutbox(t,source,c.bundle,sourcePath)
- snap,err:=source.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
+ clockState,err:=source.LoadClock(ctx,[32]byte(run))
+ if err!=nil{t.Fatal(err)}
+ checkpoints:=csfrv18SyntheticActorCheckpoints(t,sourcePath,clockState.Instant,int64(clockState.Revision))
+ if len(checkpoints)==0{t.Fatal("no source cognitive actor to migrate")}
+ snap,err:=source.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,checkpoints)
  if err!=nil{t.Fatal(err)}
  v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
  if err!=nil{t.Fatal(err)}

@@ -12,6 +12,8 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/communication"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/contextboundary"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
@@ -317,6 +319,41 @@ func TestCSFRV17CausalClaimDeliversExactlyOnePrivateInputToB(t *testing.T){
  }
  report,err:=store.ReplayClock(ctx,[32]byte(run),c.bundle)
  if err!=nil||report.ReconstructedClock!=current{t.Fatal("communication replay differs from completed terminal:",report,err)}
+ // Agent context is bound to a later authenticated SlotDispatch. The
+ // original sender cannot use B's private recipient capability.
+ genesisRaw,err:=store.LoadGenesis(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ manifest,err:=genesis.ValidateCanonical(genesisRaw,c.bundle);if err!=nil{t.Fatal(err)}
+ nextOrdinal:=domain.CycleOrdinal(current.LastOrdinal+1)
+ coordinate:=domain.EligibilityCoordinate{NotBeforeInstant:current.Instant,
+  NotBeforeCycleOrdinal:nextOrdinal}
+ roundOrigin:=[]any{uint64(2),[]any{manifest.ID[:],manifest.Digest[:]}}
+ bRound,err:=ledger.DeclareRound(ctx,"schedule",[2]string{"school","b"},
+  []string{"act"},coordinate,roundOrigin,0,uint64(nextOrdinal),0,[]any{uint64(0)})
+ if err!=nil{t.Fatal("future B round cannot be declared:",err)}
+ nextCycle,_,err:=identity.New(c.bundle).Sum("cote.csf.id.cycle",
+  "cote.csf.schema.cycle-id-preimage",1,
+  []any{run[:],[]any{int64(current.Instant),uint64(nextOrdinal)}})
+ if err!=nil{t.Fatal(err)}
+ bdID,_,err:=identity.New(c.bundle).Sum("cote.csf.id.dispatch",
+  "cote.csf.schema.dispatch-id-preimage",1,
+  []any{run[:],nextCycle[:],bRound.ID[:],"act",uint64(0)})
+ if err!=nil{t.Fatal(err)}
+ dispatch:=inputledger.Dispatch{ID:domain.ID(bdID),RunID:run,
+  CycleID:domain.ID(nextCycle),RoundID:bRound.ID,SlotID:"act",Actor:bRound.Actor,
+  Eligibility:coordinate,BaseRevision:current.Revision,EffectiveAt:current.Instant}
+ if err:=ledger.RegisterDispatch(ctx,dispatch,inputledger.CycleBinding{
+  ID:domain.ID(nextCycle),BaseRevision:current.Revision,Instant:current.Instant});err!=nil{
+  t.Fatal("future B dispatch denied:",err)
+ }
+ bInbox,err:=store.BindActorInbox(ctx,[32]byte(bdID),[2]string{"school","b"})
+ if err!=nil{t.Fatal("B inbox not bound to durable dispatch:",err)}
+ bContext,err:=contextboundary.Build(ctx,bInbox,[2]string{"school","b"})
+ if err!=nil||len(bContext.Inbox)!=1{
+  t.Fatal("delivered B claim missing from allow-listed agent context",err)
+ }
+ if _,err:=contextboundary.Build(ctx,bInbox,[2]string{"school","a"});err==nil{
+  t.Fatal("actual sender A stole B's addressed context")
+ }
  _=theft
 }
 

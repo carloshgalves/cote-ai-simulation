@@ -69,7 +69,7 @@ func verifyPublishedCommunication(ctx context.Context,q queryOne,run,cycle,commi
  if err!=nil||!equalBytes(claim[9],claimDigest[:]){return zero,errors.New("historical Claim digest forged")}
  txValue,err:=codec.StrictDecodePayload(transmissionRaw);if err!=nil{return zero,err}
  transmission,ok:=txValue.([]any)
- if !ok||len(transmission)!=14||!equalBytes(transmissionID,asBytes(transmission[0]))||
+ if !ok||len(transmission)!=14||!equalBytes(transmissionID,communicationBytes(transmission[0]))||
   transmission[12]!=uint64(0)||!sameCanonical(transmission[1],claim[1])||
   !sameCanonical(transmission[10],[]any{uint64(1),occurrenceID})||
   !sameCanonical(transmission[4],[]any{uint64(0),[]any{[]any{uint64(18),claimID,claimDigest[:]}}}){
@@ -90,7 +90,7 @@ func verifyPublishedCommunication(ctx context.Context,q queryOne,run,cycle,commi
   return zero,errors.New("historical occurrence signature invalid")
  }
  typed,ok:=occurrence[7].([]any);if !ok||len(typed)!=4{return zero,errors.New("occurrence typed payload missing")}
- env,err:=codec.StrictDecodeEnvelope(asBytes(typed[2]));if err!=nil{return zero,err}
+ env,err:=codec.StrictDecodeEnvelope(communicationBytes(typed[2]));if err!=nil{return zero,err}
  if env.DomainTag!="cote.csf.communication.delivery.v1"||!sameCanonical(env.Value,
   []any{transmissionID,txDigest[:],claimID,claimDigest[:]})||
   !communicationTypedDigestMatches(typed){
@@ -173,3 +173,5 @@ func communicationTypedDigestMatches(typed []any)bool{
  h:=identity.OpaqueContentHash(bytes)
  return sameCanonical(typed[3],h[:])
 }
+
+func communicationBytes(v any)[]byte{x,_:=v.([]byte);return x}

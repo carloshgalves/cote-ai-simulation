@@ -19,20 +19,22 @@ func sealSnapshotPrefix(ctx context.Context,tx *sql.Tx,snapshotID [32]byte)error
  for _,name:=range snapshotLedgerNames{
   rows,err:=tx.QueryContext(ctx,"SELECT id,canonical FROM "+name+" ORDER BY id")
   if err!=nil{return err}
-  var ordinal uint64
+  type member struct{ordinal uint64;id,hash []byte}
+  collected:=[]member{}
   for rows.Next(){
    var id,raw []byte
    if err:=rows.Scan(&id,&raw);err!=nil{rows.Close();return err}
    if len(id)!=32||len(raw)==0{rows.Close();return errors.New("invalid ledger member for snapshot")}
    hash:=identity.OpaqueContentHash(raw)
-   if _,err:=tx.ExecContext(ctx, "INSERT INTO snapshot_prefix_members(snapshot_id,ledger_name,ordinal,record_id,canonical_hash) VALUES(?,?,?,?,?)",
-    snapshotID[:],name,ordinal,id,hash[:]);err!=nil{
-    rows.Close();return err
-   }
-   ordinal++
+   collected=append(collected,member{uint64(len(collected)),bytes.Clone(id),hash[:]})
   }
   if err:=rows.Err();err!=nil{rows.Close();return err}
   if err:=rows.Close();err!=nil{return err}
+  // A cursor with zero rows has no membership records, as intended.
+  for _,m:=range collected{
+   if _,err:=tx.ExecContext(ctx, "INSERT INTO snapshot_prefix_members(snapshot_id,ledger_name,ordinal,record_id,canonical_hash) VALUES(?,?,?,?,?)",
+    snapshotID[:],name,m.ordinal,m.id,m.hash);err!=nil{return err}
+  }
  }
  return nil
 }

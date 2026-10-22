@@ -1,0 +1,207 @@
+# Owner-dispatched parallel implementation workers. NEVER starts review/remediation/merge.
+# Workflow must be merged to the trusted default branch before dispatch.
+name: Bounded agent implementation fleet
+on:
+  workflow_dispatch:
+    inputs:
+      issue_1:
+        description: "First ready Issue number (mandatory)"
+        required: true
+        type: string
+      issue_2:
+        description: "Second independent Issue number (optional)"
+        required: false
+        default: ""
+        type: string
+      issue_3:
+        description: "Third independent Issue number (optional)"
+        required: false
+        default: ""
+        type: string
+      model:
+        description: "Groq coding model; concurrent runs share provider quotas"
+        required: true
+        type: choice
+        default: "openai/gpt-oss-20b"
+        options:
+          - openai/gpt-oss-20b
+          - openai/gpt-oss-120b
+      segments:
+        description: "6-minute segments per worker, checkpoint after each"
+        required: true
+        default: "1"
+        type: choice
+        options: ["1", "2"]
+permissions:
+  contents: read
+jobs:
+  implement:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        slot: [1, 2, 3]
+    runs-on: ubuntu-latest
+    timeout-minutes: 38
+    concurrency:
+      group: fleet-${{ github.repository }}-${{ matrix.slot == 1 && inputs.issue_1 || matrix.slot == 2 && inputs.issue_2 || inputs.issue_3 }}
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: read
+    steps:
+      - name: Select independent Issue slot
+        id: select
+        shell: bash
+        env:
+          SLOT: ${{ matrix.slot }}
+          ISSUE_1: ${{ inputs.issue_1 }}
+          ISSUE_2: ${{ inputs.issue_2 }}
+          ISSUE_3: ${{ inputs.issue_3 }}
+        run: |
+          set -euo pipefail
+          for item in "$ISSUE_1" "$ISSUE_2" "$ISSUE_3"; do
+            [[ -z "$item" || "$item" =~ ^[1-9][0-9]*$ ]] || { echo "::error::Invalid Issue"; exit 2; }
+          done
+          [[ -z "$ISSUE_2" || "$ISSUE_1" != "$ISSUE_2" ]] || exit 2
+          [[ -z "$ISSUE_3" || ( "$ISSUE_1" != "$ISSUE_3" && "$ISSUE_2" != "$ISSUE_3" ) ]] || exit 2
+          case "$SLOT" in 1) issue="$ISSUE_1";; 2) issue="$ISSUE_2";; 3) issue="$ISSUE_3";; esac
+          if [[ -z "$issue" ]]; then echo "active=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          echo "active=true" >> "$GITHUB_OUTPUT"
+          echo "issue=$issue" >> "$GITHUB_OUTPUT"
+      - name: Checkout trusted default-branch code only
+        if: steps.select.outputs.active == 'true'
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: main
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install bounded agent client
+        if: steps.select.outputs.active == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --global opencode-ai@1.19.3 --allow-scripts=opencode-ai
+          opencode --version
+      - name: Prepare isolated issue worktree and prompt
+        id: setup
+        if: steps.select.outputs.active == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ steps.select.outputs.issue }}
+        run: |
+          set -euo pipefail
+          gh issue view "$ISSUE" --repo "$GITHUB_REPOSITORY" --json number,title,body,state > "$RUNNER_TEMP/fleet-issue.json"
+          python3 - <<'PY'
+          import json,os,pathlib
+          tmp=pathlib.Path(os.environ["RUNNER_TEMP"])
+          issue=json.loads((tmp/"fleet-issue.json").read_text())
+          if issue["state"]!="OPEN" or len(issue.get("body") or "")>12000:
+              raise SystemExit("Issue must be open and small enough for quota-safe run")
+          policy=pathlib.Path("AGENTS.md").read_text()
+          text=("Implement only accepted Issue #"+str(issue["number"])+". Read AGENTS.md, "
+                "CONTEXT.md, relevant ADRs and canonical implement skill. One coherent "
+                "vertical slice with RED/GREEN tests; keep changes within existing source/test "
+                "directories. Do NOT edit .github, .agents, .claude, config, manifests, "
+                "secrets, or project governance. Do NOT execute git commit/push or gh. "
+                "The trusted workflow checkpoints allowlisted code separately. Do NOT "
+                "invoke code-review or remediation. Do NOT merge. Prefer small context "
+                "and focused tests due provider limits. Stop at implementation-phase boundary.\n"
+                "Issue title: "+issue["title"]+"\nIssue text:\n"+(issue.get("body") or ""))
+          (tmp/"fleet-prompt.txt").write_text(text,encoding="utf-8")
+          PY
+          cp scripts/agents/fleet_checkpoint.sh "$RUNNER_TEMP/trusted-fleet-checkpoint.sh"
+          chmod 700 "$RUNNER_TEMP/trusted-fleet-checkpoint.sh"
+          branch="agent/fleet/issue-$ISSUE"
+          worktree="$RUNNER_TEMP/fleet-worktree-$ISSUE"
+          if gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/$branch" --silent >/dev/null 2>&1; then
+            git -c credential.helper='!gh auth git-credential' fetch --no-tags origin \
+              "+refs/heads/$branch:refs/remotes/origin/$branch"
+            git worktree add --detach "$worktree" "refs/remotes/origin/$branch"
+          else
+            git worktree add --detach "$worktree" HEAD
+          fi
+          git -C "$worktree" switch -c "work-issue-$ISSUE"
+          git -C "$worktree" config user.name "github-actions[bot]"
+          git -C "$worktree" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          echo "Worktree prepared without exposing GH_TOKEN to the LLM step."
+      - name: Agent session one (6-minute limit)
+        id: agent1
+        if: steps.setup.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ISSUE: ${{ steps.select.outputs.issue }}
+          FLEET_MODEL: ${{ inputs.model }}
+          OPENCODE_CONFIG_CONTENT: '{"$schema":"https://opencode.ai/config.json","permission":{"external_directory":"deny","bash":{"*":"allow","git push*":"deny","git commit*":"deny","gh *":"deny"},"read":{"*":"allow","*.env":"deny","*.env.*":"deny","*.env.example":"allow"}}}'
+        run: |
+          set -euo pipefail
+          : "${GROQ_API_KEY:?Add Actions secret GROQ_API_KEY first}"
+          cd "$RUNNER_TEMP/fleet-worktree-$ISSUE"
+          timeout --signal=TERM --kill-after=15s 6m \
+            opencode run --agent build --model "groq/$FLEET_MODEL" \
+            "$(cat "$RUNNER_TEMP/fleet-prompt.txt")" \
+            > "$RUNNER_TEMP/fleet-agent-one.log" 2>&1
+      - name: Durable checkpoint after first session, even after API/quota failure
+        id: checkpoint1
+        if: always() && steps.setup.outcome == 'success'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FLEET_WORKTREE: ${{ runner.temp }}/fleet-worktree-${{ steps.select.outputs.issue }}
+          FLEET_ISSUE: ${{ steps.select.outputs.issue }}
+          FLEET_BRANCH: agent/fleet/issue-${{ steps.select.outputs.issue }}
+          FLEET_ALLOWED_PATHS: "internal src tests evals cmd"
+          FLEET_CREATE_DRAFT: "false"
+          FLEET_BASE: "main"
+        run: bash "$RUNNER_TEMP/trusted-fleet-checkpoint.sh"
+      - name: Agent session two (explicitly requested; new bounded session)
+        id: agent2
+        if: always() && steps.setup.outcome == 'success' && steps.checkpoint1.outcome == 'success' && inputs.segments == '2'
+        continue-on-error: true
+        shell: bash
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ISSUE: ${{ steps.select.outputs.issue }}
+          FLEET_MODEL: ${{ inputs.model }}
+          OPENCODE_CONFIG_CONTENT: '{"$schema":"https://opencode.ai/config.json","permission":{"external_directory":"deny","bash":{"*":"allow","git push*":"deny","git commit*":"deny","gh *":"deny"},"read":{"*":"allow","*.env":"deny","*.env.*":"deny","*.env.example":"allow"}}}'
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/fleet-worktree-$ISSUE"
+          timeout --signal=TERM --kill-after=15s 6m \
+            opencode run --agent build --model "groq/$FLEET_MODEL" \
+            "$(cat "$RUNNER_TEMP/fleet-prompt.txt")" \
+            > "$RUNNER_TEMP/fleet-agent-two.log" 2>&1
+      - name: Durable checkpoint after optional second session
+        id: checkpoint2
+        if: always() && steps.agent2.outcome != 'skipped' && steps.setup.outcome == 'success'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FLEET_WORKTREE: ${{ runner.temp }}/fleet-worktree-${{ steps.select.outputs.issue }}
+          FLEET_ISSUE: ${{ steps.select.outputs.issue }}
+          FLEET_BRANCH: agent/fleet/issue-${{ steps.select.outputs.issue }}
+          FLEET_ALLOWED_PATHS: "internal src tests evals cmd"
+          FLEET_CREATE_DRAFT: "false"
+          FLEET_BASE: "main"
+        run: bash "$RUNNER_TEMP/trusted-fleet-checkpoint.sh"
+      - name: Summarize true outcome (checkpoint does not make failing run green)
+        if: always() && steps.select.outputs.active == 'true'
+        shell: bash
+        env:
+          ISSUE: ${{ steps.select.outputs.issue }}
+          A1: ${{ steps.agent1.outcome }}
+          A2: ${{ steps.agent2.outcome }}
+          CP1: ${{ steps.checkpoint1.outcome }}
+          CP2: ${{ steps.checkpoint2.outcome }}
+        run: |
+          echo "## Agent fleet Issue #$ISSUE" >> "$GITHUB_STEP_SUMMARY"
+          echo "Agent sessions: $A1, $A2; checkpoints: $CP1, $CP2" >> "$GITHUB_STEP_SUMMARY"
+          echo "Branch: agent/fleet/issue-$ISSUE. Code requires actual tests and independent review." >> "$GITHUB_STEP_SUMMARY"
+          if [[ "$A1" != success || "$CP1" != success || ( "$A2" != skipped && ( "$A2" != success || "$CP2" != success ) ) ]]; then
+            echo "::error::Incomplete or failed worker; inspect checkpoint branch, do not merge"
+            exit 1
+          fi

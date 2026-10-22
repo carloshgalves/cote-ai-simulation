@@ -27,8 +27,10 @@ func TestCSFRV18SnapshotReopenClockAdvanceAndCanonicalBytes(t *testing.T){
  after,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,nil)
  if err!=nil{t.Fatal(err)}
  if before.ID==after.ID||after.Revision!=before.Revision+1{t.Fatal("new revision reused snapshot identity")}
- if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),before.ID,bundle);err==nil{
-  t.Fatal("stale snapshot was silently accepted without replay of its tails")
+ historical,err:=store.VerifySnapshotV1(ctx,[32]byte(run),before.ID,bundle)
+ if err!=nil{t.Fatalf("valid historical snapshot and tail failed verification: %v",err)}
+ if historical.SnapshotClock.Revision!=0||historical.Clock.Revision!=1||historical.TailCommits!=1{
+  t.Fatalf("snapshot + tail changed causal clock history: %+v",historical)
  }
  reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
  result,err:=reopened.VerifySnapshotV1(ctx,[32]byte(run),after.ID,bundle)

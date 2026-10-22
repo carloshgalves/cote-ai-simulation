@@ -142,6 +142,16 @@ func TestCSFRV18V2ForkImportsInTransitAsChildOwnedAuthorities(t *testing.T){
  if _,err:=reopened.ReplayClock(ctx,id,v2);err!=nil{
   t.Fatal("V2 imported delivery terminal not replayable:",err)
  }
+ // Adversarial re-review: a live child Transmission without its immutable
+ // signed import birth must fail complete replay, even after delivery.
+ tamper,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ if _,err:=tamper.ExecContext(ctx,"DELETE FROM fork_communication_imports");err!=nil{
+  tamper.Close();t.Fatal(err)
+ }
+ if err:=tamper.Close();err!=nil{t.Fatal(err)}
+ if _,err:=reopened.ReplayClock(ctx,id,v2);err==nil{
+  t.Fatal("replay accepted an imported Transmission after deletion of its V2 birth")
+ }
  if _,err:=source.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,c.bundle);err!=nil{
   t.Fatal("child import mutated historical parent authority:",err)
  }

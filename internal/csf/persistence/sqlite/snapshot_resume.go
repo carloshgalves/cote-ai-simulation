@@ -56,7 +56,9 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  if err!=nil{return zero,err}
  if !equalBytes(all[18],hash[:]){return zero,errors.New("snapshot content hash mismatch")}
  if err:=verifySnapshotSeal(ctx,tx,id,run,[32]byte(hash),rev);err!=nil{return zero,err}
- if all[15]!=policy.CodecPolicyID||!equalBytes(all[16],b.CodecPolicyHash[:])||!equalBytes(all[17],b.SchemaHash[:]){
+ installedID,_,_,_,err:=b.CodecIdentity()
+ if err!=nil{return zero,err}
+ if all[15]!=installedID||!equalBytes(all[16],b.CodecPolicyHash[:])||!equalBytes(all[17],b.SchemaHash[:]){
   return zero,errors.New("snapshot codec/schema policy unavailable or changed")
  }
  var genesisRaw,clockRaw,worldRaw,worldHash,controlRaw []byte

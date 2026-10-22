@@ -149,6 +149,7 @@ func snapshotCheckpointRefs(checkpoints []SnapshotCheckpoint,instant int64,rev,c
 func (s *Store) CreateSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bundle,checkpoints []SnapshotCheckpoint)(SnapshotV1,error){
  var zero SnapshotV1
  if s==nil||b==nil{return zero,errors.New("snapshot requires store and pinned policy")}
+ clockBefore,err:=s.LoadClock(ctx,run);if err!=nil{return zero,err}
  if _,err:=s.ReplayClock(ctx,run,b);err!=nil{return zero,fmt.Errorf("snapshot replay preflight: %w",err)}
  if err:=s.VerifyCycleControl(ctx,run);err!=nil{return zero,err}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return zero,err}
@@ -163,6 +164,9 @@ func (s *Store) CreateSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bund
  var clockRaw []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",run[:]).Scan(&clockRaw);err!=nil{return zero,err}
  state,err:=clock.Decode(clockRaw);if err!=nil{return zero,err}
+ if state!=clockBefore{return zero,errors.New("clock changed between replay audit and snapshot writer lock")}
+ if err:=verifyPendingOutboxExact(ctx,tx,run);err!=nil{return zero,err}
+ if err:=verifyEvidenceRegistryExact(ctx,tx);err!=nil{return zero,err}
  var revRaw,revHash []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical,state_hash FROM world_revisions WHERE revision=?",uint64(state.Revision)).Scan(&revRaw,&revHash);err!=nil{return zero,err}
  world,err:=codec.StrictDecodePayload(revRaw);if err!=nil{return zero,err}
@@ -176,6 +180,7 @@ func (s *Store) CreateSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bund
  evidenceCount:=cursors[3].([]any)[1].(uint64)
  refs,err:=snapshotCheckpointRefs(checkpoints,int64(state.Instant),uint64(state.Revision),evidenceCount)
  if err!=nil{return zero,err}
+ if err:=verifySnapshotCheckpointRefs(ctx,tx,run,refs,int64(state.Instant),uint64(state.Revision),evidenceCount);err!=nil{return zero,err}
  pending,err:=snapshotPending(ctx,tx,run,b);if err!=nil{return zero,err}
  control:=[]any{uint64(0),[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},uint64(0)}
  var ctlRaw []byte

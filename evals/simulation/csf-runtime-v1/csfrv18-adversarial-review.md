@@ -62,3 +62,28 @@ Os findings ainda marcados OPEN (01, 02, 04 e 05) não podem ser mascarados por 
 | OPEN-05 | Cenário misto inclui permutações, recuperação, sete crash points adicionais e comparação dos cinco ledgers; novo teste injeta corrupção por ledger e exige rejeição/reversibilidade. | Resultado de R10/novas mutações ainda depende da suíte final e da matriz transições pós-fork/dispatch pendentes. |
 
 **Invariantes não negociáveis:** prefixo parental permanece sob a policy original e não é rehashado; a filha recebe novos IDs e transações próprias; nunca converter um checkpoint epistemológico opaco em world truth; nenhum rollback publica metade de um fork; fonte/round/claim sem migrador versionado deve bloquear, nunca sumir. Mantenha Draft e os findings OPEN até evidência positiva concreta.
+
+
+## R14 — migração positiva de rounds Genesis e auditoria do histórico de dispatch
+
+**Última base completamente aprovada:** `d84a982533bd108ca7084ddd6ca2ae7ae9be4c05` (5/5 workflows, incluindo race e regressão). **Este R14 não recebe aceite desse HEAD antigo.** A suite do HEAD que contém R14 precisa passar integralmente.
+
+### Nova fatia positiva de OPEN-02
+
+- `fork_pending_round.go` revalida digest registrado no checkpoint, ID derivado sob o Genesis parental, run, origem, role/ordinal, elegibilidade e roster canônico de slots. Deriva novos ID/Genesis ref sob o `childRun`, com hash da exata autoridade canônica.
+- `fork_bootstrap.go` reconcilia em bijeção as partições de `RoundDeclaration` e `pendingInput`; publica rounds e `round_integrity_seals` na **mesma transação** de Genesis/clock, archive, ocorrências e triggers.
+- Testes positivos verificam o round como unidade `PendingClock` no filho, `inputledger.Open`, `ReplayClock`, snapshot do filho, idempotência e colisão de roster, sem alterar os bytes do checkpoint parental.
+- Revisão adversarial encontrou risco de perda silenciosa: round ainda pendente pode ter histórico de SlotDispatch revogado ou respondido. A migração agora lê a autoridade parental e **rejeita qualquer round previamente despachado**, mesmo sem dispatch ativo no snapshot; negativo específico documenta a situação.
+- Uma falha injetada pelo SQLite ao inserir `round_integrity_seals` deve reverter todo o bootstrap. O helper de teste percorre todas as tabelas efetivas de autoridade do workspace para detectar resíduo, não uma lista manual parcial.
+- O workflow CSFRV1-8 passou a usar `concurrency` para cancelar execuções redundantes ou superadas no mesmo branch (push/PR), reduzindo consumo de Actions sem dispensar um CI verde no HEAD final.
+
+### Findings e limites que permanecem
+
+| Finding | Estado R14 | Aceite que falta |
+| --- | --- | --- |
+| OPEN-01 | **OPEN** | Bundle V2 normativo realmente executável com manifests/registries/conformance, pinning Genesis sob a política filha, migrador explícito V1→V2 e replay sob ambas as políticas. Não rehashar o prefixo parental. |
+| OPEN-02 | **OPEN (cobertura positiva ampliada)** | Event/Claim-owned occurrences, transmissão IN_TRANSIT, rounds com dispatch/resposta/revogação, ciclo/fence in-flight, trigger runtime evoluído e checkpoints cognitivos; cada classe precisa de rekey, causal provenance, settlement e rollback próprio. |
+| OPEN-04 | **OPEN para aceite formal** | Verificar no HEAD final o `ResumeRegisteredWorkV1` com handlers autenticados para NoProposal, recurso, contest, sistema, comunicação send/due e cenário misto. Provar idempotência e falha fechada em fontes desconhecidas. |
+| OPEN-05 | **OPEN para aceite integrado** | Reexecutar a matriz das cinco ledgers, world/state hash, permutações e crash points no HEAD final; cobertura diferencial dos migradores ainda ausentes não pode ser alegada. |
+
+**Gate:** PR permanece Draft/NO-GO. Um CI verde valida a fatia efetivamente implementada, não substitui a conformidade positiva exigida nos blockers.

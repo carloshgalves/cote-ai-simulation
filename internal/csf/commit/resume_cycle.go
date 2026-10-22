@@ -34,8 +34,9 @@ func (c *Coordinator) ReopenFencedCycle(ctx context.Context,run,snapshotID [32]b
  raw,err:=authoritative.GetFence(ctx,id);if err!=nil{return cycle,fence,resume,err}
  parsed,err:=codec.StrictDecodePayload(raw);if err!=nil{return cycle,fence,resume,err}
  fields,ok:=parsed.([]any)
- if !ok||len(fields)!=18||!bytes.Equal(fields[0].([]byte),run[:])||
-  !bytes.Equal(fields[1].([]byte),resume.Action.CycleID[:]){
+ if !ok||len(fields)!=18{return cycle,fence,resume,errors.New("frozen fence schema invalid")}
+ rawRun,runOK:=fields[0].([]byte);rawCycle,cycleOK:=fields[1].([]byte)
+ if !runOK||!cycleOK||!bytes.Equal(rawRun,run[:])||!bytes.Equal(rawCycle,resume.Action.CycleID[:]){
   return cycle,fence,resume,errors.New("frozen fence has unexpected run/cycle")
  }
  attempt,ok:=fields[2].(uint64);if !ok||attempt!=resume.Action.AttemptOrdinal||attempt>uint64(^uint32(0)){
@@ -48,10 +49,11 @@ func (c *Coordinator) ReopenFencedCycle(ctx context.Context,run,snapshotID [32]b
  digest,_,err:=identity.New(c.bundle).Sum("cote.csf.digest.fence",
   "cote.csf.schema.admission-fence.body",1,fields[:17])
  if err!=nil{return cycle,fence,resume,err}
- if !bytes.Equal(fields[17].([]byte),digest[:]){
+ publishedDigest,ok:=fields[17].([]byte)
+ if !ok||!bytes.Equal(publishedDigest,digest[:]){
   return cycle,fence,resume,errors.New("frozen admission digest diverged from persisted journal")
  }
- instant,ok:=asSigned64(fields[4]);if !ok{return cycle,fence,resume,errors.New("frozen instant invalid")}
+ instant,ok:=resumeSignedInstant(fields[4]);if !ok{return cycle,fence,resume,errors.New("frozen instant invalid")}
  ordinal,ok:=fields[5].(uint64);if !ok{return cycle,fence,resume,errors.New("frozen ordinal invalid")}
  revision,ok:=fields[7].(uint64);if !ok{return cycle,fence,resume,errors.New("frozen revision invalid")}
  stateHash,ok:=fields[8].([]byte);if !ok||len(stateHash)!=32{return cycle,fence,resume,errors.New("frozen state hash malformed")}
@@ -60,10 +62,20 @@ func (c *Coordinator) ReopenFencedCycle(ctx context.Context,run,snapshotID [32]b
  copy(base[:],stateHash)
  copy(source[:],inputHash)
  plan,ok:=fields[6].([]any);if !ok||len(plan)==0{return cycle,fence,resume,errors.New("frozen plan malformed")}
+ if len(plan)==1&&plan[0]==uint64(0){plan=nil}
  cycle=admission.Cycle{ID:domain.ID(resume.Action.CycleID),Attempt:uint32(attempt),
   Plan:plan,Instant:domain.SimulationInstant(instant),Ordinal:domain.CycleOrdinal(ordinal),
   BaseRevision:domain.WorldRevision(revision),BaseStateHash:base,RetryRef:fields[3]}
  fence=admission.Fence{ID:domain.ID(id),Digest:domain.Digest(digest),
   Fields:fields,Canonical:bytes.Clone(raw),InputDigest:source}
  return cycle,fence,resume,nil
+}
+
+func resumeSignedInstant(v any)(int64,bool){
+ switch value:=v.(type){
+ case int64:return value,true
+ case uint64:
+  if value<=uint64(^uint64(0)>>1){return int64(value),true}
+ }
+ return 0,false
 }

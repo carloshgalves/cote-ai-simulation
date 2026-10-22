@@ -8,6 +8,9 @@ import (
  _ "modernc.org/sqlite"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/fork"
@@ -324,4 +327,51 @@ func TestCSFRV18SnapshotRealInFlightHaltedRetryRecovery(t *testing.T){
    }
   })
  }
+}
+
+func TestCSFRV18CommunicationSnapshotInTransitReplayAndDeliveryOnce(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,sendCycle,sendFence,path:=communicationFixture(t)
+ _,_,_,_,_,run:=ledger.Snapshot()
+ if _,err:=c.CommitCommunicationSend(ctx,ledger,sendCycle,sendFence);err!=nil{t.Fatal(err)}
+ checkpoint,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
+ if err!=nil{t.Fatalf("snapshot while allegation IN_TRANSIT: %v",err)}
+ restarted,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer restarted.Close()
+ tip,err:=restarted.VerifySnapshotV1(ctx,[32]byte(run),checkpoint.ID,c.bundle)
+ if err!=nil{t.Fatalf("resuming in-transit transmission: %v",err)}
+ if tip.Clock.Revision!=1||tip.PendingTasks==0{
+  t.Fatal("snapshot lost uncompleted perception tasks at send boundary")
+ }
+ var status int
+ raw,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)};defer raw.Close()
+ if err:=raw.QueryRowContext(ctx,"SELECT status FROM communication_transmissions").Scan(&status);err!=nil||status!=0{
+  t.Fatal("checkpoint consumed or lost an undelivered claim")
+ }
+ advanced,err:=c.Advance(ctx,ledger,run);if err!=nil{t.Fatal(err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ selected,ok,err:=clock.Next(advanced.ResultClock,pending)
+ if err!=nil||!ok||selected.Kind!=clock.Work{t.Fatal("due transmission not selected",err)}
+ nextCycleID,_,err:=identity.New(c.bundle).Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{run[:],[]any{int64(advanced.ResultClock.Instant),uint64(selected.OriginOrdinal)}})
+ if err!=nil{t.Fatal(err)}
+ _,hash,err:=store.LoadWorldState(ctx,uint64(advanced.ResultClock.Revision));if err!=nil{t.Fatal(err)}
+ nextCycle:=admission.Cycle{ID:domain.ID(nextCycleID),Attempt:0,Instant:advanced.ResultClock.Instant,
+  Ordinal:selected.OriginOrdinal,BaseRevision:advanced.ResultClock.Revision,
+  BaseStateHash:domain.Digest(hash),RetryRef:[]any{uint64(0)}}
+ dueFence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).
+  AdmitThenEvaluate(ctx,c.bundle,ledger,nextCycle,c.admissionPolicies,nil)
+ if err!=nil{t.Fatal(err)}
+ if _,err:=c.CommitCommunicationDue(ctx,ledger,nextCycle,dueFence);err!=nil{t.Fatal(err)}
+ if _,err:=c.CommitCommunicationDue(ctx,ledger,nextCycle,dueFence);err==nil{t.Fatal("duplicate delivery accepted after replay")}
+ if err:=raw.QueryRowContext(ctx,"SELECT status FROM communication_transmissions").Scan(&status);err!=nil||status!=1{
+  t.Fatal("channel no longer delivered exactly once",status,err)
+ }
+ recovered,err:=restarted.VerifySnapshotV1(ctx,[32]byte(run),checkpoint.ID,c.bundle)
+ if err!=nil{t.Fatalf("historical in-transit checkpoint plus delivery tail: %v",err)}
+ if recovered.TailCommits!=2||recovered.Clock.Revision!=3{
+  t.Fatalf("snapshot plus delivered tail lost causal transitions: %+v",recovered)
+ }
+ _,beforeHash,err:=store.LoadWorldState(ctx,0);if err!=nil{t.Fatal(err)}
+ _,afterHash,err:=store.LoadWorldState(ctx,3);if err!=nil{t.Fatal(err)}
+ if beforeHash!=afterHash{t.Fatal("replayed allegation promoted false claim to world truth")}
 }

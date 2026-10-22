@@ -10,6 +10,8 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/fork"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
 // These tests run the V8 snapshot path on the real V3-V7 commit journal.
@@ -183,4 +185,44 @@ func TestCSFRV18HistoricalSnapshotRejectsCorruptedTail(t *testing.T){
  if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),origin.ID,bundle);err==nil{
   t.Fatal("historical prefix resumed over a corrupted terminal event tail")
  }
+}
+
+func TestCSFRV18ForkIdleSamePolicyEndToEnd(t *testing.T) {
+ ctx:=context.Background()
+ bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ root:=validGenesis(t,bundle)
+ parent,err:=sqlite.Open(ctx,t.TempDir()+"/parent.db");if err!=nil{t.Fatal(err)};defer parent.Close()
+ if err:=parent.PersistGenesis(ctx,root,bundle);err!=nil{t.Fatal(err)}
+ if err:=parent.BootstrapClock(ctx,root,bundle);err!=nil{t.Fatal(err)}
+ if err:=parent.BootstrapGenesisTriggers(ctx,root,bundle,nil);err!=nil{t.Fatal(err)}
+ checkpoint,err:=parent.CreateSnapshotV1(ctx,[32]byte(root.RunID),bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ child,err:=sqlite.Open(ctx,t.TempDir()+"/child.db");if err!=nil{t.Fatal(err)};defer child.Close()
+ childID:=[32]byte(root.RunID);childID[0]^=0x5a
+ branch,err:=parent.ForkIdleSnapshotV1(ctx,[32]byte(root.RunID),checkpoint.ID,childID,child,bundle)
+ if err!=nil{t.Fatal(err)}
+ if [32]byte(branch.RunID)!=childID||branch.Digest==root.Digest{t.Fatal("fork inherited parent identity")}
+ if _,err:=child.ValidatedGenesis(ctx,childID,bundle);err!=nil{t.Fatalf("child Genesis unverifiable: %v",err)}
+ if _,err:=child.ReplayClock(ctx,childID,bundle);err!=nil{t.Fatalf("fork causal replay failed: %v",err)}
+ branchSnap,err:=child.CreateSnapshotV1(ctx,childID,bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ if branchSnap.ID==checkpoint.ID{t.Fatal("fork shares snapshot identity with parent")}
+ _,err=child.VerifySnapshotV1(ctx,childID,branchSnap.ID,bundle)
+ if err!=nil{t.Fatalf("fork resume failed: %v",err)}
+ if _,err:=parent.VerifySnapshotV1(ctx,[32]byte(root.RunID),checkpoint.ID,bundle);err!=nil{t.Fatalf("child mutated parent: %v",err)}
+ // Cross-workspace history has the parent's exact bytes, not its live ledgers.
+ parentHistory:=branch.Payload[4].([]any)
+ ref,err:=fork.Decode(parentHistory[1].([]byte));if err!=nil{t.Fatal(err)}
+ if err:=fork.VerifyOriginSnapshot(ref,checkpoint.Canonical,bundle);err!=nil{t.Fatal(err)}
+}
+
+func TestCSFRV18RejectForkWithPendingScheduleAndReusedIdentity(t *testing.T) {
+ ctx:=context.Background()
+ _,parent,_,run,bundle,_:=testFixture(t,activeTrigger())
+ checkpoint,err:=parent.CreateSnapshotV1(ctx,[32]byte(run),bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ child,err:=sqlite.Open(ctx,t.TempDir()+"/child.db");if err!=nil{t.Fatal(err)};defer child.Close()
+ if _,err:=parent.ForkIdleSnapshotV1(ctx,[32]byte(run),checkpoint.ID,[32]byte(run),child,bundle);err==nil{t.Fatal("same-run fork accepted")}
+ other:=[32]byte(run);other[0]^=1
+ if _,err:=parent.ForkIdleSnapshotV1(ctx,[32]byte(run),checkpoint.ID,other,child,bundle);err==nil{t.Fatal("fork dropped pending work without migration")}
 }

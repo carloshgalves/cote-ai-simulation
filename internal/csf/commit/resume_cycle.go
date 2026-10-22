@@ -58,7 +58,7 @@ func (c *Coordinator) ReopenFencedCycle(ctx context.Context,run,snapshotID [32]b
  ordinal,ok:=fields[5].(uint64);if !ok{return cycle,fence,resume,errors.New("frozen ordinal invalid")}
  revision,ok:=fields[7].(uint64);if !ok{return cycle,fence,resume,errors.New("frozen revision invalid")}
  stateHash,ok:=fields[8].([]byte);if !ok||len(stateHash)!=32{return cycle,fence,resume,errors.New("frozen state hash malformed")}
- inputHash,ok:=fields[13].([]byte);if !ok||len(inputHash)!=32{return cycle,fence,resume,errors.New("frozen input hash malformed")}
+ inputHash,ok:=fields[12].([]byte);if !ok||len(inputHash)!=32{return cycle,fence,resume,errors.New("frozen input hash malformed")}
  var base,source domain.Digest
  copy(base[:],stateHash)
  copy(source[:],inputHash)

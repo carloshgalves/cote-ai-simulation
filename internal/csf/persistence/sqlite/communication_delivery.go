@@ -72,6 +72,12 @@ func loadVerifiedCommunicationProjection(ctx context.Context,q queryOne,taskID [
  event,ok:=parsed.([]any);if !ok||len(event)!=19||event[3]!="communication.delivered"{
   return zero,errors.New("only a successful delivery may address a claim")
  }
+ key,keyOK:=event[2].([]any)
+ if !keyOK||len(key)!=6||key[0]!=uint64(1)||key[2]!="communication.delivery"||
+  key[3]!=uint64(1)||key[4]!=uint64(0)||key[5]!=uint64(0)||
+  !sameCanonical(event[5],journal[3])||!sameCanonical(event[8],task[4]){
+  return zero,errors.New("delivery Event coordinate differs from committed occurrence")
+ }
  actors,ok:=event[12].([]any);if !ok||len(actors)!=1{return zero,errors.New("communication observer roster must contain B only")}
  actor,ok:=actors[0].([]any)
  if !ok||len(actor)!=2{return zero,errors.New("communication actor malformed")}

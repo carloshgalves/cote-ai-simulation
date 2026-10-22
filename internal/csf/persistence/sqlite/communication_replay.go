@@ -93,7 +93,7 @@ func verifyPublishedCommunication(ctx context.Context,q queryOne,run,cycle,commi
  env,err:=codec.StrictDecodeEnvelope(asBytes(typed[2]));if err!=nil{return zero,err}
  if env.DomainTag!="cote.csf.communication.delivery.v1"||!sameCanonical(env.Value,
   []any{transmissionID,txDigest[:],claimID,claimDigest[:]})||
-  !sameCanonical(typed[3],identity.OpaqueContentHash(asBytes(typed[2]))[:]){
+  !communicationTypedDigestMatches(typed){
   return zero,errors.New("communication occurrence does not authorize delivery of claimed message")
  }
  // Reconcile the source's provenance with the terminal admitted roster.
@@ -166,4 +166,10 @@ func checkDueHistoricalProjection(event,transmission,claim []any,txID,claimID,oc
   return errors.New("historical communicated content altered or leaked actual author")
  }
  return nil
+}
+
+func communicationTypedDigestMatches(typed []any)bool{
+ bytes,ok:=typed[2].([]byte);if !ok{return false}
+ h:=identity.OpaqueContentHash(bytes)
+ return sameCanonical(typed[3],h[:])
 }

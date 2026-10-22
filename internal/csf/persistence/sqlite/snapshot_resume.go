@@ -9,6 +9,7 @@ import (
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
@@ -88,8 +89,11 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  count,ok:=cursors[3].([]any);if !ok||len(count)!=3{return zero,errors.New("evidence cursor malformed")}
  evidenceCursor,ok:=count[1].(uint64);if !ok{return zero,errors.New("evidence cursor invalid")}
  if err:=verifySnapshotCheckpointRefs(ctx,tx,run,refs,int64(c.Instant),rev,evidenceCursor);err!=nil{return zero,err}
- var tasks int
- if err:=tx.QueryRowContext(ctx,"SELECT count(*) FROM causal_outbox WHERE canonical IS NOT NULL").Scan(&tasks);err!=nil{return zero,err}
+ pfields,ok:=currentPending[2].([]byte);if !ok{return zero,errors.New("pending state envelope missing")}
+ penv,err:=codec.StrictDecodeEnvelope(pfields);if err!=nil{return zero,err}
+ memberships,ok:=penv.Value.([]any);if !ok||len(memberships)!=10{return zero,errors.New("invalid pending state typed projection")}
+ outstanding,ok:=memberships[8].([]any);if !ok{return zero,errors.New("invalid outstanding task list")}
+ tasks:=len(outstanding)
  if err:=tx.Commit();err!=nil{return zero,err}
  return ResumeCheckpointV1{
   Snapshot:SnapshotV1{ID:id,Digest:hash,Canonical:bytes.Clone(canonical),Revision:rev},
@@ -142,8 +146,11 @@ func verifySnapshotCheckpointRefs(ctx context.Context,tx *sql.Tx,run [32]byte,re
   at,ok:=asSigned64(covers[0]);if !ok||at<instant{return errors.New("checkpoint instant stale")}
   revision,ok:=covers[1].(uint64);if !ok||revision<rev{return errors.New("checkpoint revision stale")}
   evidence,ok:=covers[2].(uint64);if !ok||evidence<cursor{return errors.New("checkpoint evidence cursor stale")}
-  if _,ok:=f[2].(uint64);!ok{return errors.New("checkpoint schema version absent")}
-  if _,ok:=f[6].(uint64);!ok{return errors.New("checkpoint producer version absent")}
+  ver,ok:=f[2].(uint64);if !ok||ver==0||ver>uint64(^uint32(0)){return errors.New("checkpoint schema version invalid")}
+  producerVer,ok:=f[6].(uint64);if !ok||producerVer==0||producerVer>uint64(^uint32(0)){return errors.New("checkpoint producer version invalid")}
+  storeID,storeOK:=f[1].(string);producer,producerOK:=f[5].(string)
+  if !storeOK||!producerOK{return errors.New("checkpoint store or producer absent")}
+  for _,name:=range []string{ns,id,storeID,producer}{if domain.ValidateMachineID(name)!=nil{return errors.New("invalid checkpoint machine ID")}}
  }
  if len(expected)!=len(got){return errors.New("missing or extra epistemic checkpoint holder")}
  for k:=range expected{if !got[k]{return errors.New("missing checkpoint for evidence holder")}}

@@ -558,3 +558,30 @@ func TestCSFRV18CorruptActorRosterFailsSnapshotResume(t *testing.T){
   t.Fatal("missing frozen actor roster survived snapshot verification")
  }
 }
+
+func TestCSFRV18SameRevisionFenceAbortRetryJournalTails(t *testing.T){
+ ctx:=context.Background()
+ coordinator,store,_,fence,run,cycle,path:=abortFixture(t)
+ frozen,err:=store.CreateSnapshotV1(ctx,[32]byte(run),coordinator.bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ first,err:=store.VerifySnapshotV1(ctx,[32]byte(run),frozen.ID,coordinator.bundle)
+ if err!=nil{t.Fatal(err)}
+ if first.Action.Kind!=sqlite.ResumeReexecuteFencedAttempt{t.Fatal("initial snapshot was not an in-flight fence")}
+ abort,err:=coordinator.Abort(ctx,run,cycle,fence,4,nil);if err!=nil{t.Fatal(err)}
+ fromAbort,err:=store.VerifySnapshotV1(ctx,[32]byte(run),frozen.ID,coordinator.bundle)
+ if err!=nil{t.Fatalf("valid same-revision abort tail rejected: %v",err)}
+ if fromAbort.Clock.Revision!=first.Clock.Revision||fromAbort.TailCommits!=0||
+  fromAbort.Action.Kind!=sqlite.ResumeHalted{
+  t.Fatalf("same-revision abort tail did not preserve HALTED state: %+v",fromAbort)
+ }
+ if _,err:=coordinator.Retry(ctx,run,cycle,abort,"operator.retry");err!=nil{t.Fatal(err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
+ fromRetry,err:=reopened.VerifySnapshotV1(ctx,[32]byte(run),frozen.ID,coordinator.bundle)
+ if err!=nil{t.Fatalf("same-revision retry tail failed restart: %v",err)}
+ if fromRetry.TailCommits!=0||fromRetry.Action.Kind!=sqlite.ResumeFenceAuthorizedRetry{
+  t.Fatalf("same-revision retry changed causal state or reopened work: %+v",fromRetry)
+ }
+ if _,err:=reopened.CreateSnapshotV1(ctx,[32]byte(run),coordinator.bundle,nil);err==nil{
+  t.Fatal("V1 snapshot identity collision in same revision was silently overwritten")
+ }
+}

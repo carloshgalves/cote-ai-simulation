@@ -328,7 +328,7 @@ func TestCSFRV17CausalClaimDeliversExactlyOnePrivateInputToB(t *testing.T){
   NotBeforeCycleOrdinal:nextOrdinal}
  roundOrigin:=[]any{uint64(2),[]any{manifest.ID[:],manifest.Digest[:]}}
  bRound,err:=ledger.DeclareRound(ctx,"schedule",[2]string{"school","b"},
-  []string{"act"},coordinate,roundOrigin,0,uint64(nextOrdinal),0,[]any{uint64(0)})
+  []string{"act"},coordinate,roundOrigin,0,uint32(nextOrdinal),0,[]any{uint64(0)})
  if err!=nil{t.Fatal("future B round cannot be declared:",err)}
  nextCycle,_,err:=identity.New(c.bundle).Sum("cote.csf.id.cycle",
   "cote.csf.schema.cycle-id-preimage",1,

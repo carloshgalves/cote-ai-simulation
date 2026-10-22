@@ -10,6 +10,7 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from headless_review import check_input
+from fleet_snapshot import export as export_snapshot, restore as restore_snapshot
 
 HERE = Path(__file__).resolve().parent
 
@@ -66,6 +67,57 @@ class HarnessTests(unittest.TestCase):
             survivor = command(base[:-3] + ["--", sys.executable, "-c", "print('irrelevant')"], root)
             self.assertEqual(survivor.returncode, 1, survivor.stdout + survivor.stderr)
             self.assertIn("return False", source.read_text())
+
+
+    def test_snapshot_cross_job_manifest_and_untrusted_tampering(self):
+        with tempfile.TemporaryDirectory() as d:
+            temp = Path(d)
+            repository = temp / "repo"
+            repository.mkdir()
+            for args in (["git", "init", "-q"], ["git", "config", "user.name", "Fixture"],
+                         ["git", "config", "user.email", "fixture@example.invalid"]):
+                self.assertEqual(command(args, repository).returncode, 0)
+            (repository / "src").mkdir()
+            file = repository / "src" / "feature.py"
+            file.write_text("value = 1\\n")
+            self.assertEqual(command(["git", "add", "."], repository).returncode, 0)
+            self.assertEqual(command(["git", "commit", "-qm", "fixture"], repository).returncode, 0)
+            snapshot = temp / "snapshot"
+            export_snapshot(repository, snapshot, ["src"])
+            file.write_text("value = 2\\n")
+            restore_snapshot(repository, snapshot, ["src"])
+            self.assertEqual(file.read_text(), "value = 1\\n")
+            # Tampering never reaches source in the privileged publisher job.
+            (snapshot / "src" / "feature.py").write_text("value = 99\\n")
+            with self.assertRaises(ValueError):
+                restore_snapshot(repository, snapshot, ["src"])
+            self.assertEqual(file.read_text(), "value = 1\\n")
+            # An unlisted file must also be rejected as injected artifact data.
+            (snapshot / "src" / "rogue.py").write_text("evil\\n")
+            with self.assertRaises(ValueError):
+                restore_snapshot(repository, snapshot, ["src"])
+            self.assertEqual(file.read_text(), "value = 1\\n")
+
+    def test_snapshot_rejects_symlink_overwrite_and_secret_paths(self):
+        with tempfile.TemporaryDirectory() as d:
+            temp = Path(d)
+            repo = temp / "repo"
+            repo.mkdir()
+            for args in (["git", "init", "-q"], ["git", "config", "user.name", "Fixture"],
+                         ["git", "config", "user.email", "fixture@example.invalid"]):
+                self.assertEqual(command(args, repo).returncode, 0)
+            (repo / "src").mkdir()
+            f = repo / "src" / "ok.py"
+            f.write_text("ready = True\\n")
+            self.assertEqual(command(["git", "add", "."], repo).returncode, 0)
+            self.assertEqual(command(["git", "commit", "-qm", "fixture"], repo).returncode, 0)
+            snapshot = temp / "snapshot"
+            export_snapshot(repo, snapshot, ["src"])
+            f.unlink()
+            f.symlink_to(repo / ".git" / "config")
+            with self.assertRaises(ValueError):
+                restore_snapshot(repo, snapshot, ["src"])
+            self.assertTrue(f.is_symlink())
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ MAX_PAGE = 265
 def load_all(folder: str):
     path = ROOT / folder
     assert path.is_dir(), f"missing directory: {path}"
-    return [(p, json.loads(p.read_text(encoding="utf-8"))) for p in sorted(path.glob("*.json"))]
+    return [(p, json.loads(p.read_text(encoding="utf-8"))) for p in sorted(path.glob("*.json")) if p.name not in {"deep-profile-index.json", "faction-history.json"}]
 
 def validate_pages(item, label):
     pages = item.get("source_pages", item.get("reference_pages", []))

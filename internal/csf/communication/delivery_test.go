@@ -26,7 +26,8 @@ func TestCSFRV17FalseForgedDelayedAndFailurePlans(t *testing.T){
  }
  payload,err:=result.Notice.RedactedValue();if err!=nil{t.Fatal(err)}
  raw,err:=codec.CanonicalPayload(payload);if err!=nil{t.Fatal(err)}
- if bytes.Contains(raw,[]byte("school"))&&bytes.Contains(raw,[]byte("a")){
+ if len(payload)!=6||result.Notice.Recipient==txSpec.ActualSender||
+  bytes.Contains(raw,[]byte("school/a"))||bytes.Contains(raw,[]byte("actual_sender")){
   t.Fatal("actual sender leaked to B")
  }
  same,err:=PlanDueDelivery(bundle,tx,claim,due,12,12,true)

@@ -102,6 +102,23 @@ func verifyPublishedCommunication(ctx context.Context,q queryOne,run,cycle,commi
    !sameCanonical(transmission[1],claim[1]){
    return zero,errors.New("source Claim was not authored by admitted proposal")
   }
+  var sourceRaw []byte
+  if err:=q.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",id[:]).Scan(&sourceRaw);err!=nil{return zero,err}
+  parsed,err:=codec.StrictDecodePayload(sourceRaw);if err!=nil{return zero,err}
+  response,ok:=parsed.([]any)
+  if !ok||len(response)!=19||response[4]!="communication.send"||response[5]!=uint64(1)||
+   !sameCanonical(response[6],transmission[5])||!sameCanonical(claim[5],[]any{uint64(1),transmission[5]})||
+   !sameCanonical(claim[6],transmission[9]){
+   return zero,errors.New("historical source ActionProposal or actual author altered")
+  }
+  sourceID,err:=registeredDigest("cote.csf.id.action-proposal",
+   "cote.csf.schema.slot-response-id-preimage",[]any{response[1],uint64(0)})
+  if err!=nil||sourceID!=domain.Digest(id){return zero,errors.New("historical communication ActionProposal ID forged")}
+  sourceHash,err:=registeredDigest("cote.csf.digest.action-proposal-unit",
+   "cote.csf.schema.action-proposal.body",[]any{response[:18]})
+  if err!=nil||sourceHash!=domain.Digest(sourceDigest)||!equalBytes(response[18],sourceDigest[:]){
+   return zero,errors.New("historical ActionProposal body digest altered")
+  }
   if !sameCanonical(f[9],communicationSentTyped(transmissionID,txDigest,claimID,claimDigest,
    occurrenceID,occurrence[3])){return zero,errors.New("send Event projection does not bind immutable transmission")}
  }else{
@@ -109,6 +126,15 @@ func verifyPublishedCommunication(ctx context.Context,q queryOne,run,cycle,commi
    !sameCanonical(f[11],[]any{[]any{uint64(2),id[:],sourceDigest[:]}}){
    return zero,errors.New("due Event did not consume the exact admitted occurrence")
   }
+  channel,valid:=transmission[8].(string)
+  if !valid{return zero,errors.New("historical channel policy missing")}
+  expectedKind:=""
+  switch channel{
+  case "school.message.v1":expectedKind="communication.delivered"
+  case "school.drop.v1":expectedKind="communication.delivery_failed"
+  default:return zero,errors.New("historical communication channel unregistered")
+  }
+  if f[3]!=expectedKind{return zero,errors.New("historical channel outcome fabricated")}
   if err:=checkDueHistoricalProjection(f,transmission,claim,transmissionID,claimID,occurrenceID);err!=nil{return zero,err}
  }
  // Terminal DecisionRecord must be closed over exactly this admitted source.

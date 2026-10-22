@@ -18,6 +18,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/fork"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
 // These tests run the V8 snapshot path on the real V3-V7 commit journal.
@@ -756,4 +757,37 @@ func TestCSFRV18HaltedNeverAutoResumesOnReconnect(t *testing.T){
  }
  status,err:=reopened.LoadCycleControl(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
  if status[0]!=uint64(3){t.Fatal("resume mutated HALTED_ON_ABORT into an executable status")}
+}
+
+func TestCSFRV18ResumeRunnerDispatchesFrozenTerminalWithoutResampling(t *testing.T){
+ ctx:=context.Background()
+ previous,store,_,fence,run,cycle,path:=abortFixture(t)
+ snapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(run),previous.bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ restarted,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer restarted.Close()
+ ledger,err:=inputledger.Open(ctx,run,previous.bundle,restarted);if err!=nil{t.Fatal(err)}
+ resumed:=New(restarted,previous.bundle,previous.admissionPolicies)
+ ran:=0
+ handler:=func(ctx context.Context,actual *inputledger.Ledger,c admission.Cycle,f admission.Fence)(ports.CanonicalRecord,error){
+  ran++
+  if c.ID!=cycle||f.ID!=fence.ID||!bytes.Equal(f.Canonical,fence.Canonical){
+   t.Fatal("resume runner substituted a different cycle/fence")
+  }
+  return resumed.CommitNoProposal(ctx,actual,c,f)
+ }
+ if _,err:=resumed.ResumeRunV1(ctx,ledger,[32]byte(run),snapshot.ID,nil);err==nil{
+  t.Fatal("runner executed perception or fence without terminal handler")
+ }
+ result,err:=resumed.ResumeRunV1(ctx,ledger,[32]byte(run),snapshot.ID,handler)
+ if err!=nil{t.Fatal(err)}
+ if !result.Continued||ran!=1||result.Publication.Identity==([32]byte{}){
+  t.Fatal("recovered in-flight cycle was not committed exactly once")
+ }
+ if _,err:=resumed.ResumeRunV1(ctx,ledger,[32]byte(run),snapshot.ID,handler);err!=nil{
+  t.Fatalf("idle recovery after settled cycle must be safe: %v",err)
+ }
+ if ran!=1{t.Fatal("terminal handler was repeated after successful replay")}
+ if _,err:=restarted.ReplayClock(ctx,[32]byte(run),previous.bundle);err!=nil{
+  t.Fatal("resumed terminal did not persist an independently replayable journal:",err)
+ }
 }

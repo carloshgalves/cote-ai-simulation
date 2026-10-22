@@ -854,3 +854,36 @@ func TestCSFRV18ResourceContestTriggerScheduleContinuityCrashMatrix(t *testing.T
   })
  }
 }
+
+func TestCSFRV18OriginPolicyResolvedWithoutConsultingChildCodec(t *testing.T){
+ ctx:=context.Background()
+ _,store,_,run,bundle,_:=testFixture(t)
+ snapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,nil);if err!=nil{t.Fatal(err)}
+ origin,err:=fork.NewSnapshotReference(bundle,snapshot.Canonical);if err!=nil{t.Fatal(err)}
+ encoded,err:=fork.Encode(origin);if err!=nil{t.Fatal(err)}
+ requests:=0
+ resolver:=fork.ResolveOriginFunc(func(_ context.Context,id string,hash [32]byte)(*policy.Bundle,error){
+  requests++
+  if id!=origin.OriginPolicyID||hash!=origin.OriginPolicyHash{
+   t.Fatal("resolver accepted child-dependent policy lookup")
+  }
+  return bundle,nil
+ })
+ resolved,used,err:=fork.VerifyOriginWithResolver(ctx,encoded,snapshot.Canonical,resolver)
+ if err!=nil{t.Fatal(err)}
+ if resolved!=origin||used!=bundle||requests!=1{t.Fatal("origin policy lookup changed pinned checkpoint reference")}
+ broken:=append([]byte(nil),snapshot.Canonical...)
+ broken[len(broken)-1]^=1
+ if _,_,err:=fork.VerifyOriginWithResolver(ctx,encoded,broken,resolver);err==nil{
+  t.Fatal("origin policy resolver accepted changed checkpoint bytes")
+ }
+ if _,_,err:=fork.VerifyOriginWithResolver(ctx,encoded,snapshot.Canonical,nil);err==nil{
+  t.Fatal("unregistered historic origin policy incorrectly trusted child codec")
+ }
+ wrong:=fork.ResolveOriginFunc(func(context.Context,string,[32]byte)(*policy.Bundle,error){
+  fake:=*bundle;fake.CodecPolicyHash[0]^=1;return &fake,nil
+ })
+ if _,_,err:=fork.VerifyOriginWithResolver(ctx,encoded,snapshot.Canonical,wrong);err==nil{
+  t.Fatal("different policy hash accepted for historic canonical snapshot")
+ }
+}

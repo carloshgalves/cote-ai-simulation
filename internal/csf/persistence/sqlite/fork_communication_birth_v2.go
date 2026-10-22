@@ -173,13 +173,22 @@ func validateV2ImportedBirthTx(ctx context.Context,tx *sql.Tx,childRun,childTxID
  // The future child authority must be rederived, not merely a renamed V1
  // record. Its Genesis origin and typed Claim/Transmission/due chain are
  // independently validated using the installed V2 schema.
- var claimDB,txDB []byte
+ var claimDB,txDB,occurrenceDB,sentDB []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM communication_claims WHERE run_id=? AND id=?",
   childRun[:],childClaimID[:]).Scan(&claimDB);err!=nil{return err}
- if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM communication_transmissions WHERE run_id=? AND id=? AND claim_id=? AND occurrence_id=?",
-  childRun[:],childTxID[:],childClaimID[:],childDueID[:]).Scan(&txDB);err!=nil{return err}
- if !bytes.Equal(claimDB,rawBytesImport(f[17]))||!bytes.Equal(txDB,rawBytesImport(f[18])){
-  return errors.New("child imported Claim/Transmission differ from immutable birth proof")
+ if err:=tx.QueryRowContext(ctx,
+  "SELECT canonical,sent_commit_id FROM communication_transmissions WHERE run_id=? AND id=? AND claim_id=? AND occurrence_id=?",
+  childRun[:],childTxID[:],childClaimID[:],childDueID[:]).Scan(&txDB,&sentDB);err!=nil{return err}
+ if err:=tx.QueryRowContext(ctx,
+  "SELECT canonical FROM scheduled_occurrences WHERE run_id=? AND id=?",
+  childRun[:],childDueID[:]).Scan(&occurrenceDB);err!=nil{return err}
+ // An imported row cannot silently change either its scheduled due body
+ // or the exact archived parent send reference, including after delivery.
+ if !bytes.Equal(claimDB,rawBytesImport(f[17]))||
+  !bytes.Equal(txDB,rawBytesImport(f[18]))||
+  !bytes.Equal(occurrenceDB,rawBytesImport(f[19]))||
+  !bytes.Equal(sentDB,parentSent){
+  return errors.New("child imported Claim/Transmission/due or send provenance differs from birth proof")
  }
  planChild:=communication.SendPlan{
   Run:domain.ID(childRun),

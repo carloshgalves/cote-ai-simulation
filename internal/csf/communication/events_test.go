@@ -29,6 +29,19 @@ func TestCSFRV17EventDraftsKeepFalseClaimSeparateFromWorldTruth(t *testing.T){
  f:=occ.([]any)
  var digest domain.Digest;copy(digest[:],f[14].([]byte))
  origin:=Origin{Kind:6,ID:domain.ID(plan.Occurrence.Identity),Digest:digest}
+ // The Event materializer must not trust a worker-supplied recipient,
+ // presentation or proposition even if the worker guesses a valid event kind.
+ forgedNotice:=delivered
+ copied:=*delivered.Notice
+ copied.PresentedSender="A"
+ forgedNotice.Notice=&copied
+ if _,err:=NewDueEvent(bundle,ctx,plan,forgedNotice,origin);err==nil{
+  t.Fatal("worker forged presented sender at terminal delivery")
+ }
+ forgedOrigin:=origin;forgedOrigin.Digest[0]^=0x01
+ if _,err:=NewDueEvent(bundle,ctx,plan,delivered,forgedOrigin);err==nil{
+  t.Fatal("delivery accepted forged ScheduledOccurrence digest")
+ }
  recorded,err:=NewDueEvent(bundle,ctx,plan,delivered,origin);if err!=nil{t.Fatal(err)}
  result,err:=codec.StrictDecodePayload(recorded.Canonical);if err!=nil{t.Fatal(err)}
  ef:=result.([]any)

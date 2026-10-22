@@ -409,6 +409,13 @@ func TestCSFRV18ForkCanArchiveFinalSourceClosureWithoutReopeningIngress(t *testi
   t.Fatalf("terminal source closure is historical, not pending work: %v",err)
  }
  if _,err:=child.ReplayClock(ctx,id,bundle);err!=nil{t.Fatal(err)}
+ forkInputs,err:=inputledger.New(ctx,domain.ID(id),bundle,child);if err!=nil{t.Fatal(err)}
+ if err:=forkInputs.DeclareSource(inputledger.Source{ID:"closed-origin"});err==nil{
+  t.Fatal("final exogenous source was reopened through a child timeline")
+ }
+ if err:=forkInputs.DeclareSource(inputledger.Source{ID:"fresh-child"});err!=nil{
+  t.Fatal("fork wrongly blocked an independent new child source:",err)
+ }
  if _,err:=source.VerifySnapshotV1(ctx,[32]byte(g.RunID),origin.ID,bundle);err!=nil{
   t.Fatal("fork modified immutable parental source history",err)
  }
@@ -485,5 +492,23 @@ func TestCSFRV18ContinuousVersusReopenedDeliverySnapshotByteEquivalence(t *testi
     t.Fatal("continuous and restarted delivery produced divergent canonical snapshot/ledger prefix")
    }
   })
+ }
+}
+
+func TestCSFRV18ForkRejectsSourceDeclaredWithoutFinalClosure(t *testing.T){
+ ctx:=context.Background()
+ b,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,b)
+ parent,err:=sqlite.Open(ctx,t.TempDir()+"/open-parent.db");if err!=nil{t.Fatal(err)};defer parent.Close()
+ if err:=parent.PersistGenesis(ctx,g,b);err!=nil{t.Fatal(err)}
+ if err:=parent.BootstrapClock(ctx,g,b);err!=nil{t.Fatal(err)}
+ if err:=parent.BootstrapGenesisTriggers(ctx,g,b,nil);err!=nil{t.Fatal(err)}
+ l,err:=inputledger.New(ctx,g.RunID,b,parent);if err!=nil{t.Fatal(err)}
+ if err:=l.DeclareSource(inputledger.Source{ID:"unfinished"});err!=nil{t.Fatal(err)}
+ snap,err:=parent.CreateSnapshotV1(ctx,[32]byte(g.RunID),b,nil);if err!=nil{t.Fatal(err)}
+ child,err:=sqlite.Open(ctx,t.TempDir()+"/child.db");if err!=nil{t.Fatal(err)};defer child.Close()
+ id:=[32]byte(g.RunID);id[0]^=0x19
+ if _,err:=parent.ForkIdleSnapshotV1(ctx,[32]byte(g.RunID),snap.ID,id,child,b);err==nil{
+  t.Fatal("fork discarded declared but never final-closed source")
  }
 }

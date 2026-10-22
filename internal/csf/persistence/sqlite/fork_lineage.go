@@ -113,6 +113,11 @@ func validateForkLineageTx(ctx context.Context,tx *sql.Tx,child *genesis.Genesis
   actual:=[]any{name,uint64(len(records)),digest[:]}
   if !sameCanonical(cursors[i],actual){return fmt.Errorf("origin immutable %s prefix changed",name)}
  }
+ // Every migrated V2 communication requires an independently rederived
+ // child Claim/Transmission/due and an exact archived V1 send proof.
+ if err:=verifyAllV2ImportsTx(ctx,tx,run,bundle);err!=nil{
+  return fmt.Errorf("fork V2 imported birth verification: %w",err)
+ }
  // A child ledger must not contain the parent history: post-fork event,
  // input and causal identities are always derived in the child run.
  return nil

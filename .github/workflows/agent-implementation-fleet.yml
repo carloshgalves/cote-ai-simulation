@@ -198,9 +198,11 @@ jobs:
           CP1: ${{ steps.checkpoint1.outcome }}
           CP2: ${{ steps.checkpoint2.outcome }}
         run: |
-          echo "## Agent fleet Issue #$ISSUE" >> "$GITHUB_STEP_SUMMARY"
-          echo "Agent sessions: $A1, $A2; checkpoints: $CP1, $CP2" >> "$GITHUB_STEP_SUMMARY"
-          echo "Branch: agent/fleet/issue-$ISSUE. Code requires actual tests and independent review." >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "## Agent fleet Issue #$ISSUE"
+            echo "Agent sessions: $A1, $A2; checkpoints: $CP1, $CP2"
+            echo "Branch: agent/fleet/issue-$ISSUE. Code requires actual tests and independent review."
+          } >> "$GITHUB_STEP_SUMMARY"
           if [[ "$A1" != success || "$CP1" != success || ( "$A2" != skipped && ( "$A2" != success || "$CP2" != success ) ) ]]; then
             echo "::error::Incomplete or failed worker; inspect checkpoint branch, do not merge"
             exit 1

@@ -164,7 +164,7 @@ type DeliveryResult struct{
 // occurrence and an authenticated fixed channel result. It never uses
 // worker elapsed time, opens EventStore or directly writes recipient inbox.
 func PlanDueDelivery(bundle *policy.Bundle,txRecord,claimRecord ports.CanonicalRecord,
- dueOccurrence domain.ID,dueAt,now domain.SimulationInstant,delivered bool)(DeliveryResult,error){
+ dueOccurrence domain.ID,dueAt,now domain.SimulationInstant)(DeliveryResult,error){
  var zero DeliveryResult
  transmission,err:=AuthenticateTransmission(bundle,txRecord);if err!=nil{return zero,err}
  claim,err:=AuthenticateClaim(bundle,claimRecord);if err!=nil{return zero,err}
@@ -182,6 +182,8 @@ func PlanDueDelivery(bundle *policy.Bundle,txRecord,claimRecord ports.CanonicalR
  if claim.AssertedBy!=transmission.ActualSender||claim.AssertedAt!=transmission.SentAt{
   return zero,errors.New("authoritative claim author/time mismatch")
  }
+ delivered,err:=registeredChannelResult(transmission.Channel)
+ if err!=nil{return zero,err}
  if !delivered{return DeliveryResult{EventType:"communication.delivery_failed",NextStatus:2},nil}
  notice:=DeliveryNotice{Recipient:transmission.Recipient,PresentedSender:transmission.PresentedSender,
   ClaimID:claim.ID,Proposition:claim.Proposition,At:now,Channel:transmission.Channel}

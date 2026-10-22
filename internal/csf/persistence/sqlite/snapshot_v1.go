@@ -11,7 +11,6 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
@@ -290,7 +289,7 @@ func (s *Store) CreateSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bund
  if _,err:=tx.ExecContext(ctx,"UPDATE clock_states SET canonical=canonical WHERE run_id=?",run[:]);err!=nil{return zero,err}
  var raw []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",run[:]).Scan(&raw);err!=nil{return zero,err}
- g,err:=genesis.ValidateCanonical(raw,b);if err!=nil{return zero,err}
+ g,err:=validatedGenesisTx(ctx,tx,run,b);if err!=nil{return zero,err}
  if [32]byte(g.RunID)!=run{return zero,errors.New("snapshot genesis run mismatch")}
  var clockRaw []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",run[:]).Scan(&clockRaw);err!=nil{return zero,err}

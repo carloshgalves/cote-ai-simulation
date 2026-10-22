@@ -125,6 +125,8 @@ def restore(worktree: Path, destination: Path, roots: list[str]) -> None:
     # Preflight every destination path before writing any untrusted data.
     for name in expected:
         path = worktree.joinpath(*PurePosixPath(name).parts)
+        if path.is_symlink():
+            raise ValueError("Refusing destination symlink")
         if not path.resolve().is_relative_to(worktree):
             raise ValueError("Destination escapes worktree")
         for parent in list(path.parents):

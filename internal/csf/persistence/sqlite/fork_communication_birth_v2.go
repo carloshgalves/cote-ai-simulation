@@ -258,6 +258,43 @@ func verifyAllV2ImportsTx(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.
  for rows.Next(){var raw []byte;if err:=rows.Scan(&raw);err!=nil{rows.Close();return err};if len(raw)!=32{rows.Close();return errors.New("bad V2 migration ID")};var id [32]byte;copy(id[:],raw);ids=append(ids,id)}
  if err:=rows.Err();err!=nil{rows.Close();return err}
  if err:=rows.Close();err!=nil{return err}
- for _,key:=range ids{if err:=validateV2ImportedBirthTx(ctx,tx,run,key,b);err!=nil{return err}}
+ proofIDs:=map[[32]byte]bool{}
+ for _,key:=range ids{
+  if proofIDs[key]{return errors.New("duplicate V2 imported birth identity")}
+  proofIDs[key]=true
+  if err:=validateV2ImportedBirthTx(ctx,tx,run,key,b);err!=nil{return err}
+ }
+ // Cross-check both directions. If an attacker drops the import receipt but
+ // leaves its child Transmission/Claim/due live, merely iterating the
+ // surviving proofs would incorrectly declare replay healthy.
+ rows,err=tx.QueryContext(ctx,
+  "SELECT id,sent_commit_id FROM communication_transmissions WHERE run_id=? ORDER BY id",
+  run[:])
+ if err!=nil{return err}
+ type activeTransmission struct{id,sent [32]byte}
+ var live []activeTransmission
+ for rows.Next(){
+  var idRaw,sentRaw []byte
+  if err:=rows.Scan(&idRaw,&sentRaw);err!=nil{rows.Close();return err}
+  if len(idRaw)!=32||len(sentRaw)!=32{rows.Close();return errors.New("V2 transmission SQL identity malformed")}
+  var item activeTransmission
+  copy(item.id[:],idRaw);copy(item.sent[:],sentRaw)
+  live=append(live,item)
+ }
+ if err:=rows.Err();err!=nil{rows.Close();return err}
+ if err:=rows.Close();err!=nil{return err}
+ for _,item:=range live{
+  var localCommit int
+  if err:=tx.QueryRowContext(ctx,
+   "SELECT count(*) FROM committed_cycles WHERE run_id=? AND commit_id=?",
+   run[:],item.sent[:]).Scan(&localCommit);err!=nil{return err}
+  imported:=proofIDs[item.id]
+  if localCommit==0&&!imported{
+   return errors.New("V2 transmission lacks both local send and imported historical birth")
+  }
+  if localCommit!=0&&imported{
+   return errors.New("V2 transmission has conflicting local and imported send births")
+  }
+ }
  return nil
 }

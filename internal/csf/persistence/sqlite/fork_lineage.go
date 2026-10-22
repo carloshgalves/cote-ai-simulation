@@ -128,7 +128,12 @@ func rejectForkFinalSourceReopening(ctx context.Context,tx *sql.Tx,run [32]byte,
   var raw []byte
   if err:=rows.Scan(&raw);err!=nil{return err}
   value,err:=codec.StrictDecodePayload(raw)
-  if err!=nil{continue} // envelope receipts are not SourceClosure records
+  if err!=nil{
+   // A valid enveloped ingress receipt cannot be a SourceClosure. Corrupt
+   // archived bytes must not disable the final-source guard.
+   if _,envelopeErr:=codec.StrictDecodeEnvelope(raw);envelopeErr==nil{continue}
+   return fmt.Errorf("fork history corrupt while guarding source finality: %w",err)
+  }
   f,ok:=value.([]any)
   if !ok||len(f)!=7{continue}
   name,ok:=f[2].(string);if !ok||name!=source{continue}

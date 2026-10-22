@@ -4,6 +4,7 @@ import (
  "bytes"
  "context"
  "database/sql"
+ "fmt"
  "testing"
  _ "modernc.org/sqlite"
 
@@ -435,5 +436,54 @@ func TestCSFRV18SnapshotDeterministicAcrossWorkerAndTriggerOrder(t *testing.T){
   if !bytes.Equal(baseline,snap.Canonical)||baseDigest!=snap.Digest{
    t.Fatalf("same semantic run changed snapshot bytes under trigger permutation %d",seed)
   }
+ }
+}
+
+func TestCSFRV18ContinuousVersusReopenedDeliverySnapshotByteEquivalence(t *testing.T){
+ ctx:=context.Background()
+ var baseline []byte
+ for mode:=0;mode<4;mode++{
+  t.Run(fmt.Sprintf("reopen-after-step-%d",mode),func(t *testing.T){
+   c,store,ledger,cycle,fence,path:=communicationFixture(t)
+   _,_,_,_,_,run:=ledger.Snapshot()
+   if _,err:=c.CommitCommunicationSend(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+   initial,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
+   if err!=nil{t.Fatal(err)}
+   reopen:=func(){
+    fresh,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+    t.Cleanup(func(){fresh.Close()})
+    restored,err:=inputledger.New(ctx,run,c.bundle,fresh);if err!=nil{t.Fatal(err)}
+    c=New(fresh,c.bundle,c.admissionPolicies)
+    store=fresh
+    ledger=restored
+    if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),initial.ID,c.bundle);err!=nil{
+     t.Fatal("snapshot+tail proof diverged after independent SQLite reopen:",err)
+    }
+   }
+   if mode==1{reopen()}
+   advanced,err:=c.Advance(ctx,ledger,run);if err!=nil{t.Fatal(err)}
+   if mode==2{reopen()}
+   state:=advanced.ResultClock
+   pending,err:=store.PendingClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+   plan,ok,err:=clock.Next(state,pending);if err!=nil||!ok||plan.Kind!=clock.Work{t.Fatal("due work missing",err)}
+   cycleID,_,err:=identity.New(c.bundle).Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+    []any{run[:],[]any{int64(state.Instant),uint64(plan.OriginOrdinal)}})
+   if err!=nil{t.Fatal(err)}
+   _,worldHash,err:=store.LoadWorldState(ctx,uint64(state.Revision));if err!=nil{t.Fatal(err)}
+   due:=admission.Cycle{ID:domain.ID(cycleID),Attempt:0,Instant:state.Instant,
+    Ordinal:plan.OriginOrdinal,BaseRevision:state.Revision,BaseStateHash:domain.Digest(worldHash),
+    RetryRef:[]any{uint64(0)}}
+   dueFence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).
+    AdmitThenEvaluate(ctx,c.bundle,ledger,due,c.admissionPolicies,nil)
+   if err!=nil{t.Fatal(err)}
+   if mode==3{reopen()}
+   if _,err:=c.CommitCommunicationDue(ctx,ledger,due,dueFence);err!=nil{t.Fatal(err)}
+   finished,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
+   if err!=nil{t.Fatal(err)}
+   if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),finished.ID,c.bundle);err!=nil{t.Fatal(err)}
+   if mode==0{baseline=bytes.Clone(finished.Canonical)}else if !bytes.Equal(baseline,finished.Canonical){
+    t.Fatal("continuous and restarted delivery produced divergent canonical snapshot/ledger prefix")
+   }
+  })
  }
 }

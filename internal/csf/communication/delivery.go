@@ -64,7 +64,7 @@ func AuthenticateClaim(bundle *policy.Bundle,record ports.CanonicalRecord)(Verif
  decoded,err:=codec.StrictDecodePayload(record.Canonical);if err!=nil{return zero,err}
  f,ok:=decoded.([]any);if !ok||len(f)!=10{return zero,errors.New("Claim shape invalid")}
  if !bytes.Equal(rawBytes(f[0]),record.Identity[:]){return zero,errors.New("Claim identity bytes wrong")}
- origin,ok:=asRef(f[1]);if !ok{return zero,errors.New("Claim origin invalid")}
+ _,ok=asRef(f[1]);if !ok{return zero,errors.New("Claim origin invalid")}
  role,roleOK:=f[2].(uint64);ordinal,ordinalOK:=f[3].(uint64)
  if !roleOK||!ordinalOK||role>65535||ordinal>4294967295{return zero,errors.New("Claim role invalid")}
  proposition,ok:=f[4].([]any);if !ok||len(proposition)!=4{return zero,errors.New("Proposition malformed")}

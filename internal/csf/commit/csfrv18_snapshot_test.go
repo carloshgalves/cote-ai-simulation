@@ -761,7 +761,8 @@ func TestCSFRV18HaltedNeverAutoResumesOnReconnect(t *testing.T){
 
 func TestCSFRV18ResumeRunnerDispatchesFrozenTerminalWithoutResampling(t *testing.T){
  ctx:=context.Background()
- previous,store,_,fence,run,cycle,path:=abortFixture(t)
+ previous,store,original,cycle,fence,path:=twoResourceContestFixtureWithSystem(t,false,true,true)
+ _,_,_,_,_,run:=original.Snapshot()
  snapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(run),previous.bundle,nil)
  if err!=nil{t.Fatal(err)}
  restarted,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer restarted.Close()
@@ -770,10 +771,10 @@ func TestCSFRV18ResumeRunnerDispatchesFrozenTerminalWithoutResampling(t *testing
  ran:=0
  handler:=func(ctx context.Context,actual *inputledger.Ledger,c admission.Cycle,f admission.Fence)(ports.CanonicalRecord,error){
   ran++
-  if c.ID!=cycle||f.ID!=fence.ID||!bytes.Equal(f.Canonical,fence.Canonical){
+  if c.ID!=cycle.ID||f.ID!=fence.ID||!bytes.Equal(f.Canonical,fence.Canonical){
    t.Fatal("resume runner substituted a different cycle/fence")
   }
-  return resumed.CommitNoProposal(ctx,actual,c,f)
+  return resumed.CommitTwoResourceContest(ctx,actual,c,f)
  }
  if _,err:=resumed.ResumeRunV1(ctx,ledger,[32]byte(run),snapshot.ID,nil);err==nil{
   t.Fatal("runner executed perception or fence without terminal handler")

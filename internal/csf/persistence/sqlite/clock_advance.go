@@ -21,9 +21,10 @@ import (
 
 func (s *Store) BootstrapClock(ctx context.Context, manifest *genesis.Genesis, bundle *policy.Bundle) error {
  if manifest==nil||bundle==nil{return errors.New("verified genesis and bundle required")}
- verified,err:=genesis.ValidateCanonical(manifest.CanonicalBytes,bundle)
+ verified,err:=s.ValidatedGenesis(ctx,[32]byte(manifest.RunID),bundle)
  if err!=nil{return err}
- if verified.RunID!=manifest.RunID||verified.ID!=manifest.ID{return errors.New("genesis identity mismatch")}
+ if verified.RunID!=manifest.RunID||verified.ID!=manifest.ID||
+  !bytes.Equal(verified.CanonicalBytes,manifest.CanonicalBytes){return errors.New("genesis identity or canonical bytes mismatch")}
  state:=clock.State{Instant:verified.InitialInstant,LastOrdinal:-1}
  encoded,err:=clock.Encode(state);if err!=nil{return err}
  typed,ok:=verified.Payload[16].([]any)

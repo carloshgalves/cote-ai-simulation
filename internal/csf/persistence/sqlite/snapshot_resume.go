@@ -57,7 +57,9 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  }
  var genesisRaw,clockRaw,worldRaw,worldHash,controlRaw []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",run[:]).Scan(&genesisRaw);err!=nil{return zero,err}
- g,err:=genesisValidateForSnapshot(genesisRaw,b);if err!=nil{return zero,err}
+ gVerified,err:=validatedGenesisTx(ctx,tx,run,b);if err!=nil{return zero,err}
+ g:=snapshotGenesis{ID:[32]byte(gVerified.ID),Digest:[32]byte(gVerified.Digest),
+  Seed:gVerified.WorldSeed,Policies:gVerified.Payload[14],InitialInstant:int64(gVerified.InitialInstant)}
  if !equalBytes(all[8],g.Seed[:])||!sameCanonical(all[9],[]any{g.ID[:],g.Digest[:]})||!sameCanonical(all[10],g.Policies){
   return zero,errors.New("snapshot genesis or policy refs mismatch")
  }

@@ -62,6 +62,15 @@ func migrateGenesisPendingTriggers(ctx context.Context,s *Store,
   if err!=nil||state.DefinitionID!=def.ID||state.Version!=def.Version{
    return result,errors.New("fork trigger runtime incompatible with source definition")
   }
+  expected,err:=trigger.Evaluate(def,
+   trigger.Runtime{DefinitionID:def.ID,Version:def.Version,Armed:true},
+   child.InitialInstant,0,trigger.PredicateValue(def,child.InitialInstant),nil)
+  if err!=nil{return result,err}
+  initialRaw,err:=trigger.RuntimeBytes(expected.Runtime)
+  if err!=nil{return result,err}
+  if !bytes.Equal(initialRaw,raw){
+   return result,errors.New("fork would transplant evolved trigger runtime without its causal transition")
+  }
   digest:=item.DefinitionDigest
   result.Definitions=append(result.Definitions,forkTriggerDefinition{
    ID:[32]byte(def.ID),Canonical:bytes.Clone(item.DefinitionCanonical),

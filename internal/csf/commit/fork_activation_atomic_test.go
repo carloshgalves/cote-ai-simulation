@@ -55,3 +55,25 @@ func TestCSFRV18ForkGenesisActivationFailureIsAtomic(t *testing.T) {
   t.Fatal("failed fork changed archived parent:",err)
  }
 }
+
+func TestCSFRV18ForkRejectsEvolvedTriggerWithoutTransitionMigrator(t *testing.T) {
+ ctx:=context.Background()
+ c,source,ledger,run,bundle,_:=testFixture(t,activeTrigger())
+ if _,err:=c.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
+ checkpoint,err:=source.CreateSnapshotV1(ctx,[32]byte(run),bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ childPath:=t.TempDir()+"/evolved-child.db"
+ child,err:=sqlite.Open(ctx,childPath);if err!=nil{t.Fatal(err)}
+ defer child.Close()
+ forkRun:=[32]byte(run);forkRun[0]^=0x45
+ if _,err:=source.ForkIdleSnapshotV1(ctx,[32]byte(run),checkpoint.ID,forkRun,child,bundle);err==nil{
+  t.Fatal("fork silently transplanted post-Genesis trigger runtime")
+ }
+ direct,err:=sql.Open("sqlite",childPath);if err!=nil{t.Fatal(err)}
+ defer direct.Close()
+ for _,table:=range []string{"genesis_records","fork_lineage","trigger_runtime","trigger_activations"}{
+  var n int
+  if err:=direct.QueryRowContext(ctx,"SELECT count(*) FROM "+table).Scan(&n);err!=nil{t.Fatal(err)}
+  if n!=0{t.Fatalf("unsupported trigger migration partially published %s",table)}
+ }
+}

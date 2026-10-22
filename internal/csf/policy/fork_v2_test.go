@@ -1,6 +1,7 @@
 package policy
 
 import (
+ "bytes"
  "os"
  "path/filepath"
  "testing"
@@ -38,7 +39,17 @@ func TestCSFRV18V2RejectsTamperedTransitionAndContractVectors(t *testing.T){
     if entry.IsDir(){continue}
     raw,err:=os.ReadFile(filepath.Join(v2BundlePath,entry.Name()))
     if err!=nil{t.Fatal(err)}
-    if entry.Name()==name{raw=append(raw,' ')}
+    if entry.Name()==name{
+     if name=="BUNDLE.sha256"{
+      needle:=[]byte("codec_policy_hash ")
+      offset:=bytes.Index(raw,needle)
+      if offset<0{t.Fatal("receipt missing policy hash")}
+      raw[offset+len(needle)]='0'
+      if raw[offset+len(needle)]=='0'&&string(raw[offset+len(needle):offset+len(needle)+1])=="0" {
+       raw[offset+len(needle)]='f'
+      }
+     }else{raw=append(raw,' ')}
+    }
     if err:=os.WriteFile(filepath.Join(dir,entry.Name()),raw,0600);err!=nil{t.Fatal(err)}
    }
    if _,err:=LoadV2(dir);err==nil{

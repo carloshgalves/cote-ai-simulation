@@ -48,3 +48,17 @@
 6. **RESOLVED-06 — SNAPSHOT V1 DE UMA REVISÃO:** preservada a identidade normativa [run, version, revision], sem reemitir um segundo snapshot diferente na mesma revisão. O checkpoint imutável mais os tails autenticados de fence/abort/retry/percepção reproduzem pontos de crash na mesma revisão; tentativa de sobrescrever o snapshot original falha fechado. Um futuro schema V2 é necessário somente para múltiplos snapshots físicos distintos da mesma revisão.
 
 Os findings ainda marcados OPEN (01, 02, 04 e 05) não podem ser mascarados por CI verde. Não é válido afirmar “zero findings”, concluir ticket ou realizar merge antes da resolução com evidência nova.
+
+
+## R10 — continuidade adversarial: migradores, política histórica e destino limpo
+
+**Verificação de execução:** a suíte completa estava aprovada no HEAD anterior `f5f002fd3030be7d041d41308cc00ee8c05f7bcc`. As alterações R10 posteriores adicionaram provas e guards; só poderão ser consideradas aceitas depois de cinco workflows verdes no **novo** HEAD, incluindo `TestCSFRV18*`, race e regressão completa. Nunca reutilizar o CI do HEAD antigo como evidência de R10.
+
+| Frente | Evidência nova | Limite explícito |
+| --- | --- | --- |
+| OPEN-01 | `InstalledPolicyRegistry` realiza lookup exato por `codec_policy_id` + `CodecPolicyHash`, e `ForkIdleSnapshotV1` autentica o CSFHREF através de `VerifyOriginWithResolver`. Testes rejeitam ausência, hash trocado, identidade futura não instalada e mutação. | **OPEN:** isso não disponibiliza política V2. Não existe bundle V2 normativo verificado, nem codec/reducer/schema/Genesis V2 executável ou migrador V1→V2; não proclamar suporte positivo cross-policy. |
+| OPEN-02 | Genesis-owned schedule/activation passam por migrador tipado e registries selados; runtime de trigger precisa ser reproduzível a partir do Genesis da filha. Tests de falha de gravação, sibling tail, identidade/roster e rollback; guard impede destino com outras autoridades preexistentes. | **OPEN:** Claim/Event-owned schedule, transmissão IN_TRANSIT, round/dispatch/resposta pendentes, controle in-flight, snapshots cognitivos e trigger evoluído não são migrados. Rejeição atômica é correta, não uma migração positiva. |
+| OPEN-04 | Executor `ResumeRegisteredWorkV1` seleciona handlers através do fence autenticado; provas de NoProposal, recurso/contest, sistema e comunicação em fases send/due. | Código implementado; revisão independente do dispatcher e suite no HEAD atual ainda necessárias antes de mudar o finding para RESOLVED. |
+| OPEN-05 | Cenário misto inclui permutações, recuperação, sete crash points adicionais e comparação dos cinco ledgers; novo teste injeta corrupção por ledger e exige rejeição/reversibilidade. | Resultado de R10/novas mutações ainda depende da suíte final e da matriz transições pós-fork/dispatch pendentes. |
+
+**Invariantes não negociáveis:** prefixo parental permanece sob a policy original e não é rehashado; a filha recebe novos IDs e transações próprias; nunca converter um checkpoint epistemológico opaco em world truth; nenhum rollback publica metade de um fork; fonte/round/claim sem migrador versionado deve bloquear, nunca sumir. Mantenha Draft e os findings OPEN até evidência positiva concreta.

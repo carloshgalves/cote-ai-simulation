@@ -42,9 +42,11 @@ func (c *Coordinator) ResumeRunV1(ctx context.Context,ledger *inputledger.Ledger
  if !ok{return result,errors.New("resume requires a verifiable SQLite authority")}
  probe,err:=s.VerifySnapshotV1(ctx,run,snapshot,c.bundle)
  if err!=nil{return result,err}
- if handler==nil&&(probe.Action.Kind==sqlite.ResumeReexecuteFencedAttempt||
-  probe.Action.Kind==sqlite.ResumeFenceAuthorizedRetry||
-  probe.Action.Kind==sqlite.ResumeDrainPerception){
+ // Perception-only recovery at IDLE is a complete operation: no WORK
+ // terminal exists to dispatch, so requiring a handler would deadlock an
+ // otherwise valid outbox drain. Frozen WORK/retry states still require one
+ // before any mutation, even when perception must be drained first.
+ if handler==nil&&(probe.ControlStatus==1||probe.ControlStatus==2){
   return result,errors.New("resume requires a registered terminal handler before any mutation")
  }
  state,err:=s.DrainPendingPerceptionV1(ctx,run,snapshot,c.bundle)

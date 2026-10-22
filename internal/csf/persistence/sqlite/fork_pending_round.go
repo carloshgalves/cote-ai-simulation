@@ -68,7 +68,7 @@ func migrateGenesisPendingRounds(ctx context.Context, s *Store,
    return nil,errors.New("fork round origin is not authenticated parent Genesis")
   }
   instant,valid:=asSigned64(coordinate[0])
-  coordOrdinal,validOrdinal:=coordinate[1].(uint64)
+  _,validOrdinal:=coordinate[1].(uint64)
   if !valid||!validOrdinal||instant<int64(child.InitialInstant){
    return nil,errors.New("fork round eligibility precedes child Genesis clock")
   }

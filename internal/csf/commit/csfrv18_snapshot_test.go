@@ -738,3 +738,22 @@ func TestCSFRV18ReopenRetryFromVerifiedFrozenSemanticCut(t *testing.T){
   t.Fatal("snapshot cannot verify same-revision successor fence:",err)
  }
 }
+
+func TestCSFRV18HaltedNeverAutoResumesOnReconnect(t *testing.T){
+ ctx:=context.Background()
+ c,store,_,fence,run,cycle,path:=abortFixture(t)
+ if _,err:=c.Abort(ctx,run,cycle,fence,4,nil);err!=nil{t.Fatal(err)}
+ snapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
+ l,err:=inputledger.Open(ctx,run,c.bundle,reopened);if err!=nil{t.Fatal(err)}
+ runner:=New(reopened,c.bundle,c.admissionPolicies)
+ if _,_,_,err:=runner.ReopenFencedCycle(ctx,[32]byte(run),snapshot.ID);err==nil{
+  t.Fatal("halted run unlawfully reopened its aborted fence")
+ }
+ if _,_,_,err:=runner.ReopenAuthorizedRetry(ctx,l,[32]byte(run),snapshot.ID);err==nil{
+  t.Fatal("halted run without signed AttemptRetryRecord fabricated retry authority")
+ }
+ status,err:=reopened.LoadCycleControl(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ if status[0]!=uint64(3){t.Fatal("resume mutated HALTED_ON_ABORT into an executable status")}
+}

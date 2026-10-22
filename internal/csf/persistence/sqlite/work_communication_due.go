@@ -11,7 +11,6 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/communication"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 

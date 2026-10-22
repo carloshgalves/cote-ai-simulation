@@ -19,17 +19,25 @@ import (
 // validation; a framed but unresolved fork can never run.
 func (s *Store) ValidatedGenesis(ctx context.Context,run [32]byte,bundle *policy.Bundle)(*genesis.Genesis,error){
  if s==nil||bundle==nil{return nil,errors.New("genesis requires store and policy")}
- raw,err:=s.LoadGenesis(ctx,run);if err!=nil{return nil,err}
+ tx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true});if err!=nil{return nil,err}
+ defer tx.Rollback()
+ root,err:=validatedGenesisTx(ctx,tx,run,bundle);if err!=nil{return nil,err}
+ if err:=tx.Commit();err!=nil{return nil,err}
+ return root,nil
+}
+
+// validatedGenesisTx is safe within existing terminal or snapshot transactions,
+// avoiding nested locks when fork lineage needs the same SQLite read view.
+func validatedGenesisTx(ctx context.Context,tx *sql.Tx,run [32]byte,bundle *policy.Bundle)(*genesis.Genesis,error){
+ var raw []byte
+ if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",run[:]).Scan(&raw);err!=nil{return nil,err}
  if root,err:=genesis.ValidateCanonical(raw,bundle);err==nil{
   if [32]byte(root.RunID)!=run{return nil,errors.New("base Genesis run mismatch")}
   return root,nil
  }
  root,err:=genesis.ValidateForkCanonical(raw,bundle);if err!=nil{return nil,err}
  if [32]byte(root.RunID)!=run{return nil,errors.New("fork Genesis run mismatch")}
- tx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true});if err!=nil{return nil,err}
- defer tx.Rollback()
  if err:=validateForkLineageTx(ctx,tx,root,bundle);err!=nil{return nil,err}
- if err:=tx.Commit();err!=nil{return nil,err}
  return root,nil
 }
 

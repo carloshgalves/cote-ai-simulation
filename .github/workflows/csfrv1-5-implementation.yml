@@ -10,6 +10,11 @@ on:
       - "docs/tickets/csf-runtime-v1/05-implementation-checkpoint.md"
 permissions:
   contents: read
+
+# Cancel superseded SHA and duplicate push/PR checks for this branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 jobs:
   terminal:
     runs-on: ubuntu-latest

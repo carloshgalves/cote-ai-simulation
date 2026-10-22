@@ -28,7 +28,7 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  if sourceRun==childRun||childRun==([32]byte{}){return nil,errors.New("fork must allocate a new nonzero run ID")}
  resume,err:=s.VerifySnapshotV1(ctx,sourceRun,parentSnapshotID,b)
  if err!=nil{return nil,fmt.Errorf("fork source checkpoint replay: %w",err)}
- if resume.ControlStatus!=0{return nil,errors.New("fork source must be at an IDLE checkpoint")}
+ if resume.SnapshotControlStatus!=0{return nil,errors.New("fork origin checkpoint must be IDLE")}
  parent,err:=s.ValidatedGenesis(ctx,sourceRun,b)
  if err!=nil{return nil,err}
  if len(parent.Payload[4].([]any))!=1{
@@ -46,9 +46,30 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
   // Latest SourceClosure, settled slot responses and completed perception
   // receipts are historical proofs, not pending work. Keep them in the
   // frozen parent prefix rather than transplanting their run-bound IDs.
-  if i==3||i==6||i==9{continue}
+  if i==3||i==6||i==9||i==0{continue}
+  // An explicitly migrated genesis schedule contributes one pending input
+  // ref (kind=2) for each immutable occurrence. Unknown source kinds fail
+  // closed, rather than discarding the parent pending work.
+  if i==7{
+   pending,ok:=lists[0].([]any)
+   if !ok||len(items)!=len(pending){return nil,errors.New("fork pending input roster not fully supported")}
+   expected:=map[string]bool{}
+   for _,v:=range pending{
+    ref,ok:=v.([]any);if !ok||len(ref)!=3{return nil,errors.New("fork genesis ref malformed")}
+    id,ok:=ref[1].([]byte);if !ok||len(id)!=32{return nil,errors.New("fork genesis ref missing ID")}
+    expected[string(id)]=true
+   }
+   for _,v:=range items{
+    ref,ok:=v.([]any);if !ok||len(ref)!=3||ref[0]!=uint64(2){
+     return nil,errors.New("fork cannot rebind non-genesis pending input")
+    }
+    id,ok:=ref[1].([]byte)
+    if !ok||len(id)!=32||!expected[string(id)]{return nil,errors.New("fork pending input does not match genesis schedule")}
+   }
+   continue
+  }
   if len(items)!=0{
-   return nil,fmt.Errorf("fork requires an idle, migration-free pending partition %d",i)
+   return nil,fmt.Errorf("fork requires a versioned migrator for pending partition %d",i)
   }
  }
  // Every source declared in the historical input prefix must have a
@@ -111,6 +132,8 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  if err!=nil{return nil,err}
  childGenesis,err:=genesis.ValidateForkCanonical(canonical,b);if err!=nil{return nil,err}
  if [32]byte(childGenesis.RunID)!=childRun{return nil,errors.New("fork generated wrong run")}
+ migrated,err:=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,lists[0].([]any),b)
+ if err!=nil{return nil,err}
  // The parent workspace must remain verifiably immutable: copy the exact
  // members under a read transaction instead of trusting a worker's proposal.
  originTx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true});if err!=nil{return nil,err}
@@ -162,6 +185,12 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  emptyClock:=clock.State{Instant:childGenesis.InitialInstant,LastOrdinal:-1}
  clockRaw,err:=clock.Encode(emptyClock);if err!=nil{return nil,err}
  if _,err:=tx.ExecContext(ctx,"INSERT INTO clock_states(run_id,canonical) VALUES(?,?)",childRun[:],clockRaw);err!=nil{return nil,err}
+ for _,o:=range migrated{
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO scheduled_occurrences "+
+   "(id,run_id,eligibility_instant,eligibility_ordinal,lifecycle,canonical) VALUES(?,?,?,?,0,?)",
+   o.ID[:],childRun[:],o.EligibilityInstant,o.EligibilityOrdinal,o.Canonical);err!=nil{return nil,err}
+ }
+ if err:=ensureGenesisScheduleSeal(ctx,tx,childRun);err!=nil{return nil,err}
  world:=childGenesis.Payload[16].([]any)
  hash,ok:=world[3].([]byte);if !ok||len(hash)!=32{return nil,errors.New("fork world state hash missing")}
  revisionZero,err:=codec.CanonicalPayload([]any{uint64(0),world,hash,uint64(0),world,hash})

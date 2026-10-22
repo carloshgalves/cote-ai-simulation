@@ -13,7 +13,6 @@ import (
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
-    "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
@@ -130,8 +129,7 @@ func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,run
     cycleID,_,err:=deriver.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,[]any{runID[:],[]any{int64(plan.From),uint64(plan.OriginOrdinal)}})
     if err!=nil{return result,err}
     clockPlan,err:=clock.EncodePlan(plan);if err!=nil{return result,err}
-    initial,err:=c.store.LoadGenesis(ctx,[32]byte(runID));if err!=nil{return result,err}
-    g,err:=genesis.ValidateCanonical(initial,c.bundle);if err!=nil{return result,err}
+    g,err:=c.store.ValidatedGenesis(ctx,[32]byte(runID),c.bundle);if err!=nil{return result,err}
     if g.RunID!=runID{return result,errors.New("clock run ID differs from persisted genesis")}
     typed,baseHash,err:=c.store.LoadWorldState(ctx,uint64(state.Revision))
     if err!=nil{return result,err}

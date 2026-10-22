@@ -11,6 +11,11 @@ on:
       - ".github/workflows/csfrv1-8-continuity.yml"
 permissions:
   contents: read
+# Push and PR events for this topic branch should not spend runner minutes
+# running identical full suites. New commits supersede older validations.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 jobs:
   continuity:
     runs-on: ubuntu-latest

@@ -566,7 +566,10 @@ func TestCSFRV18SameRevisionFenceAbortRetryJournalTails(t *testing.T){
  if err!=nil{t.Fatal(err)}
  first,err:=store.VerifySnapshotV1(ctx,[32]byte(run),frozen.ID,coordinator.bundle)
  if err!=nil{t.Fatal(err)}
- if first.Action.Kind!=sqlite.ResumeReexecuteFencedAttempt{t.Fatal("initial snapshot was not an in-flight fence")}
+ if first.ControlStatus!=1||first.Action.FenceID!=[32]byte(fence.ID)||
+ (first.Action.Kind!=sqlite.ResumeReexecuteFencedAttempt&&first.Action.Kind!=sqlite.ResumeDrainPerception){
+  t.Fatal("initial snapshot lost its frozen in-flight fence or perception barrier")
+ }
  abort,err:=coordinator.Abort(ctx,run,cycle,fence,4,nil);if err!=nil{t.Fatal(err)}
  fromAbort,err:=store.VerifySnapshotV1(ctx,[32]byte(run),frozen.ID,coordinator.bundle)
  if err!=nil{t.Fatalf("valid same-revision abort tail rejected: %v",err)}
@@ -578,7 +581,8 @@ func TestCSFRV18SameRevisionFenceAbortRetryJournalTails(t *testing.T){
  reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
  fromRetry,err:=reopened.VerifySnapshotV1(ctx,[32]byte(run),frozen.ID,coordinator.bundle)
  if err!=nil{t.Fatalf("same-revision retry tail failed restart: %v",err)}
- if fromRetry.TailCommits!=0||fromRetry.Action.Kind!=sqlite.ResumeFenceAuthorizedRetry{
+ if fromRetry.TailCommits!=0||fromRetry.ControlStatus!=2||
+ (fromRetry.Action.Kind!=sqlite.ResumeFenceAuthorizedRetry&&fromRetry.Action.Kind!=sqlite.ResumeDrainPerception){
   t.Fatalf("same-revision retry changed causal state or reopened work: %+v",fromRetry)
  }
  if _,err:=reopened.CreateSnapshotV1(ctx,[32]byte(run),coordinator.bundle,nil);err==nil{

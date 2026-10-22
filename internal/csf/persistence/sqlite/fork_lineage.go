@@ -59,12 +59,14 @@ func validateForkLineageTx(ctx context.Context,tx *sql.Tx,child *genesis.Genesis
   return errors.New("Genesis parent ref differs from archived lineage")
  }
  reference,err:=fork.Decode(refRaw);if err!=nil{return err}
- if reference.OriginPolicyHash!=bundle.CodecPolicyHash||!bytes.Equal(originHash,bundle.CodecPolicyHash[:]){
-  return errors.New("fork origin codec not available under pinned same-policy runtime")
+ origin,err:=bundle.ResolveHistoricalOrigin(reference.OriginPolicyID,reference.OriginPolicyHash)
+ if err!=nil{return fmt.Errorf("fork origin not installed by a verified manifest: %w",err)}
+ if reference.OriginPolicyHash!=origin.CodecPolicyHash||!bytes.Equal(originHash,origin.CodecPolicyHash[:]){
+  return errors.New("fork origin codec differs from exact installed historical bundle")
  }
- // Origin's own policy is used, never the child's guessed digest algorithm.
- if err:=fork.VerifyOriginSnapshot(reference,parentSnapshotRaw,bundle);err!=nil{return err}
- parent,err:=genesis.ValidateCanonical(parentGenesisRaw,bundle)
+ // Always authenticate old snapshot and Genesis with their OWN policy.
+ if err:=fork.VerifyOriginSnapshot(reference,parentSnapshotRaw,origin);err!=nil{return err}
+ parent,err:=genesis.ValidateCanonical(parentGenesisRaw,origin)
  if err!=nil{return fmt.Errorf("origin Genesis requires missing lineage resolver: %w",err)}
  if !bytes.Equal(parent.RunID[:],parentRun){return errors.New("fork origin Genesis run mismatch")}
  snapValue,err:=codec.StrictDecodePayload(parentSnapshotRaw);if err!=nil{return err}
@@ -79,7 +81,7 @@ func validateForkLineageTx(ctx context.Context,tx *sql.Tx,child *genesis.Genesis
   return errors.New("fork initial world, epistemic refs or instant differ from sealed parent")
  }
  rev,ok:=snap[3].(uint64);if !ok{return errors.New("fork origin revision invalid")}
- snapID,_,err:=identity.New(bundle).Sum("cote.csf.id.snapshot","cote.csf.schema.snapshot-id-preimage",1,
+ snapID,_,err:=identity.New(origin).Sum("cote.csf.id.snapshot","cote.csf.schema.snapshot-id-preimage",1,
   []any{parentRun,uint64(1),rev})
  if err!=nil{return err}
  if !bytes.Equal(parentSnapshotID,snapID[:]){return errors.New("origin snapshot reference is not ID-bound")}
@@ -105,7 +107,7 @@ func validateForkLineageTx(ctx context.Context,tx *sql.Tx,child *genesis.Genesis
   }
   if err:=rows.Err();err!=nil{rows.Close();return err}
   if err:=rows.Close();err!=nil{return err}
-  digest,_,err:=identity.New(bundle).Sum("cote.csf.digest.ledger-prefix",
+  digest,_,err:=identity.New(origin).Sum("cote.csf.digest.ledger-prefix",
    "cote.csf.schema.ledger-prefix-digest-preimage",1,[]any{name,records})
   if err!=nil{return err}
   actual:=[]any{name,uint64(len(records)),digest[:]}

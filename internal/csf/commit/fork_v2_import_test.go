@@ -9,6 +9,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/communication"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  _ "modernc.org/sqlite"
@@ -54,6 +55,13 @@ func TestCSFRV18V2ForkImportsInTransitAsChildOwnedAuthorities(t *testing.T){
  csfrv18SettleSendOutbox(t,source,c.bundle,sourcePath)
  clockState,err:=source.LoadClock(ctx,[32]byte(run))
  if err!=nil{t.Fatal(err)}
+ // The original fixture leaves its exogenous driver intentionally open;
+ // a fork must not lose that capability. Explicitly seal a newer FINAL
+ // SourceClosure with a distinct producer key before exporting the cut.
+ if _,err:=ledger.CloseSource(ctx,"driver",inputledger.Closure{
+  ProducerKey:"v2-fork-final",ClosedThrough:domain.EligibilityCoordinate{
+   NotBeforeInstant:clockState.Instant+1000},Final:true,
+ });err!=nil{t.Fatal("finalize imported external source:",err)}
  checkpoints:=csfrv18SyntheticActorCheckpoints(t,sourcePath,clockState.Instant,int64(clockState.Revision))
  if len(checkpoints)==0{t.Fatal("no source cognitive actor to migrate")}
  snap,err:=source.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,checkpoints)
@@ -109,6 +117,13 @@ func TestCSFRV18V2ForkImportFaultRollsBackEveryChildTable(t *testing.T){
  csfrv18SettleSendOutbox(t,source,c.bundle,sourcePath)
  clockState,err:=source.LoadClock(ctx,[32]byte(run))
  if err!=nil{t.Fatal(err)}
+ // The original fixture leaves its exogenous driver intentionally open;
+ // a fork must not lose that capability. Explicitly seal a newer FINAL
+ // SourceClosure with a distinct producer key before exporting the cut.
+ if _,err:=ledger.CloseSource(ctx,"driver",inputledger.Closure{
+  ProducerKey:"v2-fork-final",ClosedThrough:domain.EligibilityCoordinate{
+   NotBeforeInstant:clockState.Instant+1000},Final:true,
+ });err!=nil{t.Fatal("finalize imported external source:",err)}
  checkpoints:=csfrv18SyntheticActorCheckpoints(t,sourcePath,clockState.Instant,int64(clockState.Revision))
  if len(checkpoints)==0{t.Fatal("no source cognitive actor to migrate")}
  snap,err:=source.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,checkpoints)

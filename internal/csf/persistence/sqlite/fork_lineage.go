@@ -8,6 +8,7 @@ import (
  "fmt"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/fork"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -80,6 +81,32 @@ func validateForkLineageTx(ctx context.Context,tx *sql.Tx,child *genesis.Genesis
   !sameCanonical(child.Payload[3],snap[2]){
   return errors.New("fork initial world, epistemic refs or instant differ from sealed parent")
  }
+ if id,_,_,_,err:=bundle.CodecIdentity();err!=nil{return err}else if id==policy.CodecPolicyV2ID{
+  // The exact signed parent checkpoint roster is the sole authority for
+  // which opaque cognitive actors survive the migration. A child may not
+  // drop or invent a memory owner even if the world-state hash still matches.
+  expected:=map[string]bool{}
+  entries,ok:=snap[14].([]any)
+  if !ok{return errors.New("V2 cognition snapshot roster malformed")}
+  for _,raw:=range entries{
+   f,ok:=raw.([]any)
+   if !ok||len(f)!=8{return errors.New("V2 checkpoint tuple malformed")}
+   actor,ok:=f[0].([]any)
+   if !ok||len(actor)!=2{return errors.New("V2 checkpoint actor malformed")}
+   ns,okNS:=actor[0].(string);name,okName:=actor[1].(string)
+   if !okNS||!okName||domain.ValidateMachineID(ns)!=nil||domain.ValidateMachineID(name)!=nil{
+    return errors.New("V2 checkpoint actor invalid")
+   }
+   key:=ns+"\x00"+name
+   if expected[key]{return errors.New("V2 repeated imported cognitive actor")}
+   expected[key]=true
+  }
+  actual,err:=snapshotCognitiveActorRoster(ctx,tx,run,nil)
+  if err!=nil{return err}
+  if len(expected)!=len(actual){return errors.New("V2 cognitive owner roster differs from parent checkpoint")}
+  for key:=range expected{if !actual[key]{return errors.New("V2 imported cognitive owner missing")}}
+ }
+
  rev,ok:=snap[3].(uint64);if !ok{return errors.New("fork origin revision invalid")}
  snapID,_,err:=identity.New(origin).Sum("cote.csf.id.snapshot","cote.csf.schema.snapshot-id-preimage",1,
   []any{parentRun,uint64(1),rev})

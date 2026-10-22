@@ -400,7 +400,8 @@ func TestCSFRV18ForkCanArchiveFinalSourceClosureWithoutReopeningIngress(t *testi
  if _,err:=ledger.CloseSource(ctx,"closed-origin",inputledger.Closure{
   ProducerKey:"last-closure",ClosedThrough:at,Final:true});err!=nil{t.Fatal(err)}
  origin,err:=source.CreateSnapshotV1(ctx,[32]byte(g.RunID),bundle,nil);if err!=nil{t.Fatal(err)}
- child,err:=sqlite.Open(ctx,t.TempDir()+"/child.db");if err!=nil{t.Fatal(err)};defer child.Close()
+ childPath:=t.TempDir()+"/child.db"
+ child,err:=sqlite.Open(ctx,childPath);if err!=nil{t.Fatal(err)};defer child.Close()
  id:=[32]byte(g.RunID);id[0]^=0x71
  if _,err:=source.ForkIdleSnapshotV1(ctx,[32]byte(g.RunID),origin.ID,id,child,bundle);err!=nil{
   t.Fatalf("terminal source closure is historical, not pending work: %v",err)
@@ -408,5 +409,11 @@ func TestCSFRV18ForkCanArchiveFinalSourceClosureWithoutReopeningIngress(t *testi
  if _,err:=child.ReplayClock(ctx,id,bundle);err!=nil{t.Fatal(err)}
  if _,err:=source.VerifySnapshotV1(ctx,[32]byte(g.RunID),origin.ID,bundle);err!=nil{
   t.Fatal("fork modified immutable parental source history",err)
+ }
+ childRaw,err:=sql.Open("sqlite",childPath);if err!=nil{t.Fatal(err)};defer childRaw.Close()
+ if _,err:=childRaw.ExecContext(ctx,
+  "UPDATE fork_history_records SET canonical=x'01' WHERE child_run=? AND ledger_name='input_ledger' AND ordinal=0",id[:]);err!=nil{t.Fatal(err)}
+ if _,err:=child.ValidatedGenesis(ctx,id,bundle);err==nil{
+  t.Fatal("tampered historical parent prefix was accepted by child fork")
  }
 }

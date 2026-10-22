@@ -791,3 +791,65 @@ func TestCSFRV18ResumeRunnerDispatchesFrozenTerminalWithoutResampling(t *testing
   t.Fatal("resumed terminal did not persist an independently replayable journal:",err)
  }
 }
+
+func TestCSFRV18ResourceContestTriggerScheduleContinuityCrashMatrix(t *testing.T){
+ ctx:=context.Background()
+ var expectedSnapshot,expectedLedger []byte
+ for _,mode:=range []struct{name string;reverse bool;reopen bool;crash uint8}{
+  {"continuous",false,false,0},
+  {"reopened",false,true,0},
+  {"reverse-workers",true,true,0},
+  {"crash-before-journal",false,true,1},
+  {"crash-mid-terminal",true,true,4},
+  {"crash-near-terminal",false,true,7},
+ }{
+  t.Run(mode.name,func(t *testing.T){
+   c,store,ledger,cycle,fence,path:=twoResourceContestFixtureWithSystem(t,mode.reverse,true,true)
+   _,_,_,_,_,run:=ledger.Snapshot()
+   saved,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
+   if err!=nil{t.Fatal("joint scenario pre-commit checkpoint:",err)}
+   if mode.crash!=0{
+    c.failAfterStep=mode.crash
+    if _,err:=c.CommitTwoResourceContest(ctx,ledger,cycle,fence);err==nil{
+     t.Fatal("failure injection did not roll back atomic contest/trigger/occurrence")
+    }
+    c.failAfterStep=0
+   }
+   if mode.reopen{
+    fresh,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+    defer fresh.Close()
+    opened,err:=inputledger.Open(ctx,run,c.bundle,fresh);if err!=nil{t.Fatal(err)}
+    coordinator:=New(fresh,c.bundle,c.admissionPolicies)
+    handler:=func(ctx context.Context,ledger *inputledger.Ledger,
+     cy admission.Cycle,fr admission.Fence)(ports.CanonicalRecord,error){
+     return coordinator.CommitTwoResourceContest(ctx,ledger,cy,fr)
+    }
+    recovered,err:=coordinator.ResumeRunV1(ctx,opened,[32]byte(run),saved.ID,handler)
+    if err!=nil{t.Fatal("snapshot + terminal recovery:",err)}
+    if !recovered.Continued||recovered.Cycle.ID!=cycle.ID||
+     !bytes.Equal(recovered.Fence.Canonical,fence.Canonical){
+     t.Fatal("recovery displaced trigger/resource admission cut")
+    }
+    store=fresh
+   }else{
+    if _,err:=c.CommitTwoResourceContest(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+   }
+   final,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
+   if err!=nil{t.Fatal(err)}
+   if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),saved.ID,c.bundle);err!=nil{
+    t.Fatal("historical checkpoint lost full terminal tail:",err)
+   }
+   if _,err:=store.ReplayClock(ctx,[32]byte(run),c.bundle);err!=nil{
+    t.Fatal("independent replay failed:",err)
+   }
+   ledgerBytes,err:=csfrv18ExactFiveLedgers(path);if err!=nil{t.Fatal(err)}
+   if mode.name=="continuous"{
+    expectedSnapshot=bytes.Clone(final.Canonical)
+    expectedLedger=bytes.Clone(ledgerBytes)
+   }else if !bytes.Equal(expectedSnapshot,final.Canonical)||
+    !bytes.Equal(expectedLedger,ledgerBytes){
+    t.Fatal("snapshot/ledger bytes diverged after worker permutation, crash or restore")
+   }
+  })
+ }
+}

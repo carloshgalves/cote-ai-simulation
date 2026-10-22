@@ -692,8 +692,18 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
 		if err!=nil {seals.Close();return err}
 		body,ok:=fields.([]any)
 		if !ok {seals.Close();return errors.New("invalid decision ledger record")}
-		if len(body)==24 {continue} // A CycleCommit is not a fence.
-		if len(body)!=18 && len(body)!=6 {seals.Close();return errors.New("unknown decision record kind")}
+        // Only a published AdmissionFence (or its small control-fence
+        // representation) seals an ingress coordinate. Committed decisions
+        // and verified contest proofs are NOT fences, even when written
+        // after a previous cycle. Treating them as fences used to make
+        // sequential WORK cycles impossible following a resource conflict.
+        // Non-fence arities here are registered by the commit and decision
+        // proof schemas and independently verified by causal replay.
+        switch len(body){
+        case 18,6: // admission or compact control fence: check coordinate
+        case 24,3,16:continue // CycleCommit, contest proof, DecisionRecord
+        default:seals.Close();return errors.New("unknown decision record kind")
+        }
 		sealedRun,cut,err:=ingressguard.FenceCoordinate(fence)
 		if err!=nil {seals.Close();return err}
 		if err:=ingressguard.Check(entry,sealedRun,cut);err!=nil {seals.Close();return err}

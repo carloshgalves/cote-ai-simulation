@@ -5,11 +5,11 @@ import (
  "context"
  "errors"
  "fmt"
- "math"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/communication"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/fork"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
@@ -34,23 +34,28 @@ func (s *Store) PrepareV2CommunicationBirths(ctx context.Context, sourceRun,snap
  if err!=nil||id!=policy.CodecPolicyV2ID||version!=2{return nil,errors.New("migration child policy must be installed V2")}
  originID,originVersion,_,_,err:=originPolicy.CodecIdentity()
  if err!=nil||originID!=policy.CodecPolicyID||originVersion!=1{return nil,errors.New("migration source policy must be installed V1")}
- if _,err:=genesis.ValidateForkCanonical(child.CanonicalBytes,childPolicy);err!=nil{
-  return nil,fmt.Errorf("V2 child Genesis not authenticated: %w",err)
+ verifiedChild,err:=genesis.ValidateForkCanonical(child.CanonicalBytes,childPolicy)
+ if err!=nil{return nil,fmt.Errorf("V2 child Genesis not authenticated: %w",err)}
+ if verifiedChild.ID!=child.ID||verifiedChild.Digest!=child.Digest||verifiedChild.RunID!=child.RunID{
+  return nil,errors.New("child Genesis object fields do not match canonical authority")
  }
  if [32]byte(child.RunID)==sourceRun||child.RunID==([32]byte{}){
   return nil,errors.New("V2 child RunID is not distinct")
  }
  verified,err:=s.VerifySnapshotV1(ctx,sourceRun,snapshotID,originPolicy)
  if err!=nil{return nil,err}
- ref,err:=forkReferenceForMigration(originPolicy,verified.Snapshot.Canonical)
+ historyRef,err:=fork.NewSnapshotReference(originPolicy,verified.Snapshot.Canonical)
+ if err!=nil{return nil,err}
+ ref,err:=fork.Encode(historyRef)
  if err!=nil{return nil,err}
  parentRef,ok:=child.Payload[4].([]any)
- if !ok||len(parentRef)!=2||parentRef[0]!=uint64(1)||!bytes.Equal(parentRef[1].([]byte),ref){
+ refBytes,refOK:=func()([]byte,bool){if !ok||len(parentRef)!=2{return nil,false};v,valid:=parentRef[1].([]byte);return v,valid}()
+ if !ok||!refOK||len(parentRef)!=2||parentRef[0]!=uint64(1)||!bytes.Equal(refBytes,ref){
   return nil,errors.New("child Genesis does not pin exact verified V1 checkpoint")
  }
  sources,err:=s.PrepareInTransitDependenciesV1(ctx,sourceRun,snapshotID,originPolicy)
  if err!=nil{return nil,err}
- if len(sources)>math.MaxUint32{return nil,errors.New("too many pending communication imports")}
+ if uint64(len(sources))>uint64(^uint32(0)){return nil,errors.New("too many pending communication imports")}
  out:=make([]V2CommunicationBirth,0,len(sources))
  childOrigin:=communication.Origin{Kind:21,ID:child.ID,Digest:child.Digest}
  genesisOrigin:=[]any{uint64(2),[]any{child.ID[:],child.Digest[:]}}

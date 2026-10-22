@@ -28,5 +28,9 @@ jobs:
           git diff --check origin/main HEAD
       - name: Communication canonical and negative tests
         run: go test -count=1 -v ./internal/csf/communication/...
+      - name: Knowledge boundary - forged sender and unverified claim
+        run: go test -count=1 -v ./internal/csf/contextboundary -run '^TestCSFRV17KnowledgeBoundary'
+      - name: End-to-end false claim, exact receipt and replay
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV17'
       - name: Full Go regression
         run: go test -count=1 ./...

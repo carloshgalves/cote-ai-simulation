@@ -93,12 +93,12 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
   }
   return items,nil
  }
- intermediateCheckpoints,err:=acquire()
- if err!=nil{return nil,err}
- // The intermediate checkpoint is for recovery, not the final fork cut.
- intermediate,err:=origin.CreateSnapshotV1(ctx,sourceRun,c.bundle,intermediateCheckpoints)
- if err!=nil{return nil,err}
- drained,err:=c.ResumeRegisteredWorkV1(ctx,ledger,sourceRun,intermediate.ID)
+ // A snapshot ID is unique per (run, world revision). Perception
+ // completion can append a ledger tail WITHOUT advancing that revision.
+ // Therefore do not publish an intermediate snapshot and collide with the
+ // eventual final checkpoint at the same revision. Recovery can inspect
+ // the original frozen checkpoint plus its authenticated committed tail.
+ drained,err:=c.ResumeRegisteredWorkV1(ctx,ledger,sourceRun,sourceSnapshot)
  if err!=nil{return nil,fmt.Errorf("V1 terminal outbox drain: %w",err)}
  if drained.Continued {
   return nil,errors.New("unexpected additional V1 WORK terminal during fence outbox drain")

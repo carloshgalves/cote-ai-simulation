@@ -712,3 +712,29 @@ func TestCSFRV18PartialPerceptionBeforeCrashResumesWithoutDuplicateReceipt(t *te
  if err:=q.QueryRowContext(ctx,"SELECT count(*) FROM causal_outbox").Scan(&receipts);err!=nil{t.Fatal(err)}
  if receipts!=4{t.Fatal("repeat recovery changed settled outbox")}
 }
+
+func TestCSFRV18ReopenRetryFromVerifiedFrozenSemanticCut(t *testing.T){
+ ctx:=context.Background()
+ c,store,_,fence,run,cycleID,path:=abortFixture(t)
+ abort,err:=c.Abort(ctx,run,cycleID,fence,4,nil);if err!=nil{t.Fatal(err)}
+ if _,err:=c.Retry(ctx,run,cycleID,abort,"operator.retry");err!=nil{t.Fatal(err)}
+ snapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
+ ledger,err:=inputledger.Open(ctx,run,c.bundle,reopened);if err!=nil{t.Fatal(err)}
+ resumer:=New(reopened,c.bundle,c.admissionPolicies)
+ next,newFence,resume,err:=resumer.ReopenAuthorizedRetry(ctx,ledger,[32]byte(run),snapshot.ID)
+ if err!=nil{t.Fatal(err)}
+ if resume.ControlStatus!=2||resume.PendingTasks!=0||next.ID!=cycleID||next.Attempt!=1||
+  newFence.ID==fence.ID||newFence.InputDigest!=fence.InputDigest{
+  t.Fatal("authorized retry resumed different cycle or changed previous semantic cut")
+ }
+ if _,err:=resumer.ReopenAuthorizedRetry(ctx,ledger,[32]byte(run),snapshot.ID);err==nil{
+  t.Fatal("second recovery admitted duplicate attempt after state became in-flight")
+ }
+ ctl,err:=reopened.LoadCycleControl(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ if ctl[0]!=uint64(1){t.Fatal("retry was not fenced into a durable in-flight attempt")}
+ if _,err:=reopened.VerifySnapshotV1(ctx,[32]byte(run),snapshot.ID,c.bundle);err!=nil{
+  t.Fatal("snapshot cannot verify same-revision successor fence:",err)
+ }
+}

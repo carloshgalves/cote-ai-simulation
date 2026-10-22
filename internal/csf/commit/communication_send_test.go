@@ -17,6 +17,8 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/perception"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/extensions/testresourcev1"
 )
@@ -247,6 +249,41 @@ func TestCSFRV17CausalClaimDeliversExactlyOnePrivateInputToB(t *testing.T){
  b,err:=store.DeliverCommunicationPerception(ctx,types["communication.delivered"])
  if err!=nil{t.Fatal("B delivery:",err)}
  if b.Actor!=([2]string{"school","b"}){t.Fatal("claim assigned to wrong actor")}
+ // Independent pure-vs-SQL oracle: both must derive exactly the same
+ // addressed bytes from persisted Event/Claim/Transmission roots.
+ var occurrenceID []byte
+ if err:=db.QueryRowContext(ctx,"SELECT occurrence_id FROM communication_transmissions").Scan(&occurrenceID);err!=nil{t.Fatal(err)}
+ if len(occurrenceID)!=32{t.Fatal("communication occurrence ID missing")}
+ var dueKey [32]byte;copy(dueKey[:],occurrenceID)
+ pub,err:=store.LoadCommunicationForOccurrence(ctx,[32]byte(run),dueKey)
+ if err==nil{t.Fatal("terminal occurrence unexpectedly returned IN_TRANSIT transmission")}
+ var claimID,txID []byte
+ var claimRaw,txRaw,occRaw []byte
+ if err:=db.QueryRowContext(ctx,"SELECT id,canonical FROM communication_claims").Scan(&claimID,&claimRaw);err!=nil{t.Fatal(err)}
+ if err:=db.QueryRowContext(ctx,"SELECT id,canonical FROM communication_transmissions").Scan(&txID,&txRaw);err!=nil{t.Fatal(err)}
+ if err:=db.QueryRowContext(ctx,"SELECT canonical FROM scheduled_occurrences WHERE id=?",occurrenceID).Scan(&occRaw);err!=nil{t.Fatal(err)}
+ var claimKey,txKey [32]byte;copy(claimKey[:],claimID);copy(txKey[:],txID)
+ planForAudit:=communication.SendPlan{Run:run,
+  Claim:ports.CanonicalRecord{Identity:claimKey,Canonical:claimRaw},
+  Transmission:ports.CanonicalRecord{Identity:txKey,Canonical:txRaw},
+  Occurrence:ports.CanonicalRecord{Identity:dueKey,Canonical:occRaw}}
+ var taskRaw,deliveryRaw []byte
+ taskKey:=types["communication.delivered"]
+ if err:=db.QueryRowContext(ctx,"SELECT canonical FROM causal_outbox WHERE id=?",
+  taskKey[:]).Scan(&taskRaw);err!=nil{t.Fatal(err)}
+ taskFields,_:=codec.StrictDecodePayload(taskRaw)
+ if err:=db.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",
+  taskFields.([]any)[3]).Scan(&deliveryRaw);err!=nil{t.Fatal(err)}
+ var eventKey [32]byte;copy(eventKey[:],taskFields.([]any)[3].([]byte))
+ independent,err:=perception.ProjectCommunicationNotice(c.bundle,
+  ports.CanonicalRecord{Identity:types["communication.delivered"],Canonical:taskRaw},
+  ports.CanonicalRecord{Identity:eventKey,Canonical:deliveryRaw},planForAudit)
+ if err!=nil{t.Fatal("independent claim projection:",err)}
+ if independent.Actor!=b.Actor||!bytes.Equal(independent.Observation.Canonical,b.Observation.Canonical)||
+  !bytes.Equal(independent.Input.Canonical,b.Input.Canonical)||
+  !bytes.Equal(independent.Completion.Canonical,b.Completion.Canonical){
+  t.Fatal("pure communication projector disagrees with durable SQL recipient projection")
+ }
  if _,err:=store.DeliverCommunicationPerception(ctx,types["communication.delivered"]);err!=nil{
   t.Fatal("idempotent B redelivery failed:",err)
  }

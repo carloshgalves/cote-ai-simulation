@@ -35,6 +35,8 @@ type Bundle struct {
 	SuiteHash       [32]byte
 	// Set exclusively by a verified loader after manifest and receipt validation.
 	loadedFingerprint [32]byte
+	// Canonical fixtures loaded once from verified manifest authority.
+	fixtureBytes []byte
 }
 
 // RuntimeFingerprint identifies the exact parsed authority installed for
@@ -51,7 +53,8 @@ func (b *Bundle) RuntimeFingerprint() ([32]byte,error) {
   CodecHash [32]byte
   SchemaHash [32]byte
   SuiteHash [32]byte
- }{b.Directory,b.Profile,b.Registries,b.Transitions,b.CodecPolicyHash,b.SchemaHash,b.SuiteHash})
+  Fixtures []byte
+ }{b.Directory,b.Profile,b.Registries,b.Transitions,b.CodecPolicyHash,b.SchemaHash,b.SuiteHash,b.fixtureBytes})
  if err!=nil{return [32]byte{},err}
  return sha256.Sum256(data),nil
 }
@@ -144,6 +147,17 @@ func Load(directory string) (*Bundle, error) {
 	}
 	if bundle.Profile["codec_policy_id"] != CodecPolicyID || bundle.Profile["codec_version"] != float64(CodecVersion) {
 		return nil, fmt.Errorf("unsupported codec profile identity")
+	}
+	// Fixture policy refs participate in runtime authority. Freeze the exact
+	// verified bundle bytes instead of reopening an attacker-replaceable file
+	// during Genesis validation or cross-policy fork replay.
+	fixtures,err:=os.ReadFile(filepath.Join(directory,"fixtures.json"))
+	if err!=nil{return nil,fmt.Errorf("loading verified fixtures: %w",err)}
+	bundle.fixtureBytes=bytes.Clone(fixtures)
+	// Recheck the conformance manifest after the capture; it binds fixtures
+	// to their registered artifact hash, including concurrent on-disk edits.
+	if check,err:=verifyManifest(directory,"conformance-manifest.json","cote.csf.bundle.conformance.v1");err!=nil||hex.EncodeToString(check[:])!=SuiteHashHex{
+		return nil,fmt.Errorf("fixture manifest changed during load: %v",err)
 	}
 	fingerprint,err:=bundle.RuntimeFingerprint()
 	if err!=nil{return nil,fmt.Errorf("sealing verified policy: %w",err)}
@@ -270,8 +284,9 @@ func (b *Bundle) RequiredPolicyRoles() ([]string, error) {
 // GenesisPolicyRefs returns the exact, canonically ordered policy refs pinned by
 // this bundle. Callers must not synthesize refs from a recognized policy ID.
 func (b *Bundle) GenesisPolicyRefs() ([][]any, error) {
+	if err:=b.VerifyInstalledBundle();err!=nil{return nil,err}
 	var fixtures map[string]any
-	if err := decodeStrictJSON(filepath.Join(b.Directory, "fixtures.json"), &fixtures); err != nil {
+	if err := decodeStrict(b.fixtureBytes, &fixtures); err != nil {
 		return nil, err
 	}
 	var refs [][]any

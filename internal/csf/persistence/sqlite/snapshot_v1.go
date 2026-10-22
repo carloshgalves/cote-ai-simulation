@@ -351,7 +351,8 @@ func (s *Store) CreateSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bund
   if err:=verifySnapshotSeal(ctx,tx,id,run,hash,uint64(state.Revision));err!=nil{return zero,err}
   // Same-revision re-publication may not silently change cognitive eligibility.
   currentActors,err:=snapshotCognitiveActorRoster(ctx,tx,run,nil);if err!=nil{return zero,err}
-  frozenActors,err:=snapshotCognitiveActorRoster(ctx,tx,run,&id);if err!=nil{return zero,err}
+  snapshotID:=[32]byte(id)
+  frozenActors,err:=snapshotCognitiveActorRoster(ctx,tx,run,&snapshotID);if err!=nil{return zero,err}
   if len(currentActors)!=len(frozenActors){return zero,errors.New("snapshot actor eligibility changed after publication")}
   for actor:=range currentActors{if !frozenActors[actor]{return zero,errors.New("snapshot actor membership diverged")}}
   for i,name:=range snapshotLedgerNames{

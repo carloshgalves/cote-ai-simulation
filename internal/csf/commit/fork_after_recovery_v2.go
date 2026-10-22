@@ -54,6 +54,26 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
  if !ok||len(owners)!=len(checkpoints){
   return nil,errors.New("fence handoff omits cognitive owner snapshots")
  }
+ expectedActors:=map[string]bool{}
+ for _,raw:=range owners{
+  item,ok:=raw.([]any)
+  if !ok||len(item)!=8{return nil,errors.New("fence cognitive owner tuple malformed")}
+  actor,ok:=item[0].([]any)
+  if !ok||len(actor)!=2{return nil,errors.New("fence cognitive actor malformed")}
+  ns,nsOK:=actor[0].(string);name,nameOK:=actor[1].(string)
+  if !nsOK||!nameOK{return nil,errors.New("fence cognitive actor ID malformed")}
+  key:=ns+"\\x00"+name
+  if expectedActors[key]{return nil,errors.New("fence contains duplicate cognitive owner")}
+  expectedActors[key]=true
+ }
+ for _,cp:=range checkpoints{
+  key:=cp.ActorNamespace+"\\x00"+cp.ActorID
+  if !expectedActors[key]{
+   return nil,errors.New("fence handoff would replace or duplicate a cognitive owner")
+  }
+  delete(expectedActors,key)
+ }
+ if len(expectedActors)!=0{return nil,errors.New("fence handoff lost cognitive actor")}
  recovered,err:=c.ResumeRegisteredWorkV1(ctx,ledger,sourceRun,sourceSnapshot)
  if err!=nil{return nil,fmt.Errorf("V1 fenced terminal recovery: %w",err)}
  if !recovered.Continued {

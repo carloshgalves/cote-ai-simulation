@@ -60,8 +60,15 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
     id,ok:=ref[1].([]byte);if !ok||len(id)!=32{return nil,errors.New("fork genesis ref missing ID")}
     expected[string(id)]=true
    }
+   for _,v:=range activations{
+    ref,ok:=v.([]any)
+    if !ok||len(ref)!=3||ref[0]!=uint64(7){return nil,errors.New("fork activation ref malformed")}
+    id,ok:=ref[1].([]byte)
+    if !ok||len(id)!=32||expected[string(id)]{return nil,errors.New("fork duplicate activation ref")}
+    expected[string(id)]=true
+   }
    for _,v:=range items{
-    ref,ok:=v.([]any);if !ok||len(ref)!=3||ref[0]!=uint64(2){
+    ref,ok:=v.([]any);if !ok||len(ref)!=3||(ref[0]!=uint64(2)&&ref[0]!=uint64(3)){
      return nil,errors.New("fork cannot rebind non-genesis pending input")
     }
     id,ok:=ref[1].([]byte)

@@ -142,6 +142,24 @@ func TestCSFRV18V2ForkImportsInTransitAsChildOwnedAuthorities(t *testing.T){
  if _,err:=reopened.ReplayClock(ctx,id,v2);err!=nil{
   t.Fatal("V2 imported delivery terminal not replayable:",err)
  }
+ // The SQL sent_commit_id of an imported child is a historical V1
+ // provenance pointer, never a fabricated local send. It cannot be changed
+ // independently of the sealed migration birth, even after a due terminal.
+ probe,err:=sql.Open("sqlite","file:"+path)
+ if err!=nil{t.Fatal(err)}
+ if _,err:=probe.ExecContext(ctx,
+  "UPDATE communication_transmissions SET sent_commit_id=zeroblob(32) WHERE run_id=?",
+  id[:]);err!=nil{probe.Close();t.Fatal(err)}
+ if _,err:=reopened.ReplayClock(ctx,id,v2);err==nil{
+  probe.Close();t.Fatal("V2 imported due accepted a changed parent send pointer")
+ }
+ if _,err:=probe.ExecContext(ctx,
+  "UPDATE communication_transmissions SET sent_commit_id=? WHERE run_id=?",
+  original[0].SentCommitID[:],id[:]);err!=nil{probe.Close();t.Fatal(err)}
+ if err:=probe.Close();err!=nil{t.Fatal(err)}
+ if _,err:=reopened.ReplayClock(ctx,id,v2);err!=nil{
+  t.Fatal("replay did not recover after restoring exact migration sent pointer:",err)
+ }
  // Adversarial re-review: a live child Transmission without its immutable
  // signed import birth must fail complete replay, even after delivery.
  tamper,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
@@ -154,17 +172,6 @@ func TestCSFRV18V2ForkImportsInTransitAsChildOwnedAuthorities(t *testing.T){
  }
  if _,err:=source.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,c.bundle);err!=nil{
   t.Fatal("child import mutated historical parent authority:",err)
- }
- // Replay must fail if the signed migration birth disappears while its
- // rekeyed Transmission remains live/terminal; checking the remaining
- // receipt rows alone would falsely accept the orphan.
- probe,err:=sql.Open("sqlite","file:"+path)
- if err!=nil{t.Fatal(err)}
- defer probe.Close()
- if _,err:=probe.ExecContext(ctx,
-  "DELETE FROM fork_communication_imports WHERE child_run_id=?",id[:]);err!=nil{t.Fatal(err)}
- if _,err:=reopened.ReplayClock(ctx,id,v2);err==nil{
-  t.Fatal("V2 child replay accepted a transmission after its import proof was deleted")
  }
 }
 

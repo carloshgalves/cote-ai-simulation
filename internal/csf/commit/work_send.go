@@ -145,7 +145,7 @@ func (c *Coordinator) CommitCommunicationSend(ctx context.Context,ledger *inputl
   RevisionCanonical:revision,
   Journal:ports.CanonicalRecord{Identity:[32]byte(commitID),Canonical:journalRaw},
   Decisions:[]ports.CanonicalRecord{decision},Events:events,
-  CommunicationCandidate:candidate,
+  CommunicationCandidate:candidate,CommunicationBundle:c.bundle,
   Communication:&ports.CommunicationPublication{Claim:plan.Claim,Transmission:plan.Transmission,
    Occurrence:plan.Occurrence},FailAfterStep:c.failAfterStep}
  if err:=c.commitPreparedWork(ctx,&batch);err!=nil{return zero,err}

@@ -145,6 +145,17 @@ func TestCSFRV18V2ForkImportsInTransitAsChildOwnedAuthorities(t *testing.T){
  if _,err:=source.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,c.bundle);err!=nil{
   t.Fatal("child import mutated historical parent authority:",err)
  }
+ // Replay must fail if the signed migration birth disappears while its
+ // rekeyed Transmission remains live/terminal; checking the remaining
+ // receipt rows alone would falsely accept the orphan.
+ probe,err:=sql.Open("sqlite","file:"+path)
+ if err!=nil{t.Fatal(err)}
+ defer probe.Close()
+ if _,err:=probe.ExecContext(ctx,
+  "DELETE FROM fork_communication_imports WHERE child_run_id=?",id[:]);err!=nil{t.Fatal(err)}
+ if _,err:=reopened.ReplayClock(ctx,id,v2);err==nil{
+  t.Fatal("V2 child replay accepted a transmission after its import proof was deleted")
+ }
 }
 
 func TestCSFRV18V2ForkImportFaultRollsBackEveryChildTable(t *testing.T){

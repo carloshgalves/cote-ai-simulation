@@ -25,7 +25,7 @@ type forkGenesisRound struct {
 // response requires an independent, versioned work migrator and is rejected
 // by the fork's pending partition checks.
 func migrateGenesisPendingRounds(ctx context.Context, s *Store,
- parent, child *genesis.Genesis, refs []any, b *policy.Bundle)([]forkGenesisRound,error){
+ parent, child *genesis.Genesis, refs []any, originPolicy,childPolicy *policy.Bundle)([]forkGenesisRound,error){
  // Without pending round migration, the authenticated snapshot/replay already
  // covered input history; avoid a redundant full-ledger scan on idle forks.
  if len(refs)==0{return []forkGenesisRound{},nil}
@@ -79,7 +79,7 @@ func migrateGenesisPendingRounds(ctx context.Context, s *Store,
   if !ok||len(f)!=11||!equalBytes(f[0],parentID)||!equalBytes(f[1],parent.RunID[:]){
    return nil,errors.New("fork pending round source schema/run invalid")
   }
-  digest,_,err:=identity.New(b).Sum("cote.csf.digest.round-declaration",
+  digest,_,err:=identity.New(originPolicy).Sum("cote.csf.digest.round-declaration",
    "cote.csf.schema.round-declaration",1,f)
   if err!=nil||!bytes.Equal(digest[:],registeredDigest){
    return nil,errors.New("fork round checkpoint digest differs from source record")
@@ -126,13 +126,13 @@ func migrateGenesisPendingRounds(ctx context.Context, s *Store,
   }
   // Reject forged source ID even if an adversary arranged a matching
   // snapshot digest; a round's ID is derived from its Genesis origin.
-  wantParent,_,err:=identity.New(b).Sum("cote.csf.id.decision-round",
+  wantParent,_,err:=identity.New(originPolicy).Sum("cote.csf.id.decision-round",
    "cote.csf.schema.decision-round-id-preimage",1,[]any{f[6],role,ordinal})
   if err!=nil||!bytes.Equal(wantParent[:],parentID){
    return nil,errors.New("fork parent round causal identity mismatched")
   }
   childOrigin:=[]any{uint64(2),[]any{child.ID[:],child.Digest[:]}}
-  childID,_,err:=identity.New(b).Sum("cote.csf.id.decision-round",
+  childID,_,err:=identity.New(childPolicy).Sum("cote.csf.id.decision-round",
    "cote.csf.schema.decision-round-id-preimage",1,[]any{childOrigin,role,ordinal})
   if err!=nil{return nil,err}
   newFields:=append([]any(nil),f...)

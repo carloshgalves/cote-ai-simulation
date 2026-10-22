@@ -26,6 +26,14 @@ jobs:
           python3 -m unittest discover -s scripts/agents -p 'test_*.py' -v
           bash -n scripts/agents/fleet_checkpoint.sh
           git diff --check
+      - name: Validate GitHub Actions semantics with actionlint
+        shell: bash
+        run: |
+          set -euo pipefail
+          go run github.com/rhysd/actionlint/cmd/actionlint@v1.7.12 \
+            .github/workflows/agent-implementation-fleet.yml \
+            .github/workflows/headless-agent-review.yml \
+            .github/workflows/agent-harness-validation.yml
       - name: Validate workflow YAML structure
         shell: bash
         run: |

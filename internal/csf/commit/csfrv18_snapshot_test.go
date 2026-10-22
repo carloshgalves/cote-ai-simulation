@@ -226,3 +226,61 @@ func TestCSFRV18RejectForkWithPendingScheduleAndReusedIdentity(t *testing.T) {
  other:=[32]byte(run);other[0]^=1
  if _,err:=parent.ForkIdleSnapshotV1(ctx,[32]byte(run),checkpoint.ID,other,child,bundle);err==nil{t.Fatal("fork dropped pending work without migration")}
 }
+
+func TestCSFRV18ForkRollbackAndArchiveTamperReject(t *testing.T){
+ ctx:=context.Background()
+ bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,bundle)
+ parent,err:=sqlite.Open(ctx,t.TempDir()+"/parent.db");if err!=nil{t.Fatal(err)};defer parent.Close()
+ if err:=parent.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ if err:=parent.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ if err:=parent.BootstrapGenesisTriggers(ctx,g,bundle,nil);err!=nil{t.Fatal(err)}
+ snapshot,err:=parent.CreateSnapshotV1(ctx,[32]byte(g.RunID),bundle,nil);if err!=nil{t.Fatal(err)}
+ childPath:=t.TempDir()+"/child.db"
+ child,err:=sqlite.Open(ctx,childPath);if err!=nil{t.Fatal(err)};defer child.Close()
+ raw,err:=sql.Open("sqlite",childPath);if err!=nil{t.Fatal(err)};defer raw.Close()
+ childID:=[32]byte(g.RunID);childID[0]^=0x75
+ if _,err:=raw.ExecContext(ctx,`CREATE TRIGGER fail_fork BEFORE INSERT ON fork_lineage
+ BEGIN SELECT RAISE(ABORT,'injected fork lineage failure'); END`);err!=nil{t.Fatal(err)}
+ if _,err:=parent.ForkIdleSnapshotV1(ctx,[32]byte(g.RunID),snapshot.ID,childID,child,bundle);err==nil{
+  t.Fatal("fork ignored failure between genesis and lineage")
+ }
+ for _,table:=range []string{"genesis_records","world_revisions","clock_states","fork_lineage","fork_history_records"}{
+  var count int
+  if err:=raw.QueryRowContext(ctx,"SELECT count(*) FROM "+table).Scan(&count);err!=nil{t.Fatal(err)}
+  if count!=0{t.Fatalf("fork crash partially wrote %s: %d",table,count)}
+ }
+ if _,err:=raw.ExecContext(ctx,"DROP TRIGGER fail_fork");err!=nil{t.Fatal(err)}
+ if _,err:=parent.ForkIdleSnapshotV1(ctx,[32]byte(g.RunID),snapshot.ID,childID,child,bundle);err!=nil{t.Fatal(err)}
+ if _,err:=child.ValidatedGenesis(ctx,childID,bundle);err!=nil{t.Fatal(err)}
+ if _,err:=raw.ExecContext(ctx,"UPDATE fork_lineage SET reference_canonical=x'00' WHERE child_run=?",childID[:]);err!=nil{t.Fatal(err)}
+ if _,err:=child.ValidatedGenesis(ctx,childID,bundle);err==nil{
+  t.Fatal("fork accepted forged archived parent reference")
+ }
+}
+
+func TestCSFRV18TwoForksNeverAliasChildRunIDs(t *testing.T){
+ ctx:=context.Background()
+ bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,bundle)
+ source,err:=sqlite.Open(ctx,t.TempDir()+"/source.db");if err!=nil{t.Fatal(err)};defer source.Close()
+ if err:=source.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ if err:=source.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ if err:=source.BootstrapGenesisTriggers(ctx,g,bundle,nil);err!=nil{t.Fatal(err)}
+ checkpoint,err:=source.CreateSnapshotV1(ctx,[32]byte(g.RunID),bundle,nil);if err!=nil{t.Fatal(err)}
+ idA:=[32]byte(g.RunID);idA[0]^=0x55
+ idB:=[32]byte(g.RunID);idB[0]^=0x33
+ storeA,err:=sqlite.Open(ctx,t.TempDir()+"/a.db");if err!=nil{t.Fatal(err)};defer storeA.Close()
+ storeB,err:=sqlite.Open(ctx,t.TempDir()+"/b.db");if err!=nil{t.Fatal(err)};defer storeB.Close()
+ a,err:=source.ForkIdleSnapshotV1(ctx,[32]byte(g.RunID),checkpoint.ID,idA,storeA,bundle);if err!=nil{t.Fatal(err)}
+ b,err:=source.ForkIdleSnapshotV1(ctx,[32]byte(g.RunID),checkpoint.ID,idB,storeB,bundle);if err!=nil{t.Fatal(err)}
+ if bytes.Equal(a.CanonicalBytes,b.CanonicalBytes)||a.ID==b.ID{t.Fatal("fork Genesis identity aliased")}
+ snapA,err:=storeA.CreateSnapshotV1(ctx,idA,bundle,nil);if err!=nil{t.Fatal(err)}
+ snapB,err:=storeB.CreateSnapshotV1(ctx,idB,bundle,nil);if err!=nil{t.Fatal(err)}
+ if snapA.ID==snapB.ID||bytes.Equal(snapA.Canonical,snapB.Canonical){
+  t.Fatal("divergent child runs share causal snapshot identities")
+ }
+ if _,err:=source.VerifySnapshotV1(ctx,[32]byte(g.RunID),checkpoint.ID,bundle);err!=nil{
+  t.Fatal("parent prefix changed when two children were created:",err)
+ }
+}

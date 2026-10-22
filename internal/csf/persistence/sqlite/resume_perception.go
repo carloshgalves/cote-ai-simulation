@@ -34,7 +34,7 @@ func (s *Store) DrainPendingPerceptionV1(ctx context.Context,run,snapshotID [32]
   if err:=rows.Scan(&id,&raw);err!=nil{rows.Close();return zero,err}
   if len(id)!=32{rows.Close();return zero,errors.New("malformed perception outbox row ID")}
   parsed,err:=codec.StrictDecodePayload(raw);if err!=nil{rows.Close();return zero,err}
-  f,ok:=parsed.([]any);if !ok||!equalBytes(f[0],id){rows.Close();return zero,errors.New("outbox row ID mismatch")}
+  f,ok:=parsed.([]any);if !ok||len(f)==0||!equalBytes(f[0],id){rows.Close();return zero,errors.New("outbox row ID mismatch")}
   switch len(f){
   case 10:
    taskRun,ok:=idField(f[1]);if !ok{rows.Close();return zero,errors.New("perception task missing run")}

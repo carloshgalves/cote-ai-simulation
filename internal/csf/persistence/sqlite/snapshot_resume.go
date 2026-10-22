@@ -28,6 +28,7 @@ type ResumeCheckpointV1 struct{
  // independently verified live tip, which governs the NEXT resume action.
  SnapshotControlStatus uint64
  ControlStatus uint64
+ Action ResumeAction
  PendingTasks int
 }
 
@@ -102,6 +103,7 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  if rev==uint64(c.Revision)&&!sameCanonical(currentPending,all[11]){return zero,errors.New("tip snapshot pending state differs from authority")}
  controlStatus:=uint64(0)
  tipControlStatus:=uint64(0)
+ tipFields:=[]any{uint64(0),[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},uint64(0)}
  err=tx.QueryRowContext(ctx,"SELECT canonical FROM cycle_control_state WHERE run_id=?",run[:]).Scan(&controlRaw)
  if err!=nil&&err!=sql.ErrNoRows{return zero,err}
  if err==sql.ErrNoRows{
@@ -114,6 +116,7 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
   tipStatus,valid:=ctl[0].(uint64)
   if !valid||tipStatus>3{return zero,errors.New("live cycle-control status invalid")}
   tipControlStatus=tipStatus
+  tipFields=ctl
  }
  sealedControl,ok:=all[13].([]any);if !ok||len(sealedControl)!=7{return zero,errors.New("historical control schema malformed")}
  controlStatus,ok=sealedControl[0].(uint64);if !ok||controlStatus>3{return zero,errors.New("historical control status invalid")}
@@ -126,13 +129,29 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  memberships,ok:=penv.Value.([]any);if !ok||len(memberships)!=10{return zero,errors.New("invalid pending state typed projection")}
  outstanding,ok:=memberships[8].([]any);if !ok{return zero,errors.New("invalid outstanding task list")}
  tasks:=len(outstanding)
+ if rev<uint64(c.Revision){
+  present,err:=codec.StrictDecodeEnvelope(currentPending[2].([]byte))
+  if err!=nil{return zero,err}
+  nowParts,ok:=present.Value.([]any);if !ok||len(nowParts)!=10{return zero,errors.New("current pending state malformed")}
+  nowTasks,ok:=nowParts[8].([]any);if !ok{return zero,errors.New("current pending task roster malformed")}
+  tasks=len(nowTasks)
+ }
+ fetchFence:=func(id [32]byte)([]any,error){
+  var raw []byte
+  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",id[:]).Scan(&raw);err!=nil{return nil,err}
+  value,err:=codec.StrictDecodePayload(raw);if err!=nil{return nil,err}
+  f,ok:=value.([]any);if !ok{return nil,errors.New("frozen fence is not canonical array")}
+  return f,nil
+ }
+ action,err:=resumeActionForControl(tipFields,tasks,fetchFence)
+ if err!=nil{return zero,err}
  if err:=tx.Commit();err!=nil{return zero,err}
  return ResumeCheckpointV1{
   Snapshot:SnapshotV1{ID:id,Digest:hash,Canonical:bytes.Clone(canonical),Revision:rev},
   SnapshotClock:clock.State{Instant:domain.SimulationInstant(hist.Instant),Revision:domain.WorldRevision(hist.Revision),
     NextLogicalSequence:domain.LogicalSequence(hist.NextSequence),LastOrdinal:hist.LastOrdinal},
   Clock:c,TailCommits:uint64(c.Revision)-rev,SnapshotControlStatus:controlStatus,
-  ControlStatus:tipControlStatus,PendingTasks:tasks,
+  ControlStatus:tipControlStatus,Action:action,PendingTasks:tasks,
  },nil
 }
 

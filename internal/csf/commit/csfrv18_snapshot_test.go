@@ -890,12 +890,27 @@ func TestCSFRV18OriginPolicyResolvedWithoutConsultingChildCodec(t *testing.T){
 
 func TestCSFRV18RunnerRejectsFakeCompletionWithoutJournalCommit(t *testing.T){
  ctx:=context.Background()
- c,store,_,cycle,_,path:=twoResourceContestFixtureWithSystem(t,false,true,true)
- snapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(cycle.ID),c.bundle,nil)
- if err==nil{t.Fatal("foreign run reused cycle ID for snapshot")}
- db,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer db.Close()
- // The ledger's native run reference is authoritative, not user-supplied
- // IDs and not the callback's claimed terminal record.
- ledger,err:=inputledger.Open(ctx,domain.ID{},c.bundle,db)
- if err==nil||ledger!=nil{t.Fatal("opened ledger with forged run")}
+ source,store,original,cycle,_,path:=twoResourceContestFixtureWithSystem(t,false,true,true)
+ _,_,_,_,_,run:=original.Snapshot()
+ snapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(run),source.bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
+ ledger,err:=inputledger.Open(ctx,run,source.bundle,reopened);if err!=nil{t.Fatal(err)}
+ c:=New(reopened,source.bundle,source.admissionPolicies)
+ fake:=func(_ context.Context,_ *inputledger.Ledger,_ admission.Cycle,_ admission.Fence)(ports.CanonicalRecord,error){
+  return ports.CanonicalRecord{Identity:[32]byte(cycle.ID),Canonical:[]byte{0x80}},nil
+ }
+ if _,err:=c.ResumeRunV1(ctx,ledger,[32]byte(run),snapshot.ID,fake);err==nil{
+  t.Fatal("runner accepted uncommitted fabricated terminal")
+ }
+ state,err:=reopened.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ if state.Revision!=0{t.Fatal("invalid completion altered world revision")}
+ committed,err:=c.ResumeRunV1(ctx,ledger,[32]byte(run),snapshot.ID,
+  func(ctx context.Context,l *inputledger.Ledger,cy admission.Cycle,f admission.Fence)(ports.CanonicalRecord,error){
+   return c.CommitTwoResourceContest(ctx,l,cy,f)
+  })
+ if err!=nil{t.Fatal("false callback poisoned legitimate recovery:",err)}
+ if !committed.Continued||committed.Publication.Identity==([32]byte{}){
+  t.Fatal("valid terminal did not recover after forged callback")
+ }
 }

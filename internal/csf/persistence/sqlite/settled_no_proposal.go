@@ -126,6 +126,23 @@ func settledNoProposalUnits(ctx context.Context,q queryOne,runID [32]byte)(map[d
    continue
   }
   if len(eventIDs)>0{
+   first,valid:=eventRaw[0].([]byte)
+   if !valid{return nil,errors.New("committed communication Event missing")}
+   parsed,err:=codec.StrictDecodePayload(first)
+   if err!=nil{return nil,err}
+   event,valid:=parsed.([]any)
+   if valid&&len(event)==19{
+    if event[3]=="communication.sent"||event[3]=="communication.delivered"||
+     event[3]=="communication.delivery_failed"{
+     id,err:=verifyPublishedCommunication(ctx,q,runID,root.cycle,root.commit,journal,fence,eventRaw)
+     if err!=nil{return nil,err}
+     if result[id]{return nil,errors.New("communication source terminalized more than once")}
+     result[id]=true
+     continue
+    }
+   }
+  }
+  if len(eventIDs)>0{
    raw,ok:=eventRaw[0].([]byte)
    if !ok{return nil,errors.New("system Event bytes missing")}
    decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{return nil,err}

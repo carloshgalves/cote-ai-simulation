@@ -64,12 +64,25 @@ func (s *Store) PrepareInTransitDependenciesV1(ctx context.Context,
   "SELECT id,claim_id,occurrence_id,sent_commit_id,status,canonical "+
    "FROM communication_transmissions WHERE run_id=? ORDER BY id",parentRun[:])
  if err!=nil{return nil,err}
- defer rows.Close()
- result:=make([]InTransitDependencyV1,0)
+ type transmissionRow struct{
+  tid,cid,oid,sid,raw []byte
+  status int
+ }
+ collected:=make([]transmissionRow,0)
  for rows.Next(){
-  var tid,cid,oid,sid,txRaw []byte
-  var status int
-  if err:=rows.Scan(&tid,&cid,&oid,&sid,&status,&txRaw);err!=nil{return nil,err}
+  var item transmissionRow
+  if err:=rows.Scan(&item.tid,&item.cid,&item.oid,&item.sid,&item.status,&item.raw);err!=nil{
+   rows.Close();return nil,err
+  }
+  collected=append(collected,item)
+ }
+ if err:=rows.Err();err!=nil{rows.Close();return nil,err}
+ if err:=rows.Close();err!=nil{return nil,err}
+ // Store limits SQLite to one connection. Close the streaming cursor
+ // before resolving Claim/Occurrence dependencies via QueryRowContext.
+ result:=make([]InTransitDependencyV1,0)
+ for _,item:=range collected{
+  tid,cid,oid,sid,txRaw,status:=item.tid,item.cid,item.oid,item.sid,item.raw,item.status
   if status!=0{continue}
   if len(tid)!=32||len(cid)!=32||len(oid)!=32||len(sid)!=32{
    return nil,errors.New("communication migration SQL identities malformed")
@@ -143,7 +156,6 @@ func (s *Store) PrepareInTransitDependenciesV1(ctx context.Context,
   result=append(result,dependency)
   delete(expected,dependency.OccurrenceID)
  }
- if err:=rows.Err();err!=nil{return nil,err}
  // It is fine for another pending Genesis schedule to remain; the real
  // consumer uses the typed delivery envelope to select the due subset.
  return result,nil

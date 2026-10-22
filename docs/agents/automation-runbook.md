@@ -39,7 +39,7 @@ Em **Actions → Bounded agent implementation fleet → Run workflow**, fornecer
 Em **Actions → Agent headless PR review → Run workflow**, informar a `pr_number`, a `issue_number` aceita e o modelo.
 
 1. O workflow extrai Issue e **diff completo** de PR aberta contra seu HEAD exato, sem checkout/execução do código da PR.
-2. **Falha fechada** quando diff excede 48.000 caracteres ou Issue excede 12.000; não trunca fingindo revisão completa.
+2. **Falha fechada** quando diff excede 4.000 caracteres ou Issue excede 12.000; não trunca fingindo revisão completa.
 3. O Groq retorna JSON com candidatos sustentados pelo diff. A etapa confiável confere HEAD ainda idêntico e publica comentário como `ai-headless-review:v1`, sem o marcador canônico de finding OPEN.
 4. Isso não executa testes nem fecha findings. Um reviewer independente, conforme a skill original de cada repo, deve validar ou descartar sugestões e realizar review final; **zero candidatos não implica GO**.
 

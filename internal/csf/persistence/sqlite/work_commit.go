@@ -20,8 +20,8 @@ import (
 // PerceptionTasks, WorldRevision, lifecycle, clock and CycleCommit. Unsupported
 // combinations fail closed rather than committing a strict subset.
 func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
- if b.Mode>7{return errors.New("unregistered WORK terminal variant")}
- if b.Mode!=7&&(b.Communication!=nil||b.CommunicationBundle!=nil){return errors.New("communication artefacts require verified registered terminal mode")}
+ if b.Mode>8{return errors.New("unregistered WORK terminal variant")}
+ if b.Mode!=7&&b.Mode!=8&&(b.Communication!=nil||b.CommunicationBundle!=nil){return errors.New("communication artefacts require verified registered terminal mode")}
  if len(b.ExpectedClock)==0||len(b.ResultClock)==0||len(b.Journal.Canonical)==0{
   return errors.New("incomplete WORK publication batch")
  }
@@ -145,7 +145,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  seenRounds:=map[domain.ID]bool{}
  for _,p:=range pending{
   if p.Eligibility.Compare(due)>0{continue}
-  if b.Mode==3||b.Mode==4||b.Mode==5||b.Mode==6{
+  if b.Mode==3||b.Mode==4||b.Mode==5||b.Mode==6||b.Mode==8{
    sys,ok:=fence[11].([]any)
    if !ok||len(sys)==0{return errors.New("system WORK source cardinality invalid")}
    matched:=false
@@ -159,11 +159,11 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   }else if !admittedRounds[p.ID]{return errors.New("WORK has pending non-slot causal work without a source lifecycle handler")}
   seenRounds[p.ID]=true
  }
- if b.Mode!=3&&b.Mode!=4&&b.Mode!=5&&b.Mode!=6&&len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
+ if b.Mode!=3&&b.Mode!=4&&b.Mode!=5&&b.Mode!=6&&b.Mode!=8&&len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
  if b.Mode==4||b.Mode==5||b.Mode==6{
   for round:=range admittedRounds{if !seenRounds[round]{return errors.New("hybrid omitted due round")}}
  }
- if b.Mode==3&&len(admittedRounds)!=0{return errors.New("system-only handler cannot omit a due decision round")}
+ if (b.Mode==3||b.Mode==8)&&len(admittedRounds)!=0{return errors.New("system-only handler cannot omit a due decision round")}
  // A selected RoundDeclaration is indivisible: a subset of its slots
  // cannot become a terminal cycle, since the stranded slot would then
  // remain eligible at a clock ordinal that has already advanced.
@@ -211,7 +211,9 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  list,ok:=journal[16].([]any);if !ok||len(list)!=len(units){
   return errors.New("CycleCommit omits terminal decision references")
  }
- if b.Mode==7{
+ if b.Mode==8{
+  if err:=verifyCommunicationDueTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,expectedSlots);err!=nil{return err}
+ }else if b.Mode==7{
   if err:=verifyCommunicationSendTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,expectedSlots);err!=nil{return err}
  }else if b.Mode==5||b.Mode==6{
   if err:=verifyResourceSystemTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,genesisFields,allowed,expectedSlots);err!=nil{return err}
@@ -325,7 +327,10 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   !present(control[3],fullRef(11,b.FenceID[:],fence[17].([]byte))){
   return errors.New("WORK not current in-flight authorized attempt")
  }
- if b.Mode==7{
+ if b.Mode==8{
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.CommunicationCandidate.Identity[:],b.CommunicationCandidate.Canonical);err!=nil{return err}
+  if _,err:=tx.ExecContext(ctx,"UPDATE communication_transmissions SET status=? WHERE run_id=? AND id=? AND status=0",int(b.CommunicationStatus),b.RunID[:],b.Communication.Transmission.Identity[:]);err!=nil{return err}
+ } else if b.Mode==7{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.CommunicationCandidate.Identity[:],b.CommunicationCandidate.Canonical);err!=nil{return err}
   claim:=b.Communication.Claim
   transmission:=b.Communication.Transmission

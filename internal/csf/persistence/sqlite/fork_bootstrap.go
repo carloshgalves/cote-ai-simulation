@@ -15,12 +15,14 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
-// ForkIdleSnapshotV1 starts a different, initially empty run from an archived,
-// causally verified snapshot in a different SQLite workspace. The V1 safe
-// subset requires no pending schedule, runtime, source closure, round, dispatch,
-// or perception completion to migrate. Unsupported live cutover fails closed
-// instead of silently dropping work or reopening final exogenous sources.
-// New post-fork inputs/commits remain exclusively in the child's five ledgers.
+// ForkIdleSnapshotV1 starts a new run from a causally verified checkpoint in
+// a distinct SQLite workspace. Its bounded V1 migrators reconstruct pending
+// Genesis-owned occurrences, initial activations, and UNSTARTED Genesis-owned
+// rounds, deriving child identities and sealing all records atomically.
+// Dispatches (including revoked), slot responses, Event/Claim-owned work,
+// in-transit communication, evolved trigger runtime and cognition checkpoints
+// require separate versioned migrators and fail closed; none may be dropped.
+// The immutable parental prefix remains archived, never child ledger authority.
 func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotID,childRun [32]byte,
  child *Store,b *policy.Bundle)(*genesis.Genesis,error){
  if s==nil||child==nil||b==nil||s==child{return nil,errors.New("fork requires distinct parent/child stores and policy")}

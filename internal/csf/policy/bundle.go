@@ -35,6 +35,26 @@ type Bundle struct {
 	SuiteHash       [32]byte
 }
 
+// RuntimeFingerprint identifies the exact parsed authority installed for
+// historical checkpoint interpretation. This is an in-memory mutation seal,
+// not a causal identity or a substitute for manifest verification at Load.
+// Only the policy adapter may perform the underlying SHA256 operation.
+func (b *Bundle) RuntimeFingerprint() ([32]byte,error) {
+ if b==nil { return [32]byte{},fmt.Errorf("nil policy bundle") }
+ data,err:=json.Marshal(struct {
+  Directory string
+  Profile map[string]any
+  Registries map[string]any
+  Transitions map[string]any
+  CodecHash [32]byte
+  SchemaHash [32]byte
+  SuiteHash [32]byte
+ }{b.Directory,b.Profile,b.Registries,b.Transitions,b.CodecPolicyHash,b.SchemaHash,b.SuiteHash})
+ if err!=nil{return [32]byte{},err}
+ return sha256.Sum256(data),nil
+}
+
+
 type Operation struct {
 	DomainTag     string
 	SchemaID      string

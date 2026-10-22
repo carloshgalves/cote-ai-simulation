@@ -199,15 +199,15 @@ func loadNormative(directory string,spec normativeLoaderSpec) (*Bundle,error) {
 		}
 		*check.target = hash
 	}
-	if err := decodeStrictJSON(filepath.Join(directory, "profile.json"), &bundle.Profile); err != nil {
-		return nil, err
-	}
-	if err := decodeStrictJSON(filepath.Join(directory, "registries.json"), &bundle.Registries); err != nil {
-		return nil, err
-	}
-	if err := decodeStrictJSON(filepath.Join(directory, "causal-transition-contracts.json"), &bundle.Transitions); err != nil {
-		return nil, err
-	}
+	if err := decodePinnedJSON(directory,"policy-manifest.json",
+  "cote.csf.bundle.codec-policy."+spec.domainSuffix,bundle.CodecPolicyHash,
+  "profile.json",&bundle.Profile);err!=nil{return nil,err}
+ if err := decodePinnedJSON(directory,"schema-manifest.json",
+  "cote.csf.bundle.schema."+spec.domainSuffix,bundle.SchemaHash,
+  "registries.json",&bundle.Registries);err!=nil{return nil,err}
+ if err := decodePinnedJSON(directory,"schema-manifest.json",
+  "cote.csf.bundle.schema."+spec.domainSuffix,bundle.SchemaHash,
+  "causal-transition-contracts.json",&bundle.Transitions);err!=nil{return nil,err}
 	if bundle.Profile["codec_policy_id"] != spec.id || bundle.Profile["codec_version"] != float64(spec.version) {
 		return nil, fmt.Errorf("unsupported codec profile identity")
 	}
@@ -349,6 +349,47 @@ func verifyReceiptFile(directory string, hashes [3]string) error {
 		}
 	}
 	return nil
+}
+
+// decodePinnedJSON decodes the exact artifact bytes authorized by the
+// signed manifest, not an unsafe second filesystem read after verifyManifest.
+// This closes a swap-and-restore race for the runtime profile, registries,
+// and causal transition contracts in BOTH the V1 and V2 policy loaders.
+func decodePinnedJSON(directory,manifestName,domain string,expected [32]byte,
+ artifact string,target any)error{
+ manifestBytes,err:=os.ReadFile(filepath.Join(directory,manifestName))
+ if err!=nil{return err}
+ if sha256.Sum256(append(append([]byte(domain),0),manifestBytes...))!=expected{
+  return fmt.Errorf("policy manifest changed after signed verification: %s",manifestName)
+ }
+ var m manifest
+ if err:=decodeStrict(manifestBytes,&m);err!=nil{return err}
+ if m.ManifestVersion!=1{return fmt.Errorf("pinned policy manifest version invalid")}
+ var artifactHash string
+ var artifactSize int64
+ found:=false
+ for _,tuple:=range m.Artifacts{
+  if len(tuple)!=3{return fmt.Errorf("pinned manifest tuple malformed")}
+  var name string
+  var size int64
+  var digest string
+  if json.Unmarshal(tuple[0],&name)!=nil||
+   json.Unmarshal(tuple[1],&size)!=nil||
+   json.Unmarshal(tuple[2],&digest)!=nil{return fmt.Errorf("pinned manifest artifact invalid")}
+  if name!=artifact{continue}
+  if found{return fmt.Errorf("duplicate pinned artifact %s",artifact)}
+  artifactHash=digest
+  artifactSize=size
+  found=true
+ }
+ if !found{return fmt.Errorf("signed manifest missing required artifact %s",artifact)}
+ captured,err:=os.ReadFile(filepath.Join(directory,artifact))
+ if err!=nil{return err}
+ digest:=sha256.Sum256(captured)
+ if artifactSize!=int64(len(captured))||hex.EncodeToString(digest[:])!=artifactHash{
+  return fmt.Errorf("captured runtime artifact %s differs from signed manifest",artifact)
+ }
+ return decodeStrict(captured,target)
 }
 
 func decodeStrictJSON(path string, target any) error {

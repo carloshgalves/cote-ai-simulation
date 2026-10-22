@@ -425,6 +425,9 @@ func TestCSFRV18ForkCanArchiveFinalSourceClosureWithoutReopeningIngress(t *testi
  if _,err:=child.ValidatedGenesis(ctx,id,bundle);err==nil{
   t.Fatal("tampered historical parent prefix was accepted by child fork")
  }
+ if err:=forkInputs.DeclareSource(inputledger.Source{ID:"closed-origin"});err==nil{
+  t.Fatal("malformed archived source bytes reopened a previously finalized source")
+ }
 }
 
 func TestCSFRV18SnapshotDeterministicAcrossWorkerAndTriggerOrder(t *testing.T){

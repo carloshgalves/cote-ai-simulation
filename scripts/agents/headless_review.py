@@ -75,7 +75,7 @@ def review(data: dict, api_key: str, model: str) -> dict:
 
 def safe_text(value: str) -> str:
     """Prevent model-produced review markup from forging canonical finding markers."""
-    return value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\\r", " ").replace("\\n", " ")
+    return value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\r", " ").replace("\n", " ")
 
 
 def main() -> int:

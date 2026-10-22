@@ -8,6 +8,9 @@ import (
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/communication"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
@@ -103,6 +106,41 @@ func TestCSFRV18V2ForkImportsInTransitAsChildOwnedAuthorities(t *testing.T){
  defer reopened.Close()
  if _,err:=reopened.ReplayClock(ctx,id,v2);err!=nil{
   t.Fatal("V2 transmission birth failed replay after process restart:",err)
+ }
+ // The imported message must actually be deliverable through the SAME
+ // admission/CommitWork stack. Provenance is an archived V1 sent Event,
+ // not a fabricated V2 send event.
+ reloaded,err:=inputledger.Open(ctx,domain.ID(id),v2,reopened)
+ if err!=nil{t.Fatal(err)}
+ coordinator:=New(reopened,v2,c.admissionPolicies)
+ advance,err:=coordinator.Advance(ctx,reloaded,domain.ID(id))
+ if err!=nil{t.Fatal("V2 imported delivery cannot advance to due clock:",err)}
+ pendingDue,err:=reopened.PendingClock(ctx,id);if err!=nil{t.Fatal(err)}
+ selected,exists,err:=clock.Next(advance.ResultClock,pendingDue)
+ if err!=nil||!exists||selected.Kind!=clock.Work{
+  t.Fatalf("V2 imported due not scheduled as WORK: %+v %v",selected,err)
+ }
+ state:=advance.ResultClock
+ cycleID,_,err:=identity.New(v2).Sum("cote.csf.id.cycle",
+  "cote.csf.schema.cycle-id-preimage",1,
+  []any{id[:],[]any{int64(state.Instant),uint64(selected.OriginOrdinal)}})
+ if err!=nil{t.Fatal(err)}
+ _,worldHash,err:=reopened.LoadWorldState(ctx,uint64(state.Revision))
+ if err!=nil{t.Fatal(err)}
+ dueCycle:=admission.Cycle{ID:domain.ID(cycleID),Attempt:0,
+  Instant:state.Instant,Ordinal:selected.OriginOrdinal,BaseRevision:state.Revision,
+  BaseStateHash:domain.Digest(worldHash),RetryRef:[]any{uint64(0)}}
+ admitted,err:=admission.NewCoordinator(admission.NewFenceLog(reopened)).
+  AdmitThenEvaluate(ctx,v2,reloaded,dueCycle,c.admissionPolicies,nil)
+ if err!=nil{t.Fatal("imported V2 due not admitted:",err)}
+ if _,err:=coordinator.CommitCommunicationDue(ctx,reloaded,dueCycle,admitted);err!=nil{
+  t.Fatal("imported V2 due did not use authenticated terminal:",err)
+ }
+ if _,err:=coordinator.CommitCommunicationDue(ctx,reloaded,dueCycle,admitted);err==nil{
+  t.Fatal("imported transmission delivered twice")
+ }
+ if _,err:=reopened.ReplayClock(ctx,id,v2);err!=nil{
+  t.Fatal("V2 imported delivery terminal not replayable:",err)
  }
  if _,err:=source.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,c.bundle);err!=nil{
   t.Fatal("child import mutated historical parent authority:",err)

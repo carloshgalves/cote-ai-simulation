@@ -104,7 +104,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
   if err:=rows.Scan(&raw);err!=nil{rows.Close();return nil,err}
   v,err:=codec.StrictDecodePayload(raw);if err!=nil{rows.Close();return nil,err}
   f,ok:=v.([]any);if !ok{rows.Close();return nil,errors.New("invalid outbox record")}
-  if len(f)==10&&equalBytes(f[1],run[:]){parts[8]=append(parts[8],[]any{uint64(15),f[0],identity.OpaqueContentHash(raw)[:]})}
+  if len(f)==10&&equalBytes(f[1],run[:]){hash:=identity.OpaqueContentHash(raw);parts[8]=append(parts[8],[]any{uint64(15),f[0],hash[:]})}
   if len(f)==8 {parts[9]=append(parts[9],f)}
  }
  if err:=rows.Err();err!=nil{rows.Close();return nil,err}

@@ -134,6 +134,9 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  if [32]byte(childGenesis.RunID)!=childRun{return nil,errors.New("fork generated wrong run")}
  migrated,err:=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,lists[0].([]any),b)
  if err!=nil{return nil,err}
+ triggerMigration,err:=migrateGenesisPendingTriggers(ctx,s,parent,childGenesis,b,
+  lists[1].([]any),lists[2].([]any))
+ if err!=nil{return nil,fmt.Errorf("fork trigger migration: %w",err)}
  // The parent workspace must remain verifiably immutable: copy the exact
  // members under a read transaction instead of trusting a worker's proposal.
  originTx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true});if err!=nil{return nil,err}

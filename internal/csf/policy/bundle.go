@@ -76,6 +76,23 @@ func (b *Bundle) VerifyInstalledBundle() error {
 }
 
 
+// CodecIdentity is the loader-verified codec ID/version and exact manifest
+// hashes for this installed bundle. A cross-policy consumer must use this
+// authority, never substitute compile-time V1 constants for a future V2.
+func (b *Bundle) CodecIdentity() (string,uint64,[32]byte,[32]byte,error) {
+ var zero [32]byte
+ if err:=b.VerifyInstalledBundle();err!=nil{
+  return "",0,zero,zero,err
+ }
+ id,ok:=b.Profile["codec_policy_id"].(string)
+ version,versionOK:=b.Profile["codec_version"].(float64)
+ if !ok||id==""||!versionOK||version<1||version>float64(^uint32(0))||
+  float64(uint64(version))!=version {
+  return "",0,zero,zero,fmt.Errorf("installed codec identity malformed")
+ }
+ return id,uint64(version),b.CodecPolicyHash,b.SchemaHash,nil
+}
+
 type Operation struct {
 	DomainTag     string
 	SchemaID      string

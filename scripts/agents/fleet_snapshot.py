@@ -84,8 +84,13 @@ def export(worktree: Path, destination: Path, roots: list[str]) -> None:
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
         entries.append({"path": name, "bytes": size, "sha256": hash_file(target)})
+    source_head = subprocess.run(
+        ["git", "-C", str(worktree), "rev-parse", "HEAD"],
+        text=True, capture_output=True, check=True
+    ).stdout.strip()
     (destination / "manifest.json").write_text(
-        json.dumps({"schema_version": 1, "roots": roots, "files": entries},
+        json.dumps({"schema_version": 1, "roots": roots, "source_head": source_head,
+                    "files": entries},
                    sort_keys=True, separators=(",", ":")), encoding="utf-8"
     )
     print("Exported", len(entries), "allowlisted files,", total, "bytes; no repository credentials")
@@ -95,6 +100,17 @@ def restore(worktree: Path, destination: Path, roots: list[str]) -> None:
     raw = json.loads((destination / "manifest.json").read_text(encoding="utf-8"))
     if raw.get("schema_version") != 1 or raw.get("roots") != roots or not isinstance(raw.get("files"), list):
         raise ValueError("Invalid source snapshot manifest")
+    recorded_head = raw.get("source_head")
+    if not isinstance(recorded_head, str) or len(recorded_head) != 40 or any(
+        c not in "0123456789abcdef" for c in recorded_head
+    ):
+        raise ValueError("Invalid source HEAD in snapshot")
+    current_head = subprocess.run(
+        ["git", "-C", str(worktree), "rev-parse", "HEAD"],
+        text=True, capture_output=True, check=True
+    ).stdout.strip()
+    if recorded_head != current_head:
+        raise ValueError("Concurrent branch change: snapshot HEAD does not match publication base")
     rows = raw["files"]
     if len(rows) > MAX_FILES:
         raise ValueError("Too many files")

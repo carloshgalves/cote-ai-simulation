@@ -23,6 +23,10 @@ import (
 
 func communicationFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.Ledger,
  admission.Cycle,admission.Fence,string){
+ return communicationFixtureWithChannel(t,"school.message.v1")
+}
+func communicationFixtureWithChannel(t *testing.T,channel string)(*Coordinator,*sqlite.Store,*inputledger.Ledger,
+ admission.Cycle,admission.Fence,string){
  t.Helper()
  ctx:=context.Background()
  bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
@@ -63,7 +67,7 @@ func communicationFixture(t *testing.T)(*Coordinator,*sqlite.Store,*inputledger.
  if err!=nil{t.Fatal(err)}
  params,err:=communication.SendParameters(communication.SendSpec{
   Recipient:communication.Actor{"school","b"},PresentedSender:"C",
-  Channel:"school.message.v1",DueAt:g.InitialInstant+25,
+  Channel:channel,DueAt:g.InitialInstant+25,
   Proposition:communication.Proposition{
    Type:"resource.stolen",Polarity:0,TemporalScope:scope,Content:content}})
  if err!=nil{t.Fatal(err)}

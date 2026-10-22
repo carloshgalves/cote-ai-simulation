@@ -23,7 +23,7 @@ func TestCSFRV18V2GenesisPinsNormativeExecutablePolicy(t *testing.T){
  if err!=nil{t.Fatal(err)}
  child,err:=ValidateCanonical(raw,v2)
  if err!=nil{t.Fatal("V2 Genesis should execute under verified V2 policy:",err)}
- if child.RunID==([32]byte{})||child.Digest==([32]byte{}){t.Fatal("V2 Genesis causal digest not derived")}
+ if child.ID==([32]byte{})||child.Digest==([32]byte{}){t.Fatal("V2 Genesis causal digest not derived")}
  if _,err:=ValidateCanonical(raw,v1);err==nil{t.Fatal("V1 must reject V2 Genesis policy pin")}
  f[10]=bytes.Clone(v1.CodecPolicyHash[:])
  tampered,err:=codec.CanonicalBytes(env.DomainTag,env.SchemaID,env.SchemaVersion,f)

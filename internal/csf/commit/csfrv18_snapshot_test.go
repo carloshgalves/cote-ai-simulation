@@ -999,7 +999,8 @@ func TestCSFRV18IntegratedResourceTriggerCommunicationInTransit(t *testing.T){
     c.failAfterStep=0
    }
    if _,err:=c.CommitCommunicationSend(ctx,ledger,messageCycle,messageFence);err!=nil{t.Fatal(err)}
-   final,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil);if err!=nil{t.Fatal(err)}
+   checkpoints:=csfrv18SyntheticActorCheckpoints(t,path,state.Instant,int64(state.Revision)+1)
+   final,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,checkpoints);if err!=nil{t.Fatal(err)}
    var status int
    q,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
    if err:=q.QueryRowContext(ctx,"SELECT status FROM communication_transmissions").Scan(&status);err!=nil{q.Close();t.Fatal(err)}
@@ -1013,4 +1014,28 @@ func TestCSFRV18IntegratedResourceTriggerCommunicationInTransit(t *testing.T){
    }
   })
  }
+}
+
+func csfrv18SyntheticActorCheckpoints(t *testing.T,path string,at domain.SimulationInstant,revision int64)[]sqlite.SnapshotCheckpoint{
+ t.Helper()
+ db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ var cursor uint64
+ if err:=db.QueryRow("SELECT count(*) FROM evidence_ledger").Scan(&cursor);err!=nil{t.Fatal(err)}
+ rows,err:=db.Query("SELECT DISTINCT holder_namespace,holder_id FROM evidence_routes ORDER BY holder_namespace,holder_id")
+ if err!=nil{t.Fatal(err)}
+ defer rows.Close()
+ refs:=[]sqlite.SnapshotCheckpoint{}
+ for rows.Next(){
+  var ns,id string
+  if err:=rows.Scan(&ns,&id);err!=nil{t.Fatal(err)}
+  refs=append(refs,sqlite.SnapshotCheckpoint{
+   ActorNamespace:ns,ActorID:id,StoreID:"test-opaque-cognition",
+   SchemaVersion:1,Content:[]byte("versioned synthetic checkpoint"),
+   Producer:"test-checkpoint-owner",ProducerVersion:1,
+   CoversInstant:int64(at),CoversRevision:uint64(revision),CoversEvidenceCursor:cursor,
+  })
+ }
+ if err:=rows.Err();err!=nil{t.Fatal(err)}
+ return refs
 }

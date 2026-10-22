@@ -40,4 +40,17 @@ func TestCSFRV18VerifiedPolicyFixturesAreFrozenAfterLoad(t *testing.T) {
  reloaded,err:=Load(destination)
  if err!=nil{t.Fatal(err)}
  if !bytes.Equal(loaded.fixtureBytes,reloaded.fixtureBytes){t.Fatal("restored fixture differs from original verified bytes")}
+ // The registered reference roster must not share mutable []byte storage
+ // with a caller, even after its backing fixture has been cached.
+ first,err:=reloaded.GenesisPolicyRefs()
+ if err!=nil{t.Fatal(err)}
+ original,err:=reloaded.GenesisPolicyRefs()
+ if err!=nil{t.Fatal(err)}
+ first[0][0]="forged-policy-id"
+ first[0][2].([]byte)[0]^=1
+ stable,err:=reloaded.GenesisPolicyRefs()
+ if err!=nil{t.Fatal(err)}
+ if !reflect.DeepEqual(stable,original){
+  t.Fatal("caller mutated cached Genesis policy references")
+ }
 }

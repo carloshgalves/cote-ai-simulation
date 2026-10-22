@@ -33,6 +33,7 @@ func genesisScheduleDigest(ctx context.Context,q queryOne,run [32]byte)([32]byte
   tag,ok:=origin[0].(uint64);if !ok{rows.Close();return empty,errors.New("occurrence origin kind malformed")}
   switch tag{
   case 0: // terminal Event-owned successor, verified separately
+  case 1: // committed ActionProposal-born communication delivery, verified by historicalSystemUnits
   case 2:
    ref,ok:=origin[1].([]any)
    if !ok||len(ref)!=2||!equalBytes(ref[0],genesisID)||!equalBytes(ref[1],genesisDigest){

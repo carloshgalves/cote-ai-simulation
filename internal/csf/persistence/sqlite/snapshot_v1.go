@@ -64,54 +64,185 @@ func snapshotLedgerPrefix(ctx context.Context, tx *sql.Tx, name string, b *polic
  return []any{name,uint64(len(records)),digest[:]},nil
 }
 
+// snapshotPending is a deterministic projection of the complete linked
+// pending-state model. Ref digests use the registered record operation or
+// the persisted unit digest, never a surrogate hash of arbitrary bytes.
 func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundle)([]any,error){
- // Derived in authoritative, repeatable, byte-sorted order. Caller cannot
- // forge a roster of pending schedule, runtime, tasks or completions.
  var parts [10][]any
  for i:=range parts {parts[i]=[]any{}}
- pick:=func(table,sqlQuery string,part int,refKind uint64,allPayloads bool)error{
-  rows,err:=tx.QueryContext(ctx,sqlQuery,run[:]);if err!=nil{return err}
+ deriver:=identity.New(b)
+ digestRef:=func(tag,schema string,fields []any)([]byte,error){
+  d,_,err:=deriver.Sum(tag,schema,1,fields)
+  if err!=nil{return nil,err}
+  return d[:],nil
+ }
+ typed:=func(table,query string,index int,kind uint64,recordDigest func([]any)([]byte,error))error{
+  rows,err:=tx.QueryContext(ctx,query,run[:]);if err!=nil{return err}
   defer rows.Close()
   for rows.Next(){
    var id,raw []byte
    if err:=rows.Scan(&id,&raw);err!=nil{return err}
-   if len(id)!=32{return errors.New("pending source ID invalid")}
-   if allPayloads{
-    v,err:=codec.StrictDecodePayload(raw);if err!=nil{return err}
-    parts[part]=append(parts[part],v)
+   if len(id)!=32{return errors.New("snapshot authority id wrong length")}
+   decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{return err}
+   fields,ok:=decoded.([]any);if !ok||len(fields)==0||!equalBytes(fields[0],id){return errors.New("snapshot authority id and payload differ")}
+   if recordDigest==nil {
+    parts[index]=append(parts[index],fields)
    }else{
-    d:=identity.OpaqueContentHash(raw)
-    parts[part]=append(parts[part],[]any{refKind,bytes.Clone(id),d[:]})
+    d,err:=recordDigest(fields);if err!=nil{return err}
+    if len(d)!=32{return errors.New("snapshot reference digest invalid")}
+    parts[index]=append(parts[index],[]any{kind,bytes.Clone(id),d})
    }
   }
   return rows.Err()
  }
- if err:=pick("scheduled_occurrences","SELECT id,canonical FROM scheduled_occurrences WHERE run_id=? AND lifecycle=0 ORDER BY id",0,0,false);err!=nil{return nil,err}
- if err:=pick("trigger_runtime","SELECT definition_id,canonical FROM trigger_runtime WHERE run_id=? ORDER BY definition_id",1,0,true);err!=nil{return nil,err}
- if err:=pick("trigger_activations","SELECT id,canonical FROM trigger_activations WHERE run_id=? AND lifecycle=0 ORDER BY id",2,0,false);err!=nil{return nil,err}
- // Source receipts, rounds and dispatches are immutable; their terminal
- // liveness must be verified from journal before snapshot publication.
- // Full source/slot projections are kept by the five authenticated prefixes.
- pending,err:=pendingClock(ctx,tx,run);if err!=nil{return nil,err}
- for _,p:=range pending {
-  parts[7]=append(parts[7],[]any{uint64(4),p.ID[:],[]byte{}})
+ // Pending occurrence and activation membership is checked by pendingClock.
+ // Their unit digests live at the tail of the canonical immutable record.
+ lastDigest:=func(f []any)([]byte,error){
+  d,ok:=f[len(f)-1].([]byte)
+  if !ok||len(d)!=32{return nil,errors.New("invalid scheduled unit digest")}
+  return bytes.Clone(d),nil
  }
- // Completion payloads are included as opaque authoritative receipt bytes.
- rows,err:=tx.QueryContext(ctx,"SELECT canonical FROM causal_outbox ORDER BY id")
+ if err:=typed("scheduled_occurrences","SELECT id,canonical FROM scheduled_occurrences WHERE run_id=? AND lifecycle=0 ORDER BY id",0,6,lastDigest);err!=nil{return nil,err}
+ if err:=typed("trigger_runtime","SELECT definition_id,canonical FROM trigger_runtime WHERE run_id=? ORDER BY definition_id",1,0,nil);err!=nil{return nil,err}
+ if err:=typed("trigger_activations","SELECT id,canonical FROM trigger_activations WHERE run_id=? AND lifecycle=0 ORDER BY id",2,7,lastDigest);err!=nil{return nil,err}
+ pending,err:=pendingClock(ctx,tx,run);if err!=nil{return nil,err}
+ live:=map[[32]byte]bool{}
+ for _,item:=range pending{live[[32]byte(item.ID)]=true}
+ // Input authorities: closure finality, RoundDeclaration, active dispatch,
+ // response and exogenous unit are independently pinned by InputLedger replay.
+ rows,err:=tx.QueryContext(ctx,"SELECT id,canonical FROM input_ledger ORDER BY id")
  if err!=nil{return nil,err}
+ type closure struct{source string;seq uint64;ref any}
+ closings:=map[string]closure{}
+ dispatches:=map[[32]byte]any{}
+ answered:=map[[32]byte]bool{}
+ revoked:=map[[32]byte]bool{}
  for rows.Next(){
-  var raw []byte
-  if err:=rows.Scan(&raw);err!=nil{rows.Close();return nil,err}
-  v,err:=codec.StrictDecodePayload(raw);if err!=nil{rows.Close();return nil,err}
-  f,ok:=v.([]any);if !ok{rows.Close();return nil,errors.New("invalid outbox record")}
-  if len(f)==10&&equalBytes(f[1],run[:]){hash:=identity.OpaqueContentHash(raw);parts[8]=append(parts[8],[]any{uint64(15),f[0],hash[:]})}
-  if len(f)==8 {parts[9]=append(parts[9],f)}
+  var id,raw []byte
+  if err:=rows.Scan(&id,&raw);err!=nil{rows.Close();return nil,err}
+  if len(id)!=32{rows.Close();return nil,errors.New("snapshot input id malformed")}
+  var key [32]byte;copy(key[:],id)
+  if env,err:=codec.StrictDecodeEnvelope(raw);err==nil{
+   if env.DomainTag!="cote.csf.record.source-ingress-receipt"{rows.Close();return nil,errors.New("unexpected enveloped input record")}
+   continue
+  }
+  data,err:=codec.StrictDecodePayload(raw);if err!=nil{rows.Close();return nil,err}
+  f,ok:=data.([]any);if !ok||len(f)==0{rows.Close();return nil,errors.New("unrecognised snapshot input record")}
+  if len(f)==3&&f[0]=="source-declaration-v1"{continue}
+  if len(f)==3{
+   rawDispatch,ok:=f[0].([]byte);if !ok||len(rawDispatch)!=32{rows.Close();return nil,errors.New("bad dispatch revocation")}
+   var dkey [32]byte;copy(dkey[:],rawDispatch);revoked[dkey]=true
+   continue
+  }
+  if !equalBytes(f[0],id){rows.Close();return nil,errors.New("input record id mismatch")}
+  if len(f)==7{
+   source,ok:=f[2].(string);seq,okSeq:=f[6].(uint64)
+   if !ok||!okSeq||!equalBytes(f[1],run[:]){rows.Close();return nil,errors.New("source closure malformed")}
+   d,err:=digestRef("cote.csf.digest.source-closure","cote.csf.schema.source-closure",f)
+   if err!=nil{rows.Close();return nil,err}
+   if prev,exists:=closings[source];!exists||seq>prev.seq{closings[source]=closure{source,seq,[]any{uint64(2),bytes.Clone(id),d}}}
+   continue
+  }
+  if len(f)==11{
+   if source,ok:=f[2].(string);ok{
+    if !equalBytes(f[1],run[:]){rows.Close();return nil,errors.New("cross-run pending round")}
+    if live[key]{
+     d,err:=digestRef("cote.csf.digest.round-declaration","cote.csf.schema.round-declaration",f)
+     if err!=nil{rows.Close();return nil,err}
+     parts[4]=append(parts[4],[]any{uint64(3),bytes.Clone(id),d})
+     parts[7]=append(parts[7],[]any{uint64(4),bytes.Clone(id),d})
+    }
+    _=source;continue
+   }
+   if _,ok:=f[4].(string);ok{
+    if !equalBytes(f[1],run[:]){rows.Close();return nil,errors.New("cross-run dispatch")}
+    d,err:=digestRef("cote.csf.digest.slot-dispatch","cote.csf.schema.slot-dispatch",f)
+    if err!=nil{rows.Close();return nil,err}
+    dispatches[key]=[]any{uint64(4),bytes.Clone(id),d}
+    continue
+   }
+   // NoProposal slot response (the final field is its unit digest).
+   if !equalBytes(f[2],run[:]){rows.Close();return nil,errors.New("cross-run NoProposal")}
+   d,err:=lastDigest(f);if err!=nil{rows.Close();return nil,err}
+   parts[6]=append(parts[6],[]any{uint64(23),bytes.Clone(id),d})
+   rawDispatch,ok:=f[1].([]byte);if !ok||len(rawDispatch)!=32{rows.Close();return nil,errors.New("NoProposal dispatch invalid")}
+   var k [32]byte;copy(k[:],rawDispatch);answered[k]=true
+   continue
+  }
+  if len(f)==19{
+   if !equalBytes(f[2],run[:]){rows.Close();return nil,errors.New("cross-run proposal")}
+   d,err:=lastDigest(f);if err!=nil{rows.Close();return nil,err}
+   parts[6]=append(parts[6],[]any{uint64(5),bytes.Clone(id),d})
+   rawDispatch,ok:=f[1].([]byte);if !ok||len(rawDispatch)!=32{rows.Close();return nil,errors.New("proposal dispatch invalid")}
+   var k [32]byte;copy(k[:],rawDispatch);answered[k]=true
+   continue
+  }
+  if len(f)==13{
+   if !equalBytes(f[1],run[:]){rows.Close();return nil,errors.New("cross-run exogenous input")}
+   if live[key]{
+    d,err:=lastDigest(f);if err!=nil{rows.Close();return nil,err}
+    parts[7]=append(parts[7],[]any{uint64(1),bytes.Clone(id),d})
+   }
+   continue
+  }
+  rows.Close();return nil,errors.New("unknown input record shape in snapshot")
  }
  if err:=rows.Err();err!=nil{rows.Close();return nil,err}
  if err:=rows.Close();err!=nil{return nil,err}
+ keys:=make([]string,0,len(closings))
+ for key:=range closings{keys=append(keys,key)}
+ sort.Strings(keys)
+ for _,key:=range keys{parts[3]=append(parts[3],closings[key].ref)}
+ dispatchKeys:=make([][32]byte,0,len(dispatches))
+ for key:=range dispatches{dispatchKeys=append(dispatchKeys,key)}
+ sort.Slice(dispatchKeys,func(i,j int)bool{return bytes.Compare(dispatchKeys[i][:],dispatchKeys[j][:])<0})
+ for _,key:=range dispatchKeys{if !answered[key]&&!revoked[key]{parts[5]=append(parts[5],dispatches[key])}}
+ // Scheduled/trigger work contributes input-ref, distinct from causal-ref.
+ for _,p:=range []int{0,2}{
+  for _,raw:=range parts[p]{
+   ref:=raw.([]any)
+   kind:=uint64(2);if p==2{kind=3}
+   if id,ok:=idField(ref[1]);ok&&live[id]{
+    parts[7]=append(parts[7],[]any{kind,ref[1],ref[2]})
+   }
+  }
+ }
+ // Outbox tasks are not evidence. Only tasks without a committed completion
+ // remain pending; completed receipts are included in full canonical form.
+ out,err:=tx.QueryContext(ctx,"SELECT id,canonical FROM causal_outbox ORDER BY id")
+ if err!=nil{return nil,err}
+ tasks:=map[[32]byte]any{}
+ completed:=map[[32]byte]bool{}
+ for out.Next(){
+  var id,raw []byte
+  if err:=out.Scan(&id,&raw);err!=nil{out.Close();return nil,err}
+  if len(id)!=32{out.Close();return nil,errors.New("outbox identity wrong length")}
+  decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{out.Close();return nil,err}
+  f,ok:=decoded.([]any);if !ok||len(f)==0||!equalBytes(f[0],id){out.Close();return nil,errors.New("outbox canonical id changed")}
+  if len(f)==10 {
+   if !equalBytes(f[1],run[:]){out.Close();return nil,errors.New("foreign outbox task")}
+   digest,err:=digestRef("cote.csf.digest.perception-task","cote.csf.schema.perception-task",f)
+   if err!=nil{out.Close();return nil,err}
+   var key [32]byte;copy(key[:],id);tasks[key]=[]any{uint64(15),bytes.Clone(id),digest}
+  } else if len(f)==5 {
+   rawTask,ok:=f[1].([]byte);if !ok||len(rawTask)!=32{out.Close();return nil,errors.New("completion task ref invalid")}
+   d,err:=digestRef("cote.csf.digest.perception-completion","cote.csf.schema.perception-task-completion.body",f[:4])
+   if err!=nil{out.Close();return nil,err}
+   if !equalBytes(f[4],d){out.Close();return nil,errors.New("completion digest altered")}
+   var k [32]byte;copy(k[:],rawTask);completed[k]=true
+   parts[9]=append(parts[9],f)
+  }else{out.Close();return nil,errors.New("unregistered outbox record")}
+ }
+ if err:=out.Err();err!=nil{out.Close();return nil,err}
+ if err:=out.Close();err!=nil{return nil,err}
+ orderedTaskIDs:=make([][32]byte,0,len(tasks))
+ for k:=range tasks{orderedTaskIDs=append(orderedTaskIDs,k)}
+ sort.Slice(orderedTaskIDs,func(i,j int)bool{return bytes.Compare(orderedTaskIDs[i][:],orderedTaskIDs[j][:])<0})
+ for _,k:=range orderedTaskIDs{if !completed[k]{parts[8]=append(parts[8],tasks[k])}}
+ for k:=range completed{if _,ok:=tasks[k];!ok{return nil,errors.New("orphan perception completion in snapshot")}}
  fields:=make([]any,len(parts))
  for i,v:=range parts {fields[i]=v}
- hash,encoded,err:=identity.New(b).Sum("cote.csf.snapshot.pending-state","cote.csf.schema.snapshot-pending-state",1,fields)
+ hash,encoded,err:=deriver.Sum("cote.csf.snapshot.pending-state","cote.csf.schema.snapshot-pending-state",1,fields)
  if err!=nil{return nil,err}
  return []any{"cote.csf.schema.snapshot-pending-state",uint64(1),encoded,hash[:]},nil
 }

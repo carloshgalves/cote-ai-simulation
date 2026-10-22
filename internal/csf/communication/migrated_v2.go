@@ -7,7 +7,6 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
 // ValidateMigratedOccurrenceV2 validates a newly rekeyed due record and its

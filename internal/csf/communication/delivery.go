@@ -94,9 +94,18 @@ func validateRefArray(values []any,kind int)([]domain.CausalRef,error){
  seen:=map[domain.ID]bool{}
  out:=make([]domain.CausalRef,0,len(values))
  if len(values)>1024{return nil,errors.New("reference array excessive")}
+ var prior *domain.CausalRef
  for _,v:=range values{
   ref,ok:=asRef(v)
-  if !ok||kind>=0&&ref.Kind!=uint16(kind)||seen[ref.ID]{return nil,errors.New("invalid or duplicate claim reference")}
+  if !ok||kind>=0&&ref.Kind!=uint16(kind)||seen[ref.ID]{
+   return nil,errors.New("invalid or duplicate claim reference")
+  }
+  if prior!=nil{
+   if prior.Kind>ref.Kind||(prior.Kind==ref.Kind&&bytes.Compare(prior.ID[:],ref.ID[:])>=0){
+    return nil,errors.New("set-like claim references out of canonical order")
+   }
+  }
+  copyRef:=ref;prior=&copyRef
   seen[ref.ID]=true;out=append(out,ref)
  }
  return out,nil
@@ -120,7 +129,7 @@ func AuthenticateTransmission(bundle *policy.Bundle,record ports.CanonicalRecord
  role,roleOK:=f[2].(uint64);ordinal,ordOK:=f[3].(uint64)
  if !roleOK||!ordOK||role>65535||ordinal>4294967295{return zero,errors.New("Transmission role invalid")}
  content,ok:=f[4].([]any);if !ok||len(content)!=2||content[0]!=uint64(0){return zero,errors.New("unregistered transmission content variant")}
- items,ok:=content[1].([]any);if !ok||len(items)==0{return zero,errors.New("Transmission claim links missing")}
+ items,ok:=content[1].([]any);if !ok||len(items)!=1{return zero,errors.New("registered transmission requires exactly one Claim")}
  claims,err:=validateRefArray(items,18);if err!=nil{return zero,err}
  actual,ok:=asActor(f[5]);if !ok{return zero,errors.New("actual sender invalid")}
  presented,ok:=f[6].(string);if !ok||presented==""||len(presented)>512{return zero,errors.New("presented sender missing")}

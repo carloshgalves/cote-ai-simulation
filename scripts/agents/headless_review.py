@@ -73,6 +73,11 @@ def review(data: dict, api_key: str, model: str) -> dict:
     return result
 
 
+def safe_text(value: str) -> str:
+    """Prevent model-produced review markup from forging canonical finding markers."""
+    return value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\\r", " ").replace("\\n", " ")
+
+
 def main() -> int:
     try:
         data = json.loads(Path(os.environ["REVIEW_CONTEXT"]).read_text(encoding="utf-8"))
@@ -98,10 +103,10 @@ def main() -> int:
         for i, f in enumerate(result["findings"], 1):
             lines.extend([
                 f"#### Candidate {i} — {f['severity']}",
-                f"Location: {f['location']}",
-                f"Evidence: {f['evidence']}",
-                f"Impact: {f['impact']}",
-                f"Suggested correction: {f['correction']}",
+                f"Location: {safe_text(f['location'])}",
+                f"Evidence: {safe_text(f['evidence'])}",
+                f"Impact: {safe_text(f['impact'])}",
+                f"Suggested correction: {safe_text(f['correction'])}",
                 ""
             ])
         Path(os.environ["REVIEW_OUTPUT"]).write_text("\n".join(lines) + "\n", encoding="utf-8")

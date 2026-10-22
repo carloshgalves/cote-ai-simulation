@@ -28,17 +28,22 @@ func TestCSFRV17PrepareSendProducesNoEarlyRecipientInput(t *testing.T){
  fields:=decoded.([]any)
  if fields[12]!=uint64(0){t.Fatal("sending terminalized before scheduled delivery")}
  if _,err:=PlanDueDelivery(bundle,plan.Transmission,plan.Claim,
-  domain.ID(plan.Occurrence.Identity),due,due-1,true);err==nil{
+  domain.ID(plan.Occurrence.Identity),due,due-1);err==nil{
   t.Fatal("uncommitted early knowledge formed from an in-transit transmission")
  }
  result,err:=PlanDueDelivery(bundle,plan.Transmission,plan.Claim,
-  domain.ID(plan.Occurrence.Identity),due,due,true)
+  domain.ID(plan.Occurrence.Identity),due,due)
  if err!=nil||result.Notice==nil||result.Notice.PresentedSender!="C"{
   t.Fatal("committed delivery projection missing presented identity",err)
  }
- if _,err:=PlanDueDelivery(bundle,plan.Transmission,plan.Claim,
-  domain.ID(plan.Occurrence.Identity),due,due,false);err!=nil{
-  t.Fatal("failure transition requires no recipient Observation",err)
+ droppedSpec:=SendSpec{Run:run,Source:Origin{Kind:5,ID:claim.Origin.ID,Digest:claim.Origin.Digest},
+  ActualSender:transmission.ActualSender,PresentedSender:"C",Recipient:Actor{"school","b"},
+  SentAt:4,DueAt:12,Channel:"school.drop.v1",Proposition:claim.Proposition}
+ dropped,err:=PrepareSend(bundle,droppedSpec);if err!=nil{t.Fatal(err)}
+ failure,err:=PlanDueDelivery(bundle,dropped.Transmission,dropped.Claim,
+  domain.ID(dropped.Occurrence.Identity),due,due)
+ if err!=nil||failure.Notice!=nil||failure.NextStatus!=2{
+  t.Fatal("failed channel produced recipient knowledge",err)
  }
 }
 func TestCSFRV17DeliveryRequiresExactOccurrenceDigest(t *testing.T){

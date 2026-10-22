@@ -39,6 +39,9 @@ func NewInstalledPolicyRegistry(bundles ...*policy.Bundle) (*InstalledPolicyRegi
   if !ok||id==""||bundle.CodecPolicyHash==([32]byte{})||bundle.SchemaHash==([32]byte{}) {
    return nil,errors.New("unverified installed policy identity")
   }
+  if err:=bundle.VerifyInstalledBundle();err!=nil{
+   return nil,fmt.Errorf("rejecting unverified installed policy %q: %w",id,err)
+  }
   key:=policyVersion{id:id,hash:bundle.CodecPolicyHash}
   if _,exists:=out.entries[key];exists{return nil,fmt.Errorf("duplicate installed policy %q",id)}
   fp,err:=bundle.RuntimeFingerprint()
@@ -56,6 +59,9 @@ func (r *InstalledPolicyRegistry) ResolveOriginPolicy(_ context.Context,id strin
  b:=entry.bundle
  if b==nil||b.CodecPolicyHash!=hash||b.Profile["codec_policy_id"]!=id {
   return nil,errors.New("registered origin policy identity mutated")
+ }
+ if err:=b.VerifyInstalledBundle();err!=nil{
+  return nil,fmt.Errorf("installed origin policy provenance invalid: %w",err)
  }
  fp,err:=b.RuntimeFingerprint()
  if err!=nil||fp!=entry.fingerprint {

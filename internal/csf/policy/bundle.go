@@ -53,8 +53,8 @@ func (b *Bundle) RuntimeFingerprint() ([32]byte,error) {
   CodecHash [32]byte
   SchemaHash [32]byte
   SuiteHash [32]byte
-  Fixtures []byte
- }{b.Directory,b.Profile,b.Registries,b.Transitions,b.CodecPolicyHash,b.SchemaHash,b.SuiteHash,b.fixtureBytes})
+  FixtureDigest [32]byte
+ }{b.Directory,b.Profile,b.Registries,b.Transitions,b.CodecPolicyHash,b.SchemaHash,b.SuiteHash,sha256.Sum256(b.fixtureBytes)})
  if err!=nil{return [32]byte{},err}
  return sha256.Sum256(data),nil
 }

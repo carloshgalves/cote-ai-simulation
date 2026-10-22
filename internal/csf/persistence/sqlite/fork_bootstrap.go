@@ -72,8 +72,10 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
      return nil,errors.New("fork cannot rebind non-genesis pending input")
     }
     id,ok:=ref[1].([]byte)
-    if !ok||len(id)!=32||!expected[string(id)]{return nil,errors.New("fork pending input does not match genesis schedule")}
+    if !ok||len(id)!=32||!expected[string(id)]{return nil,errors.New("fork pending input does not match Genesis migration sources")}
+    delete(expected,string(id))
    }
+   if len(expected)!=0{return nil,errors.New("fork pending input omits a Genesis source")}
    continue
   }
   if len(items)!=0{

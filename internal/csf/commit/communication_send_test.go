@@ -195,3 +195,86 @@ func TestCSFRV17DelayedDeliveryExactlyOnceAndCausalReplay(t *testing.T){
  next,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
  if _,exists,err:=clock.Next(next,pending);err!=nil||exists{t.Fatal("due occurrence remained pending",exists,err)}
 }
+
+func TestCSFRV17CausalClaimDeliversExactlyOnePrivateInputToB(t *testing.T){
+ ctx:=context.Background()
+ c,store,ledger,cycle,fence,path:=communicationFixture(t)
+ _,_,_,_,_,run:=ledger.Snapshot()
+ if _,err:=c.CommitCommunicationSend(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ advanced,err:=c.Advance(ctx,ledger,run)
+ if err!=nil{t.Fatal(err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ plan,exists,err:=clock.Next(advanced.ResultClock,pending)
+ if err!=nil||!exists||plan.Kind!=clock.Work{t.Fatal("scheduled delivery not due",err)}
+ state:=advanced.ResultClock
+ did,_,err:=identity.New(c.bundle).Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{run[:],[]any{int64(state.Instant),uint64(plan.OriginOrdinal)}});if err!=nil{t.Fatal(err)}
+ _,hash,err:=store.LoadWorldState(ctx,uint64(state.Revision));if err!=nil{t.Fatal(err)}
+ dueCycle:=admission.Cycle{ID:domain.ID(did),Attempt:0,Instant:state.Instant,
+  Ordinal:plan.OriginOrdinal,BaseRevision:state.Revision,BaseStateHash:domain.Digest(hash),RetryRef:[]any{uint64(0)}}
+ admitted,err:=admission.NewCoordinator(admission.NewFenceLog(store)).AdmitThenEvaluate(
+  ctx,c.bundle,ledger,dueCycle,c.admissionPolicies,nil)
+ if err!=nil{t.Fatal(err)}
+ if _,err:=c.CommitCommunicationDue(ctx,ledger,dueCycle,admitted);err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ rows,err:=db.QueryContext(ctx,"SELECT canonical FROM causal_outbox")
+ if err!=nil{t.Fatal(err)}
+ types:=map[string][32]byte{}
+ for rows.Next(){
+  var raw []byte;if err:=rows.Scan(&raw);err!=nil{rows.Close();t.Fatal(err)}
+  v,err:=codec.StrictDecodePayload(raw);if err!=nil{rows.Close();t.Fatal(err)}
+  task,ok:=v.([]any);if !ok||len(task)!=10{continue}
+  var evRaw []byte
+  if err:=db.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",task[3]).Scan(&evRaw);err!=nil{rows.Close();t.Fatal(err)}
+  item,err:=codec.StrictDecodePayload(evRaw);if err!=nil{rows.Close();t.Fatal(err)}
+  kind:=item.([]any)[3].(string)
+  var id [32]byte;copy(id[:],task[0].([]byte))
+  types[kind]=id
+ }
+ if err:=rows.Err();err!=nil{rows.Close();t.Fatal(err)}
+ rows.Close()
+ for _,kind:=range []string{"communication.sent","round.consumed","clock.advanced","communication.delivered"}{
+  if _,ok:=types[kind];!ok{t.Fatalf("causal task %s missing",kind)}
+ }
+ if _,err:=store.CompleteInternalPerception(ctx,types["communication.sent"],c.bundle);err!=nil{t.Fatal(err)}
+ if _,err:=store.CompleteInternalPerception(ctx,types["clock.advanced"],c.bundle);err!=nil{t.Fatal(err)}
+ if _,err:=store.DeliverRoundPerception(ctx,types["round.consumed"],c.bundle);err!=nil{t.Fatal(err)}
+ b,err:=store.DeliverCommunicationPerception(ctx,types["communication.delivered"])
+ if err!=nil{t.Fatal("B delivery:",err)}
+ if b.Actor!=([2]string{"school","b"}){t.Fatal("claim assigned to wrong actor")}
+ if _,err:=store.DeliverCommunicationPerception(ctx,types["communication.delivered"]);err!=nil{
+  t.Fatal("idempotent B redelivery failed:",err)
+ }
+ var n int
+ if err:=db.QueryRowContext(ctx,
+  "SELECT count(*) FROM evidence_routes WHERE holder_namespace='school' AND holder_id='b'").Scan(&n);err!=nil||n!=2{
+  t.Fatal("B lacks exactly one Observation and KnowledgeInput",n,err)
+ }
+ var raw []byte
+ if err:=db.QueryRowContext(ctx,"SELECT canonical FROM evidence_ledger WHERE id=?",b.Input.Identity[:]).Scan(&raw);err!=nil{t.Fatal(err)}
+ if bytes.Contains(raw,[]byte("actual_sender"))||bytes.Contains(raw,[]byte("school/a")){
+  t.Fatal("sender A leaked into B's input")
+ }
+ var theft int
+ if err:=db.QueryRowContext(ctx,
+  "SELECT COUNT(*) FROM event_store WHERE instr(CAST(canonical AS TEXT),'resource.stolen')>0").Scan(&theft);err!=nil{t.Fatal(err)}
+ // The alleged phrase may be nested inside a private typed Claim; what may
+ // never exist is an authoritative Event whose event_type is resource.stolen.
+ rows,err=db.QueryContext(ctx,"SELECT canonical FROM event_store")
+ if err!=nil{t.Fatal(err)}
+ for rows.Next(){
+  var event []byte;if err:=rows.Scan(&event);err!=nil{rows.Close();t.Fatal(err)}
+  v,err:=codec.StrictDecodePayload(event);if err!=nil{rows.Close();t.Fatal(err)}
+  if v.([]any)[3]=="resource.stolen"{rows.Close();t.Fatal("false assertion became physical world fact")}
+ }
+ if err:=rows.Err();err!=nil{rows.Close();t.Fatal(err)}
+ rows.Close()
+ current,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ if err:=store.CheckPerceptionBarrier(ctx,[32]byte(run),uint64(current.Revision));err!=nil{
+  t.Fatal("received B input not admitted through complete epistemic barrier:",err)
+ }
+ report,err:=store.ReplayClock(ctx,[32]byte(run),c.bundle)
+ if err!=nil||report.ReconstructedClock!=current{t.Fatal("communication replay differs from completed terminal:",report,err)}
+ _=theft
+}

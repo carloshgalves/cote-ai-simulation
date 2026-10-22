@@ -155,10 +155,11 @@ func Load(directory string) (*Bundle, error) {
 	fixtures,err:=os.ReadFile(filepath.Join(directory,"fixtures.json"))
 	if err!=nil{return nil,fmt.Errorf("loading verified fixtures: %w",err)}
 	bundle.fixtureBytes=bytes.Clone(fixtures)
-	// Recheck the conformance manifest after the capture; it binds fixtures
-	// to their registered artifact hash, including concurrent on-disk edits.
-	if check,err:=verifyManifest(directory,"conformance-manifest.json","cote.csf.bundle.conformance.v1");err!=nil||hex.EncodeToString(check[:])!=SuiteHashHex{
-		return nil,fmt.Errorf("fixture manifest changed during load: %v",err)
+	// Authenticate the CAPTURED bytes, not a second filesystem read:
+	// a malicious swap-and-restore between ReadFile and verifyManifest
+	// must not install unverified runtime policy references.
+	if err:=verifyCapturedConformanceFixture(directory,bundle.fixtureBytes,bundle.SuiteHash);err!=nil{
+		return nil,fmt.Errorf("verified Genesis fixture capture: %w",err)
 	}
 	bundle.genesisRefs,err=parseGenesisPolicyRefs(bundle.fixtureBytes)
 	if err!=nil{return nil,fmt.Errorf("invalid signed Genesis fixture: %w",err)}
@@ -210,6 +211,39 @@ func verifyManifest(directory, name, prefix string) ([32]byte, error) {
 		}
 	}
 	return sha256.Sum256(append(append([]byte(prefix), 0), raw...)), nil
+}
+
+// verifyCapturedConformanceFixture binds the bytes retained by Load to the
+// normative, hash-pinned manifest. Reopening fixtures.json inside
+// verifyManifest was insufficient: an adversary could return altered bytes
+// for the first read and restore the file before manifest verification.
+func verifyCapturedConformanceFixture(directory string,captured []byte,expected [32]byte) error {
+ raw,err:=os.ReadFile(filepath.Join(directory,"conformance-manifest.json"))
+ if err!=nil{return err}
+ preimage:=append(append([]byte("cote.csf.bundle.conformance.v1"),0),raw...)
+ if sha256.Sum256(preimage)!=expected{
+  return fmt.Errorf("fixture manifest not the pinned conformance authority")
+ }
+ var parsed manifest
+ if err:=decodeStrict(raw,&parsed);err!=nil{return err}
+ if parsed.ManifestVersion!=1{return fmt.Errorf("unknown conformance manifest version")}
+ found:=false
+ for _,fields:=range parsed.Artifacts {
+  if len(fields)!=3{return fmt.Errorf("malformed conformance artifact")}
+  var name,expectedHex string
+  var size int64
+  if json.Unmarshal(fields[0],&name)!=nil||json.Unmarshal(fields[1],&size)!=nil||
+   json.Unmarshal(fields[2],&expectedHex)!=nil{return fmt.Errorf("invalid conformance artifact fields")}
+  if name!="fixtures.json"{continue}
+  if found{return fmt.Errorf("duplicate signed fixture entry")}
+  found=true
+  sum:=sha256.Sum256(captured)
+  if int64(len(captured))!=size||hex.EncodeToString(sum[:])!=expectedHex{
+   return fmt.Errorf("captured fixture bytes differ from signed manifest")
+  }
+ }
+ if !found{return fmt.Errorf("conformance manifest omits Genesis fixture")}
+ return nil
 }
 
 func verifyReceiptFile(directory string) error {

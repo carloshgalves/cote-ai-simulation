@@ -27,8 +27,9 @@ func (s *Store) VerifyRecoveredTerminal(ctx context.Context,run,cycle,terminal [
  }
  value,err:=codec.StrictDecodePayload(stored);if err!=nil{return err}
  fields,ok:=value.([]any)
- if !ok||len(fields)!=24||!bytes.Equal(fields[0].([]byte),run[:])||
-  !bytes.Equal(fields[1].([]byte),cycle[:]){
+ if !ok||len(fields)!=24{return errors.New("recovered CycleCommit schema invalid")}
+ rawRun,runOK:=fields[0].([]byte);rawCycle,cycleOK:=fields[1].([]byte)
+ if !runOK||!cycleOK||!bytes.Equal(rawRun,run[:])||!bytes.Equal(rawCycle,cycle[:]){
   return errors.New("recovered CycleCommit does not match resumed run/cycle")
  }
  committedRevision,ok:=fields[8].(uint64)

@@ -7,7 +7,6 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/communication"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
@@ -98,7 +97,6 @@ func ProjectCommunicationNotice(bundle *policy.Bundle,task,event ports.Canonical
  if err!=nil{return zero,err}
  completionBytes,err:=codec.CanonicalPayload(append(completionBody,completionDigest[:]))
  if err!=nil{return zero,err}
- _=identity.OpaqueContentHash
  return RoundProjection{Actor:[2]string{trans.Recipient[0],trans.Recipient[1]},
   Observation:ports.CanonicalRecord{Identity:[32]byte(id),Canonical:obs},
   Input:ports.CanonicalRecord{Identity:[32]byte(inputID),Canonical:inputBytes},

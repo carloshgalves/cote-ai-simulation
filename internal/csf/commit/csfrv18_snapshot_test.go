@@ -14,6 +14,8 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/extensions/testresourcev1"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/communication"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/fork"
@@ -912,5 +914,103 @@ func TestCSFRV18RunnerRejectsFakeCompletionWithoutJournalCommit(t *testing.T){
  if err!=nil{t.Fatal("false callback poisoned legitimate recovery:",err)}
  if !committed.Continued||committed.Publication.Identity==([32]byte{}){
   t.Fatal("valid terminal did not recover after forged callback")
+ }
+}
+
+func TestCSFRV18IntegratedResourceTriggerCommunicationInTransit(t *testing.T){
+ ctx:=context.Background()
+ var baseline,allLedgers []byte
+ for _,variant:=range []struct{name string;reverse,restore,failed bool}{
+  {"continuous",false,false,false},
+  {"reverse-workers",true,false,false},
+  {"resume-before-communication",false,true,false},
+  {"crash-in-communication",true,true,true},
+ }{
+  t.Run(variant.name,func(t *testing.T){
+   c,store,ledger,contest,fence,path:=twoResourceContestFixtureWithSystem(t,variant.reverse,true,true)
+   _,_,_,_,_,run:=ledger.Snapshot()
+   pre,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil);if err!=nil{t.Fatal(err)}
+   if _,err:=c.CommitTwoResourceContest(ctx,ledger,contest,fence);err!=nil{t.Fatal(err)}
+   post,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil);if err!=nil{t.Fatal(err)}
+   if _,err:=store.DrainPendingPerceptionV1(ctx,[32]byte(run),post.ID,c.bundle);err!=nil{t.Fatal(err)}
+   if variant.restore{
+    independent,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+    defer independent.Close()
+    ledger,err=inputledger.Open(ctx,run,c.bundle,independent);if err!=nil{t.Fatal(err)}
+    c=New(independent,c.bundle,c.admissionPolicies)
+    store=independent
+    if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),pre.ID,c.bundle);err!=nil{t.Fatal(err)}
+   }
+   g:=stockGenesis(t,c.bundle)
+   state,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+   if state.Revision!=1{t.Fatal("mixed resource+trigger commit not published first")}
+   ordinal:=domain.CycleOrdinal(state.LastOrdinal+1)
+   at:=domain.EligibilityCoordinate{NotBeforeInstant:state.Instant,NotBeforeCycleOrdinal:ordinal}
+   if _,err:=ledger.CloseSource(ctx,"driver",inputledger.Closure{
+    ProducerKey:"communication.closed",ClosedThrough:at});err!=nil{t.Fatal(err)}
+   d:=identity.New(c.bundle)
+   cycleID,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+    []any{run[:],[]any{int64(state.Instant),uint64(ordinal)}});if err!=nil{t.Fatal(err)}
+   origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+   round,err:=ledger.DeclareRound(ctx,"schedule",[2]string{"school","c"},
+    []string{"act"},at,origin,1,0,0,[]any{uint64(0)})
+   if err!=nil{t.Fatal(err)}
+   dispatchID,_,err:=d.Sum("cote.csf.id.dispatch","cote.csf.schema.dispatch-id-preimage",1,
+    []any{run[:],cycleID[:],round.ID[:],"act",uint64(0)});if err!=nil{t.Fatal(err)}
+   dispatch:=inputledger.Dispatch{ID:domain.ID(dispatchID),RunID:run,
+    CycleID:domain.ID(cycleID),RoundID:round.ID,SlotID:"act",Actor:round.Actor,
+    Eligibility:at,BaseRevision:state.Revision,EffectiveAt:state.Instant}
+   if err:=ledger.RegisterDispatch(ctx,dispatch,inputledger.CycleBinding{
+    ID:domain.ID(cycleID),BaseRevision:state.Revision,Instant:state.Instant});err!=nil{t.Fatal(err)}
+   proposal,err:=testresourcev1.ProposalForDispatch(c.bundle,dispatch);if err!=nil{t.Fatal(err)}
+   scope,err:=communication.MakeTyped("cote.csf.communication.scope.v1","cote.csf.schema.typed-value",[]any{uint64(0)})
+   if err!=nil{t.Fatal(err)}
+   content,err:=communication.MakeTyped("cote.csf.communication.allegation.v1","cote.csf.schema.typed-value",
+    []any{"resource.stolen",[]any{"school","a"},"last.resource"})
+   if err!=nil{t.Fatal(err)}
+   params,err:=communication.SendParameters(communication.SendSpec{
+    Recipient:communication.Actor{"school","b"},PresentedSender:"C",
+    Channel:"school.message.v1",DueAt:state.Instant+25,
+    Proposition:communication.Proposition{Type:"resource.stolen",Polarity:0,
+     TemporalScope:scope,Content:content}})
+   if err!=nil{t.Fatal(err)}
+   proposal.Body[4]="communication.send"
+   proposal.Body[5]=uint64(1)
+   proposal.Body[7]=[]any{}
+   proposal.Body[8]=params
+   proposal.Body[9]=[]any{}
+   proposal.Body[10]=[]any{uint64(0)}
+   digest,_,err:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,
+    []any{proposal.Body});if err!=nil{t.Fatal(err)}
+   proposal.Digest=digest
+   proposal.Canonical,err=codec.CanonicalPayload(append(cloneAny(proposal.Body),digest[:]));if err!=nil{t.Fatal(err)}
+   if err:=ledger.Respond(ctx,proposal);err!=nil{t.Fatal(err)}
+   _,hash,err:=store.LoadWorldState(ctx,1);if err!=nil{t.Fatal(err)}
+   messageCycle:=admission.Cycle{ID:domain.ID(cycleID),Attempt:0,Instant:state.Instant,
+    Ordinal:ordinal,BaseRevision:state.Revision,BaseStateHash:domain.Digest(hash),RetryRef:[]any{uint64(0)}}
+   messageFence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).
+    AdmitThenEvaluate(ctx,c.bundle,ledger,messageCycle,c.admissionPolicies,nil)
+   if err!=nil{t.Fatal(err)}
+   if variant.failed{
+    c.failAfterStep=4
+    if _,err:=c.CommitCommunicationSend(ctx,ledger,messageCycle,messageFence);err==nil{
+     t.Fatal("communication failpoint failed to roll back mixed-timeline transmission")
+    }
+    c.failAfterStep=0
+   }
+   if _,err:=c.CommitCommunicationSend(ctx,ledger,messageCycle,messageFence);err!=nil{t.Fatal(err)}
+   final,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil);if err!=nil{t.Fatal(err)}
+   var status int
+   q,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+   if err:=q.QueryRowContext(ctx,"SELECT status FROM communication_transmissions").Scan(&status);err!=nil{q.Close();t.Fatal(err)}
+   q.Close()
+   if status!=0{t.Fatal("claim delivered too early instead of remaining IN_TRANSIT")}
+   if _,err:=store.ReplayClock(ctx,[32]byte(run),c.bundle);err!=nil{t.Fatal(err)}
+   all,err:=csfrv18ExactFiveLedgers(path);if err!=nil{t.Fatal(err)}
+   if variant.name=="continuous"{baseline=bytes.Clone(final.Canonical);allLedgers=bytes.Clone(all)}else if
+    !bytes.Equal(baseline,final.Canonical)||!bytes.Equal(allLedgers,all){
+    t.Fatal("mixed resource+trigger+in-transit communication diverged across restored routes")
+   }
+  })
  }
 }

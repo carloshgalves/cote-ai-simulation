@@ -30,12 +30,21 @@ func TestCSFRV18V2SettlesFencedWorkBeforeChildFork(t *testing.T){
  path:=t.TempDir()+"/recovered-fence-v2.db"
  child,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
  defer child.Close()
+ provider:=func(ctx context.Context,s *sqlite.Store)([]sqlite.SnapshotCheckpoint,error){
+  state,err:=s.LoadClock(ctx,[32]byte(run))
+  if err!=nil{return nil,err}
+  return csfrv18SyntheticActorCheckpoints(t,sourcePath,state.Instant,int64(state.Revision)),nil
+ }
+ if _,err:=coordinator.SettleFencedThenForkV2(ctx,ledger,[32]byte(run),
+  sealed.ID,childID,child,coordinator.bundle,provider);err==nil{
+  t.Fatal("uninstalled V2 policy passed preflight")
+ }
+ unchanged,err:=parent.LoadClock(ctx,[32]byte(run))
+ if err!=nil||unchanged!=before{
+  t.Fatal("failed child policy preflight mutated V1 fenced parent:",err)
+ }
  root,err:=coordinator.SettleFencedThenForkV2(ctx,ledger,[32]byte(run),
-  sealed.ID,childID,child,v2,func(ctx context.Context,s *sqlite.Store)([]sqlite.SnapshotCheckpoint,error){
-   state,err:=s.LoadClock(ctx,[32]byte(run))
-   if err!=nil{return nil,err}
-   return csfrv18SyntheticActorCheckpoints(t,sourcePath,state.Instant,int64(state.Revision)),nil
-  })
+  sealed.ID,childID,child,v2,provider)
  if err!=nil{t.Fatal("recovered fence handoff did not complete:",err)}
  if root.Payload[5]!=policy.CodecPolicyV2ID{t.Fatal("child policy downgraded")}
  parentAfter,err:=parent.LoadClock(ctx,[32]byte(run))

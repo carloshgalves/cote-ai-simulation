@@ -10,7 +10,6 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/communication"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
@@ -52,9 +51,7 @@ func verifyCommunicationDueTerminal(ctx context.Context,tx *sql.Tx,b ports.WorkB
   !sameCanonical(revision[5],b.BaseStateHash[:]){
   return errors.New("delivering a claim may not mutate WorldState")
  }
- var genesisRaw []byte
- if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",b.RunID[:]).Scan(&genesisRaw);err!=nil{return err}
- manifest,err:=genesis.ValidateCanonical(genesisRaw,b.CommunicationBundle)
+ manifest,err:=validatedGenesisTx(ctx,tx,b.RunID,b.CommunicationBundle)
  if err!=nil||[32]byte(manifest.RunID)!=b.RunID{return errors.New("communication due Genesis policy mismatch")}
  bindings,ok:=manifest.Payload[14].([]any)
  if !ok{return errors.New("Genesis communication policy roster invalid")}

@@ -2,6 +2,7 @@ package commit
 
 import (
  "context"
+ "database/sql"
  "testing"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
@@ -126,4 +127,31 @@ func TestCSFRV18ForkRejectsGenesisRoundWithRevokedDispatchHistory(t *testing.T){
   t.Fatal("fork silently discarded revoked dispatch history from a pending Genesis round")
  }
  assertCSFRV18EmptyRejectedFork(t,path)
+}
+
+func TestCSFRV18ForkRoundSealFaultRollsBackAllChildAuthority(t *testing.T){
+ ctx:=context.Background()
+ source,ledger,b,run,origin:=csfrv18GenesisRoundSource(t)
+ state,err:=source.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ _,err=ledger.DeclareRound(ctx,"genesis.schedule",[2]string{"school","a"},
+  []string{"choice"},domain.EligibilityCoordinate{NotBeforeInstant:state.Instant+21},
+  origin,1,0,0,[]any{uint64(0)})
+ if err!=nil{t.Fatal(err)}
+ snap,err:=source.CreateSnapshotV1(ctx,[32]byte(run),b,nil);if err!=nil{t.Fatal(err)}
+ path:=t.TempDir()+"/failed-round-seal.db"
+ child,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer child.Close()
+ raw,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ defer raw.Close()
+ if _,err:=raw.ExecContext(ctx, `CREATE TRIGGER csfrv18_fault_round_seal
+  BEFORE INSERT ON round_integrity_seals
+  BEGIN SELECT RAISE(ABORT,'injected failure after child round insertion'); END;`);err!=nil{t.Fatal(err)}
+ id:=[32]byte(run);id[0]^=0x91
+ if _,err:=source.ForkIdleSnapshotV1(ctx,[32]byte(run),snap.ID,id,child,b);err==nil{
+  t.Fatal("fault during migrated round seal did not abort child bootstrap")
+ }
+ assertCSFRV18EmptyRejectedFork(t,path)
+ if _,err:=source.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,b);err!=nil{
+  t.Fatal("failed child transaction changed parental snapshot:",err)
+ }
 }

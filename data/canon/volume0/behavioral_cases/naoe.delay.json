@@ -1,0 +1,24 @@
+{
+  "schema_version": "volume0-behavioral-case-v1",
+  "case_id": "v0.case.naoe.delay",
+  "actor_id": "actor.naoe",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "source_pages": [
+    17,
+    18,
+    22
+  ],
+  "context": "Faction officials wait for uncertain appointment",
+  "behavioral_evidence": "Power to delay access affects subordinate choices",
+  "observed_outcome": "Atsuomi reads routine lateness as intentional leverage",
+  "limits": "Naoe inner motive is inferred by subordinate",
+  "simulation_usage": "Supports pre-existing behavioral calibration, not re-enactment or future-memory injection",
+  "counterfactual_required": true
+}

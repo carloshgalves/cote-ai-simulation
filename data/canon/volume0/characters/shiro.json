@@ -1,0 +1,31 @@
+{
+  "schema_version": "volume0-character-reference-v1",
+  "character_id": "actor.shiro",
+  "name": "Shiro",
+  "role_summary": "Fourth-generation student who elects to leave for freedom and friends",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "reference_pages": [
+    165,
+    166,
+    186,
+    187,
+    188,
+    190,
+    191,
+    192
+  ],
+  "behavioral_case_refs": [
+    "v0.case.shiro.freedom"
+  ],
+  "identity_and_epistemic_warnings": [
+    "voluntary dropout not death; future whereabouts unknown"
+  ],
+  "scope": "REFERENCE_ONLY; NOT Y1_START AUTO-SEED"
+}

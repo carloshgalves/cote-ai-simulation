@@ -1,0 +1,24 @@
+{
+  "schema_version": "volume0-character-reference-v1",
+  "character_id": "actor.kanzaki_ryuji",
+  "name": "Ryūji Kanzaki",
+  "role_summary": "Child at corporate sponsor gathering",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "reference_pages": [
+    224,
+    225,
+    226,
+    227,
+    232
+  ],
+  "behavioral_case_refs": [],
+  "identity_and_epistemic_warnings": [],
+  "scope": "REFERENCE_ONLY; NOT Y1_START AUTO-SEED"
+}

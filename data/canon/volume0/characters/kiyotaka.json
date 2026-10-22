@@ -1,0 +1,48 @@
+{
+  "schema_version": "volume0-character-reference-v1",
+  "character_id": "actor.kiyotaka",
+  "name": "Kiyotaka Ayanokōji",
+  "role_summary": "Fourth-generation Beta-program White Room student",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "reference_pages": [
+    132,
+    133,
+    134,
+    135,
+    136,
+    138,
+    160,
+    161,
+    162,
+    163,
+    186,
+    190,
+    191,
+    192,
+    193,
+    194,
+    251,
+    252,
+    253,
+    254
+  ],
+  "behavioral_case_refs": [
+    "v0.case.kiyotaka.gummy",
+    "v0.case.kiyotaka.cards",
+    "v0.case.kiyotaka.shiro-combat",
+    "v0.case.kiyotaka.adult-baton",
+    "v0.case.kiyotaka.yuki-health",
+    "v0.case.kiyotaka.yuki-reunion"
+  ],
+  "identity_and_epistemic_warnings": [
+    "adult combatants count and affiliation not supplied"
+  ],
+  "scope": "REFERENCE_ONLY; NOT Y1_START AUTO-SEED"
+}

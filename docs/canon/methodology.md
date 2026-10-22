@@ -69,3 +69,7 @@ O cânone descreve o que a obra afirma. Reconstruções nossas — fórmulas, al
 A dependência é unidirecional: cânone → modelos. Nenhum registro sob `data/models/` pode aparecer em `provenance.supports` de um claim canônico.
 
 O caso disciplinador é a admissão: a obra afirma que existem dimensões avaliadas e que a alocação em classes reflete mérito. Ela **não** declara uma fórmula. Se construirmos um alocador, ele é modelo de simulação, identificado como tal, validado contra as alocações canônicas conhecidas — nunca apresentado como regra da escola.
+
+## Exceção de fonte aceita pelo operador
+
+Para edições autorizadas pelo operador, a verificação bibliográfica Tier 0–1 não é exigência absoluta: é substituída por auditoria de passagem **na edição autorizada**, mantendo edition, locator, narrativa, `verified_by`/`verified_at` e bloqueios de conhecimento/conflito. A autorização da edição, isoladamente, não promove registros individuais a `VERIFIED` e o compilador atual só pode usar esses registros após adaptador/gate explícito. Detalhes: [operator-source-acceptance.md](operator-source-acceptance.md).

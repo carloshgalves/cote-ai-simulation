@@ -1,0 +1,37 @@
+{
+  "schema_version": "volume0-character-reference-v1",
+  "character_id": "actor.sakayanagi_father",
+  "name": "Sakayanagi",
+  "role_summary": "Arisu father; financial and ethical observer of White Room",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "reference_pages": [
+    37,
+    38,
+    49,
+    50,
+    54,
+    55,
+    105,
+    109,
+    110,
+    111,
+    170,
+    171,
+    172,
+    173,
+    175,
+    176
+  ],
+  "behavioral_case_refs": [
+    "v0.case.sakayanagi.observation"
+  ],
+  "identity_and_epistemic_warnings": [],
+  "scope": "REFERENCE_ONLY; NOT Y1_START AUTO-SEED"
+}

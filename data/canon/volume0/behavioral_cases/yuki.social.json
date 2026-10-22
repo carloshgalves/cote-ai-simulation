@@ -1,0 +1,27 @@
+{
+  "schema_version": "volume0-behavioral-case-v1",
+  "case_id": "v0.case.yuki.social",
+  "actor_id": "actor.yuki",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "source_pages": [
+    144,
+    145,
+    146,
+    166,
+    167,
+    168
+  ],
+  "context": "Social restriction and punishing training environment",
+  "behavioral_evidence": "Reaches out to Kiyotaka in casual conversation",
+  "observed_outcome": "Shows expressive social initiative; Kiyotaka remains atypically reserved",
+  "limits": "No automatic future romantic objective",
+  "simulation_usage": "Supports pre-existing behavioral calibration, not re-enactment or future-memory injection",
+  "counterfactual_required": true
+}

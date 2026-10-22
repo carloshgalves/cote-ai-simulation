@@ -1,0 +1,32 @@
+{
+  "schema_version": "volume0-behavioral-case-v1",
+  "case_id": "v0.case.atsuomi.patronage",
+  "actor_id": "actor.atsuomi",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "source_pages": [
+    17,
+    18,
+    19,
+    24,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33
+  ],
+  "context": "Junior politician navigates unequal Naoe relationship",
+  "behavioral_evidence": "Tolerates status humiliation while developing political options",
+  "observed_outcome": "Project role increases institutional power",
+  "limits": "Own framing of merit and ambition subjective",
+  "simulation_usage": "Supports pre-existing behavioral calibration, not re-enactment or future-memory injection",
+  "counterfactual_required": true
+}

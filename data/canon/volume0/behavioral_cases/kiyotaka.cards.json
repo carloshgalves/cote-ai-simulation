@@ -1,0 +1,25 @@
+{
+  "schema_version": "volume0-behavioral-case-v1",
+  "case_id": "v0.case.kiyotaka.cards",
+  "actor_id": "actor.kiyotaka",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "source_pages": [
+    160,
+    161,
+    162,
+    163
+  ],
+  "context": "Ten demonstration rounds with five facedown symbol cards; room observation",
+  "behavioral_evidence": "Recognized stable arrangement and task aimed at memory, not psychic powers",
+  "observed_outcome": "Fifty answers correct from fifty; instructor disclosed marked-card/earpiece assistance on his side",
+  "limits": "Pattern and memory depend on available repeated demonstrations",
+  "simulation_usage": "Supports pre-existing behavioral calibration, not re-enactment or future-memory injection",
+  "counterfactual_required": true
+}

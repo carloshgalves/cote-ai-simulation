@@ -1,0 +1,25 @@
+{
+  "schema_version": "volume0-behavioral-case-v1",
+  "case_id": "v0.case.yuki.reunion",
+  "actor_id": "actor.yuki",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "source_pages": [
+    251,
+    252,
+    253,
+    254
+  ],
+  "context": "Post-dropout counseling and desire for reunion",
+  "behavioral_evidence": "Seeks conversation and hopes Kiyotaka remembers shared childhood",
+  "observed_outcome": "Experiences distress when he declines",
+  "limits": "Do not fabricate specific diagnoses or healing outcomes",
+  "simulation_usage": "Supports pre-existing behavioral calibration, not re-enactment or future-memory injection",
+  "counterfactual_required": true
+}

@@ -1,0 +1,102 @@
+{
+  "schema_version": "volume0-open-questions-v1",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "questions": [
+    {
+      "id": "yuki-younger-sister",
+      "pages": [
+        254
+      ],
+      "fact": "Yuki father mentions his younger daughter",
+      "unknown": "Her name, whether she is Tsubaki or anyone else"
+    },
+    {
+      "id": "shiro-after-exit",
+      "pages": [
+        186,
+        187,
+        190,
+        191,
+        192
+      ],
+      "fact": "Shiro voluntarily withdrew",
+      "unknown": "Whereabouts after White Room; participation in later institutions"
+    },
+    {
+      "id": "naoe-later-status",
+      "pages": [
+        247,
+        248
+      ],
+      "fact": "Alive and severely ill in Volume 0 epilogue",
+      "unknown": "Death date or later medical condition"
+    },
+    {
+      "id": "adult-fighter-number",
+      "pages": [
+        192,
+        193,
+        194
+      ],
+      "fact": "Multiple hired adults fought Kiyotaka",
+      "unknown": "Exact count; whether organized-crime assassins"
+    },
+    {
+      "id": "white-room-recruitment-consent",
+      "pages": [
+        60,
+        61,
+        62,
+        90,
+        91,
+        126,
+        127
+      ],
+      "fact": "Heterogeneous procurement/recruitment of children",
+      "unknown": "Uniform binding rights and consent terms"
+    },
+    {
+      "id": "curriculum-hourly-detail",
+      "pages": [
+        138,
+        149,
+        150,
+        151,
+        152,
+        158,
+        242,
+        243
+      ],
+      "fact": "Tracks and programs mentioned",
+      "unknown": "Complete schedule by cohort, age and individual"
+    },
+    {
+      "id": "kijima-linked-school",
+      "pages": [
+        214,
+        215,
+        261
+      ],
+      "fact": "Education-related political agenda claimed",
+      "unknown": "Detailed institution and actual governance"
+    },
+    {
+      "id": "researcher-causality",
+      "pages": [
+        242,
+        243,
+        244,
+        245
+      ],
+      "fact": "Suzukake reports specific results and limitations",
+      "unknown": "Causal proof from observational cohorts"
+    }
+  ]
+}

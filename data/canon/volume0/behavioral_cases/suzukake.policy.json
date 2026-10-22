@@ -1,0 +1,31 @@
+{
+  "schema_version": "volume0-behavioral-case-v1",
+  "case_id": "v0.case.suzukake.policy",
+  "actor_id": "actor.suzukake",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "source_pages": [
+    108,
+    109,
+    124,
+    125,
+    126,
+    127,
+    242,
+    243,
+    244,
+    245
+  ],
+  "context": "Comparative data, attrition and educational design problem",
+  "behavioral_evidence": "Introduces increasing levels and later social curriculum; regrets Beta",
+  "observed_outcome": "Reports later cohorts and anomalous performance of Kiyotaka",
+  "limits": "Researcher claims are not universal scientific truth",
+  "simulation_usage": "Supports pre-existing behavioral calibration, not re-enactment or future-memory injection",
+  "counterfactual_required": true
+}

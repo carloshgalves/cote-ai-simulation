@@ -32,3 +32,7 @@ Tier 4 e 5 nunca aparecem em `supports`. Aparecem em `discovered_via`.
 ## Divergências conhecidas entre mídias
 
 O anime diverge do texto em pontos verificáveis (por exemplo, tamanho das turmas). Claims de origem exclusivamente adaptacional recebem `continuity: [anime]` e ficam fora da recuperação padrão, que opera em `continuity: [ln]`.
+
+## Operador: edições autorizadas para packs de simulação (22-10-2026)
+
+A autoridade bibliográfica de Tier 0–6 continua servindo como referência de origem e qualidade editorial. O **operador** pode aceitar explicitamente uma edição traduzida de fãs para fundamentar os packs internos, sem reclassificá-la falsamente como tradução oficial. Para essas edições, a aprovação de fonte é registrada separadamente da **auditoria por passagem** e não produz `VERIFIED` automático nem contorna as barreiras de conhecimento, cronologia e divergência. Consulte [operator-source-acceptance.md](operator-source-acceptance.md).

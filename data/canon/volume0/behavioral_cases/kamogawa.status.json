@@ -1,0 +1,29 @@
+{
+  "schema_version": "volume0-behavioral-case-v1",
+  "case_id": "v0.case.kamogawa.status",
+  "actor_id": "actor.kamogawa",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "source_pages": [
+    19,
+    20,
+    21,
+    24,
+    43,
+    44,
+    247,
+    248
+  ],
+  "context": "Protected junior second-generation politician under dominant patron",
+  "behavioral_evidence": "Learns compliance and maintains relationships",
+  "observed_outcome": "Still active in later factional contacts",
+  "limits": "Atsuomi's contempt not objective incompetence",
+  "simulation_usage": "Supports pre-existing behavioral calibration, not re-enactment or future-memory injection",
+  "counterfactual_required": true
+}

@@ -1,0 +1,269 @@
+{
+  "schema_version": "volume0-institution-evidence-v1",
+  "institution_id": "org.white_room",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs v1.0.1",
+    "kind": "fan_translation",
+    "project_source_authority": "OPERATOR_ACCEPTED",
+    "approved_on": "2026-10-22",
+    "record_status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "governance": {
+    "director": "actor.atsuomi",
+    "political_origin": "org.naoe_faction",
+    "research_lead": "actor.suzukake",
+    "researchers": [
+      "actor.ishida",
+      "actor.souya",
+      "actor.tabuchi"
+    ],
+    "external_operator": "actor.tsukishiro",
+    "observer": "actor.sakayanagi_father",
+    "evidence_pages": [
+      33,
+      34,
+      35,
+      72,
+      73,
+      93,
+      94,
+      103,
+      108,
+      109,
+      214,
+      215
+    ]
+  },
+  "resources": {
+    "financing": "Corporate sponsorship, patronage, clandestine intermediaries; roles vary by donor",
+    "recruitment": "Infants from heterogeneous backgrounds; fourth-generation intake 74",
+    "facilities": "Secluded facility, medical monitoring, white environment, sleep/meal regulation",
+    "evidence_pages": [
+      47,
+      54,
+      55,
+      56,
+      58,
+      59,
+      60,
+      61,
+      62,
+      70,
+      71,
+      90,
+      91,
+      97,
+      98,
+      99,
+      126,
+      127,
+      149,
+      150,
+      151
+    ]
+  },
+  "cohort_policy": [
+    {
+      "generation": 1,
+      "observed": "15 infants assigned to three groups of five with comparative educational approaches",
+      "pages": [
+        93,
+        94,
+        95,
+        103,
+        108
+      ]
+    },
+    {
+      "generation": 2,
+      "observed": "Suzukake takes pedagogical lead; precise level uncertain",
+      "pages": [
+        108,
+        109
+      ]
+    },
+    {
+      "generation": 3,
+      "observed": "Graduate difficulty increase; exact difficulty not established",
+      "pages": [
+        124,
+        125
+      ]
+    },
+    {
+      "generation": 4,
+      "observed": "Exceptional Beta program; 74 starting pupils; five remain at eighth year; one remains after following spring",
+      "pages": [
+        126,
+        127,
+        128,
+        139,
+        144,
+        186,
+        190,
+        191,
+        192,
+        243
+      ]
+    },
+    {
+      "generation": 5,
+      "observed": "Difficulty level four with introduced communication/social teaching",
+      "pages": [
+        127,
+        242,
+        243
+      ]
+    },
+    {
+      "generation": 6,
+      "observed": "Difficulty level five according to Suzukake",
+      "pages": [
+        242,
+        243
+      ]
+    },
+    {
+      "generation": 7,
+      "observed": "Difficulty level six; all students dropped out as of Suzukake account",
+      "pages": [
+        242,
+        243
+      ]
+    },
+    {
+      "generation": "8+",
+      "observed": "Mix of levels four and five according to Suzukake",
+      "pages": [
+        242,
+        243
+      ]
+    }
+  ],
+  "curricular_tracks": [
+    {
+      "track": "literacy-academics",
+      "examples": [
+        "hiragana",
+        "katakana",
+        "alphabet",
+        "numeracy",
+        "simple kanji",
+        "timed written assessments",
+        "mathematics",
+        "economics",
+        "political science"
+      ],
+      "pages": [
+        138,
+        139,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ]
+    },
+    {
+      "track": "cultural",
+      "examples": [
+        "music",
+        "calligraphy",
+        "tea ceremony"
+      ],
+      "pages": [
+        140,
+        142,
+        149,
+        150
+      ]
+    },
+    {
+      "track": "physical",
+      "examples": [
+        "judo",
+        "randori",
+        "boxing",
+        "karate",
+        "Jeet Kune Do",
+        "swimming",
+        "multi-opponent exercise",
+        "weapon familiarization"
+      ],
+      "pages": [
+        140,
+        141,
+        142,
+        165,
+        166,
+        186,
+        190,
+        191,
+        192,
+        193,
+        194
+      ]
+    },
+    {
+      "track": "reasoning",
+      "examples": [
+        "gummy-in-hand hypothesis test",
+        "five-symbol memory/instruction inference"
+      ],
+      "pages": [
+        132,
+        133,
+        134,
+        135,
+        136,
+        160,
+        161,
+        162,
+        163
+      ]
+    },
+    {
+      "track": "environmental-exposure",
+      "examples": [
+        "VR outside world",
+        "handling unfamiliar environments"
+      ],
+      "pages": [
+        124,
+        125,
+        158,
+        159,
+        160
+      ]
+    },
+    {
+      "track": "social",
+      "examples": [
+        "explicit communication curriculum introduced from generation five"
+      ],
+      "pages": [
+        242,
+        243
+      ]
+    }
+  ],
+  "assessment_cautions": [
+    "Gummy guessed beyond two apparent options but unconventional guesses were wrong",
+    "Card task fifty of fifty success resulted from observed demonstration structure; not psychic powers",
+    "Hired adult combatants were multiple, number/mafia relation unspecified",
+    "Absence of peers leads to adult opposition; not a calibrated combat rating",
+    "Dropout does not imply death",
+    "Percentages reported by researcher do not establish randomized causal efficacy",
+    "Social and emotional deficits survive academic progress"
+  ],
+  "temporal_phases": [
+    "faction-sponsored creation",
+    "researcher-run expanding curricula",
+    "political change and suspension",
+    "externally managed children / possible resumption"
+  ],
+  "epistemic_boundary": "Knowledge differs for child, teacher, director, patron, financier and investigator; do not share hidden affiliations by default",
+  "engine_status": "NOT_EXECUTABLE; White Room training separate from ANHS ExamSpec"
+}

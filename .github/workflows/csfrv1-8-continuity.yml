@@ -1,0 +1,32 @@
+name: CSFRV1-8 Continuity Checkpoint
+on:
+  push:
+    branches: [feat/csfrv1-8-replay-snapshot-fork]
+  pull_request:
+    paths:
+      - "internal/csf/**"
+      - "tests/failureinjection/**"
+      - "tests/properties/**"
+      - "evals/simulation/csf-runtime-v1/**"
+      - ".github/workflows/csfrv1-8-continuity.yml"
+permissions:
+  contents: read
+jobs:
+  continuity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Check whitespace
+        run: |
+          git fetch --no-tags --depth=1 origin main
+          git diff --check origin/main HEAD
+      - name: Snapshot and resume negative tests
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18'
+      - name: SQLite replay and terminal regression
+        run: go test -count=1 ./internal/csf/persistence/sqlite ./internal/csf/clock ./internal/csf/perception
+      - name: Full Go regression
+        run: go test -count=1 ./...

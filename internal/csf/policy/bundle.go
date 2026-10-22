@@ -33,6 +33,8 @@ type Bundle struct {
 	CodecPolicyHash [32]byte
 	SchemaHash      [32]byte
 	SuiteHash       [32]byte
+	// Set exclusively by a verified loader after manifest and receipt validation.
+	loadedFingerprint [32]byte
 }
 
 // RuntimeFingerprint identifies the exact parsed authority installed for
@@ -52,6 +54,21 @@ func (b *Bundle) RuntimeFingerprint() ([32]byte,error) {
  }{b.Directory,b.Profile,b.Registries,b.Transitions,b.CodecPolicyHash,b.SchemaHash,b.SuiteHash})
  if err!=nil{return [32]byte{},err}
  return sha256.Sum256(data),nil
+}
+
+// VerifyInstalledBundle requires the private provenance seal written by a
+// normative manifest loader. A caller cannot register a fabricated Bundle
+// merely by copying a V1 policy ID or hash into exported struct fields.
+func (b *Bundle) VerifyInstalledBundle() error {
+ if b==nil || b.loadedFingerprint==([32]byte{}) {
+  return fmt.Errorf("policy bundle was not installed by a verified loader")
+ }
+ current,err:=b.RuntimeFingerprint()
+ if err!=nil{return fmt.Errorf("fingerprinting installed bundle: %w",err)}
+ if current!=b.loadedFingerprint {
+  return fmt.Errorf("policy bundle changed after normative manifest verification")
+ }
+ return nil
 }
 
 
@@ -128,6 +145,9 @@ func Load(directory string) (*Bundle, error) {
 	if bundle.Profile["codec_policy_id"] != CodecPolicyID || bundle.Profile["codec_version"] != float64(CodecVersion) {
 		return nil, fmt.Errorf("unsupported codec profile identity")
 	}
+	fingerprint,err:=bundle.RuntimeFingerprint()
+	if err!=nil{return nil,fmt.Errorf("sealing verified policy: %w",err)}
+	bundle.loadedFingerprint=fingerprint
 	return bundle, nil
 }
 

@@ -729,7 +729,7 @@ func TestCSFRV18ReopenRetryFromVerifiedFrozenSemanticCut(t *testing.T){
   newFence.ID==fence.ID||newFence.InputDigest!=fence.InputDigest{
   t.Fatal("authorized retry resumed different cycle or changed previous semantic cut")
  }
- if _,err:=resumer.ReopenAuthorizedRetry(ctx,ledger,[32]byte(run),snapshot.ID);err==nil{
+ if _,_,_,err:=resumer.ReopenAuthorizedRetry(ctx,ledger,[32]byte(run),snapshot.ID);err==nil{
   t.Fatal("second recovery admitted duplicate attempt after state became in-flight")
  }
  ctl,err:=reopened.LoadCycleControl(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}

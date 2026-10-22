@@ -87,7 +87,7 @@ func TestCSFRV18V2ForkImportsInTransitAsChildOwnedAuthorities(t *testing.T){
   t.Fatal("import kept a parental causal identity")
  }
  if _,err:=child.ReplayClock(ctx,id,v2);err!=nil{t.Fatal("child after imported fork not replayable:",err)}
- childSnap,err:=child.CreateSnapshotV1(ctx,id,v2,nil)
+ childSnap,err:=child.CreateSnapshotV1(ctx,id,v2,checkpoints)
  if err!=nil{t.Fatal("V2 imported child snapshot:",err)}
  if _,err:=child.VerifySnapshotV1(ctx,id,childSnap.ID,v2);err!=nil{t.Fatal(err)}
  if err:=child.Close();err!=nil{t.Fatal(err)}

@@ -5,6 +5,7 @@ import (
  "context"
  "database/sql"
  "errors"
+ "fmt"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
@@ -106,22 +107,40 @@ func verifyCommunicationDueTerminal(ctx context.Context,tx *sql.Tx,b ports.WorkB
  if !bytes.Equal(durableClaim,b.Communication.Claim.Canonical){return errors.New("communication Claim no longer immutable")}
  if len(sentCommit)!=32{return errors.New("transmission send commit reference absent")}
  var sourceJournalRaw []byte
- if err:=tx.QueryRowContext(ctx,
+ sourceErr:=tx.QueryRowContext(ctx,
   "SELECT j.canonical FROM committed_cycles c JOIN decision_ledger j ON j.id=c.commit_id WHERE c.run_id=? AND c.commit_id=?",
-  b.RunID[:],sentCommit).Scan(&sourceJournalRaw);err!=nil{return errors.New("delivery has no durable earlier send CycleCommit")}
- earlier,err:=codec.StrictDecodePayload(sourceJournalRaw);if err!=nil{return err}
- priorCommit,ok:=earlier.([]any)
- if !ok||len(priorCommit)!=24{return errors.New("earlier send journal corrupt")}
- sentAtRevision,ok:=priorCommit[8].(uint64)
- if !ok||sentAtRevision>uint64(prior.Revision){return errors.New("delivery claims nonexistent future sent message")}
- trans,err:=communication.AuthenticateTransmission(b.CommunicationBundle,b.Communication.Transmission)
- if err!=nil{return err}
- if !containsRoot(priorCommit[11],[32]byte(trans.Origin.ID)){
-  return errors.New("transmission born outside its claimed send CycleCommit")
+  b.RunID[:],sentCommit).Scan(&sourceJournalRaw)
+ imported:=false
+ switch sourceErr {
+ case nil:
+  earlier,err:=codec.StrictDecodePayload(sourceJournalRaw);if err!=nil{return err}
+  priorCommit,ok:=earlier.([]any)
+  if !ok||len(priorCommit)!=24{return errors.New("earlier send journal corrupt")}
+  sentAtRevision,ok:=priorCommit[8].(uint64)
+  if !ok||sentAtRevision>uint64(prior.Revision){return errors.New("delivery claims nonexistent future sent message")}
+  trans,err:=communication.AuthenticateTransmission(b.CommunicationBundle,b.Communication.Transmission)
+  if err!=nil{return err}
+  if !containsRoot(priorCommit[11],[32]byte(trans.Origin.ID)){
+   return errors.New("transmission born outside its claimed send CycleCommit")
+  }
+ case sql.ErrNoRows:
+  // A V2-imported in-transit message has no fictitious local send CycleCommit:
+  // it must be backed by the independently verified immutable V1 prefix.
+  if err:=validateV2ImportedBirthTx(ctx,tx,b.RunID,[32]byte(b.Communication.Transmission.Identity),
+   b.CommunicationBundle);err!=nil{
+   return fmt.Errorf("missing V2 migrated send provenance: %w",err)
+  }
+  imported=true
+ default:return sourceErr
  }
  plan:=communication.SendPlan{Run:domain.ID(b.RunID),Claim:b.Communication.Claim,
   Transmission:b.Communication.Transmission,Occurrence:b.Communication.Occurrence}
- dueAt,err:=communication.ValidateOccurrence(b.CommunicationBundle,plan)
+ var dueAt domain.SimulationInstant
+ if imported {
+  dueAt,err=communication.ValidateMigratedOccurrenceV2(b.CommunicationBundle,plan,manifest.ID,manifest.Digest)
+ }else{
+  dueAt,err=communication.ValidateOccurrence(b.CommunicationBundle,plan)
+ }
  if err!=nil||dueAt>prior.Instant{return errors.New("communication due cryptographic origin invalid")}
  result,err:=communication.PlanDueDelivery(b.CommunicationBundle,plan.Transmission,plan.Claim,
   domain.ID(id),dueAt,prior.Instant)

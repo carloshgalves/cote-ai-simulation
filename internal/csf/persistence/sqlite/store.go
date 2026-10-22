@@ -184,6 +184,24 @@ CREATE TABLE IF NOT EXISTS causal_outbox (id BLOB PRIMARY KEY CHECK(length(id)=3
 CREATE TABLE IF NOT EXISTS world_revisions (revision INTEGER PRIMARY KEY, state_hash BLOB NOT NULL CHECK(length(state_hash)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS cycle_control_state (run_id BLOB PRIMARY KEY CHECK(length(run_id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS snapshots (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
+CREATE TABLE IF NOT EXISTS snapshot_seals (
+ snapshot_id BLOB PRIMARY KEY CHECK(length(snapshot_id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ revision INTEGER NOT NULL CHECK(revision>=0),
+ digest BLOB NOT NULL CHECK(length(digest)=32),
+ FOREIGN KEY(snapshot_id) REFERENCES snapshots(id)
+) STRICT;
+CREATE TABLE IF NOT EXISTS snapshot_prefix_members (
+ snapshot_id BLOB NOT NULL CHECK(length(snapshot_id)=32),
+ ledger_name TEXT NOT NULL CHECK(ledger_name IN ('input_ledger','decision_ledger','event_store','evidence_ledger','causal_outbox')),
+ ordinal INTEGER NOT NULL CHECK(ordinal>=0),
+ record_id BLOB NOT NULL CHECK(length(record_id)=32),
+ canonical_hash BLOB NOT NULL CHECK(length(canonical_hash)=32),
+ PRIMARY KEY(snapshot_id,ledger_name,ordinal),
+ FOREIGN KEY(snapshot_id) REFERENCES snapshots(id)
+) STRICT;
+CREATE UNIQUE INDEX IF NOT EXISTS idx_snapshot_prefix_member
+ ON snapshot_prefix_members(snapshot_id,ledger_name,record_id);
 CREATE TABLE IF NOT EXISTS clock_states (
  run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
  canonical BLOB NOT NULL

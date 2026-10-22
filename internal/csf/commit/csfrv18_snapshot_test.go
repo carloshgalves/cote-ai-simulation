@@ -11,6 +11,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/fork"
@@ -382,5 +383,30 @@ func TestCSFRV18CommunicationSnapshotInTransitReplayAndDeliveryOnce(t *testing.T
  partitions:=pendingEnvelope.Value.([]any)
  if len(partitions[0].([]any))!=0{
   t.Fatal("already delivered ScheduledOccurrence remained as pending checkpoint authority")
+ }
+}
+
+func TestCSFRV18ForkCanArchiveFinalSourceClosureWithoutReopeningIngress(t *testing.T){
+ ctx:=context.Background()
+ bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,bundle)
+ source,err:=sqlite.Open(ctx,t.TempDir()+"/origin.db");if err!=nil{t.Fatal(err)};defer source.Close()
+ if err:=source.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ if err:=source.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
+ if err:=source.BootstrapGenesisTriggers(ctx,g,bundle,nil);err!=nil{t.Fatal(err)}
+ ledger,err:=inputledger.New(ctx,g.RunID,bundle,source);if err!=nil{t.Fatal(err)}
+ if err:=ledger.DeclareSource(inputledger.Source{ID:"closed-origin"});err!=nil{t.Fatal(err)}
+ at:=domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant+50}
+ if _,err:=ledger.CloseSource(ctx,"closed-origin",inputledger.Closure{
+  ProducerKey:"last-closure",ClosedThrough:at,Final:true});err!=nil{t.Fatal(err)}
+ origin,err:=source.CreateSnapshotV1(ctx,[32]byte(g.RunID),bundle,nil);if err!=nil{t.Fatal(err)}
+ child,err:=sqlite.Open(ctx,t.TempDir()+"/child.db");if err!=nil{t.Fatal(err)};defer child.Close()
+ id:=[32]byte(g.RunID);id[0]^=0x71
+ if _,err:=source.ForkIdleSnapshotV1(ctx,[32]byte(g.RunID),origin.ID,id,child,bundle);err!=nil{
+  t.Fatalf("terminal source closure is historical, not pending work: %v",err)
+ }
+ if _,err:=child.ReplayClock(ctx,id,bundle);err!=nil{t.Fatal(err)}
+ if _,err:=source.VerifySnapshotV1(ctx,[32]byte(g.RunID),origin.ID,bundle);err!=nil{
+  t.Fatal("fork modified immutable parental source history",err)
  }
 }

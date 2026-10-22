@@ -171,7 +171,8 @@ func genesisValidateForSnapshot(raw []byte,b *policy.Bundle)(snapshotGenesis,err
  return out,nil
 }
 
-// The roster is bound to evidence holders, not to a caller-selected list.
+// The roster is bound to registered cognitive actors and evidence holders,
+// never to a caller-selected list.
 // Inline checkpoint bytes are hashed, never interpreted.
 func verifySnapshotCheckpointRefs(ctx context.Context,tx *sql.Tx,run [32]byte,refs []any,instant int64,rev,cursor uint64,snapshotID *[32]byte)error{
  holderSQL:="SELECT DISTINCT holder_namespace,holder_id FROM evidence_routes WHERE run_id=? ORDER BY holder_namespace,holder_id"
@@ -193,6 +194,8 @@ func verifySnapshotCheckpointRefs(ctx context.Context,tx *sql.Tx,run [32]byte,re
  }
  if err:=holders.Err();err!=nil{holders.Close();return err}
  if err:=holders.Close();err!=nil{return err}
+ eligible,err:=snapshotCognitiveActorRoster(ctx,tx,run,snapshotID);if err!=nil{return err}
+ for key:=range eligible{expected[key]=true}
  got:=map[string]bool{}
  prior:=""
  for _,v:=range refs{
@@ -217,7 +220,7 @@ func verifySnapshotCheckpointRefs(ctx context.Context,tx *sql.Tx,run [32]byte,re
   if !storeOK||!producerOK{return errors.New("checkpoint store or producer absent")}
   for _,name:=range []string{ns,id,storeID,producer}{if domain.ValidateMachineID(name)!=nil{return errors.New("invalid checkpoint machine ID")}}
  }
- if len(expected)!=len(got){return errors.New("missing or extra epistemic checkpoint holder")}
- for k:=range expected{if !got[k]{return errors.New("missing checkpoint for evidence holder")}}
+ if len(expected)!=len(got){return errors.New("missing or extra eligible cognitive checkpoint")}
+ for k:=range expected{if !got[k]{return errors.New("missing checkpoint for eligible actor")}}
  return nil
 }

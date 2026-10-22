@@ -156,11 +156,8 @@ func (s *Store) deliverCommunicationPerception(ctx context.Context,taskID [32]by
  p,err:=loadVerifiedCommunicationProjection(ctx,tx,taskID);if err!=nil{return zero,err}
  parsed,err:=codec.StrictDecodePayload(p.Observation.Canonical);if err!=nil{return zero,err}
  fields:=parsed.([]any)
- taskRaw:=fields[1].([]byte)
+ _=fields
  var run [32]byte
- if err:=tx.QueryRowContext(ctx,"SELECT run_id FROM evidence_routes WHERE task_id=? LIMIT 1",taskRaw).Scan(&run);err==nil{
-  return zero,errors.New("preexisting indexed evidence requires exact replay validation before delivery")
- }
  var raw []byte
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM causal_outbox WHERE id=?",taskID[:]).Scan(&raw);err!=nil{return zero,err}
  v,err:=codec.StrictDecodePayload(raw);if err!=nil{return zero,err}

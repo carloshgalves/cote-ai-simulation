@@ -29,6 +29,10 @@ func registeredInvisibleEngineEvent(event []any) error {
  kind,ok:=event[3].(string)
  if !ok{return errors.New("internal Event type malformed")}
  switch kind{
+ case "communication.sent":
+  if phase==1&&originProducer=="communication.send"{return nil}
+ case "communication.delivery_failed":
+  if phase==1&&originProducer=="communication.delivery"{return nil}
  case "resource.consumed":
   if phase==1&&originProducer=="resource.consume"{return nil}
  case "clock.advanced":

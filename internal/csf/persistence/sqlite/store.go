@@ -202,6 +202,27 @@ CREATE TABLE IF NOT EXISTS snapshot_prefix_members (
 ) STRICT;
 CREATE UNIQUE INDEX IF NOT EXISTS idx_snapshot_prefix_member
  ON snapshot_prefix_members(snapshot_id,ledger_name,record_id);
+CREATE TABLE IF NOT EXISTS fork_lineage (
+ child_run BLOB PRIMARY KEY CHECK(length(child_run)=32),
+ parent_run BLOB NOT NULL CHECK(length(parent_run)=32),
+ parent_snapshot_id BLOB NOT NULL CHECK(length(parent_snapshot_id)=32),
+ origin_policy_hash BLOB NOT NULL CHECK(length(origin_policy_hash)=32),
+ reference_canonical BLOB NOT NULL,
+ parent_genesis_canonical BLOB NOT NULL,
+ parent_snapshot_canonical BLOB NOT NULL,
+ FOREIGN KEY(child_run) REFERENCES genesis_records(run_id)
+) STRICT;
+CREATE TABLE IF NOT EXISTS fork_history_records (
+ child_run BLOB NOT NULL CHECK(length(child_run)=32),
+ ledger_name TEXT NOT NULL CHECK(ledger_name IN ('input_ledger','decision_ledger','event_store','evidence_ledger','causal_outbox')),
+ ordinal INTEGER NOT NULL CHECK(ordinal>=0),
+ record_id BLOB NOT NULL CHECK(length(record_id)=32),
+ canonical BLOB NOT NULL,
+ PRIMARY KEY(child_run,ledger_name,ordinal),
+ FOREIGN KEY(child_run) REFERENCES fork_lineage(child_run)
+) STRICT;
+CREATE UNIQUE INDEX IF NOT EXISTS idx_fork_history_identity
+ ON fork_history_records(child_run,ledger_name,record_id);
 CREATE TABLE IF NOT EXISTS clock_states (
  run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
  canonical BLOB NOT NULL

@@ -78,3 +78,20 @@ func TestCSFRV17CannotPretendToBecomeAnotherFact(t *testing.T){
  claim.Origin.ID=[32]byte{}
  if _,err:=NewClaim(bundle,claim);err==nil{t.Fatal("unattributed assertion accepted")}
 }
+
+
+func TestCSFRV17CannotPublishPrivilegedTypedClaimToRecipient(t *testing.T){
+ bundle,claim,_:=fixture(t)
+ forbidden,err:=MakeTyped("cote.csf.observatory.privileged.v1",
+  "cote.csf.schema.typed-value",[]any{"secret","future-knowledge"})
+ if err!=nil{t.Fatal(err)}
+ claim.Proposition.Content=forbidden
+ if _,err:=NewClaim(bundle,claim);err==nil{
+  t.Fatal("unregistered privileged content entered canonical Claim")
+ }
+ send:=SendSpec{Recipient:Actor{"school","b"},Channel:"school.message.v1",
+  PresentedSender:"C",Proposition:claim.Proposition,DueAt:12}
+ if _,err:=SendParameters(send);err==nil{
+  t.Fatal("communication ActionProposal accepted forbidden privileged typed payload")
+ }
+}

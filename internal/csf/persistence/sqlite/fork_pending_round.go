@@ -28,6 +28,32 @@ func migrateGenesisPendingRounds(ctx context.Context, s *Store,
  parent, child *genesis.Genesis, refs []any, b *policy.Bundle)([]forkGenesisRound,error){
  out:=make([]forkGenesisRound,0,len(refs))
  seen:=map[[32]byte]bool{}
+ // A round may remain pending even after one of its slots was dispatched,
+ // answered, or revoked. Rebuilding only its declaration would silently
+ // erase that operational history and risk a second response. A typed V2
+ // dispatch/response migrator is required for every such round.
+ touched:=map[string]bool{}
+ rows,err:=s.db.QueryContext(ctx,"SELECT canonical FROM input_ledger")
+ if err!=nil{return nil,err}
+ for rows.Next(){
+  var encoded []byte
+  if err:=rows.Scan(&encoded);err!=nil{rows.Close();return nil,err}
+  value,err:=codec.StrictDecodePayload(encoded)
+  if err!=nil{
+   if _,envelopeErr:=codec.StrictDecodeEnvelope(encoded);envelopeErr==nil{continue}
+   rows.Close();return nil,errors.New("fork cannot classify a parent input record")
+  }
+  fields,ok:=value.([]any)
+  if !ok{rows.Close();return nil,errors.New("fork parent input record is not canonical array")}
+  if len(fields)!=11||!equalBytes(fields[1],parent.RunID[:]){continue}
+  if _,cycleOK:=fields[2].([]byte);!cycleOK{continue}
+  roundID,roundOK:=fields[3].([]byte)
+  if _,slotOK:=fields[4].(string);roundOK&&slotOK&&len(roundID)==32{
+   touched[string(roundID)]=true
+  }
+ }
+ if err:=rows.Err();err!=nil{rows.Close();return nil,err}
+ if err:=rows.Close();err!=nil{return nil,err}
  for _,rawRef:=range refs{
   ref,ok:=rawRef.([]any)
   if !ok||len(ref)!=3||ref[0]!=uint64(3){
@@ -35,6 +61,9 @@ func migrateGenesisPendingRounds(ctx context.Context, s *Store,
   }
   parentID,ok:=ref[1].([]byte)
   if !ok||len(parentID)!=32{return nil,errors.New("fork parent round identity invalid")}
+  if touched[string(parentID)]{
+   return nil,errors.New("fork round has prior dispatch history without a versioned migrator")
+  }
   registeredDigest,ok:=ref[2].([]byte)
   if !ok||len(registeredDigest)!=32{return nil,errors.New("fork parent round digest invalid")}
   var raw []byte

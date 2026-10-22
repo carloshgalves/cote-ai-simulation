@@ -89,11 +89,21 @@ func validateCanonical(encoded []byte, bundle *policy.Bundle, forkBootstrap bool
 		if !ok{return nil,fmt.Errorf("fork history ref is not bytes")}
 		if _,err:=fork.Decode(raw);err!=nil{return nil,fmt.Errorf("invalid fork history reference: %w",err)}
 	}
-	if payload[5] != policy.CodecPolicyID || !isUnsigned(payload[6], policy.CodecVersion) || payload[7] != policy.IdentityAlgorithm || payload[8] != policy.UnicodeVersion || payload[9] != policy.NormalizationID {
+	// Resolve the complete identity from the VERIFIED bundle used to
+	// authenticate this Genesis. Fixed V1 constants would make a legitimate
+	// versioned policy impossible and could misbind a V2 child to its parent.
+	codecID,codecVersion,codecHash,schemaHash,err:=bundle.CodecIdentity()
+	if err!=nil{return nil,fmt.Errorf("Genesis policy bundle not installed: %w",err)}
+	if payload[5] != codecID || !isUnsigned(payload[6], codecVersion) ||
+	 payload[7] != policy.IdentityAlgorithm || payload[8] != policy.UnicodeVersion ||
+	 payload[9] != policy.NormalizationID {
 		return nil, fmt.Errorf("genesis codec/unicode pins mismatch")
 	}
-	if !equalHexBytes(payload[10], policy.CodecPolicyHashHex) || !equalHexBytes(payload[11], policy.SchemaBundleHashHex) {
-		return nil, fmt.Errorf("genesis bundle hash pin mismatch")
+	if hash,ok:=payload[10].([]byte);!ok||!bytes.Equal(hash,codecHash[:]){
+		return nil, fmt.Errorf("genesis codec policy hash pin mismatch")
+	}
+	if hash,ok:=payload[11].([]byte);!ok||!bytes.Equal(hash,schemaHash[:]){
+		return nil, fmt.Errorf("genesis schema bundle hash pin mismatch")
 	}
 	if err := validateExtensionBundles(payload[12]); err != nil {
 		return nil, err

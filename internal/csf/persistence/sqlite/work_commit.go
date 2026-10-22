@@ -329,7 +329,10 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  }
  if b.Mode==8{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.CommunicationCandidate.Identity[:],b.CommunicationCandidate.Canonical);err!=nil{return err}
-  if _,err:=tx.ExecContext(ctx,"UPDATE communication_transmissions SET status=? WHERE run_id=? AND id=? AND status=0",int(b.CommunicationStatus),b.RunID[:],b.Communication.Transmission.Identity[:]);err!=nil{return err}
+  changed,err:=tx.ExecContext(ctx,"UPDATE communication_transmissions SET status=? WHERE run_id=? AND id=? AND status=0",int(b.CommunicationStatus),b.RunID[:],b.Communication.Transmission.Identity[:])
+  if err!=nil{return err}
+  n,err:=changed.RowsAffected()
+  if err!=nil||n!=1{return errors.New("due communication terminal status CAS rejected")}
  } else if b.Mode==7{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.CommunicationCandidate.Identity[:],b.CommunicationCandidate.Canonical);err!=nil{return err}
   claim:=b.Communication.Claim

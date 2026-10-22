@@ -73,6 +73,12 @@ func TestCSFRV18V2RekeysTransitWithoutImportingParentAuthorities(t *testing.T){
   originalTransmission.Origin.ID!=child.ID||originalClaim.Origin.ID!=child.ID {
   t.Fatal("V2 Claim/Transmission not based on child Genesis authority")
  }
+ if _,err:=communication.ValidateMigratedOccurrenceV2(v2,communication.SendPlan{
+  Run:child.RunID,Claim:birth.ChildClaim,Transmission:birth.ChildTransmission,
+  Occurrence:birth.ChildOccurrence,
+ },child.ID,child.Digest);err!=nil{
+  t.Fatal("V2 imported occurrence not child-authenticated:",err)
+ }
  parts,err:=codec.StrictDecodePayload(birth.ChildOccurrence.Canonical);if err!=nil{t.Fatal(err)}
  occ:=parts.([]any)
  if !bytes.Equal(occ[1].([]byte),child.RunID[:])||

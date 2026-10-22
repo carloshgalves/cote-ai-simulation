@@ -40,7 +40,7 @@ func migrateGenesisPendingOccurrences(ctx context.Context,s *Store,
   parsed,err:=codec.StrictDecodePayload(original);if err!=nil{return nil,err}
   // A valid roster reference must match an authenticated parent birth
   // before deriving a different child-owned identity.
-  if _,_,err:=originPolicy.CodecIdentity();err!=nil{return nil,err}
+  if _,_,_,_,err:=originPolicy.CodecIdentity();err!=nil{return nil,err}
   f,ok:=parsed.([]any)
   if !ok||len(f)!=15||!equalBytes(f[0],parentID)||!equalBytes(f[1],parent.RunID[:])||
    !equalBytes(f[14],birthDigest){return nil,errors.New("fork schedule birth hash differs from checkpoint")}

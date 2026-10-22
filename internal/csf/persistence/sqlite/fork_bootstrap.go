@@ -62,7 +62,20 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  snapshot,ok:=snapRaw.([]any);if !ok||len(snapshot)!=19{return nil,errors.New("source snapshot schema invalid")}
  epistemic,ok:=snapshot[14].([]any)
  if !ok{return nil,errors.New("fork epistemic snapshot roster malformed")}
- if len(epistemic)>0{return nil,errors.New("fork requires versioned migration of opaque cognitive checkpoints")}
+ if len(epistemic)>0&&!crossPolicy{
+  return nil,errors.New("V1 fork requires versioned migration of opaque cognitive checkpoints")
+ }
+ // V2 imports only exact inlined, signed parent checkpoint bytes. The
+ // ownership/eligibility roster is reconstructed below, and lineage replay
+ // binds it to the immutable archived parent checkpoint.
+ if crossPolicy{
+  for _,raw:=range epistemic{
+   entry,ok:=raw.([]any)
+   if !ok||len(entry)!=8{return nil,errors.New("V2 cognition checkpoint ref malformed")}
+   inline,ok:=entry[3].([]any)
+   if !ok||len(inline)!=2||inline[0]!=uint64(1){return nil,errors.New("V2 cannot migrate external cognition checkpoint")}
+  }
+ }
  typed,ok:=snapshot[11].([]any);if !ok||len(typed)!=4{return nil,errors.New("source pending envelope absent")}
  penv,err:=codec.StrictDecodeEnvelope(typed[2].([]byte));if err!=nil{return nil,err}
  lists,ok:=penv.Value.([]any);if !ok||len(lists)!=10{return nil,errors.New("unsupported pending-state schema")}
@@ -277,6 +290,24 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  }
  if _,err:=tx.ExecContext(ctx,"INSERT INTO genesis_records(run_id,genesis_id,digest,canonical) VALUES(?,?,?,?)",
   childRun[:],childGenesis.ID[:],childGenesis.Digest[:],childGenesis.CanonicalBytes);err!=nil{return nil,err}
+ if crossPolicy{
+  // The signed parent snapshot carries the exact complete cognition roster.
+  // Preserve membership under child run/revision zero, while the opaque
+  // inline checkpoint itself stays a Genesis-pinned historical owner blob.
+  for _,raw:=range epistemic {
+   entry:=raw.([]any)
+   actor,ok:=entry[0].([]any)
+   if !ok||len(actor)!=2{return nil,errors.New("V2 cognition actor malformed")}
+   ns,okNS:=actor[0].(string);id,okID:=actor[1].(string)
+   if !okNS||!okID||domain.ValidateMachineID(ns)!=nil||
+    domain.ValidateMachineID(id)!=nil{
+    return nil,errors.New("V2 cognition actor identifier invalid")
+   }
+   if _,err:=tx.ExecContext(ctx,
+    "INSERT INTO cognitive_actor_registry(run_id,actor_namespace,actor_id,registered_revision) VALUES(?,?,?,0)",
+    childRun[:],ns,id);err!=nil{return nil,err}
+  }
+ }
  if _,err:=tx.ExecContext(ctx,
   "INSERT INTO fork_lineage(child_run,parent_run,parent_snapshot_id,origin_policy_hash,reference_canonical,parent_genesis_canonical,parent_snapshot_canonical) "+
   "VALUES(?,?,?,?,?,?,?)",childRun[:],sourceRun[:],parentSnapshotID[:],origin.CodecPolicyHash[:],

@@ -200,14 +200,22 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  if err!=nil{return nil,err}
  if _,err:=tx.ExecContext(ctx,"INSERT INTO world_revisions(revision,state_hash,canonical) VALUES(?,?,?)",
   0,hash,revisionZero);err!=nil{return nil,err}
- // An initially empty trigger registry is part of the fork transaction.
- // A separate post-commit initializer could crash and strand an unusable run.
- emptyRoster:=[]any{}
- sealBytes,err:=codec.CanonicalPayload([]any{childGenesis.ID[:],childGenesis.Digest[:],emptyRoster})
- if err!=nil{return nil,err}
- sealHash:=identity.OpaqueContentHash(sealBytes)
+ // All supported pending triggers are migrated and sealed atomically.
+ for _,def:=range triggerMigration.Definitions{
+  if _,err:=tx.ExecContext(ctx,
+   "INSERT INTO trigger_definitions(definition_id,run_id,genesis_id,genesis_digest,content_digest,canonical) VALUES(?,?,?,?,?,?)",
+   def.ID[:],childRun[:],childGenesis.ID[:],childGenesis.Digest[:],def.ContentDigest,def.Canonical);err!=nil{return nil,err}
+  if _,err:=tx.ExecContext(ctx,
+   "INSERT INTO trigger_runtime(definition_id,run_id,canonical) VALUES(?,?,?)",
+   def.ID[:],childRun[:],def.Runtime);err!=nil{return nil,err}
+ }
+ for _,act:=range triggerMigration.Activations{
+  if _,err:=tx.ExecContext(ctx,
+   "INSERT INTO trigger_activations(id,run_id,eligibility_instant,eligibility_ordinal,lifecycle,canonical) VALUES(?,?,?,?,0,?)",
+   act.ID[:],childRun[:],act.Instant,act.Ordinal,act.Canonical);err!=nil{return nil,err}
+ }
  if _,err:=tx.ExecContext(ctx,"INSERT INTO trigger_registry_seals(run_id,genesis_id,genesis_digest,registry_hash) VALUES(?,?,?,?)",
-  childRun[:],childGenesis.ID[:],childGenesis.Digest[:],sealHash[:]);err!=nil{return nil,err}
+  childRun[:],childGenesis.ID[:],childGenesis.Digest[:],triggerMigration.Seal[:]);err!=nil{return nil,err}
  if err:=validateForkLineageTx(ctx,tx,childGenesis,b);err!=nil{return nil,err}
  if err:=tx.Commit();err!=nil{return nil,err}
  return childGenesis,nil

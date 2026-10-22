@@ -85,7 +85,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   // All other live partitions, including dispatches, trigger runtimes,
   // perception tasks and unfinished rounds, still fail closed.
   for i,raw:=range lists {
-   if i==0||i==3||i==4||i==6||i==7||i==9{continue} // migrated rounds and completed receipts
+   if i==0||i==1||i==2||i==3||i==4||i==6||i==7||i==9{continue} // migrated rounds and completed receipts
    items,ok:=raw.([]any)
    if !ok||len(items)!=0{return nil,fmt.Errorf("V1-to-V2 fork needs migrator for pending partition %d",i)}
   }
@@ -262,7 +262,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  }
  migratedRounds,err:=migrateGenesisPendingRounds(ctx,s,parent,childGenesis,lists[4].([]any),origin,childPolicy)
  if err!=nil{return nil,fmt.Errorf("fork Genesis round migration: %w",err)}
- triggerMigration,err:=migrateGenesisPendingTriggers(ctx,s,parent,childGenesis,origin,
+ triggerMigration,err:=migrateGenesisPendingTriggers(ctx,s,parent,childGenesis,origin,childPolicy,
   lists[1].([]any),lists[2].([]any))
  if err!=nil{return nil,fmt.Errorf("fork trigger migration: %w",err)}
  // The parent workspace must remain verifiably immutable: copy the exact

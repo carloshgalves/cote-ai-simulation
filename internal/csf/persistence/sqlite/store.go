@@ -702,7 +702,7 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
         switch len(body){
         case 18,6: // admission or compact control fence: check coordinate
         case 24,3,16:continue // CycleCommit, contest proof, DecisionRecord
-        default:seals.Close();return errors.New("unknown decision record kind")
+        default:seals.Close();return fmt.Errorf("unknown decision record kind (arity=%d)",len(body))
         }
 		sealedRun,cut,err:=ingressguard.FenceCoordinate(fence)
 		if err!=nil {seals.Close();return err}

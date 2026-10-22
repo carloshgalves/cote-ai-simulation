@@ -56,6 +56,17 @@ func verifyCommunicationDueTerminal(ctx context.Context,tx *sql.Tx,b ports.WorkB
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",b.RunID[:]).Scan(&genesisRaw);err!=nil{return err}
  manifest,err:=genesis.ValidateCanonical(genesisRaw,b.CommunicationBundle)
  if err!=nil||[32]byte(manifest.RunID)!=b.RunID{return errors.New("communication due Genesis policy mismatch")}
+ bindings,ok:=manifest.Payload[14].([]any)
+ if !ok{return errors.New("Genesis communication policy roster invalid")}
+ pinned:=map[string]any{}
+ for _,v:=range bindings{
+  ref,ok:=v.([]any);if !ok||len(ref)!=3{return errors.New("Genesis communication policy reference malformed")}
+  name,ok:=ref[0].(string);if !ok{return errors.New("Genesis communication policy identity malformed")}
+  pinned[name]=ref
+ }
+ if pinned["validators-v1"]==nil||pinned["conflict-resolvers-v1"]==nil{
+  return errors.New("Genesis communication decision policy unregistered")
+ }
  units,ok:=fence[11].([]any)
  if !ok||len(units)!=1{return errors.New("due delivery requires exactly one admitted scheduled unit")}
  entry,ok:=units[0].([]any)
@@ -138,7 +149,8 @@ func verifyCommunicationDueTerminal(ctx context.Context,tx *sql.Tx,b ports.WorkB
    eventPayload(dueEvent),[]any{}}})||
   !sameCanonical(candidate[9],[]any{})||!sameCanonical(candidate[10],[]any{})||
   !sameCanonical(candidate[11],[]any{})||!sameCanonical(candidate[12],[]any{"source.lifecycle"})||
-  !sameCanonical(candidate[14],int64(0)){
+  !sameCanonical(candidate[14],int64(0))||
+  !sameCanonical(candidate[15],pinned["conflict-resolvers-v1"]){
   return errors.New("communication due candidate fields or provenance invalid")
  }
  did,err:=registeredDigest("cote.csf.id.decision","cote.csf.schema.decision-id-preimage",
@@ -152,7 +164,12 @@ func verifyCommunicationDueTerminal(ctx context.Context,tx *sql.Tx,b ports.WorkB
   !sameCanonical(decision[6],[]any{uint64(1),candidateID[:]})||
   !sameCanonical(decision[12],[]any{dueEvent.Identity[:]})||
   !sameCanonical(decision[13],[]any{uint64(0)})||
-  !sameCanonical(decision[14],[]any{uint64(0)}){
+  !sameCanonical(decision[14],[]any{uint64(0)})||
+  !equalBytes(decision[0],did[:])||!equalBytes(decision[1],b.RunID[:])||
+  !equalBytes(decision[2],b.CycleID[:])||decision[3]!=journal[2]||
+  !sameCanonical(decision[8],[]any{})||!sameCanonical(decision[11],[]any{})||
+  !sameCanonical(decision[9],pinned["validators-v1"])||
+  !sameCanonical(decision[10],pinned["conflict-resolvers-v1"]){
   return errors.New("communication due DecisionRecord not canonical")
  }
  pairHash,err:=registeredDigest("cote.csf.digest.decision","cote.csf.schema.decision-pair-list",

@@ -134,7 +134,13 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  href,err:=fork.NewSnapshotReference(b,resume.Snapshot.Canonical)
  if err!=nil{return nil,err}
  refRaw,err:=fork.Encode(href);if err!=nil{return nil,err}
- if err:=fork.VerifyOriginSnapshot(href,resume.Snapshot.Canonical,b);err!=nil{return nil,err}
+ // Always resolve the immutable origin by its own id+hash before
+ // interpreting its checkpoint, even for the same-policy V1 subset.
+ installed,err:=fork.NewInstalledPolicyRegistry(b)
+ if err!=nil{return nil,err}
+ _,verifiedOrigin,err:=fork.VerifyOriginWithResolver(ctx,refRaw,resume.Snapshot.Canonical,installed)
+ if err!=nil{return nil,err}
+ if verifiedOrigin!=b{return nil,errors.New("fork origin policy unexpectedly switched during validation")}
  payload:=append([]any(nil),parent.Payload...)
  payload[0]=bytes.Clone(childRun[:])
  payload[3]=int64(resume.SnapshotClock.Instant)

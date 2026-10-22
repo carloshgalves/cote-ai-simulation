@@ -153,6 +153,17 @@ CREATE TABLE IF NOT EXISTS source_ingress_receipts (source_id TEXT NOT NULL, ing
 CREATE TABLE IF NOT EXISTS decision_ledger (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS event_store (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS evidence_ledger (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
+CREATE TABLE IF NOT EXISTS evidence_routes (
+ record_id BLOB PRIMARY KEY CHECK(length(record_id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ task_id BLOB NOT NULL CHECK(length(task_id)=32),
+ holder_namespace TEXT NOT NULL,
+ holder_id TEXT NOT NULL,
+ kind INTEGER NOT NULL CHECK(kind IN (0,1)),
+ canonical_hash BLOB NOT NULL CHECK(length(canonical_hash)=32)
+) STRICT;
+CREATE INDEX IF NOT EXISTS idx_evidence_holder ON evidence_routes(run_id,holder_namespace,holder_id,kind,task_id,record_id);
+CREATE INDEX IF NOT EXISTS idx_evidence_task ON evidence_routes(task_id,kind,record_id);
 CREATE TABLE IF NOT EXISTS causal_outbox (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS world_revisions (revision INTEGER PRIMARY KEY, state_hash BLOB NOT NULL CHECK(length(state_hash)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS cycle_control_state (run_id BLOB PRIMARY KEY CHECK(length(run_id)=32), canonical BLOB NOT NULL) STRICT;
@@ -216,6 +227,11 @@ CREATE TABLE IF NOT EXISTS committed_cycles (
 
 // Append stores one canonical input-ledger record idempotently.
 func (s *Store) Append(ctx context.Context, record ports.CanonicalRecord) error {
+	// A SlotDispatch is the security-critical knowledge boundary. Check
+	// all prior durable completions under the same transaction as append.
+	if isSlotDispatchRecord(record) {
+		return s.appendDispatchGuarded(ctx, record)
+	}
 	// Guarded records cannot bypass the seal even through the generic adapter API.
 	kind, runID, instant, ordinal, err := guardedKind(record)
 	if err != nil { return err }

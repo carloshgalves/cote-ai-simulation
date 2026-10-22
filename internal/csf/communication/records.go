@@ -116,9 +116,9 @@ func NewTransmission(bundle *policy.Bundle,s TransmissionSpec)(ports.CanonicalRe
  origin,err:=originValue(s.Origin);if err!=nil{return zero,err}
  sender,err:=actorValue(s.ActualSender);if err!=nil{return zero,err}
  if len(s.PresentedSender)==0||len(s.PresentedSender)>512{return zero,errors.New("presented sender missing or excessive")}
- if err:=domain.ValidateMachineID(s.Channel);err!=nil{return zero,err}
- if s.Status>3{return zero,errors.New("transmission state invalid")}
- if len(s.Recipients)==0||len(s.Recipients)>1024{return zero,errors.New("invalid recipient count")}
+ if _,err:=registeredChannelResult(s.Channel);err!=nil{return zero,err}
+ if s.Status!=0{return zero,errors.New("cannot mint terminal Transmission outside a causal Event")}
+ if len(s.Recipients)!=1{return zero,errors.New("V1-7 communication must have exactly one recipient")}
  actors:=make([]any,0,len(s.Recipients))
  prior:=""
  for _,item:=range s.Recipients{
@@ -146,3 +146,11 @@ func NewTransmission(bundle *policy.Bundle,s TransmissionSpec)(ports.CanonicalRe
  return ports.CanonicalRecord{Identity:[32]byte(id),Canonical:raw},nil
 }
 func (p Proposition) String()string{return fmt.Sprintf("%s/%d (unverified)",p.Type,p.Polarity)}
+
+func registeredChannelResult(channel string)(bool,error){
+ switch channel{
+ case "school.message.v1":return true,nil
+ case "school.drop.v1":return false,nil
+ default:return false,errors.New("channel lacks registered deterministic delivery policy")
+ }
+}

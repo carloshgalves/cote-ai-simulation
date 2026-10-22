@@ -56,11 +56,12 @@ func PrepareSend(bundle *policy.Bundle,s SendSpec)(SendPlan,error){
   AssertedAt:s.SentAt,Proposition:s.Proposition})
  if err!=nil{return zero,err}
  verified,err:=AuthenticateClaim(bundle,claim);if err!=nil{return zero,err}
+ dueID:=domain.ID(occID)
  tx,err:=NewTransmission(bundle,TransmissionSpec{Origin:s.Source,Role:0,Ordinal:0,
   ClaimRefs:[]domain.CausalRef{{Kind:18,ID:domain.ID(claim.Identity),Digest:verified.Digest}},
   ActualSender:s.ActualSender,PresentedSender:s.PresentedSender,
   Recipients:[]Actor{s.Recipient},Channel:s.Channel,SentAt:s.SentAt,
-  DeliveryOccurrence:(*domain.ID)(&occID),Status:0})
+  DeliveryOccurrence:&dueID,Status:0})
  if err!=nil{return zero,err}
  parsed,err:=AuthenticateTransmission(bundle,tx);if err!=nil{return zero,err}
  payload,err:=MakeTyped("cote.csf.communication.delivery.v1","cote.csf.schema.typed-value",
@@ -88,7 +89,7 @@ func ValidateOccurrence(bundle *policy.Bundle,p SendPlan)(domain.SimulationInsta
  if tx.Occurrence!=domain.ID(p.Occurrence.Identity){return 0,errors.New("transmission due occurrence mismatch")}
  value,err:=codec.StrictDecodePayload(p.Occurrence.Canonical);if err!=nil{return 0,err}
  fields,ok:=value.([]any)
- if !ok||len(fields)!=15||!equalBytesID(fields[0],p.Occurrence.Identity)||fields[5]!="communication.delivery"||
+ if !ok||len(fields)!=15||!bytesEqualID(fields[0],domain.ID(p.Occurrence.Identity))||fields[5]!="communication.delivery"||
   fields[6]!=uint64(1)||fields[8]!=uint64(0)||fields[10]!=uint64(0)||fields[11]!=uint64(0){
   return 0,errors.New("delivery occurrence forged")
  }

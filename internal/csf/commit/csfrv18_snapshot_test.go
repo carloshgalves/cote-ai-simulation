@@ -142,3 +142,45 @@ func TestCSFRV18SelfHashedForgedSnapshotPrefixStillFailsClosed(t *testing.T){
   t.Fatal("accepted rehashed snapshot with false ledger prefix")
  }
 }
+
+func TestCSFRV18MissingSealAndCorruptedHistoricalMembershipFailClosed(t *testing.T){
+ ctx:=context.Background()
+ _,store,_,run,bundle,path:=testFixture(t)
+ s,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,nil);if err!=nil{t.Fatal(err)}
+ q,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)};defer q.Close()
+ if _,err:=q.ExecContext(ctx,"UPDATE snapshot_prefix_members SET canonical_hash=zeroblob(32) WHERE snapshot_id=? AND ledger_name='input_ledger'",s.ID[:]);err!=nil{t.Fatal(err)}
+ if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),s.ID,bundle);err==nil{t.Fatal("historical member digest tampering accepted")}
+ if _,err:=q.ExecContext(ctx,"DELETE FROM snapshot_seals WHERE snapshot_id=?",s.ID[:]);err!=nil{t.Fatal(err)}
+ if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),s.ID,bundle);err==nil{t.Fatal("deleted immutable snapshot seal accepted")}
+}
+
+func TestCSFRV18SnapshotPublicationIsTransactionalUnderFailure(t *testing.T){
+ ctx:=context.Background()
+ _,store,_,run,bundle,path:=testFixture(t)
+ q,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)};defer q.Close()
+ if _,err:=q.ExecContext(ctx,`CREATE TRIGGER csfrv18_fail_seal BEFORE INSERT ON snapshot_seals BEGIN SELECT RAISE(ABORT,'injected seal crash'); END`);err!=nil{t.Fatal(err)}
+ if _,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,nil);err==nil{t.Fatal("ignored injected seal failure")}
+ var snapshots,members int
+ if err:=q.QueryRowContext(ctx,"SELECT count(*) FROM snapshots").Scan(&snapshots);err!=nil{t.Fatal(err)}
+ if err:=q.QueryRowContext(ctx,"SELECT count(*) FROM snapshot_prefix_members").Scan(&members);err!=nil{t.Fatal(err)}
+ if snapshots!=0||members!=0{t.Fatalf("non-atomic failed publication: snapshots=%d members=%d",snapshots,members)}
+ if _,err:=q.ExecContext(ctx,"DROP TRIGGER csfrv18_fail_seal");err!=nil{t.Fatal(err)}
+ created,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,nil);if err!=nil{t.Fatal(err)}
+ if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),created.ID,bundle);err!=nil{t.Fatalf("reopen after injected failure: %v",err)}
+}
+
+func TestCSFRV18HistoricalSnapshotRejectsCorruptedTail(t *testing.T){
+ ctx:=context.Background()
+ coordinator,store,ledger,run,bundle,path:=testFixture(t,activeTrigger())
+ origin,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,nil);if err!=nil{t.Fatal(err)}
+ result,err:=coordinator.Advance(ctx,ledger,run);if err!=nil{t.Fatal(err)}
+ if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),origin.ID,bundle);err!=nil{t.Fatal(err)}
+ q,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)};defer q.Close()
+ event:=result.Events[0]
+ damaged:=append([]byte(nil),event.Canonical...)
+ damaged[len(damaged)-1]^=1
+ if _,err:=q.ExecContext(ctx,"UPDATE event_store SET canonical=? WHERE id=?",damaged,event.Identity[:]);err!=nil{t.Fatal(err)}
+ if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),origin.ID,bundle);err==nil{
+  t.Fatal("historical prefix resumed over a corrupted terminal event tail")
+ }
+}

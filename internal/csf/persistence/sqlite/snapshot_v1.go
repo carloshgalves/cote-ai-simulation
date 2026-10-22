@@ -329,10 +329,12 @@ func (s *Store) CreateSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bund
  case sql.ErrNoRows:
  default:return zero,err
  }
+ installedID,_,_,_,err:=b.CodecIdentity()
+ if err!=nil{return zero,err}
  fields:=[]any{
   run[:],uint64(1),int64(state.Instant),uint64(state.Revision),uint64(state.NextLogicalSequence),state.LastOrdinal,
   typed,bytes.Clone(revHash),g.WorldSeed[:],[]any{g.ID[:],g.Digest[:]},g.Payload[14],
-  pending,cursors,control,refs,policy.CodecPolicyID,b.CodecPolicyHash[:],b.SchemaHash[:],
+  pending,cursors,control,refs,installedID,b.CodecPolicyHash[:],b.SchemaHash[:],
  }
  hash,_,err:=identity.New(b).Sum("cote.csf.hash.snapshot","cote.csf.schema.snapshot.body",1,fields)
  if err!=nil{return zero,err}

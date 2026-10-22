@@ -284,3 +284,44 @@ func TestCSFRV18TwoForksNeverAliasChildRunIDs(t *testing.T){
   t.Fatal("parent prefix changed when two children were created:",err)
  }
 }
+
+func TestCSFRV18SnapshotRealInFlightHaltedRetryRecovery(t *testing.T){
+ for _,stage:=range []string{"fence","halted","retry"}{
+  t.Run(stage,func(t *testing.T){
+   ctx:=context.Background()
+   coordinator,store,_,fence,run,cycle,path:=abortFixture(t)
+   var expected uint64=1
+   if stage!="fence"{
+    abort,err:=coordinator.Abort(ctx,run,cycle,fence,4,nil)
+    if err!=nil{t.Fatal(err)}
+    expected=3
+    if stage=="retry"{
+     if _,err:=coordinator.Retry(ctx,run,cycle,abort,"operator.retry");err!=nil{t.Fatal(err)}
+     expected=2
+    }
+   }
+   snap,err:=store.CreateSnapshotV1(ctx,[32]byte(run),coordinator.bundle,nil)
+   if err!=nil{t.Fatalf("snapshot at %s failed: %v",stage,err)}
+   reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
+   restored,err:=reopened.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,coordinator.bundle)
+   if err!=nil{t.Fatalf("resume at %s failed: %v",stage,err)}
+   if restored.ControlStatus!=expected||restored.SnapshotControlStatus!=expected{
+    t.Fatalf("restore changed terminal control at %s: %+v",stage,restored)
+   }
+   if expected==3&&restored.Action.Kind!=sqlite.ResumeHalted{
+    t.Fatal("HALTED_ON_ABORT resumed without explicit operator authorization")
+   }
+   if expected==1&&restored.Action.Kind!=sqlite.ResumeReexecuteFencedAttempt&&
+    restored.Action.Kind!=sqlite.ResumeDrainPerception{
+    t.Fatal("in-flight fence incorrectly reopened a new cycle")
+   }
+   if expected==2&&restored.Action.Kind!=sqlite.ResumeFenceAuthorizedRetry&&
+    restored.Action.Kind!=sqlite.ResumeDrainPerception{
+    t.Fatal("authorized retry did not preserve same cycle")
+   }
+   if (expected==1||expected==2)&&restored.Action.CycleID!=[32]byte(cycle){
+    t.Fatal("resume discarded the frozen cycle identity")
+   }
+  })
+ }
+}

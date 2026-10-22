@@ -85,7 +85,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   // All other live partitions, including dispatches, trigger runtimes,
   // perception tasks and unfinished rounds, still fail closed.
   for i,raw:=range lists {
-   if i==0||i==3||i==6||i==7{continue}
+   if i==0||i==3||i==6||i==7||i==9{continue} // completed perception receipts remain archived
    items,ok:=raw.([]any)
    if !ok||len(items)!=0{return nil,fmt.Errorf("V1-to-V2 fork needs migrator for pending partition %d",i)}
   }

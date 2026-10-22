@@ -90,3 +90,45 @@ func TestCSFRV18ForkRekeysPendingGenesisTriggerActivation(t *testing.T) {
   t.Fatal("fork changed parent activation history:",err)
  }
 }
+
+func TestCSFRV18ForkSiblingsHaveIndependentCommittedTails(t *testing.T) {
+ ctx := context.Background()
+ c, parent, ledger, run, bundle, _ := testFixture(t,activeTrigger())
+ state,err := parent.LoadClock(ctx,[32]byte(run))
+ if err != nil { t.Fatal(err) }
+ if _,err=ledger.CloseSource(ctx,"driver",inputledger.Closure{
+  ProducerKey:"fork-terminal-driver",Final:true,
+  ClosedThrough:domain.EligibilityCoordinate{NotBeforeInstant:state.Instant+100,NotBeforeCycleOrdinal:1},
+ });err!=nil{t.Fatal(err)}
+ baseline,err:=parent.CreateSnapshotV1(ctx,[32]byte(run),bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ a,err:=sqlite.Open(ctx,t.TempDir()+"/fork-a.db")
+ if err!=nil{t.Fatal(err)}
+ defer a.Close()
+ b,err:=sqlite.Open(ctx,t.TempDir()+"/fork-b.db")
+ if err!=nil{t.Fatal(err)}
+ defer b.Close()
+ aID:=[32]byte(run);aID[0]^=0x26
+ bID:=[32]byte(run);bID[0]^=0x39
+ if _,err:=parent.ForkIdleSnapshotV1(ctx,[32]byte(run),baseline.ID,aID,a,bundle);err!=nil{t.Fatal(err)}
+ if _,err:=parent.ForkIdleSnapshotV1(ctx,[32]byte(run),baseline.ID,bID,b,bundle);err!=nil{t.Fatal(err)}
+ beforeB,err:=b.CreateSnapshotV1(ctx,bID,bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ ledgerA,err:=inputledger.New(ctx,domain.ID(aID),bundle,a)
+ if err!=nil{t.Fatal(err)}
+ runnerA:=New(a,bundle,c.admissionPolicies)
+ if _,err:=runnerA.Advance(ctx,ledgerA,domain.ID(aID));err!=nil{
+  t.Fatal("fork child cannot execute its own migrated pending schedule:",err)
+ }
+ afterA,err:=a.CreateSnapshotV1(ctx,aID,bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ if afterA.Revision!=1{t.Fatal("fork child did not produce independent causal tail")}
+ verifiedB,err:=b.VerifySnapshotV1(ctx,bID,beforeB.ID,bundle)
+ if err!=nil{t.Fatal("sibling lost its original checkpoint after another tail:",err)}
+ if verifiedB.Clock.Revision!=0{t.Fatal("sibling adopted another child's event tail")}
+ if _,err:=parent.VerifySnapshotV1(ctx,[32]byte(run),baseline.ID,bundle);err!=nil{
+  t.Fatal("parent history changed when child advanced:",err)
+ }
+ parentState,err:=parent.LoadClock(ctx,[32]byte(run))
+ if err!=nil||parentState.Revision!=0{t.Fatal("child mutated parent clock",err)}
+}

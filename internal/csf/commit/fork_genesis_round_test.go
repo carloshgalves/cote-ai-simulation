@@ -6,6 +6,7 @@ import (
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
@@ -90,6 +91,39 @@ func TestCSFRV18ForkRejectsEventOwnedPendingRoundWithoutMigrator(t *testing.T){
  id:=[32]byte(run);id[0]^=0x53
  if _,err:=source.ForkIdleSnapshotV1(ctx,[32]byte(run),snap.ID,id,child,b);err==nil{
   t.Fatal("event-owned pending round migrated without its causal event")
+ }
+ assertCSFRV18EmptyRejectedFork(t,path)
+}
+
+func TestCSFRV18ForkRejectsGenesisRoundWithRevokedDispatchHistory(t *testing.T){
+ ctx:=context.Background()
+ source,ledger,b,run,origin:=csfrv18GenesisRoundSource(t)
+ state,err:=source.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ due:=domain.EligibilityCoordinate{NotBeforeInstant:state.Instant+15}
+ round,err:=ledger.DeclareRound(ctx,"genesis.schedule",[2]string{"school","a"},
+  []string{"choice","reply"},due,origin,1,0,0,[]any{uint64(0)})
+ if err!=nil{t.Fatal(err)}
+ cid,_,err:=identity.New(b).Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",
+  1,[]any{run[:],[]any{int64(state.Instant),uint64(state.LastOrdinal+1)}})
+ if err!=nil{t.Fatal(err)}
+ dispatchID,_,err:=identity.New(b).Sum("cote.csf.id.dispatch",
+  "cote.csf.schema.dispatch-id-preimage",1,
+  []any{run[:],cid[:],round.ID[:],"choice",uint64(0)})
+ if err!=nil{t.Fatal(err)}
+ dispatch:=inputledger.Dispatch{ID:domain.ID(dispatchID),RunID:run,
+  CycleID:domain.ID(cid),RoundID:round.ID,SlotID:"choice",Actor:round.Actor,
+  Eligibility:due,BaseRevision:state.Revision,EffectiveAt:state.Instant}
+ if err:=ledger.RegisterDispatch(ctx,dispatch,inputledger.CycleBinding{
+  ID:domain.ID(cid),BaseRevision:state.Revision,Instant:state.Instant});err!=nil{t.Fatal(err)}
+ if err:=ledger.RevokeDispatch(ctx,round.ID,"choice",0,[]any{uint64(0)});err!=nil{t.Fatal(err)}
+ snap,err:=source.CreateSnapshotV1(ctx,[32]byte(run),b,nil)
+ if err!=nil{t.Fatal(err)}
+ path:=t.TempDir()+"/revoked-child.db"
+ child,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer child.Close()
+ childID:=[32]byte(run);childID[0]^=0x33
+ if _,err:=source.ForkIdleSnapshotV1(ctx,[32]byte(run),snap.ID,childID,child,b);err==nil{
+  t.Fatal("fork silently discarded revoked dispatch history from a pending Genesis round")
  }
  assertCSFRV18EmptyRejectedFork(t,path)
 }

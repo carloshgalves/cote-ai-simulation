@@ -42,6 +42,7 @@ type Bundle struct {
 	// Canonical fixtures loaded once from verified manifest authority.
 	fixtureBytes []byte
 	genesisRefs [][]any
+ historicalV1 *Bundle
 }
 
 // RuntimeFingerprint identifies the exact parsed authority installed for
@@ -59,7 +60,8 @@ func (b *Bundle) RuntimeFingerprint() ([32]byte,error) {
   SchemaHash [32]byte
   SuiteHash [32]byte
   FixtureDigest [32]byte
- }{b.Directory,b.Profile,b.Registries,b.Transitions,b.CodecPolicyHash,b.SchemaHash,b.SuiteHash,sha256.Sum256(b.fixtureBytes)})
+  HistoricalV1Hash [32]byte
+ }{b.Directory,b.Profile,b.Registries,b.Transitions,b.CodecPolicyHash,b.SchemaHash,b.SuiteHash,sha256.Sum256(b.fixtureBytes),func()[32]byte{if b.historicalV1!=nil{return b.historicalV1.CodecPolicyHash};return [32]byte{}}()})
  if err!=nil{return [32]byte{},err}
  return sha256.Sum256(data),nil
 }
@@ -75,6 +77,11 @@ func (b *Bundle) VerifyInstalledBundle() error {
  if err!=nil{return fmt.Errorf("fingerprinting installed bundle: %w",err)}
  if current!=b.loadedFingerprint {
   return fmt.Errorf("policy bundle changed after normative manifest verification")
+ }
+ if b.historicalV1!=nil {
+  if err:=b.historicalV1.VerifyInstalledBundle();err!=nil{
+   return fmt.Errorf("installed historical V1 policy mutated: %w",err)
+  }
  }
  return nil
 }
@@ -95,6 +102,21 @@ func (b *Bundle) CodecIdentity() (string,uint64,[32]byte,[32]byte,error) {
   return "",0,zero,zero,fmt.Errorf("installed codec identity malformed")
  }
  return id,uint64(version),b.CodecPolicyHash,b.SchemaHash,nil
+}
+
+// ResolveHistoricalOrigin requires the exact policy ID/hash. V2 interprets
+// historical checkpoints with its separately verified V1 policy, never by
+// substituting the V2 manifest or a caller-selected codec.
+func (b *Bundle) ResolveHistoricalOrigin(id string,hash [32]byte)(*Bundle,error){
+ if err:=b.VerifyInstalledBundle();err!=nil{return nil,err}
+ local,_,localHash,_,err:=b.CodecIdentity()
+ if err!=nil{return nil,err}
+ if id==local&&hash==localHash{return b,nil}
+ if b.historicalV1==nil{return nil,fmt.Errorf("historical origin policy not installed")}
+ originID,_,originHash,_,err:=b.historicalV1.CodecIdentity()
+ if err!=nil{return nil,err}
+ if id!=originID||hash!=originHash{return nil,fmt.Errorf("no policy with required historical ID and hash")}
+ return b.historicalV1,nil
 }
 
 type Operation struct {
@@ -205,6 +227,10 @@ func loadNormative(directory string,spec normativeLoaderSpec) (*Bundle,error) {
  if err!=nil{return nil,fmt.Errorf("invalid signed Genesis fixture: %w",err)}
  if spec.version==2 {
   if err:=validateForkV2Contract(directory,bundle);err!=nil{return nil,err}
+  originDir:=filepath.Join(filepath.Dir(directory),"canonical-codec-v1-bundle")
+  historic,err:=Load(originDir)
+  if err!=nil{return nil,fmt.Errorf("V2 requires installed signed historical V1: %w",err)}
+  bundle.historicalV1=historic
  }
 	fingerprint,err:=bundle.RuntimeFingerprint()
 	if err!=nil{return nil,fmt.Errorf("sealing verified policy: %w",err)}

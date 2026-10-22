@@ -71,6 +71,10 @@ func (c *Coordinator) ResumeRunV1(ctx context.Context,ledger *inputledger.Ledger
  if publication.Identity==([32]byte{})||len(publication.Canonical)==0{
   return result,errors.New("registered handler did not publish canonical terminal record")
  }
+ if err:=s.VerifyRecoveredTerminal(ctx,run,result.Checkpoint.Action.CycleID,
+  [32]byte(publication.Identity),publication.Canonical,uint64(result.Cycle.BaseRevision),c.bundle);err!=nil{
+  return result,fmt.Errorf("resume callback failed independent commit-journal audit: %w",err)
+ }
  result.Publication=publication
  result.Continued=true
  return result,nil

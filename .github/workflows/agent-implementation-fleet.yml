@@ -98,7 +98,7 @@ jobs:
           import json,os,pathlib
           tmp=pathlib.Path(os.environ["RUNNER_TEMP"])
           issue=json.loads((tmp/"fleet-issue.json").read_text())
-          if issue["state"]!="OPEN" or len(issue.get("body") or "")>12000:
+          if issue["state"]!="OPEN" or len(issue.get("body") or "")>4500:
               raise SystemExit("Issue must be open and small enough for quota-safe run")
           policy=pathlib.Path("AGENTS.md").read_text()
           text=("Implement only accepted Issue #"+str(issue["number"])+". Read AGENTS.md, "

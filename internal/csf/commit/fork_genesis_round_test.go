@@ -51,6 +51,16 @@ func TestCSFRV18ForkMigratesPendingUnstartedGenesisRound(t *testing.T){
   rebuilt.Role!=prior.Role||rebuilt.LocalOrdinal!=prior.LocalOrdinal {
   t.Fatal("fork round reused parent ID or changed semantic membership")
  }
+ childOrigin:=[]any{uint64(2),[]any{childGenesis.ID[:],childGenesis.Digest[:]}}
+ retried,err:=restored.DeclareRound(ctx,rebuilt.SourceID,rebuilt.Actor,
+  []string{"read","write"},due,childOrigin,1,2,0,[]any{uint64(0)})
+ if err!=nil||retried.ID!=rebuilt.ID{
+  t.Fatalf("migrated child round not idempotently reconstructible: %v",err)
+ }
+ if _,err:=restored.DeclareRound(ctx,rebuilt.SourceID,rebuilt.Actor,
+  []string{"tampered-slot"},due,childOrigin,1,2,0,[]any{uint64(0)});err==nil{
+  t.Fatal("child round accepted identity collision with altered slot roster")
+ }
  childPending,err:=child.PendingClock(ctx,childID);if err!=nil{t.Fatal(err)}
  if len(childPending)!=1||childPending[0].ID!=rebuilt.ID{
   t.Fatalf("unstarted round not recoverable as child pending WORK: %+v",childPending)

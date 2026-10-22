@@ -40,6 +40,13 @@ func (c *Coordinator) ResumeRunV1(ctx context.Context,ledger *inputledger.Ledger
  if [32]byte(ledgerRun)!=run{return result,errors.New("resume ledger belongs to another run")}
  s,ok:=c.store.(*sqlite.Store)
  if !ok{return result,errors.New("resume requires a verifiable SQLite authority")}
+ probe,err:=s.VerifySnapshotV1(ctx,run,snapshot,c.bundle)
+ if err!=nil{return result,err}
+ if handler==nil&&(probe.Action.Kind==sqlite.ResumeReexecuteFencedAttempt||
+  probe.Action.Kind==sqlite.ResumeFenceAuthorizedRetry||
+  probe.Action.Kind==sqlite.ResumeDrainPerception){
+  return result,errors.New("resume requires a registered terminal handler before any mutation")
+ }
  state,err:=s.DrainPendingPerceptionV1(ctx,run,snapshot,c.bundle)
  if err!=nil{return result,err}
  result.Checkpoint=state

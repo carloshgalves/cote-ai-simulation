@@ -11,6 +11,7 @@ import (
 
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
+    "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -32,6 +33,7 @@ type Store interface {
     PendingClock(context.Context,[32]byte)([]clock.Pending,error)
     LoadRegisteredTriggers(context.Context,[32]byte,*policy.Bundle)([]trigger.Registered,error)
     LoadGenesis(context.Context,[32]byte)([]byte,error)
+    ValidatedGenesis(context.Context,[32]byte,*policy.Bundle)(*genesis.Genesis,error)
     // LoadWorldState reads the verified persistent revision, not the genesis
     // fixture, for every WORK cycle after the first world transition.
     LoadWorldState(context.Context,uint64)([]any,[32]byte,error)

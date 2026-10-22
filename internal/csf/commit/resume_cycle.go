@@ -9,6 +9,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 )
 
@@ -78,4 +79,60 @@ func resumeSignedInstant(v any)(int64,bool){
   if value<=uint64(^uint64(0)>>1){return int64(value),true}
  }
  return 0,false
+}
+
+// ReopenAuthorizedRetry admits only the next explicit AttemptRetryRecord
+// successor. Its previous fence fixes the semantic cut, source cohort,
+// clock plan, base revision and world hash. Admission's existing durable
+// retry guard rejects any changed input digest or fabricated retry ref.
+func (c *Coordinator) ReopenAuthorizedRetry(ctx context.Context,ledger *inputledger.Ledger,
+ run,snapshotID [32]byte)(admission.Cycle,admission.Fence,sqlite.ResumeCheckpointV1,error){
+ var cycle admission.Cycle
+ var fence admission.Fence
+ var empty sqlite.ResumeCheckpointV1
+ if c==nil||c.bundle==nil||ledger==nil{return cycle,fence,empty,errors.New("retry requires coordinator, ledger and policy")}
+ s,ok:=c.store.(*sqlite.Store)
+ if !ok{return cycle,fence,empty,errors.New("retry requires the committed SQLite adapter")}
+ if !ledger.SharesFenceAuthority(c.store){return cycle,fence,empty,errors.New("retry source ledger is not the persisted admission authority")}
+ restored,err:=s.DrainPendingPerceptionV1(ctx,run,snapshotID,c.bundle)
+ if err!=nil{return cycle,fence,restored,err}
+ if restored.Action.Kind!=sqlite.ResumeFenceAuthorizedRetry{
+  return cycle,fence,restored,errors.New("run has no authorized frozen retry")
+ }
+ if restored.Action.CycleID==([32]byte{})||restored.Action.FenceID==([32]byte{})||
+  restored.Action.RetryID==([32]byte{}){
+  return cycle,fence,restored,errors.New("retry lost journal identities")
+ }
+ control,err:=s.LoadCycleControl(ctx,run);if err!=nil{return cycle,fence,restored,err}
+ if len(control)!=7||control[0]!=uint64(2){return cycle,fence,restored,errors.New("retry control changed before admission")}
+ retried,ok:=control[4].([]any)
+ if !ok||len(retried)!=2||retried[0]!=uint64(1){return cycle,fence,restored,errors.New("retry reference absent")}
+ ref,ok:=retried[1].([]any)
+ if !ok||len(ref)!=3||ref[0]!=uint64(14){return cycle,fence,restored,errors.New("retry reference malformed")}
+ refID,ok:=ref[1].([]byte)
+ if !ok||!bytes.Equal(refID,restored.Action.RetryID[:]){return cycle,fence,restored,errors.New("retry ref inconsistent with verified journal")}
+ prior,err:=s.GetFence(ctx,restored.Action.FenceID);if err!=nil{return cycle,fence,restored,err}
+ v,err:=codec.StrictDecodePayload(prior);if err!=nil{return cycle,fence,restored,err}
+ fields,ok:=v.([]any);if !ok||len(fields)!=18{return cycle,fence,restored,errors.New("previous frozen fence malformed")}
+ runRaw,runOK:=fields[0].([]byte);cycleRaw,cycOK:=fields[1].([]byte)
+ if !runOK||!cycOK||!bytes.Equal(runRaw,run[:])||!bytes.Equal(cycleRaw,restored.Action.CycleID[:]){
+  return cycle,fence,restored,errors.New("retry crosses cycle or run")
+ }
+ previousAttempt,ok:=fields[2].(uint64)
+ if !ok||previousAttempt+1!=restored.Action.AttemptOrdinal{return cycle,fence,restored,errors.New("retry attempt does not advance by one")}
+ instant,ok:=resumeSignedInstant(fields[4]);if !ok{return cycle,fence,restored,errors.New("prior instant invalid")}
+ ordinal,ok:=fields[5].(uint64);if !ok{return cycle,fence,restored,errors.New("prior ordinal invalid")}
+ plan,ok:=fields[6].([]any);if !ok||len(plan)==0{return cycle,fence,restored,errors.New("prior clock plan invalid")}
+ if len(plan)==1&&plan[0]==uint64(0){plan=nil}
+ revision,ok:=fields[7].(uint64);if !ok{return cycle,fence,restored,errors.New("prior base revision invalid")}
+ hash,ok:=fields[8].([]byte);if !ok||len(hash)!=32{return cycle,fence,restored,errors.New("prior state hash invalid")}
+ var stateHash domain.Digest;copy(stateHash[:],hash)
+ cycle=admission.Cycle{ID:domain.ID(restored.Action.CycleID),Attempt:uint32(restored.Action.AttemptOrdinal),
+  Plan:plan,Instant:domain.SimulationInstant(instant),Ordinal:domain.CycleOrdinal(ordinal),
+  BaseRevision:domain.WorldRevision(revision),BaseStateHash:stateHash,RetryRef:retried}
+ fence,err=admission.NewCoordinator(admission.NewFenceLog(c.store)).
+  AdmitThenEvaluate(ctx,c.bundle,ledger,cycle,c.admissionPolicies,nil)
+ if err!=nil{return cycle,admission.Fence{},restored,err}
+ if fence.ID==domain.ID(restored.Action.FenceID){return cycle,admission.Fence{},restored,errors.New("retry reused prior attempt identity")}
+ return cycle,fence,restored,nil
 }

@@ -153,6 +153,21 @@ CREATE TABLE IF NOT EXISTS source_ingress_receipts (source_id TEXT NOT NULL, ing
 CREATE TABLE IF NOT EXISTS decision_ledger (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS event_store (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS evidence_ledger (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
+CREATE TABLE IF NOT EXISTS cognitive_actor_registry (
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ actor_namespace TEXT NOT NULL,
+ actor_id TEXT NOT NULL,
+ registered_revision INTEGER NOT NULL CHECK(registered_revision>=0),
+ PRIMARY KEY(run_id,actor_namespace,actor_id),
+ FOREIGN KEY(run_id) REFERENCES genesis_records(run_id)
+) STRICT;
+CREATE TABLE IF NOT EXISTS snapshot_cognitive_actors (
+ snapshot_id BLOB NOT NULL CHECK(length(snapshot_id)=32),
+ actor_namespace TEXT NOT NULL,
+ actor_id TEXT NOT NULL,
+ PRIMARY KEY(snapshot_id,actor_namespace,actor_id),
+ FOREIGN KEY(snapshot_id) REFERENCES snapshots(id)
+) STRICT;
 CREATE TABLE IF NOT EXISTS evidence_routes (
  record_id BLOB PRIMARY KEY CHECK(length(record_id)=32),
  run_id BLOB NOT NULL CHECK(length(run_id)=32),

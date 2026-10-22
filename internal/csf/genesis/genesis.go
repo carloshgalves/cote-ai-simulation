@@ -11,6 +11,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/fork"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 )
@@ -27,7 +28,21 @@ type Genesis struct {
 	Payload        []any
 }
 
+// ValidateCanonical authenticates a base Genesis with no external dependencies.
+// Verified fork bootstraps use ValidateForkCanonical *and* a separately sealed
+// parent history proof, never this permissive parser by itself.
 func ValidateCanonical(encoded []byte, bundle *policy.Bundle) (*Genesis, error) {
+ return validateCanonical(encoded,bundle,false)
+}
+
+// ValidateForkCanonical checks structure, policy pins and the cross-policy
+// reference framing. It is NOT an authorization to persist the Genesis: the
+// fork parent is resolved and sealed by the SQLite fork bootstrap.
+func ValidateForkCanonical(encoded []byte, bundle *policy.Bundle) (*Genesis, error) {
+ return validateCanonical(encoded,bundle,true)
+}
+
+func validateCanonical(encoded []byte, bundle *policy.Bundle, forkBootstrap bool) (*Genesis, error) {
 	envelope, err := codec.StrictDecodeEnvelope(encoded)
 	if err != nil {
 		return nil, err
@@ -65,10 +80,14 @@ func ValidateCanonical(encoded []byte, bundle *policy.Bundle) (*Genesis, error) 
 	if err := validateOptionalBytes(payload[4]); err != nil {
 		return nil, fmt.Errorf("parent checkpoint history ref: %w", err)
 	}
-	// CSFRV1-1 only admits a new base-policy run. A fork requires resolving
-	// the parent policy and checkpoint before the genesis can be authoritative.
-	if len(payload[4].([]any)) != 1 {
-		return nil, fmt.Errorf("parent checkpoint history requires a verified fork bootstrap")
+	parentRef := payload[4].([]any)
+	if !forkBootstrap {
+		if len(parentRef) != 1 {return nil, fmt.Errorf("parent checkpoint history requires a verified fork bootstrap")}
+	}else{
+		if len(parentRef)!=2{return nil,fmt.Errorf("fork genesis must carry parent history reference")}
+		raw,ok:=parentRef[1].([]byte)
+		if !ok{return nil,fmt.Errorf("fork history ref is not bytes")}
+		if _,err:=fork.Decode(raw);err!=nil{return nil,fmt.Errorf("invalid fork history reference: %w",err)}
 	}
 	if payload[5] != policy.CodecPolicyID || !isUnsigned(payload[6], policy.CodecVersion) || payload[7] != policy.IdentityAlgorithm || payload[8] != policy.UnicodeVersion || payload[9] != policy.NormalizationID {
 		return nil, fmt.Errorf("genesis codec/unicode pins mismatch")
@@ -102,7 +121,7 @@ func ValidateCanonical(encoded []byte, bundle *policy.Bundle) (*Genesis, error) 
 	// The CSFRV1-1 bootstrap creates an empty run. Checkpoints from cognition
 	// cannot become authoritative until their owner verifies and atomically
 	// supplies their content and coverage; neither exists in this slice.
-	if len(payload[17].([]any)) != 0 {
+	if len(payload[17].([]any)) != 0 && !forkBootstrap {
 		return nil, fmt.Errorf("initial epistemic checkpoints require verified cognition bootstrap")
 	}
 	deriver := identity.New(bundle)

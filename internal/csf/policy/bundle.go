@@ -23,6 +23,10 @@ const (
 	CodecPolicyHashHex  = "513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203"
 	SchemaBundleHashHex = "ef7c1e4cec18f1491e4b72bd7dd35f49a1c28d77a5bdd89d435122074f5cba18"
 	SuiteHashHex        = "05a226340c4211045d6f3df8f034434f3ac336001158379833f7230df4038dfd"
+ CodecPolicyV2ID = "cote.csf.codec.cbor-det.v2"
+ CodecPolicyV2HashHex = "528168c4032e53d4c8b50a9a890b0b857dfc85b3722211c39b523b8de645da89"
+ SchemaBundleV2HashHex = "2316d97c90f577c285d0dae02fe6431a683e0ae636667036786c23e6795babf5"
+ SuiteV2HashHex = "a92891972d8f2d136d59aa2dad3489f18380985c9e84ca4380a78850812b5c70"
 )
 
 type Bundle struct {
@@ -129,8 +133,27 @@ type manifest struct {
 	Artifacts       [][]json.RawMessage `json:"artifacts"`
 }
 
-func Load(directory string) (*Bundle, error) {
-	if err := verifyReceiptFile(directory); err != nil {
+type normativeLoaderSpec struct {
+ id string
+ version uint64
+ policy, schema, suite, domainSuffix string
+}
+
+// LoadV2 verifies the independently sealed V2 causal fork policy. V2 retains
+// deterministic CBOR v1 wire encoding, but introduces normative, versioned
+// fork-migration semantics and Genesis policy identity.
+func LoadV2(directory string) (*Bundle,error) {
+ return loadNormative(directory,normativeLoaderSpec{
+  CodecPolicyV2ID,2,CodecPolicyV2HashHex,SchemaBundleV2HashHex,SuiteV2HashHex,"v2",
+ })
+}
+func Load(directory string) (*Bundle,error){
+ return loadNormative(directory,normativeLoaderSpec{
+  CodecPolicyID,CodecVersion,CodecPolicyHashHex,SchemaBundleHashHex,SuiteHashHex,"v1",
+ })
+}
+func loadNormative(directory string,spec normativeLoaderSpec) (*Bundle,error) {
+ if err := verifyReceiptFile(directory,[3]string{spec.policy,spec.schema,spec.suite}); err != nil {
 		return nil, err
 	}
 	bundle := &Bundle{Directory: directory}
@@ -140,9 +163,9 @@ func Load(directory string) (*Bundle, error) {
 		expected string
 		target   *[32]byte
 	}{
-		{"policy-manifest.json", "cote.csf.bundle.codec-policy.v1", CodecPolicyHashHex, &bundle.CodecPolicyHash},
-		{"schema-manifest.json", "cote.csf.bundle.schema.v1", SchemaBundleHashHex, &bundle.SchemaHash},
-		{"conformance-manifest.json", "cote.csf.bundle.conformance.v1", SuiteHashHex, &bundle.SuiteHash},
+		{"policy-manifest.json", "cote.csf.bundle.codec-policy."+spec.domainSuffix, spec.policy, &bundle.CodecPolicyHash},
+  {"schema-manifest.json", "cote.csf.bundle.schema."+spec.domainSuffix, spec.schema, &bundle.SchemaHash},
+  {"conformance-manifest.json", "cote.csf.bundle.conformance."+spec.domainSuffix, spec.suite, &bundle.SuiteHash},
 	}
 	for _, check := range checks {
 		hash, err := verifyManifest(directory, check.manifest, check.prefix)
@@ -163,7 +186,7 @@ func Load(directory string) (*Bundle, error) {
 	if err := decodeStrictJSON(filepath.Join(directory, "causal-transition-contracts.json"), &bundle.Transitions); err != nil {
 		return nil, err
 	}
-	if bundle.Profile["codec_policy_id"] != CodecPolicyID || bundle.Profile["codec_version"] != float64(CodecVersion) {
+	if bundle.Profile["codec_policy_id"] != spec.id || bundle.Profile["codec_version"] != float64(spec.version) {
 		return nil, fmt.Errorf("unsupported codec profile identity")
 	}
 	// Fixture policy refs participate in runtime authority. Freeze the exact
@@ -175,11 +198,14 @@ func Load(directory string) (*Bundle, error) {
 	// Authenticate the CAPTURED bytes, not a second filesystem read:
 	// a malicious swap-and-restore between ReadFile and verifyManifest
 	// must not install unverified runtime policy references.
-	if err:=verifyCapturedConformanceFixture(directory,bundle.fixtureBytes,bundle.SuiteHash);err!=nil{
+	if err:=verifyCapturedConformanceFixture(directory,bundle.fixtureBytes,bundle.SuiteHash,"cote.csf.bundle.conformance."+spec.domainSuffix);err!=nil{
 		return nil,fmt.Errorf("verified Genesis fixture capture: %w",err)
 	}
 	bundle.genesisRefs,err=parseGenesisPolicyRefs(bundle.fixtureBytes)
-	if err!=nil{return nil,fmt.Errorf("invalid signed Genesis fixture: %w",err)}
+ if err!=nil{return nil,fmt.Errorf("invalid signed Genesis fixture: %w",err)}
+ if spec.version==2 {
+  if err:=validateForkV2Contract(directory,bundle);err!=nil{return nil,err}
+ }
 	fingerprint,err:=bundle.RuntimeFingerprint()
 	if err!=nil{return nil,fmt.Errorf("sealing verified policy: %w",err)}
 	bundle.loadedFingerprint=fingerprint
@@ -234,10 +260,10 @@ func verifyManifest(directory, name, prefix string) ([32]byte, error) {
 // normative, hash-pinned manifest. Reopening fixtures.json inside
 // verifyManifest was insufficient: an adversary could return altered bytes
 // for the first read and restore the file before manifest verification.
-func verifyCapturedConformanceFixture(directory string,captured []byte,expected [32]byte) error {
+func verifyCapturedConformanceFixture(directory string,captured []byte,expected [32]byte,domain string) error {
  raw,err:=os.ReadFile(filepath.Join(directory,"conformance-manifest.json"))
  if err!=nil{return err}
- preimage:=append(append([]byte("cote.csf.bundle.conformance.v1"),0),raw...)
+ preimage:=append(append([]byte(domain),0),raw...)
  if sha256.Sum256(preimage)!=expected{
   return fmt.Errorf("fixture manifest not the pinned conformance authority")
  }
@@ -263,7 +289,7 @@ func verifyCapturedConformanceFixture(directory string,captured []byte,expected 
  return nil
 }
 
-func verifyReceiptFile(directory string) error {
+func verifyReceiptFile(directory string, hashes [3]string) error {
 	raw, err := os.ReadFile(filepath.Join(directory, "BUNDLE.sha256"))
 	if err != nil {
 		return err
@@ -290,7 +316,7 @@ func verifyReceiptFile(directory string) error {
 			return fmt.Errorf("invalid BUNDLE.sha256 line")
 		}
 	}
-	expected := map[string]string{"codec_policy_hash": CodecPolicyHashHex, "schema_bundle_hash": SchemaBundleHashHex, "conformance_suite_hash": SuiteHashHex}
+	expected := map[string]string{"codec_policy_hash": hashes[0], "schema_bundle_hash": hashes[1], "conformance_suite_hash": hashes[2]}
 	for key, value := range expected {
 		if values[key] != value {
 			return fmt.Errorf("bundle receipt %s mismatch", key)

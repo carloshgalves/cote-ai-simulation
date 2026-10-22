@@ -47,9 +47,19 @@ func assertCSFRV18EmptyRejectedFork(t *testing.T,path string){
  t.Helper()
  db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
  defer db.Close()
- for _,table:=range []string{"genesis_records","fork_lineage","fork_history_records","clock_states",
-  "world_revisions","scheduled_occurrences","trigger_activations","communication_transmissions"} {
+ // Query the actual runtime schema rather than a hand-maintained subset:
+ // a rejected fork must publish zero rows in EVERY authority table, including
+ // newly added round/dispatch, claim, outbox, trigger and cognitive tables.
+ rows,err:=db.Query("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name")
+ if err!=nil{t.Fatal(err)}
+ var names []string
+ for rows.Next(){var name string;if err:=rows.Scan(&name);err!=nil{rows.Close();t.Fatal(err)};names=append(names,name)}
+ if err:=rows.Err();err!=nil{rows.Close();t.Fatal(err)}
+ if err:=rows.Close();err!=nil{t.Fatal(err)}
+ if len(names)<30{t.Fatalf("fork destination schema incomplete: %d authority tables",len(names))}
+ for _,table:=range names{
   var count int
+  // sqlite_master names are the trusted identifiers emitted by Open/createSchema.
   if err:=db.QueryRow("SELECT count(*) FROM "+table).Scan(&count);err!=nil{t.Fatal(err)}
   if count!=0{t.Fatalf("rejected fork wrote %d rows to %s",count,table)}
  }

@@ -26,6 +26,9 @@ type forkGenesisRound struct {
 // by the fork's pending partition checks.
 func migrateGenesisPendingRounds(ctx context.Context, s *Store,
  parent, child *genesis.Genesis, refs []any, b *policy.Bundle)([]forkGenesisRound,error){
+ // Without pending round migration, the authenticated snapshot/replay already
+ // covered input history; avoid a redundant full-ledger scan on idle forks.
+ if len(refs)==0{return []forkGenesisRound{},nil}
  out:=make([]forkGenesisRound,0,len(refs))
  seen:=map[[32]byte]bool{}
  // A round may remain pending even after one of its slots was dispatched,

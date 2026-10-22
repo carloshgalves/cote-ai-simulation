@@ -54,6 +54,7 @@ func migrateGenesisPendingTriggers(ctx context.Context,s *Store,
   runtimeByID[string(rt.DefinitionID[:])]=encoded
  }
  refs:=[]any{}
+ expectedBirths:=map[[32]byte]bool{}
  for _,item:=range registered{
   def:=item.Definition
   raw,ok:=runtimeByID[string(def.ID[:])]
@@ -70,6 +71,11 @@ func migrateGenesisPendingTriggers(ctx context.Context,s *Store,
   if err!=nil{return result,err}
   if !bytes.Equal(initialRaw,raw){
    return result,errors.New("fork would transplant evolved trigger runtime without its causal transition")
+  }
+  if expected.Fired{
+   born,err:=genesisActivation(b,child,def,expected.Runtime)
+   if err!=nil{return result,err}
+   expectedBirths[[32]byte(born.id)]=true
   }
   digest:=item.DefinitionDigest
   result.Definitions=append(result.Definitions,forkTriggerDefinition{

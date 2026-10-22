@@ -1,0 +1,19 @@
+{
+  "suite_id": "cote.csf.migration.fork.v2",
+  "version": 2,
+  "positive": [
+    "v1-origin-checkpoint-exact-bytes",
+    "verified-v2-child-genesis-policy-pin",
+    "new-run-new-identities",
+    "transactional-claim-transmission-delivery"
+  ],
+  "negative": [
+    "mutated-parent-checkpoint",
+    "unknown-origin-policy",
+    "copied-parent-claim-id",
+    "missing-parent-send-commit",
+    "unsealed-child-genesis",
+    "orphan-in-transit-delivery",
+    "fork-partial-commit"
+  ]
+}

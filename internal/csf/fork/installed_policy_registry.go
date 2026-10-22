@@ -63,4 +63,3 @@ func (r *InstalledPolicyRegistry) ResolveOriginPolicy(_ context.Context,id strin
  }
  return b,nil
 }
-

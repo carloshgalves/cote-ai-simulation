@@ -48,7 +48,7 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
   // Latest SourceClosure, settled slot responses and completed perception
   // receipts are historical proofs, not pending work. Keep them in the
   // frozen parent prefix rather than transplanting their run-bound IDs.
-  if i==3||i==6||i==9||i==0||i==1||i==2{continue}
+  if i==3||i==6||i==9||i==0||i==1||i==2||i==4{continue}
   // An explicitly migrated genesis schedule contributes one pending input
   // ref (kind=2) for each immutable occurrence. Unknown source kinds fail
   // closed, rather than discarding the parent pending work.
@@ -56,7 +56,11 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
    pending,ok:=lists[0].([]any)
    if !ok{return nil,errors.New("fork pending schedule roster malformed")}
    activations,ok:=lists[2].([]any)
-   if !ok||len(items)!=len(pending)+len(activations){return nil,errors.New("fork pending input roster not fully supported")}
+   if !ok{return nil,errors.New("fork activation roster malformed")}
+   rounds,ok:=lists[4].([]any)
+   if !ok||len(items)!=len(pending)+len(activations)+len(rounds){
+    return nil,errors.New("fork pending input roster not fully supported")
+   }
    expected:=map[string]bool{}
    for _,v:=range pending{
     ref,ok:=v.([]any);if !ok||len(ref)!=3{return nil,errors.New("fork genesis ref malformed")}
@@ -70,9 +74,17 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
     if !ok||len(id)!=32||expected[string(id)]{return nil,errors.New("fork duplicate activation ref")}
     expected[string(id)]=true
    }
+   for _,v:=range rounds{
+    ref,ok:=v.([]any)
+    if !ok||len(ref)!=3||ref[0]!=uint64(3){return nil,errors.New("fork pending round ref malformed")}
+    id,ok:=ref[1].([]byte)
+    if !ok||len(id)!=32||expected[string(id)]{return nil,errors.New("fork duplicate round input ref")}
+    expected[string(id)]=true
+   }
    for _,v:=range items{
-    ref,ok:=v.([]any);if !ok||len(ref)!=3||(ref[0]!=uint64(2)&&ref[0]!=uint64(3)){
-     return nil,errors.New("fork cannot rebind non-genesis pending input")
+    ref,ok:=v.([]any);if !ok||len(ref)!=3||
+     (ref[0]!=uint64(2)&&ref[0]!=uint64(3)&&ref[0]!=uint64(4)){
+     return nil,errors.New("fork cannot rebind unsupported pending input")
     }
     id,ok:=ref[1].([]byte)
     if !ok||len(id)!=32||!expected[string(id)]{return nil,errors.New("fork pending input does not match Genesis migration sources")}
@@ -153,6 +165,8 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  if [32]byte(childGenesis.RunID)!=childRun{return nil,errors.New("fork generated wrong run")}
  migrated,err:=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,lists[0].([]any),b)
  if err!=nil{return nil,err}
+ migratedRounds,err:=migrateGenesisPendingRounds(ctx,s,parent,childGenesis,lists[4].([]any),b)
+ if err!=nil{return nil,fmt.Errorf("fork Genesis round migration: %w",err)}
  triggerMigration,err:=migrateGenesisPendingTriggers(ctx,s,parent,childGenesis,b,
   lists[1].([]any),lists[2].([]any))
  if err!=nil{return nil,fmt.Errorf("fork trigger migration: %w",err)}
@@ -212,6 +226,15 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  emptyClock:=clock.State{Instant:childGenesis.InitialInstant,LastOrdinal:-1}
  clockRaw,err:=clock.Encode(emptyClock);if err!=nil{return nil,err}
  if _,err:=tx.ExecContext(ctx,"INSERT INTO clock_states(run_id,canonical) VALUES(?,?)",childRun[:],clockRaw);err!=nil{return nil,err}
+ // Persist child RoundDeclarations with their own canonical seals inside
+ // the same all-or-nothing child bootstrap transaction.
+ for _,round:=range migratedRounds{
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO input_ledger(id,canonical) VALUES(?,?)",
+   round.ID[:],round.Canonical);err!=nil{return nil,err}
+  if _,err:=tx.ExecContext(ctx,
+   "INSERT INTO round_integrity_seals(id,run_id,canonical_hash) VALUES(?,?,?)",
+   round.ID[:],childRun[:],round.Seal[:]);err!=nil{return nil,err}
+ }
  for _,o:=range migrated{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO scheduled_occurrences "+
    "(id,run_id,eligibility_instant,eligibility_ordinal,lifecycle,canonical) VALUES(?,?,?,?,0,?)",

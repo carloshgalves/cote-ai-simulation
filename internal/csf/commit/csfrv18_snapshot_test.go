@@ -672,3 +672,43 @@ func TestCSFRV18RehydrateFrozenFenceInsteadOfReselectingCoordinate(t *testing.T)
   t.Fatal("checkpoint lost same-revision completed-perception tail:",err)
  }
 }
+
+func TestCSFRV18PartialPerceptionBeforeCrashResumesWithoutDuplicateReceipt(t *testing.T){
+ ctx:=context.Background()
+ coordinator,store,ledger,cycle,fence,path:=communicationFixture(t)
+ _,_,_,_,_,run:=ledger.Snapshot()
+ if _,err:=coordinator.CommitCommunicationSend(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ snapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(run),coordinator.bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ q,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)};defer q.Close()
+ rows,err:=q.QueryContext(ctx,"SELECT id,canonical FROM causal_outbox ORDER BY id")
+ if err!=nil{t.Fatal(err)}
+ var internal [32]byte
+ for rows.Next(){
+  var id,raw []byte
+  if err:=rows.Scan(&id,&raw);err!=nil{rows.Close();t.Fatal(err)}
+  decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{rows.Close();t.Fatal(err)}
+  fields:=decoded.([]any)
+  if len(fields)!=10{continue}
+  var eventRaw []byte
+  if err:=q.QueryRowContext(ctx,"SELECT canonical FROM event_store WHERE id=?",fields[3]).Scan(&eventRaw);err!=nil{rows.Close();t.Fatal(err)}
+  ev,err:=codec.StrictDecodePayload(eventRaw);if err!=nil{rows.Close();t.Fatal(err)}
+  if ev.([]any)[3]=="communication.sent"{copy(internal[:],id)}
+ }
+ if err:=rows.Err();err!=nil{rows.Close();t.Fatal(err)}
+ if err:=rows.Close();err!=nil{t.Fatal(err)}
+ if internal==([32]byte{}){t.Fatal("internal transmission send task not found")}
+ if _,err:=store.CompleteInternalPerception(ctx,internal,coordinator.bundle);err!=nil{t.Fatal(err)}
+ var receipts int
+ if err:=q.QueryRowContext(ctx,"SELECT count(*) FROM causal_outbox").Scan(&receipts);err!=nil{t.Fatal(err)}
+ if receipts!=3{t.Fatalf("one partial completion expected, got %d outbox rows",receipts)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
+ healed,err:=reopened.DrainPendingPerceptionV1(ctx,[32]byte(run),snapshot.ID,coordinator.bundle)
+ if err!=nil{t.Fatal(err)}
+ if healed.PendingTasks!=0{t.Fatal("replayed partial completion did not drain remaining work")}
+ if err:=q.QueryRowContext(ctx,"SELECT count(*) FROM causal_outbox").Scan(&receipts);err!=nil{t.Fatal(err)}
+ if receipts!=4{t.Fatalf("duplicate/absent completion after restart: %d",receipts)}
+ if _,err:=reopened.DrainPendingPerceptionV1(ctx,[32]byte(run),snapshot.ID,coordinator.bundle);err!=nil{t.Fatal(err)}
+ if err:=q.QueryRowContext(ctx,"SELECT count(*) FROM causal_outbox").Scan(&receipts);err!=nil{t.Fatal(err)}
+ if receipts!=4{t.Fatal("repeat recovery changed settled outbox")}
+}

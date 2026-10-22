@@ -134,6 +134,7 @@ type WorkBatch struct {
  Mode uint8
  // Mode 7: registered communication send, without world truth mutation.
  Communication *CommunicationPublication
+ CommunicationStatus uint8 // terminal due only; SQL verifier recomputes
  CommunicationBundle *policy.Bundle // verified against persisted Genesis before use
  CommunicationCandidate CanonicalRecord
  SystemCandidate CanonicalRecord

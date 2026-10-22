@@ -7,6 +7,7 @@ import (
  "bytes"
  "errors"
  "fmt"
+ "sort"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
@@ -61,7 +62,13 @@ func originValue(origin Origin)([]any,error){
 func refs(values []domain.CausalRef,kind int)([]any,error){
  if len(values)>1024{return nil,errors.New("too many communication references")}
  out:=make([]any,0,len(values));seen:=map[domain.ID]bool{}
- for _,v:=range values{
+ sorted:=append([]domain.CausalRef(nil),values...)
+ sort.Slice(sorted,func(i,j int)bool{
+  if sorted[i].Kind!=sorted[j].Kind{return sorted[i].Kind<sorted[j].Kind}
+  if cmp:=bytes.Compare(sorted[i].ID[:],sorted[j].ID[:]);cmp!=0{return cmp<0}
+  return bytes.Compare(sorted[i].Digest[:],sorted[j].Digest[:])<0
+ })
+ for _,v:=range sorted{
   if kind>=0&&v.Kind!=uint16(kind){return nil,errors.New("wrong claim ref kind")}
   if v.ID==([32]byte{})||v.Digest==([32]byte{})||seen[v.ID]{return nil,errors.New("duplicate or empty claim/evidence reference")}
   seen[v.ID]=true;out=append(out,[]any{uint64(v.Kind),v.ID[:],v.Digest[:]})
@@ -128,7 +135,7 @@ func NewTransmission(bundle *policy.Bundle,s TransmissionSpec)(ports.CanonicalRe
   prior=key;actors=append(actors,v)
  }
  claims,err:=refs(s.ClaimRefs,18);if err!=nil{return zero,err}
- if len(claims)==0{return zero,errors.New("transmission requires claim refs")}
+ if len(claims)!=1{return zero,errors.New("registered first-run communication supports exactly one Claim")}
  if len(s.Facts)!=0{return zero,errors.New("unverified private transmission facts forbidden")}
  var due any=[]any{uint64(0)}
  if s.DeliveryOccurrence!=nil{

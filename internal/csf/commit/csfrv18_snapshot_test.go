@@ -649,3 +649,26 @@ func csfrv18ExactFiveLedgers(path string)([]byte,error){
  }
  return out.Bytes(),nil
 }
+
+func TestCSFRV18RehydrateFrozenFenceInsteadOfReselectingCoordinate(t *testing.T){
+ ctx:=context.Background()
+ original,store,_,fence,run,cycleID,path:=abortFixture(t)
+ snap,err:=store.CreateSnapshotV1(ctx,[32]byte(run),original.bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
+ resumed:=New(reopened,original.bundle,original.admissionPolicies)
+ recoveredCycle,recoveredFence,result,err:=resumed.ReopenFencedCycle(ctx,[32]byte(run),snap.ID)
+ if err!=nil{t.Fatal(err)}
+ if recoveredCycle.ID!=cycleID||recoveredCycle.Attempt!=0||
+  recoveredFence.ID!=fence.ID||!bytes.Equal(recoveredFence.Canonical,fence.Canonical)||
+  recoveredFence.InputDigest!=fence.InputDigest{
+  t.Fatal("restored fence or cycle differs from exact admitted immutable plan")
+ }
+ if result.Action.Kind!=sqlite.ResumeReexecuteFencedAttempt||result.PendingTasks!=0{
+  t.Fatal("frozen fence resumed before causal perception drain")
+ }
+ if recoveredCycle.Plan!=nil{t.Fatal("WORK replay must retain nil cycle plan")}
+ if _,err:=reopened.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,original.bundle);err!=nil{
+  t.Fatal("checkpoint lost same-revision completed-perception tail:",err)
+ }
+}

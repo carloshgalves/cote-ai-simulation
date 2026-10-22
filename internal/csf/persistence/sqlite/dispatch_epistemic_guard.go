@@ -140,7 +140,12 @@ func verifyPriorPerceptionEmpty(ctx context.Context,tx *sql.Tx,run [32]byte,thro
   decodedEvent,err:=codec.StrictDecodePayload(eventRaw);if err!=nil{return err}
   eventFields,ok:=decodedEvent.([]any)
   if !ok||len(eventFields)!=19{return errors.New("dispatch task Event invalid")}
-  if eventFields[3]=="round.consumed"{
+  if eventFields[3]=="communication.delivered"{
+   projection,err:=loadVerifiedCommunicationProjection(ctx,tx,task.id)
+   if err!=nil{return err}
+   if !bytes.Equal(completionRaw,projection.Completion.Canonical){return errors.New("dispatch held: communicated claim completion not exact")}
+   if err:=checkProjectionEvidence(ctx,tx,run,task.id,projection);err!=nil{return err}
+  }else if eventFields[3]=="round.consumed"{
    projection,err:=loadVerifiedRoundProjection(ctx,tx,task.id)
    if err!=nil{return err}
    if !bytes.Equal(completionRaw,projection.Completion.Canonical){

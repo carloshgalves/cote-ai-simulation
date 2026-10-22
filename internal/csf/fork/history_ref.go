@@ -143,7 +143,8 @@ func VerifyOriginSnapshot(h HistoryReference,canonical []byte,origin *policy.Bun
  if !ok||len(fields)!=19{return errors.New("origin checkpoint schema is not snapshot V1")}
  digest,_,err:=identity.New(origin).Sum(SnapshotDomain,"cote.csf.schema.snapshot.body",1,fields[:18])
  if err!=nil{return err}
- if !bytes.Equal(fields[18].([]byte),digest[:])||h.CheckpointDigest!=[32]byte(digest){
+ stored,ok:=fields[18].([]byte)
+ if !ok||len(stored)!=32||!bytes.Equal(stored,digest[:])||h.CheckpointDigest!=[32]byte(digest){
   return errors.New("referenced checkpoint hash differs from origin policy digest")
  }
  return nil

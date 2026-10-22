@@ -50,9 +50,9 @@ func NewDueEvent(bundle *policy.Bundle,ctx EventContext,plan SendPlan,result Del
  }
  due,err:=ValidateOccurrence(bundle,plan);if err!=nil{return zero,err}
  if ctx.At<due{return zero,errors.New("delivery Event cannot precede due date")}
- occurrence,err:=codec.StrictDecodePayload(plan.Occurrence.Canonical)
+ decodedOccurrence,err:=codec.StrictDecodePayload(plan.Occurrence.Canonical)
  if err!=nil{return zero,err}
- fields:=occurrence.([]any)
+ fields:=decodedOccurrence.([]any)
  if !bytesEqualDigest(fields[14],occurrence.Digest){
   return zero,errors.New("delivery Event occurrence digest forged")
  }

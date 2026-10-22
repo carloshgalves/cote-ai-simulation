@@ -142,16 +142,19 @@ func communicationSentTyped(txID []byte,txDigest domain.Digest,claimID []byte,cl
  return []any{"cote.csf.schema.typed-value",uint64(1),raw,dg[:]}
 }
 func checkDueHistoricalProjection(event,transmission,claim []any,txID,claimID,occurrenceID []byte)error{
- if !sameCanonical(event[12],func()[]any{
-  if event[3]=="communication.delivery_failed"{return []any{}}
-  return []any{transmission[7].([]any)[0]}
- }()){return errors.New("due Event not addressed to intended recipient")}
+ recipients,valid:=transmission[7].([]any)
+ if !valid||len(recipients)!=1{return errors.New("historical transmission recipient roster malformed")}
+ actor,valid:=recipients[0].([]any)
+ if !valid||len(actor)!=2{return errors.New("historical transmission recipient invalid")}
+ expectedRecipients:=[]any{}
+ if event[3]=="communication.delivered"{expectedRecipients=[]any{actor}}
+ if !sameCanonical(event[12],expectedRecipients){return errors.New("due Event not addressed to intended recipient")}
  at,ok:=asSigned64(event[5]);if !ok{return errors.New("due Event occurred-at malformed")}
  var tag string
  var content any
  if event[3]=="communication.delivered"{
   tag="cote.csf.communication.delivered.v1"
-  content=[]any{transmission[7].([]any)[0],transmission[6],claimID,claim[4],at,transmission[8]}
+  content=[]any{actor,transmission[6],claimID,claim[4],at,transmission[8]}
   if event[15]!=uint64(1){return errors.New("delivered claim event visibility wrong")}
  }else{
   tag="cote.csf.communication.failure.v1"

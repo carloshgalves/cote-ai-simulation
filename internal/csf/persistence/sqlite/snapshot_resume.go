@@ -19,15 +19,19 @@ import (
 // The returned clock/control are verified, not synthesized from an external hint.
 type ResumeCheckpointV1 struct{
  Snapshot SnapshotV1
+ // SnapshotClock is the terminal clock at the sealed revision; Clock is the
+ // causally replayed *current* tip after applying every later tail.
+ SnapshotClock clock.State
  Clock clock.State
+ TailCommits uint64
  ControlStatus uint64
  PendingTasks int
 }
 
 // VerifySnapshotV1 fails closed if a snapshot, ledger prefix, pending runtime,
 // genesis policy, epistemic checkpoint or journal has been corrupted. V1
-// validates tip snapshots only: restoring an earlier point needs an explicit
-// tail replayer and must not silently discard later causal commits.
+// verifies the sealed snapshot prefix and complete subsequent journal tails.
+// It never rewinds authoritative SQLite tables or discards later commits.
 func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.Bundle)(ResumeCheckpointV1,error){
  var zero ResumeCheckpointV1
  if s==nil||b==nil{return zero,errors.New("resume requires store and pinned policy")}
@@ -47,6 +51,7 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  hash,_,err:=identity.New(b).Sum("cote.csf.hash.snapshot","cote.csf.schema.snapshot.body",1,all[:18])
  if err!=nil{return zero,err}
  if !equalBytes(all[18],hash[:]){return zero,errors.New("snapshot content hash mismatch")}
+ if err:=verifySnapshotSeal(ctx,tx,id,run,[32]byte(hash),rev);err!=nil{return zero,err}
  if all[15]!=policy.CodecPolicyID||!equalBytes(all[16],b.CodecPolicyHash[:])||!equalBytes(all[17],b.SchemaHash[:]){
   return zero,errors.New("snapshot codec/schema policy unavailable or changed")
  }
@@ -58,9 +63,11 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  }
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",run[:]).Scan(&clockRaw);err!=nil{return zero,err}
  c,err:=clock.Decode(clockRaw);if err!=nil{return zero,err}
- if uint64(c.Revision)!=rev||!sameCanonical(all[2],int64(c.Instant))||
-  !sameCanonical(all[4],uint64(c.NextLogicalSequence))||!sameCanonical(all[5],c.LastOrdinal){
-  return zero,errors.New("snapshot is stale relative to authoritative clock")
+ if rev>uint64(c.Revision){return zero,errors.New("snapshot revision is in the future")}
+ hist,err:=snapshotHistoricalClock(ctx,tx,run,g.InitialInstant,rev)
+ if err!=nil{return zero,err}
+ if !sameCanonical(all[2],hist.Instant)||!sameCanonical(all[4],hist.NextSequence)||!sameCanonical(all[5],hist.LastOrdinal){
+  return zero,errors.New("snapshot clock differs from independently replayed historical journal")
  }
  if err:=tx.QueryRowContext(ctx,"SELECT canonical,state_hash FROM world_revisions WHERE revision=?",rev).Scan(&worldRaw,&worldHash);err!=nil{return zero,err}
  world,err:=codec.StrictDecodePayload(worldRaw);if err!=nil{return zero,err}
@@ -69,26 +76,42 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  }
  cursors,ok:=all[12].([]any);if !ok||len(cursors)!=5{return zero,errors.New("snapshot must contain exactly five ledger prefixes")}
  for i,name:=range snapshotLedgerNames{
-  current,err:=snapshotLedgerPrefix(ctx,tx,name,b);if err!=nil{return zero,err}
-  if !sameCanonical(current,cursors[i]){return zero,fmt.Errorf("snapshot %s cursor or prefix changed",name)}
+  sealed,err:=snapshotVerifiedPrefix(ctx,tx,id,name,b);if err!=nil{return zero,err}
+  if !sameCanonical(sealed,cursors[i]){return zero,fmt.Errorf("snapshot %s historical prefix proof changed",name)}
+  if rev==uint64(c.Revision){
+   current,err:=snapshotLedgerPrefix(ctx,tx,name,b);if err!=nil{return zero,err}
+   if !sameCanonical(current,sealed){return zero,fmt.Errorf("tip snapshot %s cursor or prefix changed",name)}
+  }
  }
+ snapshotPendingValue,ok:=all[11].([]any)
+ if !ok||len(snapshotPendingValue)!=4||snapshotPendingValue[0]!="cote.csf.schema.snapshot-pending-state"||
+  snapshotPendingValue[1]!=uint64(1){return zero,errors.New("historical pending-state schema unsupported")}
+ snapshotRaw,ok:=snapshotPendingValue[2].([]byte);if !ok{return zero,errors.New("historical pending envelope missing")}
+ snapshotDigest:=identity.OpaqueContentHash(snapshotRaw)
+ if !equalBytes(snapshotPendingValue[3],snapshotDigest[:]){return zero,errors.New("historical pending envelope hash mismatch")}
+ snapshotEnv,err:=codec.StrictDecodeEnvelope(snapshotRaw);if err!=nil{return zero,err}
+ snapshotLists,ok:=snapshotEnv.Value.([]any)
+ if !ok||len(snapshotLists)!=10||snapshotEnv.SchemaID!="cote.csf.schema.snapshot-pending-state"||
+  snapshotEnv.SchemaVersion!=1{return zero,errors.New("historical pending-state envelope incompatible")}
  currentPending,err:=snapshotPending(ctx,tx,run,b);if err!=nil{return zero,err}
- if !sameCanonical(currentPending,all[11]){return zero,errors.New("snapshot pending state differs from authority")}
+ if rev==uint64(c.Revision)&&!sameCanonical(currentPending,all[11]){return zero,errors.New("tip snapshot pending state differs from authority")}
  controlStatus:=uint64(0)
  err=tx.QueryRowContext(ctx,"SELECT canonical FROM cycle_control_state WHERE run_id=?",run[:]).Scan(&controlRaw)
  if err!=nil&&err!=sql.ErrNoRows{return zero,err}
  if err==sql.ErrNoRows{
   idle:=[]any{uint64(0),[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},uint64(0)}
-  if !sameCanonical(all[13],idle){return zero,errors.New("snapshot wrongly claims a non-IDLE control state")}
+  if rev==uint64(c.Revision)&&!sameCanonical(all[13],idle){return zero,errors.New("tip snapshot wrongly claims a non-IDLE control state")}
  }else{
   control,err:=codec.StrictDecodePayload(controlRaw);if err!=nil{return zero,err}
-  ctl,ok:=control.([]any);if !ok||len(ctl)!=7||!sameCanonical(all[13],ctl){return zero,errors.New("snapshot control state diverged")}
-  controlStatus,ok=ctl[0].(uint64);if !ok||controlStatus>3{return zero,errors.New("snapshot control status invalid")}
+  ctl,ok:=control.([]any);if !ok||len(ctl)!=7{return zero,errors.New("cycle control state malformed")}
+  if rev==uint64(c.Revision)&&!sameCanonical(all[13],ctl){return zero,errors.New("tip snapshot control state diverged")}
  }
+ sealedControl,ok:=all[13].([]any);if !ok||len(sealedControl)!=7{return zero,errors.New("historical control schema malformed")}
+ controlStatus,ok=sealedControl[0].(uint64);if !ok||controlStatus>3{return zero,errors.New("historical control status invalid")}
  refs,ok:=all[14].([]any);if !ok{return zero,errors.New("snapshot checkpoint roster invalid")}
  count,ok:=cursors[3].([]any);if !ok||len(count)!=3{return zero,errors.New("evidence cursor malformed")}
  evidenceCursor,ok:=count[1].(uint64);if !ok{return zero,errors.New("evidence cursor invalid")}
- if err:=verifySnapshotCheckpointRefs(ctx,tx,run,refs,int64(c.Instant),rev,evidenceCursor);err!=nil{return zero,err}
+ if err:=verifySnapshotCheckpointRefs(ctx,tx,run,refs,hist.Instant,rev,evidenceCursor,&id);err!=nil{return zero,err}
  pfields,ok:=currentPending[2].([]byte);if !ok{return zero,errors.New("pending state envelope missing")}
  penv,err:=codec.StrictDecodeEnvelope(pfields);if err!=nil{return zero,err}
  memberships,ok:=penv.Value.([]any);if !ok||len(memberships)!=10{return zero,errors.New("invalid pending state typed projection")}
@@ -97,11 +120,13 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  if err:=tx.Commit();err!=nil{return zero,err}
  return ResumeCheckpointV1{
   Snapshot:SnapshotV1{ID:id,Digest:hash,Canonical:bytes.Clone(canonical),Revision:rev},
-  Clock:c,ControlStatus:controlStatus,PendingTasks:tasks,
+  SnapshotClock:clock.State{Instant:domain.SimulationInstant(hist.Instant),Revision:domain.WorldRevision(hist.Revision),
+    NextLogicalSequence:domain.LogicalSequence(hist.NextSequence),LastOrdinal:hist.LastOrdinal},
+  Clock:c,TailCommits:uint64(c.Revision)-rev,ControlStatus:controlStatus,PendingTasks:tasks,
  },nil
 }
 
-type snapshotGenesis struct{ID,Digest [32]byte;Seed [32]byte;Policies any}
+type snapshotGenesis struct{ID,Digest [32]byte;Seed [32]byte;Policies any;InitialInstant int64}
 func genesisValidateForSnapshot(raw []byte,b *policy.Bundle)(snapshotGenesis,error){
  var out snapshotGenesis
  env,err:=codec.StrictDecodeEnvelope(raw);if err!=nil{return out,err}
@@ -112,6 +137,8 @@ func genesisValidateForSnapshot(raw []byte,b *policy.Bundle)(snapshotGenesis,err
  out.ID=[32]byte(id);out.Digest=[32]byte(dig)
  seed,ok:=p[1].([]byte);if !ok||len(seed)!=32{return out,errors.New("genesis seed malformed")}
  copy(out.Seed[:],seed);out.Policies=p[14]
+ initial,ok:=asSigned64(p[3]);if !ok{return out,errors.New("genesis initial instant invalid")}
+ out.InitialInstant=initial
  return out,nil
 }
 

@@ -51,7 +51,9 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
   // closed, rather than discarding the parent pending work.
   if i==7{
    pending,ok:=lists[0].([]any)
-   if !ok||len(items)!=len(pending){return nil,errors.New("fork pending input roster not fully supported")}
+   if !ok{return nil,errors.New("fork pending schedule roster malformed")}
+   activations,ok:=lists[2].([]any)
+   if !ok||len(items)!=len(pending)+len(activations){return nil,errors.New("fork pending input roster not fully supported")}
    expected:=map[string]bool{}
    for _,v:=range pending{
     ref,ok:=v.([]any);if !ok||len(ref)!=3{return nil,errors.New("fork genesis ref malformed")}

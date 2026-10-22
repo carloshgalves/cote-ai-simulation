@@ -46,7 +46,7 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
   // Latest SourceClosure, settled slot responses and completed perception
   // receipts are historical proofs, not pending work. Keep them in the
   // frozen parent prefix rather than transplanting their run-bound IDs.
-  if i==3||i==6||i==9||i==0{continue}
+  if i==3||i==6||i==9||i==0||i==1||i==2{continue}
   // An explicitly migrated genesis schedule contributes one pending input
   // ref (kind=2) for each immutable occurrence. Unknown source kinds fail
   // closed, rather than discarding the parent pending work.

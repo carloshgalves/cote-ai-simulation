@@ -1,0 +1,41 @@
+# Pure harness checks. No provider/API secrets and no agent execution on PR.
+name: Agent harness validation
+on:
+  pull_request:
+    paths:
+      - "scripts/agents/**"
+      - ".claude/settings.json"
+      - ".github/workflows/agent-implementation-fleet.yml"
+      - ".github/workflows/headless-agent-review.yml"
+      - ".github/workflows/agent-harness-validation.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  harness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Validate Python and shell harness
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s scripts/agents -p 'test_*.py' -v
+          bash -n scripts/agents/fleet_checkpoint.sh
+          git diff --check
+      - name: Validate workflow YAML structure
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check 'PyYAML==6.0.2'
+          python3 - <<'PY'
+          import pathlib,yaml
+          files=["agent-implementation-fleet.yml","headless-agent-review.yml","agent-harness-validation.yml"]
+          for name in files:
+              root=yaml.load((pathlib.Path(".github/workflows")/name).read_text(),Loader=yaml.BaseLoader)
+              assert isinstance(root,dict) and "on" in root and "jobs" in root, name
+              print("Validated YAML shape:",name)
+          PY

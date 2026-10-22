@@ -1,25 +1,11 @@
 package communication
 
 import (
- "bytes"
  "testing"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 )
-
-func eventScenario(t *testing.T)(SendPlan,EventContext,*testEventContext){
- t.Helper()
- bundle,claim,tx:=fixture(t)
- var run,cycle domain.ID;run[0]=0x71;cycle[0]=0x72
- spec:=SendSpec{Run:run,Source:Origin{Kind:5,ID:claim.Origin.ID,Digest:claim.Origin.Digest},
-  ActualSender:tx.ActualSender,PresentedSender:"C",Recipient:Actor{"school","b"},
-  SentAt:4,DueAt:12,Channel:"school.message.v1",Proposition:claim.Proposition}
- plan,err:=PrepareSend(bundle,spec);if err!=nil{t.Fatal(err)}
- return plan,EventContext{Run:run,Cycle:cycle,At:4,Sequence:0,BaseRevision:0},
-  &testEventContext{bundle:bundle,source:spec.Source}
-}
-type testEventContext struct{bundle interface{};source Origin}
 
 func TestCSFRV17EventDraftsKeepFalseClaimSeparateFromWorldTruth(t *testing.T){
  bundle,claim,tx:=fixture(t)
@@ -47,7 +33,7 @@ func TestCSFRV17EventDraftsKeepFalseClaimSeparateFromWorldTruth(t *testing.T){
  result,err:=codec.StrictDecodePayload(recorded.Canonical);if err!=nil{t.Fatal(err)}
  ef:=result.([]any)
  if ef[3]!="communication.delivered"||ef[15]!=uint64(1)||
-  len(ef[12].([]any))!=1||!bytes.Equal(ef[12].([]any)[0].([]any)[1].(string),[]byte("b")){
+  len(ef[12].([]any))!=1||ef[12].([]any)[0].([]any)[1]!="b"{
   t.Fatal("delivery Event not addressed solely to B")
  }
  fail,err:=PlanDueDelivery(bundle,plan.Transmission,plan.Claim,origin.ID,12,12,false)

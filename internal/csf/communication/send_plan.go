@@ -40,7 +40,7 @@ type SendPlan struct{
 // transmission ref and Event payload digest.
 func PrepareSend(bundle *policy.Bundle,s SendSpec)(SendPlan,error){
  var zero SendPlan
- if bundle==nil||s.Run==([32]byte{})||s.Source.Kind!=5{return zero,errors.New("send requires run and admitted ActionProposal origin")}
+ if bundle==nil||s.Source.Kind!=5{return zero,errors.New("send requires run and admitted ActionProposal origin")}
  if s.DueAt<=s.SentAt||s.DueAt==domain.SimulationInstant(math.MaxInt64){
   return zero,errors.New("delivery occurrence must be after send")
  }
@@ -87,7 +87,7 @@ func ValidateOccurrence(bundle *policy.Bundle,p SendPlan)(domain.SimulationInsta
  if bundle==nil{return 0,errors.New("missing bundle")}
  c,err:=AuthenticateClaim(bundle,p.Claim);if err!=nil{return 0,err}
  tx,err:=AuthenticateTransmission(bundle,p.Transmission);if err!=nil{return 0,err}
- if tx.Occurrence!=domain.ID(p.Occurrence.Identity)||p.Run==([32]byte{}){
+ if tx.Occurrence!=domain.ID(p.Occurrence.Identity){
   return 0,errors.New("transmission due occurrence mismatch")
  }
  if c.Origin!=tx.Origin||tx.Origin.Kind!=5{return 0,errors.New("transmission and claim origin mismatch")}

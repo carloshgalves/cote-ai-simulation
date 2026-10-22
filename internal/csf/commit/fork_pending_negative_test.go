@@ -14,12 +14,6 @@ import (
 // verified and atomic migrator exists, fork must reject and leave no child.
 func TestCSFRV18UnsupportedOpenCommunicationAndRoundForkFailClosed(t *testing.T){
  ctx:=context.Background()
- for _,tc:=range []struct{
-  name string
-  build func(*testing.T)(*sqlite.Store,[32]byte,[32]byte,any)
- }{} {
-  _=tc
- }
  t.Run("communication-in-transit",func(t *testing.T){
   c,parent,ledger,cycle,fence,_:=communicationFixture(t)
   _,_,_,_,_,run:=ledger.Snapshot()
@@ -35,16 +29,17 @@ func TestCSFRV18UnsupportedOpenCommunicationAndRoundForkFailClosed(t *testing.T)
   assertCSFRV18EmptyRejectedFork(t,childPath)
  })
  t.Run("fenced-unfinished-round",func(t *testing.T){
-  c,parent,_,_,_,_:=noProposalWorkFixture(t)
-  // Use the authenticated run stored in the genesis checkpoint, not a
-  // fabricated round identity or newly selected cycle.
-  var run [32]byte
-  raw,err:=sql.Open("sqlite",":memory:")
-  if err!=nil{t.Fatal(err)}
-  raw.Close()
-  _=run
-  _=c
-  _=parent
+  c,parent,ledger,_,_,_:=noProposalWorkFixture(t)
+  _,_,_,_,_,run:=ledger.Snapshot()
+  snap,err:=parent.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil);if err!=nil{t.Fatal(err)}
+  childPath:=t.TempDir()+"/round-child.db"
+  child,err:=sqlite.Open(ctx,childPath);if err!=nil{t.Fatal(err)}
+  defer child.Close()
+  id:=[32]byte(run);id[0]^=0x62
+  if _,err:=parent.ForkIdleSnapshotV1(ctx,[32]byte(run),snap.ID,id,child,c.bundle);err==nil{
+   t.Fatal("fork silently discarded an admitted in-flight round and immutable fence")
+  }
+  assertCSFRV18EmptyRejectedFork(t,childPath)
  })
 }
 

@@ -7,6 +7,7 @@ import (
  "errors"
  "fmt"
 
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
@@ -67,6 +68,31 @@ func (s *Store) PrepareInTransitDependenciesV1(ctx context.Context,
  readTx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true})
  if err!=nil{return nil,err}
  defer readTx.Rollback()
+ // The signed pending roster is anchored to this checkpoint's exact
+ // five-ledger cut. A later tail (even at the same world revision) may
+ // deliver a message or complete perception. Reject mixing that newer
+ // live authority with the older checkpoint rather than silently losing
+ // an in-transit transmission at the requested fork coordinate.
+ var clockRaw []byte
+ if err:=readTx.QueryRowContext(ctx,
+  "SELECT canonical FROM clock_states WHERE run_id=?",parentRun[:]).Scan(&clockRaw);err!=nil{return nil,err}
+ cutClock,err:=clock.Decode(clockRaw)
+ if err!=nil{return nil,err}
+ if cutClock!=verified.SnapshotClock||verified.TailCommits!=0||
+  verified.ControlStatus!=verified.SnapshotControlStatus {
+  return nil,errors.New("communication migration requires exact checkpoint clock/control cut")
+ }
+ cursors,ok:=snap[12].([]any)
+ if !ok||len(cursors)!=len(snapshotLedgerNames){
+  return nil,errors.New("communication migration snapshot ledger roster malformed")
+ }
+ for i,name:=range snapshotLedgerNames {
+  prefix,err:=snapshotLedgerPrefix(ctx,readTx,name,b)
+  if err!=nil{return nil,err}
+  if !sameCanonical(prefix,cursors[i]){
+   return nil,fmt.Errorf("communication migration ledger %s advanced beyond source checkpoint",name)
+  }
+ }
  rows,err:=readTx.QueryContext(ctx,
   "SELECT id,claim_id,occurrence_id,sent_commit_id,status,canonical "+
    "FROM communication_transmissions WHERE run_id=? ORDER BY id",parentRun[:])

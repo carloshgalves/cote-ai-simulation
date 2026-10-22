@@ -42,8 +42,31 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  lists,ok:=penv.Value.([]any);if !ok||len(lists)!=10{return nil,errors.New("unsupported pending-state schema")}
  for i,raw:=range lists{
   items,ok:=raw.([]any)
-  if !ok||len(items)!=0{
+  if !ok{return nil,fmt.Errorf("fork pending partition %d is malformed",i)}
+  // Latest SourceClosure, settled slot responses and completed perception
+  // receipts are historical proofs, not pending work. Keep them in the
+  // frozen parent prefix rather than transplanting their run-bound IDs.
+  if i==3||i==6||i==9{continue}
+  if len(items)!=0{
    return nil,fmt.Errorf("fork requires an idle, migration-free pending partition %d",i)
+  }
+ }
+ // Every source cursor inherited only as archived history must be final:
+ // otherwise a child would silently drop unfinished exogenous input ingress.
+ for _,item:=range lists[3].([]any){
+  ref,ok:=item.([]any)
+  if !ok||len(ref)!=3||ref[0]!=uint64(2){return nil,errors.New("fork source closure reference malformed")}
+  id,ok:=ref[1].([]byte)
+  if !ok||len(id)!=32{return nil,errors.New("fork source closure ID malformed")}
+  var canonical []byte
+  if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM input_ledger WHERE id=?",id).Scan(&canonical);err!=nil{
+   return nil,fmt.Errorf("fork source closure absent from origin history: %w",err)
+  }
+  decoded,err:=codec.StrictDecodePayload(canonical);if err!=nil{return nil,err}
+  record,ok:=decoded.([]any)
+  if !ok||len(record)!=7||record[5]!=true||!equalBytes(record[0],id)||
+   !equalBytes(record[1],sourceRun[:]){
+   return nil,errors.New("fork would lose an unfinished or invalid source cursor")
   }
  }
  // Parent's registered snapshot body hash is distinct from the exact-byte

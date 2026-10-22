@@ -90,3 +90,35 @@ func TestCSFRV18InstalledPolicyRegistrySealsNestedRegistryContent(t *testing.T){
   t.Fatal("nested mutated registry was accepted as installed policy")
  }
 }
+
+// A copied public manifest ID/hash without the private successful-loader seal
+// must never be sufficient to register executable historical authority.
+func TestCSFRV18InstalledPolicyRequiresNormativeLoaderProvenance(t *testing.T){
+ verified,err:=policy.Load("../../../docs/architecture/canonical-codec-v1-bundle")
+ if err!=nil{t.Fatal(err)}
+ forged:=&policy.Bundle{
+  Directory:verified.Directory,
+  Profile:verified.Profile,
+  Registries:verified.Registries,
+  Transitions:verified.Transitions,
+  CodecPolicyHash:verified.CodecPolicyHash,
+  SchemaHash:verified.SchemaHash,
+  SuiteHash:verified.SuiteHash,
+ }
+ if _,err:=NewInstalledPolicyRegistry(forged);err==nil{
+  t.Fatal("fabricated bundle with copied ID and hashes was installed without policy.Load")
+ }
+ // Alterations made between the verified load and registry installation
+ // invalidate the loader provenance, even if the codec ID and hash match.
+ preMutated,err:=policy.Load("../../../docs/architecture/canonical-codec-v1-bundle")
+ if err!=nil{t.Fatal(err)}
+ preMutated.Transitions["required_genesis_policy_roles"]=[]any{}
+ if _,err:=NewInstalledPolicyRegistry(preMutated);err==nil{
+  t.Fatal("bundle mutated before installation was accepted as normatively verified")
+ }
+ clean,err:=policy.Load("../../../docs/architecture/canonical-codec-v1-bundle")
+ if err!=nil{t.Fatal(err)}
+ if _,err:=NewInstalledPolicyRegistry(clean);err!=nil{
+  t.Fatalf("verified immutable bundle was rejected: %v",err)
+ }
+}

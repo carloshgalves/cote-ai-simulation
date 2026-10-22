@@ -34,10 +34,10 @@ type forkTriggerMigration struct{
 // definitions. Later Event-owned activations require a separate, explicit
 // per-producer migration and are fail-closed here.
 func migrateGenesisPendingTriggers(ctx context.Context,s *Store,
- parent,child *genesis.Genesis,b *policy.Bundle,runtimes,activationRefs []any)(
+ parent,child *genesis.Genesis,originPolicy,childPolicy *policy.Bundle,runtimes,activationRefs []any)(
  forkTriggerMigration,error){
  var result forkTriggerMigration
- registered,err:=s.LoadRegisteredTriggers(ctx,[32]byte(parent.RunID),b);if err!=nil{return result,err}
+ registered,err:=s.LoadRegisteredTriggers(ctx,[32]byte(parent.RunID),originPolicy);if err!=nil{return result,err}
  if len(registered)!=len(runtimes){return result,errors.New("fork trigger runtime roster not fully covered")}
  // The V1 Genesis trigger migrator has no authority to replay a non-Genesis
  // transition at a different clock origin. Reject those cases instead of
@@ -73,7 +73,7 @@ func migrateGenesisPendingTriggers(ctx context.Context,s *Store,
    return result,errors.New("fork would transplant evolved trigger runtime without its causal transition")
   }
   if expected.Fired{
-   born,err:=genesisActivation(b,child,def,expected.Runtime)
+   born,err:=genesisActivation(childPolicy,child,def,expected.Runtime)
    if err!=nil{return result,err}
    expectedBirths[[32]byte(born.id)]=true
   }
@@ -121,7 +121,7 @@ func migrateGenesisPendingTriggers(ctx context.Context,s *Store,
   exists:=false
   for _,def:=range result.Definitions{if bytes.Equal(def.ID[:],definition){exists=true}}
   if !exists{return result,errors.New("fork activation references unregistered trigger")}
-  newID,_,err:=identity.New(b).Sum("cote.csf.id.trigger-activation",
+  newID,_,err:=identity.New(childPolicy).Sum("cote.csf.id.trigger-activation",
    "cote.csf.schema.trigger-activation-id-preimage",1,
    []any{child.RunID[:],definition,version,uint64(0),count})
   if err!=nil{return result,err}
@@ -129,7 +129,7 @@ func migrateGenesisPendingTriggers(ctx context.Context,s *Store,
   body[0]=newID[:]
   body[1]=child.RunID[:]
   body[5]=[]any{uint64(1),[]any{child.ID[:],child.Digest[:]}}
-  digest,_,err:=identity.New(b).Sum("cote.csf.digest.trigger-activation-unit",
+  digest,_,err:=identity.New(childPolicy).Sum("cote.csf.digest.trigger-activation-unit",
    "cote.csf.schema.trigger-activation.body",1,body)
   if err!=nil{return result,err}
   canonical,err:=codec.CanonicalPayload(append(body,digest[:]));if err!=nil{return result,err}

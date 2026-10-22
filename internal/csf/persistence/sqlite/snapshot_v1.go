@@ -196,15 +196,22 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
  for key:=range dispatches{dispatchKeys=append(dispatchKeys,key)}
  sort.Slice(dispatchKeys,func(i,j int)bool{return bytes.Compare(dispatchKeys[i][:],dispatchKeys[j][:])<0})
  for _,key:=range dispatchKeys{if !answered[key]&&!revoked[key]{parts[5]=append(parts[5],dispatches[key])}}
- // Scheduled/trigger work contributes input-ref, distinct from causal-ref.
+ // Scheduled and trigger index lifecycle fields are immutable birth-state
+ // projections. A terminal source remains indexed as lifecycle=0 but is
+ // not pending when a committed DecisionRecord has settled it. Never retain
+ // consumed entries in the checkpoint's authoritative pending partitions.
  for _,p:=range []int{0,2}{
+  active:=make([]any,0,len(parts[p]))
   for _,raw:=range parts[p]{
    ref:=raw.([]any)
    kind:=uint64(2);if p==2{kind=3}
-   if id,ok:=idField(ref[1]);ok&&live[id]{
+   id,ok:=idField(ref[1]);if !ok{return nil,errors.New("malformed pending source ref")}
+   if live[id]{
+    active=append(active,raw)
     parts[7]=append(parts[7],[]any{kind,ref[1],ref[2]})
    }
   }
+  parts[p]=active
  }
  // Outbox tasks are not evidence. Only tasks without a committed completion
  // remain pending; completed receipts are included in full canonical form.

@@ -57,7 +57,7 @@ func NewDueEvent(bundle *policy.Bundle,ctx EventContext,plan SendPlan,result Del
   return zero,errors.New("delivery Event occurrence digest forged")
  }
  expected,err:=PlanDueDelivery(bundle,plan.Transmission,plan.Claim,
-  occurrence.ID,due,ctx.At,result.NextStatus==1)
+  occurrence.ID,due,ctx.At)
  if err!=nil{return zero,err}
  if expected.EventType!=result.EventType||expected.NextStatus!=result.NextStatus||
   (expected.Notice==nil)!=(result.Notice==nil){

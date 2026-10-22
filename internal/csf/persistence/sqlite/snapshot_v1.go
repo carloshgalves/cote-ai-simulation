@@ -311,7 +311,7 @@ func (s *Store) CreateSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bund
  evidenceCount:=cursors[3].([]any)[1].(uint64)
  refs,err:=snapshotCheckpointRefs(checkpoints,int64(state.Instant),uint64(state.Revision),evidenceCount)
  if err!=nil{return zero,err}
- if err:=verifySnapshotCheckpointRefs(ctx,tx,run,refs,int64(state.Instant),uint64(state.Revision),evidenceCount);err!=nil{return zero,err}
+ if err:=verifySnapshotCheckpointRefs(ctx,tx,run,refs,int64(state.Instant),uint64(state.Revision),evidenceCount,nil);err!=nil{return zero,err}
  pending,err:=snapshotPending(ctx,tx,run,b);if err!=nil{return zero,err}
  control:=[]any{uint64(0),[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},[]any{uint64(0)},uint64(0)}
  var ctlRaw []byte

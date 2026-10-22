@@ -57,7 +57,9 @@ func TestCSFRV18V2SettlesFencedWorkBeforeChildFork(t *testing.T){
  if _,err:=parent.VerifySnapshotV1(ctx,[32]byte(run),sealed.ID,coordinator.bundle);err!=nil{
   t.Fatal("historical frozen checkpoint lost:",err)
  }
- childSnap,err:=child.CreateSnapshotV1(ctx,childID,v2,nil)
+ preserved,err:=provider(ctx,parent)
+ if err!=nil{t.Fatal(err)}
+ childSnap,err:=child.CreateSnapshotV1(ctx,childID,v2,preserved)
  if err!=nil{t.Fatal(err)}
  if _,err:=child.VerifySnapshotV1(ctx,childID,childSnap.ID,v2);err!=nil{t.Fatal(err)}
 }

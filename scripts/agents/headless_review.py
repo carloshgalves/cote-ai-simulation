@@ -14,9 +14,9 @@ from urllib import request, error
 
 
 MODELS = {"openai/gpt-oss-20b", "openai/gpt-oss-120b"}
-MAX_DIFF = 48_000
-MAX_SPEC = 12_000
-MAX_FINDINGS = 12
+MAX_DIFF = 12_000
+MAX_SPEC = 4_000
+MAX_FINDINGS = 5
 
 
 def check_input(payload: dict) -> None:
@@ -50,7 +50,7 @@ def review(data: dict, api_key: str, model: str) -> dict:
     body = json.dumps({
         "model": model,
         "temperature": 0,
-        "max_completion_tokens": 2000,
+        "max_completion_tokens": 1200,
         "response_format": {"type": "json_object"},
         "messages": [{"role": "system", "content": policy},
                      {"role": "user", "content": msg}]
@@ -86,7 +86,7 @@ def main() -> int:
             "<!-- ai-headless-review:v1 -->",
             "### AI headless review — UNVERIFIED candidates",
             "",
-            f"Commit: \`{data['pr_head']}\` | Model: \`{model}\`",
+            f"Commit: `{data['pr_head']}` | Model: `{model}`",
             "",
             "**Not a canonical code-review or release approval.** Suggestions below "
             "require independent validation against the code and full applicable spec. "

@@ -36,6 +36,9 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  snapRaw,err:=codec.StrictDecodePayload(resume.Snapshot.Canonical)
  if err!=nil{return nil,err}
  snapshot,ok:=snapRaw.([]any);if !ok||len(snapshot)!=19{return nil,errors.New("source snapshot schema invalid")}
+ epistemic,ok:=snapshot[14].([]any)
+ if !ok{return nil,errors.New("fork epistemic snapshot roster malformed")}
+ if len(epistemic)>0{return nil,errors.New("fork requires versioned migration of opaque cognitive checkpoints")}
  typed,ok:=snapshot[11].([]any);if !ok||len(typed)!=4{return nil,errors.New("source pending envelope absent")}
  penv,err:=codec.StrictDecodeEnvelope(typed[2].([]byte));if err!=nil{return nil,err}
  lists,ok:=penv.Value.([]any);if !ok||len(lists)!=10{return nil,errors.New("unsupported pending-state schema")}

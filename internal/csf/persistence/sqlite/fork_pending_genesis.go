@@ -24,7 +24,7 @@ type forkGenesisOccurrence struct{
 }
 
 func migrateGenesisPendingOccurrences(ctx context.Context,s *Store,
- parent *genesis.Genesis,child *genesis.Genesis,refs []any,b *policy.Bundle)(
+ parent *genesis.Genesis,child *genesis.Genesis,refs []any,originPolicy,childPolicy *policy.Bundle)(
  []forkGenesisOccurrence,error){
  result:=[]forkGenesisOccurrence{}
  for _,rawRef:=range refs{
@@ -38,6 +38,9 @@ func migrateGenesisPendingOccurrences(ctx context.Context,s *Store,
   if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM scheduled_occurrences WHERE id=? AND run_id=?",
    parentID,parent.RunID[:]).Scan(&original);err!=nil{return nil,err}
   parsed,err:=codec.StrictDecodePayload(original);if err!=nil{return nil,err}
+  // A valid roster reference must match an authenticated parent birth
+  // before deriving a different child-owned identity.
+  if _,_,err:=originPolicy.CodecIdentity();err!=nil{return nil,err}
   f,ok:=parsed.([]any)
   if !ok||len(f)!=15||!equalBytes(f[0],parentID)||!equalBytes(f[1],parent.RunID[:])||
    !equalBytes(f[14],birthDigest){return nil,errors.New("fork schedule birth hash differs from checkpoint")}
@@ -51,14 +54,14 @@ func migrateGenesisPendingOccurrences(ctx context.Context,s *Store,
   // A migrated schedule is an *unexecuted* child-side work unit. Preserve
   // its original due coordinate, but never its parent run/event identity.
   sourceChild:=[]any{uint64(2),[]any{child.ID[:],child.Digest[:]}}
-  nextID,_,err:=identity.New(b).Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+  nextID,_,err:=identity.New(childPolicy).Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
    []any{sourceChild,f[10],f[11]})
   if err!=nil{return nil,err}
   fields:=append([]any(nil),f[:14]...)
   fields[0]=nextID[:]
   fields[1]=child.RunID[:]
   fields[9]=sourceChild
-  hash,_,err:=identity.New(b).Sum("cote.csf.digest.occurrence-unit",
+  hash,_,err:=identity.New(childPolicy).Sum("cote.csf.digest.occurrence-unit",
    "cote.csf.schema.scheduled-occurrence.body",1,fields)
   if err!=nil{return nil,err}
   bytesOut,err:=codec.CanonicalPayload(append(fields,hash[:]));if err!=nil{return nil,err}

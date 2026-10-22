@@ -79,7 +79,7 @@ func verifyPublishedCommunication(ctx context.Context,q queryOne,run,cycle,commi
   []any{transmission[1],transmission[2],transmission[3]})
  if err!=nil||!bytes.Equal(txID[:],transmissionID){return zero,errors.New("historical Transmission ID forged")}
  txDigest,err:=registeredDigest("cote.csf.digest.transmission","cote.csf.schema.transmission.body",transmission[:13])
- if err!=nil||!equalBytes(txDigest[:],transmission[13]){return zero,errors.New("historical Transmission digest forged")}
+ if err!=nil||!equalBytes(txDigest[:],communicationBytes(transmission[13])){return zero,errors.New("historical Transmission digest forged")}
  occ,err:=codec.StrictDecodePayload(occurrenceRaw);if err!=nil{return zero,err}
  occurrence,ok:=occ.([]any)
  if !ok||len(occurrence)!=15||!equalBytes(occurrence[0],occurrenceID)||

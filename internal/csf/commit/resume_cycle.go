@@ -119,7 +119,9 @@ func (c *Coordinator) ReopenAuthorizedRetry(ctx context.Context,ledger *inputled
   return cycle,fence,restored,errors.New("retry crosses cycle or run")
  }
  previousAttempt,ok:=fields[2].(uint64)
- if !ok||previousAttempt+1!=restored.Action.AttemptOrdinal{return cycle,fence,restored,errors.New("retry attempt does not advance by one")}
+ if !ok{return cycle,fence,restored,errors.New("previous retry attempt malformed")}
+ nextAttempt,err:=verifiedRetrySuccessor(previousAttempt,restored.Action.AttemptOrdinal)
+ if err!=nil{return cycle,fence,restored,err}
  instant,ok:=resumeSignedInstant(fields[4]);if !ok{return cycle,fence,restored,errors.New("prior instant invalid")}
  ordinal,ok:=fields[5].(uint64);if !ok{return cycle,fence,restored,errors.New("prior ordinal invalid")}
  plan,ok:=fields[6].([]any);if !ok||len(plan)==0{return cycle,fence,restored,errors.New("prior clock plan invalid")}
@@ -127,7 +129,7 @@ func (c *Coordinator) ReopenAuthorizedRetry(ctx context.Context,ledger *inputled
  revision,ok:=fields[7].(uint64);if !ok{return cycle,fence,restored,errors.New("prior base revision invalid")}
  hash,ok:=fields[8].([]byte);if !ok||len(hash)!=32{return cycle,fence,restored,errors.New("prior state hash invalid")}
  var stateHash domain.Digest;copy(stateHash[:],hash)
- cycle=admission.Cycle{ID:domain.ID(restored.Action.CycleID),Attempt:uint32(restored.Action.AttemptOrdinal),
+ cycle=admission.Cycle{ID:domain.ID(restored.Action.CycleID),Attempt:nextAttempt,
   Plan:plan,Instant:domain.SimulationInstant(instant),Ordinal:domain.CycleOrdinal(ordinal),
   BaseRevision:domain.WorldRevision(revision),BaseStateHash:stateHash,RetryRef:retried}
  fence,err=admission.NewCoordinator(admission.NewFenceLog(c.store)).
@@ -135,4 +137,14 @@ func (c *Coordinator) ReopenAuthorizedRetry(ctx context.Context,ledger *inputled
  if err!=nil{return cycle,admission.Fence{},restored,err}
  if fence.ID==domain.ID(restored.Action.FenceID){return cycle,admission.Fence{},restored,errors.New("retry reused prior attempt identity")}
  return cycle,fence,restored,nil
+}
+
+// verifiedRetrySuccessor forbids uint64 wraparound and uint32 truncation
+// *before* a retry creates a new fence under an apparently reused ordinal.
+func verifiedRetrySuccessor(previous,proposed uint64)(uint32,error){
+ if previous>=uint64(^uint32(0)) || proposed>uint64(^uint32(0)) ||
+  proposed!=previous+1 {
+  return 0,errors.New("retry attempt exceeds V1 ordinal limit or is not the immediate successor")
+ }
+ return uint32(proposed),nil
 }

@@ -187,7 +187,12 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
  // A fork never shares mutable authority columns with the source run.
  for _,name:=range []string{"genesis_records","world_revisions","clock_states",
   "input_ledger","decision_ledger","event_store","evidence_ledger","causal_outbox",
-  "fork_lineage","snapshots","scheduled_occurrences","trigger_runtime","trigger_activations"}{
+  "input_source_cursors","source_ingress_receipts","input_slot_responses","round_integrity_seals",
+  "cognitive_actor_registry","snapshot_cognitive_actors","evidence_routes",
+  "communication_claims","communication_transmissions","cycle_control_state",
+  "committed_cycles","fork_lineage","fork_history_records","snapshots","snapshot_seals",
+  "snapshot_prefix_members","genesis_schedule_seals","scheduled_occurrences",
+  "trigger_registry_seals","trigger_definitions","trigger_runtime","trigger_activations"}{
   var count int
   if err:=tx.QueryRowContext(ctx,"SELECT count(*) FROM "+name).Scan(&count);err!=nil{return nil,err}
   if count!=0{return nil,fmt.Errorf("fork destination contains previous authority in %s",name)}

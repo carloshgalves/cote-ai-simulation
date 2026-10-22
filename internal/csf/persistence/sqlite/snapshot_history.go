@@ -43,7 +43,8 @@ func sealSnapshot(ctx context.Context,tx *sql.Tx,checkpoint SnapshotV1,run [32]b
  if _,err:=tx.ExecContext(ctx,
   "INSERT INTO snapshot_seals(snapshot_id,run_id,revision,digest) VALUES(?,?,?,?)",
   checkpoint.ID[:],run[:],checkpoint.Revision,checkpoint.Digest[:]);err!=nil{return err}
- return sealSnapshotPrefix(ctx,tx,checkpoint.ID)
+ if err:=sealSnapshotPrefix(ctx,tx,checkpoint.ID);err!=nil{return err}
+ return sealSnapshotCognitiveActors(ctx,tx,run,checkpoint.ID)
 }
 
 // snapshotVerifiedPrefix proves every original member is still present with

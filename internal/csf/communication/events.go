@@ -50,6 +50,26 @@ func NewDueEvent(bundle *policy.Bundle,ctx EventContext,plan SendPlan,result Del
  }
  due,err:=ValidateOccurrence(bundle,plan);if err!=nil{return zero,err}
  if ctx.At<due{return zero,errors.New("delivery Event cannot precede due date")}
+ occurrence,err:=codec.StrictDecodePayload(plan.Occurrence.Canonical)
+ if err!=nil{return zero,err}
+ fields:=occurrence.([]any)
+ if !bytesEqualDigest(fields[14],occurrence.Digest){
+  return zero,errors.New("delivery Event occurrence digest forged")
+ }
+ expected,err:=PlanDueDelivery(bundle,plan.Transmission,plan.Claim,
+  occurrence.ID,due,ctx.At,result.NextStatus==1)
+ if err!=nil{return zero,err}
+ if expected.EventType!=result.EventType||expected.NextStatus!=result.NextStatus||
+  (expected.Notice==nil)!=(result.Notice==nil){
+  return zero,errors.New("worker supplied a delivery outcome not derivable from original claim")
+ }
+ if expected.Notice!=nil{
+  original,err:=expected.Notice.RedactedValue();if err!=nil{return zero,err}
+  supplied,err:=result.Notice.RedactedValue();if err!=nil{return zero,err}
+  want,err:=codec.CanonicalPayload(original);if err!=nil{return zero,err}
+  got,err:=codec.CanonicalPayload(supplied);if err!=nil{return zero,err}
+  if string(want)!=string(got){return zero,errors.New("worker altered addressed delivery notice")}
+ }
  var typed []any
  var actorRefs []any
  var confidentiality uint64=2

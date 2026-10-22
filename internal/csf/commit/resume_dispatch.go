@@ -111,8 +111,11 @@ func (c *Coordinator) DispatchFencedWorkV1(ctx context.Context, ledger *inputled
    }
    first, firstOK := fields[0].([]byte)
    final, finalOK := fields[len(fields)-1].([]byte)
-   if !firstOK || !finalOK || !bytes.Equal(first, idRaw) ||
-    !bytes.Equal(final, digestRaw) || fields[2] != entry[2] {
+   sourceName, nameOK := fields[2].(string)
+   fenceName, fenceNameOK := entry[2].(string)
+   if !firstOK || !finalOK || !nameOK || !fenceNameOK ||
+    !bytes.Equal(first, idRaw) || !bytes.Equal(final, digestRaw) ||
+    sourceName != fenceName {
     return empty, errors.New("system source differs from frozen fence")
    }
    if kind == 2 && fields[5] == "communication.delivery" { delivery = true }

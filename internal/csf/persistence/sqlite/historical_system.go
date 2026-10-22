@@ -45,6 +45,8 @@ func historicalSystemUnits(ctx context.Context,q queryOne,run [32]byte,revision 
  eventAt:=map[string]uint64{}
  settledAt:=map[domain.ID]uint64{}
  successorBornAt:=map[domain.ID]uint64{}
+ commitBornAt:=map[string]uint64{}
+ commitSources:=map[string]map[string]bool{}
  rows,err:=q.QueryContext(ctx,"SELECT commit_id FROM committed_cycles WHERE run_id=?",run[:])
  if err!=nil{return nil,err}
  var commits [][]byte
@@ -63,6 +65,19 @@ func historicalSystemUnits(ctx context.Context,q queryOne,run [32]byte,revision 
   fields,ok:=decoded.([]any)
   if !ok||len(fields)!=24||!equalBytes(fields[0],run[:]){return nil,errors.New("historical CycleCommit invalid")}
   at,ok:=fields[8].(uint64);if !ok{return nil,errors.New("historical result revision malformed")}
+  if _,duplicate:=commitBornAt[string(commitID)];duplicate{
+   return nil,errors.New("duplicate historical commit key")
+  }
+  commitBornAt[string(commitID)]=at
+  sources,valid:=fields[11].([]any)
+  if !valid{return nil,errors.New("historical journal source roster malformed")}
+  committedSources:=map[string]bool{}
+  for _,v:=range sources{
+   id,ok:=v.([]byte)
+   if !ok||len(id)!=32{return nil,errors.New("historical journal source ID invalid")}
+   committedSources[string(id)]=true
+  }
+  commitSources[string(commitID)]=committedSources
   events,ok:=fields[15].([]any);if !ok{return nil,errors.New("historical event IDs absent")}
   for _,v:=range events{
    id,ok:=v.([]byte);if !ok||len(id)!=32{return nil,errors.New("historical event ID invalid")}
@@ -125,6 +140,37 @@ func historicalSystemUnits(ctx context.Context,q queryOne,run [32]byte,revision 
     if !valid||len(parentDigest)!=32{return nil,errors.New("occurrence parent digest malformed")}
     ev,ok:=eventValue.([]any);if !ok||len(ev)!=19||!equalBytes(ev[18],parentDigest){
      return nil,errors.New("occurrence origin event-digest provenance mismatch")
+    }
+    created=at
+   }else if v==1{
+    // The first communication schedule is born from a committed
+    // ActionProposal, not from a later Event digest (which would make
+    // transmission/occurrence/sent-Event IDs circular).
+    ref,ok:=origin[1].([]any)
+    if !ok||len(ref)!=4||ref[0]!=uint64(0)||ref[1]!=uint64(0){
+     return nil,errors.New("input-origin occurrence must be an ActionProposal ref")
+    }
+    responseID,valid:=ref[2].([]byte)
+    digest,validDigest:=ref[3].([]byte)
+    if !valid||len(responseID)!=32||!validDigest||len(digest)!=32{
+     return nil,errors.New("input-origin occurrence source/digest malformed")
+    }
+    var transmissionRaw,sentCommit []byte
+    if err:=q.QueryRowContext(ctx,
+     "SELECT canonical,sent_commit_id FROM communication_transmissions WHERE run_id=? AND occurrence_id=?",
+     run[:],id[:]).Scan(&transmissionRaw,&sentCommit);err!=nil{
+     return nil,errors.New("input-origin occurrence has no committed communication transmission")
+    }
+    at,exists:=commitBornAt[string(sentCommit)]
+    if !exists||!commitSources[string(sentCommit)][string(responseID)]{
+     return nil,errors.New("scheduled communication not created in source CycleCommit")
+    }
+    v,err:=codec.StrictDecodePayload(transmissionRaw);if err!=nil{return nil,err}
+    transmission,ok:=v.([]any)
+    if !ok||len(transmission)!=14||transmission[12]!=uint64(0)||
+     !sameCanonical(transmission[1],[]any{uint64(5),responseID,digest})||
+     !sameCanonical(transmission[10],[]any{uint64(1),id[:]}) {
+     return nil,errors.New("communication transmission not bound to immutable source/due")
     }
     created=at
    }else{return nil,fmt.Errorf("unsupported occurrence origin %d",v)}

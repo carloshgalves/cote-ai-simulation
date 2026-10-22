@@ -108,7 +108,7 @@ func canonicalEqual(a,b any)bool{
 }
 func communicationInstant(v any)(domain.SimulationInstant,bool){
  switch n:=v.(type){case uint64:if n<=uint64(^uint64(0)>>1){return domain.SimulationInstant(n),true}
- case int64:return domain.SimulationInstant(n)}
+ case int64:return domain.SimulationInstant(n),true}
  return 0,false
 }
 func communicationOccurrenceDigest(record ports.CanonicalRecord)(domain.Digest,error){

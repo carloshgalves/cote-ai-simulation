@@ -73,15 +73,15 @@ func migrateGenesisPendingTriggers(ctx context.Context,s *Store,
   }
   originalID,ok:=ref[1].([]byte)
   if !ok||len(originalID)!=32{return result,errors.New("fork trigger activation ID absent")}
-  digest,ok:=ref[2].([]byte)
-  if !ok||len(digest)!=32{return result,errors.New("fork trigger activation checkpoint digest malformed")}
+  checkpointDigest,ok:=ref[2].([]byte)
+  if !ok||len(checkpointDigest)!=32{return result,errors.New("fork trigger activation checkpoint digest malformed")}
   var raw []byte
   if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM trigger_activations WHERE id=? AND run_id=?",
    originalID,parent.RunID[:]).Scan(&raw);err!=nil{return result,err}
   decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{return result,err}
   f,ok:=decoded.([]any)
   if !ok||len(f)!=12||!equalBytes(f[0],originalID)||!equalBytes(f[1],parent.RunID[:])||
-   !equalBytes(f[11],digest){return result,errors.New("fork trigger activation not covered by snapshot")}
+   !equalBytes(f[11],checkpointDigest){return result,errors.New("fork trigger activation not covered by snapshot")}
   origin,ok:=f[5].([]any)
   if !ok||len(origin)!=2||origin[0]!=uint64(1){
    return result,errors.New("fork trigger activation not Genesis-owned")

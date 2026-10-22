@@ -1006,7 +1006,21 @@ func TestCSFRV18IntegratedResourceTriggerCommunicationInTransit(t *testing.T){
     }
     c.failAfterStep=0
    }
-   if _,err:=c.CommitCommunicationSend(ctx,ledger,messageCycle,messageFence);err!=nil{t.Fatal(err)}
+   if variant.restore{
+    // The saved revision-1 checkpoint predates the admitted communication
+    // fence. Replaying its authenticated same-revision tail must recover the
+    // exact persisted send cohort without resampling a cycle or proposal.
+    reconnected,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+    defer reconnected.Close()
+    reloaded,err:=inputledger.Open(ctx,run,c.bundle,reconnected);if err!=nil{t.Fatal(err)}
+    recovered:=New(reconnected,c.bundle,c.admissionPolicies)
+    resumed,err:=recovered.ResumeRegisteredWorkV1(ctx,reloaded,[32]byte(run),post.ID)
+    if err!=nil{t.Fatalf("integrated message send resume after failStep=%d: %v",variant.failStep,err)}
+    if !resumed.Continued{t.Fatal("resumed in-flight send did not publish the frozen terminal")}
+    c=recovered;store=reconnected;ledger=reloaded
+   }else{
+    if _,err:=c.CommitCommunicationSend(ctx,ledger,messageCycle,messageFence);err!=nil{t.Fatal(err)}
+   }
    checkpoints:=csfrv18SyntheticActorCheckpoints(t,path,state.Instant,int64(state.Revision)+1)
    final,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,checkpoints);if err!=nil{t.Fatal(err)}
    var status int

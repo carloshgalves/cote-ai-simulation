@@ -32,13 +32,15 @@ func migrateGenesisPendingOccurrences(ctx context.Context,s *Store,
   if !ok||len(ref)!=3||ref[0]!=uint64(6){return nil,errors.New("fork pending occurrence ref is not canonical")}
   parentID,ok:=ref[1].([]byte)
   if !ok||len(parentID)!=32{return nil,errors.New("fork occurrence parent ID malformed")}
+  birthDigest,ok:=ref[2].([]byte)
+  if !ok||len(birthDigest)!=32{return nil,errors.New("fork occurrence checkpoint digest malformed")}
   var original []byte
   if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM scheduled_occurrences WHERE id=? AND run_id=?",
    parentID,parent.RunID[:]).Scan(&original);err!=nil{return nil,err}
   parsed,err:=codec.StrictDecodePayload(original);if err!=nil{return nil,err}
   f,ok:=parsed.([]any)
   if !ok||len(f)!=15||!equalBytes(f[0],parentID)||!equalBytes(f[1],parent.RunID[:])||
-   !equalBytes(f[14],ref[2]){return nil,errors.New("fork schedule birth hash differs from checkpoint")}
+   !equalBytes(f[14],birthDigest){return nil,errors.New("fork schedule birth hash differs from checkpoint")}
   root,ok:=f[9].([]any)
   if !ok||len(root)!=2||root[0]!=uint64(2){return nil,errors.New("fork schedule has no supported genesis origin")}
   source,ok:=root[1].([]any)

@@ -18,6 +18,9 @@
 | R4/F7 | Resume retornava status de controle do snapshot antigo como se fosse o estado atual | Separação entre estado do checkpoint e estado do tip; diretiva fail-closed |
 | R4/F8 | Abort/halt e retry sem plano explícito de reentrada | Retoma com estado/fence/retry congelados, drenagem epistemológica e bloqueio de HALTED; testes reais e negativos |
 | R5/F9 | Fork de source terminal confundia closure/completion histórica com trabalho pendente | Apenas closures finais podem ficar no prefixo parental; nunca transplantar IDs do parent à filha |
+| R6/F10 | Fonte exógena declarada, sem closure, não aparecia no roster de closures | Fork agora rejeita histórico com source declaration sem SourceClosure final |
+| R6/F11 | Filho podia reabrir com mesmo ID uma fonte finalizada no pai | Guard transacional de source declaration lê prefixo parental, rejeita reabertura e falha fechado em archive corrupto |
+| R6/F12 | A equivalência entre execução contínua e processo reaberto não era comparada diretamente | Cenário de envio/entrega é executado em quatro rotas, com snapshots finais comparados byte a byte e restore por SQLite novo |
 
 ## Evidência automatizada
 

@@ -4,6 +4,10 @@ import (
  "context"
  "testing"
 
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 )
@@ -58,5 +62,49 @@ func TestCSFRV18RegisteredResumeDispatchesAllVerifiedV1Cohorts(t *testing.T) {
   if _, err := reopened.ReplayClock(ctx, [32]byte(run), c.bundle); err != nil {
    t.Fatal("recovered transmission is not causally replayable:", err)
   }
+ })
+}
+
+func csfrv18SealNextSystemWork(t *testing.T,c *Coordinator,store *sqlite.Store,ledger *inputledger.Ledger,run domain.ID){
+ t.Helper()
+ ctx:=context.Background()
+ state,err:=store.LoadClock(ctx,[32]byte(run))
+ if err!=nil{t.Fatal(err)}
+ pending,err:=store.PendingClock(ctx,[32]byte(run))
+ if err!=nil{t.Fatal(err)}
+ next,ok,err:=clock.Next(state,pending)
+ if err!=nil||!ok||next.Kind!=clock.Work{t.Fatal("expected due WORK",err)}
+ cid,_,err:=identity.New(c.bundle).Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{run[:],[]any{int64(state.Instant),uint64(next.OriginOrdinal)}})
+ if err!=nil{t.Fatal(err)}
+ _,hash,err:=store.LoadWorldState(ctx,uint64(state.Revision))
+ if err!=nil{t.Fatal(err)}
+ cycle:=admission.Cycle{ID:domain.ID(cid),Attempt:0,Instant:state.Instant,
+  Ordinal:next.OriginOrdinal,BaseRevision:state.Revision,
+  BaseStateHash:domain.Digest(hash),RetryRef:[]any{uint64(0)}}
+ if _,err:=admission.NewCoordinator(admission.NewFenceLog(store)).
+  AdmitThenEvaluate(ctx,c.bundle,ledger,cycle,c.admissionPolicies,nil);err!=nil{t.Fatal(err)}
+ snapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ result,err:=c.ResumeRegisteredWorkV1(ctx,ledger,[32]byte(run),snapshot.ID)
+ if err!=nil{t.Fatal("registered due system resume:",err)}
+ if !result.Continued{t.Fatal("registered handler did not publish due WORK")}
+ if _,err:=store.ReplayClock(ctx,[32]byte(run),c.bundle);err!=nil{t.Fatal(err)}
+}
+
+func TestCSFRV18RegisteredResumeRoutesDueSystemAndTransmission(t *testing.T){
+ t.Run("single scheduled system unit",func(t *testing.T){
+  ctx:=context.Background()
+  c,store,ledger,run,_,_:=testFixture(t)
+  if _,err:=c.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
+  csfrv18SealNextSystemWork(t,c,store,ledger,run)
+ })
+ t.Run("communication due",func(t *testing.T){
+  ctx:=context.Background()
+  c,store,ledger,cycle,fence,_:=communicationFixture(t)
+  _,_,_,_,_,run:=ledger.Snapshot()
+  if _,err:=c.CommitCommunicationSend(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+  if _,err:=c.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
+  csfrv18SealNextSystemWork(t,c,store,ledger,run)
  })
 }

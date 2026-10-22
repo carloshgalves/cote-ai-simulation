@@ -31,6 +31,14 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
  if c==nil||ledger==nil||destination==nil||c.bundle==nil||buildCheckpoints==nil{
   return nil,errors.New("versioned fence handoff requires registered parent and V2 destination")
  }
+ // Reject an invalid target before making any irreversible V1 parent commit.
+ if childPolicy==nil||childRun==([32]byte{})||childRun==sourceRun{
+  return nil,errors.New("fence handoff requires a distinct nonzero V2 child run")
+ }
+ id,version,_,_,policyErr:=childPolicy.CodecIdentity()
+ if policyErr!=nil||id!=policy.CodecPolicyV2ID||version!=2{
+  return nil,errors.New("fence handoff requires an independently installed normative V2 policy")
+ }
  origin,ok:=c.store.(*sqlite.Store)
  if !ok||origin==destination{
   return nil,errors.New("V1 fence handoff requires distinct SQLite authorities")

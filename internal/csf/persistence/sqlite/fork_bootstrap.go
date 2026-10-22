@@ -67,10 +67,12 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  penv,err:=codec.StrictDecodeEnvelope(typed[2].([]byte));if err!=nil{return nil,err}
  lists,ok:=penv.Value.([]any);if !ok||len(lists)!=10{return nil,errors.New("unsupported pending-state schema")}
  if crossPolicy {
-  // Version 2's communication/response migrators remain independently gated.
-  // Only a fully quiescent cut is eligible for this positive empty-work fork.
+  // The only currently admitted positive V2 migration unit is a complete
+  // in-transit communication (pending occurrence and its input ref).
+  // All other live partitions, including dispatches, trigger runtimes,
+  // perception tasks and unfinished rounds, still fail closed.
   for i,raw:=range lists {
-   if i==3{continue} // final historical SourceClosures are archive-only
+   if i==0||i==3||i==6||i==7{continue}
    items,ok:=raw.([]any)
    if !ok||len(items)!=0{return nil,fmt.Errorf("V1-to-V2 fork needs migrator for pending partition %d",i)}
   }
@@ -202,8 +204,31 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  if err!=nil{return nil,err}
  childGenesis,err:=genesis.ValidateForkCanonical(canonical,childPolicy);if err!=nil{return nil,err}
  if [32]byte(childGenesis.RunID)!=childRun{return nil,errors.New("fork generated wrong run")}
- migrated,err:=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,lists[0].([]any),origin)
- if err!=nil{return nil,err}
+ var migrated []forkGenesisOccurrence
+ var importBirths []V2CommunicationBirth
+ if crossPolicy{
+  importBirths,err=s.PrepareV2CommunicationBirths(ctx,sourceRun,parentSnapshotID,
+   childGenesis,origin,childPolicy)
+  if err!=nil{return nil,fmt.Errorf("V1-to-V2 pending transmission migration: %w",err)}
+  if len(importBirths)!=len(lists[0].([]any)){
+   return nil,errors.New("V2 communication migration omits pending non-communication occurrence")
+  }
+  for _,birth:=range importBirths {
+   value,err:=codec.StrictDecodePayload(birth.ChildOccurrence.Canonical)
+   if err!=nil{return nil,err}
+   fields,ok:=value.([]any);if !ok||len(fields)!=15{return nil,errors.New("V2 imported occurrence malformed")}
+   coordinate,ok:=fields[4].([]any);if !ok||len(coordinate)!=2{return nil,errors.New("V2 migrated coordinate malformed")}
+   when,valid:=asSigned64(coordinate[0]);ordinal,validOrdinal:=coordinate[1].(uint64)
+   if !valid||!validOrdinal{return nil,errors.New("V2 migrated coordinate invalid")}
+   migrated=append(migrated,forkGenesisOccurrence{
+    ID:birth.ChildOccurrence.Identity,EligibilityInstant:when,
+    EligibilityOrdinal:ordinal,Canonical:birth.ChildOccurrence.Canonical,
+   })
+  }
+ }else{
+  migrated,err=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,lists[0].([]any),origin)
+  if err!=nil{return nil,err}
+ }
  migratedRounds,err:=migrateGenesisPendingRounds(ctx,s,parent,childGenesis,lists[4].([]any),origin)
  if err!=nil{return nil,fmt.Errorf("fork Genesis round migration: %w",err)}
  triggerMigration,err:=migrateGenesisPendingTriggers(ctx,s,parent,childGenesis,origin,
@@ -242,7 +267,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   "input_ledger","decision_ledger","event_store","evidence_ledger","causal_outbox",
   "input_source_cursors","source_ingress_receipts","input_slot_responses","round_integrity_seals",
   "cognitive_actor_registry","snapshot_cognitive_actors","evidence_routes",
-  "communication_claims","communication_transmissions","cycle_control_state",
+  "communication_claims","communication_transmissions","fork_communication_imports","cycle_control_state",
   "committed_cycles","fork_lineage","fork_history_records","snapshots","snapshot_seals",
   "snapshot_prefix_members","genesis_schedule_seals","scheduled_occurrences",
   "trigger_registry_seals","trigger_definitions","trigger_runtime","trigger_activations"}{
@@ -302,6 +327,10 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  }
  if _,err:=tx.ExecContext(ctx,"INSERT INTO trigger_registry_seals(run_id,genesis_id,genesis_digest,registry_hash) VALUES(?,?,?,?)",
   childRun[:],childGenesis.ID[:],childGenesis.Digest[:],triggerMigration.Seal[:]);err!=nil{return nil,err}
+ if len(importBirths)>0 {
+  if err:=publishV2CommunicationBirths(ctx,tx,childRun,importBirths,
+   sourceRun,parentSnapshotID,origin,childGenesis);err!=nil{return nil,err}
+ }
  if err:=validateForkLineageTx(ctx,tx,childGenesis,childPolicy);err!=nil{return nil,err}
  if err:=tx.Commit();err!=nil{return nil,err}
  return childGenesis,nil

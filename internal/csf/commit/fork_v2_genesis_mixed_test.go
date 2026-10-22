@@ -81,3 +81,48 @@ func TestCSFRV18V2RekeysInitialGenesisTriggerActivation(t *testing.T){
  if _,err:=child.ReplayClock(ctx,id,v2);err!=nil{t.Fatal(err)}
  if _,err:=parent.VerifySnapshotV1(ctx,[32]byte(g.RunID),snap.ID,v1);err!=nil{t.Fatal(err)}
 }
+
+func TestCSFRV18V2ForkSiblingInputTailsDivergeWithoutCrossRunAuthority(t *testing.T){
+ ctx:=context.Background()
+ source,ledger,v1,run,origin:=csfrv18GenesisRoundSource(t)
+ state,err:=source.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ due:=domain.EligibilityCoordinate{NotBeforeInstant:state.Instant+80}
+ if _,err:=ledger.DeclareRound(ctx,"genesis.schedule",[2]string{"school","a"},
+  []string{"choice"},due,origin,2,1,0,[]any{uint64(0)});err!=nil{t.Fatal(err)}
+ snap,err:=source.CreateSnapshotV1(ctx,[32]byte(run),v1,nil);if err!=nil{t.Fatal(err)}
+ v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+ if err!=nil{t.Fatal(err)}
+ a,err:=sqlite.Open(ctx,t.TempDir()+"/a.db");if err!=nil{t.Fatal(err)}
+ defer a.Close()
+ b,err:=sqlite.Open(ctx,t.TempDir()+"/b.db");if err!=nil{t.Fatal(err)}
+ defer b.Close()
+ aid:=[32]byte(run);aid[0]^=0x24
+ bid:=[32]byte(run);bid[0]^=0x35
+ rootA,err:=source.ForkIdleSnapshotV1ToV2(ctx,[32]byte(run),snap.ID,aid,a,v1,v2)
+ if err!=nil{t.Fatal(err)}
+ rootB,err:=source.ForkIdleSnapshotV1ToV2(ctx,[32]byte(run),snap.ID,bid,b,v1,v2)
+ if err!=nil{t.Fatal(err)}
+ if rootA.ID==rootB.ID||rootA.Digest==rootB.Digest{
+  t.Fatal("V2 sibling Genesis identities aliased")
+ }
+ beforeB,err:=b.CreateSnapshotV1(ctx,bid,v2,nil);if err!=nil{t.Fatal(err)}
+ ledgerA,err:=inputledger.Open(ctx,domain.ID(aid),v2,a);if err!=nil{t.Fatal(err)}
+ childOrigin:=[]any{uint64(2),[]any{rootA.ID[:],rootA.Digest[:]}}
+ newRound,err:=ledgerA.DeclareRound(ctx,"child.schedule",
+  [2]string{"school","a"},[]string{"new"},due,childOrigin,3,7,0,[]any{uint64(0)})
+ if err!=nil{t.Fatal("child A tail append:",err)}
+ if _,err:=a.ReplayClock(ctx,aid,v2);err!=nil{t.Fatal("child A replay:",err)}
+ afterA,err:=a.CreateSnapshotV1(ctx,aid,v2,nil);if err!=nil{t.Fatal(err)}
+ if afterA.ID==beforeB.ID{t.Fatal("divergent child tails produced same snapshot ID")}
+ if _,err:=b.VerifySnapshotV1(ctx,bid,beforeB.ID,v2);err!=nil{
+  t.Fatal("append in child A changed sibling B:",err)
+ }
+ ledgerB,err:=inputledger.Open(ctx,domain.ID(bid),v2,b);if err!=nil{t.Fatal(err)}
+ _,_,_,roundsB,_,_:=ledgerB.Snapshot()
+ if len(roundsB)!=1||roundsB[0].ID==newRound.ID{
+  t.Fatal("child B adopted new child A round authority")
+ }
+ if _,err:=source.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,v1);err!=nil{
+  t.Fatal("V2 child append changed V1 origin:",err)
+ }
+}

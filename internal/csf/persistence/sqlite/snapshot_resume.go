@@ -144,8 +144,17 @@ func genesisValidateForSnapshot(raw []byte,b *policy.Bundle)(snapshotGenesis,err
 
 // The roster is bound to evidence holders, not to a caller-selected list.
 // Inline checkpoint bytes are hashed, never interpreted.
-func verifySnapshotCheckpointRefs(ctx context.Context,tx *sql.Tx,run [32]byte,refs []any,instant int64,rev,cursor uint64)error{
- holders,err:=tx.QueryContext(ctx,"SELECT DISTINCT holder_namespace,holder_id FROM evidence_routes WHERE run_id=? ORDER BY holder_namespace,holder_id",run[:])
+func verifySnapshotCheckpointRefs(ctx context.Context,tx *sql.Tx,run [32]byte,refs []any,instant int64,rev,cursor uint64,snapshotID *[32]byte)error{
+ holderSQL:="SELECT DISTINCT holder_namespace,holder_id FROM evidence_routes WHERE run_id=? ORDER BY holder_namespace,holder_id"
+ args:=[]any{run[:]}
+ if snapshotID!=nil{
+  holderSQL="SELECT DISTINCT e.holder_namespace,e.holder_id FROM evidence_routes e "+
+   "INNER JOIN snapshot_prefix_members m ON m.record_id=e.record_id "+
+   "AND m.ledger_name='evidence_ledger' AND m.snapshot_id=? "+
+   "WHERE e.run_id=? ORDER BY e.holder_namespace,e.holder_id"
+  args=[]any{snapshotID[:],run[:]}
+ }
+ holders,err:=tx.QueryContext(ctx,holderSQL,args...)
  if err!=nil{return err}
  expected:=map[string]bool{}
  for holders.Next(){

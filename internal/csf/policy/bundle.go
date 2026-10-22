@@ -37,6 +37,7 @@ type Bundle struct {
 	loadedFingerprint [32]byte
 	// Canonical fixtures loaded once from verified manifest authority.
 	fixtureBytes []byte
+	genesisRefs [][]any
 }
 
 // RuntimeFingerprint identifies the exact parsed authority installed for
@@ -159,6 +160,8 @@ func Load(directory string) (*Bundle, error) {
 	if check,err:=verifyManifest(directory,"conformance-manifest.json","cote.csf.bundle.conformance.v1");err!=nil||hex.EncodeToString(check[:])!=SuiteHashHex{
 		return nil,fmt.Errorf("fixture manifest changed during load: %v",err)
 	}
+	bundle.genesisRefs,err=parseGenesisPolicyRefs(bundle.fixtureBytes)
+	if err!=nil{return nil,fmt.Errorf("invalid signed Genesis fixture: %w",err)}
 	fingerprint,err:=bundle.RuntimeFingerprint()
 	if err!=nil{return nil,fmt.Errorf("sealing verified policy: %w",err)}
 	bundle.loadedFingerprint=fingerprint
@@ -283,10 +286,25 @@ func (b *Bundle) RequiredPolicyRoles() ([]string, error) {
 
 // GenesisPolicyRefs returns the exact, canonically ordered policy refs pinned by
 // this bundle. Callers must not synthesize refs from a recognized policy ID.
+// GenesisPolicyRefs returns defensive copies of the references parsed once
+// from the verified, frozen fixture. Callers cannot mutate the loader cache
+// or make the policy depend on mutable files after installation.
 func (b *Bundle) GenesisPolicyRefs() ([][]any, error) {
-	if err:=b.VerifyInstalledBundle();err!=nil{return nil,err}
+ if err:=b.VerifyInstalledBundle();err!=nil{return nil,err}
+ if len(b.genesisRefs)==0{return nil,fmt.Errorf("installed Genesis fixture refs missing")}
+ out:=make([][]any,len(b.genesisRefs))
+ for i,ref:=range b.genesisRefs {
+  if len(ref)!=3{return nil,fmt.Errorf("installed Genesis ref shape invalid")}
+  hash,ok:=ref[2].([]byte)
+  if !ok||len(hash)!=32{return nil,fmt.Errorf("installed Genesis ref hash invalid")}
+  out[i]=[]any{ref[0],ref[1],bytes.Clone(hash)}
+ }
+ return out,nil
+}
+
+func parseGenesisPolicyRefs(raw []byte) ([][]any, error) {
 	var fixtures map[string]any
-	if err := decodeStrict(b.fixtureBytes, &fixtures); err != nil {
+	if err := decodeStrict(raw, &fixtures); err != nil {
 		return nil, err
 	}
 	var refs [][]any

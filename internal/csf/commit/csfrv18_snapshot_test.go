@@ -1070,7 +1070,7 @@ func TestCSFRV18ForkMigratesPendingGenesisScheduleIntoChildIDs(t *testing.T){
  parentPending,err:=source.PendingClock(ctx,[32]byte(g.RunID));if err!=nil{t.Fatal(err)}
  childPending,err:=target.PendingClock(ctx,childID);if err!=nil{t.Fatal(err)}
  if len(parentPending)!=1||len(childPending)!=1||childPending[0].ID==parentPending[0].ID||
-  childPending[0].Instant!=parentPending[0].Instant{
+  childPending[0].Eligibility!=parentPending[0].Eligibility{
   t.Fatalf("scheduled fork changed semantic due coordinate or reused parent identity: %v %v",parentPending,childPending)
  }
  if _,err:=target.ValidatedGenesis(ctx,childID,b);err!=nil{t.Fatal(err)}

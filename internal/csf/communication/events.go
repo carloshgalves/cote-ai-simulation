@@ -95,8 +95,7 @@ func makeEvent(bundle *policy.Bundle,ctx EventContext,key []any,kind string,type
  sources,actors []any,confidentiality uint64,producer string,parents []any)(
  ports.CanonicalRecord,error){
  var zero ports.CanonicalRecord
- if ctx.Run==([32]byte{})||ctx.Cycle==([32]byte{})||
-  ctx.Sequence==domain.LogicalSequence(math.MaxUint64){return zero,errors.New("causal Event context invalid")}
+ if ctx.Sequence==domain.LogicalSequence(math.MaxUint64){return zero,errors.New("causal Event context invalid")}
  id,_,err:=identity.New(bundle).Sum("cote.csf.id.event","cote.csf.schema.event-id-preimage",1,
   []any{ctx.Run[:],ctx.Cycle[:],key})
  if err!=nil{return zero,err}

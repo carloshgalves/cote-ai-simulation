@@ -23,7 +23,7 @@ func TestCSFRV17EventDraftsKeepFalseClaimSeparateFromWorldTruth(t *testing.T){
   t.Fatal("sending leaked recipient observation or forged a theft fact")
  }
  ctx.Cycle[0]++;ctx.At=12;ctx.Sequence=1;ctx.BaseRevision=1
- delivered,err:=PlanDueDelivery(bundle,plan.Transmission,plan.Claim,domain.ID(plan.Occurrence.Identity),12,12,true)
+ delivered,err:=PlanDueDelivery(bundle,plan.Transmission,plan.Claim,domain.ID(plan.Occurrence.Identity),12,12)
  if err!=nil{t.Fatal(err)}
  occ,err:=codec.StrictDecodePayload(plan.Occurrence.Canonical);if err!=nil{t.Fatal(err)}
  f:=occ.([]any)
@@ -49,9 +49,17 @@ func TestCSFRV17EventDraftsKeepFalseClaimSeparateFromWorldTruth(t *testing.T){
   len(ef[12].([]any))!=1||ef[12].([]any)[0].([]any)[1]!="b"{
   t.Fatal("delivery Event not addressed solely to B")
  }
- fail,err:=PlanDueDelivery(bundle,plan.Transmission,plan.Claim,origin.ID,12,12,false)
+ dropped,err:=PrepareSend(bundle,SendSpec{Run:run,Source:source,
+  ActualSender:tx.ActualSender,PresentedSender:"C",Recipient:Actor{"school","b"},
+  SentAt:4,DueAt:12,Channel:"school.drop.v1",Proposition:claim.Proposition})
  if err!=nil{t.Fatal(err)}
- denied,err:=NewDueEvent(bundle,ctx,plan,fail,origin);if err!=nil{t.Fatal(err)}
+ fail,err:=PlanDueDelivery(bundle,dropped.Transmission,dropped.Claim,origin.ID,12,12)
+ if err!=nil{t.Fatal(err)}
+ newOcc,err:=codec.StrictDecodePayload(dropped.Occurrence.Canonical);if err!=nil{t.Fatal(err)}
+ f2:=newOcc.([]any)
+ var failDigest domain.Digest;copy(failDigest[:],f2[14].([]byte))
+ failedOrigin:=Origin{Kind:6,ID:domain.ID(dropped.Occurrence.Identity),Digest:failDigest}
+ denied,err:=NewDueEvent(bundle,ctx,dropped,fail,failedOrigin);if err!=nil{t.Fatal(err)}
  rejected,err:=codec.StrictDecodePayload(denied.Canonical);if err!=nil{t.Fatal(err)}
  rf:=rejected.([]any)
  if rf[3]!="communication.delivery_failed"||len(rf[12].([]any))!=0||

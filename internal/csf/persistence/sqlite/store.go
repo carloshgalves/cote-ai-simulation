@@ -164,6 +164,22 @@ CREATE TABLE IF NOT EXISTS evidence_routes (
 ) STRICT;
 CREATE INDEX IF NOT EXISTS idx_evidence_holder ON evidence_routes(run_id,holder_namespace,holder_id,kind,task_id,record_id);
 CREATE INDEX IF NOT EXISTS idx_evidence_task ON evidence_routes(task_id,kind,record_id);
+CREATE TABLE IF NOT EXISTS communication_claims (
+ id BLOB PRIMARY KEY CHECK(length(id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ canonical BLOB NOT NULL
+) STRICT;
+CREATE TABLE IF NOT EXISTS communication_transmissions (
+ id BLOB PRIMARY KEY CHECK(length(id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ claim_id BLOB NOT NULL CHECK(length(claim_id)=32),
+ occurrence_id BLOB NOT NULL UNIQUE CHECK(length(occurrence_id)=32),
+ sent_commit_id BLOB NOT NULL CHECK(length(sent_commit_id)=32),
+ status INTEGER NOT NULL CHECK(status IN (0,1,2)),
+ canonical BLOB NOT NULL
+) STRICT;
+CREATE INDEX IF NOT EXISTS idx_communication_transmissions_run
+ ON communication_transmissions(run_id,status,id);
 CREATE TABLE IF NOT EXISTS causal_outbox (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS world_revisions (revision INTEGER PRIMARY KEY, state_hash BLOB NOT NULL CHECK(length(state_hash)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS cycle_control_state (run_id BLOB PRIMARY KEY CHECK(length(run_id)=32), canonical BLOB NOT NULL) STRICT;

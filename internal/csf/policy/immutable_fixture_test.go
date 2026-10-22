@@ -54,3 +54,26 @@ func TestCSFRV18VerifiedPolicyFixturesAreFrozenAfterLoad(t *testing.T) {
   t.Fatal("caller mutated cached Genesis policy references")
  }
 }
+
+func TestCSFRV18RejectsCapturedFixtureSwapEvenIfManifestRemainsValid(t *testing.T){
+ folder:=t.TempDir()
+ entries,err:=os.ReadDir(bundlePath);if err!=nil{t.Fatal(err)}
+ for _,entry:=range entries{
+  if entry.IsDir(){continue}
+  raw,err:=os.ReadFile(filepath.Join(bundlePath,entry.Name()))
+  if err!=nil{t.Fatal(err)}
+  if err:=os.WriteFile(filepath.Join(folder,entry.Name()),raw,0600);err!=nil{t.Fatal(err)}
+ }
+ verified,err:=Load(folder);if err!=nil{t.Fatal(err)}
+ if err:=verifyCapturedConformanceFixture(folder,verified.fixtureBytes,verified.SuiteHash);err!=nil{
+  t.Fatalf("captured signed bytes rejected: %v",err)
+ }
+ forged:=bytes.Clone(verified.fixtureBytes)
+ forged[0]^=1
+ // The artifact ON DISK and manifest remain pristine, so the old
+ // check (re-reading disk only) passed. The newly pinned captured-byte
+ // assertion must reject this exact swap-and-restore race.
+ if err:=verifyCapturedConformanceFixture(folder,forged,verified.SuiteHash);err==nil{
+  t.Fatal("unsigned in-memory fixture bytes accepted because on-disk manifest was valid")
+ }
+}

@@ -24,6 +24,9 @@ type ResumeCheckpointV1 struct{
  SnapshotClock clock.State
  Clock clock.State
  TailCommits uint64
+ // SnapshotControlStatus is historical evidence. ControlStatus is the
+ // independently verified live tip, which governs the NEXT resume action.
+ SnapshotControlStatus uint64
  ControlStatus uint64
  PendingTasks int
 }
@@ -98,6 +101,7 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  currentPending,err:=snapshotPending(ctx,tx,run,b);if err!=nil{return zero,err}
  if rev==uint64(c.Revision)&&!sameCanonical(currentPending,all[11]){return zero,errors.New("tip snapshot pending state differs from authority")}
  controlStatus:=uint64(0)
+ tipControlStatus:=uint64(0)
  err=tx.QueryRowContext(ctx,"SELECT canonical FROM cycle_control_state WHERE run_id=?",run[:]).Scan(&controlRaw)
  if err!=nil&&err!=sql.ErrNoRows{return zero,err}
  if err==sql.ErrNoRows{
@@ -107,6 +111,9 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
   control,err:=codec.StrictDecodePayload(controlRaw);if err!=nil{return zero,err}
   ctl,ok:=control.([]any);if !ok||len(ctl)!=7{return zero,errors.New("cycle control state malformed")}
   if rev==uint64(c.Revision)&&!sameCanonical(all[13],ctl){return zero,errors.New("tip snapshot control state diverged")}
+  tipStatus,valid:=ctl[0].(uint64)
+  if !valid||tipStatus>3{return zero,errors.New("live cycle-control status invalid")}
+  tipControlStatus=tipStatus
  }
  sealedControl,ok:=all[13].([]any);if !ok||len(sealedControl)!=7{return zero,errors.New("historical control schema malformed")}
  controlStatus,ok=sealedControl[0].(uint64);if !ok||controlStatus>3{return zero,errors.New("historical control status invalid")}
@@ -124,7 +131,8 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
   Snapshot:SnapshotV1{ID:id,Digest:hash,Canonical:bytes.Clone(canonical),Revision:rev},
   SnapshotClock:clock.State{Instant:domain.SimulationInstant(hist.Instant),Revision:domain.WorldRevision(hist.Revision),
     NextLogicalSequence:domain.LogicalSequence(hist.NextSequence),LastOrdinal:hist.LastOrdinal},
-  Clock:c,TailCommits:uint64(c.Revision)-rev,ControlStatus:controlStatus,PendingTasks:tasks,
+  Clock:c,TailCommits:uint64(c.Revision)-rev,SnapshotControlStatus:controlStatus,
+  ControlStatus:tipControlStatus,PendingTasks:tasks,
  },nil
 }
 

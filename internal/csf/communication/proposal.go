@@ -72,8 +72,8 @@ func AuthoredAction(bundle *policy.Bundle,response ports.CanonicalRecord)(Author
  pol,ok:=args[5].(uint64);if !ok||pol>2{return zero,errors.New("proposition polarity invalid")}
  scope,ok:=args[6].([]any);if !ok{return zero,errors.New("proposition temporal scope absent")}
  content,ok:=args[7].([]any);if !ok{return zero,errors.New("proposition reported content absent")}
- if err:=checkedTyped(scope);err!=nil{return zero,err}
- if err:=checkedTyped(content);err!=nil{return zero,err}
+ if err:=checkedRegisteredProposition(scope,"cote.csf.communication.scope.v1");err!=nil{return zero,err}
+ if err:=checkedRegisteredProposition(content,"cote.csf.communication.allegation.v1");err!=nil{return zero,err}
  spec:=SendSpec{Run:run,Source:Origin{Kind:5,ID:domain.ID(response.Identity),Digest:digest},
   ActualSender:actor,PresentedSender:presented,Recipient:recipient,Channel:channel,
   SentAt:timestamp,DueAt:due,
@@ -85,8 +85,8 @@ func AuthoredAction(bundle *policy.Bundle,response ports.CanonicalRecord)(Author
 func SendParameters(spec SendSpec)([]any,error){
  if _,err:=registeredChannelResult(spec.Channel);err!=nil{return nil,err}
  actor,err:=actorValue(spec.Recipient);if err!=nil{return nil,err}
- if err:=checkedTyped(spec.Proposition.TemporalScope);err!=nil{return nil,err}
- if err:=checkedTyped(spec.Proposition.Content);err!=nil{return nil,err}
+ if err:=checkedRegisteredProposition(spec.Proposition.TemporalScope,"cote.csf.communication.scope.v1");err!=nil{return nil,err}
+ if err:=checkedRegisteredProposition(spec.Proposition.Content,"cote.csf.communication.allegation.v1");err!=nil{return nil,err}
  return MakeTyped("cote.csf.communication.send-params.v1",
   "cote.csf.schema.typed-value",[]any{actor,spec.PresentedSender,spec.Channel,
    int64(spec.DueAt),spec.Proposition.Type,uint64(spec.Proposition.Polarity),

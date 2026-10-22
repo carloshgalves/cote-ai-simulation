@@ -515,3 +515,46 @@ func TestCSFRV18ForkRejectsSourceDeclaredWithoutFinalClosure(t *testing.T){
   t.Fatal("fork discarded declared but never final-closed source")
  }
 }
+
+func TestCSFRV18CognitiveRegistryRequiresCheckpointBeforeFirstObservation(t *testing.T){
+ ctx:=context.Background()
+ _,store,_,run,bundle,path:=testFixture(t)
+ if err:=store.RegisterCognitiveActor(ctx,[32]byte(run),"school","quiet-agent",bundle);err!=nil{t.Fatal(err)}
+ if _,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,nil);err==nil{
+  t.Fatal("snapshot silently omitted cognitive actor with no evidence")
+ }
+ state,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ checkpoint:=sqlite.SnapshotCheckpoint{
+  ActorNamespace:"school",ActorID:"quiet-agent",StoreID:"cognition-checkpoint",
+  SchemaVersion:1,Content:[]byte{1,2,3,4},Producer:"cognition-owner",ProducerVersion:1,
+  CoversInstant:int64(state.Instant),CoversRevision:uint64(state.Revision),CoversEvidenceCursor:0,
+ }
+ snap,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,[]sqlite.SnapshotCheckpoint{checkpoint})
+ if err!=nil{t.Fatal(err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reopened.Close()
+ if _,err:=reopened.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,bundle);err!=nil{
+  t.Fatalf("checkpoint cannot recover actor without prior evidence: %v",err)
+ }
+ if err:=store.RegisterCognitiveActor(ctx,[32]byte(run),"school","new-agent",bundle);err==nil{
+  t.Fatal("late same-revision enrollment rewrote an already published roster")
+ }
+}
+
+func TestCSFRV18CorruptActorRosterFailsSnapshotResume(t *testing.T){
+ ctx:=context.Background()
+ _,store,_,run,bundle,path:=testFixture(t)
+ if err:=store.RegisterCognitiveActor(ctx,[32]byte(run),"school","a",bundle);err!=nil{t.Fatal(err)}
+ state,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ checkpoint:=sqlite.SnapshotCheckpoint{
+  ActorNamespace:"school",ActorID:"a",StoreID:"opaque-store",SchemaVersion:1,
+  Content:[]byte("verified cognition content"),Producer:"checkpoint-writer",ProducerVersion:1,
+  CoversInstant:int64(state.Instant),CoversRevision:0,CoversEvidenceCursor:0,
+ }
+ snap,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,[]sqlite.SnapshotCheckpoint{checkpoint})
+ if err!=nil{t.Fatal(err)}
+ raw,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)};defer raw.Close()
+ if _,err:=raw.ExecContext(ctx,"DELETE FROM snapshot_cognitive_actors WHERE snapshot_id=?",snap.ID[:]);err!=nil{t.Fatal(err)}
+ if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,bundle);err==nil{
+  t.Fatal("missing frozen actor roster survived snapshot verification")
+ }
+}

@@ -27,8 +27,8 @@ import (
 func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
  ledger *inputledger.Ledger,sourceRun,sourceSnapshot,childRun [32]byte,
  destination *sqlite.Store,childPolicy *policy.Bundle,
- checkpoints []sqlite.SnapshotCheckpoint)(*genesis.Genesis,error){
- if c==nil||ledger==nil||destination==nil||c.bundle==nil{
+ buildCheckpoints func(context.Context,*sqlite.Store)([]sqlite.SnapshotCheckpoint,error))(*genesis.Genesis,error){
+ if c==nil||ledger==nil||destination==nil||c.bundle==nil||buildCheckpoints==nil{
   return nil,errors.New("versioned fence handoff requires registered parent and V2 destination")
  }
  origin,ok:=c.store.(*sqlite.Store)
@@ -51,9 +51,7 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
  fields,ok:=parsed.([]any)
  if !ok||len(fields)!=19{return nil,errors.New("fence checkpoint schema invalid")}
  owners,ok:=fields[14].([]any)
- if !ok||len(owners)!=len(checkpoints){
-  return nil,errors.New("fence handoff omits cognitive owner snapshots")
- }
+ if !ok{return nil,errors.New("fence checkpoint cognitive roster malformed")}
  expectedActors:=map[string]bool{}
  for _,raw:=range owners{
   item,ok:=raw.([]any)
@@ -66,29 +64,40 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
   if expectedActors[key]{return nil,errors.New("fence contains duplicate cognitive owner")}
   expectedActors[key]=true
  }
- for _,cp:=range checkpoints{
-  key:=cp.ActorNamespace+"\\x00"+cp.ActorID
-  if !expectedActors[key]{
-   return nil,errors.New("fence handoff would replace or duplicate a cognitive owner")
-  }
-  delete(expectedActors,key)
- }
- if len(expectedActors)!=0{return nil,errors.New("fence handoff lost cognitive actor")}
  recovered,err:=c.ResumeRegisteredWorkV1(ctx,ledger,sourceRun,sourceSnapshot)
  if err!=nil{return nil,fmt.Errorf("V1 fenced terminal recovery: %w",err)}
  if !recovered.Continued {
   return nil,errors.New("frozen fence did not publish one verified V1 terminal")
  }
- // This intermediate checkpoint is only a recovery handle, never the
- // authoritative fork cut; pending causal perception may still exist.
- intermediate,err:=origin.CreateSnapshotV1(ctx,sourceRun,c.bundle,checkpoints)
+ // The terminal may create new eligible actors, so these checkpoint
+ // bytes must be supplied and validated AFTER V1 terminal publication.
+ acquire:=func()([]sqlite.SnapshotCheckpoint,error){
+  items,err:=buildCheckpoints(ctx,origin)
+  if err!=nil{return nil,err}
+  supplied:=map[string]bool{}
+  for _,cp:=range items{
+   key:=cp.ActorNamespace+"\\x00"+cp.ActorID
+   if supplied[key]{return nil,errors.New("handoff duplicated a cognitive actor")}
+   supplied[key]=true
+  }
+  for old:=range expectedActors{
+   if !supplied[old]{return nil,errors.New("handoff dropped pre-fence cognitive actor")}
+  }
+  return items,nil
+ }
+ intermediateCheckpoints,err:=acquire()
+ if err!=nil{return nil,err}
+ // The intermediate checkpoint is for recovery, not the final fork cut.
+ intermediate,err:=origin.CreateSnapshotV1(ctx,sourceRun,c.bundle,intermediateCheckpoints)
  if err!=nil{return nil,err}
  drained,err:=c.ResumeRegisteredWorkV1(ctx,ledger,sourceRun,intermediate.ID)
  if err!=nil{return nil,fmt.Errorf("V1 terminal outbox drain: %w",err)}
  if drained.Continued {
   return nil,errors.New("unexpected additional V1 WORK terminal during fence outbox drain")
  }
- idle,err:=origin.CreateSnapshotV1(ctx,sourceRun,c.bundle,checkpoints)
+ finalCheckpoints,err:=acquire()
+ if err!=nil{return nil,err}
+ idle,err:=origin.CreateSnapshotV1(ctx,sourceRun,c.bundle,finalCheckpoints)
  if err!=nil{return nil,err}
  verified,err:=origin.VerifySnapshotV1(ctx,sourceRun,idle.ID,c.bundle)
  if err!=nil{return nil,err}

@@ -589,3 +589,34 @@ func TestCSFRV18SameRevisionFenceAbortRetryJournalTails(t *testing.T){
   t.Fatal("V1 snapshot identity collision in same revision was silently overwritten")
  }
 }
+
+func TestCSFRV18ResumeDrainsCausallyCommittedPerceptionExactlyOnce(t *testing.T){
+ ctx:=context.Background()
+ coordinator,store,ledger,cycle,fence,path:=communicationFixture(t)
+ _,_,_,_,_,run:=ledger.Snapshot()
+ if _,err:=coordinator.CommitCommunicationSend(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ frozen,err:=store.CreateSnapshotV1(ctx,[32]byte(run),coordinator.bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ before,err:=store.VerifySnapshotV1(ctx,[32]byte(run),frozen.ID,coordinator.bundle)
+ if err!=nil{t.Fatal(err)}
+ if before.PendingTasks!=2{t.Fatalf("expected two uncompleted perception tasks, got %d",before.PendingTasks)}
+ if before.Action.Kind!=sqlite.ResumeDrainPerception{t.Fatal("resume skipped barrier")}
+ reconnected,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)};defer reconnected.Close()
+ recovered,err:=reconnected.DrainPendingPerceptionV1(ctx,[32]byte(run),frozen.ID,coordinator.bundle)
+ if err!=nil{t.Fatal(err)}
+ if recovered.PendingTasks!=0||recovered.Action.Kind!=sqlite.ResumeIdle{
+  t.Fatalf("perception drain failed to release authenticated barrier: %+v",recovered)
+ }
+ reader,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)};defer reader.Close()
+ var count int
+ if err:=reader.QueryRowContext(ctx,"SELECT count(*) FROM causal_outbox").Scan(&count);err!=nil{t.Fatal(err)}
+ if count!=4{t.Fatalf("expected two immutable tasks and two completions, got %d",count)}
+ again,err:=reconnected.DrainPendingPerceptionV1(ctx,[32]byte(run),frozen.ID,coordinator.bundle)
+ if err!=nil{t.Fatal("idempotent retry of perception drain:",err)}
+ if again.PendingTasks!=0{t.Fatal("resumed completion was repeated as new work")}
+ if err:=reader.QueryRowContext(ctx,"SELECT count(*) FROM causal_outbox").Scan(&count);err!=nil{t.Fatal(err)}
+ if count!=4{t.Fatal("replay duplicated perception receipts")}
+ if _,err:=reconnected.VerifySnapshotV1(ctx,[32]byte(run),frozen.ID,coordinator.bundle);err!=nil{
+  t.Fatal("historical snapshot lost provenance after partial perception tail:",err)
+ }
+}

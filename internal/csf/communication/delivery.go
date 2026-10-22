@@ -17,6 +17,7 @@ import (
 type VerifiedClaim struct{
  ID domain.ID
  Digest domain.Digest
+ Origin domain.CausalRef
  Proposition []any
  AssertedBy Actor
  AssertedAt domain.SimulationInstant
@@ -25,6 +26,7 @@ type VerifiedClaim struct{
 type VerifiedTransmission struct{
  ID domain.ID
  Digest domain.Digest
+ Origin domain.CausalRef
  ClaimRefs []domain.CausalRef
  ActualSender Actor
  PresentedSender string
@@ -64,7 +66,7 @@ func AuthenticateClaim(bundle *policy.Bundle,record ports.CanonicalRecord)(Verif
  decoded,err:=codec.StrictDecodePayload(record.Canonical);if err!=nil{return zero,err}
  f,ok:=decoded.([]any);if !ok||len(f)!=10{return zero,errors.New("Claim shape invalid")}
  if !bytes.Equal(rawBytes(f[0]),record.Identity[:]){return zero,errors.New("Claim identity bytes wrong")}
- _,ok=asRef(f[1]);if !ok{return zero,errors.New("Claim origin invalid")}
+ origin,ok:=asRef(f[1]);if !ok{return zero,errors.New("Claim origin invalid")}
  role,roleOK:=f[2].(uint64);ordinal,ordinalOK:=f[3].(uint64)
  if !roleOK||!ordinalOK||role>65535||ordinal>4294967295{return zero,errors.New("Claim role invalid")}
  proposition,ok:=f[4].([]any);if !ok||len(proposition)!=4{return zero,errors.New("Proposition malformed")}
@@ -86,7 +88,7 @@ func AuthenticateClaim(bundle *policy.Bundle,record ports.CanonicalRecord)(Verif
  digest,_,err:=identity.New(bundle).Sum("cote.csf.digest.claim","cote.csf.schema.claim.body",1,f[:9])
  if err!=nil{return zero,err}
  if !bytes.Equal(rawBytes(f[9]),digest[:]){return zero,errors.New("Claim body tampered")}
- return VerifiedClaim{ID:domain.ID(id),Digest:digest,Proposition:proposition,AssertedBy:actor,AssertedAt:time},nil
+ return VerifiedClaim{ID:domain.ID(id),Digest:digest,Origin:origin,Proposition:proposition,AssertedBy:actor,AssertedAt:time},nil
 }
 func validateRefArray(values []any,kind int)([]domain.CausalRef,error){
  seen:=map[domain.ID]bool{}
@@ -114,7 +116,7 @@ func AuthenticateTransmission(bundle *policy.Bundle,record ports.CanonicalRecord
  decoded,err:=codec.StrictDecodePayload(record.Canonical);if err!=nil{return zero,err}
  f,ok:=decoded.([]any);if !ok||len(f)!=14{return zero,errors.New("Transmission shape invalid")}
  if !bytes.Equal(rawBytes(f[0]),record.Identity[:]){return zero,errors.New("Transmission identity differs from stored record")}
- if _,ok:=asRef(f[1]);!ok{return zero,errors.New("Transmission origin absent")}
+ origin,ok:=asRef(f[1]);if !ok{return zero,errors.New("Transmission origin absent")}
  role,roleOK:=f[2].(uint64);ordinal,ordOK:=f[3].(uint64)
  if !roleOK||!ordOK||role>65535||ordinal>4294967295{return zero,errors.New("Transmission role invalid")}
  content,ok:=f[4].([]any);if !ok||len(content)!=2||content[0]!=uint64(0){return zero,errors.New("unregistered transmission content variant")}
@@ -136,7 +138,7 @@ func AuthenticateTransmission(bundle *policy.Bundle,record ports.CanonicalRecord
  digest,_,err:=identity.New(bundle).Sum("cote.csf.digest.transmission","cote.csf.schema.transmission.body",1,f[:13])
  if err!=nil{return zero,err}
  if !bytes.Equal(rawBytes(f[13]),digest[:]){return zero,errors.New("Transmission forged digest")}
- return VerifiedTransmission{ID:domain.ID(id),Digest:digest,ClaimRefs:claims,ActualSender:actual,
+ return VerifiedTransmission{ID:domain.ID(id),Digest:digest,Origin:origin,ClaimRefs:claims,ActualSender:actual,
   PresentedSender:presented,Recipient:recipient,Channel:channel,SentAt:sent,
   Occurrence:occur,Status:uint8(status)},nil
 }
@@ -176,6 +178,7 @@ func PlanDueDelivery(bundle *policy.Bundle,txRecord,claimRecord ports.CanonicalR
   if ref.ID==claim.ID&&ref.Digest==claim.Digest{matched=true}
  }
  if !matched{return zero,errors.New("Transmission references a different Claim")}
+ if claim.Origin!=transmission.Origin{return zero,errors.New("Claim and transmission have different causal origins")}
  if claim.AssertedBy!=transmission.ActualSender||claim.AssertedAt!=transmission.SentAt{
   return zero,errors.New("authoritative claim author/time mismatch")
  }

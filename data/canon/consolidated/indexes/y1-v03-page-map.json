@@ -1,0 +1,752 @@
+{
+  "schema_version": "page-index-v1",
+  "source_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+  "pages": {
+    "10": {
+      "evidence": [
+        "y1v3.ev.001"
+      ],
+      "cases": []
+    },
+    "11": {
+      "evidence": [
+        "y1v3.ev.002"
+      ],
+      "cases": []
+    },
+    "12": {
+      "evidence": [
+        "y1v3.ev.003"
+      ],
+      "cases": []
+    },
+    "13": {
+      "evidence": [
+        "y1v3.ev.004"
+      ],
+      "cases": []
+    },
+    "15": {
+      "evidence": [
+        "y1v3.ev.005"
+      ],
+      "cases": [
+        "y1v3.case.ken-sudo.restrain-on-ship"
+      ]
+    },
+    "16": {
+      "evidence": [
+        "y1v3.ev.006"
+      ],
+      "cases": []
+    },
+    "17": {
+      "evidence": [
+        "y1v3.ev.007"
+      ],
+      "cases": []
+    },
+    "19": {
+      "evidence": [
+        "y1v3.ev.008"
+      ],
+      "cases": []
+    },
+    "22": {
+      "evidence": [
+        "y1v3.ev.009"
+      ],
+      "cases": []
+    },
+    "24": {
+      "evidence": [
+        "y1v3.ev.010"
+      ],
+      "cases": []
+    },
+    "25": {
+      "evidence": [
+        "y1v3.ev.011",
+        "y1v3.ev.012"
+      ],
+      "cases": []
+    },
+    "27": {
+      "evidence": [
+        "y1v3.ev.013"
+      ],
+      "cases": []
+    },
+    "28": {
+      "evidence": [
+        "y1v3.ev.014"
+      ],
+      "cases": []
+    },
+    "29": {
+      "evidence": [
+        "y1v3.ev.015",
+        "y1v3.ev.016"
+      ],
+      "cases": []
+    },
+    "30": {
+      "evidence": [
+        "y1v3.ev.017"
+      ],
+      "cases": []
+    },
+    "31": {
+      "evidence": [
+        "y1v3.ev.018",
+        "y1v3.ev.019",
+        "y1v3.ev.020"
+      ],
+      "cases": []
+    },
+    "33": {
+      "evidence": [
+        "y1v3.ev.021",
+        "y1v3.ev.022"
+      ],
+      "cases": []
+    },
+    "34": {
+      "evidence": [
+        "y1v3.ev.023"
+      ],
+      "cases": []
+    },
+    "35": {
+      "evidence": [
+        "y1v3.ev.024"
+      ],
+      "cases": []
+    },
+    "36": {
+      "evidence": [
+        "y1v3.ev.025"
+      ],
+      "cases": []
+    },
+    "38": {
+      "evidence": [
+        "y1v3.ev.026"
+      ],
+      "cases": []
+    },
+    "39": {
+      "evidence": [
+        "y1v3.ev.027"
+      ],
+      "cases": []
+    },
+    "40": {
+      "evidence": [
+        "y1v3.ev.028",
+        "y1v3.ev.029"
+      ],
+      "cases": []
+    },
+    "48": {
+      "evidence": [
+        "y1v3.ev.030"
+      ],
+      "cases": [
+        "y1v3.case.suzune-horikita.reassess-nonacademic-skills"
+      ]
+    },
+    "50": {
+      "evidence": [
+        "y1v3.ev.031"
+      ],
+      "cases": [
+        "y1v3.case.yosuke-hirata.prioritize-portable-toilet"
+      ]
+    },
+    "52": {
+      "evidence": [
+        "y1v3.ev.032"
+      ],
+      "cases": [
+        "y1v3.case.kikyo-kushida.recruit-exploration-volunteers"
+      ]
+    },
+    "57": {
+      "evidence": [
+        "y1v3.ev.033"
+      ],
+      "cases": []
+    },
+    "59": {
+      "evidence": [
+        "y1v3.ev.034"
+      ],
+      "cases": []
+    },
+    "60": {
+      "evidence": [
+        "y1v3.ev.035"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.spot-island-path-from-ship"
+      ]
+    },
+    "63": {
+      "evidence": [
+        "y1v3.ev.036"
+      ],
+      "cases": [
+        "y1v3.case.kanji-ike.locate-river-camp"
+      ]
+    },
+    "66": {
+      "evidence": [
+        "y1v3.ev.037"
+      ],
+      "cases": [
+        "y1v3.case.kikyo-kushida.propose-hidden-leader-horikita",
+        "y1v3.case.suzune-horikita.accept-island-leadership"
+      ]
+    },
+    "67": {
+      "evidence": [
+        "y1v3.ev.038"
+      ],
+      "cases": []
+    },
+    "68": {
+      "evidence": [
+        "y1v3.ev.039"
+      ],
+      "cases": [
+        "y1v3.case.ken-sudo.propose-safe-water-compromise"
+      ]
+    },
+    "72": {
+      "evidence": [
+        "y1v3.ev.040"
+      ],
+      "cases": []
+    },
+    "75": {
+      "evidence": [
+        "y1v3.ev.041"
+      ],
+      "cases": [
+        "y1v3.case.airi-sakura.join-branch-collection"
+      ]
+    },
+    "78": {
+      "evidence": [
+        "y1v3.ev.042"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.assist-injured-rival"
+      ]
+    },
+    "80": {
+      "evidence": [
+        "y1v3.ev.043"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.assist-injured-rival"
+      ]
+    },
+    "83": {
+      "evidence": [
+        "y1v3.ev.044"
+      ],
+      "cases": []
+    },
+    "85": {
+      "evidence": [
+        "y1v3.ev.045"
+      ],
+      "cases": [
+        "y1v3.case.kanji-ike.build-campfire"
+      ]
+    },
+    "88": {
+      "evidence": [
+        "y1v3.ev.046"
+      ],
+      "cases": [
+        "y1v3.case.kanji-ike.apologize-to-shinohara"
+      ]
+    },
+    "89": {
+      "evidence": [
+        "y1v3.ev.047"
+      ],
+      "cases": [
+        "y1v3.case.yosuke-hirata.budget-island-allowance"
+      ]
+    },
+    "94": {
+      "evidence": [
+        "y1v3.ev.048"
+      ],
+      "cases": [
+        "y1v3.case.yosuke-hirata.welcome-rival-injured-student"
+      ]
+    },
+    "95": {
+      "evidence": [
+        "y1v3.ev.049"
+      ],
+      "cases": [
+        "y1v3.case.kikyo-kushida.share-rations-with-ibuki"
+      ]
+    },
+    "97": {
+      "evidence": [
+        "y1v3.ev.050"
+      ],
+      "cases": []
+    },
+    "100": {
+      "evidence": [
+        "y1v3.ev.051"
+      ],
+      "cases": []
+    },
+    "103": {
+      "evidence": [
+        "y1v3.ev.052"
+      ],
+      "cases": []
+    },
+    "106": {
+      "evidence": [
+        "y1v3.ev.053"
+      ],
+      "cases": []
+    },
+    "108": {
+      "evidence": [
+        "y1v3.ev.054"
+      ],
+      "cases": [
+        "y1v3.case.kakeru-ryuen.organize-luxury-spending"
+      ]
+    },
+    "112": {
+      "evidence": [
+        "y1v3.ev.055"
+      ],
+      "cases": [
+        "y1v3.case.kakeru-ryuen.intimidate-isshizaki"
+      ]
+    },
+    "113": {
+      "evidence": [
+        "y1v3.ev.056"
+      ],
+      "cases": []
+    },
+    "115": {
+      "evidence": [
+        "y1v3.ev.057"
+      ],
+      "cases": []
+    },
+    "117": {
+      "evidence": [
+        "y1v3.ev.058"
+      ],
+      "cases": []
+    },
+    "120": {
+      "evidence": [
+        "y1v3.ev.059"
+      ],
+      "cases": [
+        "y1v3.case.honami-ichinose.evaluate-well-before-shared-use"
+      ]
+    },
+    "122": {
+      "evidence": [
+        "y1v3.ev.060"
+      ],
+      "cases": []
+    },
+    "124": {
+      "evidence": [
+        "y1v3.ev.061"
+      ],
+      "cases": []
+    },
+    "126": {
+      "evidence": [
+        "y1v3.ev.062"
+      ],
+      "cases": []
+    },
+    "127": {
+      "evidence": [
+        "y1v3.ev.063"
+      ],
+      "cases": [
+        "y1v3.case.katsuragi.defend-class-a-exclusive-cave"
+      ]
+    },
+    "131": {
+      "evidence": [
+        "y1v3.ev.064"
+      ],
+      "cases": []
+    },
+    "133": {
+      "evidence": [
+        "y1v3.ev.065"
+      ],
+      "cases": []
+    },
+    "139": {
+      "evidence": [
+        "y1v3.ev.066"
+      ],
+      "cases": [
+        "y1v3.case.airi-sakura.identify-corn-food-source"
+      ]
+    },
+    "140": {
+      "evidence": [
+        "y1v3.ev.067"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.improvise-corn-carrying"
+      ]
+    },
+    "141": {
+      "evidence": [
+        "y1v3.ev.068"
+      ],
+      "cases": []
+    },
+    "144": {
+      "evidence": [
+        "y1v3.ev.069"
+      ],
+      "cases": []
+    },
+    "146": {
+      "evidence": [
+        "y1v3.ev.070"
+      ],
+      "cases": []
+    },
+    "147": {
+      "evidence": [
+        "y1v3.ev.071"
+      ],
+      "cases": []
+    },
+    "148": {
+      "evidence": [
+        "y1v3.ev.072"
+      ],
+      "cases": []
+    },
+    "149": {
+      "evidence": [
+        "y1v3.ev.073"
+      ],
+      "cases": []
+    },
+    "150": {
+      "evidence": [
+        "y1v3.ev.074",
+        "y1v3.ev.116"
+      ],
+      "cases": []
+    },
+    "153": {
+      "evidence": [
+        "y1v3.ev.075"
+      ],
+      "cases": []
+    },
+    "155": {
+      "evidence": [
+        "y1v3.ev.076"
+      ],
+      "cases": [
+        "y1v3.case.sae-chiyabashira.pressure-kiyotaka-with-family-claims"
+      ]
+    },
+    "156": {
+      "evidence": [
+        "y1v3.ev.077"
+      ],
+      "cases": [
+        "y1v3.case.sae-chiyabashira.pressure-kiyotaka-with-family-claims"
+      ]
+    },
+    "159": {
+      "evidence": [
+        "y1v3.ev.078"
+      ],
+      "cases": []
+    },
+    "163": {
+      "evidence": [
+        "y1v3.ev.079"
+      ],
+      "cases": []
+    },
+    "164": {
+      "evidence": [
+        "y1v3.ev.080"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.withhold-underwear-evidence"
+      ]
+    },
+    "166": {
+      "evidence": [
+        "y1v3.ev.081"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.withhold-underwear-evidence",
+        "y1v3.case.yosuke-hirata.protect-underwear-suspects"
+      ]
+    },
+    "173": {
+      "evidence": [
+        "y1v3.ev.082"
+      ],
+      "cases": []
+    },
+    "175": {
+      "evidence": [
+        "y1v3.ev.083"
+      ],
+      "cases": [
+        "y1v3.case.airi-sakura.defend-kiyotaka-verbally"
+      ]
+    },
+    "179": {
+      "evidence": [
+        "y1v3.ev.084"
+      ],
+      "cases": []
+    },
+    "183": {
+      "evidence": [
+        "y1v3.ev.085"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.notice-spy-hypothesis"
+      ]
+    },
+    "185": {
+      "evidence": [
+        "y1v3.ev.086"
+      ],
+      "cases": []
+    },
+    "192": {
+      "evidence": [
+        "y1v3.ev.087"
+      ],
+      "cases": []
+    },
+    "200": {
+      "evidence": [
+        "y1v3.ev.088"
+      ],
+      "cases": []
+    },
+    "203": {
+      "evidence": [
+        "y1v3.ev.089"
+      ],
+      "cases": [
+        "y1v3.case.suzune-horikita.seek-trusted-help-for-keycard"
+      ]
+    },
+    "206": {
+      "evidence": [
+        "y1v3.ev.090"
+      ],
+      "cases": []
+    },
+    "209": {
+      "evidence": [
+        "y1v3.ev.091"
+      ],
+      "cases": [
+        "y1v3.case.yosuke-hirata.freeze-during-crisis"
+      ]
+    },
+    "213": {
+      "evidence": [
+        "y1v3.ev.092"
+      ],
+      "cases": []
+    },
+    "217": {
+      "evidence": [
+        "y1v3.ev.093"
+      ],
+      "cases": [
+        "y1v3.case.mio-ibuki.fight-feverish-suzune",
+        "y1v3.case.suzune-horikita.feverish-defense-against-ibuki"
+      ]
+    },
+    "218": {
+      "evidence": [
+        "y1v3.ev.094"
+      ],
+      "cases": [
+        "y1v3.case.mio-ibuki.fight-feverish-suzune",
+        "y1v3.case.suzune-horikita.feverish-defense-against-ibuki"
+      ]
+    },
+    "221": {
+      "evidence": [
+        "y1v3.ev.095"
+      ],
+      "cases": [
+        "y1v3.case.mio-ibuki.undercover-leader-card-delivery"
+      ]
+    },
+    "222": {
+      "evidence": [
+        "y1v3.ev.096"
+      ],
+      "cases": [
+        "y1v3.case.mio-ibuki.undercover-leader-card-delivery"
+      ]
+    },
+    "223": {
+      "evidence": [
+        "y1v3.ev.097"
+      ],
+      "cases": []
+    },
+    "226": {
+      "evidence": [
+        "y1v3.ev.098"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.carry-sick-horikita"
+      ]
+    },
+    "232": {
+      "evidence": [
+        "y1v3.ev.099"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.carry-sick-horikita"
+      ]
+    },
+    "235": {
+      "evidence": [
+        "y1v3.ev.100"
+      ],
+      "cases": []
+    },
+    "237": {
+      "evidence": [
+        "y1v3.ev.101"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.carry-sick-horikita"
+      ]
+    },
+    "238": {
+      "evidence": [
+        "y1v3.ev.102"
+      ],
+      "cases": []
+    },
+    "240": {
+      "evidence": [
+        "y1v3.ev.103"
+      ],
+      "cases": []
+    },
+    "243": {
+      "evidence": [
+        "y1v3.ev.104"
+      ],
+      "cases": []
+    },
+    "244": {
+      "evidence": [
+        "y1v3.ev.105"
+      ],
+      "cases": []
+    },
+    "245": {
+      "evidence": [
+        "y1v3.ev.106"
+      ],
+      "cases": []
+    },
+    "248": {
+      "evidence": [
+        "y1v3.ev.107"
+      ],
+      "cases": []
+    },
+    "249": {
+      "evidence": [
+        "y1v3.ev.108"
+      ],
+      "cases": []
+    },
+    "251": {
+      "evidence": [
+        "y1v3.ev.109"
+      ],
+      "cases": []
+    },
+    "253": {
+      "evidence": [
+        "y1v3.ev.110"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.exploit-justified-leader-replacement"
+      ]
+    },
+    "254": {
+      "evidence": [
+        "y1v3.ev.111"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.exploit-justified-leader-replacement"
+      ]
+    },
+    "255": {
+      "evidence": [
+        "y1v3.ev.112",
+        "y1v3.ev.117"
+      ],
+      "cases": []
+    },
+    "256": {
+      "evidence": [
+        "y1v3.ev.113"
+      ],
+      "cases": []
+    },
+    "257": {
+      "evidence": [
+        "y1v3.ev.114"
+      ],
+      "cases": []
+    },
+    "258": {
+      "evidence": [
+        "y1v3.ev.115"
+      ],
+      "cases": [
+        "y1v3.case.kiyotaka-ayanokoji.condition-support-on-privacy"
+      ]
+    }
+  }
+}

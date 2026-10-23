@@ -40,17 +40,17 @@
     }
   ],
   "chapters_assessed": 7,
-  "records": 115,
+  "records": 117,
   "chapter_evidence_counts": {
     "1": 3,
     "2": 47,
     "3": 13,
     "4": 5,
-    "5": 9,
+    "5": 10,
     "6": 25,
-    "7": 13
+    "7": 14
   },
-  "cases": "NOT_YET_EXTRACTED",
+  "cases": 35,
   "open_audit": "SOURCE_WINDOWS_AND_INDIVIDUAL_ACTOR_REVIEW_PENDING",
   "operator_release": "NOT_REQUESTED",
   "method": "Initial scene-relevance-filtered source-local paraphrases across the whole volume; narrator, dialogue claims, exact procedural disclosures and future-time separate. All claims unverified pending individually audited review.",
@@ -60,5 +60,7 @@
     "Index regeneration and complete CI",
     "Leader replacement procedure and retrospective strategy must not be seeded into earlier agent knowledge",
     "Numerical results are observed; avoid inventing hidden score arithmetic"
-  ]
+  ],
+  "behavioral_cases": 35,
+  "coverage_status": "INITIAL_FULL_VOLUME_SCENE_CANDIDATES_EXTRACTED_REVIEW_PENDING"
 }

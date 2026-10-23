@@ -26,7 +26,9 @@
       "evidence": [
         "y1v1.ev.003"
       ],
-      "cases": []
+      "cases": [
+        "y1v1.case.o.priority-seat-refusal"
+      ]
     },
     "21": {
       "evidence": [
@@ -34,6 +36,7 @@
         "y1v1.ev.004"
       ],
       "cases": [
+        "y1v1.case.o.priority-seat-refusal",
         "y1v1.case.u.public-civic-appeal"
       ]
     },
@@ -41,7 +44,9 @@
       "evidence": [
         "y1v1.ev.004"
       ],
-      "cases": []
+      "cases": [
+        "y1v1.case.u.public-civic-appeal"
+      ]
     },
     "24": {
       "evidence": [
@@ -98,7 +103,8 @@
         "y1v1.ev.013"
       ],
       "cases": [
-        "y1v1.case.g.intro-stage-fright"
+        "y1v1.case.g.intro-stage-fright",
+        "y1v1.case.h.class-introductions"
       ]
     },
     "34": {

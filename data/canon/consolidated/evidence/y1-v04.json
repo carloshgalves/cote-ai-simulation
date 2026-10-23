@@ -851,10 +851,12 @@
     {
       "id": "y1v4.ev.031",
       "domain": "exam",
-      "summary": "An early answer from a classmate of the VIP is disregarded, and a VIP may not submit; the published school results keep VIP and submitter identities anonymous.",
+      "summary": "The exam forbids VIPs from submitting (PDF p.41); early correct or incorrect answers submitted by a VIP's classmate are disregarded (PDF pp.44–45). The official outcome publication does not name the VIPs or submitting students.",
       "source": {
         "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
         "pdf_pages": [
+          41,
+          44,
           45
         ],
         "chapter": 2,
@@ -2930,7 +2932,7 @@
     {
       "id": "y1v4.ev.106",
       "domain": "coercion",
-      "summary": "Kiyotaka offers to deter future Manabe harassment using a photograph he acquired while observing the assault, conditioning protection on Karuizawa's cooperation.",
+      "summary": "Kiyotaka promises to deter further harassment using a photograph from the earlier emergency-stairway intimidation of Karuizawa, then conditions his protection on her cooperation. The later secluded-room assault is a distinct episode; the photo's earlier provenance must not be merged with it.",
       "source": {
         "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -3525,11 +3527,12 @@
     {
       "id": "y1v4.ev.127",
       "domain": "exam",
-      "summary": "Final announcement names zodiac results: Rat 3, Cow 4, Tiger 2, Rabbit 4, Dragon 1, Snake 2, Horse 3, Sheep 2, Monkey 3, Rooster 3, Dog 2 and Pig 3.",
+      "summary": "The official Zodiac results are announced across PDF pages 240–241: Rat 3, Cow 4, Tiger 2, Rabbit 4, Dragon 1, Snake 2, Horse 3, Sheep 2, Monkey 3, Rooster 3, Dog 2 and Pig 3.",
       "source": {
         "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
         "pdf_pages": [
-          240
+          240,
+          241
         ],
         "chapter": 5,
         "edition": "Seven Seas English translation, operator-supplied PDF",
@@ -3582,11 +3585,11 @@
     {
       "id": "y1v4.ev.129",
       "domain": "strategy",
-      "summary": "Ryūen displays a list of several Class A VIPs and boasts of identifying selection patterns, but the complete deterministic VIP assignment formula is not shown.",
+      "summary": "Ryūen shows his phone listing Class A VIPs from Rat, Rooster and Pig and claims he found the test's underlying pattern; the exact allocation rule is not independently demonstrated.",
       "source": {
         "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
         "pdf_pages": [
-          242
+          241
         ],
         "chapter": 5,
         "edition": "Seven Seas English translation, operator-supplied PDF",

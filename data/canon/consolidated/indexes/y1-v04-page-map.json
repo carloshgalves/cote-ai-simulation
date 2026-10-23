@@ -173,7 +173,8 @@
     "41": {
       "evidence": [
         "y1v4.ev.026",
-        "y1v4.ev.027"
+        "y1v4.ev.027",
+        "y1v4.ev.031"
       ],
       "cases": []
     },
@@ -185,7 +186,8 @@
     },
     "44": {
       "evidence": [
-        "y1v4.ev.029"
+        "y1v4.ev.029",
+        "y1v4.ev.031"
       ],
       "cases": []
     },
@@ -361,7 +363,9 @@
       "evidence": [
         "y1v4.ev.055"
       ],
-      "cases": []
+      "cases": [
+        "y1v4.case.kei-karuizawa.reject-unconsented-photography"
+      ]
     },
     "94": {
       "evidence": [
@@ -886,12 +890,8 @@
     },
     "241": {
       "evidence": [
-        "y1v4.ev.128"
-      ],
-      "cases": []
-    },
-    "242": {
-      "evidence": [
+        "y1v4.ev.127",
+        "y1v4.ev.128",
         "y1v4.ev.129"
       ],
       "cases": []

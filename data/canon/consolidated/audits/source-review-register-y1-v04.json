@@ -762,10 +762,12 @@
       "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
       "chapter": 2,
       "pdf_pages": [
+        41,
+        44,
         45
       ],
       "source_mode": "REPORTED_BY_CHARACTER",
-      "primary_claim": "An early answer from a classmate of the VIP is disregarded, and a VIP may not submit; the published school results keep VIP and submitter identities anonymous.",
+      "primary_claim": "The exam forbids VIPs from submitting (PDF p.41); early correct or incorrect answers submitted by a VIP's classmate are disregarded (PDF pp.44–45). The official outcome publication does not name the VIPs or submitting students.",
       "actor_ids": [
         "actor.mashima"
       ],
@@ -2668,7 +2670,7 @@
         202
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Kiyotaka offers to deter future Manabe harassment using a photograph he acquired while observing the assault, conditioning protection on Karuizawa's cooperation.",
+      "primary_claim": "Kiyotaka promises to deter further harassment using a photograph from the earlier emergency-stairway intimidation of Karuizawa, then conditions his protection on her cooperation. The later secluded-room assault is a distinct episode; the photo's earlier provenance must not be merged with it.",
       "actor_ids": [
         "actor.kiyotaka-ayanokoji",
         "actor.kei-karuizawa",
@@ -3204,10 +3206,11 @@
       "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
       "chapter": 5,
       "pdf_pages": [
-        240
+        240,
+        241
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Final announcement names zodiac results: Rat 3, Cow 4, Tiger 2, Rabbit 4, Dragon 1, Snake 2, Horse 3, Sheep 2, Monkey 3, Rooster 3, Dog 2 and Pig 3.",
+      "primary_claim": "The official Zodiac results are announced across PDF pages 240–241: Rat 3, Cow 4, Tiger 2, Rabbit 4, Dragon 1, Snake 2, Horse 3, Sheep 2, Monkey 3, Rooster 3, Dog 2 and Pig 3.",
       "actor_ids": [
         "actor.mashima"
       ],
@@ -3253,10 +3256,10 @@
       "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
       "chapter": 5,
       "pdf_pages": [
-        242
+        241
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Ryūen displays a list of several Class A VIPs and boasts of identifying selection patterns, but the complete deterministic VIP assignment formula is not shown.",
+      "primary_claim": "Ryūen shows his phone listing Class A VIPs from Rat, Rooster and Pig and claims he found the test's underlying pattern; the exact allocation rule is not independently demonstrated.",
       "actor_ids": [
         "actor.kakeru-ryuen",
         "actor.suzune-horikita",
@@ -3306,6 +3309,7 @@
       "case_file": "data/canon/consolidated/behavioral_cases/kei-karuizawa/reject-unconsented-photography.json",
       "primary_actor_id": "actor.kei-karuizawa",
       "pdf_pages": [
+        93,
         94,
         95
       ],

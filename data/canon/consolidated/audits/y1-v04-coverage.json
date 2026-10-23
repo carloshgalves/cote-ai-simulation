@@ -95,6 +95,31 @@
       "severity": "HIGH",
       "status": "BOUNDARY_SET_REQUIRES_INDIVIDUAL_AUDIT",
       "description": "Rabbit/Dragon VIP identities, endgame SIM lock disclosure and Morishige allegation kept actor-scoped, late or uncertain."
+    },
+    {
+      "finding": "V4-PROV-007",
+      "severity": "HIGH",
+      "status": "RESOLVED_SOURCE_COMPARE",
+      "record": "y1v4.ev.106",
+      "description": "Kiyotaka's leverage photograph depicts earlier emergency stairwell episode (PDF p.163), not the later secluded-room attack."
+    },
+    {
+      "finding": "V4-LOC-008",
+      "severity": "MEDIUM",
+      "status": "RESOLVED_SOURCE_COMPARE",
+      "records": [
+        "y1v4.ev.031",
+        "y1v4.ev.127",
+        "y1v4.ev.129"
+      ],
+      "description": "Corrected cross-page exam rules, final announcement pages 240–241 and Ryūen's Class A VIP screen on p.241."
+    },
+    {
+      "finding": "V4-CASE-009",
+      "severity": "LOW",
+      "status": "RESOLVED_SOURCE_COMPARE",
+      "case_id": "y1v4.case.kei-karuizawa.reject-unconsented-photography",
+      "description": "Karuizawa's device rejection begins on PDF p.93; source scope expanded to p.93–95."
     }
   ],
   "initial_findings_closed_count": 3,

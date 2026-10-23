@@ -10,6 +10,7 @@
   "source": {
     "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
     "pdf_pages": [
+      93,
       94,
       95
     ],
@@ -32,6 +33,7 @@
     "conflict"
   ],
   "evidence_refs": [
+    "y1v4.ev.055",
     "y1v4.ev.056",
     "y1v4.ev.057"
   ],

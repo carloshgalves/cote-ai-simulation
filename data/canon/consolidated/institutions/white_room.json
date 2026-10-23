@@ -6,9 +6,7 @@
     "ln.y1.v00.legacyemtls.v1.0.1"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
-  "source_documents": [
-    "data/canon/volume0/organizations/white_room.yaml"
-  ],
+  "source_documents": [],
   "evidence_refs": [
     "v0.pol.006",
     "v0.pol.007",
@@ -162,5 +160,6 @@
       "Beta result is not evidence of generic reproducibility"
     ],
     "evaluation_domain": "INSTITUTIONAL_TRAINING_NOT_ANHS_SPECIAL_EXAM"
-  }
+  },
+  "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance."
 }

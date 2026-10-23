@@ -33,7 +33,15 @@ assert {v["case_id"] for v in register["behavioral_cases"]}==set(cases)
 assert register["release_gate"]["operator_approval"]=="PENDING"
 assert register["release_gate"]["engine_memory_admission"] is False
 assert register["release_gate"]["exam_executable"] is False
-assert all(x["verified"] is False and x["reviewed_by_assistant"] is False for x in register["evidence"]+register["behavioral_cases"])
+assert all(x["verified"] is False and x["reviewed_by_assistant"] is True for x in register["evidence"]+register["behavioral_cases"])
+assert all(len(x["review_note"])>=65 for x in register["evidence"]+register["behavioral_cases"])
+assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_SOURCE_REVIEW_PASS" for x in register["evidence"])
+assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_CASE_REVIEW_PASS" for x in register["behavioral_cases"])
+assert register["release_gate"]["assistant_individual_semantic_review"]=="COMPLETE"
+assert register["review_progress"]["assistant_evidence_reviewed"]==130
+assert register["review_progress"]["assistant_cases_reviewed"]==43
+assert source["record_audit"]=="ASSISTANT_INDIVIDUAL_SEMANTIC_REVIEW_COMPLETE_ADVERSARIAL_PENDING"
+
 assert register["global_promotion"].startswith("BLOCKED")
 for e in E:
     assert e["source"]["work_id"]==source["source_id"]
@@ -100,4 +108,4 @@ assert J(B/"institutions/anhs.json")["zodiac_special_exam_y1_v04"]["normative_sc
 assert any(x["source_mode"]=="DOCUMENT_IMAGE" and x["source"]["pdf_pages"]==[11] for x in E)
 assert any("sexually harasses" in x["summary"] for x in E)
 assert any("not an endorsed" in x["summary"] for x in E)
-print("PASS Y1V4 first source pass: 130 evidence, 43 cases, 12-group VIP reference; all review/release gates locked")
+print("PASS Y1V4 individual semantic review: 130 evidence, 43 cases, Zodiac reference, release locked")

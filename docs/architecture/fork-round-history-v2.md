@@ -1,6 +1,6 @@
 # R19 — pending round history at a V1 → V2 boundary
 
-The V2 child reconstructs pending Genesis-owned RoundDeclarations and their
+The V2 child reconstructs pending Genesis-owned or Event-owned RoundDeclarations and their
 SlotDispatch, SlotResponse (ActionProposal or NoProposal), and revocation history.
 The source is the exact InputLedger prefix sealed by the parent snapshot, including
 revoked requests which do not appear in the active-dispatch partition. Later
@@ -15,7 +15,7 @@ ordinals are preserved. Same-instant round eligibility ordinals are rebased rela
 to the parent's next ordinal, consistently with the child clock and dispatch. A response with an originating intention reference still
 requires that reference's own causal migrator; it is rejected rather than copied
 as an unauthenticated child reference. Stale requests from earlier source cuts
-and Event-owned rounds also remain unsupported.
+also remain unsupported.
 
 A slot's first dispatch has ordinal zero; each subsequent dispatch requires the
 preceding durable revocation. Revoked requests cannot also have a response. A
@@ -35,3 +35,16 @@ Acceptance evidence: `TestCSFRV18R19*` in `internal/csf/commit`, including real 
 settlement, snapshot plus tail, reopen, source-tail isolation, both response kinds,
 duplicate prevention, corruption and transactional rollback. This slice does not
 close OPEN-02 or approve the R23 differential matrix required for OPEN-05.
+
+Event-owned source rounds additionally require their exact source Event in the
+sealed parent EventStore prefix. Its run, causal ID, registered digest and the
+round's EventRef are checked under V1. No event is inserted into the child to
+simulate that old cause. The child Genesis owns the migrated declaration, and
+lineage replay rederives its historical birth from the V1 input/event archive.
+
+Genesis-owned rounds retain their role/local ordinal. Event-owned rounds retain
+their role and receive the lowest unused uint32 ordinal in that role, after
+reserving all migrated Genesis round coordinates, in lexicographic parent Round
+ID order. This named migration output order prevents distinct Event/Genesis
+origins with the same local coordinates from aliasing in the child. The source
+coordinates and EventRef remain immutable archived provenance.

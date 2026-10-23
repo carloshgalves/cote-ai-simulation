@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"sort"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
@@ -32,13 +33,13 @@ func migrateGenesisPendingRounds(ctx context.Context, s *Store,
 	if err != nil {
 		return nil, err
 	}
-	return migrateGenesisRoundRecords(parent, child, refs, records, originPolicy, childPolicy)
+	return migratePendingRoundRecords(parent, child, refs, records, nil, originPolicy, childPolicy, false)
 }
 
 // Shared by bootstrap and lineage replay: the archive is the source of truth,
 // never a worker-provided round projection.
-func migrateGenesisRoundRecords(parent, child *genesis.Genesis, refs []any,
-	records []ports.CanonicalRecord, originPolicy, childPolicy *policy.Bundle) ([]forkGenesisRound, error) {
+func migratePendingRoundRecords(parent, child *genesis.Genesis, refs []any,
+	records, events []ports.CanonicalRecord, originPolicy, childPolicy *policy.Bundle, allowHistory bool) ([]forkGenesisRound, error) {
 	out := make([]forkGenesisRound, 0, len(refs))
 	seen := map[[32]byte]bool{}
 	touched := map[string]bool{}
@@ -71,6 +72,14 @@ func migrateGenesisRoundRecords(parent, child *genesis.Genesis, refs []any,
 	if err != nil {
 		return nil, err
 	}
+	eventOrdinals, err := allocateEventRoundOrdinals(refs, byID)
+	if err != nil {
+		return nil, err
+	}
+	eventByID := map[string]ports.CanonicalRecord{}
+	for _, record := range events {
+		eventByID[string(record.Identity[:])] = record
+	}
 	for _, rawRef := range refs {
 		ref, ok := rawRef.([]any)
 		if !ok || len(ref) != 3 || ref[0] != uint64(3) {
@@ -80,7 +89,7 @@ func migrateGenesisRoundRecords(parent, child *genesis.Genesis, refs []any,
 		if !ok || len(parentID) != 32 {
 			return nil, errors.New("fork parent round identity invalid")
 		}
-		if touched[string(parentID)] && childID != policy.CodecPolicyV2ID {
+		if touched[string(parentID)] && (!allowHistory || childID != policy.CodecPolicyV2ID) {
 			return nil, errors.New("fork round has prior dispatch history without a versioned migrator")
 		}
 		registeredDigest, ok := ref[2].([]byte)
@@ -111,13 +120,23 @@ func migrateGenesisRoundRecords(parent, child *genesis.Genesis, refs []any,
 		origin, originOK := f[6].([]any)
 		if !roleOK || role > 65535 || !ordinalOK || ordinal > uint64(^uint32(0)) ||
 			!lifeOK || lifecycle != 0 || !coordOK || len(coordinate) != 2 || !originOK || len(origin) != 2 ||
-			origin[0] != uint64(2) {
-			return nil, errors.New("fork round has unsupported lifecycle or non-Genesis origin")
+			(origin[0] != uint64(2) && (origin[0] != uint64(0) || !allowHistory || childID != policy.CodecPolicyV2ID)) {
+			return nil, errors.New("fork round has unsupported lifecycle or origin")
 		}
 		parentRoot, ok := origin[1].([]any)
-		if !ok || len(parentRoot) != 2 || !equalBytes(parentRoot[0], parent.ID[:]) ||
-			!equalBytes(parentRoot[1], parent.Digest[:]) {
-			return nil, errors.New("fork round origin is not authenticated parent Genesis")
+		if !ok || len(parentRoot) != 2 {
+			return nil, errors.New("fork round origin reference malformed")
+		}
+		childOrdinal := ordinal
+		if origin[0] == uint64(2) {
+			if !equalBytes(parentRoot[0], parent.ID[:]) || !equalBytes(parentRoot[1], parent.Digest[:]) {
+				return nil, errors.New("fork round origin is not authenticated parent Genesis")
+			}
+		} else {
+			if err := authenticateRoundEventOrigin(parent, parentRoot, eventByID, originPolicy); err != nil {
+				return nil, err
+			}
+			childOrdinal = eventOrdinals[string(parentID)]
 		}
 		instant, valid := asSigned64(coordinate[0])
 		_, validOrdinal := coordinate[1].(uint64)
@@ -154,7 +173,7 @@ func migrateGenesisRoundRecords(parent, child *genesis.Genesis, refs []any,
 		}
 		childOrigin := []any{uint64(2), []any{child.ID[:], child.Digest[:]}}
 		childID, _, err := identity.New(childPolicy).Sum("cote.csf.id.decision-round",
-			"cote.csf.schema.decision-round-id-preimage", 1, []any{childOrigin, role, ordinal})
+			"cote.csf.schema.decision-round-id-preimage", 1, []any{childOrigin, role, childOrdinal})
 		if err != nil {
 			return nil, err
 		}
@@ -162,6 +181,7 @@ func migrateGenesisRoundRecords(parent, child *genesis.Genesis, refs []any,
 		newFields[0] = childID[:]
 		newFields[1] = child.RunID[:]
 		newFields[6] = childOrigin
+		newFields[8] = childOrdinal
 		newCanonical, err := codec.CanonicalPayload(newFields)
 		if err != nil {
 			return nil, err
@@ -176,4 +196,94 @@ func migrateGenesisRoundRecords(parent, child *genesis.Genesis, refs []any,
 		})
 	}
 	return out, nil
+}
+
+// Genesis births keep their existing local coordinates. Event-born rounds use
+// the lowest free ordinal in their role, in lexicographic parent Round ID order.
+// This is a named migration output order, never append or worker order.
+func allocateEventRoundOrdinals(refs []any, byID map[string][]byte) (map[string]uint64, error) {
+	used := map[[2]uint64]bool{}
+	roles := map[string]uint64{}
+	for _, raw := range refs {
+		ref, ok := raw.([]any)
+		if !ok || len(ref) != 3 {
+			return nil, errors.New("round allocation ref malformed")
+		}
+		id, ok := ref[1].([]byte)
+		if !ok || len(id) != 32 {
+			return nil, errors.New("round allocation ID malformed")
+		}
+		decoded, err := codec.StrictDecodePayload(byID[string(id)])
+		if err != nil {
+			return nil, err
+		}
+		f, ok := decoded.([]any)
+		if !ok || len(f) != 11 {
+			return nil, errors.New("round allocation record malformed")
+		}
+		role, okRole := f[7].(uint64)
+		ordinal, okOrdinal := f[8].(uint64)
+		origin, okOrigin := f[6].([]any)
+		if !okRole || role > 65535 || !okOrdinal || ordinal > uint64(^uint32(0)) || !okOrigin || len(origin) != 2 {
+			return nil, errors.New("round allocation fields malformed")
+		}
+		if origin[0] == uint64(2) {
+			used[[2]uint64{role, ordinal}] = true
+		} else if origin[0] == uint64(0) {
+			roles[string(id)] = role
+		}
+	}
+	ids := make([]string, 0, len(roles))
+	for id := range roles {
+		ids = append(ids, id)
+	}
+	sort.Strings(ids)
+	result := map[string]uint64{}
+	next := map[uint64]uint64{}
+	for _, id := range ids {
+		role := roles[id]
+		ordinal := next[role]
+		for used[[2]uint64{role, ordinal}] {
+			ordinal++
+			if ordinal > uint64(^uint32(0)) {
+				return nil, errors.New("migrated round ordinal namespace exhausted")
+			}
+		}
+		if ordinal > uint64(^uint32(0)) {
+			return nil, errors.New("migrated round ordinal namespace exhausted")
+		}
+		result[id] = ordinal
+		used[[2]uint64{role, ordinal}] = true
+		next[role] = ordinal + 1
+	}
+	return result, nil
+}
+
+func authenticateRoundEventOrigin(parent *genesis.Genesis, ref []any, events map[string]ports.CanonicalRecord, b *policy.Bundle) error {
+	id, ok := ref[0].([]byte)
+	digest, okDigest := ref[1].([]byte)
+	if !ok || len(id) != 32 || !okDigest || len(digest) != 32 {
+		return errors.New("round Event origin malformed")
+	}
+	record, exists := events[string(id)]
+	if !exists {
+		return errors.New("round Event origin absent from frozen parent archive")
+	}
+	decoded, err := codec.StrictDecodePayload(record.Canonical)
+	if err != nil {
+		return err
+	}
+	f, ok := decoded.([]any)
+	if !ok || len(f) != 19 || !equalBytes(f[0], id) || !equalBytes(f[1], parent.RunID[:]) || !equalBytes(f[18], digest) {
+		return errors.New("round Event origin differs from authenticated parent")
+	}
+	want, _, err := identity.New(b).Sum("cote.csf.id.event", "cote.csf.schema.event-id-preimage", 1, []any{f[1], f[7], f[2]})
+	if err != nil || !equalBytes(f[0], want[:]) {
+		return errors.New("round source Event identity invalid")
+	}
+	dg, _, err := identity.New(b).Sum("cote.csf.digest.event", "cote.csf.schema.event.body", 1, f[:18])
+	if err != nil || !equalBytes(f[18], dg[:]) {
+		return errors.New("round source Event digest invalid")
+	}
+	return nil
 }

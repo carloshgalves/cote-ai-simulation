@@ -135,3 +135,31 @@ cast, resposta única contra o dispatch corrente aberto e revogação única de
 request ainda sem resposta. A cadeia positiva com três revogações/reabertura
 permanece aceita. A resolução formal só deve apontar o commit da correção após
 validação e push; OPEN-02/OPEN-05 permanecem abertos.
+
+### R19 — extensão positiva para RoundDeclaration Event-owned
+
+A slice seguinte remove a restrição de origem Event para rounds V1→V2, exigindo
+que a referência resolva para o Event exato no prefixo parental congelado, com
+run, preimage de ID e digest V1 válidos. O evento continua histórico: nenhum
+Event fictício é publicado no filho. O round filho nasce na Genesis filha, e o
+verificador de linhagem reconstrói a correspondência pelos arquivos InputLedger
++ EventStore do pai.
+
+Rounds Genesis mantêm papel/ordinal. Rounds Event-owned recebem o menor ordinal
+uint32 livre em seu papel, depois da reserva dos rounds Genesis migrados, em
+ordem lexicográfica dos IDs parentais de round. Dois origins com papel/ordinal
+local idênticos não podem colidir na filha. Essa alocação é normativa na nota de
+arquitetura e independe da ordem de workers/append.
+
+`TestCSFRV18R19V2MigratesEventOwnedRoundAlongsideGenesisRound` observou RED antes
+da extensão e agora cobre coexistência/correção da colisão, rollback completo
+com retry, SQLite reopen e commit real dos dois rounds sob V2. A remoção do Event
+causal arquivado invalida replay. O negativo de Event ausente exige destino
+vazio. A suíte anterior de rounds e o finding R19-1 permanecem requisitos de
+regressão. O caminho V1 legado continua recusando histórico operacional sem
+migrador.
+
+**Gate inalterado:** OPEN-02/OPEN-05 continuam OPEN. Requests de cortes anteriores,
+originating-intention refs, ocorrências Event/Claim-owned, triggers evoluídos,
+cenários restantes de fence/checkpoint externo e a matriz R23 não são aprovados
+por esta extensão de round.

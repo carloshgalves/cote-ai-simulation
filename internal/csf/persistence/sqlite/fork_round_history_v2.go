@@ -31,14 +31,14 @@ type forkSlotHistory struct {
 // against the exact source cut can be carried; stale requests require explicit
 // source settlement. No model is called and no response is fabricated.
 func migrateRoundHistoryV2(parent, child *genesis.Genesis, snapshot []any,
-	records []ports.CanonicalRecord, origin, target *policy.Bundle) ([]forkGenesisRound, []forkSlotRecord, error) {
+	records, events []ports.CanonicalRecord, origin, target *policy.Bundle) ([]forkGenesisRound, []forkSlotRecord, error) {
 	pending := snapshot[11].([]any)
 	env, err := codec.StrictDecodeEnvelope(pending[2].([]byte))
 	if err != nil {
 		return nil, nil, err
 	}
 	lists := env.Value.([]any)
-	rounds, err := migrateGenesisRoundRecords(parent, child, lists[4].([]any), records, origin, target)
+	rounds, err := migratePendingRoundRecords(parent, child, lists[4].([]any), records, events, origin, target, true)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -363,7 +363,27 @@ func verifyRoundHistoryV2(ctx context.Context, tx *sql.Tx, parent, child *genesi
 	if err := rows.Close(); err != nil {
 		return err
 	}
-	rounds, slots, err := migrateRoundHistoryV2(parent, child, snapshot, records, origin, target)
+	eventRows, err := tx.QueryContext(ctx, "SELECT record_id,canonical FROM fork_history_records WHERE child_run=? AND ledger_name='event_store' ORDER BY ordinal", child.RunID[:])
+	if err != nil {
+		return err
+	}
+	var events []ports.CanonicalRecord
+	for eventRows.Next() {
+		var id, raw []byte
+		if err := eventRows.Scan(&id, &raw); err != nil {
+			eventRows.Close()
+			return err
+		}
+		events = append(events, ports.CanonicalRecord{Identity: bytesToID(id), Canonical: raw})
+	}
+	if err := eventRows.Err(); err != nil {
+		eventRows.Close()
+		return err
+	}
+	if err := eventRows.Close(); err != nil {
+		return err
+	}
+	rounds, slots, err := migrateRoundHistoryV2(parent, child, snapshot, records, events, origin, target)
 	if err != nil {
 		return err
 	}
@@ -400,7 +420,13 @@ func verifyRoundHistoryV2(ctx context.Context, tx *sql.Tx, parent, child *genesi
 // Read exactly the frozen cut, including when the source has since appended
 // another response or revocation at the same world revision.
 func (s *Store) snapshotInputRecords(ctx context.Context, id [32]byte) ([]ports.CanonicalRecord, error) {
-	rows, err := s.db.QueryContext(ctx, "SELECT m.record_id,i.canonical FROM snapshot_prefix_members m JOIN input_ledger i ON i.id=m.record_id WHERE m.snapshot_id=? AND m.ledger_name='input_ledger' ORDER BY m.ordinal", id[:])
+	return s.snapshotRoundLedgerRecords(ctx, id, "input_ledger")
+}
+func (s *Store) snapshotRoundLedgerRecords(ctx context.Context, id [32]byte, ledger string) ([]ports.CanonicalRecord, error) {
+	if ledger != "input_ledger" && ledger != "event_store" {
+		return nil, errors.New("unsupported round migration ledger")
+	}
+	rows, err := s.db.QueryContext(ctx, "SELECT m.record_id,i.canonical FROM snapshot_prefix_members m JOIN "+ledger+" i ON i.id=m.record_id WHERE m.snapshot_id=? AND m.ledger_name=? ORDER BY m.ordinal", id[:], ledger)
 	if err != nil {
 		return nil, err
 	}

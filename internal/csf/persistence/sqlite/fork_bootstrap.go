@@ -264,7 +264,8 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  var migratedSlots []forkSlotRecord
  if crossPolicy{
   records,err:=s.snapshotInputRecords(ctx,parentSnapshotID);if err!=nil{return nil,err}
-  migratedRounds,migratedSlots,err=migrateRoundHistoryV2(parent,childGenesis,snapshot,records,origin,childPolicy)
+  events,err:=s.snapshotRoundLedgerRecords(ctx,parentSnapshotID,"event_store");if err!=nil{return nil,err}
+  migratedRounds,migratedSlots,err=migrateRoundHistoryV2(parent,childGenesis,snapshot,records,events,origin,childPolicy)
   if err!=nil{return nil,fmt.Errorf("V2 round history migration: %w",err)}
  }else{
   migratedRounds,err=migrateGenesisPendingRounds(ctx,s,parent,childGenesis,lists[4].([]any),origin,childPolicy)

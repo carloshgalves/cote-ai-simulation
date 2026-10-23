@@ -3701,7 +3701,10 @@
       "combat": [],
       "leadership": [
         "y1v2.case.ryuji-kanzaki.public-witness-appeal"
-      ]
+      ],
+      "observation": [],
+      "conflict": [],
+      "ethics": []
     },
     "actor.kiyotaka-ayanokoji": {
       "strategy": [
@@ -3802,7 +3805,10 @@
       "risk_management": [
         "y1v2.case.kiyotaka-ayanokoji.protect-sakura-contact",
         "y1v2.case.kiyotaka-ayanokoji.protect-sakura-from-clerk"
-      ]
+      ],
+      "exam": [],
+      "conflict": [],
+      "motivation": []
     },
     "actor.ooba": {
       "social": [],
@@ -4060,7 +4066,9 @@
       "strategy": [],
       "combat": [
         "y1v1.case.kikyo-kushida.fifty-meter-swim"
-      ]
+      ],
+      "conflict": [],
+      "motivation": []
     },
     "actor.yosuke-hirata": {
       "social": [
@@ -4085,7 +4093,8 @@
       "institution": [],
       "ethics": [
         "y1v2.case.yosuke-hirata.prioritize-protecting-peers"
-      ]
+      ],
+      "conflict": []
     },
     "actor.ken-sudo": {
       "combat": [
@@ -4120,7 +4129,8 @@
         "y1v1.case.ken-sudo.prioritize-study-over-basketball",
         "y1v2.case.ken-sudo.admit-conduct-consequences",
         "y1v2.case.ken-sudo.request-confidential-help"
-      ]
+      ],
+      "observation": []
     },
     "actor.kanji-ike": {
       "social": [
@@ -4134,7 +4144,8 @@
       "strategy": [],
       "observation": [],
       "exam": [],
-      "motivation": []
+      "motivation": [],
+      "institution": []
     },
     "actor.haruki-yamauchi": {
       "social": [
@@ -4189,7 +4200,10 @@
       "leadership": [],
       "persuasion": [],
       "social": [],
-      "combat": []
+      "combat": [],
+      "conflict": [],
+      "emotion": [],
+      "motivation": []
     },
     "actor.manabu-horikita": {
       "leadership": [
@@ -4205,7 +4219,9 @@
         "y1v2.case.manabu-horikita.offer-secretary-seat"
       ],
       "observation": [],
-      "social": []
+      "social": [],
+      "conflict": [],
+      "economy": []
     },
     "actor.chie-hoshinomiya": {
       "institution": [],
@@ -4235,7 +4251,11 @@
       ],
       "strategy": [
         "y1v2.case.honami-ichinose.deploy-surveillance-bluff"
-      ]
+      ],
+      "conflict": [],
+      "observation": [],
+      "economy": [],
+      "risk_management": []
     },
     "actor.yukimura": {
       "social": [],
@@ -4250,7 +4270,9 @@
     },
     "actor.kei-karuizawa": {
       "economy": [],
-      "social": []
+      "social": [],
+      "leadership": [],
+      "ethics": []
     },
     "actor.yamawaki": {
       "social": [
@@ -4274,7 +4296,8 @@
       ],
       "observation": [
         "y1v1.case.sotomura.covert-observation-plan"
-      ]
+      ],
+      "strategy": []
     },
     "actor.airi-sakura": {
       "social": [
@@ -4292,7 +4315,13 @@
       "emotion": [
         "y1v2.case.airi-sakura.testify-despite-stage-fright",
         "y1v2.case.airi-sakura.voluntary-witness-admission"
-      ]
+      ],
+      "combat": [],
+      "economy": [],
+      "strategy": [],
+      "persuasion": [],
+      "conflict": [],
+      "institution": []
     },
     "actor.hasebe": {
       "social": [],
@@ -4318,21 +4347,62 @@
       "economy": [],
       "strategy": []
     },
-    "actor.kakeru-ryuen": {},
+    "actor.kakeru-ryuen": {
+      "conflict": [],
+      "strategy": []
+    },
     "actor.ishizaki": {
       "risk_management": [
         "y1v2.case.ishizaki.resist-initial-compromise"
       ],
       "conflict": [
         "y1v2.case.ishizaki.resist-initial-compromise"
-      ]
+      ],
+      "combat": [],
+      "observation": [],
+      "institution": [],
+      "academic_reasoning": [],
+      "strategy": [],
+      "persuasion": []
     },
-    "actor.komiya": {},
-    "actor.kondou": {},
-    "actor.chihiro-unidentified": {},
-    "actor.unidentified-electronics-clerk": {},
-    "actor.sakagami": {},
-    "actor.tachibana": {}
+    "actor.komiya": {
+      "conflict": [],
+      "combat": [],
+      "institution": [],
+      "academic_reasoning": [],
+      "strategy": [],
+      "persuasion": [],
+      "observation": []
+    },
+    "actor.kondou": {
+      "conflict": [],
+      "combat": [],
+      "institution": [],
+      "academic_reasoning": [],
+      "strategy": [],
+      "persuasion": [],
+      "observation": []
+    },
+    "actor.chihiro-unidentified": {
+      "social": [],
+      "emotion": [],
+      "ethics": []
+    },
+    "actor.unidentified-electronics-clerk": {
+      "risk_management": [],
+      "observation": [],
+      "conflict": [],
+      "persuasion": []
+    },
+    "actor.sakagami": {
+      "institution": [],
+      "conflict": [],
+      "social": []
+    },
+    "actor.tachibana": {
+      "institution": [],
+      "social": []
+    }
   },
   "context_mentions_by_actor_topic": {
     "actor.atsuomi-ayanokoji": {
@@ -6714,7 +6784,8 @@
       "persuasion": [
         "y1v2.ev.071",
         "y1v2.ev.072"
-      ]
+      ],
+      "risk_management": []
     },
     "actor.komiya": {
       "conflict": [

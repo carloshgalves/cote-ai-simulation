@@ -25,4 +25,9 @@ for x in e:
 for x in r["cases"]:
     assert x["case_file"]==idx["behavioral_case_paths"][x["case_id"]]
     assert x["source_case_owner_id"]=="actor."+Path(x["case_file"]).parent.name
-print("PASS 268 individually indexed evidence / 75 cases; no unsanctioned semantic promotions.")
+# An inactive legacy staging path must not be a live source.
+for folder in ("characters", "institutions"):
+    for packfile in (B/folder).glob("*.json"):
+        record=J(packfile)
+        assert all("/volume0/" not in path for path in record.get("source_documents", [])), packfile
+print("PASS 268 indexed evidence / 75 cases, no retired pointers or implicit promotions.")

@@ -41,6 +41,11 @@ class MidtermContract(unittest.TestCase):
         with self.assertRaises(ValueError):
             apply_recorded_concession(evaluation=result["evaluation"],authorization=a,
                 balances=result["balances"])
+        with self.assertRaises(ValueError):
+            apply_recorded_concession(evaluation=e,authorization=a,balances=b,
+                previous_transaction_ids=("unique-observed-event",))
+        with self.assertRaises(CanonRuleUnknown):
+            apply_recorded_concession(evaluation=evaluate(class_id="Y1_D",subject="English",reported_mean="79.7",reported_grades={"actor.ken-sudo":39}),authorization=a,balances=b)
         for patch in [{"approved":False},{"target":"actor.other"},
                       {"price_private_points":1},
                       {"payers":{"actor.kiyotaka-ayanokoji":100000}}]:

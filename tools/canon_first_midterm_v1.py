@@ -59,17 +59,19 @@ def evaluate_complete_roster(*,class_id,subject,roster,grades):
     result["scope"]="COMPLETE_SUPPLIED_ROSTER"
     return result
 
-def apply_recorded_concession(*,evaluation,authorization,balances):
-    """Atomic, one-time *observed* concession, not permission to buy arbitrary grades."""
+def apply_recorded_concession(*,evaluation,authorization,balances,previous_transaction_ids=()):
+    """Atomic observed concession; caller MUST validate school event and persist replay-fence IDs."""
     if evaluation.get("exam_id")!=ID or evaluation.get("class_id")!="Y1_D" or evaluation.get("subject")!="English":
         raise CanonRuleUnknown("exam mismatch")
     if not isinstance(authorization,dict) or authorization.get("approved") is not True:
         raise CanonRuleUnknown("explicit school approval required")
     if any(authorization.get(k)!=v for k,v in RECORDED_CONCESSION.items()):
         raise CanonRuleUnknown("no canonical arbitrary-purchase policy")
+    if _decimal(evaluation.get("reported_mean"))!=Decimal("79.6"):
+        raise CanonRuleUnknown("only the observed 79.6 English mean is authorized for the recorded concession")
     tx=authorization.get("transaction_id")
     if not isinstance(tx,str) or not tx: raise ValueError("transaction id required")
-    if any(x["transaction_id"]==tx for x in evaluation.get("authorized_purchases",[])):
+    if tx in previous_transaction_ids or any(x["transaction_id"]==tx for x in evaluation.get("authorized_purchases",[])):
         raise ValueError("duplicate transaction")
     score=evaluation.get("grades",{}).get("actor.ken-sudo")
     if not isinstance(score,dict) or score.get("score")!=39 or evaluation.get("cutoff")!=40:

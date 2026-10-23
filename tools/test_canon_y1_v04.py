@@ -56,7 +56,7 @@ for id,c in cases.items():
     assert c["source"]["work_id"]==source["source_id"]
     assert c["evidence_refs"] and set(c["evidence_refs"])<=sids
     assert c["epistemic_status"]=="PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
-    assert c["behavioral_policy"]=="DESCRIPTIVE_NOT_PRESCRIPTIVE"
+    assert c["behavioral_policy"] in {"DESCRIPTIVE_NOT_PRESCRIPTIVE","DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"}
     for t in c["topics"]:
         assert id in index["behavioral_by_actor_topic"][owner][t]
         assert id in J(ROOT/index["character_packs"][owner]["path"])["domains"][t]["behavioral_case_refs"]

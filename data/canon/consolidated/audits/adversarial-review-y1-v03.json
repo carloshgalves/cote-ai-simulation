@@ -1,0 +1,85 @@
+{
+  "schema_version": "adversarial-canon-review-v1",
+  "source_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+  "created_at": "2026-10-23",
+  "method": "Separated adversarial source reading plus deterministic regression contract; performed by same assistant, NOT external independent reviewer",
+  "external_reviewer": "NOT_ASSIGNED",
+  "human_verification": false,
+  "review_scope": {
+    "evidence": 117,
+    "behavioral_cases": 35,
+    "source_pdf_sha256": "22b13fabb5aa2b93e355a0cd621c7e5d9dd63c33d775eda58e27067541c5387e"
+  },
+  "resolved_findings": [
+    {
+      "severity": "HIGH",
+      "id": "V3-ATTRIBUTION-CAVE",
+      "observation": "Ship-route deduction belonged to Katsuragi, incorrectly attributed to Kiyotaka",
+      "resolution": "Rehomed behavioral case to Katsuragi with evidence on PDF pp.59–60",
+      "gate": "CASE_OWNER_PRIMARY_ACTOR"
+    },
+    {
+      "severity": "HIGH",
+      "id": "V3-CLASS-C-MESSENGERS",
+      "observation": "Komiya and Kondou delivered C's message; Ishizaki had been credited",
+      "resolution": "Corrected evidence actors and global indexes",
+      "gate": "ACTOR_MENTION_NOT_UNRELATED_ACT"
+    },
+    {
+      "severity": "HIGH",
+      "id": "V3-ALLIANCE-STATUS",
+      "observation": "A/C alliance existence is directly witnessed by Ibuki; precise financial terms are later partly conjectured by Kiyotaka",
+      "resolution": "Distinguished direct accepted alliance from Kiyotaka's speculation",
+      "gate": "CONFIRMED_EVENT_VS_INTERPRETATION"
+    },
+    {
+      "severity": "HIGH",
+      "id": "V3-ROLLCALL-1958",
+      "observation": "Medical arrival at 19:58 does not satisfy separate camp roll call",
+      "resolution": "Clarified before-20:00 arrival, absence and point cost on pp.237–238",
+      "gate": "LOCATION_AND_TIME"
+    },
+    {
+      "severity": "MEDIUM",
+      "id": "V3-SHARED-WELL",
+      "observation": "Ichinose describes test-and-share policy, not her own personally verified test",
+      "resolution": "Corrected the source assertion and case",
+      "gate": "REPORT_VS_PRIMARY_ACTION"
+    },
+    {
+      "severity": "MEDIUM",
+      "id": "V3-RATIONS-P96",
+      "observation": "Kushida handoff is on PDF p.96, not only p.95",
+      "resolution": "Expanded evidence/case physical PDF page locators",
+      "gate": "PAGE_SOURCE_LOCATOR"
+    },
+    {
+      "severity": "MEDIUM",
+      "id": "V3-LEADER-NO_NEGATIVE",
+      "observation": "No negative exam balance cannot nullify immediate class disqualification",
+      "resolution": "Preserved distinct penalty branches",
+      "gate": "EXAM_RULE_ISOLATION"
+    },
+    {
+      "severity": "MEDIUM",
+      "id": "V3-B-D-PACT",
+      "observation": "Bounded leader non-guess pact on pp.120–122 was mislocalized and understated",
+      "resolution": "Updated evidence and page map",
+      "gate": "SPEAKER_DISCLOSURE"
+    }
+  ],
+  "independent_checks": [
+    "No ungrounded owner-level behavioral capability",
+    "Volume 1–2 history unaffected by Volume 3-only behaviors",
+    "No future knowledge in initial actor memory",
+    "Named leader replacement requires qualified reason",
+    "Correct score table A120/B140/C0/D225",
+    "Every 152 item has a unique semantic note and a closed/unverified individual status",
+    "Negative mutation controls must fail validation"
+  ],
+  "unresolved": [
+    "Independent external reviewer signoff",
+    "Human operator merge/release approval"
+  ],
+  "recommendation": "HOLD_DRAFT_NO_MERGE"
+}

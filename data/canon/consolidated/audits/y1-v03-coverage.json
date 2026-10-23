@@ -51,20 +51,17 @@
     "7": 14
   },
   "cases": 35,
-  "open_audit": "INDIVIDUAL_SOURCE_REVIEW_IN_PROGRESS",
+  "open_audit": "ADVERSARIAL_CHECKS_PENDING_EXTERNAL_REVIEW_AND_OPERATOR_RELEASE",
   "operator_release": "PENDING",
   "method": "Initial scene-relevance-filtered source-local paraphrases across the whole volume; narrator, dialogue claims, exact procedural disclosures and future-time separate. All claims unverified pending individually audited review.",
   "open_issues": [
-    "Individual direct-source semantic review",
-    "Behavioral demonstrations and globally consolidated character/institution merges",
-    "Index regeneration and complete CI",
-    "Leader replacement procedure and retrospective strategy must not be seeded into earlier agent knowledge",
-    "Numerical results are observed; avoid inventing hidden score arithmetic",
-    "150+ individual claim and behavioral case source windows need separate semantic adjudication",
-    "All actor knowledge and class leader secrets must retain disclosure times"
+    "External human or separate-model independent review required before integration",
+    "Operator release approval required",
+    "All individual verified flags remain false; no runtime/actor-memory promotion",
+    "Exam reference remains NOT_EXECUTABLE"
   ],
   "behavioral_cases": 35,
-  "coverage_status": "INITIAL_FULL_VOLUME_SCENE_CANDIDATES_EXTRACTED_REVIEW_PENDING",
+  "coverage_status": "INDIVIDUAL_ASSISTANT_SEMANTIC_REVIEW_COMPLETE_RELEASE_PENDING",
   "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v03.json",
   "semantic_findings_identified": {
     "source_corrections": 27,
@@ -108,5 +105,16 @@
       "Do not credit Ichinose with personally performing all well safety tests",
       "Horikita–Ichinose pact explicitly discusses no rival leader guesses on p122, rather than p124 speculation"
     ]
+  },
+  "semantic_review": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE",
+  "case_status": "ASSISTANT_CASE_REVIEW_COMPLETE",
+  "final_semantic_review": {
+    "assistant_reviewed_evidence": 117,
+    "assistant_reviewed_cases": 35,
+    "assistant_total": 152,
+    "human_individual_verified": 0,
+    "external_independent_review": "PENDING",
+    "completed_on": "2026-10-23",
+    "review_register": "data/canon/consolidated/audits/source-review-register-y1-v03.json"
   }
 }

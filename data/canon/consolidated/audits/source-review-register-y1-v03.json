@@ -4,7 +4,7 @@
   "created_at": "2026-10-23",
   "source_pdf_sha256": "22b13fabb5aa2b93e355a0cd621c7e5d9dd63c33d775eda58e27067541c5387e",
   "source_page_count": 262,
-  "global_promotion": "BLOCKED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW_AND_OPERATOR_RELEASE",
+  "global_promotion": "BLOCKED_PENDING_EXTERNAL_INDEPENDENT_REVIEW_AND_OPERATOR_ACCEPTANCE",
   "evidence_count": 117,
   "behavioral_case_count": 35,
   "evidence": [
@@ -20,8 +20,8 @@
       "actor_ids": [
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -29,7 +29,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Chabashira's Icarus comparison is an undated internal metaphor; anonymous boy not identified.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.002",
@@ -43,8 +48,8 @@
       "actor_ids": [
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -52,7 +57,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "She describes her own gamble and distress; no external confirmation of the boy's supposed wrath.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.003",
@@ -66,8 +76,8 @@
       "actor_ids": [
         "actor.haruki-yamauchi"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -75,7 +85,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Yamauchi assessment is a printed visual dossier, not an observed demonstration.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.004",
@@ -91,8 +106,8 @@
         "actor.kanji-ike",
         "actor.ken-sudo"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -100,7 +115,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Students are told this is a luxury trip, so the exam cannot be preloaded into their shipboard knowledge.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.005",
@@ -116,8 +136,8 @@
         "actor.kikyo-kushida",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -125,7 +145,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Class A insults and shoves; Sudō restrains from starting a fight, motivation unspecified.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.006",
@@ -140,8 +165,8 @@
         "actor.yosuke-hirata",
         "actor.kei-karuizawa"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -149,7 +174,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Hirata leaves to help another peer; alleged relationship trouble with Karuizawa is hearsay.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.007",
@@ -164,8 +194,8 @@
         "actor.kanji-ike",
         "actor.kikyo-kushida"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -173,7 +203,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ike and Kushida exchange permission to use first names, not a confirmed romance.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.008",
@@ -188,8 +223,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.kikyo-kushida"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -197,7 +232,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Island's dimensions and full ship circuit are noted; future use of geography remains undisclosed.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.009",
@@ -212,8 +252,8 @@
         "actor.suzune-horikita",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -221,7 +261,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Phones and belongings are surrendered; Horikita's shivering is seen but cause unconfirmed.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.010",
@@ -236,8 +281,8 @@
         "actor.sae-chiyabashira",
         "actor.mashima"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -245,7 +290,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Chabashira calls roll for D and Mashima of A leads the public briefing.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.011",
@@ -259,8 +309,8 @@
       "actor_ids": [
         "actor.mashima"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -268,22 +318,28 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Mashima announces the surprise island test, with no evidence of prior student knowledge.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.012",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 2,
       "pdf_pages": [
-        25
+        25,
+        26
       ],
       "source_mode": "REPORTED_BY_CHARACTER",
-      "primary_claim": "Each class is provisioned two tents, two flashlights, a box of matches, and unlimited sunscreen; each student receives a toothbrush, with sanitary supplies available separately.",
+      "primary_claim": "Mashima specifies the two tents, two flashlights, one box of matches, sunscreen and toothbrush provisions, with unrestricted sanitary items separately for students who need them.",
       "actor_ids": [
         "actor.mashima"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -291,7 +347,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Tents, lights, matches and individual hygiene provisions are allocated by the school.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.013",
@@ -305,8 +366,8 @@
       "actor_ids": [
         "actor.mashima"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -314,7 +375,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Freedom is the named theme but purchases consume special-test points, not S-System balances.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.014",
@@ -328,8 +394,8 @@
       "actor_ids": [
         "actor.mashima"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -337,7 +403,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Mashima says remaining island-test points are added to class points after the examination.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.015",
@@ -351,8 +422,8 @@
       "actor_ids": [
         "actor.mashima"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -360,7 +431,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Class A's absent student produces a reported 30-point reduction to 270.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.016",
@@ -374,8 +450,8 @@
       "actor_ids": [
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -383,7 +459,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Mandatory tracking watches and removal warning are stated as school policy.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.017",
@@ -397,8 +478,8 @@
       "actor_ids": [
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -406,7 +487,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Temperature, pulse, GPS and emergency alert are listed as watch capabilities, not measured reliability.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.018",
@@ -420,8 +506,8 @@
       "actor_ids": [
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -429,7 +515,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "The written 30-point health-retirement rule is nonreversible and class-scoped.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.019",
@@ -443,8 +534,8 @@
       "actor_ids": [
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -452,7 +543,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Environmental pollution costs 20; one missed 8 AM or 8 PM roll call costs 5 per student.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.020",
@@ -466,8 +562,8 @@
       "actor_ids": [
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -475,23 +571,29 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Disqualifying interclass violence/theft also forfeits the offender's private points.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.021",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 2,
       "pdf_pages": [
+        32,
         33
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Chabashira affirms the island-test balance cannot become negative, even if additional disqualifying events occur after the balance hits zero.",
+      "primary_claim": "Chabashira confirms that island-exam test points stop at zero instead of becoming negative; she does not state that the disqualification rule can be avoided at zero.",
       "actor_ids": [
         "actor.suzune-horikita",
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -499,7 +601,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Test balance bottoms at zero, but this does not negate instant-disqualification rules.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.022",
@@ -513,8 +620,8 @@
       "actor_ids": [
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -522,7 +629,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Registered camp remains the roll-call site; moving requires suitable justification.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.023",
@@ -537,8 +649,8 @@
         "actor.sae-chiyabashira",
         "actor.shinohara"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -546,7 +658,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Portable cardboard toilet and enclosure are supplied; Shinohara's disapproval is personal.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.024",
@@ -561,8 +678,8 @@
         "actor.kanji-ike",
         "actor.shinohara"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -570,7 +687,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ike-Shinohara conflict concerns privacy and point expenditure, not a fixed universal trait.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.025",
@@ -585,8 +707,8 @@
         "actor.chie-hoshinomiya",
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -594,22 +716,28 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Hoshinomiya greets Chabashira and hints at their past, the details unproven here.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.026",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 2,
       "pdf_pages": [
-        38
+        38,
+        39
       ],
       "source_mode": "REPORTED_BY_CHARACTER",
-      "primary_claim": "Certain marked island spots can be exclusively occupied for eight hours by one class and reclaimed after expiry; each valid occupation awards one provisional bonus point.",
+      "primary_claim": "Chabashira introduces special occupied spots, later specifying that each reservation lapses automatically after eight hours and awards a single provisional, non-spendable occupation bonus.",
       "actor_ids": [
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -617,22 +745,28 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "An occupied special site expires after eight hours; its bonus point cannot be spent during exam.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.027",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 2,
       "pdf_pages": [
-        39
+        39,
+        40
       ],
       "source_mode": "REPORTED_BY_CHARACTER",
-      "primary_claim": "Occupying a spot requires the designated leader's personalized keycard; unauthorized use of another class's occupied spot costs 50 test points.",
+      "primary_claim": "The manual requires the nominated class leader's personal card to register a spot; trespassing on another class's still-occupied spot costs 50 island-test points.",
       "actor_ids": [
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -640,7 +774,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Leader-specific card is required to register spots; using another class's occupied site costs 50.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.028",
@@ -654,8 +793,8 @@
       "actor_ids": [
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -663,7 +802,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Correct and wrong leader guesses have distinct fifty-point outcomes; exposure wipes occupancy bonus.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.029",
@@ -677,8 +821,8 @@
       "actor_ids": [
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -686,7 +830,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Class leader selection is required by first roll call, with a school fallback and qualified replacement.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.030",
@@ -702,8 +851,8 @@
         "actor.ken-sudo",
         "actor.kanji-ike"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -711,24 +860,30 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Horikita acknowledges practical wilderness contributions by Ike and Sudō despite prior disdain.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.031",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 2,
       "pdf_pages": [
-        50
+        50,
+        51
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Hirata advocates spending points on a private toilet to reduce distress and health concerns, balancing minority needs against a strict savings strategy.",
+      "primary_claim": "Hirata argues for purchasing one usable private temporary toilet despite conservation objections; after a class debate Yukimura concedes and the purchase becomes a collective choice.",
       "actor_ids": [
         "actor.yosuke-hirata",
         "actor.shinohara",
         "actor.kanji-ike"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -736,7 +891,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Hirata advocates one paid toilet after debate; this is an observed contingent coalition choice.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.032",
@@ -753,8 +913,8 @@
         "actor.airi-sakura",
         "actor.rokusuke-koenji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -762,7 +922,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kushida volunteers for exploration and reluctant classmates follow; group motivation cannot be perfectly isolated.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.033",
@@ -778,8 +943,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.airi-sakura"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -787,23 +952,29 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kōenji asks what others see but conceals his precise observation and then leaves.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.034",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 2,
       "pdf_pages": [
-        59
+        59,
+        60
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Kiyotaka and Sakura reach an occupied Class A cave after following a path; the leader's card handling risks revealing a hidden identity.",
+      "primary_claim": "Kiyotaka and Sakura discover Class A's occupied cave and secretly witness Katsuragi and Yahiko discussing its strategic location and concealed leader information.",
       "actor_ids": [
         "actor.kiyotaka-ayanokoji",
         "actor.airi-sakura"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -811,22 +982,30 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka and Sakura find Class A's cave and witness card handling while hidden.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.035",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 2,
       "pdf_pages": [
+        59,
         60
       ],
       "source_mode": "INNER_MONOLOGUE",
-      "primary_claim": "Kiyotaka infers from the ship's earlier circuit and a path visible from the deck that the school may be hinting where occupation spots lie.",
+      "primary_claim": "While hidden nearby, Kiyotaka overhears Katsuragi explain that he spotted a forest path from the ship's prelanding circuit and inferred the cave's position. This deduction is Katsuragi's, not Kiyotaka's demonstrated feat.",
       "actor_ids": [
-        "actor.kiyotaka-ayanokoji"
+        "actor.kiyotaka-ayanokoji",
+        "actor.katsuragi",
+        "actor.yahiko"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -834,7 +1013,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Katsuragi, overheard by Kiyotaka, explains his route inference from a path seen on the ship; case ownership belongs to Katsuragi.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.036",
@@ -850,8 +1034,8 @@
         "actor.haruki-yamauchi",
         "actor.ken-sudo"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -859,7 +1043,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ike and associates locate a river and possible camp; water quality is not proven by the find.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.037",
@@ -875,8 +1064,8 @@
         "actor.suzune-horikita",
         "actor.yosuke-hirata"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -884,7 +1073,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kushida nominates Horikita and Hirata obtains her assigned card; an initially secret role is set.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.038",
@@ -899,8 +1093,8 @@
         "actor.kanji-ike",
         "actor.shinohara"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -908,7 +1102,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ike drinks from the river after a dare; one drink does not verify ongoing drinking-water safety.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.039",
@@ -924,8 +1123,8 @@
         "actor.shinohara",
         "actor.kanji-ike"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -933,23 +1132,29 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Sudō proposes boiling water while defusing argument; implementation and water safety remain separate.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.040",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 2,
       "pdf_pages": [
-        72
+        72,
+        73
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Some girls allocate both school-provided tents to themselves, raising shelter and class cooperation problems.",
+      "primary_claim": "The school-provided tents become a point of tension when female classmates occupy both, leaving boys to improvise and exposing unequal shelter needs.",
       "actor_ids": [
         "actor.shinohara",
         "actor.yosuke-hirata"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -957,7 +1162,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Girls initially take both tents, prompting a temporary shelter dispute, not a durable camp constitution.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.041",
@@ -973,8 +1183,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.haruki-yamauchi"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -982,7 +1192,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Sakura volunteers for branch collection although fatigued; this is bounded social participation.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.042",
@@ -998,8 +1213,8 @@
         "actor.haruki-yamauchi",
         "actor.mio-ibuki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1007,7 +1222,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka notices an injured newcomer while Yamauchi wants to proceed; no one yet knows her plan.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.043",
@@ -1024,8 +1244,8 @@
         "actor.airi-sakura",
         "actor.haruki-yamauchi"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1033,7 +1253,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ibuki asserts she is Class C and resists help; her cover story must remain attributed.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.044",
@@ -1048,8 +1273,8 @@
         "actor.haruki-yamauchi",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1057,7 +1282,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Yamauchi's attempted fire-starting fails after lighting matches against unsuitable damp, thick fuel.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.045",
@@ -1072,8 +1302,8 @@
         "actor.kanji-ike",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1081,7 +1311,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ike identifies tinder size and moisture problems and produces a flame; specific outdoor competence.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.046",
@@ -1096,8 +1331,8 @@
         "actor.kanji-ike",
         "actor.shinohara"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1105,7 +1340,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ike directly apologizes to Shinohara, who reciprocates; change beyond the episode is unknown.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.047",
@@ -1119,8 +1359,8 @@
       "actor_ids": [
         "actor.yosuke-hirata"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1128,7 +1368,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Hirata advocates a budget with target 120 points left; forecast not actual end score.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.048",
@@ -1143,8 +1388,8 @@
         "actor.yosuke-hirata",
         "actor.mio-ibuki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1152,7 +1397,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Hirata seeks camp hospitality for injured Ibuki without conclusive verification of her account.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.049",
@@ -1168,8 +1418,8 @@
         "actor.kikyo-kushida",
         "actor.mio-ibuki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1177,23 +1427,29 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kushida and friends share rations on page 96, not proof the newcomer is honest.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.050",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 2,
       "pdf_pages": [
-        97
+        97,
+        98
       ],
       "source_mode": "REPORTED_BY_CHARACTER",
-      "primary_claim": "Chabashira says Kōenji retired on health grounds and will stay on the ship, costing Class D 30 exam points; his true motivation is not established.",
+      "primary_claim": "Chabashira tells Class D that Kōenji was taken back to the ship on reported poor-health grounds and a 30-point retirement penalty applies; whether Kōenji feigned illness is not established.",
       "actor_ids": [
         "actor.rokusuke-koenji",
         "actor.sae-chiyabashira"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1201,23 +1457,30 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Teacher reports Kōenji medically retired and a 30-point cost; deliberate faking is not proven.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.051",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 3,
       "pdf_pages": [
-        100
+        100,
+        101,
+        102
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Hirata rises early to care for camp chores and discusses class ambition with Kiyotaka without asserting that all classmates share the same goals.",
+      "primary_claim": "Kiyotaka gets up early and privately checks Ibuki's bag, finding an unused school-rental digital camera; then meets Hirata, who describes poor sleep, point anxiety and conflicting class goals.",
       "actor_ids": [
         "actor.yosuke-hirata",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1225,7 +1488,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka secretly inspects Ibuki's rental camera, then hears Hirata's early budget anxiety and class ambitions.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.052",
@@ -1240,8 +1508,8 @@
         "actor.ryuji-kanzaki",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1249,24 +1517,31 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kanzaki visits Class D and reveals Class B camp location; his alleged ulterior motives are Kiyotaka's hypothesis.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.053",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 3,
       "pdf_pages": [
+        105,
         106
       ],
       "source_mode": "REPORTED_BY_CHARACTER",
-      "primary_claim": "Class C boys relay an invitation from Ryūen and provoke Ike at the river; the invitation does not prove the details of Ryūen's plans.",
+      "primary_claim": "Komiya and Kondou, not Ishizaki, arrive at Class D's base to deliver Ryūen's invitation to enjoy Class C's beach amenities, provoking Ike for several minutes.",
       "actor_ids": [
-        "actor.ishizaki",
+        "actor.komiya",
+        "actor.kondou",
         "actor.kakeru-ryuen",
         "actor.kanji-ike"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1274,7 +1549,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Komiya and Kondou, not Ishizaki, bring Ryūen's beach message to mock Ike.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.054",
@@ -1290,8 +1570,8 @@
         "actor.suzune-horikita",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1299,7 +1579,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Expensive Class C beach amenities are observed; inferred total expenditure is only an estimate.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.055",
@@ -1314,8 +1599,8 @@
         "actor.kakeru-ryuen",
         "actor.ishizaki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1323,24 +1608,30 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ryūen rebukes Ishizaki over drink temperature; the effect on durable loyalty is unestablished.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.056",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 3,
       "pdf_pages": [
+        112,
         113
       ],
       "source_mode": "REPORTED_BY_CHARACTER",
-      "primary_claim": "Ryūen discusses Ibuki as a Class C member and refuses to supply a verifiable account of her facial injury; Suzune's suspicion is not proof of perpetration.",
+      "primary_claim": "Ryūen acknowledges Ibuki as a Class C member and alludes to striking her as punishment for disobedience; his speech and gesture are not independent documentation of the initial injury.",
       "actor_ids": [
         "actor.kakeru-ryuen",
         "actor.suzune-horikita",
         "actor.mio-ibuki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1348,7 +1639,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ryūen discusses punishing Ibuki; later Ibuki privately says the slap was staged for infiltration.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.057",
@@ -1363,8 +1659,8 @@
         "actor.suzune-horikita",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1372,7 +1668,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Conjectures about why Ryūen spent points are Kiyotaka's, not a demonstrated strategy model.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.058",
@@ -1388,8 +1689,8 @@
         "actor.suzune-horikita",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1397,22 +1698,28 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Class B facilities and Ichinose's cordial reception are observed, without revealing all its plans.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.059",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 3,
       "pdf_pages": [
-        120
+        120,
+        121
       ],
       "source_mode": "SELF_DESCRIPTION",
-      "primary_claim": "Ichinose describes personally checking well water first and introducing a safer shared water supply after an initial trial period.",
+      "primary_claim": "Ichinose explains that Class B delayed using the well until it had been tested, then uses this water for its shared welfare arrangements; the text does not establish that Ichinose personally performed every water test.",
       "actor_ids": [
         "actor.honami-ichinose"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1420,7 +1727,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ichinose reports cautious well testing before shared use; she is not proved the individual technician.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.060",
@@ -1434,8 +1746,8 @@
       "actor_ids": [
         "actor.honami-ichinose"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1443,23 +1755,29 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ichinose explains reuse of sanitation materials and water cooling; measurements are not supplied.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.061",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 3,
       "pdf_pages": [
-        124
+        120,
+        122
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Ichinose cautiously weighs Horikita's proposed Class B and D cooperation while avoiding full disclosure of all strategic details.",
+      "primary_claim": "Horikita and Ichinose discuss reciprocal information sharing and a tentative agreement not to guess each other's island-test leaders; the scope is bounded to this exam and is not a permanent cross-class alliance.",
       "actor_ids": [
         "actor.honami-ichinose",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1467,7 +1785,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Horikita proposes limited Class B–D cooperation and Ichinose engages, but no perpetual alliance is concluded.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.062",
@@ -1483,8 +1806,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1492,24 +1815,31 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka and Horikita approach an occupied Class A cave to gather information, not to own it.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.063",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 3,
       "pdf_pages": [
-        127
+        127,
+        128,
+        129
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Yahiko rebuffs rival scouts and Katsuragi intervenes with an argument that respecting exclusive occupation is essential for mutual security.",
+      "primary_claim": "Yahiko rejects Horikita's attempt to inspect occupied Class A cave, and Katsuragi intervenes to argue that mutually respecting spot occupancy reduces retaliatory interference.",
       "actor_ids": [
         "actor.yahiko",
         "actor.katsuragi",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1517,7 +1847,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Yahiko objects and Katsuragi counters with a reciprocity argument on pages 128–129.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.064",
@@ -1532,8 +1867,8 @@
         "actor.airi-sakura",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1541,7 +1876,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Sakura catches up with Kiyotaka in the forest; mutual comfort is not identical to established romance.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.065",
@@ -1556,8 +1896,8 @@
         "actor.airi-sakura",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1565,7 +1905,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Sakura reports the former clerk resigned; no administrative employment record verifies it.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.066",
@@ -1580,8 +1925,8 @@
         "actor.airi-sakura",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1589,7 +1934,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Sakura identifies cultivated corn hidden in brush; food utility is assessed locally.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.067",
@@ -1604,8 +1954,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.airi-sakura"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1613,24 +1963,30 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka improvises carrying harvested corn with his clothing, without establishing survival expertise broadly.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.068",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 4,
       "pdf_pages": [
+        140,
         141
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Katsuragi checks the corn site and warns against leaving resources unguarded; he observes Class D students nearby without demonstrated knowledge of its whole plan.",
+      "primary_claim": "Katsuragi encounters Kiyotaka and Sakura near the cultivated corn, restrains Yahiko's hostility and warns against dangerous solo travel; he offers bounded assistance, but does not know Class D's whole plan.",
       "actor_ids": [
         "actor.katsuragi",
         "actor.yahiko",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1638,7 +1994,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Katsuragi tempers Yahiko and warns about hazards of moving alone; no complete Class D strategy is learned.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.069",
@@ -1653,8 +2014,8 @@
         "actor.kanji-ike",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1662,22 +2023,28 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "On day four fish, corn and fruit ease shortages; interim point estimate is narration.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.070",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 5,
       "pdf_pages": [
+        145,
         146
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Kiyotaka independently surveys a high island vantage point and marks useful spots on a rough map.",
+      "primary_claim": "Kiyotaka surveys an island watchtower and nearby potential occupied spots, recording rough observations on a hand-drawn map; deductions about his complete surveillance coverage remain limited.",
       "actor_ids": [
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1685,7 +2052,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka maps a watchtower and nearby possibilities, not a complete validated island map.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.071",
@@ -1699,8 +2071,8 @@
       "actor_ids": [
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1708,7 +2080,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Class A boys frisk Kiyotaka and seize a hand-drawn map; no consensual information exchange occurs.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.072",
@@ -1722,8 +2099,8 @@
       "actor_ids": [
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1731,7 +2108,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Class A pupils propose future points for information; bargain remains uncompleted.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.073",
@@ -1746,8 +2128,8 @@
         "actor.kakeru-ryuen",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1755,7 +2137,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Class C's earlier costly shore setup is largely deserted; reason for departures is not directly witnessed.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.074",
@@ -1770,8 +2157,8 @@
         "actor.honami-ichinose",
         "actor.ryuji-kanzaki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1779,7 +2166,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ichinose and Kanzaki discuss competing Class A factions and absent Sakayanagi, partly from reports.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.075",
@@ -1794,8 +2186,8 @@
         "actor.sae-chiyabashira",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1803,7 +2195,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Pre-island flashback dates Chabashira's private summons before the exam, not on island day four.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.076",
@@ -1818,8 +2215,8 @@
         "actor.sae-chiyabashira",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1827,7 +2224,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Chabashira says an outsider sought expulsion of Kiyotaka; institutional authority of that outsider is unverified.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.077",
@@ -1842,8 +2244,8 @@
         "actor.sae-chiyabashira",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1851,7 +2253,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Teacher pressures him with disciplinary discretion; this is her threat, not proof of lawful arbitrary expulsion.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.078",
@@ -1867,8 +2274,8 @@
         "actor.shinohara",
         "actor.yosuke-hirata"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1876,7 +2283,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Girlfriend reports missing underwear and collective suspicion begins; culprit not yet known.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.079",
@@ -1891,8 +2303,8 @@
         "actor.kanji-ike",
         "actor.haruki-yamauchi"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1900,7 +2312,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Clothing hidden in Ike's luggage is not evidence Ike placed or stole it.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.080",
@@ -1916,8 +2333,8 @@
         "actor.kanji-ike",
         "actor.haruki-yamauchi"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1925,7 +2342,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka conceals underwear transferred to him to prevent public accusation; theft remains unresolved.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.081",
@@ -1940,8 +2362,8 @@
         "actor.yosuke-hirata",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1949,7 +2371,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Hirata finds the concealed underwear while searching Kiyotaka and chooses private inquiry rather than accusation.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.082",
@@ -1964,8 +2391,8 @@
         "actor.kei-karuizawa",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1973,7 +2400,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Karuizawa and Horikita dispute gendered restrictions; their positions are not universal personal ethics.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.083",
@@ -1988,8 +2420,8 @@
         "actor.airi-sakura",
         "actor.kei-karuizawa"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -1997,7 +2429,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Sakura speaks up for Kiyotaka and is rebuffed by Karuizawa; courage with limited social success.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.084",
@@ -2012,8 +2449,8 @@
         "actor.yosuke-hirata",
         "actor.kei-karuizawa"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2021,7 +2458,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Class D formally separates boys' and girls' accommodations after suspicion, an episode-specific outcome.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.085",
@@ -2036,8 +2478,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.mio-ibuki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2045,7 +2487,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka suspects Ibuki planted underwear but does not yet have an admitted fact at this stage.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.086",
@@ -2060,8 +2507,8 @@
         "actor.suzune-horikita",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2069,7 +2516,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Fans in girls' camp reveal extra spending; source does not give complete cumulative equipment accounts.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.087",
@@ -2084,8 +2536,8 @@
         "actor.suzune-horikita",
         "actor.kikyo-kushida"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2093,7 +2545,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Suzune's continuing fever visibly reduces her performance; no clinical diagnosis is established.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.088",
@@ -2108,8 +2565,8 @@
         "actor.suzune-horikita",
         "actor.haruki-yamauchi"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2117,7 +2574,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Yamauchi smears mud on Suzune and she throws him; this is immediate reaction under illness.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.089",
@@ -2132,8 +2594,8 @@
         "actor.suzune-horikita",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2141,23 +2603,29 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Horikita privately reports leader keycard missing and asks Kiyotaka because she trusts him.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.090",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 6,
       "pdf_pages": [
-        206
+        206,
+        207
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "The Class D test manual is burned during a camp disturbance, aggravating class tension; the responsible party is not independently identified.",
+      "primary_claim": "The island examination manual is found burning near the camp toilet. Neither Kiyotaka nor Horikita directly witnesses who ignited it.",
       "actor_ids": [
         "actor.yosuke-hirata",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2165,7 +2633,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "An unidentified party burns the test manual; no eyewitness establishes the arsonist.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.091",
@@ -2179,8 +2652,8 @@
       "actor_ids": [
         "actor.yosuke-hirata"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2188,7 +2661,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Hirata dissociates under crisis and mutters about earlier trouble; exact past incident unknown here.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.092",
@@ -2203,8 +2681,8 @@
         "actor.suzune-horikita",
         "actor.mio-ibuki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2212,7 +2690,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Feverish Suzune follows suspected Ibuki into heavy rain; her suspicion is not all confirmed yet.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.093",
@@ -2227,8 +2710,8 @@
         "actor.suzune-horikita",
         "actor.mio-ibuki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2236,7 +2719,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ibuki launches physical attack as Suzune questions her; health affects the response.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.094",
@@ -2251,8 +2739,8 @@
         "actor.suzune-horikita",
         "actor.mio-ibuki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2260,23 +2748,30 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ill Suzune fights Ibuki but collapses, giving no sound healthy-versus-healthy ranking.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.095",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 6,
       "pdf_pages": [
-        221
+        221,
+        222,
+        224
       ],
       "source_mode": "INNER_MONOLOGUE",
-      "primary_claim": "The narration shifts to Ibuki's private perspective after Suzune collapses; Ibuki reports her own covert role and notes that a healthy Suzune might have fought differently.",
+      "primary_claim": "Ibuki's first-person narration confirms her covert assignment, a rental digital camera that malfunctioned, her use of a transceiver, and her staged slap by Ryūen to make her exclusion from Class C believable. She later returns the leader card to unconscious Suzune.",
       "actor_ids": [
         "actor.mio-ibuki",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2284,23 +2779,29 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ibuki's own perspective confirms covert mission, failed camera, planted slap and later return of keycard.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.096",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 6,
       "pdf_pages": [
+        221,
         222
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Ibuki shows Suzune's personalized leader keycard to Ryūen, proving that the secret was exposed within their group.",
+      "primary_claim": "Ibuki hands Suzune's personalized leader card to Ryūen for inspection and then presents it to Class A student Katsuragi, establishing both men's direct knowledge by that meeting.",
       "actor_ids": [
         "actor.mio-ibuki",
         "actor.kakeru-ryuen"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2308,24 +2809,31 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Ryūen and Katsuragi directly inspect stolen leader card; their knowledge arises at meeting, not earlier.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.097",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 6,
       "pdf_pages": [
-        223
+        222,
+        223,
+        224
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Ibuki meets Katsuragi concerning a covert cross-class arrangement; the specific transaction remains incompletely disclosed.",
+      "primary_claim": "Katsuragi directly examines the leader card and accepts an alliance proposal with Ryūen after negotiation and factional pressure. Ibuki hears that an alliance was accepted, but the contract's exact private terms are not revealed to the reader.",
       "actor_ids": [
         "actor.mio-ibuki",
         "actor.katsuragi",
         "actor.kakeru-ryuen"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2333,24 +2841,31 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Katsuragi agrees to Class A–C alliance; full consideration and contract terms remain partly undisclosed.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.098",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 6,
       "pdf_pages": [
-        226
+        225,
+        226,
+        227
       ],
       "source_mode": "NARRATED",
-      "primary_claim": "Narration returns to Kiyotaka, who follows in the storm and finds Suzune unconscious near her lost keycard.",
+      "primary_claim": "Kiyotaka follows in the storm after Ibuki's confrontation with Suzune, finds Suzune unconscious, and works to secure her and the leader card; his precise discovery and return steps unfold over subsequent pages.",
       "actor_ids": [
         "actor.kiyotaka-ayanokoji",
         "actor.mio-ibuki",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2358,7 +2873,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka arrives after Ibuki leaves and attends unconscious Suzune; discovery chronology is storm-specific.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.099",
@@ -2373,8 +2893,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2382,7 +2902,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka's fall while carrying Suzune exhibits bounded protective response and risk, not invulnerability.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.100",
@@ -2397,8 +2922,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2406,7 +2931,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka privately describes peers as tools and winning as overriding aim; others cannot access his monologue.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.101",
@@ -2421,7 +2951,7 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PASS_AFTER_SOURCE_CORRECTION",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
       "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
@@ -2432,8 +2962,12 @@
         "direct PDF locator and limits"
       ],
       "finding_resolution": "CORRECTED_IN_SOURCE: arrival before 20:00 did not meet camp roll-call participation; staff says Ayanokōji is out, and p.238 states an expected 5-point penalty.",
-      "review_note": "PDF p237 states 19:58 arrival at ship medical staff, then teacher says Kiyotaka is out; p238 explicitly narrates a 5-point missed camp roll call. Arrival before the hour is not attendance at the declared base.",
-      "reviewed_at": "2026-10-23"
+      "review_note": "He reaches ship with Suzune near 19:58 yet is out for 20:00 camp roll call, and returns leader card.",
+      "reviewed_at": "2026-10-23",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.102",
@@ -2448,8 +2982,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2457,23 +2991,29 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "He expects thirty-point medical retirement and five-point personal absence; calculation in his own narration.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.103",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 7,
       "pdf_pages": [
-        240
+        240,
+        243
       ],
       "source_mode": "NARRATED",
-      "primary_claim": "Class D reaches the final exam day with a provisional reported point balance and lingering uncertainty about leader guesses and bonus awards.",
+      "primary_claim": "On the final exam day, Class D expects a positive remainder, and Hirata later states they have 125 test points left before the final leader-guess adjustments.",
       "actor_ids": [
         "actor.yosuke-hirata",
         "actor.kanji-ike"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2481,7 +3021,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Hirata reports 125 provisional points before leader-guess effects; not Class D final result.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.104",
@@ -2495,8 +3040,8 @@
       "actor_ids": [
         "actor.mashima"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2504,7 +3049,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Mashima says test concluded and permits relaxation while teachers count final class results.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.105",
@@ -2519,8 +3069,8 @@
         "actor.mashima",
         "actor.kakeru-ryuen"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2528,7 +3078,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Published exam scores: C 0, A 120, B 140, D 225; direct public announcement.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.106",
@@ -2544,8 +3099,8 @@
         "actor.yosuke-hirata",
         "actor.kakeru-ryuen"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2553,7 +3108,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Class D celebrates surprise rank; Ryūen's expectations fail in this result, not every strategy.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.107",
@@ -2568,8 +3128,8 @@
         "actor.sae-chiyabashira",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2577,23 +3137,29 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Teacher reports family-linked pressure over Kiyotaka; outside party's authority is unproved.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.108",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 7,
       "pdf_pages": [
+        248,
         249
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Chabashira again tries to frame Kiyotaka's choices using Icarus imagery, a rhetorical tactic with no observed power to compel him.",
+      "primary_claim": "Chabashira argues with Kiyotaka using the earlier allegation about his family, then invokes the Icarus comparison; the claim about his father remains her report, not institutional proof.",
       "actor_ids": [
         "actor.sae-chiyabashira",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2601,7 +3167,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Chabashira frames choices through Icarus; rhetoric alone cannot force student intent.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.109",
@@ -2616,8 +3187,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2625,7 +3196,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka retrospectively interprets Class A cave-card scene; partly his later hypothesis.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.110",
@@ -2640,8 +3216,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2649,7 +3225,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka confirms he replaced Suzune as leader after medical retirement; secret was not Class D's earlier shared knowledge.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.111",
@@ -2664,8 +3245,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2673,7 +3254,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "He invokes justified replacement exception; do not encode unlimited leader mutations.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.112",
@@ -2688,8 +3274,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.mio-ibuki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2697,24 +3283,30 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "He infers Ibuki's covert agenda using behavior and rival Kaneda, but not every observation was public.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.113",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 7,
       "pdf_pages": [
-        256
+        256,
+        257
       ],
       "source_mode": "INTERPRETATION",
-      "primary_claim": "Kiyotaka hypothesizes hidden cooperation between Classes A and C involving purchases, spying and leader information; he explicitly says part is intuition drawn from scores.",
+      "primary_claim": "Kiyotaka explicitly labels the inferred economic terms of the A/C cooperation as intuition drawn from final scores; the existence of a Katsuragi–Ryūen alliance is separately observed in Ibuki's earlier viewpoint.",
       "actor_ids": [
         "actor.kiyotaka-ayanokoji",
         "actor.kakeru-ryuen",
         "actor.katsuragi"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2722,7 +3314,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Economics of Class A–C arrangement are partly Kiyotaka's intuition; a basic alliance is separately depicted through Ibuki.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.114",
@@ -2737,8 +3334,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2746,7 +3343,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kiyotaka privately ascribes intervention to Chabashira's earlier pressure, not a certainty accessible to Suzune.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.115",
@@ -2761,8 +3363,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2770,24 +3372,30 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "He offers continuing help conditional on Suzune respecting his privacy; she accepts at scene.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.116",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 5,
       "pdf_pages": [
+        149,
         150
       ],
       "source_mode": "REPORTED_BY_CHARACTER",
-      "primary_claim": "Ichinose and Kanzaki discuss reports that Sakayanagi is absent from Class A's island contingent; they cannot establish exactly how that affects Katsuragi's internal standing.",
+      "primary_claim": "Ichinose and Kanzaki discuss Sakayanagi's absence from the Class A island contingent and cautiously infer her internal faction's influence; no proven exact leadership transfer follows from this talk.",
       "actor_ids": [
         "actor.arisu-sakayanagi",
         "actor.honami-ichinose",
         "actor.ryuji-kanzaki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2795,25 +3403,31 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Sakayanagi's absence is discussed by Ichinose/Kanzaki, without all class faction authority proved.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.117",
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 7,
       "pdf_pages": [
+        124,
         255
       ],
       "source_mode": "REPORTED_BY_CHARACTER",
-      "primary_claim": "In a retrospective exchange Kiyotaka alleges Kaneda entered Class B as a Class C spy in connection with Ryūen's information-gathering; the mechanism and what each Class B member knew remain unobserved.",
+      "primary_claim": "Kaneda is directly seen acting within Class B's camp on page 124, while Kiyotaka only later alleges he had been inserted by Ryūen as a spy on page 255. Do not backdate that secret to Class B's knowledge.",
       "actor_ids": [
         "actor.kaneda",
         "actor.kiyotaka-ayanokoji",
         "actor.kakeru-ryuen",
         "actor.honami-ichinose"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact claim meaning",
@@ -2821,7 +3435,12 @@
         "actor mention vs action",
         "chronology and later revelation",
         "direct PDF locator and limits"
-      ]
+      ],
+      "review_note": "Kaneda is observed helping in B camp, while Kiyotaka later calls him Ryūen's spy; late attribution not contemporaneous B knowledge.",
+      "source_review_status": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_SOURCE_CORRECTION",
+      "reviewed_on": "2026-10-23"
     }
   ],
   "behavioral_cases": [
@@ -2832,8 +3451,8 @@
       "pdf_pages": [
         15
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -2841,7 +3460,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Sudō declines physical retaliation against Class A bullying despite verbal anger; the motive for restraint is uncertain.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kanji-ike.locate-river-camp",
@@ -2850,8 +3473,8 @@
       "pdf_pages": [
         63
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -2859,7 +3482,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Ike's team locates river and site mechanics, but group exploration prevents attributing every discovery to him alone.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kanji-ike.build-campfire",
@@ -2868,8 +3495,8 @@
       "pdf_pages": [
         85
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -2877,7 +3504,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Ike corrects damp thick fuel by gathering tinder and lights the bonfire; direct task-specific outdoor skill.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kanji-ike.apologize-to-shinohara",
@@ -2886,8 +3517,8 @@
       "pdf_pages": [
         88
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -2895,7 +3526,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Ike directly apologizes to Shinohara and she responds; episode-level regret, not fixed temperament.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.ken-sudo.propose-safe-water-compromise",
@@ -2904,8 +3539,8 @@
       "pdf_pages": [
         68
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -2913,7 +3548,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Sudō offers boiling as a compromise in water conflict; neither purification nor compliance is independently tested.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.yosuke-hirata.prioritize-portable-toilet",
@@ -2922,8 +3561,8 @@
       "pdf_pages": [
         50
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -2931,7 +3570,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Hirata argues a purchased toilet avoids queue, privacy and sanitation problems; eventual collective consent is evidenced.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.yosuke-hirata.budget-island-allowance",
@@ -2940,8 +3583,8 @@
       "pdf_pages": [
         89
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -2949,7 +3592,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Hirata computes a contingent 120-point target; no guarantee it equals 225 final score.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.yosuke-hirata.welcome-rival-injured-student",
@@ -2958,8 +3605,8 @@
       "pdf_pages": [
         94
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -2967,7 +3614,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Hirata grants Ibuki shelter conditionally; her covert identity makes his belief reliability distinct from compassionate action.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.yosuke-hirata.protect-underwear-suspects",
@@ -2976,8 +3627,8 @@
       "pdf_pages": [
         166
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -2985,7 +3636,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Hirata privately suppresses public discovery of Kiyotaka's underwear possession, not a formal acquittal.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.yosuke-hirata.freeze-during-crisis",
@@ -2994,8 +3649,8 @@
       "pdf_pages": [
         209
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3003,7 +3658,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Hirata becomes briefly unresponsive in crisis, with an unelaborated allusion to past events; limit to this observed breakdown.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kikyo-kushida.recruit-exploration-volunteers",
@@ -3012,8 +3671,8 @@
       "pdf_pages": [
         52
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3021,7 +3680,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Kushida's willingness to volunteer triggers volunteers but others' motives differ, so avoid guaranteeing universal persuasion.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kikyo-kushida.propose-hidden-leader-horikita",
@@ -3030,8 +3693,8 @@
       "pdf_pages": [
         66
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3039,7 +3702,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Kushida nominates Suzune as secret leader; Hirata actually submits name and delivers card, keeping action ownership separate.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kikyo-kushida.share-rations-with-ibuki",
@@ -3049,8 +3716,8 @@
         95,
         96
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3058,7 +3725,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Kushida coordinates four friends sharing scarce rations to assist Ibuki; source locates handoff on PDF p96.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.suzune-horikita.accept-island-leadership",
@@ -3067,8 +3738,8 @@
       "pdf_pages": [
         66
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3076,7 +3747,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Suzune accepts designated leader role with hidden keycard, not prior awareness of replacement exception.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.suzune-horikita.reassess-nonacademic-skills",
@@ -3085,8 +3760,8 @@
       "pdf_pages": [
         48
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3094,7 +3769,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Suzune admits outdoors skills can compensate for academics; expressed reevaluation is not lasting character transformation.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.suzune-horikita.feverish-defense-against-ibuki",
@@ -3104,8 +3783,8 @@
         217,
         218
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3113,7 +3792,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Fever seriously compromises Suzune's duel with Ibuki; result does not rank healthy Suzune below Ibuki.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.suzune-horikita.seek-trusted-help-for-keycard",
@@ -3122,8 +3805,8 @@
       "pdf_pages": [
         203
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3131,7 +3814,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Suzune privately discloses lost keycard to Kiyotaka and asks help; her trust is actor-scoped.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.airi-sakura.join-branch-collection",
@@ -3140,8 +3827,8 @@
       "pdf_pages": [
         75
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3149,7 +3836,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Sakura volunteers to accompany group for collecting wood despite fatigue and difficult social context.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.airi-sakura.identify-corn-food-source",
@@ -3158,8 +3849,8 @@
       "pdf_pages": [
         139
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3167,7 +3858,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Sakura notices cultivated corn first and Kiyotaka independently infers its artificial planting; roles remain distinct.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.airi-sakura.defend-kiyotaka-verbally",
@@ -3176,8 +3871,8 @@
       "pdf_pages": [
         175
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3185,7 +3880,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Sakura defends Kiyotaka amid theft suspicions but retreats when Karuizawa attacks her socially.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.katsuragi.infer-cave-route-from-cruise",
@@ -3195,8 +3894,8 @@
         59,
         60
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3204,7 +3903,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Katsuragi, not Kiyotaka, directly describes ship-path deduction to Yahiko while Kiyotaka overhears; cave occupancy is shared.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_AFTER_ACTOR_OWNER_CORRECTION",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kiyotaka-ayanokoji.assist-injured-rival",
@@ -3214,8 +3917,8 @@
         78,
         80
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3223,7 +3926,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Kiyotaka pauses after spotting an injured outsider and offers support; Ibuki's covert motive is not known at that instant.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kiyotaka-ayanokoji.improvise-corn-carrying",
@@ -3232,8 +3939,8 @@
       "pdf_pages": [
         140
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3241,7 +3948,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Kiyotaka uses his shirt as temporary harvest carrier; group later recovers corn, no general engineering inference.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kiyotaka-ayanokoji.withhold-underwear-evidence",
@@ -3251,8 +3962,8 @@
         164,
         166
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3260,7 +3971,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Kiyotaka accepts Ike's handed underwear and conceals it before Hirata searches; does not itself solve the theft.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kiyotaka-ayanokoji.notice-spy-hypothesis",
@@ -3269,8 +3984,8 @@
       "pdf_pages": [
         183
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3278,7 +3993,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Kiyotaka suspects Ibuki based on gaze and misplaced underwear; she has not confessed to him yet.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kiyotaka-ayanokoji.carry-sick-horikita",
@@ -3289,8 +4008,8 @@
         232,
         237
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3298,7 +4017,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Kiyotaka locates, carries and presents unconscious Suzune under severe rain, including a fall, with bounded protection.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kiyotaka-ayanokoji.exploit-justified-leader-replacement",
@@ -3308,8 +4031,8 @@
         253,
         254
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3317,7 +4040,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Kiyotaka exploits a medically justified replacement after actual retirement; opponents' prior identity guesses no longer match.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kiyotaka-ayanokoji.condition-support-on-privacy",
@@ -3326,8 +4053,8 @@
       "pdf_pages": [
         258
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3335,7 +4062,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Kiyotaka offers aid conditional on Suzune not probing his past; handshake is a present agreement only.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kakeru-ryuen.organize-luxury-spending",
@@ -3344,8 +4075,8 @@
       "pdf_pages": [
         108
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3353,7 +4084,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Ryūen directs conspicuous luxury resources in C camp; hidden political bargain is not proven by spending alone.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.kakeru-ryuen.intimidate-ishizaki",
@@ -3362,8 +4097,8 @@
       "pdf_pages": [
         112
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3371,7 +4106,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Ryūen dismissively throws back Ishizaki's water and intimidates him; obeying once is not stable loyalty.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.mio-ibuki.undercover-leader-card-delivery",
@@ -3383,8 +4122,8 @@
         223,
         224
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3392,7 +4131,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Ibuki actually delivers the card to Ryūen and Katsuragi, participates in accepted alliance and later returns it; contract price hidden.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.mio-ibuki.fight-feverish-suzune",
@@ -3402,8 +4145,8 @@
         217,
         218
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3411,7 +4154,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Ibuki defeats a febrile Suzune, but Ibuki herself notes healthy result could differ; avoid absolute combat ranking.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.honami-ichinose.evaluate-well-before-shared-use",
@@ -3421,8 +4168,8 @@
         120,
         121
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3430,7 +4177,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Ichinose explains collective Class B well-testing procedure; she is not proved the person who personally performed tests.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.katsuragi.defend-class-a-exclusive-cave",
@@ -3441,8 +4192,8 @@
         128,
         129
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3450,7 +4201,11 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Katsuragi argues unspoken mutual nonintrusion after Horikita tests cave boundaries; it is not a formal school-wide law.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     },
     {
       "case_id": "y1v3.case.sae-chiyabashira.pressure-kiyotaka-with-family-claims",
@@ -3460,8 +4215,8 @@
         155,
         156
       ],
-      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "primary actor directly demonstrated act",
@@ -3469,14 +4224,21 @@
         "observed outcome and failures",
         "limits including health or deception",
         "support evidence and post-divergence memory restrictions"
-      ]
+      ],
+      "review_note": "Chabashira uses unverified family expulsion allegation as leverage; observed pressure differs from actual unilateral removal power.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT",
+      "reviewed_on": "2026-10-23"
     }
   ],
   "release_gate": {
-    "assistant_individual_semantic_review": "IN_PROGRESS",
+    "assistant_individual_semantic_review": "COMPLETE",
     "operator_approval": "PENDING",
     "individual_verified_count": 0,
-    "engine_memory_admission": false
+    "engine_memory_admission": false,
+    "external_independent_reviewer": "PENDING",
+    "assistant_reviewed_evidence": 117,
+    "assistant_reviewed_cases": 35
   },
   "cautions": [
     "Source accepted for reading but items are not yet semantically signed off",
@@ -3485,8 +4247,13 @@
     "The island exam rules are documented reference, not executable scoring engine"
   ],
   "independent_review": {
-    "status": "NOT_STARTED",
+    "status": "ADVERSARIAL_SECOND_PASS_COMPLETED_EXTERNAL_REVIEWER_PENDING",
     "reviewer": "UNASSIGNED",
-    "notes": "Requires source-by-source separate pass; no independent reviewer has approved this corpus."
-  }
+    "source": "Same assistant undertook adversarial source rereading; independent automated regression constraints are separate from the extraction pass.",
+    "human_or_separate_model_approval": false,
+    "findings_document": "data/canon/consolidated/audits/adversarial-review-y1-v03.json",
+    "independent_workflow_required_before_merge": true
+  },
+  "semantic_boundary": "Assistant source comparison of 152 claims complete; per-item verification flags remain false and no runtime or agent memory receives future events. Adversarial automated validation is not an independent human review.",
+  "review_complete_at": "2026-10-23"
 }

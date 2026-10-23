@@ -7,7 +7,7 @@
   "operator_accepted": true,
   "official_translation_required": false,
   "claims_all_verified": false,
-  "record_audit": "INITIAL_EXTRACTION_ASSISTANT_SEMANTIC_REVIEW_PENDING",
+  "record_audit": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE_EXTERNAL_REVIEW_AND_OPERATOR_RELEASE_PENDING",
   "original_pdf_committed": false,
   "source_kind": "LICENSED_EDITION_OPERATOR_SUPPLIED",
   "warning": "Distributor watermark on provided PDF is not source authority; no copyrighted original committed."

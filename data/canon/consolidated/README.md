@@ -36,3 +36,7 @@ A second content pass added swimming performances, seven short-test failure cand
 ### Semantic review completion boundary
 
 The source-review register records 268 source-linked assistant-reviewed assertions and 75 actor-owned behavioral cases (after one Kijima context-only case was retired). This means the **source-to-paraphrase meaning was reviewed**, not that all first-person claims are necessarily world truth, nor that scene outcomes may be forced in counterfactual simulation. A human release/verification stage remains deliberately separate. Review fixes include separating Arisu's genetic argument from Sakayanagi father's decisions, restricting Naoe's waiting behavior to the observed episode, and extending precise page citations for bus introductions, exam grading and appeals.
+
+## Year 1 Volume 2 (draft ingestion)
+
+`evidence/y1-v02.json` preserves 91 scene-relevant paraphrases from seven chapters, together with page locators and speaker-sensitive source modes. The character and institution packs remain global. Twenty-six actor-owned demonstrations are stored under `behavioral_cases/<primary-actor>/`; six additional minor roles have minimal packs rather than invented biographies. Direct indexes and per-record semantic review are separate gates, and the operator release gate remains pending. The incident involving Sudō is **not** a general disciplinary algorithm. Ryūen's alleged authorship remains an attribution by Ichinose, not independent proof. The source PDF is not stored in the repository.

@@ -41,15 +41,16 @@
   ],
   "chapters_assessed": 7,
   "record_count": 91,
-  "case_status": "NOT_YET_RECONCILED",
-  "semantic_review": "REQUIRES_INDIVIDUAL_ASSISTANT_REVIEW",
+  "case_status": "EXTRACTED_ASSISTANT_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "semantic_review": "INDIVIDUAL_REVIEW_PENDING",
   "operator_release": "PENDING",
   "method": "Scene-relevant atomic paraphrases; character reports, narrator impressions and directly observed outcomes kept separate; provenance uses physical PDF pages.",
   "open_issues": [
-    "Confirm locations and epistemic strength of all records through individual semantic review",
-    "Complete per-actor case extraction and cross-volume merges",
-    "Run deterministic consolidated index rebuild and cross-file validation",
-    "Preserve Ryūen's alleged authorship as attributed belief, not proved causation",
-    "Do not infer exact disciplinary fee, penalty formulas, tropical-island exam mechanics, or Ichinose private balance."
-  ]
+    "Complete evidence and behavioral case individual semantic pass, with source-window comparisons",
+    "Institutional statements must not become universal executable rules",
+    "Rebuild all direct indexes then run repository-level validation",
+    "Human verification and release required"
+  ],
+  "behavioral_cases": 26,
+  "case_count": 26
 }

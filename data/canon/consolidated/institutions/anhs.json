@@ -4,7 +4,8 @@
   "display_name": "Advanced Nurturing High School",
   "source_coverage": [
     "ln.y1.v00.legacyemtls.v1.0.1",
-    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+    "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "ln.y1.v02.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "source_documents": [],
@@ -46,7 +47,33 @@
     "y1v1.ev.106",
     "y1v1.ev.108",
     "y1v1.ev.109",
-    "y1v1.ev.113"
+    "y1v1.ev.113",
+    "y1v2.ev.004",
+    "y1v2.ev.005",
+    "y1v2.ev.006",
+    "y1v2.ev.007",
+    "y1v2.ev.008",
+    "y1v2.ev.009",
+    "y1v2.ev.011",
+    "y1v2.ev.015",
+    "y1v2.ev.018",
+    "y1v2.ev.025",
+    "y1v2.ev.026",
+    "y1v2.ev.027",
+    "y1v2.ev.028",
+    "y1v2.ev.033",
+    "y1v2.ev.037",
+    "y1v2.ev.038",
+    "y1v2.ev.039",
+    "y1v2.ev.051",
+    "y1v2.ev.059",
+    "y1v2.ev.060",
+    "y1v2.ev.065",
+    "y1v2.ev.076",
+    "y1v2.ev.082",
+    "y1v2.ev.083",
+    "y1v2.ev.084",
+    "y1v2.ev.088"
   ],
   "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
   "operational_migration": "Only user/operator-authorized claims may be promoted after review",
@@ -79,7 +106,32 @@
         "y1v1.ev.089",
         "y1v1.ev.101",
         "y1v1.ev.103",
-        "y1v1.ev.106"
+        "y1v1.ev.106",
+        "y1v2.ev.004",
+        "y1v2.ev.006",
+        "y1v2.ev.007",
+        "y1v2.ev.008",
+        "y1v2.ev.009",
+        "y1v2.ev.011",
+        "y1v2.ev.015",
+        "y1v2.ev.018",
+        "y1v2.ev.025",
+        "y1v2.ev.026",
+        "y1v2.ev.027",
+        "y1v2.ev.028",
+        "y1v2.ev.033",
+        "y1v2.ev.037",
+        "y1v2.ev.038",
+        "y1v2.ev.039",
+        "y1v2.ev.051",
+        "y1v2.ev.059",
+        "y1v2.ev.060",
+        "y1v2.ev.065",
+        "y1v2.ev.076",
+        "y1v2.ev.082",
+        "y1v2.ev.083",
+        "y1v2.ev.084",
+        "y1v2.ev.088"
       ],
       "description": "Admission, class allocation, campus restrictions, point disclosure"
     },
@@ -103,7 +155,20 @@
         "y1v1.ev.095",
         "y1v1.ev.108",
         "y1v1.ev.109",
-        "y1v1.ev.113"
+        "y1v1.ev.113",
+        "y1v2.ev.004",
+        "y1v2.ev.005",
+        "y1v2.ev.006",
+        "y1v2.ev.007",
+        "y1v2.ev.008",
+        "y1v2.ev.011",
+        "y1v2.ev.025",
+        "y1v2.ev.026",
+        "y1v2.ev.027",
+        "y1v2.ev.028",
+        "y1v2.ev.051",
+        "y1v2.ev.076",
+        "y1v2.ev.083"
       ],
       "description": "Private transferable points; conditional class-point allocation"
     },
@@ -116,7 +181,8 @@
         "y1v1.ev.101",
         "y1v1.ev.103",
         "y1v1.ev.104",
-        "y1v1.ev.106"
+        "y1v1.ev.106",
+        "y1v2.ev.005"
       ],
       "description": "Mock diagnostic, midterm and exceptional score-point purchase"
     },
@@ -236,7 +302,39 @@
       "y1v1.ev.108",
       "y1v1.ev.109",
       "y1v1.ev.110"
-    ]
+    ],
+    "individual_class_transfer_y1_v02": {
+      "price_private_points": 20000000,
+      "source_authority": "CHABASHIRA_REPORTED_RULE",
+      "observed_successful_transfer": false,
+      "conditions_not_disclosed": true,
+      "evidence_refs": [
+        "y1v2.ev.025",
+        "y1v2.ev.026",
+        "y1v2.ev.027"
+      ],
+      "epistemic_boundary": "A reported price and historical anecdote do not define all transaction and enrollment requirements."
+    },
+    "club_reward_y1_v02": {
+      "source_authority": "CHABASHIRA_REPORTED_RULE",
+      "known_rule": "Club participation and achievements may result in private-point rewards.",
+      "unrevealed_reward_algorithm": true,
+      "evidence_refs": [
+        "y1v2.ev.028"
+      ]
+    },
+    "july_y1_class_point_observations": {
+      "class_A": 1004,
+      "class_D": 87,
+      "other_classes_gained_points": true,
+      "school_distribution_delayed": true,
+      "observed_approximate_july": "Y1_M04",
+      "evidence_refs": [
+        "y1v2.ev.006",
+        "y1v2.ev.007"
+      ],
+      "caution": "Do not infer the cause of the first-year payout delay or a universal class-point award algorithm."
+    }
   },
   "physical_education": {
     "assessments": [
@@ -265,7 +363,27 @@
       "y1v1.ev.093",
       "y1v1.ev.132",
       "y1v1.ev.133"
-    ]
+    ],
+    "y1_v02": "July economic disclosures, the fight, Airi's stage identity and suspicions about Ryūen have different time/actor disclosure boundaries. Do not seed April memory."
   },
-  "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance."
+  "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance.",
+  "disciplinary_case_y1_v02": {
+    "case_id": "discipline.y1v2.sudo-classc",
+    "authority": "Student council and homeroom teachers in observed dispute",
+    "process": "Complaint, inquiry, witnesses, contested evidence, complaint withdrawal and disposition",
+    "result": "COMPLAINT_WITHDRAWN_SUDO_NOT_SUSPENDED",
+    "charge_type": "MISCELLANEOUS_HEARING_COST_IN_PRIVATE_POINTS",
+    "charge_amount": "UNKNOWN",
+    "school_wide_general_procedure_unconfirmed": true,
+    "evidence_refs": [
+      "y1v2.ev.014",
+      "y1v2.ev.015",
+      "y1v2.ev.018",
+      "y1v2.ev.059",
+      "y1v2.ev.065",
+      "y1v2.ev.082",
+      "y1v2.ev.083",
+      "y1v2.ev.084"
+    ]
+  }
 }

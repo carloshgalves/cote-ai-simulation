@@ -802,3 +802,107 @@ func TestCSFRV18R19IntentionRequiresAuthenticatedHistoricalRoot(t *testing.T) {
 		})
 	}
 }
+
+func TestCSFRV18R19EarlierRevokedRequestDoesNotRenewAuthorization(t *testing.T) {
+	ctx := context.Background()
+	parent, ledger, v1, run, origin := csfrv18GenesisRoundSource(t)
+	state, err := parent.LoadClock(ctx, [32]byte(run))
+	if err != nil {
+		t.Fatal(err)
+	}
+	round, err := ledger.DeclareRound(ctx, "schedule", [2]string{"school", "a"}, []string{"act"},
+		domain.EligibilityCoordinate{NotBeforeInstant: state.Instant + 5}, origin, 1, 0, 0, []any{uint64(0)})
+	if err != nil {
+		t.Fatal(err)
+	}
+	cid, _, err := identity.New(v1).Sum("cote.csf.id.cycle", "cote.csf.schema.cycle-id-preimage", 1,
+		[]any{run[:], []any{int64(state.Instant), uint64(0)}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	old := r19Dispatch(t, v1, run, domain.ID(cid), round, "act", 0, 0, state.Instant)
+	if err := ledger.RegisterDispatch(ctx, old, inputledger.CycleBinding{ID: old.CycleID, Instant: old.EffectiveAt}); err != nil {
+		t.Fatal(err)
+	}
+	if err := ledger.RevokeDispatch(ctx, round.ID, "act", 2, []any{uint64(0)}); err != nil {
+		t.Fatal(err)
+	}
+	base, err := parent.CreateSnapshotV1(ctx, [32]byte(run), v1, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := policiesByRole(v1)
+	if err != nil {
+		t.Fatal(err)
+	}
+	policies := admission.Policies{AdmissionOrder: refs["admission-order"], CausalIdentity: refs["causal-identity"], Fence: refs["admission-fence"], Rules: [][]any{}}
+	c := New(parent, v1, policies)
+	if _, err := c.Advance(ctx, ledger, run); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := parent.DrainPendingPerceptionV1(ctx, [32]byte(run), base.ID, v1); err != nil {
+		t.Fatal(err)
+	}
+	state, err = parent.LoadClock(ctx, [32]byte(run))
+	if err != nil {
+		t.Fatal(err)
+	}
+	cid, _, err = identity.New(v1).Sum("cote.csf.id.cycle", "cote.csf.schema.cycle-id-preimage", 1,
+		[]any{run[:], []any{int64(state.Instant), uint64(0)}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	current := r19Dispatch(t, v1, run, domain.ID(cid), round, "act", 1, state.Revision, state.Instant)
+	if err := ledger.RegisterDispatch(ctx, current, inputledger.CycleBinding{ID: current.CycleID, BaseRevision: state.Revision, Instant: state.Instant}); err != nil {
+		t.Fatal(err)
+	}
+	snap, err := parent.CreateSnapshotV1(ctx, [32]byte(run), v1, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	v2, err := policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+	if err != nil {
+		t.Fatal(err)
+	}
+	path := t.TempDir() + "/prior-revoked.db"
+	child, err := sqlite.Open(ctx, path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	childID := [32]byte(run)
+	childID[0] ^= 0x63
+	if _, err := parent.ForkIdleSnapshotV1ToV2(ctx, [32]byte(run), snap.ID, childID, child, v1, v2); err != nil {
+		t.Fatal("older revoked request:", err)
+	}
+	if err := child.Close(); err != nil {
+		t.Fatal(err)
+	}
+	child, err = sqlite.Open(ctx, path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer child.Close()
+	restored, err := inputledger.Open(ctx, domain.ID(childID), v2, child)
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, _, _, rounds, _, _ := restored.Snapshot()
+	cid, _, err = identity.New(v2).Sum("cote.csf.id.cycle", "cote.csf.schema.cycle-id-preimage", 1,
+		[]any{childID[:], []any{int64(state.Instant), uint64(0)}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	for ordinal := uint32(0); ordinal <= 1; ordinal++ {
+		d := r19Dispatch(t, v2, domain.ID(childID), domain.ID(cid), rounds[0], "act", ordinal, 0, state.Instant)
+		err := restored.Respond(ctx, r19NoProposal(t, v2, d, 0))
+		if ordinal == 0 && err == nil {
+			t.Fatalf("old authorization revived: %v", err)
+		}
+		if ordinal == 1 && err != nil {
+			t.Fatal("current authorization lost:", err)
+		}
+	}
+	if _, err := child.ReplayClock(ctx, childID, v2); err != nil {
+		t.Fatal(err)
+	}
+}

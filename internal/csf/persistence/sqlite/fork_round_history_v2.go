@@ -31,13 +31,17 @@ type forkSlotHistory struct {
 // against the exact source cut can be carried; stale requests require explicit
 // source settlement. No model is called and no response is fabricated.
 func migrateRoundHistoryV2(parent, child *genesis.Genesis, snapshot []any,
-	records, events []ports.CanonicalRecord, origin, target *policy.Bundle) ([]forkGenesisRound, []forkSlotRecord, error) {
+	records, events, journals []ports.CanonicalRecord, origin, target *policy.Bundle) ([]forkGenesisRound, []forkSlotRecord, error) {
 	pending := snapshot[11].([]any)
 	env, err := codec.StrictDecodeEnvelope(pending[2].([]byte))
 	if err != nil {
 		return nil, nil, err
 	}
 	lists := env.Value.([]any)
+	clocks, err := roundHistoryClocksV2(parent, snapshot, journals, origin)
+	if err != nil {
+		return nil, nil, err
+	}
 	rounds, err := migratePendingRoundRecords(parent, child, lists[4].([]any), records, events, origin, target, true)
 	if err != nil {
 		return nil, nil, err
@@ -123,20 +127,15 @@ func migrateRoundHistoryV2(parent, child *genesis.Genesis, snapshot []any,
 		if !ok || ordinal > uint64(^uint32(0)) {
 			return nil, nil, errors.New("source dispatch ordinal invalid")
 		}
-		last, ok := asSigned64(snapshot[5])
-		if !ok || last < -1 || last == int64(^uint64(0)>>1) {
-			return nil, nil, errors.New("source round clock ordinal invalid")
+		revision, ok := f[8].(uint64)
+		historical, exists := clocks[revision]
+		if !ok || !exists || historical.LastOrdinal == int64(^uint64(0)>>1) {
+			return nil, nil, errors.New("source dispatch revision not covered by frozen journal")
 		}
 		cycle, _, err := identity.New(origin).Sum("cote.csf.id.cycle", "cote.csf.schema.cycle-id-preimage", 1,
-			[]any{parent.RunID[:], []any{snapshot[2], uint64(last + 1)}})
-		if err != nil || !equalBytes(f[2], cycle[:]) || !sameCanonical(f[8], snapshot[3]) || !sameCanonical(f[9], snapshot[2]) {
-			return nil, nil, errors.New("round migration requires dispatch bound to exact source cut")
-		}
-		eligible := f[7].([]any)
-		when, valid := asSigned64(eligible[0])
-		atOrdinal, validOrdinal := eligible[1].(uint64)
-		if !valid || !validOrdinal || when != int64(child.InitialInstant) || atOrdinal != offset {
-			return nil, nil, errors.New("dispatched round is not eligible at source cut")
+			[]any{parent.RunID[:], []any{historical.Instant, uint64(historical.LastOrdinal + 1)}})
+		if err != nil || !equalBytes(f[2], cycle[:]) || !sameCanonical(f[9], historical.Instant) {
+			return nil, nil, errors.New("source dispatch differs from its authenticated historical clock")
 		}
 		histories[string(id[:])] = &forkSlotHistory{oldID: [32]byte(id), fields: f}
 	}
@@ -190,6 +189,16 @@ func migrateRoundHistoryV2(parent, child *genesis.Genesis, snapshot []any,
 		if h.revoked != nil && h.response != nil {
 			return nil, nil, errors.New("source dispatch both revoked and answered")
 		}
+		if h.revoked == nil {
+			f := h.fields
+			eligible := f[7].([]any)
+			when, valid := asSigned64(eligible[0])
+			atOrdinal, validOrdinal := eligible[1].(uint64)
+			if !sameCanonical(f[8], snapshot[3]) || !sameCanonical(f[9], snapshot[2]) ||
+				!valid || !validOrdinal || when != int64(child.InitialInstant) || atOrdinal != offset {
+				return nil, nil, errors.New("unrevoked dispatch requires exact eligible source cut")
+			}
+		}
 		if h.revoked == nil && h.response == nil {
 			ref, ok := live[string(h.oldID[:])]
 			d, _, err := identity.New(origin).Sum("cote.csf.digest.slot-dispatch", "cote.csf.schema.slot-dispatch", 1, h.fields)
@@ -236,6 +245,7 @@ func migrateRoundHistoryV2(parent, child *genesis.Genesis, snapshot []any,
 		fields[2] = childCycle[:]
 		fields[3] = round[0]
 		fields[8] = uint64(0)
+		fields[9] = int64(child.InitialInstant)
 		fields[7] = round[5]
 		id, _, err := identity.New(target).Sum("cote.csf.id.dispatch", "cote.csf.schema.dispatch-id-preimage", 1,
 			[]any{fields[1], fields[2], fields[3], fields[4], fields[5]})
@@ -269,6 +279,44 @@ func migrateRoundHistoryV2(parent, child *genesis.Genesis, snapshot []any,
 		}
 	}
 	return rounds, out, nil
+}
+
+// Revoked receipts may predate the source checkpoint. Reconstruct their clock
+// from the frozen journals, rather than accepting caller-supplied cycle/revision
+// pairs. The archive prefix and the origin snapshot authenticate these journals.
+func roundHistoryClocksV2(parent *genesis.Genesis, snapshot []any, journals []ports.CanonicalRecord, bundle *policy.Bundle) (map[uint64]snapshotClock, error) {
+	commits := make([][]any, 0)
+	for _, record := range journals {
+		value, err := codec.StrictDecodePayload(record.Canonical)
+		if err != nil {
+			return nil, err
+		}
+		f, ok := value.([]any)
+		if !ok || len(f) != 24 {
+			continue
+		}
+		id, _, err := identity.New(bundle).Sum("cote.csf.id.cycle-commit", "cote.csf.schema.cycle-commit-id-preimage", 1, f[:3])
+		if err != nil || record.Identity != [32]byte(id) || !equalBytes(f[0], parent.RunID[:]) {
+			return nil, errors.New("source historical journal identity invalid")
+		}
+		if _, ok := f[8].(uint64); !ok {
+			return nil, errors.New("source historical revision malformed")
+		}
+		commits = append(commits, f)
+	}
+	sort.Slice(commits, func(i, j int) bool { return commits[i][8].(uint64) < commits[j][8].(uint64) })
+	current := snapshotClock{Instant: int64(parent.InitialInstant), LastOrdinal: -1}
+	clocks := map[uint64]snapshotClock{0: current}
+	for _, f := range commits {
+		if err := applyHistoricalClockCommit(&current, f); err != nil {
+			return nil, err
+		}
+		clocks[current.Revision] = current
+	}
+	if !sameCanonical(current.Revision, snapshot[3]) || !sameCanonical(current.Instant, snapshot[2]) || !sameCanonical(current.LastOrdinal, snapshot[5]) {
+		return nil, errors.New("source historical clock does not reach frozen snapshot")
+	}
+	return clocks, nil
 }
 
 // Intention references describe actor provenance, never a world assertion. A
@@ -406,7 +454,27 @@ func verifyRoundHistoryV2(ctx context.Context, tx *sql.Tx, parent, child *genesi
 	if err := eventRows.Close(); err != nil {
 		return err
 	}
-	rounds, slots, err := migrateRoundHistoryV2(parent, child, snapshot, records, events, origin, target)
+	journalRows, err := tx.QueryContext(ctx, "SELECT record_id,canonical FROM fork_history_records WHERE child_run=? AND ledger_name='decision_ledger' ORDER BY ordinal", child.RunID[:])
+	if err != nil {
+		return err
+	}
+	var journals []ports.CanonicalRecord
+	for journalRows.Next() {
+		var id, raw []byte
+		if err := journalRows.Scan(&id, &raw); err != nil {
+			journalRows.Close()
+			return err
+		}
+		journals = append(journals, ports.CanonicalRecord{Identity: bytesToID(id), Canonical: raw})
+	}
+	if err := journalRows.Err(); err != nil {
+		journalRows.Close()
+		return err
+	}
+	if err := journalRows.Close(); err != nil {
+		return err
+	}
+	rounds, slots, err := migrateRoundHistoryV2(parent, child, snapshot, records, events, journals, origin, target)
 	if err != nil {
 		return err
 	}
@@ -446,7 +514,7 @@ func (s *Store) snapshotInputRecords(ctx context.Context, id [32]byte) ([]ports.
 	return s.snapshotRoundLedgerRecords(ctx, id, "input_ledger")
 }
 func (s *Store) snapshotRoundLedgerRecords(ctx context.Context, id [32]byte, ledger string) ([]ports.CanonicalRecord, error) {
-	if ledger != "input_ledger" && ledger != "event_store" {
+	if ledger != "input_ledger" && ledger != "event_store" && ledger != "decision_ledger" {
 		return nil, errors.New("unsupported round migration ledger")
 	}
 	rows, err := s.db.QueryContext(ctx, "SELECT m.record_id,i.canonical FROM snapshot_prefix_members m JOIN "+ledger+" i ON i.id=m.record_id WHERE m.snapshot_id=? AND m.ledger_name=? ORDER BY m.ordinal", id[:], ledger)

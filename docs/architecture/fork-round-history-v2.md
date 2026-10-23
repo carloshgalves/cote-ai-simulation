@@ -6,8 +6,12 @@ The source is the exact InputLedger prefix sealed by the parent snapshot, includ
 revoked requests which do not appear in the active-dispatch partition. Later
 parent responses are excluded. Parent ledgers remain historical archive.
 
-The source dispatch must belong to the current source cut: run, cycle at the next
-clock ordinal, effective instant and base revision are authenticated. Child run,
+An unrevoked source dispatch must belong to the current source cut: run, cycle at
+the next clock ordinal, effective instant and base revision are authenticated. A
+durably revoked request may come from an earlier revision. Its cycle/instant are
+reconstructed from the exact frozen CycleCommit journal; it is imported only as
+an atomically revoked receipt. All child receipts bind to the child Genesis cut,
+and their original coordinates remain in the immutable parental archive. Child run,
 Genesis, round, cycle, dispatch and response identities are derived with the
 installed V2 policy. The child starts at revision/ordinal zero. Actors, slots,
 request digest, response kind, action content, revocation reason/policy and dispatch
@@ -17,8 +21,8 @@ An originating intention reference to the authenticated parent Genesis remains
 an exact historical, opaque reference. Bootstrap and lineage replay resolve its
 kind, ID and digest against the archived Genesis; no child event, evidence or
 knowledge is inferred from it. Other intention roots require their own historical
-resolver and fail closed while unavailable. Stale requests from earlier source cuts
-also remain unsupported.
+resolver and fail closed while unavailable. An earlier unrevoked request cannot
+be retimed or granted a new authorization by this migrator.
 
 A slot's first dispatch has ordinal zero; each subsequent dispatch requires the
 preceding durable revocation. Revoked requests cannot also have a response. A

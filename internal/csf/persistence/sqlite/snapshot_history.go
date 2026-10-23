@@ -102,43 +102,99 @@ func verifySnapshotSeal(ctx context.Context,tx *sql.Tx,id,run,digest [32]byte,re
 // snapshotHistoricalClock derives the clock at an older revision from the
 // already replay-validated terminal journals. No current clock state or
 // worker/controller state is substituted for the historical coordinate.
-func snapshotHistoricalClock(ctx context.Context,tx *sql.Tx,run [32]byte,initialInstant int64,target uint64)(snapshotClock,error){
- result:=snapshotClock{Instant:initialInstant,LastOrdinal:-1}
- if target==0{return result,nil}
- rows,err:=tx.QueryContext(ctx, "SELECT d.canonical FROM committed_cycles c JOIN decision_ledger d ON d.id=c.commit_id WHERE c.run_id=? ORDER BY c.rowid",run[:])
- if err!=nil{return result,err}
- defer rows.Close()
- for rows.Next(){
-  var raw []byte
-  if err:=rows.Scan(&raw);err!=nil{return result,err}
-  decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{return result,err}
-  v,ok:=decoded.([]any);if !ok||len(v)!=24{return result,errors.New("historical CycleCommit schema mismatch")}
-  after,ok:=v[8].(uint64);if !ok{return result,errors.New("historical revision malformed")}
-  if after>target{break}
-  if after!=result.Revision+1{return result,errors.New("historical terminal revision gap")}
-  plan,ok:=v[5].([]any);if !ok{return result,errors.New("historical plan malformed")}
-  switch{
-  case len(plan)==4&&plan[0]==uint64(1):
-   instant,ok:=asSigned64(plan[2]);if !ok{return result,errors.New("historical CLOCK_ADVANCE target invalid")}
-   result.Instant=instant;result.LastOrdinal=-1
-  case len(plan)==1&&plan[0]==uint64(0):
-   instant,ok:=asSigned64(v[3]);if !ok||instant!=result.Instant{return result,errors.New("historical WORK instant mismatch")}
-   ordinal,ok:=v[4].(uint64);if !ok||ordinal>uint64(^uint64(0)>>1){return result,errors.New("historical WORK ordinal invalid")}
-   result.LastOrdinal=int64(ordinal)
-  default:return result,errors.New("historical cycle kind unsupported")
-  }
-  seq,ok:=v[22].(uint64);if !ok{return result,errors.New("historical next sequence missing")}
-  result.NextSequence=seq
-  result.Revision=after
- }
- if err:=rows.Err();err!=nil{return result,err}
- if result.Revision!=target{return result,errors.New("historical checkpoint not covered by complete CycleCommit journal")}
- return result,nil
+func snapshotHistoricalClock(ctx context.Context, tx *sql.Tx, run [32]byte, initialInstant int64, target uint64) (snapshotClock, error) {
+	result := snapshotClock{Instant: initialInstant, LastOrdinal: -1}
+	if target == 0 {
+		return result, nil
+	}
+	rows, err := tx.QueryContext(ctx, "SELECT d.canonical FROM committed_cycles c JOIN decision_ledger d ON d.id=c.commit_id WHERE c.run_id=? ORDER BY c.rowid", run[:])
+	if err != nil {
+		return result, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var raw []byte
+		if err := rows.Scan(&raw); err != nil {
+			return result, err
+		}
+		decoded, err := codec.StrictDecodePayload(raw)
+		if err != nil {
+			return result, err
+		}
+		v, ok := decoded.([]any)
+		if !ok || len(v) != 24 {
+			return result, errors.New("historical CycleCommit schema mismatch")
+		}
+		after, ok := v[8].(uint64)
+		if !ok {
+			return result, errors.New("historical revision malformed")
+		}
+		if after > target {
+			break
+		}
+		if err := applyHistoricalClockCommit(&result, v); err != nil {
+			return result, err
+		}
+	}
+	if err := rows.Err(); err != nil {
+		return result, err
+	}
+	if result.Revision != target {
+		return result, errors.New("historical checkpoint not covered by complete CycleCommit journal")
+	}
+	return result, nil
 }
 
-type snapshotClock struct{
- Instant int64
- Revision uint64
- NextSequence uint64
- LastOrdinal int64
+// Shared by snapshot verification and fork receipt migration. Both callers
+// supply journals authenticated by their exact historical ledger prefix.
+func applyHistoricalClockCommit(result *snapshotClock, v []any) error {
+	if len(v) != 24 {
+		return errors.New("historical CycleCommit schema mismatch")
+	}
+	after, ok := v[8].(uint64)
+	if !ok {
+		return errors.New("historical revision malformed")
+	}
+	if after != result.Revision+1 {
+		return errors.New("historical terminal revision gap")
+	}
+	plan, ok := v[5].([]any)
+	if !ok {
+		return errors.New("historical plan malformed")
+	}
+	switch {
+	case len(plan) == 4 && plan[0] == uint64(1):
+		instant, ok := asSigned64(plan[2])
+		if !ok {
+			return errors.New("historical CLOCK_ADVANCE target invalid")
+		}
+		result.Instant = instant
+		result.LastOrdinal = -1
+	case len(plan) == 1 && plan[0] == uint64(0):
+		instant, ok := asSigned64(v[3])
+		if !ok || instant != result.Instant {
+			return errors.New("historical WORK instant mismatch")
+		}
+		ordinal, ok := v[4].(uint64)
+		if !ok || ordinal > uint64(^uint64(0)>>1) {
+			return errors.New("historical WORK ordinal invalid")
+		}
+		result.LastOrdinal = int64(ordinal)
+	default:
+		return errors.New("historical cycle kind unsupported")
+	}
+	seq, ok := v[22].(uint64)
+	if !ok {
+		return errors.New("historical next sequence missing")
+	}
+	result.NextSequence = seq
+	result.Revision = after
+	return nil
+}
+
+type snapshotClock struct {
+	Instant      int64
+	Revision     uint64
+	NextSequence uint64
+	LastOrdinal  int64
 }

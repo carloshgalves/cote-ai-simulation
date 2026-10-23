@@ -9,6 +9,7 @@ on:
       - 'tools/test_canon_y1_v02.py'
       - 'tools/test_canon_y1_v03.py'
       - 'tools/test_canon_y1_v03_adversarial.py'
+      - 'tools/test_canon_y1_v04.py'
       - 'tools/test_legacy_y1_crosswalk.py'
       - 'tools/canon_first_midterm_v1.py'
       - 'tools/test_canon_record_review.py'
@@ -29,6 +30,7 @@ jobs:
       - run: python tools/test_canon_y1_v02.py
       - run: python tools/test_canon_y1_v03.py
       - run: python tools/test_canon_y1_v03_adversarial.py
+      - run: python tools/test_canon_y1_v04.py
       - run: python tools/test_legacy_y1_crosswalk.py
       - run: python tools/test_canon_record_review.py
       - run: python -m unittest discover -s tests/canon -p 'test_first_midterm_executable_v1.py' -v

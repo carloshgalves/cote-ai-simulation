@@ -39,20 +39,21 @@
     "5": 23
   },
   "cases": 43,
-  "coverage_status": "INITIAL_SCENE_CANDIDATES_EXTRACTED_REVIEW_PENDING",
-  "semantic_review": "NOT_STARTED",
-  "operator_release": "NOT_REQUESTED",
+  "coverage_status": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE_ADVERSARIAL_PENDING",
+  "semantic_review": "ASSISTANT_INDIVIDUAL_REVIEW_COMPLETE",
+  "operator_release": "PENDING",
   "open_issues": [
-    "Individual direct-source semantic review of all evidence claims",
-    "Primary actor cases and global character packs pending",
-    "Regenerate direct indexes and execute CI",
-    "VIP allocation scheme remains unknown, not an executable formula",
-    "Safeguard coercion and trauma as source-specific descriptive records, not transferable manipulation policy",
-    "Resolve contradictory calendar wordings with explicit source-note, not guessed day arithmetic"
+    "Adversarial independent-method second pass and negative mutation tests pending",
+    "External independent human or separate-model reviewer not assigned",
+    "Operator reference merge not yet authorized",
+    "All 173 individually reviewed flags remain verified:false",
+    "Source's third-day versus fourth-day calendar wording deliberately unresolved",
+    "Zodiac/VIP allocation formula not independently supported",
+    "No agent memory or executable exam promotion authorized"
   ],
   "behavioral_cases": 43,
   "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v04.json",
-  "open_audit": "173_INDIVIDUAL_SOURCE_WINDOWS_PENDING",
+  "open_audit": "ADVERSARIAL_NEGATIVE_MUTATION_REVIEW_PENDING",
   "initial_source_corrections": [
     {
       "finding": "V4-ATTR-001",
@@ -137,5 +138,17 @@
     }
   ],
   "initial_findings_closed_count": 3,
-  "initial_findings_open_source_questions": 3
+  "initial_findings_open_source_questions": 3,
+  "case_status": "ASSISTANT_CASE_REVIEW_COMPLETE",
+  "final_semantic_review": {
+    "assistant_reviewed_evidence": 130,
+    "assistant_reviewed_cases": 43,
+    "assistant_total": 173,
+    "individual_verified": 0,
+    "external_independent_review": "NOT_PERFORMED",
+    "adversarial_method": "PENDING",
+    "operator_release": "PENDING",
+    "registered_on": "2026-10-23",
+    "review_register": "data/canon/consolidated/audits/source-review-register-y1-v04.json"
+  }
 }

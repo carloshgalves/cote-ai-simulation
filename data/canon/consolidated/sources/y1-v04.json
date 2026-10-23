@@ -8,6 +8,6 @@
   "operator_selected_for_extraction": true,
   "original_pdf_committed": false,
   "claims_all_verified": false,
-  "record_audit": "INITIAL_EXTRACTION_PENDING_INDIVIDUAL_REVIEW",
+  "record_audit": "ASSISTANT_INDIVIDUAL_SEMANTIC_REVIEW_COMPLETE_ADVERSARIAL_PENDING",
   "warning": "Source watermarks are not canon; neither copyrighted PDF nor verbatim text committed."
 }

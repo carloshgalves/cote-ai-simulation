@@ -1,0 +1,86 @@
+{
+  "schema_version": "adversarial-canon-review-v1",
+  "source_id": "ln.y1.v04.sevenseas.en.operator-provided",
+  "source_pdf_sha256": "1d587b01242cd576fa2b0627222329d1bf1c23b12d206ad63f7a590f79fe9cc8",
+  "started_on": "2026-10-23",
+  "method": "Second adversarial pass performed by same assistant, with separately implemented negative-mutation regression controls; NOT independent human or separate model review.",
+  "external_independent_reviewer": "UNASSIGNED",
+  "operator_approval": "PENDING",
+  "direct_pdf_semantic_review": {
+    "evidence": 130,
+    "cases": 43,
+    "status": "COMPLETE",
+    "human_individual_verified": 0
+  },
+  "resolved_source_findings": [
+    {
+      "id": "V4-ATTR-001",
+      "severity": "HIGH",
+      "description": "PDF p103 Yamauchi rather than Ryūen physically approaches Kiyotaka",
+      "resolved_in": "evidence source, actor packs and context indexes"
+    },
+    {
+      "id": "V4-ATTR-002",
+      "severity": "MEDIUM",
+      "description": "PDF p52 Hirata rather than Karuizawa in briefings conversation",
+      "resolved_in": "evidence source, actor packs and context indexes"
+    },
+    {
+      "id": "V4-PROV-007",
+      "severity": "HIGH",
+      "description": "Threatening photo depicts earlier stairwell incident, not later secluded assault",
+      "resolved_in": "y1v4.ev.106"
+    },
+    {
+      "id": "V4-LOC-008",
+      "severity": "MEDIUM",
+      "description": "Outcomes 1/3/4 and final results require exact page spans; Ryūen screen p241",
+      "resolved_in": "evidence source and page map"
+    },
+    {
+      "id": "V4-CASE-009",
+      "severity": "LOW",
+      "description": "Karuizawa's unwanted-photo resistance begins on p93",
+      "resolved_in": "behavioral case, source spans and page map"
+    },
+    {
+      "id": "V4-CASE-010",
+      "severity": "HIGH",
+      "description": "Ichinose reaches for phone but never shows its email before Kiyotaka interrupts",
+      "resolved_in": "honami-ichinose.stage-open-email-visibility"
+    },
+    {
+      "id": "V4-EV-011",
+      "severity": "MEDIUM",
+      "description": "Final Rabbit exam day begins with card game and Yukimura complaint, not a continuing policy debate",
+      "resolved_in": "y1v4.ev.108"
+    }
+  ],
+  "open_semantic_boundaries": [
+    {
+      "id": "V4-CALENDAR",
+      "severity": "MEDIUM",
+      "note": "Teacher's third-day example and handout's fourth-day notation conflict; preserve both rather than fabricate resolved chronology"
+    },
+    {
+      "id": "V4-SECRET",
+      "severity": "HIGH",
+      "note": "Karuizawa and Kushida secret VIP notices and phone lock disclosures must be actor and time-scoped"
+    },
+    {
+      "id": "V4-COERCION",
+      "severity": "HIGH",
+      "note": "Peer assault, sexual harassment and coercive compliance must remain source-specific wrongdoing, not endorsed actions or inferred consent"
+    },
+    {
+      "id": "V4-ALLOCATION",
+      "severity": "HIGH",
+      "note": "Ryūen boasts of a VIP selection pattern; no complete, school-authorized allocation algorithm is in source"
+    }
+  ],
+  "negative_mutations": "NOT_RUN",
+  "automated_review_result": "PENDING",
+  "external_independent_approval": false,
+  "human_verified": false,
+  "recommendation": "HOLD_DRAFT_NO_MERGE"
+}

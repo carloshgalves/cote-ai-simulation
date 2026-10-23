@@ -4854,7 +4854,7 @@
   "global_promotion": "BLOCKED_PENDING_ADVERSARIAL_REVIEW_AND_OPERATOR_RELEASE",
   "release_gate": {
     "assistant_individual_semantic_review": "COMPLETE",
-    "external_independent_review": "ADVERSARIAL_SAME_ASSISTANT_PENDING",
+    "external_independent_review": "ADVERSARIAL_METHOD_PENDING",
     "operator_approval": "PENDING",
     "individual_verified_count": 0,
     "engine_memory_admission": false,

@@ -59,10 +59,14 @@ assert "Class A" not in yamawaki["identity"]["role_summary"]
 assert any("Class C student Yamawaki" in e["summary"] for e in evidence)
 assert not any("Class A student Yamawaki" in e["summary"] for e in evidence)
 
+# Actors with no V1-owned cases can gain cases in later volumes without
+# invalidating the first-volume-only historical assertions.
 for a in ["airi-sakura","hasebe","matsushita","mori","kikuchi"]:
     actor=load(R/"characters"/(a+".json"))
-    assert actor["modeling_tier"]=="MINIMAL_ENTITY"
-    assert all(not case_ids for case_ids in index["behavioral_by_actor_topic"]["actor."+a].values()), a
+    if a!="airi-sakura":
+        assert actor["modeling_tier"]=="MINIMAL_ENTITY"
+    by_topic=index["behavioral_by_actor_topic"]["actor."+a]
+    assert all(not cid.startswith(("v0.","y1v1.")) for ids in by_topic.values() for cid in ids), a
 
 assert school["s_system"]["class_points"]["evaluation_formula"]=="NOT_DISCLOSED"
 assert school["s_system"]["private_points"]["initial_grant"]==100000

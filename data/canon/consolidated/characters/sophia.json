@@ -17,22 +17,22 @@
   },
   "domains": {
     "strategy": {
-      "evidence_refs": [
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
         "v0.char.053"
-      ],
-      "behavioral_case_refs": []
+      ]
     },
     "economy": {
-      "evidence_refs": [
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
         "v0.char.053"
-      ],
-      "behavioral_case_refs": []
+      ]
     },
     "ethics": {
-      "evidence_refs": [
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
         "v0.char.053"
-      ],
-      "behavioral_case_refs": []
+      ]
     }
   },
   "source_documents": [
@@ -44,5 +44,11 @@
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false
   },
-  "generation_policy": "Append evidence refs and recompile index when ingesting another volume; never add second pack per volume"
+  "generation_policy": "Append evidence refs and recompile index when ingesting another volume; never add second pack per volume",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
 }

@@ -1,0 +1,3 @@
+# Behavioral attribution gate
+
+`mention_actor_ids` lists implicated people, not necessarily the actor who performed a specific behavior. A Character Pack separates `context_evidence_refs` from `behavioral_case_refs`. The retrieval index has separate `context_mentions_by_actor_topic` and `behavioral_by_actor_topic`. Behavioral guidance may use only cases whose `primary_actor_id` matches the agent. Context evidence still requires identity, temporality, knowledge and provenance checks, and cannot independently prove skill. This rule prevents attributing Atsuomi's fundraising publicity to infant Kiyotaka.

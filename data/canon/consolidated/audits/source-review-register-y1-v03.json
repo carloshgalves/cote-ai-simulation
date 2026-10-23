@@ -2416,12 +2416,12 @@
         237
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Kiyotaka delivers unconscious Suzune to exam staff before the 8 PM roll call, accepts her medical retirement and returns her secret leader card.",
+      "primary_claim": "At about 7:58 PM Kiyotaka carries unconscious Suzune aboard for emergency medical retirement, turns over her secret leader card, and is nevertheless counted as absent at the class's 8 PM camp roll call.",
       "actor_ids": [
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "FINDING_PAGE_LOCATOR_AND_ROLLCALL_TIMING",
+      "semantic_review": "PASS_AFTER_SOURCE_CORRECTION",
       "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
@@ -2431,7 +2431,9 @@
         "chronology and later revelation",
         "direct PDF locator and limits"
       ],
-      "finding": "PDF p237 reports arrival at 19:58, teacher says Ayanokoji is out for roll call, p238 narrator expects five-point absence. Current evidence summary says before 8 PM but does not distinguish medical arrival from the roll-call cutoff."
+      "finding_resolution": "CORRECTED_IN_SOURCE: arrival before 20:00 did not meet camp roll-call participation; staff says Ayanokōji is out, and p.238 states an expected 5-point penalty.",
+      "review_note": "PDF p237 states 19:58 arrival at ship medical staff, then teacher says Kiyotaka is out; p238 explicitly narrates a 5-point missed camp roll call. Arrival before the hour is not attendance at the declared base.",
+      "reviewed_at": "2026-10-23"
     },
     {
       "record_id": "y1v3.ev.102",
@@ -3471,7 +3473,7 @@
     }
   ],
   "release_gate": {
-    "assistant_individual_semantic_review": "IN_PROGRESS_FINDINGS_OPEN",
+    "assistant_individual_semantic_review": "IN_PROGRESS",
     "operator_approval": "PENDING",
     "individual_verified_count": 0,
     "engine_memory_admission": false

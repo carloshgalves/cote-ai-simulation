@@ -568,7 +568,7 @@
       "pdf_pages": [
         39
       ],
-      "source_mode": "DOCUMENT_IMAGE",
+      "source_mode": "OBSERVED",
       "primary_claim": "The Rabbit list assigns three from A, three from B, four from C and four from D, including Machida, Ichinose, Ibuki and Karuizawa.",
       "actor_ids": [
         "actor.kei-karuizawa",
@@ -887,11 +887,11 @@
       "pdf_pages": [
         52
       ],
-      "source_mode": "NARRATED",
-      "primary_claim": "Kiyotaka receives a later shared-room message and observes how Karuizawa and other students respond to the group arrangements.",
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka and Hirata walk toward the staggered later briefing, privately discussing why the school explains rules to small groups instead of everyone at once.",
       "actor_ids": [
         "actor.kiyotaka-ayanokoji",
-        "actor.kei-karuizawa"
+        "actor.yosuke-hirata"
       ],
       "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
       "reviewed_by_assistant": false,
@@ -1013,7 +1013,7 @@
       "pdf_pages": [
         64
       ],
-      "source_mode": "DOCUMENT_IMAGE",
+      "source_mode": "OBSERVED",
       "primary_claim": "Suzune's handwritten Dragon roster groups leading class representatives, including Katsuragi, Kanzaki, Ryūen, Hirata and Kushida.",
       "actor_ids": [
         "actor.suzune-horikita",
@@ -1504,9 +1504,9 @@
         103
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Ryūen physically grabs and confronts Kiyotaka to press for answers, though Kiyotaka conceals his role in the island result.",
+      "primary_claim": "Yamauchi angrily grabs Kiyotaka about an earlier promise to obtain Sakura's email, which Kiyotaka admits he had made without already knowing her contact; the initial physical act is Yamauchi's.",
       "actor_ids": [
-        "actor.kakeru-ryuen",
+        "actor.haruki-yamauchi",
         "actor.kiyotaka-ayanokoji"
       ],
       "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
@@ -1528,8 +1528,8 @@
       "pdf_pages": [
         106
       ],
-      "source_mode": "NARRATED",
-      "primary_claim": "The emerging discussion of cooperation between B and D is contrasted with A's self-preservation and C's possible rivals; a permanent alliance is not shown.",
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka narrates a speculative strategic alignment between B–D and A–C; no ongoing formal class alliances are demonstrated simply by his interpretation.",
       "actor_ids": [
         "actor.suzune-horikita",
         "actor.ryuji-kanzaki",

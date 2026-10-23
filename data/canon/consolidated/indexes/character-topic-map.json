@@ -526,7 +526,8 @@
         "observation",
         "resources",
         "risk_management",
-        "social"
+        "social",
+        "strategy"
       ]
     },
     "actor.rokusuke-koenji": {
@@ -3370,6 +3371,7 @@
         "y1v4.ev.005",
         "y1v4.ev.007",
         "y1v4.ev.008",
+        "y1v4.ev.036",
         "y1v4.ev.063",
         "y1v4.ev.089",
         "y1v4.ev.090",
@@ -3425,6 +3427,7 @@
       ],
       "observation": [
         "y1v4.ev.008",
+        "y1v4.ev.036",
         "y1v4.ev.089",
         "y1v4.ev.125"
       ],
@@ -3779,7 +3782,8 @@
       "conflict": [
         "y1v3.ev.043",
         "y1v3.ev.079",
-        "y1v3.ev.080"
+        "y1v3.ev.080",
+        "y1v4.ev.060"
       ],
       "risk_management": [
         "y1v3.ev.044",
@@ -3788,6 +3792,9 @@
       ],
       "combat": [
         "y1v3.ev.088"
+      ],
+      "strategy": [
+        "y1v4.ev.060"
       ]
     },
     "actor.rokusuke-koenji": {
@@ -4376,7 +4383,6 @@
         "y1v4.ev.008",
         "y1v4.ev.019",
         "y1v4.ev.023",
-        "y1v4.ev.036",
         "y1v4.ev.071",
         "y1v4.ev.081",
         "y1v4.ev.085",
@@ -4436,7 +4442,6 @@
       ],
       "observation": [
         "y1v4.ev.008",
-        "y1v4.ev.036",
         "y1v4.ev.062",
         "y1v4.ev.070",
         "y1v4.ev.081",
@@ -4750,7 +4755,6 @@
         "y1v4.ev.038",
         "y1v4.ev.044",
         "y1v4.ev.045",
-        "y1v4.ev.060",
         "y1v4.ev.068",
         "y1v4.ev.124"
       ],
@@ -4769,7 +4773,6 @@
         "y1v4.ev.037",
         "y1v4.ev.041",
         "y1v4.ev.044",
-        "y1v4.ev.060",
         "y1v4.ev.061",
         "y1v4.ev.068",
         "y1v4.ev.074",
@@ -6158,7 +6161,8 @@
       "resources": [],
       "conflict": [],
       "risk_management": [],
-      "combat": []
+      "combat": [],
+      "strategy": []
     },
     "actor.rokusuke-koenji": {
       "social": [
@@ -8741,6 +8745,7 @@
         "y1v4.ev.005",
         "y1v4.ev.007",
         "y1v4.ev.008",
+        "y1v4.ev.036",
         "y1v4.ev.063",
         "y1v4.ev.089",
         "y1v4.ev.090",
@@ -8810,6 +8815,7 @@
       ],
       "observation": [
         "y1v4.ev.008",
+        "y1v4.ev.036",
         "y1v4.ev.089",
         "y1v4.ev.125"
       ],
@@ -9134,7 +9140,8 @@
       "conflict": [
         "y1v3.ev.043",
         "y1v3.ev.079",
-        "y1v3.ev.080"
+        "y1v3.ev.080",
+        "y1v4.ev.060"
       ],
       "risk_management": [
         "y1v3.ev.044",
@@ -9143,6 +9150,9 @@
       ],
       "combat": [
         "y1v3.ev.088"
+      ],
+      "strategy": [
+        "y1v4.ev.060"
       ]
     },
     "actor.rokusuke-koenji": {
@@ -9678,7 +9688,6 @@
         "y1v4.ev.008",
         "y1v4.ev.019",
         "y1v4.ev.023",
-        "y1v4.ev.036",
         "y1v4.ev.071",
         "y1v4.ev.081",
         "y1v4.ev.085",
@@ -9739,7 +9748,6 @@
       ],
       "observation": [
         "y1v4.ev.008",
-        "y1v4.ev.036",
         "y1v4.ev.062",
         "y1v4.ev.070",
         "y1v4.ev.081",
@@ -10025,7 +10033,6 @@
         "y1v4.ev.038",
         "y1v4.ev.044",
         "y1v4.ev.045",
-        "y1v4.ev.060",
         "y1v4.ev.068",
         "y1v4.ev.124"
       ],
@@ -10041,7 +10048,6 @@
         "y1v4.ev.037",
         "y1v4.ev.041",
         "y1v4.ev.044",
-        "y1v4.ev.060",
         "y1v4.ev.061",
         "y1v4.ev.068",
         "y1v4.ev.074",

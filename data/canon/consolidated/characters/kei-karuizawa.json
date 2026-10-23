@@ -35,7 +35,6 @@
         "y1v4.ev.008",
         "y1v4.ev.019",
         "y1v4.ev.023",
-        "y1v4.ev.036",
         "y1v4.ev.071",
         "y1v4.ev.081",
         "y1v4.ev.085",
@@ -126,7 +125,6 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v4.ev.008",
-        "y1v4.ev.036",
         "y1v4.ev.062",
         "y1v4.ev.070",
         "y1v4.ev.081",

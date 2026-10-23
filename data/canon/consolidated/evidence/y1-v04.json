@@ -633,7 +633,7 @@
         "edition": "Seven Seas English translation, operator-supplied PDF",
         "verification": "PENDING_INDIVIDUAL_REVIEW"
       },
-      "source_mode": "DOCUMENT_IMAGE",
+      "source_mode": "OBSERVED",
       "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
       "mention_actor_ids": [
         "actor.kei-karuizawa",
@@ -990,7 +990,7 @@
     {
       "id": "y1v4.ev.036",
       "domain": "observation",
-      "summary": "Kiyotaka receives a later shared-room message and observes how Karuizawa and other students respond to the group arrangements.",
+      "summary": "Kiyotaka and Hirata walk toward the staggered later briefing, privately discussing why the school explains rules to small groups instead of everyone at once.",
       "source": {
         "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -1000,11 +1000,11 @@
         "edition": "Seven Seas English translation, operator-supplied PDF",
         "verification": "PENDING_INDIVIDUAL_REVIEW"
       },
-      "source_mode": "NARRATED",
+      "source_mode": "OBSERVED",
       "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
       "mention_actor_ids": [
         "actor.kiyotaka-ayanokoji",
-        "actor.kei-karuizawa"
+        "actor.yosuke-hirata"
       ],
       "mention_organization_ids": [],
       "topics": [
@@ -1136,7 +1136,7 @@
         "edition": "Seven Seas English translation, operator-supplied PDF",
         "verification": "PENDING_INDIVIDUAL_REVIEW"
       },
-      "source_mode": "DOCUMENT_IMAGE",
+      "source_mode": "OBSERVED",
       "story_time": "Y1_M05_ZODIAC_D1",
       "mention_actor_ids": [
         "actor.suzune-horikita",
@@ -1662,7 +1662,7 @@
     {
       "id": "y1v4.ev.060",
       "domain": "conflict",
-      "summary": "Ryūen physically grabs and confronts Kiyotaka to press for answers, though Kiyotaka conceals his role in the island result.",
+      "summary": "Yamauchi angrily grabs Kiyotaka about an earlier promise to obtain Sakura's email, which Kiyotaka admits he had made without already knowing her contact; the initial physical act is Yamauchi's.",
       "source": {
         "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -1675,7 +1675,7 @@
       "source_mode": "OBSERVED",
       "story_time": "Y1_M05_ZODIAC_D1",
       "mention_actor_ids": [
-        "actor.kakeru-ryuen",
+        "actor.haruki-yamauchi",
         "actor.kiyotaka-ayanokoji"
       ],
       "mention_organization_ids": [],
@@ -1689,7 +1689,7 @@
     {
       "id": "y1v4.ev.061",
       "domain": "strategy",
-      "summary": "The emerging discussion of cooperation between B and D is contrasted with A's self-preservation and C's possible rivals; a permanent alliance is not shown.",
+      "summary": "Kiyotaka narrates a speculative strategic alignment between B–D and A–C; no ongoing formal class alliances are demonstrated simply by his interpretation.",
       "source": {
         "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -1699,7 +1699,7 @@
         "edition": "Seven Seas English translation, operator-supplied PDF",
         "verification": "PENDING_INDIVIDUAL_REVIEW"
       },
-      "source_mode": "NARRATED",
+      "source_mode": "INNER_MONOLOGUE",
       "story_time": "Y1_M05_ZODIAC_D1",
       "mention_actor_ids": [
         "actor.suzune-horikita",

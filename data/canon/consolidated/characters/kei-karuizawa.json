@@ -4,7 +4,8 @@
   "display_name": "Kei Karuizawa",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+    "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "ln.y1.v02.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -22,7 +23,8 @@
         "y1v1.ev.046",
         "y1v1.ev.051",
         "y1v1.ev.064",
-        "y1v1.ev.122"
+        "y1v1.ev.122",
+        "y1v2.ev.020"
       ]
     },
     "economy": {
@@ -31,11 +33,24 @@
         "y1v1.ev.064",
         "y1v1.ev.065"
       ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.020",
+        "y1v2.ev.024"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.024"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

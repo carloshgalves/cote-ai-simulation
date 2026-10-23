@@ -1,0 +1,18 @@
+{
+  "schema_version": "volume0-staging-retirement-v1",
+  "retired_directory": "data/canon/volume0/",
+  "authoritative_character_directory": "data/canon/consolidated/characters/",
+  "authoritative_institution_directory": "data/canon/consolidated/institutions/",
+  "retained_source_evidence": "data/canon/consolidated/evidence/volume0.json",
+  "index": "data/canon/consolidated/indexes/character-topic-map.json",
+  "old_blob_count": 77,
+  "non_authoritative_audit_files": [
+    "data/canon/consolidated/audits/legacy-extraction/volume0-deep-profile-observations.json",
+    "data/canon/consolidated/audits/legacy-extraction/volume0-faction-history.json",
+    "data/canon/consolidated/audits/legacy-extraction/volume0-open-questions.json",
+    "data/canon/consolidated/audits/legacy-extraction/volume0-relative-timeline.json",
+    "data/canon/consolidated/audits/legacy-extraction/volume0-relationship-edges.json"
+  ],
+  "warning": "Retained legacy audit files may contain old actor aliases and must not be ingested as runtime knowledge. The original stage remains in Git history.",
+  "migration_status": "STAGING_REMOVED_GLOBAL_PACKS_PRESERVED"
+}

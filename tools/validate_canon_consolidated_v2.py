@@ -31,4 +31,15 @@ assert idx["behavioral_by_actor_topic"]["actor.kiyotaka-ayanokoji"]["combat"]
 assert all(e["subject_assertion"]=="MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR" for e in ev.values())
 assert J(B/"sources/volume0.json")["claims_all_verified"]==False
 assert not list((B/"exams").glob("*.json"))
+
+# Never regress to per-volume character/institution packs or stale pack paths.
+CANON=B.parent
+assert not (CANON/"volume0").exists(), "retired volume0 staging tree reintroduced"
+pack_paths=idx["character_packs"]
+assert set(pack_paths)=={x["character_id"] for x in actors.values()}
+for actor, metadata in pack_paths.items():
+    expected="data/canon/consolidated/characters/"+actor.removeprefix("actor.")+".json"
+    assert metadata["path"]==expected, (actor, metadata["path"], expected)
+    assert (B/"characters"/(actor.removeprefix("actor.")+".json")).is_file(), actor
+assert len(actors)==35 and len(inst)==13
 print("PASS Volume0 V2: 35 actors, 13 institutions, 25 cases, 132 evidence, explicit behavioral/context gates.")

@@ -35,9 +35,7 @@
       ]
     }
   },
-  "source_documents": [
-    "data/canon/volume0/characters/sophia.yaml"
-  ],
+  "source_documents": [],
   "historical_context_only": true,
   "semantic_audit_notes": null,
   "uncertainties": {
@@ -50,5 +48,6 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance."
 }

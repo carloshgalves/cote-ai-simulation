@@ -209,6 +209,13 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
   // the earliest persisted pending before its terminal advance.
   original,err:=s.replayAdvanceInputs(ctx,runID,uint64(current.Revision))
   if err!=nil{return report,err}
+  // The durable cache already contains the post-advance cadence. Planning
+  // this historical transition must use the runtime folded up to its base.
+  for id,state:=range runtime{
+   if state.HasNextRepeat{
+    original=append(original,clock.Pending{ID:id,Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:state.NextRepeat}})
+   }
+  }
   selected,has,err:=clock.Next(current,original)
   if err!=nil{return report,fmt.Errorf("replay has stale pre-advance pending: %w",err)}
   if !has||selected!=plan{return report,errors.New("replay target differs from authoritative pending minimum")}

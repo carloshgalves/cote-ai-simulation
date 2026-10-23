@@ -277,3 +277,18 @@ vez, preservando as três identidades de ocorrência sem colisão.
 
 O contrato está em `docs/architecture/fork-occurrences-v2.md`. R21–R23 continuam
 pendentes e OPEN-02/OPEN-05 continuam abertos até suas evidências integrais.
+
+### R21a — cadência histórica de triggers repetíveis
+
+A preparação do cenário evoluído revelou um defeito anterior ao fork: o segundo
+CLOCK_ADVANCE guiado somente por cadência repetível não passava no replay.
+`replayAdvanceInputs` removia corretamente a cadência futura do cache vivo, mas o
+planejador não reinseria a cadência histórica do runtime já dobrado até a revisão
+base. O replay agora usa esse runtime reconstruído para selecionar o mínimo.
+
+O RED executou três políticas (rising, repeat e once), consumiu suas ativações
+iniciais e avançou até a segunda ativação repetível. O GREEN verifica quatro
+commits, seis transições, reopen e snapshot; corrupção da cadência no cache vivo
+deve falhar na comparação final do runtime, preservando o planejamento histórico,
+e a restauração exata volta a passar. A migração V2 do runtime evoluído continua
+na próxima slice R21; esta correção isolada não fecha OPEN-02 nem OPEN-05.

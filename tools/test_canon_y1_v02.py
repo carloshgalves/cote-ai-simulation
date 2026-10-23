@@ -49,4 +49,13 @@ assert transfer["price_private_points"]==20000000 and transfer["observed_success
 assert school["disciplinary_case_y1_v02"]["charge_amount"]=="UNKNOWN"
 assert school["s_system"]["club_reward_y1_v02"]["unrevealed_reward_algorithm"]
 assert aud["operator_release"]=="PENDING"
+
+review=J(B/"audits/source-review-register-y1-v02.json")
+assert review["evidence_count"]==len(e)==91
+assert review["behavioral_case_count"]==len(cases)==27
+assert {x["record_id"] for x in review["evidence"]}==eids
+assert {x["case_id"] for x in review["behavioral_cases"]}==set(v2_cases)
+assert all(x["verified"] is False and x["reviewed_by_assistant"] is False for x in review["evidence"]+review["behavioral_cases"])
+assert review["release_gate"]["individual_verified_count"]==0
+
 print("PASS Y1 V2: 91 evidence, 27 actor-owned cases, canonical index and source/knowledge gates")

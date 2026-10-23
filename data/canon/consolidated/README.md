@@ -40,3 +40,5 @@ The source-review register records 268 source-linked assistant-reviewed assertio
 ## Year 1 Volume 2 (draft ingestion)
 
 `evidence/y1-v02.json` preserves 91 scene-relevant paraphrases from seven chapters, together with page locators and speaker-sensitive source modes. The character and institution packs remain global. Twenty-seven actor-owned demonstrations are stored under `behavioral_cases/<primary-actor>/`; six additional minor roles have minimal packs rather than invented biographies. Direct indexes and per-record semantic review are separate gates, and the operator release gate remains pending. The incident involving Sudō is **not** a general disciplinary algorithm. Ryūen's alleged authorship remains an attribution by Ichinose, not independent proof. The source PDF is not stored in the repository.
+
+A per-record Volume 2 semantic review backlog is in `audits/source-review-register-y1-v02.json`: every one of 91 evidence records and 27 actor-owned cases remains unverified until its exact source-window meaning is checked. Successful structural CI does not waive this gate.

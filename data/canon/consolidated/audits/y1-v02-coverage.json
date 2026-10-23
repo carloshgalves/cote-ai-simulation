@@ -58,5 +58,16 @@
     "y1v2.ev.070 names Kushida's targeted email lure and extends to p.226",
     "y1v2.ev.083 allocates miscellaneous fee to Class C complainants",
     "Added actor-owned case for targeted decoy invitation without attributing mastermind role to Kushida"
-  ]
+  ],
+  "chapter_evidence_counts": {
+    "1": 1,
+    "2": 16,
+    "3": 6,
+    "4": 24,
+    "5": 10,
+    "6": 11,
+    "7": 23
+  },
+  "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v02.json",
+  "coverage_status": "EXTRACTED_AND_INDEXED_ASSISTANT_INDIVIDUAL_REVIEW_PENDING"
 }

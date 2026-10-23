@@ -782,7 +782,7 @@ func TestCSFRV18R19OpaqueIntentionSurvivesForkWithoutGrantingAuthority(t *testin
 }
 
 func TestCSFRV18R19IntentionRequiresAuthenticatedHistoricalRoot(t *testing.T) {
-	for _, mutation := range []string{"id", "digest", "kind", "option", "missing-root"} {
+	for _, mutation := range []string{"id", "digest", "kind", "option", "missing-root", "missing-snapshot", "missing-epistemic"} {
 		t.Run(mutation, func(t *testing.T) {
 			ctx := context.Background()
 			parent, v1, run, snap := r19SourceWithAction(t, true, func(origin []any) any {
@@ -799,6 +799,10 @@ func TestCSFRV18R19IntentionRequiresAuthenticatedHistoricalRoot(t *testing.T) {
 					return []any{uint64(0), ref}
 				case "missing-root":
 					ref[0] = uint64(17)
+				case "missing-snapshot":
+					ref[0] = uint64(20)
+				case "missing-epistemic":
+					ref[0] = uint64(22)
 				}
 				return []any{uint64(1), ref}
 			})

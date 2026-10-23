@@ -84,6 +84,23 @@ func authenticateArchivedCausalRef(ref []any, parent *genesis.Genesis, snapshot 
 		}
 	}
 	var fields []any
+	var candidateRaw []byte
+	for _, record := range candidates {
+		if candidateRaw != nil && !bytes.Equal(candidateRaw, record.Canonical) {
+			return errors.New("ambiguous historical causal root")
+		}
+		candidateRaw = record.Canonical
+	}
+	if candidateRaw != nil {
+		v, err := codec.StrictDecodePayload(candidateRaw)
+		if err != nil {
+			return err
+		}
+		fields, ok = v.([]any)
+		if !ok {
+			return errors.New("historical causal root is not an array")
+		}
+	}
 	switch kind {
 	case 21:
 		if !bytes.Equal(id, parent.ID[:]) || !bytes.Equal(digest, parent.Digest[:]) {
@@ -91,8 +108,13 @@ func authenticateArchivedCausalRef(ref []any, parent *genesis.Genesis, snapshot 
 		}
 		return nil // independently validated canonical Genesis in lineage
 	case 20:
-		fields = snapshot
+		if fields == nil {
+			fields = snapshot
+		}
 	case 22:
+		if fields != nil {
+			break
+		}
 		idRule := rule["id"].(map[string]any)
 		for _, raw := range snapshot[14].([]any) {
 			f := raw.([]any)
@@ -109,24 +131,6 @@ func authenticateArchivedCausalRef(ref []any, parent *genesis.Genesis, snapshot 
 					return errors.New("ambiguous epistemic root")
 				}
 				fields = f
-			}
-		}
-	default:
-		var raw []byte
-		for _, record := range candidates {
-			if raw != nil && !bytes.Equal(raw, record.Canonical) {
-				return errors.New("ambiguous historical causal root")
-			}
-			raw = record.Canonical
-		}
-		if raw != nil {
-			v, err := codec.StrictDecodePayload(raw)
-			if err != nil {
-				return err
-			}
-			fields, ok = v.([]any)
-			if !ok {
-				return errors.New("historical causal root is not an array")
 			}
 		}
 	}
@@ -208,7 +212,7 @@ func authenticateArchivedCausalRef(ref []any, parent *genesis.Genesis, snapshot 
 	if digestRule["preimage_schema"] != rule["persisted_root"] && !equalBytes(fields[len(fields)-1], digest) {
 		return errors.New("historical root embedded digest differs from authenticated reference")
 	}
-	if kind == 6 || kind == 7 || kind == 18 || kind == 19 {
+	if kind == 6 || kind == 7 || kind == 18 || kind == 19 || kind == 20 || kind == 22 {
 		return authenticateNativeRootAtCut(kind, ref, fields, parent, snapshot, archive, bundle)
 	}
 	return nil

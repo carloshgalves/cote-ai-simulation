@@ -213,7 +213,6 @@ extras. O teste de ambas as classes parte de autoridade SQLite real e cobre
 falha de INSERT da proof com rollback integral/retry, reopen, replay, corrupção
 do digest embutido e remoção da raiz. O digest embutido teve RED próprio antes da
 comparação explícita. A proof histórica não é autoridade viva do filho.
-Checkpoints históricos fora do corte corrente ainda requerem extensão;
 R20–R23 e OPEN-02/OPEN-05 seguem pendentes.
 
 A slice seguinte inclui raízes de intenção Claim/Transmission. O archive exige
@@ -227,3 +226,13 @@ IN_TRANSIT é reconstruída pelo migrador positivo já existente, sem repetir en
 nem conceder conhecimento da assertion. Fixtures fornecem checkpoints opacos de
 todos os atores cadastrados e titulares de evidência, inclusive antes de uma
 observação no filho. Isso não altera os requisitos de cobertura em produção.
+
+Referências de intenção a Snapshot/EpistemicCheckpoint de revisão anterior também
+recebem prova histórica tipada. O preparo só lê snapshots selados já verificados
+no source; o replay confere identidade/hash, origem/policy/clock para Snapshot e
+owner/coverage/bytes opacos para checkpoint epistemológico. Os dois casos tiveram
+RED próprio por resolução limitada ao corte atual e passaram após a extensão.
+Reutilizam os testes de rollback/retry, reopen, replay, snapshot do filho,
+corrupção/restauração e remoção da proof; referências sem artefato real deixam
+todo o destino vazio. Memória e mundo atuais do filho não são restaurados de uma
+intenção antiga. Artefatos cognitivos externos autenticados continuam em R22.

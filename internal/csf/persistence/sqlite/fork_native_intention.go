@@ -89,7 +89,7 @@ func nativeRoundIntentionRefs(snapshot []any, archive forkHistoryArchive) (map[s
 		if !ok {
 			return nil, errors.New("historical intention kind malformed")
 		}
-		if kind != 6 && kind != 7 && kind != 18 && kind != 19 {
+		if kind != 6 && kind != 7 && kind != 18 && kind != 19 && kind != 20 && kind != 22 {
 			continue
 		}
 		id, ok := ref[1].([]byte)
@@ -151,8 +151,15 @@ func prepareNativeRoundIntentions(ctx context.Context, s *Store, parent *genesis
 			table = "communication_transmissions"
 		}
 		var raw []byte
-		if err := s.db.QueryRowContext(ctx, "SELECT canonical FROM "+table+" WHERE run_id=? AND id=?", parent.RunID[:], ref[1]).Scan(&raw); err != nil {
-			return nil, fmt.Errorf("native intention root missing: %w", err)
+		if kind == 20 || kind == 22 {
+			raw, err = prepareHistoricalCheckpointIntention(ctx, s, parent, snapshot, ref, b)
+			if err != nil {
+				return nil, err
+			}
+		} else {
+			if err := s.db.QueryRowContext(ctx, "SELECT canonical FROM "+table+" WHERE run_id=? AND id=?", parent.RunID[:], ref[1]).Scan(&raw); err != nil {
+				return nil, fmt.Errorf("native intention root missing: %w", err)
+			}
 		}
 		root := forkHistoricalRoot{Kind: kind, CanonicalRecord: ports.CanonicalRecord{Identity: bytesToID(ref[1].([]byte)), Canonical: raw}}
 		archive[nativeArchiveKey(kind)] = append(archive[nativeArchiveKey(kind)], root.CanonicalRecord)
@@ -217,6 +224,9 @@ func loadNativeRoundIntentions(ctx context.Context, tx *sql.Tx, parent, child *g
 // the cut: the pending projection or an archived fence binds its exact digest.
 // This prevents a later source tail from satisfying an earlier dangling pointer.
 func authenticateNativeRootAtCut(kind uint64, ref, fields []any, parent *genesis.Genesis, snapshot []any, archive forkHistoryArchive, b *policy.Bundle) error {
+	if kind == 20 || kind == 22 {
+		return authenticateHistoricalCheckpointIntention(kind, fields, parent, snapshot, archive, b)
+	}
 	if kind == 18 || kind == 19 {
 		return authenticateCommunicationIntentionAtCut(kind, ref, fields, parent, snapshot, archive, b)
 	}

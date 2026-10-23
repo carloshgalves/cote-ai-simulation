@@ -18,6 +18,65 @@ import (
 func r19NativeIntentionSource(t *testing.T, kind uint64) (*sqlite.Store, *policy.Bundle, domain.ID, sqlite.SnapshotV1) {
 	t.Helper()
 	ctx := context.Background()
+	if kind == 20 || kind == 22 {
+		c, parent, ledger, _, _, path := noProposalWorkFixtureWithSetup(t, func(s *sqlite.Store, run domain.ID, b *policy.Bundle) error {
+			return s.RegisterCognitiveActor(ctx, [32]byte(run), "school", "a", b)
+		})
+		_, _, _, _, _, run := ledger.Snapshot()
+		state, err := parent.LoadClock(ctx, [32]byte(run))
+		if err != nil {
+			t.Fatal(err)
+		}
+		old, err := parent.CreateSnapshotV1(ctx, [32]byte(run), c.bundle, csfrv18SyntheticActorCheckpoints(t, path, state.Instant, int64(state.Revision)))
+		if err != nil {
+			t.Fatal(err)
+		}
+		ref := []any{uint64(20), old.ID[:], old.Digest[:]}
+		if kind == 22 {
+			value, err := codec.StrictDecodePayload(old.Canonical)
+			if err != nil {
+				t.Fatal(err)
+			}
+			fields := value.([]any)[14].([]any)[0].([]any)
+			preimage, err := identity.RecordIdentityFields("epistemic-checkpoint-ref", fields, nil)
+			if err != nil {
+				t.Fatal(err)
+			}
+			id, _, err := identity.New(c.bundle).Sum("cote.csf.id.epistemic-checkpoint", "cote.csf.schema.epistemic-checkpoint-id-preimage", 1, preimage)
+			if err != nil {
+				t.Fatal(err)
+			}
+			digest, _, err := identity.New(c.bundle).Sum("cote.csf.digest.epistemic-checkpoint", "cote.csf.schema.epistemic-checkpoint-ref", 1, fields)
+			if err != nil {
+				t.Fatal(err)
+			}
+			ref = []any{uint64(22), id[:], digest[:]}
+		}
+		for i := 0; i < 2; i++ {
+			if _, err := c.ResumeRegisteredWorkV1(ctx, ledger, [32]byte(run), old.ID); err != nil {
+				t.Fatal(err)
+			}
+		}
+		state, err = parent.LoadClock(ctx, [32]byte(run))
+		if err != nil {
+			t.Fatal(err)
+		}
+		if _, err := ledger.CloseSource(ctx, "driver", inputledger.Closure{ProducerKey: "r19-checkpoint-final", ClosedThrough: domain.EligibilityCoordinate{NotBeforeInstant: state.Instant + 1000}, Final: true}); err != nil {
+			t.Fatal(err)
+		}
+		root, err := parent.ValidatedGenesis(ctx, [32]byte(run), c.bundle)
+		if err != nil {
+			t.Fatal(err)
+		}
+		ledger, err = inputledger.Open(ctx, run, c.bundle, parent)
+		if err != nil {
+			t.Fatal(err)
+		}
+		checkpoints := func() []sqlite.SnapshotCheckpoint {
+			return csfrv18SyntheticActorCheckpoints(t, path, state.Instant, int64(state.Revision))
+		}
+		return r19SourceWithActionOn(t, parent, ledger, c.bundle, run, []any{uint64(2), []any{root.ID[:], root.Digest[:]}}, true, []any{uint64(1), ref}, checkpoints)
+	}
 	if kind == 18 || kind == 19 {
 		c, parent, ledger, cycle, fence, path := communicationFixture(t)
 		_, _, _, _, _, run := ledger.Snapshot()
@@ -131,7 +190,7 @@ func r19NativeIntentionSource(t *testing.T, kind uint64) (*sqlite.Store, *policy
 }
 
 func TestCSFRV18R19NativeIntentionRootSurvivesRollbackReopenAndAudit(t *testing.T) {
-	for _, kind := range []uint64{6, 7, 18, 19} {
+	for _, kind := range []uint64{6, 7, 18, 19, 20, 22} {
 		t.Run(fmt.Sprint(kind), func(t *testing.T) {
 			ctx := context.Background()
 			parent, v1, run, snap := r19NativeIntentionSource(t, kind)
@@ -254,7 +313,11 @@ func TestCSFRV18R19NativeIntentionRootSurvivesRollbackReopenAndAudit(t *testing.
 				t.Fatal(err)
 			}
 			f := value.([]any)
-			f[len(f)-1].([]byte)[0] ^= 1
+			digestIndex := len(f) - 1
+			if kind == 22 {
+				digestIndex = 4
+			}
+			f[digestIndex].([]byte)[0] ^= 1
 			altered, err := codec.CanonicalPayload(f)
 			if err != nil {
 				t.Fatal(err)

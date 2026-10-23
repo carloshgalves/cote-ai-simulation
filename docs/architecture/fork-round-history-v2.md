@@ -48,6 +48,19 @@ existing separate child birth migrator. Importing a pointer never sends again,
 creates a child observation, or grants knowledge of the assertion. Replay
 rejects a missing companion, a changed digest, or a retyped root.
 
+Snapshot and EpistemicCheckpoint intentions may refer to an earlier source
+revision. Preparation resolves exact bytes only from sealed source snapshots
+that pass the existing snapshot verifier and predate the fork cut. The native
+archive stores only the referenced root; its immutable ID/digest is already
+bound by the response in the frozen InputLedger. Lineage replay authenticates
+that root under V1. An old Snapshot must have the same run, Genesis, seed and
+policy and its clock must agree with the frozen journal at its revision. An old
+epistemic ref must belong to a checkpoint owner retained at the cut, stay within
+the cut's instant/revision/evidence cursor, and retain its exact inline bytes and
+content hash. Missing artifacts fail closed. These are historical pointers:
+they never replace the child's current world or cognitive checkpoints. External
+artifact authentication remains the separate R22 checkpoint protocol.
+
 New source dispatches must target a round whose eligibility has been reached at
 the authoritative current instant/next ordinal. The SQLite transaction enforces
 this for both RegisterDispatch and generic Append. Legacy revoked receipts may

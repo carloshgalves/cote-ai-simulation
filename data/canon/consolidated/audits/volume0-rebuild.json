@@ -16,7 +16,7 @@
   "no_special_exam_created": true,
   "index_strategy": "DIRECT_LOOKUP",
   "historical_snapshot_before_individual_review": true,
-  "retrospective_correction": "One v0.case.kijima.public-profile was retracted as nonbehavioral; current Volume 0 retained behavioral cases = 24. Historic V0 ingestion counts below are retained for traceability.",
-  "current_volume0_retained_cases": 24,
-  "assistant_record_review_status": "ALL_132_SOURCE_CLAIMS_SEMANTICALLY_REVIEWED_NO_OPERATOR_VERIFICATION"
+  "retrospective_correction": "The original contextual Kijima behavioral case was retired and replaced with a new actor-owned Arisu causal-hypothesis case; volume-0 retains 25 valid cases, with materially corrected attribution.",
+  "current_volume0_retained_cases": 25,
+  "assistant_record_review_status": "ALL_132_SOURCE_CLAIMS_AND_25_BEHAVIOR_CASES_SEMANTICALLY_REVIEWED_NO_OPERATOR_VERIFICATION"
 }

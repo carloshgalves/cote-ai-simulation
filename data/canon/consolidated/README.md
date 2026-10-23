@@ -23,7 +23,7 @@ Facts revealed in May must not seed April character beliefs. Narrated impression
 
 ## Year 1 Volume 1 semantic audit additions
 
-A second content pass added swimming performances, seven short-test failure candidates, Kōenji/Yukimura's tied short-test result, late syllabus notices, parenthetical cost constraints, and secondary students. `assessments/y1-v01-swimming.json` is **a physical education assessment, not an ANHS special exam**. `institutions/anhs.json` distinguishes disclosed rules from school-only information and narrator inference, avoiding January-like automatic allowance assumptions. `institutions/koenji_conglomerate.json` contains *only* Kouenji's statement of prospective succession, not verified wealth or spending power. Yamawaki's Class C affiliation was corrected from an earlier Class A misclassification. All new items remain audit-pending.
+A second content pass added swimming performances, seven short-test failure candidates, Kōenji/Yukimura's tied short-test result, late syllabus notices, parenthetical cost constraints, and secondary students. `assessments/y1-v01-swimming.json` is **a physical education assessment, not an ANHS special exam**. `institutions/anhs.json` distinguishes disclosed rules from school-only information and narrator inference, avoiding January-like automatic allowance assumptions. `institutions/koenji_conglomerate.json` contains *only* Kouenji's statement of prospective succession, not verified wealth or spending power. Yamawaki's Class C affiliation was corrected from an earlier Class A misclassification. All source interpretations have received assistant semantic review, but operator-level canon verification remains separately pending.
 
 ## Volume 0/1 closure (Draft PR #29)
 

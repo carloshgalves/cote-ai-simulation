@@ -16,7 +16,7 @@
       "source_text_private": true
     }
   ],
-  "audit_method": "Per-item direct semantic comparison of 268 evidence paraphrases and 74 retained actor cases against operator-provided PDF passages, following automated source-window triage. Each verdict is source-mode scoped; past original excerpt matching is not itself proof, and no bulk fact promotion is permitted.",
+  "audit_method": "Per-item direct semantic comparison of 268 evidence paraphrases and 75 retained actor cases against operator-provided PDF passages, following automated source-window triage. Each verdict is source-mode scoped; past original excerpt matching is not itself proof, and no bulk fact promotion is permitted.",
   "scope": {
     "records": 268,
     "cases": 75,

@@ -1,0 +1,149 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.y1.deserted-island-1",
+  "name": "Year 1 deserted-island survival special examination",
+  "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
+  "source_coverage": [
+    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+  ],
+  "participants": [
+    "Class A",
+    "Class B",
+    "Class C",
+    "Class D"
+  ],
+  "time": {
+    "start": "Y1_M05_BEGIN",
+    "end": "Y1_M05_AUG_07",
+    "source_authority": "MASHIMA_PUBLIC_BRIEFING"
+  },
+  "initial_class_test_points": 300,
+  "scoring": {
+    "end_of_exam": "Remaining exam points and eligible spot bonuses/leader outcomes add to class points after conclusion; no inference of full underlying engine formula.",
+    "observed_final_scores": {
+      "A": 120,
+      "B": 140,
+      "C": 0,
+      "D": 225
+    },
+    "observed_A_initial_adjustment": {
+      "points": 270,
+      "reason": "Student absent due to illness; teacher-reported 30 point reduction"
+    }
+  },
+  "provisions": {
+    "tents_per_class": 2,
+    "flashlights_per_class": 2,
+    "matches_boxes_per_class": 1,
+    "sunscreen": "UNLIMITED",
+    "toothbrushes_per_student": 1,
+    "menstrual_supplies": "UNLIMITED_ON_REQUEST",
+    "phone": "PROHIBITED_ON_ISLAND"
+  },
+  "penalties": [
+    {
+      "kind": "INABILITY_TO_CONTINUE_ILLNESS_OR_SERIOUS_INJURY",
+      "class_exam_points": 30,
+      "retirement": true
+    },
+    {
+      "kind": "POLLUTE_ENVIRONMENT",
+      "class_exam_points": 20
+    },
+    {
+      "kind": "ABSENT_ROLL_CALL",
+      "class_exam_points": 5,
+      "roll_calls": [
+        "08:00",
+        "20:00"
+      ],
+      "unit": "PER_ABSENT_STUDENT_PER_CALL"
+    },
+    {
+      "kind": "CROSS_CLASS_VIOLENCE_THEFT_PROPERTY_DAMAGE",
+      "consequence": "IMMEDIATE_CLASS_DISQUALIFICATION_AND_OFFENDER_PRIVATE_POINTS_FORFEITURE"
+    },
+    {
+      "kind": "UNAUTHORIZED_USE_OTHER_CLASS_OCCUPIED_SPOT",
+      "class_exam_points": 50
+    },
+    {
+      "kind": "WRONG_RIVAL_LEADER_GUESS",
+      "class_exam_points": 50
+    }
+  ],
+  "leader": {
+    "selection": "REQUIRED_BY_FIRST_ROLL_CALL",
+    "unselected": "SCHOOL_ASSIGNS",
+    "exclusive_keycard": true,
+    "replacement": "ONLY_WITH_SUITABLE_JUSTIFICATION",
+    "observed_accepted_example": "SUZUNE_MEDICAL_RETIREMENT_REPLACED_BY_KIYOTAKA_POST_DISCLOSURE",
+    "actor_knowledge_gate": "AFTER_EXAM_RESULT"
+  },
+  "spots": {
+    "exclusive_duration_hours": 8,
+    "valid_occupation_bonus_points": 1,
+    "bonus_availability": "ONLY_AT_FINAL_CALCULATION",
+    "repeat_claims": "PERMITTED_AFTER_EXPIRY",
+    "leader_guess_on_day": 7,
+    "correct_guess_gain": 50,
+    "target_loss": 50,
+    "wrong_guess_loss": 50,
+    "exposed_leader_forfeits_spot_bonus": true
+  },
+  "other_constraints": [
+    "No negative exam balance after reaching zero",
+    "Assigned base camp cannot change without suitable justification",
+    "Attendance twice daily at declared base",
+    "Retirement cannot be reversed"
+  ],
+  "source_evidence_refs": [
+    "y1v3.ev.011",
+    "y1v3.ev.012",
+    "y1v3.ev.013",
+    "y1v3.ev.014",
+    "y1v3.ev.015",
+    "y1v3.ev.016",
+    "y1v3.ev.017",
+    "y1v3.ev.018",
+    "y1v3.ev.019",
+    "y1v3.ev.020",
+    "y1v3.ev.021",
+    "y1v3.ev.022",
+    "y1v3.ev.026",
+    "y1v3.ev.027",
+    "y1v3.ev.028",
+    "y1v3.ev.029",
+    "y1v3.ev.037",
+    "y1v3.ev.050",
+    "y1v3.ev.101",
+    "y1v3.ev.102",
+    "y1v3.ev.104",
+    "y1v3.ev.105",
+    "y1v3.ev.110",
+    "y1v3.ev.111"
+  ],
+  "epistemic_disclosures": [
+    {
+      "stage": "BEFORE_ISLAND_BRIEFING",
+      "scope": "FIRST_YEAR_STUDENTS",
+      "knowledge": "Leisure trip expected; no known test mechanism"
+    },
+    {
+      "stage": "START_BRIEFING",
+      "scope": "FIRST_YEAR_STUDENTS",
+      "knowledge": "300 points, attrition, spot ownership, named class leader and final guesses"
+    },
+    {
+      "stage": "AFTER_FINAL_RESULTS",
+      "scope": "KIYOTAKA_SUZUNE_DIALOGUE",
+      "knowledge": "Medical retirement permitted actual leader replacement; late strategy interpretations cannot seed earlier knowledge"
+    }
+  ],
+  "open_questions": [
+    "Precise reconciliation of all interim deductions, spot occupation increments and guess counts from independent transaction logs",
+    "Applicability of leader substitution to every cause beyond demonstrated medically justified retirement",
+    "Source-verification of complete activity/item price table"
+  ],
+  "simulation_policy": "Do not turn this reference into executable scoring or actor memory without separate evidence and operator gate."
+}

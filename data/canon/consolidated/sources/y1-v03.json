@@ -1,0 +1,14 @@
+{
+  "source_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+  "work_id": "ln.y1.v03",
+  "edition": "Seven Seas Entertainment English edition, printed 2019; supplied by operator",
+  "pdf_sha256": "22b13fabb5aa2b93e355a0cd621c7e5d9dd63c33d775eda58e27067541c5387e",
+  "pdf_pages": 262,
+  "operator_accepted": true,
+  "official_translation_required": false,
+  "claims_all_verified": false,
+  "record_audit": "INITIAL_EXTRACTION_ASSISTANT_SEMANTIC_REVIEW_PENDING",
+  "original_pdf_committed": false,
+  "source_kind": "LICENSED_EDITION_OPERATOR_SUPPLIED",
+  "warning": "Distributor watermark on provided PDF is not source authority; no copyrighted original committed."
+}

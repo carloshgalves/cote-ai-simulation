@@ -248,6 +248,14 @@ contra merge Git temporário: whitespace herdado da base teve RED antes da
 correção e passa; whitespace novo da feature continua falhando. A correção não
 altera main nem arquivos de cânone e não requer rerun manual do Actions.
 
+O CI de `d84a4bc` mostrou metadata de base desatualizada: o evento apontava para
+`e3d0b18`, mas o merge testado tinha primeiro parent `3ed977a`. CI-1 foi reaberto.
+A fixture reforçada reproduziu RED com esse descompasso e constrói o merge na
+ordem real do GitHub. A correção verifica o head da PR contra o segundo parent,
+usa o primeiro parent real como baseline e faz checkout com depth 2. Whitespace
+da feature continua rejeitado; head divergente também falha. O workflow ganhou
+a mesma política de cancelamento de execuções supersedidas dos outros checkpoints.
+
 ### R20 — ocorrências Event/Claim-owned
 
 O bootstrap V2 agora migra recorrências Event-owned junto de schedules Genesis,

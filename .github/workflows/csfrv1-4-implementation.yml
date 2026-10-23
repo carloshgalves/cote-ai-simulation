@@ -13,11 +13,17 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
 jobs:
   resource-decision:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-go@v6
         with:
           go-version: "1.27.2"
@@ -27,10 +33,21 @@ jobs:
           node-version: "22"
       - name: Diff whitespace check
         env:
-          CSF_DIFF_BASE: ${{ github.event.pull_request.base.sha || '43574722e3f22eb629da47e17bf573dad4a68369' }}
+          CSF_EVENT_NAME: ${{ github.event_name }}
+          CSF_PR_HEAD: ${{ github.event.pull_request.head.sha }}
         run: |
-          git fetch --no-tags --depth=1 origin "$CSF_DIFF_BASE"
-          git diff --check "$CSF_DIFF_BASE" HEAD
+          if [ "$CSF_EVENT_NAME" = "pull_request" ]; then
+            csf_merge_head="$(git rev-parse --verify HEAD^2)"
+            if [ "$csf_merge_head" != "$CSF_PR_HEAD" ]; then
+              echo "Checked-out merge does not match the PR head" >&2
+              exit 1
+            fi
+            csf_diff_base="$(git rev-parse --verify HEAD^1)"
+          else
+            csf_diff_base="43574722e3f22eb629da47e17bf573dad4a68369"
+            git fetch --no-tags --depth=1 origin "$csf_diff_base"
+          fi
+          git diff --check "$csf_diff_base" HEAD
       - name: Deterministic decision kernel tests
         run: go test -count=1 ./internal/csf/decision/... ./internal/csf/extensions/testresourcev1/...
       - name: Full Go regression suite

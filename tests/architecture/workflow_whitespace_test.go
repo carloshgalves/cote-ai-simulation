@@ -20,8 +20,10 @@ func TestDecisionWorkflowWhitespaceUsesPullRequestBase(t *testing.T) {
 	if len(section) != 2 {
 		t.Fatal("whitespace check step missing")
 	}
-	if !strings.Contains(section[1], "CSF_DIFF_BASE: ${{ github.event.pull_request.base.sha || '43574722e3f22eb629da47e17bf573dad4a68369' }}") {
-		t.Fatal("whitespace base must use the exact PR event SHA with the existing push fallback")
+	if !strings.Contains(string(workflow), "fetch-depth: 2") ||
+		!strings.Contains(section[1], "CSF_EVENT_NAME: ${{ github.event_name }}") ||
+		!strings.Contains(section[1], "CSF_PR_HEAD: ${{ github.event.pull_request.head.sha }}") {
+		t.Fatal("whitespace step requires the synthetic merge parents and expected PR head")
 	}
 	block := strings.SplitN(section[1], "run: |\n", 2)
 	if len(block) != 2 {
@@ -43,9 +45,11 @@ func TestDecisionWorkflowWhitespaceUsesPullRequestBase(t *testing.T) {
 	for _, brokenFeature := range []bool{false, true} {
 		t.Run(map[bool]string{false: "unrelated-base-whitespace", true: "feature-whitespace"}[brokenFeature], func(t *testing.T) {
 			dir := t.TempDir()
+			gitEnv := append(os.Environ(), "GIT_CONFIG_GLOBAL=/dev/null", "GIT_CONFIG_NOSYSTEM=1")
 			git := func(args ...string) string {
 				command := exec.Command("git", append([]string{"-c", "user.name=CI fixture", "-c", "user.email=fixture@example.invalid"}, args...)...)
 				command.Dir = dir
+				command.Env = gitEnv
 				out, err := command.CombinedOutput()
 				if err != nil {
 					t.Fatalf("fixture git %v: %v\n%s", args, err, out)
@@ -75,19 +79,34 @@ func TestDecisionWorkflowWhitespaceUsesPullRequestBase(t *testing.T) {
 			write("feature.txt", content)
 			git("add", ".")
 			git("commit", "--quiet", "-m", "feature change")
-			git("merge", "--quiet", "--no-ff", "base", "-m", "synthetic PR merge")
+			feature := git("rev-parse", "HEAD")
+			git("switch", "--quiet", "base")
+			git("merge", "--quiet", "--no-ff", "feature", "-m", "synthetic PR merge")
+			if git("rev-parse", "HEAD^1") != base || git("rev-parse", "HEAD^2") != feature {
+				t.Fatal("fixture does not match GitHub's merge parent order")
+			}
 			git("remote", "add", "origin", dir)
 			// Translate the historical push SHA into this fixture's ancestor.
 			script := strings.ReplaceAll(strings.Join(lines, "\n"), "43574722e3f22eb629da47e17bf573dad4a68369", initial)
 			command := exec.Command("bash", "-e", "-c", script)
 			command.Dir = dir
-			command.Env = append(os.Environ(), "CSF_DIFF_BASE="+base)
+			// Model the observed stale event SHA despite a newer merge base.
+			command.Env = append(gitEnv, "CSF_DIFF_BASE="+initial, "CSF_EVENT_NAME=pull_request", "CSF_PR_HEAD="+feature)
 			out, err := command.CombinedOutput()
 			if !brokenFeature && err != nil {
 				t.Fatalf("unrelated base whitespace rejected the PR: %v\n%s", err, out)
 			}
 			if brokenFeature && (err == nil || !strings.Contains(string(out), "feature.txt")) {
 				t.Fatalf("feature whitespace not rejected: %v\n%s", err, out)
+			}
+			if !brokenFeature {
+				command = exec.Command("bash", "-e", "-c", script)
+				command.Dir = dir
+				command.Env = append(gitEnv, "CSF_DIFF_BASE="+initial, "CSF_EVENT_NAME=pull_request", "CSF_PR_HEAD="+initial)
+				out, err = command.CombinedOutput()
+				if err == nil || !strings.Contains(string(out), "PR head") {
+					t.Fatalf("wrong synthetic merge head accepted: %v\n%s", err, out)
+				}
 			}
 		})
 	}

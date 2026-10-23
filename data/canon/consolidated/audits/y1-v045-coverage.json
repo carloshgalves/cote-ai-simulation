@@ -66,5 +66,13 @@
   "global_behavioral_case_count": 202,
   "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v045.json",
   "operator_release": "NOT_REQUESTED",
-  "pending_semantic_items": 78
+  "pending_semantic_items": 78,
+  "source_fixes": [
+    {
+      "id": "V45-CASE-PAGE-001",
+      "severity": "MEDIUM",
+      "resolution": "Case page anchor changed from unsourced 95 to 97 while PDF 104 remains supported. The earliest conversation p95 may be included only after extracting direct evidence.",
+      "case_id": "y1v45.case.kiyotaka-ayanokoji.mediate-illicit-delivery-proposal"
+    }
+  ]
 }

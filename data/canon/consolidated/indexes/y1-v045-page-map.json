@@ -282,18 +282,13 @@
       ],
       "cases": []
     },
-    "95": {
-      "evidence": [],
-      "cases": [
-        "y1v45.case.kiyotaka-ayanokoji.mediate-illicit-delivery-proposal"
-      ]
-    },
     "97": {
       "evidence": [
         "y1v45.ev.027"
       ],
       "cases": [
-        "y1v45.case.katsuragi.fund-risky-family-delivery"
+        "y1v45.case.katsuragi.fund-risky-family-delivery",
+        "y1v45.case.kiyotaka-ayanokoji.mediate-illicit-delivery-proposal"
       ]
     },
     "100": {

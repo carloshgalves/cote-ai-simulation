@@ -120,6 +120,20 @@
       "status": "RESOLVED_SOURCE_COMPARE",
       "case_id": "y1v4.case.kei-karuizawa.reject-unconsented-photography",
       "description": "Karuizawa's device rejection begins on PDF p.93; source scope expanded to p.93–95."
+    },
+    {
+      "finding": "V4-CASE-010",
+      "severity": "HIGH",
+      "status": "RESOLVED_SOURCE_COMPARE",
+      "case_id": "y1v4.case.honami-ichinose.stage-open-email-visibility",
+      "description": "PDF pp.219–220 shows Ichinose prepared a phone but Kiyotaka interrupted before she displayed any email. Case now credits intention/endorsement, not a completed disclosure."
+    },
+    {
+      "finding": "V4-EV-011",
+      "severity": "MEDIUM",
+      "status": "RESOLVED_SOURCE_COMPARE",
+      "record_id": "y1v4.ev.108",
+      "description": "Final-day Rabbit p.205 is a card-game distraction plus complaint from Yukimura, not continued active argument over policy as previously paraphrased."
     }
   ],
   "initial_findings_closed_count": 3,

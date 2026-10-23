@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.honami-ichinose",
   "title": "stage open email visibility",
   "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
-  "observed_actions": "Endorses Hamaguchi's document-sharing experiment and participates with her own screen to test reactions.",
-  "observed_result": "Some rivals display school messages and the group's suspicion patterns change.",
-  "epistemic_limits": "Voluntary display does not by itself authenticate hidden phone ownership or ensure the group will cooperate.",
+  "observed_actions": "Supports Hamaguchi's proposal to volunteer authentic VIP-notification emails, reaches for her phone and prepares to join the display; Kiyotaka intervenes before she reveals its contents.",
+  "observed_result": "Hamaguchi and Beppu display their notifications, then Kiyotaka presents another device first. Ichinose's own email is not shown in this passage.",
+  "epistemic_limits": "Source PDF pp.218–220 explicitly says Kiyotaka interrupts before Ichinose can show her email. Never credit her with a completed phone disclosure or confirmed VIP status.",
   "source": {
     "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
     "pdf_pages": [

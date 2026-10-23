@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.ryuji-kanzaki",
   "title": "public witness appeal",
   "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
-  "observed_actions": "Posts a campus notice and evaluates an incoming tip",
-  "observed_result": "Receives an investigative lead",
-  "epistemic_limits": "Tip on Ishizaki's past is unverified hearsay",
+  "observed_actions": "Posts a physical information request about the Sudō case; later helps Ichinose assess a tip she received through her separate internet appeal.",
+  "observed_result": "Kanzaki initially reports no useful responses to his printed notice; later reviews Ichinose's unverified online lead.",
+  "epistemic_limits": "Do not attribute the online tip to Kanzaki's notice. The tip about Ishizaki's past is an unverified third-party allegation, not an observed feat.",
   "source": {
     "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
     "pdf_pages": [

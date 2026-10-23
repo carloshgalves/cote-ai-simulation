@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.kikyo-kushida",
   "title": "recognize shizuku identity",
   "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
-  "observed_actions": "Connects online Shizuku photos to Sakura and checks visual details",
+  "observed_actions": "Recognizes a resemblance between online idol Shizuku and Sakura and shows the profile to classmates; Kiyotaka, not Kushida, identifies the photograph's dorm-door clue.",
   "observed_result": "Identifies a private stage persona",
-  "epistemic_limits": "Private recognition is not general public knowledge",
+  "epistemic_limits": "Kushida's recognition is demonstrated, but attributing Kiyotaka's dorm-door deduction to her would misassign another actor's action; disclosure is restricted.",
   "source": {
     "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
     "pdf_pages": [

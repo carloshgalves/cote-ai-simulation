@@ -5,8 +5,8 @@
   "title": "self directed testimony advice",
   "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
   "observed_actions": "Encourages Sakura to speak for her own sake and the truth",
-  "observed_result": "She later decides to attend",
-  "epistemic_limits": "Cannot isolate this advice as the sole cause",
+  "observed_result": "Sakura thanks Kiyotaka; she later attends the hearing, having already promised testimony before this conversation.",
+  "epistemic_limits": "He gives explicit advice, but her earlier commitment means the advice cannot be credited as the unique cause of her attendance.",
   "source": {
     "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
     "pdf_pages": [

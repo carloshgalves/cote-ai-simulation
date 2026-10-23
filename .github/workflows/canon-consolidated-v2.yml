@@ -5,6 +5,7 @@ on:
       - 'data/canon/consolidated/**'
       - 'tools/validate_canon_consolidated_v2.py'
       - 'tools/rebuild_canon_indexes_v2.py'
+      - 'tools/test_canon_y1_v01.py'
       - '.github/workflows/canon-consolidated-v2.yml'
   workflow_dispatch:
 jobs:
@@ -17,3 +18,4 @@ jobs:
           python-version: '3.12'
       - run: python tools/validate_canon_consolidated_v2.py
       - run: python tools/rebuild_canon_indexes_v2.py --check
+      - run: python tools/test_canon_y1_v01.py

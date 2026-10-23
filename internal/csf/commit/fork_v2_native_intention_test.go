@@ -3,6 +3,7 @@ package commit
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
@@ -17,6 +18,54 @@ import (
 func r19NativeIntentionSource(t *testing.T, kind uint64) (*sqlite.Store, *policy.Bundle, domain.ID, sqlite.SnapshotV1) {
 	t.Helper()
 	ctx := context.Background()
+	if kind == 18 || kind == 19 {
+		c, parent, ledger, cycle, fence, path := communicationFixture(t)
+		_, _, _, _, _, run := ledger.Snapshot()
+		if _, err := c.CommitCommunicationSend(ctx, ledger, cycle, fence); err != nil {
+			t.Fatal(err)
+		}
+		csfrv18SettleSendOutbox(t, parent, c.bundle, path)
+		state, err := parent.LoadClock(ctx, [32]byte(run))
+		if err != nil {
+			t.Fatal(err)
+		}
+		if _, err := ledger.CloseSource(ctx, "driver", inputledger.Closure{ProducerKey: "r19-native-final", ClosedThrough: domain.EligibilityCoordinate{NotBeforeInstant: state.Instant + 1000}, Final: true}); err != nil {
+			t.Fatal(err)
+		}
+		root, err := parent.ValidatedGenesis(ctx, [32]byte(run), c.bundle)
+		if err != nil {
+			t.Fatal(err)
+		}
+		db, err := sql.Open("sqlite", path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer db.Close()
+		table := "communication_claims"
+		if kind == 19 {
+			table = "communication_transmissions"
+		}
+		var raw []byte
+		if err := db.QueryRowContext(ctx, "SELECT canonical FROM "+table+" WHERE run_id=?", run[:]).Scan(&raw); err != nil {
+			t.Fatal(err)
+		}
+		value, err := codec.StrictDecodePayload(raw)
+		if err != nil {
+			t.Fatal(err)
+		}
+		f := value.([]any)
+		ref := []any{uint64(1), []any{kind, f[0], f[len(f)-1]}}
+		// Declaring the pending round registers another eligible cognitive owner.
+		// Build the checkpoint roster after that declaration, at the exact cut.
+		checkpoints := func() []sqlite.SnapshotCheckpoint {
+			return csfrv18SyntheticActorCheckpoints(t, path, state.Instant, int64(state.Revision))
+		}
+		ledger, err = inputledger.Open(ctx, run, c.bundle, parent)
+		if err != nil {
+			t.Fatal(err)
+		}
+		return r19SourceWithActionOn(t, parent, ledger, c.bundle, run, []any{uint64(2), []any{root.ID[:], root.Digest[:]}}, true, ref, checkpoints)
+	}
 	b, err := policy.Load(bundlePath)
 	if err != nil {
 		t.Fatal(err)
@@ -82,8 +131,8 @@ func r19NativeIntentionSource(t *testing.T, kind uint64) (*sqlite.Store, *policy
 }
 
 func TestCSFRV18R19NativeIntentionRootSurvivesRollbackReopenAndAudit(t *testing.T) {
-	for _, kind := range []uint64{6, 7} {
-		t.Run(string(rune('0'+kind)), func(t *testing.T) {
+	for _, kind := range []uint64{6, 7, 18, 19} {
+		t.Run(fmt.Sprint(kind), func(t *testing.T) {
 			ctx := context.Background()
 			parent, v1, run, snap := r19NativeIntentionSource(t, kind)
 			v2, err := policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
@@ -135,6 +184,35 @@ func TestCSFRV18R19NativeIntentionRootSurvivesRollbackReopenAndAudit(t *testing.
 			if ref[0] != kind {
 				t.Fatal("historical intention type changed")
 			}
+			if kind == 18 || kind == 19 {
+				db, err := sql.Open("sqlite", path)
+				if err != nil {
+					t.Fatal(err)
+				}
+				table := "communication_claims"
+				if kind == 19 {
+					table = "communication_transmissions"
+				}
+				var inherited int
+				if err := db.QueryRowContext(ctx, "SELECT count(*) FROM "+table+" WHERE run_id=? AND id=?", childID[:], ref[1]).Scan(&inherited); err != nil {
+					t.Fatal(err)
+				}
+				if inherited != 0 {
+					t.Fatal("historical communication ID gained child live authority")
+				}
+				for _, table := range []string{"event_store", "evidence_ledger", "causal_outbox"} {
+					var n int
+					if err := db.QueryRowContext(ctx, "SELECT count(*) FROM "+table).Scan(&n); err != nil {
+						t.Fatal(err)
+					}
+					if n != 0 {
+						t.Fatal("historical communication was republished in the child", table)
+					}
+				}
+				if err := db.Close(); err != nil {
+					t.Fatal(err)
+				}
+			}
 			pending, err := child.PendingClock(ctx, childID)
 			if err != nil {
 				t.Fatal(err)
@@ -144,7 +222,12 @@ func TestCSFRV18R19NativeIntentionRootSurvivesRollbackReopenAndAudit(t *testing.
 					t.Fatal("historical intention root became child scheduling authority")
 				}
 			}
-			checkpoint, err := child.CreateSnapshotV1(ctx, childID, v2, nil)
+			state, err := child.LoadClock(ctx, childID)
+			if err != nil {
+				t.Fatal(err)
+			}
+			checkpoints := csfrv18SyntheticActorCheckpoints(t, path, state.Instant, int64(state.Revision))
+			checkpoint, err := child.CreateSnapshotV1(ctx, childID, v2, checkpoints)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -155,11 +238,15 @@ func TestCSFRV18R19NativeIntentionRootSurvivesRollbackReopenAndAudit(t *testing.
 			if err := db.QueryRowContext(ctx, "SELECT count(*) FROM fork_history_roots WHERE child_run=?", childID[:]).Scan(&roots); err != nil {
 				t.Fatal(err)
 			}
-			if roots != 1 {
+			wantRoots := 1
+			if kind == 18 || kind == 19 {
+				wantRoots = 2
+			}
+			if roots != wantRoots {
 				t.Fatal("native intention not archived exactly once", roots)
 			}
 			var original []byte
-			if err := db.QueryRowContext(ctx, "SELECT canonical FROM fork_history_roots WHERE child_run=?", childID[:]).Scan(&original); err != nil {
+			if err := db.QueryRowContext(ctx, "SELECT canonical FROM fork_history_roots WHERE child_run=? AND reference_kind=?", childID[:], kind).Scan(&original); err != nil {
 				t.Fatal(err)
 			}
 			value, err := codec.StrictDecodePayload(original)
@@ -172,13 +259,13 @@ func TestCSFRV18R19NativeIntentionRootSurvivesRollbackReopenAndAudit(t *testing.
 			if err != nil {
 				t.Fatal(err)
 			}
-			if _, err := db.ExecContext(ctx, "UPDATE fork_history_roots SET canonical=? WHERE child_run=?", altered, childID[:]); err != nil {
+			if _, err := db.ExecContext(ctx, "UPDATE fork_history_roots SET canonical=? WHERE child_run=? AND reference_kind=?", altered, childID[:], kind); err != nil {
 				t.Fatal(err)
 			}
 			if _, err := child.ReplayClock(ctx, childID, v2); err == nil {
 				t.Fatal("corrupt native embedded digest accepted")
 			}
-			if _, err := db.ExecContext(ctx, "UPDATE fork_history_roots SET canonical=? WHERE child_run=?", original, childID[:]); err != nil {
+			if _, err := db.ExecContext(ctx, "UPDATE fork_history_roots SET canonical=? WHERE child_run=? AND reference_kind=?", original, childID[:], kind); err != nil {
 				t.Fatal(err)
 			}
 			if _, err := child.ReplayClock(ctx, childID, v2); err != nil {
@@ -188,17 +275,58 @@ func TestCSFRV18R19NativeIntentionRootSurvivesRollbackReopenAndAudit(t *testing.
 			if kind == 6 {
 				wrongKind = 7
 			}
-			if _, err := db.ExecContext(ctx, "UPDATE fork_history_roots SET reference_kind=? WHERE child_run=?", wrongKind, childID[:]); err != nil {
+			if _, err := db.ExecContext(ctx, "UPDATE fork_history_roots SET reference_kind=? WHERE child_run=? AND reference_kind=?", wrongKind, childID[:], kind); err != nil {
 				t.Fatal(err)
 			}
 			if _, err := child.ReplayClock(ctx, childID, v2); err == nil {
 				t.Fatal("native proof retyped to a different authority")
 			}
-			if _, err := db.ExecContext(ctx, "UPDATE fork_history_roots SET reference_kind=? WHERE child_run=?", kind, childID[:]); err != nil {
+			if _, err := db.ExecContext(ctx, "UPDATE fork_history_roots SET reference_kind=? WHERE child_run=? AND reference_kind=?", kind, childID[:], wrongKind); err != nil {
 				t.Fatal(err)
 			}
 			if _, err := child.ReplayClock(ctx, childID, v2); err != nil {
 				t.Fatal(err)
+			}
+			if kind == 18 || kind == 19 {
+				companion := uint64(18)
+				if kind == 18 {
+					companion = 19
+				}
+				var companionID, companionRaw []byte
+				if err := db.QueryRowContext(ctx, "SELECT record_id,canonical FROM fork_history_roots WHERE child_run=? AND reference_kind=?", childID[:], companion).Scan(&companionID, &companionRaw); err != nil {
+					t.Fatal(err)
+				}
+				value, err := codec.StrictDecodePayload(companionRaw)
+				if err != nil {
+					t.Fatal(err)
+				}
+				fields := value.([]any)
+				fields[len(fields)-1].([]byte)[0] ^= 1
+				corrupt, err := codec.CanonicalPayload(fields)
+				if err != nil {
+					t.Fatal(err)
+				}
+				if _, err := db.ExecContext(ctx, "UPDATE fork_history_roots SET canonical=? WHERE child_run=? AND reference_kind=?", corrupt, childID[:], companion); err != nil {
+					t.Fatal(err)
+				}
+				if _, err := child.ReplayClock(ctx, childID, v2); err == nil {
+					t.Fatal("native communication graph accepted a corrupt companion root")
+				}
+				if _, err := db.ExecContext(ctx, "UPDATE fork_history_roots SET canonical=? WHERE child_run=? AND reference_kind=?", companionRaw, childID[:], companion); err != nil {
+					t.Fatal(err)
+				}
+				if _, err := db.ExecContext(ctx, "DELETE FROM fork_history_roots WHERE child_run=? AND reference_kind=?", childID[:], companion); err != nil {
+					t.Fatal(err)
+				}
+				if _, err := child.ReplayClock(ctx, childID, v2); err == nil {
+					t.Fatal("native communication graph accepted a missing companion root")
+				}
+				if _, err := db.ExecContext(ctx, "INSERT INTO fork_history_roots(child_run,reference_kind,record_id,canonical) VALUES(?,?,?,?)", childID[:], companion, companionID, companionRaw); err != nil {
+					t.Fatal(err)
+				}
+				if _, err := child.ReplayClock(ctx, childID, v2); err != nil {
+					t.Fatal("communication companion restoration failed:", err)
+				}
 			}
 			if _, err := db.ExecContext(ctx, "DELETE FROM fork_history_roots WHERE child_run=?", childID[:]); err != nil {
 				t.Fatal(err)

@@ -418,7 +418,7 @@ func verifyRoundHistoryV2(ctx context.Context, tx *sql.Tx, parent, child *genesi
 	if err != nil {
 		return err
 	}
-	if err := loadNativeRoundIntentions(ctx, tx, child, snapshot, archive); err != nil {
+	if err := loadNativeRoundIntentions(ctx, tx, parent, child, snapshot, archive, origin); err != nil {
 		return err
 	}
 	rounds, slots, err := migrateRoundHistoryV2(parent, child, snapshot, archive, origin, target)

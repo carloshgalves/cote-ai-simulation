@@ -53,12 +53,13 @@ func r19SourceWithActionOn(t *testing.T, parent *sqlite.Store, ledger *inputledg
 	if err != nil {
 		t.Fatal(err)
 	}
+	nextOrdinal := uint64(state.LastOrdinal + 1)
 	round, err := ledger.DeclareRound(ctx, "genesis.schedule", [2]string{"school", "a"}, []string{"answered", "open", "revoked"},
-		domain.EligibilityCoordinate{NotBeforeInstant: state.Instant}, origin, 1, 0, 0, []any{uint64(0)})
+		domain.EligibilityCoordinate{NotBeforeInstant: state.Instant, NotBeforeCycleOrdinal: domain.CycleOrdinal(nextOrdinal)}, origin, 1, 0, 0, []any{uint64(0)})
 	if err != nil {
 		t.Fatal(err)
 	}
-	cid, _, err := identity.New(v1).Sum("cote.csf.id.cycle", "cote.csf.schema.cycle-id-preimage", 1, []any{run[:], []any{int64(state.Instant), uint64(0)}})
+	cid, _, err := identity.New(v1).Sum("cote.csf.id.cycle", "cote.csf.schema.cycle-id-preimage", 1, []any{run[:], []any{int64(state.Instant), nextOrdinal}})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -97,7 +98,14 @@ func r19SourceWithActionOn(t *testing.T, parent *sqlite.Store, ledger *inputledg
 			}
 		}
 	}
-	snap, err := parent.CreateSnapshotV1(ctx, [32]byte(run), v1, nil)
+	var checkpoints []sqlite.SnapshotCheckpoint
+	if len(intention) > 1 {
+		checkpoints, _ = intention[1].([]sqlite.SnapshotCheckpoint)
+		if build, ok := intention[1].(func() []sqlite.SnapshotCheckpoint); ok {
+			checkpoints = build()
+		}
+	}
+	snap, err := parent.CreateSnapshotV1(ctx, [32]byte(run), v1, checkpoints)
 	if err != nil {
 		t.Fatal(err)
 	}

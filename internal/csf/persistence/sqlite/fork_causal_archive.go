@@ -208,7 +208,7 @@ func authenticateArchivedCausalRef(ref []any, parent *genesis.Genesis, snapshot 
 	if digestRule["preimage_schema"] != rule["persisted_root"] && !equalBytes(fields[len(fields)-1], digest) {
 		return errors.New("historical root embedded digest differs from authenticated reference")
 	}
-	if kind == 6 || kind == 7 {
+	if kind == 6 || kind == 7 || kind == 18 || kind == 19 {
 		return authenticateNativeRootAtCut(kind, ref, fields, parent, snapshot, archive, bundle)
 	}
 	return nil

@@ -38,6 +38,16 @@ pending-work migrators still derive the child's live occurrence/activation IDs.
 The root archive is published in the same transaction as Genesis and the five
 ledger archives; an injected root-insert fault rolls back the complete birth.
 
+Claim and Transmission intention roots use the same historical archive. Both
+members of the send pair are required, even when the response points only to a
+Claim. Their exact identities and digests are authenticated against the frozen
+`communication.sent` Event, its source ActionProposal and the CycleCommit that
+published both. Transmission content must reference that exact Claim. The
+source roots remain opaque provenance; live in-transit communication uses the
+existing separate child birth migrator. Importing a pointer never sends again,
+creates a child observation, or grants knowledge of the assertion. Replay
+rejects a missing companion, a changed digest, or a retyped root.
+
 New source dispatches must target a round whose eligibility has been reached at
 the authoritative current instant/next ordinal. The SQLite transaction enforces
 this for both RegisterDispatch and generic Append. Legacy revoked receipts may

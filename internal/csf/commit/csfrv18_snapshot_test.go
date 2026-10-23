@@ -1044,7 +1044,8 @@ func csfrv18SyntheticActorCheckpoints(t *testing.T,path string,at domain.Simulat
  defer db.Close()
  var cursor uint64
  if err:=db.QueryRow("SELECT count(*) FROM evidence_ledger").Scan(&cursor);err!=nil{t.Fatal(err)}
- rows,err:=db.Query("SELECT DISTINCT holder_namespace,holder_id FROM evidence_routes ORDER BY holder_namespace,holder_id")
+ // Eligible owners include fork-restored actors with no child observation yet.
+ rows,err:=db.Query("SELECT actor_namespace,actor_id FROM cognitive_actor_registry UNION SELECT holder_namespace,holder_id FROM evidence_routes ORDER BY 1,2")
  if err!=nil{t.Fatal(err)}
  defer rows.Close()
  refs:=[]sqlite.SnapshotCheckpoint{}

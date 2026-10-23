@@ -213,5 +213,17 @@ extras. O teste de ambas as classes parte de autoridade SQLite real e cobre
 falha de INSERT da proof com rollback integral/retry, reopen, replay, corrupção
 do digest embutido e remoção da raiz. O digest embutido teve RED próprio antes da
 comparação explícita. A proof histórica não é autoridade viva do filho.
-Raízes de intenção Claim/Transmission e checkpoints históricos fora do corte
-corrente ainda requerem extensão; R20–R23 e OPEN-02/OPEN-05 seguem pendentes.
+Checkpoints históricos fora do corte corrente ainda requerem extensão;
+R20–R23 e OPEN-02/OPEN-05 seguem pendentes.
+
+A slice seguinte inclui raízes de intenção Claim/Transmission. O archive exige
+ambos os membros do par, autenticados pelo Event `communication.sent`, pela
+ActionProposal de origem e pelo CycleCommit congelado. O teste teve RED por
+raiz indisponível e agora cobre rollback integral/retry, reopen/replay, snapshot
+do filho, digest alterado, tipo trocado, remoção do companion e restauração exata.
+Os IDs históricos não são instalados nas tabelas vivas de comunicação do filho;
+EventStore, EvidenceLedger e outbox permanecem vazios no nascimento. A mensagem
+IN_TRANSIT é reconstruída pelo migrador positivo já existente, sem repetir envio
+nem conceder conhecimento da assertion. Fixtures fornecem checkpoints opacos de
+todos os atores cadastrados e titulares de evidência, inclusive antes de uma
+observação no filho. Isso não altera os requisitos de cobertura em produção.

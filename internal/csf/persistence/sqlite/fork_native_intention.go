@@ -89,7 +89,7 @@ func nativeRoundIntentionRefs(snapshot []any, archive forkHistoryArchive) (map[s
 		if !ok {
 			return nil, errors.New("historical intention kind malformed")
 		}
-		if kind != 6 && kind != 7 {
+		if kind != 6 && kind != 7 && kind != 18 && kind != 19 {
 			continue
 		}
 		id, ok := ref[1].([]byte)
@@ -102,6 +102,27 @@ func nativeRoundIntentionRefs(snapshot []any, archive forkHistoryArchive) (map[s
 			return nil, errors.New("native root identity has two content digests")
 		}
 		refs[key] = ref
+	}
+	// The sent Event authenticates the Claim/Transmission pair, including a
+	// Transmission's referenced Claim. Preserve that closed historical pair.
+	var communicationRefs [][]any
+	for _, ref := range refs {
+		if ref[0] == uint64(18) || ref[0] == uint64(19) {
+			communicationRefs = append(communicationRefs, ref)
+		}
+	}
+	for _, ref := range communicationRefs {
+		pair, err := communicationIntentionPair(ref, archive)
+		if err != nil {
+			return nil, err
+		}
+		for _, member := range pair {
+			key := nativeRefKey(member)
+			if old, ok := refs[key]; ok && !sameCanonical(old, member) {
+				return nil, errors.New("communication historical root has conflicting digests")
+			}
+			refs[key] = member
+		}
 	}
 	return refs, nil
 }
@@ -121,8 +142,13 @@ func prepareNativeRoundIntentions(ctx context.Context, s *Store, parent *genesis
 		ref := refs[key]
 		kind := ref[0].(uint64)
 		table := "scheduled_occurrences"
-		if kind == 7 {
+		switch kind {
+		case 7:
 			table = "trigger_activations"
+		case 18:
+			table = "communication_claims"
+		case 19:
+			table = "communication_transmissions"
 		}
 		var raw []byte
 		if err := s.db.QueryRowContext(ctx, "SELECT canonical FROM "+table+" WHERE run_id=? AND id=?", parent.RunID[:], ref[1]).Scan(&raw); err != nil {
@@ -138,7 +164,7 @@ func prepareNativeRoundIntentions(ctx context.Context, s *Store, parent *genesis
 	return roots, nil
 }
 
-func loadNativeRoundIntentions(ctx context.Context, tx *sql.Tx, child *genesis.Genesis, snapshot []any, archive forkHistoryArchive) error {
+func loadNativeRoundIntentions(ctx context.Context, tx *sql.Tx, parent, child *genesis.Genesis, snapshot []any, archive forkHistoryArchive, origin *policy.Bundle) error {
 	expected, err := nativeRoundIntentionRefs(snapshot, archive)
 	if err != nil {
 		return err
@@ -148,6 +174,7 @@ func loadNativeRoundIntentions(ctx context.Context, tx *sql.Tx, child *genesis.G
 		return err
 	}
 	defer rows.Close()
+	var loadedRefs [][]any
 	for rows.Next() {
 		var kind uint64
 		var id, raw []byte
@@ -159,9 +186,11 @@ func loadNativeRoundIntentions(ctx context.Context, tx *sql.Tx, child *genesis.G
 		}
 		ref := []any{kind, id, []byte{}}
 		key := nativeRefKey(ref)
-		if _, ok := expected[key]; !ok {
+		expectedRef, ok := expected[key]
+		if !ok {
 			return errors.New("native archived root not owned by a migrated intention")
 		}
+		loadedRefs = append(loadedRefs, expectedRef)
 		delete(expected, key)
 		archive[nativeArchiveKey(kind)] = append(archive[nativeArchiveKey(kind)], ports.CanonicalRecord{Identity: bytesToID(id), Canonical: raw})
 	}
@@ -171,6 +200,16 @@ func loadNativeRoundIntentions(ctx context.Context, tx *sql.Tx, child *genesis.G
 	if len(expected) != 0 {
 		return errors.New("native historical intention root missing")
 	}
+	if err := rows.Close(); err != nil {
+		return err
+	}
+	// Authenticate every member after loading the complete dependency graph.
+	// A companion root need not itself be the response's intention pointer.
+	for _, ref := range loadedRefs {
+		if err := authenticateArchivedCausalRef(ref, parent, snapshot, archive, origin); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -178,6 +217,9 @@ func loadNativeRoundIntentions(ctx context.Context, tx *sql.Tx, child *genesis.G
 // the cut: the pending projection or an archived fence binds its exact digest.
 // This prevents a later source tail from satisfying an earlier dangling pointer.
 func authenticateNativeRootAtCut(kind uint64, ref, fields []any, parent *genesis.Genesis, snapshot []any, archive forkHistoryArchive, b *policy.Bundle) error {
+	if kind == 18 || kind == 19 {
+		return authenticateCommunicationIntentionAtCut(kind, ref, fields, parent, snapshot, archive, b)
+	}
 	if len(fields) < 2 || !equalBytes(fields[1], parent.RunID[:]) {
 		return errors.New("native intention root belongs to another run")
 	}

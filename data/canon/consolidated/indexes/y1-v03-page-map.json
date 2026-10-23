@@ -329,6 +329,14 @@
         "y1v3.case.kikyo-kushida.share-rations-with-ibuki"
       ]
     },
+    "96": {
+      "evidence": [
+        "y1v3.ev.049"
+      ],
+      "cases": [
+        "y1v3.case.kikyo-kushida.share-rations-with-ibuki"
+      ]
+    },
     "97": {
       "evidence": [
         "y1v3.ev.050"
@@ -424,7 +432,9 @@
       "evidence": [
         "y1v3.ev.059"
       ],
-      "cases": []
+      "cases": [
+        "y1v3.case.honami-ichinose.evaluate-well-before-shared-use"
+      ]
     },
     "122": {
       "evidence": [
@@ -457,13 +467,17 @@
       "evidence": [
         "y1v3.ev.063"
       ],
-      "cases": []
+      "cases": [
+        "y1v3.case.katsuragi.defend-class-a-exclusive-cave"
+      ]
     },
     "129": {
       "evidence": [
         "y1v3.ev.063"
       ],
-      "cases": []
+      "cases": [
+        "y1v3.case.katsuragi.defend-class-a-exclusive-cave"
+      ]
     },
     "131": {
       "evidence": [
@@ -716,14 +730,18 @@
       "evidence": [
         "y1v3.ev.097"
       ],
-      "cases": []
+      "cases": [
+        "y1v3.case.mio-ibuki.undercover-leader-card-delivery"
+      ]
     },
     "224": {
       "evidence": [
         "y1v3.ev.095",
         "y1v3.ev.097"
       ],
-      "cases": []
+      "cases": [
+        "y1v3.case.mio-ibuki.undercover-leader-card-delivery"
+      ]
     },
     "225": {
       "evidence": [

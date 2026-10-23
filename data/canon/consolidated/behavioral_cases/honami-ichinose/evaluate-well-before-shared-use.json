@@ -4,13 +4,14 @@
   "primary_actor_id": "actor.honami-ichinose",
   "title": "evaluate well before shared use",
   "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
-  "observed_actions": "Personally drinks from a discovered well, observes effects and gradually expands access",
-  "observed_result": "Class B begins using well water more widely",
-  "epistemic_limits": "An improvised observation is not microbiological proof of water safety",
+  "observed_actions": "Explains Class B's gradual well adoption after an initial water test and coordinates its shared use.",
+  "observed_result": "Class B uses the well and water-heating facilities after preliminary testing.",
+  "epistemic_limits": "Ichinose reports the process; the passage does not establish that she personally tested the water or that it was microbiologically safe.",
   "source": {
     "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "pdf_pages": [
-      120
+      120,
+      121
     ],
     "chapter": 3,
     "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"

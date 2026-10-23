@@ -1159,10 +1159,11 @@
       "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
       "chapter": 2,
       "pdf_pages": [
-        95
+        95,
+        96
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Kushida offers a ration and water to Ibuki after the class agrees to share food despite the newcomer not counting among its original rationed students.",
+      "primary_claim": "Kushida and friends divide four portions of food and water among five people so that Ibuki can receive a shared ration (p.96); resource-sharing is demonstrated but trust in the newcomer is not thereby validated.",
       "actor_ids": [
         "actor.kikyo-kushida",
         "actor.mio-ibuki"
@@ -3042,7 +3043,8 @@
       "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/share-rations-with-ibuki.json",
       "primary_actor_id": "actor.kikyo-kushida",
       "pdf_pages": [
-        95
+        95,
+        96
       ],
       "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
       "reviewed_by_assistant": false,
@@ -3374,7 +3376,9 @@
       "primary_actor_id": "actor.mio-ibuki",
       "pdf_pages": [
         221,
-        222
+        222,
+        223,
+        224
       ],
       "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
       "reviewed_by_assistant": false,
@@ -3411,7 +3415,8 @@
       "case_file": "data/canon/consolidated/behavioral_cases/honami-ichinose/evaluate-well-before-shared-use.json",
       "primary_actor_id": "actor.honami-ichinose",
       "pdf_pages": [
-        120
+        120,
+        121
       ],
       "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
       "reviewed_by_assistant": false,
@@ -3429,7 +3434,9 @@
       "case_file": "data/canon/consolidated/behavioral_cases/katsuragi/defend-class-a-exclusive-cave.json",
       "primary_actor_id": "actor.katsuragi",
       "pdf_pages": [
-        127
+        127,
+        128,
+        129
       ],
       "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
       "reviewed_by_assistant": false,

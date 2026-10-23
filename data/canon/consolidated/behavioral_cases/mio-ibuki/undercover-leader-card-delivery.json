@@ -4,14 +4,16 @@
   "primary_actor_id": "actor.mio-ibuki",
   "title": "undercover leader card delivery",
   "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
-  "observed_actions": "Maintains undercover position and supplies Horikita's leader card to Ryūen after a clandestine confrontation",
-  "observed_result": "Ryūen personally confirms Suzune's name on the card",
-  "epistemic_limits": "Espionage outcome depends on concealment, access and medical circumstances; cannot seed rival knowledge before delivery",
+  "observed_actions": "Maintains a cover story at Class D, steals Suzune's leader card, arranges transceiver contact and presents the real card first to Ryūen and then to Katsuragi; later returns the card to unconscious Suzune.",
+  "observed_result": "Both Ryūen and Katsuragi inspect the card, and a secret A/C agreement is accepted, though Ibuki does not reveal the contract's detailed terms.",
+  "epistemic_limits": "Cover involved staged injury and malfunctioning camera. Private dialogue is available only to attendees, not the Class D students who sheltered her.",
   "source": {
     "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "pdf_pages": [
       221,
-      222
+      222,
+      223,
+      224
     ],
     "chapter": 6,
     "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"

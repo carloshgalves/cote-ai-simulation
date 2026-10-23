@@ -4,13 +4,15 @@
   "primary_actor_id": "actor.katsuragi",
   "title": "defend class a exclusive cave",
   "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
-  "observed_actions": "Intervenes when Yahiko rebuffs rival scouts and explains why occupying classes should be allowed to protect sites",
-  "observed_result": "Dissuades intruders from pushing into an occupied cave",
-  "epistemic_limits": "Reasoned boundary proposal is local and not a universal enforceable law",
+  "observed_actions": "Interrupts the rival visitors' attempt to enter an occupied Class A cave; appeals to reciprocal protection of occupied sites to discourage retaliation.",
+  "observed_result": "Horikita and Kiyotaka leave without entering the occupied cave.",
+  "epistemic_limits": "His appeal invokes an informal mutually observed practice, not a separate mandatory school rule.",
   "source": {
     "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "pdf_pages": [
-      127
+      127,
+      128,
+      129
     ],
     "chapter": 3,
     "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"

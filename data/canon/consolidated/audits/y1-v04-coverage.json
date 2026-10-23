@@ -135,6 +135,20 @@
       "status": "RESOLVED_SOURCE_COMPARE",
       "record_id": "y1v4.ev.108",
       "description": "Final-day Rabbit p.205 is a card-game distraction plus complaint from Yukimura, not continued active argument over policy as previously paraphrased."
+    },
+    {
+      "finding": "V4-ADV-012",
+      "severity": "MEDIUM",
+      "status": "RESOLVED_ADVERSARIAL",
+      "case_id": "y1v4.case.honami-ichinose.challenge-machida-passivity",
+      "description": "The pp.86→90 objection spans Machida's preceding case claim and Ichinose's own response; contextual evidence ev.052 linked without changing case ownership."
+    },
+    {
+      "finding": "V4-ADV-013",
+      "severity": "MEDIUM",
+      "status": "RESOLVED_ADVERSARIAL",
+      "case_id": "y1v4.case.suzune-horikita.challenge-rival-alliance-threat",
+      "description": "Horikita's counterargument on p148 and Ichinose's independent refusal on p149 now both linked as act and outcome evidence, without conflating their agency."
     }
   ],
   "initial_findings_closed_count": 3,

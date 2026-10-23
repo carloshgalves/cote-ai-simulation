@@ -31,7 +31,8 @@
     "strategy"
   ],
   "evidence_refs": [
-    "y1v4.ev.077"
+    "y1v4.ev.077",
+    "y1v4.ev.078"
   ],
   "case_kind": "BEHAVIORAL_DEMONSTRATION",
   "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",

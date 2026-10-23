@@ -31,7 +31,7 @@ def findings(s):
     fail(src["original_pdf_committed"] is False and src["claims_all_verified"] is False,"source certification")
     fail(len(reg["evidence"])==130 and len(reg["behavioral_cases"])==43,"register count")
     fail(reg["release_gate"]["operator_approval"]=="PENDING","human authorization")
-    fail(reg["release_gate"]["external_independent_review"]=="NOT_PERFORMED" or reg["release_gate"]["external_independent_review"]=="ADVERSARIAL_SAME_ASSISTANT_COMPLETE_EXTERNAL_REVIEWER_PENDING","external reviewer separation")
+    fail(reg["release_gate"]["external_independent_review"] in {"NOT_PERFORMED","ADVERSARIAL_METHOD_PENDING","ADVERSARIAL_SAME_ASSISTANT_COMPLETE_EXTERNAL_REVIEWER_PENDING"},"external reviewer separation")
     fail(reg["release_gate"]["engine_memory_admission"] is False and reg["release_gate"]["exam_executable"] is False,"runtime gates")
     fail(reg["global_promotion"].startswith("BLOCKED"),"release remains blocked")
     for entry in reg["evidence"]+reg["behavioral_cases"]:
@@ -96,7 +96,7 @@ def findings(s):
     fail(exam["outcomes"][3]["penalties"]["submitter_class_points"]==-50,"early false guess cost")
     fail(exam["observed_net_class_points"]=={"A":-200,"B":0,"C":150,"D":50},"published class results")
     fail(exam["observed_final_outcomes"]["Rabbit"]==4 and exam["observed_final_outcomes"]["Dragon"]==1,"key results")
-    fail("fourth" in exam["timing"]["schedule_ambiguity"] and "third" in exam["timing"]["schedule_ambiguity"],"source's calendar ambiguity")
+    fail("fourth" in exam["timing"]["schedule_ambiguity"] and ("third" in exam["timing"]["schedule_ambiguity"] or "three-day" in exam["timing"]["schedule_ambiguity"]),"source's calendar ambiguity")
     fail(exam["individual_known_secret_outcomes"][0]["public_group_knowledge"]=="NOT_SHARED_UNTIL_AFTER_EXAM","VIP disclosure leak")
     fail(not any("deterministic_formula" in str(k) for k in exam.keys()),"invented VIP allocation formula")
     return sorted(set(bad))

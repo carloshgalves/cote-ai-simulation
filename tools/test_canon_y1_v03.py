@@ -51,7 +51,28 @@ assert review["evidence_count"]==117
 assert review["behavioral_case_count"]==35
 assert {x["record_id"] for x in review["evidence"]}==ids
 assert {x["case_id"] for x in review["behavioral_cases"]}==set(case_paths)
-assert all(not x["verified"] and not x["reviewed_by_assistant"] for x in review["evidence"]+review["behavioral_cases"])
+assert all(x["reviewed_by_assistant"] is True and x["verified"] is False for x in review["evidence"]+review["behavioral_cases"])
+assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_SOURCE_REVIEW_PASS" for x in review["evidence"])
+assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_CASE_REVIEW_PASS" for x in review["behavioral_cases"])
+assert all(isinstance(x["review_note"],str) and len(x["review_note"])>=45 for x in review["evidence"]+review["behavioral_cases"])
+assert review["release_gate"]["assistant_individual_semantic_review"]=="COMPLETE"
+assert review["release_gate"]["external_independent_reviewer"]=="PENDING"
+assert review["release_gate"]["individual_verified_count"]==0
+assert review["global_promotion"].startswith("BLOCKED_")
+assert source["record_audit"]=="ASSISTANT_SEMANTIC_REVIEW_COMPLETE_EXTERNAL_REVIEW_AND_OPERATOR_RELEASE_PENDING"
+assert coverage["final_semantic_review"]["assistant_total"]==152
+assert coverage["final_semantic_review"]["human_individual_verified"]==0
+for item in review["evidence"]:
+    c=next(e for e in E if e["id"]==item["record_id"])
+    assert item["pdf_pages"]==c["source"]["pdf_pages"],item["record_id"]
+    assert item["primary_claim"]==c["summary"],item["record_id"]
+    assert item["source_mode"]==c["source_mode"],item["record_id"]
+    assert item["actor_ids"]==c["mention_actor_ids"],item["record_id"]
+for item in review["behavioral_cases"]:
+    c=J(B.parent.parent.parent/item["case_file"])
+    assert c["primary_actor_id"]==item["primary_actor_id"],item["case_id"]
+    assert c["source"]["pdf_pages"]==item["pdf_pages"],item["case_id"]
+
 assert review["global_promotion"].startswith("BLOCKED")
 assert review["release_gate"]["operator_approval"]=="PENDING"
 assert exam["authority"]=="CANON_REFERENCE_NOT_EXECUTABLE"
@@ -71,4 +92,25 @@ assert any("Kaneda" in e["summary"] and e["source_mode"]=="REPORTED_BY_CHARACTER
 assert any("intuition" in e["summary"] and e["source_mode"]=="INTERPRETATION" for e in E)
 assert any(e["source"]["chapter"]==5 and e["story_time"].endswith("FLASHBACK") for e in E)
 assert all(c["source"]["work_id"]==source["source_id"] for c in cases)
-print("PASS Y1 V3 initial extraction: 117 source records, 35 actor cases, exam reference, pending release gates")
+
+# High-risk source and knowledge gates confirmed during the individual semantic pass
+def one(n):
+    return next(e for e in E if e["id"]=="y1v3.ev."+str(n).zfill(3))
+assert one(35)["mention_actor_ids"]==["actor.kiyotaka-ayanokoji","actor.katsuragi","actor.yahiko"]
+assert one(35)["source"]["pdf_pages"]==[59,60]
+assert "y1v3.case.katsuragi.infer-cave-route-from-cruise" in case_paths
+assert "y1v3.case.kiyotaka-ayanokoji.spot-island-path-from-ship" not in case_paths
+assert {"actor.komiya","actor.kondou"}<=set(one(53)["mention_actor_ids"])
+assert "actor.ishizaki" not in one(53)["mention_actor_ids"]
+assert one(61)["source"]["pdf_pages"]==[120,122]
+assert "alliance" in one(97)["summary"]
+assert "terms" in one(97)["summary"]
+assert "7:58" in one(101)["summary"] and "roll call" in one(101)["summary"]
+assert "five" in one(102)["summary"].lower() or "5" in one(102)["summary"]
+assert one(113)["source_mode"]=="INTERPRETATION"
+assert one(117)["source_mode"]=="REPORTED_BY_CHARACTER"
+assert one(117)["source"]["pdf_pages"]==[124,255]
+assert J(B/"audits/adversarial-review-y1-v03.json")["human_verification"] is False
+assert len(J(B/"audits/adversarial-review-y1-v03.json")["resolved_findings"])>=8
+
+print("PASS Y1 V3: 117 source semantic reviews, 35 actor case reviews; human and external gates preserved")

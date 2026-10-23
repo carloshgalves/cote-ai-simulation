@@ -1,0 +1,26 @@
+{
+  "schema_version": "consolidated-institution-v2",
+  "institution_id": "org.student-council",
+  "display_name": "ANHS student council",
+  "source_coverage": [
+    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "evidence_refs": [
+    "y1v1.ev.031",
+    "y1v1.ev.032"
+  ],
+  "owner_truth_boundary": "Student-council authority described in Manabu's public speech, not independently executed rulebook",
+  "structure": {
+    "president": "actor.manabu-horikita",
+    "eligibility_claims": [
+      "Accepts first-year applications",
+      "Discourages simultaneously belonging to other clubs"
+    ],
+    "claimed_functions": [
+      "enforcement",
+      "amendment of school rules"
+    ]
+  },
+  "operational_migration": "Do not invent bylaws or quantitative council powers"
+}

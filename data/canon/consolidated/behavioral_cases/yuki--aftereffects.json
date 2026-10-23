@@ -1,0 +1,50 @@
+{
+  "id": "v0.case.yuki.aftereffects",
+  "actor_id": "actor.yuki",
+  "title": "Lasting distress and hope for reconnection",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      251,
+      252,
+      253,
+      254
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Years after leaving White Room, Yuki meets Kiyotaka in counseling facility",
+  "information_available": "Knowledge of shared childhood; limited information about other children",
+  "perceived_objective": "Obtain reassurance and reconnect with past peer",
+  "observed_actions": "Seeks dialogue despite distress, asks about other survivors and White Room",
+  "observed_result": "Reunion does not provide hoped-for reassurance; continues visible distress",
+  "capabilities_supported": [
+    "memory",
+    "attachment",
+    "social_reconnection"
+  ],
+  "epistemic_limits": "Her symptoms and diagnosis should not be invented; younger sister exists but is unnamed",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "Intervention by empathetic peer may improve exchange; no predetermined healing outcome.",
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.yuki-father"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.yuki",
+  "topics": [
+    "academic_reasoning",
+    "social",
+    "institution"
+  ],
+  "evidence_refs": [
+    "v0.wr.035",
+    "v0.char.030",
+    "v0.wr.045",
+    "v0.char.050"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

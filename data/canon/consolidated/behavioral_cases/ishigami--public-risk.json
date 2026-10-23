@@ -1,0 +1,62 @@
+{
+  "id": "v0.case.ishigami.public-risk",
+  "actor_id": "actor.kyo-ishigami",
+  "title": "Reading power and adult intervention at sponsor gathering",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      225,
+      226,
+      227,
+      228,
+      229,
+      230,
+      231,
+      232
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Children of influential sponsors quarrel; Nogi uses family power and intimidation",
+  "information_available": "Adults observing, unequal family influence, open threats, ambiguous assertion about an autograph",
+  "perceived_objective": "Avoid unilateral escalation by rival child; preserve his position",
+  "observed_actions": "Uses verbal framing and timing to shift attention toward publicly witnessed aggression",
+  "observed_result": "Adult interventions deescalate confrontation; child statements about autograph remain disputed",
+  "capabilities_supported": [
+    "social_inference",
+    "verbal_strategy",
+    "political_awareness"
+  ],
+  "epistemic_limits": "Do not code guaranteed manipulation success; avoid attributing all events to Ishigami without source evidence",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "Without adults, witnesses or funding dependencies his leverage differs.",
+  "other_actors": [
+    "actor.nogi",
+    "actor.fuji"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.kyo-ishigami",
+  "topics": [
+    "academic_reasoning",
+    "strategy",
+    "social",
+    "politics",
+    "institution",
+    "economy"
+  ],
+  "evidence_refs": [
+    "v0.pol.019",
+    "v0.char.024",
+    "v0.char.025",
+    "v0.char.026",
+    "v0.char.027",
+    "v0.char.028",
+    "v0.char.049",
+    "v0.char.055",
+    "v0.char.056"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

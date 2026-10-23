@@ -1,0 +1,52 @@
+{
+  "id": "v0.case.kiyotaka.yuki-health",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Detecting overlooked medical condition of Yuki",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      178,
+      179,
+      180,
+      181,
+      183,
+      184,
+      185
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Yuki weakens during testing, staff initially frame failure as performance deficiency",
+  "information_available": "Observable distress during day and test; rule against speaking, sanctions for unauthorized intervention",
+  "perceived_objective": "Challenge staff explanation and call attention to health",
+  "observed_actions": "Breaks protocol to flag an atypical physical cause; staff reassess and transfer Yuki for medical attention",
+  "observed_result": "Yuki leaves cohort; Kiyotaka avoids subsequent strike from an angry instructor",
+  "capabilities_supported": [
+    "observation",
+    "rule_challenge",
+    "inference_under_pressure"
+  ],
+  "epistemic_limits": "Does not establish diagnosis by Kiyotaka or unlimited medical competence; narrator inference must be separated",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "If staff had correctly noticed her distress first, confrontation and corresponding punishment might not occur.",
+  "other_actors": [
+    "actor.yuki"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "topics": [
+    "combat",
+    "academic_reasoning",
+    "strategy",
+    "institution"
+  ],
+  "evidence_refs": [
+    "v0.wr.024",
+    "v0.char.017",
+    "v0.wr.045"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

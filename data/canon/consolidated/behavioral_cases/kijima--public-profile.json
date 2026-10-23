@@ -1,0 +1,56 @@
+{
+  "id": "v0.case.kijima.public-profile",
+  "actor_id": "actor.kijima",
+  "title": "Faction power and reported education agenda",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      25,
+      28,
+      29,
+      30,
+      202,
+      203,
+      204,
+      205,
+      214,
+      215,
+      247
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "SECOND_HAND_POLITICAL_ACCOUNT",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Rising faction within Citizens Party",
+  "information_available": "Information about popularity and rivalry comes from political observers",
+  "perceived_objective": "Gain institutional/political influence (attributed; not direct self-report)",
+  "observed_actions": "Faction rises in influence; Naoe eventually aligns with it",
+  "observed_result": "By epilogue Kijima is prime minister according to Atsuomi narration",
+  "capabilities_supported": [
+    "political_influence"
+  ],
+  "epistemic_limits": "No first-person strategic perspective; do not impute private plans without direct evidence",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "",
+  "other_actors": [
+    "actor.jinnosuke-naoe",
+    "actor.atsuomi-ayanokoji"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.kijima",
+  "topics": [
+    "academic_reasoning",
+    "strategy",
+    "politics"
+  ],
+  "evidence_refs": [
+    "v0.pol.003",
+    "v0.pol.004",
+    "v0.pol.015",
+    "v0.pol.025",
+    "v0.pol.026"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

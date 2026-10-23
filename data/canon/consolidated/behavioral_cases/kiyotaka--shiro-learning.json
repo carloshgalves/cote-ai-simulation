@@ -1,0 +1,55 @@
+{
+  "id": "v0.case.kiyotaka.shiro-learning",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Repeated judo/boxing/karate/Jeet Kune Do bouts with Shiro",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      165,
+      166,
+      186,
+      190,
+      191
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Two fourth-generation children train through varied combat disciplines",
+  "information_available": "Skills gained under similar training; initial match experience and accumulated feedback",
+  "perceived_objective": "Improve martial-arts performance, defend in final randori",
+  "observed_actions": "Kiyotaka adapts from initial failures; later wins repeated matches, including decisive final judo bout",
+  "observed_result": "Shiro reports winning first one or two matches in some disciplines, then losing thereafter; Shiro leaves by choice",
+  "capabilities_supported": [
+    "adaptive_learning",
+    "combat_strategy",
+    "motor_learning"
+  ],
+  "epistemic_limits": "Do not turn relative performance into universal numerical strength; final bout is not an adult free-for-all",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "New discipline with unknown technique and limited adaptation time may favor Shiro initially.",
+  "other_actors": [
+    "actor.shiro"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "topics": [
+    "combat",
+    "academic_reasoning",
+    "strategy",
+    "social",
+    "institution"
+  ],
+  "evidence_refs": [
+    "v0.wr.017",
+    "v0.wr.022",
+    "v0.wr.023",
+    "v0.char.013",
+    "v0.char.016",
+    "v0.char.018",
+    "v0.char.019"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

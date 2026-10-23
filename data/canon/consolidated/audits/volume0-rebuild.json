@@ -1,0 +1,18 @@
+{
+  "schema_version": "volume0-architecture-audit-v2",
+  "characters": 35,
+  "institutions": 13,
+  "cases": 25,
+  "evidence": 132,
+  "source": "OPERATOR_ACCEPTED",
+  "open_semantic_findings": [
+    "Legacy character packs sometimes misattribute other characters' acts via mentions",
+    "Source document roles require individual evidence audit",
+    "Existing Y1 prior actor aliases must be reconciled by canonical actor index",
+    "Yuki younger sister not named in this volume",
+    "Naoe eventual death after volume remains unknown",
+    "Shiro fate outside the White Room is unknown"
+  ],
+  "no_special_exam_created": true,
+  "index_strategy": "DIRECT_LOOKUP"
+}

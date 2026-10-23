@@ -1,0 +1,3 @@
+# Consolidated Canon Reference Packs V2
+
+One read-model file per character and institution, across all ingested volumes. Scenes, source references, and cases remain separate and immutable. The index resolves `actor + topic` directly, with source- and horizon-gating ahead of retrieval. This is the consolidation target; legacy `data/canon/volume0/` remains an audit trail, and the earlier `data/canon/characters/` V0 records are not to be injected as separate actor memories. An operator-approved unofficial translation is admissible source material but never grants automatic certainty about an extracted claim. Institutional White Room assessments are not ANHS ExamSpecs.

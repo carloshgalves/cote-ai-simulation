@@ -1,0 +1,23 @@
+{
+  "schema_version": "consolidated-institution-v2",
+  "institution_id": "org.kijima_faction",
+  "display_name": "Kijima faction",
+  "source_coverage": [
+    "ln.y1.v00.legacyemtls.v1.0.1"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_documents": [
+    "data/canon/volume0/organizations/kijima_faction.yaml"
+  ],
+  "evidence_refs": [
+    "v0.pol.003",
+    "v0.pol.004",
+    "v0.pol.009",
+    "v0.pol.010",
+    "v0.pol.015",
+    "v0.pol.025",
+    "v0.pol.026"
+  ],
+  "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
+  "operational_migration": "Only user/operator-authorized claims may be promoted after review"
+}

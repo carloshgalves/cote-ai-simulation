@@ -1,0 +1,17 @@
+{
+  "schema_version": "consolidated-institution-v2",
+  "institution_id": "org.peace_party",
+  "display_name": "Peace Party",
+  "source_coverage": [
+    "ln.y1.v00.legacyemtls.v1.0.1"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_documents": [
+    "data/canon/volume0/organizations/peace_party.yaml"
+  ],
+  "evidence_refs": [
+    "v0.pol.023"
+  ],
+  "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
+  "operational_migration": "Only user/operator-authorized claims may be promoted after review"
+}

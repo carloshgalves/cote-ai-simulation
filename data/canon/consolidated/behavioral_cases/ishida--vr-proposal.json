@@ -1,0 +1,33 @@
+{
+  "id": "v0.case.ishida.vr-proposal",
+  "actor_id": "actor.ishida",
+  "title": "Proposal for simulated everyday experience",
+  "context": "Researchers observe severe social adaptation limitations after institutional isolation",
+  "observed_actions": "Recommends virtual environments to expose children to ordinary context",
+  "observed_result": "Budget approved for experimental approach",
+  "epistemic_limits": "Approval does not establish equivalence to real social experience",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      124,
+      125
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [],
+  "capabilities_supported": [],
+  "information_available": "Only observations and information available in depicted scene",
+  "counterfactual_test": "Change observations and choices; do not hardcode canonical outcome",
+  "primary_actor_id": "actor.ishida",
+  "topics": [
+    "social",
+    "institution",
+    "economy"
+  ],
+  "evidence_refs": [
+    "v0.wr.014",
+    "v0.wr.047"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

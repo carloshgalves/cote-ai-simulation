@@ -1,0 +1,48 @@
+{
+  "id": "v0.case.naoe.meeting-as-leverage",
+  "actor_id": "actor.jinnosuke-naoe",
+  "title": "Political hierarchy expressed through delayed appointments",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      17,
+      18,
+      22
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATOR_INTERPRETATION",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Naoe meets faction subordinates under heavily hierarchical conditions",
+  "information_available": "His senior status, their dependence on access, their risk of punishment",
+  "perceived_objective": "Preserve asymmetrical bargaining and influence",
+  "observed_actions": "Regularly arrives late/withholds audiences, forcing intermediaries to wait",
+  "observed_result": "Atsuomi interprets lateness as strategic control; concrete lateness observed",
+  "capabilities_supported": [
+    "authority",
+    "agenda_control",
+    "influence"
+  ],
+  "epistemic_limits": "Interpretation of motives belongs to Atsuomi, not verified internal Naoe thought",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "",
+  "other_actors": [
+    "actor.atsuomi-ayanokoji",
+    "actor.kamogawa"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.jinnosuke-naoe",
+  "topics": [
+    "strategy",
+    "politics",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "v0.pol.002",
+    "v0.pol.024",
+    "v0.char.038"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

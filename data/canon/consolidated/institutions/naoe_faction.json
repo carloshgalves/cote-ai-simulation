@@ -1,0 +1,46 @@
+{
+  "schema_version": "consolidated-institution-v2",
+  "institution_id": "org.naoe_faction",
+  "display_name": "Naoe faction",
+  "source_coverage": [
+    "ln.y1.v00.legacyemtls.v1.0.1"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_documents": [
+    "data/canon/volume0/organizations/naoe_faction.yaml"
+  ],
+  "evidence_refs": [
+    "v0.pol.001",
+    "v0.pol.002",
+    "v0.pol.003",
+    "v0.pol.004",
+    "v0.pol.005",
+    "v0.pol.006",
+    "v0.pol.007",
+    "v0.pol.008",
+    "v0.pol.009",
+    "v0.pol.010",
+    "v0.pol.011",
+    "v0.pol.015",
+    "v0.pol.016",
+    "v0.pol.017",
+    "v0.pol.020",
+    "v0.pol.024",
+    "v0.wr.005",
+    "v0.wr.031",
+    "v0.char.001",
+    "v0.char.002",
+    "v0.char.003",
+    "v0.char.035",
+    "v0.char.036",
+    "v0.char.038",
+    "v0.pol.026",
+    "v0.pol.028",
+    "v0.wr.040",
+    "v0.wr.041",
+    "v0.char.042",
+    "v0.char.043"
+  ],
+  "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
+  "operational_migration": "Only user/operator-authorized claims may be promoted after review"
+}

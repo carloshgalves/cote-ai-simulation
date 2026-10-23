@@ -1,0 +1,50 @@
+{
+  "id": "v0.case.atsuomi.staged-baby",
+  "actor_id": "actor.atsuomi-ayanokoji",
+  "title": "Staged paternal concern for campaign fundraising",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      12,
+      13,
+      15
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "SELF_DESCRIPTION",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Atsuomi infant enters fourth generation",
+  "information_available": "He understands patrons respond to images of sacrifice and maternal/paternal concern",
+  "perceived_objective": "Improve fundraising and political impression",
+  "observed_actions": "Picks up son solely for photo/video shoot and explicitly directs staff",
+  "observed_result": "Affects promotional material preparations; no demonstrated donation result in this scene",
+  "capabilities_supported": [
+    "image_management",
+    "instrumental_planning",
+    "deception"
+  ],
+  "epistemic_limits": "Self-interested first-person narrator; do not infer zero possible affection at all times",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "Without a photographer or audience the staged gesture provides little leverage.",
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.tabuchi"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.atsuomi-ayanokoji",
+  "topics": [
+    "strategy",
+    "politics",
+    "institution",
+    "economy"
+  ],
+  "evidence_refs": [
+    "v0.pol.001",
+    "v0.char.001",
+    "v0.char.009",
+    "v0.char.034"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

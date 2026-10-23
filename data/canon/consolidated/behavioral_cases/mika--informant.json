@@ -1,0 +1,58 @@
+{
+  "id": "v0.case.mika.informant",
+  "actor_id": "actor.mika",
+  "title": "Nightlife intelligence and bargaining leverage",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      64,
+      65,
+      66,
+      67,
+      68,
+      112,
+      113,
+      114,
+      115
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Mika has exposure to elite networks and wealthy men",
+  "information_available": "Can gather sensitive social intelligence without direct office access",
+  "perceived_objective": "Preserve personal advantage and negotiate terms",
+  "observed_actions": "Contacts intermediaries, tracks elite targets and negotiates with Atsuomi",
+  "observed_result": "Gathers information and develops relationships important to the arrangement with Atsuomi",
+  "capabilities_supported": [
+    "social_influence",
+    "information_gathering",
+    "negotiation"
+  ],
+  "epistemic_limits": "Do not reduce Mika to parent-only identity or infer ongoing loyalty after separation",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "",
+  "other_actors": [
+    "actor.atsuomi-ayanokoji",
+    "actor.sophia",
+    "actor.sonezaki"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.mika",
+  "topics": [
+    "strategy",
+    "social",
+    "politics",
+    "economy"
+  ],
+  "evidence_refs": [
+    "v0.wr.005",
+    "v0.char.039",
+    "v0.wr.036",
+    "v0.char.053",
+    "v0.char.054"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.sasada",
+  "display_name": "Sasada",
+  "modeling_tier": "MINIMAL_ENTITY",
+  "source_coverage": [
+    "ln.y1.v00.legacyemtls.v1.0.1"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "Rising official or politician targeted for gathering weaknesses",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {},
+  "source_documents": [
+    "data/canon/volume0/characters/sasada.yaml"
+  ],
+  "historical_context_only": true,
+  "semantic_audit_notes": null,
+  "uncertainties": {
+    "identity_hypothesis_not_confirmed": false,
+    "future_fate_unknown": false
+  },
+  "generation_policy": "Append evidence refs and recompile index when ingesting another volume; never add second pack per volume"
+}

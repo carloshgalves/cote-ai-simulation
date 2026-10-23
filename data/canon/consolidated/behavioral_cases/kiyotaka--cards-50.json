@@ -1,0 +1,48 @@
+{
+  "id": "v0.case.kiyotaka.cards-50",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Five-card hidden pattern: fifty correct answers",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      160,
+      161,
+      162,
+      163
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Instructor demonstrates ten rounds of five face-down symbol cards in a one-on-one room",
+  "information_available": "Demonstration sequence, instructor dealing order, shuffle gesture, room camera, timing cues; no privileged access to communications",
+  "perceived_objective": "Determine objective of task and infer mechanism",
+  "observed_actions": "Notices instructor repeats arrangement, recalls all prior orders, infers task tests memory rather than clairvoyance",
+  "observed_result": "Answers fifty of fifty on his own turn; instructor discloses he used marked cards and earpiece instructions",
+  "capabilities_supported": [
+    "memory",
+    "observation",
+    "abductive_reasoning",
+    "rule_inference"
+  ],
+  "epistemic_limits": "No psychic ability and no general evidence of perfect memory in unrelated contexts",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "Shuffle genuinely different orders and remove demonstration/history: perfect score should not be assumed.",
+  "other_actors": [],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "topics": [
+    "academic_reasoning",
+    "strategy",
+    "social",
+    "institution"
+  ],
+  "evidence_refs": [
+    "v0.wr.020",
+    "v0.wr.021",
+    "v0.char.015"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

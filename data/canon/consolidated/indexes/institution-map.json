@@ -1,0 +1,57 @@
+{
+  "schema_version": "institution-index-v2",
+  "institutions": {
+    "org.anhs": {
+      "path": "data/canon/consolidated/institutions/anhs.json",
+      "source_volume_count": 1
+    },
+    "org.citizens_party": {
+      "path": "data/canon/consolidated/institutions/citizens_party.json",
+      "source_volume_count": 1
+    },
+    "org.financial_backers": {
+      "path": "data/canon/consolidated/institutions/financial_backers.json",
+      "source_volume_count": 1
+    },
+    "org.ishigami_group": {
+      "path": "data/canon/consolidated/institutions/ishigami_group.json",
+      "source_volume_count": 1
+    },
+    "org.isomaru_faction": {
+      "path": "data/canon/consolidated/institutions/isomaru_faction.json",
+      "source_volume_count": 1
+    },
+    "org.kanzaki_engineering": {
+      "path": "data/canon/consolidated/institutions/kanzaki_engineering.json",
+      "source_volume_count": 1
+    },
+    "org.kijima_faction": {
+      "path": "data/canon/consolidated/institutions/kijima_faction.json",
+      "source_volume_count": 1
+    },
+    "org.miyako_faction": {
+      "path": "data/canon/consolidated/institutions/miyako_faction.json",
+      "source_volume_count": 1
+    },
+    "org.naoe_faction": {
+      "path": "data/canon/consolidated/institutions/naoe_faction.json",
+      "source_volume_count": 1
+    },
+    "org.nogi_pharmaceuticals": {
+      "path": "data/canon/consolidated/institutions/nogi_pharmaceuticals.json",
+      "source_volume_count": 1
+    },
+    "org.ooba_network": {
+      "path": "data/canon/consolidated/institutions/ooba_network.json",
+      "source_volume_count": 1
+    },
+    "org.peace_party": {
+      "path": "data/canon/consolidated/institutions/peace_party.json",
+      "source_volume_count": 1
+    },
+    "org.white_room": {
+      "path": "data/canon/consolidated/institutions/white_room.json",
+      "source_volume_count": 1
+    }
+  }
+}

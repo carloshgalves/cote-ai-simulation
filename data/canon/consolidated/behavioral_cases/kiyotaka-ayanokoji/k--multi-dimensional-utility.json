@@ -1,0 +1,38 @@
+{
+  "id": "y1v1.case.k.multi-dimensional-utility",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "multi dimensional utility",
+  "context": "Kiyotaka argues classmates have distinct useful dimensions including physical and social capabilities, not just marks.",
+  "observed_actions": "Challenges uniform academic evaluation of classmates",
+  "observed_result": "Prompts Suzune to examine hidden cost of loss",
+  "epistemic_limits": "Not evidence of a guaranteed future exam",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      201
+    ],
+    "chapter": 8,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.ken-sudo",
+    "actor.kanji-ike"
+  ],
+  "capabilities_supported": [
+    "academic_reasoning",
+    "strategy"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "academic_reasoning",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.086"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

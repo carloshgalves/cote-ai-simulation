@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.s.muscle-inference",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "muscle inference",
+  "context": "Suzune notices atypical muscular development in Kiyotaka despite his denial of regular athletic training.",
+  "observed_actions": "Observes Kiyotaka's muscle structure and notices inconsistency",
+  "observed_result": "Asks skeptical questions",
+  "epistemic_limits": "Observation not direct proof of training source",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      81
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "observation",
+    "combat"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "observation",
+    "combat"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.035"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

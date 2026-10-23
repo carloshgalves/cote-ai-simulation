@@ -1,0 +1,37 @@
+{
+  "id": "y1v1.case.s.exclude-social-ally",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "exclude social ally",
+  "context": "Suzune refuses to allow Kushida to attend even though she would help recruit others.",
+  "observed_actions": "Rejects colleague whose popularity is practically useful",
+  "observed_result": "Causes friction within study group",
+  "epistemic_limits": "Preference may frustrate own goals",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      168
+    ],
+    "chapter": 8,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.kikyo-kushida"
+  ],
+  "capabilities_supported": [
+    "social",
+    "leadership"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "social",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.076"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

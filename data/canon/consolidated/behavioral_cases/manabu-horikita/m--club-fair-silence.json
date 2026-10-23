@@ -1,0 +1,37 @@
+{
+  "id": "y1v1.case.m.club-fair-silence",
+  "actor_id": "actor.manabu-horikita",
+  "primary_actor_id": "actor.manabu-horikita",
+  "title": "club fair silence",
+  "context": "Council president Manabu commands a noisy club fair by remaining silent until attendees quiet down.",
+  "observed_actions": "Waits silently for social pressure to quiet crowd before speaking",
+  "observed_result": "Assembly becomes attentive",
+  "epistemic_limits": "Institutional role and setting contribute",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      67
+    ],
+    "chapter": 3,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "persuasion"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "leadership",
+    "persuasion"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.031"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

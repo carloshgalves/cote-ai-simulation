@@ -1,0 +1,38 @@
+{
+  "id": "y1v1.case.s.pool-points-save-sudo",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "pool points save sudo",
+  "context": "Kiyotaka and Suzune jointly transfer 100000 points, securing one English mark and reversing Sudou's expulsion.",
+  "observed_actions": "Contributes to shared fee to keep student enrolled",
+  "observed_result": "Sudou no longer expelled",
+  "epistemic_limits": "Cooperation and precedent both conditional",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      254
+    ],
+    "chapter": 11,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.sae-chiyabashira",
+    "actor.ken-sudo"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "economy"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "strategy",
+    "economy"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.109"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

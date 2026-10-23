@@ -1,0 +1,37 @@
+{
+  "id": "y1v1.case.s.cutoff-appeal",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "cutoff appeal",
+  "context": "Suzune, who lowered her own English score, challenges inconsistency with prior cutoff from mean 64.4.",
+  "observed_actions": "Reduces own English result and argues earlier cutoff precedent",
+  "observed_result": "Teacher counters by clarifying nearest-integer rounding",
+  "epistemic_limits": "A rational but unsuccessful strategy",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      249
+    ],
+    "chapter": 11,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.sae-chiyabashira"
+  ],
+  "capabilities_supported": [
+    "academic_reasoning",
+    "strategy"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "academic_reasoning",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.105"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

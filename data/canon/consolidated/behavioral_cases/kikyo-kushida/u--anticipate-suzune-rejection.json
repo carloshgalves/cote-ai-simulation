@@ -1,0 +1,37 @@
+{
+  "id": "y1v1.case.u.anticipate-suzune-rejection",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "anticipate suzune rejection",
+  "context": "Kushida accurately anticipates Suzune would exclude her from study group.",
+  "observed_actions": "Identifies Suzune's objection as specific to attendance",
+  "observed_result": "Allows adjustment of public messaging",
+  "epistemic_limits": "Context-specific theory of mind",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      170
+    ],
+    "chapter": 8,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "observation",
+    "social"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "observation",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.077"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

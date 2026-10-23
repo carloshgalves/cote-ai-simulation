@@ -1,0 +1,37 @@
+{
+  "id": "y1v1.case.n.library-deescalation",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "library deescalation",
+  "context": "Ichinose defuses the library conflict by foregrounding consequences for other library users.",
+  "observed_actions": "Calls out both provocation and disruption and insists on quiet public-use norms",
+  "observed_result": "Conflict subsides",
+  "epistemic_limits": "Context-dependent social effect",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      222
+    ],
+    "chapter": 9,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.yamawaki"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "social"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "leadership",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.092"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

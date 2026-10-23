@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.k.swim-middle",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "swim middle",
+  "context": "Kiyotaka seeks only middle placement in swimming to avoid both exposure and remediation.",
+  "observed_actions": "Targets nonlast nonwinning position rather than best time",
+  "observed_result": "Avoids attention",
+  "epistemic_limits": "Not maximum ability measurement",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      85
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ken-sudo"
+  ],
+  "capabilities_supported": [
+    "combat",
+    "strategy"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "combat",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.038"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

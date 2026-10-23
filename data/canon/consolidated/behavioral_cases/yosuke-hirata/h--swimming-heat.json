@@ -1,0 +1,32 @@
+{
+  "id": "y1v1.case.h.swimming-heat",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "swimming heat",
+  "context": "Hirata wins a 50-meter freestyle heat with 26.13 seconds recorded.",
+  "observed_actions": "Completes 50-meter freestyle with practiced form",
+  "observed_result": "Wins heat in 26.13 seconds",
+  "epistemic_limits": "Single measured event",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      86
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "combat"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "combat"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.039"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

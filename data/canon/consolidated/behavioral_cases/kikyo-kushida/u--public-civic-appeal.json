@@ -1,0 +1,37 @@
+{
+  "id": "y1v1.case.u.public-civic-appeal",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "public civic appeal",
+  "context": "Kushida appeals to bus passengers collectively to give an elderly woman a seat, and another adult stands.",
+  "observed_actions": "Redirects social request from obstinate seat-holder toward entire bus",
+  "observed_result": "Someone offers an elderly woman a seat",
+  "epistemic_limits": "A single success is not universal altruism",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      21
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.rokusuke-koenji",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "social",
+    "persuasion"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "social",
+    "persuasion"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.004"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

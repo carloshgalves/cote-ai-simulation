@@ -1,0 +1,35 @@
+{
+  "id": "y1v1.case.i.sarcasm-misread",
+  "actor_id": "actor.kanji-ike",
+  "primary_actor_id": "actor.kanji-ike",
+  "title": "sarcasm misread",
+  "context": "Ike is teased about seeking a girlfriend and reads sarcasm as praise; Kouenji self-promotes publicly.",
+  "observed_actions": "Interprets a teasing response as actual approval",
+  "observed_result": "Class laughs",
+  "epistemic_limits": "One incident does not define all social inference",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      38
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.rokusuke-koenji",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "social"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.018"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

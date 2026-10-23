@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.o.priority-seat-refusal",
+  "actor_id": "actor.rokusuke-koenji",
+  "primary_actor_id": "actor.rokusuke-koenji",
+  "title": "priority seat refusal",
+  "context": "Kouenji refuses to surrender priority seating on the bus despite requests, arguing from lack of formal obligation.",
+  "observed_actions": "Rejects an appeal to vacate his bus seat and disputes moral hierarchy",
+  "observed_result": "Keeps his seat while conflict continues",
+  "epistemic_limits": "One episode does not prove general persuasion or legal superiority",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      19
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "social",
+    "ethics"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "social",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.003"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

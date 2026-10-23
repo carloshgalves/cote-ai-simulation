@@ -1,0 +1,37 @@
+{
+  "id": "y1v1.case.k.exam-paper-bargain",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "exam paper bargain",
+  "context": "Kiyotaka bargains with an unknown third-year seller for prior exam questions for 15000 points.",
+  "observed_actions": "Targets cash-poor veteran and agrees 15000-point transaction",
+  "observed_result": "Secures access to prior questions",
+  "epistemic_limits": "No universal fixed market price or seller behavior",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      231
+    ],
+    "chapter": 9,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida",
+    "actor.unidentified-third-year-test-seller"
+  ],
+  "capabilities_supported": [
+    "persuasion",
+    "economy"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "persuasion",
+    "economy"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.095"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

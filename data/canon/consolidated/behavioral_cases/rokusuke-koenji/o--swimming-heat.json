@@ -1,0 +1,34 @@
+{
+  "id": "y1v1.case.o.swimming-heat",
+  "actor_id": "actor.rokusuke-koenji",
+  "primary_actor_id": "actor.rokusuke-koenji",
+  "title": "swimming heat",
+  "context": "Kouenji swims 50-meter freestyle in 23.22 seconds and appears unfatigued; Sudou reacts competitively.",
+  "observed_actions": "Demonstrates highly efficient fast 50-meter freestyle",
+  "observed_result": "Instructor records 23.22 seconds",
+  "epistemic_limits": "No universal power rank inferred",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      87
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ken-sudo"
+  ],
+  "capabilities_supported": [
+    "combat"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "combat"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.040"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

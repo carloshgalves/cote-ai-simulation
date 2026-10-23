@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.d.reject-introduction",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "reject introduction",
+  "context": "Sudou refuses Hirata's request for introductions and exits; Hirata avoids forcing him.",
+  "observed_actions": "Challenges a public request to introduce himself",
+  "observed_result": "Leaves group activity",
+  "epistemic_limits": "Not evidence of combat strength",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      37
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "social",
+    "leadership"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "social",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.017"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

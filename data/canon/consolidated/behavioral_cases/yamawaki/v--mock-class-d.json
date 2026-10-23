@@ -1,0 +1,37 @@
+{
+  "id": "y1v1.case.v.mock-class-d",
+  "actor_id": "actor.yamawaki",
+  "primary_actor_id": "actor.yamawaki",
+  "title": "mock class d",
+  "context": "Class A student Yamawaki mocks Class D in the library, provoking Sudou.",
+  "observed_actions": "Provokes academically struggling rivals verbally",
+  "observed_result": "Triggers escalation risk",
+  "epistemic_limits": "Not proof of combat or high strategic skill",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      221
+    ],
+    "chapter": 9,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.ken-sudo"
+  ],
+  "capabilities_supported": [
+    "social",
+    "conflict"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "social",
+    "conflict"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.091"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

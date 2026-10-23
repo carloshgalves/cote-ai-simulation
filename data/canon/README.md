@@ -37,3 +37,9 @@ Esta política de corpus continua valendo. A partir do ADR 0005, o diretório ta
 Metodologia e políticas em [`docs/canon/`](../../docs/canon/). Decisão em [`docs/adr/0005-canon-knowledge-base.md`](../../docs/adr/0005-canon-knowledge-base.md).
 
 **Reconstruções nossas não vivem aqui.** Fórmulas e algoritmos que a obra não declara ficam em [`data/models/`](../models/), marcados `not_canon`. A dependência é unidirecional: cânone → modelos.
+
+## Packs consolidados e edições aprovadas pelo operador
+
+Os read-models em `data/canon/consolidated/` seguem uma ficha consolidada por personagem ou instituição, mantendo evidências atômicas, casos comportamentais e índices recuperáveis por tópico em arquivos separados. `data/canon/volume0/` permanece como trilha histórica de extração, **não** como fonte adicional de memória do agente.
+
+O operador pode autorizar traduções específicas que disponibiliza (mesmo não oficiais) para **extração**; registrar digest/edição/aceite. Isso não torna cada afirmação automaticamente verificada, nem altera os gates de compilação legados sem migração própria.

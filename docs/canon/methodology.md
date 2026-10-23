@@ -73,3 +73,9 @@ O caso disciplinador é a admissão: a obra afirma que existem dimensões avalia
 ## Exceção de fonte aceita pelo operador
 
 Para edições autorizadas pelo operador, a verificação bibliográfica Tier 0–1 não é exigência absoluta: é substituída por auditoria de passagem **na edição autorizada**, mantendo edition, locator, narrativa, `verified_by`/`verified_at` e bloqueios de conhecimento/conflito. A autorização da edição, isoladamente, não promove registros individuais a `VERIFIED` e o compilador atual só pode usar esses registros após adaptador/gate explícito. Detalhes: [operator-source-acceptance.md](operator-source-acceptance.md).
+
+## Ingestão operator-approved V2
+
+Ao receber uma nova edição autorizada pelo operador, a etapa de localização já pode usar diretamente seu texto, mas cada unidade deve ser registrada com localizador e classificação `NARRATED`, `SELF_DESCRIPTION`, `REPORTED_BY_CHARACTER` ou `INTERPRETATION`. Não inferir comportamento de um personagem apenas por aparecer mencionado. A depuração V2 separa `context_evidence_refs` de `behavioral_case_refs`.
+
+O processo de ingestão passa a atualizar **um único read-model consolidado por personagem ou instituição**, com índice regenerado por ator/assunto, em vez de abrir sequencialmente todos os volumes. A versão da fonte autorizada e os registros atômicos por cena permanecem separados. A promoção a `VERIFIED` no contrato legado requer migração de gates e conferência individual; autorização de fonte não equivale a auditoria semântica.

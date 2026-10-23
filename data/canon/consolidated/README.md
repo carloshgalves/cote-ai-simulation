@@ -14,3 +14,9 @@
 The existing `data/canon/characters/*.yaml` are legacy Y1-start prior packs with a different schema. They remain separate until an explicit canonical-schema migration, not a second V2 character source. Source approval by the operator does not auto-verify every individual claim; source text itself stays private and off the public repository.
 
 Cases must never be saved at the root of `behavioral_cases/` or under a volume directory. New actors get a new subfolder; each case belongs to the primary actor demonstrating the behavior. Other participants are represented by references, not duplicate case files.
+
+## Year 1 Volume 1 ingestion
+
+Volume 1 evidence is at `evidence/y1-v01.json`, with 114 scene-relevant records, operator-supplied Seven Seas 2019 edition provenance and a chapter coverage ledger in `audits/y1-v01-coverage.json`. Forty-one behavioral cases belong to their primary actor folders. Character packs are global and updated in place; `institutions/anhs.json` covers public versus undisclosed point rules. `institutions/student-council.json` registers the newly documented council. `exams/y1-first-midterm.json` is a **reference only** and must not be mistaken for executable scoring. Four indexes (actor/topic, case paths, institution, and volume-specific page maps) support direct retrieval without scanning books.
+
+Facts revealed in May must not seed April character beliefs. Narrated impressions and actor claims remain separate from institutional truth, and acceptance of this edition does not auto-verify all extracted records.

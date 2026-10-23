@@ -3,7 +3,7 @@
   "institutions": {
     "org.anhs": {
       "path": "data/canon/consolidated/institutions/anhs.json",
-      "source_volume_count": 1
+      "source_volume_count": 2
     },
     "org.citizens_party": {
       "path": "data/canon/consolidated/institutions/citizens_party.json",
@@ -51,6 +51,10 @@
     },
     "org.white_room": {
       "path": "data/canon/consolidated/institutions/white_room.json",
+      "source_volume_count": 1
+    },
+    "org.student-council": {
+      "path": "data/canon/consolidated/institutions/student-council.json",
       "source_volume_count": 1
     }
   }

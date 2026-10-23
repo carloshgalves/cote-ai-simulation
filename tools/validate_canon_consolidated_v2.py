@@ -7,7 +7,10 @@ J=lambda x:json.loads(x.read_text(encoding="utf-8"))
 idx=J(B/"indexes/character-topic-map.json")
 actors={p.stem:J(p) for p in (B/"characters").glob("*.json")}
 inst={p.stem:J(p) for p in (B/"institutions").glob("*.json")}
-ev={x["id"]:x for x in J(B/"evidence/volume0.json")["records"]}
+evidence_files=sorted((B/"evidence").glob("*.json"))
+evidence_records=[x for path in evidence_files for x in J(path)["records"]]
+ev={x["id"]:x for x in evidence_records}
+assert len(ev)==len(evidence_records), "duplicate evidence IDs"
 case_files=sorted((B/"behavioral_cases").glob("*/*.json"))
 cases={x["id"]:x for x in (J(p) for p in case_files)}
 assert len(case_files)==len(cases), "duplicate behavioral case IDs"
@@ -25,8 +28,8 @@ for p in case_files:
 for case_id, relative_path in case_path_index.items():
   resolved=B.parents[2]/relative_path
   assert resolved.is_file() and J(resolved)["id"]==case_id, case_id
-assert (len(actors),len(inst),len(ev),len(cases))==(35,13,132,25)
-assert len({x["character_id"] for x in actors.values()})==35
+assert len(actors)>=53 and len(inst)>=14 and len(ev)>=246 and len(cases)>=66, (len(actors),len(inst),len(ev),len(cases))
+assert len({x["character_id"] for x in actors.values()})==len(actors)
 for p in actors.values():
   actor=p["character_id"]
   assert actor in idx["topics_by_actor"]
@@ -46,7 +49,10 @@ assert idx["behavioral_by_actor_topic"]["actor.jinnosuke-naoe"]["politics"]
 assert idx["behavioral_by_actor_topic"]["actor.kiyotaka-ayanokoji"]["combat"]
 assert all(e["subject_assertion"]=="MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR" for e in ev.values())
 assert J(B/"sources/volume0.json")["claims_all_verified"]==False
-assert not list((B/"exams").glob("*.json"))
+assert J(B/"exams/y1-first-midterm.json")["authority"]=="CANON_REFERENCE_NOT_EXECUTABLE"
+assert J(B/"sources/y1-v01.json")["claims_all_verified"]==False
+assert set(idx["behavioral_case_paths"])==set(cases)
+assert any(e["id"].startswith("y1v1.") for e in ev.values())
 
 # Never regress to per-volume character/institution packs or stale pack paths.
 CANON=B.parent
@@ -57,5 +63,5 @@ for actor, metadata in pack_paths.items():
     expected="data/canon/consolidated/characters/"+actor.removeprefix("actor.")+".json"
     assert metadata["path"]==expected, (actor, metadata["path"], expected)
     assert (B/"characters"/(actor.removeprefix("actor.")+".json")).is_file(), actor
-assert len(actors)==35 and len(inst)==13
-print("PASS Volume0 V2: 35 actors, 13 institutions, 25 cases, 132 evidence, explicit behavioral/context gates.")
+assert len(actors)>=53 and len(inst)>=14
+print(f"PASS multi-volume canonical V2: {len(actors)} actors, {len(inst)} institutions, {len(cases)} cases, {len(ev)} evidence")

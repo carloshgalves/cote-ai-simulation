@@ -29,6 +29,8 @@ for actor,x in sorted(m["actor_map"].items()):
     total+=len(ids)
 assert total==119,total
 ryuen=json.loads((B/"characters/kakeru-ryuen.json").read_text(encoding="utf-8"))
-assert ryuen["domains"]=={}, "later-volume strategic feats cannot prepopulate Y1_START"
-assert ryuen["source_coverage"]==[]
+assert ryuen["knowledge_time_policy"]["canonical_after_divergence_is_not_actor_memory"] is True
+assert ryuen["knowledge_time_policy"]["actor_knowledge_requires_acquisition_event"] is True
+assert not any(ref.startswith(("v0.","y1v1.")) for domain in ryuen["domains"].values() for ref in domain.get("behavioral_case_refs",[])+domain.get("context_evidence_refs",[])), "late canon must not be assigned to Y1_START evidence"
+assert all(not source.endswith(".v01.sevenseas.en.2019.operator-provided") for source in ryuen["source_coverage"]), "Volume 1 did not establish Ryūen feats"
 print("PASS legacy six actor crosswalk:",total,"claims, no future-memory admission")

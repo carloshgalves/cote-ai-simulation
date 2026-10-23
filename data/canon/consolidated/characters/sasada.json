@@ -25,5 +25,11 @@
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false
   },
-  "generation_policy": "Append evidence refs and recompile index when ingesting another volume; never add second pack per volume"
+  "generation_policy": "Append evidence refs and recompile index when ingesting another volume; never add second pack per volume",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
 }

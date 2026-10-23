@@ -27,7 +27,8 @@
   },
   "global_promotion": "BLOCKED_UNTIL_RECORD_LEVEL_SEMANTIC_SIGNOFF",
   "review_states": {
-    "record_level_pending": 268,
+    "record_level_assistant_pass": 35,
+    "record_level_pending": 233,
     "case_level_pending": 75
   },
   "records": [
@@ -684,8 +685,9 @@
       "semantic_overlap_percent_exact_page": 57,
       "semantic_overlap_percent_with_neighbors": 64,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "v0.wr.014",
@@ -702,8 +704,9 @@
       "semantic_overlap_percent_exact_page": 59,
       "semantic_overlap_percent_with_neighbors": 59,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "v0.wr.015",
@@ -719,8 +722,9 @@
       "semantic_overlap_percent_exact_page": 77,
       "semantic_overlap_percent_with_neighbors": 77,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "v0.wr.016",
@@ -754,8 +758,9 @@
       "semantic_overlap_percent_exact_page": 75,
       "semantic_overlap_percent_with_neighbors": 75,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "v0.wr.018",
@@ -809,8 +814,9 @@
       "semantic_overlap_percent_exact_page": 27,
       "semantic_overlap_percent_with_neighbors": 33,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "v0.wr.021",
@@ -852,8 +858,9 @@
       "semantic_overlap_percent_exact_page": 79,
       "semantic_overlap_percent_with_neighbors": 86,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred. Corrected wording: Kiyotaka is offered weapons, rather than claiming combatants used improvised weapons."
     },
     {
       "id": "v0.wr.023",
@@ -961,8 +968,9 @@
       "semantic_overlap_percent_exact_page": 50,
       "semantic_overlap_percent_with_neighbors": 50,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "v0.wr.029",
@@ -1039,8 +1047,9 @@
       "semantic_overlap_percent_exact_page": 53,
       "semantic_overlap_percent_with_neighbors": 60,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "v0.wr.033",
@@ -1446,8 +1455,9 @@
       "semantic_overlap_percent_exact_page": 64,
       "semantic_overlap_percent_with_neighbors": 71,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "v0.char.019",
@@ -1463,8 +1473,9 @@
       "semantic_overlap_percent_exact_page": 50,
       "semantic_overlap_percent_with_neighbors": 50,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "v0.char.020",
@@ -1482,8 +1493,9 @@
       "semantic_overlap_percent_exact_page": 69,
       "semantic_overlap_percent_with_neighbors": 69,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "v0.char.021",
@@ -1675,8 +1687,9 @@
       "semantic_overlap_percent_exact_page": 9,
       "semantic_overlap_percent_with_neighbors": 9,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "v0.char.032",
@@ -2115,8 +2128,9 @@
       "semantic_overlap_percent_exact_page": 47,
       "semantic_overlap_percent_with_neighbors": 59,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "v0.wr.046",
@@ -2608,8 +2622,9 @@
       "semantic_overlap_percent_exact_page": 64,
       "semantic_overlap_percent_with_neighbors": 64,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.011",
@@ -3294,8 +3309,9 @@
         "98",
         "391"
       ],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.056",
@@ -3324,8 +3340,9 @@
       "semantic_overlap_percent_exact_page": 22,
       "semantic_overlap_percent_with_neighbors": 33,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.058",
@@ -3357,8 +3374,9 @@
         "14",
         "24"
       ],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.060",
@@ -4019,8 +4037,9 @@
       "digits_requiring_human_context_review": [
         "40"
       ],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.104",
@@ -4038,8 +4057,9 @@
         "398",
         "40"
       ],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.105",
@@ -4055,8 +4075,9 @@
       "digits_requiring_human_context_review": [
         "644"
       ],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.106",
@@ -4073,8 +4094,9 @@
         "322",
         "398"
       ],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.107",
@@ -4103,8 +4125,9 @@
       "semantic_overlap_percent_exact_page": 50,
       "semantic_overlap_percent_with_neighbors": 50,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.109",
@@ -4118,8 +4141,9 @@
       "semantic_overlap_percent_exact_page": 33,
       "semantic_overlap_percent_with_neighbors": 50,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.110",
@@ -4273,8 +4297,9 @@
         "26",
         "31"
       ],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.120",
@@ -4292,8 +4317,9 @@
         "25",
         "36"
       ],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.121",
@@ -4307,8 +4333,9 @@
       "semantic_overlap_percent_exact_page": 50,
       "semantic_overlap_percent_with_neighbors": 64,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.122",
@@ -4359,7 +4386,8 @@
       "id": "y1v1.ev.125",
       "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
       "pdf_pages": [
-        125
+        125,
+        126
       ],
       "source_mode": "INNER_MONOLOGUE",
       "source_text_pages_indexed": true,
@@ -4367,8 +4395,9 @@
       "semantic_overlap_percent_exact_page": 18,
       "semantic_overlap_percent_with_neighbors": 29,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred. Corrected source span to cover displayed figures and inferred exchange."
     },
     {
       "id": "y1v1.ev.126",
@@ -4382,8 +4411,9 @@
       "semantic_overlap_percent_exact_page": 22,
       "semantic_overlap_percent_with_neighbors": 28,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.127",
@@ -4401,8 +4431,9 @@
         "14",
         "24"
       ],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.128",
@@ -4418,8 +4449,9 @@
       "digits_requiring_human_context_review": [
         "90"
       ],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.129",
@@ -4463,8 +4495,9 @@
       "semantic_overlap_percent_exact_page": 31,
       "semantic_overlap_percent_with_neighbors": 31,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.132",
@@ -4478,8 +4511,9 @@
       "semantic_overlap_percent_exact_page": 42,
       "semantic_overlap_percent_with_neighbors": 42,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.133",
@@ -4493,8 +4527,9 @@
       "semantic_overlap_percent_exact_page": 18,
       "semantic_overlap_percent_with_neighbors": 27,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.134",
@@ -4508,8 +4543,9 @@
       "semantic_overlap_percent_exact_page": 50,
       "semantic_overlap_percent_with_neighbors": 50,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     },
     {
       "id": "y1v1.ev.135",
@@ -4538,8 +4574,9 @@
       "semantic_overlap_percent_exact_page": 19,
       "semantic_overlap_percent_with_neighbors": 25,
       "digits_requiring_human_context_review": [],
-      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
-      "verified": false
+      "adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "verified": false,
+      "review_basis": "Uploaded PDF page passages inspected; source assertion is scoped and no source-mode/actor omniscience inferred."
     }
   ],
   "cases": [
@@ -5149,5 +5186,6 @@
     "Review all low textual support signals and missing OCR/page extraction",
     "Resolve actor/speaker attribution and concealment/knowledge times",
     "Only then permit per-record VERIFIED promotion; re-review cases and source status changes"
-  ]
+  ],
+  "review_scope_note": "Assistant directly reviewed a high-stakes subset; remainder received automated page-window triage only. No record is operator-VERIFIED."
 }

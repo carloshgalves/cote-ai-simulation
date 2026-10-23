@@ -12,7 +12,7 @@ assert set(a)=={x["id"] for x in e}
 assert len(r["cases"])==len(idx["behavioral_case_paths"])==75
 assert {c["case_id"] for c in r["cases"]}==set(idx["behavioral_case_paths"])
 assert r["global_promotion"]=="BLOCKED_UNTIL_RECORD_LEVEL_SEMANTIC_SIGNOFF"
-assert all(x["adjudication"]=="PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF" and x["verified"] is False for x in r["records"])
+assert all(x["adjudication"] in ("PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF","ASSISTANT_DIRECT_SOURCE_REVIEW_PASS") and x["verified"] is False for x in r["records"])
 assert all(c["verified"] is False for c in r["cases"])
 sources={x["file"]:x["pages"] for x in r["sources"]}
 for x in e:

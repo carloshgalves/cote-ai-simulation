@@ -1,0 +1,46 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.morishige",
+  "display_name": "Takurou Morishige",
+  "modeling_tier": "MINIMAL_ENTITY",
+  "source_coverage": [
+    "ln.y1.v04.sevenseas.en.operator-provided"
+  ],
+  "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "identity": {
+    "role_summary": "Year 1 Class A Rabbit member whom Ichinose suspects of having defected from Katsuragi's proposed passive strategy",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.122"
+      ]
+    },
+    "epistemics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.122"
+      ]
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": false,
+  "semantic_audit_notes": "Y1 V4 scene-specific reference; speaker allegations remain uncertain, abuse is descriptively represented without promotion as prescriptive behavior.",
+  "uncertainties": {
+    "future_actions_unknown": true,
+    "private_vip_disclosure_actor_scoped": true
+  },
+  "generation_policy": "Single global actor, source-local scenes only",
+  "retrieval_policy": {
+    "behavioral_demonstration": "PRIMARY_ACTOR_ONLY",
+    "contextual_facts": "MENTIONS_NOT_CAPABILITIES",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

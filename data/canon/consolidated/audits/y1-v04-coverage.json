@@ -1,0 +1,53 @@
+{
+  "schema_version": "volume-coverage-v1",
+  "source": "ln.y1.v04.sevenseas.en.operator-provided",
+  "pdf_pages": 248,
+  "chapters": [
+    {
+      "chapter": 1,
+      "start_pdf_page": 10,
+      "end_pdf_page": 11
+    },
+    {
+      "chapter": 2,
+      "start_pdf_page": 12,
+      "end_pdf_page": 62
+    },
+    {
+      "chapter": 3,
+      "start_pdf_page": 63,
+      "end_pdf_page": 124
+    },
+    {
+      "chapter": 4,
+      "start_pdf_page": 125,
+      "end_pdf_page": 204
+    },
+    {
+      "chapter": 5,
+      "start_pdf_page": 205,
+      "end_pdf_page": 243
+    }
+  ],
+  "chapters_assessed": 5,
+  "records": 130,
+  "chapter_evidence_counts": {
+    "1": 2,
+    "2": 37,
+    "3": 27,
+    "4": 41,
+    "5": 23
+  },
+  "cases": "PENDING_PRIMARY_ACTOR_EXTRACTION",
+  "coverage_status": "INITIAL_SCENE_CANDIDATES_EXTRACTED_REVIEW_PENDING",
+  "semantic_review": "NOT_STARTED",
+  "operator_release": "NOT_REQUESTED",
+  "open_issues": [
+    "Individual direct-source semantic review of all evidence claims",
+    "Primary actor cases and global character packs pending",
+    "Regenerate direct indexes and execute CI",
+    "VIP allocation scheme remains unknown, not an executable formula",
+    "Safeguard coercion and trauma as source-specific descriptive records, not transferable manipulation policy",
+    "Resolve contradictory calendar wordings with explicit source-note, not guessed day arithmetic"
+  ]
+}

@@ -39,7 +39,7 @@ for e in E:
     assert e["source"]["work_id"]==source["source_id"]
     assert e["source"]["pdf_pages"] and all(1<=p<=source["pdf_pages"] for p in e["source"]["pdf_pages"])
     assert e["assertion_status"]=="EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
-    assert e["subject_assertion"]=="ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    assert e["subject_assertion"]=="MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     assert e["source_mode"] in {"OBSERVED","NARRATED","SELF_DESCRIPTION","REPORTED_BY_CHARACTER","INNER_MONOLOGUE","INTERPRETATION","DOCUMENT_IMAGE"}
     for aid in e["mention_actor_ids"]:
         assert aid in index["character_packs"],aid

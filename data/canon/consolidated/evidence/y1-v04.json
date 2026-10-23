@@ -26,7 +26,7 @@
         "identity"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.002",
@@ -54,7 +54,7 @@
         "academic_reasoning"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.003",
@@ -83,7 +83,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.004",
@@ -110,7 +110,7 @@
         "persuasion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.005",
@@ -138,7 +138,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.006",
@@ -165,7 +165,7 @@
         "persuasion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.007",
@@ -193,7 +193,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.008",
@@ -221,7 +221,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.009",
@@ -248,7 +248,7 @@
         "conflict"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.010",
@@ -274,7 +274,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.011",
@@ -301,7 +301,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.012",
@@ -329,7 +329,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.013",
@@ -356,7 +356,7 @@
         "emotion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.014",
@@ -383,7 +383,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.015",
@@ -411,7 +411,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.016",
@@ -440,7 +440,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.017",
@@ -470,7 +470,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.018",
@@ -501,7 +501,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.019",
@@ -531,7 +531,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.020",
@@ -559,7 +559,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.021",
@@ -589,7 +589,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.022",
@@ -618,7 +618,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.023",
@@ -650,7 +650,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.024",
@@ -678,7 +678,7 @@
         "governance"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.025",
@@ -706,7 +706,7 @@
         "institution"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.026",
@@ -734,7 +734,7 @@
         "economy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.027",
@@ -762,7 +762,7 @@
         "economy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.028",
@@ -790,7 +790,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.029",
@@ -818,7 +818,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.030",
@@ -846,7 +846,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.031",
@@ -874,7 +874,7 @@
         "governance"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.032",
@@ -900,7 +900,7 @@
         "reasoning"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.033",
@@ -928,7 +928,7 @@
         "governance"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.034",
@@ -956,7 +956,7 @@
         "governance"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.035",
@@ -985,7 +985,7 @@
         "leadership"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.036",
@@ -1012,7 +1012,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.037",
@@ -1040,7 +1040,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.038",
@@ -1067,7 +1067,7 @@
         "conflict"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.039",
@@ -1094,7 +1094,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.040",
@@ -1121,7 +1121,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.041",
@@ -1154,7 +1154,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.042",
@@ -1181,7 +1181,7 @@
         "reasoning"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.043",
@@ -1210,7 +1210,7 @@
         "epistemics"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.044",
@@ -1238,7 +1238,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.045",
@@ -1265,7 +1265,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.046",
@@ -1292,7 +1292,7 @@
         "conflict"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.047",
@@ -1320,7 +1320,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.048",
@@ -1348,7 +1348,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.049",
@@ -1374,7 +1374,7 @@
         "persuasion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.050",
@@ -1402,7 +1402,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.051",
@@ -1430,7 +1430,7 @@
         "conflict"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.052",
@@ -1460,7 +1460,7 @@
         "economy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.053",
@@ -1488,7 +1488,7 @@
         "reasoning"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.054",
@@ -1516,7 +1516,7 @@
         "ethics"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.055",
@@ -1546,7 +1546,7 @@
         "privacy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.056",
@@ -1574,7 +1574,7 @@
         "emotion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.057",
@@ -1602,7 +1602,7 @@
         "persuasion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.058",
@@ -1630,7 +1630,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.059",
@@ -1657,7 +1657,7 @@
         "emotion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.060",
@@ -1684,7 +1684,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.061",
@@ -1712,7 +1712,7 @@
         "politics"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.062",
@@ -1739,7 +1739,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.063",
@@ -1766,7 +1766,7 @@
         "conflict"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.064",
@@ -1796,7 +1796,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.065",
@@ -1823,7 +1823,7 @@
         "emotion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.066",
@@ -1850,7 +1850,7 @@
         "emotion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.067",
@@ -1880,7 +1880,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.068",
@@ -1908,7 +1908,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.069",
@@ -1935,7 +1935,7 @@
         "reasoning"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.070",
@@ -1962,7 +1962,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.071",
@@ -1990,7 +1990,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.072",
@@ -2017,7 +2017,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.073",
@@ -2044,7 +2044,7 @@
         "leadership"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.074",
@@ -2074,7 +2074,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.075",
@@ -2101,7 +2101,7 @@
         "reasoning"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.076",
@@ -2129,7 +2129,7 @@
         "negotiation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.077",
@@ -2157,7 +2157,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.078",
@@ -2184,7 +2184,7 @@
         "negotiation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.079",
@@ -2211,7 +2211,7 @@
         "ethics"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.080",
@@ -2237,7 +2237,7 @@
         "reasoning"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.081",
@@ -2265,7 +2265,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.082",
@@ -2294,7 +2294,7 @@
         "privacy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.083",
@@ -2321,7 +2321,7 @@
         "emotion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.084",
@@ -2348,7 +2348,7 @@
         "coercion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.085",
@@ -2376,7 +2376,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.086",
@@ -2405,7 +2405,7 @@
         "economy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.087",
@@ -2435,7 +2435,7 @@
         "institution"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.088",
@@ -2464,7 +2464,7 @@
         "institution"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.089",
@@ -2491,7 +2491,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.090",
@@ -2519,7 +2519,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.091",
@@ -2546,7 +2546,7 @@
         "negotiation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.092",
@@ -2574,7 +2574,7 @@
         "conflict"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.093",
@@ -2601,7 +2601,7 @@
         "ethics"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.094",
@@ -2627,7 +2627,7 @@
         "ethics"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.095",
@@ -2654,7 +2654,7 @@
         "epistemics"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.096",
@@ -2681,7 +2681,7 @@
         "coercion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.097",
@@ -2709,7 +2709,7 @@
         "coercion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.098",
@@ -2736,7 +2736,7 @@
         "coercion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.099",
@@ -2763,7 +2763,7 @@
         "violence"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.100",
@@ -2790,7 +2790,7 @@
         "coercion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.101",
@@ -2817,7 +2817,7 @@
         "coercion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.102",
@@ -2844,7 +2844,7 @@
         "identity"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.103",
@@ -2871,7 +2871,7 @@
         "violence"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.104",
@@ -2898,7 +2898,7 @@
         "emotion"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.105",
@@ -2925,7 +2925,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.106",
@@ -2953,7 +2953,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.107",
@@ -2982,7 +2982,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.108",
@@ -3012,7 +3012,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.109",
@@ -3040,7 +3040,7 @@
         "leadership"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.110",
@@ -3067,7 +3067,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.111",
@@ -3094,7 +3094,7 @@
         "social"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.112",
@@ -3123,7 +3123,7 @@
         "privacy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.113",
@@ -3150,7 +3150,7 @@
         "leadership"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.114",
@@ -3180,7 +3180,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.115",
@@ -3208,7 +3208,7 @@
         "deception"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.116",
@@ -3236,7 +3236,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.117",
@@ -3265,7 +3265,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.118",
@@ -3293,7 +3293,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.119",
@@ -3320,7 +3320,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.120",
@@ -3350,7 +3350,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.121",
@@ -3378,7 +3378,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.122",
@@ -3406,7 +3406,7 @@
         "epistemics"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.123",
@@ -3434,7 +3434,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.124",
@@ -3462,7 +3462,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.125",
@@ -3491,7 +3491,7 @@
         "observation"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.126",
@@ -3520,7 +3520,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.127",
@@ -3548,7 +3548,7 @@
         "economy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.128",
@@ -3577,7 +3577,7 @@
         "exam"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.129",
@@ -3605,7 +3605,7 @@
         "reasoning"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     },
     {
       "id": "y1v4.ev.130",
@@ -3632,7 +3632,7 @@
         "strategy"
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
-      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     }
   ]
 }

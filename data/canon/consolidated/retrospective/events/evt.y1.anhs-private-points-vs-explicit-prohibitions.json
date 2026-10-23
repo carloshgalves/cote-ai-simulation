@@ -1,0 +1,53 @@
+{
+  "id": "evt.y1.anhs-private-points-vs-explicit-prohibitions",
+  "event_time": "Y1_SCHOOL_RULES_HOLD_BY_AUG",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v4.ev.088"
+  ],
+  "prior_ambiguities": [
+    "Does the general private-points purchase facility override express school restrictions?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        91,
+        94
+      ],
+      "evidence_refs": [
+        "y1v45.ev.024",
+        "y1v45.ev.026"
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "resolves_assertion_refs": [
+        "y1v4.ev.088"
+      ],
+      "explanation": "Manabu states private points cannot authorize a school-prohibited external communication; his later informal noninvestigation is an enforcement choice, not a rule repeal.",
+      "world_epistemic_status": "STUDENT_COUNCIL_PRESIDENT_DECLARED_RULE",
+      "actor_knowledge": [
+        {
+          "actor": "actor.manabu-horikita",
+          "since": "BY_Y1_AUG_COUNCIL_REQUEST",
+          "status": "STATES_RULE"
+        },
+        {
+          "actor": "actor.katsuragi",
+          "since": "Y1_V045_COUNCIL_REQUEST",
+          "status": "HEARD_FORMAL_REFUSAL"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V045_COUNCIL_REQUEST",
+          "status": "HEARD_RULE_AND_LATER_NON_ENFORCEMENT"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Full scope of authorized private-point school purchases remains unspecified.",
+    "An explicit rule cannot be nullified by a hypothetical hidden transaction."
+  ]
+}

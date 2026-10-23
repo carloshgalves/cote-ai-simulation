@@ -1,0 +1,46 @@
+{
+  "id": "evt.y1.v04.zodiac-rabbit-reward",
+  "event_time": "Y1_AUG_ZODIAC_EXAM_AND_SEPT_SETTLEMENT",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v4.ev.120",
+    "y1v4.ev.127",
+    "y1v4.ev.128"
+  ],
+  "prior_ambiguities": [
+    "When do promised VIP private rewards reach recipients?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        153,
+        156
+      ],
+      "evidence_refs": [
+        "y1v45.ev.042"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "Karuizawa and Kiyotaka discuss her expected 500,000 private-point VIP reward to be received in September, not yet credited on that August day.",
+      "world_epistemic_status": "PRIVATE_DISCUSSION_SUPPORTED",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kei-karuizawa",
+          "since": "OWN_VIP_NOTICE_AND_POST_EXAM_RESULT",
+          "status": "KNOWS_PERSONAL_ROLE_AND_EXPECTED_PAYMENT"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V04_PRIVATE_SCHEME",
+          "status": "KNOWS_PERSONAL_ROLE_AND_EXPECTED_PAYMENT"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Exact September credit timestamp not evidenced.",
+    "No new VIP identity-selection algorithm disclosed."
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "schema_version": "retrospective-event-index-v1",
+  "policy": "docs/adr/0012-cumulative-cross-volume-revelations.md",
+  "event_lookup": {
+    "evt.y1.v03.island-class-d-leader-replacement": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.v03.island-class-d-leader-replacement.json",
+      "status": "PARTIALLY_EXPLAINED",
+      "source_evidence_refs": [
+        "y1v3.ev.110",
+        "y1v3.ev.111",
+        "y1v45.ev.007",
+        "y1v45.ev.020"
+      ]
+    },
+    "evt.y1.v04.zodiac-dragon-vip-disclosure": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.v04.zodiac-dragon-vip-disclosure.json",
+      "status": "OPEN",
+      "source_evidence_refs": [
+        "y1v4.ev.125",
+        "y1v4.ev.127",
+        "y1v45.ev.035"
+      ]
+    },
+    "evt.y1.v04.zodiac-rabbit-reward": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.v04.zodiac-rabbit-reward.json",
+      "status": "PARTIALLY_EXPLAINED",
+      "source_evidence_refs": [
+        "y1v4.ev.120",
+        "y1v4.ev.127",
+        "y1v4.ev.128",
+        "y1v45.ev.042"
+      ]
+    },
+    "evt.y1.v045.katsuragi-family-parcel-payment": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.v045.katsuragi-family-parcel-payment.json",
+      "status": "PARTIALLY_EXPLAINED",
+      "source_evidence_refs": [
+        "y1v45.ev.027",
+        "y1v45.ev.029",
+        "y1v45.ev.030",
+        "y1v45.ev.028"
+      ]
+    },
+    "evt.y1.v045.pool-invasion-and-suppression": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.v045.pool-invasion-and-suppression.json",
+      "status": "RESOLVED",
+      "source_evidence_refs": [
+        "y1v45.ev.044",
+        "y1v45.ev.046",
+        "y1v45.ev.053",
+        "y1v45.ev.054",
+        "y1v45.ev.055",
+        "y1v45.ev.056"
+      ]
+    },
+    "evt.y1.anhs-private-points-vs-explicit-prohibitions": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.anhs-private-points-vs-explicit-prohibitions.json",
+      "status": "PARTIALLY_EXPLAINED",
+      "source_evidence_refs": [
+        "y1v4.ev.088",
+        "y1v45.ev.024",
+        "y1v45.ev.026"
+      ]
+    }
+  },
+  "events_by_source_evidence": {
+    "y1v3.ev.110": [
+      "evt.y1.v03.island-class-d-leader-replacement"
+    ],
+    "y1v3.ev.111": [
+      "evt.y1.v03.island-class-d-leader-replacement"
+    ],
+    "y1v45.ev.007": [
+      "evt.y1.v03.island-class-d-leader-replacement"
+    ],
+    "y1v45.ev.020": [
+      "evt.y1.v03.island-class-d-leader-replacement"
+    ],
+    "y1v4.ev.125": [
+      "evt.y1.v04.zodiac-dragon-vip-disclosure"
+    ],
+    "y1v4.ev.127": [
+      "evt.y1.v04.zodiac-dragon-vip-disclosure",
+      "evt.y1.v04.zodiac-rabbit-reward"
+    ],
+    "y1v45.ev.035": [
+      "evt.y1.v04.zodiac-dragon-vip-disclosure"
+    ],
+    "y1v4.ev.120": [
+      "evt.y1.v04.zodiac-rabbit-reward"
+    ],
+    "y1v4.ev.128": [
+      "evt.y1.v04.zodiac-rabbit-reward"
+    ],
+    "y1v45.ev.042": [
+      "evt.y1.v04.zodiac-rabbit-reward"
+    ],
+    "y1v45.ev.027": [
+      "evt.y1.v045.katsuragi-family-parcel-payment"
+    ],
+    "y1v45.ev.029": [
+      "evt.y1.v045.katsuragi-family-parcel-payment"
+    ],
+    "y1v45.ev.030": [
+      "evt.y1.v045.katsuragi-family-parcel-payment"
+    ],
+    "y1v45.ev.028": [
+      "evt.y1.v045.katsuragi-family-parcel-payment"
+    ],
+    "y1v45.ev.044": [
+      "evt.y1.v045.pool-invasion-and-suppression"
+    ],
+    "y1v45.ev.046": [
+      "evt.y1.v045.pool-invasion-and-suppression"
+    ],
+    "y1v45.ev.053": [
+      "evt.y1.v045.pool-invasion-and-suppression"
+    ],
+    "y1v45.ev.054": [
+      "evt.y1.v045.pool-invasion-and-suppression"
+    ],
+    "y1v45.ev.055": [
+      "evt.y1.v045.pool-invasion-and-suppression"
+    ],
+    "y1v45.ev.056": [
+      "evt.y1.v045.pool-invasion-and-suppression"
+    ],
+    "y1v4.ev.088": [
+      "evt.y1.anhs-private-points-vs-explicit-prohibitions"
+    ],
+    "y1v45.ev.024": [
+      "evt.y1.anhs-private-points-vs-explicit-prohibitions"
+    ],
+    "y1v45.ev.026": [
+      "evt.y1.anhs-private-points-vs-explicit-prohibitions"
+    ]
+  },
+  "unknown_not_resolved": [
+    "evt.y1.v03.ryuen-katsuragi-alliance-contract-terms",
+    "evt.y1.v04.zodiac-vip-selection-algorithm"
+  ],
+  "memory_promotion": "FORBIDDEN_WITHOUT_ACTOR_KNOWLEDGE_AND_OPERATOR_GATES"
+}

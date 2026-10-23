@@ -1,0 +1,44 @@
+{
+  "id": "evt.y1.v04.zodiac-dragon-vip-disclosure",
+  "event_time": "Y1_AUG_ZODIAC_EXAM",
+  "status": "OPEN",
+  "canonical_event_sources": [
+    "y1v4.ev.125",
+    "y1v4.ev.127"
+  ],
+  "prior_ambiguities": [
+    "Did Kushida herself disclose or leak Dragon VIP? Source has no first-person admission."
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        120,
+        122
+      ],
+      "evidence_refs": [
+        "y1v45.ev.035"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "Suzune suspects Kushida contributed to exposure, explicitly admits no proof, and is challenged by Kiyotaka.",
+      "world_epistemic_status": "BELIEF_NOT_CONFIRMED",
+      "actor_knowledge": [
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V045_CH4",
+          "status": "SUSPECTS_NOT_KNOWS"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V045_CH4",
+          "status": "HEARD_SUSPICION"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Kushida's own knowledge or involvement in exposure not independently proved."
+  ]
+}

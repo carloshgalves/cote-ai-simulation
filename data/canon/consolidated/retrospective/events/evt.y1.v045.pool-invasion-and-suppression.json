@@ -1,0 +1,69 @@
+{
+  "id": "evt.y1.v045.pool-invasion-and-suppression",
+  "event_time": "Y1_AUG_LAST_DAY_POOL",
+  "status": "RESOLVED",
+  "canonical_event_sources": [
+    "y1v45.ev.044",
+    "y1v45.ev.046",
+    "y1v45.ev.053",
+    "y1v45.ev.054"
+  ],
+  "prior_ambiguities": [
+    "Why had Kiyotaka enlisted Karuizawa for pool attendance?",
+    "Why did the returned covert recording contain no girls' images?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        220,
+        223
+      ],
+      "evidence_refs": [
+        "y1v45.ev.055",
+        "y1v45.ev.056"
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "resolves_assertion_refs": [
+        "y1v45.ev.044",
+        "y1v45.ev.046",
+        "y1v45.ev.053"
+      ],
+      "explanation": "The later chapter depicts Karuizawa privately neutralizing the surreptitious recording at Kiyotaka's direction; the would-be voyeurs then discover no image files.",
+      "world_epistemic_status": "OBSERVED_IN_SUPPLEMENTARY_NARRATOR_PERSPECTIVE",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kei-karuizawa",
+          "since": "AT_POOL_OPERATION",
+          "status": "KNOWS_OWN_INTERVENTION"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "AT_POOL_PLAN",
+          "status": "PLANNED_COUNTERMEASURE"
+        },
+        {
+          "actor": "actor.kanji-ike",
+          "since": "AFTER_FAILED_REVIEW",
+          "status": "KNOWS_ONLY_THAT_DATA_WAS_MISSING"
+        },
+        {
+          "actor": "actor.haruki-yamauchi",
+          "since": "AFTER_FAILED_REVIEW",
+          "status": "KNOWS_ONLY_THAT_DATA_WAS_MISSING"
+        },
+        {
+          "actor": "actor.ken-sudo",
+          "since": "AFTER_FAILED_REVIEW",
+          "status": "KNOWS_ONLY_THAT_DATA_WAS_MISSING"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Attendees who did not witness Karuizawa's action must not be granted that knowledge.",
+    "Privacy violation attempt is wrongdoing; practical instructions excluded."
+  ]
+}

@@ -1,0 +1,1856 @@
+{
+  "schema_version": "consolidated-source-evidence-v1",
+  "source_id": "ln.y1.v04.sevenseas.en.operator-provided",
+  "records": [
+    {
+      "id": "y1v4.ev.001",
+      "domain": "emotion",
+      "summary": "Karuizawa privately describes her public persona as self-protection and recalls the distress associated with a bodily scar; the prologue does not disclose its exact timing to other characters.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          10
+        ],
+        "chapter": 1,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "UNDATED_PRIVATE_SOLILOQUY",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "identity"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.002",
+      "domain": "institution",
+      "summary": "The illustrated school dossier assesses Ichinose's academics, judgment and cooperation and offers an interviewer interpretation; these profile labels are not independently demonstrated feats.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          11
+        ],
+        "chapter": 1,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "DOCUMENT_IMAGE",
+      "story_time": "UNDATED_PRIVATE_SOLILOQUY",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "academic_reasoning"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.003",
+      "domain": "institution",
+      "summary": "Three days after the island exam Kiyotaka recalls the teacher's threatened expulsion and uncertain outside intervention, while considering how to avoid dependence on her.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          12
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "strategy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.004",
+      "domain": "social",
+      "summary": "Hirata invites Kiyotaka to lunch with Karuizawa's friends, but Kiyotaka refuses because of his discomfort with that group.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          14
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "persuasion"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.005",
+      "domain": "leadership",
+      "summary": "Hirata cancels a prior lunch date with Karuizawa to eat privately with Kiyotaka, while Kiyotaka questions why.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          15
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "social"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.006",
+      "domain": "leadership",
+      "summary": "Hirata privately asks Kiyotaka to mediate cooperation with Suzune because he fears speaking to her directly.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          17
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "persuasion"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.007",
+      "domain": "social",
+      "summary": "Kiyotaka argues that indirect management of Suzune could backfire; Hirata accepts the criticism and considers a more direct approach.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          18
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "strategy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.008",
+      "domain": "social",
+      "summary": "Karuizawa unexpectedly joins Hirata's private lunch with friends and crowds Kiyotaka out; he withdraws quietly.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          20
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "observation"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.009",
+      "domain": "social",
+      "summary": "Kōenji repeatedly ignores a bellhop's warning to dry off after the pool and dismisses the disturbance to fellow passengers.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          21
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "conflict"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.010",
+      "domain": "self_presentation",
+      "summary": "Kōenji gives a crew member his autograph and predicts its future value; the claim is his self-promotion, not a verified market price.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          22
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "self_presentation",
+        "social"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.011",
+      "domain": "strategy",
+      "summary": "Kiyotaka redirects Kōenji's attention to the bellhop's unfinished complaint to escape an unwelcome encounter.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          23
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.rokusuke-koenji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "social"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.012",
+      "domain": "institution",
+      "summary": "Kiyotaka describes the cruise ship's deck layout and freely accessible student facilities; inferred restrictions on overnight access are conjectural.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          24
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "observation"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.013",
+      "domain": "social",
+      "summary": "Sakura privately seeks help with her cabin roommates, saying she wants friends yet also needs time alone.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          26
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.014",
+      "domain": "social",
+      "summary": "Sakura identifies Shinohara, Ichihashi and Maezono as cabin roommates; Kiyotaka's judgments about those girls' personalities remain his impressions.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          27
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "observation"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.015",
+      "domain": "emotion",
+      "summary": "Sakura withdraws abruptly when Kushida approaches, despite Kushida apologizing; the event does not prove Kushida intended harm.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          28
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "social"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.016",
+      "domain": "institution",
+      "summary": "A synchronized school-wide urgent alert announces another surprise special exam and privately assigned meeting times and rooms.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          29
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "exam"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.017",
+      "domain": "observation",
+      "summary": "Kiyotaka compares his own 18:00 room summons with Kushida and Suzune's 20:40 summons and speculates about why the school separates students.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          30
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "observation",
+        "exam"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.018",
+      "domain": "observation",
+      "summary": "Kiyotaka arrives at a small private briefing with Mashima, Yukimura and Sotomura, initially finding one student seat vacant.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          32
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mashima",
+        "actor.yukimura",
+        "actor.sotomura"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "observation",
+        "exam"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.019",
+      "domain": "exam",
+      "summary": "Karuizawa arrives as the fourth student in the same Class D briefing and challenges the necessity of the gathering.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          33
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.mashima",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "social"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.020",
+      "domain": "institution",
+      "summary": "Mashima states all first years are divided into twelve zodiac-named mixed-class groups to assess reasoning.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          34
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "exam"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.021",
+      "domain": "governance",
+      "summary": "Mashima explains groups cannot be reassigned, each includes representatives from other classes, and the students must cooperate under those imposed assignments.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          36
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima",
+        "actor.kei-karuizawa",
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "governance",
+        "exam"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.022",
+      "domain": "governance",
+      "summary": "Mashima assigns the four Class D briefed students to Rabbit and supplies a fourteen-name cross-class roster that must be returned.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          38
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "governance",
+        "strategy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.023",
+      "domain": "institution",
+      "summary": "The Rabbit list assigns three from A, three from B, four from C and four from D, including Machida, Ichinose, Ibuki and Karuizawa.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          39
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "DOCUMENT_IMAGE",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.mio-ibuki",
+        "actor.honami-ichinose",
+        "actor.machida",
+        "actor.hamaguchi"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "social"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.024",
+      "domain": "exam",
+      "summary": "The school says each group has exactly one VIP, notified privately at 08:00, and requires closed group discussion sessions before answers.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          40
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "governance"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.025",
+      "domain": "exam",
+      "summary": "The printed calendar says the test ends at 21:00 on the fourth day while an explanatory example calls it the third day; retain the literal source ambiguity.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          40
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "institution"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.026",
+      "domain": "exam",
+      "summary": "For final-window Outcome 1, a valid correct submission between 21:30 and 22:00 rewards group members and doubles the VIP's private-point reward.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          41
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "economy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.027",
+      "domain": "exam",
+      "summary": "Outcome 2 awards the undiscovered VIP 500,000 private points when no valid final-window answer identifies them; it does not automatically reward all group members.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          41
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "economy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.028",
+      "domain": "economy",
+      "summary": "Mashima's Outcome 1 example specifies 500,000 private points for each non-VIP member and one million for the VIP.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          42
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "exam"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.029",
+      "domain": "exam",
+      "summary": "Outcome 3 allows an early correct answer by a non-VIP from another class, earning their class 50 class points and themselves 500,000 private points while penalizing the VIP's class 50.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          44
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "strategy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.030",
+      "domain": "exam",
+      "summary": "Outcome 4 gives the VIP class 50 class points and VIP 500,000 private points after an early wrong non-classmate guess, costing the submitter's class 50.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          45
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "strategy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.031",
+      "domain": "exam",
+      "summary": "An early answer from a classmate of the VIP is disregarded, and a VIP may not submit; the published school results keep VIP and submitter identities anonymous.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          45
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "governance"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.032",
+      "domain": "strategy",
+      "summary": "Kiyotaka compares the four result classes and recognizes that early betrayal can outweigh mixed-class cooperation, without yet knowing any VIP.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          46
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "reasoning"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.033",
+      "domain": "exam",
+      "summary": "The exam prohibits stealing phones, coerced identity disclosure, submitting on another person's device without consent and discussing across class lines outside permitted settings; severe breaches risk expulsion.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          48
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "governance"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.034",
+      "domain": "exam",
+      "summary": "Mandatory group sessions meet at 13:00 and 20:00; students must remain during the first hour, while official school emails cannot be forged or edited.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          49
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "governance"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.035",
+      "domain": "strategy",
+      "summary": "Yukimura advocates discussing VIP information only in a secure place and tries to unify the Class D Rabbit contingent.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          50
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.yukimura",
+        "actor.kei-karuizawa",
+        "actor.sotomura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "leadership"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.036",
+      "domain": "observation",
+      "summary": "Kiyotaka receives a later shared-room message and observes how Karuizawa and other students respond to the group arrangements.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          52
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "social"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.037",
+      "domain": "social",
+      "summary": "Kiyotaka observes Katsuragi and Ryūen at the ship gathering and contrasts their public leadership styles; conclusions about their full plans are premature.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          55
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "strategy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.038",
+      "domain": "leadership",
+      "summary": "Ryūen enters with several Class C followers and directly provokes Katsuragi, whose guarded composure contrasts with the display.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          58
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.katsuragi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "conflict"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.039",
+      "domain": "social",
+      "summary": "Kushida receives a different group assignment and communicates with Kiyotaka during the early briefings without gaining his Rabbit VIP knowledge.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          60
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_POST_ISLAND_PRE_ZODIAC",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "observation"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.040",
+      "domain": "strategy",
+      "summary": "After morning VIP notifications, Kiyotaka meets Suzune and compares the composition of their zodiac groups.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          63
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "observation"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.041",
+      "domain": "exam",
+      "summary": "Suzune's handwritten Dragon roster groups leading class representatives, including Katsuragi, Kanzaki, Ryūen, Hirata and Kushida.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          64
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "DOCUMENT_IMAGE",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen",
+        "actor.katsuragi",
+        "actor.ryuji-kanzaki",
+        "actor.kikyo-kushida",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "strategy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.042",
+      "domain": "strategy",
+      "summary": "Suzune speculates that group assignment reflects academic scores; Kiyotaka challenges the theory using members whose observed grades do not fit.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          65
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "reasoning"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.043",
+      "domain": "exam",
+      "summary": "Both Suzune and Kiyotaka read notices indicating they were not selected as their own groups' VIPs; neither learns the other groups' secret VIP lists.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          66
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "epistemics"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.044",
+      "domain": "conflict",
+      "summary": "Ryūen approaches the pair after the island exam and probes who replaced Suzune as leader; his suspicion is not a demonstrated discovery.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          69
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "strategy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.045",
+      "domain": "conflict",
+      "summary": "Ryūen asserts Suzune had a hidden strategist on the island, without correctly identifying that person's role to her at this point.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          72
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "observation"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.046",
+      "domain": "strategy",
+      "summary": "Kiyotaka recognizes Ryūen is seeking the hidden island leader and decides not to supply evidence about his own involvement.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          76
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "conflict"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.047",
+      "domain": "social",
+      "summary": "Sotomura makes playful comments about relationships and dialect as the Rabbit group prepares to convene, while Yukimura finds the digression frustrating.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          79
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.sotomura",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "observation"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.048",
+      "domain": "leadership",
+      "summary": "Ichinose initiates Rabbit introductions, opening discussion even though rival classes begin wary of one another.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          81
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.machida",
+        "actor.hamaguchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "social"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.049",
+      "domain": "leadership",
+      "summary": "With no volunteer emerging, Ichinose assumes temporary facilitation and invites each member's questions in Rabbit.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          82
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "persuasion"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.050",
+      "domain": "persuasion",
+      "summary": "Kiyotaka publicly endorses cooperative discussion to probe reactions while privately considering how participants might hide VIP status.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          83
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose",
+        "actor.sotomura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "strategy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.051",
+      "domain": "strategy",
+      "summary": "Machida advocates a silent, no-search policy in Rabbit, arguing the group can avoid traitor losses by not identifying the VIP.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          85
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.machida",
+        "actor.honami-ichinose",
+        "actor.hamaguchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "conflict"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.052",
+      "domain": "persuasion",
+      "summary": "Machida presses members to acknowledge the class-point downside of betrayal and portrays passivity as the safer common interest.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          86
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.machida",
+        "actor.yukimura",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "persuasion",
+        "economy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.053",
+      "domain": "strategy",
+      "summary": "Machida cites an assumption that VIPs were fairly distributed between classes; the school has not yet disclosed a deterministic allocation formula.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          87
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.machida",
+        "actor.hamaguchi",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "reasoning"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.054",
+      "domain": "leadership",
+      "summary": "Ichinose challenges complete silence because class incentives and uncertainty over VIP identity are not neutral across participants.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          90
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.machida",
+        "actor.hamaguchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "ethics"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.055",
+      "domain": "conflict",
+      "summary": "Manabe suspects Karuizawa of earlier mistreatment of a friend and attempts to photograph her despite protest.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          93
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.manabe-shiho",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "conflict",
+        "privacy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.056",
+      "domain": "conflict",
+      "summary": "Karuizawa's public bravado falters under Manabe's hostile accusation, while Ibuki contemptuously distances herself from Manabe.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          94
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.manabe-shiho",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "emotion"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.057",
+      "domain": "conflict",
+      "summary": "Machida intervenes against unwanted photography, citing lack of consent, and Manabe temporarily withdraws.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          95
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.machida",
+        "actor.kei-karuizawa",
+        "actor.manabe-shiho"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "persuasion"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.058",
+      "domain": "strategy",
+      "summary": "Yukimura and Sotomura disagree about how to protect a possible Class D VIP after their first Rabbit meeting.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          97
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.yukimura",
+        "actor.sotomura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "social"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.059",
+      "domain": "social",
+      "summary": "Kiyotaka encounters Sakura speaking quietly to herself and considers why she seems anxious, without obtaining a full explanation.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          100
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.060",
+      "domain": "conflict",
+      "summary": "Ryūen physically grabs and confronts Kiyotaka to press for answers, though Kiyotaka conceals his role in the island result.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          103
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "strategy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.061",
+      "domain": "strategy",
+      "summary": "The emerging discussion of cooperation between B and D is contrasted with A's self-preservation and C's possible rivals; a permanent alliance is not shown.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          106
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ryuji-kanzaki",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.062",
+      "domain": "emotion",
+      "summary": "Kiyotaka notices that Karuizawa is unusually withdrawn in Rabbit when deprived of the usual authority she exercises in Class D.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          109
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "observation"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.063",
+      "domain": "social",
+      "summary": "At night Hirata remains awake and discusses how to reconcile Rabbit group anxieties and previous Class D tension.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          112
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "conflict"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.064",
+      "domain": "exam",
+      "summary": "Kōenji reveals that his Monkey-group test has already ended, startling his roommates; its cause and strategic merit cannot be inferred from the bare announcement.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          115
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.yukimura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "strategy"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.065",
+      "domain": "social",
+      "summary": "Kushida speaks privately with Kiyotaka late on the ship; their friendliness is observed, but hidden long-term motives are not established.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          119
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.066",
+      "domain": "social",
+      "summary": "Kushida impulsively hugs Kiyotaka and leaves embarrassed; neither a romantic commitment nor knowledge of future events follows.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          121
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "ACTOR_MENTION_NOT_AUTOMATIC_BEHAVIOR"
+    }
+  ]
+}

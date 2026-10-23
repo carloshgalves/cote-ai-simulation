@@ -1,0 +1,39 @@
+{
+  "id": "y1v2.case.kikyo-kushida.recognize-shizuku-identity",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "recognize shizuku identity",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Recognizes a resemblance between online idol Shizuku and Sakura and shows the profile to classmates; Kiyotaka, not Kushida, identifies the photograph's dorm-door clue.",
+  "observed_result": "Identifies a private stage persona",
+  "epistemic_limits": "Kushida's recognition is demonstrated, but attributing Kiyotaka's dorm-door deduction to her would misassign another actor's action; disclosure is restricted.",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      179,
+      180
+    ],
+    "chapter": 5,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.airi-sakura",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "observation",
+    "social"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "observation",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.056",
+    "y1v2.ev.057"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

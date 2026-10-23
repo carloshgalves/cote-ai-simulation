@@ -7,15 +7,17 @@ r=J(B/"audits/source-review-register-v0-v1.json")
 e=[x for p in (B/"evidence").glob("*.json") for x in J(p)["records"]]
 idx=J(B/"indexes/character-topic-map.json")
 a={x["id"]:x for x in r["records"]}
-assert len(e)==len(a)==268
-assert set(a)=={x["id"] for x in e}
-assert len(r["cases"])==len(idx["behavioral_case_paths"])==75
-assert {c["case_id"] for c in r["cases"]}==set(idx["behavioral_case_paths"])
+legacy=[x for x in e if x["id"].startswith(("v0.","y1v1."))]
+assert len(legacy)==len(a)==268
+assert set(a)=={x["id"] for x in legacy}
+legacy_cases={x for x in idx["behavioral_case_paths"] if x.startswith(("v0.","y1v1."))}
+assert len(r["cases"])==len(legacy_cases)==75
+assert {c["case_id"] for c in r["cases"]}==legacy_cases
 assert r["global_promotion"]=="BLOCKED_PENDING_OPERATOR_RELEASE_APPROVAL"
 assert all(x["adjudication"]=="ASSISTANT_DIRECT_SOURCE_REVIEW_PASS" and x["verified"] is False for x in r["records"])
 assert all(c["semantic_adjudication"]=="ASSISTANT_DIRECT_CASE_REVIEW_PASS" and c["verified"] is False for c in r["cases"])
 sources={x["file"]:x["pages"] for x in r["sources"]}
-for x in e:
+for x in legacy:
     row=a[x["id"]]
     assert row["pdf_pages"]==x["source"]["pdf_pages"]
     assert row["source_mode"]==x["source_mode"]
@@ -37,4 +39,4 @@ assert J(B/"sources/volume0.json")["record_audit"]=="ASSISTANT_SEMANTIC_REVIEW_C
 assert J(B/"sources/y1-v01.json")["record_audit"]=="ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_RELEASE_PENDING"
 father=J(B/"behavioral_cases/sakayanagi-father/sakayanagi--ethical-observation.json")
 assert "Arisu" in father["epistemic_limits"] and "innate" not in father["observed_actions"]
-print("PASS 268 reviewed evidence / 74 reviewed cases, attributed actor boundaries and zero unsupported Kijima feats.")
+print("PASS 268 reviewed evidence / 75 reviewed cases (V0/V1), attributed actor boundaries and zero unsupported Kijima feats.")

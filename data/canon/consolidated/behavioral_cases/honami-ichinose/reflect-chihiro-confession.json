@@ -1,0 +1,41 @@
+{
+  "id": "y1v2.case.honami-ichinose.reflect-chihiro-confession",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "reflect chihiro confession",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Acknowledges avoidance was unfair after Chihiro's confession",
+  "observed_result": "Ichinose reports having spoken with Chihiro and asks whether ordinary contact can resume; she remains unsure of their relationship.",
+  "epistemic_limits": "The boy-as-boyfriend ruse is not completed as planned; her expression of regret does not establish a successful romantic reconciliation.",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      125,
+      127
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.chihiro-unidentified",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "emotion",
+    "ethics",
+    "social"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "emotion",
+    "ethics",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.040",
+    "y1v2.ev.041"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

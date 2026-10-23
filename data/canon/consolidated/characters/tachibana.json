@@ -1,0 +1,46 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.tachibana",
+  "display_name": "Tachibana (given name unknown)",
+  "modeling_tier": "MINIMAL_ENTITY",
+  "source_coverage": [
+    "ln.y1.v02.sevenseas.en.operator-provided"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "Student council staff and secretary",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "institution": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.088"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.088"
+      ]
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": false,
+  "semantic_audit_notes": "Minimum entity only; unknown identity fields remain unknown, assertions by other actors do not establish behavior.",
+  "uncertainties": {
+    "identity_hypothesis_not_confirmed": true,
+    "future_fate_unknown": true
+  },
+  "generation_policy": "One global actor file, never a per-volume duplicate",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

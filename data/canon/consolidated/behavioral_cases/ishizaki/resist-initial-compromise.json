@@ -1,0 +1,37 @@
+{
+  "id": "y1v2.case.ishizaki.resist-initial-compromise",
+  "actor_id": "actor.ishizaki",
+  "primary_actor_id": "actor.ishizaki",
+  "title": "resist initial compromise",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Initially refuses to give up complaint if Sudō would be spared",
+  "observed_result": "Bluff does not immediately convince him",
+  "epistemic_limits": "One statement under pressure is not a fixed utility function",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      232
+    ],
+    "chapter": 7,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.honami-ichinose"
+  ],
+  "capabilities_supported": [
+    "risk_management",
+    "conflict"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "risk_management",
+    "conflict"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.073"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

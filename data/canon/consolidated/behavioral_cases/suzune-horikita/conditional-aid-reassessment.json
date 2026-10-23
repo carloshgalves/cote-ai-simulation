@@ -1,0 +1,39 @@
+{
+  "id": "y1v2.case.suzune-horikita.conditional-aid-reassessment",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "conditional aid reassessment",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Initially refuses to help Sudō, later weighs his potential club value",
+  "observed_result": "Moves toward supporting his defense",
+  "epistemic_limits": "Pragmatic reassessment is not unconditional altruism",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      44,
+      72
+    ],
+    "chapter": 3,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "ethics"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "strategy",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.019",
+    "y1v2.ev.029"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

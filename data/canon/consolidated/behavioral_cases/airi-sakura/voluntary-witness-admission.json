@@ -1,0 +1,37 @@
+{
+  "id": "y1v2.case.airi-sakura.voluntary-witness-admission",
+  "actor_id": "actor.airi-sakura",
+  "primary_actor_id": "actor.airi-sakura",
+  "title": "voluntary witness admission",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Admits witnessing the fight after rapport is established",
+  "observed_result": "Explicitly promises Kushida she will testify after disclosing the incident privately.",
+  "epistemic_limits": "Promise is directly spoken on PDF p.146, but performance under later hostile questioning remains uncertain; no inferred automatic self-confidence.",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      146
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "social",
+    "emotion"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "social",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.046"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

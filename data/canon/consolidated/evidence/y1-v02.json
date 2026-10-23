@@ -1,0 +1,2589 @@
+{
+  "schema_version": "consolidated-source-evidence-v1",
+  "source_id": "ln.y1.v02.sevenseas.en.operator-provided",
+  "records": [
+    {
+      "id": "y1v2.ev.001",
+      "domain": "social",
+      "summary": "Airi describes intense difficulty with eye contact, crowds and relationships, adopting a facade while privately desiring connection.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          10
+        ],
+        "chapter": 1,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "NARRATIVE_SOLILOQUY_UNDATED",
+      "mention_actor_ids": [
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "validity_time": {
+        "mode": "UNKNOWN",
+        "reason": "Opening personal reflection does not explicitly date the origin of her social difficulties."
+      }
+    },
+    {
+      "id": "y1v2.ev.002",
+      "domain": "combat",
+      "summary": "Airi sees Sudō standing over three injured boys and quietly photographs the apparent end of their fight.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          12
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M03_END",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.003",
+      "domain": "social",
+      "summary": "Airi freezes with fear then evades Sudō without being identified; he senses a nearby presence.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          13
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M03_END",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.004",
+      "domain": "economy",
+      "summary": "The phone S-System app displays class and private points, supports private-point transfers, and applies a monthly distribution described as 100 times class points.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          15
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.005",
+      "domain": "economy",
+      "summary": "Class D fell from 1000 to zero class points earlier in the year; Kiyotaka recalls a specially negotiated purchase of Sudō's midterm point.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          16
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "exam"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.006",
+      "domain": "economy",
+      "summary": "The July point board shows Class A at 1004 and Class D at 87; other classes also gained points, so Suzune cautions the ranking gap remains.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          17
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.suzune-horikita",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.007",
+      "domain": "economy",
+      "summary": "Hirata notes Class D avoided ordinary conduct deductions; Chabashira reports a first-year delay in private-point distribution amid unresolved trouble.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          18
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.008",
+      "domain": "social",
+      "summary": "Kiyotaka notes Airi's isolation, Kōenji's comfort alone, and Suzune's use of free supermarket ingredients to prepare lunch.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          20
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.suzune-horikita",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "social",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.009",
+      "domain": "institution",
+      "summary": "Chabashira summons Sudō from class (p.22); later Suzune questions whether delayed private-point deposits reflect student trouble rather than a school fault (p.23).",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          22,
+          23
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.ken-sudo",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.010",
+      "domain": "social",
+      "summary": "Suzune does not participate in the class chat and mutes notifications; she later distances herself from Kushida, while Kiyotaka describes increased ease speaking to Suzune.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          24,
+          25
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.011",
+      "domain": "economy",
+      "summary": "Sudō says other students obtained duplicate keycards to Kiyotaka's locked dorm room without his knowledge; Kushida also shows a copy and offers its return.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          27,
+          28
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.012",
+      "domain": "conflict",
+      "summary": "Sudō reports fighting three Class C students and fearing long suspension; his version of instigation remains disputed.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          29,
+          30
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "combat"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.013",
+      "domain": "combat",
+      "summary": "Sudō says he is the only first-year being considered for a regular basketball role; selection is not yet final.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          30
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "motivation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.014",
+      "domain": "conflict",
+      "summary": "Sudō alleges Komiya and Kondou lured him to a special building with Ishizaki and threatened his basketball participation before the physical confrontation.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          31
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.ishizaki",
+        "actor.komiya",
+        "actor.kondou"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "combat"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.015",
+      "domain": "institution",
+      "summary": "Sudō says the school gave him until next Tuesday to produce evidence or face suspension until summer and a class-point penalty; no precise penalty is stated.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          31
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.016",
+      "domain": "strategy",
+      "summary": "Kiyotaka questions how Sudō's use of force would be weighed against a self-defense argument; Kushida suggests obtaining a confession or finding an eyewitness.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          32,
+          33,
+          34
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.017",
+      "domain": "motivation",
+      "summary": "Sudō requests discretion because of basketball risks; Kushida and Kiyotaka encourage him to avoid personally conducting the inquiry.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          35,
+          36
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.018",
+      "domain": "institution",
+      "summary": "Chabashira discloses the Class C complaint and possible consequences to Class D without establishing who started the fight.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          40
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.019",
+      "domain": "strategy",
+      "summary": "Suzune initially declines to rescue Sudō and considers whether shielding him from consequences would hinder behavioral change.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          44
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.020",
+      "domain": "leadership",
+      "summary": "Hirata and Karuizawa lead one witness-search group and Kushida another; they set out despite limited time, with no result yet established on this page.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          54
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.021",
+      "domain": "persuasion",
+      "summary": "Kushida asks Kiyotaka to help persuade Suzune, follows Suzune, and receives her continued refusal.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          55,
+          56
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.022",
+      "domain": "strategy",
+      "summary": "Kiyotaka proposes an inquiry with Class B rather than solely random campus searching.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          61
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.023",
+      "domain": "social",
+      "summary": "Kushida approaches unfamiliar students in Class B with relative ease, unlike her intimidated companions.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          63
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "persuasion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.024",
+      "domain": "leadership",
+      "summary": "Hirata argues that protecting classmates and friendships can matter more than conserving class points at any cost.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          67
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.025",
+      "domain": "economy",
+      "summary": "Chabashira announces an individual route to change classes through a private-point purchase distinct from class ranking.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          68
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.026",
+      "domain": "economy",
+      "summary": "Chabashira quotes twenty million private points as the transfer price for entering a chosen class; no successful transaction is shown.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          69
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.027",
+      "domain": "economy",
+      "summary": "Chabashira reports that no one completed the transfer and recounts a past fraud case reaching almost twelve million points before expulsion.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          70
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.028",
+      "domain": "economy",
+      "summary": "Chabashira says individual club participation or competitive achievements can earn points, without disclosing any universal amount or algorithm.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          71
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.029",
+      "domain": "strategy",
+      "summary": "Kiyotaka argues that Sudō's prospective basketball contributions create a Class A incentive to keep him in school; Suzune considers that benefit.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          72
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "motivation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.030",
+      "domain": "observation",
+      "summary": "Suzune identifies Airi Sakura as a likely ignored witness through observations before Sakura makes an admission.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          77
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.031",
+      "domain": "persuasion",
+      "summary": "Kushida approaches Sakura, who initially resists discussing the fight and struggles with unfamiliar social attention.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          86
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.032",
+      "domain": "conflict",
+      "summary": "Sudō lashes out while feeling abandoned by classmates; Suzune challenges both his conduct and the practical cost to Class D.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          91
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.033",
+      "domain": "observation",
+      "summary": "Kiyotaka points to existing classroom cameras but cannot confirm equivalent functioning cameras captured the special-building fight.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          95
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "observation",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.034",
+      "domain": "social",
+      "summary": "Kiyotaka restrains Horikita from pressing Sakura, tells Sakura that testimony must be voluntary and offers help if she is intimidated; Sakura still denies witnessing the incident.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          101,
+          102
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.035",
+      "domain": "strategy",
+      "summary": "Ichinose approaches Kiyotaka and Horikita at the special building after hearing about the conflict and offers to help; Kiyotaka considers possible Class B incentives as speculation.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          103,
+          104,
+          105,
+          106
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.036",
+      "domain": "leadership",
+      "summary": "Class D accepts Ichinose's help; a Class D-only eyewitness may be regarded as biased.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          107
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.037",
+      "domain": "leadership",
+      "summary": "Ichinose brings Class B dorm residents' requests to the dorm manager and explains that she serves as an informal representative chosen within her class.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          114,
+          115
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "leadership",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.038",
+      "domain": "institution",
+      "summary": "Ichinose explains that Class B chose representative, deputy and secretary roles independently; they are not mandatory school-wide offices.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          115
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.039",
+      "domain": "institution",
+      "summary": "Ichinose passes along a rumor of a possible summer tropical-island trip without an exam specification or confirmed mechanism.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          116
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.040",
+      "domain": "social",
+      "summary": "Ichinose has received a written romantic confession and Chihiro confronts her about the unfamiliar boy she brought to their meeting; Ichinose hesitates and cannot easily lie.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          123,
+          124,
+          125,
+          126
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.chihiro-unidentified"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.041",
+      "domain": "ethics",
+      "summary": "Ichinose acknowledges she mishandled Chihiro's feelings by avoidance; their future relationship is unresolved.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          127
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.chihiro-unidentified",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "ethics",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.042",
+      "domain": "social",
+      "summary": "Kushida and Kiyotaka accompany Sakura to a campus electronics store for a camera repair; she fears the clerk.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          138
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.043",
+      "domain": "risk_management",
+      "summary": "Kiyotaka recognizes the clerk's troubling attention and offers his own repair contact instead of having Sakura leave sensitive details.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          140
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura",
+        "actor.unidentified-electronics-clerk"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "risk_management",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.044",
+      "domain": "social",
+      "summary": "Sakura reports loving photography since childhood; her father gave her a camera before junior high, but she does not claim technical expertise.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          142
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.045",
+      "domain": "strategy",
+      "summary": "Kiyotaka contacts Sotomura (Professor) to request electronics advice because he cannot identify the appropriate device himself.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          143,
+          144
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.sotomura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.046",
+      "domain": "conflict",
+      "summary": "Sakura privately admits she witnessed Sudō's fight, explains her fear of attention, and explicitly promises Kushida to testify, though her resilience under future pressure is not established.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          146
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.047",
+      "domain": "observation",
+      "summary": "Kushida notices Sakura's eyeglasses do not show usual prescription distortion; their purpose is only hypothesized at this point.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          148
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.048",
+      "domain": "leadership",
+      "summary": "On the eve of deliberation Class D has a witness and helpers, but still lacks irrefutable proof of Sudō's innocence.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          152
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.049",
+      "domain": "strategy",
+      "summary": "Kanzaki reports posting a physical notice requesting information on the Sudō incident; he states he has received no useful leads from that approach.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          153
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.ryuji-kanzaki",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.050",
+      "domain": "observation",
+      "summary": "An anonymous tip alleges Ishizaki was violent in junior high; Kanzaki infers a deliberate trap, but neither assertion is directly confirmed by the tip.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          156
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.ryuji-kanzaki",
+        "actor.honami-ichinose",
+        "actor.ishizaki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.051",
+      "domain": "economy",
+      "summary": "Kiyotaka describes how a temporary token from the S-System point page allows payment requests; he briefly notices an undisclosed portion of Ichinose's point screen. The amount and what it implies remain unconfirmed.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          157,
+          158
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.052",
+      "domain": "social",
+      "summary": "Sakura reluctantly offers herself as a witness to Chabashira despite significant anxiety about speaking.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          164
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.053",
+      "domain": "social",
+      "summary": "Kiyotaka explains Sakura must be free to decline and her testimony might not ensure acquittal.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          173
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "persuasion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.054",
+      "domain": "social",
+      "summary": "Sakura states she does not know how to make friends and says she wanted to answer Kushida's earlier invitation but lacked the courage.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          177
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.055",
+      "domain": "persuasion",
+      "summary": "Kiyotaka counsels Sakura to testify for herself and the truth, not out of forced loyalty to Sudō or classmates.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          177
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.056",
+      "domain": "observation",
+      "summary": "Kushida discovers an online gravure-idol profile under the name Shizuku and identifies resemblance to Sakura.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          179
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.057",
+      "domain": "observation",
+      "summary": "Photographic dorm details support the small group's identification of Sakura as Shizuku, without making her identity public.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          180
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.058",
+      "domain": "emotion",
+      "summary": "Sakura comes to school for the hearing despite fear and anxiety about expectations.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          190
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.059",
+      "domain": "institution",
+      "summary": "The student council president presides over the disciplinary hearing with both classes and teachers; Sakagami is introduced as Class C homeroom teacher.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          193
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.sae-chiyabashira",
+        "actor.sakagami",
+        "actor.ishizaki",
+        "actor.komiya",
+        "actor.kondou"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.060",
+      "domain": "institution",
+      "summary": "Suzune visibly falters in the presence of the presiding council president, her older brother, during the hearing.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          194
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.061",
+      "domain": "social",
+      "summary": "Kiyotaka repeatedly tickles and physically stimulates Suzune to interrupt her paralysis at the hearing; the intrusive action must not be modeled as generally appropriate or reliable.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          196,
+          197
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.062",
+      "domain": "academic_reasoning",
+      "summary": "Suzune probes inconsistencies in Class C's prepared account, including why the reputed fighter Ishizaki was present.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          198
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ishizaki",
+        "actor.komiya",
+        "actor.kondou"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.063",
+      "domain": "social",
+      "summary": "Sakura speaks unusually forcefully under pressure, but Sakagami challenges her late disclosure and potential partiality, so her testimony alone does not resolve fault.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          201,
+          202,
+          203
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.sakagami"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.064",
+      "domain": "observation",
+      "summary": "Sakura presents dated self-portraits as Shizuku and another photograph showing the fight shortly after Sudō struck Ishizaki; this supports her presence and part of the confrontation, not who initiated it.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          203,
+          204
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.065",
+      "domain": "institution",
+      "summary": "Sakagami observes that the photos do not establish who initiated the altercation even if Sakura was present.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          205
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.sakagami",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.066",
+      "domain": "ethics",
+      "summary": "Suzune distinguishes a need for Sudō to reflect on his past from whether he deserves punishment for this specific disputed incident.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          208
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "ethics",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.067",
+      "domain": "strategy",
+      "summary": "Ichinose and Kanzaki await news from the hearing and consider further assistance after the first confrontation fails to settle the allegation.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          215
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.ryuji-kanzaki",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.068",
+      "domain": "ethics",
+      "summary": "Ichinose recognizes ethical tension in a proposed deceptive tactic but remains willing to consider it for this case.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          217
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.ryuji-kanzaki",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "ethics",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.069",
+      "domain": "social",
+      "summary": "Suzune considers gradual social growth for Sakura beneficial but cautions against forcing her beyond present ability.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          223
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.070",
+      "domain": "strategy",
+      "summary": "Kiyotaka arranges for Kushida to send appealing emails to lure Ishizaki, Komiya and Kondou to the special building; Ichinose appears as they attempt to leave.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          225,
+          226
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose",
+        "actor.ishizaki",
+        "actor.komiya",
+        "actor.kondou",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.071",
+      "domain": "persuasion",
+      "summary": "Ichinose draws attention to a hallway camera, inducing uncertainty about possible recorded evidence.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          229
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.ishizaki",
+        "actor.komiya",
+        "actor.kondou"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.072",
+      "domain": "strategy",
+      "summary": "Ichinose points out apparent hall cameras and casts doubt on Class C's checks; Kiyotaka adds pressure by invoking supposed school knowledge, although no genuine recording exists.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          229,
+          230
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.ishizaki",
+        "actor.komiya",
+        "actor.kondou"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "persuasion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.073",
+      "domain": "conflict",
+      "summary": "Ishizaki initially refuses to withdraw, professing willingness to bear punishment if Sudō is also harmed; the bluff is not immediately decisive.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          232
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.ishizaki",
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.074",
+      "domain": "strategy",
+      "summary": "The parties head to the council room after their special-building confrontation, with the complainants' access to outside advice constrained.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          233
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose",
+        "actor.ishizaki",
+        "actor.komiya",
+        "actor.kondou"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.075",
+      "domain": "strategy",
+      "summary": "The purported surveillance cameras were temporary decoys bought by Ichinose and Kanzaki and installed with Sotomura; they did not record the fight.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          234
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose",
+        "actor.ryuji-kanzaki",
+        "actor.sotomura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.076",
+      "domain": "economy",
+      "summary": "Kiyotaka borrows private points from Ichinose for decoy equipment and promises repayment no later than graduation, but the principal and any interest are not stated.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          234,
+          235
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.077",
+      "domain": "risk_management",
+      "summary": "The electronics clerk continues unwanted pursuit and intimidation of Sakura despite her refusal.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          236
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.unidentified-electronics-clerk",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "risk_management",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.078",
+      "domain": "risk_management",
+      "summary": "Kiyotaka and Ichinose intervene during the clerk's harassment and document the interaction.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          237
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "risk_management",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.079",
+      "domain": "persuasion",
+      "summary": "Kiyotaka warns the clerk against further contact with Sakura and invokes pictures as leverage; this is not formal police involvement.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          238
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.unidentified-electronics-clerk"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.080",
+      "domain": "social",
+      "summary": "With Sakura's permission Kiyotaka tells Ichinose that Sakura used the Shizuku idol identity; the disclosure is limited to those present.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          239
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.081",
+      "domain": "conflict",
+      "summary": "Ichinose accuses a student called Ryūen of instigating the Sudō trap and a previous Class B/Class C conflict; attribution remains her assessment.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          241
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.082",
+      "domain": "institution",
+      "summary": "At the reconvened hearing the Class C complainants request withdrawal without an adjudicated finding about who began the fight.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          244
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.ishizaki",
+        "actor.komiya",
+        "actor.kondou",
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.083",
+      "domain": "institution",
+      "summary": "After the withdrawal is accepted, the council requires reimbursement in private points for proceeding costs and the Class C complainants agree to pay; the amount is not stated.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          245,
+          246
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.084",
+      "domain": "institution",
+      "summary": "Chabashira confirms Sudō will not be suspended and can resume basketball; both sides are cautioned about further trouble.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          246
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "motivation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.085",
+      "domain": "emotion",
+      "summary": "Sudō admits that habitual aggression affects the whole class; one acknowledgment does not guarantee lasting reform.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          247
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.086",
+      "domain": "observation",
+      "summary": "Suzune acknowledges Kiyotaka's concealed help; Chabashira encourages examination of his unusual hidden capabilities.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          249
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.087",
+      "domain": "observation",
+      "summary": "Chabashira questions Kiyotaka's uniform entrance-exam marks and hidden involvement; her claim Suzune may be trapped is an interpretation.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          250
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.088",
+      "domain": "institution",
+      "summary": "Manabu identifies a vacant secretary position and offers it to Kiyotaka; Kiyotaka rejects the invitation, saying he wants an ordinary school life.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          252,
+          253
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.tachibana"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.089",
+      "domain": "strategy",
+      "summary": "Suzune suspects Kiyotaka steered her from observing classroom security cameras to the idea of planting false evidence in the special building; he denies planning this.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          253,
+          254
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.090",
+      "domain": "conflict",
+      "summary": "An unidentified male student comments on the cameras and promises future opposition; this encounter alone does not establish his identity.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          254
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v2.ev.091",
+      "domain": "strategy",
+      "summary": "Kiyotaka forecasts formidable Class B and Ryūen-related opposition to reaching Class A; his forecast is not a fixed future outcome.",
+      "source": {
+        "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          255
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English edition, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M04",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    }
+  ]
+}

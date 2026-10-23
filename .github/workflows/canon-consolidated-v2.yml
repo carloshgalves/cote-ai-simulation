@@ -6,6 +6,7 @@ on:
       - 'tools/validate_canon_consolidated_v2.py'
       - 'tools/rebuild_canon_indexes_v2.py'
       - 'tools/test_canon_y1_v01.py'
+      - 'tools/test_canon_y1_v02.py'
       - 'tools/test_legacy_y1_crosswalk.py'
       - 'tools/canon_first_midterm_v1.py'
       - 'tools/test_canon_record_review.py'
@@ -23,6 +24,7 @@ jobs:
       - run: python tools/validate_canon_consolidated_v2.py
       - run: python tools/rebuild_canon_indexes_v2.py --check
       - run: python tools/test_canon_y1_v01.py
+      - run: python tools/test_canon_y1_v02.py
       - run: python tools/test_legacy_y1_crosswalk.py
       - run: python tools/test_canon_record_review.py
       - run: python -m unittest discover -s tests/canon -p 'test_first_midterm_executable_v1.py' -v

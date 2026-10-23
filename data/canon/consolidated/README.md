@@ -36,3 +36,13 @@ A second content pass added swimming performances, seven short-test failure cand
 ### Semantic review completion boundary
 
 The source-review register records 268 source-linked assistant-reviewed assertions and 75 actor-owned behavioral cases (after one Kijima context-only case was retired). This means the **source-to-paraphrase meaning was reviewed**, not that all first-person claims are necessarily world truth, nor that scene outcomes may be forced in counterfactual simulation. A human release/verification stage remains deliberately separate. Review fixes include separating Arisu's genetic argument from Sakayanagi father's decisions, restricting Naoe's waiting behavior to the observed episode, and extending precise page citations for bus introductions, exam grading and appeals.
+
+## Year 1 Volume 2 (draft ingestion)
+
+`evidence/y1-v02.json` preserves 91 scene-relevant paraphrases from seven chapters, together with page locators and speaker-sensitive source modes. The character and institution packs remain global. Twenty-seven actor-owned demonstrations are stored under `behavioral_cases/<primary-actor>/`; six additional minor roles have minimal packs rather than invented biographies. Direct indexes and per-record semantic review are separate gates, and the operator release gate remains pending. The incident involving Sudō is **not** a general disciplinary algorithm. Ryūen's alleged authorship remains an attribution by Ichinose, not independent proof. The source PDF is not stored in the repository.
+
+The individual assistant semantic review is complete for **91 evidence items and 27 actor-owned behavioral cases** in `audits/source-review-register-y1-v02.json`. Each item has a page-grounded explanation, explicit attribution and epistemic limits. Source locators and seven primary-actor cases were corrected during review. All 118 entries remain `verified: false`: human operator approval is a distinct, unfulfilled release gate. CI does not override it.
+
+## Volume 2 operator acceptance — 2026-10-23
+
+The operator explicitly authorized merging the completed 118-item assistant semantic review into the canonical **reference corpus**. This is not a false declaration that the operator independently checked all 118 PDF windows: individual `verified` flags remain false and later events remain disallowed as agent starting knowledge or guaranteed simulation outcomes.

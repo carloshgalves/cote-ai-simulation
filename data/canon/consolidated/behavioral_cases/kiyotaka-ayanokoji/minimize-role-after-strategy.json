@@ -1,0 +1,38 @@
+{
+  "id": "y1v2.case.kiyotaka-ayanokoji.minimize-role-after-strategy",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "minimize role after strategy",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Downplays his involvement despite having coordinated deception",
+  "observed_result": "Keeps Horikita unsure of his goals",
+  "epistemic_limits": "He denies steering Horikita and professes a quiet life. The unidentified male's threat is contextual and not a demonstration of Kiyotaka's own behavior.",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      254,
+      255
+    ],
+    "chapter": 7,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "social"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "strategy",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.089",
+    "y1v2.ev.091"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

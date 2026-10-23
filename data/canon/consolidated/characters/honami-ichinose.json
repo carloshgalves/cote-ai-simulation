@@ -4,7 +4,8 @@
   "display_name": "Honami Ichinose",
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+    "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "ln.y1.v02.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -17,30 +18,126 @@
   },
   "domains": {
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v2.case.honami-ichinose.reflect-chihiro-confession"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.067",
-        "y1v1.ev.092"
+        "y1v1.ev.092",
+        "y1v2.ev.035",
+        "y1v2.ev.039",
+        "y1v2.ev.040",
+        "y1v2.ev.041",
+        "y1v2.ev.067",
+        "y1v2.ev.076",
+        "y1v2.ev.078",
+        "y1v2.ev.080"
       ]
     },
     "leadership": {
       "behavioral_case_refs": [
-        "y1v1.case.n.library-deescalation"
+        "y1v1.case.n.library-deescalation",
+        "y1v2.case.honami-ichinose.class-b-informal-leadership"
       ],
       "context_evidence_refs": [
-        "y1v1.ev.092"
+        "y1v1.ev.092",
+        "y1v2.ev.036",
+        "y1v2.ev.037",
+        "y1v2.ev.038",
+        "y1v2.ev.049"
       ]
     },
     "persuasion": {
       "behavioral_case_refs": [
-        "y1v1.case.n.library-deescalation"
+        "y1v1.case.n.library-deescalation",
+        "y1v2.case.honami-ichinose.deploy-surveillance-bluff"
       ],
-      "context_evidence_refs": []
+      "context_evidence_refs": [
+        "y1v2.ev.071"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [
+        "y1v2.case.honami-ichinose.deploy-surveillance-bluff"
+      ],
+      "context_evidence_refs": [
+        "y1v2.ev.035",
+        "y1v2.ev.049",
+        "y1v2.ev.067",
+        "y1v2.ev.068",
+        "y1v2.ev.070",
+        "y1v2.ev.073",
+        "y1v2.ev.074",
+        "y1v2.ev.075",
+        "y1v2.ev.081"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.036",
+        "y1v2.ev.050",
+        "y1v2.ev.070",
+        "y1v2.ev.073",
+        "y1v2.ev.074",
+        "y1v2.ev.081"
+      ]
+    },
+    "institution": {
+      "behavioral_case_refs": [
+        "y1v2.case.honami-ichinose.class-b-informal-leadership"
+      ],
+      "context_evidence_refs": [
+        "y1v2.ev.037",
+        "y1v2.ev.038",
+        "y1v2.ev.039"
+      ]
+    },
+    "emotion": {
+      "behavioral_case_refs": [
+        "y1v2.case.honami-ichinose.reflect-chihiro-confession"
+      ],
+      "context_evidence_refs": [
+        "y1v2.ev.040",
+        "y1v2.ev.080"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [
+        "y1v2.case.honami-ichinose.deploy-surveillance-bluff",
+        "y1v2.case.honami-ichinose.reflect-chihiro-confession"
+      ],
+      "context_evidence_refs": [
+        "y1v2.ev.041",
+        "y1v2.ev.068"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.050",
+        "y1v2.ev.051",
+        "y1v2.ev.071",
+        "y1v2.ev.075"
+      ]
+    },
+    "economy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.051",
+        "y1v2.ev.076"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.078"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

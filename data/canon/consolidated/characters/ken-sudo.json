@@ -4,7 +4,8 @@
   "display_name": "Ken Sudō",
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+    "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "ln.y1.v02.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -20,7 +21,9 @@
       "behavioral_case_refs": [
         "y1v1.case.d.reject-introduction",
         "y1v1.case.d.soften-after-rescue",
-        "y1v1.case.ken-sudo.prioritize-study-over-basketball"
+        "y1v1.case.ken-sudo.prioritize-study-over-basketball",
+        "y1v2.case.ken-sudo.admit-conduct-consequences",
+        "y1v2.case.ken-sudo.request-confidential-help"
       ],
       "context_evidence_refs": [
         "y1v1.ev.017",
@@ -38,7 +41,12 @@
         "y1v1.ev.112",
         "y1v1.ev.114",
         "y1v1.ev.131",
-        "y1v1.ev.134"
+        "y1v1.ev.134",
+        "y1v2.ev.003",
+        "y1v2.ev.009",
+        "y1v2.ev.011",
+        "y1v2.ev.017",
+        "y1v2.ev.085"
       ]
     },
     "leadership": {
@@ -62,13 +70,17 @@
       "context_evidence_refs": [
         "y1v1.ev.022",
         "y1v1.ev.109",
-        "y1v1.ev.126"
+        "y1v1.ev.126",
+        "y1v2.ev.005",
+        "y1v2.ev.011",
+        "y1v2.ev.083"
       ]
     },
     "combat": {
       "behavioral_case_refs": [
         "y1v1.case.d.confront-upperclassmen",
-        "y1v1.case.ken-sudo.fifty-meter-swim"
+        "y1v1.case.ken-sudo.fifty-meter-swim",
+        "y1v2.case.ken-sudo.three-on-one-fight"
       ],
       "context_evidence_refs": [
         "y1v1.ev.023",
@@ -78,13 +90,18 @@
         "y1v1.ev.038",
         "y1v1.ev.040",
         "y1v1.ev.120",
-        "y1v1.ev.121"
+        "y1v1.ev.121",
+        "y1v2.ev.002",
+        "y1v2.ev.012",
+        "y1v2.ev.013",
+        "y1v2.ev.014"
       ]
     },
     "risk_management": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v1.ev.026"
+        "y1v1.ev.026",
+        "y1v2.ev.003"
       ]
     },
     "institution": {
@@ -92,7 +109,12 @@
       "context_evidence_refs": [
         "y1v1.ev.033",
         "y1v1.ev.103",
-        "y1v1.ev.126"
+        "y1v1.ev.126",
+        "y1v2.ev.009",
+        "y1v2.ev.015",
+        "y1v2.ev.018",
+        "y1v2.ev.083",
+        "y1v2.ev.084"
       ]
     },
     "strategy": {
@@ -104,7 +126,11 @@
         "y1v1.ev.086",
         "y1v1.ev.105",
         "y1v1.ev.109",
-        "y1v1.ev.120"
+        "y1v1.ev.120",
+        "y1v2.ev.016",
+        "y1v2.ev.019",
+        "y1v2.ev.029",
+        "y1v2.ev.066"
       ]
     },
     "academic_reasoning": {
@@ -130,45 +156,71 @@
     },
     "emotion": {
       "behavioral_case_refs": [
-        "y1v1.case.d.soften-after-rescue"
+        "y1v1.case.d.soften-after-rescue",
+        "y1v2.case.ken-sudo.admit-conduct-consequences"
       ],
       "context_evidence_refs": [
         "y1v1.ev.079",
-        "y1v1.ev.102"
+        "y1v1.ev.102",
+        "y1v2.ev.032",
+        "y1v2.ev.085"
       ]
     },
     "ethics": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v1.ev.085"
+        "y1v1.ev.085",
+        "y1v2.ev.019",
+        "y1v2.ev.066"
       ]
     },
     "conflict": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v2.case.ken-sudo.three-on-one-fight"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.091",
-        "y1v1.ev.131"
+        "y1v1.ev.131",
+        "y1v2.ev.012",
+        "y1v2.ev.014",
+        "y1v2.ev.015",
+        "y1v2.ev.016",
+        "y1v2.ev.018",
+        "y1v2.ev.032"
       ]
     },
     "exam": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.103",
-        "y1v1.ev.127"
+        "y1v1.ev.127",
+        "y1v2.ev.005"
       ]
     },
     "motivation": {
       "behavioral_case_refs": [
-        "y1v1.case.ken-sudo.prioritize-study-over-basketball"
+        "y1v1.case.ken-sudo.prioritize-study-over-basketball",
+        "y1v2.case.ken-sudo.admit-conduct-consequences",
+        "y1v2.case.ken-sudo.request-confidential-help"
       ],
       "context_evidence_refs": [
-        "y1v1.ev.134"
+        "y1v1.ev.134",
+        "y1v2.ev.013",
+        "y1v2.ev.017",
+        "y1v2.ev.029",
+        "y1v2.ev.084"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.002"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

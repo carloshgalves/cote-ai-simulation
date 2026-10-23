@@ -5,7 +5,8 @@
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
     "ln.y1.v00.legacyemtls.v1.0.1",
-    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+    "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "ln.y1.v02.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -33,7 +34,12 @@
         "y1v1.case.k.exam-reuse-inference",
         "y1v1.case.k.recruit-kushida",
         "y1v1.case.k.swim-middle",
-        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort"
+        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort",
+        "y1v2.case.kiyotaka-ayanokoji.coordinate-camera-deception",
+        "y1v2.case.kiyotaka-ayanokoji.lure-complainants-via-kushida",
+        "y1v2.case.kiyotaka-ayanokoji.minimize-role-after-strategy",
+        "y1v2.case.kiyotaka-ayanokoji.refuse-student-council",
+        "y1v2.case.kiyotaka-ayanokoji.target-class-b-search"
       ],
       "context_evidence_refs": [
         "v0.char.011",
@@ -58,7 +64,24 @@
         "y1v1.ev.108",
         "y1v1.ev.109",
         "y1v1.ev.120",
-        "y1v1.ev.135"
+        "y1v1.ev.135",
+        "y1v2.ev.016",
+        "y1v2.ev.022",
+        "y1v2.ev.029",
+        "y1v2.ev.035",
+        "y1v2.ev.045",
+        "y1v2.ev.067",
+        "y1v2.ev.068",
+        "y1v2.ev.070",
+        "y1v2.ev.072",
+        "y1v2.ev.073",
+        "y1v2.ev.074",
+        "y1v2.ev.075",
+        "y1v2.ev.081",
+        "y1v2.ev.086",
+        "y1v2.ev.087",
+        "y1v2.ev.089",
+        "y1v2.ev.091"
       ]
     },
     "social": {
@@ -73,7 +96,11 @@
         "y1v1.case.k.multi-dimensional-utility",
         "y1v1.case.k.recruit-kushida",
         "y1v1.case.k.shop-help-sudo",
-        "y1v1.case.k.social-entry-freeze"
+        "y1v1.case.k.social-entry-freeze",
+        "y1v2.case.kiyotaka-ayanokoji.lure-complainants-via-kushida",
+        "y1v2.case.kiyotaka-ayanokoji.minimize-role-after-strategy",
+        "y1v2.case.kiyotaka-ayanokoji.refuse-student-council",
+        "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice"
       ],
       "context_evidence_refs": [
         "v0.char.009",
@@ -120,7 +147,28 @@
         "y1v1.ev.110",
         "y1v1.ev.111",
         "y1v1.ev.112",
-        "y1v1.ev.136"
+        "y1v1.ev.136",
+        "y1v2.ev.010",
+        "y1v2.ev.011",
+        "y1v2.ev.021",
+        "y1v2.ev.022",
+        "y1v2.ev.034",
+        "y1v2.ev.035",
+        "y1v2.ev.039",
+        "y1v2.ev.041",
+        "y1v2.ev.042",
+        "y1v2.ev.046",
+        "y1v2.ev.047",
+        "y1v2.ev.053",
+        "y1v2.ev.054",
+        "y1v2.ev.055",
+        "y1v2.ev.057",
+        "y1v2.ev.061",
+        "y1v2.ev.067",
+        "y1v2.ev.076",
+        "y1v2.ev.078",
+        "y1v2.ev.080",
+        "y1v2.ev.088"
       ]
     },
     "politics": {
@@ -176,7 +224,12 @@
         "y1v1.ev.052",
         "y1v1.ev.066",
         "y1v1.ev.089",
-        "y1v1.ev.125"
+        "y1v1.ev.125",
+        "y1v2.ev.004",
+        "y1v2.ev.033",
+        "y1v2.ev.037",
+        "y1v2.ev.039",
+        "y1v2.ev.088"
       ]
     },
     "combat": {
@@ -208,7 +261,8 @@
         "y1v1.ev.082",
         "y1v1.ev.083",
         "y1v1.ev.084",
-        "y1v1.ev.120"
+        "y1v1.ev.120",
+        "y1v2.ev.012"
       ]
     },
     "academic_reasoning": {
@@ -262,7 +316,12 @@
         "y1v1.ev.095",
         "y1v1.ev.108",
         "y1v1.ev.109",
-        "y1v1.ev.125"
+        "y1v1.ev.125",
+        "y1v2.ev.004",
+        "y1v2.ev.005",
+        "y1v2.ev.011",
+        "y1v2.ev.051",
+        "y1v2.ev.076"
       ]
     },
     "ethics": {
@@ -277,13 +336,19 @@
         "y1v1.ev.003",
         "y1v1.ev.005",
         "y1v1.ev.085",
-        "y1v1.ev.107"
+        "y1v1.ev.107",
+        "y1v2.ev.041",
+        "y1v2.ev.068"
       ]
     },
     "persuasion": {
       "behavioral_case_refs": [
         "y1v1.case.k.exam-paper-bargain",
-        "y1v1.case.k.recruit-kushida"
+        "y1v1.case.k.recruit-kushida",
+        "y1v2.case.kiyotaka-ayanokoji.coordinate-camera-deception",
+        "y1v2.case.kiyotaka-ayanokoji.lure-complainants-via-kushida",
+        "y1v2.case.kiyotaka-ayanokoji.protect-sakura-from-clerk",
+        "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice"
       ],
       "context_evidence_refs": [
         "y1v1.ev.004",
@@ -293,7 +358,12 @@
         "y1v1.ev.075",
         "y1v1.ev.095",
         "y1v1.ev.107",
-        "y1v1.ev.133"
+        "y1v1.ev.133",
+        "y1v2.ev.021",
+        "y1v2.ev.053",
+        "y1v2.ev.055",
+        "y1v2.ev.072",
+        "y1v2.ev.079"
       ]
     },
     "emotion": {
@@ -302,14 +372,25 @@
       ],
       "context_evidence_refs": [
         "y1v1.ev.007",
-        "y1v1.ev.081"
+        "y1v1.ev.081",
+        "y1v2.ev.010",
+        "y1v2.ev.061",
+        "y1v2.ev.080",
+        "y1v2.ev.091"
       ]
     },
     "risk_management": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v2.case.kiyotaka-ayanokoji.protect-sakura-contact",
+        "y1v2.case.kiyotaka-ayanokoji.protect-sakura-from-clerk"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.024",
-        "y1v1.ev.026"
+        "y1v1.ev.026",
+        "y1v2.ev.043",
+        "y1v2.ev.077",
+        "y1v2.ev.078",
+        "y1v2.ev.079"
       ]
     },
     "leadership": {
@@ -322,13 +403,17 @@
         "y1v1.ev.087",
         "y1v1.ev.098",
         "y1v1.ev.110",
-        "y1v1.ev.133"
+        "y1v1.ev.133",
+        "y1v2.ev.037"
       ]
     },
     "observation": {
       "behavioral_case_refs": [
         "y1v1.case.k.evade-manabu",
-        "y1v1.case.k.exam-reuse-inference"
+        "y1v1.case.k.exam-reuse-inference",
+        "y1v2.case.kiyotaka-ayanokoji.coordinate-camera-deception",
+        "y1v2.case.kiyotaka-ayanokoji.protect-sakura-contact",
+        "y1v2.case.kiyotaka-ayanokoji.target-class-b-search"
       ],
       "context_evidence_refs": [
         "y1v1.ev.035",
@@ -338,13 +423,52 @@
         "y1v1.ev.084",
         "y1v1.ev.094",
         "y1v1.ev.135",
-        "y1v1.ev.136"
+        "y1v1.ev.136",
+        "y1v2.ev.033",
+        "y1v2.ev.034",
+        "y1v2.ev.042",
+        "y1v2.ev.043",
+        "y1v2.ev.045",
+        "y1v2.ev.047",
+        "y1v2.ev.051",
+        "y1v2.ev.057",
+        "y1v2.ev.075",
+        "y1v2.ev.086",
+        "y1v2.ev.087",
+        "y1v2.ev.089",
+        "y1v2.ev.090"
+      ]
+    },
+    "exam": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.005"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.012",
+        "y1v2.ev.016",
+        "y1v2.ev.046",
+        "y1v2.ev.070",
+        "y1v2.ev.073",
+        "y1v2.ev.074",
+        "y1v2.ev.077",
+        "y1v2.ev.081",
+        "y1v2.ev.090"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.029"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Original V0 extraction sometimes lists acts by Atsuomi or Yuki under Kiyotaka; actor mentions are not automatically capabilities",
+  "semantic_audit_notes": "Original V0 extraction sometimes lists acts by Atsuomi or Yuki under Kiyotaka; actor mentions are not automatically capabilities Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

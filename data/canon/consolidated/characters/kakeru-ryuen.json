@@ -3,10 +3,12 @@
   "character_id": "actor.kakeru-ryuen",
   "display_name": "Kakeru Ryūen",
   "modeling_tier": "FULL_CANDIDATE",
-  "source_coverage": [],
+  "source_coverage": [
+    "ln.y1.v02.sevenseas.en.operator-provided"
+  ],
   "source_status": "NO_VOLUME_0_1_OBSERVED_EVIDENCE",
   "identity": {
-    "role_summary": "Year 1 Class C student, not yet observed in provided Volume 1 evidence; prior details are quarantined",
+    "role_summary": "Year 1 Class C student whom Ichinose names as an alleged planner of the Sudō confrontation; no direct authorship established in the Volume 2 source.",
     "aliases": [
       "Kakeru Ryuen"
     ]
@@ -15,10 +17,23 @@
     "canonical_after_divergence_is_not_actor_memory": true,
     "actor_knowledge_requires_acquisition_event": true
   },
-  "domains": {},
+  "domains": {
+    "conflict": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.081"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.081"
+      ]
+    }
+  },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "No speculative Ryuen feats, identity X or Volume 2+ history; legacy YAML supplies no authorized direct Y1_START memory.",
+  "semantic_audit_notes": "No speculative Ryuen feats, identity X or Volume 2+ history; legacy YAML supplies no authorized direct Y1_START memory. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

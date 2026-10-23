@@ -4,7 +4,8 @@
   "display_name": "Ryūji Kanzaki",
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v00.legacyemtls.v1.0.1"
+    "ln.y1.v00.legacyemtls.v1.0.1",
+    "ln.y1.v02.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -19,16 +20,23 @@
   },
   "domains": {
     "strategy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v2.case.ryuji-kanzaki.public-witness-appeal"
+      ],
       "context_evidence_refs": [
         "v0.char.029",
-        "v0.pol.019"
+        "v0.pol.019",
+        "y1v2.ev.049",
+        "y1v2.ev.067",
+        "y1v2.ev.068",
+        "y1v2.ev.075"
       ]
     },
     "social": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "v0.pol.019"
+        "v0.pol.019",
+        "y1v2.ev.067"
       ]
     },
     "politics": {
@@ -54,11 +62,38 @@
       "context_evidence_refs": [
         "v0.char.026"
       ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [
+        "y1v2.case.ryuji-kanzaki.public-witness-appeal"
+      ],
+      "context_evidence_refs": [
+        "y1v2.ev.049"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.050",
+        "y1v2.ev.075"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.050"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.068"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": true,
-  "semantic_audit_notes": null,
+  "semantic_audit_notes": " Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

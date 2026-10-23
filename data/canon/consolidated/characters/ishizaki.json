@@ -1,0 +1,97 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.ishizaki",
+  "display_name": "Ishizaki (given name not specified by source)",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v02.sevenseas.en.operator-provided"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "Class C student who participates in Sudō's disputed disciplinary complaint",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "conflict": {
+      "behavioral_case_refs": [
+        "y1v2.case.ishizaki.resist-initial-compromise"
+      ],
+      "context_evidence_refs": [
+        "y1v2.ev.014",
+        "y1v2.ev.050",
+        "y1v2.ev.059",
+        "y1v2.ev.062",
+        "y1v2.ev.070",
+        "y1v2.ev.073",
+        "y1v2.ev.074",
+        "y1v2.ev.082"
+      ]
+    },
+    "combat": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.014"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.050",
+        "y1v2.ev.071"
+      ]
+    },
+    "institution": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.059",
+        "y1v2.ev.082"
+      ]
+    },
+    "academic_reasoning": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.062"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.070",
+        "y1v2.ev.072",
+        "y1v2.ev.073",
+        "y1v2.ev.074"
+      ]
+    },
+    "persuasion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.071",
+        "y1v2.ev.072"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [
+        "y1v2.case.ishizaki.resist-initial-compromise"
+      ],
+      "context_evidence_refs": []
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": false,
+  "semantic_audit_notes": "Only observed actions and accurately attributed assertions from Y1 Volume 2. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors.",
+  "uncertainties": {
+    "identity_hypothesis_not_confirmed": true,
+    "future_fate_unknown": true
+  },
+  "generation_policy": "One global pack across volumes",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

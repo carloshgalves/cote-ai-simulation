@@ -1,0 +1,37 @@
+{
+  "id": "y1v2.case.kiyotaka-ayanokoji.refuse-student-council",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "refuse student council",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Declines secretary role while citing desire for ordinary life",
+  "observed_result": "Remains outside the council",
+  "epistemic_limits": "Self-reported motive may not be whole motive",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      253
+    ],
+    "chapter": 7,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.manabu-horikita",
+    "actor.tachibana"
+  ],
+  "capabilities_supported": [
+    "social",
+    "strategy"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "social",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.088"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

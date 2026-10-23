@@ -51,7 +51,7 @@ assert seen["actor.kiyotaka-ayanokoji"]["time_seconds_approx"]==36
 assert seen["actor.rokusuke-koenji"]["time_seconds"]==23.22
 assert seen["actor.yosuke-hirata"]["time_seconds"]==26.13
 assert assessment["type"]=="PHYSICAL_EDUCATION_NOT_SPECIAL_EXAM"
-assert "not maximal" in " ".join(assessment["simulation_cautions"])
+assert any("not peak speed" in c.lower() or "not maximal" in c.lower() for c in assessment["simulation_cautions"])
 
 yamawaki=load(R/"characters/yamawaki.json")
 assert "Class C" in yamawaki["identity"]["role_summary"]

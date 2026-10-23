@@ -230,10 +230,11 @@
     {
       "id": "y1v2.ev.009",
       "domain": "institution",
-      "summary": "Chabashira summons Sudō over trouble; Suzune considers whether the delayed point allocation concerns an incident rather than an administrative fault.",
+      "summary": "Chabashira summons Sudō from class (p.22); later Suzune questions whether delayed private-point deposits reflect student trouble rather than a school fault (p.23).",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
+          22,
           23
         ],
         "chapter": 2,
@@ -260,11 +261,12 @@
     {
       "id": "y1v2.ev.010",
       "domain": "social",
-      "summary": "Suzune keeps but does not participate in the group chat and distances herself from Kushida, while Kiyotaka describes increased comfort speaking with Suzune.",
+      "summary": "Suzune does not participate in the class chat and mutes notifications; she later distances herself from Kushida, while Kiyotaka describes increased ease speaking to Suzune.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          24
+          24,
+          25
         ],
         "chapter": 2,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -288,11 +290,12 @@
     {
       "id": "y1v2.ev.011",
       "domain": "economy",
-      "summary": "Sudō says classmates purchased duplicate access cards for Kiyotaka's room; Kushida also has one, and Kiyotaka says he did not consent.",
+      "summary": "Sudō says other students obtained duplicate keycards to Kiyotaka's locked dorm room without his knowledge; Kushida also shows a copy and offers its return.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          27
+          27,
+          28
         ],
         "chapter": 2,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -318,11 +321,12 @@
     {
       "id": "y1v2.ev.012",
       "domain": "conflict",
-      "summary": "Sudō states that a fight with three Class C boys could result in long suspension and seeks help; his account remains a contested party statement.",
+      "summary": "Sudō reports fighting three Class C students and fearing long suspension; his version of instigation remains disputed.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          29
+          29,
+          30
         ],
         "chapter": 2,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -430,11 +434,13 @@
     {
       "id": "y1v2.ev.016",
       "domain": "strategy",
-      "summary": "Kiyotaka separates proof of instigation from justification for Sudō's force; Kushida proposes finding an eyewitness or obtaining an admission.",
+      "summary": "Kiyotaka questions how Sudō's use of force would be weighed against a self-defense argument; Kushida suggests obtaining a confession or finding an eyewitness.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          33
+          32,
+          33,
+          34
         ],
         "chapter": 2,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -458,11 +464,12 @@
     {
       "id": "y1v2.ev.017",
       "domain": "motivation",
-      "summary": "Sudō asks friends to keep the dispute quiet to protect basketball prospects, while Kushida encourages him to avoid directly approaching the accusers.",
+      "summary": "Sudō requests discretion because of basketball risks; Kushida and Kiyotaka encourage him to avoid personally conducting the inquiry.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          35
+          35,
+          36
         ],
         "chapter": 2,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -541,7 +548,7 @@
     {
       "id": "y1v2.ev.020",
       "domain": "leadership",
-      "summary": "Hirata and Karuizawa coordinate one witness-search group and Kushida another; their first efforts do not produce a decisive lead.",
+      "summary": "Hirata and Karuizawa lead one witness-search group and Kushida another; they set out despite limited time, with no result yet established on this page.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -569,11 +576,12 @@
     {
       "id": "y1v2.ev.021",
       "domain": "persuasion",
-      "summary": "Kushida asks Kiyotaka to persuade Suzune to help, but Suzune initially maintains her refusal.",
+      "summary": "Kushida asks Kiyotaka to help persuade Suzune, follows Suzune, and receives her continued refusal.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          55
+          55,
+          56
         ],
         "chapter": 3,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -929,11 +937,12 @@
     {
       "id": "y1v2.ev.034",
       "domain": "social",
-      "summary": "Kiyotaka does not force Sakura to claim witness status when she denies seeing the fight; he offers help if she faces intimidation.",
+      "summary": "Kiyotaka restrains Horikita from pressing Sakura, tells Sakura that testimony must be voluntary and offers help if she is intimidated; Sakura still denies witnessing the incident.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          101
+          101,
+          102
         ],
         "chapter": 4,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -956,11 +965,14 @@
     {
       "id": "y1v2.ev.035",
       "domain": "strategy",
-      "summary": "Ichinose independently checks the fight scene and offers cross-class assistance despite the risk to Class B's reputation.",
+      "summary": "Ichinose approaches Kiyotaka and Horikita at the special building after hearing about the conflict and offers to help; Kiyotaka considers possible Class B incentives as speculation.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          103
+          103,
+          104,
+          105,
+          106
         ],
         "chapter": 4,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -1011,11 +1023,12 @@
     {
       "id": "y1v2.ev.037",
       "domain": "leadership",
-      "summary": "Ichinose collects Class B dorm grievances and communicates them to the dorm manager as their informal representative.",
+      "summary": "Ichinose brings Class B dorm residents' requests to the dorm manager and explains that she serves as an informal representative chosen within her class.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          114
+          114,
+          115
         ],
         "chapter": 4,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -1097,11 +1110,14 @@
     {
       "id": "y1v2.ev.040",
       "domain": "social",
-      "summary": "A student named Chihiro confesses romantic feelings to Ichinose, who hesitates in responding.",
+      "summary": "Ichinose has received a written romantic confession and Chihiro confronts her about the unfamiliar boy she brought to their meeting; Ichinose hesitates and cannot easily lie.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          125
+          123,
+          124,
+          125,
+          126
         ],
         "chapter": 4,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -1234,11 +1250,12 @@
     {
       "id": "y1v2.ev.045",
       "domain": "strategy",
-      "summary": "Kiyotaka asks technically knowledgeable Sotomura for help with a device rather than improvising beyond his expertise.",
+      "summary": "Kiyotaka contacts Sotomura (Professor) to request electronics advice because he cannot identify the appropriate device himself.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          143
+          143,
+          144
         ],
         "chapter": 4,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -1261,7 +1278,7 @@
     {
       "id": "y1v2.ev.046",
       "domain": "conflict",
-      "summary": "After gaining some trust, Sakura voluntarily admits witnessing the fight; agreement to give formal testimony remains uncertain.",
+      "summary": "Sakura privately admits she witnessed Sudō's fight, explains her fear of attention, and explicitly promises Kushida to testify, though her resilience under future pressure is not established.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -1484,11 +1501,11 @@
     {
       "id": "y1v2.ev.054",
       "domain": "social",
-      "summary": "Sakura admits wishing to have friends, but struggling even to answer Kushida's initial invitations.",
+      "summary": "Sakura states she does not know how to make friends and says she wanted to answer Kushida's earlier invitation but lacked the courage.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          176
+          177
         ],
         "chapter": 5,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -1680,10 +1697,11 @@
     {
       "id": "y1v2.ev.061",
       "domain": "social",
-      "summary": "Kiyotaka physically startles Suzune to break her paralysis under her brother's scrutiny; this intrusive tactic is not universally appropriate.",
+      "summary": "Kiyotaka repeatedly tickles and physically stimulates Suzune to interrupt her paralysis at the hearing; the intrusive action must not be modeled as generally appropriate or reliable.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
+          196,
           197
         ],
         "chapter": 6,
@@ -1736,11 +1754,13 @@
     {
       "id": "y1v2.ev.063",
       "domain": "social",
-      "summary": "Sakura testifies with force despite anxiety; Sakagami questions her possible bias and reliability.",
+      "summary": "Sakura speaks unusually forcefully under pressure, but Sakagami challenges her late disclosure and potential partiality, so her testimony alone does not resolve fault.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          202
+          201,
+          202,
+          203
         ],
         "chapter": 6,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -1763,10 +1783,11 @@
     {
       "id": "y1v2.ev.064",
       "domain": "observation",
-      "summary": "Sakura supplies date-associated photographs of herself as Shizuku supporting her presence near the location, not proving the start of the fight.",
+      "summary": "Sakura presents dated self-portraits as Shizuku and another photograph showing the fight shortly after Sudō struck Ishizaki; this supports her presence and part of the confrontation, not who initiated it.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
+          203,
           204
         ],
         "chapter": 6,
@@ -1929,7 +1950,7 @@
     {
       "id": "y1v2.ev.070",
       "domain": "strategy",
-      "summary": "Kiyotaka asks Kushida to send enticing emails to lure Ishizaki, Komiya and Kondou into meeting at the special building; Ichinose joins the confrontation afterward. Their allegations remain contested.",
+      "summary": "Kiyotaka arranges for Kushida to send appealing emails to lure Ishizaki, Komiya and Kondou to the special building; Ichinose appears as they attempt to leave.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -1990,10 +2011,11 @@
     {
       "id": "y1v2.ev.072",
       "domain": "strategy",
-      "summary": "Kiyotaka questions the trio's assumptions about surveillance coverage and blind spots without providing actual footage.",
+      "summary": "Ichinose points out apparent hall cameras and casts doubt on Class C's checks; Kiyotaka adds pressure by invoking supposed school knowledge, although no genuine recording exists.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
+          229,
           230
         ],
         "chapter": 7,
@@ -2106,10 +2128,11 @@
     {
       "id": "y1v2.ev.076",
       "domain": "economy",
-      "summary": "Kiyotaka borrows private points from Ichinose for equipment and promises repayment by graduation; this passage does not specify a principal.",
+      "summary": "Kiyotaka borrows private points from Ichinose for decoy equipment and promises repayment no later than graduation, but the principal and any interest are not stated.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
+          234,
           235
         ],
         "chapter": 7,
@@ -2305,11 +2328,12 @@
     {
       "id": "y1v2.ev.083",
       "domain": "institution",
-      "summary": "After the Class C complainants withdraw, the council accepts and requires those complainants to cover unspecified deliberation expenses in points; no fee amount or formula is given.",
+      "summary": "After the withdrawal is accepted, the council requires reimbursement in private points for proceeding costs and the Class C complainants agree to pay; the amount is not stated.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          245
+          245,
+          246
         ],
         "chapter": 7,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -2447,10 +2471,11 @@
     {
       "id": "y1v2.ev.088",
       "domain": "institution",
-      "summary": "Manabu offers Kiyotaka a secretary seat on the student council, and Kiyotaka declines.",
+      "summary": "Manabu identifies a vacant secretary position and offers it to Kiyotaka; Kiyotaka rejects the invitation, saying he wants an ordinary school life.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
+          252,
           253
         ],
         "chapter": 7,
@@ -2477,10 +2502,11 @@
     {
       "id": "y1v2.ev.089",
       "domain": "strategy",
-      "summary": "Suzune suspects Kiyotaka used staged evidence to force complaint withdrawal; he minimizes his role.",
+      "summary": "Suzune suspects Kiyotaka steered her from observing classroom security cameras to the idea of planting false evidence in the special building; he denies planning this.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
+          253,
           254
         ],
         "chapter": 7,

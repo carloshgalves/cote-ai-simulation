@@ -55,6 +55,12 @@
       ],
       "cases": []
     },
+    "22": {
+      "evidence": [
+        "y1v2.ev.009"
+      ],
+      "cases": []
+    },
     "23": {
       "evidence": [
         "y1v2.ev.009"
@@ -67,7 +73,19 @@
       ],
       "cases": []
     },
+    "25": {
+      "evidence": [
+        "y1v2.ev.010"
+      ],
+      "cases": []
+    },
     "27": {
+      "evidence": [
+        "y1v2.ev.011"
+      ],
+      "cases": []
+    },
+    "28": {
       "evidence": [
         "y1v2.ev.011"
       ],
@@ -83,6 +101,7 @@
     },
     "30": {
       "evidence": [
+        "y1v2.ev.012",
         "y1v2.ev.013"
       ],
       "cases": []
@@ -96,7 +115,19 @@
         "y1v2.case.ken-sudo.three-on-one-fight"
       ]
     },
+    "32": {
+      "evidence": [
+        "y1v2.ev.016"
+      ],
+      "cases": []
+    },
     "33": {
+      "evidence": [
+        "y1v2.ev.016"
+      ],
+      "cases": []
+    },
+    "34": {
       "evidence": [
         "y1v2.ev.016"
       ],
@@ -109,6 +140,12 @@
       "cases": [
         "y1v2.case.ken-sudo.request-confidential-help"
       ]
+    },
+    "36": {
+      "evidence": [
+        "y1v2.ev.017"
+      ],
+      "cases": []
     },
     "40": {
       "evidence": [
@@ -133,6 +170,12 @@
       ]
     },
     "55": {
+      "evidence": [
+        "y1v2.ev.021"
+      ],
+      "cases": []
+    },
+    "56": {
       "evidence": [
         "y1v2.ev.021"
       ],
@@ -228,7 +271,31 @@
       ],
       "cases": []
     },
+    "102": {
+      "evidence": [
+        "y1v2.ev.034"
+      ],
+      "cases": []
+    },
     "103": {
+      "evidence": [
+        "y1v2.ev.035"
+      ],
+      "cases": []
+    },
+    "104": {
+      "evidence": [
+        "y1v2.ev.035"
+      ],
+      "cases": []
+    },
+    "105": {
+      "evidence": [
+        "y1v2.ev.035"
+      ],
+      "cases": []
+    },
+    "106": {
       "evidence": [
         "y1v2.ev.035"
       ],
@@ -250,6 +317,7 @@
     },
     "115": {
       "evidence": [
+        "y1v2.ev.037",
         "y1v2.ev.038"
       ],
       "cases": [
@@ -262,6 +330,18 @@
       ],
       "cases": []
     },
+    "123": {
+      "evidence": [
+        "y1v2.ev.040"
+      ],
+      "cases": []
+    },
+    "124": {
+      "evidence": [
+        "y1v2.ev.040"
+      ],
+      "cases": []
+    },
     "125": {
       "evidence": [
         "y1v2.ev.040"
@@ -269,6 +349,12 @@
       "cases": [
         "y1v2.case.honami-ichinose.reflect-chihiro-confession"
       ]
+    },
+    "126": {
+      "evidence": [
+        "y1v2.ev.040"
+      ],
+      "cases": []
     },
     "127": {
       "evidence": [
@@ -301,6 +387,12 @@
       "cases": []
     },
     "143": {
+      "evidence": [
+        "y1v2.ev.045"
+      ],
+      "cases": []
+    },
+    "144": {
       "evidence": [
         "y1v2.ev.045"
       ],
@@ -370,14 +462,9 @@
         "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice"
       ]
     },
-    "176": {
-      "evidence": [
-        "y1v2.ev.054"
-      ],
-      "cases": []
-    },
     "177": {
       "evidence": [
+        "y1v2.ev.054",
         "y1v2.ev.055"
       ],
       "cases": [
@@ -420,6 +507,12 @@
       ],
       "cases": []
     },
+    "196": {
+      "evidence": [
+        "y1v2.ev.061"
+      ],
+      "cases": []
+    },
     "197": {
       "evidence": [
         "y1v2.ev.061"
@@ -434,6 +527,12 @@
         "y1v2.case.suzune-horikita.probe-opponent-hearing"
       ]
     },
+    "201": {
+      "evidence": [
+        "y1v2.ev.063"
+      ],
+      "cases": []
+    },
     "202": {
       "evidence": [
         "y1v2.ev.063"
@@ -441,6 +540,13 @@
       "cases": [
         "y1v2.case.airi-sakura.testify-despite-stage-fright"
       ]
+    },
+    "203": {
+      "evidence": [
+        "y1v2.ev.063",
+        "y1v2.ev.064"
+      ],
+      "cases": []
     },
     "204": {
       "evidence": [
@@ -500,7 +606,8 @@
     },
     "229": {
       "evidence": [
-        "y1v2.ev.071"
+        "y1v2.ev.071",
+        "y1v2.ev.072"
       ],
       "cases": [
         "y1v2.case.honami-ichinose.deploy-surveillance-bluff"
@@ -532,7 +639,8 @@
     },
     "234": {
       "evidence": [
-        "y1v2.ev.075"
+        "y1v2.ev.075",
+        "y1v2.ev.076"
       ],
       "cases": [
         "y1v2.case.honami-ichinose.deploy-surveillance-bluff",
@@ -593,6 +701,7 @@
     },
     "246": {
       "evidence": [
+        "y1v2.ev.083",
         "y1v2.ev.084"
       ],
       "cases": []
@@ -617,9 +726,16 @@
       ],
       "cases": []
     },
-    "253": {
+    "252": {
       "evidence": [
         "y1v2.ev.088"
+      ],
+      "cases": []
+    },
+    "253": {
+      "evidence": [
+        "y1v2.ev.088",
+        "y1v2.ev.089"
       ],
       "cases": [
         "y1v2.case.kiyotaka-ayanokoji.refuse-student-council",

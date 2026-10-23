@@ -42,7 +42,7 @@
   "chapters_assessed": 7,
   "record_count": 91,
   "case_status": "EXTRACTED_ASSISTANT_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
-  "semantic_review": "INDIVIDUAL_REVIEW_PENDING",
+  "semantic_review": "SOURCE_WINDOW_CORRECTIONS_APPLIED_REVIEW_IN_PROGRESS",
   "operator_release": "PENDING",
   "method": "Scene-relevant atomic paraphrases; character reports, narrator impressions and directly observed outcomes kept separate; provenance uses physical PDF pages.",
   "open_issues": [
@@ -69,5 +69,35 @@
     "7": 23
   },
   "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v02.json",
-  "coverage_status": "EXTRACTED_AND_INDEXED_ASSISTANT_INDIVIDUAL_REVIEW_PENDING"
+  "coverage_status": "EXTRACTED_AND_INDEXED_ASSISTANT_INDIVIDUAL_REVIEW_PENDING",
+  "semantic_corrections": {
+    "count": 24,
+    "ids": [
+      "y1v2.ev.009",
+      "y1v2.ev.010",
+      "y1v2.ev.011",
+      "y1v2.ev.012",
+      "y1v2.ev.016",
+      "y1v2.ev.017",
+      "y1v2.ev.020",
+      "y1v2.ev.021",
+      "y1v2.ev.034",
+      "y1v2.ev.035",
+      "y1v2.ev.037",
+      "y1v2.ev.040",
+      "y1v2.ev.045",
+      "y1v2.ev.046",
+      "y1v2.ev.054",
+      "y1v2.ev.061",
+      "y1v2.ev.063",
+      "y1v2.ev.064",
+      "y1v2.ev.070",
+      "y1v2.ev.072",
+      "y1v2.ev.076",
+      "y1v2.ev.083",
+      "y1v2.ev.088",
+      "y1v2.ev.089"
+    ],
+    "scope": "Direct PDF semantic review of locators, actors, images, temporal claims and epistemic uncertainty"
+  }
 }

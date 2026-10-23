@@ -1,0 +1,37 @@
+{
+  "id": "y1v4.case.kiyotaka-ayanokoji.redirect-koenji-to-bellhop",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "redirect koenji to bellhop",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Reminds a bellhop of his unfinished warning, shifting Kōenji's attention and leaving the uncomfortable situation.",
+  "observed_result": "Escapes the corridor encounter while the bellhop resumes handling Kōenji.",
+  "epistemic_limits": "Demonstrates situational redirection, not dominance or a universally successful social maneuver.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      23
+    ],
+    "chapter": 2,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.rokusuke-koenji"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "social"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "strategy",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.011"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

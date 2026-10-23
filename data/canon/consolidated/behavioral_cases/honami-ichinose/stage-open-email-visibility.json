@@ -1,0 +1,40 @@
+{
+  "id": "y1v4.case.honami-ichinose.stage-open-email-visibility",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "stage open email visibility",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Endorses Hamaguchi's document-sharing experiment and participates with her own screen to test reactions.",
+  "observed_result": "Some rivals display school messages and the group's suspicion patterns change.",
+  "epistemic_limits": "Voluntary display does not by itself authenticate hidden phone ownership or ensure the group will cooperate.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      218,
+      219
+    ],
+    "chapter": 5,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.hamaguchi",
+    "actor.beppu"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "observation"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "strategy",
+    "observation"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.113",
+    "y1v4.ev.114"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

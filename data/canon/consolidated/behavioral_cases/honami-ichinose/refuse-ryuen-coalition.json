@@ -1,0 +1,39 @@
+{
+  "id": "y1v4.case.honami-ichinose.refuse-ryuen-coalition",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "refuse ryuen coalition",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Questions Ryūen's claim of a school-created group hierarchy and refuses a tactical alliance because of prior harm and trust risks.",
+  "observed_result": "The proposed B–C coordination is not formed in that discussion.",
+  "epistemic_limits": "This refusal is specific to the proposal and evidence, not blanket refusal of every future alliance.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      145,
+      149
+    ],
+    "chapter": 4,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kakeru-ryuen"
+  ],
+  "capabilities_supported": [
+    "ethics",
+    "negotiation"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "ethics",
+    "negotiation"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.075",
+    "y1v4.ev.078"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "y1v4.case.kei-karuizawa.accept-protection-under-duress",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "accept protection under duress",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Accepts a protective arrangement with Kiyotaka after he uses evidence of her assault and her past as leverage.",
+  "observed_result": "Begins assisting the Rabbit scheme under conditions of fear.",
+  "epistemic_limits": "Compliance is coercive; this must not be generalized as enthusiastic loyalty or freely given consent.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      202,
+      203
+    ],
+    "chapter": 4,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.manabe-shiho"
+  ],
+  "capabilities_supported": [
+    "trauma",
+    "strategy"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "trauma",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.106",
+    "y1v4.ev.107"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

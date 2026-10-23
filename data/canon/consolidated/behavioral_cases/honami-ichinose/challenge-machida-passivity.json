@@ -1,0 +1,39 @@
+{
+  "id": "y1v4.case.honami-ichinose.challenge-machida-passivity",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "challenge machida passivity",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Argues that avoiding all VIP discussion is not automatically neutral between classes and asks Machida to justify its class incentive effects.",
+  "observed_result": "Rabbit debates the approach rather than passively adopting it as settled policy.",
+  "epistemic_limits": "Her challenge does not reveal an official VIP assignment distribution.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      86,
+      90
+    ],
+    "chapter": 3,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.machida",
+    "actor.hamaguchi"
+  ],
+  "capabilities_supported": [
+    "reasoning",
+    "leadership"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "reasoning",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.054"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

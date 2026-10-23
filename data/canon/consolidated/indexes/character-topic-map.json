@@ -1779,7 +1779,6 @@
         "y1v2.ev.090",
         "y1v3.case.kiyotaka-ayanokoji.assist-injured-rival",
         "y1v3.case.kiyotaka-ayanokoji.notice-spy-hypothesis",
-        "y1v3.case.kiyotaka-ayanokoji.spot-island-path-from-ship",
         "y1v3.ev.008",
         "y1v3.ev.009",
         "y1v3.ev.033",
@@ -2004,7 +2003,6 @@
         "y1v3.case.kiyotaka-ayanokoji.exploit-justified-leader-replacement",
         "y1v3.case.kiyotaka-ayanokoji.improvise-corn-carrying",
         "y1v3.case.kiyotaka-ayanokoji.notice-spy-hypothesis",
-        "y1v3.case.kiyotaka-ayanokoji.spot-island-path-from-ship",
         "y1v3.ev.033",
         "y1v3.ev.034",
         "y1v3.ev.035",
@@ -4314,6 +4312,8 @@
     "actor.katsuragi": {
       "strategy": [
         "y1v3.case.katsuragi.defend-class-a-exclusive-cave",
+        "y1v3.case.katsuragi.infer-cave-route-from-cruise",
+        "y1v3.ev.035",
         "y1v3.ev.062",
         "y1v3.ev.063",
         "y1v3.ev.068",
@@ -4328,6 +4328,8 @@
         "y1v3.ev.063"
       ],
       "observation": [
+        "y1v3.case.katsuragi.infer-cave-route-from-cruise",
+        "y1v3.ev.035",
         "y1v3.ev.068"
       ],
       "politics": [
@@ -4555,8 +4557,7 @@
         "y1v2.case.kiyotaka-ayanokoji.target-class-b-search",
         "y1v3.case.kiyotaka-ayanokoji.exploit-justified-leader-replacement",
         "y1v3.case.kiyotaka-ayanokoji.improvise-corn-carrying",
-        "y1v3.case.kiyotaka-ayanokoji.notice-spy-hypothesis",
-        "y1v3.case.kiyotaka-ayanokoji.spot-island-path-from-ship"
+        "y1v3.case.kiyotaka-ayanokoji.notice-spy-hypothesis"
       ],
       "social": [
         "v0.case.kiyotaka.cards-50",
@@ -4623,8 +4624,7 @@
         "y1v2.case.kiyotaka-ayanokoji.protect-sakura-contact",
         "y1v2.case.kiyotaka-ayanokoji.target-class-b-search",
         "y1v3.case.kiyotaka-ayanokoji.assist-injured-rival",
-        "y1v3.case.kiyotaka-ayanokoji.notice-spy-hypothesis",
-        "y1v3.case.kiyotaka-ayanokoji.spot-island-path-from-ship"
+        "y1v3.case.kiyotaka-ayanokoji.notice-spy-hypothesis"
       ],
       "persuasion": [
         "y1v1.case.k.exam-paper-bargain",
@@ -5401,13 +5401,16 @@
     },
     "actor.katsuragi": {
       "strategy": [
-        "y1v3.case.katsuragi.defend-class-a-exclusive-cave"
+        "y1v3.case.katsuragi.defend-class-a-exclusive-cave",
+        "y1v3.case.katsuragi.infer-cave-route-from-cruise"
       ],
       "institution": [],
       "conflict": [
         "y1v3.case.katsuragi.defend-class-a-exclusive-cave"
       ],
-      "observation": [],
+      "observation": [
+        "y1v3.case.katsuragi.infer-cave-route-from-cruise"
+      ],
       "politics": []
     },
     "actor.yahiko": {
@@ -8519,6 +8522,7 @@
     },
     "actor.katsuragi": {
       "strategy": [
+        "y1v3.ev.035",
         "y1v3.ev.062",
         "y1v3.ev.063",
         "y1v3.ev.068",
@@ -8532,6 +8536,7 @@
         "y1v3.ev.063"
       ],
       "observation": [
+        "y1v3.ev.035",
         "y1v3.ev.068"
       ],
       "politics": [
@@ -8688,7 +8693,6 @@
     "y1v3.case.airi-sakura.join-branch-collection": "data/canon/consolidated/behavioral_cases/airi-sakura/join-branch-collection.json",
     "y1v3.case.airi-sakura.identify-corn-food-source": "data/canon/consolidated/behavioral_cases/airi-sakura/identify-corn-food-source.json",
     "y1v3.case.airi-sakura.defend-kiyotaka-verbally": "data/canon/consolidated/behavioral_cases/airi-sakura/defend-kiyotaka-verbally.json",
-    "y1v3.case.kiyotaka-ayanokoji.spot-island-path-from-ship": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/spot-island-path-from-ship.json",
     "y1v3.case.kiyotaka-ayanokoji.assist-injured-rival": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/assist-injured-rival.json",
     "y1v3.case.kiyotaka-ayanokoji.improvise-corn-carrying": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/improvise-corn-carrying.json",
     "y1v3.case.kiyotaka-ayanokoji.withhold-underwear-evidence": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/withhold-underwear-evidence.json",
@@ -8702,6 +8706,7 @@
     "y1v3.case.honami-ichinose.evaluate-well-before-shared-use": "data/canon/consolidated/behavioral_cases/honami-ichinose/evaluate-well-before-shared-use.json",
     "y1v3.case.katsuragi.defend-class-a-exclusive-cave": "data/canon/consolidated/behavioral_cases/katsuragi/defend-class-a-exclusive-cave.json",
     "y1v3.case.sae-chiyabashira.pressure-kiyotaka-with-family-claims": "data/canon/consolidated/behavioral_cases/sae-chiyabashira/pressure-kiyotaka-with-family-claims.json",
-    "y1v3.case.kakeru-ryuen.intimidate-ishizaki": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/intimidate-ishizaki.json"
+    "y1v3.case.kakeru-ryuen.intimidate-ishizaki": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/intimidate-ishizaki.json",
+    "y1v3.case.katsuragi.infer-cave-route-from-cruise": "data/canon/consolidated/behavioral_cases/katsuragi/infer-cave-route-from-cruise.json"
   }
 }

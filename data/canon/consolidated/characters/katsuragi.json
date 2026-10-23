@@ -18,9 +18,11 @@
   "domains": {
     "strategy": {
       "behavioral_case_refs": [
-        "y1v3.case.katsuragi.defend-class-a-exclusive-cave"
+        "y1v3.case.katsuragi.defend-class-a-exclusive-cave",
+        "y1v3.case.katsuragi.infer-cave-route-from-cruise"
       ],
       "context_evidence_refs": [
+        "y1v3.ev.035",
         "y1v3.ev.062",
         "y1v3.ev.063",
         "y1v3.ev.068",
@@ -43,8 +45,11 @@
       ]
     },
     "observation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v3.case.katsuragi.infer-cave-route-from-cruise"
+      ],
       "context_evidence_refs": [
+        "y1v3.ev.035",
         "y1v3.ev.068"
       ]
     },

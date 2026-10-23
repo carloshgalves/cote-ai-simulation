@@ -203,7 +203,9 @@
         "y1v3.ev.034",
         "y1v3.ev.035"
       ],
-      "cases": []
+      "cases": [
+        "y1v3.case.katsuragi.infer-cave-route-from-cruise"
+      ]
     },
     "60": {
       "evidence": [
@@ -211,7 +213,7 @@
         "y1v3.ev.035"
       ],
       "cases": [
-        "y1v3.case.kiyotaka-ayanokoji.spot-island-path-from-ship"
+        "y1v3.case.katsuragi.infer-cave-route-from-cruise"
       ]
     },
     "63": {

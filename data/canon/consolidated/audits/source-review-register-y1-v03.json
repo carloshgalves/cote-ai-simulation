@@ -3183,10 +3183,11 @@
       ]
     },
     {
-      "case_id": "y1v3.case.kiyotaka-ayanokoji.spot-island-path-from-ship",
-      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/spot-island-path-from-ship.json",
-      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "case_id": "y1v3.case.katsuragi.infer-cave-route-from-cruise",
+      "case_file": "data/canon/consolidated/behavioral_cases/katsuragi/infer-cave-route-from-cruise.json",
+      "primary_actor_id": "actor.katsuragi",
       "pdf_pages": [
+        59,
         60
       ],
       "semantic_review": "PENDING_DIRECT_CASE_REVIEW",

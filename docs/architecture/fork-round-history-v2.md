@@ -17,11 +17,14 @@ installed V2 policy. The child starts at revision/ordinal zero. Actors, slots,
 request digest, response kind, action content, revocation reason/policy and dispatch
 ordinals are preserved. Same-instant round eligibility ordinals are rebased relative
 to the parent's next ordinal, consistently with the child clock and dispatch.
-An originating intention reference to the authenticated parent Genesis remains
-an exact historical, opaque reference. Bootstrap and lineage replay resolve its
-kind, ID and digest against the archived Genesis; no child event, evidence or
-knowledge is inferred from it. Other intention roots require their own historical
-resolver and fail closed while unavailable. An earlier unrevoked request cannot
+An originating intention reference to an authenticated parent root remains an
+exact historical, opaque reference. Bootstrap and lineage replay resolve its
+registered kind, complete ID preimage and digest against the five archived
+ledgers, parent Genesis, parent snapshot or snapshot epistemic refs. ConflictSet
+identities additionally require the cycle witness from an archived DecisionRecord.
+No child event, evidence or knowledge is inferred from the pointer. Roots outside
+these archives require their own historical proof and fail closed while unavailable.
+An earlier unrevoked request cannot
 be retimed or granted a new authorization by this migrator.
 
 A slot's first dispatch has ordinal zero; each subsequent dispatch requires the

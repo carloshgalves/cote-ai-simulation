@@ -31,7 +31,8 @@ type forkSlotHistory struct {
 // against the exact source cut can be carried; stale requests require explicit
 // source settlement. No model is called and no response is fabricated.
 func migrateRoundHistoryV2(parent, child *genesis.Genesis, snapshot []any,
-	records, events, journals []ports.CanonicalRecord, origin, target *policy.Bundle) ([]forkGenesisRound, []forkSlotRecord, error) {
+	archive forkHistoryArchive, origin, target *policy.Bundle) ([]forkGenesisRound, []forkSlotRecord, error) {
+	records, events, journals := archive["input_ledger"], archive["event_store"], archive["decision_ledger"]
 	pending := snapshot[11].([]any)
 	env, err := codec.StrictDecodeEnvelope(pending[2].([]byte))
 	if err != nil {
@@ -267,7 +268,7 @@ func migrateRoundHistoryV2(parent, child *genesis.Genesis, snapshot []any,
 		}
 		if h.response != nil {
 			if len(h.response) == 19 {
-				if err := authenticateRoundIntentionV2(h.response[16], parent); err != nil {
+				if err := authenticateRoundIntentionV2(h.response[16], parent, snapshot, archive, origin); err != nil {
 					return nil, nil, err
 				}
 			}
@@ -323,7 +324,7 @@ func roundHistoryClocksV2(parent *genesis.Genesis, snapshot []any, journals []po
 // reference may remain historical across a fork only when its root is present
 // in the authenticated cut. Genesis is already archived and independently
 // verified by lineage replay. Other roots need their corresponding resolver.
-func authenticateRoundIntentionV2(value any, parent *genesis.Genesis) error {
+func authenticateRoundIntentionV2(value any, parent *genesis.Genesis, snapshot []any, archive forkHistoryArchive, bundle *policy.Bundle) error {
 	option, ok := value.([]any)
 	if !ok || len(option) == 0 {
 		return errors.New("action intention option malformed")
@@ -335,11 +336,10 @@ func authenticateRoundIntentionV2(value any, parent *genesis.Genesis) error {
 		return errors.New("action intention option malformed")
 	}
 	ref, ok := option[1].([]any)
-	if !ok || len(ref) != 3 || ref[0] != uint64(21) ||
-		!equalBytes(ref[1], parent.ID[:]) || !equalBytes(ref[2], parent.Digest[:]) {
-		return errors.New("action intention requires an authenticated historical root")
+	if !ok {
+		return errors.New("action intention reference malformed")
 	}
-	return nil
+	return authenticateArchivedCausalRef(ref, parent, snapshot, archive, bundle)
 }
 
 func migrateSlotResponseV2(old, source, dispatch []any, origin, target *policy.Bundle) (forkSlotRecord, error) {
@@ -414,67 +414,11 @@ func verifyRoundHistoryV2(ctx context.Context, tx *sql.Tx, parent, child *genesi
 	if id != policy.CodecPolicyV2ID {
 		return nil
 	}
-	rows, err := tx.QueryContext(ctx, "SELECT record_id,canonical FROM fork_history_records WHERE child_run=? AND ledger_name='input_ledger' ORDER BY ordinal", child.RunID[:])
+	archive, err := readForkHistoryArchive(ctx, tx, [32]byte(child.RunID))
 	if err != nil {
 		return err
 	}
-	var records []ports.CanonicalRecord
-	for rows.Next() {
-		var id, raw []byte
-		if err := rows.Scan(&id, &raw); err != nil {
-			rows.Close()
-			return err
-		}
-		records = append(records, ports.CanonicalRecord{Identity: bytesToID(id), Canonical: raw})
-	}
-	if err := rows.Err(); err != nil {
-		rows.Close()
-		return err
-	}
-	if err := rows.Close(); err != nil {
-		return err
-	}
-	eventRows, err := tx.QueryContext(ctx, "SELECT record_id,canonical FROM fork_history_records WHERE child_run=? AND ledger_name='event_store' ORDER BY ordinal", child.RunID[:])
-	if err != nil {
-		return err
-	}
-	var events []ports.CanonicalRecord
-	for eventRows.Next() {
-		var id, raw []byte
-		if err := eventRows.Scan(&id, &raw); err != nil {
-			eventRows.Close()
-			return err
-		}
-		events = append(events, ports.CanonicalRecord{Identity: bytesToID(id), Canonical: raw})
-	}
-	if err := eventRows.Err(); err != nil {
-		eventRows.Close()
-		return err
-	}
-	if err := eventRows.Close(); err != nil {
-		return err
-	}
-	journalRows, err := tx.QueryContext(ctx, "SELECT record_id,canonical FROM fork_history_records WHERE child_run=? AND ledger_name='decision_ledger' ORDER BY ordinal", child.RunID[:])
-	if err != nil {
-		return err
-	}
-	var journals []ports.CanonicalRecord
-	for journalRows.Next() {
-		var id, raw []byte
-		if err := journalRows.Scan(&id, &raw); err != nil {
-			journalRows.Close()
-			return err
-		}
-		journals = append(journals, ports.CanonicalRecord{Identity: bytesToID(id), Canonical: raw})
-	}
-	if err := journalRows.Err(); err != nil {
-		journalRows.Close()
-		return err
-	}
-	if err := journalRows.Close(); err != nil {
-		return err
-	}
-	rounds, slots, err := migrateRoundHistoryV2(parent, child, snapshot, records, events, journals, origin, target)
+	rounds, slots, err := migrateRoundHistoryV2(parent, child, snapshot, archive, origin, target)
 	if err != nil {
 		return err
 	}
@@ -514,7 +458,13 @@ func (s *Store) snapshotInputRecords(ctx context.Context, id [32]byte) ([]ports.
 	return s.snapshotRoundLedgerRecords(ctx, id, "input_ledger")
 }
 func (s *Store) snapshotRoundLedgerRecords(ctx context.Context, id [32]byte, ledger string) ([]ports.CanonicalRecord, error) {
-	if ledger != "input_ledger" && ledger != "event_store" && ledger != "decision_ledger" {
+	valid := false
+	for _, name := range snapshotLedgerNames {
+		if ledger == name {
+			valid = true
+		}
+	}
+	if !valid {
 		return nil, errors.New("unsupported round migration ledger")
 	}
 	rows, err := s.db.QueryContext(ctx, "SELECT m.record_id,i.canonical FROM snapshot_prefix_members m JOIN "+ledger+" i ON i.id=m.record_id WHERE m.snapshot_id=? AND m.ledger_name=? ORDER BY m.ordinal", id[:], ledger)

@@ -74,6 +74,9 @@ func r19SourceWithAction(t *testing.T, action bool, intention ...any) (*sqlite.S
 					if build, ok := intention[0].(func([]any) any); ok {
 						response.Body[16] = build(origin)
 					}
+					if build, ok := intention[0].(func(inputledger.Round, inputledger.Dispatch) any); ok {
+						response.Body[16] = build(round, d)
+					}
 				}
 			}
 			if err := ledger.Respond(ctx, response); err != nil {
@@ -799,6 +802,48 @@ func TestCSFRV18R19IntentionRequiresAuthenticatedHistoricalRoot(t *testing.T) {
 				t.Fatal("unresolved intention gained authority")
 			}
 			assertCSFRV18EmptyRejectedFork(t, path)
+		})
+	}
+}
+
+func TestCSFRV18R19RoundAndDispatchIntentionsResolveInFrozenArchive(t *testing.T) {
+	for _, kind := range []uint64{3, 4} {
+		t.Run(string(rune('0'+kind)), func(t *testing.T) {
+			ctx := context.Background()
+			bundle, err := policy.Load(bundlePath)
+			if err != nil {
+				t.Fatal(err)
+			}
+			parent, v1, run, snap := r19SourceWithAction(t, true, func(r inputledger.Round, d inputledger.Dispatch) any {
+				id, digest := r.ID, r.Digest
+				if kind == 4 {
+					id = d.ID
+					var err error
+					digest, _, err = identity.New(bundle).Sum("cote.csf.digest.slot-dispatch", "cote.csf.schema.slot-dispatch", 1,
+						[]any{d.ID[:], d.RunID[:], d.CycleID[:], d.RoundID[:], d.SlotID, uint64(d.Ordinal), []any{d.Actor[0], d.Actor[1]}, []any{int64(d.Eligibility.NotBeforeInstant), uint64(d.Eligibility.NotBeforeCycleOrdinal)}, uint64(d.BaseRevision), int64(d.EffectiveAt), d.RequestDigest[:]})
+					if err != nil {
+						t.Fatal(err)
+					}
+				}
+				return []any{uint64(1), []any{kind, id[:], digest[:]}}
+			})
+			v2, err := policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+			if err != nil {
+				t.Fatal(err)
+			}
+			child, err := sqlite.Open(ctx, t.TempDir()+"/archive-intention.db")
+			if err != nil {
+				t.Fatal(err)
+			}
+			defer child.Close()
+			childID := [32]byte(run)
+			childID[0] ^= 0x64
+			if _, err := parent.ForkIdleSnapshotV1ToV2(ctx, [32]byte(run), snap.ID, childID, child, v1, v2); err != nil {
+				t.Fatal("archived intention:", err)
+			}
+			if _, err := child.ReplayClock(ctx, childID, v2); err != nil {
+				t.Fatal(err)
+			}
 		})
 	}
 }

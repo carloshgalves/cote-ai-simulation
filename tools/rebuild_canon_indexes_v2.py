@@ -11,7 +11,10 @@ def main():
   o=args.parse_args()
   root=Path(__file__).resolve().parents[1]/"data/canon/consolidated"
   actors=[read(p) for p in sorted((root/"characters").glob("*.json"))]
-  cases=[read(p) for p in sorted((root/"behavioral_cases").glob("*.json"))]
+  case_files=sorted((root/"behavioral_cases").glob("*/*.json"))
+  cases=[read(p) for p in case_files]
+  case_paths={c["id"]:p.relative_to(root.parents[2]).as_posix() for p,c in zip(case_files,cases)}
+  assert len(case_paths)==len(case_files), "duplicate behavioral case IDs"
   evidence=[e for p in sorted((root/"evidence").glob("*.json")) for e in read(p)["records"]]
   em={e["id"]:e for e in evidence}
   cm={c["id"]:c for c in cases}
@@ -35,7 +38,7 @@ def main():
     for n in c["source"]["pdf_pages"]:pages.setdefault(str(n),{"evidence":[],"cases":[]})["cases"].append(c["id"])
   pages={k:{field:sorted(set(v)) for field,v in d.items()} for k,d in pages.items()}
   plans=[
-    ("character-topic-map.json",{"topics_by_actor":topics,"behavioral_by_actor_topic":primary,"context_mentions_by_actor_topic":mentions}),
+    ("character-topic-map.json",{"topics_by_actor":topics,"behavioral_by_actor_topic":primary,"context_mentions_by_actor_topic":mentions,"behavioral_case_paths":case_paths}),
     ("evidence-topic-map.json",{"evidence_by_topic":evtopics}),
     ("volume0-page-map.json",{"pages":pages})
   ]

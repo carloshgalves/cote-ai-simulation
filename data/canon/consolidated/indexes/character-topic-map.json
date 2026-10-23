@@ -2922,5 +2922,32 @@
     "behavior": "behavioral_by_actor_topic",
     "context": "context_mentions_by_actor_topic",
     "knowledge_time": "enforced before retrieval results"
+  },
+  "behavioral_case_paths": {
+    "v0.case.atsuomi.beta-authorization": "data/canon/consolidated/behavioral_cases/atsuomi-ayanokoji/atsuomi--beta-authorization.json",
+    "v0.case.atsuomi.patronage": "data/canon/consolidated/behavioral_cases/atsuomi-ayanokoji/atsuomi--patronage.json",
+    "v0.case.atsuomi.staged-baby": "data/canon/consolidated/behavioral_cases/atsuomi-ayanokoji/atsuomi--staged-baby.json",
+    "v0.case.ishida.experiment-ethics": "data/canon/consolidated/behavioral_cases/ishida/ishida--experiment-ethics.json",
+    "v0.case.ishida.vr-proposal": "data/canon/consolidated/behavioral_cases/ishida/ishida--vr-proposal.json",
+    "v0.case.ishigami.public-risk": "data/canon/consolidated/behavioral_cases/kyo-ishigami/ishigami--public-risk.json",
+    "v0.case.kamogawa.hierarchy": "data/canon/consolidated/behavioral_cases/kamogawa/kamogawa--hierarchy.json",
+    "v0.case.kijima.public-profile": "data/canon/consolidated/behavioral_cases/kijima/kijima--public-profile.json",
+    "v0.case.kiyotaka.adults-baton": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--adults-baton.json",
+    "v0.case.kiyotaka.cards-50": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--cards-50.json",
+    "v0.case.kiyotaka.gummy-third-option": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--gummy-third-option.json",
+    "v0.case.kiyotaka.judo-observation": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--judo-observation.json",
+    "v0.case.kiyotaka.shiro-final-match": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--shiro-final-match.json",
+    "v0.case.kiyotaka.shiro-learning": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--shiro-learning.json",
+    "v0.case.kiyotaka.yuki-health": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--yuki-health.json",
+    "v0.case.kiyotaka.yuki-reunion": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--yuki-reunion.json",
+    "v0.case.mika.informant": "data/canon/consolidated/behavioral_cases/mika/mika--informant.json",
+    "v0.case.naoe.meeting-as-leverage": "data/canon/consolidated/behavioral_cases/jinnosuke-naoe/naoe--meeting-as-leverage.json",
+    "v0.case.sakayanagi.ethical-observation": "data/canon/consolidated/behavioral_cases/sakayanagi-father/sakayanagi--ethical-observation.json",
+    "v0.case.shiro.freedom-choice": "data/canon/consolidated/behavioral_cases/shiro/shiro--freedom-choice.json",
+    "v0.case.shiro.technical-match-and-exit": "data/canon/consolidated/behavioral_cases/shiro/shiro--technical-match-and-exit.json",
+    "v0.case.suzukake.curriculum-policy": "data/canon/consolidated/behavioral_cases/suzukake/suzukake--curriculum-policy.json",
+    "v0.case.tsukishiro.dual-roles": "data/canon/consolidated/behavioral_cases/tsukishiro/tsukishiro--dual-roles.json",
+    "v0.case.yuki.aftereffects": "data/canon/consolidated/behavioral_cases/yuki/yuki--aftereffects.json",
+    "v0.case.yuki.social-outreach": "data/canon/consolidated/behavioral_cases/yuki/yuki--social-outreach.json"
   }
 }

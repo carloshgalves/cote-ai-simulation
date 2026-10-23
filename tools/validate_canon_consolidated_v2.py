@@ -8,7 +8,23 @@ idx=J(B/"indexes/character-topic-map.json")
 actors={p.stem:J(p) for p in (B/"characters").glob("*.json")}
 inst={p.stem:J(p) for p in (B/"institutions").glob("*.json")}
 ev={x["id"]:x for x in J(B/"evidence/volume0.json")["records"]}
-cases={x["id"]:x for x in (J(p) for p in (B/"behavioral_cases").glob("*.json"))}
+case_files=sorted((B/"behavioral_cases").glob("*/*.json"))
+cases={x["id"]:x for x in (J(p) for p in case_files)}
+assert len(case_files)==len(cases), "duplicate behavioral case IDs"
+assert not list((B/"behavioral_cases").glob("*.json")), "flat behavioral cases are forbidden"
+assert sorted((B/"behavioral_cases").rglob("*.json"))==case_files, "behavioral cases must live exactly one folder under their actor"
+case_path_index=idx["behavioral_case_paths"]
+assert set(case_path_index)==set(cases), "behavioral case path index incomplete or stale"
+for p in case_files:
+  c=J(p)
+  expected_slug=c["primary_actor_id"].removeprefix("actor.")
+  assert p.parent.name==expected_slug, (p,c["primary_actor_id"])
+  canonical_path=p.relative_to(B.parents[2]).as_posix()
+  assert case_path_index[c["id"]]==canonical_path, (c["id"], canonical_path)
+  assert c["primary_actor_id"] in idx["character_packs"], c["id"]
+for case_id, relative_path in case_path_index.items():
+  resolved=B.parents[2]/relative_path
+  assert resolved.is_file() and J(resolved)["id"]==case_id, case_id
 assert (len(actors),len(inst),len(ev),len(cases))==(35,13,132,25)
 assert len({x["character_id"] for x in actors.values()})==35
 for p in actors.values():

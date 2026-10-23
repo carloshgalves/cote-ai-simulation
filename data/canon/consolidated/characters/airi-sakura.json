@@ -5,7 +5,8 @@
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
-    "ln.y1.v02.sevenseas.en.operator-provided"
+    "ln.y1.v02.sevenseas.en.operator-provided",
+    "ln.y1.v03.sevenseas.en.2019.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -23,7 +24,9 @@
       "behavioral_case_refs": [
         "y1v2.case.airi-sakura.conceal-after-fight",
         "y1v2.case.airi-sakura.testify-despite-stage-fright",
-        "y1v2.case.airi-sakura.voluntary-witness-admission"
+        "y1v2.case.airi-sakura.voluntary-witness-admission",
+        "y1v3.case.airi-sakura.defend-kiyotaka-verbally",
+        "y1v3.case.airi-sakura.join-branch-collection"
       ],
       "context_evidence_refs": [
         "y1v1.ev.116",
@@ -47,13 +50,20 @@
         "y1v2.ev.063",
         "y1v2.ev.069",
         "y1v2.ev.078",
-        "y1v2.ev.080"
+        "y1v2.ev.080",
+        "y1v3.ev.032",
+        "y1v3.ev.041",
+        "y1v3.ev.043",
+        "y1v3.ev.064",
+        "y1v3.ev.065",
+        "y1v3.ev.083"
       ]
     },
     "observation": {
       "behavioral_case_refs": [
         "y1v2.case.airi-sakura.conceal-after-fight",
-        "y1v2.case.airi-sakura.testify-despite-stage-fright"
+        "y1v2.case.airi-sakura.testify-despite-stage-fright",
+        "y1v3.case.airi-sakura.identify-corn-food-source"
       ],
       "context_evidence_refs": [
         "y1v1.ev.117",
@@ -66,7 +76,10 @@
         "y1v2.ev.047",
         "y1v2.ev.056",
         "y1v2.ev.057",
-        "y1v2.ev.064"
+        "y1v2.ev.064",
+        "y1v3.ev.033",
+        "y1v3.ev.034",
+        "y1v3.ev.066"
       ]
     },
     "combat": {
@@ -95,7 +108,10 @@
     "strategy": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v2.ev.030"
+        "y1v2.ev.030",
+        "y1v3.ev.033",
+        "y1v3.ev.034",
+        "y1v3.ev.067"
       ]
     },
     "persuasion": {
@@ -113,19 +129,23 @@
         "y1v2.ev.063",
         "y1v2.ev.064",
         "y1v2.ev.065",
-        "y1v2.ev.077"
+        "y1v2.ev.077",
+        "y1v3.ev.043",
+        "y1v3.ev.065"
       ]
     },
     "emotion": {
       "behavioral_case_refs": [
         "y1v2.case.airi-sakura.testify-despite-stage-fright",
-        "y1v2.case.airi-sakura.voluntary-witness-admission"
+        "y1v2.case.airi-sakura.voluntary-witness-admission",
+        "y1v3.case.airi-sakura.defend-kiyotaka-verbally"
       ],
       "context_evidence_refs": [
         "y1v2.ev.052",
         "y1v2.ev.058",
         "y1v2.ev.069",
-        "y1v2.ev.080"
+        "y1v2.ev.080",
+        "y1v3.ev.083"
       ]
     },
     "institution": {
@@ -133,11 +153,34 @@
       "context_evidence_refs": [
         "y1v2.ev.065"
       ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.032"
+      ]
+    },
+    "resources": {
+      "behavioral_case_refs": [
+        "y1v3.case.airi-sakura.identify-corn-food-source",
+        "y1v3.case.airi-sakura.join-branch-collection"
+      ],
+      "context_evidence_refs": [
+        "y1v3.ev.041",
+        "y1v3.ev.066",
+        "y1v3.ev.067"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.064"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Minimum volume-supported traits; no unstated skills, personalities or identity assertions. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors.",
+  "semantic_audit_notes": "Minimum volume-supported traits; no unstated skills, personalities or identity assertions. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

@@ -4,7 +4,8 @@
   "display_name": "Haruki Yamauchi",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+    "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "ln.y1.v03.sevenseas.en.2019.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -32,7 +33,10 @@
         "y1v1.ev.114",
         "y1v1.ev.116",
         "y1v1.ev.123",
-        "y1v1.ev.134"
+        "y1v1.ev.134",
+        "y1v3.ev.041",
+        "y1v3.ev.042",
+        "y1v3.ev.043"
       ]
     },
     "ethics": {
@@ -53,7 +57,8 @@
     "institution": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v1.ev.050"
+        "y1v1.ev.050",
+        "y1v3.ev.003"
       ]
     },
     "leadership": {
@@ -63,7 +68,8 @@
         "y1v1.ev.088",
         "y1v1.ev.093",
         "y1v1.ev.100",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v3.ev.036"
       ]
     },
     "academic_reasoning": {
@@ -75,7 +81,8 @@
         "y1v1.ev.090",
         "y1v1.ev.100",
         "y1v1.ev.123",
-        "y1v1.ev.134"
+        "y1v1.ev.134",
+        "y1v3.ev.003"
       ]
     },
     "emotion": {
@@ -89,11 +96,48 @@
       "context_evidence_refs": [
         "y1v1.ev.134"
       ]
+    },
+    "observation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.036",
+        "y1v3.ev.042",
+        "y1v3.ev.079"
+      ]
+    },
+    "resources": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.041",
+        "y1v3.ev.044"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.043",
+        "y1v3.ev.079",
+        "y1v3.ev.080"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.044",
+        "y1v3.ev.080",
+        "y1v3.ev.088"
+      ]
+    },
+    "combat": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.088"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

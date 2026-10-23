@@ -1,0 +1,42 @@
+{
+  "id": "y1v45.case.manabu-horikita.invite-kiyotaka-into-student-council",
+  "actor_id": "actor.manabu-horikita",
+  "primary_actor_id": "actor.manabu-horikita",
+  "title": "invite kiyotaka into student council",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "After disclosing that he suspects Kiyotaka's hidden island achievement, offers a council position over secretary Tachibana's objection.",
+  "observed_result": "Kiyotaka refuses; Manabu leaves the invitation open rather than forcing appointment.",
+  "epistemic_limits": "His knowledge is acquired after the island result and is not shared automatically with Suzune or the first-year classes.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      70,
+      73
+    ],
+    "chapter": 3,
+    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS_PENDING_INDIVIDUAL_AUDIT"
+  },
+  "other_actors": [
+    "actor.tachibana",
+    "actor.kiyotaka-ayanokoji",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "politics"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "leadership",
+    "politics"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.019",
+    "y1v45.ev.020",
+    "y1v45.ev.021"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

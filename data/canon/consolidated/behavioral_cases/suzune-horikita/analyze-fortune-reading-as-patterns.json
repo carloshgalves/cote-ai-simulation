@@ -1,0 +1,38 @@
+{
+  "id": "y1v45.case.suzune-horikita.analyze-fortune-reading-as-patterns",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "analyze fortune reading as patterns",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Rejects supernatural foresight yet describes cold reading as inference from conversational cues and accumulated observations.",
+  "observed_result": "Kiyotaka recognizes her reasoning and expresses increased curiosity.",
+  "epistemic_limits": "This is her theory, not demonstrated supernatural perception or a reliable cold-reading algorithm.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      15,
+      16
+    ],
+    "chapter": 2,
+    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS_PENDING_INDIVIDUAL_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "reasoning",
+    "psychology"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "reasoning",
+    "psychology"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.005"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

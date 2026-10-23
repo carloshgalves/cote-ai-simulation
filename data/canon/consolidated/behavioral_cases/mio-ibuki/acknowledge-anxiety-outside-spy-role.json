@@ -1,0 +1,41 @@
+{
+  "id": "y1v45.case.mio-ibuki.acknowledge-anxiety-outside-spy-role",
+  "actor_id": "actor.mio-ibuki",
+  "primary_actor_id": "actor.mio-ibuki",
+  "title": "acknowledge anxiety outside spy role",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Admits to Kiyotaka she becomes tense when meeting new people while covert role-play was easier, then listens to his interpretation.",
+  "observed_result": "She briefly considers the comparison without a proven lasting change in sociability.",
+  "epistemic_limits": "Own testimony of internal state, not an objectively measured disorder or a universal communication deficit.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      24,
+      26
+    ],
+    "chapter": 2,
+    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS_PENDING_INDIVIDUAL_AUDIT"
+  },
+  "other_actors": [
+    "actor.kakeru-ryuen",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "social",
+    "emotion"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "social",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.007",
+    "y1v45.ev.008",
+    "y1v45.ev.009"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

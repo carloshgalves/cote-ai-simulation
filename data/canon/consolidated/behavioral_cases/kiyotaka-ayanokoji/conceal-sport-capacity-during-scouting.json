@@ -1,0 +1,39 @@
+{
+  "id": "y1v45.case.kiyotaka-ayanokoji.conceal-sport-capacity-during-scouting",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "conceal sport capacity during scouting",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Intentionally misplays an easy ball after noticing Ichinose watching, limiting the display of his physical ability.",
+  "observed_result": "Suzune suspects he is concealing skill, while Class D still wins through Sudō's play.",
+  "epistemic_limits": "His intentional miss is narrated private intent; others cannot know it until he tells them.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      188,
+      190
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS_PENDING_INDIVIDUAL_AUDIT"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.honami-ichinose"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "deception"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "strategy",
+    "deception"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.050"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "y1v45.case.haruki-yamauchi.accept-sakura-rejection",
+  "actor_id": "actor.haruki-yamauchi",
+  "primary_actor_id": "actor.haruki-yamauchi",
+  "title": "accept sakura rejection",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Listens to Sakura reject his confession, thanks her for answering and later tells Kiyotaka he intends to move on.",
+  "observed_result": "The immediate interaction ends without retaliation and with some visible restraint.",
+  "epistemic_limits": "A single rejection accepted calmly does not erase previous misconduct or certify permanent maturity.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      149,
+      152
+    ],
+    "chapter": 5,
+    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS_PENDING_INDIVIDUAL_AUDIT"
+  },
+  "other_actors": [
+    "actor.airi-sakura",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "emotion",
+    "social"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "emotion",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.040",
+    "y1v45.ev.041"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

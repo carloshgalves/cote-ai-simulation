@@ -1,0 +1,47 @@
+{
+  "id": "y1v45.case.kiyotaka-ayanokoji.quietly-counter-invasive-pool-plot",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "quietly counter invasive pool plot",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "After learning classmates intend to violate girls' privacy at the pool, appears to cooperate while arranging with Karuizawa to defeat the violation.",
+  "observed_result": "The boys cannot obtain the images; the later chapter establishes the hidden counteraction and its limited audience.",
+  "epistemic_limits": "No voyeuristic procedures are endorsed; concealment of the countermeasure is private source evidence, not public knowledge at the earlier meeting.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      163,
+      165,
+      205,
+      223
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS_PENDING_INDIVIDUAL_AUDIT"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.ken-sudo",
+    "actor.kanji-ike",
+    "actor.haruki-yamauchi",
+    "actor.sotomura",
+    "actor.kei-karuizawa"
+  ],
+  "capabilities_supported": [
+    "privacy",
+    "strategy"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "privacy",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.045",
+    "y1v45.ev.053",
+    "y1v45.ev.056"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

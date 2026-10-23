@@ -1,0 +1,39 @@
+{
+  "id": "y1v45.case.katsuragi.help-stranded-elevator-rivals",
+  "actor_id": "actor.katsuragi",
+  "primary_actor_id": "actor.katsuragi",
+  "title": "help stranded elevator rivals",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Responds to Kiyotaka and Ibuki's confinement and assists them when they cannot exit on their own.",
+  "observed_result": "Both students leave the elevator safely and recognize Katsuragi's assistance.",
+  "epistemic_limits": "Exact technical intervention and time to response cannot be generalized from the narrator's limited account.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      47,
+      48
+    ],
+    "chapter": 2,
+    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS_PENDING_INDIVIDUAL_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.mio-ibuki"
+  ],
+  "capabilities_supported": [
+    "social",
+    "risk_management"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "social",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.014"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

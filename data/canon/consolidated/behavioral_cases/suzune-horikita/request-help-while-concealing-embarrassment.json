@@ -1,0 +1,41 @@
+{
+  "id": "y1v45.case.suzune-horikita.request-help-while-concealing-embarrassment",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "request help while concealing embarrassment",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Indirectly seeks help from Kiyotaka after trapping her hand, declines several potential helpers and later requests discretion.",
+  "observed_result": "With borrowed water the bottle is removed, and she expresses gratitude while keeping most peers unaware of the details.",
+  "epistemic_limits": "Embarrassment and pride are context-bound; no global refusal to cooperate can be inferred.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      112,
+      131
+    ],
+    "chapter": 4,
+    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS_PENDING_INDIVIDUAL_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.kikyo-kushida",
+    "actor.airi-sakura"
+  ],
+  "capabilities_supported": [
+    "social",
+    "risk_management"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "social",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.033",
+    "y1v45.ev.036"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "y1v45.case.nagumo.lead-older-students-volleyball",
+  "actor_id": "actor.nagumo",
+  "primary_actor_id": "actor.nagumo",
+  "title": "lead older students volleyball",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Participates prominently in a pool volleyball match and leads a strong visible performance before cheering peers.",
+  "observed_result": "His team wins that observed game and classmates surround him afterward.",
+  "epistemic_limits": "One game does not establish total sporting supremacy; political popularity and council eligibility involve other sources.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      177,
+      182
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS_PENDING_INDIVIDUAL_AUDIT"
+  },
+  "other_actors": [
+    "actor.honami-ichinose",
+    "actor.suzune-horikita",
+    "actor.manabu-horikita"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "social"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "sports",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.047",
+    "y1v45.ev.048"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

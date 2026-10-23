@@ -1,0 +1,41 @@
+{
+  "id": "y1v45.case.katsuragi.petition-to-contact-sick-twin",
+  "actor_id": "actor.katsuragi",
+  "primary_actor_id": "actor.katsuragi",
+  "title": "petition to contact sick twin",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Asks council president Manabu for permission to send a birthday gift to his twin sister, and tries to negotiate an exception using points.",
+  "observed_result": "Manabu declines because the proposed communication violates an explicit school rule.",
+  "epistemic_limits": "The sister's medical/family history is Katsuragi's testimony; strong resolve does not imply unlimited budget or authority.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      91,
+      93
+    ],
+    "chapter": 3,
+    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS_PENDING_INDIVIDUAL_AUDIT"
+  },
+  "other_actors": [
+    "actor.manabu-horikita",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "family",
+    "governance"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "family",
+    "governance"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.024",
+    "y1v45.ev.025",
+    "y1v45.ev.026"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

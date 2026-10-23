@@ -233,6 +233,11 @@ func allocateEventRoundOrdinals(refs []any, byID map[string][]byte) (map[string]
 			roles[string(id)] = role
 		}
 	}
+	return allocateForkEventCoordinates(roles, used)
+}
+
+// Shared canonical allocation for Event-owned rounds and occurrences.
+func allocateForkEventCoordinates(roles map[string]uint64, used map[[2]uint64]bool) (map[string]uint64, error) {
 	ids := make([]string, 0, len(roles))
 	for id := range roles {
 		ids = append(ids, id)
@@ -246,11 +251,11 @@ func allocateEventRoundOrdinals(refs []any, byID map[string][]byte) (map[string]
 		for used[[2]uint64{role, ordinal}] {
 			ordinal++
 			if ordinal > uint64(^uint32(0)) {
-				return nil, errors.New("migrated round ordinal namespace exhausted")
+				return nil, errors.New("migrated birth ordinal namespace exhausted")
 			}
 		}
 		if ordinal > uint64(^uint32(0)) {
-			return nil, errors.New("migrated round ordinal namespace exhausted")
+			return nil, errors.New("migrated birth ordinal namespace exhausted")
 		}
 		result[id] = ordinal
 		used[[2]uint64{role, ordinal}] = true

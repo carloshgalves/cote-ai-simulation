@@ -253,6 +253,13 @@ CREATE TABLE IF NOT EXISTS fork_history_roots (
  PRIMARY KEY(child_run,reference_kind,record_id),
  FOREIGN KEY(child_run) REFERENCES fork_lineage(child_run)
 ) STRICT;
+CREATE TABLE IF NOT EXISTS fork_occurrence_imports (
+ child_run BLOB NOT NULL CHECK(length(child_run)=32),
+ parent_occurrence_id BLOB NOT NULL CHECK(length(parent_occurrence_id)=32),
+ canonical BLOB NOT NULL,
+ PRIMARY KEY(child_run,parent_occurrence_id),
+ FOREIGN KEY(child_run) REFERENCES fork_lineage(child_run)
+) STRICT;
 CREATE TABLE IF NOT EXISTS clock_states (
  run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
  canonical BLOB NOT NULL

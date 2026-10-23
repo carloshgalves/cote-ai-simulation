@@ -13,6 +13,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
@@ -20,7 +21,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
 )
 
-func systemWorkFixture(t *testing.T,kind string)(*Coordinator,*sqlite.Store,*inputledger.Ledger,
+func systemWorkFixture(t *testing.T,kind string,setup ...func(*sqlite.Store,*genesis.Genesis))(*Coordinator,*sqlite.Store,*inputledger.Ledger,
  admission.Cycle,admission.Fence,string){
  t.Helper();ctx:=context.Background()
  bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
@@ -52,6 +53,7 @@ func systemWorkFixture(t *testing.T,kind string)(*Coordinator,*sqlite.Store,*inp
   if err:=store.SeedGenesisOccurrence(ctx,domain.ID(id),g.RunID,
    domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant},raw);err!=nil{t.Fatal(err)}
  }
+ for _,seed:=range setup{seed(store,g)}
  ledger,err:=inputledger.New(ctx,g.RunID,bundle,store);if err!=nil{t.Fatal(err)}
  roles,err:=policiesByRole(bundle);if err!=nil{t.Fatal(err)}
  policies:=admission.Policies{AdmissionOrder:roles["admission-order"],

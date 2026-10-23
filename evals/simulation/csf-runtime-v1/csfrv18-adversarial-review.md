@@ -247,3 +247,25 @@ o SHA exato da base do evento pull_request; o baseline de push permanece igual.
 contra merge Git temporário: whitespace herdado da base teve RED antes da
 correção e passa; whitespace novo da feature continua falhando. A correção não
 altera main nem arquivos de cânone e não requer rerun manual do Actions.
+
+### R20 — ocorrências Event/Claim-owned
+
+O bootstrap V2 agora migra recorrências Event-owned junto de schedules Genesis,
+rounds e os imports Claim/Transmission/due já implementados. Reutiliza o rekey
+Genesis e o alocador ordinal de rounds. Provas de nascimento no archive
+`fork_occurrence_imports` ficam na mesma transação das demais autoridades; replay
+rederiva o roster inicial completo. Uma ocorrência Event-owned exige o Event e
+a autorização DEFER exata no DecisionRecord e no CycleCommit congelados.
+
+O primeiro cenário teve RED por rejeição de origem Event e agora executa duas
+recorrências com coordenadas locais iguais, uma ocorrência Genesis e round
+respondido. Cobre rollback integral/retry, reopen, settlement conjunto no filho,
+corrupção/remoção/restauração de prova Event e reconstrução compatível da prova
+Genesis quando seu ID/digest parental são recuperáveis exatamente. O segundo
+combina Event, Claim/Transmission em trânsito, Genesis no role reservado 65535
+e round parcialmente respondido/revogado. Não fabrica Event/evidence/outbox no
+nascimento; reabre, completa os slots autorizados e entrega a comunicação uma
+vez, preservando as três identidades de ocorrência sem colisão.
+
+O contrato está em `docs/architecture/fork-occurrences-v2.md`. R21–R23 continuam
+pendentes e OPEN-02/OPEN-05 continuam abertos até suas evidências integrais.

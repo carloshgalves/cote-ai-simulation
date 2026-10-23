@@ -13,6 +13,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/fork"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
 // ForkIdleSnapshotV1 starts a new run from a causally verified checkpoint in
@@ -31,8 +32,8 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
 // ForkIdleSnapshotV1ToV2 is the positive cross-policy bootstrap for verified
 // IDLE cuts supported by the registered causal migrators. Parent V1 history is preserved
 // byte-for-byte, while child Genesis, clock and future authorities are V2.
-// Pending communication and round history are authenticated migration births;
-// unsupported source classes still fail closed.
+// Pending communication, Event/Genesis occurrences and round history are
+// authenticated migration births; unsupported source classes still fail closed.
 func (s *Store) ForkIdleSnapshotV1ToV2(ctx context.Context,sourceRun,parentSnapshotID,childRun [32]byte,
  child *Store,origin,version2 *policy.Bundle)(*genesis.Genesis,error){
  if origin==nil||version2==nil{return nil,errors.New("cross-policy fork requires both installed bundles")}
@@ -217,7 +218,13 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  if [32]byte(childGenesis.RunID)!=childRun{return nil,errors.New("fork generated wrong run")}
  var migrated []forkGenesisOccurrence
  var importBirths []V2CommunicationBirth
+ var occurrenceRoots []ports.CanonicalRecord
+ archive:=forkHistoryArchive{}
  if crossPolicy{
+  for _,name:=range snapshotLedgerNames{
+   records,err:=s.snapshotRoundLedgerRecords(ctx,parentSnapshotID,name);if err!=nil{return nil,err}
+   archive[name]=records
+  }
   if len(lists[0].([]any))>0{
    importBirths,err=s.PrepareV2CommunicationBirths(ctx,sourceRun,parentSnapshotID,
     childGenesis,origin,childPolicy)
@@ -229,21 +236,16 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
    if importedRefs[string(birth.Parent.OccurrenceID[:])]{return nil,errors.New("duplicate V2 imported communication source")}
    importedRefs[string(birth.Parent.OccurrenceID[:])]=true
   }
-  genesisRefs:=make([]any,0,len(pendingRefs))
+  ordinaryRefs:=make([]any,0,len(pendingRefs))
   for _,raw:=range pendingRefs{
    ref,ok:=raw.([]any)
    if !ok||len(ref)!=3||ref[0]!=uint64(6){return nil,errors.New("invalid cross-policy pending occurrence ref")}
    parentID,ok:=ref[1].([]byte)
    if !ok||len(parentID)!=32{return nil,errors.New("invalid cross-policy pending occurrence ID")}
    if importedRefs[string(parentID)]{delete(importedRefs,string(parentID));continue}
-   // The independent Genesis-owned migrator will reject Event/Claim
-   // occurrences; no parent-owned live work is silently discarded.
-   genesisRefs=append(genesisRefs,raw)
+   ordinaryRefs=append(ordinaryRefs,raw)
   }
   if len(importedRefs)!=0{return nil,errors.New("in-transit transmission is absent from source checkpoint")}
-  generated,err:=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,genesisRefs,origin,childPolicy)
-  if err!=nil{return nil,fmt.Errorf("V2 Genesis schedule migration: %w",err)}
-  migrated=append(migrated,generated...)
   for _,birth:=range importBirths {
    value,err:=codec.StrictDecodePayload(birth.ChildOccurrence.Canonical)
    if err!=nil{return nil,err}
@@ -256,6 +258,11 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
     EligibilityOrdinal:ordinal,Canonical:birth.ChildOccurrence.Canonical,
    })
   }
+  occurrenceRoots,err=prepareForkOccurrenceRoots(ctx,s,parent,ordinaryRefs)
+  if err!=nil{return nil,err}
+  generated,err:=migrateOccurrenceBirthsV2(parent,childGenesis,snapshot,ordinaryRefs,occurrenceRoots,migrated,archive,origin,childPolicy)
+  if err!=nil{return nil,fmt.Errorf("V2 occurrence migration: %w",err)}
+  migrated=append(migrated,generated...)
  }else{
   migrated,err=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,lists[0].([]any),origin,childPolicy)
   if err!=nil{return nil,err}
@@ -264,11 +271,6 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  var migratedSlots []forkSlotRecord
  var historicalRoots []forkHistoricalRoot
  if crossPolicy{
-  archive:=forkHistoryArchive{}
-  for _,name:=range snapshotLedgerNames{
-   records,err:=s.snapshotRoundLedgerRecords(ctx,parentSnapshotID,name);if err!=nil{return nil,err}
-   archive[name]=records
-  }
   historicalRoots,err=prepareNativeRoundIntentions(ctx,s,parent,snapshot,archive,origin)
   if err!=nil{return nil,fmt.Errorf("V2 native intention history: %w",err)}
   migratedRounds,migratedSlots,err=migrateRoundHistoryV2(parent,childGenesis,snapshot,archive,origin,childPolicy)
@@ -313,7 +315,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   "input_ledger","decision_ledger","event_store","evidence_ledger","causal_outbox",
   "input_source_cursors","source_ingress_receipts","input_slot_responses","round_integrity_seals",
   "cognitive_actor_registry","snapshot_cognitive_actors","evidence_routes",
-  "communication_claims","communication_transmissions","fork_communication_imports","fork_history_roots","cycle_control_state",
+  "communication_claims","communication_transmissions","fork_communication_imports","fork_history_roots","fork_occurrence_imports","cycle_control_state",
   "committed_cycles","fork_lineage","fork_history_records","snapshots","snapshot_seals",
   "snapshot_prefix_members","genesis_schedule_seals","scheduled_occurrences",
   "trigger_registry_seals","trigger_definitions","trigger_runtime","trigger_activations"}{
@@ -368,6 +370,9 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
    round.ID[:],childRun[:],round.Seal[:]);err!=nil{return nil,err}
  }
  if err:=publishRoundHistoryV2(ctx,tx,migratedSlots);err!=nil{return nil,err}
+ for _,record:=range occurrenceRoots{
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO fork_occurrence_imports(child_run,parent_occurrence_id,canonical) VALUES(?,?,?)",childRun[:],record.Identity[:],record.Canonical);err!=nil{return nil,err}
+ }
  for _,o:=range migrated{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO scheduled_occurrences "+
    "(id,run_id,eligibility_instant,eligibility_ordinal,lifecycle,canonical) VALUES(?,?,?,?,0,?)",

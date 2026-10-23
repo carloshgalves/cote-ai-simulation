@@ -148,6 +148,9 @@ func validateForkLineageTx(ctx context.Context,tx *sql.Tx,child *genesis.Genesis
  if err:=verifyAllV2ImportsTx(ctx,tx,run,bundle);err!=nil{
   return fmt.Errorf("fork V2 imported birth verification: %w",err)
  }
+ if err:=verifyOccurrenceBirthsV2(ctx,tx,parent,child,snap,origin,bundle);err!=nil{
+  return fmt.Errorf("fork V2 occurrence birth verification: %w",err)
+ }
  // A child ledger must not contain the parent history: post-fork event,
  // input and causal identities are always derived in the child run.
  return nil

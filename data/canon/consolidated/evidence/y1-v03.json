@@ -1424,11 +1424,13 @@
     {
       "id": "y1v3.ev.051",
       "domain": "leadership",
-      "summary": "Hirata rises early to care for camp chores and discusses class ambition with Kiyotaka without asserting that all classmates share the same goals.",
+      "summary": "Kiyotaka gets up early and privately checks Ibuki's bag, finding an unused school-rental digital camera; then meets Hirata, who describes poor sleep, point anxiety and conflicting class goals.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          100
+          100,
+          101,
+          102
         ],
         "chapter": 3,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -1478,10 +1480,11 @@
     {
       "id": "y1v3.ev.053",
       "domain": "conflict",
-      "summary": "Class C boys relay an invitation from Ryūen and provoke Ike at the river; the invitation does not prove the details of Ryūen's plans.",
+      "summary": "Komiya and Kondou, not Ishizaki, arrive at Class D's base to deliver Ryūen's invitation to enjoy Class C's beach amenities, provoking Ike for several minutes.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
+          105,
           106
         ],
         "chapter": 3,
@@ -1491,7 +1494,8 @@
       "source_mode": "REPORTED_BY_CHARACTER",
       "story_time": "Y1_M05",
       "mention_actor_ids": [
-        "actor.ishizaki",
+        "actor.komiya",
+        "actor.kondou",
         "actor.kakeru-ryuen",
         "actor.kanji-ike"
       ],
@@ -1649,11 +1653,12 @@
     {
       "id": "y1v3.ev.059",
       "domain": "leadership",
-      "summary": "Ichinose describes personally checking well water first and introducing a safer shared water supply after an initial trial period.",
+      "summary": "Ichinose explains that Class B delayed using the well until it had been tested, then uses this water for its shared welfare arrangements; the text does not establish that Ichinose personally performed every water test.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          120
+          120,
+          121
         ],
         "chapter": 3,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -1902,10 +1907,11 @@
     {
       "id": "y1v3.ev.068",
       "domain": "strategy",
-      "summary": "Katsuragi checks the corn site and warns against leaving resources unguarded; he observes Class D students nearby without demonstrated knowledge of its whole plan.",
+      "summary": "Katsuragi encounters Kiyotaka and Sakura near the cultivated corn, restrains Yahiko's hostility and warns against dangerous solo travel; he offers bounded assistance, but does not know Class D's whole plan.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
+          140,
           141
         ],
         "chapter": 4,
@@ -2652,11 +2658,13 @@
     {
       "id": "y1v3.ev.095",
       "domain": "strategy",
-      "summary": "The narration shifts to Ibuki's private perspective after Suzune collapses; Ibuki reports her own covert role and notes that a healthy Suzune might have fought differently.",
+      "summary": "Ibuki's first-person narration confirms her covert assignment, a rental digital camera that malfunctioned, her use of a transceiver, and her staged slap by Ryūen to make her exclusion from Class C believable. She later returns the leader card to unconscious Suzune.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          221
+          221,
+          222,
+          224
         ],
         "chapter": 6,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -2679,10 +2687,11 @@
     {
       "id": "y1v3.ev.096",
       "domain": "strategy",
-      "summary": "Ibuki shows Suzune's personalized leader keycard to Ryūen, proving that the secret was exposed within their group.",
+      "summary": "Ibuki hands Suzune's personalized leader card to Ryūen for inspection and then presents it to Class A student Katsuragi, establishing both men's direct knowledge by that meeting.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
+          221,
           222
         ],
         "chapter": 6,
@@ -2706,11 +2715,13 @@
     {
       "id": "y1v3.ev.097",
       "domain": "strategy",
-      "summary": "Ibuki meets Katsuragi concerning a covert cross-class arrangement; the specific transaction remains incompletely disclosed.",
+      "summary": "Katsuragi directly examines the leader card and accepts an alliance proposal with Ryūen after negotiation and factional pressure. Ibuki hears that an alliance was accepted, but the contract's exact private terms are not revealed to the reader.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          223
+          222,
+          223,
+          224
         ],
         "chapter": 6,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -3162,11 +3173,12 @@
     {
       "id": "y1v3.ev.113",
       "domain": "strategy",
-      "summary": "Kiyotaka hypothesizes hidden cooperation between Classes A and C involving purchases, spying and leader information; he explicitly says part is intuition drawn from scores.",
+      "summary": "Kiyotaka explicitly labels the inferred economic terms of the A/C cooperation as intuition drawn from final scores; the existence of a Katsuragi–Ryūen alliance is separately observed in Ibuki's earlier viewpoint.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          256
+          256,
+          257
         ],
         "chapter": 7,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",

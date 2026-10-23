@@ -1,0 +1,85 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.komiya",
+  "display_name": "Komiya (given name unknown)",
+  "modeling_tier": "MINIMAL_ENTITY",
+  "source_coverage": [
+    "ln.y1.v02.sevenseas.en.operator-provided"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "Class C basketball-club student and Sudō complainant",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "conflict": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.014",
+        "y1v2.ev.059",
+        "y1v2.ev.062",
+        "y1v2.ev.070",
+        "y1v2.ev.074",
+        "y1v2.ev.082"
+      ]
+    },
+    "combat": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.014"
+      ]
+    },
+    "institution": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.059",
+        "y1v2.ev.082"
+      ]
+    },
+    "academic_reasoning": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.062"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.070",
+        "y1v2.ev.072",
+        "y1v2.ev.074"
+      ]
+    },
+    "persuasion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.071",
+        "y1v2.ev.072"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.071"
+      ]
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": false,
+  "semantic_audit_notes": "Minimum entity only; unknown identity fields remain unknown, assertions by other actors do not establish behavior.",
+  "uncertainties": {
+    "identity_hypothesis_not_confirmed": true,
+    "future_fate_unknown": true
+  },
+  "generation_policy": "One global actor file, never a per-volume duplicate",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

@@ -1,0 +1,2296 @@
+{
+  "schema_version": "consolidated-source-evidence-v1",
+  "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+  "records": [
+    {
+      "id": "y1v45.ev.001",
+      "domain": "reflection",
+      "summary": "Kiyotaka frames summer episodes as separate vignettes about students between childhood and adulthood; this is authorially framed narrator reflection, not school policy.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          10
+        ],
+        "chapter": 1,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_LATE_SUMMER_NARRATOR_FRAME",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 1,
+        "pdf_pages": [
+          10
+        ],
+        "chapter_order": 1
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "reflection"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.002",
+      "domain": "economy",
+      "summary": "Kiyotaka sends Sudō 100,000 private points, later explained by the family-parcel arrangement in this volume's third chapter.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          11
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          11
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "resources"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.003",
+      "domain": "sports",
+      "summary": "Sudō reports being the sole first-year fielded in a basketball tournament, scoring but losing the match; his claim is told to Kiyotaka.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          12,
+          13
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          12,
+          13
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "discipline"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.004",
+      "domain": "social",
+      "summary": "Sudō asks Kiyotaka to bring Suzune to a public fortune-telling event as intermediary; Kiyotaka calls and Suzune declines due to expected crowds.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          13,
+          17
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          13,
+          17
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.005",
+      "domain": "reasoning",
+      "summary": "Suzune distinguishes supernatural prediction from evidence-based cold reading, explaining her guarded curiosity about fortune-telling.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          15,
+          16
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          15,
+          16
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "reasoning",
+        "psychology"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.006",
+      "domain": "social",
+      "summary": "A Keyaki Mall fortune-teller allows clients only in pairs; both Kiyotaka and Ibuki independently arrive alone and are initially refused.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          19,
+          20
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          19,
+          20
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "social",
+        "institution"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.007",
+      "domain": "social",
+      "summary": "Ibuki says she dislikes Ryūen and associates with him mainly because she failed to identify Class D's final island-exam leader. This is her own account, not a confirmed full contract.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          23,
+          24
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          23,
+          24
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.mio-ibuki",
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "motivation"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.008",
+      "domain": "emotion",
+      "summary": "Ibuki admits that authentic everyday interactions make her anxious, unlike playing an assigned covert role during her island infiltration.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          24,
+          26
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          24,
+          26
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.mio-ibuki",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "social"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.009",
+      "domain": "reasoning",
+      "summary": "Kiyotaka suggests Ibuki's anxiety is partly self-consciousness absent during role-play, while his explanatory psychology remains his interpretation.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          25,
+          26
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          25,
+          26
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "reasoning",
+        "social"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.010",
+      "domain": "social",
+      "summary": "Despite strained relations between classes, Kiyotaka and Ibuki agree to pair for fortune-telling without claiming a romance or political alliance.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          29,
+          32
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          29,
+          32
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "negotiation"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.011",
+      "domain": "belief",
+      "summary": "An entertainer proclaims Kiyotaka has a rare unfavorable fortune while Ibuki reacts; predictions are performance claims, not supernatural facts or proof of his childhood.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          34,
+          36
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          34,
+          36
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "belief",
+        "epistemics"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.012",
+      "domain": "risk_management",
+      "summary": "After fortune-telling, Kiyotaka and Ibuki are trapped in a stalled elevator; official contact attempts are hindered and they are unable to leave immediately.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          38,
+          42
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          38,
+          42
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "risk_management",
+        "resources"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.013",
+      "domain": "risk_management",
+      "summary": "Kiyotaka tries to keep Ibuki from escalating dangerous physical attempts and directs attention to possible outside assistance under constrained communications.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          43,
+          47
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          43,
+          47
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "risk_management",
+        "reasoning"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.014",
+      "domain": "social",
+      "summary": "Katsuragi responds to the stranded pair and helps bring the elevator incident to a safe end; Kiyotaka and Ibuki recognize his assistance.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          47,
+          48
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          47,
+          48
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "risk_management"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.015",
+      "domain": "social",
+      "summary": "Kiyotaka, Ike and Yamauchi plan a pooled birthday present for classmate Inogashira instead of purchasing separate costly gifts.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          49,
+          50
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          49,
+          50
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kokoro-inogashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "social",
+        "economy"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.016",
+      "domain": "conflict",
+      "summary": "Ike and Shinohara exchange sharp words in a shop after teasing about social interest; the scene does not confirm romance.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          54,
+          55
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          54,
+          55
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.shinohara",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "social"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.017",
+      "domain": "observation",
+      "summary": "Katsuragi purchases and repeatedly considers gift options while classmates mistakenly infer he is buying a romantic present.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          56,
+          58
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          56,
+          58
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "social"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.018",
+      "domain": "social",
+      "summary": "Kushida knows Suzune's February 15 birthday and mentions it to classmates; this does not make her privy to every personal motive.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          63
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          63
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "identity"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.019",
+      "domain": "politics",
+      "summary": "Kiyotaka meets student-council president Manabu and secretary Tachibana while trying to observe Katsuragi's route.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          67,
+          70
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          67,
+          70
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.tachibana",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "politics",
+        "observation"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.020",
+      "domain": "reasoning",
+      "summary": "Manabu says he has learned that Class D's island leader changed to Kiyotaka and infers Kiyotaka's strategic responsibility; Kiyotaka deflects attribution to Suzune.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          70,
+          71
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          70,
+          71
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "reasoning",
+        "epistemics"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.021",
+      "domain": "leadership",
+      "summary": "Manabu offers Kiyotaka a student-council role despite first-year standing; Tachibana protests and Kiyotaka declines.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          71,
+          73
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          71,
+          73
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.tachibana",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "leadership",
+        "politics"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.022",
+      "domain": "family",
+      "summary": "Katsuragi explains that the ban on outside contact harms students wanting to communicate with family and acknowledges carefully considering a gift's recipient.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          76,
+          78
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          76,
+          78
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "family",
+        "social"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.023",
+      "domain": "social",
+      "summary": "Ike and other Class D classmates attempt to celebrate Katsuragi's birthday, and he is guarded about the surprise while headed to council business.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          88,
+          90
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          88,
+          90
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.kikyo-kushida",
+        "actor.kanji-ike",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "ethics"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.024",
+      "domain": "governance",
+      "summary": "Manabu states that school rules prohibit sending parcels or even one-way communication to outsiders except compelling circumstances, and private points do not override express prohibitions.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          91,
+          93
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          91,
+          93
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "governance",
+        "economy"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.025",
+      "domain": "family",
+      "summary": "Katsuragi tells the council that he and his twin sister are orphans and that he wishes to send her birthday chocolates, explaining previously ambiguous gift purchases.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          92,
+          93
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          92,
+          93
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.manabu-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "family",
+        "motivation"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.026",
+      "domain": "governance",
+      "summary": "After rejecting Katsuragi formally, Manabu privately acknowledges that some undiscovered violations escape enforcement and says he will not investigate Kiyotaka's future actions.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          93,
+          94
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          93,
+          94
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.katsuragi"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "governance",
+        "ethics"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.027",
+      "domain": "economy",
+      "summary": "Katsuragi asks Sudō to carry an unauthorized family package beyond the campus and offers him 100,000 private points in a risk-bearing agreement.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          97,
+          101
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          97,
+          101
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "negotiation"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.028",
+      "domain": "family",
+      "summary": "Katsuragi says his twin sister is chronically unwell and cared for by relatives after their parents died; Sudō sympathizes, but this family history is Katsuragi's testimony.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          100,
+          103
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          100,
+          103
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "family",
+        "motivation"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.029",
+      "domain": "economy",
+      "summary": "Katsuragi arranges payment through Kiyotaka rather than directly and separately offers Kiyotaka 10,000 points for assisting, to conceal the source of the transaction.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          101,
+          103
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          101,
+          103
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "strategy"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.030",
+      "domain": "economy",
+      "summary": "Kiyotaka later reports that Sudō sent the family package and provided video proof without detection; receipt by the sister remains unknown.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          104
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          104
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "governance"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.031",
+      "domain": "social",
+      "summary": "Ike and Yamauchi give Katsuragi a birthday cake that has melted; Katsuragi is startled and suspects harassment rather than appreciating their intended kindness.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          105,
+          106
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          105,
+          106
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.032",
+      "domain": "infrastructure",
+      "summary": "A temporary school dormitory water outage triggers announced restrictions and free water distribution; the emergency supply later proves insufficient.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          108
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_WATER_OUTAGE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          108
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "infrastructure",
+        "institution"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.033",
+      "domain": "social",
+      "summary": "Suzune repeatedly uses an oblique turtle analogy to request help, eventually admitting her arm is stuck inside a water bottle.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          112,
+          116
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_WATER_OUTAGE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          112,
+          116
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.034",
+      "domain": "risk_management",
+      "summary": "During the water shortage Kiyotaka tries multiple ways to obtain water to free Suzune's arm; she rejects certain helpers out of embarrassment or distrust.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          118,
+          120
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_WATER_OUTAGE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          118,
+          120
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "risk_management",
+        "social"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.035",
+      "domain": "exam",
+      "summary": "Suzune suspects the Dragon-group VIP Kushida may have helped reveal her identity, but admits she has no evidence; her suspicion is not a verified betrayal.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          120,
+          122
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_AUG_LATE_SUMMER_WATER_OUTAGE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          120,
+          122
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "belief"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.036",
+      "domain": "social",
+      "summary": "Horikita avoids exposing her embarrassing trapped-hand situation; after Sakura supplies water the bottle is removed, and she asks Kiyotaka to keep it private.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          125,
+          131
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_WATER_OUTAGE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          125,
+          131
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "risk_management"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.037",
+      "domain": "social",
+      "summary": "Yamauchi asks Kiyotaka to deliver his love letter to Sakura and initially offers private points as inducement, which Kiyotaka advises against.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          132,
+          135
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_CONFESSION",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          132,
+          135
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.haruki-yamauchi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.038",
+      "domain": "social",
+      "summary": "Sakura initially mistakes the indirect love-letter delivery as a confession from Kiyotaka; he clarifies that another classmate is its sender.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          136,
+          142
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_CONFESSION",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          136,
+          142
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.haruki-yamauchi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "communication"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.039",
+      "domain": "emotion",
+      "summary": "Sakura privately contacts Kiyotaka about her anxiety before answering Yamauchi and requests support rather than a predetermined answer.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          144,
+          147
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_AUG_LATE_SUMMER_CONFESSION",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          144,
+          147
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "social"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.040",
+      "domain": "social",
+      "summary": "Sakura communicates a respectful refusal of Yamauchi's confession with Kiyotaka nearby for support; Yamauchi hears and accepts the decision.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          149,
+          151
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_CONFESSION",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          149,
+          151
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.haruki-yamauchi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.041",
+      "domain": "emotion",
+      "summary": "Yamauchi expresses disappointment, thanks Kiyotaka and chooses to move on after Sakura's refusal, without demonstrating a permanent change.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          151,
+          152
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LATE_SUMMER_CONFESSION",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          151,
+          152
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.haruki-yamauchi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "social"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.042",
+      "domain": "economy",
+      "summary": "Karuizawa says she expects the Rabbit VIP reward in September and worries about spending too freely; Kiyotaka advises retaining some private points.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          153,
+          156
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_AUG_LAST_DAY_POOL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          153,
+          156
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "privacy"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.043",
+      "domain": "trauma",
+      "summary": "Karuizawa believes the school does not know the bullying behind her former absences and low grades and describes failed attempts to seek help; her account is personal testimony.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          157,
+          159
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_AUG_LAST_DAY_POOL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          157,
+          159
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "trauma",
+        "identity"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.044",
+      "domain": "strategy",
+      "summary": "Kiyotaka requires Karuizawa to attend the pool as part of an undisclosed operation, invoking their unequal relationship; she reluctantly agrees.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          160,
+          162
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LAST_DAY_POOL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          160,
+          162
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "coercion"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE"
+    },
+    {
+      "id": "y1v45.ev.045",
+      "domain": "social",
+      "summary": "Kiyotaka invokes the private water-bottle favor to persuade Suzune to attend the group pool outing despite her initial refusal.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          163,
+          165
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LAST_DAY_POOL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          163,
+          165
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "negotiation"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.046",
+      "domain": "observation",
+      "summary": "At the pool the boys' unusual behavior raises suspicion; Kiyotaka receives covert messages from Karuizawa, whose role is not yet disclosed to the others.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          169,
+          171
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_AUG_LAST_DAY_POOL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          169,
+          171
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "privacy"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.047",
+      "domain": "sports",
+      "summary": "Students observe vice president Nagumo lead a decisive recreational volleyball performance, attracting a strong peer following.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          177,
+          182
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LAST_DAY_POOL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          177,
+          182
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.nagumo",
+        "actor.honami-ichinose",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "sports",
+        "politics"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.048",
+      "domain": "politics",
+      "summary": "Ichinose says she joined the student council after an initial rejection and attributes a subsequent approval to Nagumo's role; details of decisions are her account.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          180,
+          182
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_AUG_LAST_DAY_POOL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          180,
+          182
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.nagumo",
+        "actor.manabu-horikita",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "politics",
+        "leadership"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.049",
+      "domain": "sports",
+      "summary": "In a Class D versus B pool-volleyball contest, Sudō supplies most of D's competitive strength and D wins two consecutive sets.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          183,
+          189
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LAST_DAY_POOL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          183,
+          189
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.honami-ichinose",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "strategy"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.050",
+      "domain": "sports",
+      "summary": "Kiyotaka deliberately plays clumsily when noticing Ichinose scrutinize him; Suzune later suspects he is concealing his physical ability.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          188,
+          190
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_AUG_LAST_DAY_POOL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          188,
+          190
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "deception"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.051",
+      "domain": "strategy",
+      "summary": "Kiyotaka discusses potential expulsions as leverage, then breaks and discards a physical object rather than using it; an actual expulsion is not shown.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          193,
+          196
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LAST_DAY_POOL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          193,
+          196
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "coercion"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE"
+    },
+    {
+      "id": "y1v45.ev.052",
+      "domain": "trauma",
+      "summary": "Karuizawa avoids exposing her scar and initially refuses to swim without a cover; Kiyotaka commands and pushes her into the pool, after which she pulls him in. His coercion is not consent.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          197,
+          199
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LAST_DAY_POOL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          197,
+          199
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "trauma",
+        "coercion"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE"
+    },
+    {
+      "id": "y1v45.ev.053",
+      "domain": "privacy",
+      "summary": "Ike organizes an invasive plan to secretly film girls changing, with equipment assistance attributed to Sotomura; Kiyotaka participates superficially while privately seeking to contain harm.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          205,
+          212
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LAST_DAY_POOL_RETROSPECTIVE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          205,
+          212
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji",
+        "actor.sotomura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "privacy",
+        "misconduct"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE"
+    },
+    {
+      "id": "y1v45.ev.054",
+      "domain": "privacy",
+      "summary": "The boys initiate their unauthorized hidden-camera plan in the pool changing area; their subsequent failure does not erase the privacy violation attempted.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          213,
+          214
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LAST_DAY_POOL_RETROSPECTIVE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          213,
+          214
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "privacy",
+        "misconduct"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE"
+    },
+    {
+      "id": "y1v45.ev.055",
+      "domain": "privacy",
+      "summary": "A delayed female-viewpoint sequence reveals Karuizawa covertly neutralized the recording at Kiyotaka's prior request while keeping her action hidden from the perpetrators.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          220,
+          221
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_AUG_LAST_DAY_POOL_RETROSPECTIVE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          220,
+          221
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "privacy",
+        "strategy"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.056",
+      "domain": "privacy",
+      "summary": "After the pool visit, the three would-be voyeurs discover no image files in the returned storage; the narration confirms Karuizawa had secured the real material earlier.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          222,
+          223
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_AUG_LAST_DAY_POOL_RETROSPECTIVE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          222,
+          223
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "privacy",
+        "consequence"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    },
+    {
+      "id": "y1v45.ev.057",
+      "domain": "social",
+      "summary": "In the girls' locker-area supplementary perspective, Ichinose approaches shy Sakura gently while Karuizawa coordinates with nearby friends for a separate concealed purpose.",
+      "source": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          219,
+          221
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English translation, operator-provided PDF",
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_AUG_LAST_DAY_POOL_RETROSPECTIVE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          219,
+          221
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.airi-sakura",
+        "actor.kikyo-kushida",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "observation"
+      ],
+      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
+      "portrayal_gate": "EPISODE_BOUNDED"
+    }
+  ]
+}

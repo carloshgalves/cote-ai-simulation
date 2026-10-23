@@ -19,15 +19,15 @@ register=J(B/"audits/source-review-register-y1-v04.json")
 exam=J(B/"exams/y1-zodiac-cruise.json")
 cases={k:J(ROOT/path) for k,path in index["behavioral_case_paths"].items() if k.startswith("y1v4.case.")}
 sids={e["id"] for e in E}
-assert len(sids)==len(E)==130
-assert len(cases)==43
+assert len(sids)==len(E)==132
+assert len(cases)==44
 assert source["pdf_pages"]==248 and source["pdf_sha256"]=="1d587b01242cd576fa2b0627222329d1bf1c23b12d206ad63f7a590f79fe9cc8"
 assert source["original_pdf_committed"] is False and source["claims_all_verified"] is False
-assert coverage["records"]==130 and coverage["cases"]==43
+assert coverage["records"]==132 and coverage["cases"]==44
 assert set(x["source"]["chapter"] for x in E)==set(range(1,6))
-assert coverage["chapter_evidence_counts"]=={"1":2,"2":37,"3":27,"4":41,"5":23}
+assert coverage["chapter_evidence_counts"]=={"1":2,"2":37,"3":29,"4":41,"5":23}
 assert evidence["source_id"]==source["source_id"]==register["source_id"]==exam["source_coverage"][0]
-assert len(register["evidence"])==130 and len(register["behavioral_cases"])==43
+assert len(register["evidence"])==132 and len(register["behavioral_cases"])==44
 assert {v["record_id"] for v in register["evidence"]}==sids
 assert {v["case_id"] for v in register["behavioral_cases"]}==set(cases)
 assert register["release_gate"]["operator_approval"]=="PENDING"
@@ -38,8 +38,8 @@ assert all(len(x["review_note"])>=65 for x in register["evidence"]+register["beh
 assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_SOURCE_REVIEW_PASS" for x in register["evidence"])
 assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_CASE_REVIEW_PASS" for x in register["behavioral_cases"])
 assert register["release_gate"]["assistant_individual_semantic_review"]=="COMPLETE"
-assert register["review_progress"]["assistant_evidence_reviewed"]==130
-assert register["review_progress"]["assistant_cases_reviewed"]==43
+assert register["review_progress"]["assistant_evidence_reviewed"]==132
+assert register["review_progress"]["assistant_cases_reviewed"]==44
 assert source["record_audit"]=="ASSISTANT_INDIVIDUAL_SEMANTIC_REVIEW_COMPLETE_ADVERSARIAL_PENDING"
 
 assert register["global_promotion"].startswith("BLOCKED")
@@ -103,9 +103,13 @@ assert "NOT_" in exam["individual_known_secret_outcomes"][0]["public_group_knowl
 assert "exam.y1.zodiac-cruise-1" in J(B/"institutions/anhs.json")["domains"]["exams"]["reference_exam_ids"]
 assert iindex["institutions"]["org.anhs"]["source_volume_count"]>=5
 assert len(index["character_packs"])>=79
-assert len(index["behavioral_case_paths"])>=180
+assert len(index["behavioral_case_paths"])>=181
 assert J(B/"institutions/anhs.json")["zodiac_special_exam_y1_v04"]["normative_scope"]=="REFERENCE_ONLY"
 assert any(x["source_mode"]=="DOCUMENT_IMAGE" and x["source"]["pdf_pages"]==[11] for x in E)
 assert any("sexually harasses" in x["summary"] for x in E)
 assert any("not an endorsed" in x["summary"] for x in E)
-print("PASS Y1V4 individual semantic review: 130 evidence, 43 cases, Zodiac reference, release locked")
+assert "teacher" in exam["group_assignment_discretion"]["status"].lower() or exam["group_assignment_discretion"]["status"]=="TEACHER_REPORTED_SUPPORTED_BY_MASHIMA"
+assert next(e for e in E if e["id"]=="y1v4.ev.131")["source"]["pdf_pages"]==[110,111]
+assert next(e for e in E if e["id"]=="y1v4.ev.132")["source"]["pdf_pages"]==[122,123]
+assert "y1v4.case.kiyotaka-ayanokoji.seed-false-rika-tip" in cases
+print("PASS Y1V4 individual semantic review: 132 evidence, 44 cases, Zodiac reference, release locked")

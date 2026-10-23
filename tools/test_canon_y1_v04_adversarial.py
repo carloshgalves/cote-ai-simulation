@@ -26,10 +26,10 @@ def findings(s):
     e=s["evidence"]; ix=s["index"]; p=s["page"]; reg=s["register"]; exam=s["exam"]; cases=s["cases"]; src=s["source"]
     def fail(condition,msg):
         if not condition: bad.append(msg)
-    fail(len(e)==130 and len(cases)==43,"count")
+    fail(len(e)==132 and len(cases)==44,"count")
     fail(src["pdf_sha256"]=="1d587b01242cd576fa2b0627222329d1bf1c23b12d206ad63f7a590f79fe9cc8","source hash")
     fail(src["original_pdf_committed"] is False and src["claims_all_verified"] is False,"source certification")
-    fail(len(reg["evidence"])==130 and len(reg["behavioral_cases"])==43,"register count")
+    fail(len(reg["evidence"])==132 and len(reg["behavioral_cases"])==44,"register count")
     fail(reg["release_gate"]["operator_approval"]=="PENDING","human authorization")
     fail(reg["release_gate"]["external_independent_review"] in {"NOT_PERFORMED","ADVERSARIAL_METHOD_PENDING","ADVERSARIAL_SAME_ASSISTANT_COMPLETE_EXTERNAL_REVIEWER_PENDING"},"external reviewer separation")
     fail(reg["release_gate"]["engine_memory_admission"] is False and reg["release_gate"]["exam_executable"] is False,"runtime gates")
@@ -85,6 +85,10 @@ def findings(s):
     fail(ev(61).get("source_mode")=="INNER_MONOLOGUE","alliance hypothesis")
     fail(ev(125).get("source_mode")=="REPORTED_BY_CHARACTER","Ryūen knowledge claim")
     fail(ev(122).get("source_mode")=="REPORTED_BY_CHARACTER","Morishige claim")
+    fail(ev(131).get("source_mode")=="INNER_MONOLOGUE" and "false" in ev(131).get("summary","").lower(),"false tip not witness fact")
+    fail(ev(132).get("source_mode")=="REPORTED_BY_CHARACTER" and "Hoshinomiya" in ev(132).get("summary",""),"group teacher discretion attribution")
+    fail(exam["group_assignment_discretion"]["status"]=="TEACHER_REPORTED_SUPPORTED_BY_MASHIMA","discretion not allocation formula")
+    fail("y1v4.case.kiyotaka-ayanokoji.seed-false-rika-tip" in cases,"missed deliberate false testimony case")
     fail("before she reveals" in cases["y1v4.case.honami-ichinose.stage-open-email-visibility"]["observed_actions"],"Ichinose never shows her message")
     fail("consent" in cases["y1v4.case.kei-karuizawa.accept-protection-under-duress"]["epistemic_limits"].lower(),"coercion not consent")
     fail("NOT_EXECUTABLE" in exam["authority"],"engine allowed")
@@ -122,9 +126,11 @@ mutations=[
  ("erase assault nonconsent",lambda s:s["cases"]["y1v4.case.kei-karuizawa.accept-protection-under-duress"].update(epistemic_limits="It was a free agreement.")),
  ("break case page provenance",lambda s:s["cases"]["y1v4.case.kiyotaka-ayanokoji.orchestrate-double-phone-swap"]["source"].update(pdf_pages=[220,245])),
  ("promote executable model",lambda s:s["exam"].update(authority="SCHOOL_EXECUTABLE_ENGINE")),
+ ("falsely certify Kiyotaka witness",lambda s:s["evidence"]["y1v4.ev.131"].update(source_mode="OBSERVED")),
+ ("erase instructor group discretion",lambda s:s["exam"]["group_assignment_discretion"].update(status="VIP_FORMULA_ONLY")),
 ]
 for name,change in mutations:
     mutant=copy.deepcopy(STATE)
     change(mutant)
     assert findings(mutant),("Mutation escaped detection",name)
-print(f"PASS Y1V4 adversarial: 173 individually reviewed records and {len(mutations)} negative mutations rejected, no human/external signoff")
+print(f"PASS Y1V4 adversarial: 176 individually reviewed records and {len(mutations)} negative mutations rejected, no human/external signoff")

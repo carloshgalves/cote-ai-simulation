@@ -59,3 +59,11 @@ The 262-page operator-provided Seven Seas 2019 source is **not committed**; `sou
 ## Year 1 Volume 3 — reference integration approval (2026-10-23)
 
 The operator expressly authorized merging the 152 assistant-reviewed items to the **canonical reference corpus** while informed that there had been no independent external reviewer. This is an explicit waiver for reference integration, not a fabricated independent review or individual human source certification: all `verified: false` flags and runtime knowledge/execution restrictions remain intact.
+
+## Year 1 Volume 4 — source extraction in Draft PR
+
+The user-supplied **248-page** PDF of Classroom of the Elite Y1 Volume 4 has a recorded source SHA-256 but is not committed. The initial five-chapter reading produced **130 individually sourced evidence candidates** and **43 primary-actor behavioral episodes**, consolidated into global character and school packs with actor/topic/page direct indexes. Five new contextual characters are modeled without duplicating previously seen characters. **No automatic knowledge promotion** is permitted.
+
+The twelve-group Zodiac/VIP cruise examination is documented under `exams/y1-zodiac-cruise.json` as **canonical reference, NOT an executable resolver**. The rule reference distinguishes four outcomes, public final deltas, one confidential VIP per group, briefings, timed discussions, prohibitions, false phone identities and late revelations. The original text's third-versus-fourth-day expression is a recorded unresolved source ambiguity.
+
+**The 173 individual assistant semantic reviews remain pending**, as do independent re-review and operator approval. The ledger is `audits/source-review-register-y1-v04.json`. Every item remains `verified: false`. Bullying, sexual harassment and psychological coercion are descriptive incidents, not safety-approved tactics or general simulator policies. Do not merge before audit and explicit release.

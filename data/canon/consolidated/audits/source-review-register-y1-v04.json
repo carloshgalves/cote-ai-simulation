@@ -1,0 +1,4176 @@
+{
+  "schema_version": "individual-source-review-v2",
+  "source_id": "ln.y1.v04.sevenseas.en.operator-provided",
+  "created_at": "2026-10-23",
+  "source_pdf_sha256": "1d587b01242cd576fa2b0627222329d1bf1c23b12d206ad63f7a590f79fe9cc8",
+  "source_page_count": 248,
+  "evidence_count": 130,
+  "behavioral_case_count": 43,
+  "evidence": [
+    {
+      "record_id": "y1v4.ev.001",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 1,
+      "pdf_pages": [
+        10
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Karuizawa privately describes her public persona as self-protection and recalls the distress associated with a bodily scar; the prologue does not disclose its exact timing to other characters.",
+      "actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.002",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 1,
+      "pdf_pages": [
+        11
+      ],
+      "source_mode": "DOCUMENT_IMAGE",
+      "primary_claim": "The illustrated school dossier assesses Ichinose's academics, judgment and cooperation and offers an interviewer interpretation; these profile labels are not independently demonstrated feats.",
+      "actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.003",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        12
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Three days after the island exam Kiyotaka recalls the teacher's threatened expulsion and uncertain outside intervention, while considering how to avoid dependence on her.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.004",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        14
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata invites Kiyotaka to lunch with Karuizawa's friends, but Kiyotaka refuses because of his discomfort with that group.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.005",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        15
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata cancels a prior lunch date with Karuizawa to eat privately with Kiyotaka, while Kiyotaka questions why.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.006",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        17
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata privately asks Kiyotaka to mediate cooperation with Suzune because he fears speaking to her directly.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.007",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        18
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka argues that indirect management of Suzune could backfire; Hirata accepts the criticism and considers a more direct approach.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.008",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        20
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Karuizawa unexpectedly joins Hirata's private lunch with friends and crowds Kiyotaka out; he withdraws quietly.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.009",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        21
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kōenji repeatedly ignores a bellhop's warning to dry off after the pool and dismisses the disturbance to fellow passengers.",
+      "actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.010",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        22
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Kōenji gives a crew member his autograph and predicts its future value; the claim is his self-promotion, not a verified market price.",
+      "actor_ids": [
+        "actor.rokusuke-koenji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.011",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        23
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka redirects Kōenji's attention to the bellhop's unfinished complaint to escape an unwelcome encounter.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.rokusuke-koenji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.012",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        24
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Kiyotaka describes the cruise ship's deck layout and freely accessible student facilities; inferred restrictions on overnight access are conjectural.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.013",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        26
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Sakura privately seeks help with her cabin roommates, saying she wants friends yet also needs time alone.",
+      "actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.014",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        27
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Sakura identifies Shinohara, Ichihashi and Maezono as cabin roommates; Kiyotaka's judgments about those girls' personalities remain his impressions.",
+      "actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.015",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        28
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sakura withdraws abruptly when Kushida approaches, despite Kushida apologizing; the event does not prove Kushida intended harm.",
+      "actor_ids": [
+        "actor.airi-sakura",
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.016",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        29
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "A synchronized school-wide urgent alert announces another surprise special exam and privately assigned meeting times and rooms.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.017",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        30
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka compares his own 18:00 room summons with Kushida and Suzune's 20:40 summons and speculates about why the school separates students.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.018",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        32
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka arrives at a small private briefing with Mashima, Yukimura and Sotomura, initially finding one student seat vacant.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mashima",
+        "actor.yukimura",
+        "actor.sotomura"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.019",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        33
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Karuizawa arrives as the fourth student in the same Class D briefing and challenges the necessity of the gathering.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.mashima",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.020",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        34
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Mashima states all first years are divided into twelve zodiac-named mixed-class groups to assess reasoning.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.021",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        36
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Mashima explains groups cannot be reassigned, each includes representatives from other classes, and the students must cooperate under those imposed assignments.",
+      "actor_ids": [
+        "actor.mashima",
+        "actor.kei-karuizawa",
+        "actor.yukimura"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.022",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        38
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Mashima assigns the four Class D briefed students to Rabbit and supplies a fourteen-name cross-class roster that must be returned.",
+      "actor_ids": [
+        "actor.mashima",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.023",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        39
+      ],
+      "source_mode": "DOCUMENT_IMAGE",
+      "primary_claim": "The Rabbit list assigns three from A, three from B, four from C and four from D, including Machida, Ichinose, Ibuki and Karuizawa.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.mio-ibuki",
+        "actor.honami-ichinose",
+        "actor.machida",
+        "actor.hamaguchi"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.024",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        40
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "The school says each group has exactly one VIP, notified privately at 08:00, and requires closed group discussion sessions before answers.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.025",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        40
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "The printed calendar says the test ends at 21:00 on the fourth day while an explanatory example calls it the third day; retain the literal source ambiguity.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.026",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        41
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "For final-window Outcome 1, a valid correct submission between 21:30 and 22:00 rewards group members and doubles the VIP's private-point reward.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.027",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        41
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Outcome 2 awards the undiscovered VIP 500,000 private points when no valid final-window answer identifies them; it does not automatically reward all group members.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.028",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        42
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Mashima's Outcome 1 example specifies 500,000 private points for each non-VIP member and one million for the VIP.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.029",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        44
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Outcome 3 allows an early correct answer by a non-VIP from another class, earning their class 50 class points and themselves 500,000 private points while penalizing the VIP's class 50.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.030",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        45
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Outcome 4 gives the VIP class 50 class points and VIP 500,000 private points after an early wrong non-classmate guess, costing the submitter's class 50.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.031",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        45
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "An early answer from a classmate of the VIP is disregarded, and a VIP may not submit; the published school results keep VIP and submitter identities anonymous.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.032",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        46
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka compares the four result classes and recognizes that early betrayal can outweigh mixed-class cooperation, without yet knowing any VIP.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.033",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        48
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "The exam prohibits stealing phones, coerced identity disclosure, submitting on another person's device without consent and discussing across class lines outside permitted settings; severe breaches risk expulsion.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.034",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        49
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Mandatory group sessions meet at 13:00 and 20:00; students must remain during the first hour, while official school emails cannot be forged or edited.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.035",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        50
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Yukimura advocates discussing VIP information only in a secure place and tries to unify the Class D Rabbit contingent.",
+      "actor_ids": [
+        "actor.yukimura",
+        "actor.kei-karuizawa",
+        "actor.sotomura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.036",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        52
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Kiyotaka receives a later shared-room message and observes how Karuizawa and other students respond to the group arrangements.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.037",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        55
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka observes Katsuragi and Ryūen at the ship gathering and contrasts their public leadership styles; conclusions about their full plans are premature.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.038",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        58
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ryūen enters with several Class C followers and directly provokes Katsuragi, whose guarded composure contrasts with the display.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.katsuragi"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.039",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        60
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kushida receives a different group assignment and communicates with Kiyotaka during the early briefings without gaining his Rabbit VIP knowledge.",
+      "actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.040",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        63
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "After morning VIP notifications, Kiyotaka meets Suzune and compares the composition of their zodiac groups.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.041",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        64
+      ],
+      "source_mode": "DOCUMENT_IMAGE",
+      "primary_claim": "Suzune's handwritten Dragon roster groups leading class representatives, including Katsuragi, Kanzaki, Ryūen, Hirata and Kushida.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen",
+        "actor.katsuragi",
+        "actor.ryuji-kanzaki",
+        "actor.kikyo-kushida",
+        "actor.yosuke-hirata"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.042",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        65
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune speculates that group assignment reflects academic scores; Kiyotaka challenges the theory using members whose observed grades do not fit.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.043",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        66
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Both Suzune and Kiyotaka read notices indicating they were not selected as their own groups' VIPs; neither learns the other groups' secret VIP lists.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.044",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        69
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ryūen approaches the pair after the island exam and probes who replaced Suzune as leader; his suspicion is not a demonstrated discovery.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.045",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        72
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Ryūen asserts Suzune had a hidden strategist on the island, without correctly identifying that person's role to her at this point.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.046",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        76
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka recognizes Ryūen is seeking the hidden island leader and decides not to supply evidence about his own involvement.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.047",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        79
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sotomura makes playful comments about relationships and dialect as the Rabbit group prepares to convene, while Yukimura finds the digression frustrating.",
+      "actor_ids": [
+        "actor.sotomura",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yukimura"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.048",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        81
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ichinose initiates Rabbit introductions, opening discussion even though rival classes begin wary of one another.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.machida",
+        "actor.hamaguchi"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.049",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        82
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "With no volunteer emerging, Ichinose assumes temporary facilitation and invites each member's questions in Rabbit.",
+      "actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.050",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        83
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka publicly endorses cooperative discussion to probe reactions while privately considering how participants might hide VIP status.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose",
+        "actor.sotomura"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.051",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        85
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Machida advocates a silent, no-search policy in Rabbit, arguing the group can avoid traitor losses by not identifying the VIP.",
+      "actor_ids": [
+        "actor.machida",
+        "actor.honami-ichinose",
+        "actor.hamaguchi"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.052",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        86
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Machida presses members to acknowledge the class-point downside of betrayal and portrays passivity as the safer common interest.",
+      "actor_ids": [
+        "actor.machida",
+        "actor.yukimura",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.053",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        87
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Machida cites an assumption that VIPs were fairly distributed between classes; the school has not yet disclosed a deterministic allocation formula.",
+      "actor_ids": [
+        "actor.machida",
+        "actor.hamaguchi",
+        "actor.honami-ichinose"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.054",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        90
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ichinose challenges complete silence because class incentives and uncertainty over VIP identity are not neutral across participants.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.machida",
+        "actor.hamaguchi"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.055",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        93
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Manabe suspects Karuizawa of earlier mistreatment of a friend and attempts to photograph her despite protest.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.manabe-shiho",
+        "actor.mio-ibuki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.056",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        94
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Karuizawa's public bravado falters under Manabe's hostile accusation, while Ibuki contemptuously distances herself from Manabe.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.manabe-shiho",
+        "actor.mio-ibuki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.057",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        95
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Machida intervenes against unwanted photography, citing lack of consent, and Manabe temporarily withdraws.",
+      "actor_ids": [
+        "actor.machida",
+        "actor.kei-karuizawa",
+        "actor.manabe-shiho"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.058",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        97
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Yukimura and Sotomura disagree about how to protect a possible Class D VIP after their first Rabbit meeting.",
+      "actor_ids": [
+        "actor.yukimura",
+        "actor.sotomura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.059",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        100
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka encounters Sakura speaking quietly to herself and considers why she seems anxious, without obtaining a full explanation.",
+      "actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.060",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        103
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ryūen physically grabs and confronts Kiyotaka to press for answers, though Kiyotaka conceals his role in the island result.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.061",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        106
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "The emerging discussion of cooperation between B and D is contrasted with A's self-preservation and C's possible rivals; a permanent alliance is not shown.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ryuji-kanzaki",
+        "actor.kakeru-ryuen"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.062",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        109
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Kiyotaka notices that Karuizawa is unusually withdrawn in Rabbit when deprived of the usual authority she exercises in Class D.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.063",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        112
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "At night Hirata remains awake and discusses how to reconcile Rabbit group anxieties and previous Class D tension.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.064",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        115
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kōenji reveals that his Monkey-group test has already ended, startling his roommates; its cause and strategic merit cannot be inferred from the bare announcement.",
+      "actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.yukimura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.065",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        119
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kushida speaks privately with Kiyotaka late on the ship; their friendliness is observed, but hidden long-term motives are not established.",
+      "actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.066",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        121
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kushida impulsively hugs Kiyotaka and leaves embarrassed; neither a romantic commitment nor knowledge of future events follows.",
+      "actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.067",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        125
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune criticizes Kiyotaka after learning Kōenji brought the Monkey-group exam to an early end; consequences remain unclear until official results.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.rokusuke-koenji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.068",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        128
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ryūen approaches Suzune and Kiyotaka and tests their reaction to new claims about hidden exam decisions.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.069",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        130
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune warns that early group termination might conceal a correct deduction or a costly mistake; she does not know the outcome yet.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.070",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        134
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Karuizawa and Kiyotaka arrive unusually early at a Rabbit session; she behaves more quietly than her social image would suggest.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.071",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        137
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ichinose arrives with Class B allies while Rabbit's Class A contingent continues to resist open VIP discovery.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kei-karuizawa",
+        "actor.machida"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.072",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        139
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ichinose invites Kiyotaka to approach the Dragon group after Rabbit session, seeking additional perspectives on the exam.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.073",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        141
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Katsuragi rebuffs Ichinose's attempts to revise his no-search policy and leaves the Dragon discussion.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.honami-ichinose"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.074",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        144
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kushida invites Ichinose and Kiyotaka into Dragon's extended discussion among Suzune, Kanzaki and Ryūen after the mandatory period.",
+      "actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.honami-ichinose",
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita",
+        "actor.ryuji-kanzaki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.075",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        145
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Ryūen claims the school deliberately created groups by student abilities, including a concentrated Dragon group; no official method is yet disclosed.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.honami-ichinose"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.076",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        146
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Ryūen claims knowledge of Class C's VIP assignments and proposes cross-class cooperation to target Class A; the truth and scope of his claimed information remain uncertain.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.honami-ichinose",
+        "actor.ryuji-kanzaki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.077",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        148
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka warns that a B–C alliance would create incentives for A–D counter-cooperation and alter the entire four-class contest.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.078",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        149
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ichinose refuses Ryūen's immediate alliance proposal despite potential points, citing damage he caused to Class B and long-term trust.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kakeru-ryuen"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.079",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        152
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Ichinose says she prefers fair competition while admitting that deception may be necessary in some situations; this is a stated value, not an invariant algorithm.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.080",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        155
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka reflects that a hidden VIP can lie and that class-specific incentives make honest cooperation hard to sustain.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.081",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        158
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Kiyotaka infers that Karuizawa uses Machida's forceful intervention as protection in Rabbit while showing her own unease.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.machida",
+        "actor.manabe-shiho"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.082",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        159
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Manabe and other Class C girls press Karuizawa about the alleged mistreatment of their friend Rika without independently proving the accusation.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.manabe-shiho"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.083",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        161
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Karuizawa refuses to apologize to Rika under Manabe's pressure, which escalates hostility and public exposure risk.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.manabe-shiho"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.084",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        163
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Manabe and associates isolate Karuizawa and seize her hair to intimidate her; this is abusive conduct, not a normative persuasion technique.",
+      "actor_ids": [
+        "actor.manabe-shiho",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.085",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        164
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Yukimura attempts to intervene against the harassment but retreats when the hostile group turns on him.",
+      "actor_ids": [
+        "actor.yukimura",
+        "actor.kei-karuizawa",
+        "actor.manabe-shiho"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.086",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        166
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka calls Chabashira privately at night to ask about exceptions to what can be bought with private points.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.087",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        167
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hoshinomiya interrupts the private meeting and questions Chabashira's discretion; narrator infers teacher rivalries without all motives established.",
+      "actor_ids": [
+        "actor.chie-hoshinomiya",
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.088",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        169
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Chabashira says points can purchase bounded changes to school arrangements such as class starting time, subject to unspecified realistic limits; no universal purchase right proven.",
+      "actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.089",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        170
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka anticipates Hirata leaving their room at night and meets him privately to discuss Karuizawa's distress.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.090",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        173
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata seeks a nonviolent resolution for Karuizawa while worrying about Manabe's group; Kiyotaka shares limited evidence.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.091",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        175
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata offers support but refuses an unconditional guarantee that he will prioritize Karuizawa over every other classmate.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.092",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        177
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Karuizawa angrily rejects Hirata's shared-help approach and says their supposed romantic relationship should end; exact future status remains uncertain.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.093",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        180
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Hirata explains an earlier school bullying incident and his guilt over failing to help someone; the past is his first-person testimony, not externally audited record.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.094",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        182
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Hirata says helping vulnerable peers is how he attempts to make amends for past inaction, without claiming he can prevent every future crisis.",
+      "actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.095",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        184
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sakura helps check other classmates' apparent silence in the exam; this is limited observation, not a proof of the VIP distribution.",
+      "actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.096",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        185
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka contacts Manabe from an anonymous account to arrange a secluded confrontation with Karuizawa; the lure is a deliberate harmful manipulation.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabe-shiho"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.097",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        188
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Manabe and companions follow an anonymous message to a low-level ship room with limited reception, making Karuizawa vulnerable to abuse.",
+      "actor_ids": [
+        "actor.manabe-shiho",
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.098",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        190
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Manabe's group demands an apology and begins attacking Karuizawa, treating the prior Rika allegation as justification without formal proof.",
+      "actor_ids": [
+        "actor.manabe-shiho",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.099",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        192
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "The isolated girls repeatedly humiliate and assault Karuizawa; the violence is directly described and must not be interpreted as justified discipline.",
+      "actor_ids": [
+        "actor.manabe-shiho",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.100",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        194
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka waits for the attackers to leave before approaching a traumatized Karuizawa, having watched the harassment rather than intervening.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.101",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        196
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka uses knowledge of Karuizawa's past bullying to increase her fear and dependency, distinguishing calculated coercion from help.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.102",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        198
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Karuizawa reacts to Kiyotaka identifying her history of prolonged bullying; specific past events are revealed through speech and behavior.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.103",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        199
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka sexually harasses and threatens Karuizawa while extracting submission; this is abuse in the narrative, not an endorsed or safe technique.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.104",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        200
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Karuizawa describes extreme past bullying and emotional withdrawal under violence, but her recollections are personal testimony rather than universal responses.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.105",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        201
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka exposes an old scar after Karuizawa protests, linking it to trauma; the wound's exact causal circumstances are not independently verified.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.106",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        202
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka offers to deter future Manabe harassment using a photograph he acquired while observing the assault, conditioning protection on Karuizawa's cooperation.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa",
+        "actor.manabe-shiho"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.107",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        203
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka begins recruiting Karuizawa to a secret plan for Rabbit's VIP exam by suggesting knowledge of her role, while her agreement occurs under coercive pressure.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.108",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        205
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "On the last exam day, Rabbit's members continue arguing over whether silence or open discovery serves their interests.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.machida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.109",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        208
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka tells Suzune he expects greater cooperation from Hirata after their conversations; Suzune is reluctant to depend on him.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.yosuke-hirata"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.110",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        210
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka finds Ichinose asleep in a waiting room and hesitates to disturb her while arriving ahead of the discussion.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.111",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        213
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ichinose asks Kiyotaka whether he hopes to reach Class A and discusses students' competing ambitions and private-point use.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.112",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        216
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ichinose acknowledges Kiyotaka may have seen her large private-point balance but refuses to explain its origin and asks for discretion.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.113",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        218
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hamaguchi proposes that participants voluntarily show school emails to narrow VIP candidates; Ichinose encourages the experiment.",
+      "actor_ids": [
+        "actor.hamaguchi",
+        "actor.honami-ichinose"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.114",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        219
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hamaguchi first exposes his school notification and Beppu follows, giving the appearance of spontaneous trust while the group's interests remain divided.",
+      "actor_ids": [
+        "actor.hamaguchi",
+        "actor.beppu",
+        "actor.honami-ichinose"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.115",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        220
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka offers a device he has secretly exchanged with another student's, setting up a layered phone-identity bluff in Rabbit.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yukimura",
+        "actor.honami-ichinose"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.116",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        222
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ibuki also volunteers to show her phone and publicly challenges Yukimura's reluctance; Kiyotaka tries to limit the suspicion.",
+      "actor_ids": [
+        "actor.mio-ibuki",
+        "actor.yukimura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.117",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        224
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Under group scrutiny Yukimura displays a phone he believes belongs to Kiyotaka, having been enlisted in an incomplete deception.",
+      "actor_ids": [
+        "actor.yukimura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.118",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        227
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ichinose calls Kiyotaka's known phone number and exposes the first apparent swap, correctly challenging Yukimura's VIP claim.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yukimura"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.119",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        230
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ichinose reveals she checked SIM-lock behavior and warns that an apparently exposed phone deception can conceal a second layer.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.120",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        231
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka's private retrospective account establishes that Karuizawa was Rabbit's actual VIP and describes his multi-phone SIM-release bluff; this was not earlier shared knowledge.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa",
+        "actor.yosuke-hirata"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.121",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        232
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ichinose independently predicts Karuizawa is the actual Rabbit VIP but cannot confirm before another student submits an early answer that ends the group test.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.122",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        233
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Ichinose suspects Class A member Morishige would betray Katsuragi's passive line and explains her interest in inducing another class to answer incorrectly; the individual's responsibility remains unconfirmed.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji",
+        "actor.morishige"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.123",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        234
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Karuizawa anxiously checks whether Kiyotaka's layered plan succeeded; Hirata joins the group shortly before official results.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.124",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        238
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ryūen locates Suzune and the others shortly before results, taunting them about the Dragon group's VIP.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.125",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        239
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Ryūen correctly names Kushida as Dragon's VIP and says he knew since day two, though the exact acquisition process remains his assertion.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita",
+        "actor.yosuke-hirata"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.126",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        240
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Ryūen attributes his deduction partly to Suzune's body language; the source proves he names Kushida correctly, not the unique causal method.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.127",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        240
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Final announcement names zodiac results: Rat 3, Cow 4, Tiger 2, Rabbit 4, Dragon 1, Snake 2, Horse 3, Sheep 2, Monkey 3, Rooster 3, Dog 2 and Pig 3.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.128",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        241
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "The reported net results are A minus 200 class and plus 2 million private; B zero class and plus 2.5 million private; C plus 150 class and plus 5.5 million private; D plus 50 class and plus 3 million private.",
+      "actor_ids": [
+        "actor.mashima",
+        "actor.kakeru-ryuen"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.129",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        242
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ryūen displays a list of several Class A VIPs and boasts of identifying selection patterns, but the complete deterministic VIP assignment formula is not shown.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.130",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        243
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka privately reflects on Ryūen's success, his remaining uncertainty about the strategy and emerging excitement about future challenges.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Physical PDF locator",
+        "Narrator vs speaker source truth",
+        "Actual direct actor observation",
+        "Knowledge time acquisition",
+        "No assumed deterministic VIP assignment formula",
+        "No moral endorsement of coercion"
+      ]
+    }
+  ],
+  "behavioral_cases": [
+    {
+      "case_id": "y1v4.case.kei-karuizawa.reject-unconsented-photography",
+      "case_file": "data/canon/consolidated/behavioral_cases/kei-karuizawa/reject-unconsented-photography.json",
+      "primary_actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        94,
+        95
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kei-karuizawa.refuse-demanded-apology",
+      "case_file": "data/canon/consolidated/behavioral_cases/kei-karuizawa/refuse-demanded-apology.json",
+      "primary_actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        159,
+        161
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kei-karuizawa.resist-coercion-under-threat",
+      "case_file": "data/canon/consolidated/behavioral_cases/kei-karuizawa/resist-coercion-under-threat.json",
+      "primary_actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        199,
+        200
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kei-karuizawa.conceal-rabbit-vip-role",
+      "case_file": "data/canon/consolidated/behavioral_cases/kei-karuizawa/conceal-rabbit-vip-role.json",
+      "primary_actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        231,
+        234
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.airi-sakura.seek-cabin-social-advice",
+      "case_file": "data/canon/consolidated/behavioral_cases/airi-sakura/seek-cabin-social-advice.json",
+      "primary_actor_id": "actor.airi-sakura",
+      "pdf_pages": [
+        26,
+        27
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.rokusuke-koenji.proclaim-autograph-value",
+      "case_file": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/proclaim-autograph-value.json",
+      "primary_actor_id": "actor.rokusuke-koenji",
+      "pdf_pages": [
+        21,
+        22
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.yosuke-hirata.prioritize-solitary-classmate-lunch",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/prioritize-solitary-classmate-lunch.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        14,
+        15
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.yosuke-hirata.seek-horikita-cooperation-through-kiyotaka",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/seek-horikita-cooperation-through-kiyotaka.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        17,
+        18
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.yosuke-hirata.reject-unconditional-shelter-promise",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/reject-unconditional-shelter-promise.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        173,
+        175
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.yosuke-hirata.disclose-bullying-related-guilt",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/disclose-bullying-related-guilt.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        180,
+        182
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.suzune-horikita.test-group-assignment-hypothesis",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/test-group-assignment-hypothesis.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        64,
+        65
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.suzune-horikita.challenge-rival-alliance-threat",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/challenge-rival-alliance-threat.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        148,
+        149
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kikyo-kushida.invite-rival-delegates-into-discussion",
+      "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/invite-rival-delegates-into-discussion.json",
+      "primary_actor_id": "actor.kikyo-kushida",
+      "pdf_pages": [
+        144
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.yukimura.coordinate-rabbit-class-d-discretion",
+      "case_file": "data/canon/consolidated/behavioral_cases/yukimura/coordinate-rabbit-class-d-discretion.json",
+      "primary_actor_id": "actor.yukimura",
+      "pdf_pages": [
+        50
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.yukimura.exhibit-phone-under-rabbit-pressure",
+      "case_file": "data/canon/consolidated/behavioral_cases/yukimura/exhibit-phone-under-rabbit-pressure.json",
+      "primary_actor_id": "actor.yukimura",
+      "pdf_pages": [
+        224
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.machida.advocate-rabbit-silence",
+      "case_file": "data/canon/consolidated/behavioral_cases/machida/advocate-rabbit-silence.json",
+      "primary_actor_id": "actor.machida",
+      "pdf_pages": [
+        85,
+        86
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.machida.stop-forced-photography",
+      "case_file": "data/canon/consolidated/behavioral_cases/machida/stop-forced-photography.json",
+      "primary_actor_id": "actor.machida",
+      "pdf_pages": [
+        95
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.manabe-shiho.participate-in-isolated-assault",
+      "case_file": "data/canon/consolidated/behavioral_cases/manabe-shiho/participate-in-isolated-assault.json",
+      "primary_actor_id": "actor.manabe-shiho",
+      "pdf_pages": [
+        190,
+        192
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.hamaguchi.propose-showing-school-notifications",
+      "case_file": "data/canon/consolidated/behavioral_cases/hamaguchi/propose-showing-school-notifications.json",
+      "primary_actor_id": "actor.hamaguchi",
+      "pdf_pages": [
+        218,
+        219
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.mio-ibuki.volunteer-device-disclosure",
+      "case_file": "data/canon/consolidated/behavioral_cases/mio-ibuki/volunteer-device-disclosure.json",
+      "primary_actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        222
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kakeru-ryuen.interrogate-hidden-island-leader",
+      "case_file": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/interrogate-hidden-island-leader.json",
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        69,
+        72
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance",
+      "case_file": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/offer-b-c-tactical-alliance.json",
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        145,
+        146,
+        149
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kakeru-ryuen.name-kushida-dragon-vip",
+      "case_file": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/name-kushida-dragon-vip.json",
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        239,
+        240
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.honami-ichinose.initiate-rabbit-discussion",
+      "case_file": "data/canon/consolidated/behavioral_cases/honami-ichinose/initiate-rabbit-discussion.json",
+      "primary_actor_id": "actor.honami-ichinose",
+      "pdf_pages": [
+        81,
+        82
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.compare-private-exam-summons",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/compare-private-exam-summons.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        29,
+        30
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.redirect-koenji-to-bellhop",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/redirect-koenji-to-bellhop.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        23
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.criticize-hidden-horikita-mediation",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/criticize-hidden-horikita-mediation.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        18
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.test-zodiac-rabbit-reactions",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/test-zodiac-rabbit-reactions.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        83
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.predict-counter-alliance",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/predict-counter-alliance.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        148
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.privately-test-points-exceptions",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/privately-test-points-exceptions.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        166,
+        169
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.arrange-coercive-isolation",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/arrange-coercive-isolation.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        185,
+        188
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.exploit-karuizawa-trauma",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/exploit-karuizawa-trauma.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        194,
+        199,
+        201
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.offer-conditioned-protection",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/offer-conditioned-protection.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        202,
+        203
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.orchestrate-double-phone-swap",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/orchestrate-double-phone-swap.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        220,
+        231
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.maintain-cover-despite-ichinose-test",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/maintain-cover-despite-ichinose-test.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        227,
+        232
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.honami-ichinose.refuse-ryuen-coalition",
+      "case_file": "data/canon/consolidated/behavioral_cases/honami-ichinose/refuse-ryuen-coalition.json",
+      "primary_actor_id": "actor.honami-ichinose",
+      "pdf_pages": [
+        145,
+        149
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.honami-ichinose.challenge-machida-passivity",
+      "case_file": "data/canon/consolidated/behavioral_cases/honami-ichinose/challenge-machida-passivity.json",
+      "primary_actor_id": "actor.honami-ichinose",
+      "pdf_pages": [
+        86,
+        90
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.honami-ichinose.stage-open-email-visibility",
+      "case_file": "data/canon/consolidated/behavioral_cases/honami-ichinose/stage-open-email-visibility.json",
+      "primary_actor_id": "actor.honami-ichinose",
+      "pdf_pages": [
+        218,
+        219
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.honami-ichinose.detect-multi-phone-bluff",
+      "case_file": "data/canon/consolidated/behavioral_cases/honami-ichinose/detect-multi-phone-bluff.json",
+      "primary_actor_id": "actor.honami-ichinose",
+      "pdf_pages": [
+        227,
+        230,
+        232
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.honami-ichinose.exploit-rival-traitor-incentives",
+      "case_file": "data/canon/consolidated/behavioral_cases/honami-ichinose/exploit-rival-traitor-incentives.json",
+      "primary_actor_id": "actor.honami-ichinose",
+      "pdf_pages": [
+        232,
+        233
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.sae-chiyabashira.describe-bounded-point-exceptions",
+      "case_file": "data/canon/consolidated/behavioral_cases/sae-chiyabashira/describe-bounded-point-exceptions.json",
+      "primary_actor_id": "actor.sae-chiyabashira",
+      "pdf_pages": [
+        166,
+        169
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.katsuragi.reject-unbounded-zodiac-talk",
+      "case_file": "data/canon/consolidated/behavioral_cases/katsuragi/reject-unbounded-zodiac-talk.json",
+      "primary_actor_id": "actor.katsuragi",
+      "pdf_pages": [
+        141
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    },
+    {
+      "case_id": "y1v4.case.kei-karuizawa.accept-protection-under-duress",
+      "case_file": "data/canon/consolidated/behavioral_cases/kei-karuizawa/accept-protection-under-duress.json",
+      "primary_actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        202,
+        203
+      ],
+      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "Actor owned act and outcome",
+        "Support evidence direct PDF scene",
+        "Counterfactual failure possible",
+        "Peer allegations not canon fact",
+        "Consent, distress and coercion bounded",
+        "No retroactive VIP knowledge"
+      ]
+    }
+  ],
+  "global_promotion": "BLOCKED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW_AND_OPERATOR_RELEASE",
+  "release_gate": {
+    "assistant_individual_semantic_review": "NOT_STARTED",
+    "external_independent_review": "NOT_PERFORMED",
+    "operator_approval": "PENDING",
+    "individual_verified_count": 0,
+    "engine_memory_admission": false,
+    "exam_executable": false
+  },
+  "scope": "First pass of all five chapters. Do not claim audited record status until PDF-window semantic review. No copyrighted original stored.",
+  "cautions": [
+    "Karuizawa VIP and Kushida VIP are private notifications; group result publication does not reveal all VIP identities",
+    "Ayanokōji's layered phone scheme is revealed only retrospectively",
+    "Ichinose's belief Morishige betrayed is a prediction, not verified answer sender",
+    "Ryūen's claims about VIP pattern are speaker assertions, not normative deterministic selection rule",
+    "Coercion, violence and sexual harassment are documented as wrongdoing, never recommended or universal behaviors",
+    "Day-count discrepancy in teacher explanation is retained for audit"
+  ]
+}

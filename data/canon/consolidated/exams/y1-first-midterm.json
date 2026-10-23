@@ -64,6 +64,7 @@
     "y1v1.ev.072",
     "y1v1.ev.078",
     "y1v1.ev.088",
+    "y1v1.ev.093",
     "y1v1.ev.095",
     "y1v1.ev.097",
     "y1v1.ev.099",
@@ -75,7 +76,10 @@
     "y1v1.ev.106",
     "y1v1.ev.108",
     "y1v1.ev.109",
-    "y1v1.ev.110"
+    "y1v1.ev.110",
+    "y1v1.ev.132",
+    "y1v1.ev.133",
+    "y1v1.ev.134"
   ],
   "open_questions": [
     "Whether price/authority to buy exam points generalizes",
@@ -83,5 +87,22 @@
     "Precise test duration and calendar date",
     "Any constraints on purchasing old examination papers"
   ],
-  "simulation_policy": "Do not generate executable scoring or hidden knowledge from unsupported mechanics; allow counterfactual study choices."
+  "simulation_policy": "Do not generate executable scoring or hidden knowledge from unsupported mechanics; allow counterfactual study choices.",
+  "schedule_change": {
+    "observed": "The assessed topic range changed and Class D students were informed late after noticing Class C had different expectations; teacher says she forgot",
+    "time": "One week before midterm",
+    "evidence_refs": [
+      "y1v1.ev.131",
+      "y1v1.ev.093",
+      "y1v1.ev.132",
+      "y1v1.ev.133",
+      "y1v1.ev.134"
+    ],
+    "generalization": "Do not assume all classes receive identical advance notices or know late changes; not a universal guaranteed hidden surprise."
+  },
+  "contradictions_to_avoid": [
+    "Admission-based 100,000 allowance is not guaranteed in subsequent months.",
+    "School's class-point formula is not fully disclosed.",
+    "The special 100,000-point grade purchase is not a published right or automatic API."
+  ]
 }

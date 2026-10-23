@@ -1,0 +1,631 @@
+{
+  "schema_version": "page-index-v1",
+  "source_id": "ln.y1.v02.sevenseas.en.operator-provided",
+  "pages": {
+    "10": {
+      "evidence": [
+        "y1v2.ev.001"
+      ],
+      "cases": []
+    },
+    "12": {
+      "evidence": [
+        "y1v2.ev.002"
+      ],
+      "cases": [
+        "y1v2.case.airi-sakura.conceal-after-fight",
+        "y1v2.case.ken-sudo.three-on-one-fight"
+      ]
+    },
+    "13": {
+      "evidence": [
+        "y1v2.ev.003"
+      ],
+      "cases": [
+        "y1v2.case.airi-sakura.conceal-after-fight"
+      ]
+    },
+    "15": {
+      "evidence": [
+        "y1v2.ev.004"
+      ],
+      "cases": []
+    },
+    "16": {
+      "evidence": [
+        "y1v2.ev.005"
+      ],
+      "cases": []
+    },
+    "17": {
+      "evidence": [
+        "y1v2.ev.006"
+      ],
+      "cases": []
+    },
+    "18": {
+      "evidence": [
+        "y1v2.ev.007"
+      ],
+      "cases": []
+    },
+    "20": {
+      "evidence": [
+        "y1v2.ev.008"
+      ],
+      "cases": []
+    },
+    "23": {
+      "evidence": [
+        "y1v2.ev.009"
+      ],
+      "cases": []
+    },
+    "24": {
+      "evidence": [
+        "y1v2.ev.010"
+      ],
+      "cases": []
+    },
+    "27": {
+      "evidence": [
+        "y1v2.ev.011"
+      ],
+      "cases": []
+    },
+    "29": {
+      "evidence": [
+        "y1v2.ev.012"
+      ],
+      "cases": [
+        "y1v2.case.ken-sudo.request-confidential-help"
+      ]
+    },
+    "30": {
+      "evidence": [
+        "y1v2.ev.013"
+      ],
+      "cases": []
+    },
+    "31": {
+      "evidence": [
+        "y1v2.ev.014",
+        "y1v2.ev.015"
+      ],
+      "cases": [
+        "y1v2.case.ken-sudo.three-on-one-fight"
+      ]
+    },
+    "33": {
+      "evidence": [
+        "y1v2.ev.016"
+      ],
+      "cases": []
+    },
+    "35": {
+      "evidence": [
+        "y1v2.ev.017"
+      ],
+      "cases": [
+        "y1v2.case.ken-sudo.request-confidential-help"
+      ]
+    },
+    "40": {
+      "evidence": [
+        "y1v2.ev.018"
+      ],
+      "cases": []
+    },
+    "44": {
+      "evidence": [
+        "y1v2.ev.019"
+      ],
+      "cases": [
+        "y1v2.case.suzune-horikita.conditional-aid-reassessment"
+      ]
+    },
+    "54": {
+      "evidence": [
+        "y1v2.ev.020"
+      ],
+      "cases": [
+        "y1v2.case.kikyo-kushida.coordinate-witness-inquiry"
+      ]
+    },
+    "55": {
+      "evidence": [
+        "y1v2.ev.021"
+      ],
+      "cases": []
+    },
+    "61": {
+      "evidence": [
+        "y1v2.ev.022"
+      ],
+      "cases": [
+        "y1v2.case.kiyotaka-ayanokoji.target-class-b-search"
+      ]
+    },
+    "63": {
+      "evidence": [
+        "y1v2.ev.023"
+      ],
+      "cases": [
+        "y1v2.case.kikyo-kushida.coordinate-witness-inquiry"
+      ]
+    },
+    "67": {
+      "evidence": [
+        "y1v2.ev.024"
+      ],
+      "cases": [
+        "y1v2.case.yosuke-hirata.prioritize-protecting-peers"
+      ]
+    },
+    "68": {
+      "evidence": [
+        "y1v2.ev.025"
+      ],
+      "cases": []
+    },
+    "69": {
+      "evidence": [
+        "y1v2.ev.026"
+      ],
+      "cases": []
+    },
+    "70": {
+      "evidence": [
+        "y1v2.ev.027"
+      ],
+      "cases": []
+    },
+    "71": {
+      "evidence": [
+        "y1v2.ev.028"
+      ],
+      "cases": []
+    },
+    "72": {
+      "evidence": [
+        "y1v2.ev.029"
+      ],
+      "cases": [
+        "y1v2.case.suzune-horikita.conditional-aid-reassessment"
+      ]
+    },
+    "77": {
+      "evidence": [
+        "y1v2.ev.030"
+      ],
+      "cases": [
+        "y1v2.case.suzune-horikita.identify-sakura-witness"
+      ]
+    },
+    "86": {
+      "evidence": [
+        "y1v2.ev.031"
+      ],
+      "cases": [
+        "y1v2.case.kikyo-kushida.build-sakura-rapport"
+      ]
+    },
+    "91": {
+      "evidence": [
+        "y1v2.ev.032"
+      ],
+      "cases": []
+    },
+    "95": {
+      "evidence": [
+        "y1v2.ev.033"
+      ],
+      "cases": []
+    },
+    "101": {
+      "evidence": [
+        "y1v2.ev.034"
+      ],
+      "cases": []
+    },
+    "103": {
+      "evidence": [
+        "y1v2.ev.035"
+      ],
+      "cases": []
+    },
+    "107": {
+      "evidence": [
+        "y1v2.ev.036"
+      ],
+      "cases": []
+    },
+    "114": {
+      "evidence": [
+        "y1v2.ev.037"
+      ],
+      "cases": [
+        "y1v2.case.honami-ichinose.class-b-informal-leadership"
+      ]
+    },
+    "115": {
+      "evidence": [
+        "y1v2.ev.038"
+      ],
+      "cases": [
+        "y1v2.case.honami-ichinose.class-b-informal-leadership"
+      ]
+    },
+    "116": {
+      "evidence": [
+        "y1v2.ev.039"
+      ],
+      "cases": []
+    },
+    "125": {
+      "evidence": [
+        "y1v2.ev.040"
+      ],
+      "cases": [
+        "y1v2.case.honami-ichinose.reflect-chihiro-confession"
+      ]
+    },
+    "127": {
+      "evidence": [
+        "y1v2.ev.041"
+      ],
+      "cases": [
+        "y1v2.case.honami-ichinose.reflect-chihiro-confession"
+      ]
+    },
+    "138": {
+      "evidence": [
+        "y1v2.ev.042"
+      ],
+      "cases": [
+        "y1v2.case.kikyo-kushida.build-sakura-rapport"
+      ]
+    },
+    "140": {
+      "evidence": [
+        "y1v2.ev.043"
+      ],
+      "cases": [
+        "y1v2.case.kiyotaka-ayanokoji.protect-sakura-contact"
+      ]
+    },
+    "142": {
+      "evidence": [
+        "y1v2.ev.044"
+      ],
+      "cases": []
+    },
+    "143": {
+      "evidence": [
+        "y1v2.ev.045"
+      ],
+      "cases": []
+    },
+    "146": {
+      "evidence": [
+        "y1v2.ev.046"
+      ],
+      "cases": [
+        "y1v2.case.airi-sakura.voluntary-witness-admission",
+        "y1v2.case.kikyo-kushida.build-sakura-rapport"
+      ]
+    },
+    "148": {
+      "evidence": [
+        "y1v2.ev.047"
+      ],
+      "cases": []
+    },
+    "152": {
+      "evidence": [
+        "y1v2.ev.048"
+      ],
+      "cases": []
+    },
+    "153": {
+      "evidence": [
+        "y1v2.ev.049"
+      ],
+      "cases": [
+        "y1v2.case.ryuji-kanzaki.public-witness-appeal"
+      ]
+    },
+    "156": {
+      "evidence": [
+        "y1v2.ev.050"
+      ],
+      "cases": [
+        "y1v2.case.ryuji-kanzaki.public-witness-appeal"
+      ]
+    },
+    "157": {
+      "evidence": [
+        "y1v2.ev.051"
+      ],
+      "cases": []
+    },
+    "164": {
+      "evidence": [
+        "y1v2.ev.052"
+      ],
+      "cases": []
+    },
+    "173": {
+      "evidence": [
+        "y1v2.ev.053"
+      ],
+      "cases": [
+        "y1v2.case.airi-sakura.voluntary-witness-admission",
+        "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice"
+      ]
+    },
+    "176": {
+      "evidence": [
+        "y1v2.ev.054"
+      ],
+      "cases": []
+    },
+    "177": {
+      "evidence": [
+        "y1v2.ev.055"
+      ],
+      "cases": [
+        "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice"
+      ]
+    },
+    "179": {
+      "evidence": [
+        "y1v2.ev.056"
+      ],
+      "cases": [
+        "y1v2.case.kikyo-kushida.recognize-shizuku-identity"
+      ]
+    },
+    "180": {
+      "evidence": [
+        "y1v2.ev.057"
+      ],
+      "cases": [
+        "y1v2.case.kikyo-kushida.recognize-shizuku-identity"
+      ]
+    },
+    "190": {
+      "evidence": [
+        "y1v2.ev.058"
+      ],
+      "cases": [
+        "y1v2.case.airi-sakura.testify-despite-stage-fright"
+      ]
+    },
+    "193": {
+      "evidence": [
+        "y1v2.ev.059"
+      ],
+      "cases": []
+    },
+    "194": {
+      "evidence": [
+        "y1v2.ev.060"
+      ],
+      "cases": []
+    },
+    "197": {
+      "evidence": [
+        "y1v2.ev.061"
+      ],
+      "cases": []
+    },
+    "198": {
+      "evidence": [
+        "y1v2.ev.062"
+      ],
+      "cases": [
+        "y1v2.case.suzune-horikita.probe-opponent-hearing"
+      ]
+    },
+    "202": {
+      "evidence": [
+        "y1v2.ev.063"
+      ],
+      "cases": [
+        "y1v2.case.airi-sakura.testify-despite-stage-fright"
+      ]
+    },
+    "204": {
+      "evidence": [
+        "y1v2.ev.064"
+      ],
+      "cases": [
+        "y1v2.case.airi-sakura.testify-despite-stage-fright"
+      ]
+    },
+    "205": {
+      "evidence": [
+        "y1v2.ev.065"
+      ],
+      "cases": []
+    },
+    "208": {
+      "evidence": [
+        "y1v2.ev.066"
+      ],
+      "cases": [
+        "y1v2.case.suzune-horikita.probe-opponent-hearing"
+      ]
+    },
+    "215": {
+      "evidence": [
+        "y1v2.ev.067"
+      ],
+      "cases": []
+    },
+    "217": {
+      "evidence": [
+        "y1v2.ev.068"
+      ],
+      "cases": []
+    },
+    "223": {
+      "evidence": [
+        "y1v2.ev.069"
+      ],
+      "cases": []
+    },
+    "225": {
+      "evidence": [
+        "y1v2.ev.070"
+      ],
+      "cases": []
+    },
+    "229": {
+      "evidence": [
+        "y1v2.ev.071"
+      ],
+      "cases": [
+        "y1v2.case.honami-ichinose.deploy-surveillance-bluff"
+      ]
+    },
+    "230": {
+      "evidence": [
+        "y1v2.ev.072"
+      ],
+      "cases": [
+        "y1v2.case.kiyotaka-ayanokoji.coordinate-camera-deception"
+      ]
+    },
+    "232": {
+      "evidence": [
+        "y1v2.ev.073"
+      ],
+      "cases": [
+        "y1v2.case.ishizaki.resist-initial-compromise"
+      ]
+    },
+    "233": {
+      "evidence": [
+        "y1v2.ev.074"
+      ],
+      "cases": [
+        "y1v2.case.kiyotaka-ayanokoji.coordinate-camera-deception"
+      ]
+    },
+    "234": {
+      "evidence": [
+        "y1v2.ev.075"
+      ],
+      "cases": [
+        "y1v2.case.honami-ichinose.deploy-surveillance-bluff",
+        "y1v2.case.kiyotaka-ayanokoji.coordinate-camera-deception"
+      ]
+    },
+    "235": {
+      "evidence": [
+        "y1v2.ev.076"
+      ],
+      "cases": []
+    },
+    "236": {
+      "evidence": [
+        "y1v2.ev.077"
+      ],
+      "cases": []
+    },
+    "237": {
+      "evidence": [
+        "y1v2.ev.078"
+      ],
+      "cases": [
+        "y1v2.case.kiyotaka-ayanokoji.protect-sakura-from-clerk"
+      ]
+    },
+    "238": {
+      "evidence": [
+        "y1v2.ev.079"
+      ],
+      "cases": [
+        "y1v2.case.kiyotaka-ayanokoji.protect-sakura-from-clerk"
+      ]
+    },
+    "239": {
+      "evidence": [
+        "y1v2.ev.080"
+      ],
+      "cases": []
+    },
+    "241": {
+      "evidence": [
+        "y1v2.ev.081"
+      ],
+      "cases": []
+    },
+    "244": {
+      "evidence": [
+        "y1v2.ev.082"
+      ],
+      "cases": []
+    },
+    "245": {
+      "evidence": [
+        "y1v2.ev.083"
+      ],
+      "cases": []
+    },
+    "246": {
+      "evidence": [
+        "y1v2.ev.084"
+      ],
+      "cases": []
+    },
+    "247": {
+      "evidence": [
+        "y1v2.ev.085"
+      ],
+      "cases": [
+        "y1v2.case.ken-sudo.admit-conduct-consequences"
+      ]
+    },
+    "249": {
+      "evidence": [
+        "y1v2.ev.086"
+      ],
+      "cases": []
+    },
+    "250": {
+      "evidence": [
+        "y1v2.ev.087"
+      ],
+      "cases": []
+    },
+    "253": {
+      "evidence": [
+        "y1v2.ev.088"
+      ],
+      "cases": [
+        "y1v2.case.kiyotaka-ayanokoji.refuse-student-council",
+        "y1v2.case.manabu-horikita.offer-secretary-seat"
+      ]
+    },
+    "254": {
+      "evidence": [
+        "y1v2.ev.089",
+        "y1v2.ev.090"
+      ],
+      "cases": [
+        "y1v2.case.kiyotaka-ayanokoji.minimize-role-after-strategy"
+      ]
+    },
+    "255": {
+      "evidence": [
+        "y1v2.ev.091"
+      ],
+      "cases": [
+        "y1v2.case.kiyotaka-ayanokoji.minimize-role-after-strategy"
+      ]
+    }
+  }
+}

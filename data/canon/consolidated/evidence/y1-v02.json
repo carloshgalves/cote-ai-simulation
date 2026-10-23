@@ -1400,11 +1400,12 @@
     {
       "id": "y1v2.ev.051",
       "domain": "economy",
-      "summary": "Kiyotaka describes the point-transfer app's temporary-token feature and glimpses Ichinose's private balance without revealing a number.",
+      "summary": "Kiyotaka describes how a temporary token from the S-System point page allows payment requests; he briefly notices an undisclosed portion of Ichinose's point screen. The amount and what it implies remain unconfirmed.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          157
+          157,
+          158
         ],
         "chapter": 5,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -1928,11 +1929,12 @@
     {
       "id": "y1v2.ev.070",
       "domain": "strategy",
-      "summary": "Kiyotaka and Ichinose meet the three Class C complainants at the special building before the second hearing.",
+      "summary": "Kiyotaka asks Kushida to send enticing emails to lure Ishizaki, Komiya and Kondou into meeting at the special building; Ichinose joins the confrontation afterward. Their allegations remain contested.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [
-          225
+          225,
+          226
         ],
         "chapter": 7,
         "edition": "Seven Seas English edition, operator-supplied PDF",
@@ -1945,7 +1947,8 @@
         "actor.honami-ichinose",
         "actor.ishizaki",
         "actor.komiya",
-        "actor.kondou"
+        "actor.kondou",
+        "actor.kikyo-kushida"
       ],
       "mention_organization_ids": [],
       "topics": [
@@ -2302,7 +2305,7 @@
     {
       "id": "y1v2.ev.083",
       "domain": "institution",
-      "summary": "The council accepts withdrawal and requires an unspecified private-point payment for miscellaneous deliberation expenses.",
+      "summary": "After the Class C complainants withdraw, the council accepts and requires those complainants to cover unspecified deliberation expenses in points; no fee amount or formula is given.",
       "source": {
         "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
         "pdf_pages": [

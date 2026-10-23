@@ -1649,6 +1649,7 @@
         "y1v1.ev.107",
         "y1v1.ev.133",
         "y1v2.case.kiyotaka-ayanokoji.coordinate-camera-deception",
+        "y1v2.case.kiyotaka-ayanokoji.lure-complainants-via-kushida",
         "y1v2.case.kiyotaka-ayanokoji.protect-sakura-from-clerk",
         "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice",
         "y1v2.ev.021",
@@ -1731,6 +1732,7 @@
         "y1v1.ev.111",
         "y1v1.ev.112",
         "y1v1.ev.136",
+        "y1v2.case.kiyotaka-ayanokoji.lure-complainants-via-kushida",
         "y1v2.case.kiyotaka-ayanokoji.minimize-role-after-strategy",
         "y1v2.case.kiyotaka-ayanokoji.refuse-student-council",
         "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice",
@@ -1794,6 +1796,7 @@
         "y1v1.ev.120",
         "y1v1.ev.135",
         "y1v2.case.kiyotaka-ayanokoji.coordinate-camera-deception",
+        "y1v2.case.kiyotaka-ayanokoji.lure-complainants-via-kushida",
         "y1v2.case.kiyotaka-ayanokoji.minimize-role-after-strategy",
         "y1v2.case.kiyotaka-ayanokoji.refuse-student-council",
         "y1v2.case.kiyotaka-ayanokoji.target-class-b-search",
@@ -2504,7 +2507,8 @@
         "y1v1.ev.099",
         "y1v1.ev.135",
         "y1v2.ev.016",
-        "y1v2.ev.022"
+        "y1v2.ev.022",
+        "y1v2.ev.070"
       ],
       "combat": [
         "y1v1.case.kikyo-kushida.fifty-meter-swim",
@@ -2515,7 +2519,8 @@
         "y1v2.ev.012",
         "y1v2.ev.016",
         "y1v2.ev.046",
-        "y1v2.ev.048"
+        "y1v2.ev.048",
+        "y1v2.ev.070"
       ],
       "motivation": [
         "y1v2.ev.017"
@@ -3714,6 +3719,7 @@
         "y1v1.case.k.swim-middle",
         "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort",
         "y1v2.case.kiyotaka-ayanokoji.coordinate-camera-deception",
+        "y1v2.case.kiyotaka-ayanokoji.lure-complainants-via-kushida",
         "y1v2.case.kiyotaka-ayanokoji.minimize-role-after-strategy",
         "y1v2.case.kiyotaka-ayanokoji.refuse-student-council",
         "y1v2.case.kiyotaka-ayanokoji.target-class-b-search"
@@ -3730,6 +3736,7 @@
         "y1v1.case.k.recruit-kushida",
         "y1v1.case.k.shop-help-sudo",
         "y1v1.case.k.social-entry-freeze",
+        "y1v2.case.kiyotaka-ayanokoji.lure-complainants-via-kushida",
         "y1v2.case.kiyotaka-ayanokoji.minimize-role-after-strategy",
         "y1v2.case.kiyotaka-ayanokoji.refuse-student-council",
         "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice"
@@ -3784,6 +3791,7 @@
         "y1v1.case.k.exam-paper-bargain",
         "y1v1.case.k.recruit-kushida",
         "y1v2.case.kiyotaka-ayanokoji.coordinate-camera-deception",
+        "y1v2.case.kiyotaka-ayanokoji.lure-complainants-via-kushida",
         "y1v2.case.kiyotaka-ayanokoji.protect-sakura-from-clerk",
         "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice"
       ],
@@ -5836,7 +5844,8 @@
         "y1v1.ev.099",
         "y1v1.ev.135",
         "y1v2.ev.016",
-        "y1v2.ev.022"
+        "y1v2.ev.022",
+        "y1v2.ev.070"
       ],
       "leadership": [
         "y1v1.ev.076",
@@ -5879,7 +5888,8 @@
         "y1v2.ev.012",
         "y1v2.ev.016",
         "y1v2.ev.046",
-        "y1v2.ev.048"
+        "y1v2.ev.048",
+        "y1v2.ev.070"
       ],
       "motivation": [
         "y1v2.ev.017"
@@ -6927,6 +6937,7 @@
     "y1v2.case.ken-sudo.admit-conduct-consequences": "data/canon/consolidated/behavioral_cases/ken-sudo/admit-conduct-consequences.json",
     "y1v2.case.manabu-horikita.offer-secretary-seat": "data/canon/consolidated/behavioral_cases/manabu-horikita/offer-secretary-seat.json",
     "y1v2.case.kiyotaka-ayanokoji.refuse-student-council": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/refuse-student-council.json",
-    "y1v2.case.kiyotaka-ayanokoji.minimize-role-after-strategy": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/minimize-role-after-strategy.json"
+    "y1v2.case.kiyotaka-ayanokoji.minimize-role-after-strategy": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/minimize-role-after-strategy.json",
+    "y1v2.case.kiyotaka-ayanokoji.lure-complainants-via-kushida": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/lure-complainants-via-kushida.json"
   }
 }

@@ -51,6 +51,12 @@
     "Rebuild all direct indexes then run repository-level validation",
     "Human verification and release required"
   ],
-  "behavioral_cases": 26,
-  "case_count": 26
+  "behavioral_cases": 27,
+  "case_count": 27,
+  "audit_corrections": [
+    "y1v2.ev.051 scoped to physical PDF pp.157-158, without inventing private balance amount",
+    "y1v2.ev.070 names Kushida's targeted email lure and extends to p.226",
+    "y1v2.ev.083 allocates miscellaneous fee to Class C complainants",
+    "Added actor-owned case for targeted decoy invitation without attributing mastermind role to Kushida"
+  ]
 }

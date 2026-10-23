@@ -349,6 +349,12 @@
       ],
       "cases": []
     },
+    "158": {
+      "evidence": [
+        "y1v2.ev.051"
+      ],
+      "cases": []
+    },
     "164": {
       "evidence": [
         "y1v2.ev.052"
@@ -480,7 +486,17 @@
       "evidence": [
         "y1v2.ev.070"
       ],
-      "cases": []
+      "cases": [
+        "y1v2.case.kiyotaka-ayanokoji.lure-complainants-via-kushida"
+      ]
+    },
+    "226": {
+      "evidence": [
+        "y1v2.ev.070"
+      ],
+      "cases": [
+        "y1v2.case.kiyotaka-ayanokoji.lure-complainants-via-kushida"
+      ]
     },
     "229": {
       "evidence": [

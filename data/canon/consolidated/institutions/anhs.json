@@ -6,7 +6,8 @@
     "ln.y1.v00.legacyemtls.v1.0.1",
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v02.sevenseas.en.operator-provided",
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v04.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "source_documents": [],
@@ -131,7 +132,47 @@
     "y1v3.ev.105",
     "y1v3.ev.107",
     "y1v3.ev.110",
-    "y1v3.ev.111"
+    "y1v3.ev.111",
+    "y1v4.ev.002",
+    "y1v4.ev.003",
+    "y1v4.ev.012",
+    "y1v4.ev.016",
+    "y1v4.ev.017",
+    "y1v4.ev.018",
+    "y1v4.ev.019",
+    "y1v4.ev.020",
+    "y1v4.ev.021",
+    "y1v4.ev.022",
+    "y1v4.ev.023",
+    "y1v4.ev.024",
+    "y1v4.ev.025",
+    "y1v4.ev.026",
+    "y1v4.ev.027",
+    "y1v4.ev.028",
+    "y1v4.ev.029",
+    "y1v4.ev.030",
+    "y1v4.ev.031",
+    "y1v4.ev.033",
+    "y1v4.ev.034",
+    "y1v4.ev.041",
+    "y1v4.ev.043",
+    "y1v4.ev.052",
+    "y1v4.ev.055",
+    "y1v4.ev.064",
+    "y1v4.ev.067",
+    "y1v4.ev.082",
+    "y1v4.ev.086",
+    "y1v4.ev.087",
+    "y1v4.ev.088",
+    "y1v4.ev.107",
+    "y1v4.ev.108",
+    "y1v4.ev.112",
+    "y1v4.ev.114",
+    "y1v4.ev.117",
+    "y1v4.ev.120",
+    "y1v4.ev.126",
+    "y1v4.ev.127",
+    "y1v4.ev.128"
   ],
   "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
   "operational_migration": "Only user/operator-authorized claims may be promoted after review",
@@ -199,7 +240,15 @@
         "y1v3.ev.075",
         "y1v3.ev.076",
         "y1v3.ev.084",
-        "y1v3.ev.107"
+        "y1v3.ev.107",
+        "y1v4.ev.002",
+        "y1v4.ev.003",
+        "y1v4.ev.012",
+        "y1v4.ev.022",
+        "y1v4.ev.023",
+        "y1v4.ev.055",
+        "y1v4.ev.082",
+        "y1v4.ev.087"
       ],
       "description": "Admission, class allocation, campus restrictions, point disclosure"
     },
@@ -242,14 +291,19 @@
         "y1v3.ev.054",
         "y1v3.ev.072",
         "y1v3.ev.073",
-        "y1v3.ev.103"
+        "y1v3.ev.103",
+        "y1v4.ev.052",
+        "y1v4.ev.086",
+        "y1v4.ev.088",
+        "y1v4.ev.112"
       ],
       "description": "Private transferable points; conditional class-point allocation"
     },
     "exams": {
       "reference_exam_ids": [
         "exam.y1.deserted-island-1",
-        "exam.y1.midterm-1"
+        "exam.y1.midterm-1",
+        "exam.y1.zodiac-cruise-1"
       ],
       "evidence_refs": [
         "y1v1.ev.061",
@@ -281,7 +335,35 @@
         "y1v3.ev.104",
         "y1v3.ev.105",
         "y1v3.ev.110",
-        "y1v3.ev.111"
+        "y1v3.ev.111",
+        "y1v4.ev.016",
+        "y1v4.ev.017",
+        "y1v4.ev.018",
+        "y1v4.ev.019",
+        "y1v4.ev.020",
+        "y1v4.ev.021",
+        "y1v4.ev.024",
+        "y1v4.ev.025",
+        "y1v4.ev.026",
+        "y1v4.ev.027",
+        "y1v4.ev.028",
+        "y1v4.ev.029",
+        "y1v4.ev.030",
+        "y1v4.ev.031",
+        "y1v4.ev.033",
+        "y1v4.ev.034",
+        "y1v4.ev.041",
+        "y1v4.ev.043",
+        "y1v4.ev.064",
+        "y1v4.ev.067",
+        "y1v4.ev.107",
+        "y1v4.ev.108",
+        "y1v4.ev.114",
+        "y1v4.ev.117",
+        "y1v4.ev.120",
+        "y1v4.ev.126",
+        "y1v4.ev.127",
+        "y1v4.ev.128"
       ],
       "description": "Mock diagnostic, midterm and exceptional score-point purchase"
     },
@@ -481,7 +563,8 @@
       "y1v1.ev.133"
     ],
     "y1_v02": "July economic disclosures, the fight, Airi's stage identity and suspicions about Ryūen have different time/actor disclosure boundaries. Do not seed April memory.",
-    "y1_v03": "The island-test rule briefing is received on beach at start of August; earlier cruise passengers expected a vacation. Leader keycards, spies, late substitution and secret negotiations have actor-specific disclosure stages."
+    "y1_v03": "The island-test rule briefing is received on beach at start of August; earlier cruise passengers expected a vacation. Leader keycards, spies, late substitution and secret negotiations have actor-specific disclosure stages.",
+    "y1_v04": "12 Zodiac group exam secret notifications at first morning, compulsory mixed-class room sessions, private extra-group contacts, deception and post-result public score; never propagate hidden VIP knowledge or abusive coercion to earlier/other actor memories."
   },
   "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance.",
   "disciplinary_case_y1_v02": {
@@ -536,6 +619,22 @@
       "y1v3.ev.105",
       "y1v3.ev.110",
       "y1v3.ev.111"
+    ]
+  },
+  "zodiac_special_exam_y1_v04": {
+    "exam_ref": "data/canon/consolidated/exams/y1-zodiac-cruise.json",
+    "source_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "group_count": 12,
+    "one_vip_per_group": true,
+    "outcomes": 4,
+    "normative_scope": "REFERENCE_ONLY",
+    "undisclosed_vip_assignment_algorithm": true,
+    "disclosure_gates": [
+      "SCHOOL_PRIVATE_08_AM",
+      "CLASS_SCOPED_ROSTERS",
+      "GROUP_MEETING_OBSERVATIONS",
+      "LATE_PRIVATE_REVEALS",
+      "PUBLIC_OUTCOME_SUMMARY"
     ]
   }
 }

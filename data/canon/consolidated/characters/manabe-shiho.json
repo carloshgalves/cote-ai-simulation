@@ -73,14 +73,16 @@
         "y1v4.ev.096",
         "y1v4.ev.097",
         "y1v4.ev.098",
-        "y1v4.ev.106"
+        "y1v4.ev.106",
+        "y1v4.ev.131"
       ]
     },
     "strategy": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v4.ev.096",
-        "y1v4.ev.106"
+        "y1v4.ev.106",
+        "y1v4.ev.131"
       ]
     },
     "violence": {
@@ -90,11 +92,17 @@
       "context_evidence_refs": [
         "y1v4.ev.099"
       ]
+    },
+    "deception": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.131"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Y1 V4 scene-specific reference; speaker allegations remain uncertain, abuse is descriptively represented without promotion as prescriptive behavior.",
+  "semantic_audit_notes": "Y1 V4 scene-specific reference; speaker allegations remain uncertain, abuse is descriptively represented without promotion as prescriptive behavior. Adversarial V4 source-gap review: false Manabe witness story and Hoshinomiya's discretionary Rabbit assignment are source-scoped; group selection is not a verified VIP assignment formula.",
   "uncertainties": {
     "future_actions_unknown": true,
     "private_vip_disclosure_actor_scoped": true

@@ -61,7 +61,8 @@
         "y1v3.ev.107",
         "y1v4.ev.003",
         "y1v4.ev.087",
-        "y1v4.ev.088"
+        "y1v4.ev.088",
+        "y1v4.ev.132"
       ]
     },
     "economy": {
@@ -139,7 +140,8 @@
         "y1v3.ev.027",
         "y1v3.ev.028",
         "y1v3.ev.029",
-        "y1v3.ev.050"
+        "y1v3.ev.050",
+        "y1v4.ev.132"
       ]
     },
     "social": {
@@ -247,7 +249,8 @@
       "context_evidence_refs": [
         "y1v3.ev.010",
         "y1v3.ev.029",
-        "y1v4.ev.086"
+        "y1v4.ev.086",
+        "y1v4.ev.132"
       ]
     },
     "health": {
@@ -268,7 +271,7 @@
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. Adversarial V4 source-gap review: false Manabe witness story and Hoshinomiya's discretionary Rabbit assignment are source-scoped; group selection is not a verified VIP assignment formula.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

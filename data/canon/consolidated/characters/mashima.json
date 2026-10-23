@@ -24,7 +24,8 @@
         "y1v3.ev.011",
         "y1v3.ev.104",
         "y1v4.ev.020",
-        "y1v4.ev.025"
+        "y1v4.ev.025",
+        "y1v4.ev.132"
       ]
     },
     "governance": {
@@ -37,7 +38,8 @@
         "y1v4.ev.024",
         "y1v4.ev.031",
         "y1v4.ev.033",
-        "y1v4.ev.034"
+        "y1v4.ev.034",
+        "y1v4.ev.132"
       ]
     },
     "exam": {
@@ -65,7 +67,8 @@
         "y1v4.ev.033",
         "y1v4.ev.034",
         "y1v4.ev.127",
-        "y1v4.ev.128"
+        "y1v4.ev.128",
+        "y1v4.ev.132"
       ]
     },
     "resources": {
@@ -115,7 +118,7 @@
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory.",
+  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. Adversarial V4 source-gap review: false Manabe witness story and Hoshinomiya's discretionary Rabbit assignment are source-scoped; group selection is not a verified VIP assignment formula.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": true,
     "future_fate_unknown": true

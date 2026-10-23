@@ -1,0 +1,40 @@
+{
+  "id": "y1v4.case.honami-ichinose.initiate-rabbit-discussion",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "initiate rabbit discussion",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Initiates cross-class introductions and volunteers to facilitate the first Rabbit meeting when no one accepts responsibility.",
+  "observed_result": "The otherwise silent group begins structured conversation.",
+  "epistemic_limits": "Local group acceptance is not blanket political authority across all zodiac teams.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      81,
+      82
+    ],
+    "chapter": 3,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.machida",
+    "actor.hamaguchi"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "social"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "leadership",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.048",
+    "y1v4.ev.049"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

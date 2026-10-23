@@ -1,0 +1,40 @@
+{
+  "id": "y1v4.case.yosuke-hirata.seek-horikita-cooperation-through-kiyotaka",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "seek horikita cooperation through kiyotaka",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Asks Kiyotaka to act as intermediary with Suzune, then revises approach after hearing how indirect manipulation can backfire.",
+  "observed_result": "Admits the plan is short-sighted and considers direct contact.",
+  "epistemic_limits": "The request did not itself persuade Suzune; that outcome is not credited to Hirata here.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      17,
+      18
+    ],
+    "chapter": 2,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "persuasion",
+    "leadership"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "persuasion",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.006",
+    "y1v4.ev.007"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

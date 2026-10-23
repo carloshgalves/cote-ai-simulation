@@ -1,0 +1,39 @@
+{
+  "id": "y1v4.case.kei-karuizawa.refuse-demanded-apology",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "refuse demanded apology",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Denies wrongdoing under pressure and refuses to apologize for an allegation she disputes.",
+  "observed_result": "Manabe and others respond by increasing harassment.",
+  "epistemic_limits": "The disputed earlier act is not independently established; refusal is not a universal strategy or proof of innocence.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      159,
+      161
+    ],
+    "chapter": 4,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.manabe-shiho"
+  ],
+  "capabilities_supported": [
+    "conflict",
+    "emotion"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "conflict",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.082",
+    "y1v4.ev.083"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

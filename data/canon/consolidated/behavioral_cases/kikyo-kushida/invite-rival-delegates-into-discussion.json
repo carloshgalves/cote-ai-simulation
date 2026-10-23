@@ -1,0 +1,40 @@
+{
+  "id": "y1v4.case.kikyo-kushida.invite-rival-delegates-into-discussion",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "invite rival delegates into discussion",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Invites Ichinose and Kiyotaka into Dragon's post-session debate while the central representatives remain in the room.",
+  "observed_result": "They attend the extended discussion.",
+  "epistemic_limits": "Facilitating contact does not mean Kushida knows or reveals every group's hidden VIP.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      144
+    ],
+    "chapter": 4,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.honami-ichinose",
+    "actor.kakeru-ryuen",
+    "actor.suzune-horikita",
+    "actor.ryuji-kanzaki"
+  ],
+  "capabilities_supported": [
+    "social",
+    "leadership"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "social",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.074"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

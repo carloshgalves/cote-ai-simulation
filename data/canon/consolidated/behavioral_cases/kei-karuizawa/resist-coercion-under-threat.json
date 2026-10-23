@@ -1,0 +1,39 @@
+{
+  "id": "y1v4.case.kei-karuizawa.resist-coercion-under-threat",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "resist coercion under threat",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Despite fear, verbally challenges Kiyotaka when he threatens and sexually harasses her.",
+  "observed_result": "She briefly asserts resistance but remains at serious risk under his coercive control.",
+  "epistemic_limits": "This is an abuse survivor's contextual response, not consent, a durable defense capacity or a safe test protocol.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      199,
+      200
+    ],
+    "chapter": 4,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "trauma",
+    "emotion"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "trauma",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.103",
+    "y1v4.ev.104"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

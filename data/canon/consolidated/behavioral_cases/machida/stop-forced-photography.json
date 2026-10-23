@@ -1,0 +1,38 @@
+{
+  "id": "y1v4.case.machida.stop-forced-photography",
+  "actor_id": "actor.machida",
+  "primary_actor_id": "actor.machida",
+  "title": "stop forced photography",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Confronts Manabe and states that Karuizawa has refused permission to be photographed.",
+  "observed_result": "Manabe's group ceases the immediate photography pressure.",
+  "epistemic_limits": "This single intervention does not indicate permanent loyalty or verification of the disputed accusation.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      95
+    ],
+    "chapter": 3,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kei-karuizawa",
+    "actor.manabe-shiho"
+  ],
+  "capabilities_supported": [
+    "conflict",
+    "ethics"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "conflict",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.057"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

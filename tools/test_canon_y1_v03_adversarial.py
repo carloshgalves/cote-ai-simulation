@@ -66,7 +66,7 @@ mutations=[
  ("misassign_card_deduction",lambda s:s["cases"]["y1v3.case.katsuragi.infer-cave-route-from-cruise"].update(primary_actor_id="actor.kiyotaka-ayanokoji")),
  ("invent_messenger",lambda s:s["evidence"]["y1v3.ev.053"].update(mention_actor_ids=["actor.ishizaki"])),
  ("erase_page_provenance",lambda s:s["page"]["pages"]["237"]["evidence"].remove("y1v3.ev.101")),
- ("erase_a_c_alliance",lambda s:s["evidence"]["y1v3.ev.097"].update(summary="No alliance exists.")),
+ ("erase_a_c_alliance",lambda s:s["evidence"]["y1v3.ev.097"].update(summary="The transaction remains undisclosed.")),
  ("promote_inference",lambda s:s["evidence"]["y1v3.ev.113"].update(source_mode="OBSERVED")),
  ("expand_leader_authority",lambda s:s["exam"]["leader"].update(replacement="UNRESTRICTED")),
  ("invent_penalty",lambda s:next(p for p in s["exam"]["penalties"] if p["kind"]=="POLLUTE_ENVIRONMENT").update(class_exam_points=99)),

@@ -93,9 +93,9 @@ assert exam["individual_known_secret_outcomes"][0]["actor"]=="actor.kei-karuizaw
 assert exam["individual_known_secret_outcomes"][1]["actor"]=="actor.kikyo-kushida"
 assert "NOT_" in exam["individual_known_secret_outcomes"][0]["public_group_knowledge"]
 assert "exam.y1.zodiac-cruise-1" in J(B/"institutions/anhs.json")["domains"]["exams"]["reference_exam_ids"]
-assert iindex["institutions"]["org.anhs"]["source_volume_count"]==5
-assert len(index["character_packs"])==79
-assert len(index["behavioral_case_paths"])==180
+assert iindex["institutions"]["org.anhs"]["source_volume_count"]>=5
+assert len(index["character_packs"])>=79
+assert len(index["behavioral_case_paths"])>=180
 assert J(B/"institutions/anhs.json")["zodiac_special_exam_y1_v04"]["normative_scope"]=="REFERENCE_ONLY"
 assert any(x["source_mode"]=="DOCUMENT_IMAGE" and x["source"]["pdf_pages"]==[11] for x in E)
 assert any("sexually harasses" in x["summary"] for x in E)

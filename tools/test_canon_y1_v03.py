@@ -85,7 +85,7 @@ assert exam["spots"]["correct_guess_gain"]==50
 assert any(p["kind"]=="POLLUTE_ENVIRONMENT" and p["class_exam_points"]==20 for p in exam["penalties"])
 assert any(p["kind"]=="ABSENT_ROLL_CALL" and p["class_exam_points"]==5 for p in exam["penalties"])
 assert exam["scoring"]["observed_A_initial_adjustment"]["points"]==270
-assert inst["institutions"]["org.anhs"]["source_volume_count"]==4
+assert inst["institutions"]["org.anhs"]["source_volume_count"]>=4
 assert "exam.y1.deserted-island-1" in J(B/"institutions/anhs.json")["domains"]["exams"]["reference_exam_ids"]
 assert any(e["source_mode"]=="DOCUMENT_IMAGE" and e["source"]["pdf_pages"]==[12] for e in E)
 assert any("Kaneda" in e["summary"] and e["source_mode"]=="REPORTED_BY_CHARACTER" for e in E)

@@ -186,3 +186,12 @@ restore, admission, decisão, comunicação, terminais e migração; não altera
 bundle normativo nem reescreve arquivos parentais. O teste exige reopen dos
 bytes corretos e rejeição da codificação antiga. A resolução formal do finding
 depende do checkpoint de correção validado e publicado na PR.
+
+O re-review de `4584499` confirmou a correção de SlotResponse e registrou
+**R19-3**, o wrapper equivalente em ExogenousInput. Quatro casos V1/V2 ×
+normal/late-input demonstraram RED. A correção usa o corpo plano na escrita,
+redelivery, restore, admission e guard SQL de ingresso; testa normalização
+causal, repetição após closure posterior, receipt imutável, reopen e rejeição
+do encoding incompatível. As suítes de input/admission/conformidade/SQLite e
+as regressões de ingresso R4–R6 e intenções arquivadas passaram localmente.
+Sua resolução também exige commit/push e evidência no finding original.

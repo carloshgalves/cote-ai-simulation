@@ -227,7 +227,7 @@ func verifyInputs(d identity.Deriver, records []inputledger.StoredInput) error {
 		if !matchesBytes(id[:], f[0]) || !bytes.Equal(id[:], record.ID[:]) {
 			return errors.New("ExogenousInput identity mismatch")
 		}
-		digest, _, err := d.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, []any{f[:12]})
+		digest, _, err := d.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, f[:12])
 		if err != nil {
 			return err
 		}

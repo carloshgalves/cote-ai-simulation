@@ -414,7 +414,7 @@ func (l *Ledger) restoreInput(record ports.CanonicalRecord, fields []any) (Store
 	if err != nil || !matchesBytes(id[:], fields[0]) || !bytes.Equal(id[:], record.Identity[:]) {
 		return StoredInput{}, errors.New("persisted ExogenousInput identity mismatch")
 	}
-	digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, []any{fields[:12]})
+	digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, fields[:12])
 	if err != nil || !matchesBytes(digest[:], fields[12]) {
 		return StoredInput{}, errors.New("persisted ExogenousInput digest mismatch")
 	}
@@ -730,7 +730,7 @@ func (l *Ledger) AppendInput(ctx context.Context, sourceID string, input Input) 
 	copy(causalID[:], id[:])
 	if old, exists := l.inputByID[causalID]; exists {
 		body := []any{id[:], l.runID[:], sourceID, input.ProducerUnitKey, input.Kind, input.SchemaVersion, input.Actor, input.Payload, int64(input.DeclaredEffectiveAt), old.Fields[9], input.Provenance, input.IdempotencyKey}
-		digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, []any{body})
+		digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, body)
 		if err != nil {
 			return StoredInput{}, err
 		}
@@ -759,7 +759,7 @@ func (l *Ledger) AppendInput(ctx context.Context, sourceID string, input Input) 
 		}
 	}
 	body := []any{id[:], l.runID[:], sourceID, input.ProducerUnitKey, input.Kind, input.SchemaVersion, input.Actor, input.Payload, int64(input.DeclaredEffectiveAt), coordValue(eligibility), input.Provenance, input.IdempotencyKey}
-	digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, []any{body})
+	digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, body)
 	if err != nil {
 		return StoredInput{}, err
 	}

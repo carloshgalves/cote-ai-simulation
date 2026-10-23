@@ -1,0 +1,3476 @@
+{
+  "schema_version": "individual-source-review-v2",
+  "source_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+  "created_at": "2026-10-23",
+  "source_pdf_sha256": "22b13fabb5aa2b93e355a0cd621c7e5d9dd63c33d775eda58e27067541c5387e",
+  "source_page_count": 262,
+  "global_promotion": "BLOCKED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW_AND_OPERATOR_RELEASE",
+  "evidence_count": 117,
+  "behavioral_case_count": 35,
+  "evidence": [
+    {
+      "record_id": "y1v3.ev.001",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 1,
+      "pdf_pages": [
+        10
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Chabashira compares an unnamed boy to the story of Icarus and reflects on initiating a risky confrontation; the subject and time of that decision are not directly disclosed.",
+      "actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.002",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 1,
+      "pdf_pages": [
+        11
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Chabashira says she feels cornered and has already gambled by provoking the boy; this is her retrospective perception, not an externally verified threat.",
+      "actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.003",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 1,
+      "pdf_pages": [
+        12
+      ],
+      "source_mode": "DOCUMENT_IMAGE",
+      "primary_claim": "A school database illustration gives Yamauchi low displayed academic and decision-making assessments with an interviewer warning of self-presentation bias; scores are profile labels, not observed causal capabilities.",
+      "actor_ids": [
+        "actor.haruki-yamauchi"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.004",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        13
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "After first-semester exams, the first years board a luxury ship for a two-week school-paid vacation and are initially told to expect one week at a private island lodge.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kanji-ike",
+        "actor.ken-sudo"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.005",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        15
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Class A students insult and shove Class D students on the ship; Sudō confronts them verbally but does not start a fistfight.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.006",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        16
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata leaves leisure time to help another classmate, while fellow students speculate without proof about the state of his relationship with Karuizawa.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.007",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        17
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ike asks permission to use Kushida's first name, and Kushida reciprocates; this is a specific friendly exchange, not an established romantic relationship.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.kikyo-kushida"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.008",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        19
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "From the approaching ship, the school island is described as roughly half a square kilometre; its contours and circumnavigation later become clues to path locations.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.009",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        22
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Students are directed to leave personal objects on board and surrender phones before landing; Suzune appears dishevelled and cold, while Kiyotaka only hypothesizes why.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.010",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        24
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Chabashira oversees Class D roll call, and English teacher Mashima of Class A addresses the first-years at the beach.",
+      "actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.011",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        25
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Mashima announces the island survival activity as the first special examination of the school year, running until August 7, rather than the expected leisure week.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.012",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        25
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Each class is provisioned two tents, two flashlights, a box of matches, and unlimited sunscreen; each student receives a toothbrush, with sanitary supplies available separately.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.013",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        27
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Mashima calls the test's theme freedom and states that 300 exam points are allotted to each class to purchase necessities through a manual.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.014",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        28
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "The school states that unspent island-test points become additional class points after the test; they are not ordinary private points spendable through the S-System.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.015",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        29
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Mashima announces an absent Class A student and a 30-point illness-retirement penalty, leaving Class A with 270 initial island-test points.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.016",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        29
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Students must wear school-supplied sensor watches until the test ends; a removal without authorization attracts punishment.",
+      "actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.017",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        30
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Chabashira describes watches that track pulse, temperature, motion and GPS position, include an emergency alarm and can be replaced on failure.",
+      "actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.018",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        31
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "The manual penalizes a student who retires because of serious illness or injury by 30 class test points; retirement is not reversible.",
+      "actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.019",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        31
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "The island-test manual specifies a 20-point deduction for environmental pollution and 5 points per absent student at each 8 AM or 8 PM roll call.",
+      "actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.020",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        31
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Cross-class assault, robbery or property damage can disqualify the offender's class immediately and forfeit the offender's private points, if determined under the exam rule.",
+      "actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.021",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        33
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Chabashira affirms the island-test balance cannot become negative, even if additional disqualifying events occur after the balance hits zero.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.022",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        33
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Once a base camp is declared, its location cannot change without suitable justification; student groups have twice-daily attendance at their base.",
+      "actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.023",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        34
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Chabashira demonstrates a supplied portable cardboard toilet and privacy enclosure, and Shinohara objects to its adequacy.",
+      "actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.shinohara"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.024",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        35
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ike and Shinohara argue about privacy, hygiene and conserving points for island amenities; the dispute prevents an immediate consensus.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.shinohara"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.025",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        36
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Class B teacher Hoshinomiya greets Chabashira warmly and attempts to stay near Class D's briefing; Chabashira objects to another teacher listening.",
+      "actor_ids": [
+        "actor.chie-hoshinomiya",
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.026",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        38
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Certain marked island spots can be exclusively occupied for eight hours by one class and reclaimed after expiry; each valid occupation awards one provisional bonus point.",
+      "actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.027",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        39
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Occupying a spot requires the designated leader's personalized keycard; unauthorized use of another class's occupied spot costs 50 test points.",
+      "actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.028",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        40
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "On day seven classes may name rival leaders: a correct guess gains 50 points and costs the target 50; a wrong guess costs the guesser 50, and an exposed leader loses accumulated occupation bonuses.",
+      "actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.029",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        40
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Every class must select a leader by the first day's roll call or have one assigned; changing leaders requires suitable justification.",
+      "actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.030",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        48
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Suzune admits the unfamiliar survival test exposes limits in her academic strengths, while outdoor tasks give Ike and Sudō opportunities to help.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kanji-ike"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.031",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        50
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata advocates spending points on a private toilet to reduce distress and health concerns, balancing minority needs against a strict savings strategy.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.shinohara",
+        "actor.kanji-ike"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.032",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        52
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kushida volunteers to search the forest for water and food, drawing helpers; Kiyotaka, Sakura and Kōenji form a separate exploratory group.",
+      "actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura",
+        "actor.rokusuke-koenji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.033",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        57
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kōenji asks his companions to look around at a forest spot after noticing something of interest, but his precise intent is not yet established.",
+      "actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.034",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        59
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka and Sakura reach an occupied Class A cave after following a path; the leader's card handling risks revealing a hidden identity.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.035",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        60
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka infers from the ship's earlier circuit and a path visible from the deck that the school may be hinting where occupation spots lie.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.036",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        63
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ike and companions find a shaded river area potentially suitable as Class D's base, redirecting the larger group from the exposed beach.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.ken-sudo"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.037",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        66
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kushida proposes Suzune as the designated leader, Hirata supports her and she accepts, receiving a keycard under the island-test rules.",
+      "actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita",
+        "actor.yosuke-hirata"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.038",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        67
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ike directly drinks river water and recommends it, but Shinohara and others remain unconvinced that appearance proves it safe.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.shinohara"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.039",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        68
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sudō calms a water dispute by acknowledging prior class trouble and suggesting boiling water rather than demanding immediate compliance.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.shinohara",
+        "actor.kanji-ike"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.040",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        72
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Some girls allocate both school-provided tents to themselves, raising shelter and class cooperation problems.",
+      "actor_ids": [
+        "actor.shinohara",
+        "actor.yosuke-hirata"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.041",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        75
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sakura volunteers to join Kiyotaka and Yamauchi for branch gathering even while visibly tired, instead of isolating herself.",
+      "actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji",
+        "actor.haruki-yamauchi"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.042",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        78
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka stops Yamauchi after noticing a female student with a swollen face near the forest path.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.haruki-yamauchi",
+        "actor.mio-ibuki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.043",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        80
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Ibuki says she belongs to Class C and refuses immediate help; classmates offer support despite her rival affiliation.",
+      "actor_ids": [
+        "actor.mio-ibuki",
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura",
+        "actor.haruki-yamauchi"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.044",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        83
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Yamauchi fails repeatedly to ignite wet tinder with limited matches and becomes anxious about exhausting the box.",
+      "actor_ids": [
+        "actor.haruki-yamauchi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.045",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        85
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ike selects drier smaller fuel and builds a working fire, demonstrating practical experience from earlier family camping.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.046",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        88
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ike apologizes to Shinohara for dismissing privacy concerns, and she apologizes for refusing to consider any river-water option.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.shinohara"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.047",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        89
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata proposes an estimated 180-point spending plan and a target of 120 remaining points, distinguishing a forecast from a guaranteed result.",
+      "actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.048",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        94
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata asks Ibuki about her injury, believes her stated expulsion story enough to invite her to stay and promises help.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.mio-ibuki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.049",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        95
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kushida offers a ration and water to Ibuki after the class agrees to share food despite the newcomer not counting among its original rationed students.",
+      "actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.mio-ibuki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.050",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        97
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Chabashira says Kōenji retired on health grounds and will stay on the ship, costing Class D 30 exam points; his true motivation is not established.",
+      "actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.sae-chiyabashira"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.051",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        100
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata rises early to care for camp chores and discusses class ambition with Kiyotaka without asserting that all classmates share the same goals.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.052",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        103
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kanzaki visits near Class D's camp, examines its investments and encounters Kiyotaka; motives attributed to this reconnaissance remain partly Kiyotaka's conjecture.",
+      "actor_ids": [
+        "actor.ryuji-kanzaki",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.053",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        106
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Class C boys relay an invitation from Ryūen and provoke Ike at the river; the invitation does not prove the details of Ryūen's plans.",
+      "actor_ids": [
+        "actor.ishizaki",
+        "actor.kakeru-ryuen",
+        "actor.kanji-ike"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.054",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        108
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ryūen oversees lavish Class C beach amenities and appears to be spending its island allowance rather than preserving it.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.055",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        112
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ryūen throws back water that Ishizaki brought, scolding him for its temperature, demonstrating intimidation within his class.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.ishizaki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.056",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        113
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Ryūen discusses Ibuki as a Class C member and refuses to supply a verifiable account of her facial injury; Suzune's suspicion is not proof of perpetration.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita",
+        "actor.mio-ibuki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.057",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        115
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka notes the absence of many Class C students and entertains multiple explanations for Ryūen's extravagant apparent abandonment of points.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.058",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        117
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Class B uses a forest camp and improvised equipment; Ichinose welcomes the visitors without surrendering confidential class information.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.059",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        120
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Ichinose describes personally checking well water first and introducing a safer shared water supply after an initial trial period.",
+      "actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.060",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        122
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Ichinose says Class B conserves and reuses supplied sanitation materials without unnecessary waste, coordinating shared welfare.",
+      "actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.061",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        124
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ichinose cautiously weighs Horikita's proposed Class B and D cooperation while avoiding full disclosure of all strategic details.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.062",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        126
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka and Suzune encounter the guarded cave occupied by Class A and question whether approaching its entrance breaks the occupation rules.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.063",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        127
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Yahiko rebuffs rival scouts and Katsuragi intervenes with an argument that respecting exclusive occupation is essential for mutual security.",
+      "actor_ids": [
+        "actor.yahiko",
+        "actor.katsuragi",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.064",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        131
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sakura follows Kiyotaka on a forest walk, nervously seeking time together, and their interaction includes repeated requests to slow down.",
+      "actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.065",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        133
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Sakura tells Kiyotaka the former camera-shop clerk resigned; this is a report, not independent school employment documentation.",
+      "actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.066",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        139
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sakura spots edible-looking cultivated corn in the forest, giving the pair a new potential food source; its nutritional safety and ownership require independent checking.",
+      "actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.067",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        140
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka improvises a carrying bag from his shirt and plans to report a harvest site to Class D rather than hoard the find.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.068",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        141
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Katsuragi checks the corn site and warns against leaving resources unguarded; he observes Class D students nearby without demonstrated knowledge of its whole plan.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.yahiko",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.069",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        144
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "On day four Class D secures fish and harvested corn, easing earlier food scarcity and easing class tension.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.070",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        146
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka independently surveys a high island vantage point and marks useful spots on a rough map.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.071",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        147
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Two Class A boys stop Kiyotaka, search his belongings and seize his map and pen; he resists but does not escalate to physical combat.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.072",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        148
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Class A students propose a points-for-information arrangement with a possible written promise after phones are returned; no completed transfer is shown.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.073",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        149
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Ryūen's Class C beach camp appears mostly deserted after its costly celebrations; the narrator still cannot prove why the group dispersed.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.074",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        150
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ichinose and Kanzaki discuss uncertain leadership within Class A and whether Sakayanagi's absence changes Katsuragi's influence.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.ryuji-kanzaki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.075",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        153
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "In a pre-island flashback Chabashira summons Kiyotaka to a private room after the term closing ceremony.",
+      "actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.076",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        155
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Chabashira says a man has contacted the school to arrange Kiyotaka's expulsion; the man's authority and intentions are not independently confirmed here.",
+      "actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.077",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        156
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Chabashira pressures Kiyotaka by linking cooperation and a Class A goal to her knowledge of his background; her threat remains a teacher's claim.",
+      "actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.078",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        159
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Girls report the theft of Karuizawa's underwear, request a search of boys' possessions and become suspicious of classmates without proof of a culprit.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.shinohara",
+        "actor.yosuke-hirata"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.079",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        163
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "The stolen underwear is found inside Ike's bag, but Ike denies placing it there; its presence does not independently identify the thief.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.080",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        164
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka takes possession of the discovered underwear before a public search, creating a concealment that should not be treated as an official exoneration.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.081",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        166
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata discovers Kiyotaka holding the underwear during a search but privately withholds the accusation; he later seeks the underlying facts.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.082",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        173
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Karuizawa and Horikita clash over imposing separate facilities and collective suspicion on boys; class trust deteriorates.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.083",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        175
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sakura speaks up on Kiyotaka's behalf in a heated meeting, but Karuizawa targets her with humiliating responses and Sakura withdraws.",
+      "actor_ids": [
+        "actor.airi-sakura",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.084",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        179
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "After the underwear incident, Class D separates male and female camp arrangements, increasing resource and trust costs.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.085",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        183
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka privately infers from Ibuki's behavior that she may have planted the underwear in Ike's bag; an inference is not yet an admitted fact.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.086",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        185
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka and Suzune inspect girls' accommodations and find purchased battery fans, contradicting claims of uniformly strict austerity.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.087",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        192
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune is visibly ill and is urged to rest; her physical condition affects her ability to protect the leader's keycard.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.088",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        200
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune throws Yamauchi during a staged approach to test her physical reaction while she is already unwell.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.haruki-yamauchi"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.089",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        203
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Suzune tells Kiyotaka that her island-test leader keycard has gone missing and that she trusts him enough to ask for help.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.090",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        206
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "The Class D test manual is burned during a camp disturbance, aggravating class tension; the responsible party is not independently identified.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.091",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        209
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata momentarily freezes and cannot coordinate the camp during worsening weather and disputes, revealing a situational limit to his leadership.",
+      "actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.092",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        213
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ill Suzune follows Ibuki into the forest during heavy rain, suspecting her involvement and pressing questions about the underwear, fire and missing card.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.mio-ibuki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.093",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        217
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ibuki strikes at Suzune when Suzune attempts to inspect her bag; Suzune evades a kick despite severe fever.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.mio-ibuki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.094",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        218
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune fights Ibuki defensively but deteriorating health limits her stamina and she loses her ability to continue safely.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.mio-ibuki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.095",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        221
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "The narration shifts to Ibuki's private perspective after Suzune collapses; Ibuki reports her own covert role and notes that a healthy Suzune might have fought differently.",
+      "actor_ids": [
+        "actor.mio-ibuki",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.096",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        222
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ibuki shows Suzune's personalized leader keycard to Ryūen, proving that the secret was exposed within their group.",
+      "actor_ids": [
+        "actor.mio-ibuki",
+        "actor.kakeru-ryuen"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.097",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        223
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ibuki meets Katsuragi concerning a covert cross-class arrangement; the specific transaction remains incompletely disclosed.",
+      "actor_ids": [
+        "actor.mio-ibuki",
+        "actor.katsuragi",
+        "actor.kakeru-ryuen"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.098",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        226
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Narration returns to Kiyotaka, who follows in the storm and finds Suzune unconscious near her lost keycard.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.099",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        232
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "While carrying a feverish Suzune down a wet slope, Kiyotaka slips, protects her during a fall, and resumes his attempt to reach medical support.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.100",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        235
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka internally describes others as tools and winning as his overriding aim; this is a private self-description, not the knowledge of Suzune or other pupils.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.101",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        237
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka delivers unconscious Suzune to exam staff before the 8 PM roll call, accepts her medical retirement and returns her secret leader card.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.102",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        238
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka calculates a 30-point retirement deduction and a separate 5-point missed-roll-call cost for himself; these are in-scene expectations.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.103",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        240
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Class D reaches the final exam day with a provisional reported point balance and lingering uncertainty about leader guesses and bonus awards.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kanji-ike"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.104",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        243
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Mashima publicly states the island exam has concluded and that final results will be announced without questioning the decisions.",
+      "actor_ids": [
+        "actor.mashima"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.105",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        244
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Final announced island-test scores are Class C zero, Class A 120, Class B 140 and Class D 225, with D first and C last.",
+      "actor_ids": [
+        "actor.mashima",
+        "actor.kakeru-ryuen"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.106",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        245
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Class D celebrates the surprise outcome; Ryūen is surprised his stated leader-identification strategy did not produce the expected result.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.yosuke-hirata",
+        "actor.kakeru-ryuen"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.107",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        248
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Chabashira reports Kiyotaka's father expected him to seek expulsion eventually; her statement does not grant the father direct runtime authority.",
+      "actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.108",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        249
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Chabashira again tries to frame Kiyotaka's choices using Icarus imagery, a rhetorical tactic with no observed power to compel him.",
+      "actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.109",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        251
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Kiyotaka retrospectively explains how he detected Class A's cave card exposure and inferred that internal mistrust constrained Katsuragi.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.110",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        253
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Kiyotaka reveals that after Suzune's medical retirement he was appointed the new Class D leader and shows a card bearing his own name.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.111",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        254
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Kiyotaka argues medical retirement qualifies as suitable justification for a leader replacement, which explains why guesses naming Suzune no longer succeed.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.112",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        255
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Kiyotaka says he inferred Ibuki's espionage from her behavior and from the discovery of another suspect student in Class B, but not every inferred detail is independently demonstrated.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.113",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        256
+      ],
+      "source_mode": "INTERPRETATION",
+      "primary_claim": "Kiyotaka hypothesizes hidden cooperation between Classes A and C involving purchases, spying and leader information; he explicitly says part is intuition drawn from scores.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kakeru-ryuen",
+        "actor.katsuragi"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.114",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        257
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka privately credits his class tactics to Chabashira's earlier pressure and declines to reveal his personal motivation to Suzune.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.115",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        258
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka agrees to help Suzune target Class A on condition she stop investigating his past; she accepts with a handshake.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.116",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        150
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Ichinose and Kanzaki discuss reports that Sakayanagi is absent from Class A's island contingent; they cannot establish exactly how that affects Katsuragi's internal standing.",
+      "actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.honami-ichinose",
+        "actor.ryuji-kanzaki"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    },
+    {
+      "record_id": "y1v3.ev.117",
+      "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        255
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "In a retrospective exchange Kiyotaka alleges Kaneda entered Class B as a Class C spy in connection with Ryūen's information-gathering; the mechanism and what each Class B member knew remain unobserved.",
+      "actor_ids": [
+        "actor.kaneda",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kakeru-ryuen",
+        "actor.honami-ichinose"
+      ],
+      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "exact claim meaning",
+        "speaker vs world truth",
+        "actor mention vs action",
+        "chronology and later revelation",
+        "direct PDF locator and limits"
+      ]
+    }
+  ],
+  "behavioral_cases": [
+    {
+      "case_id": "y1v3.case.ken-sudo.restrain-on-ship",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/restrain-on-ship.json",
+      "primary_actor_id": "actor.ken-sudo",
+      "pdf_pages": [
+        15
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kanji-ike.locate-river-camp",
+      "case_file": "data/canon/consolidated/behavioral_cases/kanji-ike/locate-river-camp.json",
+      "primary_actor_id": "actor.kanji-ike",
+      "pdf_pages": [
+        63
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kanji-ike.build-campfire",
+      "case_file": "data/canon/consolidated/behavioral_cases/kanji-ike/build-campfire.json",
+      "primary_actor_id": "actor.kanji-ike",
+      "pdf_pages": [
+        85
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kanji-ike.apologize-to-shinohara",
+      "case_file": "data/canon/consolidated/behavioral_cases/kanji-ike/apologize-to-shinohara.json",
+      "primary_actor_id": "actor.kanji-ike",
+      "pdf_pages": [
+        88
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.ken-sudo.propose-safe-water-compromise",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/propose-safe-water-compromise.json",
+      "primary_actor_id": "actor.ken-sudo",
+      "pdf_pages": [
+        68
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.yosuke-hirata.prioritize-portable-toilet",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/prioritize-portable-toilet.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        50
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.yosuke-hirata.budget-island-allowance",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/budget-island-allowance.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        89
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.yosuke-hirata.welcome-rival-injured-student",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/welcome-rival-injured-student.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        94
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.yosuke-hirata.protect-underwear-suspects",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/protect-underwear-suspects.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        166
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.yosuke-hirata.freeze-during-crisis",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/freeze-during-crisis.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        209
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kikyo-kushida.recruit-exploration-volunteers",
+      "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/recruit-exploration-volunteers.json",
+      "primary_actor_id": "actor.kikyo-kushida",
+      "pdf_pages": [
+        52
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kikyo-kushida.propose-hidden-leader-horikita",
+      "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/propose-hidden-leader-horikita.json",
+      "primary_actor_id": "actor.kikyo-kushida",
+      "pdf_pages": [
+        66
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kikyo-kushida.share-rations-with-ibuki",
+      "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/share-rations-with-ibuki.json",
+      "primary_actor_id": "actor.kikyo-kushida",
+      "pdf_pages": [
+        95
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.suzune-horikita.accept-island-leadership",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/accept-island-leadership.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        66
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.suzune-horikita.reassess-nonacademic-skills",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/reassess-nonacademic-skills.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        48
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.suzune-horikita.feverish-defense-against-ibuki",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/feverish-defense-against-ibuki.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        217,
+        218
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.suzune-horikita.seek-trusted-help-for-keycard",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/seek-trusted-help-for-keycard.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        203
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.airi-sakura.join-branch-collection",
+      "case_file": "data/canon/consolidated/behavioral_cases/airi-sakura/join-branch-collection.json",
+      "primary_actor_id": "actor.airi-sakura",
+      "pdf_pages": [
+        75
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.airi-sakura.identify-corn-food-source",
+      "case_file": "data/canon/consolidated/behavioral_cases/airi-sakura/identify-corn-food-source.json",
+      "primary_actor_id": "actor.airi-sakura",
+      "pdf_pages": [
+        139
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.airi-sakura.defend-kiyotaka-verbally",
+      "case_file": "data/canon/consolidated/behavioral_cases/airi-sakura/defend-kiyotaka-verbally.json",
+      "primary_actor_id": "actor.airi-sakura",
+      "pdf_pages": [
+        175
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kiyotaka-ayanokoji.spot-island-path-from-ship",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/spot-island-path-from-ship.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        60
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kiyotaka-ayanokoji.assist-injured-rival",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/assist-injured-rival.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        78,
+        80
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kiyotaka-ayanokoji.improvise-corn-carrying",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/improvise-corn-carrying.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        140
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kiyotaka-ayanokoji.withhold-underwear-evidence",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/withhold-underwear-evidence.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        164,
+        166
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kiyotaka-ayanokoji.notice-spy-hypothesis",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/notice-spy-hypothesis.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        183
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kiyotaka-ayanokoji.carry-sick-horikita",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/carry-sick-horikita.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        226,
+        232,
+        237
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kiyotaka-ayanokoji.exploit-justified-leader-replacement",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/exploit-justified-leader-replacement.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        253,
+        254
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kiyotaka-ayanokoji.condition-support-on-privacy",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/condition-support-on-privacy.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        258
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kakeru-ryuen.organize-luxury-spending",
+      "case_file": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/organize-luxury-spending.json",
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        108
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.kakeru-ryuen.intimidate-isshizaki",
+      "case_file": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/intimidate-isshizaki.json",
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        112
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.mio-ibuki.undercover-leader-card-delivery",
+      "case_file": "data/canon/consolidated/behavioral_cases/mio-ibuki/undercover-leader-card-delivery.json",
+      "primary_actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        221,
+        222
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.mio-ibuki.fight-feverish-suzune",
+      "case_file": "data/canon/consolidated/behavioral_cases/mio-ibuki/fight-feverish-suzune.json",
+      "primary_actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        217,
+        218
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.honami-ichinose.evaluate-well-before-shared-use",
+      "case_file": "data/canon/consolidated/behavioral_cases/honami-ichinose/evaluate-well-before-shared-use.json",
+      "primary_actor_id": "actor.honami-ichinose",
+      "pdf_pages": [
+        120
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.katsuragi.defend-class-a-exclusive-cave",
+      "case_file": "data/canon/consolidated/behavioral_cases/katsuragi/defend-class-a-exclusive-cave.json",
+      "primary_actor_id": "actor.katsuragi",
+      "pdf_pages": [
+        127
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    },
+    {
+      "case_id": "y1v3.case.sae-chiyabashira.pressure-kiyotaka-with-family-claims",
+      "case_file": "data/canon/consolidated/behavioral_cases/sae-chiyabashira/pressure-kiyotaka-with-family-claims.json",
+      "primary_actor_id": "actor.sae-chiyabashira",
+      "pdf_pages": [
+        155,
+        156
+      ],
+      "semantic_review": "PENDING_DIRECT_CASE_REVIEW",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor directly demonstrated act",
+        "conditions available at the time",
+        "observed outcome and failures",
+        "limits including health or deception",
+        "support evidence and post-divergence memory restrictions"
+      ]
+    }
+  ],
+  "release_gate": {
+    "assistant_individual_semantic_review": "NOT_STARTED",
+    "operator_approval": "PENDING",
+    "individual_verified_count": 0,
+    "engine_memory_admission": false
+  },
+  "cautions": [
+    "Source accepted for reading but items are not yet semantically signed off",
+    "Narrator forecasts or first-person strategy explanations cannot be transposed to earlier character knowledge",
+    "Actor owns only its direct behavioral case, not all mentions",
+    "The island exam rules are documented reference, not executable scoring engine"
+  ]
+}

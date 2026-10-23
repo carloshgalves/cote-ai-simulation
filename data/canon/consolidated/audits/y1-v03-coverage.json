@@ -51,16 +51,19 @@
     "7": 14
   },
   "cases": 35,
-  "open_audit": "SOURCE_WINDOWS_AND_INDIVIDUAL_ACTOR_REVIEW_PENDING",
-  "operator_release": "NOT_REQUESTED",
+  "open_audit": "RECORD_LEVEL_ASSISTANT_SEMANTIC_REVIEW_PENDING",
+  "operator_release": "PENDING",
   "method": "Initial scene-relevance-filtered source-local paraphrases across the whole volume; narrator, dialogue claims, exact procedural disclosures and future-time separate. All claims unverified pending individually audited review.",
   "open_issues": [
     "Individual direct-source semantic review",
     "Behavioral demonstrations and globally consolidated character/institution merges",
     "Index regeneration and complete CI",
     "Leader replacement procedure and retrospective strategy must not be seeded into earlier agent knowledge",
-    "Numerical results are observed; avoid inventing hidden score arithmetic"
+    "Numerical results are observed; avoid inventing hidden score arithmetic",
+    "150+ individual claim and behavioral case source windows need separate semantic adjudication",
+    "All actor knowledge and class leader secrets must retain disclosure times"
   ],
   "behavioral_cases": 35,
-  "coverage_status": "INITIAL_FULL_VOLUME_SCENE_CANDIDATES_EXTRACTED_REVIEW_PENDING"
+  "coverage_status": "INITIAL_FULL_VOLUME_SCENE_CANDIDATES_EXTRACTED_REVIEW_PENDING",
+  "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v03.json"
 }

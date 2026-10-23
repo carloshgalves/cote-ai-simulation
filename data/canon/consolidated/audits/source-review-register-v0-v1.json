@@ -1,0 +1,5153 @@
+{
+  "schema_version": "canon-source-review-register-v1",
+  "sources": [
+    {
+      "file": "volume0",
+      "pages": 265,
+      "sha256": "a5f3360c145ed9aa038bf7965b1d261e8b733c943b0c7fb8ed976705e3e0f7d3",
+      "operator_accepted": true,
+      "source_text_private": true
+    },
+    {
+      "file": "y1-v01",
+      "pages": 264,
+      "sha256": "d6d21c82cc5da8dd977ffbe2011f9b8029952efdb23771366a0426f9335c91b8",
+      "operator_accepted": true,
+      "source_text_private": true
+    }
+  ],
+  "audit_method": "Offline approved PDF text windows combined with per-claim page-location retrieval; overlap and numeral signals are heuristics, not truth judgments.",
+  "scope": {
+    "records": 268,
+    "cases": 75,
+    "volumes": [
+      0,
+      1
+    ]
+  },
+  "global_promotion": "BLOCKED_UNTIL_RECORD_LEVEL_SEMANTIC_SIGNOFF",
+  "review_states": {
+    "record_level_pending": 268,
+    "case_level_pending": 75
+  },
+  "records": [
+    {
+      "id": "v0.pol.001",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        10,
+        11,
+        12
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 38,
+      "semantic_overlap_percent_with_neighbors": 46,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.002",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        18,
+        22
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 57,
+      "semantic_overlap_percent_with_neighbors": 57,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.003",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        25,
+        29
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 81,
+      "semantic_overlap_percent_with_neighbors": 81,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.004",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        28,
+        29,
+        30
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 59,
+      "semantic_overlap_percent_with_neighbors": 65,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.005",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        31,
+        32
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 44,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.006",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        33,
+        34
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 54,
+      "semantic_overlap_percent_with_neighbors": 62,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.007",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        35,
+        36
+      ],
+      "source_mode": "PROJECT_PLAN",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 42,
+      "semantic_overlap_percent_with_neighbors": 42,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.008",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        37,
+        38
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 36,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.009",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        37,
+        38,
+        49,
+        51
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 36,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.010",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        50,
+        51,
+        52
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 57,
+      "semantic_overlap_percent_with_neighbors": 57,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.011",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        39,
+        40
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 29,
+      "semantic_overlap_percent_with_neighbors": 29,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.012",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        83,
+        84,
+        85,
+        86,
+        87
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 62,
+      "semantic_overlap_percent_with_neighbors": 77,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.013",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        54,
+        55,
+        56
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 42,
+      "semantic_overlap_percent_with_neighbors": 42,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.014",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        105,
+        107,
+        109,
+        110,
+        111
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 64,
+      "semantic_overlap_percent_with_neighbors": 64,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.015",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 73,
+      "semantic_overlap_percent_with_neighbors": 73,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.016",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        209,
+        210,
+        211,
+        212,
+        213
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 47,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.017",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        214,
+        215
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 21,
+      "semantic_overlap_percent_with_neighbors": 29,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.018",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        216,
+        217,
+        218,
+        219
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 57,
+      "semantic_overlap_percent_with_neighbors": 57,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.019",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        219,
+        224,
+        225,
+        226
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 56,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.020",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        247,
+        248,
+        249,
+        259,
+        260
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 63,
+      "semantic_overlap_percent_with_neighbors": 69,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.021",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        260,
+        261
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 38,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.022",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        259,
+        260
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 25,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.023",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        239,
+        240
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 29,
+      "semantic_overlap_percent_with_neighbors": 36,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.024",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        17,
+        18,
+        19,
+        22,
+        24
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 27,
+      "semantic_overlap_percent_with_neighbors": 36,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.001",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        33,
+        34,
+        35,
+        36
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 60,
+      "semantic_overlap_percent_with_neighbors": 67,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.002",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        58,
+        59,
+        60,
+        70
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 60,
+      "semantic_overlap_percent_with_neighbors": 60,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.003",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        70,
+        71
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.004",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        47,
+        53,
+        54,
+        55,
+        71,
+        97,
+        98
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 67,
+      "semantic_overlap_percent_with_neighbors": 80,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.005",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        64,
+        65,
+        66,
+        67,
+        68
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 27,
+      "semantic_overlap_percent_with_neighbors": 27,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.006",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        60,
+        61,
+        62,
+        90,
+        91
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 44,
+      "semantic_overlap_percent_with_neighbors": 44,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.007",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        61,
+        62,
+        63
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 47,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.008",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        62,
+        91,
+        221,
+        222
+      ],
+      "source_mode": "POLICY_CLAIM",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 29,
+      "semantic_overlap_percent_with_neighbors": 36,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.009",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        93,
+        94,
+        95
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 59,
+      "semantic_overlap_percent_with_neighbors": 59,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.010",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        93,
+        94,
+        95,
+        103
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 57,
+      "semantic_overlap_percent_with_neighbors": 57,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.011",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 60,
+      "semantic_overlap_percent_with_neighbors": 60,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.012",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        105,
+        106,
+        107,
+        108,
+        109
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 58,
+      "semantic_overlap_percent_with_neighbors": 58,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.013",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        124,
+        125,
+        126,
+        127,
+        242,
+        243
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 57,
+      "semantic_overlap_percent_with_neighbors": 64,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.014",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        125,
+        126,
+        127,
+        128
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 59,
+      "semantic_overlap_percent_with_neighbors": 59,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.015",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        126,
+        127,
+        128
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 77,
+      "semantic_overlap_percent_with_neighbors": 77,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.016",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        124,
+        125
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.017",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        139,
+        144,
+        186,
+        191,
+        192
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 75,
+      "semantic_overlap_percent_with_neighbors": 75,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.018",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        149,
+        150,
+        151
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.019",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        138,
+        140,
+        142,
+        149,
+        150,
+        151,
+        158
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 80,
+      "semantic_overlap_percent_with_neighbors": 87,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.020",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        158,
+        159,
+        160
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 27,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.021",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        160,
+        161,
+        162,
+        163
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 54,
+      "semantic_overlap_percent_with_neighbors": 54,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.022",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        140,
+        141,
+        142,
+        186,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 79,
+      "semantic_overlap_percent_with_neighbors": 86,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.023",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        165,
+        166
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 60,
+      "semantic_overlap_percent_with_neighbors": 60,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.024",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        139,
+        140,
+        152,
+        153,
+        157,
+        179,
+        180,
+        181,
+        183,
+        184,
+        185
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 42,
+      "semantic_overlap_percent_with_neighbors": 58,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.025",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        169,
+        170,
+        171
+      ],
+      "source_mode": "RESEARCH_DISCUSSION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 42,
+      "semantic_overlap_percent_with_neighbors": 42,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.026",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        171,
+        172,
+        173,
+        174,
+        175
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 14,
+      "semantic_overlap_percent_with_neighbors": 14,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.027",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        242,
+        243
+      ],
+      "source_mode": "RESEARCH_SELF_REPORT",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 36,
+      "semantic_overlap_percent_with_neighbors": 36,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.028",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        242,
+        243
+      ],
+      "source_mode": "RESEARCH_SELF_REPORT",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.029",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        242,
+        243,
+        244,
+        245,
+        246
+      ],
+      "source_mode": "RESEARCH_SELF_REPORT",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 83,
+      "semantic_overlap_percent_with_neighbors": 83,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.030",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        243,
+        244,
+        245,
+        246
+      ],
+      "source_mode": "RESEARCH_SELF_REPORT",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 40,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.031",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        242,
+        247,
+        251,
+        256,
+        257,
+        258,
+        259,
+        260
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 62,
+      "semantic_overlap_percent_with_neighbors": 69,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.032",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        242,
+        243,
+        244,
+        245,
+        246
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 53,
+      "semantic_overlap_percent_with_neighbors": 60,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.033",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        128,
+        129,
+        130
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 23,
+      "semantic_overlap_percent_with_neighbors": 23,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.034",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        215,
+        216,
+        239,
+        259,
+        260
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 47,
+      "semantic_overlap_percent_with_neighbors": 47,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.035",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        256
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 67,
+      "semantic_overlap_percent_with_neighbors": 67,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.001",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        10,
+        11,
+        12
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.002",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        17,
+        20,
+        24,
+        40
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 17,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.003",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        22,
+        23
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 20,
+      "semantic_overlap_percent_with_neighbors": 20,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.004",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        43,
+        45,
+        46,
+        58,
+        59,
+        60
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 55,
+      "semantic_overlap_percent_with_neighbors": 64,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.005",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        50,
+        51,
+        54,
+        55,
+        56
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 44,
+      "semantic_overlap_percent_with_neighbors": 44,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.006",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.007",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        87,
+        88,
+        93,
+        94,
+        95,
+        103,
+        105,
+        106,
+        107,
+        108
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.008",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        105,
+        107,
+        109,
+        110,
+        111
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.009",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 31,
+      "semantic_overlap_percent_with_neighbors": 38,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.010",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        132,
+        133,
+        134,
+        135,
+        136,
+        137
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 21,
+      "semantic_overlap_percent_with_neighbors": 21,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.011",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        138,
+        139,
+        152,
+        153,
+        154,
+        155,
+        156
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 25,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.012",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        154,
+        155,
+        156
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.013",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        144,
+        145,
+        146,
+        147,
+        148,
+        166,
+        167,
+        168
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 60,
+      "semantic_overlap_percent_with_neighbors": 60,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.014",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        145,
+        146,
+        147,
+        148
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 40,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.015",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        160,
+        161,
+        162,
+        163
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.016",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        165,
+        166
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 46,
+      "semantic_overlap_percent_with_neighbors": 46,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.017",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        178,
+        179,
+        180,
+        181,
+        183,
+        184,
+        185
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 54,
+      "semantic_overlap_percent_with_neighbors": 54,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.018",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        186,
+        187,
+        188,
+        190,
+        191,
+        192
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 64,
+      "semantic_overlap_percent_with_neighbors": 71,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.019",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        190,
+        191,
+        192
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.020",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        192,
+        193,
+        194,
+        195,
+        196
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 69,
+      "semantic_overlap_percent_with_neighbors": 69,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.021",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        194,
+        195,
+        196,
+        197
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 15,
+      "semantic_overlap_percent_with_neighbors": 31,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.022",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        172,
+        173,
+        175,
+        176
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 53,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.023",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        219,
+        220,
+        221,
+        222,
+        223
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 53,
+      "semantic_overlap_percent_with_neighbors": 60,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.024",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        225,
+        226,
+        227,
+        228,
+        230
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 44,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.025",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        227,
+        228
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 40,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.026",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        229,
+        230
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 42,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.027",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        231,
+        232
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 25,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.028",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        232,
+        233
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 45,
+      "semantic_overlap_percent_with_neighbors": 55,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.029",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        234,
+        235,
+        236,
+        237
+      ],
+      "source_mode": "ADVICE_GIVEN",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 38,
+      "semantic_overlap_percent_with_neighbors": 38,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.030",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        251,
+        252,
+        253,
+        254,
+        255,
+        256
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 47,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.031",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        256,
+        257,
+        258
+      ],
+      "source_mode": "INTERNAL_MONOLOGUE",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 9,
+      "semantic_overlap_percent_with_neighbors": 9,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.032",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        35,
+        36,
+        53,
+        54,
+        55,
+        97,
+        98,
+        112,
+        218
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 67,
+      "semantic_overlap_percent_with_neighbors": 67,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.033",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        124,
+        125,
+        128,
+        129,
+        216,
+        217
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 23,
+      "semantic_overlap_percent_with_neighbors": 31,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.034",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 27,
+      "semantic_overlap_percent_with_neighbors": 27,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.035",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        203,
+        209,
+        210,
+        211,
+        212,
+        213,
+        247,
+        248,
+        249
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 70,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.036",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        214,
+        215,
+        216,
+        260,
+        261
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 58,
+      "semantic_overlap_percent_with_neighbors": 58,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.037",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        242,
+        243,
+        244,
+        245,
+        246
+      ],
+      "source_mode": "RESEARCH_SELF_REPORT",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 65,
+      "semantic_overlap_percent_with_neighbors": 71,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.038",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        17,
+        18,
+        19,
+        30,
+        33
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 29,
+      "semantic_overlap_percent_with_neighbors": 43,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.039",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        64,
+        65,
+        66,
+        67,
+        68
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 42,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.040",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        231,
+        238,
+        239,
+        240
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 31,
+      "semantic_overlap_percent_with_neighbors": 31,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.025",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        214,
+        215
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.026",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        202,
+        203,
+        204,
+        205,
+        216,
+        219
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 20,
+      "semantic_overlap_percent_with_neighbors": 27,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.027",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        234,
+        235
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 47,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.pol.028",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        215,
+        239,
+        240
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 62,
+      "semantic_overlap_percent_with_neighbors": 69,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.036",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 57,
+      "semantic_overlap_percent_with_neighbors": 64,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.037",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        121,
+        122
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 60,
+      "semantic_overlap_percent_with_neighbors": 60,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.038",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 55,
+      "semantic_overlap_percent_with_neighbors": 55,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.039",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        72,
+        73,
+        74,
+        75,
+        76,
+        87,
+        88
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 60,
+      "semantic_overlap_percent_with_neighbors": 60,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.040",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        77,
+        78,
+        79,
+        80
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 27,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.041",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        80,
+        81,
+        82
+      ],
+      "source_mode": "SUSPICION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 43,
+      "semantic_overlap_percent_with_neighbors": 57,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.042",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        220,
+        221,
+        222,
+        223
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 56,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.043",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        172,
+        173,
+        175,
+        176
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 57,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.044",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        149,
+        151,
+        196,
+        197
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 44,
+      "semantic_overlap_percent_with_neighbors": 56,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.045",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        128,
+        129,
+        179,
+        185,
+        187,
+        192,
+        252,
+        253
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 47,
+      "semantic_overlap_percent_with_neighbors": 59,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.046",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        101,
+        110,
+        111,
+        171,
+        172
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 63,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.047",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        103,
+        104,
+        105,
+        106,
+        108,
+        124,
+        125,
+        243,
+        244,
+        245
+      ],
+      "source_mode": "ANALYTIC_CAUTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 63,
+      "semantic_overlap_percent_with_neighbors": 68,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.041",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        118,
+        119,
+        120,
+        121,
+        122
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": false,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 36,
+      "semantic_overlap_percent_with_neighbors": 57,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.042",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        77,
+        78,
+        79,
+        80
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 42,
+      "semantic_overlap_percent_with_neighbors": 42,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.043",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        80,
+        81,
+        82
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 42,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.044",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        72,
+        73,
+        74
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 42,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.045",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        93,
+        94,
+        103,
+        217,
+        218
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 25,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.046",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        172,
+        173,
+        175,
+        176
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 62,
+      "semantic_overlap_percent_with_neighbors": 69,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.047",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        110,
+        111,
+        172,
+        173,
+        175,
+        176
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 43,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.048",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        175
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 46,
+      "semantic_overlap_percent_with_neighbors": 46,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.049",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        227,
+        228,
+        229,
+        230,
+        231,
+        232
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 21,
+      "semantic_overlap_percent_with_neighbors": 21,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.050",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        252,
+        253,
+        254,
+        256
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 31,
+      "semantic_overlap_percent_with_neighbors": 31,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.051",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        140,
+        141
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 31,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.052",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        43,
+        44
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 23,
+      "semantic_overlap_percent_with_neighbors": 38,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.053",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        67,
+        68
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 45,
+      "semantic_overlap_percent_with_neighbors": 45,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.054",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        68
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 25,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.055",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        225,
+        226,
+        227,
+        228,
+        229,
+        230
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 53,
+      "semantic_overlap_percent_with_neighbors": 53,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.char.056",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        225,
+        227,
+        228
+      ],
+      "source_mode": "DISPUTED_CLAIM",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 22,
+      "semantic_overlap_percent_with_neighbors": 39,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "v0.wr.048",
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "pdf_pages": [
+        42,
+        81,
+        90,
+        127,
+        212
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 47,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.001",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        14
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 27,
+      "semantic_overlap_percent_with_neighbors": 36,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.002",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        16
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 0,
+      "semantic_overlap_percent_with_neighbors": 13,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.003",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        19
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 9,
+      "semantic_overlap_percent_with_neighbors": 27,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.004",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        21
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 36,
+      "semantic_overlap_percent_with_neighbors": 45,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.005",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        24
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 43,
+      "semantic_overlap_percent_with_neighbors": 43,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.006",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        25
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 10,
+      "semantic_overlap_percent_with_neighbors": 10,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.007",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        26
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 0,
+      "semantic_overlap_percent_with_neighbors": 29,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.008",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        28
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 18,
+      "semantic_overlap_percent_with_neighbors": 27,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.009",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        30
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 47,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.010",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        31
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 64,
+      "semantic_overlap_percent_with_neighbors": 64,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.011",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        31
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 54,
+      "semantic_overlap_percent_with_neighbors": 54,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.012",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        32
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 0,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.013",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        33
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 38,
+      "semantic_overlap_percent_with_neighbors": 38,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.014",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        34
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 44,
+      "semantic_overlap_percent_with_neighbors": 67,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.015",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        34
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 20,
+      "semantic_overlap_percent_with_neighbors": 30,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.016",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        35
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 42,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.017",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        37
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 25,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.018",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        38
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 20,
+      "semantic_overlap_percent_with_neighbors": 20,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.019",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        40
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.020",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        43
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 22,
+      "semantic_overlap_percent_with_neighbors": 22,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.021",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        45
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 13,
+      "semantic_overlap_percent_with_neighbors": 13,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.022",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        46
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 38,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.023",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        47
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 10,
+      "semantic_overlap_percent_with_neighbors": 10,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.024",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        48
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 10,
+      "semantic_overlap_percent_with_neighbors": 10,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.025",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        49
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 14,
+      "semantic_overlap_percent_with_neighbors": 14,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.026",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        50
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 30,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.027",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        52
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 43,
+      "semantic_overlap_percent_with_neighbors": 43,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.028",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        54
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 38,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.029",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        63
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.030",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        66
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.031",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        67
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 42,
+      "semantic_overlap_percent_with_neighbors": 58,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.032",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        67
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 62,
+      "semantic_overlap_percent_with_neighbors": 77,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.033",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        68
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 63,
+      "semantic_overlap_percent_with_neighbors": 63,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.034",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        72
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 0,
+      "semantic_overlap_percent_with_neighbors": 10,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.035",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        81
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 9,
+      "semantic_overlap_percent_with_neighbors": 9,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.036",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        83
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 43,
+      "semantic_overlap_percent_with_neighbors": 64,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.037",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        84
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 29,
+      "semantic_overlap_percent_with_neighbors": 71,
+      "digits_requiring_human_context_review": [
+        "28"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.038",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        85
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 38,
+      "semantic_overlap_percent_with_neighbors": 38,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.039",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        86
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 29,
+      "semantic_overlap_percent_with_neighbors": 43,
+      "digits_requiring_human_context_review": [
+        "50",
+        "2613"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.040",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        87
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [
+        "50",
+        "2322"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.041",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        89
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 43,
+      "semantic_overlap_percent_with_neighbors": 43,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.042",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        91
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 13,
+      "semantic_overlap_percent_with_neighbors": 25,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.043",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        99
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 44,
+      "semantic_overlap_percent_with_neighbors": 44,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.044",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        100
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 20,
+      "semantic_overlap_percent_with_neighbors": 20,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.045",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        102
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.046",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        103
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 44,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.047",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        104
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 54,
+      "semantic_overlap_percent_with_neighbors": 54,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.048",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        105
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 31,
+      "semantic_overlap_percent_with_neighbors": 46,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.049",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        109
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.050",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        110
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.051",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        113
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 29,
+      "semantic_overlap_percent_with_neighbors": 29,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.052",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        118
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 0,
+      "semantic_overlap_percent_with_neighbors": 22,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.053",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        120
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 60,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.054",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        121
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 13,
+      "semantic_overlap_percent_with_neighbors": 38,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.055",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        122
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [
+        "98",
+        "391"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.056",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        124
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 40,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.057",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        125
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 22,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.058",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        126
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 44,
+      "semantic_overlap_percent_with_neighbors": 56,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.059",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        128
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 60,
+      "digits_requiring_human_context_review": [
+        "14",
+        "24"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.060",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        129
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.061",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        130
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 13,
+      "semantic_overlap_percent_with_neighbors": 13,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.062",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        130
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 38,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.063",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        133
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.064",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        138
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 60,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.065",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        139
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 43,
+      "semantic_overlap_percent_with_neighbors": 43,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.066",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        140
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 40,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.067",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        142
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 56,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.068",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        143
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 27,
+      "semantic_overlap_percent_with_neighbors": 36,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.069",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        146
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 36,
+      "semantic_overlap_percent_with_neighbors": 45,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.070",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        147
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 31,
+      "semantic_overlap_percent_with_neighbors": 46,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.071",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        149
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 17,
+      "semantic_overlap_percent_with_neighbors": 17,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.072",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        153
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 63,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.073",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        156
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 14,
+      "semantic_overlap_percent_with_neighbors": 14,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.074",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        159
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 44,
+      "semantic_overlap_percent_with_neighbors": 56,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.075",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        163
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 17,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.076",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        168
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 40,
+      "semantic_overlap_percent_with_neighbors": 60,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.077",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        170
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 43,
+      "semantic_overlap_percent_with_neighbors": 43,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.078",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        175
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 18,
+      "semantic_overlap_percent_with_neighbors": 27,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.079",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        177
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 20,
+      "semantic_overlap_percent_with_neighbors": 20,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.080",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        179
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 14,
+      "semantic_overlap_percent_with_neighbors": 29,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.081",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        191
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 0,
+      "semantic_overlap_percent_with_neighbors": 38,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.082",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        193
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 13,
+      "semantic_overlap_percent_with_neighbors": 13,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.083",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        194
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 14,
+      "semantic_overlap_percent_with_neighbors": 14,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.084",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        197
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 10,
+      "semantic_overlap_percent_with_neighbors": 20,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.085",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        199
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.086",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        201
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 18,
+      "semantic_overlap_percent_with_neighbors": 27,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.087",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        203
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 30,
+      "semantic_overlap_percent_with_neighbors": 40,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.088",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        208
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 63,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.089",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        213
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 29,
+      "semantic_overlap_percent_with_neighbors": 43,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.090",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        219
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 0,
+      "semantic_overlap_percent_with_neighbors": 17,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.091",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        221
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 83,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.092",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        222
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 29,
+      "semantic_overlap_percent_with_neighbors": 29,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.093",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        225
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 38,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.094",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        229
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 11,
+      "semantic_overlap_percent_with_neighbors": 22,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.095",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        231
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 27,
+      "semantic_overlap_percent_with_neighbors": 55,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.096",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        232
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 11,
+      "semantic_overlap_percent_with_neighbors": 11,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.097",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        233
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 33,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.098",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        234
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 44,
+      "semantic_overlap_percent_with_neighbors": 56,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.099",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        235
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 18,
+      "semantic_overlap_percent_with_neighbors": 18,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.100",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        236
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 86,
+      "semantic_overlap_percent_with_neighbors": 100,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.101",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        240
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 13,
+      "semantic_overlap_percent_with_neighbors": 25,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.102",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        244
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 13,
+      "semantic_overlap_percent_with_neighbors": 13,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.103",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        247
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 30,
+      "semantic_overlap_percent_with_neighbors": 70,
+      "digits_requiring_human_context_review": [
+        "40"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.104",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        247
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [
+        "796",
+        "398",
+        "40"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.105",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        249
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 22,
+      "semantic_overlap_percent_with_neighbors": 44,
+      "digits_requiring_human_context_review": [
+        "644"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.106",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        250
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 20,
+      "semantic_overlap_percent_with_neighbors": 20,
+      "digits_requiring_human_context_review": [
+        "322",
+        "398"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.107",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        251
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 0,
+      "semantic_overlap_percent_with_neighbors": 0,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.108",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        253
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.109",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        254
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.110",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        254
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 0,
+      "semantic_overlap_percent_with_neighbors": 14,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.111",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        256
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 29,
+      "semantic_overlap_percent_with_neighbors": 29,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.112",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        257
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 29,
+      "semantic_overlap_percent_with_neighbors": 29,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.113",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        258
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 29,
+      "semantic_overlap_percent_with_neighbors": 29,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.114",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        261
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 11,
+      "semantic_overlap_percent_with_neighbors": 11,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.115",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        72
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 25,
+      "semantic_overlap_percent_with_neighbors": 31,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.116",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        75
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 27,
+      "semantic_overlap_percent_with_neighbors": 36,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.117",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        78
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 38,
+      "semantic_overlap_percent_with_neighbors": 38,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.118",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        83
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 65,
+      "semantic_overlap_percent_with_neighbors": 75,
+      "digits_requiring_human_context_review": [
+        "10"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.119",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        84
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 53,
+      "semantic_overlap_percent_with_neighbors": 67,
+      "digits_requiring_human_context_review": [
+        "26",
+        "31"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.120",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        85
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 64,
+      "digits_requiring_human_context_review": [
+        "50",
+        "25",
+        "36"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.121",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        88
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 64,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.122",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        113
+      ],
+      "source_mode": "NARRATED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 27,
+      "semantic_overlap_percent_with_neighbors": 27,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.123",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        118
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.124",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        121
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.125",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        125
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 18,
+      "semantic_overlap_percent_with_neighbors": 29,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.126",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        127
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 22,
+      "semantic_overlap_percent_with_neighbors": 28,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.127",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        128
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 69,
+      "semantic_overlap_percent_with_neighbors": 69,
+      "digits_requiring_human_context_review": [
+        "31",
+        "14",
+        "24"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.128",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        128
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 44,
+      "semantic_overlap_percent_with_neighbors": 56,
+      "digits_requiring_human_context_review": [
+        "90"
+      ],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.129",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        130
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 23,
+      "semantic_overlap_percent_with_neighbors": 31,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.130",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        143
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 33,
+      "semantic_overlap_percent_with_neighbors": 40,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.131",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        220
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 31,
+      "semantic_overlap_percent_with_neighbors": 31,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.132",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        225
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 42,
+      "semantic_overlap_percent_with_neighbors": 42,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.133",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        226
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 18,
+      "semantic_overlap_percent_with_neighbors": 27,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.134",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        227
+      ],
+      "source_mode": "OBSERVED",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 50,
+      "semantic_overlap_percent_with_neighbors": 50,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.135",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        233
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 19,
+      "semantic_overlap_percent_with_neighbors": 31,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    },
+    {
+      "id": "y1v1.ev.136",
+      "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+      "pdf_pages": [
+        252
+      ],
+      "source_mode": "CHARACTER_ASSERTION",
+      "source_text_pages_indexed": true,
+      "individual_source_read": "AUTOMATED_TEXT_WINDOW_COMPARISON",
+      "semantic_overlap_percent_exact_page": 19,
+      "semantic_overlap_percent_with_neighbors": 25,
+      "digits_requiring_human_context_review": [],
+      "adjudication": "PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF",
+      "verified": false
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "v0.case.atsuomi.beta-authorization",
+      "case_file": "data/canon/consolidated/behavioral_cases/atsuomi-ayanokoji/atsuomi--beta-authorization.json",
+      "source_case_owner_id": "actor.atsuomi-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.atsuomi.patronage",
+      "case_file": "data/canon/consolidated/behavioral_cases/atsuomi-ayanokoji/atsuomi--patronage.json",
+      "source_case_owner_id": "actor.atsuomi-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.atsuomi.staged-baby",
+      "case_file": "data/canon/consolidated/behavioral_cases/atsuomi-ayanokoji/atsuomi--staged-baby.json",
+      "source_case_owner_id": "actor.atsuomi-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.ishida.experiment-ethics",
+      "case_file": "data/canon/consolidated/behavioral_cases/ishida/ishida--experiment-ethics.json",
+      "source_case_owner_id": "actor.ishida",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.ishida.vr-proposal",
+      "case_file": "data/canon/consolidated/behavioral_cases/ishida/ishida--vr-proposal.json",
+      "source_case_owner_id": "actor.ishida",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.ishigami.public-risk",
+      "case_file": "data/canon/consolidated/behavioral_cases/kyo-ishigami/ishigami--public-risk.json",
+      "source_case_owner_id": "actor.kyo-ishigami",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.kamogawa.hierarchy",
+      "case_file": "data/canon/consolidated/behavioral_cases/kamogawa/kamogawa--hierarchy.json",
+      "source_case_owner_id": "actor.kamogawa",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.kijima.public-profile",
+      "case_file": "data/canon/consolidated/behavioral_cases/kijima/kijima--public-profile.json",
+      "source_case_owner_id": "actor.kijima",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.kiyotaka.adults-baton",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--adults-baton.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.kiyotaka.cards-50",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--cards-50.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.kiyotaka.gummy-third-option",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--gummy-third-option.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.kiyotaka.judo-observation",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--judo-observation.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.kiyotaka.shiro-final-match",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--shiro-final-match.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.kiyotaka.shiro-learning",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--shiro-learning.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.kiyotaka.yuki-health",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--yuki-health.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.kiyotaka.yuki-reunion",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--yuki-reunion.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.mika.informant",
+      "case_file": "data/canon/consolidated/behavioral_cases/mika/mika--informant.json",
+      "source_case_owner_id": "actor.mika",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.naoe.meeting-as-leverage",
+      "case_file": "data/canon/consolidated/behavioral_cases/jinnosuke-naoe/naoe--meeting-as-leverage.json",
+      "source_case_owner_id": "actor.jinnosuke-naoe",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.sakayanagi.ethical-observation",
+      "case_file": "data/canon/consolidated/behavioral_cases/sakayanagi-father/sakayanagi--ethical-observation.json",
+      "source_case_owner_id": "actor.sakayanagi-father",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.shiro.freedom-choice",
+      "case_file": "data/canon/consolidated/behavioral_cases/shiro/shiro--freedom-choice.json",
+      "source_case_owner_id": "actor.shiro",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.shiro.technical-match-and-exit",
+      "case_file": "data/canon/consolidated/behavioral_cases/shiro/shiro--technical-match-and-exit.json",
+      "source_case_owner_id": "actor.shiro",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.suzukake.curriculum-policy",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzukake/suzukake--curriculum-policy.json",
+      "source_case_owner_id": "actor.suzukake",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.tsukishiro.dual-roles",
+      "case_file": "data/canon/consolidated/behavioral_cases/tsukishiro/tsukishiro--dual-roles.json",
+      "source_case_owner_id": "actor.tsukishiro",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.yuki.aftereffects",
+      "case_file": "data/canon/consolidated/behavioral_cases/yuki/yuki--aftereffects.json",
+      "source_case_owner_id": "actor.yuki",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "v0.case.yuki.social-outreach",
+      "case_file": "data/canon/consolidated/behavioral_cases/yuki/yuki--social-outreach.json",
+      "source_case_owner_id": "actor.yuki",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.c.detect-uniform-fifties",
+      "case_file": "data/canon/consolidated/behavioral_cases/sae-chiyabashira/c--detect-uniform-fifties.json",
+      "source_case_owner_id": "actor.sae-chiyabashira",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.d.confront-upperclassmen",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/d--confront-upperclassmen.json",
+      "source_case_owner_id": "actor.ken-sudo",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.d.reject-introduction",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/d--reject-introduction.json",
+      "source_case_owner_id": "actor.ken-sudo",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.d.soften-after-rescue",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/d--soften-after-rescue.json",
+      "source_case_owner_id": "actor.ken-sudo",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.g.intro-stage-fright",
+      "case_file": "data/canon/consolidated/behavioral_cases/kokoro-inogashira/g--intro-stage-fright.json",
+      "source_case_owner_id": "actor.kokoro-inogashira",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.h.class-introductions",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/h--class-introductions.json",
+      "source_case_owner_id": "actor.yosuke-hirata",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.h.point-crisis-leadership",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/h--point-crisis-leadership.json",
+      "source_case_owner_id": "actor.yosuke-hirata",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.h.swimming-heat",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/h--swimming-heat.json",
+      "source_case_owner_id": "actor.yosuke-hirata",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic",
+      "case_file": "data/canon/consolidated/behavioral_cases/haruki-yamauchi/confuse-apec-and-toeic.json",
+      "source_case_owner_id": "actor.haruki-yamauchi",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.i.sarcasm-misread",
+      "case_file": "data/canon/consolidated/behavioral_cases/kanji-ike/i--sarcasm-misread.json",
+      "source_case_owner_id": "actor.kanji-ike",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.k.bus-nonintervention",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/k--bus-nonintervention.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.k.buy-exam-point",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/k--buy-exam-point.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.k.credit-routing",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/k--credit-routing.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.k.evade-manabu",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/k--evade-manabu.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.k.exam-paper-bargain",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/k--exam-paper-bargain.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.k.exam-reuse-inference",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/k--exam-reuse-inference.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.k.multi-dimensional-utility",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/k--multi-dimensional-utility.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.k.recruit-kushida",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/k--recruit-kushida.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.k.shop-help-sudo",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/k--shop-help-sudo.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.k.social-entry-freeze",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/k--social-entry-freeze.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.k.swim-middle",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/k--swim-middle.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.ken-sudo.fifty-meter-swim",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/fifty-meter-swim.json",
+      "source_case_owner_id": "actor.ken-sudo",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.ken-sudo.prioritize-study-over-basketball",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/prioritize-study-over-basketball.json",
+      "source_case_owner_id": "actor.ken-sudo",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.kikyo-kushida.fifty-meter-swim",
+      "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/fifty-meter-swim.json",
+      "source_case_owner_id": "actor.kikyo-kushida",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/fifty-meter-swim-withheld-effort.json",
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.m.club-fair-silence",
+      "case_file": "data/canon/consolidated/behavioral_cases/manabu-horikita/m--club-fair-silence.json",
+      "source_case_owner_id": "actor.manabu-horikita",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.n.library-deescalation",
+      "case_file": "data/canon/consolidated/behavioral_cases/honami-ichinose/n--library-deescalation.json",
+      "source_case_owner_id": "actor.honami-ichinose",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.o.priority-seat-refusal",
+      "case_file": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/o--priority-seat-refusal.json",
+      "source_case_owner_id": "actor.rokusuke-koenji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.o.swimming-heat",
+      "case_file": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/o--swimming-heat.json",
+      "source_case_owner_id": "actor.rokusuke-koenji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.onodera.fifty-meter-swim",
+      "case_file": "data/canon/consolidated/behavioral_cases/onodera/fifty-meter-swim.json",
+      "source_case_owner_id": "actor.onodera",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.rokusuke-koenji.predict-zero-allowance",
+      "case_file": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/predict-zero-allowance.json",
+      "source_case_owner_id": "actor.rokusuke-koenji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.rokusuke-koenji.swim-final-over-sudo",
+      "case_file": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/swim-final-over-sudo.json",
+      "source_case_owner_id": "actor.rokusuke-koenji",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.s.class-a-goal",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/s--class-a-goal.json",
+      "source_case_owner_id": "actor.suzune-horikita",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.s.cutoff-appeal",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/s--cutoff-appeal.json",
+      "source_case_owner_id": "actor.suzune-horikita",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.s.delegated-study-recruitment",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/s--delegated-study-recruitment.json",
+      "source_case_owner_id": "actor.suzune-horikita",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.s.exclude-social-ally",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/s--exclude-social-ally.json",
+      "source_case_owner_id": "actor.suzune-horikita",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.s.financial-restraint",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/s--financial-restraint.json",
+      "source_case_owner_id": "actor.suzune-horikita",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.s.muscle-inference",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/s--muscle-inference.json",
+      "source_case_owner_id": "actor.suzune-horikita",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.s.pool-points-save-sudo",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/s--pool-points-save-sudo.json",
+      "source_case_owner_id": "actor.suzune-horikita",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.s.refuse-forced-friendship",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/s--refuse-forced-friendship.json",
+      "source_case_owner_id": "actor.suzune-horikita",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.s.study-group-collapse",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/s--study-group-collapse.json",
+      "source_case_owner_id": "actor.suzune-horikita",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.s.swimming-heat",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/s--swimming-heat.json",
+      "source_case_owner_id": "actor.suzune-horikita",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.s.targeted-study-schedule",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/s--targeted-study-schedule.json",
+      "source_case_owner_id": "actor.suzune-horikita",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.sotomura.covert-observation-plan",
+      "case_file": "data/canon/consolidated/behavioral_cases/sotomura/covert-observation-plan.json",
+      "source_case_owner_id": "actor.sotomura",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.u.anticipate-suzune-rejection",
+      "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/u--anticipate-suzune-rejection.json",
+      "source_case_owner_id": "actor.kikyo-kushida",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.u.distribute-old-tests",
+      "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/u--distribute-old-tests.json",
+      "source_case_owner_id": "actor.kikyo-kushida",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.u.public-civic-appeal",
+      "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/u--public-civic-appeal.json",
+      "source_case_owner_id": "actor.kikyo-kushida",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.u.support-inogashira",
+      "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/u--support-inogashira.json",
+      "source_case_owner_id": "actor.kikyo-kushida",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.v.mock-class-d",
+      "case_file": "data/canon/consolidated/behavioral_cases/yamawaki/v--mock-class-d.json",
+      "source_case_owner_id": "actor.yamawaki",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    },
+    {
+      "case_id": "y1v1.case.y.unreliable-athletic-story",
+      "case_file": "data/canon/consolidated/behavioral_cases/haruki-yamauchi/y--unreliable-athletic-story.json",
+      "source_case_owner_id": "actor.haruki-yamauchi",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
+      "verified": false
+    }
+  ],
+  "manual_review_queue": [
+    "Cross-check claims and causal interpretations against exact passages, not only token overlap",
+    "Review all low textual support signals and missing OCR/page extraction",
+    "Resolve actor/speaker attribution and concealment/knowledge times",
+    "Only then permit per-record VERIFIED promotion; re-review cases and source status changes"
+  ]
+}

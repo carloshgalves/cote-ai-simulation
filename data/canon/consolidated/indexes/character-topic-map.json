@@ -647,6 +647,11 @@
         "persuasion",
         "strategy"
       ]
+    },
+    "actor.kakeru-ryuen": {
+      "path": "data/canon/consolidated/characters/kakeru-ryuen.json",
+      "modeling_tier": "FULL_CANDIDATE",
+      "topics": []
     }
   },
   "topics_by_actor": {
@@ -2729,7 +2734,8 @@
       "strategy": [
         "y1v1.ev.096"
       ]
-    }
+    },
+    "actor.kakeru-ryuen": {}
   },
   "retrieval": "Direct actor/domain map with separated action/context lanes; no sequential volume scans",
   "behavioral_by_actor_topic": {
@@ -3432,7 +3438,8 @@
       "persuasion": [],
       "economy": [],
       "strategy": []
-    }
+    },
+    "actor.kakeru-ryuen": {}
   },
   "context_mentions_by_actor_topic": {
     "actor.atsuomi-ayanokoji": {
@@ -5318,7 +5325,8 @@
       "strategy": [
         "y1v1.ev.096"
       ]
-    }
+    },
+    "actor.kakeru-ryuen": {}
   },
   "gate_contract": {
     "behavior": "behavioral_by_actor_topic",

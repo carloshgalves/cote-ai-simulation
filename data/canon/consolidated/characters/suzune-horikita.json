@@ -232,5 +232,14 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
+  },
+  "legacy_y1_crosswalk": {
+    "manifest": "data/canon/consolidated/migrations/y1-legacy-six.json",
+    "source_file": "data/canon/characters/suzune-horikita.yaml",
+    "source_git_blob": "6f0ea17481ebe52d7cb66ea28e81b22d786fcd9c",
+    "legacy_claim_count": 19,
+    "admitted_initial_claim_ids": [],
+    "legacy_material_can_seed_agent": false,
+    "quarantine_policy": "Only source-backed evidence re-reviewed at record level may be promoted; future references never seed memories."
   }
 }

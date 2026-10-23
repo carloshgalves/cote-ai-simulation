@@ -38,7 +38,7 @@
     "4": 41,
     "5": 23
   },
-  "cases": "PENDING_PRIMARY_ACTOR_EXTRACTION",
+  "cases": 43,
   "coverage_status": "INITIAL_SCENE_CANDIDATES_EXTRACTED_REVIEW_PENDING",
   "semantic_review": "NOT_STARTED",
   "operator_release": "NOT_REQUESTED",
@@ -49,5 +49,6 @@
     "VIP allocation scheme remains unknown, not an executable formula",
     "Safeguard coercion and trauma as source-specific descriptive records, not transferable manipulation policy",
     "Resolve contradictory calendar wordings with explicit source-note, not guessed day arithmetic"
-  ]
+  ],
+  "behavioral_cases": 43
 }

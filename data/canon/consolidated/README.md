@@ -29,6 +29,10 @@ A second content pass added swimming performances, seven short-test failure cand
 
 `migrations/y1-legacy-six.json` enumerates all 119 source-locked legacy claims from the six Y1_START YAML packs. They are **not** a second actor memory; the single consolidated read model is authoritative. Ryūen exists in global characters without Volume 2+ imported knowledge.
 
-`audits/source-review-register-v0-v1.json` lists all **268 evidence items and 75 behavioral cases** in an individualized automated source-window triage. **Individual semantic signoff remains pending.** Page-text overlap and known file digests never justify blanket promotion to VERIFIED.
+`audits/source-review-register-v0-v1.json` lists all **268 evidence items and 74 retained behavioral cases** in an individualized automated source-window triage. **Individual assistant semantic review was completed on 2026-10-23**, with claim-level source modes and contextual restrictions recorded; one contextual Kijima case was retracted and source locators/actor attribution were repaired. All items remain `verified:false` until the separate operator release approval. Page-text overlap and known file digests alone never justify promotion to VERIFIED.
 
 `exams/y1-first-midterm-executable.json` and `tools/canon_first_midterm_v1.py` expose a deterministic **partial** resolver for the documented English Class D cutoff, and the historically approved grade-mark transaction. No general purchase API, automatic expulsion or unknown-subject rules exist, and it is not connected to the CSF runtime.
+
+### Semantic review completion boundary
+
+The source-review register records 268 source-linked assistant-reviewed assertions and 74 actor-owned behavioral cases (after one Kijima context-only case was retired). This means the **source-to-paraphrase meaning was reviewed**, not that all first-person claims are necessarily world truth, nor that scene outcomes may be forced in counterfactual simulation. A human release/verification stage remains deliberately separate. Review fixes include separating Arisu's genetic argument from Sakayanagi father's decisions, restricting Naoe's waiting behavior to the observed episode, and extending precise page citations for bus introductions, exam grading and appeals.

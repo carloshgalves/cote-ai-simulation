@@ -5,7 +5,7 @@
   "operator_acceptance_date": "2026-10-22",
   "required_official_translation": false,
   "claims_all_verified": false,
-  "record_audit": "PENDING_SEMANTIC_REVIEW",
+  "record_audit": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_RELEASE_PENDING",
   "original_pdf_committed": false,
   "checksum": "a5f3360c145ed9aa038bf7965b1d261e8b733c943b0c7fb8ed976705e3e0f7d3"
 }

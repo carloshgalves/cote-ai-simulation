@@ -30,4 +30,10 @@ for folder in ("characters", "institutions"):
     for packfile in (B/folder).glob("*.json"):
         record=J(packfile)
         assert all("/volume0/" not in path for path in record.get("source_documents", [])), packfile
-print("PASS 268 indexed evidence / 75 cases, no retired pointers or implicit promotions.")
+assert "v0.case.kijima.public-profile" not in idx["behavioral_case_paths"]
+assert "v0.case.kijima.public-profile" not in str(idx["behavioral_by_actor_topic"]["actor.kijima"])
+assert J(B/"sources/volume0.json")["record_audit"]=="ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_RELEASE_PENDING"
+assert J(B/"sources/y1-v01.json")["record_audit"]=="ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_RELEASE_PENDING"
+father=J(B/"behavioral_cases/sakayanagi-father/sakayanagi--ethical-observation.json")
+assert "Arisu" in father["epistemic_limits"] and "innate" not in father["observed_actions"]
+print("PASS 268 reviewed evidence / 74 reviewed cases, attributed actor boundaries and zero unsupported Kijima feats.")

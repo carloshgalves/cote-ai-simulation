@@ -1,0 +1,47 @@
+{
+  "id": "y1v2.case.kiyotaka-ayanokoji.coordinate-camera-deception",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "coordinate camera deception",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Arranges equipment assistance and pressures opponents through uncertain surveillance",
+  "observed_result": "Contributes to withdrawal",
+  "epistemic_limits": "Depends on collaborator help and opponent uncertainty; deceptive tactic",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      230,
+      233,
+      234
+    ],
+    "chapter": 7,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ishizaki",
+    "actor.komiya",
+    "actor.kondou",
+    "actor.honami-ichinose",
+    "actor.ryuji-kanzaki",
+    "actor.sotomura"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "observation",
+    "persuasion"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "strategy",
+    "observation",
+    "persuasion"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.072",
+    "y1v2.ev.074",
+    "y1v2.ev.075"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "y1v2.case.suzune-horikita.probe-opponent-hearing",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "probe opponent hearing",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Questions inconsistencies and separates prior behavior from current fault",
+  "observed_result": "Keeps defense active",
+  "epistemic_limits": "Not definitive acquittal at initial hearing",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      198,
+      208
+    ],
+    "chapter": 6,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ishizaki",
+    "actor.komiya",
+    "actor.kondou",
+    "actor.ken-sudo"
+  ],
+  "capabilities_supported": [
+    "academic_reasoning",
+    "strategy",
+    "conflict"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "academic_reasoning",
+    "strategy",
+    "conflict"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.062",
+    "y1v2.ev.066"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

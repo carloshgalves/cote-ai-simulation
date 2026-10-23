@@ -1,0 +1,43 @@
+{
+  "id": "y1v2.case.airi-sakura.testify-despite-stage-fright",
+  "actor_id": "actor.airi-sakura",
+  "primary_actor_id": "actor.airi-sakura",
+  "title": "testify despite stage fright",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Appears under pressure and supplies eyewitness statement and photographs",
+  "observed_result": "Establishes presence but not the whole fight",
+  "epistemic_limits": "One act of courage is not general confidence",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      190,
+      202,
+      204
+    ],
+    "chapter": 6,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.sakagami",
+    "actor.manabu-horikita"
+  ],
+  "capabilities_supported": [
+    "social",
+    "emotion",
+    "observation"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "social",
+    "emotion",
+    "observation"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.058",
+    "y1v2.ev.063",
+    "y1v2.ev.064"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

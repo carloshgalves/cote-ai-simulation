@@ -1,0 +1,37 @@
+{
+  "id": "y1v2.case.kiyotaka-ayanokoji.protect-sakura-contact",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "protect sakura contact",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Notices troubling clerk behavior and provides his own contact for repair",
+  "observed_result": "Reduces Sakura's exposure to the clerk",
+  "epistemic_limits": "One correct observation does not ensure universal foresight",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      140
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.airi-sakura",
+    "actor.unidentified-electronics-clerk"
+  ],
+  "capabilities_supported": [
+    "risk_management",
+    "observation"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "risk_management",
+    "observation"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.043"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

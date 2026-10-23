@@ -1,0 +1,45 @@
+{
+  "id": "y1v2.case.honami-ichinose.deploy-surveillance-bluff",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "deploy surveillance bluff",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Directs accusers' attention to decoy cameras",
+  "observed_result": "Contributes to withdrawal of complaint",
+  "epistemic_limits": "The cameras did not record the fight",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      229,
+      234
+    ],
+    "chapter": 7,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ishizaki",
+    "actor.komiya",
+    "actor.kondou",
+    "actor.kiyotaka-ayanokoji",
+    "actor.ryuji-kanzaki",
+    "actor.sotomura"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "persuasion",
+    "ethics"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "strategy",
+    "persuasion",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.071",
+    "y1v2.ev.075"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "y1v2.case.kiyotaka-ayanokoji.protect-sakura-from-clerk",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "protect sakura from clerk",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Intervenes with Ichinose, gathers photos and issues a warning to clerk",
+  "observed_result": "Clerk backs away",
+  "epistemic_limits": "Threatening tactics create risks",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      237,
+      238
+    ],
+    "chapter": 7,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.honami-ichinose",
+    "actor.airi-sakura",
+    "actor.unidentified-electronics-clerk"
+  ],
+  "capabilities_supported": [
+    "risk_management",
+    "persuasion"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "risk_management",
+    "persuasion"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.078",
+    "y1v2.ev.079"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

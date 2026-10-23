@@ -1,0 +1,39 @@
+{
+  "id": "y1v2.case.ken-sudo.request-confidential-help",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "request confidential help",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Seeks discreet help and agrees to avoid confronting the complainants",
+  "observed_result": "Peers take charge of investigating",
+  "epistemic_limits": "Cooperation in one incident does not prove lasting restraint",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      29,
+      35
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "social",
+    "motivation"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "social",
+    "motivation"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.012",
+    "y1v2.ev.017"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

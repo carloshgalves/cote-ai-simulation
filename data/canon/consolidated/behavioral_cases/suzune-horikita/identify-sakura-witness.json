@@ -1,0 +1,36 @@
+{
+  "id": "y1v2.case.suzune-horikita.identify-sakura-witness",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "identify sakura witness",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Notices overlooked Sakura and infers eyewitness involvement",
+  "observed_result": "Sakura later admits witnessing the fight",
+  "epistemic_limits": "Initial certainty preceded direct confirmation",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      77
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.airi-sakura"
+  ],
+  "capabilities_supported": [
+    "observation",
+    "strategy"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "observation",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.030"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "y1v2.case.ken-sudo.three-on-one-fight",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "three on one fight",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Defeats three Class C students in a physical altercation",
+  "observed_result": "Three opponents are hurt; Sudō appears unharmed",
+  "epistemic_limits": "The victory does not establish instigation, proportionality or lawful self-defense",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      12,
+      31
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.airi-sakura",
+    "actor.ishizaki",
+    "actor.komiya",
+    "actor.kondou",
+    "actor.sae-chiyabashira"
+  ],
+  "capabilities_supported": [
+    "combat",
+    "conflict"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "combat",
+    "conflict"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.002",
+    "y1v2.ev.014",
+    "y1v2.ev.015"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

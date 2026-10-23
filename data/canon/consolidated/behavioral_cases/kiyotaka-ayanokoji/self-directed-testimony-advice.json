@@ -1,0 +1,38 @@
+{
+  "id": "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "self directed testimony advice",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Encourages Sakura to speak for her own sake and the truth",
+  "observed_result": "She later decides to attend",
+  "epistemic_limits": "Cannot isolate this advice as the sole cause",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      173,
+      177
+    ],
+    "chapter": 5,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.airi-sakura"
+  ],
+  "capabilities_supported": [
+    "persuasion",
+    "social"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "persuasion",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.053",
+    "y1v2.ev.055"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

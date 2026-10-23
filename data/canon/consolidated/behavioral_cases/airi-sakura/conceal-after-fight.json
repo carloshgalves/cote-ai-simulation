@@ -1,0 +1,40 @@
+{
+  "id": "y1v2.case.airi-sakura.conceal-after-fight",
+  "actor_id": "actor.airi-sakura",
+  "primary_actor_id": "actor.airi-sakura",
+  "title": "conceal after fight",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Photographs the fight's aftermath and hides from Sudō",
+  "observed_result": "Preserves images and leaves undetected",
+  "epistemic_limits": "Photos do not identify the aggressor",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      12,
+      13
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ken-sudo"
+  ],
+  "capabilities_supported": [
+    "observation",
+    "risk_management",
+    "social"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "observation",
+    "risk_management",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.002",
+    "y1v2.ev.003"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

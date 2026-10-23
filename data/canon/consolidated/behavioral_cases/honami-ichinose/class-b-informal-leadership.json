@@ -1,0 +1,38 @@
+{
+  "id": "y1v2.case.honami-ichinose.class-b-informal-leadership",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "class b informal leadership",
+  "context": "Observed Year 1 Volume 2 episode; actor cannot know future or third-party hidden information.",
+  "observed_actions": "Consolidates dorm requests as Class B's informal representative",
+  "observed_result": "Handles shared requests",
+  "epistemic_limits": "Role is voluntary and local to Class B",
+  "source": {
+    "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      114,
+      115
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "institution"
+  ],
+  "information_available": "Actor-accessible evidence only at that scene; no later canon or post-divergence memory.",
+  "counterfactual_test": "Change resources, objectives and information; permit failure or a different outcome.",
+  "topics": [
+    "leadership",
+    "institution"
+  ],
+  "evidence_refs": [
+    "y1v2.ev.037",
+    "y1v2.ev.038"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

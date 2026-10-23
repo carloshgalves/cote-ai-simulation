@@ -7,7 +7,8 @@
   "operator_accepted": true,
   "official_translation_required": false,
   "claims_all_verified": false,
-  "record_audit": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_RELEASE_PENDING",
+  "record_audit": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_ACCEPTANCE",
   "original_pdf_committed": false,
-  "warning": "Uploaded copy includes distributor watermark; the watermark itself is not bibliographic or canonical authority."
+  "warning": "Uploaded copy includes distributor watermark; the watermark itself is not bibliographic or canonical authority.",
+  "operator_release": "APPROVED_FOR_CANON_REFERENCE"
 }

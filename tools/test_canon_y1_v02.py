@@ -48,7 +48,7 @@ transfer=school["s_system"]["individual_class_transfer_y1_v02"]
 assert transfer["price_private_points"]==20000000 and transfer["observed_successful_transfer"] is False
 assert school["disciplinary_case_y1_v02"]["charge_amount"]=="UNKNOWN"
 assert school["s_system"]["club_reward_y1_v02"]["unrevealed_reward_algorithm"]
-assert aud["operator_release"]=="PENDING"
+assert aud["operator_release"]=="APPROVED_FOR_CANON_REFERENCE"
 
 review=J(B/"audits/source-review-register-y1-v02.json")
 assert review["evidence_count"]==len(e)==91
@@ -60,9 +60,9 @@ assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_SOURCE_REVIEW_PASS" for
 assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_CASE_REVIEW_PASS" for x in review["behavioral_cases"])
 assert all(x["review_note"].strip() and len(x["review_note"])>=45 for x in review["evidence"]+review["behavioral_cases"])
 assert review["release_gate"]["assistant_individual_semantic_review"]=="COMPLETE"
-assert review["release_gate"]["operator_approval"]=="PENDING"
-assert review["global_promotion"]=="BLOCKED_PENDING_OPERATOR_RELEASE_APPROVAL"
-assert src["record_audit"]=="ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_RELEASE_PENDING"
+assert review["release_gate"]["operator_approval"]=="APPROVED_BY_OPERATOR"
+assert review["global_promotion"]=="REFERENCE_INTEGRATION_APPROVED_RECORD_VERIFICATION_SEPARATE"
+assert src["record_audit"]=="ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_ACCEPTANCE"
 assert aud["final_semantic_review"]["assistant_total"]==118
 assert aud["final_semantic_review"]["operator_verified"]==0
 assert next(x for x in e if x["id"]=="y1v2.ev.001")["story_time"]=="NARRATIVE_SOLILOQUY_UNDATED"

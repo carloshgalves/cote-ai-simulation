@@ -43,12 +43,11 @@
   "record_count": 91,
   "case_status": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_RELEASE_PENDING",
   "semantic_review": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE",
-  "operator_release": "PENDING",
+  "operator_release": "APPROVED_FOR_CANON_REFERENCE",
   "method": "Scene-relevant atomic paraphrases; character reports, narrator impressions and directly observed outcomes kept separate; provenance uses physical PDF pages.",
   "open_issues": [
-    "Human operator review and explicit release approval pending",
-    "All 118 records remain verified:false and may not be automatically promoted to simulator knowledge",
-    "Class transfers, disciplinary fees and later special-exam mechanics cannot be invented beyond direct source."
+    "No automatic actor memory or runtime promotion; record verified:false remains",
+    "Any future new semantic claims require own review"
   ],
   "behavioral_cases": 27,
   "case_count": 27,
@@ -106,6 +105,7 @@
     "operator_verified": 0,
     "individually_documented_in": "data/canon/consolidated/audits/source-review-register-y1-v02.json",
     "status": "COMPLETE_ASSISTANT_ONLY",
-    "completed_on": "2026-10-23"
+    "completed_on": "2026-10-23",
+    "operator_authorized_merge": true
   }
 }

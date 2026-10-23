@@ -4,7 +4,7 @@
   "ledger_version": 1,
   "created_at": "2026-10-23",
   "source_page_count": 261,
-  "global_promotion": "BLOCKED_PENDING_OPERATOR_RELEASE_APPROVAL",
+  "global_promotion": "REFERENCE_INTEGRATION_APPROVED_RECORD_VERIFICATION_SEPARATE",
   "source_window_mode": "PDF physical page numbers, not distributor footer pagination",
   "evidence_count": 91,
   "behavioral_case_count": 27,
@@ -2423,11 +2423,13 @@
   ],
   "release_gate": {
     "assistant_individual_semantic_review": "COMPLETE",
-    "operator_approval": "PENDING",
+    "operator_approval": "APPROVED_BY_OPERATOR",
     "individual_verified_count": 0,
     "generic_knowledge_inference_allowed": false,
     "reviewed_evidence_count": 91,
-    "reviewed_behavioral_case_count": 27
+    "reviewed_behavioral_case_count": 27,
+    "operator_approval_date": "2026-10-23",
+    "approval_scope": "Volume 2 semantic review accepted for merging the canonical reference, without implying human line-by-line independent attestation or unrestricted runtime memories"
   },
   "cautions": [
     "A found page is not semantic signoff",
@@ -2436,5 +2438,5 @@
     "The simulation does not automatically replay later-book memories"
   ],
   "review_complete_at": "2026-10-23",
-  "semantic_boundary": "Assistant direct PDF semantic pass completed, including corrected claims and primary-actor case attribution. No operator verification, runtime publication or actor-memory promotion is authorized."
+  "semantic_boundary": "Operator approved integrating canonical reference after complete assistant individual semantic review. Individual verified:false remains until separate record-level human source verification; future memory and runtime behavior gates continue."
 }

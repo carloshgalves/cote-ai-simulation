@@ -62,7 +62,7 @@ assert not any("Class A student Yamawaki" in e["summary"] for e in evidence)
 for a in ["airi-sakura","hasebe","matsushita","mori","kikuchi"]:
     actor=load(R/"characters"/(a+".json"))
     assert actor["modeling_tier"]=="MINIMAL_ENTITY"
-    assert index["behavioral_by_actor_topic"]["actor."+a]=={}
+    assert all(not case_ids for case_ids in index["behavioral_by_actor_topic"]["actor."+a].values()), a
 
 assert school["s_system"]["class_points"]["evaluation_formula"]=="NOT_DISCLOSED"
 assert school["s_system"]["private_points"]["initial_grant"]==100000

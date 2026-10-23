@@ -5,7 +5,8 @@
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v04.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -22,20 +23,22 @@
       "context_evidence_refs": [
         "y1v1.ev.066",
         "y1v1.ev.067",
-        "y1v3.ev.025"
+        "y1v3.ev.025",
+        "y1v4.ev.087"
       ]
     },
     "institution": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.066",
-        "y1v3.ev.025"
+        "y1v3.ev.025",
+        "y1v4.ev.087"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

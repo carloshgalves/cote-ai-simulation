@@ -17,7 +17,11 @@
   },
   "domains": {
     "institution": {
-      "evidence_refs": [
+      "behavioral_case_refs": [
+        "v0.case.ishida.experiment-ethics",
+        "v0.case.ishida.vr-proposal"
+      ],
+      "context_evidence_refs": [
         "v0.char.007",
         "v0.wr.009",
         "v0.wr.010",
@@ -25,61 +29,57 @@
         "v0.wr.014",
         "v0.wr.039",
         "v0.wr.047"
-      ],
-      "behavioral_case_refs": [
-        "v0.case.ishida.experiment-ethics",
-        "v0.case.ishida.vr-proposal"
       ]
     },
     "strategy": {
-      "evidence_refs": [
-        "v0.wr.010",
-        "v0.wr.014"
-      ],
       "behavioral_case_refs": [
         "v0.case.ishida.experiment-ethics"
+      ],
+      "context_evidence_refs": [
+        "v0.wr.010",
+        "v0.wr.014"
       ]
     },
     "politics": {
-      "evidence_refs": [
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
         "v0.wr.010",
         "v0.wr.011"
-      ],
-      "behavioral_case_refs": []
+      ]
     },
     "academic_reasoning": {
-      "evidence_refs": [
+      "behavioral_case_refs": [
+        "v0.case.ishida.experiment-ethics"
+      ],
+      "context_evidence_refs": [
         "v0.char.007",
         "v0.wr.011",
         "v0.wr.014",
         "v0.wr.047"
-      ],
-      "behavioral_case_refs": [
-        "v0.case.ishida.experiment-ethics"
       ]
     },
     "ethics": {
-      "evidence_refs": [
-        "v0.char.007"
-      ],
       "behavioral_case_refs": [
         "v0.case.ishida.experiment-ethics"
+      ],
+      "context_evidence_refs": [
+        "v0.char.007"
       ]
     },
     "social": {
-      "evidence_refs": [
-        "v0.wr.047"
-      ],
       "behavioral_case_refs": [
         "v0.case.ishida.experiment-ethics",
         "v0.case.ishida.vr-proposal"
+      ],
+      "context_evidence_refs": [
+        "v0.wr.047"
       ]
     },
     "economy": {
-      "evidence_refs": [],
       "behavioral_case_refs": [
         "v0.case.ishida.vr-proposal"
-      ]
+      ],
+      "context_evidence_refs": []
     }
   },
   "source_documents": [
@@ -91,5 +91,11 @@
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false
   },
-  "generation_policy": "Append evidence refs and recompile index when ingesting another volume; never add second pack per volume"
+  "generation_policy": "Append evidence refs and recompile index when ingesting another volume; never add second pack per volume",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
 }

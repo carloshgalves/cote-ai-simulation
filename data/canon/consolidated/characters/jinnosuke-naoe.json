@@ -19,7 +19,10 @@
   },
   "domains": {
     "strategy": {
-      "evidence_refs": [
+      "behavioral_case_refs": [
+        "v0.case.naoe.meeting-as-leverage"
+      ],
+      "context_evidence_refs": [
         "v0.char.038",
         "v0.char.043",
         "v0.pol.002",
@@ -41,13 +44,13 @@
         "v0.pol.028",
         "v0.wr.001",
         "v0.wr.040"
-      ],
-      "behavioral_case_refs": [
-        "v0.case.naoe.meeting-as-leverage"
       ]
     },
     "politics": {
-      "evidence_refs": [
+      "behavioral_case_refs": [
+        "v0.case.naoe.meeting-as-leverage"
+      ],
+      "context_evidence_refs": [
         "v0.char.001",
         "v0.char.038",
         "v0.char.043",
@@ -70,48 +73,45 @@
         "v0.pol.028",
         "v0.wr.001",
         "v0.wr.040"
-      ],
-      "behavioral_case_refs": [
-        "v0.case.naoe.meeting-as-leverage"
       ]
     },
     "economy": {
-      "evidence_refs": [
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
         "v0.pol.007",
         "v0.pol.026"
-      ],
-      "behavioral_case_refs": []
+      ]
     },
     "social": {
-      "evidence_refs": [
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
         "v0.char.038",
         "v0.pol.009",
         "v0.pol.017",
         "v0.pol.028",
         "v0.wr.001"
-      ],
-      "behavioral_case_refs": []
+      ]
     },
     "institution": {
-      "evidence_refs": [
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
         "v0.pol.015",
         "v0.pol.018",
         "v0.pol.026",
         "v0.wr.001"
-      ],
-      "behavioral_case_refs": []
+      ]
     },
     "combat": {
-      "evidence_refs": [
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
         "v0.pol.018"
-      ],
-      "behavioral_case_refs": []
+      ]
     },
     "ethics": {
-      "evidence_refs": [],
       "behavioral_case_refs": [
         "v0.case.naoe.meeting-as-leverage"
-      ]
+      ],
+      "context_evidence_refs": []
     }
   },
   "source_documents": [
@@ -123,5 +123,11 @@
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": true
   },
-  "generation_policy": "Append evidence refs and recompile index when ingesting another volume; never add second pack per volume"
+  "generation_policy": "Append evidence refs and recompile index when ingesting another volume; never add second pack per volume",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
 }

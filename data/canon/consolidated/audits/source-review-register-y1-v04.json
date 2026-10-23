@@ -1035,8 +1035,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.yosuke-hirata"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1045,7 +1045,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.52–54 show Hirata, not Karuizawa, discussing small staggered briefings with Kiyotaka; corrected actor ownership is necessary.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.037",
@@ -1061,8 +1065,8 @@
         "actor.kakeru-ryuen",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1071,7 +1075,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.55–58 Kiyotaka watches Katsuragi's controlled and Ryūen's provocative public interactions; judging total ability or plans would be speculation.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.038",
@@ -1086,8 +1094,8 @@
         "actor.kakeru-ryuen",
         "actor.katsuragi"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1096,7 +1104,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF p.58 Ryūen arrives with followers and taunts Katsuragi; their followers' emotional reactions are situated observations, not eternal loyalties.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.039",
@@ -1111,8 +1123,8 @@
         "actor.kikyo-kushida",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1121,7 +1133,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF p.60 Kushida asks Hirata and Kiyotaka why briefing times differ; this does not confer access to their group's eventual VIP.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.040",
@@ -1136,8 +1152,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1146,7 +1162,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.63–64 Kiyotaka and Suzune compare zodiac groups after personal first-morning messages, not before initial briefing.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.041",
@@ -1165,8 +1185,8 @@
         "actor.kikyo-kushida",
         "actor.yosuke-hirata"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1175,7 +1195,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF p.64 Suzune has copied Dragon names by hand; it is a source-visible roster, not an independent dossier ranking or proof of school algorithm.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.042",
@@ -1190,8 +1214,8 @@
         "actor.suzune-horikita",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1200,7 +1224,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF p.65 Horikita speculates about the academic-selection criteria; Kiyotaka questions it using exceptions, with no official method confirmed.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.043",
@@ -1215,8 +1243,8 @@
         "actor.suzune-horikita",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1225,7 +1253,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.65–66 both characters disclose non-VIP school notifications for their own groups; secret status of all other attendees remains unknown.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.044",
@@ -1241,8 +1273,8 @@
         "actor.kakeru-ryuen",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1251,7 +1283,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.68–73 show Ryūen probing Suzune about her island-leadership replacement; his expressed suspicion is not proof he recognized Kiyotaka.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.045",
@@ -1266,8 +1302,8 @@
         "actor.kakeru-ryuen",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1276,7 +1312,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.72–75 Ryūen says Suzune had help and tries to identify the actual strategist; source mode must remain his spoken hypothesis.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.046",
@@ -1291,8 +1331,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1301,7 +1341,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF p.76 Kiyotaka privately gauges Ryūen's suspicion and refuses to reveal himself; this thought is inaccessible to Ryūen or Suzune.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.047",
@@ -1317,8 +1361,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.yukimura"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1327,7 +1371,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.78–80 Sotomura digresses about names/dialect on approach to Rabbit; neither practical deduction nor privileged exam intelligence is shown.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.048",
@@ -1343,8 +1391,8 @@
         "actor.machida",
         "actor.hamaguchi"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1353,7 +1401,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF p.81 Ichinose stands and proposes introductions as the group remains quiet; successful initiation does not assign her mandatory authority.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.049",
@@ -1367,8 +1419,8 @@
       "actor_ids": [
         "actor.honami-ichinose"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1377,7 +1429,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF p.82 Ichinose volunteers as moderator when no one raises a hand and asks for questions; rivals remain free to oppose her.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.050",
@@ -1393,8 +1449,8 @@
         "actor.honami-ichinose",
         "actor.sotomura"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1403,7 +1459,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.82–83 Kiyotaka publicly supports group cooperation and asks Sotomura to react while privately examining motives; public speech differs from intent.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.051",
@@ -1419,8 +1479,8 @@
         "actor.honami-ichinose",
         "actor.hamaguchi"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1429,7 +1489,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.85–87 Machida urges silence and non-identification, presenting defensive incentives for A; the proposal is not universally risk-free.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.052",
@@ -1445,8 +1509,8 @@
         "actor.yukimura",
         "actor.kei-karuizawa"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1455,7 +1519,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.86–87 Machida discusses traitor incentives and Class A trust claims; his stated assumptions are not an audited school equilibrium.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.053",
@@ -1471,8 +1539,8 @@
         "actor.hamaguchi",
         "actor.honami-ichinose"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1481,7 +1549,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF p.87 Machida's equal VIP distribution argument is a student's assumption; no official school rule shows fair allocation across classes.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.054",
@@ -1497,8 +1569,8 @@
         "actor.machida",
         "actor.hamaguchi"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1507,7 +1579,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.89–91 Ichinose rebuts a passive policy, explaining how it preserves Class A's lead; the group does not immediately solve Rabbit.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.055",
@@ -1523,8 +1599,8 @@
         "actor.manabe-shiho",
         "actor.mio-ibuki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1533,7 +1609,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.93–94 Manabe relays Rika's accusation and turns a phone camera toward Karuizawa, who resists; no verified café witness proves the incident.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.056",
@@ -1549,8 +1629,8 @@
         "actor.manabe-shiho",
         "actor.mio-ibuki"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1559,7 +1639,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.94–95 Karuizawa knocks Manabe's phone away and protests photography; her distressed tone does not amount to admission about Rika.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.057",
@@ -1575,8 +1659,8 @@
         "actor.kei-karuizawa",
         "actor.manabe-shiho"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1585,7 +1669,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF p.95 Machida intervenes by citing refusal of photographic consent, leading Manabe to desist temporarily; this is his direct feat.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.058",
@@ -1601,8 +1689,8 @@
         "actor.sotomura",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1611,7 +1699,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.96–97 Class D students discuss what to disclose and whether to follow Class A, under mixed incentives; no VIP is certified by the exchange.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.059",
@@ -1626,8 +1718,8 @@
         "actor.airi-sakura",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1636,7 +1728,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.99–102 Sakura is unexpectedly alone on the deck and communicates anxiety; narrator guesses and her statements are not pathological diagnosis.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.060",
@@ -1651,8 +1747,8 @@
         "actor.haruki-yamauchi",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1661,7 +1757,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.103–105 Yamauchi physically approaches Kiyotaka about Sakura contact details. Ryūen is absent and must not own this encounter.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.061",
@@ -1677,8 +1777,8 @@
         "actor.ryuji-kanzaki",
         "actor.kakeru-ryuen"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1687,7 +1787,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF p.106 Kiyotaka speculates on Classes B/D and A/C balancing alliances; the narrator lacks evidence of a binding agreement in this scene.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.062",
@@ -1702,8 +1806,8 @@
         "actor.kei-karuizawa",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1712,7 +1816,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF p.109 Karuizawa appears reduced in influence within Rabbit; Kiyotaka's social-hierarchy framework is subjective interpretation, not class constitution.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.063",
@@ -1727,8 +1835,8 @@
         "actor.yosuke-hirata",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1737,7 +1845,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.112–114 Hirata and roommates discuss Rabbit and group strategy at night; Hirata's motives are inferred, not objectively assigned.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.064",
@@ -1753,8 +1865,8 @@
         "actor.yukimura",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1763,7 +1875,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.114–116 Kōenji announces Monkey has ended, and classmates react. He does not disclose the exact submission process in this conversation.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.065",
@@ -1778,8 +1894,8 @@
         "actor.kikyo-kushida",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1788,7 +1904,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.117–119 Kushida speaks with Kiyotaka on a nighttime deck; neither can infer a binding romance from the friendly conversation.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.066",
@@ -1803,8 +1923,8 @@
         "actor.kikyo-kushida",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1813,7 +1933,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.118–121 Kushida embraces Kiyotaka and exits flustered; the passage records contact but not a promise of exclusivity.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.067",
@@ -1829,8 +1953,8 @@
         "actor.kiyotaka-ayanokoji",
         "actor.rokusuke-koenji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1839,7 +1963,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF p.125 Suzune reproaches Kiyotaka for failing to stop Monkey's early ending; the actual point gain or loss remains undetermined at that time.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.068",
@@ -1855,8 +1983,8 @@
         "actor.suzune-horikita",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1865,7 +1993,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.128–129 Ryūen joins and offers speculation about test and class strategy; the encounter does not certify school allocation.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.069",
@@ -1880,8 +2012,8 @@
         "actor.suzune-horikita",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1890,7 +2022,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.129–130 Suzune questions Ryūen's relaxed response to early closure and uncertainty, while her own causal explanation remains speculative.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.070",
@@ -1905,8 +2041,8 @@
         "actor.kei-karuizawa",
         "actor.kiyotaka-ayanokoji"
       ],
-      "semantic_review": "PENDING_DIRECT_SOURCE_WINDOW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Physical PDF locator",
@@ -1915,7 +2051,11 @@
         "Knowledge time acquisition",
         "No assumed deterministic VIP assignment formula",
         "No moral endorsement of coercion"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.134–136 Kiyotaka reaches Rabbit before the others and Karuizawa arrives shortly afterward; his view of her quietness is narratorial observation.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
     },
     {
       "record_id": "y1v4.ev.071",
@@ -4318,7 +4458,7 @@
     "Day-count discrepancy in teacher explanation is retained for audit"
   ],
   "review_progress": {
-    "assistant_evidence_reviewed": 35,
+    "assistant_evidence_reviewed": 70,
     "assistant_cases_reviewed": 0,
     "assistant_review_complete": false
   }

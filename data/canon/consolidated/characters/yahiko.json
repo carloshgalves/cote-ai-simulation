@@ -25,6 +25,7 @@
     "strategy": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
+        "y1v3.ev.035",
         "y1v3.ev.063",
         "y1v3.ev.068"
       ]
@@ -32,6 +33,7 @@
     "observation": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
+        "y1v3.ev.035",
         "y1v3.ev.068"
       ]
     }

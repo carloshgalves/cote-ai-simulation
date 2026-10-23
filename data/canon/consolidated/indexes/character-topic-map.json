@@ -4344,10 +4344,12 @@
         "y1v3.ev.063"
       ],
       "strategy": [
+        "y1v3.ev.035",
         "y1v3.ev.063",
         "y1v3.ev.068"
       ],
       "observation": [
+        "y1v3.ev.035",
         "y1v3.ev.068"
       ]
     },
@@ -8553,10 +8555,12 @@
         "y1v3.ev.063"
       ],
       "strategy": [
+        "y1v3.ev.035",
         "y1v3.ev.063",
         "y1v3.ev.068"
       ],
       "observation": [
+        "y1v3.ev.035",
         "y1v3.ev.068"
       ]
     },

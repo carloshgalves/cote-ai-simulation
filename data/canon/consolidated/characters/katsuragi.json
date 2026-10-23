@@ -1,15 +1,16 @@
 {
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.katsuragi",
-  "display_name": "Katsuragi (given name unknown)",
+  "display_name": "Kouhei Katsuragi",
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
-    "ln.y1.v04.sevenseas.en.operator-provided"
+    "ln.y1.v04.sevenseas.en.operator-provided",
+    "ln.y1.v045.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
-    "role_summary": "Class A student defending exclusive ownership of a cave and negotiating school competition",
+    "role_summary": "Year 1 Class A leader, cautious strategist with a sickly twin sister; family history is primarily his attributed testimony.",
     "aliases": []
   },
   "knowledge_time_policy": {
@@ -32,7 +33,8 @@
         "y1v3.ev.113",
         "y1v4.ev.037",
         "y1v4.ev.041",
-        "y1v4.ev.073"
+        "y1v4.ev.073",
+        "y1v45.ev.029"
       ]
     },
     "institution": {
@@ -56,7 +58,8 @@
       ],
       "context_evidence_refs": [
         "y1v3.ev.035",
-        "y1v3.ev.068"
+        "y1v3.ev.068",
+        "y1v45.ev.017"
       ]
     },
     "politics": {
@@ -67,9 +70,16 @@
       ]
     },
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v45.case.katsuragi.help-stranded-elevator-rivals"
+      ],
       "context_evidence_refs": [
-        "y1v4.ev.037"
+        "y1v4.ev.037",
+        "y1v45.ev.014",
+        "y1v45.ev.017",
+        "y1v45.ev.022",
+        "y1v45.ev.023",
+        "y1v45.ev.031"
       ]
     },
     "leadership": {
@@ -86,14 +96,82 @@
       "context_evidence_refs": [
         "y1v4.ev.041"
       ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [
+        "y1v45.case.katsuragi.help-stranded-elevator-rivals"
+      ],
+      "context_evidence_refs": [
+        "y1v45.ev.014"
+      ]
+    },
+    "family": {
+      "behavioral_case_refs": [
+        "y1v45.case.katsuragi.petition-to-contact-sick-twin"
+      ],
+      "context_evidence_refs": [
+        "y1v45.ev.022",
+        "y1v45.ev.025",
+        "y1v45.ev.028"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.023",
+        "y1v45.ev.026"
+      ]
+    },
+    "governance": {
+      "behavioral_case_refs": [
+        "y1v45.case.katsuragi.petition-to-contact-sick-twin"
+      ],
+      "context_evidence_refs": [
+        "y1v45.ev.024",
+        "y1v45.ev.026",
+        "y1v45.ev.030"
+      ]
+    },
+    "economy": {
+      "behavioral_case_refs": [
+        "y1v45.case.katsuragi.fund-risky-family-delivery"
+      ],
+      "context_evidence_refs": [
+        "y1v45.ev.024",
+        "y1v45.ev.027",
+        "y1v45.ev.029",
+        "y1v45.ev.030"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.025",
+        "y1v45.ev.028"
+      ]
+    },
+    "negotiation": {
+      "behavioral_case_refs": [
+        "y1v45.case.katsuragi.fund-risky-family-delivery"
+      ],
+      "context_evidence_refs": [
+        "y1v45.ev.027"
+      ]
+    },
+    "emotion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.031"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory.",
+  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": true,
-    "future_fate_unknown": true
+    "future_fate_unknown": true,
+    "exact_ryuen_contract_terms_not_shown_in_v45": true
   },
   "generation_policy": "One global actor across volumes, not volume-scoped",
   "retrieval_policy": {

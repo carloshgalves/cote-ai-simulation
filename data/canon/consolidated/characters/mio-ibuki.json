@@ -5,7 +5,8 @@
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
-    "ln.y1.v04.sevenseas.en.operator-provided"
+    "ln.y1.v04.sevenseas.en.operator-provided",
+    "ln.y1.v045.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -34,13 +35,22 @@
       ]
     },
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v45.case.mio-ibuki.acknowledge-anxiety-outside-spy-role",
+        "y1v45.case.mio-ibuki.pair-with-rival-for-fortune-reading"
+      ],
       "context_evidence_refs": [
         "y1v3.ev.042",
         "y1v3.ev.043",
         "y1v3.ev.048",
         "y1v3.ev.049",
-        "y1v4.ev.023"
+        "y1v4.ev.023",
+        "y1v45.ev.006",
+        "y1v45.ev.007",
+        "y1v45.ev.008",
+        "y1v45.ev.009",
+        "y1v45.ev.010",
+        "y1v45.ev.014"
       ]
     },
     "conflict": {
@@ -65,7 +75,8 @@
     "resources": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v3.ev.049"
+        "y1v3.ev.049",
+        "y1v45.ev.012"
       ]
     },
     "strategy": {
@@ -96,7 +107,10 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v3.ev.094",
-        "y1v3.ev.098"
+        "y1v3.ev.098",
+        "y1v45.ev.012",
+        "y1v45.ev.013",
+        "y1v45.ev.014"
       ]
     },
     "politics": {
@@ -108,7 +122,8 @@
     "institution": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v4.ev.023"
+        "y1v4.ev.023",
+        "y1v45.ev.006"
       ]
     },
     "privacy": {
@@ -118,15 +133,51 @@
       ]
     },
     "emotion": {
+      "behavioral_case_refs": [
+        "y1v45.case.mio-ibuki.acknowledge-anxiety-outside-spy-role"
+      ],
+      "context_evidence_refs": [
+        "y1v4.ev.056",
+        "y1v45.ev.008"
+      ]
+    },
+    "motivation": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v4.ev.056"
+        "y1v45.ev.007"
+      ]
+    },
+    "reasoning": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.009",
+        "y1v45.ev.013"
+      ]
+    },
+    "negotiation": {
+      "behavioral_case_refs": [
+        "y1v45.case.mio-ibuki.pair-with-rival-for-fortune-reading"
+      ],
+      "context_evidence_refs": [
+        "y1v45.ev.010"
+      ]
+    },
+    "belief": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.011"
+      ]
+    },
+    "epistemics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.011"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory.",
+  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": true,
     "future_fate_unknown": true

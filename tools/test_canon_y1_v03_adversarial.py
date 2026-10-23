@@ -26,8 +26,8 @@ def issues(s):
     e=s["evidence"]; ix=s["index"]; p=s["page"]; c=s["cases"]; x=s["exam"]; r=s["register"]
     if len(e)!=117 or len(c)!=35: problems.append("unexpected source/case count")
     if len(r["evidence"])!=117 or len(r["behavioral_cases"])!=35: problems.append("audit coverage")
-    if r["release_gate"]["operator_approval"]!="PENDING": problems.append("operator gate promoted")
-    if r["release_gate"]["external_independent_reviewer"]!="PENDING": problems.append("independent review falsely approved")
+    if r["release_gate"]["operator_approval"]!="APPROVED_BY_OPERATOR": problems.append("operator gate promoted")
+    if r["release_gate"]["external_independent_reviewer"]!="NOT_PERFORMED_EXPLICIT_OPERATOR_WAIVER": problems.append("independent review falsely approved")
     if not all(z["reviewed_by_assistant"] and z["verified"] is False for z in r["evidence"]+r["behavioral_cases"]): problems.append("individual semantic review status")
     for rec in e.values():
         for a in rec["mention_actor_ids"]:
@@ -70,8 +70,8 @@ mutations=[
  ("promote_inference",lambda s:s["evidence"]["y1v3.ev.113"].update(source_mode="OBSERVED")),
  ("expand_leader_authority",lambda s:s["exam"]["leader"].update(replacement="UNRESTRICTED")),
  ("invent_penalty",lambda s:next(p for p in s["exam"]["penalties"] if p["kind"]=="POLLUTE_ENVIRONMENT").update(class_exam_points=99)),
- ("approve_without_operator",lambda s:s["register"]["release_gate"].update(operator_approval="APPROVED")),
- ("approve_without_independent",lambda s:s["register"]["release_gate"].update(external_independent_reviewer="APPROVED")),
+ ("approve_without_operator",lambda s:s["register"]["release_gate"].update(operator_approval="PENDING")),
+ ("approve_without_independent",lambda s:s["register"]["release_gate"].update(external_independent_reviewer="FAKE_APPROVED")),
 ]
 for name,mutate in mutations:
     mutant=copy.deepcopy(state)

@@ -4,7 +4,7 @@
   "created_at": "2026-10-23",
   "source_pdf_sha256": "22b13fabb5aa2b93e355a0cd621c7e5d9dd63c33d775eda58e27067541c5387e",
   "source_page_count": 262,
-  "global_promotion": "BLOCKED_PENDING_EXTERNAL_INDEPENDENT_REVIEW_AND_OPERATOR_ACCEPTANCE",
+  "global_promotion": "CANON_REFERENCE_MERGE_APPROVED_NO_RUNTIME_MEMORY_PROMOTION",
   "evidence_count": 117,
   "behavioral_case_count": 35,
   "evidence": [
@@ -4233,12 +4233,14 @@
   ],
   "release_gate": {
     "assistant_individual_semantic_review": "COMPLETE",
-    "operator_approval": "PENDING",
+    "operator_approval": "APPROVED_BY_OPERATOR",
     "individual_verified_count": 0,
     "engine_memory_admission": false,
-    "external_independent_reviewer": "PENDING",
+    "external_independent_reviewer": "NOT_PERFORMED_EXPLICIT_OPERATOR_WAIVER",
     "assistant_reviewed_evidence": 117,
-    "assistant_reviewed_cases": 35
+    "assistant_reviewed_cases": 35,
+    "operator_approval_date": "2026-10-23",
+    "independent_review_waiver": "Operator authorized merge while explicitly informed that no independent reviewer had reviewed the V3 corpus"
   },
   "cautions": [
     "Source accepted for reading but items are not yet semantically signed off",
@@ -4247,12 +4249,13 @@
     "The island exam rules are documented reference, not executable scoring engine"
   ],
   "independent_review": {
-    "status": "ADVERSARIAL_SECOND_PASS_COMPLETED_EXTERNAL_REVIEWER_PENDING",
+    "status": "EXTERNAL_REVIEW_WAIVED_BY_OPERATOR_FOR_REFERENCE_MERGE",
     "reviewer": "UNASSIGNED",
     "source": "Same assistant undertook adversarial source rereading; independent automated regression constraints are separate from the extraction pass.",
     "human_or_separate_model_approval": false,
     "findings_document": "data/canon/consolidated/audits/adversarial-review-y1-v03.json",
-    "independent_workflow_required_before_merge": true
+    "independent_workflow_required_before_merge": true,
+    "operator_waived": true
   },
   "semantic_boundary": "Assistant source comparison of 152 claims complete; per-item verification flags remain false and no runtime or agent memory receives future events. Adversarial automated validation is not an independent human review.",
   "review_complete_at": "2026-10-23"

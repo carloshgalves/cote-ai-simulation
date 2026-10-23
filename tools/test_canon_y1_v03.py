@@ -56,10 +56,10 @@ assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_SOURCE_REVIEW_PASS" for
 assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_CASE_REVIEW_PASS" for x in review["behavioral_cases"])
 assert all(isinstance(x["review_note"],str) and len(x["review_note"])>=45 for x in review["evidence"]+review["behavioral_cases"])
 assert review["release_gate"]["assistant_individual_semantic_review"]=="COMPLETE"
-assert review["release_gate"]["external_independent_reviewer"]=="PENDING"
+assert review["release_gate"]["external_independent_reviewer"]=="NOT_PERFORMED_EXPLICIT_OPERATOR_WAIVER"
 assert review["release_gate"]["individual_verified_count"]==0
-assert review["global_promotion"].startswith("BLOCKED_")
-assert source["record_audit"]=="ASSISTANT_SEMANTIC_REVIEW_COMPLETE_EXTERNAL_REVIEW_AND_OPERATOR_RELEASE_PENDING"
+assert review["global_promotion"]=="CANON_REFERENCE_MERGE_APPROVED_NO_RUNTIME_MEMORY_PROMOTION"
+assert source["record_audit"]=="ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_REFERENCE_MERGE_APPROVED"
 assert coverage["final_semantic_review"]["assistant_total"]==152
 assert coverage["final_semantic_review"]["human_individual_verified"]==0
 for item in review["evidence"]:
@@ -74,7 +74,7 @@ for item in review["behavioral_cases"]:
     assert c["source"]["pdf_pages"]==item["pdf_pages"],item["case_id"]
 
 assert review["global_promotion"].startswith("BLOCKED")
-assert review["release_gate"]["operator_approval"]=="PENDING"
+assert review["release_gate"]["operator_approval"]=="APPROVED_BY_OPERATOR"
 assert exam["authority"]=="CANON_REFERENCE_NOT_EXECUTABLE"
 assert exam["initial_class_test_points"]==300
 assert exam["scoring"]["observed_final_scores"]=={"A":120,"B":140,"C":0,"D":225}

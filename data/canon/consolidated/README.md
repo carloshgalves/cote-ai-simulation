@@ -55,3 +55,7 @@ The 262-page operator-provided Seven Seas 2019 source is **not committed**; `sou
 
 
 **Volume 3 adversarial check:** `audits/adversarial-review-y1-v03.json` records corrected attribution, leader/roll-call chronology, documented A/C alliance and report-only claims. This second pass was performed by the same assistant; it is **not** an independent human or separately commissioned reviewer. External review and operator release remain gates before merge. All items remain `verified: false`.
+
+## Year 1 Volume 3 — reference integration approval (2026-10-23)
+
+The operator expressly authorized merging the 152 assistant-reviewed items to the **canonical reference corpus** while informed that there had been no independent external reviewer. This is an explicit waiver for reference integration, not a fabricated independent review or individual human source certification: all `verified: false` flags and runtime knowledge/execution restrictions remain intact.

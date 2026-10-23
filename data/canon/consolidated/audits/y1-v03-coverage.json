@@ -52,13 +52,11 @@
   },
   "cases": 35,
   "open_audit": "ADVERSARIAL_CHECKS_PENDING_EXTERNAL_REVIEW_AND_OPERATOR_RELEASE",
-  "operator_release": "PENDING",
+  "operator_release": "APPROVED_REFERENCE_MERGE_WITH_INDEPENDENT_REVIEW_WAIVER",
   "method": "Initial scene-relevance-filtered source-local paraphrases across the whole volume; narrator, dialogue claims, exact procedural disclosures and future-time separate. All claims unverified pending individually audited review.",
   "open_issues": [
-    "External human or separate-model independent review required before integration",
-    "Operator release approval required",
-    "All individual verified flags remain false; no runtime/actor-memory promotion",
-    "Exam reference remains NOT_EXECUTABLE"
+    "Individual records remain verified:false; no operator line-by-line source attestation",
+    "No automatic agent-memory/runtime/executable exam promotion"
   ],
   "behavioral_cases": 35,
   "coverage_status": "INDIVIDUAL_ASSISTANT_SEMANTIC_REVIEW_COMPLETE_RELEASE_PENDING",
@@ -113,7 +111,7 @@
     "assistant_reviewed_cases": 35,
     "assistant_total": 152,
     "human_individual_verified": 0,
-    "external_independent_review": "PENDING",
+    "external_independent_review": "WAIVED_BY_OPERATOR_NOT_PERFORMED",
     "completed_on": "2026-10-23",
     "review_register": "data/canon/consolidated/audits/source-review-register-y1-v03.json"
   }

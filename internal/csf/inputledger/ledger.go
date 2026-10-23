@@ -540,7 +540,7 @@ func (l *Ledger) restoreResponse(record ports.CanonicalRecord, fields []any, dis
 	if kind == 0 {
 		digestSchema, bodySchema = "cote.csf.digest.action-proposal-unit", "cote.csf.schema.action-proposal.body"
 	}
-	digest, _, err := l.deriver.Sum(digestSchema, bodySchema, 1, []any{body})
+	digest, _, err := l.deriver.Sum(digestSchema, bodySchema, 1, body)
 	if err != nil || !matchesBytes(digest[:], fields[len(fields)-1]) {
 		return Response{}, errors.New("persisted SlotResponse digest mismatch")
 	}
@@ -994,7 +994,7 @@ func (l *Ledger) Respond(ctx context.Context, response Response) error {
 	} else {
 		digestSchema = "cote.csf.digest.no-proposal-unit"
 	}
-	digest, _, err := l.deriver.Sum(digestSchema, map[bool]string{true: "cote.csf.schema.action-proposal.body", false: "cote.csf.schema.no-proposal.body"}[response.Kind == 0], 1, []any{response.Body})
+	digest, _, err := l.deriver.Sum(digestSchema, map[bool]string{true: "cote.csf.schema.action-proposal.body", false: "cote.csf.schema.no-proposal.body"}[response.Kind == 0], 1, response.Body)
 	if err != nil {
 		return err
 	}

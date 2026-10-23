@@ -176,7 +176,7 @@ func validateResponse(d identity.Deriver,req Input,u Unit)(prepared,error){
  if len(x.Body)!=arity{return p,fmt.Errorf("%w: response body arity",ErrProvenance)}
  wanted,e:=derive(d,tag,"cote.csf.schema.slot-response-id-preimage",[]any{x.DispatchID[:],uint64(x.Kind)})
  if e!=nil||wanted!=x.ID{return p,fmt.Errorf("%w: response preimage",ErrProvenance)}
- dg,e:=digest(d,dtag,sch,[]any{x.Body})
+ dg,e:=digest(d,dtag,sch,x.Body)
  if e!=nil||dg!=x.Digest{return p,fmt.Errorf("%w: response digest",ErrProvenance)}
  raw,e:=encode(x.Body,dg);if e!=nil||!bytes.Equal(raw,x.Canonical){return p,fmt.Errorf("%w: response canonical bytes",ErrProvenance)}
  if !sameBytes(x.Body[0],x.ID[:])||!sameBytes(x.Body[1],x.DispatchID[:])||!sameBytes(x.Body[2],req.RunID[:])||!sameBytes(x.Body[3],req.CycleID[:]){

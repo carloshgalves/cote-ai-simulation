@@ -81,7 +81,7 @@ func verifyTwoResourceTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
   id,err:=registeredDigest("cote.csf.id.action-proposal","cote.csf.schema.slot-response-id-preimage",
    []any{prop[1],uint64(0)});if err!=nil{return err}
   dg,err:=registeredDigest("cote.csf.digest.action-proposal-unit",
-   "cote.csf.schema.action-proposal.body",[]any{prop[:18]});if err!=nil{return err}
+   "cote.csf.schema.action-proposal.body",prop[:18]);if err!=nil{return err}
   if !equalBytes(id[:],source)||!equalBytes(dg[:],sourceHash)||
    !equalBytes(prop[18],sourceHash){return errors.New("contest proposal ID/digest invalid")}
   round,ok:=prop[13].([]byte);if !ok||len(round)!=32{return errors.New("contest source round ID malformed")}

@@ -354,7 +354,7 @@ func verifyResponses(d identity.Deriver, slots map[domain.ID]map[string]inputled
 			if response.Kind == 0 {
 				digestSchema, bodySchema = "cote.csf.digest.action-proposal-unit", "cote.csf.schema.action-proposal.body"
 			}
-			digest, _, err := d.Sum(digestSchema, bodySchema, 1, []any{f})
+			digest, _, err := d.Sum(digestSchema, bodySchema, 1, f)
 			if err != nil {
 				return err
 			}

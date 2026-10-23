@@ -174,9 +174,6 @@ func authenticateArchivedCausalRef(ref []any, parent *genesis.Genesis, snapshot 
 	if digestRule["preimage_schema"] != rule["persisted_root"] {
 		body = fields[:len(fields)-1]
 	}
-	if kind == 5 || kind == 23 {
-		body = []any{body}
-	} // installed runtime response-unit convention
 	if kind == 12 {
 		if len(fields) != 24 {
 			return errors.New("historical CycleCommit malformed")

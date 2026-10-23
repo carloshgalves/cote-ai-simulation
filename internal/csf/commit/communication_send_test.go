@@ -82,7 +82,7 @@ func communicationFixtureWithChannel(t *testing.T,channel string)(*Coordinator,*
  proposal.Body[9]=[]any{}
  proposal.Body[10]=[]any{uint64(0)}
  digest,_,err:=d.Sum("cote.csf.digest.action-proposal-unit",
-  "cote.csf.schema.action-proposal.body",1,[]any{proposal.Body})
+  "cote.csf.schema.action-proposal.body",1,proposal.Body)
  if err!=nil{t.Fatal(err)}
  proposal.Digest=digest
  proposal.Canonical,err=codec.CanonicalPayload(append(cloneAny(proposal.Body),digest[:]))

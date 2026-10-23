@@ -163,3 +163,26 @@ migrador.
 originating-intention refs, ocorrências Event/Claim-owned, triggers evoluídos,
 cenários restantes de fence/checkpoint externo e a matriz R23 não são aprovados
 por esta extensão de round.
+
+### R19 — intenções históricas, revogações de cortes anteriores e finding R19-2
+
+`826d790` preserva a intenção opaca que resolve ao Genesis parental autenticado.
+`91447dc` reconstrói coordenadas de requests revogados antigos pelo journal
+congelado, preservando a extinção da autorização; requests sem revogação continuam
+exigindo o corte corrente. O teste positivo avança o relógio e redespacha, reabre
+SQLite e demonstra que somente o request substituto recebe resposta.
+
+`9d25129` reutiliza a projeção de identidades da conformidade para resolver raízes
+de intenção nos cinco ledgers, Genesis, snapshot e refs epistemológicos do corte.
+Os IDs/digests continuam históricos sob V1; nenhuma informação é projetada ao
+agente nem publicada como mundo. Raízes nativas fora desses arquivos ainda
+exigem prova própria. OPEN-02 e OPEN-05 permanecem abertos.
+
+A revisão subsequente registrou **R19-2**: o runtime calculava o digest de
+SlotResponse com `[body]`, enquanto o contrato CDDL e os vetores normativos
+exigem o array plano `body`. A regressão de fronteira para ActionProposal e
+NoProposal demonstrou ambos os REDs. A correção remove o wrapper da escrita,
+restore, admission, decisão, comunicação, terminais e migração; não altera o
+bundle normativo nem reescreve arquivos parentais. O teste exige reopen dos
+bytes corretos e rejeição da codificação antiga. A resolução formal do finding
+depende do checkpoint de correção validado e publicado na PR.

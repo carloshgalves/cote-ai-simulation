@@ -598,7 +598,7 @@ func TestCSFRV18R19Finding1RejectsIllegalSlotHistory(t *testing.T) {
 				id = [32]byte(response.ID)
 			case "response-to-revoked", "response-to-superseded":
 				response := r19NoProposal(t, v2, d, 0)
-				digest, _, err := identity.New(v2).Sum("cote.csf.digest.no-proposal-unit", "cote.csf.schema.no-proposal.body", 1, []any{response.Body})
+				digest, _, err := identity.New(v2).Sum("cote.csf.digest.no-proposal-unit", "cote.csf.schema.no-proposal.body", 1, response.Body)
 				if err != nil {
 					t.Fatal(err)
 				}

@@ -360,7 +360,7 @@ func migrateSlotResponseV2(old, source, dispatch []any, origin, target *policy.B
 		!sameCanonical(old[timeIndex], source[9]) || !sameCanonical(old[revisionIndex], source[8]) {
 		return zero, errors.New("source response does not match its dispatch")
 	}
-	oldDigest, _, err := identity.New(origin).Sum(digestTag, bodySchema, 1, []any{old[:len(old)-1]})
+	oldDigest, _, err := identity.New(origin).Sum(digestTag, bodySchema, 1, old[:len(old)-1])
 	if err != nil || !equalBytes(old[len(old)-1], oldDigest[:]) {
 		return zero, errors.New("source response digest invalid")
 	}
@@ -375,7 +375,7 @@ func migrateSlotResponseV2(old, source, dispatch []any, origin, target *policy.B
 	body[3] = dispatch[2]
 	body[roundIndex] = dispatch[3]
 	body[revisionIndex] = dispatch[8]
-	digest, _, err := identity.New(target).Sum(digestTag, bodySchema, 1, []any{body})
+	digest, _, err := identity.New(target).Sum(digestTag, bodySchema, 1, body)
 	if err != nil {
 		return zero, err
 	}

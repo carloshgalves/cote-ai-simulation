@@ -30,15 +30,15 @@
     }
   ],
   "chapters_assessed": 5,
-  "records": 130,
+  "records": 132,
   "chapter_evidence_counts": {
     "1": 2,
     "2": 37,
-    "3": 27,
+    "3": 29,
     "4": 41,
     "5": 23
   },
-  "cases": 43,
+  "cases": 44,
   "coverage_status": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE_ADVERSARIAL_PENDING",
   "semantic_review": "ASSISTANT_INDIVIDUAL_REVIEW_COMPLETE",
   "operator_release": "PENDING",
@@ -51,7 +51,7 @@
     "Zodiac/VIP allocation formula not independently supported",
     "No agent memory or executable exam promotion authorized"
   ],
-  "behavioral_cases": 43,
+  "behavioral_cases": 44,
   "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v04.json",
   "open_audit": "ADVERSARIAL_NEGATIVE_MUTATION_REVIEW_PENDING",
   "initial_source_corrections": [
@@ -149,15 +149,30 @@
       "status": "RESOLVED_ADVERSARIAL",
       "case_id": "y1v4.case.suzune-horikita.challenge-rival-alliance-threat",
       "description": "Horikita's counterargument on p148 and Ichinose's independent refusal on p149 now both linked as act and outcome evidence, without conflating their agency."
+    },
+    {
+      "finding": "V4-ADV-014",
+      "severity": "HIGH",
+      "status": "RESOLVED_ADVERSARIAL",
+      "record_id": "y1v4.ev.131",
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.seed-false-rika-tip",
+      "description": "Added omission: Kiyotaka knowingly fabricates a witness tip to Manabe on pp110–111, distinctly prior to physical assault."
+    },
+    {
+      "finding": "V4-ADV-015",
+      "severity": "HIGH",
+      "status": "RESOLVED_ADVERSARIAL",
+      "record_id": "y1v4.ev.132",
+      "description": "Added teacher conversation pp122–123 confirming Hoshinomiya's discretionary transfer of Ichinose from Dragon to Rabbit, separate from unknown VIP selection algorithm."
     }
   ],
   "initial_findings_closed_count": 3,
   "initial_findings_open_source_questions": 3,
   "case_status": "ASSISTANT_CASE_REVIEW_COMPLETE",
   "final_semantic_review": {
-    "assistant_reviewed_evidence": 130,
-    "assistant_reviewed_cases": 43,
-    "assistant_total": 173,
+    "assistant_reviewed_evidence": 132,
+    "assistant_reviewed_cases": 44,
+    "assistant_total": 176,
     "individual_verified": 0,
     "external_independent_review": "NOT_PERFORMED",
     "adversarial_method": "PENDING",

@@ -4,8 +4,8 @@
   "created_at": "2026-10-23",
   "source_pdf_sha256": "1d587b01242cd576fa2b0627222329d1bf1c23b12d206ad63f7a590f79fe9cc8",
   "source_page_count": 248,
-  "evidence_count": 130,
-  "behavioral_case_count": 43,
+  "evidence_count": 132,
+  "behavioral_case_count": 44,
   "evidence": [
     {
       "record_id": "y1v4.ev.001",
@@ -3821,6 +3821,68 @@
       "review_note": "PDF pp.242–243 Kiyotaka privately considers Ryūen's explanation, the limits of his inference and the upcoming rivalry; private reflection does not bind others.",
       "reviewed_on": "2026-10-23",
       "review_decision": "PASS_WITH_SOURCE_BOUNDARY"
+    },
+    {
+      "record_id": "y1v4.ev.131",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        110,
+        111
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka intentionally gives Manabe an invented partial account suggesting he witnessed Karuizawa harass another girl, then privately admits he saw nothing; this is a knowingly false and provocative tip rather than witness proof.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabe-shiho",
+        "actor.kei-karuizawa"
+      ],
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.110–111 Kiyotaka tells Manabe he might have seen Karuizawa attack another girl, then privately acknowledges he witnessed nothing; this is direct false testimony designed to stir hostility.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_AFTER_ADVERSARIAL_GAP_REMEDIATION",
+      "verified": false,
+      "required_checks": [
+        "direct scene proof",
+        "attribution and audience",
+        "chronology",
+        "no private VIP leak",
+        "no prescribed coercion"
+      ]
+    },
+    {
+      "record_id": "y1v4.ev.132",
+      "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        122,
+        123
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "In a conversation overheard by Kiyotaka, teacher Hoshinomiya says she intentionally removed Ichinose from Dragon and assigned her to Rabbit as a challenge; Mashima says the intervention does not violate a formal rule, while the full group-allocation mechanism remains undisclosed.",
+      "actor_ids": [
+        "actor.chie-hoshinomiya",
+        "actor.sae-chiyabashira",
+        "actor.mashima",
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose"
+      ],
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_DIRECT_PDF_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "review_note": "PDF pp.122–123 Hoshinomiya says she personally moved Ichinose out of Dragon into Rabbit, while Mashima says this is not prohibited; participant allocation has teacher discretion but VIP algorithm remains secret.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_AFTER_ADVERSARIAL_GAP_REMEDIATION",
+      "verified": false,
+      "required_checks": [
+        "direct scene proof",
+        "attribution and audience",
+        "chronology",
+        "no private VIP leak",
+        "no prescribed coercion"
+      ]
     }
   ],
   "behavioral_cases": [
@@ -4849,6 +4911,28 @@
       "review_note": "PDF pp.202–203: Karuizawa accepts Kiyotaka's proposed protection and cooperation under credible pressure, without freely bargained trust or consent.",
       "reviewed_on": "2026-10-23",
       "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
+    },
+    {
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.seed-false-rika-tip",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/seed-false-rika-tip.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        110,
+        111
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
+      "reviewed_on": "2026-10-23",
+      "review_note": "PDF pp.110–111 Kiyotaka falsely claims firsthand knowledge of Karuizawa's alleged misconduct, while privately admitting no such observation; deception and provocation are his direct actions, not Manabe's later violence.",
+      "review_decision": "PASS_AFTER_ADVERSARIAL_GAP_REMEDIATION",
+      "verified": false,
+      "required_checks": [
+        "owned direct act",
+        "speaker truth",
+        "lack of consent and harm",
+        "counterfactual"
+      ]
     }
   ],
   "global_promotion": "BLOCKED_PENDING_ADVERSARIAL_REVIEW_AND_OPERATOR_RELEASE",
@@ -4870,8 +4954,8 @@
     "Day-count discrepancy in teacher explanation is retained for audit"
   ],
   "review_progress": {
-    "assistant_evidence_reviewed": 130,
-    "assistant_cases_reviewed": 43,
+    "assistant_evidence_reviewed": 132,
+    "assistant_cases_reviewed": 44,
     "assistant_review_complete": true
   },
   "semantic_boundary": "All 173 assistant-level source and primary actor reviews complete, with no human individual verification. The next adversarial validation is a separate method by the same assistant, not an independent external reviewer.",

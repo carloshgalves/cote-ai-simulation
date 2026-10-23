@@ -3636,6 +3636,70 @@
       ],
       "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.131",
+      "domain": "strategy",
+      "summary": "Kiyotaka intentionally gives Manabe an invented partial account suggesting he witnessed Karuizawa harass another girl, then privately admits he saw nothing; this is a knowingly false and provocative tip rather than witness proof.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          110,
+          111
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabe-shiho",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "deception",
+        "coercion"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v4.ev.132",
+      "domain": "institution",
+      "summary": "In a conversation overheard by Kiyotaka, teacher Hoshinomiya says she intentionally removed Ichinose from Dragon and assigned her to Rabbit as a challenge; Mashima says the intervention does not violate a formal rule, while the full group-allocation mechanism remains undisclosed.",
+      "source": {
+        "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          122,
+          123
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English translation, operator-supplied PDF",
+        "verification": "PENDING_INDIVIDUAL_REVIEW"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_ZODIAC_D1",
+      "mention_actor_ids": [
+        "actor.chie-hoshinomiya",
+        "actor.sae-chiyabashira",
+        "actor.mashima",
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "exam",
+        "governance"
+      ],
+      "assertion_status": "EXTRACTED_PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     }
   ]
 }

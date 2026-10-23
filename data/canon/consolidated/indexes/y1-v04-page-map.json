@@ -414,6 +414,22 @@
       ],
       "cases": []
     },
+    "110": {
+      "evidence": [
+        "y1v4.ev.131"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.seed-false-rika-tip"
+      ]
+    },
+    "111": {
+      "evidence": [
+        "y1v4.ev.131"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.seed-false-rika-tip"
+      ]
+    },
     "112": {
       "evidence": [
         "y1v4.ev.063"
@@ -435,6 +451,18 @@
     "121": {
       "evidence": [
         "y1v4.ev.066"
+      ],
+      "cases": []
+    },
+    "122": {
+      "evidence": [
+        "y1v4.ev.132"
+      ],
+      "cases": []
+    },
+    "123": {
+      "evidence": [
+        "y1v4.ev.132"
       ],
       "cases": []
     },

@@ -172,7 +172,8 @@
     "y1v4.ev.120",
     "y1v4.ev.126",
     "y1v4.ev.127",
-    "y1v4.ev.128"
+    "y1v4.ev.128",
+    "y1v4.ev.132"
   ],
   "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
   "operational_migration": "Only user/operator-authorized claims may be promoted after review",
@@ -248,7 +249,8 @@
         "y1v4.ev.023",
         "y1v4.ev.055",
         "y1v4.ev.082",
-        "y1v4.ev.087"
+        "y1v4.ev.087",
+        "y1v4.ev.132"
       ],
       "description": "Admission, class allocation, campus restrictions, point disclosure"
     },
@@ -363,7 +365,8 @@
         "y1v4.ev.120",
         "y1v4.ev.126",
         "y1v4.ev.127",
-        "y1v4.ev.128"
+        "y1v4.ev.128",
+        "y1v4.ev.132"
       ],
       "description": "Mock diagnostic, midterm and exceptional score-point purchase"
     },
@@ -564,7 +567,7 @@
     ],
     "y1_v02": "July economic disclosures, the fight, Airi's stage identity and suspicions about Ryūen have different time/actor disclosure boundaries. Do not seed April memory.",
     "y1_v03": "The island-test rule briefing is received on beach at start of August; earlier cruise passengers expected a vacation. Leader keycards, spies, late substitution and secret negotiations have actor-specific disclosure stages.",
-    "y1_v04": "12 Zodiac group exam secret notifications at first morning, compulsory mixed-class room sessions, private extra-group contacts, deception and post-result public score; never propagate hidden VIP knowledge or abusive coercion to earlier/other actor memories."
+    "y1_v04": "12 Zodiac group exam secret notifications at first morning, compulsory mixed-class room sessions, private extra-group contacts, deception and post-result public score; never propagate hidden VIP knowledge or abusive coercion to earlier/other actor memories. Private teacher placement discussion of pp122–123 only heard by Kiyotaka, not public first-year knowledge."
   },
   "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance.",
   "disciplinary_case_y1_v02": {
@@ -635,6 +638,7 @@
       "GROUP_MEETING_OBSERVATIONS",
       "LATE_PRIVATE_REVEALS",
       "PUBLIC_OUTCOME_SUMMARY"
-    ]
+    ],
+    "group_allocation_discretion": "Teacher Hoshinomiya self-reports choosing Ichinose for Rabbit (pp122–123); VIP role selection rule remains unknown."
   }
 }

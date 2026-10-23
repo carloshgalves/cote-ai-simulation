@@ -1,0 +1,41 @@
+{
+  "id": "y1v4.case.kiyotaka-ayanokoji.seed-false-rika-tip",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "seed false Rika tip",
+  "context": "During the Rabbit exam Kiyotaka encounters Manabe after a group discussion and exploits her anger at Karuizawa.",
+  "observed_actions": "Deliberately lies to Manabe that he may have seen Karuizawa bully Rika; afterward admits privately that he actually witnessed nothing.",
+  "observed_result": "Manabe becomes interested and Kiyotaka expects escalation against Karuizawa; the subsequent harassment is a separate actor action.",
+  "epistemic_limits": "A planted untruth and harmful provocation. No witness corroboration of original Rika accusation; not a legitimate or endorsed persuasion strategy.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      110,
+      111
+    ],
+    "chapter": 3,
+    "source_status": "ASSISTANT_DIRECT_PDF_PASS_OPERATOR_PENDING"
+  },
+  "other_actors": [
+    "actor.manabe-shiho",
+    "actor.kei-karuizawa"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "deception",
+    "coercion"
+  ],
+  "information_available": "Kiyotaka knows he did not observe the claimed incident; Manabe hears the misleading claim and does not know it is fabricated.",
+  "counterfactual_test": "Other students may challenge fabrication, stop confrontation or report malicious conduct; do not require induced harm.",
+  "topics": [
+    "strategy",
+    "deception",
+    "coercion"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.131"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

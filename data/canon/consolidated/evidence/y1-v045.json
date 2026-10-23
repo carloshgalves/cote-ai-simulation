@@ -35,7 +35,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.002",
@@ -74,7 +75,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.003",
@@ -113,7 +115,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.004",
@@ -153,7 +156,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.005",
@@ -192,7 +196,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.006",
@@ -233,7 +238,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.007",
@@ -273,7 +279,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.v03.island-class-d-leader-replacement"
+      ]
     },
     {
       "id": "y1v45.ev.008",
@@ -312,7 +321,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.009",
@@ -351,7 +361,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.010",
@@ -390,7 +401,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.011",
@@ -429,7 +441,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.012",
@@ -468,7 +481,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.013",
@@ -507,7 +521,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.014",
@@ -547,7 +562,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.015",
@@ -590,7 +606,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.016",
@@ -630,7 +647,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.017",
@@ -671,7 +689,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.018",
@@ -708,7 +727,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.019",
@@ -741,7 +761,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "mention_organization_ids": [
-        "org.anhs"
+        "org.anhs",
+        "org.student-council"
       ],
       "topics": [
         "politics",
@@ -750,7 +771,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.020",
@@ -782,7 +804,9 @@
         "actor.kiyotaka-ayanokoji",
         "actor.suzune-horikita"
       ],
-      "mention_organization_ids": [],
+      "mention_organization_ids": [
+        "org.student-council"
+      ],
       "topics": [
         "reasoning",
         "epistemics"
@@ -790,7 +814,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.v03.island-class-d-leader-replacement"
+      ]
     },
     {
       "id": "y1v45.ev.021",
@@ -823,7 +850,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "mention_organization_ids": [
-        "org.anhs"
+        "org.anhs",
+        "org.student-council"
       ],
       "topics": [
         "leadership",
@@ -832,7 +860,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.022",
@@ -871,7 +900,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.023",
@@ -912,7 +942,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.024",
@@ -945,7 +976,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "mention_organization_ids": [
-        "org.anhs"
+        "org.anhs",
+        "org.student-council"
       ],
       "topics": [
         "governance",
@@ -954,7 +986,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.anhs-private-points-vs-explicit-prohibitions"
+      ]
     },
     {
       "id": "y1v45.ev.025",
@@ -994,7 +1029,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.026",
@@ -1027,7 +1063,8 @@
         "actor.katsuragi"
       ],
       "mention_organization_ids": [
-        "org.anhs"
+        "org.anhs",
+        "org.student-council"
       ],
       "topics": [
         "governance",
@@ -1036,7 +1073,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.anhs-private-points-vs-explicit-prohibitions"
+      ]
     },
     {
       "id": "y1v45.ev.027",
@@ -1078,7 +1118,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.v045.katsuragi-family-parcel-payment"
+      ]
     },
     {
       "id": "y1v45.ev.028",
@@ -1118,7 +1161,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.v045.katsuragi-family-parcel-payment"
+      ]
     },
     {
       "id": "y1v45.ev.029",
@@ -1160,7 +1206,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.v045.katsuragi-family-parcel-payment"
+      ]
     },
     {
       "id": "y1v45.ev.030",
@@ -1200,7 +1249,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.v045.katsuragi-family-parcel-payment"
+      ]
     },
     {
       "id": "y1v45.ev.031",
@@ -1240,7 +1292,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.032",
@@ -1278,7 +1331,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.033",
@@ -1317,7 +1371,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.034",
@@ -1356,7 +1411,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.035",
@@ -1398,7 +1454,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-dragon-vip-disclosure"
+      ]
     },
     {
       "id": "y1v45.ev.036",
@@ -1439,7 +1498,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.037",
@@ -1479,7 +1539,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.038",
@@ -1520,7 +1581,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.039",
@@ -1560,7 +1622,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.040",
@@ -1600,7 +1663,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.041",
@@ -1640,7 +1704,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.042",
@@ -1681,7 +1746,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-rabbit-reward"
+      ]
     },
     {
       "id": "y1v45.ev.043",
@@ -1720,7 +1788,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.044",
@@ -1759,7 +1828,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE"
+      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE",
+      "related_canonical_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ]
     },
     {
       "id": "y1v45.ev.045",
@@ -1801,7 +1873,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.046",
@@ -1842,7 +1915,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ]
     },
     {
       "id": "y1v45.ev.047",
@@ -1884,7 +1960,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.048",
@@ -1918,7 +1995,8 @@
         "actor.suzune-horikita"
       ],
       "mention_organization_ids": [
-        "org.anhs"
+        "org.anhs",
+        "org.student-council"
       ],
       "topics": [
         "politics",
@@ -1927,7 +2005,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.049",
@@ -1968,7 +2047,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.050",
@@ -2008,7 +2088,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.051",
@@ -2047,7 +2128,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE"
+      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.052",
@@ -2086,7 +2168,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE"
+      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE",
+      "related_canonical_event_ids": []
     },
     {
       "id": "y1v45.ev.053",
@@ -2128,7 +2211,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE"
+      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE",
+      "related_canonical_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ]
     },
     {
       "id": "y1v45.ev.054",
@@ -2168,7 +2254,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE"
+      "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE",
+      "related_canonical_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ]
     },
     {
       "id": "y1v45.ev.055",
@@ -2207,7 +2296,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ]
     },
     {
       "id": "y1v45.ev.056",
@@ -2249,7 +2341,10 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ]
     },
     {
       "id": "y1v45.ev.057",
@@ -2290,7 +2385,8 @@
       "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
-      "portrayal_gate": "EPISODE_BOUNDED"
+      "portrayal_gate": "EPISODE_BOUNDED",
+      "related_canonical_event_ids": []
     }
   ]
 }

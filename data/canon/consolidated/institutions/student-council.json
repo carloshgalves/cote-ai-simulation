@@ -4,7 +4,8 @@
   "display_name": "ANHS student council",
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
-    "ln.y1.v02.sevenseas.en.operator-provided"
+    "ln.y1.v02.sevenseas.en.operator-provided",
+    "ln.y1.v045.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "evidence_refs": [
@@ -20,7 +21,13 @@
     "y1v2.ev.082",
     "y1v2.ev.083",
     "y1v2.ev.084",
-    "y1v2.ev.088"
+    "y1v2.ev.088",
+    "y1v45.ev.019",
+    "y1v45.ev.020",
+    "y1v45.ev.021",
+    "y1v45.ev.024",
+    "y1v45.ev.026",
+    "y1v45.ev.048"
   ],
   "owner_truth_boundary": "Student-council authority described in Manabu's public speech, not independently executed rulebook",
   "structure": {
@@ -63,5 +70,33 @@
     "evidence_refs": [
       "y1v2.ev.088"
     ]
+  },
+  "student_council_interactions_y1_v045": {
+    "president": "actor.manabu-horikita",
+    "secretary": "actor.tachibana",
+    "vice_president": "actor.nagumo",
+    "membership_facts": {
+      "offer_to_kiyotaka": "DECLINED",
+      "first_year_ichinose_membership": "SELF_REPORTED_AFTER_INITIAL_REJECTION",
+      "selection_power_of_nagumo": "ICHINOSE_ATTRIBUTED_NOT_OFFICIAL_CONFIRMATION"
+    },
+    "recruitment_evidence_refs": [
+      "y1v45.ev.019",
+      "y1v45.ev.020",
+      "y1v45.ev.021",
+      "y1v45.ev.048"
+    ],
+    "external_contact_policy": {
+      "request": "Katsuragi family gift",
+      "formal_outcome": "DENIED",
+      "speaker": "actor.manabu-horikita",
+      "outcome_contradiction": "Subsequent undiscovered mailing does not invalidate ban",
+      "evidence_refs": [
+        "y1v45.ev.024",
+        "y1v45.ev.026"
+      ]
+    },
+    "time_gate": "LATE_AUG_POST_ISLAND",
+    "revelation_gate": "MANABU_REPORTED_KIYOTAKA_LEADER_BEFORE_RECRUITMENT_NOT_PUBLIC"
   }
 }

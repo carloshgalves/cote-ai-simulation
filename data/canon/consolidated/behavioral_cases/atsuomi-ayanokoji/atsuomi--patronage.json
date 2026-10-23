@@ -1,0 +1,61 @@
+{
+  "id": "v0.case.atsuomi.patronage",
+  "actor_id": "actor.atsuomi-ayanokoji",
+  "title": "Survival in political patronage network",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      17,
+      18,
+      19,
+      24,
+      25,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "SELF_DESCRIPTION",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Atsuomi is a junior politician under Naoe with asymmetrical access",
+  "information_available": "Learns that prestigious patrons exploit delays, rank, favors and vulnerability",
+  "perceived_objective": "Build own power without prematurely confronting patron",
+  "observed_actions": "Tolerates disrespect while cultivating networks and information",
+  "observed_result": "Entrusted with White Room project; continues private ambition to overtake patron",
+  "capabilities_supported": [
+    "social_inference",
+    "long_term_planning",
+    "political_patronage"
+  ],
+  "epistemic_limits": "Do not identify Atsuomi self-report as external proven merit; source covers his own retrospective understanding",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "",
+  "other_actors": [
+    "actor.jinnosuke-naoe",
+    "actor.kamogawa"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.atsuomi-ayanokoji",
+  "topics": [
+    "strategy",
+    "social",
+    "politics",
+    "institution"
+  ],
+  "evidence_refs": [
+    "v0.pol.005",
+    "v0.pol.006",
+    "v0.pol.024",
+    "v0.wr.001",
+    "v0.char.002",
+    "v0.char.038"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

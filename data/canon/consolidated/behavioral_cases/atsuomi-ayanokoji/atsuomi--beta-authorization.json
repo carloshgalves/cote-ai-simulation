@@ -1,0 +1,42 @@
+{
+  "id": "v0.case.atsuomi.beta-authorization",
+  "actor_id": "actor.atsuomi-ayanokoji",
+  "title": "Beta curriculum authorization",
+  "context": "Research staff describe heightened failure risks for fourth generation",
+  "observed_actions": "Orders exceptionally demanding Beta curriculum with his biological child included",
+  "observed_result": "Beta applied to fourth generation",
+  "epistemic_limits": "Does not establish scientific generalization or reproducibility",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      124,
+      125,
+      126,
+      127,
+      128
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [],
+  "capabilities_supported": [],
+  "information_available": "Only observations and information available in depicted scene",
+  "counterfactual_test": "Change observations and choices; do not hardcode canonical outcome",
+  "primary_actor_id": "actor.atsuomi-ayanokoji",
+  "topics": [
+    "academic_reasoning",
+    "strategy",
+    "social",
+    "institution"
+  ],
+  "evidence_refs": [
+    "v0.wr.013",
+    "v0.wr.014",
+    "v0.wr.015",
+    "v0.wr.016",
+    "v0.wr.033",
+    "v0.char.033",
+    "v0.wr.048"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

@@ -1,0 +1,19 @@
+name: Canon consolidated V2
+on:
+  pull_request:
+    paths:
+      - 'data/canon/consolidated/**'
+      - 'tools/validate_canon_consolidated_v2.py'
+      - 'tools/rebuild_canon_indexes_v2.py'
+      - '.github/workflows/canon-consolidated-v2.yml'
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/validate_canon_consolidated_v2.py
+      - run: python tools/rebuild_canon_indexes_v2.py --check

@@ -1,0 +1,313 @@
+{
+  "schema_version": "volume0-event-index-v1",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+    "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "events": [
+    {
+      "id": "v0.event.political-backstory",
+      "order": 1,
+      "description": "Atsuomi loses first campaign and advances in political patronage",
+      "source_pages": [
+        10,
+        11,
+        12
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.project-assignment",
+      "order": 2,
+      "description": "Naoe assigns reserved human resource development program",
+      "source_pages": [
+        33,
+        34,
+        35,
+        36
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.brokerage",
+      "order": 3,
+      "description": "Sakayanagi finance bridge and Tsukishiro connection",
+      "source_pages": [
+        37,
+        38,
+        39,
+        50,
+        51,
+        55,
+        56
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.facility-procurement",
+      "order": 4,
+      "description": "Saitama site chosen and White Room named",
+      "source_pages": [
+        58,
+        59,
+        60,
+        70,
+        71
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.staff-and-intake",
+      "order": 5,
+      "description": "Researchers recruited; first 15 infants distributed in 3 groups",
+      "source_pages": [
+        72,
+        73,
+        74,
+        87,
+        88,
+        93,
+        94,
+        95
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.initial-comparison",
+      "order": 6,
+      "description": "Suzukake observed results and chosen as pedagogy lead",
+      "source_pages": [
+        103,
+        105,
+        106,
+        107,
+        108,
+        109
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.beta-protocol",
+      "order": 7,
+      "description": "Fourth cohort assigned exceptional Beta curriculum",
+      "source_pages": [
+        124,
+        125,
+        126,
+        127,
+        128
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.kiyotaka-infancy",
+      "order": 8,
+      "description": "Kiyotaka enters White Room as an infant",
+      "source_pages": [
+        12,
+        13,
+        14,
+        15,
+        122,
+        123
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.fourth-generation-training",
+      "order": 9,
+      "description": "Kiyotaka, Shiro and Yuki observed in schooling and training",
+      "source_pages": [
+        132,
+        139,
+        140,
+        144,
+        149,
+        150,
+        151,
+        165,
+        166
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.cohort-contraction",
+      "order": 10,
+      "description": "Yuki exits, Shiro chooses to leave, Kiyotaka remains",
+      "source_pages": [
+        179,
+        180,
+        181,
+        183,
+        184,
+        185,
+        186,
+        187,
+        190,
+        191,
+        192
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.political-transition",
+      "order": 11,
+      "description": "Naoe aligns with Kijima and withdraws support for Atsuomi",
+      "source_pages": [
+        202,
+        203,
+        204,
+        205,
+        209
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.fundraising-independence",
+      "order": 12,
+      "description": "Atsuomi raises funding and encounters wealthy families and children",
+      "source_pages": [
+        216,
+        219,
+        220,
+        221,
+        224,
+        225,
+        230,
+        234
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.research-retrospective",
+      "order": 13,
+      "description": "Suzukake evaluates cohorts and Kiyotaka exceptional response",
+      "source_pages": [
+        242,
+        243,
+        244,
+        245,
+        246
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.temporary-shutdown",
+      "order": 14,
+      "description": "Institution suspended, children relocated, Kiyotaka meets Yuki outside",
+      "source_pages": [
+        242,
+        249,
+        251,
+        252,
+        253,
+        254,
+        256,
+        258
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    },
+    {
+      "id": "v0.event.political-next-plan",
+      "order": 15,
+      "description": "Atsuomi and Tsukishiro discuss Kiyotaka future before ANHS",
+      "source_pages": [
+        259,
+        260,
+        261
+      ],
+      "story_time": "PRE_Y1_RELATIVE; calendar date not asserted",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "knowledge_gate": "Not universally known; facts must be causally disclosed to simulation actors"
+    }
+  ]
+}

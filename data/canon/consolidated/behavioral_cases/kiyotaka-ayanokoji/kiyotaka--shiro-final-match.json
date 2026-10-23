@@ -1,0 +1,42 @@
+{
+  "id": "v0.case.kiyotaka.shiro-final-match",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Final encounter with Shiro",
+  "context": "Kiyotaka faces Shiro after he resolves to leave the White Room",
+  "observed_actions": "Accepts Shiro's decision and does not treat his exit as death",
+  "observed_result": "Shiro leaves voluntarily; Kiyotaka is sole remaining fourth-generation child",
+  "epistemic_limits": "Do not invent a universal fight win rate or Shiro fate",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [],
+  "capabilities_supported": [],
+  "information_available": "Only observations and information available in depicted scene",
+  "counterfactual_test": "Change observations and choices; do not hardcode canonical outcome",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "topics": [
+    "strategy",
+    "social",
+    "institution"
+  ],
+  "evidence_refs": [
+    "v0.wr.017",
+    "v0.wr.022",
+    "v0.char.018",
+    "v0.char.019",
+    "v0.char.020",
+    "v0.wr.045"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

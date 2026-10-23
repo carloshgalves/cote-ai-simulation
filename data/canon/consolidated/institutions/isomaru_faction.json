@@ -1,0 +1,17 @@
+{
+  "schema_version": "consolidated-institution-v2",
+  "institution_id": "org.isomaru_faction",
+  "display_name": "Isomaru faction",
+  "source_coverage": [
+    "ln.y1.v00.legacyemtls.v1.0.1"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_documents": [
+    "data/canon/volume0/organizations/isomaru_faction.yaml"
+  ],
+  "evidence_refs": [
+    "v0.pol.003"
+  ],
+  "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
+  "operational_migration": "Only user/operator-authorized claims may be promoted after review"
+}

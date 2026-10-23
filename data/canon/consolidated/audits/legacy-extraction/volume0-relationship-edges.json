@@ -1,0 +1,551 @@
+{
+  "schema_version": "volume0-relationship-edges-v1",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+    "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "edge_count": 31,
+  "edges": [
+    {
+      "id": "v0.rel.001",
+      "from": "actor.atsuomi",
+      "to": "actor.naoe",
+      "relationship": "subordinate then opponent",
+      "source_pages": [
+        11,
+        12,
+        33,
+        209,
+        210,
+        215
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.002",
+      "from": "actor.naoe",
+      "to": "actor.kijima",
+      "relationship": "intra-party rivals then accommodation",
+      "source_pages": [
+        29,
+        203,
+        204
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.003",
+      "from": "actor.naoe",
+      "to": "actor.isomaru",
+      "relationship": "intra-party rival factions",
+      "source_pages": [
+        28,
+        29,
+        204
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.004",
+      "from": "actor.kijima",
+      "to": "actor.isomaru",
+      "relationship": "rival leadership contenders",
+      "source_pages": [
+        203,
+        204
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.005",
+      "from": "actor.atsuomi",
+      "to": "actor.kamogawa",
+      "relationship": "supervisor and enduring collaborator",
+      "source_pages": [
+        34,
+        43,
+        58,
+        248
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.006",
+      "from": "actor.kamogawa",
+      "to": "actor.kamogawa_toshizou",
+      "relationship": "son and father",
+      "source_pages": [
+        19,
+        44
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.007",
+      "from": "actor.naoe",
+      "to": "actor.asama",
+      "relationship": "faction leader and senior associate",
+      "source_pages": [
+        22
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.008",
+      "from": "actor.atsuomi",
+      "to": "actor.sakayanagi_father",
+      "relationship": "partner with competing ethical views",
+      "source_pages": [
+        50,
+        55,
+        56,
+        109,
+        111,
+        231
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.009",
+      "from": "actor.sakayanagi_father",
+      "to": "actor.arisu",
+      "relationship": "father and daughter",
+      "source_pages": [
+        172,
+        173,
+        175,
+        176,
+        231
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.010",
+      "from": "actor.atsuomi",
+      "to": "actor.tsukishiro",
+      "relationship": "contracted operator with uncertain loyalties",
+      "source_pages": [
+        39,
+        83,
+        87,
+        214,
+        261
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.011",
+      "from": "actor.atsuomi",
+      "to": "actor.mika",
+      "relationship": "relationship and intelligence arrangement",
+      "source_pages": [
+        64,
+        67,
+        68,
+        114,
+        118
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.012",
+      "from": "actor.atsuomi",
+      "to": "actor.kiyotaka",
+      "relationship": "biological father and facility director",
+      "source_pages": [
+        12,
+        13,
+        15,
+        196,
+        260
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.013",
+      "from": "actor.mika",
+      "to": "actor.kiyotaka",
+      "relationship": "biological mother; arranged upbringing",
+      "source_pages": [
+        118,
+        119,
+        121,
+        122
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.014",
+      "from": "actor.mika",
+      "to": "actor.atsuomi",
+      "relationship": "former spouses with transactional arrangements",
+      "source_pages": [
+        114,
+        117,
+        118,
+        119,
+        121,
+        122
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.015",
+      "from": "actor.atsuomi",
+      "to": "actor.suzukake",
+      "relationship": "director and scientific lead",
+      "source_pages": [
+        87,
+        108,
+        126,
+        243
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.016",
+      "from": "actor.suzukake",
+      "to": "actor.ishida",
+      "relationship": "comparing and debating educator methods",
+      "source_pages": [
+        93,
+        94,
+        108
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.017",
+      "from": "actor.suzukake",
+      "to": "actor.souya",
+      "relationship": "competing early educator methods",
+      "source_pages": [
+        93,
+        94,
+        108
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.018",
+      "from": "actor.tabuchi",
+      "to": "actor.suzukake",
+      "relationship": "evaluation researcher and educational lead",
+      "source_pages": [
+        94,
+        103,
+        124
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.019",
+      "from": "actor.kiyotaka",
+      "to": "actor.yuki",
+      "relationship": "White Room peers; asymmetric social investment",
+      "source_pages": [
+        144,
+        145,
+        183,
+        252
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.020",
+      "from": "actor.kiyotaka",
+      "to": "actor.shiro",
+      "relationship": "White Room peers and combat partners",
+      "source_pages": [
+        186,
+        187,
+        190,
+        191
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.021",
+      "from": "actor.yuki",
+      "to": "actor.yuki_father",
+      "relationship": "daughter and concerned parent",
+      "source_pages": [
+        253,
+        254
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.022",
+      "from": "actor.yuki",
+      "to": "actor.yuki_younger_sister_unidentified",
+      "relationship": "sisters; younger sister unnamed",
+      "source_pages": [
+        254
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.023",
+      "from": "actor.ishigami_kyo",
+      "to": "actor.ishigami_gorou",
+      "relationship": "son and father",
+      "source_pages": [
+        232,
+        233
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.024",
+      "from": "actor.kanzaki_ryuji",
+      "to": "actor.kanzaki_tomohiro",
+      "relationship": "son and father",
+      "source_pages": [
+        234
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.025",
+      "from": "actor.ishigami_kyo",
+      "to": "actor.kanzaki_ryuji",
+      "relationship": "acquaintances with different intervention choices",
+      "source_pages": [
+        227,
+        228,
+        230
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.026",
+      "from": "actor.atsuomi",
+      "to": "actor.ishigami_kyo",
+      "relationship": "observed strategically able child; future links only proposed",
+      "source_pages": [
+        229,
+        232,
+        233
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.027",
+      "from": "actor.atsuomi",
+      "to": "actor.kanzaki_ryuji",
+      "relationship": "adult gives advice to child",
+      "source_pages": [
+        234,
+        235,
+        237
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.028",
+      "from": "actor.ishigami_kyo",
+      "to": "actor.nogi",
+      "relationship": "opponents in dispute",
+      "source_pages": [
+        228,
+        229,
+        230
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.029",
+      "from": "actor.ishigami_kyo",
+      "to": "actor.fuji",
+      "relationship": "child intervenes amid contested accusation",
+      "source_pages": [
+        227,
+        228,
+        230
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.030",
+      "from": "actor.amasawa_president",
+      "to": "actor.atsuomi",
+      "relationship": "donor and operator",
+      "source_pages": [
+        220,
+        221,
+        222,
+        223
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    },
+    {
+      "id": "v0.rel.031",
+      "from": "actor.sakayanagi_father",
+      "to": "actor.kijima",
+      "relationship": "potential politically sensitive extended-family tie",
+      "source_pages": [
+        49,
+        51,
+        56
+      ],
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "epistemic_warning": "The two parties do not necessarily share knowledge, loyalties or interpretations; attach temporal changes explicitly."
+    }
+  ]
+}

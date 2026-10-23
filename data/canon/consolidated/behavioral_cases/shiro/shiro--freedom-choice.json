@@ -1,0 +1,55 @@
+{
+  "id": "v0.case.shiro.freedom-choice",
+  "actor_id": "actor.shiro",
+  "title": "Voluntary withdrawal despite competitive ability",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      186,
+      187,
+      188,
+      190,
+      191,
+      192
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "SELF_DESCRIPTION",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Only Shiro and Kiyotaka remain; Shiro has long endured curriculum",
+  "information_available": "Observes other dropouts and anticipates life beyond confinement; has no confirmed post-exit outcomes",
+  "perceived_objective": "Obtain freedom and friendships",
+  "observed_actions": "Quietly announces plan to fail/leave, tries inviting Kiyotaka, exerts effort in final match",
+  "observed_result": "Loses final encounter, leaves voluntarily; canonical post-exit whereabouts not supplied",
+  "capabilities_supported": [
+    "autonomy",
+    "risk_tolerance",
+    "goal_reprioritization",
+    "combat_resilience"
+  ],
+  "epistemic_limits": "Dropout not death; cannot assert Shiro returns to a specific school or faction",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "A simulation can choose post-exit path; only pre-exit capabilities and stated motives are canonically constrained.",
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.shiro",
+  "topics": [
+    "combat",
+    "academic_reasoning",
+    "strategy",
+    "institution",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "v0.wr.017",
+    "v0.wr.022",
+    "v0.char.018",
+    "v0.char.019",
+    "v0.wr.045"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

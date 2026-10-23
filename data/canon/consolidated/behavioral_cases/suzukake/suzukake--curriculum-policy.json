@@ -1,0 +1,70 @@
+{
+  "id": "v0.case.suzukake.curriculum-policy",
+  "actor_id": "actor.suzukake",
+  "title": "Changing education across cohorts",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      108,
+      109,
+      124,
+      125,
+      126,
+      127,
+      242,
+      243,
+      244,
+      245
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "RESEARCHER_REPORT",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Suzukake leads pedagogy and measures gradual difficulty increases",
+  "information_available": "Researcher data, attrition, socialization deficits, child-development observations",
+  "perceived_objective": "Improve cohort outcomes and curriculum",
+  "observed_actions": "Designs difficulty levels including Beta; later adds social communication training in fifth generation",
+  "observed_result": "Reports higher skills with tradeoffs, seventh-generation complete dropout, Kiyotaka as unreplicated outlier",
+  "capabilities_supported": [
+    "instructional_design",
+    "hypothesis_revision",
+    "institutional_optimization"
+  ],
+  "epistemic_limits": "Reported causal interpretation and percentages are Suzukake evaluation, not objective scientific proof",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "",
+  "other_actors": [
+    "actor.ishida",
+    "actor.souya",
+    "actor.tabuchi"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.suzukake",
+  "topics": [
+    "academic_reasoning",
+    "social",
+    "institution",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "v0.pol.014",
+    "v0.wr.011",
+    "v0.wr.012",
+    "v0.wr.013",
+    "v0.wr.014",
+    "v0.wr.015",
+    "v0.wr.027",
+    "v0.wr.028",
+    "v0.wr.029",
+    "v0.wr.030",
+    "v0.wr.031",
+    "v0.wr.032",
+    "v0.char.007",
+    "v0.char.033",
+    "v0.char.037",
+    "v0.wr.047"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

@@ -1,0 +1,166 @@
+{
+  "schema_version": "consolidated-institution-v2",
+  "institution_id": "org.white_room",
+  "display_name": "White Room",
+  "source_coverage": [
+    "ln.y1.v00.legacyemtls.v1.0.1"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_documents": [
+    "data/canon/volume0/organizations/white_room.yaml"
+  ],
+  "evidence_refs": [
+    "v0.pol.006",
+    "v0.pol.007",
+    "v0.pol.008",
+    "v0.pol.013",
+    "v0.pol.014",
+    "v0.pol.015",
+    "v0.pol.016",
+    "v0.pol.018",
+    "v0.pol.019",
+    "v0.pol.020",
+    "v0.pol.022",
+    "v0.wr.001",
+    "v0.wr.002",
+    "v0.wr.003",
+    "v0.wr.004",
+    "v0.wr.006",
+    "v0.wr.007",
+    "v0.wr.008",
+    "v0.wr.009",
+    "v0.wr.010",
+    "v0.wr.011",
+    "v0.wr.012",
+    "v0.wr.013",
+    "v0.wr.014",
+    "v0.wr.015",
+    "v0.wr.016",
+    "v0.wr.017",
+    "v0.wr.018",
+    "v0.wr.019",
+    "v0.wr.020",
+    "v0.wr.021",
+    "v0.wr.022",
+    "v0.wr.023",
+    "v0.wr.024",
+    "v0.wr.025",
+    "v0.wr.026",
+    "v0.wr.027",
+    "v0.wr.028",
+    "v0.wr.029",
+    "v0.wr.030",
+    "v0.wr.031",
+    "v0.wr.032",
+    "v0.wr.033",
+    "v0.wr.034",
+    "v0.wr.035",
+    "v0.char.004",
+    "v0.char.005",
+    "v0.char.007",
+    "v0.char.008",
+    "v0.char.009",
+    "v0.char.010",
+    "v0.char.011",
+    "v0.char.012",
+    "v0.char.013",
+    "v0.char.014",
+    "v0.char.015",
+    "v0.char.016",
+    "v0.char.017",
+    "v0.char.018",
+    "v0.char.019",
+    "v0.char.020",
+    "v0.char.021",
+    "v0.char.022",
+    "v0.char.023",
+    "v0.char.030",
+    "v0.char.031",
+    "v0.char.032",
+    "v0.char.033",
+    "v0.char.034",
+    "v0.char.035",
+    "v0.char.037",
+    "v0.pol.027",
+    "v0.wr.036",
+    "v0.wr.037",
+    "v0.wr.038",
+    "v0.wr.039",
+    "v0.wr.040",
+    "v0.wr.042",
+    "v0.wr.043",
+    "v0.wr.044",
+    "v0.wr.045",
+    "v0.wr.046",
+    "v0.wr.047",
+    "v0.char.041",
+    "v0.char.044",
+    "v0.char.045",
+    "v0.char.046",
+    "v0.char.047",
+    "v0.char.050",
+    "v0.char.051",
+    "v0.wr.048"
+  ],
+  "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
+  "operational_migration": "Only user/operator-authorized claims may be promoted after review",
+  "white_room_model": {
+    "curricula": [
+      {
+        "generation": 4,
+        "protocol": "BETA",
+        "source_claims": [
+          "v0.wr.014",
+          "v0.wr.015"
+        ]
+      },
+      {
+        "generation": 5,
+        "level": 4,
+        "communication_component": true
+      },
+      {
+        "generation": 6,
+        "level": 5
+      },
+      {
+        "generation": 7,
+        "level": 6,
+        "reported_complete_dropout": true
+      },
+      {
+        "generation": "8+",
+        "reported_mixed_levels": [
+          4,
+          5
+        ]
+      }
+    ],
+    "observed_fourth_generation_start": 74,
+    "training_topics": [
+      "language",
+      "mathematics",
+      "political_science",
+      "economics",
+      "judo",
+      "karate",
+      "boxing",
+      "VR everyday context",
+      "pool training",
+      "card observation",
+      "gummy inference",
+      "music and traditional arts"
+    ],
+    "curriculum_details_provenance": [
+      "data/canon/volume0/white_room/curriculum_generations.yaml",
+      "data/canon/volume0/white_room/training_matrix.yaml",
+      "data/canon/volume0/white_room/institution_pack.yaml"
+    ],
+    "source_limitations": [
+      "Curriculum is not completely specified by literary text",
+      "Number of surviving children cannot be interpreted as death count",
+      "Beta result is not evidence of generic reproducibility"
+    ],
+    "evaluation_domain": "INSTITUTIONAL_TRAINING_NOT_ANHS_SPECIAL_EXAM"
+  }
+}

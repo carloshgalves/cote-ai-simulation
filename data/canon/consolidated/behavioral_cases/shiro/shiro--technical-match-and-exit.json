@@ -1,0 +1,40 @@
+{
+  "id": "v0.case.shiro.technical-match-and-exit",
+  "actor_id": "actor.shiro",
+  "title": "Shiro's last match and decision",
+  "context": "Advanced physical training; Shiro has independently chosen life outside",
+  "observed_actions": "Engages in a final match while preserving autonomous goal of leaving",
+  "observed_result": "Shiro leaves by choice; subsequent whereabouts not established",
+  "epistemic_limits": "Do not infer death or future location",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [],
+  "capabilities_supported": [],
+  "information_available": "Only observations and information available in depicted scene",
+  "counterfactual_test": "Change observations and choices; do not hardcode canonical outcome",
+  "primary_actor_id": "actor.shiro",
+  "topics": [
+    "combat",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "v0.wr.017",
+    "v0.wr.022",
+    "v0.char.018",
+    "v0.char.019",
+    "v0.wr.045"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

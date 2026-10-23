@@ -1,0 +1,51 @@
+{
+  "id": "v0.case.yuki.social-outreach",
+  "actor_id": "actor.yuki",
+  "title": "Seeking informal conversation under punitive isolation",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      144,
+      145,
+      146,
+      147,
+      166,
+      167,
+      168
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Children have little free interaction and punitive routines",
+  "information_available": "Repeated close contact and tentative social cues from Kiyotaka",
+  "perceived_objective": "Talk and connect with peers",
+  "observed_actions": "Initiates interaction and attempts friendly conversation",
+  "observed_result": "Kiyotaka notices emotional differences and ordinary gestures but responds atypically",
+  "capabilities_supported": [
+    "social_initiative",
+    "attachment",
+    "emotional_expression"
+  ],
+  "epistemic_limits": "No evidence that every gesture targets Kiyotaka romantically or that Yuki has predetermined future role",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "Vary willingness to interact, class norms and risks of punishment.",
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.yuki",
+  "topics": [
+    "social"
+  ],
+  "evidence_refs": [
+    "v0.wr.017",
+    "v0.wr.023",
+    "v0.char.013",
+    "v0.char.014",
+    "v0.char.016"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

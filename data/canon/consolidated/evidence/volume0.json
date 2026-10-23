@@ -1,0 +1,4239 @@
+{
+  "schema_version": "consolidated-evidence-v2",
+  "source_id": "ln.y1.v00.legacyemtls.v1.0.1",
+  "records": [
+    {
+      "id": "v0.pol.001",
+      "domain": "politics",
+      "summary": "Atsuomi entered electoral politics after a failed first campaign and advanced through Naoe patronage and ethically compromising assignments.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          10,
+          11,
+          12
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.citizens_party",
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.002",
+      "domain": "politics",
+      "summary": "Naoe is the party secretary-general and a dominant internal power broker who can subordinate senior colleagues and influence factional relations.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          18,
+          22
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.jinnosuke-naoe",
+        "actor.asama"
+      ],
+      "mention_organization_ids": [
+        "org.citizens_party",
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.003",
+      "domain": "politics",
+      "summary": "At the project launch period the Citizens Party has major factions associated with Naoe, Isomaru and Prime Minister Miyako, and an emerging fourth faction under Kijima.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          25,
+          29
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.jinnosuke-naoe",
+        "actor.isomaru",
+        "actor.miyako",
+        "actor.kijima"
+      ],
+      "mention_organization_ids": [
+        "org.citizens_party",
+        "org.naoe_faction",
+        "org.isomaru_faction",
+        "org.miyako_faction",
+        "org.kijima_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.004",
+      "domain": "politics",
+      "summary": "Kijima has a prominent public reformist image and growing popularity among younger party members; Naoe identifies him as a greater political threat than Isomaru.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          28,
+          29,
+          30
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kijima",
+        "actor.jinnosuke-naoe"
+      ],
+      "mention_organization_ids": [
+        "org.kijima_faction",
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.005",
+      "domain": "politics",
+      "summary": "Atsuomi describes high political achievement as shaping stakeholder satisfaction despite unmet demands, not merely delivering what voters initially ask for.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          31,
+          32
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.jinnosuke-naoe"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.006",
+      "domain": "politics",
+      "summary": "Naoe assigns Atsuomi a secret human-resource-development project; Kamogawa is attached to assist, despite Atsuomi reservations.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          33,
+          34
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.jinnosuke-naoe",
+        "actor.atsuomi-ayanokoji",
+        "actor.kamogawa"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.007",
+      "domain": "politics",
+      "summary": "A stated political goal of the project is to cultivate future cadres linked to wealthy families and loyal to the Naoe faction.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          35,
+          36
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "PROJECT_PLAN",
+      "story_time": "PRE_Y1_START",
+      "caveat": "Plan rather than an established outcome.",
+      "mention_actor_ids": [
+        "actor.jinnosuke-naoe",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.008",
+      "domain": "politics",
+      "summary": "Naoe refuses direct financing and even the public use of his name, leaving Atsuomi to construct financing and operating arrangements while maintaining secrecy.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          37,
+          38
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.jinnosuke-naoe",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction",
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.009",
+      "domain": "politics",
+      "summary": "Naoe directs Atsuomi toward Sakayanagi as a potential bridge to the financial world; Sakayanagi family ties intersect with the Kijima sphere.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          37,
+          38,
+          49,
+          51
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.jinnosuke-naoe",
+        "actor.atsuomi-ayanokoji",
+        "actor.sakayanagi-father"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction",
+        "org.kijima_faction"
+      ],
+      "topics": [
+        "strategy",
+        "social",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.010",
+      "domain": "politics",
+      "summary": "Sakayanagi is alert to the danger that information he receives could be carried to Kijima, while Atsuomi deliberately accepts an uncertain allegiance risk.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          50,
+          51,
+          52
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.sakayanagi-father",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.kijima_faction",
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.011",
+      "domain": "politics",
+      "summary": "Tsukishiro presents himself as an independent general-purpose operative handling protection, intelligence and other sensitive work, not merely Naoe bodyguard.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          39,
+          40
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.tsukishiro",
+        "actor.jinnosuke-naoe",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.012",
+      "domain": "politics",
+      "summary": "Tsukishiro later studies Atsuomi background and negotiates a relationship based on his expectation that Atsuomi will survive political conflicts.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          83,
+          84,
+          85,
+          86,
+          87
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.tsukishiro",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "social",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.013",
+      "domain": "politics",
+      "summary": "Sakayanagi agrees to introduce funding contacts in exchange for the right to observe the White Room operating methods.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          54,
+          55,
+          56
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.sakayanagi-father",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.financial_backers"
+      ],
+      "topics": [
+        "strategy",
+        "politics",
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.014",
+      "domain": "politics",
+      "summary": "Sakayanagi voices humanitarian objections to educational methods that erase or suppress emotion and refuses to regard academic results as sufficient.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          105,
+          107,
+          109,
+          110,
+          111
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.sakayanagi-father",
+        "actor.suzukake",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "strategy",
+        "social",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.015",
+      "domain": "politics",
+      "summary": "Naoe decides to abandon his leadership bid and support Kijima, then demands that Atsuomi suspend the White Room project and withdraw from political prominence.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.jinnosuke-naoe",
+        "actor.kijima",
+        "actor.atsuomi-ayanokoji",
+        "actor.kamogawa"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction",
+        "org.kijima_faction",
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy",
+        "politics",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.016",
+      "domain": "politics",
+      "summary": "Atsuomi outwardly accepts Naoe order to terminate the project while privately resolving to preserve his power and eventually overcome his former patron.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          209,
+          210,
+          211,
+          212,
+          213
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.jinnosuke-naoe",
+        "actor.kamogawa"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.017",
+      "domain": "politics",
+      "summary": "Tsukishiro interprets Naoe conduct as fear of Atsuomi growing too powerful and says Naoe intended Atsuomi to remain subordinate to Naoe political heir.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          214,
+          215
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "PRE_Y1_START",
+      "caveat": "Tsukishiro explanation is not independent omniscient confirmation.",
+      "mention_actor_ids": [
+        "actor.tsukishiro",
+        "actor.jinnosuke-naoe",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "social",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.018",
+      "domain": "politics",
+      "summary": "As Naoe influence removes supporters, Atsuomi sustains the White Room through a smaller pool of financiers and organized solicitation events.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          216,
+          217,
+          218,
+          219
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.tabuchi",
+        "actor.jinnosuke-naoe"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.financial_backers"
+      ],
+      "topics": [
+        "combat",
+        "strategy",
+        "politics",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.019",
+      "domain": "politics",
+      "summary": "The White Room fundraising event gathers wealthy families and company heirs; their children display status conflicts and existing family networks.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          219,
+          224,
+          225,
+          226
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.kyo-ishigami",
+        "actor.ryuji-kanzaki"
+      ],
+      "mention_organization_ids": [
+        "org.financial_backers",
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy",
+        "social",
+        "politics",
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.020",
+      "domain": "politics",
+      "summary": "Atsuomi later retains financial influence even outside elected office, while maintaining a political return plan as Naoe health deteriorates.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          247,
+          248,
+          249,
+          259,
+          260
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.jinnosuke-naoe",
+        "actor.kamogawa"
+      ],
+      "mention_organization_ids": [
+        "org.financial_backers",
+        "org.white_room",
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.021",
+      "domain": "politics",
+      "summary": "At the end of the volume Atsuomi commissions future arrangements from Tsukishiro, while the details are not fully disclosed in the scene.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          260,
+          261
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "caveat": "Do not invent exact undisclosed details of the plan.",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.tsukishiro",
+        "actor.kamogawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.022",
+      "domain": "politics",
+      "summary": "Atsuomi considers deploying Kiyotaka in politics but acknowledges both the nepotism interpretation and Kiyotaka difficulties with ordinary emotional interaction.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          259,
+          260
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kamogawa"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy",
+        "social",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.023",
+      "domain": "politics",
+      "summary": "Atsuomi keeps his options open regarding opposition-party contacts but resists becoming a mere tool for rival politicians.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          239,
+          240
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.citizens_party",
+        "org.peace_party"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.024",
+      "domain": "politics",
+      "summary": "The Naoe faction uses hierarchical discipline, intimidation, deliberate waiting and patronage as signals of rank.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          17,
+          18,
+          19,
+          22,
+          24
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.jinnosuke-naoe",
+        "actor.atsuomi-ayanokoji",
+        "actor.kamogawa"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.001",
+      "domain": "white_room",
+      "summary": "The project begins as a secret early-development institution meant to educate children from infancy and present that achievement as politically and financially valuable.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          33,
+          34,
+          35,
+          36
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.jinnosuke-naoe",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy",
+        "social",
+        "politics",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.002",
+      "domain": "white_room",
+      "summary": "An abandoned pharmaceutical factory in an isolated part of Saitama becomes the selected facility after renovation.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          58,
+          59,
+          60,
+          70
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kamogawa",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "politics",
+        "institution",
+        "economy",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.003",
+      "domain": "white_room",
+      "summary": "Atsuomi names the institution White Room partly for the clean, pure visual symbolism of the uniformly white interiors.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          70,
+          71
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.004",
+      "domain": "white_room",
+      "summary": "The financing model solicits wealthy benefactors and parents of children they wish to conceal or educate; investors often expect status or future influence.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          47,
+          53,
+          54,
+          55,
+          71,
+          97,
+          98
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.sakayanagi-father"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.financial_backers"
+      ],
+      "topics": [
+        "strategy",
+        "social",
+        "politics",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.005",
+      "domain": "white_room",
+      "summary": "Mika helps Atsuomi obtain compromising private information about prominent men through contacts in nightlife venues.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          64,
+          65,
+          66,
+          67,
+          68
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "caveat": "Do not assume all people discussed were in the same faction.",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.mika"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.006",
+      "domain": "white_room",
+      "summary": "The recruitment pipeline includes children relinquished by parents, clandestine arrangements through the Ooba network and contact points presented as help to distressed mothers.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          60,
+          61,
+          62,
+          90,
+          91
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.ooba",
+        "actor.kamogawa"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.ooba_network"
+      ],
+      "topics": [
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.007",
+      "domain": "white_room",
+      "summary": "The recruitment approach seeks very young infants, including some older than the strict newborn definition, and plans extensive medical monitoring before education.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          61,
+          62,
+          63
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "strategy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.008",
+      "domain": "white_room",
+      "summary": "Parents who surrender children are expected to have severely restricted contact; adult reunions or departures are treated as exceptions or later milestones.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          62,
+          91,
+          221,
+          222
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "POLICY_CLAIM",
+      "story_time": "PRE_Y1_START",
+      "caveat": "Observe time and sponsor-specific exceptions.",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.amasawa-president"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.009",
+      "domain": "white_room",
+      "summary": "The first experimental intake includes fifteen infants randomly assigned in groups of five to Ishida, Suzukake and Souya; Tabuchi supervises comparative evaluation.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          93,
+          94,
+          95
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.ishida",
+        "actor.suzukake",
+        "actor.souya",
+        "actor.tabuchi",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.010",
+      "domain": "white_room",
+      "summary": "The first cohort deliberately compares three distinct educator strategies in isolated groups, with a lead instructor selected from results.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          93,
+          94,
+          95,
+          103
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.ishida",
+        "actor.suzukake",
+        "actor.souya",
+        "actor.tabuchi"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy",
+        "politics",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.011",
+      "domain": "white_room",
+      "summary": "Suzukake group initially obtains superior academic and attention-test results, and Atsuomi selects Suzukake as educational leader for later generations.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.suzukake",
+        "actor.atsuomi-ayanokoji",
+        "actor.ishida",
+        "actor.souya"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "politics",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.012",
+      "domain": "white_room",
+      "summary": "Suzukake uses punitive educational methods, including physical mistreatment, while Sakayanagi objects and Atsuomi prioritizes results.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          105,
+          106,
+          107,
+          108,
+          109
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.suzukake",
+        "actor.atsuomi-ayanokoji",
+        "actor.sakayanagi-father"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "combat",
+        "academic_reasoning"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.013",
+      "domain": "white_room",
+      "summary": "Suzukake curriculum specifies ten escalating difficulty levels, with later cohorts initially given progressively harder level assignments.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          124,
+          125,
+          126,
+          127,
+          242,
+          243
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.suzukake",
+        "actor.tabuchi",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.014",
+      "domain": "white_room",
+      "summary": "For the fourth generation Atsuomi rejects the planned level-four path and instead imposes the more demanding Beta curriculum despite researchers warning about survival.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          125,
+          126,
+          127,
+          128
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.suzukake",
+        "actor.ishida",
+        "actor.tabuchi"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "strategy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.015",
+      "domain": "white_room",
+      "summary": "The ordinary level-four curriculum moves to the fifth generation, while the special Beta protocol remains attached to the fourth generation.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          126,
+          127,
+          128
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.suzukake"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.016",
+      "domain": "white_room",
+      "summary": "Research reports partial early-cohort attrition and improvements relative to earlier cohorts, but these are time-specific measurements rather than universal education laws.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          124,
+          125
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.tabuchi",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.017",
+      "domain": "white_room",
+      "summary": "The fourth generation starts with seventy-four children, decreases to approximately fifty around age five, later to Kiyotaka and Shiro, then finally Kiyotaka alone.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          139,
+          144,
+          186,
+          191,
+          192
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "caveat": "Age and exact count should not be applied to other cohorts.",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.shiro",
+        "actor.yuki"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.018",
+      "domain": "white_room",
+      "summary": "White Room days are meticulously timed from morning wake-up through instruction, physical training, medical checks and nighttime sleep with monitoring equipment.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          149,
+          150,
+          151
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "combat",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.019",
+      "domain": "white_room",
+      "summary": "Curriculum includes language, mathematics, political science, economics and physical exercise; other passages add instruments, traditional arts and combat sports.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          138,
+          140,
+          142,
+          149,
+          150,
+          151,
+          158
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "combat",
+        "academic_reasoning",
+        "strategy",
+        "politics",
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.020",
+      "domain": "white_room",
+      "summary": "A VR-like travel curriculum seeks to simulate outside environments but causes Kiyotaka physical discomfort; not every exercise is experienced as useful by him.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          158,
+          159,
+          160
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "combat",
+        "academic_reasoning",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.021",
+      "domain": "white_room",
+      "summary": "After a travel-class disruption, a card-based exercise probes attention, pattern identification, observation and memory through task design.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          160,
+          161,
+          162,
+          163
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.022",
+      "domain": "white_room",
+      "summary": "The fourth-generation combat track includes judo, randori, adult instructors, and eventually exercises against adult combatants with improvised weapons.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          140,
+          141,
+          142,
+          186,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          196
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.shiro"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "combat",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.023",
+      "domain": "white_room",
+      "summary": "The facility includes a heated pool for training; instruction, performance targets and optional free-time swimming are distinguished within sessions.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          165,
+          166
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.shiro",
+        "actor.yuki"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "combat",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.024",
+      "domain": "white_room",
+      "summary": "Children are subjected to selection cutoffs, elimination after insufficient results, and punishments independent of the daily academic requirements.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          139,
+          140,
+          152,
+          153,
+          157,
+          179,
+          180,
+          181,
+          183,
+          184,
+          185
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yuki"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "social",
+        "politics",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.025",
+      "domain": "white_room",
+      "summary": "Researchers consider competition against Kiyotaka difficult to calibrate and discuss restricting disclosure of his performance to other cohorts.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          169,
+          170,
+          171
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "RESEARCH_DISCUSSION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.suzukake",
+        "actor.atsuomi-ayanokoji",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.026",
+      "domain": "white_room",
+      "summary": "Sakayanagi visits the facility and sees a restricted presentation, while Atsuomi orders staff to avoid exposing visitors to the harshest training.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          171,
+          172,
+          173,
+          174,
+          175
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.sakayanagi-father",
+        "actor.arisu-sakayanagi",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.027",
+      "domain": "white_room",
+      "summary": "As cohorts advance, Suzukake adopts communication components from the fifth generation onward despite acknowledging tradeoffs in measurable progression.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          242,
+          243
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "RESEARCH_SELF_REPORT",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.suzukake"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.028",
+      "domain": "white_room",
+      "summary": "The account reports a fifth-level curriculum for generation six, sixth level for generation seven with total reported dropout, and mixtures of fourth and fifth for later cohorts.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          242,
+          243
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "RESEARCH_SELF_REPORT",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.suzukake"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "institution",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.029",
+      "domain": "white_room",
+      "summary": "Suzukake regards Kiyotaka as an exception and says the project has not demonstrated an ability to reproduce his unique development on demand.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          242,
+          243,
+          244,
+          245,
+          246
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "RESEARCH_SELF_REPORT",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.suzukake",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.030",
+      "domain": "white_room",
+      "summary": "Suzukake describes unresolved nature-versus-nurture questions and acknowledges severe deficiencies in Kiyotaka emotional and everyday social competencies.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          243,
+          244,
+          245,
+          246
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "RESEARCH_SELF_REPORT",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.suzukake",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.031",
+      "domain": "white_room",
+      "summary": "The White Room temporarily halts activities amid political pressure; Kiyotaka is moved out while Atsuomi plans future arrangements.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          242,
+          247,
+          251,
+          256,
+          257,
+          258,
+          259,
+          260
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzukake"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.032",
+      "domain": "white_room",
+      "summary": "Upon suspension, Suzukake records a research video dated March 11; the narrative date should not be converted into a real-world civil year.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          242,
+          243,
+          244,
+          245,
+          246
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.suzukake"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.033",
+      "domain": "white_room",
+      "summary": "Atsuomi explicitly considers financially backed children separately from other graduates for whom independent transition arrangements are expected.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          128,
+          129,
+          130
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "caveat": "Character dialogue and planning does not prove every case was implemented.",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.financial_backers"
+      ],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.034",
+      "domain": "white_room",
+      "summary": "Atsuomi acknowledges White Room students can provide political agents or loyal personnel for his future influence, beyond the institution public educational justification.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          215,
+          216,
+          239,
+          259,
+          260
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "strategy",
+        "politics",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.035",
+      "domain": "white_room",
+      "summary": "Parents and financiers can request exceptional meetings with children; Yuki parent arranges a later clinic reunion with Kiyotaka as part of her treatment context.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          249,
+          250,
+          251,
+          252,
+          253,
+          254,
+          256
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.yuki",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yuki-father"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.financial_backers"
+      ],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.001",
+      "domain": "behavior",
+      "summary": "Atsuomi learns that patronage, affiliation and backroom assignments are essential to his advancement despite nominal electoral ideals.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          10,
+          11,
+          12
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.jinnosuke-naoe"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.002",
+      "domain": "behavior",
+      "summary": "Atsuomi manages Kamogawa impatience, teaches political etiquette and warns against visible breaches of protocol.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          17,
+          20,
+          24,
+          40
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.kamogawa"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.003",
+      "domain": "behavior",
+      "summary": "Atsuomi remains alert to surveillance and resists tempting intelligence collection that he assesses would be exposed.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          22,
+          23
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.004",
+      "domain": "behavior",
+      "summary": "Kamogawa follows instructions and contributes to identifying and arranging an isolated facility while seeking Naoe approval.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          43,
+          45,
+          46,
+          58,
+          59,
+          60
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kamogawa",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "politics",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.005",
+      "domain": "behavior",
+      "summary": "Sakayanagi conditions cooperation on observing the institution rather than simply accepting Atsuomi account of it.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          50,
+          51,
+          54,
+          55,
+          56
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.sakayanagi-father",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.006",
+      "domain": "behavior",
+      "summary": "Tsukishiro elicits Atsuomi background, assesses his persistence and offers sophisticated operational services.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.tsukishiro",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.007",
+      "domain": "behavior",
+      "summary": "Suzukake challenges alternative researchers and advances a punishing performance-driven education system.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          87,
+          88,
+          93,
+          94,
+          95,
+          103,
+          105,
+          106,
+          107,
+          108
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.suzukake",
+        "actor.ishida",
+        "actor.souya"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "institution",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.008",
+      "domain": "behavior",
+      "summary": "Sakayanagi rejects claims that results alone justify conditioning away emotional development.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          105,
+          107,
+          109,
+          110,
+          111
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.sakayanagi-father",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.009",
+      "domain": "behavior",
+      "summary": "Atsuomi exploits staged images of apparent paternal devotion as financial-promotion material when Kiyotaka is brought to the facility.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.kiyotaka-ayanokoji",
+        "actor.tabuchi"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.010",
+      "domain": "behavior",
+      "summary": "Kiyotaka at age two detects task-design ambiguity in a candy-location exercise, evaluates hypotheses and reacts to being wrong as a learning problem.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          132,
+          133,
+          134,
+          135,
+          136,
+          137
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.011",
+      "domain": "behavior",
+      "summary": "Kiyotaka can perform written academic assessments rapidly and accurately but sometimes strategically withholds performance to examine other children.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          138,
+          139,
+          152,
+          153,
+          154,
+          155,
+          156
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "strategy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.012",
+      "domain": "behavior",
+      "summary": "Kiyotaka explains the desire to observe those who struggle as an opportunity to understand differences, while instructors initially interpret it as compassion.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          154,
+          155,
+          156
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "caveat": "His stated explanation is not objective proof of complete absence of concern.",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.013",
+      "domain": "behavior",
+      "summary": "Yuki initiates unsolicited conversation about food and later demonstrates emotional expression that fascinates Kiyotaka.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          144,
+          145,
+          146,
+          147,
+          148,
+          166,
+          167,
+          168
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.yuki",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.014",
+      "domain": "behavior",
+      "summary": "Kiyotaka reaches to prevent Yuki falling; the event precedes his investigation of spontaneous smiles.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          145,
+          146,
+          147,
+          148
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yuki"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.015",
+      "domain": "behavior",
+      "summary": "Kiyotaka uses environmental cues to infer a concealed mechanism in a card exercise, eventually obtaining a perfect observed result.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          160,
+          161,
+          162,
+          163
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.016",
+      "domain": "behavior",
+      "summary": "Kiyotaka acknowledges some children learn new physical tasks faster initially, but believes his structured practice closes the difference.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          165,
+          166
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yuki",
+        "actor.shiro"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "combat",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.017",
+      "domain": "behavior",
+      "summary": "Yuki is judged below the current fourth-generation cutoff and desperately asks to remain; Kiyotaka challenges the consequences and is punished.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          178,
+          179,
+          180,
+          181,
+          183,
+          184,
+          185
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.yuki",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.018",
+      "domain": "behavior",
+      "summary": "Shiro privately says he will voluntarily leave the White Room to pursue freedom, friends and experiences the institution cannot provide.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          186,
+          187,
+          188,
+          190,
+          191,
+          192
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.shiro",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.019",
+      "domain": "behavior",
+      "summary": "Kiyotaka does not stop Shiro from departing and thereafter becomes the only remaining fourth-generation student.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          190,
+          191,
+          192
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.shiro"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.020",
+      "domain": "behavior",
+      "summary": "In combat against adult opponents Kiyotaka considers differences in strength, reach and weapon selection rather than assuming superior raw strength.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          192,
+          193,
+          194,
+          195,
+          196
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "combat",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.021",
+      "domain": "behavior",
+      "summary": "Kiyotaka explains severe combat outcomes through the literal orders he believes he received; institutional personnel react with alarm.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          194,
+          195,
+          196,
+          197
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "combat",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.022",
+      "domain": "behavior",
+      "summary": "Arisu, as a child visitor, questions whether extreme White Room performers reflect an innate genetic advantage rather than the facility itself.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          172,
+          173,
+          175,
+          176
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.sakayanagi-father",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.023",
+      "domain": "behavior",
+      "summary": "An Amasawa-company president uses the White Room as an arrangement for children born outside his marriage and expresses limited desire for contact.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          219,
+          220,
+          221,
+          222,
+          223
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.amasawa-president",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.financial_backers",
+        "org.white_room"
+      ],
+      "topics": [
+        "social",
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.024",
+      "domain": "behavior",
+      "summary": "Kanzaki Ryuuji initially avoids intervening in a dispute over a claimed autograph, perceiving the alleged liar behavior as relevant and confrontation as undesirable.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          225,
+          226,
+          227,
+          228,
+          230
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.ryuji-kanzaki",
+        "actor.kyo-ishigami",
+        "actor.nogi",
+        "actor.fuji"
+      ],
+      "mention_organization_ids": [
+        "org.financial_backers"
+      ],
+      "topics": [],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.025",
+      "domain": "behavior",
+      "summary": "Ishigami Kyou disputes an accusation by separating photographic evidence of a meeting from proof of who did or did not receive an autograph.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          227,
+          228
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kyo-ishigami",
+        "actor.ryuji-kanzaki",
+        "actor.nogi",
+        "actor.fuji"
+      ],
+      "mention_organization_ids": [
+        "org.financial_backers"
+      ],
+      "topics": [],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.026",
+      "domain": "behavior",
+      "summary": "Ishigami prompts his would-be attacker to grasp his collar before loudly calling for help, making the aggressors visible to adults.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          229,
+          230
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kyo-ishigami",
+        "actor.nogi",
+        "actor.fuji",
+        "actor.ryuji-kanzaki"
+      ],
+      "mention_organization_ids": [
+        "org.financial_backers"
+      ],
+      "topics": [
+        "combat"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.027",
+      "domain": "behavior",
+      "summary": "Ishigami explains why he did not ask Atsuomi for help: Atsuomi had observed the bullying without acting, so the boy doubted he would intervene.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          231,
+          232
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kyo-ishigami",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.financial_backers"
+      ],
+      "topics": [],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.028",
+      "domain": "behavior",
+      "summary": "Ishigami father expresses interest in placing his son near Atsuomi future political work rather than requiring him to inherit the company.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          232,
+          233
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.goro-ishigami",
+        "actor.kyo-ishigami",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.ishigami_group"
+      ],
+      "topics": [
+        "strategy",
+        "social",
+        "politics",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.029",
+      "domain": "behavior",
+      "summary": "Atsuomi challenges Kanzaki Ryuuji to consider strategic benefits of helping even when he lacks a personal stake in a conflict.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          234,
+          235,
+          236,
+          237
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "ADVICE_GIVEN",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.ryuji-kanzaki",
+        "actor.tomohiro-kanzaki"
+      ],
+      "mention_organization_ids": [
+        "org.kanzaki_engineering"
+      ],
+      "topics": [
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.030",
+      "domain": "behavior",
+      "summary": "After a long separation Yuki shows lingering distress linked to White Room experiences and seeks comfort from Kiyotaka, who does not provide the response she hopes for.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          251,
+          252,
+          253,
+          254,
+          255,
+          256
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.yuki",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yuki-father"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.031",
+      "domain": "behavior",
+      "summary": "Kiyotaka initially performs compliance with Atsuomi directions while internally planning to preserve independent options.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          256,
+          257,
+          258
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INTERNAL_MONOLOGUE",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.032",
+      "domain": "behavior",
+      "summary": "Atsuomi stage-manages appearances and investor narratives, separating public philanthropy from political and personal objectives.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          35,
+          36,
+          53,
+          54,
+          55,
+          97,
+          98,
+          112,
+          218
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.financial_backers"
+      ],
+      "topics": [
+        "strategy",
+        "politics",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.033",
+      "domain": "behavior",
+      "summary": "Atsuomi rejects treating dropout statistics as absolute educational triumph and evaluates the economic and political burden of failures.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          124,
+          125,
+          128,
+          129,
+          216,
+          217
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.suzukake"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "strategy",
+        "politics",
+        "institution",
+        "economy",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.034",
+      "domain": "behavior",
+      "summary": "Atsuomi refuses to permit sentimental involvement with his child to distract from public relations or operational goals.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.035",
+      "domain": "behavior",
+      "summary": "Kamogawa shows emotional dependence on Atsuomi political fortunes and continues working with him after Naoe withdrawal.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          203,
+          209,
+          210,
+          211,
+          212,
+          213,
+          247,
+          248,
+          249
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kamogawa",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction",
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy",
+        "social",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.036",
+      "domain": "behavior",
+      "summary": "Tsukishiro supplies strategic interpretation of the Naoe-Kijima transition and remains linked to Atsuomi later plans.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          214,
+          215,
+          216,
+          260,
+          261
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.tsukishiro",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.037",
+      "domain": "behavior",
+      "summary": "Suzukake views fourth-generation singular performance as potentially irreproducible and resists treating one exceptional child as proof of universal artificial-genius production.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          242,
+          243,
+          244,
+          245,
+          246
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "RESEARCH_SELF_REPORT",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.suzukake",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.038",
+      "domain": "behavior",
+      "summary": "Naoe appears to use delays, rank and political dependence to impose terms; Atsuomi sees himself both protected and trapped by the relationship.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          17,
+          18,
+          19,
+          30,
+          33
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.jinnosuke-naoe",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "social",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.039",
+      "domain": "behavior",
+      "summary": "Mika collects private intelligence in situations where political targets underestimate women working in nightlife.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          64,
+          65,
+          66,
+          67,
+          68
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.mika",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.040",
+      "domain": "behavior",
+      "summary": "Sakayanagi maintains cordial contact with Atsuomi even after their philosophies diverge, and provides access to other social and financial networks.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          231,
+          238,
+          239,
+          240
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.sakayanagi-father",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.financial_backers"
+      ],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.025",
+      "domain": "politics",
+      "summary": "Tsukishiro tells Atsuomi that Kijima political strategy also includes education-related ambitions; this is Tsukishiro account, not a specification of an ANHS policy.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          214,
+          215
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.tsukishiro",
+        "actor.atsuomi-ayanokoji",
+        "actor.kijima"
+      ],
+      "mention_organization_ids": [
+        "org.kijima_faction"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.026",
+      "domain": "politics",
+      "summary": "Atsuomi and his associates consider shifting patronage systems and the risk that sponsorship networks can follow the dominant power broker rather than declared loyalties.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          202,
+          203,
+          204,
+          205,
+          216,
+          219
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.jinnosuke-naoe",
+        "actor.kijima"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction",
+        "org.kijima_faction",
+        "org.financial_backers"
+      ],
+      "topics": [
+        "strategy",
+        "politics",
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.027",
+      "domain": "politics",
+      "summary": "Company President Kanzaki expresses interest in financing the project despite earlier inability to gain a prominent role in its initial funding.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          234,
+          235
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.tomohiro-kanzaki",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.kanzaki_engineering",
+        "org.financial_backers",
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy",
+        "politics",
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.pol.028",
+      "domain": "politics",
+      "summary": "Atsuomi at one stage regards Naoe political seniority and family succession plan as obstacles to his own pursuit of national leadership.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          215,
+          239,
+          240
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.jinnosuke-naoe"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "social",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.036",
+      "domain": "white_room",
+      "summary": "Mika and Atsuomi agree to have their biological child raised through the White Room; financial terms and guardianship documents are part of their arrangement.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.mika",
+        "actor.atsuomi-ayanokoji",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.037",
+      "domain": "white_room",
+      "summary": "Mika names the baby Kiyotaka when Atsuomi asks her for a name before final registration arrangements.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          121,
+          122
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.mika",
+        "actor.atsuomi-ayanokoji",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.038",
+      "domain": "white_room",
+      "summary": "Atsuomi describes the arrangement with Mika in transactional terms, including a substantial cash payment and an expected end to their marriage.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.mika"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.039",
+      "domain": "white_room",
+      "summary": "The White Room recruits specialists with professional expertise but reputational and interpersonal problems, rather than prioritizing conventional public-facing teaching profiles.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          72,
+          73,
+          74,
+          75,
+          76,
+          87,
+          88
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.souya",
+        "actor.ishida",
+        "actor.tabuchi",
+        "actor.suzukake"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.040",
+      "domain": "white_room",
+      "summary": "Tsukishiro is described as simultaneously supervising project risk on behalf of Naoe and assisting Atsuomi, creating an explicit dual-role conflict.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          77,
+          78,
+          79,
+          80
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.tsukishiro",
+        "actor.jinnosuke-naoe",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.041",
+      "domain": "white_room",
+      "summary": "Atsuomi privately suspects Tsukishiro involvement in a journalist disappearance, but the exact actions are not established through independent first-person confirmation.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          80,
+          81,
+          82
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SUSPICION",
+      "story_time": "PRE_Y1_START",
+      "caveat": "Never promote suspected homicide attribution to a verified event.",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.tsukishiro",
+        "actor.jinnosuke-naoe"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.042",
+      "domain": "white_room",
+      "summary": "An Amasawa-company sponsor discusses placing another child into the White Room while one daughter is already cared for there; this does not by itself identify either child by name.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          220,
+          221,
+          222,
+          223
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "caveat": "Do not auto-link to Ichika without explicit identifying evidence.",
+      "mention_actor_ids": [
+        "actor.amasawa-president",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room",
+        "org.financial_backers"
+      ],
+      "topics": [
+        "social",
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.043",
+      "domain": "white_room",
+      "summary": "Sakayanagi and Arisu are given observation access, with the visit exposing competing moral and scientific interpretations of the White Room experiment.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          172,
+          173,
+          175,
+          176
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.sakayanagi-father",
+        "actor.arisu-sakayanagi",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.044",
+      "domain": "white_room",
+      "summary": "White Room operators track heart rate and other physiological measurements during challenging tasks, but observations must not be reinterpreted as complete access to internal emotions.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          149,
+          151,
+          196,
+          197
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.045",
+      "domain": "white_room",
+      "summary": "Dropout is an institutional category covering loss of eligibility to continue White Room curriculum; some former students later live outside and have ongoing psychological difficulties.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          128,
+          129,
+          179,
+          185,
+          187,
+          192,
+          252,
+          253
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.yuki",
+        "actor.shiro",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "social",
+        "institution",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.046",
+      "domain": "white_room",
+      "summary": "Atsuomi maintains surveillance or deliberately limits information disclosed to external observers such as Sakayanagi to protect the project from political or reputational threats.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          101,
+          110,
+          111,
+          171,
+          172
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.sakayanagi-father"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.047",
+      "domain": "white_room",
+      "summary": "White Room observed apparent educational performance differences between research groups and cohorts, but sample size, survivor bias and shifting tasks limit causal interpretation.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          103,
+          104,
+          105,
+          106,
+          108,
+          124,
+          125,
+          243,
+          244,
+          245
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "ANALYTIC_CAUTION",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.suzukake",
+        "actor.ishida",
+        "actor.souya",
+        "actor.tabuchi"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.041",
+      "domain": "behavior",
+      "summary": "Mika chooses Kiyotaka name and signs a prearranged guardianship and financial separation agreement, while Atsuomi treats the arrangement instrumentally.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          118,
+          119,
+          120,
+          121,
+          122
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.mika",
+        "actor.atsuomi-ayanokoji",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.042",
+      "domain": "behavior",
+      "summary": "Tsukishiro accurately anticipates Atsuomi call and shows detailed knowledge of his situation, creating a power imbalance before their meeting.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          77,
+          78,
+          79,
+          80
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.tsukishiro",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.043",
+      "domain": "behavior",
+      "summary": "Tsukishiro refuses to be intimidated by Atsuomi anger and frames clandestine actions in terms of protecting political principals.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          80,
+          81,
+          82
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.tsukishiro",
+        "actor.atsuomi-ayanokoji",
+        "actor.jinnosuke-naoe"
+      ],
+      "mention_organization_ids": [
+        "org.naoe_faction"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.044",
+      "domain": "behavior",
+      "summary": "Souya arrives at a hiring interview wearing a lab coat and speaks candidly about having been rejected by his earlier institution.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          72,
+          73,
+          74
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.souya",
+        "actor.atsuomi-ayanokoji",
+        "actor.kamogawa"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.045",
+      "domain": "behavior",
+      "summary": "Tabuchi carries comparative-evaluation responsibility but shows nervousness about organizational fundraising; Atsuomi reframes risk to stabilize him.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          93,
+          94,
+          103,
+          217,
+          218
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.tabuchi",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy",
+        "politics",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.046",
+      "domain": "behavior",
+      "summary": "At an observation visit Arisu explicitly questions whether a child innate talent rather than institutional training explains an exceptional result.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          172,
+          173,
+          175,
+          176
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.sakayanagi-father"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.047",
+      "domain": "behavior",
+      "summary": "Sakayanagi sees concern for Kiyotaka emotional growth and social circumstances as a reason to critique the institution despite admiration for its ambitions.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          110,
+          111,
+          172,
+          173,
+          175,
+          176
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.sakayanagi-father",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.048",
+      "domain": "behavior",
+      "summary": "Arisu mother is referenced as an important positive comparison for Arisu intellectual and personal qualities, without giving a comprehensive profile of her in the passage.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          175
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.sakayanagi-father"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.049",
+      "domain": "behavior",
+      "summary": "Ishigami at the sponsors event distinguishes evidentiary uncertainty from immediate safety, responding to imminent physical threat via the adult audience.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          227,
+          228,
+          229,
+          230,
+          231,
+          232
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kyo-ishigami",
+        "actor.nogi",
+        "actor.fuji"
+      ],
+      "mention_organization_ids": [
+        "org.financial_backers"
+      ],
+      "topics": [
+        "combat",
+        "strategy",
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.050",
+      "domain": "behavior",
+      "summary": "Kiyotaka at the later meeting with Yuki rejects the idea that an obligation exists merely because adults request his presence and makes an independent decision to leave.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          252,
+          253,
+          254,
+          256
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yuki",
+        "actor.yuki-father"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.051",
+      "domain": "behavior",
+      "summary": "A girl named Mikuru struggles during harsh judo training, is struck by an instructor and loses consciousness; this is a concrete observation of abusive conditions.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          140,
+          141
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.mikuru"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "combat",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.052",
+      "domain": "behavior",
+      "summary": "The young politician Kisarazu is mentioned as obtaining an expensive apartment financed by advantageous connections; this is an anecdote told by Kamogawa.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          43,
+          44
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.kisarazu",
+        "actor.kamogawa"
+      ],
+      "mention_organization_ids": [
+        "org.citizens_party"
+      ],
+      "topics": [
+        "strategy",
+        "politics",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.053",
+      "domain": "behavior",
+      "summary": "Mika contacts Sophia to obtain information about Sonezaki, a wealthy married man, for potential coercive leverage.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          67,
+          68
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.mika",
+        "actor.sophia",
+        "actor.sonezaki",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "economy",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.054",
+      "domain": "behavior",
+      "summary": "Atsuomi asks Mika to approach Sasada as his position rises; Mika resists because of Sasada prior unwelcome conduct toward her.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          68
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
+        "actor.mika",
+        "actor.sasada"
+      ],
+      "mention_organization_ids": [],
+      "topics": [],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.055",
+      "domain": "behavior",
+      "summary": "Nogi threatens another child by invoking his father corporate power, and the intimidation collapses when adults respond to a visible physical confrontation.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          225,
+          226,
+          227,
+          228,
+          229,
+          230
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.nogi",
+        "actor.kyo-ishigami",
+        "actor.fuji"
+      ],
+      "mention_organization_ids": [
+        "org.nogi_pharmaceuticals"
+      ],
+      "topics": [
+        "combat",
+        "strategy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.char.056",
+      "domain": "behavior",
+      "summary": "The children dispute an autograph allegedly issued by a public figure named Kazuya; neither the allegation nor its negation is conclusively established merely by a photo of another meeting.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          225,
+          227,
+          228
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "DISPUTED_CLAIM",
+      "story_time": "PRE_Y1_START",
+      "caveat": "Treat as contested child testimony, not verified signer behavior.",
+      "mention_actor_ids": [
+        "actor.kazuya",
+        "actor.nogi",
+        "actor.fuji",
+        "actor.kyo-ishigami"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "v0.wr.048",
+      "domain": "white_room",
+      "summary": "The clandestine Ooba group has links to infant procurement, and Atsuomi considers its members capable of serving whichever political side protects them.",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "pdf_pages": [
+          42,
+          81,
+          90,
+          127,
+          212
+        ],
+        "edition": "LegacyEMTLs v1.0.1 (fan translation)",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "PRE_Y1_START",
+      "mention_actor_ids": [
+        "actor.ooba",
+        "actor.atsuomi-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.ooba_network",
+        "org.white_room"
+      ],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    }
+  ]
+}

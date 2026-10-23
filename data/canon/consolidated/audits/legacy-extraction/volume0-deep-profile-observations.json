@@ -1,0 +1,633 @@
+{
+  "schema_version": "volume0-character-deep-profiles-v1",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+    "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "profiles": [
+    {
+      "actor_id": "actor.atsuomi",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        12,
+        15,
+        33,
+        34,
+        35,
+        55,
+        56,
+        126,
+        127,
+        128,
+        202,
+        209,
+        216,
+        247,
+        259,
+        260,
+        261
+      ],
+      "goals_interpreted_from_actions": [
+        "private national political ascent",
+        "build independent financial base",
+        "make White Room useful for state influence"
+      ],
+      "observable_strengths": [
+        "investor persuasion",
+        "hierarchical influence",
+        "deception and image manipulation",
+        "cross-network planning"
+      ],
+      "boundaries_and_unknowns": [
+        "fails to guarantee control over Kiyotaka",
+        "depends on donors and patron relations",
+        "limited grasp of high-skill education outcomes"
+      ],
+      "notable_relationships": [
+        "actor.naoe",
+        "actor.mika",
+        "actor.kiyotaka",
+        "actor.suzukake",
+        "actor.sakayanagi_father",
+        "actor.tsukishiro"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.naoe",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        17,
+        18,
+        22,
+        25,
+        28,
+        29,
+        30,
+        33,
+        34,
+        35,
+        202,
+        203,
+        204,
+        205,
+        247,
+        248
+      ],
+      "goals_interpreted_from_actions": [
+        "maintain faction influence",
+        "control ambitious subordinates",
+        "manage party realignments"
+      ],
+      "observable_strengths": [
+        "political patronage",
+        "agenda control",
+        "coalition bargaining"
+      ],
+      "boundaries_and_unknowns": [
+        "medical outcome after epilogue unknown",
+        "private motives inferred through other POVs"
+      ],
+      "notable_relationships": [
+        "actor.atsuomi",
+        "actor.kijima",
+        "actor.isomaru",
+        "actor.kamogawa",
+        "actor.asama"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.kijima",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        25,
+        28,
+        29,
+        30,
+        202,
+        203,
+        204,
+        205,
+        214,
+        215,
+        247
+      ],
+      "goals_interpreted_from_actions": [
+        "rise through Citizens Party",
+        "maintain influential political faction"
+      ],
+      "observable_strengths": [
+        "coalition development visible through trajectory"
+      ],
+      "boundaries_and_unknowns": [
+        "no reliable first-person psychological perspective",
+        "education program content not established by this volume"
+      ],
+      "notable_relationships": [
+        "actor.naoe",
+        "actor.isomaru",
+        "actor.atsuomi",
+        "actor.sakayanagi_father"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.mika",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        64,
+        65,
+        66,
+        67,
+        68,
+        114,
+        115,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122
+      ],
+      "goals_interpreted_from_actions": [
+        "negotiate advantageous terms",
+        "obtain or trade sensitive information"
+      ],
+      "observable_strengths": [
+        "nightlife contacts",
+        "information gathering",
+        "transactional bargaining"
+      ],
+      "boundaries_and_unknowns": [
+        "do not infer continuing loyalties or future motherhood involvement"
+      ],
+      "notable_relationships": [
+        "actor.atsuomi",
+        "actor.kiyotaka",
+        "actor.sophia",
+        "actor.sonezaki"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.kiyotaka",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        132,
+        133,
+        134,
+        135,
+        136,
+        160,
+        161,
+        162,
+        163,
+        186,
+        190,
+        192,
+        193,
+        194,
+        197,
+        243,
+        251,
+        252,
+        254,
+        256,
+        260
+      ],
+      "goals_interpreted_from_actions": [
+        "continue intellectual growth at White Room childhood horizon",
+        "maintain autonomous options late pre-Y1"
+      ],
+      "observable_strengths": [
+        "observation",
+        "hypothesis revision after wrong answers",
+        "memory",
+        "task structure discovery",
+        "combat adaptation"
+      ],
+      "boundaries_and_unknowns": [
+        "emotional fluency deficits",
+        "little firsthand outside social experience",
+        "vulnerable to unavailable information"
+      ],
+      "notable_relationships": [
+        "actor.shiro",
+        "actor.yuki",
+        "actor.atsuomi",
+        "actor.suzukake"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.shiro",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        165,
+        166,
+        186,
+        187,
+        190,
+        191,
+        192
+      ],
+      "goals_interpreted_from_actions": [
+        "experience freedom",
+        "make friends",
+        "leave White Room despite curriculum pressure"
+      ],
+      "observable_strengths": [
+        "initial competence in several combat disciplines",
+        "reflective self-assessment",
+        "resolve to change environment"
+      ],
+      "boundaries_and_unknowns": [
+        "later life unknown",
+        "relative comparisons not absolute ceilings"
+      ],
+      "notable_relationships": [
+        "actor.kiyotaka",
+        "actor.yuki"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.yuki",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        144,
+        145,
+        146,
+        166,
+        167,
+        178,
+        179,
+        180,
+        183,
+        184,
+        185,
+        251,
+        252,
+        253,
+        254
+      ],
+      "goals_interpreted_from_actions": [
+        "seek connection with Kiyotaka",
+        "seek support after leaving childhood institution"
+      ],
+      "observable_strengths": [
+        "initiates conversation",
+        "social affect and attachment"
+      ],
+      "boundaries_and_unknowns": [
+        "does not demonstrate Kiyotaka intellectual profile",
+        "younger sister identity unestablished",
+        "do not invent health diagnosis"
+      ],
+      "notable_relationships": [
+        "actor.kiyotaka",
+        "actor.yuki_father",
+        "actor.yuki_younger_sister_unidentified"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.ishigami_kyo",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233
+      ],
+      "goals_interpreted_from_actions": [
+        "handle child social pressure and reputation",
+        "navigate adult witnesses"
+      ],
+      "observable_strengths": [
+        "social timing",
+        "verbal reframing of safety concerns",
+        "reading family power"
+      ],
+      "boundaries_and_unknowns": [
+        "autograph claim unresolved",
+        "later political loyalties not determined by Volume 0"
+      ],
+      "notable_relationships": [
+        "actor.ishigami_gorou",
+        "actor.nogi",
+        "actor.fuji",
+        "actor.kanzaki_ryuji",
+        "actor.atsuomi"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.kanzaki_ryuji",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        225,
+        227,
+        230,
+        234,
+        235,
+        236,
+        237
+      ],
+      "goals_interpreted_from_actions": [
+        "decide whether to intervene when not personally threatened"
+      ],
+      "observable_strengths": [
+        "moral reasoning and strategic debate with Atsuomi"
+      ],
+      "boundaries_and_unknowns": [
+        "future personality not mechanically fixed by childhood anecdote"
+      ],
+      "notable_relationships": [
+        "actor.kanzaki_tomohiro",
+        "actor.ishigami_kyo",
+        "actor.atsuomi"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.kanzaki_tomohiro",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        234,
+        235,
+        236,
+        237
+      ],
+      "goals_interpreted_from_actions": [
+        "support his child's development",
+        "explore investment relationship with Atsuomi"
+      ],
+      "observable_strengths": [
+        "business ties and sponsor access"
+      ],
+      "boundaries_and_unknowns": [
+        "cannot infer all governance authority inside White Room"
+      ],
+      "notable_relationships": [
+        "actor.kanzaki_ryuji",
+        "actor.atsuomi"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.suzukake",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        108,
+        109,
+        124,
+        125,
+        126,
+        127,
+        128,
+        242,
+        243,
+        244,
+        245,
+        246
+      ],
+      "goals_interpreted_from_actions": [
+        "design high-performing pedagogy",
+        "understand exceptional pupil outcome"
+      ],
+      "observable_strengths": [
+        "cohort comparison",
+        "curriculum adaptation",
+        "limits of inference"
+      ],
+      "boundaries_and_unknowns": [
+        "researcher theories not universal fact",
+        "regrets extreme Beta selection but implements it"
+      ],
+      "notable_relationships": [
+        "actor.atsuomi",
+        "actor.ishida",
+        "actor.souya",
+        "actor.tabuchi",
+        "actor.kiyotaka"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.tsukishiro",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        39,
+        40,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        214,
+        215,
+        260,
+        261
+      ],
+      "goals_interpreted_from_actions": [
+        "remain valuable to political patrons",
+        "manage access to sensitive information"
+      ],
+      "observable_strengths": [
+        "operational information networks",
+        "ambiguous signaling",
+        "negotiation"
+      ],
+      "boundaries_and_unknowns": [
+        "his account of acts not independent witness",
+        "do not grant total awareness"
+      ],
+      "notable_relationships": [
+        "actor.naoe",
+        "actor.atsuomi",
+        "actor.kijima"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.sakayanagi_father",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        49,
+        50,
+        54,
+        55,
+        56,
+        105,
+        109,
+        110,
+        111,
+        170,
+        171,
+        172,
+        173,
+        175,
+        176,
+        238,
+        239
+      ],
+      "goals_interpreted_from_actions": [
+        "learn about research while contesting emotional deprivation",
+        "maintain affiliations without full capture"
+      ],
+      "observable_strengths": [
+        "scientific skepticism",
+        "ethical boundary negotiation",
+        "network access"
+      ],
+      "boundaries_and_unknowns": [
+        "observer not owner/operator",
+        "lack of full restricted records"
+      ],
+      "notable_relationships": [
+        "actor.arisu",
+        "actor.atsuomi",
+        "actor.kijima"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.ishida",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        72,
+        73,
+        74,
+        75,
+        124,
+        125,
+        126,
+        127,
+        128,
+        197,
+        198
+      ],
+      "goals_interpreted_from_actions": [
+        "protect valid research and children against extreme policy"
+      ],
+      "observable_strengths": [
+        "pedagogical observation",
+        "risk objection"
+      ],
+      "boundaries_and_unknowns": [
+        "overridden by facility director",
+        "researcher reasoning can err"
+      ],
+      "notable_relationships": [
+        "actor.suzukake",
+        "actor.atsuomi",
+        "actor.souya",
+        "actor.tabuchi"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    },
+    {
+      "actor_id": "actor.kamogawa",
+      "source": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+        "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+      },
+      "reference_pages": [
+        17,
+        18,
+        19,
+        20,
+        24,
+        34,
+        43,
+        44,
+        247,
+        248
+      ],
+      "goals_interpreted_from_actions": [
+        "preserve political position",
+        "maintain patron networks"
+      ],
+      "observable_strengths": [
+        "coalition survival",
+        "routine political adaptation"
+      ],
+      "boundaries_and_unknowns": [
+        "second-generation safety may bias perception; Atsuomi disdain not canonical incompetence"
+      ],
+      "notable_relationships": [
+        "actor.kamogawa_toshizou",
+        "actor.atsuomi",
+        "actor.naoe"
+      ],
+      "warning": "Working reference analysis, not unconditional truth, psychometric measurement or Y1_START injected memory"
+    }
+  ]
+}

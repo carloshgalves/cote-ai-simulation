@@ -1,0 +1,2019 @@
+{
+  "schema_version": "page-index-v1",
+  "source_id": "ln.y1.v00.legacyemtls.v1.0.1",
+  "pages": {
+    "10": {
+      "evidence": [
+        "v0.char.001",
+        "v0.pol.001"
+      ],
+      "cases": []
+    },
+    "11": {
+      "evidence": [
+        "v0.char.001",
+        "v0.pol.001"
+      ],
+      "cases": []
+    },
+    "12": {
+      "evidence": [
+        "v0.char.001",
+        "v0.char.009",
+        "v0.char.034",
+        "v0.pol.001"
+      ],
+      "cases": [
+        "v0.case.atsuomi.staged-baby"
+      ]
+    },
+    "13": {
+      "evidence": [
+        "v0.char.009",
+        "v0.char.034"
+      ],
+      "cases": [
+        "v0.case.atsuomi.staged-baby"
+      ]
+    },
+    "14": {
+      "evidence": [
+        "v0.char.009",
+        "v0.char.034"
+      ],
+      "cases": []
+    },
+    "15": {
+      "evidence": [
+        "v0.char.009",
+        "v0.char.034"
+      ],
+      "cases": [
+        "v0.case.atsuomi.staged-baby"
+      ]
+    },
+    "17": {
+      "evidence": [
+        "v0.char.002",
+        "v0.char.038",
+        "v0.pol.024"
+      ],
+      "cases": [
+        "v0.case.atsuomi.patronage",
+        "v0.case.naoe.meeting-as-leverage"
+      ]
+    },
+    "18": {
+      "evidence": [
+        "v0.char.038",
+        "v0.pol.002",
+        "v0.pol.024"
+      ],
+      "cases": [
+        "v0.case.atsuomi.patronage",
+        "v0.case.naoe.meeting-as-leverage"
+      ]
+    },
+    "19": {
+      "evidence": [
+        "v0.char.038",
+        "v0.pol.024"
+      ],
+      "cases": [
+        "v0.case.atsuomi.patronage",
+        "v0.case.kamogawa.hierarchy"
+      ]
+    },
+    "20": {
+      "evidence": [
+        "v0.char.002"
+      ],
+      "cases": [
+        "v0.case.kamogawa.hierarchy"
+      ]
+    },
+    "21": {
+      "evidence": [],
+      "cases": [
+        "v0.case.kamogawa.hierarchy"
+      ]
+    },
+    "22": {
+      "evidence": [
+        "v0.char.003",
+        "v0.pol.002",
+        "v0.pol.024"
+      ],
+      "cases": [
+        "v0.case.naoe.meeting-as-leverage"
+      ]
+    },
+    "23": {
+      "evidence": [
+        "v0.char.003"
+      ],
+      "cases": []
+    },
+    "24": {
+      "evidence": [
+        "v0.char.002",
+        "v0.pol.024"
+      ],
+      "cases": [
+        "v0.case.atsuomi.patronage",
+        "v0.case.kamogawa.hierarchy"
+      ]
+    },
+    "25": {
+      "evidence": [
+        "v0.pol.003"
+      ],
+      "cases": [
+        "v0.case.atsuomi.patronage",
+        "v0.case.kijima.public-profile"
+      ]
+    },
+    "27": {
+      "evidence": [],
+      "cases": [
+        "v0.case.atsuomi.patronage",
+        "v0.case.kamogawa.hierarchy"
+      ]
+    },
+    "28": {
+      "evidence": [
+        "v0.pol.004"
+      ],
+      "cases": [
+        "v0.case.atsuomi.patronage",
+        "v0.case.kijima.public-profile"
+      ]
+    },
+    "29": {
+      "evidence": [
+        "v0.pol.003",
+        "v0.pol.004"
+      ],
+      "cases": [
+        "v0.case.atsuomi.patronage",
+        "v0.case.kijima.public-profile"
+      ]
+    },
+    "30": {
+      "evidence": [
+        "v0.char.038",
+        "v0.pol.004"
+      ],
+      "cases": [
+        "v0.case.atsuomi.patronage",
+        "v0.case.kijima.public-profile"
+      ]
+    },
+    "31": {
+      "evidence": [
+        "v0.pol.005"
+      ],
+      "cases": [
+        "v0.case.atsuomi.patronage"
+      ]
+    },
+    "32": {
+      "evidence": [
+        "v0.pol.005"
+      ],
+      "cases": [
+        "v0.case.atsuomi.patronage"
+      ]
+    },
+    "33": {
+      "evidence": [
+        "v0.char.038",
+        "v0.pol.006",
+        "v0.wr.001"
+      ],
+      "cases": [
+        "v0.case.atsuomi.patronage"
+      ]
+    },
+    "34": {
+      "evidence": [
+        "v0.pol.006",
+        "v0.wr.001"
+      ],
+      "cases": []
+    },
+    "35": {
+      "evidence": [
+        "v0.char.032",
+        "v0.pol.007",
+        "v0.wr.001"
+      ],
+      "cases": []
+    },
+    "36": {
+      "evidence": [
+        "v0.char.032",
+        "v0.pol.007",
+        "v0.wr.001"
+      ],
+      "cases": []
+    },
+    "37": {
+      "evidence": [
+        "v0.pol.008",
+        "v0.pol.009"
+      ],
+      "cases": []
+    },
+    "38": {
+      "evidence": [
+        "v0.pol.008",
+        "v0.pol.009"
+      ],
+      "cases": []
+    },
+    "39": {
+      "evidence": [
+        "v0.pol.011"
+      ],
+      "cases": []
+    },
+    "40": {
+      "evidence": [
+        "v0.char.002",
+        "v0.pol.011"
+      ],
+      "cases": []
+    },
+    "42": {
+      "evidence": [
+        "v0.wr.048"
+      ],
+      "cases": []
+    },
+    "43": {
+      "evidence": [
+        "v0.char.004",
+        "v0.char.052"
+      ],
+      "cases": [
+        "v0.case.kamogawa.hierarchy"
+      ]
+    },
+    "44": {
+      "evidence": [
+        "v0.char.052"
+      ],
+      "cases": [
+        "v0.case.kamogawa.hierarchy"
+      ]
+    },
+    "45": {
+      "evidence": [
+        "v0.char.004"
+      ],
+      "cases": []
+    },
+    "46": {
+      "evidence": [
+        "v0.char.004"
+      ],
+      "cases": []
+    },
+    "47": {
+      "evidence": [
+        "v0.wr.004"
+      ],
+      "cases": []
+    },
+    "49": {
+      "evidence": [
+        "v0.pol.009"
+      ],
+      "cases": []
+    },
+    "50": {
+      "evidence": [
+        "v0.char.005",
+        "v0.pol.010"
+      ],
+      "cases": []
+    },
+    "51": {
+      "evidence": [
+        "v0.char.005",
+        "v0.pol.009",
+        "v0.pol.010"
+      ],
+      "cases": []
+    },
+    "52": {
+      "evidence": [
+        "v0.pol.010"
+      ],
+      "cases": []
+    },
+    "53": {
+      "evidence": [
+        "v0.char.032",
+        "v0.wr.004"
+      ],
+      "cases": []
+    },
+    "54": {
+      "evidence": [
+        "v0.char.005",
+        "v0.char.032",
+        "v0.pol.013",
+        "v0.wr.004"
+      ],
+      "cases": []
+    },
+    "55": {
+      "evidence": [
+        "v0.char.005",
+        "v0.char.032",
+        "v0.pol.013",
+        "v0.wr.004"
+      ],
+      "cases": []
+    },
+    "56": {
+      "evidence": [
+        "v0.char.005",
+        "v0.pol.013"
+      ],
+      "cases": []
+    },
+    "58": {
+      "evidence": [
+        "v0.char.004",
+        "v0.wr.002"
+      ],
+      "cases": []
+    },
+    "59": {
+      "evidence": [
+        "v0.char.004",
+        "v0.wr.002"
+      ],
+      "cases": []
+    },
+    "60": {
+      "evidence": [
+        "v0.char.004",
+        "v0.wr.002",
+        "v0.wr.006"
+      ],
+      "cases": []
+    },
+    "61": {
+      "evidence": [
+        "v0.wr.006",
+        "v0.wr.007"
+      ],
+      "cases": []
+    },
+    "62": {
+      "evidence": [
+        "v0.wr.006",
+        "v0.wr.007",
+        "v0.wr.008"
+      ],
+      "cases": []
+    },
+    "63": {
+      "evidence": [
+        "v0.wr.007"
+      ],
+      "cases": []
+    },
+    "64": {
+      "evidence": [
+        "v0.char.039",
+        "v0.wr.005"
+      ],
+      "cases": [
+        "v0.case.mika.informant"
+      ]
+    },
+    "65": {
+      "evidence": [
+        "v0.char.039",
+        "v0.wr.005"
+      ],
+      "cases": [
+        "v0.case.mika.informant"
+      ]
+    },
+    "66": {
+      "evidence": [
+        "v0.char.039",
+        "v0.wr.005"
+      ],
+      "cases": [
+        "v0.case.mika.informant"
+      ]
+    },
+    "67": {
+      "evidence": [
+        "v0.char.039",
+        "v0.char.053",
+        "v0.wr.005"
+      ],
+      "cases": [
+        "v0.case.mika.informant"
+      ]
+    },
+    "68": {
+      "evidence": [
+        "v0.char.039",
+        "v0.char.053",
+        "v0.char.054",
+        "v0.wr.005"
+      ],
+      "cases": [
+        "v0.case.mika.informant"
+      ]
+    },
+    "70": {
+      "evidence": [
+        "v0.wr.002",
+        "v0.wr.003"
+      ],
+      "cases": []
+    },
+    "71": {
+      "evidence": [
+        "v0.wr.003",
+        "v0.wr.004"
+      ],
+      "cases": []
+    },
+    "72": {
+      "evidence": [
+        "v0.char.044",
+        "v0.wr.039"
+      ],
+      "cases": []
+    },
+    "73": {
+      "evidence": [
+        "v0.char.044",
+        "v0.wr.039"
+      ],
+      "cases": []
+    },
+    "74": {
+      "evidence": [
+        "v0.char.044",
+        "v0.wr.039"
+      ],
+      "cases": []
+    },
+    "75": {
+      "evidence": [
+        "v0.wr.039"
+      ],
+      "cases": []
+    },
+    "76": {
+      "evidence": [
+        "v0.char.006",
+        "v0.wr.039"
+      ],
+      "cases": []
+    },
+    "77": {
+      "evidence": [
+        "v0.char.006",
+        "v0.char.042",
+        "v0.wr.040"
+      ],
+      "cases": [
+        "v0.case.tsukishiro.dual-roles"
+      ]
+    },
+    "78": {
+      "evidence": [
+        "v0.char.006",
+        "v0.char.042",
+        "v0.wr.040"
+      ],
+      "cases": [
+        "v0.case.tsukishiro.dual-roles"
+      ]
+    },
+    "79": {
+      "evidence": [
+        "v0.char.006",
+        "v0.char.042",
+        "v0.wr.040"
+      ],
+      "cases": [
+        "v0.case.tsukishiro.dual-roles"
+      ]
+    },
+    "80": {
+      "evidence": [
+        "v0.char.006",
+        "v0.char.042",
+        "v0.char.043",
+        "v0.wr.040",
+        "v0.wr.041"
+      ],
+      "cases": [
+        "v0.case.tsukishiro.dual-roles"
+      ]
+    },
+    "81": {
+      "evidence": [
+        "v0.char.006",
+        "v0.char.043",
+        "v0.wr.041",
+        "v0.wr.048"
+      ],
+      "cases": [
+        "v0.case.tsukishiro.dual-roles"
+      ]
+    },
+    "82": {
+      "evidence": [
+        "v0.char.006",
+        "v0.char.043",
+        "v0.wr.041"
+      ],
+      "cases": [
+        "v0.case.tsukishiro.dual-roles"
+      ]
+    },
+    "83": {
+      "evidence": [
+        "v0.char.006",
+        "v0.pol.012"
+      ],
+      "cases": []
+    },
+    "84": {
+      "evidence": [
+        "v0.char.006",
+        "v0.pol.012"
+      ],
+      "cases": []
+    },
+    "85": {
+      "evidence": [
+        "v0.char.006",
+        "v0.pol.012"
+      ],
+      "cases": []
+    },
+    "86": {
+      "evidence": [
+        "v0.char.006",
+        "v0.pol.012"
+      ],
+      "cases": []
+    },
+    "87": {
+      "evidence": [
+        "v0.char.006",
+        "v0.char.007",
+        "v0.pol.012",
+        "v0.wr.039"
+      ],
+      "cases": []
+    },
+    "88": {
+      "evidence": [
+        "v0.char.007",
+        "v0.wr.039"
+      ],
+      "cases": []
+    },
+    "90": {
+      "evidence": [
+        "v0.wr.006",
+        "v0.wr.048"
+      ],
+      "cases": []
+    },
+    "91": {
+      "evidence": [
+        "v0.wr.006",
+        "v0.wr.008"
+      ],
+      "cases": []
+    },
+    "93": {
+      "evidence": [
+        "v0.char.007",
+        "v0.char.045",
+        "v0.wr.009",
+        "v0.wr.010"
+      ],
+      "cases": []
+    },
+    "94": {
+      "evidence": [
+        "v0.char.007",
+        "v0.char.045",
+        "v0.wr.009",
+        "v0.wr.010"
+      ],
+      "cases": []
+    },
+    "95": {
+      "evidence": [
+        "v0.char.007",
+        "v0.wr.009",
+        "v0.wr.010"
+      ],
+      "cases": []
+    },
+    "97": {
+      "evidence": [
+        "v0.char.032",
+        "v0.wr.004"
+      ],
+      "cases": []
+    },
+    "98": {
+      "evidence": [
+        "v0.char.032",
+        "v0.wr.004"
+      ],
+      "cases": []
+    },
+    "101": {
+      "evidence": [
+        "v0.wr.046"
+      ],
+      "cases": []
+    },
+    "103": {
+      "evidence": [
+        "v0.char.007",
+        "v0.char.045",
+        "v0.wr.010",
+        "v0.wr.011",
+        "v0.wr.047"
+      ],
+      "cases": []
+    },
+    "104": {
+      "evidence": [
+        "v0.wr.011",
+        "v0.wr.047"
+      ],
+      "cases": []
+    },
+    "105": {
+      "evidence": [
+        "v0.char.007",
+        "v0.char.008",
+        "v0.pol.014",
+        "v0.wr.011",
+        "v0.wr.012",
+        "v0.wr.047"
+      ],
+      "cases": [
+        "v0.case.sakayanagi.ethical-observation"
+      ]
+    },
+    "106": {
+      "evidence": [
+        "v0.char.007",
+        "v0.wr.011",
+        "v0.wr.012",
+        "v0.wr.047"
+      ],
+      "cases": []
+    },
+    "107": {
+      "evidence": [
+        "v0.char.007",
+        "v0.char.008",
+        "v0.pol.014",
+        "v0.wr.011",
+        "v0.wr.012"
+      ],
+      "cases": [
+        "v0.case.sakayanagi.ethical-observation"
+      ]
+    },
+    "108": {
+      "evidence": [
+        "v0.char.007",
+        "v0.wr.011",
+        "v0.wr.012",
+        "v0.wr.047"
+      ],
+      "cases": [
+        "v0.case.suzukake.curriculum-policy"
+      ]
+    },
+    "109": {
+      "evidence": [
+        "v0.char.008",
+        "v0.pol.014",
+        "v0.wr.011",
+        "v0.wr.012"
+      ],
+      "cases": [
+        "v0.case.sakayanagi.ethical-observation",
+        "v0.case.suzukake.curriculum-policy"
+      ]
+    },
+    "110": {
+      "evidence": [
+        "v0.char.008",
+        "v0.char.047",
+        "v0.pol.014",
+        "v0.wr.046"
+      ],
+      "cases": [
+        "v0.case.sakayanagi.ethical-observation"
+      ]
+    },
+    "111": {
+      "evidence": [
+        "v0.char.008",
+        "v0.char.047",
+        "v0.pol.014",
+        "v0.wr.046"
+      ],
+      "cases": [
+        "v0.case.sakayanagi.ethical-observation"
+      ]
+    },
+    "112": {
+      "evidence": [
+        "v0.char.032"
+      ],
+      "cases": [
+        "v0.case.mika.informant"
+      ]
+    },
+    "113": {
+      "evidence": [],
+      "cases": [
+        "v0.case.mika.informant"
+      ]
+    },
+    "114": {
+      "evidence": [
+        "v0.wr.036"
+      ],
+      "cases": [
+        "v0.case.mika.informant"
+      ]
+    },
+    "115": {
+      "evidence": [
+        "v0.wr.036"
+      ],
+      "cases": [
+        "v0.case.mika.informant"
+      ]
+    },
+    "116": {
+      "evidence": [
+        "v0.wr.036"
+      ],
+      "cases": []
+    },
+    "117": {
+      "evidence": [
+        "v0.wr.036",
+        "v0.wr.038"
+      ],
+      "cases": []
+    },
+    "118": {
+      "evidence": [
+        "v0.char.041",
+        "v0.wr.036",
+        "v0.wr.038"
+      ],
+      "cases": []
+    },
+    "119": {
+      "evidence": [
+        "v0.char.041",
+        "v0.wr.036",
+        "v0.wr.038"
+      ],
+      "cases": []
+    },
+    "120": {
+      "evidence": [
+        "v0.char.041",
+        "v0.wr.036",
+        "v0.wr.038"
+      ],
+      "cases": []
+    },
+    "121": {
+      "evidence": [
+        "v0.char.041",
+        "v0.wr.036",
+        "v0.wr.037",
+        "v0.wr.038"
+      ],
+      "cases": []
+    },
+    "122": {
+      "evidence": [
+        "v0.char.041",
+        "v0.wr.036",
+        "v0.wr.037",
+        "v0.wr.038"
+      ],
+      "cases": []
+    },
+    "123": {
+      "evidence": [
+        "v0.wr.036",
+        "v0.wr.038"
+      ],
+      "cases": []
+    },
+    "124": {
+      "evidence": [
+        "v0.char.033",
+        "v0.wr.013",
+        "v0.wr.016",
+        "v0.wr.047"
+      ],
+      "cases": [
+        "v0.case.atsuomi.beta-authorization",
+        "v0.case.ishida.experiment-ethics",
+        "v0.case.ishida.vr-proposal",
+        "v0.case.suzukake.curriculum-policy"
+      ]
+    },
+    "125": {
+      "evidence": [
+        "v0.char.033",
+        "v0.wr.013",
+        "v0.wr.014",
+        "v0.wr.016",
+        "v0.wr.047"
+      ],
+      "cases": [
+        "v0.case.atsuomi.beta-authorization",
+        "v0.case.ishida.experiment-ethics",
+        "v0.case.ishida.vr-proposal",
+        "v0.case.suzukake.curriculum-policy"
+      ]
+    },
+    "126": {
+      "evidence": [
+        "v0.wr.013",
+        "v0.wr.014",
+        "v0.wr.015"
+      ],
+      "cases": [
+        "v0.case.atsuomi.beta-authorization",
+        "v0.case.ishida.experiment-ethics",
+        "v0.case.suzukake.curriculum-policy"
+      ]
+    },
+    "127": {
+      "evidence": [
+        "v0.wr.013",
+        "v0.wr.014",
+        "v0.wr.015",
+        "v0.wr.048"
+      ],
+      "cases": [
+        "v0.case.atsuomi.beta-authorization",
+        "v0.case.ishida.experiment-ethics",
+        "v0.case.suzukake.curriculum-policy"
+      ]
+    },
+    "128": {
+      "evidence": [
+        "v0.char.033",
+        "v0.wr.014",
+        "v0.wr.015",
+        "v0.wr.033",
+        "v0.wr.045"
+      ],
+      "cases": [
+        "v0.case.atsuomi.beta-authorization",
+        "v0.case.ishida.experiment-ethics"
+      ]
+    },
+    "129": {
+      "evidence": [
+        "v0.char.033",
+        "v0.wr.033",
+        "v0.wr.045"
+      ],
+      "cases": []
+    },
+    "130": {
+      "evidence": [
+        "v0.wr.033"
+      ],
+      "cases": []
+    },
+    "132": {
+      "evidence": [
+        "v0.char.010"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.gummy-third-option"
+      ]
+    },
+    "133": {
+      "evidence": [
+        "v0.char.010"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.gummy-third-option"
+      ]
+    },
+    "134": {
+      "evidence": [
+        "v0.char.010"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.gummy-third-option"
+      ]
+    },
+    "135": {
+      "evidence": [
+        "v0.char.010"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.gummy-third-option"
+      ]
+    },
+    "136": {
+      "evidence": [
+        "v0.char.010"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.gummy-third-option"
+      ]
+    },
+    "137": {
+      "evidence": [
+        "v0.char.010"
+      ],
+      "cases": []
+    },
+    "138": {
+      "evidence": [
+        "v0.char.011",
+        "v0.wr.019"
+      ],
+      "cases": []
+    },
+    "139": {
+      "evidence": [
+        "v0.char.011",
+        "v0.wr.017",
+        "v0.wr.024"
+      ],
+      "cases": []
+    },
+    "140": {
+      "evidence": [
+        "v0.char.051",
+        "v0.wr.019",
+        "v0.wr.022",
+        "v0.wr.024"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.judo-observation"
+      ]
+    },
+    "141": {
+      "evidence": [
+        "v0.char.051",
+        "v0.wr.022"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.judo-observation"
+      ]
+    },
+    "142": {
+      "evidence": [
+        "v0.wr.019",
+        "v0.wr.022"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.judo-observation"
+      ]
+    },
+    "144": {
+      "evidence": [
+        "v0.char.013",
+        "v0.wr.017"
+      ],
+      "cases": [
+        "v0.case.yuki.social-outreach"
+      ]
+    },
+    "145": {
+      "evidence": [
+        "v0.char.013",
+        "v0.char.014"
+      ],
+      "cases": [
+        "v0.case.yuki.social-outreach"
+      ]
+    },
+    "146": {
+      "evidence": [
+        "v0.char.013",
+        "v0.char.014"
+      ],
+      "cases": [
+        "v0.case.yuki.social-outreach"
+      ]
+    },
+    "147": {
+      "evidence": [
+        "v0.char.013",
+        "v0.char.014"
+      ],
+      "cases": [
+        "v0.case.yuki.social-outreach"
+      ]
+    },
+    "148": {
+      "evidence": [
+        "v0.char.013",
+        "v0.char.014"
+      ],
+      "cases": []
+    },
+    "149": {
+      "evidence": [
+        "v0.wr.018",
+        "v0.wr.019",
+        "v0.wr.044"
+      ],
+      "cases": []
+    },
+    "150": {
+      "evidence": [
+        "v0.wr.018",
+        "v0.wr.019"
+      ],
+      "cases": []
+    },
+    "151": {
+      "evidence": [
+        "v0.wr.018",
+        "v0.wr.019",
+        "v0.wr.044"
+      ],
+      "cases": []
+    },
+    "152": {
+      "evidence": [
+        "v0.char.011",
+        "v0.wr.024"
+      ],
+      "cases": []
+    },
+    "153": {
+      "evidence": [
+        "v0.char.011",
+        "v0.wr.024"
+      ],
+      "cases": []
+    },
+    "154": {
+      "evidence": [
+        "v0.char.011",
+        "v0.char.012"
+      ],
+      "cases": []
+    },
+    "155": {
+      "evidence": [
+        "v0.char.011",
+        "v0.char.012"
+      ],
+      "cases": []
+    },
+    "156": {
+      "evidence": [
+        "v0.char.011",
+        "v0.char.012"
+      ],
+      "cases": []
+    },
+    "157": {
+      "evidence": [
+        "v0.wr.024"
+      ],
+      "cases": []
+    },
+    "158": {
+      "evidence": [
+        "v0.wr.019",
+        "v0.wr.020"
+      ],
+      "cases": []
+    },
+    "159": {
+      "evidence": [
+        "v0.wr.020"
+      ],
+      "cases": []
+    },
+    "160": {
+      "evidence": [
+        "v0.char.015",
+        "v0.wr.020",
+        "v0.wr.021"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.cards-50"
+      ]
+    },
+    "161": {
+      "evidence": [
+        "v0.char.015",
+        "v0.wr.021"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.cards-50"
+      ]
+    },
+    "162": {
+      "evidence": [
+        "v0.char.015",
+        "v0.wr.021"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.cards-50"
+      ]
+    },
+    "163": {
+      "evidence": [
+        "v0.char.015",
+        "v0.wr.021"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.cards-50"
+      ]
+    },
+    "165": {
+      "evidence": [
+        "v0.char.016",
+        "v0.wr.023"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.shiro-learning"
+      ]
+    },
+    "166": {
+      "evidence": [
+        "v0.char.013",
+        "v0.char.016",
+        "v0.wr.023"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.shiro-learning",
+        "v0.case.yuki.social-outreach"
+      ]
+    },
+    "167": {
+      "evidence": [
+        "v0.char.013"
+      ],
+      "cases": [
+        "v0.case.yuki.social-outreach"
+      ]
+    },
+    "168": {
+      "evidence": [
+        "v0.char.013"
+      ],
+      "cases": [
+        "v0.case.yuki.social-outreach"
+      ]
+    },
+    "169": {
+      "evidence": [
+        "v0.wr.025"
+      ],
+      "cases": []
+    },
+    "170": {
+      "evidence": [
+        "v0.wr.025"
+      ],
+      "cases": [
+        "v0.case.sakayanagi.ethical-observation"
+      ]
+    },
+    "171": {
+      "evidence": [
+        "v0.wr.025",
+        "v0.wr.026",
+        "v0.wr.046"
+      ],
+      "cases": []
+    },
+    "172": {
+      "evidence": [
+        "v0.char.022",
+        "v0.char.046",
+        "v0.char.047",
+        "v0.wr.026",
+        "v0.wr.043",
+        "v0.wr.046"
+      ],
+      "cases": [
+        "v0.case.sakayanagi.ethical-observation"
+      ]
+    },
+    "173": {
+      "evidence": [
+        "v0.char.022",
+        "v0.char.046",
+        "v0.char.047",
+        "v0.wr.026",
+        "v0.wr.043"
+      ],
+      "cases": [
+        "v0.case.sakayanagi.ethical-observation"
+      ]
+    },
+    "174": {
+      "evidence": [
+        "v0.wr.026"
+      ],
+      "cases": []
+    },
+    "175": {
+      "evidence": [
+        "v0.char.022",
+        "v0.char.046",
+        "v0.char.047",
+        "v0.char.048",
+        "v0.wr.026",
+        "v0.wr.043"
+      ],
+      "cases": [
+        "v0.case.sakayanagi.ethical-observation"
+      ]
+    },
+    "176": {
+      "evidence": [
+        "v0.char.022",
+        "v0.char.046",
+        "v0.char.047",
+        "v0.wr.043"
+      ],
+      "cases": [
+        "v0.case.sakayanagi.ethical-observation"
+      ]
+    },
+    "178": {
+      "evidence": [
+        "v0.char.017"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.yuki-health"
+      ]
+    },
+    "179": {
+      "evidence": [
+        "v0.char.017",
+        "v0.wr.024",
+        "v0.wr.045"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.yuki-health"
+      ]
+    },
+    "180": {
+      "evidence": [
+        "v0.char.017",
+        "v0.wr.024"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.yuki-health"
+      ]
+    },
+    "181": {
+      "evidence": [
+        "v0.char.017",
+        "v0.wr.024"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.yuki-health"
+      ]
+    },
+    "183": {
+      "evidence": [
+        "v0.char.017",
+        "v0.wr.024"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.yuki-health"
+      ]
+    },
+    "184": {
+      "evidence": [
+        "v0.char.017",
+        "v0.wr.024"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.yuki-health"
+      ]
+    },
+    "185": {
+      "evidence": [
+        "v0.char.017",
+        "v0.wr.024",
+        "v0.wr.045"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.yuki-health"
+      ]
+    },
+    "186": {
+      "evidence": [
+        "v0.char.018",
+        "v0.wr.017",
+        "v0.wr.022"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.shiro-final-match",
+        "v0.case.kiyotaka.shiro-learning",
+        "v0.case.shiro.freedom-choice",
+        "v0.case.shiro.technical-match-and-exit"
+      ]
+    },
+    "187": {
+      "evidence": [
+        "v0.char.018",
+        "v0.wr.045"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.shiro-final-match",
+        "v0.case.shiro.freedom-choice",
+        "v0.case.shiro.technical-match-and-exit"
+      ]
+    },
+    "188": {
+      "evidence": [
+        "v0.char.018"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.shiro-final-match",
+        "v0.case.shiro.freedom-choice",
+        "v0.case.shiro.technical-match-and-exit"
+      ]
+    },
+    "189": {
+      "evidence": [],
+      "cases": [
+        "v0.case.kiyotaka.shiro-final-match",
+        "v0.case.shiro.technical-match-and-exit"
+      ]
+    },
+    "190": {
+      "evidence": [
+        "v0.char.018",
+        "v0.char.019",
+        "v0.wr.022"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.shiro-final-match",
+        "v0.case.kiyotaka.shiro-learning",
+        "v0.case.shiro.freedom-choice",
+        "v0.case.shiro.technical-match-and-exit"
+      ]
+    },
+    "191": {
+      "evidence": [
+        "v0.char.018",
+        "v0.char.019",
+        "v0.wr.017",
+        "v0.wr.022"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.shiro-final-match",
+        "v0.case.kiyotaka.shiro-learning",
+        "v0.case.shiro.freedom-choice",
+        "v0.case.shiro.technical-match-and-exit"
+      ]
+    },
+    "192": {
+      "evidence": [
+        "v0.char.018",
+        "v0.char.019",
+        "v0.char.020",
+        "v0.wr.017",
+        "v0.wr.022",
+        "v0.wr.045"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.adults-baton",
+        "v0.case.kiyotaka.shiro-final-match",
+        "v0.case.shiro.freedom-choice",
+        "v0.case.shiro.technical-match-and-exit"
+      ]
+    },
+    "193": {
+      "evidence": [
+        "v0.char.020",
+        "v0.wr.022"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.adults-baton"
+      ]
+    },
+    "194": {
+      "evidence": [
+        "v0.char.020",
+        "v0.char.021",
+        "v0.wr.022"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.adults-baton"
+      ]
+    },
+    "195": {
+      "evidence": [
+        "v0.char.020",
+        "v0.char.021",
+        "v0.wr.022"
+      ],
+      "cases": []
+    },
+    "196": {
+      "evidence": [
+        "v0.char.020",
+        "v0.char.021",
+        "v0.wr.022",
+        "v0.wr.044"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.adults-baton"
+      ]
+    },
+    "197": {
+      "evidence": [
+        "v0.char.021",
+        "v0.wr.044"
+      ],
+      "cases": [
+        "v0.case.ishida.experiment-ethics",
+        "v0.case.kiyotaka.adults-baton"
+      ]
+    },
+    "198": {
+      "evidence": [],
+      "cases": [
+        "v0.case.ishida.experiment-ethics"
+      ]
+    },
+    "202": {
+      "evidence": [
+        "v0.pol.015",
+        "v0.pol.026"
+      ],
+      "cases": [
+        "v0.case.kijima.public-profile"
+      ]
+    },
+    "203": {
+      "evidence": [
+        "v0.char.035",
+        "v0.pol.015",
+        "v0.pol.026"
+      ],
+      "cases": [
+        "v0.case.kijima.public-profile"
+      ]
+    },
+    "204": {
+      "evidence": [
+        "v0.pol.015",
+        "v0.pol.026"
+      ],
+      "cases": [
+        "v0.case.kijima.public-profile"
+      ]
+    },
+    "205": {
+      "evidence": [
+        "v0.pol.015",
+        "v0.pol.026"
+      ],
+      "cases": [
+        "v0.case.kijima.public-profile"
+      ]
+    },
+    "206": {
+      "evidence": [
+        "v0.pol.015"
+      ],
+      "cases": []
+    },
+    "207": {
+      "evidence": [
+        "v0.pol.015"
+      ],
+      "cases": []
+    },
+    "208": {
+      "evidence": [
+        "v0.pol.015"
+      ],
+      "cases": []
+    },
+    "209": {
+      "evidence": [
+        "v0.char.035",
+        "v0.pol.015",
+        "v0.pol.016"
+      ],
+      "cases": []
+    },
+    "210": {
+      "evidence": [
+        "v0.char.035",
+        "v0.pol.016"
+      ],
+      "cases": []
+    },
+    "211": {
+      "evidence": [
+        "v0.char.035",
+        "v0.pol.016"
+      ],
+      "cases": []
+    },
+    "212": {
+      "evidence": [
+        "v0.char.035",
+        "v0.pol.016",
+        "v0.wr.048"
+      ],
+      "cases": []
+    },
+    "213": {
+      "evidence": [
+        "v0.char.035",
+        "v0.pol.016"
+      ],
+      "cases": []
+    },
+    "214": {
+      "evidence": [
+        "v0.char.036",
+        "v0.pol.017",
+        "v0.pol.025"
+      ],
+      "cases": [
+        "v0.case.kijima.public-profile",
+        "v0.case.tsukishiro.dual-roles"
+      ]
+    },
+    "215": {
+      "evidence": [
+        "v0.char.036",
+        "v0.pol.017",
+        "v0.pol.025",
+        "v0.pol.028",
+        "v0.wr.034"
+      ],
+      "cases": [
+        "v0.case.kijima.public-profile",
+        "v0.case.tsukishiro.dual-roles"
+      ]
+    },
+    "216": {
+      "evidence": [
+        "v0.char.033",
+        "v0.char.036",
+        "v0.pol.018",
+        "v0.pol.026",
+        "v0.wr.034"
+      ],
+      "cases": []
+    },
+    "217": {
+      "evidence": [
+        "v0.char.033",
+        "v0.char.045",
+        "v0.pol.018"
+      ],
+      "cases": []
+    },
+    "218": {
+      "evidence": [
+        "v0.char.032",
+        "v0.char.045",
+        "v0.pol.018"
+      ],
+      "cases": []
+    },
+    "219": {
+      "evidence": [
+        "v0.char.023",
+        "v0.pol.018",
+        "v0.pol.019",
+        "v0.pol.026"
+      ],
+      "cases": []
+    },
+    "220": {
+      "evidence": [
+        "v0.char.023",
+        "v0.wr.042"
+      ],
+      "cases": []
+    },
+    "221": {
+      "evidence": [
+        "v0.char.023",
+        "v0.wr.008",
+        "v0.wr.042"
+      ],
+      "cases": []
+    },
+    "222": {
+      "evidence": [
+        "v0.char.023",
+        "v0.wr.008",
+        "v0.wr.042"
+      ],
+      "cases": []
+    },
+    "223": {
+      "evidence": [
+        "v0.char.023",
+        "v0.wr.042"
+      ],
+      "cases": []
+    },
+    "224": {
+      "evidence": [
+        "v0.pol.019"
+      ],
+      "cases": []
+    },
+    "225": {
+      "evidence": [
+        "v0.char.024",
+        "v0.char.055",
+        "v0.char.056",
+        "v0.pol.019"
+      ],
+      "cases": [
+        "v0.case.ishigami.public-risk"
+      ]
+    },
+    "226": {
+      "evidence": [
+        "v0.char.024",
+        "v0.char.055",
+        "v0.pol.019"
+      ],
+      "cases": [
+        "v0.case.ishigami.public-risk"
+      ]
+    },
+    "227": {
+      "evidence": [
+        "v0.char.024",
+        "v0.char.025",
+        "v0.char.049",
+        "v0.char.055",
+        "v0.char.056"
+      ],
+      "cases": [
+        "v0.case.ishigami.public-risk"
+      ]
+    },
+    "228": {
+      "evidence": [
+        "v0.char.024",
+        "v0.char.025",
+        "v0.char.049",
+        "v0.char.055",
+        "v0.char.056"
+      ],
+      "cases": [
+        "v0.case.ishigami.public-risk"
+      ]
+    },
+    "229": {
+      "evidence": [
+        "v0.char.026",
+        "v0.char.049",
+        "v0.char.055"
+      ],
+      "cases": [
+        "v0.case.ishigami.public-risk"
+      ]
+    },
+    "230": {
+      "evidence": [
+        "v0.char.024",
+        "v0.char.026",
+        "v0.char.049",
+        "v0.char.055"
+      ],
+      "cases": [
+        "v0.case.ishigami.public-risk"
+      ]
+    },
+    "231": {
+      "evidence": [
+        "v0.char.027",
+        "v0.char.040",
+        "v0.char.049"
+      ],
+      "cases": [
+        "v0.case.ishigami.public-risk"
+      ]
+    },
+    "232": {
+      "evidence": [
+        "v0.char.027",
+        "v0.char.028",
+        "v0.char.049"
+      ],
+      "cases": [
+        "v0.case.ishigami.public-risk"
+      ]
+    },
+    "233": {
+      "evidence": [
+        "v0.char.028"
+      ],
+      "cases": []
+    },
+    "234": {
+      "evidence": [
+        "v0.char.029",
+        "v0.pol.027"
+      ],
+      "cases": []
+    },
+    "235": {
+      "evidence": [
+        "v0.char.029",
+        "v0.pol.027"
+      ],
+      "cases": []
+    },
+    "236": {
+      "evidence": [
+        "v0.char.029"
+      ],
+      "cases": []
+    },
+    "237": {
+      "evidence": [
+        "v0.char.029"
+      ],
+      "cases": []
+    },
+    "238": {
+      "evidence": [
+        "v0.char.040"
+      ],
+      "cases": []
+    },
+    "239": {
+      "evidence": [
+        "v0.char.040",
+        "v0.pol.023",
+        "v0.pol.028",
+        "v0.wr.034"
+      ],
+      "cases": []
+    },
+    "240": {
+      "evidence": [
+        "v0.char.040",
+        "v0.pol.023",
+        "v0.pol.028"
+      ],
+      "cases": []
+    },
+    "242": {
+      "evidence": [
+        "v0.char.037",
+        "v0.wr.013",
+        "v0.wr.027",
+        "v0.wr.028",
+        "v0.wr.029",
+        "v0.wr.031",
+        "v0.wr.032"
+      ],
+      "cases": [
+        "v0.case.suzukake.curriculum-policy"
+      ]
+    },
+    "243": {
+      "evidence": [
+        "v0.char.037",
+        "v0.wr.013",
+        "v0.wr.027",
+        "v0.wr.028",
+        "v0.wr.029",
+        "v0.wr.030",
+        "v0.wr.032",
+        "v0.wr.047"
+      ],
+      "cases": [
+        "v0.case.suzukake.curriculum-policy"
+      ]
+    },
+    "244": {
+      "evidence": [
+        "v0.char.037",
+        "v0.wr.029",
+        "v0.wr.030",
+        "v0.wr.032",
+        "v0.wr.047"
+      ],
+      "cases": [
+        "v0.case.suzukake.curriculum-policy"
+      ]
+    },
+    "245": {
+      "evidence": [
+        "v0.char.037",
+        "v0.wr.029",
+        "v0.wr.030",
+        "v0.wr.032",
+        "v0.wr.047"
+      ],
+      "cases": [
+        "v0.case.suzukake.curriculum-policy"
+      ]
+    },
+    "246": {
+      "evidence": [
+        "v0.char.037",
+        "v0.wr.029",
+        "v0.wr.030",
+        "v0.wr.032"
+      ],
+      "cases": []
+    },
+    "247": {
+      "evidence": [
+        "v0.char.035",
+        "v0.pol.020",
+        "v0.wr.031"
+      ],
+      "cases": [
+        "v0.case.kamogawa.hierarchy",
+        "v0.case.kijima.public-profile"
+      ]
+    },
+    "248": {
+      "evidence": [
+        "v0.char.035",
+        "v0.pol.020"
+      ],
+      "cases": [
+        "v0.case.kamogawa.hierarchy"
+      ]
+    },
+    "249": {
+      "evidence": [
+        "v0.char.035",
+        "v0.pol.020",
+        "v0.wr.035"
+      ],
+      "cases": []
+    },
+    "250": {
+      "evidence": [
+        "v0.wr.035"
+      ],
+      "cases": []
+    },
+    "251": {
+      "evidence": [
+        "v0.char.030",
+        "v0.wr.031",
+        "v0.wr.035"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.yuki-reunion",
+        "v0.case.yuki.aftereffects"
+      ]
+    },
+    "252": {
+      "evidence": [
+        "v0.char.030",
+        "v0.char.050",
+        "v0.wr.035",
+        "v0.wr.045"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.yuki-reunion",
+        "v0.case.yuki.aftereffects"
+      ]
+    },
+    "253": {
+      "evidence": [
+        "v0.char.030",
+        "v0.char.050",
+        "v0.wr.035",
+        "v0.wr.045"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.yuki-reunion",
+        "v0.case.yuki.aftereffects"
+      ]
+    },
+    "254": {
+      "evidence": [
+        "v0.char.030",
+        "v0.char.050",
+        "v0.wr.035"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.yuki-reunion",
+        "v0.case.yuki.aftereffects"
+      ]
+    },
+    "255": {
+      "evidence": [
+        "v0.char.030"
+      ],
+      "cases": []
+    },
+    "256": {
+      "evidence": [
+        "v0.char.030",
+        "v0.char.031",
+        "v0.char.050",
+        "v0.wr.031",
+        "v0.wr.035"
+      ],
+      "cases": [
+        "v0.case.kiyotaka.yuki-reunion"
+      ]
+    },
+    "257": {
+      "evidence": [
+        "v0.char.031",
+        "v0.wr.031"
+      ],
+      "cases": []
+    },
+    "258": {
+      "evidence": [
+        "v0.char.031",
+        "v0.wr.031"
+      ],
+      "cases": []
+    },
+    "259": {
+      "evidence": [
+        "v0.pol.020",
+        "v0.pol.022",
+        "v0.wr.031",
+        "v0.wr.034"
+      ],
+      "cases": []
+    },
+    "260": {
+      "evidence": [
+        "v0.char.036",
+        "v0.pol.020",
+        "v0.pol.021",
+        "v0.pol.022",
+        "v0.wr.031",
+        "v0.wr.034"
+      ],
+      "cases": [
+        "v0.case.tsukishiro.dual-roles"
+      ]
+    },
+    "261": {
+      "evidence": [
+        "v0.char.036",
+        "v0.pol.021"
+      ],
+      "cases": [
+        "v0.case.tsukishiro.dual-roles"
+      ]
+    }
+  }
+}

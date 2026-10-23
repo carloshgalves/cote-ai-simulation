@@ -1,0 +1,61 @@
+{
+  "id": "v0.case.tsukishiro.dual-roles",
+  "actor_id": "actor.tsukishiro",
+  "title": "Ambiguous loyalty under competing patrons",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      214,
+      215,
+      260,
+      261
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Political operator works around Naoe and Atsuomi",
+  "information_available": "Has his own information channels; tells Atsuomi details with uncertain corroboration",
+  "perceived_objective": "Maintain value to patrons and preserve options",
+  "observed_actions": "Communicates sensitive information, negotiates service; allows perceptions of dual allegiance",
+  "observed_result": "Atsuomi must discount Tsukishiro statements and cannot fully verify underlying actions",
+  "capabilities_supported": [
+    "information_control",
+    "operational_discretion",
+    "strategic_ambiguity"
+  ],
+  "epistemic_limits": "Do not promote Atsuomi suspicions about journalist homicide to witnessed facts",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "",
+  "other_actors": [
+    "actor.atsuomi-ayanokoji",
+    "actor.jinnosuke-naoe"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.tsukishiro",
+  "topics": [
+    "strategy",
+    "social",
+    "politics"
+  ],
+  "evidence_refs": [
+    "v0.pol.017",
+    "v0.pol.021",
+    "v0.char.006",
+    "v0.char.036",
+    "v0.pol.025",
+    "v0.wr.040",
+    "v0.wr.041",
+    "v0.char.042",
+    "v0.char.043"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

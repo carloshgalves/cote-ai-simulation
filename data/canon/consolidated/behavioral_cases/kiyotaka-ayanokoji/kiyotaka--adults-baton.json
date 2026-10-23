@@ -1,0 +1,53 @@
+{
+  "id": "v0.case.kiyotaka.adults-baton",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Nine-year-old versus hired armed-capable adult fighters",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      192,
+      193,
+      194,
+      196,
+      197
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "After defeating martial arts instructors, Kiyotaka faces multiple hired adult fighters in a controlled room",
+  "information_available": "Explicit lethal permission by instructors, offered baton/stun gun/knife, opponents bigger with different fighting style, no visible precise opponent count",
+  "perceived_objective": "Complete imposed combat exercise",
+  "observed_actions": "Chooses extendable baton for reach; leverages size/reach; incapacitates multiple fighters; stops on order",
+  "observed_result": "Several adults seriously injured; staff shocked by his near-lethal compliance",
+  "capabilities_supported": [
+    "combat_strategy",
+    "weapon_familiarity",
+    "order_compliance",
+    "risk_assessment"
+  ],
+  "epistemic_limits": "Number of adult fighters is not specified; cannot call them ten assassins or certify organized-crime status; episode is controlled and armed",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "No weapons or explicit stopping order changes feasible outcomes and risk; model injuries via physical engine.",
+  "other_actors": [],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "topics": [
+    "combat",
+    "strategy",
+    "institution"
+  ],
+  "evidence_refs": [
+    "v0.wr.017",
+    "v0.wr.022",
+    "v0.char.018",
+    "v0.char.019",
+    "v0.char.020",
+    "v0.char.021",
+    "v0.wr.044",
+    "v0.wr.045"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

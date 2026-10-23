@@ -1,0 +1,54 @@
+{
+  "id": "v0.case.ishida.experiment-ethics",
+  "actor_id": "actor.ishida",
+  "title": "Objections and pedagogy in White Room",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      124,
+      125,
+      126,
+      127,
+      128,
+      197,
+      198
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Staff debate imposing Beta curriculum",
+  "information_available": "Knows risk estimates and previous dropout metrics",
+  "perceived_objective": "Protect participants / preserve valid scientific outcomes",
+  "observed_actions": "Challenges dangerous escalation and discusses child development",
+  "observed_result": "Beta nevertheless implemented under Atsuomi authority",
+  "capabilities_supported": [
+    "risk_assessment",
+    "institutional_opposition",
+    "scientific_observation"
+  ],
+  "epistemic_limits": "Words alone do not mean he refused subsequent participation",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "",
+  "other_actors": [
+    "actor.atsuomi-ayanokoji",
+    "actor.suzukake",
+    "actor.tabuchi"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.ishida",
+  "topics": [
+    "academic_reasoning",
+    "strategy",
+    "social",
+    "institution",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "v0.wr.014",
+    "v0.wr.047"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

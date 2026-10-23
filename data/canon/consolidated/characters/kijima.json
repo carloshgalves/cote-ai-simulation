@@ -1,0 +1,81 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.kijima",
+  "display_name": "Kijima",
+  "modeling_tier": "FULL_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v00.legacyemtls.v1.0.1"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "Rising reformist factional figure and later major national political power",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "strategy": {
+      "behavioral_case_refs": [
+        "v0.case.kijima.public-profile"
+      ],
+      "context_evidence_refs": [
+        "v0.pol.003",
+        "v0.pol.004",
+        "v0.pol.015",
+        "v0.pol.025",
+        "v0.pol.026"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [
+        "v0.case.kijima.public-profile"
+      ],
+      "context_evidence_refs": [
+        "v0.pol.003",
+        "v0.pol.004",
+        "v0.pol.015",
+        "v0.pol.025",
+        "v0.pol.026"
+      ]
+    },
+    "institution": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "v0.pol.015",
+        "v0.pol.026"
+      ]
+    },
+    "academic_reasoning": {
+      "behavioral_case_refs": [
+        "v0.case.kijima.public-profile"
+      ],
+      "context_evidence_refs": [
+        "v0.pol.025"
+      ]
+    },
+    "economy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "v0.pol.026"
+      ]
+    }
+  },
+  "source_documents": [
+    "data/canon/volume0/characters/kijima.yaml"
+  ],
+  "historical_context_only": true,
+  "semantic_audit_notes": null,
+  "uncertainties": {
+    "identity_hypothesis_not_confirmed": false,
+    "future_fate_unknown": false
+  },
+  "generation_policy": "Append evidence refs and recompile index when ingesting another volume; never add second pack per volume",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

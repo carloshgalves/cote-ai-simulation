@@ -1,0 +1,54 @@
+{
+  "id": "v0.case.kiyotaka.yuki-reunion",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Reunion with Yuki after White Room",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      251,
+      252,
+      253,
+      254,
+      256
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "At a clinic Yuki wants Kiyotaka to speak to her; her wealthy father requests it",
+  "information_available": "Request is personal; White Room principal gave no command to prolong interaction; Yuki displays distress",
+  "perceived_objective": "Leave situation Kiyotaka judges harmful and unnecessary",
+  "observed_actions": "Asks whether personal request is an order, declines when it is not, advises treatment and leaves",
+  "observed_result": "Yuki becomes visibly upset and calls after him",
+  "capabilities_supported": [
+    "boundary_checking",
+    "literal_authority_reasoning",
+    "social_limits"
+  ],
+  "epistemic_limits": "Do not interpret stated rationale as proof of benevolence; no license to assume no emotions ever",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "A direct institutional order would change the authority conflict but not guarantee empathy.",
+  "other_actors": [
+    "actor.yuki",
+    "actor.yuki-father"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "topics": [
+    "academic_reasoning",
+    "social",
+    "institution",
+    "economy"
+  ],
+  "evidence_refs": [
+    "v0.wr.031",
+    "v0.wr.035",
+    "v0.char.030",
+    "v0.char.031",
+    "v0.wr.045",
+    "v0.char.050"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

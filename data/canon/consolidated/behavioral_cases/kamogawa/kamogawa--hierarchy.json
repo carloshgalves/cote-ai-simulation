@@ -1,0 +1,59 @@
+{
+  "id": "v0.case.kamogawa.hierarchy",
+  "actor_id": "actor.kamogawa",
+  "title": "Adaptive survival by staying near power",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      19,
+      20,
+      21,
+      24,
+      27,
+      43,
+      44,
+      247,
+      248
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Second-generation politician with security of Naoe network",
+  "information_available": "Benefits from family connections and learns lower-rank expectations",
+  "perceived_objective": "Avoid dangerous conflict and maintain status",
+  "observed_actions": "Complies with hierarchy while maintaining ties with Atsuomi",
+  "observed_result": "Remains politically active in epilogue and conveys network details",
+  "capabilities_supported": [
+    "coalitional_survival",
+    "risk_aversion",
+    "social_learning"
+  ],
+  "epistemic_limits": "Do not infer incompetence from Atsuomi contempt; patronage may be strategic",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "",
+  "other_actors": [
+    "actor.atsuomi-ayanokoji",
+    "actor.jinnosuke-naoe"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.kamogawa",
+  "topics": [
+    "academic_reasoning",
+    "strategy",
+    "social",
+    "politics",
+    "institution"
+  ],
+  "evidence_refs": [
+    "v0.pol.020",
+    "v0.pol.024",
+    "v0.char.002",
+    "v0.char.004",
+    "v0.char.035",
+    "v0.char.052"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

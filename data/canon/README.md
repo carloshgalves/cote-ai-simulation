@@ -27,7 +27,7 @@ Esta política de corpus continua valendo. A partir do ADR 0005, o diretório ta
 | `world/` | estrutura, regras e entidades não específicas do primeiro ano |
 | `y1/` | estado inicial do primeiro ano e linha de eventos canônica |
 | `actors/` | stubs de entidade com ids estáveis |
-| `characters/` | evidence packs declarativos dos personagens focais; não são agentes executáveis |
+| `characters/` | evidence packs legados (Y1_START); não são o read-model V2 |
 | `exams/` | cânone dos exames especiais |
 | `evidence/` | paráfrases citáveis para RAG |
 | `feats/` | desempenhos físicos observados; corpus compartilhado, indexado por ator |
@@ -37,3 +37,9 @@ Esta política de corpus continua valendo. A partir do ADR 0005, o diretório ta
 Metodologia e políticas em [`docs/canon/`](../../docs/canon/). Decisão em [`docs/adr/0005-canon-knowledge-base.md`](../../docs/adr/0005-canon-knowledge-base.md).
 
 **Reconstruções nossas não vivem aqui.** Fórmulas e algoritmos que a obra não declara ficam em [`data/models/`](../models/), marcados `not_canon`. A dependência é unidirecional: cânone → modelos.
+
+## Packs consolidados e edições aprovadas pelo operador
+
+Os read-models em `data/canon/consolidated/` seguem uma ficha consolidada por personagem ou instituição, mantendo evidências atômicas, casos comportamentais e índices recuperáveis por tópico em arquivos separados. a antiga árvore de staging `data/canon/volume0/` foi aposentada; registros históricos úteis estão em `data/canon/consolidated/audits/legacy-extraction/`, isolados do contexto dos agentes.
+
+O operador pode autorizar traduções específicas que disponibiliza (mesmo não oficiais) para **extração**; registrar digest/edição/aceite. Isso não torna cada afirmação automaticamente verificada, nem altera os gates de compilação legados sem migração própria.

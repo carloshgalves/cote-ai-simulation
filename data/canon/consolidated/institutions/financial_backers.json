@@ -1,0 +1,34 @@
+{
+  "schema_version": "consolidated-institution-v2",
+  "institution_id": "org.financial_backers",
+  "display_name": "White Room financiers",
+  "source_coverage": [
+    "ln.y1.v00.legacyemtls.v1.0.1"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_documents": [
+    "data/canon/volume0/organizations/financial_backers.yaml"
+  ],
+  "evidence_refs": [
+    "v0.pol.013",
+    "v0.pol.018",
+    "v0.pol.019",
+    "v0.pol.020",
+    "v0.wr.004",
+    "v0.wr.033",
+    "v0.wr.035",
+    "v0.char.023",
+    "v0.char.024",
+    "v0.char.025",
+    "v0.char.026",
+    "v0.char.027",
+    "v0.char.032",
+    "v0.char.040",
+    "v0.pol.026",
+    "v0.pol.027",
+    "v0.wr.042",
+    "v0.char.049"
+  ],
+  "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
+  "operational_migration": "Only user/operator-authorized claims may be promoted after review"
+}

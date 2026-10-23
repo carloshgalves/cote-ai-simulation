@@ -1,0 +1,82 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.tsukishiro",
+  "display_name": "Tokinari Tsukishiro",
+  "modeling_tier": "FULL_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v00.legacyemtls.v1.0.1"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "Information and operations specialist with cross-party connections",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "strategy": {
+      "behavioral_case_refs": [
+        "v0.case.tsukishiro.dual-roles"
+      ],
+      "context_evidence_refs": [
+        "v0.char.036",
+        "v0.char.042",
+        "v0.char.043",
+        "v0.pol.011",
+        "v0.pol.012",
+        "v0.pol.017",
+        "v0.pol.021",
+        "v0.pol.025",
+        "v0.wr.040"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [
+        "v0.case.tsukishiro.dual-roles"
+      ],
+      "context_evidence_refs": [
+        "v0.char.036",
+        "v0.char.043",
+        "v0.pol.011",
+        "v0.pol.012",
+        "v0.pol.017",
+        "v0.pol.021",
+        "v0.pol.025",
+        "v0.wr.040"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [
+        "v0.case.tsukishiro.dual-roles"
+      ],
+      "context_evidence_refs": [
+        "v0.pol.012",
+        "v0.pol.017"
+      ]
+    },
+    "academic_reasoning": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "v0.pol.025"
+      ]
+    }
+  },
+  "source_documents": [
+    "data/canon/volume0/characters/tsukishiro.yaml"
+  ],
+  "historical_context_only": true,
+  "semantic_audit_notes": null,
+  "uncertainties": {
+    "identity_hypothesis_not_confirmed": false,
+    "future_fate_unknown": false
+  },
+  "generation_policy": "Append evidence refs and recompile index when ingesting another volume; never add second pack per volume",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "schema_version": "volume0-faction-dynamics-v1",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "edition": "LegacyEMTLs 1.0.1 unofficial; operator accepted 2026-10-22",
+    "status": "SOURCE_ACCEPTED_RECORD_REVIEW_REQUIRED"
+  },
+  "temporal_states": [
+    {
+      "id": "phase1.naoe-dominant",
+      "source_pages": [
+        17,
+        18,
+        22,
+        25,
+        28,
+        29,
+        33,
+        34
+      ],
+      "participants": [
+        "org.naoe_faction",
+        "org.kijima_faction",
+        "org.isomaru_faction",
+        "org.miyako_faction"
+      ],
+      "observed": "Naoe dominates patronage and sponsors a concealed project via Atsuomi; Kijima is rising rival",
+      "simulation_state": "relative influence must remain dynamic, not absolute"
+    },
+    {
+      "id": "phase2.naoe-realignment",
+      "source_pages": [
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209
+      ],
+      "participants": [
+        "org.naoe_faction",
+        "org.kijima_faction"
+      ],
+      "observed": "Naoe abandons own leadership ambition to back Kijima and demands withdrawal of Atsuomi political project",
+      "simulation_state": "alliances and objectives change with time; Kijima is not frozen as permanently hostile"
+    },
+    {
+      "id": "phase3.independent-networks",
+      "source_pages": [
+        209,
+        210,
+        211,
+        212,
+        213,
+        216,
+        217,
+        218,
+        219,
+        223,
+        232,
+        239,
+        240
+      ],
+      "participants": [
+        "actor.atsuomi",
+        "org.white_room",
+        "org.financial_backers",
+        "org.peace_party"
+      ],
+      "observed": "Atsuomi retains corporate ties and searches for renewed political leverage despite loss of patronage",
+      "simulation_state": "independent financial and political resources may remain after formal office ends"
+    },
+    {
+      "id": "phase4.epilogue",
+      "source_pages": [
+        247,
+        248,
+        249,
+        259,
+        260,
+        261
+      ],
+      "participants": [
+        "actor.naoe",
+        "actor.kijima",
+        "actor.atsuomi",
+        "actor.tsukishiro"
+      ],
+      "observed": "Kijima prime minister; Naoe alive and gravely ill, still affecting White Room; Atsuomi planning return and Kiyotaka role",
+      "simulation_state": "later death dates and eventual outcome UNKNOWN"
+    }
+  ],
+  "institutional_boundaries": [
+    "Citizens Party encompasses factions, not an independent party for each person",
+    "Peace Party is opposition and contacts are not proof of formal defection",
+    "Commercial donors are not a single faction",
+    "A school related to Kijima is not reconstructible from these passages as executable rules"
+  ],
+  "knowledge_policy": "Never leak covert project facts to uninformed students, patrons or third-party factions",
+  "source_mode_cautions": [
+    "Atsuomi self-report",
+    "Tsukishiro claims about Kijima",
+    "Naoe motivations as inferred by Atsuomi"
+  ]
+}

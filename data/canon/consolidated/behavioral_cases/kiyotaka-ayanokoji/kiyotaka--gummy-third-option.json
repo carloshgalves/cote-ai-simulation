@@ -1,0 +1,48 @@
+{
+  "id": "v0.case.kiyotaka.gummy-third-option",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Gummy hands: search for hidden alternatives",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      132,
+      133,
+      134,
+      135,
+      136
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Age approximately two; children guess location of gummy after some manipulated rounds",
+  "information_available": "Visible fist positions, previous outcomes across neighboring children, no external access to game design",
+  "perceived_objective": "Find the gummy and understand why outcomes shift",
+  "observed_actions": "Observes neighboring trials, considers a third location behind instructor even after counterexamples, guesses behind twice",
+  "observed_result": "Both novel third-option guesses are WRONG in presented trials; adults remark on hypothesis-generation rather than accuracy",
+  "capabilities_supported": [
+    "observation",
+    "hypothesis_generation",
+    "metareasoning"
+  ],
+  "epistemic_limits": "Do not code perfect deduction, mind-reading or successful inference; later description is retrospective narration",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "Instructor conceals gummy outside both hands vs places it inside hand; vary peer observation and instructor cues.",
+  "other_actors": [
+    "actor.tabuchi"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "topics": [
+    "academic_reasoning",
+    "strategy",
+    "social",
+    "institution"
+  ],
+  "evidence_refs": [
+    "v0.char.010"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

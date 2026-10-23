@@ -1,0 +1,64 @@
+{
+  "id": "v0.case.sakayanagi.ethical-observation",
+  "actor_id": "actor.sakayanagi-father",
+  "title": "Observation does not imply operational authority",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      105,
+      107,
+      109,
+      110,
+      111,
+      170,
+      172,
+      173,
+      175,
+      176
+    ],
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT",
+    "locator_policy": "PDF 1-based; source prose paraphrased"
+  },
+  "narrative_mode": "NARRATED",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "Sakayanagi permitted limited visit to White Room",
+  "information_available": "Observes children and learns assertions by researchers, his own family values",
+  "perceived_objective": "Understand institution while raising ethical objections",
+  "observed_actions": "Questions humane impact, distinguishes environment from innate aptitude",
+  "observed_result": "Remains outside operational control; engages critically with Atsuomi",
+  "capabilities_supported": [
+    "ethical_reasoning",
+    "scientific_skepticism",
+    "social_judgment"
+  ],
+  "epistemic_limits": "Do not grant full rule-setting power or secret continuous access",
+  "interpretation": "",
+  "alternate_outcomes_to_test": "",
+  "other_actors": [
+    "actor.atsuomi-ayanokoji",
+    "actor.arisu-sakayanagi",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "memory_seed_policy": "Never import the canonical episode as an occurrence after a simulation divergence; pre-existing skills may be used only in character-behavioral calibration",
+  "primary_actor_id": "actor.sakayanagi-father",
+  "topics": [
+    "academic_reasoning",
+    "social",
+    "institution",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "v0.pol.014",
+    "v0.wr.012",
+    "v0.wr.026",
+    "v0.char.008",
+    "v0.char.022",
+    "v0.wr.043",
+    "v0.wr.046",
+    "v0.char.046",
+    "v0.char.047",
+    "v0.char.048"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.rokusuke-koenji.predict-zero-allowance",
+  "actor_id": "actor.rokusuke-koenji",
+  "primary_actor_id": "actor.rokusuke-koenji",
+  "title": "predict zero allowance",
+  "context": "Before the teacher's full explanation, Kouenji publicly infers that Class D has received no May private-point allocation; teacher confirms his inference.",
+  "observed_actions": "Infers Class D's zero May allowance before explanation",
+  "observed_result": "Teacher explicitly confirms deduction",
+  "epistemic_limits": "Single instance does not make character omniscient",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      121
+    ],
+    "chapter": 7,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.sae-chiyabashira"
+  ],
+  "capabilities_supported": [
+    "academic_reasoning",
+    "observation"
+  ],
+  "information_available": "Only scene-local observed conditions and actor knowledge",
+  "counterfactual_test": "Vary preparation, institution response, social incentives and other agents; no prescribed success",
+  "topics": [
+    "academic_reasoning",
+    "observation"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.124"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

@@ -1,0 +1,38 @@
+{
+  "id": "y1v1.case.ken-sudo.prioritize-study-over-basketball",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "prioritize study over basketball",
+  "context": "Sudou volunteers to pause basketball club activities to devote time to studying; the decision encourages Ike and Yamauchi to put forth more effort.",
+  "observed_actions": "Offers to pause basketball despite strong commitment to sport",
+  "observed_result": "Strengthens group's resolve to study",
+  "epistemic_limits": "Demonstrates ability to reprioritize in crisis, not long-term academic discipline",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      227
+    ],
+    "chapter": 9,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kanji-ike",
+    "actor.haruki-yamauchi"
+  ],
+  "capabilities_supported": [
+    "motivation",
+    "social"
+  ],
+  "information_available": "Only scene-local observed conditions and actor knowledge",
+  "counterfactual_test": "Vary preparation, institution response, social incentives and other agents; no prescribed success",
+  "topics": [
+    "motivation",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.134"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

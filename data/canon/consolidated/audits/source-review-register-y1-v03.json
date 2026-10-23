@@ -3350,8 +3350,8 @@
       ]
     },
     {
-      "case_id": "y1v3.case.kakeru-ryuen.intimidate-isshizaki",
-      "case_file": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/intimidate-isshizaki.json",
+      "case_id": "y1v3.case.kakeru-ryuen.intimidate-ishizaki",
+      "case_file": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/intimidate-ishizaki.json",
       "primary_actor_id": "actor.kakeru-ryuen",
       "pdf_pages": [
         112

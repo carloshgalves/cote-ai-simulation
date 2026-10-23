@@ -21,7 +21,7 @@
   "domains": {
     "conflict": {
       "behavioral_case_refs": [
-        "y1v3.case.kakeru-ryuen.intimidate-isshizaki"
+        "y1v3.case.kakeru-ryuen.intimidate-ishizaki"
       ],
       "context_evidence_refs": [
         "y1v2.ev.081",
@@ -57,7 +57,7 @@
     },
     "leadership": {
       "behavioral_case_refs": [
-        "y1v3.case.kakeru-ryuen.intimidate-isshizaki"
+        "y1v3.case.kakeru-ryuen.intimidate-ishizaki"
       ],
       "context_evidence_refs": [
         "y1v3.ev.055"

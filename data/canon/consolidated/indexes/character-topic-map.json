@@ -3992,7 +3992,7 @@
     "actor.kakeru-ryuen": {
       "conflict": [
         "y1v2.ev.081",
-        "y1v3.case.kakeru-ryuen.intimidate-isshizaki",
+        "y1v3.case.kakeru-ryuen.intimidate-ishizaki",
         "y1v3.ev.053",
         "y1v3.ev.055",
         "y1v3.ev.056"
@@ -4015,7 +4015,7 @@
         "y1v3.ev.105"
       ],
       "leadership": [
-        "y1v3.case.kakeru-ryuen.intimidate-isshizaki",
+        "y1v3.case.kakeru-ryuen.intimidate-ishizaki",
         "y1v3.ev.055"
       ],
       "observation": [
@@ -5293,7 +5293,7 @@
     },
     "actor.kakeru-ryuen": {
       "conflict": [
-        "y1v3.case.kakeru-ryuen.intimidate-isshizaki"
+        "y1v3.case.kakeru-ryuen.intimidate-ishizaki"
       ],
       "strategy": [
         "y1v3.case.kakeru-ryuen.organize-luxury-spending"
@@ -5302,7 +5302,7 @@
         "y1v3.case.kakeru-ryuen.organize-luxury-spending"
       ],
       "leadership": [
-        "y1v3.case.kakeru-ryuen.intimidate-isshizaki"
+        "y1v3.case.kakeru-ryuen.intimidate-ishizaki"
       ],
       "observation": [],
       "politics": [],
@@ -8697,11 +8697,11 @@
     "y1v3.case.kiyotaka-ayanokoji.exploit-justified-leader-replacement": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/exploit-justified-leader-replacement.json",
     "y1v3.case.kiyotaka-ayanokoji.condition-support-on-privacy": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/condition-support-on-privacy.json",
     "y1v3.case.kakeru-ryuen.organize-luxury-spending": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/organize-luxury-spending.json",
-    "y1v3.case.kakeru-ryuen.intimidate-isshizaki": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/intimidate-isshizaki.json",
     "y1v3.case.mio-ibuki.undercover-leader-card-delivery": "data/canon/consolidated/behavioral_cases/mio-ibuki/undercover-leader-card-delivery.json",
     "y1v3.case.mio-ibuki.fight-feverish-suzune": "data/canon/consolidated/behavioral_cases/mio-ibuki/fight-feverish-suzune.json",
     "y1v3.case.honami-ichinose.evaluate-well-before-shared-use": "data/canon/consolidated/behavioral_cases/honami-ichinose/evaluate-well-before-shared-use.json",
     "y1v3.case.katsuragi.defend-class-a-exclusive-cave": "data/canon/consolidated/behavioral_cases/katsuragi/defend-class-a-exclusive-cave.json",
-    "y1v3.case.sae-chiyabashira.pressure-kiyotaka-with-family-claims": "data/canon/consolidated/behavioral_cases/sae-chiyabashira/pressure-kiyotaka-with-family-claims.json"
+    "y1v3.case.sae-chiyabashira.pressure-kiyotaka-with-family-claims": "data/canon/consolidated/behavioral_cases/sae-chiyabashira/pressure-kiyotaka-with-family-claims.json",
+    "y1v3.case.kakeru-ryuen.intimidate-ishizaki": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/intimidate-ishizaki.json"
   }
 }

@@ -9,11 +9,11 @@ idx=J(B/"indexes/character-topic-map.json")
 a={x["id"]:x for x in r["records"]}
 assert len(e)==len(a)==268
 assert set(a)=={x["id"] for x in e}
-assert len(r["cases"])==len(idx["behavioral_case_paths"])==75
+assert len(r["cases"])==len(idx["behavioral_case_paths"])==74
 assert {c["case_id"] for c in r["cases"]}==set(idx["behavioral_case_paths"])
-assert r["global_promotion"]=="BLOCKED_UNTIL_RECORD_LEVEL_SEMANTIC_SIGNOFF"
-assert all(x["adjudication"] in ("PENDING_INDIVIDUAL_SEMANTIC_SIGNOFF","ASSISTANT_DIRECT_SOURCE_REVIEW_PASS") and x["verified"] is False for x in r["records"])
-assert all(c["verified"] is False for c in r["cases"])
+assert r["global_promotion"]=="BLOCKED_PENDING_OPERATOR_RELEASE_APPROVAL"
+assert all(x["adjudication"]=="ASSISTANT_DIRECT_SOURCE_REVIEW_PASS" and x["verified"] is False for x in r["records"])
+assert all(c["semantic_adjudication"]=="ASSISTANT_DIRECT_CASE_REVIEW_PASS" and c["verified"] is False for c in r["cases"])
 sources={x["file"]:x["pages"] for x in r["sources"]}
 for x in e:
     row=a[x["id"]]

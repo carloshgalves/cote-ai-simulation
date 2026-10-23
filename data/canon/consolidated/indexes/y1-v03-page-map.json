@@ -71,6 +71,12 @@
       ],
       "cases": []
     },
+    "26": {
+      "evidence": [
+        "y1v3.ev.012"
+      ],
+      "cases": []
+    },
     "27": {
       "evidence": [
         "y1v3.ev.013"
@@ -101,6 +107,12 @@
         "y1v3.ev.018",
         "y1v3.ev.019",
         "y1v3.ev.020"
+      ],
+      "cases": []
+    },
+    "32": {
+      "evidence": [
+        "y1v3.ev.021"
       ],
       "cases": []
     },
@@ -137,12 +149,14 @@
     },
     "39": {
       "evidence": [
+        "y1v3.ev.026",
         "y1v3.ev.027"
       ],
       "cases": []
     },
     "40": {
       "evidence": [
+        "y1v3.ev.027",
         "y1v3.ev.028",
         "y1v3.ev.029"
       ],
@@ -164,6 +178,12 @@
         "y1v3.case.yosuke-hirata.prioritize-portable-toilet"
       ]
     },
+    "51": {
+      "evidence": [
+        "y1v3.ev.031"
+      ],
+      "cases": []
+    },
     "52": {
       "evidence": [
         "y1v3.ev.032"
@@ -180,12 +200,14 @@
     },
     "59": {
       "evidence": [
-        "y1v3.ev.034"
+        "y1v3.ev.034",
+        "y1v3.ev.035"
       ],
       "cases": []
     },
     "60": {
       "evidence": [
+        "y1v3.ev.034",
         "y1v3.ev.035"
       ],
       "cases": [
@@ -224,6 +246,12 @@
       ]
     },
     "72": {
+      "evidence": [
+        "y1v3.ev.040"
+      ],
+      "cases": []
+    },
+    "73": {
       "evidence": [
         "y1v3.ev.040"
       ],
@@ -305,6 +333,12 @@
       ],
       "cases": []
     },
+    "98": {
+      "evidence": [
+        "y1v3.ev.050"
+      ],
+      "cases": []
+    },
     "100": {
       "evidence": [
         "y1v3.ev.051"
@@ -333,7 +367,8 @@
     },
     "112": {
       "evidence": [
-        "y1v3.ev.055"
+        "y1v3.ev.055",
+        "y1v3.ev.056"
       ],
       "cases": [
         "y1v3.case.kakeru-ryuen.intimidate-ishizaki"
@@ -373,7 +408,8 @@
     },
     "124": {
       "evidence": [
-        "y1v3.ev.061"
+        "y1v3.ev.061",
+        "y1v3.ev.117"
       ],
       "cases": []
     },
@@ -390,6 +426,18 @@
       "cases": [
         "y1v3.case.katsuragi.defend-class-a-exclusive-cave"
       ]
+    },
+    "128": {
+      "evidence": [
+        "y1v3.ev.063"
+      ],
+      "cases": []
+    },
+    "129": {
+      "evidence": [
+        "y1v3.ev.063"
+      ],
+      "cases": []
     },
     "131": {
       "evidence": [
@@ -431,6 +479,12 @@
       ],
       "cases": []
     },
+    "145": {
+      "evidence": [
+        "y1v3.ev.070"
+      ],
+      "cases": []
+    },
     "146": {
       "evidence": [
         "y1v3.ev.070"
@@ -451,7 +505,8 @@
     },
     "149": {
       "evidence": [
-        "y1v3.ev.073"
+        "y1v3.ev.073",
+        "y1v3.ev.116"
       ],
       "cases": []
     },
@@ -573,6 +628,12 @@
       ],
       "cases": []
     },
+    "207": {
+      "evidence": [
+        "y1v3.ev.090"
+      ],
+      "cases": []
+    },
     "209": {
       "evidence": [
         "y1v3.ev.091"
@@ -627,6 +688,12 @@
       ],
       "cases": []
     },
+    "225": {
+      "evidence": [
+        "y1v3.ev.098"
+      ],
+      "cases": []
+    },
     "226": {
       "evidence": [
         "y1v3.ev.098"
@@ -634,6 +701,12 @@
       "cases": [
         "y1v3.case.kiyotaka-ayanokoji.carry-sick-horikita"
       ]
+    },
+    "227": {
+      "evidence": [
+        "y1v3.ev.098"
+      ],
+      "cases": []
     },
     "232": {
       "evidence": [
@@ -671,6 +744,7 @@
     },
     "243": {
       "evidence": [
+        "y1v3.ev.103",
         "y1v3.ev.104"
       ],
       "cases": []
@@ -689,7 +763,8 @@
     },
     "248": {
       "evidence": [
-        "y1v3.ev.107"
+        "y1v3.ev.107",
+        "y1v3.ev.108"
       ],
       "cases": []
     },

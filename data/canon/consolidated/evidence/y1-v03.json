@@ -312,11 +312,12 @@
     {
       "id": "y1v3.ev.012",
       "domain": "resources",
-      "summary": "Each class is provisioned two tents, two flashlights, a box of matches, and unlimited sunscreen; each student receives a toothbrush, with sanitary supplies available separately.",
+      "summary": "Mashima specifies the two tents, two flashlights, one box of matches, sunscreen and toothbrush provisions, with unrestricted sanitary items separately for students who need them.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          25
+          25,
+          26
         ],
         "chapter": 2,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -564,10 +565,11 @@
     {
       "id": "y1v3.ev.021",
       "domain": "exam",
-      "summary": "Chabashira affirms the island-test balance cannot become negative, even if additional disqualifying events occur after the balance hits zero.",
+      "summary": "Chabashira confirms that island-exam test points stop at zero instead of becoming negative; she does not state that the disqualification rule can be avoided at zero.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
+          32,
           33
         ],
         "chapter": 2,
@@ -706,11 +708,12 @@
     {
       "id": "y1v3.ev.026",
       "domain": "exam",
-      "summary": "Certain marked island spots can be exclusively occupied for eight hours by one class and reclaimed after expiry; each valid occupation awards one provisional bonus point.",
+      "summary": "Chabashira introduces special occupied spots, later specifying that each reservation lapses automatically after eight hours and awards a single provisional, non-spendable occupation bonus.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          38
+          38,
+          39
         ],
         "chapter": 2,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -734,11 +737,12 @@
     {
       "id": "y1v3.ev.027",
       "domain": "exam",
-      "summary": "Occupying a spot requires the designated leader's personalized keycard; unauthorized use of another class's occupied spot costs 50 test points.",
+      "summary": "The manual requires the nominated class leader's personal card to register a spot; trespassing on another class's still-occupied spot costs 50 island-test points.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          39
+          39,
+          40
         ],
         "chapter": 2,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -846,11 +850,12 @@
     {
       "id": "y1v3.ev.031",
       "domain": "leadership",
-      "summary": "Hirata advocates spending points on a private toilet to reduce distress and health concerns, balancing minority needs against a strict savings strategy.",
+      "summary": "Hirata argues for purchasing one usable private temporary toilet despite conservation objections; after a class debate Yukimura concedes and the purchase becomes a collective choice.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          50
+          50,
+          51
         ],
         "chapter": 2,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -931,11 +936,12 @@
     {
       "id": "y1v3.ev.034",
       "domain": "observation",
-      "summary": "Kiyotaka and Sakura reach an occupied Class A cave after following a path; the leader's card handling risks revealing a hidden identity.",
+      "summary": "Kiyotaka and Sakura discover Class A's occupied cave and secretly witness Katsuragi and Yahiko discussing its strategic location and concealed leader information.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          59
+          59,
+          60
         ],
         "chapter": 2,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -958,10 +964,11 @@
     {
       "id": "y1v3.ev.035",
       "domain": "observation",
-      "summary": "Kiyotaka infers from the ship's earlier circuit and a path visible from the deck that the school may be hinting where occupation spots lie.",
+      "summary": "While hidden nearby, Kiyotaka overhears Katsuragi explain that he spotted a forest path from the ship's prelanding circuit and inferred the cave's position. This deduction is Katsuragi's, not Kiyotaka's demonstrated feat.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
+          59,
           60
         ],
         "chapter": 2,
@@ -971,7 +978,9 @@
       "source_mode": "INNER_MONOLOGUE",
       "story_time": "Y1_M05",
       "mention_actor_ids": [
-        "actor.kiyotaka-ayanokoji"
+        "actor.kiyotaka-ayanokoji",
+        "actor.katsuragi",
+        "actor.yahiko"
       ],
       "mention_organization_ids": [],
       "topics": [
@@ -1099,11 +1108,12 @@
     {
       "id": "y1v3.ev.040",
       "domain": "leadership",
-      "summary": "Some girls allocate both school-provided tents to themselves, raising shelter and class cooperation problems.",
+      "summary": "The school-provided tents become a point of tension when female classmates occupy both, leaving boys to improvise and exposing unequal shelter needs.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          72
+          72,
+          73
         ],
         "chapter": 2,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -1384,11 +1394,12 @@
     {
       "id": "y1v3.ev.050",
       "domain": "health",
-      "summary": "Chabashira says Kōenji retired on health grounds and will stay on the ship, costing Class D 30 exam points; his true motivation is not established.",
+      "summary": "Chabashira tells Class D that Kōenji was taken back to the ship on reported poor-health grounds and a 30-point retirement penalty applies; whether Kōenji feigned illness is not established.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          97
+          97,
+          98
         ],
         "chapter": 2,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -1552,10 +1563,11 @@
     {
       "id": "y1v3.ev.056",
       "domain": "conflict",
-      "summary": "Ryūen discusses Ibuki as a Class C member and refuses to supply a verifiable account of her facial injury; Suzune's suspicion is not proof of perpetration.",
+      "summary": "Ryūen acknowledges Ibuki as a Class C member and alludes to striking her as punishment for disobedience; his speech and gesture are not independent documentation of the initial injury.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
+          112,
           113
         ],
         "chapter": 3,
@@ -1748,11 +1760,13 @@
     {
       "id": "y1v3.ev.063",
       "domain": "conflict",
-      "summary": "Yahiko rebuffs rival scouts and Katsuragi intervenes with an argument that respecting exclusive occupation is essential for mutual security.",
+      "summary": "Yahiko rejects Horikita's attempt to inspect occupied Class A cave, and Katsuragi intervenes to argue that mutually respecting spot occupancy reduces retaliatory interference.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          127
+          127,
+          128,
+          129
         ],
         "chapter": 3,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -1945,10 +1959,11 @@
     {
       "id": "y1v3.ev.070",
       "domain": "observation",
-      "summary": "Kiyotaka independently surveys a high island vantage point and marks useful spots on a rough map.",
+      "summary": "Kiyotaka surveys an island watchtower and nearby potential occupied spots, recording rough observations on a hand-drawn map; deductions about his complete surveillance coverage remain limited.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
+          145,
           146
         ],
         "chapter": 5,
@@ -2500,11 +2515,12 @@
     {
       "id": "y1v3.ev.090",
       "domain": "resources",
-      "summary": "The Class D test manual is burned during a camp disturbance, aggravating class tension; the responsible party is not independently identified.",
+      "summary": "The island examination manual is found burning near the camp toilet. Neither Kiyotaka nor Horikita directly witnesses who ignited it.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          206
+          206,
+          207
         ],
         "chapter": 6,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -2718,11 +2734,13 @@
     {
       "id": "y1v3.ev.098",
       "domain": "observation",
-      "summary": "Narration returns to Kiyotaka, who follows in the storm and finds Suzune unconscious near her lost keycard.",
+      "summary": "Kiyotaka follows in the storm after Ibuki's confrontation with Suzune, finds Suzune unconscious, and works to secure her and the leader card; his precise discovery and return steps unfold over subsequent pages.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          226
+          225,
+          226,
+          227
         ],
         "chapter": 6,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -2860,11 +2878,12 @@
     {
       "id": "y1v3.ev.103",
       "domain": "leadership",
-      "summary": "Class D reaches the final exam day with a provisional reported point balance and lingering uncertainty about leader guesses and bonus awards.",
+      "summary": "On the final exam day, Class D expects a positive remainder, and Hirata later states they have 125 test points left before the final leader-guess adjustments.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          240
+          240,
+          243
         ],
         "chapter": 7,
         "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
@@ -3003,10 +3022,11 @@
     {
       "id": "y1v3.ev.108",
       "domain": "persuasion",
-      "summary": "Chabashira again tries to frame Kiyotaka's choices using Icarus imagery, a rhetorical tactic with no observed power to compel him.",
+      "summary": "Chabashira argues with Kiyotaka using the earlier allegation about his family, then invokes the Icarus comparison; the claim about his father remains her report, not institutional proof.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
+          248,
           249
         ],
         "chapter": 7,
@@ -3224,10 +3244,11 @@
     {
       "id": "y1v3.ev.116",
       "domain": "politics",
-      "summary": "Ichinose and Kanzaki discuss reports that Sakayanagi is absent from Class A's island contingent; they cannot establish exactly how that affects Katsuragi's internal standing.",
+      "summary": "Ichinose and Kanzaki discuss Sakayanagi's absence from the Class A island contingent and cautiously infer her internal faction's influence; no proven exact leadership transfer follows from this talk.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
+          149,
           150
         ],
         "chapter": 5,
@@ -3252,10 +3273,11 @@
     {
       "id": "y1v3.ev.117",
       "domain": "strategy",
-      "summary": "In a retrospective exchange Kiyotaka alleges Kaneda entered Class B as a Class C spy in connection with Ryūen's information-gathering; the mechanism and what each Class B member knew remain unobserved.",
+      "summary": "Kaneda is directly seen acting within Class B's camp on page 124, while Kiyotaka only later alleges he had been inserted by Ryūen as a spy on page 255. Do not backdate that secret to Class B's knowledge.",
       "source": {
         "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
+          124,
           255
         ],
         "chapter": 7,

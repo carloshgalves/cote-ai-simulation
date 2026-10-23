@@ -51,7 +51,7 @@
     "7": 14
   },
   "cases": 35,
-  "open_audit": "RECORD_LEVEL_ASSISTANT_SEMANTIC_REVIEW_PENDING",
+  "open_audit": "INDIVIDUAL_SOURCE_REVIEW_IN_PROGRESS",
   "operator_release": "PENDING",
   "method": "Initial scene-relevance-filtered source-local paraphrases across the whole volume; narrator, dialogue claims, exact procedural disclosures and future-time separate. All claims unverified pending individually audited review.",
   "open_issues": [
@@ -65,5 +65,34 @@
   ],
   "behavioral_cases": 35,
   "coverage_status": "INITIAL_FULL_VOLUME_SCENE_CANDIDATES_EXTRACTED_REVIEW_PENDING",
-  "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v03.json"
+  "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v03.json",
+  "semantic_findings_identified": {
+    "source_corrections": 18,
+    "record_ids": [
+      "y1v3.ev.103",
+      "y1v3.ev.108",
+      "y1v3.ev.116",
+      "y1v3.ev.117",
+      "y1v3.ev.012",
+      "y1v3.ev.021",
+      "y1v3.ev.026",
+      "y1v3.ev.027",
+      "y1v3.ev.031",
+      "y1v3.ev.034",
+      "y1v3.ev.035",
+      "y1v3.ev.040",
+      "y1v3.ev.050",
+      "y1v3.ev.056",
+      "y1v3.ev.063",
+      "y1v3.ev.070",
+      "y1v3.ev.090",
+      "y1v3.ev.098"
+    ],
+    "critical": [
+      "Katsuragi deduction misassigned as Kiyotaka case",
+      "no-negative-balance does not cancel immediate disqualification",
+      "Kaneda's clandestine assignment is later disclosure",
+      "Kōenji retirement motivation unproved"
+    ]
+  }
 }

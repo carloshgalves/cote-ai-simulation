@@ -92,10 +92,10 @@
     "exposed_leader_forfeits_spot_bonus": true
   },
   "other_constraints": [
-    "No negative exam balance after reaching zero",
     "Assigned base camp cannot change without suitable justification",
     "Attendance twice daily at declared base",
-    "Retirement cannot be reversed"
+    "Retirement cannot be reversed",
+    "Island-test balance cannot become negative. This does not remove disqualification and private-point forfeiture rules."
   ],
   "source_evidence_refs": [
     "y1v3.ev.011",

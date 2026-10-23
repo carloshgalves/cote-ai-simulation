@@ -195,3 +195,12 @@ causal, repetição após closure posterior, receipt imutável, reopen e rejeiç
 do encoding incompatível. As suítes de input/admission/conformidade/SQLite e
 as regressões de ingresso R4–R6 e intenções arquivadas passaram localmente.
 Sua resolução também exige commit/push e evidência no finding original.
+
+**R19-4** identificou que o guard SQLite aceitava request para round futuro antes
+da entrada no cohort corrente. Quatro casos RED demonstraram futuro por instante
+e por ordinal, via RegisterDispatch e Append genérico. O guard agora exige
+elegibilidade alcançada no relógio autoritativo da transação. Os dois positivos
+mantêm a capability após reopen SQLite e aceitam resposta/replay. A fixture de
+revogação antiga semeia explicitamente o recibo legado já extinto; não usa mais a
+API pública para autorizar um request prematuro. A correção não retima resposta
+antiga nem inventa NoProposal.

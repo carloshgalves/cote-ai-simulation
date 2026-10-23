@@ -27,6 +27,14 @@ these archives require their own historical proof and fail closed while unavaila
 An earlier unrevoked request cannot
 be retimed or granted a new authorization by this migrator.
 
+New source dispatches must target a round whose eligibility has been reached at
+the authoritative current instant/next ordinal. The SQLite transaction enforces
+this for both RegisterDispatch and generic Append. Legacy revoked receipts may
+still be replayed and migrated as extinguished history; this compatibility rule
+does not reopen a request or permit a new premature response. The older-receipt
+test explicitly seeds such already-revoked legacy bytes and then exercises real
+clock advancement and the authorized replacement through public APIs.
+
 A slot's first dispatch has ordinal zero; each subsequent dispatch requires the
 preceding durable revocation. Revoked requests cannot also have a response. A
 response fills a slot once. Its child conditional-storage key is installed in the

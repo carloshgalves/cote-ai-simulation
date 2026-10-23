@@ -14,12 +14,14 @@ import (
 
 // Both positive and negative cases exercise real SQLite snapshot/lineage
 // authority, not a fabricated pending projection.
-func csfrv18GenesisRoundSource(t *testing.T)(*sqlite.Store,*inputledger.Ledger,*policy.Bundle,domain.ID,[]any){
+func csfrv18GenesisRoundSource(t *testing.T,workspacePath ...*string)(*sqlite.Store,*inputledger.Ledger,*policy.Bundle,domain.ID,[]any){
  t.Helper()
  ctx:=context.Background()
  b,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
  g:=validGenesis(t,b)
- store,err:=sqlite.Open(ctx,t.TempDir()+"/origin-round.db");if err!=nil{t.Fatal(err)}
+ path:=t.TempDir()+"/origin-round.db"
+ if len(workspacePath)>0{*workspacePath[0]=path}
+ store,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
  t.Cleanup(func(){store.Close()})
  if err:=store.PersistGenesis(ctx,g,b);err!=nil{t.Fatal(err)}
  if err:=store.BootstrapClock(ctx,g,b);err!=nil{t.Fatal(err)}
@@ -100,7 +102,7 @@ func TestCSFRV18ForkRejectsGenesisRoundWithRevokedDispatchHistory(t *testing.T){
  ctx:=context.Background()
  source,ledger,b,run,origin:=csfrv18GenesisRoundSource(t)
  state,err:=source.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
- due:=domain.EligibilityCoordinate{NotBeforeInstant:state.Instant+15}
+ due:=domain.EligibilityCoordinate{NotBeforeInstant:state.Instant}
  round,err:=ledger.DeclareRound(ctx,"genesis.schedule",[2]string{"school","a"},
   []string{"choice","reply"},due,origin,1,0,0,[]any{uint64(0)})
  if err!=nil{t.Fatal(err)}

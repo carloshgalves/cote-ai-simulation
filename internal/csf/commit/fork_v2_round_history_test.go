@@ -850,7 +850,8 @@ func TestCSFRV18R19RoundAndDispatchIntentionsResolveInFrozenArchive(t *testing.T
 
 func TestCSFRV18R19EarlierRevokedRequestDoesNotRenewAuthorization(t *testing.T) {
 	ctx := context.Background()
-	parent, ledger, v1, run, origin := csfrv18GenesisRoundSource(t)
+	var sourcePath string
+	parent, ledger, v1, run, origin := csfrv18GenesisRoundSource(t, &sourcePath)
 	state, err := parent.LoadClock(ctx, [32]byte(run))
 	if err != nil {
 		t.Fatal(err)
@@ -866,10 +867,41 @@ func TestCSFRV18R19EarlierRevokedRequestDoesNotRenewAuthorization(t *testing.T) 
 		t.Fatal(err)
 	}
 	old := r19Dispatch(t, v1, run, domain.ID(cid), round, "act", 0, 0, state.Instant)
-	if err := ledger.RegisterDispatch(ctx, old, inputledger.CycleBinding{ID: old.CycleID, Instant: old.EffectiveAt}); err != nil {
+	// Compatibility fixture for already-extinguished legacy authority. The
+	// public write paths must now reject premature future-round dispatches.
+	legacy, err := sql.Open("sqlite", sourcePath)
+	if err != nil {
 		t.Fatal(err)
 	}
-	if err := ledger.RevokeDispatch(ctx, round.ID, "act", 2, []any{uint64(0)}); err != nil {
+	defer legacy.Close()
+	legacyTx, err := legacy.BeginTx(ctx, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer legacyTx.Rollback()
+	raw, err := codec.CanonicalPayload([]any{old.ID[:], run[:], cid[:], round.ID[:], old.SlotID, uint64(0), []any{old.Actor[0], old.Actor[1]}, []any{int64(round.Eligibility.NotBeforeInstant), uint64(0)}, uint64(0), int64(old.EffectiveAt), old.RequestDigest[:]})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := legacyTx.ExecContext(ctx, "INSERT INTO input_ledger(id,canonical) VALUES(?,?)", old.ID[:], raw); err != nil {
+		t.Fatal(err)
+	}
+	revoked, err := codec.CanonicalPayload([]any{old.ID[:], uint64(2), []any{uint64(0)}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	revokedID := identity.OpaqueContentHash(revoked)
+	if _, err := legacyTx.ExecContext(ctx, "INSERT INTO input_ledger(id,canonical) VALUES(?,?)", revokedID[:], revoked); err != nil {
+		t.Fatal(err)
+	}
+	if err := legacyTx.Commit(); err != nil {
+		t.Fatal(err)
+	}
+	if err := legacy.Close(); err != nil {
+		t.Fatal(err)
+	}
+	ledger, err = inputledger.Open(ctx, run, v1, parent)
+	if err != nil {
 		t.Fatal(err)
 	}
 	base, err := parent.CreateSnapshotV1(ctx, [32]byte(run), v1, nil)

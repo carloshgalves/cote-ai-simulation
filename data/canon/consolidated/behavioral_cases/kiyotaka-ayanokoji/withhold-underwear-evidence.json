@@ -1,0 +1,40 @@
+{
+  "id": "y1v3.case.kiyotaka-ayanokoji.withhold-underwear-evidence",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "withhold underwear evidence",
+  "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
+  "observed_actions": "Conceals incriminating underwear during group inspection and speaks privately with Hirata afterward",
+  "observed_result": "Class does not immediately accuse Ike or Kiyotaka, but the underlying theft is unresolved",
+  "epistemic_limits": "Concealment may be ethically disputed and cannot be generalized as an evidence policy",
+  "source": {
+    "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      164,
+      166
+    ],
+    "chapter": 6,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kanji-ike",
+    "actor.haruki-yamauchi",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "risk_management",
+    "conflict"
+  ],
+  "information_available": "Only knowledge accessible to this actor at the cited story time; later disclosures may not retroactively become memory.",
+  "counterfactual_test": "Alter resources, health, opposition, incentives or information and allow failure; do not force observed outcome.",
+  "topics": [
+    "risk_management",
+    "conflict"
+  ],
+  "evidence_refs": [
+    "y1v3.ev.080",
+    "y1v3.ev.081"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

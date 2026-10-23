@@ -1,0 +1,37 @@
+{
+  "id": "y1v3.case.kikyo-kushida.propose-hidden-leader-horikita",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "propose hidden leader horikita",
+  "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
+  "observed_actions": "Suggests Horikita as secret leader on grounds of responsibility and persuades the group to consider her",
+  "observed_result": "Horikita agrees and receives personalized keycard",
+  "epistemic_limits": "Recommendation cannot be assumed safe against later spy activity",
+  "source": {
+    "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      66
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "exam"
+  ],
+  "information_available": "Only knowledge accessible to this actor at the cited story time; later disclosures may not retroactively become memory.",
+  "counterfactual_test": "Alter resources, health, opposition, incentives or information and allow failure; do not force observed outcome.",
+  "topics": [
+    "leadership",
+    "exam"
+  ],
+  "evidence_refs": [
+    "y1v3.ev.037"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

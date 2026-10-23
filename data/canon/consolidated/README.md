@@ -46,3 +46,16 @@ The individual assistant semantic review is complete for **91 evidence items and
 ## Volume 2 operator acceptance — 2026-10-23
 
 The operator explicitly authorized merging the completed 118-item assistant semantic review into the canonical **reference corpus**. This is not a false declaration that the operator independently checked all 118 PDF windows: individual `verified` flags remain false and later events remain disallowed as agent starting knowledge or guaranteed simulation outcomes.
+
+## Year 1 Volume 3 — draft extraction
+
+The 262-page operator-provided Seven Seas 2019 source is **not committed**; `sources/y1-v03.json` records its SHA-256. The initial seven-chapter source pass contains **117 atomic contextual records** in `evidence/y1-v03.json` and **35 primary-actor behavioral cases**, all consolidated into global character packs. **Six newly attested actors** have minimal or bounded global packs. The independent island examination is described only in `exams/y1-deserted-island.json` with its disclosed 300-point allowance, resource and leader rules, 8-hour spot timers, penalties, explicit results, and unknowns; it is **not an executable or completed migration**. Indexes provide direct actor/topic/case/page lookup. 
+
+**Assistant semantic review completed:** `audits/source-review-register-y1-v03.json` contains 117 evidence + 35 behavioral cases, each with source-window judgement and epistemic limits. All remain unverified, with runtime/agent-memory and operator-release gates closed. A retrospective reveal about Ayanokōji's leadership substitution is strictly later knowledge and cannot enter an earlier character memory or an alternate divergence.
+
+
+**Volume 3 adversarial check:** `audits/adversarial-review-y1-v03.json` records corrected attribution, leader/roll-call chronology, documented A/C alliance and report-only claims. This second pass was performed by the same assistant; it is **not** an independent human or separately commissioned reviewer. External review and operator release remain gates before merge. All items remain `verified: false`.
+
+## Year 1 Volume 3 — reference integration approval (2026-10-23)
+
+The operator expressly authorized merging the 152 assistant-reviewed items to the **canonical reference corpus** while informed that there had been no independent external reviewer. This is an explicit waiver for reference integration, not a fabricated independent review or individual human source certification: all `verified: false` flags and runtime knowledge/execution restrictions remain intact.

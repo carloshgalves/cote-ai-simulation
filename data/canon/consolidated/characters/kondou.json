@@ -4,7 +4,8 @@
   "display_name": "Kondou (given name unknown)",
   "modeling_tier": "MINIMAL_ENTITY",
   "source_coverage": [
-    "ln.y1.v02.sevenseas.en.operator-provided"
+    "ln.y1.v02.sevenseas.en.operator-provided",
+    "ln.y1.v03.sevenseas.en.2019.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -24,7 +25,8 @@
         "y1v2.ev.062",
         "y1v2.ev.070",
         "y1v2.ev.074",
-        "y1v2.ev.082"
+        "y1v2.ev.082",
+        "y1v3.ev.053"
       ]
     },
     "combat": {
@@ -51,7 +53,8 @@
       "context_evidence_refs": [
         "y1v2.ev.070",
         "y1v2.ev.072",
-        "y1v2.ev.074"
+        "y1v2.ev.074",
+        "y1v3.ev.053"
       ]
     },
     "persuasion": {

@@ -1,0 +1,36 @@
+{
+  "id": "y1v3.case.yosuke-hirata.welcome-rival-injured-student",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "welcome rival injured student",
+  "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
+  "observed_actions": "Hears Ibuki's injury report and advocates giving her protection despite Class C affiliation",
+  "observed_result": "Ibuki stays at Class D camp",
+  "epistemic_limits": "Ibuki's account may be deceptive; hospitality is not proof of belief correctness",
+  "source": {
+    "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      94
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.mio-ibuki"
+  ],
+  "capabilities_supported": [
+    "persuasion",
+    "social"
+  ],
+  "information_available": "Only knowledge accessible to this actor at the cited story time; later disclosures may not retroactively become memory.",
+  "counterfactual_test": "Alter resources, health, opposition, incentives or information and allow failure; do not force observed outcome.",
+  "topics": [
+    "persuasion",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v3.ev.048"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

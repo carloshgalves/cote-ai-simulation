@@ -4,11 +4,12 @@
   "display_name": "Kakeru Ryūen",
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v02.sevenseas.en.operator-provided"
+    "ln.y1.v02.sevenseas.en.operator-provided",
+    "ln.y1.v03.sevenseas.en.2019.operator-provided"
   ],
   "source_status": "NO_VOLUME_0_1_OBSERVED_EVIDENCE",
   "identity": {
-    "role_summary": "Year 1 Class C student whom Ichinose names as an alleged planner of the Sudō confrontation; no direct authorship established in the Volume 2 source.",
+    "role_summary": "Year 1 Class C student with observed costly island activities, intimidating intra-class conduct and contact with covert operatives; concealed agreements remain partially inferred.",
     "aliases": [
       "Kakeru Ryuen"
     ]
@@ -19,21 +20,86 @@
   },
   "domains": {
     "conflict": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v3.case.kakeru-ryuen.intimidate-ishizaki"
+      ],
       "context_evidence_refs": [
-        "y1v2.ev.081"
+        "y1v2.ev.081",
+        "y1v3.ev.053",
+        "y1v3.ev.055",
+        "y1v3.ev.056"
       ]
     },
     "strategy": {
+      "behavioral_case_refs": [
+        "y1v3.case.kakeru-ryuen.organize-luxury-spending"
+      ],
+      "context_evidence_refs": [
+        "y1v2.ev.081",
+        "y1v3.ev.053",
+        "y1v3.ev.054",
+        "y1v3.ev.073",
+        "y1v3.ev.096",
+        "y1v3.ev.097",
+        "y1v3.ev.113",
+        "y1v3.ev.117"
+      ]
+    },
+    "economy": {
+      "behavioral_case_refs": [
+        "y1v3.case.kakeru-ryuen.organize-luxury-spending"
+      ],
+      "context_evidence_refs": [
+        "y1v3.ev.054",
+        "y1v3.ev.073",
+        "y1v3.ev.105"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [
+        "y1v3.case.kakeru-ryuen.intimidate-ishizaki"
+      ],
+      "context_evidence_refs": [
+        "y1v3.ev.055"
+      ]
+    },
+    "observation": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v2.ev.081"
+        "y1v3.ev.056",
+        "y1v3.ev.096",
+        "y1v3.ev.117"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.097",
+        "y1v3.ev.113"
+      ]
+    },
+    "exam": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.105"
+      ]
+    },
+    "emotion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.106"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.106"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "No speculative Ryuen feats, identity X or Volume 2+ history; legacy YAML supplies no authorized direct Y1_START memory. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated.",
+  "semantic_audit_notes": "No speculative Ryuen feats, identity X or Volume 2+ history; legacy YAML supplies no authorized direct Y1_START memory. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

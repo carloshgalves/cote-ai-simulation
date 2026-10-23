@@ -1,0 +1,37 @@
+{
+  "id": "y1v3.case.kakeru-ryuen.organize-luxury-spending",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "organize luxury spending",
+  "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
+  "observed_actions": "Allows costly Class C resort-style spending in the first days of the island exam",
+  "observed_result": "Class C's visible camp has expensive amenities and little point saving",
+  "epistemic_limits": "Motivation and concealed contracts are not established solely by spending",
+  "source": {
+    "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      108
+    ],
+    "chapter": 3,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "economy",
+    "strategy"
+  ],
+  "information_available": "Only knowledge accessible to this actor at the cited story time; later disclosures may not retroactively become memory.",
+  "counterfactual_test": "Alter resources, health, opposition, incentives or information and allow failure; do not force observed outcome.",
+  "topics": [
+    "economy",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v3.ev.054"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

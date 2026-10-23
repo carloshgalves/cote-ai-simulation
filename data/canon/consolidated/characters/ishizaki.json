@@ -4,7 +4,8 @@
   "display_name": "Ishizaki (given name not specified by source)",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v02.sevenseas.en.operator-provided"
+    "ln.y1.v02.sevenseas.en.operator-provided",
+    "ln.y1.v03.sevenseas.en.2019.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -28,7 +29,8 @@
         "y1v2.ev.070",
         "y1v2.ev.073",
         "y1v2.ev.074",
-        "y1v2.ev.082"
+        "y1v2.ev.082",
+        "y1v3.ev.055"
       ]
     },
     "combat": {
@@ -78,11 +80,17 @@
         "y1v2.case.ishizaki.resist-initial-compromise"
       ],
       "context_evidence_refs": []
+    },
+    "leadership": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.055"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Only observed actions and accurately attributed assertions from Y1 Volume 2. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors.",
+  "semantic_audit_notes": "Only observed actions and accurately attributed assertions from Y1 Volume 2. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": true,
     "future_fate_unknown": true

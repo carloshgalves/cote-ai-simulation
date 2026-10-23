@@ -1,0 +1,3318 @@
+{
+  "schema_version": "consolidated-source-evidence-v1",
+  "source_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+  "records": [
+    {
+      "id": "y1v3.ev.001",
+      "domain": "emotion",
+      "summary": "Chabashira compares an unnamed boy to the story of Icarus and reflects on initiating a risky confrontation; the subject and time of that decision are not directly disclosed.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          10
+        ],
+        "chapter": 1,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "NARRATIVE_FLASHFORWARD_OR_UNDATED",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.002",
+      "domain": "strategy",
+      "summary": "Chabashira says she feels cornered and has already gambled by provoking the boy; this is her retrospective perception, not an externally verified threat.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          11
+        ],
+        "chapter": 1,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "NARRATIVE_FLASHFORWARD_OR_UNDATED",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.003",
+      "domain": "institution",
+      "summary": "A school database illustration gives Yamauchi low displayed academic and decision-making assessments with an interviewer warning of self-presentation bias; scores are profile labels, not observed causal capabilities.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          12
+        ],
+        "chapter": 1,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "DOCUMENT_IMAGE",
+      "story_time": "NARRATIVE_FLASHFORWARD_OR_UNDATED",
+      "mention_actor_ids": [
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "academic_reasoning"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.004",
+      "domain": "institution",
+      "summary": "After first-semester exams, the first years board a luxury ship for a two-week school-paid vacation and are initially told to expect one week at a private island lodge.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          13
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kanji-ike",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.005",
+      "domain": "conflict",
+      "summary": "Class A students insult and shove Class D students on the ship; Sudō confronts them verbally but does not start a fistfight.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          15
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.006",
+      "domain": "social",
+      "summary": "Hirata leaves leisure time to help another classmate, while fellow students speculate without proof about the state of his relationship with Karuizawa.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          16
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.007",
+      "domain": "social",
+      "summary": "Ike asks permission to use Kushida's first name, and Kushida reciprocates; this is a specific friendly exchange, not an established romantic relationship.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          17
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "persuasion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.008",
+      "domain": "observation",
+      "summary": "From the approaching ship, the school island is described as roughly half a square kilometre; its contours and circumnavigation later become clues to path locations.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          19
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "observation",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.009",
+      "domain": "observation",
+      "summary": "Students are directed to leave personal objects on board and surrender phones before landing; Suzune appears dishevelled and cold, while Kiyotaka only hypothesizes why.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          22
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "observation",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.010",
+      "domain": "institution",
+      "summary": "Chabashira oversees Class D roll call, and English teacher Mashima of Class A addresses the first-years at the beach.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          24
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "governance"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.011",
+      "domain": "institution",
+      "summary": "Mashima announces the island survival activity as the first special examination of the school year, running until August 7, rather than the expected leisure week.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          25
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "exam"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.012",
+      "domain": "resources",
+      "summary": "Mashima specifies the two tents, two flashlights, one box of matches, sunscreen and toothbrush provisions, with unrestricted sanitary items separately for students who need them.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          25,
+          26
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "resources",
+        "exam"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.013",
+      "domain": "exam",
+      "summary": "Mashima calls the test's theme freedom and states that 300 exam points are allotted to each class to purchase necessities through a manual.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          27
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "governance"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.014",
+      "domain": "economy",
+      "summary": "The school states that unspent island-test points become additional class points after the test; they are not ordinary private points spendable through the S-System.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          28
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "exam"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.015",
+      "domain": "exam",
+      "summary": "Mashima announces an absent Class A student and a 30-point illness-retirement penalty, leaving Class A with 270 initial island-test points.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          29
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "health"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.016",
+      "domain": "exam",
+      "summary": "Students must wear school-supplied sensor watches until the test ends; a removal without authorization attracts punishment.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          29
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "health"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.017",
+      "domain": "exam",
+      "summary": "Chabashira describes watches that track pulse, temperature, motion and GPS position, include an emergency alarm and can be replaced on failure.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          30
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "health"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.018",
+      "domain": "exam",
+      "summary": "The manual penalizes a student who retires because of serious illness or injury by 30 class test points; retirement is not reversible.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          31
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "health"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.019",
+      "domain": "exam",
+      "summary": "The island-test manual specifies a 20-point deduction for environmental pollution and 5 points per absent student at each 8 AM or 8 PM roll call.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          31
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.020",
+      "domain": "exam",
+      "summary": "Cross-class assault, robbery or property damage can disqualify the offender's class immediately and forfeit the offender's private points, if determined under the exam rule.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          31
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.021",
+      "domain": "exam",
+      "summary": "Chabashira confirms that island-exam test points stop at zero instead of becoming negative; she does not state that the disqualification rule can be avoided at zero.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          32,
+          33
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.022",
+      "domain": "exam",
+      "summary": "Once a base camp is declared, its location cannot change without suitable justification; student groups have twice-daily attendance at their base.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          33
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.023",
+      "domain": "resources",
+      "summary": "Chabashira demonstrates a supplied portable cardboard toilet and privacy enclosure, and Shinohara objects to its adequacy.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          34
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.shinohara"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "resources",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.024",
+      "domain": "conflict",
+      "summary": "Ike and Shinohara argue about privacy, hygiene and conserving points for island amenities; the dispute prevents an immediate consensus.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          35
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.shinohara"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.025",
+      "domain": "social",
+      "summary": "Class B teacher Hoshinomiya greets Chabashira warmly and attempts to stay near Class D's briefing; Chabashira objects to another teacher listening.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          36
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.chie-hoshinomiya",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.026",
+      "domain": "exam",
+      "summary": "Chabashira introduces special occupied spots, later specifying that each reservation lapses automatically after eight hours and awards a single provisional, non-spendable occupation bonus.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          38,
+          39
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.027",
+      "domain": "exam",
+      "summary": "The manual requires the nominated class leader's personal card to register a spot; trespassing on another class's still-occupied spot costs 50 island-test points.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          39,
+          40
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.028",
+      "domain": "exam",
+      "summary": "On day seven classes may name rival leaders: a correct guess gains 50 points and costs the target 50; a wrong guess costs the guesser 50, and an exposed leader loses accumulated occupation bonuses.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          40
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.029",
+      "domain": "exam",
+      "summary": "Every class must select a leader by the first day's roll call or have one assigned; changing leaders requires suitable justification.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          40
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "governance"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.030",
+      "domain": "social",
+      "summary": "Suzune admits the unfamiliar survival test exposes limits in her academic strengths, while outdoor tasks give Ike and Sudō opportunities to help.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          48
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.031",
+      "domain": "leadership",
+      "summary": "Hirata argues for purchasing one usable private temporary toilet despite conservation objections; after a class debate Yukimura concedes and the purchase becomes a collective choice.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          50,
+          51
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.shinohara",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.032",
+      "domain": "leadership",
+      "summary": "Kushida volunteers to search the forest for water and food, drawing helpers; Kiyotaka, Sakura and Kōenji form a separate exploratory group.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          52
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura",
+        "actor.rokusuke-koenji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.033",
+      "domain": "observation",
+      "summary": "Kōenji asks his companions to look around at a forest spot after noticing something of interest, but his precise intent is not yet established.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          57
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.034",
+      "domain": "observation",
+      "summary": "Kiyotaka and Sakura discover Class A's occupied cave and secretly witness Katsuragi and Yahiko discussing its strategic location and concealed leader information.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          59,
+          60
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.035",
+      "domain": "observation",
+      "summary": "While hidden nearby, Kiyotaka overhears Katsuragi explain that he spotted a forest path from the ship's prelanding circuit and inferred the cave's position. This deduction is Katsuragi's, not Kiyotaka's demonstrated feat.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          59,
+          60
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.katsuragi",
+        "actor.yahiko"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.036",
+      "domain": "observation",
+      "summary": "Ike and companions find a shaded river area potentially suitable as Class D's base, redirecting the larger group from the exposed beach.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          63
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.037",
+      "domain": "leadership",
+      "summary": "Kushida proposes Suzune as the designated leader, Hirata supports her and she accepts, receiving a keycard under the island-test rules.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          66
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "leadership",
+        "exam"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.038",
+      "domain": "resources",
+      "summary": "Ike directly drinks river water and recommends it, but Shinohara and others remain unconvinced that appearance proves it safe.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          67
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.shinohara"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "resources",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.039",
+      "domain": "social",
+      "summary": "Sudō calms a water dispute by acknowledging prior class trouble and suggesting boiling water rather than demanding immediate compliance.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          68
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.shinohara",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.040",
+      "domain": "leadership",
+      "summary": "The school-provided tents become a point of tension when female classmates occupy both, leaving boys to improvise and exposing unequal shelter needs.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          72,
+          73
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.shinohara",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "leadership",
+        "resources"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.041",
+      "domain": "social",
+      "summary": "Sakura volunteers to join Kiyotaka and Yamauchi for branch gathering even while visibly tired, instead of isolating herself.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          75
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "social",
+        "resources"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.042",
+      "domain": "observation",
+      "summary": "Kiyotaka stops Yamauchi after noticing a female student with a swollen face near the forest path.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          78
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.haruki-yamauchi",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.043",
+      "domain": "conflict",
+      "summary": "Ibuki says she belongs to Class C and refuses immediate help; classmates offer support despite her rival affiliation.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          80
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.mio-ibuki",
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.044",
+      "domain": "resources",
+      "summary": "Yamauchi fails repeatedly to ignite wet tinder with limited matches and becomes anxious about exhausting the box.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          83
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.haruki-yamauchi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "resources",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.045",
+      "domain": "resources",
+      "summary": "Ike selects drier smaller fuel and builds a working fire, demonstrating practical experience from earlier family camping.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          85
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "resources",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.046",
+      "domain": "social",
+      "summary": "Ike apologizes to Shinohara for dismissing privacy concerns, and she apologizes for refusing to consider any river-water option.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          88
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.shinohara"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.047",
+      "domain": "leadership",
+      "summary": "Hirata proposes an estimated 180-point spending plan and a target of 120 remaining points, distinguishing a forecast from a guaranteed result.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          89
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "leadership",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.048",
+      "domain": "persuasion",
+      "summary": "Hirata asks Ibuki about her injury, believes her stated expulsion story enough to invite her to stay and promises help.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          94
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.049",
+      "domain": "social",
+      "summary": "Kushida and friends divide four portions of food and water among five people so that Ibuki can receive a shared ration (p.96); resource-sharing is demonstrated but trust in the newcomer is not thereby validated.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          95,
+          96
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "social",
+        "resources"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.050",
+      "domain": "health",
+      "summary": "Chabashira tells Class D that Kōenji was taken back to the ship on reported poor-health grounds and a 30-point retirement penalty applies; whether Kōenji feigned illness is not established.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          97,
+          98
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "health",
+        "exam"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.051",
+      "domain": "leadership",
+      "summary": "Kiyotaka gets up early and privately checks Ibuki's bag, finding an unused school-rental digital camera; then meets Hirata, who describes poor sleep, point anxiety and conflicting class goals.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          100,
+          101,
+          102
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.052",
+      "domain": "strategy",
+      "summary": "Kanzaki visits near Class D's camp, examines its investments and encounters Kiyotaka; motives attributed to this reconnaissance remain partly Kiyotaka's conjecture.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          103
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.ryuji-kanzaki",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.053",
+      "domain": "conflict",
+      "summary": "Komiya and Kondou, not Ishizaki, arrive at Class D's base to deliver Ryūen's invitation to enjoy Class C's beach amenities, provoking Ike for several minutes.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          105,
+          106
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.komiya",
+        "actor.kondou",
+        "actor.kakeru-ryuen",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.054",
+      "domain": "economy",
+      "summary": "Ryūen oversees lavish Class C beach amenities and appears to be spending its island allowance rather than preserving it.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          108
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.055",
+      "domain": "leadership",
+      "summary": "Ryūen throws back water that Ishizaki brought, scolding him for its temperature, demonstrating intimidation within his class.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          112
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.ishizaki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.056",
+      "domain": "conflict",
+      "summary": "Ryūen acknowledges Ibuki as a Class C member and alludes to striking her as punishment for disobedience; his speech and gesture are not independent documentation of the initial injury.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          112,
+          113
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.057",
+      "domain": "strategy",
+      "summary": "Kiyotaka notes the absence of many Class C students and entertains multiple explanations for Ryūen's extravagant apparent abandonment of points.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          115
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.058",
+      "domain": "strategy",
+      "summary": "Class B uses a forest camp and improvised equipment; Ichinose welcomes the visitors without surrendering confidential class information.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          117
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "strategy",
+        "resources"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.059",
+      "domain": "leadership",
+      "summary": "Ichinose explains that Class B delayed using the well until it had been tested, then uses this water for its shared welfare arrangements; the text does not establish that Ichinose personally performed every water test.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          120,
+          121
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.060",
+      "domain": "resources",
+      "summary": "Ichinose says Class B conserves and reuses supplied sanitation materials without unnecessary waste, coordinating shared welfare.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          122
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "resources",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.061",
+      "domain": "strategy",
+      "summary": "Horikita and Ichinose discuss reciprocal information sharing and a tentative agreement not to guess each other's island-test leaders; the scope is bounded to this exam and is not a permanent cross-class alliance.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          120,
+          122
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.062",
+      "domain": "strategy",
+      "summary": "Kiyotaka and Suzune encounter the guarded cave occupied by Class A and question whether approaching its entrance breaks the occupation rules.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          126
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "strategy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.063",
+      "domain": "conflict",
+      "summary": "Yahiko rejects Horikita's attempt to inspect occupied Class A cave, and Katsuragi intervenes to argue that mutually respecting spot occupancy reduces retaliatory interference.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          127,
+          128,
+          129
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.yahiko",
+        "actor.katsuragi",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.064",
+      "domain": "social",
+      "summary": "Sakura follows Kiyotaka on a forest walk, nervously seeking time together, and their interaction includes repeated requests to slow down.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          131
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "motivation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.065",
+      "domain": "conflict",
+      "summary": "Sakura tells Kiyotaka the former camera-shop clerk resigned; this is a report, not independent school employment documentation.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          133
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.066",
+      "domain": "observation",
+      "summary": "Sakura spots edible-looking cultivated corn in the forest, giving the pair a new potential food source; its nutritional safety and ownership require independent checking.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          139
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "observation",
+        "resources"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.067",
+      "domain": "strategy",
+      "summary": "Kiyotaka improvises a carrying bag from his shirt and plans to report a harvest site to Class D rather than hoard the find.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          140
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "strategy",
+        "resources"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.068",
+      "domain": "strategy",
+      "summary": "Katsuragi encounters Kiyotaka and Sakura near the cultivated corn, restrains Yahiko's hostility and warns against dangerous solo travel; he offers bounded assistance, but does not know Class D's whole plan.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          140,
+          141
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.yahiko",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.069",
+      "domain": "resources",
+      "summary": "On day four Class D secures fish and harvested corn, easing earlier food scarcity and easing class tension.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          144
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "resources",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.070",
+      "domain": "observation",
+      "summary": "Kiyotaka surveys an island watchtower and nearby potential occupied spots, recording rough observations on a hand-drawn map; deductions about his complete surveillance coverage remain limited.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          145,
+          146
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.071",
+      "domain": "risk_management",
+      "summary": "Two Class A boys stop Kiyotaka, search his belongings and seize his map and pen; he resists but does not escalate to physical combat.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          147
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "risk_management",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.072",
+      "domain": "economy",
+      "summary": "Class A students propose a points-for-information arrangement with a possible written promise after phones are returned; no completed transfer is shown.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          148
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.073",
+      "domain": "strategy",
+      "summary": "Ryūen's Class C beach camp appears mostly deserted after its costly celebrations; the narrator still cannot prove why the group dispersed.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          149
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "strategy",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.074",
+      "domain": "strategy",
+      "summary": "Ichinose and Kanzaki discuss uncertain leadership within Class A and whether Sakayanagi's absence changes Katsuragi's influence.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          150
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.ryuji-kanzaki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.075",
+      "domain": "institution",
+      "summary": "In a pre-island flashback Chabashira summons Kiyotaka to a private room after the term closing ceremony.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          153
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M04_END_FLASHBACK",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.076",
+      "domain": "institution",
+      "summary": "Chabashira says a man has contacted the school to arrange Kiyotaka's expulsion; the man's authority and intentions are not independently confirmed here.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          155
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M04_END_FLASHBACK",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.077",
+      "domain": "persuasion",
+      "summary": "Chabashira pressures Kiyotaka by linking cooperation and a Class A goal to her knowledge of his background; her threat remains a teacher's claim.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          156
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M04_END_FLASHBACK",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.078",
+      "domain": "conflict",
+      "summary": "Girls report the theft of Karuizawa's underwear, request a search of boys' possessions and become suspicious of classmates without proof of a culprit.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          159
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.shinohara",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.079",
+      "domain": "conflict",
+      "summary": "The stolen underwear is found inside Ike's bag, but Ike denies placing it there; its presence does not independently identify the thief.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          163
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.080",
+      "domain": "risk_management",
+      "summary": "Kiyotaka takes possession of the discovered underwear before a public search, creating a concealment that should not be treated as an official exoneration.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          164
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "risk_management",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.081",
+      "domain": "leadership",
+      "summary": "Hirata discovers Kiyotaka holding the underwear during a search but privately withholds the accusation; he later seeks the underlying facts.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          166
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.082",
+      "domain": "conflict",
+      "summary": "Karuizawa and Horikita clash over imposing separate facilities and collective suspicion on boys; class trust deteriorates.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          173
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "conflict",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.083",
+      "domain": "social",
+      "summary": "Sakura speaks up on Kiyotaka's behalf in a heated meeting, but Karuizawa targets her with humiliating responses and Sakura withdraws.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          175
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.084",
+      "domain": "institution",
+      "summary": "After the underwear incident, Class D separates male and female camp arrangements, increasing resource and trust costs.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          179
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.085",
+      "domain": "observation",
+      "summary": "Kiyotaka privately infers from Ibuki's behavior that she may have planted the underwear in Ike's bag; an inference is not yet an admitted fact.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          183
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.086",
+      "domain": "resources",
+      "summary": "Kiyotaka and Suzune inspect girls' accommodations and find purchased battery fans, contradicting claims of uniformly strict austerity.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          185
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "resources",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.087",
+      "domain": "health",
+      "summary": "Suzune is visibly ill and is urged to rest; her physical condition affects her ability to protect the leader's keycard.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          192
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "health",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.088",
+      "domain": "combat",
+      "summary": "Suzune throws Yamauchi during a staged approach to test her physical reaction while she is already unwell.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          200
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.089",
+      "domain": "strategy",
+      "summary": "Suzune tells Kiyotaka that her island-test leader keycard has gone missing and that she trusts him enough to ask for help.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          203
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "strategy",
+        "health"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.090",
+      "domain": "resources",
+      "summary": "The island examination manual is found burning near the camp toilet. Neither Kiyotaka nor Horikita directly witnesses who ignited it.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          206,
+          207
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "resources",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.091",
+      "domain": "emotion",
+      "summary": "Hirata momentarily freezes and cannot coordinate the camp during worsening weather and disputes, revealing a situational limit to his leadership.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          209
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.092",
+      "domain": "observation",
+      "summary": "Ill Suzune follows Ibuki into the forest during heavy rain, suspecting her involvement and pressing questions about the underwear, fire and missing card.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          213
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.093",
+      "domain": "combat",
+      "summary": "Ibuki strikes at Suzune when Suzune attempts to inspect her bag; Suzune evades a kick despite severe fever.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          217
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.094",
+      "domain": "combat",
+      "summary": "Suzune fights Ibuki defensively but deteriorating health limits her stamina and she loses her ability to continue safely.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          218
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.095",
+      "domain": "strategy",
+      "summary": "Ibuki's first-person narration confirms her covert assignment, a rental digital camera that malfunctioned, her use of a transceiver, and her staged slap by Ryūen to make her exclusion from Class C believable. She later returns the leader card to unconscious Suzune.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          221,
+          222,
+          224
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.mio-ibuki",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.096",
+      "domain": "strategy",
+      "summary": "Ibuki hands Suzune's personalized leader card to Ryūen for inspection and then presents it to Class A student Katsuragi, establishing both men's direct knowledge by that meeting.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          221,
+          222
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.mio-ibuki",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.097",
+      "domain": "strategy",
+      "summary": "Katsuragi directly examines the leader card and accepts an alliance proposal with Ryūen after negotiation and factional pressure. Ibuki hears that an alliance was accepted, but the contract's exact private terms are not revealed to the reader.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          222,
+          223,
+          224
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.mio-ibuki",
+        "actor.katsuragi",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.098",
+      "domain": "observation",
+      "summary": "Kiyotaka follows in the storm after Ibuki's confrontation with Suzune, finds Suzune unconscious, and works to secure her and the leader card; his precise discovery and return steps unfold over subsequent pages.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          225,
+          226,
+          227
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.099",
+      "domain": "risk_management",
+      "summary": "While carrying a feverish Suzune down a wet slope, Kiyotaka slips, protects her during a fall, and resumes his attempt to reach medical support.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          232
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "risk_management",
+        "health"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.100",
+      "domain": "ethics",
+      "summary": "Kiyotaka internally describes others as tools and winning as his overriding aim; this is a private self-description, not the knowledge of Suzune or other pupils.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          235
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "ethics",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.101",
+      "domain": "health",
+      "summary": "At about 7:58 PM Kiyotaka carries unconscious Suzune aboard for emergency medical retirement, turns over her secret leader card, and is nevertheless counted as absent at the class's 8 PM camp roll call.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          237
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "health",
+        "exam"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.102",
+      "domain": "economy",
+      "summary": "Kiyotaka calculates a 30-point retirement deduction and a separate 5-point missed-roll-call cost for himself; these are in-scene expectations.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          238
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "exam"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.103",
+      "domain": "leadership",
+      "summary": "On the final exam day, Class D expects a positive remainder, and Hirata later states they have 125 test points left before the final leader-guess adjustments.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          240,
+          243
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "leadership",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.104",
+      "domain": "exam",
+      "summary": "Mashima publicly states the island exam has concluded and that final results will be announced without questioning the decisions.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          243
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.105",
+      "domain": "exam",
+      "summary": "Final announced island-test scores are Class C zero, Class A 120, Class B 140 and Class D 225, with D first and C last.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          244
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.mashima",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.106",
+      "domain": "emotion",
+      "summary": "Class D celebrates the surprise outcome; Ryūen is surprised his stated leader-identification strategy did not produce the expected result.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          245
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.yosuke-hirata",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.107",
+      "domain": "conflict",
+      "summary": "Chabashira reports Kiyotaka's father expected him to seek expulsion eventually; her statement does not grant the father direct runtime authority.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          248
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "conflict",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.108",
+      "domain": "persuasion",
+      "summary": "Chabashira argues with Kiyotaka using the earlier allegation about his family, then invokes the Icarus comparison; the claim about his father remains her report, not institutional proof.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          248,
+          249
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.109",
+      "domain": "observation",
+      "summary": "Kiyotaka retrospectively explains how he detected Class A's cave card exposure and inferred that internal mistrust constrained Katsuragi.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          251
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.110",
+      "domain": "strategy",
+      "summary": "Kiyotaka reveals that after Suzune's medical retirement he was appointed the new Class D leader and shows a card bearing his own name.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          253
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "strategy",
+        "exam"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.111",
+      "domain": "exam",
+      "summary": "Kiyotaka argues medical retirement qualifies as suitable justification for a leader replacement, which explains why guesses naming Suzune no longer succeed.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          254
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "governance"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.112",
+      "domain": "observation",
+      "summary": "Kiyotaka says he inferred Ibuki's espionage from her behavior and from the discovery of another suspect student in Class B, but not every inferred detail is independently demonstrated.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          255
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.113",
+      "domain": "strategy",
+      "summary": "Kiyotaka explicitly labels the inferred economic terms of the A/C cooperation as intuition drawn from final scores; the existence of a Katsuragi–Ryūen alliance is separately observed in Ibuki's earlier viewpoint.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          256,
+          257
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INTERPRETATION",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kakeru-ryuen",
+        "actor.katsuragi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "politics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.114",
+      "domain": "strategy",
+      "summary": "Kiyotaka privately credits his class tactics to Chabashira's earlier pressure and declines to reveal his personal motivation to Suzune.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          257
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.115",
+      "domain": "persuasion",
+      "summary": "Kiyotaka agrees to help Suzune target Class A on condition she stop investigating his past; she accepts with a handshake.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          258
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.116",
+      "domain": "politics",
+      "summary": "Ichinose and Kanzaki discuss Sakayanagi's absence from the Class A island contingent and cautiously infer her internal faction's influence; no proven exact leadership transfer follows from this talk.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          149,
+          150
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.honami-ichinose",
+        "actor.ryuji-kanzaki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "politics",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.117",
+      "domain": "strategy",
+      "summary": "Kaneda is directly seen acting within Class B's camp on page 124, while Kiyotaka only later alleges he had been inserted by Ryūen as a spy on page 255. Do not backdate that secret to Class B's knowledge.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          124,
+          255
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_AFTER_EXAM_RESULTS",
+      "mention_actor_ids": [
+        "actor.kaneda",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kakeru-ryuen",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.katsuragi",
+  "display_name": "Katsuragi (given name unknown)",
+  "modeling_tier": "FULL_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "Class A student defending exclusive ownership of a cave and negotiating school competition",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "strategy": {
+      "behavioral_case_refs": [
+        "y1v3.case.katsuragi.defend-class-a-exclusive-cave",
+        "y1v3.case.katsuragi.infer-cave-route-from-cruise"
+      ],
+      "context_evidence_refs": [
+        "y1v3.ev.035",
+        "y1v3.ev.062",
+        "y1v3.ev.063",
+        "y1v3.ev.068",
+        "y1v3.ev.097",
+        "y1v3.ev.113"
+      ]
+    },
+    "institution": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.062"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [
+        "y1v3.case.katsuragi.defend-class-a-exclusive-cave"
+      ],
+      "context_evidence_refs": [
+        "y1v3.ev.063"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [
+        "y1v3.case.katsuragi.infer-cave-route-from-cruise"
+      ],
+      "context_evidence_refs": [
+        "y1v3.ev.035",
+        "y1v3.ev.068"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.097",
+        "y1v3.ev.113"
+      ]
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": false,
+  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown.",
+  "uncertainties": {
+    "identity_hypothesis_not_confirmed": true,
+    "future_fate_unknown": true
+  },
+  "generation_policy": "One global actor across volumes, not volume-scoped",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

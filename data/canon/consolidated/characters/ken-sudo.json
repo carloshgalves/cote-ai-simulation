@@ -5,7 +5,8 @@
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
-    "ln.y1.v02.sevenseas.en.operator-provided"
+    "ln.y1.v02.sevenseas.en.operator-provided",
+    "ln.y1.v03.sevenseas.en.2019.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -23,7 +24,9 @@
         "y1v1.case.d.soften-after-rescue",
         "y1v1.case.ken-sudo.prioritize-study-over-basketball",
         "y1v2.case.ken-sudo.admit-conduct-consequences",
-        "y1v2.case.ken-sudo.request-confidential-help"
+        "y1v2.case.ken-sudo.request-confidential-help",
+        "y1v3.case.ken-sudo.propose-safe-water-compromise",
+        "y1v3.case.ken-sudo.restrain-on-ship"
       ],
       "context_evidence_refs": [
         "y1v1.ev.017",
@@ -46,7 +49,11 @@
         "y1v2.ev.009",
         "y1v2.ev.011",
         "y1v2.ev.017",
-        "y1v2.ev.085"
+        "y1v2.ev.085",
+        "y1v3.ev.005",
+        "y1v3.ev.030",
+        "y1v3.ev.039",
+        "y1v3.ev.106"
       ]
     },
     "leadership": {
@@ -62,7 +69,8 @@
         "y1v1.ev.092",
         "y1v1.ev.093",
         "y1v1.ev.100",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v3.ev.036"
       ]
     },
     "economy": {
@@ -73,7 +81,8 @@
         "y1v1.ev.126",
         "y1v2.ev.005",
         "y1v2.ev.011",
-        "y1v2.ev.083"
+        "y1v2.ev.083",
+        "y1v3.ev.004"
       ]
     },
     "combat": {
@@ -114,7 +123,8 @@
         "y1v2.ev.015",
         "y1v2.ev.018",
         "y1v2.ev.083",
-        "y1v2.ev.084"
+        "y1v2.ev.084",
+        "y1v3.ev.004"
       ]
     },
     "strategy": {
@@ -163,7 +173,8 @@
         "y1v1.ev.079",
         "y1v1.ev.102",
         "y1v2.ev.032",
-        "y1v2.ev.085"
+        "y1v2.ev.085",
+        "y1v3.ev.106"
       ]
     },
     "ethics": {
@@ -176,7 +187,9 @@
     },
     "conflict": {
       "behavioral_case_refs": [
-        "y1v2.case.ken-sudo.three-on-one-fight"
+        "y1v2.case.ken-sudo.three-on-one-fight",
+        "y1v3.case.ken-sudo.propose-safe-water-compromise",
+        "y1v3.case.ken-sudo.restrain-on-ship"
       ],
       "context_evidence_refs": [
         "y1v1.ev.091",
@@ -186,7 +199,9 @@
         "y1v2.ev.015",
         "y1v2.ev.016",
         "y1v2.ev.018",
-        "y1v2.ev.032"
+        "y1v2.ev.032",
+        "y1v3.ev.005",
+        "y1v3.ev.039"
       ]
     },
     "exam": {
@@ -214,13 +229,15 @@
     "observation": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v2.ev.002"
+        "y1v2.ev.002",
+        "y1v3.ev.030",
+        "y1v3.ev.036"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

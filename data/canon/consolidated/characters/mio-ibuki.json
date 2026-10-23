@@ -1,0 +1,115 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.mio-ibuki",
+  "display_name": "Mio Ibuki",
+  "modeling_tier": "FULL_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "Class C student whose covert island actions are revealed through her own viewpoint",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "observation": {
+      "behavioral_case_refs": [
+        "y1v3.case.mio-ibuki.undercover-leader-card-delivery"
+      ],
+      "context_evidence_refs": [
+        "y1v3.ev.042",
+        "y1v3.ev.056",
+        "y1v3.ev.085",
+        "y1v3.ev.092",
+        "y1v3.ev.096",
+        "y1v3.ev.098",
+        "y1v3.ev.112"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.042",
+        "y1v3.ev.043",
+        "y1v3.ev.048",
+        "y1v3.ev.049"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [
+        "y1v3.case.mio-ibuki.fight-feverish-suzune"
+      ],
+      "context_evidence_refs": [
+        "y1v3.ev.043",
+        "y1v3.ev.056",
+        "y1v3.ev.093",
+        "y1v3.ev.095"
+      ]
+    },
+    "persuasion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.048"
+      ]
+    },
+    "resources": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.049"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [
+        "y1v3.case.mio-ibuki.undercover-leader-card-delivery"
+      ],
+      "context_evidence_refs": [
+        "y1v3.ev.085",
+        "y1v3.ev.092",
+        "y1v3.ev.095",
+        "y1v3.ev.096",
+        "y1v3.ev.097",
+        "y1v3.ev.112"
+      ]
+    },
+    "combat": {
+      "behavioral_case_refs": [
+        "y1v3.case.mio-ibuki.fight-feverish-suzune"
+      ],
+      "context_evidence_refs": [
+        "y1v3.ev.093",
+        "y1v3.ev.094"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.094",
+        "y1v3.ev.098"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.097"
+      ]
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": false,
+  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown.",
+  "uncertainties": {
+    "identity_hypothesis_not_confirmed": true,
+    "future_fate_unknown": true
+  },
+  "generation_policy": "One global actor across volumes, not volume-scoped",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

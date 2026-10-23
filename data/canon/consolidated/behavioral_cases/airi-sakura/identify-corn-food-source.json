@@ -1,0 +1,36 @@
+{
+  "id": "y1v3.case.airi-sakura.identify-corn-food-source",
+  "actor_id": "actor.airi-sakura",
+  "primary_actor_id": "actor.airi-sakura",
+  "title": "identify corn food source",
+  "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
+  "observed_actions": "Notices a cultivated corn patch while exploring with Kiyotaka",
+  "observed_result": "Pair gathers some corn and reports the potential food supply",
+  "epistemic_limits": "Observing plants does not confer expertise about all edible vegetation",
+  "source": {
+    "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      139
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "observation",
+    "resources"
+  ],
+  "information_available": "Only knowledge accessible to this actor at the cited story time; later disclosures may not retroactively become memory.",
+  "counterfactual_test": "Alter resources, health, opposition, incentives or information and allow failure; do not force observed outcome.",
+  "topics": [
+    "observation",
+    "resources"
+  ],
+  "evidence_refs": [
+    "y1v3.ev.066"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

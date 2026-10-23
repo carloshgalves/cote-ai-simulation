@@ -2,10 +2,11 @@
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.kanji-ike",
   "display_name": "Kanji Ike",
-  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
-    "ln.y1.v02.sevenseas.en.operator-provided"
+    "ln.y1.v02.sevenseas.en.operator-provided",
+    "ln.y1.v03.sevenseas.en.2019.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -19,7 +20,8 @@
   "domains": {
     "social": {
       "behavioral_case_refs": [
-        "y1v1.case.i.sarcasm-misread"
+        "y1v1.case.i.sarcasm-misread",
+        "y1v3.case.kanji-ike.apologize-to-shinohara"
       ],
       "context_evidence_refs": [
         "y1v1.ev.018",
@@ -31,13 +33,19 @@
         "y1v1.ev.115",
         "y1v1.ev.116",
         "y1v1.ev.117",
-        "y1v1.ev.134"
+        "y1v1.ev.134",
+        "y1v3.ev.007",
+        "y1v3.ev.030",
+        "y1v3.ev.039",
+        "y1v3.ev.046"
       ]
     },
     "ethics": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v1.ev.034"
+        "y1v1.ev.034",
+        "y1v3.ev.024",
+        "y1v3.ev.031"
       ]
     },
     "academic_reasoning": {
@@ -54,7 +62,10 @@
       ]
     },
     "leadership": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v3.case.kanji-ike.build-campfire",
+        "y1v3.case.kanji-ike.locate-river-camp"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.073",
         "y1v1.ev.078",
@@ -62,20 +73,29 @@
         "y1v1.ev.088",
         "y1v1.ev.093",
         "y1v1.ev.100",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v3.ev.031",
+        "y1v3.ev.036",
+        "y1v3.ev.045",
+        "y1v3.ev.069",
+        "y1v3.ev.103"
       ]
     },
     "strategy": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.073",
-        "y1v1.ev.086"
+        "y1v1.ev.086",
+        "y1v3.ev.053"
       ]
     },
     "emotion": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v3.case.kanji-ike.apologize-to-shinohara"
+      ],
       "context_evidence_refs": [
-        "y1v1.ev.102"
+        "y1v1.ev.102",
+        "y1v3.ev.046"
       ]
     },
     "economy": {
@@ -83,14 +103,21 @@
       "context_evidence_refs": [
         "y1v1.ev.113",
         "y1v2.ev.006",
-        "y1v2.ev.026"
+        "y1v2.ev.026",
+        "y1v3.ev.004",
+        "y1v3.ev.103"
       ]
     },
     "observation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v3.case.kanji-ike.locate-river-camp"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.115",
-        "y1v1.ev.117"
+        "y1v1.ev.117",
+        "y1v3.ev.030",
+        "y1v3.ev.036",
+        "y1v3.ev.079"
       ]
     },
     "exam": {
@@ -109,13 +136,48 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v2.ev.006",
-        "y1v2.ev.026"
+        "y1v2.ev.026",
+        "y1v3.ev.004"
+      ]
+    },
+    "persuasion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.007"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.024",
+        "y1v3.ev.039",
+        "y1v3.ev.053",
+        "y1v3.ev.079",
+        "y1v3.ev.080"
+      ]
+    },
+    "resources": {
+      "behavioral_case_refs": [
+        "y1v3.case.kanji-ike.build-campfire",
+        "y1v3.case.kanji-ike.locate-river-camp"
+      ],
+      "context_evidence_refs": [
+        "y1v3.ev.038",
+        "y1v3.ev.045",
+        "y1v3.ev.069"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v3.ev.038",
+        "y1v3.ev.080"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

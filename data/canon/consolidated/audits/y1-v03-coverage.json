@@ -1,0 +1,118 @@
+{
+  "schema_version": "volume-coverage-v1",
+  "source": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+  "pdf_pages": 262,
+  "chapters": [
+    {
+      "chapter": 1,
+      "start_pdf_page": 10,
+      "end_pdf_page": 12
+    },
+    {
+      "chapter": 2,
+      "start_pdf_page": 13,
+      "end_pdf_page": 99
+    },
+    {
+      "chapter": 3,
+      "start_pdf_page": 100,
+      "end_pdf_page": 130
+    },
+    {
+      "chapter": 4,
+      "start_pdf_page": 131,
+      "end_pdf_page": 143
+    },
+    {
+      "chapter": 5,
+      "start_pdf_page": 144,
+      "end_pdf_page": 158
+    },
+    {
+      "chapter": 6,
+      "start_pdf_page": 159,
+      "end_pdf_page": 239
+    },
+    {
+      "chapter": 7,
+      "start_pdf_page": 240,
+      "end_pdf_page": 258
+    }
+  ],
+  "chapters_assessed": 7,
+  "records": 117,
+  "chapter_evidence_counts": {
+    "1": 3,
+    "2": 47,
+    "3": 13,
+    "4": 5,
+    "5": 10,
+    "6": 25,
+    "7": 14
+  },
+  "cases": 35,
+  "open_audit": "ADVERSARIAL_CHECKS_PENDING_EXTERNAL_REVIEW_AND_OPERATOR_RELEASE",
+  "operator_release": "APPROVED_REFERENCE_MERGE_WITH_INDEPENDENT_REVIEW_WAIVER",
+  "method": "Initial scene-relevance-filtered source-local paraphrases across the whole volume; narrator, dialogue claims, exact procedural disclosures and future-time separate. All claims unverified pending individually audited review.",
+  "open_issues": [
+    "Individual records remain verified:false; no operator line-by-line source attestation",
+    "No automatic agent-memory/runtime/executable exam promotion"
+  ],
+  "behavioral_cases": 35,
+  "coverage_status": "INDIVIDUAL_ASSISTANT_SEMANTIC_REVIEW_COMPLETE_RELEASE_PENDING",
+  "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v03.json",
+  "semantic_findings_identified": {
+    "source_corrections": 27,
+    "record_ids": [
+      "y1v3.ev.103",
+      "y1v3.ev.108",
+      "y1v3.ev.116",
+      "y1v3.ev.117",
+      "y1v3.ev.012",
+      "y1v3.ev.021",
+      "y1v3.ev.026",
+      "y1v3.ev.027",
+      "y1v3.ev.031",
+      "y1v3.ev.034",
+      "y1v3.ev.035",
+      "y1v3.ev.040",
+      "y1v3.ev.050",
+      "y1v3.ev.056",
+      "y1v3.ev.063",
+      "y1v3.ev.070",
+      "y1v3.ev.090",
+      "y1v3.ev.098",
+      "y1v3.ev.113",
+      "y1v3.ev.051",
+      "y1v3.ev.053",
+      "y1v3.ev.059",
+      "y1v3.ev.068",
+      "y1v3.ev.095",
+      "y1v3.ev.096",
+      "y1v3.ev.097",
+      "y1v3.ev.061"
+    ],
+    "critical": [
+      "Katsuragi deduction misassigned as Kiyotaka case",
+      "no-negative-balance does not cancel immediate disqualification",
+      "Kaneda's clandestine assignment is later disclosure",
+      "Kōenji retirement motivation unproved",
+      "Class C messengers were Komiya and Kondou (not Ishizaki)",
+      "Alliance existence independently confirmed by Ibuki's viewpoint; only precise deal terms inferred",
+      "Ibuki's initial slap was staged, camera failed, leader evidence verified by Katsuragi",
+      "Do not credit Ichinose with personally performing all well safety tests",
+      "Horikita–Ichinose pact explicitly discusses no rival leader guesses on p122, rather than p124 speculation"
+    ]
+  },
+  "semantic_review": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE",
+  "case_status": "ASSISTANT_CASE_REVIEW_COMPLETE",
+  "final_semantic_review": {
+    "assistant_reviewed_evidence": 117,
+    "assistant_reviewed_cases": 35,
+    "assistant_total": 152,
+    "human_individual_verified": 0,
+    "external_independent_review": "WAIVED_BY_OPERATOR_NOT_PERFORMED",
+    "completed_on": "2026-10-23",
+    "review_register": "data/canon/consolidated/audits/source-review-register-y1-v03.json"
+  }
+}

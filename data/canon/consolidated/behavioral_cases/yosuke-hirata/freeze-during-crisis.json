@@ -1,0 +1,34 @@
+{
+  "id": "y1v3.case.yosuke-hirata.freeze-during-crisis",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "freeze during crisis",
+  "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
+  "observed_actions": "Becomes unresponsive during a simultaneous manual fire, intergroup conflict and approaching storm",
+  "observed_result": "Fails to coordinate urgent activity for a period",
+  "epistemic_limits": "An observed stress overload cannot be generalized to every emergency",
+  "source": {
+    "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      209
+    ],
+    "chapter": 6,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "emotion",
+    "leadership"
+  ],
+  "information_available": "Only knowledge accessible to this actor at the cited story time; later disclosures may not retroactively become memory.",
+  "counterfactual_test": "Alter resources, health, opposition, incentives or information and allow failure; do not force observed outcome.",
+  "topics": [
+    "emotion",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v3.ev.091"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

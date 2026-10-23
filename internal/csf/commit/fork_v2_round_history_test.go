@@ -524,3 +524,168 @@ func TestCSFRV18R19V2RebasesRoundAfterPriorCommittedCycle(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+// R19-1: each injected record has valid canonical bytes and a valid causal ID.
+// Corruption is in the lifecycle transition, so ID/digest checks alone cannot
+// reject it. Replay must reject without relying on a later child snapshot.
+func TestCSFRV18R19Finding1RejectsIllegalSlotHistory(t *testing.T) {
+	for _, mutation := range []string{"second-response-kind", "response-to-revoked", "redispatch-without-revocation", "response-to-superseded", "revoke-filled-slot", "revoke-twice", "nonzero-first-ordinal"} {
+		t.Run(mutation, func(t *testing.T) {
+			ctx := context.Background()
+			parent, v1, run, snap := r19Source(t)
+			v2, err := policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+			if err != nil {
+				t.Fatal(err)
+			}
+			path := t.TempDir() + "/illegal-history.db"
+			child, err := sqlite.Open(ctx, path)
+			if err != nil {
+				t.Fatal(err)
+			}
+			defer child.Close()
+			childID := [32]byte(run)
+			childID[0] ^= 0x7a
+			root, err := parent.ForkIdleSnapshotV1ToV2(ctx, [32]byte(run), snap.ID, childID, child, v1, v2)
+			if err != nil {
+				t.Fatal(err)
+			}
+			ledger, err := inputledger.Open(ctx, domain.ID(childID), v2, child)
+			if err != nil {
+				t.Fatal(err)
+			}
+			_, _, _, rounds, responses, _ := ledger.Snapshot()
+			round := rounds[0]
+			cid := responses[round.ID]["answered"].CycleID
+			slot := "answered"
+			switch mutation {
+			case "response-to-revoked", "response-to-superseded", "revoke-twice":
+				slot = "revoked"
+			case "redispatch-without-revocation":
+				slot = "open"
+			}
+			d := r19Dispatch(t, v2, domain.ID(childID), cid, round, slot, 0, 0, round.Eligibility.NotBeforeInstant)
+			if mutation == "nonzero-first-ordinal" {
+				round, err = ledger.DeclareRound(ctx, "child.schedule", round.Actor, []string{"new"}, round.Eligibility, []any{uint64(2), []any{root.ID[:], root.Digest[:]}}, 3, 0, 0, []any{uint64(0)})
+				if err != nil {
+					t.Fatal(err)
+				}
+				d = r19Dispatch(t, v2, domain.ID(childID), cid, round, "new", 4, 0, round.Eligibility.NotBeforeInstant)
+			}
+			if mutation == "response-to-superseded" {
+				replacement := r19Dispatch(t, v2, domain.ID(childID), cid, round, slot, 1, 0, d.EffectiveAt)
+				if err := ledger.RegisterDispatch(ctx, replacement, inputledger.CycleBinding{ID: cid, Instant: d.EffectiveAt}); err != nil {
+					t.Fatal(err)
+				}
+			}
+			var raw []byte
+			var id [32]byte
+			switch mutation {
+			case "second-response-kind":
+				response, err := testresourcev1.ProposalForDispatch(v2, d)
+				if err != nil {
+					t.Fatal(err)
+				}
+				raw = response.Canonical
+				id = [32]byte(response.ID)
+			case "response-to-revoked", "response-to-superseded":
+				response := r19NoProposal(t, v2, d, 0)
+				digest, _, err := identity.New(v2).Sum("cote.csf.digest.no-proposal-unit", "cote.csf.schema.no-proposal.body", 1, []any{response.Body})
+				if err != nil {
+					t.Fatal(err)
+				}
+				raw, err = codec.CanonicalPayload(append(response.Body, digest[:]))
+				if err != nil {
+					t.Fatal(err)
+				}
+				id = [32]byte(response.ID)
+			case "revoke-filled-slot", "revoke-twice":
+				raw, err = codec.CanonicalPayload([]any{d.ID[:], uint64(1), []any{uint64(0)}})
+				if err != nil {
+					t.Fatal(err)
+				}
+				id = [32]byte(identity.OpaqueContentHash(raw))
+			case "redispatch-without-revocation", "nonzero-first-ordinal":
+				if mutation == "redispatch-without-revocation" {
+					d = r19Dispatch(t, v2, domain.ID(childID), cid, round, slot, 1, 0, d.EffectiveAt)
+				}
+				raw, err = codec.CanonicalPayload([]any{d.ID[:], d.RunID[:], d.CycleID[:], d.RoundID[:], d.SlotID, uint64(d.Ordinal), []any{d.Actor[0], d.Actor[1]}, []any{int64(d.Eligibility.NotBeforeInstant), uint64(d.Eligibility.NotBeforeCycleOrdinal)}, uint64(d.BaseRevision), int64(d.EffectiveAt), d.RequestDigest[:]})
+				if err != nil {
+					t.Fatal(err)
+				}
+				id = [32]byte(d.ID)
+			}
+			sqlDB, err := sql.Open("sqlite", path)
+			if err != nil {
+				t.Fatal(err)
+			}
+			defer sqlDB.Close()
+			if _, err := sqlDB.ExecContext(ctx, "INSERT INTO input_ledger(id,canonical) VALUES(?,?)", id[:], raw); err != nil {
+				t.Fatal(err)
+			}
+			if _, err := inputledger.Open(ctx, domain.ID(childID), v2, child); err == nil {
+				t.Errorf("R19-1: ledger restore accepted %s", mutation)
+			}
+			if _, err := child.ReplayClock(ctx, childID, v2); err == nil {
+				t.Fatalf("R19-1: replay accepted %s with valid individual IDs", mutation)
+			}
+		})
+	}
+}
+
+func TestCSFRV18R19Finding1AllowsValidRepeatedRevocationAndReopen(t *testing.T) {
+	ctx := context.Background()
+	parent, v1, run, snap := r19Source(t)
+	v2, err := policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+	if err != nil {
+		t.Fatal(err)
+	}
+	path := t.TempDir() + "/valid-history.db"
+	child, err := sqlite.Open(ctx, path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	childID := [32]byte(run)
+	childID[0] ^= 0x7b
+	if _, err := parent.ForkIdleSnapshotV1ToV2(ctx, [32]byte(run), snap.ID, childID, child, v1, v2); err != nil {
+		t.Fatal(err)
+	}
+	ledger, err := inputledger.Open(ctx, domain.ID(childID), v2, child)
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, _, _, rounds, responses, _ := ledger.Snapshot()
+	r := rounds[0]
+	cid := responses[r.ID]["answered"].CycleID
+	for ordinal := uint32(1); ordinal <= 3; ordinal++ {
+		if err := ledger.RevokeDispatch(ctx, r.ID, "open", 0, []any{uint64(0)}); err != nil {
+			t.Fatal(err)
+		}
+		d := r19Dispatch(t, v2, domain.ID(childID), cid, r, "open", ordinal, 0, r.Eligibility.NotBeforeInstant)
+		if err := ledger.RegisterDispatch(ctx, d, inputledger.CycleBinding{ID: cid, Instant: d.EffectiveAt}); err != nil {
+			t.Fatal(err)
+		}
+		if ordinal == 3 {
+			if err := ledger.Respond(ctx, r19NoProposal(t, v2, d, 0)); err != nil {
+				t.Fatal(err)
+			}
+		}
+	}
+	if err := child.Close(); err != nil {
+		t.Fatal(err)
+	}
+	child, err = sqlite.Open(ctx, path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer child.Close()
+	if _, err := child.ReplayClock(ctx, childID, v2); err != nil {
+		t.Fatal("valid lifecycle rejected:", err)
+	}
+	checkpoint, err := child.CreateSnapshotV1(ctx, childID, v2, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := child.VerifySnapshotV1(ctx, childID, checkpoint.ID, v2); err != nil {
+		t.Fatal(err)
+	}
+}

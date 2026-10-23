@@ -119,3 +119,19 @@ integrada nem implica autorização para merge. A validação do HEAD exato da P
 deve constar no checkpoint da conversa; não reutilizar os workflows do R18.
 
 Contrato operacional: [fork-round-history-v2](../../../docs/architecture/fork-round-history-v2.md).
+
+### R19-1 — restauração deve validar lifecycle, não apenas cada ID
+
+A revisão do checkpoint `b8f65f3` identificou que `InputLedger.restore` reconstruía
+respostas e dispatches sem validar todas as transições de slot. A PR contém o
+finding marcado R19-1. Seis corrupções com registros individualmente válidos
+reproduziram RED: resposta a dispatch revogado, redespacho sem revogação,
+resposta a dispatch superado, revogação após resposta, revogação repetida e
+primeiro ordinal não zero. O teste inclui também troca de tipo de resposta.
+
+A correção aplica o estado de slot durante restore: primeiro ordinal zero,
+sucessão imediata somente após revogação sem resposta, limite uint32 antes do
+cast, resposta única contra o dispatch corrente aberto e revogação única de
+request ainda sem resposta. A cadeia positiva com três revogações/reabertura
+permanece aceita. A resolução formal só deve apontar o commit da correção após
+validação e push; OPEN-02/OPEN-05 permanecem abertos.

@@ -293,6 +293,15 @@ func (l *Ledger) restore(records []ports.CanonicalRecord) error {
 			if l.providers[key] == nil {
 				l.providers[key] = map[string]*slotState{}
 			}
+			prior := l.providers[key][dispatch.SlotID]
+			if prior == nil {
+				if dispatch.Ordinal != 0 {
+					return errors.New("persisted first dispatch ordinal is not zero")
+				}
+			} else if prior.Dispatch == nil || prior.Response != nil || !prior.Revoked ||
+				prior.Dispatch.Ordinal == ^uint32(0) || dispatch.Ordinal != prior.Dispatch.Ordinal+1 {
+				return errors.New("persisted redispatch lacks immediate unfilled revocation")
+			}
 			l.providers[key][dispatch.SlotID] = &slotState{Dispatch: &dispatch}
 			continue
 		}
@@ -304,7 +313,11 @@ func (l *Ledger) restore(records []ports.CanonicalRecord) error {
 					if err != nil {
 						return err
 					}
-					l.providers[idKey(response.RoundID)][response.SlotID].Response = &response
+					state := l.providers[idKey(response.RoundID)][response.SlotID]
+					if state == nil || state.Dispatch == nil || state.Dispatch.ID != dispatchID || state.Revoked || state.Response != nil {
+						return errors.New("persisted response does not fill the current open slot exactly once")
+					}
+					state.Response = &response
 					continue
 				}
 			}
@@ -314,6 +327,10 @@ func (l *Ledger) restore(records []ports.CanonicalRecord) error {
 			if ok {
 				state := l.findDispatchState(dispatchID)
 				if state != nil {
+					reason, validReason := fields[1].(uint64)
+					if state.Revoked || state.Response != nil || !validReason || reason > 255 {
+						return errors.New("persisted revocation does not target an open unfilled dispatch")
+					}
 					if [32]byte(identity.OpaqueContentHash(record.Canonical)) != record.Identity {
 						return errors.New("persisted dispatch revocation identity mismatch")
 					}
@@ -489,7 +506,10 @@ func (l *Ledger) restoreDispatch(record ports.CanonicalRecord, fields []any) (Di
 	var digestValue domain.Digest
 	copy(idValue[:], id[:])
 	copy(digestValue[:], digest[:])
-	ordinal, _ := fields[5].(uint64)
+	ordinal, ordinalOK := fields[5].(uint64)
+	if !ordinalOK || ordinal > uint64(^uint32(0)) {
+		return Dispatch{}, errors.New("persisted dispatch ordinal is outside uint32")
+	}
 	revision, _ := fields[8].(uint64)
 	instant, instantOK := signedInt64(fields[9])
 	requestDigest, ok3 := digestFrom(fields[10])

@@ -107,7 +107,7 @@
     "detected": 20,
     "escape_count": 0,
     "validator": "tools/test_canon_y1_v04_adversarial.py",
-    "github_action_reference": "https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39982326024"
+    "github_action_reference": "https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39985446138"
   },
   "automated_review_result": "PASS_20_OF_20_NEGATIVE_MUTATIONS",
   "external_independent_approval": false,

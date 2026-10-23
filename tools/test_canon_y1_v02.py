@@ -41,7 +41,7 @@ for c in cases:
     for n in c["source"]["pdf_pages"]:
         assert 1<=n<=261 and c["id"] in page["pages"][str(n)]["cases"]
 ryuen=J(B/"characters/kakeru-ryuen.json")
-assert not any(v["behavioral_case_refs"] for v in ryuen["domains"].values())
+assert not any(cid.startswith(("v0.","y1v1.","y1v2.")) for d in ryuen["domains"].values() for cid in d["behavioral_case_refs"]), "Ryūen may gain V3 cases but did not act in source-confirmed V2 cases"
 assert any("Ryūen" in x["summary"] and x["source_mode"]=="REPORTED_BY_CHARACTER" for x in e)
 school=J(B/"institutions/anhs.json")
 transfer=school["s_system"]["individual_class_transfer_y1_v02"]

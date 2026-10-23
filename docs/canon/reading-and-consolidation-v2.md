@@ -19,3 +19,7 @@
 - All indexes point to canonical consolidated files; the validator fails if volume-scoped character/institution staging is reintroduced.
 
 - The index `behavioral_case_paths` must cover every behavioral case, matching the canonical owner's folder; build and validation fail on missing, duplicate or orphan cases.
+
+## Semantic approval gate
+
+A source volume accepted by the operator is eligible for extraction but does not automatically certify each extracted statement. An automated source/page registry is a *triage only*. Every evidence and case must be checked for exact claim meaning, speaker, act attribution, timing, disclosure, and unstated assumptions before marking semantic signoff. The current V0/V1 registry deliberately leaves those review states pending. Do not expose an unreviewed claim as verified canon or Y1_START memory.

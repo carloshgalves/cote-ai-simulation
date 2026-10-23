@@ -1498,7 +1498,10 @@
       "social": [
         "v0.char.056"
       ]
-    }
+    },
+    "actor.kamogawa-toshizou": {},
+    "actor.sasada": {},
+    "actor.yuki-younger-sister-unidentified": {}
   },
   "retrieval": "Direct actor/domain map with separated action/context lanes; no sequential volume scans",
   "behavioral_by_actor_topic": {
@@ -1873,7 +1876,10 @@
     },
     "actor.kazuya": {
       "social": []
-    }
+    },
+    "actor.kamogawa-toshizou": {},
+    "actor.sasada": {},
+    "actor.yuki-younger-sister-unidentified": {}
   },
   "context_mentions_by_actor_topic": {
     "actor.atsuomi-ayanokoji": {
@@ -2907,7 +2913,10 @@
       "social": [
         "v0.char.056"
       ]
-    }
+    },
+    "actor.kamogawa-toshizou": {},
+    "actor.sasada": {},
+    "actor.yuki-younger-sister-unidentified": {}
   },
   "gate_contract": {
     "behavior": "behavioral_by_actor_topic",

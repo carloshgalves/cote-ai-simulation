@@ -1,0 +1,24 @@
+{
+  "schema_version": "cross-volume-reconciliation-policy-v1",
+  "origin_adr": "docs/adr/0012-cumulative-cross-volume-revelations.md",
+  "statuses": [
+    "OPEN",
+    "PARTIALLY_EXPLAINED",
+    "RESOLVED",
+    "CONFLICT"
+  ],
+  "relation_types": [
+    "SUPPLEMENTS",
+    "RESOLVES_AMBIGUITY",
+    "CORRECTS_PRIOR_INTERPRETATION",
+    "CHALLENGES_WITH_CONFLICT",
+    "CONTEXTUALIZES"
+  ],
+  "immutable_source_locator": true,
+  "append_only_revelation_refs": true,
+  "global_event_identity": true,
+  "actor_knowledge_requires_in_story_acquisition": true,
+  "can_infer_vip_algorithm_from_teacher_group_selection": false,
+  "automatic_engine_admission": false,
+  "automatic_memory_admission": false
+}

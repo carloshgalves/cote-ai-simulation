@@ -1,0 +1,77 @@
+{
+  "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+  "work_id": "ln.y1.v04.5",
+  "title": "Classroom of the Elite Year 1 Volume 4.5",
+  "edition": "Seven Seas English translation, operator-supplied PDF",
+  "pdf_sha256": "b01441252214bc44e9cee75f3a27640e25ff266609ac7386ac83d4d588f72d22",
+  "pdf_pages": 227,
+  "source_kind": "PRIMARY_LITERARY_SOURCE_USER_SUPPLIED",
+  "operator_selected_for_extraction": true,
+  "original_pdf_committed": false,
+  "claims_all_verified": false,
+  "record_audit": "INITIAL_EXTRACTION_WITH_DIRECT_SOURCE_COMPARISON_OPERATOR_PENDING",
+  "narrative_segments": [
+    {
+      "chapter": 1,
+      "pdf_pages": [
+        10,
+        10
+      ],
+      "title": "Summer Vacation is Nearly Over"
+    },
+    {
+      "chapter": 2,
+      "pdf_pages": [
+        11,
+        48
+      ],
+      "title": "Ibuki Mio has Surprisingly Good Sense"
+    },
+    {
+      "chapter": 3,
+      "pdf_pages": [
+        49,
+        107
+      ],
+      "title": "Katsuragi Kouhei is Surprisingly Troubled"
+    },
+    {
+      "chapter": 4,
+      "pdf_pages": [
+        108,
+        131
+      ],
+      "title": "Dangers Lurk in Everyday Life"
+    },
+    {
+      "chapter": 5,
+      "pdf_pages": [
+        132,
+        152
+      ],
+      "title": "A Day of Girl Troubles and Disaster"
+    },
+    {
+      "chapter": 6,
+      "pdf_pages": [
+        153,
+        204
+      ],
+      "title": "A Gathering Between Classes"
+    },
+    {
+      "chapter": 7,
+      "pdf_pages": [
+        205,
+        223
+      ],
+      "title": "Ike, Yamauchi, and Sudou's Summer Vacation (Extra Stories)"
+    }
+  ],
+  "excluded_material": "postscript (authorial commentary) and promotional matter after PDF page 223",
+  "warnings": [
+    "Book/translation content paraphrased, original not committed",
+    "Narrative's late-chapter retrospective explanation does not imply later acquisition by participants",
+    "Narrator hypothesis != certified world truth"
+  ]
+}

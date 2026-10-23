@@ -1,0 +1,55 @@
+{
+  "schema_version": "volume-coverage-v1",
+  "source": "ln.y1.v02.sevenseas.en.operator-provided",
+  "pdf_pages": 261,
+  "chapters": [
+    {
+      "chapter": 1,
+      "start_pdf_page": 10,
+      "end_pdf_page": 11
+    },
+    {
+      "chapter": 2,
+      "start_pdf_page": 12,
+      "end_pdf_page": 39
+    },
+    {
+      "chapter": 3,
+      "start_pdf_page": 40,
+      "end_pdf_page": 65
+    },
+    {
+      "chapter": 4,
+      "start_pdf_page": 66,
+      "end_pdf_page": 151
+    },
+    {
+      "chapter": 5,
+      "start_pdf_page": 152,
+      "end_pdf_page": 189
+    },
+    {
+      "chapter": 6,
+      "start_pdf_page": 190,
+      "end_pdf_page": 219
+    },
+    {
+      "chapter": 7,
+      "start_pdf_page": 220,
+      "end_pdf_page": 257
+    }
+  ],
+  "chapters_assessed": 7,
+  "record_count": 91,
+  "case_status": "NOT_YET_RECONCILED",
+  "semantic_review": "REQUIRES_INDIVIDUAL_ASSISTANT_REVIEW",
+  "operator_release": "PENDING",
+  "method": "Scene-relevant atomic paraphrases; character reports, narrator impressions and directly observed outcomes kept separate; provenance uses physical PDF pages.",
+  "open_issues": [
+    "Confirm locations and epistemic strength of all records through individual semantic review",
+    "Complete per-actor case extraction and cross-volume merges",
+    "Run deterministic consolidated index rebuild and cross-file validation",
+    "Preserve Ryūen's alleged authorship as attributed belief, not proved causation",
+    "Do not infer exact disciplinary fee, penalty formulas, tropical-island exam mechanics, or Ichinose private balance."
+  ]
+}

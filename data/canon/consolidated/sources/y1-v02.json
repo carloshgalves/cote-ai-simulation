@@ -1,0 +1,13 @@
+{
+  "source_id": "ln.y1.v02.sevenseas.en.operator-provided",
+  "work_id": "ln.y1.v02",
+  "edition": "Seven Seas English translation, operator-supplied PDF (translation publication date unverified)",
+  "pdf_sha256": "11da5801d717d2d072ba52619ea60987e0d581b8de6f477d33e01e8b1211b073",
+  "pdf_pages": 261,
+  "operator_accepted": true,
+  "official_translation_required": false,
+  "claims_all_verified": false,
+  "record_audit": "ASSISTANT_SEMANTIC_REVIEW_PENDING_OPERATOR_RELEASE_PENDING",
+  "original_pdf_committed": false,
+  "warning": "Uploaded copy includes distributor watermark; the watermark itself is not bibliographic or canonical authority."
+}

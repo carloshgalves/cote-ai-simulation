@@ -4,7 +4,8 @@
   "display_name": "Shinohara (given name unknown)",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v045.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -30,7 +31,8 @@
         "y1v3.ev.023",
         "y1v3.ev.039",
         "y1v3.ev.046",
-        "y1v3.ev.078"
+        "y1v3.ev.078",
+        "y1v45.ev.016"
       ]
     },
     "conflict": {
@@ -38,7 +40,8 @@
       "context_evidence_refs": [
         "y1v3.ev.024",
         "y1v3.ev.039",
-        "y1v3.ev.078"
+        "y1v3.ev.078",
+        "y1v45.ev.016"
       ]
     },
     "ethics": {
@@ -70,7 +73,7 @@
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown.",
+  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": true,
     "future_fate_unknown": true

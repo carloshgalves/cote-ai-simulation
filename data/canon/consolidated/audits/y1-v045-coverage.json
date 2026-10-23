@@ -58,5 +58,10 @@
     "Zodiac VIP role selection algorithm is not disclosed here",
     "School rules on points vs prohibition require cross-volume comparison",
     "Pool voyeurism must be descriptive privacy violation and prevention, never practical instructions"
-  ]
+  ],
+  "behavioral_cases": 21,
+  "cases": 21,
+  "coverage_status": "INITIAL_SELECTIVE_EXTRACTION_AND_RETROSPECTIVE_LINKS_PENDING_INDIVIDUAL_REVIEW",
+  "global_character_count": 80,
+  "global_behavioral_case_count": 202
 }

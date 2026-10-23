@@ -1,0 +1,676 @@
+{
+  "schema_version": "page-index-v1",
+  "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+  "pages": {
+    "10": {
+      "evidence": [
+        "y1v45.ev.001"
+      ],
+      "cases": []
+    },
+    "11": {
+      "evidence": [
+        "y1v45.ev.002"
+      ],
+      "cases": []
+    },
+    "12": {
+      "evidence": [
+        "y1v45.ev.003"
+      ],
+      "cases": []
+    },
+    "13": {
+      "evidence": [
+        "y1v45.ev.003",
+        "y1v45.ev.004"
+      ],
+      "cases": []
+    },
+    "15": {
+      "evidence": [
+        "y1v45.ev.005"
+      ],
+      "cases": [
+        "y1v45.case.suzune-horikita.analyze-fortune-reading-as-patterns"
+      ]
+    },
+    "16": {
+      "evidence": [
+        "y1v45.ev.005"
+      ],
+      "cases": [
+        "y1v45.case.suzune-horikita.analyze-fortune-reading-as-patterns"
+      ]
+    },
+    "17": {
+      "evidence": [
+        "y1v45.ev.004"
+      ],
+      "cases": []
+    },
+    "19": {
+      "evidence": [
+        "y1v45.ev.006"
+      ],
+      "cases": []
+    },
+    "20": {
+      "evidence": [
+        "y1v45.ev.006"
+      ],
+      "cases": []
+    },
+    "23": {
+      "evidence": [
+        "y1v45.ev.007"
+      ],
+      "cases": []
+    },
+    "24": {
+      "evidence": [
+        "y1v45.ev.007",
+        "y1v45.ev.008"
+      ],
+      "cases": [
+        "y1v45.case.mio-ibuki.acknowledge-anxiety-outside-spy-role"
+      ]
+    },
+    "25": {
+      "evidence": [
+        "y1v45.ev.009"
+      ],
+      "cases": []
+    },
+    "26": {
+      "evidence": [
+        "y1v45.ev.008",
+        "y1v45.ev.009"
+      ],
+      "cases": [
+        "y1v45.case.mio-ibuki.acknowledge-anxiety-outside-spy-role"
+      ]
+    },
+    "29": {
+      "evidence": [
+        "y1v45.ev.010"
+      ],
+      "cases": [
+        "y1v45.case.mio-ibuki.pair-with-rival-for-fortune-reading"
+      ]
+    },
+    "32": {
+      "evidence": [
+        "y1v45.ev.010"
+      ],
+      "cases": [
+        "y1v45.case.mio-ibuki.pair-with-rival-for-fortune-reading"
+      ]
+    },
+    "34": {
+      "evidence": [
+        "y1v45.ev.011"
+      ],
+      "cases": []
+    },
+    "36": {
+      "evidence": [
+        "y1v45.ev.011"
+      ],
+      "cases": []
+    },
+    "38": {
+      "evidence": [
+        "y1v45.ev.012"
+      ],
+      "cases": []
+    },
+    "42": {
+      "evidence": [
+        "y1v45.ev.012"
+      ],
+      "cases": []
+    },
+    "43": {
+      "evidence": [
+        "y1v45.ev.013"
+      ],
+      "cases": []
+    },
+    "47": {
+      "evidence": [
+        "y1v45.ev.013",
+        "y1v45.ev.014"
+      ],
+      "cases": [
+        "y1v45.case.katsuragi.help-stranded-elevator-rivals"
+      ]
+    },
+    "48": {
+      "evidence": [
+        "y1v45.ev.014"
+      ],
+      "cases": [
+        "y1v45.case.katsuragi.help-stranded-elevator-rivals"
+      ]
+    },
+    "49": {
+      "evidence": [
+        "y1v45.ev.015"
+      ],
+      "cases": []
+    },
+    "50": {
+      "evidence": [
+        "y1v45.ev.015"
+      ],
+      "cases": []
+    },
+    "54": {
+      "evidence": [
+        "y1v45.ev.016"
+      ],
+      "cases": []
+    },
+    "55": {
+      "evidence": [
+        "y1v45.ev.016"
+      ],
+      "cases": []
+    },
+    "56": {
+      "evidence": [
+        "y1v45.ev.017"
+      ],
+      "cases": []
+    },
+    "58": {
+      "evidence": [
+        "y1v45.ev.017"
+      ],
+      "cases": []
+    },
+    "63": {
+      "evidence": [
+        "y1v45.ev.018"
+      ],
+      "cases": []
+    },
+    "67": {
+      "evidence": [
+        "y1v45.ev.019"
+      ],
+      "cases": []
+    },
+    "70": {
+      "evidence": [
+        "y1v45.ev.019",
+        "y1v45.ev.020"
+      ],
+      "cases": [
+        "y1v45.case.manabu-horikita.invite-kiyotaka-into-student-council"
+      ]
+    },
+    "71": {
+      "evidence": [
+        "y1v45.ev.020",
+        "y1v45.ev.021"
+      ],
+      "cases": []
+    },
+    "73": {
+      "evidence": [
+        "y1v45.ev.021"
+      ],
+      "cases": [
+        "y1v45.case.manabu-horikita.invite-kiyotaka-into-student-council"
+      ]
+    },
+    "76": {
+      "evidence": [
+        "y1v45.ev.022"
+      ],
+      "cases": []
+    },
+    "78": {
+      "evidence": [
+        "y1v45.ev.022"
+      ],
+      "cases": []
+    },
+    "88": {
+      "evidence": [
+        "y1v45.ev.023"
+      ],
+      "cases": []
+    },
+    "90": {
+      "evidence": [
+        "y1v45.ev.023"
+      ],
+      "cases": []
+    },
+    "91": {
+      "evidence": [
+        "y1v45.ev.024"
+      ],
+      "cases": [
+        "y1v45.case.katsuragi.petition-to-contact-sick-twin",
+        "y1v45.case.manabu-horikita.uphold-outside-contact-ban"
+      ]
+    },
+    "92": {
+      "evidence": [
+        "y1v45.ev.025"
+      ],
+      "cases": []
+    },
+    "93": {
+      "evidence": [
+        "y1v45.ev.024",
+        "y1v45.ev.025",
+        "y1v45.ev.026"
+      ],
+      "cases": [
+        "y1v45.case.katsuragi.petition-to-contact-sick-twin",
+        "y1v45.case.manabu-horikita.uphold-outside-contact-ban"
+      ]
+    },
+    "94": {
+      "evidence": [
+        "y1v45.ev.026"
+      ],
+      "cases": []
+    },
+    "95": {
+      "evidence": [],
+      "cases": [
+        "y1v45.case.kiyotaka-ayanokoji.mediate-illicit-delivery-proposal"
+      ]
+    },
+    "97": {
+      "evidence": [
+        "y1v45.ev.027"
+      ],
+      "cases": [
+        "y1v45.case.katsuragi.fund-risky-family-delivery"
+      ]
+    },
+    "100": {
+      "evidence": [
+        "y1v45.ev.028"
+      ],
+      "cases": [
+        "y1v45.case.ken-sudo.complete-family-parcel-task"
+      ]
+    },
+    "101": {
+      "evidence": [
+        "y1v45.ev.027",
+        "y1v45.ev.029"
+      ],
+      "cases": []
+    },
+    "103": {
+      "evidence": [
+        "y1v45.ev.028",
+        "y1v45.ev.029"
+      ],
+      "cases": [
+        "y1v45.case.katsuragi.fund-risky-family-delivery"
+      ]
+    },
+    "104": {
+      "evidence": [
+        "y1v45.ev.030"
+      ],
+      "cases": [
+        "y1v45.case.ken-sudo.complete-family-parcel-task",
+        "y1v45.case.kiyotaka-ayanokoji.mediate-illicit-delivery-proposal"
+      ]
+    },
+    "105": {
+      "evidence": [
+        "y1v45.ev.031"
+      ],
+      "cases": []
+    },
+    "106": {
+      "evidence": [
+        "y1v45.ev.031"
+      ],
+      "cases": []
+    },
+    "108": {
+      "evidence": [
+        "y1v45.ev.032"
+      ],
+      "cases": []
+    },
+    "112": {
+      "evidence": [
+        "y1v45.ev.033"
+      ],
+      "cases": [
+        "y1v45.case.suzune-horikita.request-help-while-concealing-embarrassment"
+      ]
+    },
+    "116": {
+      "evidence": [
+        "y1v45.ev.033"
+      ],
+      "cases": []
+    },
+    "118": {
+      "evidence": [
+        "y1v45.ev.034"
+      ],
+      "cases": []
+    },
+    "120": {
+      "evidence": [
+        "y1v45.ev.034",
+        "y1v45.ev.035"
+      ],
+      "cases": []
+    },
+    "122": {
+      "evidence": [
+        "y1v45.ev.035"
+      ],
+      "cases": []
+    },
+    "125": {
+      "evidence": [
+        "y1v45.ev.036"
+      ],
+      "cases": []
+    },
+    "131": {
+      "evidence": [
+        "y1v45.ev.036"
+      ],
+      "cases": [
+        "y1v45.case.suzune-horikita.request-help-while-concealing-embarrassment"
+      ]
+    },
+    "132": {
+      "evidence": [
+        "y1v45.ev.037"
+      ],
+      "cases": []
+    },
+    "135": {
+      "evidence": [
+        "y1v45.ev.037"
+      ],
+      "cases": []
+    },
+    "136": {
+      "evidence": [
+        "y1v45.ev.038"
+      ],
+      "cases": []
+    },
+    "142": {
+      "evidence": [
+        "y1v45.ev.038"
+      ],
+      "cases": []
+    },
+    "144": {
+      "evidence": [
+        "y1v45.ev.039"
+      ],
+      "cases": [
+        "y1v45.case.airi-sakura.deliver-respectful-romantic-refusal"
+      ]
+    },
+    "147": {
+      "evidence": [
+        "y1v45.ev.039"
+      ],
+      "cases": []
+    },
+    "149": {
+      "evidence": [
+        "y1v45.ev.040"
+      ],
+      "cases": [
+        "y1v45.case.haruki-yamauchi.accept-sakura-rejection"
+      ]
+    },
+    "151": {
+      "evidence": [
+        "y1v45.ev.040",
+        "y1v45.ev.041"
+      ],
+      "cases": [
+        "y1v45.case.airi-sakura.deliver-respectful-romantic-refusal"
+      ]
+    },
+    "152": {
+      "evidence": [
+        "y1v45.ev.041"
+      ],
+      "cases": [
+        "y1v45.case.haruki-yamauchi.accept-sakura-rejection"
+      ]
+    },
+    "153": {
+      "evidence": [
+        "y1v45.ev.042"
+      ],
+      "cases": []
+    },
+    "156": {
+      "evidence": [
+        "y1v45.ev.042"
+      ],
+      "cases": []
+    },
+    "157": {
+      "evidence": [
+        "y1v45.ev.043"
+      ],
+      "cases": []
+    },
+    "159": {
+      "evidence": [
+        "y1v45.ev.043"
+      ],
+      "cases": []
+    },
+    "160": {
+      "evidence": [
+        "y1v45.ev.044"
+      ],
+      "cases": []
+    },
+    "162": {
+      "evidence": [
+        "y1v45.ev.044"
+      ],
+      "cases": []
+    },
+    "163": {
+      "evidence": [
+        "y1v45.ev.045"
+      ],
+      "cases": [
+        "y1v45.case.kiyotaka-ayanokoji.quietly-counter-invasive-pool-plot"
+      ]
+    },
+    "165": {
+      "evidence": [
+        "y1v45.ev.045"
+      ],
+      "cases": [
+        "y1v45.case.kiyotaka-ayanokoji.quietly-counter-invasive-pool-plot"
+      ]
+    },
+    "169": {
+      "evidence": [
+        "y1v45.ev.046"
+      ],
+      "cases": []
+    },
+    "171": {
+      "evidence": [
+        "y1v45.ev.046"
+      ],
+      "cases": []
+    },
+    "177": {
+      "evidence": [
+        "y1v45.ev.047"
+      ],
+      "cases": [
+        "y1v45.case.nagumo.lead-older-students-volleyball"
+      ]
+    },
+    "180": {
+      "evidence": [
+        "y1v45.ev.048"
+      ],
+      "cases": []
+    },
+    "182": {
+      "evidence": [
+        "y1v45.ev.047",
+        "y1v45.ev.048"
+      ],
+      "cases": [
+        "y1v45.case.honami-ichinose.initiate-friendly-volleyball-challenge",
+        "y1v45.case.nagumo.lead-older-students-volleyball"
+      ]
+    },
+    "183": {
+      "evidence": [
+        "y1v45.ev.049"
+      ],
+      "cases": [
+        "y1v45.case.ken-sudo.lead-volleyball-under-pressure"
+      ]
+    },
+    "188": {
+      "evidence": [
+        "y1v45.ev.050"
+      ],
+      "cases": [
+        "y1v45.case.kiyotaka-ayanokoji.conceal-sport-capacity-during-scouting"
+      ]
+    },
+    "189": {
+      "evidence": [
+        "y1v45.ev.049"
+      ],
+      "cases": [
+        "y1v45.case.honami-ichinose.initiate-friendly-volleyball-challenge",
+        "y1v45.case.ken-sudo.lead-volleyball-under-pressure"
+      ]
+    },
+    "190": {
+      "evidence": [
+        "y1v45.ev.050"
+      ],
+      "cases": [
+        "y1v45.case.kiyotaka-ayanokoji.conceal-sport-capacity-during-scouting"
+      ]
+    },
+    "193": {
+      "evidence": [
+        "y1v45.ev.051"
+      ],
+      "cases": []
+    },
+    "196": {
+      "evidence": [
+        "y1v45.ev.051"
+      ],
+      "cases": []
+    },
+    "197": {
+      "evidence": [
+        "y1v45.ev.052"
+      ],
+      "cases": [
+        "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure"
+      ]
+    },
+    "199": {
+      "evidence": [
+        "y1v45.ev.052"
+      ],
+      "cases": [
+        "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure"
+      ]
+    },
+    "205": {
+      "evidence": [
+        "y1v45.ev.053"
+      ],
+      "cases": [
+        "y1v45.case.kanji-ike.attempt-invasive-pool-recording",
+        "y1v45.case.kiyotaka-ayanokoji.quietly-counter-invasive-pool-plot"
+      ]
+    },
+    "212": {
+      "evidence": [
+        "y1v45.ev.053"
+      ],
+      "cases": []
+    },
+    "213": {
+      "evidence": [
+        "y1v45.ev.054"
+      ],
+      "cases": []
+    },
+    "214": {
+      "evidence": [
+        "y1v45.ev.054"
+      ],
+      "cases": [
+        "y1v45.case.kanji-ike.attempt-invasive-pool-recording"
+      ]
+    },
+    "219": {
+      "evidence": [
+        "y1v45.ev.057"
+      ],
+      "cases": []
+    },
+    "220": {
+      "evidence": [
+        "y1v45.ev.055"
+      ],
+      "cases": [
+        "y1v45.case.kei-karuizawa.quietly-prevent-recording-abuse"
+      ]
+    },
+    "221": {
+      "evidence": [
+        "y1v45.ev.055",
+        "y1v45.ev.057"
+      ],
+      "cases": [
+        "y1v45.case.kei-karuizawa.quietly-prevent-recording-abuse"
+      ]
+    },
+    "222": {
+      "evidence": [
+        "y1v45.ev.056"
+      ],
+      "cases": []
+    },
+    "223": {
+      "evidence": [
+        "y1v45.ev.056"
+      ],
+      "cases": [
+        "y1v45.case.kiyotaka-ayanokoji.quietly-counter-invasive-pool-plot"
+      ]
+    }
+  }
+}

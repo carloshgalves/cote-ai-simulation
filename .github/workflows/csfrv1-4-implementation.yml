@@ -26,9 +26,11 @@ jobs:
         with:
           node-version: "22"
       - name: Diff whitespace check
+        env:
+          CSF_DIFF_BASE: ${{ github.event.pull_request.base.sha || '43574722e3f22eb629da47e17bf573dad4a68369' }}
         run: |
-          git fetch --no-tags --depth=1 origin 43574722e3f22eb629da47e17bf573dad4a68369
-          git diff --check 43574722e3f22eb629da47e17bf573dad4a68369 HEAD
+          git fetch --no-tags --depth=1 origin "$CSF_DIFF_BASE"
+          git diff --check "$CSF_DIFF_BASE" HEAD
       - name: Deterministic decision kernel tests
         run: go test -count=1 ./internal/csf/decision/... ./internal/csf/extensions/testresourcev1/...
       - name: Full Go regression suite

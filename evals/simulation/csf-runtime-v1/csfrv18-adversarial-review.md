@@ -236,3 +236,14 @@ Reutilizam os testes de rollback/retry, reopen, replay, snapshot do filho,
 corrupção/restauração e remoção da proof; referências sem artefato real deixam
 todo o destino vazio. Memória e mundo atuais do filho não são restaurados de uma
 intenção antiga. Artefatos cognitivos externos autenticados continuam em R22.
+
+### CI-1 — baseline de whitespace do workflow legado
+
+O workflow CSFRV1-4 comparava o merge sintético da PR contra um ancestral fixo,
+incluindo mudanças alheias vindas da base. O run 40009049489 falhou antes dos
+testes por whitespace em arquivo de cânone fora da feature. A checagem agora usa
+o SHA exato da base do evento pull_request; o baseline de push permanece igual.
+`TestDecisionWorkflowWhitespaceUsesPullRequestBase` executa o bloco shell real
+contra merge Git temporário: whitespace herdado da base teve RED antes da
+correção e passa; whitespace novo da feature continua falhando. A correção não
+altera main nem arquivos de cânone e não requer rerun manual do Actions.

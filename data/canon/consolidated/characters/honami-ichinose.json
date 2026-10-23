@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v02.sevenseas.en.operator-provided",
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v04.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -20,7 +21,8 @@
   "domains": {
     "social": {
       "behavioral_case_refs": [
-        "y1v2.case.honami-ichinose.reflect-chihiro-confession"
+        "y1v2.case.honami-ichinose.reflect-chihiro-confession",
+        "y1v4.case.honami-ichinose.initiate-rabbit-discussion"
       ],
       "context_evidence_refs": [
         "y1v1.ev.067",
@@ -33,14 +35,23 @@
         "y1v2.ev.076",
         "y1v2.ev.078",
         "y1v2.ev.080",
-        "y1v3.ev.061"
+        "y1v3.ev.061",
+        "y1v4.ev.023",
+        "y1v4.ev.048",
+        "y1v4.ev.071",
+        "y1v4.ev.074",
+        "y1v4.ev.110",
+        "y1v4.ev.111",
+        "y1v4.ev.114"
       ]
     },
     "leadership": {
       "behavioral_case_refs": [
         "y1v1.case.n.library-deescalation",
         "y1v2.case.honami-ichinose.class-b-informal-leadership",
-        "y1v3.case.honami-ichinose.evaluate-well-before-shared-use"
+        "y1v3.case.honami-ichinose.evaluate-well-before-shared-use",
+        "y1v4.case.honami-ichinose.challenge-machida-passivity",
+        "y1v4.case.honami-ichinose.initiate-rabbit-discussion"
       ],
       "context_evidence_refs": [
         "y1v1.ev.092",
@@ -48,7 +59,14 @@
         "y1v2.ev.037",
         "y1v2.ev.038",
         "y1v2.ev.049",
-        "y1v3.ev.059"
+        "y1v3.ev.059",
+        "y1v4.ev.048",
+        "y1v4.ev.049",
+        "y1v4.ev.054",
+        "y1v4.ev.071",
+        "y1v4.ev.073",
+        "y1v4.ev.108",
+        "y1v4.ev.113"
       ]
     },
     "persuasion": {
@@ -57,12 +75,17 @@
         "y1v2.case.honami-ichinose.deploy-surveillance-bluff"
       ],
       "context_evidence_refs": [
-        "y1v2.ev.071"
+        "y1v2.ev.071",
+        "y1v4.ev.049",
+        "y1v4.ev.050"
       ]
     },
     "strategy": {
       "behavioral_case_refs": [
-        "y1v2.case.honami-ichinose.deploy-surveillance-bluff"
+        "y1v2.case.honami-ichinose.deploy-surveillance-bluff",
+        "y1v4.case.honami-ichinose.detect-multi-phone-bluff",
+        "y1v4.case.honami-ichinose.exploit-rival-traitor-incentives",
+        "y1v4.case.honami-ichinose.stage-open-email-visibility"
       ],
       "context_evidence_refs": [
         "y1v2.ev.035",
@@ -78,7 +101,22 @@
         "y1v3.ev.061",
         "y1v3.ev.074",
         "y1v3.ev.116",
-        "y1v3.ev.117"
+        "y1v3.ev.117",
+        "y1v4.ev.050",
+        "y1v4.ev.051",
+        "y1v4.ev.053",
+        "y1v4.ev.072",
+        "y1v4.ev.073",
+        "y1v4.ev.074",
+        "y1v4.ev.075",
+        "y1v4.ev.076",
+        "y1v4.ev.079",
+        "y1v4.ev.113",
+        "y1v4.ev.115",
+        "y1v4.ev.118",
+        "y1v4.ev.119",
+        "y1v4.ev.121",
+        "y1v4.ev.122"
       ]
     },
     "conflict": {
@@ -89,7 +127,8 @@
         "y1v2.ev.070",
         "y1v2.ev.073",
         "y1v2.ev.074",
-        "y1v2.ev.081"
+        "y1v2.ev.081",
+        "y1v4.ev.051"
       ]
     },
     "institution": {
@@ -99,7 +138,10 @@
       "context_evidence_refs": [
         "y1v2.ev.037",
         "y1v2.ev.038",
-        "y1v2.ev.039"
+        "y1v2.ev.039",
+        "y1v4.ev.002",
+        "y1v4.ev.023",
+        "y1v4.ev.132"
       ]
     },
     "emotion": {
@@ -114,30 +156,43 @@
     "ethics": {
       "behavioral_case_refs": [
         "y1v2.case.honami-ichinose.deploy-surveillance-bluff",
-        "y1v2.case.honami-ichinose.reflect-chihiro-confession"
+        "y1v2.case.honami-ichinose.reflect-chihiro-confession",
+        "y1v4.case.honami-ichinose.refuse-ryuen-coalition"
       ],
       "context_evidence_refs": [
         "y1v2.ev.041",
         "y1v2.ev.068",
-        "y1v3.ev.060"
+        "y1v3.ev.060",
+        "y1v4.ev.054",
+        "y1v4.ev.078",
+        "y1v4.ev.079"
       ]
     },
     "observation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v4.case.honami-ichinose.stage-open-email-visibility"
+      ],
       "context_evidence_refs": [
         "y1v2.ev.050",
         "y1v2.ev.051",
         "y1v2.ev.071",
         "y1v2.ev.075",
         "y1v3.ev.074",
-        "y1v3.ev.117"
+        "y1v3.ev.117",
+        "y1v4.ev.072",
+        "y1v4.ev.110",
+        "y1v4.ev.118",
+        "y1v4.ev.121"
       ]
     },
     "economy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v4.case.honami-ichinose.exploit-rival-traitor-incentives"
+      ],
       "context_evidence_refs": [
         "y1v2.ev.051",
-        "y1v2.ev.076"
+        "y1v2.ev.076",
+        "y1v4.ev.112"
       ]
     },
     "risk_management": {
@@ -161,11 +216,75 @@
       "context_evidence_refs": [
         "y1v3.ev.116"
       ]
+    },
+    "academic_reasoning": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.002"
+      ]
+    },
+    "reasoning": {
+      "behavioral_case_refs": [
+        "y1v4.case.honami-ichinose.challenge-machida-passivity",
+        "y1v4.case.honami-ichinose.detect-multi-phone-bluff"
+      ],
+      "context_evidence_refs": [
+        "y1v4.ev.053",
+        "y1v4.ev.075",
+        "y1v4.ev.119"
+      ]
+    },
+    "negotiation": {
+      "behavioral_case_refs": [
+        "y1v4.case.honami-ichinose.refuse-ryuen-coalition"
+      ],
+      "context_evidence_refs": [
+        "y1v4.ev.076",
+        "y1v4.ev.078"
+      ]
+    },
+    "exam": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.108",
+        "y1v4.ev.114",
+        "y1v4.ev.132"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.111"
+      ]
+    },
+    "privacy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.112"
+      ]
+    },
+    "deception": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.115"
+      ]
+    },
+    "epistemics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.122"
+      ]
+    },
+    "governance": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.132"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. Adversarial V4 source-gap review: false Manabe witness story and Hoshinomiya's discretionary Rabbit assignment are source-scoped; group selection is not a verified VIP assignment formula.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

@@ -1,0 +1,184 @@
+{
+  "schema_version": "volume-coverage-v1",
+  "source": "ln.y1.v04.sevenseas.en.operator-provided",
+  "pdf_pages": 248,
+  "chapters": [
+    {
+      "chapter": 1,
+      "start_pdf_page": 10,
+      "end_pdf_page": 11
+    },
+    {
+      "chapter": 2,
+      "start_pdf_page": 12,
+      "end_pdf_page": 62
+    },
+    {
+      "chapter": 3,
+      "start_pdf_page": 63,
+      "end_pdf_page": 124
+    },
+    {
+      "chapter": 4,
+      "start_pdf_page": 125,
+      "end_pdf_page": 204
+    },
+    {
+      "chapter": 5,
+      "start_pdf_page": 205,
+      "end_pdf_page": 243
+    }
+  ],
+  "chapters_assessed": 5,
+  "records": 132,
+  "chapter_evidence_counts": {
+    "1": 2,
+    "2": 37,
+    "3": 29,
+    "4": 41,
+    "5": 23
+  },
+  "cases": 44,
+  "coverage_status": "ASSISTANT_AND_ADVERSARIAL_AUDITS_COMPLETE_OPERATOR_PENDING",
+  "semantic_review": "ASSISTANT_INDIVIDUAL_REVIEW_COMPLETE",
+  "operator_release": "PENDING",
+  "open_issues": [
+    "External independent human or separate-model reviewer not performed; same assistant ran second adversarial method",
+    "Operator reference-merge release pending",
+    "All 176 records verified:false and no agent-memory promotion authorized",
+    "Third-day vs fourth-day printed/explanatory calendar conflict deliberately preserved",
+    "No school-sanctioned deterministic VIP allocation formula",
+    "Zodiac reference is NOT_EXECUTABLE"
+  ],
+  "behavioral_cases": 44,
+  "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v04.json",
+  "open_audit": "EXTERNAL_REVIEW_AND_OPERATOR_RELEASE_PENDING",
+  "initial_source_corrections": [
+    {
+      "finding": "V4-ATTR-001",
+      "severity": "HIGH",
+      "status": "RESOLVED_INITIAL_PASS",
+      "record": "y1v4.ev.060",
+      "description": "Physical confrontation on PDF page 103 is by Haruki Yamauchi, not Ryūen; source actor, global pack, index and audit corrected."
+    },
+    {
+      "finding": "V4-ATTR-002",
+      "severity": "MEDIUM",
+      "status": "RESOLVED_INITIAL_PASS",
+      "record": "y1v4.ev.036",
+      "description": "Cabin-to-briefing conversation on PDF page 52 is between Kiyotaka and Hirata, not Karuizawa; actor and summary corrected."
+    },
+    {
+      "finding": "V4-MODE-003",
+      "severity": "LOW",
+      "status": "RESOLVED_INITIAL_PASS",
+      "records": [
+        "y1v4.ev.023",
+        "y1v4.ev.041"
+      ],
+      "description": "Printed prose rosters on PDF pages 39 and 64 normalized to OBSERVED, not misclassified as embedded standalone dossier images."
+    },
+    {
+      "finding": "V4-CHRONO-004",
+      "severity": "HIGH",
+      "status": "DOCUMENTED_AMBIGUITY_NOT_RESOLVED",
+      "description": "Printed rule's calendar fourth day versus teacher example's third day left as explicit source ambiguity, no invented exact timeline."
+    },
+    {
+      "finding": "V4-TRAUMA-005",
+      "severity": "HIGH",
+      "status": "BOUNDARY_SET_REQUIRES_INDIVIDUAL_AUDIT",
+      "description": "Bullying, threats and sexual coercion represented as descriptive wrongdoing; no consent inferred and no transferable action policy."
+    },
+    {
+      "finding": "V4-SECRET-006",
+      "severity": "HIGH",
+      "status": "BOUNDARY_SET_REQUIRES_INDIVIDUAL_AUDIT",
+      "description": "Rabbit/Dragon VIP identities, endgame SIM lock disclosure and Morishige allegation kept actor-scoped, late or uncertain."
+    },
+    {
+      "finding": "V4-PROV-007",
+      "severity": "HIGH",
+      "status": "RESOLVED_SOURCE_COMPARE",
+      "record": "y1v4.ev.106",
+      "description": "Kiyotaka's leverage photograph depicts earlier emergency stairwell episode (PDF p.163), not the later secluded-room attack."
+    },
+    {
+      "finding": "V4-LOC-008",
+      "severity": "MEDIUM",
+      "status": "RESOLVED_SOURCE_COMPARE",
+      "records": [
+        "y1v4.ev.031",
+        "y1v4.ev.127",
+        "y1v4.ev.129"
+      ],
+      "description": "Corrected cross-page exam rules, final announcement pages 240–241 and Ryūen's Class A VIP screen on p.241."
+    },
+    {
+      "finding": "V4-CASE-009",
+      "severity": "LOW",
+      "status": "RESOLVED_SOURCE_COMPARE",
+      "case_id": "y1v4.case.kei-karuizawa.reject-unconsented-photography",
+      "description": "Karuizawa's device rejection begins on PDF p.93; source scope expanded to p.93–95."
+    },
+    {
+      "finding": "V4-CASE-010",
+      "severity": "HIGH",
+      "status": "RESOLVED_SOURCE_COMPARE",
+      "case_id": "y1v4.case.honami-ichinose.stage-open-email-visibility",
+      "description": "PDF pp.219–220 shows Ichinose prepared a phone but Kiyotaka interrupted before she displayed any email. Case now credits intention/endorsement, not a completed disclosure."
+    },
+    {
+      "finding": "V4-EV-011",
+      "severity": "MEDIUM",
+      "status": "RESOLVED_SOURCE_COMPARE",
+      "record_id": "y1v4.ev.108",
+      "description": "Final-day Rabbit p.205 is a card-game distraction plus complaint from Yukimura, not continued active argument over policy as previously paraphrased."
+    },
+    {
+      "finding": "V4-ADV-012",
+      "severity": "MEDIUM",
+      "status": "RESOLVED_ADVERSARIAL",
+      "case_id": "y1v4.case.honami-ichinose.challenge-machida-passivity",
+      "description": "The pp.86→90 objection spans Machida's preceding case claim and Ichinose's own response; contextual evidence ev.052 linked without changing case ownership."
+    },
+    {
+      "finding": "V4-ADV-013",
+      "severity": "MEDIUM",
+      "status": "RESOLVED_ADVERSARIAL",
+      "case_id": "y1v4.case.suzune-horikita.challenge-rival-alliance-threat",
+      "description": "Horikita's counterargument on p148 and Ichinose's independent refusal on p149 now both linked as act and outcome evidence, without conflating their agency."
+    },
+    {
+      "finding": "V4-ADV-014",
+      "severity": "HIGH",
+      "status": "RESOLVED_ADVERSARIAL",
+      "record_id": "y1v4.ev.131",
+      "case_id": "y1v4.case.kiyotaka-ayanokoji.seed-false-rika-tip",
+      "description": "Added omission: Kiyotaka knowingly fabricates a witness tip to Manabe on pp110–111, distinctly prior to physical assault."
+    },
+    {
+      "finding": "V4-ADV-015",
+      "severity": "HIGH",
+      "status": "RESOLVED_ADVERSARIAL",
+      "record_id": "y1v4.ev.132",
+      "description": "Added teacher conversation pp122–123 confirming Hoshinomiya's discretionary transfer of Ichinose from Dragon to Rabbit, separate from unknown VIP selection algorithm."
+    }
+  ],
+  "initial_findings_closed_count": 3,
+  "initial_findings_open_source_questions": 3,
+  "case_status": "ASSISTANT_CASE_REVIEW_COMPLETE",
+  "final_semantic_review": {
+    "assistant_reviewed_evidence": 132,
+    "assistant_reviewed_cases": 44,
+    "assistant_total": 176,
+    "individual_verified": 0,
+    "adversarial_method": "PASS_20_NEGATIVE_MUTATIONS",
+    "external_independent_review": "NOT_PERFORMED",
+    "operator_release": "PENDING",
+    "registered_on": "2026-10-23",
+    "review_register": "data/canon/consolidated/audits/source-review-register-y1-v04.json"
+  },
+  "remediated_findings_count": 12,
+  "adversarial_mutation_count": 20
+}

@@ -1,0 +1,39 @@
+{
+  "id": "y1v4.case.yukimura.coordinate-rabbit-class-d-discretion",
+  "actor_id": "actor.yukimura",
+  "primary_actor_id": "actor.yukimura",
+  "title": "coordinate rabbit class d discretion",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Asks the four Class D Rabbit members to avoid leaking a VIP identity before they can discuss in private.",
+  "observed_result": "The group acknowledges a need for privacy but has not confirmed its VIP.",
+  "epistemic_limits": "This is a planning proposal, not demonstrated control over later phone sharing.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      50
+    ],
+    "chapter": 2,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kei-karuizawa",
+    "actor.sotomura",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "leadership"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "strategy",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.035"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

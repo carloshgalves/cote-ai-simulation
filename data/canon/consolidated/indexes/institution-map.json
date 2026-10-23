@@ -3,7 +3,7 @@
   "institutions": {
     "org.anhs": {
       "path": "data/canon/consolidated/institutions/anhs.json",
-      "source_volume_count": 4
+      "source_volume_count": 5
     },
     "org.citizens_party": {
       "path": "data/canon/consolidated/institutions/citizens_party.json",

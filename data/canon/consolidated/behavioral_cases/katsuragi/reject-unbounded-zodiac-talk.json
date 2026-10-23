@@ -1,0 +1,37 @@
+{
+  "id": "y1v4.case.katsuragi.reject-unbounded-zodiac-talk",
+  "actor_id": "actor.katsuragi",
+  "primary_actor_id": "actor.katsuragi",
+  "title": "reject unbounded zodiac talk",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Maintains caution and defends avoiding speculative group-level VIP discussions when approached by Ichinose.",
+  "observed_result": "Leaves the session without adopting Ichinose's proposed course.",
+  "epistemic_limits": "A situational defensive position, not a general ban on all alliances.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      141
+    ],
+    "chapter": 4,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.honami-ichinose"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "leadership"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "strategy",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.073"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "y1v4.case.kei-karuizawa.conceal-rabbit-vip-role",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "conceal rabbit vip role",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Keeps her privately announced Rabbit VIP status from peers and later checks whether the defensive deception succeeded.",
+  "observed_result": "The actual VIP identity remains hidden from most of the Rabbit group until after an early wrong guess.",
+  "epistemic_limits": "Case knowledge derives partly from Kiyotaka's later retrospective account and is not global or earlier public knowledge.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      231,
+      234
+    ],
+    "chapter": 5,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "exam"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "strategy",
+    "exam"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.120",
+    "y1v4.ev.123"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

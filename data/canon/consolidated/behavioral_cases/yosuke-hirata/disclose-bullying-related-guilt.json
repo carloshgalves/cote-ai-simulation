@@ -1,0 +1,39 @@
+{
+  "id": "y1v4.case.yosuke-hirata.disclose-bullying-related-guilt",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "disclose bullying related guilt",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Privately describes a past failure to help a bullied person and frames present interventions as atonement.",
+  "observed_result": "Kiyotaka receives background relevant to Hirata's conflict-resolution choices.",
+  "epistemic_limits": "These historical events are Hirata's uncorroborated testimony and not public school history.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      180,
+      182
+    ],
+    "chapter": 4,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "motivation",
+    "ethics"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "motivation",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.093",
+    "y1v4.ev.094"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

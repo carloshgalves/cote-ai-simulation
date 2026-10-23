@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v02.sevenseas.en.operator-provided",
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v04.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -26,7 +27,8 @@
         "y1v2.case.airi-sakura.testify-despite-stage-fright",
         "y1v2.case.airi-sakura.voluntary-witness-admission",
         "y1v3.case.airi-sakura.defend-kiyotaka-verbally",
-        "y1v3.case.airi-sakura.join-branch-collection"
+        "y1v3.case.airi-sakura.join-branch-collection",
+        "y1v4.case.airi-sakura.seek-cabin-social-advice"
       ],
       "context_evidence_refs": [
         "y1v1.ev.116",
@@ -56,7 +58,11 @@
         "y1v3.ev.043",
         "y1v3.ev.064",
         "y1v3.ev.065",
-        "y1v3.ev.083"
+        "y1v3.ev.083",
+        "y1v4.ev.013",
+        "y1v4.ev.014",
+        "y1v4.ev.015",
+        "y1v4.ev.059"
       ]
     },
     "observation": {
@@ -79,7 +85,9 @@
         "y1v2.ev.064",
         "y1v3.ev.033",
         "y1v3.ev.034",
-        "y1v3.ev.066"
+        "y1v3.ev.066",
+        "y1v4.ev.014",
+        "y1v4.ev.095"
       ]
     },
     "combat": {
@@ -138,14 +146,18 @@
       "behavioral_case_refs": [
         "y1v2.case.airi-sakura.testify-despite-stage-fright",
         "y1v2.case.airi-sakura.voluntary-witness-admission",
-        "y1v3.case.airi-sakura.defend-kiyotaka-verbally"
+        "y1v3.case.airi-sakura.defend-kiyotaka-verbally",
+        "y1v4.case.airi-sakura.seek-cabin-social-advice"
       ],
       "context_evidence_refs": [
         "y1v2.ev.052",
         "y1v2.ev.058",
         "y1v2.ev.069",
         "y1v2.ev.080",
-        "y1v3.ev.083"
+        "y1v3.ev.083",
+        "y1v4.ev.013",
+        "y1v4.ev.015",
+        "y1v4.ev.059"
       ]
     },
     "institution": {
@@ -176,11 +188,17 @@
       "context_evidence_refs": [
         "y1v3.ev.064"
       ]
+    },
+    "epistemics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.095"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Minimum volume-supported traits; no unstated skills, personalities or identity assertions. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory.",
+  "semantic_audit_notes": "Minimum volume-supported traits; no unstated skills, personalities or identity assertions. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

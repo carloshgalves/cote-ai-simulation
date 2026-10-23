@@ -1,0 +1,38 @@
+{
+  "id": "y1v4.case.kiyotaka-ayanokoji.test-zodiac-rabbit-reactions",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "test zodiac rabbit reactions",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Publicly supports cooperative discussion in Rabbit while scrutinizing the other classes' reactions.",
+  "observed_result": "Several students engage, but VIP status stays hidden.",
+  "epistemic_limits": "The observations do not establish that Kiyotaka already knows all secret VIPs.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      83
+    ],
+    "chapter": 3,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.honami-ichinose",
+    "actor.sotomura"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "observation"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "strategy",
+    "observation"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.050"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "y1v4.case.kiyotaka-ayanokoji.maintain-cover-despite-ichinose-test",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "maintain cover despite ichinose test",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Allows Ichinose to publicly challenge his apparent VIP identity without immediately exposing Karuizawa's secret.",
+  "observed_result": "Ichinose deciphers the second-level possibility but an early third-party answer ends Rabbit.",
+  "epistemic_limits": "Her independent detection must not be credited to him; he has only bounded control over others.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      227,
+      232
+    ],
+    "chapter": 5,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.honami-ichinose",
+    "actor.yukimura",
+    "actor.kei-karuizawa"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "observation"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "strategy",
+    "observation"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.118",
+    "y1v4.ev.121"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

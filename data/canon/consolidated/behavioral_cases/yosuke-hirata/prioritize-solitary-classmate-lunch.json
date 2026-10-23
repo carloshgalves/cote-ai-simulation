@@ -1,0 +1,40 @@
+{
+  "id": "y1v4.case.yosuke-hirata.prioritize-solitary-classmate-lunch",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "prioritize solitary classmate lunch",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Cancels a scheduled group lunch and invites Kiyotaka to eat alone so he can speak privately.",
+  "observed_result": "A private meeting begins instead of the prior planned lunch.",
+  "epistemic_limits": "His stated concern is observed; cancelling a date does not prove an enduring ranking of loyalties.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      14,
+      15
+    ],
+    "chapter": 2,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.kei-karuizawa"
+  ],
+  "capabilities_supported": [
+    "social",
+    "leadership"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "social",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.004",
+    "y1v4.ev.005"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

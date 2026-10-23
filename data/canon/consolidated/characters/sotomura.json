@@ -5,7 +5,8 @@
   "modeling_tier": "MINIMAL_ENTITY",
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
-    "ln.y1.v02.sevenseas.en.operator-provided"
+    "ln.y1.v02.sevenseas.en.operator-provided",
+    "ln.y1.v04.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -24,7 +25,9 @@
       "context_evidence_refs": [
         "y1v1.ev.034",
         "y1v1.ev.115",
-        "y1v1.ev.117"
+        "y1v1.ev.117",
+        "y1v4.ev.047",
+        "y1v4.ev.058"
       ]
     },
     "ethics": {
@@ -41,20 +44,43 @@
         "y1v1.ev.115",
         "y1v1.ev.117",
         "y1v2.ev.045",
-        "y1v2.ev.075"
+        "y1v2.ev.075",
+        "y1v4.ev.018",
+        "y1v4.ev.047"
       ]
     },
     "strategy": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v2.ev.045",
-        "y1v2.ev.075"
+        "y1v2.ev.075",
+        "y1v4.ev.035",
+        "y1v4.ev.050",
+        "y1v4.ev.058"
+      ]
+    },
+    "exam": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.018"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.035"
+      ]
+    },
+    "persuasion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.050"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

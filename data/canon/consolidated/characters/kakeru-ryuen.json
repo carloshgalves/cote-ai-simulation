@@ -5,7 +5,8 @@
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
     "ln.y1.v02.sevenseas.en.operator-provided",
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v04.sevenseas.en.operator-provided"
   ],
   "source_status": "NO_VOLUME_0_1_OBSERVED_EVIDENCE",
   "identity": {
@@ -21,18 +22,26 @@
   "domains": {
     "conflict": {
       "behavioral_case_refs": [
-        "y1v3.case.kakeru-ryuen.intimidate-ishizaki"
+        "y1v3.case.kakeru-ryuen.intimidate-ishizaki",
+        "y1v4.case.kakeru-ryuen.interrogate-hidden-island-leader"
       ],
       "context_evidence_refs": [
         "y1v2.ev.081",
         "y1v3.ev.053",
         "y1v3.ev.055",
-        "y1v3.ev.056"
+        "y1v3.ev.056",
+        "y1v4.ev.038",
+        "y1v4.ev.044",
+        "y1v4.ev.045",
+        "y1v4.ev.068",
+        "y1v4.ev.124"
       ]
     },
     "strategy": {
       "behavioral_case_refs": [
-        "y1v3.case.kakeru-ryuen.organize-luxury-spending"
+        "y1v3.case.kakeru-ryuen.organize-luxury-spending",
+        "y1v4.case.kakeru-ryuen.name-kushida-dragon-vip",
+        "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance"
       ],
       "context_evidence_refs": [
         "y1v2.ev.081",
@@ -42,7 +51,20 @@
         "y1v3.ev.096",
         "y1v3.ev.097",
         "y1v3.ev.113",
-        "y1v3.ev.117"
+        "y1v3.ev.117",
+        "y1v4.ev.037",
+        "y1v4.ev.041",
+        "y1v4.ev.044",
+        "y1v4.ev.061",
+        "y1v4.ev.068",
+        "y1v4.ev.074",
+        "y1v4.ev.075",
+        "y1v4.ev.076",
+        "y1v4.ev.077",
+        "y1v4.ev.124",
+        "y1v4.ev.125",
+        "y1v4.ev.126",
+        "y1v4.ev.129"
       ]
     },
     "economy": {
@@ -52,7 +74,8 @@
       "context_evidence_refs": [
         "y1v3.ev.054",
         "y1v3.ev.073",
-        "y1v3.ev.105"
+        "y1v3.ev.105",
+        "y1v4.ev.128"
       ]
     },
     "leadership": {
@@ -60,28 +83,38 @@
         "y1v3.case.kakeru-ryuen.intimidate-ishizaki"
       ],
       "context_evidence_refs": [
-        "y1v3.ev.055"
+        "y1v3.ev.055",
+        "y1v4.ev.038"
       ]
     },
     "observation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v4.case.kakeru-ryuen.interrogate-hidden-island-leader",
+        "y1v4.case.kakeru-ryuen.name-kushida-dragon-vip"
+      ],
       "context_evidence_refs": [
         "y1v3.ev.056",
         "y1v3.ev.096",
-        "y1v3.ev.117"
+        "y1v3.ev.117",
+        "y1v4.ev.045",
+        "y1v4.ev.125"
       ]
     },
     "politics": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v3.ev.097",
-        "y1v3.ev.113"
+        "y1v3.ev.113",
+        "y1v4.ev.061"
       ]
     },
     "exam": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v3.ev.105"
+        "y1v3.ev.105",
+        "y1v4.ev.041",
+        "y1v4.ev.126",
+        "y1v4.ev.128"
       ]
     },
     "emotion": {
@@ -93,13 +126,38 @@
     "social": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v3.ev.106"
+        "y1v3.ev.106",
+        "y1v4.ev.037",
+        "y1v4.ev.074"
+      ]
+    },
+    "reasoning": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.075",
+        "y1v4.ev.129"
+      ]
+    },
+    "negotiation": {
+      "behavioral_case_refs": [
+        "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance"
+      ],
+      "context_evidence_refs": [
+        "y1v4.ev.076",
+        "y1v4.ev.077",
+        "y1v4.ev.078"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.078"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "No speculative Ryuen feats, identity X or Volume 2+ history; legacy YAML supplies no authorized direct Y1_START memory. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory.",
+  "semantic_audit_notes": "No speculative Ryuen feats, identity X or Volume 2+ history; legacy YAML supplies no authorized direct Y1_START memory. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

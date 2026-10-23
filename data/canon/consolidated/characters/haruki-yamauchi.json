@@ -5,7 +5,8 @@
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v04.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -117,7 +118,8 @@
       "context_evidence_refs": [
         "y1v3.ev.043",
         "y1v3.ev.079",
-        "y1v3.ev.080"
+        "y1v3.ev.080",
+        "y1v4.ev.060"
       ]
     },
     "risk_management": {
@@ -133,11 +135,17 @@
       "context_evidence_refs": [
         "y1v3.ev.088"
       ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.060"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. Corrected attribution: physically grabs Kiyotaka over Sakura contact promise; cannot attribute attack to Ryūen.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

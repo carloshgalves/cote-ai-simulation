@@ -1,0 +1,299 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.y1.zodiac-cruise-1",
+  "name": "Year 1 cruise ship Zodiac/VIP mixed-class examination",
+  "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
+  "source_coverage": [
+    "ln.y1.v04.sevenseas.en.operator-provided"
+  ],
+  "source_pdf_sha256": "1d587b01242cd576fa2b0627222329d1bf1c23b12d206ad63f7a590f79fe9cc8",
+  "location": "School-provided cruise ship (private group rooms)",
+  "participants": "First-year students of Classes A–D",
+  "group_count": 12,
+  "group_names": [
+    "Rat",
+    "Cow",
+    "Tiger",
+    "Rabbit",
+    "Dragon",
+    "Snake",
+    "Horse",
+    "Sheep",
+    "Monkey",
+    "Rooster",
+    "Dog",
+    "Pig"
+  ],
+  "structure": {
+    "students_per_group": "approximately 14, varies by group",
+    "group_assignment": "SCHOOL_SELECTED_IMMUTABLE",
+    "mixed_classes": true,
+    "one_vip_per_group": true,
+    "vip_selected_by": "SCHOOL",
+    "public_vip_identity": false
+  },
+  "group_rosters_reference": {
+    "Rabbit": {
+      "A": [
+        "Takemoto Shigeru",
+        "Machida Kouji",
+        "Morishige Takurou"
+      ],
+      "B": [
+        "Ichinose Honami",
+        "Hamaguchi Tetsuya",
+        "Beppu Ryouta"
+      ],
+      "C": [
+        "Ibuki Mio",
+        "Manabe Shiho",
+        "Yabu Nanami",
+        "Yamashita Saki"
+      ],
+      "D": [
+        "Ayanokouji Kiyotaka",
+        "Karuizawa Kei",
+        "Sotomura Hideo",
+        "Yukimura Teruhiko"
+      ]
+    },
+    "Dragon": {
+      "A": [
+        "Katsuragi Kouhei",
+        "Nishikawa Ryouko",
+        "Matoba Shinji",
+        "Yano Koharu"
+      ],
+      "B": [
+        "Andou Saya",
+        "Kanzaki Ryuuji",
+        "Tsube Hitomi"
+      ],
+      "C": [
+        "Oda Takumi",
+        "Suzuki Hidetoshi",
+        "Sonoda Masashi",
+        "Ryuuen Kakeru"
+      ],
+      "D": [
+        "Kushida Kikyou",
+        "Hirata Yousuke",
+        "Horikita Suzune"
+      ]
+    }
+  },
+  "timing": {
+    "private_group_briefing": "Before 8 AM VIP notification",
+    "vip_notification": "08:00 first examination day",
+    "mandatory_discussions_local": [
+      "13:00",
+      "20:00"
+    ],
+    "mandatory_minutes_per_session": 60,
+    "final_group_discussion_ends": "21:00 on closing day",
+    "normal_answer_window": [
+      "21:30",
+      "22:00"
+    ],
+    "outcomes_announcement": "23:00 final day",
+    "schedule_ambiguity": "Printed source p40 says fourth calendar day (with first day free), while teacher example p41 and narrator p46 refer to the end of a three-day test. Preserve without silently reconciling calendar labels."
+  },
+  "outcomes": [
+    {
+      "number": 1,
+      "label": "FINAL_CORRECT_GROUP_ANSWER",
+      "trigger": "Earliest valid final-window group response identifies its VIP correctly",
+      "awards": {
+        "each_non_vip_member_private_points": 500000,
+        "vip_private_points": 1000000
+      },
+      "class_points": "NO_DIRECT_ADJUSTMENT_STATED"
+    },
+    {
+      "number": 2,
+      "label": "NO_VALID_FINAL_CORRECT_IDENTIFICATION",
+      "trigger": "No qualifying final answer, or wrong final answer by eligible non-VIP outside VIP's class",
+      "awards": {
+        "vip_private_points": 500000
+      },
+      "class_points": "NO_DIRECT_ADJUSTMENT_STATED"
+    },
+    {
+      "number": 3,
+      "label": "EARLY_CORRECT_TRAITOR",
+      "trigger": "Non-VIP student from a different class submits correct early VIP identification",
+      "awards": {
+        "submitter_private_points": 500000,
+        "submitter_class_points": 50
+      },
+      "penalties": {
+        "vip_class_points": -50
+      },
+      "ends_group_immediately": true
+    },
+    {
+      "number": 4,
+      "label": "EARLY_INCORRECT_TRAITOR",
+      "trigger": "Non-VIP student from a different class submits incorrect early VIP identification",
+      "awards": {
+        "vip_private_points": 500000,
+        "vip_class_points": 50
+      },
+      "penalties": {
+        "submitter_class_points": -50
+      },
+      "ends_group_immediately": true
+    }
+  ],
+  "critical_validations": [
+    "VIP never submits",
+    "Early attempted answers from VIP's classmates do not count and do not terminate",
+    "Only first qualifying answer determines group outcome",
+    "School mail cannot be copied, transferred, forged or modified",
+    "VIP identity and answer submitter remain undisclosed in published result",
+    "Class point outcomes do not imply private point balances transfer between classes",
+    "Teacher statements regarding timing should not silently override printed source inconsistency"
+  ],
+  "prohibited_actions": [
+    "Stealing another student's phone",
+    "Threatening someone to obtain secret VIP data",
+    "Submitting from another student's phone without permission",
+    "Modifying school-issued emails",
+    "Illicit cross-class communications outside allowed process (source refers to prohibitions, scope pending full normative review)"
+  ],
+  "sanctions": "Serious violations including expulsion per briefing; do not model blanket automatic expulsion without procedure",
+  "anonymity": "School publishes group outcome and class delta, not identities; temporary private-point IDs and split receipts mentioned",
+  "individual_known_secret_outcomes": [
+    {
+      "actor": "actor.kei-karuizawa",
+      "group": "Rabbit",
+      "secret": "VIP",
+      "acquisition": "08:00_PRIVATE_NOTIFICATION",
+      "public_group_knowledge": "NOT_SHARED_UNTIL_AFTER_EXAM"
+    },
+    {
+      "actor": "actor.kikyo-kushida",
+      "group": "Dragon",
+      "secret": "VIP",
+      "acquisition": "08:00_PRIVATE_NOTIFICATION",
+      "public_group_knowledge": "ENDGAME_DERIVED_AND_POST_RESULTS"
+    },
+    {
+      "actor": "actor.kiyotaka-ayanokoji",
+      "group": "Rabbit",
+      "secret": "NOT_VIP",
+      "acquisition": "08:00_PRIVATE_NOTIFICATION"
+    }
+  ],
+  "observed_final_outcomes": {
+    "Rat": 3,
+    "Cow": 4,
+    "Tiger": 2,
+    "Rabbit": 4,
+    "Dragon": 1,
+    "Snake": 2,
+    "Horse": 3,
+    "Sheep": 2,
+    "Monkey": 3,
+    "Rooster": 3,
+    "Dog": 2,
+    "Pig": 3
+  },
+  "observed_net_class_points": {
+    "A": -200,
+    "B": 0,
+    "C": 150,
+    "D": 50
+  },
+  "observed_net_private_points": {
+    "A": 2000000,
+    "B": 2500000,
+    "C": 5500000,
+    "D": 3000000
+  },
+  "epistemic_disclosures": [
+    {
+      "stage": "PRE_BRIEFING",
+      "scope": "STUDENTS",
+      "knowledge": "Vacation expectation, no known test outcome or VIP"
+    },
+    {
+      "stage": "AFTER_BRIEFING",
+      "scope": "ASSIGNED_CLASS_ROOM",
+      "knowledge": "Rules and own group roster, not global VIP identities"
+    },
+    {
+      "stage": "FIRST_MORNING_NOTIFICATION",
+      "scope": "EACH_STUDENT_ONLY",
+      "knowledge": "Whether personal VIP chosen; classmates cannot assume receipt content"
+    },
+    {
+      "stage": "DURING_GROUP_DISCUSSIONS",
+      "scope": "ATTENDING_ACTORS_ONLY",
+      "knowledge": "Local words and visible device actions; secret SIM changes and betrayal identities not automatically known"
+    },
+    {
+      "stage": "FINAL_PRIVATE_DISCLOSURE",
+      "scope": "KIYOTAKA_ICHINOSE_AND_KARUIZAWA_SCOPED",
+      "knowledge": "Karuizawa identity and layered device switch are understood by a limited set in different ways"
+    },
+    {
+      "stage": "POST_RESULTS",
+      "scope": "ALL_FIRST_YEAR_STUDENTS",
+      "knowledge": "Group outcomes and class totals but not hidden VIP identities or traitor submitters as official disclosure"
+    }
+  ],
+  "source_evidence_refs": [
+    "y1v4.ev.016",
+    "y1v4.ev.017",
+    "y1v4.ev.018",
+    "y1v4.ev.019",
+    "y1v4.ev.020",
+    "y1v4.ev.021",
+    "y1v4.ev.024",
+    "y1v4.ev.025",
+    "y1v4.ev.026",
+    "y1v4.ev.027",
+    "y1v4.ev.028",
+    "y1v4.ev.029",
+    "y1v4.ev.030",
+    "y1v4.ev.031",
+    "y1v4.ev.033",
+    "y1v4.ev.034",
+    "y1v4.ev.041",
+    "y1v4.ev.043",
+    "y1v4.ev.064",
+    "y1v4.ev.067",
+    "y1v4.ev.107",
+    "y1v4.ev.108",
+    "y1v4.ev.114",
+    "y1v4.ev.117",
+    "y1v4.ev.120",
+    "y1v4.ev.126",
+    "y1v4.ev.127",
+    "y1v4.ev.128",
+    "y1v4.ev.132"
+  ],
+  "open_questions": [
+    "Exact VIP allocation algorithm not demonstrated; Ryūen claims a pattern but this is not a normative school rule",
+    "All 12 group rosters and VIP identities not officially disclosed in source",
+    "Interaction of prohibited cross-class communication and attending scheduled mixed groups needs full normative wording verification",
+    "Calendar day three versus day four source wording conflict",
+    "Private-point totals do not disclose each actual receiver's identity",
+    "What concrete school procedure applies to coercion and misuse of phone evidence",
+    "How discretionary instructor placement of class representatives interacts with criteria for other group members remains unspecified."
+  ],
+  "simulation_policy": "REFERENCE_ONLY: Requires a separate verified executable ExamSpec, knowledge fences, timing semantics and operator release before any Zodiac/VIP runtime.",
+  "group_assignment_discretion": {
+    "status": "TEACHER_REPORTED_SUPPORTED_BY_MASHIMA",
+    "source_pdf_pages": [
+      122,
+      123
+    ],
+    "statement": "Hoshinomiya says she deliberately moved Ichinose from Dragon to Rabbit as a challenge; Mashima states there is no rule against her decision. This neither establishes unconstrained instructor authority nor solves VIP allocation.",
+    "source_evidence_refs": [
+      "y1v4.ev.132"
+    ],
+    "actor_knowledge_scope": "KIYOTAKA_OVERHEARS_PRIVATE_TEACHER_DISCUSSION"
+  }
+}

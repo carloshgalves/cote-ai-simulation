@@ -1,0 +1,37 @@
+{
+  "id": "y1v4.case.yukimura.exhibit-phone-under-rabbit-pressure",
+  "actor_id": "actor.yukimura",
+  "primary_actor_id": "actor.yukimura",
+  "title": "exhibit phone under rabbit pressure",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Under suspicion and after coordination with Kiyotaka, shows a phone he believes is Kiyotaka's.",
+  "observed_result": "The group treats the device as relevant evidence before Ichinose challenges the identity inference.",
+  "epistemic_limits": "He was not informed of the full layered swap, so independent deception mastery cannot be inferred.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      224
+    ],
+    "chapter": 5,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "exam"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "strategy",
+    "exam"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.117"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

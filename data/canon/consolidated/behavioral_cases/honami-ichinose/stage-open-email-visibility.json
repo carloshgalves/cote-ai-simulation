@@ -1,0 +1,40 @@
+{
+  "id": "y1v4.case.honami-ichinose.stage-open-email-visibility",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "stage open email visibility",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Supports Hamaguchi's proposal to volunteer authentic VIP-notification emails, reaches for her phone and prepares to join the display; Kiyotaka intervenes before she reveals its contents.",
+  "observed_result": "Hamaguchi and Beppu display their notifications, then Kiyotaka presents another device first. Ichinose's own email is not shown in this passage.",
+  "epistemic_limits": "Source PDF pp.218–220 explicitly says Kiyotaka interrupts before Ichinose can show her email. Never credit her with a completed phone disclosure or confirmed VIP status.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      218,
+      219
+    ],
+    "chapter": 5,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.hamaguchi",
+    "actor.beppu"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "observation"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "strategy",
+    "observation"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.113",
+    "y1v4.ev.114"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

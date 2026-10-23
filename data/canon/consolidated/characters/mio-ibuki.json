@@ -4,7 +4,8 @@
   "display_name": "Mio Ibuki",
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v04.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -18,7 +19,8 @@
   "domains": {
     "observation": {
       "behavioral_case_refs": [
-        "y1v3.case.mio-ibuki.undercover-leader-card-delivery"
+        "y1v3.case.mio-ibuki.undercover-leader-card-delivery",
+        "y1v4.case.mio-ibuki.volunteer-device-disclosure"
       ],
       "context_evidence_refs": [
         "y1v3.ev.042",
@@ -27,7 +29,8 @@
         "y1v3.ev.092",
         "y1v3.ev.096",
         "y1v3.ev.098",
-        "y1v3.ev.112"
+        "y1v3.ev.112",
+        "y1v4.ev.116"
       ]
     },
     "social": {
@@ -36,7 +39,8 @@
         "y1v3.ev.042",
         "y1v3.ev.043",
         "y1v3.ev.048",
-        "y1v3.ev.049"
+        "y1v3.ev.049",
+        "y1v4.ev.023"
       ]
     },
     "conflict": {
@@ -47,7 +51,9 @@
         "y1v3.ev.043",
         "y1v3.ev.056",
         "y1v3.ev.093",
-        "y1v3.ev.095"
+        "y1v3.ev.095",
+        "y1v4.ev.055",
+        "y1v4.ev.056"
       ]
     },
     "persuasion": {
@@ -64,7 +70,8 @@
     },
     "strategy": {
       "behavioral_case_refs": [
-        "y1v3.case.mio-ibuki.undercover-leader-card-delivery"
+        "y1v3.case.mio-ibuki.undercover-leader-card-delivery",
+        "y1v4.case.mio-ibuki.volunteer-device-disclosure"
       ],
       "context_evidence_refs": [
         "y1v3.ev.085",
@@ -72,7 +79,8 @@
         "y1v3.ev.095",
         "y1v3.ev.096",
         "y1v3.ev.097",
-        "y1v3.ev.112"
+        "y1v3.ev.112",
+        "y1v4.ev.116"
       ]
     },
     "combat": {
@@ -96,11 +104,29 @@
       "context_evidence_refs": [
         "y1v3.ev.097"
       ]
+    },
+    "institution": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.023"
+      ]
+    },
+    "privacy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.055"
+      ]
+    },
+    "emotion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.056"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown.",
+  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": true,
     "future_fate_unknown": true

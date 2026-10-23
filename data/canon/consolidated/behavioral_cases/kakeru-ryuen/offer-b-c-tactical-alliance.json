@@ -1,0 +1,42 @@
+{
+  "id": "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "offer b c tactical alliance",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Presents Ichinose a tactical Class B–C alliance proposal targeting Class A and claims knowledge of Class C VIP assignments.",
+  "observed_result": "Ichinose explicitly refuses to join under the stated circumstances.",
+  "epistemic_limits": "The proposal is observed, but declared intel is not fully independently corroborated; no B/C alliance was concluded.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      145,
+      146,
+      149
+    ],
+    "chapter": 4,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.honami-ichinose",
+    "actor.ryuji-kanzaki"
+  ],
+  "capabilities_supported": [
+    "negotiation",
+    "strategy"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "negotiation",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.075",
+    "y1v4.ev.076",
+    "y1v4.ev.078"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

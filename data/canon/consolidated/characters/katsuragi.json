@@ -4,7 +4,8 @@
   "display_name": "Katsuragi (given name unknown)",
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v04.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -19,7 +20,8 @@
     "strategy": {
       "behavioral_case_refs": [
         "y1v3.case.katsuragi.defend-class-a-exclusive-cave",
-        "y1v3.case.katsuragi.infer-cave-route-from-cruise"
+        "y1v3.case.katsuragi.infer-cave-route-from-cruise",
+        "y1v4.case.katsuragi.reject-unbounded-zodiac-talk"
       ],
       "context_evidence_refs": [
         "y1v3.ev.035",
@@ -27,7 +29,10 @@
         "y1v3.ev.063",
         "y1v3.ev.068",
         "y1v3.ev.097",
-        "y1v3.ev.113"
+        "y1v3.ev.113",
+        "y1v4.ev.037",
+        "y1v4.ev.041",
+        "y1v4.ev.073"
       ]
     },
     "institution": {
@@ -41,7 +46,8 @@
         "y1v3.case.katsuragi.defend-class-a-exclusive-cave"
       ],
       "context_evidence_refs": [
-        "y1v3.ev.063"
+        "y1v3.ev.063",
+        "y1v4.ev.038"
       ]
     },
     "observation": {
@@ -59,11 +65,32 @@
         "y1v3.ev.097",
         "y1v3.ev.113"
       ]
+    },
+    "social": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.037"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [
+        "y1v4.case.katsuragi.reject-unbounded-zodiac-talk"
+      ],
+      "context_evidence_refs": [
+        "y1v4.ev.038",
+        "y1v4.ev.073"
+      ]
+    },
+    "exam": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.041"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown.",
+  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": true,
     "future_fate_unknown": true

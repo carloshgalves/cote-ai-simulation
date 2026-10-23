@@ -1,0 +1,13 @@
+{
+  "source_id": "ln.y1.v04.sevenseas.en.operator-provided",
+  "work_id": "ln.y1.v04",
+  "edition": "Operator-supplied English translation of Classroom of the Elite Year 1 Volume 4, Seven Seas",
+  "pdf_sha256": "1d587b01242cd576fa2b0627222329d1bf1c23b12d206ad63f7a590f79fe9cc8",
+  "pdf_pages": 248,
+  "source_kind": "PRIMARY_LITERARY_SOURCE_USER_SUPPLIED",
+  "operator_selected_for_extraction": true,
+  "original_pdf_committed": false,
+  "claims_all_verified": false,
+  "record_audit": "ASSISTANT_SEMANTIC_REVIEW_AND_ADVERSARIAL_METHOD_COMPLETE_OPERATOR_PENDING",
+  "warning": "Source watermarks are not canon; neither copyrighted PDF nor verbatim text committed."
+}

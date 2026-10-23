@@ -4,7 +4,8 @@
   "display_name": "Yukimura (given name unknown at this horizon)",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+    "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "ln.y1.v04.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -19,7 +20,10 @@
     "social": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v1.ev.062"
+        "y1v1.ev.062",
+        "y1v4.ev.047",
+        "y1v4.ev.058",
+        "y1v4.ev.085"
       ]
     },
     "academic_reasoning": {
@@ -27,11 +31,84 @@
       "context_evidence_refs": [
         "y1v1.ev.128"
       ]
+    },
+    "observation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.018",
+        "y1v4.ev.047",
+        "y1v4.ev.116",
+        "y1v4.ev.118"
+      ]
+    },
+    "exam": {
+      "behavioral_case_refs": [
+        "y1v4.case.yukimura.exhibit-phone-under-rabbit-pressure"
+      ],
+      "context_evidence_refs": [
+        "y1v4.ev.018",
+        "y1v4.ev.021",
+        "y1v4.ev.064",
+        "y1v4.ev.117"
+      ]
+    },
+    "governance": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.021"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [
+        "y1v4.case.yukimura.coordinate-rabbit-class-d-discretion",
+        "y1v4.case.yukimura.exhibit-phone-under-rabbit-pressure"
+      ],
+      "context_evidence_refs": [
+        "y1v4.ev.035",
+        "y1v4.ev.058",
+        "y1v4.ev.064",
+        "y1v4.ev.115",
+        "y1v4.ev.116",
+        "y1v4.ev.117",
+        "y1v4.ev.118"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [
+        "y1v4.case.yukimura.coordinate-rabbit-class-d-discretion"
+      ],
+      "context_evidence_refs": [
+        "y1v4.ev.035"
+      ]
+    },
+    "persuasion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.052"
+      ]
+    },
+    "economy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.052"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.085"
+      ]
+    },
+    "deception": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v4.ev.115"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

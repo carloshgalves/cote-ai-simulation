@@ -1,0 +1,40 @@
+{
+  "id": "y1v4.case.kiyotaka-ayanokoji.compare-private-exam-summons",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "compare private exam summons",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Compares school summons times with Kushida and Suzune and notices inconsistent times and rooms.",
+  "observed_result": "Forms an early distribution hypothesis without knowing group assignment method.",
+  "epistemic_limits": "Speculation about gender separation is not proven by the observed notifications.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      29,
+      30
+    ],
+    "chapter": 2,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "observation",
+    "exam"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "observation",
+    "exam"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.016",
+    "y1v4.ev.017"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

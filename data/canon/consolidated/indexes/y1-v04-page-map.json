@@ -1,0 +1,934 @@
+{
+  "schema_version": "page-index-v1",
+  "source_id": "ln.y1.v04.sevenseas.en.operator-provided",
+  "pages": {
+    "10": {
+      "evidence": [
+        "y1v4.ev.001"
+      ],
+      "cases": []
+    },
+    "11": {
+      "evidence": [
+        "y1v4.ev.002"
+      ],
+      "cases": []
+    },
+    "12": {
+      "evidence": [
+        "y1v4.ev.003"
+      ],
+      "cases": []
+    },
+    "14": {
+      "evidence": [
+        "y1v4.ev.004"
+      ],
+      "cases": [
+        "y1v4.case.yosuke-hirata.prioritize-solitary-classmate-lunch"
+      ]
+    },
+    "15": {
+      "evidence": [
+        "y1v4.ev.005"
+      ],
+      "cases": [
+        "y1v4.case.yosuke-hirata.prioritize-solitary-classmate-lunch"
+      ]
+    },
+    "17": {
+      "evidence": [
+        "y1v4.ev.006"
+      ],
+      "cases": [
+        "y1v4.case.yosuke-hirata.seek-horikita-cooperation-through-kiyotaka"
+      ]
+    },
+    "18": {
+      "evidence": [
+        "y1v4.ev.007"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.criticize-hidden-horikita-mediation",
+        "y1v4.case.yosuke-hirata.seek-horikita-cooperation-through-kiyotaka"
+      ]
+    },
+    "20": {
+      "evidence": [
+        "y1v4.ev.008"
+      ],
+      "cases": []
+    },
+    "21": {
+      "evidence": [
+        "y1v4.ev.009"
+      ],
+      "cases": [
+        "y1v4.case.rokusuke-koenji.proclaim-autograph-value"
+      ]
+    },
+    "22": {
+      "evidence": [
+        "y1v4.ev.010"
+      ],
+      "cases": [
+        "y1v4.case.rokusuke-koenji.proclaim-autograph-value"
+      ]
+    },
+    "23": {
+      "evidence": [
+        "y1v4.ev.011"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.redirect-koenji-to-bellhop"
+      ]
+    },
+    "24": {
+      "evidence": [
+        "y1v4.ev.012"
+      ],
+      "cases": []
+    },
+    "26": {
+      "evidence": [
+        "y1v4.ev.013"
+      ],
+      "cases": [
+        "y1v4.case.airi-sakura.seek-cabin-social-advice"
+      ]
+    },
+    "27": {
+      "evidence": [
+        "y1v4.ev.014"
+      ],
+      "cases": [
+        "y1v4.case.airi-sakura.seek-cabin-social-advice"
+      ]
+    },
+    "28": {
+      "evidence": [
+        "y1v4.ev.015"
+      ],
+      "cases": []
+    },
+    "29": {
+      "evidence": [
+        "y1v4.ev.016"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.compare-private-exam-summons"
+      ]
+    },
+    "30": {
+      "evidence": [
+        "y1v4.ev.017"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.compare-private-exam-summons"
+      ]
+    },
+    "32": {
+      "evidence": [
+        "y1v4.ev.018"
+      ],
+      "cases": []
+    },
+    "33": {
+      "evidence": [
+        "y1v4.ev.019"
+      ],
+      "cases": []
+    },
+    "34": {
+      "evidence": [
+        "y1v4.ev.020"
+      ],
+      "cases": []
+    },
+    "36": {
+      "evidence": [
+        "y1v4.ev.021"
+      ],
+      "cases": []
+    },
+    "38": {
+      "evidence": [
+        "y1v4.ev.022"
+      ],
+      "cases": []
+    },
+    "39": {
+      "evidence": [
+        "y1v4.ev.023"
+      ],
+      "cases": []
+    },
+    "40": {
+      "evidence": [
+        "y1v4.ev.024",
+        "y1v4.ev.025"
+      ],
+      "cases": []
+    },
+    "41": {
+      "evidence": [
+        "y1v4.ev.026",
+        "y1v4.ev.027",
+        "y1v4.ev.031"
+      ],
+      "cases": []
+    },
+    "42": {
+      "evidence": [
+        "y1v4.ev.028"
+      ],
+      "cases": []
+    },
+    "44": {
+      "evidence": [
+        "y1v4.ev.029",
+        "y1v4.ev.031"
+      ],
+      "cases": []
+    },
+    "45": {
+      "evidence": [
+        "y1v4.ev.030",
+        "y1v4.ev.031"
+      ],
+      "cases": []
+    },
+    "46": {
+      "evidence": [
+        "y1v4.ev.032"
+      ],
+      "cases": []
+    },
+    "48": {
+      "evidence": [
+        "y1v4.ev.033"
+      ],
+      "cases": []
+    },
+    "49": {
+      "evidence": [
+        "y1v4.ev.034"
+      ],
+      "cases": []
+    },
+    "50": {
+      "evidence": [
+        "y1v4.ev.035"
+      ],
+      "cases": [
+        "y1v4.case.yukimura.coordinate-rabbit-class-d-discretion"
+      ]
+    },
+    "52": {
+      "evidence": [
+        "y1v4.ev.036"
+      ],
+      "cases": []
+    },
+    "55": {
+      "evidence": [
+        "y1v4.ev.037"
+      ],
+      "cases": []
+    },
+    "58": {
+      "evidence": [
+        "y1v4.ev.038"
+      ],
+      "cases": []
+    },
+    "60": {
+      "evidence": [
+        "y1v4.ev.039"
+      ],
+      "cases": []
+    },
+    "63": {
+      "evidence": [
+        "y1v4.ev.040"
+      ],
+      "cases": []
+    },
+    "64": {
+      "evidence": [
+        "y1v4.ev.041"
+      ],
+      "cases": [
+        "y1v4.case.suzune-horikita.test-group-assignment-hypothesis"
+      ]
+    },
+    "65": {
+      "evidence": [
+        "y1v4.ev.042"
+      ],
+      "cases": [
+        "y1v4.case.suzune-horikita.test-group-assignment-hypothesis"
+      ]
+    },
+    "66": {
+      "evidence": [
+        "y1v4.ev.043"
+      ],
+      "cases": []
+    },
+    "69": {
+      "evidence": [
+        "y1v4.ev.044"
+      ],
+      "cases": [
+        "y1v4.case.kakeru-ryuen.interrogate-hidden-island-leader"
+      ]
+    },
+    "72": {
+      "evidence": [
+        "y1v4.ev.045"
+      ],
+      "cases": [
+        "y1v4.case.kakeru-ryuen.interrogate-hidden-island-leader"
+      ]
+    },
+    "76": {
+      "evidence": [
+        "y1v4.ev.046"
+      ],
+      "cases": []
+    },
+    "79": {
+      "evidence": [
+        "y1v4.ev.047"
+      ],
+      "cases": []
+    },
+    "81": {
+      "evidence": [
+        "y1v4.ev.048"
+      ],
+      "cases": [
+        "y1v4.case.honami-ichinose.initiate-rabbit-discussion"
+      ]
+    },
+    "82": {
+      "evidence": [
+        "y1v4.ev.049"
+      ],
+      "cases": [
+        "y1v4.case.honami-ichinose.initiate-rabbit-discussion"
+      ]
+    },
+    "83": {
+      "evidence": [
+        "y1v4.ev.050"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.test-zodiac-rabbit-reactions"
+      ]
+    },
+    "85": {
+      "evidence": [
+        "y1v4.ev.051"
+      ],
+      "cases": [
+        "y1v4.case.machida.advocate-rabbit-silence"
+      ]
+    },
+    "86": {
+      "evidence": [
+        "y1v4.ev.052"
+      ],
+      "cases": [
+        "y1v4.case.honami-ichinose.challenge-machida-passivity",
+        "y1v4.case.machida.advocate-rabbit-silence"
+      ]
+    },
+    "87": {
+      "evidence": [
+        "y1v4.ev.053"
+      ],
+      "cases": []
+    },
+    "90": {
+      "evidence": [
+        "y1v4.ev.054"
+      ],
+      "cases": [
+        "y1v4.case.honami-ichinose.challenge-machida-passivity"
+      ]
+    },
+    "93": {
+      "evidence": [
+        "y1v4.ev.055"
+      ],
+      "cases": [
+        "y1v4.case.kei-karuizawa.reject-unconsented-photography"
+      ]
+    },
+    "94": {
+      "evidence": [
+        "y1v4.ev.056"
+      ],
+      "cases": [
+        "y1v4.case.kei-karuizawa.reject-unconsented-photography"
+      ]
+    },
+    "95": {
+      "evidence": [
+        "y1v4.ev.057"
+      ],
+      "cases": [
+        "y1v4.case.kei-karuizawa.reject-unconsented-photography",
+        "y1v4.case.machida.stop-forced-photography"
+      ]
+    },
+    "97": {
+      "evidence": [
+        "y1v4.ev.058"
+      ],
+      "cases": []
+    },
+    "100": {
+      "evidence": [
+        "y1v4.ev.059"
+      ],
+      "cases": []
+    },
+    "103": {
+      "evidence": [
+        "y1v4.ev.060"
+      ],
+      "cases": []
+    },
+    "106": {
+      "evidence": [
+        "y1v4.ev.061"
+      ],
+      "cases": []
+    },
+    "109": {
+      "evidence": [
+        "y1v4.ev.062"
+      ],
+      "cases": []
+    },
+    "110": {
+      "evidence": [
+        "y1v4.ev.131"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.seed-false-rika-tip"
+      ]
+    },
+    "111": {
+      "evidence": [
+        "y1v4.ev.131"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.seed-false-rika-tip"
+      ]
+    },
+    "112": {
+      "evidence": [
+        "y1v4.ev.063"
+      ],
+      "cases": []
+    },
+    "115": {
+      "evidence": [
+        "y1v4.ev.064"
+      ],
+      "cases": []
+    },
+    "119": {
+      "evidence": [
+        "y1v4.ev.065"
+      ],
+      "cases": []
+    },
+    "121": {
+      "evidence": [
+        "y1v4.ev.066"
+      ],
+      "cases": []
+    },
+    "122": {
+      "evidence": [
+        "y1v4.ev.132"
+      ],
+      "cases": []
+    },
+    "123": {
+      "evidence": [
+        "y1v4.ev.132"
+      ],
+      "cases": []
+    },
+    "125": {
+      "evidence": [
+        "y1v4.ev.067"
+      ],
+      "cases": []
+    },
+    "128": {
+      "evidence": [
+        "y1v4.ev.068"
+      ],
+      "cases": []
+    },
+    "130": {
+      "evidence": [
+        "y1v4.ev.069"
+      ],
+      "cases": []
+    },
+    "134": {
+      "evidence": [
+        "y1v4.ev.070"
+      ],
+      "cases": []
+    },
+    "137": {
+      "evidence": [
+        "y1v4.ev.071"
+      ],
+      "cases": []
+    },
+    "139": {
+      "evidence": [
+        "y1v4.ev.072"
+      ],
+      "cases": []
+    },
+    "141": {
+      "evidence": [
+        "y1v4.ev.073"
+      ],
+      "cases": [
+        "y1v4.case.katsuragi.reject-unbounded-zodiac-talk"
+      ]
+    },
+    "144": {
+      "evidence": [
+        "y1v4.ev.074"
+      ],
+      "cases": [
+        "y1v4.case.kikyo-kushida.invite-rival-delegates-into-discussion"
+      ]
+    },
+    "145": {
+      "evidence": [
+        "y1v4.ev.075"
+      ],
+      "cases": [
+        "y1v4.case.honami-ichinose.refuse-ryuen-coalition",
+        "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance"
+      ]
+    },
+    "146": {
+      "evidence": [
+        "y1v4.ev.076"
+      ],
+      "cases": [
+        "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance"
+      ]
+    },
+    "148": {
+      "evidence": [
+        "y1v4.ev.077"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.predict-counter-alliance",
+        "y1v4.case.suzune-horikita.challenge-rival-alliance-threat"
+      ]
+    },
+    "149": {
+      "evidence": [
+        "y1v4.ev.078"
+      ],
+      "cases": [
+        "y1v4.case.honami-ichinose.refuse-ryuen-coalition",
+        "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance",
+        "y1v4.case.suzune-horikita.challenge-rival-alliance-threat"
+      ]
+    },
+    "152": {
+      "evidence": [
+        "y1v4.ev.079"
+      ],
+      "cases": []
+    },
+    "155": {
+      "evidence": [
+        "y1v4.ev.080"
+      ],
+      "cases": []
+    },
+    "158": {
+      "evidence": [
+        "y1v4.ev.081"
+      ],
+      "cases": []
+    },
+    "159": {
+      "evidence": [
+        "y1v4.ev.082"
+      ],
+      "cases": [
+        "y1v4.case.kei-karuizawa.refuse-demanded-apology"
+      ]
+    },
+    "161": {
+      "evidence": [
+        "y1v4.ev.083"
+      ],
+      "cases": [
+        "y1v4.case.kei-karuizawa.refuse-demanded-apology"
+      ]
+    },
+    "163": {
+      "evidence": [
+        "y1v4.ev.084"
+      ],
+      "cases": []
+    },
+    "164": {
+      "evidence": [
+        "y1v4.ev.085"
+      ],
+      "cases": []
+    },
+    "166": {
+      "evidence": [
+        "y1v4.ev.086"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.privately-test-points-exceptions",
+        "y1v4.case.sae-chiyabashira.describe-bounded-point-exceptions"
+      ]
+    },
+    "167": {
+      "evidence": [
+        "y1v4.ev.087"
+      ],
+      "cases": []
+    },
+    "169": {
+      "evidence": [
+        "y1v4.ev.088"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.privately-test-points-exceptions",
+        "y1v4.case.sae-chiyabashira.describe-bounded-point-exceptions"
+      ]
+    },
+    "170": {
+      "evidence": [
+        "y1v4.ev.089"
+      ],
+      "cases": []
+    },
+    "173": {
+      "evidence": [
+        "y1v4.ev.090"
+      ],
+      "cases": [
+        "y1v4.case.yosuke-hirata.reject-unconditional-shelter-promise"
+      ]
+    },
+    "175": {
+      "evidence": [
+        "y1v4.ev.091"
+      ],
+      "cases": [
+        "y1v4.case.yosuke-hirata.reject-unconditional-shelter-promise"
+      ]
+    },
+    "177": {
+      "evidence": [
+        "y1v4.ev.092"
+      ],
+      "cases": []
+    },
+    "180": {
+      "evidence": [
+        "y1v4.ev.093"
+      ],
+      "cases": [
+        "y1v4.case.yosuke-hirata.disclose-bullying-related-guilt"
+      ]
+    },
+    "182": {
+      "evidence": [
+        "y1v4.ev.094"
+      ],
+      "cases": [
+        "y1v4.case.yosuke-hirata.disclose-bullying-related-guilt"
+      ]
+    },
+    "184": {
+      "evidence": [
+        "y1v4.ev.095"
+      ],
+      "cases": []
+    },
+    "185": {
+      "evidence": [
+        "y1v4.ev.096"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.arrange-coercive-isolation"
+      ]
+    },
+    "188": {
+      "evidence": [
+        "y1v4.ev.097"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.arrange-coercive-isolation"
+      ]
+    },
+    "190": {
+      "evidence": [
+        "y1v4.ev.098"
+      ],
+      "cases": [
+        "y1v4.case.manabe-shiho.participate-in-isolated-assault"
+      ]
+    },
+    "192": {
+      "evidence": [
+        "y1v4.ev.099"
+      ],
+      "cases": [
+        "y1v4.case.manabe-shiho.participate-in-isolated-assault"
+      ]
+    },
+    "194": {
+      "evidence": [
+        "y1v4.ev.100"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.exploit-karuizawa-trauma"
+      ]
+    },
+    "196": {
+      "evidence": [
+        "y1v4.ev.101"
+      ],
+      "cases": []
+    },
+    "198": {
+      "evidence": [
+        "y1v4.ev.102"
+      ],
+      "cases": []
+    },
+    "199": {
+      "evidence": [
+        "y1v4.ev.103"
+      ],
+      "cases": [
+        "y1v4.case.kei-karuizawa.resist-coercion-under-threat",
+        "y1v4.case.kiyotaka-ayanokoji.exploit-karuizawa-trauma"
+      ]
+    },
+    "200": {
+      "evidence": [
+        "y1v4.ev.104"
+      ],
+      "cases": [
+        "y1v4.case.kei-karuizawa.resist-coercion-under-threat"
+      ]
+    },
+    "201": {
+      "evidence": [
+        "y1v4.ev.105"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.exploit-karuizawa-trauma"
+      ]
+    },
+    "202": {
+      "evidence": [
+        "y1v4.ev.106"
+      ],
+      "cases": [
+        "y1v4.case.kei-karuizawa.accept-protection-under-duress",
+        "y1v4.case.kiyotaka-ayanokoji.offer-conditioned-protection"
+      ]
+    },
+    "203": {
+      "evidence": [
+        "y1v4.ev.107"
+      ],
+      "cases": [
+        "y1v4.case.kei-karuizawa.accept-protection-under-duress",
+        "y1v4.case.kiyotaka-ayanokoji.offer-conditioned-protection"
+      ]
+    },
+    "205": {
+      "evidence": [
+        "y1v4.ev.108"
+      ],
+      "cases": []
+    },
+    "208": {
+      "evidence": [
+        "y1v4.ev.109"
+      ],
+      "cases": []
+    },
+    "210": {
+      "evidence": [
+        "y1v4.ev.110"
+      ],
+      "cases": []
+    },
+    "213": {
+      "evidence": [
+        "y1v4.ev.111"
+      ],
+      "cases": []
+    },
+    "216": {
+      "evidence": [
+        "y1v4.ev.112"
+      ],
+      "cases": []
+    },
+    "218": {
+      "evidence": [
+        "y1v4.ev.113"
+      ],
+      "cases": [
+        "y1v4.case.hamaguchi.propose-showing-school-notifications",
+        "y1v4.case.honami-ichinose.stage-open-email-visibility"
+      ]
+    },
+    "219": {
+      "evidence": [
+        "y1v4.ev.114"
+      ],
+      "cases": [
+        "y1v4.case.hamaguchi.propose-showing-school-notifications",
+        "y1v4.case.honami-ichinose.stage-open-email-visibility"
+      ]
+    },
+    "220": {
+      "evidence": [
+        "y1v4.ev.115"
+      ],
+      "cases": [
+        "y1v4.case.kiyotaka-ayanokoji.orchestrate-double-phone-swap"
+      ]
+    },
+    "222": {
+      "evidence": [
+        "y1v4.ev.116"
+      ],
+      "cases": [
+        "y1v4.case.mio-ibuki.volunteer-device-disclosure"
+      ]
+    },
+    "224": {
+      "evidence": [
+        "y1v4.ev.117"
+      ],
+      "cases": [
+        "y1v4.case.yukimura.exhibit-phone-under-rabbit-pressure"
+      ]
+    },
+    "227": {
+      "evidence": [
+        "y1v4.ev.118"
+      ],
+      "cases": [
+        "y1v4.case.honami-ichinose.detect-multi-phone-bluff",
+        "y1v4.case.kiyotaka-ayanokoji.maintain-cover-despite-ichinose-test"
+      ]
+    },
+    "230": {
+      "evidence": [
+        "y1v4.ev.119"
+      ],
+      "cases": [
+        "y1v4.case.honami-ichinose.detect-multi-phone-bluff"
+      ]
+    },
+    "231": {
+      "evidence": [
+        "y1v4.ev.120"
+      ],
+      "cases": [
+        "y1v4.case.kei-karuizawa.conceal-rabbit-vip-role",
+        "y1v4.case.kiyotaka-ayanokoji.orchestrate-double-phone-swap"
+      ]
+    },
+    "232": {
+      "evidence": [
+        "y1v4.ev.121"
+      ],
+      "cases": [
+        "y1v4.case.honami-ichinose.detect-multi-phone-bluff",
+        "y1v4.case.honami-ichinose.exploit-rival-traitor-incentives",
+        "y1v4.case.kiyotaka-ayanokoji.maintain-cover-despite-ichinose-test"
+      ]
+    },
+    "233": {
+      "evidence": [
+        "y1v4.ev.122"
+      ],
+      "cases": [
+        "y1v4.case.honami-ichinose.exploit-rival-traitor-incentives"
+      ]
+    },
+    "234": {
+      "evidence": [
+        "y1v4.ev.123"
+      ],
+      "cases": [
+        "y1v4.case.kei-karuizawa.conceal-rabbit-vip-role"
+      ]
+    },
+    "238": {
+      "evidence": [
+        "y1v4.ev.124"
+      ],
+      "cases": []
+    },
+    "239": {
+      "evidence": [
+        "y1v4.ev.125"
+      ],
+      "cases": [
+        "y1v4.case.kakeru-ryuen.name-kushida-dragon-vip"
+      ]
+    },
+    "240": {
+      "evidence": [
+        "y1v4.ev.126",
+        "y1v4.ev.127"
+      ],
+      "cases": [
+        "y1v4.case.kakeru-ryuen.name-kushida-dragon-vip"
+      ]
+    },
+    "241": {
+      "evidence": [
+        "y1v4.ev.127",
+        "y1v4.ev.128",
+        "y1v4.ev.129"
+      ],
+      "cases": []
+    },
+    "243": {
+      "evidence": [
+        "y1v4.ev.130"
+      ],
+      "cases": []
+    }
+  }
+}

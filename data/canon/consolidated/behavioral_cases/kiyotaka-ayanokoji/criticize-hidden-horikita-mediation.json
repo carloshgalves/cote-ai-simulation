@@ -1,0 +1,38 @@
+{
+  "id": "y1v4.case.kiyotaka-ayanokoji.criticize-hidden-horikita-mediation",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "criticize hidden horikita mediation",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Argues that an indirect plan to control Suzune will make her suspicious and counsels Hirata to reconsider.",
+  "observed_result": "Hirata acknowledges the risk and revises his approach.",
+  "epistemic_limits": "Advice precedes no confirmed successful Suzune recruitment.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      18
+    ],
+    "chapter": 2,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.yosuke-hirata",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "reasoning",
+    "persuasion"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "reasoning",
+    "persuasion"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.007"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

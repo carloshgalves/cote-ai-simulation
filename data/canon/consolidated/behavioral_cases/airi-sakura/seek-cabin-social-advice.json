@@ -1,0 +1,39 @@
+{
+  "id": "y1v4.case.airi-sakura.seek-cabin-social-advice",
+  "actor_id": "actor.airi-sakura",
+  "primary_actor_id": "actor.airi-sakura",
+  "title": "seek cabin social advice",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Approaches Kiyotaka with anxiety about living with three assertive roommates and expresses mixed wishes for company and privacy.",
+  "observed_result": "Obtains a chance to discuss her concern before withdrawing at Kushida's appearance.",
+  "epistemic_limits": "Actor's self-disclosure is local, not a diagnosis or proof that the roommates were hostile.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      26,
+      27
+    ],
+    "chapter": 2,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "social",
+    "emotion"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "social",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.013",
+    "y1v4.ev.014"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

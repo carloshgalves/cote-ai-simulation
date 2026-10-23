@@ -1,0 +1,40 @@
+{
+  "id": "y1v4.case.kakeru-ryuen.interrogate-hidden-island-leader",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "interrogate hidden island leader",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Presses Suzune about who secretly replaced her as island leader and advances an inferred mastermind hypothesis.",
+  "observed_result": "Suzune and Kiyotaka decline to verify his theory.",
+  "epistemic_limits": "He lacks verified acquisition of the hidden replacement's identity at this moment.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      69,
+      72
+    ],
+    "chapter": 3,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "conflict",
+    "observation"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "conflict",
+    "observation"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.044",
+    "y1v4.ev.045"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

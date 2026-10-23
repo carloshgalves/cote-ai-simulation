@@ -1,0 +1,38 @@
+{
+  "id": "y1v4.case.mio-ibuki.volunteer-device-disclosure",
+  "actor_id": "actor.mio-ibuki",
+  "primary_actor_id": "actor.mio-ibuki",
+  "title": "volunteer device disclosure",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Voluntarily offers to show her device in Rabbit and challenges Yukimura's hesitation.",
+  "observed_result": "The group considers the gesture while suspicion concentrates on Yukimura.",
+  "epistemic_limits": "This does not disclose any hidden VIP or prove she never used deception elsewhere.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      222
+    ],
+    "chapter": 5,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.yukimura",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "observation"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "strategy",
+    "observation"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.116"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

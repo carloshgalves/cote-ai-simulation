@@ -1,0 +1,39 @@
+{
+  "id": "y1v4.case.kiyotaka-ayanokoji.privately-test-points-exceptions",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "privately test points exceptions",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Asks Chabashira about limits on private-point purchases at night and avoids leaving an email record.",
+  "observed_result": "Receives hypothetical permitted school-schedule changes but not a formal purchase quote.",
+  "epistemic_limits": "Questions are preparatory; no general authority to bypass any school rule is proved.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      166,
+      169
+    ],
+    "chapter": 4,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.sae-chiyabashira"
+  ],
+  "capabilities_supported": [
+    "economy",
+    "institution"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "economy",
+    "institution"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.086",
+    "y1v4.ev.088"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "y1v4.case.kiyotaka-ayanokoji.offer-conditioned-protection",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "offer conditioned protection",
+  "context": "Year 1 Volume 4 first-year shipboard Zodiac/VIP test. Primary actor action only, gated by personal knowledge at scene time.",
+  "observed_actions": "Uses evidence of abuse as leverage to offer defense against Manabe's group if Karuizawa supports his exam plan.",
+  "observed_result": "Karuizawa agrees in a context of fear, not free equal bargaining.",
+  "epistemic_limits": "Agreement arises under coercion; not proof of trust, love or moral legitimacy.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      202,
+      203
+    ],
+    "chapter": 4,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kei-karuizawa",
+    "actor.manabe-shiho"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "coercion"
+  ],
+  "information_available": "No unearned actor memories from later reveals, private confessions, other groups or alternate future timelines.",
+  "counterfactual_test": "Change actor knowledge, physical context, privileges and incentives; allow failures. Do not treat violent or sexual coercion as required, endorsed or reliable.",
+  "topics": [
+    "strategy",
+    "coercion"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.106",
+    "y1v4.ev.107"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

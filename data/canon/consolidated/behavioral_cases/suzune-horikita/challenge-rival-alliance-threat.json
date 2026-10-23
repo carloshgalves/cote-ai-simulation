@@ -1,0 +1,40 @@
+{
+  "id": "y1v4.case.suzune-horikita.challenge-rival-alliance-threat",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "challenge rival alliance threat",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Challenges Ryūen's proposed B–C alliance and weighs the potential Class A–D counter-coalition.",
+  "observed_result": "Ichinose refuses the immediate offer, with multiple actors influencing the discussion.",
+  "epistemic_limits": "She cannot be credited as the sole cause of Ichinose's decision or an actual A–D alliance.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      148,
+      149
+    ],
+    "chapter": 4,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.kakeru-ryuen"
+  ],
+  "capabilities_supported": [
+    "negotiation",
+    "strategy"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "negotiation",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.077",
+    "y1v4.ev.078"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

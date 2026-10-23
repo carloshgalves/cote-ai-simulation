@@ -1,0 +1,39 @@
+{
+  "id": "y1v4.case.manabe-shiho.participate-in-isolated-assault",
+  "actor_id": "actor.manabe-shiho",
+  "primary_actor_id": "actor.manabe-shiho",
+  "title": "participate in isolated assault",
+  "context": "Year 1 Volume 4 cruise Zodiac special exam and immediate shipboard relationships; actor information is restricted to direct accessible episodes.",
+  "observed_actions": "Confronts and physically abuses Karuizawa with other girls in a secluded room after receiving an anonymous tip.",
+  "observed_result": "Karuizawa is harmed and becomes fearful; later blackmail and deception follow.",
+  "epistemic_limits": "Source-documented abusive behavior, not an endorsed, safe or default manipulation capability.",
+  "source": {
+    "work_id": "ln.y1.v04.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      190,
+      192
+    ],
+    "chapter": 4,
+    "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW"
+  },
+  "other_actors": [
+    "actor.kei-karuizawa"
+  ],
+  "capabilities_supported": [
+    "conflict",
+    "violence"
+  ],
+  "information_available": "Only direct in-story actor knowledge available at this scene; later VIP disclosures and trauma accounts do not become globally accessible memories.",
+  "counterfactual_test": "If trust, actor health, isolation, incentives or available evidence differ, the observed event/outcome need not recur; violence and sexual coercion are not normative protocols.",
+  "topics": [
+    "conflict",
+    "violence"
+  ],
+  "evidence_refs": [
+    "y1v4.ev.098",
+    "y1v4.ev.099"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
+  "behavioral_policy": "DESCRIPTIVE_ONLY_NOT_PRESCRIPTIVE"
+}

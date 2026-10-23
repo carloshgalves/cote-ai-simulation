@@ -7,9 +7,7 @@
     "ln.y1.v01.sevenseas.en.2019.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
-  "source_documents": [
-    "data/canon/volume0/organizations/anhs.yaml"
-  ],
+  "source_documents": [],
   "evidence_refs": [
     "y1v1.ev.009",
     "y1v1.ev.010",
@@ -268,5 +266,6 @@
       "y1v1.ev.132",
       "y1v1.ev.133"
     ]
-  }
+  },
+  "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance."
 }

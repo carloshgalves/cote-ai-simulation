@@ -22,13 +22,26 @@
         "y1v1.case.o.priority-seat-refusal"
       ]
     },
+    "20": {
+      "evidence": [
+        "y1v1.ev.003"
+      ],
+      "cases": []
+    },
     "21": {
       "evidence": [
+        "y1v1.ev.003",
         "y1v1.ev.004"
       ],
       "cases": [
         "y1v1.case.u.public-civic-appeal"
       ]
+    },
+    "22": {
+      "evidence": [
+        "y1v1.ev.004"
+      ],
+      "cases": []
     },
     "24": {
       "evidence": [
@@ -81,6 +94,7 @@
     },
     "33": {
       "evidence": [
+        "y1v1.ev.012",
         "y1v1.ev.013"
       ],
       "cases": [
@@ -745,6 +759,13 @@
       ],
       "cases": []
     },
+    "248": {
+      "evidence": [
+        "y1v1.ev.103",
+        "y1v1.ev.104"
+      ],
+      "cases": []
+    },
     "249": {
       "evidence": [
         "y1v1.ev.105"
@@ -757,7 +778,9 @@
       "evidence": [
         "y1v1.ev.106"
       ],
-      "cases": []
+      "cases": [
+        "y1v1.case.s.cutoff-appeal"
+      ]
     },
     "251": {
       "evidence": [
@@ -785,8 +808,15 @@
         "y1v1.ev.110"
       ],
       "cases": [
+        "y1v1.case.k.buy-exam-point",
         "y1v1.case.s.pool-points-save-sudo"
       ]
+    },
+    "255": {
+      "evidence": [
+        "y1v1.ev.110"
+      ],
+      "cases": []
     },
     "256": {
       "evidence": [

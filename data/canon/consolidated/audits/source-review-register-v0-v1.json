@@ -29,7 +29,7 @@
   "review_states": {
     "record_level_assistant_pass": 35,
     "record_level_pending": 233,
-    "case_level_pending": 75
+    "case_level_pending": 74
   },
   "records": [
     {
@@ -2509,7 +2509,9 @@
       "id": "y1v1.ev.003",
       "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
       "pdf_pages": [
-        19
+        19,
+        20,
+        21
       ],
       "source_mode": "OBSERVED",
       "source_text_pages_indexed": true,
@@ -2524,7 +2526,8 @@
       "id": "y1v1.ev.004",
       "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
       "pdf_pages": [
-        21
+        21,
+        22
       ],
       "source_mode": "OBSERVED",
       "source_text_pages_indexed": true,
@@ -2645,7 +2648,8 @@
       "id": "y1v1.ev.012",
       "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
       "pdf_pages": [
-        32
+        32,
+        33
       ],
       "source_mode": "OBSERVED",
       "source_text_pages_indexed": true,
@@ -4027,7 +4031,8 @@
       "id": "y1v1.ev.103",
       "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
       "pdf_pages": [
-        247
+        247,
+        248
       ],
       "source_mode": "CHARACTER_ASSERTION",
       "source_text_pages_indexed": true,
@@ -4045,7 +4050,8 @@
       "id": "y1v1.ev.104",
       "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
       "pdf_pages": [
-        247
+        247,
+        248
       ],
       "source_mode": "CHARACTER_ASSERTION",
       "source_text_pages_indexed": true,
@@ -4149,7 +4155,8 @@
       "id": "y1v1.ev.110",
       "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
       "pdf_pages": [
-        254
+        254,
+        255
       ],
       "source_mode": "OBSERVED",
       "source_text_pages_indexed": true,
@@ -4632,14 +4639,6 @@
       "case_id": "v0.case.kamogawa.hierarchy",
       "case_file": "data/canon/consolidated/behavioral_cases/kamogawa/kamogawa--hierarchy.json",
       "source_case_owner_id": "actor.kamogawa",
-      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
-      "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
-      "verified": false
-    },
-    {
-      "case_id": "v0.case.kijima.public-profile",
-      "case_file": "data/canon/consolidated/behavioral_cases/kijima/kijima--public-profile.json",
-      "source_case_owner_id": "actor.kijima",
       "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
       "semantic_adjudication": "PENDING_INDIVIDUAL_CASE_SOURCE_REVIEW",
       "verified": false
@@ -5187,5 +5186,15 @@
     "Resolve actor/speaker attribution and concealment/knowledge times",
     "Only then permit per-record VERIFIED promotion; re-review cases and source status changes"
   ],
-  "review_scope_note": "Assistant directly reviewed a high-stakes subset; remainder received automated page-window triage only. No record is operator-VERIFIED."
+  "review_scope_note": "Assistant directly reviewed a high-stakes subset; remainder received automated page-window triage only. No record is operator-VERIFIED.",
+  "case_retractions": [
+    {
+      "case_id": "v0.case.kijima.public-profile",
+      "source_context": "v0.pol.003|v0.pol.004|v0.pol.015",
+      "reason": "No independently observed decision/feat by Kijima; a political factional trend is not a behavioral demonstration.",
+      "resolution": "Excluded case from primary-actor behavioral index; narrative evidence remains in contextual topics.",
+      "reviewer": "ASSISTANT",
+      "date": "2026-10-23"
+    }
+  ]
 }

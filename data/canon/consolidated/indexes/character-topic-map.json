@@ -974,7 +974,6 @@
     },
     "actor.kijima": {
       "academic_reasoning": [
-        "v0.case.kijima.public-profile",
         "v0.pol.025"
       ],
       "economy": [
@@ -985,7 +984,6 @@
         "v0.pol.026"
       ],
       "politics": [
-        "v0.case.kijima.public-profile",
         "v0.pol.003",
         "v0.pol.004",
         "v0.pol.015",
@@ -993,7 +991,6 @@
         "v0.pol.026"
       ],
       "strategy": [
-        "v0.case.kijima.public-profile",
         "v0.pol.003",
         "v0.pol.004",
         "v0.pol.015",
@@ -2795,16 +2792,10 @@
       "politics": []
     },
     "actor.kijima": {
-      "strategy": [
-        "v0.case.kijima.public-profile"
-      ],
-      "politics": [
-        "v0.case.kijima.public-profile"
-      ],
+      "strategy": [],
+      "politics": [],
       "institution": [],
-      "academic_reasoning": [
-        "v0.case.kijima.public-profile"
-      ],
+      "academic_reasoning": [],
       "economy": []
     },
     "actor.kamogawa": {
@@ -5341,7 +5332,6 @@
     "v0.case.ishida.vr-proposal": "data/canon/consolidated/behavioral_cases/ishida/ishida--vr-proposal.json",
     "v0.case.ishigami.public-risk": "data/canon/consolidated/behavioral_cases/kyo-ishigami/ishigami--public-risk.json",
     "v0.case.kamogawa.hierarchy": "data/canon/consolidated/behavioral_cases/kamogawa/kamogawa--hierarchy.json",
-    "v0.case.kijima.public-profile": "data/canon/consolidated/behavioral_cases/kijima/kijima--public-profile.json",
     "v0.case.kiyotaka.adults-baton": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--adults-baton.json",
     "v0.case.kiyotaka.cards-50": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--cards-50.json",
     "v0.case.kiyotaka.gummy-third-option": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--gummy-third-option.json",

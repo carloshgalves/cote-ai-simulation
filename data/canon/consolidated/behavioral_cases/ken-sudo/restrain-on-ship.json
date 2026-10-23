@@ -1,0 +1,37 @@
+{
+  "id": "y1v3.case.ken-sudo.restrain-on-ship",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "restrain on ship",
+  "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
+  "observed_actions": "Verbally confronts insulting Class A students after they shove a classmate but restrains from escalating to a fistfight",
+  "observed_result": "No violence follows between the groups",
+  "epistemic_limits": "Restraint under school scrutiny is demonstrated once; cannot promise future temper control",
+  "source": {
+    "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      15
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "conflict",
+    "social"
+  ],
+  "information_available": "Only knowledge accessible to this actor at the cited story time; later disclosures may not retroactively become memory.",
+  "counterfactual_test": "Alter resources, health, opposition, incentives or information and allow failure; do not force observed outcome.",
+  "topics": [
+    "conflict",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v3.ev.005"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

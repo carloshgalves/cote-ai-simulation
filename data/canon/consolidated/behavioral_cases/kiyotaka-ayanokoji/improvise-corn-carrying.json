@@ -1,0 +1,36 @@
+{
+  "id": "y1v3.case.kiyotaka-ayanokoji.improvise-corn-carrying",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "improvise corn carrying",
+  "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
+  "observed_actions": "Uses clothing as an improvised carry bag to avoid losing a newly found crop",
+  "observed_result": "Helps move gathered food toward camp",
+  "epistemic_limits": "Single improvised solution cannot establish general engineering competence",
+  "source": {
+    "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      140
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.airi-sakura"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "resources"
+  ],
+  "information_available": "Only knowledge accessible to this actor at the cited story time; later disclosures may not retroactively become memory.",
+  "counterfactual_test": "Alter resources, health, opposition, incentives or information and allow failure; do not force observed outcome.",
+  "topics": [
+    "strategy",
+    "resources"
+  ],
+  "evidence_refs": [
+    "y1v3.ev.067"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "y1v3.case.honami-ichinose.evaluate-well-before-shared-use",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "evaluate well before shared use",
+  "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
+  "observed_actions": "Personally drinks from a discovered well, observes effects and gradually expands access",
+  "observed_result": "Class B begins using well water more widely",
+  "epistemic_limits": "An improvised observation is not microbiological proof of water safety",
+  "source": {
+    "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      120
+    ],
+    "chapter": 3,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "leadership",
+    "risk_management"
+  ],
+  "information_available": "Only knowledge accessible to this actor at the cited story time; later disclosures may not retroactively become memory.",
+  "counterfactual_test": "Alter resources, health, opposition, incentives or information and allow failure; do not force observed outcome.",
+  "topics": [
+    "leadership",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "y1v3.ev.059"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

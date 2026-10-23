@@ -1,0 +1,38 @@
+{
+  "id": "y1v3.case.suzune-horikita.feverish-defense-against-ibuki",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "feverish defense against ibuki",
+  "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
+  "observed_actions": "Traces suspected thief despite illness, avoids initial kicks and counterattacks in a brief fight",
+  "observed_result": "Defends herself temporarily but suffers exhaustion and collapse",
+  "epistemic_limits": "Severely ill condition prevents estimating her uninjured combat limit; no definitive general duel ranking",
+  "source": {
+    "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      217,
+      218
+    ],
+    "chapter": 6,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.mio-ibuki"
+  ],
+  "capabilities_supported": [
+    "combat",
+    "risk_management"
+  ],
+  "information_available": "Only knowledge accessible to this actor at the cited story time; later disclosures may not retroactively become memory.",
+  "counterfactual_test": "Alter resources, health, opposition, incentives or information and allow failure; do not force observed outcome.",
+  "topics": [
+    "combat",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "y1v3.ev.093",
+    "y1v3.ev.094"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

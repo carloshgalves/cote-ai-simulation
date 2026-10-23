@@ -1,0 +1,41 @@
+{
+  "id": "y1v3.case.kiyotaka-ayanokoji.carry-sick-horikita",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "carry sick horikita",
+  "context": "Observed Year 1 Volume 3 episode within the summer deserted-island exam; only scene-accessible information is available to its actor.",
+  "observed_actions": "Finds unconscious Suzune in a storm, retrieves the card and transports her despite a dangerous fall",
+  "observed_result": "Gets her to school medical staff before roll call",
+  "epistemic_limits": "Demonstrates situational stamina, navigation and triage; does not prove invulnerability",
+  "source": {
+    "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      226,
+      232,
+      237
+    ],
+    "chapter": 6,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.mio-ibuki",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "risk_management",
+    "health"
+  ],
+  "information_available": "Only knowledge accessible to this actor at the cited story time; later disclosures may not retroactively become memory.",
+  "counterfactual_test": "Alter resources, health, opposition, incentives or information and allow failure; do not force observed outcome.",
+  "topics": [
+    "risk_management",
+    "health"
+  ],
+  "evidence_refs": [
+    "y1v3.ev.098",
+    "y1v3.ev.099",
+    "y1v3.ev.101"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

@@ -3833,8 +3833,8 @@
         94,
         95
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -3843,7 +3843,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.93–95: Karuizawa forcefully rejects a phone photo without her permission; Machida, not Karuizawa, convinces the hostile girls to stop. Consent and rescue are distinct acts.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.kei-karuizawa.refuse-demanded-apology",
@@ -3853,8 +3857,8 @@
         159,
         161
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -3863,7 +3867,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.159–161: Karuizawa refuses Manabe's pressured apology after disputing the café accusation; social defiance does not independently prove the accusation false.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.kei-karuizawa.resist-coercion-under-threat",
@@ -3873,8 +3881,8 @@
         199,
         200
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -3883,7 +3891,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.199–200: Karuizawa verbally resists Kiyotaka's sexual threats while physically trapped; freezing and later compliance are not consent or a stable capability.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.kei-karuizawa.conceal-rabbit-vip-role",
@@ -3893,8 +3905,8 @@
         231,
         234
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -3903,7 +3915,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.231,234: Karuizawa is privately identified as Rabbit VIP in Kiyotaka's later account and checks his plan anxiously; others cannot retrospectively know this secret.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.airi-sakura.seek-cabin-social-advice",
@@ -3913,8 +3929,8 @@
         26,
         27
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -3923,7 +3939,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.26–27: Sakura approaches Kiyotaka over difficult cabin relations, admitting simultaneous desire for company and solitude; only her self-reported anxiety is supported.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.rokusuke-koenji.proclaim-autograph-value",
@@ -3933,8 +3953,8 @@
         21,
         22
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -3943,7 +3963,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.21–22: Kōenji dismisses a worker's warnings and gives an autograph with predicted future value; no financial realization of that boast is observed.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.yosuke-hirata.prioritize-solitary-classmate-lunch",
@@ -3953,8 +3977,8 @@
         14,
         15
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -3963,7 +3987,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.14–16: Hirata cancels a previously planned Karuizawa lunch to speak to Kiyotaka; observed concern is not a permanent partner priority.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.yosuke-hirata.seek-horikita-cooperation-through-kiyotaka",
@@ -3973,8 +4001,8 @@
         17,
         18
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -3983,7 +4011,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.17–19: Hirata requests private indirect outreach to Horikita and accepts Kiyotaka's doubts; Horikita's endorsement is not achieved by this case.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.yosuke-hirata.reject-unconditional-shelter-promise",
@@ -3993,8 +4025,8 @@
         173,
         175
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4003,7 +4035,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.173–176: Hirata seeks a nonviolent remedy for Karuizawa but will not renounce help for other peers; his choice alienates her rather than ensuring safety.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.yosuke-hirata.disclose-bullying-related-guilt",
@@ -4013,8 +4049,8 @@
         180,
         182
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4023,7 +4059,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.180–182: Hirata describes guilt over Sugimura's bullying; the motivation is his testimony and must not be treated as an externally audited childhood record.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.suzune-horikita.test-group-assignment-hypothesis",
@@ -4033,8 +4073,8 @@
         64,
         65
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4043,7 +4083,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.64–65: Suzune compares group membership to academic excellence and adjusts a tentative theory when it fails examples; no normative allocation method is discovered.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.suzune-horikita.challenge-rival-alliance-threat",
@@ -4053,8 +4097,8 @@
         148,
         149
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4063,7 +4107,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.148–149: Suzune counters Ryūen's strategic threats and rejects the proposed coalition; Ichinose's refusal is her own separate decision.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.kikyo-kushida.invite-rival-delegates-into-discussion",
@@ -4072,8 +4120,8 @@
       "pdf_pages": [
         144
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4082,7 +4130,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF p.144: Kushida invites visitors into Dragon discussion without disclosing her own VIP status; inviting is not proving leader or information dominance.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.yukimura.coordinate-rabbit-class-d-discretion",
@@ -4091,8 +4143,8 @@
       "pdf_pages": [
         50
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4101,7 +4153,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.50–51: Yukimura recommends keeping VIP information private but cannot force compliance from Karuizawa, who soon calls Hirata.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.yukimura.exhibit-phone-under-rabbit-pressure",
@@ -4110,8 +4166,8 @@
       "pdf_pages": [
         224
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4120,7 +4176,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.224–225: Yukimura unlocks and shows a switched phone, acting on a false incomplete account from Kiyotaka; successful deception ownership remains Kiyotaka's.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.machida.advocate-rabbit-silence",
@@ -4130,8 +4190,8 @@
         85,
         86
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4140,7 +4200,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.85–91: Machida's silence strategy carries Class A incentives and provokes Ichinose's objection; it is not a proven optimal strategy for all classes.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.machida.stop-forced-photography",
@@ -4149,8 +4213,8 @@
       "pdf_pages": [
         95
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4159,7 +4223,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF p.95: Machida tells Manabe to stop unwanted photos and she backs down; this does not establish he knew which claimant told the truth.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.manabe-shiho.participate-in-isolated-assault",
@@ -4169,8 +4237,8 @@
         190,
         192
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4179,7 +4247,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.190–193: Manabe participates in abusive group intimidation and assault against Karuizawa; it demonstrates wrongdoing, not justified punishment or a desirable tactic.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.hamaguchi.propose-showing-school-notifications",
@@ -4189,8 +4261,8 @@
         218,
         219
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4199,7 +4271,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.218–219: Hamaguchi originates the voluntary authentic-message inspection and shows his own device; he does not independently solve Rabbit's VIP identity.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.mio-ibuki.volunteer-device-disclosure",
@@ -4208,8 +4284,8 @@
       "pdf_pages": [
         222
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4218,7 +4294,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF p.222: Ibuki displays her device and challenges hesitant peers; the visible email is not proof she is invariably honest or a school's allocation authority.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.kakeru-ryuen.interrogate-hidden-island-leader",
@@ -4228,8 +4308,8 @@
         69,
         72
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4238,7 +4318,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.69–73: Ryūen probes Suzune about the substituted island leader; the audience withholds the identity, so he has not solved it at this moment.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance",
@@ -4249,8 +4333,8 @@
         146,
         149
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4259,7 +4343,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.145–149: Ryūen pitches a cooperative B/C–D scheme and asserts he knows Class C VIPs; Ichinose expressly refuses, so no alliance is consummated.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.kakeru-ryuen.name-kushida-dragon-vip",
@@ -4269,8 +4357,8 @@
         239,
         240
       ],
-      "semantic_review": "PENDING_DIRECT_PRIMARY_ACTOR_REVIEW",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "Actor owned act and outcome",
@@ -4279,7 +4367,11 @@
         "Peer allegations not canon fact",
         "Consent, distress and coercion bounded",
         "No retroactive VIP knowledge"
-      ]
+      ],
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "PDF pp.239–240: Ryūen correctly says Kushida was Dragon VIP, claiming early deduction from Suzune's reactions; discovery timing and sole mechanism are unverified.",
+      "reviewed_on": "2026-10-23",
+      "review_decision": "PASS_WITH_ACTOR_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v4.case.honami-ichinose.initiate-rabbit-discussion",
@@ -4699,7 +4791,7 @@
   ],
   "review_progress": {
     "assistant_evidence_reviewed": 130,
-    "assistant_cases_reviewed": 0,
+    "assistant_cases_reviewed": 23,
     "assistant_review_complete": false
   }
 }

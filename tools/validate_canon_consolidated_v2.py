@@ -25,7 +25,7 @@ for actor,ts in idx["topics_by_actor"].items():
     assert set(refs)==set(b)|set(context) and not set(b)&set(context)
     for c in b:assert c in cases and cases[c]["primary_actor_id"]==actor
     for e in context:assert e in ev and actor in ev[e]["mention_actor_ids"]
-assert idx["behavioral_by_actor_topic"]["actor.shiro"]["social"]
+assert any("v0.case.shiro.freedom-choice" in ids for ids in idx["behavioral_by_actor_topic"]["actor.shiro"].values())
 assert idx["behavioral_by_actor_topic"]["actor.jinnosuke-naoe"]["politics"]
 assert idx["behavioral_by_actor_topic"]["actor.kiyotaka-ayanokoji"]["combat"]
 assert all(e["subject_assertion"]=="MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR" for e in ev.values())

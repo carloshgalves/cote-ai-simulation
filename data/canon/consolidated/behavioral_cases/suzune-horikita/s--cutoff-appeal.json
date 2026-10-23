@@ -10,7 +10,8 @@
   "source": {
     "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "pdf_pages": [
-      249
+      249,
+      250
     ],
     "chapter": 11,
     "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
@@ -30,7 +31,8 @@
     "strategy"
   ],
   "evidence_refs": [
-    "y1v1.ev.105"
+    "y1v1.ev.105",
+    "y1v1.ev.106"
   ],
   "case_kind": "BEHAVIORAL_DEMONSTRATION",
   "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"

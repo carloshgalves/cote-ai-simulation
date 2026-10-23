@@ -24,14 +24,14 @@
   "context": "Sakayanagi permitted limited visit to White Room",
   "information_available": "Observes children and learns assertions by researchers, his own family values",
   "perceived_objective": "Understand institution while raising ethical objections",
-  "observed_actions": "Questions humane impact, distinguishes environment from innate aptitude",
-  "observed_result": "Remains outside operational control; engages critically with Atsuomi",
+  "observed_actions": "Challenges the humanitarian effects of Suzukake's educational methods and the suppression of children's emotional development, then questions the ethics of institutional isolation.",
+  "observed_result": "Expresses misgivings to Atsuomi without acquiring institutional rule-setting authority.",
   "capabilities_supported": [
     "ethical_reasoning",
     "scientific_skepticism",
     "social_judgment"
   ],
-  "epistemic_limits": "Do not grant full rule-setting power or secret continuous access",
+  "epistemic_limits": "The innate-aptitude/DNA theory during the later observation visit is proposed by Arisu, not by her father; his response keeps nature versus nurture uncertain. Do not attribute her feat to him.",
   "interpretation": "",
   "alternate_outcomes_to_test": "",
   "other_actors": [
@@ -52,12 +52,9 @@
     "v0.wr.012",
     "v0.wr.026",
     "v0.char.008",
-    "v0.char.022",
     "v0.wr.043",
     "v0.wr.046",
-    "v0.char.046",
-    "v0.char.047",
-    "v0.char.048"
+    "v0.char.047"
   ],
   "case_kind": "BEHAVIORAL_DEMONSTRATION",
   "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"

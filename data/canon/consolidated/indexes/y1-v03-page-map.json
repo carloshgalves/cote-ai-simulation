@@ -422,7 +422,8 @@
     },
     "120": {
       "evidence": [
-        "y1v3.ev.059"
+        "y1v3.ev.059",
+        "y1v3.ev.061"
       ],
       "cases": [
         "y1v3.case.honami-ichinose.evaluate-well-before-shared-use"
@@ -438,13 +439,13 @@
     },
     "122": {
       "evidence": [
-        "y1v3.ev.060"
+        "y1v3.ev.060",
+        "y1v3.ev.061"
       ],
       "cases": []
     },
     "124": {
       "evidence": [
-        "y1v3.ev.061",
         "y1v3.ev.117"
       ],
       "cases": []

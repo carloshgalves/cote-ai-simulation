@@ -3220,6 +3220,63 @@
       ],
       "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.116",
+      "domain": "politics",
+      "summary": "Ichinose and Kanzaki discuss reports that Sakayanagi is absent from Class A's island contingent; they cannot establish exactly how that affects Katsuragi's internal standing.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          150
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.honami-ichinose",
+        "actor.ryuji-kanzaki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "politics",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v3.ev.117",
+      "domain": "strategy",
+      "summary": "In a retrospective exchange Kiyotaka alleges Kaneda entered Class B as a Class C spy in connection with Ryūen's information-gathering; the mechanism and what each Class B member knew remain unobserved.",
+      "source": {
+        "work_id": "ln.y1.v03.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          255
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas Entertainment English translation, 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_M05_AFTER_EXAM_RESULTS",
+      "mention_actor_ids": [
+        "actor.kaneda",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kakeru-ryuen",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     }
   ]
 }

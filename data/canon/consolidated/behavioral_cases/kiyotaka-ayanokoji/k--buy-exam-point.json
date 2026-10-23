@@ -5,12 +5,13 @@
   "title": "buy exam point",
   "context": "Kiyotaka proposes purchasing a test point; teacher quotes exceptional 100000-point price.",
   "observed_actions": "Explores wide 'anything can be purchased' contract to offer purchase of one score point",
-  "observed_result": "Instructor accepts at exceptional combined price",
+  "observed_result": "Chiyabashira names an exceptional 100,000-point price, then accepts the joint payment on the following page and rescinds Sudō's expulsion.",
   "epistemic_limits": "Not perpetual guaranteed right or price",
   "source": {
     "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "pdf_pages": [
-      253
+      253,
+      254
     ],
     "chapter": 11,
     "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
@@ -30,7 +31,8 @@
     "economy"
   ],
   "evidence_refs": [
-    "y1v1.ev.108"
+    "y1v1.ev.108",
+    "y1v1.ev.109"
   ],
   "case_kind": "BEHAVIORAL_DEMONSTRATION",
   "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"

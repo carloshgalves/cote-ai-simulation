@@ -104,5 +104,8 @@
     "Admission-based 100,000 allowance is not guaranteed in subsequent months.",
     "School's class-point formula is not fully disclosed.",
     "The special 100,000-point grade purchase is not a published right or automatic API."
-  ]
+  ],
+  "executable_fragment": "data/canon/consolidated/exams/y1-first-midterm-executable.json",
+  "executable_scope": "OBSERVED_CLASS_D_ENGLISH_GRADE_CUTOFF_AND_SCHOOL_APPROVED_SINGLE_PURCHASE_ONLY",
+  "unresolved_status_contract": "Unknown subject/class rules, half-integer tie policy, arbitrary purchasing or auto-expulsion are not executable canon."
 }

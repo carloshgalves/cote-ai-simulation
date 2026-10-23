@@ -1,0 +1,42 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.kakeru-ryuen",
+  "display_name": "Kakeru Ryūen",
+  "modeling_tier": "FULL_CANDIDATE",
+  "source_coverage": [],
+  "source_status": "NO_VOLUME_0_1_OBSERVED_EVIDENCE",
+  "identity": {
+    "role_summary": "Year 1 Class C student, not yet observed in provided Volume 1 evidence; prior details are quarantined",
+    "aliases": [
+      "Kakeru Ryuen"
+    ]
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {},
+  "source_documents": [],
+  "historical_context_only": false,
+  "semantic_audit_notes": "No speculative Ryuen feats, identity X or Volume 2+ history; legacy YAML supplies no authorized direct Y1_START memory.",
+  "uncertainties": {
+    "identity_hypothesis_not_confirmed": false,
+    "future_fate_unknown": false
+  },
+  "generation_policy": "All volumes update this global pack",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  },
+  "legacy_y1_crosswalk": {
+    "manifest": "data/canon/consolidated/migrations/y1-legacy-six.json",
+    "source_file": "data/canon/characters/kakeru-ryuen.yaml",
+    "source_git_blob": "94231959135e5d485c10d6268fa153a3f71e87db",
+    "legacy_claim_count": 19,
+    "admitted_initial_claim_ids": [],
+    "legacy_material_can_seed_agent": false,
+    "quarantine_policy": "Only source-backed evidence re-reviewed at record level may be promoted; future references never seed memories."
+  }
+}

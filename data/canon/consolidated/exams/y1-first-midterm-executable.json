@@ -1,0 +1,68 @@
+{
+  "schema_version": "canon-midterm-executable-fragment-v1",
+  "exam_id": "exam.y1.midterm-1",
+  "reference_path": "data/canon/consolidated/exams/y1-first-midterm.json",
+  "reference_source": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+  "status": "EXECUTABLE_OBSERVED_FRAGMENT_NOT_FULL_EXAMSPEC",
+  "entrypoint": "tools.canon_first_midterm_v1",
+  "verified_examples": [
+    {
+      "class_id": "Y1_D",
+      "subject": "English",
+      "mean": 79.6,
+      "half_mean": 39.8,
+      "cutoff": 40,
+      "source_pdf_page": 247
+    },
+    {
+      "class_id": "Y1_D",
+      "subject": "English",
+      "mean": 64.4,
+      "half_mean": 32.2,
+      "cutoff": 32,
+      "source_pdf_page": 249
+    }
+  ],
+  "actions": [
+    {
+      "id": "EVALUATE_REPORTED_GRADES",
+      "required_external_facts": [
+        "class_mean",
+        "reported_grades"
+      ],
+      "possible_outputs": [
+        "BELOW_CUTOFF",
+        "AT_OR_ABOVE_CUTOFF"
+      ]
+    },
+    {
+      "id": "APPLY_RECORDED_SCHOOL_CONCESSION",
+      "required_external_facts": [
+        "school_approval",
+        "target_grade_39",
+        "cutoff_40",
+        "private_balances",
+        "one_mark_price_100000",
+        "joint_payers",
+        "transaction_id"
+      ],
+      "validation": "ATOMIC_DEBIT_AND_REPLAY_FENCE"
+    }
+  ],
+  "prohibited_inferences": [
+    "No automatic generation of question content or grades",
+    "No automatic expulsion without separate school act",
+    "No generic purchasable exam points API",
+    "No automatic grading for other classes/subjects",
+    "No arbitrary half-integer rounding policy",
+    "No fabricated class roster or unknown class-point economy coefficients"
+  ],
+  "unknowns": [
+    "Midpoint tie rule if half of class average ends exactly x.5",
+    "Completeness of individual score sheet for all students",
+    "Cross-class and cross-subject grading consistency beyond examples",
+    "Other disciplinary decisions, appeal powers or payment tariffs",
+    "Question design, exam duration and precise calendar date"
+  ],
+  "integration_notes": "Deterministic Python reference resolver; not yet wired to CSF kernel world commit executor. Future engine adapter must preserve rejected unknown states and authoritative school approval."
+}

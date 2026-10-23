@@ -33,7 +33,7 @@
   "records": 136,
   "cases": 50,
   "method": "Scene-by-scene relevance-filtered evidence; record actor assertions separately from narration, explicit primary behavioral actors, and keep future knowledge out of Y1_START",
-  "open_audit": "HUMAN_SEMANTIC_REVIEW_REQUIRED",
+  "open_audit": "ASSISTANT_SOURCE_REVIEW_COMPLETE_OPERATOR_RELEASE_PENDING",
   "important_additions": [
     "Sports time-trial data including Onodera, Kushida, Sudou and Kiyotaka, and final-round margin for Kouenji",
     "Kouenji and Yukimura joint top 90 in mock; 7 at-risk students and Kikuchi 31",
@@ -56,5 +56,5 @@
     "11": 9,
     "12": 4
   },
-  "coverage_status": "SITUATION_AUDIT_REVIEW_OPEN"
+  "coverage_status": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE"
 }

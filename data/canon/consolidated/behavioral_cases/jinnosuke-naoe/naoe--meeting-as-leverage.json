@@ -17,14 +17,14 @@
   "context": "Naoe meets faction subordinates under heavily hierarchical conditions",
   "information_available": "His senior status, their dependence on access, their risk of punishment",
   "perceived_objective": "Preserve asymmetrical bargaining and influence",
-  "observed_actions": "Regularly arrives late/withholds audiences, forcing intermediaries to wait",
+  "observed_actions": "Makes subordinate politicians wait before an observed meeting and exercises asymmetric patronage authority.",
   "observed_result": "Atsuomi interprets lateness as strategic control; concrete lateness observed",
   "capabilities_supported": [
     "authority",
     "agenda_control",
     "influence"
   ],
-  "epistemic_limits": "Interpretation of motives belongs to Atsuomi, not verified internal Naoe thought",
+  "epistemic_limits": "One documented waiting episode cannot establish a regular lateness schedule; Atsuomi's interpretation of the motive remains his, not Naoe's verified internal thought.",
   "interpretation": "",
   "alternate_outcomes_to_test": "",
   "other_actors": [

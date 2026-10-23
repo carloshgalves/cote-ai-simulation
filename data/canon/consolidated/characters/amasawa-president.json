@@ -41,9 +41,7 @@
       ]
     }
   },
-  "source_documents": [
-    "data/canon/volume0/characters/amasawa_president.yaml"
-  ],
+  "source_documents": [],
   "historical_context_only": true,
   "semantic_audit_notes": null,
   "uncertainties": {
@@ -56,5 +54,6 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "provenance_migration_note": "Retired volume0 staging path was not an accessible source; original book provenance persists via source_coverage and evidence references."
 }

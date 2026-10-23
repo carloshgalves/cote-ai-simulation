@@ -17,6 +17,7 @@
       "topics": [
         "academic_reasoning",
         "institution",
+        "observation",
         "social"
       ]
     },
@@ -647,6 +648,11 @@
         "persuasion",
         "strategy"
       ]
+    },
+    "actor.kakeru-ryuen": {
+      "path": "data/canon/consolidated/characters/kakeru-ryuen.json",
+      "modeling_tier": "FULL_CANDIDATE",
+      "topics": []
     }
   },
   "topics_by_actor": {
@@ -969,7 +975,6 @@
     },
     "actor.kijima": {
       "academic_reasoning": [
-        "v0.case.kijima.public-profile",
         "v0.pol.025"
       ],
       "economy": [
@@ -980,7 +985,6 @@
         "v0.pol.026"
       ],
       "politics": [
-        "v0.case.kijima.public-profile",
         "v0.pol.003",
         "v0.pol.004",
         "v0.pol.015",
@@ -988,7 +992,6 @@
         "v0.pol.026"
       ],
       "strategy": [
-        "v0.case.kijima.public-profile",
         "v0.pol.003",
         "v0.pol.004",
         "v0.pol.015",
@@ -1765,9 +1768,11 @@
     },
     "actor.arisu-sakayanagi": {
       "academic_reasoning": [
+        "v0.case.arisu.nature-nurture-hypothesis",
         "v0.char.046"
       ],
       "institution": [
+        "v0.case.arisu.nature-nurture-hypothesis",
         "v0.char.022",
         "v0.char.046",
         "v0.wr.026",
@@ -1777,6 +1782,9 @@
         "v0.char.022",
         "v0.char.046",
         "v0.char.048"
+      ],
+      "observation": [
+        "v0.case.arisu.nature-nurture-hypothesis"
       ]
     },
     "actor.yuki-father": {
@@ -2729,7 +2737,8 @@
       "strategy": [
         "y1v1.ev.096"
       ]
-    }
+    },
+    "actor.kakeru-ryuen": {}
   },
   "retrieval": "Direct actor/domain map with separated action/context lanes; no sequential volume scans",
   "behavioral_by_actor_topic": {
@@ -2789,16 +2798,10 @@
       "politics": []
     },
     "actor.kijima": {
-      "strategy": [
-        "v0.case.kijima.public-profile"
-      ],
-      "politics": [
-        "v0.case.kijima.public-profile"
-      ],
+      "strategy": [],
+      "politics": [],
       "institution": [],
-      "academic_reasoning": [
-        "v0.case.kijima.public-profile"
-      ],
+      "academic_reasoning": [],
       "economy": []
     },
     "actor.kamogawa": {
@@ -3068,9 +3071,16 @@
       "strategy": []
     },
     "actor.arisu-sakayanagi": {
-      "institution": [],
+      "institution": [
+        "v0.case.arisu.nature-nurture-hypothesis"
+      ],
       "social": [],
-      "academic_reasoning": []
+      "academic_reasoning": [
+        "v0.case.arisu.nature-nurture-hypothesis"
+      ],
+      "observation": [
+        "v0.case.arisu.nature-nurture-hypothesis"
+      ]
     },
     "actor.yuki-father": {
       "social": [],
@@ -3432,7 +3442,8 @@
       "persuasion": [],
       "economy": [],
       "strategy": []
-    }
+    },
+    "actor.kakeru-ryuen": {}
   },
   "context_mentions_by_actor_topic": {
     "actor.atsuomi-ayanokoji": {
@@ -4440,7 +4451,8 @@
       ],
       "academic_reasoning": [
         "v0.char.046"
-      ]
+      ],
+      "observation": []
     },
     "actor.yuki-father": {
       "social": [
@@ -5318,7 +5330,8 @@
       "strategy": [
         "y1v1.ev.096"
       ]
-    }
+    },
+    "actor.kakeru-ryuen": {}
   },
   "gate_contract": {
     "behavior": "behavioral_by_actor_topic",
@@ -5333,7 +5346,6 @@
     "v0.case.ishida.vr-proposal": "data/canon/consolidated/behavioral_cases/ishida/ishida--vr-proposal.json",
     "v0.case.ishigami.public-risk": "data/canon/consolidated/behavioral_cases/kyo-ishigami/ishigami--public-risk.json",
     "v0.case.kamogawa.hierarchy": "data/canon/consolidated/behavioral_cases/kamogawa/kamogawa--hierarchy.json",
-    "v0.case.kijima.public-profile": "data/canon/consolidated/behavioral_cases/kijima/kijima--public-profile.json",
     "v0.case.kiyotaka.adults-baton": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--adults-baton.json",
     "v0.case.kiyotaka.cards-50": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--cards-50.json",
     "v0.case.kiyotaka.gummy-third-option": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/kiyotaka--gummy-third-option.json",
@@ -5400,6 +5412,7 @@
     "y1v1.case.rokusuke-koenji.swim-final-over-sudo": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/swim-final-over-sudo.json",
     "y1v1.case.rokusuke-koenji.predict-zero-allowance": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/predict-zero-allowance.json",
     "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic": "data/canon/consolidated/behavioral_cases/haruki-yamauchi/confuse-apec-and-toeic.json",
-    "y1v1.case.ken-sudo.prioritize-study-over-basketball": "data/canon/consolidated/behavioral_cases/ken-sudo/prioritize-study-over-basketball.json"
+    "y1v1.case.ken-sudo.prioritize-study-over-basketball": "data/canon/consolidated/behavioral_cases/ken-sudo/prioritize-study-over-basketball.json",
+    "v0.case.arisu.nature-nurture-hypothesis": "data/canon/consolidated/behavioral_cases/arisu-sakayanagi/arisu--nature-nurture-hypothesis.json"
   }
 }

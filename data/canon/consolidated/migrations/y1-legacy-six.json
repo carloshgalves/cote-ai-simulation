@@ -1,0 +1,1313 @@
+{
+  "schema_version": "legacy-y1-actor-crosswalk-v1",
+  "policy": "Legacy YAML remains human-authored read-only historical scaffolding; consolidated JSON is the ONLY runtime pack. Entries are not new verified canon and future-only evidence is never an actor's initial memory.",
+  "horizon": "Y1_START",
+  "actor_map": {
+    "actor.honami-ichinose": {
+      "legacy_file": "data/canon/characters/honami-ichinose.yaml",
+      "git_blob_sha1": "4cc44b98a81dc4dc2d46c8fe2b6e579e1377209a",
+      "claim_count": 21,
+      "claims": [
+        {
+          "legacy_claim_id": "char.ichinose.tendency.cooperate-across-class",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.cross-class-help"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.tendency.open-information-gathering",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.open-information-search"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.tendency.evidence-caution",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.evaluate-weak-proof"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.tendency.group-protection",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v10.costly-class-protection"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.goal.preserve-class-members",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.cross-class-help",
+            "ev.ichinose.v10.costly-class-protection"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.goal.cooperative-reputation",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.cross-class-help",
+            "ev.ichinose.v02.open-information-search"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.capability.reasoning",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.evaluate-weak-proof"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.capability.persuasion",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.camera-bluff",
+            "ev.ichinose.v02.cross-class-help"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.capability.social-inference",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.open-information-search"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.capability.leadership",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.cross-class-help",
+            "ev.ichinose.v10.costly-class-protection"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.capability.deception",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.camera-bluff"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.risk.self-cost-for-group",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.cross-class-help",
+            "ev.ichinose.v10.costly-class-protection"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.decision.cross-class-problem",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.cross-class-help",
+            "ev.ichinose.v02.open-information-search"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.decision.weak-evidence",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.evaluate-weak-proof"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.decision.severe-class-sacrifice",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v10.costly-class-protection"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.social.cooperative-tone",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.cross-class-help",
+            "ev.ichinose.v02.camera-bluff"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.social.share-useful-information",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.open-information-search"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.blind-spot.protective-self-cost",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v10.costly-class-protection"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.blind-spot.cooperation-exploitability",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v10.costly-class-protection"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.manifestation.cooperation-first",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.cross-class-help",
+            "ev.ichinose.v02.open-information-search",
+            "ev.ichinose.v02.camera-bluff"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ichinose.manifestation.bluff-conditional",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ichinose.v02.camera-bluff"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        }
+      ],
+      "consolidated_file": "data/canon/consolidated/characters/honami-ichinose.json",
+      "canonical_actor_id": "actor.honami-ichinose",
+      "load_policy": "GLOBAL_CONSOLIDATED_ONLY",
+      "legacy_yaml_is_second_runtime_memory": false
+    },
+    "actor.kakeru-ryuen": {
+      "legacy_file": "data/canon/characters/kakeru-ryuen.yaml",
+      "git_blob_sha1": "94231959135e5d485c10d6268fa153a3f71e87db",
+      "claim_count": 19,
+      "claims": [
+        {
+          "legacy_claim_id": "char.ryuen.knowledge.x-absent-at-start",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v07.search-for-x"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.tendency.proxy-before-exposure",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v02.proxy-sudo-trap",
+            "ev.ryuen.v03.spy-and-leader-control"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.tendency.direct-pressure-when-useful",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v02.direct-challenge"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.tendency.control-through-information",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v03.spy-and-leader-control",
+            "ev.ryuen.v07.search-for-x"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.goal.control-and-advantage",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v02.proxy-sudo-trap",
+            "ev.ryuen.v02.direct-challenge",
+            "ev.ryuen.v03.spy-and-leader-control"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.goal.identify-x",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v07.search-for-x"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.capability.strategic-planning",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v02.proxy-sudo-trap",
+            "ev.ryuen.v03.spy-and-leader-control"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.capability.deception",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v02.proxy-sudo-trap"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.capability.leadership",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v03.spy-and-leader-control"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.capability.risk-management",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v03.spy-and-leader-control",
+            "ev.ryuen.v03.hidden-state-miss"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.risk.adversarial-leverage",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v02.direct-challenge",
+            "ev.ryuen.v03.hidden-state-miss"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.decision.create-leverage",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v02.proxy-sudo-trap"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.decision.hidden-exam-state",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v03.spy-and-leader-control",
+            "ev.ryuen.v03.hidden-state-miss"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.social.confrontational-pressure",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v02.direct-challenge"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.social.instrumental-delegation",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v02.proxy-sudo-trap",
+            "ev.ryuen.v03.spy-and-leader-control"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.blind-spot.hidden-state-overcommit",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v03.hidden-state-miss"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.blind-spot.control-model",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v03.hidden-state-miss",
+            "ev.kiyotaka.v03.hidden-island-strategy"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.manifestation.visible-pressure",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v02.direct-challenge",
+            "ev.ryuen.v03.spy-and-leader-control"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.ryuen.manifestation.no-omniscience",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.ryuen.v03.hidden-state-miss"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        }
+      ],
+      "consolidated_file": "data/canon/consolidated/characters/kakeru-ryuen.json",
+      "canonical_actor_id": "actor.kakeru-ryuen",
+      "load_policy": "GLOBAL_CONSOLIDATED_ONLY",
+      "legacy_yaml_is_second_runtime_memory": false
+    },
+    "actor.kikyo-kushida": {
+      "legacy_file": "data/canon/characters/kikyo-kushida.yaml",
+      "git_blob_sha1": "ba67e447a40bdd99729d19283bbee59b7a372dea",
+      "claim_count": 19,
+      "claims": [
+        {
+          "legacy_claim_id": "char.kushida.relationship.horikita-prior-history",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.pre-y1.horikita-history"
+          ],
+          "disposition": "PRIVATE_HORIZON_CANDIDATE_REQUIRES_ACTOR_GATE",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.knowledge.own-prior-history",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.pre-y1.horikita-history"
+          ],
+          "disposition": "PRIVATE_HORIZON_CANDIDATE_REQUIRES_ACTOR_GATE",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.tendency.build-broad-rapport",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.broad-friendship-drive",
+            "ev.kushida.v02.rally-support-for-sudo"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.tendency.persuasion-before-force",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.recruit-reluctant-students"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.tendency.protect-persona",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.private-side-threat"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.goal.broad-friendships",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.broad-friendship-drive"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.goal.preserve-public-persona",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.private-side-threat",
+            "ev.kushida.pre-y1.horikita-history"
+          ],
+          "disposition": "UNCLASSIFIED_NOT_ADMITTED",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.capability.persuasion",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.recruit-reluctant-students"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.capability.social-inference",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.broad-friendship-drive",
+            "ev.kushida.v01.recruit-reluctant-students"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.capability.deception",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.private-side-threat",
+            "ev.kushida.pre-y1.horikita-history"
+          ],
+          "disposition": "UNCLASSIFIED_NOT_ADMITTED",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.risk.persona-protection",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.private-side-threat"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.decision.reluctant-peers",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.recruit-reluctant-students"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.decision.secret-exposure",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.private-side-threat"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.social.approachable-public-style",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.broad-friendship-drive",
+            "ev.kushida.v02.rally-support-for-sudo"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.social.context-dependent-presentation",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.private-side-threat"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.blind-spot.persona-threat",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.private-side-threat"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.blind-spot.horikita-history",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kushida.pre-y1.horikita-history",
+            "ev.kushida.v01.private-side-threat"
+          ],
+          "disposition": "UNCLASSIFIED_NOT_ADMITTED",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.manifestation.social-skill-frequent",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.broad-friendship-drive",
+            "ev.kushida.v01.recruit-reluctant-students"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kushida.manifestation.coercion-conditional",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kushida.v01.private-side-threat"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        }
+      ],
+      "consolidated_file": "data/canon/consolidated/characters/kikyo-kushida.json",
+      "canonical_actor_id": "actor.kikyo-kushida",
+      "load_policy": "GLOBAL_CONSOLIDATED_ONLY",
+      "legacy_yaml_is_second_runtime_memory": false
+    },
+    "actor.kiyotaka-ayanokoji": {
+      "legacy_file": "data/canon/characters/kiyotaka-ayanokoji.yaml",
+      "git_blob_sha1": "dedadc2515e8053c0bacb8241afaedde743fa236",
+      "claim_count": 22,
+      "claims": [
+        {
+          "legacy_claim_id": "char.kiyotaka.knowledge.own-white-room-past",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.pre-y1.white-room-self-knowledge"
+          ],
+          "disposition": "PRIVATE_HORIZON_CANDIDATE_REQUIRES_ACTOR_GATE",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.tendency.avoid-unnecessary-involvement",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.avoid-unnecessary-involvement"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.tendency.limit-exposure",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.redirect-credit",
+            "ev.kiyotaka.v03.hidden-island-strategy"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.tendency.ordinary-social-life",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.ordinary-social-life"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.tendency.infer-before-commit",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v03.hidden-island-strategy"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.goal.ordinary-school-life",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.ordinary-social-life"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.goal.preserve-low-exposure",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.redirect-credit",
+            "ev.kiyotaka.v03.hidden-island-strategy"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.capability.observation",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v03.hidden-island-strategy"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.capability.reasoning",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v03.hidden-island-strategy"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.capability.strategic-planning",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.redirect-credit",
+            "ev.kiyotaka.v03.hidden-island-strategy"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.capability.deception",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.redirect-credit",
+            "ev.kiyotaka.v01.downplay-visible-ability"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.capability.self-control",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.downplay-visible-ability",
+            "ev.kiyotaka.v03.hidden-island-strategy"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.risk.low-exposure-default",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.redirect-credit",
+            "ev.kiyotaka.v03.hidden-island-strategy"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.decision.low-stakes-nonintervention",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.avoid-unnecessary-involvement"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.decision.help-without-credit",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.redirect-credit"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.decision.hidden-exam-state",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v03.hidden-island-strategy"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.social.low-key-presentation",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.ordinary-social-life",
+            "ev.kiyotaka.v01.redirect-credit"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.social.no-prose-imitation",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.redirect-credit"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.blind-spot.social-inexperience",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.ordinary-social-life"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.blind-spot.underinvolvement",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.avoid-unnecessary-involvement"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.manifestation.capability-not-display",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v01.redirect-credit",
+            "ev.kiyotaka.v03.hidden-island-strategy"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.kiyotaka.manifestation.no-secret-access",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.kiyotaka.v03.hidden-island-strategy"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        }
+      ],
+      "consolidated_file": "data/canon/consolidated/characters/kiyotaka-ayanokoji.json",
+      "canonical_actor_id": "actor.kiyotaka-ayanokoji",
+      "load_policy": "GLOBAL_CONSOLIDATED_ONLY",
+      "legacy_yaml_is_second_runtime_memory": false
+    },
+    "actor.suzune-horikita": {
+      "legacy_file": "data/canon/characters/suzune-horikita.yaml",
+      "git_blob_sha1": "6f0ea17481ebe52d7cb66ea28e81b22d786fcd9c",
+      "claim_count": 19,
+      "claims": [
+        {
+          "legacy_claim_id": "char.horikita.relationship.manabu-sibling",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.pre-y1.manabu-sibling"
+          ],
+          "disposition": "PRIVATE_HORIZON_CANDIDATE_REQUIRES_ACTOR_GATE",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.knowledge.manabu-family",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.pre-y1.manabu-sibling"
+          ],
+          "disposition": "PRIVATE_HORIZON_CANDIDATE_REQUIRES_ACTOR_GATE",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.tendency.self-reliant",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v01.self-reliant-class-a"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.tendency.performance-first",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v01.study-group-friction"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.tendency.observable-cue-inference",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v02.witness-inference"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.goal.class-a",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v01.self-reliant-class-a"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.goal.manabu-acknowledgment",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.pre-y1.manabu-sibling"
+          ],
+          "disposition": "PRIVATE_HORIZON_CANDIDATE_REQUIRES_ACTOR_GATE",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.capability.reasoning",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v02.witness-inference"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.capability.observation",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v02.witness-inference"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.capability.leadership",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v01.study-group-friction",
+            "ev.horikita.v03.overcommit-while-ill"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.risk.personal-overcommitment",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v03.overcommit-while-ill"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.decision.weak-classmate",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v01.study-group-friction"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.decision.possible-witness",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v02.witness-inference"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.social.direct-task-focused",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v01.study-group-friction"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.social.low-friendship-drive",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v01.self-reliant-class-a"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.blind-spot.buy-in",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v01.study-group-friction"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.blind-spot.overcommitment",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.horikita.v03.overcommit-while-ill"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.manifestation.visible-responsibility",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.horikita.v01.study-group-friction",
+            "ev.horikita.v03.overcommit-while-ill"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.horikita.manifestation.not-consensus-default",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.horikita.v01.study-group-friction"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        }
+      ],
+      "consolidated_file": "data/canon/consolidated/characters/suzune-horikita.json",
+      "canonical_actor_id": "actor.suzune-horikita",
+      "load_policy": "GLOBAL_CONSOLIDATED_ONLY",
+      "legacy_yaml_is_second_runtime_memory": false
+    },
+    "actor.yosuke-hirata": {
+      "legacy_file": "data/canon/characters/yosuke-hirata.yaml",
+      "git_blob_sha1": "284388a326762571b7bb1784c1f03d6f70d7edc0",
+      "claim_count": 19,
+      "claims": [
+        {
+          "legacy_claim_id": "char.hirata.knowledge.own-pre-y1-trauma",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.hirata.pre-y1.bullying-trauma"
+          ],
+          "disposition": "PRIVATE_HORIZON_CANDIDATE_REQUIRES_ACTOR_GATE",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.tendency.build-cohesion",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.hirata.v01.initiate-class-cohesion",
+            "ev.hirata.v01.organize-study-support"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.tendency.support-weak-members",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.hirata.v01.organize-study-support",
+            "ev.hirata.v02.support-sudo-response"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.tendency.deescalate-conflict",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.hirata.v03.deescalate-confrontation"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.goal.class-cohesion",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.hirata.v01.initiate-class-cohesion",
+            "ev.hirata.v01.organize-study-support",
+            "ev.hirata.v02.support-sudo-response"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.goal.avoid-abandonment-dynamics",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.hirata.pre-y1.bullying-trauma",
+            "ev.hirata.v10.sacrifice-choice-breakdown"
+          ],
+          "disposition": "UNCLASSIFIED_NOT_ADMITTED",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.capability.leadership",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.hirata.v01.initiate-class-cohesion",
+            "ev.hirata.v01.organize-study-support"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.capability.persuasion",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.hirata.v01.initiate-class-cohesion",
+            "ev.hirata.v01.organize-study-support"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.capability.risk-management",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.hirata.v03.deescalate-confrontation"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.risk.interpersonal-harm-averse",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.hirata.v03.deescalate-confrontation",
+            "ev.hirata.v10.sacrifice-choice-breakdown"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.decision.struggling-classmate",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.hirata.v01.organize-study-support",
+            "ev.hirata.v02.support-sudo-response"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.decision.escalating-conflict",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.hirata.v03.deescalate-confrontation"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.decision.forced-sacrifice",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.hirata.v10.sacrifice-choice-breakdown"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.social.inclusive-facilitation",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.hirata.v01.initiate-class-cohesion",
+            "ev.hirata.v01.organize-study-support"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.social.conciliatory-conflict-style",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.hirata.v03.deescalate-confrontation"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.blind-spot.forced-sacrifice",
+          "source_status": "UNVERIFIED",
+          "legacy_evidence_ids": [
+            "ev.hirata.v10.sacrifice-choice-breakdown"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.blind-spot.cooperation-assumption",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.hirata.v03.deescalate-confrontation",
+            "ev.ryuen.v02.direct-challenge"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.manifestation.visible-leadership",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.hirata.v01.initiate-class-cohesion",
+            "ev.hirata.v01.organize-study-support"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        },
+        {
+          "legacy_claim_id": "char.hirata.manifestation.not-coercion-default",
+          "source_status": "INTERPRETATION",
+          "legacy_evidence_ids": [
+            "ev.hirata.v02.support-sudo-response",
+            "ev.hirata.v03.deescalate-confrontation"
+          ],
+          "disposition": "FUTURE_BEHAVIORAL_PRIOR_ONLY",
+          "admitted_as_actor_memory": false,
+          "requires_new_record_review": true
+        }
+      ],
+      "consolidated_file": "data/canon/consolidated/characters/yosuke-hirata.json",
+      "canonical_actor_id": "actor.yosuke-hirata",
+      "load_policy": "GLOBAL_CONSOLIDATED_ONLY",
+      "legacy_yaml_is_second_runtime_memory": false
+    }
+  }
+}

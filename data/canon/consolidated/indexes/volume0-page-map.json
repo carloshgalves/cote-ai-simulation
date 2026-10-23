@@ -129,8 +129,7 @@
         "v0.pol.003"
       ],
       "cases": [
-        "v0.case.atsuomi.patronage",
-        "v0.case.kijima.public-profile"
+        "v0.case.atsuomi.patronage"
       ]
     },
     "27": {
@@ -145,8 +144,7 @@
         "v0.pol.004"
       ],
       "cases": [
-        "v0.case.atsuomi.patronage",
-        "v0.case.kijima.public-profile"
+        "v0.case.atsuomi.patronage"
       ]
     },
     "29": {
@@ -155,8 +153,7 @@
         "v0.pol.004"
       ],
       "cases": [
-        "v0.case.atsuomi.patronage",
-        "v0.case.kijima.public-profile"
+        "v0.case.atsuomi.patronage"
       ]
     },
     "30": {
@@ -165,8 +162,7 @@
         "v0.pol.004"
       ],
       "cases": [
-        "v0.case.atsuomi.patronage",
-        "v0.case.kijima.public-profile"
+        "v0.case.atsuomi.patronage"
       ]
     },
     "31": {
@@ -1235,6 +1231,7 @@
         "v0.wr.046"
       ],
       "cases": [
+        "v0.case.arisu.nature-nurture-hypothesis",
         "v0.case.sakayanagi.ethical-observation"
       ]
     },
@@ -1247,6 +1244,7 @@
         "v0.wr.043"
       ],
       "cases": [
+        "v0.case.arisu.nature-nurture-hypothesis",
         "v0.case.sakayanagi.ethical-observation"
       ]
     },
@@ -1266,6 +1264,7 @@
         "v0.wr.043"
       ],
       "cases": [
+        "v0.case.arisu.nature-nurture-hypothesis",
         "v0.case.sakayanagi.ethical-observation"
       ]
     },
@@ -1277,6 +1276,7 @@
         "v0.wr.043"
       ],
       "cases": [
+        "v0.case.arisu.nature-nurture-hypothesis",
         "v0.case.sakayanagi.ethical-observation"
       ]
     },
@@ -1487,9 +1487,7 @@
         "v0.pol.015",
         "v0.pol.026"
       ],
-      "cases": [
-        "v0.case.kijima.public-profile"
-      ]
+      "cases": []
     },
     "203": {
       "evidence": [
@@ -1497,27 +1495,21 @@
         "v0.pol.015",
         "v0.pol.026"
       ],
-      "cases": [
-        "v0.case.kijima.public-profile"
-      ]
+      "cases": []
     },
     "204": {
       "evidence": [
         "v0.pol.015",
         "v0.pol.026"
       ],
-      "cases": [
-        "v0.case.kijima.public-profile"
-      ]
+      "cases": []
     },
     "205": {
       "evidence": [
         "v0.pol.015",
         "v0.pol.026"
       ],
-      "cases": [
-        "v0.case.kijima.public-profile"
-      ]
+      "cases": []
     },
     "206": {
       "evidence": [
@@ -1581,7 +1573,6 @@
         "v0.pol.025"
       ],
       "cases": [
-        "v0.case.kijima.public-profile",
         "v0.case.tsukishiro.dual-roles"
       ]
     },
@@ -1594,7 +1585,6 @@
         "v0.wr.034"
       ],
       "cases": [
-        "v0.case.kijima.public-profile",
         "v0.case.tsukishiro.dual-roles"
       ]
     },
@@ -1879,8 +1869,7 @@
         "v0.wr.031"
       ],
       "cases": [
-        "v0.case.kamogawa.hierarchy",
-        "v0.case.kijima.public-profile"
+        "v0.case.kamogawa.hierarchy"
       ]
     },
     "248": {

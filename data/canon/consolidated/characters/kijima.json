@@ -17,9 +17,7 @@
   },
   "domains": {
     "strategy": {
-      "behavioral_case_refs": [
-        "v0.case.kijima.public-profile"
-      ],
+      "behavioral_case_refs": [],
       "context_evidence_refs": [
         "v0.pol.003",
         "v0.pol.004",
@@ -29,9 +27,7 @@
       ]
     },
     "politics": {
-      "behavioral_case_refs": [
-        "v0.case.kijima.public-profile"
-      ],
+      "behavioral_case_refs": [],
       "context_evidence_refs": [
         "v0.pol.003",
         "v0.pol.004",
@@ -48,9 +44,7 @@
       ]
     },
     "academic_reasoning": {
-      "behavioral_case_refs": [
-        "v0.case.kijima.public-profile"
-      ],
+      "behavioral_case_refs": [],
       "context_evidence_refs": [
         "v0.pol.025"
       ]
@@ -62,11 +56,11 @@
       ]
     }
   },
-  "source_documents": [
-    "data/canon/volume0/characters/kijima.yaml"
-  ],
+  "source_documents": [],
   "historical_context_only": true,
-  "semantic_audit_notes": null,
+  "semantic_audit_notes": [
+    "Removed contextual political rise event from behavioral demonstrations: no actor-performed feat is observed. Keep political status evidence in context only."
+  ],
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false
@@ -77,5 +71,6 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve published book provenance."
 }

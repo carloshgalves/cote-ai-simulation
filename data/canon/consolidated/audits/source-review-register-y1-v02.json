@@ -18,10 +18,14 @@
       "chapter": 1,
       "source_mode": "SELF_DESCRIPTION",
       "primary_claim": "Airi describes intense difficulty with eye contact, crowds and relationships, adopting a facade while privately desiring connection.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Opening Sakura first-person interior monologue: subjectively describes a social facade and wish for connection; cannot quantify enduring competence.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.002",
@@ -32,10 +36,14 @@
       "chapter": 2,
       "source_mode": "OBSERVED",
       "primary_claim": "Airi sees Sudō standing over three injured boys and quietly photographs the apparent end of their fight.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Sakura personally narrates photographing three injured students and Sudō's blows; the short exposure does not reveal all prior provocations.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.003",
@@ -46,10 +54,14 @@
       "chapter": 2,
       "source_mode": "OBSERVED",
       "primary_claim": "Airi freezes with fear then evades Sudō without being identified; he senses a nearby presence.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Her freezing, careful exit and Sudō's unanswered suspicion are narrated; he does not identify Sakura then.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.004",
@@ -60,10 +72,14 @@
       "chapter": 2,
       "source_mode": "NARRATED",
       "primary_claim": "The phone S-System app displays class and private points, supports private-point transfers, and applies a monthly distribution described as 100 times class points.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "First-person Kiyotaka explains the S-Point app, transfer and 100x monthly relation; note this is a July exposition, not each student's April knowledge.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.005",
@@ -74,10 +90,14 @@
       "chapter": 2,
       "source_mode": "NARRATED",
       "primary_claim": "Class D fell from 1000 to zero class points earlier in the year; Kiyotaka recalls a specially negotiated purchase of Sudō's midterm point.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "July recollection of earlier 1000-to-zero class scores and special test-point purchase; no general right to buy arbitrary grade outcomes.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.006",
@@ -88,10 +108,14 @@
       "chapter": 2,
       "source_mode": "OBSERVED",
       "primary_claim": "The July point board shows Class A at 1004 and Class D at 87; other classes also gained points, so Suzune cautions the ranking gap remains.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Class A's 1004 and Class D's 87 are shown; Horikita's concern about other classes' gains is her reasoning.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.007",
@@ -102,10 +126,14 @@
       "chapter": 2,
       "source_mode": "REPORTED_BY_CHARACTER",
       "primary_claim": "Hirata notes Class D avoided ordinary conduct deductions; Chabashira reports a first-year delay in private-point distribution amid unresolved trouble.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth."
+      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Hirata infers that recent behavioral deductions did not recur; Chabashira directly reports payment delay, but her motive remains undisclosed.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.008",
@@ -116,66 +144,90 @@
       "chapter": 2,
       "source_mode": "NARRATED",
       "primary_claim": "Kiyotaka notes Airi's isolation, Kōenji's comfort alone, and Suzune's use of free supermarket ingredients to prepare lunch.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Observations of solitude and Suzuki's cooking are through Kiyotaka's narration; his judgments about Kōenji's motives remain subjective.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.009",
       "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
       "pdf_pages": [
+        22,
         23
       ],
       "chapter": 2,
       "source_mode": "OBSERVED",
-      "primary_claim": "Chabashira summons Sudō over trouble; Suzune considers whether the delayed point allocation concerns an incident rather than an administrative fault.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Chabashira summons Sudō from class (p.22); later Suzune questions whether delayed private-point deposits reflect student trouble rather than a school fault (p.23).",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Sudō is called after class on p22; Suzune's p23 explanation about why money is late is a question, not known causation.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.010",
       "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
       "pdf_pages": [
-        24
+        24,
+        25
       ],
       "chapter": 2,
       "source_mode": "OBSERVED",
-      "primary_claim": "Suzune keeps but does not participate in the group chat and distances herself from Kushida, while Kiyotaka describes increased comfort speaking with Suzune.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Suzune does not participate in the class chat and mutes notifications; she later distances herself from Kushida, while Kiyotaka describes increased ease speaking to Suzune.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Group chat nonparticipation, muting and Suzune's spoken dislike of Kushida are supported; Kiyotaka's comfort is self-reported, not proof of mutual intimacy.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.011",
       "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
       "pdf_pages": [
-        27
+        27,
+        28
       ],
       "chapter": 2,
       "source_mode": "REPORTED_BY_CHARACTER",
-      "primary_claim": "Sudō says classmates purchased duplicate access cards for Kiyotaka's room; Kushida also has one, and Kiyotaka says he did not consent.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Sudō says other students obtained duplicate keycards to Kiyotaka's locked dorm room without his knowledge; Kushida also shows a copy and offers its return.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth."
+      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Sudō's statement and physical keycard plus Kushida's key confirm duplicated access; do not infer that all holders had consent.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.012",
       "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
       "pdf_pages": [
-        29
+        29,
+        30
       ],
       "chapter": 2,
       "source_mode": "REPORTED_BY_CHARACTER",
-      "primary_claim": "Sudō states that a fight with three Class C boys could result in long suspension and seeks help; his account remains a contested party statement.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Sudō reports fighting three Class C students and fearing long suspension; his version of instigation remains disputed.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth."
+      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Sudō reports the complaint and suspension prospect; truth of self-defense is not yet adjudicated.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.013",
@@ -186,10 +238,14 @@
       "chapter": 2,
       "source_mode": "REPORTED_BY_CHARACTER",
       "primary_claim": "Sudō says he is the only first-year being considered for a regular basketball role; selection is not yet final.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth."
+      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Sudō says regular basketball status was only a nomination under consideration; never mark him definitively selected.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.014",
@@ -200,10 +256,14 @@
       "chapter": 2,
       "source_mode": "REPORTED_BY_CHARACTER",
       "primary_claim": "Sudō alleges Komiya and Kondou lured him to a special building with Ishizaki and threatened his basketball participation before the physical confrontation.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth."
+      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Sudō supplies the alleged lure and intimidation involving Komiya, Kondou and Ishizaki; instigation remains an interested party claim.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.015",
@@ -214,38 +274,53 @@
       "chapter": 2,
       "source_mode": "REPORTED_BY_CHARACTER",
       "primary_claim": "Sudō says the school gave him until next Tuesday to produce evidence or face suspension until summer and a class-point penalty; no precise penalty is stated.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth."
+      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "The school deadline, suspension and class penalty are conveyed by Sudō, without fixed numerical amounts or universal disciplinary rule.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.016",
       "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
       "pdf_pages": [
-        33
+        32,
+        33,
+        34
       ],
       "chapter": 2,
       "source_mode": "OBSERVED",
-      "primary_claim": "Kiyotaka separates proof of instigation from justification for Sudō's force; Kushida proposes finding an eyewitness or obtaining an admission.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Kiyotaka questions how Sudō's use of force would be weighed against a self-defense argument; Kushida suggests obtaining a confession or finding an eyewitness.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Kiyotaka's skepticism about self-defense differs from a legal ruling; Kushida explicitly proposes recantation or eyewitness search.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.017",
       "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
       "pdf_pages": [
-        35
+        35,
+        36
       ],
       "chapter": 2,
       "source_mode": "OBSERVED",
-      "primary_claim": "Sudō asks friends to keep the dispute quiet to protect basketball prospects, while Kushida encourages him to avoid directly approaching the accusers.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Sudō requests discretion because of basketball risks; Kushida and Kiyotaka encourage him to avoid personally conducting the inquiry.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Sudō's confidentiality request is grounded in basketball concerns and friends advise noninvolvement; no durable behavioral improvement proven.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.018",
@@ -256,10 +331,14 @@
       "chapter": 3,
       "source_mode": "OBSERVED",
       "primary_claim": "Chabashira discloses the Class C complaint and possible consequences to Class D without establishing who started the fight.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Teacher states the two-class physical dispute and suspended judgment; this establishes investigation, not guilt.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.019",
@@ -270,10 +349,14 @@
       "chapter": 3,
       "source_mode": "OBSERVED",
       "primary_claim": "Suzune initially declines to rescue Sudō and considers whether shielding him from consequences would hinder behavioral change.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Horikita's refusal is directly voiced during lunch; self-improvement theory is her conditional evaluation of Sudō's behavior.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.020",
@@ -283,25 +366,34 @@
       ],
       "chapter": 3,
       "source_mode": "OBSERVED",
-      "primary_claim": "Hirata and Karuizawa coordinate one witness-search group and Kushida another; their first efforts do not produce a decisive lead.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Hirata and Karuizawa lead one witness-search group and Kushida another; they set out despite limited time, with no result yet established on this page.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "At p54 two teams are organized to search, not yet proven to have interviewed every student or received reliable answers.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.021",
       "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
       "pdf_pages": [
-        55
+        55,
+        56
       ],
       "chapter": 3,
       "source_mode": "OBSERVED",
-      "primary_claim": "Kushida asks Kiyotaka to persuade Suzune to help, but Suzune initially maintains her refusal.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Kushida asks Kiyotaka to help persuade Suzune, follows Suzune, and receives her continued refusal.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Kushida tries to win Horikita's assistance, who refuses again on p56; no persuasive success is attributable here.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.022",
@@ -312,10 +404,14 @@
       "chapter": 3,
       "source_mode": "OBSERVED",
       "primary_claim": "Kiyotaka proposes an inquiry with Class B rather than solely random campus searching.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Kiyotaka reasons Class B has an incentive against Class C and explicitly allows for hidden hostile plans; proposal not certainty.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.023",
@@ -326,10 +422,14 @@
       "chapter": 3,
       "source_mode": "OBSERVED",
       "primary_claim": "Kushida approaches unfamiliar students in Class B with relative ease, unlike her intimidated companions.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Kushida recognizes acquaintances and socializes in Class B while others hesitate; observed contextual social fluency.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.024",
@@ -340,10 +440,14 @@
       "chapter": 4,
       "source_mode": "OBSERVED",
       "primary_claim": "Hirata argues that protecting classmates and friendships can matter more than conserving class points at any cost.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Hirata explicitly weighs friendship against point preservation; do not encode an invariant sacrifice preference.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.025",
@@ -354,10 +458,14 @@
       "chapter": 4,
       "source_mode": "REPORTED_BY_CHARACTER",
       "primary_claim": "Chabashira announces an individual route to change classes through a private-point purchase distinct from class ranking.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth."
+      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Chabashira says a personal-points route to changing class exists; she has not yet demonstrated a successful transfer.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.026",
@@ -368,10 +476,14 @@
       "chapter": 4,
       "source_mode": "REPORTED_BY_CHARACTER",
       "primary_claim": "Chabashira quotes twenty million private points as the transfer price for entering a chosen class; no successful transaction is shown.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth."
+      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Twenty million is a teacher-stated price for chosen-class transfer; individual eligibility or settlement steps remain unobserved.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.027",
@@ -382,10 +494,14 @@
       "chapter": 4,
       "source_mode": "REPORTED_BY_CHARACTER",
       "primary_claim": "Chabashira reports that no one completed the transfer and recounts a past fraud case reaching almost twelve million points before expulsion.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth."
+      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Chabashira's historical near-twelve-million fraud anecdote is reported testimony; do not independently assert record books verified.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.028",
@@ -396,10 +512,14 @@
       "chapter": 4,
       "source_mode": "REPORTED_BY_CHARACTER",
       "primary_claim": "Chabashira says individual club participation or competitive achievements can earn points, without disclosing any universal amount or algorithm.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth."
+      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Club reward possibility is stated with a calligraphy example; neither routine participation nor a fixed stipend is guaranteed.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.029",
@@ -410,10 +530,14 @@
       "chapter": 4,
       "source_mode": "OBSERVED",
       "primary_claim": "Kiyotaka argues that Sudō's prospective basketball contributions create a Class A incentive to keep him in school; Suzune considers that benefit.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Kiyotaka offers club contribution as a reason to keep Sudō; Horikita's acknowledgement is qualified and not full endorsement yet.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.030",
@@ -424,10 +548,14 @@
       "chapter": 4,
       "source_mode": "OBSERVED",
       "primary_claim": "Suzune identifies Airi Sakura as a likely ignored witness through observations before Sakura makes an admission.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Horikita notices Sakura lowering her gaze during the call for witnesses; her certainty precedes any admission.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.031",
@@ -438,10 +566,14 @@
       "chapter": 4,
       "source_mode": "OBSERVED",
       "primary_claim": "Kushida approaches Sakura, who initially resists discussing the fight and struggles with unfamiliar social attention.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Sakura averts her gaze and declines Kushida's question after school; withdrawal is observed, not evidence of intent to deceive.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.032",
@@ -452,10 +584,14 @@
       "chapter": 4,
       "source_mode": "OBSERVED",
       "primary_claim": "Sudō lashes out while feeling abandoned by classmates; Suzune challenges both his conduct and the practical cost to Class D.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Sudō protests classmates' waning aid and Horikita's point tradeoff; note emotional reaction and no fixed actual penalty.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.033",
@@ -466,38 +602,54 @@
       "chapter": 4,
       "source_mode": "OBSERVED",
       "primary_claim": "Kiyotaka points to existing classroom cameras but cannot confirm equivalent functioning cameras captured the special-building fight.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Kiyotaka points out classroom cameras; their use for class assessment is his inference, not blanket proof every hall is recorded.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.034",
       "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
       "pdf_pages": [
-        101
+        101,
+        102
       ],
       "chapter": 4,
       "source_mode": "OBSERVED",
-      "primary_claim": "Kiyotaka does not force Sakura to claim witness status when she denies seeing the fight; he offers help if she faces intimidation.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Kiyotaka restrains Horikita from pressing Sakura, tells Sakura that testimony must be voluntary and offers help if she is intimidated; Sakura still denies witnessing the incident.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Kiyotaka prevents forcing Sakura and invites reporting threats despite her denial; her status is unresolved in this scene.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.035",
       "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
       "pdf_pages": [
-        103
+        103,
+        104,
+        105,
+        106
       ],
       "chapter": 4,
       "source_mode": "OBSERVED",
-      "primary_claim": "Ichinose independently checks the fight scene and offers cross-class assistance despite the risk to Class B's reputation.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Ichinose approaches Kiyotaka and Horikita at the special building after hearing about the conflict and offers to help; Kiyotaka considers possible Class B incentives as speculation.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Ichinose's spontaneous encounter and offer are observed, but Class B interest and Kiyotaka's interpretations require uncertainty.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.036",
@@ -508,24 +660,33 @@
       "chapter": 4,
       "source_mode": "OBSERVED",
       "primary_claim": "Class D accepts Ichinose's help; a Class D-only eyewitness may be regarded as biased.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Class D accepts Ichinose as an ally, with limited impartiality of its own witness; probability of another witness remains conjectural.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.037",
       "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
       "pdf_pages": [
-        114
+        114,
+        115
       ],
       "chapter": 4,
       "source_mode": "OBSERVED",
-      "primary_claim": "Ichinose collects Class B dorm grievances and communicates them to the dorm manager as their informal representative.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Ichinose brings Class B dorm residents' requests to the dorm manager and explains that she serves as an informal representative chosen within her class.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Ichinose interacts with dorm manager about requests and later states a Class B-only voluntary office; no school appointment.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.038",
@@ -536,10 +697,14 @@
       "chapter": 4,
       "source_mode": "SELF_DESCRIPTION",
       "primary_claim": "Ichinose explains that Class B chose representative, deputy and secretary roles independently; they are not mandatory school-wide offices.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Class B representative, vice and secretary are Ichinose's descriptions; not compulsory formal governance of every class.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.039",
@@ -550,24 +715,35 @@
       "chapter": 4,
       "source_mode": "REPORTED_BY_CHARACTER",
       "primary_claim": "Ichinose passes along a rumor of a possible summer tropical-island trip without an exam specification or confirmed mechanism.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth."
+      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Tropical-island summer trip is a rumor passed by Ichinose; absolutely no special-exam mechanism can be inferred.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.040",
       "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
       "pdf_pages": [
-        125
+        123,
+        124,
+        125,
+        126
       ],
       "chapter": 4,
       "source_mode": "OBSERVED",
-      "primary_claim": "A student named Chihiro confesses romantic feelings to Ichinose, who hesitates in responding.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Ichinose has received a written romantic confession and Chihiro confronts her about the unfamiliar boy she brought to their meeting; Ichinose hesitates and cannot easily lie.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Chihiro's written confession, meeting and distress are evidenced across pp123-126; the encounter is not a direct spoken new confession.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.041",
@@ -578,10 +754,14 @@
       "chapter": 4,
       "source_mode": "SELF_DESCRIPTION",
       "primary_claim": "Ichinose acknowledges she mishandled Chihiro's feelings by avoidance; their future relationship is unresolved.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Ichinose openly admits mishandling Chihiro's feelings and reports asking to resume normal relations; there is no accepted reconciliation.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.042",
@@ -592,10 +772,14 @@
       "chapter": 4,
       "source_mode": "OBSERVED",
       "primary_claim": "Kushida and Kiyotaka accompany Sakura to a campus electronics store for a camera repair; she fears the clerk.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "The trio attend campus repair desk; Sakura shows anxiety and the repair clerk draws unwanted attention, observed separately.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.043",
@@ -606,10 +790,14 @@
       "chapter": 4,
       "source_mode": "OBSERVED",
       "primary_claim": "Kiyotaka recognizes the clerk's troubling attention and offers his own repair contact instead of having Sakura leave sensitive details.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Kiyotaka redirects repair contact after noting the clerk's gaze; legally validating his explanation about warranty is out of scope.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.044",
@@ -620,24 +808,33 @@
       "chapter": 4,
       "source_mode": "SELF_DESCRIPTION",
       "primary_claim": "Sakura reports loving photography since childhood; her father gave her a camera before junior high, but she does not claim technical expertise.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Sakura says she has liked cameras since youth and received a camera from her father; lack of technical expertise is self-described.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.045",
       "work_id": "ln.y1.v02.sevenseas.en.operator-provided",
       "pdf_pages": [
-        143
+        143,
+        144
       ],
       "chapter": 4,
       "source_mode": "OBSERVED",
-      "primary_claim": "Kiyotaka asks technically knowledgeable Sotomura for help with a device rather than improvising beyond his expertise.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Kiyotaka contacts Sotomura (Professor) to request electronics advice because he cannot identify the appropriate device himself.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Kiyotaka phones Sotomura for technical input when choosing a device; source demonstrates task-specific help-seeking.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.046",
@@ -647,11 +844,15 @@
       ],
       "chapter": 4,
       "source_mode": "SELF_DESCRIPTION",
-      "primary_claim": "After gaining some trust, Sakura voluntarily admits witnessing the fight; agreement to give formal testimony remains uncertain.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Sakura privately admits she witnessed Sudō's fight, explains her fear of attention, and explicitly promises Kushida to testify, though her resilience under future pressure is not established.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Sakura says she witnessed the fight and promises Kushida to testify on p146; pressure tolerance at hearing remains open.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.047",
@@ -662,10 +863,14 @@
       "chapter": 4,
       "source_mode": "OBSERVED",
       "primary_claim": "Kushida notices Sakura's eyeglasses do not show usual prescription distortion; their purpose is only hypothesized at this point.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Kushida distinguishes glasses with and without lens distortion and hypothesizes concealment, which is an inference until later revelations.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.048",
@@ -676,10 +881,14 @@
       "chapter": 5,
       "source_mode": "NARRATED",
       "primary_claim": "On the eve of deliberation Class D has a witness and helpers, but still lacks irrefutable proof of Sudō's innocence.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Chapter-opening Kiyotaka narration records anxiety and lack of decisive proof despite class mobilization; predicts, not adjudicates, hearing.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.049",
@@ -689,11 +898,15 @@
       ],
       "chapter": 5,
       "source_mode": "OBSERVED",
-      "primary_claim": "Kanzaki posts an information request about the fight and pursues witness tips without an immediately decisive response.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "primary_claim": "Kanzaki reports posting a physical notice requesting information on the Sudō incident; he states he has received no useful leads from that approach.",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition."
+      "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Kanzaki says his physical notice had no useful responses; his notice must not be credited for Ichinose's online tip.",
+      "review_decision": "PASS_AFTER_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.050",
@@ -704,10 +917,14 @@
       "chapter": 5,
       "source_mode": "REPORTED_BY_CHARACTER",
       "primary_claim": "An anonymous tip alleges Ishizaki was violent in junior high; Kanzaki infers a deliberate trap, but neither assertion is directly confirmed by the tip.",
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
-      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth."
+      "epistemic_note": "Attribution is the speaker's statement, not independently established world truth.",
+      "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
+      "reviewed_on": "2026-10-23",
+      "review_note": "Ishizaki junior-high reputation originates in an unverified online message; Kanzaki's trap explanation is conjecture, not proven history.",
+      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {
       "record_id": "y1v2.ev.051",
@@ -1770,7 +1987,7 @@
     }
   ],
   "release_gate": {
-    "assistant_individual_semantic_review": "PENDING",
+    "assistant_individual_semantic_review": "IN_PROGRESS",
     "operator_approval": "PENDING",
     "individual_verified_count": 0,
     "generic_knowledge_inference_allowed": false

@@ -140,6 +140,9 @@ func validateForkLineageTx(ctx context.Context,tx *sql.Tx,child *genesis.Genesis
   actual:=[]any{name,uint64(len(records)),digest[:]}
   if !sameCanonical(cursors[i],actual){return fmt.Errorf("origin immutable %s prefix changed",name)}
  }
+ if err:=verifyRoundHistoryV2(ctx,tx,parent,child,snap,origin,bundle);err!=nil{
+  return fmt.Errorf("fork V2 round history verification: %w",err)
+ }
  // Every migrated V2 communication requires an independently rederived
  // child Claim/Transmission/due and an exact archived V1 send proof.
  if err:=verifyAllV2ImportsTx(ctx,tx,run,bundle);err!=nil{

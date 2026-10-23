@@ -87,3 +87,35 @@ Os findings ainda marcados OPEN (01, 02, 04 e 05) não podem ser mascarados por 
 | OPEN-05 | **OPEN para aceite integrado** | Reexecutar a matriz das cinco ledgers, world/state hash, permutações e crash points no HEAD final; cobertura diferencial dos migradores ainda ausentes não pode ser alegada. |
 
 **Gate:** PR permanece Draft/NO-GO. Um CI verde valida a fatia efetivamente implementada, não substitui a conformidade positiva exigida nos blockers.
+
+## R19 — histórico de rounds parcialmente executados (slice inicial)
+
+O bootstrap V1→V2 agora migra rounds Genesis pendentes com dispatch aberto,
+SlotResponse (`NoProposal` ou `ActionProposal`) e revogações duráveis. A mesma
+função deriva novamente os registros a partir do arquivo parental no bootstrap e
+na validação da linhagem. Os registros e as chaves condicionais de resposta são
+publicados na transação do filho. O prefixo original continua sob a policy V1.
+
+O corte é o prefixo congelado do snapshot, mesmo que o pai receba respostas
+posteriores na mesma revisão. O migrador exige dispatches elegíveis e vinculados
+à revisão/instante/ciclo desse corte. Os ordinais de dispatch e a política de
+revogação são preservados; as coordenadas de elegibilidade dos rounds no instante
+corrente são rebaseadas em conjunto com o ciclo e a revisão iniciais do filho.
+
+Evidência local: `TestCSFRV18R19*` cobre ambos os tipos de resposta, resposta
+idempotente e duplicada, revogação/redespacho, commit real de round, replay,
+snapshot+tail, reabertura, rollback com retry, corrupção de resposta/dispatch/
+revogação/chave condicional e isolamento de resposta posterior do pai. Um teste
+adicional parte de revisão 1/ordinal 0 e exige commit positivo no filho.
+
+REDs observados: partição de dispatch sem migrador; preparador de comunicação
+bloqueando corte de round sem ocorrência pendente; ordinal parental retido na
+filha após ciclo prévio. A implementação positiva corrige esses caminhos.
+
+**Limites:** rounds Event-owned, requests de cortes anteriores e proposals com
+`originating-intention-ref` dependem de migradores próprios. R20–R23 continuam
+pendentes. OPEN-02 e OPEN-05 permanecem **OPEN**; esta slice não aprova a matriz
+integrada nem implica autorização para merge. A validação do HEAD exato da PR
+deve constar no checkpoint da conversa; não reutilizar os workflows do R18.
+
+Contrato operacional: [fork-round-history-v2](../../../docs/architecture/fork-round-history-v2.md).

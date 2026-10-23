@@ -29,10 +29,10 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
 }
 
 // ForkIdleSnapshotV1ToV2 is the positive cross-policy bootstrap for verified
-// IDLE cuts WITHOUT unsettled migration units. Parent V1 history is preserved
+// IDLE cuts supported by the registered causal migrators. Parent V1 history is preserved
 // byte-for-byte, while child Genesis, clock and future authorities are V2.
-// The in-transit path requires an additional migration birth executor and is
-// intentionally not implicitly enabled by this bounded operation.
+// Pending communication and round history are authenticated migration births;
+// unsupported source classes still fail closed.
 func (s *Store) ForkIdleSnapshotV1ToV2(ctx context.Context,sourceRun,parentSnapshotID,childRun [32]byte,
  child *Store,origin,version2 *policy.Bundle)(*genesis.Genesis,error){
  if origin==nil||version2==nil{return nil,errors.New("cross-policy fork requires both installed bundles")}
@@ -80,12 +80,10 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  penv,err:=codec.StrictDecodeEnvelope(typed[2].([]byte));if err!=nil{return nil,err}
  lists,ok:=penv.Value.([]any);if !ok||len(lists)!=10{return nil,errors.New("unsupported pending-state schema")}
  if crossPolicy {
-  // The only currently admitted positive V2 migration unit is a complete
-  // in-transit communication (pending occurrence and its input ref).
-  // All other live partitions, including dispatches, trigger runtimes,
-  // perception tasks and unfinished rounds, still fail closed.
+  // These partitions are handled by typed migrators below. Incomplete
+  // perception work still requires parent settlement before the fork.
   for i,raw:=range lists {
-   if i==0||i==1||i==2||i==3||i==4||i==6||i==7||i==9{continue} // migrated rounds and completed receipts
+   if i==0||i==1||i==2||i==3||i==4||i==5||i==6||i==7||i==9{continue} // migrated rounds and completed receipts
    items,ok:=raw.([]any)
    if !ok||len(items)!=0{return nil,fmt.Errorf("V1-to-V2 fork needs migrator for pending partition %d",i)}
   }
@@ -93,10 +91,10 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  for i,raw:=range lists{
   items,ok:=raw.([]any)
   if !ok{return nil,fmt.Errorf("fork pending partition %d is malformed",i)}
-  // Latest SourceClosure, settled slot responses and completed perception
+  // Latest SourceClosure, historical slot responses and completed perception
   // receipts are historical proofs, not pending work. Keep them in the
   // frozen parent prefix rather than transplanting their run-bound IDs.
-  if i==3||i==6||i==9||i==0||i==1||i==2||i==4{continue}
+  if i==3||i==6||i==9||i==0||i==1||i==2||i==4||(crossPolicy&&i==5){continue}
   // An explicitly migrated genesis schedule contributes one pending input
   // ref (kind=2) for each immutable occurrence. Unknown source kinds fail
   // closed, rather than discarding the parent pending work.
@@ -220,9 +218,11 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  var migrated []forkGenesisOccurrence
  var importBirths []V2CommunicationBirth
  if crossPolicy{
-  importBirths,err=s.PrepareV2CommunicationBirths(ctx,sourceRun,parentSnapshotID,
-   childGenesis,origin,childPolicy)
-  if err!=nil{return nil,fmt.Errorf("V1-to-V2 pending transmission migration: %w",err)}
+  if len(lists[0].([]any))>0{
+   importBirths,err=s.PrepareV2CommunicationBirths(ctx,sourceRun,parentSnapshotID,
+    childGenesis,origin,childPolicy)
+   if err!=nil{return nil,fmt.Errorf("V1-to-V2 pending transmission migration: %w",err)}
+  }
   pendingRefs:=lists[0].([]any)
   importedRefs:=map[string]bool{}
   for _,birth:=range importBirths {
@@ -260,8 +260,16 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   migrated,err=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,lists[0].([]any),origin,childPolicy)
   if err!=nil{return nil,err}
  }
- migratedRounds,err:=migrateGenesisPendingRounds(ctx,s,parent,childGenesis,lists[4].([]any),origin,childPolicy)
- if err!=nil{return nil,fmt.Errorf("fork Genesis round migration: %w",err)}
+ var migratedRounds []forkGenesisRound
+ var migratedSlots []forkSlotRecord
+ if crossPolicy{
+  records,err:=s.snapshotInputRecords(ctx,parentSnapshotID);if err!=nil{return nil,err}
+  migratedRounds,migratedSlots,err=migrateRoundHistoryV2(parent,childGenesis,snapshot,records,origin,childPolicy)
+  if err!=nil{return nil,fmt.Errorf("V2 round history migration: %w",err)}
+ }else{
+  migratedRounds,err=migrateGenesisPendingRounds(ctx,s,parent,childGenesis,lists[4].([]any),origin,childPolicy)
+  if err!=nil{return nil,fmt.Errorf("fork Genesis round migration: %w",err)}
+ }
  triggerMigration,err:=migrateGenesisPendingTriggers(ctx,s,parent,childGenesis,origin,childPolicy,
   lists[1].([]any),lists[2].([]any))
  if err!=nil{return nil,fmt.Errorf("fork trigger migration: %w",err)}
@@ -348,6 +356,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
    "INSERT INTO round_integrity_seals(id,run_id,canonical_hash) VALUES(?,?,?)",
    round.ID[:],childRun[:],round.Seal[:]);err!=nil{return nil,err}
  }
+ if err:=publishRoundHistoryV2(ctx,tx,migratedSlots);err!=nil{return nil,err}
  for _,o:=range migrated{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO scheduled_occurrences "+
    "(id,run_id,eligibility_instant,eligibility_ordinal,lifecycle,canonical) VALUES(?,?,?,?,0,?)",

@@ -88,16 +88,17 @@ func TestCSFRV18V2MigratesUnstartedGenesisRoundAndReplays(t *testing.T){
  if root.Payload[5]!=policy.CodecPolicyV2ID{t.Fatal("child Genesis lost V2 policy")}
 }
 
-func TestCSFRV18V2RejectsPartiallyDispatchedRoundWithoutCausalMigrator(t *testing.T){
+func TestCSFRV18V2MigratesPartiallyDispatchedRoundWithCausalHistory(t *testing.T){
  ctx:=context.Background()
  parent,ledger,v1,run,origin:=csfrv18GenesisRoundSource(t)
  state,err:=parent.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
- due:=domain.EligibilityCoordinate{NotBeforeInstant:state.Instant+15}
+ due:=domain.EligibilityCoordinate{NotBeforeInstant:state.Instant}
  round,err:=ledger.DeclareRound(ctx,"genesis.schedule",[2]string{"school","a"},
   []string{"choice","reply"},due,origin,1,0,0,[]any{uint64(0)})
  if err!=nil{t.Fatal(err)}
  // A dispatch is an externally consumed capability; it cannot be replaced
  // by an unstarted child round with new IDs while hiding the historical slot.
+ // The V2 migrator now preserves and verifies that capability history.
  cid,_,err:=identity.New(v1).Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
   []any{run[:],[]any{int64(state.Instant),uint64(state.LastOrdinal+1)}})
  if err!=nil{t.Fatal(err)}
@@ -112,12 +113,12 @@ func TestCSFRV18V2RejectsPartiallyDispatchedRoundWithoutCausalMigrator(t *testin
   ID:domain.ID(cid),BaseRevision:state.Revision,Instant:state.Instant});err!=nil{t.Fatal(err)}
  checkpoint,err:=parent.CreateSnapshotV1(ctx,[32]byte(run),v1,nil);if err!=nil{t.Fatal(err)}
  v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle");if err!=nil{t.Fatal(err)}
- path:=t.TempDir()+"/rejected-partial-v2.db"
+ path:=t.TempDir()+"/partial-v2.db"
  child,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
  defer child.Close()
  childID:=[32]byte(run);childID[0]^=0x71
- if _,err:=parent.ForkIdleSnapshotV1ToV2(ctx,[32]byte(run),checkpoint.ID,childID,child,v1,v2);err==nil{
-  t.Fatal("V2 transplanted a round with unacknowledged old dispatch capability")
+ if _,err:=parent.ForkIdleSnapshotV1ToV2(ctx,[32]byte(run),checkpoint.ID,childID,child,v1,v2);err!=nil{
+  t.Fatal("V2 partial dispatch migration:",err)
  }
- assertCSFRV18EmptyRejectedFork(t,path)
+ if _,err:=child.ReplayClock(ctx,childID,v2);err!=nil{t.Fatal(err)}
 }

@@ -12,9 +12,12 @@ Genesis, round, cycle, dispatch and response identities are derived with the
 installed V2 policy. The child starts at revision/ordinal zero. Actors, slots,
 request digest, response kind, action content, revocation reason/policy and dispatch
 ordinals are preserved. Same-instant round eligibility ordinals are rebased relative
-to the parent's next ordinal, consistently with the child clock and dispatch. A response with an originating intention reference still
-requires that reference's own causal migrator; it is rejected rather than copied
-as an unauthenticated child reference. Stale requests from earlier source cuts
+to the parent's next ordinal, consistently with the child clock and dispatch.
+An originating intention reference to the authenticated parent Genesis remains
+an exact historical, opaque reference. Bootstrap and lineage replay resolve its
+kind, ID and digest against the archived Genesis; no child event, evidence or
+knowledge is inferred from it. Other intention roots require their own historical
+resolver and fail closed while unavailable. Stale requests from earlier source cuts
 also remain unsupported.
 
 A slot's first dispatch has ordinal zero; each subsequent dispatch requires the

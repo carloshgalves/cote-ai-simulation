@@ -40,7 +40,7 @@ func r19Dispatch(t *testing.T, b *policy.Bundle, run, cycle domain.ID, r inputle
 func r19Source(t *testing.T) (*sqlite.Store, *policy.Bundle, domain.ID, sqlite.SnapshotV1) {
 	return r19SourceWithAction(t, false)
 }
-func r19SourceWithAction(t *testing.T, action bool) (*sqlite.Store, *policy.Bundle, domain.ID, sqlite.SnapshotV1) {
+func r19SourceWithAction(t *testing.T, action bool, intention ...any) (*sqlite.Store, *policy.Bundle, domain.ID, sqlite.SnapshotV1) {
 	t.Helper()
 	ctx := context.Background()
 	parent, ledger, v1, run, origin := csfrv18GenesisRoundSource(t)
@@ -68,6 +68,12 @@ func r19SourceWithAction(t *testing.T, action bool) (*sqlite.Store, *policy.Bund
 				response, err = testresourcev1.ProposalForDispatch(v1, d)
 				if err != nil {
 					t.Fatal(err)
+				}
+				if len(intention) > 0 {
+					response.Body[16] = intention[0]
+					if build, ok := intention[0].(func([]any) any); ok {
+						response.Body[16] = build(origin)
+					}
 				}
 			}
 			if err := ledger.Respond(ctx, response); err != nil {
@@ -687,5 +693,112 @@ func TestCSFRV18R19Finding1AllowsValidRepeatedRevocationAndReopen(t *testing.T) 
 	}
 	if _, err := child.VerifySnapshotV1(ctx, childID, checkpoint.ID, v2); err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestCSFRV18R19OpaqueIntentionSurvivesForkWithoutGrantingAuthority(t *testing.T) {
+	ctx := context.Background()
+	var intention any
+	parent, v1, run, snap := r19SourceWithAction(t, true, func(origin []any) any {
+		ref := origin[1].([]any)
+		intention = []any{uint64(1), []any{uint64(21), ref[0], ref[1]}}
+		return intention
+	})
+	v2, err := policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+	if err != nil {
+		t.Fatal(err)
+	}
+	path := t.TempDir() + "/opaque-intention.db"
+	child, err := sqlite.Open(ctx, path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	childID := [32]byte(run)
+	childID[0] ^= 0x61
+	if _, err := parent.ForkIdleSnapshotV1ToV2(ctx, [32]byte(run), snap.ID, childID, child, v1, v2); err != nil {
+		t.Fatal("opaque intention migration:", err)
+	}
+	if err := child.Close(); err != nil {
+		t.Fatal(err)
+	}
+	child, err = sqlite.Open(ctx, path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer child.Close()
+	ledger, err := inputledger.Open(ctx, domain.ID(childID), v2, child)
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, _, _, rounds, slots, _ := ledger.Snapshot()
+	got := slots[rounds[0].ID]["answered"]
+	before, err := codec.CanonicalPayload(intention)
+	if err != nil {
+		t.Fatal(err)
+	}
+	after, err := codec.CanonicalPayload(got.Body[16])
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Equal(before, after) {
+		t.Fatal("opaque owner reference was regenerated or reinterpreted")
+	}
+	if _, err := child.ReplayClock(ctx, childID, v2); err != nil {
+		t.Fatal(err)
+	}
+	db, err := sql.Open("sqlite", path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer db.Close()
+	for _, table := range []string{"event_store", "evidence_ledger", "causal_outbox"} {
+		var n int
+		if err := db.QueryRowContext(ctx, "SELECT count(*) FROM "+table).Scan(&n); err != nil {
+			t.Fatal(err)
+		}
+		if n != 0 {
+			t.Fatal("opaque intention became knowledge/world authority", table)
+		}
+	}
+}
+
+func TestCSFRV18R19IntentionRequiresAuthenticatedHistoricalRoot(t *testing.T) {
+	for _, mutation := range []string{"id", "digest", "kind", "option", "missing-root"} {
+		t.Run(mutation, func(t *testing.T) {
+			ctx := context.Background()
+			parent, v1, run, snap := r19SourceWithAction(t, true, func(origin []any) any {
+				root := origin[1].([]any)
+				ref := []any{uint64(21), bytes.Clone(root[0].([]byte)), bytes.Clone(root[1].([]byte))}
+				switch mutation {
+				case "id":
+					ref[1].([]byte)[0] ^= 1
+				case "digest":
+					ref[2].([]byte)[0] ^= 1
+				case "kind":
+					ref[0] = uint64(65535)
+				case "option":
+					return []any{uint64(0), ref}
+				case "missing-root":
+					ref[0] = uint64(17)
+				}
+				return []any{uint64(1), ref}
+			})
+			v2, err := policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+			if err != nil {
+				t.Fatal(err)
+			}
+			path := t.TempDir() + "/rejected-intention.db"
+			child, err := sqlite.Open(ctx, path)
+			if err != nil {
+				t.Fatal(err)
+			}
+			defer child.Close()
+			childID := [32]byte(run)
+			childID[0] ^= 0x62
+			if _, err := parent.ForkIdleSnapshotV1ToV2(ctx, [32]byte(run), snap.ID, childID, child, v1, v2); err == nil {
+				t.Fatal("unresolved intention gained authority")
+			}
+			assertCSFRV18EmptyRejectedFork(t, path)
+		})
 	}
 }

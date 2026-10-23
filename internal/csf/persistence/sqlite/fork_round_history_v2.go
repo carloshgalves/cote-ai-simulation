@@ -256,6 +256,11 @@ func migrateRoundHistoryV2(parent, child *genesis.Genesis, snapshot []any,
 			out = append(out, forkSlotRecord{CanonicalRecord: ports.CanonicalRecord{Identity: [32]byte(identity.OpaqueContentHash(raw)), Canonical: raw}})
 		}
 		if h.response != nil {
+			if len(h.response) == 19 {
+				if err := authenticateRoundIntentionV2(h.response[16], parent); err != nil {
+					return nil, nil, err
+				}
+			}
 			response, err := migrateSlotResponseV2(h.response, f, fields, origin, target)
 			if err != nil {
 				return nil, nil, err
@@ -264,6 +269,29 @@ func migrateRoundHistoryV2(parent, child *genesis.Genesis, snapshot []any,
 		}
 	}
 	return rounds, out, nil
+}
+
+// Intention references describe actor provenance, never a world assertion. A
+// reference may remain historical across a fork only when its root is present
+// in the authenticated cut. Genesis is already archived and independently
+// verified by lineage replay. Other roots need their corresponding resolver.
+func authenticateRoundIntentionV2(value any, parent *genesis.Genesis) error {
+	option, ok := value.([]any)
+	if !ok || len(option) == 0 {
+		return errors.New("action intention option malformed")
+	}
+	if len(option) == 1 && option[0] == uint64(0) {
+		return nil
+	}
+	if len(option) != 2 || option[0] != uint64(1) {
+		return errors.New("action intention option malformed")
+	}
+	ref, ok := option[1].([]any)
+	if !ok || len(ref) != 3 || ref[0] != uint64(21) ||
+		!equalBytes(ref[1], parent.ID[:]) || !equalBytes(ref[2], parent.Digest[:]) {
+		return errors.New("action intention requires an authenticated historical root")
+	}
+	return nil
 }
 
 func migrateSlotResponseV2(old, source, dispatch []any, origin, target *policy.Bundle) (forkSlotRecord, error) {
@@ -277,11 +305,6 @@ func migrateSlotResponseV2(old, source, dispatch []any, origin, target *policy.B
 		digestTag = "cote.csf.digest.action-proposal-unit"
 		bodySchema = "cote.csf.schema.action-proposal.body"
 		roundIndex, slotIndex, timeIndex, revisionIndex = 13, 14, 11, 15
-		// An intention is a causal reference, not an opaque arbitrary pointer. Its
-		// own migrator is required before this class can cross the policy boundary.
-		if !sameCanonical(old[16], []any{uint64(0)}) {
-			return zero, errors.New("action intention requires an authenticated causal migrator")
-		}
 	}
 	oldID, _, err := identity.New(origin).Sum(idTag, "cote.csf.schema.slot-response-id-preimage", 1, []any{source[0], kind})
 	if err != nil || !equalBytes(old[0], oldID[:]) || !sameCanonical(old[2], source[1]) || !sameCanonical(old[3], source[2]) ||

@@ -1685,15 +1685,25 @@
         12,
         13
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.airi-sakura",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.002",
+        "y1v2.ev.003"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Sakura actively chooses camera use and retreat during an emotionally overwhelming encounter; no claim she saw or understood the initial provocation.",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v2.case.ken-sudo.three-on-one-fight",
@@ -1703,15 +1713,25 @@
         12,
         31
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.ken-sudo",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.002",
+        "y1v2.ev.014"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Sudō demonstrably emerges uninjured against three hurt opponents, but that scene supports a local combat outcome rather than a moral/legal verdict.",
+      "review_decision": "PASS_AFTER_ATTRIBUTION_CORRECTION"
     },
     {
       "case_id": "y1v2.case.ken-sudo.request-confidential-help",
@@ -1721,15 +1741,25 @@
         29,
         35
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.ken-sudo",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.012",
+        "y1v2.ev.017"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Sudō asks for discretion and complies with friends' request to stay away; not evidence of a stable compliant personality.",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v2.case.suzune-horikita.conditional-aid-reassessment",
@@ -1739,15 +1769,25 @@
         44,
         72
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.suzune-horikita",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.019",
+        "y1v2.ev.029"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Suzune initially says no and later reevaluates potential future point gains, a conditional tactical shift rather than immediate promise of aid.",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v2.case.kikyo-kushida.coordinate-witness-inquiry",
@@ -1757,15 +1797,25 @@
         54,
         63
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.kikyo-kushida",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.020",
+        "y1v2.ev.023"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Kushida coordinates witnesses and can talk to Class B acquaintances, while other searchers' acts cannot be counted as her personal feats.",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v2.case.kiyotaka-ayanokoji.target-class-b-search",
@@ -1774,15 +1824,24 @@
       "source_pdf_pages": [
         61
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.022"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Kiyotaka targets Class B on strategic ranking incentives but explicitly considers their ability to exploit Class D too.",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v2.case.yosuke-hirata.prioritize-protecting-peers",
@@ -1791,15 +1850,24 @@
       "source_pdf_pages": [
         67
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.yosuke-hirata",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.024"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Hirata states a priority for peers in this controversy; a spoken preference is not a universal decision policy.",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v2.case.suzune-horikita.identify-sakura-witness",
@@ -1808,15 +1876,24 @@
       "source_pdf_pages": [
         77
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.suzune-horikita",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.030"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Suzune notices Sakura's unusual gaze avoidance after an inquiry and makes an accurate later-confirmed hypothesis, not omniscient detection.",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v2.case.kikyo-kushida.build-sakura-rapport",
@@ -1827,15 +1904,26 @@
         138,
         146
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.kikyo-kushida",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.031",
+        "y1v2.ev.042",
+        "y1v2.ev.046"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Kushida invites and supports Sakura, and accompanies the repair outing; Sakura's independent later decision is not fully caused by Kushida.",
+      "review_decision": "PASS_AFTER_ATTRIBUTION_CORRECTION"
     },
     {
       "case_id": "y1v2.case.honami-ichinose.class-b-informal-leadership",
@@ -1845,15 +1933,25 @@
         114,
         115
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.honami-ichinose",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.037",
+        "y1v2.ev.038"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Ichinose acts as an informal class delegate for dorm requests, and explicitly says Class B created those roles itself.",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v2.case.honami-ichinose.reflect-chihiro-confession",
@@ -1863,15 +1961,25 @@
         125,
         127
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.honami-ichinose",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.040",
+        "y1v2.ev.041"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Ichinose admits mishandling the confession and asks Chihiro to relate normally; evidence cannot establish restored friendship or romance.",
+      "review_decision": "PASS_AFTER_ATTRIBUTION_CORRECTION"
     },
     {
       "case_id": "y1v2.case.kiyotaka-ayanokoji.protect-sakura-contact",
@@ -1880,33 +1988,50 @@
       "source_pdf_pages": [
         140
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.kiyotaka-ayanokoji",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.043"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Kiyotaka observes disturbing clerk attention and uses his own personal details on a repair form; not a universal right to alter ownership fields.",
+      "review_decision": "PASS_WITH_EPISODE_LIMIT"
     },
     {
       "case_id": "y1v2.case.airi-sakura.voluntary-witness-admission",
       "case_file": "data/canon/consolidated/behavioral_cases/airi-sakura/voluntary-witness-admission.json",
       "primary_actor_id": "actor.airi-sakura",
       "source_pdf_pages": [
-        146,
-        173
+        146
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.airi-sakura",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.046"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Sakura privately admits she saw the fight and specifically promises to testify on p146; this is an affirmative commitment, not merely tentative help.",
+      "review_decision": "PASS_AFTER_ATTRIBUTION_CORRECTION"
     },
     {
       "case_id": "y1v2.case.ryuji-kanzaki.public-witness-appeal",
@@ -1916,15 +2041,25 @@
         153,
         156
       ],
-      "semantic_review": "SOURCE_WINDOW_REVIEW_PENDING",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "reviewed_by_assistant": true,
       "verified": false,
       "checklist": [
         "primary actor actually performs action",
         "source supports conditions and result",
         "limits/counterfactual do not overclaim",
         "source has no future-knowledge leakage"
-      ]
+      ],
+      "source_case_owner_id": "actor.ryuji-kanzaki",
+      "source_work_id": "ln.y1.v02.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v2.ev.049",
+        "y1v2.ev.050"
+      ],
+      "reviewed_on": "2026-10-23",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "review_note": "Kanzaki's printed notice yields no useful lead, whereas a different online channel produces a tip later shared by Ichinose; Kanzaki evaluates that hearsay.",
+      "review_decision": "PASS_AFTER_ATTRIBUTION_CORRECTION"
     },
     {
       "case_id": "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice",
@@ -2160,7 +2295,7 @@
     }
   ],
   "release_gate": {
-    "assistant_individual_semantic_review": "EVIDENCE_COMPLETE_CASES_PENDING",
+    "assistant_individual_semantic_review": "EVIDENCE_COMPLETE_CASES_IN_PROGRESS",
     "operator_approval": "PENDING",
     "individual_verified_count": 0,
     "generic_knowledge_inference_allowed": false

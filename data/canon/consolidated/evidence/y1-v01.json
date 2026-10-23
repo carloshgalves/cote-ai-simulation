@@ -1647,6 +1647,7 @@
       "source": {
         "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
+          128,
           130
         ],
         "chapter": 7,
@@ -2934,7 +2935,8 @@
       "source": {
         "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
         "pdf_pages": [
-          251
+          251,
+          252
         ],
         "chapter": 11,
         "edition": "Seven Seas English 2019, operator-supplied PDF",

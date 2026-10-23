@@ -3401,6 +3401,7 @@
       "id": "y1v1.ev.061",
       "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
       "pdf_pages": [
+        128,
         130
       ],
       "source_mode": "CHARACTER_ASSERTION",
@@ -4108,7 +4109,8 @@
       "id": "y1v1.ev.107",
       "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
       "pdf_pages": [
-        251
+        251,
+        252
       ],
       "source_mode": "OBSERVED",
       "source_text_pages_indexed": true,

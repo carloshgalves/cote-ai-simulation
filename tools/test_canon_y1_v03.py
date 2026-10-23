@@ -73,7 +73,7 @@ for item in review["behavioral_cases"]:
     assert c["primary_actor_id"]==item["primary_actor_id"],item["case_id"]
     assert c["source"]["pdf_pages"]==item["pdf_pages"],item["case_id"]
 
-assert review["global_promotion"].startswith("BLOCKED")
+assert review["global_promotion"]=="CANON_REFERENCE_MERGE_APPROVED_NO_RUNTIME_MEMORY_PROMOTION"
 assert review["release_gate"]["operator_approval"]=="APPROVED_BY_OPERATOR"
 assert exam["authority"]=="CANON_REFERENCE_NOT_EXECUTABLE"
 assert exam["initial_class_test_points"]==300

@@ -4,7 +4,8 @@
   "display_name": "Yōsuke Hirata",
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+    "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "ln.y1.v02.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -19,13 +20,17 @@
     "leadership": {
       "behavioral_case_refs": [
         "y1v1.case.h.class-introductions",
-        "y1v1.case.h.point-crisis-leadership"
+        "y1v1.case.h.point-crisis-leadership",
+        "y1v2.case.yosuke-hirata.prioritize-protecting-peers"
       ],
       "context_evidence_refs": [
         "y1v1.ev.012",
         "y1v1.ev.017",
         "y1v1.ev.063",
-        "y1v1.ev.072"
+        "y1v1.ev.072",
+        "y1v2.ev.020",
+        "y1v2.ev.024",
+        "y1v2.ev.048"
       ]
     },
     "social": {
@@ -39,7 +44,8 @@
         "y1v1.ev.018",
         "y1v1.ev.046",
         "y1v1.ev.051",
-        "y1v1.ev.063"
+        "y1v1.ev.063",
+        "y1v2.ev.020"
       ]
     },
     "emotion": {
@@ -61,13 +67,15 @@
         "y1v1.case.h.point-crisis-leadership"
       ],
       "context_evidence_refs": [
-        "y1v1.ev.055"
+        "y1v1.ev.055",
+        "y1v2.ev.007"
       ]
     },
     "institution": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v1.ev.055"
+        "y1v1.ev.055",
+        "y1v2.ev.007"
       ]
     },
     "academic_reasoning": {
@@ -81,11 +89,25 @@
         "y1v1.case.h.point-crisis-leadership"
       ],
       "context_evidence_refs": []
+    },
+    "ethics": {
+      "behavioral_case_refs": [
+        "y1v2.case.yosuke-hirata.prioritize-protecting-peers"
+      ],
+      "context_evidence_refs": [
+        "y1v2.ev.024"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v2.ev.048"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

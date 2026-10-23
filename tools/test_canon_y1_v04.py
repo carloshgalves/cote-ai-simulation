@@ -40,7 +40,7 @@ assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_CASE_REVIEW_PASS" for x
 assert register["release_gate"]["assistant_individual_semantic_review"]=="COMPLETE"
 assert register["review_progress"]["assistant_evidence_reviewed"]==132
 assert register["review_progress"]["assistant_cases_reviewed"]==44
-assert source["record_audit"]=="ASSISTANT_INDIVIDUAL_SEMANTIC_REVIEW_COMPLETE_ADVERSARIAL_PENDING"
+assert source["record_audit"]=="ASSISTANT_SEMANTIC_REVIEW_AND_ADVERSARIAL_METHOD_COMPLETE_OPERATOR_PENDING"
 
 assert register["global_promotion"].startswith("BLOCKED")
 for e in E:

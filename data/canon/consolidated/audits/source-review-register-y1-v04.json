@@ -4935,10 +4935,10 @@
       ]
     }
   ],
-  "global_promotion": "BLOCKED_PENDING_ADVERSARIAL_REVIEW_AND_OPERATOR_RELEASE",
+  "global_promotion": "BLOCKED_PENDING_EXTERNAL_REVIEW_AND_OPERATOR_RELEASE",
   "release_gate": {
     "assistant_individual_semantic_review": "COMPLETE",
-    "external_independent_review": "ADVERSARIAL_METHOD_PENDING",
+    "external_independent_review": "ADVERSARIAL_SAME_ASSISTANT_COMPLETE_EXTERNAL_REVIEWER_PENDING",
     "operator_approval": "PENDING",
     "individual_verified_count": 0,
     "engine_memory_admission": false,
@@ -4958,6 +4958,15 @@
     "assistant_cases_reviewed": 44,
     "assistant_review_complete": true
   },
-  "semantic_boundary": "All 173 assistant-level source and primary actor reviews complete, with no human individual verification. The next adversarial validation is a separate method by the same assistant, not an independent external reviewer.",
-  "review_complete_at": "2026-10-23"
+  "semantic_boundary": "Source-grounded 176-item assistant semantic audit and separate adversarial mutation review passed. No independent external reviewer performed this work; all 176 remain individually verified:false and cannot be promoted to agent memory or runtime.",
+  "review_complete_at": "2026-10-23",
+  "adversarial_review": {
+    "status": "PASS",
+    "negative_mutation_controls": 20,
+    "source_findings_recorded": 11,
+    "reviewer_identity": "SAME_ASSISTANT_NOT_EXTERNAL",
+    "external_human_signoff": false,
+    "reviewed_at": "2026-10-23",
+    "review_file": "data/canon/consolidated/audits/adversarial-review-y1-v04.json"
+  }
 }

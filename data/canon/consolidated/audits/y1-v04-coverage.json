@@ -39,21 +39,20 @@
     "5": 23
   },
   "cases": 44,
-  "coverage_status": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE_ADVERSARIAL_PENDING",
+  "coverage_status": "ASSISTANT_AND_ADVERSARIAL_AUDITS_COMPLETE_OPERATOR_PENDING",
   "semantic_review": "ASSISTANT_INDIVIDUAL_REVIEW_COMPLETE",
   "operator_release": "PENDING",
   "open_issues": [
-    "Adversarial independent-method second pass and negative mutation tests pending",
-    "External independent human or separate-model reviewer not assigned",
-    "Operator reference merge not yet authorized",
-    "All 173 individually reviewed flags remain verified:false",
-    "Source's third-day versus fourth-day calendar wording deliberately unresolved",
-    "Zodiac/VIP allocation formula not independently supported",
-    "No agent memory or executable exam promotion authorized"
+    "External independent human or separate-model reviewer not performed; same assistant ran second adversarial method",
+    "Operator reference-merge release pending",
+    "All 176 records verified:false and no agent-memory promotion authorized",
+    "Third-day vs fourth-day printed/explanatory calendar conflict deliberately preserved",
+    "No school-sanctioned deterministic VIP allocation formula",
+    "Zodiac reference is NOT_EXECUTABLE"
   ],
   "behavioral_cases": 44,
   "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v04.json",
-  "open_audit": "ADVERSARIAL_NEGATIVE_MUTATION_REVIEW_PENDING",
+  "open_audit": "EXTERNAL_REVIEW_AND_OPERATOR_RELEASE_PENDING",
   "initial_source_corrections": [
     {
       "finding": "V4-ATTR-001",
@@ -174,10 +173,12 @@
     "assistant_reviewed_cases": 44,
     "assistant_total": 176,
     "individual_verified": 0,
+    "adversarial_method": "PASS_20_NEGATIVE_MUTATIONS",
     "external_independent_review": "NOT_PERFORMED",
-    "adversarial_method": "PENDING",
     "operator_release": "PENDING",
     "registered_on": "2026-10-23",
     "review_register": "data/canon/consolidated/audits/source-review-register-y1-v04.json"
-  }
+  },
+  "remediated_findings_count": 12,
+  "adversarial_mutation_count": 20
 }

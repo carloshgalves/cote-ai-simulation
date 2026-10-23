@@ -7,9 +7,9 @@
   "external_independent_reviewer": "UNASSIGNED",
   "operator_approval": "PENDING",
   "direct_pdf_semantic_review": {
-    "evidence": 130,
-    "cases": 43,
-    "status": "COMPLETE",
+    "evidence": 132,
+    "cases": 44,
+    "status": "ASSISTANT_INDIVIDUAL_COMPLETE",
     "human_individual_verified": 0
   },
   "resolved_source_findings": [
@@ -54,6 +54,30 @@
       "severity": "MEDIUM",
       "description": "Final Rabbit exam day begins with card game and Yukimura complaint, not a continuing policy debate",
       "resolved_in": "y1v4.ev.108"
+    },
+    {
+      "id": "V4-ADV-012",
+      "severity": "MEDIUM",
+      "description": "Ichinose challenging Machida spans contextual premise p86 and direct response p90; evidence linked without owner inflation.",
+      "resolved_in": "case source references"
+    },
+    {
+      "id": "V4-ADV-013",
+      "severity": "MEDIUM",
+      "description": "Horikita's counter on p148 and Ichinose's refusal on p149 are separate owner actions, both needed for result context.",
+      "resolved_in": "case source references"
+    },
+    {
+      "id": "V4-ADV-014",
+      "severity": "HIGH",
+      "description": "Recovered omitted direct admission that Kiyotaka planted a false harassment allegation to Manabe on pp110–111.",
+      "resolved_in": "evidence y1v4.ev.131, actor case and indexes"
+    },
+    {
+      "id": "V4-ADV-015",
+      "severity": "HIGH",
+      "description": "Recovered pp122–123 teacher statement of discretionary group placement, without inventing VIP role assignment formula.",
+      "resolved_in": "evidence y1v4.ev.132, ANHS and Zodiac reference"
     }
   ],
   "open_semantic_boundaries": [
@@ -78,9 +102,24 @@
       "note": "Ryūen boasts of a VIP selection pattern; no complete, school-authorized allocation algorithm is in source"
     }
   ],
-  "negative_mutations": "NOT_RUN",
-  "automated_review_result": "PENDING",
+  "negative_mutations": {
+    "total": 20,
+    "detected": 20,
+    "escape_count": 0,
+    "validator": "tools/test_canon_y1_v04_adversarial.py",
+    "github_action_reference": "https://github.com/carloshgalves/cote-ai-simulation/actions/runs/39982326024"
+  },
+  "automated_review_result": "PASS_20_OF_20_NEGATIVE_MUTATIONS",
   "external_independent_approval": false,
   "human_verified": false,
-  "recommendation": "HOLD_DRAFT_NO_MERGE"
+  "recommendation": "HOLD_DRAFT_REQUIRE_OPERATOR_RELEASE",
+  "review_scope": {
+    "original_evidence": 130,
+    "original_cases": 43,
+    "after_adversarial_evidence": 132,
+    "after_adversarial_cases": 44,
+    "individual_total": 176,
+    "school_exams_reference_only": true
+  },
+  "completed_on": "2026-10-23"
 }

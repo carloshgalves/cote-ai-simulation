@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "fifty meter swim withheld effort",
+  "context": "Sudou finishes a 50m swimming heat in about 25 seconds, while Kiyotaka takes approximately 36 seconds and is around tenth, having aimed for a middling place.",
+  "observed_actions": "Intentionally paces a 50m swim to about 36 seconds, targeting middle placement",
+  "observed_result": "Finishes around tenth without supplementary lesson",
+  "epistemic_limits": "Observed time is not maximal physical performance",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      85
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ken-sudo"
+  ],
+  "capabilities_supported": [
+    "combat",
+    "strategy"
+  ],
+  "information_available": "Only scene-local observed conditions and actor knowledge",
+  "counterfactual_test": "Vary preparation, institution response, social incentives and other agents; no prescribed success",
+  "topics": [
+    "combat",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.120"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

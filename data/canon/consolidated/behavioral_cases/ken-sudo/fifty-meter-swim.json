@@ -1,0 +1,34 @@
+{
+  "id": "y1v1.case.ken-sudo.fifty-meter-swim",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "fifty meter swim",
+  "context": "Sudou finishes a 50m swimming heat in about 25 seconds, while Kiyotaka takes approximately 36 seconds and is around tenth, having aimed for a middling place.",
+  "observed_actions": "Swims 50m in around 25 seconds",
+  "observed_result": "Wins his preliminary heat",
+  "epistemic_limits": "Observed time not final round and not all-round fighting ability",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      85
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "combat"
+  ],
+  "information_available": "Only scene-local observed conditions and actor knowledge",
+  "counterfactual_test": "Vary preparation, institution response, social incentives and other agents; no prescribed success",
+  "topics": [
+    "combat"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.120"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

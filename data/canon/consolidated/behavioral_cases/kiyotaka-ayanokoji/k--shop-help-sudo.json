@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.k.shop-help-sudo",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "shop help sudo",
+  "context": "Sudou forgets his student ID in the store; Kiyotaka helps him and receives thanks.",
+  "observed_actions": "Helps Sudou with a forgotten payment card",
+  "observed_result": "Establishes an early reciprocal contact",
+  "epistemic_limits": "Does not guarantee self-sacrifice",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      46
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ken-sudo"
+  ],
+  "capabilities_supported": [
+    "economy",
+    "social"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "economy",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.022"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

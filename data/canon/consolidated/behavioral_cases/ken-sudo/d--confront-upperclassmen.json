@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.d.confront-upperclassmen",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "confront upperclassmen",
+  "context": "Sudou challenges three older boys after they mock Class D, but no actual three-on-one combat takes place.",
+  "observed_actions": "Threatens several mocking upperclassmen despite numerical disadvantage",
+  "observed_result": "Groups disperse without fighting",
+  "epistemic_limits": "Not a three-opponent fighting victory",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      50
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "combat",
+    "risk_management"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "combat",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.026"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

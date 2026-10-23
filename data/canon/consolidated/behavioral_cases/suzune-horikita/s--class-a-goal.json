@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.s.class-a-goal",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "class a goal",
+  "context": "Suzune decides to pursue Class A and requests Kiyotaka's help.",
+  "observed_actions": "Insists on investigating D placement and recruits Kiyotaka",
+  "observed_result": "Limited cooperation begins",
+  "epistemic_limits": "No guarantee of reaching A",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      149
+    ],
+    "chapter": 7,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "strategy"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "leadership",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.071"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

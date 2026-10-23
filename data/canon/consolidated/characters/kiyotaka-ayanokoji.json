@@ -4,7 +4,8 @@
   "display_name": "Kiyotaka Ayanokōji",
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v00.legacyemtls.v1.0.1"
+    "ln.y1.v00.legacyemtls.v1.0.1",
+    "ln.y1.v01.sevenseas.en.2019.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -25,7 +26,14 @@
         "v0.case.kiyotaka.gummy-third-option",
         "v0.case.kiyotaka.shiro-final-match",
         "v0.case.kiyotaka.shiro-learning",
-        "v0.case.kiyotaka.yuki-health"
+        "v0.case.kiyotaka.yuki-health",
+        "y1v1.case.k.buy-exam-point",
+        "y1v1.case.k.credit-routing",
+        "y1v1.case.k.exam-paper-bargain",
+        "y1v1.case.k.exam-reuse-inference",
+        "y1v1.case.k.recruit-kushida",
+        "y1v1.case.k.swim-middle",
+        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort"
       ],
       "context_evidence_refs": [
         "v0.char.011",
@@ -34,7 +42,23 @@
         "v0.char.050",
         "v0.pol.022",
         "v0.wr.019",
-        "v0.wr.031"
+        "v0.wr.031",
+        "y1v1.ev.038",
+        "y1v1.ev.070",
+        "y1v1.ev.071",
+        "y1v1.ev.073",
+        "y1v1.ev.075",
+        "y1v1.ev.085",
+        "y1v1.ev.086",
+        "y1v1.ev.094",
+        "y1v1.ev.096",
+        "y1v1.ev.097",
+        "y1v1.ev.098",
+        "y1v1.ev.099",
+        "y1v1.ev.108",
+        "y1v1.ev.109",
+        "y1v1.ev.120",
+        "y1v1.ev.135"
       ]
     },
     "social": {
@@ -43,7 +67,13 @@
         "v0.case.kiyotaka.gummy-third-option",
         "v0.case.kiyotaka.shiro-final-match",
         "v0.case.kiyotaka.shiro-learning",
-        "v0.case.kiyotaka.yuki-reunion"
+        "v0.case.kiyotaka.yuki-reunion",
+        "y1v1.case.k.bus-nonintervention",
+        "y1v1.case.k.credit-routing",
+        "y1v1.case.k.multi-dimensional-utility",
+        "y1v1.case.k.recruit-kushida",
+        "y1v1.case.k.shop-help-sudo",
+        "y1v1.case.k.social-entry-freeze"
       ],
       "context_evidence_refs": [
         "v0.char.009",
@@ -62,7 +92,35 @@
         "v0.wr.035",
         "v0.wr.036",
         "v0.wr.044",
-        "v0.wr.045"
+        "v0.wr.045",
+        "y1v1.ev.002",
+        "y1v1.ev.003",
+        "y1v1.ev.004",
+        "y1v1.ev.005",
+        "y1v1.ev.006",
+        "y1v1.ev.007",
+        "y1v1.ev.008",
+        "y1v1.ev.019",
+        "y1v1.ev.021",
+        "y1v1.ev.022",
+        "y1v1.ev.023",
+        "y1v1.ev.025",
+        "y1v1.ev.028",
+        "y1v1.ev.042",
+        "y1v1.ev.044",
+        "y1v1.ev.045",
+        "y1v1.ev.066",
+        "y1v1.ev.074",
+        "y1v1.ev.076",
+        "y1v1.ev.077",
+        "y1v1.ev.081",
+        "y1v1.ev.082",
+        "y1v1.ev.089",
+        "y1v1.ev.099",
+        "y1v1.ev.110",
+        "y1v1.ev.111",
+        "y1v1.ev.112",
+        "y1v1.ev.136"
       ]
     },
     "politics": {
@@ -106,7 +164,19 @@
         "v0.wr.031",
         "v0.wr.036",
         "v0.wr.044",
-        "v0.wr.045"
+        "v0.wr.045",
+        "y1v1.ev.010",
+        "y1v1.ev.020",
+        "y1v1.ev.027",
+        "y1v1.ev.029",
+        "y1v1.ev.030",
+        "y1v1.ev.033",
+        "y1v1.ev.036",
+        "y1v1.ev.050",
+        "y1v1.ev.052",
+        "y1v1.ev.066",
+        "y1v1.ev.089",
+        "y1v1.ev.125"
       ]
     },
     "combat": {
@@ -114,7 +184,10 @@
         "v0.case.kiyotaka.adults-baton",
         "v0.case.kiyotaka.judo-observation",
         "v0.case.kiyotaka.shiro-learning",
-        "v0.case.kiyotaka.yuki-health"
+        "v0.case.kiyotaka.yuki-health",
+        "y1v1.case.k.evade-manabu",
+        "y1v1.case.k.swim-middle",
+        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort"
       ],
       "context_evidence_refs": [
         "v0.char.016",
@@ -124,7 +197,18 @@
         "v0.wr.019",
         "v0.wr.020",
         "v0.wr.022",
-        "v0.wr.023"
+        "v0.wr.023",
+        "y1v1.ev.023",
+        "y1v1.ev.025",
+        "y1v1.ev.026",
+        "y1v1.ev.033",
+        "y1v1.ev.035",
+        "y1v1.ev.036",
+        "y1v1.ev.038",
+        "y1v1.ev.082",
+        "y1v1.ev.083",
+        "y1v1.ev.084",
+        "y1v1.ev.120"
       ]
     },
     "academic_reasoning": {
@@ -133,7 +217,10 @@
         "v0.case.kiyotaka.gummy-third-option",
         "v0.case.kiyotaka.shiro-learning",
         "v0.case.kiyotaka.yuki-health",
-        "v0.case.kiyotaka.yuki-reunion"
+        "v0.case.kiyotaka.yuki-reunion",
+        "y1v1.case.k.buy-exam-point",
+        "y1v1.case.k.exam-paper-bargain",
+        "y1v1.case.k.exam-reuse-inference"
       ],
       "context_evidence_refs": [
         "v0.char.010",
@@ -145,31 +232,118 @@
         "v0.wr.024",
         "v0.wr.036",
         "v0.wr.044",
-        "v0.wr.045"
+        "v0.wr.045",
+        "y1v1.ev.001",
+        "y1v1.ev.048",
+        "y1v1.ev.052",
+        "y1v1.ev.069",
+        "y1v1.ev.070",
+        "y1v1.ev.086",
+        "y1v1.ev.097"
       ]
     },
     "economy": {
       "behavioral_case_refs": [
-        "v0.case.kiyotaka.yuki-reunion"
+        "v0.case.kiyotaka.yuki-reunion",
+        "y1v1.case.k.buy-exam-point",
+        "y1v1.case.k.exam-paper-bargain",
+        "y1v1.case.k.shop-help-sudo"
       ],
       "context_evidence_refs": [
         "v0.char.014",
-        "v0.wr.019"
+        "v0.wr.019",
+        "y1v1.ev.010",
+        "y1v1.ev.020",
+        "y1v1.ev.021",
+        "y1v1.ev.022",
+        "y1v1.ev.024",
+        "y1v1.ev.036",
+        "y1v1.ev.050",
+        "y1v1.ev.095",
+        "y1v1.ev.108",
+        "y1v1.ev.109",
+        "y1v1.ev.125"
       ]
     },
     "ethics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.k.bus-nonintervention"
+      ],
       "context_evidence_refs": [
         "v0.char.017",
         "v0.wr.024",
-        "v0.wr.045"
+        "v0.wr.045",
+        "y1v1.ev.001",
+        "y1v1.ev.003",
+        "y1v1.ev.005",
+        "y1v1.ev.085",
+        "y1v1.ev.107"
+      ]
+    },
+    "persuasion": {
+      "behavioral_case_refs": [
+        "y1v1.case.k.exam-paper-bargain",
+        "y1v1.case.k.recruit-kushida"
+      ],
+      "context_evidence_refs": [
+        "y1v1.ev.004",
+        "y1v1.ev.031",
+        "y1v1.ev.042",
+        "y1v1.ev.074",
+        "y1v1.ev.075",
+        "y1v1.ev.095",
+        "y1v1.ev.107",
+        "y1v1.ev.133"
+      ]
+    },
+    "emotion": {
+      "behavioral_case_refs": [
+        "y1v1.case.k.social-entry-freeze"
+      ],
+      "context_evidence_refs": [
+        "y1v1.ev.007",
+        "y1v1.ev.081"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v1.ev.024",
+        "y1v1.ev.026"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v1.ev.031",
+        "y1v1.ev.071",
+        "y1v1.ev.073",
+        "y1v1.ev.076",
+        "y1v1.ev.087",
+        "y1v1.ev.098",
+        "y1v1.ev.110",
+        "y1v1.ev.133"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [
+        "y1v1.case.k.evade-manabu",
+        "y1v1.case.k.exam-reuse-inference"
+      ],
+      "context_evidence_refs": [
+        "y1v1.ev.035",
+        "y1v1.ev.069",
+        "y1v1.ev.077",
+        "y1v1.ev.083",
+        "y1v1.ev.084",
+        "y1v1.ev.094",
+        "y1v1.ev.135",
+        "y1v1.ev.136"
       ]
     }
   },
-  "source_documents": [
-    "data/canon/volume0/characters/kiyotaka.yaml"
-  ],
-  "historical_context_only": true,
+  "source_documents": [],
+  "historical_context_only": false,
   "semantic_audit_notes": "Original V0 extraction sometimes lists acts by Atsuomi or Yuki under Kiyotaka; actor mentions are not automatically capabilities",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,

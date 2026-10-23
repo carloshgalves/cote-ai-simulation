@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.k.exam-reuse-inference",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "exam reuse inference",
+  "context": "After comparing test papers, Kiyotaka detects exact repetition of short-test problems and hypothesizes midterm reuse.",
+  "observed_actions": "Cross-checks acquired mock test questions against actual prior questions",
+  "observed_result": "Finds matching items supporting strategy",
+  "epistemic_limits": "Future exams need not repeat",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      233
+    ],
+    "chapter": 9,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida"
+  ],
+  "capabilities_supported": [
+    "academic_reasoning",
+    "strategy"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "academic_reasoning",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.097"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

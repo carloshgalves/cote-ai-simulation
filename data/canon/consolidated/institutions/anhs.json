@@ -3,13 +3,270 @@
   "institution_id": "org.anhs",
   "display_name": "Advanced Nurturing High School",
   "source_coverage": [
-    "ln.y1.v00.legacyemtls.v1.0.1"
+    "ln.y1.v00.legacyemtls.v1.0.1",
+    "ln.y1.v01.sevenseas.en.2019.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "source_documents": [
     "data/canon/volume0/organizations/anhs.yaml"
   ],
-  "evidence_refs": [],
+  "evidence_refs": [
+    "y1v1.ev.009",
+    "y1v1.ev.010",
+    "y1v1.ev.011",
+    "y1v1.ev.020",
+    "y1v1.ev.021",
+    "y1v1.ev.022",
+    "y1v1.ev.024",
+    "y1v1.ev.027",
+    "y1v1.ev.029",
+    "y1v1.ev.030",
+    "y1v1.ev.032",
+    "y1v1.ev.033",
+    "y1v1.ev.036",
+    "y1v1.ev.047",
+    "y1v1.ev.049",
+    "y1v1.ev.050",
+    "y1v1.ev.052",
+    "y1v1.ev.053",
+    "y1v1.ev.054",
+    "y1v1.ev.055",
+    "y1v1.ev.056",
+    "y1v1.ev.057",
+    "y1v1.ev.058",
+    "y1v1.ev.060",
+    "y1v1.ev.061",
+    "y1v1.ev.064",
+    "y1v1.ev.065",
+    "y1v1.ev.066",
+    "y1v1.ev.068",
+    "y1v1.ev.089",
+    "y1v1.ev.095",
+    "y1v1.ev.101",
+    "y1v1.ev.103",
+    "y1v1.ev.104",
+    "y1v1.ev.106",
+    "y1v1.ev.108",
+    "y1v1.ev.109",
+    "y1v1.ev.113"
+  ],
   "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
-  "operational_migration": "Only user/operator-authorized claims may be promoted after review"
+  "operational_migration": "Only user/operator-authorized claims may be promoted after review",
+  "domains": {
+    "governance": {
+      "evidence_refs": [
+        "y1v1.ev.009",
+        "y1v1.ev.010",
+        "y1v1.ev.011",
+        "y1v1.ev.020",
+        "y1v1.ev.027",
+        "y1v1.ev.029",
+        "y1v1.ev.030",
+        "y1v1.ev.032",
+        "y1v1.ev.033",
+        "y1v1.ev.036",
+        "y1v1.ev.047",
+        "y1v1.ev.050",
+        "y1v1.ev.052",
+        "y1v1.ev.053",
+        "y1v1.ev.054",
+        "y1v1.ev.055",
+        "y1v1.ev.056",
+        "y1v1.ev.057",
+        "y1v1.ev.058",
+        "y1v1.ev.060",
+        "y1v1.ev.061",
+        "y1v1.ev.066",
+        "y1v1.ev.068",
+        "y1v1.ev.089",
+        "y1v1.ev.101",
+        "y1v1.ev.103",
+        "y1v1.ev.106"
+      ],
+      "description": "Admission, class allocation, campus restrictions, point disclosure"
+    },
+    "economy": {
+      "evidence_refs": [
+        "y1v1.ev.010",
+        "y1v1.ev.011",
+        "y1v1.ev.020",
+        "y1v1.ev.021",
+        "y1v1.ev.022",
+        "y1v1.ev.024",
+        "y1v1.ev.036",
+        "y1v1.ev.049",
+        "y1v1.ev.050",
+        "y1v1.ev.053",
+        "y1v1.ev.054",
+        "y1v1.ev.055",
+        "y1v1.ev.057",
+        "y1v1.ev.064",
+        "y1v1.ev.065",
+        "y1v1.ev.095",
+        "y1v1.ev.108",
+        "y1v1.ev.109",
+        "y1v1.ev.113"
+      ],
+      "description": "Private transferable points; conditional class-point allocation"
+    },
+    "exams": {
+      "reference_exam_ids": [
+        "exam.y1.midterm-1"
+      ],
+      "evidence_refs": [
+        "y1v1.ev.061",
+        "y1v1.ev.101",
+        "y1v1.ev.103",
+        "y1v1.ev.104",
+        "y1v1.ev.106"
+      ],
+      "description": "Mock diagnostic, midterm and exceptional score-point purchase"
+    },
+    "infrastructure": {
+      "evidence_refs": [
+        "y1v1.ev.009",
+        "y1v1.ev.020",
+        "y1v1.ev.027",
+        "y1v1.ev.030",
+        "y1v1.ev.036",
+        "y1v1.ev.050",
+        "y1v1.ev.089"
+      ],
+      "description": "Dormitories, retail, library, pool, clubs"
+    }
+  },
+  "public_disclosure_policy": {
+    "Y1_START": "Students told of dormitory, ID balances and restrictions but not the real conditional allocation",
+    "Y1_M02": "May zero deposit and midterm expulsion risk disclosed",
+    "AFTER_FIRST_MIDTERM": "Cutoff arithmetic and exceptional purchase observed"
+  },
+  "s_system": {
+    "source_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "private_points": {
+      "initial_grant": 100000,
+      "one_point_yen_equivalent": 1,
+      "observed_allocation_disclosure": "Y1_M01",
+      "transfer_between_students": "PERMITTED",
+      "cash_exchange": "FORBIDDEN_AS_STATED",
+      "post_graduation_balance": "REVERTS_TO_SCHOOL_AS_STATED",
+      "purchase_claim": "School teacher says virtually anything on campus may be purchased, but actual availability and prices require counterparty permission and specific rules",
+      "supported_pages": [
+        30,
+        31,
+        253,
+        254
+      ]
+    },
+    "class_points": {
+      "initial_reference": 1000,
+      "first_may_observed": {
+        "A": 940,
+        "B": 650,
+        "C": 490,
+        "D": 0
+      },
+      "period": "MONTHLY",
+      "evaluation_formula": "NOT_DISCLOSED",
+      "reported_stipend_relation": "Narrator infers 1000 class points is equivalent to 100000 private points/month; model as inference until independently confirmed",
+      "school_benefits": "Class A-only graduation placements per teacher statement; never assume placement guarantees for other classes",
+      "class_mobility": "School class ranks can change as points change; teacher indicates reaching class C's performance may promote class D",
+      "supported_pages": [
+        121,
+        122,
+        124,
+        125,
+        126,
+        127,
+        129
+      ]
+    },
+    "availability_of_essential_services": "Dormitory access and minimal/free meals remain available even with zero new point allocation",
+    "knowledge_release": [
+      {
+        "time": "Y1_M01",
+        "who": "first-year students",
+        "learns": [
+          "private point grant 100000",
+          "basic purchasing, transfer, boarding rules"
+        ],
+        "does_not_know": [
+          "automatic fixed monthly 100000 every month",
+          "class point evaluation formula",
+          "future score purchase concession"
+        ]
+      },
+      {
+        "time": "Y1_M02",
+        "who": "Class D after May homeroom",
+        "learns": [
+          "no May allocation",
+          "evaluation depends on discipline and other unknown factors",
+          "class scores displayed A940 B650 C490 D0",
+          "expulsion for midterm failures"
+        ]
+      },
+      {
+        "time": "AFTER_FIRST_MIDTERM",
+        "who": "Kiyotaka, Suzune, teacher and selected observers",
+        "learns": [
+          "teacher accepts special grade point transaction"
+        ],
+        "does_not_know": [
+          "universal right to purchase marks",
+          "future prices or availability"
+        ]
+      }
+    ],
+    "normative_cautions": [
+      "Avoid turning teacher rhetoric that zero points will remain forever into an irreversible engine mechanic.",
+      "Do not hard-code point-deduction coefficients; the teacher explicitly refuses to disclose complete method.",
+      "Private point transfer ≠ arbitrary alteration of examination results; the latter is a special negotiated concession."
+    ],
+    "evidence_refs": [
+      "y1v1.ev.009",
+      "y1v1.ev.010",
+      "y1v1.ev.011",
+      "y1v1.ev.054",
+      "y1v1.ev.124",
+      "y1v1.ev.057",
+      "y1v1.ev.125",
+      "y1v1.ev.126",
+      "y1v1.ev.059",
+      "y1v1.ev.127",
+      "y1v1.ev.128",
+      "y1v1.ev.060",
+      "y1v1.ev.108",
+      "y1v1.ev.109",
+      "y1v1.ev.110"
+    ]
+  },
+  "physical_education": {
+    "assessments": [
+      "assessment.y1v1.classd-50m-swimming"
+    ],
+    "evidence_refs": [
+      "y1v1.ev.036",
+      "y1v1.ev.118",
+      "y1v1.ev.037",
+      "y1v1.ev.119",
+      "y1v1.ev.038",
+      "y1v1.ev.120",
+      "y1v1.ev.039",
+      "y1v1.ev.040",
+      "y1v1.ev.121"
+    ],
+    "note": "Physical education competitive bonus does not turn into a recurring special examination."
+  },
+  "information_visibility": {
+    "public": "At admission only high-level school policies and balances",
+    "teacher_only": "Attendance incident counts, grading and month-end evaluation details before announcement",
+    "post_inform": "Known only after institutional disclosure; new tests' materials may be changed without all classes learning simultaneously",
+    "evidence_refs": [
+      "y1v1.ev.055",
+      "y1v1.ev.056",
+      "y1v1.ev.093",
+      "y1v1.ev.132",
+      "y1v1.ev.133"
+    ]
+  }
 }

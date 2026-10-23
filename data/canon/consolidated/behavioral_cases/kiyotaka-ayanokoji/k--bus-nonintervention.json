@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.k.bus-nonintervention",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "bus nonintervention",
+  "context": "Kiyotaka considers offering his own seat but does not; Suzune also remains seated.",
+  "observed_actions": "Chooses not to intervene after observing a social dispute",
+  "observed_result": "Another passenger resolves it",
+  "epistemic_limits": "Self-narrative may be incomplete; not an immutable disposition",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      24
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "social",
+    "ethics"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "social",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.005"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

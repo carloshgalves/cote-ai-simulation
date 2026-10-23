@@ -1,0 +1,37 @@
+{
+  "id": "y1v1.case.c.detect-uniform-fifties",
+  "actor_id": "actor.sae-chiyabashira",
+  "primary_actor_id": "actor.sae-chiyabashira",
+  "title": "detect uniform fifties",
+  "context": "Teacher notes Kiyotaka solved a very hard mathematics problem while missing an easier one, suggesting score control.",
+  "observed_actions": "Compares question difficulty and unusually uniform test marks",
+  "observed_result": "Raises suspicion of deliberate concealment",
+  "epistemic_limits": "Suspicion not omniscient access to student's motives",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      147
+    ],
+    "chapter": 7,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "academic_reasoning",
+    "strategy"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "academic_reasoning",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.070"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

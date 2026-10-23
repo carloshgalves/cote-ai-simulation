@@ -1,0 +1,35 @@
+{
+  "id": "y1v1.case.onodera.fifty-meter-swim",
+  "actor_id": "actor.onodera",
+  "primary_actor_id": "actor.onodera",
+  "title": "fifty meter swim",
+  "context": "Onodera, described as a former swim-team participant, completes girls' 50m freestyle in approximately 26 seconds and wins; Kushida completes in approximately 31 seconds, fourth in her heat.",
+  "observed_actions": "Swims 50m in roughly 26 seconds with prior swim-team experience",
+  "observed_result": "Finishes fastest among the girls in this session",
+  "epistemic_limits": "Single approximate result; no extrapolation to future time trials",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      84
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "combat"
+  ],
+  "information_available": "Only scene-local observed conditions and actor knowledge",
+  "counterfactual_test": "Vary preparation, institution response, social incentives and other agents; no prescribed success",
+  "topics": [
+    "combat"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.119"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

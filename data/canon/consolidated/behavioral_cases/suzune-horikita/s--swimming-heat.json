@@ -1,0 +1,32 @@
+{
+  "id": "y1v1.case.s.swimming-heat",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "swimming heat",
+  "context": "Suzune completes a 50-meter freestyle heat in approximately 28 seconds.",
+  "observed_actions": "Swims 50 meters with composed technique",
+  "observed_result": "Recorded approximate 28 seconds",
+  "epistemic_limits": "Approximate narrated time, one environment",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      84
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "combat"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "combat"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.037"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

@@ -31,20 +31,40 @@ def main():
   for e in evidence:
     for t in e["topics"]:evtopics.setdefault(t,set()).add(e["id"])
   evtopics={t:sorted(ids) for t,ids in evtopics.items()}
-  pages={}
+  pages_by_source={}
+  source_files={read(p)["source_id"]:p.stem for p in sorted((root/"evidence").glob("*.json"))}
   for e in evidence:
-    for n in e["source"]["pdf_pages"]:pages.setdefault(str(n),{"evidence":[],"cases":[]})["evidence"].append(e["id"])
+    src=e["source"]["work_id"]
+    pgs=pages_by_source.setdefault(src,{})
+    for n in e["source"]["pdf_pages"]:
+      pgs.setdefault(str(n),{"evidence":[],"cases":[]})["evidence"].append(e["id"])
   for c in cases:
-    for n in c["source"]["pdf_pages"]:pages.setdefault(str(n),{"evidence":[],"cases":[]})["cases"].append(c["id"])
-  pages={k:{field:sorted(set(v)) for field,v in d.items()} for k,d in pages.items()}
+    src=c["source"]["work_id"]
+    pgs=pages_by_source.setdefault(src,{})
+    for n in c["source"]["pdf_pages"]:
+      pgs.setdefault(str(n),{"evidence":[],"cases":[]})["cases"].append(c["id"])
+  pack_index={p["character_id"]:{
+      "path":"data/canon/consolidated/characters/"+p["character_id"].removeprefix("actor.")+".json",
+      "modeling_tier":p["modeling_tier"],
+      "topics":sorted(p["domains"])
+    } for p in actors}
+  inst_records=[read(p) for p in sorted((root/"institutions").glob("*.json"))]
+  institution_index={i["institution_id"]:{
+      "path":"data/canon/consolidated/institutions/"+i["institution_id"].removeprefix("org.")+".json",
+      "source_volume_count":len(set(i["source_coverage"]))
+    } for i in inst_records}
   plans=[
-    ("character-topic-map.json",{"topics_by_actor":topics,"behavioral_by_actor_topic":primary,"context_mentions_by_actor_topic":mentions,"behavioral_case_paths":case_paths}),
+    ("character-topic-map.json",{"character_packs":pack_index,"topics_by_actor":topics,"behavioral_by_actor_topic":primary,"context_mentions_by_actor_topic":mentions,"behavioral_case_paths":case_paths}),
     ("evidence-topic-map.json",{"evidence_by_topic":evtopics}),
-    ("volume0-page-map.json",{"pages":pages})
+    ("institution-map.json",{"institutions":institution_index})
   ]
+  for src,pgs in sorted(pages_by_source.items()):
+    stem=source_files[src]
+    normalized={k:{field:sorted(set(v)) for field,v in d.items()} for k,d in pgs.items()}
+    plans.append((stem+"-page-map.json",{"source_id":src,"pages":normalized}))
   stale=[]
   for name,fields in plans:
-    path=root/"indexes"/name;current=read(path)
+    path=root/"indexes"/name;current=read(path) if path.exists() else {"schema_version":"page-index-v1"}
     for k,value in fields.items():
       if current.get(k)!=value:stale.append(name+":"+k)
       if o.write:current[k]=value

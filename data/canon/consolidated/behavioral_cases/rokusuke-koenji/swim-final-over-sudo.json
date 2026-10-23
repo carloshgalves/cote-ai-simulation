@@ -1,0 +1,34 @@
+{
+  "id": "y1v1.case.rokusuke-koenji.swim-final-over-sudo",
+  "actor_id": "actor.rokusuke-koenji",
+  "primary_actor_id": "actor.rokusuke-koenji",
+  "title": "swim final over sudo",
+  "context": "In boys' swimming final, Kouenji finishes approximately five meters ahead of Sudou; no separate final-round time is reported.",
+  "observed_actions": "Competes in boys' final after fast preliminary",
+  "observed_result": "Finishes about five meters ahead of Sudou",
+  "epistemic_limits": "Final stopwatch time not provided",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      88
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ken-sudo"
+  ],
+  "capabilities_supported": [
+    "combat"
+  ],
+  "information_available": "Only scene-local observed conditions and actor knowledge",
+  "counterfactual_test": "Vary preparation, institution response, social incentives and other agents; no prescribed success",
+  "topics": [
+    "combat"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.121"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

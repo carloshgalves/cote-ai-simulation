@@ -1,0 +1,817 @@
+{
+  "schema_version": "page-index-v1",
+  "source_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+  "pages": {
+    "14": {
+      "evidence": [
+        "y1v1.ev.001"
+      ],
+      "cases": []
+    },
+    "16": {
+      "evidence": [
+        "y1v1.ev.002"
+      ],
+      "cases": []
+    },
+    "19": {
+      "evidence": [
+        "y1v1.ev.003"
+      ],
+      "cases": [
+        "y1v1.case.o.priority-seat-refusal"
+      ]
+    },
+    "21": {
+      "evidence": [
+        "y1v1.ev.004"
+      ],
+      "cases": [
+        "y1v1.case.u.public-civic-appeal"
+      ]
+    },
+    "24": {
+      "evidence": [
+        "y1v1.ev.005"
+      ],
+      "cases": [
+        "y1v1.case.k.bus-nonintervention"
+      ]
+    },
+    "25": {
+      "evidence": [
+        "y1v1.ev.006"
+      ],
+      "cases": []
+    },
+    "26": {
+      "evidence": [
+        "y1v1.ev.007"
+      ],
+      "cases": [
+        "y1v1.case.k.social-entry-freeze"
+      ]
+    },
+    "28": {
+      "evidence": [
+        "y1v1.ev.008"
+      ],
+      "cases": []
+    },
+    "30": {
+      "evidence": [
+        "y1v1.ev.009"
+      ],
+      "cases": []
+    },
+    "31": {
+      "evidence": [
+        "y1v1.ev.010",
+        "y1v1.ev.011"
+      ],
+      "cases": []
+    },
+    "32": {
+      "evidence": [
+        "y1v1.ev.012"
+      ],
+      "cases": [
+        "y1v1.case.h.class-introductions"
+      ]
+    },
+    "33": {
+      "evidence": [
+        "y1v1.ev.013"
+      ],
+      "cases": [
+        "y1v1.case.g.intro-stage-fright"
+      ]
+    },
+    "34": {
+      "evidence": [
+        "y1v1.ev.014",
+        "y1v1.ev.015"
+      ],
+      "cases": [
+        "y1v1.case.u.support-inogashira",
+        "y1v1.case.y.unreliable-athletic-story"
+      ]
+    },
+    "35": {
+      "evidence": [
+        "y1v1.ev.016"
+      ],
+      "cases": []
+    },
+    "37": {
+      "evidence": [
+        "y1v1.ev.017"
+      ],
+      "cases": [
+        "y1v1.case.d.reject-introduction"
+      ]
+    },
+    "38": {
+      "evidence": [
+        "y1v1.ev.018"
+      ],
+      "cases": [
+        "y1v1.case.i.sarcasm-misread"
+      ]
+    },
+    "40": {
+      "evidence": [
+        "y1v1.ev.019"
+      ],
+      "cases": []
+    },
+    "43": {
+      "evidence": [
+        "y1v1.ev.020"
+      ],
+      "cases": []
+    },
+    "45": {
+      "evidence": [
+        "y1v1.ev.021"
+      ],
+      "cases": [
+        "y1v1.case.s.financial-restraint"
+      ]
+    },
+    "46": {
+      "evidence": [
+        "y1v1.ev.022"
+      ],
+      "cases": [
+        "y1v1.case.k.shop-help-sudo"
+      ]
+    },
+    "47": {
+      "evidence": [
+        "y1v1.ev.023"
+      ],
+      "cases": []
+    },
+    "48": {
+      "evidence": [
+        "y1v1.ev.024"
+      ],
+      "cases": []
+    },
+    "49": {
+      "evidence": [
+        "y1v1.ev.025"
+      ],
+      "cases": []
+    },
+    "50": {
+      "evidence": [
+        "y1v1.ev.026"
+      ],
+      "cases": [
+        "y1v1.case.d.confront-upperclassmen"
+      ]
+    },
+    "52": {
+      "evidence": [
+        "y1v1.ev.027"
+      ],
+      "cases": []
+    },
+    "54": {
+      "evidence": [
+        "y1v1.ev.028"
+      ],
+      "cases": []
+    },
+    "63": {
+      "evidence": [
+        "y1v1.ev.029"
+      ],
+      "cases": []
+    },
+    "66": {
+      "evidence": [
+        "y1v1.ev.030"
+      ],
+      "cases": []
+    },
+    "67": {
+      "evidence": [
+        "y1v1.ev.031",
+        "y1v1.ev.032"
+      ],
+      "cases": [
+        "y1v1.case.m.club-fair-silence"
+      ]
+    },
+    "68": {
+      "evidence": [
+        "y1v1.ev.033"
+      ],
+      "cases": []
+    },
+    "72": {
+      "evidence": [
+        "y1v1.ev.034",
+        "y1v1.ev.115"
+      ],
+      "cases": [
+        "y1v1.case.sotomura.covert-observation-plan"
+      ]
+    },
+    "75": {
+      "evidence": [
+        "y1v1.ev.116"
+      ],
+      "cases": []
+    },
+    "78": {
+      "evidence": [
+        "y1v1.ev.117"
+      ],
+      "cases": []
+    },
+    "81": {
+      "evidence": [
+        "y1v1.ev.035"
+      ],
+      "cases": [
+        "y1v1.case.s.muscle-inference"
+      ]
+    },
+    "83": {
+      "evidence": [
+        "y1v1.ev.036",
+        "y1v1.ev.118"
+      ],
+      "cases": []
+    },
+    "84": {
+      "evidence": [
+        "y1v1.ev.037",
+        "y1v1.ev.119"
+      ],
+      "cases": [
+        "y1v1.case.kikyo-kushida.fifty-meter-swim",
+        "y1v1.case.onodera.fifty-meter-swim",
+        "y1v1.case.s.swimming-heat"
+      ]
+    },
+    "85": {
+      "evidence": [
+        "y1v1.ev.038",
+        "y1v1.ev.120"
+      ],
+      "cases": [
+        "y1v1.case.k.swim-middle",
+        "y1v1.case.ken-sudo.fifty-meter-swim",
+        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort"
+      ]
+    },
+    "86": {
+      "evidence": [
+        "y1v1.ev.039"
+      ],
+      "cases": [
+        "y1v1.case.h.swimming-heat"
+      ]
+    },
+    "87": {
+      "evidence": [
+        "y1v1.ev.040"
+      ],
+      "cases": [
+        "y1v1.case.o.swimming-heat"
+      ]
+    },
+    "88": {
+      "evidence": [
+        "y1v1.ev.121"
+      ],
+      "cases": [
+        "y1v1.case.rokusuke-koenji.swim-final-over-sudo"
+      ]
+    },
+    "89": {
+      "evidence": [
+        "y1v1.ev.041"
+      ],
+      "cases": []
+    },
+    "91": {
+      "evidence": [
+        "y1v1.ev.042"
+      ],
+      "cases": []
+    },
+    "99": {
+      "evidence": [
+        "y1v1.ev.043"
+      ],
+      "cases": [
+        "y1v1.case.s.refuse-forced-friendship"
+      ]
+    },
+    "100": {
+      "evidence": [
+        "y1v1.ev.044"
+      ],
+      "cases": []
+    },
+    "102": {
+      "evidence": [
+        "y1v1.ev.045"
+      ],
+      "cases": []
+    },
+    "103": {
+      "evidence": [
+        "y1v1.ev.046"
+      ],
+      "cases": []
+    },
+    "104": {
+      "evidence": [
+        "y1v1.ev.047"
+      ],
+      "cases": []
+    },
+    "105": {
+      "evidence": [
+        "y1v1.ev.048"
+      ],
+      "cases": []
+    },
+    "109": {
+      "evidence": [
+        "y1v1.ev.049"
+      ],
+      "cases": []
+    },
+    "110": {
+      "evidence": [
+        "y1v1.ev.050"
+      ],
+      "cases": []
+    },
+    "113": {
+      "evidence": [
+        "y1v1.ev.051",
+        "y1v1.ev.122"
+      ],
+      "cases": []
+    },
+    "118": {
+      "evidence": [
+        "y1v1.ev.052",
+        "y1v1.ev.123"
+      ],
+      "cases": [
+        "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic"
+      ]
+    },
+    "120": {
+      "evidence": [
+        "y1v1.ev.053"
+      ],
+      "cases": []
+    },
+    "121": {
+      "evidence": [
+        "y1v1.ev.054",
+        "y1v1.ev.124"
+      ],
+      "cases": [
+        "y1v1.case.rokusuke-koenji.predict-zero-allowance"
+      ]
+    },
+    "122": {
+      "evidence": [
+        "y1v1.ev.055"
+      ],
+      "cases": []
+    },
+    "124": {
+      "evidence": [
+        "y1v1.ev.056"
+      ],
+      "cases": []
+    },
+    "125": {
+      "evidence": [
+        "y1v1.ev.057",
+        "y1v1.ev.125"
+      ],
+      "cases": []
+    },
+    "126": {
+      "evidence": [
+        "y1v1.ev.058"
+      ],
+      "cases": []
+    },
+    "127": {
+      "evidence": [
+        "y1v1.ev.126"
+      ],
+      "cases": []
+    },
+    "128": {
+      "evidence": [
+        "y1v1.ev.059",
+        "y1v1.ev.127",
+        "y1v1.ev.128"
+      ],
+      "cases": []
+    },
+    "129": {
+      "evidence": [
+        "y1v1.ev.060"
+      ],
+      "cases": []
+    },
+    "130": {
+      "evidence": [
+        "y1v1.ev.061",
+        "y1v1.ev.062",
+        "y1v1.ev.129"
+      ],
+      "cases": []
+    },
+    "133": {
+      "evidence": [
+        "y1v1.ev.063"
+      ],
+      "cases": [
+        "y1v1.case.h.point-crisis-leadership"
+      ]
+    },
+    "138": {
+      "evidence": [
+        "y1v1.ev.064"
+      ],
+      "cases": []
+    },
+    "139": {
+      "evidence": [
+        "y1v1.ev.065"
+      ],
+      "cases": []
+    },
+    "140": {
+      "evidence": [
+        "y1v1.ev.066"
+      ],
+      "cases": []
+    },
+    "142": {
+      "evidence": [
+        "y1v1.ev.067"
+      ],
+      "cases": []
+    },
+    "143": {
+      "evidence": [
+        "y1v1.ev.068",
+        "y1v1.ev.130"
+      ],
+      "cases": []
+    },
+    "146": {
+      "evidence": [
+        "y1v1.ev.069"
+      ],
+      "cases": []
+    },
+    "147": {
+      "evidence": [
+        "y1v1.ev.070"
+      ],
+      "cases": [
+        "y1v1.case.c.detect-uniform-fifties"
+      ]
+    },
+    "149": {
+      "evidence": [
+        "y1v1.ev.071"
+      ],
+      "cases": [
+        "y1v1.case.s.class-a-goal"
+      ]
+    },
+    "153": {
+      "evidence": [
+        "y1v1.ev.072"
+      ],
+      "cases": []
+    },
+    "156": {
+      "evidence": [
+        "y1v1.ev.073"
+      ],
+      "cases": [
+        "y1v1.case.s.delegated-study-recruitment"
+      ]
+    },
+    "159": {
+      "evidence": [
+        "y1v1.ev.074"
+      ],
+      "cases": []
+    },
+    "163": {
+      "evidence": [
+        "y1v1.ev.075"
+      ],
+      "cases": [
+        "y1v1.case.k.recruit-kushida"
+      ]
+    },
+    "168": {
+      "evidence": [
+        "y1v1.ev.076"
+      ],
+      "cases": [
+        "y1v1.case.s.exclude-social-ally"
+      ]
+    },
+    "170": {
+      "evidence": [
+        "y1v1.ev.077"
+      ],
+      "cases": [
+        "y1v1.case.u.anticipate-suzune-rejection"
+      ]
+    },
+    "175": {
+      "evidence": [
+        "y1v1.ev.078"
+      ],
+      "cases": []
+    },
+    "177": {
+      "evidence": [
+        "y1v1.ev.079"
+      ],
+      "cases": []
+    },
+    "179": {
+      "evidence": [
+        "y1v1.ev.080"
+      ],
+      "cases": [
+        "y1v1.case.s.study-group-collapse"
+      ]
+    },
+    "191": {
+      "evidence": [
+        "y1v1.ev.081"
+      ],
+      "cases": []
+    },
+    "193": {
+      "evidence": [
+        "y1v1.ev.082"
+      ],
+      "cases": []
+    },
+    "194": {
+      "evidence": [
+        "y1v1.ev.083"
+      ],
+      "cases": [
+        "y1v1.case.k.evade-manabu"
+      ]
+    },
+    "197": {
+      "evidence": [
+        "y1v1.ev.084"
+      ],
+      "cases": []
+    },
+    "199": {
+      "evidence": [
+        "y1v1.ev.085"
+      ],
+      "cases": []
+    },
+    "201": {
+      "evidence": [
+        "y1v1.ev.086"
+      ],
+      "cases": [
+        "y1v1.case.k.multi-dimensional-utility"
+      ]
+    },
+    "203": {
+      "evidence": [
+        "y1v1.ev.087"
+      ],
+      "cases": []
+    },
+    "208": {
+      "evidence": [
+        "y1v1.ev.088"
+      ],
+      "cases": [
+        "y1v1.case.s.targeted-study-schedule"
+      ]
+    },
+    "213": {
+      "evidence": [
+        "y1v1.ev.089"
+      ],
+      "cases": []
+    },
+    "219": {
+      "evidence": [
+        "y1v1.ev.090"
+      ],
+      "cases": []
+    },
+    "220": {
+      "evidence": [
+        "y1v1.ev.131"
+      ],
+      "cases": []
+    },
+    "221": {
+      "evidence": [
+        "y1v1.ev.091"
+      ],
+      "cases": [
+        "y1v1.case.v.mock-class-d"
+      ]
+    },
+    "222": {
+      "evidence": [
+        "y1v1.ev.092"
+      ],
+      "cases": [
+        "y1v1.case.n.library-deescalation"
+      ]
+    },
+    "225": {
+      "evidence": [
+        "y1v1.ev.093",
+        "y1v1.ev.132"
+      ],
+      "cases": []
+    },
+    "226": {
+      "evidence": [
+        "y1v1.ev.133"
+      ],
+      "cases": []
+    },
+    "227": {
+      "evidence": [
+        "y1v1.ev.134"
+      ],
+      "cases": [
+        "y1v1.case.ken-sudo.prioritize-study-over-basketball"
+      ]
+    },
+    "229": {
+      "evidence": [
+        "y1v1.ev.094"
+      ],
+      "cases": []
+    },
+    "231": {
+      "evidence": [
+        "y1v1.ev.095"
+      ],
+      "cases": [
+        "y1v1.case.k.exam-paper-bargain"
+      ]
+    },
+    "232": {
+      "evidence": [
+        "y1v1.ev.096"
+      ],
+      "cases": []
+    },
+    "233": {
+      "evidence": [
+        "y1v1.ev.097",
+        "y1v1.ev.135"
+      ],
+      "cases": [
+        "y1v1.case.k.exam-reuse-inference"
+      ]
+    },
+    "234": {
+      "evidence": [
+        "y1v1.ev.098"
+      ],
+      "cases": []
+    },
+    "235": {
+      "evidence": [
+        "y1v1.ev.099"
+      ],
+      "cases": [
+        "y1v1.case.k.credit-routing"
+      ]
+    },
+    "236": {
+      "evidence": [
+        "y1v1.ev.100"
+      ],
+      "cases": [
+        "y1v1.case.u.distribute-old-tests"
+      ]
+    },
+    "240": {
+      "evidence": [
+        "y1v1.ev.101"
+      ],
+      "cases": []
+    },
+    "244": {
+      "evidence": [
+        "y1v1.ev.102"
+      ],
+      "cases": []
+    },
+    "247": {
+      "evidence": [
+        "y1v1.ev.103",
+        "y1v1.ev.104"
+      ],
+      "cases": []
+    },
+    "249": {
+      "evidence": [
+        "y1v1.ev.105"
+      ],
+      "cases": [
+        "y1v1.case.s.cutoff-appeal"
+      ]
+    },
+    "250": {
+      "evidence": [
+        "y1v1.ev.106"
+      ],
+      "cases": []
+    },
+    "251": {
+      "evidence": [
+        "y1v1.ev.107"
+      ],
+      "cases": []
+    },
+    "252": {
+      "evidence": [
+        "y1v1.ev.136"
+      ],
+      "cases": []
+    },
+    "253": {
+      "evidence": [
+        "y1v1.ev.108"
+      ],
+      "cases": [
+        "y1v1.case.k.buy-exam-point"
+      ]
+    },
+    "254": {
+      "evidence": [
+        "y1v1.ev.109",
+        "y1v1.ev.110"
+      ],
+      "cases": [
+        "y1v1.case.s.pool-points-save-sudo"
+      ]
+    },
+    "256": {
+      "evidence": [
+        "y1v1.ev.111"
+      ],
+      "cases": []
+    },
+    "257": {
+      "evidence": [
+        "y1v1.ev.112"
+      ],
+      "cases": [
+        "y1v1.case.d.soften-after-rescue"
+      ]
+    },
+    "258": {
+      "evidence": [
+        "y1v1.ev.113"
+      ],
+      "cases": []
+    },
+    "261": {
+      "evidence": [
+        "y1v1.ev.114"
+      ],
+      "cases": []
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.s.financial-restraint",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "financial restraint",
+  "context": "Suzune avoids costly cosmetics and criticizes Kiyotaka's attempts at conversation.",
+  "observed_actions": "Selects lower-cost necessities over upscale alternatives",
+  "observed_result": "Conserves points",
+  "epistemic_limits": "Context-dependent budget judgment",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      45
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "economy",
+    "social"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "economy",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.021"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

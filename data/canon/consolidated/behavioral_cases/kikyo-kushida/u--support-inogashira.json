@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.u.support-inogashira",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "support inogashira",
+  "context": "Kushida tells Inogashira to slow down and take her time, enabling her to continue.",
+  "observed_actions": "Replaces demanding encouragement with permission to proceed slowly",
+  "observed_result": "Inogashira finishes her speech",
+  "epistemic_limits": "Depends on recipient and context",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      34
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kokoro-inogashira"
+  ],
+  "capabilities_supported": [
+    "social",
+    "persuasion"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "social",
+    "persuasion"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.014"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

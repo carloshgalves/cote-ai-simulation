@@ -1,0 +1,38 @@
+{
+  "id": "y1v1.case.s.targeted-study-schedule",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "targeted study schedule",
+  "context": "Suzune designs a day-by-day study schedule around class breaks and personal time.",
+  "observed_actions": "Builds timed plan to reduce midterm failure risk",
+  "observed_result": "Some participants engage",
+  "epistemic_limits": "Cannot ensure all students follow schedule",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      208
+    ],
+    "chapter": 9,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.kanji-ike",
+    "actor.haruki-yamauchi"
+  ],
+  "capabilities_supported": [
+    "academic_reasoning",
+    "leadership"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "academic_reasoning",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.088"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

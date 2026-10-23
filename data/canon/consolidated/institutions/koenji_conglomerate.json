@@ -1,0 +1,19 @@
+{
+  "schema_version": "consolidated-institution-v2",
+  "institution_id": "org.koenji_conglomerate",
+  "display_name": "Kouenji family conglomerate (self-described)",
+  "source_coverage": [
+    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "evidence_refs": [
+    "y1v1.ev.061",
+    "y1v1.ev.062",
+    "y1v1.ev.129"
+  ],
+  "owner_truth_boundary": "Only Kouenji's assertion of his expected future succession is established in this volume. Corporate assets, leaders and governance are not independently documented.",
+  "structure": {
+    "claimed_successor": "actor.rokusuke-koenji"
+  },
+  "operational_migration": "Never grant unlimited finances or authority at Y1_START solely based on succession claim."
+}

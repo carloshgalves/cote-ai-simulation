@@ -1,0 +1,38 @@
+{
+  "id": "y1v1.case.u.distribute-old-tests",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "distribute old tests",
+  "context": "Kushida distributes copies of old questions to help classmates study.",
+  "observed_actions": "Presents old questions and coordinates late-stage preparation",
+  "observed_result": "Peers study material",
+  "epistemic_limits": "Help depends on access and sufficient learning time",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      236
+    ],
+    "chapter": 10,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.kanji-ike",
+    "actor.haruki-yamauchi"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "academic_reasoning"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "leadership",
+    "academic_reasoning"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.100"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

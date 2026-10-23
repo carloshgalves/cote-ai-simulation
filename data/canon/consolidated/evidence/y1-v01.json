@@ -1,0 +1,3768 @@
+{
+  "schema_version": "consolidated-source-evidence-v1",
+  "source_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+  "records": [
+    {
+      "id": "y1v1.ev.001",
+      "domain": "academic_reasoning",
+      "summary": "The opening philosophical monologue questions natural equality and emphasizes education as a source of differences; this is a narrator's perspective.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          14
+        ],
+        "chapter": 1,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "NARRATIVE_INTRODUCTION_OR_FLASHFORWARD",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.002",
+      "domain": "social",
+      "summary": "A flash-forward shows Suzune pressuring Kiyotaka for assistance; it is not an April day-one event.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          16
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "NARRATIVE_INTRODUCTION_OR_FLASHFORWARD",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.003",
+      "domain": "social",
+      "summary": "Kouenji refuses to surrender priority seating on the bus despite requests, arguing from lack of formal obligation.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          19
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.004",
+      "domain": "social",
+      "summary": "Kushida appeals to bus passengers collectively to give an elderly woman a seat, and another adult stands.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          21
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.rokusuke-koenji",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "persuasion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.005",
+      "domain": "social",
+      "summary": "Kiyotaka considers offering his own seat but does not; Suzune also remains seated.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          24
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.006",
+      "domain": "social",
+      "summary": "Suzune interprets her inaction differently from Kiyotaka's conflict avoidance; they fail to bond immediately.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          25
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.007",
+      "domain": "social",
+      "summary": "Kiyotaka rehearses social approaches to classmates but initially cannot approach a peer.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          26
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.008",
+      "domain": "social",
+      "summary": "Suzune eventually names herself; Kouenji's defiant individuality attracts negative peer attention.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          28
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.rokusuke-koenji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.009",
+      "domain": "institution",
+      "summary": "Homeroom teacher Chiyabashira announces compulsory dorm residence, restricted external communication and campus exit, and student-ID point payments.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          30
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.010",
+      "domain": "institution",
+      "summary": "At admission students receive 100000 private points; one point is stated to equal one yen, with monthly deposits on the first day; the conditional amount is not revealed.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          31
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.011",
+      "domain": "institution",
+      "summary": "Chiyabashira allows point transfers, bans extortion, says unused balances return to school on graduation and cannot be converted into cash.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          31
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.012",
+      "domain": "leadership",
+      "summary": "Hirata voluntarily organizes class introductions and begins by introducing himself.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          32
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.013",
+      "domain": "emotion",
+      "summary": "Inogashira freezes while addressing the class; applause and urgent encouragement worsen the pressure.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          33
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kokoro-inogashira",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.014",
+      "domain": "social",
+      "summary": "Kushida tells Inogashira to slow down and take her time, enabling her to continue.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          34
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kokoro-inogashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "persuasion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.015",
+      "domain": "social",
+      "summary": "Yamauchi claims extensive sports achievements including a school-level inconsistency; these are not verified physical feats.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          34
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.016",
+      "domain": "social",
+      "summary": "Kushida states she wants to befriend all classmates and collect contact information; an expressed goal does not guarantee motives.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          35
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.017",
+      "domain": "social",
+      "summary": "Sudou refuses Hirata's request for introductions and exits; Hirata avoids forcing him.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          37
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.018",
+      "domain": "social",
+      "summary": "Ike is teased about seeking a girlfriend and reads sarcasm as praise; Kouenji self-promotes publicly.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          38
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.rokusuke-koenji",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.019",
+      "domain": "social",
+      "summary": "Kiyotaka has difficulty introducing himself before class.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          40
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.020",
+      "domain": "economy",
+      "summary": "School shop labels prices in yen but payment uses point-linked student ID cards.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          43
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.021",
+      "domain": "economy",
+      "summary": "Suzune avoids costly cosmetics and criticizes Kiyotaka's attempts at conversation.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          45
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.022",
+      "domain": "economy",
+      "summary": "Sudou forgets his student ID in the store; Kiyotaka helps him and receives thanks.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          46
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.023",
+      "domain": "social",
+      "summary": "Suzune says she would rebuff aggression rather than retreat; this is self-description, not a demonstrated physical feat.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          47
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "combat"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.024",
+      "domain": "economy",
+      "summary": "Suzune cautions Kiyotaka that luxury spending can create dependence before the school reveals its evaluation mechanism.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          48
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.025",
+      "domain": "combat",
+      "summary": "Sudou tries to pursue Suzune angrily and Kiyotaka restrains him.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          49
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.026",
+      "domain": "combat",
+      "summary": "Sudou challenges three older boys after they mock Class D, but no actual three-on-one combat takes place.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          50
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.027",
+      "domain": "institution",
+      "summary": "Students receive personal dorm access/keycards and reside on campus.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          52
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.028",
+      "domain": "social",
+      "summary": "Kiyotaka remains awkward at forming friendships, but begins normal interactions.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          54
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.029",
+      "domain": "institution",
+      "summary": "Kiyotaka and Suzune attend recruitment at the school club fair.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          63
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.030",
+      "domain": "institution",
+      "summary": "Club fair describes possibility of founding a club with three members; governance scope should be confirmed separately.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          66
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.031",
+      "domain": "leadership",
+      "summary": "Council president Manabu commands a noisy club fair by remaining silent until attendees quiet down.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          67
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "persuasion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.032",
+      "domain": "institution",
+      "summary": "Manabu says student council recruits ordinarily avoid simultaneous other club memberships and can enforce/amend rules.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          67
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.033",
+      "domain": "combat",
+      "summary": "Sudou says he has played basketball since elementary school and joins the school club.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          68
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "combat",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.034",
+      "domain": "social",
+      "summary": "Several boys organize an inappropriate wager centered on female classmates; no school-sanctioned activity is inferred.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          72
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.sotomura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.035",
+      "domain": "observation",
+      "summary": "Suzune notices atypical muscular development in Kiyotaka despite his denial of regular athletic training.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          81
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "combat"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.036",
+      "domain": "institution",
+      "summary": "Physical education coach announces 50-meter swimming heats, 5000-point bonus to first and remedial lessons for last.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          83
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "combat",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.037",
+      "domain": "combat",
+      "summary": "Suzune completes a 50-meter freestyle heat in approximately 28 seconds.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          84
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.038",
+      "domain": "combat",
+      "summary": "Kiyotaka seeks only middle placement in swimming to avoid both exposure and remediation.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          85
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.039",
+      "domain": "combat",
+      "summary": "Hirata wins a 50-meter freestyle heat with 26.13 seconds recorded.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          86
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.040",
+      "domain": "combat",
+      "summary": "Kouenji swims 50-meter freestyle in 23.22 seconds and appears unfatigued; Sudou reacts competitively.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          87
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.041",
+      "domain": "social",
+      "summary": "Kushida attempts closer friendship despite Suzune's reluctance.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          89
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.042",
+      "domain": "social",
+      "summary": "Kushida enlists Kiyotaka in effort to include Suzune in a café meetup.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          91
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "persuasion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.043",
+      "domain": "social",
+      "summary": "Suzune argues compelled friendship does not create trust and rejects Kushida's efforts.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          99
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.044",
+      "domain": "social",
+      "summary": "Suzune reports having been voluntarily alone for many years; preserve as attributed self-report.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          100
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.045",
+      "domain": "social",
+      "summary": "Ike, Yamauchi and Sudou form a noisy peer group; Kiyotaka begins to socialize with them.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          102
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.046",
+      "domain": "social",
+      "summary": "Hirata and Karuizawa are publicly treated as a couple; no private motivation is established by appearances.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          103
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.047",
+      "domain": "academic_reasoning",
+      "summary": "Teacher introduces a five-subject short assessment, presented as nonreport-card reference material while disallowing cheating.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          104
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.048",
+      "domain": "academic_reasoning",
+      "summary": "The short test includes highly advanced questions; Kiyotaka plans to reproduce his entrance-exam scoring profile.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          105
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.049",
+      "domain": "economy",
+      "summary": "Yamauchi buys an expensive handheld game, while Miyamoto is mentioned as skilled at games; skill is not demonstrated here.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          109
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.haruki-yamauchi",
+        "actor.miyamoto"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.050",
+      "domain": "economy",
+      "summary": "Free bottled water and low-cost/free vegetable meals appear within campus services.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          110
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.051",
+      "domain": "social",
+      "summary": "Karuizawa is prominent among her peers and openly associated with Hirata.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          113
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.052",
+      "domain": "academic_reasoning",
+      "summary": "Kiyotaka reflects on surprising selection of students despite prestige of school and withholds firm explanation.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          118
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.053",
+      "domain": "institution",
+      "summary": "On May 1 Class D learns its expected point deposit is zero.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          120
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.054",
+      "domain": "economy",
+      "summary": "Teacher rules out clerical error and says no May allocation reflects an evaluation.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          121
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.hondou"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.055",
+      "domain": "economy",
+      "summary": "Teacher attributes deductions to 98 absences/tardies and 391 talking/phone incidents during April.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          122
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.056",
+      "domain": "institution",
+      "summary": "Suzune challenges late disclosure of deductions; the teacher defends the lack of explicit warning.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          124
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.057",
+      "domain": "economy",
+      "summary": "Teacher displays May class points A 940, B 650, C 490, D 0 and says absence of further misconduct does not automatically earn points.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          125
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.058",
+      "domain": "institution",
+      "summary": "School evaluation permits students to choose actions while imposing point consequences rather than preventing infractions.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          126
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.059",
+      "domain": "academic_reasoning",
+      "summary": "On short test Sudou scores 14 and Ike 24, while several other students perform well; marks are observations not fixed IQ.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          128
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.ken-sudo",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.060",
+      "domain": "institution",
+      "summary": "Teacher explains graduation's celebrated placement advantages depend on Class A, not all students indiscriminately.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          129
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.061",
+      "domain": "exam",
+      "summary": "Failing an upcoming midterm subjects students to expulsion; the cutoff mechanics have not yet been disclosed.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          130
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.062",
+      "domain": "social",
+      "summary": "Kouenji disputes that Class D rank determines his ability; Yukimura complains about his class placement.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          130
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.063",
+      "domain": "leadership",
+      "summary": "Hirata begins organizing practical conduct discussions; Sudou remains skeptical.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          133
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.064",
+      "domain": "economy",
+      "summary": "Yamauchi tries to resell his game; Karuizawa asks Kushida to lend points after overspending.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          138
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.haruki-yamauchi",
+        "actor.kei-karuizawa",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.065",
+      "domain": "economy",
+      "summary": "Students can transfer points via mobile phone; identity of transfers is traceable in some transactions.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          139
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.066",
+      "domain": "social",
+      "summary": "Hoshinomiya of Class B introduces herself and pursues chat with Kiyotaka; reports longstanding friendship with Chiyabashira.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          140
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.chie-hoshinomiya",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "social",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.067",
+      "domain": "social",
+      "summary": "Hoshinomiya leaves with Class B student Ichinose; Chiyabashira conceals Kiyotaka while summoning Suzune.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          142
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.chie-hoshinomiya",
+        "actor.sae-chiyabashira",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.068",
+      "domain": "academic_reasoning",
+      "summary": "Suzune appeals assignment to Class D based on her strong entrance exam and interview, while teacher holds authority.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          143
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.069",
+      "domain": "academic_reasoning",
+      "summary": "Teacher reveals Kiyotaka scored exactly 50 in each major entrance subject and again in short assessment.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          146
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.070",
+      "domain": "academic_reasoning",
+      "summary": "Teacher notes Kiyotaka solved a very hard mathematics problem while missing an easier one, suggesting score control.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          147
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.071",
+      "domain": "leadership",
+      "summary": "Suzune decides to pursue Class A and requests Kiyotaka's help.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          149
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.072",
+      "domain": "leadership",
+      "summary": "Hirata sets up an open study group after warning about imminent expulsion.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          153
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "academic_reasoning"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.073",
+      "domain": "leadership",
+      "summary": "Suzune proposes tutoring low performers and asks Kiyotaka to recruit them.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          156
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.074",
+      "domain": "persuasion",
+      "summary": "Kiyotaka asks Sudou to study; Sudou objects that basketball and free time matter more.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          159
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.075",
+      "domain": "persuasion",
+      "summary": "Kiyotaka recruits Kushida to help assemble at-risk students.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          163
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.076",
+      "domain": "social",
+      "summary": "Suzune refuses to allow Kushida to attend even though she would help recruit others.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          168
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.077",
+      "domain": "observation",
+      "summary": "Kushida accurately anticipates Suzune would exclude her from study group.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          170
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.078",
+      "domain": "academic_reasoning",
+      "summary": "Suzune tutors classmates with much weaker mathematical prerequisites, and communication problems become evident.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          175
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kanji-ike",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.079",
+      "domain": "emotion",
+      "summary": "Suzune attacks Sudou's ambitions during tutoring, while Kushida tries to prevent confrontation.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          177
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.080",
+      "domain": "leadership",
+      "summary": "First tutoring arrangement breaks down with participants leaving.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          179
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.081",
+      "domain": "social",
+      "summary": "Suzune meets her older brother Manabu under tense family circumstances.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          191
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.manabu-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.082",
+      "domain": "combat",
+      "summary": "Manabu uses force in a sibling dispute; Kiyotaka intervenes to restrain him.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          193
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.083",
+      "domain": "combat",
+      "summary": "Manabu attempts swift strike and kick at Kiyotaka, who dodges them.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          194
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.084",
+      "domain": "observation",
+      "summary": "Suzune suspects martial training after Kiyotaka's evasions; Kiyotaka gives shifting noncombat explanations.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          197
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "combat"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.085",
+      "domain": "strategy",
+      "summary": "Kiyotaka questions Suzune's suggestion that expelling weak students could be harmless to the class.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          199
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.086",
+      "domain": "academic_reasoning",
+      "summary": "Kiyotaka argues classmates have distinct useful dimensions including physical and social capabilities, not just marks.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          201
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.087",
+      "domain": "leadership",
+      "summary": "Tutoring group reorganizes to include help from Kushida despite prior interpersonal resistance.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          203
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.088",
+      "domain": "academic_reasoning",
+      "summary": "Suzune designs a day-by-day study schedule around class breaks and personal time.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          208
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.089",
+      "domain": "institution",
+      "summary": "At-risk students agree on library sessions, exploiting school facilities for studying.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          213
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.090",
+      "domain": "academic_reasoning",
+      "summary": "Students struggle with library tutoring because of gaps in prerequisite knowledge.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          219
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.091",
+      "domain": "social",
+      "summary": "Class C student Yamawaki mocks Class D in the library, provoking Sudou.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          221
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.yamawaki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.092",
+      "domain": "leadership",
+      "summary": "Ichinose defuses the library conflict by foregrounding consequences for other library users.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          222
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.ken-sudo",
+        "actor.yamawaki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.093",
+      "domain": "leadership",
+      "summary": "Even reformed group struggles and leaves fewer days before midterm.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          225
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.094",
+      "domain": "observation",
+      "summary": "Kiyotaka monitors cafeteria students to find upperclassmen with incentives to sell older exams.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          229
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.095",
+      "domain": "persuasion",
+      "summary": "Kiyotaka bargains with an unknown third-year seller for prior exam questions for 15000 points.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          231
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida",
+        "actor.unidentified-third-year-test-seller"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "persuasion",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.096",
+      "domain": "strategy",
+      "summary": "Kiyotaka also obtains old short assessment answers as cross-check for paper repetition.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          232
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.unidentified-third-year-test-seller"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.097",
+      "domain": "academic_reasoning",
+      "summary": "After comparing test papers, Kiyotaka detects exact repetition of short-test problems and hypothesizes midterm reuse.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          233
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.098",
+      "domain": "strategy",
+      "summary": "Kiyotaka plans to release questions before exam so weaker students can memorize enough to pass.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          234
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.099",
+      "domain": "strategy",
+      "summary": "Kiyotaka tells Kushida to publicly claim credit for sourcing old exams and keep his participation private.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          235
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.100",
+      "domain": "leadership",
+      "summary": "Kushida distributes copies of old questions to help classmates study.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          236
+        ],
+        "chapter": 10,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.ken-sudo",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "academic_reasoning"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.101",
+      "domain": "exam",
+      "summary": "Formal midterm takes place after old-paper study; students await results.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          240
+        ],
+        "chapter": 10,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.102",
+      "domain": "emotion",
+      "summary": "Sudou worries about his grade after exam despite significant group assistance.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          244
+        ],
+        "chapter": 10,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.103",
+      "domain": "exam",
+      "summary": "Sudou scores 39 in English while the announced pass mark is 40; teacher initially declares him expelled.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          247
+        ],
+        "chapter": 11,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.104",
+      "domain": "exam",
+      "summary": "English Class D mean reported 79.6, halved to 39.8 and rounded to cutoff 40.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          247
+        ],
+        "chapter": 11,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.105",
+      "domain": "academic_reasoning",
+      "summary": "Suzune, who lowered her own English score, challenges inconsistency with prior cutoff from mean 64.4.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          249
+        ],
+        "chapter": 11,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.106",
+      "domain": "exam",
+      "summary": "Teacher explains rounding 32.2 to 32 and 39.8 to 40, defeating appeal.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          250
+        ],
+        "chapter": 11,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.107",
+      "domain": "persuasion",
+      "summary": "Kiyotaka initially challenges undisclosed rule consequences using procedural fairness.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          251
+        ],
+        "chapter": 11,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "persuasion",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.108",
+      "domain": "strategy",
+      "summary": "Kiyotaka proposes purchasing a test point; teacher quotes exceptional 100000-point price.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          253
+        ],
+        "chapter": 11,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.sae-chiyabashira",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "strategy",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.109",
+      "domain": "strategy",
+      "summary": "Kiyotaka and Suzune jointly transfer 100000 points, securing one English mark and reversing Sudou's expulsion.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          254
+        ],
+        "chapter": 11,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.sae-chiyabashira",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "strategy",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.110",
+      "domain": "social",
+      "summary": "Suzune articulates that struggling classmates can improve instead of being discarded.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          254
+        ],
+        "chapter": 11,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "leadership"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.111",
+      "domain": "social",
+      "summary": "Surviving students celebrate in Kiyotaka's room; Suzune attends at a distance.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          256
+        ],
+        "chapter": 12,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.112",
+      "domain": "social",
+      "summary": "Sudou demonstrates softened attitude toward Suzune after she helps save him.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          257
+        ],
+        "chapter": 12,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.113",
+      "domain": "economy",
+      "summary": "Ike and Yamauchi have spent their allowances and rely partly on free food.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          258
+        ],
+        "chapter": 12,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.114",
+      "domain": "leadership",
+      "summary": "Kushida argues for cohesion toward Class A as others remain academically or socially strained.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          261
+        ],
+        "chapter": 12,
+        "edition": "Seven Seas English 2019, operator-supplied PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.115",
+      "domain": "social",
+      "summary": "Sotomura, nicknamed Professor, agrees to Ike's request for covert observation of female classmates; the later plan fails to yield the intended vantage point.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          72
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.sotomura",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.116",
+      "domain": "social",
+      "summary": "Sakura is mentioned as a reserved bespectacled classmate; Yamauchi claims he confessed to her, an assertion doubted by the narrator.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          75
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.haruki-yamauchi",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.117",
+      "domain": "social",
+      "summary": "Hasebe and Sakura appear with girls in upper spectator area; the boys' covert viewing plan does not succeed as expected.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          78
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.hasebe",
+        "actor.airi-sakura",
+        "actor.sotomura",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.118",
+      "domain": "institution",
+      "summary": "In instructor-run swimming practice, 10 girls swim two groups of five, with fastest overall winning; five fastest boys advance to a final; 5000-point prize announced and supplementary lessons for last.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          83
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "combat",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.119",
+      "domain": "combat",
+      "summary": "Onodera, described as a former swim-team participant, completes girls' 50m freestyle in approximately 26 seconds and wins; Kushida completes in approximately 31 seconds, fourth in her heat.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          84
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.onodera",
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.120",
+      "domain": "combat",
+      "summary": "Sudou finishes a 50m swimming heat in about 25 seconds, while Kiyotaka takes approximately 36 seconds and is around tenth, having aimed for a middling place.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          85
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.121",
+      "domain": "combat",
+      "summary": "In boys' swimming final, Kouenji finishes approximately five meters ahead of Sudou; no separate final-round time is reported.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          88
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.122",
+      "domain": "social",
+      "summary": "Matsushita and Mori are identified as frequently accompanying Karuizawa in her social group; no independent capability is demonstrated.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          113
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "NARRATED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.matsushita",
+        "actor.mori",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.123",
+      "domain": "academic_reasoning",
+      "summary": "Yamauchi boasts about a score of 900 on 'APEC', thinking it is an English examination, and Kushida identifies the intended TOEIC reference.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          118
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M01",
+      "mention_actor_ids": [
+        "actor.haruki-yamauchi",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.124",
+      "domain": "observation",
+      "summary": "Before the teacher's full explanation, Kouenji publicly infers that Class D has received no May private-point allocation; teacher confirms his inference.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          121
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "academic_reasoning"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.125",
+      "domain": "economy",
+      "summary": "Displayed class scores A=940, B=650, C=490, D=0 prompt inference that 1000 class points correspond to 100000 yen of monthly private-point deposits; published formula remains unstated here.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          125
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.126",
+      "domain": "economy",
+      "summary": "Chiyabashira says a zero-point class could remain without stipends indefinitely, but also confirms class points determine ranking and that gaining enough points can change the class ranking; do not model zero as permanently irreversible.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          127
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.127",
+      "domain": "academic_reasoning",
+      "summary": "Teacher reports seven students below the short-test threshold equivalent to a failing formal exam, Kikuchi highest among that set with 31; Sudou scores 14 and Ike 24.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          128
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.kikuchi",
+        "actor.kanji-ike",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "academic_reasoning",
+        "exam"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.128",
+      "domain": "academic_reasoning",
+      "summary": "Kouenji and Yukimura tie at 90 on the short test; performance is bounded to this assessment, not overall potential.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          128
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.yukimura",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.129",
+      "domain": "economy",
+      "summary": "Kouenji claims he will inherit the Kouenji conglomerate; this is an attributed prospect, not established access to corporate money or authority during Y1.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          130
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "institution"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.130",
+      "domain": "academic_reasoning",
+      "summary": "Chiyabashira identifies Suzune as third-ranked in entrance exam results, despite her placement in Class D; admissions factors remain partially undisclosed.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          143
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic_reasoning"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.131",
+      "domain": "social",
+      "summary": "Yamawaki explicitly identifies himself as a student of Class C while mocking the Class D study group; apparent printed prefix before Class C is a PDF translation artifact.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          220
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.yamawaki",
+        "actor.ken-sudo",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "conflict"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.132",
+      "domain": "institution",
+      "summary": "Teacher confirms tested syllabus was changed the prior Friday and gives updated textbook page numbers to Suzune approximately one week before examination; she attributes nondisclosure to forgetting.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          225
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "exam"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.133",
+      "domain": "leadership",
+      "summary": "After syllabus change, Kiyotaka asks Kushida to inform the entire class, using her communication network; she agrees.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          226
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "persuasion"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.134",
+      "domain": "motivation",
+      "summary": "Sudou volunteers to pause basketball club activities to devote time to studying; the decision encourages Ike and Yamauchi to put forth more effort.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          227
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.suzune-horikita",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "academic_reasoning",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.135",
+      "domain": "observation",
+      "summary": "Kiyotaka explains he took Chiyabashira's assurance of a viable passing strategy as a hint and verified that old short-test papers repeated, but he cannot know all future test items.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          233
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    },
+    {
+      "id": "y1v1.ev.136",
+      "domain": "observation",
+      "summary": "Chiyabashira already learned from upperclass contacts that Kiyotaka procured previous exam papers; his attempt to keep his involvement hidden is only partly successful.",
+      "source": {
+        "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+        "pdf_pages": [
+          252
+        ],
+        "chapter": 11,
+        "edition": "Seven Seas English 2019, operator-provided PDF",
+        "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_M02",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic",
+  "actor_id": "actor.haruki-yamauchi",
+  "primary_actor_id": "actor.haruki-yamauchi",
+  "title": "confuse apec and toeic",
+  "context": "Yamauchi boasts about a score of 900 on 'APEC', thinking it is an English examination, and Kushida identifies the intended TOEIC reference.",
+  "observed_actions": "Boasts of score on wrong-named English-language exam and is corrected",
+  "observed_result": "Claim loses credibility",
+  "epistemic_limits": "Single terminological mistake is not psychometric rating",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      118
+    ],
+    "chapter": 6,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida"
+  ],
+  "capabilities_supported": [
+    "academic_reasoning",
+    "social"
+  ],
+  "information_available": "Only scene-local observed conditions and actor knowledge",
+  "counterfactual_test": "Vary preparation, institution response, social incentives and other agents; no prescribed success",
+  "topics": [
+    "academic_reasoning",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.123"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

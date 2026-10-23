@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.g.intro-stage-fright",
+  "actor_id": "actor.kokoro-inogashira",
+  "primary_actor_id": "actor.kokoro-inogashira",
+  "title": "intro stage fright",
+  "context": "Inogashira freezes while addressing the class; applause and urgent encouragement worsen the pressure.",
+  "observed_actions": "Attempts to introduce herself under public pressure but freezes",
+  "observed_result": "Continues only after relaxed support",
+  "epistemic_limits": "Situational anxiety is not a general ability deficiency",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      33
+    ],
+    "chapter": 2,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "emotion",
+    "social"
+  ],
+  "information_available": "Only knowledge established for this actor at this scene; no future canon and no omniscient world truth.",
+  "counterfactual_test": "Change goals, constraints, interlocutor or information and allow failure; never force canonical result.",
+  "topics": [
+    "emotion",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.013"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

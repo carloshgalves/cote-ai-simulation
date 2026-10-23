@@ -1,0 +1,108 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.y1.midterm-1",
+  "name": "First midterm examination",
+  "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
+  "source_coverage": [
+    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+  ],
+  "school_year": 1,
+  "approx_month": "May",
+  "participants": "First-year classes; detailed outcomes recorded for Class D only",
+  "subjects": [
+    "Japanese",
+    "Mathematics",
+    "English",
+    "Social studies",
+    "Science"
+  ],
+  "public_rules": [
+    "Failing a required midterm subject may lead to expulsion (disclosed to students after April).",
+    "An earlier mock/short test was presented as nonreport-card risk, with no cheating permitted.",
+    "Students may prepare via study groups; purchasing old test papers was observed and not forbidden in the cited transaction."
+  ],
+  "grading_observations": {
+    "class_d_english_mean": 79.6,
+    "cutoff_rule_observed": "Round(English_Class_Mean/2) to nearest integer",
+    "cutoff": 40,
+    "sudo_english_before_purchase": 39,
+    "previous_mock_mean": 64.4,
+    "previous_mock_cutoff": 32,
+    "sudo_initially_marked_expelled": true
+  },
+  "exceptional_transaction": {
+    "purchased_english_marks": 1,
+    "cost_private_points": 100000,
+    "payers": [
+      "actor.kiyotaka-ayanokoji",
+      "actor.suzune-horikita"
+    ],
+    "accepted_by": "actor.sae-chiyabashira",
+    "sudou_expulsion_after_purchase": false
+  },
+  "epistemic_disclosures": [
+    {
+      "stage": "Y1_M01",
+      "truth": "Full point and midterm rules not disclosed at admission"
+    },
+    {
+      "stage": "Y1_M02",
+      "truth": "Teacher announces assessment-linked stipends and midterm expulsion risk"
+    },
+    {
+      "stage": "AFTER_MIDTERM",
+      "truth": "Rounding formula and exceptional purchase are disclosed or observed"
+    }
+  ],
+  "evidence_refs": [
+    "y1v1.ev.047",
+    "y1v1.ev.048",
+    "y1v1.ev.057",
+    "y1v1.ev.059",
+    "y1v1.ev.060",
+    "y1v1.ev.061",
+    "y1v1.ev.072",
+    "y1v1.ev.078",
+    "y1v1.ev.088",
+    "y1v1.ev.093",
+    "y1v1.ev.095",
+    "y1v1.ev.097",
+    "y1v1.ev.099",
+    "y1v1.ev.100",
+    "y1v1.ev.101",
+    "y1v1.ev.103",
+    "y1v1.ev.104",
+    "y1v1.ev.105",
+    "y1v1.ev.106",
+    "y1v1.ev.108",
+    "y1v1.ev.109",
+    "y1v1.ev.110",
+    "y1v1.ev.132",
+    "y1v1.ev.133",
+    "y1v1.ev.134"
+  ],
+  "open_questions": [
+    "Whether price/authority to buy exam points generalizes",
+    "Full all-class grading rules by subject",
+    "Precise test duration and calendar date",
+    "Any constraints on purchasing old examination papers"
+  ],
+  "simulation_policy": "Do not generate executable scoring or hidden knowledge from unsupported mechanics; allow counterfactual study choices.",
+  "schedule_change": {
+    "observed": "The assessed topic range changed and Class D students were informed late after noticing Class C had different expectations; teacher says she forgot",
+    "time": "One week before midterm",
+    "evidence_refs": [
+      "y1v1.ev.131",
+      "y1v1.ev.093",
+      "y1v1.ev.132",
+      "y1v1.ev.133",
+      "y1v1.ev.134"
+    ],
+    "generalization": "Do not assume all classes receive identical advance notices or know late changes; not a universal guaranteed hidden surprise."
+  },
+  "contradictions_to_avoid": [
+    "Admission-based 100,000 allowance is not guaranteed in subsequent months.",
+    "School's class-point formula is not fully disclosed.",
+    "The special 100,000-point grade purchase is not a published right or automatic API."
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.yamawaki",
+  "display_name": "Yamawaki",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+  ],
+  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "Class C",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "social": {
+      "behavioral_case_refs": [
+        "y1v1.case.v.mock-class-d"
+      ],
+      "context_evidence_refs": [
+        "y1v1.ev.091",
+        "y1v1.ev.092",
+        "y1v1.ev.131"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v1.ev.091",
+        "y1v1.ev.131"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v1.ev.092"
+      ]
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": false,
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Confirmed Class C at PDF p.220; previous Class A attribution corrected.",
+  "uncertainties": {
+    "identity_hypothesis_not_confirmed": false,
+    "future_fate_unknown": false
+  },
+  "generation_policy": "Append to global actor pack; no per-volume actor copies",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

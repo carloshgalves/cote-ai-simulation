@@ -1,0 +1,93 @@
+{
+  "schema_version": "canon-institutional-assessment-reference-v1",
+  "id": "assessment.y1v1.classd-50m-swimming",
+  "name": "Class D introductory 50-meter freestyle physical education competition",
+  "institution_id": "org.anhs",
+  "source_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+  "type": "PHYSICAL_EDUCATION_NOT_SPECIAL_EXAM",
+  "rules_observed": {
+    "stroke": "50m freestyle",
+    "female_races": "Two initial groups of five, fastest overall takes prize",
+    "male_races": "Qualifiers and top-five final",
+    "first_place_reward_private_points": 5000,
+    "last_place_consequence": "Supplementary swimming lessons",
+    "participants_observed": "16 boys and 10 girls race after excluding spectators and an unable swimmer",
+    "teacher_authority": "Physical education instructor, not homeroom teacher"
+  },
+  "observed_feats": [
+    {
+      "actor": "actor.suzune-horikita",
+      "time_seconds_approx": 28,
+      "rank": "not women's first overall",
+      "pages": [
+        84
+      ]
+    },
+    {
+      "actor": "actor.onodera",
+      "time_seconds_approx": 26,
+      "rank": "female first overall",
+      "pages": [
+        84
+      ]
+    },
+    {
+      "actor": "actor.kikyo-kushida",
+      "time_seconds_approx": 31,
+      "rank": "fourth in heat",
+      "pages": [
+        84
+      ]
+    },
+    {
+      "actor": "actor.ken-sudo",
+      "time_seconds_approx": 25,
+      "rank": "fast male preliminary",
+      "pages": [
+        85
+      ]
+    },
+    {
+      "actor": "actor.kiyotaka-ayanokoji",
+      "time_seconds_approx": 36,
+      "rank": "approx tenth; intentionally paced",
+      "pages": [
+        85
+      ]
+    },
+    {
+      "actor": "actor.yosuke-hirata",
+      "time_seconds": 26.13,
+      "rank": "qualifying heat winner",
+      "pages": [
+        86
+      ]
+    },
+    {
+      "actor": "actor.rokusuke-koenji",
+      "time_seconds": 23.22,
+      "rank": "qualifying heat winner; then defeats Sudou by approximately five meters in final",
+      "pages": [
+        87,
+        88
+      ]
+    }
+  ],
+  "simulation_cautions": [
+    "Not a repeatable or global special-exam ruleset",
+    "A deliberately constrained swimming time is not peak speed",
+    "Qualifying and final times are distinct; final round stopwatch is not stated"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.036",
+    "y1v1.ev.118",
+    "y1v1.ev.037",
+    "y1v1.ev.119",
+    "y1v1.ev.038",
+    "y1v1.ev.120",
+    "y1v1.ev.039",
+    "y1v1.ev.040",
+    "y1v1.ev.121"
+  ],
+  "record_audit": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+}

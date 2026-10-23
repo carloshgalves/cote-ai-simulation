@@ -1,0 +1,36 @@
+{
+  "id": "y1v1.case.sotomura.covert-observation-plan",
+  "actor_id": "actor.sotomura",
+  "primary_actor_id": "actor.sotomura",
+  "title": "covert observation plan",
+  "context": "Sotomura, nicknamed Professor, agrees to Ike's request for covert observation of female classmates; the later plan fails to yield the intended vantage point.",
+  "observed_actions": "Accepts request to observe schoolmates without consent from elevated pool area",
+  "observed_result": "Plan is thwarted when female students also use upper observation area",
+  "epistemic_limits": "No photography or successful illicit recording confirmed",
+  "source": {
+    "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "pdf_pages": [
+      72
+    ],
+    "chapter": 4,
+    "source_status": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
+  },
+  "other_actors": [
+    "actor.kanji-ike"
+  ],
+  "capabilities_supported": [
+    "social",
+    "observation"
+  ],
+  "information_available": "Only scene-local observed conditions and actor knowledge",
+  "counterfactual_test": "Vary preparation, institution response, social incentives and other agents; no prescribed success",
+  "topics": [
+    "social",
+    "observation"
+  ],
+  "evidence_refs": [
+    "y1v1.ev.115"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING"
+}

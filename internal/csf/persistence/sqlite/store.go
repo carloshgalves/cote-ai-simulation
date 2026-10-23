@@ -153,6 +153,21 @@ CREATE TABLE IF NOT EXISTS source_ingress_receipts (source_id TEXT NOT NULL, ing
 CREATE TABLE IF NOT EXISTS decision_ledger (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS event_store (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS evidence_ledger (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
+CREATE TABLE IF NOT EXISTS cognitive_actor_registry (
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ actor_namespace TEXT NOT NULL,
+ actor_id TEXT NOT NULL,
+ registered_revision INTEGER NOT NULL CHECK(registered_revision>=0),
+ PRIMARY KEY(run_id,actor_namespace,actor_id),
+ FOREIGN KEY(run_id) REFERENCES genesis_records(run_id)
+) STRICT;
+CREATE TABLE IF NOT EXISTS snapshot_cognitive_actors (
+ snapshot_id BLOB NOT NULL CHECK(length(snapshot_id)=32),
+ actor_namespace TEXT NOT NULL,
+ actor_id TEXT NOT NULL,
+ PRIMARY KEY(snapshot_id,actor_namespace,actor_id),
+ FOREIGN KEY(snapshot_id) REFERENCES snapshots(id)
+) STRICT;
 CREATE TABLE IF NOT EXISTS evidence_routes (
  record_id BLOB PRIMARY KEY CHECK(length(record_id)=32),
  run_id BLOB NOT NULL CHECK(length(run_id)=32),
@@ -180,10 +195,71 @@ CREATE TABLE IF NOT EXISTS communication_transmissions (
 ) STRICT;
 CREATE INDEX IF NOT EXISTS idx_communication_transmissions_run
  ON communication_transmissions(run_id,status,id);
+CREATE TABLE IF NOT EXISTS fork_communication_imports (
+ child_transmission_id BLOB PRIMARY KEY CHECK(length(child_transmission_id)=32),
+ child_run_id BLOB NOT NULL CHECK(length(child_run_id)=32),
+ parent_sent_commit_id BLOB NOT NULL CHECK(length(parent_sent_commit_id)=32),
+ canonical BLOB NOT NULL,
+ canonical_hash BLOB NOT NULL CHECK(length(canonical_hash)=32)
+) STRICT;
 CREATE TABLE IF NOT EXISTS causal_outbox (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS world_revisions (revision INTEGER PRIMARY KEY, state_hash BLOB NOT NULL CHECK(length(state_hash)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS cycle_control_state (run_id BLOB PRIMARY KEY CHECK(length(run_id)=32), canonical BLOB NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS snapshots (id BLOB PRIMARY KEY CHECK(length(id)=32), canonical BLOB NOT NULL) STRICT;
+CREATE TABLE IF NOT EXISTS snapshot_seals (
+ snapshot_id BLOB PRIMARY KEY CHECK(length(snapshot_id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ revision INTEGER NOT NULL CHECK(revision>=0),
+ digest BLOB NOT NULL CHECK(length(digest)=32),
+ FOREIGN KEY(snapshot_id) REFERENCES snapshots(id)
+) STRICT;
+CREATE TABLE IF NOT EXISTS snapshot_prefix_members (
+ snapshot_id BLOB NOT NULL CHECK(length(snapshot_id)=32),
+ ledger_name TEXT NOT NULL CHECK(ledger_name IN ('input_ledger','decision_ledger','event_store','evidence_ledger','causal_outbox')),
+ ordinal INTEGER NOT NULL CHECK(ordinal>=0),
+ record_id BLOB NOT NULL CHECK(length(record_id)=32),
+ canonical_hash BLOB NOT NULL CHECK(length(canonical_hash)=32),
+ PRIMARY KEY(snapshot_id,ledger_name,ordinal),
+ FOREIGN KEY(snapshot_id) REFERENCES snapshots(id)
+) STRICT;
+CREATE UNIQUE INDEX IF NOT EXISTS idx_snapshot_prefix_member
+ ON snapshot_prefix_members(snapshot_id,ledger_name,record_id);
+CREATE TABLE IF NOT EXISTS fork_lineage (
+ child_run BLOB PRIMARY KEY CHECK(length(child_run)=32),
+ parent_run BLOB NOT NULL CHECK(length(parent_run)=32),
+ parent_snapshot_id BLOB NOT NULL CHECK(length(parent_snapshot_id)=32),
+ origin_policy_hash BLOB NOT NULL CHECK(length(origin_policy_hash)=32),
+ reference_canonical BLOB NOT NULL,
+ parent_genesis_canonical BLOB NOT NULL,
+ parent_snapshot_canonical BLOB NOT NULL,
+ FOREIGN KEY(child_run) REFERENCES genesis_records(run_id)
+) STRICT;
+CREATE TABLE IF NOT EXISTS fork_history_records (
+ child_run BLOB NOT NULL CHECK(length(child_run)=32),
+ ledger_name TEXT NOT NULL CHECK(ledger_name IN ('input_ledger','decision_ledger','event_store','evidence_ledger','causal_outbox')),
+ ordinal INTEGER NOT NULL CHECK(ordinal>=0),
+ record_id BLOB NOT NULL CHECK(length(record_id)=32),
+ canonical BLOB NOT NULL,
+ PRIMARY KEY(child_run,ledger_name,ordinal),
+ FOREIGN KEY(child_run) REFERENCES fork_lineage(child_run)
+) STRICT;
+CREATE UNIQUE INDEX IF NOT EXISTS idx_fork_history_identity
+ ON fork_history_records(child_run,ledger_name,record_id);
+CREATE TABLE IF NOT EXISTS fork_history_roots (
+ child_run BLOB NOT NULL CHECK(length(child_run)=32),
+ reference_kind INTEGER NOT NULL CHECK(reference_kind BETWEEN 0 AND 27),
+ record_id BLOB NOT NULL CHECK(length(record_id)=32),
+ canonical BLOB NOT NULL,
+ PRIMARY KEY(child_run,reference_kind,record_id),
+ FOREIGN KEY(child_run) REFERENCES fork_lineage(child_run)
+) STRICT;
+CREATE TABLE IF NOT EXISTS fork_occurrence_imports (
+ child_run BLOB NOT NULL CHECK(length(child_run)=32),
+ parent_occurrence_id BLOB NOT NULL CHECK(length(parent_occurrence_id)=32),
+ canonical BLOB NOT NULL,
+ PRIMARY KEY(child_run,parent_occurrence_id),
+ FOREIGN KEY(child_run) REFERENCES fork_lineage(child_run)
+) STRICT;
 CREATE TABLE IF NOT EXISTS clock_states (
  run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
  canonical BLOB NOT NULL
@@ -365,6 +441,12 @@ func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundG
 	tx, err := s.db.BeginTx(ctx,nil)
 	if err!=nil { return err }
 	defer tx.Rollback()
+ if round==nil{
+  decoded,err:=codec.StrictDecodePayload(record.Canonical);if err!=nil{return err}
+  fields,ok:=decoded.([]any);if !ok||len(fields)!=3{return errors.New("source declaration malformed")}
+  source,ok:=fields[2].(string);if !ok{return errors.New("source declaration ID malformed")}
+  if err:=rejectForkFinalSourceReopening(ctx,tx,runID,source);err!=nil{return err}
+ }
  if round!=nil{
   at:=domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(round.instant),NotBeforeCycleOrdinal:domain.CycleOrdinal(round.ordinal)}
   if err:=verifyIngressClockFloor(ctx,tx,runID,at);err!=nil{return err}
@@ -380,12 +462,11 @@ func (s *Store) guardedAppend(ctx context.Context, runID [32]byte, round *roundG
 		// CycleCommit lives in decision_ledger too; it is NOT an admission
 		// fence and must never be mistaken for a causal seal.
 		if !ok {rows.Close();return errors.New("invalid decision record body")}
-		// Published terminal journal records (commit, abort, retry) and
-		// candidate audit roots are not admission fences. Their canonical
-		// identities are checked at their individual transaction insertion
-		// gates, and they cannot widen the previous input cut.
-		if len(body)==24||len(body)==16||len(body)==15||len(body)==7||len(body)==17 {continue}
-		if len(body)!=18 && len(body)!=6 {rows.Close();return errors.New("unknown decision record in admission guard")}
+        // All prior decision, contest, PRNG and completion proofs remain
+        // independently replay-checked. Only actual AdmissionFence shapes
+        // seal an input coordinate; those other records must not make the
+        // next round undecidable after a successfully committed WORK cycle.
+        if len(body)!=18 && len(body)!=6 {continue}
 		fenceRun,ok:=body[0].([]byte)
 		if !ok || len(fenceRun)!=32 {rows.Close();return errors.New("invalid persisted fence run")}
 		if !bytes.Equal(fenceRun,runID[:]) {continue}
@@ -632,8 +713,13 @@ func (s *Store) AppendIngress(ctx context.Context, source string, sequence uint6
 		if err!=nil {seals.Close();return err}
 		body,ok:=fields.([]any)
 		if !ok {seals.Close();return errors.New("invalid decision ledger record")}
-		if len(body)==24 {continue} // A CycleCommit is not a fence.
-		if len(body)!=18 && len(body)!=6 {seals.Close();return errors.New("unknown decision record kind")}
+        // The ingress barrier concerns only AdmissionFence records.
+        // Other canonical decision records (proofs, dispositions, journals,
+        // conflict/PRNG evidence) neither seal an input cut nor authorize
+        // changing one. Their contents are independently reconciled during
+        // causal replay and before any terminal commit. Do not interpret
+        // an unrelated decision as a fence based on its mere existence.
+        if len(body)!=18 && len(body)!=6 {continue}
 		sealedRun,cut,err:=ingressguard.FenceCoordinate(fence)
 		if err!=nil {seals.Close();return err}
 		if err:=ingressguard.Check(entry,sealedRun,cut);err!=nil {seals.Close();return err}

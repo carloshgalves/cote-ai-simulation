@@ -141,7 +141,7 @@ func validateCausalIngress(ctx context.Context,q ingressQuery,source string,seq 
   kind=1
   derived,err=registeredDigest("cote.csf.id.exogenous-input","cote.csf.schema.exogenous-input-id-preimage",[]any{f[1],f[2],f[3]})
   if err!=nil{return err}
-  digest,err=registeredDigest("cote.csf.digest.exogenous-input-unit","cote.csf.schema.exogenous-input.body",[]any{f[:12]})
+  digest,err=registeredDigest("cote.csf.digest.exogenous-input-unit","cote.csf.schema.exogenous-input.body",f[:12])
   if err!=nil{return err}
   if !equalBytes(f[12],digest[:]){return errors.New("source input unit digest mismatch")}
  case 7:

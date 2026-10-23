@@ -10,7 +10,6 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
@@ -100,8 +99,7 @@ func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte,replayRev
 func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bundle)(ClockReplayReport,error){
  var report ClockReplayReport
  if bundle==nil{return report,errors.New("replay requires pinned bundle")}
- graw,err:=s.LoadGenesis(ctx,runID);if err!=nil{return report,err}
- genesisRoot,err:=genesis.ValidateCanonical(graw,bundle);if err!=nil{return report,err}
+ genesisRoot,err:=s.ValidatedGenesis(ctx,runID,bundle);if err!=nil{return report,err}
  if [32]byte(genesisRoot.RunID)!=runID{return report,errors.New("genesis run mismatch")}
  if err:=verifyCascadePolicy(ctx,s.db,runID);err!=nil{return report,err}
  report.GenesisID=genesisRoot.ID
@@ -211,6 +209,13 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
   // the earliest persisted pending before its terminal advance.
   original,err:=s.replayAdvanceInputs(ctx,runID,uint64(current.Revision))
   if err!=nil{return report,err}
+  // The durable cache already contains the post-advance cadence. Planning
+  // this historical transition must use the runtime folded up to its base.
+  for id,state:=range runtime{
+   if state.HasNextRepeat{
+    original=append(original,clock.Pending{ID:id,Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:state.NextRepeat}})
+   }
+  }
   selected,has,err:=clock.Next(current,original)
   if err!=nil{return report,fmt.Errorf("replay has stale pre-advance pending: %w",err)}
   if !has||selected!=plan{return report,errors.New("replay target differs from authoritative pending minimum")}

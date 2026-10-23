@@ -52,7 +52,7 @@ func noProposalWorkFixtureWithDelivery(t *testing.T,setup func(*sqlite.Store,dom
    []any{dispatch.ID[:],uint64(1)});if err!=nil{t.Fatal(err)}
   body:=[]any{id[:],dispatch.ID[:],run[:],cycleID[:],round.ID[:],dispatch.SlotID,
    []any{dispatch.Actor[0],dispatch.Actor[1]},int64(dispatch.EffectiveAt),uint64(dispatch.BaseRevision),uint64(0)}
-  digest,_,err:=d.Sum("cote.csf.digest.no-proposal-unit","cote.csf.schema.no-proposal.body",1,[]any{body})
+  digest,_,err:=d.Sum("cote.csf.digest.no-proposal-unit","cote.csf.schema.no-proposal.body",1,body)
   if err!=nil{t.Fatal(err)}
   canonical,err:=codec.CanonicalPayload(append(cloneAny(body),digest[:]));if err!=nil{t.Fatal(err)}
   response:=inputledger.Response{Kind:1,ID:domain.ID(id),Digest:digest,Canonical:canonical,Body:body,
@@ -327,7 +327,7 @@ func TestReplayClockAdvanceThenNoProposalWorkInOneDurableHistory(t *testing.T){
   []any{dispatch.ID[:],uint64(1)});if err!=nil{t.Fatal(err)}
  fields:=[]any{unitID[:],dispatch.ID[:],run[:],cycleID[:],round.ID[:],dispatch.SlotID,
   []any{dispatch.Actor[0],dispatch.Actor[1]},int64(dispatch.EffectiveAt),uint64(dispatch.BaseRevision),uint64(0)}
- dig,_,err:=d.Sum("cote.csf.digest.no-proposal-unit","cote.csf.schema.no-proposal.body",1,[]any{fields})
+ dig,_,err:=d.Sum("cote.csf.digest.no-proposal-unit","cote.csf.schema.no-proposal.body",1,fields)
  if err!=nil{t.Fatal(err)}
  canonical,err:=codec.CanonicalPayload(append(cloneAny(fields),dig[:]));if err!=nil{t.Fatal(err)}
  response:=inputledger.Response{Kind:1,ID:domain.ID(unitID),Digest:dig,Canonical:canonical,Body:fields,

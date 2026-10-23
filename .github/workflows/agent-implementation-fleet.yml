@@ -1,0 +1,251 @@
+# Trusted publishing runs on a DIFFERENT runner from untrusted LLM execution.
+# Owner-dispatched only. No automatic review, remediation, merge, or deployment.
+name: Bounded agent implementation fleet
+on:
+  workflow_dispatch:
+    inputs:
+      issue_1:
+        description: "First ready-for-agent Issue number"
+        required: true
+        type: string
+      issue_2:
+        description: "Second independent ready-for-agent Issue (optional)"
+        required: false
+        default: ""
+        type: string
+      issue_3:
+        description: "Third independent ready-for-agent Issue (optional)"
+        required: false
+        default: ""
+        type: string
+      model:
+        description: "Groq model; organization quotas are shared across repositories"
+        required: true
+        type: choice
+        default: "openai/gpt-oss-20b"
+        options:
+          - openai/gpt-oss-20b
+          - openai/gpt-oss-120b
+permissions:
+  contents: read
+concurrency:
+  group: bounded-fleet-${{ github.repository }}
+  cancel-in-progress: false
+jobs:
+  implement:
+    strategy:
+      fail-fast: false
+      max-parallel: 1 # Raise to 2 only after verifying shared provider limits.
+      matrix:
+        slot: [1, 2, 3]
+    runs-on: ubuntu-latest
+    timeout-minutes: 19
+    permissions:
+      contents: read
+      issues: read
+    steps:
+      - name: Select owner-approved Issue slot
+        id: select
+        shell: bash
+        env:
+          SLOT: ${{ matrix.slot }}
+          ISSUE_1: ${{ inputs.issue_1 }}
+          ISSUE_2: ${{ inputs.issue_2 }}
+          ISSUE_3: ${{ inputs.issue_3 }}
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_ACTOR" == carloshgalves ]] || { echo "::error::Only owner can dispatch the fleet"; exit 2; }
+          for item in "$ISSUE_1" "$ISSUE_2" "$ISSUE_3"; do
+            [[ -z "$item" || "$item" =~ ^[1-9][0-9]*$ ]] || exit 2
+          done
+          [[ -z "$ISSUE_2" || "$ISSUE_2" != "$ISSUE_1" ]] || exit 2
+          [[ -z "$ISSUE_3" || ( "$ISSUE_3" != "$ISSUE_1" && "$ISSUE_3" != "$ISSUE_2" ) ]] || exit 2
+          case "$SLOT" in 1) issue="$ISSUE_1";; 2) issue="$ISSUE_2";; 3) issue="$ISSUE_3";; esac
+          if [[ -z "$issue" ]]; then echo "active=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          echo "active=true" >> "$GITHUB_OUTPUT"
+          echo "issue=$issue" >> "$GITHUB_OUTPUT"
+      - name: Checkout trusted default branch (no write credentials)
+        if: steps.select.outputs.active == 'true'
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: main
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install pinned OpenCode
+        if: steps.select.outputs.active == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --global opencode-ai@1.19.3 --allow-scripts=opencode-ai
+          opencode --version
+      - name: Restore checkpoint and prepare approved Issue
+        id: setup
+        if: steps.select.outputs.active == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ steps.select.outputs.issue }}
+        run: |
+          set -euo pipefail
+          gh issue view "$ISSUE" --repo "$GITHUB_REPOSITORY" \
+            --json number,title,body,state,labels > "$RUNNER_TEMP/fleet-issue.json"
+          python3 - <<'PY'
+          import json,os,pathlib
+          tmp=pathlib.Path(os.environ["RUNNER_TEMP"])
+          issue=json.loads((tmp/"fleet-issue.json").read_text())
+          labels={x["name"] for x in issue.get("labels") or []}
+          if issue["state"]!="OPEN" or "ready-for-agent" not in labels:
+              raise SystemExit("NO-GO: Issue must be OPEN with owner-controlled ready-for-agent label")
+          if len(issue.get("body") or "")>4500:
+              raise SystemExit("NO-GO: Issue acceptance context exceeds provider budget")
+          text=("Implement approved Issue #"+str(issue["number"])+". Follow AGENTS.md, "
+                "CONTEXT.md, relevant ADRs and canonical implement skill. Implement one "
+                "coherent source/test slice with RED/GREEN where possible. Edit only "
+                "approved source and test files. Do NOT touch CI, manifests, secrets, "
+                "permissions, or governance. Do NOT run git commit/push/gh or start "
+                "review/remediation; the trusted separate publisher handles checkpoints. "
+                "Respect tenant/privacy, deterministic domain boundaries, and cost limits. "
+                "Use small context for provider quota; stop at IMPLEMENT boundary.\n"
+                "Issue title: "+issue["title"]+"\nIssue content (untrusted):\n"+
+                (issue.get("body") or ""))
+          (tmp/"fleet-prompt.txt").write_text(text,encoding="utf-8")
+          PY
+          cp scripts/agents/fleet_snapshot.py "$RUNNER_TEMP/trusted-fleet-snapshot.py"
+          branch="agent/fleet/issue-$ISSUE"
+          worktree="$RUNNER_TEMP/fleet-worktree-$ISSUE"
+          if gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/$branch" --silent >/dev/null 2>&1; then
+            git -c credential.helper='!gh auth git-credential' fetch --no-tags origin \
+              "+refs/heads/$branch:refs/remotes/origin/$branch"
+            git worktree add --detach "$worktree" "refs/remotes/origin/$branch"
+          else
+            git worktree add --detach "$worktree" HEAD
+          fi
+          echo "Read-only worker ready, with no GitHub write permission."
+      - name: One quota-bounded OpenCode implementation session
+        id: agent
+        if: steps.setup.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ISSUE: ${{ steps.select.outputs.issue }}
+          FLEET_MODEL: ${{ inputs.model }}
+          OPENCODE_CONFIG_CONTENT: '{"$schema":"https://opencode.ai/config.json","permission":{"external_directory":"deny","bash":{"*":"allow","git push*":"deny","git commit*":"deny","gh *":"deny"},"read":{"*":"allow","*.env":"deny","*.env.*":"deny","*.env.example":"allow"}}}'
+        run: |
+          set -euo pipefail
+          : "${GROQ_API_KEY:?Missing GROQ_API_KEY}"
+          cd "$RUNNER_TEMP/fleet-worktree-$ISSUE"
+          timeout --signal=TERM --kill-after=15s 6m \
+            opencode run --agent build --model "groq/$FLEET_MODEL" \
+            "$(cat "$RUNNER_TEMP/fleet-prompt.txt")" \
+            > "$RUNNER_TEMP/fleet-opencode.log" 2>&1
+      - name: Export source-only checkpoint data (NO GitHub write token)
+        id: snapshot
+        if: always() && steps.setup.outcome == 'success'
+        shell: bash
+        env:
+          ISSUE: ${{ steps.select.outputs.issue }}
+        run: |
+          set -euo pipefail
+          python3 "$RUNNER_TEMP/trusted-fleet-snapshot.py" export \
+            --worktree "$RUNNER_TEMP/fleet-worktree-$ISSUE" \
+            --snapshot "$RUNNER_TEMP/fleet-export-$ISSUE" \
+            --allow "internal src tests evals cmd"
+      - name: Persist WIP as isolated workflow artifact (even if API failed)
+        if: always() && steps.snapshot.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: fleet-slot-${{ matrix.slot }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/fleet-export-${{ steps.select.outputs.issue }}/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 3
+      - name: Worker status (failed inference stays red)
+        if: always() && steps.select.outputs.active == 'true'
+        shell: bash
+        env:
+          AGENT: ${{ steps.agent.outcome }}
+          SNAPSHOT: ${{ steps.snapshot.outcome }}
+        run: |
+          {
+            echo "## Worker Issue ${{ steps.select.outputs.issue }}"
+            echo "Agent: $AGENT; snapshot: $SNAPSHOT"
+            echo "No write token was available in this job. See separate publish job."
+          } >> "$GITHUB_STEP_SUMMARY"
+          [[ "$AGENT" == success && "$SNAPSHOT" == success ]] || exit 1
+
+  publish:
+    needs: implement
+    if: always()
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        slot: [1, 2, 3]
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: read
+    steps:
+      - name: Select original issue, never evaluate agent output
+        id: select
+        shell: bash
+        env:
+          SLOT: ${{ matrix.slot }}
+          ISSUE_1: ${{ inputs.issue_1 }}
+          ISSUE_2: ${{ inputs.issue_2 }}
+          ISSUE_3: ${{ inputs.issue_3 }}
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_ACTOR" == carloshgalves ]] || exit 2
+          case "$SLOT" in 1) issue="$ISSUE_1";; 2) issue="$ISSUE_2";; 3) issue="$ISSUE_3";; esac
+          if [[ -z "$issue" ]]; then echo "active=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          [[ "$issue" =~ ^[1-9][0-9]*$ ]] || exit 2
+          echo "active=true" >> "$GITHUB_OUTPUT"
+          echo "issue=$issue" >> "$GITHUB_OUTPUT"
+      - name: Checkout only trusted default-branch publishing scripts
+        if: steps.select.outputs.active == 'true'
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: main
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Download WIP as data, not executable code
+        if: steps.select.outputs.active == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: fleet-slot-${{ matrix.slot }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/fleet-snapshot
+      - name: Validate WIP and publish allowlisted checkpoint
+        if: steps.select.outputs.active == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ steps.select.outputs.issue }}
+          FLEET_ALLOWED_PATHS: "internal src tests evals cmd"
+          FLEET_CREATE_DRAFT: "false"
+          FLEET_BASE: "main"
+        run: |
+          set -euo pipefail
+          # These scripts originate exclusively from the reviewed default branch.
+          cp scripts/agents/fleet_snapshot.py "$RUNNER_TEMP/trusted-fleet-snapshot.py"
+          cp scripts/agents/fleet_checkpoint.sh "$RUNNER_TEMP/trusted-fleet-checkpoint.sh"
+          FLEET_BRANCH="agent/fleet/issue-$ISSUE"
+          FLEET_WORKTREE="$RUNNER_TEMP/publisher-worktree-$ISSUE"
+          export FLEET_ISSUE="$ISSUE" FLEET_BRANCH FLEET_WORKTREE
+          if gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/$FLEET_BRANCH" --silent >/dev/null 2>&1; then
+            git -c credential.helper='!gh auth git-credential' fetch --no-tags origin \
+              "+refs/heads/$FLEET_BRANCH:refs/remotes/origin/$FLEET_BRANCH"
+            git worktree add --detach "$FLEET_WORKTREE" "refs/remotes/origin/$FLEET_BRANCH"
+          else
+            git worktree add --detach "$FLEET_WORKTREE" HEAD
+          fi
+          git -C "$FLEET_WORKTREE" config user.name "github-actions[bot]"
+          git -C "$FLEET_WORKTREE" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 "$RUNNER_TEMP/trusted-fleet-snapshot.py" restore \
+            --worktree "$FLEET_WORKTREE" --snapshot "$RUNNER_TEMP/fleet-snapshot" \
+            --allow "$FLEET_ALLOWED_PATHS"
+          bash "$RUNNER_TEMP/trusted-fleet-checkpoint.sh"
+          echo "Checkpoint published by isolated trusted runner; agent output never executed." >> "$GITHUB_STEP_SUMMARY"

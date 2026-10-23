@@ -13,6 +13,8 @@ Antes de alterar arquitetura, domínio ou comportamento de agentes:
 
 A pasta `.agents/skills/` é a fonte canônica das skills do projeto.
 
+Para planejar gates, paralelização segura e handoffs de implementação, use `delivery-pipeline` (`docs/agents/implementation-pipeline.md`); ele não autoriza transições automáticas entre fases.
+
 ## Fluxo de implementação e revisão
 
 Use três fases separadas; não misture responsabilidades entre elas:

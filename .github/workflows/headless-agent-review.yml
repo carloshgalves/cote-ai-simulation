@@ -1,0 +1,105 @@
+# Manual-only, quota-bounded read-only analysis of a committed PR.
+# This is NOT the canonical code-review phase and cannot authorize merge.
+name: Agent headless PR review
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "Existing PR number"
+        required: true
+        type: string
+      issue_number:
+        description: "Accepted source Issue containing acceptance criteria"
+        required: true
+        type: string
+      model:
+        description: "Groq model (must be allowlisted by review client)"
+        required: true
+        default: "openai/gpt-oss-20b"
+        type: choice
+        options:
+          - openai/gpt-oss-20b
+          - openai/gpt-oss-120b
+permissions:
+  contents: read
+concurrency:
+  group: headless-review-${{ inputs.pr_number }}
+  cancel-in-progress: false
+jobs:
+  candidates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+      issues: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Collect immutable PR/Issue context (do not execute PR code)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ inputs.pr_number }}
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+        run: |
+          set -euo pipefail
+          [[ "$PR_NUMBER" =~ ^[1-9][0-9]*$ && "$ISSUE_NUMBER" =~ ^[1-9][0-9]*$ ]] || exit 2
+          gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" \
+            --json number,title,body,headRefOid,headRefName,baseRefName,isDraft,state > "$RUNNER_TEMP/pr.json"
+          gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" \
+            --json number,title,body,state > "$RUNNER_TEMP/issue.json"
+          gh pr diff "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" > "$RUNNER_TEMP/full.diff"
+          python3 - <<'PY'
+          import json,os,pathlib
+          tmp=pathlib.Path(os.environ["RUNNER_TEMP"])
+          pr=json.loads((tmp/"pr.json").read_text())
+          issue=json.loads((tmp/"issue.json").read_text())
+          if pr["state"]!="OPEN" or issue["state"]!="OPEN":
+              raise SystemExit("PR and source Issue must be open")
+          diff=(tmp/"full.diff").read_text()
+          if not diff.startswith("diff --git ") or len(diff)>12000:
+              raise SystemExit("Full PR diff too large or unavailable: refusing partial review")
+          spec=issue.get("body") or ""
+          if len(spec)>4000:
+              raise SystemExit("Issue acceptance text too large for this bounded run")
+          policy=pathlib.Path("AGENTS.md").read_text()[:2500]
+          data={"pr_title":pr["title"],"pr_head":pr["headRefOid"],"issue_title":issue["title"],
+                "issue_body":spec,"agent_policy":policy,"diff":diff}
+          (tmp/"review-context.json").write_text(json.dumps(data))
+          print("Review context prepared for immutable PR HEAD",pr["headRefOid"],"; complete diff length",len(diff))
+          PY
+      - name: Ask read-only AI reviewer (no GitHub write token)
+        shell: bash
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          REVIEW_MODEL: ${{ inputs.model }}
+          REVIEW_CONTEXT: ${{ runner.temp }}/review-context.json
+          REVIEW_OUTPUT: ${{ runner.temp }}/review.md
+        run: python3 scripts/agents/headless_review.py
+      - name: Publish unverified candidate report only if HEAD is unchanged
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ inputs.pr_number }}
+        run: |
+          set -euo pipefail
+          original="$(python3 -c 'import json,os,pathlib;print(json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"review-context.json").read_text())["pr_head"])')"
+          current="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json headRefOid --jq .headRefOid)"
+          [[ "$original" == "$current" ]] || { echo "::error::PR HEAD changed, refusing stale review"; exit 1; }
+          already="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json comments --jq '.comments[].body' | grep -F -A 3 'ai-headless-review:v1' | grep -F "$original" || true)"
+          if [[ -n "$already" ]]; then
+            echo "AI candidate review for this HEAD already posted, skipping duplicate."
+          else
+            gh pr comment "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/review.md"
+          fi
+          echo "Unverified AI candidates published; canonical independent review still required." >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: headless-review-candidates
+          path: ${{ runner.temp }}/review.md
+          if-no-files-found: ignore
+          retention-days: 7

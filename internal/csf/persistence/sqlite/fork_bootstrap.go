@@ -262,12 +262,15 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  }
  var migratedRounds []forkGenesisRound
  var migratedSlots []forkSlotRecord
+ var historicalRoots []forkHistoricalRoot
  if crossPolicy{
   archive:=forkHistoryArchive{}
   for _,name:=range snapshotLedgerNames{
    records,err:=s.snapshotRoundLedgerRecords(ctx,parentSnapshotID,name);if err!=nil{return nil,err}
    archive[name]=records
   }
+  historicalRoots,err=prepareNativeRoundIntentions(ctx,s,parent,snapshot,archive,origin)
+  if err!=nil{return nil,fmt.Errorf("V2 native intention history: %w",err)}
   migratedRounds,migratedSlots,err=migrateRoundHistoryV2(parent,childGenesis,snapshot,archive,origin,childPolicy)
   if err!=nil{return nil,fmt.Errorf("V2 round history migration: %w",err)}
  }else{
@@ -310,7 +313,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   "input_ledger","decision_ledger","event_store","evidence_ledger","causal_outbox",
   "input_source_cursors","source_ingress_receipts","input_slot_responses","round_integrity_seals",
   "cognitive_actor_registry","snapshot_cognitive_actors","evidence_routes",
-  "communication_claims","communication_transmissions","fork_communication_imports","cycle_control_state",
+  "communication_claims","communication_transmissions","fork_communication_imports","fork_history_roots","cycle_control_state",
   "committed_cycles","fork_lineage","fork_history_records","snapshots","snapshot_seals",
   "snapshot_prefix_members","genesis_schedule_seals","scheduled_occurrences",
   "trigger_registry_seals","trigger_definitions","trigger_runtime","trigger_activations"}{
@@ -347,6 +350,10 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
    if _,err:=tx.ExecContext(ctx,"INSERT INTO fork_history_records(child_run,ledger_name,ordinal,record_id,canonical) VALUES(?,?,?,?,?)",
     childRun[:],name,ordinal,record.id,record.canonical);err!=nil{return nil,err}
   }
+ }
+ for _,root:=range historicalRoots{
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO fork_history_roots(child_run,reference_kind,record_id,canonical) VALUES(?,?,?,?)",
+   childRun[:],root.Kind,root.Identity[:],root.Canonical);err!=nil{return nil,err}
  }
  emptyClock:=clock.State{Instant:childGenesis.InitialInstant,LastOrdinal:-1}
  clockRaw,err:=clock.Encode(emptyClock);if err!=nil{return nil,err}

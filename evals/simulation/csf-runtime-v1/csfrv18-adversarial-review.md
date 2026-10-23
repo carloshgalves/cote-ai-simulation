@@ -204,3 +204,14 @@ mantêm a capability após reopen SQLite e aceitam resposta/replay. A fixture de
 revogação antiga semeia explicitamente o recibo legado já extinto; não usa mais a
 API pública para autorizar um request prematuro. A correção não retima resposta
 antiga nem inventa NoProposal.
+
+A extensão seguinte de R19 arquiva as raízes nativas Occurrence/TriggerActivation
+referenciadas pelas respostas migradas. A prova exige a referência exata no
+pending-state ou fence congelado, rederiva ID/digest V1 e resolve a origem causal.
+A bijeção entre refs necessárias e proofs impede perda, troca de tipo e raízes
+extras. O teste de ambas as classes parte de autoridade SQLite real e cobre
+falha de INSERT da proof com rollback integral/retry, reopen, replay, corrupção
+do digest embutido e remoção da raiz. O digest embutido teve RED próprio antes da
+comparação explícita. A proof histórica não é autoridade viva do filho.
+Raízes de intenção Claim/Transmission e checkpoints históricos fora do corte
+corrente ainda requerem extensão; R20–R23 e OPEN-02/OPEN-05 seguem pendentes.

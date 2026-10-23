@@ -42,8 +42,13 @@ func r19Source(t *testing.T) (*sqlite.Store, *policy.Bundle, domain.ID, sqlite.S
 }
 func r19SourceWithAction(t *testing.T, action bool, intention ...any) (*sqlite.Store, *policy.Bundle, domain.ID, sqlite.SnapshotV1) {
 	t.Helper()
-	ctx := context.Background()
 	parent, ledger, v1, run, origin := csfrv18GenesisRoundSource(t)
+	return r19SourceWithActionOn(t, parent, ledger, v1, run, origin, action, intention...)
+}
+
+func r19SourceWithActionOn(t *testing.T, parent *sqlite.Store, ledger *inputledger.Ledger, v1 *policy.Bundle, run domain.ID, origin []any, action bool, intention ...any) (*sqlite.Store, *policy.Bundle, domain.ID, sqlite.SnapshotV1) {
+	t.Helper()
+	ctx := context.Background()
 	state, err := parent.LoadClock(ctx, [32]byte(run))
 	if err != nil {
 		t.Fatal(err)
@@ -76,6 +81,9 @@ func r19SourceWithAction(t *testing.T, action bool, intention ...any) (*sqlite.S
 					}
 					if build, ok := intention[0].(func(inputledger.Round, inputledger.Dispatch) any); ok {
 						response.Body[16] = build(round, d)
+					}
+					if build, ok := intention[0].(func(*sqlite.Store, *policy.Bundle, []any) any); ok {
+						response.Body[16] = build(parent, v1, origin)
 					}
 				}
 			}

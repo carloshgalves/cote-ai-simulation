@@ -27,6 +27,17 @@ these archives require their own historical proof and fail closed while unavaila
 An earlier unrevoked request cannot
 be retimed or granted a new authorization by this migrator.
 
+Occurrence and TriggerActivation intention roots have an additional immutable
+`fork_history_roots` archive. Their exact source ID/digest must be bound by the
+snapshot's pending projection or an archived admission fence. The source record's
+ID preimage, computed and embedded digests, run, and Genesis/Event/input or cycle
+origin are authenticated under V1. Only roots referenced by migrated responses
+are admitted; missing, altered, retyped or extra proofs fail closed. These rows
+are historical provenance and are never scheduled in the child. The independent
+pending-work migrators still derive the child's live occurrence/activation IDs.
+The root archive is published in the same transaction as Genesis and the five
+ledger archives; an injected root-insert fault rolls back the complete birth.
+
 New source dispatches must target a round whose eligibility has been reached at
 the authoritative current instant/next ordinal. The SQLite transaction enforces
 this for both RegisterDispatch and generic Append. Legacy revoked receipts may

@@ -245,6 +245,14 @@ CREATE TABLE IF NOT EXISTS fork_history_records (
 ) STRICT;
 CREATE UNIQUE INDEX IF NOT EXISTS idx_fork_history_identity
  ON fork_history_records(child_run,ledger_name,record_id);
+CREATE TABLE IF NOT EXISTS fork_history_roots (
+ child_run BLOB NOT NULL CHECK(length(child_run)=32),
+ reference_kind INTEGER NOT NULL CHECK(reference_kind BETWEEN 0 AND 27),
+ record_id BLOB NOT NULL CHECK(length(record_id)=32),
+ canonical BLOB NOT NULL,
+ PRIMARY KEY(child_run,reference_kind,record_id),
+ FOREIGN KEY(child_run) REFERENCES fork_lineage(child_run)
+) STRICT;
 CREATE TABLE IF NOT EXISTS clock_states (
  run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
  canonical BLOB NOT NULL

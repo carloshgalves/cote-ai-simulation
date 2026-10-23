@@ -73,7 +73,10 @@ func authenticateArchivedCausalRef(ref []any, parent *genesis.Genesis, snapshot 
 	}
 	root := strings.TrimPrefix(rule["persisted_root"].(string), "cote.csf.schema.")
 	var candidates []ports.CanonicalRecord
-	for _, records := range archive {
+	for ledger, records := range archive {
+		if strings.HasPrefix(ledger, "native:") && ledger != nativeArchiveKey(kind) {
+			continue
+		}
 		for _, record := range records {
 			if bytes.Equal(record.Identity[:], id) {
 				candidates = append(candidates, record)
@@ -201,6 +204,12 @@ func authenticateArchivedCausalRef(ref []any, parent *genesis.Genesis, snapshot 
 	wantDigest, _, err := identity.New(bundle).Sum(digestRule["operation"].(string), digestRule["preimage_schema"].(string), 1, body)
 	if err != nil || !bytes.Equal(digest, wantDigest[:]) {
 		return errors.New("historical causal root digest differs")
+	}
+	if digestRule["preimage_schema"] != rule["persisted_root"] && !equalBytes(fields[len(fields)-1], digest) {
+		return errors.New("historical root embedded digest differs from authenticated reference")
+	}
+	if kind == 6 || kind == 7 {
+		return authenticateNativeRootAtCut(kind, ref, fields, parent, snapshot, archive, bundle)
 	}
 	return nil
 }

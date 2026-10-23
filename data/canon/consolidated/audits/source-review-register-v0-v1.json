@@ -29,7 +29,7 @@
   "review_states": {
     "record_level_assistant_pass": 268,
     "record_level_pending": 0,
-    "case_level_assistant_pass": 74,
+    "case_level_assistant_pass": 75,
     "case_level_pending": 0,
     "operator_verified_records": 0,
     "operator_verified_cases": 0
@@ -5647,6 +5647,19 @@
   ],
   "cases": [
     {
+      "case_id": "v0.case.arisu.nature-nurture-hypothesis",
+      "case_file": "data/canon/consolidated/behavioral_cases/arisu-sakayanagi/arisu--nature-nurture-hypothesis.json",
+      "source_case_owner_id": "actor.arisu-sakayanagi",
+      "verification": "EVIDENCE_LINKAGE_VALIDATED_BY_CANON_CONSOLIDATED_CI",
+      "semantic_adjudication": "ASSISTANT_DIRECT_CASE_REVIEW_PASS",
+      "verified": false,
+      "reviewed_by": "ASSISTANT",
+      "semantic_decision": "ACTOR_OWNED_CONTEXT_ACTION_RESULT_SCOPED",
+      "review_basis": "Source pp172–176 directly attributes the hypothesis to Arisu and preserves competing uncertainty.",
+      "semantic_specific_finding": "Restored a misattributed reasoning feat to the primary speaker rather than attributing it to Sakayanagi father.",
+      "revision_date": "2026-10-23"
+    },
+    {
       "case_id": "v0.case.atsuomi.beta-authorization",
       "case_file": "data/canon/consolidated/behavioral_cases/atsuomi-ayanokoji/atsuomi--beta-authorization.json",
       "source_case_owner_id": "actor.atsuomi-ayanokoji",
@@ -6623,7 +6636,8 @@
       "reason": "No independently observed decision/feat by Kijima; a political factional trend is not a behavioral demonstration.",
       "resolution": "Excluded case from primary-actor behavioral index; narrative evidence remains in contextual topics.",
       "reviewer": "ASSISTANT",
-      "date": "2026-10-23"
+      "date": "2026-10-23",
+      "replacement_case_id": "v0.case.arisu.nature-nurture-hypothesis"
     }
   ]
 }

@@ -9,7 +9,7 @@ idx=J(B/"indexes/character-topic-map.json")
 a={x["id"]:x for x in r["records"]}
 assert len(e)==len(a)==268
 assert set(a)=={x["id"] for x in e}
-assert len(r["cases"])==len(idx["behavioral_case_paths"])==74
+assert len(r["cases"])==len(idx["behavioral_case_paths"])==75
 assert {c["case_id"] for c in r["cases"]}==set(idx["behavioral_case_paths"])
 assert r["global_promotion"]=="BLOCKED_PENDING_OPERATOR_RELEASE_APPROVAL"
 assert all(x["adjudication"]=="ASSISTANT_DIRECT_SOURCE_REVIEW_PASS" and x["verified"] is False for x in r["records"])
@@ -30,6 +30,7 @@ for folder in ("characters", "institutions"):
     for packfile in (B/folder).glob("*.json"):
         record=J(packfile)
         assert all("/volume0/" not in path for path in record.get("source_documents", [])), packfile
+assert "v0.case.arisu.nature-nurture-hypothesis" in idx["behavioral_case_paths"]
 assert "v0.case.kijima.public-profile" not in idx["behavioral_case_paths"]
 assert "v0.case.kijima.public-profile" not in str(idx["behavioral_by_actor_topic"]["actor.kijima"])
 assert J(B/"sources/volume0.json")["record_audit"]=="ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_RELEASE_PENDING"

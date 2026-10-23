@@ -17,6 +17,7 @@
       "topics": [
         "academic_reasoning",
         "institution",
+        "observation",
         "social"
       ]
     },
@@ -1767,9 +1768,11 @@
     },
     "actor.arisu-sakayanagi": {
       "academic_reasoning": [
+        "v0.case.arisu.nature-nurture-hypothesis",
         "v0.char.046"
       ],
       "institution": [
+        "v0.case.arisu.nature-nurture-hypothesis",
         "v0.char.022",
         "v0.char.046",
         "v0.wr.026",
@@ -1779,6 +1782,9 @@
         "v0.char.022",
         "v0.char.046",
         "v0.char.048"
+      ],
+      "observation": [
+        "v0.case.arisu.nature-nurture-hypothesis"
       ]
     },
     "actor.yuki-father": {
@@ -3065,9 +3071,16 @@
       "strategy": []
     },
     "actor.arisu-sakayanagi": {
-      "institution": [],
+      "institution": [
+        "v0.case.arisu.nature-nurture-hypothesis"
+      ],
       "social": [],
-      "academic_reasoning": []
+      "academic_reasoning": [
+        "v0.case.arisu.nature-nurture-hypothesis"
+      ],
+      "observation": [
+        "v0.case.arisu.nature-nurture-hypothesis"
+      ]
     },
     "actor.yuki-father": {
       "social": [],
@@ -4438,7 +4451,8 @@
       ],
       "academic_reasoning": [
         "v0.char.046"
-      ]
+      ],
+      "observation": []
     },
     "actor.yuki-father": {
       "social": [
@@ -5398,6 +5412,7 @@
     "y1v1.case.rokusuke-koenji.swim-final-over-sudo": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/swim-final-over-sudo.json",
     "y1v1.case.rokusuke-koenji.predict-zero-allowance": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/predict-zero-allowance.json",
     "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic": "data/canon/consolidated/behavioral_cases/haruki-yamauchi/confuse-apec-and-toeic.json",
-    "y1v1.case.ken-sudo.prioritize-study-over-basketball": "data/canon/consolidated/behavioral_cases/ken-sudo/prioritize-study-over-basketball.json"
+    "y1v1.case.ken-sudo.prioritize-study-over-basketball": "data/canon/consolidated/behavioral_cases/ken-sudo/prioritize-study-over-basketball.json",
+    "v0.case.arisu.nature-nurture-hypothesis": "data/canon/consolidated/behavioral_cases/arisu-sakayanagi/arisu--nature-nurture-hypothesis.json"
   }
 }

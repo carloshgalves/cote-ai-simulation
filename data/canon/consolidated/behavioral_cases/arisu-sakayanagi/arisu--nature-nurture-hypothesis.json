@@ -1,0 +1,48 @@
+{
+  "id": "v0.case.arisu.nature-nurture-hypothesis",
+  "actor_id": "actor.arisu-sakayanagi",
+  "primary_actor_id": "actor.arisu-sakayanagi",
+  "title": "Genetics versus institutional training hypothesis",
+  "source": {
+    "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+    "pdf_pages": [
+      172,
+      173,
+      175,
+      176
+    ],
+    "source_status": "OPERATOR_ACCEPTED_ASSISTANT_SEMANTIC_REVIEWED",
+    "locator_policy": "PDF page numbers 1-based; source paraphrased, no protected prose reproduced"
+  },
+  "narrative_mode": "OBSERVED_DIALOGUE_WITH_NARRATOR_PERSPECTIVE",
+  "story_time": "WHITE_ROOM_PRE_Y1_CHRONOLOGY_UNRESOLVED",
+  "context": "As a child observer at the White Room, Arisu sees advanced trainees, including Kiyotaka, and discusses the institutional claim that exceptional achievement can be produced through training.",
+  "information_available": "Only what Arisu can see through the restricted observation window and what the accompanying adults say; no access to hidden training data.",
+  "perceived_objective": "Evaluate competing explanations for unusually strong performance.",
+  "observed_actions": "Questions whether selection and inherited aptitude, rather than the White Room's training alone, explain exceptional student performance; proposes that successful trainees may have been genetically advantaged.",
+  "observed_result": "Her father considers the hypothesis without treating it as proven; Atsuomi notices her analytical perspective. No causal explanation is experimentally resolved.",
+  "capabilities_supported": [
+    "hypothesis_generation",
+    "causal_reasoning",
+    "scientific_skepticism"
+  ],
+  "epistemic_limits": "Arisu's claim is a child's source-bound hypothesis, not scientific proof about DNA, superiority or a general population ranking. Do not infer secret access to White Room data or automatic correct predictions.",
+  "other_actors": [
+    "actor.sakayanagi-father",
+    "actor.atsuomi-ayanokoji",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "memory_seed_policy": "This is a pre-Y1 behavioral calibration case, not automatic actor knowledge of hidden school rules after divergence.",
+  "topics": [
+    "academic_reasoning",
+    "institution",
+    "observation"
+  ],
+  "evidence_refs": [
+    "v0.char.022",
+    "v0.char.046",
+    "v0.wr.043"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ACCEPTED_ASSISTANT_SEMANTIC_REVIEWED"
+}

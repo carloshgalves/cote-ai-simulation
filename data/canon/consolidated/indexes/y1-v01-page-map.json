@@ -214,7 +214,22 @@
     },
     "72": {
       "evidence": [
-        "y1v1.ev.034"
+        "y1v1.ev.034",
+        "y1v1.ev.115"
+      ],
+      "cases": [
+        "y1v1.case.sotomura.covert-observation-plan"
+      ]
+    },
+    "75": {
+      "evidence": [
+        "y1v1.ev.116"
+      ],
+      "cases": []
+    },
+    "78": {
+      "evidence": [
+        "y1v1.ev.117"
       ],
       "cases": []
     },
@@ -228,24 +243,31 @@
     },
     "83": {
       "evidence": [
-        "y1v1.ev.036"
+        "y1v1.ev.036",
+        "y1v1.ev.118"
       ],
       "cases": []
     },
     "84": {
       "evidence": [
-        "y1v1.ev.037"
+        "y1v1.ev.037",
+        "y1v1.ev.119"
       ],
       "cases": [
+        "y1v1.case.kikyo-kushida.fifty-meter-swim",
+        "y1v1.case.onodera.fifty-meter-swim",
         "y1v1.case.s.swimming-heat"
       ]
     },
     "85": {
       "evidence": [
-        "y1v1.ev.038"
+        "y1v1.ev.038",
+        "y1v1.ev.120"
       ],
       "cases": [
-        "y1v1.case.k.swim-middle"
+        "y1v1.case.k.swim-middle",
+        "y1v1.case.ken-sudo.fifty-meter-swim",
+        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort"
       ]
     },
     "86": {
@@ -262,6 +284,14 @@
       ],
       "cases": [
         "y1v1.case.o.swimming-heat"
+      ]
+    },
+    "88": {
+      "evidence": [
+        "y1v1.ev.121"
+      ],
+      "cases": [
+        "y1v1.case.rokusuke-koenji.swim-final-over-sudo"
       ]
     },
     "89": {
@@ -328,15 +358,19 @@
     },
     "113": {
       "evidence": [
-        "y1v1.ev.051"
+        "y1v1.ev.051",
+        "y1v1.ev.122"
       ],
       "cases": []
     },
     "118": {
       "evidence": [
-        "y1v1.ev.052"
+        "y1v1.ev.052",
+        "y1v1.ev.123"
       ],
-      "cases": []
+      "cases": [
+        "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic"
+      ]
     },
     "120": {
       "evidence": [
@@ -346,9 +380,12 @@
     },
     "121": {
       "evidence": [
-        "y1v1.ev.054"
+        "y1v1.ev.054",
+        "y1v1.ev.124"
       ],
-      "cases": []
+      "cases": [
+        "y1v1.case.rokusuke-koenji.predict-zero-allowance"
+      ]
     },
     "122": {
       "evidence": [
@@ -364,7 +401,8 @@
     },
     "125": {
       "evidence": [
-        "y1v1.ev.057"
+        "y1v1.ev.057",
+        "y1v1.ev.125"
       ],
       "cases": []
     },
@@ -374,9 +412,17 @@
       ],
       "cases": []
     },
+    "127": {
+      "evidence": [
+        "y1v1.ev.126"
+      ],
+      "cases": []
+    },
     "128": {
       "evidence": [
-        "y1v1.ev.059"
+        "y1v1.ev.059",
+        "y1v1.ev.127",
+        "y1v1.ev.128"
       ],
       "cases": []
     },
@@ -389,7 +435,8 @@
     "130": {
       "evidence": [
         "y1v1.ev.061",
-        "y1v1.ev.062"
+        "y1v1.ev.062",
+        "y1v1.ev.129"
       ],
       "cases": []
     },
@@ -427,7 +474,8 @@
     },
     "143": {
       "evidence": [
-        "y1v1.ev.068"
+        "y1v1.ev.068",
+        "y1v1.ev.130"
       ],
       "cases": []
     },
@@ -583,6 +631,12 @@
       ],
       "cases": []
     },
+    "220": {
+      "evidence": [
+        "y1v1.ev.131"
+      ],
+      "cases": []
+    },
     "221": {
       "evidence": [
         "y1v1.ev.091"
@@ -601,9 +655,24 @@
     },
     "225": {
       "evidence": [
-        "y1v1.ev.093"
+        "y1v1.ev.093",
+        "y1v1.ev.132"
       ],
       "cases": []
+    },
+    "226": {
+      "evidence": [
+        "y1v1.ev.133"
+      ],
+      "cases": []
+    },
+    "227": {
+      "evidence": [
+        "y1v1.ev.134"
+      ],
+      "cases": [
+        "y1v1.case.ken-sudo.prioritize-study-over-basketball"
+      ]
     },
     "229": {
       "evidence": [
@@ -627,7 +696,8 @@
     },
     "233": {
       "evidence": [
-        "y1v1.ev.097"
+        "y1v1.ev.097",
+        "y1v1.ev.135"
       ],
       "cases": [
         "y1v1.case.k.exam-reuse-inference"
@@ -691,6 +761,12 @@
     "251": {
       "evidence": [
         "y1v1.ev.107"
+      ],
+      "cases": []
+    },
+    "252": {
+      "evidence": [
+        "y1v1.ev.136"
       ],
       "cases": []
     },

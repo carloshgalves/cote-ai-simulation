@@ -385,6 +385,7 @@
         "exam",
         "institution",
         "leadership",
+        "motivation",
         "observation",
         "persuasion",
         "risk_management",
@@ -397,6 +398,7 @@
       "modeling_tier": "FULL_CANDIDATE",
       "topics": [
         "academic_reasoning",
+        "combat",
         "economy",
         "emotion",
         "ethics",
@@ -435,6 +437,7 @@
         "exam",
         "institution",
         "leadership",
+        "motivation",
         "persuasion",
         "risk_management",
         "social",
@@ -449,7 +452,10 @@
         "economy",
         "emotion",
         "ethics",
+        "exam",
         "leadership",
+        "motivation",
+        "observation",
         "social",
         "strategy"
       ]
@@ -464,6 +470,7 @@
         "ethics",
         "institution",
         "leadership",
+        "motivation",
         "social"
       ]
     },
@@ -471,8 +478,12 @@
       "path": "data/canon/consolidated/characters/rokusuke-koenji.json",
       "modeling_tier": "FULL_CANDIDATE",
       "topics": [
+        "academic_reasoning",
         "combat",
+        "economy",
         "ethics",
+        "institution",
+        "observation",
         "persuasion",
         "social"
       ]
@@ -482,6 +493,7 @@
       "modeling_tier": "FULL_CANDIDATE",
       "topics": [
         "academic_reasoning",
+        "combat",
         "economy",
         "ethics",
         "exam",
@@ -527,6 +539,7 @@
       "path": "data/canon/consolidated/characters/yukimura.json",
       "modeling_tier": "INTERMEDIATE_CANDIDATE",
       "topics": [
+        "academic_reasoning",
         "social"
       ]
     },
@@ -577,7 +590,62 @@
       "modeling_tier": "MINIMAL_ENTITY",
       "topics": [
         "ethics",
+        "observation",
         "social"
+      ]
+    },
+    "actor.airi-sakura": {
+      "path": "data/canon/consolidated/characters/airi-sakura.json",
+      "modeling_tier": "MINIMAL_ENTITY",
+      "topics": [
+        "observation",
+        "social"
+      ]
+    },
+    "actor.hasebe": {
+      "path": "data/canon/consolidated/characters/hasebe.json",
+      "modeling_tier": "MINIMAL_ENTITY",
+      "topics": [
+        "observation",
+        "social"
+      ]
+    },
+    "actor.matsushita": {
+      "path": "data/canon/consolidated/characters/matsushita.json",
+      "modeling_tier": "MINIMAL_ENTITY",
+      "topics": [
+        "social"
+      ]
+    },
+    "actor.mori": {
+      "path": "data/canon/consolidated/characters/mori.json",
+      "modeling_tier": "MINIMAL_ENTITY",
+      "topics": [
+        "social"
+      ]
+    },
+    "actor.onodera": {
+      "path": "data/canon/consolidated/characters/onodera.json",
+      "modeling_tier": "INTERMEDIATE_CANDIDATE",
+      "topics": [
+        "combat"
+      ]
+    },
+    "actor.kikuchi": {
+      "path": "data/canon/consolidated/characters/kikuchi.json",
+      "modeling_tier": "MINIMAL_ENTITY",
+      "topics": [
+        "academic_reasoning",
+        "exam"
+      ]
+    },
+    "actor.unidentified-third-year-test-seller": {
+      "path": "data/canon/consolidated/characters/unidentified-third-year-test-seller.json",
+      "modeling_tier": "MINIMAL_ENTITY",
+      "topics": [
+        "economy",
+        "persuasion",
+        "strategy"
       ]
     }
   },
@@ -1284,6 +1352,7 @@
         "v0.wr.023",
         "y1v1.case.k.evade-manabu",
         "y1v1.case.k.swim-middle",
+        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort",
         "y1v1.ev.023",
         "y1v1.ev.025",
         "y1v1.ev.026",
@@ -1293,7 +1362,8 @@
         "y1v1.ev.038",
         "y1v1.ev.082",
         "y1v1.ev.083",
-        "y1v1.ev.084"
+        "y1v1.ev.084",
+        "y1v1.ev.120"
       ],
       "economy": [
         "v0.case.kiyotaka.yuki-reunion",
@@ -1311,7 +1381,8 @@
         "y1v1.ev.050",
         "y1v1.ev.095",
         "y1v1.ev.108",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.125"
       ],
       "emotion": [
         "y1v1.case.k.social-entry-freeze",
@@ -1368,7 +1439,8 @@
         "y1v1.ev.050",
         "y1v1.ev.052",
         "y1v1.ev.066",
-        "y1v1.ev.089"
+        "y1v1.ev.089",
+        "y1v1.ev.125"
       ],
       "leadership": [
         "y1v1.ev.031",
@@ -1377,7 +1449,8 @@
         "y1v1.ev.076",
         "y1v1.ev.087",
         "y1v1.ev.098",
-        "y1v1.ev.110"
+        "y1v1.ev.110",
+        "y1v1.ev.133"
       ],
       "observation": [
         "y1v1.case.k.evade-manabu",
@@ -1387,7 +1460,9 @@
         "y1v1.ev.077",
         "y1v1.ev.083",
         "y1v1.ev.084",
-        "y1v1.ev.094"
+        "y1v1.ev.094",
+        "y1v1.ev.135",
+        "y1v1.ev.136"
       ],
       "persuasion": [
         "y1v1.case.k.exam-paper-bargain",
@@ -1398,7 +1473,8 @@
         "y1v1.ev.074",
         "y1v1.ev.075",
         "y1v1.ev.095",
-        "y1v1.ev.107"
+        "y1v1.ev.107",
+        "y1v1.ev.133"
       ],
       "politics": [
         "v0.char.020",
@@ -1466,7 +1542,8 @@
         "y1v1.ev.099",
         "y1v1.ev.110",
         "y1v1.ev.111",
-        "y1v1.ev.112"
+        "y1v1.ev.112",
+        "y1v1.ev.136"
       ],
       "strategy": [
         "v0.case.kiyotaka.adults-baton",
@@ -1488,6 +1565,7 @@
         "y1v1.case.k.exam-reuse-inference",
         "y1v1.case.k.recruit-kushida",
         "y1v1.case.k.swim-middle",
+        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort",
         "y1v1.ev.038",
         "y1v1.ev.070",
         "y1v1.ev.071",
@@ -1501,7 +1579,9 @@
         "y1v1.ev.098",
         "y1v1.ev.099",
         "y1v1.ev.108",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.120",
+        "y1v1.ev.135"
       ]
     },
     "actor.ooba": {
@@ -1873,7 +1953,9 @@
         "y1v1.ev.086",
         "y1v1.ev.088",
         "y1v1.ev.090",
-        "y1v1.ev.105"
+        "y1v1.ev.105",
+        "y1v1.ev.130",
+        "y1v1.ev.134"
       ],
       "combat": [
         "y1v1.case.s.muscle-inference",
@@ -1884,10 +1966,12 @@
         "y1v1.ev.037",
         "y1v1.ev.082",
         "y1v1.ev.083",
-        "y1v1.ev.084"
+        "y1v1.ev.084",
+        "y1v1.ev.119"
       ],
       "conflict": [
-        "y1v1.ev.091"
+        "y1v1.ev.091",
+        "y1v1.ev.131"
       ],
       "economy": [
         "y1v1.case.s.financial-restraint",
@@ -1910,7 +1994,8 @@
         "y1v1.ev.085"
       ],
       "exam": [
-        "y1v1.ev.106"
+        "y1v1.ev.106",
+        "y1v1.ev.132"
       ],
       "institution": [
         "y1v1.ev.020",
@@ -1918,7 +2003,8 @@
         "y1v1.ev.056",
         "y1v1.ev.068",
         "y1v1.ev.089",
-        "y1v1.ev.106"
+        "y1v1.ev.106",
+        "y1v1.ev.132"
       ],
       "leadership": [
         "y1v1.case.s.delegated-study-recruitment",
@@ -1979,7 +2065,9 @@
         "y1v1.ev.110",
         "y1v1.ev.111",
         "y1v1.ev.112",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.131",
+        "y1v1.ev.134"
       ],
       "strategy": [
         "y1v1.case.s.class-a-goal",
@@ -1995,6 +2083,9 @@
         "y1v1.ev.105",
         "y1v1.ev.108",
         "y1v1.ev.109"
+      ],
+      "motivation": [
+        "y1v1.ev.134"
       ]
     },
     "actor.kikyo-kushida": {
@@ -2002,7 +2093,8 @@
         "y1v1.case.u.distribute-old-tests",
         "y1v1.ev.078",
         "y1v1.ev.097",
-        "y1v1.ev.100"
+        "y1v1.ev.100",
+        "y1v1.ev.123"
       ],
       "economy": [
         "y1v1.ev.064",
@@ -2025,11 +2117,13 @@
         "y1v1.ev.087",
         "y1v1.ev.098",
         "y1v1.ev.100",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.133"
       ],
       "observation": [
         "y1v1.ev.077",
-        "y1v1.ev.094"
+        "y1v1.ev.094",
+        "y1v1.ev.135"
       ],
       "persuasion": [
         "y1v1.case.u.public-civic-appeal",
@@ -2038,7 +2132,8 @@
         "y1v1.ev.014",
         "y1v1.ev.042",
         "y1v1.ev.075",
-        "y1v1.ev.095"
+        "y1v1.ev.095",
+        "y1v1.ev.133"
       ],
       "social": [
         "y1v1.case.u.anticipate-suzune-rejection",
@@ -2056,14 +2151,20 @@
         "y1v1.ev.079",
         "y1v1.ev.089",
         "y1v1.ev.099",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.123"
       ],
       "strategy": [
         "y1v1.ev.075",
         "y1v1.ev.094",
         "y1v1.ev.097",
         "y1v1.ev.098",
-        "y1v1.ev.099"
+        "y1v1.ev.099",
+        "y1v1.ev.135"
+      ],
+      "combat": [
+        "y1v1.case.kikyo-kushida.fifty-meter-swim",
+        "y1v1.ev.119"
       ]
     },
     "actor.yosuke-hirata": {
@@ -2115,23 +2216,30 @@
         "y1v1.ev.088",
         "y1v1.ev.090",
         "y1v1.ev.100",
-        "y1v1.ev.105"
+        "y1v1.ev.105",
+        "y1v1.ev.127",
+        "y1v1.ev.134"
       ],
       "combat": [
         "y1v1.case.d.confront-upperclassmen",
+        "y1v1.case.ken-sudo.fifty-meter-swim",
         "y1v1.ev.023",
         "y1v1.ev.025",
         "y1v1.ev.026",
         "y1v1.ev.033",
         "y1v1.ev.038",
-        "y1v1.ev.040"
+        "y1v1.ev.040",
+        "y1v1.ev.120",
+        "y1v1.ev.121"
       ],
       "conflict": [
-        "y1v1.ev.091"
+        "y1v1.ev.091",
+        "y1v1.ev.131"
       ],
       "economy": [
         "y1v1.ev.022",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.126"
       ],
       "emotion": [
         "y1v1.case.d.soften-after-rescue",
@@ -2142,11 +2250,13 @@
         "y1v1.ev.085"
       ],
       "exam": [
-        "y1v1.ev.103"
+        "y1v1.ev.103",
+        "y1v1.ev.127"
       ],
       "institution": [
         "y1v1.ev.033",
-        "y1v1.ev.103"
+        "y1v1.ev.103",
+        "y1v1.ev.126"
       ],
       "leadership": [
         "y1v1.ev.017",
@@ -2170,6 +2280,7 @@
       "social": [
         "y1v1.case.d.reject-introduction",
         "y1v1.case.d.soften-after-rescue",
+        "y1v1.case.ken-sudo.prioritize-study-over-basketball",
         "y1v1.ev.017",
         "y1v1.ev.022",
         "y1v1.ev.023",
@@ -2183,7 +2294,9 @@
         "y1v1.ev.092",
         "y1v1.ev.111",
         "y1v1.ev.112",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.131",
+        "y1v1.ev.134"
       ],
       "strategy": [
         "y1v1.ev.038",
@@ -2191,7 +2304,12 @@
         "y1v1.ev.085",
         "y1v1.ev.086",
         "y1v1.ev.105",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.120"
+      ],
+      "motivation": [
+        "y1v1.case.ken-sudo.prioritize-study-over-basketball",
+        "y1v1.ev.134"
       ]
     },
     "actor.kanji-ike": {
@@ -2201,7 +2319,9 @@
         "y1v1.ev.086",
         "y1v1.ev.088",
         "y1v1.ev.090",
-        "y1v1.ev.100"
+        "y1v1.ev.100",
+        "y1v1.ev.127",
+        "y1v1.ev.134"
       ],
       "economy": [
         "y1v1.ev.113"
@@ -2228,18 +2348,35 @@
         "y1v1.ev.045",
         "y1v1.ev.080",
         "y1v1.ev.111",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.115",
+        "y1v1.ev.116",
+        "y1v1.ev.117",
+        "y1v1.ev.134"
       ],
       "strategy": [
         "y1v1.ev.073",
         "y1v1.ev.086"
+      ],
+      "observation": [
+        "y1v1.ev.115",
+        "y1v1.ev.117"
+      ],
+      "exam": [
+        "y1v1.ev.127"
+      ],
+      "motivation": [
+        "y1v1.ev.134"
       ]
     },
     "actor.haruki-yamauchi": {
       "academic_reasoning": [
+        "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic",
         "y1v1.ev.088",
         "y1v1.ev.090",
-        "y1v1.ev.100"
+        "y1v1.ev.100",
+        "y1v1.ev.123",
+        "y1v1.ev.134"
       ],
       "economy": [
         "y1v1.ev.049",
@@ -2264,6 +2401,7 @@
         "y1v1.ev.114"
       ],
       "social": [
+        "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic",
         "y1v1.case.y.unreliable-athletic-story",
         "y1v1.ev.015",
         "y1v1.ev.034",
@@ -2272,13 +2410,21 @@
         "y1v1.ev.064",
         "y1v1.ev.080",
         "y1v1.ev.111",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.116",
+        "y1v1.ev.123",
+        "y1v1.ev.134"
+      ],
+      "motivation": [
+        "y1v1.ev.134"
       ]
     },
     "actor.rokusuke-koenji": {
       "combat": [
         "y1v1.case.o.swimming-heat",
-        "y1v1.ev.040"
+        "y1v1.case.rokusuke-koenji.swim-final-over-sudo",
+        "y1v1.ev.040",
+        "y1v1.ev.121"
       ],
       "ethics": [
         "y1v1.case.o.priority-seat-refusal",
@@ -2294,6 +2440,21 @@
         "y1v1.ev.008",
         "y1v1.ev.018",
         "y1v1.ev.062"
+      ],
+      "academic_reasoning": [
+        "y1v1.case.rokusuke-koenji.predict-zero-allowance",
+        "y1v1.ev.124",
+        "y1v1.ev.128"
+      ],
+      "observation": [
+        "y1v1.case.rokusuke-koenji.predict-zero-allowance",
+        "y1v1.ev.124"
+      ],
+      "economy": [
+        "y1v1.ev.129"
+      ],
+      "institution": [
+        "y1v1.ev.129"
       ]
     },
     "actor.sae-chiyabashira": {
@@ -2304,7 +2465,11 @@
         "y1v1.ev.068",
         "y1v1.ev.069",
         "y1v1.ev.070",
-        "y1v1.ev.105"
+        "y1v1.ev.105",
+        "y1v1.ev.124",
+        "y1v1.ev.127",
+        "y1v1.ev.128",
+        "y1v1.ev.130"
       ],
       "economy": [
         "y1v1.ev.010",
@@ -2314,7 +2479,10 @@
         "y1v1.ev.055",
         "y1v1.ev.057",
         "y1v1.ev.108",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.118",
+        "y1v1.ev.125",
+        "y1v1.ev.126"
       ],
       "ethics": [
         "y1v1.ev.058",
@@ -2325,7 +2493,9 @@
         "y1v1.ev.101",
         "y1v1.ev.103",
         "y1v1.ev.104",
-        "y1v1.ev.106"
+        "y1v1.ev.106",
+        "y1v1.ev.127",
+        "y1v1.ev.132"
       ],
       "institution": [
         "y1v1.ev.009",
@@ -2343,21 +2513,30 @@
         "y1v1.ev.068",
         "y1v1.ev.101",
         "y1v1.ev.103",
-        "y1v1.ev.106"
+        "y1v1.ev.106",
+        "y1v1.ev.118",
+        "y1v1.ev.125",
+        "y1v1.ev.126",
+        "y1v1.ev.132"
       ],
       "leadership": [
-        "y1v1.ev.110"
+        "y1v1.ev.110",
+        "y1v1.ev.133"
       ],
       "observation": [
         "y1v1.case.c.detect-uniform-fifties",
-        "y1v1.ev.069"
+        "y1v1.ev.069",
+        "y1v1.ev.124",
+        "y1v1.ev.136"
       ],
       "persuasion": [
-        "y1v1.ev.107"
+        "y1v1.ev.107",
+        "y1v1.ev.133"
       ],
       "social": [
         "y1v1.ev.067",
-        "y1v1.ev.110"
+        "y1v1.ev.110",
+        "y1v1.ev.136"
       ],
       "strategy": [
         "y1v1.case.c.detect-uniform-fifties",
@@ -2365,6 +2544,9 @@
         "y1v1.ev.105",
         "y1v1.ev.108",
         "y1v1.ev.109"
+      ],
+      "combat": [
+        "y1v1.ev.118"
       ]
     },
     "actor.manabu-horikita": {
@@ -2419,6 +2601,9 @@
     "actor.yukimura": {
       "social": [
         "y1v1.ev.062"
+      ],
+      "academic_reasoning": [
+        "y1v1.ev.128"
       ]
     },
     "actor.kokoro-inogashira": {
@@ -2442,12 +2627,14 @@
       "social": [
         "y1v1.ev.046",
         "y1v1.ev.051",
-        "y1v1.ev.064"
+        "y1v1.ev.064",
+        "y1v1.ev.122"
       ]
     },
     "actor.yamawaki": {
       "conflict": [
-        "y1v1.ev.091"
+        "y1v1.ev.091",
+        "y1v1.ev.131"
       ],
       "leadership": [
         "y1v1.ev.092"
@@ -2455,7 +2642,8 @@
       "social": [
         "y1v1.case.v.mock-class-d",
         "y1v1.ev.091",
-        "y1v1.ev.092"
+        "y1v1.ev.092",
+        "y1v1.ev.131"
       ]
     },
     "actor.miyamoto": {
@@ -2479,7 +2667,67 @@
         "y1v1.ev.034"
       ],
       "social": [
-        "y1v1.ev.034"
+        "y1v1.case.sotomura.covert-observation-plan",
+        "y1v1.ev.034",
+        "y1v1.ev.115",
+        "y1v1.ev.117"
+      ],
+      "observation": [
+        "y1v1.case.sotomura.covert-observation-plan",
+        "y1v1.ev.115",
+        "y1v1.ev.117"
+      ]
+    },
+    "actor.airi-sakura": {
+      "social": [
+        "y1v1.ev.116",
+        "y1v1.ev.117"
+      ],
+      "observation": [
+        "y1v1.ev.117"
+      ]
+    },
+    "actor.hasebe": {
+      "social": [
+        "y1v1.ev.117"
+      ],
+      "observation": [
+        "y1v1.ev.117"
+      ]
+    },
+    "actor.matsushita": {
+      "social": [
+        "y1v1.ev.122"
+      ]
+    },
+    "actor.mori": {
+      "social": [
+        "y1v1.ev.122"
+      ]
+    },
+    "actor.onodera": {
+      "combat": [
+        "y1v1.case.onodera.fifty-meter-swim",
+        "y1v1.ev.119"
+      ]
+    },
+    "actor.kikuchi": {
+      "academic_reasoning": [
+        "y1v1.ev.127"
+      ],
+      "exam": [
+        "y1v1.ev.127"
+      ]
+    },
+    "actor.unidentified-third-year-test-seller": {
+      "persuasion": [
+        "y1v1.ev.095"
+      ],
+      "economy": [
+        "y1v1.ev.095"
+      ],
+      "strategy": [
+        "y1v1.ev.096"
       ]
     }
   },
@@ -2671,7 +2919,8 @@
         "y1v1.case.k.exam-paper-bargain",
         "y1v1.case.k.exam-reuse-inference",
         "y1v1.case.k.recruit-kushida",
-        "y1v1.case.k.swim-middle"
+        "y1v1.case.k.swim-middle",
+        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort"
       ],
       "social": [
         "v0.case.kiyotaka.cards-50",
@@ -2703,7 +2952,8 @@
         "v0.case.kiyotaka.shiro-learning",
         "v0.case.kiyotaka.yuki-health",
         "y1v1.case.k.evade-manabu",
-        "y1v1.case.k.swim-middle"
+        "y1v1.case.k.swim-middle",
+        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort"
       ],
       "academic_reasoning": [
         "v0.case.kiyotaka.cards-50",
@@ -2944,7 +3194,8 @@
       "conflict": [],
       "emotion": [],
       "exam": [],
-      "institution": []
+      "institution": [],
+      "motivation": []
     },
     "actor.kikyo-kushida": {
       "social": [
@@ -2967,7 +3218,10 @@
       "ethics": [],
       "institution": [],
       "observation": [],
-      "strategy": []
+      "strategy": [],
+      "combat": [
+        "y1v1.case.kikyo-kushida.fifty-meter-swim"
+      ]
     },
     "actor.yosuke-hirata": {
       "social": [
@@ -2992,11 +3246,13 @@
     },
     "actor.ken-sudo": {
       "combat": [
-        "y1v1.case.d.confront-upperclassmen"
+        "y1v1.case.d.confront-upperclassmen",
+        "y1v1.case.ken-sudo.fifty-meter-swim"
       ],
       "social": [
         "y1v1.case.d.reject-introduction",
-        "y1v1.case.d.soften-after-rescue"
+        "y1v1.case.d.soften-after-rescue",
+        "y1v1.case.ken-sudo.prioritize-study-over-basketball"
       ],
       "emotion": [
         "y1v1.case.d.soften-after-rescue"
@@ -3010,7 +3266,10 @@
       "leadership": [],
       "persuasion": [],
       "risk_management": [],
-      "strategy": []
+      "strategy": [],
+      "motivation": [
+        "y1v1.case.ken-sudo.prioritize-study-over-basketball"
+      ]
     },
     "actor.kanji-ike": {
       "social": [
@@ -3021,18 +3280,25 @@
       "emotion": [],
       "ethics": [],
       "leadership": [],
-      "strategy": []
+      "strategy": [],
+      "observation": [],
+      "exam": [],
+      "motivation": []
     },
     "actor.haruki-yamauchi": {
       "social": [
+        "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic",
         "y1v1.case.y.unreliable-athletic-story"
       ],
-      "academic_reasoning": [],
+      "academic_reasoning": [
+        "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic"
+      ],
       "economy": [],
       "emotion": [],
       "ethics": [],
       "institution": [],
-      "leadership": []
+      "leadership": [],
+      "motivation": []
     },
     "actor.rokusuke-koenji": {
       "social": [
@@ -3042,9 +3308,18 @@
         "y1v1.case.o.priority-seat-refusal"
       ],
       "combat": [
-        "y1v1.case.o.swimming-heat"
+        "y1v1.case.o.swimming-heat",
+        "y1v1.case.rokusuke-koenji.swim-final-over-sudo"
       ],
-      "persuasion": []
+      "persuasion": [],
+      "academic_reasoning": [
+        "y1v1.case.rokusuke-koenji.predict-zero-allowance"
+      ],
+      "observation": [
+        "y1v1.case.rokusuke-koenji.predict-zero-allowance"
+      ],
+      "economy": [],
+      "institution": []
     },
     "actor.sae-chiyabashira": {
       "academic_reasoning": [
@@ -3062,7 +3337,8 @@
       "institution": [],
       "leadership": [],
       "persuasion": [],
-      "social": []
+      "social": [],
+      "combat": []
     },
     "actor.manabu-horikita": {
       "leadership": [
@@ -3091,7 +3367,8 @@
       "social": []
     },
     "actor.yukimura": {
-      "social": []
+      "social": [],
+      "academic_reasoning": []
     },
     "actor.kokoro-inogashira": {
       "emotion": [
@@ -3121,7 +3398,40 @@
     },
     "actor.sotomura": {
       "ethics": [],
+      "social": [
+        "y1v1.case.sotomura.covert-observation-plan"
+      ],
+      "observation": [
+        "y1v1.case.sotomura.covert-observation-plan"
+      ]
+    },
+    "actor.airi-sakura": {
+      "social": [],
+      "observation": []
+    },
+    "actor.hasebe": {
+      "social": [],
+      "observation": []
+    },
+    "actor.matsushita": {
       "social": []
+    },
+    "actor.mori": {
+      "social": []
+    },
+    "actor.onodera": {
+      "combat": [
+        "y1v1.case.onodera.fifty-meter-swim"
+      ]
+    },
+    "actor.kikuchi": {
+      "academic_reasoning": [],
+      "exam": []
+    },
+    "actor.unidentified-third-year-test-seller": {
+      "persuasion": [],
+      "economy": [],
+      "strategy": []
     }
   },
   "context_mentions_by_actor_topic": {
@@ -3762,7 +4072,9 @@
         "y1v1.ev.098",
         "y1v1.ev.099",
         "y1v1.ev.108",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.120",
+        "y1v1.ev.135"
       ],
       "social": [
         "v0.char.009",
@@ -3808,7 +4120,8 @@
         "y1v1.ev.099",
         "y1v1.ev.110",
         "y1v1.ev.111",
-        "y1v1.ev.112"
+        "y1v1.ev.112",
+        "y1v1.ev.136"
       ],
       "politics": [
         "v0.char.020",
@@ -3848,7 +4161,8 @@
         "y1v1.ev.050",
         "y1v1.ev.052",
         "y1v1.ev.066",
-        "y1v1.ev.089"
+        "y1v1.ev.089",
+        "y1v1.ev.125"
       ],
       "combat": [
         "v0.char.016",
@@ -3868,7 +4182,8 @@
         "y1v1.ev.038",
         "y1v1.ev.082",
         "y1v1.ev.083",
-        "y1v1.ev.084"
+        "y1v1.ev.084",
+        "y1v1.ev.120"
       ],
       "academic_reasoning": [
         "v0.char.010",
@@ -3901,7 +4216,8 @@
         "y1v1.ev.050",
         "y1v1.ev.095",
         "y1v1.ev.108",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.125"
       ],
       "ethics": [
         "v0.char.017",
@@ -3920,7 +4236,8 @@
         "y1v1.ev.074",
         "y1v1.ev.075",
         "y1v1.ev.095",
-        "y1v1.ev.107"
+        "y1v1.ev.107",
+        "y1v1.ev.133"
       ],
       "emotion": [
         "y1v1.ev.007",
@@ -3937,7 +4254,8 @@
         "y1v1.ev.076",
         "y1v1.ev.087",
         "y1v1.ev.098",
-        "y1v1.ev.110"
+        "y1v1.ev.110",
+        "y1v1.ev.133"
       ],
       "observation": [
         "y1v1.ev.035",
@@ -3945,7 +4263,9 @@
         "y1v1.ev.077",
         "y1v1.ev.083",
         "y1v1.ev.084",
-        "y1v1.ev.094"
+        "y1v1.ev.094",
+        "y1v1.ev.135",
+        "y1v1.ev.136"
       ]
     },
     "actor.ooba": {
@@ -4302,7 +4622,9 @@
         "y1v1.ev.110",
         "y1v1.ev.111",
         "y1v1.ev.112",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.131",
+        "y1v1.ev.134"
       ],
       "ethics": [
         "y1v1.ev.005",
@@ -4323,7 +4645,8 @@
         "y1v1.ev.056",
         "y1v1.ev.068",
         "y1v1.ev.089",
-        "y1v1.ev.106"
+        "y1v1.ev.106",
+        "y1v1.ev.132"
       ],
       "combat": [
         "y1v1.ev.023",
@@ -4332,7 +4655,8 @@
         "y1v1.ev.037",
         "y1v1.ev.082",
         "y1v1.ev.083",
-        "y1v1.ev.084"
+        "y1v1.ev.084",
+        "y1v1.ev.119"
       ],
       "risk_management": [
         "y1v1.ev.024"
@@ -4368,7 +4692,9 @@
         "y1v1.ev.086",
         "y1v1.ev.088",
         "y1v1.ev.090",
-        "y1v1.ev.105"
+        "y1v1.ev.105",
+        "y1v1.ev.130",
+        "y1v1.ev.134"
       ],
       "strategy": [
         "y1v1.ev.070",
@@ -4385,10 +4711,15 @@
         "y1v1.ev.081"
       ],
       "conflict": [
-        "y1v1.ev.091"
+        "y1v1.ev.091",
+        "y1v1.ev.131"
       ],
       "exam": [
-        "y1v1.ev.106"
+        "y1v1.ev.106",
+        "y1v1.ev.132"
+      ],
+      "motivation": [
+        "y1v1.ev.134"
       ]
     },
     "actor.kikyo-kushida": {
@@ -4405,14 +4736,16 @@
         "y1v1.ev.079",
         "y1v1.ev.089",
         "y1v1.ev.099",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.123"
       ],
       "persuasion": [
         "y1v1.ev.004",
         "y1v1.ev.014",
         "y1v1.ev.042",
         "y1v1.ev.075",
-        "y1v1.ev.095"
+        "y1v1.ev.095",
+        "y1v1.ev.133"
       ],
       "ethics": [
         "y1v1.ev.043"
@@ -4427,7 +4760,8 @@
         "y1v1.ev.094",
         "y1v1.ev.097",
         "y1v1.ev.098",
-        "y1v1.ev.099"
+        "y1v1.ev.099",
+        "y1v1.ev.135"
       ],
       "leadership": [
         "y1v1.ev.076",
@@ -4435,22 +4769,28 @@
         "y1v1.ev.087",
         "y1v1.ev.098",
         "y1v1.ev.100",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.133"
       ],
       "observation": [
         "y1v1.ev.077",
-        "y1v1.ev.094"
+        "y1v1.ev.094",
+        "y1v1.ev.135"
       ],
       "academic_reasoning": [
         "y1v1.ev.078",
         "y1v1.ev.097",
-        "y1v1.ev.100"
+        "y1v1.ev.100",
+        "y1v1.ev.123"
       ],
       "emotion": [
         "y1v1.ev.079"
       ],
       "institution": [
         "y1v1.ev.089"
+      ],
+      "combat": [
+        "y1v1.ev.119"
       ]
     },
     "actor.yosuke-hirata": {
@@ -4501,7 +4841,9 @@
         "y1v1.ev.092",
         "y1v1.ev.111",
         "y1v1.ev.112",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.131",
+        "y1v1.ev.134"
       ],
       "leadership": [
         "y1v1.ev.017",
@@ -4518,7 +4860,8 @@
       ],
       "economy": [
         "y1v1.ev.022",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.126"
       ],
       "combat": [
         "y1v1.ev.023",
@@ -4526,14 +4869,17 @@
         "y1v1.ev.026",
         "y1v1.ev.033",
         "y1v1.ev.038",
-        "y1v1.ev.040"
+        "y1v1.ev.040",
+        "y1v1.ev.120",
+        "y1v1.ev.121"
       ],
       "risk_management": [
         "y1v1.ev.026"
       ],
       "institution": [
         "y1v1.ev.033",
-        "y1v1.ev.103"
+        "y1v1.ev.103",
+        "y1v1.ev.126"
       ],
       "strategy": [
         "y1v1.ev.038",
@@ -4541,7 +4887,8 @@
         "y1v1.ev.085",
         "y1v1.ev.086",
         "y1v1.ev.105",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.120"
       ],
       "academic_reasoning": [
         "y1v1.ev.059",
@@ -4551,7 +4898,9 @@
         "y1v1.ev.088",
         "y1v1.ev.090",
         "y1v1.ev.100",
-        "y1v1.ev.105"
+        "y1v1.ev.105",
+        "y1v1.ev.127",
+        "y1v1.ev.134"
       ],
       "persuasion": [
         "y1v1.ev.074"
@@ -4564,10 +4913,15 @@
         "y1v1.ev.085"
       ],
       "conflict": [
-        "y1v1.ev.091"
+        "y1v1.ev.091",
+        "y1v1.ev.131"
       ],
       "exam": [
-        "y1v1.ev.103"
+        "y1v1.ev.103",
+        "y1v1.ev.127"
+      ],
+      "motivation": [
+        "y1v1.ev.134"
       ]
     },
     "actor.kanji-ike": {
@@ -4577,7 +4931,11 @@
         "y1v1.ev.045",
         "y1v1.ev.080",
         "y1v1.ev.111",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.115",
+        "y1v1.ev.116",
+        "y1v1.ev.117",
+        "y1v1.ev.134"
       ],
       "ethics": [
         "y1v1.ev.034"
@@ -4588,7 +4946,9 @@
         "y1v1.ev.086",
         "y1v1.ev.088",
         "y1v1.ev.090",
-        "y1v1.ev.100"
+        "y1v1.ev.100",
+        "y1v1.ev.127",
+        "y1v1.ev.134"
       ],
       "leadership": [
         "y1v1.ev.073",
@@ -4608,6 +4968,16 @@
       ],
       "economy": [
         "y1v1.ev.113"
+      ],
+      "observation": [
+        "y1v1.ev.115",
+        "y1v1.ev.117"
+      ],
+      "exam": [
+        "y1v1.ev.127"
+      ],
+      "motivation": [
+        "y1v1.ev.134"
       ]
     },
     "actor.haruki-yamauchi": {
@@ -4619,7 +4989,10 @@
         "y1v1.ev.064",
         "y1v1.ev.080",
         "y1v1.ev.111",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.116",
+        "y1v1.ev.123",
+        "y1v1.ev.134"
       ],
       "ethics": [
         "y1v1.ev.034"
@@ -4643,10 +5016,15 @@
       "academic_reasoning": [
         "y1v1.ev.088",
         "y1v1.ev.090",
-        "y1v1.ev.100"
+        "y1v1.ev.100",
+        "y1v1.ev.123",
+        "y1v1.ev.134"
       ],
       "emotion": [
         "y1v1.ev.102"
+      ],
+      "motivation": [
+        "y1v1.ev.134"
       ]
     },
     "actor.rokusuke-koenji": {
@@ -4664,7 +5042,21 @@
         "y1v1.ev.004"
       ],
       "combat": [
-        "y1v1.ev.040"
+        "y1v1.ev.040",
+        "y1v1.ev.121"
+      ],
+      "observation": [
+        "y1v1.ev.124"
+      ],
+      "academic_reasoning": [
+        "y1v1.ev.124",
+        "y1v1.ev.128"
+      ],
+      "economy": [
+        "y1v1.ev.129"
+      ],
+      "institution": [
+        "y1v1.ev.129"
       ]
     },
     "actor.sae-chiyabashira": {
@@ -4684,7 +5076,11 @@
         "y1v1.ev.068",
         "y1v1.ev.101",
         "y1v1.ev.103",
-        "y1v1.ev.106"
+        "y1v1.ev.106",
+        "y1v1.ev.118",
+        "y1v1.ev.125",
+        "y1v1.ev.126",
+        "y1v1.ev.132"
       ],
       "economy": [
         "y1v1.ev.010",
@@ -4694,7 +5090,10 @@
         "y1v1.ev.055",
         "y1v1.ev.057",
         "y1v1.ev.108",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.118",
+        "y1v1.ev.125",
+        "y1v1.ev.126"
       ],
       "academic_reasoning": [
         "y1v1.ev.047",
@@ -4702,7 +5101,11 @@
         "y1v1.ev.068",
         "y1v1.ev.069",
         "y1v1.ev.070",
-        "y1v1.ev.105"
+        "y1v1.ev.105",
+        "y1v1.ev.124",
+        "y1v1.ev.127",
+        "y1v1.ev.128",
+        "y1v1.ev.130"
       ],
       "ethics": [
         "y1v1.ev.058",
@@ -4713,14 +5116,19 @@
         "y1v1.ev.101",
         "y1v1.ev.103",
         "y1v1.ev.104",
-        "y1v1.ev.106"
+        "y1v1.ev.106",
+        "y1v1.ev.127",
+        "y1v1.ev.132"
       ],
       "social": [
         "y1v1.ev.067",
-        "y1v1.ev.110"
+        "y1v1.ev.110",
+        "y1v1.ev.136"
       ],
       "observation": [
-        "y1v1.ev.069"
+        "y1v1.ev.069",
+        "y1v1.ev.124",
+        "y1v1.ev.136"
       ],
       "strategy": [
         "y1v1.ev.070",
@@ -4729,10 +5137,15 @@
         "y1v1.ev.109"
       ],
       "persuasion": [
-        "y1v1.ev.107"
+        "y1v1.ev.107",
+        "y1v1.ev.133"
       ],
       "leadership": [
-        "y1v1.ev.110"
+        "y1v1.ev.110",
+        "y1v1.ev.133"
+      ],
+      "combat": [
+        "y1v1.ev.118"
       ]
     },
     "actor.manabu-horikita": {
@@ -4782,6 +5195,9 @@
     "actor.yukimura": {
       "social": [
         "y1v1.ev.062"
+      ],
+      "academic_reasoning": [
+        "y1v1.ev.128"
       ]
     },
     "actor.kokoro-inogashira": {
@@ -4800,7 +5216,8 @@
       "social": [
         "y1v1.ev.046",
         "y1v1.ev.051",
-        "y1v1.ev.064"
+        "y1v1.ev.064",
+        "y1v1.ev.122"
       ],
       "economy": [
         "y1v1.ev.064",
@@ -4810,10 +5227,12 @@
     "actor.yamawaki": {
       "social": [
         "y1v1.ev.091",
-        "y1v1.ev.092"
+        "y1v1.ev.092",
+        "y1v1.ev.131"
       ],
       "conflict": [
-        "y1v1.ev.091"
+        "y1v1.ev.091",
+        "y1v1.ev.131"
       ],
       "leadership": [
         "y1v1.ev.092"
@@ -4837,10 +5256,67 @@
     },
     "actor.sotomura": {
       "social": [
-        "y1v1.ev.034"
+        "y1v1.ev.034",
+        "y1v1.ev.115",
+        "y1v1.ev.117"
       ],
       "ethics": [
         "y1v1.ev.034"
+      ],
+      "observation": [
+        "y1v1.ev.115",
+        "y1v1.ev.117"
+      ]
+    },
+    "actor.airi-sakura": {
+      "social": [
+        "y1v1.ev.116",
+        "y1v1.ev.117"
+      ],
+      "observation": [
+        "y1v1.ev.117"
+      ]
+    },
+    "actor.hasebe": {
+      "social": [
+        "y1v1.ev.117"
+      ],
+      "observation": [
+        "y1v1.ev.117"
+      ]
+    },
+    "actor.matsushita": {
+      "social": [
+        "y1v1.ev.122"
+      ]
+    },
+    "actor.mori": {
+      "social": [
+        "y1v1.ev.122"
+      ]
+    },
+    "actor.onodera": {
+      "combat": [
+        "y1v1.ev.119"
+      ]
+    },
+    "actor.kikuchi": {
+      "academic_reasoning": [
+        "y1v1.ev.127"
+      ],
+      "exam": [
+        "y1v1.ev.127"
+      ]
+    },
+    "actor.unidentified-third-year-test-seller": {
+      "persuasion": [
+        "y1v1.ev.095"
+      ],
+      "economy": [
+        "y1v1.ev.095"
+      ],
+      "strategy": [
+        "y1v1.ev.096"
       ]
     }
   },
@@ -4915,6 +5391,15 @@
     "y1v1.case.v.mock-class-d": "data/canon/consolidated/behavioral_cases/yamawaki/v--mock-class-d.json",
     "y1v1.case.h.class-introductions": "data/canon/consolidated/behavioral_cases/yosuke-hirata/h--class-introductions.json",
     "y1v1.case.h.point-crisis-leadership": "data/canon/consolidated/behavioral_cases/yosuke-hirata/h--point-crisis-leadership.json",
-    "y1v1.case.h.swimming-heat": "data/canon/consolidated/behavioral_cases/yosuke-hirata/h--swimming-heat.json"
+    "y1v1.case.h.swimming-heat": "data/canon/consolidated/behavioral_cases/yosuke-hirata/h--swimming-heat.json",
+    "y1v1.case.sotomura.covert-observation-plan": "data/canon/consolidated/behavioral_cases/sotomura/covert-observation-plan.json",
+    "y1v1.case.onodera.fifty-meter-swim": "data/canon/consolidated/behavioral_cases/onodera/fifty-meter-swim.json",
+    "y1v1.case.kikyo-kushida.fifty-meter-swim": "data/canon/consolidated/behavioral_cases/kikyo-kushida/fifty-meter-swim.json",
+    "y1v1.case.ken-sudo.fifty-meter-swim": "data/canon/consolidated/behavioral_cases/ken-sudo/fifty-meter-swim.json",
+    "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/fifty-meter-swim-withheld-effort.json",
+    "y1v1.case.rokusuke-koenji.swim-final-over-sudo": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/swim-final-over-sudo.json",
+    "y1v1.case.rokusuke-koenji.predict-zero-allowance": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/predict-zero-allowance.json",
+    "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic": "data/canon/consolidated/behavioral_cases/haruki-yamauchi/confuse-apec-and-toeic.json",
+    "y1v1.case.ken-sudo.prioritize-study-over-basketball": "data/canon/consolidated/behavioral_cases/ken-sudo/prioritize-study-over-basketball.json"
   }
 }

@@ -8,7 +8,7 @@
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
-    "role_summary": "Class A",
+    "role_summary": "Class C",
     "aliases": []
   },
   "knowledge_time_policy": {
@@ -22,13 +22,15 @@
       ],
       "context_evidence_refs": [
         "y1v1.ev.091",
-        "y1v1.ev.092"
+        "y1v1.ev.092",
+        "y1v1.ev.131"
       ]
     },
     "conflict": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v1.ev.091"
+        "y1v1.ev.091",
+        "y1v1.ev.131"
       ]
     },
     "leadership": {
@@ -40,7 +42,7 @@
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Confirmed Class C at PDF p.220; previous Class A attribution corrected.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

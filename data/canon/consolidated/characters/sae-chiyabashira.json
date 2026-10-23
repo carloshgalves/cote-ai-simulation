@@ -34,7 +34,11 @@
         "y1v1.ev.068",
         "y1v1.ev.101",
         "y1v1.ev.103",
-        "y1v1.ev.106"
+        "y1v1.ev.106",
+        "y1v1.ev.118",
+        "y1v1.ev.125",
+        "y1v1.ev.126",
+        "y1v1.ev.132"
       ]
     },
     "economy": {
@@ -47,7 +51,10 @@
         "y1v1.ev.055",
         "y1v1.ev.057",
         "y1v1.ev.108",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.118",
+        "y1v1.ev.125",
+        "y1v1.ev.126"
       ]
     },
     "academic_reasoning": {
@@ -60,7 +67,11 @@
         "y1v1.ev.068",
         "y1v1.ev.069",
         "y1v1.ev.070",
-        "y1v1.ev.105"
+        "y1v1.ev.105",
+        "y1v1.ev.124",
+        "y1v1.ev.127",
+        "y1v1.ev.128",
+        "y1v1.ev.130"
       ]
     },
     "ethics": {
@@ -77,14 +88,17 @@
         "y1v1.ev.101",
         "y1v1.ev.103",
         "y1v1.ev.104",
-        "y1v1.ev.106"
+        "y1v1.ev.106",
+        "y1v1.ev.127",
+        "y1v1.ev.132"
       ]
     },
     "social": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.067",
-        "y1v1.ev.110"
+        "y1v1.ev.110",
+        "y1v1.ev.136"
       ]
     },
     "observation": {
@@ -92,7 +106,9 @@
         "y1v1.case.c.detect-uniform-fifties"
       ],
       "context_evidence_refs": [
-        "y1v1.ev.069"
+        "y1v1.ev.069",
+        "y1v1.ev.124",
+        "y1v1.ev.136"
       ]
     },
     "strategy": {
@@ -109,13 +125,21 @@
     "persuasion": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v1.ev.107"
+        "y1v1.ev.107",
+        "y1v1.ev.133"
       ]
     },
     "leadership": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v1.ev.110"
+        "y1v1.ev.110",
+        "y1v1.ev.133"
+      ]
+    },
+    "combat": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v1.ev.118"
       ]
     }
   },

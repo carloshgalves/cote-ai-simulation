@@ -26,7 +26,11 @@
         "y1v1.ev.045",
         "y1v1.ev.080",
         "y1v1.ev.111",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.115",
+        "y1v1.ev.116",
+        "y1v1.ev.117",
+        "y1v1.ev.134"
       ]
     },
     "ethics": {
@@ -43,7 +47,9 @@
         "y1v1.ev.086",
         "y1v1.ev.088",
         "y1v1.ev.090",
-        "y1v1.ev.100"
+        "y1v1.ev.100",
+        "y1v1.ev.127",
+        "y1v1.ev.134"
       ]
     },
     "leadership": {
@@ -75,6 +81,25 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.113"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v1.ev.115",
+        "y1v1.ev.117"
+      ]
+    },
+    "exam": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v1.ev.127"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v1.ev.134"
       ]
     }
   },

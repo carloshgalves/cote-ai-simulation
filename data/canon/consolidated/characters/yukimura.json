@@ -21,6 +21,12 @@
       "context_evidence_refs": [
         "y1v1.ev.062"
       ]
+    },
+    "academic_reasoning": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v1.ev.128"
+      ]
     }
   },
   "source_documents": [],

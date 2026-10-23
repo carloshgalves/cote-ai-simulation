@@ -18,6 +18,7 @@
   "domains": {
     "social": {
       "behavioral_case_refs": [
+        "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic",
         "y1v1.case.y.unreliable-athletic-story"
       ],
       "context_evidence_refs": [
@@ -28,7 +29,10 @@
         "y1v1.ev.064",
         "y1v1.ev.080",
         "y1v1.ev.111",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.116",
+        "y1v1.ev.123",
+        "y1v1.ev.134"
       ]
     },
     "ethics": {
@@ -63,17 +67,27 @@
       ]
     },
     "academic_reasoning": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.088",
         "y1v1.ev.090",
-        "y1v1.ev.100"
+        "y1v1.ev.100",
+        "y1v1.ev.123",
+        "y1v1.ev.134"
       ]
     },
     "emotion": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.102"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v1.ev.134"
       ]
     }
   },

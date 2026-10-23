@@ -19,7 +19,8 @@
     "social": {
       "behavioral_case_refs": [
         "y1v1.case.d.reject-introduction",
-        "y1v1.case.d.soften-after-rescue"
+        "y1v1.case.d.soften-after-rescue",
+        "y1v1.case.ken-sudo.prioritize-study-over-basketball"
       ],
       "context_evidence_refs": [
         "y1v1.ev.017",
@@ -35,7 +36,9 @@
         "y1v1.ev.092",
         "y1v1.ev.111",
         "y1v1.ev.112",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.131",
+        "y1v1.ev.134"
       ]
     },
     "leadership": {
@@ -58,12 +61,14 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.022",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.126"
       ]
     },
     "combat": {
       "behavioral_case_refs": [
-        "y1v1.case.d.confront-upperclassmen"
+        "y1v1.case.d.confront-upperclassmen",
+        "y1v1.case.ken-sudo.fifty-meter-swim"
       ],
       "context_evidence_refs": [
         "y1v1.ev.023",
@@ -71,7 +76,9 @@
         "y1v1.ev.026",
         "y1v1.ev.033",
         "y1v1.ev.038",
-        "y1v1.ev.040"
+        "y1v1.ev.040",
+        "y1v1.ev.120",
+        "y1v1.ev.121"
       ]
     },
     "risk_management": {
@@ -84,7 +91,8 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.033",
-        "y1v1.ev.103"
+        "y1v1.ev.103",
+        "y1v1.ev.126"
       ]
     },
     "strategy": {
@@ -95,7 +103,8 @@
         "y1v1.ev.085",
         "y1v1.ev.086",
         "y1v1.ev.105",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.120"
       ]
     },
     "academic_reasoning": {
@@ -108,7 +117,9 @@
         "y1v1.ev.088",
         "y1v1.ev.090",
         "y1v1.ev.100",
-        "y1v1.ev.105"
+        "y1v1.ev.105",
+        "y1v1.ev.127",
+        "y1v1.ev.134"
       ]
     },
     "persuasion": {
@@ -135,13 +146,23 @@
     "conflict": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v1.ev.091"
+        "y1v1.ev.091",
+        "y1v1.ev.131"
       ]
     },
     "exam": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v1.ev.103"
+        "y1v1.ev.103",
+        "y1v1.ev.127"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [
+        "y1v1.case.ken-sudo.prioritize-study-over-basketball"
+      ],
+      "context_evidence_refs": [
+        "y1v1.ev.134"
       ]
     }
   },

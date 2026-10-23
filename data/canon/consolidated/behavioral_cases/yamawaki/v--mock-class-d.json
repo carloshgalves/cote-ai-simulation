@@ -3,10 +3,10 @@
   "actor_id": "actor.yamawaki",
   "primary_actor_id": "actor.yamawaki",
   "title": "mock class d",
-  "context": "Class A student Yamawaki mocks Class D in the library, provoking Sudou.",
+  "context": "Class C student Yamawaki mocks Class D in the library, provoking Sudou.",
   "observed_actions": "Provokes academically struggling rivals verbally",
   "observed_result": "Triggers escalation risk",
-  "epistemic_limits": "Not proof of combat or high strategic skill",
+  "epistemic_limits": "Not proof of combat or high strategic skill; Home class is Class C as stated in PDF page 220.",
   "source": {
     "work_id": "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "pdf_pages": [

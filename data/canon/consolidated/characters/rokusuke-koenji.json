@@ -44,10 +44,41 @@
     },
     "combat": {
       "behavioral_case_refs": [
-        "y1v1.case.o.swimming-heat"
+        "y1v1.case.o.swimming-heat",
+        "y1v1.case.rokusuke-koenji.swim-final-over-sudo"
       ],
       "context_evidence_refs": [
-        "y1v1.ev.040"
+        "y1v1.ev.040",
+        "y1v1.ev.121"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [
+        "y1v1.case.rokusuke-koenji.predict-zero-allowance"
+      ],
+      "context_evidence_refs": [
+        "y1v1.ev.124"
+      ]
+    },
+    "academic_reasoning": {
+      "behavioral_case_refs": [
+        "y1v1.case.rokusuke-koenji.predict-zero-allowance"
+      ],
+      "context_evidence_refs": [
+        "y1v1.ev.124",
+        "y1v1.ev.128"
+      ]
+    },
+    "economy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v1.ev.129"
+      ]
+    },
+    "institution": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v1.ev.129"
       ]
     }
   },

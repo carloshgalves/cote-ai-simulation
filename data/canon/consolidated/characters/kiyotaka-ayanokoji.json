@@ -32,7 +32,8 @@
         "y1v1.case.k.exam-paper-bargain",
         "y1v1.case.k.exam-reuse-inference",
         "y1v1.case.k.recruit-kushida",
-        "y1v1.case.k.swim-middle"
+        "y1v1.case.k.swim-middle",
+        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort"
       ],
       "context_evidence_refs": [
         "v0.char.011",
@@ -55,7 +56,9 @@
         "y1v1.ev.098",
         "y1v1.ev.099",
         "y1v1.ev.108",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.120",
+        "y1v1.ev.135"
       ]
     },
     "social": {
@@ -116,7 +119,8 @@
         "y1v1.ev.099",
         "y1v1.ev.110",
         "y1v1.ev.111",
-        "y1v1.ev.112"
+        "y1v1.ev.112",
+        "y1v1.ev.136"
       ]
     },
     "politics": {
@@ -171,7 +175,8 @@
         "y1v1.ev.050",
         "y1v1.ev.052",
         "y1v1.ev.066",
-        "y1v1.ev.089"
+        "y1v1.ev.089",
+        "y1v1.ev.125"
       ]
     },
     "combat": {
@@ -181,7 +186,8 @@
         "v0.case.kiyotaka.shiro-learning",
         "v0.case.kiyotaka.yuki-health",
         "y1v1.case.k.evade-manabu",
-        "y1v1.case.k.swim-middle"
+        "y1v1.case.k.swim-middle",
+        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort"
       ],
       "context_evidence_refs": [
         "v0.char.016",
@@ -201,7 +207,8 @@
         "y1v1.ev.038",
         "y1v1.ev.082",
         "y1v1.ev.083",
-        "y1v1.ev.084"
+        "y1v1.ev.084",
+        "y1v1.ev.120"
       ]
     },
     "academic_reasoning": {
@@ -254,7 +261,8 @@
         "y1v1.ev.050",
         "y1v1.ev.095",
         "y1v1.ev.108",
-        "y1v1.ev.109"
+        "y1v1.ev.109",
+        "y1v1.ev.125"
       ]
     },
     "ethics": {
@@ -284,7 +292,8 @@
         "y1v1.ev.074",
         "y1v1.ev.075",
         "y1v1.ev.095",
-        "y1v1.ev.107"
+        "y1v1.ev.107",
+        "y1v1.ev.133"
       ]
     },
     "emotion": {
@@ -312,7 +321,8 @@
         "y1v1.ev.076",
         "y1v1.ev.087",
         "y1v1.ev.098",
-        "y1v1.ev.110"
+        "y1v1.ev.110",
+        "y1v1.ev.133"
       ]
     },
     "observation": {
@@ -326,7 +336,9 @@
         "y1v1.ev.077",
         "y1v1.ev.083",
         "y1v1.ev.084",
-        "y1v1.ev.094"
+        "y1v1.ev.094",
+        "y1v1.ev.135",
+        "y1v1.ev.136"
       ]
     }
   },

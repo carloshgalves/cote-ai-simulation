@@ -17,15 +17,28 @@
   },
   "domains": {
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.sotomura.covert-observation-plan"
+      ],
       "context_evidence_refs": [
-        "y1v1.ev.034"
+        "y1v1.ev.034",
+        "y1v1.ev.115",
+        "y1v1.ev.117"
       ]
     },
     "ethics": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.034"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [
+        "y1v1.case.sotomura.covert-observation-plan"
+      ],
+      "context_evidence_refs": [
+        "y1v1.ev.115",
+        "y1v1.ev.117"
       ]
     }
   },

@@ -35,7 +35,8 @@
         "y1v1.ev.079",
         "y1v1.ev.089",
         "y1v1.ev.099",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.123"
       ]
     },
     "persuasion": {
@@ -48,7 +49,8 @@
         "y1v1.ev.014",
         "y1v1.ev.042",
         "y1v1.ev.075",
-        "y1v1.ev.095"
+        "y1v1.ev.095",
+        "y1v1.ev.133"
       ]
     },
     "ethics": {
@@ -72,7 +74,8 @@
         "y1v1.ev.094",
         "y1v1.ev.097",
         "y1v1.ev.098",
-        "y1v1.ev.099"
+        "y1v1.ev.099",
+        "y1v1.ev.135"
       ]
     },
     "leadership": {
@@ -85,14 +88,16 @@
         "y1v1.ev.087",
         "y1v1.ev.098",
         "y1v1.ev.100",
-        "y1v1.ev.114"
+        "y1v1.ev.114",
+        "y1v1.ev.133"
       ]
     },
     "observation": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.077",
-        "y1v1.ev.094"
+        "y1v1.ev.094",
+        "y1v1.ev.135"
       ]
     },
     "academic_reasoning": {
@@ -102,7 +107,8 @@
       "context_evidence_refs": [
         "y1v1.ev.078",
         "y1v1.ev.097",
-        "y1v1.ev.100"
+        "y1v1.ev.100",
+        "y1v1.ev.123"
       ]
     },
     "emotion": {
@@ -115,6 +121,14 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.089"
+      ]
+    },
+    "combat": {
+      "behavioral_case_refs": [
+        "y1v1.case.kikyo-kushida.fifty-meter-swim"
+      ],
+      "context_evidence_refs": [
+        "y1v1.ev.119"
       ]
     }
   },

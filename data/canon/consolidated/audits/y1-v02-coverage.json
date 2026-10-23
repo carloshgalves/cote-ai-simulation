@@ -41,15 +41,14 @@
   ],
   "chapters_assessed": 7,
   "record_count": 91,
-  "case_status": "EXTRACTED_ASSISTANT_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
-  "semantic_review": "SOURCE_WINDOW_CORRECTIONS_APPLIED_REVIEW_IN_PROGRESS",
+  "case_status": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_RELEASE_PENDING",
+  "semantic_review": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE",
   "operator_release": "PENDING",
   "method": "Scene-relevant atomic paraphrases; character reports, narrator impressions and directly observed outcomes kept separate; provenance uses physical PDF pages.",
   "open_issues": [
-    "Complete evidence and behavioral case individual semantic pass, with source-window comparisons",
-    "Institutional statements must not become universal executable rules",
-    "Rebuild all direct indexes then run repository-level validation",
-    "Human verification and release required"
+    "Human operator review and explicit release approval pending",
+    "All 118 records remain verified:false and may not be automatically promoted to simulator knowledge",
+    "Class transfers, disciplinary fees and later special-exam mechanics cannot be invented beyond direct source."
   ],
   "behavioral_cases": 27,
   "case_count": 27,
@@ -69,7 +68,7 @@
     "7": 23
   },
   "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v02.json",
-  "coverage_status": "EXTRACTED_AND_INDEXED_ASSISTANT_INDIVIDUAL_REVIEW_PENDING",
+  "coverage_status": "ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_RELEASE_PENDING",
   "semantic_corrections": {
     "count": 24,
     "ids": [
@@ -99,5 +98,14 @@
       "y1v2.ev.089"
     ],
     "scope": "Direct PDF semantic review of locators, actors, images, temporal claims and epistemic uncertainty"
+  },
+  "final_semantic_review": {
+    "assistant_reviewed_evidence": 91,
+    "assistant_reviewed_behavioral_cases": 27,
+    "assistant_total": 118,
+    "operator_verified": 0,
+    "individually_documented_in": "data/canon/consolidated/audits/source-review-register-y1-v02.json",
+    "status": "COMPLETE_ASSISTANT_ONLY",
+    "completed_on": "2026-10-23"
   }
 }

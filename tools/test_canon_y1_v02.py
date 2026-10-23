@@ -55,7 +55,32 @@ assert review["evidence_count"]==len(e)==91
 assert review["behavioral_case_count"]==len(cases)==27
 assert {x["record_id"] for x in review["evidence"]}==eids
 assert {x["case_id"] for x in review["behavioral_cases"]}==set(v2_cases)
-assert all(x["verified"] is False and x["reviewed_by_assistant"] is False for x in review["evidence"]+review["behavioral_cases"])
+assert all(x["verified"] is False and x["reviewed_by_assistant"] is True for x in review["evidence"]+review["behavioral_cases"])
+assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_SOURCE_REVIEW_PASS" for x in review["evidence"])
+assert all(x["semantic_adjudication"]=="ASSISTANT_DIRECT_CASE_REVIEW_PASS" for x in review["behavioral_cases"])
+assert all(x["review_note"].strip() and len(x["review_note"])>=45 for x in review["evidence"]+review["behavioral_cases"])
+assert review["release_gate"]["assistant_individual_semantic_review"]=="COMPLETE"
+assert review["release_gate"]["operator_approval"]=="PENDING"
+assert review["global_promotion"]=="BLOCKED_PENDING_OPERATOR_RELEASE_APPROVAL"
+assert src["record_audit"]=="ASSISTANT_SEMANTIC_REVIEW_COMPLETE_OPERATOR_RELEASE_PENDING"
+assert aud["final_semantic_review"]["assistant_total"]==118
+assert aud["final_semantic_review"]["operator_verified"]==0
+assert next(x for x in e if x["id"]=="y1v2.ev.001")["story_time"]=="NARRATIVE_SOLILOQUY_UNDATED"
+assert next(x for x in e if x["id"]=="y1v2.ev.046")["source"]["pdf_pages"]==[146]
+assert "promises" in next(x for x in e if x["id"]=="y1v2.ev.046")["summary"]
+assert "fight" in next(x for x in e if x["id"]=="y1v2.ev.064")["summary"]
+assert next(x for x in e if x["id"]=="y1v2.ev.081")["source_mode"]=="REPORTED_BY_CHARACTER"
+for entry in review["evidence"]:
+    source_record=next(x for x in e if x["id"]==entry["record_id"])
+    assert entry["pdf_pages"]==source_record["source"]["pdf_pages"]
+    assert entry["primary_claim"]==source_record["summary"]
+    assert entry["source_mode"]==source_record["source_mode"]
+for entry in review["behavioral_cases"]:
+    c=J(B.parent.parent.parent/entry["case_file"])
+    assert c["primary_actor_id"]==entry["source_case_owner_id"]
+    assert c["source"]["pdf_pages"]==entry["source_pdf_pages"]
+    assert c["evidence_refs"]==entry["source_evidence_refs"]
+
 assert review["release_gate"]["individual_verified_count"]==0
 
 print("PASS Y1 V2: 91 evidence, 27 actor-owned cases, canonical index and source/knowledge gates")

@@ -24,8 +24,8 @@
       "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
       "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
       "reviewed_on": "2026-10-23",
-      "review_note": "Opening Sakura first-person interior monologue: subjectively describes a social facade and wish for connection; cannot quantify enduring competence.",
-      "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
+      "review_note": "Opening Sakura first-person interior monologue: subjectively describes a social facade and wish for connection; cannot quantify enduring competence. Narrative date undetermined; do not assign the inner monologue's background to 30 June.",
+      "review_decision": "PASS_AFTER_TEMPORAL_CORRECTION"
     },
     {
       "record_id": "y1v2.ev.002",
@@ -150,7 +150,7 @@
       "epistemic_note": "Confirm speaker, episode timing, factual limits and actor-knowledge acquisition.",
       "semantic_adjudication": "ASSISTANT_DIRECT_SOURCE_REVIEW_PASS",
       "reviewed_on": "2026-10-23",
-      "review_note": "Observations of solitude and Suzuki's cooking are through Kiyotaka's narration; his judgments about Kōenji's motives remain subjective.",
+      "review_note": "Observations of solitude and Suzune's cooking are through Kiyotaka's narration; his judgments about Kōenji's motives remain subjective.",
       "review_decision": "PASS_WITH_EPISTEMIC_BOUNDARY"
     },
     {

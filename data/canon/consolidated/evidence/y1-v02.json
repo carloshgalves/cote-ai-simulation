@@ -16,7 +16,7 @@
         "verification": "OPERATOR_ACCEPTED_PENDING_RECORD_AUDIT"
       },
       "source_mode": "SELF_DESCRIPTION",
-      "story_time": "Y1_M03_END",
+      "story_time": "NARRATIVE_SOLILOQUY_UNDATED",
       "mention_actor_ids": [
         "actor.airi-sakura"
       ],
@@ -25,7 +25,11 @@
         "social"
       ],
       "assertion_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
-      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "validity_time": {
+        "mode": "UNKNOWN",
+        "reason": "Opening personal reflection does not explicitly date the origin of her social difficulties."
+      }
     },
     {
       "id": "y1v2.ev.002",

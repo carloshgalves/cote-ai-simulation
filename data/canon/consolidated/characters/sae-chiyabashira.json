@@ -51,7 +51,9 @@
       ]
     },
     "academic_reasoning": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.c.detect-uniform-fifties"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.047",
         "y1v1.ev.059",
@@ -86,13 +88,17 @@
       ]
     },
     "observation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.c.detect-uniform-fifties"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.069"
       ]
     },
     "strategy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.c.detect-uniform-fifties"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.070",
         "y1v1.ev.105",

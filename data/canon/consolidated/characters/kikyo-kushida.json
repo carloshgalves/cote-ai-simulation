@@ -17,7 +17,11 @@
   },
   "domains": {
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.u.anticipate-suzune-rejection",
+        "y1v1.case.u.public-civic-appeal",
+        "y1v1.case.u.support-inogashira"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.004",
         "y1v1.ev.014",
@@ -35,7 +39,10 @@
       ]
     },
     "persuasion": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.u.public-civic-appeal",
+        "y1v1.case.u.support-inogashira"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.004",
         "y1v1.ev.014",
@@ -69,7 +76,9 @@
       ]
     },
     "leadership": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.u.distribute-old-tests"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.076",
         "y1v1.ev.078",
@@ -87,7 +96,9 @@
       ]
     },
     "academic_reasoning": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.u.distribute-old-tests"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.078",
         "y1v1.ev.097",

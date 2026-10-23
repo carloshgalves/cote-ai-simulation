@@ -17,7 +17,10 @@
   },
   "domains": {
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.d.reject-introduction",
+        "y1v1.case.d.soften-after-rescue"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.017",
         "y1v1.ev.022",
@@ -59,7 +62,9 @@
       ]
     },
     "combat": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.d.confront-upperclassmen"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.023",
         "y1v1.ev.025",
@@ -113,7 +118,9 @@
       ]
     },
     "emotion": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.d.soften-after-rescue"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.079",
         "y1v1.ev.102"

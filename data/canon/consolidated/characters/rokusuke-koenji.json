@@ -17,7 +17,9 @@
   },
   "domains": {
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.o.priority-seat-refusal"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.003",
         "y1v1.ev.004",
@@ -27,7 +29,9 @@
       ]
     },
     "ethics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.o.priority-seat-refusal"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.003"
       ]
@@ -39,7 +43,9 @@
       ]
     },
     "combat": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.o.swimming-heat"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.040"
       ]

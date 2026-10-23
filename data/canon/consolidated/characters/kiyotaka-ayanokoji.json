@@ -26,7 +26,13 @@
         "v0.case.kiyotaka.gummy-third-option",
         "v0.case.kiyotaka.shiro-final-match",
         "v0.case.kiyotaka.shiro-learning",
-        "v0.case.kiyotaka.yuki-health"
+        "v0.case.kiyotaka.yuki-health",
+        "y1v1.case.k.buy-exam-point",
+        "y1v1.case.k.credit-routing",
+        "y1v1.case.k.exam-paper-bargain",
+        "y1v1.case.k.exam-reuse-inference",
+        "y1v1.case.k.recruit-kushida",
+        "y1v1.case.k.swim-middle"
       ],
       "context_evidence_refs": [
         "v0.char.011",
@@ -58,7 +64,13 @@
         "v0.case.kiyotaka.gummy-third-option",
         "v0.case.kiyotaka.shiro-final-match",
         "v0.case.kiyotaka.shiro-learning",
-        "v0.case.kiyotaka.yuki-reunion"
+        "v0.case.kiyotaka.yuki-reunion",
+        "y1v1.case.k.bus-nonintervention",
+        "y1v1.case.k.credit-routing",
+        "y1v1.case.k.multi-dimensional-utility",
+        "y1v1.case.k.recruit-kushida",
+        "y1v1.case.k.shop-help-sudo",
+        "y1v1.case.k.social-entry-freeze"
       ],
       "context_evidence_refs": [
         "v0.char.009",
@@ -167,7 +179,9 @@
         "v0.case.kiyotaka.adults-baton",
         "v0.case.kiyotaka.judo-observation",
         "v0.case.kiyotaka.shiro-learning",
-        "v0.case.kiyotaka.yuki-health"
+        "v0.case.kiyotaka.yuki-health",
+        "y1v1.case.k.evade-manabu",
+        "y1v1.case.k.swim-middle"
       ],
       "context_evidence_refs": [
         "v0.char.016",
@@ -196,7 +210,10 @@
         "v0.case.kiyotaka.gummy-third-option",
         "v0.case.kiyotaka.shiro-learning",
         "v0.case.kiyotaka.yuki-health",
-        "v0.case.kiyotaka.yuki-reunion"
+        "v0.case.kiyotaka.yuki-reunion",
+        "y1v1.case.k.buy-exam-point",
+        "y1v1.case.k.exam-paper-bargain",
+        "y1v1.case.k.exam-reuse-inference"
       ],
       "context_evidence_refs": [
         "v0.char.010",
@@ -220,7 +237,10 @@
     },
     "economy": {
       "behavioral_case_refs": [
-        "v0.case.kiyotaka.yuki-reunion"
+        "v0.case.kiyotaka.yuki-reunion",
+        "y1v1.case.k.buy-exam-point",
+        "y1v1.case.k.exam-paper-bargain",
+        "y1v1.case.k.shop-help-sudo"
       ],
       "context_evidence_refs": [
         "v0.char.014",
@@ -238,7 +258,9 @@
       ]
     },
     "ethics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.k.bus-nonintervention"
+      ],
       "context_evidence_refs": [
         "v0.char.017",
         "v0.wr.024",
@@ -251,7 +273,10 @@
       ]
     },
     "persuasion": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.k.exam-paper-bargain",
+        "y1v1.case.k.recruit-kushida"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.004",
         "y1v1.ev.031",
@@ -263,7 +288,9 @@
       ]
     },
     "emotion": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.k.social-entry-freeze"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.007",
         "y1v1.ev.081"
@@ -289,7 +316,10 @@
       ]
     },
     "observation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.k.evade-manabu",
+        "y1v1.case.k.exam-reuse-inference"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.035",
         "y1v1.ev.069",

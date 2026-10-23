@@ -17,7 +17,9 @@
   },
   "domains": {
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.i.sarcasm-misread"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.018",
         "y1v1.ev.034",

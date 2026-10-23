@@ -17,13 +17,17 @@
   },
   "domains": {
     "leadership": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.m.club-fair-silence"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.031"
       ]
     },
     "persuasion": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.m.club-fair-silence"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.031"
       ]

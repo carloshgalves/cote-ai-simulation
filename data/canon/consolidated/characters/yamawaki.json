@@ -17,7 +17,9 @@
   },
   "domains": {
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.v.mock-class-d"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.091",
         "y1v1.ev.092"

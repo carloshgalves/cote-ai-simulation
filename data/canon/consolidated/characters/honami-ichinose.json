@@ -24,10 +24,18 @@
       ]
     },
     "leadership": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.n.library-deescalation"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.092"
       ]
+    },
+    "persuasion": {
+      "behavioral_case_refs": [
+        "y1v1.case.n.library-deescalation"
+      ],
+      "context_evidence_refs": []
     }
   },
   "source_documents": [],

@@ -17,7 +17,12 @@
   },
   "domains": {
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.s.exclude-social-ally",
+        "y1v1.case.s.pool-points-save-sudo",
+        "y1v1.case.s.refuse-forced-friendship",
+        "y1v1.case.s.study-group-collapse"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.002",
         "y1v1.ev.005",
@@ -45,7 +50,9 @@
       ]
     },
     "ethics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.s.refuse-forced-friendship"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.005",
         "y1v1.ev.043",
@@ -53,7 +60,10 @@
       ]
     },
     "economy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.s.financial-restraint",
+        "y1v1.case.s.pool-points-save-sudo"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.020",
         "y1v1.ev.021",
@@ -75,7 +85,10 @@
       ]
     },
     "combat": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.s.muscle-inference",
+        "y1v1.case.s.swimming-heat"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.023",
         "y1v1.ev.025",
@@ -87,13 +100,19 @@
       ]
     },
     "risk_management": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.s.financial-restraint"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.024"
       ]
     },
     "leadership": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.s.delegated-study-recruitment",
+        "y1v1.case.s.study-group-collapse",
+        "y1v1.case.s.targeted-study-schedule"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.031",
         "y1v1.ev.071",
@@ -109,14 +128,18 @@
       ]
     },
     "persuasion": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.s.delegated-study-recruitment"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.031",
         "y1v1.ev.042"
       ]
     },
     "observation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.s.muscle-inference"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.035",
         "y1v1.ev.077",
@@ -125,7 +148,13 @@
       ]
     },
     "academic_reasoning": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.s.cutoff-appeal",
+        "y1v1.case.s.delegated-study-recruitment",
+        "y1v1.case.s.muscle-inference",
+        "y1v1.case.s.study-group-collapse",
+        "y1v1.case.s.targeted-study-schedule"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.048",
         "y1v1.ev.068",
@@ -138,7 +167,13 @@
       ]
     },
     "strategy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v1.case.s.class-a-goal",
+        "y1v1.case.s.cutoff-appeal",
+        "y1v1.case.s.delegated-study-recruitment",
+        "y1v1.case.s.muscle-inference",
+        "y1v1.case.s.pool-points-save-sudo"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.070",
         "y1v1.ev.071",

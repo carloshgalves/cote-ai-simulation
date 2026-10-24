@@ -21,8 +21,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -47,8 +47,8 @@
         "actor.ken-sudo"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -74,8 +74,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -102,8 +102,8 @@
         "actor.suzune-horikita"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -129,8 +129,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -156,8 +156,8 @@
         "actor.mio-ibuki"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -186,8 +186,8 @@
       "related_event_ids": [
         "evt.y1.v03.island-class-d-leader-replacement"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -213,8 +213,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -240,8 +240,8 @@
         "actor.mio-ibuki"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -267,8 +267,8 @@
         "actor.mio-ibuki"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -294,8 +294,8 @@
         "actor.mio-ibuki"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -321,8 +321,8 @@
         "actor.mio-ibuki"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -348,8 +348,8 @@
         "actor.mio-ibuki"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -369,15 +369,15 @@
         48
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Katsuragi responds to the stranded pair and helps bring the elevator incident to a safe end; Kiyotaka and Ibuki recognize his assistance.",
+      "primary_claim": "When Kiyotaka and Ibuki emerge from the elevator, staff say adults remotely moved it from the first floor. Kiyotaka credits Katsuragi for responding to his phone message; the pair's simultaneous button presses did not cause the rescue.",
       "actor_ids": [
         "actor.katsuragi",
         "actor.kiyotaka-ayanokoji",
         "actor.mio-ibuki"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -405,8 +405,8 @@
         "actor.kokoro-inogashira"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -433,8 +433,8 @@
         "actor.haruki-yamauchi"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -462,8 +462,8 @@
         "actor.haruki-yamauchi"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -488,8 +488,8 @@
         "actor.suzune-horikita"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -516,8 +516,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -546,8 +546,8 @@
       "related_event_ids": [
         "evt.y1.v03.island-class-d-leader-replacement"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -574,8 +574,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -601,8 +601,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -630,8 +630,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -660,8 +660,8 @@
       "related_event_ids": [
         "evt.y1.anhs-private-points-vs-explicit-prohibitions"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -688,8 +688,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -718,8 +718,8 @@
       "related_event_ids": [
         "evt.y1.anhs-private-points-vs-explicit-prohibitions"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -739,7 +739,7 @@
         101
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Katsuragi asks Sudō to carry an unauthorized family package beyond the campus and offers him 100,000 private points in a risk-bearing agreement.",
+      "primary_claim": "Kiyotaka recruits Sudō as a potential off-campus courier for Katsuragi's unauthorized family parcel; Sudō initially objects, then accepts after hearing the circumstances and a 100,000-private-point offer from Katsuragi.",
       "actor_ids": [
         "actor.katsuragi",
         "actor.ken-sudo",
@@ -748,8 +748,8 @@
       "related_event_ids": [
         "evt.y1.v045.katsuragi-family-parcel-payment"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -778,8 +778,8 @@
       "related_event_ids": [
         "evt.y1.v045.katsuragi-family-parcel-payment"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -808,8 +808,8 @@
       "related_event_ids": [
         "evt.y1.v045.katsuragi-family-parcel-payment"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -837,8 +837,8 @@
       "related_event_ids": [
         "evt.y1.v045.katsuragi-family-parcel-payment"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -865,8 +865,8 @@
         "actor.haruki-yamauchi"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -890,8 +890,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -917,8 +917,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -944,8 +944,8 @@
         "actor.suzune-horikita"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -974,8 +974,8 @@
       "related_event_ids": [
         "evt.y1.v04.zodiac-dragon-vip-disclosure"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1003,8 +1003,8 @@
         "actor.airi-sakura"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1031,8 +1031,8 @@
         "actor.airi-sakura"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1060,8 +1060,8 @@
         "actor.kikyo-kushida"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1088,8 +1088,8 @@
         "actor.haruki-yamauchi"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1116,8 +1116,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1144,8 +1144,8 @@
         "actor.airi-sakura"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1173,8 +1173,8 @@
       "related_event_ids": [
         "evt.y1.v04.zodiac-rabbit-reward"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1200,8 +1200,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1229,8 +1229,8 @@
       "related_event_ids": [
         "evt.y1.v045.pool-invasion-and-suppression"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1259,8 +1259,8 @@
         "actor.haruki-yamauchi"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1290,8 +1290,8 @@
       "related_event_ids": [
         "evt.y1.v045.pool-invasion-and-suppression"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1318,8 +1318,8 @@
         "actor.suzune-horikita"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1347,8 +1347,8 @@
         "actor.suzune-horikita"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1376,8 +1376,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1404,8 +1404,8 @@
         "actor.honami-ichinose"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1425,14 +1425,16 @@
         196
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Kiyotaka discusses potential expulsions as leverage, then breaks and discards a physical object rather than using it; an actual expulsion is not shown.",
+      "primary_claim": "Kiyotaka raises possible expulsions as leverage while holding a hard item Karuizawa gave him; he breaks and discards plastic pieces without expelling anyone. The later recording-card revelation contextualizes the item, but this passage never names it.",
       "actor_ids": [
         "actor.kiyotaka-ayanokoji",
         "actor.kei-karuizawa"
       ],
-      "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "related_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1458,8 +1460,8 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1490,8 +1492,8 @@
       "related_event_ids": [
         "evt.y1.v045.pool-invasion-and-suppression"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1520,8 +1522,8 @@
       "related_event_ids": [
         "evt.y1.v045.pool-invasion-and-suppression"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1549,8 +1551,8 @@
       "related_event_ids": [
         "evt.y1.v045.pool-invasion-and-suppression"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1581,8 +1583,8 @@
       "related_event_ids": [
         "evt.y1.v045.pool-invasion-and-suppression"
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1610,8 +1612,8 @@
         "actor.kei-karuizawa"
       ],
       "related_event_ids": [],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "exact PDF span",
@@ -1632,8 +1634,8 @@
         24,
         26
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1651,8 +1653,8 @@
         29,
         32
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1670,8 +1672,8 @@
         47,
         48
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1689,8 +1691,8 @@
         91,
         93
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1708,8 +1710,8 @@
         97,
         103
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1727,8 +1729,8 @@
         100,
         104
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1746,8 +1748,8 @@
         91,
         93
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1765,8 +1767,8 @@
         70,
         73
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1784,8 +1786,8 @@
         15,
         16
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1803,8 +1805,8 @@
         112,
         131
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1822,8 +1824,8 @@
         144,
         151
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1841,8 +1843,8 @@
         149,
         152
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1860,8 +1862,8 @@
         182,
         189
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1879,8 +1881,8 @@
         183,
         189
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1898,8 +1900,8 @@
         188,
         190
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1917,8 +1919,8 @@
         97,
         104
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1936,8 +1938,8 @@
         220,
         221
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1957,8 +1959,8 @@
         205,
         223
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1976,8 +1978,8 @@
         205,
         214
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -1995,8 +1997,8 @@
         197,
         199
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -2014,8 +2016,8 @@
         177,
         182
       ],
-      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_INDEPENDENT_CASE_RECHECK",
-      "reviewed_by_assistant": false,
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
         "actor actually acted, not merely mentioned",
@@ -2027,20 +2029,100 @@
     }
   ],
   "release_gate": {
-    "assistant_individual_semantic_review": "PENDING",
+    "assistant_individual_semantic_review": "COMPLETED_PDF_SECOND_PASS",
     "external_independent_review": "NOT_PERFORMED",
     "operator_approval": "NOT_REQUESTED",
     "individual_verified_count": 0,
     "engine_memory_admission": false,
-    "exam_executable": false
+    "exam_executable": false,
+    "assistant_second_pass_count": 78,
+    "independent_review_pending_count": 78
   },
-  "global_promotion": "BLOCKED_PENDING_INDIVIDUAL_SEMANTIC_AUDIT_AND_OPERATOR_APPROVAL",
+  "global_promotion": "BLOCKED_PENDING_INDEPENDENT_ADVERSARIAL_REVIEW_AND_OPERATOR_APPROVAL",
   "retrospective_policy": "docs/adr/0012-cumulative-cross-volume-revelations.md",
   "notes": [
     "New evidence supplements previous event dossiers but does not mark V3 Ryūen–Katsuragi contract terms as known.",
     "V4 Zodiac VIP selection algorithm remains unknown.",
     "Reader learns about pool recording countermeasure later; the actors involved know at the earlier event time, not all peers.",
     "Do not treat undiscovered rule violation as formal permission.",
-    "No copyrighted complete PDF committed."
+    "No copyrighted complete PDF committed.",
+    "Second-pass review of 57 source evidences and 21 primary-actor cases is assistant source concordance, not independent adversarial signoff; verified remains false and memory/executable gates remain blocked."
+  ],
+  "review_completed_at": "2026-10-24",
+  "reviewer_scope": "ASSISTANT_SECOND_SOURCE_PASS_NOT_INDEPENDENT_HUMAN_OR_THIRD_PARTY_SIGNOFF",
+  "findings": [
+    {
+      "id": "V45-SEM-001",
+      "severity": "MEDIUM",
+      "status": "REMEDIATED",
+      "targets": [
+        "y1v45.ev.014",
+        "y1v45.case.katsuragi.help-stranded-elevator-rivals"
+      ],
+      "pdf_pages": [
+        47,
+        48
+      ],
+      "note": "Rescue by staff remotely; fortuitous simultaneous button tests did not operate lift; Katsuragi coordinated according to Kiyotaka's inference."
+    },
+    {
+      "id": "V45-SEM-002",
+      "severity": "MEDIUM",
+      "status": "REMEDIATED",
+      "targets": [
+        "y1v45.ev.020",
+        "evt.y1.v03.island-class-d-leader-replacement"
+      ],
+      "pdf_pages": [
+        70,
+        71
+      ],
+      "note": "Tachibana expressly hears Manabu disclose covert island final leader. Examination committee already had restricted access, homeroom teachers reportedly did not."
+    },
+    {
+      "id": "V45-SEM-003",
+      "severity": "MEDIUM",
+      "status": "REMEDIATED",
+      "targets": [
+        "y1v45.ev.027"
+      ],
+      "pdf_pages": [
+        97,
+        101
+      ],
+      "note": "Kiyotaka recruits Sudō, and Katsuragi supplies offer and funding; original phrasing imprecisely attributed initial request to Katsuragi."
+    },
+    {
+      "id": "V45-SEM-004",
+      "severity": "MEDIUM",
+      "status": "REMEDIATED_WITH_INFERENCE_GATE",
+      "targets": [
+        "y1v45.ev.051",
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ],
+      "pdf_pages": [
+        193,
+        196,
+        220,
+        223
+      ],
+      "note": "Earlier unnamed hard plastic object destroyed by Kiyotaka is contextualized by later card swap; the identity is inferred, not explicitly named at earlier time, and graph link is bidirectional."
+    },
+    {
+      "id": "V45-SEM-005",
+      "severity": "LOW",
+      "status": "REMEDIATED",
+      "targets": [
+        "y1v45.case.nagumo.lead-older-students-volleyball",
+        "y1v45.case.honami-ichinose.initiate-friendly-volleyball-challenge"
+      ],
+      "pdf_pages": [
+        177,
+        182,
+        183,
+        189
+      ],
+      "note": "Removed Manabu/Nagumo as unrelated present participants in the selected behavioral demonstrations; their council discussion remains source context."
+    }
   ]
 }

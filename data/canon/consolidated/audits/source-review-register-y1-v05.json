@@ -1,0 +1,2191 @@
+{
+  "schema_version": "individual-source-review-v2",
+  "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+  "created_at": "2026-10-24",
+  "source_pdf_sha256": "0302c25d48f82c9a336b019c4d52045560fdbd91138381a1b24f6a960ae85914",
+  "source_page_count": 207,
+  "extraction_mode": "SOURCE_FIRST_SELECTIVE_STRATEGY_RELATIONSHIPS_PHYSICAL_PERFORMANCE",
+  "evidence_count": 60,
+  "behavioral_case_count": 28,
+  "evidence": [
+    {
+      "record_id": "y1v5.ev.001",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 1,
+      "pdf_pages": [
+        11
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Sudō recalls family hardship, abandoned sports trials, a lost basketball scholarship recommendation, and his motive for pursuing merit through ANHS.",
+      "actor_ids": [
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.002",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        13
+      ],
+      "source_mode": "CHARACTER_HYPOTHESIS",
+      "primary_claim": "Suzune articulates a Zodiac VIP-selection pattern: sort a group's students by surname, then select the ordinal corresponding to its zodiac animal; Rabbit's fourth is Karuizawa and Dragon's fifth is Kushida. This is a character deduction, not an issued school rule.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kei-karuizawa",
+        "actor.kikyo-kushida"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.003",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        13,
+        14
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata proposes improving coordination with Suzune and Karuizawa; Suzune recognizes the need for some collaboration but rejects including Kushida.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita",
+        "actor.kei-karuizawa",
+        "actor.kikyo-kushida"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.004",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        16,
+        18
+      ],
+      "source_mode": "OFFICIAL_PRINTED_RULES",
+      "primary_claim": "The issued sports-festival rules place first-year A and D in Red and B and C in White, with individual placements, recommended-event multipliers and losing-team/class rank adjustments.",
+      "actor_ids": [],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.005",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        18,
+        21
+      ],
+      "source_mode": "OFFICIAL_PRINTED_RULES",
+      "primary_claim": "Printed rules offer private points or nontransferable next-test bonus points for individual top-three finishes; last place loses points or suffers a test penalty; the ten lowest-scoring students of each year receive a ten-point test deduction.",
+      "actor_ids": [],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.006",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        21,
+        23
+      ],
+      "source_mode": "TEACHER_EXPLANATION",
+      "primary_claim": "The school requires a fixed, class-consensus participation order; regular-event shortfalls lead to disqualification, while a substitute for a recommended event costs 100,000 private points per event.",
+      "actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.007",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        23,
+        25
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sudō volunteers for every recommended event as the class's strongest athlete, while Suzune warns that fatigue and tactical balancing may offset raw ability.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.008",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        26,
+        31
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Katsuragi and Hirata negotiate practical coordination between nominally allied first-year A and D; Class A's internal split between Katsuragi and Sakayanagi is visible.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.yosuke-hirata",
+        "actor.arisu-sakayanagi"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.009",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        27,
+        28
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ryūen leaves a proposed White-team strategy discussion with Ichinose; his professed unwillingness to cooperate does not establish that he lacks a concealed strategy.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.honami-ichinose"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.010",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        31,
+        34
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka distinguishes preparation through scouting, confidential participation ordering and partner selection from reliance on forced withdrawals or exploitable loopholes; he warns Suzune not to underestimate Ryūen.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.011",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        39,
+        40
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata presents volunteers versus evidence-based capability assignment as competing participation policies, balancing morale and expected results.",
+      "actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.012",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        40,
+        42
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune argues for concentrating the class's strongest athletes into high-value groups and rejects less athletic peers' individual reward interests, generating open resistance.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.013",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        41,
+        44
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Karuizawa organizes objections to unequal opportunity; Hirata submits the competing plans to a transparent vote rather than imposing a decision.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.014",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        43,
+        44
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Class D chooses Suzune's ability-focused grouping 16 votes to 13 for Karuizawa's proposal, with abstentions; a sharing-compensation proposal does not erase individual incentive tradeoffs.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kei-karuizawa",
+        "actor.yosuke-hirata"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.015",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        62,
+        64
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "During three-legged practice, Suzune and Onodera fail to synchronize; Suzune treats slower partner adaptation as weakness, while Kiyotaka and Hirata successfully coordinate despite lower pace.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.onodera",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.016",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        64,
+        65
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka briefly outpaces Suzune while tied together to expose the flaw in her pacing theory, then explains matching tempo and communication rather than maximizing one runner's speed.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.017",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        64,
+        66
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune repeatedly changes partners after disputes; she later recognizes that the group's weakest coordination can negate a strong individual's performance.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.onodera"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.018",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        68,
+        71
+      ],
+      "source_mode": "CHARACTER_HYPOTHESIS",
+      "primary_claim": "Kiyotaka raises a suspicion of Kushida leaking her own Dragon VIP identity and arranges a scouting outing with her and Suzune; the hypothesis remains unconfirmed at this stage.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.019",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        74,
+        81
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "The scouting outing uses Kushida's social contacts to obtain observations about other classes; Suzune directly challenges her loyalty, and Kushida asserts solidarity without admitting a prior leak.",
+      "actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.020",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        82,
+        84
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Hirata aggregates practice records to choose an agreed lineup, initially naming Sudō relay anchor; Suzune later secures the anchor role to race near her older brother after disclosing that motive.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.ken-sudo",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.021",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        87,
+        89
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "In the opening 100-meter heats, Sudō and Hirata win their groups; Kanzaki beats Katsuragi, who places third; Kiyotaka deliberately holds an inconspicuous fifth.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.yosuke-hirata",
+        "actor.ryuji-kanzaki",
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.022",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        89,
+        91
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kōenji declares illness and withdraws without demonstrated medical corroboration; Sudō's hard punch is caught in Kōenji's palm, though the episode does not measure comparative all-out combat strength.",
+      "actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.023",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        92,
+        94
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "After repeated poor training outcomes, Sakura manages to finish ahead of another competitor in her 100-meter heat; the narration credits her effort without establishing elite speed.",
+      "actor_ids": [
+        "actor.airi-sakura"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.024",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        94,
+        95
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune edges Ibuki in a close 100-meter race; Ibuki starts quicker but looks toward Suzune, which Kiyotaka interprets as costly distraction.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.mio-ibuki"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.025",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        95,
+        96
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Hirata says Shibata is faster than him; Manabu wins his 100-meter heat; Red leads White 2,011 to 1,891 after the opening event.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.manabu-horikita",
+        "actor.sou-shibata"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.026",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        97,
+        99
+      ],
+      "source_mode": "OBSERVED_AND_REPORTED",
+      "primary_claim": "Hurdles penalize touched or knocked barriers. Kiyotaka deliberately takes a moderate third in his heat, Yukimura reports seventh in two events, and Suzune finishes third behind Yajima and Kinoshita.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.kinoshita",
+        "actor.yajima"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.027",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        100,
+        104
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "The Red coalition loses a capture-the-flag contest as Class C's strength and tactics overwhelm them despite Sudō's force; the event exposes organization and attrition issues.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.kakeru-ryuen",
+        "actor.yosuke-hirata"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.028",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        103,
+        104
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ryūen stomps Sudō while he is down during capture-the-flag; the narration depicts an assault, not a clean measure of relative strength or school-approved play.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.029",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        105,
+        110
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Katsuragi and Hirata organize a height-based tug-of-war arrangement; Sakayanagi-aligned Class A students hesitate, yet the Red side wins one round as B/C coordination deteriorates.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.yosuke-hirata",
+        "actor.arisu-sakayanagi"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.030",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        111,
+        113
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sudō wins an obstacle-race heat ahead of Shibata using balance and stamina; the result is specific to this race, not a universal sports ranking.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.sou-shibata"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.031",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        113,
+        115
+      ],
+      "source_mode": "LIMITED_OBSERVATION",
+      "primary_claim": "Suzune and Class C's Kinoshita collide during the girls' obstacle course and fall; the immediate viewpoint does not establish which student initiated contact, and Suzune continues with leg pain.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kinoshita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.032",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        116,
+        117
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka and Hirata finish their three-legged race by coordinating; Suzune and Kushida encounter an opponent-team struggle and do not produce a simple demonstration of superior raw speed.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.033",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        120,
+        123
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "In the girls' cavalry battle multiple Class C units focus Suzune; Ibuki pursues her rivalry and Karuizawa's attempted support is blocked by Ichinose's group.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.mio-ibuki",
+        "actor.kei-karuizawa",
+        "actor.honami-ichinose"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.034",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        124,
+        129
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "In the boys' cavalry battle Sudō supplies strong force, Hirata attacks from the top, and Ryūen's supporting Albert/Yamada unit resists a physical assault, before Ryūen steals Hirata's headband.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.yosuke-hirata",
+        "actor.kakeru-ryuen",
+        "actor.yamada-albert"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.035",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        128,
+        129
+      ],
+      "source_mode": "SUSPICION",
+      "primary_claim": "Hirata grabs Ryūen's headband but it slips; Kiyotaka observes a sheen, and Sudō alleges slippery substance. The cheating mechanism is strongly suspected but not officially adjudicated here.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kakeru-ryuen",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.036",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        130,
+        131
+      ],
+      "source_mode": "CHARACTER_INFERENCE",
+      "primary_claim": "Kiyotaka infers the enemy acquired Class D's fixed participation order and deliberately optimized matches: Class C weaker athletes against D's stars, stronger athletes against D's weakest, and deliberate targeting of Suzune.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.037",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        132,
+        134
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ryūen's provocations trigger Sudō to punch Hirata, who was trying to restrain him; Sudō abandons the festival, harming team cohesion.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.yosuke-hirata",
+        "actor.kakeru-ryuen"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.038",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        135,
+        136
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ryūen wins his 200-meter heat; Kiyotaka finishes third. Hirata confronts Ryūen about the suspected stolen lineup, but the lineup itself is already locked.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.039",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        137,
+        142
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka forces Suzune to confront the tradeoff between personal performance and retrieving Sudō, urging her to act as a leader after the disruption.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.040",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        144,
+        145
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Suzune seeks medical advice about her injury, considers substituting herself at high private-point cost, and abandons her goal of anchoring beside Manabu.",
+      "actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.041",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        146,
+        154
+      ],
+      "source_mode": "DISPUTED_ACCUSATION",
+      "primary_claim": "Kinoshita accuses Suzune of intentional obstruction and Ryūen uses an allegation and threat of formal proceedings to press for compensation; culpability remains disputed at this stage.",
+      "actor_ids": [
+        "actor.kinoshita",
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen",
+        "actor.kikyo-kushida"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.042",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        155,
+        156
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune agrees to a coerced settlement to keep the allegation from escalating, without admitting that she intentionally injured Kinoshita.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.043",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        157,
+        159
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Suzune changes course to pursue Sudō rather than dwell on her brother's response; her account conveys a change in personal priorities.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.manabu-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.044",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        160,
+        162
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka places last in the scavenger hunt after unworkable prompts, redrawing twice and accepting the stated time penalties; Ike reports winning his own heat.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kanji-ike"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.045",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        163,
+        169
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune finds Sudō in the dorm, listens to his family and recognition grievances, and compares his isolation and pride with her own, persuading him toward returning.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.046",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        169,
+        170
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Ichinose admits her own festival placings were mostly middle/lower-middle rather than firsts, resisting unearned claims of superior individual athletic performance.",
+      "actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.047",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        172,
+        175
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Kushida's private exchange with Kiyotaka reveals active hostility to Suzune and expands her desired expulsion targets to include Kiyotaka; it is her stated intention, not an executed expulsion.",
+      "actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.048",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        181,
+        182
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sudō returns, publicly apologizes for striking Hirata and offers to compete; injured Suzune withdraws from the final relay and Kushida is assigned in her place.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.049",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        183,
+        184
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sudō runs the relay's opening 200-meter leg extremely quickly and hands Hirata a lead estimated by the narrator at at least fifteen meters; class D later loses ground to older runners.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.yosuke-hirata",
+        "actor.onodera"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.050",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        184,
+        185
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Class D falls to seventh by Kushida's relay leg; Nagumo publicly advocates a harsher meritocracy while speaking to president Manabu before their relay legs.",
+      "actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.nagumo",
+        "actor.manabu-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.051",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        183,
+        188
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Hirata and Kiyotaka had secretly arranged Kiyotaka as final-relay substitute, unknown to most classmates; Kiyotaka challenges Manabu to a direct sprint after the other teams have passed him.",
+      "actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabu-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.052",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        187,
+        189
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka and Manabu sprint almost abreast at extraordinary speed; a fallen runner obstructs Kiyotaka, and Manabu finishes ahead. The scene gives no sprint times or unobstructed winner.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabu-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.053",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        190,
+        191
+      ],
+      "source_mode": "OFFICIAL_ANNOUNCEMENT",
+      "primary_claim": "Red wins the overall festival, but first-year classes rank B, C, A, D; D incurs the 100-class-point fourth-place penalty while team victory avoids the losing-team penalty.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kakeru-ryuen",
+        "actor.katsuragi",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.054",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        191
+      ],
+      "source_mode": "OFFICIAL_ANNOUNCEMENT",
+      "primary_claim": "Shibata Sō is named first-year MVP; Sudō reports sweeping his entered individual competitions, but absence and relay outcomes mean he does not claim the individual overall award.",
+      "actor_ids": [
+        "actor.sou-shibata",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.055",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        191,
+        193
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune and Sudō negotiate a promise against unjustified future violence and permission for him to call her Suzune; both acknowledge mistakes, but lasting behavior change is untested.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.056",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        194,
+        196
+      ],
+      "source_mode": "DIRECT_DIALOGUE",
+      "primary_claim": "At a post-festival meeting, Suzune confronts Kushida as the class-information leaker; Kushida admits hostility and involvement, but Suzune's knowledge arises here, not in prior exam scenes.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida",
+        "actor.kakeru-ryuen"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.057",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        198,
+        199
+      ],
+      "source_mode": "SELF_INCRIMINATING_CLAIM",
+      "primary_claim": "Ryūen claims he pre-arranged the collision, manipulated a more serious injury and induced Kinoshita to participate with points; this is Ryūen's recorded but later contested narrative, not independently observed injury causation.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kinoshita",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.058",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        199,
+        201
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune's attempted phone recording is met by Ryūen's simultaneous full recording; an unknown sender then sends Ryūen an incriminating earlier recording, blocking his bargaining position. The sender is not directly identified.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen",
+        "actor.kikyo-kushida"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.059",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        202,
+        204
+      ],
+      "source_mode": "DIRECT_DIALOGUE",
+      "primary_claim": "Arisu Sakayanagi privately approaches Kiyotaka, says 'White Room', claims knowledge of his background and a desire to defeat him. The exact source and date of her knowledge remain her claim.",
+      "actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.060",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        191
+      ],
+      "source_mode": "SOURCE_CONFLICT_COMPARISON",
+      "primary_claim": "Festival publication says the losing side costs 100 class points; later narration says Class B's White-side loss is fifty despite separately granting first-place fifty, producing an unresolved source inconsistency.",
+      "actor_ids": [],
+      "related_event_ids": [],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_RECORD_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "direct physical PDF page and any cross-chapter source separately",
+        "direct speaker vs narrator inference vs school rules",
+        "actor knowledge and revelation time",
+        "physical result vs quantitative ceiling",
+        "misconduct is descriptive, not rewarded as universally effective"
+      ]
+    }
+  ],
+  "behavioral_cases": [
+    {
+      "case_id": "y1v5.case.yosuke-hirata.balance-vote-and-merit",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/balance-vote-and-merit.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        39,
+        40,
+        41,
+        43,
+        44
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.suzune-horikita.concentrate-strong-athletes",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/concentrate-strong-athletes.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        40,
+        42,
+        43,
+        44
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.kei-karuizawa.organize-fairness-opposition",
+      "case_file": "data/canon/consolidated/behavioral_cases/kei-karuizawa/organize-fairness-opposition.json",
+      "primary_actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        41,
+        43,
+        44
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.kiyotaka-ayanokoji.demonstrate-synchronized-partner-pacing",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/demonstrate-synchronized-partner-pacing.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        62,
+        64,
+        65
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.suzune-horikita.struggle-with-three-legged-coordination",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/struggle-with-three-legged-coordination.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        62,
+        64,
+        66
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.yosuke-hirata.model-three-legged-cooperation",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/model-three-legged-cooperation.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        116,
+        117,
+        62,
+        64
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.yosuke-hirata.coordinate-red-coalition",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/coordinate-red-coalition.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        105,
+        110,
+        26,
+        31
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.katsuragi.organize-tug-team-formation",
+      "case_file": "data/canon/consolidated/behavioral_cases/katsuragi/organize-tug-team-formation.json",
+      "primary_actor_id": "actor.katsuragi",
+      "pdf_pages": [
+        105,
+        110
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.ken-sudo.win-sprint-and-obstacle-heats",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/win-sprint-and-obstacle-heats.json",
+      "primary_actor_id": "actor.ken-sudo",
+      "pdf_pages": [
+        111,
+        113,
+        87,
+        89
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.suzune-horikita.edge-ibuki-in-sprint",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/edge-ibuki-in-sprint.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        94,
+        95
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.mio-ibuki.challenge-suzune-in-sprint",
+      "case_file": "data/canon/consolidated/behavioral_cases/mio-ibuki/challenge-suzune-in-sprint.json",
+      "primary_actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        94,
+        95
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.rokusuke-koenji.catch-sudo-strike-while-withdrawing",
+      "case_file": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/catch-sudo-strike-while-withdrawing.json",
+      "primary_actor_id": "actor.rokusuke-koenji",
+      "pdf_pages": [
+        89,
+        91
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.ryuji-kanzaki.outpace-katsuragi-in-100m",
+      "case_file": "data/canon/consolidated/behavioral_cases/ryuji-kanzaki/outpace-katsuragi-in-100m.json",
+      "primary_actor_id": "actor.ryuji-kanzaki",
+      "pdf_pages": [
+        87,
+        89
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.suzune-horikita.place-third-against-track-specialists",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/place-third-against-track-specialists.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        97,
+        99
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.kakeru-ryuen.physically-provoke-during-flag",
+      "case_file": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/physically-provoke-during-flag.json",
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        100,
+        103,
+        104
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.yosuke-hirata.try-to-deescalate-sudo",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/try-to-deescalate-sudo.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        132,
+        134
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.kakeru-ryuen.exploit-leaked-fixed-participation-order",
+      "case_file": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/exploit-leaked-fixed-participation-order.json",
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        130,
+        131,
+        135,
+        136,
+        194,
+        196
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.yosuke-hirata.contest-ryuen-cavalry-unit",
+      "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/contest-ryuen-cavalry-unit.json",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        124,
+        128,
+        129
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/negotiate-contested-injury-accusation.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        146,
+        154,
+        155,
+        156
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.suzune-horikita.bring-back-sudo-through-mutual-recognition",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/bring-back-sudo-through-mutual-recognition.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        157,
+        159,
+        163,
+        169,
+        181,
+        182
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.ken-sudo.apologize-and-return-to-race",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/apologize-and-return-to-race.json",
+      "primary_actor_id": "actor.ken-sudo",
+      "pdf_pages": [
+        132,
+        134,
+        181,
+        182
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.ken-sudo.create-relay-opening-lead",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/create-relay-opening-lead.json",
+      "primary_actor_id": "actor.ken-sudo",
+      "pdf_pages": [
+        183,
+        184
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.kiyotaka-ayanokoji.run-all-out-against-manabu",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/run-all-out-against-manabu.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        183,
+        187,
+        188,
+        189
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.manabu-horikita.accept-relay-duel-with-kiyotaka",
+      "case_file": "data/canon/consolidated/behavioral_cases/manabu-horikita/accept-relay-duel-with-kiyotaka.json",
+      "primary_actor_id": "actor.manabu-horikita",
+      "pdf_pages": [
+        183,
+        187,
+        188,
+        189
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.sou-shibata.earn-first-year-festival-mvp",
+      "case_file": "data/canon/consolidated/behavioral_cases/sou-shibata/earn-first-year-festival-mvp.json",
+      "primary_actor_id": "actor.sou-shibata",
+      "pdf_pages": [
+        111,
+        113,
+        191,
+        95,
+        96
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.kikyo-kushida.leak-class-participation-to-opponent",
+      "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/leak-class-participation-to-opponent.json",
+      "primary_actor_id": "actor.kikyo-kushida",
+      "pdf_pages": [
+        172,
+        175,
+        194,
+        196,
+        74,
+        81
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation",
+      "case_file": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/pressure-horikita-with-kinoshita-accusation.json",
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        146,
+        154,
+        155,
+        156,
+        198,
+        199,
+        201
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.arisu-sakayanagi.approach-kiyotaka-with-white-room-secret",
+      "case_file": "data/canon/consolidated/behavioral_cases/arisu-sakayanagi/approach-kiyotaka-with-white-room-secret.json",
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "pdf_pages": [
+        202,
+        204
+      ],
+      "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
+      "reviewed_by_assistant": false,
+      "verified": false,
+      "required_checks": [
+        "primary actor observed, not mentioned only",
+        "evidence pages and result overlap",
+        "event physical comparison bounded",
+        "no automated counterfactual outcome or universal success",
+        "independent gate remains closed"
+      ]
+    }
+  ],
+  "release_gate": {
+    "assistant_individual_semantic_review": "PENDING",
+    "external_independent_review": "NOT_PERFORMED",
+    "operator_approval": "NOT_REQUESTED",
+    "individual_verified_count": 0,
+    "engine_memory_admission": false,
+    "exam_executable": false
+  },
+  "global_promotion": "BLOCKED_PENDING_SEMANTIC_ADVERSARIAL_REVIEW_AND_OPERATOR_APPROVAL",
+  "notes": [
+    "No independent claim verification; book remains uncommitted.",
+    "VIP pattern is two-example actor deduction; official algorithm not issued.",
+    "Class B grade-vs-coalition penalty amount is contradicted by narration; keep conflict open.",
+    "Questionable physical misconduct and Kinoshita injury are not treated as simulation tactics.",
+    "Manabu versus Kiyotaka finish is obstructed; there are no measured times."
+  ]
+}

@@ -30,8 +30,7 @@
     "18": {
       "evidence": [
         "y1v5.ev.004",
-        "y1v5.ev.005",
-        "y1v5.ev.060"
+        "y1v5.ev.005"
       ],
       "cases": []
     },
@@ -104,8 +103,8 @@
         "y1v5.ev.012"
       ],
       "cases": [
-        "y1v5.case.yosuke-hirata.balance-vote-and-merit",
-        "y1v5.case.suzune-horikita.concentrate-strong-athletes"
+        "y1v5.case.suzune-horikita.concentrate-strong-athletes",
+        "y1v5.case.yosuke-hirata.balance-vote-and-merit"
       ]
     },
     "41": {
@@ -113,8 +112,8 @@
         "y1v5.ev.013"
       ],
       "cases": [
-        "y1v5.case.yosuke-hirata.balance-vote-and-merit",
-        "y1v5.case.kei-karuizawa.organize-fairness-opposition"
+        "y1v5.case.kei-karuizawa.organize-fairness-opposition",
+        "y1v5.case.yosuke-hirata.balance-vote-and-merit"
       ]
     },
     "42": {
@@ -130,9 +129,9 @@
         "y1v5.ev.014"
       ],
       "cases": [
-        "y1v5.case.yosuke-hirata.balance-vote-and-merit",
+        "y1v5.case.kei-karuizawa.organize-fairness-opposition",
         "y1v5.case.suzune-horikita.concentrate-strong-athletes",
-        "y1v5.case.kei-karuizawa.organize-fairness-opposition"
+        "y1v5.case.yosuke-hirata.balance-vote-and-merit"
       ]
     },
     "44": {
@@ -141,9 +140,9 @@
         "y1v5.ev.014"
       ],
       "cases": [
-        "y1v5.case.yosuke-hirata.balance-vote-and-merit",
+        "y1v5.case.kei-karuizawa.organize-fairness-opposition",
         "y1v5.case.suzune-horikita.concentrate-strong-athletes",
-        "y1v5.case.kei-karuizawa.organize-fairness-opposition"
+        "y1v5.case.yosuke-hirata.balance-vote-and-merit"
       ]
     },
     "62": {
@@ -264,8 +263,8 @@
         "y1v5.ev.024"
       ],
       "cases": [
-        "y1v5.case.suzune-horikita.edge-ibuki-in-sprint",
-        "y1v5.case.mio-ibuki.challenge-suzune-in-sprint"
+        "y1v5.case.mio-ibuki.challenge-suzune-in-sprint",
+        "y1v5.case.suzune-horikita.edge-ibuki-in-sprint"
       ]
     },
     "95": {
@@ -274,9 +273,9 @@
         "y1v5.ev.025"
       ],
       "cases": [
-        "y1v5.case.suzune-horikita.edge-ibuki-in-sprint",
         "y1v5.case.mio-ibuki.challenge-suzune-in-sprint",
-        "y1v5.case.sou-shibata.earn-first-year-festival-mvp"
+        "y1v5.case.sou-shibata.earn-first-year-festival-mvp",
+        "y1v5.case.suzune-horikita.edge-ibuki-in-sprint"
       ]
     },
     "96": {
@@ -333,8 +332,8 @@
         "y1v5.ev.029"
       ],
       "cases": [
-        "y1v5.case.yosuke-hirata.coordinate-red-coalition",
-        "y1v5.case.katsuragi.organize-tug-team-formation"
+        "y1v5.case.katsuragi.organize-tug-team-formation",
+        "y1v5.case.yosuke-hirata.coordinate-red-coalition"
       ]
     },
     "110": {
@@ -342,8 +341,8 @@
         "y1v5.ev.029"
       ],
       "cases": [
-        "y1v5.case.yosuke-hirata.coordinate-red-coalition",
-        "y1v5.case.katsuragi.organize-tug-team-formation"
+        "y1v5.case.katsuragi.organize-tug-team-formation",
+        "y1v5.case.yosuke-hirata.coordinate-red-coalition"
       ]
     },
     "111": {
@@ -445,8 +444,8 @@
         "y1v5.ev.037"
       ],
       "cases": [
-        "y1v5.case.yosuke-hirata.try-to-deescalate-sudo",
-        "y1v5.case.ken-sudo.apologize-and-return-to-race"
+        "y1v5.case.ken-sudo.apologize-and-return-to-race",
+        "y1v5.case.yosuke-hirata.try-to-deescalate-sudo"
       ]
     },
     "134": {
@@ -454,8 +453,8 @@
         "y1v5.ev.037"
       ],
       "cases": [
-        "y1v5.case.yosuke-hirata.try-to-deescalate-sudo",
-        "y1v5.case.ken-sudo.apologize-and-return-to-race"
+        "y1v5.case.ken-sudo.apologize-and-return-to-race",
+        "y1v5.case.yosuke-hirata.try-to-deescalate-sudo"
       ]
     },
     "135": {
@@ -503,8 +502,8 @@
         "y1v5.ev.041"
       ],
       "cases": [
-        "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation",
-        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation"
+        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation",
+        "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation"
       ]
     },
     "154": {
@@ -512,8 +511,8 @@
         "y1v5.ev.041"
       ],
       "cases": [
-        "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation",
-        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation"
+        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation",
+        "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation"
       ]
     },
     "155": {
@@ -521,8 +520,8 @@
         "y1v5.ev.042"
       ],
       "cases": [
-        "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation",
-        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation"
+        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation",
+        "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation"
       ]
     },
     "156": {
@@ -530,8 +529,8 @@
         "y1v5.ev.042"
       ],
       "cases": [
-        "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation",
-        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation"
+        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation",
+        "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation"
       ]
     },
     "157": {
@@ -606,8 +605,8 @@
         "y1v5.ev.048"
       ],
       "cases": [
-        "y1v5.case.suzune-horikita.bring-back-sudo-through-mutual-recognition",
-        "y1v5.case.ken-sudo.apologize-and-return-to-race"
+        "y1v5.case.ken-sudo.apologize-and-return-to-race",
+        "y1v5.case.suzune-horikita.bring-back-sudo-through-mutual-recognition"
       ]
     },
     "182": {
@@ -615,8 +614,8 @@
         "y1v5.ev.048"
       ],
       "cases": [
-        "y1v5.case.suzune-horikita.bring-back-sudo-through-mutual-recognition",
-        "y1v5.case.ken-sudo.apologize-and-return-to-race"
+        "y1v5.case.ken-sudo.apologize-and-return-to-race",
+        "y1v5.case.suzune-horikita.bring-back-sudo-through-mutual-recognition"
       ]
     },
     "183": {

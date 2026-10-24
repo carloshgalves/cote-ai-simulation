@@ -72,5 +72,11 @@
     "Actual complete event placings unknown; no inferred global athletic rankings",
     "Independent record-level semantic review and operator release pending"
   ],
-  "coverage_status": "SELECTIVE_FIRST_SOURCE_PASS_NOT_RELEASE_AUTHORIZED"
+  "coverage_status": "SELECTIVE_FIRST_SOURCE_PASS_NOT_RELEASE_AUTHORIZED",
+  "cases": 28,
+  "behavioral_cases": 28,
+  "global_character_count": 84,
+  "global_behavioral_case_count": 230,
+  "pending_semantic_items": 88,
+  "review_register_path": "data/canon/consolidated/audits/source-review-register-y1-v05.json"
 }

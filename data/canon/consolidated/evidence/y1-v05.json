@@ -82,7 +82,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-vip-surname-order-pattern"
+      ]
     },
     {
       "id": "y1v5.ev.003",
@@ -699,7 +701,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.018",
@@ -824,7 +828,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.relay-unmasked-physical-capacity"
+      ]
     },
     {
       "id": "y1v5.ev.021",
@@ -1331,7 +1337,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.relay-unmasked-physical-capacity"
+      ]
     },
     {
       "id": "y1v5.ev.033",
@@ -1584,7 +1592,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.039",
@@ -1757,7 +1767,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.043",
@@ -1800,7 +1812,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
     },
     {
       "id": "y1v5.ev.044",
@@ -1926,7 +1940,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.047",
@@ -1969,7 +1985,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.048",
@@ -2092,7 +2110,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
     },
     {
       "id": "y1v5.ev.051",
@@ -2176,7 +2196,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.053",
@@ -2259,7 +2281,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
     },
     {
       "id": "y1v5.ev.055",
@@ -2303,7 +2327,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.relay-unmasked-physical-capacity"
+      ]
     },
     {
       "id": "y1v5.ev.056",
@@ -2388,7 +2414,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.relay-unmasked-physical-capacity"
+      ]
     },
     {
       "id": "y1v5.ev.058",
@@ -2553,7 +2581,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-dragon-vip-disclosure"
+      ]
     },
     {
       "id": "y1v5.ev.062",
@@ -2595,7 +2625,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-dragon-vip-disclosure"
+      ]
     },
     {
       "id": "y1v5.ev.063",
@@ -2638,7 +2670,10 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-dragon-vip-disclosure",
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.064",
@@ -2679,7 +2714,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.065",
@@ -2721,7 +2758,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.066",
@@ -2760,7 +2799,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.067",
@@ -2801,7 +2842,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sakayanagi-white-room-recognition"
+      ]
     },
     {
       "id": "y1v5.ev.068",
@@ -2841,7 +2884,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sakayanagi-white-room-recognition"
+      ]
     }
   ]
 }

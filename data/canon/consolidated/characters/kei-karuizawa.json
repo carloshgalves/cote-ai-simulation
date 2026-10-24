@@ -76,7 +76,8 @@
         "y1v5.ev.003",
         "y1v5.ev.013",
         "y1v5.ev.014",
-        "y1v5.ev.045"
+        "y1v5.ev.045",
+        "y1v5.ev.071"
       ]
     },
     "ethics": {
@@ -191,7 +192,8 @@
         "y1v5.ev.003",
         "y1v5.ev.040",
         "y1v5.ev.042",
-        "y1v5.ev.045"
+        "y1v5.ev.045",
+        "y1v5.ev.071"
       ]
     },
     "persuasion": {
@@ -263,7 +265,8 @@
     "deception": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v4.ev.131"
+        "y1v4.ev.131",
+        "y1v5.ev.071"
       ]
     },
     "consequence": {
@@ -296,6 +299,12 @@
       "context_evidence_refs": [
         "y1v5.ev.040"
       ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.071"
+      ]
     }
   },
   "source_documents": [],
@@ -311,5 +320,7 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

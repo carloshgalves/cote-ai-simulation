@@ -46,7 +46,8 @@
         "y1v4.case.kakeru-ryuen.name-kushida-dragon-vip",
         "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance",
         "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
-        "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording"
+        "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording",
+        "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence"
       ],
       "context_evidence_refs": [
         "y1v2.ev.081",
@@ -78,7 +79,10 @@
         "y1v5.ev.062",
         "y1v5.ev.063",
         "y1v5.ev.064",
-        "y1v5.ev.065"
+        "y1v5.ev.065",
+        "y1v5.ev.074",
+        "y1v5.ev.075",
+        "y1v5.ev.076"
       ]
     },
     "economy": {
@@ -174,7 +178,9 @@
         "y1v5.ev.009",
         "y1v5.ev.046",
         "y1v5.ev.047",
-        "y1v5.ev.064"
+        "y1v5.ev.064",
+        "y1v5.ev.076",
+        "y1v5.ev.077"
       ]
     },
     "ethics": {
@@ -185,14 +191,19 @@
       ]
     },
     "motivation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence"
+      ],
       "context_evidence_refs": [
-        "y1v45.ev.007"
+        "y1v45.ev.007",
+        "y1v5.ev.074",
+        "y1v5.ev.075"
       ]
     },
     "risk_management": {
       "behavioral_case_refs": [
-        "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording"
+        "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording",
+        "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence"
       ],
       "context_evidence_refs": [
         "y1v5.ev.011",
@@ -221,7 +232,9 @@
         "y1v5.ev.043",
         "y1v5.ev.047",
         "y1v5.ev.062",
-        "y1v5.ev.063"
+        "y1v5.ev.063",
+        "y1v5.ev.074",
+        "y1v5.ev.075"
       ]
     },
     "cooperation": {
@@ -245,20 +258,37 @@
         "y1v5.ev.061",
         "y1v5.ev.063",
         "y1v5.ev.065",
-        "y1v5.ev.066"
+        "y1v5.ev.066",
+        "y1v5.ev.077"
       ]
     },
     "coercion": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.047",
-        "y1v5.ev.062"
+        "y1v5.ev.062",
+        "y1v5.ev.075",
+        "y1v5.ev.076"
       ]
     },
     "relationship": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v5.ev.061"
+      ]
+    },
+    "deception": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.074"
+      ]
+    },
+    "counterstrategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.077"
       ]
     }
   },
@@ -284,5 +314,10 @@
     "admitted_initial_claim_ids": [],
     "legacy_material_can_seed_agent": false,
     "quarantine_policy": "Only source-backed evidence re-reviewed at record level may be promoted; future references never seed memories."
-  }
+  },
+  "goal_transition_refs": [
+    "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score",
+    "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

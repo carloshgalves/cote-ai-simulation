@@ -91,7 +91,9 @@
         "y1v5.ev.043",
         "y1v5.ev.048",
         "y1v5.ev.050",
-        "y1v5.ev.054"
+        "y1v5.ev.054",
+        "y1v5.ev.070",
+        "y1v5.ev.072"
       ]
     },
     "economy": {
@@ -173,7 +175,8 @@
         "y1v5.ev.016",
         "y1v5.ev.026",
         "y1v5.ev.041",
-        "y1v5.ev.055"
+        "y1v5.ev.055",
+        "y1v5.ev.070"
       ]
     },
     "academic_reasoning": {
@@ -215,7 +218,10 @@
         "y1v5.ev.048",
         "y1v5.ev.050",
         "y1v5.ev.054",
-        "y1v5.ev.060"
+        "y1v5.ev.060",
+        "y1v5.ev.069",
+        "y1v5.ev.072",
+        "y1v5.ev.073"
       ]
     },
     "ethics": {
@@ -261,7 +267,8 @@
       "behavioral_case_refs": [
         "y1v1.case.ken-sudo.prioritize-study-over-basketball",
         "y1v2.case.ken-sudo.admit-conduct-consequences",
-        "y1v2.case.ken-sudo.request-confidential-help"
+        "y1v2.case.ken-sudo.request-confidential-help",
+        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect"
       ],
       "context_evidence_refs": [
         "y1v1.ev.134",
@@ -271,7 +278,12 @@
         "y1v2.ev.084",
         "y1v45.ev.028",
         "y1v5.ev.001",
-        "y1v5.ev.018"
+        "y1v5.ev.018",
+        "y1v5.ev.069",
+        "y1v5.ev.070",
+        "y1v5.ev.072",
+        "y1v5.ev.073",
+        "y1v5.ev.080"
       ]
     },
     "observation": {
@@ -301,7 +313,8 @@
         "y1v5.case.ken-sudo.practice-coaching-and-temper",
         "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
         "y1v5.case.ken-sudo.serve-as-powerbase-in-cavalry",
-        "y1v5.case.ken-sudo.win-obstacles-through-balance"
+        "y1v5.case.ken-sudo.win-obstacles-through-balance",
+        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect"
       ],
       "context_evidence_refs": [
         "y1v45.ev.003",
@@ -324,12 +337,14 @@
       "behavioral_case_refs": [
         "y1v5.case.ken-sudo.abandon-festival-after-provocation",
         "y1v5.case.ken-sudo.practice-coaching-and-temper",
-        "y1v5.case.ken-sudo.return-apologize-and-serve-relay"
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect"
       ],
       "context_evidence_refs": [
         "y1v45.ev.003",
         "y1v5.ev.028",
-        "y1v5.ev.060"
+        "y1v5.ev.060",
+        "y1v5.ev.080"
       ]
     },
     "negotiation": {
@@ -383,11 +398,17 @@
       ]
     },
     "relationship": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.018",
         "y1v5.ev.054",
-        "y1v5.ev.060"
+        "y1v5.ev.060",
+        "y1v5.ev.069",
+        "y1v5.ev.072",
+        "y1v5.ev.073",
+        "y1v5.ev.080"
       ]
     },
     "results": {
@@ -427,5 +448,10 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [
+    "y1v5.goal.ken-sudo.romantic-interest-shapes-mvp-motivation",
+    "y1v5.goal.ken-sudo.from-demanded-respect-to-conditional-reliability"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

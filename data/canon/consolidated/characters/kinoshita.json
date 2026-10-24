@@ -37,7 +37,8 @@
       "context_evidence_refs": [
         "y1v5.ev.038",
         "y1v5.ev.047",
-        "y1v5.ev.063"
+        "y1v5.ev.063",
+        "y1v5.ev.075"
       ]
     },
     "negotiation": {
@@ -62,7 +63,8 @@
     "coercion": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v5.ev.047"
+        "y1v5.ev.047",
+        "y1v5.ev.075"
       ]
     },
     "strategy": {
@@ -70,7 +72,8 @@
         "y1v5.case.kinoshita.take-part-in-disputed-collision-case"
       ],
       "context_evidence_refs": [
-        "y1v5.ev.063"
+        "y1v5.ev.063",
+        "y1v5.ev.075"
       ]
     },
     "epistemics": {
@@ -79,6 +82,12 @@
       ],
       "context_evidence_refs": [
         "y1v5.ev.063"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.075"
       ]
     }
   },
@@ -95,5 +104,7 @@
     "contextual_facts": "MENTIONS_NOT_FEATS",
     "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
     "verified_facts": "INDIVIDUAL_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

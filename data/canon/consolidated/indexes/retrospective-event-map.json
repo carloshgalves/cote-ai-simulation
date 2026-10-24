@@ -50,7 +50,8 @@
         "y1v45.ev.053",
         "y1v45.ev.054",
         "y1v45.ev.055",
-        "y1v45.ev.056"
+        "y1v45.ev.056",
+        "y1v45.ev.051"
       ]
     },
     "evt.y1.anhs-private-points-vs-explicit-prohibitions": {
@@ -133,6 +134,9 @@
     ],
     "y1v45.ev.026": [
       "evt.y1.anhs-private-points-vs-explicit-prohibitions"
+    ],
+    "y1v45.ev.051": [
+      "evt.y1.v045.pool-invasion-and-suppression"
     ]
   },
   "unknown_not_resolved": [

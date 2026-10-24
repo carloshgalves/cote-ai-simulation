@@ -26,10 +26,10 @@ perf=J(BASE/"performance/y1-v05-event-results.json")
 assert source["pdf_sha256"]=="0302c25d48f82c9a336b019c4d52045560fdbd91138381a1b24f6a960ae85914"
 assert source["pdf_pages"]==207 and source["original_pdf_committed"] is False
 assert source["claims_all_verified"] is False
-assert len(records)==len(evidence)==coverage["records"]==68
-assert len(cases)==len(manifest)==coverage["cases"]==36
-assert coverage["chapter_evidence_counts"]=={"1":1,"2":10,"3":5,"4":6,"5":4,"6":19,"7":3,"8":6,"9":14}
-assert len(audit["evidence"])==68 and len(audit["behavioral_cases"])==36
+assert len(records)==len(evidence)==coverage["records"]==80
+assert len(cases)==len(manifest)==coverage["cases"]==39
+assert coverage["chapter_evidence_counts"]=={"1":1,"2":10,"3":5,"4":7,"5":4,"6":21,"7":3,"8":9,"9":20}
+assert len(audit["evidence"])==80 and len(audit["behavioral_cases"])==39
 assert {x["record_id"] for x in audit["evidence"]}==set(evidence)
 assert {x["case_id"] for x in audit["behavioral_cases"]}==set(cases)
 assert audit["release_gate"]["external_independent_review"]=="NOT_PERFORMED"
@@ -46,7 +46,7 @@ assert len(fest["events"])==13 and len(perf["events"])==13
 assert sum(len(ev["observations"]) for ev in perf["events"])==35
 assert len(perf["measures"])==2
 assert "evt.y1.v04.zodiac-vip-selection-algorithm" in retro["unknown_not_resolved"]
-assert retro["event_lookup"]["evt.y1.v04.zodiac-dragon-vip-disclosure"]["status"]=="OPEN"
+assert retro["event_lookup"]["evt.y1.v04.zodiac-dragon-vip-disclosure"]["status"]=="PARTIALLY_EXPLAINED"
 
 for e in records:
     assert e["source"]["work_id"]==source["source_id"]
@@ -116,5 +116,5 @@ for name,change in mutants:
     assert violations(altered),("negative mutation escaped",name)
 
 assert len(index["character_packs"])==85
-assert len(index["behavioral_case_paths"])==238
-print("PASS Year 1 V5 68 evidences, 36 actor cases, 13 events, 35 athletic observations, 6 negative controls; release blocked")
+assert len(index["behavioral_case_paths"])==241
+print("PASS Year 1 V5 80 evidences, 39 actor cases, 13 events, 35 athletic observations, 6 sports negative controls; release blocked")

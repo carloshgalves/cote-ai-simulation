@@ -63,7 +63,8 @@
         "y1v5.ev.035",
         "y1v5.ev.043",
         "y1v5.ev.045",
-        "y1v5.ev.051"
+        "y1v5.ev.051",
+        "y1v5.ev.071"
       ]
     },
     "social": {
@@ -171,7 +172,8 @@
         "y1v5.ev.026",
         "y1v5.ev.041",
         "y1v5.ev.045",
-        "y1v5.ev.055"
+        "y1v5.ev.055",
+        "y1v5.ev.071"
       ]
     },
     "ethics": {
@@ -260,7 +262,8 @@
         "y1v4.case.yosuke-hirata.disclose-bullying-related-guilt"
       ],
       "context_evidence_refs": [
-        "y1v4.ev.094"
+        "y1v4.ev.094",
+        "y1v5.ev.071"
       ]
     },
     "reasoning": {
@@ -304,7 +307,8 @@
     "deception": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v5.ev.015"
+        "y1v5.ev.015",
+        "y1v5.ev.071"
       ]
     },
     "cooperation": {
@@ -380,5 +384,7 @@
     "admitted_initial_claim_ids": [],
     "legacy_material_can_seed_agent": false,
     "quarantine_policy": "Only source-backed evidence re-reviewed at record level may be promoted; future references never seed memories."
-  }
+  },
+  "goal_transition_refs": [],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

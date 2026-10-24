@@ -59,7 +59,8 @@
         "y1v45.case.kiyotaka-ayanokoji.mediate-illicit-delivery-proposal",
         "y1v45.case.kiyotaka-ayanokoji.quietly-counter-invasive-pool-plot",
         "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack",
-        "y1v5.case.kiyotaka-ayanokoji.replace-miyake-as-relay-anchor"
+        "y1v5.case.kiyotaka-ayanokoji.replace-miyake-as-relay-anchor",
+        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita"
       ],
       "context_evidence_refs": [
         "v0.char.011",
@@ -181,7 +182,11 @@
         "y1v5.ev.052",
         "y1v5.ev.055",
         "y1v5.ev.067",
-        "y1v5.ev.068"
+        "y1v5.ev.068",
+        "y1v5.ev.070",
+        "y1v5.ev.071",
+        "y1v5.ev.074",
+        "y1v5.ev.078"
       ]
     },
     "social": {
@@ -613,7 +618,8 @@
         "y1v5.ev.030",
         "y1v5.ev.043",
         "y1v5.ev.048",
-        "y1v5.ev.053"
+        "y1v5.ev.053",
+        "y1v5.ev.079"
       ]
     },
     "risk_management": {
@@ -645,7 +651,9 @@
       ]
     },
     "leadership": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.031",
         "y1v1.ev.071",
@@ -673,7 +681,10 @@
         "y1v5.ev.043",
         "y1v5.ev.045",
         "y1v5.ev.048",
-        "y1v5.ev.051"
+        "y1v5.ev.051",
+        "y1v5.ev.070",
+        "y1v5.ev.071",
+        "y1v5.ev.079"
       ]
     },
     "observation": {
@@ -822,7 +833,9 @@
       ]
     },
     "motivation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita"
+      ],
       "context_evidence_refs": [
         "y1v2.ev.029",
         "y1v3.ev.064",
@@ -831,7 +844,12 @@
         "y1v45.ev.025",
         "y1v45.ev.028",
         "y1v5.ev.029",
-        "y1v5.ev.068"
+        "y1v5.ev.068",
+        "y1v5.ev.070",
+        "y1v5.ev.071",
+        "y1v5.ev.074",
+        "y1v5.ev.078",
+        "y1v5.ev.079"
       ]
     },
     "resources": {
@@ -910,7 +928,8 @@
         "y1v5.ev.042",
         "y1v5.ev.052",
         "y1v5.ev.066",
-        "y1v5.ev.067"
+        "y1v5.ev.067",
+        "y1v5.ev.078"
       ]
     },
     "negotiation": {
@@ -987,7 +1006,8 @@
         "y1v4.case.kiyotaka-ayanokoji.seed-false-rika-tip",
         "y1v45.case.kiyotaka-ayanokoji.conceal-sport-capacity-during-scouting",
         "y1v5.case.kiyotaka-ayanokoji.record-deliberately-limited-grip",
-        "y1v5.case.kiyotaka-ayanokoji.replace-miyake-as-relay-anchor"
+        "y1v5.case.kiyotaka-ayanokoji.replace-miyake-as-relay-anchor",
+        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita"
       ],
       "context_evidence_refs": [
         "y1v4.ev.115",
@@ -995,7 +1015,9 @@
         "y1v45.ev.050",
         "y1v5.ev.015",
         "y1v5.ev.020",
-        "y1v5.ev.032"
+        "y1v5.ev.032",
+        "y1v5.ev.071",
+        "y1v5.ev.074"
       ]
     },
     "reflection": {
@@ -1075,7 +1097,8 @@
       "context_evidence_refs": [
         "y1v45.ev.053",
         "y1v5.ev.043",
-        "y1v5.ev.053"
+        "y1v5.ev.053",
+        "y1v5.ev.074"
       ]
     },
     "consequence": {
@@ -1150,5 +1173,10 @@
     "admitted_initial_claim_ids": [],
     "legacy_material_can_seed_agent": false,
     "quarantine_policy": "Only source-backed evidence re-reviewed at record level may be promoted; future references never seed memories."
-  }
+  },
+  "goal_transition_refs": [
+    "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning",
+    "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

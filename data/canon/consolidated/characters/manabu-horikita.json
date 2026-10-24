@@ -121,7 +121,8 @@
     "epistemics": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v45.ev.020"
+        "y1v45.ev.020",
+        "y1v5.ev.078"
       ]
     },
     "governance": {
@@ -142,7 +143,8 @@
     "motivation": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v45.ev.025"
+        "y1v45.ev.025",
+        "y1v5.ev.078"
       ]
     },
     "ethics": {
@@ -166,6 +168,12 @@
         "y1v5.ev.031",
         "y1v5.ev.057"
       ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.078"
+      ]
     }
   },
   "source_documents": [],
@@ -181,5 +189,7 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

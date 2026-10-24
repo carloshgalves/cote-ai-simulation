@@ -165,7 +165,8 @@
         "y1v45.case.mio-ibuki.pair-with-rival-for-fortune-reading"
       ],
       "context_evidence_refs": [
-        "y1v45.ev.010"
+        "y1v45.ev.010",
+        "y1v5.ev.077"
       ]
     },
     "belief": {
@@ -178,7 +179,8 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v45.ev.011",
-        "y1v5.ev.065"
+        "y1v5.ev.065",
+        "y1v5.ev.077"
       ]
     },
     "sports": {
@@ -196,6 +198,12 @@
         "y1v5.ev.030",
         "y1v5.ev.040"
       ]
+    },
+    "counterstrategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.077"
+      ]
     }
   },
   "source_documents": [],
@@ -211,5 +219,7 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

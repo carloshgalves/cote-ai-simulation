@@ -2969,7 +2969,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.071",
@@ -3013,7 +3015,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.072",
@@ -3059,7 +3063,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
     },
     {
       "id": "y1v5.ev.073",
@@ -3102,7 +3108,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
     },
     {
       "id": "y1v5.ev.074",
@@ -3148,7 +3156,10 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-dragon-vip-disclosure",
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.075",
@@ -3192,7 +3203,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.076",
@@ -3234,7 +3247,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.077",
@@ -3277,7 +3292,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v5.ev.078",
@@ -3321,7 +3338,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.relay-unmasked-physical-capacity"
+      ]
     },
     {
       "id": "y1v5.ev.079",
@@ -3360,7 +3379,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
     },
     {
       "id": "y1v5.ev.080",
@@ -3401,7 +3422,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
       "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
     }
   ]
 }

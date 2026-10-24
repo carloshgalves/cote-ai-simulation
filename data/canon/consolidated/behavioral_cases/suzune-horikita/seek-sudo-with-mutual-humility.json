@@ -4,16 +4,24 @@
   "primary_actor_id": "actor.suzune-horikita",
   "title": "seek sudo with mutual humility",
   "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
-  "observed_actions": "Seeks Sudō, recognizes her own failures and his contributions, then asks for mutual support and encourages a return.",
-  "observed_result": "Sudō rejoins and apologizes to classmates before relay.",
-  "epistemic_limits": "Relationship growth is situational; one repair does not certify permanent empathy or future compliance.",
+  "observed_actions": "After failing to secure class victory alone, Suzune recognizes Sudō's need for respect, admits she has used the wrong means to earn Manabu's approval and reach Class A, and explicitly asks Sudō to work together through graduation.",
+  "observed_result": "The distant end goal (Class A and brother's respect) remains, while her chosen means changes from isolated personal perfection to reciprocal collaboration. Sudō returns, apologizes, and they agree to constrain unjustified violence.",
+  "epistemic_limits": "This is an observed revision of means and new alliance, not proof she abandons Class A ambitions or becomes permanently empathetic. Ayanokōji's pressure is a trigger, not an automatic instruction.",
   "source": {
     "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
     "pdf_pages": [
       136,
+      138,
       159,
       163,
-      180
+      165,
+      166,
+      178,
+      179,
+      180,
+      191,
+      192,
+      193
     ],
     "chapter": 6,
     "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
@@ -38,7 +46,11 @@
     "y1v5.ev.045",
     "y1v5.ev.048",
     "y1v5.ev.050",
-    "y1v5.ev.054"
+    "y1v5.ev.054",
+    "y1v5.ev.070",
+    "y1v5.ev.072",
+    "y1v5.ev.079",
+    "y1v5.ev.080"
   ],
   "case_kind": "BEHAVIORAL_DEMONSTRATION",
   "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",

@@ -4,13 +4,14 @@
   "primary_actor_id": "actor.kakeru-ryuen",
   "title": "reassess hidden opponent after recording",
   "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
-  "observed_actions": "Maintains a parallel longer recording, then reacts to an apparently older incriminating audio sent anonymously and begins searching for a hidden actor.",
-  "observed_result": "His pressure on Suzune is disrupted; he does not conclusively identify the sender.",
-  "epistemic_limits": "Do not grant him automatic knowledge that Ayanokōji sent, generated or acquired the material.",
+  "observed_actions": "Keeps a full video of his exchange to neutralize Suzune's edited-audio threat. When an anonymous older recording appears, abandons immediate extortion and investigates an unknown strategist instead of continuing to humiliate Suzune.",
+  "observed_result": "He states that his demands for points and final kneeling have failed and explicitly refuses to pin the anonymous evidence on one person; he names Kiyotaka only as a possibility.",
+  "epistemic_limits": "His own privately recorded countermeasure is observed; the sender of the external audio and source of the earlier recording remain unidentified. Suzune believing it was Kiyotaka is not shared knowledge of Ryūen.",
   "source": {
     "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
     "pdf_pages": [
       199,
+      200,
       201
     ],
     "chapter": 9,
@@ -36,7 +37,9 @@
   "evidence_refs": [
     "y1v5.ev.064",
     "y1v5.ev.065",
-    "y1v5.ev.066"
+    "y1v5.ev.066",
+    "y1v5.ev.076",
+    "y1v5.ev.077"
   ],
   "case_kind": "BEHAVIORAL_DEMONSTRATION",
   "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",

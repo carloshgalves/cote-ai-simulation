@@ -5,7 +5,8 @@
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
     "ln.y1.v00.legacyemtls.v1.0.1",
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -55,19 +56,44 @@
     "politics": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v3.ev.116"
+        "y1v3.ev.116",
+        "y1v5.ev.008"
       ]
     },
     "strategy": {
+      "behavioral_case_refs": [
+        "y1v5.case.arisu-sakayanagi.approach-kiyotaka-with-white-room-secret"
+      ],
+      "context_evidence_refs": [
+        "y1v3.ev.116",
+        "y1v5.ev.029",
+        "y1v5.ev.059"
+      ]
+    },
+    "leadership": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v3.ev.116"
+        "y1v5.ev.008"
+      ]
+    },
+    "sports": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.029"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [
+        "y1v5.case.arisu-sakayanagi.approach-kiyotaka-with-white-room-secret"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.059"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": true,
-  "semantic_audit_notes": "An individual Volume 0 case has been assigned to Arisu for her explicit nature-versus-nurture hypothesis, not to her father. No causal or genetic generalization is claimed. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory.",
+  "semantic_audit_notes": "An individual Volume 0 case has been assigned to Arisu for her explicit nature-versus-nurture hypothesis, not to her father. No causal or genetic generalization is claimed. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. Volume 5 initial sport-festival references added with no independent record signoff; traits and action are event-scoped.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

@@ -6,7 +6,7 @@
   "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
   "observed_actions": "Invites students from another class to play pool volleyball and proposes a friendly lunch bet, then competes and accepts losing.",
   "observed_result": "Class D wins; both groups subsequently obtain lunch together.",
-  "epistemic_limits": "Her interaction is voluntary social competition; it does not demonstrate authority to set official exam rules.",
+  "epistemic_limits": "Her interaction is voluntary social competition; it does not demonstrate authority to set official exam rules. Nagumo and Manabu are discussed in the earlier council-related conversation, not participants in Ichinose's Class B versus Class D match.",
   "source": {
     "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
     "pdf_pages": [
@@ -17,9 +17,7 @@
     "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS_PENDING_INDIVIDUAL_AUDIT"
   },
   "other_actors": [
-    "actor.nagumo",
     "actor.suzune-horikita",
-    "actor.manabu-horikita",
     "actor.ken-sudo",
     "actor.kiyotaka-ayanokoji"
   ],

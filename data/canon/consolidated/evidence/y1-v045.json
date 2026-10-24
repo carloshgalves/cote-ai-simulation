@@ -13,7 +13,7 @@
         ],
         "chapter": 1,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "INNER_MONOLOGUE",
       "story_time": "Y1_LATE_SUMMER_NARRATOR_FRAME",
@@ -32,7 +32,7 @@
       "topics": [
         "reflection"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -49,7 +49,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "NARRATED",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -72,7 +72,7 @@
         "economy",
         "resources"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -90,7 +90,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "REPORTED_BY_CHARACTER",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -112,7 +112,7 @@
         "sports",
         "discipline"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -130,7 +130,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -153,7 +153,7 @@
         "social",
         "emotion"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -171,7 +171,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "REPORTED_BY_CHARACTER",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -193,7 +193,7 @@
         "reasoning",
         "psychology"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -211,7 +211,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -235,7 +235,7 @@
         "social",
         "institution"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -253,7 +253,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "SELF_DESCRIPTION",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -276,7 +276,7 @@
         "social",
         "motivation"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -296,7 +296,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "SELF_DESCRIPTION",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -318,7 +318,7 @@
         "emotion",
         "social"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -336,7 +336,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "INNER_MONOLOGUE",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -358,7 +358,7 @@
         "reasoning",
         "social"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -376,7 +376,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -398,7 +398,7 @@
         "social",
         "negotiation"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -416,7 +416,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "REPORTED_BY_CHARACTER",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -438,7 +438,7 @@
         "belief",
         "epistemics"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -456,7 +456,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -478,7 +478,7 @@
         "risk_management",
         "resources"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -496,7 +496,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -518,7 +518,7 @@
         "risk_management",
         "reasoning"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -527,7 +527,7 @@
     {
       "id": "y1v45.ev.014",
       "domain": "social",
-      "summary": "Katsuragi responds to the stranded pair and helps bring the elevator incident to a safe end; Kiyotaka and Ibuki recognize his assistance.",
+      "summary": "When Kiyotaka and Ibuki emerge from the elevator, staff say adults remotely moved it from the first floor. Kiyotaka credits Katsuragi for responding to his phone message; the pair's simultaneous button presses did not cause the rescue.",
       "source": {
         "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -536,7 +536,7 @@
         ],
         "chapter": 2,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_FORTUNE_TELLER",
@@ -559,7 +559,7 @@
         "social",
         "risk_management"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -577,7 +577,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -603,7 +603,7 @@
         "social",
         "economy"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -621,7 +621,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -644,7 +644,7 @@
         "conflict",
         "social"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -662,7 +662,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -686,7 +686,7 @@
         "observation",
         "social"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -703,7 +703,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "REPORTED_BY_CHARACTER",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -724,7 +724,7 @@
         "social",
         "identity"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -742,7 +742,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -768,7 +768,7 @@
         "politics",
         "observation"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -786,7 +786,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "REPORTED_BY_CHARACTER",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -811,7 +811,7 @@
         "reasoning",
         "epistemics"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -831,7 +831,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -857,7 +857,7 @@
         "leadership",
         "politics"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -875,7 +875,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "SELF_DESCRIPTION",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -897,7 +897,7 @@
         "family",
         "social"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -915,7 +915,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -939,7 +939,7 @@
         "social",
         "ethics"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -957,7 +957,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "REPORTED_BY_CHARACTER",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -983,7 +983,7 @@
         "governance",
         "economy"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1003,7 +1003,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "SELF_DESCRIPTION",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -1026,7 +1026,7 @@
         "family",
         "motivation"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1044,7 +1044,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -1070,7 +1070,7 @@
         "governance",
         "ethics"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1081,7 +1081,7 @@
     {
       "id": "y1v45.ev.027",
       "domain": "economy",
-      "summary": "Katsuragi asks Sudō to carry an unauthorized family package beyond the campus and offers him 100,000 private points in a risk-bearing agreement.",
+      "summary": "Kiyotaka recruits Sudō as a potential off-campus courier for Katsuragi's unauthorized family parcel; Sudō initially objects, then accepts after hearing the circumstances and a 100,000-private-point offer from Katsuragi.",
       "source": {
         "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -1090,7 +1090,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -1115,7 +1115,7 @@
         "economy",
         "negotiation"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1135,7 +1135,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "SELF_DESCRIPTION",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -1158,7 +1158,7 @@
         "family",
         "motivation"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1178,7 +1178,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -1203,7 +1203,7 @@
         "economy",
         "strategy"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1222,7 +1222,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "NARRATED",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -1246,7 +1246,7 @@
         "economy",
         "governance"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1266,7 +1266,7 @@
         ],
         "chapter": 3,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "NARRATED",
       "story_time": "Y1_AUG_LATE_SUMMER_KATSURAGI_PARCEL",
@@ -1289,7 +1289,7 @@
         "social",
         "emotion"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1306,7 +1306,7 @@
         ],
         "chapter": 4,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_WATER_OUTAGE",
@@ -1328,7 +1328,7 @@
         "infrastructure",
         "institution"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1346,7 +1346,7 @@
         ],
         "chapter": 4,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_WATER_OUTAGE",
@@ -1368,7 +1368,7 @@
         "social",
         "emotion"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1386,7 +1386,7 @@
         ],
         "chapter": 4,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_WATER_OUTAGE",
@@ -1408,7 +1408,7 @@
         "risk_management",
         "social"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1426,7 +1426,7 @@
         ],
         "chapter": 4,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "REPORTED_BY_CHARACTER",
       "story_time": "Y1_AUG_LATE_SUMMER_WATER_OUTAGE",
@@ -1451,7 +1451,7 @@
         "exam",
         "belief"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1471,7 +1471,7 @@
         ],
         "chapter": 4,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_WATER_OUTAGE",
@@ -1495,7 +1495,7 @@
         "social",
         "risk_management"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1513,7 +1513,7 @@
         ],
         "chapter": 5,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_CONFESSION",
@@ -1536,7 +1536,7 @@
         "social",
         "emotion"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1554,7 +1554,7 @@
         ],
         "chapter": 5,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_CONFESSION",
@@ -1578,7 +1578,7 @@
         "social",
         "communication"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1596,7 +1596,7 @@
         ],
         "chapter": 5,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "SELF_DESCRIPTION",
       "story_time": "Y1_AUG_LATE_SUMMER_CONFESSION",
@@ -1619,7 +1619,7 @@
         "emotion",
         "social"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1637,7 +1637,7 @@
         ],
         "chapter": 5,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_CONFESSION",
@@ -1660,7 +1660,7 @@
         "social",
         "emotion"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1678,7 +1678,7 @@
         ],
         "chapter": 5,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LATE_SUMMER_CONFESSION",
@@ -1701,7 +1701,7 @@
         "emotion",
         "social"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1719,7 +1719,7 @@
         ],
         "chapter": 6,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "SELF_DESCRIPTION",
       "story_time": "Y1_AUG_LAST_DAY_POOL",
@@ -1743,7 +1743,7 @@
         "economy",
         "privacy"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1763,7 +1763,7 @@
         ],
         "chapter": 6,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "SELF_DESCRIPTION",
       "story_time": "Y1_AUG_LAST_DAY_POOL",
@@ -1785,7 +1785,7 @@
         "trauma",
         "identity"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1803,7 +1803,7 @@
         ],
         "chapter": 6,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LAST_DAY_POOL",
@@ -1825,7 +1825,7 @@
         "strategy",
         "coercion"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE",
@@ -1845,7 +1845,7 @@
         ],
         "chapter": 6,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LAST_DAY_POOL",
@@ -1870,7 +1870,7 @@
         "social",
         "negotiation"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1888,7 +1888,7 @@
         ],
         "chapter": 6,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "NARRATED",
       "story_time": "Y1_AUG_LAST_DAY_POOL",
@@ -1912,7 +1912,7 @@
         "observation",
         "privacy"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1932,7 +1932,7 @@
         ],
         "chapter": 6,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LAST_DAY_POOL",
@@ -1957,7 +1957,7 @@
         "sports",
         "politics"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -1975,7 +1975,7 @@
         ],
         "chapter": 6,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "SELF_DESCRIPTION",
       "story_time": "Y1_AUG_LAST_DAY_POOL",
@@ -2002,7 +2002,7 @@
         "politics",
         "leadership"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -2020,7 +2020,7 @@
         ],
         "chapter": 6,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LAST_DAY_POOL",
@@ -2044,7 +2044,7 @@
         "sports",
         "strategy"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -2062,7 +2062,7 @@
         ],
         "chapter": 6,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "INNER_MONOLOGUE",
       "story_time": "Y1_AUG_LAST_DAY_POOL",
@@ -2085,7 +2085,7 @@
         "sports",
         "deception"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -2094,7 +2094,7 @@
     {
       "id": "y1v45.ev.051",
       "domain": "strategy",
-      "summary": "Kiyotaka discusses potential expulsions as leverage, then breaks and discards a physical object rather than using it; an actual expulsion is not shown.",
+      "summary": "Kiyotaka raises possible expulsions as leverage while holding a hard item Karuizawa gave him; he breaks and discards plastic pieces without expelling anyone. The later recording-card revelation contextualizes the item, but this passage never names it.",
       "source": {
         "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -2103,7 +2103,7 @@
         ],
         "chapter": 6,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LAST_DAY_POOL",
@@ -2125,11 +2125,13 @@
         "strategy",
         "coercion"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ]
     },
     {
       "id": "y1v45.ev.052",
@@ -2143,7 +2145,7 @@
         ],
         "chapter": 6,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LAST_DAY_POOL",
@@ -2165,7 +2167,7 @@
         "trauma",
         "coercion"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE",
@@ -2183,7 +2185,7 @@
         ],
         "chapter": 7,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LAST_DAY_POOL_RETROSPECTIVE",
@@ -2208,7 +2210,7 @@
         "privacy",
         "misconduct"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE",
@@ -2228,7 +2230,7 @@
         ],
         "chapter": 7,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LAST_DAY_POOL_RETROSPECTIVE",
@@ -2251,7 +2253,7 @@
         "privacy",
         "misconduct"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "DESCRIPTIVE_WRONGDOING_NOT_PRESCRIPTIVE",
@@ -2271,7 +2273,7 @@
         ],
         "chapter": 7,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "NARRATED",
       "story_time": "Y1_AUG_LAST_DAY_POOL_RETROSPECTIVE",
@@ -2293,7 +2295,7 @@
         "privacy",
         "strategy"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -2313,7 +2315,7 @@
         ],
         "chapter": 7,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_AUG_LAST_DAY_POOL_RETROSPECTIVE",
@@ -2338,7 +2340,7 @@
         "privacy",
         "consequence"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
@@ -2358,7 +2360,7 @@
         ],
         "chapter": 7,
         "edition": "Seven Seas English translation, operator-provided PDF",
-        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_INITIAL_PASS"
+        "verification": "DIRECT_SOURCE_LOCATOR_ASSISTANT_SECOND_PASS"
       },
       "source_mode": "NARRATED",
       "story_time": "Y1_AUG_LAST_DAY_POOL_RETROSPECTIVE",
@@ -2382,7 +2384,7 @@
         "social",
         "observation"
       ],
-      "assertion_status": "ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING",
+      "assertion_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",

@@ -7,7 +7,8 @@
     "ln.y1.v00.legacyemtls.v1.0.1",
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
-    "ln.y1.v04.sevenseas.en.operator-provided"
+    "ln.y1.v04.sevenseas.en.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -115,11 +116,31 @@
       "context_evidence_refs": [
         "y1v4.ev.076"
       ]
+    },
+    "sports": {
+      "behavioral_case_refs": [
+        "y1v5.case.ryuji-kanzaki.outpace-katsuragi-in-100m"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.021"
+      ]
+    },
+    "deception": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.021"
+      ]
+    },
+    "physical": {
+      "behavioral_case_refs": [
+        "y1v5.case.ryuji-kanzaki.outpace-katsuragi-in-100m"
+      ],
+      "context_evidence_refs": []
     }
   },
   "source_documents": [],
   "historical_context_only": true,
-  "semantic_audit_notes": " Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory.",
+  "semantic_audit_notes": " Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. Volume 5 initial sport-festival references added with no independent record signoff; traits and action are event-scoped.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

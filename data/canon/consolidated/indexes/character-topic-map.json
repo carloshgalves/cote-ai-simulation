@@ -136,7 +136,10 @@
         "observation",
         "politics",
         "social",
-        "strategy"
+        "strategy",
+        "sports",
+        "deception",
+        "physical"
       ]
     },
     "actor.tomohiro-kanzaki": {
@@ -440,7 +443,13 @@
         "risk_management",
         "social",
         "sports",
-        "strategy"
+        "strategy",
+        "family",
+        "coercion",
+        "consequence",
+        "discipline",
+        "violence",
+        "physical"
       ]
     },
     "actor.kikyo-kushida": {
@@ -495,7 +504,14 @@
         "persuasion",
         "resources",
         "social",
-        "strategy"
+        "strategy",
+        "politics",
+        "sports",
+        "family",
+        "deception",
+        "misconduct",
+        "violence",
+        "physical"
       ]
     },
     "actor.ken-sudo": {
@@ -599,7 +615,9 @@
         "persuasion",
         "self_presentation",
         "social",
-        "strategy"
+        "strategy",
+        "sports",
+        "physical"
       ]
     },
     "actor.sae-chiyabashira": {
@@ -644,7 +662,11 @@
         "persuasion",
         "politics",
         "reasoning",
-        "social"
+        "social",
+        "sports",
+        "exam",
+        "strategy",
+        "physical"
       ]
     },
     "actor.chie-hoshinomiya": {
@@ -831,7 +853,11 @@
       "path": "data/canon/consolidated/characters/onodera.json",
       "modeling_tier": "INTERMEDIATE_CANDIDATE",
       "topics": [
-        "combat"
+        "combat",
+        "sports",
+        "social",
+        "leadership",
+        "physical"
       ]
     },
     "actor.kikuchi": {
@@ -1007,7 +1033,9 @@
         "resources",
         "risk_management",
         "social",
-        "strategy"
+        "strategy",
+        "sports",
+        "psychology"
       ]
     },
     "actor.katsuragi": {
@@ -1128,7 +1156,11 @@
     "actor.sou-shibata": {
       "path": "data/canon/consolidated/characters/sou-shibata.json",
       "modeling_tier": "INTERMEDIATE_CANDIDATE",
-      "topics": []
+      "topics": [
+        "sports",
+        "exam",
+        "physical"
+      ]
     },
     "actor.kinoshita": {
       "path": "data/canon/consolidated/characters/kinoshita.json",
@@ -1145,12 +1177,18 @@
     "actor.yajima": {
       "path": "data/canon/consolidated/characters/yajima.json",
       "modeling_tier": "INTERMEDIATE_CANDIDATE",
-      "topics": []
+      "topics": [
+        "sports",
+        "exam"
+      ]
     },
     "actor.yamada-albert": {
       "path": "data/canon/consolidated/characters/yamada-albert.json",
       "modeling_tier": "INTERMEDIATE_CANDIDATE",
-      "topics": []
+      "topics": [
+        "sports",
+        "combat"
+      ]
     }
   },
   "topics_by_actor": {

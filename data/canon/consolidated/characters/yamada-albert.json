@@ -15,10 +15,23 @@
     "canonical_after_divergence_is_not_actor_memory": true,
     "actor_knowledge_requires_acquisition_event": true
   },
-  "domains": {},
+  "domains": {
+    "sports": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.034"
+      ]
+    },
+    "combat": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.034"
+      ]
+    }
+  },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 5 only; individual performances do not fix generic abilities.",
+  "semantic_audit_notes": "Volume 5 only; individual performances do not fix generic abilities. Volume 5 initial sport-festival references added with no independent record signoff; traits and action are event-scoped.",
   "uncertainties": {
     "given_name_unknown_in_source": false,
     "future_fate_unknown": true

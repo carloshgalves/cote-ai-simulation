@@ -36,6 +36,16 @@ assert audit["release_gate"]["engine_memory_admission"] is False
 assert audit["release_gate"]["exam_executable"] is False
 assert audit["global_promotion"].startswith("BLOCKED_")
 assert all(x["verified"] is False for x in audit["evidence"]+audit["behavioral_cases"])
+assert all(x["reviewed_by_assistant"] is True for x in audit["evidence"]+audit["behavioral_cases"])
+assert all(x["semantic_review"]=="ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING" for x in audit["evidence"]+audit["behavioral_cases"])
+assert audit["release_gate"]["assistant_individual_semantic_review"]=="COMPLETED_PDF_SECOND_PASS"
+assert audit["release_gate"]["assistant_second_pass_count"]==78
+assert audit["release_gate"]["independent_review_pending_count"]==78
+assert audit["release_gate"]["individual_verified_count"]==0
+assert audit["release_gate"]["external_independent_review"]=="NOT_PERFORMED"
+assert src["record_audit"]=="ASSISTANT_SECOND_PASS_78_ITEMS_COMPLETE_INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+assert cover["pending_semantic_items"]==0 and cover["pending_independent_review_items"]==78
+assert len(audit["findings"])==5 and all(x["status"].startswith("REMEDIATED") for x in audit["findings"])
 assert src["source_id"]==audit["source_id"]==cover["source"]
 assert len(idx["character_packs"])==80
 assert len(idx["behavioral_case_paths"])==202
@@ -44,7 +54,7 @@ assert institutions["institutions"]["org.student-council"]["source_volume_count"
 for e in E:
     assert e["source"]["work_id"]==src["source_id"]
     assert e["source"]["pdf_pages"] and all(1<=n<=227 for n in e["source"]["pdf_pages"])
-    assert e["assertion_status"]=="ASSISTANT_EXTRACTED_SEMANTIC_AUDIT_PENDING"
+    assert e["assertion_status"]=="ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING"
     assert e["subject_assertion"]=="MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     assert e["actor_knowledge_gate"]=="LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY"
     assert e["related_canonical_event_ids"]==ret["events_by_source_evidence"].get(e["id"],[])
@@ -61,7 +71,8 @@ for id,c in cases.items():
     owner="actor."+Path(idx["behavioral_case_paths"][id]).parent.name
     assert owner==c["actor_id"]==c["primary_actor_id"]
     assert c["id"]==id and c["source"]["work_id"]==src["source_id"]
-    assert c["epistemic_status"]=="ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT"
+    assert c["epistemic_status"]=="ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING"
+    assert c["source"]["source_status"]=="ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING"
     assert c["behavioral_policy"]=="DESCRIPTIVE_NOT_PRESCRIPTIVE"
     assert c["evidence_refs"] and set(c["evidence_refs"])<=set(eid)
     support=[eid[r] for r in c["evidence_refs"]]
@@ -88,4 +99,12 @@ assert "not" in J(B/"exams/y1-zodiac-cruise.json")["later_revelations"][-1]["com
 assert "actor.nagumo" in idx["character_packs"]
 assert J(B/"characters/katsuragi.json")["display_name"]=="Kouhei Katsuragi"
 assert J(B/"institutions/anhs.json")["outside_contact_restrictions_y1_v045"]["engine_authority"]=="REFERENCE_ONLY_NOT_COMPILED"
-print("PASS Y1 V4.5 initial: 57 evidence, 21 cases, cumulative references and all release gates blocked")
+assert "remotely moved" in eid["y1v45.ev.014"]["summary"]
+assert "recruits Sudō" in eid["y1v45.ev.027"]["summary"]
+assert "never names it" in eid["y1v45.ev.051"]["summary"]
+assert eid["y1v45.ev.051"]["related_canonical_event_ids"]==["evt.y1.v045.pool-invasion-and-suppression"]
+assert "actor.manabu-horikita" not in cases["y1v45.case.nagumo.lead-older-students-volleyball"]["other_actors"]
+assert "actor.manabu-horikita" not in cases["y1v45.case.honami-ichinose.initiate-friendly-volleyball-challenge"]["other_actors"]
+assert "actor.nagumo" not in cases["y1v45.case.honami-ichinose.initiate-friendly-volleyball-challenge"]["other_actors"]
+assert "remotely operate" in cases["y1v45.case.katsuragi.help-stranded-elevator-rivals"]["observed_result"]
+print("PASS Y1 V4.5 assistant PDF second pass: 57 evidence, 21 cases, five remediations, independent gates blocked")

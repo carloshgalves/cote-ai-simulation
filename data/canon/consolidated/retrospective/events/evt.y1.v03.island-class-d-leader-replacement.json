@@ -49,7 +49,7 @@
         "y1v45.ev.020"
       ],
       "relationship": "SUPPLEMENTS",
-      "explanation": "Student-council president Manabu states he learned Kiyotaka became final leader and suspects he orchestrated the result; Kiyotaka denies primary initiative.",
+      "explanation": "Manabu explicitly identifies Kiyotaka as the final substituted Class D island leader and suspects his strategic role; Kiyotaka deflects to Suzune. Manabu says only the examination committee and he held the information before this meeting; secretary Tachibana now hears it, while homeroom teachers reportedly do not.",
       "world_epistemic_status": "SPEAKER_ASSERTION_WITH_OBSERVED_CONVERSATION",
       "actor_knowledge": [
         {
@@ -61,12 +61,18 @@
           "actor": "actor.kiyotaka-ayanokoji",
           "since": "AT_ISLAND_REPLACEMENT",
           "status": "SELF_KNOWLEDGE"
+        },
+        {
+          "actor": "actor.tachibana",
+          "since": "Y1_V045_CH3_P70_CONVERSATION",
+          "status": "HEARD_MANABU_DISCLOSE_SUBSTITUTED_LEADER"
         }
       ],
       "no_backdated_global_knowledge": true
     }
   ],
   "unresolved": [
-    "Ryūen–Katsuragi island cooperation's exact financial contract remains unknown; no facts about it added from 4.5"
+    "Ryūen–Katsuragi island cooperation's exact financial contract remains unknown; no facts about it added from 4.5",
+    "Which members of the examination committee know the substitution is unspecified; committee access must not imply knowledge for every teacher or classmate."
   ]
 }

@@ -1,0 +1,41 @@
+{
+  "id": "y1v5.case.arisu-sakayanagi.maintain-faction-support-withdraw-athletics",
+  "actor_id": "actor.arisu-sakayanagi",
+  "primary_actor_id": "actor.arisu-sakayanagi",
+  "title": "maintain faction support withdraw athletics",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Meets Red-team counterparts with public politeness while disclosing inability to perform sports events; Class A students cluster around her.",
+  "observed_result": "Kiyotaka observes considerable factional support despite nonparticipation.",
+  "epistemic_limits": "Nonparticipation is source-described accommodation context, not sports incompetence or global political victory.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      28,
+      30
+    ],
+    "chapter": 2,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.katsuragi",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "politics",
+    "social",
+    "leadership"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "politics",
+    "social",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.010"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

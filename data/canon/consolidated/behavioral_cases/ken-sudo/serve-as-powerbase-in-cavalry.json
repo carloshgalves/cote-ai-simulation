@@ -1,0 +1,40 @@
+{
+  "id": "y1v5.case.ken-sudo.serve-as-powerbase-in-cavalry",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "serve as powerbase in cavalry",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Carries much of Hirata unit's load and repeatedly surges into opponent unit centered on Albert.",
+  "observed_result": "Rival unit endures and Ryūen seizes Hirata's headband.",
+  "epistemic_limits": "Relative strength claim is narrator observation in one team configuration; no calibrated power ratio.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      124,
+      129
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.yamada-albert",
+    "actor.yosuke-hirata",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "cooperation"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "sports",
+    "cooperation"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.041"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

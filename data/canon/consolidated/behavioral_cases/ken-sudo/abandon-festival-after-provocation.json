@@ -1,0 +1,42 @@
+{
+  "id": "y1v5.case.ken-sudo.abandon-festival-after-provocation",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "abandon festival after provocation",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Responds to taunts and disappointment by lashing out and leaving his team during continuing contests.",
+  "observed_result": "Class D loses important participation and morale; later teammates confront his outburst.",
+  "epistemic_limits": "Behavior at this moment does not fix his permanent response to stress.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      132,
+      135
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.yosuke-hirata",
+    "actor.kiyotaka-ayanokoji",
+    "actor.kakeru-ryuen"
+  ],
+  "capabilities_supported": [
+    "discipline",
+    "emotion",
+    "leadership"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "discipline",
+    "emotion",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.043"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

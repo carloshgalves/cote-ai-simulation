@@ -1,0 +1,44 @@
+{
+  "id": "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "reassess hidden opponent after recording",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Maintains a parallel longer recording, then reacts to an apparently older incriminating audio sent anonymously and begins searching for a hidden actor.",
+  "observed_result": "His pressure on Suzune is disrupted; he does not conclusively identify the sender.",
+  "epistemic_limits": "Do not grant him automatic knowledge that Ayanokōji sent, generated or acquired the material.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      199,
+      201
+    ],
+    "chapter": 9,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kikyo-kushida",
+    "actor.mio-ibuki"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "risk_management",
+    "reasoning"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "strategy",
+    "risk_management",
+    "reasoning"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.064",
+    "y1v5.ev.065",
+    "y1v5.ev.066"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "leak lineup and threaten classmates",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "States her aim to expel Suzune and Kiyotaka, threatens use of Suzune's brother, and is described in Ryūen's account as source of the roster leak.",
+  "observed_result": "Ayanokōji and Suzune separately acquire some knowledge; wider class does not.",
+  "epistemic_limits": "One volume's admission of intent and adversary report of leak does not prove every earlier suspected Dragon VIP betrayal.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      174,
+      175,
+      194,
+      199
+    ],
+    "chapter": 8,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kiyotaka-ayanokoji",
+    "actor.kakeru-ryuen"
+  ],
+  "capabilities_supported": [
+    "misconduct",
+    "deception",
+    "strategy"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "misconduct",
+    "deception",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.053",
+    "y1v5.ev.061",
+    "y1v5.ev.062",
+    "y1v5.ev.063"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

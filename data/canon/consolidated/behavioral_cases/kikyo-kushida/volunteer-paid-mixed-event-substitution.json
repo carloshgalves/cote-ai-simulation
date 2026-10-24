@@ -1,0 +1,43 @@
+{
+  "id": "y1v5.case.kikyo-kushida.volunteer-paid-mixed-event-substitution",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "volunteer paid mixed event substitution",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Offers to join mixed three-legged event as substitute, speaks with Kiyotaka and later reveals hostile expulsion intentions.",
+  "observed_result": "Her social helpfulness is publicly observable, but private motives differ.",
+  "epistemic_limits": "An observed substitution offer does not imply permanent loyalty.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      168,
+      175
+    ],
+    "chapter": 8,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "social",
+    "cooperation",
+    "deception"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "social",
+    "cooperation",
+    "deception"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.051",
+    "y1v5.ev.052",
+    "y1v5.ev.053"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

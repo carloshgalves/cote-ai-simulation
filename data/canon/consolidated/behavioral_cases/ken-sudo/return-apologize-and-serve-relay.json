@@ -1,0 +1,46 @@
+{
+  "id": "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "return apologize and serve relay",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Returns after Horikita's appeal, apologizes publicly and runs first relay leg to build a major lead.",
+  "observed_result": "Shows tangible repair and excellent athletic start; does not win grade MVP.",
+  "epistemic_limits": "Short-term apology and performance do not erase earlier violence or settle future maturation.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      163,
+      180,
+      181,
+      193
+    ],
+    "chapter": 8,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "sports",
+    "discipline"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "leadership",
+    "sports",
+    "discipline"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.050",
+    "y1v5.ev.054",
+    "y1v5.ev.056",
+    "y1v5.ev.060"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

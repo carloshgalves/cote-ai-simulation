@@ -1,0 +1,46 @@
+{
+  "id": "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "seek sudo with mutual humility",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Seeks Sudō, recognizes her own failures and his contributions, then asks for mutual support and encourages a return.",
+  "observed_result": "Sudō rejoins and apologizes to classmates before relay.",
+  "epistemic_limits": "Relationship growth is situational; one repair does not certify permanent empathy or future compliance.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      136,
+      159,
+      163,
+      180
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "relationship",
+    "emotion"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "leadership",
+    "relationship",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.045",
+    "y1v5.ev.048",
+    "y1v5.ev.050",
+    "y1v5.ev.054"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

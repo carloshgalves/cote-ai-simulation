@@ -1,0 +1,44 @@
+{
+  "id": "y1v5.case.yosuke-hirata.mediate-athlete-roles-and-vote",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "mediate athlete roles and vote",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Presents volunteer versus athletic-ability lineup options and mediates disagreement by class vote.",
+  "observed_result": "Class uses collective decision and fills many roles, with residual tension and different incentives.",
+  "epistemic_limits": "Explaining options is not proof everyone freely agrees; no universal class victory from this vote.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      39,
+      45
+    ],
+    "chapter": 3,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kei-karuizawa",
+    "actor.shinohara"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "negotiation",
+    "governance"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "leadership",
+    "negotiation",
+    "governance"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.012",
+    "y1v5.ev.013",
+    "y1v5.ev.014"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

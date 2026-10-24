@@ -1,0 +1,44 @@
+{
+  "id": "y1v5.case.suzune-horikita.propose-performance-optimized-lineup",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "propose performance optimized lineup",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Argues for assigning strongest athletes to maximize class points and shared reward, despite student objections.",
+  "observed_result": "Her logic yields public disagreement; does not secure unquestioned support.",
+  "epistemic_limits": "Proposed mathematical optimization ignores morale and incentives for weakest performers.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      39,
+      45
+    ],
+    "chapter": 3,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.yosuke-hirata",
+    "actor.shinohara",
+    "actor.kei-karuizawa"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "leadership",
+    "resources"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "strategy",
+    "leadership",
+    "resources"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.012",
+    "y1v5.ev.013",
+    "y1v5.ev.014"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

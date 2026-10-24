@@ -1,0 +1,47 @@
+{
+  "id": "y1v5.case.kinoshita.take-part-in-disputed-collision-case",
+  "actor_id": "actor.kinoshita",
+  "primary_actor_id": "actor.kinoshita",
+  "title": "take part in disputed collision case",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Collides with Suzune in observed obstacle event; afterward advances an injury/foul-play complaint and figures in Ryūen's alleged staging account.",
+  "observed_result": "Suzune confronts potential penalties; later Ryūen claims orchestration.",
+  "epistemic_limits": "Contact observed, motive and actual injury sequence based partly on a contested speaker confession, not complete independent medical proof.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      113,
+      115,
+      144,
+      149,
+      198,
+      199
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kakeru-ryuen"
+  ],
+  "capabilities_supported": [
+    "misconduct",
+    "strategy",
+    "epistemics"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "misconduct",
+    "strategy",
+    "epistemics"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.038",
+    "y1v5.ev.046",
+    "y1v5.ev.063"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

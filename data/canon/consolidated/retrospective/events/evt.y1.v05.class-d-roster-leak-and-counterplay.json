@@ -104,6 +104,103 @@
         }
       ],
       "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        172,
+        175
+      ],
+      "evidence_refs": [
+        "y1v5.ev.074"
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "explanation": "Kushida admits privately to Kiyotaka that she herself photographed and leaked Class D's festival participation table, an additional first-person source beyond Ryūen's later account.",
+      "world_epistemic_status": "DIRECT_PRIVATE_ADMISSION_TO_KIYOTAKA_NOT_PUBLIC_KNOWLEDGE",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kikyo-kushida",
+          "since": "BEFORE_FESTIVAL_OWN_DISCLOSURE",
+          "status": "KNOWS_OWN_ACTION"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V05_CH8_DIALOGUE",
+          "status": "HEARD_CONFESSION"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH9_RYUEN_DIALOGUE",
+          "status": "HEARD_LATER_RYUEN_ATTRIBUTION"
+        }
+      ],
+      "no_backdated_global_knowledge": true,
+      "resolves_assertion_refs": [
+        "y1v5.ev.042"
+      ]
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        198,
+        201
+      ],
+      "evidence_refs": [
+        "y1v5.ev.075",
+        "y1v5.ev.076",
+        "y1v5.ev.077"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "Ryūen says Suzune's humiliation, forced kneeling and payment outranked maximizing his festival score; he says he rehearsed a collision with Kinoshita and offered 500000. Suzune starts to kneel before an anonymous audio interrupts; he later acknowledges not securing the intended final submission, and does not identify its sender.",
+      "world_epistemic_status": "DECLARED_MOTIVE_PLUS_OBSERVED_INTERRUPT_NO_CONFIRMED_SENDER",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kakeru-ryuen",
+          "since": "BEFORE_Y1_V05_CH9_FOR_OWN_PLAN",
+          "status": "KNOWS_OWN_OBJECTIVE_AND_STATED_STRATEGY"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH9",
+          "status": "HEARD_ADMISSION_AND_AUDIO_NOT_SENDER"
+        },
+        {
+          "actor": "actor.kikyo-kushida",
+          "since": "Y1_V05_CH9",
+          "status": "HEARD_AUDIO_NOT_SENDER"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        137,
+        142
+      ],
+      "evidence_refs": [
+        "y1v5.ev.070",
+        "y1v5.ev.071"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "Kiyotaka withheld a roster-change countermeasure and wanted Suzune to identify the spy and bring Sudō back on her own; his objective is locally stated developmental intervention, not confirmed intent to cause all of D's losses.",
+      "world_epistemic_status": "KIYOTAKA_PRIVATE_INTENT_NOT_OTHER_ACTORS_BELIEF",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V05_CH6",
+          "status": "KNOWS_OWN_REASONING"
+        },
+        {
+          "actor": "actor.yosuke-hirata",
+          "since": "Y1_V05_CH6_BRIEFING",
+          "status": "HEARD_MISATTRIBUTION_TO_SUZUNE_PLAN"
+        }
+      ],
+      "no_backdated_global_knowledge": true
     }
   ],
   "unresolved": [

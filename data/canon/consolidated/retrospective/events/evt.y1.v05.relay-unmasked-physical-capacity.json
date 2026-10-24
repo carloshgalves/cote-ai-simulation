@@ -47,6 +47,33 @@
         }
       ],
       "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        187,
+        189
+      ],
+      "evidence_refs": [
+        "y1v5.ev.078"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "Kiyotaka foresees the poor present tournament outcome, predicts eventual Class D strengthening and prioritizes a personal race with Manabu; his deliberate concealment and selective disclosure do not prove an intentional plan to make Class D last.",
+      "world_epistemic_status": "KIYOTAKA_PRIVATE_THOUGHT_NOT_CLASS_PUBLIC_KNOWLEDGE",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V05_CH9_RELAY",
+          "status": "KNOWS_OWN_PREFERENCE"
+        },
+        {
+          "actor": "actor.manabu-horikita",
+          "since": "Y1_V05_CH9_RELAY",
+          "status": "HEARD_CHALLENGE_AND_PREDICTION_NOT_PRIVATE_OBJECTIVE"
+        }
+      ],
+      "no_backdated_global_knowledge": true
     }
   ],
   "unresolved": [

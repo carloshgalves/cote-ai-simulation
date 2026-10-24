@@ -1,0 +1,95 @@
+{
+  "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+  "work_id": "ln.y1.v05",
+  "title": "Classroom of the Elite Year 1 Volume 5",
+  "edition": "English translation in user-provided PDF",
+  "pdf_sha256": "0302c25d48f82c9a336b019c4d52045560fdbd91138381a1b24f6a960ae85914",
+  "pdf_pages": 207,
+  "source_kind": "PRIMARY_LITERARY_SOURCE_USER_SUPPLIED",
+  "operator_selected_for_extraction": true,
+  "original_pdf_committed": false,
+  "claims_all_verified": false,
+  "record_audit": "INITIAL_DIRECT_TEXT_SOURCE_PASS_INDEPENDENT_INDIVIDUAL_REVIEW_PENDING",
+  "narrative_segments": [
+    {
+      "chapter": 1,
+      "pdf_pages": [
+        11,
+        12
+      ],
+      "title": "Sudou Ken's Soliloquy"
+    },
+    {
+      "chapter": 2,
+      "pdf_pages": [
+        13,
+        38
+      ],
+      "title": "The School Sports Festival Begins"
+    },
+    {
+      "chapter": 3,
+      "pdf_pages": [
+        39,
+        53
+      ],
+      "title": "Class D's Objective"
+    },
+    {
+      "chapter": 4,
+      "pdf_pages": [
+        54,
+        67
+      ],
+      "title": "Everyone's Calculations"
+    },
+    {
+      "chapter": 5,
+      "pdf_pages": [
+        68,
+        85
+      ],
+      "title": "There's a Reason for Their Relationship"
+    },
+    {
+      "chapter": 6,
+      "pdf_pages": [
+        86,
+        143
+      ],
+      "title": "The Curtains Rise"
+    },
+    {
+      "chapter": 7,
+      "pdf_pages": [
+        144,
+        159
+      ],
+      "title": "For Whose Sake?"
+    },
+    {
+      "chapter": 8,
+      "pdf_pages": [
+        160,
+        180
+      ],
+      "title": "What You and I Lack"
+    },
+    {
+      "chapter": 9,
+      "pdf_pages": [
+        181,
+        204
+      ],
+      "title": "The Turning Point"
+    }
+  ],
+  "excluded_material": "Postscript and promotional material from physical PDF page 205 onward",
+  "warnings": [
+    "Page numbers are 1-based physical PDF positions, not printed novel pages",
+    "Claims by Ryūen/Kushida and the anonymous recording are source-described dialogue/recording, not independently authenticated external forensics",
+    "No clean race ranking when interference, unequal starts or different events apply",
+    "Self-narrated Sudō family background remains source-scoped",
+    "White Room history introduced by Sakayanagi does not establish acquisition method or memory for other actors"
+  ]
+}

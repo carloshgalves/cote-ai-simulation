@@ -1,0 +1,209 @@
+{
+  "schema_version": "canon-sports-festival-reference-v1",
+  "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+  "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
+  "description": "Source-derived Year 1 school sports festival rules; no fabricated complete score table",
+  "teams": {
+    "red": [
+      "A",
+      "D"
+    ],
+    "white": [
+      "B",
+      "C"
+    ]
+  },
+  "scoring": {
+    "all_individual_first_four": [
+      15,
+      12,
+      10,
+      8
+    ],
+    "all_individual_from_fifth": "-1 for fifth, -2 sixth, etc",
+    "recommended_first_four": [
+      50,
+      30,
+      15,
+      10
+    ],
+    "recommended_from_fifth": "-2 fifth, -4 sixth, etc",
+    "recommended_final_relay_multiplier": 3,
+    "group_event_winner_points": 500,
+    "losing_team_class_points": -100,
+    "grade_rank_class_points": {
+      "1": 50,
+      "2": 0,
+      "3": -50,
+      "4": -100
+    },
+    "individual_place_rewards": [
+      {
+        "rank": 1,
+        "private_points": 5000,
+        "exam_points": 3
+      },
+      {
+        "rank": 2,
+        "private_points": 3000,
+        "exam_points": 2
+      },
+      {
+        "rank": 3,
+        "private_points": 1000,
+        "exam_points": 1
+      }
+    ],
+    "last_individual_event_private_penalty": 1000,
+    "first_year_bottom_ten_exam_penalty": 10,
+    "overall_mvp_private_points": 100000,
+    "grade_mvp_top_three_private_points": 10000
+  },
+  "roster": {
+    "deadline": "17:00 the day before festival",
+    "after_deadline": "IMMUTABLE",
+    "missed_submission": "RANDOM_ASSIGNMENT",
+    "recommended_substitution_cost_private_points": 100000
+  },
+  "events": [
+    {
+      "code": "100m",
+      "name": "100-metre sprint",
+      "kind": "all",
+      "pdf_pages": [
+        87,
+        96
+      ]
+    },
+    {
+      "code": "hurdles",
+      "name": "Hurdle race",
+      "kind": "all",
+      "pdf_pages": [
+        97,
+        99
+      ]
+    },
+    {
+      "code": "capture_flag",
+      "name": "Capture the flag (boys)",
+      "kind": "all",
+      "pdf_pages": [
+        100,
+        105
+      ]
+    },
+    {
+      "code": "ball_toss",
+      "name": "Ball toss (girls)",
+      "kind": "all",
+      "pdf_pages": [
+        105,
+        108
+      ]
+    },
+    {
+      "code": "tug_of_war",
+      "name": "Tug-of-war (boys and girls separately)",
+      "kind": "all",
+      "pdf_pages": [
+        105,
+        110
+      ]
+    },
+    {
+      "code": "obstacle",
+      "name": "Obstacle course",
+      "kind": "all",
+      "pdf_pages": [
+        111,
+        115
+      ]
+    },
+    {
+      "code": "three_legged",
+      "name": "Three-legged race",
+      "kind": "all",
+      "pdf_pages": [
+        115,
+        117
+      ]
+    },
+    {
+      "code": "cavalry",
+      "name": "Cavalry battle",
+      "kind": "all",
+      "pdf_pages": [
+        120,
+        129
+      ]
+    },
+    {
+      "code": "200m",
+      "name": "200-metre dash",
+      "kind": "all",
+      "pdf_pages": [
+        135,
+        136
+      ]
+    },
+    {
+      "code": "scavenger",
+      "name": "Scavenger hunt",
+      "kind": "recommended",
+      "pdf_pages": [
+        160,
+        162
+      ]
+    },
+    {
+      "code": "four_way_tug",
+      "name": "Four-way tug-of-war",
+      "kind": "recommended",
+      "pdf_pages": [
+        168,
+        169
+      ]
+    },
+    {
+      "code": "mixed_three_legged",
+      "name": "Mixed-gender three-legged race",
+      "kind": "recommended",
+      "pdf_pages": [
+        169,
+        175
+      ]
+    },
+    {
+      "code": "relay1200",
+      "name": "1200-metre all-years relay",
+      "kind": "recommended",
+      "pdf_pages": [
+        181,
+        189
+      ]
+    }
+  ],
+  "outcome": {
+    "team_winner": "RED",
+    "first_year_ranking": [
+      "B",
+      "C",
+      "A",
+      "D"
+    ],
+    "first_year_net_class_points": {
+      "A": -50,
+      "B": 0,
+      "C": -100,
+      "D": -100
+    },
+    "first_year_mvp": "actor.shibata-so",
+    "first_year_mvp_source": "y1v5.ev.059"
+  },
+  "limitations": [
+    "Source not sufficient for complete athlete-by-heat placements or event-level ranking table",
+    "Historical events are not live simulations or uniform quantitative ratings",
+    "No known physical ability rankings across incompatible or obstructed events"
+  ]
+}

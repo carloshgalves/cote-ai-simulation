@@ -1,0 +1,44 @@
+{
+  "id": "y1v5.case.yosuke-hirata.model-three-legged-cooperation",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "model three legged cooperation",
+  "context": "Year 1 Volume 5 sports-festival episode; physical and strategic observations are event-bounded.",
+  "observed_actions": "Coaches Kiyotaka on breathing and maintaining a compatible partnered stride.",
+  "observed_result": "Paired practice works without requiring maximum isolated sprint speed.",
+  "epistemic_limits": "No global performance tier or forced replay; distinguish direct action, reported motive, health, matchup, fatigue and other actors' participation; misconduct is descriptive only.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      62,
+      64,
+      116,
+      117
+    ],
+    "chapter": 4,
+    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_PASS_PENDING_INDIVIDUAL_AUDIT"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.onodera",
+    "actor.kiyotaka-ayanokoji",
+    "actor.kikyo-kushida"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "leadership"
+  ],
+  "information_available": "Limited to participants and witnesses at occurrence time; later reader revelations are not prior actor memory.",
+  "counterfactual_test": "Different opponents, coalition, partner, recovery and information may alter result.",
+  "topics": [
+    "sports",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.015",
+    "y1v5.ev.032"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

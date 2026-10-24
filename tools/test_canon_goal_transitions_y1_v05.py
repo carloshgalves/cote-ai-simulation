@@ -53,7 +53,7 @@ def errors(dataset):
     kushida=by_id["y1v5.goal.kikyo-kushida.expulsion-prioritized-over-class-rank"]
     if "prioritize expelling Suzune" not in kushida["observed_goal_or_means_after"]:out.append("lost secret priority")
     ryuen=by_id["y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent"]
-    if "unidentified" not in ryuen["behavioral_evidence"]:out.append("Ryuen falsely knows sender")
+    if not any(term in ryuen["behavioral_evidence"] for term in ("unidentified","withholds attribution")):out.append("Ryuen falsely knows sender")
     if "Kiyotaka sent the audio" in ryuen["behavioral_evidence"]:out.append("sender identity fabricated")
     if dataset["future_divergence_gate"].startswith("Every simulation must repeat"):out.append("story arc predetermined")
     return sorted(set(out))

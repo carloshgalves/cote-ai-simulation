@@ -1,0 +1,76 @@
+{
+  "schema_version": "volume-coverage-v1",
+  "source": "ln.y1.v05.sevenseas.en.operator-provided",
+  "pdf_pages": 207,
+  "chapters": [
+    {
+      "chapter": 1,
+      "start_pdf_page": 11,
+      "end_pdf_page": 11
+    },
+    {
+      "chapter": 2,
+      "start_pdf_page": 13,
+      "end_pdf_page": 38
+    },
+    {
+      "chapter": 3,
+      "start_pdf_page": 39,
+      "end_pdf_page": 53
+    },
+    {
+      "chapter": 4,
+      "start_pdf_page": 54,
+      "end_pdf_page": 67
+    },
+    {
+      "chapter": 5,
+      "start_pdf_page": 68,
+      "end_pdf_page": 85
+    },
+    {
+      "chapter": 6,
+      "start_pdf_page": 86,
+      "end_pdf_page": 143
+    },
+    {
+      "chapter": 7,
+      "start_pdf_page": 144,
+      "end_pdf_page": 159
+    },
+    {
+      "chapter": 8,
+      "start_pdf_page": 160,
+      "end_pdf_page": 180
+    },
+    {
+      "chapter": 9,
+      "start_pdf_page": 181,
+      "end_pdf_page": 204
+    }
+  ],
+  "records": 60,
+  "chapter_evidence_counts": {
+    "1": 1,
+    "2": 9,
+    "3": 4,
+    "4": 3,
+    "5": 3,
+    "6": 19,
+    "7": 4,
+    "8": 4,
+    "9": 13
+  },
+  "semantic_review": "INITIAL_SOURCE_FIRST_PASS_PENDING_INDEPENDENT_RECORD_RECHECK",
+  "release": "DRAFT_NOT_AUTHORIZED",
+  "extraction_policy": "Selective prioritized strategy, alliances, interpersonal changes, physical demonstration, results and source-ambiguity",
+  "open_findings": [
+    "Reader-level source deduction of zodiac VIP ordinal pattern is not official VIP-selection policy",
+    "Class B losing-team points 100 vs 50 conflict between printed handout and post-event narration",
+    "Sudō, Shibata, Manabu and Kiyotaka have no standardized measured sprint time in this source",
+    "Ryūen's injury/bribery story includes adversarial admissions and denials; independently established extent unresolved",
+    "Actual complete event placings unknown; no inferred global athletic rankings",
+    "Independent record-level semantic review and operator release pending"
+  ],
+  "coverage_status": "SELECTIVE_FIRST_SOURCE_PASS_NOT_RELEASE_AUTHORIZED"
+}

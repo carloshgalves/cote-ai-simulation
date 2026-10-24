@@ -1,0 +1,143 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.y1.sports-festival",
+  "name": "Year 1 inter-grade red/white school sports festival",
+  "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
+  "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+  "physical_pdf_pages": [
+    16,
+    23,
+    86,
+    191
+  ],
+  "timing": "Y1_SEPT_TO_EARLY_OCT",
+  "grade_level": 1,
+  "teams": {
+    "Red": [
+      "A",
+      "D"
+    ],
+    "White": [
+      "B",
+      "C"
+    ]
+  },
+  "events_all": [
+    "100m dash",
+    "hurdles",
+    "boys capture the flag",
+    "girls ball toss",
+    "boys/girls tug of war",
+    "obstacle course",
+    "three-legged race",
+    "cavalry battle",
+    "200m dash"
+  ],
+  "events_recommended": [
+    "scavenger hunt",
+    "four-way tug of war",
+    "mixed three-legged race",
+    "1200m three-year mixed relay"
+  ],
+  "participation_order": {
+    "class_consensus_required": true,
+    "submitted_before_festival": true,
+    "changes_after_deadline": "FORBIDDEN",
+    "missed_deadline": "RANDOM_ASSIGNMENT",
+    "recommended_substitution_private_points": 100000,
+    "all_participants_below_minimum": "DISQUALIFIED"
+  },
+  "individual_placement_points": {
+    "first": 15,
+    "second": 12,
+    "third": 10,
+    "fourth": 8,
+    "fifth": -1,
+    "below_fifth": "minus one additional per lower position"
+  },
+  "recommended_placement_points": {
+    "first": 50,
+    "second": 30,
+    "third": 15,
+    "fourth": 10,
+    "fifth": -2,
+    "below_fifth": "minus two additional per lower position",
+    "final_relay_multiplier": 3
+  },
+  "team_competition_winner_points": 500,
+  "grade_class_point_deltas": {
+    "first": 50,
+    "second": 0,
+    "third": -50,
+    "fourth": -100
+  },
+  "losing_coalition_class_points": -100,
+  "individual_rewards": {
+    "first": "5000 private points OR +3 next-test points",
+    "second": "3000 private points OR +2 next-test points",
+    "third": "1000 private points OR +1 next-test point",
+    "last": "minus 1000 private points OR minus 1 next-test point if insufficient balance",
+    "test_bonus_transferable": false
+  },
+  "lowest_10_in_grade_next_test_penalty": -10,
+  "mvp_overall_private_points": 100000,
+  "top_3_each_grade_private_points": 10000,
+  "rules_authority": "PRINTED_HANDOUT_PLUS_TEACHER_EXPLANATION",
+  "observed_results": {
+    "coalition_winner": "Red",
+    "grade_one_class_order": [
+      "B",
+      "C",
+      "A",
+      "D"
+    ],
+    "class_D_grade_penalty": -100,
+    "first_year_mvp": "Sou Shibata",
+    "relay_start_sudo_lead_at_least_meters": 15
+  },
+  "documented_conflicts": [
+    "Rules assign 100 class-point loss to each White-team class; post-festival narration describes Class B losing 50 due to White loss. Do not silently normalize this inconsistency."
+  ],
+  "unknowns": [
+    "Exact complete event-by-event placement matrix not provided",
+    "Unobstructed Kiyotaka-versus-Manabu sprint winner not demonstrated",
+    "School adjudication of alleged slippery headband and Kinoshita scheme not shown",
+    "All relevant substitute payments and balances not independently itemized"
+  ],
+  "source_evidence_refs": [
+    "y1v5.ev.001",
+    "y1v5.ev.002",
+    "y1v5.ev.004",
+    "y1v5.ev.005",
+    "y1v5.ev.006",
+    "y1v5.ev.007",
+    "y1v5.ev.015",
+    "y1v5.ev.016",
+    "y1v5.ev.017",
+    "y1v5.ev.021",
+    "y1v5.ev.022",
+    "y1v5.ev.023",
+    "y1v5.ev.024",
+    "y1v5.ev.025",
+    "y1v5.ev.026",
+    "y1v5.ev.027",
+    "y1v5.ev.029",
+    "y1v5.ev.030",
+    "y1v5.ev.031",
+    "y1v5.ev.032",
+    "y1v5.ev.033",
+    "y1v5.ev.034",
+    "y1v5.ev.035",
+    "y1v5.ev.038",
+    "y1v5.ev.044",
+    "y1v5.ev.046",
+    "y1v5.ev.049",
+    "y1v5.ev.050",
+    "y1v5.ev.051",
+    "y1v5.ev.052",
+    "y1v5.ev.053",
+    "y1v5.ev.054",
+    "y1v5.ev.060"
+  ],
+  "simulation_policy": "REFERENCE_ONLY_NOT_COMPILED_INTO_EXAM_ENGINE"
+}

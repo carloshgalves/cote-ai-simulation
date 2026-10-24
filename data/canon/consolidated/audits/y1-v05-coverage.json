@@ -49,34 +49,40 @@
       "end_pdf_page": 204
     }
   ],
-  "records": 68,
-  "cases": 36,
-  "behavioral_cases": 36,
+  "records": 80,
+  "cases": 39,
+  "behavioral_cases": 39,
   "chapter_evidence_counts": {
     "1": 1,
     "2": 10,
     "3": 5,
-    "4": 6,
+    "4": 7,
     "5": 4,
-    "6": 19,
+    "6": 21,
     "7": 3,
-    "8": 6,
-    "9": 14
+    "8": 9,
+    "9": 20
   },
   "source_review": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_PDF_REVIEW_PENDING",
   "pending_semantic_items": 104,
-  "pending_independent_review_items": 104,
-  "release": "DRAFT_NOT_AUTHORIZED",
+  "pending_independent_review_items": 119,
+  "release": "DRAFT_REQUIRES_HUMAN_REVIEW",
   "extraction_policy": "Source-first selective coverage includes victories, failures, ordinary placements, composite-event context, and temporal knowledge restrictions.",
   "open_findings": [
     "Individual 104-item semantic comparison requires independent review",
     "No complete source-certified all-heats ranking",
     "Original school-certified Zodiac VIP algorithm not provided even if V5 actors infer surname pattern",
     "Anonymous audio source and Ibuki/Kinoshita phrasing need adversarial analysis",
-    "No clean Ayanokōji-Manabu maximal sprint comparison; no numerical strength ranking"
+    "No clean Ayanokōji-Manabu maximal sprint comparison; no numerical strength ranking",
+    "Known source-text inconsistency: anonymous audio attributes collision assignment to Ibuki while observed race had Kinoshita",
+    "Goal transition examples are non-executable until actor planning system integration; no fixed future arc",
+    "119 independent per-record semantic signoffs and operator approval still pending"
   ],
   "global_character_count": 85,
-  "global_behavioral_case_count": 238,
+  "global_behavioral_case_count": 241,
   "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v05.json",
-  "operator_release": "NOT_REQUESTED"
+  "operator_release": "NOT_REQUESTED",
+  "goal_transition_count": 10,
+  "goal_transition_actors": 5,
+  "behavioral_case_count": 39
 }

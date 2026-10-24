@@ -5,8 +5,8 @@
   "source_pdf_sha256": "0302c25d48f82c9a336b019c4d52045560fdbd91138381a1b24f6a960ae85914",
   "source_page_count": 207,
   "extraction_mode": "DIRECT_PDF_TEXT_VALUE_BASED_SPORTS_STRATEGY_RELATIONS",
-  "evidence_count": 68,
-  "behavioral_case_count": 36,
+  "evidence_count": 80,
+  "behavioral_case_count": 39,
   "evidence": [
     {
       "record_id": "y1v5.ev.001",
@@ -1904,6 +1904,368 @@
         "actor source and knowledge time",
         "cross-volume provenance"
       ]
+    },
+    {
+      "record_id": "y1v5.ev.069",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        55,
+        56
+      ],
+      "source_mode": "NARRATOR_INFERENCE",
+      "primary_claim": "Sudō requests permission to use Suzune's given name if he wins top first-year sports honors; the narrator indicates romantic feelings, while Suzune interprets the interaction as a wager or friendship request. No reciprocal romance is established.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Matched against user-supplied primary Volume 5 source (PDF pages shown). Narrator, directly admitted actions, coerced kneeling interrupted by audio, and conditional goal changes remain separately attributed. Independent review remains pending.",
+      "required_checks": [
+        "source exact claim and page",
+        "actor motive vs behavior",
+        "speaker admission vs medical/transaction verification",
+        "private revelation time",
+        "no fixed future goal"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.070",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        136,
+        138
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka knows Sudō has a crush on Suzune and deliberately delivers a harsh lesson to prompt her to retrieve their strongest athlete and learn the limits of solitary effort. He frames Sudō's return as a counterstrategy to Ryūen's provocation.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Matched against user-supplied primary Volume 5 source (PDF pages shown). Narrator, directly admitted actions, coerced kneeling interrupted by audio, and conditional goal changes remain separately attributed. Independent review remains pending.",
+      "required_checks": [
+        "source exact claim and page",
+        "actor motive vs behavior",
+        "speaker admission vs medical/transaction verification",
+        "private revelation time",
+        "no fixed future goal"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.071",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        141,
+        142
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka admits privately he wanted Suzune to uncover the spy herself and intentionally did not revise the roster despite anticipating leakage; he misleadingly attributes this course to Horikita's plan when talking to Hirata and Kei. This accepts competitive risk but does not prove deliberately causing the entire class defeat.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Matched against user-supplied primary Volume 5 source (PDF pages shown). Narrator, directly admitted actions, coerced kneeling interrupted by audio, and conditional goal changes remain separately attributed. Independent review remains pending.",
+      "required_checks": [
+        "source exact claim and page",
+        "actor motive vs behavior",
+        "speaker admission vs medical/transaction verification",
+        "private revelation time",
+        "no fixed future goal"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.072",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        165,
+        166,
+        178,
+        179
+      ],
+      "source_mode": "FIRST_PERSON_MONOLOGUE",
+      "primary_claim": "Suzune recognizes that she and Sudō both pursued recognition through self-reliance; she retains the goal of Class A and her brother's respect but explicitly revises her method to relying on allies. She and Sudō agree to mutual support.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Matched against user-supplied primary Volume 5 source (PDF pages shown). Narrator, directly admitted actions, coerced kneeling interrupted by audio, and conditional goal changes remain separately attributed. Independent review remains pending.",
+      "required_checks": [
+        "source exact claim and page",
+        "actor motive vs behavior",
+        "speaker admission vs medical/transaction verification",
+        "private revelation time",
+        "no fixed future goal"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.073",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        165,
+        166,
+        179
+      ],
+      "source_mode": "DIALOGUE",
+      "primary_claim": "Sudō discloses the need for attention and respect beyond basketball and responds to Suzune's recognition by agreeing to return. His attachment to her influences effort, but the exchange does not guarantee future emotional compliance.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Matched against user-supplied primary Volume 5 source (PDF pages shown). Narrator, directly admitted actions, coerced kneeling interrupted by audio, and conditional goal changes remain separately attributed. Independent review remains pending.",
+      "required_checks": [
+        "source exact claim and page",
+        "actor motive vs behavior",
+        "speaker admission vs medical/transaction verification",
+        "private revelation time",
+        "no fixed future goal"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.074",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        172,
+        174,
+        175
+      ],
+      "source_mode": "DIRECT_CHARACTER_ADMISSION",
+      "primary_claim": "Kushida explicitly admits leaking the festival roster to Class C. She affirms Kiyotaka's analysis that her Zodiac VIP disclosure to Ryūen was traded for help targeting Suzune, describes Suzune's expulsion as preceding advancement to Class A, and adds Kiyotaka to her expulsion targets. The precise past communication or transaction remains source-scoped.",
+      "actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen"
+      ],
+      "related_event_ids": [
+        "evt.y1.v04.zodiac-dragon-vip-disclosure",
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Matched against user-supplied primary Volume 5 source (PDF pages shown). Narrator, directly admitted actions, coerced kneeling interrupted by audio, and conditional goal changes remain separately attributed. Independent review remains pending.",
+      "required_checks": [
+        "source exact claim and page",
+        "actor motive vs behavior",
+        "speaker admission vs medical/transaction verification",
+        "private revelation time",
+        "no fixed future goal"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.075",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        198,
+        199
+      ],
+      "source_mode": "CHARACTER_CONFESSION",
+      "primary_claim": "Ryūen admits prioritizing Suzune's humiliation rather than maximizing Class C's festival result; claims he obtained D's roster from Kushida, had Kinoshita rehearse a collision, offered her 500000 private points, and caused an injury himself later. These are Ryūen's claims in a conversation he simultaneously records and later characterizes as fictional.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kinoshita",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "related_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Matched against user-supplied primary Volume 5 source (PDF pages shown). Narrator, directly admitted actions, coerced kneeling interrupted by audio, and conditional goal changes remain separately attributed. Independent review remains pending.",
+      "required_checks": [
+        "source exact claim and page",
+        "actor motive vs behavior",
+        "speaker admission vs medical/transaction verification",
+        "private revelation time",
+        "no fixed future goal"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.076",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        199,
+        200
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune captures Ryūen's apparent confession and threatens to use it, but Ryūen exhibits his own longer video and demands she kneel; she begins kneeling and admitting defeat before an incoming message interrupts him. The interrupted kneeling should not be conflated with a completed post-demand settlement.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen",
+        "actor.kikyo-kushida"
+      ],
+      "related_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Matched against user-supplied primary Volume 5 source (PDF pages shown). Narrator, directly admitted actions, coerced kneeling interrupted by audio, and conditional goal changes remain separately attributed. Independent review remains pending.",
+      "required_checks": [
+        "source exact claim and page",
+        "actor motive vs behavior",
+        "speaker admission vs medical/transaction verification",
+        "private revelation time",
+        "no fixed future goal"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.077",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        200,
+        201
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "An anonymous message delivers audio of a prior Class C planning conversation and disrupts Ryūen's leverage. He concludes an unknown opponent has anticipated his scheme but does not identify the sender; Suzune believes Kiyotaka is the mastermind. The tape names Ibuki in a line apparently inconsistent with the observed Kinoshita collision, which must not be silently rewritten.",
+      "actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida",
+        "actor.mio-ibuki"
+      ],
+      "related_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Matched against user-supplied primary Volume 5 source (PDF pages shown). Narrator, directly admitted actions, coerced kneeling interrupted by audio, and conditional goal changes remain separately attributed. Independent review remains pending.",
+      "required_checks": [
+        "source exact claim and page",
+        "actor motive vs behavior",
+        "speaker admission vs medical/transaction verification",
+        "private revelation time",
+        "no fixed future goal"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.078",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        187,
+        189,
+        193
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka expresses disinterest in the day's festival result and predicts Class D will become stronger, while treating the race against Manabu as personally meaningful. This supports tolerating present loss for future development, not a proven intention or causal action to make the class finish last.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabu-horikita",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [
+        "evt.y1.v05.relay-unmasked-physical-capacity"
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Matched against user-supplied primary Volume 5 source (PDF pages shown). Narrator, directly admitted actions, coerced kneeling interrupted by audio, and conditional goal changes remain separately attributed. Independent review remains pending.",
+      "required_checks": [
+        "source exact claim and page",
+        "actor motive vs behavior",
+        "speaker admission vs medical/transaction verification",
+        "private revelation time",
+        "no fixed future goal"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.079",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        193
+      ],
+      "source_mode": "DIALOGUE",
+      "primary_claim": "After a last-place class result, Suzune says failure has nourished her growth and expresses confidence in the class's future; this is self-reported reflective change, not proof she can never regress.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Matched against user-supplied primary Volume 5 source (PDF pages shown). Narrator, directly admitted actions, coerced kneeling interrupted by audio, and conditional goal changes remain separately attributed. Independent review remains pending.",
+      "required_checks": [
+        "source exact claim and page",
+        "actor motive vs behavior",
+        "speaker admission vs medical/transaction verification",
+        "private revelation time",
+        "no fixed future goal"
+      ]
+    },
+    {
+      "record_id": "y1v5.ev.080",
+      "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        191,
+        192
+      ],
+      "source_mode": "DIALOGUE",
+      "primary_claim": "Suzune conditions Sudō's future on rejecting unjustified violence, agrees to his use of her given name and thanks him for the class's new hope. Sudō accepts the condition, though observed long-term fulfillment remains unknown.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Matched against user-supplied primary Volume 5 source (PDF pages shown). Narrator, directly admitted actions, coerced kneeling interrupted by audio, and conditional goal changes remain separately attributed. Independent review remains pending.",
+      "required_checks": [
+        "source exact claim and page",
+        "actor motive vs behavior",
+        "speaker admission vs medical/transaction verification",
+        "private revelation time",
+        "no fixed future goal"
+      ]
     }
   ],
   "behavioral_cases": [
@@ -1962,6 +2324,28 @@
         "counterfactual nonpromotion",
         "misconduct descriptive only",
         "actor knowledge at time"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
+      "case_file": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/escalate-coercion-until-anonymous-counterevidence.json",
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        198,
+        199,
+        200,
+        201
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Behavior source and dialogue rechecked for the newly added case. Own action, social motive, and contradictory actor knowledge are bounded by volume scenes; future simulation change not guaranteed.",
+      "required_checks": [
+        "primary actor attribution",
+        "evidence refs and source passages",
+        "outcomes actually observed",
+        "uncertainty of future persistence",
+        "unearned knowledge"
       ]
     },
     {
@@ -2142,6 +2526,33 @@
       ]
     },
     {
+      "case_id": "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/seek-suzune-recognition-and-reprioritize-respect.json",
+      "primary_actor_id": "actor.ken-sudo",
+      "pdf_pages": [
+        55,
+        56,
+        136,
+        165,
+        166,
+        178,
+        179,
+        191,
+        192
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Behavior source and dialogue rechecked for the newly added case. Own action, social motive, and contradictory actor knowledge are bounded by volume scenes; future simulation change not guaranteed.",
+      "required_checks": [
+        "primary actor attribution",
+        "evidence refs and source passages",
+        "outcomes actually observed",
+        "uncertainty of future persistence",
+        "unearned knowledge"
+      ]
+    },
+    {
       "case_id": "y1v5.case.ken-sudo.serve-as-powerbase-in-cavalry",
       "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/serve-as-powerbase-in-cavalry.json",
       "primary_actor_id": "actor.ken-sudo",
@@ -2240,6 +2651,29 @@
         "counterfactual nonpromotion",
         "misconduct descriptive only",
         "actor knowledge at time"
+      ]
+    },
+    {
+      "case_id": "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/accept-short-term-risk-to-develop-horikita.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        137,
+        138,
+        141,
+        142,
+        187
+      ],
+      "semantic_review": "ASSISTANT_DIRECT_PDF_RECHECK_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "review_note": "Behavior source and dialogue rechecked for the newly added case. Own action, social motive, and contradictory actor knowledge are bounded by volume scenes; future simulation change not guaranteed.",
+      "required_checks": [
+        "primary actor attribution",
+        "evidence refs and source passages",
+        "outcomes actually observed",
+        "uncertainty of future persistence",
+        "unearned knowledge"
       ]
     },
     {
@@ -2619,17 +3053,75 @@
     }
   ],
   "release_gate": {
-    "assistant_individual_semantic_review": "PENDING",
+    "assistant_individual_semantic_review": "PARTIAL_TARGETED_DIRECT_SOURCE_RECHECK",
     "external_independent_review": "NOT_PERFORMED",
     "operator_approval": "NOT_REQUESTED",
     "individual_verified_count": 0,
     "engine_memory_admission": false,
-    "exam_executable": false
+    "exam_executable": false,
+    "independent_review_pending_count": 119,
+    "assistant_direct_source_rechecked_count": 15
   },
-  "global_promotion": "BLOCKED_PENDING_INDEPENDENT_SEMANTIC_REVIEW_AND_OPERATOR_APPROVAL",
+  "global_promotion": "BLOCKED_PENDING_119_ITEM_INDEPENDENT_SEMANTIC_REVIEW_AND_OPERATOR_APPROVAL",
   "notes": [
     "One initial extraction pass is not a 104-item individually signed semantic review.",
     "No full copyrighted PDF committed.",
-    "User/operator gate required before merge."
+    "User/operator gate required before merge.",
+    "October 24 targeted read of 12 added evidence and three added cases completed; previous 104 individual reviews remain pending. Numeric goals/weights and runtime automatic updates not created."
+  ],
+  "findings": [
+    {
+      "id": "Y1V5-GOAL-001",
+      "severity": "MEDIUM",
+      "state": "REMEDIATED",
+      "description": "Ryūen aims at Suzune's humiliation/coerced kneeling rather than simply optimizing class score; began kneeling but anonymous message interrupted plan",
+      "refs": [
+        "y1v5.ev.075",
+        "y1v5.ev.076",
+        "y1v5.ev.077"
+      ]
+    },
+    {
+      "id": "Y1V5-GOAL-002",
+      "severity": "MEDIUM",
+      "state": "REMEDIATED",
+      "description": "Kushida's direct sport roster leak admission, asserted VIP exchange and shifting expulsion target list separated from public Class A objective",
+      "refs": [
+        "y1v5.ev.074"
+      ]
+    },
+    {
+      "id": "Y1V5-GOAL-003",
+      "severity": "HIGH",
+      "state": "OPEN_SOURCE_TEXT_ANOMALY",
+      "description": "Anonymous audio names Ibuki in the quoted collision instruction although direct observed collision concerns Kinoshita; do not silently correct, authenticate or collapse",
+      "refs": [
+        "y1v5.ev.077"
+      ]
+    },
+    {
+      "id": "Y1V5-GOAL-004",
+      "severity": "MEDIUM",
+      "state": "REMEDIATED",
+      "description": "Horikita retains Class A/brother objective but revises cooperative means; Sudō's one-sided romance and promises are not enduring guarantees",
+      "refs": [
+        "y1v5.ev.069",
+        "y1v5.ev.072",
+        "y1v5.ev.073",
+        "y1v5.ev.079",
+        "y1v5.ev.080"
+      ]
+    },
+    {
+      "id": "Y1V5-GOAL-005",
+      "severity": "MEDIUM",
+      "state": "REMEDIATED_WITH_INFERENCE_GATE",
+      "description": "Ayanokōji accepts risk to have Suzune discover spy; cannot generalize to intentionally engineering Class D's entire loss",
+      "refs": [
+        "y1v5.ev.070",
+        "y1v5.ev.071",
+        "y1v5.ev.078"
+      ]
+    }
   ]
 }

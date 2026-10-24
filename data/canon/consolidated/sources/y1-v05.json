@@ -9,7 +9,7 @@
   "operator_selected_for_extraction": true,
   "original_pdf_committed": false,
   "claims_all_verified": false,
-  "record_audit": "INITIAL_DIRECT_TEXT_SOURCE_PASS_INDEPENDENT_INDIVIDUAL_REVIEW_PENDING",
+  "record_audit": "PARTIAL_ASSISTANT_TARGETED_SOURCE_RECHECK_15_NEW_ITEMS_INDEPENDENT_AUDIT_PENDING",
   "narrative_segments": [
     {
       "chapter": 1,

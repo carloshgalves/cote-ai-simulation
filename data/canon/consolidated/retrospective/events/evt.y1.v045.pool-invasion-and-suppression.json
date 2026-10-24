@@ -6,11 +6,13 @@
     "y1v45.ev.044",
     "y1v45.ev.046",
     "y1v45.ev.053",
-    "y1v45.ev.054"
+    "y1v45.ev.054",
+    "y1v45.ev.051"
   ],
   "prior_ambiguities": [
     "Why had Kiyotaka enlisted Karuizawa for pool attendance?",
-    "Why did the returned covert recording contain no girls' images?"
+    "Why did the returned covert recording contain no girls' images?",
+    "What was the small hard plastic object Karuizawa handed Kiyotaka before he broke and discarded it?"
   ],
   "later_revelations": [
     {
@@ -28,7 +30,8 @@
       "resolves_assertion_refs": [
         "y1v45.ev.044",
         "y1v45.ev.046",
-        "y1v45.ev.053"
+        "y1v45.ev.053",
+        "y1v45.ev.051"
       ],
       "explanation": "The later chapter depicts Karuizawa privately neutralizing the surreptitious recording at Kiyotaka's direction; the would-be voyeurs then discover no image files.",
       "world_epistemic_status": "OBSERVED_IN_SUPPLEMENTARY_NARRATOR_PERSPECTIVE",
@@ -64,6 +67,7 @@
   ],
   "unresolved": [
     "Attendees who did not witness Karuizawa's action must not be granted that knowledge.",
-    "Privacy violation attempt is wrongdoing; practical instructions excluded."
+    "Privacy violation attempt is wrongdoing; practical instructions excluded.",
+    "The later replacement of the recording card strongly contextualizes the earlier broken plastic object (PDF pp193 and 196), but the object in Kiyotaka's hand is never expressly named in that earlier passage; the identification remains an inference, not an observed label."
   ]
 }

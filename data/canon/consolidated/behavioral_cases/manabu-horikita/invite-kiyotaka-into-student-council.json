@@ -14,7 +14,7 @@
       73
     ],
     "chapter": 3,
-    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS_PENDING_INDIVIDUAL_AUDIT"
+    "source_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING"
   },
   "other_actors": [
     "actor.tachibana",
@@ -37,6 +37,6 @@
     "y1v45.ev.021"
   ],
   "case_kind": "BEHAVIORAL_DEMONSTRATION",
-  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "epistemic_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
   "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
 }

@@ -55,6 +55,28 @@
       ]
     },
     {
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/escalate-coercion-until-anonymous-counterevidence.json",
+      "id": "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
+      "actor_id": "actor.kakeru-ryuen",
+      "topics": [
+        "strategy",
+        "coercion",
+        "risk_management",
+        "motivation"
+      ],
+      "pdf_pages": [
+        198,
+        199,
+        200,
+        201
+      ],
+      "evidence_refs": [
+        "y1v5.ev.075",
+        "y1v5.ev.076",
+        "y1v5.ev.077"
+      ]
+    },
+    {
       "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/exploit-roster-and-target-horikita.json",
       "id": "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
       "actor_id": "actor.kakeru-ryuen",
@@ -222,6 +244,33 @@
       ]
     },
     {
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/seek-suzune-recognition-and-reprioritize-respect.json",
+      "id": "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect",
+      "actor_id": "actor.ken-sudo",
+      "topics": [
+        "motivation",
+        "relationship",
+        "sports",
+        "discipline"
+      ],
+      "pdf_pages": [
+        55,
+        56,
+        136,
+        165,
+        166,
+        178,
+        179,
+        191,
+        192
+      ],
+      "evidence_refs": [
+        "y1v5.ev.069",
+        "y1v5.ev.073",
+        "y1v5.ev.080"
+      ]
+    },
+    {
       "path": "data/canon/consolidated/behavioral_cases/ken-sudo/serve-as-powerbase-in-cavalry.json",
       "id": "y1v5.case.ken-sudo.serve-as-powerbase-in-cavalry",
       "actor_id": "actor.ken-sudo",
@@ -315,6 +364,29 @@
         "y1v5.ev.038",
         "y1v5.ev.046",
         "y1v5.ev.063"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/accept-short-term-risk-to-develop-horikita.json",
+      "id": "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "topics": [
+        "strategy",
+        "motivation",
+        "leadership",
+        "deception"
+      ],
+      "pdf_pages": [
+        137,
+        138,
+        141,
+        142,
+        187
+      ],
+      "evidence_refs": [
+        "y1v5.ev.070",
+        "y1v5.ev.071",
+        "y1v5.ev.078"
       ]
     },
     {

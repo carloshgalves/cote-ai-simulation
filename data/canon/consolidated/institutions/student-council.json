@@ -5,7 +5,8 @@
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v02.sevenseas.en.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "evidence_refs": [
@@ -98,5 +99,16 @@
     },
     "time_gate": "LATE_AUG_POST_ISLAND",
     "revelation_gate": "MANABU_REPORTED_KIYOTAKA_LEADER_BEFORE_RECRUITMENT_NOT_PUBLIC"
+  },
+  "sports_festival_y1_v05": {
+    "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "source_evidence_refs": [
+      "y1v5.ev.025",
+      "y1v5.ev.050",
+      "y1v5.ev.052"
+    ],
+    "nagumo_public_goal": "EXPRESSED_DESIRE_FOR_HARSHER_MERITOCRACY_NOT_CURRENT_SCHOOL_POLICY",
+    "manabu_athletic_observation": "OBSERVED_100M_HEAT_WIN_AND_RELAY_CHALLENGE",
+    "gate": "NO_ASSUMED_POLICY_CHANGE_OR_PROSPECTIVE_ELECTION_OUTCOME"
   }
 }

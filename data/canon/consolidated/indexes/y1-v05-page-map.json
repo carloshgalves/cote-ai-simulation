@@ -1,0 +1,757 @@
+{
+  "schema_version": "page-index-v1",
+  "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+  "pages": {
+    "11": {
+      "evidence": [
+        "y1v5.ev.001"
+      ],
+      "cases": []
+    },
+    "13": {
+      "evidence": [
+        "y1v5.ev.002",
+        "y1v5.ev.003"
+      ],
+      "cases": []
+    },
+    "14": {
+      "evidence": [
+        "y1v5.ev.003"
+      ],
+      "cases": []
+    },
+    "16": {
+      "evidence": [
+        "y1v5.ev.004"
+      ],
+      "cases": []
+    },
+    "18": {
+      "evidence": [
+        "y1v5.ev.004",
+        "y1v5.ev.005"
+      ],
+      "cases": []
+    },
+    "21": {
+      "evidence": [
+        "y1v5.ev.005",
+        "y1v5.ev.006"
+      ],
+      "cases": []
+    },
+    "23": {
+      "evidence": [
+        "y1v5.ev.006",
+        "y1v5.ev.007"
+      ],
+      "cases": []
+    },
+    "25": {
+      "evidence": [
+        "y1v5.ev.007"
+      ],
+      "cases": []
+    },
+    "26": {
+      "evidence": [
+        "y1v5.ev.008"
+      ],
+      "cases": [
+        "y1v5.case.yosuke-hirata.coordinate-red-coalition"
+      ]
+    },
+    "27": {
+      "evidence": [
+        "y1v5.ev.009"
+      ],
+      "cases": []
+    },
+    "28": {
+      "evidence": [
+        "y1v5.ev.009"
+      ],
+      "cases": []
+    },
+    "31": {
+      "evidence": [
+        "y1v5.ev.008",
+        "y1v5.ev.010"
+      ],
+      "cases": [
+        "y1v5.case.yosuke-hirata.coordinate-red-coalition"
+      ]
+    },
+    "34": {
+      "evidence": [
+        "y1v5.ev.010"
+      ],
+      "cases": []
+    },
+    "39": {
+      "evidence": [
+        "y1v5.ev.011"
+      ],
+      "cases": [
+        "y1v5.case.yosuke-hirata.balance-vote-and-merit"
+      ]
+    },
+    "40": {
+      "evidence": [
+        "y1v5.ev.011",
+        "y1v5.ev.012"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.concentrate-strong-athletes",
+        "y1v5.case.yosuke-hirata.balance-vote-and-merit"
+      ]
+    },
+    "41": {
+      "evidence": [
+        "y1v5.ev.013"
+      ],
+      "cases": [
+        "y1v5.case.kei-karuizawa.organize-fairness-opposition",
+        "y1v5.case.yosuke-hirata.balance-vote-and-merit"
+      ]
+    },
+    "42": {
+      "evidence": [
+        "y1v5.ev.012"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.concentrate-strong-athletes"
+      ]
+    },
+    "43": {
+      "evidence": [
+        "y1v5.ev.014"
+      ],
+      "cases": [
+        "y1v5.case.kei-karuizawa.organize-fairness-opposition",
+        "y1v5.case.suzune-horikita.concentrate-strong-athletes",
+        "y1v5.case.yosuke-hirata.balance-vote-and-merit"
+      ]
+    },
+    "44": {
+      "evidence": [
+        "y1v5.ev.013",
+        "y1v5.ev.014"
+      ],
+      "cases": [
+        "y1v5.case.kei-karuizawa.organize-fairness-opposition",
+        "y1v5.case.suzune-horikita.concentrate-strong-athletes",
+        "y1v5.case.yosuke-hirata.balance-vote-and-merit"
+      ]
+    },
+    "62": {
+      "evidence": [
+        "y1v5.ev.015"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.demonstrate-synchronized-partner-pacing",
+        "y1v5.case.suzune-horikita.struggle-with-three-legged-coordination",
+        "y1v5.case.yosuke-hirata.model-three-legged-cooperation"
+      ]
+    },
+    "64": {
+      "evidence": [
+        "y1v5.ev.015",
+        "y1v5.ev.016",
+        "y1v5.ev.017"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.demonstrate-synchronized-partner-pacing",
+        "y1v5.case.suzune-horikita.struggle-with-three-legged-coordination",
+        "y1v5.case.yosuke-hirata.model-three-legged-cooperation"
+      ]
+    },
+    "65": {
+      "evidence": [
+        "y1v5.ev.016"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.demonstrate-synchronized-partner-pacing"
+      ]
+    },
+    "66": {
+      "evidence": [
+        "y1v5.ev.017"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.struggle-with-three-legged-coordination"
+      ]
+    },
+    "68": {
+      "evidence": [
+        "y1v5.ev.018"
+      ],
+      "cases": []
+    },
+    "71": {
+      "evidence": [
+        "y1v5.ev.018"
+      ],
+      "cases": []
+    },
+    "74": {
+      "evidence": [
+        "y1v5.ev.019"
+      ],
+      "cases": [
+        "y1v5.case.kikyo-kushida.leak-class-participation-to-opponent"
+      ]
+    },
+    "81": {
+      "evidence": [
+        "y1v5.ev.019"
+      ],
+      "cases": [
+        "y1v5.case.kikyo-kushida.leak-class-participation-to-opponent"
+      ]
+    },
+    "82": {
+      "evidence": [
+        "y1v5.ev.020"
+      ],
+      "cases": []
+    },
+    "84": {
+      "evidence": [
+        "y1v5.ev.020"
+      ],
+      "cases": []
+    },
+    "87": {
+      "evidence": [
+        "y1v5.ev.021"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.win-sprint-and-obstacle-heats",
+        "y1v5.case.ryuji-kanzaki.outpace-katsuragi-in-100m"
+      ]
+    },
+    "89": {
+      "evidence": [
+        "y1v5.ev.021",
+        "y1v5.ev.022"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.win-sprint-and-obstacle-heats",
+        "y1v5.case.rokusuke-koenji.catch-sudo-strike-while-withdrawing",
+        "y1v5.case.ryuji-kanzaki.outpace-katsuragi-in-100m"
+      ]
+    },
+    "91": {
+      "evidence": [
+        "y1v5.ev.022"
+      ],
+      "cases": [
+        "y1v5.case.rokusuke-koenji.catch-sudo-strike-while-withdrawing"
+      ]
+    },
+    "92": {
+      "evidence": [
+        "y1v5.ev.023"
+      ],
+      "cases": []
+    },
+    "94": {
+      "evidence": [
+        "y1v5.ev.023",
+        "y1v5.ev.024"
+      ],
+      "cases": [
+        "y1v5.case.mio-ibuki.challenge-suzune-in-sprint",
+        "y1v5.case.suzune-horikita.edge-ibuki-in-sprint"
+      ]
+    },
+    "95": {
+      "evidence": [
+        "y1v5.ev.024",
+        "y1v5.ev.025"
+      ],
+      "cases": [
+        "y1v5.case.mio-ibuki.challenge-suzune-in-sprint",
+        "y1v5.case.sou-shibata.earn-first-year-festival-mvp",
+        "y1v5.case.suzune-horikita.edge-ibuki-in-sprint"
+      ]
+    },
+    "96": {
+      "evidence": [
+        "y1v5.ev.025"
+      ],
+      "cases": [
+        "y1v5.case.sou-shibata.earn-first-year-festival-mvp"
+      ]
+    },
+    "97": {
+      "evidence": [
+        "y1v5.ev.026"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.place-third-against-track-specialists"
+      ]
+    },
+    "99": {
+      "evidence": [
+        "y1v5.ev.026"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.place-third-against-track-specialists"
+      ]
+    },
+    "100": {
+      "evidence": [
+        "y1v5.ev.027"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.physically-provoke-during-flag"
+      ]
+    },
+    "103": {
+      "evidence": [
+        "y1v5.ev.028"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.physically-provoke-during-flag"
+      ]
+    },
+    "104": {
+      "evidence": [
+        "y1v5.ev.027",
+        "y1v5.ev.028"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.physically-provoke-during-flag"
+      ]
+    },
+    "105": {
+      "evidence": [
+        "y1v5.ev.029"
+      ],
+      "cases": [
+        "y1v5.case.katsuragi.organize-tug-team-formation",
+        "y1v5.case.yosuke-hirata.coordinate-red-coalition"
+      ]
+    },
+    "110": {
+      "evidence": [
+        "y1v5.ev.029"
+      ],
+      "cases": [
+        "y1v5.case.katsuragi.organize-tug-team-formation",
+        "y1v5.case.yosuke-hirata.coordinate-red-coalition"
+      ]
+    },
+    "111": {
+      "evidence": [
+        "y1v5.ev.030"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.win-sprint-and-obstacle-heats",
+        "y1v5.case.sou-shibata.earn-first-year-festival-mvp"
+      ]
+    },
+    "113": {
+      "evidence": [
+        "y1v5.ev.030",
+        "y1v5.ev.031"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.win-sprint-and-obstacle-heats",
+        "y1v5.case.sou-shibata.earn-first-year-festival-mvp"
+      ]
+    },
+    "115": {
+      "evidence": [
+        "y1v5.ev.031"
+      ],
+      "cases": []
+    },
+    "116": {
+      "evidence": [
+        "y1v5.ev.032"
+      ],
+      "cases": [
+        "y1v5.case.yosuke-hirata.model-three-legged-cooperation"
+      ]
+    },
+    "117": {
+      "evidence": [
+        "y1v5.ev.032"
+      ],
+      "cases": [
+        "y1v5.case.yosuke-hirata.model-three-legged-cooperation"
+      ]
+    },
+    "120": {
+      "evidence": [
+        "y1v5.ev.033"
+      ],
+      "cases": []
+    },
+    "123": {
+      "evidence": [
+        "y1v5.ev.033"
+      ],
+      "cases": []
+    },
+    "124": {
+      "evidence": [
+        "y1v5.ev.034"
+      ],
+      "cases": [
+        "y1v5.case.yosuke-hirata.contest-ryuen-cavalry-unit"
+      ]
+    },
+    "128": {
+      "evidence": [
+        "y1v5.ev.035"
+      ],
+      "cases": [
+        "y1v5.case.yosuke-hirata.contest-ryuen-cavalry-unit"
+      ]
+    },
+    "129": {
+      "evidence": [
+        "y1v5.ev.034",
+        "y1v5.ev.035"
+      ],
+      "cases": [
+        "y1v5.case.yosuke-hirata.contest-ryuen-cavalry-unit"
+      ]
+    },
+    "130": {
+      "evidence": [
+        "y1v5.ev.036"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-leaked-fixed-participation-order"
+      ]
+    },
+    "131": {
+      "evidence": [
+        "y1v5.ev.036"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-leaked-fixed-participation-order"
+      ]
+    },
+    "132": {
+      "evidence": [
+        "y1v5.ev.037"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.apologize-and-return-to-race",
+        "y1v5.case.yosuke-hirata.try-to-deescalate-sudo"
+      ]
+    },
+    "134": {
+      "evidence": [
+        "y1v5.ev.037"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.apologize-and-return-to-race",
+        "y1v5.case.yosuke-hirata.try-to-deescalate-sudo"
+      ]
+    },
+    "135": {
+      "evidence": [
+        "y1v5.ev.038"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-leaked-fixed-participation-order"
+      ]
+    },
+    "136": {
+      "evidence": [
+        "y1v5.ev.038"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-leaked-fixed-participation-order"
+      ]
+    },
+    "137": {
+      "evidence": [
+        "y1v5.ev.039"
+      ],
+      "cases": []
+    },
+    "142": {
+      "evidence": [
+        "y1v5.ev.039"
+      ],
+      "cases": []
+    },
+    "144": {
+      "evidence": [
+        "y1v5.ev.040"
+      ],
+      "cases": []
+    },
+    "145": {
+      "evidence": [
+        "y1v5.ev.040"
+      ],
+      "cases": []
+    },
+    "146": {
+      "evidence": [
+        "y1v5.ev.041"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation",
+        "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation"
+      ]
+    },
+    "154": {
+      "evidence": [
+        "y1v5.ev.041"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation",
+        "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation"
+      ]
+    },
+    "155": {
+      "evidence": [
+        "y1v5.ev.042"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation",
+        "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation"
+      ]
+    },
+    "156": {
+      "evidence": [
+        "y1v5.ev.042"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation",
+        "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation"
+      ]
+    },
+    "157": {
+      "evidence": [
+        "y1v5.ev.043"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.bring-back-sudo-through-mutual-recognition"
+      ]
+    },
+    "159": {
+      "evidence": [
+        "y1v5.ev.043"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.bring-back-sudo-through-mutual-recognition"
+      ]
+    },
+    "160": {
+      "evidence": [
+        "y1v5.ev.044"
+      ],
+      "cases": []
+    },
+    "162": {
+      "evidence": [
+        "y1v5.ev.044"
+      ],
+      "cases": []
+    },
+    "163": {
+      "evidence": [
+        "y1v5.ev.045"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.bring-back-sudo-through-mutual-recognition"
+      ]
+    },
+    "169": {
+      "evidence": [
+        "y1v5.ev.045",
+        "y1v5.ev.046"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.bring-back-sudo-through-mutual-recognition"
+      ]
+    },
+    "170": {
+      "evidence": [
+        "y1v5.ev.046"
+      ],
+      "cases": []
+    },
+    "172": {
+      "evidence": [
+        "y1v5.ev.047"
+      ],
+      "cases": [
+        "y1v5.case.kikyo-kushida.leak-class-participation-to-opponent"
+      ]
+    },
+    "175": {
+      "evidence": [
+        "y1v5.ev.047"
+      ],
+      "cases": [
+        "y1v5.case.kikyo-kushida.leak-class-participation-to-opponent"
+      ]
+    },
+    "181": {
+      "evidence": [
+        "y1v5.ev.048"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.apologize-and-return-to-race",
+        "y1v5.case.suzune-horikita.bring-back-sudo-through-mutual-recognition"
+      ]
+    },
+    "182": {
+      "evidence": [
+        "y1v5.ev.048"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.apologize-and-return-to-race",
+        "y1v5.case.suzune-horikita.bring-back-sudo-through-mutual-recognition"
+      ]
+    },
+    "183": {
+      "evidence": [
+        "y1v5.ev.049",
+        "y1v5.ev.051"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.create-relay-opening-lead",
+        "y1v5.case.kiyotaka-ayanokoji.run-all-out-against-manabu",
+        "y1v5.case.manabu-horikita.accept-relay-duel-with-kiyotaka"
+      ]
+    },
+    "184": {
+      "evidence": [
+        "y1v5.ev.049",
+        "y1v5.ev.050"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.create-relay-opening-lead"
+      ]
+    },
+    "185": {
+      "evidence": [
+        "y1v5.ev.050"
+      ],
+      "cases": []
+    },
+    "187": {
+      "evidence": [
+        "y1v5.ev.052"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.run-all-out-against-manabu",
+        "y1v5.case.manabu-horikita.accept-relay-duel-with-kiyotaka"
+      ]
+    },
+    "188": {
+      "evidence": [
+        "y1v5.ev.051"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.run-all-out-against-manabu",
+        "y1v5.case.manabu-horikita.accept-relay-duel-with-kiyotaka"
+      ]
+    },
+    "189": {
+      "evidence": [
+        "y1v5.ev.052"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.run-all-out-against-manabu",
+        "y1v5.case.manabu-horikita.accept-relay-duel-with-kiyotaka"
+      ]
+    },
+    "190": {
+      "evidence": [
+        "y1v5.ev.053"
+      ],
+      "cases": []
+    },
+    "191": {
+      "evidence": [
+        "y1v5.ev.053",
+        "y1v5.ev.054",
+        "y1v5.ev.055",
+        "y1v5.ev.060"
+      ],
+      "cases": [
+        "y1v5.case.sou-shibata.earn-first-year-festival-mvp"
+      ]
+    },
+    "193": {
+      "evidence": [
+        "y1v5.ev.055"
+      ],
+      "cases": []
+    },
+    "194": {
+      "evidence": [
+        "y1v5.ev.056"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-leaked-fixed-participation-order",
+        "y1v5.case.kikyo-kushida.leak-class-participation-to-opponent"
+      ]
+    },
+    "196": {
+      "evidence": [
+        "y1v5.ev.056"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-leaked-fixed-participation-order",
+        "y1v5.case.kikyo-kushida.leak-class-participation-to-opponent"
+      ]
+    },
+    "198": {
+      "evidence": [
+        "y1v5.ev.057"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation"
+      ]
+    },
+    "199": {
+      "evidence": [
+        "y1v5.ev.057",
+        "y1v5.ev.058"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation"
+      ]
+    },
+    "201": {
+      "evidence": [
+        "y1v5.ev.058"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.pressure-horikita-with-kinoshita-accusation"
+      ]
+    },
+    "202": {
+      "evidence": [
+        "y1v5.ev.059"
+      ],
+      "cases": [
+        "y1v5.case.arisu-sakayanagi.approach-kiyotaka-with-white-room-secret"
+      ]
+    },
+    "204": {
+      "evidence": [
+        "y1v5.ev.059"
+      ],
+      "cases": [
+        "y1v5.case.arisu-sakayanagi.approach-kiyotaka-with-white-room-secret"
+      ]
+    }
+  }
+}

@@ -5,7 +5,8 @@
   "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
   "source_coverage": [
     "ln.y1.v04.sevenseas.en.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_pdf_sha256": "1d587b01242cd576fa2b0627222329d1bf1c23b12d206ad63f7a590f79fe9cc8",
   "location": "School-provided cruise ship (private group rooms)",
@@ -275,10 +276,11 @@
     "y1v4.ev.128",
     "y1v4.ev.132",
     "y1v45.ev.035",
-    "y1v45.ev.042"
+    "y1v45.ev.042",
+    "y1v5.ev.002"
   ],
   "open_questions": [
-    "Exact VIP allocation algorithm not demonstrated; Ryūen claims a pattern but this is not a normative school rule",
+    "School-issued algorithm still not disclosed. V5 provides Suzune's source-backed ordinal pattern but not official certification.",
     "All 12 group rosters and VIP identities not officially disclosed in source",
     "Interaction of prohibited cross-class communication and attending scheduled mixed groups needs full normative wording verification",
     "Calendar day three versus day four source wording conflict",
@@ -310,6 +312,44 @@
       "comment": "Horikita suspects Kushida leaked Dragon's VIP but has no proof; Karuizawa privately expects 500000 Rabbit VIP points in September, not yet credited.",
       "epistemic": "BELIEF_AND_PRIVATE_REWARD_EXPECTATION",
       "claim_promotion": "CONTEXT_ONLY_NO_EXECUTABLE_PROMOTION"
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v5.ev.002"
+      ],
+      "comment": "Suzune proposes alphabetic surname ordinal linked to Zodiac group animal; Rabbit and Dragon examples match, but school has not formally certified its method.",
+      "epistemic": "EXPLICIT_DEDUCTION_WITH_TWO_MATCHES",
+      "claim_promotion": "SUPPORTED_PATTERN_NOT_NORMATIVE_EXAM_FORMULA"
     }
-  ]
+  ],
+  "vip_ordinal_pattern_v05": {
+    "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      13,
+      14
+    ],
+    "status": "CHARACTER_DERIVED_HYPOTHESIS_NOT_OFFICIAL_ALGORITHM",
+    "proposed_rule": "Within each named group sort by surname alphabetically and use animal's zodiac rank as 1-based position",
+    "demonstrated_examples": [
+      {
+        "group": "Rabbit",
+        "position": 4,
+        "vip": "Karuizawa"
+      },
+      {
+        "group": "Dragon",
+        "position": 5,
+        "vip": "Kushida"
+      }
+    ],
+    "scope": "Two explicitly exemplified matches; do not assert official deterministic assignment without more normative evidence",
+    "available_to": [
+      "actor.suzune-horikita",
+      "actor.yosuke-hirata",
+      "actor.kei-karuizawa",
+      "actor.kiyotaka-ayanokoji"
+    ],
+    "available_since": "Y1_V05_CH2_DISCUSSION"
+  }
 }

@@ -4,7 +4,8 @@
   "display_name": "Nagumo (given name not supplied in this volume)",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "ASSISTANT_INITIAL_PASS_AUDIT_PENDING",
   "identity": {
@@ -21,14 +22,16 @@
         "y1v45.case.nagumo.lead-older-students-volleyball"
       ],
       "context_evidence_refs": [
-        "y1v45.ev.047"
+        "y1v45.ev.047",
+        "y1v5.ev.050"
       ]
     },
     "politics": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v45.ev.047",
-        "y1v45.ev.048"
+        "y1v45.ev.048",
+        "y1v5.ev.050"
       ]
     },
     "leadership": {
@@ -46,7 +49,7 @@
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Source confirms recreational performance; student council background and future presidency are Ichinose's account and predictions.",
+  "semantic_audit_notes": "Source confirms recreational performance; student council background and future presidency are Ichinose's account and predictions. Volume 5 initial sport-festival references added with no independent record signoff; traits and action are event-scoped.",
   "uncertainties": {
     "given_name_unknown_in_source": true,
     "council_selection_claims_not_official_rule": true,

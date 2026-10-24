@@ -1,0 +1,43 @@
+{
+  "id": "y1v5.case.suzune-horikita.negotiate-contested-injury-accusation",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "negotiate contested injury accusation",
+  "context": "Year 1 Volume 5 sports-festival episode; physical and strategic observations are event-bounded.",
+  "observed_actions": "Faces Kinoshita's accusation under Ryūen's pressure without admitting intentional injury.",
+  "observed_result": "Negotiates to avoid escalation; culpability remains disputed.",
+  "epistemic_limits": "No global performance tier or forced replay; distinguish direct action, reported motive, health, matchup, fatigue and other actors' participation; misconduct is descriptive only.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      146,
+      154,
+      155,
+      156
+    ],
+    "chapter": 7,
+    "source_status": "ASSISTANT_INITIAL_DIRECT_PDF_PASS_PENDING_INDIVIDUAL_AUDIT"
+  },
+  "other_actors": [
+    "actor.kinoshita",
+    "actor.kakeru-ryuen",
+    "actor.kikyo-kushida"
+  ],
+  "capabilities_supported": [
+    "negotiation",
+    "risk_management"
+  ],
+  "information_available": "Limited to participants and witnesses at occurrence time; later reader revelations are not prior actor memory.",
+  "counterfactual_test": "Different opponents, coalition, partner, recovery and information may alter result.",
+  "topics": [
+    "negotiation",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.041",
+    "y1v5.ev.042"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_EXTRACTED_PENDING_INDIVIDUAL_AUDIT",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

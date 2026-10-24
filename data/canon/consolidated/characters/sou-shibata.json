@@ -1,0 +1,59 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.sou-shibata",
+  "display_name": "Sō Shibata",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v05.sevenseas.en.operator-provided"
+  ],
+  "source_status": "ASSISTANT_INITIAL_PASS_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "Class B first-year; festival first-year MVP",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "sports": {
+      "behavioral_case_refs": [
+        "y1v5.case.sou-shibata.earn-first-year-festival-mvp"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.025",
+        "y1v5.ev.030",
+        "y1v5.ev.054"
+      ]
+    },
+    "exam": {
+      "behavioral_case_refs": [
+        "y1v5.case.sou-shibata.earn-first-year-festival-mvp"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.025",
+        "y1v5.ev.054"
+      ]
+    },
+    "physical": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.030"
+      ]
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": false,
+  "semantic_audit_notes": "Volume 5 only; individual performances do not fix generic abilities. Volume 5 initial sport-festival references added with no independent record signoff; traits and action are event-scoped.",
+  "uncertainties": {
+    "given_name_unknown_in_source": false,
+    "future_fate_unknown": true
+  },
+  "generation_policy": "Single global identity",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTIONS_NOT_FEATS",
+    "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

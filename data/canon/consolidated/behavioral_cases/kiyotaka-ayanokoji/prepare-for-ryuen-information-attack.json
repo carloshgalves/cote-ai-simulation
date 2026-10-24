@@ -1,0 +1,56 @@
+{
+  "id": "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "prepare for ryuen information attack",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Identifies the roster leak early and privately chooses not to change the final lineup because he wants Suzune to discover and handle the spy; he nudges her through a harsh lesson to win Sudō back, while deliberately misrepresenting his choices to Hirata as Suzune's plan.",
+  "observed_result": "Accepts immediate competitive risk to create an opportunity for Suzune's growth, predicts future class improvement despite expecting poor festival results, and chooses a personally meaningful race against Manabu.",
+  "epistemic_limits": "This does not show he mechanically caused the overall last place or that an explicit fixed preference to make his class lose governs all future exams. His self-disclosed intent is to let Suzune solve the specific issue.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      31,
+      34,
+      54,
+      70,
+      129,
+      131,
+      136,
+      138,
+      141,
+      142,
+      187
+    ],
+    "chapter": 2,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kakeru-ryuen"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "risk_management",
+    "reasoning"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "strategy",
+    "risk_management",
+    "reasoning"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.011",
+    "y1v5.ev.017",
+    "y1v5.ev.023",
+    "y1v5.ev.042",
+    "y1v5.ev.070",
+    "y1v5.ev.071",
+    "y1v5.ev.078"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

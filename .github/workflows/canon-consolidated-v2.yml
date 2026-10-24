@@ -12,6 +12,8 @@ on:
       - 'tools/test_canon_y1_v04.py'
       - 'tools/test_canon_y1_v04_adversarial.py'
       - 'tools/test_canon_y1_v045.py'
+      - 'tools/test_canon_y1_v05.py'
+      - 'tools/test_canon_goal_transitions_y1_v05.py'
       - 'tools/test_canon_cross_volume_reconciliation.py'
       - 'tools/test_legacy_y1_crosswalk.py'
       - 'tools/canon_first_midterm_v1.py'
@@ -36,6 +38,8 @@ jobs:
       - run: python tools/test_canon_y1_v04.py
       - run: python tools/test_canon_y1_v04_adversarial.py
       - run: python tools/test_canon_y1_v045.py
+      - run: python tools/test_canon_y1_v05.py
+      - run: python tools/test_canon_goal_transitions_y1_v05.py
       - run: python tools/test_canon_cross_volume_reconciliation.py
       - run: python tools/test_legacy_y1_crosswalk.py
       - run: python tools/test_canon_record_review.py

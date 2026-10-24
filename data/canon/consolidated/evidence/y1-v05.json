@@ -1,0 +1,3430 @@
+{
+  "schema_version": "consolidated-source-evidence-v1",
+  "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+  "records": [
+    {
+      "id": "y1v5.ev.001",
+      "domain": "family",
+      "summary": "Sudō narrates parental abandonment, his father's janitorial work, and his pursuit of basketball; a prior sports-school recommendation was withdrawn following trouble. This is his retrospective self-account, not a verified independent family dossier.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          11
+        ],
+        "chapter": 1,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_BEFORE_ENROLLMENT_RETROSPECTIVE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 1,
+        "pdf_pages": [
+          11
+        ],
+        "chapter_order": 1
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "family",
+        "sports",
+        "motivation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.002",
+      "domain": "reasoning",
+      "summary": "Suzune presents a zodiac-position/surname-order explanation for VIP selection, illustrated by Rabbit/Karuizawa and Dragon/Kushida. It is the group's post-exam inference, not a newly published teacher-certified allocation formula.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          13,
+          14
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          13,
+          14
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "reasoning",
+        "exam",
+        "epistemics"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-vip-surname-order-pattern"
+      ]
+    },
+    {
+      "id": "y1v5.ev.003",
+      "domain": "leadership",
+      "summary": "Hirata proposes bringing Kushida into the Class D cooperation group; Suzune declines, claiming Hirata and Karuizawa provide needed interpersonal coverage.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          14,
+          15
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          14,
+          15
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "social",
+        "strategy"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.004",
+      "domain": "exam",
+      "summary": "School divides all three years into Red classes A/D and White classes B/C, with class-level and team-level consequences: losing team -100; grade-class positions +50,0,-50,-100.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          17,
+          19
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "INSTITUTIONAL_DECLARATION",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          17,
+          19
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "governance"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.005",
+      "domain": "exam",
+      "summary": "Individual places score 15/12/10/8 for first-fourth and negative values from fifth; recommended events have 50/30/15/10 and doubled negative deduction from fifth; final relay triples recommended event values.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          18,
+          19
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "INSTITUTIONAL_DECLARATION",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          18,
+          19
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "resources"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.006",
+      "domain": "exam",
+      "summary": "Top three individual event finishes permit a choice of 5000/3000/1000 private points or 3/2/1 written-test points; last place loses 1000 private points or a test point; bottom ten in each grade face -10 on the next written exam.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          19,
+          20
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "INSTITUTIONAL_DECLARATION",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          19,
+          20
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "economy"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.007",
+      "domain": "exam",
+      "summary": "Festival has 13 published events; participation order is class-submitted before 17:00 the preceding day, no later edit, random assignment if missed, and eligible recommended-participant substitution costs 100000 private points per event.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          20,
+          23
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "INSTITUTIONAL_DECLARATION",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          20,
+          23
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "governance",
+        "risk_management"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.008",
+      "domain": "strategy",
+      "summary": "Sudō volunteers for all recommended events, while Suzune warns repeated participation exhausts stamina; personal rewards compete with selecting the best participants for Class D.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          24,
+          25
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          24,
+          25
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.suzune-horikita",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "sports",
+        "leadership"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.009",
+      "domain": "strategy",
+      "summary": "Katsuragi and Hirata agree to minimize mutual interference as allied Red classes; Ryūen publicly refuses overt cooperation with Ichinose's White class, leaving intent uncertain.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          26,
+          27
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          26,
+          27
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.katsuragi",
+        "actor.kakeru-ryuen",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "negotiation",
+        "social"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.010",
+      "domain": "politics",
+      "summary": "Ayanokōji observes Class A gathering predominantly near Sakayanagi, suggesting a factional shift versus Katsuragi; the narrator's guess about motivations is not proof.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          28,
+          30
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "NARRATOR_OBSERVATION",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          28,
+          30
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "politics",
+        "leadership",
+        "epistemics"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.011",
+      "domain": "strategy",
+      "summary": "Ayanokōji distinguishes preparation (scouting and secrecy of order) from opportunistic rule manipulation, urges contingency planning against Ryūen and warns that his refusal to coordinate may be strategic.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          31,
+          34
+        ],
+        "chapter": 2,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          31,
+          34
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "risk_management"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.012",
+      "domain": "leadership",
+      "summary": "Hirata articulates volunteer-choice versus ability-based assignment methods; Sudō supports emphasizing athletic competence while others prioritize chances at prizes.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          39,
+          40
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          39,
+          40
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "strategy"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.013",
+      "domain": "negotiation",
+      "summary": "Suzune proposes strength-based groupings and sharing earned private points; Shinohara and Karuizawa object to sacrificing non-athletes' personal rewards, and Kushida advocates a compromise.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          40,
+          42
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          40,
+          42
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.shinohara",
+        "actor.kei-karuizawa",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "negotiation",
+        "social",
+        "leadership"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.014",
+      "domain": "governance",
+      "summary": "Class D settles strategic disagreement through a show-of-hands vote, documenting conflicting collective and individual goals; do not infer the entire class unanimously agreed.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          42,
+          45
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          42,
+          45
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita",
+        "actor.kei-karuizawa",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "governance",
+        "social",
+        "leadership"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.015",
+      "domain": "sports",
+      "summary": "In grip-strength screening Ayanokōji deliberately stops at 60.6 rather than full effort, placing second behind Sudō with Kōenji uncounted; Hirata records 57.9, Ike 42.6 and Sotomura 42. These are observed readings, not absolute strength ceilings.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          49,
+          51
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          49,
+          51
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo",
+        "actor.yosuke-hirata",
+        "actor.kanji-ike",
+        "actor.sotomura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "observation",
+        "deception"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.016",
+      "domain": "strategy",
+      "summary": "Hirata initially assigns tug-of-war using observed grip results, fills the scavenger-hunt field by a selection process involving chance, and warns classmates against photographing the provisional lineup.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          51,
+          52
+        ],
+        "chapter": 3,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          51,
+          52
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "resources"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.017",
+      "domain": "strategy",
+      "summary": "Class C conspicuously does not scout Class D's public practices, which Ayanokōji treats as reason to suspect an already arranged plan; its existence is a hypothesis at this moment.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          54,
+          55
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "NARRATOR_INFERENCE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          54,
+          55
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "observation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.018",
+      "domain": "motivation",
+      "summary": "Sudō seeks permission to address Suzune by her given name if he wins first-year MVP, with a stated negative consequence if he fails; his personal motivation is explicitly involved.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          55,
+          56
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          55,
+          56
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "relationship"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.019",
+      "domain": "leadership",
+      "summary": "Sudō demonstrates rope-pulling technique and coaches classmates intensely but impatiently; Hirata teaches carriage formations cooperatively and gently, contrasting leadership styles.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          57,
+          60
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          57,
+          60
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "sports",
+        "social"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.020",
+      "domain": "observation",
+      "summary": "Horikita notices Ayanokōji's consistently average public athletics and asks whether he is hiding his ability; he denies it. Her suspicion is not first-person knowledge of his maximum.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          59,
+          60
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          59,
+          60
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "deception",
+        "sports"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.relay-unmasked-physical-capacity"
+      ]
+    },
+    {
+      "id": "y1v5.ev.021",
+      "domain": "sports",
+      "summary": "Horikita and Onodera struggle to synchronize in three-legged practice, finishing third and quarreling; Hirata and Ayanokōji coordinate smoothly at practice speed; Sakura/Inogashira perform poorly.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          62,
+          64
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          62,
+          64
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.onodera",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "cooperation",
+        "leadership"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.022",
+      "domain": "social",
+      "summary": "Repeated failed pairings expose Suzune's refusal to accommodate a partner's pace; Ayanokōji offers practical feedback, while Kushida's popularity is considered an alternative for social coordination.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          64,
+          66
+        ],
+        "chapter": 4,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          64,
+          66
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "cooperation",
+        "strategy"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.023",
+      "domain": "strategy",
+      "summary": "Ayanokōji proposes a Saturday recon meeting with Suzune and Kushida; he values Kushida's familiarity with other classes while withholding suspicions and private knowledge.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          68,
+          70
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          68,
+          70
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "information"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.024",
+      "domain": "sports",
+      "summary": "At a mixed-year soccer game, Hirata competes and interacts with Nagumo and Shibata; single plays do not supply quantitative career-level superiority.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          74,
+          78
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          74,
+          78
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.nagumo",
+        "actor.shibata-so",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "social",
+        "observation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.025",
+      "domain": "social",
+      "summary": "Suzune confronts Kushida's hostility and her presence from prior junior high; Kushida maintains a public cooperative pose in front of others, while Kiyotaka remains cautious about her reliability.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          78,
+          81
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          78,
+          81
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "trust",
+        "epistemics"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.026",
+      "domain": "strategy",
+      "summary": "Class D finalizes the lineup; Sudō's starting position reflects use of his explosive opening speed, while Suzune's preferred relay arrangement anticipates Manabu as anchor.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          82,
+          85
+        ],
+        "chapter": 5,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          82,
+          85
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.ken-sudo",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "exam"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.027",
+      "domain": "sports",
+      "summary": "Sudō wins his 100-meter heat; Sotomura/Professor finishes last in the same heat; Kanzaki wins a different heat with Katsuragi third; Kōenji does not start his assigned heat.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          87,
+          88
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          87,
+          88
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.sotomura",
+        "actor.ryuji-kanzaki",
+        "actor.katsuragi",
+        "actor.rokusuke-koenji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.028",
+      "domain": "discipline",
+      "summary": "Kōenji claims illness and withdraws; Sudō reacts aggressively and Hirata and Ayanokōji intervene. The narrator suspects malingering but no clinical diagnosis establishes it.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          88,
+          91
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          88,
+          91
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.rokusuke-koenji",
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "discipline",
+        "leadership",
+        "exam"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.029",
+      "domain": "sports",
+      "summary": "Sakura says she is not last in a 100-meter run for the first time; narrator frames this as improvement through effort, not proof of competitive speed.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          92,
+          94
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "SELF_DESCRIPTION",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          92,
+          94
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "motivation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.030",
+      "domain": "sports",
+      "summary": "Suzune narrowly beats Ibuki in their 100-meter heat; Ibuki starts quicker but repeatedly checks on Suzune. Kiyotaka attributes the loss partly to overattention, an interpretation not a measured speed difference.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          94,
+          95
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          94,
+          95
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.mio-ibuki",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "emotion",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.031",
+      "domain": "sports",
+      "summary": "Hirata acknowledges Shibata is faster than him in ordinary running; Manabu wins his observed third-year 100-meter heat; team running totals are announced 2011 Red versus 1891 White.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          95,
+          96
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          95,
+          96
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.shibata-so",
+        "actor.manabu-horikita",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.032",
+      "domain": "sports",
+      "summary": "Ayanokōji places fifth in the 100 meters and third in hurdles while modulating effort; Kanzaki questions his apparent holding back. Yukimura reports seventh in two early races.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          97,
+          99
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          97,
+          99
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.ryuji-kanzaki",
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "deception",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.relay-unmasked-physical-capacity"
+      ]
+    },
+    {
+      "id": "y1v5.ev.033",
+      "domain": "sports",
+      "summary": "Suzune places third in hurdles behind Class C track athletes Yajima and Kinoshita; opposed runners being ahead in a hurdle race is not proof of globally superior athleticism.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          97,
+          99
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          97,
+          99
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kinoshita",
+        "actor.yajima",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.034",
+      "domain": "sports",
+      "summary": "In boys' capture-the-flag, Class C's forceful defense/attack and Ryūen's direct blow against Sudō contribute to the A/D defeat; the incident is portrayed as foul play, not an endorsed tactic.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          100,
+          104
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          100,
+          104
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.kakeru-ryuen",
+        "actor.yamada-albert",
+        "actor.katsuragi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "misconduct",
+        "emotion"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.035",
+      "domain": "sports",
+      "summary": "Boys' tug-of-war exposes Red's internal Class A factional cooperation problem; Katsuragi intervenes to recover teamwork, while the B/C coalition changes formation and contests subsequent rounds.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          105,
+          110
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          105,
+          110
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.katsuragi",
+        "actor.yosuke-hirata",
+        "actor.kakeru-ryuen",
+        "actor.ken-sudo",
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "leadership",
+        "cooperation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.036",
+      "domain": "sports",
+      "summary": "Girls' ball toss proceeds in parallel with boys' events, but these pages do not supply an individually verified full placement matrix.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          105,
+          108
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          105,
+          108
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.katsuragi",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.037",
+      "domain": "sports",
+      "summary": "In obstacle race, Sudō defeats Shibata after rapid balance-beam traversal; Shibata closes during other obstacles. Ike finishes sixth in an earlier heat. Winner of this mixed-skill test is not necessarily fastest in a flat sprint.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          111,
+          112
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          111,
+          112
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.shibata-so",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.038",
+      "domain": "sports",
+      "summary": "Horikita and Kinoshita fall after contact in an obstacle race amid unusual matchups; who intentionally initiated contact remains uncertain from the immediate observation.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          113,
+          115
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          113,
+          115
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kinoshita",
+        "actor.yajima"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "misconduct",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.039",
+      "domain": "sports",
+      "summary": "Three-legged race demonstrates teamwork demands: Hirata and Ayanokōji run together, while Horikita and Kushida coordinate under competitive pressure; specific universal ability rankings are not warranted.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          115,
+          117
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          115,
+          117
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "cooperation",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.040",
+      "domain": "sports",
+      "summary": "In girls' cavalry battle multiple opponents target and overwhelm Suzune, who loses her headband; her isolated outcome is conditioned by four-on-one pressure.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          120,
+          123
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          120,
+          123
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kei-karuizawa",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "results",
+        "strategy"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.041",
+      "domain": "sports",
+      "summary": "Boys' cavalry battle shows Ryūen exploiting Hirata's attempted capture; Albert supports Ryūen and sustains strong contact; the D/A unit with Sudō loses, with allegations of a slippery headband unproven.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          124,
+          129
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          124,
+          129
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.ken-sudo",
+        "actor.kakeru-ryuen",
+        "actor.yamada-albert",
+        "actor.kiyotaka-ayanokoji",
+        "actor.miyake",
+        "actor.katsuragi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "strategy",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.042",
+      "domain": "strategy",
+      "summary": "After repeated adverse matchups, Ayanokōji concludes Class D's participation table may have leaked to Ryūen; he cannot at that point prove the traitor's identity to the class.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          129,
+          131
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "NARRATOR_INFERENCE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          129,
+          131
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "epistemics"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.043",
+      "domain": "leadership",
+      "summary": "Sudō explodes after taunting, rejects teamwork feedback and leaves the playing area; the loss removes a major athlete and aggravates team results.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          132,
+          135
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          132,
+          135
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "emotion",
+        "misconduct"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
+    },
+    {
+      "id": "y1v5.ev.044",
+      "domain": "sports",
+      "summary": "Ryūen wins his observed 200-meter heat; Ayanokōji places third in his own 200-meter race; Sudō is absent for part of the event schedule.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          135,
+          136
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          135,
+          136
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.045",
+      "domain": "strategy",
+      "summary": "Ayanokōji challenges Horikita to recognize both Sudō's emotional state and the probable compromised lineup; Horikita leaves at lunch to look for Sudō.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          136,
+          142
+        ],
+        "chapter": 6,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          136,
+          142
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "leadership"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.046",
+      "domain": "negotiation",
+      "summary": "Ryūen and Kinoshita accuse Suzune of intentional foul play and invoke possible school penalties; Suzune maintains she did not deliberately injure anyone and seeks evidence.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          144,
+          149
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          144,
+          149
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kinoshita",
+        "actor.kakeru-ryuen",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "negotiation",
+        "ethics",
+        "risk_management"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.047",
+      "domain": "coercion",
+      "summary": "Ryūen demands a private-point settlement in exchange for dropping the allegation; Suzune weighs severe exposure and refuses to treat a contested accusation as verified guilt.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          150,
+          156
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          150,
+          156
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen",
+        "actor.kinoshita",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "coercion",
+        "negotiation",
+        "misconduct"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.048",
+      "domain": "emotion",
+      "summary": "After the accusation Suzune recognizes isolation and shortcomings in class strategy, then decides that reconnecting with Sudō is essential.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          157,
+          159
+        ],
+        "chapter": 7,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          157,
+          159
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "leadership"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.049",
+      "domain": "sports",
+      "summary": "During the scavenger hunt Ayanokōji receives a difficult requirement involving bringing several friends; Ike performs well in his heat. The local event result cannot be turned into global social ability.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          160,
+          162
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 8,
+        "pdf_pages": [
+          160,
+          162
+        ],
+        "chapter_order": 8
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kanji-ike",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.050",
+      "domain": "leadership",
+      "summary": "Suzune finds Sudō in the dorm and acknowledges his skill while confronting his temper and her own failure to lead; their conversation does not imply permanent behavioral reform.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          163,
+          167
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 8,
+        "pdf_pages": [
+          163,
+          167
+        ],
+        "chapter_order": 8
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "emotion",
+        "social"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
+    },
+    {
+      "id": "y1v5.ev.051",
+      "domain": "sports",
+      "summary": "Class D loses four-way tug-of-war with Sudō absent despite substitution; Kushida offers to join mixed three-legged event as a paid substitute after another participant withdraws.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          168,
+          170
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 8,
+        "pdf_pages": [
+          168,
+          170
+        ],
+        "chapter_order": 8
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.kikyo-kushida",
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "results",
+        "leadership"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.052",
+      "domain": "sports",
+      "summary": "In the mixed three-legged event Ayanokōji questions Kushida's knowledge of Class D's selection order and elicits defensive reactions; his suspicion is not yet public school-certified proof.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          171,
+          174
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 8,
+        "pdf_pages": [
+          171,
+          174
+        ],
+        "chapter_order": 8
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "strategy",
+        "epistemics"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.053",
+      "domain": "misconduct",
+      "summary": "Kushida privately says she aims to expel Suzune and now adds Kiyotaka as a target; this is a character's declared future intent, not an already completed expulsion.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          174,
+          175
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 8,
+        "pdf_pages": [
+          174,
+          175
+        ],
+        "chapter_order": 8
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "misconduct",
+        "emotion",
+        "relationship"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.054",
+      "domain": "emotion",
+      "summary": "Suzune revisits Sudō before the relay, acknowledges the need for mutual support rather than solitary excellence, and persuades him to rejoin; he agrees on that occasion.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          176,
+          180
+        ],
+        "chapter": 8,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 8,
+        "pdf_pages": [
+          176,
+          180
+        ],
+        "chapter_order": 8
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "leadership",
+        "relationship"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
+    },
+    {
+      "id": "y1v5.ev.055",
+      "domain": "strategy",
+      "summary": "Ayanokōji replaces Miyake in relay under the paid-substitution rule after the latter reports an ankle issue; the dialogue suggests covert prior coordination with Hirata.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          181,
+          183
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          181,
+          183
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita",
+        "actor.miyake",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "exam",
+        "resources"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.relay-unmasked-physical-capacity"
+      ]
+    },
+    {
+      "id": "y1v5.ev.056",
+      "domain": "sports",
+      "summary": "Sudō builds about fifteen meters of relay advantage as opener and Hirata maintains early momentum; subsequent legs lose ground, so this is not evidence of overall D superiority.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          183,
+          185
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          183,
+          185
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.yosuke-hirata",
+        "actor.onodera",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "results"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.057",
+      "domain": "sports",
+      "summary": "Ayanokōji and Manabu demonstrate extraordinary relay running; Manabu delays departure for their encounter, and Ayanokōji's path is obstructed by a falling runner. A clean straight-line comparison is unobserved.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          185,
+          188
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          185,
+          188
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabu-horikita",
+        "actor.nagumo",
+        "actor.shibata-so"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "sports",
+        "results",
+        "politics"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.relay-unmasked-physical-capacity"
+      ]
+    },
+    {
+      "id": "y1v5.ev.058",
+      "domain": "politics",
+      "summary": "During the relay Nagumo challenges Manabu's student-council philosophy and advances a stronger meritocratic agenda; political disagreement is separate from athletic ranking.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          185,
+          186
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          185,
+          186
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.nagumo",
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "politics",
+        "leadership"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.059",
+      "domain": "results",
+      "summary": "Red Team wins overall, but first-year class order B>C>A>D; net class points B 0, C -100, A -50, D -100. Shibata earns first-year MVP; Sudō does not.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          189,
+          191
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          189,
+          191
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.yosuke-hirata",
+        "actor.shibata-so"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "results",
+        "exam"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.060",
+      "domain": "emotion",
+      "summary": "Sudō pledges to control unjustified violence while Suzune recognizes she did not fulfill expectations; she permits him to use her given name despite his failure to win MVP.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          191,
+          193
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          191,
+          193
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "relationship",
+        "discipline"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.061",
+      "domain": "relationship",
+      "summary": "Suzune openly confronts Kushida about their shared junior high and suspected betrayal in Ryūen's presence; Kushida acknowledges wanting students who know her past to disappear.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          194,
+          196
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          194,
+          196
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "epistemics"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-dragon-vip-disclosure"
+      ]
+    },
+    {
+      "id": "y1v5.ev.062",
+      "domain": "coercion",
+      "summary": "Kushida threatens to involve Manabu if Suzune exposes her past and vows to get Suzune expelled; Ryūen and Kushida discuss their cooperation. Threats are character claims and attempts, not school outcomes.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          196,
+          198
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          196,
+          198
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "coercion",
+        "misconduct",
+        "strategy"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-dragon-vip-disclosure"
+      ]
+    },
+    {
+      "id": "y1v5.ev.063",
+      "domain": "strategy",
+      "summary": "Ryūen describes using Kushida's leaked participant roster to engineer matchups and alleges Kinoshita rehearsed collision and accepted payment for a manufactured injury; narration does not establish a completed independent forensic investigation.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          198,
+          199
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "CHARACTER_CONFESSION",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          198,
+          199
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida",
+        "actor.kinoshita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "misconduct",
+        "epistemics"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-dragon-vip-disclosure",
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.064",
+      "domain": "strategy",
+      "summary": "Suzune records Ryūen's account, but he counters with a longer video and characterizes his statements as hypothetical, defeating her unilateral editing threat.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          199,
+          200
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          199,
+          200
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "negotiation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.065",
+      "domain": "strategy",
+      "summary": "An anonymous recording reaches Ryūen containing a previous strategy discussion featuring Ibuki; Ryūen concludes he faces a hidden counter-operator. The recording's contents and the Kinoshita narrative should not be flattened into identical witnessed events.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          200,
+          201
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          200,
+          201
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "epistemics"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.066",
+      "domain": "epistemics",
+      "summary": "Suzune suspects Kiyotaka orchestrated the anonymous evidence and counterplay, but she lacks direct knowledge of its acquisition method or sender's confirmed identity.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          201
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          201
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "epistemics",
+        "reasoning"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.067",
+      "domain": "epistemics",
+      "summary": "Sakayanagi recognizes Kiyotaka, names the White Room and claims to have known him before he could remember her; he is unsettled and she frames their relationship as competitive.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          202,
+          204
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          202,
+          204
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "epistemics",
+        "relationship",
+        "strategy"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sakayanagi-white-room-recognition"
+      ]
+    },
+    {
+      "id": "y1v5.ev.068",
+      "domain": "strategy",
+      "summary": "Sakayanagi says she intends to defeat her father's greatest masterpiece and keep Kiyotaka's secret for now; Kiyotaka privately contemplates what his defeat would mean. Her knowledge source remains unproven here.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          203,
+          204
+        ],
+        "chapter": 9,
+        "edition": "Seven Seas English PDF supplied by operator",
+        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "CHARACTER_ASSERTION",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          203,
+          204
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "motivation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sakayanagi-white-room-recognition"
+      ]
+    },
+    {
+      "id": "y1v5.ev.069",
+      "domain": "motivation",
+      "summary": "Sudō requests permission to use Suzune's given name if he wins top first-year sports honors; the narrator indicates romantic feelings, while Suzune interprets the interaction as a wager or friendship request. No reciprocal romance is established.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          55,
+          56
+        ],
+        "chapter": 4,
+        "edition": "English translation supplied by operator",
+        "verification": "DIRECT_PRIMARY_SOURCE_RECHECK_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "NARRATOR_INFERENCE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          55,
+          56
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "relationship",
+        "emotion"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v5.ev.070",
+      "domain": "strategy",
+      "summary": "Kiyotaka knows Sudō has a crush on Suzune and deliberately delivers a harsh lesson to prompt her to retrieve their strongest athlete and learn the limits of solitary effort. He frames Sudō's return as a counterstrategy to Ryūen's provocation.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          136,
+          138
+        ],
+        "chapter": 6,
+        "edition": "English translation supplied by operator",
+        "verification": "DIRECT_PRIMARY_SOURCE_RECHECK_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          136,
+          138
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "leadership",
+        "motivation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.071",
+      "domain": "strategy",
+      "summary": "Kiyotaka admits privately he wanted Suzune to uncover the spy herself and intentionally did not revise the roster despite anticipating leakage; he misleadingly attributes this course to Horikita's plan when talking to Hirata and Kei. This accepts competitive risk but does not prove deliberately causing the entire class defeat.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          141,
+          142
+        ],
+        "chapter": 6,
+        "edition": "English translation supplied by operator",
+        "verification": "DIRECT_PRIMARY_SOURCE_RECHECK_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          141,
+          142
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata",
+        "actor.kei-karuizawa",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "deception",
+        "leadership",
+        "motivation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.072",
+      "domain": "motivation",
+      "summary": "Suzune recognizes that she and Sudō both pursued recognition through self-reliance; she retains the goal of Class A and her brother's respect but explicitly revises her method to relying on allies. She and Sudō agree to mutual support.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          165,
+          166,
+          178,
+          179
+        ],
+        "chapter": 8,
+        "edition": "English translation supplied by operator",
+        "verification": "DIRECT_PRIMARY_SOURCE_RECHECK_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "FIRST_PERSON_MONOLOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 8,
+        "pdf_pages": [
+          165,
+          166,
+          178,
+          179
+        ],
+        "chapter_order": 8
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "leadership",
+        "relationship",
+        "emotion"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
+    },
+    {
+      "id": "y1v5.ev.073",
+      "domain": "motivation",
+      "summary": "Sudō discloses the need for attention and respect beyond basketball and responds to Suzune's recognition by agreeing to return. His attachment to her influences effort, but the exchange does not guarantee future emotional compliance.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          165,
+          166,
+          179
+        ],
+        "chapter": 8,
+        "edition": "English translation supplied by operator",
+        "verification": "DIRECT_PRIMARY_SOURCE_RECHECK_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 8,
+        "pdf_pages": [
+          165,
+          166,
+          179
+        ],
+        "chapter_order": 8
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "relationship",
+        "emotion"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
+    },
+    {
+      "id": "y1v5.ev.074",
+      "domain": "misconduct",
+      "summary": "Kushida explicitly admits leaking the festival roster to Class C. She affirms Kiyotaka's analysis that her Zodiac VIP disclosure to Ryūen was traded for help targeting Suzune, describes Suzune's expulsion as preceding advancement to Class A, and adds Kiyotaka to her expulsion targets. The precise past communication or transaction remains source-scoped.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          172,
+          174,
+          175
+        ],
+        "chapter": 8,
+        "edition": "English translation supplied by operator",
+        "verification": "DIRECT_PRIMARY_SOURCE_RECHECK_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "DIRECT_CHARACTER_ADMISSION",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 8,
+        "pdf_pages": [
+          172,
+          174,
+          175
+        ],
+        "chapter_order": 8
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "misconduct",
+        "strategy",
+        "motivation",
+        "deception"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-dragon-vip-disclosure",
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.075",
+      "domain": "strategy",
+      "summary": "Ryūen admits prioritizing Suzune's humiliation rather than maximizing Class C's festival result; claims he obtained D's roster from Kushida, had Kinoshita rehearse a collision, offered her 500000 private points, and caused an injury himself later. These are Ryūen's claims in a conversation he simultaneously records and later characterizes as fictional.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          198,
+          199
+        ],
+        "chapter": 9,
+        "edition": "English translation supplied by operator",
+        "verification": "DIRECT_PRIMARY_SOURCE_RECHECK_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "CHARACTER_CONFESSION",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          198,
+          199
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kinoshita",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "misconduct",
+        "coercion",
+        "motivation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.076",
+      "domain": "coercion",
+      "summary": "Suzune captures Ryūen's apparent confession and threatens to use it, but Ryūen exhibits his own longer video and demands she kneel; she begins kneeling and admitting defeat before an incoming message interrupts him. The interrupted kneeling should not be conflated with a completed post-demand settlement.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          199,
+          200
+        ],
+        "chapter": 9,
+        "edition": "English translation supplied by operator",
+        "verification": "DIRECT_PRIMARY_SOURCE_RECHECK_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          199,
+          200
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kakeru-ryuen",
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "coercion",
+        "strategy",
+        "negotiation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.077",
+      "domain": "counterstrategy",
+      "summary": "An anonymous message delivers audio of a prior Class C planning conversation and disrupts Ryūen's leverage. He concludes an unknown opponent has anticipated his scheme but does not identify the sender; Suzune believes Kiyotaka is the mastermind. The tape names Ibuki in a line apparently inconsistent with the observed Kinoshita collision, which must not be silently rewritten.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          200,
+          201
+        ],
+        "chapter": 9,
+        "edition": "English translation supplied by operator",
+        "verification": "DIRECT_PRIMARY_SOURCE_RECHECK_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          200,
+          201
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "counterstrategy",
+        "epistemics",
+        "negotiation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
+    },
+    {
+      "id": "y1v5.ev.078",
+      "domain": "motivation",
+      "summary": "Kiyotaka expresses disinterest in the day's festival result and predicts Class D will become stronger, while treating the race against Manabu as personally meaningful. This supports tolerating present loss for future development, not a proven intention or causal action to make the class finish last.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          187,
+          189,
+          193
+        ],
+        "chapter": 9,
+        "edition": "English translation supplied by operator",
+        "verification": "DIRECT_PRIMARY_SOURCE_RECHECK_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          187,
+          189,
+          193
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabu-horikita",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "strategy",
+        "epistemics"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.relay-unmasked-physical-capacity"
+      ]
+    },
+    {
+      "id": "y1v5.ev.079",
+      "domain": "motivation",
+      "summary": "After a last-place class result, Suzune says failure has nourished her growth and expresses confidence in the class's future; this is self-reported reflective change, not proof she can never regress.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          193
+        ],
+        "chapter": 9,
+        "edition": "English translation supplied by operator",
+        "verification": "DIRECT_PRIMARY_SOURCE_RECHECK_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          193
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "leadership",
+        "emotion"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
+    },
+    {
+      "id": "y1v5.ev.080",
+      "domain": "relationship",
+      "summary": "Suzune conditions Sudō's future on rejecting unjustified violence, agrees to his use of her given name and thanks him for the class's new hope. Sudō accepts the condition, though observed long-term fulfillment remains unknown.",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          191,
+          192
+        ],
+        "chapter": 9,
+        "edition": "English translation supplied by operator",
+        "verification": "DIRECT_PRIMARY_SOURCE_RECHECK_INDEPENDENT_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 9,
+        "pdf_pages": [
+          191,
+          192
+        ],
+        "chapter_order": 9
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "discipline",
+        "motivation"
+      ],
+      "assertion_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_PERSONA_AND_TEMPORAL_ACQUISITION_ONLY",
+      "portrayal_gate": "EPISODE_BOUNDED_NO_AUTOMATIC_RATING",
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
+    }
+  ]
+}

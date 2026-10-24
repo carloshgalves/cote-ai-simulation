@@ -1,0 +1,42 @@
+{
+  "id": "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "attempt counter recording negotiation",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Records Ryūen's apparent admission and threatens complaint leverage, but faces his own longer video and hypothetical-story counterclaim.",
+  "observed_result": "Her immediate unilateral leverage collapses, followed by an anonymous recording arriving on his device.",
+  "epistemic_limits": "Anonymous sender's identity not established from Suzune's point of view.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      198,
+      200
+    ],
+    "chapter": 9,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.kakeru-ryuen",
+    "actor.kikyo-kushida"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "negotiation",
+    "epistemics"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "strategy",
+    "negotiation",
+    "epistemics"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.063",
+    "y1v5.ev.064"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

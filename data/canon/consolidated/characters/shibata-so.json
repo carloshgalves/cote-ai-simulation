@@ -1,0 +1,86 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.shibata-so",
+  "display_name": "Sou Shibata",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v05.sevenseas.en.operator-provided"
+  ],
+  "source_status": "ASSISTANT_INITIAL_PDF_PASS_INDEPENDENT_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "Observed Year 1 Volume 5 sports festival participant",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "sports": {
+      "behavioral_case_refs": [
+        "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.024",
+        "y1v5.ev.031",
+        "y1v5.ev.037",
+        "y1v5.ev.057"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.024"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.024"
+      ]
+    },
+    "results": {
+      "behavioral_case_refs": [
+        "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.031",
+        "y1v5.ev.037",
+        "y1v5.ev.057",
+        "y1v5.ev.059"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.057"
+      ]
+    },
+    "exam": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.059"
+      ]
+    },
+    "discipline": {
+      "behavioral_case_refs": [
+        "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event"
+      ],
+      "context_evidence_refs": []
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": false,
+  "semantic_audit_notes": "Episode-scoped, physical comparison must preserve event conditions and narrator limits.",
+  "uncertainties": {
+    "earlier_history_not_established_here": true,
+    "future_outcome_unknown": true
+  },
+  "generation_policy": "One global character identity across volumes",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTIONS_NOT_FEATS",
+    "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
+    "verified_facts": "INDIVIDUAL_AUDIT_REQUIRED"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "id": "evt.y1.v05.relay-unmasked-physical-capacity",
+  "event_time": "Y1_FESTIVAL_FINAL_RELAY",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v5.ev.020",
+    "y1v5.ev.032",
+    "y1v5.ev.055"
+  ],
+  "prior_ambiguities": [
+    "Do Kiyotaka's ordinary training/heat placements represent his real maximum running speed?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        187,
+        189
+      ],
+      "evidence_refs": [
+        "y1v5.ev.057"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "Kiyotaka's unexpectedly fast relay against Manabu demonstrates earlier public performance was deliberately unrepresentative; an intervening fallen runner prevents clean maximal-speed ranking.",
+      "world_epistemic_status": "SOURCE_BOUNDED_CHARACTER_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "ALWAYS_OWN_PHYSICAL_CAPACITY",
+          "status": "SELF_KNOWLEDGE"
+        },
+        {
+          "actor": "actor.manabu-horikita",
+          "since": "Y1_V05_RELAY",
+          "status": "OBSERVED_FAST_OPPONENT"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_RELAY_AND_AFTER",
+          "status": "OBSERVED_DISCLOSURE_NOT_PRIOR"
+        },
+        {
+          "actor": "actor.ken-sudo",
+          "since": "AFTER_Y1_V05_RELAY",
+          "status": "OBSERVED_FAST_RUN_NOT_HIDDEN_TRAINING"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        187,
+        189
+      ],
+      "evidence_refs": [
+        "y1v5.ev.078"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "Kiyotaka foresees the poor present tournament outcome, predicts eventual Class D strengthening and prioritizes a personal race with Manabu; his deliberate concealment and selective disclosure do not prove an intentional plan to make Class D last.",
+      "world_epistemic_status": "KIYOTAKA_PRIVATE_THOUGHT_NOT_CLASS_PUBLIC_KNOWLEDGE",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V05_CH9_RELAY",
+          "status": "KNOWS_OWN_PREFERENCE"
+        },
+        {
+          "actor": "actor.manabu-horikita",
+          "since": "Y1_V05_CH9_RELAY",
+          "status": "HEARD_CHALLENGE_AND_PREDICTION_NOT_PRIVATE_OBJECTIVE"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "No verified clean winner or time in unobstructed Ayanokōji vs Manabu race.",
+    "Previously recorded 60.6 grip is explicitly submaximal, not an athletic ceiling."
+  ]
+}

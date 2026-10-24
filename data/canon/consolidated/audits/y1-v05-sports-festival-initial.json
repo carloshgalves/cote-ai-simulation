@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "volume": "Y1_V05",
+  "source": {
+    "filename": "cote_5.pdf",
+    "sha256": "0302c25d48f82c9a336b019c4d52045560fdbd91138381a1b24f6a960ae85914",
+    "pdf_pages": 207,
+    "edition": "Seven Seas English"
+  },
+  "status": "INITIAL_SOURCE_GROUNDED_EXTRACTION_NOT_FULL_SEMANTIC_AUDIT",
+  "focus": [
+    "athletic capabilities",
+    "strategy",
+    "relationship changes",
+    "event outcomes",
+    "knowledge chronology"
+  ],
+  "facts": [
+    {
+      "id": "v05.001",
+      "type": "rules",
+      "pages": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "claim": "Red A/D versus White B/C across all grades; first-year class ranking bonuses/penalties +50,0,-50,-100, losing team -100 class points; recommended relay triple points.",
+      "confidence": "explicit"
+    },
+    {
+      "id": "v05.002",
+      "type": "strategy",
+      "pages": [
+        32,
+        33,
+        34
+      ],
+      "actor": "ayanokoji",
+      "claim": "Advocates opponent scouting, concealed lineups, stamina preparation and risk planning; distinguishes preparation from rule exploitation.",
+      "confidence": "explicit"
+    },
+    {
+      "id": "v05.003",
+      "type": "relationship",
+      "pages": [
+        26,
+        27,
+        31
+      ],
+      "actors": [
+        "hirata",
+        "katsuragi",
+        "ryuen",
+        "ichinose"
+      ],
+      "claim": "Class A and D coordinate minimally; Ryuen refuses overt Class B coordination, which Ayanokoji regards as a possible strategic feint.",
+      "confidence": "explicit_and_hypothesis_separated"
+    },
+    {
+      "id": "v05.004",
+      "type": "physical",
+      "pages": [
+        111,
+        112
+      ],
+      "actors": [
+        "sudo",
+        "shibata"
+      ],
+      "claim": "Sudou beats Shibata in obstacle race despite Shibata closing distance; narrative considers them closely matched, Shibata possibly faster on pure running.",
+      "confidence": "explicit_with_narrator_inference"
+    },
+    {
+      "id": "v05.005",
+      "type": "strategy",
+      "pages": [
+        151,
+        152,
+        153
+      ],
+      "actors": [
+        "ryuen",
+        "kinoshita",
+        "horikita",
+        "kushida"
+      ],
+      "claim": "Ryuen and Kinoshita present an accusation of deliberate collision and demand one million private points; Horikita disputes intent and suspects a staged trap. Do not classify the contested allegation as established fact.",
+      "confidence": "disputed_testimony"
+    },
+    {
+      "id": "v05.006",
+      "type": "relationship",
+      "pages": [
+        163,
+        164,
+        165
+      ],
+      "actors": [
+        "horikita",
+        "sudo"
+      ],
+      "claim": "Horikita seeks out Sudou after he leaves the festival, recognizing both his value and her own leadership failures.",
+      "confidence": "explicit"
+    },
+    {
+      "id": "v05.007",
+      "type": "strategy",
+      "pages": [
+        182,
+        183,
+        184
+      ],
+      "actors": [
+        "ayanokoji",
+        "hirata",
+        "miyake"
+      ],
+      "claim": "Ayanokoji enters relay as paid substitute after Miyake reports ankle injury; dialogue reveals his participation was privately planned with Hirata.",
+      "confidence": "explicit"
+    },
+    {
+      "id": "v05.008",
+      "type": "physical",
+      "pages": [
+        184,
+        185,
+        186
+      ],
+      "actors": [
+        "sudo",
+        "hirata",
+        "onodera",
+        "maezono",
+        "kushida"
+      ],
+      "claim": "Sudou builds at least fifteen-meter opening relay lead; Hirata maintains it; subsequent runners lose positions, with Class D seventh before Kushida passes to anchor.",
+      "confidence": "explicit"
+    },
+    {
+      "id": "v05.009",
+      "type": "physical",
+      "pages": [
+        187,
+        188,
+        189,
+        190
+      ],
+      "actors": [
+        "ayanokoji",
+        "manabu-horikita"
+      ],
+      "claim": "Ayanokoji and Manabu race at full speed after Manabu waits for his baton; a fallen runner obstructs Ayanokoji and Manabu pulls ahead. No clean uncontaminated speed ranking is justified.",
+      "confidence": "explicit_with_counterfactual_unknown"
+    },
+    {
+      "id": "v05.010",
+      "type": "results",
+      "pages": [
+        190,
+        191,
+        192
+      ],
+      "claim": "Red Team wins; first-year class rank B>C>A>D. Net class-point change B 0, C -100, A -50, D -100. Shibata Sou wins first-year MVP; Sudou not MVP despite winning individual events.",
+      "confidence": "explicit"
+    },
+    {
+      "id": "v05.011",
+      "type": "relationship",
+      "pages": [
+        192,
+        193
+      ],
+      "actors": [
+        "horikita",
+        "sudo"
+      ],
+      "claim": "Sudou promises to avoid unjustified violence, with justification assessed by Horikita or a third party; Horikita permits first-name address despite his MVP loss.",
+      "confidence": "explicit"
+    }
+  ],
+  "unresolved": [
+    "Detailed per-event placements and full lineup matrix require a further systematic pass.",
+    "Do not infer physical ratings from narrator speculation or compromised matchups.",
+    "Cross-volume links and all actor case packs require individual independent semantic audit."
+  ],
+  "release_gate": "BLOCKED_DRAFT_ONLY"
+}

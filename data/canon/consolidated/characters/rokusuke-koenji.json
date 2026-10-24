@@ -7,7 +7,8 @@
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
-    "ln.y1.v04.sevenseas.en.operator-provided"
+    "ln.y1.v04.sevenseas.en.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -22,7 +23,8 @@
     "social": {
       "behavioral_case_refs": [
         "y1v1.case.o.priority-seat-refusal",
-        "y1v4.case.rokusuke-koenji.proclaim-autograph-value"
+        "y1v4.case.rokusuke-koenji.proclaim-autograph-value",
+        "y1v5.case.rokusuke-koenji.withdraw-claimed-illness-under-pressure"
       ],
       "context_evidence_refs": [
         "y1v1.ev.003",
@@ -95,7 +97,8 @@
     "leadership": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v3.ev.032"
+        "y1v3.ev.032",
+        "y1v5.ev.028"
       ]
     },
     "strategy": {
@@ -117,7 +120,8 @@
       "context_evidence_refs": [
         "y1v3.ev.050",
         "y1v4.ev.064",
-        "y1v4.ev.067"
+        "y1v4.ev.067",
+        "y1v5.ev.028"
       ]
     },
     "conflict": {
@@ -134,11 +138,37 @@
       "context_evidence_refs": [
         "y1v4.ev.010"
       ]
+    },
+    "sports": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.027"
+      ]
+    },
+    "results": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.027"
+      ]
+    },
+    "discipline": {
+      "behavioral_case_refs": [
+        "y1v5.case.rokusuke-koenji.withdraw-claimed-illness-under-pressure"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.028"
+      ]
+    },
+    "resources": {
+      "behavioral_case_refs": [
+        "y1v5.case.rokusuke-koenji.withdraw-claimed-illness-under-pressure"
+      ],
+      "context_evidence_refs": []
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

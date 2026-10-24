@@ -1,0 +1,110 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.kinoshita",
+  "display_name": "Kinoshita (given name not established)",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v05.sevenseas.en.operator-provided"
+  ],
+  "source_status": "ASSISTANT_INITIAL_PDF_PASS_INDEPENDENT_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "Observed Year 1 Volume 5 sports festival participant",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "sports": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.033",
+        "y1v5.ev.038"
+      ]
+    },
+    "results": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.033",
+        "y1v5.ev.038"
+      ]
+    },
+    "misconduct": {
+      "behavioral_case_refs": [
+        "y1v5.case.kinoshita.take-part-in-disputed-collision-case"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.038",
+        "y1v5.ev.047",
+        "y1v5.ev.063",
+        "y1v5.ev.075"
+      ]
+    },
+    "negotiation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.046",
+        "y1v5.ev.047"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.046"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.046"
+      ]
+    },
+    "coercion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.047",
+        "y1v5.ev.075"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [
+        "y1v5.case.kinoshita.take-part-in-disputed-collision-case"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.063",
+        "y1v5.ev.075"
+      ]
+    },
+    "epistemics": {
+      "behavioral_case_refs": [
+        "y1v5.case.kinoshita.take-part-in-disputed-collision-case"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.063"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.075"
+      ]
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": false,
+  "semantic_audit_notes": "Episode-scoped, physical comparison must preserve event conditions and narrator limits.",
+  "uncertainties": {
+    "earlier_history_not_established_here": true,
+    "future_outcome_unknown": true
+  },
+  "generation_policy": "One global character identity across volumes",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTIONS_NOT_FEATS",
+    "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
+    "verified_facts": "INDIVIDUAL_AUDIT_REQUIRED"
+  },
+  "goal_transition_refs": [],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+}

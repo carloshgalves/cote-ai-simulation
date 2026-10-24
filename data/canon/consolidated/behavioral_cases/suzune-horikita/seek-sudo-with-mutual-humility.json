@@ -1,0 +1,58 @@
+{
+  "id": "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "seek sudo with mutual humility",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "After failing to secure class victory alone, Suzune recognizes Sudō's need for respect, admits she has used the wrong means to earn Manabu's approval and reach Class A, and explicitly asks Sudō to work together through graduation.",
+  "observed_result": "The distant end goal (Class A and brother's respect) remains, while her chosen means changes from isolated personal perfection to reciprocal collaboration. Sudō returns, apologizes, and they agree to constrain unjustified violence.",
+  "epistemic_limits": "This is an observed revision of means and new alliance, not proof she abandons Class A ambitions or becomes permanently empathetic. Ayanokōji's pressure is a trigger, not an automatic instruction.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      136,
+      138,
+      159,
+      163,
+      165,
+      166,
+      178,
+      179,
+      180,
+      191,
+      192,
+      193
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "relationship",
+    "emotion"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "leadership",
+    "relationship",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.045",
+    "y1v5.ev.048",
+    "y1v5.ev.050",
+    "y1v5.ev.054",
+    "y1v5.ev.070",
+    "y1v5.ev.072",
+    "y1v5.ev.079",
+    "y1v5.ev.080"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

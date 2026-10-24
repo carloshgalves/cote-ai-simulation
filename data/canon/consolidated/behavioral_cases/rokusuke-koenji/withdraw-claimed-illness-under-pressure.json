@@ -1,0 +1,41 @@
+{
+  "id": "y1v5.case.rokusuke-koenji.withdraw-claimed-illness-under-pressure",
+  "actor_id": "actor.rokusuke-koenji",
+  "primary_actor_id": "actor.rokusuke-koenji",
+  "title": "withdraw claimed illness under pressure",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Does not run his scheduled heat and cites illness; rejects Sudō's aggressive demands.",
+  "observed_result": "Absent from festival competition, costing Class D possible contribution.",
+  "epistemic_limits": "Narrator doubts illness, but no doctor-confirmed malingering; avoid treating this as a demonstrated low athletic ceiling.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      88,
+      91
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "discipline",
+    "resources",
+    "social"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "discipline",
+    "resources",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.028"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

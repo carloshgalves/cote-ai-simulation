@@ -1,0 +1,45 @@
+{
+  "id": "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event",
+  "actor_id": "actor.shibata-so",
+  "primary_actor_id": "actor.shibata-so",
+  "title": "compete with sudo in obstacle event",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Shows strong flat-run speed and catches ground on obstacles against Sudō; remains a consistent high-ranked competitor.",
+  "observed_result": "Loses observed obstacle clash but earns first-year MVP across all festival events.",
+  "epistemic_limits": "Composite event loss does not imply inferior flat sprint speed or inability in other modalities.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      95,
+      112,
+      190,
+      191
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "results",
+    "discipline"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "sports",
+    "results",
+    "discipline"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.031",
+    "y1v5.ev.037",
+    "y1v5.ev.059"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

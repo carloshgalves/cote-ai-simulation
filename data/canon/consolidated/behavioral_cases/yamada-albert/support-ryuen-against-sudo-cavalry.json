@@ -1,0 +1,39 @@
+{
+  "id": "y1v5.case.yamada-albert.support-ryuen-against-sudo-cavalry",
+  "actor_id": "actor.yamada-albert",
+  "primary_actor_id": "actor.yamada-albert",
+  "title": "support ryuen against sudo cavalry",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Supports Ryūen's cavalry unit with resistance described by Kiyotaka as comparable to Sudō's in that match.",
+  "observed_result": "Ryūen unit outlasts Hirata's and wins the headband.",
+  "epistemic_limits": "No measurement of overall lifting strength or personal duel; supported by teammates.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      125,
+      129
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.kakeru-ryuen"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "cooperation"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "sports",
+    "cooperation"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.041"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

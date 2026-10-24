@@ -1,0 +1,44 @@
+{
+  "id": "evt.y1.v05.sakayanagi-white-room-recognition",
+  "event_time": "PRE_ANHS_HISTORY_CLAIM_UNDATED",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v5.ev.067"
+  ],
+  "prior_ambiguities": [
+    "How and when did Sakayanagi acquire information about Kiyotaka and the White Room?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        203,
+        204
+      ],
+      "evidence_refs": [
+        "y1v5.ev.068"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "Sakayanagi asserts familiarity with Kiyotaka/White Room and frames a rivalry; Kiyotaka privately reacts, but the full provenance of her past knowledge is not shown.",
+      "world_epistemic_status": "SOURCE_BOUNDED_CHARACTER_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.arisu-sakayanagi",
+          "since": "PRE_V05_BY_OWN_ACCOUNT_UNVERIFIED_DATE",
+          "status": "CLAIMS_PRIOR_KNOWLEDGE"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V05_CH9_CONFRONTATION",
+          "status": "HEARD_CLAIM_AND_RECOGNIZES_TERM"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Her exact earlier observation context and timing are not authenticated.",
+    "Other Class A students, school staff, or first-year classmates are not granted this private knowledge."
+  ]
+}

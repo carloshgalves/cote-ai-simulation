@@ -1,0 +1,48 @@
+{
+  "id": "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "escalate coercion until anonymous counterevidence",
+  "context": "Year 1 V5 actor goals and plans viewed through source-scoped temporal knowledge; normative evolution not automatic.",
+  "observed_actions": "Subordinates class-score optimization to forcing Suzune's submission, deploys private-point and injury allegations, defends against her audio recording with complete video, then halts immediate pressure on receiving older anonymous audio.",
+  "observed_result": "Suzune begins to kneel; the anonymous evidence disrupts the interaction, and Ryūen says the extortion/humiliation goals were not achieved while he turns to investigating an unidentified counterparty.",
+  "epistemic_limits": "The anonymous sender is not identified; 500000 was promised according to Ryūen but payment is not verified; the tape's Ibuki/Kinoshita inconsistency must remain explicit.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      198,
+      199,
+      200,
+      201
+    ],
+    "chapter": 9,
+    "source_status": "ASSISTANT_SOURCE_TEXT_MATCH_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kikyo-kushida",
+    "actor.kinoshita"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "coercion",
+    "risk_management",
+    "motivation"
+  ],
+  "information_available": "Private intent, public action and later retrospective statements stay in separate temporal lanes.",
+  "counterfactual_test": "Under alternate incentives, trust and history, goal reprioritization is contingent, never pre-scripted.",
+  "topics": [
+    "strategy",
+    "coercion",
+    "risk_management",
+    "motivation"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.075",
+    "y1v5.ev.076",
+    "y1v5.ev.077"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

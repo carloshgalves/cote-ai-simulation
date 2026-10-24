@@ -1,0 +1,41 @@
+{
+  "id": "y1v5.case.kakeru-ryuen.physically-harass-sudo-in-flag-match",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "physically harass sudo in flag match",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Participates in aggressive flag contest and stomps Sudō while Sudō is defensively occupied.",
+  "observed_result": "Class C wins the encounter; Sudō is hurt and angered.",
+  "epistemic_limits": "Source-described unethical coercion; outcome is not a generalizable technique or permission for simulated abuse.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      100,
+      104
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.yamada-albert"
+  ],
+  "capabilities_supported": [
+    "misconduct",
+    "conflict",
+    "sports"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "misconduct",
+    "conflict",
+    "sports"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.034"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

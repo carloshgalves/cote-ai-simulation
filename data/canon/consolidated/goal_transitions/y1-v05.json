@@ -1,0 +1,333 @@
+{
+  "schema_version": "canon-actor-goal-transition-reference-v1",
+  "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+  "authority": "HISTORICAL_EXAMPLES_NOT_EXECUTABLE_GOAL_POLICY",
+  "purpose": "Permit priorities, means, interests and targets to evolve when simulated events justify a change; no deterministic reproduction of literary arcs.",
+  "update_dimensions": [
+    "NEW_PERSONAL_GOAL",
+    "NEW_TARGET",
+    "GOAL_REPRIORITIZATION",
+    "GOAL_PRIORITY_REVEAL",
+    "MEANS_CHANGE",
+    "VALUE_REAPPRAISAL",
+    "LOCAL_TACTICAL_PRIORITY",
+    "IMMEDIATE_PLAN_INTERRUPTION",
+    "SITUATIONAL_GOAL_ADDITION"
+  ],
+  "truth_vs_belief_gate": "Statements reflect speaker's awareness and report; third parties do not automatically inherit inner motives.",
+  "future_divergence_gate": "No historical transition fires unless simulated actor experiences sufficiently analogous cues and chooses it based on its own constraints; outcomes never preassigned.",
+  "stability_gate": "Do not invent permanent changes, numeric utility weights or irreversible romance from a single scene.",
+  "transitions": [
+    {
+      "id": "y1v5.goal.suzune-horikita.individual-excellence-to-reciprocal-alliance",
+      "actor_id": "actor.suzune-horikita",
+      "kind": "MEANS_CHANGE",
+      "event_time_ref": "Y1_V05_CH8_AFTER_CONFLICT",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          165,
+          166,
+          178,
+          179,
+          193
+        ],
+        "mode": "SELF_REPORTED_EXPLICIT"
+      },
+      "evidence_refs": [
+        "y1v5.ev.072",
+        "y1v5.ev.079"
+      ],
+      "prior_goal_or_means": "Reach Class A and earn elder brother Manabu's respect by individual academic and athletic excellence, working mostly alone",
+      "observed_goal_or_means_after": "Reach Class A and earn Manabu's respect with the assistance of reciprocal alliances rather than relying solely on isolated excellence",
+      "trigger_or_new_information": "Realized her inability to resolve Ryūen's and Sudō's crises alone and recognized Sudō's struggle for respect",
+      "behavioral_evidence": "The desired final rank and brother's admiration are retained; the strategy changes. She reports growing through defeat.",
+      "epistemic_status": "SELF_REPORTED_EXPLICIT",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Sufficient peer support may stabilize cooperation",
+        "Future betrayal, status anxiety or conflict may challenge it"
+      ],
+      "simulation_guard": "Do not force her to be collaborative in every alternate timeline or remove brother-recognition motivation",
+      "source_review": "ASSISTANT_DIRECT_TEXT_SECOND_REVIEW_INDEPENDENT_ADVERSARIAL_PENDING"
+    },
+    {
+      "id": "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal",
+      "actor_id": "actor.suzune-horikita",
+      "kind": "VALUE_REAPPRAISAL",
+      "event_time_ref": "Y1_V05_CH9_POST_RESULTS",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          191,
+          192,
+          193
+        ],
+        "mode": "SELF_REPORTED_EXPLICIT"
+      },
+      "evidence_refs": [
+        "y1v5.ev.079",
+        "y1v5.ev.080"
+      ],
+      "prior_goal_or_means": "Treat setbacks primarily as humiliation and direct evidence of inferior personal ability",
+      "observed_goal_or_means_after": "Treat a setback as evidence for revising means, recognizing team strengths and planning future class advancement",
+      "trigger_or_new_information": "Class D finishes last, Suzune is injured and learns how relying on Sudō changes their available choices",
+      "behavioral_evidence": "States defeat helped her grow, admits own shortcomings, thanks Sudō and negotiates mutual behavioral expectations",
+      "epistemic_status": "SELF_REPORTED_EXPLICIT",
+      "persistence_scope": "MAY_EVOLVE",
+      "contingent_alternatives": [
+        "Additional failures may deepen cooperative stance",
+        "Success or renewed rivalry may alter response"
+      ],
+      "simulation_guard": "This is a changed interpretation of failure, not a guarantee of future victory",
+      "source_review": "ASSISTANT_DIRECT_TEXT_SECOND_REVIEW_INDEPENDENT_ADVERSARIAL_PENDING"
+    },
+    {
+      "id": "y1v5.goal.ken-sudo.romantic-interest-shapes-mvp-motivation",
+      "actor_id": "actor.ken-sudo",
+      "kind": "ADDED_PERSONAL_GOAL",
+      "event_time_ref": "Y1_V05_CH4_BEFORE_FESTIVAL",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          55,
+          56,
+          136
+        ],
+        "mode": "NARRATOR_EXPLICIT_ATTRIBUTION"
+      },
+      "evidence_refs": [
+        "y1v5.ev.069",
+        "y1v5.ev.070"
+      ],
+      "prior_goal_or_means": "Excel in basketball and seek recognition from peers, with competitive excellence as a visible means",
+      "observed_goal_or_means_after": "Also seek Suzune's positive regard and closer relationship, using festival MVP and first-name privilege as an immediate proposed route",
+      "trigger_or_new_information": "Kiyotaka recognizes Sudō's crush; Suzune formerly defended him and Sudō seeks permission to call her Suzune",
+      "behavioral_evidence": "Intensifies training and stakes romantic/social closeness on performance, while Suzune does not reciprocally declare romantic feelings",
+      "epistemic_status": "NARRATOR_EXPLICIT_ATTRIBUTION",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Encouragement may affect choice to train",
+        "Rejection or alternate bonds may change which person's validation matters"
+      ],
+      "simulation_guard": "Never convert his affection into guaranteed reciprocation or a fixed all-costs obsession",
+      "source_review": "ASSISTANT_DIRECT_TEXT_SECOND_REVIEW_INDEPENDENT_ADVERSARIAL_PENDING"
+    },
+    {
+      "id": "y1v5.goal.ken-sudo.from-demanded-respect-to-conditional-reliability",
+      "actor_id": "actor.ken-sudo",
+      "kind": "GOAL_REPRIORITIZATION",
+      "event_time_ref": "Y1_V05_CH8_AND_CH9",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          165,
+          166,
+          178,
+          179,
+          191,
+          192
+        ],
+        "mode": "ACTIONS_AND_DECLARED_COMMITMENT"
+      },
+      "evidence_refs": [
+        "y1v5.ev.073",
+        "y1v5.ev.080"
+      ],
+      "prior_goal_or_means": "Prove worth through winning and command teammates despite anger, seeking recognition from classmates and Suzune",
+      "observed_goal_or_means_after": "Gain respect as a trusted ally while retaining competitive sport ambition and accepting a conditional restraint against violence",
+      "trigger_or_new_information": "Suzune visits him, validates his effort outside basketball and proposes mutual support through graduation; later grants first-name privilege",
+      "behavioral_evidence": "Returns, apologizes, performs strongly in the relay and agrees not to use unjustified violence",
+      "epistemic_status": "ACTIONS_AND_DECLARED_COMMITMENT",
+      "persistence_scope": "FUTURE_COMPLIANCE_UNPROVEN",
+      "contingent_alternatives": [
+        "Support and earned trust may improve restraint",
+        "Provocation and shame may still cause relapse"
+      ],
+      "simulation_guard": "Do not rewrite previous aggression as never having happened, nor assume permanent reform",
+      "source_review": "ASSISTANT_DIRECT_TEXT_SECOND_REVIEW_INDEPENDENT_ADVERSARIAL_PENDING"
+    },
+    {
+      "id": "y1v5.goal.kikyo-kushida.expulsion-prioritized-over-class-rank",
+      "actor_id": "actor.kikyo-kushida",
+      "kind": "GOAL_HIERARCHY_DISCLOSURE",
+      "event_time_ref": "Y1_V05_CH8_PRIVATE_CONFESSION",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          172,
+          174,
+          175
+        ],
+        "mode": "DIRECT_CHARACTER_ADMISSION"
+      },
+      "evidence_refs": [
+        "y1v5.ev.074"
+      ],
+      "prior_goal_or_means": "Publicly participate in the class effort to reach Class A and maintain a beloved trustworthy persona",
+      "observed_goal_or_means_after": "Secretly prioritize expelling Suzune to conceal past exposure, subordinating Class A advancement until afterward",
+      "trigger_or_new_information": "Kiyotaka confronts her with evidence of roster leakage and recalls her Zodiac VIP collaboration with Ryūen",
+      "behavioral_evidence": "Explicitly admits the roster leak and says she would sacrifice Class A ambitions if necessary to expel Suzune",
+      "epistemic_status": "DIRECT_CHARACTER_ADMISSION",
+      "persistence_scope": "CURRENTLY_STATED_NOT_IMMUTABLE",
+      "contingent_alternatives": [
+        "New leverage, threats, and audience may affect tactics",
+        "After target removal she says she intends to pursue Class A"
+      ],
+      "simulation_guard": "Separate public-facing objectives from private statements and do not presume the stated plan always succeeds",
+      "source_review": "ASSISTANT_DIRECT_TEXT_SECOND_REVIEW_INDEPENDENT_ADVERSARIAL_PENDING"
+    },
+    {
+      "id": "y1v5.goal.kikyo-kushida.expand-expulsion-target-to-ayanokoji",
+      "actor_id": "actor.kikyo-kushida",
+      "kind": "NEW_TARGET",
+      "event_time_ref": "Y1_V05_CH8_PRIVATE_CONFESSION",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          174,
+          175
+        ],
+        "mode": "DIRECT_CHARACTER_ADMISSION"
+      },
+      "evidence_refs": [
+        "y1v5.ev.074"
+      ],
+      "prior_goal_or_means": "Target Suzune's expulsion as the overriding perceived protection against past exposure",
+      "observed_goal_or_means_after": "Add Kiyotaka to the target list after he understands and challenges her secret actions",
+      "trigger_or_new_information": "Kiyotaka reveals awareness of roster leak and secret motives and discusses consequences of evidence",
+      "behavioral_evidence": "Says she has reconsidered one thing: she now wants Kiyotaka expelled as well, prior to a Class A push",
+      "epistemic_status": "DIRECT_CHARACTER_ADMISSION",
+      "persistence_scope": "CONDITIONAL_FUTURE_INTENT",
+      "contingent_alternatives": [
+        "Continued secrecy and exposure risk influence this aim",
+        "Changed leverage or reconciliation could alter later goals"
+      ],
+      "simulation_guard": "Statement of desired expulsion is not proof either student is expelled",
+      "source_review": "ASSISTANT_DIRECT_TEXT_SECOND_REVIEW_INDEPENDENT_ADVERSARIAL_PENDING"
+    },
+    {
+      "id": "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score",
+      "actor_id": "actor.kakeru-ryuen",
+      "kind": "GOAL_PRIORITY_REVEAL",
+      "event_time_ref": "Y1_V05_CH9_RYUEN_ACCOUNT",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          198,
+          199,
+          200
+        ],
+        "mode": "CHARACTER_CONFESSION_AND_OBSERVED_DEMAND"
+      },
+      "evidence_refs": [
+        "y1v5.ev.075",
+        "y1v5.ev.076"
+      ],
+      "prior_goal_or_means": "Compete for school standing while exploiting opponents and controlling Class C",
+      "observed_goal_or_means_after": "Prefer psychologically breaking Suzune and securing submission/possible points even when this reduces tournament score optimization",
+      "trigger_or_new_information": "Suzune resists his planned matchups, alleged staged injury and coercive demand",
+      "behavioral_evidence": "States he had no interest in festival victory relative to crushing her, demands large points and kneeling; Suzune begins kneeling but he does not complete his demands",
+      "epistemic_status": "CHARACTER_CONFESSION_AND_OBSERVED_DEMAND",
+      "persistence_scope": "CONTEXT_SPECIFIC",
+      "contingent_alternatives": [
+        "Future rivals or resources could alter the target's priority",
+        "A failed coercion can drive new information goals"
+      ],
+      "simulation_guard": "Source allegation of induced injury and 500000 offered points is not independently verified payment",
+      "source_review": "ASSISTANT_DIRECT_TEXT_SECOND_REVIEW_INDEPENDENT_ADVERSARIAL_PENDING"
+    },
+    {
+      "id": "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent",
+      "actor_id": "actor.kakeru-ryuen",
+      "kind": "IMMEDIATE_PLAN_INTERRUPTION",
+      "event_time_ref": "Y1_V05_CH9_RECEIVES_AUDIO",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          200,
+          201
+        ],
+        "mode": "OBSERVED_BEHAVIOR_AND_DIALOGUE"
+      },
+      "evidence_refs": [
+        "y1v5.ev.077"
+      ],
+      "prior_goal_or_means": "Extract points and force Suzune to complete public or private submission",
+      "observed_goal_or_means_after": "Suspend immediate pressure and investigate who anticipated the plan and sent the incriminating prior audio",
+      "trigger_or_new_information": "Anonymous recording arrives while Suzune is beginning to kneel; the audio suggests unauthorized capture of earlier Class C plotting",
+      "behavioral_evidence": "States that he failed to collect the points and to make Suzune kneel as intended, and explicitly withholds attribution of sender identity",
+      "epistemic_status": "OBSERVED_BEHAVIOR_AND_DIALOGUE",
+      "persistence_scope": "SUBSEQUENT_INTENT_UNOBSERVED",
+      "contingent_alternatives": [
+        "More evidence may identify sender",
+        "Another advantage may revive coercive plan"
+      ],
+      "simulation_guard": "He suspects possibilities, including Kiyotaka, but does not KNOW that he sent the message",
+      "source_review": "ASSISTANT_DIRECT_TEXT_SECOND_REVIEW_INDEPENDENT_ADVERSARIAL_PENDING"
+    },
+    {
+      "id": "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "kind": "LOCAL_TACTICAL_PRIORITY",
+      "event_time_ref": "Y1_V05_CH6_PRE_LUNCH",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          137,
+          138,
+          141,
+          142
+        ],
+        "mode": "INNER_MONOLOGUE_EXPLICIT_LOCAL_INTENT"
+      },
+      "evidence_refs": [
+        "y1v5.ev.070",
+        "y1v5.ev.071"
+      ],
+      "prior_goal_or_means": "Help Class D avoid losses while concealing his capabilities and controlling his direct intervention",
+      "observed_goal_or_means_after": "Accept the immediate risk of not swapping a compromised roster so Suzune can discover the spy and learn to recover Sudō herself",
+      "trigger_or_new_information": "He knows or strongly suspects roster compromise and privately wishes Suzune to handle it, despite Hirata noting alternatives",
+      "behavioral_evidence": "Does not implement Hirata's immediate countermeasure, speaks harshly to Horikita, and misattributes agency when briefing Hirata",
+      "epistemic_status": "INNER_MONOLOGUE_EXPLICIT_LOCAL_INTENT",
+      "persistence_scope": "LOCAL_ONLY_NO_GLOBAL_PLAN",
+      "contingent_alternatives": [
+        "If the divergence changes school stakes he may choose direct intervention",
+        "If Suzune acts differently the result may change"
+      ],
+      "simulation_guard": "Never assert as canonical fact he deliberately engineered all Class D losses or that all class defeats must occur",
+      "source_review": "ASSISTANT_DIRECT_TEXT_SECOND_REVIEW_INDEPENDENT_ADVERSARIAL_PENDING"
+    },
+    {
+      "id": "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "kind": "SITUATIONAL_GOAL_ADDITION",
+      "event_time_ref": "Y1_V05_CH9_FINAL_RELAY",
+      "source": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          187,
+          188,
+          189,
+          193
+        ],
+        "mode": "FIRST_PERSON_EXPLICIT_AND_INTERPRETATION"
+      },
+      "evidence_refs": [
+        "y1v5.ev.078"
+      ],
+      "prior_goal_or_means": "Maintain a low public profile and minimize visible extraordinary athletics",
+      "observed_goal_or_means_after": "Temporarily value an authentic test against Manabu over anonymity, while predicting the Class D group could improve in future",
+      "trigger_or_new_information": "Class D's poor festival trajectory and encounter with Manabu during relay make a head-to-head opportunity possible",
+      "behavioral_evidence": "Sprints seriously despite the exposure cost, states he already knows outcome, and expresses a premonition of later class strength",
+      "epistemic_status": "FIRST_PERSON_EXPLICIT_AND_INTERPRETATION",
+      "persistence_scope": "PERSONAL_EXPERIMENT_NOT_GLOBAL_PREFERENCE",
+      "contingent_alternatives": [
+        "Opportunity cost and attention risk may alter willingness in other timelines",
+        "His perceived rival may change"
+      ],
+      "simulation_guard": "Predicted future growth is not proof he purposefully made Class D last or that maximal physical comparison is resolved",
+      "source_review": "ASSISTANT_DIRECT_TEXT_SECOND_REVIEW_INDEPENDENT_ADVERSARIAL_PENDING"
+    }
+  ]
+}

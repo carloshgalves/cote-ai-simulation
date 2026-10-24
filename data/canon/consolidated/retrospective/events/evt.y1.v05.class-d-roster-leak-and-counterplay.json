@@ -1,0 +1,211 @@
+{
+  "id": "evt.y1.v05.class-d-roster-leak-and-counterplay",
+  "event_time": "Y1_SPORTS_FESTIVAL_PREPARATION_AND_EVENT",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v5.ev.017",
+    "y1v5.ev.038",
+    "y1v5.ev.042",
+    "y1v5.ev.046",
+    "y1v5.ev.047",
+    "y1v5.ev.052"
+  ],
+  "prior_ambiguities": [
+    "Who gave Class D lineup to Class C?",
+    "Did difficult matchups occur by strategy or coincidence?",
+    "What evidence could interrupt Ryūen's coercive demand?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        198,
+        199
+      ],
+      "evidence_refs": [
+        "y1v5.ev.063"
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "explanation": "Ryūen claims Kushida leaked D's roster and that he arranged matchups and the collision/injury narrative. This is a named confession, not an external forensic finding.",
+      "world_epistemic_status": "SOURCE_BOUNDED_CHARACTER_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kakeru-ryuen",
+          "since": "BEFORE_FESTIVAL_FOR_OWN_PLAN",
+          "status": "KNOWS_OWN_ACCOUNT"
+        },
+        {
+          "actor": "actor.kikyo-kushida",
+          "since": "OWN_TRANSFER_IF_PERFORMED",
+          "status": "KNOWS_SELF_ACTION"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH9_CONFESSION",
+          "status": "HEARD_RYUEN_ACCOUNT"
+        }
+      ],
+      "no_backdated_global_knowledge": true,
+      "resolves_assertion_refs": [
+        "y1v5.ev.042"
+      ]
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        199,
+        201
+      ],
+      "evidence_refs": [
+        "y1v5.ev.064",
+        "y1v5.ev.065"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "Suzune's locally recorded concession loses leverage when Ryūen produces longer recording; a different older audio arrives anonymously and interrupts him. Sender/authentication and the Ibuki/Kinoshita differences cannot be assumed resolved.",
+      "world_epistemic_status": "SOURCE_BOUNDED_CHARACTER_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH9",
+          "status": "HEARD_ANONYMOUS_AUDIO"
+        },
+        {
+          "actor": "actor.kakeru-ryuen",
+          "since": "Y1_V05_CH9_RECEIPT",
+          "status": "RECEIVED_AUDIO_NOT_SENDER_IDENTITY"
+        },
+        {
+          "actor": "actor.kikyo-kushida",
+          "since": "Y1_V05_CH9",
+          "status": "WITNESSES_MESSAGE_NOT_SOURCE"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        201
+      ],
+      "evidence_refs": [
+        "y1v5.ev.066"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "Suzune concludes Kiyotaka likely orchestrated the counteraction; that remains her belief, not proof of how anonymous evidence was acquired or delivered.",
+      "world_epistemic_status": "SOURCE_BOUNDED_CHARACTER_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH9",
+          "status": "SUSPECTS_AYANOKOJI_NOT_KNOWS"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        172,
+        175
+      ],
+      "evidence_refs": [
+        "y1v5.ev.074"
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "explanation": "Kushida admits privately to Kiyotaka that she herself photographed and leaked Class D's festival participation table, an additional first-person source beyond Ryūen's later account.",
+      "world_epistemic_status": "DIRECT_PRIVATE_ADMISSION_TO_KIYOTAKA_NOT_PUBLIC_KNOWLEDGE",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kikyo-kushida",
+          "since": "BEFORE_FESTIVAL_OWN_DISCLOSURE",
+          "status": "KNOWS_OWN_ACTION"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V05_CH8_DIALOGUE",
+          "status": "HEARD_CONFESSION"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH9_RYUEN_DIALOGUE",
+          "status": "HEARD_LATER_RYUEN_ATTRIBUTION"
+        }
+      ],
+      "no_backdated_global_knowledge": true,
+      "resolves_assertion_refs": [
+        "y1v5.ev.042"
+      ]
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        198,
+        201
+      ],
+      "evidence_refs": [
+        "y1v5.ev.075",
+        "y1v5.ev.076",
+        "y1v5.ev.077"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "Ryūen says Suzune's humiliation, forced kneeling and payment outranked maximizing his festival score; he says he rehearsed a collision with Kinoshita and offered 500000. Suzune starts to kneel before an anonymous audio interrupts; he later acknowledges not securing the intended final submission, and does not identify its sender.",
+      "world_epistemic_status": "DECLARED_MOTIVE_PLUS_OBSERVED_INTERRUPT_NO_CONFIRMED_SENDER",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kakeru-ryuen",
+          "since": "BEFORE_Y1_V05_CH9_FOR_OWN_PLAN",
+          "status": "KNOWS_OWN_OBJECTIVE_AND_STATED_STRATEGY"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH9",
+          "status": "HEARD_ADMISSION_AND_AUDIO_NOT_SENDER"
+        },
+        {
+          "actor": "actor.kikyo-kushida",
+          "since": "Y1_V05_CH9",
+          "status": "HEARD_AUDIO_NOT_SENDER"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        137,
+        142
+      ],
+      "evidence_refs": [
+        "y1v5.ev.070",
+        "y1v5.ev.071"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "Kiyotaka withheld a roster-change countermeasure and wanted Suzune to identify the spy and bring Sudō back on her own; his objective is locally stated developmental intervention, not confirmed intent to cause all of D's losses.",
+      "world_epistemic_status": "KIYOTAKA_PRIVATE_INTENT_NOT_OTHER_ACTORS_BELIEF",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V05_CH6",
+          "status": "KNOWS_OWN_REASONING"
+        },
+        {
+          "actor": "actor.yosuke-hirata",
+          "since": "Y1_V05_CH6_BRIEFING",
+          "status": "HEARD_MISATTRIBUTION_TO_SUZUNE_PLAN"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Actual identity of anonymous sender/collaborator not established from Suzune's perspective.",
+    "Reported Ibuki voice/instruction in anonymous tape differs from the observed Kinoshita collision; do not conflate these accounts.",
+    "Ryūen's described payment and claimed injury staging have no independent medical/transaction verification in this volume."
+  ]
+}

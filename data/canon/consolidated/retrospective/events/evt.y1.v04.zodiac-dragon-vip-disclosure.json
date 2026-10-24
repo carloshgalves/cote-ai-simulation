@@ -1,7 +1,7 @@
 {
   "id": "evt.y1.v04.zodiac-dragon-vip-disclosure",
   "event_time": "Y1_AUG_ZODIAC_EXAM",
-  "status": "OPEN",
+  "status": "PARTIALLY_EXPLAINED",
   "canonical_event_sources": [
     "y1v4.ev.125",
     "y1v4.ev.127"
@@ -36,9 +36,70 @@
         }
       ],
       "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        194,
+        199
+      ],
+      "evidence_refs": [
+        "y1v5.ev.061",
+        "y1v5.ev.062",
+        "y1v5.ev.063"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "V5 establishes open hostility by Kushida to Suzune and Ryūen's attribution of festival roster leakage to Kushida; it does not retroactively prove the distinct Dragon VIP disclosure in V4.",
+      "world_epistemic_status": "LATER_CHARACTER_STATEMENTS_NOT_V4_VIP_LEAK_PROOF",
+      "actor_knowledge": [
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH9",
+          "status": "HEARD_LATER_EXPULSION_THREAT_AND_RYUEN_ACCOUNT"
+        },
+        {
+          "actor": "actor.kakeru-ryuen",
+          "since": "BY_Y1_V05_CH9",
+          "status": "ASSERTS_RECEIVED_FESTIVAL_LINEUP_NOT_V4_VIP_PROOF"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        174,
+        175
+      ],
+      "evidence_refs": [
+        "y1v5.ev.074"
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "explanation": "During an explicit private confrontation, Kiyotaka describes Kushida's Dragon VIP exchange with Ryūen and Kushida agrees he has figured it out, then states that the intended favor was to get Suzune expelled. This is source-supported conversational acknowledgement, beyond the V4.5 suspicion, but the exact terms and independent school-certified facts remain open.",
+      "world_epistemic_status": "DIRECT_CHARACTERS_PRIVATE_DIALOGUE_CONTEXT_NOT_EXAM_ALGORITHM_PROOF",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V05_CH8_DIRECT_PRIVATE_CONVERSATION",
+          "status": "HEARD_KUSHIDA_ACCEPT_RECONSTRUCTION"
+        },
+        {
+          "actor": "actor.kikyo-kushida",
+          "since": "OWN_ROLE_IN_V4_EXAM",
+          "status": "KNOWS_OWN_PAST_INTENT_AND_ACTION"
+        }
+      ],
+      "no_backdated_global_knowledge": true,
+      "resolves_assertion_refs": [
+        "y1v4.ev.125"
+      ]
     }
   ],
   "unresolved": [
-    "Kushida's own knowledge or involvement in exposure not independently proved."
+    "Full sequence, exact terms and independent verification of the previous VIP disclosure are not narrated in V5.",
+    "The school's secret VIP selection algorithm has not been formally certified by the V5 private conversation.",
+    "V5 festival roster leak separately has direct Kushida admission; do not conflate timing or exact scope of two disclosures."
   ]
 }

@@ -1,0 +1,57 @@
+{
+  "id": "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "seek suzune recognition and reprioritize respect",
+  "context": "Longitudinal Y1 Volume 5 demonstration: romantic recognition motive in chapter 4, crisis in chapter 6, alliance and promise in chapters 8–9; each observation retains its own source evidence and temporal place.",
+  "observed_actions": "Trains intensely while romantically attracted to Suzune, initially stakes use of her given name on first-year MVP, and reveals his need to be noticed beyond basketball. Her direct recognition prompts a decision to return.",
+  "observed_result": "He misses MVP yet receives permission to address her by her given name, and accepts a condition to avoid unjustified violence.",
+  "epistemic_limits": "His romantic feelings are not reciprocally confirmed and his promise is not evidence of durable behavior or a forced motivation state after timeline divergence.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      55,
+      56,
+      136,
+      165,
+      166,
+      178,
+      179,
+      191,
+      192
+    ],
+    "chapter": 4,
+    "source_status": "ASSISTANT_SOURCE_TEXT_MATCH_INDEPENDENT_AUDIT_PENDING",
+    "additional_chapters": [
+      6,
+      8,
+      9
+    ]
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "motivation",
+    "relationship",
+    "sports",
+    "discipline"
+  ],
+  "information_available": "Private intent, public action and later retrospective statements stay in separate temporal lanes.",
+  "counterfactual_test": "Under alternate incentives, trust and history, goal reprioritization is contingent, never pre-scripted.",
+  "topics": [
+    "motivation",
+    "relationship",
+    "sports",
+    "discipline"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.069",
+    "y1v5.ev.073",
+    "y1v5.ev.080"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

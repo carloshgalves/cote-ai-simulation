@@ -1,0 +1,43 @@
+{
+  "id": "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "advocate nonathlete fairness",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Organizes opposition to exclusive ability-based grouping and calls on social allies.",
+  "observed_result": "Class modifies approach after contested vote and discussion.",
+  "epistemic_limits": "A peer following is contextual and may not reliably predict future votes.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      40,
+      45
+    ],
+    "chapter": 3,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.shinohara",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "social",
+    "leadership",
+    "negotiation"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "social",
+    "leadership",
+    "negotiation"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.013",
+    "y1v5.ev.014"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

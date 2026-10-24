@@ -192,6 +192,7 @@
         "y1v5.ev.069"
       ],
       "cases": [
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
         "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect"
       ]
     },
@@ -201,6 +202,7 @@
         "y1v5.ev.069"
       ],
       "cases": [
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
         "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect"
       ]
     },
@@ -544,7 +546,9 @@
         "y1v5.ev.070"
       ],
       "cases": [
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
         "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect",
+        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack",
         "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
       ]
     },
@@ -559,7 +563,9 @@
         "y1v5.ev.070"
       ],
       "cases": [
-        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita"
+        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita",
+        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack",
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
       ]
     },
     "141": {
@@ -567,7 +573,8 @@
         "y1v5.ev.071"
       ],
       "cases": [
-        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita"
+        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita",
+        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack"
       ]
     },
     "142": {
@@ -576,7 +583,8 @@
         "y1v5.ev.071"
       ],
       "cases": [
-        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita"
+        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita",
+        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack"
       ]
     },
     "144": {
@@ -655,7 +663,9 @@
         "y1v5.ev.073"
       ],
       "cases": [
-        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect"
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect",
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
       ]
     },
     "166": {
@@ -664,7 +674,9 @@
         "y1v5.ev.073"
       ],
       "cases": [
-        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect"
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect",
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
       ]
     },
     "167": {
@@ -697,7 +709,16 @@
       "evidence": [
         "y1v5.ev.074"
       ],
-      "cases": []
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
+        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates"
+      ]
+    },
+    "173": {
+      "evidence": [],
+      "cases": [
+        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates"
+      ]
     },
     "174": {
       "evidence": [
@@ -706,6 +727,7 @@
         "y1v5.ev.074"
       ],
       "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
         "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates"
       ]
     },
@@ -715,6 +737,7 @@
         "y1v5.ev.074"
       ],
       "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
         "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
         "y1v5.case.kikyo-kushida.volunteer-paid-mixed-event-substitution"
       ]
@@ -730,7 +753,9 @@
         "y1v5.ev.072"
       ],
       "cases": [
-        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect"
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect",
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
       ]
     },
     "179": {
@@ -739,7 +764,9 @@
         "y1v5.ev.073"
       ],
       "cases": [
-        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect"
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect",
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
       ]
     },
     "180": {
@@ -799,6 +826,7 @@
       ],
       "cases": [
         "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita",
+        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack",
         "y1v5.case.kiyotaka-ayanokoji.sprint-against-manabu-with-obstruction",
         "y1v5.case.manabu-horikita.accept-ayanokoji-relay-challenge"
       ]
@@ -834,8 +862,10 @@
         "y1v5.ev.080"
       ],
       "cases": [
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
         "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect",
-        "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event"
+        "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event",
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
       ]
     },
     "192": {
@@ -843,7 +873,9 @@
         "y1v5.ev.080"
       ],
       "cases": [
-        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect"
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect",
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
       ]
     },
     "193": {
@@ -853,7 +885,8 @@
         "y1v5.ev.079"
       ],
       "cases": [
-        "y1v5.case.ken-sudo.return-apologize-and-serve-relay"
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
       ]
     },
     "194": {
@@ -864,12 +897,20 @@
         "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates"
       ]
     },
+    "195": {
+      "evidence": [],
+      "cases": [
+        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates"
+      ]
+    },
     "196": {
       "evidence": [
         "y1v5.ev.061",
         "y1v5.ev.062"
       ],
-      "cases": []
+      "cases": [
+        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates"
+      ]
     },
     "198": {
       "evidence": [
@@ -880,6 +921,7 @@
       "cases": [
         "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
         "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
+        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
         "y1v5.case.kinoshita.take-part-in-disputed-collision-case",
         "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation"
       ]
@@ -908,6 +950,8 @@
       ],
       "cases": [
         "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
+        "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
+        "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording",
         "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation"
       ]
     },

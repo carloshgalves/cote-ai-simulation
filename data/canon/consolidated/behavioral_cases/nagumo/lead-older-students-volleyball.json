@@ -6,7 +6,7 @@
   "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
   "observed_actions": "Participates prominently in a pool volleyball match and leads a strong visible performance before cheering peers.",
   "observed_result": "His team wins that observed game and classmates surround him afterward.",
-  "epistemic_limits": "One game does not establish total sporting supremacy; political popularity and council eligibility involve other sources.",
+  "epistemic_limits": "One game does not establish total sporting supremacy; political popularity and council eligibility involve other sources. Manabu is mentioned as council president in the surrounding conversation, not observed as a participant in this volleyball scene.",
   "source": {
     "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
     "pdf_pages": [
@@ -18,8 +18,7 @@
   },
   "other_actors": [
     "actor.honami-ichinose",
-    "actor.suzune-horikita",
-    "actor.manabu-horikita"
+    "actor.suzune-horikita"
   ],
   "capabilities_supported": [
     "sports",

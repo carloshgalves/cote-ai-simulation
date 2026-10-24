@@ -1,0 +1,62 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.nagumo",
+  "display_name": "Nagumo (given name not supplied in this volume)",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v045.sevenseas.en.operator-provided"
+  ],
+  "source_status": "ASSISTANT_INITIAL_PASS_AUDIT_PENDING",
+  "identity": {
+    "role_summary": "ANHS student council vice president observed playing volleyball and described by Ichinose as Class B origin and prospective president.",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "sports": {
+      "behavioral_case_refs": [
+        "y1v45.case.nagumo.lead-older-students-volleyball"
+      ],
+      "context_evidence_refs": [
+        "y1v45.ev.047"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.047",
+        "y1v45.ev.048"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.048"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [
+        "y1v45.case.nagumo.lead-older-students-volleyball"
+      ],
+      "context_evidence_refs": []
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": false,
+  "semantic_audit_notes": "Source confirms recreational performance; student council background and future presidency are Ichinose's account and predictions.",
+  "uncertainties": {
+    "given_name_unknown_in_source": true,
+    "council_selection_claims_not_official_rule": true,
+    "future_political_outcome_unknown": true
+  },
+  "generation_policy": "Use one global identity across future volumes",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTIONS_NOT_FEATS",
+    "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

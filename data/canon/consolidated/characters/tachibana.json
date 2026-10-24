@@ -4,7 +4,8 @@
   "display_name": "Tachibana (given name unknown)",
   "modeling_tier": "MINIMAL_ENTITY",
   "source_coverage": [
-    "ln.y1.v02.sevenseas.en.operator-provided"
+    "ln.y1.v02.sevenseas.en.operator-provided",
+    "ln.y1.v045.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -27,11 +28,30 @@
       "context_evidence_refs": [
         "y1v2.ev.088"
       ]
+    },
+    "politics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.019",
+        "y1v45.ev.021"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.019"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.021"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Minimum entity only; unknown identity fields remain unknown, assertions by other actors do not establish behavior.",
+  "semantic_audit_notes": "Minimum entity only; unknown identity fields remain unknown, assertions by other actors do not establish behavior. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": true,
     "future_fate_unknown": true

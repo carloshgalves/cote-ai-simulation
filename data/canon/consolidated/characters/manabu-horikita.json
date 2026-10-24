@@ -5,7 +5,8 @@
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
-    "ln.y1.v02.sevenseas.en.operator-provided"
+    "ln.y1.v02.sevenseas.en.operator-provided",
+    "ln.y1.v045.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -20,10 +21,14 @@
     "leadership": {
       "behavioral_case_refs": [
         "y1v1.case.m.club-fair-silence",
-        "y1v2.case.manabu-horikita.offer-secretary-seat"
+        "y1v2.case.manabu-horikita.offer-secretary-seat",
+        "y1v45.case.manabu-horikita.invite-kiyotaka-into-student-council",
+        "y1v45.case.manabu-horikita.uphold-outside-contact-ban"
       ],
       "context_evidence_refs": [
-        "y1v1.ev.031"
+        "y1v1.ev.031",
+        "y1v45.ev.021",
+        "y1v45.ev.048"
       ]
     },
     "persuasion": {
@@ -73,7 +78,8 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.083",
-        "y1v2.ev.064"
+        "y1v2.ev.064",
+        "y1v45.ev.019"
       ]
     },
     "conflict": {
@@ -87,13 +93,63 @@
     "economy": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v2.ev.083"
+        "y1v2.ev.083",
+        "y1v45.ev.024"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [
+        "y1v45.case.manabu-horikita.invite-kiyotaka-into-student-council"
+      ],
+      "context_evidence_refs": [
+        "y1v45.ev.019",
+        "y1v45.ev.021",
+        "y1v45.ev.048"
+      ]
+    },
+    "reasoning": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.020"
+      ]
+    },
+    "epistemics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.020"
+      ]
+    },
+    "governance": {
+      "behavioral_case_refs": [
+        "y1v45.case.manabu-horikita.uphold-outside-contact-ban"
+      ],
+      "context_evidence_refs": [
+        "y1v45.ev.024",
+        "y1v45.ev.026"
+      ]
+    },
+    "family": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.025"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.025"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.026"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

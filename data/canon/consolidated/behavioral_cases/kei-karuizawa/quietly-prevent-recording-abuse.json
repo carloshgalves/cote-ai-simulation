@@ -1,0 +1,42 @@
+{
+  "id": "y1v45.case.kei-karuizawa.quietly-prevent-recording-abuse",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "quietly prevent recording abuse",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Privately executes Kiyotaka's protective countermeasure to prevent a group of boys from retaining images of girls changing.",
+  "observed_result": "The perpetrators later find no usable material; Karuizawa completes her action without disclosing its purpose to nearby friends.",
+  "epistemic_limits": "The scene is a prevention of a privacy violation, not approval or practical instruction for intrusive recording; she acts under a coercively asymmetric relationship with Kiyotaka.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      220,
+      221
+    ],
+    "chapter": 7,
+    "source_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.honami-ichinose",
+    "actor.airi-sakura",
+    "actor.kikyo-kushida"
+  ],
+  "capabilities_supported": [
+    "privacy",
+    "strategy"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "privacy",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.055",
+    "y1v45.ev.057"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

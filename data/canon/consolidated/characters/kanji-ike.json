@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v02.sevenseas.en.operator-provided",
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v045.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -37,7 +38,13 @@
         "y1v3.ev.007",
         "y1v3.ev.030",
         "y1v3.ev.039",
-        "y1v3.ev.046"
+        "y1v3.ev.046",
+        "y1v45.ev.015",
+        "y1v45.ev.016",
+        "y1v45.ev.017",
+        "y1v45.ev.023",
+        "y1v45.ev.031",
+        "y1v45.ev.045"
       ]
     },
     "ethics": {
@@ -45,7 +52,8 @@
       "context_evidence_refs": [
         "y1v1.ev.034",
         "y1v3.ev.024",
-        "y1v3.ev.031"
+        "y1v3.ev.031",
+        "y1v45.ev.023"
       ]
     },
     "academic_reasoning": {
@@ -95,7 +103,8 @@
       ],
       "context_evidence_refs": [
         "y1v1.ev.102",
-        "y1v3.ev.046"
+        "y1v3.ev.046",
+        "y1v45.ev.031"
       ]
     },
     "economy": {
@@ -105,7 +114,8 @@
         "y1v2.ev.006",
         "y1v2.ev.026",
         "y1v3.ev.004",
-        "y1v3.ev.103"
+        "y1v3.ev.103",
+        "y1v45.ev.015"
       ]
     },
     "observation": {
@@ -117,7 +127,9 @@
         "y1v1.ev.117",
         "y1v3.ev.030",
         "y1v3.ev.036",
-        "y1v3.ev.079"
+        "y1v3.ev.079",
+        "y1v45.ev.017",
+        "y1v45.ev.046"
       ]
     },
     "exam": {
@@ -153,7 +165,8 @@
         "y1v3.ev.039",
         "y1v3.ev.053",
         "y1v3.ev.079",
-        "y1v3.ev.080"
+        "y1v3.ev.080",
+        "y1v45.ev.016"
       ]
     },
     "resources": {
@@ -173,11 +186,43 @@
         "y1v3.ev.038",
         "y1v3.ev.080"
       ]
+    },
+    "negotiation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.045"
+      ]
+    },
+    "privacy": {
+      "behavioral_case_refs": [
+        "y1v45.case.kanji-ike.attempt-invasive-pool-recording"
+      ],
+      "context_evidence_refs": [
+        "y1v45.ev.046",
+        "y1v45.ev.053",
+        "y1v45.ev.054",
+        "y1v45.ev.056"
+      ]
+    },
+    "misconduct": {
+      "behavioral_case_refs": [
+        "y1v45.case.kanji-ike.attempt-invasive-pool-recording"
+      ],
+      "context_evidence_refs": [
+        "y1v45.ev.053",
+        "y1v45.ev.054"
+      ]
+    },
+    "consequence": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.056"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

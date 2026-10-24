@@ -4,7 +4,8 @@
   "name": "Year 1 deserted-island survival special examination",
   "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
   "source_coverage": [
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v045.sevenseas.en.operator-provided"
   ],
   "participants": [
     "Class A",
@@ -121,7 +122,9 @@
     "y1v3.ev.104",
     "y1v3.ev.105",
     "y1v3.ev.110",
-    "y1v3.ev.111"
+    "y1v3.ev.111",
+    "y1v45.ev.007",
+    "y1v45.ev.020"
   ],
   "epistemic_disclosures": [
     {
@@ -145,5 +148,17 @@
     "Applicability of leader substitution to every cause beyond demonstrated medically justified retirement",
     "Source-verification of complete activity/item price table"
   ],
-  "simulation_policy": "Do not turn this reference into executable scoring or actor memory without separate evidence and operator gate."
+  "simulation_policy": "Do not turn this reference into executable scoring or actor memory without separate evidence and operator gate.",
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v45.ev.007",
+        "y1v45.ev.020"
+      ],
+      "comment": "Ibuki's self-described reason for post-island Ryūen cooperation and Manabu's later knowledge of the secret replacement; neither supplies A/C contract terms.",
+      "epistemic": "CHARACTER_TESTIMONY_AND_POST_RESULT_COUNCIL_SPEECH",
+      "claim_promotion": "CONTEXT_ONLY_NO_EXECUTABLE_PROMOTION"
+    }
+  ]
 }

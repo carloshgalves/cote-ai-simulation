@@ -7,7 +7,8 @@
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
-    "ln.y1.v04.sevenseas.en.operator-provided"
+    "ln.y1.v04.sevenseas.en.operator-provided",
+    "ln.y1.v045.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -68,7 +69,12 @@
         "y1v4.ev.039",
         "y1v4.ev.065",
         "y1v4.ev.066",
-        "y1v4.ev.074"
+        "y1v4.ev.074",
+        "y1v45.ev.018",
+        "y1v45.ev.023",
+        "y1v45.ev.036",
+        "y1v45.ev.038",
+        "y1v45.ev.057"
       ]
     },
     "persuasion": {
@@ -94,7 +100,8 @@
     "ethics": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v1.ev.043"
+        "y1v1.ev.043",
+        "y1v45.ev.023"
       ]
     },
     "economy": {
@@ -160,7 +167,8 @@
         "y1v3.ev.008",
         "y1v4.ev.017",
         "y1v4.ev.039",
-        "y1v4.ev.125"
+        "y1v4.ev.125",
+        "y1v45.ev.057"
       ]
     },
     "academic_reasoning": {
@@ -226,7 +234,8 @@
         "y1v3.ev.037",
         "y1v4.ev.016",
         "y1v4.ev.017",
-        "y1v4.ev.041"
+        "y1v4.ev.041",
+        "y1v45.ev.035"
       ]
     },
     "resources": {
@@ -242,11 +251,35 @@
       "context_evidence_refs": [
         "y1v3.ev.087"
       ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.018"
+      ]
+    },
+    "belief": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.035"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.036"
+      ]
+    },
+    "communication": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.038"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

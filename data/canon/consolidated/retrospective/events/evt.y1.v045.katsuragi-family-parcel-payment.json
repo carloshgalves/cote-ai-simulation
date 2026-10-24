@@ -1,0 +1,58 @@
+{
+  "id": "evt.y1.v045.katsuragi-family-parcel-payment",
+  "event_time": "Y1_LATE_AUG_PARCEL_MAILED_BEFORE_NARRATOR_POINTS_TRANSFER",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v45.ev.027",
+    "y1v45.ev.029",
+    "y1v45.ev.030"
+  ],
+  "prior_ambiguities": [
+    "Initial chapter presents an unexplained 100,000 point transfer to Sudō.",
+    "Receiving sister's eventual delivery remains unknown."
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        97,
+        104
+      ],
+      "evidence_refs": [
+        "y1v45.ev.027",
+        "y1v45.ev.028",
+        "y1v45.ev.029",
+        "y1v45.ev.030"
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "explanation": "The 100,000 private-point transfer introduced on PDF p11 is payment for Sudō's negotiated off-campus family parcel delivery arranged by Katsuragi and Kiyotaka.",
+      "resolves_assertion_refs": [
+        "y1v45.ev.002"
+      ],
+      "world_epistemic_status": "NARRATED_TRANSACTION_AND_CHARACTER_DIALOGUE",
+      "actor_knowledge": [
+        {
+          "actor": "actor.ken-sudo",
+          "since": "AT_PAYMENT_AGREEMENT",
+          "status": "KNOWS_PAYMENT_REASON"
+        },
+        {
+          "actor": "actor.katsuragi",
+          "since": "AT_PAYMENT_AGREEMENT",
+          "status": "KNOWS_PAYMENT_REASON"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "AT_PAYMENT_AGREEMENT",
+          "status": "KNOWS_PAYMENT_REASON"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "No proof sister received package, despite evidence it was mailed.",
+    "Neither point transfers nor lack of detection make this a permitted rule exception."
+  ]
+}

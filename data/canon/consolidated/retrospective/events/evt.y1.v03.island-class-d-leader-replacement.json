@@ -1,0 +1,78 @@
+{
+  "id": "evt.y1.v03.island-class-d-leader-replacement",
+  "event_time": "Y1_AUG_ISLAND_FINAL_EVENING",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v3.ev.110",
+    "y1v3.ev.111"
+  ],
+  "prior_ambiguities": [
+    "Who understood the covert leader substitution after the exam?",
+    "Why did Ibuki continue to deal with Ryūen? (self-reported only)"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        23,
+        24
+      ],
+      "evidence_refs": [
+        "y1v45.ev.007"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "Ibuki claims she remained with Ryūen after failing to deduce the effective final D leader; she still did not know the private replacement outcome during the island test.",
+      "world_epistemic_status": "REPORTED_BY_CHARACTER",
+      "actor_knowledge": [
+        {
+          "actor": "actor.mio-ibuki",
+          "since": "AT_OWN_ACCOUNT",
+          "status": "HAS_PERSONAL_MOTIVATION"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V045_CH2_CONVERSATION",
+          "status": "HEARD_ACCOUNT"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        70,
+        71
+      ],
+      "evidence_refs": [
+        "y1v45.ev.020"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "Manabu explicitly identifies Kiyotaka as the final substituted Class D island leader and suspects his strategic role; Kiyotaka deflects to Suzune. Manabu says only the examination committee and he held the information before this meeting; secretary Tachibana now hears it, while homeroom teachers reportedly do not.",
+      "world_epistemic_status": "SPEAKER_ASSERTION_WITH_OBSERVED_CONVERSATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.manabu-horikita",
+          "since": "AFTER_ISLAND_RESULT_BEFORE_Y1_V045_CH3",
+          "status": "HAS_LEARNED_LEADER_SUBSTITUTION"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "AT_ISLAND_REPLACEMENT",
+          "status": "SELF_KNOWLEDGE"
+        },
+        {
+          "actor": "actor.tachibana",
+          "since": "Y1_V045_CH3_P70_CONVERSATION",
+          "status": "HEARD_MANABU_DISCLOSE_SUBSTITUTED_LEADER"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Ryūen–Katsuragi island cooperation's exact financial contract remains unknown; no facts about it added from 4.5",
+    "Which members of the examination committee know the substitution is unspecified; committee access must not imply knowledge for every teacher or classmate."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "y1v45.case.katsuragi.fund-risky-family-delivery",
+  "actor_id": "actor.katsuragi",
+  "primary_actor_id": "actor.katsuragi",
+  "title": "fund risky family delivery",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "After formal refusal, Katsuragi negotiates an unofficial one-time parcel delivery and large private-point reward involving Sudō and Kiyotaka.",
+  "observed_result": "Sudō accepts the risk, while Katsuragi adds contingencies for proof and delayed settlement.",
+  "epistemic_limits": "This violates stated institutional restrictions, is not an approved policy and does not establish acceptance of similar risks later.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      97,
+      103
+    ],
+    "chapter": 3,
+    "source_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "economy",
+    "negotiation"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "economy",
+    "negotiation"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.027",
+    "y1v45.ev.028",
+    "y1v45.ev.029"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

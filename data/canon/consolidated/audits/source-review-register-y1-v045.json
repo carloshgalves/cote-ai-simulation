@@ -1,0 +1,2128 @@
+{
+  "schema_version": "individual-source-review-v2",
+  "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+  "created_at": "2026-10-23",
+  "source_pdf_sha256": "b01441252214bc44e9cee75f3a27640e25ff266609ac7386ac83d4d588f72d22",
+  "source_page_count": 227,
+  "extraction_mode": "SELECTIVE_SOURCE_FIRST_NO_FILLER_TO_MEET_QUOTA",
+  "evidence_count": 57,
+  "behavioral_case_count": 21,
+  "evidence": [
+    {
+      "record_id": "y1v45.ev.001",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 1,
+      "pdf_pages": [
+        10
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka frames summer episodes as separate vignettes about students between childhood and adulthood; this is authorially framed narrator reflection, not school policy.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.002",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        11
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Kiyotaka sends Sudō 100,000 private points, later explained by the family-parcel arrangement in this volume's third chapter.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.003",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        12,
+        13
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Sudō reports being the sole first-year fielded in a basketball tournament, scoring but losing the match; his claim is told to Kiyotaka.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.004",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        13,
+        17
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sudō asks Kiyotaka to bring Suzune to a public fortune-telling event as intermediary; Kiyotaka calls and Suzune declines due to expected crowds.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.005",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        15,
+        16
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Suzune distinguishes supernatural prediction from evidence-based cold reading, explaining her guarded curiosity about fortune-telling.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.006",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        19,
+        20
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "A Keyaki Mall fortune-teller allows clients only in pairs; both Kiyotaka and Ibuki independently arrive alone and are initially refused.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.007",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        23,
+        24
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Ibuki says she dislikes Ryūen and associates with him mainly because she failed to identify Class D's final island-exam leader. This is her own account, not a confirmed full contract.",
+      "actor_ids": [
+        "actor.mio-ibuki",
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [
+        "evt.y1.v03.island-class-d-leader-replacement"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.008",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        24,
+        26
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Ibuki admits that authentic everyday interactions make her anxious, unlike playing an assigned covert role during her island infiltration.",
+      "actor_ids": [
+        "actor.mio-ibuki",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.009",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        25,
+        26
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka suggests Ibuki's anxiety is partly self-consciousness absent during role-play, while his explanatory psychology remains his interpretation.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.010",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        29,
+        32
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Despite strained relations between classes, Kiyotaka and Ibuki agree to pair for fortune-telling without claiming a romance or political alliance.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.011",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        34,
+        36
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "An entertainer proclaims Kiyotaka has a rare unfavorable fortune while Ibuki reacts; predictions are performance claims, not supernatural facts or proof of his childhood.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.012",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        38,
+        42
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "After fortune-telling, Kiyotaka and Ibuki are trapped in a stalled elevator; official contact attempts are hindered and they are unable to leave immediately.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.013",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        43,
+        47
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka tries to keep Ibuki from escalating dangerous physical attempts and directs attention to possible outside assistance under constrained communications.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.014",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        47,
+        48
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "When Kiyotaka and Ibuki emerge from the elevator, staff say adults remotely moved it from the first floor. Kiyotaka credits Katsuragi for responding to his phone message; the pair's simultaneous button presses did not cause the rescue.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.015",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        49,
+        50
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka, Ike and Yamauchi plan a pooled birthday present for classmate Inogashira instead of purchasing separate costly gifts.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kokoro-inogashira"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.016",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        54,
+        55
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ike and Shinohara exchange sharp words in a shop after teasing about social interest; the scene does not confirm romance.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.shinohara",
+        "actor.haruki-yamauchi"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.017",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        56,
+        58
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Katsuragi purchases and repeatedly considers gift options while classmates mistakenly infer he is buying a romantic present.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.018",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        63
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Kushida knows Suzune's February 15 birthday and mentions it to classmates; this does not make her privy to every personal motive.",
+      "actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.019",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        67,
+        70
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka meets student-council president Manabu and secretary Tachibana while trying to observe Katsuragi's route.",
+      "actor_ids": [
+        "actor.manabu-horikita",
+        "actor.tachibana",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.020",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        70,
+        71
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Manabu says he has learned that Class D's island leader changed to Kiyotaka and infers Kiyotaka's strategic responsibility; Kiyotaka deflects attribution to Suzune.",
+      "actor_ids": [
+        "actor.manabu-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [
+        "evt.y1.v03.island-class-d-leader-replacement"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.021",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        71,
+        73
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Manabu offers Kiyotaka a student-council role despite first-year standing; Tachibana protests and Kiyotaka declines.",
+      "actor_ids": [
+        "actor.manabu-horikita",
+        "actor.tachibana",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.022",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        76,
+        78
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Katsuragi explains that the ban on outside contact harms students wanting to communicate with family and acknowledges carefully considering a gift's recipient.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.023",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        88,
+        90
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ike and other Class D classmates attempt to celebrate Katsuragi's birthday, and he is guarded about the surprise while headed to council business.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.kikyo-kushida",
+        "actor.kanji-ike",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.024",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        91,
+        93
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Manabu states that school rules prohibit sending parcels or even one-way communication to outsiders except compelling circumstances, and private points do not override express prohibitions.",
+      "actor_ids": [
+        "actor.manabu-horikita",
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [
+        "evt.y1.anhs-private-points-vs-explicit-prohibitions"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.025",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        92,
+        93
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Katsuragi tells the council that he and his twin sister are orphans and that he wishes to send her birthday chocolates, explaining previously ambiguous gift purchases.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.manabu-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.026",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        93,
+        94
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "After rejecting Katsuragi formally, Manabu privately acknowledges that some undiscovered violations escape enforcement and says he will not investigate Kiyotaka's future actions.",
+      "actor_ids": [
+        "actor.manabu-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.katsuragi"
+      ],
+      "related_event_ids": [
+        "evt.y1.anhs-private-points-vs-explicit-prohibitions"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.027",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        97,
+        101
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka recruits Sudō as a potential off-campus courier for Katsuragi's unauthorized family parcel; Sudō initially objects, then accepts after hearing the circumstances and a 100,000-private-point offer from Katsuragi.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [
+        "evt.y1.v045.katsuragi-family-parcel-payment"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.028",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        100,
+        103
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Katsuragi says his twin sister is chronically unwell and cared for by relatives after their parents died; Sudō sympathizes, but this family history is Katsuragi's testimony.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [
+        "evt.y1.v045.katsuragi-family-parcel-payment"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.029",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        101,
+        103
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Katsuragi arranges payment through Kiyotaka rather than directly and separately offers Kiyotaka 10,000 points for assisting, to conceal the source of the transaction.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [
+        "evt.y1.v045.katsuragi-family-parcel-payment"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.030",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        104
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Kiyotaka later reports that Sudō sent the family package and provided video proof without detection; receipt by the sister remains unknown.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.katsuragi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [
+        "evt.y1.v045.katsuragi-family-parcel-payment"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.031",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        105,
+        106
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "Ike and Yamauchi give Katsuragi a birthday cake that has melted; Katsuragi is startled and suspects harassment rather than appreciating their intended kindness.",
+      "actor_ids": [
+        "actor.katsuragi",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.032",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        108
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "A temporary school dormitory water outage triggers announced restrictions and free water distribution; the emergency supply later proves insufficient.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.033",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        112,
+        116
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Suzune repeatedly uses an oblique turtle analogy to request help, eventually admitting her arm is stuck inside a water bottle.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.034",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        118,
+        120
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "During the water shortage Kiyotaka tries multiple ways to obtain water to free Suzune's arm; she rejects certain helpers out of embarrassment or distrust.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.035",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        120,
+        122
+      ],
+      "source_mode": "REPORTED_BY_CHARACTER",
+      "primary_claim": "Suzune suspects the Dragon-group VIP Kushida may have helped reveal her identity, but admits she has no evidence; her suspicion is not a verified betrayal.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [
+        "evt.y1.v04.zodiac-dragon-vip-disclosure"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.036",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        125,
+        131
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Horikita avoids exposing her embarrassing trapped-hand situation; after Sakura supplies water the bottle is removed, and she asks Kiyotaka to keep it private.",
+      "actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida",
+        "actor.airi-sakura"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.037",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        132,
+        135
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Yamauchi asks Kiyotaka to deliver his love letter to Sakura and initially offers private points as inducement, which Kiyotaka advises against.",
+      "actor_ids": [
+        "actor.haruki-yamauchi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.038",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        136,
+        142
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sakura initially mistakes the indirect love-letter delivery as a confession from Kiyotaka; he clarifies that another classmate is its sender.",
+      "actor_ids": [
+        "actor.haruki-yamauchi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura",
+        "actor.kikyo-kushida"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.039",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        144,
+        147
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Sakura privately contacts Kiyotaka about her anxiety before answering Yamauchi and requests support rather than a predetermined answer.",
+      "actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji",
+        "actor.haruki-yamauchi"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.040",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        149,
+        151
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Sakura communicates a respectful refusal of Yamauchi's confession with Kiyotaka nearby for support; Yamauchi hears and accepts the decision.",
+      "actor_ids": [
+        "actor.airi-sakura",
+        "actor.haruki-yamauchi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.041",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 5,
+      "pdf_pages": [
+        151,
+        152
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Yamauchi expresses disappointment, thanks Kiyotaka and chooses to move on after Sakura's refusal, without demonstrating a permanent change.",
+      "actor_ids": [
+        "actor.haruki-yamauchi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.airi-sakura"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.042",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        153,
+        156
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Karuizawa says she expects the Rabbit VIP reward in September and worries about spending too freely; Kiyotaka advises retaining some private points.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [
+        "evt.y1.v04.zodiac-rabbit-reward"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.043",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        157,
+        159
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Karuizawa believes the school does not know the bullying behind her former absences and low grades and describes failed attempts to seek help; her account is personal testimony.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.044",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        160,
+        162
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka requires Karuizawa to attend the pool as part of an undisclosed operation, invoking their unequal relationship; she reluctantly agrees.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "related_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.045",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        163,
+        165
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka invokes the private water-bottle favor to persuade Suzune to attend the group pool outing despite her initial refusal.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.ken-sudo",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.046",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        169,
+        171
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "At the pool the boys' unusual behavior raises suspicion; Kiyotaka receives covert messages from Karuizawa, whose role is not yet disclosed to the others.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.ken-sudo",
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi"
+      ],
+      "related_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.047",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        177,
+        182
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Students observe vice president Nagumo lead a decisive recreational volleyball performance, attracting a strong peer following.",
+      "actor_ids": [
+        "actor.nagumo",
+        "actor.honami-ichinose",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.048",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        180,
+        182
+      ],
+      "source_mode": "SELF_DESCRIPTION",
+      "primary_claim": "Ichinose says she joined the student council after an initial rejection and attributes a subsequent approval to Nagumo's role; details of decisions are her account.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.nagumo",
+        "actor.manabu-horikita",
+        "actor.suzune-horikita"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.049",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        183,
+        189
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "In a Class D versus B pool-volleyball contest, Sudō supplies most of D's competitive strength and D wins two consecutive sets.",
+      "actor_ids": [
+        "actor.ken-sudo",
+        "actor.honami-ichinose",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.050",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        188,
+        190
+      ],
+      "source_mode": "INNER_MONOLOGUE",
+      "primary_claim": "Kiyotaka deliberately plays clumsily when noticing Ichinose scrutinize him; Suzune later suspects he is concealing his physical ability.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.honami-ichinose"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.051",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        193,
+        196
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Kiyotaka raises possible expulsions as leverage while holding a hard item Karuizawa gave him; he breaks and discards plastic pieces without expelling anyone. The later recording-card revelation contextualizes the item, but this passage never names it.",
+      "actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "related_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.052",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        197,
+        199
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Karuizawa avoids exposing her scar and initially refuses to swim without a cover; Kiyotaka commands and pushes her into the pool, after which she pulls him in. His coercion is not consent.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.053",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        205,
+        212
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "Ike organizes an invasive plan to secretly film girls changing, with equipment assistance attributed to Sotomura; Kiyotaka participates superficially while privately seeking to contain harm.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji",
+        "actor.sotomura"
+      ],
+      "related_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.054",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        213,
+        214
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "The boys initiate their unauthorized hidden-camera plan in the pool changing area; their subsequent failure does not erase the privacy violation attempted.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.ken-sudo"
+      ],
+      "related_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.055",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        220,
+        221
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "A delayed female-viewpoint sequence reveals Karuizawa covertly neutralized the recording at Kiyotaka's prior request while keeping her action hidden from the perpetrators.",
+      "actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "related_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.056",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        222,
+        223
+      ],
+      "source_mode": "OBSERVED",
+      "primary_claim": "After the pool visit, the three would-be voyeurs discover no image files in the returned storage; the narration confirms Karuizawa had secured the real material earlier.",
+      "actor_ids": [
+        "actor.kanji-ike",
+        "actor.haruki-yamauchi",
+        "actor.ken-sudo",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "related_event_ids": [
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    },
+    {
+      "record_id": "y1v45.ev.057",
+      "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        219,
+        221
+      ],
+      "source_mode": "NARRATED",
+      "primary_claim": "In the girls' locker-area supplementary perspective, Ichinose approaches shy Sakura gently while Karuizawa coordinates with nearby friends for a separate concealed purpose.",
+      "actor_ids": [
+        "actor.honami-ichinose",
+        "actor.airi-sakura",
+        "actor.kikyo-kushida",
+        "actor.kei-karuizawa"
+      ],
+      "related_event_ids": [],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "exact PDF span",
+        "source narrator vs actor speaker",
+        "time of occurrence vs time of exposition",
+        "actor knowledge acquisition",
+        "ties to earlier volume must preserve original provenance",
+        "no psychological diagnostic leap"
+      ]
+    }
+  ],
+  "behavioral_cases": [
+    {
+      "case_id": "y1v45.case.mio-ibuki.acknowledge-anxiety-outside-spy-role",
+      "case_file": "data/canon/consolidated/behavioral_cases/mio-ibuki/acknowledge-anxiety-outside-spy-role.json",
+      "primary_actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        24,
+        26
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.mio-ibuki.pair-with-rival-for-fortune-reading",
+      "case_file": "data/canon/consolidated/behavioral_cases/mio-ibuki/pair-with-rival-for-fortune-reading.json",
+      "primary_actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        29,
+        32
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.katsuragi.help-stranded-elevator-rivals",
+      "case_file": "data/canon/consolidated/behavioral_cases/katsuragi/help-stranded-elevator-rivals.json",
+      "primary_actor_id": "actor.katsuragi",
+      "pdf_pages": [
+        47,
+        48
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.katsuragi.petition-to-contact-sick-twin",
+      "case_file": "data/canon/consolidated/behavioral_cases/katsuragi/petition-to-contact-sick-twin.json",
+      "primary_actor_id": "actor.katsuragi",
+      "pdf_pages": [
+        91,
+        93
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.katsuragi.fund-risky-family-delivery",
+      "case_file": "data/canon/consolidated/behavioral_cases/katsuragi/fund-risky-family-delivery.json",
+      "primary_actor_id": "actor.katsuragi",
+      "pdf_pages": [
+        97,
+        103
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.ken-sudo.complete-family-parcel-task",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/complete-family-parcel-task.json",
+      "primary_actor_id": "actor.ken-sudo",
+      "pdf_pages": [
+        100,
+        104
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.manabu-horikita.uphold-outside-contact-ban",
+      "case_file": "data/canon/consolidated/behavioral_cases/manabu-horikita/uphold-outside-contact-ban.json",
+      "primary_actor_id": "actor.manabu-horikita",
+      "pdf_pages": [
+        91,
+        93
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.manabu-horikita.invite-kiyotaka-into-student-council",
+      "case_file": "data/canon/consolidated/behavioral_cases/manabu-horikita/invite-kiyotaka-into-student-council.json",
+      "primary_actor_id": "actor.manabu-horikita",
+      "pdf_pages": [
+        70,
+        73
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.suzune-horikita.analyze-fortune-reading-as-patterns",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/analyze-fortune-reading-as-patterns.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        15,
+        16
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.suzune-horikita.request-help-while-concealing-embarrassment",
+      "case_file": "data/canon/consolidated/behavioral_cases/suzune-horikita/request-help-while-concealing-embarrassment.json",
+      "primary_actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        112,
+        131
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.airi-sakura.deliver-respectful-romantic-refusal",
+      "case_file": "data/canon/consolidated/behavioral_cases/airi-sakura/deliver-respectful-romantic-refusal.json",
+      "primary_actor_id": "actor.airi-sakura",
+      "pdf_pages": [
+        144,
+        151
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.haruki-yamauchi.accept-sakura-rejection",
+      "case_file": "data/canon/consolidated/behavioral_cases/haruki-yamauchi/accept-sakura-rejection.json",
+      "primary_actor_id": "actor.haruki-yamauchi",
+      "pdf_pages": [
+        149,
+        152
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.honami-ichinose.initiate-friendly-volleyball-challenge",
+      "case_file": "data/canon/consolidated/behavioral_cases/honami-ichinose/initiate-friendly-volleyball-challenge.json",
+      "primary_actor_id": "actor.honami-ichinose",
+      "pdf_pages": [
+        182,
+        189
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.ken-sudo.lead-volleyball-under-pressure",
+      "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/lead-volleyball-under-pressure.json",
+      "primary_actor_id": "actor.ken-sudo",
+      "pdf_pages": [
+        183,
+        189
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.kiyotaka-ayanokoji.conceal-sport-capacity-during-scouting",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/conceal-sport-capacity-during-scouting.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        188,
+        190
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.kiyotaka-ayanokoji.mediate-illicit-delivery-proposal",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/mediate-illicit-delivery-proposal.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        97,
+        104
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.kei-karuizawa.quietly-prevent-recording-abuse",
+      "case_file": "data/canon/consolidated/behavioral_cases/kei-karuizawa/quietly-prevent-recording-abuse.json",
+      "primary_actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        220,
+        221
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.kiyotaka-ayanokoji.quietly-counter-invasive-pool-plot",
+      "case_file": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/quietly-counter-invasive-pool-plot.json",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        163,
+        165,
+        205,
+        223
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.kanji-ike.attempt-invasive-pool-recording",
+      "case_file": "data/canon/consolidated/behavioral_cases/kanji-ike/attempt-invasive-pool-recording.json",
+      "primary_actor_id": "actor.kanji-ike",
+      "pdf_pages": [
+        205,
+        214
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure",
+      "case_file": "data/canon/consolidated/behavioral_cases/kei-karuizawa/handle-pool-scar-avoidance-under-pressure.json",
+      "primary_actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        197,
+        199
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    },
+    {
+      "case_id": "y1v45.case.nagumo.lead-older-students-volleyball",
+      "case_file": "data/canon/consolidated/behavioral_cases/nagumo/lead-older-students-volleyball.json",
+      "primary_actor_id": "actor.nagumo",
+      "pdf_pages": [
+        177,
+        182
+      ],
+      "semantic_review": "ASSISTANT_SECOND_PASS_PDF_MATCHED_INDEPENDENT_REVIEW_PENDING",
+      "reviewed_by_assistant": true,
+      "verified": false,
+      "required_checks": [
+        "actor actually acted, not merely mentioned",
+        "supported result and bounded counterfactual",
+        "no legacy source rewrite",
+        "misconduct described but not prescribed",
+        "retrospective narrative never injected into prior belief state"
+      ]
+    }
+  ],
+  "release_gate": {
+    "assistant_individual_semantic_review": "COMPLETED_PDF_SECOND_PASS",
+    "external_independent_review": "NOT_PERFORMED",
+    "operator_approval": "NOT_REQUESTED",
+    "individual_verified_count": 0,
+    "engine_memory_admission": false,
+    "exam_executable": false,
+    "assistant_second_pass_count": 78,
+    "independent_review_pending_count": 78
+  },
+  "global_promotion": "BLOCKED_PENDING_INDEPENDENT_ADVERSARIAL_REVIEW_AND_OPERATOR_APPROVAL",
+  "retrospective_policy": "docs/adr/0012-cumulative-cross-volume-revelations.md",
+  "notes": [
+    "New evidence supplements previous event dossiers but does not mark V3 Ryūen–Katsuragi contract terms as known.",
+    "V4 Zodiac VIP selection algorithm remains unknown.",
+    "Reader learns about pool recording countermeasure later; the actors involved know at the earlier event time, not all peers.",
+    "Do not treat undiscovered rule violation as formal permission.",
+    "No copyrighted complete PDF committed.",
+    "Second-pass review of 57 source evidences and 21 primary-actor cases is assistant source concordance, not independent adversarial signoff; verified remains false and memory/executable gates remain blocked."
+  ],
+  "review_completed_at": "2026-10-24",
+  "reviewer_scope": "ASSISTANT_SECOND_SOURCE_PASS_NOT_INDEPENDENT_HUMAN_OR_THIRD_PARTY_SIGNOFF",
+  "findings": [
+    {
+      "id": "V45-SEM-001",
+      "severity": "MEDIUM",
+      "status": "REMEDIATED",
+      "targets": [
+        "y1v45.ev.014",
+        "y1v45.case.katsuragi.help-stranded-elevator-rivals"
+      ],
+      "pdf_pages": [
+        47,
+        48
+      ],
+      "note": "Rescue by staff remotely; fortuitous simultaneous button tests did not operate lift; Katsuragi coordinated according to Kiyotaka's inference."
+    },
+    {
+      "id": "V45-SEM-002",
+      "severity": "MEDIUM",
+      "status": "REMEDIATED",
+      "targets": [
+        "y1v45.ev.020",
+        "evt.y1.v03.island-class-d-leader-replacement"
+      ],
+      "pdf_pages": [
+        70,
+        71
+      ],
+      "note": "Tachibana expressly hears Manabu disclose covert island final leader. Examination committee already had restricted access, homeroom teachers reportedly did not."
+    },
+    {
+      "id": "V45-SEM-003",
+      "severity": "MEDIUM",
+      "status": "REMEDIATED",
+      "targets": [
+        "y1v45.ev.027"
+      ],
+      "pdf_pages": [
+        97,
+        101
+      ],
+      "note": "Kiyotaka recruits Sudō, and Katsuragi supplies offer and funding; original phrasing imprecisely attributed initial request to Katsuragi."
+    },
+    {
+      "id": "V45-SEM-004",
+      "severity": "MEDIUM",
+      "status": "REMEDIATED_WITH_INFERENCE_GATE",
+      "targets": [
+        "y1v45.ev.051",
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ],
+      "pdf_pages": [
+        193,
+        196,
+        220,
+        223
+      ],
+      "note": "Earlier unnamed hard plastic object destroyed by Kiyotaka is contextualized by later card swap; the identity is inferred, not explicitly named at earlier time, and graph link is bidirectional."
+    },
+    {
+      "id": "V45-SEM-005",
+      "severity": "LOW",
+      "status": "REMEDIATED",
+      "targets": [
+        "y1v45.case.nagumo.lead-older-students-volleyball",
+        "y1v45.case.honami-ichinose.initiate-friendly-volleyball-challenge"
+      ],
+      "pdf_pages": [
+        177,
+        182,
+        183,
+        189
+      ],
+      "note": "Removed Manabu/Nagumo as unrelated present participants in the selected behavioral demonstrations; their council discussion remains source context."
+    }
+  ]
+}

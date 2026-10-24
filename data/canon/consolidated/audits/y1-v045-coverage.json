@@ -1,0 +1,123 @@
+{
+  "schema_version": "volume-coverage-v1",
+  "source": "ln.y1.v045.sevenseas.en.operator-provided",
+  "pdf_pages": 227,
+  "chapters": [
+    {
+      "chapter": 1,
+      "start_pdf_page": 10,
+      "end_pdf_page": 10
+    },
+    {
+      "chapter": 2,
+      "start_pdf_page": 11,
+      "end_pdf_page": 48
+    },
+    {
+      "chapter": 3,
+      "start_pdf_page": 49,
+      "end_pdf_page": 107
+    },
+    {
+      "chapter": 4,
+      "start_pdf_page": 108,
+      "end_pdf_page": 131
+    },
+    {
+      "chapter": 5,
+      "start_pdf_page": 132,
+      "end_pdf_page": 152
+    },
+    {
+      "chapter": 6,
+      "start_pdf_page": 153,
+      "end_pdf_page": 204
+    },
+    {
+      "chapter": 7,
+      "start_pdf_page": 205,
+      "end_pdf_page": 223
+    }
+  ],
+  "records": 57,
+  "chapter_evidence_counts": {
+    "1": 1,
+    "2": 13,
+    "3": 17,
+    "4": 5,
+    "5": 5,
+    "6": 11,
+    "7": 5
+  },
+  "semantic_review": "ASSISTANT_SECOND_PASS_PDF_COMPLETED_INDEPENDENT_REVIEW_PENDING",
+  "release": "DRAFT_NOT_AUTHORIZED",
+  "extraction_policy": "Selective value-based extraction, including the extracurricular short stories because they reveal previous scene causes and participant knowledge.",
+  "open_findings": [
+    "Independent adversarial or human source review and operator merge approval remain pending",
+    "Historical A/C island contract terms are not disclosed here",
+    "Zodiac VIP role selection algorithm is not disclosed here",
+    "School rules on points vs prohibition require cross-volume comparison",
+    "Pool voyeurism must be descriptive privacy violation and prevention, never practical instructions"
+  ],
+  "behavioral_cases": 21,
+  "cases": 21,
+  "coverage_status": "SELECTIVE_SOURCE_EXTRACTION_ASSISTANT_SECOND_PASS_COMPLETE_INDEPENDENT_RELEASE_GATES_BLOCKED",
+  "global_character_count": 80,
+  "global_behavioral_case_count": 202,
+  "source_window_review_register": "data/canon/consolidated/audits/source-review-register-y1-v045.json",
+  "operator_release": "NOT_REQUESTED",
+  "pending_semantic_items": 0,
+  "source_fixes": [
+    {
+      "id": "V45-CASE-PAGE-001",
+      "severity": "MEDIUM",
+      "resolution": "Case page anchor changed from unsourced 95 to 97 while PDF 104 remains supported. The earliest conversation p95 may be included only after extracting direct evidence.",
+      "case_id": "y1v45.case.kiyotaka-ayanokoji.mediate-illicit-delivery-proposal"
+    },
+    {
+      "id": "V45-SEM-001",
+      "severity": "MEDIUM",
+      "resolution": "Rescue by staff remotely; fortuitous simultaneous button tests did not operate lift; Katsuragi coordinated according to Kiyotaka's inference.",
+      "targets": [
+        "y1v45.ev.014",
+        "y1v45.case.katsuragi.help-stranded-elevator-rivals"
+      ]
+    },
+    {
+      "id": "V45-SEM-002",
+      "severity": "MEDIUM",
+      "resolution": "Tachibana expressly hears Manabu disclose covert island final leader. Examination committee already had restricted access, homeroom teachers reportedly did not.",
+      "targets": [
+        "y1v45.ev.020",
+        "evt.y1.v03.island-class-d-leader-replacement"
+      ]
+    },
+    {
+      "id": "V45-SEM-003",
+      "severity": "MEDIUM",
+      "resolution": "Kiyotaka recruits Sudō, and Katsuragi supplies offer and funding; original phrasing imprecisely attributed initial request to Katsuragi.",
+      "targets": [
+        "y1v45.ev.027"
+      ]
+    },
+    {
+      "id": "V45-SEM-004",
+      "severity": "MEDIUM",
+      "resolution": "Earlier unnamed hard plastic object destroyed by Kiyotaka is contextualized by later card swap; the identity is inferred, not explicitly named at earlier time, and graph link is bidirectional.",
+      "targets": [
+        "y1v45.ev.051",
+        "evt.y1.v045.pool-invasion-and-suppression"
+      ]
+    },
+    {
+      "id": "V45-SEM-005",
+      "severity": "LOW",
+      "resolution": "Removed Manabu/Nagumo as unrelated present participants in the selected behavioral demonstrations; their council discussion remains source context.",
+      "targets": [
+        "y1v45.case.nagumo.lead-older-students-volleyball",
+        "y1v45.case.honami-ichinose.initiate-friendly-volleyball-challenge"
+      ]
+    }
+  ],
+  "pending_independent_review_items": 78
+}

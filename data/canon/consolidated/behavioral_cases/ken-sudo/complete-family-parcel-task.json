@@ -1,0 +1,40 @@
+{
+  "id": "y1v45.case.ken-sudo.complete-family-parcel-task",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "complete family parcel task",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Agrees to deliver Katsuragi's birthday package during an off-campus basketball tournament and later reports task completion.",
+  "observed_result": "Kiyotaka says proof of mailing was obtained without detected interception; receipt by the sister is unknown.",
+  "epistemic_limits": "Source attests mailing, not a reliable method for bypassing security or repeated success; avoid procedural instructions.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      100,
+      104
+    ],
+    "chapter": 3,
+    "source_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.katsuragi",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "social",
+    "resources"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "social",
+    "resources"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.028",
+    "y1v45.ev.030"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

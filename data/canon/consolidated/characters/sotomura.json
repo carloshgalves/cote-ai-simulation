@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v02.sevenseas.en.operator-provided",
-    "ln.y1.v04.sevenseas.en.operator-provided"
+    "ln.y1.v04.sevenseas.en.operator-provided",
+    "ln.y1.v045.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -76,11 +77,23 @@
       "context_evidence_refs": [
         "y1v4.ev.050"
       ]
+    },
+    "privacy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.053"
+      ]
+    },
+    "misconduct": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v45.ev.053"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

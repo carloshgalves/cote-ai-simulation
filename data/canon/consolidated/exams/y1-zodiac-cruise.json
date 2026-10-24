@@ -4,7 +4,8 @@
   "name": "Year 1 cruise ship Zodiac/VIP mixed-class examination",
   "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
   "source_coverage": [
-    "ln.y1.v04.sevenseas.en.operator-provided"
+    "ln.y1.v04.sevenseas.en.operator-provided",
+    "ln.y1.v045.sevenseas.en.operator-provided"
   ],
   "source_pdf_sha256": "1d587b01242cd576fa2b0627222329d1bf1c23b12d206ad63f7a590f79fe9cc8",
   "location": "School-provided cruise ship (private group rooms)",
@@ -272,7 +273,9 @@
     "y1v4.ev.126",
     "y1v4.ev.127",
     "y1v4.ev.128",
-    "y1v4.ev.132"
+    "y1v4.ev.132",
+    "y1v45.ev.035",
+    "y1v45.ev.042"
   ],
   "open_questions": [
     "Exact VIP allocation algorithm not demonstrated; Ryūen claims a pattern but this is not a normative school rule",
@@ -281,7 +284,8 @@
     "Calendar day three versus day four source wording conflict",
     "Private-point totals do not disclose each actual receiver's identity",
     "What concrete school procedure applies to coercion and misuse of phone evidence",
-    "How discretionary instructor placement of class representatives interacts with criteria for other group members remains unspecified."
+    "How discretionary instructor placement of class representatives interacts with criteria for other group members remains unspecified.",
+    "The 4.5 account provides no complete VIP role selection algorithm; Suzune's suspicion of Kushida is explicitly unproven."
   ],
   "simulation_policy": "REFERENCE_ONLY: Requires a separate verified executable ExamSpec, knowledge fences, timing semantics and operator release before any Zodiac/VIP runtime.",
   "group_assignment_discretion": {
@@ -295,5 +299,17 @@
       "y1v4.ev.132"
     ],
     "actor_knowledge_scope": "KIYOTAKA_OVERHEARS_PRIVATE_TEACHER_DISCUSSION"
-  }
+  },
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v045.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v45.ev.035",
+        "y1v45.ev.042"
+      ],
+      "comment": "Horikita suspects Kushida leaked Dragon's VIP but has no proof; Karuizawa privately expects 500000 Rabbit VIP points in September, not yet credited.",
+      "epistemic": "BELIEF_AND_PRIVATE_REWARD_EXPECTATION",
+      "claim_promotion": "CONTEXT_ONLY_NO_EXECUTABLE_PROMOTION"
+    }
+  ]
 }

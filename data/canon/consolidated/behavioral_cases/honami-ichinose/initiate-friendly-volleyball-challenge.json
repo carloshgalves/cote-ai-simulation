@@ -1,0 +1,42 @@
+{
+  "id": "y1v45.case.honami-ichinose.initiate-friendly-volleyball-challenge",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "initiate friendly volleyball challenge",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Invites students from another class to play pool volleyball and proposes a friendly lunch bet, then competes and accepts losing.",
+  "observed_result": "Class D wins; both groups subsequently obtain lunch together.",
+  "epistemic_limits": "Her interaction is voluntary social competition; it does not demonstrate authority to set official exam rules. Nagumo and Manabu are discussed in the earlier council-related conversation, not participants in Ichinose's Class B versus Class D match.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      182,
+      189
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.ken-sudo",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "sports"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "leadership",
+    "sports"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.047",
+    "y1v45.ev.048",
+    "y1v45.ev.049"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

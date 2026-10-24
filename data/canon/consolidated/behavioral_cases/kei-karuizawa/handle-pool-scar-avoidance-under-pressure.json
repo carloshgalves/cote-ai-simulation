@@ -1,0 +1,38 @@
+{
+  "id": "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "handle pool scar avoidance under pressure",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Initially refuses to expose a body scar and resists Kiyotaka pressuring her to swim without her protective cover.",
+  "observed_result": "After an unwanted push into the pool she responds angrily and pulls him in, in a mixed emotional episode.",
+  "epistemic_limits": "Kiyotaka's forced actions are not Karuizawa's consent or evidence that coercive exposure cures trauma.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      197,
+      199
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "trauma",
+    "emotion"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "trauma",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.052"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

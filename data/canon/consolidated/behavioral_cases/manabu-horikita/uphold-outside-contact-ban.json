@@ -1,0 +1,41 @@
+{
+  "id": "y1v45.case.manabu-horikita.uphold-outside-contact-ban",
+  "actor_id": "actor.manabu-horikita",
+  "primary_actor_id": "actor.manabu-horikita",
+  "title": "uphold outside contact ban",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Explains that outside contact is forbidden even one-way and tells Katsuragi that private points do not nullify a clear school prohibition.",
+  "observed_result": "The formal request is denied despite Katsuragi's humanitarian reason.",
+  "epistemic_limits": "Separates valid policy from possible failure of enforcement; cannot establish that every past exception was denied.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      91,
+      93
+    ],
+    "chapter": 3,
+    "source_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.katsuragi",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "governance",
+    "leadership"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "governance",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.024",
+    "y1v45.ev.025",
+    "y1v45.ev.026"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

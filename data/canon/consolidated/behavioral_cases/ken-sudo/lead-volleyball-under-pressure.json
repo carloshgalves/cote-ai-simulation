@@ -1,0 +1,40 @@
+{
+  "id": "y1v45.case.ken-sudo.lead-volleyball-under-pressure",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "lead volleyball under pressure",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Uses athletic skill and sustained effort to drive Class D in the pool-volleyball match against Class B.",
+  "observed_result": "Class D wins two sets, and other students praise his contribution.",
+  "epistemic_limits": "Performance in this recreational game does not predict all academics, combat or professional sports outcomes.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      183,
+      189
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.honami-ichinose",
+    "actor.suzune-horikita",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "leadership"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "sports",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.049"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

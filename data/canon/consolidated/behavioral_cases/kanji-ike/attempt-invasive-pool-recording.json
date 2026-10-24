@@ -1,0 +1,42 @@
+{
+  "id": "y1v45.case.kanji-ike.attempt-invasive-pool-recording",
+  "actor_id": "actor.kanji-ike",
+  "primary_actor_id": "actor.kanji-ike",
+  "title": "attempt invasive pool recording",
+  "context": "Y1 Volume 4.5 final summer vacation episode. Later flashbacks and private narration do not imply global contemporaneous knowledge.",
+  "observed_actions": "Organizes a covert plan to spy on girls changing without consent and initiates it with companions.",
+  "observed_result": "The scheme ultimately fails because another actor defeats the recording; harm was attempted even though the returned file is empty.",
+  "epistemic_limits": "This is misconduct requiring condemnation in simulation context, never an endorsed skill or how-to.",
+  "source": {
+    "work_id": "ln.y1.v045.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      205,
+      214
+    ],
+    "chapter": 7,
+    "source_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.haruki-yamauchi",
+    "actor.ken-sudo",
+    "actor.kiyotaka-ayanokoji",
+    "actor.sotomura"
+  ],
+  "capabilities_supported": [
+    "privacy",
+    "misconduct"
+  ],
+  "information_available": "Actor-scoped at actual event time only. Later source explanations can refine the dossier without backdating belief, especially in retrospective final chapter.",
+  "counterfactual_test": "Different support, actor health, social context and private knowledge may change the result; no forced repetition or universal success.",
+  "topics": [
+    "privacy",
+    "misconduct"
+  ],
+  "evidence_refs": [
+    "y1v45.ev.053",
+    "y1v45.ev.054"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SECOND_PDF_PASS_COMPLETE_INDEPENDENT_AUDIT_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

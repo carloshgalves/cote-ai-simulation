@@ -61,7 +61,11 @@ def problems(s):
     require(any(x["actor"]=="actor.arisu-sakayanagi" for rel in white["later_revelations"] for x in rel["actor_knowledge"]),"private Arisu knowledge gate")
     vip=doss["evt.y1.v04.zodiac-vip-surname-order-pattern"]
     require(vip["status"]=="PARTIALLY_EXPLAINED","surname pattern remains actor explanation, not formal certified algorithm")
-    require("evt.y1.v04.zodiac-dragon-vip-disclosure" in doss and doss["evt.y1.v04.zodiac-dragon-vip-disclosure"]["status"]=="OPEN","Kushida VIP leak not retroactively proved")
+    require(doss["evt.y1.v04.zodiac-dragon-vip-disclosure"]["status"]=="PARTIALLY_EXPLAINED","Kushida direct V5 acknowledgment supplements older Dragon VIP suspicion without certifying hidden school formula")
+    require("y1v5.ev.074" in [rid for rel in doss["evt.y1.v04.zodiac-dragon-vip-disclosure"]["later_revelations"] for rid in rel["evidence_refs"]],"Dragon disclosure sourced in V5 private dialogue")
+    require(any("anonymous" in x.lower() for x in v5_trap["unresolved"]),"anonymous sender remains unknown")
+    require(any("Ibuki" in x and "Kinoshita" in x for x in v5_trap["unresolved"]),"source conflict not erased")
+    require("y1v5.ev.075" in [r for rel in v5_trap["later_revelations"] for r in rel["evidence_refs"]],"Ryuen humiliating objective traced")
     reverse={}
     for key,d in doss.items():
         for aid in set(d["canonical_event_sources"]+[ref for rel in d["later_revelations"] for ref in rel["evidence_refs"]]):
@@ -94,7 +98,7 @@ mutants=[
  ("promote inferential pool card to explicit proof",lambda s:s["dossiers"]["evt.y1.v045.pool-invasion-and-suppression"]["later_revelations"][0]["resolves_assertion_refs"].append("y1v45.ev.051")),
  ("move V5 report back into V4.5",lambda s:s["dossiers"]["evt.y1.v05.class-d-roster-leak-and-counterplay"]["later_revelations"][0].update(source_id="ln.y1.v045.sevenseas.en.operator-provided")),
  ("erase V5 undisclosed tape discrepancy",lambda s:s["dossiers"]["evt.y1.v05.class-d-roster-leak-and-counterplay"]["unresolved"].clear()),
- ("forge Kushida V4 leak proof",lambda s:s["dossiers"]["evt.y1.v04.zodiac-dragon-vip-disclosure"].update(status="RESOLVED")),
+ ("forge total school certification of Kushida V4 disclosure",lambda s:s["dossiers"]["evt.y1.v04.zodiac-dragon-vip-disclosure"].update(status="RESOLVED")),
  ("erase Arisu knowledge speaker",lambda s:s["dossiers"]["evt.y1.v05.sakayanagi-white-room-recognition"]["later_revelations"][0]["actor_knowledge"].clear()),
 
 ]

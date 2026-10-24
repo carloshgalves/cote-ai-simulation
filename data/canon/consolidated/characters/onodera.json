@@ -4,7 +4,8 @@
   "display_name": "Onodera",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+    "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -23,11 +24,36 @@
       "context_evidence_refs": [
         "y1v1.ev.119"
       ]
+    },
+    "sports": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.021",
+        "y1v5.ev.056"
+      ]
+    },
+    "cooperation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.021"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.021"
+      ]
+    },
+    "results": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.056"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Minimum volume-supported traits; no unstated skills, personalities or identity assertions.",
+  "semantic_audit_notes": "Minimum volume-supported traits; no unstated skills, personalities or identity assertions. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

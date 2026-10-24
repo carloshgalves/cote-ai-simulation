@@ -1,0 +1,847 @@
+{
+  "schema_version": "volume-page-index-v1",
+  "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+  "pages": {
+    "11": {
+      "evidence": [
+        "y1v5.ev.001"
+      ],
+      "cases": []
+    },
+    "13": {
+      "evidence": [
+        "y1v5.ev.002"
+      ],
+      "cases": []
+    },
+    "14": {
+      "evidence": [
+        "y1v5.ev.002",
+        "y1v5.ev.003"
+      ],
+      "cases": []
+    },
+    "15": {
+      "evidence": [
+        "y1v5.ev.003"
+      ],
+      "cases": []
+    },
+    "17": {
+      "evidence": [
+        "y1v5.ev.004"
+      ],
+      "cases": []
+    },
+    "18": {
+      "evidence": [
+        "y1v5.ev.005"
+      ],
+      "cases": []
+    },
+    "19": {
+      "evidence": [
+        "y1v5.ev.004",
+        "y1v5.ev.005",
+        "y1v5.ev.006"
+      ],
+      "cases": []
+    },
+    "20": {
+      "evidence": [
+        "y1v5.ev.006",
+        "y1v5.ev.007"
+      ],
+      "cases": []
+    },
+    "23": {
+      "evidence": [
+        "y1v5.ev.007"
+      ],
+      "cases": []
+    },
+    "24": {
+      "evidence": [
+        "y1v5.ev.008"
+      ],
+      "cases": []
+    },
+    "25": {
+      "evidence": [
+        "y1v5.ev.008"
+      ],
+      "cases": []
+    },
+    "26": {
+      "evidence": [
+        "y1v5.ev.009"
+      ],
+      "cases": []
+    },
+    "27": {
+      "evidence": [
+        "y1v5.ev.009"
+      ],
+      "cases": []
+    },
+    "28": {
+      "evidence": [
+        "y1v5.ev.010"
+      ],
+      "cases": [
+        "y1v5.case.arisu-sakayanagi.maintain-faction-support-withdraw-athletics"
+      ]
+    },
+    "30": {
+      "evidence": [
+        "y1v5.ev.010"
+      ],
+      "cases": [
+        "y1v5.case.arisu-sakayanagi.maintain-faction-support-withdraw-athletics"
+      ]
+    },
+    "31": {
+      "evidence": [
+        "y1v5.ev.011"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack"
+      ]
+    },
+    "34": {
+      "evidence": [
+        "y1v5.ev.011"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack"
+      ]
+    },
+    "39": {
+      "evidence": [
+        "y1v5.ev.012"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.propose-performance-optimized-lineup",
+        "y1v5.case.yosuke-hirata.mediate-athlete-roles-and-vote"
+      ]
+    },
+    "40": {
+      "evidence": [
+        "y1v5.ev.012",
+        "y1v5.ev.013"
+      ],
+      "cases": [
+        "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness"
+      ]
+    },
+    "42": {
+      "evidence": [
+        "y1v5.ev.013",
+        "y1v5.ev.014"
+      ],
+      "cases": []
+    },
+    "45": {
+      "evidence": [
+        "y1v5.ev.014"
+      ],
+      "cases": [
+        "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness",
+        "y1v5.case.suzune-horikita.propose-performance-optimized-lineup",
+        "y1v5.case.yosuke-hirata.mediate-athlete-roles-and-vote"
+      ]
+    },
+    "49": {
+      "evidence": [
+        "y1v5.ev.015"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.record-deliberately-limited-grip"
+      ]
+    },
+    "51": {
+      "evidence": [
+        "y1v5.ev.015",
+        "y1v5.ev.016"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.record-deliberately-limited-grip",
+        "y1v5.case.yosuke-hirata.protect-sensitive-participant-table"
+      ]
+    },
+    "52": {
+      "evidence": [
+        "y1v5.ev.016"
+      ],
+      "cases": [
+        "y1v5.case.yosuke-hirata.protect-sensitive-participant-table"
+      ]
+    },
+    "54": {
+      "evidence": [
+        "y1v5.ev.017"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack"
+      ]
+    },
+    "55": {
+      "evidence": [
+        "y1v5.ev.017",
+        "y1v5.ev.018"
+      ],
+      "cases": []
+    },
+    "56": {
+      "evidence": [
+        "y1v5.ev.018"
+      ],
+      "cases": []
+    },
+    "57": {
+      "evidence": [
+        "y1v5.ev.019"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.practice-coaching-and-temper"
+      ]
+    },
+    "59": {
+      "evidence": [
+        "y1v5.ev.020"
+      ],
+      "cases": []
+    },
+    "60": {
+      "evidence": [
+        "y1v5.ev.019",
+        "y1v5.ev.020"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.practice-coaching-and-temper"
+      ]
+    },
+    "62": {
+      "evidence": [
+        "y1v5.ev.021"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.fail-to-synchronize-three-legged"
+      ]
+    },
+    "64": {
+      "evidence": [
+        "y1v5.ev.021",
+        "y1v5.ev.022"
+      ],
+      "cases": []
+    },
+    "66": {
+      "evidence": [
+        "y1v5.ev.022"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.fail-to-synchronize-three-legged"
+      ]
+    },
+    "68": {
+      "evidence": [
+        "y1v5.ev.023"
+      ],
+      "cases": []
+    },
+    "70": {
+      "evidence": [
+        "y1v5.ev.023"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack"
+      ]
+    },
+    "74": {
+      "evidence": [
+        "y1v5.ev.024"
+      ],
+      "cases": [
+        "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition"
+      ]
+    },
+    "77": {
+      "evidence": [],
+      "cases": [
+        "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition"
+      ]
+    },
+    "78": {
+      "evidence": [
+        "y1v5.ev.024",
+        "y1v5.ev.025"
+      ],
+      "cases": []
+    },
+    "81": {
+      "evidence": [
+        "y1v5.ev.025"
+      ],
+      "cases": []
+    },
+    "82": {
+      "evidence": [
+        "y1v5.ev.026"
+      ],
+      "cases": [
+        "y1v5.case.yosuke-hirata.protect-sensitive-participant-table"
+      ]
+    },
+    "85": {
+      "evidence": [
+        "y1v5.ev.026"
+      ],
+      "cases": [
+        "y1v5.case.yosuke-hirata.protect-sensitive-participant-table"
+      ]
+    },
+    "87": {
+      "evidence": [
+        "y1v5.ev.027"
+      ],
+      "cases": []
+    },
+    "88": {
+      "evidence": [
+        "y1v5.ev.027",
+        "y1v5.ev.028"
+      ],
+      "cases": [
+        "y1v5.case.rokusuke-koenji.withdraw-claimed-illness-under-pressure"
+      ]
+    },
+    "91": {
+      "evidence": [
+        "y1v5.ev.028"
+      ],
+      "cases": [
+        "y1v5.case.rokusuke-koenji.withdraw-claimed-illness-under-pressure"
+      ]
+    },
+    "92": {
+      "evidence": [
+        "y1v5.ev.029"
+      ],
+      "cases": [
+        "y1v5.case.airi-sakura.improve-to-not-last-in-sprint"
+      ]
+    },
+    "94": {
+      "evidence": [
+        "y1v5.ev.029",
+        "y1v5.ev.030"
+      ],
+      "cases": [
+        "y1v5.case.airi-sakura.improve-to-not-last-in-sprint",
+        "y1v5.case.mio-ibuki.lose-narrow-sprint-while-monitoring-rival",
+        "y1v5.case.suzune-horikita.edge-ibuki-in-sprint"
+      ]
+    },
+    "95": {
+      "evidence": [
+        "y1v5.ev.030",
+        "y1v5.ev.031"
+      ],
+      "cases": [
+        "y1v5.case.mio-ibuki.lose-narrow-sprint-while-monitoring-rival",
+        "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event",
+        "y1v5.case.suzune-horikita.edge-ibuki-in-sprint"
+      ]
+    },
+    "96": {
+      "evidence": [
+        "y1v5.ev.031"
+      ],
+      "cases": []
+    },
+    "97": {
+      "evidence": [
+        "y1v5.ev.032",
+        "y1v5.ev.033"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.be-targeted-in-group-contests"
+      ]
+    },
+    "98": {
+      "evidence": [],
+      "cases": [
+        "y1v5.case.yukimura.respond-to-low-athletic-ranks"
+      ]
+    },
+    "99": {
+      "evidence": [
+        "y1v5.ev.032",
+        "y1v5.ev.033"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.be-targeted-in-group-contests",
+        "y1v5.case.yukimura.respond-to-low-athletic-ranks"
+      ]
+    },
+    "100": {
+      "evidence": [
+        "y1v5.ev.034"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.physically-harass-sudo-in-flag-match"
+      ]
+    },
+    "104": {
+      "evidence": [
+        "y1v5.ev.034"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.physically-harass-sudo-in-flag-match"
+      ]
+    },
+    "105": {
+      "evidence": [
+        "y1v5.ev.035",
+        "y1v5.ev.036"
+      ],
+      "cases": [
+        "y1v5.case.katsuragi.restore-tug-team-coordination"
+      ]
+    },
+    "108": {
+      "evidence": [
+        "y1v5.ev.036"
+      ],
+      "cases": []
+    },
+    "110": {
+      "evidence": [
+        "y1v5.ev.035"
+      ],
+      "cases": [
+        "y1v5.case.katsuragi.restore-tug-team-coordination"
+      ]
+    },
+    "111": {
+      "evidence": [
+        "y1v5.ev.037"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.win-obstacles-through-balance"
+      ]
+    },
+    "112": {
+      "evidence": [
+        "y1v5.ev.037"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.win-obstacles-through-balance",
+        "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event"
+      ]
+    },
+    "113": {
+      "evidence": [
+        "y1v5.ev.038"
+      ],
+      "cases": [
+        "y1v5.case.kinoshita.take-part-in-disputed-collision-case",
+        "y1v5.case.suzune-horikita.be-targeted-in-group-contests"
+      ]
+    },
+    "115": {
+      "evidence": [
+        "y1v5.ev.038",
+        "y1v5.ev.039"
+      ],
+      "cases": [
+        "y1v5.case.kinoshita.take-part-in-disputed-collision-case"
+      ]
+    },
+    "117": {
+      "evidence": [
+        "y1v5.ev.039"
+      ],
+      "cases": []
+    },
+    "120": {
+      "evidence": [
+        "y1v5.ev.040"
+      ],
+      "cases": []
+    },
+    "123": {
+      "evidence": [
+        "y1v5.ev.040"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.be-targeted-in-group-contests"
+      ]
+    },
+    "124": {
+      "evidence": [
+        "y1v5.ev.041"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.serve-as-powerbase-in-cavalry"
+      ]
+    },
+    "125": {
+      "evidence": [],
+      "cases": [
+        "y1v5.case.yamada-albert.support-ryuen-against-sudo-cavalry"
+      ]
+    },
+    "129": {
+      "evidence": [
+        "y1v5.ev.041",
+        "y1v5.ev.042"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
+        "y1v5.case.ken-sudo.serve-as-powerbase-in-cavalry",
+        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack",
+        "y1v5.case.yamada-albert.support-ryuen-against-sudo-cavalry"
+      ]
+    },
+    "131": {
+      "evidence": [
+        "y1v5.ev.042"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
+        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack"
+      ]
+    },
+    "132": {
+      "evidence": [
+        "y1v5.ev.043"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.abandon-festival-after-provocation"
+      ]
+    },
+    "135": {
+      "evidence": [
+        "y1v5.ev.043",
+        "y1v5.ev.044"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.abandon-festival-after-provocation"
+      ]
+    },
+    "136": {
+      "evidence": [
+        "y1v5.ev.044",
+        "y1v5.ev.045"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
+      ]
+    },
+    "142": {
+      "evidence": [
+        "y1v5.ev.045"
+      ],
+      "cases": []
+    },
+    "144": {
+      "evidence": [
+        "y1v5.ev.046"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
+        "y1v5.case.kinoshita.take-part-in-disputed-collision-case"
+      ]
+    },
+    "149": {
+      "evidence": [
+        "y1v5.ev.046"
+      ],
+      "cases": [
+        "y1v5.case.kinoshita.take-part-in-disputed-collision-case"
+      ]
+    },
+    "150": {
+      "evidence": [
+        "y1v5.ev.047"
+      ],
+      "cases": []
+    },
+    "153": {
+      "evidence": [],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita"
+      ]
+    },
+    "156": {
+      "evidence": [
+        "y1v5.ev.047"
+      ],
+      "cases": []
+    },
+    "157": {
+      "evidence": [
+        "y1v5.ev.048"
+      ],
+      "cases": []
+    },
+    "159": {
+      "evidence": [
+        "y1v5.ev.048"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
+      ]
+    },
+    "160": {
+      "evidence": [
+        "y1v5.ev.049"
+      ],
+      "cases": []
+    },
+    "162": {
+      "evidence": [
+        "y1v5.ev.049"
+      ],
+      "cases": []
+    },
+    "163": {
+      "evidence": [
+        "y1v5.ev.050"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
+      ]
+    },
+    "167": {
+      "evidence": [
+        "y1v5.ev.050"
+      ],
+      "cases": []
+    },
+    "168": {
+      "evidence": [
+        "y1v5.ev.051"
+      ],
+      "cases": [
+        "y1v5.case.kikyo-kushida.volunteer-paid-mixed-event-substitution"
+      ]
+    },
+    "170": {
+      "evidence": [
+        "y1v5.ev.051"
+      ],
+      "cases": []
+    },
+    "171": {
+      "evidence": [
+        "y1v5.ev.052"
+      ],
+      "cases": []
+    },
+    "174": {
+      "evidence": [
+        "y1v5.ev.052",
+        "y1v5.ev.053"
+      ],
+      "cases": [
+        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates"
+      ]
+    },
+    "175": {
+      "evidence": [
+        "y1v5.ev.053"
+      ],
+      "cases": [
+        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
+        "y1v5.case.kikyo-kushida.volunteer-paid-mixed-event-substitution"
+      ]
+    },
+    "176": {
+      "evidence": [
+        "y1v5.ev.054"
+      ],
+      "cases": []
+    },
+    "180": {
+      "evidence": [
+        "y1v5.ev.054"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
+      ]
+    },
+    "181": {
+      "evidence": [
+        "y1v5.ev.055"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+        "y1v5.case.kiyotaka-ayanokoji.replace-miyake-as-relay-anchor"
+      ]
+    },
+    "183": {
+      "evidence": [
+        "y1v5.ev.055",
+        "y1v5.ev.056"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.create-relay-first-leg-lead"
+      ]
+    },
+    "184": {
+      "evidence": [],
+      "cases": [
+        "y1v5.case.ken-sudo.create-relay-first-leg-lead"
+      ]
+    },
+    "185": {
+      "evidence": [
+        "y1v5.ev.056",
+        "y1v5.ev.057",
+        "y1v5.ev.058"
+      ],
+      "cases": [
+        "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition"
+      ]
+    },
+    "186": {
+      "evidence": [
+        "y1v5.ev.058"
+      ],
+      "cases": [
+        "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition"
+      ]
+    },
+    "187": {
+      "evidence": [],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.sprint-against-manabu-with-obstruction",
+        "y1v5.case.manabu-horikita.accept-ayanokoji-relay-challenge"
+      ]
+    },
+    "188": {
+      "evidence": [
+        "y1v5.ev.057"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.replace-miyake-as-relay-anchor"
+      ]
+    },
+    "189": {
+      "evidence": [
+        "y1v5.ev.059"
+      ],
+      "cases": [
+        "y1v5.case.kiyotaka-ayanokoji.sprint-against-manabu-with-obstruction",
+        "y1v5.case.manabu-horikita.accept-ayanokoji-relay-challenge"
+      ]
+    },
+    "190": {
+      "evidence": [],
+      "cases": [
+        "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event"
+      ]
+    },
+    "191": {
+      "evidence": [
+        "y1v5.ev.059",
+        "y1v5.ev.060"
+      ],
+      "cases": [
+        "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event"
+      ]
+    },
+    "193": {
+      "evidence": [
+        "y1v5.ev.060"
+      ],
+      "cases": [
+        "y1v5.case.ken-sudo.return-apologize-and-serve-relay"
+      ]
+    },
+    "194": {
+      "evidence": [
+        "y1v5.ev.061"
+      ],
+      "cases": [
+        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates"
+      ]
+    },
+    "196": {
+      "evidence": [
+        "y1v5.ev.061",
+        "y1v5.ev.062"
+      ],
+      "cases": []
+    },
+    "198": {
+      "evidence": [
+        "y1v5.ev.062",
+        "y1v5.ev.063"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
+        "y1v5.case.kinoshita.take-part-in-disputed-collision-case",
+        "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation"
+      ]
+    },
+    "199": {
+      "evidence": [
+        "y1v5.ev.063",
+        "y1v5.ev.064"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
+        "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording",
+        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
+        "y1v5.case.kinoshita.take-part-in-disputed-collision-case"
+      ]
+    },
+    "200": {
+      "evidence": [
+        "y1v5.ev.064",
+        "y1v5.ev.065"
+      ],
+      "cases": [
+        "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation"
+      ]
+    },
+    "201": {
+      "evidence": [
+        "y1v5.ev.065",
+        "y1v5.ev.066"
+      ],
+      "cases": [
+        "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording"
+      ]
+    },
+    "202": {
+      "evidence": [
+        "y1v5.ev.067"
+      ],
+      "cases": [
+        "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private"
+      ]
+    },
+    "203": {
+      "evidence": [
+        "y1v5.ev.068"
+      ],
+      "cases": []
+    },
+    "204": {
+      "evidence": [
+        "y1v5.ev.067",
+        "y1v5.ev.068"
+      ],
+      "cases": [
+        "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private"
+      ]
+    }
+  }
+}

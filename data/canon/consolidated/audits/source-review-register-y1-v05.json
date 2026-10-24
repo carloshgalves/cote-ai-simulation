@@ -1703,10 +1703,10 @@
       "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/model-three-legged-cooperation.json",
       "primary_actor_id": "actor.yosuke-hirata",
       "pdf_pages": [
-        116,
-        117,
         62,
-        64
+        64,
+        116,
+        117
       ],
       "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
       "reviewed_by_assistant": false,
@@ -1724,10 +1724,10 @@
       "case_file": "data/canon/consolidated/behavioral_cases/yosuke-hirata/coordinate-red-coalition.json",
       "primary_actor_id": "actor.yosuke-hirata",
       "pdf_pages": [
-        105,
-        110,
         26,
-        31
+        31,
+        105,
+        110
       ],
       "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
       "reviewed_by_assistant": false,
@@ -1764,10 +1764,10 @@
       "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/win-sprint-and-obstacle-heats.json",
       "primary_actor_id": "actor.ken-sudo",
       "pdf_pages": [
-        111,
-        113,
         87,
-        89
+        89,
+        111,
+        113
       ],
       "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
       "reviewed_by_assistant": false,
@@ -2088,11 +2088,11 @@
       "case_file": "data/canon/consolidated/behavioral_cases/sou-shibata/earn-first-year-festival-mvp.json",
       "primary_actor_id": "actor.sou-shibata",
       "pdf_pages": [
+        95,
+        96,
         111,
         113,
-        191,
-        95,
-        96
+        191
       ],
       "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
       "reviewed_by_assistant": false,
@@ -2110,12 +2110,12 @@
       "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/leak-class-participation-to-opponent.json",
       "primary_actor_id": "actor.kikyo-kushida",
       "pdf_pages": [
+        74,
+        81,
         172,
         175,
         194,
-        196,
-        74,
-        81
+        196
       ],
       "semantic_review": "INITIAL_SOURCE_PASS_PENDING_CASE_RECHECK",
       "reviewed_by_assistant": false,

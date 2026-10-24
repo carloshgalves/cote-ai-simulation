@@ -2357,8 +2357,12 @@
         131,
         144,
         153,
+        172,
+        174,
+        175,
         198,
-        199
+        199,
+        200
       ],
       "semantic_review": "PENDING_INDIVIDUAL_CASE_RECHECK",
       "reviewed_by_assistant": false,
@@ -2396,6 +2400,7 @@
       "primary_actor_id": "actor.kakeru-ryuen",
       "pdf_pages": [
         199,
+        200,
         201
       ],
       "semantic_review": "PENDING_INDIVIDUAL_CASE_RECHECK",
@@ -2509,9 +2514,18 @@
       "case_file": "data/canon/consolidated/behavioral_cases/ken-sudo/return-apologize-and-serve-relay.json",
       "primary_actor_id": "actor.ken-sudo",
       "pdf_pages": [
+        55,
+        56,
+        136,
         163,
+        165,
+        166,
+        178,
+        179,
         180,
         181,
+        191,
+        192,
         193
       ],
       "semantic_review": "PENDING_INDIVIDUAL_CASE_RECHECK",
@@ -2595,9 +2609,14 @@
       "case_file": "data/canon/consolidated/behavioral_cases/kikyo-kushida/leak-lineup-and-threaten-classmates.json",
       "primary_actor_id": "actor.kikyo-kushida",
       "pdf_pages": [
+        172,
+        173,
         174,
         175,
         194,
+        195,
+        196,
+        198,
         199
       ],
       "semantic_review": "PENDING_INDIVIDUAL_CASE_RECHECK",
@@ -2686,7 +2705,12 @@
         54,
         70,
         129,
-        131
+        131,
+        136,
+        138,
+        141,
+        142,
+        187
       ],
       "semantic_review": "PENDING_INDIVIDUAL_CASE_RECHECK",
       "reviewed_by_assistant": false,
@@ -2958,9 +2982,17 @@
       "primary_actor_id": "actor.suzune-horikita",
       "pdf_pages": [
         136,
+        138,
         159,
         163,
-        180
+        165,
+        166,
+        178,
+        179,
+        180,
+        191,
+        192,
+        193
       ],
       "semantic_review": "PENDING_INDIVIDUAL_CASE_RECHECK",
       "reviewed_by_assistant": false,

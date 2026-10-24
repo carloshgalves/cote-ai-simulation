@@ -2396,20 +2396,18 @@
       "source": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "pdf_pages": [
-          18,
           191
         ],
         "chapter": 9,
         "edition": "Seven Seas English, user-supplied PDF",
         "verification": "ASSISTANT_INITIAL_DIRECT_PDF_SOURCE_PASS"
       },
-      "source_mode": "SOURCE_CONFLICT",
+      "source_mode": "SOURCE_CONFLICT_COMPARISON",
       "story_time": "Y1_SEPT_TO_EARLY_OCT_SPORTS_FESTIVAL",
       "narrative_revelation": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "chapter": 9,
         "pdf_pages": [
-          18,
           191
         ],
         "chapter_order": 9
@@ -2424,7 +2422,15 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "LOCAL_PARTICIPANT_ONLY_NOT_AUTOMATIC_GLOBAL_MEMORY",
       "portrayal_gate": "EPISODE_BOUNDED",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "comparison_source_locator": {
+        "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          18
+        ],
+        "source_mode": "OFFICIAL_PRINTED_RULES"
+      }
     }
   ]
 }

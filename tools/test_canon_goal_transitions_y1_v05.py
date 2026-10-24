@@ -49,7 +49,7 @@ def errors(dataset):
     sudo=by_id["y1v5.goal.ken-sudo.romantic-interest-shapes-mvp-motivation"]
     if "Never convert" not in sudo["simulation_guard"] or "reciprocation" not in sudo["simulation_guard"]:out.append("unearned romance")
     ho=by_id["y1v5.goal.suzune-horikita.individual-excellence-to-reciprocal-alliance"]
-    if "Class A" not in ho["observed_goal_or_means_after"] or "Manabu" not in ho["observed_goal_or_means_after"]:out.append("false change of distant Horikita aim")
+    if not ho["observed_goal_or_means_after"].startswith("Reach Class A and earn Manabu\'s respect with the assistance of reciprocal alliances"):out.append("false change of distant Horikita aim")
     kushida=by_id["y1v5.goal.kikyo-kushida.expulsion-prioritized-over-class-rank"]
     if "prioritize expelling Suzune" not in kushida["observed_goal_or_means_after"]:out.append("lost secret priority")
     ryuen=by_id["y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent"]

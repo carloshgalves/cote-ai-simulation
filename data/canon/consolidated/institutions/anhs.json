@@ -8,7 +8,8 @@
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "source_documents": [],
@@ -687,5 +688,20 @@
     "enforcement_note": "A council officer's stated decision not to investigate is not blanket immunity or a legal exception.",
     "effective_time": "HOLDS_BY_Y1_LATE_AUG",
     "engine_authority": "REFERENCE_ONLY_NOT_COMPILED"
+  },
+  "sports_festival_y1_v05": {
+    "exam_ref": "exam.y1.sports-festival",
+    "authority": "SOURCE_BOUNDED_REFERENCE_NOT_EXECUTABLE",
+    "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "source_evidence_refs": [
+      "y1v5.ev.004",
+      "y1v5.ev.005",
+      "y1v5.ev.006",
+      "y1v5.ev.053",
+      "y1v5.ev.060"
+    ],
+    "class_point_conflict": "UNRESOLVED_PRINTED_VS_NARRATOR_TEAM_PENALTY",
+    "individual_to_writing_test_reward_boundary": "SPORTS_BONUS_NON_TRANSFERABLE",
+    "scoring_uncertainties": "SEE_SPORTS_FESTIVAL_EXAM_REFERENCE"
   }
 }

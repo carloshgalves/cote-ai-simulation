@@ -14,14 +14,15 @@
     },
     "evt.y1.v04.zodiac-dragon-vip-disclosure": {
       "path": "data/canon/consolidated/retrospective/events/evt.y1.v04.zodiac-dragon-vip-disclosure.json",
-      "status": "OPEN",
+      "status": "PARTIALLY_EXPLAINED",
       "source_evidence_refs": [
         "y1v4.ev.125",
         "y1v4.ev.127",
         "y1v45.ev.035",
         "y1v5.ev.061",
         "y1v5.ev.062",
-        "y1v5.ev.063"
+        "y1v5.ev.063",
+        "y1v5.ev.074"
       ]
     },
     "evt.y1.v04.zodiac-rabbit-reward": {
@@ -39,9 +40,9 @@
       "status": "PARTIALLY_EXPLAINED",
       "source_evidence_refs": [
         "y1v45.ev.027",
+        "y1v45.ev.028",
         "y1v45.ev.029",
-        "y1v45.ev.030",
-        "y1v45.ev.028"
+        "y1v45.ev.030"
       ]
     },
     "evt.y1.v045.pool-invasion-and-suppression": {
@@ -50,9 +51,9 @@
       "source_evidence_refs": [
         "y1v45.ev.044",
         "y1v45.ev.046",
+        "y1v45.ev.051",
         "y1v45.ev.053",
         "y1v45.ev.054",
-        "y1v45.ev.051",
         "y1v45.ev.055",
         "y1v45.ev.056"
       ]
@@ -89,7 +90,13 @@
         "y1v5.ev.063",
         "y1v5.ev.064",
         "y1v5.ev.065",
-        "y1v5.ev.066"
+        "y1v5.ev.066",
+        "y1v5.ev.070",
+        "y1v5.ev.071",
+        "y1v5.ev.074",
+        "y1v5.ev.075",
+        "y1v5.ev.076",
+        "y1v5.ev.077"
       ]
     },
     "evt.y1.v05.relay-unmasked-physical-capacity": {
@@ -99,7 +106,8 @@
         "y1v5.ev.020",
         "y1v5.ev.032",
         "y1v5.ev.055",
-        "y1v5.ev.057"
+        "y1v5.ev.057",
+        "y1v5.ev.078"
       ]
     },
     "evt.y1.v05.sakayanagi-white-room-recognition": {
@@ -116,7 +124,11 @@
       "source_evidence_refs": [
         "y1v5.ev.043",
         "y1v5.ev.050",
-        "y1v5.ev.054"
+        "y1v5.ev.054",
+        "y1v5.ev.072",
+        "y1v5.ev.073",
+        "y1v5.ev.079",
+        "y1v5.ev.080"
       ]
     }
   },
@@ -164,6 +176,10 @@
       "evt.y1.v04.zodiac-dragon-vip-disclosure",
       "evt.y1.v05.class-d-roster-leak-and-counterplay"
     ],
+    "y1v5.ev.074": [
+      "evt.y1.v04.zodiac-dragon-vip-disclosure",
+      "evt.y1.v05.class-d-roster-leak-and-counterplay"
+    ],
     "y1v4.ev.120": [
       "evt.y1.v04.zodiac-rabbit-reward",
       "evt.y1.v04.zodiac-vip-surname-order-pattern"
@@ -180,13 +196,13 @@
     "y1v45.ev.027": [
       "evt.y1.v045.katsuragi-family-parcel-payment"
     ],
+    "y1v45.ev.028": [
+      "evt.y1.v045.katsuragi-family-parcel-payment"
+    ],
     "y1v45.ev.029": [
       "evt.y1.v045.katsuragi-family-parcel-payment"
     ],
     "y1v45.ev.030": [
-      "evt.y1.v045.katsuragi-family-parcel-payment"
-    ],
-    "y1v45.ev.028": [
       "evt.y1.v045.katsuragi-family-parcel-payment"
     ],
     "y1v45.ev.044": [
@@ -195,13 +211,13 @@
     "y1v45.ev.046": [
       "evt.y1.v045.pool-invasion-and-suppression"
     ],
+    "y1v45.ev.051": [
+      "evt.y1.v045.pool-invasion-and-suppression"
+    ],
     "y1v45.ev.053": [
       "evt.y1.v045.pool-invasion-and-suppression"
     ],
     "y1v45.ev.054": [
-      "evt.y1.v045.pool-invasion-and-suppression"
-    ],
-    "y1v45.ev.051": [
       "evt.y1.v045.pool-invasion-and-suppression"
     ],
     "y1v45.ev.055": [
@@ -237,6 +253,21 @@
     "y1v5.ev.066": [
       "evt.y1.v05.class-d-roster-leak-and-counterplay"
     ],
+    "y1v5.ev.070": [
+      "evt.y1.v05.class-d-roster-leak-and-counterplay"
+    ],
+    "y1v5.ev.071": [
+      "evt.y1.v05.class-d-roster-leak-and-counterplay"
+    ],
+    "y1v5.ev.075": [
+      "evt.y1.v05.class-d-roster-leak-and-counterplay"
+    ],
+    "y1v5.ev.076": [
+      "evt.y1.v05.class-d-roster-leak-and-counterplay"
+    ],
+    "y1v5.ev.077": [
+      "evt.y1.v05.class-d-roster-leak-and-counterplay"
+    ],
     "y1v5.ev.020": [
       "evt.y1.v05.relay-unmasked-physical-capacity"
     ],
@@ -247,6 +278,9 @@
       "evt.y1.v05.relay-unmasked-physical-capacity"
     ],
     "y1v5.ev.057": [
+      "evt.y1.v05.relay-unmasked-physical-capacity"
+    ],
+    "y1v5.ev.078": [
       "evt.y1.v05.relay-unmasked-physical-capacity"
     ],
     "y1v5.ev.067": [
@@ -262,6 +296,18 @@
       "evt.y1.v05.sudo-withdrawal-and-return"
     ],
     "y1v5.ev.054": [
+      "evt.y1.v05.sudo-withdrawal-and-return"
+    ],
+    "y1v5.ev.072": [
+      "evt.y1.v05.sudo-withdrawal-and-return"
+    ],
+    "y1v5.ev.073": [
+      "evt.y1.v05.sudo-withdrawal-and-return"
+    ],
+    "y1v5.ev.079": [
+      "evt.y1.v05.sudo-withdrawal-and-return"
+    ],
+    "y1v5.ev.080": [
       "evt.y1.v05.sudo-withdrawal-and-return"
     ]
   },

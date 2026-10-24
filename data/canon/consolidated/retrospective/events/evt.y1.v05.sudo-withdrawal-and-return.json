@@ -1,0 +1,52 @@
+{
+  "id": "evt.y1.v05.sudo-withdrawal-and-return",
+  "event_time": "Y1_FESTIVAL_MIDDAY_AND_FINAL_RELAY",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v5.ev.043"
+  ],
+  "prior_ambiguities": [
+    "Will Sudō return to the festival after the confrontation, and why?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        163,
+        180
+      ],
+      "evidence_refs": [
+        "y1v5.ev.050",
+        "y1v5.ev.054"
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "explanation": "Suzune's self-disclosure and request for mutual reliance influence Sudō's decision to return; later public apology is evidence of current action, not guaranteed lasting change.",
+      "world_epistemic_status": "SOURCE_BOUNDED_CHARACTER_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH8_DIALOGUE",
+          "status": "KNOWS_OWN_APPEAL"
+        },
+        {
+          "actor": "actor.ken-sudo",
+          "since": "Y1_V05_CH8_DIALOGUE",
+          "status": "HEARD_APPEAL_AND_DECIDED_RETURN"
+        },
+        {
+          "actor": "actor.yosuke-hirata",
+          "since": "Y1_V05_CH9_APOLOGY",
+          "status": "OBSERVED_RETURN_NOT_PRIVATE_DIALOGUE"
+        }
+      ],
+      "no_backdated_global_knowledge": true,
+      "resolves_assertion_refs": [
+        "y1v5.ev.043"
+      ]
+    }
+  ],
+  "unresolved": [
+    "Sudō's future reliability and aggression are not established by this single apology."
+  ]
+}

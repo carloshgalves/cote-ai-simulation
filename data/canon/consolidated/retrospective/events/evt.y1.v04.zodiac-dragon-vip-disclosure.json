@@ -36,9 +36,39 @@
         }
       ],
       "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        194,
+        199
+      ],
+      "evidence_refs": [
+        "y1v5.ev.061",
+        "y1v5.ev.062",
+        "y1v5.ev.063"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "V5 establishes open hostility by Kushida to Suzune and Ryūen's attribution of festival roster leakage to Kushida; it does not retroactively prove the distinct Dragon VIP disclosure in V4.",
+      "world_epistemic_status": "LATER_CHARACTER_STATEMENTS_NOT_V4_VIP_LEAK_PROOF",
+      "actor_knowledge": [
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH9",
+          "status": "HEARD_LATER_EXPULSION_THREAT_AND_RYUEN_ACCOUNT"
+        },
+        {
+          "actor": "actor.kakeru-ryuen",
+          "since": "BY_Y1_V05_CH9",
+          "status": "ASSERTS_RECEIVED_FESTIVAL_LINEUP_NOT_V4_VIP_PROOF"
+        }
+      ],
+      "no_backdated_global_knowledge": true
     }
   ],
   "unresolved": [
-    "Kushida's own knowledge or involvement in exposure not independently proved."
+    "Kushida's own knowledge or involvement in exposure not independently proved.",
+    "Kushida's V5 festival roster leak is not direct proof she intentionally exposed Dragon VIP in V4."
   ]
 }

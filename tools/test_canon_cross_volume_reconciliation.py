@@ -55,7 +55,7 @@ def problems(s):
     require("y1v45.ev.051" not in pool_revelation["resolves_assertion_refs"],"do not pretend physical object identity is explicitly resolved")
     v5_trap=doss["evt.y1.v05.class-d-roster-leak-and-counterplay"]
     require(v5_trap["status"]=="PARTIALLY_EXPLAINED","V5 covert operation must remain partial")
-    require(any("Ibuki/Kinoshita" in gap for gap in v5_trap["unresolved"]),"V5 anonymous audio name discrepancy not flattened")
+    require(any("Ibuki" in gap and "Kinoshita" in gap for gap in v5_trap["unresolved"]),"V5 anonymous audio name discrepancy not flattened")
     white=doss["evt.y1.v05.sakayanagi-white-room-recognition"]
     require("UNVERIFIED" not in white["event_time"] or white["status"]!="RESOLVED","White Room prior identity is not a proven full chronology")
     require(any(x["actor"]=="actor.arisu-sakayanagi" for rel in white["later_revelations"] for x in rel["actor_knowledge"]),"private Arisu knowledge gate")

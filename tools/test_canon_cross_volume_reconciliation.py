@@ -42,6 +42,15 @@ def problems(s):
                 require(bool(rel.get("resolves_assertion_refs")),"explicit resolved prior claim "+key)
             if rel["relationship"]=="CHALLENGES_WITH_CONFLICT":
                 require(d["status"]=="CONFLICT","conflict remains open "+key)
+    island=doss["evt.y1.v03.island-class-d-leader-replacement"]
+    island_revelation=island["later_revelations"][1]
+    require(any(x["actor"]=="actor.tachibana" and x["status"]=="HEARD_MANABU_DISCLOSE_SUBSTITUTED_LEADER" for x in island_revelation["actor_knowledge"]),"Tachibana hears island leader disclosure in V4.5")
+    require("homeroom teachers" in island_revelation["explanation"],"committee knowledge not shared with ordinary teaching staff")
+    pool=doss["evt.y1.v045.pool-invasion-and-suppression"]
+    pool_revelation=pool["later_revelations"][0]
+    require("y1v45.ev.051" in pool["canonical_event_sources"],"physical object participates in pool history")
+    require("y1v45.ev.051" in pool_revelation.get("contextualizes_but_does_not_resolve_assertion_refs",[]),"unnamed card-shaped object only contextualized")
+    require("y1v45.ev.051" not in pool_revelation["resolves_assertion_refs"],"do not pretend physical object identity is explicitly resolved")
     reverse={}
     for key,d in doss.items():
         for aid in set(d["canonical_event_sources"]+[ref for rel in d["later_revelations"] for ref in rel["evidence_refs"]]):
@@ -70,6 +79,8 @@ mutants=[
  ("fake external memory gate",lambda s:s["reg"]["release_gate"].update(engine_memory_admission=True)),
  ("promote executable VIP exam",lambda s:s["exam"].update(authority="EXECUTABLE")),
  ("forge VIP allocation",lambda s:s["exam"].update(vip_selection_formula="AUTHORITATIVE_DIGIT_SEQUENCE")),
+ ("erase Tachibana disclosure",lambda s:s["dossiers"]["evt.y1.v03.island-class-d-leader-replacement"]["later_revelations"][1]["actor_knowledge"].pop()),
+ ("promote inferential pool card to explicit proof",lambda s:s["dossiers"]["evt.y1.v045.pool-invasion-and-suppression"]["later_revelations"][0]["resolves_assertion_refs"].append("y1v45.ev.051")),
 ]
 for name,alter in mutants:
     mutant=copy.deepcopy(BASE);alter(mutant)

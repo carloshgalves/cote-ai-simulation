@@ -1,0 +1,225 @@
+{
+  "schema_version": "v05-case-manifest-v1",
+  "source": "ln.y1.v05.sevenseas.en.operator-provided",
+  "cases": [
+    {
+      "path": "data/canon/consolidated/behavioral_cases/airi-sakura/improve-to-not-last-in-sprint.json",
+      "id": "y1v5.case.airi-sakura.improve-to-not-last-in-sprint",
+      "actor_id": "actor.airi-sakura",
+      "topics": [
+        "sports",
+        "motivation",
+        "emotion"
+      ],
+      "pdf_pages": [
+        92,
+        94
+      ],
+      "evidence_refs": [
+        "y1v5.ev.029"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/arisu-sakayanagi/maintain-faction-support-withdraw-athletics.json",
+      "id": "y1v5.case.arisu-sakayanagi.maintain-faction-support-withdraw-athletics",
+      "actor_id": "actor.arisu-sakayanagi",
+      "topics": [
+        "politics",
+        "social",
+        "leadership"
+      ],
+      "pdf_pages": [
+        28,
+        30
+      ],
+      "evidence_refs": [
+        "y1v5.ev.010"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/arisu-sakayanagi/reveal-white-room-knowledge-in-private.json",
+      "id": "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private",
+      "actor_id": "actor.arisu-sakayanagi",
+      "topics": [
+        "epistemics",
+        "strategy",
+        "relationship"
+      ],
+      "pdf_pages": [
+        202,
+        204
+      ],
+      "evidence_refs": [
+        "y1v5.ev.067",
+        "y1v5.ev.068"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/exploit-roster-and-target-horikita.json",
+      "id": "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
+      "actor_id": "actor.kakeru-ryuen",
+      "topics": [
+        "strategy",
+        "misconduct",
+        "negotiation"
+      ],
+      "pdf_pages": [
+        129,
+        131,
+        144,
+        153,
+        198,
+        199
+      ],
+      "evidence_refs": [
+        "y1v5.ev.042",
+        "y1v5.ev.046",
+        "y1v5.ev.047",
+        "y1v5.ev.063"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/physically-harass-sudo-in-flag-match.json",
+      "id": "y1v5.case.kakeru-ryuen.physically-harass-sudo-in-flag-match",
+      "actor_id": "actor.kakeru-ryuen",
+      "topics": [
+        "misconduct",
+        "conflict",
+        "sports"
+      ],
+      "pdf_pages": [
+        100,
+        104
+      ],
+      "evidence_refs": [
+        "y1v5.ev.034"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/reassess-hidden-opponent-after-recording.json",
+      "id": "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording",
+      "actor_id": "actor.kakeru-ryuen",
+      "topics": [
+        "strategy",
+        "risk_management",
+        "reasoning"
+      ],
+      "pdf_pages": [
+        199,
+        201
+      ],
+      "evidence_refs": [
+        "y1v5.ev.064",
+        "y1v5.ev.065",
+        "y1v5.ev.066"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/katsuragi/restore-tug-team-coordination.json",
+      "id": "y1v5.case.katsuragi.restore-tug-team-coordination",
+      "actor_id": "actor.katsuragi",
+      "topics": [
+        "leadership",
+        "cooperation",
+        "sports"
+      ],
+      "pdf_pages": [
+        105,
+        110
+      ],
+      "evidence_refs": [
+        "y1v5.ev.035"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/advocate-nonathlete-fairness.json",
+      "id": "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness",
+      "actor_id": "actor.kei-karuizawa",
+      "topics": [
+        "social",
+        "leadership",
+        "negotiation"
+      ],
+      "pdf_pages": [
+        40,
+        45
+      ],
+      "evidence_refs": [
+        "y1v5.ev.013",
+        "y1v5.ev.014"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/abandon-festival-after-provocation.json",
+      "id": "y1v5.case.ken-sudo.abandon-festival-after-provocation",
+      "actor_id": "actor.ken-sudo",
+      "topics": [
+        "discipline",
+        "emotion",
+        "leadership"
+      ],
+      "pdf_pages": [
+        132,
+        135
+      ],
+      "evidence_refs": [
+        "y1v5.ev.043"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/create-relay-first-leg-lead.json",
+      "id": "y1v5.case.ken-sudo.create-relay-first-leg-lead",
+      "actor_id": "actor.ken-sudo",
+      "topics": [
+        "sports",
+        "results"
+      ],
+      "pdf_pages": [
+        183,
+        184
+      ],
+      "evidence_refs": [
+        "y1v5.ev.056"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/practice-coaching-and-temper.json",
+      "id": "y1v5.case.ken-sudo.practice-coaching-and-temper",
+      "actor_id": "actor.ken-sudo",
+      "topics": [
+        "sports",
+        "leadership",
+        "discipline"
+      ],
+      "pdf_pages": [
+        57,
+        60
+      ],
+      "evidence_refs": [
+        "y1v5.ev.019"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/return-apologize-and-serve-relay.json",
+      "id": "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+      "actor_id": "actor.ken-sudo",
+      "topics": [
+        "leadership",
+        "sports",
+        "discipline"
+      ],
+      "pdf_pages": [
+        163,
+        180,
+        181,
+        193
+      ],
+      "evidence_refs": [
+        "y1v5.ev.050",
+        "y1v5.ev.054",
+        "y1v5.ev.056",
+        "y1v5.ev.060"
+      ]
+    }
+  ]
+}

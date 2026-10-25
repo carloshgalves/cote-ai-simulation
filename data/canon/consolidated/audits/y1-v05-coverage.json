@@ -64,9 +64,9 @@
     "9": 20
   },
   "source_review": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_PDF_REVIEW_PENDING",
-  "pending_semantic_items": 104,
-  "pending_independent_review_items": 119,
-  "release": "DRAFT_REQUIRES_HUMAN_REVIEW",
+  "pending_semantic_items": 0,
+  "pending_independent_review_items": 129,
+  "release": "SOURCE_ADVERSARIAL_ASSISTANT_REVIEW_COMPLETED_ENGINE_PROMOTION_BLOCKED",
   "extraction_policy": "Source-first selective coverage includes victories, failures, ordinary placements, composite-event context, and temporal knowledge restrictions.",
   "open_findings": [
     "Individual 104-item semantic comparison requires independent review",
@@ -76,7 +76,9 @@
     "No clean Ayanokōji-Manabu maximal sprint comparison; no numerical strength ranking",
     "Known source-text inconsistency: anonymous audio attributes collision assignment to Ibuki while observed race had Kinoshita",
     "Goal transition examples are non-executable until actor planning system integration; no fixed future arc",
-    "119 independent per-record semantic signoffs and operator approval still pending"
+    "119 independent per-record semantic signoffs and operator approval still pending",
+    "One open primary-source Ibuki-versus-Kinoshita tape inconsistency; unresolved and explicitly excluded from proof of actor identity",
+    "Independent literary source check and executable engine goals still not performed"
   ],
   "global_character_count": 85,
   "global_behavioral_case_count": 241,
@@ -84,5 +86,7 @@
   "operator_release": "NOT_REQUESTED",
   "goal_transition_count": 10,
   "goal_transition_actors": 5,
-  "behavioral_case_count": 39
+  "behavioral_case_count": 39,
+  "reviewed_by_assistant_evidence_cases": 119,
+  "reviewed_by_assistant_goal_transitions": 10
 }

@@ -1,0 +1,45 @@
+{
+  "id": "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition",
+  "actor_id": "actor.nagumo",
+  "primary_actor_id": "actor.nagumo",
+  "title": "demonstrate soccer skill and political ambition",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Outmaneuvers visible soccer opponents, scores and later disputes Manabu's council approach before the relay.",
+  "observed_result": "Demonstrates observed skill and political objectives in two contexts.",
+  "epistemic_limits": "No quantified speed ranking; speech about future meritocracy is ambition, not enacted rule.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      74,
+      77,
+      185,
+      186
+    ],
+    "chapter": 5,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.yosuke-hirata",
+    "actor.manabu-horikita",
+    "actor.shibata-so"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "politics",
+    "leadership"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "sports",
+    "politics",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.024",
+    "y1v5.ev.058"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

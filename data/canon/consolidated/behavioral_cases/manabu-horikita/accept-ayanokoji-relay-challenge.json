@@ -1,0 +1,38 @@
+{
+  "id": "y1v5.case.manabu-horikita.accept-ayanokoji-relay-challenge",
+  "actor_id": "actor.manabu-horikita",
+  "primary_actor_id": "actor.manabu-horikita",
+  "title": "accept ayanokoji relay challenge",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Waits for Kiyotaka's baton handoff rather than continuing his own relay race, then sprints alongside him.",
+  "observed_result": "Competes seriously, with external interference affecting the finish.",
+  "epistemic_limits": "This is chosen comparison under mixed-year relay conditions, not an uncontested zero-interference duel.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      187,
+      189
+    ],
+    "chapter": 9,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "leadership"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "sports",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.057"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

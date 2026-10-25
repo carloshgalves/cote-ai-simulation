@@ -1,0 +1,95 @@
+{
+  "schema_version": "canon-goal-transitions-index-v1",
+  "policy": "docs/canon/evidence-grounded-goal-updates.md",
+  "source_to_transitions": {
+    "ln.y1.v05.sevenseas.en.operator-provided": [
+      "y1v5.goal.suzune-horikita.individual-excellence-to-reciprocal-alliance",
+      "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal",
+      "y1v5.goal.ken-sudo.romantic-interest-shapes-mvp-motivation",
+      "y1v5.goal.ken-sudo.from-demanded-respect-to-conditional-reliability",
+      "y1v5.goal.kikyo-kushida.expulsion-prioritized-over-class-rank",
+      "y1v5.goal.kikyo-kushida.expand-expulsion-target-to-ayanokoji",
+      "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score",
+      "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent",
+      "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning",
+      "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race"
+    ]
+  },
+  "by_actor": {
+    "actor.suzune-horikita": [
+      "y1v5.goal.suzune-horikita.individual-excellence-to-reciprocal-alliance",
+      "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal"
+    ],
+    "actor.ken-sudo": [
+      "y1v5.goal.ken-sudo.from-demanded-respect-to-conditional-reliability",
+      "y1v5.goal.ken-sudo.romantic-interest-shapes-mvp-motivation"
+    ],
+    "actor.kikyo-kushida": [
+      "y1v5.goal.kikyo-kushida.expand-expulsion-target-to-ayanokoji",
+      "y1v5.goal.kikyo-kushida.expulsion-prioritized-over-class-rank"
+    ],
+    "actor.kakeru-ryuen": [
+      "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent",
+      "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score"
+    ],
+    "actor.kiyotaka-ayanokoji": [
+      "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning",
+      "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race"
+    ]
+  },
+  "by_evidence": {
+    "y1v5.ev.072": [
+      "y1v5.goal.suzune-horikita.individual-excellence-to-reciprocal-alliance"
+    ],
+    "y1v5.ev.079": [
+      "y1v5.goal.suzune-horikita.individual-excellence-to-reciprocal-alliance",
+      "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal"
+    ],
+    "y1v5.ev.080": [
+      "y1v5.goal.ken-sudo.from-demanded-respect-to-conditional-reliability",
+      "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal"
+    ],
+    "y1v5.ev.069": [
+      "y1v5.goal.ken-sudo.romantic-interest-shapes-mvp-motivation"
+    ],
+    "y1v5.ev.070": [
+      "y1v5.goal.ken-sudo.romantic-interest-shapes-mvp-motivation",
+      "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning"
+    ],
+    "y1v5.ev.073": [
+      "y1v5.goal.ken-sudo.from-demanded-respect-to-conditional-reliability"
+    ],
+    "y1v5.ev.074": [
+      "y1v5.goal.kikyo-kushida.expand-expulsion-target-to-ayanokoji",
+      "y1v5.goal.kikyo-kushida.expulsion-prioritized-over-class-rank"
+    ],
+    "y1v5.ev.075": [
+      "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score"
+    ],
+    "y1v5.ev.076": [
+      "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score"
+    ],
+    "y1v5.ev.077": [
+      "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent"
+    ],
+    "y1v5.ev.071": [
+      "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning"
+    ],
+    "y1v5.ev.078": [
+      "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race"
+    ]
+  },
+  "transition_files": {
+    "y1v5.goal.suzune-horikita.individual-excellence-to-reciprocal-alliance": "data/canon/consolidated/goal_transitions/y1-v05.json",
+    "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal": "data/canon/consolidated/goal_transitions/y1-v05.json",
+    "y1v5.goal.ken-sudo.romantic-interest-shapes-mvp-motivation": "data/canon/consolidated/goal_transitions/y1-v05.json",
+    "y1v5.goal.ken-sudo.from-demanded-respect-to-conditional-reliability": "data/canon/consolidated/goal_transitions/y1-v05.json",
+    "y1v5.goal.kikyo-kushida.expulsion-prioritized-over-class-rank": "data/canon/consolidated/goal_transitions/y1-v05.json",
+    "y1v5.goal.kikyo-kushida.expand-expulsion-target-to-ayanokoji": "data/canon/consolidated/goal_transitions/y1-v05.json",
+    "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score": "data/canon/consolidated/goal_transitions/y1-v05.json",
+    "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent": "data/canon/consolidated/goal_transitions/y1-v05.json",
+    "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning": "data/canon/consolidated/goal_transitions/y1-v05.json",
+    "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race": "data/canon/consolidated/goal_transitions/y1-v05.json"
+  },
+  "guard": "RETRIEVAL_ONLY_NOT_AUTOMATIC_RUNTIME_GOAL_UPDATE"
+}

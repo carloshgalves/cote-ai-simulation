@@ -12,9 +12,10 @@ B=ROOT/"data/canon/consolidated"
 J=lambda p:json.loads(Path(p).read_text(encoding="utf-8"))
 index=J(B/"indexes/retrospective-event-map.json")
 source=J(B/"evidence/y1-v045.json")
+source5=J(B/"evidence/y1-v05.json")
 reg=J(B/"audits/source-review-register-y1-v045.json")
 originals={r["id"] for r in J(B/"evidence/y1-v03.json")["records"]+J(B/"evidence/y1-v04.json")["records"]}
-current={r["id"] for r in source["records"]}
+current={r["id"] for r in source["records"]+source5["records"]}
 dossiers={key:J(ROOT/row["path"]) for key,row in index["event_lookup"].items()}
 exam=J(B/"exams/y1-zodiac-cruise.json")
 school=J(B/"institutions/anhs.json")
@@ -25,15 +26,16 @@ def problems(s):
     idx=s["index"];doss=s["dossiers"];src=s["sources"];new=s["current"];exam=s["exam"];reg=s["reg"]
     def require(c,msg):
         if not c: errors.append(msg)
-    require(len(doss)==6,"six cumulative event dossiers")
+    require(len(doss)==11,"eleven cumulative event dossiers")
     require(set(idx["event_lookup"])==set(doss),"stable IDs present in index")
     for key,d in doss.items():
         require(d["id"]==key,"dossier id "+key)
         require(d["status"] in {"OPEN","PARTIALLY_EXPLAINED","RESOLVED","CONFLICT"},"dossier status "+key)
         require(all(x in src for x in d["canonical_event_sources"]),"prior anchor exists "+key)
         for rel in d["later_revelations"]:
-            require(rel["source_id"]=="ln.y1.v045.sevenseas.en.operator-provided","true source locator "+key)
-            require(rel["chapter"] in range(1,8) and bool(rel["pdf_pages"]),"chapter and physical locator "+key)
+            require(rel["source_id"] in {"ln.y1.v045.sevenseas.en.operator-provided","ln.y1.v05.sevenseas.en.operator-provided"},"true source locator "+key)
+            require(all((rid.startswith("y1v45.") if "v045." in rel["source_id"] else rid.startswith("y1v5.")) for rid in rel["evidence_refs"]),"source volume matches evidence "+key)
+            require(rel["chapter"] in (range(1,8) if "v045." in rel["source_id"] else range(1,10)) and bool(rel["pdf_pages"]),"chapter and physical locator "+key)
             require(rel["relationship"] in {"SUPPLEMENTS","RESOLVES_AMBIGUITY","CORRECTS_PRIOR_INTERPRETATION","CHALLENGES_WITH_CONFLICT","CONTEXTUALIZES"},"relation "+key)
             require(all(x in new for x in rel["evidence_refs"]),"later evidence belongs to its actual source "+key)
             require(all(item["since"] and item["status"] for item in rel["actor_knowledge"]),"nonempty actor knowledge gate "+key)
@@ -51,6 +53,19 @@ def problems(s):
     require("y1v45.ev.051" in pool["canonical_event_sources"],"physical object participates in pool history")
     require("y1v45.ev.051" in pool_revelation.get("contextualizes_but_does_not_resolve_assertion_refs",[]),"unnamed card-shaped object only contextualized")
     require("y1v45.ev.051" not in pool_revelation["resolves_assertion_refs"],"do not pretend physical object identity is explicitly resolved")
+    v5_trap=doss["evt.y1.v05.class-d-roster-leak-and-counterplay"]
+    require(v5_trap["status"]=="PARTIALLY_EXPLAINED","V5 covert operation must remain partial")
+    require(any("Ibuki" in gap and "Kinoshita" in gap for gap in v5_trap["unresolved"]),"V5 anonymous audio name discrepancy not flattened")
+    white=doss["evt.y1.v05.sakayanagi-white-room-recognition"]
+    require("UNVERIFIED" not in white["event_time"] or white["status"]!="RESOLVED","White Room prior identity is not a proven full chronology")
+    require(any(x["actor"]=="actor.arisu-sakayanagi" for rel in white["later_revelations"] for x in rel["actor_knowledge"]),"private Arisu knowledge gate")
+    vip=doss["evt.y1.v04.zodiac-vip-surname-order-pattern"]
+    require(vip["status"]=="PARTIALLY_EXPLAINED","surname pattern remains actor explanation, not formal certified algorithm")
+    require(doss["evt.y1.v04.zodiac-dragon-vip-disclosure"]["status"]=="PARTIALLY_EXPLAINED","Kushida direct V5 acknowledgment supplements older Dragon VIP suspicion without certifying hidden school formula")
+    require("y1v5.ev.074" in [rid for rel in doss["evt.y1.v04.zodiac-dragon-vip-disclosure"]["later_revelations"] for rid in rel["evidence_refs"]],"Dragon disclosure sourced in V5 private dialogue")
+    require(any("anonymous" in x.lower() for x in v5_trap["unresolved"]),"anonymous sender remains unknown")
+    require(any("Ibuki" in x and "Kinoshita" in x for x in v5_trap["unresolved"]),"source conflict not erased")
+    require("y1v5.ev.075" in [r for rel in v5_trap["later_revelations"] for r in rel["evidence_refs"]],"Ryuen humiliating objective traced")
     reverse={}
     for key,d in doss.items():
         for aid in set(d["canonical_event_sources"]+[ref for rel in d["later_revelations"] for ref in rel["evidence_refs"]]):
@@ -81,6 +96,11 @@ mutants=[
  ("forge VIP allocation",lambda s:s["exam"].update(vip_selection_formula="AUTHORITATIVE_DIGIT_SEQUENCE")),
  ("erase Tachibana disclosure",lambda s:s["dossiers"]["evt.y1.v03.island-class-d-leader-replacement"]["later_revelations"][1]["actor_knowledge"].pop()),
  ("promote inferential pool card to explicit proof",lambda s:s["dossiers"]["evt.y1.v045.pool-invasion-and-suppression"]["later_revelations"][0]["resolves_assertion_refs"].append("y1v45.ev.051")),
+ ("move V5 report back into V4.5",lambda s:s["dossiers"]["evt.y1.v05.class-d-roster-leak-and-counterplay"]["later_revelations"][0].update(source_id="ln.y1.v045.sevenseas.en.operator-provided")),
+ ("erase V5 undisclosed tape discrepancy",lambda s:s["dossiers"]["evt.y1.v05.class-d-roster-leak-and-counterplay"]["unresolved"].clear()),
+ ("forge total school certification of Kushida V4 disclosure",lambda s:s["dossiers"]["evt.y1.v04.zodiac-dragon-vip-disclosure"].update(status="RESOLVED")),
+ ("erase Arisu knowledge speaker",lambda s:s["dossiers"]["evt.y1.v05.sakayanagi-white-room-recognition"]["later_revelations"][0]["actor_knowledge"].clear()),
+
 ]
 for name,alter in mutants:
     mutant=copy.deepcopy(BASE);alter(mutant)

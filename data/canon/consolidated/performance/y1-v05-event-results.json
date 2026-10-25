@@ -1,0 +1,438 @@
+{
+  "schema_version": "canon-athletic-observations-v1",
+  "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+  "competition": "Y1 School Sports Festival",
+  "comparison_policy": "OBSERVED_EVENT_ONLY_NO_UNCONSTRAINED_GENERALIZATION",
+  "events": [
+    {
+      "code": "100m",
+      "name": "100-metre sprint",
+      "kind": "all",
+      "pages": [
+        87,
+        96
+      ],
+      "observations": [
+        {
+          "actor": "actor.ken-sudo",
+          "result": "FIRST_IN_HEAT",
+          "context": "Opening boys' heat",
+          "evidence": "y1v5.ev.027"
+        },
+        {
+          "actor": "actor.sotomura",
+          "result": "LAST_IN_HEAT",
+          "context": "Opening boys' heat",
+          "evidence": "y1v5.ev.027"
+        },
+        {
+          "actor": "actor.ryuji-kanzaki",
+          "result": "FIRST_IN_HEAT",
+          "context": "Different heat against Katsuragi",
+          "evidence": "y1v5.ev.027"
+        },
+        {
+          "actor": "actor.katsuragi",
+          "result": "THIRD_IN_HEAT",
+          "context": "Against Kanzaki",
+          "evidence": "y1v5.ev.027"
+        },
+        {
+          "actor": "actor.airi-sakura",
+          "result": "NOT_LAST_IN_HEAT",
+          "context": "First such outcome according to Sakura",
+          "evidence": "y1v5.ev.029"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "result": "AHEAD_OF_IBUKI_BY_NARROW_MARGIN",
+          "context": "Ibuki checked her rival during sprint",
+          "evidence": "y1v5.ev.030"
+        },
+        {
+          "actor": "actor.mio-ibuki",
+          "result": "BEHIND_HORIKITA_BY_NARROW_MARGIN",
+          "context": "Observed quicker start, then monitored opponent",
+          "evidence": "y1v5.ev.030"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "result": "FIFTH_IN_HEAT",
+          "context": "Self-described selected effort, not maximum",
+          "evidence": "y1v5.ev.032"
+        },
+        {
+          "actor": "actor.manabu-horikita",
+          "result": "FIRST_IN_HEAT",
+          "context": "Third-year sprint",
+          "evidence": "y1v5.ev.031"
+        }
+      ]
+    },
+    {
+      "code": "hurdles",
+      "name": "Hurdle race",
+      "kind": "all",
+      "pages": [
+        97,
+        99
+      ],
+      "observations": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "result": "THIRD_IN_HEAT",
+          "context": "Kanzaki ahead; Ayanokōji claims moderated effort",
+          "evidence": "y1v5.ev.032"
+        },
+        {
+          "actor": "actor.yukimura",
+          "result": "SEVENTH_IN_HEAT",
+          "context": "Second consecutive self-reported seventh placing, exact heat",
+          "evidence": "y1v5.ev.032"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "result": "THIRD_IN_HEAT",
+          "context": "Behind track athletes Yajima/Kinoshita",
+          "evidence": "y1v5.ev.033"
+        }
+      ]
+    },
+    {
+      "code": "capture_flag",
+      "name": "Capture the flag (boys)",
+      "kind": "all",
+      "pages": [
+        100,
+        105
+      ],
+      "observations": [
+        {
+          "unit": "Red A/D",
+          "result": "LOSS_TO_WHITE_B_C",
+          "context": "Ryūen physical harassment contributed; no universal fighting skill ranking",
+          "evidence": "y1v5.ev.034"
+        }
+      ]
+    },
+    {
+      "code": "ball_toss",
+      "name": "Ball toss (girls)",
+      "kind": "all",
+      "pages": [
+        105,
+        108
+      ],
+      "observations": [],
+      "unresolved": "Complete round results and participants not stated in extracted pages"
+    },
+    {
+      "code": "tug_of_war",
+      "name": "Tug-of-war (boys and girls separately)",
+      "kind": "all",
+      "pages": [
+        105,
+        110
+      ],
+      "observations": [
+        {
+          "unit": "Red A/D boys",
+          "result": "RED_A_D_BOYS_WIN_AFTER_THREE_ROUNDS",
+          "context": "Red/A-D win first round; White/B-C win second after better configuration; Red/A-D take deciding round despite Class A faction conflict and Ryūen disruption. Girls' separate competition outcome not proven here.",
+          "evidence": "y1v5.ev.035"
+        }
+      ]
+    },
+    {
+      "code": "obstacle",
+      "name": "Obstacle course",
+      "kind": "all",
+      "pages": [
+        111,
+        115
+      ],
+      "observations": [
+        {
+          "actor": "actor.ken-sudo",
+          "result": "AHEAD_OF_SHIBATA",
+          "context": "Balance-beam skill influential; not clean 100m speed ranking",
+          "evidence": "y1v5.ev.037"
+        },
+        {
+          "actor": "actor.shibata-so",
+          "result": "BEHIND_SUDO",
+          "context": "Closed distance in other obstacles",
+          "evidence": "y1v5.ev.037"
+        },
+        {
+          "actor": "actor.kanji-ike",
+          "result": "SIXTH_IN_HEAT",
+          "context": "Separate heat",
+          "evidence": "y1v5.ev.037"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "result": "DEGRADED_BY_COLLISION",
+          "context": "Contact with Kinoshita; intent initially contested",
+          "evidence": "y1v5.ev.038"
+        },
+        {
+          "actor": "actor.kinoshita",
+          "result": "FALL_AND_REPORTED_INJURY",
+          "context": "Later Ryūen confession complicates original cause narrative",
+          "evidence": "y1v5.ev.063"
+        }
+      ]
+    },
+    {
+      "code": "three_legged",
+      "name": "Three-legged race",
+      "kind": "all",
+      "pages": [
+        115,
+        117
+      ],
+      "observations": [
+        {
+          "actors": [
+            "actor.kiyotaka-ayanokoji",
+            "actor.yosuke-hirata"
+          ],
+          "result": "RAN_AS_PAIR",
+          "context": "Pair synchronization, no calibrated solo speed",
+          "evidence": "y1v5.ev.039"
+        },
+        {
+          "actors": [
+            "actor.suzune-horikita",
+            "actor.kikyo-kushida"
+          ],
+          "result": "RAN_AS_PAIR",
+          "context": "Partner coordination and competitive pressure",
+          "evidence": "y1v5.ev.039"
+        }
+      ]
+    },
+    {
+      "code": "cavalry",
+      "name": "Cavalry battle",
+      "kind": "all",
+      "pages": [
+        120,
+        129
+      ],
+      "observations": [
+        {
+          "actor": "actor.suzune-horikita",
+          "result": "LOST_HEADBAND",
+          "context": "Four-to-one targeting invalidates ordinary rank inference",
+          "evidence": "y1v5.ev.040"
+        },
+        {
+          "unit": "D/Hirata-Sudo-Miyake-Ayanokoji",
+          "result": "ELIMINATED_BY_RYUEN",
+          "context": "Hirata's headband seized after attempt against Ryūen; strength includes team composition",
+          "evidence": "y1v5.ev.041"
+        }
+      ]
+    },
+    {
+      "code": "200m",
+      "name": "200-metre dash",
+      "kind": "all",
+      "pages": [
+        135,
+        136
+      ],
+      "observations": [
+        {
+          "actor": "actor.kakeru-ryuen",
+          "result": "FIRST_IN_HEAT",
+          "context": "One observed 200m race",
+          "evidence": "y1v5.ev.044"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "result": "THIRD_IN_HEAT",
+          "context": "Self-limited public athlete profile",
+          "evidence": "y1v5.ev.044"
+        }
+      ]
+    },
+    {
+      "code": "scavenger",
+      "name": "Scavenger hunt",
+      "kind": "recommended",
+      "pages": [
+        160,
+        162
+      ],
+      "observations": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "result": "DIFFICULT_REQUIREMENT",
+          "context": "Draw requiring multiple acquaintances; no absolute sociability grading",
+          "evidence": "y1v5.ev.049"
+        },
+        {
+          "actor": "actor.kanji-ike",
+          "result": "REPORTED_STRONG_FINISH",
+          "context": "Observed success/positive placement, exact classification must be sourced separately",
+          "evidence": "y1v5.ev.049"
+        }
+      ]
+    },
+    {
+      "code": "four_way_tug",
+      "name": "Four-way tug-of-war",
+      "kind": "recommended",
+      "pages": [
+        168,
+        169
+      ],
+      "observations": [
+        {
+          "unit": "Class D",
+          "result": "POOR_RESULT",
+          "context": "Sudō absent; even with substituted contestant Class D performed poorly",
+          "evidence": "y1v5.ev.051"
+        }
+      ]
+    },
+    {
+      "code": "mixed_three_legged",
+      "name": "Mixed-gender three-legged race",
+      "kind": "recommended",
+      "pages": [
+        169,
+        175
+      ],
+      "observations": [
+        {
+          "actor": "actor.kikyo-kushida",
+          "result": "PAID_SUBSTITUTE",
+          "context": "Reported other contestant dropped; strategic conversation with Ayanokōji",
+          "evidence": "y1v5.ev.051"
+        }
+      ]
+    },
+    {
+      "code": "relay1200",
+      "name": "1200-metre all-years relay",
+      "kind": "recommended",
+      "pages": [
+        181,
+        189
+      ],
+      "observations": [
+        {
+          "actor": "actor.ken-sudo",
+          "result": "OPENING_LEAD_GE_15M",
+          "context": "Fast initial acceleration with others competing for position",
+          "evidence": "y1v5.ev.056"
+        },
+        {
+          "actor": "actor.yosuke-hirata",
+          "result": "MAINTAINED_EARLY_LEAD",
+          "context": "Second relay leg",
+          "evidence": "y1v5.ev.056"
+        },
+        {
+          "actor": "actor.onodera",
+          "result": "LOST_PARTIAL_GAP",
+          "context": "Pursued by older male competitors",
+          "evidence": "y1v5.ev.056"
+        },
+        {
+          "actor": "actor.kikyo-kushida",
+          "result": "FIFTH_LEG_HANDOFF",
+          "context": "Team was seventh by fifth handoff, not individual Kushida placement",
+          "evidence": "y1v5.ev.056"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "result": "FAST_ANCHOR_OBSTRUCTED",
+          "context": "Paid replacement; collision with fallen runner interrupted direct Manabu comparison",
+          "evidence": "y1v5.ev.057"
+        },
+        {
+          "actor": "actor.manabu-horikita",
+          "result": "FAST_ANCHOR_WAITED_FOR_OPPONENT",
+          "context": "Not an uncontested official individual stopwatch comparison",
+          "evidence": "y1v5.ev.057"
+        }
+      ]
+    }
+  ],
+  "measures": [
+    {
+      "kind": "grip_strength",
+      "context": "Class D training before festival",
+      "pdf_pages": [
+        50,
+        51
+      ],
+      "unit": "kgf_on_device_not_calibrated_max",
+      "observations": [
+        {
+          "actor": "actor.sotomura",
+          "value": 42
+        },
+        {
+          "actor": "actor.kanji-ike",
+          "value": 42.6
+        },
+        {
+          "actor": "actor.miyamoto",
+          "value": 48
+        },
+        {
+          "actor": "actor.yosuke-hirata",
+          "value": 57.9
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "value": 60.6,
+          "source_mode": "INTENTIONALLY_SUBMAXIMAL",
+          "rank_note": "Second measured class boy excluding unmeasured Kōenji"
+        },
+        {
+          "actor": "actor.ken-sudo",
+          "value": 82.4,
+          "source_mode": "REPORTED_MEASURED_DOMINANT_HAND",
+          "context": "Comparison against Ayanokōji deliberate submaximal reading is not a maximum-strength contest."
+        }
+      ],
+      "evidence_refs": [
+        "y1v5.ev.015"
+      ],
+      "limits": [
+        "Physical grip readings are single device observations, not calibrated actor strength parameters",
+        "Sudō 82.4 vs Ayanokōji 60.6 cannot establish maximum strength because Ayanokōji stopped deliberately",
+        "No quantified valid reading for Kōenji; do not impute any"
+      ]
+    },
+    {
+      "kind": "relay_lead",
+      "context": "Sudō relay opening leg",
+      "pdf_pages": [
+        183,
+        184
+      ],
+      "value": 15,
+      "unit": "metres_or_more",
+      "source_mode": "NARRATED_LOWER_BOUND",
+      "evidence_refs": [
+        "y1v5.ev.056"
+      ]
+    }
+  ],
+  "excluded_inferences": [
+    "Do not treat intentionally curtailed 60.6 as strength maximum",
+    "Do not score Shibata as universally slower based on obstacle race loss",
+    "Do not treat Suzune as slower than all C runners due to targeted placements and collision",
+    "Do not score Ayanokōji vs Manabu from an obstructed race as clean win/loss",
+    "Do not generalize Ryūen's physical intimidation into a safe or ethical strategic skill"
+  ],
+  "completeness": "SELECTIVE_KNOWN_RESULTS_NOT_EXHAUSTIVE"
+}

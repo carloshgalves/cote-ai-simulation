@@ -1,0 +1,40 @@
+{
+  "id": "y1v5.case.mio-ibuki.lose-narrow-sprint-while-monitoring-rival",
+  "actor_id": "actor.mio-ibuki",
+  "primary_actor_id": "actor.mio-ibuki",
+  "title": "lose narrow sprint while monitoring rival",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Gets a quicker start than Suzune but monitors the opponent and narrowly loses the sprint.",
+  "observed_result": "Suzune crosses the line first; Kiyotaka infers rival fixation impaired focus.",
+  "epistemic_limits": "No recorded time or controlled rematch supports firm intrinsic velocity ordering.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      94,
+      95
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "emotion",
+    "observation"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "sports",
+    "emotion",
+    "observation"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.030"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

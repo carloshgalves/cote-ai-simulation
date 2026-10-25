@@ -1,0 +1,57 @@
+{
+  "id": "evt.y1.v04.zodiac-vip-surname-order-pattern",
+  "event_time": "Y1_AUG_ZODIAC_EXAM",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v4.ev.120",
+    "y1v4.ev.125",
+    "y1v4.ev.127"
+  ],
+  "prior_ambiguities": [
+    "Was a reproducible VIP pattern inferred after the exam?",
+    "Was the private VIP selection formula formally published or teacher-certified?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        13,
+        14
+      ],
+      "evidence_refs": [
+        "y1v5.ev.002"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "Suzune reconstructs VIP selection as surname order by zodiac ordinal, using Rabbit/Karuizawa and Dragon/Kushida; character explanation fits examples but is not an official school-certified rules document.",
+      "world_epistemic_status": "SOURCE_BOUNDED_CHARACTER_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH2_DISCUSSION",
+          "status": "INFERS_PATTERN"
+        },
+        {
+          "actor": "actor.yosuke-hirata",
+          "since": "Y1_V05_CH2_DISCUSSION",
+          "status": "HEARD_EXPLANATION"
+        },
+        {
+          "actor": "actor.kei-karuizawa",
+          "since": "Y1_V05_CH2_DISCUSSION",
+          "status": "HEARD_EXPLANATION"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V05_CH2_DISCUSSION",
+          "status": "HEARD_EXPLANATION"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Original school-certified VIP formula not provided; do not promote a character's matching hypothesis to engine rules.",
+    "This surname-order deduction does not resolve Kushida's specific leak or disclosures in Dragon group."
+  ]
+}

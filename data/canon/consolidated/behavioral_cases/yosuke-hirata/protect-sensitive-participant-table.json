@@ -1,0 +1,45 @@
+{
+  "id": "y1v5.case.yosuke-hirata.protect-sensitive-participant-table",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "protect sensitive participant table",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Collects class athlete data and instructs classmates not to photograph roster; later submits event assignments.",
+  "observed_result": "A provisional list is arranged, but later leakage demonstrates limits of protective procedures.",
+  "epistemic_limits": "Prohibiting photos is not evidence information never left the class.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      51,
+      52,
+      82,
+      85
+    ],
+    "chapter": 3,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kikyo-kushida",
+    "actor.ken-sudo"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "information",
+    "risk_management"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "strategy",
+    "information",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.016",
+    "y1v5.ev.026"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "y1v5.case.kiyotaka-ayanokoji.record-deliberately-limited-grip",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "record deliberately limited grip",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Stops exerting grip around measured 60.6 to avoid looking exceptional.",
+  "observed_result": "Hirata places him second among measured classmates excluding Kouenji, making him conspicuous.",
+  "epistemic_limits": "60.6 is observed deliberately submaximal device reading, NOT maximum grip or exact ability score.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      49,
+      51
+    ],
+    "chapter": 3,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.yosuke-hirata",
+    "actor.ken-sudo"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "deception",
+    "observation"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "sports",
+    "deception",
+    "observation"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.015"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

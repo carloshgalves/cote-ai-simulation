@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -21,7 +22,8 @@
     "observation": {
       "behavioral_case_refs": [
         "y1v3.case.mio-ibuki.undercover-leader-card-delivery",
-        "y1v4.case.mio-ibuki.volunteer-device-disclosure"
+        "y1v4.case.mio-ibuki.volunteer-device-disclosure",
+        "y1v5.case.mio-ibuki.lose-narrow-sprint-while-monitoring-rival"
       ],
       "context_evidence_refs": [
         "y1v3.ev.042",
@@ -91,7 +93,9 @@
         "y1v3.ev.096",
         "y1v3.ev.097",
         "y1v3.ev.112",
-        "y1v4.ev.116"
+        "y1v4.ev.116",
+        "y1v5.ev.040",
+        "y1v5.ev.065"
       ]
     },
     "combat": {
@@ -134,11 +138,13 @@
     },
     "emotion": {
       "behavioral_case_refs": [
-        "y1v45.case.mio-ibuki.acknowledge-anxiety-outside-spy-role"
+        "y1v45.case.mio-ibuki.acknowledge-anxiety-outside-spy-role",
+        "y1v5.case.mio-ibuki.lose-narrow-sprint-while-monitoring-rival"
       ],
       "context_evidence_refs": [
         "y1v4.ev.056",
-        "y1v45.ev.008"
+        "y1v45.ev.008",
+        "y1v5.ev.030"
       ]
     },
     "motivation": {
@@ -159,7 +165,8 @@
         "y1v45.case.mio-ibuki.pair-with-rival-for-fortune-reading"
       ],
       "context_evidence_refs": [
-        "y1v45.ev.010"
+        "y1v45.ev.010",
+        "y1v5.ev.077"
       ]
     },
     "belief": {
@@ -171,13 +178,37 @@
     "epistemics": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v45.ev.011"
+        "y1v45.ev.011",
+        "y1v5.ev.065",
+        "y1v5.ev.077"
+      ]
+    },
+    "sports": {
+      "behavioral_case_refs": [
+        "y1v5.case.mio-ibuki.lose-narrow-sprint-while-monitoring-rival"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.030",
+        "y1v5.ev.040"
+      ]
+    },
+    "results": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.030",
+        "y1v5.ev.040"
+      ]
+    },
+    "counterstrategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.077"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge.",
+  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": true,
     "future_fate_unknown": true
@@ -188,5 +219,7 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

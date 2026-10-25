@@ -1,0 +1,39 @@
+{
+  "id": "y1v5.case.ken-sudo.create-relay-first-leg-lead",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "create relay first leg lead",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Starts explosively and passes multiple other runners before baton handoff.",
+  "observed_result": "Opens about fifteen metres ahead, though subsequent Class D legs lose position.",
+  "epistemic_limits": "Not a standalone top sprint-speed measurement; starting position and other runners' congestion matter.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      183,
+      184
+    ],
+    "chapter": 9,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.yosuke-hirata",
+    "actor.onodera"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "results"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "sports",
+    "results"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.056"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

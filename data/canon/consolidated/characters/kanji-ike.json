@@ -7,7 +7,8 @@
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -44,7 +45,8 @@
         "y1v45.ev.017",
         "y1v45.ev.023",
         "y1v45.ev.031",
-        "y1v45.ev.045"
+        "y1v45.ev.045",
+        "y1v5.ev.019"
       ]
     },
     "ethics": {
@@ -86,7 +88,9 @@
         "y1v3.ev.036",
         "y1v3.ev.045",
         "y1v3.ev.069",
-        "y1v3.ev.103"
+        "y1v3.ev.103",
+        "y1v5.ev.008",
+        "y1v5.ev.019"
       ]
     },
     "strategy": {
@@ -94,7 +98,8 @@
       "context_evidence_refs": [
         "y1v1.ev.073",
         "y1v1.ev.086",
-        "y1v3.ev.053"
+        "y1v3.ev.053",
+        "y1v5.ev.008"
       ]
     },
     "emotion": {
@@ -129,7 +134,8 @@
         "y1v3.ev.036",
         "y1v3.ev.079",
         "y1v45.ev.017",
-        "y1v45.ev.046"
+        "y1v45.ev.046",
+        "y1v5.ev.015"
       ]
     },
     "exam": {
@@ -218,11 +224,34 @@
       "context_evidence_refs": [
         "y1v45.ev.056"
       ]
+    },
+    "sports": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.008",
+        "y1v5.ev.015",
+        "y1v5.ev.019",
+        "y1v5.ev.037",
+        "y1v5.ev.049"
+      ]
+    },
+    "deception": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.015"
+      ]
+    },
+    "results": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.037",
+        "y1v5.ev.049"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge. Y1 V5: actor-scoped athletics and strategy evidence provisional; no maximal physical ratings, hidden truth, or future memory without audit.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

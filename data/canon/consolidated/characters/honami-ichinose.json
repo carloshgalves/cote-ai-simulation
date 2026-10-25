@@ -8,7 +8,8 @@
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -44,7 +45,8 @@
         "y1v4.ev.110",
         "y1v4.ev.111",
         "y1v4.ev.114",
-        "y1v45.ev.057"
+        "y1v45.ev.057",
+        "y1v5.ev.009"
       ]
     },
     "leadership": {
@@ -70,7 +72,8 @@
         "y1v4.ev.073",
         "y1v4.ev.108",
         "y1v4.ev.113",
-        "y1v45.ev.048"
+        "y1v45.ev.048",
+        "y1v5.ev.051"
       ]
     },
     "persuasion": {
@@ -121,7 +124,8 @@
         "y1v4.ev.119",
         "y1v4.ev.121",
         "y1v4.ev.122",
-        "y1v45.ev.049"
+        "y1v45.ev.049",
+        "y1v5.ev.009"
       ]
     },
     "conflict": {
@@ -248,7 +252,8 @@
       ],
       "context_evidence_refs": [
         "y1v4.ev.076",
-        "y1v4.ev.078"
+        "y1v4.ev.078",
+        "y1v5.ev.009"
       ]
     },
     "exam": {
@@ -297,13 +302,20 @@
       "context_evidence_refs": [
         "y1v45.ev.047",
         "y1v45.ev.049",
-        "y1v45.ev.050"
+        "y1v45.ev.050",
+        "y1v5.ev.051"
+      ]
+    },
+    "results": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.051"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. Adversarial V4 source-gap review: false Manabe witness story and Hoshinomiya's discretionary Rabbit assignment are source-scoped; group selection is not a verified VIP assignment formula. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. Adversarial V4 source-gap review: false Manabe witness story and Hoshinomiya's discretionary Rabbit assignment are source-scoped; group selection is not a verified VIP assignment formula. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge. Y1 V5: actor-scoped athletics and strategy evidence provisional; no maximal physical ratings, hidden truth, or future memory without audit.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

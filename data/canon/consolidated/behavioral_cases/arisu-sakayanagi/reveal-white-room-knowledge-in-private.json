@@ -1,0 +1,42 @@
+{
+  "id": "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private",
+  "actor_id": "actor.arisu-sakayanagi",
+  "primary_actor_id": "actor.arisu-sakayanagi",
+  "title": "reveal white room knowledge in private",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Confronts Kiyotaka privately, names White Room and asserts prior knowledge of him, then challenges him to future rivalry.",
+  "observed_result": "Ayanokōji's composure is disrupted; secret remains limited to participants.",
+  "epistemic_limits": "Her precise source, date and nature of past access are not established; no public disclosure or completed defeat.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      202,
+      203,
+      204
+    ],
+    "chapter": 9,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "epistemics",
+    "strategy",
+    "relationship"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "epistemics",
+    "strategy",
+    "relationship"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.067",
+    "y1v5.ev.068"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

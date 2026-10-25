@@ -1,0 +1,53 @@
+{
+  "id": "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "leak lineup and threaten classmates",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Admits privately to Kiyotaka she leaked the Class D sports roster and embraces the explanation that she bargained over the zodiac VIP disclosure to secure Suzune's expulsion. She says expelling Suzune takes precedence over reaching Class A, then adds Kiyotaka to her target list. In Ryūen's presence she threatens Suzune through Manabu.",
+  "observed_result": "Explicit goal hierarchy exposed: eliminate witnesses and classmates who threaten her constructed reputation first, pursue class promotion after; she cooperates with Ryūen despite mutual distrust.",
+  "epistemic_limits": "Her stated intent is not a completed expulsion; details of older Zodiac exchange are accepted in her dialogue but no teacher-certified VIP-selection algorithm follows. Avoid presuming she always prioritizes sabotage in later divergent timelines.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      172,
+      173,
+      174,
+      175,
+      194,
+      195,
+      196,
+      198,
+      199
+    ],
+    "chapter": 8,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kiyotaka-ayanokoji",
+    "actor.kakeru-ryuen"
+  ],
+  "capabilities_supported": [
+    "misconduct",
+    "deception",
+    "strategy"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "misconduct",
+    "deception",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.053",
+    "y1v5.ev.061",
+    "y1v5.ev.062",
+    "y1v5.ev.063",
+    "y1v5.ev.074"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

@@ -1,0 +1,108 @@
+{
+  "id": "evt.y1.v05.sudo-withdrawal-and-return",
+  "event_time": "Y1_FESTIVAL_MIDDAY_AND_FINAL_RELAY",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v5.ev.043"
+  ],
+  "prior_ambiguities": [
+    "Will Sudō return to the festival after the confrontation, and why?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        163,
+        180
+      ],
+      "evidence_refs": [
+        "y1v5.ev.050",
+        "y1v5.ev.054"
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "explanation": "Suzune's self-disclosure and request for mutual reliance influence Sudō's decision to return; later public apology is evidence of current action, not guaranteed lasting change.",
+      "world_epistemic_status": "SOURCE_BOUNDED_CHARACTER_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH8_DIALOGUE",
+          "status": "KNOWS_OWN_APPEAL"
+        },
+        {
+          "actor": "actor.ken-sudo",
+          "since": "Y1_V05_CH8_DIALOGUE",
+          "status": "HEARD_APPEAL_AND_DECIDED_RETURN"
+        },
+        {
+          "actor": "actor.yosuke-hirata",
+          "since": "Y1_V05_CH9_APOLOGY",
+          "status": "OBSERVED_RETURN_NOT_PRIVATE_DIALOGUE"
+        }
+      ],
+      "no_backdated_global_knowledge": true,
+      "resolves_assertion_refs": [
+        "y1v5.ev.043"
+      ]
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 8,
+      "pdf_pages": [
+        165,
+        179
+      ],
+      "evidence_refs": [
+        "y1v5.ev.072",
+        "y1v5.ev.073"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "Sudō tells Suzune he wants attention and respect; Suzune sees her own solitude in his and says she will pursue Class A and Manabu's respect with allies instead of by isolated excellence.",
+      "world_epistemic_status": "FIRST_PERSON_GOAL_REAPPRAISAL_NOT_PERMANENT_CHARACTER_FIX",
+      "actor_knowledge": [
+        {
+          "actor": "actor.ken-sudo",
+          "since": "Y1_V05_CH8_PRIVATE_DIALOGUE",
+          "status": "HEARS_SUZUNE_RECIPROCAL_ALLIANCE"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH8_PRIVATE_DIALOGUE",
+          "status": "SELF_REVISES_METHOD"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+      "chapter": 9,
+      "pdf_pages": [
+        191,
+        193
+      ],
+      "evidence_refs": [
+        "y1v5.ev.079",
+        "y1v5.ev.080"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "Following Class D's loss, Suzune calls failure a source of growth, Sudō accepts a rule against unjustified violence and she grants his first-name request despite missing MVP; future compliance and romance remain unknown.",
+      "world_epistemic_status": "OBSERVED_PROMISE_AND_SELF_REPORT_NOT_PERMANENT_ENFORCEMENT",
+      "actor_knowledge": [
+        {
+          "actor": "actor.ken-sudo",
+          "since": "Y1_V05_CH9_FESTIVAL_END",
+          "status": "KNOWS_OWN_PROMISE"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V05_CH9_FESTIVAL_END",
+          "status": "KNOWS_OWN_OFFER_AND_REFLECTION"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Sudō's future reliability and aggression are not established by this single apology."
+  ]
+}

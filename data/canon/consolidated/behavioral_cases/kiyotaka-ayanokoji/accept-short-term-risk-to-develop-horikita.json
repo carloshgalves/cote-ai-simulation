@@ -1,0 +1,49 @@
+{
+  "id": "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "accept short term risk to develop horikita",
+  "context": "Year 1 V5 actor goals and plans viewed through source-scoped temporal knowledge; normative evolution not automatic.",
+  "observed_actions": "Privately wants Suzune to find the spy instead of changing a compromised roster, engineers a stern motivational challenge so she retrieves Sudō, and later predicts future strength despite foreseen poor festival results.",
+  "observed_result": "Suzune changes course and Sudō returns, while Class D still places last; Kiyotaka withholds credit and misattributes planning to Suzune before Hirata.",
+  "epistemic_limits": "The source establishes purposeful withholding of an immediate countermeasure, not a proved intention to make the class lose every event. No future unconditional sacrifice priority.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      137,
+      138,
+      141,
+      142,
+      187
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_SOURCE_TEXT_MATCH_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.yosuke-hirata",
+    "actor.ken-sudo"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "motivation",
+    "leadership",
+    "deception"
+  ],
+  "information_available": "Private intent, public action and later retrospective statements stay in separate temporal lanes.",
+  "counterfactual_test": "Under alternate incentives, trust and history, goal reprioritization is contingent, never pre-scripted.",
+  "topics": [
+    "strategy",
+    "motivation",
+    "leadership",
+    "deception"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.070",
+    "y1v5.ev.071",
+    "y1v5.ev.078"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

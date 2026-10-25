@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v02.sevenseas.en.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -23,12 +24,14 @@
         "y1v1.case.m.club-fair-silence",
         "y1v2.case.manabu-horikita.offer-secretary-seat",
         "y1v45.case.manabu-horikita.invite-kiyotaka-into-student-council",
-        "y1v45.case.manabu-horikita.uphold-outside-contact-ban"
+        "y1v45.case.manabu-horikita.uphold-outside-contact-ban",
+        "y1v5.case.manabu-horikita.accept-ayanokoji-relay-challenge"
       ],
       "context_evidence_refs": [
         "y1v1.ev.031",
         "y1v45.ev.021",
-        "y1v45.ev.048"
+        "y1v45.ev.048",
+        "y1v5.ev.058"
       ]
     },
     "persuasion": {
@@ -104,7 +107,9 @@
       "context_evidence_refs": [
         "y1v45.ev.019",
         "y1v45.ev.021",
-        "y1v45.ev.048"
+        "y1v45.ev.048",
+        "y1v5.ev.057",
+        "y1v5.ev.058"
       ]
     },
     "reasoning": {
@@ -116,7 +121,8 @@
     "epistemics": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v45.ev.020"
+        "y1v45.ev.020",
+        "y1v5.ev.078"
       ]
     },
     "governance": {
@@ -137,7 +143,8 @@
     "motivation": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v45.ev.025"
+        "y1v45.ev.025",
+        "y1v5.ev.078"
       ]
     },
     "ethics": {
@@ -145,11 +152,33 @@
       "context_evidence_refs": [
         "y1v45.ev.026"
       ]
+    },
+    "sports": {
+      "behavioral_case_refs": [
+        "y1v5.case.manabu-horikita.accept-ayanokoji-relay-challenge"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.031",
+        "y1v5.ev.057"
+      ]
+    },
+    "results": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.031",
+        "y1v5.ev.057"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.078"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false
@@ -160,5 +189,7 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

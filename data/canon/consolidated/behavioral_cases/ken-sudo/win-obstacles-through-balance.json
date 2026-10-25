@@ -1,0 +1,38 @@
+{
+  "id": "y1v5.case.ken-sudo.win-obstacles-through-balance",
+  "actor_id": "actor.ken-sudo",
+  "primary_actor_id": "actor.ken-sudo",
+  "title": "win obstacles through balance",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Rapidly crosses a narrow balance beam and keeps enough obstacle-course pace to beat Shibata.",
+  "observed_result": "Wins head-to-head obstacle race while Shibata regains distance in later segments.",
+  "epistemic_limits": "One composite course cannot calibrate maximal sprint velocity.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      111,
+      112
+    ],
+    "chapter": 6,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.shibata-so"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "results"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "sports",
+    "results"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.037"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

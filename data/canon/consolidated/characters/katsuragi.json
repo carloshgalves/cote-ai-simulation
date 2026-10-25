@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -34,7 +35,9 @@
         "y1v4.ev.037",
         "y1v4.ev.041",
         "y1v4.ev.073",
-        "y1v45.ev.029"
+        "y1v45.ev.029",
+        "y1v5.ev.009",
+        "y1v5.ev.041"
       ]
     },
     "institution": {
@@ -66,7 +69,8 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v3.ev.097",
-        "y1v3.ev.113"
+        "y1v3.ev.113",
+        "y1v5.ev.010"
       ]
     },
     "social": {
@@ -79,16 +83,20 @@
         "y1v45.ev.017",
         "y1v45.ev.022",
         "y1v45.ev.023",
-        "y1v45.ev.031"
+        "y1v45.ev.031",
+        "y1v5.ev.009"
       ]
     },
     "leadership": {
       "behavioral_case_refs": [
-        "y1v4.case.katsuragi.reject-unbounded-zodiac-talk"
+        "y1v4.case.katsuragi.reject-unbounded-zodiac-talk",
+        "y1v5.case.katsuragi.restore-tug-team-coordination"
       ],
       "context_evidence_refs": [
         "y1v4.ev.038",
-        "y1v4.ev.073"
+        "y1v4.ev.073",
+        "y1v5.ev.010",
+        "y1v5.ev.035"
       ]
     },
     "exam": {
@@ -155,19 +163,61 @@
         "y1v45.case.katsuragi.fund-risky-family-delivery"
       ],
       "context_evidence_refs": [
-        "y1v45.ev.027"
+        "y1v45.ev.027",
+        "y1v5.ev.009"
       ]
     },
     "emotion": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v45.ev.031"
+        "y1v45.ev.031",
+        "y1v5.ev.034"
+      ]
+    },
+    "epistemics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.010"
+      ]
+    },
+    "sports": {
+      "behavioral_case_refs": [
+        "y1v5.case.katsuragi.restore-tug-team-coordination"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.027",
+        "y1v5.ev.034",
+        "y1v5.ev.035",
+        "y1v5.ev.036",
+        "y1v5.ev.041"
+      ]
+    },
+    "results": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.027",
+        "y1v5.ev.036",
+        "y1v5.ev.041"
+      ]
+    },
+    "misconduct": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.034"
+      ]
+    },
+    "cooperation": {
+      "behavioral_case_refs": [
+        "y1v5.case.katsuragi.restore-tug-team-coordination"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.035"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge.",
+  "semantic_audit_notes": "This role is modeled only from observed Volume 3 evidence, statements or narration; exact incomplete names, hidden plans and future ability remain unknown. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge. Y1 V5: actor-scoped athletics and strategy evidence provisional; no maximal physical ratings, hidden truth, or future memory without audit.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": true,
     "future_fate_unknown": true,

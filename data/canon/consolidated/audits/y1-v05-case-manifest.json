@@ -1,0 +1,794 @@
+{
+  "schema_version": "v05-case-manifest-v1",
+  "source": "ln.y1.v05.sevenseas.en.operator-provided",
+  "cases": [
+    {
+      "path": "data/canon/consolidated/behavioral_cases/airi-sakura/improve-to-not-last-in-sprint.json",
+      "id": "y1v5.case.airi-sakura.improve-to-not-last-in-sprint",
+      "actor_id": "actor.airi-sakura",
+      "topics": [
+        "sports",
+        "motivation",
+        "emotion"
+      ],
+      "pdf_pages": [
+        92,
+        94
+      ],
+      "evidence_refs": [
+        "y1v5.ev.029"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/arisu-sakayanagi/maintain-faction-support-withdraw-athletics.json",
+      "id": "y1v5.case.arisu-sakayanagi.maintain-faction-support-withdraw-athletics",
+      "actor_id": "actor.arisu-sakayanagi",
+      "topics": [
+        "politics",
+        "social",
+        "leadership"
+      ],
+      "pdf_pages": [
+        28,
+        30
+      ],
+      "evidence_refs": [
+        "y1v5.ev.010"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/arisu-sakayanagi/reveal-white-room-knowledge-in-private.json",
+      "id": "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private",
+      "actor_id": "actor.arisu-sakayanagi",
+      "topics": [
+        "epistemics",
+        "strategy",
+        "relationship"
+      ],
+      "pdf_pages": [
+        202,
+        203,
+        204
+      ],
+      "evidence_refs": [
+        "y1v5.ev.067",
+        "y1v5.ev.068"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/escalate-coercion-until-anonymous-counterevidence.json",
+      "id": "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
+      "actor_id": "actor.kakeru-ryuen",
+      "topics": [
+        "strategy",
+        "coercion",
+        "risk_management",
+        "motivation"
+      ],
+      "pdf_pages": [
+        198,
+        199,
+        200,
+        201
+      ],
+      "evidence_refs": [
+        "y1v5.ev.075",
+        "y1v5.ev.076",
+        "y1v5.ev.077"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/exploit-roster-and-target-horikita.json",
+      "id": "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
+      "actor_id": "actor.kakeru-ryuen",
+      "topics": [
+        "strategy",
+        "misconduct",
+        "negotiation"
+      ],
+      "pdf_pages": [
+        129,
+        131,
+        144,
+        153,
+        172,
+        174,
+        175,
+        198,
+        199,
+        200
+      ],
+      "evidence_refs": [
+        "y1v5.ev.042",
+        "y1v5.ev.046",
+        "y1v5.ev.047",
+        "y1v5.ev.063",
+        "y1v5.ev.074",
+        "y1v5.ev.075",
+        "y1v5.ev.076"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/physically-harass-sudo-in-flag-match.json",
+      "id": "y1v5.case.kakeru-ryuen.physically-harass-sudo-in-flag-match",
+      "actor_id": "actor.kakeru-ryuen",
+      "topics": [
+        "misconduct",
+        "conflict",
+        "sports"
+      ],
+      "pdf_pages": [
+        100,
+        104
+      ],
+      "evidence_refs": [
+        "y1v5.ev.034"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/reassess-hidden-opponent-after-recording.json",
+      "id": "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording",
+      "actor_id": "actor.kakeru-ryuen",
+      "topics": [
+        "strategy",
+        "risk_management",
+        "reasoning"
+      ],
+      "pdf_pages": [
+        199,
+        200,
+        201
+      ],
+      "evidence_refs": [
+        "y1v5.ev.064",
+        "y1v5.ev.065",
+        "y1v5.ev.066",
+        "y1v5.ev.076",
+        "y1v5.ev.077"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/katsuragi/restore-tug-team-coordination.json",
+      "id": "y1v5.case.katsuragi.restore-tug-team-coordination",
+      "actor_id": "actor.katsuragi",
+      "topics": [
+        "leadership",
+        "cooperation",
+        "sports"
+      ],
+      "pdf_pages": [
+        105,
+        110
+      ],
+      "evidence_refs": [
+        "y1v5.ev.035"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/advocate-nonathlete-fairness.json",
+      "id": "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness",
+      "actor_id": "actor.kei-karuizawa",
+      "topics": [
+        "social",
+        "leadership",
+        "negotiation"
+      ],
+      "pdf_pages": [
+        40,
+        45
+      ],
+      "evidence_refs": [
+        "y1v5.ev.013",
+        "y1v5.ev.014"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/abandon-festival-after-provocation.json",
+      "id": "y1v5.case.ken-sudo.abandon-festival-after-provocation",
+      "actor_id": "actor.ken-sudo",
+      "topics": [
+        "discipline",
+        "emotion",
+        "leadership"
+      ],
+      "pdf_pages": [
+        132,
+        135
+      ],
+      "evidence_refs": [
+        "y1v5.ev.043"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/create-relay-first-leg-lead.json",
+      "id": "y1v5.case.ken-sudo.create-relay-first-leg-lead",
+      "actor_id": "actor.ken-sudo",
+      "topics": [
+        "sports",
+        "results"
+      ],
+      "pdf_pages": [
+        183,
+        184
+      ],
+      "evidence_refs": [
+        "y1v5.ev.056"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/practice-coaching-and-temper.json",
+      "id": "y1v5.case.ken-sudo.practice-coaching-and-temper",
+      "actor_id": "actor.ken-sudo",
+      "topics": [
+        "sports",
+        "leadership",
+        "discipline"
+      ],
+      "pdf_pages": [
+        57,
+        60
+      ],
+      "evidence_refs": [
+        "y1v5.ev.019"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/return-apologize-and-serve-relay.json",
+      "id": "y1v5.case.ken-sudo.return-apologize-and-serve-relay",
+      "actor_id": "actor.ken-sudo",
+      "topics": [
+        "leadership",
+        "sports",
+        "discipline"
+      ],
+      "pdf_pages": [
+        55,
+        56,
+        136,
+        163,
+        165,
+        166,
+        178,
+        179,
+        180,
+        181,
+        191,
+        192,
+        193
+      ],
+      "evidence_refs": [
+        "y1v5.ev.050",
+        "y1v5.ev.054",
+        "y1v5.ev.056",
+        "y1v5.ev.060",
+        "y1v5.ev.069",
+        "y1v5.ev.073",
+        "y1v5.ev.080"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/seek-suzune-recognition-and-reprioritize-respect.json",
+      "id": "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect",
+      "actor_id": "actor.ken-sudo",
+      "topics": [
+        "motivation",
+        "relationship",
+        "sports",
+        "discipline"
+      ],
+      "pdf_pages": [
+        55,
+        56,
+        136,
+        165,
+        166,
+        178,
+        179,
+        191,
+        192
+      ],
+      "evidence_refs": [
+        "y1v5.ev.069",
+        "y1v5.ev.073",
+        "y1v5.ev.080"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/serve-as-powerbase-in-cavalry.json",
+      "id": "y1v5.case.ken-sudo.serve-as-powerbase-in-cavalry",
+      "actor_id": "actor.ken-sudo",
+      "topics": [
+        "sports",
+        "cooperation"
+      ],
+      "pdf_pages": [
+        124,
+        129
+      ],
+      "evidence_refs": [
+        "y1v5.ev.041"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/win-obstacles-through-balance.json",
+      "id": "y1v5.case.ken-sudo.win-obstacles-through-balance",
+      "actor_id": "actor.ken-sudo",
+      "topics": [
+        "sports",
+        "results"
+      ],
+      "pdf_pages": [
+        111,
+        112
+      ],
+      "evidence_refs": [
+        "y1v5.ev.037"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kikyo-kushida/leak-lineup-and-threaten-classmates.json",
+      "id": "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
+      "actor_id": "actor.kikyo-kushida",
+      "topics": [
+        "misconduct",
+        "deception",
+        "strategy"
+      ],
+      "pdf_pages": [
+        172,
+        173,
+        174,
+        175,
+        194,
+        195,
+        196,
+        198,
+        199
+      ],
+      "evidence_refs": [
+        "y1v5.ev.053",
+        "y1v5.ev.061",
+        "y1v5.ev.062",
+        "y1v5.ev.063",
+        "y1v5.ev.074"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kikyo-kushida/volunteer-paid-mixed-event-substitution.json",
+      "id": "y1v5.case.kikyo-kushida.volunteer-paid-mixed-event-substitution",
+      "actor_id": "actor.kikyo-kushida",
+      "topics": [
+        "social",
+        "cooperation",
+        "deception"
+      ],
+      "pdf_pages": [
+        168,
+        175
+      ],
+      "evidence_refs": [
+        "y1v5.ev.051",
+        "y1v5.ev.052",
+        "y1v5.ev.053"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kinoshita/take-part-in-disputed-collision-case.json",
+      "id": "y1v5.case.kinoshita.take-part-in-disputed-collision-case",
+      "actor_id": "actor.kinoshita",
+      "topics": [
+        "misconduct",
+        "strategy",
+        "epistemics"
+      ],
+      "pdf_pages": [
+        113,
+        115,
+        144,
+        149,
+        198,
+        199
+      ],
+      "evidence_refs": [
+        "y1v5.ev.038",
+        "y1v5.ev.046",
+        "y1v5.ev.063"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/accept-short-term-risk-to-develop-horikita.json",
+      "id": "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "topics": [
+        "strategy",
+        "motivation",
+        "leadership",
+        "deception"
+      ],
+      "pdf_pages": [
+        137,
+        138,
+        141,
+        142,
+        187
+      ],
+      "evidence_refs": [
+        "y1v5.ev.070",
+        "y1v5.ev.071",
+        "y1v5.ev.078"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/prepare-for-ryuen-information-attack.json",
+      "id": "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "topics": [
+        "strategy",
+        "risk_management",
+        "reasoning"
+      ],
+      "pdf_pages": [
+        31,
+        34,
+        54,
+        70,
+        129,
+        131,
+        136,
+        138,
+        141,
+        142,
+        187
+      ],
+      "evidence_refs": [
+        "y1v5.ev.011",
+        "y1v5.ev.017",
+        "y1v5.ev.023",
+        "y1v5.ev.042",
+        "y1v5.ev.070",
+        "y1v5.ev.071",
+        "y1v5.ev.078"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/record-deliberately-limited-grip.json",
+      "id": "y1v5.case.kiyotaka-ayanokoji.record-deliberately-limited-grip",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "topics": [
+        "sports",
+        "deception",
+        "observation"
+      ],
+      "pdf_pages": [
+        49,
+        51
+      ],
+      "evidence_refs": [
+        "y1v5.ev.015"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/replace-miyake-as-relay-anchor.json",
+      "id": "y1v5.case.kiyotaka-ayanokoji.replace-miyake-as-relay-anchor",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "topics": [
+        "strategy",
+        "sports",
+        "deception"
+      ],
+      "pdf_pages": [
+        181,
+        188
+      ],
+      "evidence_refs": [
+        "y1v5.ev.055",
+        "y1v5.ev.057"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/sprint-against-manabu-with-obstruction.json",
+      "id": "y1v5.case.kiyotaka-ayanokoji.sprint-against-manabu-with-obstruction",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "topics": [
+        "sports",
+        "results",
+        "reasoning"
+      ],
+      "pdf_pages": [
+        187,
+        189
+      ],
+      "evidence_refs": [
+        "y1v5.ev.057"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/manabu-horikita/accept-ayanokoji-relay-challenge.json",
+      "id": "y1v5.case.manabu-horikita.accept-ayanokoji-relay-challenge",
+      "actor_id": "actor.manabu-horikita",
+      "topics": [
+        "sports",
+        "leadership"
+      ],
+      "pdf_pages": [
+        187,
+        189
+      ],
+      "evidence_refs": [
+        "y1v5.ev.057"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/mio-ibuki/lose-narrow-sprint-while-monitoring-rival.json",
+      "id": "y1v5.case.mio-ibuki.lose-narrow-sprint-while-monitoring-rival",
+      "actor_id": "actor.mio-ibuki",
+      "topics": [
+        "sports",
+        "emotion",
+        "observation"
+      ],
+      "pdf_pages": [
+        94,
+        95
+      ],
+      "evidence_refs": [
+        "y1v5.ev.030"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/nagumo/demonstrate-soccer-skill-and-political-ambition.json",
+      "id": "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition",
+      "actor_id": "actor.nagumo",
+      "topics": [
+        "sports",
+        "politics",
+        "leadership"
+      ],
+      "pdf_pages": [
+        74,
+        77,
+        185,
+        186
+      ],
+      "evidence_refs": [
+        "y1v5.ev.024",
+        "y1v5.ev.058"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/withdraw-claimed-illness-under-pressure.json",
+      "id": "y1v5.case.rokusuke-koenji.withdraw-claimed-illness-under-pressure",
+      "actor_id": "actor.rokusuke-koenji",
+      "topics": [
+        "discipline",
+        "resources",
+        "social"
+      ],
+      "pdf_pages": [
+        88,
+        91
+      ],
+      "evidence_refs": [
+        "y1v5.ev.028"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/shibata-so/compete-with-sudo-in-obstacle-event.json",
+      "id": "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event",
+      "actor_id": "actor.shibata-so",
+      "topics": [
+        "sports",
+        "results",
+        "discipline"
+      ],
+      "pdf_pages": [
+        95,
+        112,
+        190,
+        191
+      ],
+      "evidence_refs": [
+        "y1v5.ev.031",
+        "y1v5.ev.037",
+        "y1v5.ev.059"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/suzune-horikita/attempt-counter-recording-negotiation.json",
+      "id": "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation",
+      "actor_id": "actor.suzune-horikita",
+      "topics": [
+        "strategy",
+        "negotiation",
+        "epistemics"
+      ],
+      "pdf_pages": [
+        198,
+        200
+      ],
+      "evidence_refs": [
+        "y1v5.ev.063",
+        "y1v5.ev.064"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/suzune-horikita/be-targeted-in-group-contests.json",
+      "id": "y1v5.case.suzune-horikita.be-targeted-in-group-contests",
+      "actor_id": "actor.suzune-horikita",
+      "topics": [
+        "sports",
+        "risk_management",
+        "results"
+      ],
+      "pdf_pages": [
+        97,
+        99,
+        113,
+        123
+      ],
+      "evidence_refs": [
+        "y1v5.ev.033",
+        "y1v5.ev.038",
+        "y1v5.ev.040"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/suzune-horikita/edge-ibuki-in-sprint.json",
+      "id": "y1v5.case.suzune-horikita.edge-ibuki-in-sprint",
+      "actor_id": "actor.suzune-horikita",
+      "topics": [
+        "sports",
+        "results"
+      ],
+      "pdf_pages": [
+        94,
+        95
+      ],
+      "evidence_refs": [
+        "y1v5.ev.030"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/suzune-horikita/fail-to-synchronize-three-legged.json",
+      "id": "y1v5.case.suzune-horikita.fail-to-synchronize-three-legged",
+      "actor_id": "actor.suzune-horikita",
+      "topics": [
+        "cooperation",
+        "leadership",
+        "sports"
+      ],
+      "pdf_pages": [
+        62,
+        66
+      ],
+      "evidence_refs": [
+        "y1v5.ev.021",
+        "y1v5.ev.022"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/suzune-horikita/propose-performance-optimized-lineup.json",
+      "id": "y1v5.case.suzune-horikita.propose-performance-optimized-lineup",
+      "actor_id": "actor.suzune-horikita",
+      "topics": [
+        "strategy",
+        "leadership",
+        "resources"
+      ],
+      "pdf_pages": [
+        39,
+        45
+      ],
+      "evidence_refs": [
+        "y1v5.ev.012",
+        "y1v5.ev.013",
+        "y1v5.ev.014"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/suzune-horikita/seek-sudo-with-mutual-humility.json",
+      "id": "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility",
+      "actor_id": "actor.suzune-horikita",
+      "topics": [
+        "leadership",
+        "relationship",
+        "emotion"
+      ],
+      "pdf_pages": [
+        136,
+        138,
+        159,
+        163,
+        165,
+        166,
+        178,
+        179,
+        180,
+        191,
+        192,
+        193
+      ],
+      "evidence_refs": [
+        "y1v5.ev.045",
+        "y1v5.ev.048",
+        "y1v5.ev.050",
+        "y1v5.ev.054",
+        "y1v5.ev.070",
+        "y1v5.ev.072",
+        "y1v5.ev.079",
+        "y1v5.ev.080"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/yamada-albert/support-ryuen-against-sudo-cavalry.json",
+      "id": "y1v5.case.yamada-albert.support-ryuen-against-sudo-cavalry",
+      "actor_id": "actor.yamada-albert",
+      "topics": [
+        "sports",
+        "cooperation"
+      ],
+      "pdf_pages": [
+        125,
+        129
+      ],
+      "evidence_refs": [
+        "y1v5.ev.041"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/yosuke-hirata/mediate-athlete-roles-and-vote.json",
+      "id": "y1v5.case.yosuke-hirata.mediate-athlete-roles-and-vote",
+      "actor_id": "actor.yosuke-hirata",
+      "topics": [
+        "leadership",
+        "negotiation",
+        "governance"
+      ],
+      "pdf_pages": [
+        39,
+        45
+      ],
+      "evidence_refs": [
+        "y1v5.ev.012",
+        "y1v5.ev.013",
+        "y1v5.ev.014"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/yosuke-hirata/protect-sensitive-participant-table.json",
+      "id": "y1v5.case.yosuke-hirata.protect-sensitive-participant-table",
+      "actor_id": "actor.yosuke-hirata",
+      "topics": [
+        "strategy",
+        "information",
+        "risk_management"
+      ],
+      "pdf_pages": [
+        51,
+        52,
+        82,
+        85
+      ],
+      "evidence_refs": [
+        "y1v5.ev.016",
+        "y1v5.ev.026"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/yukimura/respond-to-low-athletic-ranks.json",
+      "id": "y1v5.case.yukimura.respond-to-low-athletic-ranks",
+      "actor_id": "actor.yukimura",
+      "topics": [
+        "sports",
+        "emotion"
+      ],
+      "pdf_pages": [
+        98,
+        99
+      ],
+      "evidence_refs": [
+        "y1v5.ev.032"
+      ]
+    }
+  ]
+}

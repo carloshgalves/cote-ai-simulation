@@ -8,7 +8,8 @@
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v05.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -74,7 +75,14 @@
         "y1v45.ev.033",
         "y1v45.ev.034",
         "y1v45.ev.036",
-        "y1v45.ev.045"
+        "y1v45.ev.045",
+        "y1v5.ev.003",
+        "y1v5.ev.013",
+        "y1v5.ev.014",
+        "y1v5.ev.019",
+        "y1v5.ev.022",
+        "y1v5.ev.025",
+        "y1v5.ev.050"
       ]
     },
     "ethics": {
@@ -88,7 +96,8 @@
         "y1v1.ev.085",
         "y1v2.ev.019",
         "y1v2.ev.066",
-        "y1v3.ev.100"
+        "y1v3.ev.100",
+        "y1v5.ev.046"
       ]
     },
     "economy": {
@@ -156,7 +165,8 @@
       "behavioral_case_refs": [
         "y1v1.case.s.financial-restraint",
         "y1v3.case.suzune-horikita.feverish-defense-against-ibuki",
-        "y1v45.case.suzune-horikita.request-help-while-concealing-embarrassment"
+        "y1v45.case.suzune-horikita.request-help-while-concealing-embarrassment",
+        "y1v5.case.suzune-horikita.be-targeted-in-group-contests"
       ],
       "context_evidence_refs": [
         "y1v1.ev.024",
@@ -165,7 +175,9 @@
         "y1v3.ev.098",
         "y1v3.ev.099",
         "y1v45.ev.034",
-        "y1v45.ev.036"
+        "y1v45.ev.036",
+        "y1v5.ev.011",
+        "y1v5.ev.046"
       ]
     },
     "leadership": {
@@ -173,7 +185,10 @@
         "y1v1.case.s.delegated-study-recruitment",
         "y1v1.case.s.study-group-collapse",
         "y1v1.case.s.targeted-study-schedule",
-        "y1v3.case.suzune-horikita.accept-island-leadership"
+        "y1v3.case.suzune-horikita.accept-island-leadership",
+        "y1v5.case.suzune-horikita.fail-to-synchronize-three-legged",
+        "y1v5.case.suzune-horikita.propose-performance-optimized-lineup",
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
       ],
       "context_evidence_refs": [
         "y1v1.ev.031",
@@ -191,7 +206,22 @@
         "y1v2.ev.048",
         "y1v3.ev.037",
         "y1v4.ev.109",
-        "y1v45.ev.048"
+        "y1v45.ev.048",
+        "y1v5.ev.003",
+        "y1v5.ev.008",
+        "y1v5.ev.012",
+        "y1v5.ev.013",
+        "y1v5.ev.014",
+        "y1v5.ev.019",
+        "y1v5.ev.021",
+        "y1v5.ev.045",
+        "y1v5.ev.048",
+        "y1v5.ev.050",
+        "y1v5.ev.054",
+        "y1v5.ev.070",
+        "y1v5.ev.071",
+        "y1v5.ev.072",
+        "y1v5.ev.079"
       ]
     },
     "persuasion": {
@@ -233,7 +263,9 @@
         "y1v4.ev.017",
         "y1v4.ev.040",
         "y1v4.ev.045",
-        "y1v4.ev.125"
+        "y1v4.ev.125",
+        "y1v5.ev.017",
+        "y1v5.ev.020"
       ]
     },
     "academic_reasoning": {
@@ -271,7 +303,9 @@
         "y1v2.case.suzune-horikita.probe-opponent-hearing",
         "y1v3.case.suzune-horikita.seek-trusted-help-for-keycard",
         "y1v4.case.suzune-horikita.challenge-rival-alliance-threat",
-        "y1v4.case.suzune-horikita.test-group-assignment-hypothesis"
+        "y1v4.case.suzune-horikita.test-group-assignment-hypothesis",
+        "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation",
+        "y1v5.case.suzune-horikita.propose-performance-optimized-lineup"
       ],
       "context_evidence_refs": [
         "y1v1.ev.070",
@@ -321,11 +355,35 @@
         "y1v4.ev.126",
         "y1v4.ev.129",
         "y1v4.ev.130",
-        "y1v45.ev.049"
+        "y1v45.ev.049",
+        "y1v5.ev.003",
+        "y1v5.ev.008",
+        "y1v5.ev.011",
+        "y1v5.ev.012",
+        "y1v5.ev.017",
+        "y1v5.ev.022",
+        "y1v5.ev.023",
+        "y1v5.ev.026",
+        "y1v5.ev.040",
+        "y1v5.ev.042",
+        "y1v5.ev.045",
+        "y1v5.ev.055",
+        "y1v5.ev.062",
+        "y1v5.ev.063",
+        "y1v5.ev.064",
+        "y1v5.ev.065",
+        "y1v5.ev.070",
+        "y1v5.ev.071",
+        "y1v5.ev.074",
+        "y1v5.ev.075",
+        "y1v5.ev.076",
+        "y1v5.ev.078"
       ]
     },
     "emotion": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.079",
         "y1v1.ev.081",
@@ -338,7 +396,17 @@
         "y1v3.ev.114",
         "y1v4.ev.130",
         "y1v45.ev.004",
-        "y1v45.ev.033"
+        "y1v45.ev.033",
+        "y1v5.ev.030",
+        "y1v5.ev.048",
+        "y1v5.ev.050",
+        "y1v5.ev.053",
+        "y1v5.ev.054",
+        "y1v5.ev.060",
+        "y1v5.ev.069",
+        "y1v5.ev.072",
+        "y1v5.ev.073",
+        "y1v5.ev.079"
       ]
     },
     "conflict": {
@@ -385,22 +453,41 @@
         "y1v4.ev.043",
         "y1v4.ev.067",
         "y1v4.ev.126",
-        "y1v45.ev.035"
+        "y1v45.ev.035",
+        "y1v5.ev.002",
+        "y1v5.ev.004",
+        "y1v5.ev.026",
+        "y1v5.ev.055",
+        "y1v5.ev.059"
       ]
     },
     "motivation": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.134",
-        "y1v2.ev.029"
+        "y1v2.ev.029",
+        "y1v5.ev.018",
+        "y1v5.ev.069",
+        "y1v5.ev.070",
+        "y1v5.ev.071",
+        "y1v5.ev.072",
+        "y1v5.ev.073",
+        "y1v5.ev.074",
+        "y1v5.ev.075",
+        "y1v5.ev.078",
+        "y1v5.ev.079",
+        "y1v5.ev.080"
       ]
     },
     "resources": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v5.case.suzune-horikita.propose-performance-optimized-lineup"
+      ],
       "context_evidence_refs": [
         "y1v3.ev.058",
         "y1v3.ev.086",
-        "y1v3.ev.090"
+        "y1v3.ev.090",
+        "y1v5.ev.055"
       ]
     },
     "health": {
@@ -417,7 +504,9 @@
     "governance": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v3.ev.111"
+        "y1v3.ev.111",
+        "y1v5.ev.004",
+        "y1v5.ev.014"
       ]
     },
     "reasoning": {
@@ -430,14 +519,27 @@
         "y1v4.ev.069",
         "y1v4.ev.129",
         "y1v45.ev.005",
-        "y1v45.ev.020"
+        "y1v45.ev.020",
+        "y1v5.ev.002",
+        "y1v5.ev.066"
       ]
     },
     "epistemics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation"
+      ],
       "context_evidence_refs": [
         "y1v4.ev.043",
-        "y1v45.ev.020"
+        "y1v45.ev.020",
+        "y1v5.ev.002",
+        "y1v5.ev.025",
+        "y1v5.ev.042",
+        "y1v5.ev.061",
+        "y1v5.ev.063",
+        "y1v5.ev.065",
+        "y1v5.ev.066",
+        "y1v5.ev.077",
+        "y1v5.ev.078"
       ]
     },
     "politics": {
@@ -450,11 +552,18 @@
     },
     "negotiation": {
       "behavioral_case_refs": [
-        "y1v4.case.suzune-horikita.challenge-rival-alliance-threat"
+        "y1v4.case.suzune-horikita.challenge-rival-alliance-threat",
+        "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation"
       ],
       "context_evidence_refs": [
         "y1v4.ev.077",
-        "y1v45.ev.045"
+        "y1v45.ev.045",
+        "y1v5.ev.013",
+        "y1v5.ev.046",
+        "y1v5.ev.047",
+        "y1v5.ev.064",
+        "y1v5.ev.076",
+        "y1v5.ev.077"
       ]
     },
     "psychology": {
@@ -478,23 +587,127 @@
       ]
     },
     "sports": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v5.case.suzune-horikita.be-targeted-in-group-contests",
+        "y1v5.case.suzune-horikita.edge-ibuki-in-sprint",
+        "y1v5.case.suzune-horikita.fail-to-synchronize-three-legged"
+      ],
       "context_evidence_refs": [
         "y1v45.ev.047",
         "y1v45.ev.049",
-        "y1v45.ev.050"
+        "y1v45.ev.050",
+        "y1v5.ev.008",
+        "y1v5.ev.019",
+        "y1v5.ev.020",
+        "y1v5.ev.021",
+        "y1v5.ev.030",
+        "y1v5.ev.031",
+        "y1v5.ev.033",
+        "y1v5.ev.038",
+        "y1v5.ev.039",
+        "y1v5.ev.040"
       ]
     },
     "deception": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v45.ev.050"
+        "y1v45.ev.050",
+        "y1v5.ev.020",
+        "y1v5.ev.071",
+        "y1v5.ev.074"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.018",
+        "y1v5.ev.053",
+        "y1v5.ev.054",
+        "y1v5.ev.060",
+        "y1v5.ev.061",
+        "y1v5.ev.069",
+        "y1v5.ev.072",
+        "y1v5.ev.073",
+        "y1v5.ev.080"
+      ]
+    },
+    "cooperation": {
+      "behavioral_case_refs": [
+        "y1v5.case.suzune-horikita.fail-to-synchronize-three-legged"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.021",
+        "y1v5.ev.022",
+        "y1v5.ev.039"
+      ]
+    },
+    "information": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.023"
+      ]
+    },
+    "trust": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.025"
+      ]
+    },
+    "results": {
+      "behavioral_case_refs": [
+        "y1v5.case.suzune-horikita.be-targeted-in-group-contests",
+        "y1v5.case.suzune-horikita.edge-ibuki-in-sprint"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.030",
+        "y1v5.ev.031",
+        "y1v5.ev.033",
+        "y1v5.ev.038",
+        "y1v5.ev.039",
+        "y1v5.ev.040",
+        "y1v5.ev.059"
+      ]
+    },
+    "misconduct": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.038",
+        "y1v5.ev.047",
+        "y1v5.ev.053",
+        "y1v5.ev.062",
+        "y1v5.ev.063",
+        "y1v5.ev.074",
+        "y1v5.ev.075"
+      ]
+    },
+    "coercion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.047",
+        "y1v5.ev.062",
+        "y1v5.ev.075",
+        "y1v5.ev.076"
+      ]
+    },
+    "discipline": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.060",
+        "y1v5.ev.080"
+      ]
+    },
+    "counterstrategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v5.ev.077"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false
@@ -514,5 +727,10 @@
     "admitted_initial_claim_ids": [],
     "legacy_material_can_seed_agent": false,
     "quarantine_policy": "Only source-backed evidence re-reviewed at record level may be promoted; future references never seed memories."
-  }
+  },
+  "goal_transition_refs": [
+    "y1v5.goal.suzune-horikita.individual-excellence-to-reciprocal-alliance",
+    "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

@@ -1,0 +1,42 @@
+{
+  "id": "y1v5.case.suzune-horikita.fail-to-synchronize-three-legged",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "fail to synchronize three legged",
+  "context": "Year 1 Volume 5; scene-specific competition conditions and asymmetric knowledge gates apply.",
+  "observed_actions": "Attempts three-legged practice with Onodera but refuses pace compromises and repeatedly loses partners.",
+  "observed_result": "Pair has mediocre practice finishes and quarrels, despite strong individual sprinting.",
+  "epistemic_limits": "Team coordination is distinct from solo speed; partner mismatch is not a permanent character property.",
+  "source": {
+    "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      62,
+      66
+    ],
+    "chapter": 4,
+    "source_status": "ASSISTANT_INITIAL_PDF_TEXT_REVIEW_INDEPENDENT_AUDIT_PENDING"
+  },
+  "other_actors": [
+    "actor.onodera",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "cooperation",
+    "leadership",
+    "sports"
+  ],
+  "information_available": "Only actors participating in the scene know their own actions; narrated thoughts and later private revelations never create global actor memories.",
+  "counterfactual_test": "Compare against same event, equipment, rest, teammates, opponents and information, preserving injury/obstruction and luck. Unobserved counterfactual remains unknown.",
+  "topics": [
+    "cooperation",
+    "leadership",
+    "sports"
+  ],
+  "evidence_refs": [
+    "y1v5.ev.021",
+    "y1v5.ev.022"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE"
+}

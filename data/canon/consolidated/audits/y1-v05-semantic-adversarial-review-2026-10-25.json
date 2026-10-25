@@ -1,0 +1,80 @@
+{
+  "schema_version": "volume-semantic-adversarial-review-v1",
+  "volume": "Y1_V05",
+  "date": "2026-10-25",
+  "source_id": "ln.y1.v05.sevenseas.en.operator-provided",
+  "source_sha256": "0302c25d48f82c9a336b019c4d52045560fdbd91138381a1b24f6a960ae85914",
+  "review_actor": "ASSISTANT_DIRECT_SOURCE_AND_ADVERSARIAL_NO_INDEPENDENT_REVIEW",
+  "source_verified_externally": false,
+  "reviewed": {
+    "evidence": 80,
+    "behavioral_cases": 39,
+    "goal_transitions": 10
+  },
+  "open_known_source_anomaly": "Y1V5-GOAL-003: anonymous recording names Ibuki at physical PDF p200-201 while collision and Ryuen's later explanation refer to Kinoshita; avoid invented harmonization.",
+  "remediated": [
+    {
+      "id": "Y1V5-GOAL-001",
+      "description": "Ryūen aims at Suzune's humiliation/coerced kneeling rather than simply optimizing class score; began kneeling but anonymous message interrupted plan",
+      "pages": null
+    },
+    {
+      "id": "Y1V5-GOAL-002",
+      "description": "Kushida's direct sport roster leak admission, asserted VIP exchange and shifting expulsion target list separated from public Class A objective",
+      "pages": null
+    },
+    {
+      "id": "Y1V5-GOAL-004",
+      "description": "Horikita retains Class A/brother objective but revises cooperative means; Sudō's one-sided romance and promises are not enduring guarantees",
+      "pages": null
+    },
+    {
+      "id": "Y1V5-GOAL-005",
+      "description": "Ayanokōji accepts risk to have Suzune discover spy; cannot generalize to intentionally engineering Class D's entire loss",
+      "pages": null
+    },
+    {
+      "id": "Y1V5-ADV-001",
+      "description": "Last-place penalty is not elective written-test reward; a one-point test deduction is fallback only for student with insufficient 1000 private points.",
+      "pages": [
+        19
+      ]
+    },
+    {
+      "id": "Y1V5-ADV-002",
+      "description": "Include Sudō's reported 82.4 kg grip measurement and retain Ayanokōji's 60.6 kg explicitly submaximal result.",
+      "pages": [
+        50,
+        51
+      ]
+    },
+    {
+      "id": "Y1V5-ADV-003",
+      "description": "Source supports Ryūen offering 500000 private points to Kinoshita, not proof of a completed payment; redact incorrect 'accepted payment' phrasing.",
+      "pages": [
+        199
+      ]
+    },
+    {
+      "id": "Y1V5-ADV-004",
+      "description": "Previously omitted three Hirata-funded substitutions and separately self-funded Kushida/Ayanokōji substitution decisions; record as resource-limited strategy, not generic altruism.",
+      "pages": [
+        168,
+        169
+      ]
+    }
+  ],
+  "release_gates": {
+    "github_merge_commit": "OPERATOR_EXPLICITLY_REQUESTED_ON_THIS_TURN_IF_CI_GREEN",
+    "independent_source_verification": "NOT_PERFORMED",
+    "engine_memory_admission": false,
+    "executable_goals": false,
+    "operator_engine_release": "NOT_REQUESTED"
+  },
+  "notes": [
+    "Direct primary PDF SHA matches committed metadata, full PDF not in repository",
+    "Assistant review cannot be represented as independent adversarial peer review",
+    "Semantic edits do not change canonical event history or retroactively distribute secrets to simulated actors",
+    "Provenance example paths and regression tests keep alternate outcomes open"
+  ]
+}

@@ -209,7 +209,7 @@
     {
       "id": "y1v5.ev.006",
       "domain": "exam",
-      "summary": "Top three individual event finishes permit a choice of 5000/3000/1000 private points or 3/2/1 written-test points; last place loses 1000 private points or a test point; bottom ten in each grade face -10 on the next written exam.",
+      "summary": "First-through-third finishes in individual events offer a choice of 5000/3000/1000 private points or 3/2/1 written-test points respectively. Last place instead costs 1000 private points, with a one-point written-test penalty only if the student has fewer than 1000 private points. The ten lowest-scoring first years also receive a ten-point penalty on their next written exam.",
       "source": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -580,7 +580,7 @@
     {
       "id": "y1v5.ev.015",
       "domain": "sports",
-      "summary": "In grip-strength screening Ayanokōji deliberately stops at 60.6 rather than full effort, placing second behind Sudō with Kōenji uncounted; Hirata records 57.9, Ike 42.6 and Sotomura 42. These are observed readings, not absolute strength ceilings.",
+      "summary": "In the pre-festival dominant-hand grip-strength screening Sudō reads 82.4 kg, Ayanokōji deliberately stops at 60.6 kg rather than full effort, Hirata reads 57.9, Ike 42.6, Sotomura 42.0, and Miyamoto 48.0. Ayanokōji is second among the measured boys, excluding unmeasured Kōenji; readings are observed values, not general maximum strength ratings.",
       "source": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -2117,7 +2117,7 @@
     {
       "id": "y1v5.ev.051",
       "domain": "sports",
-      "summary": "Class D loses four-way tug-of-war with Sudō absent despite substitution; Kushida offers to join mixed three-legged event as a paid substitute after another participant withdraws.",
+      "summary": "Class D loses four-way tug-of-war with Sudō absent; Hirata reports having already covered three paid substitutions (twice for Sudō and once for Horikita) at 100000 points each. Kushida volunteers to pay her own 100000-point substitution to replace Horikita in the mixed three-legged event; Ayanokōji independently offers to pay his own substitution to replace Sudō. Financial burden and participant choice are distinct from their stated public motives.",
       "source": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -2632,7 +2632,7 @@
     {
       "id": "y1v5.ev.063",
       "domain": "strategy",
-      "summary": "Ryūen describes using Kushida's leaked participant roster to engineer matchups and alleges Kinoshita rehearsed collision and accepted payment for a manufactured injury; narration does not establish a completed independent forensic investigation.",
+      "summary": "Ryūen describes using Kushida's leaked participant roster to engineer matchups and claims Kinoshita rehearsed a collision, pretended to be injured initially, and agreed to his OFFER of 500000 private points for a staged injury later allegedly inflicted by him. No completed payment is shown; the confession is subsequently framed by Ryūen as hypothetical and does not constitute independent forensic proof.",
       "source": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "pdf_pages": [

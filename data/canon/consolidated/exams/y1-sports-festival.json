@@ -57,7 +57,13 @@
     "last_individual_event_private_penalty": 1000,
     "first_year_bottom_ten_exam_penalty": 10,
     "overall_mvp_private_points": 100000,
-    "grade_mvp_top_three_private_points": 10000
+    "grade_mvp_top_three_private_points": 10000,
+    "last_individual_event_fallback_exam_penalty": {
+      "points": 1,
+      "condition": "ONLY_IF_STUDENT_PRIVATE_POINTS_BELOW_1000",
+      "source_pdf_page": 19
+    },
+    "individual_winner_reward_choice_note": "First three places only: private points OR nontransferable written-test points. Last-place fallback is NOT an elective choice."
   },
   "roster": {
     "deadline": "17:00 the day before festival",

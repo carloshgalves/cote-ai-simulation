@@ -375,30 +375,41 @@
       "unit": "kgf_on_device_not_calibrated_max",
       "observations": [
         {
-          "actor": "actor.kiyotaka-ayanokoji",
-          "value": 60.6,
-          "source_mode": "INTENTIONALLY_SUBMAXIMAL",
-          "rank_note": "Second measured class boy excluding unmeasured Kōenji"
-        },
-        {
-          "actor": "actor.yosuke-hirata",
-          "value": 57.9
+          "actor": "actor.sotomura",
+          "value": 42
         },
         {
           "actor": "actor.kanji-ike",
           "value": 42.6
         },
         {
-          "actor": "actor.sotomura",
-          "value": 42
-        },
-        {
           "actor": "actor.miyamoto",
           "value": 48
+        },
+        {
+          "actor": "actor.yosuke-hirata",
+          "value": 57.9
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "value": 60.6,
+          "source_mode": "INTENTIONALLY_SUBMAXIMAL",
+          "rank_note": "Second measured class boy excluding unmeasured Kōenji"
+        },
+        {
+          "actor": "actor.ken-sudo",
+          "value": 82.4,
+          "source_mode": "REPORTED_MEASURED_DOMINANT_HAND",
+          "context": "Comparison against Ayanokōji deliberate submaximal reading is not a maximum-strength contest."
         }
       ],
       "evidence_refs": [
         "y1v5.ev.015"
+      ],
+      "limits": [
+        "Physical grip readings are single device observations, not calibrated actor strength parameters",
+        "Sudō 82.4 vs Ayanokōji 60.6 cannot establish maximum strength because Ayanokōji stopped deliberately",
+        "No quantified valid reading for Kōenji; do not impute any"
       ]
     },
     {

@@ -137,8 +137,8 @@
       "observations": [
         {
           "unit": "Red A/D boys",
-          "result": "MIXED_ROUND_PERFORMANCE",
-          "context": "Internal Class A faction conflict and regrouping; full score matrix not documented",
+          "result": "RED_A_D_BOYS_WIN_AFTER_THREE_ROUNDS",
+          "context": "Red/A-D win first round; White/B-C win second after better configuration; Red/A-D take deciding round despite Class A faction conflict and Ryūen disruption. Girls' separate competition outcome not proven here.",
           "evidence": "y1v5.ev.035"
         }
       ]

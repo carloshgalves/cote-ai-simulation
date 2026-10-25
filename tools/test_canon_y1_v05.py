@@ -38,6 +38,14 @@ assert audit["release_gate"]["engine_memory_admission"] is False
 assert audit["release_gate"]["exam_executable"] is False
 assert all(x["verified"] is False for x in audit["evidence"]+audit["behavioral_cases"])
 assert fest["authority"]=="CANON_REFERENCE_NOT_EXECUTABLE"
+assert fest["scoring"]["last_individual_event_fallback_exam_penalty"]=={"points":1,"condition":"ONLY_IF_STUDENT_PRIVATE_POINTS_BELOW_1000","source_pdf_page":19}
+assert "Last-place fallback is NOT an elective choice" in fest["scoring"]["individual_winner_reward_choice_note"]
+assert "ONLY_IF_STUDENT_PRIVATE_POINTS_BELOW_1000" not in evidence["y1v5.ev.006"]["summary"] or "last place" in evidence["y1v5.ev.006"]["summary"].lower()
+assert "fewer than 1000 private points" in evidence["y1v5.ev.006"]["summary"]
+assert "82.4" in evidence["y1v5.ev.015"]["summary"]
+assert "OFF" in evidence["y1v5.ev.063"]["summary"] and "No completed payment" in evidence["y1v5.ev.063"]["summary"]
+assert "three paid substitutions" in evidence["y1v5.ev.051"]["summary"]
+assert "Ibuki" in evidence["y1v5.ev.077"]["summary"] and "Kinoshita" in evidence["y1v5.ev.077"]["summary"]
 assert fest["outcome"]["team_winner"]=="RED"
 assert fest["outcome"]["first_year_ranking"]==["B","C","A","D"]
 assert fest["outcome"]["first_year_mvp"]=="actor.shibata-so"
@@ -88,6 +96,8 @@ def violations(model):
     v=[]
     measured=model["measures"][0]["observations"]
     ay=next(x for x in measured if x["actor"]=="actor.kiyotaka-ayanokoji")
+    sudo=next((x for x in measured if x["actor"]=="actor.ken-sudo"),None)
+    if sudo is None or sudo["value"]!=82.4: v.append("Sudou source grip value missing")
     if ay["value"]!=60.6 or ay["source_mode"]!="INTENTIONALLY_SUBMAXIMAL":v.append("false maximum grip")
     if model["comparison_policy"]!="OBSERVED_EVENT_ONLY_NO_UNCONSTRAINED_GENERALIZATION":v.append("unbounded physical rankings")
     race=model["events"][0]["observations"]
@@ -103,7 +113,8 @@ def violations(model):
 # Event-local observations, never automatic combat or speed ratings.
 assert not violations(perf),violations(perf)
 mutants=[
-    ("upgrade submaximal grip",lambda p:p["measures"][0]["observations"][0].update(source_mode="MAXIMUM")),
+    ("upgrade submaximal grip",lambda p:next(x for x in p["measures"][0]["observations"] if x["actor"]=="actor.kiyotaka-ayanokoji").update(source_mode="MAXIMUM")),
+    ("delete Sudo measured 82.4",lambda p:next(x for x in p["measures"][0]["observations"] if x["actor"]=="actor.ken-sudo").update(value=78.0)),
     ("unbounded physical score",lambda p:p.update(comparison_policy="GLOBAL_RANK_BY_WINS")),
     ("erase Horikita-Ibuki nuance",lambda p:next(x for x in p["events"][0]["observations"] if x.get("actor")=="actor.suzune-horikita").update(result="FASTER_IN_ALL_CONTEXTS")),
     ("forge clear Ayanokoji-Manabu win",lambda p:next(x for x in p["events"][-1]["observations"] if x.get("actor")=="actor.kiyotaka-ayanokoji").update(result="UNCONTESTED_WIN")),

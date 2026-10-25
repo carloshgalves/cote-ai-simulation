@@ -49,7 +49,18 @@
     },
     "20": {
       "evidence": [
-        "y1v5.ev.006",
+        "y1v5.ev.006"
+      ],
+      "cases": []
+    },
+    "21": {
+      "evidence": [
+        "y1v5.ev.007"
+      ],
+      "cases": []
+    },
+    "22": {
+      "evidence": [
         "y1v5.ev.007"
       ],
       "cases": []
@@ -976,9 +987,12 @@
     },
     "203": {
       "evidence": [
+        "y1v5.ev.067",
         "y1v5.ev.068"
       ],
-      "cases": []
+      "cases": [
+        "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private"
+      ]
     },
     "204": {
       "evidence": [

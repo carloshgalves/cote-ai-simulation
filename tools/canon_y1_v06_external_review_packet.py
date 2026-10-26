@@ -102,6 +102,7 @@ def validate(packet,head,allow_findings=False):
         issues.append("review not linked to GitHub")
     if str(reviewer.get("identity","")).strip().lower() in ("same_assistant","chatgpt_same_assistant","sAME_assistant_two_methods".lower()):
         issues.append("same assistant not an independent reviewer")
+    anchor_pages={x["record_id"]:x["pdf_page"] for x in read(DATA/"audits/y1-v06-verbatim-source-anchors.json")["records"]}
     rows=packet.get("reviews",[])
     if len(rows)!=138:issues.append("missing review rows")
     seen=set()
@@ -123,7 +124,12 @@ def validate(packet,head,allow_findings=False):
             issues.append("invalid page review "+key)
         refs=set(expected[key]["evidence_refs"])
         if set(entry.get("evidence_refs_checked",[]))!=refs:issues.append("missing per-claim citations "+key)
-        if len(str(entry.get("short_source_excerpt","")).strip())<6:issues.append("supporting excerpt absent "+key)
+        for ref in refs:
+            if anchor_pages.get(ref) not in entry.get("pages_checked",[]):
+                issues.append("source page for referenced evidence not read "+key+" -> "+ref)
+        excerpt=str(entry.get("short_source_excerpt","")).strip()
+        if len(excerpt)<6:issues.append("supporting excerpt absent "+key)
+        if len(excerpt.split())>20:issues.append("excessive quotation from copyrighted source "+key)
         if len(str(entry.get("reasoning","")).strip())<45:issues.append("insufficient reasoning "+key)
         if verdict in ("FINDING","UNRESOLVED"):
             if entry.get("finding_severity") not in ("LOW","MEDIUM","HIGH","CRITICAL"):issues.append("finding severity absent "+key)

@@ -37,7 +37,35 @@
         "y1v6.ev.027",
         "y1v6.ev.028",
         "y1v6.ev.030"
-      ]
+      ],
+      "horikita_four_group_targets": [
+        {
+          "group": "TEN_LOWEST_ACADEMIC_STUDENTS",
+          "size": 10,
+          "score_target": "0",
+          "role": "Pair with top scoring peers"
+        },
+        {
+          "group": "TEN_LOWER_MIDDLE_ACADEMIC_STUDENTS",
+          "size": 10,
+          "score_target": "1",
+          "role": "Pair with upper-middle peers"
+        },
+        {
+          "group": "TEN_UPPER_MIDDLE_ACADEMIC_STUDENTS",
+          "size": 10,
+          "score_target": "MAXIMUM_80",
+          "role": "Pair with lower-middle peers"
+        },
+        {
+          "group": "TEN_HIGHEST_ACADEMIC_STUDENTS",
+          "size": 10,
+          "score_target": "AT_LEAST_85",
+          "role": "Pair with lowest peers"
+        }
+      ],
+      "horikita_four_group_targets_pdf_page": 78,
+      "coenji_risk": "Unpredictable quiz underperformance could break intended high-low pairing; he did not promise exact points"
     },
     "main_exam": {
       "subjects": 8,

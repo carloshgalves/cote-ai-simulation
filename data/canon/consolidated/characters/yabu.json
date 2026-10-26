@@ -1,17 +1,48 @@
 {
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.yabu",
-  "display_name": "Yabu (first name not established here)",
+  "display_name": "Yabu Nanami",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "REPORT_CANDIDATES_DIRECT_SOURCE_REVIEW_PENDING",
   "identity": {
-    "role_summary": "Character explicitly mentioned in Year 1 Volume 6",
+    "role_summary": "Class C student among three privately interrogated by Ryūen in Volume 6",
     "aliases": []
   },
-  "domains": {},
+  "domains": {
+    "intimidation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.024"
+      ]
+    },
+    "information": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.024"
+      ]
+    },
+    "investigation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.025"
+      ]
+    },
+    "privacy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.025"
+      ]
+    },
+    "coercion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.025"
+      ]
+    }
+  },
   "knowledge_time_policy": {
     "canonical_after_divergence_is_not_actor_memory": true,
     "actor_knowledge_requires_acquisition_event": true

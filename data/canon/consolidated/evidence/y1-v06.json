@@ -1159,7 +1159,7 @@
         ],
         "chapter": 4,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "DIRECT_PDF_P71_P74_NAME_CHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -1176,7 +1176,9 @@
       },
       "mention_actor_ids": [
         "actor.kakeru-ryuen",
-        "actor.manabe-shiho"
+        "actor.manabe-shiho",
+        "actor.yabu",
+        "actor.yamashita"
       ],
       "mention_organization_ids": [],
       "topics": [
@@ -1207,7 +1209,7 @@
         ],
         "chapter": 4,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "DIRECT_PDF_P71_P74_NAME_CHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
       },
       "source_mode": "SECONDHAND_REPORT_AND_INFERENCE",
       "source_report_mode": "RELATO / INFERÊNCIA",
@@ -1224,7 +1226,10 @@
         "chapter_order": 4
       },
       "mention_actor_ids": [
-        "actor.kakeru-ryuen"
+        "actor.kakeru-ryuen",
+        "actor.yabu",
+        "actor.yamashita",
+        "actor.manabe-shiho"
       ],
       "mention_organization_ids": [],
       "topics": [

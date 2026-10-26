@@ -9,7 +9,8 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -49,7 +50,8 @@
         "y1v45.ev.057",
         "y1v5.ev.003",
         "y1v5.ev.013",
-        "y1v5.ev.014"
+        "y1v5.ev.014",
+        "y1v6.ev.059"
       ]
     },
     "economy": {
@@ -206,7 +208,8 @@
     "privacy": {
       "behavioral_case_refs": [
         "y1v4.case.kei-karuizawa.reject-unconsented-photography",
-        "y1v45.case.kei-karuizawa.quietly-prevent-recording-abuse"
+        "y1v45.case.kei-karuizawa.quietly-prevent-recording-abuse",
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection"
       ],
       "context_evidence_refs": [
         "y1v4.ev.055",
@@ -229,7 +232,8 @@
         "y1v4.ev.131",
         "y1v45.ev.044",
         "y1v45.ev.051",
-        "y1v45.ev.052"
+        "y1v45.ev.052",
+        "y1v6.ev.062"
       ]
     },
     "negotiation": {
@@ -263,10 +267,14 @@
       ]
     },
     "deception": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes"
+      ],
       "context_evidence_refs": [
         "y1v4.ev.131",
-        "y1v5.ev.071"
+        "y1v5.ev.071",
+        "y1v6.ev.060",
+        "y1v6.ev.062"
       ]
     },
     "consequence": {
@@ -276,13 +284,17 @@
       ]
     },
     "reasoning": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.002"
       ]
     },
     "epistemics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.002",
         "y1v5.ev.042"
@@ -305,11 +317,52 @@
       "context_evidence_refs": [
         "y1v5.ev.071"
       ]
+    },
+    "secrecy": {
+      "behavioral_case_refs": [
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.009",
+        "y1v6.ev.059"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.009"
+      ]
+    },
+    "security": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.009"
+      ]
+    },
+    "information": {
+      "behavioral_case_refs": [
+        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.059",
+        "y1v6.ev.062"
+      ]
+    },
+    "investigation": {
+      "behavioral_case_refs": [
+        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.060"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. Adversarial V4 source-gap review: false Manabe witness story and Hoshinomiya's discretionary Rabbit assignment are source-scoped; group selection is not a verified VIP assignment formula. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge. Y1 V5: actor-scoped athletics and strategy evidence provisional; no maximal physical ratings, hidden truth, or future memory without audit.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. Adversarial V4 source-gap review: false Manabe witness story and Hoshinomiya's discretionary Rabbit assignment are source-scoped; group selection is not a verified VIP assignment formula. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge. Y1 V5: actor-scoped athletics and strategy evidence provisional; no maximal physical ratings, hidden truth, or future memory without audit. Y1 V6 source-scoped report evidence, no automatic future memory or guaranteed goals.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

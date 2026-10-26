@@ -6,7 +6,7 @@ Data: 2026-10-26. Estado: revisão do assistente com passagens de maior risco ve
 - Fonte primária: `COTE Y1 V6.pdf`, SHA-256 `e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b`, 211 páginas físicas.
 - Relatório de base: `Relatorio_COTE_Y1_V6.md`, SHA-256 `b637e9625e3287dd53a6c3f6bbfe5a4071751bec6fca3cf8b9be6f227223d320`.
 - Arquivos incorporados: 80 evidências candidatas, 43 casos por ator, 15 transições históricas de metas/crenças, dossiês retrospectivos e `exams/y1-paper-shuffle.json`.
-- Auditoria atual: 50 evidências com janela primária diretamente conferida em alguma etapa; 31 com segunda verificação semântica dirigida aos riscos; 43 casos com atribuição/links de fonte verificados estruturalmente; 15 transições com causalidade/alternativas verificadas estruturalmente. **107 verificações semânticas profundas específicas permanecem pendentes; 138 avaliações independentes permanecem pendentes.** Nenhuma afirmação recebe `verified:true`.
+- Auditoria atual: **80/80 evidências com frases curtas verificadas nas páginas físicas do PDF**, **43/43 casos** e **15/15 transições** conferidos pela mesma assistência sob dois critérios (fidelidade contextual e contestação adversarial). O registro individual tem **138 pareceres** e uma hipótese adversarial específica para cada item. **Zero verificações semânticas assistidas permanecem pendentes neste escopo; as 138 revisões por um avaliador efetivamente independente ainda estão pendentes na Issue #38.** Não há afirmações `verified:true` nem liberação de execução.
 
 ## Achados remediados na revisão final
 
@@ -38,9 +38,18 @@ A primeira extração do Volume 5 (#34) foi substituída pela #35. Antes de fech
 - Páginas 160–162 do Volume 5: Ayanokōji fica **em último lugar** na caça ao objeto após duas trocas de pedido, sem que isso meça atletismo geral.
 - Página 189 do Volume 5: Manabu termina à frente de Ayanokōji após obstrução; nenhum tempo máximo ou resultado sem o acidente é fornecido.
 
+## Verificação por método diferente e independência real
+
+- Uma rotina de conferência executada sobre o PDF privado verificou as **80 âncoras textuais, o SHA-256 e as 211 páginas**, sem publicar o texto integral da novel. O comando reproduzível está em `tools/verify_canon_y1_v06_primary_pdf.py`; as evidências curtas em `audits/y1-v06-verbatim-source-anchors.json`.
+- O arquivo `audits/y1-v06-source-and-adversarial-138-evaluations.json` contém um parecer **por cada evidência, caso e transição** com hipótese de extrapolação a rejeitar. Todos os pareceres são do **mesmo assistente**; não constituem validação externa por outra pessoa/modelo.
+- **Issue [#38](https://github.com/carloshgalves/cote-ai-simulation/issues/38)** define a revisão independente que falta, com acesso autorizado ao PDF privado, aprovação individual, evidências e regressões. Não falsificar 138 pareceres externos inexistentes.
+- Nova correção **V6-F015**: p166, Karuizawa derrama o suco intencionalmente sobre Kushida; p203–205, a autoria do plano/da folha permanece inferencial e não é atribuída sem prova.
+- Nova correção **V6-F016**: p17–18, Ike e Yamauchi de fato reduzem convites a Ayanokōji; a motivação atribuída por Horikita a ressentimento das habilidades ocultas é **interpretação**, não explicação confessada pelos colegas.
+
 ## Controles e decisão
 
 - `tools/test_canon_y1_v06.py`: 17 controles adversariais preexistentes.
 - `tools/test_canon_y1_v06_semantic_adversarial.py`: 28 novos controles negativos para identidades, arquivos escolares, inferência X, objetivo persistente de Ryūen, limites de resultados, avaliação independente e as duas ressalvas herdadas da #34.
-- As suítes de V5 incluem **32 mutações adversariais**, agora protegendo também os cinco episódios físicos/estratégicos recuperados da #34; a regressão cumulativa permanece obrigatória no CI. Toda promoção de memória, definição executável de exame e mecanismo executável de metas permanece **desabilitada**.
+- `tools/test_canon_y1_v06_comprehensive_audit.py`: **138 mutações de regressão por item**, além da validação de páginas, ator, fonte e gates; esses testes não substituem um avaliador literário independente.
+- As suítes de V5 incluem **32 mutações adversariais**, protegendo também cinco episódios físicos/estratégicos recuperados da #34; a regressão cumulativa permanece obrigatória no CI. Toda promoção de memória, definição executável de exame e mecanismo executável de metas permanece **desabilitada**.
 - **Estado recomendado:** manter PR #37 como Draft, sem merge, até resolver a revisão independente restante e o gate do operador. O relatório documenta uma revisão assistida substancial, sem reivindicar revisão por terceiro.

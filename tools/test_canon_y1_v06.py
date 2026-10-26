@@ -60,7 +60,7 @@ for i in range(1,81):
     assert 1<=e["source"]["chapter"]<=7
     assert e["subject_assertion"]=="MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR"
     assert e["related_canonical_event_ids"]==retro["events_by_source_evidence"].get(id,[])
-    assert e["assertion_status"]=="REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING"
+    assert e["assertion_status"]=="ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING"
     for p in e["source"]["pdf_pages"]:
         assert id in pages["pages"][str(p)]["evidence"]
     for t in e["topics"]:

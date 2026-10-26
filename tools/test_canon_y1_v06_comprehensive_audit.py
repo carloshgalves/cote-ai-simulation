@@ -79,6 +79,8 @@ def problems():
         if len(rr.get("primary_pdf_anchor_refs",[]))!=len(g["evidence_refs"]):bad.append("goal primary refs "+id)
         if ar.get("kind")!="goal_transition" or ar.get("third_party_signoff") is not False or not ar.get("adversarial_counterclaim"):bad.append("goal adversarial reviewer "+id)
         if len(ar.get("primary_pdf_anchor_refs",[]))!=len(g["evidence_refs"]):bad.append("goal adversarial anchors "+id)
+    if claims["y1v6.ev.005"]["source_mode"]!="NARRATOR_OBSERVED_SOCIAL_EXCLUSION_WITH_CHARACTER_INFERENCE":bad.append("Horikita social motive presented as observed confession")
+    if "interpretação da personagem" not in claims["y1v6.ev.005"]["summary"]:bad.append("attributed social cause invented")
     if "deliberadamente" not in claims["y1v6.ev.062"]["summary"] and "conscientemente" not in claims["y1v6.ev.062"]["summary"]:bad.append("juice wrongly treated as accidental")
     if "não prova quem planejou" not in claims["y1v6.ev.062"]["summary"]:bad.append("unproven orchestrator attributed")
     if "Classe A" not in claims["y1v6.ev.079"]["summary"]:bad.append("Ryuen final goal lost")

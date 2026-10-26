@@ -108,7 +108,7 @@
       "id": "y1v6.ev.003",
       "source_catalog_id": "V6-E003",
       "domain": "politics",
-      "summary": "Nagumo sucede Manabu e anuncia reformas centralizadoras no conselho",
+      "summary": "Nagumo Miyabi é publicamente empossado presidente do conselho após Manabu e anuncia seu programa de reforma (mandatos, tamanho, eleições, afastamento por voto). Ele declara que deseja implementar as mudanças imediatamente, mas reconhece obstáculos e obrigações antes da execução. Não equiparar anúncio a regras já operacionalizadas.",
       "source": {
         "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -122,7 +122,7 @@
         ],
         "chapter": 2,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "DIRECT_PDF_P14_TO_P16_SEMANTIC_SECOND_PASS_INDEPENDENT_REVIEW_PENDING"
       },
       "source_mode": "CHARACTER_DECLARATION",
       "source_report_mode": "DECLARAÇÃO",
@@ -2764,7 +2764,7 @@
       "id": "y1v6.ev.056",
       "source_catalog_id": "V6-E056",
       "domain": "friendship",
-      "summary": "Formação do grupo por aceitação, vínculos e nomes escolhidos",
+      "summary": "Formação do grupo de Ayanokōji com Yukimura, Miyake e Hasebe; na conversa os colegas identificam seus nomes Haruka (Hasebe), Akito (Miyake), Kiyotaka e Teruhiko (Yukimura). Os nomes e apelidos valem conforme o relacionamento e o momento; Sakura posteriormente solicita entrada.",
       "source": {
         "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -2775,15 +2775,17 @@
           147,
           148,
           149,
-          150
+          150,
+          151,
+          152
         ],
         "pdf_page_range": [
           143,
-          150
+          152
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "DIRECT_PDF_P149_TO_P152_NAMES_AND_GROUP_INDEPENDENT_REVIEW_PENDING"
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -2800,7 +2802,9 @@
           147,
           148,
           149,
-          150
+          150,
+          151,
+          152
         ],
         "chapter_order": 6
       },
@@ -2879,7 +2883,7 @@
       "id": "y1v6.ev.058",
       "source_catalog_id": "V6-E058",
       "domain": "identity",
-      "summary": "Prefere nome Keisei; relata que nome Teruhiko foi dado por mãe ausente",
+      "summary": "Yukimura revela que Teruhiko é o nome oficial escolhido pela mãe que deixou a família; pede aos amigos que o chamem Keisei, nome que o pai queria dar. Essa preferência social não constitui alteração legal nem substituição da identidade canônica.",
       "source": {
         "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -2893,7 +2897,7 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "DIRECT_PDF_P150_TO_P152_NAME_EPISODE_INDEPENDENT_REVIEW_PENDING"
       },
       "source_mode": "SELF_REPORT",
       "source_report_mode": "AUTORRELATO",

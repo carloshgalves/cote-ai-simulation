@@ -34,7 +34,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -42,7 +42,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.002",
@@ -65,7 +66,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -73,7 +74,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.003",
@@ -86,7 +88,7 @@
       ],
       "source_mode": "CHARACTER_DECLARATION",
       "original_report_mode": "DECLARAÇÃO",
-      "claim": "Nagumo sucede Manabu e anuncia reformas centralizadoras no conselho",
+      "claim": "Nagumo Miyabi é publicamente empossado presidente do conselho após Manabu e anuncia seu programa de reforma (mandatos, tamanho, eleições, afastamento por voto). Ele declara que deseja implementar as mudanças imediatamente, mas reconhece obstáculos e obrigações antes da execução. Não equiparar anúncio a regras já operacionalizadas.",
       "actor_ids": [
         "actor.nagumo",
         "actor.manabu-horikita"
@@ -94,8 +96,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -103,7 +105,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.004",
@@ -125,7 +128,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -133,7 +136,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.005",
@@ -153,7 +157,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -161,7 +165,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.006",
@@ -183,7 +188,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -191,7 +196,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.007",
@@ -214,7 +220,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -222,7 +228,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.008",
@@ -239,7 +246,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -247,7 +254,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.009",
@@ -270,7 +278,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -278,7 +286,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.010",
@@ -303,7 +312,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -311,7 +320,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.011",
@@ -330,7 +340,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -338,7 +348,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.012",
@@ -357,7 +368,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -365,7 +376,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.013",
@@ -388,8 +400,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -397,7 +409,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.014",
@@ -416,8 +429,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -425,7 +438,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.015",
@@ -448,7 +462,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -456,7 +470,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.016",
@@ -480,7 +495,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -488,7 +503,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.017",
@@ -509,7 +525,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -517,7 +533,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.018",
@@ -538,7 +555,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -546,7 +563,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.019",
@@ -568,7 +586,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -576,7 +594,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.020",
@@ -598,7 +617,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -606,7 +625,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.021",
@@ -628,7 +648,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -636,7 +656,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.022",
@@ -660,7 +681,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -668,7 +689,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.023",
@@ -695,7 +717,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -703,7 +725,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.024",
@@ -726,7 +749,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -734,7 +757,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.025",
@@ -761,7 +785,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -769,7 +793,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.026",
@@ -792,7 +817,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -800,7 +825,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.027",
@@ -823,7 +849,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -831,7 +857,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.028",
@@ -850,8 +877,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -859,7 +886,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.029",
@@ -878,7 +906,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -886,7 +914,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.030",
@@ -907,8 +936,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -916,7 +945,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.031",
@@ -935,8 +965,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -944,7 +974,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.032",
@@ -964,7 +995,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -972,7 +1003,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.033",
@@ -992,7 +1024,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1000,7 +1032,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.034",
@@ -1020,7 +1053,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1028,7 +1061,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.035",
@@ -1047,8 +1081,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1056,7 +1090,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.036",
@@ -1075,8 +1110,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1084,7 +1119,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.037",
@@ -1106,7 +1142,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1114,7 +1150,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.038",
@@ -1134,7 +1171,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1142,7 +1179,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.039",
@@ -1172,9 +1210,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1182,7 +1220,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.040",
@@ -1204,7 +1243,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1212,7 +1251,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.041",
@@ -1231,7 +1271,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1239,7 +1279,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.042",
@@ -1257,9 +1298,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1267,7 +1308,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.043",
@@ -1287,7 +1329,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1295,7 +1337,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.044",
@@ -1317,7 +1360,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1325,7 +1368,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.045",
@@ -1349,7 +1393,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1357,7 +1401,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.046",
@@ -1377,7 +1422,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1385,7 +1430,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.047",
@@ -1413,7 +1459,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1421,7 +1467,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.048",
@@ -1441,7 +1488,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1449,7 +1496,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.049",
@@ -1475,8 +1523,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1484,7 +1532,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.050",
@@ -1507,7 +1556,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1515,7 +1564,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.051",
@@ -1540,8 +1590,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1549,7 +1599,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.052",
@@ -1569,7 +1620,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1577,7 +1628,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.053",
@@ -1598,7 +1650,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1606,7 +1658,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.054",
@@ -1632,7 +1685,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1640,7 +1693,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.055",
@@ -1663,7 +1717,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1671,7 +1725,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.056",
@@ -1685,11 +1740,13 @@
         147,
         148,
         149,
-        150
+        150,
+        151,
+        152
       ],
       "source_mode": "OBSERVED",
       "original_report_mode": "OBSERVAÇÃO",
-      "claim": "Formação do grupo por aceitação, vínculos e nomes escolhidos",
+      "claim": "Formação do grupo de Ayanokōji com Yukimura, Miyake e Hasebe; na conversa os colegas identificam seus nomes Haruka (Hasebe), Akito (Miyake), Kiyotaka e Teruhiko (Yukimura). Os nomes e apelidos valem conforme o relacionamento e o momento; Sakura posteriormente solicita entrada.",
       "actor_ids": [
         "actor.kiyotaka-ayanokoji",
         "actor.yukimura",
@@ -1698,9 +1755,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1708,7 +1765,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.057",
@@ -1731,7 +1789,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1739,7 +1797,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.058",
@@ -1752,15 +1811,15 @@
       ],
       "source_mode": "SELF_REPORT",
       "original_report_mode": "AUTORRELATO",
-      "claim": "Prefere nome Keisei; relata que nome Teruhiko foi dado por mãe ausente",
+      "claim": "Yukimura revela que Teruhiko é o nome oficial escolhido pela mãe que deixou a família; pede aos amigos que o chamem Keisei, nome que o pai queria dar. Essa preferência social não constitui alteração legal nem substituição da identidade canônica.",
       "actor_ids": [
         "actor.yukimura"
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1768,7 +1827,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.059",
@@ -1790,7 +1850,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1798,7 +1858,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.060",
@@ -1819,9 +1880,9 @@
         "evt.y1.v06.hiyori-sugar-observation-and-prior-social-inquiry"
       ],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1829,7 +1890,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.061",
@@ -1853,7 +1915,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1861,7 +1923,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.062",
@@ -1883,9 +1946,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1893,7 +1956,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.063",
@@ -1915,7 +1979,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1923,7 +1987,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.064",
@@ -1947,9 +2012,9 @@
         "evt.y1.v06.ichinose-fraud-accusation-letter"
       ],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1957,7 +2022,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.065",
@@ -1981,8 +2047,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1990,7 +2056,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.066",
@@ -2015,8 +2082,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2024,7 +2091,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.067",
@@ -2044,7 +2112,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2052,7 +2120,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.068",
@@ -2068,8 +2137,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2077,7 +2146,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.069",
@@ -2095,9 +2165,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2105,7 +2175,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.070",
@@ -2124,8 +2195,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2133,7 +2204,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.071",
@@ -2154,7 +2226,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": false,
       "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2162,7 +2234,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
     },
     {
       "record_id": "y1v6.ev.072",
@@ -2186,8 +2259,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2195,7 +2268,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.073",
@@ -2217,8 +2291,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2226,7 +2300,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.074",
@@ -2247,9 +2322,9 @@
         "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
       ],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2257,7 +2332,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.075",
@@ -2280,8 +2356,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2289,7 +2365,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.076",
@@ -2310,8 +2387,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2319,7 +2396,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.077",
@@ -2340,8 +2418,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2349,7 +2427,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.078",
@@ -2370,8 +2449,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2379,7 +2458,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.079",
@@ -2391,7 +2471,7 @@
       ],
       "source_mode": "OBSERVED_DECISION",
       "original_report_mode": "DECISÃO",
-      "claim": "Três alternativas avaliadas; escolhe dar respostas falsas a Kushida",
+      "claim": "Ryūen avalia três alternativas após o ultimato anônimo: entregar respostas corretas à Kushida e expulsar Horikita, permitir um cenário de suspeita de cola contra Kushida, ou fornecer respostas falsas para que Horikita permaneça. Ele afirma escolher a terceira; seu objetivo de longo prazo de alcançar a Classe A continua inalterado (página 207), enquanto a prioridade tática muda. X permanece anônimo para ele.",
       "actor_ids": [
         "actor.kakeru-ryuen"
       ],
@@ -2400,8 +2480,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2409,7 +2489,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     },
     {
       "record_id": "y1v6.ev.080",
@@ -2429,8 +2510,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_SOURCE_SEMANTIC_AUDIT_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2438,7 +2519,8 @@
         "teacher-confirmed rule versus narration or estimate",
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
-      ]
+      ],
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
     }
   ],
   "behavioral_cases": [
@@ -2473,7 +2555,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
@@ -2519,7 +2603,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.hiyori-shiina.open-gentle-dialogue-while-ryuen-probes-x",
@@ -2547,7 +2633,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity",
@@ -2578,7 +2666,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.honami-ichinose.face-false-fraud-accusation-with-institutional-rebuttal",
@@ -2603,7 +2693,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits",
@@ -2633,7 +2725,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction",
@@ -2660,7 +2754,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment",
@@ -2693,7 +2789,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects",
@@ -2719,7 +2817,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori",
@@ -2750,7 +2850,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kakeru-ryuen.threaten-target-in-photograph-to-identify-x",
@@ -2774,7 +2876,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.katsuragi.regret-prior-ryuen-alliance-and-assess-factional-loss",
@@ -2800,7 +2904,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
@@ -2824,7 +2930,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
@@ -2852,7 +2960,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
@@ -2880,7 +2990,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.ken-sudo.study-with-suzune-and-mature-daily-conduct",
@@ -2907,7 +3019,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
@@ -2943,7 +3057,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
@@ -2972,7 +3088,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets",
@@ -2996,7 +3114,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
@@ -3035,7 +3155,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note",
@@ -3063,7 +3185,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past",
@@ -3097,7 +3221,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
@@ -3138,7 +3264,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces",
@@ -3169,7 +3297,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
@@ -3198,7 +3328,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.kiyotaka-ayanokoji.stage-gradual-academic-public-image",
@@ -3222,7 +3354,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.manabu-horikita.witness-private-math-wager-without-past-secret",
@@ -3247,7 +3381,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction",
@@ -3277,7 +3413,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.maya-sato.increase-study-effort-for-shared-paper-shuffle-risk",
@@ -3306,7 +3444,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
@@ -3352,7 +3492,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.nagumo.announce-student-council-centralizing-reforms",
@@ -3375,7 +3517,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust",
@@ -3406,7 +3550,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness",
@@ -3434,7 +3580,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.suzune-horikita.choose-class-c-as-academic-opponent",
@@ -3462,7 +3610,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets",
@@ -3497,7 +3647,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution",
@@ -3533,7 +3685,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
@@ -3562,7 +3716,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk",
@@ -3591,7 +3747,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus",
@@ -3625,7 +3783,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.yosuke-hirata.privately-infer-ayanokoji-strategist-without-disclosure",
@@ -3647,7 +3807,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy",
@@ -3692,7 +3854,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.yukimura.request-preferred-name-keisei",
@@ -3723,7 +3887,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     },
     {
       "case_id": "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring",
@@ -3752,7 +3918,9 @@
         "no false permanent ability or guaranteed motivation",
         "source wrongdoing not endorsed",
         "actor epistemic gating"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Primary actor, evidence refs, source window and outcome caveat checked against case manifest; full independent semantic check remains pending"
     }
   ],
   "goal_transitions": [
@@ -3786,7 +3954,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling",
@@ -3817,7 +3987,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack",
@@ -3849,7 +4021,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.ken-sudo.improve-studies-under-tutoring",
@@ -3874,7 +4048,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.yukimura.offer-personalized-teaching",
@@ -3901,7 +4077,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.yukimura.use-preferred-name-keisei",
@@ -3930,7 +4108,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.airi-sakura.request-friendship-group-entry",
@@ -3956,7 +4136,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets",
@@ -3992,7 +4174,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.kikyo-kushida.seek-status-through-confidences",
@@ -4020,7 +4204,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation",
@@ -4051,7 +4237,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation",
@@ -4087,7 +4275,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum",
@@ -4112,7 +4302,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.honami-ichinose.help-across-classes-with-competitive-limits",
@@ -4140,7 +4332,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.katsuragi.regret-cooperation-with-ryuen",
@@ -4164,7 +4358,9 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     },
     {
       "transition_id": "y1v6.goal.nagumo.announce-student-council-overhaul",
@@ -4185,17 +4381,38 @@
         "trigger is accessible to actor",
         "alternative paths remain open",
         "no forced romance or knowledge leak"
-      ]
+      ],
+      "assistant_second_pass_structural_checked": true,
+      "assistant_second_pass_note": "Before/trigger/after, actor epistemics and no forced-arc guard reviewed; independent review remains pending"
     }
   ],
   "review_methodology": {
-    "reviewed_by": "previous ChatGPT volume-6 report + source SHA and targeted direct-text checks in this turn",
-    "direct_pdf_spotchecked_candidate_count": 41,
-    "full_case_by_case_semantic_review": "NOT_PERFORMED_IN_THIS_TURN",
+    "reviewed_by": "ChatGPT assistant, previous 80-item report plus direct original PDF source-window rechecks for high-risk claims and structural actor/case validation",
+    "pdf_pages": 211,
+    "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+    "initial_direct_spotcheck_count": 41,
+    "additional_high_risk_windows_rechecked": 31,
+    "individual_deep_second_pass_count": 31,
+    "all_80_evidence_automatic_primary_page_locator_checked": true,
+    "actor_case_owner_and_source_refs_checked": 43,
+    "goal_transition_structural_and_causality_checks": 15,
+    "qualitative_case_independent_review": "NOT_PERFORMED",
+    "important_omissions_examined": [
+      "Nagumo public name/presidency and delayed rules",
+      "First names and Yukimura preferred Keisei",
+      "School-card image dates and ordinal grades",
+      "Ryuen's unchanged Class A goal versus local tactical false answers",
+      "Horikita independently school-authorized question counterplan",
+      "692 final vs 700 estimated threshold",
+      "Unproven official paper shuffle final results",
+      "Ryuen does not know X despite hearing from X",
+      "Ichinose clearance with unsigned sender provenance",
+      "Hiyori sugar intelligence via prior inquiry"
+    ],
     "independent_review": "NOT_PERFORMED"
   },
   "release_gate": {
-    "assistant_individual_semantic_review": "PENDING",
+    "assistant_individual_semantic_review": "TARGETED_31_EVIDENCE_WINDOWS_AND_ALL_43_CASE_STRUCTURAL_CROSSCHECKS_COMPLETED",
     "external_independent_review": "NOT_PERFORMED",
     "operator_approval": "NOT_REQUESTED",
     "individual_verified_count": 0,
@@ -4203,7 +4420,7 @@
     "exam_executable": false,
     "goal_runtime_auto_update": false
   },
-  "global_promotion": "BLOCKED_PENDING_INDIVIDUAL_SEMANTIC_AND_OPERATOR_GATE",
+  "global_promotion": "BLOCKED_OPERATOR_INDEPENDENT_SEMANTIC_AND_ENGINE_GATE",
   "findings": [
     {
       "id": "V6-F001",
@@ -4305,6 +4522,63 @@
         "y1v6.ev.042",
         "y1v6.ev.061"
       ]
+    },
+    {
+      "id": "V6-F011",
+      "priority": "MEDIUM",
+      "state": "REMEDIATED",
+      "source_pdf_pages": [
+        14,
+        15,
+        16
+      ],
+      "description": "Nagumo Miyabi publicly assumes student council presidency; prior pack incorrectly treated given name and presidency as unknown. Announcement of reforms still not confirmation of immediate implementation.",
+      "evidence": [
+        "y1v6.ev.003"
+      ],
+      "regression": "tools/test_canon_y1_v06_semantic_adversarial.py"
+    },
+    {
+      "id": "V6-F012",
+      "priority": "MEDIUM",
+      "state": "REMEDIATED",
+      "source_pdf_pages": [
+        150,
+        151,
+        152
+      ],
+      "description": "Preserve Haruka Hasebe, Akito Miyake, Teruhiko Yukimura and Keisei preferred social name without renaming actor IDs.",
+      "evidence": [
+        "y1v6.ev.056",
+        "y1v6.ev.058"
+      ],
+      "regression": "tools/test_canon_y1_v06_semantic_adversarial.py"
+    },
+    {
+      "id": "V6-F013",
+      "priority": "LOW",
+      "state": "REMEDIATED",
+      "source_pdf_pages": [
+        13,
+        29
+      ],
+      "description": "Illustrated school cards give Yukimura July 11 and Satō February 28 birth dates and dated qualitative teacher context; do not convert letter grades to simulation scores.",
+      "evidence": [],
+      "regression": "tools/test_canon_y1_v06_semantic_adversarial.py"
+    },
+    {
+      "id": "V6-F014",
+      "priority": "HIGH",
+      "state": "REMEDIATED",
+      "source_pdf_pages": [
+        207,
+        208
+      ],
+      "description": "Ryūen chooses false answers to Kushida but narrator explicitly states his long-term goal of reaching Class A remained unchanged. Separate local tactical decision from goal replacement.",
+      "evidence": [
+        "y1v6.ev.079"
+      ],
+      "regression": "tools/test_canon_y1_v06_semantic_adversarial.py"
     }
   ]
 }

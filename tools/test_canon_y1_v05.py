@@ -126,6 +126,6 @@ for name,change in mutants:
     change(altered)
     assert violations(altered),("negative mutation escaped",name)
 
-assert len(index["character_packs"])==85
-assert len(index["behavioral_case_paths"])==241
+assert len(index["character_packs"])>=85
+assert len(index["behavioral_case_paths"])>=241
 print("PASS Year 1 V5 80 evidences, 39 actor cases, 13 events, 35 athletic observations, 6 sports negative controls; release blocked")

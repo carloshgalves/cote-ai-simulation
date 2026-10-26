@@ -48,7 +48,11 @@
           "status": "REALIZES_OWN_SWAP_NOT_BINDING"
         }
       ],
-      "no_backdated_global_knowledge": true
+      "no_backdated_global_knowledge": true,
+      "resolves_assertion_refs": [
+        "y1v6.ev.045",
+        "y1v6.ev.065"
+      ]
     }
   ],
   "unresolved": [

@@ -20,7 +20,7 @@
       "evidence_refs": [
         "y1v6.ev.077"
       ],
-      "relationship": "CHALLENGES_WITH_CONFLICT",
+      "relationship": "CORRECTS_PRIOR_INTERPRETATION",
       "explanation": "School authorities reject the fraud claim; Ryūen says he did not send the letters and speculates about another sender's aims. Neither the printed signature nor Ryūen's denial is independent postal authorship proof.",
       "world_epistemic_status": "SOURCE_MODE_AND_SPEAKER_BOUNDED_PRIVATE_OR_INSTITUTIONAL_INFORMATION",
       "actor_knowledge": [

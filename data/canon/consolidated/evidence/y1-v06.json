@@ -20,7 +20,12 @@
         ],
         "chapter": 1,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 10,
+          "fragment": "hate losing far more",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "SELF_REPORT",
       "source_report_mode": "AUTORRELATO",
@@ -71,7 +76,12 @@
         ],
         "chapter": 1,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 11,
+          "fragment": "Trustworthy people receive access",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "SELF_REPORT",
       "source_report_mode": "AUTORRELATO",
@@ -122,7 +132,12 @@
         ],
         "chapter": 2,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "DIRECT_PDF_P14_TO_P16_SEMANTIC_SECOND_PASS_INDEPENDENT_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 15,
+          "fragment": "my name is Nagumo Miyabi",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "CHARACTER_DECLARATION",
       "source_report_mode": "DECLARAÇÃO",
@@ -173,7 +188,12 @@
         ],
         "chapter": 2,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 17,
+          "fragment": "actually took notes",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -222,7 +242,12 @@
         ],
         "chapter": 2,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 18,
+          "fragment": "concealed your excellence",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -270,7 +295,12 @@
         ],
         "chapter": 2,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 19,
+          "fragment": "are you going out with anyone",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "DIALOGUE",
       "source_report_mode": "DIÁLOGO",
@@ -320,7 +350,12 @@
         ],
         "chapter": 2,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 23,
+          "fragment": "I regret it",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "DIALOGUE",
       "source_report_mode": "DIÁLOGO",
@@ -369,7 +404,12 @@
         ],
         "chapter": 2,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 23,
+          "fragment": "874",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "NARRATED_DATA",
       "source_report_mode": "DADO NARRADO",
@@ -414,7 +454,12 @@
         ],
         "chapter": 2,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 27,
+          "fragment": "taken countermeasures",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "DIALOGUE",
       "source_report_mode": "DIÁLOGO",
@@ -466,7 +511,12 @@
         ],
         "chapter": 3,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 31,
+          "fragment": "fifty-seven",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REPORTED_RESULT",
       "source_report_mode": "RESULTADO",
@@ -517,7 +567,12 @@
         ],
         "chapter": 3,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 31,
+          "fragment": "forty-three",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REPORTED_RESULT",
       "source_report_mode": "RESULTADO",
@@ -561,7 +616,12 @@
         ],
         "chapter": 3,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 32,
+          "fragment": "sixty-four",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "INNER_MONOLOGUE",
       "source_report_mode": "MONÓLOGO",
@@ -610,7 +670,12 @@
         ],
         "chapter": 3,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 34,
+          "fragment": "eight subjects",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "INSTITUTIONAL_RULE",
       "source_report_mode": "REGRA",
@@ -663,7 +728,12 @@
         ],
         "chapter": 3,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 38,
+          "fragment": "fifty class points",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "INSTITUTIONAL_RULE",
       "source_report_mode": "REGRA",
@@ -714,7 +784,12 @@
         ],
         "chapter": 3,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 40,
+          "fragment": "partner",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -765,7 +840,12 @@
         ],
         "chapter": 3,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 44,
+          "fragment": "same junior high",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "SECONDHAND_REPORT",
       "source_report_mode": "RELATO DE TERCEIRO",
@@ -816,7 +896,12 @@
         ],
         "chapter": 3,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 47,
+          "fragment": "lies",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "DIALOGUE",
       "source_report_mode": "DIÁLOGO",
@@ -865,7 +950,12 @@
         ],
         "chapter": 3,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 48,
+          "fragment": "expelled",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED_DECISION",
       "source_report_mode": "DECISÃO",
@@ -913,7 +1003,12 @@
         ],
         "chapter": 3,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 50,
+          "fragment": "recording",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "DIALOGUE",
       "source_report_mode": "DIÁLOGO",
@@ -962,7 +1057,12 @@
         ],
         "chapter": 3,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 55,
+          "fragment": "high-scoring",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REASONING",
       "source_report_mode": "RACIOCÍNIO",
@@ -1012,7 +1112,12 @@
         ],
         "chapter": 3,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 56,
+          "fragment": "Class C",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED_DECISION",
       "source_report_mode": "DECISÃO",
@@ -1063,7 +1168,12 @@
         ],
         "chapter": 4,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 60,
+          "fragment": "Class D",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED_DECISION",
       "source_report_mode": "DECISÃO",
@@ -1121,7 +1231,12 @@
         ],
         "chapter": 4,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 64,
+          "fragment": "phones",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "STRATEGY",
       "source_report_mode": "ESTRATÉGIA",
@@ -1175,7 +1290,12 @@
         ],
         "chapter": 4,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "DIRECT_PDF_P71_P74_NAME_CHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 71,
+          "fragment": "Manabe",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -1225,7 +1345,12 @@
         ],
         "chapter": 4,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "DIRECT_PDF_P71_P74_NAME_CHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 72,
+          "fragment": "Karuizawa",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "SECONDHAND_REPORT_AND_INFERENCE",
       "source_report_mode": "RELATO / INFERÊNCIA",
@@ -1279,7 +1404,12 @@
         ],
         "chapter": 4,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 73,
+          "fragment": "Yukimura",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "INFERENCE",
       "source_report_mode": "INFERÊNCIA",
@@ -1330,7 +1460,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 76,
+          "fragment": "apologize",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED_ACTION",
       "source_report_mode": "AÇÃO",
@@ -1380,7 +1515,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 78,
+          "fragment": "zero points",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "STRATEGY",
       "source_report_mode": "ESTRATÉGIA",
@@ -1426,7 +1566,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 79,
+          "fragment": "Kouenji",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "DIALOGUE",
       "source_report_mode": "DIÁLOGO",
@@ -1473,7 +1618,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 80,
+          "fragment": "Class C will attack Class D",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REPORTED_RESULT",
       "source_report_mode": "RESULTADO",
@@ -1523,7 +1673,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 83,
+          "fragment": "Horikita Suzune and Sudou Ken",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REPORTED_RESULT",
       "source_report_mode": "RESULTADO",
@@ -1569,7 +1724,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 83,
+          "fragment": "Hirata Yousuke and Yamauchi Haruki",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REPORTED_RESULT",
       "source_report_mode": "RESULTADO",
@@ -1615,7 +1775,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 83,
+          "fragment": "Kushida Kikyou and Ike Kanji",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REPORTED_RESULT",
       "source_report_mode": "RESULTADO",
@@ -1661,7 +1826,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 83,
+          "fragment": "Yukimura Teruhiko and Inogashira Kokoro",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REPORTED_RESULT",
       "source_report_mode": "RESULTADO",
@@ -1707,7 +1877,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 83,
+          "fragment": "Satou Maya",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REPORTED_RESULT",
       "source_report_mode": "RESULTADO",
@@ -1753,7 +1928,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 83,
+          "fragment": "Okiya",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REPORTED_RESULT",
       "source_report_mode": "RESULTADO",
@@ -1801,7 +1981,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 85,
+          "fragment": "seventy-nine",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "RESULT_AND_ANALYSIS",
       "source_report_mode": "RESULTADO / ANÁLISE",
@@ -1850,7 +2035,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 87,
+          "fragment": "tutor",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED_DECISION",
       "source_report_mode": "DECISÃO",
@@ -1907,7 +2097,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 100,
+          "fragment": "correct",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REPORTED_RESULT",
       "source_report_mode": "RESULTADO",
@@ -1967,7 +2162,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 94,
+          "fragment": "seventy",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REPORTED_RESULT",
       "source_report_mode": "RESULTADO",
@@ -2014,7 +2214,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 95,
+          "fragment": "October 20",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "INNER_MONOLOGUE",
       "source_report_mode": "MONÓLOGO",
@@ -2060,7 +2265,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 96,
+          "fragment": "sports festival",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "SELF_REPORT",
       "source_report_mode": "AUTORRELATO",
@@ -2107,7 +2317,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 97,
+          "fragment": "Sakura",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -2154,7 +2369,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 101,
+          "fragment": "questions",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "STRATEGY",
       "source_report_mode": "ESTRATÉGIA",
@@ -2204,7 +2424,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 105,
+          "fragment": "questions",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "DIALOGUE",
       "source_report_mode": "DIÁLOGO",
@@ -2254,7 +2479,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 106,
+          "fragment": "email",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -2308,7 +2538,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 108,
+          "fragment": "Ichinose",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "DIALOGUE",
       "source_report_mode": "DIÁLOGO",
@@ -2363,7 +2598,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 115,
+          "fragment": "giving me far too much credit",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -2412,7 +2652,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 121,
+          "fragment": "mathematics",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "CONDITIONAL_AGREEMENT",
       "source_report_mode": "ACORDO",
@@ -2467,7 +2712,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 124,
+          "fragment": "incident",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED_DECISION",
       "source_report_mode": "DECISÃO",
@@ -2520,7 +2770,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 126,
+          "fragment": "blog",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "FIRST_PERSON_CONFESSION",
       "source_report_mode": "CONFISSÃO",
@@ -2573,7 +2828,12 @@
         ],
         "chapter": 5,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 129,
+          "fragment": "drop out",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "CHARACTER_DECLARATION",
       "source_report_mode": "DECLARAÇÃO",
@@ -2621,7 +2881,12 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 132,
+          "fragment": "Yukimura",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -2674,7 +2939,12 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 136,
+          "fragment": "Ryuuen",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -2727,7 +2997,12 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 140,
+          "fragment": "sugar",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "CONTESTED_DECLARATION",
       "source_report_mode": "DECLARAÇÃO CONTESTADA",
@@ -2785,7 +3060,12 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "DIRECT_PDF_P149_TO_P152_NAMES_AND_GROUP_INDEPENDENT_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 150,
+          "fragment": "Haruka",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -2846,7 +3126,12 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 152,
+          "fragment": "Sakura",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED_ACTION",
       "source_report_mode": "AÇÃO",
@@ -2897,7 +3182,12 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "DIRECT_PDF_P150_TO_P152_NAME_EPISODE_INDEPENDENT_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 151,
+          "fragment": "Keisei",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "SELF_REPORT",
       "source_report_mode": "AUTORRELATO",
@@ -2946,7 +3236,12 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 158,
+          "fragment": "birthday",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -2995,7 +3290,12 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 157,
+          "fragment": "sugar",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "INVESTIGATION",
       "source_report_mode": "INVESTIGAÇÃO",
@@ -3046,7 +3346,12 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 161,
+          "fragment": "grabbed me",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -3100,7 +3405,12 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "DIRECT_PDF_P163_TO_P167_INTENTIONAL_ACT_AUDIT_INDEPENDENT_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 166,
+          "fragment": "juice",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "ACTION_WITH_INFERRED_STRATEGY",
       "source_report_mode": "AÇÃO / ESTRATÉGIA",
@@ -3151,7 +3461,12 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 168,
+          "fragment": "Katsuragi",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "DIALOGUE",
       "source_report_mode": "DIÁLOGO",
@@ -3202,7 +3517,12 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 170,
+          "fragment": "fraud",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "INSTITUTIONALLY_REFUTED_ACCUSATION",
       "source_report_mode": "ACUSAÇÃO REFUTADA",
@@ -3259,7 +3579,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 177,
+          "fragment": "questions",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED_DECISION",
       "source_report_mode": "DECISÃO",
@@ -3314,7 +3639,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 181,
+          "fragment": "questions",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "COUNTERSTRATEGY",
       "source_report_mode": "CONTRAMEDIDA",
@@ -3366,7 +3696,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 187,
+          "fragment": "traitor",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "REPORT_MODE_AVALIACAO",
       "source_report_mode": "AVALIAÇÃO",
@@ -3411,7 +3746,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 188,
+          "fragment": "692",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "INSTITUTIONAL_FINAL_THRESHOLD",
       "source_report_mode": "REGRA FINAL",
@@ -3457,7 +3797,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 189,
+          "fragment": "Hirata",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "DIALOGUE",
       "source_report_mode": "DIÁLOGO",
@@ -3504,7 +3849,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 193,
+          "fragment": "sixty",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "INNER_MONOLOGUE",
       "source_report_mode": "MONÓLOGO",
@@ -3550,7 +3900,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 193,
+          "fragment": "Kushida",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED",
       "source_report_mode": "OBSERVAÇÃO",
@@ -3599,7 +3954,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 194,
+          "fragment": "ninety-eight",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "SELF_ASSESSMENT_AND_AGREEMENT",
       "source_report_mode": "AUTOAVALIAÇÃO / ACORDO",
@@ -3652,7 +4012,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 197,
+          "fragment": "hand",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "CHARACTER_DECLARATION",
       "source_report_mode": "DECLARAÇÃO",
@@ -3702,7 +4067,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 200,
+          "fragment": "picture",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "THREAT_AND_INFERENCE",
       "source_report_mode": "AMEAÇA / INFERÊNCIA",
@@ -3753,7 +4123,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 202,
+          "fragment": "completely different",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "LATER_REVELATION",
       "source_report_mode": "REVELAÇÃO",
@@ -3804,7 +4179,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 204,
+          "fragment": "blazer",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "ATTRIBUTED_INFERENCE",
       "source_report_mode": "INFERÊNCIA ATRIBUÍDA",
@@ -3853,7 +4233,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 205,
+          "fragment": "letter",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "ATTRIBUTED_DECLARATION",
       "source_report_mode": "DECLARAÇÃO ATRIBUÍDA",
@@ -3901,7 +4286,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 207,
+          "fragment": "Transaction",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "MESSAGE_AND_DECISION",
       "source_report_mode": "MENSAGEM E DECISÃO",
@@ -3950,7 +4340,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "DIRECT_PDF_P207_208_SPEAKER_AND_GOAL_RECHECK_INDEPENDENT_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 208,
+          "fragment": "three options",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "OBSERVED_DECISION",
       "source_report_mode": "DECISÃO",
@@ -3998,7 +4393,12 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "primary_pdf_anchor": {
+          "pdf_page": 208,
+          "fragment": "destroy her",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        }
       },
       "source_mode": "FUTURE_THREAT",
       "source_report_mode": "AMEAÇA FUTURA",

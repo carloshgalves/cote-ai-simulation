@@ -33,8 +33,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -43,7 +43,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 10,
+        "fragment": "hate losing far more"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p10 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's SELF_REPORT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.002",
@@ -65,8 +71,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -75,7 +81,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 11,
+        "fragment": "Trustworthy people receive access"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p11 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's SELF_REPORT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.003",
@@ -97,7 +109,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -106,7 +118,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 15,
+        "fragment": "my name is Nagumo Miyabi"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p15 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's CHARACTER_DECLARATION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.004",
@@ -127,8 +145,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -137,7 +155,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 17,
+        "fragment": "actually took notes"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p17 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.005",
@@ -155,9 +179,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -166,7 +190,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 18,
+        "fragment": "concealed your excellence"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p18 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.006",
@@ -187,8 +217,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -197,7 +227,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 19,
+        "fragment": "are you going out with anyone"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p19 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's DIALOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.007",
@@ -219,8 +255,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -229,7 +265,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 23,
+        "fragment": "I regret it"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p23 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's DIALOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.008",
@@ -244,9 +286,9 @@
       "actor_ids": [],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -255,7 +297,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 23,
+        "fragment": "874"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p23 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's NARRATED_DATA status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.009",
@@ -276,9 +324,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -287,7 +335,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 27,
+        "fragment": "taken countermeasures"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p27 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's DIALOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.010",
@@ -311,8 +365,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -321,7 +375,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 31,
+        "fragment": "fifty-seven"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p31 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REPORTED_RESULT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.011",
@@ -339,8 +399,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -349,7 +409,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 31,
+        "fragment": "forty-three"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p31 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REPORTED_RESULT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.012",
@@ -367,8 +433,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -377,7 +443,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 32,
+        "fragment": "sixty-four"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p32 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's INNER_MONOLOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.013",
@@ -401,7 +473,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -410,7 +482,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 34,
+        "fragment": "eight subjects"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p34 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's INSTITUTIONAL_RULE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.014",
@@ -430,7 +508,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -439,7 +517,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 38,
+        "fragment": "fifty class points"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p38 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's INSTITUTIONAL_RULE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.015",
@@ -460,9 +544,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -471,7 +555,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 40,
+        "fragment": "partner"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p40 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.016",
@@ -493,9 +583,9 @@
         "evt.y1.v06.kushida-juniorhigh-secret-breach"
       ],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -504,7 +594,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 44,
+        "fragment": "same junior high"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p44 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's SECONDHAND_REPORT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.017",
@@ -523,9 +619,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -534,7 +630,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 47,
+        "fragment": "lies"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p47 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's DIALOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.018",
@@ -553,9 +655,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -564,7 +666,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 48,
+        "fragment": "expelled"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p48 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED_DECISION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.019",
@@ -585,8 +693,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -595,7 +703,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 50,
+        "fragment": "recording"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p50 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's DIALOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.020",
@@ -616,8 +730,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -626,7 +740,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 55,
+        "fragment": "high-scoring"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p55 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REASONING status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.021",
@@ -647,8 +767,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -657,7 +777,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 56,
+        "fragment": "Class C"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p56 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED_DECISION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.022",
@@ -679,9 +805,9 @@
         "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
       ],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -690,7 +816,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 60,
+        "fragment": "Class D"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p60 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED_DECISION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.023",
@@ -716,8 +848,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -726,7 +858,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 64,
+        "fragment": "phones"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p64 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's STRATEGY status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.024",
@@ -748,8 +886,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -758,7 +896,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 71,
+        "fragment": "Manabe"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p71 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.025",
@@ -784,8 +928,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -794,7 +938,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 72,
+        "fragment": "Karuizawa"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p72 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's SECONDHAND_REPORT_AND_INFERENCE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.026",
@@ -816,8 +966,8 @@
       ],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -826,7 +976,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 73,
+        "fragment": "Yukimura"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p73 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's INFERENCE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.027",
@@ -848,8 +1004,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -858,7 +1014,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 76,
+        "fragment": "apologize"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p76 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED_ACTION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.028",
@@ -878,7 +1040,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -887,7 +1049,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 78,
+        "fragment": "zero points"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p78 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's STRATEGY status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.029",
@@ -904,9 +1072,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -915,7 +1083,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 79,
+        "fragment": "Kouenji"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p79 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's DIALOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.030",
@@ -937,7 +1111,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -946,7 +1120,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 80,
+        "fragment": "Class C will attack Class D"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p80 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REPORTED_RESULT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.031",
@@ -966,7 +1146,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -975,7 +1155,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 83,
+        "fragment": "Horikita Suzune and Sudou Ken"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p83 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REPORTED_RESULT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.032",
@@ -994,8 +1180,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1004,7 +1190,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 83,
+        "fragment": "Hirata Yousuke and Yamauchi Haruki"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p83 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REPORTED_RESULT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.033",
@@ -1023,8 +1215,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1033,7 +1225,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 83,
+        "fragment": "Kushida Kikyou and Ike Kanji"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p83 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REPORTED_RESULT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.034",
@@ -1052,8 +1250,8 @@
       "related_event_ids": [],
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1062,7 +1260,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 83,
+        "fragment": "Yukimura Teruhiko and Inogashira Kokoro"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p83 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REPORTED_RESULT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.035",
@@ -1082,7 +1286,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1091,7 +1295,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 83,
+        "fragment": "Satou Maya"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p83 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REPORTED_RESULT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.036",
@@ -1111,7 +1321,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1120,7 +1330,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 83,
+        "fragment": "Okiya"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p83 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REPORTED_RESULT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.037",
@@ -1140,9 +1356,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1151,7 +1367,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 85,
+        "fragment": "seventy-nine"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p85 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's RESULT_AND_ANALYSIS status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.038",
@@ -1169,9 +1391,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1180,7 +1402,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 87,
+        "fragment": "tutor"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p87 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED_DECISION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.039",
@@ -1212,7 +1440,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1221,7 +1449,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 100,
+        "fragment": "correct"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p100 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REPORTED_RESULT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.040",
@@ -1241,9 +1475,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1252,7 +1486,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 94,
+        "fragment": "seventy"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p94 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REPORTED_RESULT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.041",
@@ -1269,9 +1509,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1280,7 +1520,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 95,
+        "fragment": "October 20"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p95 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's INNER_MONOLOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.042",
@@ -1300,7 +1546,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1309,7 +1555,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 96,
+        "fragment": "sports festival"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p96 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's SELF_REPORT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.043",
@@ -1327,9 +1579,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1338,7 +1590,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 97,
+        "fragment": "Sakura"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p97 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.044",
@@ -1358,9 +1616,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1369,7 +1627,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 101,
+        "fragment": "questions"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p101 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's STRATEGY status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.045",
@@ -1391,9 +1655,9 @@
         "evt.y1.v06.paper-shuffle-question-authority-and-swap"
       ],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1402,7 +1666,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 105,
+        "fragment": "questions"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p105 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's DIALOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.046",
@@ -1420,9 +1690,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1431,7 +1701,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 106,
+        "fragment": "email"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p106 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.047",
@@ -1457,9 +1733,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1468,7 +1744,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 108,
+        "fragment": "Ichinose"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p108 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's DIALOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.048",
@@ -1486,9 +1768,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1497,7 +1779,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 115,
+        "fragment": "giving me far too much credit"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p115 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.049",
@@ -1524,7 +1812,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1533,7 +1821,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 121,
+        "fragment": "mathematics"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p121 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's CONDITIONAL_AGREEMENT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.050",
@@ -1554,9 +1848,9 @@
         "evt.y1.v06.math-wager-and-future-interference"
       ],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1565,7 +1859,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 124,
+        "fragment": "incident"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p124 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED_DECISION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.051",
@@ -1591,7 +1891,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1600,7 +1900,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 126,
+        "fragment": "blog"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p126 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's FIRST_PERSON_CONFESSION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.052",
@@ -1618,9 +1924,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1629,7 +1935,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 129,
+        "fragment": "drop out"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p129 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's CHARACTER_DECLARATION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.053",
@@ -1648,9 +1960,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1659,7 +1971,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 132,
+        "fragment": "Yukimura"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p132 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.054",
@@ -1683,9 +2001,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1694,7 +2012,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 136,
+        "fragment": "Ryuuen"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p136 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.055",
@@ -1715,9 +2039,9 @@
         "evt.y1.v06.hiyori-sugar-observation-and-prior-social-inquiry"
       ],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1726,7 +2050,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 140,
+        "fragment": "sugar"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p140 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's CONTESTED_DECLARATION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.056",
@@ -1757,7 +2087,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1766,7 +2096,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 150,
+        "fragment": "Haruka"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p150 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.057",
@@ -1787,9 +2123,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1798,7 +2134,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 152,
+        "fragment": "Sakura"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p152 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED_ACTION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.058",
@@ -1819,7 +2161,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1828,7 +2170,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 151,
+        "fragment": "Keisei"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p151 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's SELF_REPORT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.059",
@@ -1848,9 +2196,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1859,7 +2207,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 158,
+        "fragment": "birthday"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p158 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.060",
@@ -1882,7 +2236,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1891,7 +2245,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 157,
+        "fragment": "sugar"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p157 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's INVESTIGATION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.061",
@@ -1913,9 +2273,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1924,7 +2284,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 161,
+        "fragment": "grabbed me"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p161 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.062",
@@ -1948,7 +2314,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1957,7 +2323,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 166,
+        "fragment": "juice"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p166 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's ACTION_WITH_INFERRED_STRATEGY status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.063",
@@ -1977,9 +2349,9 @@
         "evt.y1.v03.ryuen-katsuragi-alliance-contract-terms"
       ],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -1988,7 +2360,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 168,
+        "fragment": "Katsuragi"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p168 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's DIALOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.064",
@@ -2014,7 +2392,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2023,7 +2401,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 170,
+        "fragment": "fraud"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p170 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's INSTITUTIONALLY_REFUTED_ACCUSATION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.065",
@@ -2048,7 +2432,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2057,7 +2441,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 177,
+        "fragment": "questions"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p177 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED_DECISION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.066",
@@ -2083,7 +2473,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2092,7 +2482,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 181,
+        "fragment": "questions"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p181 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's COUNTERSTRATEGY status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.067",
@@ -2110,9 +2506,9 @@
       ],
       "related_event_ids": [],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2121,7 +2517,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 187,
+        "fragment": "traitor"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p187 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's REPORT_MODE_AVALIACAO status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.068",
@@ -2138,7 +2540,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2147,7 +2549,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 188,
+        "fragment": "692"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p188 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's INSTITUTIONAL_FINAL_THRESHOLD status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.069",
@@ -2167,7 +2575,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2176,7 +2584,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 189,
+        "fragment": "Hirata"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p189 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's DIALOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.070",
@@ -2196,7 +2610,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2205,7 +2619,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 193,
+        "fragment": "sixty"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p193 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's INNER_MONOLOGUE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.071",
@@ -2224,9 +2644,9 @@
         "evt.y1.v06.math-wager-and-future-interference"
       ],
       "report_parsed": true,
-      "direct_pdf_spotchecked": false,
-      "reviewed_by_assistant": false,
-      "semantic_review": "INDIVIDUAL_DEEP_SEMANTIC_REVIEW_STILL_PENDING",
+      "direct_pdf_spotchecked": true,
+      "reviewed_by_assistant": true,
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2235,7 +2655,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review"
+      "assistant_review_scope": "Report-derived source locator and structural checks, not a second deep passage-by-passage review",
+      "primary_pdf_anchor": {
+        "pdf_page": 193,
+        "fragment": "Kushida"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p193 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.072",
@@ -2260,7 +2686,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2269,7 +2695,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 194,
+        "fragment": "ninety-eight"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p194 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's SELF_ASSESSMENT_AND_AGREEMENT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.073",
@@ -2292,7 +2724,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2301,7 +2733,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 197,
+        "fragment": "hand"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p197 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's CHARACTER_DECLARATION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.074",
@@ -2324,7 +2762,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2333,7 +2771,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 200,
+        "fragment": "picture"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p200 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's THREAT_AND_INFERENCE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.075",
@@ -2357,7 +2801,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2366,7 +2810,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 202,
+        "fragment": "completely different"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p202 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's LATER_REVELATION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.076",
@@ -2388,7 +2838,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2397,7 +2847,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 204,
+        "fragment": "blazer"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p204 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's ATTRIBUTED_INFERENCE status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.077",
@@ -2419,7 +2875,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2428,7 +2884,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 205,
+        "fragment": "letter"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p205 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's ATTRIBUTED_DECLARATION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.078",
@@ -2450,7 +2912,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2459,7 +2921,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 207,
+        "fragment": "Transaction"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p207 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's MESSAGE_AND_DECISION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.079",
@@ -2481,7 +2949,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2490,7 +2958,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 208,
+        "fragment": "three options"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p208 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED_DECISION status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     },
     {
       "record_id": "y1v6.ev.080",
@@ -2511,7 +2985,7 @@
       "report_parsed": true,
       "direct_pdf_spotchecked": true,
       "reviewed_by_assistant": true,
-      "semantic_review": "ASSISTANT_SECOND_PASS_DIRECT_PDF_SOURCE_RISK_CHECK_INDEPENDENT_PENDING",
+      "semantic_review": "ASSISTANT_COMPLETE_PRIMARY_PDF_SOURCE_SEMANTIC_RECHECK_AND_SECOND_ADVERSARIAL_METHOD_PASS",
       "verified": false,
       "required_checks": [
         "actual source event/date/page and full local passage",
@@ -2520,7 +2994,13 @@
         "speaker's statement versus independent observation",
         "facts actually acquired by actor at the time"
       ],
-      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission"
+      "assistant_review_scope": "Exact primary PDF source window, source-mode and temporal actor knowledge rechecked; no independent signoff or simulated memory admission",
+      "primary_pdf_anchor": {
+        "pdf_page": 208,
+        "fragment": "destroy her"
+      },
+      "independent_verified": false,
+      "review_note": "PDF physical p208 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's FUTURE_THREAT status. Do not promote narrative inference, testimony or future knowledge into certified objective fact."
     }
   ],
   "behavioral_cases": [

@@ -539,12 +539,13 @@
     {
       "id": "y1v5.ev.014",
       "domain": "governance",
-      "summary": "Class D settles strategic disagreement through a show-of-hands vote, documenting conflicting collective and individual goals; do not infer the entire class unanimously agreed.",
+      "summary": "Class D resolves its festival participation strategy by a show-of-hands vote: Horikita's strength-optimized team plan receives 16 votes, Karuizawa's individual-opportunity plan 13, with the remaining students abstaining. Hirata administers the vote; the result shows majority preference, not unanimous endorsement or permanent team loyalty.",
       "source": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "pdf_pages": [
           42,
-          45
+          43,
+          44
         ],
         "chapter": 3,
         "edition": "Seven Seas English PDF supplied by operator",
@@ -557,7 +558,8 @@
         "chapter": 3,
         "pdf_pages": [
           42,
-          45
+          43,
+          44
         ],
         "chapter_order": 3
       },
@@ -2463,11 +2465,11 @@
     {
       "id": "y1v5.ev.059",
       "domain": "results",
-      "summary": "Red Team wins overall, but first-year class order B>C>A>D; net class points B 0, C -100, A -50, D -100. Shibata earns first-year MVP; Sudō does not.",
+      "summary": "Closing ceremony: Red wins; first-year order B > C > A > D; narration reports net first-year class points B 0, C -100, A -50, D -100, and Shibata MVP. Source conflict preserved: printed rule on physical p18 says each losing White class loses 100, whereas closing narration on pp190–191 says Class B lost only 50 and thus cancels its +50 first-place reward. These are two separate source statements; actual reason for apparent difference is not established.",
       "source": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "pdf_pages": [
-          189,
+          190,
           191
         ],
         "chapter": 9,
@@ -2480,7 +2482,7 @@
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "chapter": 9,
         "pdf_pages": [
-          189,
+          190,
           191
         ],
         "chapter_order": 9

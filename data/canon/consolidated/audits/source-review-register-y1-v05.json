@@ -384,10 +384,11 @@
       "chapter": 3,
       "pdf_pages": [
         42,
-        45
+        43,
+        44
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Class D settles strategic disagreement through a show-of-hands vote, documenting conflicting collective and individual goals; do not infer the entire class unanimously agreed.",
+      "primary_claim": "Class D resolves its festival participation strategy by a show-of-hands vote: Horikita's strength-optimized team plan receives 16 votes, Karuizawa's individual-opportunity plan 13, with the remaining students abstaining. Hirata administers the vote; the result shows majority preference, not unanimous endorsement or permanent team loyalty.",
       "actor_ids": [
         "actor.yosuke-hirata",
         "actor.suzune-horikita",
@@ -395,7 +396,7 @@
         "actor.kikyo-kushida"
       ],
       "related_event_ids": [],
-      "semantic_review": "ASSISTANT_PRIMARY_PDF_SEMANTIC_ADVERSARIAL_PASS_INDEPENDENT_REVIEW_PENDING",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_CONFLICT_RECHECK_PENDING_INDEPENDENT_ADJUDICATION",
       "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
@@ -405,7 +406,7 @@
         "actor source and knowledge time",
         "cross-volume provenance"
       ],
-      "review_note": "Assistant source-window review of physical PDF pp 42,45: actor and event boundaries checked, OBSERVED separated from school-certified fact, later reveals and counterfactuals are not backdated. Independent reviewer pending.",
+      "review_note": "PDF pp43–44 explicitly show vote 16 vs 13 plus abstentions",
       "verified_by_independent_reviewer": false
     },
     {
@@ -1740,11 +1741,11 @@
       "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
       "chapter": 9,
       "pdf_pages": [
-        189,
+        190,
         191
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Red Team wins overall, but first-year class order B>C>A>D; net class points B 0, C -100, A -50, D -100. Shibata earns first-year MVP; Sudō does not.",
+      "primary_claim": "Closing ceremony: Red wins; first-year order B > C > A > D; narration reports net first-year class points B 0, C -100, A -50, D -100, and Shibata MVP. Source conflict preserved: printed rule on physical p18 says each losing White class loses 100, whereas closing narration on pp190–191 says Class B lost only 50 and thus cancels its +50 first-place reward. These are two separate source statements; actual reason for apparent difference is not established.",
       "actor_ids": [
         "actor.ken-sudo",
         "actor.kiyotaka-ayanokoji",
@@ -1753,7 +1754,7 @@
         "actor.shibata-so"
       ],
       "related_event_ids": [],
-      "semantic_review": "ASSISTANT_PRIMARY_PDF_SEMANTIC_ADVERSARIAL_PASS_INDEPENDENT_REVIEW_PENDING",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_CONFLICT_RECHECK_PENDING_INDEPENDENT_ADJUDICATION",
       "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
@@ -1763,7 +1764,7 @@
         "actor source and knowledge time",
         "cross-volume provenance"
       ],
-      "review_note": "Assistant source-window review of physical PDF pp 189,191: actor and event boundaries checked, OBSERVED separated from school-certified fact, later reveals and counterfactuals are not backdated. Independent reviewer pending.",
+      "review_note": "PDF p18 printed loss -100 for White classes conflicts with p191 narrative deducting only -50 for B; unadjudicated",
       "verified_by_independent_reviewer": false
     },
     {
@@ -3436,6 +3437,35 @@
         "y1v5.ev.051"
       ],
       "regression": "test_canon_y1_v05.py"
+    },
+    {
+      "id": "Y1V5-ADV-005",
+      "severity": "LOW",
+      "state": "REMEDIATED",
+      "source_pdf_pages": [
+        43,
+        44
+      ],
+      "description": "Preserve exact 16-to-13 majority vote and abstentions, not generic class consensus.",
+      "refs": [
+        "y1v5.ev.014"
+      ],
+      "regression": "tools/test_canon_y1_v05.py"
+    },
+    {
+      "id": "Y1V5-ADV-006",
+      "severity": "HIGH",
+      "state": "OPEN_SOURCE_TEXT_CONTRADICTION",
+      "source_pdf_pages": [
+        18,
+        190,
+        191
+      ],
+      "description": "Printed White-class losing-team deduction -100 conflicts with closing narrative class B -50. Retain source discrepancy, do not invent a school exception or overwrite narrated B net zero.",
+      "refs": [
+        "y1v5.ev.059"
+      ],
+      "regression": "tools/test_canon_y1_v05_adversarial.py"
     }
   ],
   "goal_transitions": [

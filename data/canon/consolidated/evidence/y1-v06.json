@@ -3084,7 +3084,7 @@
       "id": "y1v6.ev.062",
       "source_catalog_id": "V6-E062",
       "domain": "deception",
-      "summary": "Confronto e suco derramado, limpeza e investigação indireta de uniforme",
+      "summary": "Na reunião de estudos no karaokê, Karuizawa conscientemente derrama suco de uva sobre o blazer de Kushida após discussão verbal; os presentes reagem e condenam o gesto. O resultado leva à informação de que Kushida só tem um blazer e à limpeza da roupa. Ryūen posteriormente interpreta isso como possível preparação da armadilha da folha, mas o texto não prova quem planejou ou colocou material de cola.",
       "source": {
         "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -3100,7 +3100,7 @@
         ],
         "chapter": 6,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "DIRECT_PDF_P163_TO_P167_INTENTIONAL_ACT_AUDIT_INDEPENDENT_PENDING"
       },
       "source_mode": "ACTION_WITH_INFERRED_STRATEGY",
       "source_report_mode": "AÇÃO / ESTRATÉGIA",

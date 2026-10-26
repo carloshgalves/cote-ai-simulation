@@ -1939,7 +1939,7 @@
       ],
       "source_mode": "ACTION_WITH_INFERRED_STRATEGY",
       "original_report_mode": "AÇÃO / ESTRATÉGIA",
-      "claim": "Confronto e suco derramado, limpeza e investigação indireta de uniforme",
+      "claim": "Na reunião de estudos no karaokê, Karuizawa conscientemente derrama suco de uva sobre o blazer de Kushida após discussão verbal; os presentes reagem e condenam o gesto. O resultado leva à informação de que Kushida só tem um blazer e à limpeza da roupa. Ryūen posteriormente interpreta isso como possível preparação da armadilha da folha, mas o texto não prova quem planejou ou colocou material de cola.",
       "actor_ids": [
         "actor.kikyo-kushida",
         "actor.kei-karuizawa"
@@ -4579,6 +4579,24 @@
         "y1v6.ev.079"
       ],
       "regression": "tools/test_canon_y1_v06_semantic_adversarial.py"
+    },
+    {
+      "id": "V6-F015",
+      "priority": "MEDIUM",
+      "state": "REMEDIATED",
+      "source_pdf_pages": [
+        163,
+        164,
+        165,
+        166,
+        167
+      ],
+      "description": "Karuizawa poured the juice deliberately, not an accidental spill; source does not independently certify the broader plan's mastermind nor the sheet inserter.",
+      "evidence": [
+        "y1v6.ev.062"
+      ],
+      "case_id": "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+      "regression": "tools/test_canon_y1_v06_comprehensive_audit.py"
     }
   ]
 }

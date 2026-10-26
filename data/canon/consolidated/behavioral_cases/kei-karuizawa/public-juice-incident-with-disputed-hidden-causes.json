@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.kei-karuizawa",
   "title": "public juice incident with disputed hidden causes",
   "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
-  "observed_actions": "Participates in encounter with Kushida where a drink is spilled and uniform changes become relevant to later suspicions.",
-  "observed_result": "A later cheat-sheet discovery prompts Ryūen to infer a complex setup.",
-  "epistemic_limits": "The record does not establish who placed the paper, who scripted every move, or that Karuizawa herself knew all elements.",
+  "observed_actions": "During a tense karaoke study meeting Karuizawa deliberately dumps grape juice over Kushida's blazer. She is rebuked by classmates, apologizes and offers to pay for cleaning.",
+  "observed_result": "Kushida discloses that she has only one blazer and accepts cleaning help; this incident later informs Ryūen's speculative reconstruction of the cheat-sheet setup.",
+  "epistemic_limits": "Karuizawa intentionally poured juice, but neither her knowledge of any planned cheat-sheet insertion nor who orchestrated the broader plan or planted the paper is source-certified.",
   "source": {
     "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
     "pdf_pages": [

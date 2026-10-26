@@ -183,9 +183,9 @@
         17,
         18
       ],
-      "source_mode": "OBSERVED",
+      "source_mode": "NARRATOR_OBSERVED_SOCIAL_EXCLUSION_WITH_CHARACTER_INFERENCE",
       "original_report_mode": "OBSERVAÇÃO",
-      "claim": "Colegas percebem desempenho físico ocultado e se afastam socialmente",
+      "claim": "Após o revezamento, Ayanokōji observa que Ike e Yamauchi passaram a convidá-lo muito menos e praticamente o excluíram dos passeios. Horikita atribui o afastamento à descoberta de sua velocidade e força de preensão antes ocultas, mas essa explicação causal é uma interpretação da personagem, não um motivo diretamente confessado pelos dois colegas.",
       "actor_ids": [
         "actor.kiyotaka-ayanokoji"
       ],
@@ -209,7 +209,7 @@
       },
       "independent_verified": false,
       "review_note": "PDF physical p18 supports a directly located phrase; inspected the relevant primary-source window and retained the claim's OBSERVED status. Do not promote narrative inference, testimony or future knowledge into certified objective fact.",
-      "adversarial_challenge": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "adversarial_challenge": "Observed invitations stopped after the relay; Horikita's suggested reason for Ike/Yamauchi's behavior is an inference, not their admitted motive.",
       "adversarial_disposition": "SOURCE_BOUND_SEMANTIC_OVERCLAIM_REJECTED_OR_UNRESOLVED_BOUNDARY_PRESERVED",
       "external_independent_reviewer": "NOT_PERFORMED"
     },
@@ -6254,6 +6254,20 @@
         "y1v6.ev.062"
       ],
       "case_id": "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+      "regression": "tools/test_canon_y1_v06_comprehensive_audit.py"
+    },
+    {
+      "id": "V6-F016",
+      "priority": "MEDIUM",
+      "state": "REMEDIATED",
+      "source_pdf_pages": [
+        17,
+        18
+      ],
+      "description": "Narrator directly observes Ike/Yamauchi excluding Kiyotaka; Horikita's cause attribution (concealed physical skill) is inferred, not an explicit confession from Ike/Yamauchi.",
+      "evidence": [
+        "y1v6.ev.005"
+      ],
       "regression": "tools/test_canon_y1_v06_comprehensive_audit.py"
     }
   ]

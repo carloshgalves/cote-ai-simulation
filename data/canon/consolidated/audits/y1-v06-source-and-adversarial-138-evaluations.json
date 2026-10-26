@@ -109,9 +109,9 @@
         "pdf_page": 18,
         "fragment": "concealed your excellence"
       },
-      "claim_under_review": "Colegas percebem desempenho físico ocultado e se afastam socialmente",
-      "source_mode": "OBSERVED",
-      "adversarial_counterclaim": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "claim_under_review": "Após o revezamento, Ayanokōji observa que Ike e Yamauchi passaram a convidá-lo muito menos e praticamente o excluíram dos passeios. Horikita atribui o afastamento à descoberta de sua velocidade e força de preensão antes ocultas, mas essa explicação causal é uma interpretação da personagem, não um motivo diretamente confessado pelos dois colegas.",
+      "source_mode": "NARRATOR_OBSERVED_SOCIAL_EXCLUSION_WITH_CHARACTER_INFERENCE",
+      "adversarial_counterclaim": "Observed invitations stopped after the relay; Horikita's suggested reason for Ike/Yamauchi's behavior is an inference, not their admitted motive.",
       "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
       "reviewer": "SAME_ASSISTANT_TWO_METHODS",
       "third_party_signoff": false

@@ -229,7 +229,7 @@
       "id": "y1v6.ev.005",
       "source_catalog_id": "V6-E005",
       "domain": "social",
-      "summary": "Colegas percebem desempenho físico ocultado e se afastam socialmente",
+      "summary": "Após o revezamento, Ayanokōji observa que Ike e Yamauchi passaram a convidá-lo muito menos e praticamente o excluíram dos passeios. Horikita atribui o afastamento à descoberta de sua velocidade e força de preensão antes ocultas, mas essa explicação causal é uma interpretação da personagem, não um motivo diretamente confessado pelos dois colegas.",
       "source": {
         "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -242,14 +242,14 @@
         ],
         "chapter": 2,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "ASSISTANT_PRIMARY_PDF_PAGE_TEXT_AND_SEMANTIC_PASS_INDEPENDENT_REVIEW_PENDING",
+        "verification": "DIRECT_PDF_P17_P18_EVENT_VERSUS_HORIKITA_MOTIVE_INFERENCE_CHECKED",
         "primary_pdf_anchor": {
           "pdf_page": 18,
           "fragment": "concealed your excellence",
           "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
         }
       },
-      "source_mode": "OBSERVED",
+      "source_mode": "NARRATOR_OBSERVED_SOCIAL_EXCLUSION_WITH_CHARACTER_INFERENCE",
       "source_report_mode": "OBSERVAÇÃO",
       "source_report_attribution": "Ayanokōji",
       "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",

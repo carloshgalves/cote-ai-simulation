@@ -70,6 +70,19 @@
         43,
         44
       ]
+    },
+    {
+      "id": "Y1V5-ADV-007",
+      "description": "Source-checked event-local feats and failed placements not fully explicit in PR #35",
+      "pages": [
+        65,
+        90,
+        106,
+        160,
+        161,
+        162,
+        189
+      ]
     }
   ],
   "release_gates": {

@@ -839,16 +839,18 @@
     {
       "id": "y1v5.ev.021",
       "domain": "sports",
-      "summary": "Horikita and Onodera struggle to synchronize in three-legged practice, finishing third and quarreling; Hirata and Ayanokōji coordinate smoothly at practice speed; Sakura/Inogashira perform poorly.",
+      "summary": "During three-legged practice, Horikita and Onodera fail to synchronize, while Hirata and Ayanokōji show coordinated pacing. At p65, Ayanokōji ties legs with Suzune, deliberately accelerates beyond her ability to match him, catches her stumble and explicitly demonstrates that coordination requires adapting tempo to the partner; this bounded pedagogical scene is not a calibrated maximum-speed comparison.",
       "source": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "pdf_pages": [
           62,
-          64
+          63,
+          64,
+          65
         ],
         "chapter": 4,
         "edition": "Seven Seas English PDF supplied by operator",
-        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+        "verification": "DIRECT_PDF_SOURCE_SPECIFIC_FEAT_RECHECK_INDEPENDENT_AUDIT_PENDING"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
@@ -857,7 +859,9 @@
         "chapter": 4,
         "pdf_pages": [
           62,
-          64
+          63,
+          64,
+          65
         ],
         "chapter_order": 4
       },
@@ -1137,16 +1141,18 @@
     {
       "id": "y1v5.ev.028",
       "domain": "discipline",
-      "summary": "Kōenji claims illness and withdraws; Sudō reacts aggressively and Hirata and Ayanokōji intervene. The narrator suspects malingering but no clinical diagnosis establishes it.",
+      "summary": "Kōenji claims illness and withdraws without clinical corroboration. On p90, Sudō throws a strong punch, and Kōenji catches the fist in his palm without apparently needing to look at him; Hirata prevents a repeat. This isolated defense is not a verified full-contact combat-strength ranking, and alleged illness is not medically adjudicated.",
       "source": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "pdf_pages": [
           88,
+          89,
+          90,
           91
         ],
         "chapter": 6,
         "edition": "Seven Seas English PDF supplied by operator",
-        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+        "verification": "DIRECT_PDF_SOURCE_SPECIFIC_FEAT_RECHECK_INDEPENDENT_AUDIT_PENDING"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
@@ -1155,6 +1161,8 @@
         "chapter": 6,
         "pdf_pages": [
           88,
+          89,
+          90,
           91
         ],
         "chapter_order": 6
@@ -1433,16 +1441,20 @@
     {
       "id": "y1v5.ev.035",
       "domain": "sports",
-      "summary": "Boys' tug-of-war exposes Red's internal Class A factional cooperation problem; Katsuragi intervenes to recover teamwork, while the B/C coalition changes formation and contests subsequent rounds.",
+      "summary": "Katsuragi and Hirata organize Red's boys' tug-of-war by placing participants in height order to distribute pulling force. Sakayanagi-aligned Class A boys hesitate and challenge Katsuragi, whose intervention restores cooperation; the Red side eventually wins the deciding round despite opponent formation changes. This is a local team tactic, not proof that height-order always wins.",
       "source": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "pdf_pages": [
           105,
+          106,
+          107,
+          108,
+          109,
           110
         ],
         "chapter": 6,
         "edition": "Seven Seas English PDF supplied by operator",
-        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+        "verification": "DIRECT_PDF_SOURCE_SPECIFIC_FEAT_RECHECK_INDEPENDENT_AUDIT_PENDING"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
@@ -1451,6 +1463,10 @@
         "chapter": 6,
         "pdf_pages": [
           105,
+          106,
+          107,
+          108,
+          109,
           110
         ],
         "chapter_order": 6
@@ -2037,16 +2053,17 @@
     {
       "id": "y1v5.ev.049",
       "domain": "sports",
-      "summary": "During the scavenger hunt Ayanokōji receives a difficult requirement involving bringing several friends; Ike performs well in his heat. The local event result cannot be turned into global social ability.",
+      "summary": "In scavenger hunt Ayanokōji draws an unworkable friend-related prompt, redraws after the mandatory 30-second wait and rejects the second 'person you love' prompt, incurring another delay; on the third draw he searches for a table clock, cannot locate one before the others finish, and comes last in his heat. Ike wins his own heat. This result measures prompt luck plus tactical hesitation, not physical ceiling or global social ability.",
       "source": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "pdf_pages": [
           160,
+          161,
           162
         ],
         "chapter": 8,
         "edition": "Seven Seas English PDF supplied by operator",
-        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+        "verification": "DIRECT_PDF_SOURCE_SPECIFIC_FEAT_RECHECK_INDEPENDENT_AUDIT_PENDING"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
@@ -2055,6 +2072,7 @@
         "chapter": 8,
         "pdf_pages": [
           160,
+          161,
           162
         ],
         "chapter_order": 8
@@ -2380,16 +2398,19 @@
     {
       "id": "y1v5.ev.057",
       "domain": "sports",
-      "summary": "Ayanokōji and Manabu demonstrate extraordinary relay running; Manabu delays departure for their encounter, and Ayanokōji's path is obstructed by a falling runner. A clean straight-line comparison is unobserved.",
+      "summary": "In the final relay Ayanokōji and Manabu run seriously at exceptional observed speed; Manabu has stood waiting to compete with him. A fallen runner obstructs Ayanokōji near the end, and Manabu finishes ahead after the delay. The source provides no times and explicitly does not establish who would have won an unobstructed sprint.",
       "source": {
         "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
         "pdf_pages": [
           185,
-          188
+          186,
+          187,
+          188,
+          189
         ],
         "chapter": 9,
         "edition": "Seven Seas English PDF supplied by operator",
-        "verification": "PDF_TEXT_DIRECT_ASSISTANT_PASS_INDEPENDENT_REVIEW_PENDING"
+        "verification": "DIRECT_PDF_SOURCE_SPECIFIC_FEAT_RECHECK_INDEPENDENT_AUDIT_PENDING"
       },
       "source_mode": "OBSERVED",
       "story_time": "Y1_SEPT_OCT_SPORTS_FESTIVAL",
@@ -2398,7 +2419,10 @@
         "chapter": 9,
         "pdf_pages": [
           185,
-          188
+          186,
+          187,
+          188,
+          189
         ],
         "chapter_order": 9
       },

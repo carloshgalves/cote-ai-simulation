@@ -85,6 +85,9 @@ def violations(bundle):
         issues.append("assistant source review missing")
     if len(review["evidence"])!=80 or len(review["behavioral_cases"])!=39 or len(review["goal_transitions"])!=10:
         issues.append("source review coverage incomplete")
+    conflicting=exam["scoring"].get("team_loss_rule_source_discrepancy",{})
+    if conflicting.get("state")!="UNRESOLVED_PRINTED_RULE_VS_CLOSING_NARRATION":issues.append("fabricated scoring reconciliation")
+    if "16 votes" not in evid["y1v5.ev.014"]["summary"] or "13" not in evid["y1v5.ev.014"]["summary"]:issues.append("vote counts erased")
     if source["claims_all_verified"] is not False:
         issues.append("unproven global canon verification")
     if bundle["review"]["review_actor"]!="ASSISTANT_DIRECT_SOURCE_AND_ADVERSARIAL_NO_INDEPENDENT_REVIEW":
@@ -121,10 +124,12 @@ def mutant_case(n):
     22:lambda: a["evidence"].pop(),
     23:lambda: b["src"].update(claims_all_verified=True),
     24:lambda: b["review"].update(review_actor="INDEPENDENT_PEER_VERIFIED"),
+    25:lambda: b["exam"]["scoring"]["team_loss_rule_source_discrepancy"].update(state="RECONCILED_BY_NEW_EXCEPTIONS"),
+    26:lambda: b["e"]["y1v5.ev.014"].update(summary="Majority vote held with no reported tally"),
     }
     cases[n]()
     return b
 
-for i in range(25):
+for i in range(27):
     assert violations(mutant_case(i)),("negative mutation escaped",i)
 print("PASS Y1 V5 direct-source adversarial: 129 source/actor/goal audit items, 25 negative mutations rejected, no fabricated peer approval")

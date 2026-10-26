@@ -152,10 +152,20 @@
       ],
       "cases": []
     },
-    "45": {
+    "43": {
       "evidence": [
         "y1v5.ev.014"
       ],
+      "cases": []
+    },
+    "44": {
+      "evidence": [
+        "y1v5.ev.014"
+      ],
+      "cases": []
+    },
+    "45": {
+      "evidence": [],
       "cases": [
         "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness",
         "y1v5.case.suzune-horikita.propose-performance-optimized-lineup",
@@ -852,7 +862,6 @@
     },
     "189": {
       "evidence": [
-        "y1v5.ev.059",
         "y1v5.ev.078"
       ],
       "cases": [
@@ -861,7 +870,9 @@
       ]
     },
     "190": {
-      "evidence": [],
+      "evidence": [
+        "y1v5.ev.059"
+      ],
       "cases": [
         "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event"
       ]

@@ -28,7 +28,7 @@
     "additional_chapters": [
       7
     ],
-    "source_status": "REPORT_DERIVED_FIRST_PRIMARY_SOURCE_SPOTCHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+    "source_status": "ASSISTANT_PRIMARY_PDF_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED"
   },
   "other_actors": [
     "actor.kiyotaka-ayanokoji",
@@ -56,6 +56,18 @@
     "y1v6.ev.067"
   ],
   "case_kind": "BEHAVIORAL_DEMONSTRATION",
-  "epistemic_status": "REPORT_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
-  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION"
+  "epistemic_status": "ASSISTANT_SOURCE_BOUND_REVIEW_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION",
+  "individual_review": {
+    "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+    "evidence_refs": [
+      "y1v6.ev.045",
+      "y1v6.ev.065",
+      "y1v6.ev.066",
+      "y1v6.ev.067"
+    ],
+    "adversarial_matrix_id": "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution",
+    "independent_third_party_verified": false,
+    "source_review_status": "ASSISTANT_COMPLETED"
+  }
 }

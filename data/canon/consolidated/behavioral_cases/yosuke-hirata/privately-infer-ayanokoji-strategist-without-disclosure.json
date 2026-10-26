@@ -15,7 +15,7 @@
     ],
     "chapter": 7,
     "additional_chapters": [],
-    "source_status": "REPORT_DERIVED_FIRST_PRIMARY_SOURCE_SPOTCHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+    "source_status": "ASSISTANT_PRIMARY_PDF_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED"
   },
   "other_actors": [],
   "capabilities_supported": [
@@ -34,6 +34,15 @@
     "y1v6.ev.069"
   ],
   "case_kind": "BEHAVIORAL_DEMONSTRATION",
-  "epistemic_status": "REPORT_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
-  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION"
+  "epistemic_status": "ASSISTANT_SOURCE_BOUND_REVIEW_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION",
+  "individual_review": {
+    "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+    "evidence_refs": [
+      "y1v6.ev.069"
+    ],
+    "adversarial_matrix_id": "y1v6.case.yosuke-hirata.privately-infer-ayanokoji-strategist-without-disclosure",
+    "independent_third_party_verified": false,
+    "source_review_status": "ASSISTANT_COMPLETED"
+  }
 }

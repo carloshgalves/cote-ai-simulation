@@ -4,7 +4,8 @@
   "display_name": "Miyake (given name not established)",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "ASSISTANT_INITIAL_PDF_PASS_INDEPENDENT_AUDIT_PENDING",
   "identity": {
@@ -32,7 +33,9 @@
     "results": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v5.ev.041"
+        "y1v5.ev.041",
+        "y1v6.ev.037",
+        "y1v6.ev.040"
       ]
     },
     "exam": {
@@ -46,11 +49,61 @@
       "context_evidence_refs": [
         "y1v5.ev.055"
       ]
+    },
+    "academic": {
+      "behavioral_case_refs": [
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.037",
+        "y1v6.ev.040"
+      ]
+    },
+    "studies": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.037",
+        "y1v6.ev.039"
+      ]
+    },
+    "diagnostic": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.039"
+      ]
+    },
+    "reasoning": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.039"
+      ]
+    },
+    "friendship": {
+      "behavioral_case_refs": [
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
+    },
+    "cooperation": {
+      "behavioral_case_refs": [
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Episode-scoped, physical comparison must preserve event conditions and narrator limits.",
+  "semantic_audit_notes": "Episode-scoped, physical comparison must preserve event conditions and narrator limits. Y1 V6 source-scoped behavioral claims; preserve historical actor knowledge and allow alternative future goals.",
   "uncertainties": {
     "earlier_history_not_established_here": true,
     "future_outcome_unknown": true

@@ -5,7 +5,8 @@
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "ASSISTANT_INITIAL_PASS_AUDIT_PENDING",
   "identity": {
@@ -30,18 +31,21 @@
     },
     "politics": {
       "behavioral_case_refs": [
-        "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition"
+        "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition",
+        "y1v6.case.nagumo.announce-student-council-centralizing-reforms"
       ],
       "context_evidence_refs": [
         "y1v45.ev.047",
         "y1v45.ev.048",
         "y1v5.ev.057",
-        "y1v5.ev.058"
+        "y1v5.ev.058",
+        "y1v6.ev.003"
       ]
     },
     "leadership": {
       "behavioral_case_refs": [
-        "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition"
+        "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition",
+        "y1v6.case.nagumo.announce-student-council-centralizing-reforms"
       ],
       "context_evidence_refs": [
         "y1v45.ev.048",
@@ -67,11 +71,25 @@
       "context_evidence_refs": [
         "y1v5.ev.057"
       ]
+    },
+    "student_council": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.003"
+      ]
+    },
+    "authority": {
+      "behavioral_case_refs": [
+        "y1v6.case.nagumo.announce-student-council-centralizing-reforms"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.003"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Source confirms recreational performance; student council background and future presidency are Ichinose's account and predictions. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory.",
+  "semantic_audit_notes": "Source confirms recreational performance; student council background and future presidency are Ichinose's account and predictions. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory. Y1 V6 source-scoped behavioral claims; preserve historical actor knowledge and allow alternative future goals.",
   "uncertainties": {
     "given_name_unknown_in_source": true,
     "council_selection_claims_not_official_rule": true,
@@ -83,5 +101,9 @@
     "contextual_facts": "MENTIONS_NOT_FEATS",
     "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [
+    "y1v6.goal.nagumo.announce-student-council-overhaul"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

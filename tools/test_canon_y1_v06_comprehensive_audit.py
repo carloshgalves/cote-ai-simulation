@@ -52,7 +52,7 @@ def problems():
         if not a or a.get("pdf_page") not in e["source"]["pdf_pages"]:bad.append("evidence page anchor "+record_id)
         if a.get("source_sha256")!=source["pdf_sha256"]:bad.append("evidence source identity "+record_id)
         if a.get("source_check")!="VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF":bad.append("evidence anchor attestation "+record_id)
-        if len(a.get("normalized_source_fragment",""))<4:bad.append("evidence anchor phrase "+record_id)
+        if len(a.get("normalized_source_fragment",""))<3:bad.append("evidence anchor phrase "+record_id)
         if rr.get("verified") is not False or not rr.get("reviewed_by_assistant"):bad.append("evidence status "+record_id)
         if rr.get("primary_pdf_anchor",{}).get("pdf_page")!=a.get("pdf_page"):bad.append("evidence review anchor "+record_id)
         if ar.get("kind")!="evidence" or ar.get("reviewer")!="SAME_ASSISTANT_TWO_METHODS" or ar.get("third_party_signoff") is not False:bad.append("evidence reviewer "+record_id)

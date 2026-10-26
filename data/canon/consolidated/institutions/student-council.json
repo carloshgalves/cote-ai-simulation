@@ -5,7 +5,8 @@
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v02.sevenseas.en.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "evidence_refs": [
@@ -27,7 +28,8 @@
     "y1v45.ev.021",
     "y1v45.ev.024",
     "y1v45.ev.026",
-    "y1v45.ev.048"
+    "y1v45.ev.048",
+    "y1v6.ev.003"
   ],
   "owner_truth_boundary": "Student-council authority described in Manabu's public speech, not independently executed rulebook",
   "structure": {
@@ -98,5 +100,32 @@
     },
     "time_gate": "LATE_AUG_POST_ISLAND",
     "revelation_gate": "MANABU_REPORTED_KIYOTAKA_LEADER_BEFORE_RECRUITMENT_NOT_PUBLIC"
+  },
+  "presidency_y1_v06": {
+    "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "source_evidence": "y1v6.ev.003",
+    "former_president": "actor.manabu-horikita",
+    "new_president": "actor.nagumo",
+    "change": "NAGUMO_SUCCEEDS_MANABU",
+    "proposals": [
+      {
+        "name": "OFFICER_TERMS",
+        "description": "Indefinite while student enrolled",
+        "enacted": "NOT_CONFIRMED"
+      },
+      {
+        "name": "NO_FIXED_MEMBERSHIP_CAP",
+        "enacted": "NOT_CONFIRMED"
+      },
+      {
+        "name": "ELECTION_PROCESS_CHANGE",
+        "enacted": "NOT_CONFIRMED"
+      },
+      {
+        "name": "MAJORITY_REMOVAL_OF_UNFIT_MEMBER",
+        "enacted": "NOT_CONFIRMED"
+      }
+    ],
+    "gate": "PUBLIC_POLICY_ANNOUNCEMENT_IS_NOT_AUTHORIZED_ENGINE_RULE_CHANGE"
   }
 }

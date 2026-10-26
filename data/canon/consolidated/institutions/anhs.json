@@ -8,7 +8,8 @@
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "source_documents": [],
@@ -335,7 +336,8 @@
       "reference_exam_ids": [
         "exam.y1.deserted-island-1",
         "exam.y1.midterm-1",
-        "exam.y1.zodiac-cruise-1"
+        "exam.y1.zodiac-cruise-1",
+        "anhs.y1.paper-shuffle"
       ],
       "evidence_refs": [
         "y1v1.ev.061",
@@ -396,7 +398,11 @@
         "y1v4.ev.126",
         "y1v4.ev.127",
         "y1v4.ev.128",
-        "y1v4.ev.132"
+        "y1v4.ev.132",
+        "y1v6.ev.013",
+        "y1v6.ev.014",
+        "y1v6.ev.030",
+        "y1v6.ev.068"
       ],
       "description": "Mock diagnostic, midterm and exceptional score-point purchase"
     },
@@ -687,5 +693,15 @@
     "enforcement_note": "A council officer's stated decision not to investigate is not blanket immunity or a legal exception.",
     "effective_time": "HOLDS_BY_Y1_LATE_AUG",
     "engine_authority": "REFERENCE_ONLY_NOT_COMPILED"
+  },
+  "paper_shuffle_y1_v06": {
+    "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "rule_reference": "data/canon/consolidated/exams/y1-paper-shuffle.json",
+    "authority": "SCHOOL_DEFINED_ONLY_AFTER_ANNOUNCEMENT",
+    "pair_expulsion": "BOTH_PARTNERS",
+    "combined_minimum_per_subject": 60,
+    "combined_total_minimum": 692,
+    "final_results": "UNPUBLISHED_IN_VOLUME",
+    "unapproved_questions_not_authoritative": true
   }
 }

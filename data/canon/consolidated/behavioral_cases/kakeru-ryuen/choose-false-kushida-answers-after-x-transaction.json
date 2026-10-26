@@ -5,8 +5,8 @@
   "title": "choose false kushida answers after x transaction",
   "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
   "observed_actions": "Receives an anonymous warning/ultimatum, evaluates three options and intentionally provides Kushida incorrect mathematics questions.",
-  "observed_result": "Preserves Suzune's enrollment while denying Kushida a win and refusing to give X the obvious cheating-expulsion outcome.",
-  "epistemic_limits": "Ryūen's later explanation of incentives is attributed; X remains unidentified, so do not credit Kiyotaka as known counterparty.",
+  "observed_result": "Preserves Suzune's enrollment while denying Kushida a win and refusing to give X the obvious cheating-expulsion outcome. His declared enduring ambition to reach Class A is explicitly unchanged at PDF p207; this is a local tactic, not a change in ultimate objective.",
+  "epistemic_limits": "Ryūen's later explanation of incentives is attributed; X remains unidentified, so do not credit Kiyotaka as known counterparty. Do not mistake local accommodation of Horikita for strategic alliance with Class D.",
   "source": {
     "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
     "pdf_pages": [

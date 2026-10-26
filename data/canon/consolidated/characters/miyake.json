@@ -1,7 +1,7 @@
 {
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.miyake",
-  "display_name": "Miyake (given name not established)",
+  "display_name": "Akito Miyake",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v05.sevenseas.en.operator-provided",
@@ -9,8 +9,20 @@
   ],
   "source_status": "ASSISTANT_INITIAL_PDF_PASS_INDEPENDENT_AUDIT_PENDING",
   "identity": {
-    "role_summary": "Observed Year 1 Volume 5 sports festival participant",
-    "aliases": []
+    "role_summary": "First-year Class D student Akito Miyake, studies with Hasebe and Yukimura in Y1 V6.",
+    "aliases": [
+      "Miyake Akito",
+      "Akito",
+      "Miyacchi"
+    ],
+    "temporal_updates": [
+      {
+        "since": "Y1_V06_CH6_P150",
+        "source_evidence_id": "y1v6.ev.056",
+        "given_name": "Akito",
+        "scope": "FIRST_NAME_VOLUNTARILY_SHARED_WITH_STUDY_FRIENDS"
+      }
+    ]
   },
   "knowledge_time_policy": {
     "canonical_after_divergence_is_not_actor_memory": true,

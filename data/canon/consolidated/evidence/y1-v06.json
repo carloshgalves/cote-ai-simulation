@@ -3933,7 +3933,7 @@
       "id": "y1v6.ev.079",
       "source_catalog_id": "V6-E079",
       "domain": "strategy",
-      "summary": "Três alternativas avaliadas; escolhe dar respostas falsas a Kushida",
+      "summary": "Ryūen avalia três alternativas após o ultimato anônimo: entregar respostas corretas à Kushida e expulsar Horikita, permitir um cenário de suspeita de cola contra Kushida, ou fornecer respostas falsas para que Horikita permaneça. Ele afirma escolher a terceira; seu objetivo de longo prazo de alcançar a Classe A continua inalterado (página 207), enquanto a prioridade tática muda. X permanece anônimo para ele.",
       "source": {
         "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
         "pdf_pages": [
@@ -3946,7 +3946,7 @@
         ],
         "chapter": 7,
         "edition": "English Seven Seas PDF supplied by operator",
-        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+        "verification": "DIRECT_PDF_P207_208_SPEAKER_AND_GOAL_RECHECK_INDEPENDENT_REVIEW_PENDING"
       },
       "source_mode": "OBSERVED_DECISION",
       "source_report_mode": "DECISÃO",

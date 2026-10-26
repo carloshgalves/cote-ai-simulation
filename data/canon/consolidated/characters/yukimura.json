@@ -1,7 +1,7 @@
 {
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.yukimura",
-  "display_name": "Yukimura (given name unknown at this horizon)",
+  "display_name": "Teruhiko Yukimura (preferred name: Keisei)",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
@@ -11,8 +11,22 @@
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
-    "role_summary": "Class D",
-    "aliases": []
+    "role_summary": "First-year Class D student; officially called Teruhiko Yukimura, prefers Keisei among friends from Y1 V6.",
+    "aliases": [
+      "Yukimura Teruhiko",
+      "Keisei",
+      "Teruhiko"
+    ],
+    "temporal_updates": [
+      {
+        "since": "Y1_V06_CH6_P151",
+        "source_evidence_id": "y1v6.ev.058",
+        "official_given_name": "Teruhiko",
+        "preferred_given_name": "Keisei",
+        "reason_as_self_reported": "Named Teruhiko by departed mother; Keisei is the name his father wanted",
+        "scope": "FRIEND_GROUP_SOCIAL_ADDRESS_NOT_LEGAL_RENAME"
+      }
+    ]
   },
   "knowledge_time_policy": {
     "canonical_after_divergence_is_not_actor_memory": true,

@@ -16,7 +16,9 @@
         "physical": "D-",
         "cooperativeness": "D-"
       },
-      "epistemic_boundary": "Past school-database baseline, not permanent traits or simulation scalar ratings"
+      "epistemic_boundary": "Past school-database baseline, not permanent traits or simulation scalar ratings",
+      "date_of_birth_month_day": "07-11",
+      "school_context_notes": "Teacher card notes strong academics and difficulty making friends; faculty expectation of social growth; evaluation reflects a dated historical snapshot."
     },
     {
       "actor_id": "actor.maya-sato",
@@ -30,7 +32,9 @@
         "physical": "C",
         "cooperativeness": "C-"
       },
-      "epistemic_boundary": "Past school-database snapshot; does not foreclose later growth or dictate romance"
+      "epistemic_boundary": "Past school-database snapshot; does not foreclose later growth or dictate romance",
+      "date_of_birth_month_day": "02-28",
+      "school_context_notes": "Teacher card notes earlier stronger grades, distractibility from friendships in later junior high, cheerful/proactive social profile; historical context, not fixed simulation ability."
     }
   ],
   "numeric_conversion": "FORBIDDEN",

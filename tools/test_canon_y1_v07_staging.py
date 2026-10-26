@@ -51,7 +51,10 @@ def check(data: dict, bridges: dict, volume0: dict) -> list[str]:
                 continue
             pages = str(row.get("pages", ""))
             nums = [int(n) for n in re.findall(r"\d+", pages)]
-            require(bool(nums) and all(1 <= n <= 207 for n in nums), "invalid V7 source pages: " + str(row.get("id")))
+            # N28 is a procedural anti-false-review control, not a literary claim.
+            # It intentionally has no source page and must retain that classification.
+            procedural = field == "negative_controls_proposed" and row.get("id") == "N28" and pages == "—"
+            require(procedural or (bool(nums) and all(1 <= n <= 207 for n in nums)), "invalid V7 source pages: " + str(row.get("id")))
             if field != "negative_controls_proposed":
                 require(row.get("verified") is False, "false record signoff: " + str(row.get("id")))
     for row in data.get("goal_transitions", []):

@@ -1,0 +1,59 @@
+{
+  "id": "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "commit to math wager and reveal junior high past",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Chooses mathematics as wager subject, demands Horikita leave if she wins and recounts posting anonymous grievances then releasing confidants' true secrets.",
+  "observed_result": "Her private account helps Ayanokōji understand her current defensive hostility; official future math score not yet known.",
+  "epistemic_limits": "Past secrets disclosed by narrator/self-account are not globally known to Manabu, classmates, or simulations.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130
+    ],
+    "chapter": 5,
+    "additional_chapters": [],
+    "source_status": "REPORT_DERIVED_FIRST_PRIMARY_SOURCE_SPOTCHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.manabu-horikita",
+    "actor.suzune-horikita",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "agreement",
+    "motivation",
+    "privacy",
+    "retrospective"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "agreement",
+    "motivation",
+    "privacy",
+    "retrospective"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.049",
+    "y1v6.ev.050",
+    "y1v6.ev.051",
+    "y1v6.ev.052"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "REPORT_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION"
+}

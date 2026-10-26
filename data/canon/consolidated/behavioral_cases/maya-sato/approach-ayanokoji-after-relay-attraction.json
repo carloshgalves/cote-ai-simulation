@@ -1,0 +1,53 @@
+{
+  "id": "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction",
+  "actor_id": "actor.maya-sato",
+  "primary_actor_id": "actor.maya-sato",
+  "title": "approach ayanokoji after relay attraction",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Privately asks Kiyotaka whether he has a girlfriend and obtains his contact information after noticing his running.",
+  "observed_result": "Mutual contact is established without any dating commitment.",
+  "epistemic_limits": "Attraction is unilateral in volume and cannot be upgraded to reciprocated romance.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      19,
+      20,
+      21,
+      83,
+      159,
+      160,
+      161,
+      162
+    ],
+    "chapter": 2,
+    "additional_chapters": [
+      5,
+      6
+    ],
+    "source_status": "REPORT_DERIVED_FIRST_PRIMARY_SOURCE_SPOTCHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.airi-sakura"
+  ],
+  "capabilities_supported": [
+    "romance",
+    "relationship",
+    "social"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "romance",
+    "relationship",
+    "social"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.006",
+    "y1v6.ev.035",
+    "y1v6.ev.061"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "REPORT_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION"
+}

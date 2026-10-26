@@ -1,0 +1,66 @@
+{
+  "id": "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "join five student friendship circle",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Forms a social circle with Yukimura, Miyake, Hasebe and Sakura and participates in communication beyond prior solitary routine.",
+  "observed_result": "Gains a reciprocal group; continues concealing other information and motives.",
+  "epistemic_limits": "Joining this group is an observed social development, not irreversible loyalty or exposure of secret knowledge.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      97,
+      98,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158
+    ],
+    "chapter": 5,
+    "additional_chapters": [
+      6
+    ],
+    "source_status": "REPORT_DERIVED_FIRST_PRIMARY_SOURCE_SPOTCHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.airi-sakura",
+    "actor.yukimura",
+    "actor.miyake",
+    "actor.hasebe",
+    "actor.kei-karuizawa"
+  ],
+  "capabilities_supported": [
+    "friendship",
+    "social",
+    "development"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "friendship",
+    "social",
+    "development"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.043",
+    "y1v6.ev.056",
+    "y1v6.ev.057",
+    "y1v6.ev.059"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "REPORT_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION"
+}

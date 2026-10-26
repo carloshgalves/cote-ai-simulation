@@ -1,0 +1,50 @@
+{
+  "id": "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "public juice incident with disputed hidden causes",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Participates in encounter with Kushida where a drink is spilled and uniform changes become relevant to later suspicions.",
+  "observed_result": "A later cheat-sheet discovery prompts Ryūen to infer a complex setup.",
+  "epistemic_limits": "The record does not establish who placed the paper, who scripted every move, or that Karuizawa herself knew all elements.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      163,
+      164,
+      165,
+      166,
+      167,
+      204,
+      205
+    ],
+    "chapter": 6,
+    "additional_chapters": [
+      7
+    ],
+    "source_status": "REPORT_DERIVED_FIRST_PRIMARY_SOURCE_SPOTCHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida",
+    "actor.kakeru-ryuen"
+  ],
+  "capabilities_supported": [
+    "deception",
+    "epistemics",
+    "information"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "deception",
+    "epistemics",
+    "information"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.062",
+    "y1v6.ev.076"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "REPORT_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION"
+}

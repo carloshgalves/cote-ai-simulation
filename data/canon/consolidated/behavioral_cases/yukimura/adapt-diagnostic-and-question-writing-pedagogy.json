@@ -1,0 +1,68 @@
+{
+  "id": "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy",
+  "actor_id": "actor.yukimura",
+  "primary_actor_id": "actor.yukimura",
+  "title": "adapt diagnostic and question writing pedagogy",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Analyzes Miyake/Hasebe's overlapping humanities weakness, gives diagnostic problems and adapts explanations.",
+  "observed_result": "Students start discovering shared gaps, and source-grounded test preparation improves their planning.",
+  "epistemic_limits": "Three correct plus one partial among ten questions are situational diagnostics, not fixed intelligence.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      85,
+      86,
+      87,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      132,
+      133,
+      134
+    ],
+    "chapter": 5,
+    "additional_chapters": [
+      6
+    ],
+    "source_status": "REPORT_DERIVED_FIRST_PRIMARY_SOURCE_SPOTCHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.miyake",
+    "actor.hasebe",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "studies",
+    "reasoning",
+    "teaching"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "studies",
+    "reasoning",
+    "teaching"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.037",
+    "y1v6.ev.039",
+    "y1v6.ev.040",
+    "y1v6.ev.044",
+    "y1v6.ev.053"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "REPORT_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION"
+}

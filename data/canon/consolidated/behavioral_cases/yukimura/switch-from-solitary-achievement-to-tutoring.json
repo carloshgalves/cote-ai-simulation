@@ -1,0 +1,48 @@
+{
+  "id": "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring",
+  "actor_id": "actor.yukimura",
+  "primary_actor_id": "actor.yukimura",
+  "title": "switch from solitary achievement to tutoring",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Acknowledges his physical and cooperation limits after the festival and offers tutoring to peers in a vulnerable academic pair.",
+  "observed_result": "Begins teaching rather than dismissing less capable students.",
+  "epistemic_limits": "Does not erase historic weak cooperativeness school-card rating; demonstrated change contextual.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      87,
+      88,
+      96,
+      97,
+      132,
+      133,
+      134
+    ],
+    "chapter": 5,
+    "additional_chapters": [
+      6
+    ],
+    "source_status": "REPORT_DERIVED_FIRST_PRIMARY_SOURCE_SPOTCHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "development",
+    "cooperation",
+    "teaching"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "development",
+    "cooperation",
+    "teaching"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.038",
+    "y1v6.ev.042",
+    "y1v6.ev.053"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "REPORT_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION"
+}

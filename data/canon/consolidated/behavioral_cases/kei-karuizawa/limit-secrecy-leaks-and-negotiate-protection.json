@@ -1,0 +1,49 @@
+{
+  "id": "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "limit secrecy leaks and negotiate protection",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Challenges Kiyotaka over Satō gossip, asks for continued protection and deletes sensitive calls and emails.",
+  "observed_result": "Maintains mutually useful but unequal private communication.",
+  "epistemic_limits": "Her actions do not establish exclusive romance or independent control of all information.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      25,
+      26,
+      27,
+      28,
+      156,
+      157,
+      158
+    ],
+    "chapter": 2,
+    "additional_chapters": [
+      6
+    ],
+    "source_status": "REPORT_DERIVED_FIRST_PRIMARY_SOURCE_SPOTCHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "secrecy",
+    "relationship",
+    "privacy"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "secrecy",
+    "relationship",
+    "privacy"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.009",
+    "y1v6.ev.059"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "REPORT_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION"
+}

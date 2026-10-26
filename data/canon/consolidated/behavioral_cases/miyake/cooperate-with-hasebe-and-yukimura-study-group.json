@@ -1,0 +1,69 @@
+{
+  "id": "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+  "actor_id": "actor.miyake",
+  "primary_actor_id": "actor.miyake",
+  "title": "cooperate with hasebe and yukimura study group",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Recognizes common weak disciplines with Hasebe and takes part in Yukimura's tailored tutoring and new friendship group.",
+  "observed_result": "Academic risk prompts new social cooperation; no verified final exam score.",
+  "epistemic_limits": "Strong similarity in subjects is not proof he cannot ever improve.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      85,
+      86,
+      87,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150
+    ],
+    "chapter": 5,
+    "additional_chapters": [
+      6
+    ],
+    "source_status": "REPORT_DERIVED_FIRST_PRIMARY_SOURCE_SPOTCHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.hasebe",
+    "actor.yukimura",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "academic",
+    "friendship",
+    "cooperation"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "academic",
+    "friendship",
+    "cooperation"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.037",
+    "y1v6.ev.039",
+    "y1v6.ev.040",
+    "y1v6.ev.056"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "REPORT_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION"
+}

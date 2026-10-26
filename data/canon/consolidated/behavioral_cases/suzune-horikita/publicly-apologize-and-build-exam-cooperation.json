@@ -1,0 +1,52 @@
+{
+  "id": "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "publicly apologize and build exam cooperation",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Acknowledges her sports-festival failures publicly and coordinates the class through Hirata and strategic diagnostic scores.",
+  "observed_result": "Students assent to a plan that limits expulsion risk and confirms chosen pairs.",
+  "epistemic_limits": "Observed leadership change in this context; no guaranteed future consensus or perfection.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      48,
+      49,
+      50,
+      76,
+      77,
+      78,
+      79
+    ],
+    "chapter": 3,
+    "additional_chapters": [
+      5
+    ],
+    "source_status": "REPORT_DERIVED_FIRST_PRIMARY_SOURCE_SPOTCHECK_INDEPENDENT_SEMANTIC_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "cooperation",
+    "exam",
+    "motivation"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "leadership",
+    "cooperation",
+    "exam",
+    "motivation"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.018",
+    "y1v6.ev.027",
+    "y1v6.ev.028"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "REPORT_EXTRACTED_INDIVIDUAL_SEMANTIC_REVIEW_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION"
+}

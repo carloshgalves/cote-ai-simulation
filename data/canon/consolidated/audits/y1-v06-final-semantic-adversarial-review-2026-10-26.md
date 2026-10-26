@@ -32,10 +32,15 @@ Data: 2026-10-26. Estado: revisão do assistente com passagens de maior risco ve
 A primeira extração do Volume 5 (#34) foi substituída pela #35. Antes de fechá-la, foram trazidos para a branch da #37 os dois únicos detalhes que exigiam explicitação:
 - Páginas 43–44 do Volume 5: **16 votos** para Horikita, **13** para Karuizawa, com abstenções.
 - Página 18 do Volume 5 (regra do perdedor `-100`) versus páginas 190–191 (narração de `-50` para a Classe B). **Contradição da fonte ainda aberta**; não inventar exceção nem substituir resultados narrados.
+- Página 65 do Volume 5: Ayanokōji e Horikita experimentam andar de três pernas; ele acelera para ensinar a **adaptar ritmo e coordenar com o parceiro**, não para medir velocidade máxima.
+- Página 90 do Volume 5: Kōenji segura o soco de Sudō com a palma; episódio de defesa específico, sem classificar força total.
+- Página 106 do Volume 5: formação por **altura** no cabo de guerra organizada por Katsuragi e Hirata.
+- Páginas 160–162 do Volume 5: Ayanokōji fica **em último lugar** na caça ao objeto após duas trocas de pedido, sem que isso meça atletismo geral.
+- Página 189 do Volume 5: Manabu termina à frente de Ayanokōji após obstrução; nenhum tempo máximo ou resultado sem o acidente é fornecido.
 
 ## Controles e decisão
 
 - `tools/test_canon_y1_v06.py`: 17 controles adversariais preexistentes.
 - `tools/test_canon_y1_v06_semantic_adversarial.py`: 28 novos controles negativos para identidades, arquivos escolares, inferência X, objetivo persistente de Ryūen, limites de resultados, avaliação independente e as duas ressalvas herdadas da #34.
-- As suítes de V5 e regressão cumulativa seguem obrigatórias no CI; toda promoção de memória, definição executável de exame e mecanismo executável de metas permanece **desabilitada**.
+- As suítes de V5 incluem **32 mutações adversariais**, agora protegendo também os cinco episódios físicos/estratégicos recuperados da #34; a regressão cumulativa permanece obrigatória no CI. Toda promoção de memória, definição executável de exame e mecanismo executável de metas permanece **desabilitada**.
 - **Estado recomendado:** manter PR #37 como Draft, sem merge, até resolver a revisão independente restante e o gate do operador. O relatório documenta uma revisão assistida substancial, sem reivindicar revisão por terceiro.

@@ -1,0 +1,594 @@
+{
+  "schema_version": "canon-actor-goal-transition-reference-v1",
+  "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+  "authority": "HISTORICAL_EXAMPLES_NOT_EXECUTABLE_GOAL_POLICY",
+  "purpose": "Ground examples of contingent goal shifts and belief development, no fixed future narratives",
+  "future_divergence_gate": "Only in-story acquired information and current circumstances may inform simulated updates",
+  "truth_vs_belief_gate": "Keep private confessions, school facts and third-party observations distinct",
+  "stability_gate": "No mandatory redemption, romance, class victory or coercive tactic replication",
+  "update_dimensions": [
+    "MEANS_CHANGE",
+    "ETHICAL_PRIORITY_CONFLICT",
+    "INDEPENDENT_STRATEGIC_GROWTH",
+    "DISCIPLINE_PRIORITY_CHANGE",
+    "COOPERATION_MEANS_CHANGE",
+    "IDENTITY_PRESENTATION_CHANGE",
+    "SOCIAL_INITIATIVE",
+    "NEW_SOCIAL_INVOLVEMENT",
+    "RETROSPECTIVE_HIDDEN_MOTIVE_REVEAL",
+    "COMMITMENT_CONSTRAINED_PRIORITY",
+    "INFORMATION_PRIORITY_CHANGE",
+    "LOCAL_TACTICAL_REPRIORITIZATION",
+    "VALUES_IN_TENSION_NOT_REPLACEMENT",
+    "ALLIANCE_REAPPRAISAL",
+    "INSTITUTIONAL_AGENDA"
+  ],
+  "transitions": [
+    {
+      "id": "y1v6.goal.suzune-horikita.coordinate-classwide-exam",
+      "actor_id": "actor.suzune-horikita",
+      "kind": "MEANS_CHANGE",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_3",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          48,
+          49,
+          50,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.018",
+        "y1v6.ev.027",
+        "y1v6.ev.028",
+        "y1v6.ev.030"
+      ],
+      "prior_goal_or_means": "Solitary performance and direct confrontation",
+      "observed_goal_or_means_after": "Coordinate public apology, Hirata's support and diagnostic score planning to keep pairs safe",
+      "trigger_or_new_information": "Classwide expulsion risk and previous festival failure",
+      "behavioral_evidence": "Class follows strategy and announced pairs largely match the plan",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "Does not guarantee permanent goodwill, obedience or success in divergent trials.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling",
+      "actor_id": "actor.suzune-horikita",
+      "kind": "ETHICAL_PRIORITY_CONFLICT",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_3",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          44,
+          45,
+          46,
+          48,
+          49,
+          50,
+          118,
+          119,
+          120,
+          121,
+          122
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.016",
+        "y1v6.ev.018",
+        "y1v6.ev.049"
+      ],
+      "prior_goal_or_means": "Guard exam safety while distrusting a potential traitor",
+      "observed_goal_or_means_after": "Keep trying to reform Kushida instead of expelling her immediately",
+      "trigger_or_new_information": "Sudō's earlier improvement under support and wish to preserve class potential",
+      "behavioral_evidence": "Rejects suggestion of immediate expulsion while making cautious defensive wager",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "Does not guarantee permanent goodwill, obedience or success in divergent trials.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack",
+      "actor_id": "actor.suzune-horikita",
+      "kind": "INDEPENDENT_STRATEGIC_GROWTH",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_5",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          104,
+          105,
+          106,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.045",
+        "y1v6.ev.065",
+        "y1v6.ev.066"
+      ],
+      "prior_goal_or_means": "Risk hostile question replacement after drafting papers",
+      "observed_goal_or_means_after": "Request school recognition of her questions ahead of rivals and conceal that authorization",
+      "trigger_or_new_information": "Insider leakage and school acceptance timing",
+      "behavioral_evidence": "Chabashira recognizes her questions; rival substitution fails",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "Does not guarantee permanent goodwill, obedience or success in divergent trials.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.ken-sudo.improve-studies-under-tutoring",
+      "actor_id": "actor.ken-sudo",
+      "kind": "DISCIPLINE_PRIORITY_CHANGE",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_2",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          17,
+          18,
+          30,
+          31,
+          32,
+          33
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.004",
+        "y1v6.ev.010"
+      ],
+      "prior_goal_or_means": "Disengage in classes and prioritize basketball",
+      "observed_goal_or_means_after": "Attend classes, take notes, practice study outside school with Suzune",
+      "trigger_or_new_information": "Relationship-driven validation and danger of exam expulsion",
+      "behavioral_evidence": "Reported average rises to 57, English 52; still no guaranteed future performance",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "Performance changes need training and support; no permanent gain or romantic reward guaranteed.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.yukimura.offer-personalized-teaching",
+      "actor_id": "actor.yukimura",
+      "kind": "COOPERATION_MEANS_CHANGE",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_5",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          87,
+          88,
+          96,
+          97,
+          132,
+          133,
+          134
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.038",
+        "y1v6.ev.042",
+        "y1v6.ev.053"
+      ],
+      "prior_goal_or_means": "Prefer academic achievement alone over peer involvement",
+      "observed_goal_or_means_after": "Teach Miyake and Hasebe with tailored diagnostic exercises",
+      "trigger_or_new_information": "Recognizes limits from festival and pair's shared humanities weakness",
+      "behavioral_evidence": "Repeated study sessions and improved social cooperation",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "School card D- cooperation is historical; preferred name does not change stable actor ID.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.yukimura.use-preferred-name-keisei",
+      "actor_id": "actor.yukimura",
+      "kind": "IDENTITY_PRESENTATION_CHANGE",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_6",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.056",
+        "y1v6.ev.058"
+      ],
+      "prior_goal_or_means": "Schoolmates address him Teruhiko",
+      "observed_goal_or_means_after": "Ask close friends to use preferred name Keisei",
+      "trigger_or_new_information": "Disclosure of personal history associated with name and absent mother",
+      "behavioral_evidence": "Peers accept preferred form of address; formal actor identity remains unchanged",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "School card D- cooperation is historical; preferred name does not change stable actor ID.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.airi-sakura.request-friendship-group-entry",
+      "actor_id": "actor.airi-sakura",
+      "kind": "SOCIAL_INITIATIVE",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_5",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          97,
+          98,
+          151,
+          152,
+          153,
+          154,
+          155
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.043",
+        "y1v6.ev.057"
+      ],
+      "prior_goal_or_means": "Watch group from distance and hesitate to speak",
+      "observed_goal_or_means_after": "Directly request inclusion in Ayanokoji's circle",
+      "trigger_or_new_information": "Desire to belong and increasing peer safety",
+      "behavioral_evidence": "Five-member friendship circle forms",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "Timidity is not a hard prohibition on initiative; different groups could reject her.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "kind": "NEW_SOCIAL_INVOLVEMENT",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_6",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.056",
+        "y1v6.ev.057",
+        "y1v6.ev.059"
+      ],
+      "prior_goal_or_means": "Maintain relatively isolated social routine",
+      "observed_goal_or_means_after": "Participate in reciprocal five-student friendship circle",
+      "trigger_or_new_information": "Accepted invitation and repeated shared study time",
+      "behavioral_evidence": "Expands interpersonal ties while retaining private information",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "Friendship does not transfer secret X identity or hidden past to peers.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.kikyo-kushida.seek-status-through-confidences",
+      "actor_id": "actor.kikyo-kushida",
+      "kind": "RETROSPECTIVE_HIDDEN_MOTIVE_REVEAL",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_1",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          10,
+          11,
+          12,
+          125,
+          126,
+          127,
+          128,
+          129
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.001",
+        "y1v6.ev.002",
+        "y1v6.ev.051"
+      ],
+      "prior_goal_or_means": "Seek praise for academics, appearance and athletics",
+      "observed_goal_or_means_after": "Seek unmatched popularity by becoming trusted keeper of private secrets",
+      "trigger_or_new_information": "Repeated personal rivalry failure and subsequent junior-high events",
+      "behavioral_evidence": "Recounts constructed persona, exposed anonymous blog and mass disclosure of confidences",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "Confession and promise never establish permanent reform, universal deception skills or a diagnosis.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation",
+      "actor_id": "actor.kikyo-kushida",
+      "kind": "COMMITMENT_CONSTRAINED_PRIORITY",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_5",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          118,
+          119,
+          120,
+          121,
+          122,
+          194,
+          195,
+          196,
+          197,
+          198,
+          199
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.049",
+        "y1v6.ev.072",
+        "y1v6.ev.073"
+      ],
+      "prior_goal_or_means": "Seek expulsion of Suzune and Kiyotaka",
+      "observed_goal_or_means_after": "Promise not to interfere after conceding math wager, without forgiving Suzune",
+      "trigger_or_new_information": "Unexpected math questions and admitted own probable score below 80",
+      "behavioral_evidence": "Refuses handshake and expresses continued hostility",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "Confession and promise never establish permanent reform, universal deception skills or a diagnosis.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation",
+      "actor_id": "actor.kakeru-ryuen",
+      "kind": "INFORMATION_PRIORITY_CHANGE",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_4",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.022",
+        "y1v6.ev.023",
+        "y1v6.ev.025",
+        "y1v6.ev.026"
+      ],
+      "prior_goal_or_means": "Prioritize winning points against rivals and enforce Class C control",
+      "observed_goal_or_means_after": "Spend effort locating unknown X and collaborators",
+      "trigger_or_new_information": "Previously received anonymous interference and shame of strategic reversal",
+      "behavioral_evidence": "Conducts intimidation test and narrows hypotheses without learning identity",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "No knowing X identity or automatic knowledge of material crime authorship; local choices contingent.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum",
+      "actor_id": "actor.kakeru-ryuen",
+      "kind": "LOCAL_TACTICAL_REPRIORITIZATION",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_7",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          202,
+          203,
+          204,
+          207,
+          208
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.075",
+        "y1v6.ev.078",
+        "y1v6.ev.079"
+      ],
+      "prior_goal_or_means": "Use Kushida's question swap and math answers to attack Suzune",
+      "observed_goal_or_means_after": "Send deliberately wrong math answers and keep Suzune in school",
+      "trigger_or_new_information": "X warns school had accepted Horikita papers and offers transactional options",
+      "behavioral_evidence": "Ryūen reports choosing one of three alternatives; X sender remains unknown",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "No knowing X identity or automatic knowledge of material crime authorship; local choices contingent.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.honami-ichinose.help-across-classes-with-competitive-limits",
+      "actor_id": "actor.honami-ichinose",
+      "kind": "VALUES_IN_TENSION_NOT_REPLACEMENT",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_5",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.047",
+        "y1v6.ev.048"
+      ],
+      "prior_goal_or_means": "Maintain a public commitment to solidarity",
+      "observed_goal_or_means_after": "Offer help and study access across competing classes while confronting resource tradeoffs",
+      "trigger_or_new_information": "Discussion about priorities in competitive school",
+      "behavioral_evidence": "Cooperative conduct continues; discomfort when praised has unknown cause",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "No secret motive inferred from discomfort or compulsory future altruism.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.katsuragi.regret-cooperation-with-ryuen",
+      "actor_id": "actor.katsuragi",
+      "kind": "ALLIANCE_REAPPRAISAL",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_2",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          22,
+          23,
+          24,
+          168,
+          169
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.007",
+        "y1v6.ev.063"
+      ],
+      "prior_goal_or_means": "Accept a limited alliance with Ryūen as politically necessary",
+      "observed_goal_or_means_after": "Regret alliance and become wary of coercive rival tactics",
+      "trigger_or_new_information": "Declining faction standing and realized risks of previous bargain",
+      "behavioral_evidence": "Admits regret and warns Kiyotaka against Ryūen",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "Regret does not automatically formalize new alliances.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v6.goal.nagumo.announce-student-council-overhaul",
+      "actor_id": "actor.nagumo",
+      "kind": "INSTITUTIONAL_AGENDA",
+      "event_time_ref": "Y1_V06_SOURCE_CHAPTER_2",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          14,
+          15,
+          16
+        ],
+        "mode": "REPORT_EXTRACTED_SOURCE_MODE_GATED"
+      },
+      "evidence_refs": [
+        "y1v6.ev.003"
+      ],
+      "prior_goal_or_means": "Inherit student council role within Manabu's framework",
+      "observed_goal_or_means_after": "Announce more centralized indefinite mandates and majority removals",
+      "trigger_or_new_information": "Takes student council presidency",
+      "behavioral_evidence": "Public promises are not yet verified as enacted formal rules",
+      "epistemic_status": "ATTRIBUTED_TO_SOURCE_AND_SPEAKER",
+      "persistence_scope": "SCENE_LOCAL_FUTURE_UNPROVEN",
+      "contingent_alternatives": [
+        "Same pressure may not change objectives in a divergent timeline",
+        "New information or incentives may produce a different decision"
+      ],
+      "simulation_guard": "A political proposal cannot rewrite currently operative institutional rules.",
+      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+    }
+  ]
+}

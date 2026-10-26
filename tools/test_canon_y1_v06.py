@@ -37,10 +37,12 @@ assert len(changes["transitions"])==15
 assert coverage["records"]==80 and coverage["cases"]==43 and coverage["goal_transitions"]==15
 assert coverage["chapter_evidence_counts"]=={"1":2,"2":7,"3":12,"4":5,"5":26,"6":12,"7":16}
 assert len(audit["evidence"])==80 and len(audit["behavioral_cases"])==43 and len(audit["goal_transitions"])==15
+assert sum(x["reviewed_by_assistant"] for x in audit["evidence"])==31
+assert audit["release_gate"]["external_independent_review"]=="NOT_PERFORMED"
 assert {x["record_id"] for x in audit["evidence"]}==set(ev)
 assert {x["case_id"] for x in audit["behavioral_cases"]}==set(cases)
 assert {x["transition_id"] for x in audit["goal_transitions"]}=={g["id"] for g in changes["transitions"]}
-assert sum(x["direct_pdf_spotchecked"] for x in audit["evidence"])==41
+assert sum(x["direct_pdf_spotchecked"] for x in audit["evidence"])==50
 assert all(x["verified"] is False for x in audit["evidence"]+audit["behavioral_cases"]+audit["goal_transitions"])
 assert audit["release_gate"]["external_independent_review"]=="NOT_PERFORMED"
 assert audit["release_gate"]["engine_memory_admission"] is False

@@ -1,0 +1,2213 @@
+{
+  "schema_version": "cote-y1-v7-report-evidence-candidates-v1",
+  "status": "OPERATOR_SOURCE_ASSISTED_REPORT_NOT_CANONICAL_NOT_INDEPENDENT_REVIEWED",
+  "source": {
+    "work_id": "ln.y1.v07",
+    "edition": "Seven Seas English, operator-supplied PDF",
+    "pdf_pages": 207,
+    "pdf_sha256": "b41f00143f483fa7704bcc6c4bfda03323bd835c77ea1e95e53d27bd859e461b",
+    "page_convention": "physical 1-based PDF pages",
+    "original_pdf_committed": false
+  },
+  "governance": [
+    "docs/adr/0005-canon-knowledge-base.md",
+    "docs/adr/0012-cumulative-cross-volume-revelations.md",
+    "docs/canon/conflict-policy.md"
+  ],
+  "coverage": {
+    "chapter_ranges": {
+      "1": [
+        11,
+        12
+      ],
+      "2": [
+        14,
+        30
+      ],
+      "3": [
+        32,
+        96
+      ],
+      "4": [
+        98,
+        118
+      ],
+      "5": [
+        120,
+        150
+      ],
+      "6": [
+        152,
+        195
+      ],
+      "7": [
+        197,
+        205
+      ]
+    },
+    "illustrated_cards": [
+      13,
+      31,
+      97,
+      119,
+      151,
+      196
+    ],
+    "excluded": [
+      "postscript p206",
+      "newsletter p207",
+      "advertising front matter"
+    ]
+  },
+  "statistics": {
+    "source_evidence_candidates": 113,
+    "behavioral_cases": 44,
+    "goal_transitions": 18,
+    "retrospective_dossiers": 14,
+    "negative_controls": 32
+  },
+  "epistemic_warning": "Cada registro é candidato assistido com página e contrafactual; não é autoridade canônica revisada por avaliador independente.",
+  "reviews": {
+    "assistant_report_drafted": true,
+    "external_independent_review": "NOT_PERFORMED",
+    "external_independent_reviews_completed": 0,
+    "external_independent_reviews_required": 175,
+    "human_release_gate": "NOT_GRANTED",
+    "engine_memory_admission": false,
+    "exam_executable": false,
+    "goal_runtime_auto_update": false
+  },
+  "evidence_candidates": [
+    {
+      "id": "V7-E001",
+      "chapter": 1,
+      "pages": "11",
+      "mode": "AUTORRELATO",
+      "summary": "Ryūen narra ter matado uma serpente numa excursão escolar, sem temor aparente naquele episódio.",
+      "counterclaim": "Não inferir imunidade universal a medo ou violência fora da situação narrada.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E002",
+      "chapter": 1,
+      "pages": "11",
+      "mode": "AUTORRELATO",
+      "summary": "Ryūen associa a derrota do oponente ao prazer e descreve a violência como instrumento de poder.",
+      "counterclaim": "Autointerpretação do personagem; não é lei objetiva do universo.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E003",
+      "chapter": 1,
+      "pages": "11-12",
+      "mode": "AUTORRELATO",
+      "summary": "Ryūen descreve tédio com vitórias e desejo de enfrentar alguém que consiga derrotá-lo.",
+      "counterclaim": "Desejo de sofrer derrota não comprova desejo de morrer nem prediz resposta futura.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E004",
+      "chapter": 2,
+      "pages": "14-15",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Ayanokōji convive regularmente no grupo de Yukimura, Hasebe, Sakura e Miyake; Miyake chega depois do arco e flecha.",
+      "counterclaim": "A associação não implica compartilhamento de operações clandestinas.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E005",
+      "chapter": 2,
+      "pages": "15",
+      "mode": "RELATO",
+      "summary": "Yukimura cita rumor de que um empate integral de pontos exigiria prova adicional para determinar a Classe A.",
+      "counterclaim": "Rumor entre veteranos, não regulamento escolar confirmado.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E006",
+      "chapter": 2,
+      "pages": "17-18",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Komiya acompanha o grupo e Miyake relata observação de Komiya e Ishizaki no clube de arco e flecha.",
+      "counterclaim": "Vigilância percebida e relato não provam ato disciplinar formal.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E007",
+      "chapter": 2,
+      "pages": "19",
+      "mode": "RELATO_NUMÉRICO",
+      "summary": "Yukimura relembra os saldos de 1º de dezembro: Classe D 262; Classe C 542 antes do efeito do Paper Shuffle.",
+      "counterclaim": "O comentário não é boletim posterior à transferência de pontos do exame.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E008",
+      "chapter": 2,
+      "pages": "19-20",
+      "mode": "RELATO",
+      "summary": "A narrativa descreve vitória de D sobre C no Paper Shuffle e a diferença de oitenta pontos após a transferência de cem de C para D.",
+      "counterclaim": "Separar cálculo narrativo e fichas ilustradas de 1º de dezembro.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E009",
+      "chapter": 2,
+      "pages": "19",
+      "mode": "RELATO",
+      "summary": "Um abatimento de cem pontos em C por violação interna é mencionado com detalhes mantidos em sigilo pela escola.",
+      "counterclaim": "Causa precisa e responsabilidades não são reveladas.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E010",
+      "chapter": 2,
+      "pages": "20-21",
+      "mode": "INFERÊNCIA_NARRADOR",
+      "summary": "Ayanokōji interpreta o uso dos 300 pontos de C na ilha como possível troca por pontos privados com a Classe A.",
+      "counterclaim": "O valor e as cláusulas contratuais são explicitados depois, nas pp.113–114.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E011",
+      "chapter": 2,
+      "pages": "22-23",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Ayanokōji atribui publicamente a Horikita estratégias da ilha e omite a traição de Kushida ao relatar eventos ao grupo.",
+      "counterclaim": "O grupo não recebe o conhecimento ocultado.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E012",
+      "chapter": 2,
+      "pages": "25-27",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Sakura demonstra satisfação genuína com conversas cotidianas, e Yukimura pretende contribuir por meio de estudos.",
+      "counterclaim": "Uma manifestação não estabelece traço fixo sem contexto.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E013",
+      "chapter": 2,
+      "pages": "28",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Ayanokōji identifica Kamuro seguindo-o por dias e apresenta fotografias feitas discretamente.",
+      "counterclaim": "Fotos comprovam acompanhamento; não explicam toda a motivação.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E014",
+      "chapter": 2,
+      "pages": "29-30",
+      "mode": "INFERÊNCIA_NARRADOR",
+      "summary": "Ayanokōji deduz que Sakayanagi detém alguma fraqueza de Kamuro, explorando sua reação à ameaça.",
+      "counterclaim": "Natureza da fraqueza e sua origem permanecem desconhecidas.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E015",
+      "chapter": 2,
+      "pages": "30",
+      "mode": "AÇÃO",
+      "summary": "Ayanokōji oferece a Kamuro tolerar a vigilância em troca de não divulgar seu segredo a terceiros além de Sakayanagi.",
+      "counterclaim": "Acordo verbal situado; não presume cumprimento perpétuo.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E016",
+      "chapter": 3,
+      "pages": "32-33",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Sudō relata provocações de alunos C, resiste a revidar e aceita a orientação de Horikita de não se envolver fisicamente.",
+      "counterclaim": "Autocontrole observado, sem garantia de não reincidência.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E017",
+      "chapter": 3,
+      "pages": "34-35",
+      "mode": "DEDUÇÃO_PERSONAGEM",
+      "summary": "Horikita percebe que Ryūen procura quem move a Classe D nos bastidores e descarta ser ela o alvo efetivo.",
+      "counterclaim": "Dedução de Horikita, não confissão de Ryūen naquele momento.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E018",
+      "chapter": 3,
+      "pages": "35-36",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Horikita revela ter previsto a colaboração de Kushida com Ryūen no Paper Shuffle.",
+      "counterclaim": "Não atribuir descoberta exclusiva a Ayanokōji.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E019",
+      "chapter": 3,
+      "pages": "37-38",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Horikita oferece a Ayanokōji um livro de Chandler para devolver à biblioteca, gesto que o narrador lê como bondade indireta.",
+      "counterclaim": "Intenção atribuída é inferência, não declaração de Horikita.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E020",
+      "chapter": 3,
+      "pages": "38",
+      "mode": "RELATO_INSTITUCIONAL",
+      "summary": "Ayanokōji afirma que livros atrasados geram dedução de pontos privados.",
+      "counterclaim": "Relato de prática escolar; sem valor/tabela de multas.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E021",
+      "chapter": 3,
+      "pages": "39-46",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Ayanokōji encontra Hiyori Shiina na biblioteca, conversa sobre autores policiais e posteriormente almoça com ela.",
+      "counterclaim": "Interação genuína aparente não comprova espionagem.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E022",
+      "chapter": 3,
+      "pages": "44-46",
+      "mode": "AUTORRELATO",
+      "summary": "Shiina diz buscar companhia para falar de livros e oferece empréstimos de sua coleção.",
+      "counterclaim": "Sua declaração não é prova universal de ausência de motivos secundários.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E023",
+      "chapter": 3,
+      "pages": "47-48",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Miyake deixa o clube mais cedo em razão do incômodo causado pela vigilância de C.",
+      "counterclaim": "A decisão é dele; não é expulsão do clube.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E024",
+      "chapter": 3,
+      "pages": "50-53",
+      "mode": "RELATO_COLETIVO",
+      "summary": "O grupo debate a hipótese de Kōenji ser X, rejeita-a e Sakura cogita a participação de Ayanokōji.",
+      "counterclaim": "Nenhuma hipótese equivale a descoberta formal da identidade.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E025",
+      "chapter": 3,
+      "pages": "54",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Satō convida Ayanokōji para sair, mas a conversa é interrompida pela convocação de Chabashira.",
+      "counterclaim": "Não codificar encontro realizado nessa cena.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E026",
+      "chapter": 3,
+      "pages": "55-56",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Chabashira leva Ayanokōji a uma reunião privada com o pai, na presença inicial da direção.",
+      "counterclaim": "A professora não originou necessariamente a visita.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E027",
+      "chapter": 3,
+      "pages": "56-59",
+      "mode": "DECLARAÇÃO_PAI",
+      "summary": "O pai exige a retirada do filho e reivindica autoridade sobre ele com base na criação pela White Room.",
+      "counterclaim": "É pretensão do pai, não direito escolar ou legal certificado.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E028",
+      "chapter": 3,
+      "pages": "59-61",
+      "mode": "DECLARAÇÃO_PAI",
+      "summary": "O pai afirma que Matsuo foi punido, que prejudicou seu filho e que Matsuo morreu por suicídio.",
+      "counterclaim": "Ayanokōji questiona provas; não converter narrativa interessada em confirmação independente.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E029",
+      "chapter": 3,
+      "pages": "62-63",
+      "mode": "AUTORRELATO",
+      "summary": "Ayanokōji identifica a experiência da liberdade e do cotidiano como motivo central para permanecer na escola.",
+      "counterclaim": "Motivo declarado, não único objetivo imutável.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E030",
+      "chapter": 3,
+      "pages": "62",
+      "mode": "AUTORRELATO",
+      "summary": "Ayanokōji afirma ter recebido na White Room educação intensiva em artes, ciências e autodefesa.",
+      "counterclaim": "Não traduzir descrição em pontuações numéricas absolutos ou onisciência.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E031",
+      "chapter": 3,
+      "pages": "63",
+      "mode": "DECLARAÇÃO_PAI",
+      "summary": "O pai reconhece suspensão temporária das atividades da White Room e critica a interrupção de cerca de um ano.",
+      "counterclaim": "Temporalidade e extensão exatas não estão documentadas institucionalmente no romance.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E032",
+      "chapter": 3,
+      "pages": "63-65",
+      "mode": "INFERÊNCIA_NARRADOR",
+      "summary": "Ayanokōji deduz limites do alcance do pai na escola a partir da ausência de escoltas e da necessidade de persuadi-lo.",
+      "counterclaim": "A interpretação não prova impossibilidade absoluta de intervenção clandestina.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E033",
+      "chapter": 3,
+      "pages": "65",
+      "mode": "DECLARAÇÃO_PAI",
+      "summary": "O pai reconhece que outros candidatos existem, mas considera a aptidão de Kiyotaka superior à deles.",
+      "counterclaim": "Avaliação interessada, não ranking verificável da White Room.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E034",
+      "chapter": 3,
+      "pages": "65-67",
+      "mode": "OBSERVAÇÃO",
+      "summary": "O presidente do conselho escolar, Sakayanagi, intervém na reunião com o pai de Kiyotaka.",
+      "counterclaim": "Distinguir presidente da mantenedora de Sakayanagi Arisu, aluna.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E035",
+      "chapter": 3,
+      "pages": "67-68",
+      "mode": "DECLARAÇÃO_AUTORIDADE",
+      "summary": "O presidente do conselho nega expulsão unilateral a pedido do pai enquanto o aluno quiser permanecer, observadas as normas.",
+      "counterclaim": "Proteção institucional condicionada, não imunidade permanente.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E036",
+      "chapter": 3,
+      "pages": "69",
+      "mode": "DECLARAÇÃO_AUTORIDADE",
+      "summary": "O presidente afirma ter decidido a admissão de Kiyotaka e conhecido sua identidade antes do encontro atual.",
+      "counterclaim": "Admissão excepcional não prova fórmula universal de seleção.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E037",
+      "chapter": 3,
+      "pages": "69",
+      "mode": "DECLARAÇÃO_AUTORIDADE",
+      "summary": "O presidente afirma que os cinquenta pontos em cada teste de ingresso, obtidos intencionalmente, não determinaram aprovação ou reprovação.",
+      "counterclaim": "Conhecimento da direção não significa conhecimento de todos os professores/colegas.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E038",
+      "chapter": 3,
+      "pages": "69-70",
+      "mode": "DECLARAÇÃO_AUTORIDADE",
+      "summary": "O presidente identifica Arisu como sua filha e manifesta compromisso de proteção dos alunos dentro das regras.",
+      "counterclaim": "Relação familiar não transmite automaticamente segredos entre pai e filha.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E039",
+      "chapter": 3,
+      "pages": "70-71",
+      "mode": "AÇÃO",
+      "summary": "Ayanokōji testa Chabashira com uma alegação falsa sobre revelação da direção; ela reage e expõe informação sobre sua intervenção.",
+      "counterclaim": "Seu blefe não deve ser confundido com fala real do presidente.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E040",
+      "chapter": 3,
+      "pages": "73-75",
+      "mode": "DEDUÇÃO_E_CONFISSÃO",
+      "summary": "Ayanokōji expõe o desejo oculto de Chabashira de levar D à Classe A; ela reconhece que não encontrou seu pai antes da visita.",
+      "counterclaim": "Separar confissão parcial das conjecturas sobre o motivo da alocação em D.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E041",
+      "chapter": 3,
+      "pages": "74-75",
+      "mode": "DECLARAÇÃO_PROFESSORA",
+      "summary": "Chabashira admite ter manipulado o aluno e sustenta que ainda poderia tentar incriminá-lo por violação escolar.",
+      "counterclaim": "Possibilidade declarada não é poder irrestrito nem ato consumado.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E042",
+      "chapter": 3,
+      "pages": "75-76",
+      "mode": "AUTORRELATO",
+      "summary": "Com a chantagem anterior neutralizada, Ayanokōji decide se afastar da corrida ativa para a Classe A.",
+      "counterclaim": "Prioridade reversível; não significa abandono automático de pessoas.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E043",
+      "chapter": 3,
+      "pages": "77-79",
+      "mode": "INFERÊNCIA_NARRADOR",
+      "summary": "Ayanokōji considera Ryūen, Sakayanagi e outros observadores ao decidir se revelará sua identidade.",
+      "counterclaim": "Não assumir que cada suspeito conhece todos os fatos.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E044",
+      "chapter": 3,
+      "pages": "79-83",
+      "mode": "AÇÃO",
+      "summary": "Ayanokōji liga a Karuizawa, informa que pretende interromper a parceria e encerra o contato apesar da reação dela.",
+      "counterclaim": "A ruptura verbal não prova desligamento emocional simétrico.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E045",
+      "chapter": 3,
+      "pages": "80-83",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Ayanokōji recolhe um amuleto vermelho caído e o entrega à administração do dormitório de veteranos.",
+      "counterclaim": "Não inferir o proprietário sem fonte.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E046",
+      "chapter": 3,
+      "pages": "84-86",
+      "mode": "AUTOANÁLISE",
+      "summary": "Ayanokōji pondera o risco de Ryūen descobrir o rastro de Karuizawa mesmo sem outras intervenções suas.",
+      "counterclaim": "Risco prospectivo, não descoberta já consumada.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E047",
+      "chapter": 3,
+      "pages": "86-89",
+      "mode": "RELATO_MANABU",
+      "summary": "Manabu procura Ayanokōji para falar sobre Nagumo, descreve tensão política e recrutamento de Ichinose.",
+      "counterclaim": "A versão de Manabu exige atribuição; não implica conhecimento coletivo da escola.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E048",
+      "chapter": 3,
+      "pages": "88-89",
+      "mode": "AÇÃO",
+      "summary": "Ayanokōji recebe contato de Manabu sem prometer cooperação automática contra Nagumo.",
+      "counterclaim": "Contato não estabelece aliança irrestrita.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E049",
+      "chapter": 3,
+      "pages": "90-92",
+      "mode": "OBSERVAÇÃO",
+      "summary": "O grupo participa de karaokê; o narrador observa iniciativas sociais de Sakura e outros colegas.",
+      "counterclaim": "Não criar estatísticas de canto ou sociabilidade ausentes.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E050",
+      "chapter": 3,
+      "pages": "94-95",
+      "mode": "DECLARAÇÃO_PERSONAGEM",
+      "summary": "Ichinose reconhece vitória de D sobre C e derrota de B para A no Paper Shuffle; Sakayanagi menciona vantagem de dois pontos.",
+      "counterclaim": "Dois pontos referem-se ao confronto relatado, não a nova diferença de pontos de classe.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E051",
+      "chapter": 3,
+      "pages": "97",
+      "mode": "FICHA_OFICIAL_ILUSTRADA",
+      "summary": "A avaliação ilustrada da Classe D registra 262 pontos em 1º de dezembro e vitória de D no Paper Shuffle.",
+      "counterclaim": "Não tratar 262 como saldo após o exame.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E052",
+      "chapter": 4,
+      "pages": "98-100",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Ryūen invade a sala D com seu grupo e observa Kōenji, que sai sem demonstrar intimidação.",
+      "counterclaim": "Proximidade não demonstra que Kōenji seja X.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E053",
+      "chapter": 4,
+      "pages": "103-108",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Ryūen confronta Kōenji no trajeto; Kōenji usa conversa e gestos excêntricos para resistir à pressão.",
+      "counterclaim": "Não transformar comportamento em prova de superioridade combativa generalizada.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E054",
+      "chapter": 4,
+      "pages": "108",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Ryūen quebra o espelho de Kōenji e Sudō recolhe fragmentos, apesar do clima de hostilidade.",
+      "counterclaim": "Objeto quebrado não demonstra agressão física de Kōenji.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E055",
+      "chapter": 4,
+      "pages": "109-112",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Sakayanagi e membros da Classe A intervêm verbalmente na abordagem de Ryūen.",
+      "counterclaim": "Ela pode conhecer o alvo de interesse sem conhecer necessariamente sua identidade na cena.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E056",
+      "chapter": 4,
+      "pages": "112",
+      "mode": "DECLARAÇÃO_RYUEN",
+      "summary": "Ryūen confirma buscar a pessoa anônima X e admite considerar chantagem e violência para localizá-la.",
+      "counterclaim": "Registre como intenção e conduta indevida, não técnica aconselhável.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E057",
+      "chapter": 4,
+      "pages": "113",
+      "mode": "DECLARAÇÃO_CONTRATUAL",
+      "summary": "Sakayanagi cita cláusula de vinte mil pontos privados por pessoa por mês até a formatura no acordo A–C.",
+      "counterclaim": "Revelação posterior de contrato da ilha; preservar fonte V7 e ressalvas sobre cumprimento futuro.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E058",
+      "chapter": 4,
+      "pages": "113-114",
+      "mode": "NARRAÇÃO_E_DECLARAÇÃO",
+      "summary": "O arranjo é explicado como fluxo de aproximadamente oitocentos mil pontos privados por mês de A para C.",
+      "counterclaim": "Os 800 mil são por turma; não equivalem a 800 pontos de classe.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E059",
+      "chapter": 4,
+      "pages": "113-114",
+      "mode": "DECLARAÇÃO_SAKAYANAGI",
+      "summary": "Sakayanagi atribui a Katsuragi a iniciativa do contrato com Ryūen.",
+      "counterclaim": "Declaração de parte interessada; autoria contratual exige distinção da participação real.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E060",
+      "chapter": 4,
+      "pages": "114-116",
+      "mode": "AUTORRELATO_KOENJI",
+      "summary": "Kōenji prioriza lazer e declara que não pretende cooperar com sua classe.",
+      "counterclaim": "Prioridade atual, não comportamento futuro imutável.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E061",
+      "chapter": 4,
+      "pages": "117-118",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Horikita controla reação de Sudō, enquanto Ryūen passa a considerar que suas preparações estão quase concluídas.",
+      "counterclaim": "O estado do plano de Ryūen vem de interpretação e fala, não de autoridade escolar.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E062",
+      "chapter": 4,
+      "pages": "119",
+      "mode": "FICHA_OFICIAL_ILUSTRADA",
+      "summary": "A ficha C registra 542 pontos em 1º de dezembro e confirma derrota de C para D no Paper Shuffle.",
+      "counterclaim": "Comentário retrospectivo pode coexistir com saldo anterior à prova.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E063",
+      "chapter": 5,
+      "pages": "120-122",
+      "mode": "AUTORRELATO_RYUEN",
+      "summary": "Ryūen descreve busca pelo X e interesse em prolongar a incerteza do adversário.",
+      "counterclaim": "Vontade de descobrir não implica capacidade ilimitada de vigilância.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E064",
+      "chapter": 5,
+      "pages": "122",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Hiyori Shiina recusa convite para participar diretamente da perseguição a X e questiona a necessidade da caça.",
+      "counterclaim": "Não tratar sua recusa como ruptura formal com a classe.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E065",
+      "chapter": 5,
+      "pages": "123",
+      "mode": "AUTORRELATO_RYUEN",
+      "summary": "Ryūen oculta de Ibuki o papel de Kushida na obtenção do endereço eletrônico de Karuizawa.",
+      "counterclaim": "Ryūen conhece a fonte; Ibuki não é informada na ocasião.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E066",
+      "chapter": 5,
+      "pages": "123-124",
+      "mode": "AÇÃO",
+      "summary": "Ryūen convoca Karuizawa ao terraço e avisa X, explorando o segredo da aluna.",
+      "counterclaim": "Ação de coerção descrita como violência moral, não norma escolar.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E067",
+      "chapter": 5,
+      "pages": "125-126",
+      "mode": "AUTORRELATO_RYUEN",
+      "summary": "Ryūen prepara o local e inutiliza a câmera do terraço com tinta.",
+      "counterclaim": "A existência de câmera e seu dano são fatos de cena, não licença de uso de segurança.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E068",
+      "chapter": 5,
+      "pages": "127-128",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Karuizawa comparece sozinha perto das 14 horas sob ameaça de exposição de seu passado.",
+      "counterclaim": "Presença coagida não é consentimento voluntário.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E069",
+      "chapter": 5,
+      "pages": "128-130",
+      "mode": "DECLARAÇÃO_RYUEN",
+      "summary": "Ryūen relata a participação anterior de Manabe e amigas e o uso coercitivo delas por X.",
+      "counterclaim": "A hipótese combina dados relatados e interpretação de Ryūen; manter níveis separados.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E070",
+      "chapter": 5,
+      "pages": "131-133",
+      "mode": "AÇÃO",
+      "summary": "Karuizawa tenta resistir à chantagem verbal e evita entregar o nome de X.",
+      "counterclaim": "Resistência observada não demonstra ausência de medo.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E071",
+      "chapter": 5,
+      "pages": "133-134",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Ibuki resiste a participar da violência, mas acaba imobilizando Karuizawa sob pressão de Ryūen.",
+      "counterclaim": "Distinguir objeção moral/risco percebido e efetiva participação.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E072",
+      "chapter": 5,
+      "pages": "134-142",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Ryūen submete Karuizawa a exposição ao frio e repetidas agressões com água diante dos presentes.",
+      "counterclaim": "Evento abusivo; evitar descrição operacional ou glamourização.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E073",
+      "chapter": 5,
+      "pages": "137-139",
+      "mode": "AUTORRELATO_RYUEN",
+      "summary": "Ryūen narra ter experimentado limites de câmeras, pontos privados e contratos da escola.",
+      "counterclaim": "Experimentos privados não revelam todas as regras institucionais.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E074",
+      "chapter": 5,
+      "pages": "142-145",
+      "mode": "NARRAÇÃO_KARUIZAWA",
+      "summary": "Karuizawa revive memórias traumáticas e descreve terror e temor de voltar à situação anterior.",
+      "counterclaim": "Ponto de vista subjetivo; não atribuir diagnóstico clínico.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E075",
+      "chapter": 5,
+      "pages": "146-148",
+      "mode": "DECLARAÇÃO_RYUEN",
+      "summary": "Ryūen expõe sua reconstrução de manipulações anteriores de X relativas à perseguição de Manabe.",
+      "counterclaim": "A reconstrução é fala de adversário; Ayanokōji mais tarde confirma engano sem certificar cada detalhe.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E076",
+      "chapter": 5,
+      "pages": "149-150",
+      "mode": "AÇÃO_E_AUTORRELATO",
+      "summary": "Mesmo fragilizada, Karuizawa decide não revelar o nome de Kiyotaka e associa a decisão ao respeito próprio.",
+      "counterclaim": "Não codificar como obediência cega ou lealdade incondicional.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E077",
+      "chapter": 5,
+      "pages": "150",
+      "mode": "AUTORRELATO",
+      "summary": "Karuizawa reconhece sentimentos contraditórios: gratidão e diversão na parceria, receio de traição e esperança de resgate.",
+      "counterclaim": "Estados simultâneos; não achatá-los em um único parâmetro fixo.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E078",
+      "chapter": 5,
+      "pages": "151",
+      "mode": "FICHA_OFICIAL_ILUSTRADA",
+      "summary": "A avaliação ilustrada registra Classe B com 753 pontos em 1º de dezembro e derrota para A no Paper Shuffle.",
+      "counterclaim": "Sem confundir avaliação do professor com análise determinística de personalidade.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E079",
+      "chapter": 6,
+      "pages": "152-153",
+      "mode": "AÇÃO",
+      "summary": "Karuizawa envia aviso de emergência a Ayanokōji sobre encontro no terraço; ele já conhece a convocação.",
+      "counterclaim": "Conhecimento de Ayanokōji não é difundido ao grupo de amigos.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E080",
+      "chapter": 6,
+      "pages": "153-154",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Satō faz novo convite social e Ayanokōji aceita discutir encontro futuro.",
+      "counterclaim": "Convite e aceitação da conversa não demonstram relacionamento iniciado.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E081",
+      "chapter": 6,
+      "pages": "155-156",
+      "mode": "AÇÃO",
+      "summary": "Ayanokōji interrompe o programa com amigos para tratar da situação de Karuizawa.",
+      "counterclaim": "Escolha contextual; não negar sua intenção simultânea de controlar informação.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E082",
+      "chapter": 6,
+      "pages": "156-158",
+      "mode": "AÇÃO",
+      "summary": "Ayanokōji procura Chabashira para testar sua disposição de intervir e discutir consequências escolares.",
+      "counterclaim": "Professor não é acionado como garantia automática de punição.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E083",
+      "chapter": 6,
+      "pages": "159-161",
+      "mode": "INQUIRIÇÃO",
+      "summary": "Ayanokōji questiona a compra de pontos de prova a partir de preço histórico de 100 mil por ponto.",
+      "counterclaim": "Não deduzir cotação universal ou repetibilidade irrestrita.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E084",
+      "chapter": 6,
+      "pages": "162",
+      "mode": "DECLARAÇÃO_PROFESSORA",
+      "summary": "Chabashira explica que há numerosas regras e restrições à divulgação dos preços e usos especiais de pontos.",
+      "counterclaim": "Sua explicação genérica não publica uma tabela executável de transações.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E085",
+      "chapter": 6,
+      "pages": "162",
+      "mode": "AÇÃO",
+      "summary": "Ayanokōji envia mensagem convocando Manabu para a área do terraço.",
+      "counterclaim": "O destinatário e a missão são confirmados nas pp.164–165.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E086",
+      "chapter": 6,
+      "pages": "163",
+      "mode": "DECLARAÇÃO_PROFESSORA",
+      "summary": "Chabashira alega ter agido após orientação do presidente da escola para tornar Kiyotaka apegado à instituição.",
+      "counterclaim": "Declaração de Chabashira; não provar que a direção autorizou cada mentira.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E087",
+      "chapter": 6,
+      "pages": "163-164",
+      "mode": "AUTORRELATO",
+      "summary": "Ayanokōji reafirma que Horikita pode liderar D e que pretende afastar-se da competição direta de classes.",
+      "counterclaim": "O plano é histórico/condicional, não script permanente pós-divergência.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E088",
+      "chapter": 6,
+      "pages": "164-165",
+      "mode": "ACORDO",
+      "summary": "Manabu comparece como testemunha de contexto e deve ficar na escada, sem presenciar diretamente a luta no terraço.",
+      "counterclaim": "Não promover a testemunho ocular de todos os golpes.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E089",
+      "chapter": 6,
+      "pages": "166-167",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Ayanokōji supera a barreira representada por Albert e revela-se a Ryūen diante de Ibuki, Ishizaki e Karuizawa.",
+      "counterclaim": "O conjunto de presentes descobre X nesse instante, não em Y1_START.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E090",
+      "chapter": 6,
+      "pages": "167-168",
+      "mode": "CONFISSÃO_IBUKI",
+      "summary": "Ibuki reconhece ter ocultado a roupa íntima de Karuizawa na mochila de um garoto durante o exame da ilha.",
+      "counterclaim": "Confissão retrospectiva V3; autoria limitada ao ato declarado.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E091",
+      "chapter": 6,
+      "pages": "170-172",
+      "mode": "DEDUÇÃO_DO_GRUPO",
+      "summary": "Ibuki e Ishizaki inicialmente duvidam que Ayanokōji seja X apesar de sua presença e das afirmações de Ryūen.",
+      "counterclaim": "Atualização de crenças exige evidência local de cada ator.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E092",
+      "chapter": 6,
+      "pages": "173-175",
+      "mode": "DECLARAÇÃO_AYANOKOJI",
+      "summary": "Ayanokōji recusa ceder à chantagem e afirma que denunciar sua identidade deflagraria confronto.",
+      "counterclaim": "Ameaça estratégica situada, não política de agressão obrigatória.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E093",
+      "chapter": 6,
+      "pages": "176-177",
+      "mode": "AÇÃO",
+      "summary": "Ryūen agride Ibuki quando ela se opõe à escalada e exige confronto físico com Ayanokōji.",
+      "counterclaim": "Agressão não demonstra consenso ou anuência de Ibuki.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E094",
+      "chapter": 6,
+      "pages": "179-180",
+      "mode": "OBSERVAÇÃO_FÍSICA",
+      "summary": "Ayanokōji imobiliza Ishizaki e neutraliza Albert após golpes recebidos e contra-ataques.",
+      "counterclaim": "Desempenho situado contra oponentes específicos, sem força física infinita.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E095",
+      "chapter": 6,
+      "pages": "181",
+      "mode": "DECLARAÇÃO_E_REVELAÇÃO",
+      "summary": "Ayanokōji explica que a exposição da rede de Manabe e a busca de X eram desdobramentos que ele antecipara.",
+      "counterclaim": "A retrospectiva revela intenção; não provar controle causal absoluto de todas as contingências.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E096",
+      "chapter": 6,
+      "pages": "182",
+      "mode": "OBSERVAÇÃO_FÍSICA",
+      "summary": "Ibuki ataca com chutes; Ayanokōji os evita e a derruba; narrador compara suas habilidades às de Horikita na ilha.",
+      "counterclaim": "Comparação com Horikita é julgamento do narrador em condição hipotética.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E097",
+      "chapter": 6,
+      "pages": "183-188",
+      "mode": "OBSERVAÇÃO_FÍSICA",
+      "summary": "Ryūen luta com Ayanokōji, resiste a golpes e é finalmente nocauteado.",
+      "counterclaim": "Vitória pontual não fornece escala global entre personagens fictícios e reais.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E098",
+      "chapter": 6,
+      "pages": "184-188",
+      "mode": "AUTORRELATO_DUAL",
+      "summary": "Ryūen insiste que não teme ser derrotado; Ayanokōji relata ausência de medo e prazer na luta.",
+      "counterclaim": "Afirmações internas concorrentes, não diagnósticos nem estados universais.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E099",
+      "chapter": 6,
+      "pages": "190-191",
+      "mode": "AÇÃO_E_AUTOANÁLISE",
+      "summary": "Ayanokōji consola Karuizawa, promete voltar a protegê-la e admite privadamente que demorou para testar fidelidade e dependência.",
+      "counterclaim": "Preservar duas camadas: conforto externo e intenção interna de controle.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E100",
+      "chapter": 6,
+      "pages": "192-193",
+      "mode": "DECLARAÇÃO_AYANOKOJI",
+      "summary": "Ayanokōji revela que Manabu está na escada e que há registro de Ryūen danificando a câmera, além de álibi próprio.",
+      "counterclaim": "Manabu não vira testemunha ocular do combate.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E101",
+      "chapter": 6,
+      "pages": "193-195",
+      "mode": "AÇÃO",
+      "summary": "Ryūen anuncia intenção de assumir culpa, transferir pontos e retirar-se da escola, mas não conclui a saída nesse momento.",
+      "counterclaim": "Intenção não é expulsão efetiva.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E102",
+      "chapter": 6,
+      "pages": "195",
+      "mode": "AUTORRELATO_ESTRATÉGICO",
+      "summary": "Ayanokōji justifica preservar Ryūen para pressionar Ichinose/Sakayanagi e evitar novas suspeitas sobre X.",
+      "counterclaim": "Justificativa de parte interessada; não prova resultado futuro.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E103",
+      "chapter": 6,
+      "pages": "196",
+      "mode": "FICHA_OFICIAL_ILUSTRADA",
+      "summary": "Avaliação da Classe A registra 874 pontos em 1º de dezembro, ressalta parceria de ilha com C e ausência de incidentes no Paper Shuffle.",
+      "counterclaim": "Tornar comentários da avaliação observações docentes, não habilidades quantificadas.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E104",
+      "chapter": 7,
+      "pages": "197-198",
+      "mode": "NARRAÇÃO_RYUEN",
+      "summary": "Ryūen sonha com a cobra e reflete sobre derrota; Ibuki lhe devolve celular entregue anteriormente.",
+      "counterclaim": "Mudança de perspectiva narrativa deve ser preservada.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E105",
+      "chapter": 7,
+      "pages": "199",
+      "mode": "OBSERVAÇÃO",
+      "summary": "Ibuki encontra no aparelho de Ryūen plano de três anos que cita oitocentos milhões de pontos privados.",
+      "counterclaim": "Plano visível não prova que recursos já foram acumulados.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E106",
+      "chapter": 7,
+      "pages": "199-200",
+      "mode": "DECLARAÇÃO_DIVERGENTE",
+      "summary": "Ibuki interpreta os 800 milhões como estratégia de levar a turma inteira à Classe A; Ryūen minimiza o documento.",
+      "counterclaim": "Duas declarações conflitantes não se resolvem inventando intenção única.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E107",
+      "chapter": 7,
+      "pages": "200",
+      "mode": "DECLARAÇÃO_RYUEN",
+      "summary": "Ryūen prevê que Hiyori e Kaneda possam conduzir C após sua retirada da liderança.",
+      "counterclaim": "Previsão não equivale a eleição/posse formal confirmada.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E108",
+      "chapter": 7,
+      "pages": "200",
+      "mode": "AÇÃO",
+      "summary": "Ibuki confronta fisicamente Ryūen e insiste que ele não abandone prematuramente a disputa.",
+      "counterclaim": "Não inferir vencedor genérico de duelo sem condições.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E109",
+      "chapter": 7,
+      "pages": "201-202",
+      "mode": "AÇÃO",
+      "summary": "Ryūen procura Sakagami e admite dano à câmera e responsabilidade por conflito com seus colegas.",
+      "counterclaim": "Autoinculpação parcial é estratégia, não laudo completo da escola.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E110",
+      "chapter": 7,
+      "pages": "203",
+      "mode": "DECLARAÇÃO_INSTITUCIONAL",
+      "summary": "O professor informa que um aluno de D assumiu parte do dano e que pontos privados da Classe D cobriram reparação.",
+      "counterclaim": "Identidade do pagador e cadeia de negociação não são integralmente demonstradas.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E111",
+      "chapter": 7,
+      "pages": "203",
+      "mode": "DECLARAÇÃO_INSTITUCIONAL",
+      "summary": "Ishizaki e Albert declararam que também sairiam se Ryūen saísse.",
+      "counterclaim": "Decisão dos alunos não pode ser automaticamente atribuída a ordem de X.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E112",
+      "chapter": 7,
+      "pages": "204",
+      "mode": "AÇÃO",
+      "summary": "Ryūen desiste de entregar o pedido de retirada e permanece matriculado.",
+      "counterclaim": "A deserção consumada é contrafactual, não evento canônico.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    },
+    {
+      "id": "V7-E113",
+      "chapter": 7,
+      "pages": "205",
+      "mode": "NARRAÇÃO",
+      "summary": "Circulam rumores de que Ryūen abandonou a liderança e afastou seus antigos subordinados; Ayanokōji considera utilizá-lo novamente.",
+      "counterclaim": "Rumor sobre configuração política não certifica designação de sucessor.",
+      "verified": false,
+      "reviewer_external": null,
+      "engine_admission": false
+    }
+  ],
+  "behavioral_cases": [
+    {
+      "id": "V7-C001",
+      "actor": "Ryūen",
+      "pages": "11",
+      "title": "Enfrentar risco na infância",
+      "action": "Mata serpente e relata prazer com vitória",
+      "limitation": "Autorrelato posterior, sem verificação por terceira pessoa",
+      "verified": false
+    },
+    {
+      "id": "V7-C002",
+      "actor": "Ryūen",
+      "pages": "98-118",
+      "title": "Pressionar suspeitos de X",
+      "action": "Persegue Kōenji e convoca audiência de outras turmas",
+      "limitation": "Desiste dessa linha sem identificar X nessa cena",
+      "verified": false
+    },
+    {
+      "id": "V7-C003",
+      "actor": "Ryūen",
+      "pages": "120-126",
+      "title": "Preparar extorsão",
+      "action": "Envia ameaças e isola o encontro no terraço",
+      "limitation": "Violência descrita como abuso e risco disciplinar",
+      "verified": false
+    },
+    {
+      "id": "V7-C004",
+      "actor": "Ryūen",
+      "pages": "127-141",
+      "title": "Tentar obter segredo sob coerção",
+      "action": "Pressiona Karuizawa com revelação e maus-tratos",
+      "limitation": "Fracassa em obter o nome por esse meio",
+      "verified": false
+    },
+    {
+      "id": "V7-C005",
+      "actor": "Ryūen",
+      "pages": "176-188",
+      "title": "Escolher luta física contra X",
+      "action": "Ataca e resiste a múltiplos golpes",
+      "limitation": "Sofre derrota e perde consciência",
+      "verified": false
+    },
+    {
+      "id": "V7-C006",
+      "actor": "Ryūen",
+      "pages": "193-195",
+      "title": "Assumir responsabilidade e anunciar abandono",
+      "action": "Propõe assumir culpa e transferir pontos a Ibuki",
+      "limitation": "Saída ainda não concluída",
+      "verified": false
+    },
+    {
+      "id": "V7-C007",
+      "actor": "Ryūen",
+      "pages": "201-204",
+      "title": "Tentar oficializar desistência",
+      "action": "Apresenta autoinculpação à escola e recebe formulários",
+      "limitation": "Recua diante do risco de Ishizaki e Albert também saírem",
+      "verified": false
+    },
+    {
+      "id": "V7-C008",
+      "actor": "Ryūen",
+      "pages": "199-200",
+      "title": "Revelar planejamento de longo prazo inadvertidamente",
+      "action": "Ibuki encontra projeção de 800 milhões em seu celular",
+      "limitation": "Intenção coletiva disputada entre Ibuki e Ryūen",
+      "verified": false
+    },
+    {
+      "id": "V7-C009",
+      "actor": "Ayanokōji",
+      "pages": "28-30",
+      "title": "Detectar vigilância",
+      "action": "Registra fotos de Kamuro e negocia silêncio",
+      "limitation": "Método funciona com esta interlocutora",
+      "verified": false
+    },
+    {
+      "id": "V7-C010",
+      "actor": "Ayanokōji",
+      "pages": "37-46",
+      "title": "Aceitar aproximação social",
+      "action": "Interage com Shiina por meio de livros e almoço",
+      "limitation": "Não prova que toda amizade é instrumental",
+      "verified": false
+    },
+    {
+      "id": "V7-C011",
+      "actor": "Ayanokōji",
+      "pages": "63-70",
+      "title": "Recusar retirada imposta",
+      "action": "Argumenta com o pai e obtém proteção institucional condicionada",
+      "limitation": "O pai mantém capacidade potencial fora da escola",
+      "verified": false
+    },
+    {
+      "id": "V7-C012",
+      "actor": "Ayanokōji",
+      "pages": "70-75",
+      "title": "Testar blefe de autoridade",
+      "action": "Emprega informação falsa contra Chabashira e obtém admissão",
+      "limitation": "A alegação sobre a direção era blefe",
+      "verified": false
+    },
+    {
+      "id": "V7-C013",
+      "actor": "Ayanokōji",
+      "pages": "79-83",
+      "title": "Romper colaboração aparente",
+      "action": "Diz a Karuizawa que a parceria terminou",
+      "limitation": "Ação não prevê que ele a abandone de fato",
+      "verified": false
+    },
+    {
+      "id": "V7-C014",
+      "actor": "Ayanokōji",
+      "pages": "156-165",
+      "title": "Recrutar testemunha contextual",
+      "action": "Procura Manabu, aciona Chabashira e prepara presença na escada",
+      "limitation": "Manabu não observa os golpes diretamente",
+      "verified": false
+    },
+    {
+      "id": "V7-C015",
+      "actor": "Ayanokōji",
+      "pages": "166-168",
+      "title": "Revelar identidade estratégica",
+      "action": "Comparece ao terraço e assume ser X",
+      "limitation": "Conhecimento chega só aos participantes presentes",
+      "verified": false
+    },
+    {
+      "id": "V7-C016",
+      "actor": "Ayanokōji",
+      "pages": "179-182",
+      "title": "Neutralizar oponentes",
+      "action": "Derruba Ishizaki, Albert e Ibuki sob ataque",
+      "limitation": "Desempenhos são situados e desiguais",
+      "verified": false
+    },
+    {
+      "id": "V7-C017",
+      "actor": "Ayanokōji",
+      "pages": "183-188",
+      "title": "Responder à luta de Ryūen",
+      "action": "Suporta golpes limitados e nocauteia Ryūen",
+      "limitation": "Não é imunidade à dor nem máximo de força",
+      "verified": false
+    },
+    {
+      "id": "V7-C018",
+      "actor": "Ayanokōji",
+      "pages": "190-191",
+      "title": "Socorrer e manter influência sobre Karuizawa",
+      "action": "Promete protegê-la enquanto narra cálculo de dependência",
+      "limitation": "Camadas afetiva e instrumental coexistem",
+      "verified": false
+    },
+    {
+      "id": "V7-C019",
+      "actor": "Ayanokōji",
+      "pages": "192-195",
+      "title": "Negociar consequências pós-confronto",
+      "action": "Emprega testemunha remota e alibi como dissuasão",
+      "limitation": "Não é absolvição judicial ou punição automática",
+      "verified": false
+    },
+    {
+      "id": "V7-C020",
+      "actor": "Karuizawa",
+      "pages": "127-134",
+      "title": "Resistir à chantagem",
+      "action": "Questiona Ryūen e retém informação",
+      "limitation": "Sua presença foi coagida",
+      "verified": false
+    },
+    {
+      "id": "V7-C021",
+      "actor": "Karuizawa",
+      "pages": "142-150",
+      "title": "Escolher não denunciar X",
+      "action": "Apesar do pânico, decide preservar o nome dele",
+      "limitation": "Decisão explicitamente relacionada à própria dignidade",
+      "verified": false
+    },
+    {
+      "id": "V7-C022",
+      "actor": "Karuizawa",
+      "pages": "152-153",
+      "title": "Usar canal de emergência",
+      "action": "Avisa Kiyotaka sobre convocação de Ryūen",
+      "limitation": "Mensagem não obtém resposta imediata",
+      "verified": false
+    },
+    {
+      "id": "V7-C023",
+      "actor": "Karuizawa",
+      "pages": "190-191",
+      "title": "Aceitar resgate mantendo crítica",
+      "action": "Acusa Kiyotaka de traição e busca apoio",
+      "limitation": "Não interpretar confiança como perdão completo",
+      "verified": false
+    },
+    {
+      "id": "V7-C024",
+      "actor": "Ibuki",
+      "pages": "133-134",
+      "title": "Resistir e ceder à ordem",
+      "action": "Objeta e depois imobiliza Karuizawa",
+      "limitation": "Não apagar responsabilidade nem coerção hierárquica",
+      "verified": false
+    },
+    {
+      "id": "V7-C025",
+      "actor": "Ibuki",
+      "pages": "167-168",
+      "title": "Relatar sabotagem anterior",
+      "action": "Admite roubo e ocultação na ilha",
+      "limitation": "É confissão localizada sobre V3",
+      "verified": false
+    },
+    {
+      "id": "V7-C026",
+      "actor": "Ibuki",
+      "pages": "176",
+      "title": "Enfrentar ordem violenta",
+      "action": "Protesta contra Ryūen e sofre agressão",
+      "limitation": "Não é consentimento com a escalada",
+      "verified": false
+    },
+    {
+      "id": "V7-C027",
+      "actor": "Ibuki",
+      "pages": "182",
+      "title": "Atacar Ayanokōji",
+      "action": "Emprega chutes; ele a derruba",
+      "limitation": "A comparação com Suzune é hipotética",
+      "verified": false
+    },
+    {
+      "id": "V7-C028",
+      "actor": "Ibuki",
+      "pages": "198-200",
+      "title": "Confrontar renúncia de Ryūen",
+      "action": "Examina plano e recusa receber os pontos sem debate",
+      "limitation": "Autonomia é demonstrada, não submissão absoluta",
+      "verified": false
+    },
+    {
+      "id": "V7-C029",
+      "actor": "Horikita Suzune",
+      "pages": "32-35",
+      "title": "Conter reação de Sudō",
+      "action": "Instrui autocontrole e questiona a caça a X",
+      "limitation": "Liderança ainda em construção",
+      "verified": false
+    },
+    {
+      "id": "V7-C030",
+      "actor": "Horikita Suzune",
+      "pages": "37-38",
+      "title": "Fazer favor social",
+      "action": "Devolve livro por intermédio de Ayanokōji",
+      "limitation": "Motivação afetiva é interpretação do narrador",
+      "verified": false
+    },
+    {
+      "id": "V7-C031",
+      "actor": "Horikita Suzune",
+      "pages": "117-118",
+      "title": "Desescalar confronto",
+      "action": "Contém o avanço de Sudō contra Ryūen",
+      "limitation": "Ação específica, não paz duradoura",
+      "verified": false
+    },
+    {
+      "id": "V7-C032",
+      "actor": "Hiyori Shiina",
+      "pages": "39-46",
+      "title": "Iniciar conversa literária",
+      "action": "Compartilha autores e propõe novos livros",
+      "limitation": "Não prova intenção de espionar",
+      "verified": false
+    },
+    {
+      "id": "V7-C033",
+      "actor": "Hiyori Shiina",
+      "pages": "121-122",
+      "title": "Restringir participação em plano",
+      "action": "Recusa seguir Ryūen na caça a X",
+      "limitation": "É recusa deste plano, não deserção da classe",
+      "verified": false
+    },
+    {
+      "id": "V7-C034",
+      "actor": "Kamuro",
+      "pages": "28-30",
+      "title": "Vigiar Ayanokōji",
+      "action": "É flagrada em fotografias e aceita proposta de sigilo",
+      "limitation": "Não estabelecer a natureza da chantagem de Arisu",
+      "verified": false
+    },
+    {
+      "id": "V7-C035",
+      "actor": "Manabu Horikita",
+      "pages": "86-89",
+      "title": "Alertar sobre Nagumo",
+      "action": "Procura Ayanokōji para discutir conselho estudantil",
+      "limitation": "Seu relato exige fonte atribuída",
+      "verified": false
+    },
+    {
+      "id": "V7-C036",
+      "actor": "Manabu Horikita",
+      "pages": "164-165",
+      "title": "Testemunhar proximidade do confronto",
+      "action": "Permanece na escada a pedido de Ayanokōji",
+      "limitation": "Não presencia todos os golpes",
+      "verified": false
+    },
+    {
+      "id": "V7-C037",
+      "actor": "Chabashira",
+      "pages": "70-75",
+      "title": "Instrumentalizar aluno para ascensão",
+      "action": "Reconhece não ter recebido ordem do pai antes do encontro",
+      "limitation": "Motivos adicionais continuam parcialmente inferidos",
+      "verified": false
+    },
+    {
+      "id": "V7-C038",
+      "actor": "Chabashira",
+      "pages": "159-164",
+      "title": "Explicar limites das regras",
+      "action": "Revela proibição de divulgar vários usos de pontos",
+      "limitation": "Não fornece algoritmo de preços",
+      "verified": false
+    },
+    {
+      "id": "V7-C039",
+      "actor": "Presidente Sakayanagi",
+      "pages": "66-70",
+      "title": "Negar retirada forçada do aluno",
+      "action": "Mantém a matrícula sob regras escolares contra exigência do pai",
+      "limitation": "Não assegura imunidade a infrações futuras",
+      "verified": false
+    },
+    {
+      "id": "V7-C040",
+      "actor": "Sudō",
+      "pages": "32-33",
+      "title": "Evitar retaliação",
+      "action": "Resiste a provocações e segue instrução de Suzune",
+      "limitation": "Não implica controle emocional perfeito",
+      "verified": false
+    },
+    {
+      "id": "V7-C041",
+      "actor": "Ishizaki",
+      "pages": "179-180",
+      "title": "Atacar sob ordem",
+      "action": "Ataca e é neutralizado por Ayanokōji",
+      "limitation": "Relata seguir ordens, sem perdoar responsabilidade",
+      "verified": false
+    },
+    {
+      "id": "V7-C042",
+      "actor": "Ishizaki",
+      "pages": "201-203",
+      "title": "Impedir saída de líder por solidariedade",
+      "action": "Procura professor e ameaça sair junto de Ryūen",
+      "limitation": "Iniciativa atribuída ao aluno pelo professor",
+      "verified": false
+    },
+    {
+      "id": "V7-C043",
+      "actor": "Albert Yamada",
+      "pages": "179-180",
+      "title": "Confrontar fisicamente X",
+      "action": "Demonstra força e resistência; perde na troca",
+      "limitation": "Não é ausência de treino ou fraqueza absoluta",
+      "verified": false
+    },
+    {
+      "id": "V7-C044",
+      "actor": "Albert Yamada",
+      "pages": "201-203",
+      "title": "Acompanhar protesto de Ishizaki",
+      "action": "Avisa que sairia caso Ryūen saísse",
+      "limitation": "Ação relatada por autoridade",
+      "verified": false
+    }
+  ],
+  "goal_transitions": [
+    {
+      "id": "V7-G001",
+      "actor": "Ryūen",
+      "pages": "11-12;183-188",
+      "prior": "Procurar adversário capaz de vencê-lo",
+      "trigger": "Confronto real com Ayanokōji",
+      "observed_change": "Da confiança em violência e domínio para reconhecimento de derrota pontual",
+      "guard": "Sem converter em medo global ou pacifismo obrigatório",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G002",
+      "actor": "Ryūen",
+      "pages": "193-195;201-204",
+      "prior": "Querer responsabilizar-se e deixar a escola",
+      "trigger": "Solidariedade de Ishizaki e Albert e limitações escolares",
+      "observed_change": "Abandona retirada formal e permanece",
+      "guard": "Permanência não restaura automaticamente seu comando",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G003",
+      "actor": "Ryūen",
+      "pages": "199-205",
+      "prior": "Liderar classe pelo controle coercitivo",
+      "trigger": "Derrota e contestação de Ibuki",
+      "observed_change": "Reduz papel público e surge rumor de abandono da liderança",
+      "guard": "Não comprovar sucessor formal nem abdicação de Class A como ambição",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G004",
+      "actor": "Ayanokōji",
+      "pages": "62-63;75-76",
+      "prior": "Aprender vida normal e preservar liberdade",
+      "trigger": "Descobre falsidade de chantagem da professora",
+      "observed_change": "Passa a planejar retirada da competição ativa entre classes",
+      "guard": "Plano condicionado por novas situações",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G005",
+      "actor": "Ayanokōji",
+      "pages": "79-83;152-166",
+      "prior": "Cortar contato operacional com Karuizawa",
+      "trigger": "Convocação de Ryūen e alerta da aluna",
+      "observed_change": "Volta a intervir para resgatá-la e enfrentar X",
+      "guard": "Não apagar cálculo instrumental de seu monólogo",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G006",
+      "actor": "Ayanokōji",
+      "pages": "165;190-195",
+      "prior": "Preservar anonimato absoluto",
+      "trigger": "Confronto inevitável e proteção da aluna",
+      "observed_change": "Aceita exposição restrita e usa testemunha remota",
+      "guard": "Segredo revelado aos presentes, não publicamente à escola inteira",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G007",
+      "actor": "Karuizawa",
+      "pages": "79-83;127-150",
+      "prior": "Contar com X como proteção",
+      "trigger": "Ruptura telefônica e chantagem violenta",
+      "observed_change": "Escolhe silêncio como ato de dignidade pessoal",
+      "guard": "Não caracterizar decisão como mera programação de lealdade",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G008",
+      "actor": "Karuizawa",
+      "pages": "149-150;190-191",
+      "prior": "Recusar traição apesar de medo",
+      "trigger": "Resgate tardio e reconhecimento de engano",
+      "observed_change": "Mantém proteção de seu segredo e vínculo ambivalente",
+      "guard": "Desconfiança expressa e dependência podem coexistir",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G009",
+      "actor": "Ibuki",
+      "pages": "123-134;176",
+      "prior": "Cooperar pragmaticamente com Ryūen",
+      "trigger": "Coerção sobre Karuizawa e agressão contra X",
+      "observed_change": "Questiona explicitamente os limites da liderança de Ryūen",
+      "guard": "Ainda participa de alguns atos e não rompe instantaneamente",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G010",
+      "actor": "Ibuki",
+      "pages": "197-200",
+      "prior": "Desejar libertar-se do comando de Ryūen",
+      "trigger": "Ameaça de saída e visão do plano 800M",
+      "observed_change": "Passa a pressioná-lo a permanecer e reconsiderar metas",
+      "guard": "Motivos vão além de mera devoção pessoal",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G011",
+      "actor": "Ishizaki",
+      "pages": "176;201-203",
+      "prior": "Obedecer ao líder por medo e hábito",
+      "trigger": "Derrota de Ryūen e tentativa de desistência",
+      "observed_change": "Manifesta solidariedade e disposição de sair com ele",
+      "guard": "Não inferir ausência de medo pretérito",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G012",
+      "actor": "Albert",
+      "pages": "179-180;201-203",
+      "prior": "Defender Ryūen em luta",
+      "trigger": "Risco de abandono do líder",
+      "observed_change": "Manifesta intenção de sair com Ryūen",
+      "guard": "Não é prova de lealdade irrevogável",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G013",
+      "actor": "Horikita Suzune",
+      "pages": "32-36;117-118",
+      "prior": "Subir à Classe A e liderar D",
+      "trigger": "Provocações de C e avanço da turma",
+      "observed_change": "Assume respostas independentes e regula impulsos de Sudō",
+      "guard": "Não lhe atribuir fatos que desconhece sobre o terraço",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G014",
+      "actor": "Chabashira",
+      "pages": "73-75;163-164",
+      "prior": "Forçar X a levar D à Classe A",
+      "trigger": "Exposição da chantagem e recusa do aluno",
+      "observed_change": "Reconhece erro e reconsidera papel na turma",
+      "guard": "Arrependimento declarado não garante mudança de conduta irreversível",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G015",
+      "actor": "Manabu Horikita",
+      "pages": "86-89;164-165",
+      "prior": "Limitar Nagumo sem envolver-se diretamente",
+      "trigger": "Receio sobre conselho e pedido de Ayanokōji",
+      "observed_change": "Abre canal e aceita testemunho limitado",
+      "guard": "Acordo de contrapartida exata requer evidência própria",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G016",
+      "actor": "Hiyori Shiina",
+      "pages": "39-46;122",
+      "prior": "Buscar conexões não violentas",
+      "trigger": "Vínculo literário com Ayanokōji e caça a X",
+      "observed_change": "Mantém disposição amistosa e recusa caça direta",
+      "guard": "Não é adesão automática à Classe D",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G017",
+      "actor": "Sudō",
+      "pages": "32-33;117-118",
+      "prior": "Responder a provocação com agressividade",
+      "trigger": "Orientação consistente de Horikita",
+      "observed_change": "Resiste às provocações em duas cenas",
+      "guard": "Melhora comportamental não é atributo de imunidade",
+      "engine_goal_update": false,
+      "verified": false
+    },
+    {
+      "id": "V7-G018",
+      "actor": "Kōenji",
+      "pages": "103-117",
+      "prior": "Cultivar interesses próprios e evitar disputas",
+      "trigger": "Intimidação coletiva de C",
+      "observed_change": "Sustenta postura não cooperativa diante de Ryūen",
+      "guard": "Não extrapolar imunidade a coerção física futura",
+      "engine_goal_update": false,
+      "verified": false
+    }
+  ],
+  "retrospective_dossiers": [
+    {
+      "id": "V7-R001",
+      "event": "V3: pacto Ryūen–Katsuragi na ilha",
+      "pages": "113-114",
+      "relation": "SUPPLEMENTS",
+      "delta": "Cláusulas de vinte mil pontos por pessoa/mês e efeito agregado de oitocentos mil.",
+      "limit": "Escopo, duração e situação de execução futura exigem cuidado; atribuição da iniciativa a Katsuragi é fala de Arisu.",
+      "verified": false
+    },
+    {
+      "id": "V7-R002",
+      "event": "V3: roubo de peça íntima e ocultação",
+      "pages": "167-168",
+      "relation": "RESOLVES_AMBIGUITY",
+      "delta": "Ibuki admite autoria específica da ocultação na mochila durante a ilha.",
+      "limit": "Não atribuir a ela incidentes de outras datas.",
+      "verified": false
+    },
+    {
+      "id": "V7-R003",
+      "event": "V3: alocação escolar de Kiyotaka",
+      "pages": "66-70",
+      "relation": "SUPPLEMENTS",
+      "delta": "A direção confirma admissão especial e irrelevância dos cinquenta pontos deliberados.",
+      "limit": "Não retroceder o conhecimento de colegas para Y1_START.",
+      "verified": false
+    },
+    {
+      "id": "V7-R004",
+      "event": "V3: esconder X por meio da imagem de Suzune",
+      "pages": "22-23;34-35;181",
+      "relation": "CONTEXTUALIZES",
+      "delta": "X assume que atribuiu publicamente feitos a Horikita e previu que Ryūen desconfiaria.",
+      "limit": "Separar estratégia antiga da interpretação retrospectiva.",
+      "verified": false
+    },
+    {
+      "id": "V7-R005",
+      "event": "V4: episódio Manabe/Karuizawa no cruzeiro",
+      "pages": "123-130;146-150;181",
+      "relation": "SUPPLEMENTS",
+      "delta": "Ryūen explica seu rastro e X admite ter antecipado descoberta da rede de Manabe.",
+      "limit": "Detalhes narrados por Ryūen não viram observações diretas de outros atores.",
+      "verified": false
+    },
+    {
+      "id": "V7-R006",
+      "event": "V5: uso de gravação e mobilização contra X",
+      "pages": "22-23;181",
+      "relation": "SUPPLEMENTS",
+      "delta": "Ayanokōji diz ter previsto que o uso da rede de Manabe no festival levantaria suspeitas.",
+      "limit": "Identidade de remetente de outras gravações não é certificada por mera continuidade.",
+      "verified": false
+    },
+    {
+      "id": "V7-R007",
+      "event": "V6: Paper Shuffle — D contra C",
+      "pages": "19;94-95;97;119",
+      "relation": "RESOLVES_AMBIGUITY",
+      "delta": "Resultado do confronto agora é confirmado por personagens e fichas escolares.",
+      "limit": "Preservar retrospectivamente a falta de boletim oficial no final do V6.",
+      "verified": false
+    },
+    {
+      "id": "V7-R008",
+      "event": "V6: Paper Shuffle — A contra B",
+      "pages": "94-95;151;196",
+      "relation": "RESOLVES_AMBIGUITY",
+      "delta": "Vitória A sobre B explicitada em diálogo e avaliação escolar.",
+      "limit": "Vantagem de dois pontos não equivale ao saldo de pontos de classe.",
+      "verified": false
+    },
+    {
+      "id": "V7-R009",
+      "event": "V6: suspeita do estrategista X",
+      "pages": "34;100-118;166-175",
+      "relation": "SUPPLEMENTS",
+      "delta": "A identidade passa de suspeita a revelação aos participantes do terraço.",
+      "limit": "Não revelar a todo aluno em épocas anteriores.",
+      "verified": false
+    },
+    {
+      "id": "V7-R010",
+      "event": "V6: acusações anônimas contra Ichinose",
+      "pages": "34;177;195",
+      "relation": "CONTEXTUALIZES",
+      "delta": "Ryūen menciona futuro ataque a Ichinose, e Kiyotaka o vê como peça estratégica.",
+      "limit": "Não confirma autoria passada das cartas nem culpa de Ichinose.",
+      "verified": false
+    },
+    {
+      "id": "V7-R011",
+      "event": "V1–V6: papel de Chabashira no incentivo à Classe A",
+      "pages": "70-75;163-164",
+      "relation": "CORRECTS_PRIOR_INTERPRETATION",
+      "delta": "A ameaça de contato prévio com o pai é desmontada; professora admite fabricação inicial.",
+      "limit": "A nova fala sobre direção não elimina todas as incertezas da motivação.",
+      "verified": false
+    },
+    {
+      "id": "V7-R012",
+      "event": "Y1 início: White Room, guarda e separação familiar",
+      "pages": "59-69",
+      "relation": "SUPPLEMENTS",
+      "delta": "Motivo da matrícula, ligação paterna, suspensão da White Room e acesso à direção são revelados.",
+      "limit": "Narrativa do pai sobre Matsuo carece de confirmação externa.",
+      "verified": false
+    },
+    {
+      "id": "V7-R013",
+      "event": "V3: saldos de pontos e economia A–C",
+      "pages": "19-21;113-114",
+      "relation": "SUPPLEMENTS",
+      "delta": "Diferencia troca de pontos privados de desempenho em pontos de classe.",
+      "limit": "Nenhuma taxa universal de conversão entre moedas é inferida.",
+      "verified": false
+    },
+    {
+      "id": "V7-R014",
+      "event": "V6: evolução de Suzune e Sudō",
+      "pages": "32-36;117-118;163-164",
+      "relation": "CONTEXTUALIZES",
+      "delta": "Novas cenas mostram contenção de provocações e cooperação emergente.",
+      "limit": "Evolução não é atributo estático a injetar no estado inicial.",
+      "verified": false
+    }
+  ],
+  "negative_controls_proposed": [
+    {
+      "id": "N01",
+      "assertion": "Não converter a declaração do pai sobre Matsuo em óbito institucionalmente verificado.",
+      "pages": "59-62"
+    },
+    {
+      "id": "N02",
+      "assertion": "Não afirmar que o pai pode expulsar Kiyotaka automaticamente após a proteção do presidente.",
+      "pages": "63-70"
+    },
+    {
+      "id": "N03",
+      "assertion": "Não atribuir a Chabashira contato efetivo anterior com o pai apenas por sua ameaça.",
+      "pages": "70-75"
+    },
+    {
+      "id": "N04",
+      "assertion": "Não supor que o presidente Sakayanagi e a aluna Arisu e a aluna Arisu possuam conhecimento simétrico.",
+      "pages": "66-70"
+    },
+    {
+      "id": "N05",
+      "assertion": "Não transformar cinquenta pontos deliberados de ingresso em corte de admissão.",
+      "pages": "69"
+    },
+    {
+      "id": "N06",
+      "assertion": "Não transformar o contrato A–C de 20 mil pontos mensais por pessoa em 20 mil totais.",
+      "pages": "113-114"
+    },
+    {
+      "id": "N07",
+      "assertion": "Não transformar 800 mil pontos privados/mês em pontos de classe.",
+      "pages": "113-114"
+    },
+    {
+      "id": "N08",
+      "assertion": "Não declarar extinto o contrato da ilha após a derrota ou ameaça de saída de Ryūen.",
+      "pages": "193-195;204"
+    },
+    {
+      "id": "N09",
+      "assertion": "Não tratar os totais de 1º de dezembro como atualização posterior ao exame.",
+      "pages": "97;119;151;196"
+    },
+    {
+      "id": "N10",
+      "assertion": "Não converter dois pontos de margem no Paper Shuffle em diferença de pontos de classe.",
+      "pages": "94-95"
+    },
+    {
+      "id": "N11",
+      "assertion": "Não atribuir o episódio V3 da roupa íntima a outro ator após confissão de Ibuki.",
+      "pages": "167-168"
+    },
+    {
+      "id": "N12",
+      "assertion": "Não declarar que Manabu presenciou fisicamente todos os golpes no terraço.",
+      "pages": "164-165;192"
+    },
+    {
+      "id": "N13",
+      "assertion": "Não concluir que Karuizawa revelou o nome de X por pronunciar um som incompleto.",
+      "pages": "149"
+    },
+    {
+      "id": "N14",
+      "assertion": "Não interpretar a decisão de Karuizawa como ausência de medo ou consentimento à violência.",
+      "pages": "142-150"
+    },
+    {
+      "id": "N15",
+      "assertion": "Não confundir objeção verbal de Ibuki com não participação material nas agressões.",
+      "pages": "133-140"
+    },
+    {
+      "id": "N16",
+      "assertion": "Não derivar força ilimitada de Ayanokōji de vitória contra quatro adversários específicos.",
+      "pages": "179-188"
+    },
+    {
+      "id": "N17",
+      "assertion": "Não transformar avaliação hipotética de Ibuki versus Horikita em combate real adicional.",
+      "pages": "182"
+    },
+    {
+      "id": "N18",
+      "assertion": "Não atribuir a Ryūen ausência psicológica universal de medo como fato objetivo.",
+      "pages": "11;184-188"
+    },
+    {
+      "id": "N19",
+      "assertion": "Não inferir de autorrelato de Ayanokōji diagnóstico psiquiátrico permanente.",
+      "pages": "188;190-191"
+    },
+    {
+      "id": "N20",
+      "assertion": "Não declarar Ryūen oficialmente expulso ou desistente por formular intenção e receber formulário.",
+      "pages": "193-195;201-204"
+    },
+    {
+      "id": "N21",
+      "assertion": "Não nomear Hiyori e Kaneda como líderes eleitos pela classe com base em previsão de Ryūen.",
+      "pages": "200;205"
+    },
+    {
+      "id": "N22",
+      "assertion": "Não afirmar que Ayanokōji ordenou a Ishizaki e Albert ameaçarem abandono sem fonte direta.",
+      "pages": "203"
+    },
+    {
+      "id": "N23",
+      "assertion": "Não converter as 800 milhões de anotações em saldo real de contas.",
+      "pages": "199"
+    },
+    {
+      "id": "N24",
+      "assertion": "Não extinguir definitivamente meta de Classe A de Ryūen diante de negação feita a Ibuki.",
+      "pages": "199-200"
+    },
+    {
+      "id": "N25",
+      "assertion": "Não substituir agência própria de Horikita, Karuizawa ou Ibuki pela causalidade onisciente de X.",
+      "pages": "32-36;149;199"
+    },
+    {
+      "id": "N26",
+      "assertion": "Não tornar registros de V7 conhecidos em abril de Y1 por terem ocorrido antes ou por retrospectiva.",
+      "pages": "59-75;113;167"
+    },
+    {
+      "id": "N27",
+      "assertion": "Não usar os modos de chantagem, dano a câmeras ou violência como técnicas normativas de agente.",
+      "pages": "123-142;176-188"
+    },
+    {
+      "id": "N28",
+      "assertion": "Não declarar sem revisão externa 138 avaliações independentes com base em trabalho de um único avaliador.",
+      "pages": "—"
+    },
+    {
+      "id": "N29",
+      "assertion": "Não converter tabela ordinal das fichas escolares em scores contínuos calibrados.",
+      "pages": "13;31"
+    },
+    {
+      "id": "N30",
+      "assertion": "Não considerar a cobrança de 100 mil por ponto uma tarifa fixa e irrestrita para qualquer exame.",
+      "pages": "159-162"
+    },
+    {
+      "id": "N31",
+      "assertion": "Não usar fonte posterior para mover o localizador original V3/V4/V5 para o V7.",
+      "pages": "113;167;181"
+    },
+    {
+      "id": "N32",
+      "assertion": "Não apagar contradição ou erro de atribuição entre Sakagami e Sakayanagi na cena de retirada.",
+      "pages": "201-204"
+    }
+  ]
+}

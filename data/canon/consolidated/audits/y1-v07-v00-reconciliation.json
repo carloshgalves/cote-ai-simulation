@@ -1,0 +1,583 @@
+{
+  "schema_version": "cote-cross-volume-v00-v07-bridges-v1",
+  "status": "DRAFT_SOURCE_RECONCILIATION_NOT_CANONICAL_VERIFIED",
+  "sources": {
+    "v0": {
+      "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "edition": "LegacyEMTLs v1.0.1 unofficial, accepted by operator",
+      "pdf_sha256": "a5f3360c145ed9aa038bf7965b1d261e8b733c943b0c7fb8ed976705e3e0f7d3",
+      "pdf_pages": 265
+    },
+    "v7": {
+      "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "edition": "Seven Seas English, operator-supplied",
+      "pdf_sha256": "b41f00143f483fa7704bcc6c4bfda03323bd835c77ea1e95e53d27bd859e461b",
+      "pdf_pages": 207
+    }
+  },
+  "temporal_policy": {
+    "valid_time": "Source-bounded pre-enrollment facts remain PRE_Y1; volume-seven school episodes remain in their observed December context.",
+    "narrative_time": "V0 chronology and V7 revelation retain independent locators.",
+    "knowledge_time": "No later V7 revelation is given to a V0 or Y1_START actor without a witnessed acquisition.",
+    "transaction_time": "Git branch draft only; subsequent canonical promotion must be separately approved."
+  },
+  "links": [
+    {
+      "id": "V00V07-B01",
+      "title": "Instituição e autoridade parental",
+      "relationship": "SUPPLEMENTS",
+      "source_before": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "evidence_refs": [
+          "v0.wr.001",
+          "v0.wr.003",
+          "v0.wr.024"
+        ],
+        "pdf_pages": [
+          33,
+          34,
+          70,
+          71,
+          139,
+          140
+        ],
+        "source_status": "OPERATOR_ACCEPTED_NOT_INDEPENDENTLY_RELEASED"
+      },
+      "source_after": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "evidence_refs": [
+          "V7-E027",
+          "V7-E030"
+        ],
+        "pdf_pages": [
+          59,
+          62
+        ],
+        "source_status": "ASSISTANT_EXTRACTION_CANDIDATE_NOT_INDEPENDENTLY_REVIEWED"
+      },
+      "assessment": "Atsuomi organizou e supervisionou o projeto; no V7 ele reivindica autoridade absoluta sobre o filho. Sua pretensão de propriedade é uma fala coercitiva, não norma jurídica demonstrada.",
+      "unresolved": [
+        "Não converter declaração de propriedade em direito válido de vida ou morte.",
+        "Não tratar a instituição como extensão automática do poder legal do pai."
+      ],
+      "actor_knowledge": [
+        {
+          "actor": "actor.atsuomi-ayanokoji",
+          "scope": "PROJETO_E_DECLARACOES_PROPRIAS"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "scope": "EXPERIENCIA_PROPRIA_E_ENCONTRO_V7"
+        }
+      ],
+      "source_event_times": [
+        "PRE_Y1_START",
+        "Y1_VOLUME7_DECEMBER"
+      ],
+      "narrative_revelation_time": "Y1_V07_PHYSICAL_PDF",
+      "global_actor_memory_backdating": false,
+      "engine_admission": false
+    },
+    {
+      "id": "V00V07-B02",
+      "title": "Quarta geração e educação intensiva",
+      "relationship": "SUPPLEMENTS",
+      "source_before": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "evidence_refs": [
+          "v0.wr.014",
+          "v0.wr.015",
+          "v0.wr.019",
+          "v0.wr.020",
+          "v0.wr.045"
+        ],
+        "pdf_pages": [
+          125,
+          126,
+          127,
+          138,
+          140,
+          158,
+          185
+        ],
+        "source_status": "OPERATOR_ACCEPTED_NOT_INDEPENDENTLY_RELEASED"
+      },
+      "source_after": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "evidence_refs": [
+          "V7-E030",
+          "V7-E033"
+        ],
+        "pdf_pages": [
+          62,
+          65
+        ],
+        "source_status": "ASSISTANT_EXTRACTION_CANDIDATE_NOT_INDEPENDENTLY_REVIEWED"
+      },
+      "assessment": "V0 documenta a geração 4 sob protocolo Beta, com desempenhos e limitações observados. O V7 apresenta autodescrição de Kiyotaka e reconhecimento de sua excepcionalidade pelo pai.",
+      "unresolved": [
+        "Não converter autodescrição em QI, velocidade ou omniscência.",
+        "Outras gerações e ex-alunos não devem ser equiparados ao desfecho da quarta geração."
+      ],
+      "actor_knowledge": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "scope": "PROPRIA_TRAJETORIA_NAO_DETALHE_SECRETO_DAS_DEMAIS_GERACOES"
+        }
+      ],
+      "source_event_times": [
+        "PRE_Y1_START",
+        "Y1_VOLUME7_DECEMBER"
+      ],
+      "narrative_revelation_time": "Y1_V07_PHYSICAL_PDF",
+      "global_actor_memory_backdating": false,
+      "engine_admission": false
+    },
+    {
+      "id": "V00V07-B03",
+      "title": "Suspensão da White Room",
+      "relationship": "SUPPLEMENTS",
+      "source_before": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "evidence_refs": [
+          "v0.wr.031",
+          "v0.pol.015",
+          "v0.pol.016"
+        ],
+        "pdf_pages": [
+          202,
+          209,
+          242,
+          247,
+          251,
+          258
+        ],
+        "source_status": "OPERATOR_ACCEPTED_NOT_INDEPENDENTLY_RELEASED"
+      },
+      "source_after": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "evidence_refs": [
+          "V7-E031"
+        ],
+        "pdf_pages": [
+          63
+        ],
+        "source_status": "ASSISTANT_EXTRACTION_CANDIDATE_NOT_INDEPENDENTLY_REVIEWED"
+      },
+      "assessment": "V0 registra suspensão do programa no contexto de pressão política e realocação; no V7 Atsuomi lamenta que a pausa permitiu independência a Kiyotaka.",
+      "unresolved": [
+        "Não interpretar a expressão de arrependimento no V7 como descrição exaustiva da causa política da suspensão.",
+        "Não supor data exata de reabertura."
+      ],
+      "actor_knowledge": [],
+      "source_event_times": [
+        "PRE_Y1_START",
+        "Y1_VOLUME7_DECEMBER"
+      ],
+      "narrative_revelation_time": "Y1_V07_PHYSICAL_PDF",
+      "global_actor_memory_backdating": false,
+      "engine_admission": false
+    },
+    {
+      "id": "V00V07-B04",
+      "title": "Lacuna Matsuo entre suspensão e matrícula",
+      "relationship": "SUPPLEMENTS",
+      "source_before": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "evidence_refs": [
+          "v0.wr.031"
+        ],
+        "pdf_pages": [
+          242,
+          249,
+          251,
+          258
+        ],
+        "source_status": "OPERATOR_ACCEPTED_NOT_INDEPENDENTLY_RELEASED"
+      },
+      "source_after": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "evidence_refs": [
+          "V7-E028",
+          "V7-E029"
+        ],
+        "pdf_pages": [
+          59,
+          60,
+          61,
+          62,
+          63
+        ],
+        "source_status": "ASSISTANT_EXTRACTION_CANDIDATE_NOT_INDEPENDENTLY_REVIEWED"
+      },
+      "assessment": "V7 relata que Matsuo foi encarregado de acompanhar Kiyotaka por aproximadamente um ano e apresentou a ANHS. V0 não identifica Matsuo na cronologia extraída.",
+      "unresolved": [
+        "Identidade de eventual agente ou mandante por trás de Matsuo não demonstrada.",
+        "História sobre perseguição, morte e consequências ao filho é fala de Atsuomi, não óbito verificado.",
+        "Nenhuma versão do V0 deve ser reescrita como se narrasse Matsuo."
+      ],
+      "actor_knowledge": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "scope": "VIVENCIA_COM_MATSUO_E_OUVIR_FALA_DO_PAI_EM_V7"
+        }
+      ],
+      "source_event_times": [
+        "PRE_Y1_START",
+        "Y1_VOLUME7_DECEMBER"
+      ],
+      "narrative_revelation_time": "Y1_V07_PHYSICAL_PDF",
+      "global_actor_memory_backdating": false,
+      "engine_admission": false
+    },
+    {
+      "id": "V00V07-B05",
+      "title": "Plano reservado com Tsukishiro versus matrícula apresentada como desobediência",
+      "relationship": "CONTEXTUALIZES",
+      "source_before": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "evidence_refs": [
+          "v0.pol.021",
+          "v0.pol.022"
+        ],
+        "pdf_pages": [
+          259,
+          260,
+          261
+        ],
+        "source_status": "OPERATOR_ACCEPTED_NOT_INDEPENDENTLY_RELEASED"
+      },
+      "source_after": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "evidence_refs": [
+          "V7-E027",
+          "V7-E029",
+          "V7-E032"
+        ],
+        "pdf_pages": [
+          59,
+          62,
+          63,
+          64
+        ],
+        "source_status": "ASSISTANT_EXTRACTION_CANDIDATE_NOT_INDEPENDENTLY_REVIEWED"
+      },
+      "assessment": "O epílogo V0 documenta instruções reservadas de Atsuomi a Tsukishiro sobre o futuro de Kiyotaka, sem descrever o conteúdo integral; V7 apresenta recusa do filho e pai exigindo saída. Não há prova suficiente de operação preordenada nem incompatibilidade lógica obrigatória.",
+      "unresolved": [
+        "Se Atsuomi previa a matrícula ou a provocou deliberadamente é UNKNOWN.",
+        "Não classificar manipulação integral da fuga como fato.",
+        "Não apagar a autonomia expressa por Kiyotaka nem presumir surpresa sincera do pai."
+      ],
+      "actor_knowledge": [
+        {
+          "actor": "actor.atsuomi-ayanokoji",
+          "scope": "PLANO_PRIVADO_DE_CONTEUDO_OPACO"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "scope": "SEM_CONHECIMENTO_COMPROVADO_DO_PLANO_PRIVADO"
+        }
+      ],
+      "source_event_times": [
+        "PRE_Y1_START",
+        "Y1_VOLUME7_DECEMBER"
+      ],
+      "narrative_revelation_time": "Y1_V07_PHYSICAL_PDF",
+      "global_actor_memory_backdating": false,
+      "engine_admission": false
+    },
+    {
+      "id": "V00V07-B06",
+      "title": "Projeto político de Atsuomi e controle de Kiyotaka",
+      "relationship": "CONTEXTUALIZES",
+      "source_before": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "evidence_refs": [
+          "v0.pol.020",
+          "v0.pol.021",
+          "v0.pol.022"
+        ],
+        "pdf_pages": [
+          247,
+          248,
+          259,
+          260,
+          261
+        ],
+        "source_status": "OPERATOR_ACCEPTED_NOT_INDEPENDENTLY_RELEASED"
+      },
+      "source_after": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "evidence_refs": [
+          "V7-E027",
+          "V7-E033"
+        ],
+        "pdf_pages": [
+          59,
+          65
+        ],
+        "source_status": "ASSISTANT_EXTRACTION_CANDIDATE_NOT_INDEPENDENTLY_REVIEWED"
+      },
+      "assessment": "No V0, Atsuomi pondera Kiyotaka como futuro aliado político e cogita riscos da hereditariedade e de sua autonomia. O V7 ilustra sua tentativa imediata de retomar controle.",
+      "unresolved": [
+        "Não reduzir objetivo político a simples desejo paternal.",
+        "Não afirmar que o projeto político foi abandonado no V7.",
+        "Não converter finalidade provável em script futuro do agente."
+      ],
+      "actor_knowledge": [],
+      "source_event_times": [
+        "PRE_Y1_START",
+        "Y1_VOLUME7_DECEMBER"
+      ],
+      "narrative_revelation_time": "Y1_V07_PHYSICAL_PDF",
+      "global_actor_memory_backdating": false,
+      "engine_admission": false
+    },
+    {
+      "id": "V00V07-B07",
+      "title": "Sakayanagi: colaborador externo no V0, autoridade da escola no V7",
+      "relationship": "SUPPLEMENTS",
+      "source_before": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "evidence_refs": [
+          "v0.pol.009",
+          "v0.pol.013",
+          "v0.pol.014"
+        ],
+        "pdf_pages": [
+          37,
+          38,
+          54,
+          55,
+          56,
+          105,
+          107
+        ],
+        "source_status": "OPERATOR_ACCEPTED_NOT_INDEPENDENTLY_RELEASED"
+      },
+      "source_after": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "evidence_refs": [
+          "V7-E034",
+          "V7-E035",
+          "V7-E036",
+          "V7-E038"
+        ],
+        "pdf_pages": [
+          65,
+          66,
+          67,
+          68,
+          69,
+          70
+        ],
+        "source_status": "ASSISTANT_EXTRACTION_CANDIDATE_NOT_INDEPENDENTLY_REVIEWED"
+      },
+      "assessment": "O V0 registra intermediação financeira e observação crítica da White Room; V7 mostra o mesmo adulto exercendo a presidência da mantenedora e proteção de matrícula.",
+      "unresolved": [
+        "O cargo atual não pode ser retrodatado para todos os eventos do V0.",
+        "Intermediação prévia não prova lealdade presente a Atsuomi.",
+        "Decisão excepcional de ingresso não implica poder irrestrito de alterar quaisquer regras."
+      ],
+      "actor_knowledge": [],
+      "source_event_times": [
+        "PRE_Y1_START",
+        "Y1_VOLUME7_DECEMBER"
+      ],
+      "narrative_revelation_time": "Y1_V07_PHYSICAL_PDF",
+      "global_actor_memory_backdating": false,
+      "engine_admission": false
+    },
+    {
+      "id": "V00V07-B08",
+      "title": "Arisu viu White Room no V0, mas sua informação continua privada",
+      "relationship": "SUPPLEMENTS",
+      "source_before": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "evidence_refs": [
+          "v0.wr.043",
+          "v0.char.046"
+        ],
+        "pdf_pages": [
+          172,
+          173,
+          175,
+          176
+        ],
+        "source_status": "OPERATOR_ACCEPTED_NOT_INDEPENDENTLY_RELEASED"
+      },
+      "source_after": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "evidence_refs": [
+          "V7-E038"
+        ],
+        "pdf_pages": [
+          69
+        ],
+        "source_status": "ASSISTANT_EXTRACTION_CANDIDATE_NOT_INDEPENDENTLY_REVIEWED"
+      },
+      "assessment": "V0 apresenta a visita de Arisu e seu raciocínio sobre origem das capacidades de Kiyotaka; V5 traz a confrontação privada. V7 esclarece o vínculo familiar com presidente Sakayanagi, mas não cria conhecimento coletivo da White Room.",
+      "unresolved": [
+        "Não supor que Arisu observou todos os treinamentos ou conheceu todas as decisões de Atsuomi.",
+        "Não transmitir essa informação a Ryūen, Horikita ou demais classes sem aquisição explícita."
+      ],
+      "actor_knowledge": [
+        {
+          "actor": "actor.arisu-sakayanagi",
+          "scope": "VISITA_V0_E_CONFRONTO_PRIVADO_V5"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "scope": "SABE_QUE_ARISU_ALEGOU_CONHECIMENTO_DESDE_V5"
+        }
+      ],
+      "source_event_times": [
+        "PRE_Y1_START",
+        "Y1_VOLUME7_DECEMBER"
+      ],
+      "narrative_revelation_time": "Y1_V07_PHYSICAL_PDF",
+      "global_actor_memory_backdating": false,
+      "engine_admission": false
+    },
+    {
+      "id": "V00V07-B09",
+      "title": "Declaração de Atsuomi sobre Matsuo",
+      "relationship": "CONTEXTUALIZES",
+      "source_before": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "evidence_refs": [
+          "v0.pol.021"
+        ],
+        "pdf_pages": [
+          260,
+          261
+        ],
+        "source_status": "OPERATOR_ACCEPTED_NOT_INDEPENDENTLY_RELEASED"
+      },
+      "source_after": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "evidence_refs": [
+          "V7-E028"
+        ],
+        "pdf_pages": [
+          59,
+          60,
+          61,
+          62
+        ],
+        "source_status": "ASSISTANT_EXTRACTION_CANDIDATE_NOT_INDEPENDENTLY_REVIEWED"
+      },
+      "assessment": "V7 relata retaliação alegada por Atsuomi, danos à educação do filho de Matsuo e morte por suicídio; a narrativa não apresenta documentação independente examinada.",
+      "unresolved": [
+        "Manter status CHARACTER_CLAIM_NOT_VERIFIED.",
+        "Não inferir que Tsukishiro executou atos descritos ou que Matsuo foi parte do plano secreto."
+      ],
+      "actor_knowledge": [
+        {
+          "actor": "actor.atsuomi-ayanokoji",
+          "scope": "DECLARACAO_PROPRIA"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "scope": "RECEBE_INFORMACAO_NAO_AUDITADA"
+        }
+      ],
+      "source_event_times": [
+        "PRE_Y1_START",
+        "Y1_VOLUME7_DECEMBER"
+      ],
+      "narrative_revelation_time": "Y1_V07_PHYSICAL_PDF",
+      "global_actor_memory_backdating": false,
+      "engine_admission": false
+    },
+    {
+      "id": "V00V07-B10",
+      "title": "Matrícula excepcional e alcance institucional",
+      "relationship": "SUPPLEMENTS",
+      "source_before": {
+        "work_id": "ln.y1.v00.legacyemtls.v1.0.1",
+        "evidence_refs": [
+          "v0.pol.013",
+          "v0.wr.031"
+        ],
+        "pdf_pages": [
+          54,
+          55,
+          56,
+          242,
+          247
+        ],
+        "source_status": "OPERATOR_ACCEPTED_NOT_INDEPENDENTLY_RELEASED"
+      },
+      "source_after": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "evidence_refs": [
+          "V7-E035",
+          "V7-E036",
+          "V7-E037"
+        ],
+        "pdf_pages": [
+          67,
+          68,
+          69
+        ],
+        "source_status": "ASSISTANT_EXTRACTION_CANDIDATE_NOT_INDEPENDENTLY_REVIEWED"
+      },
+      "assessment": "O V7 atesta, pela fala do presidente, a matrícula autorizada independentemente das notas de cinquenta pontos, e impede expulsão unilateral por vontade parental, preservadas condições escolares.",
+      "unresolved": [
+        "Não usar a fala como autorização de ingresso para qualquer aluno.",
+        "Não inferir que todas as políticas escolares são secretamente controladas por Atsuomi.",
+        "Não concluir que a ANHS era desde sua fundação protegida contra toda influência externa."
+      ],
+      "actor_knowledge": [],
+      "source_event_times": [
+        "PRE_Y1_START",
+        "Y1_VOLUME7_DECEMBER"
+      ],
+      "narrative_revelation_time": "Y1_V07_PHYSICAL_PDF",
+      "global_actor_memory_backdating": false,
+      "engine_admission": false
+    }
+  ],
+  "proposed_findings": [
+    {
+      "id": "V00V07-OPEN-01",
+      "status": "UNRESOLVED",
+      "topic": "Atsuomi, Tsukishiro e o conhecimento prévio da matrícula",
+      "references": [
+        "v0.pol.021",
+        "v0.pol.022",
+        "V7-E027",
+        "V7-E032"
+      ],
+      "resolution_requirement": "Fonte primária posterior ou evidência direta do conteúdo do plano; evitar ler foreshadowing como explicação certificada."
+    },
+    {
+      "id": "V00V07-OPEN-02",
+      "status": "UNRESOLVED",
+      "topic": "Matsuo e o filho: verificação da narrativa de retaliação e óbito",
+      "references": [
+        "V7-E028"
+      ],
+      "resolution_requirement": "Comprovação textual independente da fala de Atsuomi."
+    },
+    {
+      "id": "V00V07-OPEN-03",
+      "status": "UNRESOLVED",
+      "topic": "Cronologia detalhada da pausa da White Room, supervisão de Matsuo e matrícula",
+      "references": [
+        "v0.wr.031",
+        "V7-E031",
+        "V7-E028"
+      ],
+      "resolution_requirement": "Ancoragem temporal sem inventar início, fim e causa única."
+    }
+  ],
+  "release_gate": {
+    "external_independent_review": "NOT_PERFORMED",
+    "all_links_verified": false,
+    "engine_memory_admission": false,
+    "human_approval": "NOT_GRANTED",
+    "merge_authorized": false
+  }
+}

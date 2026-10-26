@@ -100,6 +100,60 @@
         }
       ],
       "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+      "chapter": 2,
+      "pdf_pages": [
+        17,
+        18
+      ],
+      "evidence_refs": [
+        "y1v6.ev.004"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "After festival reconciliation, Sudō now takes notes and behaves less aggressively during lessons; source does not guarantee permanent reform.",
+      "world_epistemic_status": "TEMPORALLY_BOUNDED_SOURCE_AND_SPEAKER",
+      "actor_knowledge": [
+        {
+          "actor": "actor.ken-sudo",
+          "since": "Y1_V06_CH2",
+          "status": "KNOWS_OWN_CHANGES"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V06_CH2",
+          "status": "OBSERVED_CLASSROOM_DEVELOPMENT"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        30,
+        32
+      ],
+      "evidence_refs": [
+        "y1v6.ev.010"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "Sudō's following midterm results include average 57, English 52 and rank twelfth from the bottom; tutoring and easier test both contribute, so no causal monopoly.",
+      "world_epistemic_status": "TEMPORALLY_BOUNDED_SOURCE_AND_SPEAKER",
+      "actor_knowledge": [
+        {
+          "actor": "actor.ken-sudo",
+          "since": "Y1_V06_CH3_SCORES",
+          "status": "KNOWS_OWN_SCORES"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V06_CH3_SCORES",
+          "status": "KNOWS_TUTORING_OUTCOMES"
+        }
+      ],
+      "no_backdated_global_knowledge": true
     }
   ],
   "unresolved": [

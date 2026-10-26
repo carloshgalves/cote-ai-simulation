@@ -201,6 +201,61 @@
         }
       ],
       "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+      "chapter": 3,
+      "pdf_pages": [
+        50,
+        51
+      ],
+      "evidence_refs": [
+        "y1v6.ev.019"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "After the festival Kiyotaka confirms to Suzune that he obtained an obstructing recording but does not reveal precise acquisition method. This strengthens knowledge of possession but not other actors' automatic knowledge of sender identity.",
+      "world_epistemic_status": "TEMPORALLY_BOUNDED_SOURCE_AND_SPEAKER",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "BEFORE_Y1_V06_CH3",
+          "status": "KNOWS_OWN_RECORDING_ACCESS"
+        },
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V06_CH3_TALK",
+          "status": "HEARD_POSSESSION_ACKNOWLEDGEMENT"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+      "chapter": 4,
+      "pdf_pages": [
+        72,
+        74
+      ],
+      "evidence_refs": [
+        "y1v6.ev.025",
+        "y1v6.ev.026"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "Ryūen uses coercion to gather the Manabe assault network connected to Karuizawa and suspects intermediaries, without proving who X is.",
+      "world_epistemic_status": "TEMPORALLY_BOUNDED_SOURCE_AND_SPEAKER",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kakeru-ryuen",
+          "since": "Y1_V06_CH4_INTERVIEW",
+          "status": "LEARNED_MANABE_ACCOUNT"
+        },
+        {
+          "actor": "actor.manabe-shiho",
+          "since": "Y1_V06_CH4",
+          "status": "KNOWS_OWN_DISCLOSURE_UNDER_PRESSURE"
+        }
+      ],
+      "no_backdated_global_knowledge": true
     }
   ],
   "unresolved": [

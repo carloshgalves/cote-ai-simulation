@@ -49,7 +49,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.kushida-juniorhigh-secret-breach"
+      ]
     },
     {
       "id": "y1v6.ev.002",
@@ -98,7 +100,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.kushida-juniorhigh-secret-breach"
+      ]
     },
     {
       "id": "y1v6.ev.003",
@@ -197,7 +201,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
     },
     {
       "id": "y1v6.ev.005",
@@ -343,7 +349,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v03.ryuen-katsuragi-alliance-contract-terms"
+      ]
     },
     {
       "id": "y1v6.ev.008",
@@ -489,7 +497,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.sudo-withdrawal-and-return"
+      ]
     },
     {
       "id": "y1v6.ev.011",
@@ -785,7 +795,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.kushida-juniorhigh-secret-breach"
+      ]
     },
     {
       "id": "y1v6.ev.017",
@@ -928,7 +940,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay"
+      ]
     },
     {
       "id": "y1v6.ev.020",
@@ -1079,7 +1093,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+      ]
     },
     {
       "id": "y1v6.ev.023",
@@ -1241,7 +1257,10 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay",
+        "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+      ]
     },
     {
       "id": "y1v6.ev.026",
@@ -1287,7 +1306,10 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v05.class-d-roster-leak-and-counterplay",
+        "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+      ]
     },
     {
       "id": "y1v6.ev.027",
@@ -2212,7 +2234,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.paper-shuffle-question-authority-and-swap"
+      ]
     },
     {
       "id": "y1v6.ev.046",
@@ -2421,7 +2445,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.math-wager-and-future-interference"
+      ]
     },
     {
       "id": "y1v6.ev.050",
@@ -2470,7 +2496,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.math-wager-and-future-interference"
+      ]
     },
     {
       "id": "y1v6.ev.051",
@@ -2523,7 +2551,10 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v04.zodiac-dragon-vip-disclosure",
+        "evt.y1.v06.kushida-juniorhigh-secret-breach"
+      ]
     },
     {
       "id": "y1v6.ev.052",
@@ -2725,7 +2756,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.hiyori-sugar-observation-and-prior-social-inquiry"
+      ]
     },
     {
       "id": "y1v6.ev.056",
@@ -2986,7 +3019,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.hiyori-sugar-observation-and-prior-social-inquiry"
+      ]
     },
     {
       "id": "y1v6.ev.061",
@@ -3139,7 +3174,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v03.ryuen-katsuragi-alliance-contract-terms"
+      ]
     },
     {
       "id": "y1v6.ev.064",
@@ -3195,7 +3232,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.ichinose-fraud-accusation-letter"
+      ]
     },
     {
       "id": "y1v6.ev.065",
@@ -3247,7 +3286,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.paper-shuffle-question-authority-and-swap"
+      ]
     },
     {
       "id": "y1v6.ev.066",
@@ -3301,7 +3342,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.paper-shuffle-question-authority-and-swap"
+      ]
     },
     {
       "id": "y1v6.ev.067",
@@ -3529,7 +3572,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.math-wager-and-future-interference"
+      ]
     },
     {
       "id": "y1v6.ev.072",
@@ -3581,7 +3626,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.math-wager-and-future-interference"
+      ]
     },
     {
       "id": "y1v6.ev.073",
@@ -3630,7 +3677,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.math-wager-and-future-interference"
+      ]
     },
     {
       "id": "y1v6.ev.074",
@@ -3678,7 +3727,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+      ]
     },
     {
       "id": "y1v6.ev.075",
@@ -3728,7 +3779,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+      ]
     },
     {
       "id": "y1v6.ev.076",
@@ -3775,7 +3828,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+      ]
     },
     {
       "id": "y1v6.ev.077",
@@ -3821,7 +3876,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.ichinose-fraud-accusation-letter"
+      ]
     },
     {
       "id": "y1v6.ev.078",
@@ -3868,7 +3925,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+      ]
     },
     {
       "id": "y1v6.ev.079",
@@ -3915,7 +3974,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+      ]
     },
     {
       "id": "y1v6.ev.080",
@@ -3960,7 +4021,9 @@
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [
+        "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+      ]
     }
   ]
 }

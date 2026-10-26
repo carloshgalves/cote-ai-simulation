@@ -1,0 +1,1725 @@
+{
+  "schema_version": "volume-page-index-v1",
+  "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+  "pages": {
+    "10": {
+      "evidence": [
+        "y1v6.ev.001",
+        "y1v6.ev.002"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets"
+      ]
+    },
+    "11": {
+      "evidence": [
+        "y1v6.ev.001",
+        "y1v6.ev.002"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets"
+      ]
+    },
+    "12": {
+      "evidence": [
+        "y1v6.ev.001",
+        "y1v6.ev.002"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets"
+      ]
+    },
+    "14": {
+      "evidence": [
+        "y1v6.ev.003"
+      ],
+      "cases": [
+        "y1v6.case.nagumo.announce-student-council-centralizing-reforms"
+      ]
+    },
+    "15": {
+      "evidence": [
+        "y1v6.ev.003"
+      ],
+      "cases": [
+        "y1v6.case.nagumo.announce-student-council-centralizing-reforms"
+      ]
+    },
+    "16": {
+      "evidence": [
+        "y1v6.ev.003"
+      ],
+      "cases": [
+        "y1v6.case.nagumo.announce-student-council-centralizing-reforms"
+      ]
+    },
+    "17": {
+      "evidence": [
+        "y1v6.ev.004",
+        "y1v6.ev.005"
+      ],
+      "cases": [
+        "y1v6.case.ken-sudo.study-with-suzune-and-mature-daily-conduct"
+      ]
+    },
+    "18": {
+      "evidence": [
+        "y1v6.ev.004",
+        "y1v6.ev.005"
+      ],
+      "cases": [
+        "y1v6.case.ken-sudo.study-with-suzune-and-mature-daily-conduct"
+      ]
+    },
+    "19": {
+      "evidence": [
+        "y1v6.ev.006"
+      ],
+      "cases": [
+        "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction"
+      ]
+    },
+    "20": {
+      "evidence": [
+        "y1v6.ev.006"
+      ],
+      "cases": [
+        "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction"
+      ]
+    },
+    "21": {
+      "evidence": [
+        "y1v6.ev.006"
+      ],
+      "cases": [
+        "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction"
+      ]
+    },
+    "22": {
+      "evidence": [
+        "y1v6.ev.007"
+      ],
+      "cases": [
+        "y1v6.case.katsuragi.regret-prior-ryuen-alliance-and-assess-factional-loss"
+      ]
+    },
+    "23": {
+      "evidence": [
+        "y1v6.ev.007",
+        "y1v6.ev.008"
+      ],
+      "cases": [
+        "y1v6.case.katsuragi.regret-prior-ryuen-alliance-and-assess-factional-loss"
+      ]
+    },
+    "24": {
+      "evidence": [
+        "y1v6.ev.007"
+      ],
+      "cases": [
+        "y1v6.case.katsuragi.regret-prior-ryuen-alliance-and-assess-factional-loss"
+      ]
+    },
+    "25": {
+      "evidence": [
+        "y1v6.ev.009"
+      ],
+      "cases": [
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces"
+      ]
+    },
+    "26": {
+      "evidence": [
+        "y1v6.ev.009"
+      ],
+      "cases": [
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces"
+      ]
+    },
+    "27": {
+      "evidence": [
+        "y1v6.ev.009"
+      ],
+      "cases": [
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces"
+      ]
+    },
+    "28": {
+      "evidence": [
+        "y1v6.ev.009"
+      ],
+      "cases": [
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces"
+      ]
+    },
+    "30": {
+      "evidence": [
+        "y1v6.ev.010"
+      ],
+      "cases": [
+        "y1v6.case.ken-sudo.study-with-suzune-and-mature-daily-conduct"
+      ]
+    },
+    "31": {
+      "evidence": [
+        "y1v6.ev.010",
+        "y1v6.ev.011"
+      ],
+      "cases": [
+        "y1v6.case.ken-sudo.study-with-suzune-and-mature-daily-conduct"
+      ]
+    },
+    "32": {
+      "evidence": [
+        "y1v6.ev.010",
+        "y1v6.ev.012"
+      ],
+      "cases": [
+        "y1v6.case.ken-sudo.study-with-suzune-and-mature-daily-conduct",
+        "y1v6.case.kiyotaka-ayanokoji.stage-gradual-academic-public-image"
+      ]
+    },
+    "33": {
+      "evidence": [
+        "y1v6.ev.010"
+      ],
+      "cases": [
+        "y1v6.case.ken-sudo.study-with-suzune-and-mature-daily-conduct"
+      ]
+    },
+    "34": {
+      "evidence": [
+        "y1v6.ev.013"
+      ],
+      "cases": []
+    },
+    "35": {
+      "evidence": [
+        "y1v6.ev.013"
+      ],
+      "cases": []
+    },
+    "36": {
+      "evidence": [
+        "y1v6.ev.013"
+      ],
+      "cases": []
+    },
+    "37": {
+      "evidence": [
+        "y1v6.ev.013"
+      ],
+      "cases": []
+    },
+    "38": {
+      "evidence": [
+        "y1v6.ev.013",
+        "y1v6.ev.014"
+      ],
+      "cases": []
+    },
+    "39": {
+      "evidence": [
+        "y1v6.ev.013",
+        "y1v6.ev.014"
+      ],
+      "cases": []
+    },
+    "40": {
+      "evidence": [
+        "y1v6.ev.015"
+      ],
+      "cases": [
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ]
+    },
+    "41": {
+      "evidence": [
+        "y1v6.ev.015"
+      ],
+      "cases": [
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ]
+    },
+    "42": {
+      "evidence": [
+        "y1v6.ev.015"
+      ],
+      "cases": [
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ]
+    },
+    "43": {
+      "evidence": [
+        "y1v6.ev.015"
+      ],
+      "cases": [
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ]
+    },
+    "44": {
+      "evidence": [
+        "y1v6.ev.016"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk"
+      ]
+    },
+    "45": {
+      "evidence": [
+        "y1v6.ev.016"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk"
+      ]
+    },
+    "46": {
+      "evidence": [
+        "y1v6.ev.016"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk"
+      ]
+    },
+    "47": {
+      "evidence": [
+        "y1v6.ev.017"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk"
+      ]
+    },
+    "48": {
+      "evidence": [
+        "y1v6.ev.017",
+        "y1v6.ev.018"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
+        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk"
+      ]
+    },
+    "49": {
+      "evidence": [
+        "y1v6.ev.018"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
+        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk"
+      ]
+    },
+    "50": {
+      "evidence": [
+        "y1v6.ev.018",
+        "y1v6.ev.019"
+      ],
+      "cases": [
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces",
+        "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
+        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk"
+      ]
+    },
+    "51": {
+      "evidence": [
+        "y1v6.ev.019"
+      ],
+      "cases": [
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces"
+      ]
+    },
+    "53": {
+      "evidence": [
+        "y1v6.ev.020"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets"
+      ]
+    },
+    "54": {
+      "evidence": [
+        "y1v6.ev.020"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets"
+      ]
+    },
+    "55": {
+      "evidence": [
+        "y1v6.ev.020"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets"
+      ]
+    },
+    "56": {
+      "evidence": [
+        "y1v6.ev.021"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.choose-class-c-as-academic-opponent",
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ]
+    },
+    "57": {
+      "evidence": [
+        "y1v6.ev.021"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.choose-class-c-as-academic-opponent",
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ]
+    },
+    "58": {
+      "evidence": [
+        "y1v6.ev.021"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.choose-class-c-as-academic-opponent",
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ]
+    },
+    "60": {
+      "evidence": [
+        "y1v6.ev.022"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment"
+      ]
+    },
+    "61": {
+      "evidence": [
+        "y1v6.ev.022"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment"
+      ]
+    },
+    "62": {
+      "evidence": [
+        "y1v6.ev.022"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment"
+      ]
+    },
+    "63": {
+      "evidence": [
+        "y1v6.ev.022",
+        "y1v6.ev.023"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment"
+      ]
+    },
+    "64": {
+      "evidence": [
+        "y1v6.ev.023"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment"
+      ]
+    },
+    "65": {
+      "evidence": [
+        "y1v6.ev.023"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment"
+      ]
+    },
+    "66": {
+      "evidence": [
+        "y1v6.ev.023"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment"
+      ]
+    },
+    "67": {
+      "evidence": [
+        "y1v6.ev.023"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment"
+      ]
+    },
+    "68": {
+      "evidence": [
+        "y1v6.ev.023"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment"
+      ]
+    },
+    "69": {
+      "evidence": [
+        "y1v6.ev.023"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment"
+      ]
+    },
+    "70": {
+      "evidence": [
+        "y1v6.ev.023"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment"
+      ]
+    },
+    "71": {
+      "evidence": [
+        "y1v6.ev.023",
+        "y1v6.ev.024"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment",
+        "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects"
+      ]
+    },
+    "72": {
+      "evidence": [
+        "y1v6.ev.024",
+        "y1v6.ev.025"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects"
+      ]
+    },
+    "73": {
+      "evidence": [
+        "y1v6.ev.025",
+        "y1v6.ev.026"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects"
+      ]
+    },
+    "74": {
+      "evidence": [
+        "y1v6.ev.025",
+        "y1v6.ev.026"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects"
+      ]
+    },
+    "76": {
+      "evidence": [
+        "y1v6.ev.027"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets",
+        "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ]
+    },
+    "77": {
+      "evidence": [
+        "y1v6.ev.027"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets",
+        "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ]
+    },
+    "78": {
+      "evidence": [
+        "y1v6.ev.027",
+        "y1v6.ev.028"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets",
+        "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ]
+    },
+    "79": {
+      "evidence": [
+        "y1v6.ev.027",
+        "y1v6.ev.028",
+        "y1v6.ev.029"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets",
+        "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ]
+    },
+    "80": {
+      "evidence": [
+        "y1v6.ev.030"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.choose-class-c-as-academic-opponent",
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets"
+      ]
+    },
+    "81": {
+      "evidence": [
+        "y1v6.ev.030"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.choose-class-c-as-academic-opponent",
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets"
+      ]
+    },
+    "82": {
+      "evidence": [
+        "y1v6.ev.030"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.choose-class-c-as-academic-opponent",
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets"
+      ]
+    },
+    "83": {
+      "evidence": [
+        "y1v6.ev.030",
+        "y1v6.ev.031",
+        "y1v6.ev.032",
+        "y1v6.ev.033",
+        "y1v6.ev.034",
+        "y1v6.ev.035",
+        "y1v6.ev.036"
+      ],
+      "cases": [
+        "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
+        "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction",
+        "y1v6.case.maya-sato.increase-study-effort-for-shared-paper-shuffle-risk",
+        "y1v6.case.suzune-horikita.choose-class-c-as-academic-opponent",
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets"
+      ]
+    },
+    "85": {
+      "evidence": [
+        "y1v6.ev.037"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "86": {
+      "evidence": [
+        "y1v6.ev.037"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "87": {
+      "evidence": [
+        "y1v6.ev.037",
+        "y1v6.ev.038"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy",
+        "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring"
+      ]
+    },
+    "88": {
+      "evidence": [
+        "y1v6.ev.038"
+      ],
+      "cases": [
+        "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring"
+      ]
+    },
+    "89": {
+      "evidence": [
+        "y1v6.ev.039"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "90": {
+      "evidence": [
+        "y1v6.ev.039"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "91": {
+      "evidence": [
+        "y1v6.ev.039"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "92": {
+      "evidence": [
+        "y1v6.ev.039"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "93": {
+      "evidence": [
+        "y1v6.ev.039",
+        "y1v6.ev.040"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "94": {
+      "evidence": [
+        "y1v6.ev.039",
+        "y1v6.ev.040"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "95": {
+      "evidence": [
+        "y1v6.ev.039",
+        "y1v6.ev.040",
+        "y1v6.ev.041"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "96": {
+      "evidence": [
+        "y1v6.ev.039",
+        "y1v6.ev.042"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy",
+        "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring"
+      ]
+    },
+    "97": {
+      "evidence": [
+        "y1v6.ev.039",
+        "y1v6.ev.042",
+        "y1v6.ev.043"
+      ],
+      "cases": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy",
+        "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring"
+      ]
+    },
+    "98": {
+      "evidence": [
+        "y1v6.ev.039",
+        "y1v6.ev.043"
+      ],
+      "cases": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "99": {
+      "evidence": [
+        "y1v6.ev.039"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "100": {
+      "evidence": [
+        "y1v6.ev.039"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "101": {
+      "evidence": [
+        "y1v6.ev.044"
+      ],
+      "cases": [
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "102": {
+      "evidence": [
+        "y1v6.ev.044"
+      ],
+      "cases": [
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "103": {
+      "evidence": [
+        "y1v6.ev.044"
+      ],
+      "cases": [
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ]
+    },
+    "104": {
+      "evidence": [
+        "y1v6.ev.045"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "105": {
+      "evidence": [
+        "y1v6.ev.045"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "106": {
+      "evidence": [
+        "y1v6.ev.045",
+        "y1v6.ev.046"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "107": {
+      "evidence": [
+        "y1v6.ev.047"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
+      ]
+    },
+    "108": {
+      "evidence": [
+        "y1v6.ev.047"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
+      ]
+    },
+    "109": {
+      "evidence": [
+        "y1v6.ev.047"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
+      ]
+    },
+    "110": {
+      "evidence": [
+        "y1v6.ev.047"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
+      ]
+    },
+    "111": {
+      "evidence": [
+        "y1v6.ev.047"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
+      ]
+    },
+    "112": {
+      "evidence": [
+        "y1v6.ev.047"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
+      ]
+    },
+    "113": {
+      "evidence": [
+        "y1v6.ev.047"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
+      ]
+    },
+    "114": {
+      "evidence": [
+        "y1v6.ev.047",
+        "y1v6.ev.048"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
+      ]
+    },
+    "115": {
+      "evidence": [
+        "y1v6.ev.047",
+        "y1v6.ev.048"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
+      ]
+    },
+    "118": {
+      "evidence": [
+        "y1v6.ev.049"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past",
+        "y1v6.case.manabu-horikita.witness-private-math-wager-without-past-secret",
+        "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness"
+      ]
+    },
+    "119": {
+      "evidence": [
+        "y1v6.ev.049"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past",
+        "y1v6.case.manabu-horikita.witness-private-math-wager-without-past-secret",
+        "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness"
+      ]
+    },
+    "120": {
+      "evidence": [
+        "y1v6.ev.049"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past",
+        "y1v6.case.manabu-horikita.witness-private-math-wager-without-past-secret",
+        "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness"
+      ]
+    },
+    "121": {
+      "evidence": [
+        "y1v6.ev.049"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past",
+        "y1v6.case.manabu-horikita.witness-private-math-wager-without-past-secret",
+        "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness"
+      ]
+    },
+    "122": {
+      "evidence": [
+        "y1v6.ev.049"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past",
+        "y1v6.case.manabu-horikita.witness-private-math-wager-without-past-secret",
+        "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness"
+      ]
+    },
+    "123": {
+      "evidence": [
+        "y1v6.ev.050"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past"
+      ]
+    },
+    "124": {
+      "evidence": [
+        "y1v6.ev.050"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past"
+      ]
+    },
+    "125": {
+      "evidence": [
+        "y1v6.ev.050",
+        "y1v6.ev.051"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past"
+      ]
+    },
+    "126": {
+      "evidence": [
+        "y1v6.ev.051"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past"
+      ]
+    },
+    "127": {
+      "evidence": [
+        "y1v6.ev.051"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past"
+      ]
+    },
+    "128": {
+      "evidence": [
+        "y1v6.ev.051"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past"
+      ]
+    },
+    "129": {
+      "evidence": [
+        "y1v6.ev.051",
+        "y1v6.ev.052"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past",
+        "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness"
+      ]
+    },
+    "130": {
+      "evidence": [
+        "y1v6.ev.052"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness"
+      ]
+    },
+    "132": {
+      "evidence": [
+        "y1v6.ev.053"
+      ],
+      "cases": [
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy",
+        "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring"
+      ]
+    },
+    "133": {
+      "evidence": [
+        "y1v6.ev.053"
+      ],
+      "cases": [
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy",
+        "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring"
+      ]
+    },
+    "134": {
+      "evidence": [
+        "y1v6.ev.053"
+      ],
+      "cases": [
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy",
+        "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring"
+      ]
+    },
+    "136": {
+      "evidence": [
+        "y1v6.ev.054"
+      ],
+      "cases": [
+        "y1v6.case.hiyori-shiina.open-gentle-dialogue-while-ryuen-probes-x",
+        "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity",
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori"
+      ]
+    },
+    "137": {
+      "evidence": [
+        "y1v6.ev.054"
+      ],
+      "cases": [
+        "y1v6.case.hiyori-shiina.open-gentle-dialogue-while-ryuen-probes-x",
+        "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity",
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori"
+      ]
+    },
+    "138": {
+      "evidence": [
+        "y1v6.ev.054"
+      ],
+      "cases": [
+        "y1v6.case.hiyori-shiina.open-gentle-dialogue-while-ryuen-probes-x",
+        "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity",
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori"
+      ]
+    },
+    "139": {
+      "evidence": [
+        "y1v6.ev.054"
+      ],
+      "cases": [
+        "y1v6.case.hiyori-shiina.open-gentle-dialogue-while-ryuen-probes-x",
+        "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity",
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori"
+      ]
+    },
+    "140": {
+      "evidence": [
+        "y1v6.ev.054",
+        "y1v6.ev.055"
+      ],
+      "cases": [
+        "y1v6.case.hiyori-shiina.open-gentle-dialogue-while-ryuen-probes-x",
+        "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity",
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori"
+      ]
+    },
+    "141": {
+      "evidence": [
+        "y1v6.ev.054",
+        "y1v6.ev.055"
+      ],
+      "cases": [
+        "y1v6.case.hiyori-shiina.open-gentle-dialogue-while-ryuen-probes-x",
+        "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity",
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori"
+      ]
+    },
+    "142": {
+      "evidence": [
+        "y1v6.ev.054",
+        "y1v6.ev.055"
+      ],
+      "cases": [
+        "y1v6.case.hiyori-shiina.open-gentle-dialogue-while-ryuen-probes-x",
+        "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity",
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori"
+      ]
+    },
+    "143": {
+      "evidence": [
+        "y1v6.ev.056"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ]
+    },
+    "144": {
+      "evidence": [
+        "y1v6.ev.056"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ]
+    },
+    "145": {
+      "evidence": [
+        "y1v6.ev.056"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ]
+    },
+    "146": {
+      "evidence": [
+        "y1v6.ev.056"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ]
+    },
+    "147": {
+      "evidence": [
+        "y1v6.ev.056"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ]
+    },
+    "148": {
+      "evidence": [
+        "y1v6.ev.056"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ]
+    },
+    "149": {
+      "evidence": [
+        "y1v6.ev.056"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ]
+    },
+    "150": {
+      "evidence": [
+        "y1v6.ev.056",
+        "y1v6.ev.058"
+      ],
+      "cases": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ]
+    },
+    "151": {
+      "evidence": [
+        "y1v6.ev.057",
+        "y1v6.ev.058"
+      ],
+      "cases": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ]
+    },
+    "152": {
+      "evidence": [
+        "y1v6.ev.057",
+        "y1v6.ev.058"
+      ],
+      "cases": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ]
+    },
+    "153": {
+      "evidence": [
+        "y1v6.ev.057"
+      ],
+      "cases": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle"
+      ]
+    },
+    "154": {
+      "evidence": [
+        "y1v6.ev.057"
+      ],
+      "cases": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle"
+      ]
+    },
+    "155": {
+      "evidence": [
+        "y1v6.ev.057"
+      ],
+      "cases": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle"
+      ]
+    },
+    "156": {
+      "evidence": [
+        "y1v6.ev.059"
+      ],
+      "cases": [
+        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces"
+      ]
+    },
+    "157": {
+      "evidence": [
+        "y1v6.ev.059",
+        "y1v6.ev.060"
+      ],
+      "cases": [
+        "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity",
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori",
+        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces"
+      ]
+    },
+    "158": {
+      "evidence": [
+        "y1v6.ev.059",
+        "y1v6.ev.060"
+      ],
+      "cases": [
+        "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity",
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori",
+        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces"
+      ]
+    },
+    "159": {
+      "evidence": [
+        "y1v6.ev.061"
+      ],
+      "cases": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
+        "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction",
+        "y1v6.case.maya-sato.increase-study-effort-for-shared-paper-shuffle-risk"
+      ]
+    },
+    "160": {
+      "evidence": [
+        "y1v6.ev.061"
+      ],
+      "cases": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
+        "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction",
+        "y1v6.case.maya-sato.increase-study-effort-for-shared-paper-shuffle-risk"
+      ]
+    },
+    "161": {
+      "evidence": [
+        "y1v6.ev.061"
+      ],
+      "cases": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
+        "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction",
+        "y1v6.case.maya-sato.increase-study-effort-for-shared-paper-shuffle-risk"
+      ]
+    },
+    "162": {
+      "evidence": [
+        "y1v6.ev.061"
+      ],
+      "cases": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
+        "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction",
+        "y1v6.case.maya-sato.increase-study-effort-for-shared-paper-shuffle-risk"
+      ]
+    },
+    "163": {
+      "evidence": [
+        "y1v6.ev.062"
+      ],
+      "cases": [
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage"
+      ]
+    },
+    "164": {
+      "evidence": [
+        "y1v6.ev.062"
+      ],
+      "cases": [
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage"
+      ]
+    },
+    "165": {
+      "evidence": [
+        "y1v6.ev.062"
+      ],
+      "cases": [
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage"
+      ]
+    },
+    "166": {
+      "evidence": [
+        "y1v6.ev.062"
+      ],
+      "cases": [
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage"
+      ]
+    },
+    "167": {
+      "evidence": [
+        "y1v6.ev.062"
+      ],
+      "cases": [
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage"
+      ]
+    },
+    "168": {
+      "evidence": [
+        "y1v6.ev.063"
+      ],
+      "cases": [
+        "y1v6.case.katsuragi.regret-prior-ryuen-alliance-and-assess-factional-loss"
+      ]
+    },
+    "169": {
+      "evidence": [
+        "y1v6.ev.063"
+      ],
+      "cases": [
+        "y1v6.case.katsuragi.regret-prior-ryuen-alliance-and-assess-factional-loss"
+      ]
+    },
+    "170": {
+      "evidence": [
+        "y1v6.ev.064"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.face-false-fraud-accusation-with-institutional-rebuttal"
+      ]
+    },
+    "171": {
+      "evidence": [
+        "y1v6.ev.064"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.face-false-fraud-accusation-with-institutional-rebuttal"
+      ]
+    },
+    "172": {
+      "evidence": [
+        "y1v6.ev.064"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.face-false-fraud-accusation-with-institutional-rebuttal"
+      ]
+    },
+    "173": {
+      "evidence": [
+        "y1v6.ev.064"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.face-false-fraud-accusation-with-institutional-rebuttal"
+      ]
+    },
+    "174": {
+      "evidence": [
+        "y1v6.ev.064"
+      ],
+      "cases": [
+        "y1v6.case.honami-ichinose.face-false-fraud-accusation-with-institutional-rebuttal"
+      ]
+    },
+    "177": {
+      "evidence": [
+        "y1v6.ev.065"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "178": {
+      "evidence": [
+        "y1v6.ev.065"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "179": {
+      "evidence": [
+        "y1v6.ev.065"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "180": {
+      "evidence": [
+        "y1v6.ev.065"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "181": {
+      "evidence": [
+        "y1v6.ev.066"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "182": {
+      "evidence": [
+        "y1v6.ev.066"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "183": {
+      "evidence": [
+        "y1v6.ev.066"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "184": {
+      "evidence": [
+        "y1v6.ev.066"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "185": {
+      "evidence": [
+        "y1v6.ev.066"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "187": {
+      "evidence": [
+        "y1v6.ev.067"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ]
+    },
+    "188": {
+      "evidence": [
+        "y1v6.ev.068"
+      ],
+      "cases": [
+        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust"
+      ]
+    },
+    "189": {
+      "evidence": [
+        "y1v6.ev.069"
+      ],
+      "cases": [
+        "y1v6.case.yosuke-hirata.privately-infer-ayanokoji-strategist-without-disclosure"
+      ]
+    },
+    "190": {
+      "evidence": [
+        "y1v6.ev.069"
+      ],
+      "cases": [
+        "y1v6.case.yosuke-hirata.privately-infer-ayanokoji-strategist-without-disclosure"
+      ]
+    },
+    "192": {
+      "evidence": [
+        "y1v6.ev.070"
+      ],
+      "cases": [
+        "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
+        "y1v6.case.kiyotaka-ayanokoji.stage-gradual-academic-public-image",
+        "y1v6.case.maya-sato.increase-study-effort-for-shared-paper-shuffle-risk"
+      ]
+    },
+    "193": {
+      "evidence": [
+        "y1v6.ev.070",
+        "y1v6.ev.071"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+        "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
+        "y1v6.case.kiyotaka-ayanokoji.stage-gradual-academic-public-image",
+        "y1v6.case.maya-sato.increase-study-effort-for-shared-paper-shuffle-risk",
+        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust"
+      ]
+    },
+    "194": {
+      "evidence": [
+        "y1v6.ev.072"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust"
+      ]
+    },
+    "195": {
+      "evidence": [
+        "y1v6.ev.072"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust"
+      ]
+    },
+    "196": {
+      "evidence": [
+        "y1v6.ev.072"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust"
+      ]
+    },
+    "197": {
+      "evidence": [
+        "y1v6.ev.072",
+        "y1v6.ev.073"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust"
+      ]
+    },
+    "198": {
+      "evidence": [
+        "y1v6.ev.073"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust"
+      ]
+    },
+    "199": {
+      "evidence": [
+        "y1v6.ev.073"
+      ],
+      "cases": [
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust"
+      ]
+    },
+    "200": {
+      "evidence": [
+        "y1v6.ev.074"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.threaten-target-in-photograph-to-identify-x"
+      ]
+    },
+    "201": {
+      "evidence": [
+        "y1v6.ev.074"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.threaten-target-in-photograph-to-identify-x"
+      ]
+    },
+    "202": {
+      "evidence": [
+        "y1v6.ev.075"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction",
+        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
+      ]
+    },
+    "203": {
+      "evidence": [
+        "y1v6.ev.075"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction",
+        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
+      ]
+    },
+    "204": {
+      "evidence": [
+        "y1v6.ev.075",
+        "y1v6.ev.076"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction",
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
+      ]
+    },
+    "205": {
+      "evidence": [
+        "y1v6.ev.076",
+        "y1v6.ev.077"
+      ],
+      "cases": [
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
+      ]
+    },
+    "206": {
+      "evidence": [
+        "y1v6.ev.077"
+      ],
+      "cases": []
+    },
+    "207": {
+      "evidence": [
+        "y1v6.ev.078",
+        "y1v6.ev.079"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction",
+        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
+      ]
+    },
+    "208": {
+      "evidence": [
+        "y1v6.ev.078",
+        "y1v6.ev.079",
+        "y1v6.ev.080"
+      ],
+      "cases": [
+        "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction",
+        "y1v6.case.kakeru-ryuen.threaten-target-in-photograph-to-identify-x",
+        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
+      ]
+    }
+  }
+}

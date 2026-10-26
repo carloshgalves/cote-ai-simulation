@@ -220,7 +220,18 @@
       "y1v5.ev.074",
       "y1v5.ev.075",
       "y1v5.ev.076",
-      "y1v5.ev.078"
+      "y1v5.ev.078",
+      "y1v6.ev.015",
+      "y1v6.ev.021",
+      "y1v6.ev.022",
+      "y1v6.ev.023",
+      "y1v6.ev.028",
+      "y1v6.ev.046",
+      "y1v6.ev.050",
+      "y1v6.ev.054",
+      "y1v6.ev.065",
+      "y1v6.ev.078",
+      "y1v6.ev.079"
     ],
     "politics": [
       "v0.char.001",
@@ -287,7 +298,10 @@
       "y1v45.ev.048",
       "y1v5.ev.010",
       "y1v5.ev.057",
-      "y1v5.ev.058"
+      "y1v5.ev.058",
+      "y1v6.ev.003",
+      "y1v6.ev.007",
+      "y1v6.ev.063"
     ],
     "ethics": [
       "v0.char.007",
@@ -328,7 +342,11 @@
       "y1v4.ev.094",
       "y1v45.ev.023",
       "y1v45.ev.026",
-      "y1v5.ev.046"
+      "y1v5.ev.046",
+      "y1v6.ev.017",
+      "y1v6.ev.018",
+      "y1v6.ev.047",
+      "y1v6.ev.067"
     ],
     "economy": [
       "v0.char.014",
@@ -644,7 +662,15 @@
       "y1v5.ev.022",
       "y1v5.ev.024",
       "y1v5.ev.025",
-      "y1v5.ev.050"
+      "y1v5.ev.050",
+      "y1v6.ev.005",
+      "y1v6.ev.006",
+      "y1v6.ev.023",
+      "y1v6.ev.041",
+      "y1v6.ev.043",
+      "y1v6.ev.057",
+      "y1v6.ev.058",
+      "y1v6.ev.059"
     ],
     "institution": [
       "v0.char.004",
@@ -961,7 +987,9 @@
       "y1v5.ev.069",
       "y1v5.ev.072",
       "y1v5.ev.073",
-      "y1v5.ev.079"
+      "y1v5.ev.079",
+      "y1v6.ev.041",
+      "y1v6.ev.048"
     ],
     "leadership": [
       "y1v1.ev.012",
@@ -1040,7 +1068,14 @@
       "y1v5.ev.070",
       "y1v5.ev.071",
       "y1v5.ev.072",
-      "y1v5.ev.079"
+      "y1v5.ev.079",
+      "y1v6.ev.018",
+      "y1v6.ev.027",
+      "y1v6.ev.038",
+      "y1v6.ev.042",
+      "y1v6.ev.063",
+      "y1v6.ev.067",
+      "y1v6.ev.069"
     ],
     "risk_management": [
       "y1v1.ev.024",
@@ -1066,7 +1101,10 @@
       "y1v45.ev.036",
       "y1v5.ev.007",
       "y1v5.ev.011",
-      "y1v5.ev.046"
+      "y1v5.ev.046",
+      "y1v6.ev.007",
+      "y1v6.ev.045",
+      "y1v6.ev.049"
     ],
     "observation": [
       "y1v1.ev.035",
@@ -1226,7 +1264,30 @@
       "y1v5.ev.026",
       "y1v5.ev.028",
       "y1v5.ev.055",
-      "y1v5.ev.059"
+      "y1v5.ev.059",
+      "y1v6.ev.013",
+      "y1v6.ev.014",
+      "y1v6.ev.015",
+      "y1v6.ev.020",
+      "y1v6.ev.021",
+      "y1v6.ev.028",
+      "y1v6.ev.030",
+      "y1v6.ev.031",
+      "y1v6.ev.032",
+      "y1v6.ev.033",
+      "y1v6.ev.034",
+      "y1v6.ev.035",
+      "y1v6.ev.036",
+      "y1v6.ev.044",
+      "y1v6.ev.045",
+      "y1v6.ev.049",
+      "y1v6.ev.065",
+      "y1v6.ev.066",
+      "y1v6.ev.068",
+      "y1v6.ev.070",
+      "y1v6.ev.071",
+      "y1v6.ev.072",
+      "y1v6.ev.075"
     ],
     "conflict": [
       "y1v1.ev.091",
@@ -1296,7 +1357,8 @@
       "y1v4.ev.098",
       "y1v4.ev.099",
       "y1v4.ev.124",
-      "y1v45.ev.016"
+      "y1v45.ev.016",
+      "y1v6.ev.017"
     ],
     "motivation": [
       "y1v1.ev.134",
@@ -1323,7 +1385,14 @@
       "y1v5.ev.075",
       "y1v5.ev.078",
       "y1v5.ev.079",
-      "y1v5.ev.080"
+      "y1v5.ev.080",
+      "y1v6.ev.001",
+      "y1v6.ev.002",
+      "y1v6.ev.018",
+      "y1v6.ev.022",
+      "y1v6.ev.052",
+      "y1v6.ev.073",
+      "y1v6.ev.079"
     ],
     "governance": [
       "y1v3.ev.010",
@@ -1382,7 +1451,8 @@
       "y1v4.ev.001",
       "y1v4.ev.102",
       "y1v45.ev.018",
-      "y1v45.ev.043"
+      "y1v45.ev.043",
+      "y1v6.ev.058"
     ],
     "self_presentation": [
       "y1v4.ev.010"
@@ -1401,7 +1471,11 @@
       "y1v45.ev.013",
       "y1v45.ev.020",
       "y1v5.ev.002",
-      "y1v5.ev.066"
+      "y1v5.ev.066",
+      "y1v6.ev.015",
+      "y1v6.ev.020",
+      "y1v6.ev.039",
+      "y1v6.ev.044"
     ],
     "epistemics": [
       "y1v4.ev.043",
@@ -1420,7 +1494,20 @@
       "y1v5.ev.066",
       "y1v5.ev.067",
       "y1v5.ev.077",
-      "y1v5.ev.078"
+      "y1v5.ev.078",
+      "y1v6.ev.016",
+      "y1v6.ev.019",
+      "y1v6.ev.026",
+      "y1v6.ev.046",
+      "y1v6.ev.048",
+      "y1v6.ev.055",
+      "y1v6.ev.061",
+      "y1v6.ev.064",
+      "y1v6.ev.069",
+      "y1v6.ev.071",
+      "y1v6.ev.074",
+      "y1v6.ev.077",
+      "y1v6.ev.080"
     ],
     "privacy": [
       "y1v4.ev.055",
@@ -1431,7 +1518,11 @@
       "y1v45.ev.053",
       "y1v45.ev.054",
       "y1v45.ev.055",
-      "y1v45.ev.056"
+      "y1v45.ev.056",
+      "y1v6.ev.001",
+      "y1v6.ev.016",
+      "y1v6.ev.025",
+      "y1v6.ev.051"
     ],
     "negotiation": [
       "y1v4.ev.076",
@@ -1465,7 +1556,13 @@
       "y1v5.ev.047",
       "y1v5.ev.062",
       "y1v5.ev.075",
-      "y1v5.ev.076"
+      "y1v5.ev.076",
+      "y1v6.ev.017",
+      "y1v6.ev.023",
+      "y1v6.ev.025",
+      "y1v6.ev.051",
+      "y1v6.ev.062",
+      "y1v6.ev.074"
     ],
     "violence": [
       "y1v4.ev.099",
@@ -1486,7 +1583,15 @@
       "y1v5.ev.020",
       "y1v5.ev.032",
       "y1v5.ev.071",
-      "y1v5.ev.074"
+      "y1v5.ev.074",
+      "y1v6.ev.005",
+      "y1v6.ev.012",
+      "y1v6.ev.055",
+      "y1v6.ev.060",
+      "y1v6.ev.062",
+      "y1v6.ev.070",
+      "y1v6.ev.075",
+      "y1v6.ev.076"
     ],
     "reflection": [
       "y1v45.ev.001"
@@ -1528,7 +1633,8 @@
       "y1v45.ev.003",
       "y1v5.ev.028",
       "y1v5.ev.060",
-      "y1v5.ev.080"
+      "y1v5.ev.080",
+      "y1v6.ev.004"
     ],
     "psychology": [
       "y1v45.ev.005"
@@ -1541,13 +1647,15 @@
       "y1v45.ev.022",
       "y1v45.ev.025",
       "y1v45.ev.028",
-      "y1v5.ev.001"
+      "y1v5.ev.001",
+      "y1v6.ev.058"
     ],
     "infrastructure": [
       "y1v45.ev.032"
     ],
     "communication": [
-      "y1v45.ev.038"
+      "y1v45.ev.038",
+      "y1v6.ev.046"
     ],
     "misconduct": [
       "y1v45.ev.053",
@@ -1575,19 +1683,43 @@
       "y1v5.ev.069",
       "y1v5.ev.072",
       "y1v5.ev.073",
-      "y1v5.ev.080"
+      "y1v5.ev.080",
+      "y1v6.ev.006",
+      "y1v6.ev.009",
+      "y1v6.ev.035",
+      "y1v6.ev.043",
+      "y1v6.ev.047",
+      "y1v6.ev.056",
+      "y1v6.ev.057",
+      "y1v6.ev.061",
+      "y1v6.ev.073"
     ],
     "cooperation": [
       "y1v5.ev.021",
       "y1v5.ev.022",
       "y1v5.ev.035",
-      "y1v5.ev.039"
+      "y1v5.ev.039",
+      "y1v6.ev.027",
+      "y1v6.ev.029",
+      "y1v6.ev.047",
+      "y1v6.ev.056"
     ],
     "information": [
-      "y1v5.ev.023"
+      "y1v5.ev.023",
+      "y1v6.ev.002",
+      "y1v6.ev.024",
+      "y1v6.ev.045",
+      "y1v6.ev.050",
+      "y1v6.ev.055",
+      "y1v6.ev.059",
+      "y1v6.ev.062",
+      "y1v6.ev.078"
     ],
     "trust": [
-      "y1v5.ev.025"
+      "y1v5.ev.025",
+      "y1v6.ev.001",
+      "y1v6.ev.002",
+      "y1v6.ev.005"
     ],
     "results": [
       "y1v5.ev.027",
@@ -1606,10 +1738,172 @@
       "y1v5.ev.051",
       "y1v5.ev.056",
       "y1v5.ev.057",
-      "y1v5.ev.059"
+      "y1v5.ev.059",
+      "y1v6.ev.008",
+      "y1v6.ev.010",
+      "y1v6.ev.011",
+      "y1v6.ev.030",
+      "y1v6.ev.031",
+      "y1v6.ev.032",
+      "y1v6.ev.033",
+      "y1v6.ev.034",
+      "y1v6.ev.036",
+      "y1v6.ev.037",
+      "y1v6.ev.040",
+      "y1v6.ev.068"
     ],
     "counterstrategy": [
-      "y1v5.ev.077"
+      "y1v5.ev.077",
+      "y1v6.ev.066"
+    ],
+    "student_council": [
+      "y1v6.ev.003"
+    ],
+    "authority": [
+      "y1v6.ev.003",
+      "y1v6.ev.013",
+      "y1v6.ev.066"
+    ],
+    "studies": [
+      "y1v6.ev.004",
+      "y1v6.ev.037",
+      "y1v6.ev.038",
+      "y1v6.ev.039",
+      "y1v6.ev.053"
+    ],
+    "development": [
+      "y1v6.ev.004",
+      "y1v6.ev.010",
+      "y1v6.ev.038",
+      "y1v6.ev.042",
+      "y1v6.ev.053"
+    ],
+    "romance": [
+      "y1v6.ev.006",
+      "y1v6.ev.061"
+    ],
+    "alliance": [
+      "y1v6.ev.007"
+    ],
+    "class_points": [
+      "y1v6.ev.008",
+      "y1v6.ev.014"
+    ],
+    "secrecy": [
+      "y1v6.ev.009",
+      "y1v6.ev.059",
+      "y1v6.ev.069"
+    ],
+    "security": [
+      "y1v6.ev.009"
+    ],
+    "academic": [
+      "y1v6.ev.010",
+      "y1v6.ev.011",
+      "y1v6.ev.012",
+      "y1v6.ev.037",
+      "y1v6.ev.040",
+      "y1v6.ev.070"
+    ],
+    "rules": [
+      "y1v6.ev.013",
+      "y1v6.ev.014",
+      "y1v6.ev.068"
+    ],
+    "retrospective": [
+      "y1v6.ev.016",
+      "y1v6.ev.019",
+      "y1v6.ev.051"
+    ],
+    "teamwork": [
+      "y1v6.ev.020",
+      "y1v6.ev.042"
+    ],
+    "opponent_selection": [
+      "y1v6.ev.021"
+    ],
+    "investigation": [
+      "y1v6.ev.022",
+      "y1v6.ev.025",
+      "y1v6.ev.026",
+      "y1v6.ev.054",
+      "y1v6.ev.060",
+      "y1v6.ev.074",
+      "y1v6.ev.076"
+    ],
+    "intimidation": [
+      "y1v6.ev.024"
+    ],
+    "apology": [
+      "y1v6.ev.027"
+    ],
+    "pairing": [
+      "y1v6.ev.028",
+      "y1v6.ev.030",
+      "y1v6.ev.031",
+      "y1v6.ev.032",
+      "y1v6.ev.033",
+      "y1v6.ev.034",
+      "y1v6.ev.035",
+      "y1v6.ev.036"
+    ],
+    "uncertainty": [
+      "y1v6.ev.029",
+      "y1v6.ev.072"
+    ],
+    "diagnostic": [
+      "y1v6.ev.039"
+    ],
+    "birthday": [
+      "y1v6.ev.041"
+    ],
+    "question_design": [
+      "y1v6.ev.044"
+    ],
+    "agreement": [
+      "y1v6.ev.049",
+      "y1v6.ev.050",
+      "y1v6.ev.052",
+      "y1v6.ev.072",
+      "y1v6.ev.073"
+    ],
+    "threat": [
+      "y1v6.ev.052",
+      "y1v6.ev.080"
+    ],
+    "teaching": [
+      "y1v6.ev.053"
+    ],
+    "friendship": [
+      "y1v6.ev.056"
+    ],
+    "initiative": [
+      "y1v6.ev.057"
+    ],
+    "accusation": [
+      "y1v6.ev.064",
+      "y1v6.ev.077"
+    ],
+    "school_authority": [
+      "y1v6.ev.064"
+    ],
+    "submission": [
+      "y1v6.ev.065"
+    ],
+    "cheating": [
+      "y1v6.ev.075"
+    ],
+    "attribution": [
+      "y1v6.ev.076"
+    ],
+    "transaction": [
+      "y1v6.ev.078"
+    ],
+    "decision": [
+      "y1v6.ev.079"
+    ],
+    "blackmail": [
+      "y1v6.ev.080"
     ]
   }
 }

@@ -10,7 +10,8 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -60,7 +61,8 @@
         "y1v45.case.kiyotaka-ayanokoji.quietly-counter-invasive-pool-plot",
         "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack",
         "y1v5.case.kiyotaka-ayanokoji.replace-miyake-as-relay-anchor",
-        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita"
+        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita",
+        "y1v6.case.kiyotaka-ayanokoji.stage-gradual-academic-public-image"
       ],
       "context_evidence_refs": [
         "v0.char.011",
@@ -186,7 +188,9 @@
         "y1v5.ev.070",
         "y1v5.ev.071",
         "y1v5.ev.074",
-        "y1v5.ev.078"
+        "y1v5.ev.078",
+        "y1v6.ev.046",
+        "y1v6.ev.050"
       ]
     },
     "social": {
@@ -208,7 +212,8 @@
         "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice",
         "y1v3.case.kiyotaka-ayanokoji.assist-injured-rival",
         "y1v3.case.kiyotaka-ayanokoji.condition-support-on-privacy",
-        "y1v4.case.kiyotaka-ayanokoji.redirect-koenji-to-bellhop"
+        "y1v4.case.kiyotaka-ayanokoji.redirect-koenji-to-bellhop",
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle"
       ],
       "context_evidence_refs": [
         "v0.char.009",
@@ -335,7 +340,11 @@
         "y1v45.ev.045",
         "y1v5.ev.022",
         "y1v5.ev.024",
-        "y1v5.ev.025"
+        "y1v5.ev.025",
+        "y1v6.ev.005",
+        "y1v6.ev.006",
+        "y1v6.ev.041",
+        "y1v6.ev.059"
       ]
     },
     "politics": {
@@ -551,7 +560,8 @@
         "y1v4.ev.090",
         "y1v4.ev.093",
         "y1v45.ev.023",
-        "y1v45.ev.026"
+        "y1v45.ev.026",
+        "y1v6.ev.017"
       ]
     },
     "persuasion": {
@@ -619,7 +629,8 @@
         "y1v5.ev.043",
         "y1v5.ev.048",
         "y1v5.ev.053",
-        "y1v5.ev.079"
+        "y1v5.ev.079",
+        "y1v6.ev.041"
       ]
     },
     "risk_management": {
@@ -628,7 +639,8 @@
         "y1v2.case.kiyotaka-ayanokoji.protect-sakura-from-clerk",
         "y1v3.case.kiyotaka-ayanokoji.carry-sick-horikita",
         "y1v3.case.kiyotaka-ayanokoji.withhold-underwear-evidence",
-        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack"
+        "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack",
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces"
       ],
       "context_evidence_refs": [
         "y1v1.ev.024",
@@ -647,7 +659,8 @@
         "y1v45.ev.014",
         "y1v45.ev.034",
         "y1v45.ev.036",
-        "y1v5.ev.011"
+        "y1v5.ev.011",
+        "y1v6.ev.045"
       ]
     },
     "leadership": {
@@ -771,7 +784,8 @@
     "exam": {
       "behavioral_case_refs": [
         "y1v3.case.kiyotaka-ayanokoji.exploit-justified-leader-replacement",
-        "y1v4.case.kiyotaka-ayanokoji.compare-private-exam-summons"
+        "y1v4.case.kiyotaka-ayanokoji.compare-private-exam-summons",
+        "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair"
       ],
       "context_evidence_refs": [
         "y1v2.ev.005",
@@ -795,7 +809,11 @@
         "y1v5.ev.002",
         "y1v5.ev.028",
         "y1v5.ev.055",
-        "y1v5.ev.059"
+        "y1v5.ev.059",
+        "y1v6.ev.035",
+        "y1v6.ev.044",
+        "y1v6.ev.045",
+        "y1v6.ev.070"
       ]
     },
     "conflict": {
@@ -829,7 +847,8 @@
         "y1v4.ev.068",
         "y1v4.ev.092",
         "y1v4.ev.097",
-        "y1v4.ev.124"
+        "y1v4.ev.124",
+        "y1v6.ev.017"
       ]
     },
     "motivation": {
@@ -911,7 +930,8 @@
         "y1v45.ev.013",
         "y1v45.ev.020",
         "y1v5.ev.002",
-        "y1v5.ev.066"
+        "y1v5.ev.066",
+        "y1v6.ev.044"
       ]
     },
     "epistemics": {
@@ -929,13 +949,18 @@
         "y1v5.ev.052",
         "y1v5.ev.066",
         "y1v5.ev.067",
-        "y1v5.ev.078"
+        "y1v5.ev.078",
+        "y1v6.ev.019",
+        "y1v6.ev.046",
+        "y1v6.ev.061",
+        "y1v6.ev.074"
       ]
     },
     "negotiation": {
       "behavioral_case_refs": [
         "y1v4.case.kiyotaka-ayanokoji.predict-counter-alliance",
-        "y1v45.case.kiyotaka-ayanokoji.mediate-illicit-delivery-proposal"
+        "y1v45.case.kiyotaka-ayanokoji.mediate-illicit-delivery-proposal",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past"
       ],
       "context_evidence_refs": [
         "y1v4.ev.077",
@@ -961,7 +986,9 @@
         "y1v4.ev.131",
         "y1v45.ev.044",
         "y1v45.ev.051",
-        "y1v45.ev.052"
+        "y1v45.ev.052",
+        "y1v6.ev.017",
+        "y1v6.ev.074"
       ]
     },
     "trauma": {
@@ -989,7 +1016,9 @@
     },
     "privacy": {
       "behavioral_case_refs": [
-        "y1v45.case.kiyotaka-ayanokoji.quietly-counter-invasive-pool-plot"
+        "y1v45.case.kiyotaka-ayanokoji.quietly-counter-invasive-pool-plot",
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past",
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces"
       ],
       "context_evidence_refs": [
         "y1v4.ev.112",
@@ -1007,7 +1036,8 @@
         "y1v45.case.kiyotaka-ayanokoji.conceal-sport-capacity-during-scouting",
         "y1v5.case.kiyotaka-ayanokoji.record-deliberately-limited-grip",
         "y1v5.case.kiyotaka-ayanokoji.replace-miyake-as-relay-anchor",
-        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita"
+        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita",
+        "y1v6.case.kiyotaka-ayanokoji.stage-gradual-academic-public-image"
       ],
       "context_evidence_refs": [
         "y1v4.ev.115",
@@ -1017,7 +1047,10 @@
         "y1v5.ev.020",
         "y1v5.ev.032",
         "y1v5.ev.071",
-        "y1v5.ev.074"
+        "y1v5.ev.074",
+        "y1v6.ev.005",
+        "y1v6.ev.012",
+        "y1v6.ev.070"
       ]
     },
     "reflection": {
@@ -1089,7 +1122,8 @@
     "communication": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v45.ev.038"
+        "y1v45.ev.038",
+        "y1v6.ev.046"
       ]
     },
     "misconduct": {
@@ -1112,19 +1146,26 @@
       "context_evidence_refs": [
         "y1v5.ev.021",
         "y1v5.ev.022",
-        "y1v5.ev.039"
+        "y1v5.ev.039",
+        "y1v6.ev.056"
       ]
     },
     "information": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past"
+      ],
       "context_evidence_refs": [
-        "y1v5.ev.023"
+        "y1v5.ev.023",
+        "y1v6.ev.045",
+        "y1v6.ev.050",
+        "y1v6.ev.059"
       ]
     },
     "trust": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v5.ev.025"
+        "y1v5.ev.025",
+        "y1v6.ev.005"
       ]
     },
     "results": {
@@ -1144,16 +1185,104 @@
       ]
     },
     "relationship": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces",
+        "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.053",
-        "y1v5.ev.067"
+        "y1v5.ev.067",
+        "y1v6.ev.006",
+        "y1v6.ev.009",
+        "y1v6.ev.035",
+        "y1v6.ev.056",
+        "y1v6.ev.061"
       ]
+    },
+    "romance": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.006",
+        "y1v6.ev.061"
+      ]
+    },
+    "secrecy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.009",
+        "y1v6.ev.059"
+      ]
+    },
+    "security": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.009"
+      ]
+    },
+    "academic": {
+      "behavioral_case_refs": [
+        "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
+        "y1v6.case.kiyotaka-ayanokoji.stage-gradual-academic-public-image"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.012",
+        "y1v6.ev.070"
+      ]
+    },
+    "retrospective": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.019"
+      ]
+    },
+    "pairing": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.035"
+      ]
+    },
+    "birthday": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.041"
+      ]
+    },
+    "question_design": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.044"
+      ]
+    },
+    "agreement": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.050"
+      ]
+    },
+    "friendship": {
+      "behavioral_case_refs": [
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
+    },
+    "investigation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.074"
+      ]
+    },
+    "development": {
+      "behavioral_case_refs": [
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle"
+      ],
+      "context_evidence_refs": []
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Original V0 extraction sometimes lists acts by Atsuomi or Yuki under Kiyotaka; actor mentions are not automatically capabilities Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. Adversarial V4 source-gap review: false Manabe witness story and Hoshinomiya's discretionary Rabbit assignment are source-scoped; group selection is not a verified VIP assignment formula. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge. Y1 V5: actor-scoped athletics and strategy evidence provisional; no maximal physical ratings, hidden truth, or future memory without audit.",
+  "semantic_audit_notes": "Original V0 extraction sometimes lists acts by Atsuomi or Yuki under Kiyotaka; actor mentions are not automatically capabilities Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. Adversarial V4 source-gap review: false Manabe witness story and Hoshinomiya's discretionary Rabbit assignment are source-scoped; group selection is not a verified VIP assignment formula. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge. Y1 V5: actor-scoped athletics and strategy evidence provisional; no maximal physical ratings, hidden truth, or future memory without audit. Y1 V6 source-scoped report evidence, no automatic future memory or guaranteed goals.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false
@@ -1176,7 +1305,8 @@
   },
   "goal_transition_refs": [
     "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning",
-    "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race"
+    "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race",
+    "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets"
   ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

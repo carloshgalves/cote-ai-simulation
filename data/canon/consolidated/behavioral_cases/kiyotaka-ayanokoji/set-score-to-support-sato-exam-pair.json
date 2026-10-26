@@ -1,0 +1,63 @@
+{
+  "id": "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "set score to support sato exam pair",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Accepts Satō as exam partner and adjusts publicly targeted scoring to keep the pairing away from penalties.",
+  "observed_result": "Shares expulsion exposure with an academically weaker partner without revealing his true ceiling.",
+  "epistemic_limits": "No confirmed final published grade or romantic reciprocation.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      83,
+      159,
+      160,
+      161,
+      162,
+      192,
+      193
+    ],
+    "chapter": 5,
+    "additional_chapters": [
+      6,
+      7
+    ],
+    "source_status": "ASSISTANT_PRIMARY_PDF_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED"
+  },
+  "other_actors": [
+    "actor.maya-sato",
+    "actor.airi-sakura"
+  ],
+  "capabilities_supported": [
+    "academic",
+    "relationship",
+    "exam"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "academic",
+    "relationship",
+    "exam"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.035",
+    "y1v6.ev.061",
+    "y1v6.ev.070"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_BOUND_REVIEW_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION",
+  "individual_review": {
+    "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+    "evidence_refs": [
+      "y1v6.ev.035",
+      "y1v6.ev.061",
+      "y1v6.ev.070"
+    ],
+    "adversarial_matrix_id": "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
+    "independent_third_party_verified": false,
+    "source_review_status": "ASSISTANT_COMPLETED"
+  }
+}

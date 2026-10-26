@@ -1,17 +1,32 @@
 {
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.yukimura",
-  "display_name": "Yukimura (given name unknown at this horizon)",
+  "display_name": "Teruhiko Yukimura (preferred name: Keisei)",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
-    "role_summary": "Class D",
-    "aliases": []
+    "role_summary": "First-year Class D student; officially called Teruhiko Yukimura, prefers Keisei among friends from Y1 V6.",
+    "aliases": [
+      "Yukimura Teruhiko",
+      "Keisei",
+      "Teruhiko"
+    ],
+    "temporal_updates": [
+      {
+        "since": "Y1_V06_CH6_P151",
+        "source_evidence_id": "y1v6.ev.058",
+        "official_given_name": "Teruhiko",
+        "preferred_given_name": "Keisei",
+        "reason_as_self_reported": "Named Teruhiko by departed mother; Keisei is the name his father wanted",
+        "scope": "FRIEND_GROUP_SOCIAL_ADDRESS_NOT_LEGAL_RENAME"
+      }
+    ]
   },
   "knowledge_time_policy": {
     "canonical_after_divergence_is_not_actor_memory": true,
@@ -19,12 +34,15 @@
   },
   "domains": {
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.062",
         "y1v4.ev.047",
         "y1v4.ev.058",
-        "y1v4.ev.085"
+        "y1v4.ev.085",
+        "y1v6.ev.058"
       ]
     },
     "academic_reasoning": {
@@ -50,7 +68,9 @@
         "y1v4.ev.018",
         "y1v4.ev.021",
         "y1v4.ev.064",
-        "y1v4.ev.117"
+        "y1v4.ev.117",
+        "y1v6.ev.034",
+        "y1v6.ev.044"
       ]
     },
     "governance": {
@@ -79,7 +99,9 @@
         "y1v4.case.yukimura.coordinate-rabbit-class-d-discretion"
       ],
       "context_evidence_refs": [
-        "y1v4.ev.035"
+        "y1v4.ev.035",
+        "y1v6.ev.038",
+        "y1v6.ev.042"
       ]
     },
     "persuasion": {
@@ -118,7 +140,8 @@
     "results": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v5.ev.032"
+        "y1v5.ev.032",
+        "y1v6.ev.034"
       ]
     },
     "emotion": {
@@ -126,11 +149,109 @@
         "y1v5.case.yukimura.respond-to-low-athletic-ranks"
       ],
       "context_evidence_refs": []
+    },
+    "pairing": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.034"
+      ]
+    },
+    "studies": {
+      "behavioral_case_refs": [
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.038",
+        "y1v6.ev.039",
+        "y1v6.ev.053"
+      ]
+    },
+    "development": {
+      "behavioral_case_refs": [
+        "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.038",
+        "y1v6.ev.042",
+        "y1v6.ev.053"
+      ]
+    },
+    "diagnostic": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.039"
+      ]
+    },
+    "reasoning": {
+      "behavioral_case_refs": [
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.039",
+        "y1v6.ev.044"
+      ]
+    },
+    "teamwork": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.042"
+      ]
+    },
+    "question_design": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.044"
+      ]
+    },
+    "teaching": {
+      "behavioral_case_refs": [
+        "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy",
+        "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.053"
+      ]
+    },
+    "friendship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
+    },
+    "cooperation": {
+      "behavioral_case_refs": [
+        "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.058"
+      ]
+    },
+    "family": {
+      "behavioral_case_refs": [
+        "y1v6.case.yukimura.request-preferred-name-keisei"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.058"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory. Y1 V6 source-scoped behavioral claims; preserve historical actor knowledge and allow alternative future goals.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false
@@ -141,5 +262,10 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [
+    "y1v6.goal.yukimura.offer-personalized-teaching",
+    "y1v6.goal.yukimura.use-preferred-name-keisei"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

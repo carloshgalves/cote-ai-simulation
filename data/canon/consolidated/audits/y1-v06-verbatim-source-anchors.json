@@ -1,0 +1,733 @@
+{
+  "schema_version": "canon-v6-primary-pdf-verbatim-anchor-v1",
+  "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+  "pdf_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+  "physical_page_count": 211,
+  "reviewer": "ASSISTANT_SOURCE_CHECK_WITH_LOCAL_PDF_TEXT_NOT_INDEPENDENT_PERSON",
+  "record_count": 80,
+  "records": [
+    {
+      "record_id": "y1v6.ev.001",
+      "pdf_page": 10,
+      "normalized_source_fragment": "hate losing far more",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.002",
+      "pdf_page": 11,
+      "normalized_source_fragment": "trustworthy people receive access",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.003",
+      "pdf_page": 15,
+      "normalized_source_fragment": "my name is nagumo miyabi",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.004",
+      "pdf_page": 17,
+      "normalized_source_fragment": "actually took notes",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.005",
+      "pdf_page": 18,
+      "normalized_source_fragment": "concealed your excellence",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.006",
+      "pdf_page": 19,
+      "normalized_source_fragment": "are you going out with anyone",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.007",
+      "pdf_page": 23,
+      "normalized_source_fragment": "i regret it",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.008",
+      "pdf_page": 23,
+      "normalized_source_fragment": "874",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.009",
+      "pdf_page": 27,
+      "normalized_source_fragment": "taken countermeasures",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.010",
+      "pdf_page": 31,
+      "normalized_source_fragment": "fifty-seven",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.011",
+      "pdf_page": 31,
+      "normalized_source_fragment": "forty-three",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.012",
+      "pdf_page": 32,
+      "normalized_source_fragment": "sixty-four",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.013",
+      "pdf_page": 34,
+      "normalized_source_fragment": "eight subjects",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.014",
+      "pdf_page": 38,
+      "normalized_source_fragment": "fifty class points",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.015",
+      "pdf_page": 40,
+      "normalized_source_fragment": "partner",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.016",
+      "pdf_page": 44,
+      "normalized_source_fragment": "same junior high",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.017",
+      "pdf_page": 47,
+      "normalized_source_fragment": "lies",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.018",
+      "pdf_page": 48,
+      "normalized_source_fragment": "expelled",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.019",
+      "pdf_page": 50,
+      "normalized_source_fragment": "recording",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.020",
+      "pdf_page": 55,
+      "normalized_source_fragment": "high-scoring",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.021",
+      "pdf_page": 56,
+      "normalized_source_fragment": "class c",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.022",
+      "pdf_page": 60,
+      "normalized_source_fragment": "class d",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.023",
+      "pdf_page": 64,
+      "normalized_source_fragment": "phones",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.024",
+      "pdf_page": 71,
+      "normalized_source_fragment": "manabe",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.025",
+      "pdf_page": 72,
+      "normalized_source_fragment": "karuizawa",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.026",
+      "pdf_page": 73,
+      "normalized_source_fragment": "yukimura",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.027",
+      "pdf_page": 76,
+      "normalized_source_fragment": "apologize",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.028",
+      "pdf_page": 78,
+      "normalized_source_fragment": "zero points",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.029",
+      "pdf_page": 79,
+      "normalized_source_fragment": "kouenji",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.030",
+      "pdf_page": 80,
+      "normalized_source_fragment": "class c will attack class d",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.031",
+      "pdf_page": 83,
+      "normalized_source_fragment": "horikita suzune and sudou ken",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.032",
+      "pdf_page": 83,
+      "normalized_source_fragment": "hirata yousuke and yamauchi haruki",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.033",
+      "pdf_page": 83,
+      "normalized_source_fragment": "kushida kikyou and ike kanji",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.034",
+      "pdf_page": 83,
+      "normalized_source_fragment": "yukimura teruhiko and inogashira kokoro",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.035",
+      "pdf_page": 83,
+      "normalized_source_fragment": "satou maya",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.036",
+      "pdf_page": 83,
+      "normalized_source_fragment": "okiya",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.037",
+      "pdf_page": 85,
+      "normalized_source_fragment": "seventy-nine",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.038",
+      "pdf_page": 87,
+      "normalized_source_fragment": "tutor",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.039",
+      "pdf_page": 100,
+      "normalized_source_fragment": "correct",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.040",
+      "pdf_page": 94,
+      "normalized_source_fragment": "seventy",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.041",
+      "pdf_page": 95,
+      "normalized_source_fragment": "october 20",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.042",
+      "pdf_page": 96,
+      "normalized_source_fragment": "sports festival",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.043",
+      "pdf_page": 97,
+      "normalized_source_fragment": "sakura",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.044",
+      "pdf_page": 101,
+      "normalized_source_fragment": "questions",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.045",
+      "pdf_page": 105,
+      "normalized_source_fragment": "questions",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.046",
+      "pdf_page": 106,
+      "normalized_source_fragment": "email",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.047",
+      "pdf_page": 108,
+      "normalized_source_fragment": "ichinose",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.048",
+      "pdf_page": 115,
+      "normalized_source_fragment": "giving me far too much credit",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.049",
+      "pdf_page": 121,
+      "normalized_source_fragment": "mathematics",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.050",
+      "pdf_page": 124,
+      "normalized_source_fragment": "incident",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.051",
+      "pdf_page": 126,
+      "normalized_source_fragment": "blog",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.052",
+      "pdf_page": 129,
+      "normalized_source_fragment": "drop out",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.053",
+      "pdf_page": 132,
+      "normalized_source_fragment": "yukimura",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.054",
+      "pdf_page": 136,
+      "normalized_source_fragment": "ryuuen",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.055",
+      "pdf_page": 140,
+      "normalized_source_fragment": "sugar",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.056",
+      "pdf_page": 150,
+      "normalized_source_fragment": "haruka",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.057",
+      "pdf_page": 152,
+      "normalized_source_fragment": "sakura",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.058",
+      "pdf_page": 151,
+      "normalized_source_fragment": "keisei",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.059",
+      "pdf_page": 158,
+      "normalized_source_fragment": "birthday",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.060",
+      "pdf_page": 157,
+      "normalized_source_fragment": "sugar",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.061",
+      "pdf_page": 161,
+      "normalized_source_fragment": "grabbed me",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.062",
+      "pdf_page": 166,
+      "normalized_source_fragment": "juice",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.063",
+      "pdf_page": 168,
+      "normalized_source_fragment": "katsuragi",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.064",
+      "pdf_page": 170,
+      "normalized_source_fragment": "fraud",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.065",
+      "pdf_page": 177,
+      "normalized_source_fragment": "questions",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.066",
+      "pdf_page": 181,
+      "normalized_source_fragment": "questions",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.067",
+      "pdf_page": 187,
+      "normalized_source_fragment": "traitor",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.068",
+      "pdf_page": 188,
+      "normalized_source_fragment": "692",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.069",
+      "pdf_page": 189,
+      "normalized_source_fragment": "hirata",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.070",
+      "pdf_page": 193,
+      "normalized_source_fragment": "sixty",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.071",
+      "pdf_page": 193,
+      "normalized_source_fragment": "kushida",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.072",
+      "pdf_page": 194,
+      "normalized_source_fragment": "ninety-eight",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.073",
+      "pdf_page": 197,
+      "normalized_source_fragment": "hand",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.074",
+      "pdf_page": 200,
+      "normalized_source_fragment": "picture",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.075",
+      "pdf_page": 202,
+      "normalized_source_fragment": "completely different",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.076",
+      "pdf_page": 204,
+      "normalized_source_fragment": "blazer",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.077",
+      "pdf_page": 205,
+      "normalized_source_fragment": "letter",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.078",
+      "pdf_page": 207,
+      "normalized_source_fragment": "transaction",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.079",
+      "pdf_page": 208,
+      "normalized_source_fragment": "three options",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    },
+    {
+      "record_id": "y1v6.ev.080",
+      "pdf_page": 208,
+      "normalized_source_fragment": "destroy her",
+      "source_check": "VERBATIM_SUBSTRING_MATCH_CONFIRMED_IN_OPERATOR_PDF",
+      "source_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+      "method": "pdftotext -layout PDF physical page; casefold phrase search; subsequent assistant semantic context inspection",
+      "limitations": "Text fragment only corroborates page location; narrative meaning and actor knowledge require separate adjudication"
+    }
+  ],
+  "source_not_committed": "COTE Y1 V6.pdf",
+  "policy": "SHORT_SOURCE_FRAGMENTS_ONLY; NO PDF CONTENT IN REPO",
+  "count_claim": "80_OF_80_ANCHORS_MATCHED_ORIGINAL_SOURCE_IN_LOCAL_DIRECT_SOURCE_CHECK"
+}

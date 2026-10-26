@@ -49,8 +49,8 @@ assert len(audit["findings"])==5 and all(x["status"].startswith("REMEDIATED") fo
 assert src["source_id"]==audit["source_id"]==cover["source"]
 assert len(idx["character_packs"])>=80
 assert len(idx["behavioral_case_paths"])>=202
-assert institutions["institutions"]["org.anhs"]["source_volume_count"]==6
-assert institutions["institutions"]["org.student-council"]["source_volume_count"]==3
+assert institutions["institutions"]["org.anhs"]["source_volume_count"]>=6
+assert institutions["institutions"]["org.student-council"]["source_volume_count"]>=3
 for e in E:
     assert e["source"]["work_id"]==src["source_id"]
     assert e["source"]["pdf_pages"] and all(1<=n<=227 for n in e["source"]["pdf_pages"])

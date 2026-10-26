@@ -1,0 +1,87 @@
+{
+  "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+  "work_id": "ln.y1.v06",
+  "title": "Classroom of the Elite Year 1 Volume 6",
+  "edition": "Seven Seas English in user-provided 211-page PDF",
+  "pdf_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+  "pdf_pages": 211,
+  "source_kind": "PRIMARY_LITERARY_SOURCE_USER_SUPPLIED",
+  "operator_selected_for_extraction": true,
+  "original_pdf_committed": false,
+  "claims_all_verified": false,
+  "record_audit": "ASSISTANT_138_OF_138_INDIVIDUAL_SEMANTIC_ADVERSARIAL_PASS_DONE_EXTERNAL_INDEPENDENT_0_OF_138_PENDING",
+  "narrative_segments": [
+    {
+      "chapter": 1,
+      "pdf_pages": [
+        10,
+        12
+      ],
+      "title": "Kushida Kikyou's Soliloquy"
+    },
+    {
+      "chapter": 2,
+      "pdf_pages": [
+        14,
+        29
+      ],
+      "title": "The Changing Class D"
+    },
+    {
+      "chapter": 3,
+      "pdf_pages": [
+        30,
+        59
+      ],
+      "title": "The Paper Shuffle"
+    },
+    {
+      "chapter": 4,
+      "pdf_pages": [
+        60,
+        75
+      ],
+      "title": "Class C Makes Its Move"
+    },
+    {
+      "chapter": 5,
+      "pdf_pages": [
+        76,
+        131
+      ],
+      "title": "A Means of Escape"
+    },
+    {
+      "chapter": 6,
+      "pdf_pages": [
+        132,
+        176
+      ],
+      "title": "The Ayanokouji Group's Formation"
+    },
+    {
+      "chapter": 7,
+      "pdf_pages": [
+        177,
+        209
+      ],
+      "title": "A Difference in Determination"
+    }
+  ],
+  "excluded_material": "Postscript on p210 and ancillary content",
+  "analysis_report": {
+    "filename": "Relatorio_COTE_Y1_V6.md",
+    "sha256": "b637e9625e3287dd53a6c3f6bbfe5a4071751bec6fca3cf8b9be6f227223d320",
+    "candidate_records": 80,
+    "report_date": "2026-10-25",
+    "source_scope": "REPORT_CANDIDATES_NOT_AUTOMATICALLY_INDEPENDENT_VERIFIED"
+  },
+  "warnings": [
+    "All locators are 1-based physical PDF pages, not printed novel pages",
+    "Narrator perspective, self-report, rumours, school-confirmed fact and Ryūen's inferences have different truth gates",
+    "Final Paper Shuffle complete official results not shown in Volume 6",
+    "No extrapolated sender identity or staged cheating authorship from circumstantial evidence",
+    "Academic ability baseline cards are source-defined ordinal grades, not numerical cognitive measurements",
+    "No character must repeat historical goal transitions after divergence"
+  ]
+}

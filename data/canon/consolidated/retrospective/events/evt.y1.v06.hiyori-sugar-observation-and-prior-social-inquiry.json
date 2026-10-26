@@ -1,0 +1,49 @@
+{
+  "id": "evt.y1.v06.hiyori-sugar-observation-and-prior-social-inquiry",
+  "event_time": "Y1_PAPER_SHUFFLE_PROBING_CLASS_D",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v6.ev.055"
+  ],
+  "prior_ambiguities": [
+    "Did Hiyori deduce sugar from the cup through exceptional pure observation?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        157,
+        158
+      ],
+      "evidence_refs": [
+        "y1v6.ev.060"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "Kiyotaka's Karuizawa-mediated inquiry establishes a girl previously asked around about Hasebe's sugar choices, offering a plausible information route for Hiyori's claim.",
+      "world_epistemic_status": "SOURCE_MODE_AND_SPEAKER_BOUNDED_PRIVATE_OR_INSTITUTIONAL_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V06_CH6_INQUIRY",
+          "status": "HEARS_PREVIOUS_QUESTIONING"
+        },
+        {
+          "actor": "actor.kei-karuizawa",
+          "since": "Y1_V06_CH6_NETWORK",
+          "status": "FINDS_OR_REPORTS_INTERVIEW"
+        },
+        {
+          "actor": "actor.hiyori-shiina",
+          "since": "Y1_V06_CH6_PROBE",
+          "status": "KNOWS_OWN_APPROACH"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Exact person ordering inquiry and Hiyori's complete process are not established.",
+    "No numeric or supernatural inference capacity may be promoted."
+  ]
+}

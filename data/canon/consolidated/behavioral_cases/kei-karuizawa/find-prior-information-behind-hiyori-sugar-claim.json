@@ -1,0 +1,54 @@
+{
+  "id": "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "find prior information behind hiyori sugar claim",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Uses her social-information network to investigate claims about Hiyori deducing Hasebe's preferred coffee sugar.",
+  "observed_result": "Discovers a girl had asked others about Hasebe's sugar habits beforehand.",
+  "epistemic_limits": "This weakens the mind-reading claim but does not identify who ordered the inquiry.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      156,
+      157,
+      158
+    ],
+    "chapter": 6,
+    "additional_chapters": [],
+    "source_status": "ASSISTANT_PRIMARY_PDF_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.hiyori-shiina"
+  ],
+  "capabilities_supported": [
+    "investigation",
+    "information",
+    "reasoning"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "investigation",
+    "information",
+    "reasoning"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.059",
+    "y1v6.ev.060"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_BOUND_REVIEW_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION",
+  "individual_review": {
+    "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+    "evidence_refs": [
+      "y1v6.ev.059",
+      "y1v6.ev.060"
+    ],
+    "adversarial_matrix_id": "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
+    "independent_third_party_verified": false,
+    "source_review_status": "ASSISTANT_COMPLETED"
+  }
+}

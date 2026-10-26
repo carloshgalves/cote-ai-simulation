@@ -1,0 +1,45 @@
+{
+  "id": "evt.y1.v06.ichinose-fraud-accusation-letter",
+  "event_time": "Y1_PAPER_SHUFFLE_PRE_EXAM",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v6.ev.064"
+  ],
+  "prior_ambiguities": [
+    "Did Ichinose actually receive fraudulent private points?",
+    "Does an alleged Ryūen signature prove sender?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        205,
+        206
+      ],
+      "evidence_refs": [
+        "y1v6.ev.077"
+      ],
+      "relationship": "CORRECTS_PRIOR_INTERPRETATION",
+      "explanation": "School authorities reject the fraud claim; Ryūen says he did not send the letters and speculates about another sender's aims. Neither the printed signature nor Ryūen's denial is independent postal authorship proof.",
+      "world_epistemic_status": "SOURCE_MODE_AND_SPEAKER_BOUNDED_PRIVATE_OR_INSTITUTIONAL_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.honami-ichinose",
+          "since": "Y1_V06_CH6_INVESTIGATION",
+          "status": "KNOWS_INSTITUTIONAL_CLEARANCE"
+        },
+        {
+          "actor": "actor.kakeru-ryuen",
+          "since": "Y1_V06_CH7_EXPLANATION",
+          "status": "DENIES_SENDING_LETTER"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Actual author and distribution chain not verified.",
+    "Discomfort with compliments elsewhere is not an indicator of fraud."
+  ]
+}

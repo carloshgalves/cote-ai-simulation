@@ -1,0 +1,57 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.yamashita",
+  "display_name": "Yamashita Saki",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v06.sevenseas.en.operator-provided"
+  ],
+  "source_status": "REPORT_CANDIDATES_DIRECT_SOURCE_REVIEW_PENDING",
+  "identity": {
+    "role_summary": "Class C student among three privately interrogated by Ryūen in Volume 6",
+    "aliases": []
+  },
+  "domains": {
+    "intimidation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.024"
+      ]
+    },
+    "information": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.024"
+      ]
+    },
+    "investigation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.025"
+      ]
+    },
+    "privacy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.025"
+      ]
+    },
+    "coercion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.025"
+      ]
+    }
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "semantic_audit_notes": "Do not promote report references to exclusive actor feats or permanent attributes before primary-source audit",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTIONS_NOT_FEATS",
+    "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
+    "verified_facts": "INDEPENDENT_AUDIT_REQUIRED"
+  }
+}

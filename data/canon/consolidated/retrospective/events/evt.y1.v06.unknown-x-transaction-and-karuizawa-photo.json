@@ -1,0 +1,61 @@
+{
+  "id": "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo",
+  "event_time": "Y1_PAPER_SHUFFLE_LATE_PLAN_AND_ROOFTOP",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v6.ev.022",
+    "y1v6.ev.025",
+    "y1v6.ev.026"
+  ],
+  "prior_ambiguities": [
+    "Who is X to Ryūen?",
+    "What caused Ryūen to supply wrong answers?",
+    "Who placed physical cheating evidence?",
+    "What will be done with the photograph?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        202,
+        208
+      ],
+      "evidence_refs": [
+        "y1v6.ev.074",
+        "y1v6.ev.075",
+        "y1v6.ev.076",
+        "y1v6.ev.078",
+        "y1v6.ev.079",
+        "y1v6.ev.080"
+      ],
+      "relationship": "SUPPLEMENTS",
+      "explanation": "An anonymous transaction warns of Horikita's school-approved papers and requests data/changes. Ryūen reports choosing false answers rather than expelling Horikita or triggering the obvious cheating-risk branch. He threatens a photographed person to force X to appear. PDF p207 states Ryūen's continuing goal of reaching Class A; new tactic against Kushida does not change his distant objective.",
+      "world_epistemic_status": "SOURCE_MODE_AND_SPEAKER_BOUNDED_PRIVATE_OR_INSTITUTIONAL_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kakeru-ryuen",
+          "since": "Y1_V06_CH7_MESSAGE",
+          "status": "RECEIVED_X_MESSAGE_NOT_IDENTITY"
+        },
+        {
+          "actor": "actor.kikyo-kushida",
+          "since": "Y1_V06_CH7_ROOFTOP",
+          "status": "HEARD_RYUEN_ACCOUNT_ONLY"
+        },
+        {
+          "actor": "actor.kei-karuizawa",
+          "since": "EARLIER_HARASSMENT",
+          "status": "KNOWS_OWN_PAST_NOT_NEW_X_PHOTO_THREAT"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Anonymous sender's actual identity is not identified by Ryūen.",
+    "Authorship and insertion moment of cheat sheet not independently proven.",
+    "No later new assault against photographed person occurs within V6.",
+    "Karuizawa not automatically aware of the rooftop threat."
+  ]
+}

@@ -152,10 +152,20 @@
       ],
       "cases": []
     },
-    "45": {
+    "43": {
       "evidence": [
         "y1v5.ev.014"
       ],
+      "cases": []
+    },
+    "44": {
+      "evidence": [
+        "y1v5.ev.014"
+      ],
+      "cases": []
+    },
+    "45": {
+      "evidence": [],
       "cases": [
         "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness",
         "y1v5.case.suzune-horikita.propose-performance-optimized-lineup",
@@ -248,10 +258,22 @@
         "y1v5.case.suzune-horikita.fail-to-synchronize-three-legged"
       ]
     },
+    "63": {
+      "evidence": [
+        "y1v5.ev.021"
+      ],
+      "cases": []
+    },
     "64": {
       "evidence": [
         "y1v5.ev.021",
         "y1v5.ev.022"
+      ],
+      "cases": []
+    },
+    "65": {
+      "evidence": [
+        "y1v5.ev.021"
       ],
       "cases": []
     },
@@ -334,6 +356,18 @@
       "cases": [
         "y1v5.case.rokusuke-koenji.withdraw-claimed-illness-under-pressure"
       ]
+    },
+    "89": {
+      "evidence": [
+        "y1v5.ev.028"
+      ],
+      "cases": []
+    },
+    "90": {
+      "evidence": [
+        "y1v5.ev.028"
+      ],
+      "cases": []
     },
     "91": {
       "evidence": [
@@ -429,9 +463,28 @@
         "y1v5.case.katsuragi.restore-tug-team-coordination"
       ]
     },
+    "106": {
+      "evidence": [
+        "y1v5.ev.035"
+      ],
+      "cases": []
+    },
+    "107": {
+      "evidence": [
+        "y1v5.ev.035"
+      ],
+      "cases": []
+    },
     "108": {
       "evidence": [
+        "y1v5.ev.035",
         "y1v5.ev.036"
+      ],
+      "cases": []
+    },
+    "109": {
+      "evidence": [
+        "y1v5.ev.035"
       ],
       "cases": []
     },
@@ -653,6 +706,12 @@
       ],
       "cases": []
     },
+    "161": {
+      "evidence": [
+        "y1v5.ev.049"
+      ],
+      "cases": []
+    },
     "162": {
       "evidence": [
         "y1v5.ev.049"
@@ -825,6 +884,7 @@
     },
     "186": {
       "evidence": [
+        "y1v5.ev.057",
         "y1v5.ev.058"
       ],
       "cases": [
@@ -833,6 +893,7 @@
     },
     "187": {
       "evidence": [
+        "y1v5.ev.057",
         "y1v5.ev.078"
       ],
       "cases": [
@@ -852,7 +913,7 @@
     },
     "189": {
       "evidence": [
-        "y1v5.ev.059",
+        "y1v5.ev.057",
         "y1v5.ev.078"
       ],
       "cases": [
@@ -861,7 +922,9 @@
       ]
     },
     "190": {
-      "evidence": [],
+      "evidence": [
+        "y1v5.ev.059"
+      ],
       "cases": [
         "y1v5.case.shibata-so.compete-with-sudo-in-obstacle-event"
       ]

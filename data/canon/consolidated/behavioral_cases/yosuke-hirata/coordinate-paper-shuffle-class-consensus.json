@@ -1,0 +1,67 @@
+{
+  "id": "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "coordinate paper shuffle class consensus",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Works with Suzune to organize study and diagnostic-score strategy before the paired examination.",
+  "observed_result": "Class D collectively follows a plan and the school later confirms much of the predicted pair list.",
+  "epistemic_limits": "Agreement under uncertainty need not mean universal ability or future compliance.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      40,
+      41,
+      42,
+      43,
+      56,
+      57,
+      58,
+      76,
+      77,
+      78,
+      79
+    ],
+    "chapter": 3,
+    "additional_chapters": [
+      5
+    ],
+    "source_status": "ASSISTANT_PRIMARY_PDF_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED"
+  },
+  "other_actors": [
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "exam",
+    "cooperation"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "leadership",
+    "exam",
+    "cooperation"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.015",
+    "y1v6.ev.021",
+    "y1v6.ev.027",
+    "y1v6.ev.028"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_BOUND_REVIEW_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION",
+  "individual_review": {
+    "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+    "evidence_refs": [
+      "y1v6.ev.015",
+      "y1v6.ev.021",
+      "y1v6.ev.027",
+      "y1v6.ev.028"
+    ],
+    "adversarial_matrix_id": "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus",
+    "independent_third_party_verified": false,
+    "source_review_status": "ASSISTANT_COMPLETED"
+  }
+}

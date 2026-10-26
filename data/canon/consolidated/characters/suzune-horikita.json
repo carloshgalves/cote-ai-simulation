@@ -9,7 +9,8 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -88,7 +89,8 @@
     "ethics": {
       "behavioral_case_refs": [
         "y1v1.case.s.refuse-forced-friendship",
-        "y1v2.case.suzune-horikita.conditional-aid-reassessment"
+        "y1v2.case.suzune-horikita.conditional-aid-reassessment",
+        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk"
       ],
       "context_evidence_refs": [
         "y1v1.ev.005",
@@ -97,7 +99,11 @@
         "y1v2.ev.019",
         "y1v2.ev.066",
         "y1v3.ev.100",
-        "y1v5.ev.046"
+        "y1v5.ev.046",
+        "y1v6.ev.017",
+        "y1v6.ev.018",
+        "y1v6.ev.047",
+        "y1v6.ev.067"
       ]
     },
     "economy": {
@@ -177,7 +183,9 @@
         "y1v45.ev.034",
         "y1v45.ev.036",
         "y1v5.ev.011",
-        "y1v5.ev.046"
+        "y1v5.ev.046",
+        "y1v6.ev.045",
+        "y1v6.ev.049"
       ]
     },
     "leadership": {
@@ -188,7 +196,9 @@
         "y1v3.case.suzune-horikita.accept-island-leadership",
         "y1v5.case.suzune-horikita.fail-to-synchronize-three-legged",
         "y1v5.case.suzune-horikita.propose-performance-optimized-lineup",
-        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility",
+        "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
+        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk"
       ],
       "context_evidence_refs": [
         "y1v1.ev.031",
@@ -221,7 +231,10 @@
         "y1v5.ev.070",
         "y1v5.ev.071",
         "y1v5.ev.072",
-        "y1v5.ev.079"
+        "y1v5.ev.079",
+        "y1v6.ev.018",
+        "y1v6.ev.027",
+        "y1v6.ev.067"
       ]
     },
     "persuasion": {
@@ -305,7 +318,10 @@
         "y1v4.case.suzune-horikita.challenge-rival-alliance-threat",
         "y1v4.case.suzune-horikita.test-group-assignment-hypothesis",
         "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation",
-        "y1v5.case.suzune-horikita.propose-performance-optimized-lineup"
+        "y1v5.case.suzune-horikita.propose-performance-optimized-lineup",
+        "y1v6.case.suzune-horikita.choose-class-c-as-academic-opponent",
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets",
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
       ],
       "context_evidence_refs": [
         "y1v1.ev.070",
@@ -377,7 +393,11 @@
         "y1v5.ev.074",
         "y1v5.ev.075",
         "y1v5.ev.076",
-        "y1v5.ev.078"
+        "y1v5.ev.078",
+        "y1v6.ev.015",
+        "y1v6.ev.021",
+        "y1v6.ev.028",
+        "y1v6.ev.065"
       ]
     },
     "emotion": {
@@ -432,12 +452,18 @@
         "y1v4.ev.046",
         "y1v4.ev.067",
         "y1v4.ev.068",
-        "y1v4.ev.124"
+        "y1v4.ev.124",
+        "y1v6.ev.017"
       ]
     },
     "exam": {
       "behavioral_case_refs": [
-        "y1v3.case.suzune-horikita.accept-island-leadership"
+        "y1v3.case.suzune-horikita.accept-island-leadership",
+        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust",
+        "y1v6.case.suzune-horikita.choose-class-c-as-academic-opponent",
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets",
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution",
+        "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation"
       ],
       "context_evidence_refs": [
         "y1v1.ev.106",
@@ -458,11 +484,25 @@
         "y1v5.ev.004",
         "y1v5.ev.026",
         "y1v5.ev.055",
-        "y1v5.ev.059"
+        "y1v5.ev.059",
+        "y1v6.ev.015",
+        "y1v6.ev.020",
+        "y1v6.ev.021",
+        "y1v6.ev.028",
+        "y1v6.ev.031",
+        "y1v6.ev.045",
+        "y1v6.ev.049",
+        "y1v6.ev.065",
+        "y1v6.ev.066",
+        "y1v6.ev.072"
       ]
     },
     "motivation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust",
+        "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
+        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.134",
         "y1v2.ev.029",
@@ -476,7 +516,8 @@
         "y1v5.ev.075",
         "y1v5.ev.078",
         "y1v5.ev.079",
-        "y1v5.ev.080"
+        "y1v5.ev.080",
+        "y1v6.ev.018"
       ]
     },
     "resources": {
@@ -512,7 +553,8 @@
     "reasoning": {
       "behavioral_case_refs": [
         "y1v4.case.suzune-horikita.test-group-assignment-hypothesis",
-        "y1v45.case.suzune-horikita.analyze-fortune-reading-as-patterns"
+        "y1v45.case.suzune-horikita.analyze-fortune-reading-as-patterns",
+        "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets"
       ],
       "context_evidence_refs": [
         "y1v4.ev.042",
@@ -521,12 +563,15 @@
         "y1v45.ev.005",
         "y1v45.ev.020",
         "y1v5.ev.002",
-        "y1v5.ev.066"
+        "y1v5.ev.066",
+        "y1v6.ev.015",
+        "y1v6.ev.020"
       ]
     },
     "epistemics": {
       "behavioral_case_refs": [
-        "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation"
+        "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation",
+        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk"
       ],
       "context_evidence_refs": [
         "y1v4.ev.043",
@@ -539,7 +584,8 @@
         "y1v5.ev.065",
         "y1v5.ev.066",
         "y1v5.ev.077",
-        "y1v5.ev.078"
+        "y1v5.ev.078",
+        "y1v6.ev.016"
       ]
     },
     "politics": {
@@ -553,7 +599,8 @@
     "negotiation": {
       "behavioral_case_refs": [
         "y1v4.case.suzune-horikita.challenge-rival-alliance-threat",
-        "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation"
+        "y1v5.case.suzune-horikita.attempt-counter-recording-negotiation",
+        "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness"
       ],
       "context_evidence_refs": [
         "y1v4.ev.077",
@@ -619,7 +666,8 @@
     },
     "relationship": {
       "behavioral_case_refs": [
-        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility"
+        "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility",
+        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust"
       ],
       "context_evidence_refs": [
         "y1v5.ev.018",
@@ -630,23 +678,28 @@
         "y1v5.ev.069",
         "y1v5.ev.072",
         "y1v5.ev.073",
-        "y1v5.ev.080"
+        "y1v5.ev.080",
+        "y1v6.ev.047"
       ]
     },
     "cooperation": {
       "behavioral_case_refs": [
-        "y1v5.case.suzune-horikita.fail-to-synchronize-three-legged"
+        "y1v5.case.suzune-horikita.fail-to-synchronize-three-legged",
+        "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation"
       ],
       "context_evidence_refs": [
         "y1v5.ev.021",
         "y1v5.ev.022",
-        "y1v5.ev.039"
+        "y1v5.ev.039",
+        "y1v6.ev.027",
+        "y1v6.ev.047"
       ]
     },
     "information": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v5.ev.023"
+        "y1v5.ev.023",
+        "y1v6.ev.045"
       ]
     },
     "trust": {
@@ -667,7 +720,9 @@
         "y1v5.ev.038",
         "y1v5.ev.039",
         "y1v5.ev.040",
-        "y1v5.ev.059"
+        "y1v5.ev.059",
+        "y1v6.ev.010",
+        "y1v6.ev.031"
       ]
     },
     "misconduct": {
@@ -688,7 +743,8 @@
         "y1v5.ev.047",
         "y1v5.ev.062",
         "y1v5.ev.075",
-        "y1v5.ev.076"
+        "y1v5.ev.076",
+        "y1v6.ev.017"
       ]
     },
     "discipline": {
@@ -699,15 +755,104 @@
       ]
     },
     "counterstrategy": {
+      "behavioral_case_refs": [
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ],
+      "context_evidence_refs": [
+        "y1v5.ev.077",
+        "y1v6.ev.066"
+      ]
+    },
+    "academic": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v5.ev.077"
+        "y1v6.ev.010"
       ]
+    },
+    "development": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.010"
+      ]
+    },
+    "retrospective": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.016"
+      ]
+    },
+    "privacy": {
+      "behavioral_case_refs": [
+        "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.016"
+      ]
+    },
+    "teamwork": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.020"
+      ]
+    },
+    "opponent_selection": {
+      "behavioral_case_refs": [
+        "y1v6.case.suzune-horikita.choose-class-c-as-academic-opponent"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.021"
+      ]
+    },
+    "apology": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.027"
+      ]
+    },
+    "pairing": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.028",
+        "y1v6.ev.031"
+      ]
+    },
+    "agreement": {
+      "behavioral_case_refs": [
+        "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.049",
+        "y1v6.ev.072"
+      ]
+    },
+    "submission": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.065"
+      ]
+    },
+    "authority": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.066"
+      ]
+    },
+    "uncertainty": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.072"
+      ]
+    },
+    "school_authority": {
+      "behavioral_case_refs": [
+        "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution"
+      ],
+      "context_evidence_refs": []
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. V4.5 late disclosures only supplement actor-scoped history, never imported as earlier actor knowledge. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory. Y1 V6 source-scoped behavioral claims; preserve historical actor knowledge and allow alternative future goals.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false
@@ -730,7 +875,10 @@
   },
   "goal_transition_refs": [
     "y1v5.goal.suzune-horikita.individual-excellence-to-reciprocal-alliance",
-    "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal"
+    "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal",
+    "y1v6.goal.suzune-horikita.coordinate-classwide-exam",
+    "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling",
+    "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack"
   ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

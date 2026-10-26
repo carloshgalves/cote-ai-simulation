@@ -22,7 +22,8 @@
         "y1v5.ev.061",
         "y1v5.ev.062",
         "y1v5.ev.063",
-        "y1v5.ev.074"
+        "y1v5.ev.074",
+        "y1v6.ev.051"
       ]
     },
     "evt.y1.v04.zodiac-rabbit-reward": {
@@ -96,7 +97,10 @@
         "y1v5.ev.074",
         "y1v5.ev.075",
         "y1v5.ev.076",
-        "y1v5.ev.077"
+        "y1v5.ev.077",
+        "y1v6.ev.019",
+        "y1v6.ev.025",
+        "y1v6.ev.026"
       ]
     },
     "evt.y1.v05.relay-unmasked-physical-capacity": {
@@ -128,7 +132,78 @@
         "y1v5.ev.072",
         "y1v5.ev.073",
         "y1v5.ev.079",
-        "y1v5.ev.080"
+        "y1v5.ev.080",
+        "y1v6.ev.004",
+        "y1v6.ev.010"
+      ]
+    },
+    "evt.y1.v06.kushida-juniorhigh-secret-breach": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.v06.kushida-juniorhigh-secret-breach.json",
+      "status": "PARTIALLY_EXPLAINED",
+      "source_evidence_refs": [
+        "y1v6.ev.001",
+        "y1v6.ev.002",
+        "y1v6.ev.016",
+        "y1v6.ev.051"
+      ]
+    },
+    "evt.y1.v06.paper-shuffle-question-authority-and-swap": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.v06.paper-shuffle-question-authority-and-swap.json",
+      "status": "RESOLVED",
+      "source_evidence_refs": [
+        "y1v6.ev.045",
+        "y1v6.ev.065",
+        "y1v6.ev.066"
+      ]
+    },
+    "evt.y1.v06.math-wager-and-future-interference": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.v06.math-wager-and-future-interference.json",
+      "status": "PARTIALLY_EXPLAINED",
+      "source_evidence_refs": [
+        "y1v6.ev.049",
+        "y1v6.ev.050",
+        "y1v6.ev.071",
+        "y1v6.ev.072",
+        "y1v6.ev.073"
+      ]
+    },
+    "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.v06.unknown-x-transaction-and-karuizawa-photo.json",
+      "status": "PARTIALLY_EXPLAINED",
+      "source_evidence_refs": [
+        "y1v6.ev.022",
+        "y1v6.ev.025",
+        "y1v6.ev.026",
+        "y1v6.ev.074",
+        "y1v6.ev.075",
+        "y1v6.ev.076",
+        "y1v6.ev.078",
+        "y1v6.ev.079",
+        "y1v6.ev.080"
+      ]
+    },
+    "evt.y1.v06.ichinose-fraud-accusation-letter": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.v06.ichinose-fraud-accusation-letter.json",
+      "status": "PARTIALLY_EXPLAINED",
+      "source_evidence_refs": [
+        "y1v6.ev.064",
+        "y1v6.ev.077"
+      ]
+    },
+    "evt.y1.v06.hiyori-sugar-observation-and-prior-social-inquiry": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.v06.hiyori-sugar-observation-and-prior-social-inquiry.json",
+      "status": "PARTIALLY_EXPLAINED",
+      "source_evidence_refs": [
+        "y1v6.ev.055",
+        "y1v6.ev.060"
+      ]
+    },
+    "evt.y1.v03.ryuen-katsuragi-alliance-contract-terms": {
+      "path": "data/canon/consolidated/retrospective/events/evt.y1.v03.ryuen-katsuragi-alliance-contract-terms.json",
+      "status": "PARTIALLY_EXPLAINED",
+      "source_evidence_refs": [
+        "y1v6.ev.007",
+        "y1v6.ev.063"
       ]
     }
   },
@@ -308,6 +383,99 @@
       "evt.y1.v05.sudo-withdrawal-and-return"
     ],
     "y1v5.ev.080": [
+      "evt.y1.v05.sudo-withdrawal-and-return"
+    ],
+    "y1v6.ev.001": [
+      "evt.y1.v06.kushida-juniorhigh-secret-breach"
+    ],
+    "y1v6.ev.002": [
+      "evt.y1.v06.kushida-juniorhigh-secret-breach"
+    ],
+    "y1v6.ev.016": [
+      "evt.y1.v06.kushida-juniorhigh-secret-breach"
+    ],
+    "y1v6.ev.051": [
+      "evt.y1.v04.zodiac-dragon-vip-disclosure",
+      "evt.y1.v06.kushida-juniorhigh-secret-breach"
+    ],
+    "y1v6.ev.045": [
+      "evt.y1.v06.paper-shuffle-question-authority-and-swap"
+    ],
+    "y1v6.ev.065": [
+      "evt.y1.v06.paper-shuffle-question-authority-and-swap"
+    ],
+    "y1v6.ev.066": [
+      "evt.y1.v06.paper-shuffle-question-authority-and-swap"
+    ],
+    "y1v6.ev.049": [
+      "evt.y1.v06.math-wager-and-future-interference"
+    ],
+    "y1v6.ev.050": [
+      "evt.y1.v06.math-wager-and-future-interference"
+    ],
+    "y1v6.ev.071": [
+      "evt.y1.v06.math-wager-and-future-interference"
+    ],
+    "y1v6.ev.072": [
+      "evt.y1.v06.math-wager-and-future-interference"
+    ],
+    "y1v6.ev.073": [
+      "evt.y1.v06.math-wager-and-future-interference"
+    ],
+    "y1v6.ev.022": [
+      "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+    ],
+    "y1v6.ev.025": [
+      "evt.y1.v05.class-d-roster-leak-and-counterplay",
+      "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+    ],
+    "y1v6.ev.026": [
+      "evt.y1.v05.class-d-roster-leak-and-counterplay",
+      "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+    ],
+    "y1v6.ev.074": [
+      "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+    ],
+    "y1v6.ev.075": [
+      "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+    ],
+    "y1v6.ev.076": [
+      "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+    ],
+    "y1v6.ev.078": [
+      "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+    ],
+    "y1v6.ev.079": [
+      "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+    ],
+    "y1v6.ev.080": [
+      "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
+    ],
+    "y1v6.ev.064": [
+      "evt.y1.v06.ichinose-fraud-accusation-letter"
+    ],
+    "y1v6.ev.077": [
+      "evt.y1.v06.ichinose-fraud-accusation-letter"
+    ],
+    "y1v6.ev.055": [
+      "evt.y1.v06.hiyori-sugar-observation-and-prior-social-inquiry"
+    ],
+    "y1v6.ev.060": [
+      "evt.y1.v06.hiyori-sugar-observation-and-prior-social-inquiry"
+    ],
+    "y1v6.ev.007": [
+      "evt.y1.v03.ryuen-katsuragi-alliance-contract-terms"
+    ],
+    "y1v6.ev.063": [
+      "evt.y1.v03.ryuen-katsuragi-alliance-contract-terms"
+    ],
+    "y1v6.ev.019": [
+      "evt.y1.v05.class-d-roster-leak-and-counterplay"
+    ],
+    "y1v6.ev.004": [
+      "evt.y1.v05.sudo-withdrawal-and-return"
+    ],
+    "y1v6.ev.010": [
       "evt.y1.v05.sudo-withdrawal-and-return"
     ]
   },

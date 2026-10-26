@@ -63,7 +63,21 @@
       "condition": "ONLY_IF_STUDENT_PRIVATE_POINTS_BELOW_1000",
       "source_pdf_page": 19
     },
-    "individual_winner_reward_choice_note": "First three places only: private points OR nontransferable written-test points. Last-place fallback is NOT an elective choice."
+    "individual_winner_reward_choice_note": "First three places only: private points OR nontransferable written-test points. Last-place fallback is NOT an elective choice.",
+    "team_loss_rule_source_discrepancy": {
+      "state": "UNRESOLVED_PRINTED_RULE_VS_CLOSING_NARRATION",
+      "printed_pdf_page": 18,
+      "printed_rule": "Each class on losing team loses 100 class points",
+      "closing_pdf_pages": [
+        190,
+        191
+      ],
+      "closing_narration_class_b": "B gains 50 rank points but narration states loss of 50 for White defeat; net 0",
+      "closing_narration_class_c": "C loses 100 for White defeat",
+      "known_reason_for_difference": "NOT_ESTABLISHED",
+      "handling": "RETAIN BOTH CLAIMS; do not silently change printed rule or narrated totals",
+      "evidence_ref": "y1v5.ev.059"
+    }
   },
   "roster": {
     "deadline": "17:00 the day before festival",
@@ -205,7 +219,8 @@
       "D": -100
     },
     "first_year_mvp": "actor.shibata-so",
-    "first_year_mvp_source": "y1v5.ev.059"
+    "first_year_mvp_source": "y1v5.ev.059",
+    "first_year_net_class_points_provenance": "CLOSING_NARRATION_REPORTED_VALUES_NOT_A_RECONCILED_FORMAL_SCORING_CALCULATION"
   },
   "limitations": [
     "Source not sufficient for complete athlete-by-heat placements or event-level ranking table",

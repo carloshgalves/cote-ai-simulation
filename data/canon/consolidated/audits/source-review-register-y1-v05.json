@@ -384,10 +384,11 @@
       "chapter": 3,
       "pdf_pages": [
         42,
-        45
+        43,
+        44
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Class D settles strategic disagreement through a show-of-hands vote, documenting conflicting collective and individual goals; do not infer the entire class unanimously agreed.",
+      "primary_claim": "Class D resolves its festival participation strategy by a show-of-hands vote: Horikita's strength-optimized team plan receives 16 votes, Karuizawa's individual-opportunity plan 13, with the remaining students abstaining. Hirata administers the vote; the result shows majority preference, not unanimous endorsement or permanent team loyalty.",
       "actor_ids": [
         "actor.yosuke-hirata",
         "actor.suzune-horikita",
@@ -395,7 +396,7 @@
         "actor.kikyo-kushida"
       ],
       "related_event_ids": [],
-      "semantic_review": "ASSISTANT_PRIMARY_PDF_SEMANTIC_ADVERSARIAL_PASS_INDEPENDENT_REVIEW_PENDING",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_CONFLICT_RECHECK_PENDING_INDEPENDENT_ADJUDICATION",
       "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
@@ -405,7 +406,7 @@
         "actor source and knowledge time",
         "cross-volume provenance"
       ],
-      "review_note": "Assistant source-window review of physical PDF pp 42,45: actor and event boundaries checked, OBSERVED separated from school-certified fact, later reveals and counterfactuals are not backdated. Independent reviewer pending.",
+      "review_note": "PDF pp43–44 explicitly show vote 16 vs 13 plus abstentions",
       "verified_by_independent_reviewer": false
     },
     {
@@ -594,10 +595,12 @@
       "chapter": 4,
       "pdf_pages": [
         62,
-        64
+        63,
+        64,
+        65
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Horikita and Onodera struggle to synchronize in three-legged practice, finishing third and quarreling; Hirata and Ayanokōji coordinate smoothly at practice speed; Sakura/Inogashira perform poorly.",
+      "primary_claim": "During three-legged practice, Horikita and Onodera fail to synchronize, while Hirata and Ayanokōji show coordinated pacing. At p65, Ayanokōji ties legs with Suzune, deliberately accelerates beyond her ability to match him, catches her stumble and explicitly demonstrates that coordination requires adapting tempo to the partner; this bounded pedagogical scene is not a calibrated maximum-speed comparison.",
       "actor_ids": [
         "actor.suzune-horikita",
         "actor.onodera",
@@ -606,7 +609,7 @@
         "actor.airi-sakura"
       ],
       "related_event_ids": [],
-      "semantic_review": "ASSISTANT_PRIMARY_PDF_SEMANTIC_ADVERSARIAL_PASS_INDEPENDENT_REVIEW_PENDING",
+      "semantic_review": "ASSISTANT_DIRECT_EPISODE_SEMANTIC_REMEDIATION_PENDING_INDEPENDENT_REVIEW",
       "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
@@ -616,7 +619,7 @@
         "actor source and knowledge time",
         "cross-volume provenance"
       ],
-      "review_note": "Assistant source-window review of physical PDF pp 62,64: actor and event boundaries checked, OBSERVED separated from school-certified fact, later reveals and counterfactuals are not backdated. Independent reviewer pending.",
+      "review_note": "Episode-specific observation reconciled with superseded PR #34 source and bounded against unearned global performance conclusions.",
       "verified_by_independent_reviewer": false
     },
     {
@@ -804,10 +807,12 @@
       "chapter": 6,
       "pdf_pages": [
         88,
+        89,
+        90,
         91
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Kōenji claims illness and withdraws; Sudō reacts aggressively and Hirata and Ayanokōji intervene. The narrator suspects malingering but no clinical diagnosis establishes it.",
+      "primary_claim": "Kōenji claims illness and withdraws without clinical corroboration. On p90, Sudō throws a strong punch, and Kōenji catches the fist in his palm without apparently needing to look at him; Hirata prevents a repeat. This isolated defense is not a verified full-contact combat-strength ranking, and alleged illness is not medically adjudicated.",
       "actor_ids": [
         "actor.ken-sudo",
         "actor.rokusuke-koenji",
@@ -815,7 +820,7 @@
         "actor.kiyotaka-ayanokoji"
       ],
       "related_event_ids": [],
-      "semantic_review": "ASSISTANT_PRIMARY_PDF_SEMANTIC_ADVERSARIAL_PASS_INDEPENDENT_REVIEW_PENDING",
+      "semantic_review": "ASSISTANT_DIRECT_EPISODE_SEMANTIC_REMEDIATION_PENDING_INDEPENDENT_REVIEW",
       "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
@@ -825,7 +830,7 @@
         "actor source and knowledge time",
         "cross-volume provenance"
       ],
-      "review_note": "Assistant source-window review of physical PDF pp 88,91: actor and event boundaries checked, OBSERVED separated from school-certified fact, later reveals and counterfactuals are not backdated. Independent reviewer pending.",
+      "review_note": "Episode-specific observation reconciled with superseded PR #34 source and bounded against unearned global performance conclusions.",
       "verified_by_independent_reviewer": false
     },
     {
@@ -1012,10 +1017,14 @@
       "chapter": 6,
       "pdf_pages": [
         105,
+        106,
+        107,
+        108,
+        109,
         110
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Boys' tug-of-war exposes Red's internal Class A factional cooperation problem; Katsuragi intervenes to recover teamwork, while the B/C coalition changes formation and contests subsequent rounds.",
+      "primary_claim": "Katsuragi and Hirata organize Red's boys' tug-of-war by placing participants in height order to distribute pulling force. Sakayanagi-aligned Class A boys hesitate and challenge Katsuragi, whose intervention restores cooperation; the Red side eventually wins the deciding round despite opponent formation changes. This is a local team tactic, not proof that height-order always wins.",
       "actor_ids": [
         "actor.katsuragi",
         "actor.yosuke-hirata",
@@ -1024,7 +1033,7 @@
         "actor.arisu-sakayanagi"
       ],
       "related_event_ids": [],
-      "semantic_review": "ASSISTANT_PRIMARY_PDF_SEMANTIC_ADVERSARIAL_PASS_INDEPENDENT_REVIEW_PENDING",
+      "semantic_review": "ASSISTANT_DIRECT_EPISODE_SEMANTIC_REMEDIATION_PENDING_INDEPENDENT_REVIEW",
       "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
@@ -1034,7 +1043,7 @@
         "actor source and knowledge time",
         "cross-volume provenance"
       ],
-      "review_note": "Assistant source-window review of physical PDF pp 105,110: actor and event boundaries checked, OBSERVED separated from school-certified fact, later reveals and counterfactuals are not backdated. Independent reviewer pending.",
+      "review_note": "Episode-specific observation reconciled with superseded PR #34 source and bounded against unearned global performance conclusions.",
       "verified_by_independent_reviewer": false
     },
     {
@@ -1440,17 +1449,18 @@
       "chapter": 8,
       "pdf_pages": [
         160,
+        161,
         162
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "During the scavenger hunt Ayanokōji receives a difficult requirement involving bringing several friends; Ike performs well in his heat. The local event result cannot be turned into global social ability.",
+      "primary_claim": "In scavenger hunt Ayanokōji draws an unworkable friend-related prompt, redraws after the mandatory 30-second wait and rejects the second 'person you love' prompt, incurring another delay; on the third draw he searches for a table clock, cannot locate one before the others finish, and comes last in his heat. Ike wins his own heat. This result measures prompt luck plus tactical hesitation, not physical ceiling or global social ability.",
       "actor_ids": [
         "actor.kiyotaka-ayanokoji",
         "actor.kanji-ike",
         "actor.kakeru-ryuen"
       ],
       "related_event_ids": [],
-      "semantic_review": "ASSISTANT_PRIMARY_PDF_SEMANTIC_ADVERSARIAL_PASS_INDEPENDENT_REVIEW_PENDING",
+      "semantic_review": "ASSISTANT_DIRECT_EPISODE_SEMANTIC_REMEDIATION_PENDING_INDEPENDENT_REVIEW",
       "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
@@ -1460,7 +1470,7 @@
         "actor source and knowledge time",
         "cross-volume provenance"
       ],
-      "review_note": "Assistant source-window review of physical PDF pp 160,162: actor and event boundaries checked, OBSERVED separated from school-certified fact, later reveals and counterfactuals are not backdated. Independent reviewer pending.",
+      "review_note": "Episode-specific observation reconciled with superseded PR #34 source and bounded against unearned global performance conclusions.",
       "verified_by_independent_reviewer": false
     },
     {
@@ -1681,10 +1691,13 @@
       "chapter": 9,
       "pdf_pages": [
         185,
-        188
+        186,
+        187,
+        188,
+        189
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Ayanokōji and Manabu demonstrate extraordinary relay running; Manabu delays departure for their encounter, and Ayanokōji's path is obstructed by a falling runner. A clean straight-line comparison is unobserved.",
+      "primary_claim": "In the final relay Ayanokōji and Manabu run seriously at exceptional observed speed; Manabu has stood waiting to compete with him. A fallen runner obstructs Ayanokōji near the end, and Manabu finishes ahead after the delay. The source provides no times and explicitly does not establish who would have won an unobstructed sprint.",
       "actor_ids": [
         "actor.kiyotaka-ayanokoji",
         "actor.manabu-horikita",
@@ -1694,7 +1707,7 @@
       "related_event_ids": [
         "evt.y1.v05.relay-unmasked-physical-capacity"
       ],
-      "semantic_review": "ASSISTANT_PRIMARY_PDF_SEMANTIC_ADVERSARIAL_PASS_INDEPENDENT_REVIEW_PENDING",
+      "semantic_review": "ASSISTANT_DIRECT_EPISODE_SEMANTIC_REMEDIATION_PENDING_INDEPENDENT_REVIEW",
       "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
@@ -1704,7 +1717,7 @@
         "actor source and knowledge time",
         "cross-volume provenance"
       ],
-      "review_note": "Assistant source-window review of physical PDF pp 185,188: actor and event boundaries checked, OBSERVED separated from school-certified fact, later reveals and counterfactuals are not backdated. Independent reviewer pending.",
+      "review_note": "Episode-specific observation reconciled with superseded PR #34 source and bounded against unearned global performance conclusions.",
       "verified_by_independent_reviewer": false
     },
     {
@@ -1740,11 +1753,11 @@
       "work_id": "ln.y1.v05.sevenseas.en.operator-provided",
       "chapter": 9,
       "pdf_pages": [
-        189,
+        190,
         191
       ],
       "source_mode": "OBSERVED",
-      "primary_claim": "Red Team wins overall, but first-year class order B>C>A>D; net class points B 0, C -100, A -50, D -100. Shibata earns first-year MVP; Sudō does not.",
+      "primary_claim": "Closing ceremony: Red wins; first-year order B > C > A > D; narration reports net first-year class points B 0, C -100, A -50, D -100, and Shibata MVP. Source conflict preserved: printed rule on physical p18 says each losing White class loses 100, whereas closing narration on pp190–191 says Class B lost only 50 and thus cancels its +50 first-place reward. These are two separate source statements; actual reason for apparent difference is not established.",
       "actor_ids": [
         "actor.ken-sudo",
         "actor.kiyotaka-ayanokoji",
@@ -1753,7 +1766,7 @@
         "actor.shibata-so"
       ],
       "related_event_ids": [],
-      "semantic_review": "ASSISTANT_PRIMARY_PDF_SEMANTIC_ADVERSARIAL_PASS_INDEPENDENT_REVIEW_PENDING",
+      "semantic_review": "ASSISTANT_DIRECT_SOURCE_CONFLICT_RECHECK_PENDING_INDEPENDENT_ADJUDICATION",
       "reviewed_by_assistant": true,
       "verified": false,
       "required_checks": [
@@ -1763,7 +1776,7 @@
         "actor source and knowledge time",
         "cross-volume provenance"
       ],
-      "review_note": "Assistant source-window review of physical PDF pp 189,191: actor and event boundaries checked, OBSERVED separated from school-certified fact, later reveals and counterfactuals are not backdated. Independent reviewer pending.",
+      "review_note": "PDF p18 printed loss -100 for White classes conflicts with p191 narrative deducting only -50 for B; unadjudicated",
       "verified_by_independent_reviewer": false
     },
     {
@@ -3436,6 +3449,58 @@
         "y1v5.ev.051"
       ],
       "regression": "test_canon_y1_v05.py"
+    },
+    {
+      "id": "Y1V5-ADV-005",
+      "severity": "LOW",
+      "state": "REMEDIATED",
+      "source_pdf_pages": [
+        43,
+        44
+      ],
+      "description": "Preserve exact 16-to-13 majority vote and abstentions, not generic class consensus.",
+      "refs": [
+        "y1v5.ev.014"
+      ],
+      "regression": "tools/test_canon_y1_v05.py"
+    },
+    {
+      "id": "Y1V5-ADV-006",
+      "severity": "HIGH",
+      "state": "OPEN_SOURCE_TEXT_CONTRADICTION",
+      "source_pdf_pages": [
+        18,
+        190,
+        191
+      ],
+      "description": "Printed White-class losing-team deduction -100 conflicts with closing narrative class B -50. Retain source discrepancy, do not invent a school exception or overwrite narrated B net zero.",
+      "refs": [
+        "y1v5.ev.059"
+      ],
+      "regression": "tools/test_canon_y1_v05_adversarial.py"
+    },
+    {
+      "id": "Y1V5-ADV-007",
+      "severity": "MEDIUM",
+      "state": "REMEDIATED",
+      "source_pdf_pages": [
+        65,
+        90,
+        106,
+        160,
+        161,
+        162,
+        189
+      ],
+      "description": "Restored source-specific coordinated pacing demonstration, Kōenji catch of Sudō blow, height-order tug formation, Ayanokōji last scavenger result and actual obstructed relay finish. All are event-bounded, not fixed global abilities.",
+      "refs": [
+        "y1v5.ev.021",
+        "y1v5.ev.028",
+        "y1v5.ev.035",
+        "y1v5.ev.049",
+        "y1v5.ev.057"
+      ],
+      "regression": "tools/test_canon_y1_v05_semantic_adversarial.py"
     }
   ],
   "goal_transitions": [

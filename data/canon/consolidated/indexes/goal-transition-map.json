@@ -13,28 +13,70 @@
       "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent",
       "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning",
       "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race"
+    ],
+    "ln.y1.v06.sevenseas.en.operator-provided": [
+      "y1v6.goal.suzune-horikita.coordinate-classwide-exam",
+      "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling",
+      "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack",
+      "y1v6.goal.ken-sudo.improve-studies-under-tutoring",
+      "y1v6.goal.yukimura.offer-personalized-teaching",
+      "y1v6.goal.yukimura.use-preferred-name-keisei",
+      "y1v6.goal.airi-sakura.request-friendship-group-entry",
+      "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets",
+      "y1v6.goal.kikyo-kushida.seek-status-through-confidences",
+      "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation",
+      "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation",
+      "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum",
+      "y1v6.goal.honami-ichinose.help-across-classes-with-competitive-limits",
+      "y1v6.goal.katsuragi.regret-cooperation-with-ryuen",
+      "y1v6.goal.nagumo.announce-student-council-overhaul"
     ]
   },
   "by_actor": {
     "actor.suzune-horikita": [
       "y1v5.goal.suzune-horikita.individual-excellence-to-reciprocal-alliance",
-      "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal"
+      "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal",
+      "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack",
+      "y1v6.goal.suzune-horikita.coordinate-classwide-exam",
+      "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling"
     ],
     "actor.ken-sudo": [
       "y1v5.goal.ken-sudo.from-demanded-respect-to-conditional-reliability",
-      "y1v5.goal.ken-sudo.romantic-interest-shapes-mvp-motivation"
+      "y1v5.goal.ken-sudo.romantic-interest-shapes-mvp-motivation",
+      "y1v6.goal.ken-sudo.improve-studies-under-tutoring"
     ],
     "actor.kikyo-kushida": [
       "y1v5.goal.kikyo-kushida.expand-expulsion-target-to-ayanokoji",
-      "y1v5.goal.kikyo-kushida.expulsion-prioritized-over-class-rank"
+      "y1v5.goal.kikyo-kushida.expulsion-prioritized-over-class-rank",
+      "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation",
+      "y1v6.goal.kikyo-kushida.seek-status-through-confidences"
     ],
     "actor.kakeru-ryuen": [
       "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent",
-      "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score"
+      "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score",
+      "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum",
+      "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation"
     ],
     "actor.kiyotaka-ayanokoji": [
       "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning",
-      "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race"
+      "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race",
+      "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets"
+    ],
+    "actor.yukimura": [
+      "y1v6.goal.yukimura.offer-personalized-teaching",
+      "y1v6.goal.yukimura.use-preferred-name-keisei"
+    ],
+    "actor.airi-sakura": [
+      "y1v6.goal.airi-sakura.request-friendship-group-entry"
+    ],
+    "actor.honami-ichinose": [
+      "y1v6.goal.honami-ichinose.help-across-classes-with-competitive-limits"
+    ],
+    "actor.katsuragi": [
+      "y1v6.goal.katsuragi.regret-cooperation-with-ryuen"
+    ],
+    "actor.nagumo": [
+      "y1v6.goal.nagumo.announce-student-council-overhaul"
     ]
   },
   "by_evidence": {
@@ -77,6 +119,118 @@
     ],
     "y1v5.ev.078": [
       "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race"
+    ],
+    "y1v6.ev.018": [
+      "y1v6.goal.suzune-horikita.coordinate-classwide-exam",
+      "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling"
+    ],
+    "y1v6.ev.027": [
+      "y1v6.goal.suzune-horikita.coordinate-classwide-exam"
+    ],
+    "y1v6.ev.028": [
+      "y1v6.goal.suzune-horikita.coordinate-classwide-exam"
+    ],
+    "y1v6.ev.030": [
+      "y1v6.goal.suzune-horikita.coordinate-classwide-exam"
+    ],
+    "y1v6.ev.016": [
+      "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling"
+    ],
+    "y1v6.ev.049": [
+      "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation",
+      "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling"
+    ],
+    "y1v6.ev.045": [
+      "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack"
+    ],
+    "y1v6.ev.065": [
+      "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack"
+    ],
+    "y1v6.ev.066": [
+      "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack"
+    ],
+    "y1v6.ev.004": [
+      "y1v6.goal.ken-sudo.improve-studies-under-tutoring"
+    ],
+    "y1v6.ev.010": [
+      "y1v6.goal.ken-sudo.improve-studies-under-tutoring"
+    ],
+    "y1v6.ev.038": [
+      "y1v6.goal.yukimura.offer-personalized-teaching"
+    ],
+    "y1v6.ev.042": [
+      "y1v6.goal.yukimura.offer-personalized-teaching"
+    ],
+    "y1v6.ev.053": [
+      "y1v6.goal.yukimura.offer-personalized-teaching"
+    ],
+    "y1v6.ev.056": [
+      "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets",
+      "y1v6.goal.yukimura.use-preferred-name-keisei"
+    ],
+    "y1v6.ev.058": [
+      "y1v6.goal.yukimura.use-preferred-name-keisei"
+    ],
+    "y1v6.ev.043": [
+      "y1v6.goal.airi-sakura.request-friendship-group-entry"
+    ],
+    "y1v6.ev.057": [
+      "y1v6.goal.airi-sakura.request-friendship-group-entry",
+      "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets"
+    ],
+    "y1v6.ev.059": [
+      "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets"
+    ],
+    "y1v6.ev.001": [
+      "y1v6.goal.kikyo-kushida.seek-status-through-confidences"
+    ],
+    "y1v6.ev.002": [
+      "y1v6.goal.kikyo-kushida.seek-status-through-confidences"
+    ],
+    "y1v6.ev.051": [
+      "y1v6.goal.kikyo-kushida.seek-status-through-confidences"
+    ],
+    "y1v6.ev.072": [
+      "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation"
+    ],
+    "y1v6.ev.073": [
+      "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation"
+    ],
+    "y1v6.ev.022": [
+      "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation"
+    ],
+    "y1v6.ev.023": [
+      "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation"
+    ],
+    "y1v6.ev.025": [
+      "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation"
+    ],
+    "y1v6.ev.026": [
+      "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation"
+    ],
+    "y1v6.ev.075": [
+      "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum"
+    ],
+    "y1v6.ev.078": [
+      "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum"
+    ],
+    "y1v6.ev.079": [
+      "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum"
+    ],
+    "y1v6.ev.047": [
+      "y1v6.goal.honami-ichinose.help-across-classes-with-competitive-limits"
+    ],
+    "y1v6.ev.048": [
+      "y1v6.goal.honami-ichinose.help-across-classes-with-competitive-limits"
+    ],
+    "y1v6.ev.007": [
+      "y1v6.goal.katsuragi.regret-cooperation-with-ryuen"
+    ],
+    "y1v6.ev.063": [
+      "y1v6.goal.katsuragi.regret-cooperation-with-ryuen"
+    ],
+    "y1v6.ev.003": [
+      "y1v6.goal.nagumo.announce-student-council-overhaul"
     ]
   },
   "transition_files": {
@@ -89,7 +243,22 @@
     "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score": "data/canon/consolidated/goal_transitions/y1-v05.json",
     "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent": "data/canon/consolidated/goal_transitions/y1-v05.json",
     "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning": "data/canon/consolidated/goal_transitions/y1-v05.json",
-    "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race": "data/canon/consolidated/goal_transitions/y1-v05.json"
+    "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race": "data/canon/consolidated/goal_transitions/y1-v05.json",
+    "y1v6.goal.suzune-horikita.coordinate-classwide-exam": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.ken-sudo.improve-studies-under-tutoring": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.yukimura.offer-personalized-teaching": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.yukimura.use-preferred-name-keisei": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.airi-sakura.request-friendship-group-entry": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.kikyo-kushida.seek-status-through-confidences": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.honami-ichinose.help-across-classes-with-competitive-limits": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.katsuragi.regret-cooperation-with-ryuen": "data/canon/consolidated/goal_transitions/y1-v06.json",
+    "y1v6.goal.nagumo.announce-student-council-overhaul": "data/canon/consolidated/goal_transitions/y1-v06.json"
   },
   "guard": "RETRIEVAL_ONLY_NOT_AUTOMATIC_RUNTIME_GOAL_UPDATE"
 }

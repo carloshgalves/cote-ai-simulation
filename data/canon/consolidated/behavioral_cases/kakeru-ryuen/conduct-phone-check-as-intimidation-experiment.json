@@ -1,0 +1,60 @@
+{
+  "id": "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "conduct phone check as intimidation experiment",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Orders coercive examination of Class C classmates' phones mainly to observe reactions and fear rather than rely on stored messages.",
+  "observed_result": "Pressures disfavored classmates and identifies new leads about possible betrayal.",
+  "epistemic_limits": "Coercion is source-described wrongdoing, never legitimate simulation permission or a guaranteed detection method.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71
+    ],
+    "chapter": 4,
+    "additional_chapters": [],
+    "source_status": "ASSISTANT_PRIMARY_PDF_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "coercion",
+    "investigation"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "strategy",
+    "coercion",
+    "investigation"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.022",
+    "y1v6.ev.023"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_BOUND_REVIEW_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION",
+  "individual_review": {
+    "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+    "evidence_refs": [
+      "y1v6.ev.022",
+      "y1v6.ev.023"
+    ],
+    "adversarial_matrix_id": "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment",
+    "independent_third_party_verified": false,
+    "source_review_status": "ASSISTANT_COMPLETED"
+  }
+}

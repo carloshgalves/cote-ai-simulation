@@ -1,0 +1,66 @@
+{
+  "id": "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+  "actor_id": "actor.airi-sakura",
+  "primary_actor_id": "actor.airi-sakura",
+  "title": "request inclusion in friendship circle",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Overcomes hesitation and directly asks the newly forming group for entry.",
+  "observed_result": "Others accept and the circle reaches five members.",
+  "epistemic_limits": "Earlier timidity does not prevent initiative when social incentives change.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      97,
+      98,
+      151,
+      152,
+      153,
+      154,
+      155,
+      159,
+      160,
+      161,
+      162
+    ],
+    "chapter": 5,
+    "additional_chapters": [
+      6
+    ],
+    "source_status": "ASSISTANT_PRIMARY_PDF_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.maya-sato"
+  ],
+  "capabilities_supported": [
+    "initiative",
+    "friendship",
+    "relationship"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "initiative",
+    "friendship",
+    "relationship"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.043",
+    "y1v6.ev.057",
+    "y1v6.ev.061"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_BOUND_REVIEW_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION",
+  "individual_review": {
+    "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+    "evidence_refs": [
+      "y1v6.ev.043",
+      "y1v6.ev.057",
+      "y1v6.ev.061"
+    ],
+    "adversarial_matrix_id": "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+    "independent_third_party_verified": false,
+    "source_review_status": "ASSISTANT_COMPLETED"
+  }
+}

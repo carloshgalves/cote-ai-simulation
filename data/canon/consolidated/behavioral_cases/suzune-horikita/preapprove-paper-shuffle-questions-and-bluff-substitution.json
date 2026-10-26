@@ -1,0 +1,73 @@
+{
+  "id": "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "preapprove paper shuffle questions and bluff substitution",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Obtains advance school approval for her submissions and simulates vulnerability to Kushida/Ryūen's late attempt to replace the papers.",
+  "observed_result": "Chabashira affirms Horikita's questions, rendering the adverse set ineffective and preserving her class exam chances.",
+  "epistemic_limits": "This countermeasure is Horikita's own institutional strategy, not automatically credited to X.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      104,
+      105,
+      106,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      187
+    ],
+    "chapter": 5,
+    "additional_chapters": [
+      7
+    ],
+    "source_status": "ASSISTANT_PRIMARY_PDF_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.sae-chiyabashira",
+    "actor.kikyo-kushida"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "counterstrategy",
+    "exam",
+    "school_authority"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "strategy",
+    "counterstrategy",
+    "exam",
+    "school_authority"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.045",
+    "y1v6.ev.065",
+    "y1v6.ev.066",
+    "y1v6.ev.067"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_BOUND_REVIEW_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION",
+  "individual_review": {
+    "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+    "evidence_refs": [
+      "y1v6.ev.045",
+      "y1v6.ev.065",
+      "y1v6.ev.066",
+      "y1v6.ev.067"
+    ],
+    "adversarial_matrix_id": "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution",
+    "independent_third_party_verified": false,
+    "source_review_status": "ASSISTANT_COMPLETED"
+  }
+}

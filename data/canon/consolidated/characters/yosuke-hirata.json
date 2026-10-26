@@ -8,7 +8,8 @@
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -31,7 +32,8 @@
         "y1v3.case.yosuke-hirata.protect-underwear-suspects",
         "y1v4.case.yosuke-hirata.prioritize-solitary-classmate-lunch",
         "y1v4.case.yosuke-hirata.seek-horikita-cooperation-through-kiyotaka",
-        "y1v5.case.yosuke-hirata.mediate-athlete-roles-and-vote"
+        "y1v5.case.yosuke-hirata.mediate-athlete-roles-and-vote",
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
       ],
       "context_evidence_refs": [
         "y1v1.ev.012",
@@ -64,7 +66,9 @@
         "y1v5.ev.043",
         "y1v5.ev.045",
         "y1v5.ev.051",
-        "y1v5.ev.071"
+        "y1v5.ev.071",
+        "y1v6.ev.027",
+        "y1v6.ev.069"
       ]
     },
     "social": {
@@ -173,7 +177,9 @@
         "y1v5.ev.041",
         "y1v5.ev.045",
         "y1v5.ev.055",
-        "y1v5.ev.071"
+        "y1v5.ev.071",
+        "y1v6.ev.015",
+        "y1v6.ev.021"
       ]
     },
     "ethics": {
@@ -204,7 +210,9 @@
       ]
     },
     "exam": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ],
       "context_evidence_refs": [
         "y1v3.ev.037",
         "y1v4.ev.041",
@@ -214,7 +222,11 @@
         "y1v5.ev.026",
         "y1v5.ev.028",
         "y1v5.ev.055",
-        "y1v5.ev.059"
+        "y1v5.ev.059",
+        "y1v6.ev.015",
+        "y1v6.ev.020",
+        "y1v6.ev.021",
+        "y1v6.ev.032"
       ]
     },
     "resources": {
@@ -269,14 +281,19 @@
     "reasoning": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v5.ev.002"
+        "y1v5.ev.002",
+        "y1v6.ev.015",
+        "y1v6.ev.020"
       ]
     },
     "epistemics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.yosuke-hirata.privately-infer-ayanokoji-strategist-without-disclosure"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.002",
-        "y1v5.ev.025"
+        "y1v5.ev.025",
+        "y1v6.ev.069"
       ]
     },
     "governance": {
@@ -312,11 +329,14 @@
       ]
     },
     "cooperation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.021",
         "y1v5.ev.035",
-        "y1v5.ev.039"
+        "y1v5.ev.039",
+        "y1v6.ev.027"
       ]
     },
     "trust": {
@@ -340,7 +360,8 @@
         "y1v5.ev.041",
         "y1v5.ev.051",
         "y1v5.ev.056",
-        "y1v5.ev.059"
+        "y1v5.ev.059",
+        "y1v6.ev.032"
       ]
     },
     "misconduct": {
@@ -360,11 +381,53 @@
         "y1v5.case.yosuke-hirata.protect-sensitive-participant-table"
       ],
       "context_evidence_refs": []
+    },
+    "teamwork": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.020"
+      ]
+    },
+    "opponent_selection": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.021"
+      ]
+    },
+    "apology": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.027"
+      ]
+    },
+    "pairing": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.032"
+      ]
+    },
+    "secrecy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.069"
+      ]
+    },
+    "privacy": {
+      "behavioral_case_refs": [
+        "y1v6.case.yosuke-hirata.privately-infer-ayanokoji-strategist-without-disclosure"
+      ],
+      "context_evidence_refs": []
+    },
+    "relationship": {
+      "behavioral_case_refs": [
+        "y1v6.case.yosuke-hirata.privately-infer-ayanokoji-strategist-without-disclosure"
+      ],
+      "context_evidence_refs": []
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Volume 4 is operator-selected primary source but individual claims require audit; private VIP status, trauma disclosures, and coercion remain actor-scoped, non-prescriptive. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory. Y1 V6 source-scoped behavioral claims; preserve historical actor knowledge and allow alternative future goals.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

@@ -1,15 +1,27 @@
 {
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.hasebe",
-  "display_name": "Hasebe",
+  "display_name": "Haruka Hasebe",
   "modeling_tier": "MINIMAL_ENTITY",
   "source_coverage": [
-    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+    "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
-    "role_summary": "Class D student observed in swimming-area social context; given name not confirmed by this volume",
-    "aliases": []
+    "role_summary": "First-year Class D student Haruka Hasebe, member of the new Ayanokōji friendship group from Y1 V6.",
+    "aliases": [
+      "Hasebe Haruka",
+      "Haruka"
+    ],
+    "temporal_updates": [
+      {
+        "since": "Y1_V06_CH6_P150",
+        "source_evidence_id": "y1v6.ev.056",
+        "given_name": "Haruka",
+        "scope": "FIRST_NAME_VOLUNTARILY_SHARED_WITH_STUDY_FRIENDS"
+      }
+    ]
   },
   "knowledge_time_policy": {
     "canonical_after_divergence_is_not_actor_memory": true,
@@ -17,7 +29,9 @@
   },
   "domains": {
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.117"
       ]
@@ -27,11 +41,66 @@
       "context_evidence_refs": [
         "y1v1.ev.117"
       ]
+    },
+    "academic": {
+      "behavioral_case_refs": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.037",
+        "y1v6.ev.040"
+      ]
+    },
+    "studies": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.037",
+        "y1v6.ev.039"
+      ]
+    },
+    "results": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.037",
+        "y1v6.ev.040"
+      ]
+    },
+    "diagnostic": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.039"
+      ]
+    },
+    "reasoning": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.039"
+      ]
+    },
+    "friendship": {
+      "behavioral_case_refs": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
+    },
+    "cooperation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Minimum volume-supported traits; no unstated skills, personalities or identity assertions.",
+  "semantic_audit_notes": "Minimum volume-supported traits; no unstated skills, personalities or identity assertions. Y1 V6 report-derived claims, cases and goals are source-scoped; private knowledge never auto-disclosed.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

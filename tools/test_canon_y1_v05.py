@@ -38,6 +38,12 @@ assert audit["release_gate"]["engine_memory_admission"] is False
 assert audit["release_gate"]["exam_executable"] is False
 assert all(x["verified"] is False for x in audit["evidence"]+audit["behavioral_cases"])
 assert fest["authority"]=="CANON_REFERENCE_NOT_EXECUTABLE"
+assert "16 votes" in evidence["y1v5.ev.014"]["summary"]
+assert "13" in evidence["y1v5.ev.014"]["summary"] and "abstain" in evidence["y1v5.ev.014"]["summary"]
+assert fest["scoring"]["team_loss_rule_source_discrepancy"]["state"]=="UNRESOLVED_PRINTED_RULE_VS_CLOSING_NARRATION"
+assert fest["scoring"]["team_loss_rule_source_discrepancy"]["printed_rule"].endswith("100 class points")
+assert fest["outcome"]["first_year_net_class_points"]["B"]==0
+assert any(f["id"]=="Y1V5-ADV-006" and f["state"].startswith("OPEN") for f in audit["findings"])
 assert fest["scoring"]["last_individual_event_fallback_exam_penalty"]=={"points":1,"condition":"ONLY_IF_STUDENT_PRIVATE_POINTS_BELOW_1000","source_pdf_page":19}
 assert "Last-place fallback is NOT an elective choice" in fest["scoring"]["individual_winner_reward_choice_note"]
 assert "ONLY_IF_STUDENT_PRIVATE_POINTS_BELOW_1000" not in evidence["y1v5.ev.006"]["summary"] or "last place" in evidence["y1v5.ev.006"]["summary"].lower()
@@ -126,6 +132,6 @@ for name,change in mutants:
     change(altered)
     assert violations(altered),("negative mutation escaped",name)
 
-assert len(index["character_packs"])==85
-assert len(index["behavioral_case_paths"])==241
+assert len(index["character_packs"])>=85
+assert len(index["behavioral_case_paths"])>=241
 print("PASS Year 1 V5 80 evidences, 39 actor cases, 13 events, 35 athletic observations, 6 sports negative controls; release blocked")

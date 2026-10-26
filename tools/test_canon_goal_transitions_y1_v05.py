@@ -21,7 +21,7 @@ assert idx["guard"]=="RETRIEVAL_ONLY_NOT_AUTOMATIC_RUNTIME_GOAL_UPDATE"
 assert goals["source_id"]==source["source_id"]
 assert len(goals["transitions"])==10
 assert len({t["id"] for t in goals["transitions"]})==10
-assert len(idx["by_actor"])==5
+assert len([actor for actor,ids in idx["by_actor"].items() if any(x.startswith("y1v5.goal.") for x in ids)])==5
 assert review["release_gate"]["external_independent_review"]=="NOT_PERFORMED"
 assert review["release_gate"]["operator_approval"]=="NOT_REQUESTED"
 assert review["release_gate"]["engine_memory_admission"] is False
@@ -41,8 +41,9 @@ def errors(dataset):
         if not t["contingent_alternatives"] or not t["simulation_guard"]:out.append("forced fixed path")
         if not t["event_time_ref"]:out.append("missing event time")
         if t["actor_id"] not in actor_idx["character_packs"]:out.append("untracked actor")
-    expected={a:sorted([t["id"] for t in trans if t["actor_id"]==a]) for a in idx["by_actor"]}
-    if expected!=idx["by_actor"]:out.append("stale actor goal index")
+    expected={a:sorted([t["id"] for t in trans if t["actor_id"]==a]) for a in {t["actor_id"] for t in trans}}
+    actual={a:sorted(x for x in idx["by_actor"][a] if x.startswith("y1v5.goal.")) for a in expected}
+    if expected!=actual:out.append("stale actor goal index")
     ay=by_id["y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning"]
     if "not a proved intention" not in ay["simulation_guard"].lower() and "never assert" not in ay["simulation_guard"].lower():out.append("miscast full class loss as designed")
     if "purposefully make class finish last" in ay["observed_goal_or_means_after"].lower():out.append("invented forced loss")
@@ -61,11 +62,12 @@ def errors(dataset):
 assert not errors(goals),errors(goals)
 for actor,ids in idx["by_actor"].items():
     pack=J(ROOT/actor_idx["character_packs"][actor]["path"])
-    assert set(pack["goal_transition_refs"])==set(ids)
+    assert set(x for x in pack["goal_transition_refs"] if x.startswith("y1v5.goal."))==set(x for x in ids if x.startswith("y1v5.goal."))
     assert pack["goal_transition_model"]=="EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 for evid,ids in idx["by_evidence"].items():
-    assert evid in evidence
-    assert set(ids)=={t["id"] for t in goals["transitions"] if evid in t["evidence_refs"]}
+    if evid.startswith("y1v5."):
+        assert evid in evidence
+        assert set(x for x in ids if x.startswith("y1v5.goal."))=={t["id"] for t in goals["transitions"] if evid in t["evidence_refs"]}
 assert {x for ids in idx["by_actor"].values() for x in ids}==set(idx["transition_files"])
 assert set(idx["source_to_transitions"][source["source_id"]])=={t["id"] for t in goals["transitions"]}
 

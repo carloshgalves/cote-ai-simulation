@@ -1,0 +1,3731 @@
+{
+  "schema_version": "canon-literary-two-lens-audit-v1",
+  "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+  "pdf_sha256": "e85ebfe1efb68282f8067768b8d81b289492c295720d157f77afdd4e10ee706b",
+  "created_date": "2026-10-26",
+  "reviewer_identity": "SAME_ASSISTANT_SOURCE_PASS_PLUS_ADVERSARIAL_PASS_NOT_AN_INDEPENDENT_PEER",
+  "lenses": [
+    {
+      "name": "primary_source_fidelity",
+      "method": "Local source PDF SHA + all 80 physical-page anchor substring matches; source-window interpretation, source/speaker modes, temporal actor knowledge and estimated versus published results"
+    },
+    {
+      "name": "adversarial_second_read",
+      "method": "For each of 138 records, formulate a source-specific overclaim/counterfactual that must not be licensed; check case/result attribution and ongoing goal boundaries"
+    }
+  ],
+  "counts": {
+    "evidence": 80,
+    "cases": 43,
+    "goals": 15,
+    "total": 138,
+    "independent_external_evaluations": 0
+  },
+  "external_independent_reviewer": "NOT_PERFORMED",
+  "individual_evaluations": [
+    {
+      "id": "y1v6.ev.001",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        10,
+        11,
+        12
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 10,
+        "fragment": "hate losing far more"
+      },
+      "claim_under_review": "Autodescrição: busca de aprovação e intolerância à derrota",
+      "source_mode": "SELF_REPORT",
+      "adversarial_counterclaim": "Self-report can be strategic, selective or imperfect; source confirms speaker narration, not objective proof of every psychological inference.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.002",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        10,
+        11,
+        12
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 11,
+        "fragment": "trustworthy people receive access"
+      },
+      "claim_under_review": "Persona prestativa, coleta de segredos e colapso anterior narrados em retrospecto",
+      "source_mode": "SELF_REPORT",
+      "adversarial_counterclaim": "Self-report can be strategic, selective or imperfect; source confirms speaker narration, not objective proof of every psychological inference.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.003",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        14,
+        15,
+        16
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 15,
+        "fragment": "my name is nagumo miyabi"
+      },
+      "claim_under_review": "Nagumo Miyabi é publicamente empossado presidente do conselho após Manabu e anuncia seu programa de reforma (mandatos, tamanho, eleições, afastamento por voto). Ele declara que deseja implementar as mudanças imediatamente, mas reconhece obstáculos e obrigações antes da execução. Não equiparar anúncio a regras já operacionalizadas.",
+      "source_mode": "CHARACTER_DECLARATION",
+      "adversarial_counterclaim": "Presidency publicly assumed by Miyabi; announced reforms must not be treated as enacted.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.004",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        17,
+        18
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 17,
+        "fragment": "actually took notes"
+      },
+      "claim_under_review": "Passa a tomar notas e reduz conduta agressiva depois do festival",
+      "source_mode": "OBSERVED",
+      "adversarial_counterclaim": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.005",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        17,
+        18
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 18,
+        "fragment": "concealed your excellence"
+      },
+      "claim_under_review": "Após o revezamento, Ayanokōji observa que Ike e Yamauchi passaram a convidá-lo muito menos e praticamente o excluíram dos passeios. Horikita atribui o afastamento à descoberta de sua velocidade e força de preensão antes ocultas, mas essa explicação causal é uma interpretação da personagem, não um motivo diretamente confessado pelos dois colegas.",
+      "source_mode": "NARRATOR_OBSERVED_SOCIAL_EXCLUSION_WITH_CHARACTER_INFERENCE",
+      "adversarial_counterclaim": "Observed invitations stopped after the relay; Horikita's suggested reason for Ike/Yamauchi's behavior is an inference, not their admitted motive.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.006",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        19,
+        20,
+        21
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 19,
+        "fragment": "are you going out with anyone"
+      },
+      "claim_under_review": "Satō pede contato, mostra atração pelo desempenho no revezamento",
+      "source_mode": "DIALOGUE",
+      "adversarial_counterclaim": "Speaker claim is bounded by listener and when it was said; uninvolved characters cannot know it.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.007",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        22,
+        23,
+        24
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 23,
+        "fragment": "i regret it"
+      },
+      "claim_under_review": "Admite arrependimento pela aliança com Ryūen e declínio político da facção",
+      "source_mode": "DIALOGUE",
+      "adversarial_counterclaim": "Speaker claim is bounded by listener and when it was said; uninvolved characters cannot know it.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.008",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        23
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 23,
+        "fragment": "874"
+      },
+      "claim_under_review": "Pontuações: A 874, B 753, C 542, D 262 após festival",
+      "source_mode": "NARRATED_DATA",
+      "adversarial_counterclaim": "Points A 874/B 753/C 542/D 262 are narrated October snapshots, not inferred sports award distribution.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.009",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        25,
+        26,
+        27,
+        28
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 27,
+        "fragment": "taken countermeasures"
+      },
+      "claim_under_review": "Interação sobre Satō; proteção e apagamento de comunicações",
+      "source_mode": "DIALOGUE",
+      "adversarial_counterclaim": "Speaker claim is bounded by listener and when it was said; uninvolved characters cannot know it.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.010",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        30,
+        31,
+        32,
+        33
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 31,
+        "fragment": "fifty-seven"
+      },
+      "claim_under_review": "Média 57, posição 12ª de baixo para cima e estudo extra com Horikita",
+      "source_mode": "REPORTED_RESULT",
+      "adversarial_counterclaim": "Sudō's 57 average is affected by easier test and sports-festival bonuses.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.011",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        31
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 31,
+        "fragment": "forty-three"
+      },
+      "claim_under_review": "Mínimo 43 em inglês, todas matérias acima de 40; classe sem expulsões",
+      "source_mode": "REPORTED_RESULT",
+      "adversarial_counterclaim": "Result must be distinguished from independent school announcement versus participant expectation.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.012",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        32
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 32,
+        "fragment": "sixty-four"
+      },
+      "claim_under_review": "Média exposta 64 com calibração deliberada da própria aparência acadêmica",
+      "source_mode": "INNER_MONOLOGUE",
+      "adversarial_counterclaim": "A private intention is accessible only to the thinker/narrator and does not certify later execution.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.013",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 34,
+        "fragment": "eight subjects"
+      },
+      "claim_under_review": "Regras oficiais de quiz, pareamento, 8 disciplinas, notas mínimas e expulsão",
+      "source_mode": "INSTITUTIONAL_RULE",
+      "adversarial_counterclaim": "Initial 700 points explicitly approximate; 692 confirmed later.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.014",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        38,
+        39
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 38,
+        "fragment": "fifty class points"
+      },
+      "claim_under_review": "Provas elaboradas por classes; escola revisa; 50 pontos de classe",
+      "source_mode": "INSTITUTIONAL_RULE",
+      "adversarial_counterclaim": "50 class-point exchange depends on overall attacking/defending result, not guaranteed for nomination.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.015",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 40,
+        "fragment": "partner"
+      },
+      "claim_under_review": "Análise de mecanismo oculto de pares e coordenação inicial",
+      "source_mode": "OBSERVED",
+      "adversarial_counterclaim": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.016",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        44,
+        45,
+        46
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 44,
+        "fragment": "same junior high"
+      },
+      "claim_under_review": "Horikita conhece rumores da antiga turma, sem acesso aos fatos completos",
+      "source_mode": "SECONDHAND_REPORT",
+      "adversarial_counterclaim": "Horikita knows only rumours about Kushida's former school at this point.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.017",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        47,
+        48
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 47,
+        "fragment": "lies"
+      },
+      "claim_under_review": "Discussão sobre mentiras, verdade, violência e arsenal social",
+      "source_mode": "DIALOGUE",
+      "adversarial_counterclaim": "Speaker claim is bounded by listener and when it was said; uninvolved characters cannot know it.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.018",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        48,
+        49,
+        50
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 48,
+        "fragment": "expelled"
+      },
+      "claim_under_review": "Recusa descartar Kushida apesar de risco; objetivo preservar a turma",
+      "source_mode": "OBSERVED_DECISION",
+      "adversarial_counterclaim": "An observed local decision is not replacement of broader personality or end goal.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.019",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        50,
+        51
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 50,
+        "fragment": "recording"
+      },
+      "claim_under_review": "Confirma a Horikita ter obtido gravação que impediu Ryūen no festival",
+      "source_mode": "DIALOGUE",
+      "adversarial_counterclaim": "Kiyotaka acknowledges obtaining recording; Suzune does not learn its complete acquisition chain.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.020",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        53,
+        54,
+        55
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 55,
+        "fragment": "high-scoring"
+      },
+      "claim_under_review": "Inferem ordenação oposta de notas como pareamento e discutem risco de alunos médios",
+      "source_mode": "REASONING",
+      "adversarial_counterclaim": "Inference and hypothetical pairing are not school-confirmed until the later announcement.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.021",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        56,
+        57,
+        58
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 56,
+        "fragment": "class c"
+      },
+      "claim_under_review": "Decidem mirar Classe C e identificam risco do sorteio entre nominadores",
+      "source_mode": "OBSERVED_DECISION",
+      "adversarial_counterclaim": "An observed local decision is not replacement of broader personality or end goal.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.022",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        60,
+        61,
+        62,
+        63
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 60,
+        "fragment": "class d"
+      },
+      "claim_under_review": "Decide concentrar Classe C na busca pelo estrategista oculto da D",
+      "source_mode": "OBSERVED_DECISION",
+      "adversarial_counterclaim": "An observed local decision is not replacement of broader personality or end goal.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.023",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 64,
+        "fragment": "phones"
+      },
+      "claim_under_review": "Falsa inspeção de celulares é teste de lealdade, medo e comportamento",
+      "source_mode": "STRATEGY",
+      "adversarial_counterclaim": "Phone inspections do not mean all phone history examined; Ryūen targets behavioral reactions.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.024",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        71,
+        72
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 71,
+        "fragment": "manabe"
+      },
+      "claim_under_review": "Manabe e amigas são isoladas como informantes coercivamente controladas",
+      "source_mode": "OBSERVED",
+      "adversarial_counterclaim": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.025",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        72,
+        73,
+        74
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 72,
+        "fragment": "karuizawa"
+      },
+      "claim_under_review": "Obtém história da intimidação a Karuizawa; investiga observadores da foto",
+      "source_mode": "SECONDHAND_REPORT_AND_INFERENCE",
+      "adversarial_counterclaim": "Preserve actor-acquired facts and source mode; neither reported event nor inference determines immutable identity or future outcomes.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.026",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        73,
+        74
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 73,
+        "fragment": "yukimura"
+      },
+      "claim_under_review": "Suspeita de Ayanokōji e Yukimura sem concluir qual é X",
+      "source_mode": "INFERENCE",
+      "adversarial_counterclaim": "Yukimura/Ayanokōji suspected but Ryūen cannot authenticate X.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.027",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        76,
+        77,
+        78,
+        79
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 76,
+        "fragment": "apologize"
+      },
+      "claim_under_review": "Horikita pede desculpas publicamente e comunica esquema de notas controladas",
+      "source_mode": "OBSERVED_ACTION",
+      "adversarial_counterclaim": "Preserve actor-acquired facts and source mode; neither reported event nor inference determines immutable identity or future outcomes.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.028",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        78,
+        79
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 78,
+        "fragment": "zero points"
+      },
+      "claim_under_review": "Categorias de quiz: 0, 1, até 80, pelo menos 85; pares alto-baixo",
+      "source_mode": "STRATEGY",
+      "adversarial_counterclaim": "Four-band planned quiz targets are Horikita's classroom strategy, not exam-school command.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.029",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        79
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 79,
+        "fragment": "kouenji"
+      },
+      "claim_under_review": "Ambiguidade quanto à cooperação; não promete nota específica",
+      "source_mode": "DIALOGUE",
+      "adversarial_counterclaim": "Kōenji refuses to guarantee a particular score.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.030",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        80,
+        81,
+        82,
+        83
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 80,
+        "fragment": "class c will attack class d"
+      },
+      "claim_under_review": "Correspondência D↔C e A↔B confirmada; quiz resulta em pares previstos",
+      "source_mode": "REPORTED_RESULT",
+      "adversarial_counterclaim": "Result must be distinguished from independent school announcement versus participant expectation.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.031",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        83
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 83,
+        "fragment": "horikita suzune and sudou ken"
+      },
+      "claim_under_review": "Dupla confirmada para final",
+      "source_mode": "REPORTED_RESULT",
+      "adversarial_counterclaim": "Result must be distinguished from independent school announcement versus participant expectation.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.032",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        83
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 83,
+        "fragment": "hirata yousuke and yamauchi haruki"
+      },
+      "claim_under_review": "Dupla confirmada para final",
+      "source_mode": "REPORTED_RESULT",
+      "adversarial_counterclaim": "Result must be distinguished from independent school announcement versus participant expectation.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.033",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        83
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 83,
+        "fragment": "kushida kikyou and ike kanji"
+      },
+      "claim_under_review": "Dupla confirmada para final",
+      "source_mode": "REPORTED_RESULT",
+      "adversarial_counterclaim": "Result must be distinguished from independent school announcement versus participant expectation.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.034",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        83
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 83,
+        "fragment": "yukimura teruhiko and inogashira kokoro"
+      },
+      "claim_under_review": "Dupla confirmada para final",
+      "source_mode": "REPORTED_RESULT",
+      "adversarial_counterclaim": "Result must be distinguished from independent school announcement versus participant expectation.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.035",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        83
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 83,
+        "fragment": "satou maya"
+      },
+      "claim_under_review": "Dupla confirmada para final",
+      "source_mode": "REPORTED_RESULT",
+      "adversarial_counterclaim": "Result must be distinguished from independent school announcement versus participant expectation.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.036",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        83
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 83,
+        "fragment": "okiya"
+      },
+      "claim_under_review": "Dupla confirmada para final",
+      "source_mode": "REPORTED_RESULT",
+      "adversarial_counterclaim": "Result must be distinguished from independent school announcement versus participant expectation.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.037",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        85,
+        86,
+        87
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 85,
+        "fragment": "seventy-nine"
+      },
+      "claim_under_review": "Notas de quiz 79 e 1, ambos com fraquezas muito semelhantes",
+      "source_mode": "RESULT_AND_ANALYSIS",
+      "adversarial_counterclaim": "Preserve actor-acquired facts and source mode; neither reported event nor inference determines immutable identity or future outcomes.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.038",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        87,
+        88
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 87,
+        "fragment": "tutor"
+      },
+      "claim_under_review": "Oferece tutoria apesar de histórico de isolamento acadêmico",
+      "source_mode": "OBSERVED_DECISION",
+      "adversarial_counterclaim": "Yukimura offers tutoring; no final class pass publicly certified.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.039",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 100,
+        "fragment": "correct"
+      },
+      "claim_under_review": "Teste diagnóstico: mesmas respostas, 3 corretas + 1 parcial em 10",
+      "source_mode": "REPORTED_RESULT",
+      "adversarial_counterclaim": "Miyake and Hasebe each have 3 correct, 6 wrong, 1 half: local ten-question exercise.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.040",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        93,
+        94,
+        95
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 94,
+        "fragment": "seventy"
+      },
+      "claim_under_review": "Aproximadamente 70 em matemática e 40 em matérias de humanas",
+      "source_mode": "REPORTED_RESULT",
+      "adversarial_counterclaim": "Result must be distinguished from independent school announcement versus participant expectation.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.041",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        95
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 95,
+        "fragment": "october 20"
+      },
+      "claim_under_review": "Reflete sobre data de aniversário 20 de outubro e ausência de comemorações",
+      "source_mode": "INNER_MONOLOGUE",
+      "adversarial_counterclaim": "October 20 is the narrator's personal birthday, not a class event or intelligence feat.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.042",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        96,
+        97
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 96,
+        "fragment": "sports festival"
+      },
+      "claim_under_review": "Reconhece limites do individualismo após fracasso físico do festival",
+      "source_mode": "SELF_REPORT",
+      "adversarial_counterclaim": "Self-report can be strategic, selective or imperfect; source confirms speaker narration, not objective proof of every psychological inference.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.043",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        97,
+        98
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 97,
+        "fragment": "sakura"
+      },
+      "claim_under_review": "Acompanha grupos à distância; decide tentar participar",
+      "source_mode": "OBSERVED",
+      "adversarial_counterclaim": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.044",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        101,
+        102,
+        103
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 101,
+        "fragment": "questions"
+      },
+      "claim_under_review": "Sugerem testar limites da banca com questões preliminares e revisar erros",
+      "source_mode": "STRATEGY",
+      "adversarial_counterclaim": "An intended tactic does not guarantee successful execution or future inevitability.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.045",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        104,
+        105,
+        106
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 105,
+        "fragment": "questions"
+      },
+      "claim_under_review": "Risco de vazamento das perguntas submetidas; controle de acesso",
+      "source_mode": "DIALOGUE",
+      "adversarial_counterclaim": "Speaker claim is bounded by listener and when it was said; uninvolved characters cannot know it.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.046",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        106
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 106,
+        "fragment": "email"
+      },
+      "claim_under_review": "Contato por e-mail anônimo e questionamento sobre identidade de X",
+      "source_mode": "OBSERVED",
+      "adversarial_counterclaim": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.047",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 108,
+        "fragment": "ichinose"
+      },
+      "claim_under_review": "Solidariedade à turma e dilemas de ajuda entre amigos rivais",
+      "source_mode": "DIALOGUE",
+      "adversarial_counterclaim": "Speaker claim is bounded by listener and when it was said; uninvolved characters cannot know it.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.048",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        114,
+        115
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 115,
+        "fragment": "giving me far too much credit"
+      },
+      "claim_under_review": "Fica desconcertada com elogio de bondade; causa não é demonstrada",
+      "source_mode": "OBSERVED",
+      "adversarial_counterclaim": "Ichinose's discomfort is observed; reason cannot be inferred.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.049",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        118,
+        119,
+        120,
+        121,
+        122
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 121,
+        "fragment": "mathematics"
+      },
+      "claim_under_review": "Aposta sobre nota de matemática com testemunha Manabu e termos assimétricos",
+      "source_mode": "CONDITIONAL_AGREEMENT",
+      "adversarial_counterclaim": "Manabu witnesses math wager, not junior-high details.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.050",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        123,
+        124,
+        125
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 124,
+        "fragment": "incident"
+      },
+      "claim_under_review": "Entra na aposta condicionando aceitação à revelação do passado de Kushida",
+      "source_mode": "OBSERVED_DECISION",
+      "adversarial_counterclaim": "An observed local decision is not replacement of broader personality or end goal.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.051",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        125,
+        126,
+        127,
+        128,
+        129
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 126,
+        "fragment": "blog"
+      },
+      "claim_under_review": "Explica blog anônimo exposto e utilização de segredos verídicos contra turma",
+      "source_mode": "FIRST_PERSON_CONFESSION",
+      "adversarial_counterclaim": "Kushida's disclosed personal history is self-report, including genuine confidences weaponized.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.052",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        129,
+        130
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 129,
+        "fragment": "drop out"
+      },
+      "claim_under_review": "Declara desejo de expulsar Horikita e Ayanokōji se vencer aposta",
+      "source_mode": "CHARACTER_DECLARATION",
+      "adversarial_counterclaim": "A character declaration, preference or announced intent is not automatic fulfilled action, policy or durable goal.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.053",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        132,
+        133,
+        134
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 132,
+        "fragment": "yukimura"
+      },
+      "claim_under_review": "Método pedagógico individual com exercícios difíceis e ritmo flexível",
+      "source_mode": "OBSERVED",
+      "adversarial_counterclaim": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.054",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 136,
+        "fragment": "ryuuen"
+      },
+      "claim_under_review": "Abordagem dos suspeitos; Hiyori consulta sem acusar diretamente",
+      "source_mode": "OBSERVED",
+      "adversarial_counterclaim": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.055",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        140,
+        141,
+        142
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 140,
+        "fragment": "sugar"
+      },
+      "claim_under_review": "Afirma ter calculado açúcar pelo copo; explicação mais tarde contestada",
+      "source_mode": "CONTESTED_DECLARATION",
+      "adversarial_counterclaim": "Sugar insight could be social intelligence; prior questioning documented later.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.056",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 150,
+        "fragment": "haruka"
+      },
+      "claim_under_review": "Formação do grupo de Ayanokōji com Yukimura, Miyake e Hasebe; na conversa os colegas identificam seus nomes Haruka (Hasebe), Akito (Miyake), Kiyotaka e Teruhiko (Yukimura). Os nomes e apelidos valem conforme o relacionamento e o momento; Sakura posteriormente solicita entrada.",
+      "source_mode": "OBSERVED",
+      "adversarial_counterclaim": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.057",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        151,
+        152,
+        153,
+        154,
+        155
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 152,
+        "fragment": "sakura"
+      },
+      "claim_under_review": "Rompe timidez e pede para integrar o grupo de cinco",
+      "source_mode": "OBSERVED_ACTION",
+      "adversarial_counterclaim": "Preserve actor-acquired facts and source mode; neither reported event nor inference determines immutable identity or future outcomes.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.058",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        150,
+        151,
+        152
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 151,
+        "fragment": "keisei"
+      },
+      "claim_under_review": "Yukimura revela que Teruhiko é o nome oficial escolhido pela mãe que deixou a família; pede aos amigos que o chamem Keisei, nome que o pai queria dar. Essa preferência social não constitui alteração legal nem substituição da identidade canônica.",
+      "source_mode": "SELF_REPORT",
+      "adversarial_counterclaim": "Teruhiko is legal school name; Keisei only preferred among friends.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.059",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        156,
+        157,
+        158
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 158,
+        "fragment": "birthday"
+      },
+      "claim_under_review": "Conversa sobre aniversário, mensagens apagadas e coleta social de dados",
+      "source_mode": "OBSERVED",
+      "adversarial_counterclaim": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.060",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        157,
+        158
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 157,
+        "fragment": "sugar"
+      },
+      "claim_under_review": "Fonte da suposta dedução do açúcar é reavaliada por pesquisa de terceiros",
+      "source_mode": "INVESTIGATION",
+      "adversarial_counterclaim": "Preserve actor-acquired facts and source mode; neither reported event nor inference determines immutable identity or future outcomes.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.061",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        159,
+        160,
+        161,
+        162
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 161,
+        "fragment": "grabbed me"
+      },
+      "claim_under_review": "Interesses amorosos unilaterais e limite da reciprocidade",
+      "source_mode": "OBSERVED",
+      "adversarial_counterclaim": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.062",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        163,
+        164,
+        165,
+        166,
+        167
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 166,
+        "fragment": "juice"
+      },
+      "claim_under_review": "Na reunião de estudos no karaokê, Karuizawa conscientemente derrama suco de uva sobre o blazer de Kushida após discussão verbal; os presentes reagem e condenam o gesto. O resultado leva à informação de que Kushida só tem um blazer e à limpeza da roupa. Ryūen posteriormente interpreta isso como possível preparação da armadilha da folha, mas o texto não prova quem planejou ou colocou material de cola.",
+      "source_mode": "ACTION_WITH_INFERRED_STRATEGY",
+      "adversarial_counterclaim": "Karuizawa's grape juice pouring intentional; full staged-cheating mastermind remains unknown.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.063",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        168,
+        169
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 168,
+        "fragment": "katsuragi"
+      },
+      "claim_under_review": "Reconhece declínio de influência e perda de privilégios de liderança",
+      "source_mode": "DIALOGUE",
+      "adversarial_counterclaim": "Speaker claim is bounded by listener and when it was said; uninvolved characters cannot know it.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.064",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        170,
+        171,
+        172,
+        173,
+        174
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 170,
+        "fragment": "fraud"
+      },
+      "claim_under_review": "Cartas difamatórias assinadas Ryūen; escola declara inocência de fraude",
+      "source_mode": "INSTITUTIONALLY_REFUTED_ACCUSATION",
+      "adversarial_counterclaim": "School clears Ichinose; authorship of mailed letter is not certified.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.065",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        177,
+        178,
+        179,
+        180
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 177,
+        "fragment": "questions"
+      },
+      "claim_under_review": "Proteção aparente das provas e condição de acesso com autorização",
+      "source_mode": "OBSERVED_DECISION",
+      "adversarial_counterclaim": "Who submitted school-approved questions is independent from Kushida's attempted handoff.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.066",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        181,
+        182,
+        183,
+        184,
+        185
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 181,
+        "fragment": "questions"
+      },
+      "claim_under_review": "Revelação do engano: pré-acordo impede troca real; simulação para adversários",
+      "source_mode": "COUNTERSTRATEGY",
+      "adversarial_counterclaim": "Horikita's own advance approval and staged panic, not automatically X's operation.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.067",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        187
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 187,
+        "fragment": "traitor"
+      },
+      "claim_under_review": "Professora confirma fragilidade estrutural de uma classe com traidora",
+      "source_mode": "REPORT_MODE_AVALIACAO",
+      "adversarial_counterclaim": "Preserve actor-acquired facts and source mode; neither reported event nor inference determines immutable identity or future outcomes.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.068",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        188
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 188,
+        "fragment": "692"
+      },
+      "claim_under_review": "Nota agregada mínima efetiva de 692 no exame final; exigência definitiva distinta da estimativa inicial de cerca de 700 pontos",
+      "source_mode": "INSTITUTIONAL_FINAL_THRESHOLD",
+      "adversarial_counterclaim": "Official combined pair threshold 692, distinct from earlier 700 estimate.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.069",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        189,
+        190
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 189,
+        "fragment": "hirata"
+      },
+      "claim_under_review": "Deduz que Ayanokōji é o estrategista; promete sigilo",
+      "source_mode": "DIALOGUE",
+      "adversarial_counterclaim": "Hirata privately suspects Kiyotaka; not public knowledge or known to Ryūen.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.070",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        192,
+        193
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 193,
+        "fragment": "sixty"
+      },
+      "claim_under_review": "Ajusta meta pública para cerca de 60 na prova, sem mostrar máximo real",
+      "source_mode": "INNER_MONOLOGUE",
+      "adversarial_counterclaim": "Kiyotaka's desired displayed score is not a confirmed final grade.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.071",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        193
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 193,
+        "fragment": "kushida"
+      },
+      "claim_under_review": "Reage ao conteúdo divergente da prova de matemática",
+      "source_mode": "OBSERVED",
+      "adversarial_counterclaim": "An observed scene or social reaction is time-limited; avoid inferring hidden intentions or universal capability.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.072",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        194,
+        195,
+        196,
+        197
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 194,
+        "fragment": "ninety-eight"
+      },
+      "claim_under_review": "Estimativas de matemática: Horikita ≥98; Kushida <80; aposta aceita como perdida; não equivale a boletim escolar homologado",
+      "source_mode": "SELF_ASSESSMENT_AND_AGREEMENT",
+      "adversarial_counterclaim": "Math 98+ and under 80 are student assessments pending official grades.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.073",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        197,
+        198,
+        199
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 197,
+        "fragment": "hand"
+      },
+      "claim_under_review": "Promete não interferir, mas rejeita cooperação, mantendo hostilidade",
+      "source_mode": "CHARACTER_DECLARATION",
+      "adversarial_counterclaim": "Kushida promises non-interference but refuses friendship; future compliance unverified.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.074",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        200,
+        201
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 200,
+        "fragment": "picture"
+      },
+      "claim_under_review": "Foto recebida por Ayanokōji e ameaça de Ryūen: identidade de X em disputa; Ryūen ainda não identifica X",
+      "source_mode": "THREAT_AND_INFERENCE",
+      "adversarial_counterclaim": "Threat with photograph sent but Ryūen still cannot identify X.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.075",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        202,
+        203,
+        204
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 202,
+        "fragment": "completely different"
+      },
+      "claim_under_review": "Perguntas falsas, folha na roupa, risco de acusação de cola",
+      "source_mode": "LATER_REVELATION",
+      "adversarial_counterclaim": "Kushida detects false answers and a physical sheet; no confirmed institutional cheating verdict.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.076",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        204,
+        205
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 204,
+        "fragment": "blazer"
+      },
+      "claim_under_review": "Deduz preparação do cenário do suco e uso da informação de uniforme único; autoria material e cadeia de custódia não certificadas",
+      "source_mode": "ATTRIBUTED_INFERENCE",
+      "adversarial_counterclaim": "Ryūen's juice/blazer conspiracy is inferred; sheet insertion actor not certified.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.077",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        205,
+        206
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 205,
+        "fragment": "letter"
+      },
+      "claim_under_review": "Afirma não ter enviado carta sobre Ichinose; remetente e propósito não provados",
+      "source_mode": "ATTRIBUTED_DECLARATION",
+      "adversarial_counterclaim": "Signed letter and Ryūen denial do not certify postal sender.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.078",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        207,
+        208
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 207,
+        "fragment": "transaction"
+      },
+      "claim_under_review": "E-mail Transaction oferece aviso estratégico e demanda provas/alteração",
+      "source_mode": "MESSAGE_AND_DECISION",
+      "adversarial_counterclaim": "Anonymous Transaction quote is a message received by Ryūen, not public knowledge of sender.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.079",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        207,
+        208
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 208,
+        "fragment": "three options"
+      },
+      "claim_under_review": "Ryūen avalia três alternativas após o ultimato anônimo: entregar respostas corretas à Kushida e expulsar Horikita, permitir um cenário de suspeita de cola contra Kushida, ou fornecer respostas falsas para que Horikita permaneça. Ele afirma escolher a terceira; seu objetivo de longo prazo de alcançar a Classe A continua inalterado (página 207), enquanto a prioridade tática muda. X permanece anônimo para ele.",
+      "source_mode": "OBSERVED_DECISION",
+      "adversarial_counterclaim": "Ryūen retains Class A ambition despite altering local math-answer strategy.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.ev.080",
+      "kind": "evidence",
+      "source_pdf_pages": [
+        208
+      ],
+      "primary_pdf_anchor": {
+        "pdf_page": 208,
+        "fragment": "destroy her"
+      },
+      "claim_under_review": "Ameaça pessoa retratada na foto para obter identidade de X",
+      "source_mode": "FUTURE_THREAT",
+      "adversarial_counterclaim": "Threat to destroy pictured girl is a future intent, not a completed attack.",
+      "assessment": "PASS_WITH_RETAINED_SOURCE_AND_EPISTEMIC_BOUNDARIES",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+      "kind": "behavioral_case",
+      "actor_id": "actor.airi-sakura",
+      "source_pdf_pages": [
+        97,
+        98,
+        151,
+        152,
+        153,
+        154,
+        155,
+        159,
+        160,
+        161,
+        162
+      ],
+      "evidence_refs": [
+        "y1v6.ev.043",
+        "y1v6.ev.057",
+        "y1v6.ev.061"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.043",
+          "page": 97
+        },
+        {
+          "id": "y1v6.ev.057",
+          "page": 152
+        },
+        {
+          "id": "y1v6.ev.061",
+          "page": 161
+        }
+      ],
+      "adversarial_counterclaim": "Sakura's observed request to join the group does not independently certify group permanence, broad confidence or romance.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+      "kind": "behavioral_case",
+      "actor_id": "actor.hasebe",
+      "source_pdf_pages": [
+        85,
+        86,
+        87,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150
+      ],
+      "evidence_refs": [
+        "y1v6.ev.037",
+        "y1v6.ev.039",
+        "y1v6.ev.040",
+        "y1v6.ev.056"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.037",
+          "page": 85
+        },
+        {
+          "id": "y1v6.ev.039",
+          "page": 100
+        },
+        {
+          "id": "y1v6.ev.040",
+          "page": 94
+        },
+        {
+          "id": "y1v6.ev.056",
+          "page": 150
+        }
+      ],
+      "adversarial_counterclaim": "Hasebe's study collaboration does not demonstrate that the official final academic grade improved.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.hiyori-shiina.open-gentle-dialogue-while-ryuen-probes-x",
+      "kind": "behavioral_case",
+      "actor_id": "actor.hiyori-shiina",
+      "source_pdf_pages": [
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142
+      ],
+      "evidence_refs": [
+        "y1v6.ev.054",
+        "y1v6.ev.055"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.054",
+          "page": 136
+        },
+        {
+          "id": "y1v6.ev.055",
+          "page": 140
+        }
+      ],
+      "adversarial_counterclaim": "Hiyori's calm questioning near Ryūen does not establish her independence from his reconnaissance or full knowledge.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity",
+      "kind": "behavioral_case",
+      "actor_id": "actor.hiyori-shiina",
+      "source_pdf_pages": [
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        157,
+        158
+      ],
+      "evidence_refs": [
+        "y1v6.ev.054",
+        "y1v6.ev.055",
+        "y1v6.ev.060"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.054",
+          "page": 136
+        },
+        {
+          "id": "y1v6.ev.055",
+          "page": 140
+        },
+        {
+          "id": "y1v6.ev.060",
+          "page": 157
+        }
+      ],
+      "adversarial_counterclaim": "The sugar insight may be based on earlier social inquiry; no extraordinary sensory capacity may be inferred.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.honami-ichinose.face-false-fraud-accusation-with-institutional-rebuttal",
+      "kind": "behavioral_case",
+      "actor_id": "actor.honami-ichinose",
+      "source_pdf_pages": [
+        170,
+        171,
+        172,
+        173,
+        174
+      ],
+      "evidence_refs": [
+        "y1v6.ev.064"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.064",
+          "page": 170
+        }
+      ],
+      "adversarial_counterclaim": "School clearance refutes an Ichinose fraud allegation but neither identifies the mailed-letter author nor supplies her full points ledger.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits",
+      "kind": "behavioral_case",
+      "actor_id": "actor.honami-ichinose",
+      "source_pdf_pages": [
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115
+      ],
+      "evidence_refs": [
+        "y1v6.ev.047",
+        "y1v6.ev.048"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.047",
+          "page": 108
+        },
+        {
+          "id": "y1v6.ev.048",
+          "page": 115
+        }
+      ],
+      "adversarial_counterclaim": "Ichinose's generosity is explicitly limited by available resources and competing obligations, not universal loyalty to rivals.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kakeru-ryuen",
+      "source_pdf_pages": [
+        202,
+        203,
+        204,
+        207,
+        208
+      ],
+      "evidence_refs": [
+        "y1v6.ev.075",
+        "y1v6.ev.078",
+        "y1v6.ev.079"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.075",
+          "page": 202
+        },
+        {
+          "id": "y1v6.ev.078",
+          "page": 207
+        },
+        {
+          "id": "y1v6.ev.079",
+          "page": 208
+        }
+      ],
+      "adversarial_counterclaim": "Ryūen's false-answer decision is one bounded tactic; his long-term Class A goal persists and X remains anonymous to him.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kakeru-ryuen",
+      "source_pdf_pages": [
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71
+      ],
+      "evidence_refs": [
+        "y1v6.ev.022",
+        "y1v6.ev.023"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.022",
+          "page": 60
+        },
+        {
+          "id": "y1v6.ev.023",
+          "page": 64
+        }
+      ],
+      "adversarial_counterclaim": "Ryūen's invasive phone test targets reactions under pressure, not a genuinely comprehensive forensic search of each device.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kakeru-ryuen",
+      "source_pdf_pages": [
+        71,
+        72,
+        73,
+        74
+      ],
+      "evidence_refs": [
+        "y1v6.ev.024",
+        "y1v6.ev.025",
+        "y1v6.ev.026"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.024",
+          "page": 71
+        },
+        {
+          "id": "y1v6.ev.025",
+          "page": 72
+        },
+        {
+          "id": "y1v6.ev.026",
+          "page": 73
+        }
+      ],
+      "adversarial_counterclaim": "Manabe's coerced account yields two possible witnesses and a photograph, not authenticated X identity.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kakeru-ryuen",
+      "source_pdf_pages": [
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        157,
+        158
+      ],
+      "evidence_refs": [
+        "y1v6.ev.054",
+        "y1v6.ev.055",
+        "y1v6.ev.060"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.054",
+          "page": 136
+        },
+        {
+          "id": "y1v6.ev.055",
+          "page": 140
+        },
+        {
+          "id": "y1v6.ev.060",
+          "page": 157
+        }
+      ],
+      "adversarial_counterclaim": "Hiyori's sugar claim and appearance in Ryūen's probing is not certified as a controlled double-blind intelligence test.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kakeru-ryuen.threaten-target-in-photograph-to-identify-x",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kakeru-ryuen",
+      "source_pdf_pages": [
+        200,
+        201,
+        208
+      ],
+      "evidence_refs": [
+        "y1v6.ev.074",
+        "y1v6.ev.080"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.074",
+          "page": 200
+        },
+        {
+          "id": "y1v6.ev.080",
+          "page": 208
+        }
+      ],
+      "adversarial_counterclaim": "The photographed victim is threatened conditionally; no new physical assault during V6 or X unmasking is recorded.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.katsuragi.regret-prior-ryuen-alliance-and-assess-factional-loss",
+      "kind": "behavioral_case",
+      "actor_id": "actor.katsuragi",
+      "source_pdf_pages": [
+        22,
+        23,
+        24,
+        168,
+        169
+      ],
+      "evidence_refs": [
+        "y1v6.ev.007",
+        "y1v6.ev.063"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.007",
+          "page": 23
+        },
+        {
+          "id": "y1v6.ev.063",
+          "page": 168
+        }
+      ],
+      "adversarial_counterclaim": "Katsuragi's regret is direct testimony and declining faction influence; no secret new alliance is proven.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kei-karuizawa",
+      "source_pdf_pages": [
+        156,
+        157,
+        158
+      ],
+      "evidence_refs": [
+        "y1v6.ev.059",
+        "y1v6.ev.060"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.059",
+          "page": 158
+        },
+        {
+          "id": "y1v6.ev.060",
+          "page": 157
+        }
+      ],
+      "adversarial_counterclaim": "Karuizawa-mediated investigation finds prior questioning about sugar, not who commissioned it or a full conspiracy.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kei-karuizawa",
+      "source_pdf_pages": [
+        25,
+        26,
+        27,
+        28,
+        156,
+        157,
+        158
+      ],
+      "evidence_refs": [
+        "y1v6.ev.009",
+        "y1v6.ev.059"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.009",
+          "page": 27
+        },
+        {
+          "id": "y1v6.ev.059",
+          "page": 158
+        }
+      ],
+      "adversarial_counterclaim": "Karuizawa deletes sensitive correspondence but control over all copies and permanent safety are not proven.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kei-karuizawa",
+      "source_pdf_pages": [
+        163,
+        164,
+        165,
+        166,
+        167,
+        204,
+        205
+      ],
+      "evidence_refs": [
+        "y1v6.ev.062",
+        "y1v6.ev.076"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.062",
+          "page": 166
+        },
+        {
+          "id": "y1v6.ev.076",
+          "page": 204
+        }
+      ],
+      "adversarial_counterclaim": "Karuizawa intentionally dumps grape juice; mastermind, cheat-sheet author, planting time and knowledge of every step remain unproven.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.ken-sudo.study-with-suzune-and-mature-daily-conduct",
+      "kind": "behavioral_case",
+      "actor_id": "actor.ken-sudo",
+      "source_pdf_pages": [
+        17,
+        18,
+        30,
+        31,
+        32,
+        33
+      ],
+      "evidence_refs": [
+        "y1v6.ev.004",
+        "y1v6.ev.010"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.004",
+          "page": 17
+        },
+        {
+          "id": "y1v6.ev.010",
+          "page": 31
+        }
+      ],
+      "adversarial_counterclaim": "Sudō's reported midterm improvement also reflects easier questions and sports adjustments; avoid permanent intelligence boost.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kikyo-kushida",
+      "source_pdf_pages": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130
+      ],
+      "evidence_refs": [
+        "y1v6.ev.049",
+        "y1v6.ev.050",
+        "y1v6.ev.051",
+        "y1v6.ev.052"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.049",
+          "page": 121
+        },
+        {
+          "id": "y1v6.ev.050",
+          "page": 124
+        },
+        {
+          "id": "y1v6.ev.051",
+          "page": 126
+        },
+        {
+          "id": "y1v6.ev.052",
+          "page": 129
+        }
+      ],
+      "adversarial_counterclaim": "Kushida's middle-school narrative is first-person confession acquired privately by Suzune and Kiyotaka, not the absent Manabu.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kikyo-kushida",
+      "source_pdf_pages": [
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199
+      ],
+      "evidence_refs": [
+        "y1v6.ev.071",
+        "y1v6.ev.072",
+        "y1v6.ev.073"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.071",
+          "page": 193
+        },
+        {
+          "id": "y1v6.ev.072",
+          "page": 194
+        },
+        {
+          "id": "y1v6.ev.073",
+          "page": 197
+        }
+      ],
+      "adversarial_counterclaim": "Kushida concedes the wager ahead of official scores and rejects friendship; do not script permanent reconciliation.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kikyo-kushida",
+      "source_pdf_pages": [
+        10,
+        11,
+        12
+      ],
+      "evidence_refs": [
+        "y1v6.ev.001",
+        "y1v6.ev.002"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.001",
+          "page": 10
+        },
+        {
+          "id": "y1v6.ev.002",
+          "page": 11
+        }
+      ],
+      "adversarial_counterclaim": "Popularity, blog trauma and exposure of genuine confidences are Kushida's self-account, not diagnosis or guaranteed manipulation.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kikyo-kushida",
+      "source_pdf_pages": [
+        96,
+        97,
+        118,
+        119,
+        120,
+        121,
+        122,
+        163,
+        164,
+        165,
+        166,
+        167,
+        177,
+        178,
+        179,
+        180
+      ],
+      "evidence_refs": [
+        "y1v6.ev.042",
+        "y1v6.ev.049",
+        "y1v6.ev.062",
+        "y1v6.ev.065"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.042",
+          "page": 96
+        },
+        {
+          "id": "y1v6.ev.049",
+          "page": 121
+        },
+        {
+          "id": "y1v6.ev.062",
+          "page": 166
+        },
+        {
+          "id": "y1v6.ev.065",
+          "page": 177
+        }
+      ],
+      "adversarial_counterclaim": "Publicly helpful exam participation can conceal a private attempt to leak questions, but does not imply every classmate knew.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kikyo-kushida",
+      "source_pdf_pages": [
+        202,
+        203,
+        204,
+        205,
+        207,
+        208
+      ],
+      "evidence_refs": [
+        "y1v6.ev.075",
+        "y1v6.ev.076",
+        "y1v6.ev.079"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.075",
+          "page": 202
+        },
+        {
+          "id": "y1v6.ev.076",
+          "page": 204
+        },
+        {
+          "id": "y1v6.ev.079",
+          "page": 208
+        }
+      ],
+      "adversarial_counterclaim": "Finding a note in Kushida's blazer is not an adjudicated cheating conviction; Ryūen speculates on the insertion.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "source_pdf_pages": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129
+      ],
+      "evidence_refs": [
+        "y1v6.ev.049",
+        "y1v6.ev.050",
+        "y1v6.ev.051"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.049",
+          "page": 121
+        },
+        {
+          "id": "y1v6.ev.050",
+          "page": 124
+        },
+        {
+          "id": "y1v6.ev.051",
+          "page": 126
+        }
+      ],
+      "adversarial_counterclaim": "Kiyotaka enters a private high-risk math wager to hear Kushida's past; knowledge remains private, and future expulsion is contingent.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "source_pdf_pages": [
+        97,
+        98,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158
+      ],
+      "evidence_refs": [
+        "y1v6.ev.043",
+        "y1v6.ev.056",
+        "y1v6.ev.057",
+        "y1v6.ev.059"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.043",
+          "page": 97
+        },
+        {
+          "id": "y1v6.ev.056",
+          "page": 150
+        },
+        {
+          "id": "y1v6.ev.057",
+          "page": 152
+        },
+        {
+          "id": "y1v6.ev.059",
+          "page": 158
+        }
+      ],
+      "adversarial_counterclaim": "Joining the five-person circle creates relationships, not an irreversible personality change or dissemination of X secret.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "source_pdf_pages": [
+        25,
+        26,
+        27,
+        28,
+        50,
+        51,
+        156,
+        157,
+        158
+      ],
+      "evidence_refs": [
+        "y1v6.ev.009",
+        "y1v6.ev.019",
+        "y1v6.ev.059"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.009",
+          "page": 27
+        },
+        {
+          "id": "y1v6.ev.019",
+          "page": 50
+        },
+        {
+          "id": "y1v6.ev.059",
+          "page": 158
+        }
+      ],
+      "adversarial_counterclaim": "Kiyotaka's assurance to protect Karuizawa is neither unlimited operational protection nor reciprocal romance.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "source_pdf_pages": [
+        83,
+        159,
+        160,
+        161,
+        162,
+        192,
+        193
+      ],
+      "evidence_refs": [
+        "y1v6.ev.035",
+        "y1v6.ev.061",
+        "y1v6.ev.070"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.035",
+          "page": 83
+        },
+        {
+          "id": "y1v6.ev.061",
+          "page": 161
+        },
+        {
+          "id": "y1v6.ev.070",
+          "page": 193
+        }
+      ],
+      "adversarial_counterclaim": "Satō is the exam partner; Kiyotaka's target score is a stated strategy, not an officially reported final score.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.kiyotaka-ayanokoji.stage-gradual-academic-public-image",
+      "kind": "behavioral_case",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "source_pdf_pages": [
+        32,
+        192,
+        193
+      ],
+      "evidence_refs": [
+        "y1v6.ev.012",
+        "y1v6.ev.070"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.012",
+          "page": 32
+        },
+        {
+          "id": "y1v6.ev.070",
+          "page": 193
+        }
+      ],
+      "adversarial_counterclaim": "An intentionally average public exam score is not an actual maximum academic capability measurement.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.manabu-horikita.witness-private-math-wager-without-past-secret",
+      "kind": "behavioral_case",
+      "actor_id": "actor.manabu-horikita",
+      "source_pdf_pages": [
+        118,
+        119,
+        120,
+        121,
+        122
+      ],
+      "evidence_refs": [
+        "y1v6.ev.049"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.049",
+          "page": 121
+        }
+      ],
+      "adversarial_counterclaim": "Manabu only witnesses the betting terms; Kushida's junior-high confession is not automatically acquired by him.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction",
+      "kind": "behavioral_case",
+      "actor_id": "actor.maya-sato",
+      "source_pdf_pages": [
+        19,
+        20,
+        21,
+        83,
+        159,
+        160,
+        161,
+        162
+      ],
+      "evidence_refs": [
+        "y1v6.ev.006",
+        "y1v6.ev.035",
+        "y1v6.ev.061"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.006",
+          "page": 19
+        },
+        {
+          "id": "y1v6.ev.035",
+          "page": 83
+        },
+        {
+          "id": "y1v6.ev.061",
+          "page": 161
+        }
+      ],
+      "adversarial_counterclaim": "Satō obtains Kiyotaka's contact information and shows one-sided interest; dating or reciprocity not established.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.maya-sato.increase-study-effort-for-shared-paper-shuffle-risk",
+      "kind": "behavioral_case",
+      "actor_id": "actor.maya-sato",
+      "source_pdf_pages": [
+        83,
+        159,
+        160,
+        161,
+        162,
+        192,
+        193
+      ],
+      "evidence_refs": [
+        "y1v6.ev.035",
+        "y1v6.ev.061",
+        "y1v6.ev.070"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.035",
+          "page": 83
+        },
+        {
+          "id": "y1v6.ev.061",
+          "page": 161
+        },
+        {
+          "id": "y1v6.ev.070",
+          "page": 193
+        }
+      ],
+      "adversarial_counterclaim": "Satō's enthusiasm and practice are not proof of a passing official examination score or romantic outcome.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+      "kind": "behavioral_case",
+      "actor_id": "actor.miyake",
+      "source_pdf_pages": [
+        85,
+        86,
+        87,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150
+      ],
+      "evidence_refs": [
+        "y1v6.ev.037",
+        "y1v6.ev.039",
+        "y1v6.ev.040",
+        "y1v6.ev.056"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.037",
+          "page": 85
+        },
+        {
+          "id": "y1v6.ev.039",
+          "page": 100
+        },
+        {
+          "id": "y1v6.ev.040",
+          "page": 94
+        },
+        {
+          "id": "y1v6.ev.056",
+          "page": 150
+        }
+      ],
+      "adversarial_counterclaim": "Miyake's shared humanities weakness with Hasebe is local diagnostic performance, not a permanent learning deficit.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.nagumo.announce-student-council-centralizing-reforms",
+      "kind": "behavioral_case",
+      "actor_id": "actor.nagumo",
+      "source_pdf_pages": [
+        14,
+        15,
+        16
+      ],
+      "evidence_refs": [
+        "y1v6.ev.003"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.003",
+          "page": 15
+        }
+      ],
+      "adversarial_counterclaim": "Nagumo's inauguration establishes an office and announced intended reforms, not implementation of all governance rules.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust",
+      "kind": "behavioral_case",
+      "actor_id": "actor.suzune-horikita",
+      "source_pdf_pages": [
+        188,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199
+      ],
+      "evidence_refs": [
+        "y1v6.ev.068",
+        "y1v6.ev.071",
+        "y1v6.ev.072",
+        "y1v6.ev.073"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.068",
+          "page": 188
+        },
+        {
+          "id": "y1v6.ev.071",
+          "page": 193
+        },
+        {
+          "id": "y1v6.ev.072",
+          "page": 194
+        },
+        {
+          "id": "y1v6.ev.073",
+          "page": 197
+        }
+      ],
+      "adversarial_counterclaim": "Suzune estimates a very high math score and receives Kushida's concession, not an official results document or permanent trust.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness",
+      "kind": "behavioral_case",
+      "actor_id": "actor.suzune-horikita",
+      "source_pdf_pages": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        129,
+        130
+      ],
+      "evidence_refs": [
+        "y1v6.ev.049",
+        "y1v6.ev.052"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.049",
+          "page": 121
+        },
+        {
+          "id": "y1v6.ev.052",
+          "page": 129
+        }
+      ],
+      "adversarial_counterclaim": "The mathematics wager has a narrow witness and private disclosure boundary; legal enforceability and automatic expulsion are not proven.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.suzune-horikita.choose-class-c-as-academic-opponent",
+      "kind": "behavioral_case",
+      "actor_id": "actor.suzune-horikita",
+      "source_pdf_pages": [
+        56,
+        57,
+        58,
+        80,
+        81,
+        82,
+        83
+      ],
+      "evidence_refs": [
+        "y1v6.ev.021",
+        "y1v6.ev.030"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.021",
+          "page": 56
+        },
+        {
+          "id": "y1v6.ev.030",
+          "page": 80
+        }
+      ],
+      "adversarial_counterclaim": "Class C is nominated and the school later confirms a matchup; its predicted academic weakness is not globally quantified.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets",
+      "kind": "behavioral_case",
+      "actor_id": "actor.suzune-horikita",
+      "source_pdf_pages": [
+        53,
+        54,
+        55,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ],
+      "evidence_refs": [
+        "y1v6.ev.020",
+        "y1v6.ev.027",
+        "y1v6.ev.028",
+        "y1v6.ev.030",
+        "y1v6.ev.031"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.020",
+          "page": 55
+        },
+        {
+          "id": "y1v6.ev.027",
+          "page": 76
+        },
+        {
+          "id": "y1v6.ev.028",
+          "page": 78
+        },
+        {
+          "id": "y1v6.ev.030",
+          "page": 80
+        },
+        {
+          "id": "y1v6.ev.031",
+          "page": 83
+        }
+      ],
+      "adversarial_counterclaim": "High–low diagnostic scores follow Horikita's inference and a situational four-band plan; Kōenji cooperation cannot be guaranteed.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.suzune-horikita.preapprove-paper-shuffle-questions-and-bluff-substitution",
+      "kind": "behavioral_case",
+      "actor_id": "actor.suzune-horikita",
+      "source_pdf_pages": [
+        104,
+        105,
+        106,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        187
+      ],
+      "evidence_refs": [
+        "y1v6.ev.045",
+        "y1v6.ev.065",
+        "y1v6.ev.066",
+        "y1v6.ev.067"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.045",
+          "page": 105
+        },
+        {
+          "id": "y1v6.ev.065",
+          "page": 177
+        },
+        {
+          "id": "y1v6.ev.066",
+          "page": 181
+        },
+        {
+          "id": "y1v6.ev.067",
+          "page": 187
+        }
+      ],
+      "adversarial_counterclaim": "School-authorized advance submission is Suzune's independently demonstrated strategy; do not collapse into X's separate messages.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
+      "kind": "behavioral_case",
+      "actor_id": "actor.suzune-horikita",
+      "source_pdf_pages": [
+        48,
+        49,
+        50,
+        76,
+        77,
+        78,
+        79
+      ],
+      "evidence_refs": [
+        "y1v6.ev.018",
+        "y1v6.ev.027",
+        "y1v6.ev.028"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.018",
+          "page": 48
+        },
+        {
+          "id": "y1v6.ev.027",
+          "page": 76
+        },
+        {
+          "id": "y1v6.ev.028",
+          "page": 78
+        }
+      ],
+      "adversarial_counterclaim": "Public apology and classmates' immediate agreement do not create enduring consent or perfect leadership.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk",
+      "kind": "behavioral_case",
+      "actor_id": "actor.suzune-horikita",
+      "source_pdf_pages": [
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "evidence_refs": [
+        "y1v6.ev.016",
+        "y1v6.ev.017",
+        "y1v6.ev.018"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.016",
+          "page": 44
+        },
+        {
+          "id": "y1v6.ev.017",
+          "page": 47
+        },
+        {
+          "id": "y1v6.ev.018",
+          "page": 48
+        }
+      ],
+      "adversarial_counterclaim": "Horikita wants to retain Kushida, but the text does not prove Kushida can or must be rehabilitated.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus",
+      "kind": "behavioral_case",
+      "actor_id": "actor.yosuke-hirata",
+      "source_pdf_pages": [
+        40,
+        41,
+        42,
+        43,
+        56,
+        57,
+        58,
+        76,
+        77,
+        78,
+        79
+      ],
+      "evidence_refs": [
+        "y1v6.ev.015",
+        "y1v6.ev.021",
+        "y1v6.ev.027",
+        "y1v6.ev.028"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.015",
+          "page": 40
+        },
+        {
+          "id": "y1v6.ev.021",
+          "page": 56
+        },
+        {
+          "id": "y1v6.ev.027",
+          "page": 76
+        },
+        {
+          "id": "y1v6.ev.028",
+          "page": 78
+        }
+      ],
+      "adversarial_counterclaim": "Hirata organizes and supports Horikita's score plan; this is not the exclusive invention of the pairing method.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.yosuke-hirata.privately-infer-ayanokoji-strategist-without-disclosure",
+      "kind": "behavioral_case",
+      "actor_id": "actor.yosuke-hirata",
+      "source_pdf_pages": [
+        189,
+        190
+      ],
+      "evidence_refs": [
+        "y1v6.ev.069"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.069",
+          "page": 189
+        }
+      ],
+      "adversarial_counterclaim": "Hirata's private inference about Kiyotaka as strategist is not certified public knowledge or automatically shared with Ryūen.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.yukimura.adapt-diagnostic-and-question-writing-pedagogy",
+      "kind": "behavioral_case",
+      "actor_id": "actor.yukimura",
+      "source_pdf_pages": [
+        85,
+        86,
+        87,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        132,
+        133,
+        134
+      ],
+      "evidence_refs": [
+        "y1v6.ev.037",
+        "y1v6.ev.039",
+        "y1v6.ev.040",
+        "y1v6.ev.044",
+        "y1v6.ev.053"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.037",
+          "page": 85
+        },
+        {
+          "id": "y1v6.ev.039",
+          "page": 100
+        },
+        {
+          "id": "y1v6.ev.040",
+          "page": 94
+        },
+        {
+          "id": "y1v6.ev.044",
+          "page": 101
+        },
+        {
+          "id": "y1v6.ev.053",
+          "page": 132
+        }
+      ],
+      "adversarial_counterclaim": "Yukimura's three-correct one-partial local quiz is a teaching diagnostic, not an IQ or permanent cognition value.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.yukimura.request-preferred-name-keisei",
+      "kind": "behavioral_case",
+      "actor_id": "actor.yukimura",
+      "source_pdf_pages": [
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152
+      ],
+      "evidence_refs": [
+        "y1v6.ev.056",
+        "y1v6.ev.058"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.056",
+          "page": 150
+        },
+        {
+          "id": "y1v6.ev.058",
+          "page": 151
+        }
+      ],
+      "adversarial_counterclaim": "Keisei is Yukimura's friend-group preferred name, while Teruhiko remains his registered given name; actor ID unchanged.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring",
+      "kind": "behavioral_case",
+      "actor_id": "actor.yukimura",
+      "source_pdf_pages": [
+        87,
+        88,
+        96,
+        97,
+        132,
+        133,
+        134
+      ],
+      "evidence_refs": [
+        "y1v6.ev.038",
+        "y1v6.ev.042",
+        "y1v6.ev.053"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.038",
+          "page": 87
+        },
+        {
+          "id": "y1v6.ev.042",
+          "page": 96
+        },
+        {
+          "id": "y1v6.ev.053",
+          "page": 132
+        }
+      ],
+      "adversarial_counterclaim": "Yukimura begins tutoring after reflecting on festival limits; no guarantee of unbroken cooperative behavior afterward.",
+      "assessment": "PASS_SOURCE_OWNED_SCENE_WITH_LIMITATIONS",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.suzune-horikita.coordinate-classwide-exam",
+      "kind": "goal_transition",
+      "actor_id": "actor.suzune-horikita",
+      "source_pdf_pages": [
+        48,
+        49,
+        50,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ],
+      "evidence_refs": [
+        "y1v6.ev.018",
+        "y1v6.ev.027",
+        "y1v6.ev.028",
+        "y1v6.ev.030"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.018",
+          "page": 48
+        },
+        {
+          "id": "y1v6.ev.027",
+          "page": 76
+        },
+        {
+          "id": "y1v6.ev.028",
+          "page": 78
+        },
+        {
+          "id": "y1v6.ev.030",
+          "page": 80
+        }
+      ],
+      "adversarial_counterclaim": "Change in teamwork method does not imply Suzune abandoned her Class A/Manabu objectives.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling",
+      "kind": "goal_transition",
+      "actor_id": "actor.suzune-horikita",
+      "source_pdf_pages": [
+        44,
+        45,
+        46,
+        48,
+        49,
+        50,
+        118,
+        119,
+        120,
+        121,
+        122
+      ],
+      "evidence_refs": [
+        "y1v6.ev.016",
+        "y1v6.ev.018",
+        "y1v6.ev.049"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.016",
+          "page": 44
+        },
+        {
+          "id": "y1v6.ev.018",
+          "page": 48
+        },
+        {
+          "id": "y1v6.ev.049",
+          "page": 121
+        }
+      ],
+      "adversarial_counterclaim": "Horikita's choice not to expel Kushida cannot require Kushida to become trustworthy after the wager.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack",
+      "kind": "goal_transition",
+      "actor_id": "actor.suzune-horikita",
+      "source_pdf_pages": [
+        104,
+        105,
+        106,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185
+      ],
+      "evidence_refs": [
+        "y1v6.ev.045",
+        "y1v6.ev.065",
+        "y1v6.ev.066"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.045",
+          "page": 105
+        },
+        {
+          "id": "y1v6.ev.065",
+          "page": 177
+        },
+        {
+          "id": "y1v6.ev.066",
+          "page": 181
+        }
+      ],
+      "adversarial_counterclaim": "School question approval is source-backed independent reasoning, not predestination or ownership by X.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.ken-sudo.improve-studies-under-tutoring",
+      "kind": "goal_transition",
+      "actor_id": "actor.ken-sudo",
+      "source_pdf_pages": [
+        17,
+        18,
+        30,
+        31,
+        32,
+        33
+      ],
+      "evidence_refs": [
+        "y1v6.ev.004",
+        "y1v6.ev.010"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.004",
+          "page": 17
+        },
+        {
+          "id": "y1v6.ev.010",
+          "page": 31
+        }
+      ],
+      "adversarial_counterclaim": "Sudō's studied exams incorporate variable difficulty and sports bonuses; training gains can regress.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.yukimura.offer-personalized-teaching",
+      "kind": "goal_transition",
+      "actor_id": "actor.yukimura",
+      "source_pdf_pages": [
+        87,
+        88,
+        96,
+        97,
+        132,
+        133,
+        134
+      ],
+      "evidence_refs": [
+        "y1v6.ev.038",
+        "y1v6.ev.042",
+        "y1v6.ev.053"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.038",
+          "page": 87
+        },
+        {
+          "id": "y1v6.ev.042",
+          "page": 96
+        },
+        {
+          "id": "y1v6.ev.053",
+          "page": 132
+        }
+      ],
+      "adversarial_counterclaim": "Yukimura tutoring is a new contextual strategy, not mandatory altruism in all futures.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.yukimura.use-preferred-name-keisei",
+      "kind": "goal_transition",
+      "actor_id": "actor.yukimura",
+      "source_pdf_pages": [
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152
+      ],
+      "evidence_refs": [
+        "y1v6.ev.056",
+        "y1v6.ev.058"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.056",
+          "page": 150
+        },
+        {
+          "id": "y1v6.ev.058",
+          "page": 151
+        }
+      ],
+      "adversarial_counterclaim": "Preferred given name Keisei cannot rewrite official identity or earlier actor memory.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.airi-sakura.request-friendship-group-entry",
+      "kind": "goal_transition",
+      "actor_id": "actor.airi-sakura",
+      "source_pdf_pages": [
+        97,
+        98,
+        151,
+        152,
+        153,
+        154,
+        155
+      ],
+      "evidence_refs": [
+        "y1v6.ev.043",
+        "y1v6.ev.057"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.043",
+          "page": 97
+        },
+        {
+          "id": "y1v6.ev.057",
+          "page": 152
+        }
+      ],
+      "adversarial_counterclaim": "Sakura joining a circle is an observed initiative, not an automatic romance or universal confidence.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets",
+      "kind": "goal_transition",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "source_pdf_pages": [
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158
+      ],
+      "evidence_refs": [
+        "y1v6.ev.056",
+        "y1v6.ev.057",
+        "y1v6.ev.059"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.056",
+          "page": 150
+        },
+        {
+          "id": "y1v6.ev.057",
+          "page": 152
+        },
+        {
+          "id": "y1v6.ev.059",
+          "page": 158
+        }
+      ],
+      "adversarial_counterclaim": "Kiyotaka's friends do not thereby inherit White Room/X information or inevitable future loyalty.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.kikyo-kushida.seek-status-through-confidences",
+      "kind": "goal_transition",
+      "actor_id": "actor.kikyo-kushida",
+      "source_pdf_pages": [
+        10,
+        11,
+        12,
+        125,
+        126,
+        127,
+        128,
+        129
+      ],
+      "evidence_refs": [
+        "y1v6.ev.001",
+        "y1v6.ev.002",
+        "y1v6.ev.051"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.001",
+          "page": 10
+        },
+        {
+          "id": "y1v6.ev.002",
+          "page": 11
+        },
+        {
+          "id": "y1v6.ev.051",
+          "page": 126
+        }
+      ],
+      "adversarial_counterclaim": "Kushida's retrospective status/approval account is self-report and cannot force identical trauma in divergence.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation",
+      "kind": "goal_transition",
+      "actor_id": "actor.kikyo-kushida",
+      "source_pdf_pages": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199
+      ],
+      "evidence_refs": [
+        "y1v6.ev.049",
+        "y1v6.ev.072",
+        "y1v6.ev.073"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.049",
+          "page": 121
+        },
+        {
+          "id": "y1v6.ev.072",
+          "page": 194
+        },
+        {
+          "id": "y1v6.ev.073",
+          "page": 197
+        }
+      ],
+      "adversarial_counterclaim": "Conceded bet causes temporary ceasefire while hostility persists, not permanent redemption.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation",
+      "kind": "goal_transition",
+      "actor_id": "actor.kakeru-ryuen",
+      "source_pdf_pages": [
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74
+      ],
+      "evidence_refs": [
+        "y1v6.ev.022",
+        "y1v6.ev.023",
+        "y1v6.ev.025",
+        "y1v6.ev.026"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.022",
+          "page": 60
+        },
+        {
+          "id": "y1v6.ev.023",
+          "page": 64
+        },
+        {
+          "id": "y1v6.ev.025",
+          "page": 72
+        },
+        {
+          "id": "y1v6.ev.026",
+          "page": 73
+        }
+      ],
+      "adversarial_counterclaim": "Ryūen suspects X without discovering identity; information goal can evolve without guaranteed coercive tactics.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum",
+      "kind": "goal_transition",
+      "actor_id": "actor.kakeru-ryuen",
+      "source_pdf_pages": [
+        202,
+        203,
+        204,
+        207,
+        208
+      ],
+      "evidence_refs": [
+        "y1v6.ev.075",
+        "y1v6.ev.078",
+        "y1v6.ev.079"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.075",
+          "page": 202
+        },
+        {
+          "id": "y1v6.ev.078",
+          "page": 207
+        },
+        {
+          "id": "y1v6.ev.079",
+          "page": 208
+        }
+      ],
+      "adversarial_counterclaim": "Ryūen's long-term Class A objective explicitly remains while he tactically sends false Kushida answers.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.honami-ichinose.help-across-classes-with-competitive-limits",
+      "kind": "goal_transition",
+      "actor_id": "actor.honami-ichinose",
+      "source_pdf_pages": [
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115
+      ],
+      "evidence_refs": [
+        "y1v6.ev.047",
+        "y1v6.ev.048"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.047",
+          "page": 108
+        },
+        {
+          "id": "y1v6.ev.048",
+          "page": 115
+        }
+      ],
+      "adversarial_counterclaim": "Ichinose's documented solidarity may persist; tension is not evidence her entire goal was replaced.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.katsuragi.regret-cooperation-with-ryuen",
+      "kind": "goal_transition",
+      "actor_id": "actor.katsuragi",
+      "source_pdf_pages": [
+        22,
+        23,
+        24,
+        168,
+        169
+      ],
+      "evidence_refs": [
+        "y1v6.ev.007",
+        "y1v6.ev.063"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.007",
+          "page": 23
+        },
+        {
+          "id": "y1v6.ev.063",
+          "page": 168
+        }
+      ],
+      "adversarial_counterclaim": "Katsuragi's declared regret does not entail a secret anti-Ryūen pact.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    },
+    {
+      "id": "y1v6.goal.nagumo.announce-student-council-overhaul",
+      "kind": "goal_transition",
+      "actor_id": "actor.nagumo",
+      "source_pdf_pages": [
+        14,
+        15,
+        16
+      ],
+      "evidence_refs": [
+        "y1v6.ev.003"
+      ],
+      "primary_pdf_anchor_refs": [
+        {
+          "id": "y1v6.ev.003",
+          "page": 15
+        }
+      ],
+      "adversarial_counterclaim": "Nagumo's presidential policy agenda is a speech, not proof every institutional rule changed.",
+      "assessment": "PASS_HISTORICAL_CAUSAL_EXAMPLE_NOT_RUNTIME_POLICY",
+      "reviewer": "SAME_ASSISTANT_TWO_METHODS",
+      "third_party_signoff": false
+    }
+  ],
+  "notices": [
+    "A same-assistant second reading is not independent human or separate-model validation",
+    "A short verbatim snippet proves the PDF location, not by itself the semantics of the full claim",
+    "Unresolved material authorship and unpublished final scores remain explicitly open"
+  ]
+}

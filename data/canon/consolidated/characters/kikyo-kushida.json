@@ -9,7 +9,8 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -123,7 +124,9 @@
     },
     "strategy": {
       "behavioral_case_refs": [
-        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates"
+        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
       ],
       "context_evidence_refs": [
         "y1v1.ev.075",
@@ -248,16 +251,25 @@
       ]
     },
     "motivation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+        "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets"
+      ],
       "context_evidence_refs": [
         "y1v2.ev.017",
         "y1v5.ev.074",
-        "y1v5.ev.075"
+        "y1v5.ev.075",
+        "y1v6.ev.001",
+        "y1v6.ev.002",
+        "y1v6.ev.052",
+        "y1v6.ev.073"
       ]
     },
     "exam": {
       "behavioral_case_refs": [
-        "y1v3.case.kikyo-kushida.propose-hidden-leader-horikita"
+        "y1v3.case.kikyo-kushida.propose-hidden-leader-horikita",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage"
       ],
       "context_evidence_refs": [
         "y1v3.ev.037",
@@ -266,7 +278,13 @@
         "y1v4.ev.041",
         "y1v45.ev.035",
         "y1v5.ev.002",
-        "y1v5.ev.026"
+        "y1v5.ev.026",
+        "y1v6.ev.033",
+        "y1v6.ev.049",
+        "y1v6.ev.066",
+        "y1v6.ev.071",
+        "y1v6.ev.072",
+        "y1v6.ev.075"
       ]
     },
     "resources": {
@@ -296,10 +314,13 @@
       ]
     },
     "risk_management": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
+      ],
       "context_evidence_refs": [
         "y1v45.ev.036",
-        "y1v5.ev.046"
+        "y1v5.ev.046",
+        "y1v6.ev.049"
       ]
     },
     "communication": {
@@ -315,7 +336,10 @@
       ]
     },
     "epistemics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.002",
         "y1v5.ev.025",
@@ -323,7 +347,9 @@
         "y1v5.ev.061",
         "y1v5.ev.063",
         "y1v5.ev.065",
-        "y1v5.ev.077"
+        "y1v5.ev.077",
+        "y1v6.ev.016",
+        "y1v6.ev.071"
       ]
     },
     "negotiation": {
@@ -355,13 +381,19 @@
     "information": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v5.ev.023"
+        "y1v5.ev.023",
+        "y1v6.ev.002",
+        "y1v6.ev.062"
       ]
     },
     "trust": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets"
+      ],
       "context_evidence_refs": [
-        "y1v5.ev.025"
+        "y1v5.ev.025",
+        "y1v6.ev.001",
+        "y1v6.ev.002"
       ]
     },
     "sports": {
@@ -378,7 +410,8 @@
       "context_evidence_refs": [
         "y1v5.ev.039",
         "y1v5.ev.051",
-        "y1v5.ev.056"
+        "y1v5.ev.056",
+        "y1v6.ev.033"
       ]
     },
     "coercion": {
@@ -387,7 +420,9 @@
         "y1v5.ev.047",
         "y1v5.ev.062",
         "y1v5.ev.075",
-        "y1v5.ev.076"
+        "y1v5.ev.076",
+        "y1v6.ev.051",
+        "y1v6.ev.062"
       ]
     },
     "misconduct": {
@@ -404,31 +439,101 @@
       ]
     },
     "relationship": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.053",
-        "y1v5.ev.061"
+        "y1v5.ev.061",
+        "y1v6.ev.073"
       ]
     },
     "deception": {
       "behavioral_case_refs": [
         "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
-        "y1v5.case.kikyo-kushida.volunteer-paid-mixed-event-substitution"
+        "y1v5.case.kikyo-kushida.volunteer-paid-mixed-event-substitution",
+        "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage"
       ],
       "context_evidence_refs": [
-        "y1v5.ev.074"
+        "y1v5.ev.074",
+        "y1v6.ev.062",
+        "y1v6.ev.075"
       ]
     },
     "counterstrategy": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v5.ev.077"
+        "y1v5.ev.077",
+        "y1v6.ev.066"
+      ]
+    },
+    "privacy": {
+      "behavioral_case_refs": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.001",
+        "y1v6.ev.016",
+        "y1v6.ev.051"
+      ]
+    },
+    "retrospective": {
+      "behavioral_case_refs": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.016",
+        "y1v6.ev.051"
+      ]
+    },
+    "pairing": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.033"
+      ]
+    },
+    "agreement": {
+      "behavioral_case_refs": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.049",
+        "y1v6.ev.052",
+        "y1v6.ev.072",
+        "y1v6.ev.073"
+      ]
+    },
+    "threat": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.052"
+      ]
+    },
+    "authority": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.066"
+      ]
+    },
+    "uncertainty": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.072"
+      ]
+    },
+    "cheating": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.075"
       ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge. Y1 V5: actor-scoped athletics and strategy evidence provisional; no maximal physical ratings, hidden truth, or future memory without audit.",
+  "semantic_audit_notes": "Volume 1 paraphrases distinguish narrated observation, claim and narrator inference. Year 1 Volume 2 appended; case-by-case semantic audit and operator release pending. Claims by other speakers are not actor behaviors. Volume 3 source time and post-exam retrospective explanations are separately gated: no prior actor knowledge presumed. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge. Y1 V5: actor-scoped athletics and strategy evidence provisional; no maximal physical ratings, hidden truth, or future memory without audit. Y1 V6 source-scoped report evidence, no automatic future memory or guaranteed goals.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false
@@ -451,7 +556,9 @@
   },
   "goal_transition_refs": [
     "y1v5.goal.kikyo-kushida.expulsion-prioritized-over-class-rank",
-    "y1v5.goal.kikyo-kushida.expand-expulsion-target-to-ayanokoji"
+    "y1v5.goal.kikyo-kushida.expand-expulsion-target-to-ayanokoji",
+    "y1v6.goal.kikyo-kushida.seek-status-through-confidences",
+    "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation"
   ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

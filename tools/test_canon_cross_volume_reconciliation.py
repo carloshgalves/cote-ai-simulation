@@ -13,9 +13,10 @@ J=lambda p:json.loads(Path(p).read_text(encoding="utf-8"))
 index=J(B/"indexes/retrospective-event-map.json")
 source=J(B/"evidence/y1-v045.json")
 source5=J(B/"evidence/y1-v05.json")
+source6=J(B/"evidence/y1-v06.json")
 reg=J(B/"audits/source-review-register-y1-v045.json")
 originals={r["id"] for r in J(B/"evidence/y1-v03.json")["records"]+J(B/"evidence/y1-v04.json")["records"]}
-current={r["id"] for r in source["records"]+source5["records"]}
+current={r["id"] for r in source["records"]+source5["records"]+source6["records"]}
 dossiers={key:J(ROOT/row["path"]) for key,row in index["event_lookup"].items()}
 exam=J(B/"exams/y1-zodiac-cruise.json")
 school=J(B/"institutions/anhs.json")
@@ -26,16 +27,16 @@ def problems(s):
     idx=s["index"];doss=s["dossiers"];src=s["sources"];new=s["current"];exam=s["exam"];reg=s["reg"]
     def require(c,msg):
         if not c: errors.append(msg)
-    require(len(doss)==11,"eleven cumulative event dossiers")
+    require(len(doss)==18,"eighteen cumulative event dossiers across V4.5 V5 V6")
     require(set(idx["event_lookup"])==set(doss),"stable IDs present in index")
     for key,d in doss.items():
         require(d["id"]==key,"dossier id "+key)
         require(d["status"] in {"OPEN","PARTIALLY_EXPLAINED","RESOLVED","CONFLICT"},"dossier status "+key)
         require(all(x in src for x in d["canonical_event_sources"]),"prior anchor exists "+key)
         for rel in d["later_revelations"]:
-            require(rel["source_id"] in {"ln.y1.v045.sevenseas.en.operator-provided","ln.y1.v05.sevenseas.en.operator-provided"},"true source locator "+key)
-            require(all((rid.startswith("y1v45.") if "v045." in rel["source_id"] else rid.startswith("y1v5.")) for rid in rel["evidence_refs"]),"source volume matches evidence "+key)
-            require(rel["chapter"] in (range(1,8) if "v045." in rel["source_id"] else range(1,10)) and bool(rel["pdf_pages"]),"chapter and physical locator "+key)
+            require(rel["source_id"] in {"ln.y1.v045.sevenseas.en.operator-provided","ln.y1.v05.sevenseas.en.operator-provided","ln.y1.v06.sevenseas.en.operator-provided"},"true source locator "+key)
+            require(all(rid.startswith("y1v45." if ".v045." in rel["source_id"] else ("y1v5." if ".v05." in rel["source_id"] else "y1v6.")) for rid in rel["evidence_refs"]),"source volume matches evidence "+key)
+            require(rel["chapter"] in (range(1,8) if ".v045." in rel["source_id"] or ".v06." in rel["source_id"] else range(1,10)) and bool(rel["pdf_pages"]),"chapter and physical locator "+key)
             require(rel["relationship"] in {"SUPPLEMENTS","RESOLVES_AMBIGUITY","CORRECTS_PRIOR_INTERPRETATION","CHALLENGES_WITH_CONFLICT","CONTEXTUALIZES"},"relation "+key)
             require(all(x in new for x in rel["evidence_refs"]),"later evidence belongs to its actual source "+key)
             require(all(item["since"] and item["status"] for item in rel["actor_knowledge"]),"nonempty actor knowledge gate "+key)
@@ -66,6 +67,16 @@ def problems(s):
     require(any("anonymous" in x.lower() for x in v5_trap["unresolved"]),"anonymous sender remains unknown")
     require(any("Ibuki" in x and "Kinoshita" in x for x in v5_trap["unresolved"]),"source conflict not erased")
     require("y1v5.ev.075" in [r for rel in v5_trap["later_revelations"] for r in rel["evidence_refs"]],"Ryuen humiliating objective traced")
+    shuffle=doss["evt.y1.v06.paper-shuffle-question-authority-and-swap"]
+    require(shuffle["status"]=="RESOLVED","V6 accepted exam sheets trace")
+    require("y1v6.ev.066" in [r for z in shuffle["later_revelations"] for r in z["evidence_refs"]],"Horikita source of school-approved counterplan")
+    kushida_past=doss["evt.y1.v06.kushida-juniorhigh-secret-breach"]
+    require("Manabu" in " ".join(kushida_past["unresolved"]),"Manabu must not inherit Kushida private confession")
+    x=doss["evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"]
+    require(x["status"]=="PARTIALLY_EXPLAINED","X identity still unknown")
+    require(any("identity" in gap.lower() for gap in x["unresolved"]),"Ryuen has no authorized X identity")
+    ichinose=doss["evt.y1.v06.ichinose-fraud-accusation-letter"]
+    require(ichinose["status"]=="PARTIALLY_EXPLAINED","fraud refuted while mail author remains unknown")
     reverse={}
     for key,d in doss.items():
         for aid in set(d["canonical_event_sources"]+[ref for rel in d["later_revelations"] for ref in rel["evidence_refs"]]):

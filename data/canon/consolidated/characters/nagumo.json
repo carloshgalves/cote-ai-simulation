@@ -1,16 +1,30 @@
 {
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.nagumo",
-  "display_name": "Nagumo (given name not supplied in this volume)",
+  "display_name": "Miyabi Nagumo",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "ASSISTANT_INITIAL_PASS_AUDIT_PENDING",
   "identity": {
-    "role_summary": "ANHS student council vice president observed playing volleyball and described by Ichinose as Class B origin and prospective president.",
-    "aliases": []
+    "role_summary": "Second-year Class A; former student council vice president, publicly inaugurated as president after Manabu Horikita in Y1 V6.",
+    "aliases": [
+      "Nagumo Miyabi",
+      "Nagumo"
+    ],
+    "temporal_updates": [
+      {
+        "since": "Y1_V06_CH2_P15",
+        "source_evidence_id": "y1v6.ev.003",
+        "kind": "PUBLIC_IDENTITY_AND_OFFICE_CONFIRMATION",
+        "given_name": "Miyabi",
+        "office": "STUDENT_COUNCIL_PRESIDENT",
+        "earlier_office": "VICE_PRESIDENT"
+      }
+    ]
   },
   "knowledge_time_policy": {
     "canonical_after_divergence_is_not_actor_memory": true,
@@ -30,18 +44,21 @@
     },
     "politics": {
       "behavioral_case_refs": [
-        "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition"
+        "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition",
+        "y1v6.case.nagumo.announce-student-council-centralizing-reforms"
       ],
       "context_evidence_refs": [
         "y1v45.ev.047",
         "y1v45.ev.048",
         "y1v5.ev.057",
-        "y1v5.ev.058"
+        "y1v5.ev.058",
+        "y1v6.ev.003"
       ]
     },
     "leadership": {
       "behavioral_case_refs": [
-        "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition"
+        "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition",
+        "y1v6.case.nagumo.announce-student-council-centralizing-reforms"
       ],
       "context_evidence_refs": [
         "y1v45.ev.048",
@@ -67,15 +84,30 @@
       "context_evidence_refs": [
         "y1v5.ev.057"
       ]
+    },
+    "student_council": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.003"
+      ]
+    },
+    "authority": {
+      "behavioral_case_refs": [
+        "y1v6.case.nagumo.announce-student-council-centralizing-reforms"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.003"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Source confirms recreational performance; student council background and future presidency are Ichinose's account and predictions. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory.",
+  "semantic_audit_notes": "Source confirms recreational performance; student council background and future presidency are Ichinose's account and predictions. Y1 V5: provisional actor-scoped athletic and exam evidence; no maximal physical rating or unearned retrospective memory. Y1 V6 source-scoped behavioral claims; preserve historical actor knowledge and allow alternative future goals. Y1 V6 physical p15 directly identifies Miyabi and confirms presidency, but explicitly says immediate rule implementation is delayed.",
   "uncertainties": {
-    "given_name_unknown_in_source": true,
+    "given_name_unknown_in_source": false,
     "council_selection_claims_not_official_rule": true,
-    "future_political_outcome_unknown": true
+    "future_political_outcome_unknown": false,
+    "future_rule_implementation_unknown": true
   },
   "generation_policy": "Use one global identity across future volumes",
   "retrieval_policy": {
@@ -83,5 +115,9 @@
     "contextual_facts": "MENTIONS_NOT_FEATS",
     "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [
+    "y1v6.goal.nagumo.announce-student-council-overhaul"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

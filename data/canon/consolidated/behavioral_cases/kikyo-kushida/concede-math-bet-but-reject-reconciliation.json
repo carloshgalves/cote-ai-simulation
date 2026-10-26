@@ -1,0 +1,61 @@
+{
+  "id": "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "concede math bet but reject reconciliation",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "After observing unexpected math questions, estimates a low score, admits losing to Suzune and promises not to interfere while rejecting a handshake.",
+  "observed_result": "Coercive prior wager changes stated immediate tactics but not observed affection or permanent cooperation.",
+  "epistemic_limits": "A verbal promise and projected score are not completed school-certified reconciliation or transcript.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199
+    ],
+    "chapter": 7,
+    "additional_chapters": [],
+    "source_status": "ASSISTANT_PRIMARY_PDF_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED"
+  },
+  "other_actors": [
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "agreement",
+    "relationship",
+    "motivation",
+    "epistemics"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "agreement",
+    "relationship",
+    "motivation",
+    "epistemics"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.071",
+    "y1v6.ev.072",
+    "y1v6.ev.073"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_BOUND_REVIEW_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION",
+  "individual_review": {
+    "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+    "evidence_refs": [
+      "y1v6.ev.071",
+      "y1v6.ev.072",
+      "y1v6.ev.073"
+    ],
+    "adversarial_matrix_id": "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+    "independent_third_party_verified": false,
+    "source_review_status": "ASSISTANT_COMPLETED"
+  }
+}

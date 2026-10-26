@@ -1,0 +1,101 @@
+{
+  "schema_version": "volume-coverage-v1",
+  "source": "ln.y1.v06.sevenseas.en.operator-provided",
+  "pdf_pages": 211,
+  "narrative_chapters": [
+    {
+      "chapter": 1,
+      "pdf_pages": [
+        10,
+        12
+      ],
+      "title": "Kushida Kikyou's Soliloquy"
+    },
+    {
+      "chapter": 2,
+      "pdf_pages": [
+        14,
+        29
+      ],
+      "title": "The Changing Class D"
+    },
+    {
+      "chapter": 3,
+      "pdf_pages": [
+        30,
+        59
+      ],
+      "title": "The Paper Shuffle"
+    },
+    {
+      "chapter": 4,
+      "pdf_pages": [
+        60,
+        75
+      ],
+      "title": "Class C Makes Its Move"
+    },
+    {
+      "chapter": 5,
+      "pdf_pages": [
+        76,
+        131
+      ],
+      "title": "A Means of Escape"
+    },
+    {
+      "chapter": 6,
+      "pdf_pages": [
+        132,
+        176
+      ],
+      "title": "The Ayanokouji Group's Formation"
+    },
+    {
+      "chapter": 7,
+      "pdf_pages": [
+        177,
+        209
+      ],
+      "title": "A Difference in Determination"
+    }
+  ],
+  "report_based_evidence_candidates": 80,
+  "records": 80,
+  "cases": 43,
+  "behavioral_cases": 43,
+  "goal_transitions": 15,
+  "illustrated_school_cards": 2,
+  "new_actors": 5,
+  "retrospective_dossiers_added": 7,
+  "retrospective_dossiers_updated": 3,
+  "chapter_evidence_counts": {
+    "1": 2,
+    "2": 7,
+    "3": 12,
+    "4": 5,
+    "5": 26,
+    "6": 12,
+    "7": 16
+  },
+  "source_review": "ASSISTANT_138_ITEM_TWO_METHOD_SOURCE_AND_ADVERSARIAL_PASS_COMPLETED_EXTERNAL_INDEPENDENT_PENDING",
+  "assistant_full_individual_review_done": true,
+  "independent_review_done": false,
+  "pending_semantic_items": 0,
+  "pending_independent_review_items": 138,
+  "release": "SOURCE_ASSISTANT_PASS_COMPLETED_EXTERNAL_INDEPENDENT_AND_OPERATOR_GATE_PENDING",
+  "extraction_policy": "Preserve page source, speaker/self-report/inference, school authority and actor knowledge timing",
+  "open_findings": [
+    "V6-F003",
+    "V6-F004",
+    "V6-F005",
+    "V6-F006"
+  ],
+  "engine_memory_admission": false,
+  "operator_release": "NOT_REQUESTED",
+  "assistant_targeted_semantic_review_items": 31,
+  "assistant_actor_case_structural_checks": 43,
+  "assistant_goal_transition_checks": 15,
+  "assistant_second_pass_adversarial_items": 138,
+  "assistant_direct_primary_source_anchored_items": 80
+}

@@ -1,0 +1,45 @@
+{
+  "id": "evt.y1.v03.ryuen-katsuragi-alliance-contract-terms",
+  "event_time": "Y1_PRIOR_TO_V06_CLASS_A_POLITICAL_PRESSURES",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v6.ev.007"
+  ],
+  "prior_ambiguities": [
+    "What precise earlier bargain linked Katsuragi and Ryūen?",
+    "Does Katsuragi still consider Ryūen trustworthy?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+      "chapter": 6,
+      "pdf_pages": [
+        168,
+        169
+      ],
+      "evidence_refs": [
+        "y1v6.ev.063"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "Katsuragi observes declining influence and expresses regret regarding the past Ryūen cooperation. Full bargain terms remain unstated.",
+      "world_epistemic_status": "SOURCE_MODE_AND_SPEAKER_BOUNDED_PRIVATE_OR_INSTITUTIONAL_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.katsuragi",
+          "since": "Y1_V06_CH2_AND_CH6",
+          "status": "KNOWS_OWN_REGRET"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V06_CH2",
+          "status": "HEARS_WARNING"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Exact original contract consideration and authority remain unknown.",
+    "Declining factional support is not proof of absolute loss of influence."
+  ]
+}

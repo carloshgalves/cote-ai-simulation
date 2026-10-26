@@ -4,7 +4,8 @@
   "display_name": "Shiho Manabe",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v04.sevenseas.en.operator-provided"
+    "ln.y1.v04.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "PENDING_INDIVIDUAL_SEMANTIC_REVIEW",
   "identity": {
@@ -37,7 +38,8 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v4.ev.055",
-        "y1v4.ev.082"
+        "y1v4.ev.082",
+        "y1v6.ev.025"
       ]
     },
     "emotion": {
@@ -74,7 +76,8 @@
         "y1v4.ev.097",
         "y1v4.ev.098",
         "y1v4.ev.106",
-        "y1v4.ev.131"
+        "y1v4.ev.131",
+        "y1v6.ev.025"
       ]
     },
     "strategy": {
@@ -98,11 +101,29 @@
       "context_evidence_refs": [
         "y1v4.ev.131"
       ]
+    },
+    "intimidation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.024"
+      ]
+    },
+    "information": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.024"
+      ]
+    },
+    "investigation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.025"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Y1 V4 scene-specific reference; speaker allegations remain uncertain, abuse is descriptively represented without promotion as prescriptive behavior. Adversarial V4 source-gap review: false Manabe witness story and Hoshinomiya's discretionary Rabbit assignment are source-scoped; group selection is not a verified VIP assignment formula.",
+  "semantic_audit_notes": "Y1 V4 scene-specific reference; speaker allegations remain uncertain, abuse is descriptively represented without promotion as prescriptive behavior. Adversarial V4 source-gap review: false Manabe witness story and Hoshinomiya's discretionary Rabbit assignment are source-scoped; group selection is not a verified VIP assignment formula. Y1 V6 source-scoped report evidence, no automatic future memory or guaranteed goals.",
   "uncertainties": {
     "future_actions_unknown": true,
     "private_vip_disclosure_actor_scoped": true

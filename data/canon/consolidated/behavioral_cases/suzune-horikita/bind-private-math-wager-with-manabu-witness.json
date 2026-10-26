@@ -1,0 +1,58 @@
+{
+  "id": "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "bind private math wager with manabu witness",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Accepts high-stakes asymmetric math wager, invites Manabu solely as commitment witness without exposing Kushida's prior secret.",
+  "observed_result": "Agreement acquires a witness but is not an independently court-validated enforceable expulsion order.",
+  "epistemic_limits": "Do not give Manabu knowledge of Kushida's confessed acts because he observed the wager.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      118,
+      119,
+      120,
+      121,
+      122,
+      129,
+      130
+    ],
+    "chapter": 5,
+    "additional_chapters": [],
+    "source_status": "ASSISTANT_PRIMARY_PDF_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida",
+    "actor.manabu-horikita"
+  ],
+  "capabilities_supported": [
+    "agreement",
+    "negotiation",
+    "privacy"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "agreement",
+    "negotiation",
+    "privacy"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.049",
+    "y1v6.ev.052"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_BOUND_REVIEW_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION",
+  "individual_review": {
+    "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+    "evidence_refs": [
+      "y1v6.ev.049",
+      "y1v6.ev.052"
+    ],
+    "adversarial_matrix_id": "y1v6.case.suzune-horikita.bind-private-math-wager-with-manabu-witness",
+    "independent_third_party_verified": false,
+    "source_review_status": "ASSISTANT_COMPLETED"
+  }
+}

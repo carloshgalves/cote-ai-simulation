@@ -1,0 +1,57 @@
+{
+  "id": "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "choose false kushida answers after x transaction",
+  "context": "Year 1 Volume 6; episode-limited source evidence and actor-knowledge rules, not deterministic simulation behavior",
+  "observed_actions": "Receives an anonymous warning/ultimatum, evaluates three options and intentionally provides Kushida incorrect mathematics questions.",
+  "observed_result": "Preserves Suzune's enrollment while denying Kushida a win and refusing to give X the obvious cheating-expulsion outcome. His declared enduring ambition to reach Class A is explicitly unchanged at PDF p207; this is a local tactic, not a change in ultimate objective.",
+  "epistemic_limits": "Ryūen's later explanation of incentives is attributed; X remains unidentified, so do not credit Kiyotaka as known counterparty. Do not mistake local accommodation of Horikita for strategic alliance with Class D.",
+  "source": {
+    "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      202,
+      203,
+      204,
+      207,
+      208
+    ],
+    "chapter": 7,
+    "additional_chapters": [],
+    "source_status": "ASSISTANT_PRIMARY_PDF_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "negotiation",
+    "motivation"
+  ],
+  "information_available": "Only facts directly observed, received or recalled by this actor at the scene; no retroactive transfer of private confidences or X identity",
+  "counterfactual_test": "Change environmental pressures, trust, academic strengths or evidence; an analogous result or goal change is not guaranteed",
+  "topics": [
+    "strategy",
+    "negotiation",
+    "motivation"
+  ],
+  "evidence_refs": [
+    "y1v6.ev.075",
+    "y1v6.ev.078",
+    "y1v6.ev.079"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "ASSISTANT_SOURCE_BOUND_REVIEW_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
+  "behavioral_policy": "SOURCE_DESCRIPTION_NOT_PRESCRIPTIVE_OR_RUNTIME_ACTION",
+  "individual_review": {
+    "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+    "evidence_refs": [
+      "y1v6.ev.075",
+      "y1v6.ev.078",
+      "y1v6.ev.079"
+    ],
+    "adversarial_matrix_id": "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction",
+    "independent_third_party_verified": false,
+    "source_review_status": "ASSISTANT_COMPLETED"
+  }
+}

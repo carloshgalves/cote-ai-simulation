@@ -1,0 +1,59 @@
+{
+  "id": "evt.y1.v06.math-wager-and-future-interference",
+  "event_time": "Y1_PAPER_SHUFFLE_MATH_BET",
+  "status": "PARTIALLY_EXPLAINED",
+  "canonical_event_sources": [
+    "y1v6.ev.049",
+    "y1v6.ev.050"
+  ],
+  "prior_ambiguities": [
+    "Will Kushida obtain winning score by leaked questions?",
+    "Does Manabu know Kushida's history?",
+    "Does a promise to stop interference cause durable trust?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        194,
+        197
+      ],
+      "evidence_refs": [
+        "y1v6.ev.071",
+        "y1v6.ev.072",
+        "y1v6.ev.073"
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "explanation": "Kushida concedes losing the high-stakes private math wager and agrees not to undermine Suzune; she still hates her. Scores discussed remain self-estimates until school publication.",
+      "world_epistemic_status": "SOURCE_MODE_AND_SPEAKER_BOUNDED_PRIVATE_OR_INSTITUTIONAL_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "Y1_V06_CH7_CONCESSION",
+          "status": "HEARD_PROMISE"
+        },
+        {
+          "actor": "actor.kikyo-kushida",
+          "since": "Y1_V06_CH7_CONCESSION",
+          "status": "PROMISED_STOP_INTERFERENCE"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V06_CH7_CONVERSATION",
+          "status": "WITNESSED_CONCESSION"
+        }
+      ],
+      "no_backdated_global_knowledge": true,
+      "resolves_assertion_refs": [
+        "y1v6.ev.049",
+        "y1v6.ev.050"
+      ]
+    }
+  ],
+  "unresolved": [
+    "Official final mathematics scores and future compliance are not shown.",
+    "Manabu witnessed terms but not Kushida's complete earlier confession.",
+    "The bet is asymmetric and cannot be generalized to any student contract."
+  ]
+}

@@ -88,6 +88,15 @@ def violations(bundle):
     conflicting=exam["scoring"].get("team_loss_rule_source_discrepancy",{})
     if conflicting.get("state")!="UNRESOLVED_PRINTED_RULE_VS_CLOSING_NARRATION":issues.append("fabricated scoring reconciliation")
     if "16 votes" not in evid["y1v5.ev.014"]["summary"] or "13" not in evid["y1v5.ev.014"]["summary"]:issues.append("vote counts erased")
+    details={
+      "y1v5.ev.021":["ties legs","adapting tempo"],
+      "y1v5.ev.028":["catches the fist","palm"],
+      "y1v5.ev.035":["height order","deciding round"],
+      "y1v5.ev.049":["third draw","last in his heat"],
+      "y1v5.ev.057":["Manabu finishes ahead","obstructs"]
+    }
+    for item,terms in details.items():
+        if not all(term in evid[item]["summary"] for term in terms):issues.append("lost event-local V5 source "+item)
     if source["claims_all_verified"] is not False:
         issues.append("unproven global canon verification")
     if bundle["review"]["review_actor"]!="ASSISTANT_DIRECT_SOURCE_AND_ADVERSARIAL_NO_INDEPENDENT_REVIEW":
@@ -126,10 +135,15 @@ def mutant_case(n):
     24:lambda: b["review"].update(review_actor="INDEPENDENT_PEER_VERIFIED"),
     25:lambda: b["exam"]["scoring"]["team_loss_rule_source_discrepancy"].update(state="RECONCILED_BY_NEW_EXCEPTIONS"),
     26:lambda: b["e"]["y1v5.ev.014"].update(summary="Majority vote held with no reported tally"),
+    27:lambda: b["e"]["y1v5.ev.021"].update(summary="All athletes fully coordinated"),
+    28:lambda: b["e"]["y1v5.ev.028"].update(summary="A prolonged clean fight establishes Sudou superiority"),
+    29:lambda: b["e"]["y1v5.ev.035"].update(summary="The tug winner is not identified"),
+    30:lambda: b["e"]["y1v5.ev.049"].update(summary="Ayanokoji definitely won the scavenger race"),
+    31:lambda: b["e"]["y1v5.ev.057"].update(summary="Ayanokoji won a clean and timed sprint"),
     }
     cases[n]()
     return b
 
-for i in range(27):
+for i in range(32):
     assert violations(mutant_case(i)),("negative mutation escaped",i)
-print("PASS Y1 V5 direct-source adversarial: 129 source/actor/goal audit items, 25 negative mutations rejected, no fabricated peer approval")
+print("PASS Y1 V5 direct-source adversarial: 129 source/actor/goal audit items, 32 negative mutations rejected, no fabricated peer approval")

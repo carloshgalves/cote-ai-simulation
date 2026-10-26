@@ -8,7 +8,8 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "NO_VOLUME_0_1_OBSERVED_EVIDENCE",
   "identity": {
@@ -47,7 +48,10 @@
         "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance",
         "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
         "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording",
-        "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence"
+        "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
+        "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction",
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment",
+        "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects"
       ],
       "context_evidence_refs": [
         "y1v2.ev.081",
@@ -82,7 +86,13 @@
         "y1v5.ev.065",
         "y1v5.ev.074",
         "y1v5.ev.075",
-        "y1v5.ev.076"
+        "y1v5.ev.076",
+        "y1v6.ev.022",
+        "y1v6.ev.023",
+        "y1v6.ev.046",
+        "y1v6.ev.054",
+        "y1v6.ev.078",
+        "y1v6.ev.079"
       ]
     },
     "economy": {
@@ -135,7 +145,8 @@
         "y1v3.ev.105",
         "y1v4.ev.041",
         "y1v4.ev.126",
-        "y1v4.ev.128"
+        "y1v4.ev.128",
+        "y1v6.ev.075"
       ]
     },
     "emotion": {
@@ -153,7 +164,8 @@
         "y1v4.ev.037",
         "y1v4.ev.074",
         "y1v45.ev.007",
-        "y1v5.ev.009"
+        "y1v5.ev.009",
+        "y1v6.ev.023"
       ]
     },
     "reasoning": {
@@ -169,7 +181,8 @@
     "negotiation": {
       "behavioral_case_refs": [
         "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance",
-        "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita"
+        "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
+        "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction"
       ],
       "context_evidence_refs": [
         "y1v4.ev.076",
@@ -192,12 +205,15 @@
     },
     "motivation": {
       "behavioral_case_refs": [
-        "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence"
+        "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
+        "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction"
       ],
       "context_evidence_refs": [
         "y1v45.ev.007",
         "y1v5.ev.074",
-        "y1v5.ev.075"
+        "y1v5.ev.075",
+        "y1v6.ev.022",
+        "y1v6.ev.079"
       ]
     },
     "risk_management": {
@@ -252,25 +268,38 @@
       ]
     },
     "epistemics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.kakeru-ryuen.threaten-target-in-photograph-to-identify-x"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.042",
         "y1v5.ev.061",
         "y1v5.ev.063",
         "y1v5.ev.065",
         "y1v5.ev.066",
-        "y1v5.ev.077"
+        "y1v5.ev.077",
+        "y1v6.ev.026",
+        "y1v6.ev.046",
+        "y1v6.ev.064",
+        "y1v6.ev.074",
+        "y1v6.ev.077",
+        "y1v6.ev.080"
       ]
     },
     "coercion": {
       "behavioral_case_refs": [
-        "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence"
+        "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment",
+        "y1v6.case.kakeru-ryuen.threaten-target-in-photograph-to-identify-x"
       ],
       "context_evidence_refs": [
         "y1v5.ev.047",
         "y1v5.ev.062",
         "y1v5.ev.075",
-        "y1v5.ev.076"
+        "y1v5.ev.076",
+        "y1v6.ev.023",
+        "y1v6.ev.025",
+        "y1v6.ev.074"
       ]
     },
     "relationship": {
@@ -280,9 +309,13 @@
       ]
     },
     "deception": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori"
+      ],
       "context_evidence_refs": [
-        "y1v5.ev.074"
+        "y1v5.ev.074",
+        "y1v6.ev.075",
+        "y1v6.ev.076"
       ]
     },
     "counterstrategy": {
@@ -290,11 +323,106 @@
       "context_evidence_refs": [
         "y1v5.ev.077"
       ]
+    },
+    "investigation": {
+      "behavioral_case_refs": [
+        "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment",
+        "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects",
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.022",
+        "y1v6.ev.025",
+        "y1v6.ev.026",
+        "y1v6.ev.054",
+        "y1v6.ev.074",
+        "y1v6.ev.076"
+      ]
+    },
+    "intimidation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.024"
+      ]
+    },
+    "information": {
+      "behavioral_case_refs": [
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.024",
+        "y1v6.ev.078"
+      ]
+    },
+    "privacy": {
+      "behavioral_case_refs": [
+        "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.025"
+      ]
+    },
+    "communication": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.046"
+      ]
+    },
+    "accusation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.064",
+        "y1v6.ev.077"
+      ]
+    },
+    "school_authority": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.064"
+      ]
+    },
+    "cheating": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.075"
+      ]
+    },
+    "attribution": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.076"
+      ]
+    },
+    "transaction": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.078"
+      ]
+    },
+    "decision": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.079"
+      ]
+    },
+    "threat": {
+      "behavioral_case_refs": [
+        "y1v6.case.kakeru-ryuen.threaten-target-in-photograph-to-identify-x"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.080"
+      ]
+    },
+    "blackmail": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.080"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "No speculative Ryuen feats, identity X or Volume 2+ history; legacy YAML supplies no authorized direct Y1_START memory. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge. Y1 V5: actor-scoped athletics and strategy evidence provisional; no maximal physical ratings, hidden truth, or future memory without audit.",
+  "semantic_audit_notes": "No speculative Ryuen feats, identity X or Volume 2+ history; legacy YAML supplies no authorized direct Y1_START memory. Y1 V2 adds context-only actor mentions; reports, inference and direct acts must not be conflated. Y1 V3 context-only mentions never establish primary actions; observed feats are source-scoped, not post-divergence memory. Zodiac/VIP source events are fenced: secret notifications, later deductions, exposed device screens and selected moral claims are not automatic prior memory. V4.5 observed/proclaimed facts limited by scene time; extra-story pool reveals true prevention but must not become perpetrator knowledge. Y1 V5: actor-scoped athletics and strategy evidence provisional; no maximal physical ratings, hidden truth, or future memory without audit. Y1 V6 report-derived claims, cases and goals are source-scoped; private knowledge never auto-disclosed.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false
@@ -317,7 +445,9 @@
   },
   "goal_transition_refs": [
     "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score",
-    "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent"
+    "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent",
+    "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation",
+    "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum"
   ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

@@ -4,7 +4,8 @@
   "display_name": "Hasebe",
   "modeling_tier": "MINIMAL_ENTITY",
   "source_coverage": [
-    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+    "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "ln.y1.v06.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -17,7 +18,9 @@
   },
   "domains": {
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.117"
       ]
@@ -27,11 +30,66 @@
       "context_evidence_refs": [
         "y1v1.ev.117"
       ]
+    },
+    "academic": {
+      "behavioral_case_refs": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.037",
+        "y1v6.ev.040"
+      ]
+    },
+    "studies": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.037",
+        "y1v6.ev.039"
+      ]
+    },
+    "results": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.037",
+        "y1v6.ev.040"
+      ]
+    },
+    "diagnostic": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.039"
+      ]
+    },
+    "reasoning": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.039"
+      ]
+    },
+    "friendship": {
+      "behavioral_case_refs": [
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle"
+      ],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
+    },
+    "cooperation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v6.ev.056"
+      ]
     }
   },
   "source_documents": [],
   "historical_context_only": false,
-  "semantic_audit_notes": "Minimum volume-supported traits; no unstated skills, personalities or identity assertions.",
+  "semantic_audit_notes": "Minimum volume-supported traits; no unstated skills, personalities or identity assertions. Y1 V6 report-derived claims, cases and goals are source-scoped; private knowledge never auto-disclosed.",
   "uncertainties": {
     "identity_hypothesis_not_confirmed": false,
     "future_fate_unknown": false

@@ -63,7 +63,19 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "Does not guarantee permanent goodwill, obedience or success in divergent trials.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.018",
+          "y1v6.ev.027",
+          "y1v6.ev.028",
+          "y1v6.ev.030"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.suzune-horikita.coordinate-classwide-exam",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling",
@@ -103,7 +115,18 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "Does not guarantee permanent goodwill, obedience or success in divergent trials.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.016",
+          "y1v6.ev.018",
+          "y1v6.ev.049"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack",
@@ -144,7 +167,18 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "Does not guarantee permanent goodwill, obedience or success in divergent trials.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.045",
+          "y1v6.ev.065",
+          "y1v6.ev.066"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.ken-sudo.improve-studies-under-tutoring",
@@ -178,7 +212,17 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "Performance changes need training and support; no permanent gain or romantic reward guaranteed.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.004",
+          "y1v6.ev.010"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.ken-sudo.improve-studies-under-tutoring",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.yukimura.offer-personalized-teaching",
@@ -214,7 +258,18 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "School card D- cooperation is historical; preferred name does not change stable actor ID.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.038",
+          "y1v6.ev.042",
+          "y1v6.ev.053"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.yukimura.offer-personalized-teaching",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.yukimura.use-preferred-name-keisei",
@@ -252,7 +307,17 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "School card D- cooperation is historical; preferred name does not change stable actor ID.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.056",
+          "y1v6.ev.058"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.yukimura.use-preferred-name-keisei",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.airi-sakura.request-friendship-group-entry",
@@ -287,7 +352,17 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "Timidity is not a hard prohibition on initiative; different groups could reject her.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.043",
+          "y1v6.ev.057"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.airi-sakura.request-friendship-group-entry",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets",
@@ -332,7 +407,18 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "Friendship does not transfer secret X identity or hidden past to peers.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.056",
+          "y1v6.ev.057",
+          "y1v6.ev.059"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.kikyo-kushida.seek-status-through-confidences",
@@ -369,7 +455,18 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "Confession and promise never establish permanent reform, universal deception skills or a diagnosis.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.001",
+          "y1v6.ev.002",
+          "y1v6.ev.051"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.kikyo-kushida.seek-status-through-confidences",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation",
@@ -409,7 +506,18 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "Confession and promise never establish permanent reform, universal deception skills or a diagnosis.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.049",
+          "y1v6.ev.072",
+          "y1v6.ev.073"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation",
@@ -454,7 +562,19 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "No knowing X identity or automatic knowledge of material crime authorship; local choices contingent. Ryūen's enduring goal to reach Class A is explicitly unchanged at PDF p207; local X hunt and choice to retain Suzune are not abandonment of that end goal.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.022",
+          "y1v6.ev.023",
+          "y1v6.ev.025",
+          "y1v6.ev.026"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum",
@@ -488,7 +608,18 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "No knowing X identity or automatic knowledge of material crime authorship; local choices contingent. Ryūen's enduring goal to reach Class A is explicitly unchanged at PDF p207; local X hunt and choice to retain Suzune are not abandonment of that end goal.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.075",
+          "y1v6.ev.078",
+          "y1v6.ev.079"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.honami-ichinose.help-across-classes-with-competitive-limits",
@@ -525,7 +656,17 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "No secret motive inferred from discomfort or compulsory future altruism.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.047",
+          "y1v6.ev.048"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.honami-ichinose.help-across-classes-with-competitive-limits",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.katsuragi.regret-cooperation-with-ryuen",
@@ -558,7 +699,17 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "Regret does not automatically formalize new alliances.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.007",
+          "y1v6.ev.063"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.katsuragi.regret-cooperation-with-ryuen",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.goal.nagumo.announce-student-council-overhaul",
@@ -588,7 +739,16 @@
         "New information or incentives may produce a different decision"
       ],
       "simulation_guard": "A political proposal cannot rewrite currently operative institutional rules.",
-      "source_review": "REPORT_CANDIDATE_INDIVIDUAL_SEMANTIC_REVIEW_PENDING"
+      "source_review": "ASSISTANT_INDIVIDUAL_SEMANTIC_AND_ADVERSARIAL_PASS_EXTERNAL_INDEPENDENT_REQUIRED",
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "evidence_refs": [
+          "y1v6.ev.003"
+        ],
+        "adversarial_matrix_id": "y1v6.goal.nagumo.announce-student-council-overhaul",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     }
   ]
 }

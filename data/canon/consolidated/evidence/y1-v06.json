@@ -50,13 +50,24 @@
         "trust",
         "privacy"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.kushida-juniorhigh-secret-breach"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 10,
+          "fragment": "hate losing far more",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.001",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.002",
@@ -106,13 +117,24 @@
         "trust",
         "information"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.kushida-juniorhigh-secret-breach"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 11,
+          "fragment": "Trustworthy people receive access",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.002",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.003",
@@ -165,11 +187,22 @@
         "student_council",
         "authority"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 15,
+          "fragment": "my name is Nagumo Miyabi",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.003",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.004",
@@ -217,13 +250,24 @@
         "discipline",
         "development"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v05.sudo-withdrawal-and-return"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 17,
+          "fragment": "actually took notes",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.004",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.005",
@@ -271,11 +315,22 @@
         "trust",
         "deception"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 18,
+          "fragment": "concealed your excellence",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.005",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.006",
@@ -326,11 +381,22 @@
         "romance",
         "social"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 19,
+          "fragment": "are you going out with anyone",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.006",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.007",
@@ -380,13 +446,24 @@
         "alliance",
         "risk_management"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v03.ryuen-katsuragi-alliance-contract-terms"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 23,
+          "fragment": "I regret it",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.007",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.008",
@@ -429,11 +506,22 @@
         "class_points",
         "results"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 23,
+          "fragment": "874",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.008",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.009",
@@ -486,11 +574,22 @@
         "relationship",
         "security"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 27,
+          "fragment": "taken countermeasures",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.009",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.010",
@@ -543,13 +642,24 @@
         "results",
         "development"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v05.sudo-withdrawal-and-return"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 31,
+          "fragment": "fifty-seven",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.010",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.011",
@@ -594,11 +704,22 @@
         "academic",
         "results"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 31,
+          "fragment": "forty-three",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.011",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.012",
@@ -643,11 +764,22 @@
         "academic",
         "deception"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 32,
+          "fragment": "sixty-four",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.012",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.013",
@@ -705,11 +837,22 @@
         "rules",
         "authority"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 34,
+          "fragment": "eight subjects",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.013",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.014",
@@ -759,11 +902,22 @@
         "rules",
         "class_points"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 38,
+          "fragment": "fifty class points",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.014",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.015",
@@ -816,11 +970,22 @@
         "strategy",
         "reasoning"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 40,
+          "fragment": "partner",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.015",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.016",
@@ -871,13 +1036,24 @@
         "epistemics",
         "privacy"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.kushida-juniorhigh-secret-breach"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 44,
+          "fragment": "same junior high",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.016",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.017",
@@ -926,11 +1102,22 @@
         "conflict",
         "coercion"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 47,
+          "fragment": "lies",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.017",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.018",
@@ -980,11 +1167,22 @@
         "motivation",
         "ethics"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 48,
+          "fragment": "expelled",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.018",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.019",
@@ -1031,13 +1229,24 @@
         "retrospective",
         "epistemics"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v05.class-d-roster-leak-and-counterplay"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 50,
+          "fragment": "recording",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.019",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.020",
@@ -1088,11 +1297,22 @@
         "reasoning",
         "teamwork"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 55,
+          "fragment": "high-scoring",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.020",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.021",
@@ -1143,11 +1363,22 @@
         "opponent_selection",
         "strategy"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 56,
+          "fragment": "Class C",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.021",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.022",
@@ -1199,13 +1430,24 @@
         "investigation",
         "motivation"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 60,
+          "fragment": "Class D",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.022",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.023",
@@ -1267,11 +1509,22 @@
         "coercion",
         "social"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 64,
+          "fragment": "phones",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.023",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.024",
@@ -1321,11 +1574,22 @@
         "intimidation",
         "information"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 71,
+          "fragment": "Manabe",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.024",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.025",
@@ -1378,14 +1642,25 @@
         "privacy",
         "coercion"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v05.class-d-roster-leak-and-counterplay",
         "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 72,
+          "fragment": "Karuizawa",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.025",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.026",
@@ -1432,14 +1707,25 @@
         "epistemics",
         "investigation"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v05.class-d-roster-leak-and-counterplay",
         "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 73,
+          "fragment": "Yukimura",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.026",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.027",
@@ -1492,11 +1778,22 @@
         "apology",
         "cooperation"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 76,
+          "fragment": "apologize",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.027",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.028",
@@ -1544,11 +1841,22 @@
         "pairing",
         "strategy"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 78,
+          "fragment": "zero points",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.028",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.029",
@@ -1593,11 +1901,22 @@
         "cooperation",
         "uncertainty"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 79,
+          "fragment": "Kouenji",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.029",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.030",
@@ -1651,11 +1970,22 @@
         "pairing",
         "results"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 80,
+          "fragment": "Class C will attack Class D",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.030",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.031",
@@ -1702,11 +2032,22 @@
         "pairing",
         "results"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 83,
+          "fragment": "Horikita Suzune and Sudou Ken",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.031",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.032",
@@ -1753,11 +2094,22 @@
         "pairing",
         "results"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 83,
+          "fragment": "Hirata Yousuke and Yamauchi Haruki",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.032",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.033",
@@ -1804,11 +2156,22 @@
         "pairing",
         "results"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 83,
+          "fragment": "Kushida Kikyou and Ike Kanji",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.033",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.034",
@@ -1855,11 +2218,22 @@
         "pairing",
         "results"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 83,
+          "fragment": "Yukimura Teruhiko and Inogashira Kokoro",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.034",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.035",
@@ -1906,11 +2280,22 @@
         "pairing",
         "relationship"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 83,
+          "fragment": "Satou Maya",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.035",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.036",
@@ -1957,11 +2342,22 @@
         "pairing",
         "results"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 83,
+          "fragment": "Okiya",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.036",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.037",
@@ -2012,11 +2408,22 @@
         "studies",
         "results"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 85,
+          "fragment": "seventy-nine",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.037",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.038",
@@ -2064,11 +2471,22 @@
         "studies",
         "development"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 87,
+          "fragment": "tutor",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.038",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.039",
@@ -2138,11 +2556,22 @@
         "diagnostic",
         "reasoning"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 100,
+          "fragment": "correct",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.039",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.040",
@@ -2192,11 +2621,22 @@
         "academic",
         "results"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 94,
+          "fragment": "seventy",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.040",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.041",
@@ -2242,11 +2682,22 @@
         "social",
         "emotion"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 95,
+          "fragment": "October 20",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.041",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.042",
@@ -2294,11 +2745,22 @@
         "teamwork",
         "leadership"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 96,
+          "fragment": "sports festival",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.042",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.043",
@@ -2345,11 +2807,22 @@
         "relationship",
         "social"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 97,
+          "fragment": "Sakura",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.043",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.044",
@@ -2400,11 +2873,22 @@
         "question_design",
         "reasoning"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 101,
+          "fragment": "questions",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.044",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.045",
@@ -2455,13 +2939,24 @@
         "information",
         "risk_management"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.paper-shuffle-question-authority-and-swap"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 105,
+          "fragment": "questions",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.045",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.046",
@@ -2508,11 +3003,22 @@
         "communication",
         "epistemics"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 106,
+          "fragment": "email",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.046",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.047",
@@ -2575,11 +3081,22 @@
         "cooperation",
         "ethics"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 108,
+          "fragment": "Ichinose",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.047",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.048",
@@ -2626,11 +3143,22 @@
         "emotion",
         "epistemics"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 115,
+          "fragment": "giving me far too much credit",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.048",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.049",
@@ -2686,13 +3214,24 @@
         "exam",
         "risk_management"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.math-wager-and-future-interference"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 121,
+          "fragment": "mathematics",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.049",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.050",
@@ -2742,13 +3281,24 @@
         "information",
         "strategy"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.math-wager-and-future-interference"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 124,
+          "fragment": "incident",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.050",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.051",
@@ -2802,14 +3352,25 @@
         "privacy",
         "coercion"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v04.zodiac-dragon-vip-disclosure",
         "evt.y1.v06.kushida-juniorhigh-secret-breach"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 126,
+          "fragment": "blog",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.051",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.052",
@@ -2857,11 +3418,22 @@
         "threat",
         "agreement"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 129,
+          "fragment": "drop out",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.052",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.053",
@@ -2911,11 +3483,22 @@
         "teaching",
         "development"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 132,
+          "fragment": "Yukimura",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.053",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.054",
@@ -2973,11 +3556,22 @@
         "investigation",
         "strategy"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 136,
+          "fragment": "Ryuuen",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.054",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.055",
@@ -3027,13 +3621,24 @@
         "information",
         "epistemics"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.hiyori-sugar-observation-and-prior-social-inquiry"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 140,
+          "fragment": "sugar",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.055",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.056",
@@ -3100,11 +3705,22 @@
         "relationship",
         "cooperation"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 150,
+          "fragment": "Haruka",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.056",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.057",
@@ -3158,11 +3774,22 @@
         "social",
         "relationship"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 152,
+          "fragment": "Sakura",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.057",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.058",
@@ -3212,11 +3839,22 @@
         "family",
         "social"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 151,
+          "fragment": "Keisei",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.058",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.059",
@@ -3267,11 +3905,22 @@
         "secrecy",
         "information"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 158,
+          "fragment": "birthday",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.059",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.060",
@@ -3319,13 +3968,24 @@
         "investigation",
         "deception"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.hiyori-sugar-observation-and-prior-social-inquiry"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 157,
+          "fragment": "sugar",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.060",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.061",
@@ -3379,11 +4039,22 @@
         "relationship",
         "epistemics"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 161,
+          "fragment": "grabbed me",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.061",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.062",
@@ -3438,11 +4109,22 @@
         "coercion",
         "information"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 166,
+          "fragment": "juice",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.062",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.063",
@@ -3489,13 +4171,24 @@
         "politics",
         "leadership"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v03.ryuen-katsuragi-alliance-contract-terms"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 168,
+          "fragment": "Katsuragi",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.063",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.064",
@@ -3552,13 +4245,24 @@
         "epistemics",
         "school_authority"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.ichinose-fraud-accusation-letter"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 170,
+          "fragment": "fraud",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.064",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.065",
@@ -3611,13 +4315,24 @@
         "submission",
         "strategy"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.paper-shuffle-question-authority-and-swap"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 177,
+          "fragment": "questions",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.065",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.066",
@@ -3672,13 +4387,24 @@
         "counterstrategy",
         "authority"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.paper-shuffle-question-authority-and-swap"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 181,
+          "fragment": "questions",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.066",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.067",
@@ -3724,11 +4450,22 @@
         "leadership",
         "ethics"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 187,
+          "fragment": "traitor",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.067",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.068",
@@ -3774,11 +4511,22 @@
         "rules",
         "results"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 188,
+          "fragment": "692",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.068",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.069",
@@ -3826,11 +4574,22 @@
         "epistemics",
         "leadership"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 189,
+          "fragment": "Hirata",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.069",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.070",
@@ -3878,11 +4637,22 @@
         "deception",
         "academic"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
-      "related_canonical_event_ids": []
+      "related_canonical_event_ids": [],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 193,
+          "fragment": "sixty",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.070",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.071",
@@ -3927,13 +4697,24 @@
         "exam",
         "epistemics"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.math-wager-and-future-interference"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 193,
+          "fragment": "Kushida",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.071",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.072",
@@ -3986,13 +4767,24 @@
         "agreement",
         "uncertainty"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.math-wager-and-future-interference"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 194,
+          "fragment": "ninety-eight",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.072",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.073",
@@ -4042,13 +4834,24 @@
         "relationship",
         "motivation"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.math-wager-and-future-interference"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 197,
+          "fragment": "hand",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.073",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.074",
@@ -4097,13 +4900,24 @@
         "investigation",
         "epistemics"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 200,
+          "fragment": "picture",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.074",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.075",
@@ -4154,13 +4968,24 @@
         "deception",
         "cheating"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 202,
+          "fragment": "completely different",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.075",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.076",
@@ -4208,13 +5033,24 @@
         "attribution",
         "deception"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 204,
+          "fragment": "blazer",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.076",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.077",
@@ -4261,13 +5097,24 @@
         "accusation",
         "epistemics"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.ichinose-fraud-accusation-letter"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 205,
+          "fragment": "letter",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.077",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.078",
@@ -4315,13 +5162,24 @@
         "information",
         "strategy"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 207,
+          "fragment": "Transaction",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.078",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.079",
@@ -4369,13 +5227,24 @@
         "decision",
         "motivation"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 208,
+          "fragment": "three options",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.079",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     },
     {
       "id": "y1v6.ev.080",
@@ -4421,13 +5290,24 @@
         "blackmail",
         "epistemics"
       ],
-      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "assertion_status": "ASSISTANT_PDF_SOURCE_AND_ADVERSARIAL_TWO_METHODS_COMPLETE_EXTERNAL_INDEPENDENT_PENDING",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
       "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
       "related_canonical_event_ids": [
         "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"
-      ]
+      ],
+      "individual_review": {
+        "completed_by": "SAME_ASSISTANT_TWO_METHODS",
+        "primary_pdf_anchor": {
+          "pdf_page": 208,
+          "fragment": "destroy her",
+          "verification": "DIRECT_LOCAL_PRIMARY_PDF_PAGE_TEXT_MATCH"
+        },
+        "adversarial_matrix_id": "y1v6.ev.080",
+        "independent_third_party_verified": false,
+        "source_review_status": "ASSISTANT_COMPLETED"
+      }
     }
   ]
 }

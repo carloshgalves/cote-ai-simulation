@@ -1,0 +1,38 @@
+{
+  "schema_version": "canon-illustrated-school-cards-v1",
+  "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+  "source_type": "ILLUSTRATED_IN_UNIVERSE_SCHOOL_DATABASE_SNAPSHOTS",
+  "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
+  "cards": [
+    {
+      "actor_id": "actor.yukimura",
+      "label_name": "Yukimura Teruhiko",
+      "pdf_page": 13,
+      "claimed_record_date": "7/1",
+      "attributes": {
+        "academic": "A",
+        "intelligence": "A-",
+        "decision_making": "C",
+        "physical": "D-",
+        "cooperativeness": "D-"
+      },
+      "epistemic_boundary": "Past school-database baseline, not permanent traits or simulation scalar ratings"
+    },
+    {
+      "actor_id": "actor.maya-sato",
+      "label_name": "Satou Maya",
+      "pdf_page": 29,
+      "claimed_record_date": "7/1",
+      "attributes": {
+        "academic": "D-",
+        "intelligence": "D-",
+        "decision_making": "D-",
+        "physical": "C",
+        "cooperativeness": "C-"
+      },
+      "epistemic_boundary": "Past school-database snapshot; does not foreclose later growth or dictate romance"
+    }
+  ],
+  "numeric_conversion": "FORBIDDEN",
+  "promotion": "NOT_AUTHORIZED"
+}

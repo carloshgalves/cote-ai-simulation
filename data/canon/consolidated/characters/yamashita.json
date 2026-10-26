@@ -1,0 +1,26 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.yamashita",
+  "display_name": "Yamashita (first name not established here)",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v06.sevenseas.en.operator-provided"
+  ],
+  "source_status": "REPORT_CANDIDATES_DIRECT_SOURCE_REVIEW_PENDING",
+  "identity": {
+    "role_summary": "Character explicitly mentioned in Year 1 Volume 6",
+    "aliases": []
+  },
+  "domains": {},
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "semantic_audit_notes": "Do not promote report references to exclusive actor feats or permanent attributes before primary-source audit",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTIONS_NOT_FEATS",
+    "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
+    "verified_facts": "INDEPENDENT_AUDIT_REQUIRED"
+  }
+}

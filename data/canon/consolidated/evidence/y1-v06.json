@@ -1,0 +1,3961 @@
+{
+  "schema_version": "consolidated-source-evidence-v1",
+  "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+  "records": [
+    {
+      "id": "y1v6.ev.001",
+      "source_catalog_id": "V6-E001",
+      "domain": "motivation",
+      "summary": "Autodescrição: busca de aprovação e intolerância à derrota",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          10,
+          11,
+          12
+        ],
+        "pdf_page_range": [
+          10,
+          12
+        ],
+        "chapter": 1,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "SELF_REPORT",
+      "source_report_mode": "AUTORRELATO",
+      "source_report_attribution": "Kushida",
+      "story_time": "Y1_PRE_ENROLLMENT_KUSHIDA_RETROSPECTIVE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 1,
+        "pdf_pages": [
+          10,
+          11,
+          12
+        ],
+        "chapter_order": 1
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "trust",
+        "privacy"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.002",
+      "source_catalog_id": "V6-E002",
+      "domain": "motivation",
+      "summary": "Persona prestativa, coleta de segredos e colapso anterior narrados em retrospecto",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          10,
+          11,
+          12
+        ],
+        "pdf_page_range": [
+          10,
+          12
+        ],
+        "chapter": 1,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "SELF_REPORT",
+      "source_report_mode": "AUTORRELATO",
+      "source_report_attribution": "Kushida",
+      "story_time": "Y1_PRE_ENROLLMENT_KUSHIDA_RETROSPECTIVE",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 1,
+        "pdf_pages": [
+          10,
+          11,
+          12
+        ],
+        "chapter_order": 1
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "trust",
+        "information"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.003",
+      "source_catalog_id": "V6-E003",
+      "domain": "politics",
+      "summary": "Nagumo sucede Manabu e anuncia reformas centralizadoras no conselho",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          14,
+          15,
+          16
+        ],
+        "pdf_page_range": [
+          14,
+          16
+        ],
+        "chapter": 2,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "CHARACTER_DECLARATION",
+      "source_report_mode": "DECLARAÇÃO",
+      "source_report_attribution": "Nagumo / Manabu",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          14,
+          15,
+          16
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.nagumo",
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "politics",
+        "student_council",
+        "authority"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.004",
+      "source_catalog_id": "V6-E004",
+      "domain": "studies",
+      "summary": "Passa a tomar notas e reduz conduta agressiva depois do festival",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          17,
+          18
+        ],
+        "pdf_page_range": [
+          17,
+          18
+        ],
+        "chapter": 2,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Sudō",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          17,
+          18
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "studies",
+        "discipline",
+        "development"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.005",
+      "source_catalog_id": "V6-E005",
+      "domain": "social",
+      "summary": "Colegas percebem desempenho físico ocultado e se afastam socialmente",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          17,
+          18
+        ],
+        "pdf_page_range": [
+          17,
+          18
+        ],
+        "chapter": 2,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          17,
+          18
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "trust",
+        "deception"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.006",
+      "source_catalog_id": "V6-E006",
+      "domain": "relationship",
+      "summary": "Satō pede contato, mostra atração pelo desempenho no revezamento",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          19,
+          20,
+          21
+        ],
+        "pdf_page_range": [
+          19,
+          21
+        ],
+        "chapter": 2,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "source_report_mode": "DIÁLOGO",
+      "source_report_attribution": "Satō / Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          19,
+          20,
+          21
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.maya-sato"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "romance",
+        "social"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.007",
+      "source_catalog_id": "V6-E007",
+      "domain": "politics",
+      "summary": "Admite arrependimento pela aliança com Ryūen e declínio político da facção",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          22,
+          23,
+          24
+        ],
+        "pdf_page_range": [
+          22,
+          24
+        ],
+        "chapter": 2,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "source_report_mode": "DIÁLOGO",
+      "source_report_attribution": "Katsuragi",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          22,
+          23,
+          24
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.katsuragi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "politics",
+        "alliance",
+        "risk_management"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.008",
+      "source_catalog_id": "V6-E008",
+      "domain": "class_points",
+      "summary": "Pontuações: A 874, B 753, C 542, D 262 após festival",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          23
+        ],
+        "pdf_page_range": [
+          23,
+          23
+        ],
+        "chapter": 2,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "NARRATED_DATA",
+      "source_report_mode": "DADO NARRADO",
+      "source_report_attribution": "Classes A–D",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          23
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [],
+      "topics": [
+        "class_points",
+        "results"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.009",
+      "source_catalog_id": "V6-E009",
+      "domain": "secrecy",
+      "summary": "Interação sobre Satō; proteção e apagamento de comunicações",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          25,
+          26,
+          27,
+          28
+        ],
+        "pdf_page_range": [
+          25,
+          28
+        ],
+        "chapter": 2,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "source_report_mode": "DIÁLOGO",
+      "source_report_attribution": "Karuizawa / Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 2,
+        "pdf_pages": [
+          25,
+          26,
+          27,
+          28
+        ],
+        "chapter_order": 2
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "secrecy",
+        "relationship",
+        "security"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.010",
+      "source_catalog_id": "V6-E010",
+      "domain": "academic",
+      "summary": "Média 57, posição 12ª de baixo para cima e estudo extra com Horikita",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          30,
+          31,
+          32,
+          33
+        ],
+        "pdf_page_range": [
+          30,
+          33
+        ],
+        "chapter": 3,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REPORTED_RESULT",
+      "source_report_mode": "RESULTADO",
+      "source_report_attribution": "Sudō / Horikita",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          30,
+          31,
+          32,
+          33
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic",
+        "results",
+        "development"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.011",
+      "source_catalog_id": "V6-E011",
+      "domain": "academic",
+      "summary": "Mínimo 43 em inglês, todas matérias acima de 40; classe sem expulsões",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          31
+        ],
+        "pdf_page_range": [
+          31,
+          31
+        ],
+        "chapter": 3,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REPORTED_RESULT",
+      "source_report_mode": "RESULTADO",
+      "source_report_attribution": "Yamauchi",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          31
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic",
+        "results"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.012",
+      "source_catalog_id": "V6-E012",
+      "domain": "academic",
+      "summary": "Média exposta 64 com calibração deliberada da própria aparência acadêmica",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          32
+        ],
+        "pdf_page_range": [
+          32,
+          32
+        ],
+        "chapter": 3,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "source_report_mode": "MONÓLOGO",
+      "source_report_attribution": "Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          32
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic",
+        "deception"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.013",
+      "source_catalog_id": "V6-E013",
+      "domain": "exam",
+      "summary": "Regras oficiais de quiz, pareamento, 8 disciplinas, notas mínimas e expulsão",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          34,
+          35,
+          36,
+          37,
+          38,
+          39
+        ],
+        "pdf_page_range": [
+          34,
+          39
+        ],
+        "chapter": 3,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "INSTITUTIONAL_RULE",
+      "source_report_mode": "REGRA",
+      "source_report_attribution": "Chabashira",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          34,
+          35,
+          36,
+          37,
+          38,
+          39
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "rules",
+        "authority"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.014",
+      "source_catalog_id": "V6-E014",
+      "domain": "exam",
+      "summary": "Provas elaboradas por classes; escola revisa; 50 pontos de classe",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          38,
+          39
+        ],
+        "pdf_page_range": [
+          38,
+          39
+        ],
+        "chapter": 3,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "INSTITUTIONAL_RULE",
+      "source_report_mode": "REGRA",
+      "source_report_attribution": "Chabashira",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          38,
+          39
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "rules",
+        "class_points"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.015",
+      "source_catalog_id": "V6-E015",
+      "domain": "exam",
+      "summary": "Análise de mecanismo oculto de pares e coordenação inicial",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          40,
+          41,
+          42,
+          43
+        ],
+        "pdf_page_range": [
+          40,
+          43
+        ],
+        "chapter": 3,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Horikita / Hirata",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          40,
+          41,
+          42,
+          43
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "strategy",
+        "reasoning"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.016",
+      "source_catalog_id": "V6-E016",
+      "domain": "retrospective",
+      "summary": "Horikita conhece rumores da antiga turma, sem acesso aos fatos completos",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          44,
+          45,
+          46
+        ],
+        "pdf_page_range": [
+          44,
+          46
+        ],
+        "chapter": 3,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "SECONDHAND_REPORT",
+      "source_report_mode": "RELATO DE TERCEIRO",
+      "source_report_attribution": "Horikita / Kushida",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          44,
+          45,
+          46
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "retrospective",
+        "epistemics",
+        "privacy"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.017",
+      "source_catalog_id": "V6-E017",
+      "domain": "ethics",
+      "summary": "Discussão sobre mentiras, verdade, violência e arsenal social",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          47,
+          48
+        ],
+        "pdf_page_range": [
+          47,
+          48
+        ],
+        "chapter": 3,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "source_report_mode": "DIÁLOGO",
+      "source_report_attribution": "Ayanokōji / Horikita",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          47,
+          48
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "ethics",
+        "conflict",
+        "coercion"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.018",
+      "source_catalog_id": "V6-E018",
+      "domain": "leadership",
+      "summary": "Recusa descartar Kushida apesar de risco; objetivo preservar a turma",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          48,
+          49,
+          50
+        ],
+        "pdf_page_range": [
+          48,
+          50
+        ],
+        "chapter": 3,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED_DECISION",
+      "source_report_mode": "DECISÃO",
+      "source_report_attribution": "Horikita",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          48,
+          49,
+          50
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "motivation",
+        "ethics"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.019",
+      "source_catalog_id": "V6-E019",
+      "domain": "retrospective",
+      "summary": "Confirma a Horikita ter obtido gravação que impediu Ryūen no festival",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          50,
+          51
+        ],
+        "pdf_page_range": [
+          50,
+          51
+        ],
+        "chapter": 3,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "source_report_mode": "DIÁLOGO",
+      "source_report_attribution": "Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          50,
+          51
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "retrospective",
+        "epistemics"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.020",
+      "source_catalog_id": "V6-E020",
+      "domain": "exam",
+      "summary": "Inferem ordenação oposta de notas como pareamento e discutem risco de alunos médios",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          53,
+          54,
+          55
+        ],
+        "pdf_page_range": [
+          53,
+          55
+        ],
+        "chapter": 3,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REASONING",
+      "source_report_mode": "RACIOCÍNIO",
+      "source_report_attribution": "Horikita / Hirata",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          53,
+          54,
+          55
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "reasoning",
+        "teamwork"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.021",
+      "source_catalog_id": "V6-E021",
+      "domain": "exam",
+      "summary": "Decidem mirar Classe C e identificam risco do sorteio entre nominadores",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          56,
+          57,
+          58
+        ],
+        "pdf_page_range": [
+          56,
+          58
+        ],
+        "chapter": 3,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED_DECISION",
+      "source_report_mode": "DECISÃO",
+      "source_report_attribution": "Horikita / Hirata",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 3,
+        "pdf_pages": [
+          56,
+          57,
+          58
+        ],
+        "chapter_order": 3
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "opponent_selection",
+        "strategy"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.022",
+      "source_catalog_id": "V6-E022",
+      "domain": "strategy",
+      "summary": "Decide concentrar Classe C na busca pelo estrategista oculto da D",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          60,
+          61,
+          62,
+          63
+        ],
+        "pdf_page_range": [
+          60,
+          63
+        ],
+        "chapter": 4,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED_DECISION",
+      "source_report_mode": "DECISÃO",
+      "source_report_attribution": "Ryūen",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          60,
+          61,
+          62,
+          63
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "investigation",
+        "motivation"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.023",
+      "source_catalog_id": "V6-E023",
+      "domain": "strategy",
+      "summary": "Falsa inspeção de celulares é teste de lealdade, medo e comportamento",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71
+        ],
+        "pdf_page_range": [
+          63,
+          71
+        ],
+        "chapter": 4,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "STRATEGY",
+      "source_report_mode": "ESTRATÉGIA",
+      "source_report_attribution": "Ryūen",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "coercion",
+        "social"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.024",
+      "source_catalog_id": "V6-E024",
+      "domain": "intimidation",
+      "summary": "Manabe e amigas são isoladas como informantes coercivamente controladas",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          71,
+          72
+        ],
+        "pdf_page_range": [
+          71,
+          72
+        ],
+        "chapter": 4,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Manabe / Ryūen",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          71,
+          72
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.manabe-shiho"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "intimidation",
+        "information"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.025",
+      "source_catalog_id": "V6-E025",
+      "domain": "investigation",
+      "summary": "Obtém história da intimidação a Karuizawa; investiga observadores da foto",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          72,
+          73,
+          74
+        ],
+        "pdf_page_range": [
+          72,
+          74
+        ],
+        "chapter": 4,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "SECONDHAND_REPORT_AND_INFERENCE",
+      "source_report_mode": "RELATO / INFERÊNCIA",
+      "source_report_attribution": "Ryūen",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          72,
+          73,
+          74
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "investigation",
+        "privacy",
+        "coercion"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.026",
+      "source_catalog_id": "V6-E026",
+      "domain": "epistemics",
+      "summary": "Suspeita de Ayanokōji e Yukimura sem concluir qual é X",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          73,
+          74
+        ],
+        "pdf_page_range": [
+          73,
+          74
+        ],
+        "chapter": 4,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "INFERENCE",
+      "source_report_mode": "INFERÊNCIA",
+      "source_report_attribution": "Ryūen",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 4,
+        "pdf_pages": [
+          73,
+          74
+        ],
+        "chapter_order": 4
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "epistemics",
+        "investigation"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.027",
+      "source_catalog_id": "V6-E027",
+      "domain": "leadership",
+      "summary": "Horikita pede desculpas publicamente e comunica esquema de notas controladas",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          76,
+          77,
+          78,
+          79
+        ],
+        "pdf_page_range": [
+          76,
+          79
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED_ACTION",
+      "source_report_mode": "AÇÃO",
+      "source_report_attribution": "Horikita / Hirata",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          76,
+          77,
+          78,
+          79
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "apology",
+        "cooperation"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.028",
+      "source_catalog_id": "V6-E028",
+      "domain": "exam",
+      "summary": "Categorias de quiz: 0, 1, até 80, pelo menos 85; pares alto-baixo",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          78,
+          79
+        ],
+        "pdf_page_range": [
+          78,
+          79
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "STRATEGY",
+      "source_report_mode": "ESTRATÉGIA",
+      "source_report_attribution": "Horikita",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          78,
+          79
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "pairing",
+        "strategy"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.029",
+      "source_catalog_id": "V6-E029",
+      "domain": "cooperation",
+      "summary": "Ambiguidade quanto à cooperação; não promete nota específica",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          79
+        ],
+        "pdf_page_range": [
+          79,
+          79
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "source_report_mode": "DIÁLOGO",
+      "source_report_attribution": "Kōenji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          79
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "cooperation",
+        "uncertainty"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.030",
+      "source_catalog_id": "V6-E030",
+      "domain": "exam",
+      "summary": "Correspondência D↔C e A↔B confirmada; quiz resulta em pares previstos",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          80,
+          81,
+          82,
+          83
+        ],
+        "pdf_page_range": [
+          80,
+          83
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REPORTED_RESULT",
+      "source_report_mode": "RESULTADO",
+      "source_report_attribution": "Classe D / Chabashira",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          80,
+          81,
+          82,
+          83
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "pairing",
+        "results"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.031",
+      "source_catalog_id": "V6-E031",
+      "domain": "exam",
+      "summary": "Dupla confirmada para final",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          83
+        ],
+        "pdf_page_range": [
+          83,
+          83
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REPORTED_RESULT",
+      "source_report_mode": "RESULTADO",
+      "source_report_attribution": "Horikita–Sudō",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          83
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "pairing",
+        "results"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.032",
+      "source_catalog_id": "V6-E032",
+      "domain": "exam",
+      "summary": "Dupla confirmada para final",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          83
+        ],
+        "pdf_page_range": [
+          83,
+          83
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REPORTED_RESULT",
+      "source_report_mode": "RESULTADO",
+      "source_report_attribution": "Hirata–Yamauchi",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          83
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.haruki-yamauchi",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "pairing",
+        "results"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.033",
+      "source_catalog_id": "V6-E033",
+      "domain": "exam",
+      "summary": "Dupla confirmada para final",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          83
+        ],
+        "pdf_page_range": [
+          83,
+          83
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REPORTED_RESULT",
+      "source_report_mode": "RESULTADO",
+      "source_report_attribution": "Kushida–Ike",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          83
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kanji-ike"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "pairing",
+        "results"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.034",
+      "source_catalog_id": "V6-E034",
+      "domain": "exam",
+      "summary": "Dupla confirmada para final",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          83
+        ],
+        "pdf_page_range": [
+          83,
+          83
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REPORTED_RESULT",
+      "source_report_mode": "RESULTADO",
+      "source_report_attribution": "Yukimura–Inogashira",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          83
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.yukimura",
+        "actor.kokoro-inogashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "pairing",
+        "results"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.035",
+      "source_catalog_id": "V6-E035",
+      "domain": "exam",
+      "summary": "Dupla confirmada para final",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          83
+        ],
+        "pdf_page_range": [
+          83,
+          83
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REPORTED_RESULT",
+      "source_report_mode": "RESULTADO",
+      "source_report_attribution": "Ayanokōji–Satō",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          83
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.maya-sato"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "pairing",
+        "relationship"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.036",
+      "source_catalog_id": "V6-E036",
+      "domain": "exam",
+      "summary": "Dupla confirmada para final",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          83
+        ],
+        "pdf_page_range": [
+          83,
+          83
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REPORTED_RESULT",
+      "source_report_mode": "RESULTADO",
+      "source_report_attribution": "Kōenji–Okiya",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          83
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji",
+        "actor.okiya"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "pairing",
+        "results"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.037",
+      "source_catalog_id": "V6-E037",
+      "domain": "academic",
+      "summary": "Notas de quiz 79 e 1, ambos com fraquezas muito semelhantes",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          85,
+          86,
+          87
+        ],
+        "pdf_page_range": [
+          85,
+          87
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "RESULT_AND_ANALYSIS",
+      "source_report_mode": "RESULTADO / ANÁLISE",
+      "source_report_attribution": "Miyake–Hasebe",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          85,
+          86,
+          87
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.miyake",
+        "actor.hasebe"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic",
+        "studies",
+        "results"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.038",
+      "source_catalog_id": "V6-E038",
+      "domain": "leadership",
+      "summary": "Oferece tutoria apesar de histórico de isolamento acadêmico",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          87,
+          88
+        ],
+        "pdf_page_range": [
+          87,
+          88
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED_DECISION",
+      "source_report_mode": "DECISÃO",
+      "source_report_attribution": "Yukimura",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          87,
+          88
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "studies",
+        "development"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.039",
+      "source_catalog_id": "V6-E039",
+      "domain": "studies",
+      "summary": "Teste diagnóstico: mesmas respostas, 3 corretas + 1 parcial em 10",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "pdf_page_range": [
+          89,
+          100
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REPORTED_RESULT",
+      "source_report_mode": "RESULTADO",
+      "source_report_attribution": "Yukimura / Miyake / Hasebe",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.yukimura",
+        "actor.miyake",
+        "actor.hasebe"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "studies",
+        "diagnostic",
+        "reasoning"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.040",
+      "source_catalog_id": "V6-E040",
+      "domain": "academic",
+      "summary": "Aproximadamente 70 em matemática e 40 em matérias de humanas",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          93,
+          94,
+          95
+        ],
+        "pdf_page_range": [
+          93,
+          95
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REPORTED_RESULT",
+      "source_report_mode": "RESULTADO",
+      "source_report_attribution": "Miyake / Hasebe",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          93,
+          94,
+          95
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.miyake",
+        "actor.hasebe"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "academic",
+        "results"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.041",
+      "source_catalog_id": "V6-E041",
+      "domain": "birthday",
+      "summary": "Reflete sobre data de aniversário 20 de outubro e ausência de comemorações",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          95
+        ],
+        "pdf_page_range": [
+          95,
+          95
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "source_report_mode": "MONÓLOGO",
+      "source_report_attribution": "Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          95
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "birthday",
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.042",
+      "source_catalog_id": "V6-E042",
+      "domain": "development",
+      "summary": "Reconhece limites do individualismo após fracasso físico do festival",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          96,
+          97
+        ],
+        "pdf_page_range": [
+          96,
+          97
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "SELF_REPORT",
+      "source_report_mode": "AUTORRELATO",
+      "source_report_attribution": "Yukimura",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          96,
+          97
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "development",
+        "teamwork",
+        "leadership"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.043",
+      "source_catalog_id": "V6-E043",
+      "domain": "relationship",
+      "summary": "Acompanha grupos à distância; decide tentar participar",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          97,
+          98
+        ],
+        "pdf_page_range": [
+          97,
+          98
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Sakura",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          97,
+          98
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "social"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.044",
+      "source_catalog_id": "V6-E044",
+      "domain": "exam",
+      "summary": "Sugerem testar limites da banca com questões preliminares e revisar erros",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          101,
+          102,
+          103
+        ],
+        "pdf_page_range": [
+          101,
+          103
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "STRATEGY",
+      "source_report_mode": "ESTRATÉGIA",
+      "source_report_attribution": "Yukimura / Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          101,
+          102,
+          103
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "question_design",
+        "reasoning"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.045",
+      "source_catalog_id": "V6-E045",
+      "domain": "exam",
+      "summary": "Risco de vazamento das perguntas submetidas; controle de acesso",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          104,
+          105,
+          106
+        ],
+        "pdf_page_range": [
+          104,
+          106
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "source_report_mode": "DIÁLOGO",
+      "source_report_attribution": "Horikita / Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          104,
+          105,
+          106
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "information",
+        "risk_management"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.046",
+      "source_catalog_id": "V6-E046",
+      "domain": "strategy",
+      "summary": "Contato por e-mail anônimo e questionamento sobre identidade de X",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          106
+        ],
+        "pdf_page_range": [
+          106,
+          106
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Ryūen / Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          106
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "communication",
+        "epistemics"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.047",
+      "source_catalog_id": "V6-E047",
+      "domain": "relationship",
+      "summary": "Solidariedade à turma e dilemas de ajuda entre amigos rivais",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115
+        ],
+        "pdf_page_range": [
+          107,
+          115
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "source_report_mode": "DIÁLOGO",
+      "source_report_attribution": "Ichinose / Horikita",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "cooperation",
+        "ethics"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.048",
+      "source_catalog_id": "V6-E048",
+      "domain": "emotion",
+      "summary": "Fica desconcertada com elogio de bondade; causa não é demonstrada",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          114,
+          115
+        ],
+        "pdf_page_range": [
+          114,
+          115
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Ichinose",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          114,
+          115
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "epistemics"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.049",
+      "source_catalog_id": "V6-E049",
+      "domain": "agreement",
+      "summary": "Aposta sobre nota de matemática com testemunha Manabu e termos assimétricos",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          118,
+          119,
+          120,
+          121,
+          122
+        ],
+        "pdf_page_range": [
+          118,
+          122
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "CONDITIONAL_AGREEMENT",
+      "source_report_mode": "ACORDO",
+      "source_report_attribution": "Horikita / Kushida / Manabu",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          118,
+          119,
+          120,
+          121,
+          122
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.manabu-horikita",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "agreement",
+        "exam",
+        "risk_management"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.050",
+      "source_catalog_id": "V6-E050",
+      "domain": "agreement",
+      "summary": "Entra na aposta condicionando aceitação à revelação do passado de Kushida",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          123,
+          124,
+          125
+        ],
+        "pdf_page_range": [
+          123,
+          125
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED_DECISION",
+      "source_report_mode": "DECISÃO",
+      "source_report_attribution": "Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          123,
+          124,
+          125
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "agreement",
+        "information",
+        "strategy"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.051",
+      "source_catalog_id": "V6-E051",
+      "domain": "retrospective",
+      "summary": "Explica blog anônimo exposto e utilização de segredos verídicos contra turma",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          125,
+          126,
+          127,
+          128,
+          129
+        ],
+        "pdf_page_range": [
+          125,
+          129
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "FIRST_PERSON_CONFESSION",
+      "source_report_mode": "CONFISSÃO",
+      "source_report_attribution": "Kushida",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          125,
+          126,
+          127,
+          128,
+          129
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "retrospective",
+        "privacy",
+        "coercion"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.052",
+      "source_catalog_id": "V6-E052",
+      "domain": "motivation",
+      "summary": "Declara desejo de expulsar Horikita e Ayanokōji se vencer aposta",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          129,
+          130
+        ],
+        "pdf_page_range": [
+          129,
+          130
+        ],
+        "chapter": 5,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "CHARACTER_DECLARATION",
+      "source_report_mode": "DECLARAÇÃO",
+      "source_report_attribution": "Kushida",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 5,
+        "pdf_pages": [
+          129,
+          130
+        ],
+        "chapter_order": 5
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "threat",
+        "agreement"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.053",
+      "source_catalog_id": "V6-E053",
+      "domain": "studies",
+      "summary": "Método pedagógico individual com exercícios difíceis e ritmo flexível",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          132,
+          133,
+          134
+        ],
+        "pdf_page_range": [
+          132,
+          134
+        ],
+        "chapter": 6,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Yukimura",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          132,
+          133,
+          134
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "studies",
+        "teaching",
+        "development"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.054",
+      "source_catalog_id": "V6-E054",
+      "domain": "investigation",
+      "summary": "Abordagem dos suspeitos; Hiyori consulta sem acusar diretamente",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142
+        ],
+        "pdf_page_range": [
+          136,
+          142
+        ],
+        "chapter": 6,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Ryūen / Hiyori",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.hiyori-shiina"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "investigation",
+        "strategy"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.055",
+      "source_catalog_id": "V6-E055",
+      "domain": "deception",
+      "summary": "Afirma ter calculado açúcar pelo copo; explicação mais tarde contestada",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          140,
+          141,
+          142
+        ],
+        "pdf_page_range": [
+          140,
+          142
+        ],
+        "chapter": 6,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "CONTESTED_DECLARATION",
+      "source_report_mode": "DECLARAÇÃO CONTESTADA",
+      "source_report_attribution": "Hiyori",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          140,
+          141,
+          142
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.hiyori-shiina"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "deception",
+        "information",
+        "epistemics"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.056",
+      "source_catalog_id": "V6-E056",
+      "domain": "friendship",
+      "summary": "Formação do grupo por aceitação, vínculos e nomes escolhidos",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150
+        ],
+        "pdf_page_range": [
+          143,
+          150
+        ],
+        "chapter": 6,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Hasebe / Miyake / Yukimura / Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yukimura",
+        "actor.miyake",
+        "actor.hasebe"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "friendship",
+        "relationship",
+        "cooperation"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.057",
+      "source_catalog_id": "V6-E057",
+      "domain": "initiative",
+      "summary": "Rompe timidez e pede para integrar o grupo de cinco",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          151,
+          152,
+          153,
+          154,
+          155
+        ],
+        "pdf_page_range": [
+          151,
+          155
+        ],
+        "chapter": 6,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED_ACTION",
+      "source_report_mode": "AÇÃO",
+      "source_report_attribution": "Sakura",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          151,
+          152,
+          153,
+          154,
+          155
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "initiative",
+        "social",
+        "relationship"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.058",
+      "source_catalog_id": "V6-E058",
+      "domain": "identity",
+      "summary": "Prefere nome Keisei; relata que nome Teruhiko foi dado por mãe ausente",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          150,
+          151,
+          152
+        ],
+        "pdf_page_range": [
+          150,
+          152
+        ],
+        "chapter": 6,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "SELF_REPORT",
+      "source_report_mode": "AUTORRELATO",
+      "source_report_attribution": "Yukimura",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          150,
+          151,
+          152
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "family",
+        "social"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.059",
+      "source_catalog_id": "V6-E059",
+      "domain": "social",
+      "summary": "Conversa sobre aniversário, mensagens apagadas e coleta social de dados",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          156,
+          157,
+          158
+        ],
+        "pdf_page_range": [
+          156,
+          158
+        ],
+        "chapter": 6,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Ayanokōji / Karuizawa",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          156,
+          157,
+          158
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "secrecy",
+        "information"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.060",
+      "source_catalog_id": "V6-E060",
+      "domain": "investigation",
+      "summary": "Fonte da suposta dedução do açúcar é reavaliada por pesquisa de terceiros",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          157,
+          158
+        ],
+        "pdf_page_range": [
+          157,
+          158
+        ],
+        "chapter": 6,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "INVESTIGATION",
+      "source_report_mode": "INVESTIGAÇÃO",
+      "source_report_attribution": "Hiyori / Karuizawa",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          157,
+          158
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.hiyori-shiina"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "investigation",
+        "deception"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.061",
+      "source_catalog_id": "V6-E061",
+      "domain": "romance",
+      "summary": "Interesses amorosos unilaterais e limite da reciprocidade",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          159,
+          160,
+          161,
+          162
+        ],
+        "pdf_page_range": [
+          159,
+          162
+        ],
+        "chapter": 6,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Satō / Sakura / Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          159,
+          160,
+          161,
+          162
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.maya-sato",
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "romance",
+        "relationship",
+        "epistemics"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.062",
+      "source_catalog_id": "V6-E062",
+      "domain": "deception",
+      "summary": "Confronto e suco derramado, limpeza e investigação indireta de uniforme",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          163,
+          164,
+          165,
+          166,
+          167
+        ],
+        "pdf_page_range": [
+          163,
+          167
+        ],
+        "chapter": 6,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "ACTION_WITH_INFERRED_STRATEGY",
+      "source_report_mode": "AÇÃO / ESTRATÉGIA",
+      "source_report_attribution": "Karuizawa / Kushida",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          163,
+          164,
+          165,
+          166,
+          167
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "deception",
+        "coercion",
+        "information"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.063",
+      "source_catalog_id": "V6-E063",
+      "domain": "politics",
+      "summary": "Reconhece declínio de influência e perda de privilégios de liderança",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          168,
+          169
+        ],
+        "pdf_page_range": [
+          168,
+          169
+        ],
+        "chapter": 6,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "source_report_mode": "DIÁLOGO",
+      "source_report_attribution": "Katsuragi",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          168,
+          169
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.katsuragi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "politics",
+        "leadership"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.064",
+      "source_catalog_id": "V6-E064",
+      "domain": "accusation",
+      "summary": "Cartas difamatórias assinadas Ryūen; escola declara inocência de fraude",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          170,
+          171,
+          172,
+          173,
+          174
+        ],
+        "pdf_page_range": [
+          170,
+          174
+        ],
+        "chapter": 6,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "INSTITUTIONALLY_REFUTED_ACCUSATION",
+      "source_report_mode": "ACUSAÇÃO REFUTADA",
+      "source_report_attribution": "Ichinose / Ryūen",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 6,
+        "pdf_pages": [
+          170,
+          171,
+          172,
+          173,
+          174
+        ],
+        "chapter_order": 6
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "accusation",
+        "epistemics",
+        "school_authority"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.065",
+      "source_catalog_id": "V6-E065",
+      "domain": "exam",
+      "summary": "Proteção aparente das provas e condição de acesso com autorização",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          177,
+          178,
+          179,
+          180
+        ],
+        "pdf_page_range": [
+          177,
+          180
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED_DECISION",
+      "source_report_mode": "DECISÃO",
+      "source_report_attribution": "Horikita / Chabashira",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          177,
+          178,
+          179,
+          180
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "submission",
+        "strategy"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.066",
+      "source_catalog_id": "V6-E066",
+      "domain": "exam",
+      "summary": "Revelação do engano: pré-acordo impede troca real; simulação para adversários",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          181,
+          182,
+          183,
+          184,
+          185
+        ],
+        "pdf_page_range": [
+          181,
+          185
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "COUNTERSTRATEGY",
+      "source_report_mode": "CONTRAMEDIDA",
+      "source_report_attribution": "Horikita / Kushida",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          181,
+          182,
+          183,
+          184,
+          185
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "counterstrategy",
+        "authority"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.067",
+      "source_catalog_id": "V6-E067",
+      "domain": "leadership",
+      "summary": "Professora confirma fragilidade estrutural de uma classe com traidora",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          187
+        ],
+        "pdf_page_range": [
+          187,
+          187
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "REPORT_MODE_AVALIACAO",
+      "source_report_mode": "AVALIAÇÃO",
+      "source_report_attribution": "Chabashira / Horikita",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          187
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "ethics"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.068",
+      "source_catalog_id": "V6-E068",
+      "domain": "exam",
+      "summary": "Nota agregada mínima efetiva de 692 no exame final; exigência definitiva distinta da estimativa inicial de cerca de 700 pontos",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          188
+        ],
+        "pdf_page_range": [
+          188,
+          188
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "INSTITUTIONAL_FINAL_THRESHOLD",
+      "source_report_mode": "REGRA FINAL",
+      "source_report_attribution": "School / Classe D",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          188
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "rules",
+        "results"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.069",
+      "source_catalog_id": "V6-E069",
+      "domain": "secrecy",
+      "summary": "Deduz que Ayanokōji é o estrategista; promete sigilo",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          189,
+          190
+        ],
+        "pdf_page_range": [
+          189,
+          190
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "DIALOGUE",
+      "source_report_mode": "DIÁLOGO",
+      "source_report_attribution": "Hirata",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          189,
+          190
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "secrecy",
+        "epistemics",
+        "leadership"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.070",
+      "source_catalog_id": "V6-E070",
+      "domain": "exam",
+      "summary": "Ajusta meta pública para cerca de 60 na prova, sem mostrar máximo real",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          192,
+          193
+        ],
+        "pdf_page_range": [
+          192,
+          193
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "INNER_MONOLOGUE",
+      "source_report_mode": "MONÓLOGO",
+      "source_report_attribution": "Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          192,
+          193
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "deception",
+        "academic"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.071",
+      "source_catalog_id": "V6-E071",
+      "domain": "exam",
+      "summary": "Reage ao conteúdo divergente da prova de matemática",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          193
+        ],
+        "pdf_page_range": [
+          193,
+          193
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED",
+      "source_report_mode": "OBSERVAÇÃO",
+      "source_report_attribution": "Kushida",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          193
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "epistemics"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.072",
+      "source_catalog_id": "V6-E072",
+      "domain": "exam",
+      "summary": "Estimativas de matemática: Horikita ≥98; Kushida <80; aposta aceita como perdida; não equivale a boletim escolar homologado",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          194,
+          195,
+          196,
+          197
+        ],
+        "pdf_page_range": [
+          194,
+          197
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "SELF_ASSESSMENT_AND_AGREEMENT",
+      "source_report_mode": "AUTOAVALIAÇÃO / ACORDO",
+      "source_report_attribution": "Horikita / Kushida",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          194,
+          195,
+          196,
+          197
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "agreement",
+        "uncertainty"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.073",
+      "source_catalog_id": "V6-E073",
+      "domain": "agreement",
+      "summary": "Promete não interferir, mas rejeita cooperação, mantendo hostilidade",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          197,
+          198,
+          199
+        ],
+        "pdf_page_range": [
+          197,
+          199
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "CHARACTER_DECLARATION",
+      "source_report_mode": "DECLARAÇÃO",
+      "source_report_attribution": "Kushida",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          197,
+          198,
+          199
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "agreement",
+        "relationship",
+        "motivation"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.074",
+      "source_catalog_id": "V6-E074",
+      "domain": "coercion",
+      "summary": "Foto recebida por Ayanokōji e ameaça de Ryūen: identidade de X em disputa; Ryūen ainda não identifica X",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          200,
+          201
+        ],
+        "pdf_page_range": [
+          200,
+          201
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "THREAT_AND_INFERENCE",
+      "source_report_mode": "AMEAÇA / INFERÊNCIA",
+      "source_report_attribution": "Ryūen / Ayanokōji",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          200,
+          201
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "coercion",
+        "investigation",
+        "epistemics"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.075",
+      "source_catalog_id": "V6-E075",
+      "domain": "exam",
+      "summary": "Perguntas falsas, folha na roupa, risco de acusação de cola",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          202,
+          203,
+          204
+        ],
+        "pdf_page_range": [
+          202,
+          204
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "LATER_REVELATION",
+      "source_report_mode": "REVELAÇÃO",
+      "source_report_attribution": "Ryūen / Kushida",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          202,
+          203,
+          204
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "exam",
+        "deception",
+        "cheating"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.076",
+      "source_catalog_id": "V6-E076",
+      "domain": "investigation",
+      "summary": "Deduz preparação do cenário do suco e uso da informação de uniforme único; autoria material e cadeia de custódia não certificadas",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          204,
+          205
+        ],
+        "pdf_page_range": [
+          204,
+          205
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "ATTRIBUTED_INFERENCE",
+      "source_report_mode": "INFERÊNCIA ATRIBUÍDA",
+      "source_report_attribution": "Ryūen",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          204,
+          205
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "investigation",
+        "attribution",
+        "deception"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.077",
+      "source_catalog_id": "V6-E077",
+      "domain": "accusation",
+      "summary": "Afirma não ter enviado carta sobre Ichinose; remetente e propósito não provados",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          205,
+          206
+        ],
+        "pdf_page_range": [
+          205,
+          206
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "ATTRIBUTED_DECLARATION",
+      "source_report_mode": "DECLARAÇÃO ATRIBUÍDA",
+      "source_report_attribution": "Ryūen",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          205,
+          206
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "accusation",
+        "epistemics"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.078",
+      "source_catalog_id": "V6-E078",
+      "domain": "transaction",
+      "summary": "E-mail Transaction oferece aviso estratégico e demanda provas/alteração",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          207,
+          208
+        ],
+        "pdf_page_range": [
+          207,
+          208
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "MESSAGE_AND_DECISION",
+      "source_report_mode": "MENSAGEM E DECISÃO",
+      "source_report_attribution": "X / Ryūen",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          207,
+          208
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "transaction",
+        "information",
+        "strategy"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.079",
+      "source_catalog_id": "V6-E079",
+      "domain": "strategy",
+      "summary": "Três alternativas avaliadas; escolhe dar respostas falsas a Kushida",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          207,
+          208
+        ],
+        "pdf_page_range": [
+          207,
+          208
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "OBSERVED_DECISION",
+      "source_report_mode": "DECISÃO",
+      "source_report_attribution": "Ryūen",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          207,
+          208
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "decision",
+        "motivation"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    },
+    {
+      "id": "y1v6.ev.080",
+      "source_catalog_id": "V6-E080",
+      "domain": "threat",
+      "summary": "Ameaça pessoa retratada na foto para obter identidade de X",
+      "source": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          208
+        ],
+        "pdf_page_range": [
+          208,
+          208
+        ],
+        "chapter": 7,
+        "edition": "English Seven Seas PDF supplied by operator",
+        "verification": "REPORT_PROVENANCE_WITH_SPOTCHECKS_INDIVIDUAL_SOURCE_REVIEW_PENDING"
+      },
+      "source_mode": "FUTURE_THREAT",
+      "source_report_mode": "AMEAÇA FUTURA",
+      "source_report_attribution": "Ryūen",
+      "story_time": "Y1_SECOND_SEMESTER_PAPER_SHUFFLE_PREP_AND_AFTER",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v06.sevenseas.en.operator-provided",
+        "chapter": 7,
+        "pdf_pages": [
+          208
+        ],
+        "chapter_order": 7
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "threat",
+        "blackmail",
+        "epistemics"
+      ],
+      "assertion_status": "REPORT_EXTRACTED_SOURCE_SEMANTIC_REVIEW_PENDING",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "DIRECT_ACTOR_ACQUISITION_ONLY_NO_FUTURE_LEAK",
+      "portrayal_gate": "SCENE_BOUNDED_NO_NUMERIC_RATING",
+      "related_canonical_event_ids": []
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "schema_version": "canon-paper-shuffle-reference-v1",
+  "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+  "exam_id": "anhs.y1.paper-shuffle",
+  "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
+  "source_locators": {
+    "announcement_pdf_pages": [
+      34,
+      39
+    ],
+    "pairing_confirmation_pdf_pages": [
+      77,
+      83
+    ],
+    "final_threshold_pdf_page": 188,
+    "official_acceptance_counterplay_pdf_pages": [
+      177,
+      185
+    ],
+    "student_math_estimate_pdf_pages": [
+      194,
+      197
+    ]
+  },
+  "rules": {
+    "diagnostic_quiz": {
+      "questions": 100,
+      "max_points": 100,
+      "grade_credit": false,
+      "level": "THIRD_YEAR_JUNIOR_HIGH",
+      "pairing": "HIGHEST_WITH_LOWEST_CONTINUING_INWARD",
+      "tie_break": "RANDOM",
+      "strategy": "DELIBERATE_SCORE_TARGETS_PERMITTED_WITHOUT_CHEATING",
+      "source": [
+        "y1v6.ev.013",
+        "y1v6.ev.020",
+        "y1v6.ev.027",
+        "y1v6.ev.028",
+        "y1v6.ev.030"
+      ]
+    },
+    "main_exam": {
+      "subjects": 8,
+      "questions_total": 400,
+      "questions_per_subject": 50,
+      "max_points_per_student_subject": 100,
+      "days": 2,
+      "subjects_per_day": 4,
+      "per_subject_pair_minimum": 60,
+      "combined_total_minimum": 692,
+      "earlier_total_estimate_about": 700,
+      "earlier_estimate_not_final": true,
+      "expulsion_if_any_subject_below_minimum": true,
+      "expulsion_if_aggregate_below_minimum": true,
+      "both_partners_expelled": true,
+      "cheating_both_partners_expelled": true,
+      "unjustified_absence_zero_for_missed_tests": true
+    },
+    "interclass": {
+      "question_authorship": "RIVAL_CLASS",
+      "school_review_required": true,
+      "missed_submission_fallback": "EASIER_SCHOOL_AUTHORED_QUESTIONS",
+      "winning_class_points_gain": 50,
+      "losing_class_points_loss": 50,
+      "source": [
+        "y1v6.ev.014",
+        "y1v6.ev.021",
+        "y1v6.ev.030"
+      ],
+      "confirmed_pairs": [
+        [
+          "D",
+          "C"
+        ],
+        [
+          "C",
+          "D"
+        ],
+        [
+          "A",
+          "B"
+        ],
+        [
+          "B",
+          "A"
+        ]
+      ]
+    },
+    "question_authority_states": [
+      "DRAFT",
+      "SUBMITTED_FOR_SCHOOL_VALIDATION",
+      "SCHOOL_APPROVED",
+      "SUPERSEDED",
+      "BINDING_FOR_EXAM",
+      "LEAKED_UNVALIDATED_COPY"
+    ],
+    "authority_note": "A physical paper handoff or simulated acceptance cannot supersede school-approved questions."
+  },
+  "midterm_preparatory_results": {
+    "pass_cutoff": 40,
+    "all_class_d_students_passed": true,
+    "sudo": {
+      "average": 57,
+      "english": 52,
+      "rank_from_bottom": 12
+    },
+    "ayanokoji": {
+      "public_average": 64,
+      "self_moderated": true
+    },
+    "yamauchi": {
+      "english_minimum": 43
+    },
+    "source_refs": [
+      "y1v6.ev.010",
+      "y1v6.ev.011",
+      "y1v6.ev.012"
+    ]
+  },
+  "paired_students": [
+    {
+      "actor_a": "actor.suzune-horikita",
+      "actor_b": "actor.ken-sudo",
+      "evidence_ref": "y1v6.ev.031",
+      "note": "ANNOUNCED_BY_HOMEROOM_TEACHER"
+    },
+    {
+      "actor_a": "actor.yosuke-hirata",
+      "actor_b": "actor.haruki-yamauchi",
+      "evidence_ref": "y1v6.ev.032",
+      "note": "ANNOUNCED_BY_HOMEROOM_TEACHER"
+    },
+    {
+      "actor_a": "actor.kikyo-kushida",
+      "actor_b": "actor.kanji-ike",
+      "evidence_ref": "y1v6.ev.033",
+      "note": "ANNOUNCED_BY_HOMEROOM_TEACHER"
+    },
+    {
+      "actor_a": "actor.yukimura",
+      "actor_b": "actor.kokoro-inogashira",
+      "evidence_ref": "y1v6.ev.034",
+      "note": "ANNOUNCED_BY_HOMEROOM_TEACHER"
+    },
+    {
+      "actor_a": "actor.kiyotaka-ayanokoji",
+      "actor_b": "actor.maya-sato",
+      "evidence_ref": "y1v6.ev.035",
+      "note": "ANNOUNCED_BY_HOMEROOM_TEACHER"
+    },
+    {
+      "actor_a": "actor.rokusuke-koenji",
+      "actor_b": "actor.okiya",
+      "evidence_ref": "y1v6.ev.036",
+      "note": "ANNOUNCED_BY_HOMEROOM_TEACHER"
+    },
+    {
+      "actor_a": "actor.miyake",
+      "actor_b": "actor.hasebe",
+      "evidence_ref": "y1v6.ev.037",
+      "note": "DIAGNOSTIC_79_AND_1_WITH_SHARED_HUMANITIES_WEAKNESS"
+    }
+  ],
+  "end_of_volume_outcomes": {
+    "confirmed_competitors": "CLASS_D_VS_CLASS_C",
+    "final_class_results": "NOT_PUBLISHED",
+    "final_individual_scores": "NOT_PUBLISHED",
+    "pair_expulsions": "NOT_PUBLISHED",
+    "math_wager": {
+      "subject": "MATHEMATICS",
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "witness": "actor.manabu-horikita",
+      "voluntary_added_stakeholder": "actor.kiyotaka-ayanokoji",
+      "horikita_score": "SELF_ASSESSED_AT_LEAST_98",
+      "kushida_score": "SELF_ASSESSED_BELOW_80",
+      "admission": "KUSHIDA_CONCEDES_LOSS_BEFORE_OFFICIAL_SCORE",
+      "horikita_wins": "KUSHIDA_PROMISES_END_INTERFERENCE",
+      "kushida_wins": "HORIKITA_AND_AYANOKOJI_AGREED_TO_LEAVE",
+      "witness_privacy": "MANABU_DID_NOT_HEAR_DETAILED_JUNIOR_HIGH_CONFESSION"
+    },
+    "ryuen_claim": "EXPECTS_CLASS_C_TO_LOSE_POINTS_NOT_CONFIRMED_SCHOOL_RESULT"
+  },
+  "strategy_layers": [
+    {
+      "id": "horikita",
+      "source_refs": [
+        "y1v6.ev.065",
+        "y1v6.ev.066"
+      ],
+      "authority": "SCHOOL_DIALOGUE_CONFIRMED",
+      "summary": "Horikita pre-registers binding questions with Chabashira, lets Kushida/Ryūen think their question swap worked"
+    },
+    {
+      "id": "kushida_ryuen",
+      "source_refs": [
+        "y1v6.ev.062",
+        "y1v6.ev.075"
+      ],
+      "authority": "KUSHIDA_DIRECT_ADMISSION_AND_RYUEN_ACCOUNT",
+      "summary": "Kushida attempts to replace questions, expects true math answers, receives false ones"
+    },
+    {
+      "id": "x_transaction",
+      "source_refs": [
+        "y1v6.ev.078",
+        "y1v6.ev.079"
+      ],
+      "authority": "ANONYMOUS_MESSAGE_AND_RYUEN_LATER_DIALOGUE",
+      "summary": "X warns Ryūen of actual school acceptance, requests questions/answers or changes; Ryūen chooses false Kushida answers to keep Horikita in school"
+    },
+    {
+      "id": "cheat_sheet",
+      "source_refs": [
+        "y1v6.ev.062",
+        "y1v6.ev.075",
+        "y1v6.ev.076"
+      ],
+      "authority": "OBSERVED_SUSPECTED_WITH_RYUEN_INFERENCE",
+      "summary": "Paper found in Kushida uniform, author and exact insertion unknown, not adjudicated cheating"
+    },
+    {
+      "id": "ichinose_letter",
+      "source_refs": [
+        "y1v6.ev.064",
+        "y1v6.ev.077"
+      ],
+      "authority": "FRAUD_REFUTED_AUTHORSHIP_UNRESOLVED",
+      "summary": "School confirms Ichinose innocent of allegation, Ryūen printed signature not reliable sender authentication"
+    }
+  ],
+  "limitations": [
+    "No school-confirmed final winner or all examination scores in Volume 6",
+    "The initial about 700 required points was only an estimate; 692 is binding",
+    "Evidence found in a pocket is not automatic proof of cheating",
+    "Ryūen's theory about letters/uniform is not independently verified",
+    "Manabu witnessed wager, not Kushida's private confession",
+    "No automatic promotion into executable ExamSpec or agent memory"
+  ],
+  "executable": false,
+  "engine_memory_admission": false
+}

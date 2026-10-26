@@ -1,0 +1,58 @@
+{
+  "id": "evt.y1.v06.paper-shuffle-question-authority-and-swap",
+  "event_time": "Y1_PAPER_SHUFFLE_PRE_EXAM",
+  "status": "RESOLVED",
+  "canonical_event_sources": [
+    "y1v6.ev.045",
+    "y1v6.ev.065",
+    "y1v6.ev.066"
+  ],
+  "prior_ambiguities": [
+    "Would Kushida's intercepted question delivery replace Horikita's exam?",
+    "Did Ryūen know which questions the school had approved?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v06.sevenseas.en.operator-provided",
+      "chapter": 7,
+      "pdf_pages": [
+        181,
+        185
+      ],
+      "evidence_refs": [
+        "y1v6.ev.065",
+        "y1v6.ev.066"
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "explanation": "Suzune had secured pre-approval of her own question submission with Chabashira. Her apparent panic at Kushida's last-minute swap was deception; the attacker-controlled paper was not the binding school exam.",
+      "world_epistemic_status": "SOURCE_MODE_AND_SPEAKER_BOUNDED_PRIVATE_OR_INSTITUTIONAL_INFORMATION",
+      "actor_knowledge": [
+        {
+          "actor": "actor.suzune-horikita",
+          "since": "PRE_SUBMISSION",
+          "status": "KNOWS_OWN_PLAN"
+        },
+        {
+          "actor": "actor.sae-chiyabashira",
+          "since": "PRE_SUBMISSION",
+          "status": "SCHOOL_APPROVAL_AUTHORITY"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V06_CH7_DISCLOSURE",
+          "status": "LEARNS_HORIKITA_PLAN"
+        },
+        {
+          "actor": "actor.kikyo-kushida",
+          "since": "Y1_V06_CH7_FAILED_ATTACK",
+          "status": "REALIZES_OWN_SWAP_NOT_BINDING"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Horikita's independent plan should not be misattributed to X.",
+    "Do not make historical approval protocol an automatic runtime permission without ExamSpec governance."
+  ]
+}

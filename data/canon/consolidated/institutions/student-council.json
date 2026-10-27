@@ -7,7 +7,8 @@
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_ATTRIBUTED_PRIVATE_REPORT_NOT_INDEPENDENTLY_VERIFIED",
   "evidence_refs": [
@@ -35,7 +36,13 @@
     "y1v7.ev.048",
     "y1v7.ev.085",
     "y1v7.ev.088",
-    "y1v7.ev.100"
+    "y1v7.ev.100",
+    "y1v075.ev.025",
+    "y1v075.ev.027",
+    "y1v075.ev.053",
+    "y1v075.ev.054",
+    "y1v075.ev.055",
+    "y1v075.ev.056"
   ],
   "owner_truth_boundary": "Student-council authority described in Manabu's public speech, not independently executed rulebook",
   "structure": {
@@ -218,5 +225,88 @@
     "actor_knowledge_gate": "ONLY_MANABU_AND_KIYOTAKA_PRIVATE_CONVERSATION; NAGUMO_NOT_AUTOMATICALLY_AWARE",
     "engine_memory_admission": false,
     "verified": false
+  },
+  "y1_v075_roster_governance_and_nagumo_opposition": {
+    "source_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "source_status": "DRAFT_MANABU_KIRIYAMA_REPORT_NOT_EXTERNAL_CERTIFICATION",
+    "pdf_pages": [
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159
+    ],
+    "current_president": "actor.nagumo",
+    "former_president": "actor.manabu-horikita",
+    "second_year_vice_president": "actor.kiriyama",
+    "secretaries_named_by_manabu": [
+      "Mizowaki",
+      "Tonokawa"
+    ],
+    "roster_claim_attributed_to": "actor.manabu-horikita",
+    "policy_scope": {
+      "source_pages": [
+        87,
+        88,
+        89
+      ],
+      "claim": "Council participates in some disciplinary questions and is consulted/participates in design of some special examinations, including the earlier island-exam example.",
+      "source_mode": "MANABU_PRIVATE_EXPLANATION",
+      "limits": [
+        "No blanket rulemaking authority",
+        "No retroactive new scoring formulas",
+        "Not authorized to independently remove any student at will"
+      ]
+    },
+    "disciplinary_statistics": {
+      "source_pages": [
+        88,
+        89,
+        90
+      ],
+      "reported_total_second_year_expulsions": 17,
+      "reported_nagumo_involvement": "MORE_THAN_HALF",
+      "evidence_character": "MANABU_CITES_EXIT_INTERVIEWS_NOT_INDEPENDENT_SCHOOL_LEDGER",
+      "individually_certified_cases": 0,
+      "source_evidence_refs": [
+        "y1v075.ev.055"
+      ],
+      "engine_disqualification": false
+    },
+    "political_situation": {
+      "pdf_pages": [
+        154,
+        155,
+        156,
+        157,
+        158,
+        159
+      ],
+      "kiriyama": "Second-year vice-president says he remains on council despite opposing Nagumo to observe and constrain him",
+      "allegation": "Nagumo holds large second-year support and offers possible route to Class A, per Kiriyama",
+      "knowledge_fence": "PRIVATE_KIRIYAMA_DISCLOSURE",
+      "operational_goal_update": false
+    },
+    "nagumo_online_exam_tease": {
+      "pdf_page": 126,
+      "status": "PROVOCATION_NOT_A_CONFIRMED_EXAM_RULE",
+      "source_ref": "V75-066"
+    },
+    "source_evidence_refs": [
+      "y1v075.ev.053",
+      "y1v075.ev.054",
+      "y1v075.ev.055",
+      "y1v075.ev.056"
+    ],
+    "engine_memory_admission": false
   }
 }

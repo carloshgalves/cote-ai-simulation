@@ -1,0 +1,43 @@
+{
+  "id": "y1v075.case.yosuke-hirata.v075-c034",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "Hirata explains club preference and does not want student council post.",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Hirata explains club preference and does not want student council post.",
+  "observed_result": "Prefere continuar no futebol a aceitar eventual atuação no conselho; interesse extracurricular independente.",
+  "epistemic_limits": "Retain as Hirata-specific sport/social context only; label is corrected in primary actor field before promotion.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      130,
+      133
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "sports",
+    "institution"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "institution",
+    "sports",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.034"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-034"
+}

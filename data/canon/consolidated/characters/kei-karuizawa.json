@@ -11,7 +11,8 @@
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -26,7 +27,10 @@
     "social": {
       "behavioral_case_refs": [
         "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness",
-        "y1v7.case.kei-karuizawa.v7-c022"
+        "y1v7.case.kei-karuizawa.v7-c022",
+        "y1v075.case.kei-karuizawa.v075-c003",
+        "y1v075.case.kei-karuizawa.v075-c005",
+        "y1v075.case.kei-karuizawa.v075-c006"
       ],
       "context_evidence_refs": [
         "y1v1.ev.046",
@@ -55,7 +59,10 @@
         "y1v5.ev.014",
         "y1v6.ev.059",
         "y1v7.ev.066",
-        "y1v7.ev.079"
+        "y1v7.ev.079",
+        "y1v075.ev.003",
+        "y1v075.ev.005",
+        "y1v075.ev.006"
       ]
     },
     "economy": {
@@ -83,7 +90,8 @@
         "y1v5.ev.013",
         "y1v5.ev.014",
         "y1v5.ev.045",
-        "y1v5.ev.071"
+        "y1v5.ev.071",
+        "y1v075.ev.032"
       ]
     },
     "ethics": {
@@ -118,7 +126,9 @@
       "behavioral_case_refs": [
         "y1v4.case.kei-karuizawa.refuse-demanded-apology",
         "y1v4.case.kei-karuizawa.resist-coercion-under-threat",
-        "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure"
+        "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure",
+        "y1v075.case.kei-karuizawa.v075-c002",
+        "y1v075.case.kei-karuizawa.v075-c007"
       ],
       "context_evidence_refs": [
         "y1v3.ev.083",
@@ -127,7 +137,11 @@
         "y1v4.ev.062",
         "y1v4.ev.070",
         "y1v4.ev.083",
-        "y1v4.ev.104"
+        "y1v4.ev.104",
+        "y1v075.ev.002",
+        "y1v075.ev.007",
+        "y1v075.ev.030",
+        "y1v075.ev.032"
       ]
     },
     "institution": {
@@ -138,11 +152,21 @@
       ]
     },
     "identity": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v075.case.kei-karuizawa.v075-c001",
+        "y1v075.case.kei-karuizawa.v075-c009"
+      ],
       "context_evidence_refs": [
         "y1v4.ev.001",
         "y1v4.ev.102",
-        "y1v45.ev.043"
+        "y1v45.ev.043",
+        "y1v075.ev.001",
+        "y1v075.ev.009",
+        "y1v075.ev.038",
+        "y1v075.ev.039",
+        "y1v075.ev.040",
+        "y1v075.ev.041",
+        "y1v075.ev.049"
       ]
     },
     "observation": {
@@ -213,7 +237,8 @@
         "y1v7.ev.077",
         "y1v7.ev.081",
         "y1v7.ev.089",
-        "y1v7.ev.099"
+        "y1v7.ev.099",
+        "y1v075.ev.037"
       ]
     },
     "persuasion": {
@@ -251,7 +276,8 @@
         "y1v45.ev.044",
         "y1v45.ev.051",
         "y1v45.ev.052",
-        "y1v6.ev.062"
+        "y1v6.ev.062",
+        "y1v075.ev.033"
       ]
     },
     "negotiation": {
@@ -274,25 +300,29 @@
       "behavioral_case_refs": [
         "y1v4.case.kei-karuizawa.accept-protection-under-duress",
         "y1v4.case.kei-karuizawa.resist-coercion-under-threat",
-        "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure"
+        "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure",
+        "y1v075.case.kei-karuizawa.v075-c001"
       ],
       "context_evidence_refs": [
         "y1v4.ev.102",
         "y1v4.ev.104",
         "y1v4.ev.105",
         "y1v45.ev.043",
-        "y1v45.ev.052"
+        "y1v45.ev.052",
+        "y1v075.ev.001"
       ]
     },
     "deception": {
       "behavioral_case_refs": [
-        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes"
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+        "y1v075.case.kei-karuizawa.v075-c005"
       ],
       "context_evidence_refs": [
         "y1v4.ev.131",
         "y1v5.ev.071",
         "y1v6.ev.060",
-        "y1v6.ev.062"
+        "y1v6.ev.062",
+        "y1v075.ev.005"
       ]
     },
     "consequence": {
@@ -347,10 +377,29 @@
     },
     "relationship": {
       "behavioral_case_refs": [
-        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection"
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
+        "y1v075.case.kei-karuizawa.v075-c002",
+        "y1v075.case.kei-karuizawa.v075-c003",
+        "y1v075.case.kei-karuizawa.v075-c004",
+        "y1v075.case.kei-karuizawa.v075-c007",
+        "y1v075.case.kei-karuizawa.v075-c008",
+        "y1v075.case.kei-karuizawa.v075-c009"
       ],
       "context_evidence_refs": [
-        "y1v6.ev.009"
+        "y1v6.ev.009",
+        "y1v075.ev.002",
+        "y1v075.ev.003",
+        "y1v075.ev.004",
+        "y1v075.ev.007",
+        "y1v075.ev.008",
+        "y1v075.ev.009",
+        "y1v075.ev.030",
+        "y1v075.ev.037",
+        "y1v075.ev.038",
+        "y1v075.ev.039",
+        "y1v075.ev.040",
+        "y1v075.ev.041",
+        "y1v075.ev.049"
       ]
     },
     "security": {
@@ -362,11 +411,16 @@
     "information": {
       "behavioral_case_refs": [
         "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
-        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes"
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+        "y1v075.case.kei-karuizawa.v075-c004",
+        "y1v075.case.kei-karuizawa.v075-c008"
       ],
       "context_evidence_refs": [
         "y1v6.ev.059",
-        "y1v6.ev.062"
+        "y1v6.ev.062",
+        "y1v075.ev.004",
+        "y1v075.ev.008",
+        "y1v075.ev.035"
       ]
     },
     "investigation": {
@@ -389,6 +443,21 @@
       "context_evidence_refs": [
         "y1v7.ev.090"
       ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [
+        "y1v075.case.kei-karuizawa.v075-c006"
+      ],
+      "context_evidence_refs": [
+        "y1v075.ev.006"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.033",
+        "y1v075.ev.035"
+      ]
     }
   },
   "source_documents": [],
@@ -409,5 +478,83 @@
     "y1v7.goal.kei-karuizawa.v7-g007",
     "y1v7.goal.kei-karuizawa.v7-g008"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v075_source_status": "SOURCE_CANDIDATE_INDEPENDENT_REVIEW_NOT_PERFORMED",
+  "y1_v075_actor_state_deltas": [
+    {
+      "source_record_id": "V75-038",
+      "evidence_ref": "y1v075.ev.038",
+      "pdf_pages": [
+        12,
+        15
+      ],
+      "claim": "Says she feels stronger after V7, but retains body scar insecurity and past memories.",
+      "qualification": "Stage snapshot rather than an invented categorical cure.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "confirmed_future_state": false,
+      "actor_knowledge_requires_observation": true,
+      "verified": false
+    },
+    {
+      "source_record_id": "V75-039",
+      "evidence_ref": "y1v075.ev.039",
+      "pdf_pages": [
+        17,
+        21
+      ],
+      "claim": "Considers abandoning publicly fake relationship with Hirata and romantic jealousy of Satou.",
+      "qualification": "Intent not completed breakup at this scene.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "confirmed_future_state": false,
+      "actor_knowledge_requires_observation": true,
+      "verified": false
+    },
+    {
+      "source_record_id": "V75-040",
+      "evidence_ref": "y1v075.ev.040",
+      "pdf_pages": [
+        32,
+        34
+      ],
+      "claim": "Fears she is a replaceable intelligence asset and Kiyotaka no longer needs her.",
+      "qualification": "Private attachment vulnerability, not observed objective diminished competence.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "confirmed_future_state": false,
+      "actor_knowledge_requires_observation": true,
+      "verified": false
+    },
+    {
+      "source_record_id": "V75-041",
+      "evidence_ref": "y1v075.ev.041",
+      "pdf_pages": [
+        164,
+        170
+      ],
+      "claim": "Requests first-name Kiyotaka-Kei form and reassesses Hirata cover, increasing reciprocal exclusivity.",
+      "qualification": "New relationship evidence does not confirm boyfriend/girlfriend status.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "confirmed_future_state": false,
+      "actor_knowledge_requires_observation": true,
+      "verified": false
+    }
+  ],
+  "y1_v075_relationship_refs": [
+    "y1v075.rel.kei-kiyotaka",
+    "y1v075.rel.kei-hirata"
+  ],
+  "y1_v075_non_executable_transition_contract": {
+    "dimensions": [
+      "trust",
+      "jealousy",
+      "vulnerability",
+      "attachment",
+      "social_visibility",
+      "self_concept"
+    ],
+    "historical_phase": "WINTER_BREAK_DEC_23_TO_25",
+    "source_integration_only": true,
+    "avoid_goal_only_reduction": true,
+    "no_post_divergence_auto_memory": true,
+    "prevent_mutual_romance_without_both_actor_evidence": true
+  }
 }

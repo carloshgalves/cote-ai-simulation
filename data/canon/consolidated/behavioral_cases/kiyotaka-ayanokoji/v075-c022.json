@@ -1,0 +1,43 @@
+{
+  "id": "y1v075.case.kiyotaka-ayanokoji.v075-c022",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Recontacts Ryuen, exposes fear and liability factors, negotiates verbal conditional cooperation including Kush",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Recontacts Ryuen, exposes fear and liability factors, negotiates verbal conditional cooperation including Kushida issue.",
+  "observed_result": "Reabre diálogo com Ryūen após vencê-lo e propõe cooperação específica; não existe aliança permanente.",
+  "epistemic_limits": "Strategy changes from physical defeat to conditional political diplomacy, not a permanent alliance.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      73,
+      85
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kakeru-ryuen"
+  ],
+  "capabilities_supported": [
+    "negotiation",
+    "strategy"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "negotiation",
+    "strategy",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.022"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-022"
+}

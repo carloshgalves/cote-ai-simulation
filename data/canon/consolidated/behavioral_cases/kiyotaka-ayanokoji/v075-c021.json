@@ -1,0 +1,45 @@
+{
+  "id": "y1v075.case.kiyotaka-ayanokoji.v075-c021",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Acknowledges Airi affection but treats her as still learning friendship and seeks appropriate response to her ",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Acknowledges Airi affection but treats her as still learning friendship and seeks appropriate response to her present.",
+  "observed_result": "Reconhece a atração de Airi e pondera seu amadurecimento; não corresponde romanticamente nem despreza o gesto.",
+  "epistemic_limits": "Shows interpersonal learning without accepting romantic intimacy.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      70,
+      72,
+      103,
+      106
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.airi-sakura"
+  ],
+  "capabilities_supported": [
+    "social",
+    "emotion"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "emotion",
+    "social",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.021"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-021"
+}

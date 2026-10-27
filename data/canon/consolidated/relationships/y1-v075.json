@@ -1,0 +1,151 @@
+{
+  "schema_version": "canon-relationship-state-delta-v1",
+  "source_id": "ln.y1.v075.sevenseas.en.operator-provided",
+  "period": "Y1_WINTER_BREAK_DEC_23_TO_25",
+  "status": "HISTORICAL_SOURCE_CANDIDATE_NOT_EXECUTABLE",
+  "verified": false,
+  "engine_memory_admission": false,
+  "semantics": {
+    "directed": "Relationship evidence is per actor; one participant's attraction does not make it reciprocal",
+    "dimensions": [
+      "public_status",
+      "private_feelings_as_reported",
+      "trust",
+      "dependency",
+      "knowledge",
+      "commitment",
+      "protective_role"
+    ],
+    "phase_transition": "New observation or confession rather than arbitrary goal flip",
+    "divergence": "Never apply post-divergence romantic history without observed events",
+    "forbid_inferred_couple_by_first_names": true
+  },
+  "edges": [
+    {
+      "id": "y1v075.rel.kei-kiyotaka",
+      "actors": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v075.ev.001",
+        "y1v075.ev.002",
+        "y1v075.ev.007",
+        "y1v075.ev.009",
+        "y1v075.ev.037",
+        "y1v075.ev.038",
+        "y1v075.ev.040",
+        "y1v075.ev.041",
+        "y1v075.ev.044"
+      ],
+      "from": "Y1_V07_ROOFTOP_AFTERMATH",
+      "to": "Y1_V075_CHRISTMAS",
+      "public_status": "NOT_DECLARED_COUPLE",
+      "keis_private_state": "Attraction, jealousy, greater self-confidence coexist with fear of abandonment and instrumental dependence",
+      "kiyotakas_private_state": "Protection/utility reasoning and selective reciprocity; not explicit love confession",
+      "observed_milestones": [
+        "Kei facilitates Satou date despite jealousy",
+        "Kei challenges his intentions after Satou rejection",
+        "First-name reciprocity and gift/medicine exchange"
+      ],
+      "knowledge_fence": "PRIVATE_TO_PARTICIPANTS_AND_SPECIFIC_OBSERVERS"
+    },
+    {
+      "id": "y1v075.rel.kei-hirata",
+      "actors": [
+        "actor.kei-karuizawa",
+        "actor.yosuke-hirata"
+      ],
+      "source_refs": [
+        "y1v075.ev.009",
+        "y1v075.ev.039",
+        "y1v075.ev.049"
+      ],
+      "public_status": "PRESENTED_AS_ROMANTIC_PARTNERS",
+      "private_arrangement": "FAKE_COUPLE_PROTECTIVE_COVER",
+      "actual_breakup_in_volume": false,
+      "change": "Kei contemplates ending arrangement; Hirata does not pursue alternate dating",
+      "knowledge_fence": "SECRET_TO_PARTICIPANTS_AND_INFORMED_FEW"
+    },
+    {
+      "id": "y1v075.rel.sato-kiyotaka",
+      "actors": [
+        "actor.maya-sato",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v075.ev.030",
+        "y1v075.ev.031",
+        "y1v075.ev.045"
+      ],
+      "satos_affection": "EXPRESSED_DIRECTLY_ON_DEC25",
+      "kiyotakas_response": "DECLINES_RELATIONSHIP",
+      "official_couple": false,
+      "friendship_request": "SATOU_REQUESTS_CONTINUED_FRIENDSHIP",
+      "knowledge_fence": "PARTICIPANTS_AND_LIMITED_OBSERVERS"
+    },
+    {
+      "id": "y1v075.rel.airi-kiyotaka",
+      "actors": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v075.ev.020",
+        "y1v075.ev.021",
+        "y1v075.ev.050"
+      ],
+      "observed": "Airi initiates first Christmas gift following social outing",
+      "mutual_romance_confirmed": false,
+      "development": "New extracurricular agency; unreciprocated attraction contextual"
+    },
+    {
+      "id": "y1v075.rel.airi-haruka",
+      "actors": [
+        "actor.airi-sakura",
+        "actor.hasebe"
+      ],
+      "source_refs": [
+        "y1v075.ev.019",
+        "y1v075.ev.020",
+        "y1v075.ev.050",
+        "y1v075.ev.051"
+      ],
+      "observed": "Haruka organizes holiday gathering and helps protect Airi as she develops independent social activity",
+      "relationship_type": "FRIENDSHIP_SUPPORT_NOT_ROMANCE"
+    },
+    {
+      "id": "y1v075.rel.ike-shinohara",
+      "actors": [
+        "actor.kanji-ike",
+        "actor.shinohara"
+      ],
+      "source_refs": [
+        "y1v075.ev.017",
+        "y1v075.ev.018",
+        "y1v075.ev.052"
+      ],
+      "observed": "Ike intervenes in dispute; Shinohara extends dinner invitation",
+      "couple_declared": false,
+      "development": "Possible attraction, not established pairing"
+    },
+    {
+      "id": "y1v075.rel.manabu-kiriyama-nagumo",
+      "actors": [
+        "actor.manabu-horikita",
+        "actor.kiriyama",
+        "actor.nagumo"
+      ],
+      "source_refs": [
+        "y1v075.ev.025",
+        "y1v075.ev.027",
+        "y1v075.ev.036",
+        "y1v075.ev.053",
+        "y1v075.ev.056"
+      ],
+      "relationship_type": "POLITICAL_OPPOSITION_AND_UNCERTAIN_ALLIANCE",
+      "observed": "Manabu recruits Kiyotaka; Kiriyama stays within council while criticizing Nagumo; Nagumo current president",
+      "knowledge_fence": "PRIVATE_CONTACTS_ARE_NOT_PUBLIC_OR_UNIVERSAL"
+    }
+  ]
+}

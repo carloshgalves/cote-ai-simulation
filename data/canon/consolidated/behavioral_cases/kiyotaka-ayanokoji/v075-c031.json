@@ -1,0 +1,43 @@
+{
+  "id": "y1v075.case.kiyotaka-ayanokoji.v075-c031",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Accepts Christmas date, socializes with mixed group, refuses Satou candidly due to lack of reciprocated love a",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Accepts Christmas date, socializes with mixed group, refuses Satou candidly due to lack of reciprocated love and current risk burden.",
+  "observed_result": "Participa de seu primeiro encontro e recusa Satō honestamente; ausência atual de amor não é incapacidade permanente.",
+  "epistemic_limits": "First social/romantic event and refusal, not declaration of incapacity to love.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      108,
+      145
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.maya-sato"
+  ],
+  "capabilities_supported": [
+    "romance",
+    "social"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "romance",
+    "social",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.031"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-031"
+}

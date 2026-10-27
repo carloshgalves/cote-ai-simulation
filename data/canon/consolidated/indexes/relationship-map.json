@@ -1,0 +1,97 @@
+{
+  "schema_version": "canon-relationship-index-v1",
+  "source_id": "ln.y1.v075.sevenseas.en.operator-provided",
+  "source_path": "data/canon/consolidated/relationships/y1-v075.json",
+  "edges": {
+    "y1v075.rel.kei-kiyotaka": {
+      "source_path": "data/canon/consolidated/relationships/y1-v075.json",
+      "actors": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ]
+    },
+    "y1v075.rel.kei-hirata": {
+      "source_path": "data/canon/consolidated/relationships/y1-v075.json",
+      "actors": [
+        "actor.kei-karuizawa",
+        "actor.yosuke-hirata"
+      ]
+    },
+    "y1v075.rel.sato-kiyotaka": {
+      "source_path": "data/canon/consolidated/relationships/y1-v075.json",
+      "actors": [
+        "actor.maya-sato",
+        "actor.kiyotaka-ayanokoji"
+      ]
+    },
+    "y1v075.rel.airi-kiyotaka": {
+      "source_path": "data/canon/consolidated/relationships/y1-v075.json",
+      "actors": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ]
+    },
+    "y1v075.rel.airi-haruka": {
+      "source_path": "data/canon/consolidated/relationships/y1-v075.json",
+      "actors": [
+        "actor.airi-sakura",
+        "actor.hasebe"
+      ]
+    },
+    "y1v075.rel.ike-shinohara": {
+      "source_path": "data/canon/consolidated/relationships/y1-v075.json",
+      "actors": [
+        "actor.kanji-ike",
+        "actor.shinohara"
+      ]
+    },
+    "y1v075.rel.manabu-kiriyama-nagumo": {
+      "source_path": "data/canon/consolidated/relationships/y1-v075.json",
+      "actors": [
+        "actor.manabu-horikita",
+        "actor.kiriyama",
+        "actor.nagumo"
+      ]
+    }
+  },
+  "by_actor": {
+    "actor.kei-karuizawa": [
+      "y1v075.rel.kei-hirata",
+      "y1v075.rel.kei-kiyotaka"
+    ],
+    "actor.kiyotaka-ayanokoji": [
+      "y1v075.rel.airi-kiyotaka",
+      "y1v075.rel.kei-kiyotaka",
+      "y1v075.rel.sato-kiyotaka"
+    ],
+    "actor.yosuke-hirata": [
+      "y1v075.rel.kei-hirata"
+    ],
+    "actor.maya-sato": [
+      "y1v075.rel.sato-kiyotaka"
+    ],
+    "actor.airi-sakura": [
+      "y1v075.rel.airi-haruka",
+      "y1v075.rel.airi-kiyotaka"
+    ],
+    "actor.hasebe": [
+      "y1v075.rel.airi-haruka"
+    ],
+    "actor.kanji-ike": [
+      "y1v075.rel.ike-shinohara"
+    ],
+    "actor.shinohara": [
+      "y1v075.rel.ike-shinohara"
+    ],
+    "actor.manabu-horikita": [
+      "y1v075.rel.manabu-kiriyama-nagumo"
+    ],
+    "actor.kiriyama": [
+      "y1v075.rel.manabu-kiriyama-nagumo"
+    ],
+    "actor.nagumo": [
+      "y1v075.rel.manabu-kiriyama-nagumo"
+    ]
+  },
+  "engine_memory_admission": false
+}

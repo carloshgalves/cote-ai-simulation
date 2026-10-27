@@ -1,0 +1,47 @@
+{
+  "id": "y1v075.case.kei-karuizawa.v075-c005",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "Performs fake-couple double date and public interrogations of Kiyotaka, amplifying and undermining Satou.",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Performs fake-couple double date and public interrogations of Kiyotaka, amplifying and undermining Satou.",
+  "observed_result": "Sustenta o encontro duplo e questiona Kiyotaka em público; desempenho social observado, sem presumir motivo único.",
+  "epistemic_limits": "Competent social performance, strategic ambiguity, no single benevolent intent.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      110,
+      113,
+      119,
+      123
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.maya-sato",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "social",
+    "deception"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "deception",
+    "social",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.005"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-005"
+}

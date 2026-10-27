@@ -1,0 +1,44 @@
+{
+  "id": "y1v075.case.maya-sato.v075-c030",
+  "actor_id": "actor.maya-sato",
+  "primary_actor_id": "actor.maya-sato",
+  "title": "Pursues first date, rehearses double-date support, confesses directly and accepts rejection with tears while a",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Pursues first date, rehearses double-date support, confesses directly and accepts rejection with tears while asking to remain friends.",
+  "observed_result": "Prepara encontro amoroso e se declara, aceitando rejeição com sofrimento; atitude corajosa e contextual.",
+  "epistemic_limits": "Courage and emotional response, not manipulation or a current couple.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      108,
+      144
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kei-karuizawa",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "relationship",
+    "emotion"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "emotion",
+    "relationship",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.030"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-030"
+}

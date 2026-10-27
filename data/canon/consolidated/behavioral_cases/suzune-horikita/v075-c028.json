@@ -1,0 +1,44 @@
+{
+  "id": "y1v075.case.suzune-horikita.v075-c028",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "Meets Kushida publicly, resists Kiyotaka council request, calls brother after contact through Tachibana, still",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Meets Kushida publicly, resists Kiyotaka council request, calls brother after contact through Tachibana, still refuses council membership.",
+  "observed_result": "Conversa com Kushida e fala com Manabu, mas recusa entrar no conselho; iniciativa social e autonomia preservadas.",
+  "epistemic_limits": "Relationship repair and autonomy; not accepted student-council appointment.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      93,
+      101
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida",
+    "actor.manabu-horikita"
+  ],
+  "capabilities_supported": [
+    "social",
+    "relationship"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "relationship",
+    "social",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.028"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-028"
+}

@@ -227,5 +227,27 @@
     "Historical events are not live simulations or uniform quantitative ratings",
     "No known physical ability rankings across incompatible or obstructed events"
   ],
-  "exam_id": "exam.y1.sports-festival"
+  "exam_id": "exam.y1.sports-festival",
+  "source_coverage": [
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
+  ],
+  "y1_v075_retrospective_effects": {
+    "source_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "source_evidence_refs": [
+      "y1v075.ev.062"
+    ],
+    "pdf_pages": [
+      17,
+      94,
+      123,
+      159
+    ],
+    "observations": [
+      "Satou says Kiyotaka's relay performance influenced her attraction",
+      "Nagumo and Kiriyama recognize Kiyotaka through performance/discussion"
+    ],
+    "effect_type": "SOCIAL_VISIBILITY_AND_ATTRACTION_NOT_CHANGED_SPORTS_SCORE",
+    "no_actor_awareness_broadcast": true
+  }
 }

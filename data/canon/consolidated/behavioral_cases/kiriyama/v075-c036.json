@@ -1,0 +1,44 @@
+{
+  "id": "y1v075.case.kiriyama.v075-c036",
+  "actor_id": "actor.kiriyama",
+  "primary_actor_id": "actor.kiriyama",
+  "title": "Discloses opposition to Nagumo, remains vice president for access, proposes cautious anonymous communications.",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Discloses opposition to Nagumo, remains vice president for access, proposes cautious anonymous communications.",
+  "observed_result": "Integra o conselho enquanto resiste a Nagumo e propõe mensagens anônimas; motivação altruísta ainda é relato dele.",
+  "epistemic_limits": "New first-hand political actor case; allegations need attribution to Kiriyama.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      154,
+      159
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.manabu-horikita",
+    "actor.nagumo"
+  ],
+  "capabilities_supported": [
+    "politics",
+    "risk_management"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "politics",
+    "risk_management",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.036"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-036"
+}

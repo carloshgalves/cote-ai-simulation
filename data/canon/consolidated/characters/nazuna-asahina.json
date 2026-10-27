@@ -1,0 +1,64 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.nazuna-asahina",
+  "display_name": "Nazuna Asahina",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v08.sevenseas.en.operator-provided"
+  ],
+  "source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "identity": {
+    "role_summary": "Second-year Class A student acquainted with Nagumo; offers Kiyotaka selective information after a chance encounter.",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "no_unobserved_other_gender_grade_knowledge": true,
+    "no_post_divergence_import": true
+  },
+  "domains": {
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.nazuna-asahina.v08-c028"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.028"
+      ]
+    },
+    "information": {
+      "behavioral_case_refs": [
+        "y1v08.case.nazuna-asahina.v08-c028"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.028"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [
+        "y1v08.case.nazuna-asahina.v08-c028"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.028"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.048"
+      ]
+    }
+  },
+  "y1_v08_source_status": "UNVERIFIED_SOURCE_BOUNDED",
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.048"
+  ],
+  "y1_v08_knowledge_gate": {
+    "source_unverified": true,
+    "private_meetings_are_private": true,
+    "engine_memory_admission": false
+  },
+  "retrieval_policy": {
+    "historical_reference_only": true,
+    "non_executable": true
+  }
+}

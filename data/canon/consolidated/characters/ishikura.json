@@ -1,0 +1,65 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.ishikura",
+  "display_name": "Ishikura",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v08.sevenseas.en.operator-provided"
+  ],
+  "source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "identity": {
+    "role_summary": "Third-year Class B actor linked to Ikari's expulsion revocation; alleged private political coordination is not independently certified.",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "no_unobserved_other_gender_grade_knowledge": true,
+    "no_post_divergence_import": true
+  },
+  "domains": {
+    "behavior": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.040"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.040"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.040"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.055"
+      ]
+    },
+    "exam": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.071",
+        "y1v08.ev.072"
+      ]
+    }
+  },
+  "y1_v08_source_status": "UNVERIFIED_SOURCE_BOUNDED",
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.055"
+  ],
+  "y1_v08_knowledge_gate": {
+    "source_unverified": true,
+    "private_meetings_are_private": true,
+    "engine_memory_admission": false
+  },
+  "retrieval_policy": {
+    "historical_reference_only": true,
+    "non_executable": true
+  }
+}

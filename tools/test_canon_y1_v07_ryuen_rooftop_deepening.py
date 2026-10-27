@@ -70,7 +70,7 @@ def violations(state):
     require(ch["intervened_in_fight"] is False,"teacher invented intervention")
     for case_id in ["kiyotaka-ayanokoji.v7-c014","kiyotaka-ayanokoji.v7-c019","manabu-horikita.v7-c036","sae-chiyabashira.v7-c038"]:
         case=packs[case_id]
-        require("testemunha" in json.dumps(case["episode_deepening"],ensure_ascii=False).lower(),"witness absent from case "+case_id)
+        require(any(k in case["episode_deepening"] for k in ("testemunha","testemunhas")),"witness object absent from case "+case_id)
     plan=d["eight_hundred_million"]
     require(plan["unit"]=="PRIVATE_POINTS" and "800,000,000" in plan["observed_document"],"misstated money units")
     require(plan["eventual_goal_execution"] is False,"800M executable transfer")

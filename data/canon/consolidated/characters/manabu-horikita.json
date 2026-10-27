@@ -8,9 +8,10 @@
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "Student council president",
     "aliases": []
@@ -61,7 +62,8 @@
       "context_evidence_refs": [
         "y1v1.ev.081",
         "y1v1.ev.082",
-        "y1v2.ev.088"
+        "y1v2.ev.088",
+        "y1v7.ev.085"
       ]
     },
     "emotion": {
@@ -75,7 +77,8 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.082",
-        "y1v1.ev.083"
+        "y1v1.ev.083",
+        "y1v7.ev.088"
       ]
     },
     "observation": {
@@ -172,9 +175,15 @@
       ]
     },
     "strategy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v7.case.manabu-horikita.v7-c035",
+        "y1v7.case.manabu-horikita.v7-c036"
+      ],
       "context_evidence_refs": [
-        "y1v5.ev.078"
+        "y1v5.ev.078",
+        "y1v7.ev.047",
+        "y1v7.ev.048",
+        "y1v7.ev.100"
       ]
     },
     "student_council": {

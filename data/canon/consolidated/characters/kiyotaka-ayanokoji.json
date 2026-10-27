@@ -11,9 +11,10 @@
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "Fourth-generation White Room student; Atsuomi son",
     "aliases": [
@@ -62,7 +63,14 @@
         "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack",
         "y1v5.case.kiyotaka-ayanokoji.replace-miyake-as-relay-anchor",
         "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita",
-        "y1v6.case.kiyotaka-ayanokoji.stage-gradual-academic-public-image"
+        "y1v6.case.kiyotaka-ayanokoji.stage-gradual-academic-public-image",
+        "y1v7.case.kiyotaka-ayanokoji.v7-c009",
+        "y1v7.case.kiyotaka-ayanokoji.v7-c012",
+        "y1v7.case.kiyotaka-ayanokoji.v7-c013",
+        "y1v7.case.kiyotaka-ayanokoji.v7-c014",
+        "y1v7.case.kiyotaka-ayanokoji.v7-c015",
+        "y1v7.case.kiyotaka-ayanokoji.v7-c018",
+        "y1v7.case.kiyotaka-ayanokoji.v7-c019"
       ],
       "context_evidence_refs": [
         "v0.char.011",
@@ -190,7 +198,31 @@
         "y1v5.ev.074",
         "y1v5.ev.078",
         "y1v6.ev.046",
-        "y1v6.ev.050"
+        "y1v6.ev.050",
+        "y1v7.ev.013",
+        "y1v7.ev.014",
+        "y1v7.ev.015",
+        "y1v7.ev.019",
+        "y1v7.ev.020",
+        "y1v7.ev.024",
+        "y1v7.ev.039",
+        "y1v7.ev.043",
+        "y1v7.ev.044",
+        "y1v7.ev.045",
+        "y1v7.ev.046",
+        "y1v7.ev.047",
+        "y1v7.ev.048",
+        "y1v7.ev.081",
+        "y1v7.ev.083",
+        "y1v7.ev.087",
+        "y1v7.ev.089",
+        "y1v7.ev.091",
+        "y1v7.ev.092",
+        "y1v7.ev.095",
+        "y1v7.ev.099",
+        "y1v7.ev.100",
+        "y1v7.ev.102",
+        "y1v7.ev.113"
       ]
     },
     "social": {
@@ -213,7 +245,8 @@
         "y1v3.case.kiyotaka-ayanokoji.assist-injured-rival",
         "y1v3.case.kiyotaka-ayanokoji.condition-support-on-privacy",
         "y1v4.case.kiyotaka-ayanokoji.redirect-koenji-to-bellhop",
-        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle"
+        "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
+        "y1v7.case.kiyotaka-ayanokoji.v7-c010"
       ],
       "context_evidence_refs": [
         "v0.char.009",
@@ -344,7 +377,13 @@
         "y1v6.ev.005",
         "y1v6.ev.006",
         "y1v6.ev.041",
-        "y1v6.ev.059"
+        "y1v6.ev.059",
+        "y1v7.ev.004",
+        "y1v7.ev.021",
+        "y1v7.ev.025",
+        "y1v7.ev.079",
+        "y1v7.ev.080",
+        "y1v7.ev.085"
       ]
     },
     "politics": {
@@ -372,7 +411,8 @@
         "v0.case.kiyotaka.shiro-learning",
         "v0.case.kiyotaka.yuki-health",
         "v0.case.kiyotaka.yuki-reunion",
-        "y1v4.case.kiyotaka-ayanokoji.privately-test-points-exceptions"
+        "y1v4.case.kiyotaka-ayanokoji.privately-test-points-exceptions",
+        "y1v7.case.kiyotaka-ayanokoji.v7-c011"
       ],
       "context_evidence_refs": [
         "v0.char.009",
@@ -426,7 +466,13 @@
         "y1v4.ev.088",
         "y1v4.ev.132",
         "y1v45.ev.006",
-        "y1v45.ev.032"
+        "y1v45.ev.032",
+        "y1v7.ev.026",
+        "y1v7.ev.029",
+        "y1v7.ev.030",
+        "y1v7.ev.032",
+        "y1v7.ev.040",
+        "y1v7.ev.082"
       ]
     },
     "combat": {
@@ -437,7 +483,9 @@
         "v0.case.kiyotaka.yuki-health",
         "y1v1.case.k.evade-manabu",
         "y1v1.case.k.swim-middle",
-        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort"
+        "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort",
+        "y1v7.case.kiyotaka-ayanokoji.v7-c016",
+        "y1v7.case.kiyotaka-ayanokoji.v7-c017"
       ],
       "context_evidence_refs": [
         "v0.char.016",
@@ -459,7 +507,12 @@
         "y1v1.ev.083",
         "y1v1.ev.084",
         "y1v1.ev.120",
-        "y1v2.ev.012"
+        "y1v2.ev.012",
+        "y1v7.ev.042",
+        "y1v7.ev.093",
+        "y1v7.ev.094",
+        "y1v7.ev.097",
+        "y1v7.ev.098"
       ]
     },
     "academic_reasoning": {
@@ -1278,6 +1331,14 @@
         "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle"
       ],
       "context_evidence_refs": []
+    },
+    "exams": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v7.ev.010",
+        "y1v7.ev.011",
+        "y1v7.ev.096"
+      ]
     }
   },
   "source_documents": [],

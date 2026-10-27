@@ -1,0 +1,1453 @@
+{
+  "schema": "canon-y1-v075-manual-candidate-ledger-v1",
+  "work": "Classroom of the Elite Y1 V7.5",
+  "pdf_sha256": "e20d8d39292917744f3d49672e1814f2615041330f2dd141c2a8f89e32e4653d",
+  "pages": 172,
+  "source_review": "PRIMARY_TEXT_CANDIDATE_REVIEW_NOT_EXTERNALLY_INDEPENDENT",
+  "original_pdf_committed": false,
+  "summary": {
+    "total": 77,
+    "by_category": {
+      "BEHAVIORAL": 37,
+      "CHARACTER": 15,
+      "INSTITUTION": 9,
+      "EXAM": 6,
+      "FILTER": 10
+    },
+    "by_decision": {
+      "ACCEPT": 43,
+      "CONTEXT": 21,
+      "CANDIDATE_ONLY": 1,
+      "REJECT_AS_RULE": 2,
+      "EXCLUDE": 10
+    }
+  },
+  "records": [
+    {
+      "id": "V75-001",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        12,
+        15
+      ],
+      "claim": "Reinterprets the rooftop trauma, recognizes enhanced sense of agency, but still remembers vulnerability and scars.",
+      "decision_rationale": "Personal baseline changed; do not compress to fearless/cured.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Reconstrói o sofrimento do terraço e encontra mais agência; manter também cicatrizes e inseguranças, sem declarar cura."
+    },
+    {
+      "id": "V75-002",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        16,
+        20
+      ],
+      "claim": "Suppresses jealousy while Satou seeks advice about Kiyotaka; considers steering Satou toward other boys.",
+      "decision_rationale": "Conflict between public friendship, new attachment and self-protection.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Ajuda Satō apesar do ciúme; registrar conflito entre apoio social e temor de perder Kiyotaka, não altruísmo puro."
+    },
+    {
+      "id": "V75-003",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        20,
+        31
+      ],
+      "claim": "Plans Satou date logistics, accepts double date, balances desire to help with fear of losing Kiyotaka.",
+      "decision_rationale": "Multiple conflicting motives with observed plans, more informative than a flat jealous label.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Aceita preparar o encontro duplo para Satō e administrar aparências; mistura auxílio, interesse próprio e improvisação."
+    },
+    {
+      "id": "V75-004",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        32,
+        34
+      ],
+      "claim": "Gathers background on Satou through Shinohara at Kiyotaka request despite emotional distress.",
+      "decision_rationale": "Observed cooperation under jealousy; gate who learns Satou details.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Consulta Shinohara a pedido de Kiyotaka mesmo estando emocionalmente abalada; caso de informação social com fonte identificável."
+    },
+    {
+      "id": "V75-005",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        110,
+        113,
+        119,
+        123
+      ],
+      "claim": "Performs fake-couple double date and public interrogations of Kiyotaka, amplifying and undermining Satou.",
+      "decision_rationale": "Competent social performance, strategic ambiguity, no single benevolent intent.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Sustenta o encontro duplo e questiona Kiyotaka em público; desempenho social observado, sem presumir motivo único."
+    },
+    {
+      "id": "V75-006",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        125,
+        127
+      ],
+      "claim": "Defuses Nagumo grabbing Kiyotaka and publicly minimizes Kiyotaka skill.",
+      "decision_rationale": "Demonstrates rapid social intervention and cover maintenance; not automatic safety against Nagumo.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Intervém com humor quando Nagumo ameaça Kiyotaka; proteger cobertura é ato concreto, não vitória garantida."
+    },
+    {
+      "id": "V75-007",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        146,
+        150
+      ],
+      "claim": "Overhears Satou rejection, challenges Kiyotaka emotionally, tests explanation and fears replacement.",
+      "decision_rationale": "Critical attachment change with incomplete self-knowledge; no proven established romance.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Ouve a rejeição de Satō, confronta Kiyotaka e teme ser trocada; sinal afetivo forte, mas sem namoro confirmado."
+    },
+    {
+      "id": "V75-008",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        151,
+        153,
+        160,
+        169
+      ],
+      "claim": "Asks about student council, infers unusual visibility, accepts limited knowledge about Manabu/Kiriyama; renews cooperation conditionally.",
+      "decision_rationale": "Scope knowledge and trust state evolves in discrete conversations.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Indaga sobre Manabu, Nagumo e os segredos de Kiyotaka, sem receber todos; separar quem soube o quê."
+    },
+    {
+      "id": "V75-009",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        163,
+        170
+      ],
+      "claim": "Offers Christmas gift, considers breakup with Hirata, requests assurance of utility/protection, reacts to first-name reciprocity and accepts cold medicine.",
+      "decision_rationale": "Changes protective cover, reciprocity and intimacy without official romantic label.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Reavalia vínculo com Hirata, oferece presente e negocia proteção; mudança relacional concreta, não término já consumado."
+    },
+    {
+      "id": "V75-010",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kiyotaka Ayanokoji",
+      "pdf_pages": [
+        35,
+        43
+      ],
+      "claim": "Meets Sakayanagi alone, questions her Ichinose claims and provokes her merit/status sensitivity.",
+      "decision_rationale": "Conditional manipulation and White Room disclosure boundary, not general defeat of Arisu.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Discute e provoca Arisu quanto a mérito, Ichinose e White Room; manter blefes como blefes, não fatos da escola."
+    },
+    {
+      "id": "V75-011",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Arisu Sakayanagi",
+      "pdf_pages": [
+        36,
+        43
+      ],
+      "claim": "Provokes Kiyotaka, threatens to attack Class B, asserts natural-genius theory and pressure on Kamuro.",
+      "decision_rationale": "Active competitive strategy but genuine Ichinose secret remains unverified.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Arisu pressiona Kiyotaka e mira Ichinose, fundamentando sua tese de gênio inato; segredo exato ainda não demonstrado."
+    },
+    {
+      "id": "V75-012",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Masumi Kamuro",
+      "pdf_pages": [
+        40,
+        43
+      ],
+      "claim": "Interrupts Sakayanagi, challenges suggestion about Ichinose, reveals reaction to secret comparison.",
+      "decision_rationale": "Her responses expose vulnerability yet do not establish precise prior offense.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Reage às insinuações de Arisu sobre Ichinose; seu espanto não certifica qual foi a transgressão anterior."
+    },
+    {
+      "id": "V75-013",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Mio Ibuki",
+      "pdf_pages": [
+        52,
+        64
+      ],
+      "claim": "Pursues Kiyotaka, challenges him to secret rematch, chooses restricted storeroom, concedes after short fight.",
+      "decision_rationale": "New combat demonstration with explicit negotiated result and coercive escalation.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Busca revanche, escolhe uma despensa e admite derrota após luta; há novo caso físico, com risco de transgressão."
+    },
+    {
+      "id": "V75-014",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kiyotaka Ayanokoji",
+      "pdf_pages": [
+        58,
+        63
+      ],
+      "claim": "Chooses measured counters in cramped storage, then obtains concession and handles escape via employee Kimura while staging embarrassing-date explanation.",
+      "decision_rationale": "Scene supports practical planning and ethically troubling throat restraint, not infinite martial superiority.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Controla golpes, exige rendição e lida com funcionário após o combate; registrar também contenção perigosa, não excelência moral."
+    },
+    {
+      "id": "V75-015",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Mio Ibuki",
+      "pdf_pages": [
+        53,
+        54
+      ],
+      "claim": "Reveals goal of seeing every film screened at school and refuses to leave until Kiyotaka does.",
+      "decision_rationale": "Noncompetitive durable personal goal and trait of commitment distinct from class A.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Ibuki pretende assistir a todos os filmes exibidos; um objetivo extracurricular independente do desempenho acadêmico."
+    },
+    {
+      "id": "V75-016",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Mio Ibuki",
+      "pdf_pages": [
+        54,
+        56,
+        64
+      ],
+      "claim": "Hides with Kiyotaka from Ishizaki, challenges leader narrative and asks about 800 million in private points.",
+      "decision_rationale": "Demonstrates loyal opposition and financial interpretation, not confirmed loyalty to Kiyotaka.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Evita exposição com Kiyotaka e questiona o plano de Ryūen; independência e lealdade crítica coexistem."
+    },
+    {
+      "id": "V75-017",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kanji Ike",
+      "pdf_pages": [
+        67,
+        69,
+        94,
+        95
+      ],
+      "claim": "Intervenes for Shinohara in senior dispute, downplays it, then accepts Christmas Eve dinner invitation.",
+      "decision_rationale": "Demonstrated spontaneous defense and potential relational change, not certified dating.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Defende Shinohara da intimidação de veteranos, embora use comentários grosseiros; depois aceita jantar com ela."
+    },
+    {
+      "id": "V75-018",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Satsuki Shinohara",
+      "pdf_pages": [
+        67,
+        69,
+        94,
+        95
+      ],
+      "claim": "Struggles with assertive upperclassman, recognizes Ike help, invites him to dinner.",
+      "decision_rationale": "Social vulnerability then reciprocity; useful non-main romance seed.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Reconhece a ajuda de Ike e o convida; mudança recíproca incipiente, não anúncio de casal."
+    },
+    {
+      "id": "V75-019",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Haruka Hasebe",
+      "pdf_pages": [
+        70,
+        72
+      ],
+      "claim": "Organizes Christmas single-students gathering, infers Satou date, arranges protection for Airi feelings.",
+      "decision_rationale": "Social care, group cohesion, peer romance mediation.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Organiza encontro festivo e protege Airi do constrangimento; liderança afetiva da rede de amigos."
+    },
+    {
+      "id": "V75-020",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Airi Sakura",
+      "pdf_pages": [
+        103,
+        106
+      ],
+      "claim": "Visits Kiyotaka after outing with Haruka to give gloves, with shy but deliberate approach.",
+      "decision_rationale": "Self-initiated extracurricular social action and a concrete caring gift.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Leva luvas a Kiyotaka em iniciativa própria; gesto social relevante para a evolução de Airi."
+    },
+    {
+      "id": "V75-021",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kiyotaka Ayanokoji",
+      "pdf_pages": [
+        70,
+        72,
+        103,
+        106
+      ],
+      "claim": "Acknowledges Airi affection but treats her as still learning friendship and seeks appropriate response to her present.",
+      "decision_rationale": "Shows interpersonal learning without accepting romantic intimacy.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Reconhece a atração de Airi e pondera seu amadurecimento; não corresponde romanticamente nem despreza o gesto."
+    },
+    {
+      "id": "V75-022",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kiyotaka Ayanokoji",
+      "pdf_pages": [
+        73,
+        85
+      ],
+      "claim": "Recontacts Ryuen, exposes fear and liability factors, negotiates verbal conditional cooperation including Kushida issue.",
+      "decision_rationale": "Strategy changes from physical defeat to conditional political diplomacy, not a permanent alliance.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Reabre diálogo com Ryūen após vencê-lo e propõe cooperação específica; não existe aliança permanente."
+    },
+    {
+      "id": "V75-023",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kakeru Ryuen",
+      "pdf_pages": [
+        76,
+        85
+      ],
+      "claim": "Discusses his fear, 800 million possibilities, asks compensation and stages future C(D) leadership by Kaneda/Hiyori.",
+      "decision_rationale": "Adaptation and self-preservation after defeat; goals and tactics both conditional.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Negocia interesses, discute sua estratégia de pontos e prepara liderança indireta; derrota não elimina agência."
+    },
+    {
+      "id": "V75-024",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kakeru Ryuen",
+      "pdf_pages": [
+        81,
+        82
+      ],
+      "claim": "Proposes obtaining very large recurring point streams from all school grades as speculative finance scheme.",
+      "decision_rationale": "Important ability to generate extreme strategy; do not treat extortion as actual school-legal method.",
+      "source_mode": "ATTRIBUTED_PLAN",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Formula captação hipotética de pontos dos demais alunos; conservar como estratégia especulativa, não receita comprovada."
+    },
+    {
+      "id": "V75-025",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Manabu Horikita",
+      "pdf_pages": [
+        85,
+        92
+      ],
+      "claim": "Arrives at secret meeting and recruits Kiyotaka against Nagumo; supplies council roster and makes conditional cooperation promise.",
+      "decision_rationale": "Important governance/information brokerage without universal power.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Intermedeia a rede anti-Nagumo e fornece dados de integrantes do conselho; autoridade e limites do ex-presidente."
+    },
+    {
+      "id": "V75-026",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kakeru Ryuen",
+      "pdf_pages": [
+        86,
+        87
+      ],
+      "claim": "Tests Manabu with snow feint and jab; Manabu blocks and de-escalates.",
+      "decision_rationale": "Distinct minor physical demonstration; not Ryuen-Manabu full duel.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Ryūen testa Manabu com ataque breve, que é bloqueado; não transformar em duelo completo ou ranking universal."
+    },
+    {
+      "id": "V75-027",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kiyotaka Ayanokoji",
+      "pdf_pages": [
+        89,
+        92
+      ],
+      "claim": "Accepts introduction to second-year Nagumo opposition despite wishing to remain anonymous; assesses reputational exposure.",
+      "decision_rationale": "Concrete choice changes who learns about him and who can use him.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Aceita ser apresentado à oposição de Nagumo e assume risco reputacional; expansão voluntária da visibilidade."
+    },
+    {
+      "id": "V75-028",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Suzune Horikita",
+      "pdf_pages": [
+        93,
+        101
+      ],
+      "claim": "Meets Kushida publicly, resists Kiyotaka council request, calls brother after contact through Tachibana, still refuses council membership.",
+      "decision_rationale": "Relationship repair and autonomy; not accepted student-council appointment.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Conversa com Kushida e fala com Manabu, mas recusa entrar no conselho; iniciativa social e autonomia preservadas."
+    },
+    {
+      "id": "V75-029",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kikyo Kushida",
+      "pdf_pages": [
+        96,
+        102
+      ],
+      "claim": "Appears amicably with Suzune, already has Tachibana phone information and helps contact Manabu.",
+      "decision_rationale": "Social network demonstrated, underlying hostility not thereby resolved.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Mobiliza contato de Tachibana e mostra laços com veteranos; aparente gentileza não resolve sua rivalidade com Suzune."
+    },
+    {
+      "id": "V75-030",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Maya Satou",
+      "pdf_pages": [
+        108,
+        144
+      ],
+      "claim": "Pursues first date, rehearses double-date support, confesses directly and accepts rejection with tears while asking to remain friends.",
+      "decision_rationale": "Courage and emotional response, not manipulation or a current couple.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Prepara encontro amoroso e se declara, aceitando rejeição com sofrimento; atitude corajosa e contextual."
+    },
+    {
+      "id": "V75-031",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kiyotaka Ayanokoji",
+      "pdf_pages": [
+        108,
+        145
+      ],
+      "claim": "Accepts Christmas date, socializes with mixed group, refuses Satou candidly due to lack of reciprocated love and current risk burden.",
+      "decision_rationale": "First social/romantic event and refusal, not declaration of incapacity to love.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Participa de seu primeiro encontro e recusa Satō honestamente; ausência atual de amor não é incapacidade permanente."
+    },
+    {
+      "id": "V75-032",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Yosuke Hirata",
+      "pdf_pages": [
+        109,
+        112,
+        129,
+        133
+      ],
+      "claim": "Handles double date and Nagumo encounter, describes prioritizing others happiness and fear of class disintegration.",
+      "decision_rationale": "Social de-escalation, hidden fragility and relationship disinterest in his own POV.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Ajuda a administrar o encontro e conversa sobre seus valores; sociabilidade e fragilidade diante da desunião."
+    },
+    {
+      "id": "V75-033",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Miyabi Nagumo",
+      "pdf_pages": [
+        123,
+        127
+      ],
+      "claim": "Interrupts Christmas double date, grips Kiyotaka arm and uses mock invitation/online-game special-exam provocation.",
+      "decision_rationale": "An active targeted social threat; online-game hypothetical not approved ExamSpec.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Pressiona fisicamente Kiyotaka no shopping e debocha diante dos amigos; ameaça social real, sem exame aprovado."
+    },
+    {
+      "id": "V75-034",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Yosuke Hirata",
+      "pdf_pages": [
+        130,
+        133
+      ],
+      "claim": "Hirata explains club preference and does not want student council post.",
+      "decision_rationale": "Retain as Hirata-specific sport/social context only; label is corrected in primary actor field before promotion.",
+      "source_mode": "DIALOGUE",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Prefere continuar no futebol a aceitar eventual atuação no conselho; interesse extracurricular independente."
+    },
+    {
+      "id": "V75-035",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kiyotaka Ayanokoji",
+      "pdf_pages": [
+        154,
+        159
+      ],
+      "claim": "Kiyotaka brings Kei as apparent partner to meeting with Kiriyama, enabling plausible couple cover; assesses each side’s incentives.",
+      "decision_rationale": "Crucial visibility and knowledge-sharing choices, not established romantic couple.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Usa Kei como acompanhante e disfarce ao encontrar Kiriyama; parceria operacional não certifica romance formal."
+    },
+    {
+      "id": "V75-036",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kiriyama",
+      "pdf_pages": [
+        154,
+        159
+      ],
+      "claim": "Discloses opposition to Nagumo, remains vice president for access, proposes cautious anonymous communications.",
+      "decision_rationale": "New first-hand political actor case; allegations need attribution to Kiriyama.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Integra o conselho enquanto resiste a Nagumo e propõe mensagens anônimas; motivação altruísta ainda é relato dele."
+    },
+    {
+      "id": "V75-037",
+      "category": "BEHAVIORAL",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "Kiyotaka Ayanokoji",
+      "pdf_pages": [
+        163,
+        170
+      ],
+      "claim": "Admits he intentionally shifted Kei from Hirata protection to dependence on him, reciprocates first-name address and reveals previously purchased medicine.",
+      "decision_rationale": "Mixed protection and control with ambiguous affect, not proven mutual love.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Explica ter aumentado a dependência de Kei, mas também revela preocupação e reciprocidade; não reduzir a gesto romântico puro."
+    },
+    {
+      "id": "V75-038",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        12,
+        15
+      ],
+      "claim": "Says she feels stronger after V7, but retains body scar insecurity and past memories.",
+      "decision_rationale": "Stage snapshot rather than an invented categorical cure.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Diz sentir força nova sem apagar medos e cicatrizes; contexto temporal para estados contraditórios."
+    },
+    {
+      "id": "V75-039",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        17,
+        21
+      ],
+      "claim": "Considers abandoning publicly fake relationship with Hirata and romantic jealousy of Satou.",
+      "decision_rationale": "Intent not completed breakup at this scene.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Cogita desfazer relacionamento falso e percebe ciúme; intenção ainda reversível."
+    },
+    {
+      "id": "V75-040",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        32,
+        34
+      ],
+      "claim": "Fears she is a replaceable intelligence asset and Kiyotaka no longer needs her.",
+      "decision_rationale": "Private attachment vulnerability, not observed objective diminished competence.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Teme ser substituída como parceira útil; sentimento privado, não avaliação objetiva da competência dela."
+    },
+    {
+      "id": "V75-041",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Kei Karuizawa",
+      "pdf_pages": [
+        164,
+        170
+      ],
+      "claim": "Requests first-name Kiyotaka-Kei form and reassesses Hirata cover, increasing reciprocal exclusivity.",
+      "decision_rationale": "New relationship evidence does not confirm boyfriend/girlfriend status.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "A troca de nomes próprios e a reflexão sobre Hirata sugerem aproximação, não namoro confirmado."
+    },
+    {
+      "id": "V75-042",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Kiyotaka Ayanokoji",
+      "pdf_pages": [
+        11,
+        107,
+        140,
+        150,
+        170
+      ],
+      "claim": "Reflects on unfamiliarity with ordinary romance, inability to show smile, uncertainty and potential future closeness with Kei.",
+      "decision_rationale": "Changing model of interpersonal goals not a fixed incapacity to love.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Reflete sobre amor, sorriso e normalidade; aprendizado possível, não personalidade congelada."
+    },
+    {
+      "id": "V75-043",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Kiyotaka Ayanokoji",
+      "pdf_pages": [
+        36,
+        43,
+        89,
+        125,
+        159
+      ],
+      "claim": "Visibility expands: Arisu knows White Room; Ryuen/roof group know X; Nagumo sees relay; Kiriyama gains identity; Satou sees runner.",
+      "decision_rationale": "Maintain separate knowledge sets, no school-wide identity broadcast.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Conhecimento se distribui entre Arisu, grupo do terraço, Nagumo, Kiriyama e Satō; não há publicidade universal de X."
+    },
+    {
+      "id": "V75-044",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Kiyotaka Ayanokoji",
+      "pdf_pages": [
+        149,
+        150,
+        164,
+        170
+      ],
+      "claim": "His decision to preserve Kei involves coercive utility reasoning alongside genuine gestures and conditional warmth.",
+      "decision_rationale": "Dual motive, not moral redemption or objectively romantically in love.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "A avaliação instrumental sobre Kei coexiste com cuidado observável; registrar fonte íntima e atos externos separadamente."
+    },
+    {
+      "id": "V75-045",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Maya Satou",
+      "pdf_pages": [
+        16,
+        24,
+        108,
+        144
+      ],
+      "claim": "Attraction dates from sports festival, confesses on December 25, remains open to friendship after rejection.",
+      "decision_rationale": "Romantic state dynamic independent from annual class rank.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Satō se encanta após a corrida, declara-se e aceita continuar amiga; evolução afetiva sem nova meta escolar."
+    },
+    {
+      "id": "V75-046",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Mio Ibuki",
+      "pdf_pages": [
+        53,
+        64
+      ],
+      "claim": "Persistence, film hobby, resentment, own tactical judgment and admission of defeat coexist.",
+      "decision_rationale": "Do not equate defeat with obedience or conversion to Kiyotaka.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Hobby de cinema, orgulho e ressentimento de Ibuki coexistem com aceitação de derrota."
+    },
+    {
+      "id": "V75-047",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Kakeru Ryuen",
+      "pdf_pages": [
+        76,
+        85
+      ],
+      "claim": "Retreats from direct command but keeps entrepreneurship/ambition and capacity to negotiate.",
+      "decision_rationale": "Defeat changes behavior, not total removal from class history.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Ryūen reduz o comando direto sem perder planejamento ou autonomia; mudança de meio, não apagamento de identidade."
+    },
+    {
+      "id": "V75-048",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Suzune Horikita",
+      "pdf_pages": [
+        93,
+        102
+      ],
+      "claim": "Declines Sudou Christmas invitation and Kiyotaka student-council recommendation; initiates tentative contact with Kushida.",
+      "decision_rationale": "Independent priorities vs romance, fraternal acceptance not automatic membership.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Suzune recusa Sudō e a vaga no conselho, mas tenta conviver com Kushida; decisões distintas."
+    },
+    {
+      "id": "V75-049",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Yosuke Hirata",
+      "pdf_pages": [
+        129,
+        133,
+        164,
+        165
+      ],
+      "claim": "Fake romantic partnership still public, no desire for other dating, soccer remains central.",
+      "decision_rationale": "His noninterest and vulnerability not necessarily permanent.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Hirata sustenta romance público fictício, valoriza futebol e declara pouco interesse próprio em namoro."
+    },
+    {
+      "id": "V75-050",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Airi Sakura",
+      "pdf_pages": [
+        70,
+        72,
+        103,
+        106
+      ],
+      "claim": "Haruka’s friendship supports growth; first gift action demonstrates initiative outside classroom.",
+      "decision_rationale": "Small meaningful developmental step not merely gift metadata.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Amizade com Haruka permite a Airi agir além da antiga retração; gesto pequeno, mudança demonstrada."
+    },
+    {
+      "id": "V75-051",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Haruka Hasebe",
+      "pdf_pages": [
+        70,
+        72,
+        103,
+        106
+      ],
+      "claim": "Preserves autonomy of friend group while protecting Airi from dating news.",
+      "decision_rationale": "Group support, no guarantee Airi never learns.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Haruka protege Airi e flexibiliza encontro do grupo; não controlar automaticamente a futura descoberta do romance."
+    },
+    {
+      "id": "V75-052",
+      "category": "CHARACTER",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "Ike / Shinohara",
+      "pdf_pages": [
+        67,
+        69,
+        94,
+        95
+      ],
+      "claim": "Assistance and invitation foreshadow possible romance without public couple announcement.",
+      "decision_rationale": "Do not skip as decorative shopping encounter.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Ike e Shinohara passam da hostilidade cotidiana à reciprocidade, sem declaração oficial de namoro."
+    },
+    {
+      "id": "V75-053",
+      "category": "INSTITUTION",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "org.student-council",
+      "pdf_pages": [
+        85,
+        92
+      ],
+      "claim": "V7.5 introduces second-year vice president Kiriyama, secretaries Mizowaki and Tonokawa, faction and opposition.",
+      "decision_rationale": "Organizational relation evidence, source-scoped roster.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Kiriyama, Mizowaki e Tonokawa aparecem na estrutura; registrar funções e facções com cronologia."
+    },
+    {
+      "id": "V75-054",
+      "category": "INSTITUTION",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "org.student-council",
+      "pdf_pages": [
+        87,
+        89
+      ],
+      "claim": "Manabu says council participates in school disciplinary proceedings and partly in designing special exams (island test example).",
+      "decision_rationale": "Affects institutional jurisdiction; do not infer unlimited independent rulemaking.",
+      "source_mode": "MANABU_REPORTED",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Manabu relata participação disciplinar e elaboração parcial de exames pelo conselho; autoridade não é ilimitada."
+    },
+    {
+      "id": "V75-055",
+      "category": "INSTITUTION",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "org.student-council",
+      "pdf_pages": [
+        88,
+        90
+      ],
+      "claim": "Manabu reports 17 second-year expulsions and claims Nagumo involved in more than half based on exit interviews.",
+      "decision_rationale": "Report figure with attributed source; not independently audited ledger.",
+      "source_mode": "MANABU_REPORT",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Manabu reporta 17 expulsões e participação de Nagumo em mais da metade; dado atribuído, sem auditoria dos 17 casos."
+    },
+    {
+      "id": "V75-056",
+      "category": "INSTITUTION",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "org.student-council",
+      "pdf_pages": [
+        155,
+        159
+      ],
+      "claim": "Kiriyama claims Nagumo has most second years under control and offers class-A promotion chances; Kiriyama remains inside council to observe.",
+      "decision_rationale": "Faction dynamics and incentives, some future policies unverifiable.",
+      "source_mode": "KIRIYAMA_REPORT",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Kiriyama relata hegemonia de Nagumo e proposta de mobilidade; promessas não equivalem a regras efetivadas."
+    },
+    {
+      "id": "V75-057",
+      "category": "INSTITUTION",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "org.anhs",
+      "pdf_pages": [
+        63,
+        64
+      ],
+      "claim": "Private-point class transfer reference confirms 20 million per individual, 800 million for forty; V7 earlier 2m quote remains discrepancy.",
+      "decision_rationale": "Supports known rule, not evidence of discounts or actual cohort movement.",
+      "source_mode": "IBUKI_QUOTE",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "V7.5 volta a citar 20 milhões por aluno e 800 milhões por turma; confrontar com fala divergente do V7, sem apagar fonte."
+    },
+    {
+      "id": "V75-058",
+      "category": "INSTITUTION",
+      "decision": "ACCEPT",
+      "primary_actor_or_organization": "org.anhs",
+      "pdf_pages": [
+        57,
+        59,
+        63
+      ],
+      "claim": "Public mall staff-only storage access, trapping door, school-related discipline uncertainty and staff discretion.",
+      "decision_rationale": "Specific place security episode only; not normative loophole for any student.",
+      "source_mode": "OBSERVED_SCENE",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "A entrada na despensa e reação do funcionário exemplificam riscos locais; não são um manual normativo de segurança."
+    },
+    {
+      "id": "V75-059",
+      "category": "INSTITUTION",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "org.anhs",
+      "pdf_pages": [
+        16,
+        23,
+        73,
+        107
+      ],
+      "claim": "Winter holiday Dec 23-25: public mall, cinema, cafés, dorms, school building available with constraints; students retain off-class social lives.",
+      "decision_rationale": "Simulation environment/schedule context, not a new special exam.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Férias permitem shopping, cinema, cafés e convivência; registrar disponibilidade contextual, não um exame."
+    },
+    {
+      "id": "V75-060",
+      "category": "INSTITUTION",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "org.white_room",
+      "pdf_pages": [
+        35,
+        40,
+        130,
+        150
+      ],
+      "claim": "Arisu knows White Room past; Kiyotaka contrasts regimented childhood with inability to experience normal dating.",
+      "decision_rationale": "Character memory and external knowledge gate, no verified new WR training curriculum.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "White Room explica limitação afetiva de Kiyotaka e é conhecida por Arisu; não inventar novo currículo."
+    },
+    {
+      "id": "V75-061",
+      "category": "INSTITUTION",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "org.anhs",
+      "pdf_pages": [
+        21,
+        22
+      ],
+      "claim": "Legendary confession tree appears in school bulletin-board forum with alleged sunset success chance.",
+      "decision_rationale": "Urban legend exists as rumor; percentage not institutional guarantee.",
+      "source_mode": "FORUM_RUMOR",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "A árvore romântica aparece em fórum, mas a chance de 99% é superstição, não regra escolar."
+    },
+    {
+      "id": "V75-062",
+      "category": "EXAM",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "exam.y1.sports-festival",
+      "pdf_pages": [
+        17,
+        94,
+        123,
+        159
+      ],
+      "claim": "Relay performance generates Satou attraction and Nagumo/Kiriyama interest in Kiyotaka.",
+      "decision_rationale": "Important retrospective reputational effect, not changed race score.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "A corrida anterior explica interesse de Satō e atenção dos veteranos; efeito reputacional, sem recalcular resultado."
+    },
+    {
+      "id": "V75-063",
+      "category": "EXAM",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "exam.y1.deserted-island-1",
+      "pdf_pages": [
+        87,
+        88
+      ],
+      "claim": "Manabu describes prior island exam as at least partly based on student council proposal.",
+      "decision_rationale": "Institutional design provenance, not newly codified island scoring rule.",
+      "source_mode": "MANABU_REPORTED",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Manabu atribui parte da criação da prova da ilha ao conselho; retrospectiva institucional, sem inventar pontuação."
+    },
+    {
+      "id": "V75-064",
+      "category": "EXAM",
+      "decision": "CONTEXT",
+      "primary_actor_or_organization": "exam.y1.zodiac-cruise-1",
+      "pdf_pages": [
+        42,
+        52
+      ],
+      "claim": "Ryuen/Kei/Kiyotaka discuss previous secrets and school tactics from cruise in postfacto conversations.",
+      "decision_rationale": "Retrospective contextual links, not new VIP formula or exam outcome.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Diálogos resgatam segredos antigos do cruzeiro; contexto posterior, sem alterar VIPs nem regras."
+    },
+    {
+      "id": "V75-065",
+      "category": "EXAM",
+      "decision": "CANDIDATE_ONLY",
+      "primary_actor_or_organization": "future.y1-january-mixed-year-exam",
+      "pdf_pages": [
+        157,
+        158
+      ],
+      "claim": "Kiriyama forecasts January special exam with interactions among 1st/2nd and sometimes 3rd years, and says years vary.",
+      "decision_rationale": "Future unnamed exam warning; no rules, teams or dates to instantiate.",
+      "source_mode": "KIRIYAMA_REPORT",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Kiriyama prevê prova entre séries em janeiro, sem formato definitivo; manter como alerta de exame futuro."
+    },
+    {
+      "id": "V75-066",
+      "category": "EXAM",
+      "decision": "REJECT_AS_RULE",
+      "primary_actor_or_organization": "future.nagumo-online-game-exam",
+      "pdf_pages": [
+        126
+      ],
+      "claim": "Nagumo suggests online-game-based special exam during hostile chat.",
+      "decision_rationale": "Provocation/hypothesis, not enacted rule or authorized ExamSpec.",
+      "source_mode": "NAGUMO_HYPOTHETICAL",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Nagumo menciona jogo online como provocação; não há autorização para criar um ExamSpec."
+    },
+    {
+      "id": "V75-067",
+      "category": "EXAM",
+      "decision": "REJECT_AS_RULE",
+      "primary_actor_or_organization": "winter-break-special-exam",
+      "pdf_pages": [
+        16,
+        23
+      ],
+      "claim": "Karuizawa and Satou speculate about winter-break exams; nothing announced.",
+      "decision_rationale": "Holiday not an examination; no fictitious pack should be created.",
+      "source_mode": "CASUAL_SPECULATION",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Alunos especulam sobre exame nas férias, mas o volume não mostra prova; rejeitar existência inventada."
+    },
+    {
+      "id": "V75-068",
+      "category": "FILTER",
+      "decision": "EXCLUDE",
+      "primary_actor_or_organization": "Keyaki Mall film screening",
+      "pdf_pages": [
+        44,
+        52
+      ],
+      "claim": "Cinema projector malfunction halts the show.",
+      "decision_rationale": "Atmospheric obstacle, keep only as context for Ibuki confrontation; not standalone meaningful skill demonstration.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Defeito no cinema aproxima Ibuki e Kiyotaka, mas, por si só, não demonstra habilidade de ninguém."
+    },
+    {
+      "id": "V75-069",
+      "category": "FILTER",
+      "decision": "EXCLUDE",
+      "primary_actor_or_organization": "Kiyotaka hobby buys medicine",
+      "pdf_pages": [
+        35,
+        168,
+        169
+      ],
+      "claim": "Buys two types of cold medicine.",
+      "decision_rationale": "Purchase alone is trivia; KEEP contextual link to delayed welfare concern/Kei trust change.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "A compra de remédios isolada é detalhe; sua finalidade e a reação de Kei é que justificam caso afetivo."
+    },
+    {
+      "id": "V75-070",
+      "category": "FILTER",
+      "decision": "EXCLUDE",
+      "primary_actor_or_organization": "Kiyotaka snow joke",
+      "pdf_pages": [
+        73,
+        82
+      ],
+      "claim": "Leaves snow on his head and does not brush it off.",
+      "decision_rationale": "Humorous mannerism rather than robust permanent psychological trait.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Cabeça coberta de neve é traço cômico local, insuficiente para atributo permanente."
+    },
+    {
+      "id": "V75-071",
+      "category": "FILTER",
+      "decision": "EXCLUDE",
+      "primary_actor_or_organization": "Christmas tree 99% myth",
+      "pdf_pages": [
+        21,
+        22
+      ],
+      "claim": "Forum claims 99 percent success for confessions at a tree.",
+      "decision_rationale": "Do not import fabricated probability into engine; store as school rumor.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Boato de sucesso na árvore não é probabilidade oficial do sistema."
+    },
+    {
+      "id": "V75-072",
+      "category": "FILTER",
+      "decision": "EXCLUDE",
+      "primary_actor_or_organization": "Generic café and movie date venues",
+      "pdf_pages": [
+        16,
+        44,
+        108,
+        139
+      ],
+      "claim": "Characters spend time in mall and movie theater.",
+      "decision_rationale": "Keep geography/environment metadata; cannot classify every meal as a separate competence case.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Rotinas de cafeteria e cinema são ambientais; não criar um feito para cada compra, prato ou caminhada."
+    },
+    {
+      "id": "V75-073",
+      "category": "FILTER",
+      "decision": "EXCLUDE",
+      "primary_actor_or_organization": "Yamauchi karaoke banter",
+      "pdf_pages": [
+        93,
+        95
+      ],
+      "claim": "Jokes about singles and makes rude remarks to Ike.",
+      "decision_rationale": "Retain social-group scene context, insufficient change in preference or repeatable decision pattern.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Provocações de Yamauchi são pano de fundo para Ike, não uma transição suficientemente demonstrada."
+    },
+    {
+      "id": "V75-074",
+      "category": "FILTER",
+      "decision": "EXCLUDE",
+      "primary_actor_or_organization": "Kiriyama guaranteed selflessness",
+      "pdf_pages": [
+        158,
+        159
+      ],
+      "claim": "Claims he resists Nagumo only for future students welfare.",
+      "decision_rationale": "Attribution to his self-report; no certainty of pure motive.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Kiriyama alega altruísmo e Kiyotaka desconfia; manter motivo aberto e atribuído."
+    },
+    {
+      "id": "V75-075",
+      "category": "FILTER",
+      "decision": "EXCLUDE",
+      "primary_actor_or_organization": "Ayanokoji irrevocable choice about Kushida",
+      "pdf_pages": [
+        79,
+        80
+      ],
+      "claim": "Suggests willingness to expel Kushida at expense of future class points.",
+      "decision_rationale": "A serious conditional proposal, not completed expulsion or irrevocable runtime objective.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Proposta para expulsar Kushida não é expulsão ocorrida nem objetivo futuro obrigatório."
+    },
+    {
+      "id": "V75-076",
+      "category": "FILTER",
+      "decision": "EXCLUDE",
+      "primary_actor_or_organization": "Kiyotaka romantic confession to Kei",
+      "pdf_pages": [
+        168,
+        170
+      ],
+      "claim": "Mutual first names and narration of potential future relationship.",
+      "decision_rationale": "Strong interpersonal signals but no current confession or officially declared romance.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Chamar Kei pelo primeiro nome e imaginar futuro juntos não torna os dois namorados naquele momento."
+    },
+    {
+      "id": "V75-077",
+      "category": "FILTER",
+      "decision": "EXCLUDE",
+      "primary_actor_or_organization": "Ryuen monthly point extraction guaranteed",
+      "pdf_pages": [
+        80,
+        82
+      ],
+      "claim": "Hypothesizes 48m-100m monthly extraction across school and 800m potential.",
+      "decision_rationale": "Numbers are thought experiment, not observed income stream or permitted exploit.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "actor_knowledge_gate": "SCOPED",
+      "independent_review": "PENDING",
+      "verified": false,
+      "engine_memory_admission": false,
+      "decision_explanation_pt": "Ryūen calcula somas elevadas de captação; isso não prova pontos acumulados nem viabilidade institucional."
+    }
+  ]
+}

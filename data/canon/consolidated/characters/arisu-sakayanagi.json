@@ -7,7 +7,8 @@
     "ln.y1.v00.legacyemtls.v1.0.1",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -30,7 +31,8 @@
         "v0.char.046",
         "v0.wr.026",
         "v0.wr.043",
-        "y1v7.ev.038"
+        "y1v7.ev.038",
+        "y1v075.ev.060"
       ]
     },
     "social": {
@@ -55,20 +57,26 @@
       "behavioral_case_refs": [
         "v0.case.arisu.nature-nurture-hypothesis"
       ],
-      "context_evidence_refs": []
+      "context_evidence_refs": [
+        "y1v075.ev.010",
+        "y1v075.ev.012"
+      ]
     },
     "politics": {
       "behavioral_case_refs": [
-        "y1v5.case.arisu-sakayanagi.maintain-faction-support-withdraw-athletics"
+        "y1v5.case.arisu-sakayanagi.maintain-faction-support-withdraw-athletics",
+        "y1v075.case.arisu-sakayanagi.v075-c011"
       ],
       "context_evidence_refs": [
         "y1v3.ev.116",
-        "y1v5.ev.010"
+        "y1v5.ev.010",
+        "y1v075.ev.011"
       ]
     },
     "strategy": {
       "behavioral_case_refs": [
-        "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private"
+        "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private",
+        "y1v075.case.arisu-sakayanagi.v075-c011"
       ],
       "context_evidence_refs": [
         "y1v3.ev.116",
@@ -79,7 +87,9 @@
         "y1v7.ev.043",
         "y1v7.ev.055",
         "y1v7.ev.057",
-        "y1v7.ev.102"
+        "y1v7.ev.102",
+        "y1v075.ev.010",
+        "y1v075.ev.011"
       ]
     },
     "leadership": {
@@ -117,7 +127,8 @@
         "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private"
       ],
       "context_evidence_refs": [
-        "y1v5.ev.067"
+        "y1v5.ev.067",
+        "y1v075.ev.043"
       ]
     },
     "motivation": {
@@ -131,6 +142,18 @@
       "context_evidence_refs": [
         "y1v7.ev.050",
         "y1v7.ev.059"
+      ]
+    },
+    "emotion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.012"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.043"
       ]
     }
   },
@@ -148,5 +171,13 @@
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
   },
-  "provenance_migration_note": "Retired volume0 staging path was not an accessible source; original book provenance persists via source_coverage and evidence references."
+  "provenance_migration_note": "Retired volume0 staging path was not an accessible source; original book provenance persists via source_coverage and evidence references.",
+  "y1_v075_source_status": "UNVERIFIED_SOURCE_BOUNDED_REVIEW_PENDING",
+  "y1_v075_actor_state_deltas": [],
+  "y1_v075_temporal_guard": {
+    "historical_phase": "Y1_V075_WINTER_BREAK",
+    "social_and_extracurricular_changes_matter": true,
+    "not_permanent_personality_rating": true,
+    "divergence_requires_new_acquisition": true
+  }
 }

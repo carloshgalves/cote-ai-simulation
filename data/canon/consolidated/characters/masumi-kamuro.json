@@ -4,7 +4,8 @@
   "display_name": "Masumi Kamuro",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -23,7 +24,30 @@
       "context_evidence_refs": [
         "y1v7.ev.013",
         "y1v7.ev.014",
-        "y1v7.ev.015"
+        "y1v7.ev.015",
+        "y1v075.ev.011"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.011"
+      ]
+    },
+    "emotion": {
+      "behavioral_case_refs": [
+        "y1v075.case.masumi-kamuro.v075-c012"
+      ],
+      "context_evidence_refs": [
+        "y1v075.ev.012"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [
+        "y1v075.case.masumi-kamuro.v075-c012"
+      ],
+      "context_evidence_refs": [
+        "y1v075.ev.012"
       ]
     }
   },
@@ -38,5 +62,13 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
+  },
+  "y1_v075_source_status": "UNVERIFIED_SOURCE_BOUNDED_REVIEW_PENDING",
+  "y1_v075_actor_state_deltas": [],
+  "y1_v075_temporal_guard": {
+    "historical_phase": "Y1_V075_WINTER_BREAK",
+    "social_and_extracurricular_changes_matter": true,
+    "not_permanent_personality_rating": true,
+    "divergence_requires_new_acquisition": true
   }
 }

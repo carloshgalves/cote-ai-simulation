@@ -10,7 +10,8 @@
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -57,7 +58,8 @@
         "y1v7.case.kakeru-ryuen.v7-c003",
         "y1v7.case.kakeru-ryuen.v7-c004",
         "y1v7.case.kakeru-ryuen.v7-c006",
-        "y1v7.case.kakeru-ryuen.v7-c008"
+        "y1v7.case.kakeru-ryuen.v7-c008",
+        "y1v075.case.kakeru-ryuen.v075-c024"
       ],
       "context_evidence_refs": [
         "y1v2.ev.081",
@@ -123,18 +125,25 @@
         "y1v7.ev.109",
         "y1v7.ev.111",
         "y1v7.ev.112",
-        "y1v7.ev.113"
+        "y1v7.ev.113",
+        "y1v075.ev.022",
+        "y1v075.ev.024"
       ]
     },
     "economy": {
       "behavioral_case_refs": [
-        "y1v3.case.kakeru-ryuen.organize-luxury-spending"
+        "y1v3.case.kakeru-ryuen.organize-luxury-spending",
+        "y1v075.case.kakeru-ryuen.v075-c023",
+        "y1v075.case.kakeru-ryuen.v075-c024"
       ],
       "context_evidence_refs": [
         "y1v3.ev.054",
         "y1v3.ev.073",
         "y1v3.ev.105",
-        "y1v4.ev.128"
+        "y1v4.ev.128",
+        "y1v075.ev.016",
+        "y1v075.ev.023",
+        "y1v075.ev.024"
       ]
     },
     "leadership": {
@@ -200,7 +209,8 @@
         "y1v5.ev.009",
         "y1v6.ev.023",
         "y1v7.ev.053",
-        "y1v7.ev.066"
+        "y1v7.ev.066",
+        "y1v075.ev.016"
       ]
     },
     "reasoning": {
@@ -217,7 +227,8 @@
       "behavioral_case_refs": [
         "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance",
         "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
-        "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction"
+        "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction",
+        "y1v075.case.kakeru-ryuen.v075-c023"
       ],
       "context_evidence_refs": [
         "y1v4.ev.076",
@@ -228,7 +239,9 @@
         "y1v5.ev.047",
         "y1v5.ev.064",
         "y1v5.ev.076",
-        "y1v5.ev.077"
+        "y1v5.ev.077",
+        "y1v075.ev.022",
+        "y1v075.ev.023"
       ]
     },
     "ethics": {
@@ -254,11 +267,13 @@
     "risk_management": {
       "behavioral_case_refs": [
         "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording",
-        "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence"
+        "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
+        "y1v075.case.kakeru-ryuen.v075-c026"
       ],
       "context_evidence_refs": [
         "y1v5.ev.011",
-        "y1v5.ev.046"
+        "y1v5.ev.046",
+        "y1v075.ev.026"
       ]
     },
     "sports": {
@@ -340,7 +355,9 @@
     "relationship": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v5.ev.061"
+        "y1v5.ev.061",
+        "y1v075.ev.043",
+        "y1v075.ev.047"
       ]
     },
     "deception": {
@@ -466,7 +483,8 @@
     },
     "combat": {
       "behavioral_case_refs": [
-        "y1v7.case.kakeru-ryuen.v7-c005"
+        "y1v7.case.kakeru-ryuen.v7-c005",
+        "y1v075.case.kakeru-ryuen.v075-c026"
       ],
       "context_evidence_refs": [
         "y1v7.ev.002",
@@ -476,7 +494,8 @@
         "y1v7.ev.093",
         "y1v7.ev.097",
         "y1v7.ev.098",
-        "y1v7.ev.108"
+        "y1v7.ev.108",
+        "y1v075.ev.026"
       ]
     },
     "exams": {
@@ -484,6 +503,13 @@
       "context_evidence_refs": [
         "y1v7.ev.018",
         "y1v7.ev.059"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.043",
+        "y1v075.ev.047"
       ]
     }
   },
@@ -519,5 +545,27 @@
     "y1v7.goal.kakeru-ryuen.v7-g002",
     "y1v7.goal.kakeru-ryuen.v7-g003"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v075_source_status": "UNVERIFIED_SOURCE_BOUNDED_REVIEW_PENDING",
+  "y1_v075_actor_state_deltas": [
+    {
+      "source_record_id": "V75-047",
+      "evidence_ref": "y1v075.ev.047",
+      "pdf_pages": [
+        76,
+        85
+      ],
+      "claim": "Retreats from direct command but keeps entrepreneurship/ambition and capacity to negotiate.",
+      "qualification": "Defeat changes behavior, not total removal from class history.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "verified": false,
+      "engine_memory_admission": false
+    }
+  ],
+  "y1_v075_temporal_guard": {
+    "historical_phase": "Y1_V075_WINTER_BREAK",
+    "social_and_extracurricular_changes_matter": true,
+    "not_permanent_personality_rating": true,
+    "divergence_requires_new_acquisition": true
+  }
 }

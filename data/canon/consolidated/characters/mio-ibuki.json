@@ -8,7 +8,8 @@
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -40,7 +41,8 @@
     "social": {
       "behavioral_case_refs": [
         "y1v45.case.mio-ibuki.acknowledge-anxiety-outside-spy-role",
-        "y1v45.case.mio-ibuki.pair-with-rival-for-fortune-reading"
+        "y1v45.case.mio-ibuki.pair-with-rival-for-fortune-reading",
+        "y1v075.case.mio-ibuki.v075-c016"
       ],
       "context_evidence_refs": [
         "y1v3.ev.042",
@@ -53,7 +55,8 @@
         "y1v45.ev.008",
         "y1v45.ev.009",
         "y1v45.ev.010",
-        "y1v45.ev.014"
+        "y1v45.ev.014",
+        "y1v075.ev.016"
       ]
     },
     "conflict": {
@@ -104,21 +107,25 @@
         "y1v7.ev.091",
         "y1v7.ev.104",
         "y1v7.ev.105",
-        "y1v7.ev.106"
+        "y1v7.ev.106",
+        "y1v075.ev.014"
       ]
     },
     "combat": {
       "behavioral_case_refs": [
         "y1v3.case.mio-ibuki.fight-feverish-suzune",
         "y1v7.case.mio-ibuki.v7-c024",
-        "y1v7.case.mio-ibuki.v7-c026"
+        "y1v7.case.mio-ibuki.v7-c026",
+        "y1v075.case.mio-ibuki.v075-c013"
       ],
       "context_evidence_refs": [
         "y1v3.ev.093",
         "y1v3.ev.094",
         "y1v7.ev.071",
         "y1v7.ev.093",
-        "y1v7.ev.108"
+        "y1v7.ev.108",
+        "y1v075.ev.013",
+        "y1v075.ev.014"
       ]
     },
     "risk_management": {
@@ -162,9 +169,12 @@
       ]
     },
     "motivation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v075.case.mio-ibuki.v075-c015"
+      ],
       "context_evidence_refs": [
-        "y1v45.ev.007"
+        "y1v45.ev.007",
+        "y1v075.ev.015"
       ]
     },
     "reasoning": {
@@ -176,11 +186,13 @@
     },
     "negotiation": {
       "behavioral_case_refs": [
-        "y1v45.case.mio-ibuki.pair-with-rival-for-fortune-reading"
+        "y1v45.case.mio-ibuki.pair-with-rival-for-fortune-reading",
+        "y1v075.case.mio-ibuki.v075-c013"
       ],
       "context_evidence_refs": [
         "y1v45.ev.010",
-        "y1v5.ev.077"
+        "y1v5.ev.077",
+        "y1v075.ev.013"
       ]
     },
     "belief": {
@@ -227,6 +239,34 @@
         "y1v7.ev.090",
         "y1v7.ev.096"
       ]
+    },
+    "extracurricular": {
+      "behavioral_case_refs": [
+        "y1v075.case.mio-ibuki.v075-c015"
+      ],
+      "context_evidence_refs": [
+        "y1v075.ev.015"
+      ]
+    },
+    "economy": {
+      "behavioral_case_refs": [
+        "y1v075.case.mio-ibuki.v075-c016"
+      ],
+      "context_evidence_refs": [
+        "y1v075.ev.016"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.046"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.046"
+      ]
     }
   },
   "source_documents": [],
@@ -247,5 +287,27 @@
     "y1v7.goal.mio-ibuki.v7-g009",
     "y1v7.goal.mio-ibuki.v7-g010"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v075_source_status": "UNVERIFIED_SOURCE_BOUNDED_REVIEW_PENDING",
+  "y1_v075_actor_state_deltas": [
+    {
+      "source_record_id": "V75-046",
+      "evidence_ref": "y1v075.ev.046",
+      "pdf_pages": [
+        53,
+        64
+      ],
+      "claim": "Persistence, film hobby, resentment, own tactical judgment and admission of defeat coexist.",
+      "qualification": "Do not equate defeat with obedience or conversion to Kiyotaka.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "verified": false,
+      "engine_memory_admission": false
+    }
+  ],
+  "y1_v075_temporal_guard": {
+    "historical_phase": "Y1_V075_WINTER_BREAK",
+    "social_and_extracurricular_changes_matter": true,
+    "not_permanent_personality_rating": true,
+    "divergence_requires_new_acquisition": true
+  }
 }

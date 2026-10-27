@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -94,7 +95,8 @@
       "context_evidence_refs": [
         "y1v6.ev.056",
         "y1v075.ev.020",
-        "y1v075.ev.051"
+        "y1v075.ev.051",
+        "y1v08.ev.053"
       ]
     },
     "cooperation": {
@@ -158,5 +160,15 @@
     "friendship_and_romance_are_distinct": true,
     "observed_initiative_not_enduring_trait": true,
     "divergent_history_no_auto_import": true
-  }
+  },
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.053"
+  ]
 }

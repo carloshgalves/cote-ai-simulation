@@ -9,7 +9,8 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -33,7 +34,8 @@
         "y1v4.case.yosuke-hirata.prioritize-solitary-classmate-lunch",
         "y1v4.case.yosuke-hirata.seek-horikita-cooperation-through-kiyotaka",
         "y1v5.case.yosuke-hirata.mediate-athlete-roles-and-vote",
-        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus"
+        "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus",
+        "y1v075.case.yosuke-hirata.v075-c032"
       ],
       "context_evidence_refs": [
         "y1v1.ev.012",
@@ -68,7 +70,8 @@
         "y1v5.ev.051",
         "y1v5.ev.071",
         "y1v6.ev.027",
-        "y1v6.ev.069"
+        "y1v6.ev.069",
+        "y1v075.ev.032"
       ]
     },
     "social": {
@@ -109,18 +112,22 @@
         "y1v5.ev.014",
         "y1v5.ev.019",
         "y1v5.ev.024",
-        "y1v5.ev.025"
+        "y1v5.ev.025",
+        "y1v075.ev.003",
+        "y1v075.ev.005"
       ]
     },
     "emotion": {
       "behavioral_case_refs": [
-        "y1v3.case.yosuke-hirata.freeze-during-crisis"
+        "y1v3.case.yosuke-hirata.freeze-during-crisis",
+        "y1v075.case.yosuke-hirata.v075-c032"
       ],
       "context_evidence_refs": [
         "y1v1.ev.013",
         "y1v3.ev.091",
         "y1v3.ev.106",
-        "y1v5.ev.043"
+        "y1v5.ev.043",
+        "y1v075.ev.032"
       ]
     },
     "combat": {
@@ -144,11 +151,14 @@
       ]
     },
     "institution": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v075.case.yosuke-hirata.v075-c034"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.055",
         "y1v2.ev.007",
-        "y1v3.ev.084"
+        "y1v3.ev.084",
+        "y1v075.ev.034"
       ]
     },
     "academic_reasoning": {
@@ -179,7 +189,8 @@
         "y1v5.ev.055",
         "y1v5.ev.071",
         "y1v6.ev.015",
-        "y1v6.ev.021"
+        "y1v6.ev.021",
+        "y1v075.ev.037"
       ]
     },
     "ethics": {
@@ -306,7 +317,9 @@
       ]
     },
     "sports": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v075.case.yosuke-hirata.v075-c034"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.015",
         "y1v5.ev.019",
@@ -318,14 +331,16 @@
         "y1v5.ev.039",
         "y1v5.ev.041",
         "y1v5.ev.051",
-        "y1v5.ev.056"
+        "y1v5.ev.056",
+        "y1v075.ev.034"
       ]
     },
     "deception": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v5.ev.015",
-        "y1v5.ev.071"
+        "y1v5.ev.071",
+        "y1v075.ev.005"
       ]
     },
     "cooperation": {
@@ -422,7 +437,31 @@
       "behavioral_case_refs": [
         "y1v6.case.yosuke-hirata.privately-infer-ayanokoji-strategist-without-disclosure"
       ],
-      "context_evidence_refs": []
+      "context_evidence_refs": [
+        "y1v075.ev.003",
+        "y1v075.ev.009",
+        "y1v075.ev.037",
+        "y1v075.ev.049"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.009",
+        "y1v075.ev.049"
+      ]
+    },
+    "coercion": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.033"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.033"
+      ]
     }
   },
   "source_documents": [],
@@ -449,5 +488,42 @@
     "quarantine_policy": "Only source-backed evidence re-reviewed at record level may be promoted; future references never seed memories."
   },
   "goal_transition_refs": [],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v075_source_status": "SOURCE_CANDIDATE_INDEPENDENT_REVIEW_NOT_PERFORMED",
+  "y1_v075_actor_state_deltas": [
+    {
+      "source_record_id": "V75-049",
+      "evidence_ref": "y1v075.ev.049",
+      "pdf_pages": [
+        129,
+        133,
+        164,
+        165
+      ],
+      "claim": "Fake romantic partnership still public, no desire for other dating, soccer remains central.",
+      "qualification": "His noninterest and vulnerability not necessarily permanent.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "confirmed_future_state": false,
+      "actor_knowledge_requires_observation": true,
+      "verified": false
+    }
+  ],
+  "y1_v075_relationship_refs": [
+    "y1v075.rel.kei-hirata"
+  ],
+  "y1_v075_non_executable_transition_contract": {
+    "dimensions": [
+      "trust",
+      "jealousy",
+      "vulnerability",
+      "attachment",
+      "social_visibility",
+      "self_concept"
+    ],
+    "historical_phase": "WINTER_BREAK_DEC_23_TO_25",
+    "source_integration_only": true,
+    "avoid_goal_only_reduction": true,
+    "no_post_divergence_auto_memory": true,
+    "prevent_mutual_romance_without_both_actor_evidence": true
+  }
 }

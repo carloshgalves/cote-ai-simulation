@@ -12,7 +12,8 @@
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -70,7 +71,11 @@
         "y1v7.case.kiyotaka-ayanokoji.v7-c014",
         "y1v7.case.kiyotaka-ayanokoji.v7-c015",
         "y1v7.case.kiyotaka-ayanokoji.v7-c018",
-        "y1v7.case.kiyotaka-ayanokoji.v7-c019"
+        "y1v7.case.kiyotaka-ayanokoji.v7-c019",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c010",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c014",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c022",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c037"
       ],
       "context_evidence_refs": [
         "v0.char.011",
@@ -222,7 +227,12 @@
         "y1v7.ev.099",
         "y1v7.ev.100",
         "y1v7.ev.102",
-        "y1v7.ev.113"
+        "y1v7.ev.113",
+        "y1v075.ev.010",
+        "y1v075.ev.011",
+        "y1v075.ev.014",
+        "y1v075.ev.022",
+        "y1v075.ev.037"
       ]
     },
     "social": {
@@ -246,7 +256,9 @@
         "y1v3.case.kiyotaka-ayanokoji.condition-support-on-privacy",
         "y1v4.case.kiyotaka-ayanokoji.redirect-koenji-to-bellhop",
         "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
-        "y1v7.case.kiyotaka-ayanokoji.v7-c010"
+        "y1v7.case.kiyotaka-ayanokoji.v7-c010",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c021",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c031"
       ],
       "context_evidence_refs": [
         "v0.char.009",
@@ -383,11 +395,21 @@
         "y1v7.ev.025",
         "y1v7.ev.079",
         "y1v7.ev.080",
-        "y1v7.ev.085"
+        "y1v7.ev.085",
+        "y1v075.ev.003",
+        "y1v075.ev.005",
+        "y1v075.ev.006",
+        "y1v075.ev.016",
+        "y1v075.ev.020",
+        "y1v075.ev.021",
+        "y1v075.ev.031"
       ]
     },
     "politics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v075.case.kiyotaka-ayanokoji.v075-c027",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c035"
+      ],
       "context_evidence_refs": [
         "v0.char.020",
         "v0.pol.022",
@@ -398,7 +420,12 @@
         "y1v45.ev.019",
         "y1v45.ev.021",
         "y1v5.ev.010",
-        "y1v5.ev.057"
+        "y1v5.ev.057",
+        "y1v075.ev.011",
+        "y1v075.ev.025",
+        "y1v075.ev.027",
+        "y1v075.ev.033",
+        "y1v075.ev.035"
       ]
     },
     "institution": {
@@ -472,7 +499,9 @@
         "y1v7.ev.030",
         "y1v7.ev.032",
         "y1v7.ev.040",
-        "y1v7.ev.082"
+        "y1v7.ev.082",
+        "y1v075.ev.034",
+        "y1v075.ev.060"
       ]
     },
     "combat": {
@@ -485,7 +514,8 @@
         "y1v1.case.k.swim-middle",
         "y1v1.case.kiyotaka-ayanokoji.fifty-meter-swim-withheld-effort",
         "y1v7.case.kiyotaka-ayanokoji.v7-c016",
-        "y1v7.case.kiyotaka-ayanokoji.v7-c017"
+        "y1v7.case.kiyotaka-ayanokoji.v7-c017",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c014"
       ],
       "context_evidence_refs": [
         "v0.char.016",
@@ -512,7 +542,9 @@
         "y1v7.ev.093",
         "y1v7.ev.094",
         "y1v7.ev.097",
-        "y1v7.ev.098"
+        "y1v7.ev.098",
+        "y1v075.ev.013",
+        "y1v075.ev.014"
       ]
     },
     "academic_reasoning": {
@@ -587,7 +619,9 @@
         "y1v45.ev.027",
         "y1v45.ev.029",
         "y1v45.ev.030",
-        "y1v45.ev.042"
+        "y1v45.ev.042",
+        "y1v075.ev.016",
+        "y1v075.ev.023"
       ]
     },
     "ethics": {
@@ -652,7 +686,8 @@
     },
     "emotion": {
       "behavioral_case_refs": [
-        "y1v1.case.k.social-entry-freeze"
+        "y1v1.case.k.social-entry-freeze",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c021"
       ],
       "context_evidence_refs": [
         "y1v1.ev.007",
@@ -683,7 +718,12 @@
         "y1v5.ev.048",
         "y1v5.ev.053",
         "y1v5.ev.079",
-        "y1v6.ev.041"
+        "y1v6.ev.041",
+        "y1v075.ev.002",
+        "y1v075.ev.007",
+        "y1v075.ev.021",
+        "y1v075.ev.030",
+        "y1v075.ev.032"
       ]
     },
     "risk_management": {
@@ -713,7 +753,8 @@
         "y1v45.ev.034",
         "y1v45.ev.036",
         "y1v5.ev.011",
-        "y1v6.ev.045"
+        "y1v6.ev.045",
+        "y1v075.ev.006"
       ]
     },
     "leadership": {
@@ -750,7 +791,9 @@
         "y1v5.ev.051",
         "y1v5.ev.070",
         "y1v5.ev.071",
-        "y1v5.ev.079"
+        "y1v5.ev.079",
+        "y1v075.ev.025",
+        "y1v075.ev.032"
       ]
     },
     "observation": {
@@ -765,7 +808,9 @@
         "y1v4.case.kiyotaka-ayanokoji.compare-private-exam-summons",
         "y1v4.case.kiyotaka-ayanokoji.maintain-cover-despite-ichinose-test",
         "y1v4.case.kiyotaka-ayanokoji.test-zodiac-rabbit-reactions",
-        "y1v5.case.kiyotaka-ayanokoji.record-deliberately-limited-grip"
+        "y1v5.case.kiyotaka-ayanokoji.record-deliberately-limited-grip",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c010",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c027"
       ],
       "context_evidence_refs": [
         "y1v1.ev.035",
@@ -831,7 +876,9 @@
         "y1v5.ev.015",
         "y1v5.ev.017",
         "y1v5.ev.020",
-        "y1v5.ev.024"
+        "y1v5.ev.024",
+        "y1v075.ev.010",
+        "y1v075.ev.027"
       ]
     },
     "exam": {
@@ -1013,13 +1060,17 @@
       "behavioral_case_refs": [
         "y1v4.case.kiyotaka-ayanokoji.predict-counter-alliance",
         "y1v45.case.kiyotaka-ayanokoji.mediate-illicit-delivery-proposal",
-        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past"
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c022"
       ],
       "context_evidence_refs": [
         "y1v4.ev.077",
         "y1v45.ev.010",
         "y1v45.ev.027",
-        "y1v45.ev.045"
+        "y1v45.ev.045",
+        "y1v075.ev.013",
+        "y1v075.ev.022",
+        "y1v075.ev.023"
       ]
     },
     "coercion": {
@@ -1041,7 +1092,8 @@
         "y1v45.ev.051",
         "y1v45.ev.052",
         "y1v6.ev.017",
-        "y1v6.ev.074"
+        "y1v6.ev.074",
+        "y1v075.ev.033"
       ]
     },
     "trauma": {
@@ -1058,7 +1110,11 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v4.ev.102",
-        "y1v45.ev.043"
+        "y1v45.ev.043",
+        "y1v075.ev.009",
+        "y1v075.ev.042",
+        "y1v075.ev.043",
+        "y1v075.ev.044"
       ]
     },
     "violence": {
@@ -1103,7 +1159,8 @@
         "y1v5.ev.074",
         "y1v6.ev.005",
         "y1v6.ev.012",
-        "y1v6.ev.070"
+        "y1v6.ev.070",
+        "y1v075.ev.005"
       ]
     },
     "reflection": {
@@ -1135,7 +1192,8 @@
         "y1v5.ev.049",
         "y1v5.ev.051",
         "y1v5.ev.052",
-        "y1v5.ev.057"
+        "y1v5.ev.057",
+        "y1v075.ev.034"
       ]
     },
     "discipline": {
@@ -1205,13 +1263,17 @@
     },
     "information": {
       "behavioral_case_refs": [
-        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past"
+        "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c035"
       ],
       "context_evidence_refs": [
         "y1v5.ev.023",
         "y1v6.ev.045",
         "y1v6.ev.050",
-        "y1v6.ev.059"
+        "y1v6.ev.059",
+        "y1v075.ev.004",
+        "y1v075.ev.008",
+        "y1v075.ev.035"
       ]
     },
     "trust": {
@@ -1240,7 +1302,8 @@
     "relationship": {
       "behavioral_case_refs": [
         "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces",
-        "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair"
+        "y1v6.case.kiyotaka-ayanokoji.set-score-to-support-sato-exam-pair",
+        "y1v075.case.kiyotaka-ayanokoji.v075-c037"
       ],
       "context_evidence_refs": [
         "y1v5.ev.053",
@@ -1249,14 +1312,29 @@
         "y1v6.ev.009",
         "y1v6.ev.035",
         "y1v6.ev.056",
-        "y1v6.ev.061"
+        "y1v6.ev.061",
+        "y1v075.ev.002",
+        "y1v075.ev.003",
+        "y1v075.ev.004",
+        "y1v075.ev.007",
+        "y1v075.ev.008",
+        "y1v075.ev.009",
+        "y1v075.ev.020",
+        "y1v075.ev.030",
+        "y1v075.ev.037",
+        "y1v075.ev.042",
+        "y1v075.ev.043",
+        "y1v075.ev.044"
       ]
     },
     "romance": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v075.case.kiyotaka-ayanokoji.v075-c031"
+      ],
       "context_evidence_refs": [
         "y1v6.ev.006",
-        "y1v6.ev.061"
+        "y1v6.ev.061",
+        "y1v075.ev.031"
       ]
     },
     "secrecy": {
@@ -1372,5 +1450,78 @@
     "y1v7.goal.kiyotaka-ayanokoji.v7-g005",
     "y1v7.goal.kiyotaka-ayanokoji.v7-g006"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v075_source_status": "SOURCE_CANDIDATE_INDEPENDENT_REVIEW_NOT_PERFORMED",
+  "y1_v075_actor_state_deltas": [
+    {
+      "source_record_id": "V75-042",
+      "evidence_ref": "y1v075.ev.042",
+      "pdf_pages": [
+        11,
+        107,
+        140,
+        150,
+        170
+      ],
+      "claim": "Reflects on unfamiliarity with ordinary romance, inability to show smile, uncertainty and potential future closeness with Kei.",
+      "qualification": "Changing model of interpersonal goals not a fixed incapacity to love.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "confirmed_future_state": false,
+      "actor_knowledge_requires_observation": true,
+      "verified": false
+    },
+    {
+      "source_record_id": "V75-043",
+      "evidence_ref": "y1v075.ev.043",
+      "pdf_pages": [
+        36,
+        43,
+        89,
+        125,
+        159
+      ],
+      "claim": "Visibility expands: Arisu knows White Room; Ryuen/roof group know X; Nagumo sees relay; Kiriyama gains identity; Satou sees runner.",
+      "qualification": "Maintain separate knowledge sets, no school-wide identity broadcast.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "confirmed_future_state": false,
+      "actor_knowledge_requires_observation": true,
+      "verified": false
+    },
+    {
+      "source_record_id": "V75-044",
+      "evidence_ref": "y1v075.ev.044",
+      "pdf_pages": [
+        149,
+        150,
+        164,
+        170
+      ],
+      "claim": "His decision to preserve Kei involves coercive utility reasoning alongside genuine gestures and conditional warmth.",
+      "qualification": "Dual motive, not moral redemption or objectively romantically in love.",
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "confirmed_future_state": false,
+      "actor_knowledge_requires_observation": true,
+      "verified": false
+    }
+  ],
+  "y1_v075_relationship_refs": [
+    "y1v075.rel.kei-kiyotaka",
+    "y1v075.rel.sato-kiyotaka",
+    "y1v075.rel.airi-kiyotaka"
+  ],
+  "y1_v075_non_executable_transition_contract": {
+    "dimensions": [
+      "trust",
+      "jealousy",
+      "vulnerability",
+      "attachment",
+      "social_visibility",
+      "self_concept"
+    ],
+    "historical_phase": "WINTER_BREAK_DEC_23_TO_25",
+    "source_integration_only": true,
+    "avoid_goal_only_reduction": true,
+    "no_post_divergence_auto_memory": true,
+    "prevent_mutual_romance_without_both_actor_evidence": true
+  }
 }

@@ -5,7 +5,8 @@
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -15,12 +16,20 @@
   "domains": {
     "relationship": {
       "behavioral_case_refs": [
-        "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction"
+        "y1v6.case.maya-sato.approach-ayanokoji-after-relay-attraction",
+        "y1v075.case.maya-sato.v075-c030"
       ],
       "context_evidence_refs": [
         "y1v6.ev.006",
         "y1v6.ev.035",
-        "y1v6.ev.061"
+        "y1v6.ev.061",
+        "y1v075.ev.002",
+        "y1v075.ev.003",
+        "y1v075.ev.004",
+        "y1v075.ev.007",
+        "y1v075.ev.030",
+        "y1v075.ev.043",
+        "y1v075.ev.045"
       ]
     },
     "romance": {
@@ -29,7 +38,8 @@
       ],
       "context_evidence_refs": [
         "y1v6.ev.006",
-        "y1v6.ev.061"
+        "y1v6.ev.061",
+        "y1v075.ev.031"
       ]
     },
     "social": {
@@ -39,7 +49,11 @@
       "context_evidence_refs": [
         "y1v6.ev.006",
         "y1v7.ev.025",
-        "y1v7.ev.080"
+        "y1v7.ev.080",
+        "y1v075.ev.003",
+        "y1v075.ev.005",
+        "y1v075.ev.019",
+        "y1v075.ev.031"
       ]
     },
     "exam": {
@@ -73,6 +87,41 @@
         "y1v6.case.maya-sato.increase-study-effort-for-shared-paper-shuffle-risk"
       ],
       "context_evidence_refs": []
+    },
+    "emotion": {
+      "behavioral_case_refs": [
+        "y1v075.case.maya-sato.v075-c030"
+      ],
+      "context_evidence_refs": [
+        "y1v075.ev.002",
+        "y1v075.ev.007",
+        "y1v075.ev.030"
+      ]
+    },
+    "information": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.004"
+      ]
+    },
+    "deception": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.005"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.019"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.043",
+        "y1v075.ev.045"
+      ]
     }
   },
   "knowledge_time_policy": {
@@ -85,5 +134,42 @@
     "contextual_facts": "MENTIONS_NOT_FEATS",
     "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
     "verified_facts": "INDEPENDENT_AUDIT_REQUIRED"
+  },
+  "y1_v075_source_status": "SOURCE_CANDIDATE_INDEPENDENT_REVIEW_NOT_PERFORMED",
+  "y1_v075_actor_state_deltas": [
+    {
+      "source_record_id": "V75-045",
+      "evidence_ref": "y1v075.ev.045",
+      "pdf_pages": [
+        16,
+        24,
+        108,
+        144
+      ],
+      "claim": "Attraction dates from sports festival, confesses on December 25, remains open to friendship after rejection.",
+      "qualification": "Romantic state dynamic independent from annual class rank.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "confirmed_future_state": false,
+      "actor_knowledge_requires_observation": true,
+      "verified": false
+    }
+  ],
+  "y1_v075_relationship_refs": [
+    "y1v075.rel.sato-kiyotaka"
+  ],
+  "y1_v075_non_executable_transition_contract": {
+    "dimensions": [
+      "trust",
+      "jealousy",
+      "vulnerability",
+      "attachment",
+      "social_visibility",
+      "self_concept"
+    ],
+    "historical_phase": "WINTER_BREAK_DEC_23_TO_25",
+    "source_integration_only": true,
+    "avoid_goal_only_reduction": true,
+    "no_post_divergence_auto_memory": true,
+    "prevent_mutual_romance_without_both_actor_evidence": true
   }
 }

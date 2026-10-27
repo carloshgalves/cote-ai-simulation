@@ -94,5 +94,6 @@
   },
   "goal_transition_refs": [
     "y1v7.goal.hiyori-shiina.v7-g016"
-  ]
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

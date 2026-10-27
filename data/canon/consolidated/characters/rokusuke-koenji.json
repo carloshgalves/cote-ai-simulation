@@ -209,5 +209,6 @@
   },
   "goal_transition_refs": [
     "y1v7.goal.rokusuke-koenji.v7-g018"
-  ]
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

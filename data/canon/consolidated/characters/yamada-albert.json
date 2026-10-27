@@ -85,5 +85,6 @@
   },
   "goal_transition_refs": [
     "y1v7.goal.yamada-albert.v7-g012"
-  ]
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

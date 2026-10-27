@@ -342,5 +342,6 @@
   },
   "goal_transition_refs": [
     "y1v7.goal.sae-chiyabashira.v7-g014"
-  ]
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

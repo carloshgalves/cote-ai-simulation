@@ -11270,7 +11270,8 @@
       "results": [],
       "exam": [],
       "pairing": [],
-      "relationship": []
+      "relationship": [],
+      "y1_v09": []
     },
     "actor.rokusuke-koenji": {
       "social": [
@@ -11376,7 +11377,8 @@
       "submission": [],
       "behavior": [
         "y1v08.case.sae-chiyabashira.v08-c003"
-      ]
+      ],
+      "y1_v09": []
     },
     "actor.manabu-horikita": {
       "leadership": [
@@ -11559,7 +11561,9 @@
         "y1v09.case.honami-ichinose.v09-c01",
         "y1v09.case.honami-ichinose.v09-c02",
         "y1v09.case.honami-ichinose.v09-c22"
-      ]
+      ],
+      "biography": [],
+      "knowledge": []
     },
     "actor.yukimura": {
       "social": [
@@ -12375,7 +12379,9 @@
       ],
       "persuasion": [
         "y1v09.case.nagumo.v09-c03"
-      ]
+      ],
+      "economy": [],
+      "governance": []
     },
     "actor.shibata-so": {
       "sports": [
@@ -12581,7 +12587,9 @@
       ],
       "deception": [
         "y1v09.case.masumi-kamuro.v09-c10"
-      ]
+      ],
+      "identity": [],
+      "knowledge": []
     },
     "actor.matsuo": {
       "institution": []

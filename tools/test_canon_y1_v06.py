@@ -135,7 +135,7 @@ assert card_by["actor.yukimura"]["attributes"]=={"academic":"A","intelligence":"
 assert card_by["actor.maya-sato"]["attributes"]=={"academic":"D-","intelligence":"D-","decision_making":"D-","physical":"C","cooperativeness":"C-"}
 assert anhs["paper_shuffle_y1_v06"]["combined_total_minimum"]==692
 assert all(p["enacted"]=="NOT_CONFIRMED" for p in council["presidency_y1_v06"]["proposals"])
-assert len(retro["event_lookup"])==18
+assert len(retro["event_lookup"])>=18  # Cross-volume dossiers are append-only; later volumes may add events.
 assert retro["event_lookup"]["evt.y1.v06.unknown-x-transaction-and-karuizawa-photo"]["status"]=="PARTIALLY_EXPLAINED"
 assert "evt.y1.v04.zodiac-vip-selection-algorithm" in retro["unknown_not_resolved"]
 

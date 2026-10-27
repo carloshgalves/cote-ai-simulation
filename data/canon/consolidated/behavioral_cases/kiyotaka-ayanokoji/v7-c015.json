@@ -35,5 +35,20 @@
   "behavioral_policy": "NON_EXECUTABLE",
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED"
+  },
+  "episode_deepening": {
+    "schema_version": "canon-episode-case-detail-v1",
+    "source_work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "dossier_ref": "data/canon/consolidated/audits/y1-v07-ryuen-plan-rooftop-deepening.json",
+    "focus": "IDENTITY_DISCLOSURE",
+    "observed_mechanism": "Enters past Albert, publicly identifies himself as X only to the group on the roof and gives Ibuki proof through island sabotage details.",
+    "epistemic_and_capability_limits": [
+      "Disclosure not campus-wide",
+      "Some Class C participants initially refuse to believe him"
+    ],
+    "first_party_pdf_page_review": "ASSISTANT_DIRECT_PRIMARY_PDF_CHECK",
+    "independent_review": "NOT_PERFORMED",
+    "runtime_admission": false,
+    "simulator_replay": "NOT_DETERMINISTIC"
   }
 }

@@ -38,5 +38,31 @@
   "behavioral_policy": "NON_EXECUTABLE",
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED"
+  },
+  "episode_deepening": {
+    "schema_version": "canon-episode-case-detail-v1",
+    "source_work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "dossier_ref": "data/canon/consolidated/audits/y1-v07-ryuen-plan-rooftop-deepening.json",
+    "focus": "800M_COUNTERREADING",
+    "observed_mechanism": "Observes the three-year 800M projection on Ryuen's phone, disputes his personal-only ambition and demands he reconsider abandoning Class C.",
+    "epistemic_and_capability_limits": [
+      "Ibuki's inference does not prove Ryuen's private intent",
+      "V7 two-million statement differs from V2 twenty-million reported class transfer"
+    ],
+    "first_party_pdf_page_review": "ASSISTANT_DIRECT_PRIMARY_PDF_CHECK",
+    "independent_review": "NOT_PERFORMED",
+    "runtime_admission": false,
+    "simulator_replay": "NOT_DETERMINISTIC",
+    "numeric_conflict": {
+      "v7_p199_ibuki_single_person_price": 2000000,
+      "v2_teacher_reported_transfer_price": 20000000,
+      "v2_evidence_refs": [
+        "y1v2.ev.025",
+        "y1v2.ev.026",
+        "y1v2.ev.027"
+      ],
+      "status": "OPEN_NO_SILENT_CORRECTION",
+      "reason": "The printed V7 claim and earlier teacher rule disagree; do not invent discounts, errata or exchange formula."
+    }
   }
 }

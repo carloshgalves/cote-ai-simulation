@@ -38,5 +38,20 @@
   "behavioral_policy": "NON_EXECUTABLE",
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED"
+  },
+  "episode_deepening": {
+    "schema_version": "canon-episode-case-detail-v1",
+    "source_work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "dossier_ref": "data/canon/consolidated/audits/y1-v07-ryuen-plan-rooftop-deepening.json",
+    "focus": "SCHOOL_RESPONSE",
+    "observed_mechanism": "Visits teacher Sakagami and learns camera repair has already been paid by Class D, while Ishizaki and Albert condition their own withdrawal on his; he remains.",
+    "epistemic_and_capability_limits": [
+      "Ryuen's guess that Kiyotaka orchestrated others' decisions is not verified",
+      "No general immunity by paying points"
+    ],
+    "first_party_pdf_page_review": "ASSISTANT_DIRECT_PRIMARY_PDF_CHECK",
+    "independent_review": "NOT_PERFORMED",
+    "runtime_admission": false,
+    "simulator_replay": "NOT_DETERMINISTIC"
   }
 }

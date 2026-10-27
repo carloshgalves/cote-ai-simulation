@@ -33,5 +33,20 @@
   "behavioral_policy": "NON_EXECUTABLE",
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED"
+  },
+  "episode_deepening": {
+    "schema_version": "canon-episode-case-detail-v1",
+    "source_work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "dossier_ref": "data/canon/consolidated/audits/y1-v07-ryuen-plan-rooftop-deepening.json",
+    "focus": "SEPARATE_KICK_ATTACK",
+    "observed_mechanism": "Opposes Ryuen's escalation, gets slapped, then later attacks Kiyotaka through kicks after the first two fighters are down; he evades and brings her down.",
+    "epistemic_and_capability_limits": [
+      "Not an enthusiastic original participant in Ryuen's coercion",
+      "Horikita comparison is only hypothetical source appraisal"
+    ],
+    "first_party_pdf_page_review": "ASSISTANT_DIRECT_PRIMARY_PDF_CHECK",
+    "independent_review": "NOT_PERFORMED",
+    "runtime_admission": false,
+    "simulator_replay": "NOT_DETERMINISTIC"
   }
 }

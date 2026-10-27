@@ -34,5 +34,20 @@
   "behavioral_policy": "NON_EXECUTABLE",
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED"
+  },
+  "episode_deepening": {
+    "schema_version": "canon-episode-case-detail-v1",
+    "source_work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "dossier_ref": "data/canon/consolidated/audits/y1-v07-ryuen-plan-rooftop-deepening.json",
+    "focus": "OPENING_ATTACKER",
+    "observed_mechanism": "Under Ryuen's order, makes a slow sweeping punch, gets his fist caught and later rushes again; Kiyotaka incapacitates him.",
+    "epistemic_and_capability_limits": [
+      "Not simultaneously coordinated with all other fighters",
+      "Local defeat not evidence of zero skill"
+    ],
+    "first_party_pdf_page_review": "ASSISTANT_DIRECT_PRIMARY_PDF_CHECK",
+    "independent_review": "NOT_PERFORMED",
+    "runtime_admission": false,
+    "simulator_replay": "NOT_DETERMINISTIC"
   }
 }

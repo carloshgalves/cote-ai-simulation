@@ -58,7 +58,7 @@ def errors(s):
     require(ed["y1v075.rel.kei-hirata"]["actual_breakup_in_volume"] is False,"fake couple already broken")
     require(ed["y1v075.rel.sato-kiyotaka"]["official_couple"] is False,"Satou becomes girlfriend")
     require(ed["y1v075.rel.ike-shinohara"]["couple_declared"] is False,"Ike/Shinohara relationship certified")
-    require(len(s["relation_index"]["edges"])==len(ed),"relationship retrieval index missing")
+    require(set(ed).issubset(set(s["relation_index"]["edges"])),"relationship retrieval index missing")
     require(s["council"]["y1_v075_roster_governance_and_nagumo_opposition"]["disciplinary_statistics"]["reported_total_second_year_expulsions"]==17,"Manabu expulsion report erased")
     require(s["council"]["y1_v075_roster_governance_and_nagumo_opposition"]["disciplinary_statistics"]["individually_certified_cases"]==0,"17 reports turned into independently verified cases")
     require(s["council"]["y1_v075_roster_governance_and_nagumo_opposition"]["nagumo_online_exam_tease"]["status"]=="PROVOCATION_NOT_A_CONFIRMED_EXAM_RULE","hypothetical game promoted to exam")

@@ -8,7 +8,8 @@
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_ATTRIBUTED_PRIVATE_REPORT_NOT_INDEPENDENTLY_VERIFIED",
   "evidence_refs": [
@@ -308,5 +309,41 @@
       "y1v075.ev.056"
     ],
     "engine_memory_admission": false
+  },
+  "y1_v08_interyear_political_exam_context": {
+    "source_id": "ln.y1.v08.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      57,
+      58,
+      59,
+      60,
+      118,
+      142,
+      145,
+      146,
+      147,
+      208,
+      209,
+      210,
+      211,
+      227,
+      228,
+      229,
+      230,
+      231,
+      236,
+      238,
+      239,
+      240
+    ],
+    "current_president": "actor.nagumo",
+    "former_president": "actor.manabu-horikita",
+    "vice_president": "actor.kiriyama",
+    "political_rivalry": "MANABU_NAGUMO_COMPETE_USING_DIFFERENT_MORAL_RESTRICTIONS",
+    "exam_influence": "ATTRIBUTED_TO_NAGUMO_AND_INFERRED_FROM_SCENE_NOT_UNBOUNDED_STATUTORY_RULEMAKING",
+    "observed_group_outcome": "NAGUMO_SECOND_VERSUS_MANABU_FIRST_MALE",
+    "indirect_strategy": "TACHIBANA_TARGETED_IN_FEMALE_SOLIDARITY_WITH_COSTLY_RESCUE",
+    "possible_collusion": "KIYOTAKA_NARRATOR_INFERENCE_NOT_CERTIFIED_PERSONAL_LEDGER",
+    "automatic_engine_update": false
   }
 }

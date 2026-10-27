@@ -1,0 +1,42 @@
+{
+  "id": "y1v7.case.mio-ibuki.v7-c028",
+  "actor_id": "actor.mio-ibuki",
+  "primary_actor_id": "actor.mio-ibuki",
+  "title": "Confrontar renúncia de Ryūen",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Examina plano e recusa receber os pontos sem debate",
+  "observed_result": "Autonomia é demonstrada, não submissão absoluta",
+  "epistemic_limits": "Autonomia é demonstrada, não submissão absoluta",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      198,
+      199,
+      200
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "strategy",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.106",
+    "y1v7.ev.104",
+    "y1v7.ev.105",
+    "y1v7.ev.108"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

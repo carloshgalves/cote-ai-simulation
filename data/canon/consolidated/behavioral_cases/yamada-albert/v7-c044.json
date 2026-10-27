@@ -1,0 +1,39 @@
+{
+  "id": "y1v7.case.yamada-albert.v7-c044",
+  "actor_id": "actor.yamada-albert",
+  "primary_actor_id": "actor.yamada-albert",
+  "title": "Acompanhar protesto de Ishizaki",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Avisa que sairia caso Ryūen saísse",
+  "observed_result": "Ação relatada por autoridade",
+  "epistemic_limits": "Ação relatada por autoridade",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      201,
+      202,
+      203
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "strategy",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.111"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

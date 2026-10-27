@@ -1,0 +1,39 @@
+{
+  "id": "y1v7.case.kakeru-ryuen.v7-c001",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "Enfrentar risco na infância",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Mata serpente e relata prazer com vitória",
+  "observed_result": "Autorrelato posterior, sem verificação por terceira pessoa",
+  "epistemic_limits": "Autorrelato posterior, sem verificação por terceira pessoa",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      11
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "strategy",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.001",
+    "y1v7.ev.002",
+    "y1v7.ev.003"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "y1v7.case.kakeru-ryuen.v7-c008",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "Revelar planejamento de longo prazo inadvertidamente",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Ibuki encontra projeção de 800 milhões em seu celular",
+  "observed_result": "Intenção coletiva disputada entre Ibuki e Ryūen",
+  "epistemic_limits": "Intenção coletiva disputada entre Ibuki e Ryūen",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      199,
+      200
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "strategy",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.106",
+    "y1v7.ev.105",
+    "y1v7.ev.107",
+    "y1v7.ev.108"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

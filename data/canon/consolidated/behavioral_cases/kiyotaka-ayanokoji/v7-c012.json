@@ -1,0 +1,44 @@
+{
+  "id": "y1v7.case.kiyotaka-ayanokoji.v7-c012",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Testar blefe de autoridade",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Emprega informação falsa contra Chabashira e obtém admissão",
+  "observed_result": "A alegação sobre a direção era blefe",
+  "epistemic_limits": "A alegação sobre a direção era blefe",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      70,
+      71,
+      72,
+      73,
+      74,
+      75
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "strategy",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.040",
+    "y1v7.ev.039",
+    "y1v7.ev.042"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

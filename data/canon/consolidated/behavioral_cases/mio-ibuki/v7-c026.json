@@ -1,0 +1,37 @@
+{
+  "id": "y1v7.case.mio-ibuki.v7-c026",
+  "actor_id": "actor.mio-ibuki",
+  "primary_actor_id": "actor.mio-ibuki",
+  "title": "Enfrentar ordem violenta",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Protesta contra Ryūen e sofre agressão",
+  "observed_result": "Não é consentimento com a escalada",
+  "epistemic_limits": "Não é consentimento com a escalada",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      176
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "combat"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "combat",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.093"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "y1v7.case.suzune-horikita.v7-c029",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "Conter reação de Sudō",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Instrui autocontrole e questiona a caça a X",
+  "observed_result": "Liderança ainda em construção",
+  "epistemic_limits": "Liderança ainda em construção",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      32,
+      33,
+      34,
+      35
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "strategy",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.016",
+    "y1v7.ev.017",
+    "y1v7.ev.018"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "volume-coverage-v1",
+  "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+  "pdf_pages": 207,
+  "records": 113,
+  "cases": 44,
+  "goal_transitions": 18,
+  "retrospective_dossiers_proposed": 14,
+  "pending_independent_items": 175,
+  "engine_memory_admission": false
+}

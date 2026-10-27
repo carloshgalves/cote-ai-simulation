@@ -1,0 +1,48 @@
+{
+  "id": "y1v7.case.kei-karuizawa.v7-c021",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "Escolher não denunciar X",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Apesar do pânico, decide preservar o nome dele",
+  "observed_result": "Decisão explicitamente relacionada à própria dignidade",
+  "epistemic_limits": "Decisão explicitamente relacionada à própria dignidade",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "strategy",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.074",
+    "y1v7.ev.076",
+    "y1v7.ev.072",
+    "y1v7.ev.077"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

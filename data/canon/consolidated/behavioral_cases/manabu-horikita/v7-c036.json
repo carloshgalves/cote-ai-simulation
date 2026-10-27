@@ -1,0 +1,38 @@
+{
+  "id": "y1v7.case.manabu-horikita.v7-c036",
+  "actor_id": "actor.manabu-horikita",
+  "primary_actor_id": "actor.manabu-horikita",
+  "title": "Testemunhar proximidade do confronto",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Permanece na escada a pedido de Ayanokōji",
+  "observed_result": "Não presencia todos os golpes",
+  "epistemic_limits": "Não presencia todos os golpes",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      164,
+      165
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "strategy",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.088"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

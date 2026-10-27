@@ -5,7 +5,8 @@
   "modeling_tier": "MINIMAL_ENTITY",
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -30,10 +31,13 @@
   "domains": {
     "social": {
       "behavioral_case_refs": [
-        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle"
+        "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
+        "y1v075.case.hasebe.v075-c019"
       ],
       "context_evidence_refs": [
-        "y1v1.ev.117"
+        "y1v1.ev.117",
+        "y1v075.ev.019",
+        "y1v075.ev.020"
       ]
     },
     "observation": {
@@ -88,13 +92,29 @@
     "relationship": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v6.ev.056"
+        "y1v6.ev.056",
+        "y1v075.ev.020",
+        "y1v075.ev.051"
       ]
     },
     "cooperation": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v6.ev.056"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [
+        "y1v075.case.hasebe.v075-c019"
+      ],
+      "context_evidence_refs": [
+        "y1v075.ev.019"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.051"
       ]
     }
   },
@@ -111,5 +131,32 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
+  },
+  "y1_v075_source_status": "UNVERIFIED_SOURCE_BOUNDED_REVIEW_PENDING",
+  "y1_v075_actor_state_deltas": [
+    {
+      "source_record_id": "V75-051",
+      "evidence_ref": "y1v075.ev.051",
+      "pdf_pages": [
+        70,
+        72,
+        103,
+        106
+      ],
+      "claim": "Preserves autonomy of friend group while protecting Airi from dating news.",
+      "qualification": "Group support, no guarantee Airi never learns.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "verified": false,
+      "engine_memory_admission": false
+    }
+  ],
+  "y1_v075_relationship_refs": [
+    "y1v075.rel.airi-haruka"
+  ],
+  "y1_v075_temporal_guard": {
+    "historical_phase": "Y1_V075_WINTER_BREAK",
+    "friendship_and_romance_are_distinct": true,
+    "observed_initiative_not_enduring_trait": true,
+    "divergent_history_no_auto_import": true
   }
 }

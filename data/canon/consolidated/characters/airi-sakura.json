@@ -11,7 +11,8 @@
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -33,7 +34,8 @@
         "y1v3.case.airi-sakura.defend-kiyotaka-verbally",
         "y1v3.case.airi-sakura.join-branch-collection",
         "y1v4.case.airi-sakura.seek-cabin-social-advice",
-        "y1v45.case.airi-sakura.deliver-respectful-romantic-refusal"
+        "y1v45.case.airi-sakura.deliver-respectful-romantic-refusal",
+        "y1v075.case.airi-sakura.v075-c020"
       ],
       "context_evidence_refs": [
         "y1v1.ev.116",
@@ -79,7 +81,10 @@
         "y1v6.ev.057",
         "y1v7.ev.004",
         "y1v7.ev.012",
-        "y1v7.ev.049"
+        "y1v7.ev.049",
+        "y1v075.ev.019",
+        "y1v075.ev.020",
+        "y1v075.ev.021"
       ]
     },
     "observation": {
@@ -183,7 +188,8 @@
         "y1v45.ev.037",
         "y1v45.ev.039",
         "y1v45.ev.040",
-        "y1v45.ev.041"
+        "y1v45.ev.041",
+        "y1v075.ev.021"
       ]
     },
     "institution": {
@@ -196,7 +202,8 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v3.ev.032",
-        "y1v5.ev.021"
+        "y1v5.ev.021",
+        "y1v075.ev.019"
       ]
     },
     "resources": {
@@ -256,12 +263,15 @@
     },
     "relationship": {
       "behavioral_case_refs": [
-        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle"
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v075.case.airi-sakura.v075-c020"
       ],
       "context_evidence_refs": [
         "y1v6.ev.043",
         "y1v6.ev.057",
-        "y1v6.ev.061"
+        "y1v6.ev.061",
+        "y1v075.ev.020",
+        "y1v075.ev.050"
       ]
     },
     "initiative": {
@@ -283,6 +293,12 @@
         "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle"
       ],
       "context_evidence_refs": []
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.050"
+      ]
     }
   },
   "source_documents": [],
@@ -302,5 +318,33 @@
   "goal_transition_refs": [
     "y1v6.goal.airi-sakura.request-friendship-group-entry"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v075_source_status": "UNVERIFIED_SOURCE_BOUNDED_REVIEW_PENDING",
+  "y1_v075_actor_state_deltas": [
+    {
+      "source_record_id": "V75-050",
+      "evidence_ref": "y1v075.ev.050",
+      "pdf_pages": [
+        70,
+        72,
+        103,
+        106
+      ],
+      "claim": "Haruka’s friendship supports growth; first gift action demonstrates initiative outside classroom.",
+      "qualification": "Small meaningful developmental step not merely gift metadata.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "verified": false,
+      "engine_memory_admission": false
+    }
+  ],
+  "y1_v075_relationship_refs": [
+    "y1v075.rel.airi-kiyotaka",
+    "y1v075.rel.airi-haruka"
+  ],
+  "y1_v075_temporal_guard": {
+    "historical_phase": "Y1_V075_WINTER_BREAK",
+    "friendship_and_romance_are_distinct": true,
+    "observed_initiative_not_enduring_trait": true,
+    "divergent_history_no_auto_import": true
+  }
 }

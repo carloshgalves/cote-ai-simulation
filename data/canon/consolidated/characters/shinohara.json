@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -27,14 +28,18 @@
       ]
     },
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v075.case.shinohara.v075-c018"
+      ],
       "context_evidence_refs": [
         "y1v3.ev.023",
         "y1v3.ev.039",
         "y1v3.ev.046",
         "y1v3.ev.078",
         "y1v45.ev.016",
-        "y1v5.ev.013"
+        "y1v5.ev.013",
+        "y1v075.ev.017",
+        "y1v075.ev.018"
       ]
     },
     "conflict": {
@@ -78,6 +83,29 @@
       "context_evidence_refs": [
         "y1v5.ev.013"
       ]
+    },
+    "information": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.004"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [
+        "y1v075.case.shinohara.v075-c018"
+      ],
+      "context_evidence_refs": [
+        "y1v075.ev.004",
+        "y1v075.ev.017",
+        "y1v075.ev.018",
+        "y1v075.ev.052"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.052"
+      ]
     }
   },
   "source_documents": [],
@@ -93,5 +121,32 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
+  },
+  "y1_v075_source_status": "UNVERIFIED_SOURCE_BOUNDED_REVIEW_PENDING",
+  "y1_v075_actor_state_deltas": [
+    {
+      "source_record_id": "V75-052",
+      "evidence_ref": "y1v075.ev.052",
+      "pdf_pages": [
+        67,
+        69,
+        94,
+        95
+      ],
+      "claim": "Assistance and invitation foreshadow possible romance without public couple announcement.",
+      "qualification": "Do not skip as decorative shopping encounter.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "verified": false,
+      "engine_memory_admission": false
+    }
+  ],
+  "y1_v075_relationship_refs": [
+    "y1v075.rel.ike-shinohara"
+  ],
+  "y1_v075_temporal_guard": {
+    "historical_phase": "Y1_V075_WINTER_BREAK",
+    "friendship_and_romance_are_distinct": true,
+    "observed_initiative_not_enduring_trait": true,
+    "divergent_history_no_auto_import": true
   }
 }

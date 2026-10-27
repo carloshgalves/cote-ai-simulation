@@ -17,3 +17,7 @@ Prioritize tests for:
 - promotion/demotion of NPC simulation tiers.
 
 Do not demand exact string outputs from stochastic LLM calls. Those belong in eval suites with rubrics/thresholds.
+
+## Mandatory CI billing/runner fallback
+
+When CI does not allocate runners or cannot execute, follow `docs/agents/ci-billing-fallback.md` and `AGENTS.md`: check runner/steps before diagnosing financial cause; report `CI_NOT_RUN` separately from failed code/evals, run bounded local deterministic/replay/eval verification with real exit codes and protected corpus excluded, and preserve separate human phase and merge gates.

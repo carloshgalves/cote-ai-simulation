@@ -22,3 +22,7 @@ Extract and formalize:
 Write examples and edge cases before agent strategy is involved. Verify the engine can run the exam with scripted/puppet agents first.
 
 Only after deterministic correctness is proven should LLM agents enter. This prevents strategic model behavior from masking a broken exam implementation.
+
+## Mandatory CI billing/runner fallback
+
+When CI does not allocate runners or cannot execute, follow `docs/agents/ci-billing-fallback.md` and `AGENTS.md`: check runner/steps before diagnosing financial cause; report `CI_NOT_RUN` separately from failed code/evals, run bounded local deterministic/replay/eval verification with real exit codes and protected corpus excluded, and preserve separate human phase and merge gates.

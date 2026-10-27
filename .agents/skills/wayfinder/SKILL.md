@@ -15,3 +15,7 @@ Create a decision map rather than a giant implementation checklist.
 6. Re-plan when a decision invalidates downstream assumptions.
 
 Never generate dozens of tickets around an unresolved framework or domain choice.
+
+## Mandatory CI billing/runner fallback
+
+When CI does not allocate runners or cannot execute, follow `docs/agents/ci-billing-fallback.md` and `AGENTS.md`: check runner/steps before diagnosing financial cause; report `CI_NOT_RUN` separately from failed code/evals, run bounded local deterministic/replay/eval verification with real exit codes and protected corpus excluded, and preserve separate human phase and merge gates.

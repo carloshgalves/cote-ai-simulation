@@ -13,7 +13,8 @@
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -75,7 +76,8 @@
         "y1v075.case.kiyotaka-ayanokoji.v075-c010",
         "y1v075.case.kiyotaka-ayanokoji.v075-c014",
         "y1v075.case.kiyotaka-ayanokoji.v075-c022",
-        "y1v075.case.kiyotaka-ayanokoji.v075-c037"
+        "y1v075.case.kiyotaka-ayanokoji.v075-c037",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c022"
       ],
       "context_evidence_refs": [
         "v0.char.011",
@@ -232,7 +234,9 @@
         "y1v075.ev.011",
         "y1v075.ev.014",
         "y1v075.ev.022",
-        "y1v075.ev.037"
+        "y1v075.ev.037",
+        "y1v08.ev.022",
+        "y1v08.ev.040"
       ]
     },
     "social": {
@@ -258,7 +262,8 @@
         "y1v6.case.kiyotaka-ayanokoji.join-five-student-friendship-circle",
         "y1v7.case.kiyotaka-ayanokoji.v7-c010",
         "y1v075.case.kiyotaka-ayanokoji.v075-c021",
-        "y1v075.case.kiyotaka-ayanokoji.v075-c031"
+        "y1v075.case.kiyotaka-ayanokoji.v075-c031",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c027"
       ],
       "context_evidence_refs": [
         "v0.char.009",
@@ -402,13 +407,16 @@
         "y1v075.ev.016",
         "y1v075.ev.020",
         "y1v075.ev.021",
-        "y1v075.ev.031"
+        "y1v075.ev.031",
+        "y1v08.ev.027"
       ]
     },
     "politics": {
       "behavioral_case_refs": [
         "y1v075.case.kiyotaka-ayanokoji.v075-c027",
-        "y1v075.case.kiyotaka-ayanokoji.v075-c035"
+        "y1v075.case.kiyotaka-ayanokoji.v075-c035",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c022",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c034"
       ],
       "context_evidence_refs": [
         "v0.char.020",
@@ -425,7 +433,10 @@
         "y1v075.ev.025",
         "y1v075.ev.027",
         "y1v075.ev.033",
-        "y1v075.ev.035"
+        "y1v075.ev.035",
+        "y1v08.ev.022",
+        "y1v08.ev.034",
+        "y1v08.ev.040"
       ]
     },
     "institution": {
@@ -660,7 +671,8 @@
         "y1v2.case.kiyotaka-ayanokoji.protect-sakura-from-clerk",
         "y1v2.case.kiyotaka-ayanokoji.self-directed-testimony-advice",
         "y1v3.case.kiyotaka-ayanokoji.condition-support-on-privacy",
-        "y1v4.case.kiyotaka-ayanokoji.criticize-hidden-horikita-mediation"
+        "y1v4.case.kiyotaka-ayanokoji.criticize-hidden-horikita-mediation",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c009"
       ],
       "context_evidence_refs": [
         "y1v1.ev.004",
@@ -681,7 +693,8 @@
         "y1v3.ev.115",
         "y1v4.ev.004",
         "y1v4.ev.006",
-        "y1v4.ev.050"
+        "y1v4.ev.050",
+        "y1v08.ev.009"
       ]
     },
     "emotion": {
@@ -733,7 +746,8 @@
         "y1v3.case.kiyotaka-ayanokoji.carry-sick-horikita",
         "y1v3.case.kiyotaka-ayanokoji.withhold-underwear-evidence",
         "y1v5.case.kiyotaka-ayanokoji.prepare-for-ryuen-information-attack",
-        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces"
+        "y1v6.case.kiyotaka-ayanokoji.protect-karuizawa-and-limit-contact-traces",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c005"
       ],
       "context_evidence_refs": [
         "y1v1.ev.024",
@@ -754,12 +768,14 @@
         "y1v45.ev.036",
         "y1v5.ev.011",
         "y1v6.ev.045",
-        "y1v075.ev.006"
+        "y1v075.ev.006",
+        "y1v08.ev.005"
       ]
     },
     "leadership": {
       "behavioral_case_refs": [
-        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita"
+        "y1v5.case.kiyotaka-ayanokoji.accept-short-term-risk-to-develop-horikita",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c009"
       ],
       "context_evidence_refs": [
         "y1v1.ev.031",
@@ -793,7 +809,8 @@
         "y1v5.ev.071",
         "y1v5.ev.079",
         "y1v075.ev.025",
-        "y1v075.ev.032"
+        "y1v075.ev.032",
+        "y1v08.ev.009"
       ]
     },
     "observation": {
@@ -810,7 +827,9 @@
         "y1v4.case.kiyotaka-ayanokoji.test-zodiac-rabbit-reactions",
         "y1v5.case.kiyotaka-ayanokoji.record-deliberately-limited-grip",
         "y1v075.case.kiyotaka-ayanokoji.v075-c010",
-        "y1v075.case.kiyotaka-ayanokoji.v075-c027"
+        "y1v075.case.kiyotaka-ayanokoji.v075-c027",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c024",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c033"
       ],
       "context_evidence_refs": [
         "y1v1.ev.035",
@@ -878,7 +897,9 @@
         "y1v5.ev.020",
         "y1v5.ev.024",
         "y1v075.ev.010",
-        "y1v075.ev.027"
+        "y1v075.ev.027",
+        "y1v08.ev.024",
+        "y1v08.ev.033"
       ]
     },
     "exam": {
@@ -913,7 +934,9 @@
         "y1v6.ev.035",
         "y1v6.ev.044",
         "y1v6.ev.045",
-        "y1v6.ev.070"
+        "y1v6.ev.070",
+        "y1v08.ev.069",
+        "y1v08.ev.072"
       ]
     },
     "conflict": {
@@ -1253,18 +1276,25 @@
       ]
     },
     "cooperation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c025"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.021",
         "y1v5.ev.022",
         "y1v5.ev.039",
-        "y1v6.ev.056"
+        "y1v6.ev.056",
+        "y1v08.ev.025"
       ]
     },
     "information": {
       "behavioral_case_refs": [
         "y1v6.case.kiyotaka-ayanokoji.enter-conditional-bet-to-learn-kushida-past",
-        "y1v075.case.kiyotaka-ayanokoji.v075-c035"
+        "y1v075.case.kiyotaka-ayanokoji.v075-c035",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c005",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c017",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c019",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c024"
       ],
       "context_evidence_refs": [
         "y1v5.ev.023",
@@ -1273,7 +1303,11 @@
         "y1v6.ev.059",
         "y1v075.ev.004",
         "y1v075.ev.008",
-        "y1v075.ev.035"
+        "y1v075.ev.035",
+        "y1v08.ev.005",
+        "y1v08.ev.017",
+        "y1v08.ev.019",
+        "y1v08.ev.024"
       ]
     },
     "trust": {
@@ -1324,7 +1358,13 @@
         "y1v075.ev.037",
         "y1v075.ev.042",
         "y1v075.ev.043",
-        "y1v075.ev.044"
+        "y1v075.ev.044",
+        "y1v08.ev.043",
+        "y1v08.ev.044",
+        "y1v08.ev.048",
+        "y1v08.ev.052",
+        "y1v08.ev.053",
+        "y1v08.ev.056"
       ]
     },
     "romance": {
@@ -1338,16 +1378,24 @@
       ]
     },
     "secrecy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c017",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c019"
+      ],
       "context_evidence_refs": [
         "y1v6.ev.009",
-        "y1v6.ev.059"
+        "y1v6.ev.059",
+        "y1v08.ev.017",
+        "y1v08.ev.019"
       ]
     },
     "security": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c025"
+      ],
       "context_evidence_refs": [
-        "y1v6.ev.009"
+        "y1v6.ev.009",
+        "y1v08.ev.025"
       ]
     },
     "academic": {
@@ -1399,9 +1447,14 @@
       ]
     },
     "investigation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c027",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c034"
+      ],
       "context_evidence_refs": [
-        "y1v6.ev.074"
+        "y1v6.ev.074",
+        "y1v08.ev.027",
+        "y1v08.ev.034"
       ]
     },
     "development": {
@@ -1416,6 +1469,41 @@
         "y1v7.ev.010",
         "y1v7.ev.011",
         "y1v7.ev.096"
+      ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c005",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c009",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c017",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c019",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c022",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c024",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c025",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c027",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c033",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c034"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.005",
+        "y1v08.ev.009",
+        "y1v08.ev.017",
+        "y1v08.ev.019",
+        "y1v08.ev.022",
+        "y1v08.ev.024",
+        "y1v08.ev.025",
+        "y1v08.ev.027",
+        "y1v08.ev.033",
+        "y1v08.ev.034",
+        "y1v08.ev.040"
+      ]
+    },
+    "empathy": {
+      "behavioral_case_refs": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c033"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.033"
       ]
     }
   },
@@ -1523,5 +1611,20 @@
     "avoid_goal_only_reduction": true,
     "no_post_divergence_auto_memory": true,
     "prevent_mutual_romance_without_both_actor_evidence": true
-  }
+  },
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.043",
+    "y1v08.rel.044",
+    "y1v08.rel.048",
+    "y1v08.rel.052",
+    "y1v08.rel.053",
+    "y1v08.rel.056"
+  ]
 }

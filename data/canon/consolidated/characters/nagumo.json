@@ -8,7 +8,8 @@
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "Y1_V07_THIRD_PARTY_CONTEXT_ADDED_INDEPENDENT_REVIEW_PENDING",
   "identity": {
@@ -56,7 +57,10 @@
       "behavioral_case_refs": [
         "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition",
         "y1v6.case.nagumo.announce-student-council-centralizing-reforms",
-        "y1v075.case.nagumo.v075-c033"
+        "y1v075.case.nagumo.v075-c033",
+        "y1v08.case.nagumo.v08-c010",
+        "y1v08.case.nagumo.v08-c037",
+        "y1v08.case.nagumo.v08-c040"
       ],
       "context_evidence_refs": [
         "y1v45.ev.047",
@@ -67,7 +71,10 @@
         "y1v075.ev.025",
         "y1v075.ev.027",
         "y1v075.ev.033",
-        "y1v075.ev.036"
+        "y1v075.ev.036",
+        "y1v08.ev.010",
+        "y1v08.ev.037",
+        "y1v08.ev.040"
       ]
     },
     "leadership": {
@@ -83,18 +90,23 @@
     },
     "social": {
       "behavioral_case_refs": [
-        "y1v45.case.nagumo.lead-older-students-volleyball"
+        "y1v45.case.nagumo.lead-older-students-volleyball",
+        "y1v08.case.nagumo.v08-c016"
       ],
       "context_evidence_refs": [
         "y1v5.ev.024",
-        "y1v075.ev.006"
+        "y1v075.ev.006",
+        "y1v08.ev.016"
       ]
     },
     "observation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v08.case.nagumo.v08-c016"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.024",
-        "y1v075.ev.027"
+        "y1v075.ev.027",
+        "y1v08.ev.016"
       ]
     },
     "results": {
@@ -118,9 +130,16 @@
       ]
     },
     "strategy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v08.case.nagumo.v08-c010",
+        "y1v08.case.nagumo.v08-c012",
+        "y1v08.case.nagumo.v08-c040"
+      ],
       "context_evidence_refs": [
-        "y1v7.ev.047"
+        "y1v7.ev.047",
+        "y1v08.ev.010",
+        "y1v08.ev.012",
+        "y1v08.ev.040"
       ]
     },
     "risk_management": {
@@ -147,7 +166,49 @@
     "relationship": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v075.ev.043"
+        "y1v075.ev.043",
+        "y1v08.ev.045",
+        "y1v08.ev.047",
+        "y1v08.ev.055"
+      ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.nagumo.v08-c010",
+        "y1v08.case.nagumo.v08-c012",
+        "y1v08.case.nagumo.v08-c016",
+        "y1v08.case.nagumo.v08-c037",
+        "y1v08.case.nagumo.v08-c040"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.010",
+        "y1v08.ev.012",
+        "y1v08.ev.016",
+        "y1v08.ev.037",
+        "y1v08.ev.040"
+      ]
+    },
+    "information": {
+      "behavioral_case_refs": [
+        "y1v08.case.nagumo.v08-c012",
+        "y1v08.case.nagumo.v08-c037"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.012",
+        "y1v08.ev.037"
+      ]
+    },
+    "exam": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.069",
+        "y1v08.ev.072"
+      ]
+    },
+    "institution": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.074"
       ]
     }
   },
@@ -184,5 +245,17 @@
     "manabu_reported_17_expulsions_source": "y1v075.ev.055",
     "rumored_involvement": "MORE_THAN_HALF_ATTRIBUTED_BY_MANABU_NOT_17_PROVEN_PERSONAL_ACTIONS",
     "online_exam_idea": "PROVOCATION_NOT_AUTHORIZED_EXAM"
-  }
+  },
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.045",
+    "y1v08.rel.047",
+    "y1v08.rel.055"
+  ]
 }

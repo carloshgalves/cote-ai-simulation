@@ -38,5 +38,21 @@
   "behavioral_policy": "NON_EXECUTABLE",
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED"
+  },
+  "episode_deepening": {
+    "schema_version": "canon-episode-case-detail-v1",
+    "source_work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "dossier_ref": "data/canon/consolidated/audits/y1-v07-ryuen-plan-rooftop-deepening.json",
+    "focus": "FIRST_THREE_OPPONENTS",
+    "observed_mechanism": "Intercepts Ishizaki's easy opening punch, intentionally absorbs one powerful Albert strike with pain then adapts, later evades Ibuki's kicks and brings her down.",
+    "epistemic_and_capability_limits": [
+      "Engagements differentiated by opponent and timing",
+      "No immunity to pain",
+      "No numeric combat coefficient"
+    ],
+    "first_party_pdf_page_review": "ASSISTANT_DIRECT_PRIMARY_PDF_CHECK",
+    "independent_review": "NOT_PERFORMED",
+    "runtime_admission": false,
+    "simulator_replay": "NOT_DETERMINISTIC"
   }
 }

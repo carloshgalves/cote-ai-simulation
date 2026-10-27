@@ -1367,7 +1367,10 @@
   "goal_transition_refs": [
     "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning",
     "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race",
-    "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets"
+    "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets",
+    "y1v7.goal.kiyotaka-ayanokoji.v7-g004",
+    "y1v7.goal.kiyotaka-ayanokoji.v7-g005",
+    "y1v7.goal.kiyotaka-ayanokoji.v7-g006"
   ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

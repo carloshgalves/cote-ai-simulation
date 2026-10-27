@@ -895,7 +895,8 @@
     "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal",
     "y1v6.goal.suzune-horikita.coordinate-classwide-exam",
     "y1v6.goal.suzune-horikita.preserve-kushida-instead-of-expelling",
-    "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack"
+    "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack",
+    "y1v7.goal.suzune-horikita.v7-g013"
   ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

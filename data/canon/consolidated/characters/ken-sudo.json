@@ -493,7 +493,8 @@
   "goal_transition_refs": [
     "y1v5.goal.ken-sudo.romantic-interest-shapes-mvp-motivation",
     "y1v5.goal.ken-sudo.from-demanded-respect-to-conditional-reliability",
-    "y1v6.goal.ken-sudo.improve-studies-under-tutoring"
+    "y1v6.goal.ken-sudo.improve-studies-under-tutoring",
+    "y1v7.goal.ken-sudo.v7-g017"
   ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

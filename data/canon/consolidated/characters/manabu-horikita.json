@@ -241,6 +241,8 @@
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
   },
-  "goal_transition_refs": [],
+  "goal_transition_refs": [
+    "y1v7.goal.manabu-horikita.v7-g015"
+  ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

@@ -1,0 +1,255 @@
+{
+  "schema_version": "canon-relationship-source-v1",
+  "source_id": "ln.y1.v09.en.operator-provided",
+  "phase": "Y1_V09_FEBRUARY",
+  "verified": false,
+  "engine_memory_admission": false,
+  "epistemic_policy": {
+    "directed_emotion_not_equal_mutual": "TRUE",
+    "private_knowledge_is_actor_scoped": "TRUE",
+    "divergent_simulation": "NO_AUTOMATIC_CANON_TRAJECTORY"
+  },
+  "edges": [
+    {
+      "id": "y1v09.rel.001",
+      "actors": [
+        "actor.honami-ichinose",
+        "actor.nagumo"
+      ],
+      "source_refs": [
+        "y1v09.ev.026"
+      ],
+      "pdf_pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "source_bound_change": "A revelação de passado pré-ingresso torna Nagumo conhecedor por conversa privada; não cria confiança irrestrita",
+      "relation_certainty": "SOURCE_CANDIDATE_SCOPED_TO_SCENE",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v09.rel.002",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.nagumo"
+      ],
+      "source_refs": [
+        "y1v09.ev.028"
+      ],
+      "pdf_pages": [
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "source_bound_change": "Pacto político de tolerância à ofensiva, condicionado à disputa particular",
+      "relation_certainty": "SOURCE_CANDIDATE_SCOPED_TO_SCENE",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v09.rel.003",
+      "actors": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v09.ev.05"
+      ],
+      "pdf_pages": [
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        218
+      ],
+      "source_bound_change": "Abertura gradual e gratidão após escuta; romance recíproco não comprovado",
+      "relation_certainty": "SOURCE_CANDIDATE_SCOPED_TO_SCENE",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v09.rel.004",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.masumi-kamuro"
+      ],
+      "source_refs": [
+        "y1v09.ev.10"
+      ],
+      "pdf_pages": [
+        84,
+        89,
+        95,
+        227,
+        228,
+        229
+      ],
+      "source_bound_change": "Kamuro cumpre missão de observar reação de Kiyotaka; não lealdade incondicional",
+      "relation_certainty": "SOURCE_CANDIDATE_SCOPED_TO_SCENE",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v09.rel.005",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v09.ev.05"
+      ],
+      "pdf_pages": [
+        183,
+        184,
+        185,
+        186
+      ],
+      "source_bound_change": "Arisu tenta induzir ação de Kiyotaka e propõe disputa futura; resultado não ocorreu ainda",
+      "relation_certainty": "SOURCE_CANDIDATE_SCOPED_TO_SCENE",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v09.rel.006",
+      "actors": [
+        "actor.kei-karuizawa",
+        "actor.yosuke-hirata"
+      ],
+      "source_refs": [
+        "y1v09.ev.034"
+      ],
+      "pdf_pages": [
+        28,
+        29,
+        30
+      ],
+      "source_bound_change": "Encerramento público de casal encenado; relação de proteção prévia não excluída",
+      "relation_certainty": "SOURCE_CANDIDATE_SCOPED_TO_SCENE",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v09.rel.007",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ],
+      "source_refs": [
+        "y1v09.ev.17"
+      ],
+      "pdf_pages": [
+        187,
+        191,
+        195,
+        197,
+        200,
+        201
+      ],
+      "source_bound_change": "Negociação informacional sob risco recíproco; proposta de pontos não prova pagamento",
+      "relation_certainty": "SOURCE_CANDIDATE_SCOPED_TO_SCENE",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v09.rel.008",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kiriyama"
+      ],
+      "source_refs": [
+        "y1v09.ev.18"
+      ],
+      "pdf_pages": [
+        202,
+        203,
+        204,
+        205,
+        206
+      ],
+      "source_bound_change": "Cooperação tática para provocar ação escolar; não aliança estável",
+      "relation_certainty": "SOURCE_CANDIDATE_SCOPED_TO_SCENE",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v09.rel.009",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.haruki-yamauchi"
+      ],
+      "source_refs": [
+        "y1v09.ev.033"
+      ],
+      "pdf_pages": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        232,
+        238
+      ],
+      "source_bound_change": "Contato intencional em formação; desfecho do plano não observado",
+      "relation_certainty": "SOURCE_CANDIDATE_SCOPED_TO_SCENE",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v09.rel.010",
+      "actors": [
+        "actor.hashimoto",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "source_refs": [
+        "y1v09.ev.14"
+      ],
+      "pdf_pages": [
+        118,
+        125,
+        128,
+        132,
+        201,
+        202
+      ],
+      "source_bound_change": "Vigilância e crença equivocada influem em decisões; falso namoro não certificado",
+      "relation_certainty": "SOURCE_CANDIDATE_SCOPED_TO_SCENE",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v09.rel.011",
+      "actors": [
+        "actor.honami-ichinose",
+        "actor.ryuji-kanzaki"
+      ],
+      "source_refs": [
+        "y1v09.ev.027"
+      ],
+      "pdf_pages": [
+        168,
+        169,
+        170,
+        174,
+        177,
+        178,
+        179
+      ],
+      "source_bound_change": "Apoio coletivo e liderança sob pressão; sem resultado contrafactual obrigatório",
+      "relation_certainty": "SOURCE_CANDIDATE_SCOPED_TO_SCENE",
+      "verified": false,
+      "engine_memory_admission": false
+    }
+  ]
+}

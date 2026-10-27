@@ -1,0 +1,52 @@
+{
+  "id": "y1v09.case.kei-karuizawa.v09-c15",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "Improvisar cobertura diante de Hashimoto e preservar discrição de contato",
+  "context": "Year 1 Volume 9, post-admission canonical episode",
+  "observed_actions": "Improvisar cobertura diante de Hashimoto e preservar discrição de contato",
+  "observed_result": "Source-bounded canonical historical outcome; not a guaranteed simulated outcome",
+  "epistemic_limits": "Pensamentos privados não são fatos conhecidos de Kiyotaka",
+  "source": {
+    "work_id": "ln.y1.v09.en.operator-provided",
+    "pdf_pages": [
+      128,
+      129,
+      130,
+      131,
+      132,
+      224,
+      225,
+      226,
+      227
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social",
+    "strategy",
+    "emotion"
+  ],
+  "information_available": "Only legitimately acquired information available to primary actor at episode time",
+  "counterfactual_test": "Divergent simulation must not assume occurrence, causal success or future knowledge",
+  "topics": [
+    "social",
+    "strategy",
+    "emotion",
+    "y1_v09"
+  ],
+  "evidence_refs": [
+    "y1v09.ev.15"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "PRIVATE_MONOLOGUE_AND_ACTION",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "assistant_semantic_review": "NOT_ITEMIZED",
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

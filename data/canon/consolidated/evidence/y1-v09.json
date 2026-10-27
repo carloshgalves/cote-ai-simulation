@@ -1,0 +1,1372 @@
+{
+  "schema_version": "canon-evidence-v1",
+  "source_id": "ln.y1.v09.en.operator-provided",
+  "records": [
+    {
+      "id": "y1v09.ev.01",
+      "source_catalog_id": "V9-C01",
+      "domain": "behavior",
+      "summary": "Proteção familiar, furto isolado e culpa posteriores",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          172,
+          173,
+          174,
+          175,
+          176
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SELF_REPORT_PRE_ENROLLMENT",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "identity",
+        "ethics",
+        "emotion",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Não inferir furto habitual nem condenação judicial",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.02",
+      "source_catalog_id": "V9-C02",
+      "domain": "behavior",
+      "summary": "Retomar projeto de vida e educação após isolamento anterior",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          6,
+          7,
+          176
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SELF_REPORT_PRE_ENROLLMENT",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "motivation",
+        "identity",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Não inferir recuperação emocional definitiva",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.03",
+      "source_catalog_id": "V9-C03",
+      "domain": "behavior",
+      "summary": "Aproximar-se de candidata, distorcer avaliação de Manabu e extrair segredo",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_DIALOGUE",
+      "mention_actor_ids": [
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "politics",
+        "strategy",
+        "persuasion",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Não converter fala de Nagumo em motivo verdadeiro de Manabu",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.04",
+      "source_catalog_id": "V9-C04",
+      "domain": "behavior",
+      "summary": "Negociar com Nagumo a não intervenção do conselho antes da ofensiva",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_DIALOGUE",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "politics",
+        "institution",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Não atribuir ao conselho poder irrestrito",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.05",
+      "source_catalog_id": "V9-C05",
+      "domain": "behavior",
+      "summary": "Pressão reputacional sobre Ichinose para induzir resposta de Kiyotaka",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          16,
+          17,
+          18,
+          183,
+          184,
+          185
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "LATER_REVEALED_PRIVATE_PLAN",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "deception",
+        "motivation",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Objetivo final não se reduz a expulsar Ichinose",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.06",
+      "source_catalog_id": "V9-C06",
+      "domain": "behavior",
+      "summary": "Procurar fontes sobre boatos e confrontar Hashimoto quanto a informações",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ACTION",
+      "mention_actor_ids": [
+        "actor.ryuji-kanzaki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "investigation",
+        "leadership",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Interrogatório e rumores não comprovam autoria",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.07",
+      "source_catalog_id": "V9-C07",
+      "domain": "behavior",
+      "summary": "Cultivar contatos e seguir Kiyotaka, inferindo incorretamente romance",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "ACTOR_INFERENCE",
+      "mention_actor_ids": [
+        "actor.hashimoto"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "observation",
+        "strategy",
+        "social",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Hipótese romântica de Hashimoto não é fato",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.08",
+      "source_catalog_id": "V9-C08",
+      "domain": "behavior",
+      "summary": "Considerar ajuda a Ichinose e conter intervenção que ampliaria boatos",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          65,
+          66,
+          67,
+          68
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ACTION",
+      "mention_actor_ids": [
+        "actor.hiyori-shiina"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "social",
+        "risk_management",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "A cautela específica não prova passividade permanente",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.09",
+      "source_catalog_id": "V9-C09",
+      "domain": "behavior",
+      "summary": "Procurar a líder rival, sondar boatos e aceitar recusa de revelação",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ACTION",
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "investigation",
+        "strategy",
+        "social",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Perguntar não equivale a conhecer segredo",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.10",
+      "source_catalog_id": "V9-C10",
+      "domain": "behavior",
+      "summary": "Revelar furto próprio e relatar segredo para testar a reação de Kiyotaka",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          227,
+          228,
+          229
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "LATER_REVEALED_MISSION",
+      "mention_actor_ids": [
+        "actor.masumi-kamuro"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "deception",
+        "observation",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "A missão foi delegada; não assumir rebelião contra Arisu",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.11",
+      "source_catalog_id": "V9-C11",
+      "domain": "behavior",
+      "summary": "Preparar evidência material antiga para deslocar a atenção de Kiyotaka",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          183,
+          184,
+          185
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "LATER_REVEALED_PLAN",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "deception",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Lata não foi furtada no dia da visita",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.12",
+      "source_catalog_id": "V9-C12",
+      "domain": "behavior",
+      "summary": "Comparar validade de lata e deduzir descompasso temporal da encenação",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          183,
+          184,
+          185
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "ACTOR_DEDUCTION",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "observation",
+        "reasoning",
+        "strategy",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Dedução local não prova onisciência",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.13",
+      "source_catalog_id": "V9-C13",
+      "domain": "behavior",
+      "summary": "Encerrar relacionamento público de fachada sem abandonar papel social",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          28,
+          29,
+          30
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ACTION",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "social",
+        "identity",
+        "relationship",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "O romance público com Hirata não era real",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.14",
+      "source_catalog_id": "V9-C14",
+      "domain": "behavior",
+      "summary": "Planejar aparição ambígua com Kei para desviar suspeitas de Hashimoto",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          201,
+          202
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "RETROSPECTIVE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "deception",
+        "social",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Não pressupor controle de reação de Hashimoto",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.15",
+      "source_catalog_id": "V9-C15",
+      "domain": "behavior",
+      "summary": "Improvisar cobertura diante de Hashimoto e preservar discrição de contato",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          128,
+          129,
+          130,
+          131,
+          132,
+          224,
+          225,
+          226,
+          227
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_MONOLOGUE_AND_ACTION",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "social",
+        "strategy",
+        "emotion",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Pensamentos privados não são fatos conhecidos de Kiyotaka",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.16",
+      "source_catalog_id": "V9-C16",
+      "domain": "behavior",
+      "summary": "Usar rede segmentada de segredos e proteção por gravações na negociação",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198,
+          199,
+          200
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_DIALOGUE",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "information",
+        "deception",
+        "strategy",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Rumores recolhidos não são automaticamente verdade",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.17",
+      "source_catalog_id": "V9-C17",
+      "domain": "behavior",
+      "summary": "Negociar promessa de pontos e compromissos para obter informação de Kushida",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          191,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198,
+          199,
+          200,
+          201
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_NEGOTIATION",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "economy",
+        "risk_management",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Promessa de pontos não comprova transferência realizada",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.18",
+      "source_catalog_id": "V9-C18",
+      "domain": "behavior",
+      "summary": "Organizar ação indireta contra rumores por Kiriyama e apoio político",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "RETROSPECTIVE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "institution",
+        "politics",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Não naturalizar dano a terceiros nem resultado garantido",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.19",
+      "source_catalog_id": "V9-C19",
+      "domain": "behavior",
+      "summary": "Aceitar cooperação instrumental sob cálculo de custos políticos",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          202,
+          203,
+          204,
+          205,
+          206
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_NEGOTIATION",
+      "mention_actor_ids": [
+        "actor.kiriyama"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "politics",
+        "risk_management",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Não converter cooperação pontual em lealdade permanente",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.20",
+      "source_catalog_id": "V9-C20",
+      "domain": "behavior",
+      "summary": "Intervir preventivamente contra escalada física entre estudantes",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ACTION",
+      "mention_actor_ids": [
+        "actor.miyake"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "social",
+        "conflict",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Não atribuir superioridade física universal",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.21",
+      "source_catalog_id": "V9-C21",
+      "domain": "behavior",
+      "summary": "Mediar fim de conflito entre turmas sem alegar ter prova de autoria",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          162,
+          163,
+          164
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ACTION",
+      "mention_actor_ids": [
+        "actor.hiyori-shiina"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "social",
+        "conflict",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Mediação não resolve origem dos boatos",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.22",
+      "source_catalog_id": "V9-C22",
+      "domain": "behavior",
+      "summary": "Confessar furto antigo, reivindicar agência e pedir confiança da turma",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PUBLIC_SCENE",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "leadership",
+        "emotion",
+        "identity",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Aceitação da turma não é consequência obrigatória em todo mundo",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.23",
+      "source_catalog_id": "V9-C23",
+      "domain": "behavior",
+      "summary": "Visitar repetidamente e ouvir Ichinose, dando abertura para confidência",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          207,
+          208,
+          209,
+          210,
+          211,
+          212,
+          213
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "RETROSPECTIVE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "social",
+        "strategy",
+        "observation",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Apoio específico não garante efeito terapêutico universal",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.24",
+      "source_catalog_id": "V9-C24",
+      "domain": "behavior",
+      "summary": "Planejar aproximação a Yamauchi e administrar rivalidades e prioridades",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_MONOLOGUE_AND_ACTION",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "politics",
+        "social",
+        "y1_v09"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "interpretation_limit": "Não afirmar que manobra futura teve êxito",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.025",
+      "source_catalog_id": "V9-X025",
+      "domain": "identity",
+      "summary": "Relato de origem humilde, mãe e irmã, furto de presilha, ausência de condenação formal conhecida",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          172,
+          173,
+          174,
+          175,
+          176
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SELF_REPORT_PRE_ENROLLMENT",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "biography",
+        "ethics",
+        "y1_v09"
+      ],
+      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.026",
+      "source_catalog_id": "V9-X026",
+      "domain": "institution",
+      "summary": "Revelação do segredo a Nagumo após ingresso é ato escolar privado, não estado anterior à matrícula",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_DIALOGUE",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [
+        "org.student-council"
+      ],
+      "topics": [
+        "institution",
+        "knowledge",
+        "y1_v09"
+      ],
+      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.027",
+      "source_catalog_id": "V9-X027",
+      "domain": "social",
+      "summary": "Revelação pública de furto pretérito e reafirmação de confiança pelos colegas",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PUBLIC_SCENE",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "leadership",
+        "y1_v09"
+      ],
+      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.028",
+      "source_catalog_id": "V9-X028",
+      "domain": "politics",
+      "summary": "Conversa com Sakayanagi e não intervenção institucional negociada de forma privada",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_DIALOGUE",
+      "mention_actor_ids": [
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [
+        "org.student-council"
+      ],
+      "topics": [
+        "politics",
+        "institution",
+        "y1_v09"
+      ],
+      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.029",
+      "source_catalog_id": "V9-X029",
+      "domain": "institution",
+      "summary": "Escola anuncia restrição prospectiva a boatos e possibilidade de punição, sem retroagir sanções",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          179,
+          180,
+          181
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCHOOL_OFFICIAL_STATEMENT",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "governance",
+        "y1_v09"
+      ],
+      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.030",
+      "source_catalog_id": "V9-X030",
+      "domain": "economy",
+      "summary": "Discussão sobre a compra de pontos de veteranos e possível alteração de regras; não há norma nova confirmada",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          20,
+          21,
+          22,
+          23
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "CHARACTER_SPECULATION",
+      "mention_actor_ids": [
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [
+        "org.student-council",
+        "org.anhs"
+      ],
+      "topics": [
+        "economy",
+        "governance",
+        "y1_v09"
+      ],
+      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.031",
+      "source_catalog_id": "V9-X031",
+      "domain": "exams",
+      "summary": "Provas acadêmicas regulares/preparatórias são mencionadas sem novo regulamento de exame especial demonstrado",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          107,
+          108,
+          109,
+          165,
+          166,
+          167,
+          214,
+          215,
+          216
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCHOOL_EXAM_CONTEXT",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exams",
+        "institution",
+        "y1_v09"
+      ],
+      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.032",
+      "source_catalog_id": "V9-X032",
+      "domain": "identity",
+      "summary": "Furto da lata de bebida alcoólica ocorreu após entrada na escola, apesar de reaparecer meses depois",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          183,
+          184,
+          185
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_REPORT_AND_DEDUCTION",
+      "mention_actor_ids": [
+        "actor.masumi-kamuro"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "knowledge",
+        "y1_v09"
+      ],
+      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.033",
+      "source_catalog_id": "V9-X033",
+      "domain": "social",
+      "summary": "A aproximação de Sakayanagi é iniciada neste volume; consequência da manobra não demonstrada",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_AND_PRIVATE_MONOLOGUE",
+      "mention_actor_ids": [
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "strategy",
+        "y1_v09"
+      ],
+      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    },
+    {
+      "id": "y1v09.ev.034",
+      "source_catalog_id": "V9-X034",
+      "domain": "social",
+      "summary": "Relação pública de Kei e Hirata foi encenação protetiva; separação não revela namoro verdadeiro",
+      "source": {
+        "work_id": "ln.y1.v09.en.operator-provided",
+        "pdf_pages": [
+          28,
+          29,
+          30
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "CHARACTER_AND_NARRATOR_REPORT",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "relationship",
+        "y1_v09"
+      ],
+      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+      }
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "evt.pre-y1.ichinose-hairclip-shoplifting",
+  "event_time": "PRE_Y1_MIDDLE_SCHOOL_UNDATED",
+  "status": "SOURCE_BOUND_SELF_REPORTED",
+  "canonical_event_sources": [
+    "y1v09.ev.025",
+    "y1v09.ev.01"
+  ],
+  "prior_ambiguities": [
+    "A culpa de Ichinose provava delito habitual?",
+    "A acusação escolar de crime era condenação judicial?"
+  ],
+  "later_revelations": [
+    {
+      "source_id": "ln.y1.v09.en.operator-provided",
+      "chapter": "Chapter 7",
+      "pdf_pages": [
+        172,
+        173,
+        174,
+        175,
+        176
+      ],
+      "evidence_refs": [
+        "y1v09.ev.025"
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "explanation": "Ichinose relata um furto isolado de presilha ao tentar agradar a irmã; não há prova de condenação ou historial de crimes.",
+      "world_epistemic_status": "SELF_REPORTED_LITERARY_EPISODE",
+      "actor_knowledge": [
+        {
+          "actor": "actor.honami-ichinose",
+          "since": "PRE_Y1",
+          "status": "PERSONAL_DIRECT_KNOWLEDGE"
+        },
+        {
+          "actor": "actor.nagumo",
+          "since": "Y1_AFTER_ADMISSION_PRIVATE_CONFESSION",
+          "status": "HEARD_HONAMI_REPORT"
+        },
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V09_PRIVATE_VISIT",
+          "status": "HEARD_HONAMI_REPORT"
+        }
+      ],
+      "no_backdated_global_knowledge": true
+    }
+  ],
+  "unresolved": [
+    "Causa exata da ausência paterna, diagnóstico da mãe, data civil precisa e detalhes jurídicos não demonstrados.",
+    "Se o contato pessoal com terceiros variou, manter conhecidos apenas quando narrados; não definir público na matrícula."
+  ],
+  "baseline_gate": {
+    "event_occurrence": "PRE_ENROLLMENT_BIOGRAPHY",
+    "actor_initial_background": [
+      "actor.honami-ichinose"
+    ],
+    "not_runtime_episodic_memory": true,
+    "no_pre_admission_leak_to_nagumo_or_kiyotaka": true
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "y1v09.case.nagumo.v09-c03",
+  "actor_id": "actor.nagumo",
+  "primary_actor_id": "actor.nagumo",
+  "title": "Aproximar-se de candidata, distorcer avaliação de Manabu e extrair segredo",
+  "context": "Year 1 Volume 9, post-admission canonical episode",
+  "observed_actions": "Aproximar-se de candidata, distorcer avaliação de Manabu e extrair segredo",
+  "observed_result": "Source-bounded canonical historical outcome; not a guaranteed simulated outcome",
+  "epistemic_limits": "Não converter fala de Nagumo em motivo verdadeiro de Manabu",
+  "source": {
+    "work_id": "ln.y1.v09.en.operator-provided",
+    "pdf_pages": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "politics",
+    "strategy",
+    "persuasion"
+  ],
+  "information_available": "Only legitimately acquired information available to primary actor at episode time",
+  "counterfactual_test": "Divergent simulation must not assume occurrence, causal success or future knowledge",
+  "topics": [
+    "politics",
+    "strategy",
+    "persuasion",
+    "y1_v09"
+  ],
+  "evidence_refs": [
+    "y1v09.ev.03"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "PRIVATE_DIALOGUE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "assistant_semantic_review": "NOT_ITEMIZED",
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

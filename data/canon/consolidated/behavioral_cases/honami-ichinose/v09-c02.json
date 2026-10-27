@@ -1,0 +1,44 @@
+{
+  "id": "y1v09.case.honami-ichinose.v09-c02",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "Retomar projeto de vida e educação após isolamento anterior",
+  "context": "Year 1 Volume 9 retrospective: pre-enrollment biography",
+  "observed_actions": "Retomar projeto de vida e educação após isolamento anterior",
+  "observed_result": "Source-bounded canonical historical outcome; not a guaranteed simulated outcome",
+  "epistemic_limits": "Não inferir recuperação emocional definitiva",
+  "source": {
+    "work_id": "ln.y1.v09.en.operator-provided",
+    "pdf_pages": [
+      6,
+      7,
+      176
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "motivation",
+    "identity"
+  ],
+  "information_available": "Only legitimately acquired information available to primary actor at episode time",
+  "counterfactual_test": "Divergent simulation must not assume occurrence, causal success or future knowledge",
+  "topics": [
+    "motivation",
+    "identity",
+    "y1_v09"
+  ],
+  "evidence_refs": [
+    "y1v09.ev.02"
+  ],
+  "episode_scope": "PRE_ENROLLMENT_BIOGRAPHICAL_EVIDENCE",
+  "source_mode": "SELF_REPORT_PRE_ENROLLMENT",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "assistant_semantic_review": "NOT_ITEMIZED",
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

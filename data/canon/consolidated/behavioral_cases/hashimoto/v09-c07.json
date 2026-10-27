@@ -1,0 +1,59 @@
+{
+  "id": "y1v09.case.hashimoto.v09-c07",
+  "actor_id": "actor.hashimoto",
+  "primary_actor_id": "actor.hashimoto",
+  "title": "Cultivar contatos e seguir Kiyotaka, inferindo incorretamente romance",
+  "context": "Year 1 Volume 9, post-admission canonical episode",
+  "observed_actions": "Cultivar contatos e seguir Kiyotaka, inferindo incorretamente romance",
+  "observed_result": "Source-bounded canonical historical outcome; not a guaranteed simulated outcome",
+  "epistemic_limits": "Hipótese romântica de Hashimoto não é fato",
+  "source": {
+    "work_id": "ln.y1.v09.en.operator-provided",
+    "pdf_pages": [
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "observation",
+    "strategy",
+    "social"
+  ],
+  "information_available": "Only legitimately acquired information available to primary actor at episode time",
+  "counterfactual_test": "Divergent simulation must not assume occurrence, causal success or future knowledge",
+  "topics": [
+    "observation",
+    "strategy",
+    "social",
+    "y1_v09"
+  ],
+  "evidence_refs": [
+    "y1v09.ev.07"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_INFERENCE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "assistant_semantic_review": "NOT_ITEMIZED",
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

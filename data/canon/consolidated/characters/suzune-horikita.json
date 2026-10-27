@@ -11,7 +11,8 @@
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -31,7 +32,8 @@
         "y1v1.case.s.study-group-collapse",
         "y1v3.case.suzune-horikita.reassess-nonacademic-skills",
         "y1v45.case.suzune-horikita.request-help-while-concealing-embarrassment",
-        "y1v7.case.suzune-horikita.v7-c030"
+        "y1v7.case.suzune-horikita.v7-c030",
+        "y1v075.case.suzune-horikita.v075-c028"
       ],
       "context_evidence_refs": [
         "y1v1.ev.002",
@@ -85,7 +87,9 @@
         "y1v5.ev.019",
         "y1v5.ev.022",
         "y1v5.ev.025",
-        "y1v5.ev.050"
+        "y1v5.ev.050",
+        "y1v075.ev.028",
+        "y1v075.ev.029"
       ]
     },
     "ethics": {
@@ -281,7 +285,8 @@
         "y1v4.ev.045",
         "y1v4.ev.125",
         "y1v5.ev.017",
-        "y1v5.ev.020"
+        "y1v5.ev.020",
+        "y1v075.ev.029"
       ]
     },
     "academic_reasoning": {
@@ -633,7 +638,8 @@
     "identity": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v45.ev.018"
+        "y1v45.ev.018",
+        "y1v075.ev.048"
       ]
     },
     "belief": {
@@ -676,7 +682,8 @@
     "relationship": {
       "behavioral_case_refs": [
         "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility",
-        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust"
+        "y1v6.case.suzune-horikita.accept-early-math-victory-and-offer-trust",
+        "y1v075.case.suzune-horikita.v075-c028"
       ],
       "context_evidence_refs": [
         "y1v5.ev.018",
@@ -688,7 +695,9 @@
         "y1v5.ev.072",
         "y1v5.ev.073",
         "y1v5.ev.080",
-        "y1v6.ev.047"
+        "y1v6.ev.047",
+        "y1v075.ev.028",
+        "y1v075.ev.048"
       ]
     },
     "cooperation": {
@@ -898,5 +907,27 @@
     "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack",
     "y1v7.goal.suzune-horikita.v7-g013"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v075_source_status": "UNVERIFIED_SOURCE_BOUNDED_REVIEW_PENDING",
+  "y1_v075_actor_state_deltas": [
+    {
+      "source_record_id": "V75-048",
+      "evidence_ref": "y1v075.ev.048",
+      "pdf_pages": [
+        93,
+        102
+      ],
+      "claim": "Declines Sudou Christmas invitation and Kiyotaka student-council recommendation; initiates tentative contact with Kushida.",
+      "qualification": "Independent priorities vs romance, fraternal acceptance not automatic membership.",
+      "source_mode": "NARRATIVA_OU_CENA",
+      "verified": false,
+      "engine_memory_admission": false
+    }
+  ],
+  "y1_v075_temporal_guard": {
+    "historical_phase": "Y1_V075_WINTER_BREAK",
+    "private_factional_knowledge_not_public": true,
+    "not_permanent_personality_rating": true,
+    "divergence_requires_new_acquisition": true
+  }
 }

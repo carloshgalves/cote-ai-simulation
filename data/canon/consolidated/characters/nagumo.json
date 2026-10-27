@@ -7,7 +7,8 @@
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "Y1_V07_THIRD_PARTY_CONTEXT_ADDED_INDEPENDENT_REVIEW_PENDING",
   "identity": {
@@ -54,14 +55,19 @@
     "politics": {
       "behavioral_case_refs": [
         "y1v5.case.nagumo.demonstrate-soccer-skill-and-political-ambition",
-        "y1v6.case.nagumo.announce-student-council-centralizing-reforms"
+        "y1v6.case.nagumo.announce-student-council-centralizing-reforms",
+        "y1v075.case.nagumo.v075-c033"
       ],
       "context_evidence_refs": [
         "y1v45.ev.047",
         "y1v45.ev.048",
         "y1v5.ev.057",
         "y1v5.ev.058",
-        "y1v6.ev.003"
+        "y1v6.ev.003",
+        "y1v075.ev.025",
+        "y1v075.ev.027",
+        "y1v075.ev.033",
+        "y1v075.ev.036"
       ]
     },
     "leadership": {
@@ -71,7 +77,8 @@
       ],
       "context_evidence_refs": [
         "y1v45.ev.048",
-        "y1v5.ev.058"
+        "y1v5.ev.058",
+        "y1v075.ev.025"
       ]
     },
     "social": {
@@ -79,13 +86,15 @@
         "y1v45.case.nagumo.lead-older-students-volleyball"
       ],
       "context_evidence_refs": [
-        "y1v5.ev.024"
+        "y1v5.ev.024",
+        "y1v075.ev.006"
       ]
     },
     "observation": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v5.ev.024"
+        "y1v5.ev.024",
+        "y1v075.ev.027"
       ]
     },
     "results": {
@@ -113,6 +122,33 @@
       "context_evidence_refs": [
         "y1v7.ev.047"
       ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.006",
+        "y1v075.ev.036"
+      ]
+    },
+    "coercion": {
+      "behavioral_case_refs": [
+        "y1v075.case.nagumo.v075-c033"
+      ],
+      "context_evidence_refs": [
+        "y1v075.ev.033"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.043"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.043"
+      ]
     }
   },
   "source_documents": [],
@@ -134,5 +170,19 @@
   "goal_transition_refs": [
     "y1v6.goal.nagumo.announce-student-council-overhaul"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v075_source_status": "UNVERIFIED_SOURCE_BOUNDED_REVIEW_PENDING",
+  "y1_v075_actor_state_deltas": [],
+  "y1_v075_temporal_guard": {
+    "historical_phase": "Y1_V075_WINTER_BREAK",
+    "private_factional_knowledge_not_public": true,
+    "not_permanent_personality_rating": true,
+    "divergence_requires_new_acquisition": true
+  },
+  "y1_v075_student_council_assertions": {
+    "role": "PRESIDENT",
+    "manabu_reported_17_expulsions_source": "y1v075.ev.055",
+    "rumored_involvement": "MORE_THAN_HALF_ATTRIBUTED_BY_MANABU_NOT_17_PROVEN_PERSONAL_ACTIONS",
+    "online_exam_idea": "PROVOCATION_NOT_AUTHORIZED_EXAM"
+  }
 }

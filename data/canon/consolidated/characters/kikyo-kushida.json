@@ -10,7 +10,8 @@
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -33,7 +34,8 @@
         "y1v3.case.kikyo-kushida.recruit-exploration-volunteers",
         "y1v3.case.kikyo-kushida.share-rations-with-ibuki",
         "y1v4.case.kikyo-kushida.invite-rival-delegates-into-discussion",
-        "y1v5.case.kikyo-kushida.volunteer-paid-mixed-event-substitution"
+        "y1v5.case.kikyo-kushida.volunteer-paid-mixed-event-substitution",
+        "y1v075.case.kikyo-kushida.v075-c029"
       ],
       "context_evidence_refs": [
         "y1v1.ev.004",
@@ -82,7 +84,9 @@
         "y1v5.ev.013",
         "y1v5.ev.014",
         "y1v5.ev.022",
-        "y1v5.ev.025"
+        "y1v5.ev.025",
+        "y1v075.ev.028",
+        "y1v075.ev.029"
       ]
     },
     "persuasion": {
@@ -183,7 +187,8 @@
     },
     "observation": {
       "behavioral_case_refs": [
-        "y1v2.case.kikyo-kushida.recognize-shizuku-identity"
+        "y1v2.case.kikyo-kushida.recognize-shizuku-identity",
+        "y1v075.case.kikyo-kushida.v075-c029"
       ],
       "context_evidence_refs": [
         "y1v1.ev.077",
@@ -197,7 +202,8 @@
         "y1v4.ev.017",
         "y1v4.ev.039",
         "y1v4.ev.125",
-        "y1v45.ev.057"
+        "y1v45.ev.057",
+        "y1v075.ev.029"
       ]
     },
     "academic_reasoning": {
@@ -445,7 +451,8 @@
       "context_evidence_refs": [
         "y1v5.ev.053",
         "y1v5.ev.061",
-        "y1v6.ev.073"
+        "y1v6.ev.073",
+        "y1v075.ev.028"
       ]
     },
     "deception": {
@@ -560,5 +567,13 @@
     "y1v6.goal.kikyo-kushida.seek-status-through-confidences",
     "y1v6.goal.kikyo-kushida.concede-bet-without-reconciliation"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v075_source_status": "UNVERIFIED_SOURCE_BOUNDED_REVIEW_PENDING",
+  "y1_v075_actor_state_deltas": [],
+  "y1_v075_temporal_guard": {
+    "historical_phase": "Y1_V075_WINTER_BREAK",
+    "private_factional_knowledge_not_public": true,
+    "not_permanent_personality_rating": true,
+    "divergence_requires_new_acquisition": true
+  }
 }

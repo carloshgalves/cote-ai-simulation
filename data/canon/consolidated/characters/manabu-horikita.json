@@ -9,7 +9,8 @@
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -40,13 +41,15 @@
         "y1v2.case.manabu-horikita.offer-secretary-seat",
         "y1v45.case.manabu-horikita.invite-kiyotaka-into-student-council",
         "y1v45.case.manabu-horikita.uphold-outside-contact-ban",
-        "y1v5.case.manabu-horikita.accept-ayanokoji-relay-challenge"
+        "y1v5.case.manabu-horikita.accept-ayanokoji-relay-challenge",
+        "y1v075.case.manabu-horikita.v075-c025"
       ],
       "context_evidence_refs": [
         "y1v1.ev.031",
         "y1v45.ev.021",
         "y1v45.ev.048",
-        "y1v5.ev.058"
+        "y1v5.ev.058",
+        "y1v075.ev.025"
       ]
     },
     "persuasion": {
@@ -76,7 +79,8 @@
         "y1v1.ev.081",
         "y1v1.ev.082",
         "y1v2.ev.088",
-        "y1v7.ev.085"
+        "y1v7.ev.085",
+        "y1v075.ev.028"
       ]
     },
     "emotion": {
@@ -91,7 +95,8 @@
       "context_evidence_refs": [
         "y1v1.ev.082",
         "y1v1.ev.083",
-        "y1v7.ev.088"
+        "y1v7.ev.088",
+        "y1v075.ev.026"
       ]
     },
     "observation": {
@@ -119,7 +124,8 @@
     },
     "politics": {
       "behavioral_case_refs": [
-        "y1v45.case.manabu-horikita.invite-kiyotaka-into-student-council"
+        "y1v45.case.manabu-horikita.invite-kiyotaka-into-student-council",
+        "y1v075.case.manabu-horikita.v075-c025"
       ],
       "context_evidence_refs": [
         "y1v45.ev.019",
@@ -127,7 +133,9 @@
         "y1v45.ev.048",
         "y1v5.ev.057",
         "y1v5.ev.058",
-        "y1v6.ev.003"
+        "y1v6.ev.003",
+        "y1v075.ev.025",
+        "y1v075.ev.036"
       ]
     },
     "reasoning": {
@@ -230,7 +238,9 @@
     "risk_management": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v6.ev.049"
+        "y1v6.ev.049",
+        "y1v075.ev.026",
+        "y1v075.ev.036"
       ]
     },
     "privacy": {
@@ -238,6 +248,19 @@
         "y1v6.case.manabu-horikita.witness-private-math-wager-without-past-secret"
       ],
       "context_evidence_refs": []
+    },
+    "information": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.008"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.008",
+        "y1v075.ev.028"
+      ]
     }
   },
   "source_documents": [],
@@ -257,5 +280,14 @@
   "goal_transition_refs": [
     "y1v7.goal.manabu-horikita.v7-g015"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v075_source_status": "UNVERIFIED_SOURCE_BOUNDED_REVIEW_PENDING",
+  "y1_v075_actor_state_deltas": [],
+  "y1_v075_temporal_guard": {
+    "historical_phase": "Y1_V075_WINTER_BREAK",
+    "private_factional_knowledge_not_public": true,
+    "not_permanent_personality_rating": true,
+    "divergence_requires_new_acquisition": true
+  },
+  "y1_v075_status_note": "FORMER_COUNCIL_PRESIDENT_ACTIVE_IN_PRIVATE_OPPOSITION"
 }

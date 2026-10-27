@@ -3,9 +3,10 @@
   "institution_id": "org.white_room",
   "display_name": "White Room",
   "source_coverage": [
-    "ln.y1.v00.legacyemtls.v1.0.1"
+    "ln.y1.v00.legacyemtls.v1.0.1",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V0_PLUS_V7_ATTRIBUTED_REFERENCE_NOT_EXTERNAL_APPROVED",
   "source_documents": [],
   "evidence_refs": [
     "v0.pol.006",
@@ -98,7 +99,19 @@
     "v0.char.047",
     "v0.char.050",
     "v0.char.051",
-    "v0.wr.048"
+    "v0.wr.048",
+    "y1v7.ev.027",
+    "y1v7.ev.028",
+    "y1v7.ev.029",
+    "y1v7.ev.030",
+    "y1v7.ev.031",
+    "y1v7.ev.032",
+    "y1v7.ev.033",
+    "y1v7.ev.034",
+    "y1v7.ev.035",
+    "y1v7.ev.036",
+    "y1v7.ev.037",
+    "y1v7.ev.038"
   ],
   "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
   "operational_migration": "Only user/operator-authorized claims may be promoted after review",
@@ -159,7 +172,84 @@
       "Number of surviving children cannot be interpreted as death count",
       "Beta result is not evidence of generic reproducibility"
     ],
-    "evaluation_domain": "INSTITUTIONAL_TRAINING_NOT_ANHS_SPECIAL_EXAM"
+    "evaluation_domain": "INSTITUTIONAL_TRAINING_NOT_ANHS_SPECIAL_EXAM",
+    "y1_v07_qualified_additions": {
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "source_status": "ASSISTANT_SOURCE_CANDIDATES_EXTERNAL_INDEPENDENT_PENDING",
+      "actor_knowledge_gate": "NO_UNEARNED_INSTITUTIONAL_OR_THIRD_PARTY_MEMORY",
+      "assertions": [
+        {
+          "topic": "PARENTAL_CLAIM_OF_CONTROL",
+          "pages": [
+            59
+          ],
+          "attributed_to": "actor.atsuomi-ayanokoji",
+          "refs": [
+            "y1v7.ev.027"
+          ],
+          "status": "CHARACTER_DECLARATION_NOT_LEGAL_RULE"
+        },
+        {
+          "topic": "MATSUO_SUPERVISION_AND_RETRIBUTION",
+          "pages": [
+            59,
+            60,
+            61,
+            62
+          ],
+          "attributed_to": "actor.atsuomi-ayanokoji",
+          "refs": [
+            "y1v7.ev.028"
+          ],
+          "status": "CHARACTER_REPORT_UNCORROBORATED; narrator regards plausible, not independent death certificate"
+        },
+        {
+          "topic": "TRAINEE_EDUCATION_SELF_ACCOUNT",
+          "pages": [
+            62,
+            63
+          ],
+          "attributed_to": "actor.kiyotaka-ayanokoji",
+          "refs": [
+            "y1v7.ev.030"
+          ],
+          "status": "SELF_REPORT_NOT_NUMERIC_SKILL_RATING"
+        },
+        {
+          "topic": "PROGRAM_PAUSE_AND_RETURN_TO_OPERATION",
+          "pages": [
+            63,
+            64
+          ],
+          "attributed_to": "actor.atsuomi-ayanokoji",
+          "refs": [
+            "y1v7.ev.031"
+          ],
+          "status": "FATHER_REPORT; V0 political pressures preserved separately"
+        },
+        {
+          "topic": "EXCEPTIONAL_CHILD_TALENT",
+          "pages": [
+            64,
+            65
+          ],
+          "attributed_to": "actor.atsuomi-ayanokoji",
+          "refs": [
+            "y1v7.ev.033"
+          ],
+          "status": "FATHER_ASSESSMENT_NOT_UNIVERSAL_ABILITY_METRIC"
+        }
+      ],
+      "chronology_bridge": "data/canon/consolidated/audits/y1-v07-v00-reconciliation.json",
+      "unresolved": [
+        "Atsuomi knowledge/planning of enrollment cannot be certified from V0 private Tsukishiro plan",
+        "Matsuo account lacks independent documentary corroboration",
+        "Precise start/end of WR pause and overlap with Matsuo assignment need further data"
+      ],
+      "boundaries": "White Room authority is distinct from ANHS's state-funded school rules; parental demand does not automatically expel student.",
+      "engine_memory_admission": false,
+      "executable_institutional_behavior": false
+    }
   },
   "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance."
 }

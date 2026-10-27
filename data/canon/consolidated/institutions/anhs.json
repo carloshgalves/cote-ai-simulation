@@ -9,9 +9,10 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_NEW_RECORDS_UNVERIFIED_EXTERNAL_REVIEW_PENDING",
   "source_documents": [],
   "evidence_refs": [
     "y1v1.ev.009",
@@ -190,7 +191,12 @@
     "y1v45.ev.035",
     "y1v45.ev.042",
     "y1v45.ev.047",
-    "y1v45.ev.048"
+    "y1v45.ev.048",
+    "y1v7.ev.050",
+    "y1v7.ev.051",
+    "y1v7.ev.062",
+    "y1v7.ev.078",
+    "y1v7.ev.103"
   ],
   "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
   "operational_migration": "Only user/operator-authorized claims may be promoted after review",
@@ -334,10 +340,11 @@
     },
     "exams": {
       "reference_exam_ids": [
+        "anhs.y1.paper-shuffle",
         "exam.y1.deserted-island-1",
         "exam.y1.midterm-1",
-        "exam.y1.zodiac-cruise-1",
-        "anhs.y1.paper-shuffle"
+        "exam.y1.sports-festival",
+        "exam.y1.zodiac-cruise-1"
       ],
       "evidence_refs": [
         "y1v1.ev.061",
@@ -402,7 +409,12 @@
         "y1v6.ev.013",
         "y1v6.ev.014",
         "y1v6.ev.030",
-        "y1v6.ev.068"
+        "y1v6.ev.068",
+        "y1v7.ev.050",
+        "y1v7.ev.051",
+        "y1v7.ev.062",
+        "y1v7.ev.078",
+        "y1v7.ev.103"
       ],
       "description": "Mock diagnostic, midterm and exceptional score-point purchase"
     },
@@ -703,5 +715,33 @@
     "combined_total_minimum": 692,
     "final_results": "UNPUBLISHED_IN_VOLUME",
     "unapproved_questions_not_authoritative": true
+  },
+  "y1_v07_paper_shuffle_observed_later": {
+    "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "school_card_pdf_pages": [
+      97,
+      119,
+      151,
+      196
+    ],
+    "class_point_snapshot_on_december_1": {
+      "A": 874,
+      "B": 753,
+      "C": 542,
+      "D": 262
+    },
+    "winning_classes_against_opponent": {
+      "A": "B",
+      "D": "C"
+    },
+    "evidence_refs": [
+      "y1v7.ev.050",
+      "y1v7.ev.051",
+      "y1v7.ev.062",
+      "y1v7.ev.078",
+      "y1v7.ev.103"
+    ],
+    "limits": "Do not treat pre-exam December 1 point snapshots as final after Paper Shuffle. Academic individual scores and later class totals are not all reported.",
+    "review_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
   }
 }

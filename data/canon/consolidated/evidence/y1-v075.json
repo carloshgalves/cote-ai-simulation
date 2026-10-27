@@ -2444,7 +2444,11 @@
           92
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.kiriyama",
+        "actor.manabu-horikita",
+        "actor.nagumo"
+      ],
       "mention_organization_ids": [
         "org.student-council"
       ],
@@ -2487,7 +2491,9 @@
           89
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.manabu-horikita"
+      ],
       "mention_organization_ids": [
         "org.student-council"
       ],
@@ -2530,7 +2536,10 @@
           90
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.nagumo"
+      ],
       "mention_organization_ids": [
         "org.student-council"
       ],
@@ -2573,7 +2582,10 @@
           159
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.kiriyama",
+        "actor.nagumo"
+      ],
       "mention_organization_ids": [
         "org.student-council"
       ],
@@ -2661,7 +2673,10 @@
           63
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
       "mention_organization_ids": [
         "org.anhs"
       ],
@@ -2801,7 +2816,10 @@
           22
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.maya-sato"
+      ],
       "mention_organization_ids": [
         "org.anhs"
       ],
@@ -2848,7 +2866,12 @@
           159
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.kiriyama",
+        "actor.kiyotaka-ayanokoji",
+        "actor.maya-sato",
+        "actor.nagumo"
+      ],
       "mention_organization_ids": [
         "org.anhs"
       ],
@@ -2891,7 +2914,9 @@
           88
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.manabu-horikita"
+      ],
       "mention_organization_ids": [
         "org.anhs"
       ],
@@ -2934,7 +2959,11 @@
           52
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
       "mention_organization_ids": [
         "org.anhs"
       ],
@@ -2977,7 +3006,9 @@
           158
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.kiriyama"
+      ],
       "mention_organization_ids": [
         "org.anhs"
       ],
@@ -3018,7 +3049,9 @@
           126
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.nagumo"
+      ],
       "mention_organization_ids": [
         "org.anhs"
       ],
@@ -3061,7 +3094,10 @@
           23
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.maya-sato"
+      ],
       "mention_organization_ids": [
         "org.anhs"
       ],

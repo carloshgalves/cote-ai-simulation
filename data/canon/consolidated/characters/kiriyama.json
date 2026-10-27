@@ -1,0 +1,73 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.kiriyama",
+  "display_name": "Kiriyama",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v075.sevenseas.en.operator-provided"
+  ],
+  "source_status": "Y1_V075_SOURCE_CANDIDATE_DISTINCT_REVIEW_PENDING",
+  "identity": {
+    "role_summary": "Second-year student council vice president who privately opposes President Nagumo; affiliations and intentions are source-attributed, not automatically verified.",
+    "aliases": [],
+    "given_name": "NOT_CONFIRMED_IN_THIS_SOURCE"
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "politics": {
+      "behavioral_case_refs": [
+        "y1v075.case.kiriyama.v075-c036"
+      ],
+      "context_evidence_refs": [
+        "y1v075.ev.025",
+        "y1v075.ev.027",
+        "y1v075.ev.035",
+        "y1v075.ev.053",
+        "y1v075.ev.056",
+        "y1v075.ev.065"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [
+        "y1v075.case.kiriyama.v075-c036"
+      ],
+      "context_evidence_refs": [
+        "y1v075.ev.036"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v075.ev.053",
+        "y1v075.ev.056"
+      ]
+    }
+  },
+  "y1_v075_actor_state_deltas": [],
+  "y1_v075_relationship_refs": [
+    "y1v075.rel.manabu-kiriyama-nagumo"
+  ],
+  "y1_v075_temporal_guard": {
+    "claims_about_nagumo": "KIRIYAMA_PRIVATE_REPORT_NOT_CERTIFIED_BY_SCHOOL",
+    "source_pages": [
+      154,
+      155,
+      156,
+      157,
+      158,
+      159
+    ],
+    "opposition_to_nagumo_contextual_only": true,
+    "not_universal_state": true
+  },
+  "semantic_audit_notes": "Kiriyama is not Nagumo's successor; vice-presidency, minority opposition and motives are from Y1 V7.5 dialogue. Do not reveal Manabu's plan to other actors without transmission.",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTIONS_NOT_FEATS",
+    "post_divergence_memory": "NO_UNEARNED_CANON_KNOWLEDGE",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

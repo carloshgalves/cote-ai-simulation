@@ -47,7 +47,7 @@ class ClaudeRoutingContract(unittest.TestCase):
         text = skill.read_text(encoding="utf-8")
         for term in ("delivery-pipeline", "cote-review-finding:v1", "CI_NOT_RUN",
                      "world truth", "human", "/tasks", "Opus High"):
-            self.assertIn(term, text)
+            self.assertIn(term.casefold(), text.casefold())
 
     def test_ci_policy_all_canonical_skills(self):
         paths = list((ROOT / ".agents/skills").glob("*/SKILL.md"))

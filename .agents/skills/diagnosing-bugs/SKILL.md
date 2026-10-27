@@ -13,3 +13,7 @@ description: Use for hard bugs, non-deterministic failures, agent regressions, p
 6. Add deterministic regression test or eval case.
 
 For “the character acted weird,” inspect retrieved canon evidence and current beliefs/memories before rewriting the entire persona prompt.
+
+## Mandatory CI billing/runner fallback
+
+When CI does not allocate runners or cannot execute, follow `docs/agents/ci-billing-fallback.md` and `AGENTS.md`: check runner/steps before diagnosing financial cause; report `CI_NOT_RUN` separately from failed code/evals, run bounded local deterministic/replay/eval verification with real exit codes and protected corpus excluded, and preserve separate human phase and merge gates.

@@ -24,3 +24,7 @@ Use três fases separadas; não misture responsabilidades entre elas:
 3. `address-review-findings` — entra apenas quando findings já existem na Draft PR. Valida, corrige ou justifica cada finding, roda regressões, commita e faz push das correções na mesma branch.
 
 Depois de `address-review-findings`, rode `code-review` novamente em sessão independente até a PR ficar limpa. Commit de implementação ou de correção nunca implica autorização automática para merge.
+
+## CI/billing fallback (all skills)
+
+All canonical skills, Claude wrappers and subagents **must** apply `docs/agents/ci-billing-fallback.md`. A GitHub job failing without a runner or steps is `CI_NOT_RUN`, not test failure, test PASS or definitive billing proof. Perform scoped local validation only when safe, preserve evidence and require the same independent review/human phase gates and merge authorization.

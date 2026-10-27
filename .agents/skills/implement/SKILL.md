@@ -52,3 +52,7 @@ After the validated implementation is committed and, when possible, pushed:
 5. Report the implementation checkpoint and tell the user that `$code-review <ticket>` is the separate next phase if they want to run it.
 
 Do not open, approve, mark ready, or merge a pull request from this skill. `code-review` owns the review surface and `address-review-findings` owns remediation. A phase transition requires a separate user-triggered skill invocation.
+
+## Mandatory CI billing/runner fallback
+
+When CI does not allocate runners or cannot execute, follow `docs/agents/ci-billing-fallback.md` and `AGENTS.md`: check runner/steps before diagnosing financial cause; report `CI_NOT_RUN` separately from failed code/evals, run bounded local deterministic/replay/eval verification with real exit codes and protected corpus excluded, and preserve separate human phase and merge gates.

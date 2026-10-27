@@ -89,3 +89,7 @@ After all findings and the review summary are persisted:
 6. Report the review result and tell the user that `$address-review-findings <ticket>` is the separate next phase when actionable findings exist.
 
 A re-review is also a separate user-triggered invocation of this skill. Phase transitions are never automatic.
+
+## Mandatory CI billing/runner fallback
+
+When CI does not allocate runners or cannot execute, follow `docs/agents/ci-billing-fallback.md` and `AGENTS.md`: check runner/steps before diagnosing financial cause; report `CI_NOT_RUN` separately from failed code/evals, run bounded local deterministic/replay/eval verification with real exit codes and protected corpus excluded, and preserve separate human phase and merge gates.

@@ -22,3 +22,7 @@ Create eval scenarios in three groups:
 Fidelity is not exact quote imitation. Prefer decisions, priorities and information use over prose mimicry.
 
 For Kiyotaka specifically, never encode competence as privileged access to secrets. Test high-quality inference from partial evidence and willingness *not* to reveal ability when that better matches goals.
+
+## Mandatory CI billing/runner fallback
+
+When CI does not allocate runners or cannot execute, follow `docs/agents/ci-billing-fallback.md` and `AGENTS.md`: check runner/steps before diagnosing financial cause; report `CI_NOT_RUN` separately from failed code/evals, run bounded local deterministic/replay/eval verification with real exit codes and protected corpus excluded, and preserve separate human phase and merge gates.

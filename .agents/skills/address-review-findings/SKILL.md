@@ -72,3 +72,7 @@ After the remediation commit is pushed and every finding in the frozen batch has
 6. Report the remediation checkpoint and tell the user that `$code-review <ticket>` is the separate next phase if they want another independent review.
 
 A new review cycle is a separate user-triggered workflow phase. No workflow phase may automatically invoke the next one.
+
+## Mandatory CI billing/runner fallback
+
+When CI does not allocate runners or cannot execute, follow `docs/agents/ci-billing-fallback.md` and `AGENTS.md`: check runner/steps before diagnosing financial cause; report `CI_NOT_RUN` separately from failed code/evals, run bounded local deterministic/replay/eval verification with real exit codes and protected corpus excluded, and preserve separate human phase and merge gates.

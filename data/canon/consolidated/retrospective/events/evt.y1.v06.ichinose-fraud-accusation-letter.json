@@ -59,7 +59,8 @@
           "status": "ONLY_PERSONALLY_LEARNED_FACTS"
         }
       ],
-      "no_backdated_global_knowledge": true
+      "no_backdated_global_knowledge": true,
+      "chapter": 3
     }
   ],
   "unresolved": [

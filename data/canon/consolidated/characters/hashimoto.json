@@ -4,7 +4,8 @@
   "display_name": "Masayoshi Hashimoto",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v08.sevenseas.en.operator-provided"
+    "ln.y1.v08.sevenseas.en.operator-provided",
+    "ln.y1.v09.en.operator-provided"
   ],
   "source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -20,12 +21,14 @@
       "behavioral_case_refs": [
         "y1v08.case.hashimoto.v08-c026",
         "y1v08.case.hashimoto.v08-c029",
-        "y1v08.case.hashimoto.v08-c035"
+        "y1v08.case.hashimoto.v08-c035",
+        "y1v09.case.hashimoto.v09-c07"
       ],
       "context_evidence_refs": [
         "y1v08.ev.026",
         "y1v08.ev.029",
-        "y1v08.ev.035"
+        "y1v08.ev.035",
+        "y1v09.ev.07"
       ]
     },
     "cooperation": {
@@ -48,10 +51,12 @@
     },
     "social": {
       "behavioral_case_refs": [
-        "y1v08.case.hashimoto.v08-c029"
+        "y1v08.case.hashimoto.v08-c029",
+        "y1v09.case.hashimoto.v09-c07"
       ],
       "context_evidence_refs": [
-        "y1v08.ev.029"
+        "y1v08.ev.029",
+        "y1v09.ev.07"
       ]
     },
     "deception": {
@@ -75,6 +80,30 @@
       "context_evidence_refs": [
         "y1v08.ev.050"
       ]
+    },
+    "y1_v09": {
+      "behavioral_case_refs": [
+        "y1v09.case.hashimoto.v09-c07"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.07"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [
+        "y1v09.case.hashimoto.v09-c07"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.07"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [
+        "y1v09.case.hashimoto.v09-c07"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.07"
+      ]
     }
   },
   "y1_v08_source_status": "UNVERIFIED_SOURCE_BOUNDED",
@@ -90,5 +119,22 @@
   "retrieval_policy": {
     "historical_reference_only": true,
     "non_executable": true
-  }
+  },
+  "y1_v09_source_status": "UNVERIFIED_SOURCE_CANDIDATE_NO_EXTERNAL_REVIEW",
+  "y1_v09_knowledge_gate": {
+    "source_revelation_not_occurrence_time": true,
+    "post_admission_canon_not_simulation_memory": true,
+    "requires_actor_specific_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v09_behavioral_case_refs": [
+    "y1v09.case.hashimoto.v09-c07"
+  ],
+  "y1_v09_context_evidence_refs": [
+    "y1v09.ev.07"
+  ],
+  "y1_v09_relationship_refs": [
+    "y1v09.rel.010"
+  ]
 }

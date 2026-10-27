@@ -8,7 +8,8 @@
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v09.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -78,10 +79,12 @@
     },
     "leadership": {
       "behavioral_case_refs": [
-        "y1v2.case.ryuji-kanzaki.public-witness-appeal"
+        "y1v2.case.ryuji-kanzaki.public-witness-appeal",
+        "y1v09.case.ryuji-kanzaki.v09-c06"
       ],
       "context_evidence_refs": [
-        "y1v2.ev.049"
+        "y1v2.ev.049",
+        "y1v09.ev.06"
       ]
     },
     "observation": {
@@ -136,6 +139,30 @@
       "context_evidence_refs": [
         "y1v5.ev.032"
       ]
+    },
+    "y1_v09": {
+      "behavioral_case_refs": [
+        "y1v09.case.ryuji-kanzaki.v09-c06"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.06"
+      ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v09.case.ryuji-kanzaki.v09-c06"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.06"
+      ]
+    },
+    "investigation": {
+      "behavioral_case_refs": [
+        "y1v09.case.ryuji-kanzaki.v09-c06"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.06"
+      ]
     }
   },
   "source_documents": [],
@@ -152,5 +179,22 @@
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
   },
-  "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance."
+  "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance.",
+  "y1_v09_source_status": "UNVERIFIED_SOURCE_CANDIDATE_NO_EXTERNAL_REVIEW",
+  "y1_v09_knowledge_gate": {
+    "source_revelation_not_occurrence_time": true,
+    "post_admission_canon_not_simulation_memory": true,
+    "requires_actor_specific_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v09_behavioral_case_refs": [
+    "y1v09.case.ryuji-kanzaki.v09-c06"
+  ],
+  "y1_v09_context_evidence_refs": [
+    "y1v09.ev.06"
+  ],
+  "y1_v09_relationship_refs": [
+    "y1v09.rel.011"
+  ]
 }

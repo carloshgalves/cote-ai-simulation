@@ -7,7 +7,8 @@
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v08.sevenseas.en.operator-provided"
+    "ln.y1.v08.sevenseas.en.operator-provided",
+    "ln.y1.v09.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -120,17 +121,22 @@
       ]
     },
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v09.case.miyake.v09-c20"
+      ],
       "context_evidence_refs": [
-        "y1v7.ev.004"
+        "y1v7.ev.004",
+        "y1v09.ev.20"
       ]
     },
     "behavior": {
       "behavioral_case_refs": [
-        "y1v08.case.miyake.v08-c008"
+        "y1v08.case.miyake.v08-c008",
+        "y1v09.case.miyake.v09-c20"
       ],
       "context_evidence_refs": [
-        "y1v08.ev.008"
+        "y1v08.ev.008",
+        "y1v09.ev.20"
       ]
     },
     "risk_management": {
@@ -139,6 +145,22 @@
       ],
       "context_evidence_refs": [
         "y1v08.ev.008"
+      ]
+    },
+    "y1_v09": {
+      "behavioral_case_refs": [
+        "y1v09.case.miyake.v09-c20"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.20"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [
+        "y1v09.case.miyake.v09-c20"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.20"
       ]
     }
   },
@@ -165,5 +187,20 @@
   "y1_v08_actor_state_deltas": [],
   "y1_v08_relationship_refs": [
     "y1v08.rel.053"
-  ]
+  ],
+  "y1_v09_source_status": "UNVERIFIED_SOURCE_CANDIDATE_NO_EXTERNAL_REVIEW",
+  "y1_v09_knowledge_gate": {
+    "source_revelation_not_occurrence_time": true,
+    "post_admission_canon_not_simulation_memory": true,
+    "requires_actor_specific_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v09_behavioral_case_refs": [
+    "y1v09.case.miyake.v09-c20"
+  ],
+  "y1_v09_context_evidence_refs": [
+    "y1v09.ev.20"
+  ],
+  "y1_v09_relationship_refs": []
 }

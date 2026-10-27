@@ -48,8 +48,8 @@ assert audit["release_gate"]["external_independent_review"]=="NOT_PERFORMED"
 assert audit["release_gate"]["engine_memory_admission"] is False
 assert audit["release_gate"]["exam_executable"] is False
 assert audit["release_gate"]["goal_runtime_auto_update"] is False
-assert len(characters["character_packs"])==90
-assert len(characters["behavioral_case_paths"])==284
+assert len(characters["character_packs"])>=90  # append-only future volumes add actors
+assert len(characters["behavioral_case_paths"])>=284  # append-only future volumes add cases
 
 for i in range(1,81):
     id=f"y1v6.ev.{i:03d}"

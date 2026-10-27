@@ -509,6 +509,7 @@
     "not_public_at_entry": true,
     "no_auto_propagation_to_nagumo_or_kiyotaka": true,
     "verified": false,
-    "engine_memory_admission": false
+    "engine_memory_admission": false,
+    "source_record_path": "data/canon/consolidated/biographies/evt.pre-y1.ichinose-hairclip-shoplifting.json"
   }
 }

@@ -15,7 +15,7 @@ def load():
              "audits/y1-v09-case-manifest.json", "relationships/y1-v09.json",
              "indexes/character-topic-map.json", "indexes/evidence-topic-map.json",
              "indexes/y1-v09-page-map.json", "indexes/relationship-map.json",
-             "indexes/retrospective-event-map.json",
+             "indexes/biography-event-map.json",
              "exams/y1-v09-academic-context.json", "institutions/anhs.json",
              "institutions/student-council.json"]
     s = {name:J(B/name) for name in names}
@@ -38,7 +38,7 @@ def violations(s):
     ei=s["indexes/evidence-topic-map.json"]
     pi=s["indexes/y1-v09-page-map.json"]
     ri=s["indexes/relationship-map.json"]
-    retro=s["indexes/retrospective-event-map.json"]
+    retro=s["indexes/biography-event-map.json"]
     e_by_id={e["id"]:e for e in evidence["records"]}
     ck(source["source_id"]==SRC and source["pdf_sha256"]=="51c4bdcea2cfa0389617a56de52970a7db878c4e37d4e07a02b7863df9c1d6db", "source digest")
     ck(source["pdf_pages"]==238 and source["original_pdf_committed"] is False, "source provenance")
@@ -76,7 +76,7 @@ def violations(s):
     ck(s["actors"]["nagumo"]["y1_v09_ichinose_secret_acquisition"]["known_at_y1_start"] is False, "Nagumo premature knowledge")
     ck(s["actors"]["kiyotaka-ayanokoji"]["y1_v09_ichinose_secret_acquisition"]["known_at_y1_start"] is False, "Kiyotaka premature knowledge")
     ck(s["actors"]["masumi-kamuro"]["y1_v09_school_furto_temporal_guard"]["time"]=="AFTER_Y1_START", "Kamuro event backdating")
-    ck("evt.pre-y1.ichinose-hairclip-shoplifting" in retro["event_lookup"], "missing retrospective index")
+    ck("evt.pre-y1.ichinose-hairclip-shoplifting" in retro["biographical_event_lookup"], "missing retrospective index")
     return bad
 
 class TestV9(unittest.TestCase):

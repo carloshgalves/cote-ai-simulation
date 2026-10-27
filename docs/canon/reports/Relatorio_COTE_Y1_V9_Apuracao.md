@@ -17,7 +17,7 @@ O volume não introduz novo **exame especial** resolvível; há referências a p
 - `characters/*.json`: referências globais append-only, sem reescrever experiências prévias e com guard de temporalidade.
 - `institutions/anhs.json` e `student-council.json`: alegações/declarações e limites.
 - `relationships/y1-v09.json`: relações contextuais sem reciprocidade ou estabilidade inventadas.
-- `retrospective/events/evt.pre-y1.ichinose-hairclip-shoplifting.json`: ocorrência pré-ingresso e canais posteriores.
+- `biographies/evt.pre-y1.ichinose-hairclip-shoplifting.json`: ocorrência pré-ingresso e canais posteriores.
 - Indexação determinística e revisão individual obrigatórias antes de liberação.
 
 ## Gates

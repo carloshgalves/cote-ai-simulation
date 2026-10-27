@@ -217,14 +217,6 @@
         "y1v7.ev.058",
         "y1v7.ev.059"
       ]
-    },
-    "evt.pre-y1.ichinose-hairclip-shoplifting": {
-      "path": "data/canon/consolidated/retrospective/events/evt.pre-y1.ichinose-hairclip-shoplifting.json",
-      "status": "SOURCE_BOUND_SELF_REPORTED",
-      "source_evidence_refs": [
-        "y1v09.ev.001",
-        "y1v09.ev.025"
-      ]
     }
   },
   "events_by_source_evidence": {

@@ -1168,7 +1168,9 @@
           59
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji"
+      ],
       "mention_organization_ids": [
         "org.white_room"
       ],
@@ -1214,6 +1216,7 @@
         ]
       },
       "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
         "actor.matsuo"
       ],
       "mention_organization_ids": [],
@@ -1340,7 +1343,9 @@
           63
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji"
+      ],
       "mention_organization_ids": [
         "org.white_room"
       ],
@@ -1386,6 +1391,7 @@
         ]
       },
       "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
         "actor.kiyotaka-ayanokoji"
       ],
       "mention_organization_ids": [],
@@ -1426,7 +1432,9 @@
           65
         ]
       },
-      "mention_actor_ids": [],
+      "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji"
+      ],
       "mention_organization_ids": [],
       "topics": [
         "institution",
@@ -1470,6 +1478,7 @@
         ]
       },
       "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
         "actor.sakayanagi-father"
       ],
       "mention_organization_ids": [],
@@ -1513,6 +1522,7 @@
         ]
       },
       "mention_actor_ids": [
+        "actor.atsuomi-ayanokoji",
         "actor.sakayanagi-father"
       ],
       "mention_organization_ids": [],

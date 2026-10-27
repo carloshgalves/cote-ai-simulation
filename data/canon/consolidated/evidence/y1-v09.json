@@ -1014,7 +1014,7 @@
         "ethics",
         "y1_v09"
       ],
-      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
       "verified": false,
       "engine_admission": false,
@@ -1051,7 +1051,7 @@
         "knowledge",
         "y1_v09"
       ],
-      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
       "verified": false,
       "engine_admission": false,
@@ -1093,7 +1093,7 @@
         "leadership",
         "y1_v09"
       ],
-      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
       "verified": false,
       "engine_admission": false,
@@ -1130,7 +1130,7 @@
         "institution",
         "y1_v09"
       ],
-      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
       "verified": false,
       "engine_admission": false,
@@ -1165,7 +1165,7 @@
         "governance",
         "y1_v09"
       ],
-      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
       "verified": false,
       "engine_admission": false,
@@ -1202,7 +1202,7 @@
         "governance",
         "y1_v09"
       ],
-      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
       "verified": false,
       "engine_admission": false,
@@ -1243,7 +1243,7 @@
         "institution",
         "y1_v09"
       ],
-      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
       "verified": false,
       "engine_admission": false,
@@ -1283,7 +1283,7 @@
         "knowledge",
         "y1_v09"
       ],
-      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
       "verified": false,
       "engine_admission": false,
@@ -1326,7 +1326,7 @@
         "strategy",
         "y1_v09"
       ],
-      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
       "verified": false,
       "engine_admission": false,
@@ -1359,7 +1359,7 @@
         "relationship",
         "y1_v09"
       ],
-      "subject_assertion": "CONTEXT_NOT_PRIMARY_BEHAVIOR",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
       "verified": false,
       "engine_admission": false,

@@ -5,7 +5,8 @@
   "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
   "source_coverage": [
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "participants": [
     "Class A",
@@ -179,6 +180,21 @@
       "payment_ledger_verified": false,
       "source_historical_contract_pdf_pages": "V7_ONLY_REVELATION_ABOUT_V3",
       "authority": "REFERENCE_ONLY_NOT_EXECUTABLE"
+    },
+    {
+      "source_id": "ln.y1.v075.sevenseas.en.operator-provided",
+      "pdf_pages": [
+        87,
+        88
+      ],
+      "source_evidence_refs": [
+        "y1v075.ev.063"
+      ],
+      "attributed_to": "actor.manabu-horikita",
+      "comment": "Former council president reports school council participated to some extent in past island special-exam creation",
+      "epistemic": "MANABU_REPORT_NOT_INDEPENDENT_EXAM_DOCUMENTATION",
+      "scoring_changed": false,
+      "engine_promotion": false
     }
   ]
 }

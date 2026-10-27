@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_pdf_sha256": "1d587b01242cd576fa2b0627222329d1bf1c23b12d206ad63f7a590f79fe9cc8",
   "location": "School-provided cruise ship (private group rooms)",
@@ -360,6 +361,20 @@
       "comment": "Ryuen challenges Koenji about the earlier Zodiac examination; the narrative credits Koenji with correctly finding the Monkey group's VIP, while Koenji says he sought to finish meetings quickly.",
       "epistemic": "RYUEN_CHALLENGE_KOENJI_SELF_DESCRIPTION_NARRATOR_ACCOUNT",
       "claim_promotion": "NO_GENERAL_VIP_DETECTION_ABILITY_OR_SELECTION_FORMULA_FROM_SINGLE_EPISODE",
+      "verified": false
+    },
+    {
+      "source_id": "ln.y1.v075.sevenseas.en.operator-provided",
+      "pdf_pages": [
+        42,
+        52
+      ],
+      "source_evidence_refs": [
+        "y1v075.ev.064"
+      ],
+      "comment": "Post-exam conversations mention Ryuen, Kei, Kiyotaka and prior cruise secrets; no new Zodiac VIP allocation, outcomes or scoring.",
+      "epistemic": "PRIVATE_REMEMBERED_EVENTS_NOT_NEW_SCHOOL_RULE",
+      "claim_promotion": "CONTEXT_ONLY_NO_EXECUTABLE_PROMOTION",
       "verified": false
     }
   ],

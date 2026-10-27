@@ -10,7 +10,8 @@
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v075.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_NEW_RECORDS_UNVERIFIED_EXTERNAL_REVIEW_PENDING",
   "source_documents": [],
@@ -203,7 +204,12 @@
     "y1v7.ev.039",
     "y1v7.ev.040",
     "y1v7.ev.041",
-    "y1v7.ev.086"
+    "y1v7.ev.086",
+    "y1v075.ev.057",
+    "y1v075.ev.058",
+    "y1v075.ev.059",
+    "y1v075.ev.061",
+    "y1v075.ev.065"
   ],
   "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
   "operational_migration": "Only user/operator-authorized claims may be promoted after review",
@@ -840,5 +846,68 @@
     "cross_institution_guard": "Board chairman Sakayanagi, formerly White Room observer/broker in V0, is not an ANHS Student Council officer; earlier funding links do not give Atsuomi present control over ANHS.",
     "release_gate": "REFERENCE_ONLY_PENDING_DISTINCT_PRIMARY_SOURCE_REVIEW",
     "engine_memory_admission": false
+  },
+  "y1_v075_winter_extracurricular_context": {
+    "source_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "period": "DEC_23_TO_25",
+    "pdf_pages": [
+      16,
+      21,
+      22,
+      23,
+      35,
+      44,
+      52,
+      57,
+      59,
+      63,
+      73,
+      107,
+      139
+    ],
+    "campus_locations": [
+      "Keyaki Mall",
+      "cafes",
+      "cinema",
+      "student dormitories",
+      "conditional staff-only service rooms"
+    ],
+    "student_life": "School break allows free social trips, shopping, winter festivals and dating; no course classes for those days",
+    "storage_incident": "An episode involving an employee and a restricted store room, not a universal permission for student access",
+    "confession_tree": "Campus social forum rumor; alleged 99 percent success is NOT school policy, probability or guaranteed effect",
+    "school_authority_scope": "Holiday scene does not establish new academic/special exam regulations",
+    "source_refs": [
+      "y1v075.ev.058",
+      "y1v075.ev.059",
+      "y1v075.ev.061"
+    ],
+    "engine_memory_admission": false
+  },
+  "y1_v075_advanced_notice_and_transfer_confirmation": {
+    "source_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "source_refs": [
+      "y1v075.ev.057",
+      "y1v075.ev.065"
+    ],
+    "individual_class_transfer": {
+      "v2_teacher_reported_price": 20000000,
+      "v075_dialogue_corrob_price": 20000000,
+      "v7_ibuki_dialogue_discrepancy": 2000000,
+      "forty_person_arithmetic_example": 800000000,
+      "observed_transfer_in_v075": false,
+      "normative_formula_or_group_discount_verified": false,
+      "discrepancy_status": "V7_DISCREPANT_LINE_NOT_SILENTLY_OVERRIDDEN"
+    },
+    "future_exam": {
+      "source_mode": "KIRIYAMA_PRIVATE_FORECAST",
+      "pdf_pages": [
+        157,
+        158
+      ],
+      "reported": "January mixed-year special examination can involve 1st and 2nd years and potentially 3rd; some details vary by year",
+      "rulebook_not_supplied": true,
+      "exam_spec_created": false
+    },
+    "engine_rule_auto_update": false
   }
 }

@@ -1481,7 +1481,9 @@
         "actor.atsuomi-ayanokoji",
         "actor.sakayanagi-father"
       ],
-      "mention_organization_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
       "topics": [
         "institution",
         "y1_v07"
@@ -1525,7 +1527,9 @@
         "actor.atsuomi-ayanokoji",
         "actor.sakayanagi-father"
       ],
-      "mention_organization_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
       "topics": [
         "institution",
         "y1_v07"
@@ -1566,7 +1570,9 @@
       "mention_actor_ids": [
         "actor.sakayanagi-father"
       ],
-      "mention_organization_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
       "topics": [
         "institution",
         "y1_v07"
@@ -1695,7 +1701,9 @@
         "actor.kiyotaka-ayanokoji",
         "actor.sae-chiyabashira"
       ],
-      "mention_organization_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
       "topics": [
         "strategy",
         "y1_v07"
@@ -2065,9 +2073,12 @@
       "mention_actor_ids": [
         "actor.honami-ichinose",
         "actor.kiyotaka-ayanokoji",
-        "actor.manabu-horikita"
+        "actor.manabu-horikita",
+        "actor.nagumo"
       ],
-      "mention_organization_ids": [],
+      "mention_organization_ids": [
+        "org.student-council"
+      ],
       "topics": [
         "strategy",
         "y1_v07"
@@ -3785,7 +3796,9 @@
         "actor.sae-chiyabashira",
         "actor.sakayanagi-father"
       ],
-      "mention_organization_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
       "topics": [
         "institution",
         "y1_v07"

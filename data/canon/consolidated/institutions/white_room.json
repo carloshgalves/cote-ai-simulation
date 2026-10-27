@@ -249,6 +249,44 @@
       "boundaries": "White Room authority is distinct from ANHS's state-funded school rules; parental demand does not automatically expel student.",
       "engine_memory_admission": false,
       "executable_institutional_behavior": false
+    },
+    "y1_v07_school_board_interface": {
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "prior_source_id": "ln.y1.v00.legacyemtls.v1.0.1",
+      "prior_evidence_refs": [
+        "v0.pol.013",
+        "v0.wr.043"
+      ],
+      "y1_v07_evidence_refs": [
+        "y1v7.ev.034",
+        "y1v7.ev.035",
+        "y1v7.ev.036"
+      ],
+      "prior_context": "Sakayanagi had White Room observation/funding intermediation in V0, including ethical objections; prior relationship not presumed to be continuing operational subordination.",
+      "observed_y1_v07_relationship": "ANHS chairman meets Atsuomi, refuses unilateral withdrawal, describes one-student exceptional admission, and recognizes Kiyotaka.",
+      "institutional_separation": "org.white_room and org.anhs have distinct authorities; school board chairman is not org.student-council president.",
+      "source_pages_v00": [
+        54,
+        55,
+        56,
+        172,
+        173,
+        175,
+        176
+      ],
+      "source_pages_v07": [
+        65,
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "actor_knowledge": "Kiyotaka hears the Y1 V7 school encounter; other students and Nagumo are not imputed this private exchange.",
+      "no_parental_control_inference": true,
+      "no_private_funding_control_inference": true,
+      "engine_memory_admission": false,
+      "review_status": "DRAFT_NOT_EXTERNALLY_INDEPENDENTLY_REVIEWED"
     }
   },
   "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance."

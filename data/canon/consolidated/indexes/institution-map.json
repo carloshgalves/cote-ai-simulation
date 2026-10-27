@@ -55,7 +55,7 @@
     },
     "org.student-council": {
       "path": "data/canon/consolidated/institutions/student-council.json",
-      "source_volume_count": 4
+      "source_volume_count": 5
     },
     "org.koenji_conglomerate": {
       "path": "data/canon/consolidated/institutions/koenji_conglomerate.json",

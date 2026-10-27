@@ -6,9 +6,10 @@
   "source_coverage": [
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "ASSISTANT_INITIAL_PASS_AUDIT_PENDING",
+  "source_status": "Y1_V07_THIRD_PARTY_CONTEXT_ADDED_INDEPENDENT_REVIEW_PENDING",
   "identity": {
     "role_summary": "Second-year Class A; former student council vice president, publicly inaugurated as president after Manabu Horikita in Y1 V6.",
     "aliases": [
@@ -23,6 +24,14 @@
         "given_name": "Miyabi",
         "office": "STUDENT_COUNCIL_PRESIDENT",
         "earlier_office": "VICE_PRESIDENT"
+      },
+      {
+        "since": "Y1_V07_DEC_PRIVATE_MANABU_REPORT",
+        "source_evidence_id": "y1v7.ev.047",
+        "kind": "SPOKEN_ABOUT_BY_FORMER_PRESIDENT_NOT_NEW_ACTION_BY_NAGUMO",
+        "office": "STUDENT_COUNCIL_PRESIDENT",
+        "claim": "Manabu says Nagumo rallied second years and may cause numerous expulsions; no such result observed in scene.",
+        "knowledge_gate": "NAGUMO_NOT_KNOWN_TO_HEAR_THE_CONVERSATION"
       }
     ]
   },
@@ -97,6 +106,12 @@
       ],
       "context_evidence_refs": [
         "y1v6.ev.003"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v7.ev.047"
       ]
     }
   },

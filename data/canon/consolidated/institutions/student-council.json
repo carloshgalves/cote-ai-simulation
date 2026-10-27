@@ -6,9 +6,10 @@
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_ATTRIBUTED_PRIVATE_REPORT_NOT_INDEPENDENTLY_VERIFIED",
   "evidence_refs": [
     "y1v1.ev.031",
     "y1v1.ev.032",
@@ -29,11 +30,16 @@
     "y1v45.ev.024",
     "y1v45.ev.026",
     "y1v45.ev.048",
-    "y1v6.ev.003"
+    "y1v6.ev.003",
+    "y1v7.ev.047",
+    "y1v7.ev.048",
+    "y1v7.ev.085",
+    "y1v7.ev.088",
+    "y1v7.ev.100"
   ],
   "owner_truth_boundary": "Student-council authority described in Manabu's public speech, not independently executed rulebook",
   "structure": {
-    "president": "actor.manabu-horikita",
+    "president": "actor.nagumo",
     "eligibility_claims": [
       "Accepts first-year applications",
       "Discourages simultaneously belonging to other clubs"
@@ -41,7 +47,9 @@
     "claimed_functions": [
       "enforcement",
       "amendment of school rules"
-    ]
+    ],
+    "current_president_as_of": "Y1_V06_SUCCESSION_CONFIRMATION_STILL_CURRENT_IN_Y1_V07",
+    "former_president": "actor.manabu-horikita"
   },
   "operational_migration": "Do not invent bylaws or quantitative council powers",
   "disciplinary_hearing_y1_v02": {
@@ -127,5 +135,88 @@
       }
     ],
     "gate": "PUBLIC_POLICY_ANNOUNCEMENT_IS_NOT_AUTHORIZED_ENGINE_RULE_CHANGE"
+  },
+  "y1_v07_succession_and_private_warning": {
+    "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "source_pdf_pages": [
+      86,
+      87,
+      88,
+      89,
+      164,
+      165,
+      191,
+      192,
+      193,
+      195
+    ],
+    "source_evidence_refs": [
+      "y1v7.ev.047",
+      "y1v7.ev.048",
+      "y1v7.ev.085",
+      "y1v7.ev.088",
+      "y1v7.ev.100"
+    ],
+    "offices": {
+      "current_president": "actor.nagumo",
+      "former_president": "actor.manabu-horikita",
+      "succession_source": "y1v6.ev.003"
+    },
+    "private_report_to_kiyotaka": {
+      "reporter": "actor.manabu-horikita",
+      "recipient": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        87,
+        88
+      ],
+      "claims": [
+        {
+          "claim": "Nagumo wants to reform the established school traditions and rules",
+          "status": "MANABU_FORECAST_NOT_CONFIRMED_ENACTMENT"
+        },
+        {
+          "claim": "Unprecedented future student expulsions are likely",
+          "status": "MANABU_PREDICTION_NOT_OBSERVED_EXPULSIONS"
+        },
+        {
+          "claim": "Nagumo has rallied most second-year students beyond Class A",
+          "status": "MANABU_PRIVATE_REPORT_NOT_INDEPENDENTLY_VERIFIED"
+        },
+        {
+          "claim": "Manabu initially rejected applications from Katsuragi and Ichinose, fearing Nagumo would recruit them; Nagumo later arranged Ichinose membership against Manabu wishes",
+          "status": "MANABU_RETROSPECTIVE_ACCOUNT_NOT_AUTOMATIC_KNOWLEDGE_OF_ICHINOSE_OR_KATSURAGI"
+        }
+      ]
+    },
+    "contingent_coordination": {
+      "pdf_pages": [
+        88,
+        89
+      ],
+      "proposal": "Manabu proposes using Suzune as intermediary and gives Kiyotaka contact information.",
+      "outcome": "KIYOTAKA_ACCEPTS_CONTACT_ONLY; COOPERATION_NOT_PROMISED",
+      "future_goal_script": false
+    },
+    "rooftop_witness_boundary": {
+      "pdf_pages": [
+        164,
+        165,
+        191,
+        192,
+        193,
+        195
+      ],
+      "person": "actor.manabu-horikita",
+      "role": "FORMER_PRESIDENT_PRIVATE_WITNESS_CONTEXT",
+      "location": "STAIRWELL_BELOW_ROOFTOP",
+      "did_not_directly_observe_fight": true,
+      "punishment_or_official_hearing": "NONE_CONDUCTED_BY_MANABU",
+      "confidentiality": "SOURCE_REPORTED_PRIVATE_AGREEMENT"
+    },
+    "institutional_authority_guard": "Former office and private presence do not automatically confer current disciplinary jurisdiction. Never confuse org.student-council with Sakayanagi board chairman of org.anhs.",
+    "observed_new_rules": "NONE_CONFIRMED_BY_Y1_V07",
+    "actor_knowledge_gate": "ONLY_MANABU_AND_KIYOTAKA_PRIVATE_CONVERSATION; NAGUMO_NOT_AUTOMATICALLY_AWARE",
+    "engine_memory_admission": false,
+    "verified": false
   }
 }

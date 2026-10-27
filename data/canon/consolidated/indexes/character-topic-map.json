@@ -1328,6 +1328,7 @@
         "results",
         "social",
         "sports",
+        "strategy",
         "student_council"
       ]
     },
@@ -8287,6 +8288,9 @@
       ],
       "student_council": [
         "y1v6.ev.003"
+      ],
+      "strategy": [
+        "y1v7.ev.047"
       ]
     },
     "actor.shibata-so": {
@@ -10647,7 +10651,8 @@
       "authority": [
         "y1v6.case.nagumo.announce-student-council-centralizing-reforms"
       ],
-      "student_council": []
+      "student_council": [],
+      "strategy": []
     },
     "actor.shibata-so": {
       "sports": [
@@ -16876,6 +16881,9 @@
       ],
       "authority": [
         "y1v6.ev.003"
+      ],
+      "strategy": [
+        "y1v7.ev.047"
       ]
     },
     "actor.shibata-so": {

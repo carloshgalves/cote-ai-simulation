@@ -1,0 +1,48 @@
+{
+  "id": "y1v08.case.nagumo.v08-c040",
+  "actor_id": "actor.nagumo",
+  "primary_actor_id": "actor.nagumo",
+  "title": "A armadilha contra Tachibana resulta em pressão por revogação de expulsão, mas conluio exato é reconstrução de Kiyo",
+  "context": "Year 1 Volume 8 Mixed Training Camp",
+  "observed_actions": "A armadilha contra Tachibana resulta em pressão por revogação de expulsão, mas conluio exato é reconstrução de Kiyotaka.",
+  "observed_result": "Source-bounded; consult primary chapter",
+  "epistemic_limits": "Reported attribution and protagonist reconstruction; no institutional certification.",
+  "source": {
+    "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      235,
+      236,
+      238,
+      239,
+      240
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "behavior"
+  ],
+  "information_available": "Historical contact only",
+  "counterfactual_test": "Do not force canonical episode after divergence",
+  "topics": [
+    "behavior",
+    "y1_v08"
+  ],
+  "evidence_refs": [
+    "y1v08.ev.040"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

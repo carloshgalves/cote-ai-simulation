@@ -1,0 +1,724 @@
+{
+  "schema_version": "canon-case-manifest-v1",
+  "source_id": "ln.y1.v08.sevenseas.en.operator-provided",
+  "cases": [
+    {
+      "path": "data/canon/consolidated/behavioral_cases/yosuke-hirata/v08-c002.json",
+      "id": "y1v08.case.yosuke-hirata.v08-c002",
+      "actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        27,
+        28,
+        29
+      ],
+      "evidence_refs": [
+        "y1v08.ev.002"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/sae-chiyabashira/v08-c003.json",
+      "id": "y1v08.case.sae-chiyabashira.v08-c003",
+      "actor_id": "actor.sae-chiyabashira",
+      "pdf_pages": [
+        28,
+        29
+      ],
+      "evidence_refs": [
+        "y1v08.ev.003"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/suzune-horikita/v08-c004.json",
+      "id": "y1v08.case.suzune-horikita.v08-c004",
+      "actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        30,
+        31
+      ],
+      "evidence_refs": [
+        "y1v08.ev.004"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v08-c005.json",
+      "id": "y1v08.case.kiyotaka-ayanokoji.v08-c005",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        31,
+        32
+      ],
+      "evidence_refs": [
+        "y1v08.ev.005"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/arisu-sakayanagi/v08-c006.json",
+      "id": "y1v08.case.arisu-sakayanagi.v08-c006",
+      "actor_id": "actor.arisu-sakayanagi",
+      "pdf_pages": [
+        35,
+        36,
+        37,
+        38
+      ],
+      "evidence_refs": [
+        "y1v08.ev.006"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/yosuke-hirata/v08-c007.json",
+      "id": "y1v08.case.yosuke-hirata.v08-c007",
+      "actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        39,
+        40,
+        41,
+        42,
+        46
+      ],
+      "evidence_refs": [
+        "y1v08.ev.007"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/miyake/v08-c008.json",
+      "id": "y1v08.case.miyake.v08-c008",
+      "actor_id": "actor.miyake",
+      "pdf_pages": [
+        49,
+        50
+      ],
+      "evidence_refs": [
+        "y1v08.ev.008"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v08-c009.json",
+      "id": "y1v08.case.kiyotaka-ayanokoji.v08-c009",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        50,
+        51,
+        55
+      ],
+      "evidence_refs": [
+        "y1v08.ev.009"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/nagumo/v08-c010.json",
+      "id": "y1v08.case.nagumo.v08-c010",
+      "actor_id": "actor.nagumo",
+      "pdf_pages": [
+        57,
+        58,
+        59,
+        60
+      ],
+      "evidence_refs": [
+        "y1v08.ev.010"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/manabu-horikita/v08-c011.json",
+      "id": "y1v08.case.manabu-horikita.v08-c011",
+      "actor_id": "actor.manabu-horikita",
+      "pdf_pages": [
+        59,
+        60
+      ],
+      "evidence_refs": [
+        "y1v08.ev.011"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/nagumo/v08-c012.json",
+      "id": "y1v08.case.nagumo.v08-c012",
+      "actor_id": "actor.nagumo",
+      "pdf_pages": [
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67
+      ],
+      "evidence_refs": [
+        "y1v08.ev.012"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/v08-c013.json",
+      "id": "y1v08.case.rokusuke-koenji.v08-c013",
+      "actor_id": "actor.rokusuke-koenji",
+      "pdf_pages": [
+        63,
+        64,
+        65,
+        66,
+        67,
+        68
+      ],
+      "evidence_refs": [
+        "y1v08.ev.013"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/yukimura/v08-c014.json",
+      "id": "y1v08.case.yukimura.v08-c014",
+      "actor_id": "actor.yukimura",
+      "pdf_pages": [
+        68,
+        78,
+        79,
+        84,
+        85
+      ],
+      "evidence_refs": [
+        "y1v08.ev.014"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/v08-c015.json",
+      "id": "y1v08.case.rokusuke-koenji.v08-c015",
+      "actor_id": "actor.rokusuke-koenji",
+      "pdf_pages": [
+        78,
+        82,
+        87,
+        88
+      ],
+      "evidence_refs": [
+        "y1v08.ev.015"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/nagumo/v08-c016.json",
+      "id": "y1v08.case.nagumo.v08-c016",
+      "actor_id": "actor.nagumo",
+      "pdf_pages": [
+        96,
+        97,
+        98,
+        99,
+        100,
+        105,
+        106,
+        107,
+        108,
+        109
+      ],
+      "evidence_refs": [
+        "y1v08.ev.016"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v08-c017.json",
+      "id": "y1v08.case.kiyotaka-ayanokoji.v08-c017",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        105,
+        106,
+        107,
+        108,
+        109
+      ],
+      "evidence_refs": [
+        "y1v08.ev.017"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiriyama/v08-c018.json",
+      "id": "y1v08.case.kiriyama.v08-c018",
+      "actor_id": "actor.kiriyama",
+      "pdf_pages": [
+        116,
+        117,
+        118
+      ],
+      "evidence_refs": [
+        "y1v08.ev.018"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v08-c019.json",
+      "id": "y1v08.case.kiyotaka-ayanokoji.v08-c019",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        120,
+        121,
+        123,
+        124,
+        125,
+        126,
+        127
+      ],
+      "evidence_refs": [
+        "y1v08.ev.019"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v08-c020.json",
+      "id": "y1v08.case.kei-karuizawa.v08-c020",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        120,
+        121,
+        123,
+        124,
+        125,
+        126
+      ],
+      "evidence_refs": [
+        "y1v08.ev.020"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/manabu-horikita/v08-c021.json",
+      "id": "y1v08.case.manabu-horikita.v08-c021",
+      "actor_id": "actor.manabu-horikita",
+      "pdf_pages": [
+        142,
+        143,
+        144,
+        145,
+        146,
+        147
+      ],
+      "evidence_refs": [
+        "y1v08.ev.021"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v08-c022.json",
+      "id": "y1v08.case.kiyotaka-ayanokoji.v08-c022",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        142,
+        143,
+        144,
+        145,
+        146,
+        147
+      ],
+      "evidence_refs": [
+        "y1v08.ev.022"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/honami-ichinose/v08-c023.json",
+      "id": "y1v08.case.honami-ichinose.v08-c023",
+      "actor_id": "actor.honami-ichinose",
+      "pdf_pages": [
+        148,
+        149,
+        150,
+        151,
+        152
+      ],
+      "evidence_refs": [
+        "y1v08.ev.023"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v08-c024.json",
+      "id": "y1v08.case.kiyotaka-ayanokoji.v08-c024",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        155,
+        156,
+        157,
+        158,
+        159,
+        160
+      ],
+      "evidence_refs": [
+        "y1v08.ev.024"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v08-c025.json",
+      "id": "y1v08.case.kiyotaka-ayanokoji.v08-c025",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        162,
+        163,
+        164
+      ],
+      "evidence_refs": [
+        "y1v08.ev.025"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/hashimoto/v08-c026.json",
+      "id": "y1v08.case.hashimoto.v08-c026",
+      "actor_id": "actor.hashimoto",
+      "pdf_pages": [
+        162,
+        163,
+        164
+      ],
+      "evidence_refs": [
+        "y1v08.ev.026"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v08-c027.json",
+      "id": "y1v08.case.kiyotaka-ayanokoji.v08-c027",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        173,
+        174,
+        175,
+        176,
+        178,
+        179,
+        180,
+        181
+      ],
+      "evidence_refs": [
+        "y1v08.ev.027"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/nazuna-asahina/v08-c028.json",
+      "id": "y1v08.case.nazuna-asahina.v08-c028",
+      "actor_id": "actor.nazuna-asahina",
+      "pdf_pages": [
+        174,
+        175,
+        176,
+        178,
+        179,
+        180,
+        181
+      ],
+      "evidence_refs": [
+        "y1v08.ev.028"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/hashimoto/v08-c029.json",
+      "id": "y1v08.case.hashimoto.v08-c029",
+      "actor_id": "actor.hashimoto",
+      "pdf_pages": [
+        182,
+        183,
+        184,
+        185
+      ],
+      "evidence_refs": [
+        "y1v08.ev.029"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/yukimura/v08-c030.json",
+      "id": "y1v08.case.yukimura.v08-c030",
+      "actor_id": "actor.yukimura",
+      "pdf_pages": [
+        184,
+        185,
+        186,
+        187,
+        188
+      ],
+      "evidence_refs": [
+        "y1v08.ev.030"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/rokusuke-koenji/v08-c032.json",
+      "id": "y1v08.case.rokusuke-koenji.v08-c032",
+      "actor_id": "actor.rokusuke-koenji",
+      "pdf_pages": [
+        189,
+        190,
+        191,
+        223,
+        224,
+        225,
+        226
+      ],
+      "evidence_refs": [
+        "y1v08.ev.032"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v08-c033.json",
+      "id": "y1v08.case.kiyotaka-ayanokoji.v08-c033",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        194,
+        195,
+        196,
+        197,
+        198
+      ],
+      "evidence_refs": [
+        "y1v08.ev.033"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v08-c034.json",
+      "id": "y1v08.case.kiyotaka-ayanokoji.v08-c034",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        199,
+        200,
+        201,
+        202
+      ],
+      "evidence_refs": [
+        "y1v08.ev.034"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/hashimoto/v08-c035.json",
+      "id": "y1v08.case.hashimoto.v08-c035",
+      "actor_id": "actor.hashimoto",
+      "pdf_pages": [
+        203,
+        204,
+        205,
+        206,
+        207,
+        208
+      ],
+      "evidence_refs": [
+        "y1v08.ev.035"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v08-c036.json",
+      "id": "y1v08.case.kakeru-ryuen.v08-c036",
+      "actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        204,
+        205,
+        207,
+        208,
+        209
+      ],
+      "evidence_refs": [
+        "y1v08.ev.036"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/nagumo/v08-c037.json",
+      "id": "y1v08.case.nagumo.v08-c037",
+      "actor_id": "actor.nagumo",
+      "pdf_pages": [
+        208,
+        209,
+        210,
+        211
+      ],
+      "evidence_refs": [
+        "y1v08.ev.037"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/nagumo/v08-c040.json",
+      "id": "y1v08.case.nagumo.v08-c040",
+      "actor_id": "actor.nagumo",
+      "pdf_pages": [
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        235,
+        236,
+        238,
+        239,
+        240
+      ],
+      "evidence_refs": [
+        "y1v08.ev.040"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/manabu-horikita/v08-c041.json",
+      "id": "y1v08.case.manabu-horikita.v08-c041",
+      "actor_id": "actor.manabu-horikita",
+      "pdf_pages": [
+        235,
+        236,
+        237,
+        240
+      ],
+      "evidence_refs": [
+        "y1v08.ev.041"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    },
+    {
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v08-c042.json",
+      "id": "y1v08.case.kei-karuizawa.v08-c042",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        237,
+        238,
+        239,
+        240
+      ],
+      "evidence_refs": [
+        "y1v08.ev.042"
+      ],
+      "topics": [
+        "behavior",
+        "y1_v08"
+      ]
+    }
+  ]
+}

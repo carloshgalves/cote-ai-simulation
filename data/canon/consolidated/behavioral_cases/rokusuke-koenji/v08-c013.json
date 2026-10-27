@@ -1,0 +1,42 @@
+{
+  "id": "y1v08.case.rokusuke-koenji.v08-c013",
+  "actor_id": "actor.rokusuke-koenji",
+  "primary_actor_id": "actor.rokusuke-koenji",
+  "title": "Recusa função de representante e admite proposta de comprar pontos de veteranos, sem execução.",
+  "context": "Year 1 Volume 8 Mixed Training Camp",
+  "observed_actions": "Recusa função de representante e admite proposta de comprar pontos de veteranos, sem execução.",
+  "observed_result": "Source-bounded; consult primary chapter",
+  "epistemic_limits": "Do not generalize one episode to permanent personality or future replay.",
+  "source": {
+    "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      63,
+      64,
+      65,
+      66,
+      67,
+      68
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "behavior"
+  ],
+  "information_available": "Historical contact only",
+  "counterfactual_test": "Do not force canonical episode after divergence",
+  "topics": [
+    "behavior",
+    "y1_v08"
+  ],
+  "evidence_refs": [
+    "y1v08.ev.013"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

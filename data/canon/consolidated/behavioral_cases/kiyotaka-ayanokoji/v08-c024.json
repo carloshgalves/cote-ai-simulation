@@ -1,0 +1,42 @@
+{
+  "id": "y1v08.case.kiyotaka-ayanokoji.v08-c024",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Conversa isoladamente com Kōenji durante percurso e recebe leitura de suas capacidades ocultas.",
+  "context": "Year 1 Volume 8 Mixed Training Camp",
+  "observed_actions": "Conversa isoladamente com Kōenji durante percurso e recebe leitura de suas capacidades ocultas.",
+  "observed_result": "Source-bounded; consult primary chapter",
+  "epistemic_limits": "Do not generalize one episode to permanent personality or future replay.",
+  "source": {
+    "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      155,
+      156,
+      157,
+      158,
+      159,
+      160
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "behavior"
+  ],
+  "information_available": "Historical contact only",
+  "counterfactual_test": "Do not force canonical episode after divergence",
+  "topics": [
+    "behavior",
+    "y1_v08"
+  ],
+  "evidence_refs": [
+    "y1v08.ev.024"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

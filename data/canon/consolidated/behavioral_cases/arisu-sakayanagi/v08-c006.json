@@ -1,0 +1,40 @@
+{
+  "id": "y1v08.case.arisu-sakayanagi.v08-c006",
+  "actor_id": "actor.arisu-sakayanagi",
+  "primary_actor_id": "actor.arisu-sakayanagi",
+  "title": "Bloco da Classe A atribuído a Sakayanagi busca vagas seletivas e controle de grupo.",
+  "context": "Year 1 Volume 8 Mixed Training Camp",
+  "observed_actions": "Bloco da Classe A atribuído a Sakayanagi busca vagas seletivas e controle de grupo.",
+  "observed_result": "Source-bounded; consult primary chapter",
+  "epistemic_limits": "Reported attribution and protagonist reconstruction; no institutional certification.",
+  "source": {
+    "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      35,
+      36,
+      37,
+      38
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "behavior"
+  ],
+  "information_available": "Historical contact only",
+  "counterfactual_test": "Do not force canonical episode after divergence",
+  "topics": [
+    "behavior",
+    "y1_v08"
+  ],
+  "evidence_refs": [
+    "y1v08.ev.006"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

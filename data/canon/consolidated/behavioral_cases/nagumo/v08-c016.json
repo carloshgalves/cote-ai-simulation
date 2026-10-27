@@ -1,0 +1,46 @@
+{
+  "id": "y1v08.case.nagumo.v08-c016",
+  "actor_id": "actor.nagumo",
+  "primary_actor_id": "actor.nagumo",
+  "title": "Organiza rodada noturna de cartas com tarefas apostadas e lê reação dos novatos.",
+  "context": "Year 1 Volume 8 Mixed Training Camp",
+  "observed_actions": "Organiza rodada noturna de cartas com tarefas apostadas e lê reação dos novatos.",
+  "observed_result": "Source-bounded; consult primary chapter",
+  "epistemic_limits": "Do not generalize one episode to permanent personality or future replay.",
+  "source": {
+    "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      96,
+      97,
+      98,
+      99,
+      100,
+      105,
+      106,
+      107,
+      108,
+      109
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "behavior"
+  ],
+  "information_available": "Historical contact only",
+  "counterfactual_test": "Do not force canonical episode after divergence",
+  "topics": [
+    "behavior",
+    "y1_v08"
+  ],
+  "evidence_refs": [
+    "y1v08.ev.016"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

@@ -13,7 +13,8 @@
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
-    "ln.y1.v08.sevenseas.en.operator-provided"
+    "ln.y1.v08.sevenseas.en.operator-provided",
+    "ln.y1.v09.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -31,7 +32,9 @@
         "y1v7.case.kei-karuizawa.v7-c022",
         "y1v075.case.kei-karuizawa.v075-c003",
         "y1v075.case.kei-karuizawa.v075-c005",
-        "y1v075.case.kei-karuizawa.v075-c006"
+        "y1v075.case.kei-karuizawa.v075-c006",
+        "y1v09.case.kei-karuizawa.v09-c13",
+        "y1v09.case.kei-karuizawa.v09-c15"
       ],
       "context_evidence_refs": [
         "y1v1.ev.046",
@@ -63,7 +66,10 @@
         "y1v7.ev.079",
         "y1v075.ev.003",
         "y1v075.ev.005",
-        "y1v075.ev.006"
+        "y1v075.ev.006",
+        "y1v09.ev.13",
+        "y1v09.ev.15",
+        "y1v09.ev.034"
       ]
     },
     "economy": {
@@ -129,7 +135,8 @@
         "y1v4.case.kei-karuizawa.resist-coercion-under-threat",
         "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure",
         "y1v075.case.kei-karuizawa.v075-c002",
-        "y1v075.case.kei-karuizawa.v075-c007"
+        "y1v075.case.kei-karuizawa.v075-c007",
+        "y1v09.case.kei-karuizawa.v09-c15"
       ],
       "context_evidence_refs": [
         "y1v3.ev.083",
@@ -142,7 +149,8 @@
         "y1v075.ev.002",
         "y1v075.ev.007",
         "y1v075.ev.030",
-        "y1v075.ev.032"
+        "y1v075.ev.032",
+        "y1v09.ev.15"
       ]
     },
     "institution": {
@@ -155,7 +163,8 @@
     "identity": {
       "behavioral_case_refs": [
         "y1v075.case.kei-karuizawa.v075-c001",
-        "y1v075.case.kei-karuizawa.v075-c009"
+        "y1v075.case.kei-karuizawa.v075-c009",
+        "y1v09.case.kei-karuizawa.v09-c13"
       ],
       "context_evidence_refs": [
         "y1v4.ev.001",
@@ -167,7 +176,8 @@
         "y1v075.ev.039",
         "y1v075.ev.040",
         "y1v075.ev.041",
-        "y1v075.ev.049"
+        "y1v075.ev.049",
+        "y1v09.ev.13"
       ]
     },
     "observation": {
@@ -208,7 +218,8 @@
         "y1v45.case.kei-karuizawa.quietly-prevent-recording-abuse",
         "y1v7.case.kei-karuizawa.v7-c020",
         "y1v7.case.kei-karuizawa.v7-c021",
-        "y1v7.case.kei-karuizawa.v7-c023"
+        "y1v7.case.kei-karuizawa.v7-c023",
+        "y1v09.case.kei-karuizawa.v09-c15"
       ],
       "context_evidence_refs": [
         "y1v4.ev.035",
@@ -239,7 +250,8 @@
         "y1v7.ev.081",
         "y1v7.ev.089",
         "y1v7.ev.099",
-        "y1v075.ev.037"
+        "y1v075.ev.037",
+        "y1v09.ev.15"
       ]
     },
     "persuasion": {
@@ -386,7 +398,8 @@
         "y1v075.case.kei-karuizawa.v075-c008",
         "y1v075.case.kei-karuizawa.v075-c009",
         "y1v08.case.kei-karuizawa.v08-c020",
-        "y1v08.case.kei-karuizawa.v08-c042"
+        "y1v08.case.kei-karuizawa.v08-c042",
+        "y1v09.case.kei-karuizawa.v09-c13"
       ],
       "context_evidence_refs": [
         "y1v6.ev.009",
@@ -405,7 +418,9 @@
         "y1v075.ev.049",
         "y1v08.ev.020",
         "y1v08.ev.042",
-        "y1v08.ev.043"
+        "y1v08.ev.043",
+        "y1v09.ev.13",
+        "y1v09.ev.034"
       ]
     },
     "security": {
@@ -470,11 +485,15 @@
     "behavior": {
       "behavioral_case_refs": [
         "y1v08.case.kei-karuizawa.v08-c020",
-        "y1v08.case.kei-karuizawa.v08-c042"
+        "y1v08.case.kei-karuizawa.v08-c042",
+        "y1v09.case.kei-karuizawa.v09-c13",
+        "y1v09.case.kei-karuizawa.v09-c15"
       ],
       "context_evidence_refs": [
         "y1v08.ev.020",
-        "y1v08.ev.042"
+        "y1v08.ev.042",
+        "y1v09.ev.13",
+        "y1v09.ev.15"
       ]
     },
     "analysis": {
@@ -483,6 +502,17 @@
       ],
       "context_evidence_refs": [
         "y1v08.ev.042"
+      ]
+    },
+    "y1_v09": {
+      "behavioral_case_refs": [
+        "y1v09.case.kei-karuizawa.v09-c13",
+        "y1v09.case.kei-karuizawa.v09-c15"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.13",
+        "y1v09.ev.15",
+        "y1v09.ev.034"
       ]
     }
   },
@@ -592,5 +622,26 @@
   "y1_v08_actor_state_deltas": [],
   "y1_v08_relationship_refs": [
     "y1v08.rel.043"
+  ],
+  "y1_v09_source_status": "UNVERIFIED_SOURCE_CANDIDATE_NO_EXTERNAL_REVIEW",
+  "y1_v09_knowledge_gate": {
+    "source_revelation_not_occurrence_time": true,
+    "post_admission_canon_not_simulation_memory": true,
+    "requires_actor_specific_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v09_behavioral_case_refs": [
+    "y1v09.case.kei-karuizawa.v09-c13",
+    "y1v09.case.kei-karuizawa.v09-c15"
+  ],
+  "y1_v09_context_evidence_refs": [
+    "y1v09.ev.13",
+    "y1v09.ev.15",
+    "y1v09.ev.034"
+  ],
+  "y1_v09_relationship_refs": [
+    "y1v09.rel.006",
+    "y1v09.rel.010"
   ]
 }

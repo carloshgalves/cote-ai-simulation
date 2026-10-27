@@ -12,7 +12,8 @@
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
-    "ln.y1.v08.sevenseas.en.operator-provided"
+    "ln.y1.v08.sevenseas.en.operator-provided",
+    "ln.y1.v09.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -131,7 +132,8 @@
       "behavioral_case_refs": [
         "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
         "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
-        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
+        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note",
+        "y1v09.case.kikyo-kushida.v09-c16"
       ],
       "context_evidence_refs": [
         "y1v1.ev.075",
@@ -157,7 +159,8 @@
         "y1v5.ev.065",
         "y1v5.ev.074",
         "y1v5.ev.075",
-        "y1v5.ev.076"
+        "y1v5.ev.076",
+        "y1v09.ev.16"
       ]
     },
     "leadership": {
@@ -388,11 +391,14 @@
       ]
     },
     "information": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v09.case.kikyo-kushida.v09-c16"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.023",
         "y1v6.ev.002",
-        "y1v6.ev.062"
+        "y1v6.ev.062",
+        "y1v09.ev.16"
       ]
     },
     "trust": {
@@ -465,12 +471,14 @@
         "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
         "y1v5.case.kikyo-kushida.volunteer-paid-mixed-event-substitution",
         "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets",
-        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage"
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v09.case.kikyo-kushida.v09-c16"
       ],
       "context_evidence_refs": [
         "y1v5.ev.074",
         "y1v6.ev.062",
-        "y1v6.ev.075"
+        "y1v6.ev.075",
+        "y1v09.ev.16"
       ]
     },
     "counterstrategy": {
@@ -543,9 +551,20 @@
       ]
     },
     "behavior": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v09.case.kikyo-kushida.v09-c16"
+      ],
       "context_evidence_refs": [
-        "y1v08.ev.039"
+        "y1v08.ev.039",
+        "y1v09.ev.16"
+      ]
+    },
+    "y1_v09": {
+      "behavioral_case_refs": [
+        "y1v09.case.kikyo-kushida.v09-c16"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.16"
       ]
     }
   },
@@ -609,5 +628,22 @@
   ],
   "y1_v08_relationship_refs": [
     "y1v08.rel.051"
+  ],
+  "y1_v09_source_status": "UNVERIFIED_SOURCE_CANDIDATE_NO_EXTERNAL_REVIEW",
+  "y1_v09_knowledge_gate": {
+    "source_revelation_not_occurrence_time": true,
+    "post_admission_canon_not_simulation_memory": true,
+    "requires_actor_specific_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v09_behavioral_case_refs": [
+    "y1v09.case.kikyo-kushida.v09-c16"
+  ],
+  "y1_v09_context_evidence_refs": [
+    "y1v09.ev.16"
+  ],
+  "y1_v09_relationship_refs": [
+    "y1v09.rel.007"
   ]
 }

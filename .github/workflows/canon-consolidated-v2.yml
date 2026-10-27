@@ -20,6 +20,7 @@ on:
       - 'tools/test_canon_y1_v06_comprehensive_audit.py'
       - 'tools/test_canon_y1_v07_staging.py'
       - 'tools/test_canon_y1_v07_integration.py'
+      - 'tools/test_canon_y1_v07_institution_exam_followup.py'
       - 'tools/canon_y1_v06_external_review_packet.py'
       - 'tools/test_canon_y1_v06_external_review_packet.py'
       - 'tools/verify_canon_y1_v06_primary_pdf.py'
@@ -55,6 +56,7 @@ jobs:
       - run: python tools/test_canon_y1_v06_comprehensive_audit.py
       - run: python tools/test_canon_y1_v07_staging.py
       - run: python tools/test_canon_y1_v07_integration.py
+      - run: python tools/test_canon_y1_v07_institution_exam_followup.py
       - run: python tools/test_canon_y1_v06_external_review_packet.py
       - run: python tools/test_canon_cross_volume_reconciliation.py
       - run: python tools/test_legacy_y1_crosswalk.py

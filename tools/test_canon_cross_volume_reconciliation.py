@@ -14,9 +14,10 @@ index=J(B/"indexes/retrospective-event-map.json")
 source=J(B/"evidence/y1-v045.json")
 source5=J(B/"evidence/y1-v05.json")
 source6=J(B/"evidence/y1-v06.json")
+source7=J(B/"evidence/y1-v07.json")
 reg=J(B/"audits/source-review-register-y1-v045.json")
 originals={r["id"] for r in J(B/"evidence/y1-v03.json")["records"]+J(B/"evidence/y1-v04.json")["records"]}
-current={r["id"] for r in source["records"]+source5["records"]+source6["records"]}
+current={r["id"] for r in source["records"]+source5["records"]+source6["records"]+source7["records"]}
 dossiers={key:J(ROOT/row["path"]) for key,row in index["event_lookup"].items()}
 exam=J(B/"exams/y1-zodiac-cruise.json")
 school=J(B/"institutions/anhs.json")
@@ -34,9 +35,9 @@ def problems(s):
         require(d["status"] in {"OPEN","PARTIALLY_EXPLAINED","RESOLVED","CONFLICT"},"dossier status "+key)
         require(all(x in src for x in d["canonical_event_sources"]),"prior anchor exists "+key)
         for rel in d["later_revelations"]:
-            require(rel["source_id"] in {"ln.y1.v045.sevenseas.en.operator-provided","ln.y1.v05.sevenseas.en.operator-provided","ln.y1.v06.sevenseas.en.operator-provided"},"true source locator "+key)
-            require(all(rid.startswith("y1v45." if ".v045." in rel["source_id"] else ("y1v5." if ".v05." in rel["source_id"] else "y1v6.")) for rid in rel["evidence_refs"]),"source volume matches evidence "+key)
-            require(rel["chapter"] in (range(1,8) if ".v045." in rel["source_id"] or ".v06." in rel["source_id"] else range(1,10)) and bool(rel["pdf_pages"]),"chapter and physical locator "+key)
+            require(rel["source_id"] in {"ln.y1.v045.sevenseas.en.operator-provided","ln.y1.v05.sevenseas.en.operator-provided","ln.y1.v06.sevenseas.en.operator-provided","ln.y1.v07.sevenseas.en.operator-provided"},"true source locator "+key)
+            require(all(rid.startswith("y1v45." if ".v045." in rel["source_id"] else ("y1v5." if ".v05." in rel["source_id"] else ("y1v6." if ".v06." in rel["source_id"] else "y1v7."))) for rid in rel["evidence_refs"]),"source volume matches evidence "+key)
+            require(rel["chapter"] in (range(1,8) if ".v045." in rel["source_id"] or ".v06." in rel["source_id"] or ".v07." in rel["source_id"] else range(1,10)) and bool(rel["pdf_pages"]),"chapter and physical locator "+key)
             require(rel["relationship"] in {"SUPPLEMENTS","RESOLVES_AMBIGUITY","CORRECTS_PRIOR_INTERPRETATION","CHALLENGES_WITH_CONFLICT","CONTEXTUALIZES"},"relation "+key)
             require(all(x in new for x in rel["evidence_refs"]),"later evidence belongs to its actual source "+key)
             require(all(item["since"] and item["status"] for item in rel["actor_knowledge"]),"nonempty actor knowledge gate "+key)

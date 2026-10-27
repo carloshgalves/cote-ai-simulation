@@ -1,0 +1,41 @@
+{
+  "id": "y1v08.case.yukimura.v08-c030",
+  "actor_id": "actor.yukimura",
+  "primary_actor_id": "actor.yukimura",
+  "title": "Keisei reconhece limites e organiza revezamento valorizando capacidades dos colegas.",
+  "context": "Year 1 Volume 8 Mixed Training Camp",
+  "observed_actions": "Keisei reconhece limites e organiza revezamento valorizando capacidades dos colegas.",
+  "observed_result": "Source-bounded; consult primary chapter",
+  "epistemic_limits": "Do not generalize one episode to permanent personality or future replay.",
+  "source": {
+    "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      184,
+      185,
+      186,
+      187,
+      188
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "behavior"
+  ],
+  "information_available": "Historical contact only",
+  "counterfactual_test": "Do not force canonical episode after divergence",
+  "topics": [
+    "behavior",
+    "y1_v08"
+  ],
+  "evidence_refs": [
+    "y1v08.ev.030"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

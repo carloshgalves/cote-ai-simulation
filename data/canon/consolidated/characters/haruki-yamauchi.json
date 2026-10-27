@@ -9,7 +9,8 @@
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -236,6 +237,12 @@
       "context_evidence_refs": [
         "y1v6.ev.032"
       ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.054"
+      ]
     }
   },
   "source_documents": [],
@@ -251,5 +258,15 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.054"
+  ]
 }

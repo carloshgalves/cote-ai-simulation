@@ -12,7 +12,8 @@
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -383,7 +384,9 @@
         "y1v075.case.kei-karuizawa.v075-c004",
         "y1v075.case.kei-karuizawa.v075-c007",
         "y1v075.case.kei-karuizawa.v075-c008",
-        "y1v075.case.kei-karuizawa.v075-c009"
+        "y1v075.case.kei-karuizawa.v075-c009",
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.case.kei-karuizawa.v08-c042"
       ],
       "context_evidence_refs": [
         "y1v6.ev.009",
@@ -399,7 +402,10 @@
         "y1v075.ev.039",
         "y1v075.ev.040",
         "y1v075.ev.041",
-        "y1v075.ev.049"
+        "y1v075.ev.049",
+        "y1v08.ev.020",
+        "y1v08.ev.042",
+        "y1v08.ev.043"
       ]
     },
     "security": {
@@ -413,14 +419,16 @@
         "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
         "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
         "y1v075.case.kei-karuizawa.v075-c004",
-        "y1v075.case.kei-karuizawa.v075-c008"
+        "y1v075.case.kei-karuizawa.v075-c008",
+        "y1v08.case.kei-karuizawa.v08-c020"
       ],
       "context_evidence_refs": [
         "y1v6.ev.059",
         "y1v6.ev.062",
         "y1v075.ev.004",
         "y1v075.ev.008",
-        "y1v075.ev.035"
+        "y1v075.ev.035",
+        "y1v08.ev.020"
       ]
     },
     "investigation": {
@@ -457,6 +465,24 @@
       "context_evidence_refs": [
         "y1v075.ev.033",
         "y1v075.ev.035"
+      ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.case.kei-karuizawa.v08-c042"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.020",
+        "y1v08.ev.042"
+      ]
+    },
+    "analysis": {
+      "behavioral_case_refs": [
+        "y1v08.case.kei-karuizawa.v08-c042"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.042"
       ]
     }
   },
@@ -556,5 +582,15 @@
     "avoid_goal_only_reduction": true,
     "no_post_divergence_auto_memory": true,
     "prevent_mutual_romance_without_both_actor_evidence": true
-  }
+  },
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.043"
+  ]
 }

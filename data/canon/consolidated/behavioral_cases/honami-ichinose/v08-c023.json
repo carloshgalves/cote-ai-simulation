@@ -1,0 +1,41 @@
+{
+  "id": "y1v08.case.honami-ichinose.v08-c023",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "Ichinose media integração de meninas e discute honestidade e exposição pessoal sem constranger interlocutores.",
+  "context": "Year 1 Volume 8 Mixed Training Camp",
+  "observed_actions": "Ichinose media integração de meninas e discute honestidade e exposição pessoal sem constranger interlocutores.",
+  "observed_result": "Source-bounded; consult primary chapter",
+  "epistemic_limits": "Do not generalize one episode to permanent personality or future replay.",
+  "source": {
+    "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      148,
+      149,
+      150,
+      151,
+      152
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "behavior"
+  ],
+  "information_available": "Historical contact only",
+  "counterfactual_test": "Do not force canonical episode after divergence",
+  "topics": [
+    "behavior",
+    "y1_v08"
+  ],
+  "evidence_refs": [
+    "y1v08.ev.023"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

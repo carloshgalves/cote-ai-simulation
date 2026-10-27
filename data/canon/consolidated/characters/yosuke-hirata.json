@@ -10,7 +10,8 @@
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -35,7 +36,8 @@
         "y1v4.case.yosuke-hirata.seek-horikita-cooperation-through-kiyotaka",
         "y1v5.case.yosuke-hirata.mediate-athlete-roles-and-vote",
         "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus",
-        "y1v075.case.yosuke-hirata.v075-c032"
+        "y1v075.case.yosuke-hirata.v075-c032",
+        "y1v08.case.yosuke-hirata.v08-c002"
       ],
       "context_evidence_refs": [
         "y1v1.ev.012",
@@ -71,7 +73,8 @@
         "y1v5.ev.071",
         "y1v6.ev.027",
         "y1v6.ev.069",
-        "y1v075.ev.032"
+        "y1v075.ev.032",
+        "y1v08.ev.002"
       ]
     },
     "social": {
@@ -79,7 +82,8 @@
         "y1v1.case.h.class-introductions",
         "y1v3.case.yosuke-hirata.welcome-rival-injured-student",
         "y1v4.case.yosuke-hirata.prioritize-solitary-classmate-lunch",
-        "y1v4.case.yosuke-hirata.reject-unconditional-shelter-promise"
+        "y1v4.case.yosuke-hirata.reject-unconditional-shelter-promise",
+        "y1v08.case.yosuke-hirata.v08-c007"
       ],
       "context_evidence_refs": [
         "y1v1.ev.012",
@@ -114,7 +118,8 @@
         "y1v5.ev.024",
         "y1v5.ev.025",
         "y1v075.ev.003",
-        "y1v075.ev.005"
+        "y1v075.ev.005",
+        "y1v08.ev.007"
       ]
     },
     "emotion": {
@@ -141,13 +146,15 @@
     "economy": {
       "behavioral_case_refs": [
         "y1v1.case.h.point-crisis-leadership",
-        "y1v3.case.yosuke-hirata.budget-island-allowance"
+        "y1v3.case.yosuke-hirata.budget-island-allowance",
+        "y1v08.case.yosuke-hirata.v08-c002"
       ],
       "context_evidence_refs": [
         "y1v1.ev.055",
         "y1v2.ev.007",
         "y1v3.ev.047",
-        "y1v3.ev.103"
+        "y1v3.ev.103",
+        "y1v08.ev.002"
       ]
     },
     "institution": {
@@ -273,11 +280,13 @@
     },
     "negotiation": {
       "behavioral_case_refs": [
-        "y1v5.case.yosuke-hirata.mediate-athlete-roles-and-vote"
+        "y1v5.case.yosuke-hirata.mediate-athlete-roles-and-vote",
+        "y1v08.case.yosuke-hirata.v08-c007"
       ],
       "context_evidence_refs": [
         "y1v4.ev.091",
-        "y1v5.ev.009"
+        "y1v5.ev.009",
+        "y1v08.ev.007"
       ]
     },
     "motivation": {
@@ -462,6 +471,16 @@
       "context_evidence_refs": [
         "y1v075.ev.033"
       ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.yosuke-hirata.v08-c002",
+        "y1v08.case.yosuke-hirata.v08-c007"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.002",
+        "y1v08.ev.007"
+      ]
     }
   },
   "source_documents": [],
@@ -525,5 +544,13 @@
     "avoid_goal_only_reduction": true,
     "no_post_divergence_auto_memory": true,
     "prevent_mutual_romance_without_both_actor_evidence": true
-  }
+  },
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": []
 }

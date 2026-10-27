@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -104,21 +105,40 @@
     "relationship": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v6.ev.056"
+        "y1v6.ev.056",
+        "y1v08.ev.053"
       ]
     },
     "cooperation": {
       "behavioral_case_refs": [
-        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group"
+        "y1v6.case.miyake.cooperate-with-hasebe-and-yukimura-study-group",
+        "y1v08.case.miyake.v08-c008"
       ],
       "context_evidence_refs": [
-        "y1v6.ev.056"
+        "y1v6.ev.056",
+        "y1v08.ev.008"
       ]
     },
     "social": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v7.ev.004"
+      ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.miyake.v08-c008"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.008"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [
+        "y1v08.case.miyake.v08-c008"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.008"
       ]
     }
   },
@@ -135,5 +155,15 @@
     "contextual_facts": "MENTIONS_NOT_FEATS",
     "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
     "verified_facts": "INDIVIDUAL_AUDIT_REQUIRED"
-  }
+  },
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.053"
+  ]
 }

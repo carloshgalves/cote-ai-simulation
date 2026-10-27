@@ -11,7 +11,8 @@
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -253,7 +254,8 @@
         "y1v2.ev.046",
         "y1v2.ev.048",
         "y1v2.ev.070",
-        "y1v3.ev.005"
+        "y1v3.ev.005",
+        "y1v08.ev.039"
       ]
     },
     "motivation": {
@@ -290,7 +292,8 @@
         "y1v6.ev.066",
         "y1v6.ev.071",
         "y1v6.ev.072",
-        "y1v6.ev.075"
+        "y1v6.ev.075",
+        "y1v08.ev.070"
       ]
     },
     "resources": {
@@ -399,7 +402,8 @@
       "context_evidence_refs": [
         "y1v5.ev.025",
         "y1v6.ev.001",
-        "y1v6.ev.002"
+        "y1v6.ev.002",
+        "y1v08.ev.039"
       ]
     },
     "sports": {
@@ -452,7 +456,8 @@
         "y1v5.ev.053",
         "y1v5.ev.061",
         "y1v6.ev.073",
-        "y1v075.ev.028"
+        "y1v075.ev.028",
+        "y1v08.ev.051"
       ]
     },
     "deception": {
@@ -536,6 +541,12 @@
       "context_evidence_refs": [
         "y1v6.ev.075"
       ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.039"
+      ]
     }
   },
   "source_documents": [],
@@ -575,5 +586,28 @@
     "private_factional_knowledge_not_public": true,
     "not_permanent_personality_rating": true,
     "divergence_requires_new_acquisition": true
-  }
+  },
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [
+    {
+      "evidence_ref": "y1v08.ev.039",
+      "source_pages": [
+        212,
+        213,
+        214,
+        215
+      ],
+      "change": "Kushida rejeita cooperação por medo de quem conhece o passado dela.",
+      "permanent_trait": false,
+      "verified": false
+    }
+  ],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.051"
+  ]
 }

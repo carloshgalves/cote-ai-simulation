@@ -8,7 +8,8 @@
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -73,7 +74,8 @@
         "y1v4.ev.064",
         "y1v4.ev.117",
         "y1v6.ev.034",
-        "y1v6.ev.044"
+        "y1v6.ev.044",
+        "y1v08.ev.069"
       ]
     },
     "governance": {
@@ -100,12 +102,16 @@
     },
     "leadership": {
       "behavioral_case_refs": [
-        "y1v4.case.yukimura.coordinate-rabbit-class-d-discretion"
+        "y1v4.case.yukimura.coordinate-rabbit-class-d-discretion",
+        "y1v08.case.yukimura.v08-c014",
+        "y1v08.case.yukimura.v08-c030"
       ],
       "context_evidence_refs": [
         "y1v4.ev.035",
         "y1v6.ev.038",
-        "y1v6.ev.042"
+        "y1v6.ev.042",
+        "y1v08.ev.014",
+        "y1v08.ev.030"
       ]
     },
     "persuasion": {
@@ -225,15 +231,21 @@
     "relationship": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v6.ev.056"
+        "y1v6.ev.056",
+        "y1v08.ev.049",
+        "y1v08.ev.053"
       ]
     },
     "cooperation": {
       "behavioral_case_refs": [
-        "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring"
+        "y1v6.case.yukimura.switch-from-solitary-achievement-to-tutoring",
+        "y1v08.case.yukimura.v08-c014",
+        "y1v08.case.yukimura.v08-c030"
       ],
       "context_evidence_refs": [
-        "y1v6.ev.056"
+        "y1v6.ev.056",
+        "y1v08.ev.014",
+        "y1v08.ev.030"
       ]
     },
     "identity": {
@@ -257,6 +269,16 @@
       "context_evidence_refs": [
         "y1v7.ev.007"
       ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.yukimura.v08-c014",
+        "y1v08.case.yukimura.v08-c030"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.014",
+        "y1v08.ev.030"
+      ]
     }
   },
   "source_documents": [],
@@ -277,5 +299,16 @@
     "y1v6.goal.yukimura.offer-personalized-teaching",
     "y1v6.goal.yukimura.use-preferred-name-keisei"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.049",
+    "y1v08.rel.053"
+  ]
 }

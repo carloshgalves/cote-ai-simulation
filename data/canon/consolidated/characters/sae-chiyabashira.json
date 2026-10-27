@@ -9,7 +9,8 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -23,7 +24,8 @@
   "domains": {
     "institution": {
       "behavioral_case_refs": [
-        "y1v7.case.sae-chiyabashira.v7-c037"
+        "y1v7.case.sae-chiyabashira.v7-c037",
+        "y1v08.case.sae-chiyabashira.v08-c003"
       ],
       "context_evidence_refs": [
         "y1v1.ev.009",
@@ -71,12 +73,14 @@
         "y1v7.ev.040",
         "y1v7.ev.041",
         "y1v7.ev.082",
-        "y1v7.ev.086"
+        "y1v7.ev.086",
+        "y1v08.ev.003"
       ]
     },
     "economy": {
       "behavioral_case_refs": [
-        "y1v4.case.sae-chiyabashira.describe-bounded-point-exceptions"
+        "y1v4.case.sae-chiyabashira.describe-bounded-point-exceptions",
+        "y1v08.case.sae-chiyabashira.v08-c003"
       ],
       "context_evidence_refs": [
         "y1v1.ev.010",
@@ -98,7 +102,8 @@
         "y1v2.ev.028",
         "y1v3.ev.021",
         "y1v4.ev.086",
-        "y1v4.ev.088"
+        "y1v4.ev.088",
+        "y1v08.ev.003"
       ]
     },
     "academic_reasoning": {
@@ -324,6 +329,14 @@
       "context_evidence_refs": [
         "y1v6.ev.065"
       ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.sae-chiyabashira.v08-c003"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.003"
+      ]
     }
   },
   "source_documents": [],
@@ -343,5 +356,13 @@
   "goal_transition_refs": [
     "y1v7.goal.sae-chiyabashira.v7-g014"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": []
 }

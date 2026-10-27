@@ -1,0 +1,1590 @@
+{
+  "schema_version": "page-index-v1",
+  "source_id": "ln.y1.v08.sevenseas.en.operator-provided",
+  "pages": {
+    "10": {
+      "evidence": [
+        "y1v08.ev.001",
+        "y1v08.ev.045"
+      ],
+      "cases": []
+    },
+    "11": {
+      "evidence": [
+        "y1v08.ev.057",
+        "y1v08.ev.075"
+      ],
+      "cases": []
+    },
+    "14": {
+      "evidence": [
+        "y1v08.ev.057",
+        "y1v08.ev.075"
+      ],
+      "cases": []
+    },
+    "15": {
+      "evidence": [
+        "y1v08.ev.058"
+      ],
+      "cases": []
+    },
+    "16": {
+      "evidence": [
+        "y1v08.ev.058"
+      ],
+      "cases": []
+    },
+    "17": {
+      "evidence": [
+        "y1v08.ev.058"
+      ],
+      "cases": []
+    },
+    "18": {
+      "evidence": [
+        "y1v08.ev.058",
+        "y1v08.ev.067"
+      ],
+      "cases": []
+    },
+    "19": {
+      "evidence": [
+        "y1v08.ev.057",
+        "y1v08.ev.059",
+        "y1v08.ev.067",
+        "y1v08.ev.075"
+      ],
+      "cases": []
+    },
+    "20": {
+      "evidence": [
+        "y1v08.ev.059",
+        "y1v08.ev.060",
+        "y1v08.ev.061"
+      ],
+      "cases": []
+    },
+    "21": {
+      "evidence": [
+        "y1v08.ev.060",
+        "y1v08.ev.061",
+        "y1v08.ev.062"
+      ],
+      "cases": []
+    },
+    "22": {
+      "evidence": [
+        "y1v08.ev.061",
+        "y1v08.ev.062",
+        "y1v08.ev.063",
+        "y1v08.ev.064",
+        "y1v08.ev.073",
+        "y1v08.ev.076"
+      ],
+      "cases": []
+    },
+    "23": {
+      "evidence": [
+        "y1v08.ev.063",
+        "y1v08.ev.064",
+        "y1v08.ev.072"
+      ],
+      "cases": []
+    },
+    "24": {
+      "evidence": [
+        "y1v08.ev.064",
+        "y1v08.ev.065",
+        "y1v08.ev.072",
+        "y1v08.ev.075",
+        "y1v08.ev.076",
+        "y1v08.ev.077"
+      ],
+      "cases": []
+    },
+    "25": {
+      "evidence": [
+        "y1v08.ev.065",
+        "y1v08.ev.066",
+        "y1v08.ev.075",
+        "y1v08.ev.076",
+        "y1v08.ev.077"
+      ],
+      "cases": []
+    },
+    "26": {
+      "evidence": [
+        "y1v08.ev.066",
+        "y1v08.ev.075"
+      ],
+      "cases": []
+    },
+    "27": {
+      "evidence": [
+        "y1v08.ev.002"
+      ],
+      "cases": [
+        "y1v08.case.yosuke-hirata.v08-c002"
+      ]
+    },
+    "28": {
+      "evidence": [
+        "y1v08.ev.002",
+        "y1v08.ev.003"
+      ],
+      "cases": [
+        "y1v08.case.sae-chiyabashira.v08-c003",
+        "y1v08.case.yosuke-hirata.v08-c002"
+      ]
+    },
+    "29": {
+      "evidence": [
+        "y1v08.ev.002",
+        "y1v08.ev.003"
+      ],
+      "cases": [
+        "y1v08.case.sae-chiyabashira.v08-c003",
+        "y1v08.case.yosuke-hirata.v08-c002"
+      ]
+    },
+    "30": {
+      "evidence": [
+        "y1v08.ev.004",
+        "y1v08.ev.043",
+        "y1v08.ev.051",
+        "y1v08.ev.053"
+      ],
+      "cases": [
+        "y1v08.case.suzune-horikita.v08-c004"
+      ]
+    },
+    "31": {
+      "evidence": [
+        "y1v08.ev.004",
+        "y1v08.ev.005",
+        "y1v08.ev.043",
+        "y1v08.ev.051",
+        "y1v08.ev.053"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c005",
+        "y1v08.case.suzune-horikita.v08-c004"
+      ]
+    },
+    "32": {
+      "evidence": [
+        "y1v08.ev.005",
+        "y1v08.ev.043"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c005"
+      ]
+    },
+    "35": {
+      "evidence": [
+        "y1v08.ev.006"
+      ],
+      "cases": [
+        "y1v08.case.arisu-sakayanagi.v08-c006"
+      ]
+    },
+    "36": {
+      "evidence": [
+        "y1v08.ev.006"
+      ],
+      "cases": [
+        "y1v08.case.arisu-sakayanagi.v08-c006"
+      ]
+    },
+    "37": {
+      "evidence": [
+        "y1v08.ev.006"
+      ],
+      "cases": [
+        "y1v08.case.arisu-sakayanagi.v08-c006"
+      ]
+    },
+    "38": {
+      "evidence": [
+        "y1v08.ev.006"
+      ],
+      "cases": [
+        "y1v08.case.arisu-sakayanagi.v08-c006"
+      ]
+    },
+    "39": {
+      "evidence": [
+        "y1v08.ev.007"
+      ],
+      "cases": [
+        "y1v08.case.yosuke-hirata.v08-c007"
+      ]
+    },
+    "40": {
+      "evidence": [
+        "y1v08.ev.007"
+      ],
+      "cases": [
+        "y1v08.case.yosuke-hirata.v08-c007"
+      ]
+    },
+    "41": {
+      "evidence": [
+        "y1v08.ev.007"
+      ],
+      "cases": [
+        "y1v08.case.yosuke-hirata.v08-c007"
+      ]
+    },
+    "42": {
+      "evidence": [
+        "y1v08.ev.007"
+      ],
+      "cases": [
+        "y1v08.case.yosuke-hirata.v08-c007"
+      ]
+    },
+    "46": {
+      "evidence": [
+        "y1v08.ev.007"
+      ],
+      "cases": [
+        "y1v08.case.yosuke-hirata.v08-c007"
+      ]
+    },
+    "49": {
+      "evidence": [
+        "y1v08.ev.008"
+      ],
+      "cases": [
+        "y1v08.case.miyake.v08-c008"
+      ]
+    },
+    "50": {
+      "evidence": [
+        "y1v08.ev.008",
+        "y1v08.ev.009"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c009",
+        "y1v08.case.miyake.v08-c008"
+      ]
+    },
+    "51": {
+      "evidence": [
+        "y1v08.ev.009"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c009"
+      ]
+    },
+    "55": {
+      "evidence": [
+        "y1v08.ev.009"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c009"
+      ]
+    },
+    "57": {
+      "evidence": [
+        "y1v08.ev.010",
+        "y1v08.ev.044",
+        "y1v08.ev.045",
+        "y1v08.ev.074"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c010"
+      ]
+    },
+    "58": {
+      "evidence": [
+        "y1v08.ev.010",
+        "y1v08.ev.045"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c010"
+      ]
+    },
+    "59": {
+      "evidence": [
+        "y1v08.ev.010",
+        "y1v08.ev.011",
+        "y1v08.ev.044",
+        "y1v08.ev.045",
+        "y1v08.ev.074"
+      ],
+      "cases": [
+        "y1v08.case.manabu-horikita.v08-c011",
+        "y1v08.case.nagumo.v08-c010"
+      ]
+    },
+    "60": {
+      "evidence": [
+        "y1v08.ev.010",
+        "y1v08.ev.011",
+        "y1v08.ev.044",
+        "y1v08.ev.045",
+        "y1v08.ev.074"
+      ],
+      "cases": [
+        "y1v08.case.manabu-horikita.v08-c011",
+        "y1v08.case.nagumo.v08-c010"
+      ]
+    },
+    "61": {
+      "evidence": [
+        "y1v08.ev.012"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c012"
+      ]
+    },
+    "62": {
+      "evidence": [
+        "y1v08.ev.012"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c012"
+      ]
+    },
+    "63": {
+      "evidence": [
+        "y1v08.ev.012",
+        "y1v08.ev.013"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c012",
+        "y1v08.case.rokusuke-koenji.v08-c013"
+      ]
+    },
+    "64": {
+      "evidence": [
+        "y1v08.ev.012",
+        "y1v08.ev.013"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c012",
+        "y1v08.case.rokusuke-koenji.v08-c013"
+      ]
+    },
+    "65": {
+      "evidence": [
+        "y1v08.ev.012",
+        "y1v08.ev.013",
+        "y1v08.ev.074",
+        "y1v08.ev.078"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c012",
+        "y1v08.case.rokusuke-koenji.v08-c013"
+      ]
+    },
+    "66": {
+      "evidence": [
+        "y1v08.ev.012",
+        "y1v08.ev.013",
+        "y1v08.ev.078"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c012",
+        "y1v08.case.rokusuke-koenji.v08-c013"
+      ]
+    },
+    "67": {
+      "evidence": [
+        "y1v08.ev.012",
+        "y1v08.ev.013",
+        "y1v08.ev.078"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c012",
+        "y1v08.case.rokusuke-koenji.v08-c013"
+      ]
+    },
+    "68": {
+      "evidence": [
+        "y1v08.ev.013",
+        "y1v08.ev.014"
+      ],
+      "cases": [
+        "y1v08.case.rokusuke-koenji.v08-c013",
+        "y1v08.case.yukimura.v08-c014"
+      ]
+    },
+    "78": {
+      "evidence": [
+        "y1v08.ev.014",
+        "y1v08.ev.015"
+      ],
+      "cases": [
+        "y1v08.case.rokusuke-koenji.v08-c015",
+        "y1v08.case.yukimura.v08-c014"
+      ]
+    },
+    "79": {
+      "evidence": [
+        "y1v08.ev.014"
+      ],
+      "cases": [
+        "y1v08.case.yukimura.v08-c014"
+      ]
+    },
+    "81": {
+      "evidence": [
+        "y1v08.ev.067"
+      ],
+      "cases": []
+    },
+    "82": {
+      "evidence": [
+        "y1v08.ev.015",
+        "y1v08.ev.079"
+      ],
+      "cases": [
+        "y1v08.case.rokusuke-koenji.v08-c015"
+      ]
+    },
+    "83": {
+      "evidence": [
+        "y1v08.ev.067",
+        "y1v08.ev.079"
+      ],
+      "cases": []
+    },
+    "84": {
+      "evidence": [
+        "y1v08.ev.014",
+        "y1v08.ev.067",
+        "y1v08.ev.079"
+      ],
+      "cases": [
+        "y1v08.case.yukimura.v08-c014"
+      ]
+    },
+    "85": {
+      "evidence": [
+        "y1v08.ev.014",
+        "y1v08.ev.079"
+      ],
+      "cases": [
+        "y1v08.case.yukimura.v08-c014"
+      ]
+    },
+    "86": {
+      "evidence": [
+        "y1v08.ev.067",
+        "y1v08.ev.079"
+      ],
+      "cases": []
+    },
+    "87": {
+      "evidence": [
+        "y1v08.ev.015",
+        "y1v08.ev.067",
+        "y1v08.ev.079"
+      ],
+      "cases": [
+        "y1v08.case.rokusuke-koenji.v08-c015"
+      ]
+    },
+    "88": {
+      "evidence": [
+        "y1v08.ev.015"
+      ],
+      "cases": [
+        "y1v08.case.rokusuke-koenji.v08-c015"
+      ]
+    },
+    "92": {
+      "evidence": [
+        "y1v08.ev.054"
+      ],
+      "cases": []
+    },
+    "93": {
+      "evidence": [
+        "y1v08.ev.054"
+      ],
+      "cases": []
+    },
+    "94": {
+      "evidence": [
+        "y1v08.ev.054"
+      ],
+      "cases": []
+    },
+    "96": {
+      "evidence": [
+        "y1v08.ev.016",
+        "y1v08.ev.047"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c016"
+      ]
+    },
+    "97": {
+      "evidence": [
+        "y1v08.ev.016"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c016"
+      ]
+    },
+    "98": {
+      "evidence": [
+        "y1v08.ev.016",
+        "y1v08.ev.047"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c016"
+      ]
+    },
+    "99": {
+      "evidence": [
+        "y1v08.ev.016"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c016"
+      ]
+    },
+    "100": {
+      "evidence": [
+        "y1v08.ev.016"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c016"
+      ]
+    },
+    "101": {
+      "evidence": [
+        "y1v08.ev.047"
+      ],
+      "cases": []
+    },
+    "105": {
+      "evidence": [
+        "y1v08.ev.016",
+        "y1v08.ev.017"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c017",
+        "y1v08.case.nagumo.v08-c016"
+      ]
+    },
+    "106": {
+      "evidence": [
+        "y1v08.ev.016",
+        "y1v08.ev.017"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c017",
+        "y1v08.case.nagumo.v08-c016"
+      ]
+    },
+    "107": {
+      "evidence": [
+        "y1v08.ev.016",
+        "y1v08.ev.017"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c017",
+        "y1v08.case.nagumo.v08-c016"
+      ]
+    },
+    "108": {
+      "evidence": [
+        "y1v08.ev.016",
+        "y1v08.ev.017"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c017",
+        "y1v08.case.nagumo.v08-c016"
+      ]
+    },
+    "109": {
+      "evidence": [
+        "y1v08.ev.016",
+        "y1v08.ev.017"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c017",
+        "y1v08.case.nagumo.v08-c016"
+      ]
+    },
+    "116": {
+      "evidence": [
+        "y1v08.ev.018",
+        "y1v08.ev.067",
+        "y1v08.ev.079"
+      ],
+      "cases": [
+        "y1v08.case.kiriyama.v08-c018"
+      ]
+    },
+    "117": {
+      "evidence": [
+        "y1v08.ev.018",
+        "y1v08.ev.047"
+      ],
+      "cases": [
+        "y1v08.case.kiriyama.v08-c018"
+      ]
+    },
+    "118": {
+      "evidence": [
+        "y1v08.ev.018",
+        "y1v08.ev.047",
+        "y1v08.ev.074"
+      ],
+      "cases": [
+        "y1v08.case.kiriyama.v08-c018"
+      ]
+    },
+    "120": {
+      "evidence": [
+        "y1v08.ev.019",
+        "y1v08.ev.020",
+        "y1v08.ev.043"
+      ],
+      "cases": [
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c019"
+      ]
+    },
+    "121": {
+      "evidence": [
+        "y1v08.ev.019",
+        "y1v08.ev.020",
+        "y1v08.ev.043"
+      ],
+      "cases": [
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c019"
+      ]
+    },
+    "123": {
+      "evidence": [
+        "y1v08.ev.019",
+        "y1v08.ev.020",
+        "y1v08.ev.043"
+      ],
+      "cases": [
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c019"
+      ]
+    },
+    "124": {
+      "evidence": [
+        "y1v08.ev.019",
+        "y1v08.ev.020",
+        "y1v08.ev.043"
+      ],
+      "cases": [
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c019"
+      ]
+    },
+    "125": {
+      "evidence": [
+        "y1v08.ev.019",
+        "y1v08.ev.020",
+        "y1v08.ev.043"
+      ],
+      "cases": [
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c019"
+      ]
+    },
+    "126": {
+      "evidence": [
+        "y1v08.ev.019",
+        "y1v08.ev.020"
+      ],
+      "cases": [
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c019"
+      ]
+    },
+    "127": {
+      "evidence": [
+        "y1v08.ev.019"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c019"
+      ]
+    },
+    "142": {
+      "evidence": [
+        "y1v08.ev.021",
+        "y1v08.ev.022",
+        "y1v08.ev.044"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c022",
+        "y1v08.case.manabu-horikita.v08-c021"
+      ]
+    },
+    "143": {
+      "evidence": [
+        "y1v08.ev.021",
+        "y1v08.ev.022"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c022",
+        "y1v08.case.manabu-horikita.v08-c021"
+      ]
+    },
+    "144": {
+      "evidence": [
+        "y1v08.ev.021",
+        "y1v08.ev.022"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c022",
+        "y1v08.case.manabu-horikita.v08-c021"
+      ]
+    },
+    "145": {
+      "evidence": [
+        "y1v08.ev.021",
+        "y1v08.ev.022",
+        "y1v08.ev.044"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c022",
+        "y1v08.case.manabu-horikita.v08-c021"
+      ]
+    },
+    "146": {
+      "evidence": [
+        "y1v08.ev.021",
+        "y1v08.ev.022",
+        "y1v08.ev.044"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c022",
+        "y1v08.case.manabu-horikita.v08-c021"
+      ]
+    },
+    "147": {
+      "evidence": [
+        "y1v08.ev.021",
+        "y1v08.ev.022",
+        "y1v08.ev.044",
+        "y1v08.ev.080"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c022",
+        "y1v08.case.manabu-horikita.v08-c021"
+      ]
+    },
+    "148": {
+      "evidence": [
+        "y1v08.ev.023",
+        "y1v08.ev.052"
+      ],
+      "cases": [
+        "y1v08.case.honami-ichinose.v08-c023"
+      ]
+    },
+    "149": {
+      "evidence": [
+        "y1v08.ev.023",
+        "y1v08.ev.052"
+      ],
+      "cases": [
+        "y1v08.case.honami-ichinose.v08-c023"
+      ]
+    },
+    "150": {
+      "evidence": [
+        "y1v08.ev.023",
+        "y1v08.ev.052"
+      ],
+      "cases": [
+        "y1v08.case.honami-ichinose.v08-c023"
+      ]
+    },
+    "151": {
+      "evidence": [
+        "y1v08.ev.023",
+        "y1v08.ev.052"
+      ],
+      "cases": [
+        "y1v08.case.honami-ichinose.v08-c023"
+      ]
+    },
+    "152": {
+      "evidence": [
+        "y1v08.ev.023",
+        "y1v08.ev.052"
+      ],
+      "cases": [
+        "y1v08.case.honami-ichinose.v08-c023"
+      ]
+    },
+    "153": {
+      "evidence": [
+        "y1v08.ev.080"
+      ],
+      "cases": []
+    },
+    "154": {
+      "evidence": [
+        "y1v08.ev.080"
+      ],
+      "cases": []
+    },
+    "155": {
+      "evidence": [
+        "y1v08.ev.024",
+        "y1v08.ev.049",
+        "y1v08.ev.056"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c024"
+      ]
+    },
+    "156": {
+      "evidence": [
+        "y1v08.ev.024",
+        "y1v08.ev.056"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c024"
+      ]
+    },
+    "157": {
+      "evidence": [
+        "y1v08.ev.024",
+        "y1v08.ev.056"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c024"
+      ]
+    },
+    "158": {
+      "evidence": [
+        "y1v08.ev.024",
+        "y1v08.ev.056"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c024"
+      ]
+    },
+    "159": {
+      "evidence": [
+        "y1v08.ev.024",
+        "y1v08.ev.056"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c024"
+      ]
+    },
+    "160": {
+      "evidence": [
+        "y1v08.ev.024",
+        "y1v08.ev.056"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c024"
+      ]
+    },
+    "162": {
+      "evidence": [
+        "y1v08.ev.025",
+        "y1v08.ev.026"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c026",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c025"
+      ]
+    },
+    "163": {
+      "evidence": [
+        "y1v08.ev.025",
+        "y1v08.ev.026"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c026",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c025"
+      ]
+    },
+    "164": {
+      "evidence": [
+        "y1v08.ev.025",
+        "y1v08.ev.026"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c026",
+        "y1v08.case.kiyotaka-ayanokoji.v08-c025"
+      ]
+    },
+    "165": {
+      "evidence": [
+        "y1v08.ev.053"
+      ],
+      "cases": []
+    },
+    "166": {
+      "evidence": [
+        "y1v08.ev.053"
+      ],
+      "cases": []
+    },
+    "167": {
+      "evidence": [
+        "y1v08.ev.053"
+      ],
+      "cases": []
+    },
+    "168": {
+      "evidence": [
+        "y1v08.ev.031",
+        "y1v08.ev.049"
+      ],
+      "cases": []
+    },
+    "169": {
+      "evidence": [
+        "y1v08.ev.031",
+        "y1v08.ev.049"
+      ],
+      "cases": []
+    },
+    "170": {
+      "evidence": [
+        "y1v08.ev.031",
+        "y1v08.ev.049"
+      ],
+      "cases": []
+    },
+    "171": {
+      "evidence": [
+        "y1v08.ev.031",
+        "y1v08.ev.049"
+      ],
+      "cases": []
+    },
+    "173": {
+      "evidence": [
+        "y1v08.ev.027",
+        "y1v08.ev.048"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c027"
+      ]
+    },
+    "174": {
+      "evidence": [
+        "y1v08.ev.027",
+        "y1v08.ev.028",
+        "y1v08.ev.048"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c027",
+        "y1v08.case.nazuna-asahina.v08-c028"
+      ]
+    },
+    "175": {
+      "evidence": [
+        "y1v08.ev.027",
+        "y1v08.ev.028",
+        "y1v08.ev.048"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c027",
+        "y1v08.case.nazuna-asahina.v08-c028"
+      ]
+    },
+    "176": {
+      "evidence": [
+        "y1v08.ev.027",
+        "y1v08.ev.028",
+        "y1v08.ev.048"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c027",
+        "y1v08.case.nazuna-asahina.v08-c028"
+      ]
+    },
+    "178": {
+      "evidence": [
+        "y1v08.ev.027",
+        "y1v08.ev.028",
+        "y1v08.ev.048"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c027",
+        "y1v08.case.nazuna-asahina.v08-c028"
+      ]
+    },
+    "179": {
+      "evidence": [
+        "y1v08.ev.027",
+        "y1v08.ev.028",
+        "y1v08.ev.048"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c027",
+        "y1v08.case.nazuna-asahina.v08-c028"
+      ]
+    },
+    "180": {
+      "evidence": [
+        "y1v08.ev.027",
+        "y1v08.ev.028",
+        "y1v08.ev.048"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c027",
+        "y1v08.case.nazuna-asahina.v08-c028"
+      ]
+    },
+    "181": {
+      "evidence": [
+        "y1v08.ev.027",
+        "y1v08.ev.028",
+        "y1v08.ev.048"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c027",
+        "y1v08.case.nazuna-asahina.v08-c028"
+      ]
+    },
+    "182": {
+      "evidence": [
+        "y1v08.ev.029"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c029"
+      ]
+    },
+    "183": {
+      "evidence": [
+        "y1v08.ev.029",
+        "y1v08.ev.049"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c029"
+      ]
+    },
+    "184": {
+      "evidence": [
+        "y1v08.ev.029",
+        "y1v08.ev.030"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c029",
+        "y1v08.case.yukimura.v08-c030"
+      ]
+    },
+    "185": {
+      "evidence": [
+        "y1v08.ev.029",
+        "y1v08.ev.030",
+        "y1v08.ev.031",
+        "y1v08.ev.049"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c029",
+        "y1v08.case.yukimura.v08-c030"
+      ]
+    },
+    "186": {
+      "evidence": [
+        "y1v08.ev.030"
+      ],
+      "cases": [
+        "y1v08.case.yukimura.v08-c030"
+      ]
+    },
+    "187": {
+      "evidence": [
+        "y1v08.ev.030"
+      ],
+      "cases": [
+        "y1v08.case.yukimura.v08-c030"
+      ]
+    },
+    "188": {
+      "evidence": [
+        "y1v08.ev.030",
+        "y1v08.ev.031",
+        "y1v08.ev.049"
+      ],
+      "cases": [
+        "y1v08.case.yukimura.v08-c030"
+      ]
+    },
+    "189": {
+      "evidence": [
+        "y1v08.ev.032"
+      ],
+      "cases": [
+        "y1v08.case.rokusuke-koenji.v08-c032"
+      ]
+    },
+    "190": {
+      "evidence": [
+        "y1v08.ev.032"
+      ],
+      "cases": [
+        "y1v08.case.rokusuke-koenji.v08-c032"
+      ]
+    },
+    "191": {
+      "evidence": [
+        "y1v08.ev.032"
+      ],
+      "cases": [
+        "y1v08.case.rokusuke-koenji.v08-c032"
+      ]
+    },
+    "192": {
+      "evidence": [
+        "y1v08.ev.031",
+        "y1v08.ev.049"
+      ],
+      "cases": []
+    },
+    "194": {
+      "evidence": [
+        "y1v08.ev.033"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c033"
+      ]
+    },
+    "195": {
+      "evidence": [
+        "y1v08.ev.033"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c033"
+      ]
+    },
+    "196": {
+      "evidence": [
+        "y1v08.ev.033"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c033"
+      ]
+    },
+    "197": {
+      "evidence": [
+        "y1v08.ev.033"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c033"
+      ]
+    },
+    "198": {
+      "evidence": [
+        "y1v08.ev.033",
+        "y1v08.ev.046"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c033"
+      ]
+    },
+    "199": {
+      "evidence": [
+        "y1v08.ev.034",
+        "y1v08.ev.046"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c034"
+      ]
+    },
+    "200": {
+      "evidence": [
+        "y1v08.ev.034",
+        "y1v08.ev.046"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c034"
+      ]
+    },
+    "201": {
+      "evidence": [
+        "y1v08.ev.034",
+        "y1v08.ev.046"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c034"
+      ]
+    },
+    "202": {
+      "evidence": [
+        "y1v08.ev.034",
+        "y1v08.ev.046"
+      ],
+      "cases": [
+        "y1v08.case.kiyotaka-ayanokoji.v08-c034"
+      ]
+    },
+    "203": {
+      "evidence": [
+        "y1v08.ev.035",
+        "y1v08.ev.050"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c035"
+      ]
+    },
+    "204": {
+      "evidence": [
+        "y1v08.ev.035",
+        "y1v08.ev.036",
+        "y1v08.ev.050"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c035",
+        "y1v08.case.kakeru-ryuen.v08-c036"
+      ]
+    },
+    "205": {
+      "evidence": [
+        "y1v08.ev.035",
+        "y1v08.ev.036",
+        "y1v08.ev.050"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c035",
+        "y1v08.case.kakeru-ryuen.v08-c036"
+      ]
+    },
+    "206": {
+      "evidence": [
+        "y1v08.ev.035",
+        "y1v08.ev.050"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c035"
+      ]
+    },
+    "207": {
+      "evidence": [
+        "y1v08.ev.035",
+        "y1v08.ev.036",
+        "y1v08.ev.050"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c035",
+        "y1v08.case.kakeru-ryuen.v08-c036"
+      ]
+    },
+    "208": {
+      "evidence": [
+        "y1v08.ev.035",
+        "y1v08.ev.036",
+        "y1v08.ev.037",
+        "y1v08.ev.050",
+        "y1v08.ev.055"
+      ],
+      "cases": [
+        "y1v08.case.hashimoto.v08-c035",
+        "y1v08.case.kakeru-ryuen.v08-c036",
+        "y1v08.case.nagumo.v08-c037"
+      ]
+    },
+    "209": {
+      "evidence": [
+        "y1v08.ev.036",
+        "y1v08.ev.037"
+      ],
+      "cases": [
+        "y1v08.case.kakeru-ryuen.v08-c036",
+        "y1v08.case.nagumo.v08-c037"
+      ]
+    },
+    "210": {
+      "evidence": [
+        "y1v08.ev.037",
+        "y1v08.ev.074"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c037"
+      ]
+    },
+    "211": {
+      "evidence": [
+        "y1v08.ev.037"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c037"
+      ]
+    },
+    "212": {
+      "evidence": [
+        "y1v08.ev.038",
+        "y1v08.ev.039",
+        "y1v08.ev.051"
+      ],
+      "cases": []
+    },
+    "213": {
+      "evidence": [
+        "y1v08.ev.038",
+        "y1v08.ev.039",
+        "y1v08.ev.051"
+      ],
+      "cases": []
+    },
+    "214": {
+      "evidence": [
+        "y1v08.ev.038",
+        "y1v08.ev.039",
+        "y1v08.ev.051"
+      ],
+      "cases": []
+    },
+    "215": {
+      "evidence": [
+        "y1v08.ev.038",
+        "y1v08.ev.039",
+        "y1v08.ev.051"
+      ],
+      "cases": []
+    },
+    "216": {
+      "evidence": [
+        "y1v08.ev.049"
+      ],
+      "cases": []
+    },
+    "217": {
+      "evidence": [
+        "y1v08.ev.067",
+        "y1v08.ev.068",
+        "y1v08.ev.080"
+      ],
+      "cases": []
+    },
+    "218": {
+      "evidence": [
+        "y1v08.ev.067",
+        "y1v08.ev.068",
+        "y1v08.ev.080"
+      ],
+      "cases": []
+    },
+    "219": {
+      "evidence": [
+        "y1v08.ev.068"
+      ],
+      "cases": []
+    },
+    "220": {
+      "evidence": [
+        "y1v08.ev.068"
+      ],
+      "cases": []
+    },
+    "221": {
+      "evidence": [
+        "y1v08.ev.068"
+      ],
+      "cases": []
+    },
+    "222": {
+      "evidence": [
+        "y1v08.ev.068"
+      ],
+      "cases": []
+    },
+    "223": {
+      "evidence": [
+        "y1v08.ev.032",
+        "y1v08.ev.068"
+      ],
+      "cases": [
+        "y1v08.case.rokusuke-koenji.v08-c032"
+      ]
+    },
+    "224": {
+      "evidence": [
+        "y1v08.ev.032",
+        "y1v08.ev.068"
+      ],
+      "cases": [
+        "y1v08.case.rokusuke-koenji.v08-c032"
+      ]
+    },
+    "225": {
+      "evidence": [
+        "y1v08.ev.032",
+        "y1v08.ev.068"
+      ],
+      "cases": [
+        "y1v08.case.rokusuke-koenji.v08-c032"
+      ]
+    },
+    "226": {
+      "evidence": [
+        "y1v08.ev.032",
+        "y1v08.ev.068"
+      ],
+      "cases": [
+        "y1v08.case.rokusuke-koenji.v08-c032"
+      ]
+    },
+    "227": {
+      "evidence": [
+        "y1v08.ev.040",
+        "y1v08.ev.069"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c040"
+      ]
+    },
+    "228": {
+      "evidence": [
+        "y1v08.ev.040",
+        "y1v08.ev.069"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c040"
+      ]
+    },
+    "229": {
+      "evidence": [
+        "y1v08.ev.040",
+        "y1v08.ev.045",
+        "y1v08.ev.055",
+        "y1v08.ev.069",
+        "y1v08.ev.070"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c040"
+      ]
+    },
+    "230": {
+      "evidence": [
+        "y1v08.ev.040",
+        "y1v08.ev.070"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c040"
+      ]
+    },
+    "231": {
+      "evidence": [
+        "y1v08.ev.040",
+        "y1v08.ev.046",
+        "y1v08.ev.055",
+        "y1v08.ev.070",
+        "y1v08.ev.071"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c040"
+      ]
+    },
+    "232": {
+      "evidence": [
+        "y1v08.ev.040",
+        "y1v08.ev.071"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c040"
+      ]
+    },
+    "233": {
+      "evidence": [
+        "y1v08.ev.040",
+        "y1v08.ev.046",
+        "y1v08.ev.071"
+      ],
+      "cases": [
+        "y1v08.case.nagumo.v08-c040"
+      ]
+    },
+    "235": {
+      "evidence": [
+        "y1v08.ev.040",
+        "y1v08.ev.041",
+        "y1v08.ev.045",
+        "y1v08.ev.071"
+      ],
+      "cases": [
+        "y1v08.case.manabu-horikita.v08-c041",
+        "y1v08.case.nagumo.v08-c040"
+      ]
+    },
+    "236": {
+      "evidence": [
+        "y1v08.ev.040",
+        "y1v08.ev.041",
+        "y1v08.ev.045",
+        "y1v08.ev.071"
+      ],
+      "cases": [
+        "y1v08.case.manabu-horikita.v08-c041",
+        "y1v08.case.nagumo.v08-c040"
+      ]
+    },
+    "237": {
+      "evidence": [
+        "y1v08.ev.041",
+        "y1v08.ev.042",
+        "y1v08.ev.043",
+        "y1v08.ev.045",
+        "y1v08.ev.046",
+        "y1v08.ev.071",
+        "y1v08.ev.077"
+      ],
+      "cases": [
+        "y1v08.case.kei-karuizawa.v08-c042",
+        "y1v08.case.manabu-horikita.v08-c041"
+      ]
+    },
+    "238": {
+      "evidence": [
+        "y1v08.ev.040",
+        "y1v08.ev.042",
+        "y1v08.ev.043",
+        "y1v08.ev.055",
+        "y1v08.ev.072"
+      ],
+      "cases": [
+        "y1v08.case.kei-karuizawa.v08-c042",
+        "y1v08.case.nagumo.v08-c040"
+      ]
+    },
+    "239": {
+      "evidence": [
+        "y1v08.ev.040",
+        "y1v08.ev.042",
+        "y1v08.ev.043",
+        "y1v08.ev.055",
+        "y1v08.ev.072"
+      ],
+      "cases": [
+        "y1v08.case.kei-karuizawa.v08-c042",
+        "y1v08.case.nagumo.v08-c040"
+      ]
+    },
+    "240": {
+      "evidence": [
+        "y1v08.ev.040",
+        "y1v08.ev.041",
+        "y1v08.ev.042",
+        "y1v08.ev.043",
+        "y1v08.ev.055",
+        "y1v08.ev.071",
+        "y1v08.ev.072",
+        "y1v08.ev.074",
+        "y1v08.ev.077"
+      ],
+      "cases": [
+        "y1v08.case.kei-karuizawa.v08-c042",
+        "y1v08.case.manabu-horikita.v08-c041",
+        "y1v08.case.nagumo.v08-c040"
+      ]
+    }
+  }
+}

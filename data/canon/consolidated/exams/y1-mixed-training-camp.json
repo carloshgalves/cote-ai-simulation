@@ -1,0 +1,400 @@
+{
+  "schema_version": "canon-mixed-training-camp-reference-v1",
+  "exam_id": "exam.y1.mixed-training-camp",
+  "source_id": "ln.y1.v08.sevenseas.en.operator-provided",
+  "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
+  "title": "Y1 V8 Mixed Training Camp (Mixed Camp)",
+  "source_locator_basis": "1-based physical PDF pages",
+  "pdf_total_pages": 244,
+  "original_pdf_committed": false,
+  "scope": {
+    "cohorts": [
+      "YEAR_1",
+      "YEAR_2",
+      "YEAR_3"
+    ],
+    "duration_days": 8,
+    "duration_nights": 7,
+    "gender_segregated_small_groups": true,
+    "small_group_sets_per_grade_and_gender": 6,
+    "final_large_groups_per_gender": 6,
+    "large_group_size_approx_min": 30,
+    "large_group_size_approx_max": 45,
+    "individual_group_counts_not_fully_exhaustive": true,
+    "pdf_pages": [
+      11,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ]
+  },
+  "grouping": {
+    "composition_requires_multiple_classes": true,
+    "minimum_classes_per_small_group": 2,
+    "formation_requires_unanimous_agreement": true,
+    "final_membership_fixed": true,
+    "absent_ill_student_not_replaced": true,
+    "small_group_headcount_by_grade_gender_total": [
+      {
+        "min_school_population": 60,
+        "max_school_population": 69,
+        "min_group_size": 8,
+        "max_group_size": 13
+      },
+      {
+        "min_school_population": 70,
+        "max_school_population": 79,
+        "min_group_size": 9,
+        "max_group_size": 14
+      },
+      {
+        "min_school_population": 80,
+        "max_school_population": null,
+        "min_group_size": 10,
+        "max_group_size": 15
+      }
+    ],
+    "caveat": "Source supplies separate table for population below 60; not reconstructed here.",
+    "final_large_group_formation": "Combine one small group from each of three grades, subject to formation order and choice; no automatic balanced assignment.",
+    "pages": [
+      15,
+      16,
+      17,
+      19,
+      20,
+      35,
+      55,
+      56,
+      57
+    ]
+  },
+  "pedagogical_principles": [
+    "ETHICS",
+    "FORTITUDE",
+    "DISCIPLINE",
+    "INITIATIVE"
+  ],
+  "activities": [
+    "ZAZEN",
+    "WRITTEN_TEST",
+    "SPEECH",
+    "LONG_DISTANCE_RELAY",
+    "CLEANING",
+    "COOKING",
+    "CONDUCT",
+    "PHYSICAL_TRAINING"
+  ],
+  "final_assessment_parts": [
+    "ZAZEN",
+    "WRITTEN_TEST",
+    "LONG_DISTANCE_RELAY",
+    "SPEECH"
+  ],
+  "final_day_sequence_first_year": [
+    "ZAZEN",
+    "WRITTEN_TEST",
+    "LONG_DISTANCE_RELAY",
+    "SPEECH"
+  ],
+  "other_grade_sequences": "DIFFER; FULL_BY_GRADE_ORDER_NOT_RECONSTRUCTED",
+  "final_score_weighting": "UNPUBLISHED",
+  "scoring_threshold_numeric": "UNPUBLISHED",
+  "base_rank_rewards_per_student": [
+    {
+      "rank": 1,
+      "private_points": 10000,
+      "class_points": 3
+    },
+    {
+      "rank": 2,
+      "private_points": 5000,
+      "class_points": 1
+    },
+    {
+      "rank": 3,
+      "private_points": 3000,
+      "class_points": 0
+    },
+    {
+      "rank": 4,
+      "private_points": -5000,
+      "class_points": 0
+    },
+    {
+      "rank": 5,
+      "private_points": -10000,
+      "class_points": -3
+    },
+    {
+      "rank": 6,
+      "private_points": -20000,
+      "class_points": -5
+    }
+  ],
+  "ranking_basis": "AVERAGE_OF_ALL_MEMBERS_OF_EACH_LARGE_GROUP",
+  "award_multipliers": {
+    "apply_only_to_positive_placements": [
+      1,
+      2,
+      3
+    ],
+    "small_group_class_diversity": [
+      {
+        "classes": 2,
+        "multiplier": 1
+      },
+      {
+        "classes": 3,
+        "multiplier": 2
+      },
+      {
+        "classes": 4,
+        "multiplier": 3
+      }
+    ],
+    "small_group_size_examples": [
+      {
+        "members": 9,
+        "multiplier": 0.9
+      },
+      {
+        "members": 10,
+        "multiplier": 1
+      },
+      {
+        "members": 15,
+        "multiplier": 1.5
+      }
+    ],
+    "general_size_formula": "SIZE_DIVIDED_BY_TEN_PER_TEACHER_EXAMPLE_ONLY",
+    "rounding": "ROUND_PER_STUDENT_CLASS_POINTS_TO_WHOLE_BEFORE_COHORT_SUM_AS_PUBLISHED_EXAMPLE",
+    "confirmed_max_exemplar": {
+      "small_group_members": 15,
+      "principal_class_members": 12,
+      "classes_represented": 4,
+      "private_points_total_for_principal_class": 1080000,
+      "class_points_total_for_principal_class": 336
+    },
+    "do_not_multiply_negative_rewards": true,
+    "pages": [
+      20,
+      21,
+      22,
+      23
+    ]
+  },
+  "representative": {
+    "one_per_small_group": true,
+    "selection_due": "FOLLOWING_MORNING",
+    "failure_to_select": "ENTIRE_SMALL_GROUP_DISQUALIFIED_AND_ALL_MEMBERS_EXPELLED",
+    "double_positive_rewards_for_representative_and_same_class_students": true,
+    "representative_expulsion_rule": {
+      "trigger": "LARGE_GROUP_LAST_AND_THIS_SMALL_GROUP_AVERAGE_BELOW_SCHOOL_THRESHOLD",
+      "subject": "SMALL_GROUP_REPRESENTATIVE",
+      "solidarity_can_name_another_person": true,
+      "solidarity_requires_school_to_deem_person_contributory": true,
+      "unrestricted_choice": false
+    },
+    "additional_class_penalty_on_expulsion": -100,
+    "pages": [
+      22,
+      23,
+      24,
+      25
+    ]
+  },
+  "revocation_of_expulsion": {
+    "private_points": 20000000,
+    "class_points": 300,
+    "prevents_expulsion": true,
+    "does_not_reverse_existing_class_penalties": true,
+    "pooling_private_points_permitted_when_not_prohibited": true,
+    "distinct_from_individual_class_transfer": true,
+    "pages": [
+      25,
+      26,
+      236,
+      237,
+      239,
+      240
+    ]
+  },
+  "school_constraints": {
+    "phones_collected": true,
+    "phone_unavailable_during_week": true,
+    "dormitories_separate_by_gender": true,
+    "meals_shared_once_daily": true,
+    "meal_cross_gender_contact_minutes": 60,
+    "after_hours_going_outside_requires_permission": true,
+    "pages": [
+      25,
+      26
+    ]
+  },
+  "observed_results": {
+    "male": {
+      "no_expulsions": true,
+      "large_group_first": {
+        "third_year_representative": "Ninomiya Kuranosuke",
+        "contains": "Manabu Horikita"
+      },
+      "large_group_second": {
+        "contains": [
+          "Miyabi Nagumo",
+          "Keisei Yukimura",
+          "Kiyotaka Ayanokoji"
+        ]
+      },
+      "remaining_large_group_places": "NOT_ALL_PUBLICLY_ENUMERATED_IN_TEXT",
+      "exact_scores": "NOT_DISCLOSED",
+      "source_pages": [
+        227,
+        228,
+        229
+      ]
+    },
+    "female": {
+      "large_group_first": {
+        "third_year_representative": "Ayase Natsu",
+        "includes": [
+          "Suzune Horikita",
+          "Kikyo Kushida"
+        ]
+      },
+      "large_group_last": {
+        "third_year_representative": "Ikari Momoko",
+        "rep_small_group_below_threshold": true
+      },
+      "solidarity_named": "Tachibana Akane",
+      "source_pages": [
+        229,
+        230,
+        231,
+        232,
+        233
+      ]
+    },
+    "rescues": [
+      {
+        "target": "Tachibana Akane",
+        "class": "THIRD_YEAR_A",
+        "rescuer_decider": "Manabu Horikita",
+        "method": "REVOCATION_OF_EXPULSION"
+      },
+      {
+        "target": "Ikari Momoko",
+        "class": "THIRD_YEAR_B",
+        "rescuer_decider": "Ishikura",
+        "method": "REVOCATION_OF_EXPULSION"
+      }
+    ],
+    "permanence": "BOTH_EXPULSIONS_REVOKED_IN_STORY",
+    "actual_personal_point_ledgers": "NOT_IN_SOURCE",
+    "source_pages": [
+      236,
+      237,
+      238,
+      239,
+      240
+    ]
+  },
+  "adversarial_episode": {
+    "description": "Nagumo's publicly lost male ranking contrasts with a successful female-group solidarity trap aimed at Tachibana and Manabu's finances.",
+    "verified_school_facts": [
+      "Male top two places",
+      "Female first and last groups",
+      "Ikari below threshold",
+      "Tachibana solidarity target",
+      "Both expulsion revocations"
+    ],
+    "actor_inferences_not_elevated_to_official_truth": [
+      "Specific deliberate group-wide underperformance",
+      "Specific advance payment of 20 million from Nagumo to Ishikura",
+      "All participants' awareness and intention",
+      "Exact role of council in authoring detailed exam mechanics"
+    ],
+    "information_sources": [
+      "Kei",
+      "Honami Ichinose",
+      "Nazuna Asahina",
+      "Manabu and exam dialogue"
+    ],
+    "actor_reasoning_owner": "Kiyotaka Ayanokoji",
+    "source_pages": [
+      57,
+      58,
+      59,
+      60,
+      173,
+      174,
+      175,
+      176,
+      179,
+      180,
+      181,
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240
+    ]
+  },
+  "open_fields": [
+    "COMPLETE_GROUP_ROSTERS",
+    "EXACT_FINAL_SCORES",
+    "ALL_SCORE_WEIGHTINGS",
+    "SOLIDARITY_SCHOOL_EVIDENCE_STANDARD",
+    "FULL_SMALL_GROUP_SIZE_TABLE_UNDER_60",
+    "FULL_REWARDS_CREDIT_LEDGER",
+    "INTERNAL_PRIVATE_POINT_TRANSFER_LEDGER",
+    "ALL_OFFICIAL_GENDER_RANKINGS"
+  ],
+  "epistemic_boundaries": [
+    "No historical result must replay under divergent agent decisions",
+    "No actor gets other-gender knowledge when phones confiscated without encounter",
+    "Teacher rule != actor theory about council design",
+    "No false claim girls' and boys' rankings are one combined list",
+    "A quoted future sanction is not proof of later enforcement"
+  ],
+  "verified": false,
+  "external_independent_review": "NOT_PERFORMED",
+  "engine_memory_admission": false,
+  "executable": false,
+  "v08_evidence_refs": [
+    "y1v08.ev.057",
+    "y1v08.ev.058",
+    "y1v08.ev.059",
+    "y1v08.ev.060",
+    "y1v08.ev.061",
+    "y1v08.ev.062",
+    "y1v08.ev.063",
+    "y1v08.ev.064",
+    "y1v08.ev.065",
+    "y1v08.ev.066",
+    "y1v08.ev.067",
+    "y1v08.ev.068",
+    "y1v08.ev.069",
+    "y1v08.ev.070",
+    "y1v08.ev.071",
+    "y1v08.ev.072",
+    "y1v08.ev.073"
+  ],
+  "review_status_update": {
+    "source_evidence_records": 17,
+    "independent_literary_review": "PENDING",
+    "engine_memory_admission": false,
+    "observed_results_and_rulebook_not_same_as_executable_scoring": true
+  }
+}

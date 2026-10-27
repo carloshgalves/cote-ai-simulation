@@ -12,7 +12,8 @@
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -205,7 +206,8 @@
         "y1v5.case.suzune-horikita.propose-performance-optimized-lineup",
         "y1v5.case.suzune-horikita.seek-sudo-with-mutual-humility",
         "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
-        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk"
+        "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk",
+        "y1v08.case.suzune-horikita.v08-c004"
       ],
       "context_evidence_refs": [
         "y1v1.ev.031",
@@ -241,7 +243,9 @@
         "y1v5.ev.079",
         "y1v6.ev.018",
         "y1v6.ev.027",
-        "y1v6.ev.067"
+        "y1v6.ev.067",
+        "y1v08.ev.004",
+        "y1v08.ev.038"
       ]
     },
     "persuasion": {
@@ -508,7 +512,8 @@
         "y1v6.ev.049",
         "y1v6.ev.065",
         "y1v6.ev.066",
-        "y1v6.ev.072"
+        "y1v6.ev.072",
+        "y1v08.ev.070"
       ]
     },
     "motivation": {
@@ -697,7 +702,8 @@
         "y1v5.ev.080",
         "y1v6.ev.047",
         "y1v075.ev.028",
-        "y1v075.ev.048"
+        "y1v075.ev.048",
+        "y1v08.ev.051"
       ]
     },
     "cooperation": {
@@ -721,9 +727,13 @@
       ]
     },
     "trust": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v08.case.suzune-horikita.v08-c004"
+      ],
       "context_evidence_refs": [
-        "y1v5.ev.025"
+        "y1v5.ev.025",
+        "y1v08.ev.004",
+        "y1v08.ev.038"
       ]
     },
     "results": {
@@ -874,6 +884,15 @@
         "y1v7.ev.018",
         "y1v7.ev.096"
       ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.suzune-horikita.v08-c004"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.004",
+        "y1v08.ev.038"
+      ]
     }
   },
   "source_documents": [],
@@ -929,5 +948,28 @@
     "private_factional_knowledge_not_public": true,
     "not_permanent_personality_rating": true,
     "divergence_requires_new_acquisition": true
-  }
+  },
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [
+    {
+      "evidence_ref": "y1v08.ev.038",
+      "source_pages": [
+        212,
+        213,
+        214,
+        215
+      ],
+      "change": "Suzune insiste em conciliação privada com Kushida apesar de conflito e custos.",
+      "permanent_trait": false,
+      "verified": false
+    }
+  ],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.051"
+  ]
 }

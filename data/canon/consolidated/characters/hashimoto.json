@@ -1,0 +1,94 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.hashimoto",
+  "display_name": "Masayoshi Hashimoto",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v08.sevenseas.en.operator-provided"
+  ],
+  "source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "identity": {
+    "role_summary": "Class A first-year student who brokers discreet contacts, protects information about Keisei and negotiates with Ryūen.",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "no_unobserved_other_gender_grade_knowledge": true,
+    "no_post_divergence_import": true
+  },
+  "domains": {
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.hashimoto.v08-c026",
+        "y1v08.case.hashimoto.v08-c029",
+        "y1v08.case.hashimoto.v08-c035"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.026",
+        "y1v08.ev.029",
+        "y1v08.ev.035"
+      ]
+    },
+    "cooperation": {
+      "behavioral_case_refs": [
+        "y1v08.case.hashimoto.v08-c026",
+        "y1v08.case.hashimoto.v08-c029"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.026",
+        "y1v08.ev.029"
+      ]
+    },
+    "security": {
+      "behavioral_case_refs": [
+        "y1v08.case.hashimoto.v08-c026"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.026"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [
+        "y1v08.case.hashimoto.v08-c029"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.029"
+      ]
+    },
+    "deception": {
+      "behavioral_case_refs": [
+        "y1v08.case.hashimoto.v08-c035"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.035"
+      ]
+    },
+    "negotiation": {
+      "behavioral_case_refs": [
+        "y1v08.case.hashimoto.v08-c035"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.035"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.050"
+      ]
+    }
+  },
+  "y1_v08_source_status": "UNVERIFIED_SOURCE_BOUNDED",
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.050"
+  ],
+  "y1_v08_knowledge_gate": {
+    "source_unverified": true,
+    "private_meetings_are_private": true,
+    "engine_memory_admission": false
+  },
+  "retrieval_policy": {
+    "historical_reference_only": true,
+    "non_executable": true
+  }
+}

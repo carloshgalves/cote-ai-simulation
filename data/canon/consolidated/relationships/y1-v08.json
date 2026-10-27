@@ -1,0 +1,338 @@
+{
+  "schema_version": "canon-relationship-source-v1",
+  "source_id": "ln.y1.v08.sevenseas.en.operator-provided",
+  "phase": "Y1_V08_MIXED_CAMP",
+  "verified": false,
+  "engine_memory_admission": false,
+  "epistemic_policy": {
+    "directed_emotion_not_equal_mutual": "TRUE",
+    "private_political_links_not_public": "TRUE",
+    "divergent_simulation": "NO_AUTOMATIC_CANON_TRAJECTORY"
+  },
+  "edges": [
+    {
+      "id": "y1v08.rel.043",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ],
+      "source_refs": [
+        "y1v08.ev.043"
+      ],
+      "pdf_pages": [
+        30,
+        31,
+        32,
+        120,
+        121,
+        123,
+        124,
+        125,
+        237,
+        238,
+        239,
+        240
+      ],
+      "source_bound_change": "Cooperação informacional íntima e protetiva sem namoro público; insegurança coexistente.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.044",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabu-horikita"
+      ],
+      "source_refs": [
+        "y1v08.ev.044"
+      ],
+      "pdf_pages": [
+        57,
+        59,
+        60,
+        142,
+        145,
+        146,
+        147
+      ],
+      "source_bound_change": "Contato político privado com limites de lealdade e independência.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.045",
+      "actors": [
+        "actor.manabu-horikita",
+        "actor.nagumo"
+      ],
+      "source_refs": [
+        "y1v08.ev.045"
+      ],
+      "pdf_pages": [
+        10,
+        57,
+        58,
+        59,
+        60,
+        229,
+        235,
+        236,
+        237
+      ],
+      "source_bound_change": "Duas concepções de competição e comando; disputa pública não descreve resultado estratégico global.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.046",
+      "actors": [
+        "actor.manabu-horikita",
+        "actor.tachibana"
+      ],
+      "source_refs": [
+        "y1v08.ev.046"
+      ],
+      "pdf_pages": [
+        198,
+        199,
+        200,
+        201,
+        202,
+        231,
+        233,
+        237
+      ],
+      "source_bound_change": "Lealdade e proteção; namoro ou paixão recíproca não confirmados.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.047",
+      "actors": [
+        "actor.nagumo",
+        "actor.kiriyama"
+      ],
+      "source_refs": [
+        "y1v08.ev.047"
+      ],
+      "pdf_pages": [
+        96,
+        98,
+        101,
+        117,
+        118
+      ],
+      "source_bound_change": "Hierarquia do conselho e oposição interna coexistem.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.048",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.nazuna-asahina"
+      ],
+      "source_refs": [
+        "y1v08.ev.048"
+      ],
+      "pdf_pages": [
+        173,
+        174,
+        175,
+        176,
+        178,
+        179,
+        180,
+        181
+      ],
+      "source_bound_change": "Contato fortuito evolui para troca informacional limitada.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.049",
+      "actors": [
+        "actor.yukimura",
+        "actor.ishizaki"
+      ],
+      "source_refs": [
+        "y1v08.ev.049"
+      ],
+      "pdf_pages": [
+        155,
+        168,
+        169,
+        170,
+        171,
+        183,
+        185,
+        188,
+        192,
+        216
+      ],
+      "source_bound_change": "Antagonismo evolui para cooperação de curto prazo.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.050",
+      "actors": [
+        "actor.hashimoto",
+        "actor.kakeru-ryuen"
+      ],
+      "source_refs": [
+        "y1v08.ev.050"
+      ],
+      "pdf_pages": [
+        203,
+        204,
+        205,
+        206,
+        207,
+        208
+      ],
+      "source_bound_change": "Negociação clandestina, oportunismo e possibilidade não consumada de mudar de facção.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.051",
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.kikyo-kushida"
+      ],
+      "source_refs": [
+        "y1v08.ev.051"
+      ],
+      "pdf_pages": [
+        30,
+        31,
+        212,
+        213,
+        214,
+        215
+      ],
+      "source_bound_change": "Colaboração pública e hostilidade privada; confiança ainda inexistente.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.052",
+      "actors": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v08.ev.052"
+      ],
+      "pdf_pages": [
+        148,
+        149,
+        150,
+        151,
+        152
+      ],
+      "source_bound_change": "Facilitação de diálogo íntimo; não há confissão recíproca.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.053",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yukimura",
+        "actor.miyake",
+        "actor.airi-sakura",
+        "actor.hasebe"
+      ],
+      "source_refs": [
+        "y1v08.ev.053"
+      ],
+      "pdf_pages": [
+        30,
+        31,
+        165,
+        166,
+        167
+      ],
+      "source_bound_change": "Ayanokōji Group manifesta laços sob segregação física do exame.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.054",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.haruki-yamauchi"
+      ],
+      "source_refs": [
+        "y1v08.ev.054"
+      ],
+      "pdf_pages": [
+        92,
+        93,
+        94
+      ],
+      "source_bound_change": "Colisão e pedido de desculpas não provam estratégia ulterior.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.055",
+      "actors": [
+        "actor.nagumo",
+        "actor.ishikura",
+        "actor.ikari-momoko"
+      ],
+      "source_refs": [
+        "y1v08.ev.055"
+      ],
+      "pdf_pages": [
+        208,
+        229,
+        231,
+        238,
+        239,
+        240
+      ],
+      "source_bound_change": "Coordenação interpretada pelo protagonista; termos privados de pagamentos não documentados.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v08.rel.056",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.rokusuke-koenji"
+      ],
+      "source_refs": [
+        "y1v08.ev.056"
+      ],
+      "pdf_pages": [
+        155,
+        156,
+        157,
+        158,
+        159,
+        160
+      ],
+      "source_bound_change": "Observação mútua e autonomia de Kōenji não implicam aliança.",
+      "relation_certainty": "SCOPE_TO_SCENE_AND_REPORTED_INTENT",
+      "verified": false,
+      "engine_memory_admission": false
+    }
+  ]
+}

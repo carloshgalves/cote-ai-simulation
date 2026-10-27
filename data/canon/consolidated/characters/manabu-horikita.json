@@ -10,7 +10,8 @@
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -42,14 +43,16 @@
         "y1v45.case.manabu-horikita.invite-kiyotaka-into-student-council",
         "y1v45.case.manabu-horikita.uphold-outside-contact-ban",
         "y1v5.case.manabu-horikita.accept-ayanokoji-relay-challenge",
-        "y1v075.case.manabu-horikita.v075-c025"
+        "y1v075.case.manabu-horikita.v075-c025",
+        "y1v08.case.manabu-horikita.v08-c041"
       ],
       "context_evidence_refs": [
         "y1v1.ev.031",
         "y1v45.ev.021",
         "y1v45.ev.048",
         "y1v5.ev.058",
-        "y1v075.ev.025"
+        "y1v075.ev.025",
+        "y1v08.ev.041"
       ]
     },
     "persuasion": {
@@ -70,7 +73,8 @@
         "y1v2.ev.060",
         "y1v2.ev.082",
         "y1v2.ev.083",
-        "y1v2.ev.088"
+        "y1v2.ev.088",
+        "y1v08.ev.074"
       ]
     },
     "social": {
@@ -125,7 +129,9 @@
     "politics": {
       "behavioral_case_refs": [
         "y1v45.case.manabu-horikita.invite-kiyotaka-into-student-council",
-        "y1v075.case.manabu-horikita.v075-c025"
+        "y1v075.case.manabu-horikita.v075-c025",
+        "y1v08.case.manabu-horikita.v08-c011",
+        "y1v08.case.manabu-horikita.v08-c021"
       ],
       "context_evidence_refs": [
         "y1v45.ev.019",
@@ -135,7 +141,10 @@
         "y1v5.ev.058",
         "y1v6.ev.003",
         "y1v075.ev.025",
-        "y1v075.ev.036"
+        "y1v075.ev.036",
+        "y1v08.ev.011",
+        "y1v08.ev.021",
+        "y1v08.ev.040"
       ]
     },
     "reasoning": {
@@ -174,9 +183,14 @@
       ]
     },
     "ethics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v08.case.manabu-horikita.v08-c011",
+        "y1v08.case.manabu-horikita.v08-c041"
+      ],
       "context_evidence_refs": [
-        "y1v45.ev.026"
+        "y1v45.ev.026",
+        "y1v08.ev.011",
+        "y1v08.ev.041"
       ]
     },
     "sports": {
@@ -204,7 +218,8 @@
         "y1v5.ev.078",
         "y1v7.ev.047",
         "y1v7.ev.048",
-        "y1v7.ev.100"
+        "y1v7.ev.100",
+        "y1v08.ev.040"
       ]
     },
     "student_council": {
@@ -232,7 +247,9 @@
     "exam": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v6.ev.049"
+        "y1v6.ev.049",
+        "y1v08.ev.069",
+        "y1v08.ev.071"
       ]
     },
     "risk_management": {
@@ -259,7 +276,44 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v075.ev.008",
-        "y1v075.ev.028"
+        "y1v075.ev.028",
+        "y1v08.ev.044",
+        "y1v08.ev.045",
+        "y1v08.ev.046"
+      ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.manabu-horikita.v08-c011",
+        "y1v08.case.manabu-horikita.v08-c021",
+        "y1v08.case.manabu-horikita.v08-c041"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.001",
+        "y1v08.ev.011",
+        "y1v08.ev.021",
+        "y1v08.ev.040",
+        "y1v08.ev.041"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.001"
+      ]
+    },
+    "reflection": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.001"
+      ]
+    },
+    "negotiation": {
+      "behavioral_case_refs": [
+        "y1v08.case.manabu-horikita.v08-c021"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.021"
       ]
     }
   },
@@ -289,5 +343,27 @@
     "not_permanent_personality_rating": true,
     "divergence_requires_new_acquisition": true
   },
-  "y1_v075_status_note": "FORMER_COUNCIL_PRESIDENT_ACTIVE_IN_PRIVATE_OPPOSITION"
+  "y1_v075_status_note": "FORMER_COUNCIL_PRESIDENT_ACTIVE_IN_PRIVATE_OPPOSITION",
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [
+    {
+      "evidence_ref": "y1v08.ev.001",
+      "source_pages": [
+        10
+      ],
+      "change": "Manabu relata arrependimento íntimo por isolamento e ausência de amizades profundas.",
+      "permanent_trait": false,
+      "verified": false
+    }
+  ],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.044",
+    "y1v08.rel.045",
+    "y1v08.rel.046"
+  ]
 }

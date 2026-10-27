@@ -1,0 +1,2775 @@
+{
+  "schema_version": "canon-evidence-v1",
+  "source_id": "ln.y1.v08.sevenseas.en.operator-provided",
+  "records": [
+    {
+      "id": "y1v08.ev.001",
+      "source_catalog_id": "V8-001",
+      "domain": "behavior",
+      "summary": "Manabu relata arrependimento íntimo por isolamento e ausência de amizades profundas.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          10
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "CHARACTER_REPORT_OR_INFERENCE",
+      "mention_actor_ids": [
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "identity",
+        "reflection",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.002",
+      "source_catalog_id": "V8-002",
+      "domain": "behavior",
+      "summary": "Propõe repartir ganhos da turma e perde votação após advertência financeira da professora.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          27,
+          28,
+          29
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "economy",
+        "leadership",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.003",
+      "source_catalog_id": "V8-003",
+      "domain": "behavior",
+      "summary": "Contesta reserva coletiva dos pontos usando exemplo de liquidez individual e regras condicionais.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          28,
+          29
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "economy",
+        "institution",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.004",
+      "source_catalog_id": "V8-004",
+      "domain": "behavior",
+      "summary": "Assume coordenação das meninas e indica Kushida como canal apesar da hostilidade privada.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          30,
+          31
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "leadership",
+        "trust",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.005",
+      "source_catalog_id": "V8-005",
+      "domain": "behavior",
+      "summary": "Instruções pré-confisco a Kei; prioriza proteção seletiva e monitoramento de Nagumo.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          31,
+          32
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "information",
+        "risk_management",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.006",
+      "source_catalog_id": "V8-006",
+      "domain": "behavior",
+      "summary": "Bloco da Classe A atribuído a Sakayanagi busca vagas seletivas e controle de grupo.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          35,
+          36,
+          37,
+          38
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "CLASS_A_STRATEGY_ATTRIBUTED_NOT_DIRECT_ARISU_ORDER",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "leadership",
+        "strategy",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.007",
+      "source_catalog_id": "V8-007",
+      "domain": "behavior",
+      "summary": "Concilia classes rivais, lida com compromissos de grupo e oferece vaga a Ryūen.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          39,
+          40,
+          41,
+          42,
+          46
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "negotiation",
+        "social",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.008",
+      "source_catalog_id": "V8-008",
+      "domain": "behavior",
+      "summary": "Akito voluntaria-se representante para admitir Ryūen, aceitando risco próprio.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          49,
+          50
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.miyake"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "cooperation",
+        "risk_management",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.009",
+      "source_catalog_id": "V8-009",
+      "domain": "behavior",
+      "summary": "Ayanokōji leva Keisei a exercer iniciativa na montagem do grupo sem assumir liderança pública.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          50,
+          51,
+          55
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "leadership",
+        "persuasion",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.010",
+      "source_catalog_id": "V8-010",
+      "domain": "behavior",
+      "summary": "Nagumo propõe disputa a Manabu; desafio público de médias encobre outras possibilidades.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          57,
+          58,
+          59,
+          60
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "politics",
+        "strategy",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.011",
+      "source_catalog_id": "V8-011",
+      "domain": "behavior",
+      "summary": "Manabu aceita duelo apenas sob condição de não prejudicar terceiros.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          59,
+          60
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "ethics",
+        "politics",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.012",
+      "source_catalog_id": "V8-012",
+      "domain": "behavior",
+      "summary": "Usa hesitação do grupo e insinua estratégia de Kōenji para expor interesses.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "information",
+        "strategy",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.013",
+      "source_catalog_id": "V8-013",
+      "domain": "behavior",
+      "summary": "Recusa função de representante e admite proposta de comprar pontos de veteranos, sem execução.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          63,
+          64,
+          65,
+          66,
+          67,
+          68
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "autonomy",
+        "behavior",
+        "economy",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.014",
+      "source_catalog_id": "V8-014",
+      "domain": "behavior",
+      "summary": "Keisei aceita representar grupo heterogêneo e tenta conduzir rotinas conflituosas.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          68,
+          78,
+          79,
+          84,
+          85
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "cooperation",
+        "leadership",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.015",
+      "source_catalog_id": "V8-015",
+      "domain": "behavior",
+      "summary": "Kōenji preserva independência perante pressão coletiva e professora.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          78,
+          82,
+          87,
+          88
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "autonomy",
+        "behavior",
+        "discipline",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.016",
+      "source_catalog_id": "V8-016",
+      "domain": "behavior",
+      "summary": "Organiza rodada noturna de cartas com tarefas apostadas e lê reação dos novatos.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          96,
+          97,
+          98,
+          99,
+          100,
+          105,
+          106,
+          107,
+          108,
+          109
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "observation",
+        "social",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.017",
+      "source_catalog_id": "V8-017",
+      "domain": "behavior",
+      "summary": "Oculta nível de habilidade durante jogos noturnos observados por Nagumo.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          105,
+          106,
+          107,
+          108,
+          109
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "information",
+        "secrecy",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.018",
+      "source_catalog_id": "V8-018",
+      "domain": "behavior",
+      "summary": "Kiriyama tenta impor disciplina, enfrenta interferência de Ishikura e limita atritos políticos.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          116,
+          117,
+          118
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiriyama"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "conflict",
+        "governance",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.019",
+      "source_catalog_id": "V8-019",
+      "domain": "behavior",
+      "summary": "Obtém informações das turmas femininas por conversa discreta com Kei durante jantar.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          120,
+          121,
+          123,
+          124,
+          125,
+          126,
+          127
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "information",
+        "secrecy",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.020",
+      "source_catalog_id": "V8-020",
+      "domain": "behavior",
+      "summary": "Kei afasta amigas discretamente e comunica dados das meninas; mostra ciúme e confiança coexistentes.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          120,
+          121,
+          123,
+          124,
+          125,
+          126
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "information",
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.021",
+      "source_catalog_id": "V8-021",
+      "domain": "behavior",
+      "summary": "Realiza reunião reservada solicitada por Kiyotaka e revisa ameaça de Nagumo.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          142,
+          143,
+          144,
+          145,
+          146,
+          147
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "negotiation",
+        "politics",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.022",
+      "source_catalog_id": "V8-022",
+      "domain": "behavior",
+      "summary": "Investiga alcance do acordo Manabu–Nagumo sem aceitar participação integral no conflito.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          142,
+          143,
+          144,
+          145,
+          146,
+          147
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "politics",
+        "strategy",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.023",
+      "source_catalog_id": "V8-023",
+      "domain": "behavior",
+      "summary": "Ichinose media integração de meninas e discute honestidade e exposição pessoal sem constranger interlocutores.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          148,
+          149,
+          150,
+          151,
+          152
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "leadership",
+        "social",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.024",
+      "source_catalog_id": "V8-024",
+      "domain": "behavior",
+      "summary": "Conversa isoladamente com Kōenji durante percurso e recebe leitura de suas capacidades ocultas.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          155,
+          156,
+          157,
+          158,
+          159,
+          160
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "information",
+        "observation",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.025",
+      "source_catalog_id": "V8-025",
+      "domain": "behavior",
+      "summary": "Ajuda Keisei ferido no trajeto e mantém discrição com auxílio de Hashimoto.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          162,
+          163,
+          164
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "cooperation",
+        "security",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.026",
+      "source_catalog_id": "V8-026",
+      "domain": "behavior",
+      "summary": "Hashimoto auxilia Keisei machucado e ajuda a proteger situação de terceiros.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          162,
+          163,
+          164
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.hashimoto"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "cooperation",
+        "security",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.027",
+      "source_catalog_id": "V8-027",
+      "domain": "behavior",
+      "summary": "Devolve pingente de Asahina e sonda informação parcial do segundo ano.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          173,
+          174,
+          175,
+          176,
+          178,
+          179,
+          180,
+          181
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "investigation",
+        "social",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.028",
+      "source_catalog_id": "V8-028",
+      "domain": "behavior",
+      "summary": "Asahina compartilha informação parcial sobre Nagumo e composição feminina sem aliança confirmada.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          174,
+          175,
+          176,
+          178,
+          179,
+          180,
+          181
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.nazuna-asahina"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "information",
+        "politics",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.029",
+      "source_catalog_id": "V8-029",
+      "domain": "behavior",
+      "summary": "Hashimoto facilita conversa no escuro sobre experiências pessoais e reduz tensão do grupo.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          182,
+          183,
+          184,
+          185
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.hashimoto"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "cooperation",
+        "social",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.030",
+      "source_catalog_id": "V8-030",
+      "domain": "behavior",
+      "summary": "Keisei reconhece limites e organiza revezamento valorizando capacidades dos colegas.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          184,
+          185,
+          186,
+          187,
+          188
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "cooperation",
+        "leadership",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.031",
+      "source_catalog_id": "V8-031",
+      "domain": "behavior",
+      "summary": "Ishizaki passa de hostilidade a ajuda concreta a Keisei em tarefas e corrida.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          168,
+          169,
+          170,
+          171,
+          185,
+          188,
+          192
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.ishizaki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "cooperation",
+        "development",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.032",
+      "source_catalog_id": "V8-032",
+      "domain": "behavior",
+      "summary": "Kōenji coopera apenas no nível mínimo exigido e limita compromisso com esforço coletivo.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          189,
+          190,
+          191,
+          223,
+          224,
+          225,
+          226
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "autonomy",
+        "behavior",
+        "teamwork",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.033",
+      "source_catalog_id": "V8-033",
+      "domain": "behavior",
+      "summary": "Sonda a preocupação de Ichinose sem confirmar a causa interna do sofrimento dela.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          194,
+          195,
+          196,
+          197,
+          198
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "empathy",
+        "observation",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.034",
+      "source_catalog_id": "V8-034",
+      "domain": "behavior",
+      "summary": "Verifica posição de Tachibana e considera vulnerabilidade política potencial.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          199,
+          200,
+          201,
+          202
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "investigation",
+        "politics",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.035",
+      "source_catalog_id": "V8-035",
+      "domain": "behavior",
+      "summary": "Marca encontro clandestino com Ryūen e oferece possibilidade não consumada de mudança de lealdade.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          203,
+          204,
+          205,
+          206,
+          207,
+          208
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.hashimoto"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "deception",
+        "negotiation",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.036",
+      "source_catalog_id": "V8-036",
+      "domain": "behavior",
+      "summary": "Ryūen confronta Hashimoto e Nagumo e mantém autonomia após perder liderança pública.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          204,
+          205,
+          207,
+          208,
+          209
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "autonomy",
+        "behavior",
+        "negotiation",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.037",
+      "source_catalog_id": "V8-037",
+      "domain": "behavior",
+      "summary": "Nagumo intervém em negociação noturna e introduz Ayanokōji perante Hashimoto.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          208,
+          209,
+          210,
+          211
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "information",
+        "politics",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.038",
+      "source_catalog_id": "V8-038",
+      "domain": "behavior",
+      "summary": "Suzune insiste em conciliação privada com Kushida apesar de conflito e custos.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          212,
+          213,
+          214,
+          215
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "leadership",
+        "trust",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.039",
+      "source_catalog_id": "V8-039",
+      "domain": "behavior",
+      "summary": "Kushida rejeita cooperação por medo de quem conhece o passado dela.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          212,
+          213,
+          214,
+          215
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "conflict",
+        "trust",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.040",
+      "source_catalog_id": "V8-040",
+      "domain": "behavior",
+      "summary": "A armadilha contra Tachibana resulta em pressão por revogação de expulsão, mas conluio exato é reconstrução de Kiyotaka.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          227,
+          228,
+          229,
+          230,
+          231,
+          232,
+          233,
+          235,
+          236,
+          238,
+          239,
+          240
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "KIYOTAKA_RECONSTRUCTION_WITH_UNOBSERVED_PRIVATE_COORDINATION",
+      "mention_actor_ids": [
+        "actor.ikari-momoko",
+        "actor.ishikura",
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabu-horikita",
+        "actor.nagumo",
+        "actor.tachibana"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "politics",
+        "strategy",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.041",
+      "source_catalog_id": "V8-041",
+      "domain": "behavior",
+      "summary": "Manabu decide sacrificar pontos para impedir a expulsão de Tachibana.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          235,
+          236,
+          237,
+          240
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "ethics",
+        "leadership",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.042",
+      "source_catalog_id": "V8-042",
+      "domain": "behavior",
+      "summary": "Kei questiona composição da armadilha e melhora a hipótese estratégica de Kiyotaka; procura compromisso de proteção.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          237,
+          238,
+          239,
+          240
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HISTORICAL_OBSERVED_OR_PRIVATE_SCENE",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "analysis",
+        "behavior",
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCENE_TIME_AND_CONTACT_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.043",
+      "source_catalog_id": "V8-43",
+      "domain": "relationship",
+      "summary": "Cooperação informacional íntima e protetiva sem namoro público; insegurança coexistente.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          30,
+          31,
+          32,
+          120,
+          121,
+          123,
+          124,
+          125,
+          237,
+          238,
+          239,
+          240
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.044",
+      "source_catalog_id": "V8-44",
+      "domain": "relationship",
+      "summary": "Contato político privado com limites de lealdade e independência.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          57,
+          59,
+          60,
+          142,
+          145,
+          146,
+          147
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.045",
+      "source_catalog_id": "V8-45",
+      "domain": "relationship",
+      "summary": "Duas concepções de competição e comando; disputa pública não descreve resultado estratégico global.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          10,
+          57,
+          58,
+          59,
+          60,
+          229,
+          235,
+          236,
+          237
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.046",
+      "source_catalog_id": "V8-46",
+      "domain": "relationship",
+      "summary": "Lealdade e proteção; namoro ou paixão recíproca não confirmados.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          198,
+          199,
+          200,
+          201,
+          202,
+          231,
+          233,
+          237
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.tachibana"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.047",
+      "source_catalog_id": "V8-47",
+      "domain": "relationship",
+      "summary": "Hierarquia do conselho e oposição interna coexistem.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          96,
+          98,
+          101,
+          117,
+          118
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.kiriyama",
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.048",
+      "source_catalog_id": "V8-48",
+      "domain": "relationship",
+      "summary": "Contato fortuito evolui para troca informacional limitada.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          173,
+          174,
+          175,
+          176,
+          178,
+          179,
+          180,
+          181
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.nazuna-asahina"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.049",
+      "source_catalog_id": "V8-49",
+      "domain": "relationship",
+      "summary": "Antagonismo evolui para cooperação de curto prazo.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          155,
+          168,
+          169,
+          170,
+          171,
+          183,
+          185,
+          188,
+          192,
+          216
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.ishizaki",
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.050",
+      "source_catalog_id": "V8-50",
+      "domain": "relationship",
+      "summary": "Negociação clandestina, oportunismo e possibilidade não consumada de mudar de facção.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          203,
+          204,
+          205,
+          206,
+          207,
+          208
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.hashimoto",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.051",
+      "source_catalog_id": "V8-51",
+      "domain": "relationship",
+      "summary": "Colaboração pública e hostilidade privada; confiança ainda inexistente.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          30,
+          31,
+          212,
+          213,
+          214,
+          215
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.052",
+      "source_catalog_id": "V8-52",
+      "domain": "relationship",
+      "summary": "Facilitação de diálogo íntimo; não há confissão recíproca.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          148,
+          149,
+          150,
+          151,
+          152
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.053",
+      "source_catalog_id": "V8-53",
+      "domain": "relationship",
+      "summary": "Ayanokōji Group manifesta laços sob segregação física do exame.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          30,
+          31,
+          165,
+          166,
+          167
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.hasebe",
+        "actor.kiyotaka-ayanokoji",
+        "actor.miyake",
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.054",
+      "source_catalog_id": "V8-54",
+      "domain": "relationship",
+      "summary": "Colisão e pedido de desculpas não provam estratégia ulterior.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          92,
+          93,
+          94
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.haruki-yamauchi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.055",
+      "source_catalog_id": "V8-55",
+      "domain": "relationship",
+      "summary": "Coordenação interpretada pelo protagonista; termos privados de pagamentos não documentados.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          208,
+          229,
+          231,
+          238,
+          239,
+          240
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "KIYOTAKA_RECONSTRUCTION_WITH_UNOBSERVED_PRIVATE_COORDINATION",
+      "mention_actor_ids": [
+        "actor.ikari-momoko",
+        "actor.ishikura",
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.056",
+      "source_catalog_id": "V8-56",
+      "domain": "relationship",
+      "summary": "Observação mútua e autonomia de Kōenji não implicam aliança.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          155,
+          156,
+          157,
+          158,
+          159,
+          160
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCENE_ATTRIBUTED_RELATIONSHIP",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.rokusuke-koenji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "PARTICIPANTS_AND_OBSERVERS_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.057",
+      "source_catalog_id": "V8-57",
+      "domain": "exam",
+      "summary": "Acampamento misto de três séries, oito dias e sete noites.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          11,
+          14,
+          19
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.058",
+      "source_catalog_id": "V8-58",
+      "domain": "exam",
+      "summary": "Separação por gênero, seis pequenos grupos por série, diversidade de classe e unanimidade.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          15,
+          16,
+          17,
+          18
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.059",
+      "source_catalog_id": "V8-59",
+      "domain": "exam",
+      "summary": "Grupos fixos se combinam entre séries em seis grandes grupos por gênero.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          19,
+          20
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.060",
+      "source_catalog_id": "V8-60",
+      "domain": "exam",
+      "summary": "Classificação por média dos grupos grandes; bônus/penalidades individuais.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          20,
+          21
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.061",
+      "source_catalog_id": "V8-61",
+      "domain": "exam",
+      "summary": "Tabela oficial de recompensas e penalidades por posição.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          20,
+          21,
+          22
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.062",
+      "source_catalog_id": "V8-62",
+      "domain": "exam",
+      "summary": "Multiplicadores positivos por tamanho e diversidade de turmas.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          21,
+          22
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.063",
+      "source_catalog_id": "V8-63",
+      "domain": "exam",
+      "summary": "Representante é obrigatório e tem incentivo duplo para mesma classe.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          22,
+          23
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.064",
+      "source_catalog_id": "V8-64",
+      "domain": "exam",
+      "summary": "Risco de expulsão do representante do pequeno grupo e solidariedade condicionada à contribuição.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          22,
+          23,
+          24
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.065",
+      "source_catalog_id": "V8-65",
+      "domain": "exam",
+      "summary": "Expulsão custa 100 pontos de classe; revogação 20 milhões privados mais 300 pontos de classe.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          24,
+          25
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.066",
+      "source_catalog_id": "V8-66",
+      "domain": "exam",
+      "summary": "Celulares recolhidos; dormitório segregado e refeição conjunta de 60 minutos.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          25,
+          26
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.067",
+      "source_catalog_id": "V8-67",
+      "domain": "exam",
+      "summary": "Ética, fortitude, disciplina e iniciativa com atividades de zazen, prova escrita, discurso e revezamento.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          18,
+          19,
+          81,
+          83,
+          84,
+          86,
+          87,
+          116,
+          217,
+          218
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.068",
+      "source_catalog_id": "V8-68",
+      "domain": "exam",
+      "summary": "Avaliações por série em diferentes sequências; sem placar numérico completo.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          217,
+          218,
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          225,
+          226
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.069",
+      "source_catalog_id": "V8-69",
+      "domain": "exam",
+      "summary": "Entre rapazes não houve expulsão; Ninomiya/Manabu primeiro, Nagumo/Keisei segundo.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          227,
+          228,
+          229
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabu-horikita",
+        "actor.nagumo",
+        "actor.ninomiya",
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.070",
+      "source_catalog_id": "V8-70",
+      "domain": "exam",
+      "summary": "Entre moças, Ayase primeiro e Ikari em último com pequeno grupo abaixo do corte.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          229,
+          230,
+          231
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [
+        "actor.ayase-natsu",
+        "actor.ikari-momoko",
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.071",
+      "source_catalog_id": "V8-71",
+      "domain": "exam",
+      "summary": "Tachibana é nomeada por solidariedade; Manabu e Ishikura usam revogação.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          231,
+          232,
+          233,
+          235,
+          236,
+          237,
+          240
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [
+        "actor.ikari-momoko",
+        "actor.ishikura",
+        "actor.manabu-horikita",
+        "actor.tachibana"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.072",
+      "source_catalog_id": "V8-72",
+      "domain": "exam",
+      "summary": "Interpretação de manipulação contra Tachibana atribuída a Kiyotaka.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          23,
+          24,
+          238,
+          239,
+          240
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "KIYOTAKA_RECONSTRUCTION_WITH_UNOBSERVED_PRIVATE_COORDINATION",
+      "mention_actor_ids": [
+        "actor.ikari-momoko",
+        "actor.ishikura",
+        "actor.kiyotaka-ayanokoji",
+        "actor.nagumo",
+        "actor.tachibana"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.073",
+      "source_catalog_id": "V8-73",
+      "domain": "exam",
+      "summary": "Exemplo didático de máxima recompensa 1,08 milhão privados e 336 pontos de classe.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          22
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_RULE_OR_OFFICIAL_OUTCOME",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "OFFICIAL_ANNOUNCEMENT_OR_SCENE_TIME",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.074",
+      "source_catalog_id": "V8-74",
+      "domain": "institution",
+      "summary": "Presidência de Nagumo e influência atribuída na elaboração de exame; poder normativo amplo não certificado.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          57,
+          59,
+          60,
+          65,
+          118,
+          210,
+          240
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_POLICY_OR_ATTRIBUTED_POWER",
+      "mention_actor_ids": [
+        "actor.manabu-horikita",
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [
+        "org.student-council"
+      ],
+      "topics": [
+        "institution",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCOPE_OF_SPEAKER_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.075",
+      "source_catalog_id": "V8-75",
+      "domain": "institution",
+      "summary": "Política específica do acampamento para grupos, participação dos três anos e disciplina.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          11,
+          14,
+          19,
+          24,
+          25,
+          26
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_POLICY_OR_ATTRIBUTED_POWER",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCOPE_OF_SPEAKER_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.076",
+      "source_catalog_id": "V8-76",
+      "domain": "institution",
+      "summary": "Débito de pontos é acumulado mesmo quando saldo aparente tem piso zero.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          22,
+          24,
+          25
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_POLICY_OR_ATTRIBUTED_POWER",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCOPE_OF_SPEAKER_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.077",
+      "source_catalog_id": "V8-77",
+      "domain": "institution",
+      "summary": "Revogação de expulsão não é transferência de classe.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          24,
+          25,
+          237,
+          240
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_POLICY_OR_ATTRIBUTED_POWER",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCOPE_OF_SPEAKER_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.078",
+      "source_catalog_id": "V8-78",
+      "domain": "institution",
+      "summary": "Compra especulada por Kōenji de pontos de formandos e proposta de proibição não aprovada.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          65,
+          66,
+          67
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_POLICY_OR_ATTRIBUTED_POWER",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCOPE_OF_SPEAKER_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.079",
+      "source_catalog_id": "V8-79",
+      "domain": "institution",
+      "summary": "Avaliação de conduta e postura além de conteúdos convencionais.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          116
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_POLICY_OR_ATTRIBUTED_POWER",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCOPE_OF_SPEAKER_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v08.ev.080",
+      "source_catalog_id": "V8-80",
+      "domain": "institution",
+      "summary": "Atividades/testes separados por sexo e séries, com cooperação interclasses.",
+      "source": {
+        "work_id": "ln.y1.v08.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          147,
+          153,
+          154,
+          217,
+          218
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "TEACHER_POLICY_OR_ATTRIBUTED_POWER",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "y1_v08"
+      ],
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SCOPE_OF_SPEAKER_ONLY",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    }
+  ]
+}

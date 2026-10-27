@@ -5,7 +5,8 @@
   "modeling_tier": "MINIMAL_ENTITY",
   "source_coverage": [
     "ln.y1.v02.sevenseas.en.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -33,7 +34,8 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v45.ev.019",
-        "y1v45.ev.021"
+        "y1v45.ev.021",
+        "y1v08.ev.040"
       ]
     },
     "observation": {
@@ -46,6 +48,31 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v45.ev.021"
+      ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.040"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.040"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.046"
+      ]
+    },
+    "exam": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.071",
+        "y1v08.ev.072"
       ]
     }
   },
@@ -62,5 +89,15 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.046"
+  ]
 }

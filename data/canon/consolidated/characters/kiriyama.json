@@ -4,7 +4,8 @@
   "display_name": "Kiriyama",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "Y1_V075_SOURCE_CANDIDATE_DISTINCT_REVIEW_PENDING",
   "identity": {
@@ -44,6 +45,36 @@
         "y1v075.ev.053",
         "y1v075.ev.056"
       ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.kiriyama.v08-c018"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.018"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [
+        "y1v08.case.kiriyama.v08-c018"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.018"
+      ]
+    },
+    "governance": {
+      "behavioral_case_refs": [
+        "y1v08.case.kiriyama.v08-c018"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.018"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.047"
+      ]
     }
   },
   "y1_v075_actor_state_deltas": [],
@@ -69,5 +100,15 @@
     "contextual_facts": "MENTIONS_NOT_FEATS",
     "post_divergence_memory": "NO_UNEARNED_CANON_KNOWLEDGE",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.047"
+  ]
 }

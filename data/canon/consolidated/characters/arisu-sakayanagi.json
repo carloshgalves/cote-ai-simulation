@@ -8,7 +8,8 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -76,7 +77,8 @@
     "strategy": {
       "behavioral_case_refs": [
         "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private",
-        "y1v075.case.arisu-sakayanagi.v075-c011"
+        "y1v075.case.arisu-sakayanagi.v075-c011",
+        "y1v08.case.arisu-sakayanagi.v08-c006"
       ],
       "context_evidence_refs": [
         "y1v3.ev.116",
@@ -89,16 +91,19 @@
         "y1v7.ev.057",
         "y1v7.ev.102",
         "y1v075.ev.010",
-        "y1v075.ev.011"
+        "y1v075.ev.011",
+        "y1v08.ev.006"
       ]
     },
     "leadership": {
       "behavioral_case_refs": [
-        "y1v5.case.arisu-sakayanagi.maintain-faction-support-withdraw-athletics"
+        "y1v5.case.arisu-sakayanagi.maintain-faction-support-withdraw-athletics",
+        "y1v08.case.arisu-sakayanagi.v08-c006"
       ],
       "context_evidence_refs": [
         "y1v5.ev.010",
-        "y1v5.ev.035"
+        "y1v5.ev.035",
+        "y1v08.ev.006"
       ]
     },
     "epistemics": {
@@ -128,7 +133,8 @@
       ],
       "context_evidence_refs": [
         "y1v5.ev.067",
-        "y1v075.ev.043"
+        "y1v075.ev.043",
+        "y1v08.ev.054"
       ]
     },
     "motivation": {
@@ -155,6 +161,14 @@
       "context_evidence_refs": [
         "y1v075.ev.043"
       ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v08.case.arisu-sakayanagi.v08-c006"
+      ],
+      "context_evidence_refs": [
+        "y1v08.ev.006"
+      ]
     }
   },
   "source_documents": [],
@@ -179,5 +193,15 @@
     "social_and_extracurricular_changes_matter": true,
     "not_permanent_personality_rating": true,
     "divergence_requires_new_acquisition": true
-  }
+  },
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.054"
+  ]
 }

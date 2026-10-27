@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v08.sevenseas.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -96,6 +97,30 @@
       "context_evidence_refs": [
         "y1v3.ev.055"
       ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.031"
+      ]
+    },
+    "cooperation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.031"
+      ]
+    },
+    "development": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.031"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v08.ev.049"
+      ]
     }
   },
   "source_documents": [],
@@ -115,5 +140,31 @@
   "goal_transition_refs": [
     "y1v7.goal.ishizaki.v7-g011"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v08_source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
+  "y1_v08_knowledge_gate": {
+    "private_cross_grade_and_gender_acquisition_required": true,
+    "after_divergence_no_canon_import": true,
+    "engine_memory_admission": false
+  },
+  "y1_v08_actor_state_deltas": [
+    {
+      "evidence_ref": "y1v08.ev.031",
+      "source_pages": [
+        168,
+        169,
+        170,
+        171,
+        185,
+        188,
+        192
+      ],
+      "change": "Ishizaki passa de hostilidade a ajuda concreta a Keisei em tarefas e corrida.",
+      "permanent_trait": false,
+      "verified": false
+    }
+  ],
+  "y1_v08_relationship_refs": [
+    "y1v08.rel.049"
+  ]
 }

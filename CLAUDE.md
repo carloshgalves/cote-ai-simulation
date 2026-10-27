@@ -24,3 +24,7 @@ For implementation work, keep the lifecycle explicit:
 Current phase: architectural and domain discovery plus the first implemented Embodiment slices. Prefer `research`, `domain-modeling`, `character-fidelity`, `agent-memory-rag`, `knowledge-boundary-audit`, and `exam-modeling` before `implement` unless an accepted spec or ticket already exists.
 
 For canon research, treat the light novel as the primary authority. Separate VERIFIED, INFERRED, INTERPRETATION, and UNVERIFIED claims. Do not silently fill gaps from model memory, and keep the simulation timestamp explicit to avoid future information contaminating earlier character states.
+
+## Required CI fallback
+
+Read `docs/agents/ci-billing-fallback.md` whenever Actions cannot run. Report unexecuted CI as `CI_NOT_RUN`, use local deterministic/replay/eval evidence with real exit codes and keep human phase gates. This rule applies to every Claude skill.

@@ -36,6 +36,30 @@
         }
       ],
       "no_backdated_global_knowledge": true
+    },
+    {
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "pdf_pages": [
+        34,
+        177,
+        195
+      ],
+      "evidence_refs": [
+        "y1v7.ev.017",
+        "y1v7.ev.102"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "explanation": "Ryūen menciona futuro ataque a Ichinose, e Kiyotaka o vê como peça estratégica.",
+      "epistemic_limits": "Não confirma autoria passada das cartas nem culpa de Ichinose.",
+      "world_epistemic_status": "ATTRIBUTED_PRIMARY_TEXT_PENDING_DISTINCT_REVIEW",
+      "actor_knowledge": [
+        {
+          "actor": "actor.kiyotaka-ayanokoji",
+          "since": "Y1_V07_RELEVANT_SCENE_ONLY",
+          "status": "ONLY_PERSONALLY_LEARNED_FACTS"
+        }
+      ],
+      "no_backdated_global_knowledge": true
     }
   ],
   "unresolved": [

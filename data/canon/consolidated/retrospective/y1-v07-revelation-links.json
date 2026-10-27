@@ -1,0 +1,329 @@
+{
+  "schema_version": "y1-v07-retrospective-links-v1",
+  "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+  "source_pdf_pages": 207,
+  "reference_only": true,
+  "independent_review": "NOT_PERFORMED",
+  "links": [
+    {
+      "id": "V7-R001",
+      "historical_event": "V3: pacto Ryūen–Katsuragi na ilha",
+      "volume7_pdf_pages": [
+        113,
+        114
+      ],
+      "relationship": "SUPPLEMENTS",
+      "delta": "Cláusulas de vinte mil pontos por pessoa/mês e efeito agregado de oitocentos mil.",
+      "limitations": "Escopo, duração e situação de execução futura exigem cuidado; atribuição da iniciativa a Katsuragi é fala de Arisu.",
+      "linked_event_id": "evt.y1.v03.ryuen-katsuragi-alliance-contract-terms",
+      "source_evidence_refs": [
+        "y1v7.ev.057",
+        "y1v7.ev.058",
+        "y1v7.ev.059"
+      ],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R002",
+      "historical_event": "V3: roubo de peça íntima e ocultação",
+      "volume7_pdf_pages": [
+        167,
+        168
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "delta": "Ibuki admite autoria específica da ocultação na mochila durante a ilha.",
+      "limitations": "Não atribuir a ela incidentes de outras datas.",
+      "linked_event_id": null,
+      "source_evidence_refs": [],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R003",
+      "historical_event": "V3: alocação escolar de Kiyotaka",
+      "volume7_pdf_pages": [
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "relationship": "SUPPLEMENTS",
+      "delta": "A direção confirma admissão especial e irrelevância dos cinquenta pontos deliberados.",
+      "limitations": "Não retroceder o conhecimento de colegas para Y1_START.",
+      "linked_event_id": null,
+      "source_evidence_refs": [],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R004",
+      "historical_event": "V3: esconder X por meio da imagem de Suzune",
+      "volume7_pdf_pages": [
+        22,
+        23,
+        34,
+        35,
+        181
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "delta": "X assume que atribuiu publicamente feitos a Horikita e previu que Ryūen desconfiaria.",
+      "limitations": "Separar estratégia antiga da interpretação retrospectiva.",
+      "linked_event_id": null,
+      "source_evidence_refs": [],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R005",
+      "historical_event": "V4: episódio Manabe/Karuizawa no cruzeiro",
+      "volume7_pdf_pages": [
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        146,
+        147,
+        148,
+        149,
+        150,
+        181
+      ],
+      "relationship": "SUPPLEMENTS",
+      "delta": "Ryūen explica seu rastro e X admite ter antecipado descoberta da rede de Manabe.",
+      "limitations": "Detalhes narrados por Ryūen não viram observações diretas de outros atores.",
+      "linked_event_id": null,
+      "source_evidence_refs": [],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R006",
+      "historical_event": "V5: uso de gravação e mobilização contra X",
+      "volume7_pdf_pages": [
+        22,
+        23,
+        181
+      ],
+      "relationship": "SUPPLEMENTS",
+      "delta": "Ayanokōji diz ter previsto que o uso da rede de Manabe no festival levantaria suspeitas.",
+      "limitations": "Identidade de remetente de outras gravações não é certificada por mera continuidade.",
+      "linked_event_id": null,
+      "source_evidence_refs": [],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R007",
+      "historical_event": "V6: Paper Shuffle — D contra C",
+      "volume7_pdf_pages": [
+        19,
+        94,
+        95,
+        97,
+        119
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "delta": "Resultado do confronto agora é confirmado por personagens e fichas escolares.",
+      "limitations": "Preservar retrospectivamente a falta de boletim oficial no final do V6.",
+      "linked_event_id": null,
+      "source_evidence_refs": [],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R008",
+      "historical_event": "V6: Paper Shuffle — A contra B",
+      "volume7_pdf_pages": [
+        94,
+        95,
+        151,
+        196
+      ],
+      "relationship": "RESOLVES_AMBIGUITY",
+      "delta": "Vitória A sobre B explicitada em diálogo e avaliação escolar.",
+      "limitations": "Vantagem de dois pontos não equivale ao saldo de pontos de classe.",
+      "linked_event_id": null,
+      "source_evidence_refs": [],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R009",
+      "historical_event": "V6: suspeita do estrategista X",
+      "volume7_pdf_pages": [
+        34,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175
+      ],
+      "relationship": "SUPPLEMENTS",
+      "delta": "A identidade passa de suspeita a revelação aos participantes do terraço.",
+      "limitations": "Não revelar a todo aluno em épocas anteriores.",
+      "linked_event_id": "evt.y1.v06.unknown-x-transaction-and-karuizawa-photo",
+      "source_evidence_refs": [
+        "y1v7.ev.063",
+        "y1v7.ev.066",
+        "y1v7.ev.089",
+        "y1v7.ev.091",
+        "y1v7.ev.095"
+      ],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R010",
+      "historical_event": "V6: acusações anônimas contra Ichinose",
+      "volume7_pdf_pages": [
+        34,
+        177,
+        195
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "delta": "Ryūen menciona futuro ataque a Ichinose, e Kiyotaka o vê como peça estratégica.",
+      "limitations": "Não confirma autoria passada das cartas nem culpa de Ichinose.",
+      "linked_event_id": "evt.y1.v06.ichinose-fraud-accusation-letter",
+      "source_evidence_refs": [
+        "y1v7.ev.017",
+        "y1v7.ev.102"
+      ],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R011",
+      "historical_event": "V1–V6: papel de Chabashira no incentivo à Classe A",
+      "volume7_pdf_pages": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        163,
+        164
+      ],
+      "relationship": "CORRECTS_PRIOR_INTERPRETATION",
+      "delta": "A ameaça de contato prévio com o pai é desmontada; professora admite fabricação inicial.",
+      "limitations": "A nova fala sobre direção não elimina todas as incertezas da motivação.",
+      "linked_event_id": null,
+      "source_evidence_refs": [],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R012",
+      "historical_event": "Y1 início: White Room, guarda e separação familiar",
+      "volume7_pdf_pages": [
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ],
+      "relationship": "SUPPLEMENTS",
+      "delta": "Motivo da matrícula, ligação paterna, suspensão da White Room e acesso à direção são revelados.",
+      "limitations": "Narrativa do pai sobre Matsuo carece de confirmação externa.",
+      "linked_event_id": null,
+      "source_evidence_refs": [],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R013",
+      "historical_event": "V3: saldos de pontos e economia A–C",
+      "volume7_pdf_pages": [
+        19,
+        20,
+        21,
+        113,
+        114
+      ],
+      "relationship": "SUPPLEMENTS",
+      "delta": "Diferencia troca de pontos privados de desempenho em pontos de classe.",
+      "limitations": "Nenhuma taxa universal de conversão entre moedas é inferida.",
+      "linked_event_id": null,
+      "source_evidence_refs": [],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "V7-R014",
+      "historical_event": "V6: evolução de Suzune e Sudō",
+      "volume7_pdf_pages": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        117,
+        118,
+        163,
+        164
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "delta": "Novas cenas mostram contenção de provocações e cooperação emergente.",
+      "limitations": "Evolução não é atributo estático a injetar no estado inicial.",
+      "linked_event_id": "evt.y1.v05.sudo-withdrawal-and-return",
+      "source_evidence_refs": [
+        "y1v7.ev.016",
+        "y1v7.ev.061"
+      ],
+      "review_status": "ASSISTANT_SOURCE_CANDIDATE_PENDING_DISTINCT_EVALUATOR",
+      "verified": false,
+      "engine_memory_admission": false
+    }
+  ],
+  "retroactive_memory_grant": false,
+  "source_local_report": "docs/canon/reports/Relatorio_COTE_Y1_V7.md"
+}

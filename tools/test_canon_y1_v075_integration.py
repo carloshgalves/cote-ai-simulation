@@ -39,7 +39,10 @@ def errors(s):
         for t in x["topics"]: require(x["id"] in s["evidence_index"]["evidence_by_topic"][t],"topic index incomplete")
         for p in x["source"]["pdf_pages"]:require(x["id"] in s["page_index"]["pages"][str(p)]["evidence"],"page evidence index incomplete")
     for item in m["cases"]:
-        c=s["cases"][item["id"]]
+        c=s["cases"].get(item["id"])
+        if c is None:
+            require(False,"missing registered behavioral case "+item["id"])
+            continue
         require(c["id"]==item["id"] and c["primary_actor_id"]==item["actor_id"],"primary actor attribution")
         require(c["evidence_refs"]==item["evidence_refs"] and all(ref in eid for ref in c["evidence_refs"]),"case evidence link")
         require(not c["verified"] and c["behavioral_policy"]=="NON_EXECUTABLE","case prematurely promoted")

@@ -46,7 +46,7 @@ def violations(s):
     ck(len(m["cases"])==24 and len(evidence["records"])==34 and len(r["edges"])==11, "item counts")
     ck(len(set(e_by_id))==34 and len(s["cases"])==24, "duplicate/missing evidence/cases")
     ck(m["engine_memory_admission"] is False and m["goal_runtime_auto_update"] is False and
-       m["external_independent_review_status"]=="NOT_PERFORMED", "release gate")
+       m["independent_review_status"]=="NOT_PERFORMED", "release gate")
     for e in evidence["records"]:
         ck(e["source"]["work_id"]==SRC and e["verified"] is False and not e["engine_admission"], "evidence auto-promoted")
         ck(e["subject_assertion"]=="MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR", "context wrongly promoted")
@@ -94,7 +94,7 @@ class TestV9(unittest.TestCase):
     def test_negative_kamuro_time(self):self.mutated(lambda x:x["actors"]["masumi-kamuro"]["y1_v09_school_furto_temporal_guard"].update(time="PRE_Y1"))
     def test_negative_special_exam(self):self.mutated(lambda x:x["exams/y1-v09-academic-context.json"].update(exam_executable=True))
     def test_negative_backdated_rumor(self):self.mutated(lambda x:x["institutions/anhs.json"]["y1_v09_rumor_and_academic_context"]["rumors"].update(prospective_only=False))
-    def test_negative_fake_independent_review(self):self.mutated(lambda x:x["audits/y1-v09-case-manifest.json"].update(external_independent_review_status="COMPLETE"))
+    def test_negative_fake_independent_review(self):self.mutated(lambda x:x["audits/y1-v09-case-manifest.json"].update(independent_review_status="COMPLETE"))
     def test_negative_wrong_actor(self):self.mutated(lambda x:next(iter(x["cases"].values())).update(primary_actor_id="actor.nagumo"))
     def test_negative_confidant_wrong_evidence(self):self.mutated(lambda x:next(r for r in x["relationships/y1-v09.json"]["edges"] if r["id"]=="y1v09.rel.003").update(source_refs=["y1v09.ev.005"]))
 

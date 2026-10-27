@@ -1,0 +1,21 @@
+{
+  "schema_version": "v0-v7-historical-judgment-index-v1",
+  "links": [
+    {
+      "id": "V00V07-OPEN-01",
+      "prior_status": "UNRESOLVED",
+      "source_adjudication_ref": "data/canon/consolidated/audits/y1-v07-v00-historical-adjudication.json"
+    },
+    {
+      "id": "V00V07-OPEN-02",
+      "prior_status": "UNRESOLVED",
+      "source_adjudication_ref": "data/canon/consolidated/audits/y1-v07-v00-historical-adjudication.json"
+    },
+    {
+      "id": "V00V07-OPEN-03",
+      "prior_status": "UNRESOLVED",
+      "source_adjudication_ref": "data/canon/consolidated/audits/y1-v07-v00-historical-adjudication.json"
+    }
+  ],
+  "independent_review": "NOT_PERFORMED"
+}

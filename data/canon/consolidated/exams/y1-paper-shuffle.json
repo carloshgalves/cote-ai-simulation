@@ -270,5 +270,35 @@
     "No automatic promotion into executable ExamSpec or agent memory"
   ],
   "executable": false,
-  "engine_memory_admission": false
+  "engine_memory_admission": false,
+  "later_volume_7_outcomes": {
+    "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      94,
+      95,
+      97,
+      119,
+      151,
+      196
+    ],
+    "class_winners": [
+      "A_OVER_B",
+      "D_OVER_C"
+    ],
+    "december_1_snapshot": {
+      "A": 874,
+      "B": 753,
+      "C": 542,
+      "D": 262
+    },
+    "reference_evidence_refs": [
+      "y1v7.ev.050",
+      "y1v7.ev.051",
+      "y1v7.ev.062",
+      "y1v7.ev.078",
+      "y1v7.ev.103"
+    ],
+    "official_final_point_totals": "NOT_ESTABLISHED",
+    "status": "REFERENCE_ONLY_EXTERNAL_REVIEW_PENDING"
+  }
 }

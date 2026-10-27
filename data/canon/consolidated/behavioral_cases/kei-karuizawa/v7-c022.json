@@ -1,0 +1,38 @@
+{
+  "id": "y1v7.case.kei-karuizawa.v7-c022",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "Usar canal de emergência",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Avisa Kiyotaka sobre convocação de Ryūen",
+  "observed_result": "Mensagem não obtém resposta imediata",
+  "epistemic_limits": "Mensagem não obtém resposta imediata",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      152,
+      153
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "social",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.079"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

@@ -5,9 +5,10 @@
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v02.sevenseas.en.operator-provided",
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "Class C student who participates in Sudō's disputed disciplinary complaint",
     "aliases": []
@@ -34,9 +35,12 @@
       ]
     },
     "combat": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v7.case.ishizaki.v7-c041"
+      ],
       "context_evidence_refs": [
-        "y1v2.ev.014"
+        "y1v2.ev.014",
+        "y1v7.ev.094"
       ]
     },
     "observation": {
@@ -60,12 +64,18 @@
       ]
     },
     "strategy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v7.case.ishizaki.v7-c042"
+      ],
       "context_evidence_refs": [
         "y1v2.ev.070",
         "y1v2.ev.072",
         "y1v2.ev.073",
-        "y1v2.ev.074"
+        "y1v2.ev.074",
+        "y1v7.ev.006",
+        "y1v7.ev.089",
+        "y1v7.ev.091",
+        "y1v7.ev.111"
       ]
     },
     "persuasion": {
@@ -101,5 +111,9 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [
+    "y1v7.goal.ishizaki.v7-g011"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

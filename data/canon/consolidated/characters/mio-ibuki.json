@@ -7,9 +7,10 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "Class C student whose covert island actions are revealed through her own viewpoint",
     "aliases": []
@@ -84,7 +85,9 @@
     "strategy": {
       "behavioral_case_refs": [
         "y1v3.case.mio-ibuki.undercover-leader-card-delivery",
-        "y1v4.case.mio-ibuki.volunteer-device-disclosure"
+        "y1v4.case.mio-ibuki.volunteer-device-disclosure",
+        "y1v7.case.mio-ibuki.v7-c027",
+        "y1v7.case.mio-ibuki.v7-c028"
       ],
       "context_evidence_refs": [
         "y1v3.ev.085",
@@ -95,16 +98,27 @@
         "y1v3.ev.112",
         "y1v4.ev.116",
         "y1v5.ev.040",
-        "y1v5.ev.065"
+        "y1v5.ev.065",
+        "y1v7.ev.065",
+        "y1v7.ev.089",
+        "y1v7.ev.091",
+        "y1v7.ev.104",
+        "y1v7.ev.105",
+        "y1v7.ev.106"
       ]
     },
     "combat": {
       "behavioral_case_refs": [
-        "y1v3.case.mio-ibuki.fight-feverish-suzune"
+        "y1v3.case.mio-ibuki.fight-feverish-suzune",
+        "y1v7.case.mio-ibuki.v7-c024",
+        "y1v7.case.mio-ibuki.v7-c026"
       ],
       "context_evidence_refs": [
         "y1v3.ev.093",
-        "y1v3.ev.094"
+        "y1v3.ev.094",
+        "y1v7.ev.071",
+        "y1v7.ev.093",
+        "y1v7.ev.108"
       ]
     },
     "risk_management": {
@@ -204,6 +218,15 @@
       "context_evidence_refs": [
         "y1v5.ev.077"
       ]
+    },
+    "exams": {
+      "behavioral_case_refs": [
+        "y1v7.case.mio-ibuki.v7-c025"
+      ],
+      "context_evidence_refs": [
+        "y1v7.ev.090",
+        "y1v7.ev.096"
+      ]
     }
   },
   "source_documents": [],
@@ -220,6 +243,9 @@
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
   },
-  "goal_transition_refs": [],
+  "goal_transition_refs": [
+    "y1v7.goal.mio-ibuki.v7-g009",
+    "y1v7.goal.mio-ibuki.v7-g010"
+  ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

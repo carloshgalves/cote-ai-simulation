@@ -8,12 +8,26 @@
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
-    "role_summary": "Student council president",
-    "aliases": []
+    "role_summary": "Former ANHS student council president by Y1 V06; succeeded by Nagumo. Y1 V07 private consultation and stairwell witness are not official council action.",
+    "aliases": [],
+    "temporal_updates": [
+      {
+        "since": "Y1_V06_PRESIDENCY_HANDOVER",
+        "source_evidence_id": "y1v6.ev.003",
+        "former_office": "STUDENT_COUNCIL_PRESIDENT",
+        "status": "SUCCESSION_CONFIRMED_IN_V06"
+      },
+      {
+        "since": "Y1_V07_PRIVATE_VISIT",
+        "source_evidence_id": "y1v7.ev.047",
+        "status": "FORMER_PRESIDENT_PRIVATE_POLITICAL_WARNING_AND_PROPOSAL"
+      }
+    ]
   },
   "knowledge_time_policy": {
     "canonical_after_divergence_is_not_actor_memory": true,
@@ -61,7 +75,8 @@
       "context_evidence_refs": [
         "y1v1.ev.081",
         "y1v1.ev.082",
-        "y1v2.ev.088"
+        "y1v2.ev.088",
+        "y1v7.ev.085"
       ]
     },
     "emotion": {
@@ -75,7 +90,8 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v1.ev.082",
-        "y1v1.ev.083"
+        "y1v1.ev.083",
+        "y1v7.ev.088"
       ]
     },
     "observation": {
@@ -172,9 +188,15 @@
       ]
     },
     "strategy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v7.case.manabu-horikita.v7-c035",
+        "y1v7.case.manabu-horikita.v7-c036"
+      ],
       "context_evidence_refs": [
-        "y1v5.ev.078"
+        "y1v5.ev.078",
+        "y1v7.ev.047",
+        "y1v7.ev.048",
+        "y1v7.ev.100"
       ]
     },
     "student_council": {
@@ -232,6 +254,8 @@
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
   },
-  "goal_transition_refs": [],
+  "goal_transition_refs": [
+    "y1v7.goal.manabu-horikita.v7-g015"
+  ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

@@ -7,9 +7,10 @@
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "First-year Class D student; officially called Teruhiko Yukimura, prefers Keisei among friends from Y1 V6.",
     "aliases": [
@@ -42,7 +43,9 @@
         "y1v4.ev.047",
         "y1v4.ev.058",
         "y1v4.ev.085",
-        "y1v6.ev.058"
+        "y1v6.ev.058",
+        "y1v7.ev.004",
+        "y1v7.ev.012"
       ]
     },
     "academic_reasoning": {
@@ -91,7 +94,8 @@
         "y1v4.ev.115",
         "y1v4.ev.116",
         "y1v4.ev.117",
-        "y1v4.ev.118"
+        "y1v4.ev.118",
+        "y1v7.ev.005"
       ]
     },
     "leadership": {
@@ -246,6 +250,12 @@
       ],
       "context_evidence_refs": [
         "y1v6.ev.058"
+      ]
+    },
+    "exams": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v7.ev.007"
       ]
     }
   },

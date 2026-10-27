@@ -1,0 +1,48 @@
+{
+  "id": "y1v7.case.kiyotaka-ayanokoji.v7-c010",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Aceitar aproximação social",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Interage com Shiina por meio de livros e almoço",
+  "observed_result": "Não prova que toda amizade é instrumental",
+  "epistemic_limits": "Não prova que toda amizade é instrumental",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "social",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.021",
+    "y1v7.ev.019",
+    "y1v7.ev.020"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.masumi-kamuro",
+  "display_name": "Masumi Kamuro",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v07.sevenseas.en.operator-provided"
+  ],
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
+  "identity": {
+    "role_summary": "Class A student conducting surveillance",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "strategy": {
+      "behavioral_case_refs": [
+        "y1v7.case.masumi-kamuro.v7-c034"
+      ],
+      "context_evidence_refs": [
+        "y1v7.ev.013",
+        "y1v7.ev.014",
+        "y1v7.ev.015"
+      ]
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": true,
+  "uncertainties": {
+    "future_fate_unknown": false
+  },
+  "generation_policy": "Append global references only",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

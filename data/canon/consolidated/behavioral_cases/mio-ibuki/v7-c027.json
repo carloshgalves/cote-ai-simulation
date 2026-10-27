@@ -1,0 +1,37 @@
+{
+  "id": "y1v7.case.mio-ibuki.v7-c027",
+  "actor_id": "actor.mio-ibuki",
+  "primary_actor_id": "actor.mio-ibuki",
+  "title": "Atacar Ayanokōji",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Emprega chutes; ele a derruba",
+  "observed_result": "A comparação com Suzune é hipotética",
+  "epistemic_limits": "A comparação com Suzune é hipotética",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      182
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "strategy",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.096"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

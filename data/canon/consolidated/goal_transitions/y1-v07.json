@@ -1,0 +1,746 @@
+{
+  "schema_version": "canon-goal-transitions-v1",
+  "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+  "transitions": [
+    {
+      "id": "y1v7.goal.kakeru-ryuen.v7-g001",
+      "actor_id": "actor.kakeru-ryuen",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          11,
+          12,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.097",
+        "y1v7.ev.098",
+        "y1v7.ev.003",
+        "y1v7.ev.001"
+      ],
+      "prior_goal_or_means": "Procurar adversário capaz de vencê-lo",
+      "observed_goal_or_means_after": "Da confiança em violência e domínio para reconhecimento de derrota pontual",
+      "trigger_or_new_information": "Confronto real com Ayanokōji",
+      "behavioral_evidence": "Da confiança em violência e domínio para reconhecimento de derrota pontual",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Sem converter em medo global ou pacifismo obrigatório",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.kakeru-ryuen.v7-g002",
+      "actor_id": "actor.kakeru-ryuen",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          193,
+          194,
+          195,
+          201,
+          202,
+          203,
+          204
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.101",
+        "y1v7.ev.109",
+        "y1v7.ev.100",
+        "y1v7.ev.102"
+      ],
+      "prior_goal_or_means": "Querer responsabilizar-se e deixar a escola",
+      "observed_goal_or_means_after": "Abandona retirada formal e permanece",
+      "trigger_or_new_information": "Solidariedade de Ishizaki e Albert e limitações escolares",
+      "behavioral_evidence": "Abandona retirada formal e permanece",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Permanência não restaura automaticamente seu comando",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.kakeru-ryuen.v7-g003",
+      "actor_id": "actor.kakeru-ryuen",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.106",
+        "y1v7.ev.109",
+        "y1v7.ev.105",
+        "y1v7.ev.107"
+      ],
+      "prior_goal_or_means": "Liderar classe pelo controle coercitivo",
+      "observed_goal_or_means_after": "Reduz papel público e surge rumor de abandono da liderança",
+      "trigger_or_new_information": "Derrota e contestação de Ibuki",
+      "behavioral_evidence": "Reduz papel público e surge rumor de abandono da liderança",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Não comprovar sucessor formal nem abdicação de Class A como ambição",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.kiyotaka-ayanokoji.v7-g004",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          62,
+          63,
+          75,
+          76
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.029",
+        "y1v7.ev.042",
+        "y1v7.ev.030",
+        "y1v7.ev.032"
+      ],
+      "prior_goal_or_means": "Aprender vida normal e preservar liberdade",
+      "observed_goal_or_means_after": "Passa a planejar retirada da competição ativa entre classes",
+      "trigger_or_new_information": "Descobre falsidade de chantagem da professora",
+      "behavioral_evidence": "Passa a planejar retirada da competição ativa entre classes",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Plano condicionado por novas situações",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.kiyotaka-ayanokoji.v7-g005",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          79,
+          80,
+          81,
+          82,
+          83,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.044",
+        "y1v7.ev.045",
+        "y1v7.ev.082",
+        "y1v7.ev.083"
+      ],
+      "prior_goal_or_means": "Cortar contato operacional com Karuizawa",
+      "observed_goal_or_means_after": "Volta a intervir para resgatá-la e enfrentar X",
+      "trigger_or_new_information": "Convocação de Ryūen e alerta da aluna",
+      "behavioral_evidence": "Volta a intervir para resgatá-la e enfrentar X",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Não apagar cálculo instrumental de seu monólogo",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.kiyotaka-ayanokoji.v7-g006",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          165,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.099",
+        "y1v7.ev.100",
+        "y1v7.ev.102"
+      ],
+      "prior_goal_or_means": "Preservar anonimato absoluto",
+      "observed_goal_or_means_after": "Aceita exposição restrita e usa testemunha remota",
+      "trigger_or_new_information": "Confronto inevitável e proteção da aluna",
+      "behavioral_evidence": "Aceita exposição restrita e usa testemunha remota",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Segredo revelado aos presentes, não publicamente à escola inteira",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.kei-karuizawa.v7-g007",
+      "actor_id": "actor.kei-karuizawa",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          79,
+          80,
+          81,
+          82,
+          83,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.072",
+        "y1v7.ev.044",
+        "y1v7.ev.074",
+        "y1v7.ev.070"
+      ],
+      "prior_goal_or_means": "Contar com X como proteção",
+      "observed_goal_or_means_after": "Escolhe silêncio como ato de dignidade pessoal",
+      "trigger_or_new_information": "Ruptura telefônica e chantagem violenta",
+      "behavioral_evidence": "Escolhe silêncio como ato de dignidade pessoal",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Não caracterizar decisão como mera programação de lealdade",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.kei-karuizawa.v7-g008",
+      "actor_id": "actor.kei-karuizawa",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          149,
+          150,
+          190,
+          191
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.076",
+        "y1v7.ev.099",
+        "y1v7.ev.077"
+      ],
+      "prior_goal_or_means": "Recusar traição apesar de medo",
+      "observed_goal_or_means_after": "Mantém proteção de seu segredo e vínculo ambivalente",
+      "trigger_or_new_information": "Resgate tardio e reconhecimento de engano",
+      "behavioral_evidence": "Mantém proteção de seu segredo e vínculo ambivalente",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Desconfiança expressa e dependência podem coexistir",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.mio-ibuki.v7-g009",
+      "actor_id": "actor.mio-ibuki",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          176
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.071",
+        "y1v7.ev.065",
+        "y1v7.ev.093"
+      ],
+      "prior_goal_or_means": "Cooperar pragmaticamente com Ryūen",
+      "observed_goal_or_means_after": "Questiona explicitamente os limites da liderança de Ryūen",
+      "trigger_or_new_information": "Coerção sobre Karuizawa e agressão contra X",
+      "behavioral_evidence": "Questiona explicitamente os limites da liderança de Ryūen",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Ainda participa de alguns atos e não rompe instantaneamente",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.mio-ibuki.v7-g010",
+      "actor_id": "actor.mio-ibuki",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          197,
+          198,
+          199,
+          200
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.104",
+        "y1v7.ev.106",
+        "y1v7.ev.105",
+        "y1v7.ev.108"
+      ],
+      "prior_goal_or_means": "Desejar libertar-se do comando de Ryūen",
+      "observed_goal_or_means_after": "Passa a pressioná-lo a permanecer e reconsiderar metas",
+      "trigger_or_new_information": "Ameaça de saída e visão do plano 800M",
+      "behavioral_evidence": "Passa a pressioná-lo a permanecer e reconsiderar metas",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Motivos vão além de mera devoção pessoal",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.ishizaki.v7-g011",
+      "actor_id": "actor.ishizaki",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          176,
+          201,
+          202,
+          203
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.111"
+      ],
+      "prior_goal_or_means": "Obedecer ao líder por medo e hábito",
+      "observed_goal_or_means_after": "Manifesta solidariedade e disposição de sair com ele",
+      "trigger_or_new_information": "Derrota de Ryūen e tentativa de desistência",
+      "behavioral_evidence": "Manifesta solidariedade e disposição de sair com ele",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Não inferir ausência de medo pretérito",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.yamada-albert.v7-g012",
+      "actor_id": "actor.yamada-albert",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          179,
+          180,
+          201,
+          202,
+          203
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.094",
+        "y1v7.ev.111"
+      ],
+      "prior_goal_or_means": "Defender Ryūen em luta",
+      "observed_goal_or_means_after": "Manifesta intenção de sair com Ryūen",
+      "trigger_or_new_information": "Risco de abandono do líder",
+      "behavioral_evidence": "Manifesta intenção de sair com Ryūen",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Não é prova de lealdade irrevogável",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.suzune-horikita.v7-g013",
+      "actor_id": "actor.suzune-horikita",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          32,
+          33,
+          34,
+          35,
+          36,
+          117,
+          118
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.016",
+        "y1v7.ev.017",
+        "y1v7.ev.018",
+        "y1v7.ev.061"
+      ],
+      "prior_goal_or_means": "Subir à Classe A e liderar D",
+      "observed_goal_or_means_after": "Assume respostas independentes e regula impulsos de Sudō",
+      "trigger_or_new_information": "Provocações de C e avanço da turma",
+      "behavioral_evidence": "Assume respostas independentes e regula impulsos de Sudō",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Não lhe atribuir fatos que desconhece sobre o terraço",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.sae-chiyabashira.v7-g014",
+      "actor_id": "actor.sae-chiyabashira",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          73,
+          74,
+          75,
+          163,
+          164
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.040",
+        "y1v7.ev.041",
+        "y1v7.ev.086"
+      ],
+      "prior_goal_or_means": "Forçar X a levar D à Classe A",
+      "observed_goal_or_means_after": "Reconhece erro e reconsidera papel na turma",
+      "trigger_or_new_information": "Exposição da chantagem e recusa do aluno",
+      "behavioral_evidence": "Reconhece erro e reconsidera papel na turma",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Arrependimento declarado não garante mudança de conduta irreversível",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.manabu-horikita.v7-g015",
+      "actor_id": "actor.manabu-horikita",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          86,
+          87,
+          88,
+          89,
+          164,
+          165
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.047",
+        "y1v7.ev.048",
+        "y1v7.ev.088"
+      ],
+      "prior_goal_or_means": "Limitar Nagumo sem envolver-se diretamente",
+      "observed_goal_or_means_after": "Abre canal e aceita testemunho limitado",
+      "trigger_or_new_information": "Receio sobre conselho e pedido de Ayanokōji",
+      "behavioral_evidence": "Abre canal e aceita testemunho limitado",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Acordo de contrapartida exata requer evidência própria",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.hiyori-shiina.v7-g016",
+      "actor_id": "actor.hiyori-shiina",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          122
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.021",
+        "y1v7.ev.022",
+        "y1v7.ev.064"
+      ],
+      "prior_goal_or_means": "Buscar conexões não violentas",
+      "observed_goal_or_means_after": "Mantém disposição amistosa e recusa caça direta",
+      "trigger_or_new_information": "Vínculo literário com Ayanokōji e caça a X",
+      "behavioral_evidence": "Mantém disposição amistosa e recusa caça direta",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Não é adesão automática à Classe D",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.ken-sudo.v7-g017",
+      "actor_id": "actor.ken-sudo",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          32,
+          33,
+          117,
+          118
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.016",
+        "y1v7.ev.061"
+      ],
+      "prior_goal_or_means": "Responder a provocação com agressividade",
+      "observed_goal_or_means_after": "Resiste às provocações em duas cenas",
+      "trigger_or_new_information": "Orientação consistente de Horikita",
+      "behavioral_evidence": "Resiste às provocações em duas cenas",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Melhora comportamental não é atributo de imunidade",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v7.goal.rokusuke-koenji.v7-g018",
+      "actor_id": "actor.rokusuke-koenji",
+      "kind": "CONTINGENT_GOAL_CHANGE",
+      "event_time_ref": "Y1_V07",
+      "source": {
+        "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117
+        ],
+        "mode": "UNVERIFIED"
+      },
+      "evidence_refs": [
+        "y1v7.ev.053",
+        "y1v7.ev.060",
+        "y1v7.ev.054"
+      ],
+      "prior_goal_or_means": "Cultivar interesses próprios e evitar disputas",
+      "observed_goal_or_means_after": "Sustenta postura não cooperativa diante de Ryūen",
+      "trigger_or_new_information": "Intimidação coletiva de C",
+      "behavioral_evidence": "Sustenta postura não cooperativa diante de Ryūen",
+      "epistemic_status": "UNVERIFIED",
+      "persistence_scope": "SCENE_LOCAL",
+      "contingent_alternatives": [
+        "Divergent events may change the choice"
+      ],
+      "simulation_guard": "Não extrapolar imunidade a coerção física futura",
+      "engine_goal_update": false,
+      "verified": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    }
+  ],
+  "engine_memory_admission": false,
+  "goal_runtime_auto_update": false
+}

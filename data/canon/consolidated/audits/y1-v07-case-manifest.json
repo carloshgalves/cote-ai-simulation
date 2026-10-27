@@ -1,0 +1,894 @@
+{
+  "schema_version": "canon-case-manifest-v1",
+  "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+  "cases": [
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c001",
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v7-c001.json",
+      "actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        11
+      ],
+      "evidence_refs": [
+        "y1v7.ev.001",
+        "y1v7.ev.002",
+        "y1v7.ev.003"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c002",
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v7-c002.json",
+      "actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118
+      ],
+      "evidence_refs": [
+        "y1v7.ev.053",
+        "y1v7.ev.055",
+        "y1v7.ev.052",
+        "y1v7.ev.059"
+      ],
+      "topics": [
+        "social",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c003",
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v7-c003.json",
+      "actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126
+      ],
+      "evidence_refs": [
+        "y1v7.ev.063",
+        "y1v7.ev.066",
+        "y1v7.ev.067",
+        "y1v7.ev.065"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c004",
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v7-c004.json",
+      "actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141
+      ],
+      "evidence_refs": [
+        "y1v7.ev.072",
+        "y1v7.ev.069",
+        "y1v7.ev.073",
+        "y1v7.ev.071"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c005",
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v7-c005.json",
+      "actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188
+      ],
+      "evidence_refs": [
+        "y1v7.ev.097",
+        "y1v7.ev.098",
+        "y1v7.ev.093"
+      ],
+      "topics": [
+        "combat",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c006",
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v7-c006.json",
+      "actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        193,
+        194,
+        195
+      ],
+      "evidence_refs": [
+        "y1v7.ev.101",
+        "y1v7.ev.100",
+        "y1v7.ev.102"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c007",
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v7-c007.json",
+      "actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        201,
+        202,
+        203,
+        204
+      ],
+      "evidence_refs": [
+        "y1v7.ev.109",
+        "y1v7.ev.111",
+        "y1v7.ev.112"
+      ],
+      "topics": [
+        "institution",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c008",
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v7-c008.json",
+      "actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        199,
+        200
+      ],
+      "evidence_refs": [
+        "y1v7.ev.106",
+        "y1v7.ev.105",
+        "y1v7.ev.107",
+        "y1v7.ev.108"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c009",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v7-c009.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        28,
+        29,
+        30
+      ],
+      "evidence_refs": [
+        "y1v7.ev.014",
+        "y1v7.ev.013",
+        "y1v7.ev.015"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c010",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v7-c010.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "evidence_refs": [
+        "y1v7.ev.021",
+        "y1v7.ev.019",
+        "y1v7.ev.020"
+      ],
+      "topics": [
+        "social",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c011",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v7-c011.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "evidence_refs": [
+        "y1v7.ev.032",
+        "y1v7.ev.029",
+        "y1v7.ev.039"
+      ],
+      "topics": [
+        "institution",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c012",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v7-c012.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75
+      ],
+      "evidence_refs": [
+        "y1v7.ev.040",
+        "y1v7.ev.039",
+        "y1v7.ev.042"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c013",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v7-c013.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        79,
+        80,
+        81,
+        82,
+        83
+      ],
+      "evidence_refs": [
+        "y1v7.ev.044",
+        "y1v7.ev.045",
+        "y1v7.ev.043"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c014",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v7-c014.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165
+      ],
+      "evidence_refs": [
+        "y1v7.ev.082",
+        "y1v7.ev.083",
+        "y1v7.ev.087",
+        "y1v7.ev.081"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c015",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v7-c015.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        166,
+        167,
+        168
+      ],
+      "evidence_refs": [
+        "y1v7.ev.089"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c016",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v7-c016.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        179,
+        180,
+        181,
+        182
+      ],
+      "evidence_refs": [
+        "y1v7.ev.094",
+        "y1v7.ev.095",
+        "y1v7.ev.096"
+      ],
+      "topics": [
+        "combat",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c017",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v7-c017.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        183,
+        184,
+        185,
+        186,
+        187,
+        188
+      ],
+      "evidence_refs": [
+        "y1v7.ev.097",
+        "y1v7.ev.098"
+      ],
+      "topics": [
+        "combat",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c018",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v7-c018.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        190,
+        191
+      ],
+      "evidence_refs": [
+        "y1v7.ev.099"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c019",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v7-c019.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        192,
+        193,
+        194,
+        195
+      ],
+      "evidence_refs": [
+        "y1v7.ev.100",
+        "y1v7.ev.102"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kei-karuizawa.v7-c020",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v7-c020.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134
+      ],
+      "evidence_refs": [
+        "y1v7.ev.070",
+        "y1v7.ev.068",
+        "y1v7.ev.071",
+        "y1v7.ev.072"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kei-karuizawa.v7-c021",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v7-c021.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150
+      ],
+      "evidence_refs": [
+        "y1v7.ev.074",
+        "y1v7.ev.076",
+        "y1v7.ev.072",
+        "y1v7.ev.077"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kei-karuizawa.v7-c022",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v7-c022.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        152,
+        153
+      ],
+      "evidence_refs": [
+        "y1v7.ev.079"
+      ],
+      "topics": [
+        "social",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.kei-karuizawa.v7-c023",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v7-c023.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        190,
+        191
+      ],
+      "evidence_refs": [
+        "y1v7.ev.099"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.mio-ibuki.v7-c024",
+      "path": "data/canon/consolidated/behavioral_cases/mio-ibuki/v7-c024.json",
+      "actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        133,
+        134
+      ],
+      "evidence_refs": [
+        "y1v7.ev.071"
+      ],
+      "topics": [
+        "combat",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.mio-ibuki.v7-c025",
+      "path": "data/canon/consolidated/behavioral_cases/mio-ibuki/v7-c025.json",
+      "actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        167,
+        168
+      ],
+      "evidence_refs": [
+        "y1v7.ev.090",
+        "y1v7.ev.089"
+      ],
+      "topics": [
+        "exams",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.mio-ibuki.v7-c026",
+      "path": "data/canon/consolidated/behavioral_cases/mio-ibuki/v7-c026.json",
+      "actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        176
+      ],
+      "evidence_refs": [
+        "y1v7.ev.093"
+      ],
+      "topics": [
+        "combat",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.mio-ibuki.v7-c027",
+      "path": "data/canon/consolidated/behavioral_cases/mio-ibuki/v7-c027.json",
+      "actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        182
+      ],
+      "evidence_refs": [
+        "y1v7.ev.096"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.mio-ibuki.v7-c028",
+      "path": "data/canon/consolidated/behavioral_cases/mio-ibuki/v7-c028.json",
+      "actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        198,
+        199,
+        200
+      ],
+      "evidence_refs": [
+        "y1v7.ev.106",
+        "y1v7.ev.104",
+        "y1v7.ev.105",
+        "y1v7.ev.108"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.suzune-horikita.v7-c029",
+      "path": "data/canon/consolidated/behavioral_cases/suzune-horikita/v7-c029.json",
+      "actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        32,
+        33,
+        34,
+        35
+      ],
+      "evidence_refs": [
+        "y1v7.ev.016",
+        "y1v7.ev.017",
+        "y1v7.ev.018"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.suzune-horikita.v7-c030",
+      "path": "data/canon/consolidated/behavioral_cases/suzune-horikita/v7-c030.json",
+      "actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        37,
+        38
+      ],
+      "evidence_refs": [
+        "y1v7.ev.019"
+      ],
+      "topics": [
+        "social",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.suzune-horikita.v7-c031",
+      "path": "data/canon/consolidated/behavioral_cases/suzune-horikita/v7-c031.json",
+      "actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        117,
+        118
+      ],
+      "evidence_refs": [
+        "y1v7.ev.061"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.hiyori-shiina.v7-c032",
+      "path": "data/canon/consolidated/behavioral_cases/hiyori-shiina/v7-c032.json",
+      "actor_id": "actor.hiyori-shiina",
+      "pdf_pages": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "evidence_refs": [
+        "y1v7.ev.021",
+        "y1v7.ev.022"
+      ],
+      "topics": [
+        "exams",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.hiyori-shiina.v7-c033",
+      "path": "data/canon/consolidated/behavioral_cases/hiyori-shiina/v7-c033.json",
+      "actor_id": "actor.hiyori-shiina",
+      "pdf_pages": [
+        121,
+        122
+      ],
+      "evidence_refs": [
+        "y1v7.ev.064"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.masumi-kamuro.v7-c034",
+      "path": "data/canon/consolidated/behavioral_cases/masumi-kamuro/v7-c034.json",
+      "actor_id": "actor.masumi-kamuro",
+      "pdf_pages": [
+        28,
+        29,
+        30
+      ],
+      "evidence_refs": [
+        "y1v7.ev.014",
+        "y1v7.ev.013",
+        "y1v7.ev.015"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.manabu-horikita.v7-c035",
+      "path": "data/canon/consolidated/behavioral_cases/manabu-horikita/v7-c035.json",
+      "actor_id": "actor.manabu-horikita",
+      "pdf_pages": [
+        86,
+        87,
+        88,
+        89
+      ],
+      "evidence_refs": [
+        "y1v7.ev.047",
+        "y1v7.ev.048"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.manabu-horikita.v7-c036",
+      "path": "data/canon/consolidated/behavioral_cases/manabu-horikita/v7-c036.json",
+      "actor_id": "actor.manabu-horikita",
+      "pdf_pages": [
+        164,
+        165
+      ],
+      "evidence_refs": [
+        "y1v7.ev.088"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.sae-chiyabashira.v7-c037",
+      "path": "data/canon/consolidated/behavioral_cases/sae-chiyabashira/v7-c037.json",
+      "actor_id": "actor.sae-chiyabashira",
+      "pdf_pages": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75
+      ],
+      "evidence_refs": [
+        "y1v7.ev.040",
+        "y1v7.ev.039",
+        "y1v7.ev.041"
+      ],
+      "topics": [
+        "institution",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.sae-chiyabashira.v7-c038",
+      "path": "data/canon/consolidated/behavioral_cases/sae-chiyabashira/v7-c038.json",
+      "actor_id": "actor.sae-chiyabashira",
+      "pdf_pages": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "evidence_refs": [
+        "y1v7.ev.084",
+        "y1v7.ev.086"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.sakayanagi-father.v7-c039",
+      "path": "data/canon/consolidated/behavioral_cases/sakayanagi-father/v7-c039.json",
+      "actor_id": "actor.sakayanagi-father",
+      "pdf_pages": [
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "evidence_refs": [
+        "y1v7.ev.034",
+        "y1v7.ev.035",
+        "y1v7.ev.038",
+        "y1v7.ev.036"
+      ],
+      "topics": [
+        "institution",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.ken-sudo.v7-c040",
+      "path": "data/canon/consolidated/behavioral_cases/ken-sudo/v7-c040.json",
+      "actor_id": "actor.ken-sudo",
+      "pdf_pages": [
+        32,
+        33
+      ],
+      "evidence_refs": [
+        "y1v7.ev.016"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.ishizaki.v7-c041",
+      "path": "data/canon/consolidated/behavioral_cases/ishizaki/v7-c041.json",
+      "actor_id": "actor.ishizaki",
+      "pdf_pages": [
+        179,
+        180
+      ],
+      "evidence_refs": [
+        "y1v7.ev.094"
+      ],
+      "topics": [
+        "combat",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.ishizaki.v7-c042",
+      "path": "data/canon/consolidated/behavioral_cases/ishizaki/v7-c042.json",
+      "actor_id": "actor.ishizaki",
+      "pdf_pages": [
+        201,
+        202,
+        203
+      ],
+      "evidence_refs": [
+        "y1v7.ev.111"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.yamada-albert.v7-c043",
+      "path": "data/canon/consolidated/behavioral_cases/yamada-albert/v7-c043.json",
+      "actor_id": "actor.yamada-albert",
+      "pdf_pages": [
+        179,
+        180
+      ],
+      "evidence_refs": [
+        "y1v7.ev.094"
+      ],
+      "topics": [
+        "combat",
+        "y1_v07"
+      ]
+    },
+    {
+      "id": "y1v7.case.yamada-albert.v7-c044",
+      "path": "data/canon/consolidated/behavioral_cases/yamada-albert/v7-c044.json",
+      "actor_id": "actor.yamada-albert",
+      "pdf_pages": [
+        201,
+        202,
+        203
+      ],
+      "evidence_refs": [
+        "y1v7.ev.111"
+      ],
+      "topics": [
+        "strategy",
+        "y1_v07"
+      ]
+    }
+  ]
+}

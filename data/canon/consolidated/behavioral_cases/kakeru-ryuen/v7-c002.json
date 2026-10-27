@@ -1,0 +1,60 @@
+{
+  "id": "y1v7.case.kakeru-ryuen.v7-c002",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "Pressionar suspeitos de X",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Persegue Kōenji e convoca audiência de outras turmas",
+  "observed_result": "Desiste dessa linha sem identificar X nessa cena",
+  "epistemic_limits": "Desiste dessa linha sem identificar X nessa cena",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "social",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.053",
+    "y1v7.ev.055",
+    "y1v7.ev.052",
+    "y1v7.ev.059"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

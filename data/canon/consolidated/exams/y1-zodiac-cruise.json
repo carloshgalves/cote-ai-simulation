@@ -5,7 +5,8 @@
   "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
   "source_coverage": [
     "ln.y1.v04.sevenseas.en.operator-provided",
-    "ln.y1.v045.sevenseas.en.operator-provided"
+    "ln.y1.v045.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
   "source_pdf_sha256": "1d587b01242cd576fa2b0627222329d1bf1c23b12d206ad63f7a590f79fe9cc8",
   "location": "School-provided cruise ship (private group rooms)",
@@ -310,6 +311,57 @@
       "comment": "Horikita suspects Kushida leaked Dragon's VIP but has no proof; Karuizawa privately expects 500000 Rabbit VIP points in September, not yet credited.",
       "epistemic": "BELIEF_AND_PRIVATE_REWARD_EXPECTATION",
       "claim_promotion": "CONTEXT_ONLY_NO_EXECUTABLE_PROMOTION"
+    },
+    {
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "pdf_pages": [
+        123,
+        124,
+        125,
+        127,
+        128,
+        129,
+        130,
+        146,
+        147,
+        148,
+        181
+      ],
+      "source_evidence_refs": [
+        "y1v7.ev.069",
+        "y1v7.ev.075",
+        "y1v7.ev.095"
+      ],
+      "relationship": "CONTEXTUALIZES",
+      "reported_by": [
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "comment": "Ryuen reports Manabe group disclosed Kei Karuizawa's prior victimization, and says anonymous X used proof of their bullying to pressure them into leaking Class C sports-festival information. Kiyotaka later states he expected Ryuen to trace Manabe through that sports-festival leak.",
+      "temporal_scope": "Y1_V07_RECONSTRUCTION_OF_POST_CRUISE_COERCION_AND_V5_FESTIVAL; NOT_NEW_V4_EXAM_RULE",
+      "epistemic": "RYUEN_ATTRIBUTED_REPORT_AND_KIYOTAKA_PERSONAL_RETROSPECTIVE_NOT_SCHOOL_AUTHORITATIVE_VIP_LOG",
+      "actor_knowledge": "Ryuen and present rooftop attendees learn different pieces at different times; no knowledge broadcast to Rabbit/Dragon groups in V4.",
+      "claim_promotion": "RETRIEVAL_CONTEXT_ONLY_NO_VIP_ASSIGNMENT_OR_RUBRIC_CHANGE",
+      "verified": false
+    },
+    {
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "pdf_pages": [
+        110
+      ],
+      "source_evidence_refs": [],
+      "source_locator_pending_atomic_evidence": true,
+      "relationship": "CONTEXTUALIZES",
+      "reported_by": [
+        "actor.kakeru-ryuen",
+        "actor.rokusuke-koenji",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "comment": "Ryuen challenges Koenji about the earlier Zodiac examination; the narrative credits Koenji with correctly finding the Monkey group's VIP, while Koenji says he sought to finish meetings quickly.",
+      "epistemic": "RYUEN_CHALLENGE_KOENJI_SELF_DESCRIPTION_NARRATOR_ACCOUNT",
+      "claim_promotion": "NO_GENERAL_VIP_DETECTION_ABILITY_OR_SELECTION_FORMULA_FROM_SINGLE_EPISODE",
+      "verified": false
     }
-  ]
+  ],
+  "v07_retroactive_knowledge_gate": "Y1_V07 private reconstruction does not grant previously hidden betrayals or VIP identities to V4 participants."
 }

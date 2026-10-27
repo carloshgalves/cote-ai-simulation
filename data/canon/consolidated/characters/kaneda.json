@@ -4,9 +4,10 @@
   "display_name": "Kaneda (given name unknown)",
   "modeling_tier": "MINIMAL_ENTITY",
   "source_coverage": [
-    "ln.y1.v03.sevenseas.en.2019.operator-provided"
+    "ln.y1.v03.sevenseas.en.2019.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "Student alleged by Kiyotaka to have entered Class B as Class C intelligence contact; not directly observed",
     "aliases": []
@@ -19,7 +20,8 @@
     "strategy": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v3.ev.117"
+        "y1v3.ev.117",
+        "y1v7.ev.107"
       ]
     },
     "observation": {

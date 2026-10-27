@@ -8,9 +8,10 @@
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "Class D homeroom teacher",
     "aliases": []
@@ -21,7 +22,9 @@
   },
   "domains": {
     "institution": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v7.case.sae-chiyabashira.v7-c037"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.009",
         "y1v1.ev.010",
@@ -63,7 +66,12 @@
         "y1v4.ev.003",
         "y1v4.ev.087",
         "y1v4.ev.088",
-        "y1v4.ev.132"
+        "y1v4.ev.132",
+        "y1v7.ev.026",
+        "y1v7.ev.040",
+        "y1v7.ev.041",
+        "y1v7.ev.082",
+        "y1v7.ev.086"
       ]
     },
     "economy": {
@@ -161,7 +169,8 @@
         "y1v2.ev.085",
         "y1v3.ev.023",
         "y1v3.ev.025",
-        "y1v4.ev.087"
+        "y1v4.ev.087",
+        "y1v7.ev.025"
       ]
     },
     "observation": {
@@ -178,7 +187,8 @@
     },
     "strategy": {
       "behavioral_case_refs": [
-        "y1v1.case.c.detect-uniform-fifties"
+        "y1v1.case.c.detect-uniform-fifties",
+        "y1v7.case.sae-chiyabashira.v7-c038"
       ],
       "context_evidence_refs": [
         "y1v1.ev.070",
@@ -193,7 +203,9 @@
         "y1v3.ev.028",
         "y1v3.ev.076",
         "y1v4.ev.003",
-        "y1v6.ev.065"
+        "y1v6.ev.065",
+        "y1v7.ev.039",
+        "y1v7.ev.084"
       ]
     },
     "persuasion": {
@@ -327,5 +339,9 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [
+    "y1v7.goal.sae-chiyabashira.v7-g014"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

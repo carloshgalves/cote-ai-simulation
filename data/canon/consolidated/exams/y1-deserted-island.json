@@ -159,6 +159,26 @@
       "comment": "Ibuki's self-described reason for post-island Ryūen cooperation and Manabu's later knowledge of the secret replacement; neither supplies A/C contract terms.",
       "epistemic": "CHARACTER_TESTIMONY_AND_POST_RESULT_COUNCIL_SPEECH",
       "claim_promotion": "CONTEXT_ONLY_NO_EXECUTABLE_PROMOTION"
+    },
+    {
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "source_evidence_refs": [
+        "y1v7.ev.057",
+        "y1v7.ev.058",
+        "y1v7.ev.059"
+      ],
+      "pdf_pages": [
+        113,
+        114
+      ],
+      "relationship": "SUPPLEMENTS",
+      "summary": "Ryūen and Sakayanagi discuss an alliance contract described as 20,000 private points per participating student monthly, narrated as 800,000 per month to Class C. Sakayanagi says Katsuragi initiated the contract.",
+      "source_mode": "CHARACTER_DECLARATION_WITH_NARRATOR_INTERPRETATION",
+      "contract_term_as_stated": "UNTIL_GRADUATION",
+      "rival_statement": "Ryūen says payments continue until Class A loses its standing; do not silently resolve the ambiguity.",
+      "payment_ledger_verified": false,
+      "source_historical_contract_pdf_pages": "V7_ONLY_REVELATION_ABOUT_V3",
+      "authority": "REFERENCE_ONLY_NOT_EXECUTABLE"
     }
   ]
 }

@@ -1,0 +1,38 @@
+{
+  "id": "y1v7.case.mio-ibuki.v7-c024",
+  "actor_id": "actor.mio-ibuki",
+  "primary_actor_id": "actor.mio-ibuki",
+  "title": "Resistir e ceder à ordem",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Objeta e depois imobiliza Karuizawa",
+  "observed_result": "Não apagar responsabilidade nem coerção hierárquica",
+  "epistemic_limits": "Não apagar responsabilidade nem coerção hierárquica",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      133,
+      134
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "combat"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "combat",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.071"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

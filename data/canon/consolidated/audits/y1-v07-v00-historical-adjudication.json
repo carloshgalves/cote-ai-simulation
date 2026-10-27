@@ -1,0 +1,72 @@
+{
+  "schema_version": "y1-v00-v07-historical-adjudication-v1",
+  "source_pdf_hashes": {
+    "v00": "a5f3360c145ed9aa038bf7965b1d261e8b733c943b0c7fb8ed976705e3e0f7d3",
+    "v07": "b41f00143f483fa7704bcc6c4bfda03323bd835c77ea1e95e53d27bd859e461b"
+  },
+  "method": "Compare direct first-person V0 pre-school narration with distinct V7 character reports; absence of independent corroboration is not proof of falsehood.",
+  "judgments": [
+    {
+      "id": "V00V07-OPEN-01",
+      "verdict": "UNRESOLVED",
+      "question": "Did Atsuomi deliberately engineer ANHS enrollment?",
+      "v00_pages": [
+        258,
+        259,
+        260,
+        261
+      ],
+      "v07_pages": [
+        59,
+        62,
+        63,
+        64
+      ],
+      "supported": "V0 Atsuomi plans to develop Kiyotaka's individuality and privately commissions Tsukishiro; V7 Atsuomi publicly treats the enrollment as defiance while Kiyotaka rejects return.",
+      "not_supported": "Neither source gives complete terms of Tsukishiro's arrangement or demonstrates Atsuomi ordered Matsuo to steer enrollment.",
+      "simulation": "Preserve two competing interpretations; no omniscient Atsuomi agent memory or scripted outcome."
+    },
+    {
+      "id": "V00V07-OPEN-02",
+      "verdict": "UNRESOLVED",
+      "question": "Did Matsuo die by suicide and was Atsuomi behind all retaliation?",
+      "v00_pages": [
+        249,
+        258,
+        260,
+        261
+      ],
+      "v07_pages": [
+        59,
+        60,
+        61,
+        62
+      ],
+      "supported": "V7 contains Atsuomi's detailed first-person account; narrator considers it probable and recalls Matsuo, but explicitly disputes lack of evidence. The alleged papers are not inspected.",
+      "not_supported": "An independent death certificate, school record, or firsthand observation of each claimed punishment.",
+      "simulation": "Can model Atsuomi's claim and Kiyotaka hearing it; not universal event truth."
+    },
+    {
+      "id": "V00V07-OPEN-03",
+      "verdict": "COMPATIBLE_EXPLANATIONS_WITH_UNRESOLVED_CHRONOLOGY",
+      "question": "Does V7 contradict V0 about White Room suspension?",
+      "v00_pages": [
+        242,
+        247,
+        249,
+        256,
+        258
+      ],
+      "v07_pages": [
+        62,
+        63,
+        64
+      ],
+      "supported": "V0 reports political and operational causes for a temporary freeze. V7 shows Atsuomi regrets that interruption and says the institution has resumed. These claims are causally compatible.",
+      "not_supported": "Exact restart date, total downtime, full custody chain, unique cause or the entire meaning of one year with Matsuo.",
+      "simulation": "Retain both source accounts; temporal bounds UNKNOWN/HOLDS_BY. This resolves the alleged contradiction, not the missing dates."
+    }
+  ],
+  "external_independent_confirmation": "NOT_PERFORMED",
+  "engine_memory_admission": false
+}

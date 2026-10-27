@@ -1,0 +1,3270 @@
+{
+  "schema_version": "canon-y1-v07-independent-review-register-v1",
+  "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+  "source_pdf_sha256": "b41f00143f483fa7704bcc6c4bfda03323bd835c77ea1e95e53d27bd859e461b",
+  "source_pdf_pages": 207,
+  "status": "SOURCE_APURATION_ASSISTANT_MIGRATED_EXTERNAL_INDEPENDENT_NOT_PERFORMED",
+  "record_counts": {
+    "evidence": 113,
+    "cases": 44,
+    "goals": 18,
+    "total": 175
+  },
+  "reviewer_independence_rule": "A distinct human or separately authenticated model must inspect the primary PDF and deliver per-item rationale. Reuse of this assistant or two prompts is not independent.",
+  "assistant_deep_review_completed_count": 0,
+  "external_independent_review_completed_count": 0,
+  "rows": [
+    {
+      "id": "y1v7.ev.001",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        11
+      ],
+      "claim_summary": "Ryūen narra ter matado uma serpente numa excursão escolar, sem temor aparente naquele episódio.",
+      "adversarial_guard": "Não inferir imunidade universal a medo ou violência fora da situação narrada.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.002",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        11
+      ],
+      "claim_summary": "Ryūen associa a derrota do oponente ao prazer e descreve a violência como instrumento de poder.",
+      "adversarial_guard": "Autointerpretação do personagem; não é lei objetiva do universo.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.003",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        11,
+        12
+      ],
+      "claim_summary": "Ryūen descreve tédio com vitórias e desejo de enfrentar alguém que consiga derrotá-lo.",
+      "adversarial_guard": "Desejo de sofrer derrota não comprova desejo de morrer nem prediz resposta futura.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.004",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        14,
+        15
+      ],
+      "claim_summary": "Ayanokōji convive regularmente no grupo de Yukimura, Hasebe, Sakura e Miyake; Miyake chega depois do arco e flecha.",
+      "adversarial_guard": "A associação não implica compartilhamento de operações clandestinas.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.005",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        15
+      ],
+      "claim_summary": "Yukimura cita rumor de que um empate integral de pontos exigiria prova adicional para determinar a Classe A.",
+      "adversarial_guard": "Rumor entre veteranos, não regulamento escolar confirmado.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.006",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        17,
+        18
+      ],
+      "claim_summary": "Komiya acompanha o grupo e Miyake relata observação de Komiya e Ishizaki no clube de arco e flecha.",
+      "adversarial_guard": "Vigilância percebida e relato não provam ato disciplinar formal.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.007",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        19
+      ],
+      "claim_summary": "Yukimura relembra os saldos de 1º de dezembro: Classe D 262; Classe C 542 antes do efeito do Paper Shuffle.",
+      "adversarial_guard": "O comentário não é boletim posterior à transferência de pontos do exame.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.008",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        19,
+        20
+      ],
+      "claim_summary": "A narrativa descreve vitória de D sobre C no Paper Shuffle e a diferença de oitenta pontos após a transferência de cem de C para D.",
+      "adversarial_guard": "Separar cálculo narrativo e fichas ilustradas de 1º de dezembro.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.009",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        19
+      ],
+      "claim_summary": "Um abatimento de cem pontos em C por violação interna é mencionado com detalhes mantidos em sigilo pela escola.",
+      "adversarial_guard": "Causa precisa e responsabilidades não são reveladas.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.010",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        20,
+        21
+      ],
+      "claim_summary": "Ayanokōji interpreta o uso dos 300 pontos de C na ilha como possível troca por pontos privados com a Classe A.",
+      "adversarial_guard": "O valor e as cláusulas contratuais são explicitados depois, nas pp.113–114.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.011",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        22,
+        23
+      ],
+      "claim_summary": "Ayanokōji atribui publicamente a Horikita estratégias da ilha e omite a traição de Kushida ao relatar eventos ao grupo.",
+      "adversarial_guard": "O grupo não recebe o conhecimento ocultado.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.012",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        25,
+        26,
+        27
+      ],
+      "claim_summary": "Sakura demonstra satisfação genuína com conversas cotidianas, e Yukimura pretende contribuir por meio de estudos.",
+      "adversarial_guard": "Uma manifestação não estabelece traço fixo sem contexto.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.013",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        28
+      ],
+      "claim_summary": "Ayanokōji identifica Kamuro seguindo-o por dias e apresenta fotografias feitas discretamente.",
+      "adversarial_guard": "Fotos comprovam acompanhamento; não explicam toda a motivação.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.014",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        29,
+        30
+      ],
+      "claim_summary": "Ayanokōji deduz que Sakayanagi detém alguma fraqueza de Kamuro, explorando sua reação à ameaça.",
+      "adversarial_guard": "Natureza da fraqueza e sua origem permanecem desconhecidas.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.015",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        30
+      ],
+      "claim_summary": "Ayanokōji oferece a Kamuro tolerar a vigilância em troca de não divulgar seu segredo a terceiros além de Sakayanagi.",
+      "adversarial_guard": "Acordo verbal situado; não presume cumprimento perpétuo.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.016",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        32,
+        33
+      ],
+      "claim_summary": "Sudō relata provocações de alunos C, resiste a revidar e aceita a orientação de Horikita de não se envolver fisicamente.",
+      "adversarial_guard": "Autocontrole observado, sem garantia de não reincidência.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.017",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        34,
+        35
+      ],
+      "claim_summary": "Horikita percebe que Ryūen procura quem move a Classe D nos bastidores e descarta ser ela o alvo efetivo.",
+      "adversarial_guard": "Dedução de Horikita, não confissão de Ryūen naquele momento.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.018",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        35,
+        36
+      ],
+      "claim_summary": "Horikita revela ter previsto a colaboração de Kushida com Ryūen no Paper Shuffle.",
+      "adversarial_guard": "Não atribuir descoberta exclusiva a Ayanokōji.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.019",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        37,
+        38
+      ],
+      "claim_summary": "Horikita oferece a Ayanokōji um livro de Chandler para devolver à biblioteca, gesto que o narrador lê como bondade indireta.",
+      "adversarial_guard": "Intenção atribuída é inferência, não declaração de Horikita.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.020",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        38
+      ],
+      "claim_summary": "Ayanokōji afirma que livros atrasados geram dedução de pontos privados.",
+      "adversarial_guard": "Relato de prática escolar; sem valor/tabela de multas.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.021",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "claim_summary": "Ayanokōji encontra Hiyori Shiina na biblioteca, conversa sobre autores policiais e posteriormente almoça com ela.",
+      "adversarial_guard": "Interação genuína aparente não comprova espionagem.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.022",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        44,
+        45,
+        46
+      ],
+      "claim_summary": "Shiina diz buscar companhia para falar de livros e oferece empréstimos de sua coleção.",
+      "adversarial_guard": "Sua declaração não é prova universal de ausência de motivos secundários.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.023",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        47,
+        48
+      ],
+      "claim_summary": "Miyake deixa o clube mais cedo em razão do incômodo causado pela vigilância de C.",
+      "adversarial_guard": "A decisão é dele; não é expulsão do clube.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.024",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        50,
+        51,
+        52,
+        53
+      ],
+      "claim_summary": "O grupo debate a hipótese de Kōenji ser X, rejeita-a e Sakura cogita a participação de Ayanokōji.",
+      "adversarial_guard": "Nenhuma hipótese equivale a descoberta formal da identidade.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.025",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        54
+      ],
+      "claim_summary": "Satō convida Ayanokōji para sair, mas a conversa é interrompida pela convocação de Chabashira.",
+      "adversarial_guard": "Não codificar encontro realizado nessa cena.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.026",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        55,
+        56
+      ],
+      "claim_summary": "Chabashira leva Ayanokōji a uma reunião privada com o pai, na presença inicial da direção.",
+      "adversarial_guard": "A professora não originou necessariamente a visita.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.027",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        56,
+        57,
+        58,
+        59
+      ],
+      "claim_summary": "O pai exige a retirada do filho e reivindica autoridade sobre ele com base na criação pela White Room.",
+      "adversarial_guard": "É pretensão do pai, não direito escolar ou legal certificado.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.028",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        59,
+        60,
+        61
+      ],
+      "claim_summary": "O pai afirma que Matsuo foi punido, que prejudicou seu filho e que Matsuo morreu por suicídio.",
+      "adversarial_guard": "Ayanokōji questiona provas; não converter narrativa interessada em confirmação independente.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.029",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        62,
+        63
+      ],
+      "claim_summary": "Ayanokōji identifica a experiência da liberdade e do cotidiano como motivo central para permanecer na escola.",
+      "adversarial_guard": "Motivo declarado, não único objetivo imutável.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.030",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        62
+      ],
+      "claim_summary": "Ayanokōji afirma ter recebido na White Room educação intensiva em artes, ciências e autodefesa.",
+      "adversarial_guard": "Não traduzir descrição em pontuações numéricas absolutos ou onisciência.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.031",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        63
+      ],
+      "claim_summary": "O pai reconhece suspensão temporária das atividades da White Room e critica a interrupção de cerca de um ano.",
+      "adversarial_guard": "Temporalidade e extensão exatas não estão documentadas institucionalmente no romance.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.032",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        63,
+        64,
+        65
+      ],
+      "claim_summary": "Ayanokōji deduz limites do alcance do pai na escola a partir da ausência de escoltas e da necessidade de persuadi-lo.",
+      "adversarial_guard": "A interpretação não prova impossibilidade absoluta de intervenção clandestina.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.033",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        65
+      ],
+      "claim_summary": "O pai reconhece que outros candidatos existem, mas considera a aptidão de Kiyotaka superior à deles.",
+      "adversarial_guard": "Avaliação interessada, não ranking verificável da White Room.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.034",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        65,
+        66,
+        67
+      ],
+      "claim_summary": "O presidente do conselho escolar, Sakayanagi, intervém na reunião com o pai de Kiyotaka.",
+      "adversarial_guard": "Distinguir presidente da mantenedora de Sakayanagi Arisu, aluna.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.035",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        67,
+        68
+      ],
+      "claim_summary": "O presidente do conselho nega expulsão unilateral a pedido do pai enquanto o aluno quiser permanecer, observadas as normas.",
+      "adversarial_guard": "Proteção institucional condicionada, não imunidade permanente.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.036",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        69
+      ],
+      "claim_summary": "O presidente afirma ter decidido a admissão de Kiyotaka e conhecido sua identidade antes do encontro atual.",
+      "adversarial_guard": "Admissão excepcional não prova fórmula universal de seleção.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.037",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        69
+      ],
+      "claim_summary": "O presidente afirma que os cinquenta pontos em cada teste de ingresso, obtidos intencionalmente, não determinaram aprovação ou reprovação.",
+      "adversarial_guard": "Conhecimento da direção não significa conhecimento de todos os professores/colegas.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.038",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        69,
+        70
+      ],
+      "claim_summary": "O presidente identifica Arisu como sua filha e manifesta compromisso de proteção dos alunos dentro das regras.",
+      "adversarial_guard": "Relação familiar não transmite automaticamente segredos entre pai e filha.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.039",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        70,
+        71
+      ],
+      "claim_summary": "Ayanokōji testa Chabashira com uma alegação falsa sobre revelação da direção; ela reage e expõe informação sobre sua intervenção.",
+      "adversarial_guard": "Seu blefe não deve ser confundido com fala real do presidente.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.040",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        73,
+        74,
+        75
+      ],
+      "claim_summary": "Ayanokōji expõe o desejo oculto de Chabashira de levar D à Classe A; ela reconhece que não encontrou seu pai antes da visita.",
+      "adversarial_guard": "Separar confissão parcial das conjecturas sobre o motivo da alocação em D.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.041",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        74,
+        75
+      ],
+      "claim_summary": "Chabashira admite ter manipulado o aluno e sustenta que ainda poderia tentar incriminá-lo por violação escolar.",
+      "adversarial_guard": "Possibilidade declarada não é poder irrestrito nem ato consumado.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.042",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        75,
+        76
+      ],
+      "claim_summary": "Com a chantagem anterior neutralizada, Ayanokōji decide se afastar da corrida ativa para a Classe A.",
+      "adversarial_guard": "Prioridade reversível; não significa abandono automático de pessoas.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.043",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        77,
+        78,
+        79
+      ],
+      "claim_summary": "Ayanokōji considera Ryūen, Sakayanagi e outros observadores ao decidir se revelará sua identidade.",
+      "adversarial_guard": "Não assumir que cada suspeito conhece todos os fatos.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.044",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        79,
+        80,
+        81,
+        82,
+        83
+      ],
+      "claim_summary": "Ayanokōji liga a Karuizawa, informa que pretende interromper a parceria e encerra o contato apesar da reação dela.",
+      "adversarial_guard": "A ruptura verbal não prova desligamento emocional simétrico.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.045",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        80,
+        81,
+        82,
+        83
+      ],
+      "claim_summary": "Ayanokōji recolhe um amuleto vermelho caído e o entrega à administração do dormitório de veteranos.",
+      "adversarial_guard": "Não inferir o proprietário sem fonte.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.046",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        84,
+        85,
+        86
+      ],
+      "claim_summary": "Ayanokōji pondera o risco de Ryūen descobrir o rastro de Karuizawa mesmo sem outras intervenções suas.",
+      "adversarial_guard": "Risco prospectivo, não descoberta já consumada.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.047",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        86,
+        87,
+        88,
+        89
+      ],
+      "claim_summary": "Manabu procura Ayanokōji para falar sobre Nagumo, descreve tensão política e recrutamento de Ichinose.",
+      "adversarial_guard": "A versão de Manabu exige atribuição; não implica conhecimento coletivo da escola.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.048",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        88,
+        89
+      ],
+      "claim_summary": "Ayanokōji recebe contato de Manabu sem prometer cooperação automática contra Nagumo.",
+      "adversarial_guard": "Contato não estabelece aliança irrestrita.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.049",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        90,
+        91,
+        92
+      ],
+      "claim_summary": "O grupo participa de karaokê; o narrador observa iniciativas sociais de Sakura e outros colegas.",
+      "adversarial_guard": "Não criar estatísticas de canto ou sociabilidade ausentes.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.050",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        94,
+        95
+      ],
+      "claim_summary": "Ichinose reconhece vitória de D sobre C e derrota de B para A no Paper Shuffle; Sakayanagi menciona vantagem de dois pontos.",
+      "adversarial_guard": "Dois pontos referem-se ao confronto relatado, não a nova diferença de pontos de classe.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.051",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        97
+      ],
+      "claim_summary": "A avaliação ilustrada da Classe D registra 262 pontos em 1º de dezembro e vitória de D no Paper Shuffle.",
+      "adversarial_guard": "Não tratar 262 como saldo após o exame.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.052",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        98,
+        99,
+        100
+      ],
+      "claim_summary": "Ryūen invade a sala D com seu grupo e observa Kōenji, que sai sem demonstrar intimidação.",
+      "adversarial_guard": "Proximidade não demonstra que Kōenji seja X.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.053",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        103,
+        104,
+        105,
+        106,
+        107,
+        108
+      ],
+      "claim_summary": "Ryūen confronta Kōenji no trajeto; Kōenji usa conversa e gestos excêntricos para resistir à pressão.",
+      "adversarial_guard": "Não transformar comportamento em prova de superioridade combativa generalizada.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.054",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        108
+      ],
+      "claim_summary": "Ryūen quebra o espelho de Kōenji e Sudō recolhe fragmentos, apesar do clima de hostilidade.",
+      "adversarial_guard": "Objeto quebrado não demonstra agressão física de Kōenji.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.055",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        109,
+        110,
+        111,
+        112
+      ],
+      "claim_summary": "Sakayanagi e membros da Classe A intervêm verbalmente na abordagem de Ryūen.",
+      "adversarial_guard": "Ela pode conhecer o alvo de interesse sem conhecer necessariamente sua identidade na cena.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.056",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        112
+      ],
+      "claim_summary": "Ryūen confirma buscar a pessoa anônima X e admite considerar chantagem e violência para localizá-la.",
+      "adversarial_guard": "Registre como intenção e conduta indevida, não técnica aconselhável.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.057",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        113
+      ],
+      "claim_summary": "Sakayanagi cita cláusula de vinte mil pontos privados por pessoa por mês até a formatura no acordo A–C.",
+      "adversarial_guard": "Revelação posterior de contrato da ilha; preservar fonte V7 e ressalvas sobre cumprimento futuro.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.058",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        113,
+        114
+      ],
+      "claim_summary": "O arranjo é explicado como fluxo de aproximadamente oitocentos mil pontos privados por mês de A para C.",
+      "adversarial_guard": "Os 800 mil são por turma; não equivalem a 800 pontos de classe.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.059",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        113,
+        114
+      ],
+      "claim_summary": "Sakayanagi atribui a Katsuragi a iniciativa do contrato com Ryūen.",
+      "adversarial_guard": "Declaração de parte interessada; autoria contratual exige distinção da participação real.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.060",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        114,
+        115,
+        116
+      ],
+      "claim_summary": "Kōenji prioriza lazer e declara que não pretende cooperar com sua classe.",
+      "adversarial_guard": "Prioridade atual, não comportamento futuro imutável.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.061",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        117,
+        118
+      ],
+      "claim_summary": "Horikita controla reação de Sudō, enquanto Ryūen passa a considerar que suas preparações estão quase concluídas.",
+      "adversarial_guard": "O estado do plano de Ryūen vem de interpretação e fala, não de autoridade escolar.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.062",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        119
+      ],
+      "claim_summary": "A ficha C registra 542 pontos em 1º de dezembro e confirma derrota de C para D no Paper Shuffle.",
+      "adversarial_guard": "Comentário retrospectivo pode coexistir com saldo anterior à prova.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.063",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        120,
+        121,
+        122
+      ],
+      "claim_summary": "Ryūen descreve busca pelo X e interesse em prolongar a incerteza do adversário.",
+      "adversarial_guard": "Vontade de descobrir não implica capacidade ilimitada de vigilância.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.064",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        122
+      ],
+      "claim_summary": "Hiyori Shiina recusa convite para participar diretamente da perseguição a X e questiona a necessidade da caça.",
+      "adversarial_guard": "Não tratar sua recusa como ruptura formal com a classe.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.065",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        123
+      ],
+      "claim_summary": "Ryūen oculta de Ibuki o papel de Kushida na obtenção do endereço eletrônico de Karuizawa.",
+      "adversarial_guard": "Ryūen conhece a fonte; Ibuki não é informada na ocasião.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.066",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        123,
+        124
+      ],
+      "claim_summary": "Ryūen convoca Karuizawa ao terraço e avisa X, explorando o segredo da aluna.",
+      "adversarial_guard": "Ação de coerção descrita como violência moral, não norma escolar.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.067",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        125,
+        126
+      ],
+      "claim_summary": "Ryūen prepara o local e inutiliza a câmera do terraço com tinta.",
+      "adversarial_guard": "A existência de câmera e seu dano são fatos de cena, não licença de uso de segurança.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.068",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        127,
+        128
+      ],
+      "claim_summary": "Karuizawa comparece sozinha perto das 14 horas sob ameaça de exposição de seu passado.",
+      "adversarial_guard": "Presença coagida não é consentimento voluntário.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.069",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        128,
+        129,
+        130
+      ],
+      "claim_summary": "Ryūen relata a participação anterior de Manabe e amigas e o uso coercitivo delas por X.",
+      "adversarial_guard": "A hipótese combina dados relatados e interpretação de Ryūen; manter níveis separados.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.070",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        131,
+        132,
+        133
+      ],
+      "claim_summary": "Karuizawa tenta resistir à chantagem verbal e evita entregar o nome de X.",
+      "adversarial_guard": "Resistência observada não demonstra ausência de medo.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.071",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        133,
+        134
+      ],
+      "claim_summary": "Ibuki resiste a participar da violência, mas acaba imobilizando Karuizawa sob pressão de Ryūen.",
+      "adversarial_guard": "Distinguir objeção moral/risco percebido e efetiva participação.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.072",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142
+      ],
+      "claim_summary": "Ryūen submete Karuizawa a exposição ao frio e repetidas agressões com água diante dos presentes.",
+      "adversarial_guard": "Evento abusivo; evitar descrição operacional ou glamourização.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.073",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        137,
+        138,
+        139
+      ],
+      "claim_summary": "Ryūen narra ter experimentado limites de câmeras, pontos privados e contratos da escola.",
+      "adversarial_guard": "Experimentos privados não revelam todas as regras institucionais.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.074",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        142,
+        143,
+        144,
+        145
+      ],
+      "claim_summary": "Karuizawa revive memórias traumáticas e descreve terror e temor de voltar à situação anterior.",
+      "adversarial_guard": "Ponto de vista subjetivo; não atribuir diagnóstico clínico.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.075",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        146,
+        147,
+        148
+      ],
+      "claim_summary": "Ryūen expõe sua reconstrução de manipulações anteriores de X relativas à perseguição de Manabe.",
+      "adversarial_guard": "A reconstrução é fala de adversário; Ayanokōji mais tarde confirma engano sem certificar cada detalhe.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.076",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        149,
+        150
+      ],
+      "claim_summary": "Mesmo fragilizada, Karuizawa decide não revelar o nome de Kiyotaka e associa a decisão ao respeito próprio.",
+      "adversarial_guard": "Não codificar como obediência cega ou lealdade incondicional.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.077",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        150
+      ],
+      "claim_summary": "Karuizawa reconhece sentimentos contraditórios: gratidão e diversão na parceria, receio de traição e esperança de resgate.",
+      "adversarial_guard": "Estados simultâneos; não achatá-los em um único parâmetro fixo.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.078",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        151
+      ],
+      "claim_summary": "A avaliação ilustrada registra Classe B com 753 pontos em 1º de dezembro e derrota para A no Paper Shuffle.",
+      "adversarial_guard": "Sem confundir avaliação do professor com análise determinística de personalidade.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.079",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        152,
+        153
+      ],
+      "claim_summary": "Karuizawa envia aviso de emergência a Ayanokōji sobre encontro no terraço; ele já conhece a convocação.",
+      "adversarial_guard": "Conhecimento de Ayanokōji não é difundido ao grupo de amigos.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.080",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        153,
+        154
+      ],
+      "claim_summary": "Satō faz novo convite social e Ayanokōji aceita discutir encontro futuro.",
+      "adversarial_guard": "Convite e aceitação da conversa não demonstram relacionamento iniciado.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.081",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        155,
+        156
+      ],
+      "claim_summary": "Ayanokōji interrompe o programa com amigos para tratar da situação de Karuizawa.",
+      "adversarial_guard": "Escolha contextual; não negar sua intenção simultânea de controlar informação.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.082",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        156,
+        157,
+        158
+      ],
+      "claim_summary": "Ayanokōji procura Chabashira para testar sua disposição de intervir e discutir consequências escolares.",
+      "adversarial_guard": "Professor não é acionado como garantia automática de punição.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.083",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        159,
+        160,
+        161
+      ],
+      "claim_summary": "Ayanokōji questiona a compra de pontos de prova a partir de preço histórico de 100 mil por ponto.",
+      "adversarial_guard": "Não deduzir cotação universal ou repetibilidade irrestrita.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.084",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        162
+      ],
+      "claim_summary": "Chabashira explica que há numerosas regras e restrições à divulgação dos preços e usos especiais de pontos.",
+      "adversarial_guard": "Sua explicação genérica não publica uma tabela executável de transações.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.085",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        162
+      ],
+      "claim_summary": "Ayanokōji envia mensagem convocando Manabu para a área do terraço.",
+      "adversarial_guard": "O destinatário e a missão são confirmados nas pp.164–165.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.086",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        163
+      ],
+      "claim_summary": "Chabashira alega ter agido após orientação do presidente da escola para tornar Kiyotaka apegado à instituição.",
+      "adversarial_guard": "Declaração de Chabashira; não provar que a direção autorizou cada mentira.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.087",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        163,
+        164
+      ],
+      "claim_summary": "Ayanokōji reafirma que Horikita pode liderar D e que pretende afastar-se da competição direta de classes.",
+      "adversarial_guard": "O plano é histórico/condicional, não script permanente pós-divergência.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.088",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        164,
+        165
+      ],
+      "claim_summary": "Manabu comparece como testemunha de contexto e deve ficar na escada, sem presenciar diretamente a luta no terraço.",
+      "adversarial_guard": "Não promover a testemunho ocular de todos os golpes.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.089",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        166,
+        167
+      ],
+      "claim_summary": "Ayanokōji supera a barreira representada por Albert e revela-se a Ryūen diante de Ibuki, Ishizaki e Karuizawa.",
+      "adversarial_guard": "O conjunto de presentes descobre X nesse instante, não em Y1_START.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.090",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        167,
+        168
+      ],
+      "claim_summary": "Ibuki reconhece ter ocultado a roupa íntima de Karuizawa na mochila de um garoto durante o exame da ilha.",
+      "adversarial_guard": "Confissão retrospectiva V3; autoria limitada ao ato declarado.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.091",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        170,
+        171,
+        172
+      ],
+      "claim_summary": "Ibuki e Ishizaki inicialmente duvidam que Ayanokōji seja X apesar de sua presença e das afirmações de Ryūen.",
+      "adversarial_guard": "Atualização de crenças exige evidência local de cada ator.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.092",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        173,
+        174,
+        175
+      ],
+      "claim_summary": "Ayanokōji recusa ceder à chantagem e afirma que denunciar sua identidade deflagraria confronto.",
+      "adversarial_guard": "Ameaça estratégica situada, não política de agressão obrigatória.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.093",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        176,
+        177
+      ],
+      "claim_summary": "Ryūen agride Ibuki quando ela se opõe à escalada e exige confronto físico com Ayanokōji.",
+      "adversarial_guard": "Agressão não demonstra consenso ou anuência de Ibuki.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.094",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        179,
+        180
+      ],
+      "claim_summary": "Ayanokōji imobiliza Ishizaki e neutraliza Albert após golpes recebidos e contra-ataques.",
+      "adversarial_guard": "Desempenho situado contra oponentes específicos, sem força física infinita.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.095",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        181
+      ],
+      "claim_summary": "Ayanokōji explica que a exposição da rede de Manabe e a busca de X eram desdobramentos que ele antecipara.",
+      "adversarial_guard": "A retrospectiva revela intenção; não provar controle causal absoluto de todas as contingências.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.096",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        182
+      ],
+      "claim_summary": "Ibuki ataca com chutes; Ayanokōji os evita e a derruba; narrador compara suas habilidades às de Horikita na ilha.",
+      "adversarial_guard": "Comparação com Horikita é julgamento do narrador em condição hipotética.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.097",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        183,
+        184,
+        185,
+        186,
+        187,
+        188
+      ],
+      "claim_summary": "Ryūen luta com Ayanokōji, resiste a golpes e é finalmente nocauteado.",
+      "adversarial_guard": "Vitória pontual não fornece escala global entre personagens fictícios e reais.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.098",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        184,
+        185,
+        186,
+        187,
+        188
+      ],
+      "claim_summary": "Ryūen insiste que não teme ser derrotado; Ayanokōji relata ausência de medo e prazer na luta.",
+      "adversarial_guard": "Afirmações internas concorrentes, não diagnósticos nem estados universais.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.099",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        190,
+        191
+      ],
+      "claim_summary": "Ayanokōji consola Karuizawa, promete voltar a protegê-la e admite privadamente que demorou para testar fidelidade e dependência.",
+      "adversarial_guard": "Preservar duas camadas: conforto externo e intenção interna de controle.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.100",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        192,
+        193
+      ],
+      "claim_summary": "Ayanokōji revela que Manabu está na escada e que há registro de Ryūen danificando a câmera, além de álibi próprio.",
+      "adversarial_guard": "Manabu não vira testemunha ocular do combate.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.101",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        193,
+        194,
+        195
+      ],
+      "claim_summary": "Ryūen anuncia intenção de assumir culpa, transferir pontos e retirar-se da escola, mas não conclui a saída nesse momento.",
+      "adversarial_guard": "Intenção não é expulsão efetiva.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.102",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        195
+      ],
+      "claim_summary": "Ayanokōji justifica preservar Ryūen para pressionar Ichinose/Sakayanagi e evitar novas suspeitas sobre X.",
+      "adversarial_guard": "Justificativa de parte interessada; não prova resultado futuro.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.103",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        196
+      ],
+      "claim_summary": "Avaliação da Classe A registra 874 pontos em 1º de dezembro, ressalta parceria de ilha com C e ausência de incidentes no Paper Shuffle.",
+      "adversarial_guard": "Tornar comentários da avaliação observações docentes, não habilidades quantificadas.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.104",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        197,
+        198
+      ],
+      "claim_summary": "Ryūen sonha com a cobra e reflete sobre derrota; Ibuki lhe devolve celular entregue anteriormente.",
+      "adversarial_guard": "Mudança de perspectiva narrativa deve ser preservada.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.105",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        199
+      ],
+      "claim_summary": "Ibuki encontra no aparelho de Ryūen plano de três anos que cita oitocentos milhões de pontos privados.",
+      "adversarial_guard": "Plano visível não prova que recursos já foram acumulados.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.106",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        199,
+        200
+      ],
+      "claim_summary": "Ibuki interpreta os 800 milhões como estratégia de levar a turma inteira à Classe A; Ryūen minimiza o documento.",
+      "adversarial_guard": "Duas declarações conflitantes não se resolvem inventando intenção única.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.107",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        200
+      ],
+      "claim_summary": "Ryūen prevê que Hiyori e Kaneda possam conduzir C após sua retirada da liderança.",
+      "adversarial_guard": "Previsão não equivale a eleição/posse formal confirmada.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.108",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        200
+      ],
+      "claim_summary": "Ibuki confronta fisicamente Ryūen e insiste que ele não abandone prematuramente a disputa.",
+      "adversarial_guard": "Não inferir vencedor genérico de duelo sem condições.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.109",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        201,
+        202
+      ],
+      "claim_summary": "Ryūen procura Sakagami e admite dano à câmera e responsabilidade por conflito com seus colegas.",
+      "adversarial_guard": "Autoinculpação parcial é estratégia, não laudo completo da escola.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.110",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        203
+      ],
+      "claim_summary": "O professor informa que um aluno de D assumiu parte do dano e que pontos privados da Classe D cobriram reparação.",
+      "adversarial_guard": "Identidade do pagador e cadeia de negociação não são integralmente demonstradas.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.111",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        203
+      ],
+      "claim_summary": "Ishizaki e Albert declararam que também sairiam se Ryūen saísse.",
+      "adversarial_guard": "Decisão dos alunos não pode ser automaticamente atribuída a ordem de X.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.112",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        204
+      ],
+      "claim_summary": "Ryūen desiste de entregar o pedido de retirada e permanece matriculado.",
+      "adversarial_guard": "A deserção consumada é contrafactual, não evento canônico.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.ev.113",
+      "record_kind": "EVIDENCE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        205
+      ],
+      "claim_summary": "Circulam rumores de que Ryūen abandonou a liderança e afastou seus antigos subordinados; Ayanokōji considera utilizá-lo novamente.",
+      "adversarial_guard": "Rumor sobre configuração política não certifica designação de sucessor.",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c001",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        11
+      ],
+      "claim_summary": "Actor actor.kakeru-ryuen: y1v7.case.kakeru-ryuen.v7-c001",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c002",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118
+      ],
+      "claim_summary": "Actor actor.kakeru-ryuen: y1v7.case.kakeru-ryuen.v7-c002",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c003",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126
+      ],
+      "claim_summary": "Actor actor.kakeru-ryuen: y1v7.case.kakeru-ryuen.v7-c003",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c004",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141
+      ],
+      "claim_summary": "Actor actor.kakeru-ryuen: y1v7.case.kakeru-ryuen.v7-c004",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c005",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188
+      ],
+      "claim_summary": "Actor actor.kakeru-ryuen: y1v7.case.kakeru-ryuen.v7-c005",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c006",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        193,
+        194,
+        195
+      ],
+      "claim_summary": "Actor actor.kakeru-ryuen: y1v7.case.kakeru-ryuen.v7-c006",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c007",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        201,
+        202,
+        203,
+        204
+      ],
+      "claim_summary": "Actor actor.kakeru-ryuen: y1v7.case.kakeru-ryuen.v7-c007",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kakeru-ryuen.v7-c008",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        199,
+        200
+      ],
+      "claim_summary": "Actor actor.kakeru-ryuen: y1v7.case.kakeru-ryuen.v7-c008",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c009",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        28,
+        29,
+        30
+      ],
+      "claim_summary": "Actor actor.kiyotaka-ayanokoji: y1v7.case.kiyotaka-ayanokoji.v7-c009",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c010",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "claim_summary": "Actor actor.kiyotaka-ayanokoji: y1v7.case.kiyotaka-ayanokoji.v7-c010",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c011",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "claim_summary": "Actor actor.kiyotaka-ayanokoji: y1v7.case.kiyotaka-ayanokoji.v7-c011",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c012",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75
+      ],
+      "claim_summary": "Actor actor.kiyotaka-ayanokoji: y1v7.case.kiyotaka-ayanokoji.v7-c012",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c013",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        79,
+        80,
+        81,
+        82,
+        83
+      ],
+      "claim_summary": "Actor actor.kiyotaka-ayanokoji: y1v7.case.kiyotaka-ayanokoji.v7-c013",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c014",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165
+      ],
+      "claim_summary": "Actor actor.kiyotaka-ayanokoji: y1v7.case.kiyotaka-ayanokoji.v7-c014",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c015",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        166,
+        167,
+        168
+      ],
+      "claim_summary": "Actor actor.kiyotaka-ayanokoji: y1v7.case.kiyotaka-ayanokoji.v7-c015",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c016",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        179,
+        180,
+        181,
+        182
+      ],
+      "claim_summary": "Actor actor.kiyotaka-ayanokoji: y1v7.case.kiyotaka-ayanokoji.v7-c016",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c017",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        183,
+        184,
+        185,
+        186,
+        187,
+        188
+      ],
+      "claim_summary": "Actor actor.kiyotaka-ayanokoji: y1v7.case.kiyotaka-ayanokoji.v7-c017",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c018",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        190,
+        191
+      ],
+      "claim_summary": "Actor actor.kiyotaka-ayanokoji: y1v7.case.kiyotaka-ayanokoji.v7-c018",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kiyotaka-ayanokoji.v7-c019",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        192,
+        193,
+        194,
+        195
+      ],
+      "claim_summary": "Actor actor.kiyotaka-ayanokoji: y1v7.case.kiyotaka-ayanokoji.v7-c019",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kei-karuizawa.v7-c020",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134
+      ],
+      "claim_summary": "Actor actor.kei-karuizawa: y1v7.case.kei-karuizawa.v7-c020",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kei-karuizawa.v7-c021",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150
+      ],
+      "claim_summary": "Actor actor.kei-karuizawa: y1v7.case.kei-karuizawa.v7-c021",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kei-karuizawa.v7-c022",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        152,
+        153
+      ],
+      "claim_summary": "Actor actor.kei-karuizawa: y1v7.case.kei-karuizawa.v7-c022",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.kei-karuizawa.v7-c023",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        190,
+        191
+      ],
+      "claim_summary": "Actor actor.kei-karuizawa: y1v7.case.kei-karuizawa.v7-c023",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.mio-ibuki.v7-c024",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        133,
+        134
+      ],
+      "claim_summary": "Actor actor.mio-ibuki: y1v7.case.mio-ibuki.v7-c024",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.mio-ibuki.v7-c025",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        167,
+        168
+      ],
+      "claim_summary": "Actor actor.mio-ibuki: y1v7.case.mio-ibuki.v7-c025",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.mio-ibuki.v7-c026",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        176
+      ],
+      "claim_summary": "Actor actor.mio-ibuki: y1v7.case.mio-ibuki.v7-c026",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.mio-ibuki.v7-c027",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        182
+      ],
+      "claim_summary": "Actor actor.mio-ibuki: y1v7.case.mio-ibuki.v7-c027",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.mio-ibuki.v7-c028",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        198,
+        199,
+        200
+      ],
+      "claim_summary": "Actor actor.mio-ibuki: y1v7.case.mio-ibuki.v7-c028",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.suzune-horikita.v7-c029",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        32,
+        33,
+        34,
+        35
+      ],
+      "claim_summary": "Actor actor.suzune-horikita: y1v7.case.suzune-horikita.v7-c029",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.suzune-horikita.v7-c030",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        37,
+        38
+      ],
+      "claim_summary": "Actor actor.suzune-horikita: y1v7.case.suzune-horikita.v7-c030",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.suzune-horikita.v7-c031",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        117,
+        118
+      ],
+      "claim_summary": "Actor actor.suzune-horikita: y1v7.case.suzune-horikita.v7-c031",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.hiyori-shiina.v7-c032",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "claim_summary": "Actor actor.hiyori-shiina: y1v7.case.hiyori-shiina.v7-c032",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.hiyori-shiina.v7-c033",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        121,
+        122
+      ],
+      "claim_summary": "Actor actor.hiyori-shiina: y1v7.case.hiyori-shiina.v7-c033",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.masumi-kamuro.v7-c034",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        28,
+        29,
+        30
+      ],
+      "claim_summary": "Actor actor.masumi-kamuro: y1v7.case.masumi-kamuro.v7-c034",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.manabu-horikita.v7-c035",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        86,
+        87,
+        88,
+        89
+      ],
+      "claim_summary": "Actor actor.manabu-horikita: y1v7.case.manabu-horikita.v7-c035",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.manabu-horikita.v7-c036",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        164,
+        165
+      ],
+      "claim_summary": "Actor actor.manabu-horikita: y1v7.case.manabu-horikita.v7-c036",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.sae-chiyabashira.v7-c037",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        70,
+        71,
+        72,
+        73,
+        74,
+        75
+      ],
+      "claim_summary": "Actor actor.sae-chiyabashira: y1v7.case.sae-chiyabashira.v7-c037",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.sae-chiyabashira.v7-c038",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "claim_summary": "Actor actor.sae-chiyabashira: y1v7.case.sae-chiyabashira.v7-c038",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.sakayanagi-father.v7-c039",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "claim_summary": "Actor actor.sakayanagi-father: y1v7.case.sakayanagi-father.v7-c039",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.ken-sudo.v7-c040",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        32,
+        33
+      ],
+      "claim_summary": "Actor actor.ken-sudo: y1v7.case.ken-sudo.v7-c040",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.ishizaki.v7-c041",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        179,
+        180
+      ],
+      "claim_summary": "Actor actor.ishizaki: y1v7.case.ishizaki.v7-c041",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.ishizaki.v7-c042",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        201,
+        202,
+        203
+      ],
+      "claim_summary": "Actor actor.ishizaki: y1v7.case.ishizaki.v7-c042",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.yamada-albert.v7-c043",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        179,
+        180
+      ],
+      "claim_summary": "Actor actor.yamada-albert: y1v7.case.yamada-albert.v7-c043",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.case.yamada-albert.v7-c044",
+      "record_kind": "BEHAVIORAL_CASE",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        201,
+        202,
+        203
+      ],
+      "claim_summary": "Actor actor.yamada-albert: y1v7.case.yamada-albert.v7-c044",
+      "adversarial_guard": "Keep action primary-actor-owned and episode-limited",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.kakeru-ryuen.v7-g001",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        11,
+        12,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188
+      ],
+      "claim_summary": "Procurar adversário capaz de vencê-lo → Da confiança em violência e domínio para reconhecimento de derrota pontual",
+      "adversarial_guard": "Sem converter em medo global ou pacifismo obrigatório",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.kakeru-ryuen.v7-g002",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        193,
+        194,
+        195,
+        201,
+        202,
+        203,
+        204
+      ],
+      "claim_summary": "Querer responsabilizar-se e deixar a escola → Abandona retirada formal e permanece",
+      "adversarial_guard": "Permanência não restaura automaticamente seu comando",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.kakeru-ryuen.v7-g003",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205
+      ],
+      "claim_summary": "Liderar classe pelo controle coercitivo → Reduz papel público e surge rumor de abandono da liderança",
+      "adversarial_guard": "Não comprovar sucessor formal nem abdicação de Class A como ambição",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.kiyotaka-ayanokoji.v7-g004",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        62,
+        63,
+        75,
+        76
+      ],
+      "claim_summary": "Aprender vida normal e preservar liberdade → Passa a planejar retirada da competição ativa entre classes",
+      "adversarial_guard": "Plano condicionado por novas situações",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.kiyotaka-ayanokoji.v7-g005",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        79,
+        80,
+        81,
+        82,
+        83,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166
+      ],
+      "claim_summary": "Cortar contato operacional com Karuizawa → Volta a intervir para resgatá-la e enfrentar X",
+      "adversarial_guard": "Não apagar cálculo instrumental de seu monólogo",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.kiyotaka-ayanokoji.v7-g006",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        165,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195
+      ],
+      "claim_summary": "Preservar anonimato absoluto → Aceita exposição restrita e usa testemunha remota",
+      "adversarial_guard": "Segredo revelado aos presentes, não publicamente à escola inteira",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.kei-karuizawa.v7-g007",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        79,
+        80,
+        81,
+        82,
+        83,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150
+      ],
+      "claim_summary": "Contar com X como proteção → Escolhe silêncio como ato de dignidade pessoal",
+      "adversarial_guard": "Não caracterizar decisão como mera programação de lealdade",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.kei-karuizawa.v7-g008",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        149,
+        150,
+        190,
+        191
+      ],
+      "claim_summary": "Recusar traição apesar de medo → Mantém proteção de seu segredo e vínculo ambivalente",
+      "adversarial_guard": "Desconfiança expressa e dependência podem coexistir",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.mio-ibuki.v7-g009",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        176
+      ],
+      "claim_summary": "Cooperar pragmaticamente com Ryūen → Questiona explicitamente os limites da liderança de Ryūen",
+      "adversarial_guard": "Ainda participa de alguns atos e não rompe instantaneamente",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.mio-ibuki.v7-g010",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        197,
+        198,
+        199,
+        200
+      ],
+      "claim_summary": "Desejar libertar-se do comando de Ryūen → Passa a pressioná-lo a permanecer e reconsiderar metas",
+      "adversarial_guard": "Motivos vão além de mera devoção pessoal",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.ishizaki.v7-g011",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        176,
+        201,
+        202,
+        203
+      ],
+      "claim_summary": "Obedecer ao líder por medo e hábito → Manifesta solidariedade e disposição de sair com ele",
+      "adversarial_guard": "Não inferir ausência de medo pretérito",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.yamada-albert.v7-g012",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        179,
+        180,
+        201,
+        202,
+        203
+      ],
+      "claim_summary": "Defender Ryūen em luta → Manifesta intenção de sair com Ryūen",
+      "adversarial_guard": "Não é prova de lealdade irrevogável",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.suzune-horikita.v7-g013",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        117,
+        118
+      ],
+      "claim_summary": "Subir à Classe A e liderar D → Assume respostas independentes e regula impulsos de Sudō",
+      "adversarial_guard": "Não lhe atribuir fatos que desconhece sobre o terraço",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.sae-chiyabashira.v7-g014",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        73,
+        74,
+        75,
+        163,
+        164
+      ],
+      "claim_summary": "Forçar X a levar D à Classe A → Reconhece erro e reconsidera papel na turma",
+      "adversarial_guard": "Arrependimento declarado não garante mudança de conduta irreversível",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.manabu-horikita.v7-g015",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        86,
+        87,
+        88,
+        89,
+        164,
+        165
+      ],
+      "claim_summary": "Limitar Nagumo sem envolver-se diretamente → Abre canal e aceita testemunho limitado",
+      "adversarial_guard": "Acordo de contrapartida exata requer evidência própria",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.hiyori-shiina.v7-g016",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        122
+      ],
+      "claim_summary": "Buscar conexões não violentas → Mantém disposição amistosa e recusa caça direta",
+      "adversarial_guard": "Não é adesão automática à Classe D",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.ken-sudo.v7-g017",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        32,
+        33,
+        117,
+        118
+      ],
+      "claim_summary": "Responder a provocação com agressividade → Resiste às provocações em duas cenas",
+      "adversarial_guard": "Melhora comportamental não é atributo de imunidade",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    },
+    {
+      "id": "y1v7.goal.rokusuke-koenji.v7-g018",
+      "record_kind": "CONTINGENT_GOAL_TRANSITION",
+      "source_id": "ln.y1.v07.sevenseas.en.operator-provided",
+      "physical_pdf_pages": [
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117
+      ],
+      "claim_summary": "Cultivar interesses próprios e evitar disputas → Sustenta postura não cooperativa diante de Ryūen",
+      "adversarial_guard": "Não extrapolar imunidade a coerção física futura",
+      "assistant_first_pass": "CANDIDATE_SOURCE_LOCATED",
+      "assistant_individual_deep_semantic_review": "NOT_CLAIMED",
+      "external_independent_reviewer": null,
+      "external_decision": "UNRESOLVED_PENDING_SOURCE_EXAM",
+      "source_copy_committed": false,
+      "engine_admission": false
+    }
+  ],
+  "release_gate": {
+    "independent_review": "NOT_PERFORMED",
+    "operator_approval": "NOT_GRANTED",
+    "engine_memory_admission": false,
+    "goals_executable": false,
+    "merge_to_main": "BLOCKED"
+  }
+}

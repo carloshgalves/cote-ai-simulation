@@ -4,9 +4,10 @@
   "display_name": "Yamada Albert",
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "ASSISTANT_INITIAL_PDF_PASS_INDEPENDENT_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "Observed Year 1 Volume 5 sports festival participant",
     "aliases": []
@@ -38,9 +39,13 @@
       ]
     },
     "strategy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v7.case.yamada-albert.v7-c044"
+      ],
       "context_evidence_refs": [
-        "y1v5.ev.041"
+        "y1v5.ev.041",
+        "y1v7.ev.089",
+        "y1v7.ev.111"
       ]
     },
     "results": {
@@ -54,6 +59,14 @@
         "y1v5.case.yamada-albert.support-ryuen-against-sudo-cavalry"
       ],
       "context_evidence_refs": []
+    },
+    "combat": {
+      "behavioral_case_refs": [
+        "y1v7.case.yamada-albert.v7-c043"
+      ],
+      "context_evidence_refs": [
+        "y1v7.ev.094"
+      ]
     }
   },
   "source_documents": [],
@@ -69,5 +82,9 @@
     "contextual_facts": "MENTIONS_NOT_FEATS",
     "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
     "verified_facts": "INDIVIDUAL_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [
+    "y1v7.goal.yamada-albert.v7-g012"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

@@ -9,9 +9,10 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "Class D",
     "aliases": []
@@ -37,7 +38,8 @@
         "y1v3.ev.032",
         "y1v4.ev.009",
         "y1v4.ev.010",
-        "y1v4.ev.011"
+        "y1v4.ev.011",
+        "y1v7.ev.053"
       ]
     },
     "ethics": {
@@ -107,7 +109,11 @@
       "context_evidence_refs": [
         "y1v3.ev.033",
         "y1v4.ev.011",
-        "y1v4.ev.064"
+        "y1v4.ev.064",
+        "y1v7.ev.024",
+        "y1v7.ev.052",
+        "y1v7.ev.054",
+        "y1v7.ev.060"
       ]
     },
     "health": {
@@ -200,5 +206,9 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "goal_transition_refs": [
+    "y1v7.goal.rokusuke-koenji.v7-g018"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

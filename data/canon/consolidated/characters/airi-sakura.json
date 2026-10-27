@@ -10,9 +10,10 @@
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "Class D student who privately uses Shizuku as an idol name, demonstrates courageous but anxious testimony and wishes for social connection",
     "aliases": [
@@ -75,7 +76,10 @@
         "y1v45.ev.041",
         "y1v45.ev.057",
         "y1v6.ev.043",
-        "y1v6.ev.057"
+        "y1v6.ev.057",
+        "y1v7.ev.004",
+        "y1v7.ev.012",
+        "y1v7.ev.049"
       ]
     },
     "observation": {
@@ -134,7 +138,8 @@
         "y1v2.ev.030",
         "y1v3.ev.033",
         "y1v3.ev.034",
-        "y1v3.ev.067"
+        "y1v3.ev.067",
+        "y1v7.ev.024"
       ]
     },
     "persuasion": {

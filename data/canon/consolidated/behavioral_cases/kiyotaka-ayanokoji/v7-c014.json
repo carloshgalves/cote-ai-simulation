@@ -1,0 +1,49 @@
+{
+  "id": "y1v7.case.kiyotaka-ayanokoji.v7-c014",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Recrutar testemunha contextual",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Procura Manabu, aciona Chabashira e prepara presença na escada",
+  "observed_result": "Manabu não observa os golpes diretamente",
+  "epistemic_limits": "Manabu não observa os golpes diretamente",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "strategy",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.082",
+    "y1v7.ev.083",
+    "y1v7.ev.087",
+    "y1v7.ev.081"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

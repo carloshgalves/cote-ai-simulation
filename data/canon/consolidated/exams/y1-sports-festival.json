@@ -226,5 +226,6 @@
     "Source not sufficient for complete athlete-by-heat placements or event-level ranking table",
     "Historical events are not live simulations or uniform quantitative ratings",
     "No known physical ability rankings across incompatible or obstructed events"
-  ]
+  ],
+  "exam_id": "exam.y1.sports-festival"
 }

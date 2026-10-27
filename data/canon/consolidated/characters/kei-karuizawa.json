@@ -10,9 +10,10 @@
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "Class D",
     "aliases": []
@@ -24,7 +25,8 @@
   "domains": {
     "social": {
       "behavioral_case_refs": [
-        "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness"
+        "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness",
+        "y1v7.case.kei-karuizawa.v7-c022"
       ],
       "context_evidence_refs": [
         "y1v1.ev.046",
@@ -51,7 +53,9 @@
         "y1v5.ev.003",
         "y1v5.ev.013",
         "y1v5.ev.014",
-        "y1v6.ev.059"
+        "y1v6.ev.059",
+        "y1v7.ev.066",
+        "y1v7.ev.079"
       ]
     },
     "economy": {
@@ -176,7 +180,10 @@
       "behavioral_case_refs": [
         "y1v4.case.kei-karuizawa.accept-protection-under-duress",
         "y1v4.case.kei-karuizawa.conceal-rabbit-vip-role",
-        "y1v45.case.kei-karuizawa.quietly-prevent-recording-abuse"
+        "y1v45.case.kei-karuizawa.quietly-prevent-recording-abuse",
+        "y1v7.case.kei-karuizawa.v7-c020",
+        "y1v7.case.kei-karuizawa.v7-c021",
+        "y1v7.case.kei-karuizawa.v7-c023"
       ],
       "context_evidence_refs": [
         "y1v4.ev.035",
@@ -195,7 +202,18 @@
         "y1v5.ev.040",
         "y1v5.ev.042",
         "y1v5.ev.045",
-        "y1v5.ev.071"
+        "y1v5.ev.071",
+        "y1v7.ev.044",
+        "y1v7.ev.046",
+        "y1v7.ev.065",
+        "y1v7.ev.068",
+        "y1v7.ev.070",
+        "y1v7.ev.074",
+        "y1v7.ev.076",
+        "y1v7.ev.077",
+        "y1v7.ev.081",
+        "y1v7.ev.089",
+        "y1v7.ev.099"
       ]
     },
     "persuasion": {
@@ -358,6 +376,19 @@
       "context_evidence_refs": [
         "y1v6.ev.060"
       ]
+    },
+    "combat": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v7.ev.071",
+        "y1v7.ev.072"
+      ]
+    },
+    "exams": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v7.ev.090"
+      ]
     }
   },
   "source_documents": [],
@@ -374,6 +405,9 @@
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
   },
-  "goal_transition_refs": [],
+  "goal_transition_refs": [
+    "y1v7.goal.kei-karuizawa.v7-g007",
+    "y1v7.goal.kei-karuizawa.v7-g008"
+  ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

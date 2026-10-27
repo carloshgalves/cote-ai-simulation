@@ -1,0 +1,39 @@
+{
+  "id": "y1v7.case.ishizaki.v7-c042",
+  "actor_id": "actor.ishizaki",
+  "primary_actor_id": "actor.ishizaki",
+  "title": "Impedir saída de líder por solidariedade",
+  "context": "Y1 V7 source-limited scene",
+  "observed_actions": "Procura professor e ameaça sair junto de Ryūen",
+  "observed_result": "Iniciativa atribuída ao aluno pelo professor",
+  "epistemic_limits": "Iniciativa atribuída ao aluno pelo professor",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      201,
+      202,
+      203
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy"
+  ],
+  "information_available": "Direct causal access only",
+  "counterfactual_test": "Historical action not forced in divergent circumstances",
+  "topics": [
+    "strategy",
+    "y1_v07"
+  ],
+  "evidence_refs": [
+    "y1v7.ev.111"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

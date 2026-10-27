@@ -1,0 +1,38 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.matsuo",
+  "display_name": "Matsuo",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v07.sevenseas.en.operator-provided"
+  ],
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
+  "identity": {
+    "role_summary": "Butler described by Kiyotaka and Atsuomi; reported fate not independently proven",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "institution": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v7.ev.028"
+      ]
+    }
+  },
+  "source_documents": [],
+  "historical_context_only": true,
+  "uncertainties": {
+    "future_fate_unknown": true
+  },
+  "generation_policy": "Append global references only",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTION_REFERENCES_ONLY",
+    "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
+    "verified_facts": "RECORD_AUDIT_REQUIRED"
+  }
+}

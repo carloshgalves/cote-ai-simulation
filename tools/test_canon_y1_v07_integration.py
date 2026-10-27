@@ -39,7 +39,8 @@ def violations(fixture):
     check(exams["paper"]["later_volume_7_outcomes"]["december_1_snapshot"]=={"A":874,"B":753,"C":542,"D":262},"wrong school card snapshot")
     check(exams["paper"]["later_volume_7_outcomes"]["official_final_point_totals"]=="NOT_ESTABLISHED","snapshot promoted to finals")
     check(exams["sports"]["authority"]=="CANON_REFERENCE_NOT_EXECUTABLE","sports declared executable")
-    check(exams["island"]["later_revelations"][-1]["payment_ledger_verified"] is False,"V3 contract payment ledger fabricated")
+    v7_contract=next((x for x in exams["island"]["later_revelations"] if x.get("source_id")=="ln.y1.v07.sevenseas.en.operator-provided"),None)
+    check(v7_contract is not None and v7_contract.get("payment_ledger_verified") is False,"V3 contract payment ledger fabricated")
     extra=wr["white_room_model"]["y1_v07_qualified_additions"]
     check(extra["engine_memory_admission"] is False and extra["executable_institutional_behavior"] is False,"White Room engine promotion")
     check(extra["assertions"][1]["status"].startswith("CHARACTER_REPORT"),"Matsuo death no longer attributed")

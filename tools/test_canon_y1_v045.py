@@ -95,7 +95,9 @@ for x in audit["behavioral_cases"]:
 assert src["source_id"] in J(B/"exams/y1-zodiac-cruise.json")["source_coverage"]
 assert src["source_id"] in J(B/"exams/y1-deserted-island.json")["source_coverage"]
 assert J(B/"exams/y1-zodiac-cruise.json")["authority"]=="CANON_REFERENCE_NOT_EXECUTABLE"
-assert "not" in J(B/"exams/y1-zodiac-cruise.json")["later_revelations"][-1]["comment"].lower() or "no" in J(B/"exams/y1-zodiac-cruise.json")["later_revelations"][-1]["comment"].lower()
+v045_zodiac_revelations=[rel for rel in J(B/"exams/y1-zodiac-cruise.json")["later_revelations"] if rel["source_id"]==src["source_id"]]
+assert len(v045_zodiac_revelations)==1
+assert "not" in v045_zodiac_revelations[0]["comment"].lower() or "no" in v045_zodiac_revelations[0]["comment"].lower()
 assert "actor.nagumo" in idx["character_packs"]
 assert J(B/"characters/katsuragi.json")["display_name"]=="Kouhei Katsuragi"
 assert J(B/"institutions/anhs.json")["outside_contact_restrictions_y1_v045"]["engine_authority"]=="REFERENCE_ONLY_NOT_COMPILED"

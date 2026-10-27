@@ -46,3 +46,7 @@ MANDATORY: This coordinator does NOT invoke `implement`, `code-review`, `address
 Return: Issue; phase; base/branch/HEAD/PR; accepted spec; completed slice(s); RED evidence or N/A; focused/full test commands and exit codes; mutation evidence if used; finding counts/status IDs; manual/operational gaps; next explicitly permitted stage. STOP at the canonical skill's boundary.
 
 See `docs/agents/implementation-pipeline.md` for gates, parallel worktree selection, crash-safe negative controls and handoff schema.
+
+## Mandatory CI billing/runner fallback
+
+When CI does not allocate runners or cannot execute, follow `docs/agents/ci-billing-fallback.md` and `AGENTS.md`: check runner/steps before diagnosing financial cause; report `CI_NOT_RUN` separately from failed code/evals, run bounded local deterministic/replay/eval verification with real exit codes and protected corpus excluded, and preserve separate human phase and merge gates.

@@ -1,0 +1,44 @@
+{
+  "id": "y1v075.case.kei-karuizawa.v075-c002",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "Suppresses jealousy while Satou seeks advice about Kiyotaka; considers steering Satou toward other boys.",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Suppresses jealousy while Satou seeks advice about Kiyotaka; considers steering Satou toward other boys.",
+  "observed_result": "Ajuda Satō apesar do ciúme; registrar conflito entre apoio social e temor de perder Kiyotaka, não altruísmo puro.",
+  "epistemic_limits": "Conflict between public friendship, new attachment and self-protection.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      16,
+      20
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.maya-sato"
+  ],
+  "capabilities_supported": [
+    "emotion",
+    "relationship"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "emotion",
+    "relationship",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.002"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-002"
+}

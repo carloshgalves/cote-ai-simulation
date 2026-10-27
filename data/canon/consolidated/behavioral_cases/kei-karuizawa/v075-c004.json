@@ -1,0 +1,45 @@
+{
+  "id": "y1v075.case.kei-karuizawa.v075-c004",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "Gathers background on Satou through Shinohara at Kiyotaka request despite emotional distress.",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Gathers background on Satou through Shinohara at Kiyotaka request despite emotional distress.",
+  "observed_result": "Consulta Shinohara a pedido de Kiyotaka mesmo estando emocionalmente abalada; caso de informação social com fonte identificável.",
+  "epistemic_limits": "Observed cooperation under jealousy; gate who learns Satou details.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      32,
+      34
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.maya-sato",
+    "actor.shinohara"
+  ],
+  "capabilities_supported": [
+    "information",
+    "relationship"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "information",
+    "relationship",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.004"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-004"
+}

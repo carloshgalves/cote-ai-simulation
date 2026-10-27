@@ -1,0 +1,44 @@
+{
+  "id": "y1v075.case.kiyotaka-ayanokoji.v075-c035",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Kiyotaka brings Kei as apparent partner to meeting with Kiriyama, enabling plausible couple cover; assesses ea",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Kiyotaka brings Kei as apparent partner to meeting with Kiriyama, enabling plausible couple cover; assesses each side’s incentives.",
+  "observed_result": "Usa Kei como acompanhante e disfarce ao encontrar Kiriyama; parceria operacional não certifica romance formal.",
+  "epistemic_limits": "Crucial visibility and knowledge-sharing choices, not established romantic couple.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      154,
+      159
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kei-karuizawa",
+    "actor.kiriyama"
+  ],
+  "capabilities_supported": [
+    "information",
+    "politics"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "information",
+    "politics",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.035"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-035"
+}

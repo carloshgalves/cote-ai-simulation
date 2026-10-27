@@ -1,0 +1,46 @@
+{
+  "id": "y1v075.case.yosuke-hirata.v075-c032",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "Handles double date and Nagumo encounter, describes prioritizing others happiness and fear of class disintegra",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Handles double date and Nagumo encounter, describes prioritizing others happiness and fear of class disintegration.",
+  "observed_result": "Ajuda a administrar o encontro e conversa sobre seus valores; sociabilidade e fragilidade diante da desunião.",
+  "epistemic_limits": "Social de-escalation, hidden fragility and relationship disinterest in his own POV.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      109,
+      112,
+      129,
+      133
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kei-karuizawa",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "emotion"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "emotion",
+    "leadership",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.032"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-032"
+}

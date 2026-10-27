@@ -1,0 +1,41 @@
+{
+  "id": "y1v075.case.kakeru-ryuen.v075-c024",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "Proposes obtaining very large recurring point streams from all school grades as speculative finance scheme.",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Proposes obtaining very large recurring point streams from all school grades as speculative finance scheme.",
+  "observed_result": "Formula captação hipotética de pontos dos demais alunos; conservar como estratégia especulativa, não receita comprovada.",
+  "epistemic_limits": "Important ability to generate extreme strategy; do not treat extortion as actual school-legal method.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      81,
+      82
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "economy",
+    "strategy"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "economy",
+    "strategy",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.024"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-024"
+}

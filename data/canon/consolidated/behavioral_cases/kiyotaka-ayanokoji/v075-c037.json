@@ -1,0 +1,44 @@
+{
+  "id": "y1v075.case.kiyotaka-ayanokoji.v075-c037",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Admits he intentionally shifted Kei from Hirata protection to dependence on him, reciprocates first-name addre",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Admits he intentionally shifted Kei from Hirata protection to dependence on him, reciprocates first-name address and reveals previously purchased medicine.",
+  "observed_result": "Explica ter aumentado a dependência de Kei, mas também revela preocupação e reciprocidade; não reduzir a gesto romântico puro.",
+  "epistemic_limits": "Mixed protection and control with ambiguous affect, not proven mutual love.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      163,
+      170
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kei-karuizawa",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "relationship",
+    "strategy"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "relationship",
+    "strategy",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.037"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-037"
+}

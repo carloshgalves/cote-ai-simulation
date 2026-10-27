@@ -1,0 +1,43 @@
+{
+  "id": "y1v075.case.masumi-kamuro.v075-c012",
+  "actor_id": "actor.masumi-kamuro",
+  "primary_actor_id": "actor.masumi-kamuro",
+  "title": "Interrupts Sakayanagi, challenges suggestion about Ichinose, reveals reaction to secret comparison.",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Interrupts Sakayanagi, challenges suggestion about Ichinose, reveals reaction to secret comparison.",
+  "observed_result": "Reage às insinuações de Arisu sobre Ichinose; seu espanto não certifica qual foi a transgressão anterior.",
+  "epistemic_limits": "Her responses expose vulnerability yet do not establish precise prior offense.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      40,
+      43
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.arisu-sakayanagi"
+  ],
+  "capabilities_supported": [
+    "emotion",
+    "observation"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "emotion",
+    "observation",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.012"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-012"
+}

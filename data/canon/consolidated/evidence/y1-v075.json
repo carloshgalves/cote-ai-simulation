@@ -1,0 +1,3085 @@
+{
+  "schema_version": "canon-evidence-v1",
+  "source_id": "ln.y1.v075.sevenseas.en.operator-provided",
+  "records": [
+    {
+      "id": "y1v075.ev.001",
+      "source_catalog_id": "V75-001",
+      "domain": "behavior",
+      "summary": "Reinterprets the rooftop trauma, recognizes enhanced sense of agency, but still remembers vulnerability and scars.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          12,
+          15
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          12,
+          15
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "trauma",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Personal baseline changed; do not compress to fearless/cured.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Reconstrói o sofrimento do terraço e encontra mais agência; manter também cicatrizes e inseguranças, sem declarar cura.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.002",
+      "source_catalog_id": "V75-002",
+      "domain": "behavior",
+      "summary": "Suppresses jealousy while Satou seeks advice about Kiyotaka; considers steering Satou toward other boys.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          16,
+          20
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          16,
+          20
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji",
+        "actor.maya-sato"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Conflict between public friendship, new attachment and self-protection.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Ajuda Satō apesar do ciúme; registrar conflito entre apoio social e temor de perder Kiyotaka, não altruísmo puro.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.003",
+      "source_catalog_id": "V75-003",
+      "domain": "behavior",
+      "summary": "Plans Satou date logistics, accepts double date, balances desire to help with fear of losing Kiyotaka.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          20,
+          31
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          20,
+          31
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji",
+        "actor.maya-sato",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "social",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Multiple conflicting motives with observed plans, more informative than a flat jealous label.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Aceita preparar o encontro duplo para Satō e administrar aparências; mistura auxílio, interesse próprio e improvisação.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.004",
+      "source_catalog_id": "V75-004",
+      "domain": "behavior",
+      "summary": "Gathers background on Satou through Shinohara at Kiyotaka request despite emotional distress.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          32,
+          34
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          32,
+          34
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji",
+        "actor.maya-sato",
+        "actor.shinohara"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "information",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Observed cooperation under jealousy; gate who learns Satou details.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Consulta Shinohara a pedido de Kiyotaka mesmo estando emocionalmente abalada; caso de informação social com fonte identificável.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.005",
+      "source_catalog_id": "V75-005",
+      "domain": "behavior",
+      "summary": "Performs fake-couple double date and public interrogations of Kiyotaka, amplifying and undermining Satou.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          110,
+          113,
+          119,
+          123
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          110,
+          113,
+          119,
+          123
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji",
+        "actor.maya-sato",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "deception",
+        "social",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Competent social performance, strategic ambiguity, no single benevolent intent.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Sustenta o encontro duplo e questiona Kiyotaka em público; desempenho social observado, sem presumir motivo único.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.006",
+      "source_catalog_id": "V75-006",
+      "domain": "behavior",
+      "summary": "Defuses Nagumo grabbing Kiyotaka and publicly minimizes Kiyotaka skill.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          125,
+          127
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          125,
+          127
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji",
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "risk_management",
+        "social",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Demonstrates rapid social intervention and cover maintenance; not automatic safety against Nagumo.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Intervém com humor quando Nagumo ameaça Kiyotaka; proteger cobertura é ato concreto, não vitória garantida.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.007",
+      "source_catalog_id": "V75-007",
+      "domain": "behavior",
+      "summary": "Overhears Satou rejection, challenges Kiyotaka emotionally, tests explanation and fears replacement.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          146,
+          150
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          146,
+          150
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji",
+        "actor.maya-sato"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Critical attachment change with incomplete self-knowledge; no proven established romance.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Ouve a rejeição de Satō, confronta Kiyotaka e teme ser trocada; sinal afetivo forte, mas sem namoro confirmado.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.008",
+      "source_catalog_id": "V75-008",
+      "domain": "behavior",
+      "summary": "Asks about student council, infers unusual visibility, accepts limited knowledge about Manabu/Kiriyama; renews cooperation conditionally.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          151,
+          153,
+          160,
+          169
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          151,
+          153,
+          160,
+          169
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiriyama",
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "information",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Scope knowledge and trust state evolves in discrete conversations.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Indaga sobre Manabu, Nagumo e os segredos de Kiyotaka, sem receber todos; separar quem soube o quê.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.009",
+      "source_catalog_id": "V75-009",
+      "domain": "behavior",
+      "summary": "Offers Christmas gift, considers breakup with Hirata, requests assurance of utility/protection, reacts to first-name reciprocity and accepts cold medicine.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          163,
+          170
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          163,
+          170
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Changes protective cover, reciprocity and intimacy without official romantic label.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Reavalia vínculo com Hirata, oferece presente e negocia proteção; mudança relacional concreta, não término já consumado.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.010",
+      "source_catalog_id": "V75-010",
+      "domain": "behavior",
+      "summary": "Meets Sakayanagi alone, questions her Ichinose claims and provokes her merit/status sensitivity.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          35,
+          43
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          35,
+          43
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Conditional manipulation and White Room disclosure boundary, not general defeat of Arisu.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Discute e provoca Arisu quanto a mérito, Ichinose e White Room; manter blefes como blefes, não fatos da escola.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.011",
+      "source_catalog_id": "V75-011",
+      "domain": "behavior",
+      "summary": "Provokes Kiyotaka, threatens to attack Class B, asserts natural-genius theory and pressure on Kamuro.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          36,
+          43
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          36,
+          43
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji",
+        "actor.masumi-kamuro"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "politics",
+        "strategy",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Active competitive strategy but genuine Ichinose secret remains unverified.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Arisu pressiona Kiyotaka e mira Ichinose, fundamentando sua tese de gênio inato; segredo exato ainda não demonstrado.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.012",
+      "source_catalog_id": "V75-012",
+      "domain": "behavior",
+      "summary": "Interrupts Sakayanagi, challenges suggestion about Ichinose, reveals reaction to secret comparison.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          40,
+          43
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          40,
+          43
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.masumi-kamuro"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "observation",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Her responses expose vulnerability yet do not establish precise prior offense.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Reage às insinuações de Arisu sobre Ichinose; seu espanto não certifica qual foi a transgressão anterior.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.013",
+      "source_catalog_id": "V75-013",
+      "domain": "behavior",
+      "summary": "Pursues Kiyotaka, challenges him to secret rematch, chooses restricted storeroom, concedes after short fight.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          52,
+          64
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          52,
+          64
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "negotiation",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "New combat demonstration with explicit negotiated result and coercive escalation.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Busca revanche, escolhe uma despensa e admite derrota após luta; há novo caso físico, com risco de transgressão.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.014",
+      "source_catalog_id": "V75-014",
+      "domain": "behavior",
+      "summary": "Chooses measured counters in cramped storage, then obtains concession and handles escape via employee Kimura while staging embarrassing-date explanation.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          58,
+          63
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          58,
+          63
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "strategy",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Scene supports practical planning and ethically troubling throat restraint, not infinite martial superiority.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Controla golpes, exige rendição e lida com funcionário após o combate; registrar também contenção perigosa, não excelência moral.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.015",
+      "source_catalog_id": "V75-015",
+      "domain": "behavior",
+      "summary": "Reveals goal of seeing every film screened at school and refuses to leave until Kiyotaka does.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          53,
+          54
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          53,
+          54
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "extracurricular",
+        "motivation",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Noncompetitive durable personal goal and trait of commitment distinct from class A.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Ibuki pretende assistir a todos os filmes exibidos; um objetivo extracurricular independente do desempenho acadêmico.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.016",
+      "source_catalog_id": "V75-016",
+      "domain": "behavior",
+      "summary": "Hides with Kiyotaka from Ishizaki, challenges leader narrative and asks about 800 million in private points.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          54,
+          56,
+          64
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          54,
+          56,
+          64
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.ishizaki",
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "economy",
+        "social",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Demonstrates loyal opposition and financial interpretation, not confirmed loyalty to Kiyotaka.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Evita exposição com Kiyotaka e questiona o plano de Ryūen; independência e lealdade crítica coexistem.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.017",
+      "source_catalog_id": "V75-017",
+      "domain": "behavior",
+      "summary": "Intervenes for Shinohara in senior dispute, downplays it, then accepts Christmas Eve dinner invitation.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          67,
+          69,
+          94,
+          95
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          67,
+          69,
+          94,
+          95
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.shinohara"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "social",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Demonstrated spontaneous defense and potential relational change, not certified dating.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Defende Shinohara da intimidação de veteranos, embora use comentários grosseiros; depois aceita jantar com ela.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.018",
+      "source_catalog_id": "V75-018",
+      "domain": "behavior",
+      "summary": "Struggles with assertive upperclassman, recognizes Ike help, invites him to dinner.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          67,
+          69,
+          94,
+          95
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          67,
+          69,
+          94,
+          95
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.shinohara"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "social",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Social vulnerability then reciprocity; useful non-main romance seed.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Reconhece a ajuda de Ike e o convida; mudança recíproca incipiente, não anúncio de casal.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.019",
+      "source_catalog_id": "V75-019",
+      "domain": "behavior",
+      "summary": "Organizes Christmas single-students gathering, infers Satou date, arranges protection for Airi feelings.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          70,
+          72
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          70,
+          72
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.hasebe",
+        "actor.maya-sato"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "social",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Social care, group cohesion, peer romance mediation.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Organiza encontro festivo e protege Airi do constrangimento; liderança afetiva da rede de amigos.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.020",
+      "source_catalog_id": "V75-020",
+      "domain": "behavior",
+      "summary": "Visits Kiyotaka after outing with Haruka to give gloves, with shy but deliberate approach.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          103,
+          106
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          103,
+          106
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.hasebe",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "social",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Self-initiated extracurricular social action and a concrete caring gift.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Leva luvas a Kiyotaka em iniciativa própria; gesto social relevante para a evolução de Airi.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.021",
+      "source_catalog_id": "V75-021",
+      "domain": "behavior",
+      "summary": "Acknowledges Airi affection but treats her as still learning friendship and seeks appropriate response to her present.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          70,
+          72,
+          103,
+          106
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          70,
+          72,
+          103,
+          106
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.airi-sakura",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "social",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Shows interpersonal learning without accepting romantic intimacy.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Reconhece a atração de Airi e pondera seu amadurecimento; não corresponde romanticamente nem despreza o gesto.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.022",
+      "source_catalog_id": "V75-022",
+      "domain": "behavior",
+      "summary": "Recontacts Ryuen, exposes fear and liability factors, negotiates verbal conditional cooperation including Kushida issue.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          73,
+          85
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          73,
+          85
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "negotiation",
+        "strategy",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Strategy changes from physical defeat to conditional political diplomacy, not a permanent alliance.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Reabre diálogo com Ryūen após vencê-lo e propõe cooperação específica; não existe aliança permanente.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.023",
+      "source_catalog_id": "V75-023",
+      "domain": "behavior",
+      "summary": "Discusses his fear, 800 million possibilities, asks compensation and stages future C(D) leadership by Kaneda/Hiyori.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          76,
+          85
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          76,
+          85
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "economy",
+        "negotiation",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Adaptation and self-preservation after defeat; goals and tactics both conditional.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Negocia interesses, discute sua estratégia de pontos e prepara liderança indireta; derrota não elimina agência.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.024",
+      "source_catalog_id": "V75-024",
+      "domain": "behavior",
+      "summary": "Proposes obtaining very large recurring point streams from all school grades as speculative finance scheme.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          81,
+          82
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "ATTRIBUTED_PLAN",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          81,
+          82
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "economy",
+        "strategy",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Important ability to generate extreme strategy; do not treat extortion as actual school-legal method.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Formula captação hipotética de pontos dos demais alunos; conservar como estratégia especulativa, não receita comprovada.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.025",
+      "source_catalog_id": "V75-025",
+      "domain": "behavior",
+      "summary": "Arrives at secret meeting and recruits Kiyotaka against Nagumo; supplies council roster and makes conditional cooperation promise.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          85,
+          92
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          85,
+          92
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kiriyama",
+        "actor.kiyotaka-ayanokoji",
+        "actor.manabu-horikita",
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "politics",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Important governance/information brokerage without universal power.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Intermedeia a rede anti-Nagumo e fornece dados de integrantes do conselho; autoridade e limites do ex-presidente.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.026",
+      "source_catalog_id": "V75-026",
+      "domain": "behavior",
+      "summary": "Tests Manabu with snow feint and jab; Manabu blocks and de-escalates.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          86,
+          87
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          86,
+          87
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen",
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "risk_management",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Distinct minor physical demonstration; not Ryuen-Manabu full duel.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Ryūen testa Manabu com ataque breve, que é bloqueado; não transformar em duelo completo ou ranking universal.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.027",
+      "source_catalog_id": "V75-027",
+      "domain": "behavior",
+      "summary": "Accepts introduction to second-year Nagumo opposition despite wishing to remain anonymous; assesses reputational exposure.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          89,
+          92
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          89,
+          92
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kiriyama",
+        "actor.kiyotaka-ayanokoji",
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "politics",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Concrete choice changes who learns about him and who can use him.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Aceita ser apresentado à oposição de Nagumo e assume risco reputacional; expansão voluntária da visibilidade.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.028",
+      "source_catalog_id": "V75-028",
+      "domain": "behavior",
+      "summary": "Meets Kushida publicly, resists Kiyotaka council request, calls brother after contact through Tachibana, still refuses council membership.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          93,
+          101
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          93,
+          101
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.manabu-horikita",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "social",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Relationship repair and autonomy; not accepted student-council appointment.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Conversa com Kushida e fala com Manabu, mas recusa entrar no conselho; iniciativa social e autonomia preservadas.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.029",
+      "source_catalog_id": "V75-029",
+      "domain": "behavior",
+      "summary": "Appears amicably with Suzune, already has Tachibana phone information and helps contact Manabu.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          96,
+          102
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          96,
+          102
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kikyo-kushida",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "social",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Social network demonstrated, underlying hostility not thereby resolved.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Mobiliza contato de Tachibana e mostra laços com veteranos; aparente gentileza não resolve sua rivalidade com Suzune.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.030",
+      "source_catalog_id": "V75-030",
+      "domain": "behavior",
+      "summary": "Pursues first date, rehearses double-date support, confesses directly and accepts rejection with tears while asking to remain friends.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          108,
+          144
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          108,
+          144
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji",
+        "actor.maya-sato"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Courage and emotional response, not manipulation or a current couple.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Prepara encontro amoroso e se declara, aceitando rejeição com sofrimento; atitude corajosa e contextual.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.031",
+      "source_catalog_id": "V75-031",
+      "domain": "behavior",
+      "summary": "Accepts Christmas date, socializes with mixed group, refuses Satou candidly due to lack of reciprocated love and current risk burden.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          108,
+          145
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          108,
+          145
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.maya-sato"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "romance",
+        "social",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "First social/romantic event and refusal, not declaration of incapacity to love.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Participa de seu primeiro encontro e recusa Satō honestamente; ausência atual de amor não é incapacidade permanente.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.032",
+      "source_catalog_id": "V75-032",
+      "domain": "behavior",
+      "summary": "Handles double date and Nagumo encounter, describes prioritizing others happiness and fear of class disintegration.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          109,
+          112,
+          129,
+          133
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          109,
+          112,
+          129,
+          133
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "emotion",
+        "leadership",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Social de-escalation, hidden fragility and relationship disinterest in his own POV.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Ajuda a administrar o encontro e conversa sobre seus valores; sociabilidade e fragilidade diante da desunião.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.033",
+      "source_catalog_id": "V75-033",
+      "domain": "behavior",
+      "summary": "Interrupts Christmas double date, grips Kiyotaka arm and uses mock invitation/online-game special-exam provocation.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          123,
+          127
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          123,
+          127
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji",
+        "actor.nagumo",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "coercion",
+        "politics",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "An active targeted social threat; online-game hypothetical not approved ExamSpec.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Pressiona fisicamente Kiyotaka no shopping e debocha diante dos amigos; ameaça social real, sem exame aprovado.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.034",
+      "source_catalog_id": "V75-034",
+      "domain": "behavior",
+      "summary": "Hirata explains club preference and does not want student council post.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          130,
+          133
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "DIALOGUE",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          130,
+          133
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "institution",
+        "sports",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Retain as Hirata-specific sport/social context only; label is corrected in primary actor field before promotion.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Prefere continuar no futebol a aceitar eventual atuação no conselho; interesse extracurricular independente.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.035",
+      "source_catalog_id": "V75-035",
+      "domain": "behavior",
+      "summary": "Kiyotaka brings Kei as apparent partner to meeting with Kiriyama, enabling plausible couple cover; assesses each side’s incentives.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          154,
+          159
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          154,
+          159
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiriyama",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "information",
+        "politics",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Crucial visibility and knowledge-sharing choices, not established romantic couple.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Usa Kei como acompanhante e disfarce ao encontrar Kiriyama; parceria operacional não certifica romance formal.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.036",
+      "source_catalog_id": "V75-036",
+      "domain": "behavior",
+      "summary": "Discloses opposition to Nagumo, remains vice president for access, proposes cautious anonymous communications.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          154,
+          159
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          154,
+          159
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kiriyama",
+        "actor.manabu-horikita",
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "politics",
+        "risk_management",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "New first-hand political actor case; allegations need attribution to Kiriyama.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Integra o conselho enquanto resiste a Nagumo e propõe mensagens anônimas; motivação altruísta ainda é relato dele.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.037",
+      "source_catalog_id": "V75-037",
+      "domain": "behavior",
+      "summary": "Admits he intentionally shifted Kei from Hirata protection to dependence on him, reciprocates first-name address and reveals previously purchased medicine.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          163,
+          170
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          163,
+          170
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "strategy",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Mixed protection and control with ambiguous affect, not proven mutual love.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Explica ter aumentado a dependência de Kei, mas também revela preocupação e reciprocidade; não reduzir a gesto romântico puro.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.038",
+      "source_catalog_id": "V75-038",
+      "domain": "development",
+      "summary": "Says she feels stronger after V7, but retains body scar insecurity and past memories.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          12,
+          15
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          12,
+          15
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Stage snapshot rather than an invented categorical cure.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Diz sentir força nova sem apagar medos e cicatrizes; contexto temporal para estados contraditórios.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.039",
+      "source_catalog_id": "V75-039",
+      "domain": "development",
+      "summary": "Considers abandoning publicly fake relationship with Hirata and romantic jealousy of Satou.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          17,
+          21
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          17,
+          21
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Intent not completed breakup at this scene.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Cogita desfazer relacionamento falso e percebe ciúme; intenção ainda reversível.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.040",
+      "source_catalog_id": "V75-040",
+      "domain": "development",
+      "summary": "Fears she is a replaceable intelligence asset and Kiyotaka no longer needs her.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          32,
+          34
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          32,
+          34
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Private attachment vulnerability, not observed objective diminished competence.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Teme ser substituída como parceira útil; sentimento privado, não avaliação objetiva da competência dela.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.041",
+      "source_catalog_id": "V75-041",
+      "domain": "development",
+      "summary": "Requests first-name Kiyotaka-Kei form and reassesses Hirata cover, increasing reciprocal exclusivity.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          164,
+          170
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          164,
+          170
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "New relationship evidence does not confirm boyfriend/girlfriend status.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "A troca de nomes próprios e a reflexão sobre Hirata sugerem aproximação, não namoro confirmado.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.042",
+      "source_catalog_id": "V75-042",
+      "domain": "development",
+      "summary": "Reflects on unfamiliarity with ordinary romance, inability to show smile, uncertainty and potential future closeness with Kei.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          11,
+          107,
+          140,
+          150,
+          170
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          11,
+          107,
+          140,
+          150,
+          170
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Changing model of interpersonal goals not a fixed incapacity to love.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Reflete sobre amor, sorriso e normalidade; aprendizado possível, não personalidade congelada.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.043",
+      "source_catalog_id": "V75-043",
+      "domain": "development",
+      "summary": "Visibility expands: Arisu knows White Room; Ryuen/roof group know X; Nagumo sees relay; Kiriyama gains identity; Satou sees runner.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          36,
+          43,
+          89,
+          125,
+          159
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          36,
+          43,
+          89,
+          125,
+          159
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.kakeru-ryuen",
+        "actor.kiriyama",
+        "actor.kiyotaka-ayanokoji",
+        "actor.maya-sato",
+        "actor.nagumo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Maintain separate knowledge sets, no school-wide identity broadcast.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Conhecimento se distribui entre Arisu, grupo do terraço, Nagumo, Kiriyama e Satō; não há publicidade universal de X.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.044",
+      "source_catalog_id": "V75-044",
+      "domain": "development",
+      "summary": "His decision to preserve Kei involves coercive utility reasoning alongside genuine gestures and conditional warmth.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          149,
+          150,
+          164,
+          170
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_FIRST_PERSON",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          149,
+          150,
+          164,
+          170
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Dual motive, not moral redemption or objectively romantically in love.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "A avaliação instrumental sobre Kei coexiste com cuidado observável; registrar fonte íntima e atos externos separadamente.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.045",
+      "source_catalog_id": "V75-045",
+      "domain": "development",
+      "summary": "Attraction dates from sports festival, confesses on December 25, remains open to friendship after rejection.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          16,
+          24,
+          108,
+          144
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          16,
+          24,
+          108,
+          144
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.maya-sato"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Romantic state dynamic independent from annual class rank.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Satō se encanta após a corrida, declara-se e aceita continuar amiga; evolução afetiva sem nova meta escolar.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.046",
+      "source_catalog_id": "V75-046",
+      "domain": "development",
+      "summary": "Persistence, film hobby, resentment, own tactical judgment and admission of defeat coexist.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          53,
+          64
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          53,
+          64
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Do not equate defeat with obedience or conversion to Kiyotaka.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Hobby de cinema, orgulho e ressentimento de Ibuki coexistem com aceitação de derrota.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.047",
+      "source_catalog_id": "V75-047",
+      "domain": "development",
+      "summary": "Retreats from direct command but keeps entrepreneurship/ambition and capacity to negotiate.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          76,
+          85
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          76,
+          85
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Defeat changes behavior, not total removal from class history.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Ryūen reduz o comando direto sem perder planejamento ou autonomia; mudança de meio, não apagamento de identidade.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.048",
+      "source_catalog_id": "V75-048",
+      "domain": "development",
+      "summary": "Declines Sudou Christmas invitation and Kiyotaka student-council recommendation; initiates tentative contact with Kushida.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          93,
+          102
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          93,
+          102
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Independent priorities vs romance, fraternal acceptance not automatic membership.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Suzune recusa Sudō e a vaga no conselho, mas tenta conviver com Kushida; decisões distintas.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.049",
+      "source_catalog_id": "V75-049",
+      "domain": "development",
+      "summary": "Fake romantic partnership still public, no desire for other dating, soccer remains central.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          129,
+          133,
+          164,
+          165
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          129,
+          133,
+          164,
+          165
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "His noninterest and vulnerability not necessarily permanent.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Hirata sustenta romance público fictício, valoriza futebol e declara pouco interesse próprio em namoro.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.050",
+      "source_catalog_id": "V75-050",
+      "domain": "development",
+      "summary": "Haruka’s friendship supports growth; first gift action demonstrates initiative outside classroom.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          70,
+          72,
+          103,
+          106
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          70,
+          72,
+          103,
+          106
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.airi-sakura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Small meaningful developmental step not merely gift metadata.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Amizade com Haruka permite a Airi agir além da antiga retração; gesto pequeno, mudança demonstrada.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.051",
+      "source_catalog_id": "V75-051",
+      "domain": "development",
+      "summary": "Preserves autonomy of friend group while protecting Airi from dating news.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          70,
+          72,
+          103,
+          106
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          70,
+          72,
+          103,
+          106
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.hasebe"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Group support, no guarantee Airi never learns.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Haruka protege Airi e flexibiliza encontro do grupo; não controlar automaticamente a futura descoberta do romance.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.052",
+      "source_catalog_id": "V75-052",
+      "domain": "development",
+      "summary": "Assistance and invitation foreshadow possible romance without public couple announcement.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          67,
+          69,
+          94,
+          95
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          67,
+          69,
+          94,
+          95
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.kanji-ike",
+        "actor.shinohara"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Do not skip as decorative shopping encounter.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Ike e Shinohara passam da hostilidade cotidiana à reciprocidade, sem declaração oficial de namoro.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.053",
+      "source_catalog_id": "V75-053",
+      "domain": "institution",
+      "summary": "V7.5 introduces second-year vice president Kiriyama, secretaries Mizowaki and Tonokawa, faction and opposition.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          85,
+          92
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          85,
+          92
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.student-council"
+      ],
+      "topics": [
+        "institution",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Organizational relation evidence, source-scoped roster.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Kiriyama, Mizowaki e Tonokawa aparecem na estrutura; registrar funções e facções com cronologia.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.054",
+      "source_catalog_id": "V75-054",
+      "domain": "institution",
+      "summary": "Manabu says council participates in school disciplinary proceedings and partly in designing special exams (island test example).",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          87,
+          89
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "MANABU_REPORTED",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          87,
+          89
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.student-council"
+      ],
+      "topics": [
+        "institution",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Affects institutional jurisdiction; do not infer unlimited independent rulemaking.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Manabu relata participação disciplinar e elaboração parcial de exames pelo conselho; autoridade não é ilimitada.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.055",
+      "source_catalog_id": "V75-055",
+      "domain": "institution",
+      "summary": "Manabu reports 17 second-year expulsions and claims Nagumo involved in more than half based on exit interviews.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          88,
+          90
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "MANABU_REPORT",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          88,
+          90
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.student-council"
+      ],
+      "topics": [
+        "institution",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Report figure with attributed source; not independently audited ledger.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Manabu reporta 17 expulsões e participação de Nagumo em mais da metade; dado atribuído, sem auditoria dos 17 casos.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.056",
+      "source_catalog_id": "V75-056",
+      "domain": "institution",
+      "summary": "Kiriyama claims Nagumo has most second years under control and offers class-A promotion chances; Kiriyama remains inside council to observe.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          155,
+          159
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "KIRIYAMA_REPORT",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          155,
+          159
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.student-council"
+      ],
+      "topics": [
+        "institution",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Faction dynamics and incentives, some future policies unverifiable.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "Kiriyama relata hegemonia de Nagumo e proposta de mobilidade; promessas não equivalem a regras efetivadas.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.057",
+      "source_catalog_id": "V75-057",
+      "domain": "institution",
+      "summary": "Private-point class transfer reference confirms 20 million per individual, 800 million for forty; V7 earlier 2m quote remains discrepancy.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          63,
+          64
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "IBUKI_QUOTE",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          63,
+          64
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Supports known rule, not evidence of discounts or actual cohort movement.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "V7.5 volta a citar 20 milhões por aluno e 800 milhões por turma; confrontar com fala divergente do V7, sem apagar fonte.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.058",
+      "source_catalog_id": "V75-058",
+      "domain": "institution",
+      "summary": "Public mall staff-only storage access, trapping door, school-related discipline uncertainty and staff discretion.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          57,
+          59,
+          63
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_SCENE",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          57,
+          59,
+          63
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Specific place security episode only; not normative loophole for any student.",
+      "review_decision": "ACCEPT",
+      "review_rationale_pt": "A entrada na despensa e reação do funcionário exemplificam riscos locais; não são um manual normativo de segurança.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.059",
+      "source_catalog_id": "V75-059",
+      "domain": "institution",
+      "summary": "Winter holiday Dec 23-25: public mall, cinema, cafés, dorms, school building available with constraints; students retain off-class social lives.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          16,
+          23,
+          73,
+          107
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          16,
+          23,
+          73,
+          107
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Simulation environment/schedule context, not a new special exam.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Férias permitem shopping, cinema, cafés e convivência; registrar disponibilidade contextual, não um exame.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.060",
+      "source_catalog_id": "V75-060",
+      "domain": "institution",
+      "summary": "Arisu knows White Room past; Kiyotaka contrasts regimented childhood with inability to experience normal dating.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          35,
+          40,
+          130,
+          150
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          35,
+          40,
+          130,
+          150
+        ]
+      },
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "institution",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Character memory and external knowledge gate, no verified new WR training curriculum.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "White Room explica limitação afetiva de Kiyotaka e é conhecida por Arisu; não inventar novo currículo.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.061",
+      "source_catalog_id": "V75-061",
+      "domain": "institution",
+      "summary": "Legendary confession tree appears in school bulletin-board forum with alleged sunset success chance.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          21,
+          22
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "FORUM_RUMOR",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          21,
+          22
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Urban legend exists as rumor; percentage not institutional guarantee.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "A árvore romântica aparece em fórum, mas a chance de 99% é superstição, não regra escolar.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.062",
+      "source_catalog_id": "V75-062",
+      "domain": "exam",
+      "summary": "Relay performance generates Satou attraction and Nagumo/Kiriyama interest in Kiyotaka.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          17,
+          94,
+          123,
+          159
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          17,
+          94,
+          123,
+          159
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Important retrospective reputational effect, not changed race score.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "A corrida anterior explica interesse de Satō e atenção dos veteranos; efeito reputacional, sem recalcular resultado.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.063",
+      "source_catalog_id": "V75-063",
+      "domain": "exam",
+      "summary": "Manabu describes prior island exam as at least partly based on student council proposal.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          87,
+          88
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "MANABU_REPORTED",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          87,
+          88
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Institutional design provenance, not newly codified island scoring rule.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Manabu atribui parte da criação da prova da ilha ao conselho; retrospectiva institucional, sem inventar pontuação.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.064",
+      "source_catalog_id": "V75-064",
+      "domain": "exam",
+      "summary": "Ryuen/Kei/Kiyotaka discuss previous secrets and school tactics from cruise in postfacto conversations.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          42,
+          52
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NARRATIVA_OU_CENA",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          42,
+          52
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Retrospective contextual links, not new VIP formula or exam outcome.",
+      "review_decision": "CONTEXT",
+      "review_rationale_pt": "Diálogos resgatam segredos antigos do cruzeiro; contexto posterior, sem alterar VIPs nem regras.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.065",
+      "source_catalog_id": "V75-065",
+      "domain": "exam",
+      "summary": "Kiriyama forecasts January special exam with interactions among 1st/2nd and sometimes 3rd years, and says years vary.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          157,
+          158
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "KIRIYAMA_REPORT",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          157,
+          158
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Future unnamed exam warning; no rules, teams or dates to instantiate.",
+      "review_decision": "CANDIDATE_ONLY",
+      "review_rationale_pt": "Kiriyama prevê prova entre séries em janeiro, sem formato definitivo; manter como alerta de exame futuro.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.066",
+      "source_catalog_id": "V75-066",
+      "domain": "exam",
+      "summary": "Nagumo suggests online-game-based special exam during hostile chat.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          126
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "NAGUMO_HYPOTHETICAL",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          126
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Provocation/hypothesis, not enacted rule or authorized ExamSpec.",
+      "review_decision": "REJECT_AS_RULE",
+      "review_rationale_pt": "Nagumo menciona jogo online como provocação; não há autorização para criar um ExamSpec.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    },
+    {
+      "id": "y1v075.ev.067",
+      "source_catalog_id": "V75-067",
+      "domain": "exam",
+      "summary": "Karuizawa and Satou speculate about winter-break exams; nothing announced.",
+      "source": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          16,
+          23
+        ],
+        "edition": "Seven Seas English operator-provided PDF",
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "CASUAL_SPECULATION",
+      "story_time": "Y1_WINTER_BREAK_POST_V07",
+      "narrative_revelation": {
+        "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+        "pdf_pages": [
+          16,
+          23
+        ]
+      },
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exam",
+        "y1_v075"
+      ],
+      "assertion_status": "UNVERIFIED",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "actor_knowledge_gate": "SOURCE_SCOPED_NO_RETROACTIVE_IMPORT",
+      "counterclaim": "Holiday not an examination; no fictitious pack should be created.",
+      "review_decision": "REJECT_AS_RULE",
+      "review_rationale_pt": "Alunos especulam sobre exame nas férias, mas o volume não mostra prova; rejeitar existência inventada.",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED"
+      }
+    }
+  ]
+}

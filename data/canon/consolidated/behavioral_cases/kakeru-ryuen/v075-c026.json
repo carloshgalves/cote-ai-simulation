@@ -1,0 +1,43 @@
+{
+  "id": "y1v075.case.kakeru-ryuen.v075-c026",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "Tests Manabu with snow feint and jab; Manabu blocks and de-escalates.",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Tests Manabu with snow feint and jab; Manabu blocks and de-escalates.",
+  "observed_result": "Ryūen testa Manabu com ataque breve, que é bloqueado; não transformar em duelo completo ou ranking universal.",
+  "epistemic_limits": "Distinct minor physical demonstration; not Ryuen-Manabu full duel.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      86,
+      87
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.manabu-horikita"
+  ],
+  "capabilities_supported": [
+    "combat",
+    "risk_management"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "combat",
+    "risk_management",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.026"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-026"
+}

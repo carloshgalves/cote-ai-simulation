@@ -1,0 +1,45 @@
+{
+  "id": "y1v075.case.kei-karuizawa.v075-c003",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "Plans Satou date logistics, accepts double date, balances desire to help with fear of losing Kiyotaka.",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Plans Satou date logistics, accepts double date, balances desire to help with fear of losing Kiyotaka.",
+  "observed_result": "Aceita preparar o encontro duplo para Satō e administrar aparências; mistura auxílio, interesse próprio e improvisação.",
+  "epistemic_limits": "Multiple conflicting motives with observed plans, more informative than a flat jealous label.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      20,
+      31
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.maya-sato",
+    "actor.yosuke-hirata"
+  ],
+  "capabilities_supported": [
+    "relationship",
+    "social"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "relationship",
+    "social",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.003"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-003"
+}

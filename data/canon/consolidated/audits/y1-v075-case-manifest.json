@@ -1,0 +1,648 @@
+{
+  "schema_version": "canon-case-manifest-v1",
+  "source_id": "ln.y1.v075.sevenseas.en.operator-provided",
+  "cases": [
+    {
+      "id": "y1v075.case.kei-karuizawa.v075-c001",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v075-c001.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        12,
+        15
+      ],
+      "evidence_refs": [
+        "y1v075.ev.001"
+      ],
+      "topics": [
+        "identity",
+        "trauma",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kei-karuizawa.v075-c002",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v075-c002.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        16,
+        20
+      ],
+      "evidence_refs": [
+        "y1v075.ev.002"
+      ],
+      "topics": [
+        "emotion",
+        "relationship",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kei-karuizawa.v075-c003",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v075-c003.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        20,
+        31
+      ],
+      "evidence_refs": [
+        "y1v075.ev.003"
+      ],
+      "topics": [
+        "relationship",
+        "social",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kei-karuizawa.v075-c004",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v075-c004.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        32,
+        34
+      ],
+      "evidence_refs": [
+        "y1v075.ev.004"
+      ],
+      "topics": [
+        "information",
+        "relationship",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kei-karuizawa.v075-c005",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v075-c005.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        110,
+        113,
+        119,
+        123
+      ],
+      "evidence_refs": [
+        "y1v075.ev.005"
+      ],
+      "topics": [
+        "deception",
+        "social",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kei-karuizawa.v075-c006",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v075-c006.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        125,
+        127
+      ],
+      "evidence_refs": [
+        "y1v075.ev.006"
+      ],
+      "topics": [
+        "risk_management",
+        "social",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kei-karuizawa.v075-c007",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v075-c007.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        146,
+        150
+      ],
+      "evidence_refs": [
+        "y1v075.ev.007"
+      ],
+      "topics": [
+        "emotion",
+        "relationship",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kei-karuizawa.v075-c008",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v075-c008.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        151,
+        153,
+        160,
+        169
+      ],
+      "evidence_refs": [
+        "y1v075.ev.008"
+      ],
+      "topics": [
+        "information",
+        "relationship",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kei-karuizawa.v075-c009",
+      "path": "data/canon/consolidated/behavioral_cases/kei-karuizawa/v075-c009.json",
+      "actor_id": "actor.kei-karuizawa",
+      "pdf_pages": [
+        163,
+        170
+      ],
+      "evidence_refs": [
+        "y1v075.ev.009"
+      ],
+      "topics": [
+        "identity",
+        "relationship",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kiyotaka-ayanokoji.v075-c010",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v075-c010.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        35,
+        43
+      ],
+      "evidence_refs": [
+        "y1v075.ev.010"
+      ],
+      "topics": [
+        "observation",
+        "strategy",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.arisu-sakayanagi.v075-c011",
+      "path": "data/canon/consolidated/behavioral_cases/arisu-sakayanagi/v075-c011.json",
+      "actor_id": "actor.arisu-sakayanagi",
+      "pdf_pages": [
+        36,
+        43
+      ],
+      "evidence_refs": [
+        "y1v075.ev.011"
+      ],
+      "topics": [
+        "politics",
+        "strategy",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.masumi-kamuro.v075-c012",
+      "path": "data/canon/consolidated/behavioral_cases/masumi-kamuro/v075-c012.json",
+      "actor_id": "actor.masumi-kamuro",
+      "pdf_pages": [
+        40,
+        43
+      ],
+      "evidence_refs": [
+        "y1v075.ev.012"
+      ],
+      "topics": [
+        "emotion",
+        "observation",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.mio-ibuki.v075-c013",
+      "path": "data/canon/consolidated/behavioral_cases/mio-ibuki/v075-c013.json",
+      "actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        52,
+        64
+      ],
+      "evidence_refs": [
+        "y1v075.ev.013"
+      ],
+      "topics": [
+        "combat",
+        "negotiation",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kiyotaka-ayanokoji.v075-c014",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v075-c014.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        58,
+        63
+      ],
+      "evidence_refs": [
+        "y1v075.ev.014"
+      ],
+      "topics": [
+        "combat",
+        "strategy",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.mio-ibuki.v075-c015",
+      "path": "data/canon/consolidated/behavioral_cases/mio-ibuki/v075-c015.json",
+      "actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        53,
+        54
+      ],
+      "evidence_refs": [
+        "y1v075.ev.015"
+      ],
+      "topics": [
+        "extracurricular",
+        "motivation",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.mio-ibuki.v075-c016",
+      "path": "data/canon/consolidated/behavioral_cases/mio-ibuki/v075-c016.json",
+      "actor_id": "actor.mio-ibuki",
+      "pdf_pages": [
+        54,
+        56,
+        64
+      ],
+      "evidence_refs": [
+        "y1v075.ev.016"
+      ],
+      "topics": [
+        "economy",
+        "social",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kanji-ike.v075-c017",
+      "path": "data/canon/consolidated/behavioral_cases/kanji-ike/v075-c017.json",
+      "actor_id": "actor.kanji-ike",
+      "pdf_pages": [
+        67,
+        69,
+        94,
+        95
+      ],
+      "evidence_refs": [
+        "y1v075.ev.017"
+      ],
+      "topics": [
+        "relationship",
+        "social",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.shinohara.v075-c018",
+      "path": "data/canon/consolidated/behavioral_cases/shinohara/v075-c018.json",
+      "actor_id": "actor.shinohara",
+      "pdf_pages": [
+        67,
+        69,
+        94,
+        95
+      ],
+      "evidence_refs": [
+        "y1v075.ev.018"
+      ],
+      "topics": [
+        "relationship",
+        "social",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.hasebe.v075-c019",
+      "path": "data/canon/consolidated/behavioral_cases/hasebe/v075-c019.json",
+      "actor_id": "actor.hasebe",
+      "pdf_pages": [
+        70,
+        72
+      ],
+      "evidence_refs": [
+        "y1v075.ev.019"
+      ],
+      "topics": [
+        "leadership",
+        "social",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.airi-sakura.v075-c020",
+      "path": "data/canon/consolidated/behavioral_cases/airi-sakura/v075-c020.json",
+      "actor_id": "actor.airi-sakura",
+      "pdf_pages": [
+        103,
+        106
+      ],
+      "evidence_refs": [
+        "y1v075.ev.020"
+      ],
+      "topics": [
+        "relationship",
+        "social",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kiyotaka-ayanokoji.v075-c021",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v075-c021.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        70,
+        72,
+        103,
+        106
+      ],
+      "evidence_refs": [
+        "y1v075.ev.021"
+      ],
+      "topics": [
+        "emotion",
+        "social",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kiyotaka-ayanokoji.v075-c022",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v075-c022.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        73,
+        85
+      ],
+      "evidence_refs": [
+        "y1v075.ev.022"
+      ],
+      "topics": [
+        "negotiation",
+        "strategy",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kakeru-ryuen.v075-c023",
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v075-c023.json",
+      "actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        76,
+        85
+      ],
+      "evidence_refs": [
+        "y1v075.ev.023"
+      ],
+      "topics": [
+        "economy",
+        "negotiation",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kakeru-ryuen.v075-c024",
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v075-c024.json",
+      "actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        81,
+        82
+      ],
+      "evidence_refs": [
+        "y1v075.ev.024"
+      ],
+      "topics": [
+        "economy",
+        "strategy",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.manabu-horikita.v075-c025",
+      "path": "data/canon/consolidated/behavioral_cases/manabu-horikita/v075-c025.json",
+      "actor_id": "actor.manabu-horikita",
+      "pdf_pages": [
+        85,
+        92
+      ],
+      "evidence_refs": [
+        "y1v075.ev.025"
+      ],
+      "topics": [
+        "leadership",
+        "politics",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kakeru-ryuen.v075-c026",
+      "path": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v075-c026.json",
+      "actor_id": "actor.kakeru-ryuen",
+      "pdf_pages": [
+        86,
+        87
+      ],
+      "evidence_refs": [
+        "y1v075.ev.026"
+      ],
+      "topics": [
+        "combat",
+        "risk_management",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kiyotaka-ayanokoji.v075-c027",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v075-c027.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        89,
+        92
+      ],
+      "evidence_refs": [
+        "y1v075.ev.027"
+      ],
+      "topics": [
+        "observation",
+        "politics",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.suzune-horikita.v075-c028",
+      "path": "data/canon/consolidated/behavioral_cases/suzune-horikita/v075-c028.json",
+      "actor_id": "actor.suzune-horikita",
+      "pdf_pages": [
+        93,
+        101
+      ],
+      "evidence_refs": [
+        "y1v075.ev.028"
+      ],
+      "topics": [
+        "relationship",
+        "social",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kikyo-kushida.v075-c029",
+      "path": "data/canon/consolidated/behavioral_cases/kikyo-kushida/v075-c029.json",
+      "actor_id": "actor.kikyo-kushida",
+      "pdf_pages": [
+        96,
+        102
+      ],
+      "evidence_refs": [
+        "y1v075.ev.029"
+      ],
+      "topics": [
+        "observation",
+        "social",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.maya-sato.v075-c030",
+      "path": "data/canon/consolidated/behavioral_cases/maya-sato/v075-c030.json",
+      "actor_id": "actor.maya-sato",
+      "pdf_pages": [
+        108,
+        144
+      ],
+      "evidence_refs": [
+        "y1v075.ev.030"
+      ],
+      "topics": [
+        "emotion",
+        "relationship",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kiyotaka-ayanokoji.v075-c031",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v075-c031.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        108,
+        145
+      ],
+      "evidence_refs": [
+        "y1v075.ev.031"
+      ],
+      "topics": [
+        "romance",
+        "social",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.yosuke-hirata.v075-c032",
+      "path": "data/canon/consolidated/behavioral_cases/yosuke-hirata/v075-c032.json",
+      "actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        109,
+        112,
+        129,
+        133
+      ],
+      "evidence_refs": [
+        "y1v075.ev.032"
+      ],
+      "topics": [
+        "emotion",
+        "leadership",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.nagumo.v075-c033",
+      "path": "data/canon/consolidated/behavioral_cases/nagumo/v075-c033.json",
+      "actor_id": "actor.nagumo",
+      "pdf_pages": [
+        123,
+        127
+      ],
+      "evidence_refs": [
+        "y1v075.ev.033"
+      ],
+      "topics": [
+        "coercion",
+        "politics",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.yosuke-hirata.v075-c034",
+      "path": "data/canon/consolidated/behavioral_cases/yosuke-hirata/v075-c034.json",
+      "actor_id": "actor.yosuke-hirata",
+      "pdf_pages": [
+        130,
+        133
+      ],
+      "evidence_refs": [
+        "y1v075.ev.034"
+      ],
+      "topics": [
+        "institution",
+        "sports",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kiyotaka-ayanokoji.v075-c035",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v075-c035.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        154,
+        159
+      ],
+      "evidence_refs": [
+        "y1v075.ev.035"
+      ],
+      "topics": [
+        "information",
+        "politics",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kiriyama.v075-c036",
+      "path": "data/canon/consolidated/behavioral_cases/kiriyama/v075-c036.json",
+      "actor_id": "actor.kiriyama",
+      "pdf_pages": [
+        154,
+        159
+      ],
+      "evidence_refs": [
+        "y1v075.ev.036"
+      ],
+      "topics": [
+        "politics",
+        "risk_management",
+        "y1_v075"
+      ]
+    },
+    {
+      "id": "y1v075.case.kiyotaka-ayanokoji.v075-c037",
+      "path": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v075-c037.json",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "pdf_pages": [
+        163,
+        170
+      ],
+      "evidence_refs": [
+        "y1v075.ev.037"
+      ],
+      "topics": [
+        "relationship",
+        "strategy",
+        "y1_v075"
+      ]
+    }
+  ]
+}

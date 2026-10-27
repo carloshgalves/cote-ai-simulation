@@ -1,0 +1,44 @@
+{
+  "id": "y1v075.case.hasebe.v075-c019",
+  "actor_id": "actor.hasebe",
+  "primary_actor_id": "actor.hasebe",
+  "title": "Organizes Christmas single-students gathering, infers Satou date, arranges protection for Airi feelings.",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Organizes Christmas single-students gathering, infers Satou date, arranges protection for Airi feelings.",
+  "observed_result": "Organiza encontro festivo e protege Airi do constrangimento; liderança afetiva da rede de amigos.",
+  "epistemic_limits": "Social care, group cohesion, peer romance mediation.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      70,
+      72
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.airi-sakura",
+    "actor.maya-sato"
+  ],
+  "capabilities_supported": [
+    "social",
+    "leadership"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "leadership",
+    "social",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.019"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-019"
+}

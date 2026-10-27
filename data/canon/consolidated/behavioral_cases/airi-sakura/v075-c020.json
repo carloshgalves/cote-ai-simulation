@@ -1,0 +1,44 @@
+{
+  "id": "y1v075.case.airi-sakura.v075-c020",
+  "actor_id": "actor.airi-sakura",
+  "primary_actor_id": "actor.airi-sakura",
+  "title": "Visits Kiyotaka after outing with Haruka to give gloves, with shy but deliberate approach.",
+  "context": "Y1 V7.5 source-bounded winter-break scene",
+  "observed_actions": "Visits Kiyotaka after outing with Haruka to give gloves, with shy but deliberate approach.",
+  "observed_result": "Leva luvas a Kiyotaka em iniciativa própria; gesto social relevante para a evolução de Airi.",
+  "epistemic_limits": "Self-initiated extracurricular social action and a concrete caring gift.",
+  "source": {
+    "work_id": "ln.y1.v075.sevenseas.en.operator-provided",
+    "pdf_pages": [
+      103,
+      106
+    ],
+    "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.hasebe",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "social",
+    "relationship"
+  ],
+  "information_available": "Episode-scoped actor acquisition only",
+  "counterfactual_test": "Do not force the same choice, attachment, defeat or cooperation after divergent history",
+  "topics": [
+    "relationship",
+    "social",
+    "y1_v075"
+  ],
+  "evidence_refs": [
+    "y1v075.ev.020"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED"
+  },
+  "review_origin": "V75-020"
+}

@@ -5,9 +5,10 @@
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v06.sevenseas.en.operator-provided"
+    "ln.y1.v06.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "ASSISTANT_INITIAL_PDF_PASS_INDEPENDENT_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "First-year Class D student Akito Miyake, studies with Hasebe and Yukimura in Y1 V6.",
     "aliases": [
@@ -39,7 +40,9 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v5.ev.041",
-        "y1v5.ev.055"
+        "y1v5.ev.055",
+        "y1v7.ev.006",
+        "y1v7.ev.023"
       ]
     },
     "results": {
@@ -110,6 +113,12 @@
       ],
       "context_evidence_refs": [
         "y1v6.ev.056"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v7.ev.004"
       ]
     }
   },

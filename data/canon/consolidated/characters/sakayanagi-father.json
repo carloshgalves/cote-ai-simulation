@@ -4,9 +4,10 @@
   "display_name": "Sakayanagi",
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v00.legacyemtls.v1.0.1"
+    "ln.y1.v00.legacyemtls.v1.0.1",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "Young financial intermediary and future ANHS figure; father of Arisu",
     "aliases": [
@@ -58,7 +59,8 @@
     },
     "institution": {
       "behavioral_case_refs": [
-        "v0.case.sakayanagi.ethical-observation"
+        "v0.case.sakayanagi.ethical-observation",
+        "y1v7.case.sakayanagi-father.v7-c039"
       ],
       "context_evidence_refs": [
         "v0.char.005",
@@ -67,7 +69,13 @@
         "v0.char.047",
         "v0.pol.013",
         "v0.wr.026",
-        "v0.wr.043"
+        "v0.wr.043",
+        "y1v7.ev.034",
+        "y1v7.ev.035",
+        "y1v7.ev.036",
+        "y1v7.ev.037",
+        "y1v7.ev.038",
+        "y1v7.ev.086"
       ]
     },
     "economy": {

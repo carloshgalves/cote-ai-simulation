@@ -4,9 +4,10 @@
   "display_name": "Sakagami (given name unknown)",
   "modeling_tier": "MINIMAL_ENTITY",
   "source_coverage": [
-    "ln.y1.v02.sevenseas.en.operator-provided"
+    "ln.y1.v02.sevenseas.en.operator-provided",
+    "ln.y1.v07.sevenseas.en.operator-provided"
   ],
-  "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
+  "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
     "role_summary": "Year 1 Class C homeroom teacher",
     "aliases": []
@@ -35,6 +36,12 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v2.ev.063"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v7.ev.109"
       ]
     }
   },

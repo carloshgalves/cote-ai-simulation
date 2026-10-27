@@ -16,6 +16,7 @@
       "modeling_tier": "FULL_CANDIDATE",
       "topics": [
         "academic_reasoning",
+        "behavior",
         "cooperation",
         "emotion",
         "epistemics",
@@ -499,6 +500,7 @@
         "academic_reasoning",
         "agreement",
         "authority",
+        "behavior",
         "belief",
         "cheating",
         "coercion",
@@ -675,6 +677,7 @@
         "observation",
         "pairing",
         "privacy",
+        "relationship",
         "resources",
         "results",
         "risk_management",
@@ -788,6 +791,7 @@
       "topics": [
         "academic_reasoning",
         "accusation",
+        "behavior",
         "conflict",
         "cooperation",
         "deception",
@@ -868,6 +872,8 @@
       "path": "data/canon/consolidated/characters/kei-karuizawa.json",
       "modeling_tier": "FULL_CANDIDATE",
       "topics": [
+        "analysis",
+        "behavior",
         "coercion",
         "combat",
         "conflict",
@@ -1042,6 +1048,8 @@
       "topics": [
         "accusation",
         "attribution",
+        "autonomy",
+        "behavior",
         "blackmail",
         "cheating",
         "coercion",
@@ -1087,12 +1095,16 @@
       "modeling_tier": "INTERMEDIATE_CANDIDATE",
       "topics": [
         "academic_reasoning",
+        "behavior",
         "combat",
         "conflict",
+        "cooperation",
+        "development",
         "institution",
         "leadership",
         "observation",
         "persuasion",
+        "relationship",
         "risk_management",
         "strategy"
       ]
@@ -1517,6 +1529,48 @@
         "leadership",
         "politics",
         "risk_management"
+      ]
+    },
+    "actor.ayase-natsu": {
+      "path": "data/canon/consolidated/characters/ayase-natsu.json",
+      "modeling_tier": "INTERMEDIATE_CANDIDATE",
+      "topics": [
+        "exam"
+      ]
+    },
+    "actor.hashimoto": {
+      "path": "data/canon/consolidated/characters/hashimoto.json",
+      "modeling_tier": "INTERMEDIATE_CANDIDATE",
+      "topics": [
+        "behavior",
+        "cooperation",
+        "deception",
+        "negotiation",
+        "relationship",
+        "security",
+        "social"
+      ]
+    },
+    "actor.ikari-momoko": {
+      "path": "data/canon/consolidated/characters/ikari-momoko.json",
+      "modeling_tier": "INTERMEDIATE_CANDIDATE",
+      "topics": [
+        "behavior",
+        "exam",
+        "politics",
+        "relationship",
+        "strategy"
+      ]
+    },
+    "actor.ishikura": {
+      "path": "data/canon/consolidated/characters/ishikura.json",
+      "modeling_tier": "INTERMEDIATE_CANDIDATE",
+      "topics": [
+        "behavior",
+        "exam",
+        "politics",
+        "relationship",
+        "strategy"
       ]
     }
   },
@@ -3615,10 +3669,6 @@
       ]
     },
     "actor.arisu-sakayanagi": {
-      "academic_reasoning": [
-        "v0.case.arisu.nature-nurture-hypothesis",
-        "v0.char.046"
-      ],
       "institution": [
         "v0.case.arisu.nature-nurture-hypothesis",
         "v0.char.022",
@@ -3633,6 +3683,10 @@
         "v0.char.046",
         "v0.char.048",
         "y1v5.case.arisu-sakayanagi.maintain-faction-support-withdraw-athletics"
+      ],
+      "academic_reasoning": [
+        "v0.case.arisu.nature-nurture-hypothesis",
+        "v0.char.046"
       ],
       "observation": [
         "v0.case.arisu.nature-nurture-hypothesis",
@@ -3650,6 +3704,8 @@
         "y1v075.case.arisu-sakayanagi.v075-c011",
         "y1v075.ev.010",
         "y1v075.ev.011",
+        "y1v08.case.arisu-sakayanagi.v08-c006",
+        "y1v08.ev.006",
         "y1v3.ev.116",
         "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private",
         "y1v5.ev.067",
@@ -3662,6 +3718,8 @@
         "y1v7.ev.102"
       ],
       "leadership": [
+        "y1v08.case.arisu-sakayanagi.v08-c006",
+        "y1v08.ev.006",
         "y1v5.case.arisu-sakayanagi.maintain-faction-support-withdraw-athletics",
         "y1v5.ev.010",
         "y1v5.ev.035"
@@ -3679,6 +3737,7 @@
       ],
       "relationship": [
         "y1v075.ev.043",
+        "y1v08.ev.054",
         "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private",
         "y1v5.ev.067"
       ],
@@ -3694,6 +3753,10 @@
       ],
       "identity": [
         "y1v075.ev.043"
+      ],
+      "behavior": [
+        "y1v08.case.arisu-sakayanagi.v08-c006",
+        "y1v08.ev.006"
       ]
     },
     "actor.yuki-father": {
@@ -4532,92 +4595,6 @@
       ]
     },
     "actor.kikyo-kushida": {
-      "academic_reasoning": [
-        "y1v1.case.u.distribute-old-tests",
-        "y1v1.ev.078",
-        "y1v1.ev.097",
-        "y1v1.ev.100",
-        "y1v1.ev.123"
-      ],
-      "economy": [
-        "y1v1.ev.064",
-        "y1v1.ev.065",
-        "y1v1.ev.095",
-        "y1v2.ev.011"
-      ],
-      "emotion": [
-        "y1v1.ev.079",
-        "y1v2.ev.010",
-        "y1v4.ev.015",
-        "y1v4.ev.065",
-        "y1v4.ev.066",
-        "y1v5.ev.053"
-      ],
-      "ethics": [
-        "y1v1.ev.043",
-        "y1v45.ev.023",
-        "y1v5.ev.046"
-      ],
-      "institution": [
-        "y1v1.ev.089",
-        "y1v3.ev.008",
-        "y1v4.ev.016"
-      ],
-      "leadership": [
-        "y1v1.case.u.distribute-old-tests",
-        "y1v1.ev.076",
-        "y1v1.ev.078",
-        "y1v1.ev.087",
-        "y1v1.ev.098",
-        "y1v1.ev.100",
-        "y1v1.ev.114",
-        "y1v1.ev.133",
-        "y1v2.case.kikyo-kushida.coordinate-witness-inquiry",
-        "y1v2.ev.020",
-        "y1v2.ev.048",
-        "y1v3.case.kikyo-kushida.propose-hidden-leader-horikita",
-        "y1v3.case.kikyo-kushida.recruit-exploration-volunteers",
-        "y1v3.ev.032",
-        "y1v3.ev.037",
-        "y1v4.case.kikyo-kushida.invite-rival-delegates-into-discussion",
-        "y1v5.ev.003",
-        "y1v5.ev.013",
-        "y1v5.ev.014",
-        "y1v5.ev.051"
-      ],
-      "observation": [
-        "y1v075.case.kikyo-kushida.v075-c029",
-        "y1v075.ev.029",
-        "y1v1.ev.077",
-        "y1v1.ev.094",
-        "y1v1.ev.135",
-        "y1v2.case.kikyo-kushida.recognize-shizuku-identity",
-        "y1v2.ev.042",
-        "y1v2.ev.047",
-        "y1v2.ev.056",
-        "y1v2.ev.057",
-        "y1v3.ev.008",
-        "y1v4.ev.017",
-        "y1v4.ev.039",
-        "y1v4.ev.125",
-        "y1v45.ev.057"
-      ],
-      "persuasion": [
-        "y1v1.case.u.public-civic-appeal",
-        "y1v1.case.u.support-inogashira",
-        "y1v1.ev.004",
-        "y1v1.ev.014",
-        "y1v1.ev.042",
-        "y1v1.ev.075",
-        "y1v1.ev.095",
-        "y1v1.ev.133",
-        "y1v2.case.kikyo-kushida.build-sakura-rapport",
-        "y1v2.case.kikyo-kushida.coordinate-witness-inquiry",
-        "y1v2.ev.021",
-        "y1v2.ev.023",
-        "y1v2.ev.031",
-        "y1v3.ev.007"
-      ],
       "social": [
         "y1v075.case.kikyo-kushida.v075-c029",
         "y1v075.ev.028",
@@ -4680,6 +4657,33 @@
         "y1v5.ev.022",
         "y1v5.ev.025"
       ],
+      "persuasion": [
+        "y1v1.case.u.public-civic-appeal",
+        "y1v1.case.u.support-inogashira",
+        "y1v1.ev.004",
+        "y1v1.ev.014",
+        "y1v1.ev.042",
+        "y1v1.ev.075",
+        "y1v1.ev.095",
+        "y1v1.ev.133",
+        "y1v2.case.kikyo-kushida.build-sakura-rapport",
+        "y1v2.case.kikyo-kushida.coordinate-witness-inquiry",
+        "y1v2.ev.021",
+        "y1v2.ev.023",
+        "y1v2.ev.031",
+        "y1v3.ev.007"
+      ],
+      "ethics": [
+        "y1v1.ev.043",
+        "y1v45.ev.023",
+        "y1v5.ev.046"
+      ],
+      "economy": [
+        "y1v1.ev.064",
+        "y1v1.ev.065",
+        "y1v1.ev.095",
+        "y1v2.ev.011"
+      ],
       "strategy": [
         "y1v1.ev.075",
         "y1v1.ev.094",
@@ -4709,12 +4713,72 @@
         "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
         "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
       ],
+      "leadership": [
+        "y1v1.case.u.distribute-old-tests",
+        "y1v1.ev.076",
+        "y1v1.ev.078",
+        "y1v1.ev.087",
+        "y1v1.ev.098",
+        "y1v1.ev.100",
+        "y1v1.ev.114",
+        "y1v1.ev.133",
+        "y1v2.case.kikyo-kushida.coordinate-witness-inquiry",
+        "y1v2.ev.020",
+        "y1v2.ev.048",
+        "y1v3.case.kikyo-kushida.propose-hidden-leader-horikita",
+        "y1v3.case.kikyo-kushida.recruit-exploration-volunteers",
+        "y1v3.ev.032",
+        "y1v3.ev.037",
+        "y1v4.case.kikyo-kushida.invite-rival-delegates-into-discussion",
+        "y1v5.ev.003",
+        "y1v5.ev.013",
+        "y1v5.ev.014",
+        "y1v5.ev.051"
+      ],
+      "observation": [
+        "y1v075.case.kikyo-kushida.v075-c029",
+        "y1v075.ev.029",
+        "y1v1.ev.077",
+        "y1v1.ev.094",
+        "y1v1.ev.135",
+        "y1v2.case.kikyo-kushida.recognize-shizuku-identity",
+        "y1v2.ev.042",
+        "y1v2.ev.047",
+        "y1v2.ev.056",
+        "y1v2.ev.057",
+        "y1v3.ev.008",
+        "y1v4.ev.017",
+        "y1v4.ev.039",
+        "y1v4.ev.125",
+        "y1v45.ev.057"
+      ],
+      "academic_reasoning": [
+        "y1v1.case.u.distribute-old-tests",
+        "y1v1.ev.078",
+        "y1v1.ev.097",
+        "y1v1.ev.100",
+        "y1v1.ev.123"
+      ],
+      "emotion": [
+        "y1v1.ev.079",
+        "y1v2.ev.010",
+        "y1v4.ev.015",
+        "y1v4.ev.065",
+        "y1v4.ev.066",
+        "y1v5.ev.053"
+      ],
+      "institution": [
+        "y1v1.ev.089",
+        "y1v3.ev.008",
+        "y1v4.ev.016"
+      ],
       "combat": [
         "y1v1.case.kikyo-kushida.fifty-meter-swim",
         "y1v1.ev.119",
         "y1v2.ev.012"
       ],
       "conflict": [
+        "y1v08.ev.039",
         "y1v2.ev.012",
         "y1v2.ev.016",
         "y1v2.ev.046",
@@ -4735,6 +4799,7 @@
         "y1v6.ev.073"
       ],
       "exam": [
+        "y1v08.ev.070",
         "y1v3.case.kikyo-kushida.propose-hidden-leader-horikita",
         "y1v3.ev.037",
         "y1v4.ev.016",
@@ -4811,6 +4876,7 @@
         "y1v6.ev.062"
       ],
       "trust": [
+        "y1v08.ev.039",
         "y1v5.ev.025",
         "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets",
         "y1v6.ev.001",
@@ -4847,6 +4913,7 @@
       ],
       "relationship": [
         "y1v075.ev.028",
+        "y1v08.ev.051",
         "y1v5.ev.053",
         "y1v5.ev.061",
         "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
@@ -4865,23 +4932,6 @@
         "y1v5.ev.077",
         "y1v6.ev.066"
       ],
-      "agreement": [
-        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
-        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
-        "y1v6.ev.049",
-        "y1v6.ev.052",
-        "y1v6.ev.072",
-        "y1v6.ev.073"
-      ],
-      "authority": [
-        "y1v6.ev.066"
-      ],
-      "cheating": [
-        "y1v6.ev.075"
-      ],
-      "pairing": [
-        "y1v6.ev.033"
-      ],
       "privacy": [
         "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
         "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets",
@@ -4894,11 +4944,31 @@
         "y1v6.ev.016",
         "y1v6.ev.051"
       ],
+      "pairing": [
+        "y1v6.ev.033"
+      ],
+      "agreement": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation",
+        "y1v6.ev.049",
+        "y1v6.ev.052",
+        "y1v6.ev.072",
+        "y1v6.ev.073"
+      ],
       "threat": [
         "y1v6.ev.052"
       ],
+      "authority": [
+        "y1v6.ev.066"
+      ],
       "uncertainty": [
         "y1v6.ev.072"
+      ],
+      "cheating": [
+        "y1v6.ev.075"
+      ],
+      "behavior": [
+        "y1v08.ev.039"
       ]
     },
     "actor.yosuke-hirata": {
@@ -5732,48 +5802,6 @@
       ]
     },
     "actor.haruki-yamauchi": {
-      "academic_reasoning": [
-        "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic",
-        "y1v1.ev.088",
-        "y1v1.ev.090",
-        "y1v1.ev.100",
-        "y1v1.ev.123",
-        "y1v1.ev.134",
-        "y1v3.ev.003"
-      ],
-      "economy": [
-        "y1v1.ev.049",
-        "y1v1.ev.050",
-        "y1v1.ev.064",
-        "y1v1.ev.113",
-        "y1v45.ev.015"
-      ],
-      "emotion": [
-        "y1v1.ev.102",
-        "y1v45.case.haruki-yamauchi.accept-sakura-rejection",
-        "y1v45.ev.031",
-        "y1v45.ev.037",
-        "y1v45.ev.039",
-        "y1v45.ev.040",
-        "y1v45.ev.041"
-      ],
-      "ethics": [
-        "y1v1.ev.034"
-      ],
-      "institution": [
-        "y1v1.ev.050",
-        "y1v3.ev.003"
-      ],
-      "leadership": [
-        "y1v1.ev.080",
-        "y1v1.ev.088",
-        "y1v1.ev.093",
-        "y1v1.ev.100",
-        "y1v1.ev.114",
-        "y1v3.ev.036",
-        "y1v5.ev.008",
-        "y1v5.ev.019"
-      ],
       "social": [
         "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic",
         "y1v1.case.y.unreliable-athletic-story",
@@ -5803,6 +5831,48 @@
         "y1v45.ev.041",
         "y1v45.ev.045",
         "y1v5.ev.019"
+      ],
+      "ethics": [
+        "y1v1.ev.034"
+      ],
+      "economy": [
+        "y1v1.ev.049",
+        "y1v1.ev.050",
+        "y1v1.ev.064",
+        "y1v1.ev.113",
+        "y1v45.ev.015"
+      ],
+      "institution": [
+        "y1v1.ev.050",
+        "y1v3.ev.003"
+      ],
+      "leadership": [
+        "y1v1.ev.080",
+        "y1v1.ev.088",
+        "y1v1.ev.093",
+        "y1v1.ev.100",
+        "y1v1.ev.114",
+        "y1v3.ev.036",
+        "y1v5.ev.008",
+        "y1v5.ev.019"
+      ],
+      "academic_reasoning": [
+        "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic",
+        "y1v1.ev.088",
+        "y1v1.ev.090",
+        "y1v1.ev.100",
+        "y1v1.ev.123",
+        "y1v1.ev.134",
+        "y1v3.ev.003"
+      ],
+      "emotion": [
+        "y1v1.ev.102",
+        "y1v45.case.haruki-yamauchi.accept-sakura-rejection",
+        "y1v45.ev.031",
+        "y1v45.ev.037",
+        "y1v45.ev.039",
+        "y1v45.ev.040",
+        "y1v45.ev.041"
       ],
       "motivation": [
         "y1v1.ev.134"
@@ -5863,15 +5933,18 @@
       "academic": [
         "y1v6.ev.011"
       ],
+      "results": [
+        "y1v6.ev.011",
+        "y1v6.ev.032"
+      ],
       "exam": [
         "y1v6.ev.032"
       ],
       "pairing": [
         "y1v6.ev.032"
       ],
-      "results": [
-        "y1v6.ev.011",
-        "y1v6.ev.032"
+      "relationship": [
+        "y1v08.ev.054"
       ]
     },
     "actor.rokusuke-koenji": {
@@ -6365,7 +6438,35 @@
       ]
     },
     "actor.honami-ichinose": {
+      "social": [
+        "y1v08.case.honami-ichinose.v08-c023",
+        "y1v08.ev.023",
+        "y1v1.ev.067",
+        "y1v1.ev.092",
+        "y1v2.case.honami-ichinose.reflect-chihiro-confession",
+        "y1v2.ev.035",
+        "y1v2.ev.039",
+        "y1v2.ev.040",
+        "y1v2.ev.041",
+        "y1v2.ev.067",
+        "y1v2.ev.076",
+        "y1v2.ev.078",
+        "y1v2.ev.080",
+        "y1v3.ev.061",
+        "y1v4.case.honami-ichinose.initiate-rabbit-discussion",
+        "y1v4.ev.023",
+        "y1v4.ev.048",
+        "y1v4.ev.071",
+        "y1v4.ev.074",
+        "y1v4.ev.110",
+        "y1v4.ev.111",
+        "y1v4.ev.114",
+        "y1v45.ev.057",
+        "y1v5.ev.009"
+      ],
       "leadership": [
+        "y1v08.case.honami-ichinose.v08-c023",
+        "y1v08.ev.023",
         "y1v1.case.n.library-deescalation",
         "y1v1.ev.092",
         "y1v2.case.honami-ichinose.class-b-informal-leadership",
@@ -6394,30 +6495,6 @@
         "y1v2.ev.071",
         "y1v4.ev.049",
         "y1v4.ev.050"
-      ],
-      "social": [
-        "y1v1.ev.067",
-        "y1v1.ev.092",
-        "y1v2.case.honami-ichinose.reflect-chihiro-confession",
-        "y1v2.ev.035",
-        "y1v2.ev.039",
-        "y1v2.ev.040",
-        "y1v2.ev.041",
-        "y1v2.ev.067",
-        "y1v2.ev.076",
-        "y1v2.ev.078",
-        "y1v2.ev.080",
-        "y1v3.ev.061",
-        "y1v4.case.honami-ichinose.initiate-rabbit-discussion",
-        "y1v4.ev.023",
-        "y1v4.ev.048",
-        "y1v4.ev.071",
-        "y1v4.ev.074",
-        "y1v4.ev.110",
-        "y1v4.ev.111",
-        "y1v4.ev.114",
-        "y1v45.ev.057",
-        "y1v5.ev.009"
       ],
       "strategy": [
         "y1v2.case.honami-ichinose.deploy-surveillance-bluff",
@@ -6579,17 +6656,18 @@
       "results": [
         "y1v5.ev.051"
       ],
-      "accusation": [
-        "y1v6.case.honami-ichinose.face-false-fraud-accusation-with-institutional-rebuttal",
-        "y1v6.ev.064"
+      "relationship": [
+        "y1v08.ev.052",
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits",
+        "y1v6.ev.047"
       ],
       "cooperation": [
         "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits",
         "y1v6.ev.047"
       ],
-      "relationship": [
-        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits",
-        "y1v6.ev.047"
+      "accusation": [
+        "y1v6.case.honami-ichinose.face-false-fraud-accusation-with-institutional-rebuttal",
+        "y1v6.ev.064"
       ],
       "school_authority": [
         "y1v6.case.honami-ichinose.face-false-fraud-accusation-with-institutional-rebuttal",
@@ -6597,6 +6675,10 @@
       ],
       "exams": [
         "y1v7.ev.050"
+      ],
+      "behavior": [
+        "y1v08.case.honami-ichinose.v08-c023",
+        "y1v08.ev.023"
       ]
     },
     "actor.yukimura": {
@@ -6756,12 +6838,6 @@
       ]
     },
     "actor.kei-karuizawa": {
-      "economy": [
-        "y1v1.ev.064",
-        "y1v1.ev.065",
-        "y1v4.ev.052",
-        "y1v45.ev.042"
-      ],
       "social": [
         "y1v075.case.kei-karuizawa.v075-c003",
         "y1v075.case.kei-karuizawa.v075-c005",
@@ -6798,6 +6874,12 @@
         "y1v7.case.kei-karuizawa.v7-c022",
         "y1v7.ev.066",
         "y1v7.ev.079"
+      ],
+      "economy": [
+        "y1v1.ev.064",
+        "y1v1.ev.065",
+        "y1v4.ev.052",
+        "y1v45.ev.042"
       ],
       "leadership": [
         "y1v075.ev.032",
@@ -7010,20 +7092,10 @@
       "motivation": [
         "y1v5.ev.071"
       ],
-      "information": [
-        "y1v075.case.kei-karuizawa.v075-c004",
-        "y1v075.case.kei-karuizawa.v075-c008",
-        "y1v075.ev.004",
-        "y1v075.ev.008",
-        "y1v075.ev.035",
-        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
-        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
-        "y1v6.ev.059",
-        "y1v6.ev.062"
-      ],
-      "investigation": [
-        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
-        "y1v6.ev.060"
+      "secrecy": [
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
+        "y1v6.ev.009",
+        "y1v6.ev.059"
       ],
       "relationship": [
         "y1v075.case.kei-karuizawa.v075-c002",
@@ -7045,16 +7117,33 @@
         "y1v075.ev.040",
         "y1v075.ev.041",
         "y1v075.ev.049",
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.case.kei-karuizawa.v08-c042",
+        "y1v08.ev.020",
+        "y1v08.ev.042",
+        "y1v08.ev.043",
         "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
         "y1v6.ev.009"
-      ],
-      "secrecy": [
-        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
-        "y1v6.ev.009",
-        "y1v6.ev.059"
       ],
       "security": [
         "y1v6.ev.009"
+      ],
+      "information": [
+        "y1v075.case.kei-karuizawa.v075-c004",
+        "y1v075.case.kei-karuizawa.v075-c008",
+        "y1v075.ev.004",
+        "y1v075.ev.008",
+        "y1v075.ev.035",
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.ev.020",
+        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
+        "y1v6.ev.059",
+        "y1v6.ev.062"
+      ],
+      "investigation": [
+        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
+        "y1v6.ev.060"
       ],
       "combat": [
         "y1v7.ev.071",
@@ -7070,6 +7159,16 @@
       "politics": [
         "y1v075.ev.033",
         "y1v075.ev.035"
+      ],
+      "behavior": [
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.case.kei-karuizawa.v08-c042",
+        "y1v08.ev.020",
+        "y1v08.ev.042"
+      ],
+      "analysis": [
+        "y1v08.case.kei-karuizawa.v08-c042",
+        "y1v08.ev.042"
       ]
     },
     "actor.yamawaki": {
@@ -7333,24 +7432,25 @@
       "results": [
         "y1v5.ev.033"
       ],
-      "friendship": [
-        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle"
-      ],
-      "initiative": [
-        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
-        "y1v6.ev.057"
-      ],
       "relationship": [
         "y1v075.case.airi-sakura.v075-c020",
         "y1v075.ev.020",
         "y1v075.ev.050",
+        "y1v08.ev.053",
         "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
         "y1v6.ev.043",
         "y1v6.ev.057",
         "y1v6.ev.061"
       ],
+      "initiative": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle",
+        "y1v6.ev.057"
+      ],
       "romance": [
         "y1v6.ev.061"
+      ],
+      "friendship": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle"
       ],
       "identity": [
         "y1v075.ev.050"
@@ -7372,31 +7472,32 @@
         "y1v6.ev.037",
         "y1v6.ev.040"
       ],
-      "cooperation": [
-        "y1v6.ev.056"
+      "studies": [
+        "y1v6.ev.037",
+        "y1v6.ev.039"
+      ],
+      "results": [
+        "y1v6.ev.037",
+        "y1v6.ev.040"
       ],
       "diagnostic": [
+        "y1v6.ev.039"
+      ],
+      "reasoning": [
         "y1v6.ev.039"
       ],
       "friendship": [
         "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
         "y1v6.ev.056"
       ],
-      "reasoning": [
-        "y1v6.ev.039"
-      ],
       "relationship": [
         "y1v075.ev.020",
         "y1v075.ev.051",
+        "y1v08.ev.053",
         "y1v6.ev.056"
       ],
-      "results": [
-        "y1v6.ev.037",
-        "y1v6.ev.040"
-      ],
-      "studies": [
-        "y1v6.ev.037",
-        "y1v6.ev.039"
+      "cooperation": [
+        "y1v6.ev.056"
       ],
       "leadership": [
         "y1v075.case.hasebe.v075-c019",
@@ -7620,6 +7721,8 @@
         "y1v075.case.kakeru-ryuen.v075-c023",
         "y1v075.ev.022",
         "y1v075.ev.023",
+        "y1v08.case.kakeru-ryuen.v08-c036",
+        "y1v08.ev.036",
         "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance",
         "y1v4.ev.076",
         "y1v4.ev.077",
@@ -7711,6 +7814,7 @@
       "relationship": [
         "y1v075.ev.043",
         "y1v075.ev.047",
+        "y1v08.ev.050",
         "y1v5.ev.061"
       ],
       "deception": [
@@ -7721,33 +7825,6 @@
       ],
       "counterstrategy": [
         "y1v5.ev.077"
-      ],
-      "accusation": [
-        "y1v6.ev.064",
-        "y1v6.ev.077"
-      ],
-      "attribution": [
-        "y1v6.ev.076"
-      ],
-      "blackmail": [
-        "y1v6.ev.080"
-      ],
-      "cheating": [
-        "y1v6.ev.075"
-      ],
-      "communication": [
-        "y1v6.ev.046"
-      ],
-      "decision": [
-        "y1v6.ev.079"
-      ],
-      "information": [
-        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori",
-        "y1v6.ev.024",
-        "y1v6.ev.078"
-      ],
-      "intimidation": [
-        "y1v6.ev.024"
       ],
       "investigation": [
         "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment",
@@ -7760,19 +7837,52 @@
         "y1v6.ev.074",
         "y1v6.ev.076"
       ],
+      "intimidation": [
+        "y1v6.ev.024"
+      ],
+      "information": [
+        "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori",
+        "y1v6.ev.024",
+        "y1v6.ev.078"
+      ],
       "privacy": [
         "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects",
         "y1v6.ev.025"
       ],
+      "communication": [
+        "y1v6.ev.046"
+      ],
+      "accusation": [
+        "y1v6.ev.064",
+        "y1v6.ev.077"
+      ],
       "school_authority": [
         "y1v6.ev.064"
+      ],
+      "cheating": [
+        "y1v6.ev.075"
+      ],
+      "attribution": [
+        "y1v6.ev.076"
+      ],
+      "transaction": [
+        "y1v6.ev.078"
+      ],
+      "decision": [
+        "y1v6.ev.079"
       ],
       "threat": [
         "y1v6.case.kakeru-ryuen.threaten-target-in-photograph-to-identify-x",
         "y1v6.ev.080"
       ],
-      "transaction": [
-        "y1v6.ev.078"
+      "blackmail": [
+        "y1v6.ev.080"
+      ],
+      "institution": [
+        "y1v7.case.kakeru-ryuen.v7-c007",
+        "y1v7.ev.001",
+        "y1v7.ev.073",
+        "y1v7.ev.101"
       ],
       "combat": [
         "y1v075.case.kakeru-ryuen.v075-c026",
@@ -7791,15 +7901,17 @@
         "y1v7.ev.018",
         "y1v7.ev.059"
       ],
-      "institution": [
-        "y1v7.case.kakeru-ryuen.v7-c007",
-        "y1v7.ev.001",
-        "y1v7.ev.073",
-        "y1v7.ev.101"
-      ],
       "identity": [
         "y1v075.ev.043",
         "y1v075.ev.047"
+      ],
+      "autonomy": [
+        "y1v08.case.kakeru-ryuen.v08-c036",
+        "y1v08.ev.036"
+      ],
+      "behavior": [
+        "y1v08.case.kakeru-ryuen.v08-c036",
+        "y1v08.ev.036"
       ]
     },
     "actor.ishizaki": {
@@ -7851,6 +7963,18 @@
       ],
       "leadership": [
         "y1v3.ev.055"
+      ],
+      "behavior": [
+        "y1v08.ev.031"
+      ],
+      "cooperation": [
+        "y1v08.ev.031"
+      ],
+      "development": [
+        "y1v08.ev.031"
+      ],
+      "relationship": [
+        "y1v08.ev.049"
       ]
     },
     "actor.komiya": {
@@ -9022,6 +9146,83 @@
         "y1v075.ev.053",
         "y1v075.ev.056"
       ]
+    },
+    "actor.ayase-natsu": {
+      "exam": [
+        "y1v08.ev.070"
+      ]
+    },
+    "actor.hashimoto": {
+      "behavior": [
+        "y1v08.case.hashimoto.v08-c026",
+        "y1v08.case.hashimoto.v08-c029",
+        "y1v08.case.hashimoto.v08-c035",
+        "y1v08.ev.026",
+        "y1v08.ev.029",
+        "y1v08.ev.035"
+      ],
+      "cooperation": [
+        "y1v08.case.hashimoto.v08-c026",
+        "y1v08.case.hashimoto.v08-c029",
+        "y1v08.ev.026",
+        "y1v08.ev.029"
+      ],
+      "security": [
+        "y1v08.case.hashimoto.v08-c026",
+        "y1v08.ev.026"
+      ],
+      "social": [
+        "y1v08.case.hashimoto.v08-c029",
+        "y1v08.ev.029"
+      ],
+      "deception": [
+        "y1v08.case.hashimoto.v08-c035",
+        "y1v08.ev.035"
+      ],
+      "negotiation": [
+        "y1v08.case.hashimoto.v08-c035",
+        "y1v08.ev.035"
+      ],
+      "relationship": [
+        "y1v08.ev.050"
+      ]
+    },
+    "actor.ikari-momoko": {
+      "behavior": [
+        "y1v08.ev.040"
+      ],
+      "politics": [
+        "y1v08.ev.040"
+      ],
+      "strategy": [
+        "y1v08.ev.040"
+      ],
+      "relationship": [
+        "y1v08.ev.055"
+      ],
+      "exam": [
+        "y1v08.ev.070",
+        "y1v08.ev.071",
+        "y1v08.ev.072"
+      ]
+    },
+    "actor.ishikura": {
+      "behavior": [
+        "y1v08.ev.040"
+      ],
+      "politics": [
+        "y1v08.ev.040"
+      ],
+      "strategy": [
+        "y1v08.ev.040"
+      ],
+      "relationship": [
+        "y1v08.ev.055"
+      ],
+      "exam": [
+        "y1v08.ev.071",
+        "y1v08.ev.072"
+      ]
     }
   },
   "retrieval": "Direct actor/domain map with separated action/context lanes; no sequential volume scans",
@@ -9572,9 +9773,11 @@
       ],
       "strategy": [
         "y1v075.case.arisu-sakayanagi.v075-c011",
+        "y1v08.case.arisu-sakayanagi.v08-c006",
         "y1v5.case.arisu-sakayanagi.reveal-white-room-knowledge-in-private"
       ],
       "leadership": [
+        "y1v08.case.arisu-sakayanagi.v08-c006",
         "y1v5.case.arisu-sakayanagi.maintain-faction-support-withdraw-athletics"
       ],
       "epistemics": [
@@ -9588,7 +9791,10 @@
       "motivation": [],
       "exams": [],
       "emotion": [],
-      "identity": []
+      "identity": [],
+      "behavior": [
+        "y1v08.case.arisu-sakayanagi.v08-c006"
+      ]
     },
     "actor.yuki-father": {
       "social": [],
@@ -9852,8 +10058,18 @@
         "y1v4.case.kikyo-kushida.invite-rival-delegates-into-discussion",
         "y1v5.case.kikyo-kushida.volunteer-paid-mixed-event-substitution"
       ],
-      "academic_reasoning": [
-        "y1v1.case.u.distribute-old-tests"
+      "persuasion": [
+        "y1v1.case.u.public-civic-appeal",
+        "y1v1.case.u.support-inogashira",
+        "y1v2.case.kikyo-kushida.build-sakura-rapport",
+        "y1v2.case.kikyo-kushida.coordinate-witness-inquiry"
+      ],
+      "ethics": [],
+      "economy": [],
+      "strategy": [
+        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
+        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
+        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
       ],
       "leadership": [
         "y1v1.case.u.distribute-old-tests",
@@ -9862,25 +10078,15 @@
         "y1v3.case.kikyo-kushida.recruit-exploration-volunteers",
         "y1v4.case.kikyo-kushida.invite-rival-delegates-into-discussion"
       ],
-      "persuasion": [
-        "y1v1.case.u.public-civic-appeal",
-        "y1v1.case.u.support-inogashira",
-        "y1v2.case.kikyo-kushida.build-sakura-rapport",
-        "y1v2.case.kikyo-kushida.coordinate-witness-inquiry"
-      ],
-      "economy": [],
-      "emotion": [],
-      "ethics": [],
-      "institution": [],
       "observation": [
         "y1v075.case.kikyo-kushida.v075-c029",
         "y1v2.case.kikyo-kushida.recognize-shizuku-identity"
       ],
-      "strategy": [
-        "y1v5.case.kikyo-kushida.leak-lineup-and-threaten-classmates",
-        "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage",
-        "y1v6.case.kikyo-kushida.react-to-false-answers-and-cheat-note"
+      "academic_reasoning": [
+        "y1v1.case.u.distribute-old-tests"
       ],
+      "emotion": [],
+      "institution": [],
       "combat": [
         "y1v1.case.kikyo-kushida.fifty-meter-swim"
       ],
@@ -9934,10 +10140,6 @@
         "y1v6.case.kikyo-kushida.cooperate-on-exam-while-secretly-preparing-sabotage"
       ],
       "counterstrategy": [],
-      "agreement": [
-        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
-        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation"
-      ],
       "privacy": [
         "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
         "y1v6.case.kikyo-kushida.construct-popularity-and-collect-trusted-secrets"
@@ -9945,11 +10147,16 @@
       "retrospective": [
         "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past"
       ],
-      "authority": [],
-      "cheating": [],
       "pairing": [],
+      "agreement": [
+        "y1v6.case.kikyo-kushida.commit-to-math-wager-and-reveal-junior-high-past",
+        "y1v6.case.kikyo-kushida.concede-math-bet-but-reject-reconciliation"
+      ],
       "threat": [],
-      "uncertainty": []
+      "authority": [],
+      "uncertainty": [],
+      "cheating": [],
+      "behavior": []
     },
     "actor.yosuke-hirata": {
       "social": [
@@ -10200,16 +10407,16 @@
         "y1v1.case.y.unreliable-athletic-story",
         "y1v45.case.haruki-yamauchi.accept-sakura-rejection"
       ],
+      "ethics": [],
+      "economy": [],
+      "institution": [],
+      "leadership": [],
       "academic_reasoning": [
         "y1v1.case.haruki-yamauchi.confuse-apec-and-toeic"
       ],
-      "economy": [],
       "emotion": [
         "y1v45.case.haruki-yamauchi.accept-sakura-rejection"
       ],
-      "ethics": [],
-      "institution": [],
-      "leadership": [],
       "motivation": [],
       "observation": [],
       "resources": [],
@@ -10224,9 +10431,10 @@
       "consequence": [],
       "sports": [],
       "academic": [],
+      "results": [],
       "exam": [],
       "pairing": [],
-      "results": []
+      "relationship": []
     },
     "actor.rokusuke-koenji": {
       "social": [
@@ -10375,7 +10583,13 @@
       "governance": []
     },
     "actor.honami-ichinose": {
+      "social": [
+        "y1v08.case.honami-ichinose.v08-c023",
+        "y1v2.case.honami-ichinose.reflect-chihiro-confession",
+        "y1v4.case.honami-ichinose.initiate-rabbit-discussion"
+      ],
       "leadership": [
+        "y1v08.case.honami-ichinose.v08-c023",
         "y1v1.case.n.library-deescalation",
         "y1v2.case.honami-ichinose.class-b-informal-leadership",
         "y1v3.case.honami-ichinose.evaluate-well-before-shared-use",
@@ -10387,10 +10601,13 @@
         "y1v1.case.n.library-deescalation",
         "y1v2.case.honami-ichinose.deploy-surveillance-bluff"
       ],
-      "social": [
-        "y1v2.case.honami-ichinose.reflect-chihiro-confession",
-        "y1v4.case.honami-ichinose.initiate-rabbit-discussion"
+      "strategy": [
+        "y1v2.case.honami-ichinose.deploy-surveillance-bluff",
+        "y1v4.case.honami-ichinose.detect-multi-phone-bluff",
+        "y1v4.case.honami-ichinose.exploit-rival-traitor-incentives",
+        "y1v4.case.honami-ichinose.stage-open-email-visibility"
       ],
+      "conflict": [],
       "institution": [
         "y1v2.case.honami-ichinose.class-b-informal-leadership"
       ],
@@ -10403,13 +10620,6 @@
         "y1v4.case.honami-ichinose.refuse-ryuen-coalition",
         "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
       ],
-      "strategy": [
-        "y1v2.case.honami-ichinose.deploy-surveillance-bluff",
-        "y1v4.case.honami-ichinose.detect-multi-phone-bluff",
-        "y1v4.case.honami-ichinose.exploit-rival-traitor-incentives",
-        "y1v4.case.honami-ichinose.stage-open-email-visibility"
-      ],
-      "conflict": [],
       "observation": [
         "y1v4.case.honami-ichinose.stage-open-email-visibility"
       ],
@@ -10441,19 +10651,22 @@
         "y1v45.case.honami-ichinose.initiate-friendly-volleyball-challenge"
       ],
       "results": [],
+      "relationship": [
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
+      ],
+      "cooperation": [
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
+      ],
       "accusation": [
         "y1v6.case.honami-ichinose.face-false-fraud-accusation-with-institutional-rebuttal"
       ],
       "school_authority": [
         "y1v6.case.honami-ichinose.face-false-fraud-accusation-with-institutional-rebuttal"
       ],
-      "cooperation": [
-        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
-      ],
-      "relationship": [
-        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
-      ],
-      "exams": []
+      "exams": [],
+      "behavior": [
+        "y1v08.case.honami-ichinose.v08-c023"
+      ]
     },
     "actor.yukimura": {
       "social": [
@@ -10525,7 +10738,6 @@
       "results": []
     },
     "actor.kei-karuizawa": {
-      "economy": [],
       "social": [
         "y1v075.case.kei-karuizawa.v075-c003",
         "y1v075.case.kei-karuizawa.v075-c005",
@@ -10533,6 +10745,7 @@
         "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness",
         "y1v7.case.kei-karuizawa.v7-c022"
       ],
+      "economy": [],
       "leadership": [
         "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness"
       ],
@@ -10597,15 +10810,6 @@
       "sports": [],
       "results": [],
       "motivation": [],
-      "investigation": [
-        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim"
-      ],
-      "information": [
-        "y1v075.case.kei-karuizawa.v075-c004",
-        "y1v075.case.kei-karuizawa.v075-c008",
-        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
-        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes"
-      ],
       "secrecy": [
         "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection"
       ],
@@ -10616,15 +10820,34 @@
         "y1v075.case.kei-karuizawa.v075-c007",
         "y1v075.case.kei-karuizawa.v075-c008",
         "y1v075.case.kei-karuizawa.v075-c009",
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.case.kei-karuizawa.v08-c042",
         "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection"
       ],
       "security": [],
+      "information": [
+        "y1v075.case.kei-karuizawa.v075-c004",
+        "y1v075.case.kei-karuizawa.v075-c008",
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes"
+      ],
+      "investigation": [
+        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim"
+      ],
       "combat": [],
       "exams": [],
       "risk_management": [
         "y1v075.case.kei-karuizawa.v075-c006"
       ],
-      "politics": []
+      "politics": [],
+      "behavior": [
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v08.case.kei-karuizawa.v08-c042"
+      ],
+      "analysis": [
+        "y1v08.case.kei-karuizawa.v08-c042"
+      ]
     },
     "actor.yamawaki": {
       "social": [
@@ -10675,9 +10898,14 @@
         "y1v2.case.airi-sakura.testify-despite-stage-fright",
         "y1v3.case.airi-sakura.identify-corn-food-source"
       ],
+      "combat": [],
       "risk_management": [
         "y1v2.case.airi-sakura.conceal-after-fight"
       ],
+      "economy": [],
+      "strategy": [],
+      "persuasion": [],
+      "conflict": [],
       "emotion": [
         "y1v2.case.airi-sakura.testify-despite-stage-fright",
         "y1v2.case.airi-sakura.voluntary-witness-admission",
@@ -10686,11 +10914,6 @@
         "y1v45.case.airi-sakura.deliver-respectful-romantic-refusal",
         "y1v5.case.airi-sakura.improve-to-not-last-in-sprint"
       ],
-      "combat": [],
-      "economy": [],
-      "strategy": [],
-      "persuasion": [],
-      "conflict": [],
       "institution": [],
       "leadership": [],
       "resources": [
@@ -10707,17 +10930,17 @@
       ],
       "cooperation": [],
       "results": [],
-      "initiative": [
-        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle"
-      ],
-      "friendship": [
-        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle"
-      ],
       "relationship": [
         "y1v075.case.airi-sakura.v075-c020",
         "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle"
       ],
+      "initiative": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle"
+      ],
       "romance": [],
+      "friendship": [
+        "y1v6.case.airi-sakura.request-inclusion-in-friendship-circle"
+      ],
       "identity": []
     },
     "actor.hasebe": {
@@ -10729,15 +10952,15 @@
       "academic": [
         "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle"
       ],
+      "studies": [],
+      "results": [],
+      "diagnostic": [],
+      "reasoning": [],
       "friendship": [
         "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle"
       ],
-      "cooperation": [],
-      "diagnostic": [],
-      "reasoning": [],
       "relationship": [],
-      "results": [],
-      "studies": [],
+      "cooperation": [],
       "leadership": [
         "y1v075.case.hasebe.v075-c019"
       ],
@@ -10813,6 +11036,7 @@
       ],
       "negotiation": [
         "y1v075.case.kakeru-ryuen.v075-c023",
+        "y1v08.case.kakeru-ryuen.v08-c036",
         "y1v4.case.kakeru-ryuen.offer-b-c-tactical-alliance",
         "y1v5.case.kakeru-ryuen.exploit-roster-and-target-horikita",
         "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction"
@@ -10854,24 +11078,24 @@
         "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects",
         "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori"
       ],
-      "privacy": [
-        "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects"
-      ],
+      "intimidation": [],
       "information": [
         "y1v6.case.kakeru-ryuen.probe-unknown-opponent-through-hiyori"
       ],
+      "privacy": [
+        "y1v6.case.kakeru-ryuen.extract-manabe-network-and-narrow-x-suspects"
+      ],
+      "communication": [],
+      "accusation": [],
+      "school_authority": [],
+      "cheating": [],
+      "attribution": [],
+      "transaction": [],
+      "decision": [],
       "threat": [
         "y1v6.case.kakeru-ryuen.threaten-target-in-photograph-to-identify-x"
       ],
-      "accusation": [],
-      "attribution": [],
       "blackmail": [],
-      "cheating": [],
-      "communication": [],
-      "decision": [],
-      "intimidation": [],
-      "school_authority": [],
-      "transaction": [],
       "institution": [
         "y1v7.case.kakeru-ryuen.v7-c007"
       ],
@@ -10880,12 +11104,15 @@
         "y1v7.case.kakeru-ryuen.v7-c005"
       ],
       "exams": [],
-      "identity": []
+      "identity": [],
+      "autonomy": [
+        "y1v08.case.kakeru-ryuen.v08-c036"
+      ],
+      "behavior": [
+        "y1v08.case.kakeru-ryuen.v08-c036"
+      ]
     },
     "actor.ishizaki": {
-      "risk_management": [
-        "y1v2.case.ishizaki.resist-initial-compromise"
-      ],
       "conflict": [
         "y1v2.case.ishizaki.resist-initial-compromise"
       ],
@@ -10899,7 +11126,14 @@
         "y1v7.case.ishizaki.v7-c042"
       ],
       "persuasion": [],
-      "leadership": []
+      "risk_management": [
+        "y1v2.case.ishizaki.resist-initial-compromise"
+      ],
+      "leadership": [],
+      "behavior": [],
+      "cooperation": [],
+      "development": [],
+      "relationship": []
     },
     "actor.komiya": {
       "conflict": [],
@@ -11368,6 +11602,47 @@
         "y1v075.case.kiriyama.v075-c036"
       ],
       "leadership": []
+    },
+    "actor.ayase-natsu": {
+      "exam": []
+    },
+    "actor.hashimoto": {
+      "behavior": [
+        "y1v08.case.hashimoto.v08-c026",
+        "y1v08.case.hashimoto.v08-c029",
+        "y1v08.case.hashimoto.v08-c035"
+      ],
+      "cooperation": [
+        "y1v08.case.hashimoto.v08-c026",
+        "y1v08.case.hashimoto.v08-c029"
+      ],
+      "security": [
+        "y1v08.case.hashimoto.v08-c026"
+      ],
+      "social": [
+        "y1v08.case.hashimoto.v08-c029"
+      ],
+      "deception": [
+        "y1v08.case.hashimoto.v08-c035"
+      ],
+      "negotiation": [
+        "y1v08.case.hashimoto.v08-c035"
+      ],
+      "relationship": []
+    },
+    "actor.ikari-momoko": {
+      "behavior": [],
+      "politics": [],
+      "strategy": [],
+      "relationship": [],
+      "exam": []
+    },
+    "actor.ishikura": {
+      "behavior": [],
+      "politics": [],
+      "strategy": [],
+      "relationship": [],
+      "exam": []
     }
   },
   "context_mentions_by_actor_topic": {
@@ -13249,6 +13524,7 @@
       "strategy": [
         "y1v075.ev.010",
         "y1v075.ev.011",
+        "y1v08.ev.006",
         "y1v3.ev.116",
         "y1v5.ev.067",
         "y1v5.ev.068",
@@ -13260,6 +13536,7 @@
         "y1v7.ev.102"
       ],
       "leadership": [
+        "y1v08.ev.006",
         "y1v5.ev.010",
         "y1v5.ev.035"
       ],
@@ -13275,6 +13552,7 @@
       ],
       "relationship": [
         "y1v075.ev.043",
+        "y1v08.ev.054",
         "y1v5.ev.067"
       ],
       "motivation": [
@@ -13289,6 +13567,9 @@
       ],
       "identity": [
         "y1v075.ev.043"
+      ],
+      "behavior": [
+        "y1v08.ev.006"
       ]
     },
     "actor.yuki-father": {
@@ -14184,6 +14465,7 @@
         "y1v2.ev.012"
       ],
       "conflict": [
+        "y1v08.ev.039",
         "y1v2.ev.012",
         "y1v2.ev.016",
         "y1v2.ev.046",
@@ -14201,6 +14483,7 @@
         "y1v6.ev.073"
       ],
       "exam": [
+        "y1v08.ev.070",
         "y1v3.ev.037",
         "y1v4.ev.016",
         "y1v4.ev.017",
@@ -14270,6 +14553,7 @@
         "y1v6.ev.062"
       ],
       "trust": [
+        "y1v08.ev.039",
         "y1v5.ev.025",
         "y1v6.ev.001",
         "y1v6.ev.002"
@@ -14304,6 +14588,7 @@
       ],
       "relationship": [
         "y1v075.ev.028",
+        "y1v08.ev.051",
         "y1v5.ev.053",
         "y1v5.ev.061",
         "y1v6.ev.073"
@@ -14346,6 +14631,9 @@
       ],
       "cheating": [
         "y1v6.ev.075"
+      ],
+      "behavior": [
+        "y1v08.ev.039"
       ]
     },
     "actor.yosuke-hirata": {
@@ -15212,6 +15500,9 @@
       ],
       "pairing": [
         "y1v6.ev.032"
+      ],
+      "relationship": [
+        "y1v08.ev.054"
       ]
     },
     "actor.rokusuke-koenji": {
@@ -15667,6 +15958,7 @@
     },
     "actor.honami-ichinose": {
       "social": [
+        "y1v08.ev.023",
         "y1v1.ev.067",
         "y1v1.ev.092",
         "y1v2.ev.035",
@@ -15689,6 +15981,7 @@
         "y1v5.ev.009"
       ],
       "leadership": [
+        "y1v08.ev.023",
         "y1v1.ev.092",
         "y1v2.ev.036",
         "y1v2.ev.037",
@@ -15853,6 +16146,7 @@
         "y1v5.ev.051"
       ],
       "relationship": [
+        "y1v08.ev.052",
         "y1v6.ev.047"
       ],
       "cooperation": [
@@ -15866,6 +16160,9 @@
       ],
       "exams": [
         "y1v7.ev.050"
+      ],
+      "behavior": [
+        "y1v08.ev.023"
       ]
     },
     "actor.yukimura": {
@@ -16246,6 +16543,9 @@
         "y1v075.ev.040",
         "y1v075.ev.041",
         "y1v075.ev.049",
+        "y1v08.ev.020",
+        "y1v08.ev.042",
+        "y1v08.ev.043",
         "y1v6.ev.009"
       ],
       "security": [
@@ -16255,6 +16555,7 @@
         "y1v075.ev.004",
         "y1v075.ev.008",
         "y1v075.ev.035",
+        "y1v08.ev.020",
         "y1v6.ev.059",
         "y1v6.ev.062"
       ],
@@ -16274,6 +16575,13 @@
       "politics": [
         "y1v075.ev.033",
         "y1v075.ev.035"
+      ],
+      "behavior": [
+        "y1v08.ev.020",
+        "y1v08.ev.042"
+      ],
+      "analysis": [
+        "y1v08.ev.042"
       ]
     },
     "actor.yamawaki": {
@@ -16515,6 +16823,7 @@
       "relationship": [
         "y1v075.ev.020",
         "y1v075.ev.050",
+        "y1v08.ev.053",
         "y1v6.ev.043",
         "y1v6.ev.057",
         "y1v6.ev.061"
@@ -16563,6 +16872,7 @@
       "relationship": [
         "y1v075.ev.020",
         "y1v075.ev.051",
+        "y1v08.ev.053",
         "y1v6.ev.056"
       ],
       "cooperation": [
@@ -16761,6 +17071,7 @@
       "negotiation": [
         "y1v075.ev.022",
         "y1v075.ev.023",
+        "y1v08.ev.036",
         "y1v4.ev.076",
         "y1v4.ev.077",
         "y1v4.ev.078",
@@ -16837,6 +17148,7 @@
       "relationship": [
         "y1v075.ev.043",
         "y1v075.ev.047",
+        "y1v08.ev.050",
         "y1v5.ev.061"
       ],
       "deception": [
@@ -16916,6 +17228,12 @@
       "identity": [
         "y1v075.ev.043",
         "y1v075.ev.047"
+      ],
+      "autonomy": [
+        "y1v08.ev.036"
+      ],
+      "behavior": [
+        "y1v08.ev.036"
       ]
     },
     "actor.ishizaki": {
@@ -16962,6 +17280,18 @@
       "risk_management": [],
       "leadership": [
         "y1v3.ev.055"
+      ],
+      "behavior": [
+        "y1v08.ev.031"
+      ],
+      "cooperation": [
+        "y1v08.ev.031"
+      ],
+      "development": [
+        "y1v08.ev.031"
+      ],
+      "relationship": [
+        "y1v08.ev.049"
       ]
     },
     "actor.komiya": {
@@ -18028,6 +18358,74 @@
       "leadership": [
         "y1v075.ev.053",
         "y1v075.ev.056"
+      ]
+    },
+    "actor.ayase-natsu": {
+      "exam": [
+        "y1v08.ev.070"
+      ]
+    },
+    "actor.hashimoto": {
+      "behavior": [
+        "y1v08.ev.026",
+        "y1v08.ev.029",
+        "y1v08.ev.035"
+      ],
+      "cooperation": [
+        "y1v08.ev.026",
+        "y1v08.ev.029"
+      ],
+      "security": [
+        "y1v08.ev.026"
+      ],
+      "social": [
+        "y1v08.ev.029"
+      ],
+      "deception": [
+        "y1v08.ev.035"
+      ],
+      "negotiation": [
+        "y1v08.ev.035"
+      ],
+      "relationship": [
+        "y1v08.ev.050"
+      ]
+    },
+    "actor.ikari-momoko": {
+      "behavior": [
+        "y1v08.ev.040"
+      ],
+      "politics": [
+        "y1v08.ev.040"
+      ],
+      "strategy": [
+        "y1v08.ev.040"
+      ],
+      "relationship": [
+        "y1v08.ev.055"
+      ],
+      "exam": [
+        "y1v08.ev.070",
+        "y1v08.ev.071",
+        "y1v08.ev.072"
+      ]
+    },
+    "actor.ishikura": {
+      "behavior": [
+        "y1v08.ev.040"
+      ],
+      "politics": [
+        "y1v08.ev.040"
+      ],
+      "strategy": [
+        "y1v08.ev.040"
+      ],
+      "relationship": [
+        "y1v08.ev.055"
+      ],
+      "exam": [
+        "y1v08.ev.071",
+        "y1v08.ev.072"
       ]
     }
   },

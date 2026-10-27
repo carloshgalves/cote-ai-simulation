@@ -1,0 +1,518 @@
+{
+  "schema_version": "canon-y1-v07-episode-semantic-dossier-v1",
+  "id": "y1v7.episode.ryuen-plan-rooftop-800m",
+  "source": {
+    "work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "physical_pdf_pages": 207,
+    "sha256": "b41f00143f483fa7704bcc6c4bfda03323bd835c77ea1e95e53d27bd859e461b",
+    "edition": "Operator-provided Seven Seas English PDF",
+    "page_basis": "1-BASED_PHYSICAL",
+    "original_pdf_committed": false,
+    "paraphrase_only": true
+  },
+  "status": {
+    "primary_source_review": "ASSISTANT_DIRECT_PDF_SEMANTIC_PASS",
+    "independent_second_reviewer": "NOT_PERFORMED",
+    "claims_all_verified": false,
+    "simulation_runtime_admission": false,
+    "immutable_script": false
+  },
+  "scope": "Exclusively Ryuen's rooftop operation, Kiyotaka's four distinct engagements, witnesses and post-fight 800-million private-point plan",
+  "ryuen_operation": {
+    "point_of_view": "Ryuen first-person narration",
+    "strategic_goal": "Identify unknown X, break its secrecy and test an opponent he regards as exceptional",
+    "initial_epistemic_state": {
+      "pages": [
+        120,
+        121
+      ],
+      "number_of_candidates": "APPROXIMATELY_TEN_REMAIN",
+      "true_X_identity": "UNCONFIRMED_TO_RYUEN",
+      "suspect_pressure": "CLASS_C_SURVEILLANCE_POST_PAPER_SHUFFLE"
+    },
+    "sequence": [
+      {
+        "id": "R1",
+        "pages": [
+          120,
+          121
+        ],
+        "action": "Mobilizes class-wide tailing, removes unlikely suspects and lets targets notice surveillance as psychological pressure.",
+        "limit": "Monitoring provides no validated proof of X."
+      },
+      {
+        "id": "R2",
+        "pages": [
+          121,
+          123,
+          124,
+          125
+        ],
+        "action": "Times threat for last school day, summons Karuizawa and sends an alert to X, anticipating intervention.",
+        "limit": "Response of X and Karuizawa is contingent, not controlled."
+      },
+      {
+        "id": "R3",
+        "pages": [
+          123,
+          124
+        ],
+        "action": "Keeps Kushida's involvement in obtaining Karuizawa's email private from Ibuki and Ishizaki.",
+        "limit": "Compartmentalized team knowledge."
+      },
+      {
+        "id": "R4",
+        "pages": [
+          125,
+          126
+        ],
+        "action": "Uses secluded rooftop, obstructs camera and positions Albert as stairwell lookout.",
+        "limit": "Ryuen's expectation of a repair penalty comes from his experiment, not blanket school permission."
+      },
+      {
+        "id": "R5",
+        "pages": [
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141
+        ],
+        "action": "Uses threats to disclose Karuizawa's traumatic history and abusive cold-water coercion to demand X's identity.",
+        "limit": "Abuse fails to obtain X's name and is neither ethically neutral nor a safe operational recipe."
+      },
+      {
+        "id": "R6",
+        "pages": [
+          146,
+          147,
+          148,
+          149,
+          150
+        ],
+        "action": "Interprets the older cruise/Manabe episode as deliberate manipulation by X to claim Kiyotaka will not save her.",
+        "limit": "Partly adversarial conjecture. Karuizawa is frightened but refuses to disclose him."
+      },
+      {
+        "id": "R7",
+        "pages": [
+          166,
+          167,
+          168,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175
+        ],
+        "action": "After Kiyotaka arrives, Ryuen accepts his possible identity as X despite Ibuki and Ishizaki objecting, keeps threat of future exposure.",
+        "limit": "Knowledge becomes local to rooftop participants, not universally public."
+      },
+      {
+        "id": "R8",
+        "pages": [
+          176,
+          177,
+          178
+        ],
+        "action": "Strikes Ibuki when she objects, has Albert close the roof door and orders Ishizaki's opening attack.",
+        "limit": "Ibuki objects; no universal agreement among the four."
+      }
+    ],
+    "failures": [
+      "Karuizawa maintains confidentiality despite abuse.",
+      "Ryuen does not know Kiyotaka's fighting skill and assumes he controls the physical risk.",
+      "Distant contextual witnesses create a future evidentiary deterrent.",
+      "Kiyotaka describes having anticipated the Manabe→Ryuen trace, but not every contingency is provably engineered."
+    ],
+    "evidence_refs": [
+      "y1v7.ev.063",
+      "y1v7.ev.065",
+      "y1v7.ev.066",
+      "y1v7.ev.067",
+      "y1v7.ev.069",
+      "y1v7.ev.070",
+      "y1v7.ev.071",
+      "y1v7.ev.072",
+      "y1v7.ev.075",
+      "y1v7.ev.076",
+      "y1v7.ev.093"
+    ]
+  },
+  "kiyotaka_counterplan": {
+    "initial_choice": {
+      "pages": [
+        79,
+        80,
+        81,
+        82,
+        83,
+        152,
+        153,
+        154,
+        155,
+        156
+      ],
+      "description": "Appears to sever operational partnership, receives notice of rooftop summons, waits, then leaves his friends to address the situation.",
+      "limit": "Rescue and later admission of instrumental delay coexist; not a universal propensity to abandon victims."
+    },
+    "contextual_preparation": {
+      "pages": [
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165
+      ],
+      "description": "Discusses teacher intervention and school rules with Chabashira, identifies the pre-existing rooftop risk, summons Manabu as a nearby contextual witness.",
+      "limit": "No teacher is posted on rooftop as a direct combat observer."
+    },
+    "controlled_identity_disclosure": {
+      "pages": [
+        166,
+        167,
+        168,
+        170,
+        171,
+        172
+      ],
+      "description": "Enters alone past Albert and supplies island sabotage details to convince skeptics that he is X.",
+      "limit": "Spoiler restricted to scene participants."
+    },
+    "dual_purpose": {
+      "pages": [
+        181,
+        185,
+        190,
+        191
+      ],
+      "description": "States he anticipated Ryuen's search path; tests whether fear emerges in Ryuen while later acknowledging he gauged Karuizawa's dependence.",
+      "limit": "First-person after-the-fact motive report, not perfect foresight or neutral intent."
+    },
+    "postfight_control": {
+      "pages": [
+        191,
+        192,
+        193,
+        194,
+        195
+      ],
+      "description": "Moves Karuizawa toward witnesses below and cites damaged-camera recording, off-site alibi and Manabu's nearby presence as bargaining leverage.",
+      "limit": "No judicial absolution, direct eye-witnessed blows, or guaranteed expulsion."
+    },
+    "witnesses": [
+      {
+        "actor_id": "actor.manabu-horikita",
+        "name": "Manabu Horikita",
+        "classification": "TESTEMUNHA_CONTEXTUAL_DE_PROXIMIDADE",
+        "pdf_pages": [
+          162,
+          164,
+          165,
+          191,
+          192,
+          193,
+          195
+        ],
+        "position": "ESCADARIA_ABAIXO_DO_TERRACO",
+        "role": "Kiyotaka convida o ex-presidente, que aceita ficar visível a quem descer do terraço; existência de terceiro informado dissuade acusações e novas agressões.",
+        "knows": "Convite, contexto limitado, presença e saída de estudantes",
+        "does_not_know": "Golpes individuais, sequência exata de combate ou intenção privada de Ryuen",
+        "direct_eyewitness_of_strikes": false,
+        "official_hearing": false,
+        "acted_as_student_council_president": false
+      },
+      {
+        "actor_id": "actor.sae-chiyabashira",
+        "name": "Sae Chabashira",
+        "classification": "TESTEMUNHA_CONTEXTUAL_DOCENTE",
+        "pdf_pages": [
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          191
+        ],
+        "position": "CORREDOR_E_ESCADARIA_FORA_DO_TERRACO",
+        "role": "Professora discute com Kiyotaka antes do confronto, observa movimentação e baldes de Ishizaki no acesso e depois é mencionada entre os que aguardam abaixo.",
+        "knows": "Parte da situação de Karuizawa, relato e planos de Kiyotaka, movimentos externos à cobertura do terraço",
+        "does_not_know": "Testemunho ocular da luta nem cada ato de violência prévia no terraço",
+        "direct_eyewitness_of_strikes": false,
+        "official_hearing": false,
+        "intervened_in_fight": false
+      }
+    ],
+    "evidence_refs": [
+      "y1v7.ev.079",
+      "y1v7.ev.082",
+      "y1v7.ev.085",
+      "y1v7.ev.088",
+      "y1v7.ev.089",
+      "y1v7.ev.094",
+      "y1v7.ev.095",
+      "y1v7.ev.096",
+      "y1v7.ev.097",
+      "y1v7.ev.098",
+      "y1v7.ev.099",
+      "y1v7.ev.100"
+    ]
+  },
+  "combat": {
+    "group_size_potential_opponents": 4,
+    "simultaneous_four_person_attack": false,
+    "structure": "Ishizaki initiated; Albert intervened in the same phase; Ibuki then fought separately; Ryuen fought last.",
+    "engagement_records": [
+      {
+        "order": 1,
+        "actor_id": "actor.ishizaki",
+        "pages": [
+          178,
+          179,
+          180
+        ],
+        "situation": "Hesitates under Ryuen's order; opens with slow sweeping fist.",
+        "kiyotaka_response": "Grabs fist and squeezes until Ishizaki collapses; later intercepts another charge with kick and jaw strike.",
+        "outcome": "Incapacitated locally.",
+        "demonstrated": [
+          "attack_is_telegraphed",
+          "kiyotaka_grip_strength_and_timing"
+        ],
+        "limits": [
+          "No numeric grip measurement",
+          "Do not infer permanent incompetence"
+        ]
+      },
+      {
+        "order": 2,
+        "actor_id": "actor.yamada-albert",
+        "pages": [
+          166,
+          179,
+          180
+        ],
+        "situation": "Was lookout; intervenes without new instruction while Ishizaki is restrained, attacks with substantial force.",
+        "kiyotaka_response": "Deliberately blocks one hit and feels pain/jolt, then dodges, tests body resistance, feints, counters and knocks him down.",
+        "outcome": "Incapacitated after countersequence.",
+        "demonstrated": [
+          "albert_raw_power_and_body_conditioning",
+          "kiyotaka_read_adjustment_and_precision"
+        ],
+        "limits": [
+          "Kiyotaka is not invulnerable",
+          "Albert not proven untrained or universally weak"
+        ]
+      },
+      {
+        "order": 3,
+        "actor_id": "actor.mio-ibuki",
+        "pages": [
+          176,
+          182
+        ],
+        "situation": "Previously opposed violence and was struck by Ryuen; launches repeated kicks after the two others fall.",
+        "kiyotaka_response": "Evades, closes distance and takes her down without escalating to the most dangerous available strike.",
+        "outcome": "Neutralized.",
+        "demonstrated": [
+          "ibuki_kicking_and_agility",
+          "kiyotaka_range_control"
+        ],
+        "limits": [
+          "Narrator's comparison with Suzune is hypothetical and conditional",
+          "No claim of group attack at same moment"
+        ]
+      },
+      {
+        "order": 4,
+        "actor_id": "actor.kakeru-ryuen",
+        "pages": [
+          183,
+          184,
+          185,
+          186,
+          187,
+          188
+        ],
+        "situation": "Combines unorthodox brawling, abdomen attacks and threat of future repeated ambushes; claims fearlessness.",
+        "kiyotaka_response": "Dodges, takes some impacts intentionally as local fear test, adapts and ends exchange by repeated strikes causing unconsciousness.",
+        "outcome": "Ryuen unconscious, later revived.",
+        "demonstrated": [
+          "ryuen_pain_tolerance_and_stubbornness",
+          "kiyotaka_counterstriking_and_force_modulation"
+        ],
+        "limits": [
+          "Kiyotaka explicitly experiences pain",
+          "Ryuen fearlessness is self-report disputed by narrator's psychological interpretation",
+          "No universal stats or guaranteed future victory"
+        ]
+      }
+    ],
+    "present_on_roof": [
+      "actor.kiyotaka-ayanokoji",
+      "actor.kakeru-ryuen",
+      "actor.ishizaki",
+      "actor.yamada-albert",
+      "actor.mio-ibuki",
+      "actor.kei-karuizawa"
+    ],
+    "contextual_witnesses_outside_roof": [
+      "actor.manabu-horikita",
+      "actor.sae-chiyabashira"
+    ],
+    "evidence_refs": [
+      "y1v7.ev.089",
+      "y1v7.ev.091",
+      "y1v7.ev.093",
+      "y1v7.ev.094",
+      "y1v7.ev.096",
+      "y1v7.ev.097",
+      "y1v7.ev.098"
+    ]
+  },
+  "aftermath": {
+    "pages": [
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      198,
+      199,
+      200,
+      201,
+      202,
+      203,
+      204
+    ],
+    "beats": [
+      {
+        "pages": [
+          190,
+          191
+        ],
+        "claim": "Kiyotaka consoles Karuizawa and narrates instrumental calculation about dependency.",
+        "status": "OBSERVATION_PLUS_PRIVATE_NARRATOR_INTENT"
+      },
+      {
+        "pages": [
+          192,
+          193
+        ],
+        "claim": "Kiyotaka cites proximity of former council president, camera tampering and alibi; Ryuen recognizes future leverage.",
+        "status": "CHARACTER_ASSERTION_AND_RECORDED_LOCAL_RISK"
+      },
+      {
+        "pages": [
+          193,
+          194,
+          195
+        ],
+        "claim": "Ryuen proposes taking responsibility and leaving; Kiyotaka warns departure may reveal X and weaken future strategic balance.",
+        "status": "ATTEMPT_NOT_COMPLETED_WITHIN_ROOFTOP_SCENE"
+      },
+      {
+        "pages": [
+          201,
+          202,
+          203,
+          204
+        ],
+        "claim": "Sakagami says a Class D student paid to repair camera; Ishizaki and Albert want to quit if Ryuen does; Ryuen stays.",
+        "status": "SCHOOL_TEACHER_REPORT_AND_OBSERVED_WITHDRAWAL_REVERSAL"
+      }
+    ],
+    "no_certain_origin_of_ishizaki_albert_threat": "Ryuen suspects Kiyotaka set up the solidarity threat, but source does not independently prove how they decided."
+  },
+  "eight_hundred_million": {
+    "unit": "PRIVATE_POINTS",
+    "pdf_pages": [
+      198,
+      199,
+      200
+    ],
+    "observed_document": "Ryuen's phone shows his drafted three-year projection of 800,000,000 private points; Ibuki directly reads it.",
+    "distinction": [
+      {
+        "actor": "actor.mio-ibuki",
+        "source_mode": "IBUKI_INFERENCE",
+        "interpretation": "800 million would enable taking all Class C to Class A, unlike one individual's passage."
+      },
+      {
+        "actor": "actor.kakeru-ryuen",
+        "source_mode": "RYUEN_SELF_REPORT_OR_DEFLECTION",
+        "interpretation": "States alliance and ambition were selfish and dismisses the draft as idle writing."
+      }
+    ],
+    "not_established": [
+      "A confession of Ryuen's true enduring collective objective",
+      "800 million accumulated or spent",
+      "School-adjudicated price or executable 40-person transfer mechanism"
+    ],
+    "unresolved_numeric_discrepancy": {
+      "v7_p199_ibuki_single_person_price": 2000000,
+      "v2_teacher_reported_transfer_price": 20000000,
+      "v2_evidence_refs": [
+        "y1v2.ev.025",
+        "y1v2.ev.026",
+        "y1v2.ev.027"
+      ],
+      "status": "OPEN_NO_SILENT_CORRECTION",
+      "reason": "The printed V7 claim and earlier teacher rule disagree; do not invent discounts, errata or exchange formula."
+    },
+    "links": [
+      "y1v7.ev.105",
+      "y1v7.ev.106",
+      "y1v7.ev.107",
+      "y1v7.ev.108"
+    ],
+    "eventual_goal_execution": false
+  },
+  "release_gates": {
+    "external_independent_review_required": true,
+    "operator_release_required": true,
+    "permanent_ratings_forbidden": true,
+    "retroactive_actor_memory_forbidden": true
+  },
+  "case_ids": [
+    "kakeru-ryuen.v7-c003",
+    "kakeru-ryuen.v7-c004",
+    "kakeru-ryuen.v7-c005",
+    "kakeru-ryuen.v7-c006",
+    "kakeru-ryuen.v7-c007",
+    "kakeru-ryuen.v7-c008",
+    "kiyotaka-ayanokoji.v7-c014",
+    "kiyotaka-ayanokoji.v7-c015",
+    "kiyotaka-ayanokoji.v7-c016",
+    "kiyotaka-ayanokoji.v7-c017",
+    "kiyotaka-ayanokoji.v7-c018",
+    "kiyotaka-ayanokoji.v7-c019",
+    "ishizaki.v7-c041",
+    "yamada-albert.v7-c043",
+    "mio-ibuki.v7-c027",
+    "mio-ibuki.v7-c028",
+    "manabu-horikita.v7-c036",
+    "sae-chiyabashira.v7-c038"
+  ]
+}

@@ -17,7 +17,10 @@
     ],
     "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.manabu-horikita",
+    "actor.sae-chiyabashira"
+  ],
   "capabilities_supported": [
     "strategy"
   ],
@@ -37,5 +40,69 @@
   "behavioral_policy": "NON_EXECUTABLE",
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED"
+  },
+  "episode_deepening": {
+    "schema_version": "canon-episode-case-detail-v1",
+    "source_work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "dossier_ref": "data/canon/consolidated/audits/y1-v07-ryuen-plan-rooftop-deepening.json",
+    "focus": "POSTFIGHT_EVIDENCE",
+    "observed_mechanism": "Uses Manabu's scoped witness presence, camera-obscuring evidence and own alibi to discourage false accusations and later pressure.",
+    "epistemic_and_capability_limits": [
+      "Manabu did not directly witness blows",
+      "Chabashira has surrounding context only",
+      "No formal adjudicated punishments"
+    ],
+    "first_party_pdf_page_review": "ASSISTANT_DIRECT_PRIMARY_PDF_CHECK",
+    "independent_review": "NOT_PERFORMED",
+    "runtime_admission": false,
+    "simulator_replay": "NOT_DETERMINISTIC",
+    "testemunhas": [
+      {
+        "actor_id": "actor.manabu-horikita",
+        "name": "Manabu Horikita",
+        "classification": "TESTEMUNHA_CONTEXTUAL_DE_PROXIMIDADE",
+        "pdf_pages": [
+          162,
+          164,
+          165,
+          191,
+          192,
+          193,
+          195
+        ],
+        "position": "ESCADARIA_ABAIXO_DO_TERRACO",
+        "role": "Kiyotaka convida o ex-presidente, que aceita ficar visível a quem descer do terraço; existência de terceiro informado dissuade acusações e novas agressões.",
+        "knows": "Convite, contexto limitado, presença e saída de estudantes",
+        "does_not_know": "Golpes individuais, sequência exata de combate ou intenção privada de Ryuen",
+        "direct_eyewitness_of_strikes": false,
+        "official_hearing": false,
+        "acted_as_student_council_president": false
+      },
+      {
+        "actor_id": "actor.sae-chiyabashira",
+        "name": "Sae Chabashira",
+        "classification": "TESTEMUNHA_CONTEXTUAL_DOCENTE",
+        "pdf_pages": [
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          191
+        ],
+        "position": "CORREDOR_E_ESCADARIA_FORA_DO_TERRACO",
+        "role": "Professora discute com Kiyotaka antes do confronto, observa movimentação e baldes de Ishizaki no acesso e depois é mencionada entre os que aguardam abaixo.",
+        "knows": "Parte da situação de Karuizawa, relato e planos de Kiyotaka, movimentos externos à cobertura do terraço",
+        "does_not_know": "Testemunho ocular da luta nem cada ato de violência prévia no terraço",
+        "direct_eyewitness_of_strikes": false,
+        "official_hearing": false,
+        "intervened_in_fight": false
+      }
+    ]
   }
 }

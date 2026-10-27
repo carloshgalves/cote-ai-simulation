@@ -37,5 +37,20 @@
   "behavioral_policy": "NON_EXECUTABLE",
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED"
+  },
+  "episode_deepening": {
+    "schema_version": "canon-episode-case-detail-v1",
+    "source_work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "dossier_ref": "data/canon/consolidated/audits/y1-v07-ryuen-plan-rooftop-deepening.json",
+    "focus": "AFTERMATH_CHOICE",
+    "observed_mechanism": "Acknowledges Kiyotaka's witness-alibi leverage and volunteers responsibility or withdrawal; exit not completed on rooftop.",
+    "epistemic_and_capability_limits": [
+      "Withdrawal is a contemplated choice, not expulsion",
+      "A claim to transfer points is not confirmed transaction"
+    ],
+    "first_party_pdf_page_review": "ASSISTANT_DIRECT_PRIMARY_PDF_CHECK",
+    "independent_review": "NOT_PERFORMED",
+    "runtime_admission": false,
+    "simulator_replay": "NOT_DETERMINISTIC"
   }
 }

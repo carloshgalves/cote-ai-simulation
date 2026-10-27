@@ -19,7 +19,9 @@
     ],
     "source_status": "DRAFT_EXTERNAL_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
   "capabilities_supported": [
     "strategy"
   ],
@@ -39,5 +41,46 @@
   "behavioral_policy": "NON_EXECUTABLE",
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED"
+  },
+  "episode_deepening": {
+    "schema_version": "canon-episode-case-detail-v1",
+    "source_work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "dossier_ref": "data/canon/consolidated/audits/y1-v07-ryuen-plan-rooftop-deepening.json",
+    "focus": "TESTEMUNHA_CHABASHIRA",
+    "observed_mechanism": "Teacher discusses the incident with Kiyotaka, observes staircase traffic and waits below roof with Manabu as a contextual witness.",
+    "epistemic_and_capability_limits": [
+      "Not direct eyewitness of blows",
+      "No on-the-spot teacher sanction",
+      "Does not know everything that transpired on the roof"
+    ],
+    "first_party_pdf_page_review": "ASSISTANT_DIRECT_PRIMARY_PDF_CHECK",
+    "independent_review": "NOT_PERFORMED",
+    "runtime_admission": false,
+    "simulator_replay": "NOT_DETERMINISTIC",
+    "testemunha": {
+      "actor_id": "actor.sae-chiyabashira",
+      "name": "Sae Chabashira",
+      "classification": "TESTEMUNHA_CONTEXTUAL_DOCENTE",
+      "pdf_pages": [
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        191
+      ],
+      "position": "CORREDOR_E_ESCADARIA_FORA_DO_TERRACO",
+      "role": "Professora discute com Kiyotaka antes do confronto, observa movimentação e baldes de Ishizaki no acesso e depois é mencionada entre os que aguardam abaixo.",
+      "knows": "Parte da situação de Karuizawa, relato e planos de Kiyotaka, movimentos externos à cobertura do terraço",
+      "does_not_know": "Testemunho ocular da luta nem cada ato de violência prévia no terraço",
+      "direct_eyewitness_of_strikes": false,
+      "official_hearing": false,
+      "intervened_in_fight": false
+    }
   }
 }

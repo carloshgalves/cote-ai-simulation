@@ -42,5 +42,21 @@
   "behavioral_policy": "NON_EXECUTABLE",
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED"
+  },
+  "episode_deepening": {
+    "schema_version": "canon-episode-case-detail-v1",
+    "source_work_id": "ln.y1.v07.sevenseas.en.operator-provided",
+    "dossier_ref": "data/canon/consolidated/audits/y1-v07-ryuen-plan-rooftop-deepening.json",
+    "focus": "PREPARATION",
+    "observed_mechanism": "Mobilizes class watchers, applies pressure while X remains unidentified, keeps Kushida's role private, times the threat and obstructs the camera.",
+    "epistemic_and_capability_limits": [
+      "No verified X identity yet",
+      "Private plan not wholly known to Ibuki",
+      "A prior camera fine does not imply permission"
+    ],
+    "first_party_pdf_page_review": "ASSISTANT_DIRECT_PRIMARY_PDF_CHECK",
+    "independent_review": "NOT_PERFORMED",
+    "runtime_admission": false,
+    "simulator_replay": "NOT_DETERMINISTIC"
   }
 }

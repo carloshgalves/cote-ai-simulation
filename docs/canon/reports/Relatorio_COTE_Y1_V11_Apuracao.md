@@ -106,3 +106,12 @@ O registro `audits/y1-v11-review-register.json` enumera **160 unidades candidata
 3. **F3 qualificado:** reconhecer Kiyotaka como jogador de xadrez genuinamente excepcional não comprova rejeição geral da hipótese genética de Arisu. O caso V11-C054 e G001 foram limitados à avaliação descrita na fonte, incluindo a declaração posterior de motivação pessoal (pp. 453–454).
 
 4. **Gate ainda aberto:** a maioria dos casos usa metadados genéricos, insuficientes para modelagem comportamental profunda; ver revisão semântica específica e seu manifesto. CI verde não equivale a revisão literária independente.
+
+
+## Atualização após remediação semântica integral dos casos
+
+A contagem inicial de 56 casos/74 evidências/15 relações/12 objetivos era anterior à solução da identidade de Mii-chan. A branch atual contém **59 casos**, **77 evidências**, **16 relações** e **13 transições históricas**, com **168 unidades de auditoria**. O próprio PDF p.58 identifica Mei-Yu Wang como Mii-chan. Sua proatividade foi registrada em três estudos comportamentais próprios (C057–C059), sem transferir sua iniciativa a outros personagens.
+
+Os 59 casos têm agora campos individualizados de gatilho, objetivo, informação, estratégia/ação, consequência, participantes e contrafactuais. As relações foram divididas em fases e as transições receberam condições causais. Esta atualização não representa revisão independente nem autoriza incorporação direta dos acontecimentos posteriores à matrícula na memória de agentes.
+
+Ver [revisão semântica detalhada](Revisao_Semantica_COTE_Y1_V11.md) e matriz `data/canon/consolidated/audits/y1-v11-semantic-depth-matrix.json`.

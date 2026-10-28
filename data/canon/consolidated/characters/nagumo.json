@@ -10,7 +10,8 @@
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
-    "ln.y1.v09.en.operator-provided"
+    "ln.y1.v09.en.operator-provided",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "Y1_V07_THIRD_PARTY_CONTEXT_ADDED_INDEPENDENT_REVIEW_PENDING",
   "identity": {
@@ -62,7 +63,8 @@
         "y1v08.case.nagumo.v08-c010",
         "y1v08.case.nagumo.v08-c037",
         "y1v08.case.nagumo.v08-c040",
-        "y1v09.case.nagumo.v09-c03"
+        "y1v09.case.nagumo.v09-c03",
+        "y1v10.case.nagumo.v10-c004"
       ],
       "context_evidence_refs": [
         "y1v45.ev.047",
@@ -78,7 +80,9 @@
         "y1v08.ev.037",
         "y1v08.ev.040",
         "y1v09.ev.03",
-        "y1v09.ev.028"
+        "y1v09.ev.028",
+        "y1v10.ev.004",
+        "y1v10.ev.052"
       ]
     },
     "leadership": {
@@ -95,12 +99,15 @@
     "social": {
       "behavioral_case_refs": [
         "y1v45.case.nagumo.lead-older-students-volleyball",
-        "y1v08.case.nagumo.v08-c016"
+        "y1v08.case.nagumo.v08-c016",
+        "y1v10.case.nagumo.v10-c004"
       ],
       "context_evidence_refs": [
         "y1v5.ev.024",
         "y1v075.ev.006",
-        "y1v08.ev.016"
+        "y1v08.ev.016",
+        "y1v10.ev.004",
+        "y1v10.ev.052"
       ]
     },
     "observation": {
@@ -138,14 +145,16 @@
         "y1v08.case.nagumo.v08-c010",
         "y1v08.case.nagumo.v08-c012",
         "y1v08.case.nagumo.v08-c040",
-        "y1v09.case.nagumo.v09-c03"
+        "y1v09.case.nagumo.v09-c03",
+        "y1v10.case.nagumo.v10-c004"
       ],
       "context_evidence_refs": [
         "y1v7.ev.047",
         "y1v08.ev.010",
         "y1v08.ev.012",
         "y1v08.ev.040",
-        "y1v09.ev.03"
+        "y1v09.ev.03",
+        "y1v10.ev.004"
       ]
     },
     "risk_management": {
@@ -185,7 +194,8 @@
         "y1v08.case.nagumo.v08-c016",
         "y1v08.case.nagumo.v08-c037",
         "y1v08.case.nagumo.v08-c040",
-        "y1v09.case.nagumo.v09-c03"
+        "y1v09.case.nagumo.v09-c03",
+        "y1v10.case.nagumo.v10-c004"
       ],
       "context_evidence_refs": [
         "y1v08.ev.010",
@@ -193,7 +203,8 @@
         "y1v08.ev.016",
         "y1v08.ev.037",
         "y1v08.ev.040",
-        "y1v09.ev.03"
+        "y1v09.ev.03",
+        "y1v10.ev.004"
       ]
     },
     "information": {
@@ -241,13 +252,31 @@
     "economy": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v09.ev.030"
+        "y1v09.ev.030",
+        "y1v10.ev.052",
+        "y1v10.ev.054"
       ]
     },
     "governance": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v09.ev.030"
+      ]
+    },
+    "y1_v10": {
+      "behavioral_case_refs": [
+        "y1v10.case.nagumo.v10-c004"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.004",
+        "y1v10.ev.052",
+        "y1v10.ev.054"
+      ]
+    },
+    "negotiation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v10.ev.054"
       ]
     }
   },
@@ -322,5 +351,35 @@
     "known_at_y1_start": false,
     "canonical_acquisition": "Y1_EARLY_STUDENT_COUNCIL_CONFESSION",
     "this_is_not_simulation_memory": true
+  },
+  "y1_v10_source_status": "SOURCE_BOUNDED_CANDIDATE_INDEPENDENT_REVIEW_PENDING",
+  "y1_v10_knowledge_gate": {
+    "pre_enrollment_history_biography_only": true,
+    "post_admission_canon_never_runtime_episode": true,
+    "rumor_and_private_interpretation_actor_scoped": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v10_behavioral_case_refs": [
+    "y1v10.case.nagumo.v10-c004"
+  ],
+  "y1_v10_context_evidence_refs": [
+    "y1v10.ev.004",
+    "y1v10.ev.052",
+    "y1v10.ev.054"
+  ],
+  "y1_v10_goal_transition_refs": [],
+  "y1_v10_ichinose_loan_contract": {
+    "offer_reported": true,
+    "private_points_offered": 4043019,
+    "condition": "romantic relationship",
+    "offer_accepted": false,
+    "loan_executed": false,
+    "evidence_refs": [
+      "y1v10.ev.015",
+      "y1v10.ev.052",
+      "y1v10.ev.054"
+    ],
+    "no_initial_belief_seeding": true
   }
 }

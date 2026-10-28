@@ -14,7 +14,8 @@
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
-    "ln.y1.v09.en.operator-provided"
+    "ln.y1.v09.en.operator-provided",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -34,7 +35,8 @@
         "y1v075.case.kei-karuizawa.v075-c005",
         "y1v075.case.kei-karuizawa.v075-c006",
         "y1v09.case.kei-karuizawa.v09-c13",
-        "y1v09.case.kei-karuizawa.v09-c15"
+        "y1v09.case.kei-karuizawa.v09-c15",
+        "y1v10.case.kei-karuizawa.v10-c021"
       ],
       "context_evidence_refs": [
         "y1v1.ev.046",
@@ -69,7 +71,8 @@
         "y1v075.ev.006",
         "y1v09.ev.13",
         "y1v09.ev.15",
-        "y1v09.ev.034"
+        "y1v09.ev.034",
+        "y1v10.ev.021"
       ]
     },
     "economy": {
@@ -219,7 +222,8 @@
         "y1v7.case.kei-karuizawa.v7-c020",
         "y1v7.case.kei-karuizawa.v7-c021",
         "y1v7.case.kei-karuizawa.v7-c023",
-        "y1v09.case.kei-karuizawa.v09-c15"
+        "y1v09.case.kei-karuizawa.v09-c15",
+        "y1v10.case.kei-karuizawa.v10-c021"
       ],
       "context_evidence_refs": [
         "y1v4.ev.035",
@@ -251,7 +255,8 @@
         "y1v7.ev.089",
         "y1v7.ev.099",
         "y1v075.ev.037",
-        "y1v09.ev.15"
+        "y1v09.ev.15",
+        "y1v10.ev.021"
       ]
     },
     "persuasion": {
@@ -435,7 +440,8 @@
         "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
         "y1v075.case.kei-karuizawa.v075-c004",
         "y1v075.case.kei-karuizawa.v075-c008",
-        "y1v08.case.kei-karuizawa.v08-c020"
+        "y1v08.case.kei-karuizawa.v08-c020",
+        "y1v10.case.kei-karuizawa.v10-c021"
       ],
       "context_evidence_refs": [
         "y1v6.ev.059",
@@ -443,7 +449,8 @@
         "y1v075.ev.004",
         "y1v075.ev.008",
         "y1v075.ev.035",
-        "y1v08.ev.020"
+        "y1v08.ev.020",
+        "y1v10.ev.021"
       ]
     },
     "investigation": {
@@ -487,13 +494,15 @@
         "y1v08.case.kei-karuizawa.v08-c020",
         "y1v08.case.kei-karuizawa.v08-c042",
         "y1v09.case.kei-karuizawa.v09-c13",
-        "y1v09.case.kei-karuizawa.v09-c15"
+        "y1v09.case.kei-karuizawa.v09-c15",
+        "y1v10.case.kei-karuizawa.v10-c021"
       ],
       "context_evidence_refs": [
         "y1v08.ev.020",
         "y1v08.ev.042",
         "y1v09.ev.13",
-        "y1v09.ev.15"
+        "y1v09.ev.15",
+        "y1v10.ev.021"
       ]
     },
     "analysis": {
@@ -513,6 +522,14 @@
         "y1v09.ev.13",
         "y1v09.ev.15",
         "y1v09.ev.034"
+      ]
+    },
+    "y1_v10": {
+      "behavioral_case_refs": [
+        "y1v10.case.kei-karuizawa.v10-c021"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.021"
       ]
     }
   },
@@ -643,5 +660,20 @@
   "y1_v09_relationship_refs": [
     "y1v09.rel.006",
     "y1v09.rel.010"
-  ]
+  ],
+  "y1_v10_source_status": "SOURCE_BOUNDED_CANDIDATE_INDEPENDENT_REVIEW_PENDING",
+  "y1_v10_knowledge_gate": {
+    "pre_enrollment_history_biography_only": true,
+    "post_admission_canon_never_runtime_episode": true,
+    "rumor_and_private_interpretation_actor_scoped": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v10_behavioral_case_refs": [
+    "y1v10.case.kei-karuizawa.v10-c021"
+  ],
+  "y1_v10_context_evidence_refs": [
+    "y1v10.ev.021"
+  ],
+  "y1_v10_goal_transition_refs": []
 }

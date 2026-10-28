@@ -1,0 +1,50 @@
+{
+  "id": "y1v09.case.kiyotaka-ayanokoji.v09-c23",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Visitar repetidamente e ouvir Ichinose, dando abertura para confidência",
+  "context": "Year 1 Volume 9, post-admission canonical episode",
+  "observed_actions": "Visitar repetidamente e ouvir Ichinose, dando abertura para confidência",
+  "observed_result": "Source-bounded canonical historical outcome; not a guaranteed simulated outcome",
+  "epistemic_limits": "Apoio específico não garante efeito terapêutico universal",
+  "source": {
+    "work_id": "ln.y1.v09.en.operator-provided",
+    "pdf_pages": [
+      207,
+      208,
+      209,
+      210,
+      211,
+      212,
+      213
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social",
+    "strategy",
+    "observation"
+  ],
+  "information_available": "Only legitimately acquired information available to primary actor at episode time",
+  "counterfactual_test": "Divergent simulation must not assume occurrence, causal success or future knowledge",
+  "topics": [
+    "social",
+    "strategy",
+    "observation",
+    "y1_v09"
+  ],
+  "evidence_refs": [
+    "y1v09.ev.23"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "RETROSPECTIVE_SCENE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "assistant_semantic_review": "NOT_ITEMIZED",
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

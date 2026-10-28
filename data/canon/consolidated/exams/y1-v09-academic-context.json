@@ -1,0 +1,29 @@
+{
+  "schema_version": "canon-academic-exam-context-v1",
+  "source_id": "ln.y1.v09.en.operator-provided",
+  "authority": "CANON_CONTEXT_ONLY_NOT_EXAM_SPEC",
+  "title": "Volume 9: assessment and end-of-year academic context",
+  "source_locator_basis": "1-based PDF physical page",
+  "pdf_pages": [
+    107,
+    108,
+    109,
+    165,
+    166,
+    167,
+    214,
+    215,
+    216
+  ],
+  "observations": [
+    "Prova preparatória/provisional e exames acadêmicos do fim do ano são mencionados na história",
+    "A fonte não documenta neste volume uma nova mecânica de exame especial com formula completa de pontos e penalidades"
+  ],
+  "explicitly_unknown": [
+    "Cálculo de notas individuais completas neste volume",
+    "Novo algoritmo de ranking ou alteração de pontos de classe específico do exame"
+  ],
+  "exam_executable": false,
+  "engine_memory_admission": false,
+  "verified": false
+}

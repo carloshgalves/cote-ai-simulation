@@ -5,7 +5,8 @@
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v09.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -19,13 +20,15 @@
   "domains": {
     "strategy": {
       "behavioral_case_refs": [
-        "y1v7.case.masumi-kamuro.v7-c034"
+        "y1v7.case.masumi-kamuro.v7-c034",
+        "y1v09.case.masumi-kamuro.v09-c10"
       ],
       "context_evidence_refs": [
         "y1v7.ev.013",
         "y1v7.ev.014",
         "y1v7.ev.015",
-        "y1v075.ev.011"
+        "y1v075.ev.011",
+        "y1v09.ev.10"
       ]
     },
     "politics": {
@@ -44,10 +47,49 @@
     },
     "observation": {
       "behavioral_case_refs": [
-        "y1v075.case.masumi-kamuro.v075-c012"
+        "y1v075.case.masumi-kamuro.v075-c012",
+        "y1v09.case.masumi-kamuro.v09-c10"
       ],
       "context_evidence_refs": [
-        "y1v075.ev.012"
+        "y1v075.ev.012",
+        "y1v09.ev.10"
+      ]
+    },
+    "y1_v09": {
+      "behavioral_case_refs": [
+        "y1v09.case.masumi-kamuro.v09-c10"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.10",
+        "y1v09.ev.032"
+      ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v09.case.masumi-kamuro.v09-c10"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.10"
+      ]
+    },
+    "deception": {
+      "behavioral_case_refs": [
+        "y1v09.case.masumi-kamuro.v09-c10"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.10"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v09.ev.032"
+      ]
+    },
+    "knowledge": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v09.ev.032"
       ]
     }
   },
@@ -70,5 +112,41 @@
     "social_and_extracurricular_changes_matter": true,
     "not_permanent_personality_rating": true,
     "divergence_requires_new_acquisition": true
+  },
+  "y1_v09_source_status": "UNVERIFIED_SOURCE_CANDIDATE_NO_EXTERNAL_REVIEW",
+  "y1_v09_knowledge_gate": {
+    "source_revelation_not_occurrence_time": true,
+    "post_admission_canon_not_simulation_memory": true,
+    "requires_actor_specific_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v09_behavioral_case_refs": [
+    "y1v09.case.masumi-kamuro.v09-c10"
+  ],
+  "y1_v09_context_evidence_refs": [
+    "y1v09.ev.10",
+    "y1v09.ev.032"
+  ],
+  "y1_v09_relationship_refs": [
+    "y1v09.rel.004"
+  ],
+  "y1_v09_school_furto_temporal_guard": {
+    "event": "Beer shoplifting",
+    "time": "AFTER_Y1_START",
+    "pages": [
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      183,
+      184,
+      185
+    ],
+    "later_presented_can_not_backdate_event": true,
+    "verified": false
   }
 }

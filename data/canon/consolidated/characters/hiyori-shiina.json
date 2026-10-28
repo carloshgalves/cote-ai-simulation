@@ -5,7 +5,8 @@
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v09.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -55,11 +56,15 @@
     "social": {
       "behavioral_case_refs": [
         "y1v6.case.hiyori-shiina.open-gentle-dialogue-while-ryuen-probes-x",
-        "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity"
+        "y1v6.case.hiyori-shiina.present-sugar-cup-observation-with-social-information-ambiguity",
+        "y1v09.case.hiyori-shiina.v09-c21",
+        "y1v09.case.hiyori-shiina.v09-c08"
       ],
       "context_evidence_refs": [
         "y1v7.ev.021",
-        "y1v7.ev.064"
+        "y1v7.ev.064",
+        "y1v09.ev.21",
+        "y1v09.ev.08"
       ]
     },
     "relationship": {
@@ -79,6 +84,42 @@
         "y1v7.case.hiyori-shiina.v7-c032"
       ],
       "context_evidence_refs": []
+    },
+    "y1_v09": {
+      "behavioral_case_refs": [
+        "y1v09.case.hiyori-shiina.v09-c21",
+        "y1v09.case.hiyori-shiina.v09-c08"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.21",
+        "y1v09.ev.08"
+      ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v09.case.hiyori-shiina.v09-c21",
+        "y1v09.case.hiyori-shiina.v09-c08"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.21",
+        "y1v09.ev.08"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [
+        "y1v09.case.hiyori-shiina.v09-c21"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.21"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [
+        "y1v09.case.hiyori-shiina.v09-c08"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.08"
+      ]
     }
   },
   "knowledge_time_policy": {
@@ -95,5 +136,22 @@
   "goal_transition_refs": [
     "y1v7.goal.hiyori-shiina.v7-g016"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v09_source_status": "UNVERIFIED_SOURCE_CANDIDATE_NO_EXTERNAL_REVIEW",
+  "y1_v09_knowledge_gate": {
+    "source_revelation_not_occurrence_time": true,
+    "post_admission_canon_not_simulation_memory": true,
+    "requires_actor_specific_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v09_behavioral_case_refs": [
+    "y1v09.case.hiyori-shiina.v09-c21",
+    "y1v09.case.hiyori-shiina.v09-c08"
+  ],
+  "y1_v09_context_evidence_refs": [
+    "y1v09.ev.21",
+    "y1v09.ev.08"
+  ],
+  "y1_v09_relationship_refs": []
 }

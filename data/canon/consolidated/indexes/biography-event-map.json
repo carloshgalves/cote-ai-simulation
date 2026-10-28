@@ -1,0 +1,19 @@
+{
+  "schema_version": "canon-biography-event-index-v1",
+  "authority": "DESCRIPTIVE_NON_RUNTIME",
+  "biographical_event_lookup": {
+    "evt.pre-y1.ichinose-hairclip-shoplifting": {
+      "path": "data/canon/consolidated/biographies/evt.pre-y1.ichinose-hairclip-shoplifting.json",
+      "source_id": "ln.y1.v09.en.operator-provided",
+      "evidence_refs": [
+        "y1v09.ev.001",
+        "y1v09.ev.025"
+      ],
+      "known_to_at_y1_start": [
+        "actor.honami-ichinose"
+      ],
+      "engine_memory_admission": false,
+      "verified": false
+    }
+  }
+}

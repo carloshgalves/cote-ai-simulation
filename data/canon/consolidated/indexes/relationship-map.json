@@ -154,6 +154,84 @@
         "actor.kiyotaka-ayanokoji",
         "actor.rokusuke-koenji"
       ]
+    },
+    "y1v09.rel.001": {
+      "source_path": "data/canon/consolidated/relationships/y1-v09.json",
+      "actors": [
+        "actor.honami-ichinose",
+        "actor.nagumo"
+      ]
+    },
+    "y1v09.rel.002": {
+      "source_path": "data/canon/consolidated/relationships/y1-v09.json",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.nagumo"
+      ]
+    },
+    "y1v09.rel.003": {
+      "source_path": "data/canon/consolidated/relationships/y1-v09.json",
+      "actors": [
+        "actor.honami-ichinose",
+        "actor.kiyotaka-ayanokoji"
+      ]
+    },
+    "y1v09.rel.004": {
+      "source_path": "data/canon/consolidated/relationships/y1-v09.json",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.masumi-kamuro"
+      ]
+    },
+    "y1v09.rel.005": {
+      "source_path": "data/canon/consolidated/relationships/y1-v09.json",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ]
+    },
+    "y1v09.rel.006": {
+      "source_path": "data/canon/consolidated/relationships/y1-v09.json",
+      "actors": [
+        "actor.kei-karuizawa",
+        "actor.yosuke-hirata"
+      ]
+    },
+    "y1v09.rel.007": {
+      "source_path": "data/canon/consolidated/relationships/y1-v09.json",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida"
+      ]
+    },
+    "y1v09.rel.008": {
+      "source_path": "data/canon/consolidated/relationships/y1-v09.json",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.kiriyama"
+      ]
+    },
+    "y1v09.rel.009": {
+      "source_path": "data/canon/consolidated/relationships/y1-v09.json",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.haruki-yamauchi"
+      ]
+    },
+    "y1v09.rel.010": {
+      "source_path": "data/canon/consolidated/relationships/y1-v09.json",
+      "actors": [
+        "actor.hashimoto",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kei-karuizawa"
+      ]
+    },
+    "y1v09.rel.011": {
+      "source_path": "data/canon/consolidated/relationships/y1-v09.json",
+      "actors": [
+        "actor.honami-ichinose",
+        "actor.ryuji-kanzaki"
+      ]
     }
   },
   "by_actor": {

@@ -1,0 +1,54 @@
+{
+  "id": "y1v09.case.kiyotaka-ayanokoji.v09-c17",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Negociar promessa de pontos e compromissos para obter informação de Kushida",
+  "context": "Year 1 Volume 9, post-admission canonical episode",
+  "observed_actions": "Negociar promessa de pontos e compromissos para obter informação de Kushida",
+  "observed_result": "Source-bounded canonical historical outcome; not a guaranteed simulated outcome",
+  "epistemic_limits": "Promessa de pontos não comprova transferência realizada",
+  "source": {
+    "work_id": "ln.y1.v09.en.operator-provided",
+    "pdf_pages": [
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      200,
+      201
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "economy",
+    "risk_management"
+  ],
+  "information_available": "Only legitimately acquired information available to primary actor at episode time",
+  "counterfactual_test": "Divergent simulation must not assume occurrence, causal success or future knowledge",
+  "topics": [
+    "strategy",
+    "economy",
+    "risk_management",
+    "y1_v09"
+  ],
+  "evidence_refs": [
+    "y1v09.ev.17"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "PRIVATE_NEGOTIATION",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "assistant_semantic_review": "NOT_ITEMIZED",
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

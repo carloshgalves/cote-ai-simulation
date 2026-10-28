@@ -9,7 +9,8 @@
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
-    "ln.y1.v08.sevenseas.en.operator-provided"
+    "ln.y1.v08.sevenseas.en.operator-provided",
+    "ln.y1.v09.en.operator-provided"
   ],
   "source_status": "Y1_V07_THIRD_PARTY_CONTEXT_ADDED_INDEPENDENT_REVIEW_PENDING",
   "identity": {
@@ -60,7 +61,8 @@
         "y1v075.case.nagumo.v075-c033",
         "y1v08.case.nagumo.v08-c010",
         "y1v08.case.nagumo.v08-c037",
-        "y1v08.case.nagumo.v08-c040"
+        "y1v08.case.nagumo.v08-c040",
+        "y1v09.case.nagumo.v09-c03"
       ],
       "context_evidence_refs": [
         "y1v45.ev.047",
@@ -74,7 +76,9 @@
         "y1v075.ev.036",
         "y1v08.ev.010",
         "y1v08.ev.037",
-        "y1v08.ev.040"
+        "y1v08.ev.040",
+        "y1v09.ev.03",
+        "y1v09.ev.028"
       ]
     },
     "leadership": {
@@ -133,13 +137,15 @@
       "behavioral_case_refs": [
         "y1v08.case.nagumo.v08-c010",
         "y1v08.case.nagumo.v08-c012",
-        "y1v08.case.nagumo.v08-c040"
+        "y1v08.case.nagumo.v08-c040",
+        "y1v09.case.nagumo.v09-c03"
       ],
       "context_evidence_refs": [
         "y1v7.ev.047",
         "y1v08.ev.010",
         "y1v08.ev.012",
-        "y1v08.ev.040"
+        "y1v08.ev.040",
+        "y1v09.ev.03"
       ]
     },
     "risk_management": {
@@ -178,14 +184,16 @@
         "y1v08.case.nagumo.v08-c012",
         "y1v08.case.nagumo.v08-c016",
         "y1v08.case.nagumo.v08-c037",
-        "y1v08.case.nagumo.v08-c040"
+        "y1v08.case.nagumo.v08-c040",
+        "y1v09.case.nagumo.v09-c03"
       ],
       "context_evidence_refs": [
         "y1v08.ev.010",
         "y1v08.ev.012",
         "y1v08.ev.016",
         "y1v08.ev.037",
-        "y1v08.ev.040"
+        "y1v08.ev.040",
+        "y1v09.ev.03"
       ]
     },
     "information": {
@@ -208,7 +216,38 @@
     "institution": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v08.ev.074"
+        "y1v08.ev.074",
+        "y1v09.ev.028"
+      ]
+    },
+    "y1_v09": {
+      "behavioral_case_refs": [
+        "y1v09.case.nagumo.v09-c03"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.03",
+        "y1v09.ev.028",
+        "y1v09.ev.030"
+      ]
+    },
+    "persuasion": {
+      "behavioral_case_refs": [
+        "y1v09.case.nagumo.v09-c03"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.03"
+      ]
+    },
+    "economy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v09.ev.030"
+      ]
+    },
+    "governance": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v09.ev.030"
       ]
     }
   },
@@ -257,5 +296,31 @@
     "y1v08.rel.045",
     "y1v08.rel.047",
     "y1v08.rel.055"
-  ]
+  ],
+  "y1_v09_source_status": "UNVERIFIED_SOURCE_CANDIDATE_NO_EXTERNAL_REVIEW",
+  "y1_v09_knowledge_gate": {
+    "source_revelation_not_occurrence_time": true,
+    "post_admission_canon_not_simulation_memory": true,
+    "requires_actor_specific_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v09_behavioral_case_refs": [
+    "y1v09.case.nagumo.v09-c03"
+  ],
+  "y1_v09_context_evidence_refs": [
+    "y1v09.ev.03",
+    "y1v09.ev.028",
+    "y1v09.ev.030"
+  ],
+  "y1_v09_relationship_refs": [
+    "y1v09.rel.001",
+    "y1v09.rel.002"
+  ],
+  "y1_v09_ichinose_secret_acquisition": {
+    "fact_id": "evt.pre-y1.ichinose-hairclip-shoplifting",
+    "known_at_y1_start": false,
+    "canonical_acquisition": "Y1_EARLY_STUDENT_COUNCIL_CONFESSION",
+    "this_is_not_simulation_memory": true
+  }
 }

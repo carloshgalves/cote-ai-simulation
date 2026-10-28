@@ -1,0 +1,54 @@
+{
+  "id": "y1v09.case.kiyotaka-ayanokoji.v09-c14",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Planejar aparição ambígua com Kei para desviar suspeitas de Hashimoto",
+  "context": "Year 1 Volume 9, post-admission canonical episode",
+  "observed_actions": "Planejar aparição ambígua com Kei para desviar suspeitas de Hashimoto",
+  "observed_result": "Source-bounded canonical historical outcome; not a guaranteed simulated outcome",
+  "epistemic_limits": "Não pressupor controle de reação de Hashimoto",
+  "source": {
+    "work_id": "ln.y1.v09.en.operator-provided",
+    "pdf_pages": [
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      201,
+      202
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "deception",
+    "social"
+  ],
+  "information_available": "Only legitimately acquired information available to primary actor at episode time",
+  "counterfactual_test": "Divergent simulation must not assume occurrence, causal success or future knowledge",
+  "topics": [
+    "strategy",
+    "deception",
+    "social",
+    "y1_v09"
+  ],
+  "evidence_refs": [
+    "y1v09.ev.14"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "RETROSPECTIVE_SCENE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "assistant_semantic_review": "NOT_ITEMIZED",
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

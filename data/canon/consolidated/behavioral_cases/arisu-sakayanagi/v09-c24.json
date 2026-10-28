@@ -1,0 +1,56 @@
+{
+  "id": "y1v09.case.arisu-sakayanagi.v09-c24",
+  "actor_id": "actor.arisu-sakayanagi",
+  "primary_actor_id": "actor.arisu-sakayanagi",
+  "title": "Planejar aproximação a Yamauchi e administrar rivalidades e prioridades",
+  "context": "Year 1 Volume 9, post-admission canonical episode",
+  "observed_actions": "Planejar aproximação a Yamauchi e administrar rivalidades e prioridades",
+  "observed_result": "Source-bounded canonical historical outcome; not a guaranteed simulated outcome",
+  "epistemic_limits": "Não afirmar que manobra futura teve êxito",
+  "source": {
+    "work_id": "ln.y1.v09.en.operator-provided",
+    "pdf_pages": [
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "politics",
+    "social"
+  ],
+  "information_available": "Only legitimately acquired information available to primary actor at episode time",
+  "counterfactual_test": "Divergent simulation must not assume occurrence, causal success or future knowledge",
+  "topics": [
+    "strategy",
+    "politics",
+    "social",
+    "y1_v09"
+  ],
+  "evidence_refs": [
+    "y1v09.ev.24"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "PRIVATE_MONOLOGUE_AND_ACTION",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "assistant_semantic_review": "NOT_ITEMIZED",
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

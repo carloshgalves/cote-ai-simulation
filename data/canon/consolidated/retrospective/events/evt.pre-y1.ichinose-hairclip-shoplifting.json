@@ -1,0 +1,10 @@
+{
+  "schema_version": "non_authoritative_redirect-v1",
+  "id": "evt.pre-y1.ichinose-hairclip-shoplifting",
+  "status": "REDIRECT_TO_PRE_ENROLLMENT_BIOGRAPHY",
+  "authority": "NOT_AN_ADR0012_RETROSPECTIVE_DOSSIER",
+  "redirect_path": "data/canon/consolidated/biographies/evt.pre-y1.ichinose-hairclip-shoplifting.json",
+  "engine_memory_admission": false,
+  "verified": false,
+  "warning": "No canonical event history should be ingested from this backward-compatible path."
+}

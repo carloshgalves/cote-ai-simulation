@@ -1,0 +1,61 @@
+{
+  "id": "y1v09.case.masumi-kamuro.v09-c10",
+  "actor_id": "actor.masumi-kamuro",
+  "primary_actor_id": "actor.masumi-kamuro",
+  "title": "Revelar furto próprio e relatar segredo para testar a reação de Kiyotaka",
+  "context": "Year 1 Volume 9, post-admission canonical episode",
+  "observed_actions": "Revelar furto próprio e relatar segredo para testar a reação de Kiyotaka",
+  "observed_result": "Source-bounded canonical historical outcome; not a guaranteed simulated outcome",
+  "epistemic_limits": "A missão foi delegada; não assumir rebelião contra Arisu",
+  "source": {
+    "work_id": "ln.y1.v09.en.operator-provided",
+    "pdf_pages": [
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      227,
+      228,
+      229
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "deception",
+    "observation"
+  ],
+  "information_available": "Only legitimately acquired information available to primary actor at episode time",
+  "counterfactual_test": "Divergent simulation must not assume occurrence, causal success or future knowledge",
+  "topics": [
+    "strategy",
+    "deception",
+    "observation",
+    "y1_v09"
+  ],
+  "evidence_refs": [
+    "y1v09.ev.10"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "LATER_REVEALED_MISSION",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "assistant_semantic_review": "NOT_ITEMIZED",
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

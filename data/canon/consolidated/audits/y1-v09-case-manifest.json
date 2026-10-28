@@ -1,0 +1,479 @@
+{
+  "schema_version": "y1-v09-candidate-review-manifest-v1",
+  "source_id": "ln.y1.v09.en.operator-provided",
+  "case_count": 24,
+  "context_evidence_count": 10,
+  "evidence_count": 34,
+  "semantic_review_status": "NOT_INDIVIDUALLY_CERTIFIED",
+  "independent_review_status": "NOT_PERFORMED",
+  "operator_release_status": "PENDING",
+  "engine_memory_admission": false,
+  "goal_runtime_auto_update": false,
+  "exam_executable": false,
+  "cases": [
+    {
+      "candidate_id": "V9-C01",
+      "case_id": "y1v09.case.honami-ichinose.v09-c01",
+      "primary_actor_id": "actor.honami-ichinose",
+      "evidence_id": "y1v09.ev.01",
+      "pdf_pages": [
+        172,
+        173,
+        174,
+        175,
+        176
+      ],
+      "source_bound_title": "Proteção familiar, furto isolado e culpa posteriores",
+      "do_not_infer": "Não inferir furto habitual nem condenação judicial",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C02",
+      "case_id": "y1v09.case.honami-ichinose.v09-c02",
+      "primary_actor_id": "actor.honami-ichinose",
+      "evidence_id": "y1v09.ev.02",
+      "pdf_pages": [
+        6,
+        7,
+        176
+      ],
+      "source_bound_title": "Retomar projeto de vida e educação após isolamento anterior",
+      "do_not_infer": "Não inferir recuperação emocional definitiva",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C03",
+      "case_id": "y1v09.case.nagumo.v09-c03",
+      "primary_actor_id": "actor.nagumo",
+      "evidence_id": "y1v09.ev.03",
+      "pdf_pages": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "source_bound_title": "Aproximar-se de candidata, distorcer avaliação de Manabu e extrair segredo",
+      "do_not_infer": "Não converter fala de Nagumo em motivo verdadeiro de Manabu",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C04",
+      "case_id": "y1v09.case.arisu-sakayanagi.v09-c04",
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_id": "y1v09.ev.04",
+      "pdf_pages": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "source_bound_title": "Negociar com Nagumo a não intervenção do conselho antes da ofensiva",
+      "do_not_infer": "Não atribuir ao conselho poder irrestrito",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C05",
+      "case_id": "y1v09.case.arisu-sakayanagi.v09-c05",
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_id": "y1v09.ev.05",
+      "pdf_pages": [
+        16,
+        17,
+        18,
+        183,
+        184,
+        185
+      ],
+      "source_bound_title": "Pressão reputacional sobre Ichinose para induzir resposta de Kiyotaka",
+      "do_not_infer": "Objetivo final não se reduz a expulsar Ichinose",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C06",
+      "case_id": "y1v09.case.ryuji-kanzaki.v09-c06",
+      "primary_actor_id": "actor.ryuji-kanzaki",
+      "evidence_id": "y1v09.ev.06",
+      "pdf_pages": [
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "source_bound_title": "Procurar fontes sobre boatos e confrontar Hashimoto quanto a informações",
+      "do_not_infer": "Interrogatório e rumores não comprovam autoria",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C07",
+      "case_id": "y1v09.case.hashimoto.v09-c07",
+      "primary_actor_id": "actor.hashimoto",
+      "evidence_id": "y1v09.ev.07",
+      "pdf_pages": [
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133
+      ],
+      "source_bound_title": "Cultivar contatos e seguir Kiyotaka, inferindo incorretamente romance",
+      "do_not_infer": "Hipótese romântica de Hashimoto não é fato",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C08",
+      "case_id": "y1v09.case.hiyori-shiina.v09-c08",
+      "primary_actor_id": "actor.hiyori-shiina",
+      "evidence_id": "y1v09.ev.08",
+      "pdf_pages": [
+        65,
+        66,
+        67,
+        68
+      ],
+      "source_bound_title": "Considerar ajuda a Ichinose e conter intervenção que ampliaria boatos",
+      "do_not_infer": "A cautela específica não prova passividade permanente",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C09",
+      "case_id": "y1v09.case.suzune-horikita.v09-c09",
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_id": "y1v09.ev.09",
+      "pdf_pages": [
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75
+      ],
+      "source_bound_title": "Procurar a líder rival, sondar boatos e aceitar recusa de revelação",
+      "do_not_infer": "Perguntar não equivale a conhecer segredo",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C10",
+      "case_id": "y1v09.case.masumi-kamuro.v09-c10",
+      "primary_actor_id": "actor.masumi-kamuro",
+      "evidence_id": "y1v09.ev.10",
+      "pdf_pages": [
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        227,
+        228,
+        229
+      ],
+      "source_bound_title": "Revelar furto próprio e relatar segredo para testar a reação de Kiyotaka",
+      "do_not_infer": "A missão foi delegada; não assumir rebelião contra Arisu",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C11",
+      "case_id": "y1v09.case.arisu-sakayanagi.v09-c11",
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_id": "y1v09.ev.11",
+      "pdf_pages": [
+        183,
+        184,
+        185
+      ],
+      "source_bound_title": "Preparar evidência material antiga para deslocar a atenção de Kiyotaka",
+      "do_not_infer": "Lata não foi furtada no dia da visita",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C12",
+      "case_id": "y1v09.case.kiyotaka-ayanokoji.v09-c12",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_id": "y1v09.ev.12",
+      "pdf_pages": [
+        183,
+        184,
+        185
+      ],
+      "source_bound_title": "Comparar validade de lata e deduzir descompasso temporal da encenação",
+      "do_not_infer": "Dedução local não prova onisciência",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C13",
+      "case_id": "y1v09.case.kei-karuizawa.v09-c13",
+      "primary_actor_id": "actor.kei-karuizawa",
+      "evidence_id": "y1v09.ev.13",
+      "pdf_pages": [
+        28,
+        29,
+        30
+      ],
+      "source_bound_title": "Encerrar relacionamento público de fachada sem abandonar papel social",
+      "do_not_infer": "O romance público com Hirata não era real",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C14",
+      "case_id": "y1v09.case.kiyotaka-ayanokoji.v09-c14",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_id": "y1v09.ev.14",
+      "pdf_pages": [
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        201,
+        202
+      ],
+      "source_bound_title": "Planejar aparição ambígua com Kei para desviar suspeitas de Hashimoto",
+      "do_not_infer": "Não pressupor controle de reação de Hashimoto",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C15",
+      "case_id": "y1v09.case.kei-karuizawa.v09-c15",
+      "primary_actor_id": "actor.kei-karuizawa",
+      "evidence_id": "y1v09.ev.15",
+      "pdf_pages": [
+        128,
+        129,
+        130,
+        131,
+        132,
+        224,
+        225,
+        226,
+        227
+      ],
+      "source_bound_title": "Improvisar cobertura diante de Hashimoto e preservar discrição de contato",
+      "do_not_infer": "Pensamentos privados não são fatos conhecidos de Kiyotaka",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C16",
+      "case_id": "y1v09.case.kikyo-kushida.v09-c16",
+      "primary_actor_id": "actor.kikyo-kushida",
+      "evidence_id": "y1v09.ev.16",
+      "pdf_pages": [
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200
+      ],
+      "source_bound_title": "Usar rede segmentada de segredos e proteção por gravações na negociação",
+      "do_not_infer": "Rumores recolhidos não são automaticamente verdade",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C17",
+      "case_id": "y1v09.case.kiyotaka-ayanokoji.v09-c17",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_id": "y1v09.ev.17",
+      "pdf_pages": [
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201
+      ],
+      "source_bound_title": "Negociar promessa de pontos e compromissos para obter informação de Kushida",
+      "do_not_infer": "Promessa de pontos não comprova transferência realizada",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C18",
+      "case_id": "y1v09.case.kiyotaka-ayanokoji.v09-c18",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_id": "y1v09.ev.18",
+      "pdf_pages": [
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206
+      ],
+      "source_bound_title": "Organizar ação indireta contra rumores por Kiriyama e apoio político",
+      "do_not_infer": "Não naturalizar dano a terceiros nem resultado garantido",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C19",
+      "case_id": "y1v09.case.kiriyama.v09-c19",
+      "primary_actor_id": "actor.kiriyama",
+      "evidence_id": "y1v09.ev.19",
+      "pdf_pages": [
+        202,
+        203,
+        204,
+        205,
+        206
+      ],
+      "source_bound_title": "Aceitar cooperação instrumental sob cálculo de custos políticos",
+      "do_not_infer": "Não converter cooperação pontual em lealdade permanente",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C20",
+      "case_id": "y1v09.case.miyake.v09-c20",
+      "primary_actor_id": "actor.miyake",
+      "evidence_id": "y1v09.ev.20",
+      "pdf_pages": [
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "source_bound_title": "Intervir preventivamente contra escalada física entre estudantes",
+      "do_not_infer": "Não atribuir superioridade física universal",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C21",
+      "case_id": "y1v09.case.hiyori-shiina.v09-c21",
+      "primary_actor_id": "actor.hiyori-shiina",
+      "evidence_id": "y1v09.ev.21",
+      "pdf_pages": [
+        162,
+        163,
+        164
+      ],
+      "source_bound_title": "Mediar fim de conflito entre turmas sem alegar ter prova de autoria",
+      "do_not_infer": "Mediação não resolve origem dos boatos",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C22",
+      "case_id": "y1v09.case.honami-ichinose.v09-c22",
+      "primary_actor_id": "actor.honami-ichinose",
+      "evidence_id": "y1v09.ev.22",
+      "pdf_pages": [
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179
+      ],
+      "source_bound_title": "Confessar furto antigo, reivindicar agência e pedir confiança da turma",
+      "do_not_infer": "Aceitação da turma não é consequência obrigatória em todo mundo",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C23",
+      "case_id": "y1v09.case.kiyotaka-ayanokoji.v09-c23",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_id": "y1v09.ev.23",
+      "pdf_pages": [
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213
+      ],
+      "source_bound_title": "Visitar repetidamente e ouvir Ichinose, dando abertura para confidência",
+      "do_not_infer": "Apoio específico não garante efeito terapêutico universal",
+      "verified": false
+    },
+    {
+      "candidate_id": "V9-C24",
+      "case_id": "y1v09.case.arisu-sakayanagi.v09-c24",
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_id": "y1v09.ev.24",
+      "pdf_pages": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238
+      ],
+      "source_bound_title": "Planejar aproximação a Yamauchi e administrar rivalidades e prioridades",
+      "do_not_infer": "Não afirmar que manobra futura teve êxito",
+      "verified": false
+    }
+  ]
+}

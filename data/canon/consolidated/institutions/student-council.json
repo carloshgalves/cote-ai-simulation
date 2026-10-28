@@ -9,7 +9,8 @@
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
-    "ln.y1.v08.sevenseas.en.operator-provided"
+    "ln.y1.v08.sevenseas.en.operator-provided",
+    "ln.y1.v09.en.operator-provided"
   ],
   "source_status": "V7_ATTRIBUTED_PRIVATE_REPORT_NOT_INDEPENDENTLY_VERIFIED",
   "evidence_refs": [
@@ -44,7 +45,11 @@
     "y1v7.ev.048",
     "y1v7.ev.085",
     "y1v7.ev.088",
-    "y1v7.ev.100"
+    "y1v7.ev.100",
+    "y1v09.ev.003",
+    "y1v09.ev.026",
+    "y1v09.ev.028",
+    "y1v09.ev.030"
   ],
   "owner_truth_boundary": "Student-council authority described in Manabu's public speech, not independently executed rulebook",
   "structure": {
@@ -346,5 +351,43 @@
     "indirect_strategy": "TACHIBANA_TARGETED_IN_FEMALE_SOLIDARITY_WITH_COSTLY_RESCUE",
     "possible_collusion": "KIYOTAKA_NARRATOR_INFERENCE_NOT_CERTIFIED_PERSONAL_LEDGER",
     "automatic_engine_update": false
+  },
+  "y1_v09_recruitment_and_political_influence": {
+    "source_id": "ln.y1.v09.en.operator-provided",
+    "pdf_pages": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "verified": false,
+    "engine_memory_admission": false,
+    "ichinose_secret": {
+      "nagumo_receives_secret_after_enrollment": true,
+      "private_source": "HONAMI_CONFESSION",
+      "cannot_seed_nagumo_knowledge_at_y1_start": true
+    },
+    "sakayanagi_nagumo": {
+      "observed": "Private bargaining for student council noninterference in Ichinose campaign",
+      "no_global_school_immunity": true
+    },
+    "manabu_rejection": {
+      "nagumo_claim_about_class_based_bias": "MISLEADING_CHARACTER_CLAIM_NOT_AUTHORITY"
+    },
+    "prospective_point_rule": {
+      "speculation_not_enactment": true
+    },
+    "school_oversight": "School may independently stop harmful rumors, regardless of Nagumo statements"
   }
 }

@@ -1,0 +1,45 @@
+{
+  "id": "y1v09.case.hiyori-shiina.v09-c08",
+  "actor_id": "actor.hiyori-shiina",
+  "primary_actor_id": "actor.hiyori-shiina",
+  "title": "Considerar ajuda a Ichinose e conter intervenção que ampliaria boatos",
+  "context": "Year 1 Volume 9, post-admission canonical episode",
+  "observed_actions": "Considerar ajuda a Ichinose e conter intervenção que ampliaria boatos",
+  "observed_result": "Source-bounded canonical historical outcome; not a guaranteed simulated outcome",
+  "epistemic_limits": "A cautela específica não prova passividade permanente",
+  "source": {
+    "work_id": "ln.y1.v09.en.operator-provided",
+    "pdf_pages": [
+      65,
+      66,
+      67,
+      68
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social",
+    "risk_management"
+  ],
+  "information_available": "Only legitimately acquired information available to primary actor at episode time",
+  "counterfactual_test": "Divergent simulation must not assume occurrence, causal success or future knowledge",
+  "topics": [
+    "social",
+    "risk_management",
+    "y1_v09"
+  ],
+  "evidence_refs": [
+    "y1v09.ev.08"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "SCENE_ACTION",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "assistant_semantic_review": "NOT_ITEMIZED",
+    "external_independent_review": "NOT_PERFORMED"
+  }
+}

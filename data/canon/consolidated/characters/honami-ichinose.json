@@ -12,7 +12,8 @@
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v08.sevenseas.en.operator-provided"
+    "ln.y1.v08.sevenseas.en.operator-provided",
+    "ln.y1.v09.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -51,7 +52,8 @@
         "y1v4.ev.114",
         "y1v45.ev.057",
         "y1v5.ev.009",
-        "y1v08.ev.023"
+        "y1v08.ev.023",
+        "y1v09.ev.027"
       ]
     },
     "leadership": {
@@ -62,7 +64,8 @@
         "y1v4.case.honami-ichinose.challenge-machida-passivity",
         "y1v4.case.honami-ichinose.initiate-rabbit-discussion",
         "y1v45.case.honami-ichinose.initiate-friendly-volleyball-challenge",
-        "y1v08.case.honami-ichinose.v08-c023"
+        "y1v08.case.honami-ichinose.v08-c023",
+        "y1v09.case.honami-ichinose.v09-c22"
       ],
       "context_evidence_refs": [
         "y1v1.ev.092",
@@ -80,7 +83,9 @@
         "y1v4.ev.113",
         "y1v45.ev.048",
         "y1v5.ev.051",
-        "y1v08.ev.023"
+        "y1v08.ev.023",
+        "y1v09.ev.22",
+        "y1v09.ev.027"
       ]
     },
     "persuasion": {
@@ -164,12 +169,16 @@
     },
     "emotion": {
       "behavioral_case_refs": [
-        "y1v2.case.honami-ichinose.reflect-chihiro-confession"
+        "y1v2.case.honami-ichinose.reflect-chihiro-confession",
+        "y1v09.case.honami-ichinose.v09-c22",
+        "y1v09.case.honami-ichinose.v09-c01"
       ],
       "context_evidence_refs": [
         "y1v2.ev.040",
         "y1v2.ev.080",
-        "y1v6.ev.048"
+        "y1v6.ev.048",
+        "y1v09.ev.22",
+        "y1v09.ev.01"
       ]
     },
     "ethics": {
@@ -177,7 +186,8 @@
         "y1v2.case.honami-ichinose.deploy-surveillance-bluff",
         "y1v2.case.honami-ichinose.reflect-chihiro-confession",
         "y1v4.case.honami-ichinose.refuse-ryuen-coalition",
-        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits"
+        "y1v6.case.honami-ichinose.support-study-and-disagree-about-solidarity-limits",
+        "y1v09.case.honami-ichinose.v09-c01"
       ],
       "context_evidence_refs": [
         "y1v2.ev.041",
@@ -186,7 +196,9 @@
         "y1v4.ev.054",
         "y1v4.ev.078",
         "y1v4.ev.079",
-        "y1v6.ev.047"
+        "y1v6.ev.047",
+        "y1v09.ev.01",
+        "y1v09.ev.025"
       ]
     },
     "observation": {
@@ -277,9 +289,12 @@
       ]
     },
     "motivation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v09.case.honami-ichinose.v09-c02"
+      ],
       "context_evidence_refs": [
-        "y1v4.ev.111"
+        "y1v4.ev.111",
+        "y1v09.ev.02"
       ]
     },
     "privacy": {
@@ -369,10 +384,49 @@
     },
     "behavior": {
       "behavioral_case_refs": [
-        "y1v08.case.honami-ichinose.v08-c023"
+        "y1v08.case.honami-ichinose.v08-c023",
+        "y1v09.case.honami-ichinose.v09-c22",
+        "y1v09.case.honami-ichinose.v09-c01",
+        "y1v09.case.honami-ichinose.v09-c02"
       ],
       "context_evidence_refs": [
-        "y1v08.ev.023"
+        "y1v08.ev.023",
+        "y1v09.ev.22",
+        "y1v09.ev.01",
+        "y1v09.ev.02"
+      ]
+    },
+    "y1_v09": {
+      "behavioral_case_refs": [
+        "y1v09.case.honami-ichinose.v09-c22",
+        "y1v09.case.honami-ichinose.v09-c01",
+        "y1v09.case.honami-ichinose.v09-c02"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.22",
+        "y1v09.ev.01",
+        "y1v09.ev.02",
+        "y1v09.ev.025",
+        "y1v09.ev.027"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [
+        "y1v09.case.honami-ichinose.v09-c22",
+        "y1v09.case.honami-ichinose.v09-c01",
+        "y1v09.case.honami-ichinose.v09-c02"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.22",
+        "y1v09.ev.01",
+        "y1v09.ev.02",
+        "y1v09.ev.025"
+      ]
+    },
+    "biography": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v09.ev.025"
       ]
     }
   },
@@ -412,5 +466,50 @@
   "y1_v08_actor_state_deltas": [],
   "y1_v08_relationship_refs": [
     "y1v08.rel.052"
-  ]
+  ],
+  "y1_v09_source_status": "UNVERIFIED_SOURCE_CANDIDATE_NO_EXTERNAL_REVIEW",
+  "y1_v09_knowledge_gate": {
+    "source_revelation_not_occurrence_time": true,
+    "post_admission_canon_not_simulation_memory": true,
+    "requires_actor_specific_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v09_behavioral_case_refs": [
+    "y1v09.case.honami-ichinose.v09-c22",
+    "y1v09.case.honami-ichinose.v09-c01",
+    "y1v09.case.honami-ichinose.v09-c02"
+  ],
+  "y1_v09_context_evidence_refs": [
+    "y1v09.ev.22",
+    "y1v09.ev.01",
+    "y1v09.ev.02",
+    "y1v09.ev.025",
+    "y1v09.ev.027"
+  ],
+  "y1_v09_relationship_refs": [
+    "y1v09.rel.001",
+    "y1v09.rel.003",
+    "y1v09.rel.011"
+  ],
+  "y1_v09_pre_admission_biography": {
+    "event_id": "evt.pre-y1.ichinose-hairclip-shoplifting",
+    "scope": "BIOGRAPHY_NOT_SIMULATION_EPISODIC_MEMORY",
+    "evidence_refs": [
+      "y1v09.ev.001",
+      "y1v09.ev.002",
+      "y1v09.ev.025"
+    ],
+    "source_mode": "ICHINOSE_PRIVATE_MONOLOGUE_AND_LATER_CONFESSION",
+    "event_time": "PRE_Y1_UNDATED",
+    "statement": "Antes da matrícula, relatou ter furtado uma presilha para presentear a irmã, motivada por dificuldades familiares; sentiu culpa e passou por isolamento. Fora dessa fonte não há sentença criminal demonstrada.",
+    "known_by_at_entry": [
+      "actor.honami-ichinose"
+    ],
+    "not_public_at_entry": true,
+    "no_auto_propagation_to_nagumo_or_kiyotaka": true,
+    "verified": false,
+    "engine_memory_admission": false,
+    "source_record_path": "data/canon/consolidated/biographies/evt.pre-y1.ichinose-hairclip-shoplifting.json"
+  }
 }

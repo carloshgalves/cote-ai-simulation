@@ -5,7 +5,8 @@
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v075.sevenseas.en.operator-provided",
-    "ln.y1.v08.sevenseas.en.operator-provided"
+    "ln.y1.v08.sevenseas.en.operator-provided",
+    "ln.y1.v09.en.operator-provided"
   ],
   "source_status": "Y1_V075_SOURCE_CANDIDATE_DISTINCT_REVIEW_PENDING",
   "identity": {
@@ -20,7 +21,8 @@
   "domains": {
     "politics": {
       "behavioral_case_refs": [
-        "y1v075.case.kiriyama.v075-c036"
+        "y1v075.case.kiriyama.v075-c036",
+        "y1v09.case.kiriyama.v09-c19"
       ],
       "context_evidence_refs": [
         "y1v075.ev.025",
@@ -28,15 +30,18 @@
         "y1v075.ev.035",
         "y1v075.ev.053",
         "y1v075.ev.056",
-        "y1v075.ev.065"
+        "y1v075.ev.065",
+        "y1v09.ev.19"
       ]
     },
     "risk_management": {
       "behavioral_case_refs": [
-        "y1v075.case.kiriyama.v075-c036"
+        "y1v075.case.kiriyama.v075-c036",
+        "y1v09.case.kiriyama.v09-c19"
       ],
       "context_evidence_refs": [
-        "y1v075.ev.036"
+        "y1v075.ev.036",
+        "y1v09.ev.19"
       ]
     },
     "leadership": {
@@ -48,10 +53,12 @@
     },
     "behavior": {
       "behavioral_case_refs": [
-        "y1v08.case.kiriyama.v08-c018"
+        "y1v08.case.kiriyama.v08-c018",
+        "y1v09.case.kiriyama.v09-c19"
       ],
       "context_evidence_refs": [
-        "y1v08.ev.018"
+        "y1v08.ev.018",
+        "y1v09.ev.19"
       ]
     },
     "conflict": {
@@ -74,6 +81,14 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v08.ev.047"
+      ]
+    },
+    "y1_v09": {
+      "behavioral_case_refs": [
+        "y1v09.case.kiriyama.v09-c19"
+      ],
+      "context_evidence_refs": [
+        "y1v09.ev.19"
       ]
     }
   },
@@ -110,5 +125,22 @@
   "y1_v08_actor_state_deltas": [],
   "y1_v08_relationship_refs": [
     "y1v08.rel.047"
+  ],
+  "y1_v09_source_status": "UNVERIFIED_SOURCE_CANDIDATE_NO_EXTERNAL_REVIEW",
+  "y1_v09_knowledge_gate": {
+    "source_revelation_not_occurrence_time": true,
+    "post_admission_canon_not_simulation_memory": true,
+    "requires_actor_specific_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v09_behavioral_case_refs": [
+    "y1v09.case.kiriyama.v09-c19"
+  ],
+  "y1_v09_context_evidence_refs": [
+    "y1v09.ev.19"
+  ],
+  "y1_v09_relationship_refs": [
+    "y1v09.rel.008"
   ]
 }

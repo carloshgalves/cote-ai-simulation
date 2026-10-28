@@ -12,7 +12,8 @@
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
-    "ln.y1.v10.en.operator-provided"
+    "ln.y1.v10.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -45,7 +46,8 @@
         "y1v45.case.manabu-horikita.uphold-outside-contact-ban",
         "y1v5.case.manabu-horikita.accept-ayanokoji-relay-challenge",
         "y1v075.case.manabu-horikita.v075-c025",
-        "y1v08.case.manabu-horikita.v08-c041"
+        "y1v08.case.manabu-horikita.v08-c041",
+        "y1v11.case.manabu-horikita.v11-c023"
       ],
       "context_evidence_refs": [
         "y1v1.ev.031",
@@ -53,7 +55,8 @@
         "y1v45.ev.048",
         "y1v5.ev.058",
         "y1v075.ev.025",
-        "y1v08.ev.041"
+        "y1v08.ev.041",
+        "y1v11.ev.023"
       ]
     },
     "persuasion": {
@@ -276,13 +279,16 @@
       ]
     },
     "relationship": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v11.case.manabu-horikita.v11-c023"
+      ],
       "context_evidence_refs": [
         "y1v075.ev.008",
         "y1v075.ev.028",
         "y1v08.ev.044",
         "y1v08.ev.045",
-        "y1v08.ev.046"
+        "y1v08.ev.046",
+        "y1v11.ev.023"
       ]
     },
     "behavior": {
@@ -290,7 +296,8 @@
         "y1v08.case.manabu-horikita.v08-c011",
         "y1v08.case.manabu-horikita.v08-c021",
         "y1v08.case.manabu-horikita.v08-c041",
-        "y1v10.case.manabu-horikita.v10-c005"
+        "y1v10.case.manabu-horikita.v10-c005",
+        "y1v11.case.manabu-horikita.v11-c023"
       ],
       "context_evidence_refs": [
         "y1v08.ev.001",
@@ -298,7 +305,8 @@
         "y1v08.ev.021",
         "y1v08.ev.040",
         "y1v08.ev.041",
-        "y1v10.ev.005"
+        "y1v10.ev.005",
+        "y1v11.ev.023"
       ]
     },
     "identity": {
@@ -343,6 +351,14 @@
       ],
       "context_evidence_refs": [
         "y1v10.ev.005"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.manabu-horikita.v11-c023"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.023"
       ]
     }
   },
@@ -409,5 +425,21 @@
   "y1_v10_context_evidence_refs": [
     "y1v10.ev.005"
   ],
-  "y1_v10_goal_transition_refs": []
+  "y1_v10_goal_transition_refs": [],
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_runtime_memory": true,
+    "private_disclosures_require_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.manabu-horikita.v11-c023"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.023"
+  ],
+  "y1_v11_relationship_refs": [],
+  "y1_v11_goal_transition_refs": []
 }

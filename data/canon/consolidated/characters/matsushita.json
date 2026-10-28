@@ -4,7 +4,8 @@
   "display_name": "Matsushita",
   "modeling_tier": "MINIMAL_ENTITY",
   "source_coverage": [
-    "ln.y1.v01.sevenseas.en.2019.operator-provided"
+    "ln.y1.v01.sevenseas.en.2019.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -21,6 +22,38 @@
       "context_evidence_refs": [
         "y1v1.ev.122"
       ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v11.case.matsushita.v11-c037"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.037"
+      ]
+    },
+    "academic_reasoning": {
+      "behavioral_case_refs": [
+        "y1v11.case.matsushita.v11-c037"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.037"
+      ]
+    },
+    "teamwork": {
+      "behavioral_case_refs": [
+        "y1v11.case.matsushita.v11-c037"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.037"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.matsushita.v11-c037"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.037"
+      ]
     }
   },
   "source_documents": [],
@@ -36,5 +69,21 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_runtime_memory": true,
+    "private_disclosures_require_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.matsushita.v11-c037"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.037"
+  ],
+  "y1_v11_relationship_refs": [],
+  "y1_v11_goal_transition_refs": []
 }

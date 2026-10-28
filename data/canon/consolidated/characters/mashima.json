@@ -5,7 +5,8 @@
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
-    "ln.y1.v04.sevenseas.en.operator-provided"
+    "ln.y1.v04.sevenseas.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -18,14 +19,19 @@
   },
   "domains": {
     "institution": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v11.case.mashima.v11-c003"
+      ],
       "context_evidence_refs": [
         "y1v3.ev.010",
         "y1v3.ev.011",
         "y1v3.ev.104",
         "y1v4.ev.020",
         "y1v4.ev.025",
-        "y1v4.ev.132"
+        "y1v4.ev.132",
+        "y1v11.ev.003",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
       ]
     },
     "governance": {
@@ -86,7 +92,8 @@
         "y1v4.ev.027",
         "y1v4.ev.028",
         "y1v4.ev.127",
-        "y1v4.ev.128"
+        "y1v4.ev.128",
+        "y1v11.ev.059"
       ]
     },
     "health": {
@@ -114,6 +121,46 @@
         "y1v4.ev.029",
         "y1v4.ev.030"
       ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v11.case.mashima.v11-c003"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.003"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [
+        "y1v11.case.mashima.v11-c003"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.003"
+      ]
+    },
+    "initiative": {
+      "behavioral_case_refs": [
+        "y1v11.case.mashima.v11-c003"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.003"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.mashima.v11-c003"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.003",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ]
+    },
+    "politics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v11.ev.058"
+      ]
     }
   },
   "source_documents": [],
@@ -129,5 +176,26 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_runtime_memory": true,
+    "private_disclosures_require_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.mashima.v11-c003"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.003",
+    "y1v11.ev.058",
+    "y1v11.ev.059"
+  ],
+  "y1_v11_relationship_refs": [
+    "y1v11.rel.002",
+    "y1v11.rel.003"
+  ],
+  "y1_v11_goal_transition_refs": []
 }

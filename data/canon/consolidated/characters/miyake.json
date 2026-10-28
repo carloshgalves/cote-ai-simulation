@@ -8,7 +8,8 @@
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
-    "ln.y1.v09.en.operator-provided"
+    "ln.y1.v09.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -33,18 +34,24 @@
   },
   "domains": {
     "sports": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v11.case.miyake.v11-c046"
+      ],
       "context_evidence_refs": [
-        "y1v5.ev.041"
+        "y1v5.ev.041",
+        "y1v11.ev.046"
       ]
     },
     "strategy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v11.case.miyake.v11-c012"
+      ],
       "context_evidence_refs": [
         "y1v5.ev.041",
         "y1v5.ev.055",
         "y1v7.ev.006",
-        "y1v7.ev.023"
+        "y1v7.ev.023",
+        "y1v11.ev.012"
       ]
     },
     "results": {
@@ -52,7 +59,8 @@
       "context_evidence_refs": [
         "y1v5.ev.041",
         "y1v6.ev.037",
-        "y1v6.ev.040"
+        "y1v6.ev.040",
+        "y1v11.ev.066"
       ]
     },
     "exam": {
@@ -90,9 +98,12 @@
       ]
     },
     "reasoning": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v11.case.miyake.v11-c012"
+      ],
       "context_evidence_refs": [
-        "y1v6.ev.039"
+        "y1v6.ev.039",
+        "y1v11.ev.012"
       ]
     },
     "friendship": {
@@ -132,11 +143,15 @@
     "behavior": {
       "behavioral_case_refs": [
         "y1v08.case.miyake.v08-c008",
-        "y1v09.case.miyake.v09-c20"
+        "y1v09.case.miyake.v09-c20",
+        "y1v11.case.miyake.v11-c012",
+        "y1v11.case.miyake.v11-c046"
       ],
       "context_evidence_refs": [
         "y1v08.ev.008",
-        "y1v09.ev.20"
+        "y1v09.ev.20",
+        "y1v11.ev.012",
+        "y1v11.ev.046"
       ]
     },
     "risk_management": {
@@ -161,6 +176,39 @@
       ],
       "context_evidence_refs": [
         "y1v09.ev.20"
+      ]
+    },
+    "planning": {
+      "behavioral_case_refs": [
+        "y1v11.case.miyake.v11-c012"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.012"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.miyake.v11-c012",
+        "y1v11.case.miyake.v11-c046"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.012",
+        "y1v11.ev.046",
+        "y1v11.ev.066"
+      ]
+    },
+    "teamwork": {
+      "behavioral_case_refs": [
+        "y1v11.case.miyake.v11-c046"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.046"
+      ]
+    },
+    "exams": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v11.ev.066"
       ]
     }
   },
@@ -202,5 +250,24 @@
   "y1_v09_context_evidence_refs": [
     "y1v09.ev.20"
   ],
-  "y1_v09_relationship_refs": []
+  "y1_v09_relationship_refs": [],
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_runtime_memory": true,
+    "private_disclosures_require_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.miyake.v11-c012",
+    "y1v11.case.miyake.v11-c046"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.012",
+    "y1v11.ev.046",
+    "y1v11.ev.066"
+  ],
+  "y1_v11_relationship_refs": [],
+  "y1_v11_goal_transition_refs": []
 }

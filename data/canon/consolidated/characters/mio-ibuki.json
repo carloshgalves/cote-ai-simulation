@@ -10,7 +10,8 @@
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
-    "ln.y1.v10.en.operator-provided"
+    "ln.y1.v10.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -62,7 +63,8 @@
     },
     "conflict": {
       "behavioral_case_refs": [
-        "y1v3.case.mio-ibuki.fight-feverish-suzune"
+        "y1v3.case.mio-ibuki.fight-feverish-suzune",
+        "y1v11.case.mio-ibuki.v11-c043"
       ],
       "context_evidence_refs": [
         "y1v3.ev.043",
@@ -70,7 +72,8 @@
         "y1v3.ev.093",
         "y1v3.ev.095",
         "y1v4.ev.055",
-        "y1v4.ev.056"
+        "y1v4.ev.056",
+        "y1v11.ev.043"
       ]
     },
     "persuasion": {
@@ -280,10 +283,12 @@
     },
     "behavior": {
       "behavioral_case_refs": [
-        "y1v10.case.mio-ibuki.v10-c038"
+        "y1v10.case.mio-ibuki.v10-c038",
+        "y1v11.case.mio-ibuki.v11-c043"
       ],
       "context_evidence_refs": [
-        "y1v10.ev.038"
+        "y1v10.ev.038",
+        "y1v11.ev.043"
       ]
     },
     "y1_v10": {
@@ -293,6 +298,22 @@
       "context_evidence_refs": [
         "y1v10.ev.038",
         "y1v10.ev.059"
+      ]
+    },
+    "agency": {
+      "behavioral_case_refs": [
+        "y1v11.case.mio-ibuki.v11-c043"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.043"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.mio-ibuki.v11-c043"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.043"
       ]
     }
   },
@@ -355,5 +376,23 @@
   ],
   "y1_v10_goal_transition_refs": [
     "y1v10.goal.mio-ibuki.v10-g006"
-  ]
+  ],
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_runtime_memory": true,
+    "private_disclosures_require_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.mio-ibuki.v11-c043"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.043"
+  ],
+  "y1_v11_relationship_refs": [
+    "y1v11.rel.011"
+  ],
+  "y1_v11_goal_transition_refs": []
 }

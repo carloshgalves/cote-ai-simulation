@@ -12,7 +12,8 @@
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
-    "ln.y1.v08.sevenseas.en.operator-provided"
+    "ln.y1.v08.sevenseas.en.operator-provided",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -60,7 +61,9 @@
         "y1v7.case.kakeru-ryuen.v7-c004",
         "y1v7.case.kakeru-ryuen.v7-c006",
         "y1v7.case.kakeru-ryuen.v7-c008",
-        "y1v075.case.kakeru-ryuen.v075-c024"
+        "y1v075.case.kakeru-ryuen.v075-c024",
+        "y1v10.case.kakeru-ryuen.v10-c013",
+        "y1v10.case.kakeru-ryuen.v10-c041"
       ],
       "context_evidence_refs": [
         "y1v2.ev.081",
@@ -128,7 +131,9 @@
         "y1v7.ev.112",
         "y1v7.ev.113",
         "y1v075.ev.022",
-        "y1v075.ev.024"
+        "y1v075.ev.024",
+        "y1v10.ev.013",
+        "y1v10.ev.041"
       ]
     },
     "economy": {
@@ -173,11 +178,14 @@
       ]
     },
     "politics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v10.case.kakeru-ryuen.v10-c041"
+      ],
       "context_evidence_refs": [
         "y1v3.ev.097",
         "y1v3.ev.113",
-        "y1v4.ev.061"
+        "y1v4.ev.061",
+        "y1v10.ev.041"
       ]
     },
     "exam": {
@@ -257,26 +265,32 @@
     "motivation": {
       "behavioral_case_refs": [
         "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
-        "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction"
+        "y1v6.case.kakeru-ryuen.choose-false-kushida-answers-after-x-transaction",
+        "y1v10.case.kakeru-ryuen.v10-c013",
+        "y1v10.case.kakeru-ryuen.v10-c041"
       ],
       "context_evidence_refs": [
         "y1v45.ev.007",
         "y1v5.ev.074",
         "y1v5.ev.075",
         "y1v6.ev.022",
-        "y1v6.ev.079"
+        "y1v6.ev.079",
+        "y1v10.ev.013",
+        "y1v10.ev.041"
       ]
     },
     "risk_management": {
       "behavioral_case_refs": [
         "y1v5.case.kakeru-ryuen.reassess-hidden-opponent-after-recording",
         "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
-        "y1v075.case.kakeru-ryuen.v075-c026"
+        "y1v075.case.kakeru-ryuen.v075-c026",
+        "y1v10.case.kakeru-ryuen.v10-c013"
       ],
       "context_evidence_refs": [
         "y1v5.ev.011",
         "y1v5.ev.046",
-        "y1v075.ev.026"
+        "y1v075.ev.026",
+        "y1v10.ev.013"
       ]
     },
     "sports": {
@@ -482,7 +496,8 @@
       "context_evidence_refs": [
         "y1v7.ev.001",
         "y1v7.ev.073",
-        "y1v7.ev.101"
+        "y1v7.ev.101",
+        "y1v10.ev.059"
       ]
     },
     "combat": {
@@ -506,7 +521,8 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v7.ev.018",
-        "y1v7.ev.059"
+        "y1v7.ev.059",
+        "y1v10.ev.059"
       ]
     },
     "identity": {
@@ -526,10 +542,25 @@
     },
     "behavior": {
       "behavioral_case_refs": [
-        "y1v08.case.kakeru-ryuen.v08-c036"
+        "y1v08.case.kakeru-ryuen.v08-c036",
+        "y1v10.case.kakeru-ryuen.v10-c013",
+        "y1v10.case.kakeru-ryuen.v10-c041"
       ],
       "context_evidence_refs": [
-        "y1v08.ev.036"
+        "y1v08.ev.036",
+        "y1v10.ev.013",
+        "y1v10.ev.041"
+      ]
+    },
+    "y1_v10": {
+      "behavioral_case_refs": [
+        "y1v10.case.kakeru-ryuen.v10-c013",
+        "y1v10.case.kakeru-ryuen.v10-c041"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.013",
+        "y1v10.ev.041",
+        "y1v10.ev.059"
       ]
     }
   },
@@ -597,5 +628,25 @@
   "y1_v08_actor_state_deltas": [],
   "y1_v08_relationship_refs": [
     "y1v08.rel.050"
+  ],
+  "y1_v10_source_status": "SOURCE_BOUNDED_CANDIDATE_INDEPENDENT_REVIEW_PENDING",
+  "y1_v10_knowledge_gate": {
+    "pre_enrollment_history_biography_only": true,
+    "post_admission_canon_never_runtime_episode": true,
+    "rumor_and_private_interpretation_actor_scoped": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v10_behavioral_case_refs": [
+    "y1v10.case.kakeru-ryuen.v10-c013",
+    "y1v10.case.kakeru-ryuen.v10-c041"
+  ],
+  "y1_v10_context_evidence_refs": [
+    "y1v10.ev.013",
+    "y1v10.ev.041",
+    "y1v10.ev.059"
+  ],
+  "y1_v10_goal_transition_refs": [
+    "y1v10.goal.kakeru-ryuen.v10-g009"
   ]
 }

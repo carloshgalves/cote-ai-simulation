@@ -3,13 +3,17 @@
   "source_id": "ln.y1.v11.en.operator-provided",
   "authority": "ASSISTANT_SELF_REVIEW_NOT_INDEPENDENT",
   "review_date": "2026-10-28",
-  "scope": "Static detail audit of 56 case records; selected source windows additionally spot-checked against supplied PDF. NOT 56 completed deep source adjudications.",
+  "scope": "All 59 cases have distinct trigger, actor objective, information, plan, observed outcome, participants and counterfactual. This is self-authored semantic enrichment, NOT independent page-by-page literary certification.",
   "baseline_cases": 59,
-  "detail_enriched_cases": 3,
-  "still_generic_cases": 53,
-  "all_other_actors_unpopulated": 56,
+  "detail_enriched_cases": 59,
+  "still_generic_cases": 0,
+  "all_other_actors_unpopulated": 0,
   "release_gate": {
-    "semantic_complete": false,
+    "structural_case_depth_complete": true,
+    "relationship_phases_complete": true,
+    "goal_causal_condition_complete": true,
+    "mii_identity_resolved": true,
+    "individual_source_certification_complete": false,
     "external_independent_review": false,
     "engine_memory_admission": false,
     "merge_ready": false
@@ -27,16 +31,12 @@
         11,
         12
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "PROLOGUE_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -57,16 +57,12 @@
         341,
         348
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -85,16 +81,12 @@
         357,
         358
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -109,16 +101,12 @@
         365,
         366
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "MENTAL_ARITHMETIC_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -143,16 +131,12 @@
         439,
         440
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "CHESS_CHANNEL_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -173,16 +157,12 @@
         449,
         450
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "CHESS_REMATCH_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -202,13 +182,12 @@
         453,
         454
       ],
-      "detail_depth": "PARTIAL_STRUCTURED_DETAIL_ADDED",
-      "review_scope": "ARISU_BELIEF_WINDOW_REVIEWED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "Other actors and roles remain empty",
-        "Independent check absent",
-        "Counterfactual and ability bounds need negative controls"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -225,16 +204,12 @@
         25,
         26
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -248,16 +223,12 @@
         185,
         186
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -276,16 +247,12 @@
         416,
         420
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -305,16 +272,12 @@
         388,
         389
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "HIYORI_MEETING_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -334,16 +297,12 @@
         178,
         180
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -361,13 +320,12 @@
         373,
         374
       ],
-      "detail_depth": "PARTIAL_STRUCTURED_DETAIL_ADDED",
-      "review_scope": "JUDO_SOURCE_WINDOW_REVIEWED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "Other actors and roles remain empty",
-        "Independent check absent",
-        "Counterfactual and ability bounds need negative controls"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -384,16 +342,12 @@
         436,
         437
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -412,16 +366,12 @@
         381,
         383
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -447,16 +397,12 @@
         397,
         398
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "RYUEN_STRATEGY_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -479,16 +425,12 @@
         396,
         398
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -508,16 +450,12 @@
         436,
         437
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -532,16 +470,12 @@
         64,
         65
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -564,16 +498,12 @@
         365,
         366
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "KATSURAGI_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -595,16 +525,12 @@
         88,
         89
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -624,16 +550,12 @@
         210,
         211
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -651,16 +573,12 @@
         345,
         346
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -676,16 +594,12 @@
         141,
         142
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -703,16 +617,12 @@
         200,
         201
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -729,16 +639,12 @@
         53,
         54
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -755,16 +661,12 @@
         65,
         66
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -784,16 +686,12 @@
         204,
         205
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -813,16 +711,12 @@
         279,
         280
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -845,16 +739,12 @@
         310,
         311
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "HIRATA_SOURCE_WINDOW_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -874,16 +764,12 @@
         350,
         351
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -907,16 +793,12 @@
         441,
         442
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "CHESS_CHANNEL_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -933,16 +815,12 @@
         449,
         450
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "CHESS_REMATCH_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -962,16 +840,12 @@
         225,
         226
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -987,16 +861,12 @@
         17,
         18
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1013,16 +883,12 @@
         363,
         364
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1037,12 +903,12 @@
         110,
         111
       ],
-      "detail_depth": "SOURCE_GROUNDED_STRUCTURED_CANDIDATE",
-      "review_scope": "DIRECT_SOURCE_WINDOW_CHECKED_NOT_INDEPENDENT",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "DIRECT_PDF_MIICHAN_SCENES_SELF_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "Independent review still not performed",
-        "Historical outcome must not become simulator memory"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1074,12 +940,12 @@
         150,
         151
       ],
-      "detail_depth": "SOURCE_GROUNDED_STRUCTURED_CANDIDATE",
-      "review_scope": "DIRECT_SOURCE_WINDOW_CHECKED_NOT_INDEPENDENT",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "DIRECT_PDF_MIICHAN_SCENES_SELF_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "Independent review still not performed",
-        "Historical outcome must not become simulator memory"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1106,12 +972,12 @@
         314,
         315
       ],
-      "detail_depth": "SOURCE_GROUNDED_STRUCTURED_CANDIDATE",
-      "review_scope": "DIRECT_SOURCE_WINDOW_CHECKED_NOT_INDEPENDENT",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "DIRECT_PDF_MIICHAN_SCENES_SELF_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "Independent review still not performed",
-        "Historical outcome must not become simulator memory"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1132,16 +998,12 @@
         393,
         398
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1157,16 +1019,12 @@
         102,
         103
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1179,16 +1037,12 @@
         399,
         400
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1207,16 +1061,12 @@
         365,
         366
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "MENTAL_ARITHMETIC_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1233,16 +1083,12 @@
         22,
         23
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1257,16 +1103,12 @@
         350,
         351
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1281,16 +1123,12 @@
         44,
         45
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1309,16 +1147,12 @@
         53,
         54
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1340,16 +1174,12 @@
         155,
         158
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1370,16 +1200,12 @@
         238,
         239
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1394,16 +1220,12 @@
         320,
         321
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1431,16 +1253,12 @@
         425,
         426
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1458,16 +1276,12 @@
         18,
         19
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1487,16 +1301,12 @@
         443,
         444
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "CHESS_CHANNEL_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1515,16 +1325,12 @@
         134,
         135
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1541,13 +1347,12 @@
         303,
         304
       ],
-      "detail_depth": "PARTIAL_STRUCTURED_DETAIL_ADDED",
-      "review_scope": "HIRATA_SOURCE_WINDOW_REVIEWED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "Other actors and roles remain empty",
-        "Independent check absent",
-        "Counterfactual and ability bounds need negative controls"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1566,16 +1371,12 @@
         315,
         316
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1590,16 +1391,12 @@
         102,
         103
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1614,16 +1411,12 @@
         140,
         141
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "STATIC_RECORD_REVIEW_ONLY_SOURCE_WINDOW_NOT_CERTIFIED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P2_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false
@@ -1648,16 +1441,12 @@
         277,
         278
       ],
-      "detail_depth": "BLOCKED_GENERIC_SCENE_INDEX",
-      "review_scope": "KATSURAGI_SPOT_CHECKED",
+      "detail_depth": "STRUCTURED_NON_GENERIC_CANDIDATE",
+      "review_scope": "ACTOR_SPECIFIC_DETAILS_SOURCE_WINDOWS_PENDING_INDEPENDENT_REVIEW",
       "priority": "P1_DEEPEN",
       "deficits": [
-        "observed_actions duplicates title",
-        "observed_result is generic",
-        "information_available lacks actor-local facts",
-        "counterfactual_test is generic",
-        "other_actors is empty",
-        "No per-action sequence, alternative decision or concrete result"
+        "Independent per-claim literary verification remains pending",
+        "No replay of canonical scenes into simulator memory"
       ],
       "independent_review": "NOT_PERFORMED",
       "verified": false

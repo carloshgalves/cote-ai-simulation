@@ -8,7 +8,8 @@
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
-    "ln.y1.v10.en.operator-provided"
+    "ln.y1.v10.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -35,19 +36,24 @@
       "behavioral_case_refs": [
         "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
         "y1v075.case.hasebe.v075-c019",
-        "y1v10.case.hasebe.v10-c011"
+        "y1v10.case.hasebe.v10-c011",
+        "y1v11.case.hasebe.v11-c019"
       ],
       "context_evidence_refs": [
         "y1v1.ev.117",
         "y1v075.ev.019",
         "y1v075.ev.020",
-        "y1v10.ev.011"
+        "y1v10.ev.011",
+        "y1v11.ev.019"
       ]
     },
     "observation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v11.case.hasebe.v11-c019"
+      ],
       "context_evidence_refs": [
-        "y1v1.ev.117"
+        "y1v1.ev.117",
+        "y1v11.ev.019"
       ]
     },
     "academic": {
@@ -128,11 +134,13 @@
     "behavior": {
       "behavioral_case_refs": [
         "y1v10.case.hasebe.v10-c011",
-        "y1v10.case.hasebe.v10-c022"
+        "y1v10.case.hasebe.v10-c022",
+        "y1v11.case.hasebe.v11-c019"
       ],
       "context_evidence_refs": [
         "y1v10.ev.011",
-        "y1v10.ev.022"
+        "y1v10.ev.022",
+        "y1v11.ev.019"
       ]
     },
     "strategy": {
@@ -163,6 +171,14 @@
       "context_evidence_refs": [
         "y1v10.ev.011",
         "y1v10.ev.022"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.hasebe.v11-c019"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.019"
       ]
     }
   },
@@ -233,5 +249,22 @@
     "y1v10.ev.011",
     "y1v10.ev.022"
   ],
-  "y1_v10_goal_transition_refs": []
+  "y1_v10_goal_transition_refs": [],
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_simulation_episodic_memory": true,
+    "private_disclosures_require_individual_acquisition": true,
+    "exam_results_not_replayed_automatically": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.hasebe.v11-c019"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.019"
+  ],
+  "y1_v11_relationship_refs": [],
+  "y1_v11_goal_transition_refs": []
 }

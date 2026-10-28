@@ -8,7 +8,8 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
-    "ln.y1.v10.en.operator-provided"
+    "ln.y1.v10.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -102,11 +103,13 @@
     },
     "behavior": {
       "behavioral_case_refs": [
-        "y1v10.case.ishizaki.v10-c037"
+        "y1v10.case.ishizaki.v10-c037",
+        "y1v11.case.ishizaki.v11-c041"
       ],
       "context_evidence_refs": [
         "y1v08.ev.031",
-        "y1v10.ev.037"
+        "y1v10.ev.037",
+        "y1v11.ev.041"
       ]
     },
     "cooperation": {
@@ -145,10 +148,12 @@
     },
     "loyalty": {
       "behavioral_case_refs": [
-        "y1v10.case.ishizaki.v10-c037"
+        "y1v10.case.ishizaki.v10-c037",
+        "y1v11.case.ishizaki.v11-c041"
       ],
       "context_evidence_refs": [
-        "y1v10.ev.037"
+        "y1v10.ev.037",
+        "y1v11.ev.041"
       ]
     },
     "y1_v10": {
@@ -164,6 +169,22 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v10.ev.059"
+      ]
+    },
+    "initiative": {
+      "behavioral_case_refs": [
+        "y1v11.case.ishizaki.v11-c041"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.041"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.ishizaki.v11-c041"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.041"
       ]
     }
   },
@@ -183,6 +204,7 @@
   },
   "goal_transition_refs": [
     "y1v10.goal.ishizaki.v10-g007",
+    "y1v11.goal.ishizaki.v11-g010",
     "y1v7.goal.ishizaki.v7-g011"
   ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
@@ -229,5 +251,27 @@
   ],
   "y1_v10_goal_transition_refs": [
     "y1v10.goal.ishizaki.v10-g007"
+  ],
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_simulation_episodic_memory": true,
+    "private_disclosures_require_individual_acquisition": true,
+    "exam_results_not_replayed_automatically": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.ishizaki.v11-c041"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.041"
+  ],
+  "y1_v11_relationship_refs": [
+    "y1v11.rel.004",
+    "y1v11.rel.011"
+  ],
+  "y1_v11_goal_transition_refs": [
+    "y1v11.goal.ishizaki.v11-g010"
   ]
 }

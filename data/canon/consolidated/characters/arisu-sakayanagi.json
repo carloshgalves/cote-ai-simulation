@@ -11,7 +11,8 @@
     "ln.y1.v075.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
     "ln.y1.v09.en.operator-provided",
-    "ln.y1.v10.en.operator-provided"
+    "ln.y1.v10.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -41,7 +42,8 @@
         "y1v10.ev.053",
         "y1v10.ev.056",
         "y1v10.ev.060",
-        "y1v10.ev.061"
+        "y1v10.ev.061",
+        "y1v11.ev.068"
       ]
     },
     "social": {
@@ -58,21 +60,25 @@
     },
     "academic_reasoning": {
       "behavioral_case_refs": [
-        "v0.case.arisu.nature-nurture-hypothesis"
+        "v0.case.arisu.nature-nurture-hypothesis",
+        "y1v11.case.arisu-sakayanagi.v11-c036"
       ],
       "context_evidence_refs": [
-        "v0.char.046"
+        "v0.char.046",
+        "y1v11.ev.036"
       ]
     },
     "observation": {
       "behavioral_case_refs": [
         "v0.case.arisu.nature-nurture-hypothesis",
-        "y1v10.case.arisu-sakayanagi.v10-c042"
+        "y1v10.case.arisu-sakayanagi.v10-c042",
+        "y1v11.case.arisu-sakayanagi.v11-c050"
       ],
       "context_evidence_refs": [
         "y1v075.ev.010",
         "y1v075.ev.012",
-        "y1v10.ev.042"
+        "y1v10.ev.042",
+        "y1v11.ev.050"
       ]
     },
     "politics": {
@@ -82,7 +88,8 @@
         "y1v09.case.arisu-sakayanagi.v09-c24",
         "y1v09.case.arisu-sakayanagi.v09-c04",
         "y1v10.case.arisu-sakayanagi.v10-c032",
-        "y1v10.case.arisu-sakayanagi.v10-c034"
+        "y1v10.case.arisu-sakayanagi.v10-c034",
+        "y1v11.case.arisu-sakayanagi.v11-c039"
       ],
       "context_evidence_refs": [
         "y1v3.ev.116",
@@ -94,7 +101,8 @@
         "y1v10.ev.034",
         "y1v10.ev.053",
         "y1v10.ev.055",
-        "y1v10.ev.065"
+        "y1v10.ev.065",
+        "y1v11.ev.039"
       ]
     },
     "strategy": {
@@ -110,7 +118,11 @@
         "y1v10.case.arisu-sakayanagi.v10-c032",
         "y1v10.case.arisu-sakayanagi.v10-c033",
         "y1v10.case.arisu-sakayanagi.v10-c034",
-        "y1v10.case.arisu-sakayanagi.v10-c042"
+        "y1v10.case.arisu-sakayanagi.v10-c042",
+        "y1v11.case.arisu-sakayanagi.v11-c032",
+        "y1v11.case.arisu-sakayanagi.v11-c036",
+        "y1v11.case.arisu-sakayanagi.v11-c039",
+        "y1v11.case.arisu-sakayanagi.v11-c050"
       ],
       "context_evidence_refs": [
         "y1v3.ev.116",
@@ -135,7 +147,12 @@
         "y1v10.ev.034",
         "y1v10.ev.042",
         "y1v10.ev.065",
-        "y1v10.ev.068"
+        "y1v10.ev.068",
+        "y1v11.ev.032",
+        "y1v11.ev.036",
+        "y1v11.ev.039",
+        "y1v11.ev.050",
+        "y1v11.ev.062"
       ]
     },
     "leadership": {
@@ -156,7 +173,8 @@
       "context_evidence_refs": [
         "y1v5.ev.010",
         "y1v5.ev.067",
-        "y1v10.ev.061"
+        "y1v10.ev.061",
+        "y1v11.ev.069"
       ]
     },
     "sports": {
@@ -178,7 +196,8 @@
       "context_evidence_refs": [
         "y1v5.ev.067",
         "y1v075.ev.043",
-        "y1v08.ev.054"
+        "y1v08.ev.054",
+        "y1v11.ev.073"
       ]
     },
     "motivation": {
@@ -199,19 +218,26 @@
         "y1v7.ev.050",
         "y1v7.ev.059",
         "y1v10.ev.056",
-        "y1v10.ev.060"
+        "y1v10.ev.060",
+        "y1v11.ev.062"
       ]
     },
     "emotion": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v075.ev.012"
+        "y1v075.ev.012",
+        "y1v11.ev.073"
       ]
     },
     "identity": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v11.case.arisu-sakayanagi.v11-c001",
+        "y1v11.case.arisu-sakayanagi.v11-c054"
+      ],
       "context_evidence_refs": [
-        "y1v075.ev.043"
+        "y1v075.ev.043",
+        "y1v11.ev.001",
+        "y1v11.ev.054"
       ]
     },
     "behavior": {
@@ -225,7 +251,14 @@
         "y1v10.case.arisu-sakayanagi.v10-c032",
         "y1v10.case.arisu-sakayanagi.v10-c033",
         "y1v10.case.arisu-sakayanagi.v10-c034",
-        "y1v10.case.arisu-sakayanagi.v10-c042"
+        "y1v10.case.arisu-sakayanagi.v10-c042",
+        "y1v11.case.arisu-sakayanagi.v11-c001",
+        "y1v11.case.arisu-sakayanagi.v11-c032",
+        "y1v11.case.arisu-sakayanagi.v11-c036",
+        "y1v11.case.arisu-sakayanagi.v11-c039",
+        "y1v11.case.arisu-sakayanagi.v11-c050",
+        "y1v11.case.arisu-sakayanagi.v11-c052",
+        "y1v11.case.arisu-sakayanagi.v11-c054"
       ],
       "context_evidence_refs": [
         "y1v08.ev.006",
@@ -237,7 +270,14 @@
         "y1v10.ev.032",
         "y1v10.ev.033",
         "y1v10.ev.034",
-        "y1v10.ev.042"
+        "y1v10.ev.042",
+        "y1v11.ev.001",
+        "y1v11.ev.032",
+        "y1v11.ev.036",
+        "y1v11.ev.039",
+        "y1v11.ev.050",
+        "y1v11.ev.052",
+        "y1v11.ev.054"
       ]
     },
     "y1_v09": {
@@ -316,6 +356,111 @@
       "context_evidence_refs": [
         "y1v10.ev.034",
         "y1v10.ev.042"
+      ]
+    },
+    "biography": {
+      "behavioral_case_refs": [
+        "y1v11.case.arisu-sakayanagi.v11-c001"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.001",
+        "y1v11.ev.057"
+      ]
+    },
+    "belief": {
+      "behavioral_case_refs": [
+        "y1v11.case.arisu-sakayanagi.v11-c001"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.001"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.arisu-sakayanagi.v11-c001",
+        "y1v11.case.arisu-sakayanagi.v11-c032",
+        "y1v11.case.arisu-sakayanagi.v11-c036",
+        "y1v11.case.arisu-sakayanagi.v11-c039",
+        "y1v11.case.arisu-sakayanagi.v11-c050",
+        "y1v11.case.arisu-sakayanagi.v11-c052",
+        "y1v11.case.arisu-sakayanagi.v11-c054"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.001",
+        "y1v11.ev.032",
+        "y1v11.ev.036",
+        "y1v11.ev.039",
+        "y1v11.ev.050",
+        "y1v11.ev.052",
+        "y1v11.ev.054",
+        "y1v11.ev.057",
+        "y1v11.ev.062",
+        "y1v11.ev.068",
+        "y1v11.ev.069",
+        "y1v11.ev.073"
+      ]
+    },
+    "planning": {
+      "behavioral_case_refs": [
+        "y1v11.case.arisu-sakayanagi.v11-c032"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.032"
+      ]
+    },
+    "coercion": {
+      "behavioral_case_refs": [
+        "y1v11.case.arisu-sakayanagi.v11-c039"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.039"
+      ]
+    },
+    "chess": {
+      "behavioral_case_refs": [
+        "y1v11.case.arisu-sakayanagi.v11-c050",
+        "y1v11.case.arisu-sakayanagi.v11-c052"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.050",
+        "y1v11.ev.052",
+        "y1v11.ev.069"
+      ]
+    },
+    "initiative": {
+      "behavioral_case_refs": [
+        "y1v11.case.arisu-sakayanagi.v11-c052"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.052"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [
+        "y1v11.case.arisu-sakayanagi.v11-c052"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.052"
+      ]
+    },
+    "belief_update": {
+      "behavioral_case_refs": [
+        "y1v11.case.arisu-sakayanagi.v11-c054"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.054"
+      ]
+    },
+    "knowledge": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v11.ev.057"
+      ]
+    },
+    "integrity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v11.ev.068"
       ]
     }
   },
@@ -420,7 +565,66 @@
     "engine_memory_admission": false
   },
   "goal_transition_refs": [
-    "y1v10.goal.arisu-sakayanagi.v10-g004"
+    "y1v10.goal.arisu-sakayanagi.v10-g004",
+    "y1v11.goal.arisu-sakayanagi.v11-g001",
+    "y1v11.goal.arisu-sakayanagi.v11-g009"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_simulation_episodic_memory": true,
+    "private_disclosures_require_individual_acquisition": true,
+    "exam_results_not_replayed_automatically": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.arisu-sakayanagi.v11-c001",
+    "y1v11.case.arisu-sakayanagi.v11-c032",
+    "y1v11.case.arisu-sakayanagi.v11-c036",
+    "y1v11.case.arisu-sakayanagi.v11-c039",
+    "y1v11.case.arisu-sakayanagi.v11-c050",
+    "y1v11.case.arisu-sakayanagi.v11-c052",
+    "y1v11.case.arisu-sakayanagi.v11-c054"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.001",
+    "y1v11.ev.032",
+    "y1v11.ev.036",
+    "y1v11.ev.039",
+    "y1v11.ev.050",
+    "y1v11.ev.052",
+    "y1v11.ev.054",
+    "y1v11.ev.057",
+    "y1v11.ev.062",
+    "y1v11.ev.068",
+    "y1v11.ev.069",
+    "y1v11.ev.073"
+  ],
+  "y1_v11_relationship_refs": [
+    "y1v11.rel.001",
+    "y1v11.rel.010",
+    "y1v11.rel.014",
+    "y1v11.rel.016"
+  ],
+  "y1_v11_goal_transition_refs": [
+    "y1v11.goal.arisu-sakayanagi.v11-g001",
+    "y1v11.goal.arisu-sakayanagi.v11-g009"
+  ],
+  "y1_v11_pre_admission_biography": {
+    "event_id": "evt.pre-y1.arisu-white-room-observation",
+    "source_record_path": "data/canon/consolidated/biographies/evt.pre-y1.arisu-white-room-observation.json",
+    "known_by_at_entry": [
+      "actor.arisu-sakayanagi"
+    ],
+    "not_known_by_kiyotaka_from_visit": true,
+    "her_innate_genius_theory_is_subjective": true,
+    "source_evidence_refs": [
+      "y1v11.ev.001",
+      "y1v11.ev.057"
+    ],
+    "not_simulation_episodic_memory": true,
+    "verified": false
+  }
 }

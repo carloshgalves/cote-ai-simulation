@@ -30,20 +30,28 @@
   "domains": {
     "social": {
       "behavioral_case_refs": [
-        "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness",
-        "y1v7.case.kei-karuizawa.v7-c022",
         "y1v075.case.kei-karuizawa.v075-c003",
         "y1v075.case.kei-karuizawa.v075-c005",
         "y1v075.case.kei-karuizawa.v075-c006",
         "y1v09.case.kei-karuizawa.v09-c13",
         "y1v09.case.kei-karuizawa.v09-c15",
-        "y1v10.case.kei-karuizawa.v10-c021"
+        "y1v10.case.kei-karuizawa.v10-c021",
+        "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness",
+        "y1v7.case.kei-karuizawa.v7-c022"
       ],
       "context_evidence_refs": [
+        "y1v075.ev.003",
+        "y1v075.ev.005",
+        "y1v075.ev.006",
+        "y1v09.ev.034",
+        "y1v09.ev.13",
+        "y1v09.ev.15",
         "y1v1.ev.046",
         "y1v1.ev.051",
         "y1v1.ev.064",
         "y1v1.ev.122",
+        "y1v10.ev.021",
+        "y1v11.ev.076",
         "y1v2.ev.020",
         "y1v3.ev.006",
         "y1v3.ev.078",
@@ -66,14 +74,7 @@
         "y1v5.ev.014",
         "y1v6.ev.059",
         "y1v7.ev.066",
-        "y1v7.ev.079",
-        "y1v075.ev.003",
-        "y1v075.ev.005",
-        "y1v075.ev.006",
-        "y1v09.ev.13",
-        "y1v09.ev.15",
-        "y1v09.ev.034",
-        "y1v10.ev.021"
+        "y1v7.ev.079"
       ]
     },
     "economy": {
@@ -90,6 +91,7 @@
         "y1v5.case.kei-karuizawa.advocate-nonathlete-fairness"
       ],
       "context_evidence_refs": [
+        "y1v075.ev.032",
         "y1v2.ev.020",
         "y1v2.ev.024",
         "y1v3.ev.006",
@@ -101,8 +103,7 @@
         "y1v5.ev.013",
         "y1v5.ev.014",
         "y1v5.ev.045",
-        "y1v5.ev.071",
-        "y1v075.ev.032"
+        "y1v5.ev.071"
       ]
     },
     "ethics": {
@@ -135,29 +136,30 @@
     },
     "emotion": {
       "behavioral_case_refs": [
-        "y1v4.case.kei-karuizawa.refuse-demanded-apology",
-        "y1v4.case.kei-karuizawa.resist-coercion-under-threat",
-        "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure",
         "y1v075.case.kei-karuizawa.v075-c002",
         "y1v075.case.kei-karuizawa.v075-c007",
         "y1v09.case.kei-karuizawa.v09-c15",
-        "y1v11.case.kei-karuizawa.v11-c022"
+        "y1v11.case.kei-karuizawa.v11-c022",
+        "y1v4.case.kei-karuizawa.refuse-demanded-apology",
+        "y1v4.case.kei-karuizawa.resist-coercion-under-threat",
+        "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure"
       ],
       "context_evidence_refs": [
-        "y1v3.ev.083",
-        "y1v4.ev.001",
-        "y1v4.ev.056",
-        "y1v4.ev.062",
-        "y1v4.ev.070",
-        "y1v4.ev.083",
-        "y1v4.ev.104",
         "y1v075.ev.002",
         "y1v075.ev.007",
         "y1v075.ev.030",
         "y1v075.ev.032",
         "y1v09.ev.15",
         "y1v11.ev.022",
-        "y1v11.ev.074"
+        "y1v11.ev.074",
+        "y1v11.ev.076",
+        "y1v3.ev.083",
+        "y1v4.ev.001",
+        "y1v4.ev.056",
+        "y1v4.ev.062",
+        "y1v4.ev.070",
+        "y1v4.ev.083",
+        "y1v4.ev.104"
       ]
     },
     "institution": {
@@ -174,9 +176,6 @@
         "y1v09.case.kei-karuizawa.v09-c13"
       ],
       "context_evidence_refs": [
-        "y1v4.ev.001",
-        "y1v4.ev.102",
-        "y1v45.ev.043",
         "y1v075.ev.001",
         "y1v075.ev.009",
         "y1v075.ev.038",
@@ -184,7 +183,10 @@
         "y1v075.ev.040",
         "y1v075.ev.041",
         "y1v075.ev.049",
-        "y1v09.ev.13"
+        "y1v09.ev.13",
+        "y1v4.ev.001",
+        "y1v4.ev.102",
+        "y1v45.ev.043"
       ]
     },
     "observation": {
@@ -192,14 +194,14 @@
         "y1v11.case.kei-karuizawa.v11-c011"
       ],
       "context_evidence_refs": [
+        "y1v11.ev.011",
         "y1v4.ev.008",
         "y1v4.ev.062",
         "y1v4.ev.070",
         "y1v4.ev.081",
         "y1v4.ev.105",
         "y1v4.ev.121",
-        "y1v45.ev.057",
-        "y1v11.ev.011"
+        "y1v45.ev.057"
       ]
     },
     "exam": {
@@ -223,16 +225,19 @@
     },
     "strategy": {
       "behavioral_case_refs": [
+        "y1v09.case.kei-karuizawa.v09-c15",
+        "y1v10.case.kei-karuizawa.v10-c021",
         "y1v4.case.kei-karuizawa.accept-protection-under-duress",
         "y1v4.case.kei-karuizawa.conceal-rabbit-vip-role",
         "y1v45.case.kei-karuizawa.quietly-prevent-recording-abuse",
         "y1v7.case.kei-karuizawa.v7-c020",
         "y1v7.case.kei-karuizawa.v7-c021",
-        "y1v7.case.kei-karuizawa.v7-c023",
-        "y1v09.case.kei-karuizawa.v09-c15",
-        "y1v10.case.kei-karuizawa.v10-c021"
+        "y1v7.case.kei-karuizawa.v7-c023"
       ],
       "context_evidence_refs": [
+        "y1v075.ev.037",
+        "y1v09.ev.15",
+        "y1v10.ev.021",
         "y1v4.ev.035",
         "y1v4.ev.100",
         "y1v4.ev.101",
@@ -260,10 +265,7 @@
         "y1v7.ev.077",
         "y1v7.ev.081",
         "y1v7.ev.089",
-        "y1v7.ev.099",
-        "y1v075.ev.037",
-        "y1v09.ev.15",
-        "y1v10.ev.021"
+        "y1v7.ev.099"
       ]
     },
     "persuasion": {
@@ -290,6 +292,7 @@
     "coercion": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
+        "y1v075.ev.033",
         "y1v4.ev.084",
         "y1v4.ev.097",
         "y1v4.ev.098",
@@ -301,8 +304,7 @@
         "y1v45.ev.044",
         "y1v45.ev.051",
         "y1v45.ev.052",
-        "y1v6.ev.062",
-        "y1v075.ev.033"
+        "y1v6.ev.062"
       ]
     },
     "negotiation": {
@@ -323,31 +325,31 @@
     },
     "trauma": {
       "behavioral_case_refs": [
+        "y1v075.case.kei-karuizawa.v075-c001",
         "y1v4.case.kei-karuizawa.accept-protection-under-duress",
         "y1v4.case.kei-karuizawa.resist-coercion-under-threat",
-        "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure",
-        "y1v075.case.kei-karuizawa.v075-c001"
+        "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure"
       ],
       "context_evidence_refs": [
+        "y1v075.ev.001",
         "y1v4.ev.102",
         "y1v4.ev.104",
         "y1v4.ev.105",
         "y1v45.ev.043",
-        "y1v45.ev.052",
-        "y1v075.ev.001"
+        "y1v45.ev.052"
       ]
     },
     "deception": {
       "behavioral_case_refs": [
-        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
-        "y1v075.case.kei-karuizawa.v075-c005"
+        "y1v075.case.kei-karuizawa.v075-c005",
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes"
       ],
       "context_evidence_refs": [
+        "y1v075.ev.005",
         "y1v4.ev.131",
         "y1v5.ev.071",
         "y1v6.ev.060",
-        "y1v6.ev.062",
-        "y1v075.ev.005"
+        "y1v6.ev.062"
       ]
     },
     "consequence": {
@@ -402,7 +404,6 @@
     },
     "relationship": {
       "behavioral_case_refs": [
-        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection",
         "y1v075.case.kei-karuizawa.v075-c002",
         "y1v075.case.kei-karuizawa.v075-c003",
         "y1v075.case.kei-karuizawa.v075-c004",
@@ -413,10 +414,10 @@
         "y1v08.case.kei-karuizawa.v08-c042",
         "y1v09.case.kei-karuizawa.v09-c13",
         "y1v11.case.kei-karuizawa.v11-c011",
-        "y1v11.case.kei-karuizawa.v11-c022"
+        "y1v11.case.kei-karuizawa.v11-c022",
+        "y1v6.case.kei-karuizawa.limit-secrecy-leaks-and-negotiate-protection"
       ],
       "context_evidence_refs": [
-        "y1v6.ev.009",
         "y1v075.ev.002",
         "y1v075.ev.003",
         "y1v075.ev.004",
@@ -433,11 +434,13 @@
         "y1v08.ev.020",
         "y1v08.ev.042",
         "y1v08.ev.043",
-        "y1v09.ev.13",
         "y1v09.ev.034",
+        "y1v09.ev.13",
         "y1v11.ev.011",
         "y1v11.ev.022",
-        "y1v11.ev.074"
+        "y1v11.ev.074",
+        "y1v11.ev.076",
+        "y1v6.ev.009"
       ]
     },
     "security": {
@@ -448,23 +451,23 @@
     },
     "information": {
       "behavioral_case_refs": [
-        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
-        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes",
         "y1v075.case.kei-karuizawa.v075-c004",
         "y1v075.case.kei-karuizawa.v075-c008",
         "y1v08.case.kei-karuizawa.v08-c020",
         "y1v10.case.kei-karuizawa.v10-c021",
-        "y1v11.case.kei-karuizawa.v11-c011"
+        "y1v11.case.kei-karuizawa.v11-c011",
+        "y1v6.case.kei-karuizawa.find-prior-information-behind-hiyori-sugar-claim",
+        "y1v6.case.kei-karuizawa.public-juice-incident-with-disputed-hidden-causes"
       ],
       "context_evidence_refs": [
-        "y1v6.ev.059",
-        "y1v6.ev.062",
         "y1v075.ev.004",
         "y1v075.ev.008",
         "y1v075.ev.035",
         "y1v08.ev.020",
         "y1v10.ev.021",
-        "y1v11.ev.011"
+        "y1v11.ev.011",
+        "y1v6.ev.059",
+        "y1v6.ev.062"
       ]
     },
     "investigation": {
@@ -520,7 +523,8 @@
         "y1v09.ev.15",
         "y1v10.ev.021",
         "y1v11.ev.011",
-        "y1v11.ev.022"
+        "y1v11.ev.022",
+        "y1v11.ev.076"
       ]
     },
     "analysis": {
@@ -537,9 +541,9 @@
         "y1v09.case.kei-karuizawa.v09-c15"
       ],
       "context_evidence_refs": [
+        "y1v09.ev.034",
         "y1v09.ev.13",
-        "y1v09.ev.15",
-        "y1v09.ev.034"
+        "y1v09.ev.15"
       ]
     },
     "y1_v10": {
@@ -558,7 +562,14 @@
       "context_evidence_refs": [
         "y1v11.ev.011",
         "y1v11.ev.022",
-        "y1v11.ev.074"
+        "y1v11.ev.074",
+        "y1v11.ev.076"
+      ]
+    },
+    "initiative": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v11.ev.076"
       ]
     }
   },
@@ -720,7 +731,8 @@
   "y1_v11_context_evidence_refs": [
     "y1v11.ev.011",
     "y1v11.ev.022",
-    "y1v11.ev.074"
+    "y1v11.ev.074",
+    "y1v11.ev.076"
   ],
   "y1_v11_relationship_refs": [
     "y1v11.rel.006"

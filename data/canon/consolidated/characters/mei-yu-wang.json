@@ -30,6 +30,8 @@
         "y1v11.case.mei-yu-wang.v11-c059"
       ],
       "context_evidence_refs": [
+        "y1v11.ev.016",
+        "y1v11.ev.030",
         "y1v11.ev.075",
         "y1v11.ev.076",
         "y1v11.ev.077"
@@ -66,6 +68,8 @@
         "y1v11.case.mei-yu-wang.v11-c059"
       ],
       "context_evidence_refs": [
+        "y1v11.ev.016",
+        "y1v11.ev.030",
         "y1v11.ev.075",
         "y1v11.ev.076",
         "y1v11.ev.077"
@@ -78,6 +82,7 @@
         "y1v11.case.mei-yu-wang.v11-c059"
       ],
       "context_evidence_refs": [
+        "y1v11.ev.016",
         "y1v11.ev.075",
         "y1v11.ev.076",
         "y1v11.ev.077"
@@ -90,9 +95,29 @@
         "y1v11.case.mei-yu-wang.v11-c059"
       ],
       "context_evidence_refs": [
+        "y1v11.ev.016",
+        "y1v11.ev.030",
         "y1v11.ev.075",
         "y1v11.ev.076",
         "y1v11.ev.077"
+      ]
+    },
+    "conflict": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v11.ev.016"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v11.ev.030"
+      ]
+    },
+    "goal_change": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v11.ev.030"
       ]
     }
   },
@@ -124,6 +149,8 @@
     "y1v11.case.mei-yu-wang.v11-c059"
   ],
   "y1_v11_context_evidence_refs": [
+    "y1v11.ev.016",
+    "y1v11.ev.030",
     "y1v11.ev.075",
     "y1v11.ev.076",
     "y1v11.ev.077"

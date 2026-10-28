@@ -608,7 +608,8 @@
       },
       "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
       "mention_actor_ids": [
-        "actor.yosuke-hirata"
+        "actor.yosuke-hirata",
+        "actor.mei-yu-wang"
       ],
       "mention_organization_ids": [],
       "topics": [
@@ -1187,7 +1188,8 @@
       },
       "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
       "mention_actor_ids": [
-        "actor.yosuke-hirata"
+        "actor.yosuke-hirata",
+        "actor.mei-yu-wang"
       ],
       "mention_organization_ids": [],
       "topics": [

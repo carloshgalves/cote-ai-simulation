@@ -1,0 +1,272 @@
+{
+  "schema_version": "canon-class-poll-reference-v1",
+  "exam_id": "exam.y1.class-poll",
+  "source_id": "ln.y1.v10.en.operator-provided",
+  "title": "Y1 V10 Supplementary Special Exam — Class Poll",
+  "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
+  "source_locator_basis": "1-based physical PDF pages",
+  "pdf_total_pages": 376,
+  "original_pdf_committed": false,
+  "notice_and_schedule": {
+    "school_year": "Y1",
+    "announcement": "Y1_MARCH_02",
+    "weekday_announcement": "Tuesday",
+    "preparation_days": 4,
+    "vote_day": "following Saturday",
+    "exam_start_calendar_claim": "MARCH_02",
+    "regular_final_special_exam_separately_announced": "MARCH_08",
+    "school_explanation": "No first-year dropouts by end-term examinations; school improvised supplemental vote",
+    "school_rationale_epistemic_mode": "TEACHER_OFFICIAL_EXPLANATION_NOT_PROOF_OF_HIDDEN_BOARD_MOTIVE",
+    "sources_pdf_pages": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      45
+    ]
+  },
+  "electorate": {
+    "applies_to_each_first_year_class": true,
+    "mandatory_all_students": true,
+    "internal_praise_votes_per_student": 3,
+    "internal_censure_votes_per_student": 3,
+    "additional_cross_class_praise_votes_per_student": 1,
+    "self_vote_prohibited": true,
+    "duplicate_vote_for_same_person_prohibited": true,
+    "abstention_or_blank_vote_prohibited": true,
+    "absence_due_to_illness_does_not_waive_vote": true,
+    "ballot_anonymity": true,
+    "recipient_in_cross_class_must_belong_to_another_class": true,
+    "attribution_of_individual_ballots": "NEVER_PUBLIC",
+    "source_pdf_pages": [
+      37,
+      41,
+      42,
+      44,
+      45
+    ]
+  },
+  "net_votes": {
+    "formula": "TOTAL_PRAISE_INCLUDING_CROSS_CLASS_MINUS_INTERNAL_CENSURE",
+    "internal_vote_cancelation": true,
+    "rank_by_net_votes": true,
+    "all_net_zero_force_revote": true,
+    "first_place_and_last_place_required": true,
+    "tied_extrema": "DECIDING_VOTE",
+    "repeated_tie": "UNSPECIFIED_SCHOOL_SPECIAL_METHOD",
+    "tie_implementation": "UNKNOWN_NOT_EXECUTABLE",
+    "source_pdf_pages": [
+      38,
+      39,
+      41,
+      42,
+      43,
+      44,
+      45
+    ]
+  },
+  "rewards_and_penalties": {
+    "max_net_vote_in_each_class": "ONE_PROTECTION_POINT",
+    "protection_point": {
+      "unit": 1,
+      "nontransferable": true,
+      "ability": "CAN_OVERRIDE_A_FUTURE_EXPULSION",
+      "scope_and_consumption_DETAILS": "PARTIAL_NOT_FULLY_SPECIFIED",
+      "equivalent_private_points_claimed": 20000000
+    },
+    "min_net_vote_in_each_class": "EXPULSION",
+    "expelled_student_class_point_penalty": 0,
+    "optional_expulsion_revocation": {
+      "private_points_cost": 20000000,
+      "payment_entitlement": "school must revoke an expulsion if enough private points are legitimately tendered",
+      "no_automatic_classmate_revival": true
+    },
+    "class_point_change_caused_by_exam": 0,
+    "source_pdf_pages": [
+      38,
+      39,
+      40,
+      45,
+      46,
+      47,
+      315
+    ]
+  },
+  "cross_class_authority": {
+    "praise_only": true,
+    "external_censure_not_authorized": true,
+    "privately_reported_original_negative_vote_proposal": {
+      "speaker": "actor.arisu-sakayanagi",
+      "pdf_pages": [
+        355,
+        356
+      ],
+      "source_mode": "PRIVATE_ACTOR_REPORT_NOT_INSTITUTIONAL_CERTIFICATION",
+      "enacted": false
+    }
+  },
+  "strategies_as_descriptive_history": [
+    {
+      "id": "class-a-decoy",
+      "actors": [
+        "actor.arisu-sakayanagi"
+      ],
+      "description": "Rumor of Katsuragi expulsion hides Totsuka as real targeted voter; Praise votes preserve Katsuragi's enrollment",
+      "pdf_pages": [
+        262,
+        264,
+        292,
+        293,
+        294,
+        295
+      ],
+      "not_normative": true
+    },
+    {
+      "id": "class-c-double-defense",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.suzune-horikita",
+        "actor.arisu-sakayanagi"
+      ],
+      "description": "Exposure of Yamauchi plot plus Class A cross-class praise for Kiyotaka, without assuming actor knows other side's actions",
+      "pdf_pages": [
+        197,
+        205,
+        214,
+        304,
+        305,
+        306,
+        314
+      ],
+      "not_normative": true
+    },
+    {
+      "id": "class-b-financial-rescue",
+      "actors": [
+        "actor.honami-ichinose",
+        "actor.ryuji-kanzaki"
+      ],
+      "description": "Collective point pooling and 20-million revocation after Kanzaki nominated",
+      "pdf_pages": [
+        252,
+        256,
+        345,
+        349,
+        350
+      ],
+      "not_normative": true
+    },
+    {
+      "id": "class-d-cross-class-bargain",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.mio-ibuki",
+        "actor.ishizaki",
+        "actor.honami-ichinose"
+      ],
+      "description": "Approximately four-million private points supplement Class B pool; 40 Class B cross-class praise votes protect Ryūen",
+      "pdf_pages": [
+        334,
+        335,
+        342,
+        343,
+        344,
+        345,
+        346
+      ],
+      "not_normative": true
+    }
+  ],
+  "observed_official_results": {
+    "source_pdf_pages": [
+      292,
+      293,
+      294,
+      304,
+      305,
+      306,
+      315,
+      316,
+      349,
+      350
+    ],
+    "expulsions_by_class": {
+      "A": "actor.yahiko",
+      "B": null,
+      "C": "actor.haruki-yamauchi",
+      "D": "actor.manabe-shiho"
+    },
+    "class_point_change": 0,
+    "protection_point_winners_by_class": {
+      "A": "actor.arisu-sakayanagi",
+      "B": "actor.honami-ichinose",
+      "C": "actor.kiyotaka-ayanokoji",
+      "D": "actor.kaneda"
+    },
+    "numeric_reported": {
+      "class_a": {
+        "top_praise_net": 36,
+        "expelled_censure_votes": 36,
+        "runnerup_censure_votes_katsuragi": 30
+      },
+      "class_b": {
+        "top_praise_net": 98,
+        "revocation_paid_private_points": 20000000
+      },
+      "class_c": {
+        "top_praise_net_kiyotaka": 42,
+        "expelled_censure_votes_yamauchi": 33,
+        "runnerup_sudo_censure": 21,
+        "third_ike_censure": 20,
+        "top_positive_order": [
+          "actor.kiyotaka-ayanokoji",
+          "actor.yosuke-hirata",
+          "actor.kikyo-kushida"
+        ]
+      },
+      "class_d": {
+        "top_praise_net_kaneda": 27,
+        "ryuen_cross_class_positive_from_class_b": 40
+      }
+    },
+    "private_point_transfer_details": {
+      "ichinose_nagumo_proposed_loan": 4043019,
+      "ichinose_nagumo_loan_executed": false,
+      "ryuen_points_pre_rescue": "a little over five million (not an exact transfer amount)",
+      "ibuki_to_ichinose": "about four million private points; exact observed receipt is resulting Class B total of twenty million",
+      "class_b_to_school_revocation": 20000000
+    }
+  },
+  "uncertain_or_not_proven": [
+    "Exact second tie resolution method",
+    "Official per-ballot identities (anonymous)",
+    "Official all-voter ranking with net totals",
+    "Whether all the very large point transfers have precise transaction audit beyond actor device demonstration",
+    "No guarantee that one future protection point cancels any conceivable category of expulsion",
+    "Exact authoritative attribution for who designed initial punitive exam; actor Sakayanagi's report is not direct school proof",
+    "Assumed date after March without concrete source calendar-year anchoring"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.046",
+    "y1v10.ev.047",
+    "y1v10.ev.048",
+    "y1v10.ev.049",
+    "y1v10.ev.051",
+    "y1v10.ev.054",
+    "y1v10.ev.056",
+    "y1v10.ev.057",
+    "y1v10.ev.058",
+    "y1v10.ev.059",
+    "y1v10.ev.060",
+    "y1v10.ev.061"
+  ],
+  "verified": false,
+  "external_independent_review": "NOT_PERFORMED",
+  "engine_memory_admission": false,
+  "executable": false,
+  "goal_runtime_auto_update": false
+}

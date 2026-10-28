@@ -1,0 +1,406 @@
+{
+  "schema_version": "canon-actor-goal-transition-reference-v1",
+  "source_id": "ln.y1.v10.en.operator-provided",
+  "authority": "HISTORICAL_EXAMPLES_NOT_EXECUTABLE_GOAL_POLICY",
+  "purpose": "Reference examples of agency, conflict, subjective goals and voluntary initiative during Class Poll.",
+  "truth_vs_belief_gate": "Public statements, private monologues, and narrator inference have separate epistemic authority.",
+  "future_divergence_gate": "No transition from later school volumes becomes actor memory or a deterministic future action in a fork.",
+  "stability_gate": "No stable numeric weights, guaranteed cooperation, coerced romance, or irreversible personality conversion.",
+  "transitions": [
+    {
+      "id": "y1v10.goal.yosuke-hirata.v10-g001",
+      "actor_id": "actor.yosuke-hirata",
+      "kind": "GOAL_CONFLICT",
+      "event_time_ref": "Y1_V10_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v10.en.operator-provided",
+        "pdf_pages": [
+          129,
+          130,
+          135,
+          136,
+          137,
+          138,
+          139,
+          287,
+          288,
+          289
+        ],
+        "mode": "HISTORICAL_OBSERVATION_OR_CHARACTER_REPORT"
+      },
+      "evidence_refs": [
+        "y1v10.ev.008",
+        "y1v10.ev.028",
+        "y1v10.ev.035"
+      ],
+      "prior_goal_or_means": "Protect all classmates through class unity",
+      "observed_goal_or_means_after": "Prevent expulsion without choosing a victim, even at personal cost",
+      "trigger_or_new_information": "Class Poll forces choosing the lowest-ranked classmate",
+      "behavioral_evidence": "Source-bounded episode only; see evidence_refs and pages.",
+      "epistemic_status": "HISTORICAL_OBSERVED_OR_SCENE_INFERENCE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulated information can produce no transition or a different strategy."
+      ],
+      "simulation_guard": "Never apply this literary transition to current agent state without an observed causal simulation event and actor-authored choice.",
+      "source_review": "ASSISTANT_CANDIDATE_INDEPENDENT_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v10.goal.yosuke-hirata.v10-g002",
+      "actor_id": "actor.yosuke-hirata",
+      "kind": "GOAL_PRIORITY_REVEAL",
+      "event_time_ref": "Y1_V10_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v10.en.operator-provided",
+        "pdf_pages": [
+          219,
+          220,
+          223,
+          224,
+          225,
+          226,
+          287,
+          288,
+          289
+        ],
+        "mode": "HISTORICAL_OBSERVATION_OR_CHARACTER_REPORT"
+      },
+      "evidence_refs": [
+        "y1v10.ev.028",
+        "y1v10.ev.035"
+      ],
+      "prior_goal_or_means": "Preserve friendliness and consensus",
+      "observed_goal_or_means_after": "Publicly oppose Suzune, then offer himself for censure",
+      "trigger_or_new_information": "Exposure of Yamauchi and unavoidable vote confronts his ethical limits",
+      "behavioral_evidence": "Source-bounded episode only; see evidence_refs and pages.",
+      "epistemic_status": "HISTORICAL_OBSERVED_OR_SCENE_INFERENCE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulated information can produce no transition or a different strategy."
+      ],
+      "simulation_guard": "Never apply this literary transition to current agent state without an observed causal simulation event and actor-authored choice.",
+      "source_review": "ASSISTANT_CANDIDATE_INDEPENDENT_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v10.goal.suzune-horikita.v10-g003",
+      "actor_id": "actor.suzune-horikita",
+      "kind": "MEANS_CHANGE",
+      "event_time_ref": "Y1_V10_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v10.en.operator-provided",
+        "pdf_pages": [
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          198,
+          201,
+          202,
+          205,
+          209,
+          215,
+          217
+        ],
+        "mode": "HISTORICAL_OBSERVATION_OR_CHARACTER_REPORT"
+      },
+      "evidence_refs": [
+        "y1v10.ev.025",
+        "y1v10.ev.026"
+      ],
+      "prior_goal_or_means": "Seek ascent to Class A without abandoning classmate relationships",
+      "observed_goal_or_means_after": "Make explicit recommendation to vote Yamauchi out based on performance and betrayal",
+      "trigger_or_new_information": "School voting rule and reliable information about manipulation",
+      "behavioral_evidence": "Source-bounded episode only; see evidence_refs and pages.",
+      "epistemic_status": "HISTORICAL_OBSERVED_OR_SCENE_INFERENCE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulated information can produce no transition or a different strategy."
+      ],
+      "simulation_guard": "Never apply this literary transition to current agent state without an observed causal simulation event and actor-authored choice.",
+      "source_review": "ASSISTANT_CANDIDATE_INDEPENDENT_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v10.goal.arisu-sakayanagi.v10-g004",
+      "actor_id": "actor.arisu-sakayanagi",
+      "kind": "STRATEGY_CHANGE",
+      "event_time_ref": "Y1_V10_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v10.en.operator-provided",
+        "pdf_pages": [
+          118,
+          121,
+          122,
+          123,
+          292,
+          294,
+          305,
+          355,
+          356
+        ],
+        "mode": "HISTORICAL_OBSERVATION_OR_CHARACTER_REPORT"
+      },
+      "evidence_refs": [
+        "y1v10.ev.017",
+        "y1v10.ev.032",
+        "y1v10.ev.034"
+      ],
+      "prior_goal_or_means": "Compete directly with Ayanokōji",
+      "observed_goal_or_means_after": "Postpone direct match, shield him with outside positive votes while advancing Class A faction advantage",
+      "trigger_or_new_information": "Supplemental Class Poll has only positive cross-class influence",
+      "behavioral_evidence": "Source-bounded episode only; see evidence_refs and pages.",
+      "epistemic_status": "HISTORICAL_OBSERVED_OR_SCENE_INFERENCE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulated information can produce no transition or a different strategy."
+      ],
+      "simulation_guard": "Never apply this literary transition to current agent state without an observed causal simulation event and actor-authored choice.",
+      "source_review": "ASSISTANT_CANDIDATE_INDEPENDENT_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v10.goal.honami-ichinose.v10-g005",
+      "actor_id": "actor.honami-ichinose",
+      "kind": "MEANS_CHANGE",
+      "event_time_ref": "Y1_V10_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v10.en.operator-provided",
+        "pdf_pages": [
+          142,
+          145,
+          252,
+          256,
+          257,
+          260,
+          342,
+          343,
+          344,
+          345,
+          349
+        ],
+        "mode": "HISTORICAL_OBSERVATION_OR_CHARACTER_REPORT"
+      },
+      "evidence_refs": [
+        "y1v10.ev.019",
+        "y1v10.ev.030",
+        "y1v10.ev.040"
+      ],
+      "prior_goal_or_means": "Rescue all classmates from expulsion by collective point pooling",
+      "observed_goal_or_means_after": "Replace contemplated Nagumo loan with conditional deal involving Ryūen's saved points and Class B praise votes",
+      "trigger_or_new_information": "Conditional dating discomfort and availability of Ibuki's transferred private points",
+      "behavioral_evidence": "Source-bounded episode only; see evidence_refs and pages.",
+      "epistemic_status": "HISTORICAL_OBSERVED_OR_SCENE_INFERENCE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulated information can produce no transition or a different strategy."
+      ],
+      "simulation_guard": "Never apply this literary transition to current agent state without an observed causal simulation event and actor-authored choice.",
+      "source_review": "ASSISTANT_CANDIDATE_INDEPENDENT_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v10.goal.mio-ibuki.v10-g006",
+      "actor_id": "actor.mio-ibuki",
+      "kind": "SITUATIONAL_GOAL_ADDITION",
+      "event_time_ref": "Y1_V10_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v10.en.operator-provided",
+        "pdf_pages": [
+          320,
+          324,
+          329,
+          334,
+          336,
+          338,
+          339,
+          345,
+          348
+        ],
+        "mode": "HISTORICAL_OBSERVATION_OR_CHARACTER_REPORT"
+      },
+      "evidence_refs": [
+        "y1v10.ev.038"
+      ],
+      "prior_goal_or_means": "Obtain deserved release from Ryūen's prior domination",
+      "observed_goal_or_means_after": "Protect Ryūen's continued enrollment and nominate alternative target",
+      "trigger_or_new_information": "Others' projected expulsion of Ryūen and her access to his accumulated private points",
+      "behavioral_evidence": "Source-bounded episode only; see evidence_refs and pages.",
+      "epistemic_status": "HISTORICAL_OBSERVED_OR_SCENE_INFERENCE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulated information can produce no transition or a different strategy."
+      ],
+      "simulation_guard": "Never apply this literary transition to current agent state without an observed causal simulation event and actor-authored choice.",
+      "source_review": "ASSISTANT_CANDIDATE_INDEPENDENT_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v10.goal.ishizaki.v10-g007",
+      "actor_id": "actor.ishizaki",
+      "kind": "GOAL_REPRIORITIZATION",
+      "event_time_ref": "Y1_V10_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v10.en.operator-provided",
+        "pdf_pages": [
+          320,
+          323,
+          324,
+          326,
+          327,
+          328,
+          336,
+          337
+        ],
+        "mode": "HISTORICAL_OBSERVATION_OR_CHARACTER_REPORT"
+      },
+      "evidence_refs": [
+        "y1v10.ev.037"
+      ],
+      "prior_goal_or_means": "Avoid retaliation and protect own graduation",
+      "observed_goal_or_means_after": "Seek assistance to save Ryūen, accepting that another classmate may be expelled",
+      "trigger_or_new_information": "Ryūen's resignation to being voted out",
+      "behavioral_evidence": "Source-bounded episode only; see evidence_refs and pages.",
+      "epistemic_status": "HISTORICAL_OBSERVED_OR_SCENE_INFERENCE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulated information can produce no transition or a different strategy."
+      ],
+      "simulation_guard": "Never apply this literary transition to current agent state without an observed causal simulation event and actor-authored choice.",
+      "source_review": "ASSISTANT_CANDIDATE_INDEPENDENT_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v10.goal.kiyotaka-ayanokoji.v10-g008",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "kind": "SITUATIONAL_GOAL_ADDITION",
+      "event_time_ref": "Y1_V10_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v10.en.operator-provided",
+        "pdf_pages": [
+          168,
+          170,
+          174,
+          183,
+          197,
+          205,
+          229,
+          230,
+          314
+        ],
+        "mode": "HISTORICAL_OBSERVATION_OR_CHARACTER_REPORT"
+      },
+      "evidence_refs": [
+        "y1v10.ev.021",
+        "y1v10.ev.023",
+        "y1v10.ev.029"
+      ],
+      "prior_goal_or_means": "Maintain low profile while avoiding unwanted school expulsion",
+      "observed_goal_or_means_after": "Use private information channels to discredit Yamauchi's coalition without openly claiming authorship",
+      "trigger_or_new_information": "Coordinated censure plot discovered through contact with Kei/Kushida",
+      "behavioral_evidence": "Source-bounded episode only; see evidence_refs and pages.",
+      "epistemic_status": "HISTORICAL_OBSERVED_OR_SCENE_INFERENCE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulated information can produce no transition or a different strategy."
+      ],
+      "simulation_guard": "Never apply this literary transition to current agent state without an observed causal simulation event and actor-authored choice.",
+      "source_review": "ASSISTANT_CANDIDATE_INDEPENDENT_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v10.goal.kakeru-ryuen.v10-g009",
+      "actor_id": "actor.kakeru-ryuen",
+      "kind": "GOAL_STATUS_UNCERTAIN",
+      "event_time_ref": "Y1_V10_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v10.en.operator-provided",
+        "pdf_pages": [
+          73,
+          75,
+          316,
+          317,
+          347,
+          348,
+          349
+        ],
+        "mode": "HISTORICAL_OBSERVATION_OR_CHARACTER_REPORT"
+      },
+      "evidence_refs": [
+        "y1v10.ev.013",
+        "y1v10.ev.041"
+      ],
+      "prior_goal_or_means": "Previously seek Class A through coercive leadership",
+      "observed_goal_or_means_after": "Accept private retention without publicly reclaiming leadership",
+      "trigger_or_new_information": "Support from Ishizaki and Ibuki and interclass rescue surprise",
+      "behavioral_evidence": "Source-bounded episode only; see evidence_refs and pages.",
+      "epistemic_status": "HISTORICAL_OBSERVED_OR_SCENE_INFERENCE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulated information can produce no transition or a different strategy."
+      ],
+      "simulation_guard": "Never apply this literary transition to current agent state without an observed causal simulation event and actor-authored choice.",
+      "source_review": "ASSISTANT_CANDIDATE_INDEPENDENT_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v10.goal.suzune-horikita.v10-g010",
+      "actor_id": "actor.suzune-horikita",
+      "kind": "RELATIONSHIP_MEANS_CHANGE",
+      "event_time_ref": "Y1_V10_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v10.en.operator-provided",
+        "pdf_pages": [
+          21,
+          24,
+          190,
+          192,
+          194,
+          195,
+          196
+        ],
+        "mode": "HISTORICAL_OBSERVATION_OR_CHARACTER_REPORT"
+      },
+      "evidence_refs": [
+        "y1v10.ev.004",
+        "y1v10.ev.005",
+        "y1v10.ev.025"
+      ],
+      "prior_goal_or_means": "Keep distance from Manabu while aspiring to his recognition",
+      "observed_goal_or_means_after": "Initiate private conversation, seek advice and articulate her own classroom action",
+      "trigger_or_new_information": "Nagumo's confrontation and looming irrevocable vote",
+      "behavioral_evidence": "Source-bounded episode only; see evidence_refs and pages.",
+      "epistemic_status": "HISTORICAL_OBSERVED_OR_SCENE_INFERENCE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulated information can produce no transition or a different strategy."
+      ],
+      "simulation_guard": "Never apply this literary transition to current agent state without an observed causal simulation event and actor-authored choice.",
+      "source_review": "ASSISTANT_CANDIDATE_INDEPENDENT_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v10.goal.kiyotaka-ayanokoji.v10-g011",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "kind": "RISK_RESPONSE_CHANGE",
+      "event_time_ref": "Y1_V10_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v10.en.operator-provided",
+        "pdf_pages": [
+          358,
+          359,
+          360,
+          361
+        ],
+        "mode": "HISTORICAL_OBSERVATION_OR_CHARACTER_REPORT"
+      },
+      "evidence_refs": [
+        "y1v10.ev.044"
+      ],
+      "prior_goal_or_means": "Avoid revealing ability in school conflicts",
+      "observed_goal_or_means_after": "Protect Arisu from harm and refrain from retaliation against acting director",
+      "trigger_or_new_information": "Tsukishiro's violence and potential tampering with evidence",
+      "behavioral_evidence": "Source-bounded episode only; see evidence_refs and pages.",
+      "epistemic_status": "HISTORICAL_OBSERVED_OR_SCENE_INFERENCE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulated information can produce no transition or a different strategy."
+      ],
+      "simulation_guard": "Never apply this literary transition to current agent state without an observed causal simulation event and actor-authored choice.",
+      "source_review": "ASSISTANT_CANDIDATE_INDEPENDENT_REVIEW_PENDING"
+    }
+  ]
+}

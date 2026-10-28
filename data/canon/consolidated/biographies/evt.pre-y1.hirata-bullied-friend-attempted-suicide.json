@@ -1,0 +1,47 @@
+{
+  "schema_version": "canon-biography-event-v1",
+  "id": "evt.pre-y1.hirata-bullied-friend-attempted-suicide",
+  "authority": "PRE_ENROLLMENT_BIOGRAPHY_REFERENCE_ONLY",
+  "event_time": "BEFORE_Y1_START_MIDDLE_SCHOOL_UNDATED",
+  "status": "FIRST_PERSON_ACCOUNT",
+  "source_id": "ln.y1.v10.en.operator-provided",
+  "source_pdf_pages": [
+    6,
+    7,
+    8
+  ],
+  "source_evidence_refs": [
+    "y1v10.ev.001",
+    "y1v10.ev.063"
+  ],
+  "observed_or_reported": "Hirata recalls a childhood friend bullied without his knowing, who survived a suicide attempt; Hirata attempted to suppress bullying and describes a failed approach that reduced visible conflict but also eroded happiness.",
+  "person_known_to_actor": "actor.yosuke-hirata",
+  "friend_identity": "UNIDENTIFIED",
+  "friend_survived": true,
+  "baseline_gate": {
+    "actor_initial_background": [
+      "actor.yosuke-hirata"
+    ],
+    "known_to_other_agents_at_y1_start": "NOT_PROVEN",
+    "not_runtime_episodic_memory": true,
+    "post_entry_reactions_are_only_behavioral_evidence": true
+  },
+  "linkage_to_y1_v10": {
+    "actor": "actor.yosuke-hirata",
+    "related_post_entry_evidence": [
+      "y1v10.ev.008",
+      "y1v10.ev.028",
+      "y1v10.ev.035"
+    ],
+    "relation": "CONTEXTUALIZES_CONTINGENT_BEHAVIOR_NOT_DETERMINISTIC_SCRIPT"
+  },
+  "avoid_inference": [
+    "Do not invent the friend's name, school, method of attempted suicide or precise date.",
+    "Do not assume Hirata intentionally caused the attempt.",
+    "Do not assume all schoolmates or other agents know this before disclosure.",
+    "Do not import current voting crisis to Y1_START memories."
+  ],
+  "verified": false,
+  "engine_memory_admission": false,
+  "external_independent_review": "NOT_PERFORMED"
+}

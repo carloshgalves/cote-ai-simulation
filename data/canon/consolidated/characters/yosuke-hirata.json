@@ -13,7 +13,8 @@
     "ln.y1.v075.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
     "ln.y1.v09.en.operator-provided",
-    "ln.y1.v10.en.operator-provided"
+    "ln.y1.v10.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -40,7 +41,8 @@
         "y1v6.case.yosuke-hirata.coordinate-paper-shuffle-class-consensus",
         "y1v075.case.yosuke-hirata.v075-c032",
         "y1v08.case.yosuke-hirata.v08-c002",
-        "y1v10.case.yosuke-hirata.v10-c008"
+        "y1v10.case.yosuke-hirata.v10-c008",
+        "y1v11.case.yosuke-hirata.v11-c030"
       ],
       "context_evidence_refs": [
         "y1v1.ev.012",
@@ -78,7 +80,8 @@
         "y1v6.ev.069",
         "y1v075.ev.032",
         "y1v08.ev.002",
-        "y1v10.ev.008"
+        "y1v10.ev.008",
+        "y1v11.ev.030"
       ]
     },
     "social": {
@@ -132,7 +135,9 @@
         "y1v075.case.yosuke-hirata.v075-c032",
         "y1v10.case.yosuke-hirata.v10-c001",
         "y1v10.case.yosuke-hirata.v10-c028",
-        "y1v10.case.yosuke-hirata.v10-c035"
+        "y1v10.case.yosuke-hirata.v10-c035",
+        "y1v11.case.yosuke-hirata.v11-c016",
+        "y1v11.case.yosuke-hirata.v11-c030"
       ],
       "context_evidence_refs": [
         "y1v1.ev.013",
@@ -143,7 +148,9 @@
         "y1v10.ev.001",
         "y1v10.ev.028",
         "y1v10.ev.035",
-        "y1v10.ev.063"
+        "y1v10.ev.063",
+        "y1v11.ev.016",
+        "y1v11.ev.030"
       ]
     },
     "combat": {
@@ -221,7 +228,8 @@
         "y1v4.case.yosuke-hirata.reject-unconditional-shelter-promise",
         "y1v10.case.yosuke-hirata.v10-c008",
         "y1v10.case.yosuke-hirata.v10-c028",
-        "y1v10.case.yosuke-hirata.v10-c035"
+        "y1v10.case.yosuke-hirata.v10-c035",
+        "y1v11.case.yosuke-hirata.v11-c028"
       ],
       "context_evidence_refs": [
         "y1v2.ev.024",
@@ -232,13 +240,15 @@
         "y1v4.ev.094",
         "y1v10.ev.008",
         "y1v10.ev.028",
-        "y1v10.ev.035"
+        "y1v10.ev.035",
+        "y1v11.ev.028"
       ]
     },
     "conflict": {
       "behavioral_case_refs": [
         "y1v10.case.yosuke-hirata.v10-c008",
-        "y1v10.case.yosuke-hirata.v10-c028"
+        "y1v10.case.yosuke-hirata.v10-c028",
+        "y1v11.case.yosuke-hirata.v11-c016"
       ],
       "context_evidence_refs": [
         "y1v2.ev.048",
@@ -247,7 +257,8 @@
         "y1v4.ev.063",
         "y1v4.ev.092",
         "y1v10.ev.008",
-        "y1v10.ev.028"
+        "y1v10.ev.028",
+        "y1v11.ev.016"
       ]
     },
     "exam": {
@@ -469,24 +480,28 @@
     },
     "relationship": {
       "behavioral_case_refs": [
-        "y1v6.case.yosuke-hirata.privately-infer-ayanokoji-strategist-without-disclosure"
+        "y1v6.case.yosuke-hirata.privately-infer-ayanokoji-strategist-without-disclosure",
+        "y1v11.case.yosuke-hirata.v11-c016"
       ],
       "context_evidence_refs": [
         "y1v075.ev.003",
         "y1v075.ev.009",
         "y1v075.ev.037",
-        "y1v075.ev.049"
+        "y1v075.ev.049",
+        "y1v11.ev.016"
       ]
     },
     "identity": {
       "behavioral_case_refs": [
-        "y1v10.case.yosuke-hirata.v10-c001"
+        "y1v10.case.yosuke-hirata.v10-c001",
+        "y1v11.case.yosuke-hirata.v11-c028"
       ],
       "context_evidence_refs": [
         "y1v075.ev.009",
         "y1v075.ev.049",
         "y1v10.ev.001",
-        "y1v10.ev.063"
+        "y1v10.ev.063",
+        "y1v11.ev.028"
       ]
     },
     "coercion": {
@@ -508,7 +523,10 @@
         "y1v10.case.yosuke-hirata.v10-c001",
         "y1v10.case.yosuke-hirata.v10-c008",
         "y1v10.case.yosuke-hirata.v10-c028",
-        "y1v10.case.yosuke-hirata.v10-c035"
+        "y1v10.case.yosuke-hirata.v10-c035",
+        "y1v11.case.yosuke-hirata.v11-c016",
+        "y1v11.case.yosuke-hirata.v11-c028",
+        "y1v11.case.yosuke-hirata.v11-c030"
       ],
       "context_evidence_refs": [
         "y1v08.ev.002",
@@ -516,7 +534,10 @@
         "y1v10.ev.001",
         "y1v10.ev.008",
         "y1v10.ev.028",
-        "y1v10.ev.035"
+        "y1v10.ev.035",
+        "y1v11.ev.016",
+        "y1v11.ev.028",
+        "y1v11.ev.030"
       ]
     },
     "y1_v10": {
@@ -550,9 +571,40 @@
       ]
     },
     "biography": {
+      "behavioral_case_refs": [
+        "y1v11.case.yosuke-hirata.v11-c028"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.063",
+        "y1v11.ev.028",
+        "y1v11.ev.064"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.yosuke-hirata.v11-c016",
+        "y1v11.case.yosuke-hirata.v11-c028",
+        "y1v11.case.yosuke-hirata.v11-c030"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.016",
+        "y1v11.ev.028",
+        "y1v11.ev.030",
+        "y1v11.ev.064"
+      ]
+    },
+    "goal_change": {
+      "behavioral_case_refs": [
+        "y1v11.case.yosuke-hirata.v11-c030"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.030"
+      ]
+    },
+    "knowledge": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v10.ev.063"
+        "y1v11.ev.064"
       ]
     }
   },
@@ -581,7 +633,8 @@
   },
   "goal_transition_refs": [
     "y1v10.goal.yosuke-hirata.v10-g001",
-    "y1v10.goal.yosuke-hirata.v10-g002"
+    "y1v10.goal.yosuke-hirata.v10-g002",
+    "y1v11.goal.yosuke-hirata.v11-g002"
   ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
   "y1_v075_source_status": "SOURCE_CANDIDATE_INDEPENDENT_REVIEW_NOT_PERFORMED",
@@ -678,6 +731,45 @@
     "self_reported": "A childhood friend was bullied and survived a suicide attempt; Hirata's subsequent attempts to stop abuse inform his protect-all impulse.",
     "disclosure_at_v10_not_event_time": true,
     "not_simulation_episodic_memory": true,
+    "verified": false
+  },
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_runtime_memory": true,
+    "private_disclosures_require_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.yosuke-hirata.v11-c016",
+    "y1v11.case.yosuke-hirata.v11-c028",
+    "y1v11.case.yosuke-hirata.v11-c030"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.016",
+    "y1v11.ev.028",
+    "y1v11.ev.030",
+    "y1v11.ev.064"
+  ],
+  "y1_v11_relationship_refs": [
+    "y1v11.rel.008"
+  ],
+  "y1_v11_goal_transition_refs": [
+    "y1v11.goal.yosuke-hirata.v11-g002"
+  ],
+  "y1_v11_pre_admission_biography_extension": {
+    "event_id": "evt.pre-y1.hirata-bullied-friend-attempted-suicide",
+    "friend_name": "Sugimura",
+    "friend_survived_in_coma_at_report": true,
+    "school_response": "class reassignment and strict observation after Hirata's coercion",
+    "source_evidence_refs": [
+      "y1v11.ev.028",
+      "y1v11.ev.064"
+    ],
+    "initial_background_owner": "actor.yosuke-hirata",
+    "not_public_at_y1_entry": true,
+    "revelation_to_kiyotaka_after_admission_not_initial_memory": true,
     "verified": false
   }
 }

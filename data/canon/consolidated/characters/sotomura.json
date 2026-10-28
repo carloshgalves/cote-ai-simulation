@@ -8,7 +8,8 @@
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v045.sevenseas.en.operator-provided",
-    "ln.y1.v05.sevenseas.en.operator-provided"
+    "ln.y1.v05.sevenseas.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -110,6 +111,38 @@
       "context_evidence_refs": [
         "y1v5.ev.027"
       ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v11.case.sotomura.v11-c035"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.035"
+      ]
+    },
+    "typing": {
+      "behavioral_case_refs": [
+        "y1v11.case.sotomura.v11-c035"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.035"
+      ]
+    },
+    "competence": {
+      "behavioral_case_refs": [
+        "y1v11.case.sotomura.v11-c035"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.035"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.sotomura.v11-c035"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.035"
+      ]
     }
   },
   "source_documents": [],
@@ -125,5 +158,21 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_runtime_memory": true,
+    "private_disclosures_require_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.sotomura.v11-c035"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.035"
+  ],
+  "y1_v11_relationship_refs": [],
+  "y1_v11_goal_transition_refs": []
 }

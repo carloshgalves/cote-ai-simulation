@@ -5,7 +5,8 @@
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
     "ln.y1.v00.legacyemtls.v1.0.1",
-    "ln.y1.v10.en.operator-provided"
+    "ln.y1.v10.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -36,7 +37,8 @@
     "politics": {
       "behavioral_case_refs": [
         "v0.case.tsukishiro.dual-roles",
-        "y1v10.case.tsukishiro.v10-c043"
+        "y1v10.case.tsukishiro.v10-c043",
+        "y1v11.case.tsukishiro.v11-c002"
       ],
       "context_evidence_refs": [
         "v0.char.036",
@@ -48,7 +50,9 @@
         "v0.pol.025",
         "v0.wr.040",
         "y1v10.ev.043",
-        "y1v10.ev.062"
+        "y1v10.ev.062",
+        "y1v11.ev.002",
+        "y1v11.ev.058"
       ]
     },
     "social": {
@@ -68,10 +72,14 @@
     },
     "behavior": {
       "behavioral_case_refs": [
-        "y1v10.case.tsukishiro.v10-c043"
+        "y1v10.case.tsukishiro.v10-c043",
+        "y1v11.case.tsukishiro.v11-c002",
+        "y1v11.case.tsukishiro.v11-c051"
       ],
       "context_evidence_refs": [
-        "y1v10.ev.043"
+        "y1v10.ev.043",
+        "y1v11.ev.002",
+        "y1v11.ev.051"
       ]
     },
     "coercion": {
@@ -100,9 +108,58 @@
       ]
     },
     "institution": {
+      "behavioral_case_refs": [
+        "y1v11.case.tsukishiro.v11-c002",
+        "y1v11.case.tsukishiro.v11-c051"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.062",
+        "y1v11.ev.002",
+        "y1v11.ev.051",
+        "y1v11.ev.058",
+        "y1v11.ev.068"
+      ]
+    },
+    "authority": {
+      "behavioral_case_refs": [
+        "y1v11.case.tsukishiro.v11-c002"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.002"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.tsukishiro.v11-c002",
+        "y1v11.case.tsukishiro.v11-c051"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.002",
+        "y1v11.ev.051",
+        "y1v11.ev.058",
+        "y1v11.ev.068"
+      ]
+    },
+    "interference": {
+      "behavioral_case_refs": [
+        "y1v11.case.tsukishiro.v11-c051"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.051"
+      ]
+    },
+    "deception": {
+      "behavioral_case_refs": [
+        "y1v11.case.tsukishiro.v11-c051"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.051"
+      ]
+    },
+    "integrity": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
-        "y1v10.ev.062"
+        "y1v11.ev.068"
       ]
     }
   },
@@ -147,5 +204,40 @@
     "aggression_observed": true,
     "camera_tamper_allegation_is_self_report": true,
     "do_not_backdate_public_school_knowledge": true
+  },
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_runtime_memory": true,
+    "private_disclosures_require_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.tsukishiro.v11-c002",
+    "y1v11.case.tsukishiro.v11-c051"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.002",
+    "y1v11.ev.051",
+    "y1v11.ev.058",
+    "y1v11.ev.068"
+  ],
+  "y1_v11_relationship_refs": [
+    "y1v11.rel.002",
+    "y1v11.rel.014",
+    "y1v11.rel.015"
+  ],
+  "y1_v11_goal_transition_refs": [],
+  "y1_v11_exam_channel_interference": {
+    "source_evidence_refs": [
+      "y1v11.ev.051",
+      "y1v11.ev.068"
+    ],
+    "original_commander_input_modified_before_headset_playback": true,
+    "official_class_a_win": true,
+    "channel_integrity_compromised": true,
+    "not_sanctioned_command_action": true,
+    "verified": false
   }
 }

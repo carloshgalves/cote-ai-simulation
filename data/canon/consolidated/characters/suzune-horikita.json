@@ -15,7 +15,8 @@
     "ln.y1.v075.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
     "ln.y1.v09.en.operator-provided",
-    "ln.y1.v10.en.operator-provided"
+    "ln.y1.v10.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -99,7 +100,8 @@
         "y1v09.ev.09",
         "y1v10.ev.006",
         "y1v10.ev.012",
-        "y1v10.ev.067"
+        "y1v10.ev.067",
+        "y1v11.ev.072"
       ]
     },
     "ethics": {
@@ -225,7 +227,10 @@
         "y1v10.case.suzune-horikita.v10-c003",
         "y1v10.case.suzune-horikita.v10-c025",
         "y1v10.case.suzune-horikita.v10-c026",
-        "y1v10.case.suzune-horikita.v10-c045"
+        "y1v10.case.suzune-horikita.v10-c045",
+        "y1v11.case.suzune-horikita.v11-c008",
+        "y1v11.case.suzune-horikita.v11-c014",
+        "y1v11.case.suzune-horikita.v11-c031"
       ],
       "context_evidence_refs": [
         "y1v1.ev.031",
@@ -267,7 +272,10 @@
         "y1v10.ev.003",
         "y1v10.ev.025",
         "y1v10.ev.026",
-        "y1v10.ev.045"
+        "y1v10.ev.045",
+        "y1v11.ev.008",
+        "y1v11.ev.014",
+        "y1v11.ev.031"
       ]
     },
     "persuasion": {
@@ -364,7 +372,8 @@
         "y1v09.case.suzune-horikita.v09-c09",
         "y1v10.case.suzune-horikita.v10-c007",
         "y1v10.case.suzune-horikita.v10-c012",
-        "y1v10.case.suzune-horikita.v10-c026"
+        "y1v10.case.suzune-horikita.v10-c026",
+        "y1v11.case.suzune-horikita.v11-c008"
       ],
       "context_evidence_refs": [
         "y1v1.ev.070",
@@ -448,7 +457,8 @@
         "y1v09.ev.09",
         "y1v10.ev.007",
         "y1v10.ev.012",
-        "y1v10.ev.026"
+        "y1v10.ev.026",
+        "y1v11.ev.008"
       ]
     },
     "emotion": {
@@ -555,7 +565,8 @@
         "y1v6.case.suzune-horikita.publicly-apologize-and-build-exam-cooperation",
         "y1v6.case.suzune-horikita.refuse-to-expel-kushida-despite-risk",
         "y1v10.case.suzune-horikita.v10-c006",
-        "y1v10.case.suzune-horikita.v10-c045"
+        "y1v10.case.suzune-horikita.v10-c045",
+        "y1v11.case.suzune-horikita.v11-c047"
       ],
       "context_evidence_refs": [
         "y1v1.ev.134",
@@ -573,7 +584,8 @@
         "y1v5.ev.080",
         "y1v6.ev.018",
         "y1v10.ev.006",
-        "y1v10.ev.045"
+        "y1v10.ev.045",
+        "y1v11.ev.047"
       ]
     },
     "resources": {
@@ -611,7 +623,8 @@
         "y1v4.case.suzune-horikita.test-group-assignment-hypothesis",
         "y1v45.case.suzune-horikita.analyze-fortune-reading-as-patterns",
         "y1v6.case.suzune-horikita.exploit-reverse-score-pairing-with-diagnostic-targets",
-        "y1v10.case.suzune-horikita.v10-c007"
+        "y1v10.case.suzune-horikita.v10-c007",
+        "y1v11.case.suzune-horikita.v11-c006"
       ],
       "context_evidence_refs": [
         "y1v4.ev.042",
@@ -623,7 +636,8 @@
         "y1v5.ev.066",
         "y1v6.ev.015",
         "y1v6.ev.020",
-        "y1v10.ev.007"
+        "y1v10.ev.007",
+        "y1v11.ev.006"
       ]
     },
     "epistemics": {
@@ -648,13 +662,15 @@
     },
     "politics": {
       "behavioral_case_refs": [
-        "y1v10.case.suzune-horikita.v10-c026"
+        "y1v10.case.suzune-horikita.v10-c026",
+        "y1v11.case.suzune-horikita.v11-c008"
       ],
       "context_evidence_refs": [
         "y1v4.ev.061",
         "y1v45.ev.047",
         "y1v45.ev.048",
-        "y1v10.ev.026"
+        "y1v10.ev.026",
+        "y1v11.ev.008"
       ]
     },
     "negotiation": {
@@ -864,9 +880,14 @@
       ]
     },
     "teamwork": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v11.case.suzune-horikita.v11-c014",
+        "y1v11.case.suzune-horikita.v11-c024"
+      ],
       "context_evidence_refs": [
-        "y1v6.ev.020"
+        "y1v6.ev.020",
+        "y1v11.ev.014",
+        "y1v11.ev.024"
       ]
     },
     "opponent_selection": {
@@ -924,11 +945,17 @@
       "context_evidence_refs": []
     },
     "exams": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v11.case.suzune-horikita.v11-c006",
+        "y1v11.case.suzune-horikita.v11-c024"
+      ],
       "context_evidence_refs": [
         "y1v7.ev.011",
         "y1v7.ev.018",
-        "y1v7.ev.096"
+        "y1v7.ev.096",
+        "y1v11.ev.006",
+        "y1v11.ev.024",
+        "y1v11.ev.065"
       ]
     },
     "behavior": {
@@ -941,7 +968,13 @@
         "y1v10.case.suzune-horikita.v10-c012",
         "y1v10.case.suzune-horikita.v10-c025",
         "y1v10.case.suzune-horikita.v10-c026",
-        "y1v10.case.suzune-horikita.v10-c045"
+        "y1v10.case.suzune-horikita.v10-c045",
+        "y1v11.case.suzune-horikita.v11-c006",
+        "y1v11.case.suzune-horikita.v11-c008",
+        "y1v11.case.suzune-horikita.v11-c014",
+        "y1v11.case.suzune-horikita.v11-c024",
+        "y1v11.case.suzune-horikita.v11-c031",
+        "y1v11.case.suzune-horikita.v11-c047"
       ],
       "context_evidence_refs": [
         "y1v08.ev.004",
@@ -953,7 +986,13 @@
         "y1v10.ev.012",
         "y1v10.ev.025",
         "y1v10.ev.026",
-        "y1v10.ev.045"
+        "y1v10.ev.045",
+        "y1v11.ev.006",
+        "y1v11.ev.008",
+        "y1v11.ev.014",
+        "y1v11.ev.024",
+        "y1v11.ev.031",
+        "y1v11.ev.047"
       ]
     },
     "y1_v09": {
@@ -1016,6 +1055,69 @@
       "context_evidence_refs": [
         "y1v10.ev.025"
       ]
+    },
+    "planning": {
+      "behavioral_case_refs": [
+        "y1v11.case.suzune-horikita.v11-c006",
+        "y1v11.case.suzune-horikita.v11-c014",
+        "y1v11.case.suzune-horikita.v11-c024"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.006",
+        "y1v11.ev.014",
+        "y1v11.ev.024"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.suzune-horikita.v11-c006",
+        "y1v11.case.suzune-horikita.v11-c008",
+        "y1v11.case.suzune-horikita.v11-c014",
+        "y1v11.case.suzune-horikita.v11-c024",
+        "y1v11.case.suzune-horikita.v11-c031",
+        "y1v11.case.suzune-horikita.v11-c047"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.006",
+        "y1v11.ev.008",
+        "y1v11.ev.014",
+        "y1v11.ev.024",
+        "y1v11.ev.031",
+        "y1v11.ev.047",
+        "y1v11.ev.065",
+        "y1v11.ev.072"
+      ]
+    },
+    "delegation": {
+      "behavioral_case_refs": [
+        "y1v11.case.suzune-horikita.v11-c031"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.031"
+      ]
+    },
+    "chess": {
+      "behavioral_case_refs": [
+        "y1v11.case.suzune-horikita.v11-c047"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.047",
+        "y1v11.ev.065"
+      ]
+    },
+    "learning": {
+      "behavioral_case_refs": [
+        "y1v11.case.suzune-horikita.v11-c047"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.047"
+      ]
+    },
+    "virtual_simulation": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v11.ev.072"
+      ]
     }
   },
   "source_documents": [],
@@ -1044,6 +1146,8 @@
   "goal_transition_refs": [
     "y1v10.goal.suzune-horikita.v10-g003",
     "y1v10.goal.suzune-horikita.v10-g010",
+    "y1v11.goal.suzune-horikita.v11-g003",
+    "y1v11.goal.suzune-horikita.v11-g012",
     "y1v5.goal.suzune-horikita.individual-excellence-to-reciprocal-alliance",
     "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal",
     "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack",
@@ -1142,5 +1246,40 @@
   "y1_v10_goal_transition_refs": [
     "y1v10.goal.suzune-horikita.v10-g003",
     "y1v10.goal.suzune-horikita.v10-g010"
+  ],
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_runtime_memory": true,
+    "private_disclosures_require_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.suzune-horikita.v11-c006",
+    "y1v11.case.suzune-horikita.v11-c008",
+    "y1v11.case.suzune-horikita.v11-c014",
+    "y1v11.case.suzune-horikita.v11-c024",
+    "y1v11.case.suzune-horikita.v11-c031",
+    "y1v11.case.suzune-horikita.v11-c047"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.006",
+    "y1v11.ev.008",
+    "y1v11.ev.014",
+    "y1v11.ev.024",
+    "y1v11.ev.031",
+    "y1v11.ev.047",
+    "y1v11.ev.065",
+    "y1v11.ev.072"
+  ],
+  "y1_v11_relationship_refs": [
+    "y1v11.rel.005",
+    "y1v11.rel.009",
+    "y1v11.rel.013"
+  ],
+  "y1_v11_goal_transition_refs": [
+    "y1v11.goal.suzune-horikita.v11-g003",
+    "y1v11.goal.suzune-horikita.v11-g012"
   ]
 }

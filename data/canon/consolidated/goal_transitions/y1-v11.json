@@ -1,0 +1,418 @@
+{
+  "schema_version": "canon-actor-goal-transition-reference-v1",
+  "source_id": "ln.y1.v11.en.operator-provided",
+  "authority": "HISTORICAL_EXAMPLES_NOT_EXECUTABLE_GOAL_POLICY",
+  "purpose": "Evidence of initiative, perceived beliefs, retrospective identity, strategic reversal and leadership",
+  "truth_vs_belief_gate": "Actor speech, narrator interpretation and official results separate",
+  "future_divergence_gate": "Historical transition never seeds future runtime state",
+  "stability_gate": "No fixed character weights inferred",
+  "transitions": [
+    {
+      "id": "y1v11.goal.arisu-sakayanagi.v11-g001",
+      "actor_id": "actor.arisu-sakayanagi",
+      "kind": "BELIEF_REVISION",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          445,
+          446,
+          449,
+          450
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.001",
+        "y1v11.ev.054"
+      ],
+      "prior_goal_or_means": "Genetic innate superiority assumed decisive",
+      "observed_goal_or_means_after": "Acknowledges that White Room-educated Kiyotaka is a worthy chess peer",
+      "trigger_or_new_information": "Pre-matriculation observation plus direct match and altered-channel disclosure",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulation stimuli may lead to alternative actions."
+      ],
+      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v11.goal.yosuke-hirata.v11-g002",
+      "actor_id": "actor.yosuke-hirata",
+      "kind": "RECOVERY_WITH_UNCERTAINTY",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          299,
+          304,
+          306,
+          308,
+          309,
+          310,
+          311,
+          313,
+          314,
+          315
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.028",
+        "y1v11.ev.030"
+      ],
+      "prior_goal_or_means": "Protect everyone and withdraw after forced loss",
+      "observed_goal_or_means_after": "Resumes cooperation, acknowledging limits and reliance on classmates",
+      "trigger_or_new_information": "Private confrontation with Kiyotaka and emotional crisis",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulation stimuli may lead to alternative actions."
+      ],
+      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v11.goal.suzune-horikita.v11-g003",
+      "actor_id": "actor.suzune-horikita",
+      "kind": "DELEGATED_EXECUTION",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          318,
+          319
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.031"
+      ],
+      "prior_goal_or_means": "Plan most event choices and assignments",
+      "observed_goal_or_means_after": "Leaves on-day selection discretion to Kiyotaka after preparation",
+      "trigger_or_new_information": "Kiyotaka becomes commander, Class A opponents identified",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulation stimuli may lead to alternative actions."
+      ],
+      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v11.goal.kiyotaka-ayanokoji.v11-g004",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "kind": "SITUATIONAL_PLAN",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          50,
+          51,
+          55,
+          63,
+          66,
+          318,
+          319
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.007",
+        "y1v11.ev.010"
+      ],
+      "prior_goal_or_means": "Avoid attention and unnecessary intervention",
+      "observed_goal_or_means_after": "Becomes commander; pursues direct chess contest with Arisu under protection",
+      "trigger_or_new_information": "Own protection point and direct rivalry",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulation stimuli may lead to alternative actions."
+      ],
+      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v11.goal.kakeru-ryuen.v11-g005",
+      "actor_id": "actor.kakeru-ryuen",
+      "kind": "ACTIVE_RETURN",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          375,
+          377,
+          381,
+          387,
+          389,
+          391,
+          392,
+          395,
+          396,
+          398
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.040",
+        "y1v11.ev.045",
+        "y1v11.ev.055"
+      ],
+      "prior_goal_or_means": "Had relinquished Class D leadership following V7 conflict",
+      "observed_goal_or_means_after": "Plans indirect pressure to exploit Ichinose's unwillingness to confront; commands D",
+      "trigger_or_new_information": "Ishizaki seeks help and encounter mediated by Hiyori",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulation stimuli may lead to alternative actions."
+      ],
+      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v11.goal.honami-ichinose.v11-g006",
+      "actor_id": "actor.honami-ichinose",
+      "kind": "CONFLICT_EXPOSURE",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          368,
+          370,
+          372,
+          373,
+          374
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.018",
+        "y1v11.ev.044"
+      ],
+      "prior_goal_or_means": "Lead by cooperation and trust with class peers",
+      "observed_goal_or_means_after": "Struggles to counter protracted pressure; hesitates in event selection",
+      "trigger_or_new_information": "D's adversarial tactics before and during karate event",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulation stimuli may lead to alternative actions."
+      ],
+      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v11.goal.katsuragi.v11-g007",
+      "actor_id": "actor.katsuragi",
+      "kind": "PRIORITY_CLARIFICATION",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          271,
+          278,
+          359,
+          363,
+          365,
+          366
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.026"
+      ],
+      "prior_goal_or_means": "Resent Sakayanagi and contemplate helping opposing class",
+      "observed_goal_or_means_after": "Prioritizes classmates' safety and refuses to throw event",
+      "trigger_or_new_information": "Threat from Arisu targeting earnest students",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulation stimuli may lead to alternative actions."
+      ],
+      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v11.goal.kiyotaka-ayanokoji.v11-g008",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "kind": "PLAN_FAILURE_AND_REPLAN",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          419,
+          425,
+          429,
+          440,
+          441,
+          442,
+          445,
+          446
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.049",
+        "y1v11.ev.053"
+      ],
+      "prior_goal_or_means": "Reach chess victory through legal commands",
+      "observed_goal_or_means_after": "Recognizes channel tampering and accepts unofficial rematch without changing official standings",
+      "trigger_or_new_information": "Input differs from headset instruction; Tsukishiro confirms intervention",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulation stimuli may lead to alternative actions."
+      ],
+      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v11.goal.arisu-sakayanagi.v11-g009",
+      "actor_id": "actor.arisu-sakayanagi",
+      "kind": "FAIRNESS_PRIORITY",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          440,
+          441,
+          443,
+          444,
+          445,
+          446,
+          449
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.051",
+        "y1v11.ev.052"
+      ],
+      "prior_goal_or_means": "Seek victory over White Room rival",
+      "observed_goal_or_means_after": "Prefers uncontaminated contest, confronts official, requests private rematch",
+      "trigger_or_new_information": "Discovery of manipulation after exam",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulation stimuli may lead to alternative actions."
+      ],
+      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v11.goal.ishizaki.v11-g010",
+      "actor_id": "actor.ishizaki",
+      "kind": "INITIATIVE",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          375,
+          376,
+          377,
+          378,
+          379
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.041"
+      ],
+      "prior_goal_or_means": "Save class under Kaneda command despite low competitiveness",
+      "observed_goal_or_means_after": "Seeks Ryūen's strategic contribution",
+      "trigger_or_new_information": "Realizes planned match against B likely unwinnable without strategy",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulation stimuli may lead to alternative actions."
+      ],
+      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v11.goal.hiyori-shiina.v11-g011",
+      "actor_id": "actor.hiyori-shiina",
+      "kind": "INITIATIVE",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          381,
+          382,
+          383,
+          384,
+          385,
+          386,
+          387
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.042"
+      ],
+      "prior_goal_or_means": "Keep interpersonal peace while perceiving tense relations",
+      "observed_goal_or_means_after": "Arranges get-together for potential coordination",
+      "trigger_or_new_information": "Ishizaki and Ibuki seek way forward with Ryūen",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulation stimuli may lead to alternative actions."
+      ],
+      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+    },
+    {
+      "id": "y1v11.goal.suzune-horikita.v11-g012",
+      "actor_id": "actor.suzune-horikita",
+      "kind": "LEARNING",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          319,
+          320,
+          404,
+          405,
+          408,
+          409,
+          414,
+          415,
+          416,
+          417
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.047"
+      ],
+      "prior_goal_or_means": "Has minimal chess experience",
+      "observed_goal_or_means_after": "Trains for one week and contests school chess event with commander support",
+      "trigger_or_new_information": "Event Chess among opponent repertoire and Kiyotaka's assistance",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "NOT_PROVEN_PERMANENT",
+      "contingent_alternatives": [
+        "Different simulation stimuli may lead to alternative actions."
+      ],
+      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
+    }
+  ]
+}

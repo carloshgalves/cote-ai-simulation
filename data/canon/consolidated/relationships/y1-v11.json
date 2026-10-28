@@ -1,0 +1,423 @@
+{
+  "schema_version": "canon-relationship-source-v1",
+  "source_id": "ln.y1.v11.en.operator-provided",
+  "phase": "Y1_V11_FINAL_SPECIAL_EXAM",
+  "verified": false,
+  "engine_memory_admission": false,
+  "epistemic_policy": {
+    "one_way_prior_observation_not_reciprocal": "TRUE",
+    "actor_cannot_read_narrator": "TRUE",
+    "private_claims_not_public": "TRUE",
+    "historical_not_sim_memory": "TRUE"
+  },
+  "edges": [
+    {
+      "id": "y1v11.rel.001",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v11.ev.001"
+      ],
+      "pdf_pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        445,
+        446,
+        449,
+        450
+      ],
+      "source_bound_change": "Arisu's pre-school observation is one-way; later direct chess rivalry and acknowledgment do not backdate mutual familiarity",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.002",
+      "actors": [
+        "actor.tsukishiro",
+        "actor.mashima",
+        "actor.sae-chiyabashira"
+      ],
+      "source_refs": [
+        "y1v11.ev.002"
+      ],
+      "pdf_pages": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "source_bound_change": "Acting director imposes revised exam despite teacher resistance; different authority levels",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.003",
+      "actors": [
+        "actor.sae-chiyabashira",
+        "actor.chie-hoshinomiya",
+        "actor.mashima"
+      ],
+      "source_refs": [
+        "y1v11.ev.005"
+      ],
+      "pdf_pages": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "source_bound_change": "Old student rivalry survives as professional interpersonal tension, not automatically collusion",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.004",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose",
+        "actor.ishizaki"
+      ],
+      "source_refs": [
+        "y1v11.ev.010"
+      ],
+      "pdf_pages": [
+        55,
+        62,
+        63,
+        64,
+        65,
+        66
+      ],
+      "source_bound_change": "Privately negotiated preferences align matchups; draw itself remains random",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.005",
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v11.ev.008"
+      ],
+      "pdf_pages": [
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        318,
+        319
+      ],
+      "source_bound_change": "Suzune both deflects suspicion and delegates commander role; knows only classroom and actual messages",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.006",
+      "actors": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v11.ev.011"
+      ],
+      "pdf_pages": [
+        72,
+        78,
+        80,
+        82,
+        83,
+        84,
+        85,
+        88,
+        89,
+        187,
+        188,
+        189,
+        207,
+        208,
+        209,
+        210
+      ],
+      "source_bound_change": "Private coordination and White Day ambiguities; no mandatory declared couple",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.008",
+      "actors": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v11.ev.028"
+      ],
+      "pdf_pages": [
+        295,
+        297,
+        299,
+        300,
+        301,
+        302,
+        303,
+        307,
+        308,
+        309,
+        310,
+        311
+      ],
+      "source_bound_change": "Hirata reveals pre-enrollment history only in subsequent private conversation; boundaries of third-party knowledge",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.009",
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.yukimura"
+      ],
+      "source_refs": [
+        "y1v11.ev.025"
+      ],
+      "pdf_pages": [
+        137,
+        139,
+        140,
+        141,
+        155,
+        158,
+        240,
+        241,
+        242
+      ],
+      "source_bound_change": "Collaborate on event selection, security, and provisional Katsuragi maneuver",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.010",
+      "actors": [
+        "actor.katsuragi",
+        "actor.arisu-sakayanagi",
+        "actor.yukimura"
+      ],
+      "source_refs": [
+        "y1v11.ev.026"
+      ],
+      "pdf_pages": [
+        271,
+        273,
+        276,
+        278,
+        279,
+        280,
+        363,
+        364,
+        365,
+        366
+      ],
+      "source_bound_change": "Katsuragi's apparent willingness to throw is overridden by pressure from Arisu about other classmates",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.011",
+      "actors": [
+        "actor.kakeru-ryuen",
+        "actor.ishizaki",
+        "actor.mio-ibuki",
+        "actor.hiyori-shiina"
+      ],
+      "source_refs": [
+        "y1v11.ev.040"
+      ],
+      "pdf_pages": [
+        375,
+        377,
+        381,
+        383,
+        387,
+        389,
+        391,
+        392,
+        393,
+        395,
+        396,
+        398
+      ],
+      "source_bound_change": "Invitation and preparation revive Ryuen role; each participant has different motivations",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.012",
+      "actors": [
+        "actor.honami-ichinose",
+        "actor.kakeru-ryuen"
+      ],
+      "source_refs": [
+        "y1v11.ev.044"
+      ],
+      "pdf_pages": [
+        170,
+        171,
+        172,
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        436,
+        437
+      ],
+      "source_bound_change": "Class D gradual pressure and Class B defense; success in source not universal",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.013",
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.hashimoto"
+      ],
+      "source_refs": [
+        "y1v11.ev.047"
+      ],
+      "pdf_pages": [
+        402,
+        404,
+        405,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417
+      ],
+      "source_bound_change": "Student chess match with external commander assistance",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.014",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.tsukishiro"
+      ],
+      "source_refs": [
+        "y1v11.ev.051"
+      ],
+      "pdf_pages": [
+        433,
+        434,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445
+      ],
+      "source_bound_change": "Arisu confronts acting director when computer intervention is disclosed; not proof she knew beforehand",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.015",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.tsukishiro"
+      ],
+      "source_refs": [
+        "y1v11.ev.049"
+      ],
+      "pdf_pages": [
+        429,
+        433,
+        440,
+        441,
+        442,
+        443,
+        444
+      ],
+      "source_bound_change": "Actor knows original command not reproduced; power to expose institution is limited",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.016",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v11.ev.052"
+      ],
+      "pdf_pages": [
+        445,
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453
+      ],
+      "source_bound_change": "Private chess resumed from altered position; public result remains separate",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false
+    }
+  ],
+  "excluded_unmodeled_relation": {
+    "candidate_id": "y1v11.rel.007",
+    "reason": "Mii-chan actor pack identity absent from current actor index; do not fabricate canonical ID",
+    "pdf_pages": [
+      129,
+      130,
+      131,
+      132,
+      133,
+      148,
+      149,
+      150,
+      151
+    ]
+  }
+}

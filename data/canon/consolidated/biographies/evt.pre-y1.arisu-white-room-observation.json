@@ -1,0 +1,47 @@
+{
+  "schema_version": "canon-biography-event-v1",
+  "id": "evt.pre-y1.arisu-white-room-observation",
+  "authority": "PRE_ENROLLMENT_BIOGRAPHY_REFERENCE_ONLY",
+  "event_time": "PRE_Y1_CHILDHOOD_UNDATED",
+  "status": "FIRST_PERSON_RETROSPECTIVE",
+  "source_id": "ln.y1.v11.en.operator-provided",
+  "source_pdf_pages": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "evidence_refs": [
+    "y1v11.ev.001",
+    "y1v11.ev.057"
+  ],
+  "event": "Arisu accompanies father to white facility and observes child Kiyotaka solving chess tasks through glass; forms motivation to test inherited vs taught talent.",
+  "initial_known_by": [
+    "actor.arisu-sakayanagi"
+  ],
+  "not_initially_public": true,
+  "child_kiyotaka_observation_not_mutual_awareness": true,
+  "belief_record": {
+    "holder": "actor.arisu-sakayanagi",
+    "belief": "genius is principally innate; education cannot manufacture innate giftedness",
+    "assertion_status": "CHARACTER_BELIEF_NOT_SCIENTIFIC_PROOF",
+    "later_can_update_from_direct_experience": true
+  },
+  "no_unwarranted_certification": [
+    "No genetic experiment results are verified by Arisu's theory",
+    "Statements made by her father regarding Kiyotaka's parents are secondhand to Arisu",
+    "Kiyotaka did not observe Arisu behind the one-way mirror"
+  ],
+  "baseline_gate": {
+    "actor_initial_background": [
+      "actor.arisu-sakayanagi"
+    ],
+    "not_runtime_episodic_memory": true,
+    "no_backdating_of_later_exam_duel": true
+  },
+  "verified": false,
+  "engine_memory_admission": false,
+  "external_independent_review": "NOT_PERFORMED"
+}

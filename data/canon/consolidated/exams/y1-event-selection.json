@@ -1,0 +1,347 @@
+{
+  "schema_version": "canon-event-selection-reference-v1",
+  "exam_id": "exam.y1.event-selection",
+  "source_id": "ln.y1.v11.en.operator-provided",
+  "authority": "CANON_REFERENCE_NOT_EXECUTABLE",
+  "title": "Y1 V11 — Event Selection Exam",
+  "source_locator_basis": "1-based physical PDF page",
+  "pdf_total_pages": 476,
+  "original_pdf_committed": false,
+  "verified": false,
+  "external_independent_review": "NOT_PERFORMED",
+  "engine_memory_admission": false,
+  "executable": false,
+  "goal_runtime_auto_update": false,
+  "time": {
+    "announce": "Y1_MARCH_08",
+    "proposal_deadline": "Y1_MARCH_14_END_OF_DAY",
+    "opposing_event_rules_reveal": "Y1_MARCH_15",
+    "exam": "Y1_MARCH_22",
+    "dates_not_absolute_calendar_year": true,
+    "source_pdf_pages": [
+      27,
+      28,
+      32,
+      33,
+      34,
+      35
+    ]
+  },
+  "pairing": {
+    "lottery_decides_choice_right": true,
+    "lottery_winner": "actor.kaneda",
+    "pairings": [
+      [
+        "CLASS_A",
+        "CLASS_C"
+      ],
+      [
+        "CLASS_B",
+        "CLASS_D"
+      ]
+    ],
+    "source_pdf_pages": [
+      62,
+      63,
+      64,
+      65,
+      66
+    ],
+    "school_randomness_separate_from_pre_arranged_actor_choices": true,
+    "secret_communications_by_kiyotaka_do_not_control_ballot": true
+  },
+  "event_proposals": {
+    "proposed_per_class": 10,
+    "shortlisted_per_class_on_exam_day": 5,
+    "combined_shortlist_total": 10,
+    "school_draws": 7,
+    "draw_algorithm": "UNKNOWN; random automatic per staff explanation; possible intervention not formally ruled out",
+    "source_pdf_pages": [
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      43,
+      44,
+      448
+    ],
+    "school_checks_prior_to_final_submission": true,
+    "duplicates_across_same_class_rejected": true,
+    "submitted_event_retraction_not_allowed": true,
+    "obscure_or_overly_complex_events_rejected": true,
+    "tiebreaker_defined_for_every_event": true,
+    "events_without_time_limit_may_be_rejected": true,
+    "school_supplies_questions_for_written_exams": true,
+    "number_participants_different_for_own_ten_proposals": true,
+    "participants_per_event_min": 1,
+    "participants_per_event_max": 20,
+    "more_than_ten_persons_events_max": 2,
+    "each_student_one_event_until_all_classmates_have_participated": true,
+    "commander_prohibited_from_direct_participation": true,
+    "school_autofills_missing_proposals": true,
+    "source_mode": "SCHOOL_TEACHER_HANDOUT"
+  },
+  "command_runtime_reference": {
+    "one_commander_per_class": true,
+    "commander_not_event_player": true,
+    "intervention_rights_event_specific_school_approved": true,
+    "participant_selection_after_draw": true,
+    "selecting_participants_seconds_per_student_approximately": 30,
+    "missing_participant_auto_random": true,
+    "excess_selections_auto_random_remove": true,
+    "one_headset_receives_instructions_per_class_per_event": true,
+    "text_to_speech_messages_only": true,
+    "teacher_policy_filters_messages": true,
+    "direct_phone_instruction_not_allowed": true,
+    "live_screened_observation": true,
+    "source_pdf_pages": [
+      36,
+      37,
+      38,
+      67,
+      68,
+      69,
+      70,
+      71
+    ],
+    "preserve_written_command_before_channel": "YES_SOURCE_STATED_AFTER_REVELATION",
+    "require_incoming_vs_played_message_audit": true
+  },
+  "scoring": {
+    "event_winner_transfer_class_points": 30,
+    "event_loser_class_points": -30,
+    "seven_events_always_run_even_when_winner_decided": true,
+    "overall_winner_more_than_half_events": true,
+    "overall_winner_bonus_class_points_from_school": 100,
+    "maximum_gain_all_seven": 310,
+    "one_match_result_if_4_wins_and_3_losses": {
+      "winner_class_delta": 130,
+      "loser_class_delta": -30
+    },
+    "deficit_liability": "Negative class points displayed as zero and owed to school",
+    "source_pdf_pages": [
+      34,
+      40,
+      41
+    ],
+    "formula": "per_class = 30*(event_wins-event_losses) + (overall_winner ? 100 : 0)"
+  },
+  "commander_penalty": {
+    "loser_expulsion_if_no_protection_point": true,
+    "protection_point_if_present_consumed_to_prevent_expulsion": true,
+    "winning_commander_private_points": "YES_AMOUNT_UNSPECIFIED",
+    "source_pdf_pages": [
+      36,
+      37,
+      38,
+      318,
+      319
+    ]
+  },
+  "observed_events": {
+    "class_a_vs_c": {
+      "official_winner": "CLASS_A",
+      "event_wins": {
+        "CLASS_A": 4,
+        "CLASS_C": 3
+      },
+      "class_point_delta": {
+        "CLASS_A": 130,
+        "CLASS_C": -30
+      },
+      "official_status": "SCHOOL_DECLARED_VALID_BUT_CONTESTED_CHESS_CHANNEL",
+      "known_sequence": [
+        {
+          "order": 1,
+          "name": "Basketball",
+          "winner": "CLASS_C",
+          "source_pages": [
+            334,
+            335,
+            336,
+            343,
+            345
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Typing",
+          "winner": "CLASS_C",
+          "source_pages": [
+            348,
+            349,
+            350
+          ]
+        },
+        {
+          "order": 3,
+          "name": "Math Exam",
+          "winner": "CLASS_A",
+          "source_pages": [
+            351,
+            352,
+            353,
+            354,
+            355
+          ]
+        },
+        {
+          "order": 4,
+          "name": "UNRESOLVED_EVENT_ID",
+          "winner": "CLASS_A",
+          "source_pages": [
+            355,
+            356,
+            357,
+            358
+          ]
+        },
+        {
+          "order": 5,
+          "name": "Flash Mental Arithmetic",
+          "winner": "CLASS_A",
+          "source_pages": [
+            359,
+            360,
+            361,
+            362,
+            363,
+            364,
+            365
+          ]
+        },
+        {
+          "order": 6,
+          "name": "Archery",
+          "winner": "CLASS_C",
+          "source_pages": [
+            399,
+            400
+          ]
+        },
+        {
+          "order": 7,
+          "name": "Chess",
+          "winner": "CLASS_A_OFFICIAL",
+          "source_pages": [
+            400,
+            401,
+            402,
+            408,
+            414,
+            425,
+            428,
+            429
+          ]
+        }
+      ],
+      "chess": {
+        "student_players": [
+          "actor.suzune-horikita",
+          "actor.hashimoto"
+        ],
+        "commanders": [
+          "actor.kiyotaka-ayanokoji",
+          "actor.arisu-sakayanagi"
+        ],
+        "official_result": "CLASS_A_WIN",
+        "authoritative_message_discrepancy": {
+          "original_input_actor": "actor.kiyotaka-ayanokoji",
+          "tampering_actor": "actor.tsukishiro",
+          "source": "OFFICIAL_ACTING_DIRECTOR_DISCLOSURE_AND_FIRST_PERSON_OBSERVATION",
+          "observed_delay_seconds_approx": 30,
+          "normal_lag_seconds_approx": 10,
+          "command_changed_before_speech_output": true,
+          "channel_integrity_compromised": true
+        },
+        "private_rematch": {
+          "location": "LIBRARY",
+          "resume_from_before_adulterated_move": true,
+          "winner": "actor.kiyotaka-ayanokoji",
+          "official_exam_overturned": false,
+          "source_pdf_pages": [
+            445,
+            446,
+            447,
+            448,
+            449,
+            450
+          ]
+        },
+        "chess_not_global_rating": "PRIVATE_RESUMPTION_NOT_INDEPENDENT_FULL_MATCH"
+      }
+    },
+    "class_b_vs_d": {
+      "official_winner": "CLASS_D",
+      "reported_class_d_delta": 190,
+      "inferred_wins_from_delta": {
+        "CLASS_D": 5,
+        "CLASS_B": 2
+      },
+      "inferred_class_b_delta": -90,
+      "source_pdf_pages": [
+        368,
+        370,
+        371,
+        372,
+        373,
+        374,
+        436,
+        437
+      ],
+      "fifth_event_karate": {
+        "result": "CLASS_B_FORFEIT_BY_TEACHER_INTERVENTION_AFTER_INABILITY_TO_SELECT_PLAYER",
+        "winner": "CLASS_D",
+        "source_pdf_pages": [
+          371,
+          372,
+          373,
+          374
+        ]
+      },
+      "long_term_pressure": {
+        "source": "RETROSPECTIVE_ACTOR_PLAN",
+        "actors": [
+          "actor.kakeru-ryuen",
+          "actor.ishizaki",
+          "actor.mio-ibuki"
+        ],
+        "not_inevitable": true
+      }
+    }
+  },
+  "pre_exam_class_points": {
+    "CLASS_A": 1001,
+    "CLASS_B": 640,
+    "CLASS_C": 377,
+    "CLASS_D": 318,
+    "source_pdf_pages": [
+      40
+    ]
+  },
+  "provisional_post_exam_rank_change": "Former C reverts to D, former D rises to C; CLASS_A and CLASS_B remain ahead",
+  "source_pdf_pages": [
+    436,
+    437
+  ],
+  "claims_not_to_promote": [
+    "One full chess win guarantees stronger player universally",
+    "Tsukishiro-altered move is legal match event input",
+    "School lottery was actually modified; source only suspects that later event order may not be random",
+    "Reported class point totals prove all unspecified external transactions",
+    "Moral intimidation should be default agent strategy"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.060",
+    "y1v11.ev.061",
+    "y1v11.ev.062",
+    "y1v11.ev.063",
+    "y1v11.ev.066",
+    "y1v11.ev.067",
+    "y1v11.ev.068",
+    "y1v11.ev.069"
+  ]
+}

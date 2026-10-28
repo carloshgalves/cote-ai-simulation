@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.kei-karuizawa",
   "title": "Fornece informações sobre sociabilidade e negocia limites da relação com Kiyotaka",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Fornece informações sobre sociabilidade e negocia limites da relação com Kiyotaka",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Oferece percepções sobre colegas relata preocupações e discute participação no exame",
+  "observed_result": "Kiyotaka obtém dados sociais parciais; os dois mantêm incertezas pessoais",
+  "epistemic_limits": "Acesso social não é leitura mental ou prova de namoro recíproco",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -24,14 +24,18 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.yosuke-hirata",
+    "actor.kikyo-kushida"
+  ],
   "capabilities_supported": [
     "relationship",
     "information",
     "observation"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Conhece redes sociais e crise de Hirata, mas não todas as habilidades técnicas dos colegas",
+  "counterfactual_test": "Se Kei desconhecer algo ou recusar contato, Kiyotaka deve buscar outra fonte",
   "topics": [
     "behavior",
     "relationship",
@@ -51,5 +55,62 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Kiyotaka precisa avaliar aptidões e relações pessoais na turma",
+    "actor_objective_at_time": "Auxiliar informacionalmente e negociar limites de proximidade",
+    "actor_known_information": [
+      "Conhece redes sociais e crise de Hirata, mas não todas as habilidades técnicas dos colegas"
+    ],
+    "beliefs_and_uncertainties": [
+      "Acesso social não é leitura mental ou prova de namoro recíproco"
+    ],
+    "available_alternatives": [
+      "Se Kei desconhecer algo ou recusar contato, Kiyotaka deve buscar outra fonte"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Oferece percepções sobre colegas",
+      "relata preocupações e discute participação no exame"
+    ],
+    "observed_outcome": "Kiyotaka obtém dados sociais parciais; os dois mantêm incertezas pessoais",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "interlocutor"
+      },
+      {
+        "actor_id": "actor.yosuke-hirata",
+        "role": "terceiro discutido"
+      },
+      {
+        "actor_id": "actor.kikyo-kushida",
+        "role": "terceira discutida"
+      }
+    ],
+    "causal_and_epistemic_limits": "Acesso social não é leitura mental ou prova de namoro recíproco",
+    "counterfactual_probes": [
+      "Se Kei desconhecer algo ou recusar contato, Kiyotaka deve buscar outra fonte"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.011",
+        "pdf_pages": [
+          72,
+          74,
+          78,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          88,
+          89
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.tsukishiro",
   "title": "Defende novos exames e desconsidera resistência dos professores",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Defende novos exames e desconsidera resistência dos professores",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Apresenta política, provoca manifestação e mantém decisão apesar da oposição de Mashima",
+  "observed_result": "A medida permanece encaminhada apesar do protesto",
+  "epistemic_limits": "Poder de cargo não equivale a legitimidade irrestrita nem a resultado garantido",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -20,14 +20,17 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.mashima",
+    "actor.sae-chiyabashira"
+  ],
   "capabilities_supported": [
     "institution",
     "politics",
     "authority"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Sabe do plano de exames e da posição formal de diretor interino; escuta objeções docentes",
+  "counterfactual_test": "Uma autoridade superior ou recurso válido poderia limitar ou suspender o plano",
   "topics": [
     "behavior",
     "institution",
@@ -47,5 +50,53 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Reunião administrativa para alterar exames de calouros",
+    "actor_objective_at_time": "Aplicar linha institucional mais coercitiva",
+    "actor_known_information": [
+      "Sabe do plano de exames e da posição formal de diretor interino; escuta objeções docentes"
+    ],
+    "beliefs_and_uncertainties": [
+      "Poder de cargo não equivale a legitimidade irrestrita nem a resultado garantido"
+    ],
+    "available_alternatives": [
+      "Uma autoridade superior ou recurso válido poderia limitar ou suspender o plano"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Apresenta política, provoca manifestação e mantém decisão apesar da oposição de Mashima"
+    ],
+    "observed_outcome": "A medida permanece encaminhada apesar do protesto",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.mashima",
+        "role": "opositor"
+      },
+      {
+        "actor_id": "actor.sae-chiyabashira",
+        "role": "docente que presencia"
+      }
+    ],
+    "causal_and_epistemic_limits": "Poder de cargo não equivale a legitimidade irrestrita nem a resultado garantido",
+    "counterfactual_probes": [
+      "Uma autoridade superior ou recurso válido poderia limitar ou suspender o plano"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.002",
+        "pdf_pages": [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.mashima",
   "title": "Protesta contra prova suplementar que força expulsões",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Protesta contra prova suplementar que força expulsões",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Pede a palavra e contesta o caráter forçado das expulsões e a ausência de justificação",
+  "observed_result": "Registra dissenso, sem lograr veto administrativo na cena",
+  "epistemic_limits": "Coragem de discordar não significa competência para anular ato superior",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -18,14 +18,17 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.tsukishiro",
+    "actor.sae-chiyabashira"
+  ],
   "capabilities_supported": [
     "ethics",
     "institution",
     "initiative"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Primeiro ano tinha pouca evasão e o regulamento difere das expectativas anteriores",
+  "counterfactual_test": "Com apoio institucional formal, protesto poderia produzir outro resultado",
   "topics": [
     "behavior",
     "ethics",
@@ -45,5 +48,51 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Tsukishiro anuncia exame extraordinário potencialmente expulsivo",
+    "actor_objective_at_time": "Defender tratamento justo e limitar expulsões impostas",
+    "actor_known_information": [
+      "Primeiro ano tinha pouca evasão e o regulamento difere das expectativas anteriores"
+    ],
+    "beliefs_and_uncertainties": [
+      "Coragem de discordar não significa competência para anular ato superior"
+    ],
+    "available_alternatives": [
+      "Com apoio institucional formal, protesto poderia produzir outro resultado"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Pede a palavra e contesta o caráter forçado das expulsões e a ausência de justificação"
+    ],
+    "observed_outcome": "Registra dissenso, sem lograr veto administrativo na cena",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.tsukishiro",
+        "role": "superior questionado"
+      },
+      {
+        "actor_id": "actor.sae-chiyabashira",
+        "role": "colega presente"
+      }
+    ],
+    "causal_and_epistemic_limits": "Coragem de discordar não significa competência para anular ato superior",
+    "counterfactual_probes": [
+      "Com apoio institucional formal, protesto poderia produzir outro resultado"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.003",
+        "pdf_pages": [
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

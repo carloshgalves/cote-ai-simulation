@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.yukimura",
   "title": "Avalia e questiona aposta estatística nos eventos de sorte",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Avalia e questiona aposta estatística nos eventos de sorte",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Questiona a aproximação informal e calcula chance global muito inferior",
+  "observed_result": "A proposta é recebida com mais cautela, sem garantia de número exato",
+  "epistemic_limits": "Estimativa oral de 5-10% não é teorema nem probabilidade fixa",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -17,13 +17,17 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.miyake",
+    "actor.hasebe",
+    "actor.kiyotaka-ayanokoji"
+  ],
   "capabilities_supported": [
     "reasoning",
     "strategy"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "A classificação depende de escolha de sete provas e de pelo menos quatro vitórias",
+  "counterfactual_test": "Com distribuição diferente de eventos, chance de vitória precisa ser recalculada",
   "topics": [
     "behavior",
     "reasoning",
@@ -42,5 +46,54 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Miyake sugere cinco jogos de sorte",
+    "actor_objective_at_time": "Calibrar risco e impedir otimismo matemático injustificado",
+    "actor_known_information": [
+      "A classificação depende de escolha de sete provas e de pelo menos quatro vitórias"
+    ],
+    "beliefs_and_uncertainties": [
+      "Estimativa oral de 5-10% não é teorema nem probabilidade fixa"
+    ],
+    "available_alternatives": [
+      "Com distribuição diferente de eventos, chance de vitória precisa ser recalculada"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Questiona a aproximação informal e calcula chance global muito inferior"
+    ],
+    "observed_outcome": "A proposta é recebida com mais cautela, sem garantia de número exato",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.miyake",
+        "role": "autor da proposta"
+      },
+      {
+        "actor_id": "actor.hasebe",
+        "role": "colega presente"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "ouvinte"
+      }
+    ],
+    "causal_and_epistemic_limits": "Estimativa oral de 5-10% não é teorema nem probabilidade fixa",
+    "counterfactual_probes": [
+      "Com distribuição diferente de eventos, chance de vitória precisa ser recalculada"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.013",
+        "pdf_pages": [
+          100,
+          101,
+          102,
+          103
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

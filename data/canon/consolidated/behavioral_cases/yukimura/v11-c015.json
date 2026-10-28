@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.yukimura",
   "title": "Pede cautela sobre espionagem durante discussão dos eventos",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Pede cautela sobre espionagem durante discussão dos eventos",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Propõe sentinelas ouve contestação de Suzune sobre direito de passagem e eficácia",
+  "observed_result": "Turma reavalia medida proposta, sem tratar suspeita como identificação de espião",
+  "epistemic_limits": "Propor guarda não autoriza barrar passagem pública",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -17,14 +17,17 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.kiyotaka-ayanokoji"
+  ],
   "capabilities_supported": [
     "security",
     "information",
     "planning"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Sabe que competidores poderiam escutar o corredor; não tem prova de espionagem em cada momento",
+  "counterfactual_test": "Em sala legitimamente restrita, mecanismos autorizados poderiam reduzir vazamento",
   "topics": [
     "behavior",
     "security",
@@ -44,5 +47,51 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Debate de estratégia em sala acessível por corredores comuns",
+    "actor_objective_at_time": "Evitar vazamento sem violar circulação escolar",
+    "actor_known_information": [
+      "Sabe que competidores poderiam escutar o corredor; não tem prova de espionagem em cada momento"
+    ],
+    "beliefs_and_uncertainties": [
+      "Propor guarda não autoriza barrar passagem pública"
+    ],
+    "available_alternatives": [
+      "Em sala legitimamente restrita, mecanismos autorizados poderiam reduzir vazamento"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Propõe sentinelas",
+      "ouve contestação de Suzune sobre direito de passagem e eficácia"
+    ],
+    "observed_outcome": "Turma reavalia medida proposta, sem tratar suspeita como identificação de espião",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.suzune-horikita",
+        "role": "avaliadora da proposta"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "observador"
+      }
+    ],
+    "causal_and_epistemic_limits": "Propor guarda não autoriza barrar passagem pública",
+    "counterfactual_probes": [
+      "Em sala legitimamente restrita, mecanismos autorizados poderiam reduzir vazamento"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.015",
+        "pdf_pages": [
+          137,
+          139,
+          140,
+          141
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

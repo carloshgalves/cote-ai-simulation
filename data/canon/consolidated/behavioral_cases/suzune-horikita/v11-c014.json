@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.suzune-horikita",
   "title": "Organiza catálogo de capacidades da turma e eventos propostos",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Organiza catálogo de capacidades da turma e eventos propostos",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Convoca discussão, atribui tarefas de identificar aptidões e organiza propostas avaliáveis",
+  "observed_result": "Forma processo de preparação, sujeito a indisponibilidade e lacunas",
+  "epistemic_limits": "Planejamento não cria talento ou cooperação automática",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -24,14 +24,18 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.yukimura",
+    "actor.yosuke-hirata"
+  ],
   "capabilities_supported": [
     "planning",
     "leadership",
     "teamwork"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Conhece limites regulamentares, ausências e dificuldade de mobilizar colegas",
+  "counterfactual_test": "Se baixa colaboração persistir, deve reduzir confiança em escalações estimadas",
   "topics": [
     "behavior",
     "planning",
@@ -51,5 +55,61 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Classe precisa preparar catálogo de eventos e Hirata se afasta",
+    "actor_objective_at_time": "Mapear capacidades reais e coordenar propostas coletivas",
+    "actor_known_information": [
+      "Conhece limites regulamentares, ausências e dificuldade de mobilizar colegas"
+    ],
+    "beliefs_and_uncertainties": [
+      "Planejamento não cria talento ou cooperação automática"
+    ],
+    "available_alternatives": [
+      "Se baixa colaboração persistir, deve reduzir confiança em escalações estimadas"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Convoca discussão, atribui tarefas de identificar aptidões e organiza propostas avaliáveis"
+    ],
+    "observed_outcome": "Forma processo de preparação, sujeito a indisponibilidade e lacunas",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante que usa dados"
+      },
+      {
+        "actor_id": "actor.yukimura",
+        "role": "analista"
+      },
+      {
+        "actor_id": "actor.yosuke-hirata",
+        "role": "colega ausente"
+      }
+    ],
+    "causal_and_epistemic_limits": "Planejamento não cria talento ou cooperação automática",
+    "counterfactual_probes": [
+      "Se baixa colaboração persistir, deve reduzir confiança em escalações estimadas"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.014",
+        "pdf_pages": [
+          110,
+          112,
+          115,
+          118,
+          120,
+          125,
+          137,
+          140,
+          142,
+          155,
+          158
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

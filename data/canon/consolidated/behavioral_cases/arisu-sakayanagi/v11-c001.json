@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.arisu-sakayanagi",
   "title": "Observa Kiyotaka na White Room e formula tese sobre talento inato, contrapondo educação",
   "context": "Pre-enrollment revelation, biographical example",
-  "observed_actions": "Observa Kiyotaka na White Room e formula tese sobre talento inato, contrapondo educação",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Past event is biographical, actor-scoped and not runtime-episodic; source's later disclosure is not its occurrence time",
+  "observed_actions": "Observa o desempenho e formula uma crença pessoal deseja enfrentá-lo no futuro",
+  "observed_result": "Forma uma motivação biográfica sem contato recíproco com Kiyotaka",
+  "epistemic_limits": "Teoria genética é crença subjetiva; o menino não adquire conhecimento da observadora",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -19,14 +19,16 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
   "capabilities_supported": [
     "biography",
     "identity",
     "belief"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Observa Kiyotaka jogar xadrez através de vidro unidirecional; ouve avaliações paternas, mas não conhece resultados genéticos",
+  "counterfactual_test": "Se a observação fosse diferente, sua hipótese e desejo de duelo poderiam não surgir",
   "topics": [
     "behavior",
     "biography",
@@ -46,5 +48,49 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "PRE_Y1_BIOGRAPHY",
+    "trigger": "Infância: visita à White Room acompanhando o pai",
+    "actor_objective_at_time": "Investigar rivalidade entre talento inato e educação",
+    "actor_known_information": [
+      "Observa Kiyotaka jogar xadrez através de vidro unidirecional; ouve avaliações paternas, mas não conhece resultados genéticos"
+    ],
+    "beliefs_and_uncertainties": [
+      "Teoria genética é crença subjetiva; o menino não adquire conhecimento da observadora"
+    ],
+    "available_alternatives": [
+      "Se a observação fosse diferente, sua hipótese e desejo de duelo poderiam não surgir"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Observa o desempenho e formula uma crença pessoal",
+      "deseja enfrentá-lo no futuro"
+    ],
+    "observed_outcome": "Forma uma motivação biográfica sem contato recíproco com Kiyotaka",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "menino observado sem consciência da observadora"
+      }
+    ],
+    "causal_and_epistemic_limits": "Teoria genética é crença subjetiva; o menino não adquire conhecimento da observadora",
+    "counterfactual_probes": [
+      "Se a observação fosse diferente, sua hipótese e desejo de duelo poderiam não surgir"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.001",
+        "pdf_pages": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

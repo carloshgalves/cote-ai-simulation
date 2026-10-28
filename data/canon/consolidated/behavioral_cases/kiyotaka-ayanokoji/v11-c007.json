@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.kiyotaka-ayanokoji",
   "title": "Voluntaria-se comandante e busca confronto com Arisu usando ponto de proteção",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Voluntaria-se comandante e busca confronto com Arisu usando ponto de proteção",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Voluntaria-se e apresenta justificativa pública de assumir responsabilidade conserva motivo privado do duelo",
+  "observed_result": "Passa a ocupar comando, arriscando consumo do ponto de proteção",
+  "epistemic_limits": "Motivo privado e argumento público são diferentes; comando não concede onisciência",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -19,14 +19,18 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.arisu-sakayanagi",
+    "actor.kei-karuizawa"
+  ],
   "capabilities_supported": [
     "initiative",
     "strategy",
     "planning"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Tem ponto de proteção e prevê Arisu como possível comandante; não controla emparelhamento",
+  "counterfactual_test": "Se turma rejeitar a candidatura ou pareamento mudar, ele não obtém o duelo desejado",
   "topics": [
     "behavior",
     "initiative",
@@ -46,5 +50,57 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Colegas questionam ponto de proteção de Kiyotaka; comandante ainda não eleito",
+    "actor_objective_at_time": "Assumir comando para enfrentar Arisu e controlar exposição",
+    "actor_known_information": [
+      "Tem ponto de proteção e prevê Arisu como possível comandante; não controla emparelhamento"
+    ],
+    "beliefs_and_uncertainties": [
+      "Motivo privado e argumento público são diferentes; comando não concede onisciência"
+    ],
+    "available_alternatives": [
+      "Se turma rejeitar a candidatura ou pareamento mudar, ele não obtém o duelo desejado"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Voluntaria-se e apresenta justificativa pública de assumir responsabilidade",
+      "conserva motivo privado do duelo"
+    ],
+    "observed_outcome": "Passa a ocupar comando, arriscando consumo do ponto de proteção",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.suzune-horikita",
+        "role": "liderança que apoia"
+      },
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "rival pretendida"
+      },
+      {
+        "actor_id": "actor.kei-karuizawa",
+        "role": "colega observadora"
+      }
+    ],
+    "causal_and_epistemic_limits": "Motivo privado e argumento público são diferentes; comando não concede onisciência",
+    "counterfactual_probes": [
+      "Se turma rejeitar a candidatura ou pareamento mudar, ele não obtém o duelo desejado"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.007",
+        "pdf_pages": [
+          47,
+          50,
+          51,
+          52,
+          53,
+          54
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

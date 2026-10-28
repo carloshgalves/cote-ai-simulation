@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.kaneda",
   "title": "Ganha sorteio e formaliza escolha de Classe B como adversária",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Ganha sorteio e formaliza escolha de Classe B como adversária",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Declara B como adversária e confirma escolha a Mashima",
+  "observed_result": "D enfrenta B e sobra confronto A contra C",
+  "epistemic_limits": "Não atribuir resultado do sorteio aos planos privados de Kiyotaka",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -17,13 +17,17 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.honami-ichinose",
+    "actor.kiyotaka-ayanokoji",
+    "actor.arisu-sakayanagi"
+  ],
   "capabilities_supported": [
     "exams",
     "leadership"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Sabe que o vencedor do sorteio escolhe e as outras duas classes serão emparelhadas",
+  "counterfactual_test": "Se Kaneda escolhesse C ou A, confrontos futuros seriam diferentes",
   "topics": [
     "behavior",
     "exams",
@@ -42,5 +46,54 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Sorteio oferece a Kaneda o direito formal de escolher adversário",
+    "actor_objective_at_time": "Escolher confronto que D julga promissor",
+    "actor_known_information": [
+      "Sabe que o vencedor do sorteio escolhe e as outras duas classes serão emparelhadas"
+    ],
+    "beliefs_and_uncertainties": [
+      "Não atribuir resultado do sorteio aos planos privados de Kiyotaka"
+    ],
+    "available_alternatives": [
+      "Se Kaneda escolhesse C ou A, confrontos futuros seriam diferentes"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Declara B como adversária e confirma escolha a Mashima"
+    ],
+    "observed_outcome": "D enfrenta B e sobra confronto A contra C",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.honami-ichinose",
+        "role": "oponente escolhida"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante emparelhado"
+      },
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "comandante de A"
+      }
+    ],
+    "causal_and_epistemic_limits": "Não atribuir resultado do sorteio aos planos privados de Kiyotaka",
+    "counterfactual_probes": [
+      "Se Kaneda escolhesse C ou A, confrontos futuros seriam diferentes"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.009",
+        "pdf_pages": [
+          62,
+          63,
+          64,
+          65
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

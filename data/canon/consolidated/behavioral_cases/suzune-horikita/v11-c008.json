@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.suzune-horikita",
   "title": "Desfaz suspeitas contra Kiyotaka e articula sua escolha como comandante",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Desfaz suspeitas contra Kiyotaka e articula sua escolha como comandante",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Intervém em defesa dele e aceita o voluntariado com obrigações públicas",
+  "observed_result": "Conflito não some, mas comando fica definido sem ela assumir o risco",
+  "epistemic_limits": "A defesa pública não prova que Suzune conhece todos os votos",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -21,14 +21,18 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.ken-sudo",
+    "actor.kei-karuizawa"
+  ],
   "capabilities_supported": [
     "leadership",
     "politics",
     "strategy"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Sabe que cédulas são anônimas e que Kiyotaka tem proteção; desconhece distribuição completa",
+  "counterfactual_test": "Sem candidatura de Kiyotaka teria de procurar outro comandante",
   "topics": [
     "behavior",
     "leadership",
@@ -48,5 +52,58 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Turma pressiona Kiyotaka sobre votos da rodada anterior",
+    "actor_objective_at_time": "Defender coesão, decidir comandante e gerir risco de expulsão",
+    "actor_known_information": [
+      "Sabe que cédulas são anônimas e que Kiyotaka tem proteção; desconhece distribuição completa"
+    ],
+    "beliefs_and_uncertainties": [
+      "A defesa pública não prova que Suzune conhece todos os votos"
+    ],
+    "available_alternatives": [
+      "Sem candidatura de Kiyotaka teria de procurar outro comandante"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Intervém em defesa dele e aceita o voluntariado com obrigações públicas"
+    ],
+    "observed_outcome": "Conflito não some, mas comando fica definido sem ela assumir o risco",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "voluntário"
+      },
+      {
+        "actor_id": "actor.ken-sudo",
+        "role": "colega desconfiado"
+      },
+      {
+        "actor_id": "actor.kei-karuizawa",
+        "role": "questiona a posição de Suzune"
+      }
+    ],
+    "causal_and_epistemic_limits": "A defesa pública não prova que Suzune conhece todos os votos",
+    "counterfactual_probes": [
+      "Sem candidatura de Kiyotaka teria de procurar outro comandante"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.008",
+        "pdf_pages": [
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

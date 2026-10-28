@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.kiyotaka-ayanokoji",
   "title": "Coordena previamente negociações com Ichinose e Ishizaki para pareamento C–A",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Coordena previamente negociações com Ichinose e Ishizaki para pareamento C–A",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Realiza contatos prévios e observa Kaneda escolher B, o que deixa C contra A",
+  "observed_result": "Obtém pareamento desejado contingentemente, sem manipular a urna",
+  "epistemic_limits": "Negociação não é prova de fraude no sorteio",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -19,14 +19,19 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.honami-ichinose",
+    "actor.ishizaki",
+    "actor.kaneda",
+    "actor.arisu-sakayanagi"
+  ],
   "capabilities_supported": [
     "initiative",
     "negotiation",
     "strategy"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Pode negociar preferências com Ichinose e Ishizaki; não sabe vencedor da loteria",
+  "counterfactual_test": "Se Kaneda escolher outra classe, resultado do plano muda",
   "topics": [
     "behavior",
     "initiative",
@@ -46,5 +51,60 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Emparelhamento a ocorrer após sorteio de prioridade",
+    "actor_objective_at_time": "Favorecer confronto C versus A por diálogo prévio",
+    "actor_known_information": [
+      "Pode negociar preferências com Ichinose e Ishizaki; não sabe vencedor da loteria"
+    ],
+    "beliefs_and_uncertainties": [
+      "Negociação não é prova de fraude no sorteio"
+    ],
+    "available_alternatives": [
+      "Se Kaneda escolher outra classe, resultado do plano muda"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Realiza contatos prévios e observa Kaneda escolher B, o que deixa C contra A"
+    ],
+    "observed_outcome": "Obtém pareamento desejado contingentemente, sem manipular a urna",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.honami-ichinose",
+        "role": "interlocutora"
+      },
+      {
+        "actor_id": "actor.ishizaki",
+        "role": "intermediário de D"
+      },
+      {
+        "actor_id": "actor.kaneda",
+        "role": "escolhedor formal"
+      },
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "rival"
+      }
+    ],
+    "causal_and_epistemic_limits": "Negociação não é prova de fraude no sorteio",
+    "counterfactual_probes": [
+      "Se Kaneda escolher outra classe, resultado do plano muda"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.010",
+        "pdf_pages": [
+          55,
+          62,
+          63,
+          64,
+          65,
+          66
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

@@ -9,7 +9,8 @@
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v04.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
-    "ln.y1.v09.en.operator-provided"
+    "ln.y1.v09.en.operator-provided",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -66,9 +67,13 @@
       ]
     },
     "economy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v10.case.ryuji-kanzaki.v10-c031"
+      ],
       "context_evidence_refs": [
-        "v0.pol.019"
+        "v0.pol.019",
+        "y1v10.ev.031",
+        "y1v10.ev.058"
       ]
     },
     "combat": {
@@ -80,11 +85,13 @@
     "leadership": {
       "behavioral_case_refs": [
         "y1v2.case.ryuji-kanzaki.public-witness-appeal",
-        "y1v09.case.ryuji-kanzaki.v09-c06"
+        "y1v09.case.ryuji-kanzaki.v09-c06",
+        "y1v10.case.ryuji-kanzaki.v10-c031"
       ],
       "context_evidence_refs": [
         "y1v2.ev.049",
-        "y1v09.ev.06"
+        "y1v09.ev.06",
+        "y1v10.ev.031"
       ]
     },
     "observation": {
@@ -103,9 +110,12 @@
       ]
     },
     "ethics": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v10.case.ryuji-kanzaki.v10-c031"
+      ],
       "context_evidence_refs": [
-        "y1v2.ev.068"
+        "y1v2.ev.068",
+        "y1v10.ev.031"
       ]
     },
     "exam": {
@@ -150,10 +160,12 @@
     },
     "behavior": {
       "behavioral_case_refs": [
-        "y1v09.case.ryuji-kanzaki.v09-c06"
+        "y1v09.case.ryuji-kanzaki.v09-c06",
+        "y1v10.case.ryuji-kanzaki.v10-c031"
       ],
       "context_evidence_refs": [
-        "y1v09.ev.06"
+        "y1v09.ev.06",
+        "y1v10.ev.031"
       ]
     },
     "investigation": {
@@ -162,6 +174,21 @@
       ],
       "context_evidence_refs": [
         "y1v09.ev.06"
+      ]
+    },
+    "y1_v10": {
+      "behavioral_case_refs": [
+        "y1v10.case.ryuji-kanzaki.v10-c031"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.031",
+        "y1v10.ev.058"
+      ]
+    },
+    "exams": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v10.ev.058"
       ]
     }
   },
@@ -196,5 +223,21 @@
   ],
   "y1_v09_relationship_refs": [
     "y1v09.rel.011"
-  ]
+  ],
+  "y1_v10_source_status": "SOURCE_BOUNDED_CANDIDATE_INDEPENDENT_REVIEW_PENDING",
+  "y1_v10_knowledge_gate": {
+    "pre_enrollment_history_biography_only": true,
+    "post_admission_canon_never_runtime_episode": true,
+    "rumor_and_private_interpretation_actor_scoped": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v10_behavioral_case_refs": [
+    "y1v10.case.ryuji-kanzaki.v10-c031"
+  ],
+  "y1_v10_context_evidence_refs": [
+    "y1v10.ev.031",
+    "y1v10.ev.058"
+  ],
+  "y1_v10_goal_transition_refs": []
 }

@@ -10,7 +10,8 @@
     "ln.y1.v045.sevenseas.en.operator-provided",
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
-    "ln.y1.v07.sevenseas.en.operator-provided"
+    "ln.y1.v07.sevenseas.en.operator-provided",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -154,7 +155,8 @@
         "y1v2.ev.018",
         "y1v2.ev.083",
         "y1v2.ev.084",
-        "y1v3.ev.004"
+        "y1v3.ev.004",
+        "y1v10.ev.057"
       ]
     },
     "strategy": {
@@ -187,7 +189,9 @@
       ]
     },
     "academic_reasoning": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v10.case.ken-sudo.v10-c002"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.059",
         "y1v1.ev.072",
@@ -198,7 +202,8 @@
         "y1v1.ev.100",
         "y1v1.ev.105",
         "y1v1.ev.127",
-        "y1v1.ev.134"
+        "y1v1.ev.134",
+        "y1v10.ev.002"
       ]
     },
     "persuasion": {
@@ -276,7 +281,8 @@
         "y1v1.case.ken-sudo.prioritize-study-over-basketball",
         "y1v2.case.ken-sudo.admit-conduct-consequences",
         "y1v2.case.ken-sudo.request-confidential-help",
-        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect"
+        "y1v5.case.ken-sudo.seek-suzune-recognition-and-reprioritize-respect",
+        "y1v10.case.ken-sudo.v10-c002"
       ],
       "context_evidence_refs": [
         "y1v1.ev.134",
@@ -291,7 +297,8 @@
         "y1v5.ev.070",
         "y1v5.ev.072",
         "y1v5.ev.073",
-        "y1v5.ev.080"
+        "y1v5.ev.080",
+        "y1v10.ev.002"
       ]
     },
     "observation": {
@@ -474,6 +481,37 @@
       "context_evidence_refs": [
         "y1v6.ev.031"
       ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v10.case.ken-sudo.v10-c002"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.002"
+      ]
+    },
+    "learning": {
+      "behavioral_case_refs": [
+        "y1v10.case.ken-sudo.v10-c002"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.002"
+      ]
+    },
+    "y1_v10": {
+      "behavioral_case_refs": [
+        "y1v10.case.ken-sudo.v10-c002"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.002",
+        "y1v10.ev.057"
+      ]
+    },
+    "exams": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v10.ev.057"
+      ]
     }
   },
   "source_documents": [],
@@ -496,5 +534,21 @@
     "y1v6.goal.ken-sudo.improve-studies-under-tutoring",
     "y1v7.goal.ken-sudo.v7-g017"
   ],
-  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v10_source_status": "SOURCE_BOUNDED_CANDIDATE_INDEPENDENT_REVIEW_PENDING",
+  "y1_v10_knowledge_gate": {
+    "pre_enrollment_history_biography_only": true,
+    "post_admission_canon_never_runtime_episode": true,
+    "rumor_and_private_interpretation_actor_scoped": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v10_behavioral_case_refs": [
+    "y1v10.case.ken-sudo.v10-c002"
+  ],
+  "y1_v10_context_evidence_refs": [
+    "y1v10.ev.002",
+    "y1v10.ev.057"
+  ],
+  "y1_v10_goal_transition_refs": []
 }

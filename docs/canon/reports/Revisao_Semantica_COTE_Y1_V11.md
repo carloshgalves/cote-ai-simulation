@@ -51,3 +51,14 @@
 3. Tratar #51 e resolver #52; implantar controles negativos por mecanismo, além de testes estruturalmente verdes.
 4. Segunda leitura independente por avaliador diferente com acesso ao PDF original; findings e re-review.
 5. Aceite humano para sair de Draft. Manter `verified:false` e `engine_memory_admission:false` até os gates.
+
+
+## Remediação concluída na branch — 28/10/2026
+
+O bloqueio **F4** referente à ausência de detalhamento foi tratado nos **56 casos originais** e foram acrescentados **3 casos de Mii-chan (Mei-Yu Wang)**, totalizando **59 casos estruturados**. Cada caso agora possui gatilho específico, objetivo, informação disponível, plano/ações, resultado observado, participantes e papéis, limites epistêmicos e uma alternativa contrafactual. Os registros seguem `verified:false` e não executáveis: esta é **remediação semântica do próprio autor**, não segunda opinião independente sobre todas as páginas.
+
+O bloqueio **F5** foi tratado pela atribuição explícita de participantes nos 59 casos. F6 passou a ter **16 relações com 24 fases de evidência** e **13 transições condicionais de objetivos**, com fronteira temporal e guardas de conhecimento. A identidade Mii-chan = Mei-Yu Wang foi confirmada explicitamente pelo PDF físico **p.58**. Foram criados os casos C057–C059 (pp.58–59, 129–151, 283–314), a relação rel.007 e transição G013. Isso resolve o escopo de identidade e cobertura de #51 sem presumir reciprocidade romântica.
+
+O Exam Pack recebeu regras sobre reservas/participantes da p.43 e exceção de segurança da prova de **judô**, sexta modalidade contra a Classe D (pp.372–374), enquanto o caratê foi o quinto evento efetivamente disputado. O canal adulterado de xadrez foi mantido como evento irregular, distinguindo resultados oficiais, entrada enviada e instrução entregue. As 18 evidências contextuais receberam modos epistêmicos individualizados.
+
+**Total revisado estruturalmente:** 59 casos, 77 evidências, 16 relações, 13 metas, um Exam Pack e dois eventos/atualizações de biografia = 168 entradas de auditoria. A matriz `y1-v11-semantic-depth-matrix.json` registra **0 casos com placeholders genéricos**. O conteúdo permanece sujeito à leitura de fonte e parecer independente antes de promoção para `verified:true`/motor. Não confundir entrega de casos ricos com validação editorial concluída.

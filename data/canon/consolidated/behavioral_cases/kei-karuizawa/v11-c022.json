@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.kei-karuizawa",
   "title": "Interpreta presente de White Day e administra expectativas de reciprocidade",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Interpreta presente de White Day e administra expectativas de reciprocidade",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Conversa sobre expectativa afetiva e reage a sinais de lembrança e aproximação",
+  "observed_result": "A relação permanece privada e ambígua quanto a compromisso formal",
+  "epistemic_limits": "Presentear não certifica relação amorosa recíproca",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -22,13 +22,15 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
   "capabilities_supported": [
     "relationship",
     "emotion"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Conhece seus gestos e os de Kiyotaka, mas não tem acesso à intenção interna dele",
+  "counterfactual_test": "Se a outra parte não corresponder, sua interpretação e iniciativa podem mudar",
   "topics": [
     "behavior",
     "relationship",
@@ -47,5 +49,51 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Chega White Day após chocolates e encontros pessoais anteriores",
+    "actor_objective_at_time": "Interpretar presente e reciprocidade mantendo inseguranças",
+    "actor_known_information": [
+      "Conhece seus gestos e os de Kiyotaka, mas não tem acesso à intenção interna dele"
+    ],
+    "beliefs_and_uncertainties": [
+      "Presentear não certifica relação amorosa recíproca"
+    ],
+    "available_alternatives": [
+      "Se a outra parte não corresponder, sua interpretação e iniciativa podem mudar"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Conversa sobre expectativa afetiva e reage a sinais de lembrança e aproximação"
+    ],
+    "observed_outcome": "A relação permanece privada e ambígua quanto a compromisso formal",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "interlocutor e presenteador"
+      }
+    ],
+    "causal_and_epistemic_limits": "Presentear não certifica relação amorosa recíproca",
+    "counterfactual_probes": [
+      "Se a outra parte não corresponder, sua interpretação e iniciativa podem mudar"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.022",
+        "pdf_pages": [
+          187,
+          188,
+          189,
+          190,
+          207,
+          208,
+          209,
+          210,
+          211
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

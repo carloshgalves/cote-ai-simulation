@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.katsuragi",
   "title": "Enfrenta conflito entre ressentimento a Arisu e proteção dos colegas",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Enfrenta conflito entre ressentimento a Arisu e proteção dos colegas",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Compartilha parte das escolhas de A, cogita desempenhar abaixo do normal depois não entrega o evento sob coerção de Arisu",
+  "observed_result": "A informação é fornecida, mas sabotagem planejada não se concretiza no resultado da prova",
+  "epistemic_limits": "Ressentimento e compromisso público coexistem; não atribuir resultado do evento a sabotagem sem fato",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -25,14 +25,18 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.yukimura",
+    "actor.kiyotaka-ayanokoji",
+    "actor.arisu-sakayanagi"
+  ],
   "capabilities_supported": [
     "ethics",
     "loyalty",
     "conflict"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Sabe quais eventos prevê e como simular falhas; sabe que outras pessoas podem ser atingidas",
+  "counterfactual_test": "Se Arisu não ameaçar colegas e custos mudarem, disposição a colaborar poderia ser diferente",
   "topics": [
     "behavior",
     "ethics",
@@ -52,5 +56,63 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Keisei e Kiyotaka abordam Katsuragi durante crise de facções em A",
+    "actor_objective_at_time": "Pesar oposição a Arisu contra dever com colegas de classe",
+    "actor_known_information": [
+      "Sabe quais eventos prevê e como simular falhas; sabe que outras pessoas podem ser atingidas"
+    ],
+    "beliefs_and_uncertainties": [
+      "Ressentimento e compromisso público coexistem; não atribuir resultado do evento a sabotagem sem fato"
+    ],
+    "available_alternatives": [
+      "Se Arisu não ameaçar colegas e custos mudarem, disposição a colaborar poderia ser diferente"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Compartilha parte das escolhas de A, cogita desempenhar abaixo do normal",
+      "depois não entrega o evento sob coerção de Arisu"
+    ],
+    "observed_outcome": "A informação é fornecida, mas sabotagem planejada não se concretiza no resultado da prova",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.yukimura",
+        "role": "negociador"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "observador/negociador"
+      },
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "líder que pressiona"
+      }
+    ],
+    "causal_and_epistemic_limits": "Ressentimento e compromisso público coexistem; não atribuir resultado do evento a sabotagem sem fato",
+    "counterfactual_probes": [
+      "Se Arisu não ameaçar colegas e custos mudarem, disposição a colaborar poderia ser diferente"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.026",
+        "pdf_pages": [
+          271,
+          273,
+          274,
+          276,
+          278,
+          279,
+          280,
+          359,
+          363,
+          364,
+          365,
+          366
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

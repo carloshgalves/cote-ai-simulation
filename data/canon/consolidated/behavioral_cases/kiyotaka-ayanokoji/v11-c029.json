@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.kiyotaka-ayanokoji",
   "title": "Confronta Hirata com responsabilização extrema antes de oferecer apoio",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Confronta Hirata com responsabilização extrema antes de oferecer apoio",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Procura Hirata fora da escola, faz perguntas duras e atribui deliberadamente culpa depois oferece possibilidade de dividir fardo",
+  "observed_result": "Hirata chora e começa a aceitar ajuda, sem garantia de cura duradoura",
+  "epistemic_limits": "Narrador admite interesse estratégico; não promover pressão emocional como terapia ou tática ética universal",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -25,14 +25,17 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.yosuke-hirata",
+    "actor.mei-yu-wang"
+  ],
   "capabilities_supported": [
     "strategy",
     "social",
     "emotion"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Kiyotaka sabe da culpa narrada por Hirata e tem suas próprias hipóteses sobre sua responsabilidade",
+  "counterfactual_test": "Se Hirata reagir com afastamento ou piora, a intervenção poderá fracassar ou ser danosa",
   "topics": [
     "behavior",
     "strategy",
@@ -52,5 +55,59 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Crise de Hirata prejudica preparação e tentativas de apoio falharam",
+    "actor_objective_at_time": "Provocar reavaliação instrumental para restaurar liderança funcional",
+    "actor_known_information": [
+      "Kiyotaka sabe da culpa narrada por Hirata e tem suas próprias hipóteses sobre sua responsabilidade"
+    ],
+    "beliefs_and_uncertainties": [
+      "Narrador admite interesse estratégico; não promover pressão emocional como terapia ou tática ética universal"
+    ],
+    "available_alternatives": [
+      "Se Hirata reagir com afastamento ou piora, a intervenção poderá fracassar ou ser danosa"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Procura Hirata fora da escola, faz perguntas duras e atribui deliberadamente culpa",
+      "depois oferece possibilidade de dividir fardo"
+    ],
+    "observed_outcome": "Hirata chora e começa a aceitar ajuda, sem garantia de cura duradoura",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.yosuke-hirata",
+        "role": "interlocutor em sofrimento"
+      },
+      {
+        "actor_id": "actor.mei-yu-wang",
+        "role": "colega cujo esforço precede a conversa"
+      }
+    ],
+    "causal_and_epistemic_limits": "Narrador admite interesse estratégico; não promover pressão emocional como terapia ou tática ética universal",
+    "counterfactual_probes": [
+      "Se Hirata reagir com afastamento ou piora, a intervenção poderá fracassar ou ser danosa"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.029",
+        "pdf_pages": [
+          295,
+          297,
+          298,
+          299,
+          304,
+          305,
+          306,
+          307,
+          308,
+          309,
+          310,
+          311
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

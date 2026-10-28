@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.yosuke-hirata",
   "title": "Consegue chorar e retomar cooperação na turma após conversa",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Consegue chorar e retomar cooperação na turma após conversa",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Expressa emoções, aceita depender dos colegas e pede desculpas publicamente, incluindo Mii-chan",
+  "observed_result": "Retoma participação e liderança situacional na classe",
+  "epistemic_limits": "A recuperação é observada naquele período; não declarar cura permanente",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -21,14 +21,18 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.mei-yu-wang",
+    "actor.suzune-horikita"
+  ],
   "capabilities_supported": [
     "emotion",
     "leadership",
     "goal_change"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Conhece experiência de Sugimura, custo do próprio isolamento e disponibilidade de apoio da classe",
+  "counterfactual_test": "Se o suporte não persistir, retorno não é garantido e pode haver novas crises",
   "topics": [
     "behavior",
     "emotion",
@@ -48,5 +52,58 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Após confronto privado, Hirata reconhece limites de tentar proteger todos",
+    "actor_objective_at_time": "Restabelecer colaboração sem fingir que expulsões podem sempre ser evitadas",
+    "actor_known_information": [
+      "Conhece experiência de Sugimura, custo do próprio isolamento e disponibilidade de apoio da classe"
+    ],
+    "beliefs_and_uncertainties": [
+      "A recuperação é observada naquele período; não declarar cura permanente"
+    ],
+    "available_alternatives": [
+      "Se o suporte não persistir, retorno não é garantido e pode haver novas crises"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Expressa emoções, aceita depender dos colegas e pede desculpas publicamente, incluindo Mii-chan"
+    ],
+    "observed_outcome": "Retoma participação e liderança situacional na classe",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "interlocutor privado"
+      },
+      {
+        "actor_id": "actor.mei-yu-wang",
+        "role": "destinatária de desculpas"
+      },
+      {
+        "actor_id": "actor.suzune-horikita",
+        "role": "colega de trabalho"
+      }
+    ],
+    "causal_and_epistemic_limits": "A recuperação é observada naquele período; não declarar cura permanente",
+    "counterfactual_probes": [
+      "Se o suporte não persistir, retorno não é garantido e pode haver novas crises"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.030",
+        "pdf_pages": [
+          308,
+          309,
+          310,
+          311,
+          313,
+          314,
+          315,
+          316
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.suzune-horikita",
   "title": "Confronta catálogo divulgado de Classe A e ajusta preparação",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Confronta catálogo divulgado de Classe A e ajusta preparação",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Analisa modalidades e desvantagens distribui preparação e considera participantes viáveis",
+  "observed_result": "Turma ajusta a preparação sem garantia de eventos sorteados",
+  "epistemic_limits": "Conhecimento da lista de dez não implica conhecer cinco escolhidas",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -23,14 +23,17 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.yukimura"
+  ],
   "capabilities_supported": [
     "planning",
     "exams",
     "teamwork"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Conhece lista divulgada, mas ignora quais cinco serão colocados no sorteio final",
+  "counterfactual_test": "Se sorteio favorecer outras modalidades, parte do treino não será usada",
   "topics": [
     "behavior",
     "planning",
@@ -50,5 +53,57 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Classe A divulga dez eventos, inclusive disciplinas intelectuais e modalidades esportivas",
+    "actor_objective_at_time": "Reorientar treino e escalação após receber opções adversárias",
+    "actor_known_information": [
+      "Conhece lista divulgada, mas ignora quais cinco serão colocados no sorteio final"
+    ],
+    "beliefs_and_uncertainties": [
+      "Conhecimento da lista de dez não implica conhecer cinco escolhidas"
+    ],
+    "available_alternatives": [
+      "Se sorteio favorecer outras modalidades, parte do treino não será usada"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Analisa modalidades e desvantagens",
+      "distribui preparação e considera participantes viáveis"
+    ],
+    "observed_outcome": "Turma ajusta a preparação sem garantia de eventos sorteados",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante receptor dos dados"
+      },
+      {
+        "actor_id": "actor.yukimura",
+        "role": "analista do planejamento"
+      }
+    ],
+    "causal_and_epistemic_limits": "Conhecimento da lista de dez não implica conhecer cinco escolhidas",
+    "counterfactual_probes": [
+      "Se sorteio favorecer outras modalidades, parte do treino não será usada"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.024",
+        "pdf_pages": [
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          239
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

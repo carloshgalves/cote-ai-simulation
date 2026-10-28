@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.honami-ichinose",
   "title": "Desencoraja retaliação contra provocações de estudantes da D",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Desencoraja retaliação contra provocações de estudantes da D",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Modera a reação de Shibata fala de modo persuasivo e discute padrão de incidentes com colegas",
+  "observed_result": "Evita retaliação imediata na conversa, mas pressão continua e exige investigação",
+  "epistemic_limits": "Não atribuir causalidade médica ou autoria de toda provocação sem prova específica",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -22,14 +22,17 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kakeru-ryuen",
+    "actor.kiyotaka-ayanokoji"
+  ],
   "capabilities_supported": [
     "ethics",
     "leadership",
     "risk_management"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Ouve relatos de Shibata sobre repetição de confrontos; não dispõe ainda de prova total de autoria e intenção",
+  "counterfactual_test": "Se surgirem provas ou risco imediato de dano, uma resposta protetiva diferente é plausível",
   "topics": [
     "behavior",
     "ethics",
@@ -49,5 +52,56 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Estudantes de D provocam repetidamente colegas da classe B",
+    "actor_objective_at_time": "Conter escalada e preservar segurança/cohesão antes do exame",
+    "actor_known_information": [
+      "Ouve relatos de Shibata sobre repetição de confrontos; não dispõe ainda de prova total de autoria e intenção"
+    ],
+    "beliefs_and_uncertainties": [
+      "Não atribuir causalidade médica ou autoria de toda provocação sem prova específica"
+    ],
+    "available_alternatives": [
+      "Se surgirem provas ou risco imediato de dano, uma resposta protetiva diferente é plausível"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Modera a reação de Shibata",
+      "fala de modo persuasivo e discute padrão de incidentes com colegas"
+    ],
+    "observed_outcome": "Evita retaliação imediata na conversa, mas pressão continua e exige investigação",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kakeru-ryuen",
+        "role": "possível planejador adversário em cena posterior"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "observador externo"
+      }
+    ],
+    "causal_and_epistemic_limits": "Não atribuir causalidade médica ou autoria de toda provocação sem prova específica",
+    "counterfactual_probes": [
+      "Se surgirem provas ou risco imediato de dano, uma resposta protetiva diferente é plausível"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.018",
+        "pdf_pages": [
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          178,
+          180
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

@@ -13,7 +13,8 @@
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
-    "ln.y1.v10.en.operator-provided"
+    "ln.y1.v10.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -63,7 +64,10 @@
         "y1v7.case.kakeru-ryuen.v7-c008",
         "y1v075.case.kakeru-ryuen.v075-c024",
         "y1v10.case.kakeru-ryuen.v10-c013",
-        "y1v10.case.kakeru-ryuen.v10-c041"
+        "y1v10.case.kakeru-ryuen.v10-c041",
+        "y1v11.case.kakeru-ryuen.v11-c040",
+        "y1v11.case.kakeru-ryuen.v11-c045",
+        "y1v11.case.kakeru-ryuen.v11-c055"
       ],
       "context_evidence_refs": [
         "y1v2.ev.081",
@@ -133,7 +137,10 @@
         "y1v075.ev.022",
         "y1v075.ev.024",
         "y1v10.ev.013",
-        "y1v10.ev.041"
+        "y1v10.ev.041",
+        "y1v11.ev.040",
+        "y1v11.ev.045",
+        "y1v11.ev.055"
       ]
     },
     "economy": {
@@ -154,13 +161,17 @@
     },
     "leadership": {
       "behavioral_case_refs": [
-        "y1v3.case.kakeru-ryuen.intimidate-ishizaki"
+        "y1v3.case.kakeru-ryuen.intimidate-ishizaki",
+        "y1v11.case.kakeru-ryuen.v11-c045",
+        "y1v11.case.kakeru-ryuen.v11-c055"
       ],
       "context_evidence_refs": [
         "y1v3.ev.055",
         "y1v4.ev.038",
         "y1v5.ev.035",
-        "y1v5.ev.043"
+        "y1v5.ev.043",
+        "y1v11.ev.045",
+        "y1v11.ev.055"
       ]
     },
     "observation": {
@@ -331,7 +342,8 @@
       "context_evidence_refs": [
         "y1v5.ev.041",
         "y1v5.ev.044",
-        "y1v5.ev.049"
+        "y1v5.ev.049",
+        "y1v11.ev.067"
       ]
     },
     "epistemics": {
@@ -357,7 +369,8 @@
       "behavioral_case_refs": [
         "y1v5.case.kakeru-ryuen.escalate-coercion-until-anonymous-counterevidence",
         "y1v6.case.kakeru-ryuen.conduct-phone-check-as-intimidation-experiment",
-        "y1v6.case.kakeru-ryuen.threaten-target-in-photograph-to-identify-x"
+        "y1v6.case.kakeru-ryuen.threaten-target-in-photograph-to-identify-x",
+        "y1v11.case.kakeru-ryuen.v11-c040"
       ],
       "context_evidence_refs": [
         "y1v5.ev.047",
@@ -366,7 +379,8 @@
         "y1v5.ev.076",
         "y1v6.ev.023",
         "y1v6.ev.025",
-        "y1v6.ev.074"
+        "y1v6.ev.074",
+        "y1v11.ev.040"
       ]
     },
     "relationship": {
@@ -522,7 +536,8 @@
       "context_evidence_refs": [
         "y1v7.ev.018",
         "y1v7.ev.059",
-        "y1v10.ev.059"
+        "y1v10.ev.059",
+        "y1v11.ev.067"
       ]
     },
     "identity": {
@@ -544,12 +559,18 @@
       "behavioral_case_refs": [
         "y1v08.case.kakeru-ryuen.v08-c036",
         "y1v10.case.kakeru-ryuen.v10-c013",
-        "y1v10.case.kakeru-ryuen.v10-c041"
+        "y1v10.case.kakeru-ryuen.v10-c041",
+        "y1v11.case.kakeru-ryuen.v11-c040",
+        "y1v11.case.kakeru-ryuen.v11-c045",
+        "y1v11.case.kakeru-ryuen.v11-c055"
       ],
       "context_evidence_refs": [
         "y1v08.ev.036",
         "y1v10.ev.013",
-        "y1v10.ev.041"
+        "y1v10.ev.041",
+        "y1v11.ev.040",
+        "y1v11.ev.045",
+        "y1v11.ev.055"
       ]
     },
     "y1_v10": {
@@ -561,6 +582,37 @@
         "y1v10.ev.013",
         "y1v10.ev.041",
         "y1v10.ev.059"
+      ]
+    },
+    "initiative": {
+      "behavioral_case_refs": [
+        "y1v11.case.kakeru-ryuen.v11-c040",
+        "y1v11.case.kakeru-ryuen.v11-c045"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.040",
+        "y1v11.ev.045"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.kakeru-ryuen.v11-c040",
+        "y1v11.case.kakeru-ryuen.v11-c045",
+        "y1v11.case.kakeru-ryuen.v11-c055"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.040",
+        "y1v11.ev.045",
+        "y1v11.ev.055",
+        "y1v11.ev.067"
+      ]
+    },
+    "goal_change": {
+      "behavioral_case_refs": [
+        "y1v11.case.kakeru-ryuen.v11-c055"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.055"
       ]
     }
   },
@@ -589,6 +641,7 @@
   },
   "goal_transition_refs": [
     "y1v10.goal.kakeru-ryuen.v10-g009",
+    "y1v11.goal.kakeru-ryuen.v11-g005",
     "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent",
     "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score",
     "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum",
@@ -649,5 +702,31 @@
   ],
   "y1_v10_goal_transition_refs": [
     "y1v10.goal.kakeru-ryuen.v10-g009"
+  ],
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_runtime_memory": true,
+    "private_disclosures_require_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.kakeru-ryuen.v11-c040",
+    "y1v11.case.kakeru-ryuen.v11-c045",
+    "y1v11.case.kakeru-ryuen.v11-c055"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.040",
+    "y1v11.ev.045",
+    "y1v11.ev.055",
+    "y1v11.ev.067"
+  ],
+  "y1_v11_relationship_refs": [
+    "y1v11.rel.011",
+    "y1v11.rel.012"
+  ],
+  "y1_v11_goal_transition_refs": [
+    "y1v11.goal.kakeru-ryuen.v11-g005"
   ]
 }

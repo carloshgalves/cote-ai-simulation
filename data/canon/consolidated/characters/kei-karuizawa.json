@@ -15,7 +15,8 @@
     "ln.y1.v075.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
     "ln.y1.v09.en.operator-provided",
-    "ln.y1.v10.en.operator-provided"
+    "ln.y1.v10.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -139,7 +140,8 @@
         "y1v45.case.kei-karuizawa.handle-pool-scar-avoidance-under-pressure",
         "y1v075.case.kei-karuizawa.v075-c002",
         "y1v075.case.kei-karuizawa.v075-c007",
-        "y1v09.case.kei-karuizawa.v09-c15"
+        "y1v09.case.kei-karuizawa.v09-c15",
+        "y1v11.case.kei-karuizawa.v11-c022"
       ],
       "context_evidence_refs": [
         "y1v3.ev.083",
@@ -153,7 +155,9 @@
         "y1v075.ev.007",
         "y1v075.ev.030",
         "y1v075.ev.032",
-        "y1v09.ev.15"
+        "y1v09.ev.15",
+        "y1v11.ev.022",
+        "y1v11.ev.074"
       ]
     },
     "institution": {
@@ -184,7 +188,9 @@
       ]
     },
     "observation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v11.case.kei-karuizawa.v11-c011"
+      ],
       "context_evidence_refs": [
         "y1v4.ev.008",
         "y1v4.ev.062",
@@ -192,7 +198,8 @@
         "y1v4.ev.081",
         "y1v4.ev.105",
         "y1v4.ev.121",
-        "y1v45.ev.057"
+        "y1v45.ev.057",
+        "y1v11.ev.011"
       ]
     },
     "exam": {
@@ -404,7 +411,9 @@
         "y1v075.case.kei-karuizawa.v075-c009",
         "y1v08.case.kei-karuizawa.v08-c020",
         "y1v08.case.kei-karuizawa.v08-c042",
-        "y1v09.case.kei-karuizawa.v09-c13"
+        "y1v09.case.kei-karuizawa.v09-c13",
+        "y1v11.case.kei-karuizawa.v11-c011",
+        "y1v11.case.kei-karuizawa.v11-c022"
       ],
       "context_evidence_refs": [
         "y1v6.ev.009",
@@ -425,7 +434,10 @@
         "y1v08.ev.042",
         "y1v08.ev.043",
         "y1v09.ev.13",
-        "y1v09.ev.034"
+        "y1v09.ev.034",
+        "y1v11.ev.011",
+        "y1v11.ev.022",
+        "y1v11.ev.074"
       ]
     },
     "security": {
@@ -441,7 +453,8 @@
         "y1v075.case.kei-karuizawa.v075-c004",
         "y1v075.case.kei-karuizawa.v075-c008",
         "y1v08.case.kei-karuizawa.v08-c020",
-        "y1v10.case.kei-karuizawa.v10-c021"
+        "y1v10.case.kei-karuizawa.v10-c021",
+        "y1v11.case.kei-karuizawa.v11-c011"
       ],
       "context_evidence_refs": [
         "y1v6.ev.059",
@@ -450,7 +463,8 @@
         "y1v075.ev.008",
         "y1v075.ev.035",
         "y1v08.ev.020",
-        "y1v10.ev.021"
+        "y1v10.ev.021",
+        "y1v11.ev.011"
       ]
     },
     "investigation": {
@@ -495,14 +509,18 @@
         "y1v08.case.kei-karuizawa.v08-c042",
         "y1v09.case.kei-karuizawa.v09-c13",
         "y1v09.case.kei-karuizawa.v09-c15",
-        "y1v10.case.kei-karuizawa.v10-c021"
+        "y1v10.case.kei-karuizawa.v10-c021",
+        "y1v11.case.kei-karuizawa.v11-c011",
+        "y1v11.case.kei-karuizawa.v11-c022"
       ],
       "context_evidence_refs": [
         "y1v08.ev.020",
         "y1v08.ev.042",
         "y1v09.ev.13",
         "y1v09.ev.15",
-        "y1v10.ev.021"
+        "y1v10.ev.021",
+        "y1v11.ev.011",
+        "y1v11.ev.022"
       ]
     },
     "analysis": {
@@ -530,6 +548,17 @@
       ],
       "context_evidence_refs": [
         "y1v10.ev.021"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.kei-karuizawa.v11-c011",
+        "y1v11.case.kei-karuizawa.v11-c022"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.011",
+        "y1v11.ev.022",
+        "y1v11.ev.074"
       ]
     }
   },
@@ -675,5 +704,26 @@
   "y1_v10_context_evidence_refs": [
     "y1v10.ev.021"
   ],
-  "y1_v10_goal_transition_refs": []
+  "y1_v10_goal_transition_refs": [],
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_runtime_memory": true,
+    "private_disclosures_require_acquisition": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.kei-karuizawa.v11-c011",
+    "y1v11.case.kei-karuizawa.v11-c022"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.011",
+    "y1v11.ev.022",
+    "y1v11.ev.074"
+  ],
+  "y1_v11_relationship_refs": [
+    "y1v11.rel.006"
+  ],
+  "y1_v11_goal_transition_refs": []
 }

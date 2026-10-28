@@ -13,7 +13,8 @@
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
-    "ln.y1.v09.en.operator-provided"
+    "ln.y1.v09.en.operator-provided",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "V7_NEW_RECORDS_UNVERIFIED_EXTERNAL_REVIEW_PENDING",
   "source_documents": [],
@@ -237,7 +238,20 @@
     "y1v7.ev.103",
     "y1v09.ev.029",
     "y1v09.ev.030",
-    "y1v09.ev.031"
+    "y1v09.ev.031",
+    "y1v10.ev.046",
+    "y1v10.ev.047",
+    "y1v10.ev.048",
+    "y1v10.ev.049",
+    "y1v10.ev.050",
+    "y1v10.ev.051",
+    "y1v10.ev.056",
+    "y1v10.ev.057",
+    "y1v10.ev.058",
+    "y1v10.ev.059",
+    "y1v10.ev.060",
+    "y1v10.ev.061",
+    "y1v10.ev.062"
   ],
   "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
   "operational_migration": "Only user/operator-authorized claims may be promoted after review",
@@ -1016,6 +1030,53 @@
       "nagumo_expressed_rule_change_intention": true,
       "new_school_rule_enacted_in_volume": false,
       "rule_change_not_asserted_as_canon": true
+    }
+  },
+  "y1_v10_class_poll": {
+    "exam_id": "exam.y1.class-poll",
+    "source_id": "ln.y1.v10.en.operator-provided",
+    "reference_path": "data/canon/consolidated/exams/y1-class-poll.json",
+    "institutional_scope": "FIRST_YEAR_MARCH_SUPPLEMENTARY",
+    "exam_announced": "MARCH_02",
+    "vote_day": "FOLLOWING_SATURDAY",
+    "reason_announced": "No first-year dropouts after previous exams",
+    "source_mode": "SCHOOL_OFFICIAL_TEACHER_STATEMENT",
+    "voting_rules": {
+      "internal_positive": 3,
+      "internal_negative": 3,
+      "extra_cross_class_positive": 1,
+      "duplicate_vote_prohibited": true,
+      "abstention_prohibited": true,
+      "anonymous_ballots": true,
+      "re_vote_when_all_net_zero": true,
+      "tie_special_method": "UNREVEALED"
+    },
+    "protection_point": {
+      "per_class_first_place": 1,
+      "nontransferable": true
+    },
+    "expulsion_private_point_revocation": 20000000,
+    "reference_only": true,
+    "executable": false,
+    "engine_memory_admission": false,
+    "verified": false,
+    "no_class_point_delta": true,
+    "source_evidence_refs": [
+      "y1v10.ev.046",
+      "y1v10.ev.047",
+      "y1v10.ev.048",
+      "y1v10.ev.049",
+      "y1v10.ev.056",
+      "y1v10.ev.057",
+      "y1v10.ev.058",
+      "y1v10.ev.059",
+      "y1v10.ev.060"
+    ],
+    "rule_revision_source_guard": {
+      "claim": "Cross-class censure originally proposed",
+      "source": "ARISU_PRIVATE_REPORT",
+      "enacted": false,
+      "official_revision_record_absent": true
     }
   }
 }

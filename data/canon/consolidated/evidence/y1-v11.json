@@ -2293,7 +2293,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "PRE_Y1_ARISU_MEMORY",
       "mention_actor_ids": [
         "actor.arisu-sakayanagi",
         "actor.kiyotaka-ayanokoji"
@@ -2313,7 +2313,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "PRE_Y1_ARISU_MEMORY",
+      "claim_provenance_guard": "Arisu a observadora, Kiyotaka não sabia da observação.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.058",
@@ -2333,7 +2336,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "DIRECT_PRIVATE_TEACHERS_MEETING",
       "mention_actor_ids": [
         "actor.tsukishiro",
         "actor.mashima"
@@ -2353,7 +2356,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "DIRECT_PRIVATE_TEACHERS_MEETING",
+      "claim_provenance_guard": "Professores presentes recebem informação; estudantes não têm acesso automático.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.059",
@@ -2373,7 +2379,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "PRIVATE_TEACHER_EXPLANATION_OF_SCHOOL_RULE",
       "mention_actor_ids": [
         "actor.sae-chiyabashira",
         "actor.chie-hoshinomiya",
@@ -2394,7 +2400,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "PRIVATE_TEACHER_EXPLANATION_OF_SCHOOL_RULE",
+      "claim_provenance_guard": "Norma ordinária e exceção Class Poll são relatadas por docentes; não aplicá-las retroativamente.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.060",
@@ -2424,7 +2433,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "OFFICIAL_TEACHER_HANDOUT",
       "mention_actor_ids": [
         "actor.sae-chiyabashira"
       ],
@@ -2443,7 +2452,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "OFFICIAL_TEACHER_HANDOUT",
+      "claim_provenance_guard": "A regra é publicada por docente; não inventar campos não enunciados.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.061",
@@ -2463,7 +2475,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "OFFICIAL_TEACHER_HANDOUT",
       "mention_actor_ids": [
         "actor.sae-chiyabashira"
       ],
@@ -2482,7 +2494,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "OFFICIAL_TEACHER_HANDOUT",
+      "claim_provenance_guard": "Cronograma e pontuação comunicados à turma na apresentação.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.062",
@@ -2500,7 +2515,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "OBSERVED_SCHOOL_LOTTERY_WITH_PRIVATE_PREPARATION",
       "mention_actor_ids": [
         "actor.kaneda",
         "actor.kiyotaka-ayanokoji",
@@ -2522,7 +2537,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "OBSERVED_SCHOOL_LOTTERY_WITH_PRIVATE_PREPARATION",
+      "claim_provenance_guard": "A seleção de Kaneda é oficial; conversas anteriores não controlam o sorteio.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.063",
@@ -2540,7 +2558,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "OFFICIAL_SYSTEM_DEMONSTRATION",
       "mention_actor_ids": [
         "actor.kiyotaka-ayanokoji"
       ],
@@ -2559,7 +2577,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "OFFICIAL_SYSTEM_DEMONSTRATION",
+      "claim_provenance_guard": "O limite de comando é mostrado pela escola; não implicar acesso irrestrito ao sistema.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.064",
@@ -2577,7 +2598,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "HIRATA_PRIVATE_FIRST_PERSON_ACCOUNT",
       "mention_actor_ids": [
         "actor.yosuke-hirata"
       ],
@@ -2594,7 +2615,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "HIRATA_PRIVATE_FIRST_PERSON_ACCOUNT",
+      "claim_provenance_guard": "Kiyotaka recorda o nome Sugimura ao perguntar; detalhes adicionais vêm da conversa privada.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.065",
@@ -2618,7 +2642,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "DIRECT_CHESS_SCENE_WITH_COMMAND_ASSISTANCE",
       "mention_actor_ids": [
         "actor.suzune-horikita",
         "actor.kiyotaka-ayanokoji"
@@ -2638,7 +2662,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "DIRECT_CHESS_SCENE_WITH_COMMAND_ASSISTANCE",
+      "claim_provenance_guard": "Jogadores e comandantes têm informações diferentes; o canal de C sofreu manipulação.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.066",
@@ -2661,7 +2688,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "SCHOOL_MATCH_ANNOUNCEMENT_AND_NARRATED_SEQUENCE",
       "mention_actor_ids": [
         "actor.miyake",
         "actor.kiyotaka-ayanokoji"
@@ -2681,7 +2708,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "SCHOOL_MATCH_ANNOUNCEMENT_AND_NARRATED_SEQUENCE",
+      "claim_provenance_guard": "Os resultados dos sete eventos têm autoridade escolar, não normatizam eventos em forks.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.067",
@@ -2703,7 +2733,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "ON_DAY_MATCH_EVENTS_AND_OFFICIAL_RESULT",
+      "source_mode": "OBSERVED_FIFTH_KARATE_AND_SIXTH_JUDO_OFFICIAL_RULING",
       "mention_actor_ids": [
         "actor.honami-ichinose",
         "actor.kakeru-ryuen"
@@ -2723,7 +2753,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "OBSERVED_FIFTH_KARATE_AND_SIXTH_JUDO_OFFICIAL_RULING",
+      "claim_provenance_guard": "O caratê é jogado; no judô ocorre forfait por decisão de Mashima após timeout.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.068",
@@ -2748,7 +2781,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "OBSERVED_OFFICIAL_CHESS_RESULT_AND_TSUKISHIRO_ADMISSION",
       "mention_actor_ids": [
         "actor.tsukishiro",
         "actor.kiyotaka-ayanokoji",
@@ -2769,7 +2802,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "OBSERVED_OFFICIAL_CHESS_RESULT_AND_TSUKISHIRO_ADMISSION",
+      "claim_provenance_guard": "A vitória é registrada, mas a confissão de adulteração não substitui toda a prova técnica do canal.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.069",
@@ -2788,7 +2824,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "DIRECT_PRIVATE_CHESS_REMATCH",
       "mention_actor_ids": [
         "actor.kiyotaka-ayanokoji",
         "actor.arisu-sakayanagi"
@@ -2806,7 +2842,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "DIRECT_PRIVATE_CHESS_REMATCH",
+      "claim_provenance_guard": "A vitória da continuação privada não altera ata oficial.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.070",
@@ -2825,7 +2864,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "CHIE_PRIVATE_ORAL_SCHOOL_HISTORY",
       "mention_actor_ids": [
         "actor.chie-hoshinomiya"
       ],
@@ -2844,7 +2883,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "CHIE_PRIVATE_ORAL_SCHOOL_HISTORY",
+      "claim_provenance_guard": "Relato de docente sobre dormitórios não é norma escolar vigente independentemente certificada.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.071",
@@ -2871,7 +2913,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "KUSHIDA_CHARACTER_FOCALIZED_SIDE_STORY",
       "mention_actor_ids": [
         "actor.kikyo-kushida"
       ],
@@ -2888,7 +2930,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "KUSHIDA_CHARACTER_FOCALIZED_SIDE_STORY",
+      "claim_provenance_guard": "Monólogo de personagem não é conhecimento partilhado; status editorial da tradução de fãs continua pendente.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.072",
@@ -2908,7 +2953,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "VIRTUAL_REALITY_SIDE_STORY",
       "mention_actor_ids": [
         "actor.suzune-horikita",
         "actor.kiyotaka-ayanokoji"
@@ -2926,7 +2971,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "VIRTUAL_REALITY_SIDE_STORY",
+      "claim_provenance_guard": "Ação em RPG/VR não demonstra proeza física equivalente fora do jogo.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.073",
@@ -2945,7 +2993,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "ARISU_CHARACTER_FOCALIZED_SIDE_STORY",
       "mention_actor_ids": [
         "actor.arisu-sakayanagi"
       ],
@@ -2962,7 +3010,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "ARISU_CHARACTER_FOCALIZED_SIDE_STORY",
+      "claim_provenance_guard": "Sentimentos privados não comprovam relacionamento recíproco.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.074",
@@ -2980,7 +3031,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "KEI_CHARACTER_FOCALIZED_SIDE_STORY",
       "mention_actor_ids": [
         "actor.kei-karuizawa",
         "actor.kiyotaka-ayanokoji"
@@ -2998,7 +3049,10 @@
       "individual_review": {
         "external_independent_review": "NOT_PERFORMED",
         "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
-      }
+      },
+      "epistemic_source_type": "KEI_CHARACTER_FOCALIZED_SIDE_STORY",
+      "claim_provenance_guard": "Interpretação privada de presente não confirma namoro formal.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
     },
     {
       "id": "y1v11.ev.075",

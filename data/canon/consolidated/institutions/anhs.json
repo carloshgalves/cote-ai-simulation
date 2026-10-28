@@ -1160,6 +1160,26 @@
     "evidence_status": "CANDIDATE",
     "executable": false,
     "engine_memory_admission": false,
-    "verified": false
+    "verified": false,
+    "safety_adjudication": {
+      "fifth_event": "KARATE_CLASS_D_WIN_ON_PLAYED_MATCH",
+      "sixth_event": "JUDO_CLASS_B_DEFAULT_AFTER_30S_UNSELECTED_AND_SAFETY_ASSESSMENT",
+      "teacher": "Mashima",
+      "exception_to_default_fallback": true,
+      "source_pdf_pages": [
+        371,
+        372,
+        373,
+        374
+      ],
+      "not_generalized_rule": true
+    },
+    "participant_cardinality_detail": {
+      "distinct_proposal_sizes_exclude_substitutes": true,
+      "hard_max_twenty_includes_substitutes": true,
+      "source_pdf_pages": [
+        43
+      ]
+    }
   }
 }

@@ -82,7 +82,27 @@
     "each_student_one_event_until_all_classmates_have_participated": true,
     "commander_prohibited_from_direct_participation": true,
     "school_autofills_missing_proposals": true,
-    "source_mode": "SCHOOL_TEACHER_HANDOUT"
+    "source_mode": "SCHOOL_TEACHER_HANDOUT",
+    "participant_count_contract": {
+      "unique_participant_number_across_ten_proposals_excludes_substitutes": true,
+      "min_max_1_to_20_includes_substitutes": true,
+      "over_ten_participant_events_max_two_includes_substitutes": true,
+      "source_pdf_pages": [
+        43
+      ],
+      "review_status": "DIRECT_HANDOUT_TEXT_REVIEWED_NOT_INDEPENDENT"
+    },
+    "school_approval_overrides": {
+      "scope": "UNSAFE_PLAYER_SELECTION",
+      "authority": "SCHOOL_TEACHER",
+      "example": "Judo event six Class B default after commander selection timeout and Mashima safety determination",
+      "source_pdf_pages": [
+        372,
+        373,
+        374
+      ],
+      "does_not_mean_all_timeouts_forfeit": true
+    }
   },
   "command_runtime_reference": {
     "one_commander_per_class": true,
@@ -108,7 +128,40 @@
       71
     ],
     "preserve_written_command_before_channel": "YES_SOURCE_STATED_AFTER_REVELATION",
-    "require_incoming_vs_played_message_audit": true
+    "require_incoming_vs_played_message_audit": true,
+    "participant_assignment_timeout_exception": {
+      "default": "SCHOOL_RANDOM_FILL",
+      "exception": "SCHOOL_SAFETY_ADJUDICATION",
+      "source_pdf_pages": [
+        68,
+        372,
+        373,
+        374
+      ],
+      "judo_example": "Mashima declines random fill and issues Class B default after Ichinose fails to select fighter",
+      "does_not_replace_general_rule": true
+    },
+    "proposed_integrity_audit_contract": {
+      "type": "FUTURE_ENGINE_DESIGN_NOT_CLAIM_ABOUT_EXISTING_SCHOOL_LOGS",
+      "fields": [
+        "submitted_command",
+        "validated_command",
+        "delivered_command",
+        "observed_game_action",
+        "authority_identity",
+        "tamper_flag"
+      ],
+      "source_grounding": "Kiyotaka's intended chess command differed from delivered instruction; Tsukishiro later admits modification.",
+      "source_pdf_pages": [
+        417,
+        425,
+        429,
+        440,
+        441,
+        442,
+        443
+      ]
+    }
   },
   "scoring": {
     "event_winner_transfer_class_points": 30,
@@ -336,9 +389,11 @@
           372,
           373,
           374
-        ]
+        ],
+        "teacher_authority": "OFFICIAL_EXAM_ADJUDICATION_SAFETY"
       },
-      "causality_note": "Karate was the completed fifth event. Judo was the sixth event and ended by official default; the base random-fallback rule was overridden on safety grounds by Mashima."
+      "causality_note": "Karate was the completed fifth event. Judo was the sixth event and ended by official default; the base random-fallback rule was overridden on safety grounds by Mashima.",
+      "fifth_event_karate_source_mode": "COMPLETED_MATCH_WITH_ALLOWED_REMATCH_B_WIN_NOT_OBSERVED"
     }
   },
   "pre_exam_class_points": {
@@ -371,5 +426,9 @@
     "y1v11.ev.067",
     "y1v11.ev.068",
     "y1v11.ev.069"
+  ],
+  "uncertain_or_not_proven": [
+    "Existence of actual cryptographic logs for original/validated/delivered moves is not demonstrated in the story; such logs are an engineering proposal.",
+    "Safety override in judo does not authorize arbitrary teacher default on every timeout."
   ]
 }

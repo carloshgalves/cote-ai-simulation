@@ -16,7 +16,7 @@
   ],
   "observed_or_reported": "Hirata recalls a childhood friend bullied without his knowing, who survived a suicide attempt; Hirata attempted to suppress bullying and describes a failed approach that reduced visible conflict but also eroded happiness.",
   "person_known_to_actor": "actor.yosuke-hirata",
-  "friend_identity": "UNIDENTIFIED",
+  "friend_identity": "Sugimura (reported by Hirata; confirmed remembered by Kiyotaka)",
   "friend_survived": true,
   "baseline_gate": {
     "actor_initial_background": [
@@ -24,7 +24,9 @@
     ],
     "known_to_other_agents_at_y1_start": "NOT_PROVEN",
     "not_runtime_episodic_memory": true,
-    "post_entry_reactions_are_only_behavioral_evidence": true
+    "post_entry_reactions_are_only_behavioral_evidence": true,
+    "event_time": "BEFORE_Y1_START",
+    "kiyotaka_at_y1_start_knows_details": false
   },
   "linkage_to_y1_v10": {
     "actor": "actor.yosuke-hirata",
@@ -43,5 +45,27 @@
   ],
   "verified": false,
   "engine_memory_admission": false,
-  "external_independent_review": "NOT_PERFORMED"
+  "external_independent_review": "NOT_PERFORMED",
+  "friend_condition_at_source_time": "Survived attempted suicide; remained in a coma per Hirata's disclosure.",
+  "earlier_action_and_school_response": "After bullying shifted to another victim, Hirata enforced a coercive fear-based regime in middle school; classes were broken up/redistributed and monitored until graduation.",
+  "y1_v11_source_extension": {
+    "source_id": "ln.y1.v11.en.operator-provided",
+    "source_pdf_pages": [
+      299,
+      300,
+      301,
+      302,
+      303
+    ],
+    "source_evidence_refs": [
+      "y1v11.ev.028",
+      "y1v11.ev.064"
+    ],
+    "after_admission_disclosure_to_kiyotaka": true,
+    "does_not_give_every_student_initial_knowledge": true,
+    "contradictions_to_watch": [
+      "V10 only established survived attempt, V11 adds prolonged coma",
+      "Hirata's fearful control was self-reported; do not model as mandatory conduct"
+    ]
+  }
 }

@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.rokusuke-koenji",
   "title": "Opta por não responder, embora identifique resposta final de cálculo mental",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Opta por não responder, embora identifique resposta final de cálculo mental",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Deixa respostas em branco e em outro momento indica conseguir responder conta difícil",
+  "observed_result": "A classe não recebe todos os pontos que sua habilidade poderia talvez proporcionar",
+  "epistemic_limits": "Competência demonstrada não implica motivação para aplicá-la; não quantificar QI",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -21,13 +21,16 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.matsushita",
+    "actor.kiyotaka-ayanokoji"
+  ],
   "capabilities_supported": [
     "autonomy",
     "competence"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Conhece conteúdo e identifica dificuldade; não recebe mandato para agir sempre no máximo da própria capacidade",
+  "counterfactual_test": "Se interesse próprio mudar ou risco de expulsão pessoal surgir, pode escolher atuar",
   "topics": [
     "behavior",
     "autonomy",
@@ -46,5 +49,54 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Em cálculo mental rápido, Kōenji evita responder às contas propostas",
+    "actor_objective_at_time": "Preservar autonomia de participação mesmo possuindo habilidade de cálculo",
+    "actor_known_information": [
+      "Conhece conteúdo e identifica dificuldade; não recebe mandato para agir sempre no máximo da própria capacidade"
+    ],
+    "beliefs_and_uncertainties": [
+      "Competência demonstrada não implica motivação para aplicá-la; não quantificar QI"
+    ],
+    "available_alternatives": [
+      "Se interesse próprio mudar ou risco de expulsão pessoal surgir, pode escolher atuar"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Deixa respostas em branco e em outro momento indica conseguir responder conta difícil"
+    ],
+    "observed_outcome": "A classe não recebe todos os pontos que sua habilidade poderia talvez proporcionar",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.matsushita",
+        "role": "colega no evento"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante limitado pela vontade do participante"
+      }
+    ],
+    "causal_and_epistemic_limits": "Competência demonstrada não implica motivação para aplicá-la; não quantificar QI",
+    "counterfactual_probes": [
+      "Se interesse próprio mudar ou risco de expulsão pessoal surgir, pode escolher atuar"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.038",
+        "pdf_pages": [
+          359,
+          360,
+          361,
+          362,
+          363,
+          364,
+          365,
+          366
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

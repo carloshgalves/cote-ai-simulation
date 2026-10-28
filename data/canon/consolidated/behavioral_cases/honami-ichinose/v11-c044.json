@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.honami-ichinose",
   "title": "Durante o sexto evento (judô), esgota o prazo de escalação diante de Albert; Mashima declara vitória de D por padrão",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Ao chegar ao judô, avalia a diferença física de Albert, paralisa na designação de um único participante e deixa os 30 segundos expirarem.",
-  "observed_result": "Mashima declara a derrota da Classe B por padrão, em vez de escalar automaticamente um estudante, considerando os riscos da luta. É a quarta vitória de D, garantindo-lhe o confronto, mas a sétima prova ainda deve ocorrer.",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Não realiza escalação até o prazo Mashima decide não sortear estudante e determina derrota por padrão",
+  "observed_result": "D conquista quarta vitória e assegura resultado geral; sétimo evento ainda deve ocorrer",
+  "epistemic_limits": "Não confundir com quinto evento de caratê, que foi disputado; prevalece decisão excepcional de Mashima",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -20,13 +20,17 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kakeru-ryuen",
+    "actor.sae-chiyabashira",
+    "actor.kiyotaka-ayanokoji"
+  ],
   "capabilities_supported": [
     "leadership",
     "stress"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Ichinose sabe do limite de trinta segundos e da diferença física de Albert, mas não escolhe adversário",
+  "counterfactual_test": "Se escolher antes do prazo ou houver autorização de substituição segura, o combate pode ocorrer com resultado desconhecido",
   "topics": [
     "behavior",
     "leadership",
@@ -70,6 +74,57 @@
     "counterfactuals": [
       "Se a comandante tivesse escolhido participante a tempo, o judô poderia ter sido disputado, resultado desconhecido.",
       "Se Mashima aplicasse fallback aleatório, o participante escolhido e suas consequências dependeriam das regras e avaliação de segurança."
-    ]
+    ],
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Na sexta prova, judô, D escala Albert imediatamente",
+    "actor_objective_at_time": "Evitar expor aluno de B a confronto potencialmente inseguro enquanto precisa vencer",
+    "actor_known_information": [
+      "Ichinose sabe do limite de trinta segundos e da diferença física de Albert, mas não escolhe adversário"
+    ],
+    "beliefs_and_uncertainties": [
+      "Não confundir com quinto evento de caratê, que foi disputado; prevalece decisão excepcional de Mashima"
+    ],
+    "available_alternatives": [
+      "Se escolher antes do prazo ou houver autorização de substituição segura, o combate pode ocorrer com resultado desconhecido"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Não realiza escalação até o prazo",
+      "Mashima decide não sortear estudante e determina derrota por padrão"
+    ],
+    "observed_outcome": "D conquista quarta vitória e assegura resultado geral; sétimo evento ainda deve ocorrer",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kakeru-ryuen",
+        "role": "comandante adversário"
+      },
+      {
+        "actor_id": "actor.sae-chiyabashira",
+        "role": "docente da outra classe"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "observador externo"
+      }
+    ],
+    "causal_and_epistemic_limits": "Não confundir com quinto evento de caratê, que foi disputado; prevalece decisão excepcional de Mashima",
+    "counterfactual_probes": [
+      "Se escolher antes do prazo ou houver autorização de substituição segura, o combate pode ocorrer com resultado desconhecido"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.044",
+        "pdf_pages": [
+          368,
+          369,
+          370,
+          371,
+          372,
+          373,
+          374
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

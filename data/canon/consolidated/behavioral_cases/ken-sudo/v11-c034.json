@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.ken-sudo",
   "title": "Contribui à vitória da turma em basquete",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Contribui à vitória da turma em basquete",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Entra como substituto e enfrenta Kitō, que havia ocultado sua habilidade durante parte do jogo",
+  "observed_result": "Classe C mantém caminho à vitória no basquete, apesar de provocações",
+  "epistemic_limits": "Talento no basquete e resiliência emocional são atributos separados",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -20,13 +20,16 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.arisu-sakayanagi"
+  ],
   "capabilities_supported": [
     "sports",
     "teamwork"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Sudō sabe que joga bem, mas a estratégia adversária inclui provocar sua impulsividade",
+  "counterfactual_test": "Se Sudō perder controle sob provocação, desempenho ou disciplina podem cair",
   "topics": [
     "behavior",
     "sports",
@@ -45,5 +48,53 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "No basquete, Class C precisa de atleta decisivo contra Kitō",
+    "actor_objective_at_time": "Contribuir para a vitória após ser colocado em quadra",
+    "actor_known_information": [
+      "Sudō sabe que joga bem, mas a estratégia adversária inclui provocar sua impulsividade"
+    ],
+    "beliefs_and_uncertainties": [
+      "Talento no basquete e resiliência emocional são atributos separados"
+    ],
+    "available_alternatives": [
+      "Se Sudō perder controle sob provocação, desempenho ou disciplina podem cair"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Entra como substituto e enfrenta Kitō, que havia ocultado sua habilidade durante parte do jogo"
+    ],
+    "observed_outcome": "Classe C mantém caminho à vitória no basquete, apesar de provocações",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante que escala"
+      },
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "comandante adversária"
+      }
+    ],
+    "causal_and_epistemic_limits": "Talento no basquete e resiliência emocional são atributos separados",
+    "counterfactual_probes": [
+      "Se Sudō perder controle sob provocação, desempenho ou disciplina podem cair"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.034",
+        "pdf_pages": [
+          335,
+          338,
+          340,
+          343,
+          344,
+          345,
+          346
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

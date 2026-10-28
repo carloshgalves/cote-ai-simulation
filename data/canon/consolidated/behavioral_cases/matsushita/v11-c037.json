@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.matsushita",
   "title": "Participa como backup em cálculo mental até limite demonstrado",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Participa como backup em cálculo mental até limite demonstrado",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Responde parte das contas dentro das próprias condições e não decide sozinha o placar",
+  "observed_result": "Classe A vence evento; limites locais das respostas não definem teto geral de inteligência dela",
+  "epistemic_limits": "Uma atuação de backup não é medida universal de raciocínio",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -19,13 +19,16 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.rokusuke-koenji"
+  ],
   "capabilities_supported": [
     "academic_reasoning",
     "teamwork"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Matsushita participa como apoio e reconhece a complexidade crescente das questões",
+  "counterfactual_test": "Se a ordem de perguntas ou participação for diferente, contribuição efetiva muda",
   "topics": [
     "behavior",
     "academic_reasoning",
@@ -44,5 +47,52 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Cálculo mental rápido exige participantes e reserva sob limite de tempo",
+    "actor_objective_at_time": "Contribuir com cálculos corretos antes de atingir limite individual",
+    "actor_known_information": [
+      "Matsushita participa como apoio e reconhece a complexidade crescente das questões"
+    ],
+    "beliefs_and_uncertainties": [
+      "Uma atuação de backup não é medida universal de raciocínio"
+    ],
+    "available_alternatives": [
+      "Se a ordem de perguntas ou participação for diferente, contribuição efetiva muda"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Responde parte das contas dentro das próprias condições e não decide sozinha o placar"
+    ],
+    "observed_outcome": "Classe A vence evento; limites locais das respostas não definem teto geral de inteligência dela",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante de C"
+      },
+      {
+        "actor_id": "actor.rokusuke-koenji",
+        "role": "colega que não responde"
+      }
+    ],
+    "causal_and_epistemic_limits": "Uma atuação de backup não é medida universal de raciocínio",
+    "counterfactual_probes": [
+      "Se a ordem de perguntas ou participação for diferente, contribuição efetiva muda"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.037",
+        "pdf_pages": [
+          359,
+          360,
+          361,
+          362,
+          363,
+          364
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

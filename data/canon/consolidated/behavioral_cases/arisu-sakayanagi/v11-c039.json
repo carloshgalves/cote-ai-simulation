@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.arisu-sakayanagi",
   "title": "Prevê aliciamento de Katsuragi e o desestimula ameaçando colegas",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Prevê aliciamento de Katsuragi e o desestimula ameaçando colegas",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Antecipando falha deliberada, apresenta consequência potencial a colegas que ele deseja proteger",
+  "observed_result": "Katsuragi mantém atuação na prova e plano de sabotagem não se concretiza",
+  "epistemic_limits": "Coerção observada não é capacidade legítima irrestrita de controlar colega",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -17,14 +17,18 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.katsuragi",
+    "actor.yukimura",
+    "actor.kiyotaka-ayanokoji"
+  ],
   "capabilities_supported": [
     "strategy",
     "coercion",
     "politics"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Arisu conhece conflito político com Katsuragi e possibilidade de aliciamento",
+  "counterfactual_test": "Se ameaças forem impossíveis ou Katsuragi priorizar ressentimento, sua escolha pode divergir",
   "topics": [
     "behavior",
     "strategy",
@@ -44,5 +48,54 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Katsuragi é sondado por Keisei e Kiyotaka",
+    "actor_objective_at_time": "Impedir sabotagem da turma A preservando domínio de sua facção",
+    "actor_known_information": [
+      "Arisu conhece conflito político com Katsuragi e possibilidade de aliciamento"
+    ],
+    "beliefs_and_uncertainties": [
+      "Coerção observada não é capacidade legítima irrestrita de controlar colega"
+    ],
+    "available_alternatives": [
+      "Se ameaças forem impossíveis ou Katsuragi priorizar ressentimento, sua escolha pode divergir"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Antecipando falha deliberada, apresenta consequência potencial a colegas que ele deseja proteger"
+    ],
+    "observed_outcome": "Katsuragi mantém atuação na prova e plano de sabotagem não se concretiza",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.katsuragi",
+        "role": "alvo da pressão"
+      },
+      {
+        "actor_id": "actor.yukimura",
+        "role": "negociador externo"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "observador da tentativa"
+      }
+    ],
+    "causal_and_epistemic_limits": "Coerção observada não é capacidade legítima irrestrita de controlar colega",
+    "counterfactual_probes": [
+      "Se ameaças forem impossíveis ou Katsuragi priorizar ressentimento, sua escolha pode divergir"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.039",
+        "pdf_pages": [
+          363,
+          364,
+          365,
+          366
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

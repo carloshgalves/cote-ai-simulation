@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.hiyori-shiina",
   "title": "Convoca colegas para aproximar Ryūen, Ibuki e Ishizaki",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Convoca colegas para aproximar Ryūen, Ibuki e Ishizaki",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Organiza encontro no karaokê, insiste para convidados esperarem e consegue reuni-los apesar de atraso",
+  "observed_result": "A conversa acontece; Ryūen concebe estratégia depois, não Hiyori",
+  "epistemic_limits": "Facilitar encontro não é controlar conteúdo do plano, nem legitimar seus meios",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -22,14 +22,18 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.ishizaki",
+    "actor.mio-ibuki",
+    "actor.kakeru-ryuen"
+  ],
   "capabilities_supported": [
     "initiative",
     "social",
     "mediation"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Hiyori sabe da tensão entre Ryūen e ex-subordinados e dispõe de meio de convocação",
+  "counterfactual_test": "Se alguém sair antes da chegada ou Ryūen não comparecer, mediação não se conclui",
   "topics": [
     "behavior",
     "initiative",
@@ -49,5 +53,59 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Ishizaki e Ibuki não convencem Ryūen diretamente",
+    "actor_objective_at_time": "Aproximar os três colegas e permitir conversa sobre futuro da turma",
+    "actor_known_information": [
+      "Hiyori sabe da tensão entre Ryūen e ex-subordinados e dispõe de meio de convocação"
+    ],
+    "beliefs_and_uncertainties": [
+      "Facilitar encontro não é controlar conteúdo do plano, nem legitimar seus meios"
+    ],
+    "available_alternatives": [
+      "Se alguém sair antes da chegada ou Ryūen não comparecer, mediação não se conclui"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Organiza encontro no karaokê, insiste para convidados esperarem e consegue reuni-los apesar de atraso"
+    ],
+    "observed_outcome": "A conversa acontece; Ryūen concebe estratégia depois, não Hiyori",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.ishizaki",
+        "role": "convidado e solicitante"
+      },
+      {
+        "actor_id": "actor.mio-ibuki",
+        "role": "convidada"
+      },
+      {
+        "actor_id": "actor.kakeru-ryuen",
+        "role": "convidado tardio"
+      }
+    ],
+    "causal_and_epistemic_limits": "Facilitar encontro não é controlar conteúdo do plano, nem legitimar seus meios",
+    "counterfactual_probes": [
+      "Se alguém sair antes da chegada ou Ryūen não comparecer, mediação não se conclui"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.042",
+        "pdf_pages": [
+          381,
+          382,
+          383,
+          384,
+          385,
+          386,
+          387,
+          388,
+          389
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

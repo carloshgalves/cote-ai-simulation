@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.sotomura",
   "title": "Vence evento de digitação com especialidade própria",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Vence evento de digitação com especialidade própria",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Participa de prova de três formatos e faz 90 pontos",
+  "observed_result": "Vence Yoshida da Classe A por 90 a 83, garantindo segundo evento de C",
+  "epistemic_limits": "Proficiência em digitação não é desempenho geral em tecnologia ou liderança",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -17,13 +17,16 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.arisu-sakayanagi"
+  ],
   "capabilities_supported": [
     "typing",
     "competence"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Sotomura conhece sua habilidade; não sabe antecipadamente desempenho de Yoshida",
+  "counterfactual_test": "Adversário mais veloz ou execução mais errática poderia produzir derrota",
   "topics": [
     "behavior",
     "typing",
@@ -42,5 +45,50 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "O segundo evento sorteado é digitação com um participante",
+    "actor_objective_at_time": "Aplicar especialidade em teclado sob critérios de velocidade e precisão",
+    "actor_known_information": [
+      "Sotomura conhece sua habilidade; não sabe antecipadamente desempenho de Yoshida"
+    ],
+    "beliefs_and_uncertainties": [
+      "Proficiência em digitação não é desempenho geral em tecnologia ou liderança"
+    ],
+    "available_alternatives": [
+      "Adversário mais veloz ou execução mais errática poderia produzir derrota"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Participa de prova de três formatos e faz 90 pontos"
+    ],
+    "observed_outcome": "Vence Yoshida da Classe A por 90 a 83, garantindo segundo evento de C",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante que escolhe"
+      },
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "comandante adversária"
+      }
+    ],
+    "causal_and_epistemic_limits": "Proficiência em digitação não é desempenho geral em tecnologia ou liderança",
+    "counterfactual_probes": [
+      "Adversário mais veloz ou execução mais errática poderia produzir derrota"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.035",
+        "pdf_pages": [
+          348,
+          349,
+          350,
+          351
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

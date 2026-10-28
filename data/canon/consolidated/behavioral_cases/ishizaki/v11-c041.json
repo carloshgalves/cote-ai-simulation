@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.ishizaki",
   "title": "Solicita participação estratégica de Ryūen após recusa inicial",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Solicita participação estratégica de Ryūen após recusa inicial",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Procura Ryūen e pede cooperação, mesmo após recusa inicial",
+  "observed_result": "Abre caminho para reunião de aliados; não recebe ordem inicial para procurar ajuda",
+  "epistemic_limits": "Iniciativa pertence a Ishizaki; resultado não é inevitável",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -21,13 +21,17 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kakeru-ryuen",
+    "actor.hiyori-shiina",
+    "actor.mio-ibuki"
+  ],
   "capabilities_supported": [
     "initiative",
     "loyalty"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Ishizaki conhece competência anterior de Ryūen mas não sua disponibilidade atual",
+  "counterfactual_test": "Se Ryūen recusar definitivamente, Ishizaki terá de agir com Kaneda ou outro plano",
   "topics": [
     "behavior",
     "initiative",
@@ -46,5 +50,58 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Kaneda comanda D e a turma teme perder para B",
+    "actor_objective_at_time": "Buscar contribuição do estrategista que havia se afastado da liderança",
+    "actor_known_information": [
+      "Ishizaki conhece competência anterior de Ryūen mas não sua disponibilidade atual"
+    ],
+    "beliefs_and_uncertainties": [
+      "Iniciativa pertence a Ishizaki; resultado não é inevitável"
+    ],
+    "available_alternatives": [
+      "Se Ryūen recusar definitivamente, Ishizaki terá de agir com Kaneda ou outro plano"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Procura Ryūen e pede cooperação, mesmo após recusa inicial"
+    ],
+    "observed_outcome": "Abre caminho para reunião de aliados; não recebe ordem inicial para procurar ajuda",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kakeru-ryuen",
+        "role": "potencial estrategista"
+      },
+      {
+        "actor_id": "actor.hiyori-shiina",
+        "role": "facilitadora"
+      },
+      {
+        "actor_id": "actor.mio-ibuki",
+        "role": "colega cética"
+      }
+    ],
+    "causal_and_epistemic_limits": "Iniciativa pertence a Ishizaki; resultado não é inevitável",
+    "counterfactual_probes": [
+      "Se Ryūen recusar definitivamente, Ishizaki terá de agir com Kaneda ou outro plano"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.041",
+        "pdf_pages": [
+          375,
+          376,
+          377,
+          378,
+          379,
+          380,
+          381,
+          383
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

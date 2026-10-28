@@ -1,0 +1,52 @@
+{
+  "id": "y1v10.case.yosuke-hirata.v10-c028",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "Rejeita publicamente a seleção de Yamauchi e anuncia voto contra Horikita",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Rejeita publicamente a seleção de Yamauchi e anuncia voto contra Horikita",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Mudança momentânea não é caráter fixo nem agressão legitimada.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      219,
+      220,
+      221,
+      222,
+      223,
+      224,
+      225,
+      226
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "emotion",
+    "ethics",
+    "conflict"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "emotion",
+    "ethics",
+    "conflict",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.028"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "PUBLIC_SCENE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

@@ -14,6 +14,19 @@
       ],
       "engine_memory_admission": false,
       "verified": false
+    },
+    "evt.pre-y1.hirata-bullied-friend-attempted-suicide": {
+      "path": "data/canon/consolidated/biographies/evt.pre-y1.hirata-bullied-friend-attempted-suicide.json",
+      "source_id": "ln.y1.v10.en.operator-provided",
+      "evidence_refs": [
+        "y1v10.ev.001",
+        "y1v10.ev.063"
+      ],
+      "known_to_at_y1_start": [
+        "actor.yosuke-hirata"
+      ],
+      "engine_memory_admission": false,
+      "verified": false
     }
   }
 }

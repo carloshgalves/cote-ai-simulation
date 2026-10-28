@@ -7,7 +7,8 @@
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
-    "ln.y1.v08.sevenseas.en.operator-provided"
+    "ln.y1.v08.sevenseas.en.operator-provided",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -33,12 +34,14 @@
     "social": {
       "behavioral_case_refs": [
         "y1v6.case.hasebe.seek-academic-support-and-form-friendship-circle",
-        "y1v075.case.hasebe.v075-c019"
+        "y1v075.case.hasebe.v075-c019",
+        "y1v10.case.hasebe.v10-c011"
       ],
       "context_evidence_refs": [
         "y1v1.ev.117",
         "y1v075.ev.019",
-        "y1v075.ev.020"
+        "y1v075.ev.020",
+        "y1v10.ev.011"
       ]
     },
     "observation": {
@@ -100,9 +103,12 @@
       ]
     },
     "cooperation": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v10.case.hasebe.v10-c022"
+      ],
       "context_evidence_refs": [
-        "y1v6.ev.056"
+        "y1v6.ev.056",
+        "y1v10.ev.022"
       ]
     },
     "leadership": {
@@ -117,6 +123,46 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v075.ev.051"
+      ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v10.case.hasebe.v10-c011",
+        "y1v10.case.hasebe.v10-c022"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.011",
+        "y1v10.ev.022"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [
+        "y1v10.case.hasebe.v10-c011",
+        "y1v10.case.hasebe.v10-c022"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.011",
+        "y1v10.ev.022"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [
+        "y1v10.case.hasebe.v10-c011",
+        "y1v10.case.hasebe.v10-c022"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.011",
+        "y1v10.ev.022"
+      ]
+    },
+    "y1_v10": {
+      "behavioral_case_refs": [
+        "y1v10.case.hasebe.v10-c011",
+        "y1v10.case.hasebe.v10-c022"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.011",
+        "y1v10.ev.022"
       ]
     }
   },
@@ -170,5 +216,22 @@
   "y1_v08_actor_state_deltas": [],
   "y1_v08_relationship_refs": [
     "y1v08.rel.053"
-  ]
+  ],
+  "y1_v10_source_status": "SOURCE_BOUNDED_CANDIDATE_INDEPENDENT_REVIEW_PENDING",
+  "y1_v10_knowledge_gate": {
+    "pre_enrollment_history_biography_only": true,
+    "post_admission_canon_never_runtime_episode": true,
+    "rumor_and_private_interpretation_actor_scoped": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v10_behavioral_case_refs": [
+    "y1v10.case.hasebe.v10-c011",
+    "y1v10.case.hasebe.v10-c022"
+  ],
+  "y1_v10_context_evidence_refs": [
+    "y1v10.ev.011",
+    "y1v10.ev.022"
+  ],
+  "y1_v10_goal_transition_refs": []
 }

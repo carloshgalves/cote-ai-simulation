@@ -11,7 +11,8 @@
     "ln.y1.v05.sevenseas.en.operator-provided",
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v08.sevenseas.en.operator-provided"
+    "ln.y1.v08.sevenseas.en.operator-provided",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -27,7 +28,9 @@
       "behavioral_case_refs": [
         "y1v1.case.o.priority-seat-refusal",
         "y1v4.case.rokusuke-koenji.proclaim-autograph-value",
-        "y1v5.case.rokusuke-koenji.withdraw-claimed-illness-under-pressure"
+        "y1v5.case.rokusuke-koenji.withdraw-claimed-illness-under-pressure",
+        "y1v10.case.rokusuke-koenji.v10-c009",
+        "y1v10.case.rokusuke-koenji.v10-c036"
       ],
       "context_evidence_refs": [
         "y1v1.ev.003",
@@ -40,7 +43,9 @@
         "y1v4.ev.009",
         "y1v4.ev.010",
         "y1v4.ev.011",
-        "y1v7.ev.053"
+        "y1v7.ev.053",
+        "y1v10.ev.009",
+        "y1v10.ev.036"
       ]
     },
     "ethics": {
@@ -109,7 +114,9 @@
       ]
     },
     "strategy": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v10.case.rokusuke-koenji.v10-c009"
+      ],
       "context_evidence_refs": [
         "y1v3.ev.033",
         "y1v4.ev.011",
@@ -117,7 +124,8 @@
         "y1v7.ev.024",
         "y1v7.ev.052",
         "y1v7.ev.054",
-        "y1v7.ev.060"
+        "y1v7.ev.060",
+        "y1v10.ev.009"
       ]
     },
     "health": {
@@ -137,10 +145,13 @@
       ]
     },
     "conflict": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v10.case.rokusuke-koenji.v10-c036"
+      ],
       "context_evidence_refs": [
         "y1v4.ev.009",
-        "y1v4.ev.067"
+        "y1v4.ev.067",
+        "y1v10.ev.036"
       ]
     },
     "self_presentation": {
@@ -214,12 +225,16 @@
       "behavioral_case_refs": [
         "y1v08.case.rokusuke-koenji.v08-c013",
         "y1v08.case.rokusuke-koenji.v08-c015",
-        "y1v08.case.rokusuke-koenji.v08-c032"
+        "y1v08.case.rokusuke-koenji.v08-c032",
+        "y1v10.case.rokusuke-koenji.v10-c009",
+        "y1v10.case.rokusuke-koenji.v10-c036"
       ],
       "context_evidence_refs": [
         "y1v08.ev.013",
         "y1v08.ev.015",
-        "y1v08.ev.032"
+        "y1v08.ev.032",
+        "y1v10.ev.009",
+        "y1v10.ev.036"
       ]
     },
     "teamwork": {
@@ -234,6 +249,26 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v08.ev.056"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [
+        "y1v10.case.rokusuke-koenji.v10-c009",
+        "y1v10.case.rokusuke-koenji.v10-c036"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.009",
+        "y1v10.ev.036"
+      ]
+    },
+    "y1_v10": {
+      "behavioral_case_refs": [
+        "y1v10.case.rokusuke-koenji.v10-c009",
+        "y1v10.case.rokusuke-koenji.v10-c036"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.009",
+        "y1v10.ev.036"
       ]
     }
   },
@@ -264,5 +299,22 @@
   "y1_v08_actor_state_deltas": [],
   "y1_v08_relationship_refs": [
     "y1v08.rel.056"
-  ]
+  ],
+  "y1_v10_source_status": "SOURCE_BOUNDED_CANDIDATE_INDEPENDENT_REVIEW_PENDING",
+  "y1_v10_knowledge_gate": {
+    "pre_enrollment_history_biography_only": true,
+    "post_admission_canon_never_runtime_episode": true,
+    "rumor_and_private_interpretation_actor_scoped": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v10_behavioral_case_refs": [
+    "y1v10.case.rokusuke-koenji.v10-c009",
+    "y1v10.case.rokusuke-koenji.v10-c036"
+  ],
+  "y1_v10_context_evidence_refs": [
+    "y1v10.ev.009",
+    "y1v10.ev.036"
+  ],
+  "y1_v10_goal_transition_refs": []
 }

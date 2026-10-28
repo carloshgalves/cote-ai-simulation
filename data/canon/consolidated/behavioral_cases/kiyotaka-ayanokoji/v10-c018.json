@@ -1,0 +1,51 @@
+{
+  "id": "y1v10.case.kiyotaka-ayanokoji.v10-c018",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Questiona Hirata em privado e aconselha que forme juízo próprio sobre o sacrifício",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Questiona Hirata em privado e aconselha que forme juízo próprio sobre o sacrifício",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Não concluir que tentou curar trauma ou controlar toda decisão de Hirata.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      129,
+      130,
+      135,
+      136,
+      137,
+      138,
+      139
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social",
+    "strategy",
+    "inference"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "social",
+    "strategy",
+    "inference",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.018"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "PRIVATE_DIALOGUE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "y1v10.case.nazuna-asahina.v10-c015",
+  "actor_id": "actor.nazuna-asahina",
+  "primary_actor_id": "actor.nazuna-asahina",
+  "title": "Avisa Ayanokōji sobre proposta de Nagumo a Ichinose e seu custo pessoal",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Avisa Ayanokōji sobre proposta de Nagumo a Ichinose e seu custo pessoal",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Termos são relatados por Asahina, não contrato já efetivado.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      97,
+      98,
+      99,
+      100,
+      101,
+      102
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "politics",
+    "social",
+    "proactivity"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "politics",
+    "social",
+    "proactivity",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.015"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "PRIVATE_REPORTED_DIALOGUE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

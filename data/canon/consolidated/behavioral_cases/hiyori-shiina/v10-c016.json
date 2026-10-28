@@ -1,0 +1,47 @@
+{
+  "id": "y1v10.case.hiyori-shiina.v10-c016",
+  "actor_id": "actor.hiyori-shiina",
+  "primary_actor_id": "actor.hiyori-shiina",
+  "title": "Conversa com Ayanokōji na biblioteca e disponibiliza interação discreta entre classes",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Conversa com Ayanokōji na biblioteca e disponibiliza interação discreta entre classes",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "A conversa não autoriza atribuir conhecimento integral do plano posterior.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      104,
+      105,
+      106,
+      107,
+      108
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social",
+    "observation"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "social",
+    "observation",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.016"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "DIRECT_SCENE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "y1v10.case.kei-karuizawa.v10-c021",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "Coleta informações sobre conspiração de votos e comunica indícios a Ayanokōji",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Coleta informações sobre conspiração de votos e comunica indícios a Ayanokōji",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Informações da rede precisam preservar quem efetivamente ouviu o quê.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      150,
+      151,
+      152,
+      153,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "information",
+    "strategy",
+    "social"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "information",
+    "strategy",
+    "social",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.021"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "PRIVATE_MESSAGE_REPORT",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

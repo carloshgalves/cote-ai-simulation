@@ -1,0 +1,50 @@
+{
+  "id": "y1v10.case.kiyotaka-ayanokoji.v10-c029",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Fornece informação ao Manabu para chegar a Suzune sem ser o rosto da denúncia",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Fornece informação ao Manabu para chegar a Suzune sem ser o rosto da denúncia",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Separar canal indireto do discurso executado por Suzune.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      227,
+      228,
+      229,
+      230,
+      314,
+      315
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "indirect_action",
+    "proactivity"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "strategy",
+    "indirect_action",
+    "proactivity",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.029"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "RETROSPECTIVE_NARRATOR_ACCOUNT",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

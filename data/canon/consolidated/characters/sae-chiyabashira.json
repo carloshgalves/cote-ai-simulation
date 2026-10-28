@@ -11,7 +11,8 @@
     "ln.y1.v06.sevenseas.en.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
-    "ln.y1.v09.en.operator-provided"
+    "ln.y1.v09.en.operator-provided",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -76,7 +77,13 @@
         "y1v7.ev.082",
         "y1v7.ev.086",
         "y1v08.ev.003",
-        "y1v09.ev.029"
+        "y1v09.ev.029",
+        "y1v10.ev.046",
+        "y1v10.ev.047",
+        "y1v10.ev.048",
+        "y1v10.ev.049",
+        "y1v10.ev.050",
+        "y1v10.ev.051"
       ]
     },
     "economy": {
@@ -105,7 +112,8 @@
         "y1v3.ev.021",
         "y1v4.ev.086",
         "y1v4.ev.088",
-        "y1v08.ev.003"
+        "y1v08.ev.003",
+        "y1v10.ev.049"
       ]
     },
     "academic_reasoning": {
@@ -346,6 +354,33 @@
       "context_evidence_refs": [
         "y1v09.ev.029"
       ]
+    },
+    "exams": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v10.ev.046",
+        "y1v10.ev.047",
+        "y1v10.ev.048",
+        "y1v10.ev.049",
+        "y1v10.ev.051"
+      ]
+    },
+    "y1_v10": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v10.ev.046",
+        "y1v10.ev.047",
+        "y1v10.ev.048",
+        "y1v10.ev.049",
+        "y1v10.ev.050",
+        "y1v10.ev.051"
+      ]
+    },
+    "academics": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v10.ev.050"
+      ]
     }
   },
   "source_documents": [],
@@ -386,5 +421,23 @@
   "y1_v09_context_evidence_refs": [
     "y1v09.ev.029"
   ],
-  "y1_v09_relationship_refs": []
+  "y1_v09_relationship_refs": [],
+  "y1_v10_source_status": "SOURCE_BOUNDED_CANDIDATE_INDEPENDENT_REVIEW_PENDING",
+  "y1_v10_knowledge_gate": {
+    "pre_enrollment_history_biography_only": true,
+    "post_admission_canon_never_runtime_episode": true,
+    "rumor_and_private_interpretation_actor_scoped": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v10_behavioral_case_refs": [],
+  "y1_v10_context_evidence_refs": [
+    "y1v10.ev.046",
+    "y1v10.ev.047",
+    "y1v10.ev.048",
+    "y1v10.ev.049",
+    "y1v10.ev.050",
+    "y1v10.ev.051"
+  ],
+  "y1_v10_goal_transition_refs": []
 }

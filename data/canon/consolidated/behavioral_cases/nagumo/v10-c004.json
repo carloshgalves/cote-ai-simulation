@@ -1,0 +1,51 @@
+{
+  "id": "y1v10.case.nagumo.v10-c004",
+  "actor_id": "actor.nagumo",
+  "primary_actor_id": "actor.nagumo",
+  "title": "Reúne os irmãos Horikita para testar vulnerabilidades políticas e propõe ingresso de Suzune no conselho",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Reúne os irmãos Horikita para testar vulnerabilidades políticas e propõe ingresso de Suzune no conselho",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Objetivo de obter concessão de Manabu é avaliação dos observadores; não ato certificado.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "politics",
+    "strategy",
+    "social"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "politics",
+    "strategy",
+    "social",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.004"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "DIRECT_AND_INTERPRETED_ACTION",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

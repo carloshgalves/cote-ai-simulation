@@ -1,0 +1,57 @@
+{
+  "id": "y1v10.case.mio-ibuki.v10-c038",
+  "actor_id": "actor.mio-ibuki",
+  "primary_actor_id": "actor.mio-ibuki",
+  "title": "Obtém pontos de Ryūen, avalia custo de substituição e propõe Manabe como alvo",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Obtém pontos de Ryūen, avalia custo de substituição e propõe Manabe como alvo",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Proposta contra Manabe não foi endossada antecipadamente por todos.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      329,
+      330,
+      331,
+      332,
+      333,
+      334,
+      335,
+      336,
+      337,
+      338,
+      339,
+      340,
+      341
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "economy",
+    "strategy",
+    "risk_management"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "economy",
+    "strategy",
+    "risk_management",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.038"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "DIRECT_AND_LATER_REVEALED",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

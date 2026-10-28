@@ -1,0 +1,66 @@
+{
+  "id": "y1v10.case.suzune-horikita.v10-c026",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "Expõe esquema de Yamauchi, contrapõe contribuição acadêmica e defende voto contra ele",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Expõe esquema de Yamauchi, contrapõe contribuição acadêmica e defende voto contra ele",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "A coerção grupal e a finalidade dos votos são históricas, não práticas obrigatórias.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      198,
+      199,
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "leadership",
+    "strategy",
+    "politics"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "leadership",
+    "strategy",
+    "politics",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.026"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "PUBLIC_SCENE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

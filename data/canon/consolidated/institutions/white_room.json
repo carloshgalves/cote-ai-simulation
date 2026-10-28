@@ -5,7 +5,8 @@
   "source_coverage": [
     "ln.y1.v00.legacyemtls.v1.0.1",
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v075.sevenseas.en.operator-provided"
+    "ln.y1.v075.sevenseas.en.operator-provided",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "V0_PLUS_V7_ATTRIBUTED_REFERENCE_NOT_EXTERNAL_APPROVED",
   "source_documents": [],
@@ -113,7 +114,9 @@
     "y1v7.ev.036",
     "y1v7.ev.037",
     "y1v7.ev.038",
-    "y1v075.ev.060"
+    "y1v075.ev.060",
+    "y1v10.ev.043",
+    "y1v10.ev.062"
   ],
   "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
   "operational_migration": "Only user/operator-authorized claims may be promoted after review",
@@ -311,5 +314,21 @@
       "engine_memory_admission": false
     }
   },
-  "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance."
+  "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance.",
+  "y1_v10_external_kyotaka_pressure": {
+    "source_id": "ln.y1.v10.en.operator-provided",
+    "source_evidence_refs": [
+      "y1v10.ev.043",
+      "y1v10.ev.062"
+    ],
+    "school_visitor_self_identified": "Tsukishiro",
+    "announced_office": "ACTING_DIRECTOR_IN_APRIL",
+    "attributed_message_from_atsuomi": "WANTS_KIYOTAKA_TO_RETURN_HOME",
+    "agency_boundary": "Tsukishiro's claim is not independent documentary proof of chain of command or exact access to White Room decisions",
+    "observed_event": "Physical confrontation in private special building",
+    "uncertain_camera_record": "Tsukishiro asserts tampered security video; no independent audit performed",
+    "no_backdated_actor_knowledge": true,
+    "engine_memory_admission": false,
+    "verified": false
+  }
 }

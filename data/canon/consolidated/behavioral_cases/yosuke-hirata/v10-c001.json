@@ -1,0 +1,47 @@
+{
+  "id": "y1v10.case.yosuke-hirata.v10-c001",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "Ao relatar a tentativa de suicídio de amigo intimidado, Hirata associa proteção de colegas à necessidade de impedir novas agressões",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Ao relatar a tentativa de suicídio de amigo intimidado, Hirata associa proteção de colegas à necessidade de impedir novas agressões",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Biografia anterior à matrícula; não impor controle autoritário como resposta universal.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      6,
+      7,
+      8
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "identity",
+    "emotion",
+    "motivation"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "identity",
+    "emotion",
+    "motivation",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.001"
+  ],
+  "episode_scope": "PRE_ADMISSION_BIOGRAPHICAL_EVIDENCE",
+  "source_mode": "FIRST_PERSON_PRE_ENROLLMENT",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

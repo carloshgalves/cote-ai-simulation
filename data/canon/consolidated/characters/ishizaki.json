@@ -7,7 +7,8 @@
     "ln.y1.v02.sevenseas.en.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
     "ln.y1.v07.sevenseas.en.operator-provided",
-    "ln.y1.v08.sevenseas.en.operator-provided"
+    "ln.y1.v08.sevenseas.en.operator-provided",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "V7_DESCRIPTIVE_DATA_PRESENT_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -55,7 +56,8 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v2.ev.059",
-        "y1v2.ev.082"
+        "y1v2.ev.082",
+        "y1v10.ev.059"
       ]
     },
     "academic_reasoning": {
@@ -99,9 +101,12 @@
       ]
     },
     "behavior": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v10.case.ishizaki.v10-c037"
+      ],
       "context_evidence_refs": [
-        "y1v08.ev.031"
+        "y1v08.ev.031",
+        "y1v10.ev.037"
       ]
     },
     "cooperation": {
@@ -121,6 +126,45 @@
       "context_evidence_refs": [
         "y1v08.ev.049"
       ]
+    },
+    "proactivity": {
+      "behavioral_case_refs": [
+        "y1v10.case.ishizaki.v10-c037"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.037"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [
+        "y1v10.case.ishizaki.v10-c037"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.037"
+      ]
+    },
+    "loyalty": {
+      "behavioral_case_refs": [
+        "y1v10.case.ishizaki.v10-c037"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.037"
+      ]
+    },
+    "y1_v10": {
+      "behavioral_case_refs": [
+        "y1v10.case.ishizaki.v10-c037"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.037",
+        "y1v10.ev.059"
+      ]
+    },
+    "exams": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v10.ev.059"
+      ]
     }
   },
   "source_documents": [],
@@ -138,6 +182,7 @@
     "verified_facts": "RECORD_AUDIT_REQUIRED"
   },
   "goal_transition_refs": [
+    "y1v10.goal.ishizaki.v10-g007",
     "y1v7.goal.ishizaki.v7-g011"
   ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
@@ -166,5 +211,23 @@
   ],
   "y1_v08_relationship_refs": [
     "y1v08.rel.049"
+  ],
+  "y1_v10_source_status": "SOURCE_BOUNDED_CANDIDATE_INDEPENDENT_REVIEW_PENDING",
+  "y1_v10_knowledge_gate": {
+    "pre_enrollment_history_biography_only": true,
+    "post_admission_canon_never_runtime_episode": true,
+    "rumor_and_private_interpretation_actor_scoped": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v10_behavioral_case_refs": [
+    "y1v10.case.ishizaki.v10-c037"
+  ],
+  "y1_v10_context_evidence_refs": [
+    "y1v10.ev.037",
+    "y1v10.ev.059"
+  ],
+  "y1_v10_goal_transition_refs": [
+    "y1v10.goal.ishizaki.v10-g007"
   ]
 }

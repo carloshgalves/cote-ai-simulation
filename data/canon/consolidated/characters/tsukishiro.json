@@ -4,7 +4,8 @@
   "display_name": "Tokinari Tsukishiro",
   "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
-    "ln.y1.v00.legacyemtls.v1.0.1"
+    "ln.y1.v00.legacyemtls.v1.0.1",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -34,7 +35,8 @@
     },
     "politics": {
       "behavioral_case_refs": [
-        "v0.case.tsukishiro.dual-roles"
+        "v0.case.tsukishiro.dual-roles",
+        "y1v10.case.tsukishiro.v10-c043"
       ],
       "context_evidence_refs": [
         "v0.char.036",
@@ -44,7 +46,9 @@
         "v0.pol.017",
         "v0.pol.021",
         "v0.pol.025",
-        "v0.wr.040"
+        "v0.wr.040",
+        "y1v10.ev.043",
+        "y1v10.ev.062"
       ]
     },
     "social": {
@@ -60,6 +64,45 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "v0.pol.025"
+      ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v10.case.tsukishiro.v10-c043"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.043"
+      ]
+    },
+    "coercion": {
+      "behavioral_case_refs": [
+        "y1v10.case.tsukishiro.v10-c043"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.043"
+      ]
+    },
+    "combat": {
+      "behavioral_case_refs": [
+        "y1v10.case.tsukishiro.v10-c043"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.043"
+      ]
+    },
+    "y1_v10": {
+      "behavioral_case_refs": [
+        "y1v10.case.tsukishiro.v10-c043"
+      ],
+      "context_evidence_refs": [
+        "y1v10.ev.043",
+        "y1v10.ev.062"
+      ]
+    },
+    "institution": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v10.ev.062"
       ]
     }
   },
@@ -77,5 +120,32 @@
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
   },
-  "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance."
+  "provenance_migration_note": "Retired volume0 staging pointer removed; source_coverage and evidence references preserve book provenance.",
+  "y1_v10_source_status": "SOURCE_BOUNDED_CANDIDATE_INDEPENDENT_REVIEW_PENDING",
+  "y1_v10_knowledge_gate": {
+    "pre_enrollment_history_biography_only": true,
+    "post_admission_canon_never_runtime_episode": true,
+    "rumor_and_private_interpretation_actor_scoped": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v10_behavioral_case_refs": [
+    "y1v10.case.tsukishiro.v10-c043"
+  ],
+  "y1_v10_context_evidence_refs": [
+    "y1v10.ev.043",
+    "y1v10.ev.062"
+  ],
+  "y1_v10_goal_transition_refs": [],
+  "y1_v10_intervention_boundaries": {
+    "self_identified_acting_director": true,
+    "claimed_office_start": "APRIL_AFTER_Y1",
+    "source_evidence_refs": [
+      "y1v10.ev.043",
+      "y1v10.ev.062"
+    ],
+    "aggression_observed": true,
+    "camera_tamper_allegation_is_self_report": true,
+    "do_not_backdate_public_school_knowledge": true
+  }
 }

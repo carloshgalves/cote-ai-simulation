@@ -10,7 +10,8 @@
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
-    "ln.y1.v09.en.operator-provided"
+    "ln.y1.v09.en.operator-provided",
+    "ln.y1.v10.en.operator-provided"
   ],
   "source_status": "V7_ATTRIBUTED_PRIVATE_REPORT_NOT_INDEPENDENTLY_VERIFIED",
   "evidence_refs": [
@@ -49,7 +50,11 @@
     "y1v09.ev.003",
     "y1v09.ev.026",
     "y1v09.ev.028",
-    "y1v09.ev.030"
+    "y1v09.ev.030",
+    "y1v10.ev.004",
+    "y1v10.ev.015",
+    "y1v10.ev.052",
+    "y1v10.ev.054"
   ],
   "owner_truth_boundary": "Student-council authority described in Manabu's public speech, not independently executed rulebook",
   "structure": {
@@ -389,5 +394,28 @@
       "speculation_not_enactment": true
     },
     "school_oversight": "School may independently stop harmful rumors, regardless of Nagumo statements"
+  },
+  "y1_v10_nagumo_proactive_politics": {
+    "source_id": "ln.y1.v10.en.operator-provided",
+    "source_evidence_refs": [
+      "y1v10.ev.004",
+      "y1v10.ev.015",
+      "y1v10.ev.052",
+      "y1v10.ev.054"
+    ],
+    "events": [
+      "Nagumo engineers a meeting involving both Horikita siblings and invites Suzune to the council; Suzune declines.",
+      "Asahina reports Nagumo's conditional romantic-loan proposition for Ichinose.",
+      "The proposed financing is superseded by interclass trade; no evidence Nagumo paid the loan."
+    ],
+    "epistemic_gates": [
+      "Nagumo's political motives and Manabu's feelings remain speaker-specific.",
+      "A council president's personal loan or invitation is not school law."
+    ],
+    "loan_proposed_private_points": 4043019,
+    "loan_executed": false,
+    "consensual_romance_not_proven": true,
+    "engine_memory_admission": false,
+    "verified": false
   }
 }

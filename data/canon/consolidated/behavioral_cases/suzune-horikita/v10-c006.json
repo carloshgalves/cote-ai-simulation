@@ -1,0 +1,46 @@
+{
+  "id": "y1v10.case.suzune-horikita.v10-c006",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "Recusa convite de Nagumo ao conselho por insegurança e diante do irmão",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Recusa convite de Nagumo ao conselho por insegurança e diante do irmão",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Recusa neste momento não equivale à incapacidade institucional vitalícia.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      24,
+      25
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "self_assessment",
+    "social",
+    "motivation"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "self_assessment",
+    "social",
+    "motivation",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.006"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "DIRECT_DIALOGUE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

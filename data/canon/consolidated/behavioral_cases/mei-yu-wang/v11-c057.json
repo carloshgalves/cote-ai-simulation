@@ -38,7 +38,7 @@
     "y1_v11"
   ],
   "evidence_refs": [
-    "y1v11.ev.057"
+    "y1v11.ev.075"
   ],
   "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
   "source_mode": "ACTOR_SCOPED_OBSERVED_AND_SELF_REPORTED",
@@ -84,22 +84,22 @@
     "source_claims": [
       {
         "pdf_page": 58,
-        "evidence_id": "y1v11.ev.057",
+        "evidence_id": "y1v11.ev.075",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 59,
-        "evidence_id": "y1v11.ev.057",
+        "evidence_id": "y1v11.ev.075",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 110,
-        "evidence_id": "y1v11.ev.057",
+        "evidence_id": "y1v11.ev.075",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 111,
-        "evidence_id": "y1v11.ev.057",
+        "evidence_id": "y1v11.ev.075",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       }
     ],

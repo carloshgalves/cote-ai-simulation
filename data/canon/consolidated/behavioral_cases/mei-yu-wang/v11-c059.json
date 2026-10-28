@@ -51,7 +51,7 @@
     "y1_v11"
   ],
   "evidence_refs": [
-    "y1v11.ev.059"
+    "y1v11.ev.077"
   ],
   "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
   "source_mode": "ACTOR_SCOPED_OBSERVED_AND_SELF_REPORTED",
@@ -103,82 +103,82 @@
     "source_claims": [
       {
         "pdf_page": 283,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 284,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 285,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 286,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 287,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 288,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 289,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 290,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 291,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 292,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 293,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 304,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 309,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 313,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 314,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       },
       {
         "pdf_page": 315,
-        "evidence_id": "y1v11.ev.059",
+        "evidence_id": "y1v11.ev.077",
         "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
       }
     ],

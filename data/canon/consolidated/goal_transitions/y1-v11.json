@@ -605,9 +605,9 @@
         "mode": "DIRECT_DIALOGUE_AND_BEHAVIOR"
       },
       "evidence_refs": [
-        "y1v11.ev.057",
-        "y1v11.ev.058",
-        "y1v11.ev.059"
+        "y1v11.ev.075",
+        "y1v11.ev.076",
+        "y1v11.ev.077"
       ],
       "prior_goal_or_means": "Ajudar Hirata e preservar vínculo sem depender de ordem da turma.",
       "observed_goal_or_means_after": "Persistir em abordar Hirata apesar da rejeição, sem garantia de eficácia; após nova rejeição, continua emocionalmente afetada.",

@@ -788,9 +788,9 @@
         "y1v11.ev.028",
         "y1v11.ev.029",
         "y1v11.ev.030",
-        "y1v11.ev.057",
-        "y1v11.ev.058",
-        "y1v11.ev.059"
+        "y1v11.ev.075",
+        "y1v11.ev.076",
+        "y1v11.ev.077"
       ],
       "pdf_pages": [
         58,
@@ -844,8 +844,8 @@
         {
           "phase": "MIICHAN_INITIATIVE",
           "evidence_refs": [
-            "y1v11.ev.057",
-            "y1v11.ev.058",
+            "y1v11.ev.075",
+            "y1v11.ev.076",
             "y1v11.ev.016"
           ],
           "observed_or_reported_change": "Mii-chan procura Hirata e explica seu próprio motivo a Kiyotaka; ele rejeita a aproximação.",
@@ -855,7 +855,7 @@
         {
           "phase": "LATER_REJECTION_AND_APOLOGY",
           "evidence_refs": [
-            "y1v11.ev.059",
+            "y1v11.ev.077",
             "y1v11.ev.028",
             "y1v11.ev.029",
             "y1v11.ev.030"

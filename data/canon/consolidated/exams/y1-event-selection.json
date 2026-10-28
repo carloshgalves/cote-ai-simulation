@@ -303,16 +303,6 @@
         436,
         437
       ],
-      "fifth_event_karate": {
-        "result": "CLASS_B_FORFEIT_BY_TEACHER_INTERVENTION_AFTER_INABILITY_TO_SELECT_PLAYER",
-        "winner": "CLASS_D",
-        "source_pdf_pages": [
-          371,
-          372,
-          373,
-          374
-        ]
-      },
       "long_term_pressure": {
         "source": "RETROSPECTIVE_ACTOR_PLAN",
         "actors": [
@@ -321,7 +311,34 @@
           "actor.mio-ibuki"
         ],
         "not_inevitable": true
-      }
+      },
+      "fifth_event_karate": {
+        "result": "CLASS_D_WIN_ON_COMPLETED_CONTESTS",
+        "winner": "CLASS_D",
+        "b_selected_participants": true,
+        "commander_ichinose_requested_rematch": true,
+        "rematch_did_not_reverse_result": true,
+        "source_pdf_pages": [
+          371,
+          372
+        ]
+      },
+      "sixth_event_judo": {
+        "result": "CLASS_B_LOSS_BY_OFFICIAL_DEFAULT_AFTER_SELECTION_TIMEOUT",
+        "winner": "CLASS_D",
+        "opponent": "actor.albert-yamada",
+        "class_b_commander": "actor.honami-ichinose",
+        "selection_timeout_seconds": 30,
+        "selection_completed": false,
+        "teacher": "Mashima",
+        "teacher_ruling": "DEFAULT_LOSS_WITHOUT_AUTO_RANDOM_ASSIGNMENT_AFTER_SAFETY_ASSESSMENT",
+        "source_pdf_pages": [
+          372,
+          373,
+          374
+        ]
+      },
+      "causality_note": "Karate was the completed fifth event. Judo was the sixth event and ended by official default; the base random-fallback rule was overridden on safety grounds by Mashima."
     }
   },
   "pre_exam_class_points": {

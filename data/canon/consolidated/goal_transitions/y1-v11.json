@@ -10,7 +10,7 @@
     {
       "id": "y1v11.goal.arisu-sakayanagi.v11-g001",
       "actor_id": "actor.arisu-sakayanagi",
-      "kind": "BELIEF_REVISION",
+      "kind": "BELIEF_EVIDENCE_REASSESSMENT",
       "event_time_ref": "Y1_V11_SCENE_ONLY",
       "source": {
         "work_id": "ln.y1.v11.en.operator-provided",
@@ -32,16 +32,16 @@
         "y1v11.ev.001",
         "y1v11.ev.054"
       ],
-      "prior_goal_or_means": "Genetic innate superiority assumed decisive",
-      "observed_goal_or_means_after": "Acknowledges that White Room-educated Kiyotaka is a worthy chess peer",
+      "prior_goal_or_means": "Defender subjetivamente primazia genética e desafiar talento treinado na White Room.",
+      "observed_goal_or_means_after": "Reconhece Kiyotaka como jogador excepcional e rival digno, sem rejeição explícita da tese geral de talento inato.",
       "trigger_or_new_information": "Pre-matriculation observation plus direct match and altered-channel disclosure",
       "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
-      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "epistemic_status": "DIRECT_PRIVATE_ADMISSION_WITH_BELIEF_SCOPE_LIMIT",
       "persistence_scope": "NOT_PROVEN_PERMANENT",
       "contingent_alternatives": [
         "Different simulation stimuli may lead to alternative actions."
       ],
-      "simulation_guard": "Do not replay literary plan in divergent fork absent actor-local causal world events.",
+      "simulation_guard": "Do not rewrite the global genetics/education model from Arisu's subjective statements, or force belief reversal in divergent forks.",
       "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING"
     },
     {

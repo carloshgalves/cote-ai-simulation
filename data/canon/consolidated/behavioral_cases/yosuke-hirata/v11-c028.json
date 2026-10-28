@@ -2,10 +2,10 @@
   "id": "y1v11.case.yosuke-hirata.v11-c028",
   "actor_id": "actor.yosuke-hirata",
   "primary_actor_id": "actor.yosuke-hirata",
-  "title": "Explica nome Sugimura, coma e uso de coerção após bullying na antiga escola",
+  "title": "Revela a Kiyotaka, já na ANHS, fatos biográficos sobre Sugimura, coma e coerção na escola anterior",
   "context": "Pre-enrollment revelation, biographical example",
-  "observed_actions": "Explica nome Sugimura, coma e uso de coerção após bullying na antiga escola",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
+  "observed_actions": "Em conversa privada na ANHS, Hirata relata a Kiyotaka a história do amigo Sugimura, sua condição após a tentativa de suicídio e seu próprio recurso anterior à coerção.",
+  "observed_result": "Kiyotaka adquire detalhes adicionais por relato de Hirata naquele momento escolar; a história narrada continua pré-matrícula e não é automaticamente conhecida pelos demais colegas.",
   "epistemic_limits": "Past event is biographical, actor-scoped and not runtime-episodic; source's later disclosure is not its occurrence time",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
@@ -37,8 +37,8 @@
   "evidence_refs": [
     "y1v11.ev.028"
   ],
-  "episode_scope": "PRE_ADMISSION_BIOGRAPHICAL_EVIDENCE",
-  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "episode_scope": "POST_ADMISSION_PRIVATE_DISCLOSURE_OF_PRE_ADMISSION_BIOGRAPHY",
+  "source_mode": "PRIVATE_FIRST_PERSON_DISCLOSURE_WITH_DISTINCT_EVENT_TIMES",
   "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
   "epistemic_status": "UNVERIFIED",
   "verified": false,
@@ -46,5 +46,22 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_of_disclosure": "Y1_V11_ANHS_PRIVATE_SCENE",
+    "time_of_described_events": "PRE_Y1_MIDDLE_SCHOOL",
+    "recipient_actor_id": "actor.kiyotaka-ayanokoji",
+    "not_initially_public": true,
+    "source_pdf_pages": [
+      299,
+      300,
+      301,
+      302,
+      303,
+      304
+    ],
+    "knowledge_created": "Kiyotaka hears or recollects some details, including Sugimura's name and coma condition, through this dialogue; other students do not automatically know.",
+    "confidence": "Hirata self-report; Kiyotaka narration sometimes contains inference.",
+    "counterfactual": "In a divergent simulation, Kiyotaka learns the details only if an equivalent authorized disclosure occurs."
   }
 }

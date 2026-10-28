@@ -1086,7 +1086,7 @@
       "id": "y1v11.ev.028",
       "source_catalog_id": "V11-C028",
       "domain": "behavior",
-      "summary": "Explica nome Sugimura, coma e uso de coerção após bullying na antiga escola",
+      "summary": "Revela a Kiyotaka, já na ANHS, fatos biográficos sobre Sugimura, coma e coerção na escola anterior",
       "source": {
         "work_id": "ln.y1.v11.en.operator-provided",
         "pdf_pages": [
@@ -1099,7 +1099,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "PRE_ENROLLMENT_RETROSPECTIVE",
+      "source_mode": "POST_ADMISSION_PRIVATE_DISCLOSURE_OF_PRE_ADMISSION_BIOGRAPHY",
       "mention_actor_ids": [
         "actor.yosuke-hirata"
       ],
@@ -1733,7 +1733,7 @@
       "id": "y1v11.ev.044",
       "source_catalog_id": "V11-C044",
       "domain": "behavior",
-      "summary": "Hesita ao escolher participante de caratê e perde por decisão escolar",
+      "summary": "Durante o sexto evento (judô), esgota o prazo de escalação diante de Albert; Mashima declara vitória de D por padrão",
       "source": {
         "work_id": "ln.y1.v11.en.operator-provided",
         "pdf_pages": [
@@ -1747,7 +1747,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "source_mode": "DIRECT_ON_DAY_SIXTH_EVENT_AND_TEACHER_ADJUDICATION",
       "mention_actor_ids": [
         "actor.honami-ichinose"
       ],
@@ -2157,7 +2157,7 @@
       "id": "y1v11.ev.054",
       "source_catalog_id": "V11-C054",
       "domain": "behavior",
-      "summary": "Reavalia concepção de talento e reconsidera sua rivalidade com Kiyotaka",
+      "summary": "Reconhece a habilidade de xadrez de Kiyotaka e redefine a rivalidade, sem comprovar abandono da teoria inatista",
       "source": {
         "work_id": "ln.y1.v11.en.operator-provided",
         "pdf_pages": [
@@ -2172,7 +2172,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "source_mode": "PRIVATE_DIALOGUE_OBSERVED_BELIEF_EVALUATION",
       "mention_actor_ids": [
         "actor.arisu-sakayanagi"
       ],
@@ -2684,7 +2684,7 @@
       "id": "y1v11.ev.067",
       "source_catalog_id": "V11-X067",
       "domain": "exams",
-      "summary": "D defeats B with comeback; karate forfeited when Ichinose cannot select participant; D gains 190 reported",
+      "summary": "A Classe D vence B por 5–2; o quinto evento (caratê) foi disputado e perdido por B, enquanto o sexto (judô) foi perdido por forfait após o timeout de escalação de Ichinose. D recebe +190 pontos de classe.",
       "source": {
         "work_id": "ln.y1.v11.en.operator-provided",
         "pdf_pages": [
@@ -2700,7 +2700,7 @@
         ],
         "verification": "UNVERIFIED"
       },
-      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "source_mode": "ON_DAY_MATCH_EVENTS_AND_OFFICIAL_RESULT",
       "mention_actor_ids": [
         "actor.honami-ichinose",
         "actor.kakeru-ryuen"

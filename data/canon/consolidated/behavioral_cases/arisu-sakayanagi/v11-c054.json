@@ -2,10 +2,10 @@
   "id": "y1v11.case.arisu-sakayanagi.v11-c054",
   "actor_id": "actor.arisu-sakayanagi",
   "primary_actor_id": "actor.arisu-sakayanagi",
-  "title": "Reavalia concepção de talento e reconsidera sua rivalidade com Kiyotaka",
+  "title": "Reconhece a habilidade de xadrez de Kiyotaka e redefine a rivalidade, sem comprovar abandono da teoria inatista",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Reavalia concepção de talento e reconsidera sua rivalidade com Kiyotaka",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
+  "observed_actions": "Após a revanche privada, reconhece Kiyotaka como adversário genuíno e reinterpreta o significado do confronto, sem declarar falsificação ou superação científica da teoria inatista.",
+  "observed_result": "Kiyotaka vence a continuação privada do lance adulterado; Arisu admite a força dele, evita uma revanche imediata e manifesta interesse em manter alguma distância por discrição.",
   "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
@@ -46,5 +46,22 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "source_pdf_pages": [
+      446,
+      447,
+      448,
+      449,
+      450,
+      451,
+      452,
+      453,
+      454
+    ],
+    "observed_belief_change": "Da expectativa de provar que a White Room não cria genialidade para reconhecer publicamente a si mesma a habilidade excepcional do jogador treinado ali.",
+    "not_observed": "Retratação científica explícita de hipótese genética ou aceitação de que educação por si só fabrica genialidade.",
+    "other_private_motive": "Ao final, Arisu retira sua justificativa inicial de ter evitado duelo direto para proteger a discrição de Kiyotaka e declara também o desejo pessoal de prolongar o tempo ao lado dele (pp. 453–454).",
+    "risk_of_overinterpretation": "Não presumir romance recíproco nem causalidade única para a escolha do evento."
   }
 }

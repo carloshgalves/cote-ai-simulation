@@ -611,7 +611,7 @@
         "actor.yosuke-hirata"
       ],
       "source_mode": "PRE_ENROLLMENT_RETROSPECTIVE",
-      "summary": "Explica nome Sugimura, coma e uso de coerção após bullying na antiga escola",
+      "summary": "Revela a Kiyotaka, já na ANHS, fatos biográficos sobre Sugimura, coma e coerção na escola anterior",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
       "engine_memory_admission": false
@@ -964,7 +964,7 @@
         "actor.honami-ichinose"
       ],
       "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
-      "summary": "Hesita ao escolher participante de caratê e perde por decisão escolar",
+      "summary": "Durante o sexto evento (judô), esgota o prazo de escalação diante de Albert; Mashima declara vitória de D por padrão",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
       "engine_memory_admission": false
@@ -1203,7 +1203,7 @@
         "actor.arisu-sakayanagi"
       ],
       "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
-      "summary": "Reavalia concepção de talento e reconsidera sua rivalidade com Kiyotaka",
+      "summary": "Reconhece a habilidade de xadrez de Kiyotaka e redefine a rivalidade, sem comprovar abandono da teoria inatista",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
       "engine_memory_admission": false
@@ -1499,7 +1499,7 @@
         "actor.kakeru-ryuen"
       ],
       "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
-      "summary": "D defeats B with comeback; karate forfeited when Ichinose cannot select participant; D gains 190 reported",
+      "summary": "A Classe D vence B por 5–2; o quinto evento (caratê) foi disputado e perdido por B, enquanto o sexto (judô) foi perdido por forfait após o timeout de escalação de Ichinose. D recebe +190 pontos de classe.",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
       "engine_memory_admission": false
@@ -2253,7 +2253,7 @@
       "evidence_refs": [
         "y1v11.ev.028"
       ],
-      "summary": "Explica nome Sugimura, coma e uso de coerção após bullying na antiga escola",
+      "summary": "Revela a Kiyotaka, já na ANHS, fatos biográficos sobre Sugimura, coma e coerção na escola anterior",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
       "engine_memory_admission": false
@@ -2606,7 +2606,7 @@
       "evidence_refs": [
         "y1v11.ev.044"
       ],
-      "summary": "Hesita ao escolher participante de caratê e perde por decisão escolar",
+      "summary": "Durante o sexto evento (judô), esgota o prazo de escalação diante de Albert; Mashima declara vitória de D por padrão",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
       "engine_memory_admission": false
@@ -2845,7 +2845,7 @@
       "evidence_refs": [
         "y1v11.ev.054"
       ],
-      "summary": "Reavalia concepção de talento e reconsidera sua rivalidade com Kiyotaka",
+      "summary": "Reconhece a habilidade de xadrez de Kiyotaka e redefine a rivalidade, sem comprovar abandono da teoria inatista",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
       "engine_memory_admission": false

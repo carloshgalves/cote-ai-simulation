@@ -38,7 +38,7 @@
     "relation": "CONTEXTUALIZES_CONTINGENT_BEHAVIOR_NOT_DETERMINISTIC_SCRIPT"
   },
   "avoid_inference": [
-    "Do not invent the friend's name, school, method of attempted suicide or precise date.",
+    "Do not invent the middle school's name, exact date or circumstances not disclosed; friend's name Sugimura becomes evidenced only in the V11 extension.",
     "Do not assume Hirata intentionally caused the attempt.",
     "Do not assume all schoolmates or other agents know this before disclosure.",
     "Do not import current voting crisis to Y1_START memories."
@@ -66,6 +66,7 @@
     "contradictions_to_watch": [
       "V10 only established survived attempt, V11 adds prolonged coma",
       "Hirata's fearful control was self-reported; do not model as mandatory conduct"
-    ]
+    ],
+    "source_scope": "Biographical historical details from a POST-ENROLLMENT_PRIVATE_DISCLOSURE, not a new pre-enrollment conversation."
   }
 }

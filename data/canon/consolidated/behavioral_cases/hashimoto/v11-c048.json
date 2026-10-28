@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.hashimoto",
   "title": "Joga xadrez contra Suzune e recebe instruções de Arisu",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Joga xadrez contra Suzune e recebe instruções de Arisu",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Joga contra Suzune e recebe suporte da comandante Arisu pelo canal permitido",
+  "observed_result": "A partida termina oficialmente favorável a A após manipulação externa do comando de C",
+  "epistemic_limits": "Força do jogador e decisões da comandante não devem ser colapsadas num único feat",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -21,13 +21,17 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.arisu-sakayanagi",
+    "actor.kiyotaka-ayanokoji"
+  ],
   "capabilities_supported": [
     "chess",
     "competition"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Conhece própria experiência e comandos da chefe; não possui visão do comando privado de Kiyotaka",
+  "counterfactual_test": "Sem interferência externa e com outra sequência de lances, resultado oficial não é inevitável",
   "topics": [
     "behavior",
     "chess",
@@ -46,5 +50,58 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Hashimoto é selecionado por Arisu para o xadrez decisivo",
+    "actor_objective_at_time": "Representar A frente à rival treinada Suzune",
+    "actor_known_information": [
+      "Conhece própria experiência e comandos da chefe; não possui visão do comando privado de Kiyotaka"
+    ],
+    "beliefs_and_uncertainties": [
+      "Força do jogador e decisões da comandante não devem ser colapsadas num único feat"
+    ],
+    "available_alternatives": [
+      "Sem interferência externa e com outra sequência de lances, resultado oficial não é inevitável"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Joga contra Suzune e recebe suporte da comandante Arisu pelo canal permitido"
+    ],
+    "observed_outcome": "A partida termina oficialmente favorável a A após manipulação externa do comando de C",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.suzune-horikita",
+        "role": "adversária jogadora"
+      },
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "comandante"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante oponente"
+      }
+    ],
+    "causal_and_epistemic_limits": "Força do jogador e decisões da comandante não devem ser colapsadas num único feat",
+    "counterfactual_probes": [
+      "Sem interferência externa e com outra sequência de lances, resultado oficial não é inevitável"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.048",
+        "pdf_pages": [
+          402,
+          405,
+          408,
+          410,
+          414,
+          415,
+          416,
+          420
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

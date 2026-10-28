@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.kiyotaka-ayanokoji",
   "title": "Aceita revanche e evita afirmar superioridade universal a partir de uma partida",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Aceita revanche e evita afirmar superioridade universal a partir de uma partida",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Aceita convite, retoma jogo no tabuleiro da biblioteca e vence essa continuação",
+  "observed_result": "Vitória privada de Kiyotaka não muda resultado oficial A–C 4–3",
+  "epistemic_limits": "Não inferir ELO, taxa universal de vitória ou superioridade absoluta",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -19,13 +19,16 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.arisu-sakayanagi",
+    "actor.tsukishiro"
+  ],
   "capabilities_supported": [
     "chess",
     "reasoning"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Sabe posição de xadrez, seu comando original e explicação sobre alteração; não sabe futuras partidas",
+  "counterfactual_test": "Com posição inicial diferente ou outra preparação, resultado da revanche pode mudar",
   "topics": [
     "behavior",
     "chess",
@@ -44,5 +47,52 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Arisu oferece revanche particular a partir do lance alterado",
+    "actor_objective_at_time": "Avaliar força relativa sem confundir partida oficial e informal",
+    "actor_known_information": [
+      "Sabe posição de xadrez, seu comando original e explicação sobre alteração; não sabe futuras partidas"
+    ],
+    "beliefs_and_uncertainties": [
+      "Não inferir ELO, taxa universal de vitória ou superioridade absoluta"
+    ],
+    "available_alternatives": [
+      "Com posição inicial diferente ou outra preparação, resultado da revanche pode mudar"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Aceita convite, retoma jogo no tabuleiro da biblioteca e vence essa continuação"
+    ],
+    "observed_outcome": "Vitória privada de Kiyotaka não muda resultado oficial A–C 4–3",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "rival e proponente"
+      },
+      {
+        "actor_id": "actor.tsukishiro",
+        "role": "causa da divergência inicial"
+      }
+    ],
+    "causal_and_epistemic_limits": "Não inferir ELO, taxa universal de vitória ou superioridade absoluta",
+    "counterfactual_probes": [
+      "Com posição inicial diferente ou outra preparação, resultado da revanche pode mudar"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.053",
+        "pdf_pages": [
+          445,
+          446,
+          447,
+          448,
+          449,
+          450
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

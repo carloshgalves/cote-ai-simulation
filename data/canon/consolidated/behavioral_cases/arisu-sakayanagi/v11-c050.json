@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.arisu-sakayanagi",
   "title": "Orienta Hashimoto e reconhece força de Kiyotaka sem conhecer adulteração até revelação",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Orienta Hashimoto e reconhece força de Kiyotaka sem conhecer adulteração até revelação",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Seleciona e orienta Hashimoto, identifica força de Kiyotaka e questiona a escolha final incomum",
+  "observed_result": "Recebe vitória oficial, mas sua satisfação diminui após a revelação de manipulação",
+  "epistemic_limits": "Suspeitar de lance ruim não é saber previamente quem o alterou",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -27,14 +27,18 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.hashimoto",
+    "actor.kiyotaka-ayanokoji",
+    "actor.tsukishiro"
+  ],
   "capabilities_supported": [
     "chess",
     "strategy",
     "observation"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Conhece seus comandos e as respostas de Hashimoto; não sabe da adulteração até informação revelada depois",
+  "counterfactual_test": "Com canal íntegro, poderia aceitar derrota ou vitória real sem pedir revanche por adulteração",
   "topics": [
     "behavior",
     "chess",
@@ -54,5 +58,64 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Arisu dirige Hashimoto e suspeita de inconsistência no lance decisivo de C",
+    "actor_objective_at_time": "Disputar xadrez genuíno com Kiyotaka e validar desempenho",
+    "actor_known_information": [
+      "Conhece seus comandos e as respostas de Hashimoto; não sabe da adulteração até informação revelada depois"
+    ],
+    "beliefs_and_uncertainties": [
+      "Suspeitar de lance ruim não é saber previamente quem o alterou"
+    ],
+    "available_alternatives": [
+      "Com canal íntegro, poderia aceitar derrota ou vitória real sem pedir revanche por adulteração"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Seleciona e orienta Hashimoto, identifica força de Kiyotaka e questiona a escolha final incomum"
+    ],
+    "observed_outcome": "Recebe vitória oficial, mas sua satisfação diminui após a revelação de manipulação",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.hashimoto",
+        "role": "jogador instruído"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "rival comandante"
+      },
+      {
+        "actor_id": "actor.tsukishiro",
+        "role": "interferente posteriormente identificado"
+      }
+    ],
+    "causal_and_epistemic_limits": "Suspeitar de lance ruim não é saber previamente quem o alterou",
+    "counterfactual_probes": [
+      "Com canal íntegro, poderia aceitar derrota ou vitória real sem pedir revanche por adulteração"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.050",
+        "pdf_pages": [
+          414,
+          415,
+          416,
+          417,
+          419,
+          420,
+          421,
+          422,
+          423,
+          424,
+          425,
+          438,
+          439,
+          440
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.kakeru-ryuen",
   "title": "Retorna ao comando de D e vence disputa contra Ichinose",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Retorna ao comando de D e vence disputa contra Ichinose",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Aceita colaborar, concebe pressão gradual e dirige confronto até vantagem oficial",
+  "observed_result": "D vence B por 5–2, num percurso com decisões e exceção escolar de segurança",
+  "epistemic_limits": "Retorno à liderança é evento histórico, não memória pronta do agente no início",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -22,14 +22,19 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.ishizaki",
+    "actor.hiyori-shiina",
+    "actor.mio-ibuki",
+    "actor.honami-ichinose"
+  ],
   "capabilities_supported": [
     "leadership",
     "strategy",
     "goal_change"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Conhece capacidade dos colegas e relatos de reação de B a provocações; desconhece como cada estudante responderá",
+  "counterfactual_test": "Se não voltar ao planejamento ou B encontrar contramedida eficaz, trajetória diverge",
   "topics": [
     "behavior",
     "leadership",
@@ -49,5 +54,63 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Após perda de liderança anterior, Ishizaki e Hiyori procuram Ryūen",
+    "actor_objective_at_time": "Retomar iniciativa estratégica contra B e explorar ponto de fraqueza percebido",
+    "actor_known_information": [
+      "Conhece capacidade dos colegas e relatos de reação de B a provocações; desconhece como cada estudante responderá"
+    ],
+    "beliefs_and_uncertainties": [
+      "Retorno à liderança é evento histórico, não memória pronta do agente no início"
+    ],
+    "available_alternatives": [
+      "Se não voltar ao planejamento ou B encontrar contramedida eficaz, trajetória diverge"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Aceita colaborar, concebe pressão gradual e dirige confronto até vantagem oficial"
+    ],
+    "observed_outcome": "D vence B por 5–2, num percurso com decisões e exceção escolar de segurança",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.ishizaki",
+        "role": "solicitante"
+      },
+      {
+        "actor_id": "actor.hiyori-shiina",
+        "role": "facilitadora"
+      },
+      {
+        "actor_id": "actor.mio-ibuki",
+        "role": "participante crítica"
+      },
+      {
+        "actor_id": "actor.honami-ichinose",
+        "role": "comandante oposta"
+      }
+    ],
+    "causal_and_epistemic_limits": "Retorno à liderança é evento histórico, não memória pronta do agente no início",
+    "counterfactual_probes": [
+      "Se não voltar ao planejamento ou B encontrar contramedida eficaz, trajetória diverge"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.055",
+        "pdf_pages": [
+          368,
+          370,
+          374,
+          393,
+          394,
+          395,
+          398,
+          436,
+          437
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

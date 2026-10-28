@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.miyake",
   "title": "Contribui para a vitória de C na prova de arco e flecha",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Contribui para a vitória de C na prova de arco e flecha",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Participa da modalidade física sorteada e executa a tarefa dentro do regulamento",
+  "observed_result": "A Classe C vence arco e flecha, igualando em 3–3 antes do xadrez",
+  "epistemic_limits": "Habilidade no arco e flecha não se generaliza para todos os esportes",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -15,13 +15,16 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.arisu-sakayanagi"
+  ],
   "capabilities_supported": [
     "sports",
     "teamwork"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Miyake dispõe de competência naquele esporte e depende de escalação pelo comandante",
+  "counterfactual_test": "Se não for escalado ou enfrentar especialista superior, seu papel no placar pode ser outro",
   "topics": [
     "behavior",
     "sports",
@@ -40,5 +43,48 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "A sexta prova do confronto C–A é arco e flecha",
+    "actor_objective_at_time": "Contribuir com aptidão específica ao resultado da equipe",
+    "actor_known_information": [
+      "Miyake dispõe de competência naquele esporte e depende de escalação pelo comandante"
+    ],
+    "beliefs_and_uncertainties": [
+      "Habilidade no arco e flecha não se generaliza para todos os esportes"
+    ],
+    "available_alternatives": [
+      "Se não for escalado ou enfrentar especialista superior, seu papel no placar pode ser outro"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Participa da modalidade física sorteada e executa a tarefa dentro do regulamento"
+    ],
+    "observed_outcome": "A Classe C vence arco e flecha, igualando em 3–3 antes do xadrez",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante que seleciona"
+      },
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "comandante adversária"
+      }
+    ],
+    "causal_and_epistemic_limits": "Habilidade no arco e flecha não se generaliza para todos os esportes",
+    "counterfactual_probes": [
+      "Se não for escalado ou enfrentar especialista superior, seu papel no placar pode ser outro"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.046",
+        "pdf_pages": [
+          399,
+          400
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

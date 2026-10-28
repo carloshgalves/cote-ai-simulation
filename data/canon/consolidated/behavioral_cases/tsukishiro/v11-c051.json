@@ -4,9 +4,9 @@
   "primary_actor_id": "actor.tsukishiro",
   "title": "Interfere em canal de comandos para mudar lance de Kiyotaka no xadrez",
   "context": "Y1 Volume 11 source-bound episode",
-  "observed_actions": "Interfere em canal de comandos para mudar lance de Kiyotaka no xadrez",
-  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
-  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "observed_actions": "Substitui mensagem original antes de sua entrega e mais tarde admite participação diante dos dois comandantes",
+  "observed_result": "Lance entregue altera a partida, escola mantém vitória A; sua ação é irregular, não intervenção autorizada",
+  "epistemic_limits": "Confissão é evidência relevante, mas não fornece trilha técnica completa de todos os comandos",
   "source": {
     "work_id": "ln.y1.v11.en.operator-provided",
     "pdf_pages": [
@@ -22,14 +22,18 @@
     ],
     "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
   },
-  "other_actors": [],
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.arisu-sakayanagi",
+    "actor.suzune-horikita"
+  ],
   "capabilities_supported": [
     "institution",
     "interference",
     "deception"
   ],
-  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
-  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "information_available": "Tem capacidade de interferir no canal institucional; o livro não fornece logs independentes de todas as ações administrativas",
+  "counterfactual_test": "Com atestado de integridade e autenticação ponta-a-ponta, adulteração poderia ser detectada/bloqueada",
   "topics": [
     "behavior",
     "institution",
@@ -49,5 +53,59 @@
   "individual_review": {
     "external_independent_review": "NOT_PERFORMED",
     "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Tsukishiro controla acesso administrativo ao sistema de instruções da prova",
+    "actor_objective_at_time": "Impedir vitória de Kiyotaka no xadrez conforme interesse próprio ou ordem alegada",
+    "actor_known_information": [
+      "Tem capacidade de interferir no canal institucional; o livro não fornece logs independentes de todas as ações administrativas"
+    ],
+    "beliefs_and_uncertainties": [
+      "Confissão é evidência relevante, mas não fornece trilha técnica completa de todos os comandos"
+    ],
+    "available_alternatives": [
+      "Com atestado de integridade e autenticação ponta-a-ponta, adulteração poderia ser detectada/bloqueada"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Substitui mensagem original antes de sua entrega e mais tarde admite participação diante dos dois comandantes"
+    ],
+    "observed_outcome": "Lance entregue altera a partida, escola mantém vitória A; sua ação é irregular, não intervenção autorizada",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante prejudicado"
+      },
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "comandante beneficiada sem consentimento prévio"
+      },
+      {
+        "actor_id": "actor.suzune-horikita",
+        "role": "receptora afetada"
+      }
+    ],
+    "causal_and_epistemic_limits": "Confissão é evidência relevante, mas não fornece trilha técnica completa de todos os comandos",
+    "counterfactual_probes": [
+      "Com atestado de integridade e autenticação ponta-a-ponta, adulteração poderia ser detectada/bloqueada"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.051",
+        "pdf_pages": [
+          433,
+          434,
+          436,
+          439,
+          440,
+          441,
+          442,
+          443,
+          444
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
   }
 }

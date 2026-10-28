@@ -52,7 +52,7 @@ Com a resistência de Hirata e o esforço de Mii-chan ainda sem resolver o probl
 Suzune entrega a Kiyotaka a liberdade final de escalar participantes. A sequência observada de **C contra A** é: 1) basquete (C vence), 2) digitação (C vence), 3) prova de inglês (A vence: 651 × 443), 4) matemática (A vence: 655 × 631), 5) cálculo mental rápido (A vence), 6) arco e flecha (C vence), 7) xadrez (A vence oficialmente). O 3–3 antecede a partida decisiva; selecionar a mesma competência para eventos diferentes exaure participantes. Fonte: pp. 335–365, 400–429. O comportamento de Kōenji, que deixa respostas em branco e identifica resposta final difícil, exemplifica **capacidade exibida não aplicada** (pp. 359–366), não domínio automático do exam pack.
 
 ### Capítulo 8 — Class B vs. Class D (pp. 368–399)
-Ryūen havia deixado a liderança, mas Ishizaki o procura e Hiyori organiza encontro com Ibuki. O próprio Ryūen desenvolve estratégia de pressão indireta e coleta de informações sobre as preferências de B, priorizando eventos físicos (pp. 375–398). O texto relata observação, assédio e intimidação calculada, que devem ser modelados como **ações sujeitas a regras e consequências**, jamais como heurística geral de sucesso. Durante o evento de caratê, Ichinose não consegue designar participante e a escola determina derrota por forfait (pp. 371–374). A turma D supera B por **5–2**, conforme informe no epílogo (pp. 436–437). Isso significa **+190** para D e **−90** para B no modelo de pontos declarado, sem inferir outra operação oculta.
+Ryūen havia deixado a liderança, mas Ishizaki o procura e Hiyori organiza encontro com Ibuki. O próprio Ryūen desenvolve estratégia de pressão indireta e coleta de informações sobre as preferências de B, priorizando eventos físicos (pp. 375–398). O texto relata observação, assédio e intimidação calculada, que devem ser modelados como **ações sujeitas a regras e consequências**, jamais como heurística geral de sucesso. A quinta prova foi **caratê**, disputada e perdida pela Classe B mesmo após uma revanche autorizada (pp. 371–372). Na **sexta prova, judô**, Ryūen escala Albert; Ichinose deixa expirar o prazo de 30 segundos sem escolher um participante e Mashima decreta derrota por padrão, devido à segurança (pp. 372–374). A turma D supera B por **5–2**, conforme informe no epílogo (pp. 436–437). Isso significa **+190** para D e **−90** para B no modelo de pontos declarado, sem inferir outra operação oculta.
 
 ### Epílogo — The Line Between the Winner and the Loser (pp. 400–454)
 A partida de xadrez entre Suzune e Hashimoto avança com comandos de Kiyotaka e Arisu. A escola anuncia **vitória de A, 4–3**, consequência de uma instrução recebida por Suzune que não correspondeu à entrada enviada por Kiyotaka. Tsukishiro revela a adulteração do canal por intervenção interna, feita de modo a parecer um lance plausível (pp. 429, 440–444). A diferença entre `original_input`, `validated_command`, `delivered_command` e `executed_move` torna-se essencial para auditoria, replay e responsabilidade.
@@ -95,3 +95,14 @@ O registro `audits/y1-v11-review-register.json` enumera **160 unidades candidata
 **Lacunas conhecidas:** identidade computacional canônica de Mii-chan/Wang Mei-Yu ainda ausente do índice atual; detalhes não narrados do RNG escolar; método exato de abuso do sistema interno em todos os sorteios; autenticidade editorial das histórias extras; pleno conhecimento dos funcionários da White Room; regras pós-exame sobre avaliação de cada participante. Preservar `REVIEW_REQUIRED` e não inventar solução.
 
 **Estado de release:** Draft, sem merge automático, sem admissão de evidências ao motor, sem atualização automática de objetivos e sem executar regras do exame antes da revisão e autorização humana.
+
+
+## Errata após revisão semântica direta do PDF (28/10/2026)
+
+1. **F1 corrigido:** caratê foi o quinto evento, disputado; o forfait ocorreu no sexto, judô. Atualizados o exame, o caso V11-C044, as evidências E044/E067, o manifesto e o registro de auditoria.
+
+2. **F2 corrigido:** V11-C028 agora é a **revelação privada de Hirata após ingresso**; o conteúdo relatado permanece no dossiê biográfico anterior à matrícula.
+
+3. **F3 qualificado:** reconhecer Kiyotaka como jogador de xadrez genuinamente excepcional não comprova rejeição geral da hipótese genética de Arisu. O caso V11-C054 e G001 foram limitados à avaliação descrita na fonte, incluindo a declaração posterior de motivação pessoal (pp. 453–454).
+
+4. **Gate ainda aberto:** a maioria dos casos usa metadados genéricos, insuficientes para modelagem comportamental profunda; ver revisão semântica específica e seu manifesto. CI verde não equivale a revisão literária independente.

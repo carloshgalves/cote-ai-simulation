@@ -23,7 +23,8 @@
   "other_actors": [
     "actor.kakeru-ryuen",
     "actor.sae-chiyabashira",
-    "actor.kiyotaka-ayanokoji"
+    "actor.kiyotaka-ayanokoji",
+    "actor.mashima"
   ],
   "capabilities_supported": [
     "leadership",
@@ -104,6 +105,10 @@
       {
         "actor_id": "actor.kiyotaka-ayanokoji",
         "role": "observador externo"
+      },
+      {
+        "actor_id": "actor.mashima",
+        "role": "professor e autoridade que determina o resultado por segurança no sexto evento (judô)"
       }
     ],
     "causal_and_epistemic_limits": "Não confundir com quinto evento de caratê, que foi disputado; prevalece decisão excepcional de Mashima",

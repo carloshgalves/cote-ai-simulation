@@ -21,7 +21,8 @@
   },
   "other_actors": [
     "actor.kakeru-ryuen",
-    "actor.kiyotaka-ayanokoji"
+    "actor.kiyotaka-ayanokoji",
+    "actor.mashima"
   ],
   "capabilities_supported": [
     "emotion",
@@ -74,6 +75,10 @@
       {
         "actor_id": "actor.kiyotaka-ayanokoji",
         "role": "observador"
+      },
+      {
+        "actor_id": "actor.mashima",
+        "role": "professor e autoridade que determina o resultado por segurança no sexto evento (judô)"
       }
     ],
     "causal_and_epistemic_limits": "Não atribuir incapacidade permanente nem diagnóstico psicológico a Ichinose; resultado não prova que toda pressão foi causada por Ryūen",
